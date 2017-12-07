@@ -1,0 +1,58 @@
+version: 2
+jobs:
+  prepare web dependencies cache:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+      - run:
+          name: install dependencies
+          working_directory: ~/project/web
+          command: npm install
+      - save_cache:
+          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+          paths:
+            - web/node_modules
+
+  web lint:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+      - run:
+          name: run linter
+          working_directory: ~/project/web
+          command: npm run lint
+
+  web test:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+      - run:
+          name: run tests
+          working_directory: ~/project/web
+          command: npm test
+      - run:
+          name: report coverage
+          when: always
+          working_directory: ~/project/web
+          command: bash <(curl -s https://codecov.io/bash)
+
+workflows:
+  version: 2
+  web:
+    jobs:
+      - prepare web dependencies cache
+      - web lint:
+          requires:
+            - prepare web dependencies cache
+      - web test:
+          requires:
+            - prepare web dependencies cache
