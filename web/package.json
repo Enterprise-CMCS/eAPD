@@ -1,0 +1,72 @@
+{
+  "name": "cms-hitech-apd-webapp",
+  "version": "1.0.0",
+  "description": "APD app for CMS HITECH program",
+  "main": "app.js",
+  "scripts": {
+    "build": "webpack -p",
+    "lint": "eslint src/**/*.js",
+    "start": "webpack-dev-server --host 0.0.0.0 --port 8000 --content-base src/",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/18F/cms-hitech-apd.git"
+  },
+  "keywords": [
+    "cms",
+    "medicaid",
+    "hitech",
+    "emr",
+    "apd"
+  ],
+  "contributors": [
+    "Nicole Fenton",
+    "Meghana Khandekar",
+    "Nikki Lee",
+    "Brendan Sudol",
+    "Greg Walker"
+  ],
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/18F/cms-hitech-apd/issues"
+  },
+  "homepage": "https://github.com/18F/cms-hitech-apd#readme",
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^21.2.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "jest": "^21.2.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "../coverage",
+    "rootDir": "src",
+    "setupFiles": [
+      "../polyfills.test.js",
+      "../setup.test.js"
+    ]
+  }
+}
