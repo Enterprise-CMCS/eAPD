@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Hello component renders with a default name 1`] = `
+ReactWrapper {
+  "length": 1,
+  Symbol(enzyme.__unrendered__): <Hello
+    name="Unidentified Person"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "name": "Unidentified Person",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": <div>
+        Hello 
+        Unidentified Person
+        !
+      </div>,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          "Hello ",
+          "Unidentified Person",
+          "!",
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        "Hello ",
+        "Unidentified Person",
+        "!",
+      ],
+      "type": "div",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "name": "Unidentified Person",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": <div>
+          Hello 
+          Unidentified Person
+          !
+        </div>,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Hello ",
+            "Unidentified Person",
+            "!",
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "Hello ",
+          "Unidentified Person",
+          "!",
+        ],
+        "type": "div",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`the Hello component renders with a provided name  1`] = `
+ReactWrapper {
+  "length": 1,
+  Symbol(enzyme.__unrendered__): <Hello
+    name="Test Person"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "name": "Test Person",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": <div>
+        Hello 
+        Test Person
+        !
+      </div>,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          "Hello ",
+          "Test Person",
+          "!",
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        "Hello ",
+        "Test Person",
+        "!",
+      ],
+      "type": "div",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "name": "Test Person",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": <div>
+          Hello 
+          Test Person
+          !
+        </div>,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Hello ",
+            "Test Person",
+            "!",
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "Hello ",
+          "Test Person",
+          "!",
+        ],
+        "type": "div",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

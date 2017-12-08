@@ -1,0 +1,10 @@
+engines:
+  eslint:
+    enabled: true
+    channel: "eslint-4"
+  csslint:
+    enabled: false
+
+ratings:
+  paths:
+    - "web/src/**"
