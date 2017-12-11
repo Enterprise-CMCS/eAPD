@@ -7,7 +7,8 @@
     "build": "webpack -p",
     "lint": "eslint src/**/*.js",
     "start": "webpack-dev-server --host 0.0.0.0 --port 8000 --content-base src/",
-    "test": "jest"
+    "test": "jest",
+    "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -51,6 +52,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.5.1",
     "jest": "^21.2.1",
+    "prettier": "^1.9.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   },
