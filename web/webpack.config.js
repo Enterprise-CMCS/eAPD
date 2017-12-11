@@ -12,7 +12,13 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        use: ['babel-loader?presets=[]=env,presets[]=react']
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env', 'react']
+          }
+        }
       }
     ]
   }
