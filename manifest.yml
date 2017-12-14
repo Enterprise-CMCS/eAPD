@@ -1,0 +1,7 @@
+---
+applications:
+  - name: hitech-apd-frontend
+    path: web/dist
+    memory: 128M
+    host: hitech-apd
+    buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
