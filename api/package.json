@@ -7,7 +7,7 @@
     "lint": "eslint **/*.js",
     "start": "node main.js",
     "start-dev": "nodemon ./main.js",
-    "test": "jest",
+    "test": "tap --cov --coverage-report=lcov --no-browser --reporter=spec 'tests/**/*.js'",
     "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
   "repository": {
@@ -42,6 +42,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "nodemon": "^1.12.7",
-    "prettier": "^1.9.2"
+    "prettier": "^1.9.2",
+    "tap": "^11.0.0"
   }
 }
