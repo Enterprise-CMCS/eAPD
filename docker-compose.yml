@@ -7,3 +7,13 @@ services:
       - /app/node_modules
     ports:
       - 8080:8000
+
+  api:
+    build: ./api
+    environment:
+      - PORT=8000
+    volumes:
+      - ./api:/app
+      - /app_node_modules
+    ports:
+      - 8081:8000
