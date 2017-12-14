@@ -45,6 +45,51 @@ jobs:
           working_directory: ~/project/web
           command: bash <(curl -s https://codecov.io/bash)
 
+  prepare api dependencies cache:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
+      - run:
+          name: install dependencies
+          working_directory: ~/project/api
+          command: npm install
+      - save_cache:
+          key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
+          paths:
+            - api/node_modules
+
+  api lint:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
+      - run:
+          name: run linter
+          working_directory: ~/project/api
+          command: npm run lint
+
+  api test:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
+      - run:
+          name: run tests
+          working_directory: ~/project/api
+          command: npm test
+      - run:
+          name: report coverage
+          when: always
+          working_directory: ~/project/api
+          command: bash <(curl -s https://codecov.io/bash)
+
 workflows:
   version: 2
   web:
@@ -56,3 +101,10 @@ workflows:
       - web test:
           requires:
             - prepare web dependencies cache
+      - prepare api dependencies cache
+      - api lint:
+          requires:
+             - prepare api dependencies cache
+      - api test:
+          requires:
+             - prepare api dependencies cache
