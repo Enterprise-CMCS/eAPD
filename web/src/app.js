@@ -5,5 +5,5 @@ import HelloWorld from './hello';
 
 ReactDOM.render(
   <HelloWorld name="friendly visitor" />,
-  document.getElementById('')
+  document.getElementById('app')
 );
