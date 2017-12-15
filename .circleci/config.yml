@@ -90,6 +90,17 @@ jobs:
           working_directory: ~/project/api
           command: bash <(curl -s https://codecov.io/bash)
 
+  deploy:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+      - run:
+          name: deploy to prod
+          command: ./bin/deploy.sh
+
 workflows:
   version: 2
   web:
@@ -108,3 +119,11 @@ workflows:
       - api test:
           requires:
              - prepare api dependencies cache
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+             - web test
+             - api test
