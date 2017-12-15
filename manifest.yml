@@ -2,6 +2,11 @@
 applications:
   - name: hitech-apd-frontend
     path: web/dist
-    memory: 128M
+    memory: 64M
     host: hitech-apd
     buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  - name: hitech-apd-api
+    memory: 128M
+    path: api
+    host: hitech-api
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git
