@@ -1,48 +1,30 @@
-const crypto = require('crypto');
-const sessions = require('client-sessions');
-const passport = require('passport');
+const Passport = require('passport');
 const LocalStrategy = require('passport-local');
 
-const session = sessions({
-  cookieName: 'user', // this is the cookie name passport writes to
-  secret: crypto.randomBytes(256),
-  duration: 14 * 24 * 60 * 60 * 1000, // session lifetime, in milliseconds
-  cookie: {
-    httpOnly: true
-  }
-});
+const authenticate = require('./authenticate');
+const serialization = require('./serialization');
+const sessionFunction = require('./session').getSessionFunction();
 
-const authenticate = (username, password, done) => {
-  if (username === 'hello' && password === 'world') {
-    done(null, { username, email: 'hello@world.com', token: 'auth-token' });
-  } else {
-    done('No idea who that is');
-  }
-};
+module.exports.strategies = [
+  new LocalStrategy(authenticate)
+];
 
-const serializeUser = (user, done) => {
-  done(null, user.token);
-};
+module.exports.setup = function setup(
+  app,
+  passport = Passport,
+  strategies = module.exports.strategies,
+  session = sessionFunction
+) {
+  strategies.forEach(strategy => passport.use(strategy));
 
-const deserializeUser = (token, done) => {
-  done(null, { username: 'hello', email: 'hello@world.com', token });
-};
-
-module.exports.setup = function setup(app) {
-  passport.use(new LocalStrategy(authenticate));
-  passport.serializeUser(serializeUser);
-  passport.deserializeUser(deserializeUser);
+  passport.serializeUser(serialization.serializeUser);
+  passport.deserializeUser(serialization.deserializeUser);
 
   app.use(session);
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use((req, res, next) => {
-    req.user = req.headers.authorization;
-    next();
-  });
-
   app.post('/auth/login', passport.authenticate('local'), (req, res) => {
-    res.send({ bearer: req.user.token });
+    res.send({ bearer: req.user.id });
   });
 };
