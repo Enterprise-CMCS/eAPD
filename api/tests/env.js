@@ -8,7 +8,8 @@ tap.beforeEach((done) => {
 
 tap.test('environment setup', (envTest) => {
   const knownEnvironmentVariables = [
-    { name: 'PORT', type: 'number' }
+    { name: 'PORT', type: 'number' },
+    { name: 'SESSION_SECRET', type: 'string' }
   ];
 
   envTest.test('sets default values for known environment variables', (setsDefaultTest) => {
