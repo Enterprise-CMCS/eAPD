@@ -46,6 +46,8 @@ tap.test('authentication setup', (authTest) => {
     setupTest.ok(passport.deserializeUser.calledOnce, 'user deserialization function is set once');
 
     setupTest.ok(passport.authenticate.calledOnce, 'passport authenticate method is inserted one time');
+    setupTest.ok(passport.authenticate.calledWith('local'), 'passport local authentication method is used');
+
     setupTest.ok(app.post.calledOnce, 'a single POST endpoint is added to the app');
     setupTest.ok(app.post.calledWith('/auth/login', 'passport-authenticate', sinon.match.func));
 
