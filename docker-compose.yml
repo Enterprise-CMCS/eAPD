@@ -1,5 +1,15 @@
 version: "3"
 services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=hitech_apd
+      - POSTGRES_PASSWORD=cms
+    expose:
+      - 5432
+    ports:
+      - 54325:5432
+
   web:
     build: ./web
     volumes:
@@ -10,8 +20,11 @@ services:
 
   api:
     build: ./api
+    depends_on:
+      - db
     environment:
       - PORT=8000
+      - DATABASE_URL=postgres://postgres:cms@db/hitech_apd
     volumes:
       - ./api:/app
       - /app_node_modules
