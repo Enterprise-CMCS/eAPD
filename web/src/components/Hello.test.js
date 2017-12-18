@@ -1,7 +1,8 @@
 import React from 'react';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Hello from './hello';
+
+import Hello from './Hello';
 
 configure({ adapter: new Adapter() });
 
