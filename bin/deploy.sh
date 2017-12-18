@@ -12,7 +12,7 @@ SPACE="brendan.sudol"
 
 # Install `cf` cli
 curl -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-sudo dpkg -i cf-cli_amd64.deb
+dpkg -i cf-cli_amd64.deb
 rm cf-cli_amd64.deb
 
 # Install `autopilot` plugin
