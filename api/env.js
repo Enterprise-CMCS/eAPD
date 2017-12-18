@@ -7,9 +7,4 @@ const defaults = {
 };
 
 dotenv.config();
-
-Object.keys(defaults).forEach((env) => {
-  if (!process.env[env]) {
-    process.env[env] = defaults[env];
-  }
-});
+process.env = Object.assign({}, defaults, process.env);
