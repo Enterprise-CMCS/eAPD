@@ -1,26 +1,35 @@
 const tap = require('tap');
 
 tap.beforeEach((done) => {
+  delete require.cache[require.resolve('../env')];
   process.env = { };
   done();
 });
 
 tap.test('environment setup', (envTest) => {
-  envTest.test('handles the PORT environment variable', (hostTest) => {
-    hostTest.test('sets default', (defaultTest) => {
-      require('../env'); // eslint-disable-line global-require
-      defaultTest.type(process.env.PORT, 'number', 'sets the PORT to a number');
-      defaultTest.end();
-    });
+  const knownEnvironmentVariables = [
+    { name: 'PORT', type: 'number' },
+    { name: 'SESSION_SECRET', type: 'string' }
+  ];
 
-    hostTest.test('does not override', (overrideTest) => {
-      process.env.PORT = 'test-value';
-      require('../env'); // eslint-disable-line global-require
-      overrideTest.same(process.env.PORT, 'test-value', 'does not override the PORT variable');
-      overrideTest.end();
+  envTest.test('sets default values for known environment variables', (setsDefaultTest) => {
+    require('../env'); // eslint-disable-line global-require
+    knownEnvironmentVariables.forEach((envVar) => {
+      setsDefaultTest.type(process.env[envVar.name], envVar.type, `sets the ${envVar.name} to a ${envVar.type}`);
     });
-
-    hostTest.end();
+    setsDefaultTest.end();
   });
-  envTest.end();
+
+  envTest.test('does not override environment variables that have been set externally', (doesNotOverrideTest) => {
+    knownEnvironmentVariables.forEach((envVar) => {
+      process.env[envVar.name] = 'test-value';
+    });
+
+    require('../env'); // eslint-disable-line global-require
+    knownEnvironmentVariables.forEach((envVar) => {
+      doesNotOverrideTest.same(process.env[envVar.name], 'test-value', `does not override the ${envVar.name} variable`);
+    });
+    doesNotOverrideTest.end();
+  });
+  envTest.done();
 });

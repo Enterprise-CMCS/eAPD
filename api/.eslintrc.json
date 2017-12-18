@@ -1,7 +1,8 @@
 {
   "extends": "airbnb-base",
   "rules": {
-    "comma-dangle": [1, "never"]
+    "comma-dangle": [1, "never"],
+    "prefer-destructuring": [0]
   },
   "env": {
     "node": true,
