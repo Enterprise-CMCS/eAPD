@@ -4,7 +4,7 @@ exports[`the Hello component renders with a default name 1`] = `
 ReactWrapper {
   "length": 1,
   Symbol(enzyme.__unrendered__): <Hello
-    name="Unidentified Person"
+    name="Friend"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -19,31 +19,31 @@ ReactWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "name": "Unidentified Person",
+      "name": "Friend",
     },
     "ref": null,
     "rendered": Object {
-      "instance": <div>
+      "instance": <h1>
         Hello 
-        Unidentified Person
+        Friend
         !
-      </div>,
+      </h1>,
       "key": undefined,
       "nodeType": "host",
       "props": Object {
         "children": Array [
           "Hello ",
-          "Unidentified Person",
+          "Friend",
           "!",
         ],
       },
       "ref": null,
       "rendered": Array [
         "Hello ",
-        "Unidentified Person",
+        "Friend",
         "!",
       ],
-      "type": "div",
+      "type": "h1",
     },
     "type": [Function],
   },
@@ -53,31 +53,31 @@ ReactWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "name": "Unidentified Person",
+        "name": "Friend",
       },
       "ref": null,
       "rendered": Object {
-        "instance": <div>
+        "instance": <h1>
           Hello 
-          Unidentified Person
+          Friend
           !
-        </div>,
+        </h1>,
         "key": undefined,
         "nodeType": "host",
         "props": Object {
           "children": Array [
             "Hello ",
-            "Unidentified Person",
+            "Friend",
             "!",
           ],
         },
         "ref": null,
         "rendered": Array [
           "Hello ",
-          "Unidentified Person",
+          "Friend",
           "!",
         ],
-        "type": "div",
+        "type": "h1",
       },
       "type": [Function],
     },
@@ -115,11 +115,11 @@ ReactWrapper {
     },
     "ref": null,
     "rendered": Object {
-      "instance": <div>
+      "instance": <h1>
         Hello 
         Test Person
         !
-      </div>,
+      </h1>,
       "key": undefined,
       "nodeType": "host",
       "props": Object {
@@ -135,7 +135,7 @@ ReactWrapper {
         "Test Person",
         "!",
       ],
-      "type": "div",
+      "type": "h1",
     },
     "type": [Function],
   },
@@ -149,11 +149,11 @@ ReactWrapper {
       },
       "ref": null,
       "rendered": Object {
-        "instance": <div>
+        "instance": <h1>
           Hello 
           Test Person
           !
-        </div>,
+        </h1>,
         "key": undefined,
         "nodeType": "host",
         "props": Object {
@@ -169,7 +169,7 @@ ReactWrapper {
           "Test Person",
           "!",
         ],
-        "type": "div",
+        "type": "h1",
       },
       "type": [Function],
     },
