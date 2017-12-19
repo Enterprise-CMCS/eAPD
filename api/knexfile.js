@@ -9,6 +9,16 @@ module.exports = {
     }
   },
 
+  test: {
+    client: 'postgresql',
+    connection: {
+      host: 'db',
+      database: 'hitech_apd_test',
+      user: 'postgres',
+      password: 'cms'
+    }
+  },
+
   staging: {
     client: 'postgresql',
     connection: {
