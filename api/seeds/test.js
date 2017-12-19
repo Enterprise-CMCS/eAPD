@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const users = require('./test/users');
 
 // Deletes ALL existing entries
 exports.seed = (knex) => {
@@ -6,8 +6,7 @@ exports.seed = (knex) => {
   if (process.env.NODE_ENV !== 'test') {
     return Promise.resolve();
   }
-  return knex('users').del()
-    .then(() => knex('users').insert([
-      { id: 57, email: 'em@il.com', password: bcrypt.hashSync('password') }
-    ]));
+
+  // Chain together specific seeds from here.
+  return users.seed(knex);
 };
