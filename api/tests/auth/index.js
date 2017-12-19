@@ -1,5 +1,6 @@
 const tap = require('tap');
 const sinon = require('sinon');
+
 const sandbox = sinon.createSandbox();
 
 process.env.SESSION_SECRET = 'secret';
