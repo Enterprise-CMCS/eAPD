@@ -1,18 +1,24 @@
+import createHistory from 'history/createBrowserHistory';
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { routerMiddleware } from 'react-router-redux';
+import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 
 import reducer from './reducers';
-import App from './containers/App';
+import Root from './components/Root';
 
-const middleware = [createLogger()];
+const history = createHistory();
+
+const middleware = [routerMiddleware(history)];
+if (process.env.NODE_ENV !== 'production') {
+  middleware.push(createLogger());
+}
+
 const store = createStore(reducer, applyMiddleware(...middleware));
 
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Root history={history} store={store} />,
   document.getElementById('app')
 );
