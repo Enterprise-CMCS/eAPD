@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Counter = ({ total, onIncrement, onDecrement }) => (
-  <div style={{ fontFamily: 'monospace' }}>
+  <div>
     <h1>Clicks: {total}</h1>
     <button type="button" onClick={onDecrement}>
       -
