@@ -1,22 +1,8 @@
-import counter from './index';
-import { INCREMENT_COUNT, DECREMENT_COUNT } from '../actions';
+import rootReducer from './index';
 
-describe('reducers', () => {
-  describe('counter', () => {
-    test('should provide the initial state', () => {
-      expect(counter(undefined, {})).toBe(0);
-    });
-
-    test('should handle INCREMENT action', () => {
-      expect(counter(1, { type: INCREMENT_COUNT })).toBe(2);
-    });
-
-    test('should handle DECREMENT action', () => {
-      expect(counter(1, { type: DECREMENT_COUNT })).toBe(0);
-    });
-
-    test('should ignore unknown actions', () => {
-      expect(counter(1, { type: 'unknown' })).toBe(1);
-    });
+describe('root reducer', () => {
+  test('should have proper state slices', () => {
+    const stateKeys = Object.keys(rootReducer(undefined, {}));
+    expect(stateKeys).toEqual(['counter', 'router']);
   });
 });
