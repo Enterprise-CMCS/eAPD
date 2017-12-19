@@ -9,6 +9,8 @@ import { createLogger } from 'redux-logger';
 import reducer from './reducers';
 import Root from './components/Root';
 
+import './styles/index.css';
+
 const history = createHistory();
 
 const middleware = [routerMiddleware(history)];

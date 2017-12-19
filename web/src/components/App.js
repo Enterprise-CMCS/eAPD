@@ -6,13 +6,23 @@ import Home from '../containers/Home';
 
 const App = () => (
   <div>
-    <header>
-      <Link to="/">Home</Link>
-      <span>&nbsp;</span>
-      <Link to="/hello">Hello</Link>
+    <header className="clearfix bg-darken-1">
+      <div className="sm-col">
+        <Link to="/" className="btn p2 caps">
+          CMS HITECH APD
+        </Link>
+      </div>
+      <div className="sm-col-right">
+        <Link to="/" className="btn p2 h5">
+          Home
+        </Link>
+        <Link to="/hello" className="btn p2 h5">
+          Hello
+        </Link>
+      </div>
     </header>
 
-    <main>
+    <main className="container px2 py3">
       <Route exact path="/" component={Home} />
       <Route path="/hello" component={Hello} />
     </main>
