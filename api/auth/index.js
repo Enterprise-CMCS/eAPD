@@ -1,12 +1,13 @@
 const Passport = require('passport');
 const LocalStrategy = require('passport-local');
 
+const database = require('../db');
 const authenticate = require('./authenticate');
 const serialization = require('./serialization');
 const sessionFunction = require('./session').getSessionFunction();
 
 module.exports.defaultStrategies = [
-  new LocalStrategy(authenticate)
+  new LocalStrategy(authenticate.authenticate)
 ];
 
 // This setup method configures passport and inserts it into
@@ -23,8 +24,12 @@ module.exports.setup = function setup(
   app,
   passport = Passport,
   strategies = module.exports.defaultStrategies,
-  session = sessionFunction
+  session = sessionFunction,
+  db = database
 ) {
+  // Pass off the database
+  authenticate.setup(db);
+
   // Handle all of the authentication strategies that we support
   strategies.forEach(strategy => passport.use(strategy));
 
