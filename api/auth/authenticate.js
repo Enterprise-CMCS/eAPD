@@ -1,16 +1,27 @@
-const defaultDB = require('../db');
+const defaultDB = require('../db')();
 const defaultBcrypt = require('bcryptjs');
 
 module.exports = (
   db = defaultDB,
   bcrypt = defaultBcrypt
 ) => ((username, password, done) => {
-  if (username === 'hello' && password === 'world') {
-    // Check the username and password.  If it's good, callback
-    // with a valid user object.
-    done(null, { username, email: 'hello@world.com', id: 'user-id' });
-  } else {
-    // Otherwise, callback with an error.
-    done('Unknown user');
-  }
+  const pwHash = bcrypt.hashSync(password);
+  return db('users')
+    .where({
+      email: username,
+      password: pwHash
+    })
+    .select()
+    .then((u) => {
+      if (u.length) {
+        // If there is a matching user, return it
+        done(null, { username: u[0].email, id: u[0].id });
+      } else {
+        // Otherwise, callback with an error.
+        done('Unknown user');
+      }
+    })
+    .catch(() => {
+      done('Database error');
+    });
 });
