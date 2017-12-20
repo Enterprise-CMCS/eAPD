@@ -1,22 +1,29 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
+import { Container, NavLink, Provider, Toolbar } from 'rebass';
 
 import Hello from '../components/Hello';
 import Home from '../containers/Home';
 
 const App = () => (
-  <div>
-    <header>
-      <Link to="/">Home</Link>
-      <span>&nbsp;</span>
-      <Link to="/hello">Hello</Link>
-    </header>
+  <Provider>
+    <Toolbar bg="black">
+      <NavLink to="/" is={Link}>
+        CMS HITECH APD
+      </NavLink>
+      <NavLink to="/" is={Link} ml="auto">
+        Home
+      </NavLink>
+      <NavLink to="/hello" is={Link}>
+        Hello
+      </NavLink>
+    </Toolbar>
 
-    <main>
+    <Container is="main">
       <Route exact path="/" component={Home} />
       <Route path="/hello" component={Hello} />
-    </main>
-  </div>
+    </Container>
+  </Provider>
 );
 
 export default App;
