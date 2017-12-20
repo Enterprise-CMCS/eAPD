@@ -1,6 +1,5 @@
 const users = require('./test/users');
 
-// Deletes ALL existing entries
 exports.seed = (knex) => {
   // Don't seed this data if we're not in a test environment.
   if (process.env.NODE_ENV !== 'test') {
