@@ -57,7 +57,7 @@ tap.test('local authentication', (authTest) => {
         noUserTest.ok(bcrypt.compareSync.calledWith('password', ''), 'password is compared to empty string');
 
         noUserTest.equal(doneCallback.callCount, 1, 'called done callback once');
-        noUserTest.ok(doneCallback.calledWith(sinon.match.truthy), 'got an error message');
+        noUserTest.ok(doneCallback.calledWith(null, false), 'got a false user');
 
         noUserTest.done();
       });
@@ -83,7 +83,7 @@ tap.test('local authentication', (authTest) => {
         invalidTest.ok(bcrypt.compareSync.calledWith('password', 'test-password'), 'password is compared to database value');
 
         invalidTest.equal(doneCallback.callCount, 1, 'called done callback once');
-        invalidTest.ok(doneCallback.calledWith(sinon.match.truthy), 'got an error message');
+        invalidTest.ok(doneCallback.calledWith(null, false), 'got a false user');
 
         invalidTest.done();
       });

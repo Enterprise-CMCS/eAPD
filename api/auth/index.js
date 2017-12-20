@@ -5,7 +5,7 @@ const authenticate = require('./authenticate')();
 const serialization = require('./serialization');
 const sessionFunction = require('./session').getSessionFunction();
 
-module.exports.defaultStrategies = [
+const defaultStrategies = [
   new LocalStrategy(authenticate)
 ];
 
@@ -22,7 +22,7 @@ module.exports.defaultStrategies = [
 module.exports.setup = function setup(
   app,
   passport = Passport,
-  strategies = module.exports.defaultStrategies,
+  strategies = defaultStrategies,
   session = sessionFunction
 ) {
   // Handle all of the authentication strategies that we support
@@ -40,6 +40,6 @@ module.exports.setup = function setup(
 
   // Add a local authentication endpoint
   app.post('/auth/login', passport.authenticate('local'), (req, res) => {
-    res.send({ bearer: req.user.id });
+    res.status(200).end();
   });
 };

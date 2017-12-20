@@ -20,7 +20,7 @@ module.exports = (
       done(null, { username: user.email, id: user.id });
     } else {
       // Otherwise, callback with an error.
-      done('Unknown user');
+      done(null, false);
     }
   })
   .catch(() => {
