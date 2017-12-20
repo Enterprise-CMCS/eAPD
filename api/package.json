@@ -4,7 +4,7 @@
   "description": "APD api for CMS HITECH program",
   "main": "main.js",
   "scripts": {
-    "lint": "eslint **/*.js",
+    "lint": "eslint '**/*.js'",
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run",
     "start": "node main.js",
