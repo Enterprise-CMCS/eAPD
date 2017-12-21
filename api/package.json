@@ -4,10 +4,12 @@
   "description": "APD api for CMS HITECH program",
   "main": "main.js",
   "scripts": {
-    "lint": "eslint **/*.js",
+    "lint": "eslint '**/*.js'",
+    "migrate": "knex migrate:latest",
+    "seed": "knex seed:run",
     "start": "node main.js",
     "start-dev": "nodemon ./main.js",
-    "test": "tap --cov --coverage-report=lcov --no-browser --reporter=spec 'tests/**/*.js'",
+    "test": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec 'tests/**/*.js'",
     "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
   "repository": {
@@ -34,11 +36,14 @@
   },
   "homepage": "https://github.com/18F/cms-hitech-apd#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "client-sessions": "^0.8.0",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
+    "knex": "^0.14.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "pg": "^7.4.0",
     "sinon": "^4.1.3"
   },
   "engines": {
