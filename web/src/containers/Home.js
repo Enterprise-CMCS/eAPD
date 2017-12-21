@@ -3,6 +3,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { ButtonOutline, Divider } from 'rebass';
 
 import Counter from '../components/Counter';
 import { decrement, increment } from '../actions';
@@ -15,12 +16,11 @@ const Home = ({ actions, total }) => (
       onDecrement={actions.decrement}
     />
 
-    <br />
-    <br />
+    <Divider my={4} />
 
-    <button onClick={actions.goToHelloPage}>
+    <ButtonOutline onClick={actions.goToHelloPage}>
       Go to Hello component via Redux Action
-    </button>
+    </ButtonOutline>
   </div>
 );
 
