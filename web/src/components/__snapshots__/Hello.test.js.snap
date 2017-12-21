@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the Hello component renders with a default name 1`] = `
-ReactWrapper {
+ShallowWrapper {
   "length": 1,
+  Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Hello
     name="Friend"
   />,
@@ -13,55 +14,33 @@ ReactWrapper {
     "simulateEvent": [Function],
     "unmount": [Function],
   },
-  Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "function",
+    "nodeType": "host",
     "props": Object {
-      "name": "Friend",
-    },
-    "ref": null,
-    "rendered": Object {
-      "instance": <h1>
-        Hello 
-        Friend
-        !
-      </h1>,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          "Hello ",
-          "Friend",
-          "!",
-        ],
-      },
-      "ref": null,
-      "rendered": Array [
-        "Hello ",
-        "Friend",
-        "!",
-      ],
-      "type": "h1",
-    },
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "name": "Friend",
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": <h1>
+      "children": Array [
+        <h1>
           Hello 
           Friend
           !
         </h1>,
+        <Styled(Styled(Box))
+          kind="error"
+        >
+          <Styled(Styled(Base))>
+            Hey-oh!
+          </Styled(Styled(Base))>
+          <Styled(Styled(Base))>
+            This is a fake alert :)
+          </Styled(Styled(Base))>
+        </Styled(Styled(Box))>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
         "key": undefined,
         "nodeType": "host",
         "props": Object {
@@ -79,7 +58,140 @@ ReactWrapper {
         ],
         "type": "h1",
       },
-      "type": [Function],
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <Styled(Styled(Base))>
+              Hey-oh!
+            </Styled(Styled(Base))>,
+            <Styled(Styled(Base))>
+              This is a fake alert :)
+            </Styled(Styled(Base))>,
+          ],
+          "kind": "error",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Hey-oh!",
+            },
+            "ref": null,
+            "rendered": "Hey-oh!",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "This is a fake alert :)",
+            },
+            "ref": null,
+            "rendered": "This is a fake alert :)",
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h1>
+            Hello 
+            Friend
+            !
+          </h1>,
+          <Styled(Styled(Box))
+            kind="error"
+          >
+            <Styled(Styled(Base))>
+              Hey-oh!
+            </Styled(Styled(Base))>
+            <Styled(Styled(Base))>
+              This is a fake alert :)
+            </Styled(Styled(Base))>
+          </Styled(Styled(Box))>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "Hello ",
+              "Friend",
+              "!",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "Hello ",
+            "Friend",
+            "!",
+          ],
+          "type": "h1",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <Styled(Styled(Base))>
+                Hey-oh!
+              </Styled(Styled(Base))>,
+              <Styled(Styled(Base))>
+                This is a fake alert :)
+              </Styled(Styled(Base))>,
+            ],
+            "kind": "error",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Hey-oh!",
+              },
+              "ref": null,
+              "rendered": "Hey-oh!",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "This is a fake alert :)",
+              },
+              "ref": null,
+              "rendered": "This is a fake alert :)",
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": "div",
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -93,8 +205,9 @@ ReactWrapper {
 `;
 
 exports[`the Hello component renders with a provided name  1`] = `
-ReactWrapper {
+ShallowWrapper {
   "length": 1,
+  Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Hello
     name="Test Person"
   />,
@@ -105,55 +218,33 @@ ReactWrapper {
     "simulateEvent": [Function],
     "unmount": [Function],
   },
-  Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "function",
+    "nodeType": "host",
     "props": Object {
-      "name": "Test Person",
-    },
-    "ref": null,
-    "rendered": Object {
-      "instance": <h1>
-        Hello 
-        Test Person
-        !
-      </h1>,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          "Hello ",
-          "Test Person",
-          "!",
-        ],
-      },
-      "ref": null,
-      "rendered": Array [
-        "Hello ",
-        "Test Person",
-        "!",
-      ],
-      "type": "h1",
-    },
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "name": "Test Person",
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": <h1>
+      "children": Array [
+        <h1>
           Hello 
           Test Person
           !
         </h1>,
+        <Styled(Styled(Box))
+          kind="error"
+        >
+          <Styled(Styled(Base))>
+            Hey-oh!
+          </Styled(Styled(Base))>
+          <Styled(Styled(Base))>
+            This is a fake alert :)
+          </Styled(Styled(Base))>
+        </Styled(Styled(Box))>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
         "key": undefined,
         "nodeType": "host",
         "props": Object {
@@ -171,7 +262,140 @@ ReactWrapper {
         ],
         "type": "h1",
       },
-      "type": [Function],
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <Styled(Styled(Base))>
+              Hey-oh!
+            </Styled(Styled(Base))>,
+            <Styled(Styled(Base))>
+              This is a fake alert :)
+            </Styled(Styled(Base))>,
+          ],
+          "kind": "error",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Hey-oh!",
+            },
+            "ref": null,
+            "rendered": "Hey-oh!",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "This is a fake alert :)",
+            },
+            "ref": null,
+            "rendered": "This is a fake alert :)",
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h1>
+            Hello 
+            Test Person
+            !
+          </h1>,
+          <Styled(Styled(Box))
+            kind="error"
+          >
+            <Styled(Styled(Base))>
+              Hey-oh!
+            </Styled(Styled(Base))>
+            <Styled(Styled(Base))>
+              This is a fake alert :)
+            </Styled(Styled(Base))>
+          </Styled(Styled(Box))>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "Hello ",
+              "Test Person",
+              "!",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "Hello ",
+            "Test Person",
+            "!",
+          ],
+          "type": "h1",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <Styled(Styled(Base))>
+                Hey-oh!
+              </Styled(Styled(Base))>,
+              <Styled(Styled(Base))>
+                This is a fake alert :)
+              </Styled(Styled(Base))>,
+            ],
+            "kind": "error",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Hey-oh!",
+              },
+              "ref": null,
+              "rendered": "Hey-oh!",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "This is a fake alert :)",
+              },
+              "ref": null,
+              "rendered": "This is a fake alert :)",
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": "div",
     },
   ],
   Symbol(enzyme.__options__): Object {
