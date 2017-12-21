@@ -1,12 +1,18 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
+const sandbox = sinon.createSandbox();
+
 const serialization = require('../../auth/serialization');
 
 tap.test('passport serialization', (serializationTest) => {
-  const doneCallback = sinon.spy();
+  const db = sandbox.stub();
+  const where = sandbox.stub();
+  const select = sandbox.stub();
+  const doneCallback = sandbox.stub().returns('hi');
+
   serializationTest.beforeEach((done) => {
-    doneCallback.reset();
+    sandbox.reset();
     done();
   });
 
@@ -19,9 +25,31 @@ tap.test('passport serialization', (serializationTest) => {
 
   serializationTest.test('deserialize a user', (deserializeTest) => {
     const userID = 'the-user-id';
-    serialization.deserializeUser(userID, doneCallback);
-    deserializeTest.ok(doneCallback.calledWith(null, sinon.match.object), 'deserializes the user ID to an object');
-    deserializeTest.equal(doneCallback.args[0][1].id, userID, 'output user object ID matches input user ID');
+
+    deserializeTest.test('that is not in the database', (invalidTest) => {
+      db.returns({ where, select });
+      where.returns({ where, select });
+      select.resolves([]);
+
+      serialization.deserializeUser(userID, doneCallback, db)
+        .then(() => {
+          invalidTest.ok(doneCallback.calledWith(sinon.match.string), 'calls back with an error');
+          invalidTest.done();
+        });
+    });
+
+    deserializeTest.test('that is in the database', (validTest) => {
+      db.returns({ where, select });
+      where.returns({ where, select });
+      select.resolves([{ email: 'test-email', id: 'test-id' }]);
+
+      serialization.deserializeUser(userID, doneCallback, db)
+        .then(() => {
+          validTest.ok(doneCallback.calledWith(null, { username: 'test-email', id: 'test-id' }), 'deserializes the user ID to an object');
+          validTest.done();
+        });
+    });
+
     deserializeTest.done();
   });
 

@@ -1,5 +1,6 @@
 const tap = require('tap');
 const sinon = require('sinon');
+
 const sandbox = sinon.createSandbox();
 
 process.env.SESSION_SECRET = 'secret';
@@ -69,13 +70,19 @@ tap.test('authentication setup', (authTest) => {
     const post = app.post.args[0][2];
 
     const res = {
-      send: sinon.spy()
+      send: sinon.stub(),
+      status: sinon.stub(),
+      end: sinon.spy()
     };
+    res.send.returns(res);
+    res.status.returns(res);
 
     post({ user: { id: 'test-user-id' } }, res);
 
-    postTest.ok(res.send.calledOnce, 'a response is sent once');
-    postTest.ok(res.send.calledWithMatch({ bearer: 'test-user-id' }), 'sends an object with a bearer property of the user ID');
+    postTest.ok(res.status.calledOnce, 'an HTTP status is set once');
+    postTest.ok(res.status.calledWith(200), 'sets a 200 HTTP status');
+    postTest.ok(res.send.notCalled, 'HTTP body is not sent');
+    postTest.ok(res.end.calledOnce, 'response is ended one time');
 
     postTest.done();
   });
