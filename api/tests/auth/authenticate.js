@@ -5,7 +5,7 @@ const sandbox = sinon.createSandbox();
 
 const db = sandbox.stub();
 const where = sandbox.stub();
-const select = sandbox.stub();
+const first = sandbox.stub();
 
 const bcrypt = {
   compareSync: sandbox.stub()
@@ -17,13 +17,13 @@ tap.test('local authentication', (authTest) => {
   const doneCallback = sandbox.spy();
   authTest.beforeEach((done) => {
     sandbox.reset();
-    db.returns({ select, where });
-    where.returns({ select, where });
+    db.returns({ first, where });
+    where.returns({ first, where });
     done();
   });
 
   authTest.test('with a database error', (errorTest) => {
-    select.rejects();
+    first.rejects();
 
     auth('user', 'password', doneCallback)
       .then(() => {
@@ -31,7 +31,7 @@ tap.test('local authentication', (authTest) => {
         errorTest.ok(db.calledWith('users'), 'it is the users table');
         errorTest.ok(where.calledOnce, 'one set of WHERE clauses is added');
         errorTest.ok(where.calledWith({ email: 'user' }), 'it is the WHERE we expect');
-        errorTest.ok(select.calledOnce, 'the query is executed one time');
+        errorTest.ok(first.calledOnce, 'the query is executed one time');
 
         errorTest.ok(bcrypt.compareSync.notCalled, 'does not compare passwords');
 
@@ -43,7 +43,7 @@ tap.test('local authentication', (authTest) => {
   });
 
   authTest.test('with no valid users', (noUserTest) => {
-    select.resolves([]);
+    first.resolves();
 
     auth('user', 'password', doneCallback)
       .then(() => {
@@ -51,10 +51,9 @@ tap.test('local authentication', (authTest) => {
         noUserTest.ok(db.calledWith('users'), 'it is the users table');
         noUserTest.ok(where.calledOnce, 'one set of WHERE clauses is added');
         noUserTest.ok(where.calledWith({ email: 'user' }), 'it is the WHERE we expect');
-        noUserTest.ok(select.calledOnce, 'the query is executed one time');
+        noUserTest.ok(first.calledOnce, 'the query is executed one time');
 
-        noUserTest.ok(bcrypt.compareSync.calledOnce, 'password is compared one time');
-        noUserTest.ok(bcrypt.compareSync.calledWith('password', ''), 'password is compared to empty string');
+        noUserTest.ok(bcrypt.compareSync.notCalled, 'does not compare password');
 
         noUserTest.equal(doneCallback.callCount, 1, 'called done callback once');
         noUserTest.ok(doneCallback.calledWith(null, false), 'got a false user');
@@ -64,11 +63,11 @@ tap.test('local authentication', (authTest) => {
   });
 
   authTest.test('with invalid password', (invalidTest) => {
-    select.resolves([{
+    first.resolves({
       email: 'hello@world',
       password: 'test-password',
       id: 57
-    }]);
+    });
     bcrypt.compareSync.returns(false);
 
     auth('user', 'password', doneCallback)
@@ -77,7 +76,7 @@ tap.test('local authentication', (authTest) => {
         invalidTest.ok(db.calledWith('users'), 'it is the users table');
         invalidTest.ok(where.calledOnce, 'one set of WHERE clauses is added');
         invalidTest.ok(where.calledWith({ email: 'user' }), 'it is the WHERE we expect');
-        invalidTest.ok(select.calledOnce, 'the query is executed one time');
+        invalidTest.ok(first.calledOnce, 'the query is executed one time');
 
         invalidTest.ok(bcrypt.compareSync.calledOnce, 'password is compared one time');
         invalidTest.ok(bcrypt.compareSync.calledWith('password', 'test-password'), 'password is compared to database value');
@@ -90,11 +89,11 @@ tap.test('local authentication', (authTest) => {
   });
 
   authTest.test('with a valid user', (validTest) => {
-    select.resolves([{
+    first.resolves({
       email: 'hello@world',
       password: 'test-password',
       id: 57
-    }]);
+    });
     bcrypt.compareSync.returns(true);
 
     auth('user', 'password', doneCallback)
@@ -103,7 +102,7 @@ tap.test('local authentication', (authTest) => {
         validTest.ok(db.calledWith('users'), 'it is the users table');
         validTest.ok(where.calledOnce, 'one set of WHERE clauses is added');
         validTest.ok(where.calledWith({ email: 'user' }), 'it is the WHERE we expect');
-        validTest.ok(select.calledOnce, 'the query is executed one time');
+        validTest.ok(first.calledOnce, 'the query is executed one time');
 
         validTest.ok(bcrypt.compareSync.calledOnce, 'password is compared one time');
         validTest.ok(bcrypt.compareSync.calledWith('password', 'test-password'), 'password is compared to database value');
