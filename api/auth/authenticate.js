@@ -8,15 +8,10 @@ module.exports = (
   .where({
     email: username
   })
-  .select()
-  .then((users) => {
-    let user = { password: '' };
-    if (users.length) {
-      user = users[0];
-    }
-
+  .first()
+  .then((user) => {
     // If there is a matching user, return it
-    if (bcrypt.compareSync(password, user.password)) {
+    if (user && bcrypt.compareSync(password, user.password)) {
       done(null, { username: user.email, id: user.id });
     } else {
       // Otherwise, callback with a false user.  If we
