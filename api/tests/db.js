@@ -10,7 +10,7 @@ tap.test('database object module', (dbTest) => {
 
   const nodeEnv = process.env.NODE_ENV;
   process.env.NODE_ENV = 'env2';
-  const result = db(knex, { env1: 'environemtn 1', env2: 'environment 2' });
+  const result = db(knex, { env1: 'environment 1', env2: 'environment 2' });
 
   dbTest.ok(knex.calledOnce, 'knex is configured');
   dbTest.ok(knex.calledWith('environment 2'), 'knex is configured with the passed value');
