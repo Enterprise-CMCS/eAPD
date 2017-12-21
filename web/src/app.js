@@ -1,10 +1,11 @@
 import createHistory from 'history/createBrowserHistory';
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
 import { routerMiddleware } from 'react-router-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
+import { createLogger } from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
+// 👆 eslint complains that 'redux-logger' should be in dependencies rather
+// that devDependencies, but the module is only used in development
 
 import reducer from './reducers';
 import Root from './components/Root';
