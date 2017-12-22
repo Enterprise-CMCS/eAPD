@@ -109,7 +109,7 @@ tap.test('user POST endpoint', endpointTest => {
     });
 
     handlerTest.test(
-      'sends an server error code if there is a database error checking for an existing user',
+      'sends a server error code if there is a database error checking for an existing user',
       invalidTest => {
         first.rejects();
 
@@ -125,7 +125,7 @@ tap.test('user POST endpoint', endpointTest => {
     );
 
     handlerTest.test(
-      'sends an server error code if there is a database error inserting a new user',
+      'sends a server error code if there is a database error inserting a new user',
       invalidTest => {
         first.resolves();
         insert.rejects();
