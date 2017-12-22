@@ -4,9 +4,7 @@ const auth = require('./auth');
 
 const server = express();
 
-server.use(express.urlencoded({
-  extended: true
-}));
+server.use(express.urlencoded({ extended: true }));
 
 auth.setup(server);
 
