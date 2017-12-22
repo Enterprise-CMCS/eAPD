@@ -6,7 +6,7 @@ const sandbox = sinon.createSandbox();
 process.env.SESSION_SECRET = 'secret';
 const authSetup = require('../../auth').setup;
 
-tap.test('authentication setup', (authTest) => {
+tap.test('authentication setup', authTest => {
   const app = {
     use: sandbox.spy(),
     post: sandbox.spy()
@@ -23,49 +23,102 @@ tap.test('authentication setup', (authTest) => {
 
   const strategies = ['strategy1', 'strategy2'];
 
-  authTest.beforeEach((done) => {
+  authTest.beforeEach(done => {
     sandbox.resetHistory();
     done();
   });
 
-  authTest.test('setup calls everything we expect it to', (setupTest) => {
+  authTest.test('setup calls everything we expect it to', setupTest => {
     authSetup(app, passport, strategies);
 
-    setupTest.equal(app.use.callCount, 3, 'three middleware functions added to app');
-    setupTest.ok(app.use.calledWith(sinon.match.func), 'adds session function to middleware');
-    setupTest.ok(app.use.calledWith('passport-initialize'), 'adds passport initialization to middleware');
-    setupTest.ok(app.use.calledWith('passport-session'), 'adds passport session to middleware');
+    setupTest.equal(
+      app.use.callCount,
+      3,
+      'three middleware functions added to app'
+    );
+    setupTest.ok(
+      app.use.calledWith(sinon.match.func),
+      'adds session function to middleware'
+    );
+    setupTest.ok(
+      app.use.calledWith('passport-initialize'),
+      'adds passport initialization to middleware'
+    );
+    setupTest.ok(
+      app.use.calledWith('passport-session'),
+      'adds passport session to middleware'
+    );
 
-    setupTest.equal(passport.use.callCount, 2, 'two passport strategies are configured');
-    setupTest.ok(passport.use.calledWith('strategy1'), 'first strategy is registered');
-    setupTest.ok(passport.use.calledWith('strategy2'), 'second strategy is registered');
+    setupTest.equal(
+      passport.use.callCount,
+      2,
+      'two passport strategies are configured'
+    );
+    setupTest.ok(
+      passport.use.calledWith('strategy1'),
+      'first strategy is registered'
+    );
+    setupTest.ok(
+      passport.use.calledWith('strategy2'),
+      'second strategy is registered'
+    );
 
     setupTest.ok(passport.initialize.calledOnce, 'passport is initialized');
     setupTest.ok(passport.session.calledOnce, 'passport session is setup');
 
-    setupTest.ok(passport.serializeUser.calledOnce, 'user serialization function is set once');
-    setupTest.ok(passport.deserializeUser.calledOnce, 'user deserialization function is set once');
+    setupTest.ok(
+      passport.serializeUser.calledOnce,
+      'user serialization function is set once'
+    );
+    setupTest.ok(
+      passport.deserializeUser.calledOnce,
+      'user deserialization function is set once'
+    );
 
-    setupTest.ok(passport.authenticate.calledOnce, 'passport authenticate method is inserted one time');
-    setupTest.ok(passport.authenticate.calledWith('local'), 'passport local authentication method is used');
+    setupTest.ok(
+      passport.authenticate.calledOnce,
+      'passport authenticate method is inserted one time'
+    );
+    setupTest.ok(
+      passport.authenticate.calledWith('local'),
+      'passport local authentication method is used'
+    );
 
-    setupTest.ok(app.post.calledOnce, 'a single POST endpoint is added to the app');
-    setupTest.ok(app.post.calledWith('/auth/login', 'passport-authenticate', sinon.match.func));
+    setupTest.ok(
+      app.post.calledOnce,
+      'a single POST endpoint is added to the app'
+    );
+    setupTest.ok(
+      app.post.calledWith(
+        '/auth/login',
+        'passport-authenticate',
+        sinon.match.func
+      )
+    );
 
     setupTest.done();
   });
 
-  authTest.test('setup works with defaults, too', (setupTest) => {
+  authTest.test('setup works with defaults, too', setupTest => {
     authSetup(app);
 
-    setupTest.equal(app.use.callCount, 3, 'three middleware functions added to app');
-    setupTest.ok(app.post.calledOnce, 'a single POST endpoint is added to the app');
-    setupTest.ok(app.post.calledWith('/auth/login', sinon.match.func, sinon.match.func));
+    setupTest.equal(
+      app.use.callCount,
+      3,
+      'three middleware functions added to app'
+    );
+    setupTest.ok(
+      app.post.calledOnce,
+      'a single POST endpoint is added to the app'
+    );
+    setupTest.ok(
+      app.post.calledWith('/auth/login', sinon.match.func, sinon.match.func)
+    );
 
     setupTest.done();
   });
 
-  authTest.test('POST endpoint behaves as expected', (postTest) => {
+  authTest.test('POST endpoint behaves as expected', postTest => {
     authSetup(app, passport, strategies);
     const post = app.post.args[0][2];
 
