@@ -5,9 +5,7 @@ const authenticate = require('./authenticate')();
 const serialization = require('./serialization');
 const sessionFunction = require('./session').getSessionFunction();
 
-const defaultStrategies = [
-  new LocalStrategy(authenticate)
-];
+const defaultStrategies = [new LocalStrategy(authenticate)];
 
 // This setup method configures passport and inserts it into
 // the express middleware. After a successful authentication,
