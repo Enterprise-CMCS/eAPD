@@ -14,10 +14,6 @@ server.use(bodyParser.json());
 
 auth.setup(server);
 
-server.get('*', (req, res) => {
-  res.send({ hello: 'world' });
-});
-
 routes(server);
 
 server.listen(process.env.PORT);
