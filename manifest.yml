@@ -1,11 +1,13 @@
 ---
 applications:
   - name: hitech-apd-frontend
-    path: web/dist
     memory: 64M
+    path: web/dist
     host: hitech-apd
     buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
   - name: hitech-apd-api
+    services:
+      - cms-db
     memory: 128M
     path: api
     host: hitech-api
