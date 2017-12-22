@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs');
-const db = require('../../db')();
+const defaultDB = require('../../db')();
 const loggedIn = require('../../auth/middleware').loggedIn;
 
-const ifUserIsNew = (email, res) => db('users')
+const ifUserIsNew = (email, res, db) => db('users')
   .where({ email }).first()
   .then((user) => {
     if (user) {
@@ -12,16 +12,16 @@ const ifUserIsNew = (email, res) => db('users')
     return Promise.resolve();
   });
 
-const insert = (email, password) => {
+const insert = (email, password, db) => {
   const hashed = bcrypt.hashSync(password);
   return db('users').insert({ email, password: hashed });
 };
 
-module.exports = (app) => {
+module.exports = (app, db = defaultDB) => {
   app.post('/user', loggedIn, (req, res) => {
     if (req.body.email && req.body.password) {
-      ifUserIsNew(req.body.email, res)
-        .then(() => insert(req.body.email, req.body.password))
+      ifUserIsNew(req.body.email, res, db)
+        .then(() => insert(req.body.email, req.body.password, db))
         .then(() => {
           res.status(200).end();
         })

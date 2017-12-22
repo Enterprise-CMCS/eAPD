@@ -1,5 +1,5 @@
 const users = require('./users');
 
-module.exports = (app) => {
-  users(app);
+module.exports = (app, usersEndpoint = users) => {
+  usersEndpoint(app);
 };
