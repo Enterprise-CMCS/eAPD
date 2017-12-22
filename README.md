@@ -30,6 +30,11 @@ npm start
 
 Then open http://localhost:8080/ in your browser.
 
+### Documentation
+
+Check out the [technical/dev documentation](docs/index.md) for a deeper dive into how the app
+is built, configured, run, and so on.
+
 ## Public domain
 
 This project is in the worldwide [public domain](LICENSE.md).   As stated in [CONTRIBUTING](CONTRIBUTING.md):
