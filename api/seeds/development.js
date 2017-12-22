@@ -1,6 +1,6 @@
 const users = require('./development/users');
 
-exports.seed = (knex) => {
+exports.seed = knex => {
   // Don't seed this data if we're not in a development environment.
   if (process.env.NODE_ENV !== 'development') {
     return Promise.resolve();
