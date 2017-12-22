@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const getSessionFunction = require('../../auth/session').getSessionFunction;
+const getSessionFunction = require('./session').getSessionFunction;
 
 tap.test('session function', sessionTest => {
   const sessions = sinon.spy();
