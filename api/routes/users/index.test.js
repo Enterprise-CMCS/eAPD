@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const usersIndex = require('../../../routes/users');
+const usersIndex = require('./index');
 
 tap.test('users endpoint setup', endpointTest => {
   const app = {};

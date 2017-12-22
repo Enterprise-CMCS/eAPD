@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const db = require('../db');
+const db = require('./db');
 
 tap.test('database object module', dbTest => {
   const knex = sinon.stub().returns({

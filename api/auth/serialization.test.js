@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const sandbox = sinon.createSandbox();
 
-const serialization = require('../../auth/serialization');
+const serialization = require('./serialization');
 
 tap.test('passport serialization', serializationTest => {
   const db = sandbox.stub();

@@ -11,7 +11,7 @@ const bcrypt = {
   compareSync: sandbox.stub()
 };
 
-const auth = require('../../auth/authenticate.js')(db, bcrypt);
+const auth = require('./authenticate.js')(db, bcrypt);
 
 tap.test('local authentication', authTest => {
   const doneCallback = sandbox.spy();
