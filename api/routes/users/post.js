@@ -2,15 +2,20 @@ const bcrypt = require('bcryptjs');
 const defaultDB = require('../../db')();
 const loggedIn = require('../../auth/middleware').loggedIn;
 
-const ifUserIsNew = (email, res, db) => db('users')
-  .where({ email }).first()
-  .then((user) => {
-    if (user) {
-      res.status(400).send({ error: 'add-user-email-exists' }).end();
-      return Promise.reject();
-    }
-    return Promise.resolve();
-  });
+const ifUserIsNew = (email, res, db) =>
+  db('users')
+    .where({ email })
+    .first()
+    .then(user => {
+      if (user) {
+        res
+          .status(400)
+          .send({ error: 'add-user-email-exists' })
+          .end();
+        return Promise.reject();
+      }
+      return Promise.resolve();
+    });
 
 const insert = (email, password, db) => {
   const hashed = bcrypt.hashSync(password);
@@ -31,7 +36,10 @@ module.exports = (app, db = defaultDB) => {
           res.status(500).end();
         });
     } else {
-      res.status(400).send({ error: 'add-user-invalid' }).end();
+      res
+        .status(400)
+        .send({ error: 'add-user-invalid' })
+        .end();
     }
   });
 };
