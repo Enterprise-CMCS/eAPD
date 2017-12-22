@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const db = require('../db');
 
-tap.test('database object module', (dbTest) => {
+tap.test('database object module', dbTest => {
   const knex = sinon.stub().returns({
     thisIs: 'a database'
   });
@@ -13,8 +13,15 @@ tap.test('database object module', (dbTest) => {
   const result = db(knex, { env1: 'environment 1', env2: 'environment 2' });
 
   dbTest.ok(knex.calledOnce, 'knex is configured');
-  dbTest.ok(knex.calledWith('environment 2'), 'knex is configured with the passed value');
-  dbTest.same(result, { thisIs: 'a database' }, 'returns the expected object based on env');
+  dbTest.ok(
+    knex.calledWith('environment 2'),
+    'knex is configured with the passed value'
+  );
+  dbTest.same(
+    result,
+    { thisIs: 'a database' },
+    'returns the expected object based on env'
+  );
 
   process.env.NODE_ENV = nodeEnv;
   dbTest.done();
