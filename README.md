@@ -7,16 +7,16 @@
 
 This project aims to create a user-friendly, modern product to allow states to
 submit their Medicaid HITECH APD information to CMS easily and help CMS
-analysts review the requests more efficiently.
+analysts review requests more efficiently.
 
 ## Developing
 
 After you clone the repo, you can use [Docker](https://www.docker.com/) to get your local environment
-up and running quickly, or you can just install your [Node.js](https://nodejs.org) dependencies directly.
+up and running quickly, or you can install the [Node.js](https://nodejs.org) dependencies directly.
 
 ### docker
 
-Just run `docker-compose up`, wait until it's done, and then open http://localhost:8080/ in your browser.
+Run `docker-compose up`, wait until it's done, and then open http://localhost:8080/ in your browser.
 
 ### direct
 
@@ -28,15 +28,17 @@ npm install
 npm start
 ```
 
-Then open http://localhost:8080/ in your browser.
+Then, open http://localhost:8080/ in your browser.
+
+### Documentation
+
+Check out the [technical documentation](docs/index.md) for a deeper dive into how the app
+works.
 
 ## Public domain
 
-This project is in the worldwide [public domain](LICENSE.md).   As stated in [CONTRIBUTING](CONTRIBUTING.md):
+This project is in the worldwide [public domain](LICENSE.md). As stated in [CONTRIBUTING](CONTRIBUTING.md):
 
-> This project is in the public domain within   the United States, and copyright and related rights in the
-> work worldwide are waived through the
-> [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).  
+> This project is in the public domain within   the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 >
-> All contributions to this project will be released under the CC0 dedication. By submitting a pull request,
-> you are agreeing to comply with this waiver of copyright interest.
+> All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.
