@@ -8,14 +8,41 @@ services:
     expose:
       - 5432
 
-  api-endpoint-tests:
-    build: ./
+  api-for-testing:
+    build: .
     depends_on:
       - db
     environment:
       - PORT=8000
       - NODE_ENV=test
+      - API_PORT=8000
+      - API_HOST=api-for-testing
+    expose:
+      - 8000
     volumes:
       - ./:/app
       - /app/node_modules
-    # entrypoint: ./test/endpoint-tests.sh
+
+  api-migration:
+    build: .
+    depends_on:
+      - db
+      - api-for-testing
+    environment:
+      - NODE_ENV=test
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: npm run migrate
+
+  api-seed:
+    build: .
+    depends_on:
+      - db
+      - api-for-testing
+    environment:
+      - NODE_ENV=test
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: npm run seed
