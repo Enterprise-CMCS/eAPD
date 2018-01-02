@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "scaffold": "mkdir -p dist && cp src/index.html dist/",
-    "build": "npm run scaffold && webpack -p",
+    "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --host 0.0.0.0 --port 8000 --history-api-fallback --content-base src/",
     "test": "jest",
@@ -48,10 +48,12 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.1.2",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.12.1",
@@ -70,7 +72,8 @@
   "babel": {
     "presets": [
       "env",
-      "react"
+      "react",
+      "stage-0"
     ]
   },
   "jest": {
