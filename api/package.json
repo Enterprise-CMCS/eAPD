@@ -9,7 +9,7 @@
     "seed": "knex seed:run",
     "start": "node main.js",
     "start-dev": "nodemon ./main.js",
-    "test": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec 'tests/**/*.js'",
+    "test": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec '{,!(node_modules)/**/}*.test.js'",
     "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
   "repository": {
