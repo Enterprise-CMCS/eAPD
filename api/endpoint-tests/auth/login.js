@@ -2,7 +2,7 @@ const tap = require('tap');
 const request = require('request');
 
 tap.test('login endpoint | /auth/login', loginTest => {
-  const url = `http://localhost:${process.env.PORT}/auth/login`;
+  const url = `http://${process.env.API_HOST || 'localhost'}:${process.env.API_PORT || process.env.PORT || 8000}/auth/login`;
 
   loginTest.test('with no post body at all', invalidTest => {
     request.post(url, (err, response) => {
