@@ -140,6 +140,9 @@ workflows:
       - api unit test:
           requires:
              - prepare api dependencies cache
+      - api endpoint test:
+          requires:
+             - prepare api dependencies cache
       - deploy:
           filters:
             branches:
@@ -148,3 +151,4 @@ workflows:
           requires:
              - web test
              - api unit test
+             - api endpoint test
