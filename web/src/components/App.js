@@ -2,8 +2,9 @@ import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Container, NavLink, Provider, Toolbar } from 'rebass';
 
-import Demo from '../components/Demo';
-import Hello from '../components/Hello';
+import Demo from './Demo';
+import DevTools from './DevTools';
+import Hello from './Hello';
 import Home from '../containers/Home';
 
 const App = () => (
@@ -28,6 +29,8 @@ const App = () => (
       <Route path="/hello" component={Hello} />
       <Route path="/demo" component={Demo} />
     </Container>
+
+    {process.env.NODE_ENV !== 'production' && <DevTools />}
   </Provider>
 );
 
