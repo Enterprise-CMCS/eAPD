@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Counter component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Counter
+    onDecrement={[Function]}
+    onIncrement={[Function]}
+    total={5}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <Styled(Styled(Base))
+          mb={2}
+        >
+          Clicks: 
+          5
+        </Styled(Styled(Base))>,
+        <Styled(Styled(Base))
+          onClick={[Function]}
+        >
+          -
+        </Styled(Styled(Base))>,
+        " ",
+        <Styled(Styled(Base))
+          onClick={[Function]}
+        >
+          +
+        </Styled(Styled(Base))>,
+      ],
+      "py": 3,
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            "Clicks: ",
+            5,
+          ],
+          "mb": 2,
+        },
+        "ref": null,
+        "rendered": Array [
+          "Clicks: ",
+          5,
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "-",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "-",
+        "type": [Function],
+      },
+      " ",
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "+",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "+",
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <Styled(Styled(Base))
+            mb={2}
+          >
+            Clicks: 
+            5
+          </Styled(Styled(Base))>,
+          <Styled(Styled(Base))
+            onClick={[Function]}
+          >
+            -
+          </Styled(Styled(Base))>,
+          " ",
+          <Styled(Styled(Base))
+            onClick={[Function]}
+          >
+            +
+          </Styled(Styled(Base))>,
+        ],
+        "py": 3,
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              "Clicks: ",
+              5,
+            ],
+            "mb": 2,
+          },
+          "ref": null,
+          "rendered": Array [
+            "Clicks: ",
+            5,
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "-",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "-",
+          "type": [Function],
+        },
+        " ",
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "+",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "+",
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

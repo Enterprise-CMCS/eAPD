@@ -1,0 +1,475 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the App component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <App />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <Styled(Styled(Base))
+          bg="black"
+        >
+          <Styled(Styled(Base))
+            is={[Function]}
+            to="/"
+          >
+            CMS HITECH APD
+          </Styled(Styled(Base))>
+          <Styled(Styled(Base))
+            is={[Function]}
+            ml="auto"
+            to="/"
+          >
+            Home
+          </Styled(Styled(Base))>
+          <Styled(Styled(Base))
+            is={[Function]}
+            to="/hello"
+          >
+            Hello
+          </Styled(Styled(Base))>
+          <Styled(Styled(Base))
+            is={[Function]}
+            to="/demo"
+          >
+            Demo
+          </Styled(Styled(Base))>
+        </Styled(Styled(Base))>,
+        <Styled(Styled(Base))
+          is="main"
+        >
+          <Route
+            component={[Function]}
+            exact={true}
+            path="/"
+          />
+          <Route
+            component={[Function]}
+            path="/hello"
+          />
+          <Route
+            component={[Function]}
+            path="/demo"
+          />
+        </Styled(Styled(Base))>,
+        <DevTools />,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "bg": "black",
+          "children": Array [
+            <Styled(Styled(Base))
+              is={[Function]}
+              to="/"
+            >
+              CMS HITECH APD
+            </Styled(Styled(Base))>,
+            <Styled(Styled(Base))
+              is={[Function]}
+              ml="auto"
+              to="/"
+            >
+              Home
+            </Styled(Styled(Base))>,
+            <Styled(Styled(Base))
+              is={[Function]}
+              to="/hello"
+            >
+              Hello
+            </Styled(Styled(Base))>,
+            <Styled(Styled(Base))
+              is={[Function]}
+              to="/demo"
+            >
+              Demo
+            </Styled(Styled(Base))>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "CMS HITECH APD",
+              "is": [Function],
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "CMS HITECH APD",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Home",
+              "is": [Function],
+              "ml": "auto",
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "Home",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Hello",
+              "is": [Function],
+              "to": "/hello",
+            },
+            "ref": null,
+            "rendered": "Hello",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Demo",
+              "is": [Function],
+              "to": "/demo",
+            },
+            "ref": null,
+            "rendered": "Demo",
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <Route
+              component={[Function]}
+              exact={true}
+              path="/"
+            />,
+            <Route
+              component={[Function]}
+              path="/hello"
+            />,
+            <Route
+              component={[Function]}
+              path="/demo"
+            />,
+          ],
+          "is": "main",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "component": [Function],
+              "exact": true,
+              "path": "/",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "component": [Function],
+              "path": "/hello",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "component": [Function],
+              "path": "/demo",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <Styled(Styled(Base))
+            bg="black"
+          >
+            <Styled(Styled(Base))
+              is={[Function]}
+              to="/"
+            >
+              CMS HITECH APD
+            </Styled(Styled(Base))>
+            <Styled(Styled(Base))
+              is={[Function]}
+              ml="auto"
+              to="/"
+            >
+              Home
+            </Styled(Styled(Base))>
+            <Styled(Styled(Base))
+              is={[Function]}
+              to="/hello"
+            >
+              Hello
+            </Styled(Styled(Base))>
+            <Styled(Styled(Base))
+              is={[Function]}
+              to="/demo"
+            >
+              Demo
+            </Styled(Styled(Base))>
+          </Styled(Styled(Base))>,
+          <Styled(Styled(Base))
+            is="main"
+          >
+            <Route
+              component={[Function]}
+              exact={true}
+              path="/"
+            />
+            <Route
+              component={[Function]}
+              path="/hello"
+            />
+            <Route
+              component={[Function]}
+              path="/demo"
+            />
+          </Styled(Styled(Base))>,
+          <DevTools />,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bg": "black",
+            "children": Array [
+              <Styled(Styled(Base))
+                is={[Function]}
+                to="/"
+              >
+                CMS HITECH APD
+              </Styled(Styled(Base))>,
+              <Styled(Styled(Base))
+                is={[Function]}
+                ml="auto"
+                to="/"
+              >
+                Home
+              </Styled(Styled(Base))>,
+              <Styled(Styled(Base))
+                is={[Function]}
+                to="/hello"
+              >
+                Hello
+              </Styled(Styled(Base))>,
+              <Styled(Styled(Base))
+                is={[Function]}
+                to="/demo"
+              >
+                Demo
+              </Styled(Styled(Base))>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "CMS HITECH APD",
+                "is": [Function],
+                "to": "/",
+              },
+              "ref": null,
+              "rendered": "CMS HITECH APD",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Home",
+                "is": [Function],
+                "ml": "auto",
+                "to": "/",
+              },
+              "ref": null,
+              "rendered": "Home",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Hello",
+                "is": [Function],
+                "to": "/hello",
+              },
+              "ref": null,
+              "rendered": "Hello",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Demo",
+                "is": [Function],
+                "to": "/demo",
+              },
+              "ref": null,
+              "rendered": "Demo",
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <Route
+                component={[Function]}
+                exact={true}
+                path="/"
+              />,
+              <Route
+                component={[Function]}
+                path="/hello"
+              />,
+              <Route
+                component={[Function]}
+                path="/demo"
+              />,
+            ],
+            "is": "main",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "exact": true,
+                "path": "/",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/hello",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/demo",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
