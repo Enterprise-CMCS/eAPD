@@ -1,8 +1,8 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const loggedInMiddleware = require('../../../auth/middleware').loggedIn;
-const postEndpoint = require('../../../routes/users/post');
+const loggedInMiddleware = require('../../auth/middleware').loggedIn;
+const postEndpoint = require('./post');
 
 tap.test('user POST endpoint', endpointTest => {
   const sandbox = sinon.createSandbox();

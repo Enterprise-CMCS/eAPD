@@ -1,7 +1,7 @@
 const tap = require('tap');
 
 tap.beforeEach(done => {
-  delete require.cache[require.resolve('../env')];
+  delete require.cache[require.resolve('./env')];
   process.env = {};
   done();
 });
@@ -15,7 +15,7 @@ tap.test('environment setup', envTest => {
   envTest.test(
     'sets default values for known environment variables',
     setsDefaultTest => {
-      require('../env'); // eslint-disable-line global-require
+      require('./env'); // eslint-disable-line global-require
       knownEnvironmentVariables.forEach(envVar => {
         setsDefaultTest.type(
           process.env[envVar.name],
@@ -34,7 +34,7 @@ tap.test('environment setup', envTest => {
         process.env[envVar.name] = 'test-value';
       });
 
-      require('../env'); // eslint-disable-line global-require
+      require('./env'); // eslint-disable-line global-require
       knownEnvironmentVariables.forEach(envVar => {
         doesNotOverrideTest.same(
           process.env[envVar.name],
