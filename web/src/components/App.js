@@ -3,12 +3,14 @@ import { Link, Route } from 'react-router-dom';
 import { Container, NavLink, Provider, Toolbar } from 'rebass';
 
 import Demo from './Demo';
-import DevTools from './DevTools';
+import DevProvider from './DevProvider';
 import Hello from './Hello';
 import Home from '../containers/Home';
 
+const Wrapper = process.env.NODE_ENV !== 'production' ? DevProvider : Provider;
+
 const App = () => (
-  <Provider>
+  <Wrapper>
     <Toolbar bg="black">
       <NavLink to="/" is={Link}>
         CMS HITECH APD
@@ -29,9 +31,7 @@ const App = () => (
       <Route path="/hello" component={Hello} />
       <Route path="/demo" component={Demo} />
     </Container>
-
-    {process.env.NODE_ENV !== 'production' && <DevTools />}
-  </Provider>
+  </Wrapper>
 );
 
 export default App;
