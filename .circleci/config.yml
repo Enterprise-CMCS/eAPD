@@ -106,9 +106,11 @@ jobs:
           key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
       - run:
           name: database migration
+          working_directory: ~/project/api
           command: npm run migrate
       - run:
           name: database seed
+          working_directory: ~/project/api
           command: npm run seed
 
   deploy:
