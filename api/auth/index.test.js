@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const sandbox = sinon.createSandbox();
 
 process.env.SESSION_SECRET = 'secret';
-const authSetup = require('../../auth').setup;
+const authSetup = require('./index').setup;
 
 tap.test('authentication setup', authTest => {
   const app = {
