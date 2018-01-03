@@ -73,7 +73,7 @@ jobs:
           working_directory: ~/project/api
           command: npm run lint
 
-  api test:
+  api unit test:
     docker:
       - image: node:8
     steps:
@@ -89,6 +89,27 @@ jobs:
           when: always
           working_directory: ~/project/api
           command: bash <(curl -s https://codecov.io/bash)
+
+  api endpoint test:
+    docker:
+      - image: node:8
+        environment:
+          - NODE_ENV=test
+      - image: postgres:latest
+        environment:
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=cms
+          - POSTGRES_DB=hitech_apd_test
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
+      - run:
+          name: database migration
+          command: npm run migrate
+      - run:
+          name: database seed
+          command: npm run seed
 
   deploy:
     docker:
@@ -116,7 +137,7 @@ workflows:
       - api lint:
           requires:
              - prepare api dependencies cache
-      - api test:
+      - api unit test:
           requires:
              - prepare api dependencies cache
       - deploy:
@@ -126,4 +147,4 @@ workflows:
                 - master
           requires:
              - web test
-             - api test
+             - api unit test
