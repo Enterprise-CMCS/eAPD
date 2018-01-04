@@ -106,6 +106,9 @@ jobs:
       - restore_cache:
           key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
       - run:
+          name: wait for database
+          command: sleep 5
+      - run:
           name: database migration
           working_directory: ~/project/api
           command: npm run migrate
