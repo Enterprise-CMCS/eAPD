@@ -96,6 +96,7 @@ jobs:
         environment:
           - NODE_ENV=test
       - image: postgres:latest
+        name: db
         environment:
           - POSTGRES_USER=postgres
           - POSTGRES_PASSWORD=cms
@@ -129,13 +130,13 @@ workflows:
   web:
     jobs:
       - prepare web dependencies cache
+      - prepare api dependencies cache
       - web lint:
           requires:
             - prepare web dependencies cache
       - web test:
           requires:
             - prepare web dependencies cache
-      - prepare api dependencies cache
       - api lint:
           requires:
              - prepare api dependencies cache
