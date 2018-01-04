@@ -12,7 +12,7 @@ module.exports = {
   test: {
     client: 'postgresql',
     connection: {
-      host: 'db',
+      host: process.env.TEST_DB_HOST || 'db',
       database: 'hitech_apd_test',
       user: 'postgres',
       password: 'cms'
