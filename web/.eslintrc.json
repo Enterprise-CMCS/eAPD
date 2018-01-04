@@ -14,16 +14,13 @@
     ]
   },
   "env": {
-    "browser": true,
-    "jest": true
+    "browser": true
   },
   "overrides": [
     {
       "files": ["**/*.test.js"],
-      "globals": {
-        "describe": false,
-        "expect": false,
-        "test": false
+      "env": {
+        "jest": true
       }
     }
   ]
