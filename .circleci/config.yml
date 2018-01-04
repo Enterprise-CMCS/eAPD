@@ -116,6 +116,17 @@ jobs:
           name: database seed
           working_directory: ~/project/api
           command: npm run seed
+      - run:
+          name: start the API
+          working_directory: ~/project/api
+          command: npm start
+      - run:
+          name: wait for API
+          command: sleep 5
+      - run:
+          name: run tests
+          working_directory: ~/project/api
+          command: npm run test-endpoints
 
   deploy:
     docker:
