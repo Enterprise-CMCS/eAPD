@@ -1,0 +1,453 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Demo component renders correctly 1`] = `
+<div
+  className="sc-ifAKCX cFlEyZ sc-bdVaJa hoIHyY"
+  is={null}
+>
+  <div
+    className="sc-eXEjpC Ektxw sc-kIPQKe gQkzp"
+    is={null}
+  >
+    <a
+      className="sc-RefOD iVdTDt sc-ibxdXY dRYPZn"
+      is={null}
+    >
+      Beep
+    </a>
+    <a
+      className="sc-RefOD cfkplI sc-ibxdXY dRYPZn"
+      is={null}
+    >
+      Boop
+    </a>
+    <a
+      className="sc-RefOD cfkplI sc-ibxdXY dRYPZn"
+      is={null}
+    >
+      Bop
+    </a>
+  </div>
+  <h2
+    className="sc-eNQAEJ bpjgLe sc-jKJlTe FSDfo sc-ckVGcZ foYhJp sc-dxgOiQ jLStMh"
+    is={null}
+  >
+    Hello
+    <div
+      className="sc-iyvyFf ePQNFD sc-gzOgki cwiGqs"
+      is={null}
+    >
+      Beep
+    </div>
+  </h2>
+  <div
+    className="sc-jtRfpW fASADh sc-elJkPf bpJyZp"
+    is={null}
+  >
+    Message: a verbal, written, or recorded communication sent to or left for a recipient who cannot be contacted directly
+  </div>
+  <div
+    className="sc-bxivhb bUZGRr sc-htpNat jtWIOA sc-bdVaJa OUoyf"
+    is={null}
+  >
+    <div
+      className="sc-ifAKCX cFlEyZ sc-bdVaJa WTnKA"
+      is={null}
+    >
+      <div
+        className="sc-hEsumM ftUEpe sc-tilXH eyKWtt"
+        is={null}
+      >
+        <div
+          className="sc-hqyNC fwUope sc-kvZOFW jvYLmV"
+          is={null}
+          src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2048&q=20"
+        />
+        <div
+          className="sc-ifAKCX cFlEyZ sc-bdVaJa iHSytp"
+          is={null}
+        >
+          <h3
+            className="sc-kEYyzF gfWKdx sc-hMqMXs gdbeMS sc-eNQAEJ bpjgLe sc-jKJlTe ckzJsy sc-ckVGcZ foYhJp sc-dxgOiQ bwRFdG"
+            is={null}
+          >
+            Card 
+            A
+          </h3>
+          <small
+            className="sc-iAyFgw gPlgsX sc-kkGfuU kzFeiw sc-ckVGcZ foYhJp sc-dxgOiQ kAySVu"
+            is={null}
+          >
+            Small meta text
+          </small>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-ifAKCX cFlEyZ sc-bdVaJa WTnKA"
+      is={null}
+    >
+      <div
+        className="sc-hEsumM ftUEpe sc-tilXH eyKWtt"
+        is={null}
+      >
+        <div
+          className="sc-hqyNC fwUope sc-kvZOFW jvYLmV"
+          is={null}
+          src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2048&q=20"
+        />
+        <div
+          className="sc-ifAKCX cFlEyZ sc-bdVaJa iHSytp"
+          is={null}
+        >
+          <h3
+            className="sc-kEYyzF gfWKdx sc-hMqMXs gdbeMS sc-eNQAEJ bpjgLe sc-jKJlTe ckzJsy sc-ckVGcZ foYhJp sc-dxgOiQ bwRFdG"
+            is={null}
+          >
+            Card 
+            B
+          </h3>
+          <small
+            className="sc-iAyFgw gPlgsX sc-kkGfuU kzFeiw sc-ckVGcZ foYhJp sc-dxgOiQ kAySVu"
+            is={null}
+          >
+            Small meta text
+          </small>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-ifAKCX cFlEyZ sc-bdVaJa WTnKA"
+      is={null}
+    >
+      <div
+        className="sc-hEsumM ftUEpe sc-tilXH eyKWtt"
+        is={null}
+      >
+        <div
+          className="sc-hqyNC fwUope sc-kvZOFW jvYLmV"
+          is={null}
+          src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2048&q=20"
+        />
+        <div
+          className="sc-ifAKCX cFlEyZ sc-bdVaJa iHSytp"
+          is={null}
+        >
+          <h3
+            className="sc-kEYyzF gfWKdx sc-hMqMXs gdbeMS sc-eNQAEJ bpjgLe sc-jKJlTe ckzJsy sc-ckVGcZ foYhJp sc-dxgOiQ bwRFdG"
+            is={null}
+          >
+            Card 
+            C
+          </h3>
+          <small
+            className="sc-iAyFgw gPlgsX sc-kkGfuU kzFeiw sc-ckVGcZ foYhJp sc-dxgOiQ kAySVu"
+            is={null}
+          >
+            Small meta text
+          </small>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-ifAKCX cFlEyZ sc-bdVaJa WTnKA"
+      is={null}
+    >
+      <div
+        className="sc-hEsumM ftUEpe sc-tilXH eyKWtt"
+        is={null}
+      >
+        <div
+          className="sc-hqyNC fwUope sc-kvZOFW jvYLmV"
+          is={null}
+          src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2048&q=20"
+        />
+        <div
+          className="sc-ifAKCX cFlEyZ sc-bdVaJa iHSytp"
+          is={null}
+        >
+          <h3
+            className="sc-kEYyzF gfWKdx sc-hMqMXs gdbeMS sc-eNQAEJ bpjgLe sc-jKJlTe ckzJsy sc-ckVGcZ foYhJp sc-dxgOiQ bwRFdG"
+            is={null}
+          >
+            Card 
+            D
+          </h3>
+          <small
+            className="sc-iAyFgw gPlgsX sc-kkGfuU kzFeiw sc-ckVGcZ foYhJp sc-dxgOiQ kAySVu"
+            is={null}
+          >
+            Small meta text
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-ifAKCX cFlEyZ sc-bdVaJa jrVbSM"
+    is={null}
+  >
+    <button
+      className="sc-iwsKbI hAPDJb sc-dnqmqq uKddu"
+      is={null}
+    >
+      Hello
+    </button>
+    <button
+      className="sc-jTzLTM cuxBAu sc-VigVT htunsm sc-iwsKbI hAPDJb sc-dnqmqq uKddu"
+      is={null}
+    >
+      Hello
+    </button>
+    <button
+      className="sc-gqjmRU gqRUPg sc-gZMcBi gqXijI sc-iwsKbI euIPqd sc-dnqmqq jdUsdO"
+      is={null}
+    >
+      Hello
+    </button>
+    <div
+      className="sc-bAeIUo ctPUXC sc-bMVAic gPfCFy"
+      is={null}
+    >
+      <p
+        className="sc-ckVGcZ foYhJp sc-dxgOiQ kMqakB"
+        is={null}
+      >
+        Hover Me
+      </p>
+    </div>
+  </div>
+  <h2
+    className="sc-eNQAEJ bpjgLe sc-jKJlTe ePiGln sc-ckVGcZ foYhJp sc-dxgOiQ jYtIvp"
+    is={null}
+  >
+    Form elements
+  </h2>
+  <form>
+    <div
+      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      is={null}
+    >
+      <label
+        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        is={null}
+      >
+        Input
+      </label>
+      <input
+        className="sc-fBuWsC jFadsW sc-jhAzac dklNqo"
+        defaultValue="Hello"
+        is={null}
+        type="text"
+      />
+    </div>
+    <div
+      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      is={null}
+    >
+      <label
+        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        is={null}
+      >
+        Select
+      </label>
+      <div
+        className="sc-dVhcbM lcjAwY sc-fMiknA krFHnr sc-bZQynM iMWVsx"
+      >
+        <select
+          className="sc-gzVnrw jwFyqx"
+          color="inherit"
+          defaultValue="Hello"
+        >
+          <option>
+            Hello
+          </option>
+          <option>
+            World
+          </option>
+        </select>
+        <svg
+          className="sc-htoDjs ldjFnT"
+          viewBox="0 0 32 32"
+        >
+          <path
+            d="M0 6 L32 6 L16 28 z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      is={null}
+    >
+      <label
+        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        is={null}
+      >
+        Input
+      </label>
+      <textarea
+        className="sc-fAjcbJ vYpGm sc-eqIVtm tHpjC"
+        defaultValue="Hello"
+        is={null}
+      />
+    </div>
+    <div
+      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      is={null}
+    >
+      <label
+        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        is={null}
+      >
+        <input
+          className="sc-gisBJw kDlVKO sc-caSCKo fXbvQO"
+          is={null}
+          type="checkbox"
+        />
+        Check it
+      </label>
+    </div>
+    <div
+      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      is={null}
+    >
+      <label
+        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        is={null}
+      >
+        <input
+          className="sc-cHGsZl bHiaRe sc-kjoXOD buzgFW"
+          defaultChecked={true}
+          is={null}
+          name="foo"
+          type="radio"
+        />
+        Pick me
+      </label>
+      <label
+        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        is={null}
+      >
+        <input
+          className="sc-cHGsZl bHiaRe sc-kjoXOD buzgFW"
+          is={null}
+          name="foo"
+          type="radio"
+        />
+        Pick me
+      </label>
+    </div>
+    <div
+      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      is={null}
+    >
+      <label
+        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        is={null}
+      >
+        Slider
+      </label>
+      <input
+        className="sc-kgAjT iqeAVc sc-TOsTZ DlFFt"
+        is={null}
+        type="range"
+      />
+    </div>
+  </form>
+  <section
+    className="sc-dNLxif cTKadY sc-jbKcbu hWvDCc"
+    id="Typographic Scale"
+    is={null}
+  >
+    <h2
+      className="sc-eNQAEJ bpjgLe sc-jKJlTe cAcSXe sc-ckVGcZ foYhJp sc-dxgOiQ iRMEPR"
+      is={null}
+    >
+      <a
+        className="sc-kpOJdX bCROIv sc-kGXeez eIIwaK"
+        href="#Typographic Scale"
+        is={null}
+      >
+        Typographic Scale
+      </a>
+    </h2>
+    <p
+      className="sc-ckVGcZ foYhJp sc-dxgOiQ kMqakB"
+      is={null}
+    >
+      The default typographic scale is basedo n a 16px base and common sizes, well suited for responsive typography that helps maintain a natural feeling visual rhythm.
+    </p>
+    <p
+      className="sc-Rmtcm epEsCW sc-csuQGl ievhzw sc-ckVGcZ foYhJp sc-dxgOiQ jmahZm"
+      is={null}
+    >
+      96
+      px The quick brown fox jumped over the lazy dog.
+    </p>
+    <p
+      className="sc-Rmtcm epEsCW sc-csuQGl dKMNYJ sc-ckVGcZ foYhJp sc-dxgOiQ gCVBHD"
+      is={null}
+    >
+      72
+      px The quick brown fox jumped over the lazy dog.
+    </p>
+    <p
+      className="sc-Rmtcm epEsCW sc-csuQGl gdWlZS sc-ckVGcZ foYhJp sc-dxgOiQ jVOolO"
+      is={null}
+    >
+      64
+      px The quick brown fox jumped over the lazy dog.
+    </p>
+    <p
+      className="sc-Rmtcm epEsCW sc-csuQGl cfZBpJ sc-ckVGcZ foYhJp sc-dxgOiQ dVmXvX"
+      is={null}
+    >
+      48
+      px The quick brown fox jumped over the lazy dog.
+    </p>
+    <p
+      className="sc-Rmtcm epEsCW sc-csuQGl ccxVEJ sc-ckVGcZ foYhJp sc-dxgOiQ jYtIvp"
+      is={null}
+    >
+      32
+      px The quick brown fox jumped over the lazy dog.
+    </p>
+    <p
+      className="sc-Rmtcm epEsCW sc-csuQGl OGEXm sc-ckVGcZ foYhJp sc-dxgOiQ gTpgse"
+      is={null}
+    >
+      24
+      px The quick brown fox jumped over the lazy dog.
+    </p>
+    <p
+      className="sc-Rmtcm epEsCW sc-csuQGl cMAKDi sc-ckVGcZ foYhJp sc-dxgOiQ gEomQh"
+      is={null}
+    >
+      20
+      px The quick brown fox jumped over the lazy dog.
+    </p>
+    <p
+      className="sc-Rmtcm epEsCW sc-csuQGl cfpKmS sc-ckVGcZ foYhJp sc-dxgOiQ cUErUG"
+      is={null}
+    >
+      16
+      px The quick brown fox jumped over the lazy dog.
+    </p>
+    <p
+      className="sc-Rmtcm epEsCW sc-csuQGl eaiYnG sc-ckVGcZ foYhJp sc-dxgOiQ fPNQWW"
+      is={null}
+    >
+      14
+      px The quick brown fox jumped over the lazy dog.
+    </p>
+    <p
+      className="sc-Rmtcm epEsCW sc-csuQGl kumjpo sc-ckVGcZ foYhJp sc-dxgOiQ bqpYRM"
+      is={null}
+    >
+      12
+      px The quick brown fox jumped over the lazy dog.
+    </p>
+  </section>
+</div>
+`;

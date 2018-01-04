@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the DevProvider component renders correctly 1`] = `
+<div
+  className="sc-EHOje hzBkDV"
+>
+  <div
+    className="nano1k2nybm"
+    disabled={true}
+  >
+    <div>
+      foo
+    </div>
+  </div>
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".nano1k2nybm{padding:0}",
+      }
+    }
+  />
+  <div
+    className="sc-iQNlJl itsyWL sc-epnACN gKJwmO"
+    is={null}
+  >
+    <button
+      className="sc-iwsKbI enyoio sc-dnqmqq rssUT"
+      is={null}
+      onClick={[Function]}
+    >
+      X-Ray
+    </button>
+  </div>
+</div>
+`;
