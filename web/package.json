@@ -67,6 +67,7 @@
     "prettier": "^1.9.1",
     "react-test-renderer": "^16.2.0",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.4.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   },
@@ -83,7 +84,8 @@
     "rootDir": "src",
     "setupFiles": [
       "../polyfills.test.js",
-      "../setup.test.js"
+      "../setup.test.js",
+      "../files.test.js"
     ]
   }
 }
