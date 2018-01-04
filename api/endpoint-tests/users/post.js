@@ -1,6 +1,6 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const request = require('request'); // eslint-disable-line import/no-extraneous-dependencies
-const { getFullPath, login } = require('../utils');
+const { db, getFullPath, login } = require('../utils');
 
 tap.test('users endpoint | POST /user', postUsersTest => {
   const url = getFullPath('/user');
@@ -104,7 +104,23 @@ tap.test('users endpoint | POST /user', postUsersTest => {
               'gives a 200 status code'
             );
             validTest.notOk(body, 'does not send a body');
-            validTest.done();
+
+            db()('users')
+              .where({ email: 'newuser@email.com' })
+              .first()
+              .then(user => {
+                validTest.ok(
+                  user,
+                  'a user object is inserted into the database'
+                );
+              })
+              .catch(() => {
+                validTest.fail('error');
+              })
+              .then(() => {
+                validTest.done();
+                // process.exit();
+              });
           }
         );
       });
