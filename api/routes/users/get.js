@@ -30,7 +30,7 @@ const oneUserHandler = (req, res, db) => {
   } else {
     res
       .status(400)
-      .send('get-user-invalid')
+      .send({ error: 'get-user-invalid' })
       .end();
   }
 };
