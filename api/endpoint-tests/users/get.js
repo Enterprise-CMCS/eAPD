@@ -6,11 +6,11 @@ const login = require('../utils').login;
 tap.test('users endpoint | GET /users', getUsersTest => {
   const url = getFullPath('/users');
 
-  getUsersTest.test('when unauthenticated', invalidTest => {
+  getUsersTest.test('when unauthenticated', unauthenticatedTest => {
     request.get(url, (err, response, body) => {
-      invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
-      invalidTest.notOk(body, 'does not send a body');
-      invalidTest.done();
+      unauthenticatedTest.equal(response.statusCode, 403, 'gives a 403 status code');
+      unauthenticatedTest.notOk(body, 'does not send a body');
+      unauthenticatedTest.done();
     });
   });
 
@@ -53,7 +53,7 @@ tap.test('users endpoint | GET /user/:userID', getUserTest => {
       login().then(cookies => {
         request.get(`${url}/random-id`, { jar: cookies, json: true }, (err, response, body) => {
           invalidTest.equal(response.statusCode, 400, 'gives a 400 status code');
-          invalidTest.equal(body, 'get-user-invalid', 'sends a token indicating the failure');
+          invalidTest.same(body, { error: 'get-user-invalid' }, 'sends a token indicating the failure');
           invalidTest.done();
         });
       });
