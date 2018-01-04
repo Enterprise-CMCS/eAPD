@@ -120,6 +120,7 @@ jobs:
           name: start the API
           working_directory: ~/project/api
           command: npm start
+          background: true
       - run:
           name: wait for API
           command: sleep 5
