@@ -1,11 +1,10 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const request = require('request'); // eslint-disable-line import/no-extraneous-dependencies
+const { getFullPath } = require('../utils');
 
 tap.test('login endpoint | /auth/login', loginTest => {
-  const url = `http://${process.env.API_HOST || 'localhost'}:${process.env
-    .API_PORT ||
-    process.env.PORT ||
-    8000}/auth/login`;
+  const url = getFullPath('/auth/login');
+  console.log(url);
 
   loginTest.test('with no post body at all', invalidTest => {
     request.post(url, (err, response) => {
