@@ -10,6 +10,7 @@
     "start": "node main.js",
     "start-dev": "nodemon ./main.js",
     "test": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec '{,!(node_modules)/**/}*.test.js'",
+    "test-endpoints": "tap --reporter=spec 'endpoint-tests/*/*.js'",
     "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
   "repository": {
@@ -45,8 +46,7 @@
     "knex": "^0.14.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pg": "^7.4.0",
-    "sinon": "^4.1.3"
+    "pg": "^7.4.0"
   },
   "engines": {
     "node": "^8.9"
@@ -57,6 +57,9 @@
     "eslint-plugin-import": "^2.8.0",
     "nodemon": "^1.12.7",
     "prettier": "^1.9.2",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "sinon": "^4.1.3",
     "tap": "^11.0.0"
   }
 }
