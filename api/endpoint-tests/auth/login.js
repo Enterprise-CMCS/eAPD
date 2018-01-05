@@ -4,7 +4,6 @@ const { getFullPath } = require('../utils');
 
 tap.test('login endpoint | /auth/login', loginTest => {
   const url = getFullPath('/auth/login');
-  console.log(url);
 
   loginTest.test('with no post body at all', invalidTest => {
     request.post(url, (err, response) => {
