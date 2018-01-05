@@ -30,17 +30,21 @@ npm install
 npm start
 ```
 
-Then, open http://localhost:8080/ in your browser.
+Then, open http://localhost:8001/ in your browser.
 
-To start the API server, make sure your environomental variables are
-[configured](docs/api-configuration.md) and then run these commands from the
-repo root:
+To start the API server, make sure (a) your environment variables are
+[configured](docs/api-configuration.md), (b) Postgres is running (i.e., `brew
+services start postgresql`), and (c) the development database exists
+([db settings](api/knexfile.js)). Then, run these commands from the repo root:
 
 ```
 cd api
 npm install
+npm run migrate
 npm start
 ```
+
+The server should now be running at http://localhost:8000/
 
 ### Documentation
 
