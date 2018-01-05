@@ -6,11 +6,15 @@ const login = require('../utils').login;
 tap.test('users endpoint | GET /users', getUsersTest => {
   const url = getFullPath('/users');
 
-  getUsersTest.test('when unauthenticated', invalidTest => {
+  getUsersTest.test('when unauthenticated', unauthenticatedTest => {
     request.get(url, (err, response, body) => {
-      invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
-      invalidTest.notOk(body, 'does not send a body');
-      invalidTest.done();
+      unauthenticatedTest.equal(
+        response.statusCode,
+        403,
+        'gives a 403 status code'
+      );
+      unauthenticatedTest.notOk(body, 'does not send a body');
+      unauthenticatedTest.done();
     });
   });
 
@@ -18,7 +22,11 @@ tap.test('users endpoint | GET /users', getUsersTest => {
     login().then(cookies => {
       request.get(url, { jar: cookies, json: true }, (err, response, body) => {
         validTest.equal(response.statusCode, 200, 'gives a 200 status code');
-        validTest.same(body, [{ id: 57, email: 'em@il.com' }], 'returns an array of known users');
+        validTest.same(
+          body,
+          [{ id: 57, email: 'em@il.com' }],
+          'returns an array of known users'
+        );
         validTest.done();
       });
     });
@@ -38,7 +46,11 @@ tap.test('users endpoint | GET /user/:userID', getUserTest => {
     ].forEach(situation => {
       unauthenticatedTests.test(situation.name, unauthentedTest => {
         request.get(`${url}/${situation.id}`, (err, response, body) => {
-          unauthentedTest.equal(response.statusCode, 403, 'gives a 403 status code');
+          unauthentedTest.equal(
+            response.statusCode,
+            403,
+            'gives a 403 status code'
+          );
           unauthentedTest.notOk(body, 'does not send a body');
           unauthentedTest.done();
         });
@@ -49,33 +61,71 @@ tap.test('users endpoint | GET /user/:userID', getUserTest => {
   });
 
   getUserTest.test('when authenticated', authenticatedTests => {
-    authenticatedTests.test('when requesting an invalid user ID', invalidTest => {
-      login().then(cookies => {
-        request.get(`${url}/random-id`, { jar: cookies, json: true }, (err, response, body) => {
-          invalidTest.equal(response.statusCode, 400, 'gives a 400 status code');
-          invalidTest.equal(body, 'get-user-invalid', 'sends a token indicating the failure');
-          invalidTest.done();
+    authenticatedTests.test(
+      'when requesting an invalid user ID',
+      invalidTest => {
+        login().then(cookies => {
+          request.get(
+            `${url}/random-id`,
+            { jar: cookies, json: true },
+            (err, response, body) => {
+              invalidTest.equal(
+                response.statusCode,
+                400,
+                'gives a 400 status code'
+              );
+              invalidTest.same(
+                body,
+                { error: 'get-user-invalid' },
+                'sends a token indicating the failure'
+              );
+              invalidTest.done();
+            }
+          );
         });
-      });
-    });
+      }
+    );
 
-    authenticatedTests.test('when requesting a non-existant user ID', invalidTest => {
-      login().then(cookies => {
-        request.get(`${url}/500`, { jar: cookies, json: true }, (err, response, body) => {
-          invalidTest.equal(response.statusCode, 404, 'gives a 404 status code');
-          invalidTest.notOk(body, 'does not send a body');
-          invalidTest.done();
+    authenticatedTests.test(
+      'when requesting a non-existant user ID',
+      invalidTest => {
+        login().then(cookies => {
+          request.get(
+            `${url}/500`,
+            { jar: cookies, json: true },
+            (err, response, body) => {
+              invalidTest.equal(
+                response.statusCode,
+                404,
+                'gives a 404 status code'
+              );
+              invalidTest.notOk(body, 'does not send a body');
+              invalidTest.done();
+            }
+          );
         });
-      });
-    });
+      }
+    );
 
     authenticatedTests.test('when requesting a valid user ID', validTest => {
       login().then(cookies => {
-        request.get(`${url}/57`, { jar: cookies, json: true }, (err, response, body) => {
-          validTest.equal(response.statusCode, 200, 'gives a 200 status code');
-          validTest.same(body, { id: 57, email: 'em@il.com' }, 'returns an object for the requested user');
-          validTest.done();
-        });
+        request.get(
+          `${url}/57`,
+          { jar: cookies, json: true },
+          (err, response, body) => {
+            validTest.equal(
+              response.statusCode,
+              200,
+              'gives a 200 status code'
+            );
+            validTest.same(
+              body,
+              { id: 57, email: 'em@il.com' },
+              'returns an object for the requested user'
+            );
+            validTest.done();
+          }
+        );
       });
     });
 
