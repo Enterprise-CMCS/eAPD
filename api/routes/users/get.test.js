@@ -124,7 +124,7 @@ tap.test('user GET endpoint', endpointTest => {
           handler({ params: invalidCase.params }, res);
           invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
           invalidTest.ok(
-            res.send.calledWith('get-user-invalid'),
+            res.send.calledWith({ error: 'get-user-invalid' }),
             'sets an error message'
           );
           invalidTest.ok(res.end.called, 'response is terminated');
