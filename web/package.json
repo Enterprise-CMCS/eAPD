@@ -7,7 +7,7 @@
     "scaffold": "mkdir -p dist && cp src/index.html dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
-    "start": "webpack-dev-server --host 0.0.0.0 --port 8000 --history-api-fallback --content-base src/",
+    "start": "webpack-dev-server --host 0.0.0.0 --port 8001 --history-api-fallback --content-base src/",
     "test": "jest",
     "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
   },

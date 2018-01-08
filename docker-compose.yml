@@ -16,7 +16,7 @@ services:
       - ./web:/app
       - /app/node_modules
     ports:
-      - 8080:8000
+      - 8080:8001
 
   api:
     build: ./api
