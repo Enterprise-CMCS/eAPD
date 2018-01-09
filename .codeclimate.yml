@@ -1,9 +1,12 @@
-engines:
+plugins:
   duplication:
     enabled: false
   eslint:
     enabled: true
     channel: "eslint-4"
+    checks:
+      complexity:
+        enabled: false
   csslint:
     enabled: false
 

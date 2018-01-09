@@ -20,6 +20,7 @@ ShallowWrapper {
       "children": Array [
         <Styled(Styled(Base))
           bg="black"
+          mb={4}
         >
           <Styled(Styled(Base))
             is={[Function]}
@@ -36,15 +37,9 @@ ShallowWrapper {
           </Styled(Styled(Base))>
           <Styled(Styled(Base))
             is={[Function]}
-            to="/hello"
+            to="/poc"
           >
-            Hello
-          </Styled(Styled(Base))>
-          <Styled(Styled(Base))
-            is={[Function]}
-            to="/demo"
-          >
-            Demo
+            PoC
           </Styled(Styled(Base))>
         </Styled(Styled(Base))>,
         <Styled(Styled(Base))
@@ -57,7 +52,7 @@ ShallowWrapper {
           />
           <Route
             component={[Function]}
-            path="/hello"
+            path="/poc"
           />
           <Route
             component={[Function]}
@@ -90,17 +85,12 @@ ShallowWrapper {
             </Styled(Styled(Base))>,
             <Styled(Styled(Base))
               is={[Function]}
-              to="/hello"
+              to="/poc"
             >
-              Hello
-            </Styled(Styled(Base))>,
-            <Styled(Styled(Base))
-              is={[Function]}
-              to="/demo"
-            >
-              Demo
+              PoC
             </Styled(Styled(Base))>,
           ],
+          "mb": 4,
         },
         "ref": null,
         "rendered": Array [
@@ -136,25 +126,12 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": "Hello",
+              "children": "PoC",
               "is": [Function],
-              "to": "/hello",
+              "to": "/poc",
             },
             "ref": null,
-            "rendered": "Hello",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Demo",
-              "is": [Function],
-              "to": "/demo",
-            },
-            "ref": null,
-            "rendered": "Demo",
+            "rendered": "PoC",
             "type": [Function],
           },
         ],
@@ -173,7 +150,7 @@ ShallowWrapper {
             />,
             <Route
               component={[Function]}
-              path="/hello"
+              path="/poc"
             />,
             <Route
               component={[Function]}
@@ -203,7 +180,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "component": [Function],
-              "path": "/hello",
+              "path": "/poc",
             },
             "ref": null,
             "rendered": null,
@@ -236,6 +213,7 @@ ShallowWrapper {
         "children": Array [
           <Styled(Styled(Base))
             bg="black"
+            mb={4}
           >
             <Styled(Styled(Base))
               is={[Function]}
@@ -252,15 +230,9 @@ ShallowWrapper {
             </Styled(Styled(Base))>
             <Styled(Styled(Base))
               is={[Function]}
-              to="/hello"
+              to="/poc"
             >
-              Hello
-            </Styled(Styled(Base))>
-            <Styled(Styled(Base))
-              is={[Function]}
-              to="/demo"
-            >
-              Demo
+              PoC
             </Styled(Styled(Base))>
           </Styled(Styled(Base))>,
           <Styled(Styled(Base))
@@ -273,7 +245,7 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
-              path="/hello"
+              path="/poc"
             />
             <Route
               component={[Function]}
@@ -306,17 +278,12 @@ ShallowWrapper {
               </Styled(Styled(Base))>,
               <Styled(Styled(Base))
                 is={[Function]}
-                to="/hello"
+                to="/poc"
               >
-                Hello
-              </Styled(Styled(Base))>,
-              <Styled(Styled(Base))
-                is={[Function]}
-                to="/demo"
-              >
-                Demo
+                PoC
               </Styled(Styled(Base))>,
             ],
+            "mb": 4,
           },
           "ref": null,
           "rendered": Array [
@@ -352,25 +319,12 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "children": "Hello",
+                "children": "PoC",
                 "is": [Function],
-                "to": "/hello",
+                "to": "/poc",
               },
               "ref": null,
-              "rendered": "Hello",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "Demo",
-                "is": [Function],
-                "to": "/demo",
-              },
-              "ref": null,
-              "rendered": "Demo",
+              "rendered": "PoC",
               "type": [Function],
             },
           ],
@@ -389,7 +343,7 @@ ShallowWrapper {
               />,
               <Route
                 component={[Function]}
-                path="/hello"
+                path="/poc"
               />,
               <Route
                 component={[Function]}
@@ -419,7 +373,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "path": "/hello",
+                "path": "/poc",
               },
               "ref": null,
               "rendered": null,
