@@ -9,6 +9,7 @@ import { createLogger } from 'redux-logger'; // eslint-disable-line import/no-ex
 
 import reducer from './reducers';
 import Root from './components/Root';
+import './styles/base';
 
 const history = createHistory();
 

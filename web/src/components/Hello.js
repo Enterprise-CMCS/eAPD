@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Measure, Subhead } from 'rebass';
-
-import Alert from '../styles/Alert';
 
 const Hello = props => (
   <div>
-    <h1>Hello {props.name}!</h1>
-    <Alert kind="error">
-      <Subhead>Hey-oh!</Subhead>
-      <Measure>This is a fake alert :)</Measure>
-    </Alert>
+    <h1>
+      Hello, {props.name}!!<br />👋
+    </h1>
   </div>
 );
 
@@ -19,7 +14,7 @@ Hello.propTypes = {
 };
 
 Hello.defaultProps = {
-  name: 'Friend'
+  name: 'world'
 };
 
 export default Hello;

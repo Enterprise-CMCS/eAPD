@@ -5,7 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Hello
-    name="Friend"
+    name="world"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -19,88 +19,46 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": Array [
-        <h1>
-          Hello 
-          Friend
-          !
-        </h1>,
-        <Styled(Styled(Box))
-          kind="error"
-        >
-          <Styled(Styled(Base))>
-            Hey-oh!
-          </Styled(Styled(Base))>
-          <Styled(Styled(Base))>
-            This is a fake alert :)
-          </Styled(Styled(Base))>
-        </Styled(Styled(Box))>,
-      ],
+      "children": <h1>
+        Hello, 
+        world
+        !!
+        <br />
+        👋
+      </h1>,
     },
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            "Hello ",
-            "Friend",
-            "!",
-          ],
-        },
-        "ref": null,
-        "rendered": Array [
-          "Hello ",
-          "Friend",
-          "!",
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          "Hello, ",
+          "world",
+          "!!",
+          <br />,
+          "👋",
         ],
-        "type": "h1",
       },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": Array [
-            <Styled(Styled(Base))>
-              Hey-oh!
-            </Styled(Styled(Base))>,
-            <Styled(Styled(Base))>
-              This is a fake alert :)
-            </Styled(Styled(Base))>,
-          ],
-          "kind": "error",
+      "ref": null,
+      "rendered": Array [
+        "Hello, ",
+        "world",
+        "!!",
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": "br",
         },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Hey-oh!",
-            },
-            "ref": null,
-            "rendered": "Hey-oh!",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "This is a fake alert :)",
-            },
-            "ref": null,
-            "rendered": "This is a fake alert :)",
-            "type": [Function],
-          },
-        ],
-        "type": [Function],
-      },
-    ],
+        "👋",
+      ],
+      "type": "h1",
+    },
     "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
@@ -109,88 +67,46 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": Array [
-          <h1>
-            Hello 
-            Friend
-            !
-          </h1>,
-          <Styled(Styled(Box))
-            kind="error"
-          >
-            <Styled(Styled(Base))>
-              Hey-oh!
-            </Styled(Styled(Base))>
-            <Styled(Styled(Base))>
-              This is a fake alert :)
-            </Styled(Styled(Base))>
-          </Styled(Styled(Box))>,
-        ],
+        "children": <h1>
+          Hello, 
+          world
+          !!
+          <br />
+          👋
+        </h1>,
       },
       "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              "Hello ",
-              "Friend",
-              "!",
-            ],
-          },
-          "ref": null,
-          "rendered": Array [
-            "Hello ",
-            "Friend",
-            "!",
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Hello, ",
+            "world",
+            "!!",
+            <br />,
+            "👋",
           ],
-          "type": "h1",
         },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
-              <Styled(Styled(Base))>
-                Hey-oh!
-              </Styled(Styled(Base))>,
-              <Styled(Styled(Base))>
-                This is a fake alert :)
-              </Styled(Styled(Base))>,
-            ],
-            "kind": "error",
+        "ref": null,
+        "rendered": Array [
+          "Hello, ",
+          "world",
+          "!!",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": "br",
           },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "Hey-oh!",
-              },
-              "ref": null,
-              "rendered": "Hey-oh!",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "This is a fake alert :)",
-              },
-              "ref": null,
-              "rendered": "This is a fake alert :)",
-              "type": [Function],
-            },
-          ],
-          "type": [Function],
-        },
-      ],
+          "👋",
+        ],
+        "type": "h1",
+      },
       "type": "div",
     },
   ],
@@ -223,88 +139,46 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": Array [
-        <h1>
-          Hello 
-          Test Person
-          !
-        </h1>,
-        <Styled(Styled(Box))
-          kind="error"
-        >
-          <Styled(Styled(Base))>
-            Hey-oh!
-          </Styled(Styled(Base))>
-          <Styled(Styled(Base))>
-            This is a fake alert :)
-          </Styled(Styled(Base))>
-        </Styled(Styled(Box))>,
-      ],
+      "children": <h1>
+        Hello, 
+        Test Person
+        !!
+        <br />
+        👋
+      </h1>,
     },
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            "Hello ",
-            "Test Person",
-            "!",
-          ],
-        },
-        "ref": null,
-        "rendered": Array [
-          "Hello ",
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          "Hello, ",
           "Test Person",
-          "!",
+          "!!",
+          <br />,
+          "👋",
         ],
-        "type": "h1",
       },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": Array [
-            <Styled(Styled(Base))>
-              Hey-oh!
-            </Styled(Styled(Base))>,
-            <Styled(Styled(Base))>
-              This is a fake alert :)
-            </Styled(Styled(Base))>,
-          ],
-          "kind": "error",
+      "ref": null,
+      "rendered": Array [
+        "Hello, ",
+        "Test Person",
+        "!!",
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": "br",
         },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Hey-oh!",
-            },
-            "ref": null,
-            "rendered": "Hey-oh!",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "This is a fake alert :)",
-            },
-            "ref": null,
-            "rendered": "This is a fake alert :)",
-            "type": [Function],
-          },
-        ],
-        "type": [Function],
-      },
-    ],
+        "👋",
+      ],
+      "type": "h1",
+    },
     "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
@@ -313,88 +187,46 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": Array [
-          <h1>
-            Hello 
-            Test Person
-            !
-          </h1>,
-          <Styled(Styled(Box))
-            kind="error"
-          >
-            <Styled(Styled(Base))>
-              Hey-oh!
-            </Styled(Styled(Base))>
-            <Styled(Styled(Base))>
-              This is a fake alert :)
-            </Styled(Styled(Base))>
-          </Styled(Styled(Box))>,
-        ],
+        "children": <h1>
+          Hello, 
+          Test Person
+          !!
+          <br />
+          👋
+        </h1>,
       },
       "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              "Hello ",
-              "Test Person",
-              "!",
-            ],
-          },
-          "ref": null,
-          "rendered": Array [
-            "Hello ",
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Hello, ",
             "Test Person",
-            "!",
+            "!!",
+            <br />,
+            "👋",
           ],
-          "type": "h1",
         },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
-              <Styled(Styled(Base))>
-                Hey-oh!
-              </Styled(Styled(Base))>,
-              <Styled(Styled(Base))>
-                This is a fake alert :)
-              </Styled(Styled(Base))>,
-            ],
-            "kind": "error",
+        "ref": null,
+        "rendered": Array [
+          "Hello, ",
+          "Test Person",
+          "!!",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": "br",
           },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "Hey-oh!",
-              },
-              "ref": null,
-              "rendered": "Hey-oh!",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "This is a fake alert :)",
-              },
-              "ref": null,
-              "rendered": "This is a fake alert :)",
-              "type": [Function],
-            },
-          ],
-          "type": [Function],
-        },
-      ],
+          "👋",
+        ],
+        "type": "h1",
+      },
       "type": "div",
     },
   ],
