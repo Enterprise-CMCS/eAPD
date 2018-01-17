@@ -36,6 +36,11 @@ module.exports.setup = function setup(
   app.use(passport.initialize());
   app.use(passport.session());
 
+  app.get('/auth/logout', (req, res) => {
+    req.logout();
+    res.status(200).end();
+  });
+
   // Add a local authentication endpoint
   app.post('/auth/login', passport.authenticate('local'), (req, res) => {
     res.status(200).end();
