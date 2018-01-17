@@ -6,6 +6,11 @@ exports.seed = knex =>
     .del()
     .then(() =>
       knex('users').insert([
-        { id: 57, email: 'em@il.com', password: bcrypt.hashSync('password') }
+        {
+          id: 57,
+          email: 'em@il.com',
+          password: bcrypt.hashSync('password'),
+          auth_role: 'admin'
+        }
       ])
     );
