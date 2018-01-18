@@ -46,6 +46,8 @@ npm start
 
 The server should now be running at http://localhost:8000/
 
+See the [testing documentation](docs/testing.md) for information about running tests.
+
 ### Documentation
 
 Check out the [technical documentation](docs/index.md) for a deeper dive into
