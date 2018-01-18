@@ -9,6 +9,7 @@ const authSetup = require('./index').setup;
 tap.test('authentication setup', authTest => {
   const app = {
     use: sandbox.spy(),
+    get: sandbox.spy(),
     post: sandbox.spy()
   };
 
@@ -85,6 +86,17 @@ tap.test('authentication setup', authTest => {
     );
 
     setupTest.ok(
+      app.get.calledOnce,
+      'a single GET endpoint is added to the app'
+    );
+    setupTest.ok(
+      app.get.calledWith,
+      '/auth/logout',
+      sinon.match.func,
+      'adds a function handler to GET /auth/logout'
+    );
+
+    setupTest.ok(
       app.post.calledOnce,
       'a single POST endpoint is added to the app'
     );
@@ -93,7 +105,8 @@ tap.test('authentication setup', authTest => {
         '/auth/login',
         'passport-authenticate',
         sinon.match.func
-      )
+      ),
+      'adds a function handler to POST /auth/login using the passport authenticate middleware'
     );
 
     setupTest.done();
