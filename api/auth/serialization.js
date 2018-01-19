@@ -14,7 +14,36 @@ module.exports.deserializeUser = (userID, done, db = defaultDB) =>
     .select()
     .then(users => {
       if (users.length) {
-        done(null, { username: users[0].email, id: users[0].id });
+        const role = users[0].auth_role;
+        if (role) {
+          db('auth_role_activity_mapping')
+            .fullOuterJoin(
+              'auth_roles',
+              'auth_roles.id',
+              'auth_role_activity_mapping.role_id'
+            )
+            .where({ 'auth_roles.name': role })
+            .innerJoin(
+              'auth_activities',
+              'auth_activities.id',
+              'auth_role_activity_mapping.activity_id'
+            )
+            .select()
+            .then(activityRows => {
+              const activities = activityRows.map(row => row.name);
+              done(null, {
+                username: users[0].email,
+                id: users[0].id,
+                activities
+              });
+            });
+        } else {
+          done(null, {
+            username: users[0].email,
+            id: users[0].id,
+            activities: []
+          });
+        }
       } else {
         done('Could not deserialize user');
       }
