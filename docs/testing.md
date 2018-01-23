@@ -4,6 +4,8 @@ We're big fans of testing, so we're putting in lots of testing throughout this
 app, both frontend and backend.  Here are some notes describing the tests and
 how to run them.
 
+If you haven't gotten everything running yet, [the README](../README.md) has
+good instructions on how to get started.
 
 ## Frontend
 
