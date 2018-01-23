@@ -36,3 +36,7 @@ about:
 * [configuring the back end app (environment variables and stuff like that)](api-configuration.md)
 * [our authorization model](api-authorization.md)
 * [how we handle authentication](api-authentication.md)
+
+## Testing
+
+We also have [documentation about how to run tests](testing.md).
