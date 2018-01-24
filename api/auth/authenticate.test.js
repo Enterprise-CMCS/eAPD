@@ -13,7 +13,7 @@ const bcrypt = {
 
 const auth = require('./authenticate.js')(db, bcrypt);
 
-tap.test('local authentication', authTest => {
+tap.test('local authentication', async authTest => {
   const doneCallback = sandbox.spy();
   authTest.beforeEach(done => {
     sandbox.reset();
@@ -43,8 +43,6 @@ tap.test('local authentication', authTest => {
       doneCallback.calledWith(sinon.match.truthy),
       'got an error message'
     );
-
-    errorTest.done();
   });
 
   authTest.test('with no valid users', async noUserTest => {
@@ -65,8 +63,6 @@ tap.test('local authentication', authTest => {
 
     noUserTest.equal(doneCallback.callCount, 1, 'called done callback once');
     noUserTest.ok(doneCallback.calledWith(null, false), 'got a false user');
-
-    noUserTest.done();
   });
 
   authTest.test('with invalid password', async invalidTest => {
@@ -99,8 +95,6 @@ tap.test('local authentication', authTest => {
 
     invalidTest.equal(doneCallback.callCount, 1, 'called done callback once');
     invalidTest.ok(doneCallback.calledWith(null, false), 'got a false user');
-
-    invalidTest.done();
   });
 
   authTest.test('with a valid user', async validTest => {
@@ -136,9 +130,5 @@ tap.test('local authentication', authTest => {
       doneCallback.calledWith(null, { username: 'hello@world', id: 57 }),
       'did not get an error message, did get a user object'
     );
-
-    validTest.done();
   });
-
-  authTest.done();
 });

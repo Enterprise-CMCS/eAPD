@@ -6,7 +6,7 @@ tap.beforeEach(done => {
   done();
 });
 
-tap.test('environment setup', envTest => {
+tap.test('environment setup', async envTest => {
   const knownEnvironmentVariables = [
     { name: 'PORT', type: 'number' },
     { name: 'SESSION_SECRET', type: 'string' }
@@ -45,5 +45,4 @@ tap.test('environment setup', envTest => {
       doesNotOverrideTest.end();
     }
   );
-  envTest.done();
 });
