@@ -44,16 +44,15 @@ tap.test('passport serialization', serializationTest => {
   serializationTest.test('deserialize a user', deserializeTest => {
     const userID = 'the-user-id';
 
-    deserializeTest.test('that is not in the database', invalidTest => {
+    deserializeTest.test('that is not in the database', async invalidTest => {
       select.resolves([]);
 
-      serialization.deserializeUser(userID, doneCallback, db).then(() => {
-        invalidTest.ok(
-          doneCallback.calledWith(sinon.match.string),
-          'calls back with an error'
-        );
-        invalidTest.done();
-      });
+      await serialization.deserializeUser(userID, doneCallback, db);
+      invalidTest.ok(
+        doneCallback.calledWith(sinon.match.string),
+        'calls back with an error'
+      );
+      invalidTest.done();
     });
 
     deserializeTest.test('that is in the database', validTest => {
