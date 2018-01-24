@@ -8,20 +8,34 @@ const getFullPath = endpointPath =>
     process.env.PORT ||
     8000}${endpointPath}`;
 
-const login = () =>
-  new Promise((resolve, reject) => {
-    const cookies = request.jar();
-    request.post(
-      getFullPath('/auth/login'),
-      { jar: cookies, json: { username: 'em@il.com', password: 'password' } },
-      (err, response) => {
-        if (response.statusCode === 200) {
-          return resolve(cookies);
-        }
-        return reject(new Error('Failed to login'));
-      }
-    );
+const get = async (...args) => new Promise(resolve => {
+  request.get(...args, (err, response, body) => {
+    resolve({ err, response, body });
   });
+});
+
+const post = async (...args) => new Promise(resolve => {
+  request.post(...args, (err, response, body) => {
+    resolve({ err, response, body });
+  });
+});
+
+const login = async () => {
+  const cookies = request.jar();
+
+  const { response } = await post(
+    getFullPath('/auth/login'),
+    {
+      jar: cookies,
+      json: { username: 'em@il.com', password: 'password' }
+    }
+  );
+
+  if (response.statusCode === 200) {
+    return cookies;
+  }
+  throw new Error('Failed to login');
+};
 
 const db = () => {
   // tap runs each test file in its own process, which is awesome for
@@ -40,6 +54,7 @@ const db = () => {
 
 module.exports = {
   db,
+  request: { get, post, jar: request.jar },
   getFullPath,
   login
 };
