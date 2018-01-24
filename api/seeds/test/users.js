@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs');
 
 // Deletes ALL existing entries
-exports.seed = knex =>
-  knex('users').insert([
+exports.seed = async knex => {
+  await knex('users').insert([
     {
       id: 57,
       email: 'em@il.com',
@@ -10,3 +10,4 @@ exports.seed = knex =>
       auth_role: 'admin'
     }
   ]);
+};
