@@ -92,69 +92,61 @@ tap.test('user POST endpoint', endpointTest => {
       invalidTests.done();
     });
 
-    handlerTest.test('rejects inserting an existing user', invalidTest => {
+    handlerTest.test('rejects inserting an existing user', async invalidTest => {
       first.resolves({});
 
-      handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+      await handler({ body: { email: 'em@il.com', password: 'password' } }, res);
 
-      setTimeout(() => {
-        invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
-        invalidTest.ok(
-          res.send.calledWith({ error: 'add-user-email-exists' }),
-          'sets an error message'
-        );
-        invalidTest.ok(res.end.called, 'response is terminated');
-        invalidTest.done();
-      }, 20);
+      invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
+      invalidTest.ok(
+        res.send.calledWith({ error: 'add-user-email-exists' }),
+        'sets an error message'
+      );
+      invalidTest.ok(res.end.called, 'response is terminated');
+      invalidTest.done();
     });
 
     handlerTest.test(
       'sends a server error code if there is a database error checking for an existing user',
-      invalidTest => {
+      async invalidTest => {
         first.rejects();
 
-        handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler({ body: { email: 'em@il.com', password: 'password' } }, res);
 
-        setTimeout(() => {
-          invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-          invalidTest.ok(res.send.notCalled, 'does not send a message');
-          invalidTest.ok(res.end.called, 'response is terminated');
-          invalidTest.done();
-        }, 20);
+        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
+        invalidTest.ok(res.send.notCalled, 'does not send a message');
+        invalidTest.ok(res.end.called, 'response is terminated');
+        invalidTest.done();
       }
     );
 
     handlerTest.test(
       'sends a server error code if there is a database error inserting a new user',
-      invalidTest => {
+      async invalidTest => {
         first.resolves();
         insert.rejects();
 
-        handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler({ body: { email: 'em@il.com', password: 'password' } }, res);
 
-        setTimeout(() => {
-          invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-          invalidTest.ok(res.send.notCalled, 'does not send a message');
-          invalidTest.ok(res.end.called, 'response is terminated');
-          invalidTest.done();
-        }, 20);
+        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
+        invalidTest.ok(res.send.notCalled, 'does not send a message');
+        invalidTest.ok(res.end.called, 'response is terminated');
+        invalidTest.done();
       }
     );
 
     handlerTest.test(
       'inserts a new user and returns a success for a valid, new user',
-      validTest => {
+      async validTest => {
         first.resolves();
         insert.resolves();
 
-        handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler({ body: { email: 'em@il.com', password: 'password' } }, res);
 
-        setTimeout(() => {
-          validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
-          validTest.ok(res.send.notCalled, 'does not send a message');
-          validTest.ok(res.end.called, 'response is terminated');
-          validTest.done();
-        }, 20);
+        validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
+        validTest.ok(res.send.notCalled, 'does not send a message');
+        validTest.ok(res.end.called, 'response is terminated');
+        validTest.done();
       }
     );
 
