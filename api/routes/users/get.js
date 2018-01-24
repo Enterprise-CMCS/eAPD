@@ -1,32 +1,30 @@
 const defaultDB = require('../../db')();
 const loggedIn = require('../../auth/middleware').loggedIn;
 
-const allUsersHandler = (req, res, db) => {
-  db('users')
-    .select('id', 'email')
-    .then(users => {
-      res.send(users);
-    })
-    .catch(() => {
-      res.status(500).end();
-    });
+const allUsersHandler = async (req, res, db) => {
+  try {
+    const users = await db('users')
+      .select('id', 'email');
+    res.send(users);
+  } catch (e) {
+    res.status(500).end();
+  }
 };
 
-const oneUserHandler = (req, res, db) => {
+const oneUserHandler = async (req, res, db) => {
   if (req.params.id && !Number.isNaN(Number(req.params.id))) {
-    db('users')
-      .where({ id: Number(req.params.id) })
-      .first('id', 'email')
-      .then(user => {
-        if (user) {
-          res.send(user);
-        } else {
-          res.status(404).end();
-        }
-      })
-      .catch(() => {
-        res.status(500).end();
-      });
+    try {
+      const user = await db('users')
+        .where({ id: Number(req.params.id) })
+        .first('id', 'email');
+      if (user) {
+        res.send(user);
+      } else {
+        res.status(404).end();
+      }
+    } catch (e) {
+      res.status(500).end();
+    }
   } else {
     res
       .status(400)
