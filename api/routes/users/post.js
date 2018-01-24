@@ -26,7 +26,10 @@ module.exports = (app, db = defaultDB) => {
           await insert(req.body.email, req.body.password, db);
           res.status(200).end();
         } else {
-          res.status(400).send({ error: 'add-user-email-exists' }).end();
+          res
+            .status(400)
+            .send({ error: 'add-user-email-exists' })
+            .end();
         }
       } catch (e) {
         // 👆 eventually we should catch errors here and log

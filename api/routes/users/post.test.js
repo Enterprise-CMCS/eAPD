@@ -92,26 +92,35 @@ tap.test('user POST endpoint', endpointTest => {
       invalidTests.done();
     });
 
-    handlerTest.test('rejects inserting an existing user', async invalidTest => {
-      first.resolves({});
+    handlerTest.test(
+      'rejects inserting an existing user',
+      async invalidTest => {
+        first.resolves({});
 
-      await handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler(
+          { body: { email: 'em@il.com', password: 'password' } },
+          res
+        );
 
-      invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
-      invalidTest.ok(
-        res.send.calledWith({ error: 'add-user-email-exists' }),
-        'sets an error message'
-      );
-      invalidTest.ok(res.end.called, 'response is terminated');
-      invalidTest.done();
-    });
+        invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
+        invalidTest.ok(
+          res.send.calledWith({ error: 'add-user-email-exists' }),
+          'sets an error message'
+        );
+        invalidTest.ok(res.end.called, 'response is terminated');
+        invalidTest.done();
+      }
+    );
 
     handlerTest.test(
       'sends a server error code if there is a database error checking for an existing user',
       async invalidTest => {
         first.rejects();
 
-        await handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler(
+          { body: { email: 'em@il.com', password: 'password' } },
+          res
+        );
 
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'does not send a message');
@@ -126,7 +135,10 @@ tap.test('user POST endpoint', endpointTest => {
         first.resolves();
         insert.rejects();
 
-        await handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler(
+          { body: { email: 'em@il.com', password: 'password' } },
+          res
+        );
 
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'does not send a message');
@@ -141,7 +153,10 @@ tap.test('user POST endpoint', endpointTest => {
         first.resolves();
         insert.resolves();
 
-        await handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler(
+          { body: { email: 'em@il.com', password: 'password' } },
+          res
+        );
 
         validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
         validTest.ok(res.send.notCalled, 'does not send a message');

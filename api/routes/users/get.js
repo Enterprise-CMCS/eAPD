@@ -3,8 +3,7 @@ const loggedIn = require('../../auth/middleware').loggedIn;
 
 const allUsersHandler = async (req, res, db) => {
   try {
-    const users = await db('users')
-      .select('id', 'email');
+    const users = await db('users').select('id', 'email');
     res.send(users);
   } catch (e) {
     res.status(500).end();

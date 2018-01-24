@@ -18,7 +18,10 @@ tap.test('users endpoint | GET /users', async getUsersTest => {
 
   getUsersTest.test('when authenticated', async validTest => {
     const cookies = await login();
-    const { response, body } = await request.get(url, { jar: cookies, json: true });
+    const { response, body } = await request.get(url, {
+      jar: cookies,
+      json: true
+    });
 
     validTest.equal(response.statusCode, 200, 'gives a 200 status code');
     validTest.same(
@@ -55,15 +58,12 @@ tap.test('users endpoint | GET /user/:userID', async getUserTest => {
       'when requesting an invalid user ID',
       async invalidTest => {
         const cookies = await login();
-        const { response, body } = await request.get(
-          `${url}/random-id`,
-          { jar: cookies, json: true });
+        const { response, body } = await request.get(`${url}/random-id`, {
+          jar: cookies,
+          json: true
+        });
 
-        invalidTest.equal(
-          response.statusCode,
-          400,
-          'gives a 400 status code'
-        );
+        invalidTest.equal(response.statusCode, 400, 'gives a 400 status code');
         invalidTest.same(
           body,
           { error: 'get-user-invalid' },
@@ -76,34 +76,31 @@ tap.test('users endpoint | GET /user/:userID', async getUserTest => {
       'when requesting a non-existant user ID',
       async invalidTest => {
         const cookies = await login();
-        const { response, body } = await request.get(
-          `${url}/500`,
-          { jar: cookies, json: true });
+        const { response, body } = await request.get(`${url}/500`, {
+          jar: cookies,
+          json: true
+        });
 
-        invalidTest.equal(
-          response.statusCode,
-          404,
-          'gives a 404 status code'
-        );
+        invalidTest.equal(response.statusCode, 404, 'gives a 404 status code');
         invalidTest.notOk(body, 'does not send a body');
       }
     );
 
-    authenticatedTests.test('when requesting a valid user ID', async validTest => {
-      const cookies = await login();
-      const { response, body } = await request.get(
-        `${url}/57`,
-        { jar: cookies, json: true });
-      validTest.equal(
-        response.statusCode,
-        200,
-        'gives a 200 status code'
-      );
-      validTest.same(
-        body,
-        { id: 57, email: 'em@il.com' },
-        'returns an object for the requested user'
-      );
-    });
+    authenticatedTests.test(
+      'when requesting a valid user ID',
+      async validTest => {
+        const cookies = await login();
+        const { response, body } = await request.get(`${url}/57`, {
+          jar: cookies,
+          json: true
+        });
+        validTest.equal(response.statusCode, 200, 'gives a 200 status code');
+        validTest.same(
+          body,
+          { id: 57, email: 'em@il.com' },
+          'returns an object for the requested user'
+        );
+      }
+    );
   });
 });

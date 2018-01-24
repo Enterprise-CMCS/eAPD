@@ -8,28 +8,27 @@ const getFullPath = endpointPath =>
     process.env.PORT ||
     8000}${endpointPath}`;
 
-const get = async (...args) => new Promise(resolve => {
-  request.get(...args, (err, response, body) => {
-    resolve({ err, response, body });
+const get = async (...args) =>
+  new Promise(resolve => {
+    request.get(...args, (err, response, body) => {
+      resolve({ err, response, body });
+    });
   });
-});
 
-const post = async (...args) => new Promise(resolve => {
-  request.post(...args, (err, response, body) => {
-    resolve({ err, response, body });
+const post = async (...args) =>
+  new Promise(resolve => {
+    request.post(...args, (err, response, body) => {
+      resolve({ err, response, body });
+    });
   });
-});
 
 const login = async () => {
   const cookies = request.jar();
 
-  const { response } = await post(
-    getFullPath('/auth/login'),
-    {
-      jar: cookies,
-      json: { username: 'em@il.com', password: 'password' }
-    }
-  );
+  const { response } = await post(getFullPath('/auth/login'), {
+    jar: cookies,
+    json: { username: 'em@il.com', password: 'password' }
+  });
 
   if (response.statusCode === 200) {
     return cookies;

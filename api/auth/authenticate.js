@@ -7,7 +7,9 @@ module.exports = (db = defaultDB, bcrypt = defaultBcrypt) => async (
   done
 ) => {
   try {
-    const user = await db('users').where({ email: username }).first();
+    const user = await db('users')
+      .where({ email: username })
+      .first();
     // If there is a matching user, return it
     if (user && bcrypt.compareSync(password, user.password)) {
       done(null, { username: user.email, id: user.id });
