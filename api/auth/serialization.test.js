@@ -5,7 +5,7 @@ const sandbox = sinon.createSandbox();
 
 const serialization = require('./serialization');
 
-tap.test('passport serialization', serializationTest => {
+tap.test('passport serialization', async serializationTest => {
   const db = sandbox.stub();
   const where = sandbox.stub();
   const select = sandbox.stub();
@@ -31,17 +31,16 @@ tap.test('passport serialization', serializationTest => {
     done();
   });
 
-  serializationTest.test('serialize a user', serializeTest => {
+  serializationTest.test('serialize a user', async serializeTest => {
     const user = { id: 'the-user-id' };
     serialization.serializeUser(user, doneCallback);
     serializeTest.ok(
       doneCallback.calledWith(null, 'the-user-id'),
       'serializes the user object'
     );
-    serializeTest.done();
   });
 
-  serializationTest.test('deserialize a user', deserializeTest => {
+  serializationTest.test('deserialize a user', async deserializeTest => {
     const userID = 'the-user-id';
 
     deserializeTest.test('that is not in the database', async invalidTest => {
@@ -52,10 +51,9 @@ tap.test('passport serialization', serializationTest => {
         doneCallback.calledWith(sinon.match.string),
         'calls back with an error'
       );
-      invalidTest.done();
     });
 
-    deserializeTest.test('that is in the database', validTest => {
+    deserializeTest.test('that is in the database', async validTest => {
       validTest.test('with no role', async noRoleTest => {
         select.resolves([{ email: 'test-email', id: 'test-id', role: null }]);
 
@@ -69,7 +67,6 @@ tap.test('passport serialization', serializationTest => {
           }),
           'deserializes the user ID to an object'
         );
-        noRoleTest.done();
       });
 
       validTest.test('with a role', async adminRoleTest => {
@@ -96,14 +93,7 @@ tap.test('passport serialization', serializationTest => {
           }),
           'deserializes the user ID to an object'
         );
-        adminRoleTest.done();
       });
-
-      validTest.done();
     });
-
-    deserializeTest.done();
   });
-
-  serializationTest.done();
 });

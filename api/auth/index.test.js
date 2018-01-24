@@ -6,7 +6,7 @@ const sandbox = sinon.createSandbox();
 process.env.SESSION_SECRET = 'secret';
 const authSetup = require('./index').setup;
 
-tap.test('authentication setup', authTest => {
+tap.test('authentication setup', async authTest => {
   const app = {
     use: sandbox.spy(),
     get: sandbox.spy(),
@@ -29,7 +29,7 @@ tap.test('authentication setup', authTest => {
     done();
   });
 
-  authTest.test('setup calls everything we expect it to', setupTest => {
+  authTest.test('setup calls everything we expect it to', async setupTest => {
     authSetup(app, passport, strategies);
 
     setupTest.equal(
@@ -108,11 +108,9 @@ tap.test('authentication setup', authTest => {
       ),
       'adds a function handler to POST /auth/login using the passport authenticate middleware'
     );
-
-    setupTest.done();
   });
 
-  authTest.test('setup works with defaults, too', setupTest => {
+  authTest.test('setup works with defaults, too', async setupTest => {
     authSetup(app);
 
     setupTest.equal(
@@ -127,11 +125,9 @@ tap.test('authentication setup', authTest => {
     setupTest.ok(
       app.post.calledWith('/auth/login', sinon.match.func, sinon.match.func)
     );
-
-    setupTest.done();
   });
 
-  authTest.test('POST endpoint behaves as expected', postTest => {
+  authTest.test('POST endpoint behaves as expected', async postTest => {
     authSetup(app, passport, strategies);
     const post = app.post.args[0][2];
 
@@ -149,9 +145,5 @@ tap.test('authentication setup', authTest => {
     postTest.ok(res.status.calledWith(200), 'sets a 200 HTTP status');
     postTest.ok(res.send.notCalled, 'HTTP body is not sent');
     postTest.ok(res.end.calledOnce, 'response is ended one time');
-
-    postTest.done();
   });
-
-  authTest.done();
 });

@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const loggedInMiddleware = require('../../auth/middleware').loggedIn;
 const getEndpoint = require('./get');
 
-tap.test('user GET endpoint', endpointTest => {
+tap.test('user GET endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = {
     get: sandbox.stub()
@@ -32,7 +32,7 @@ tap.test('user GET endpoint', endpointTest => {
     done();
   });
 
-  endpointTest.test('setup', setupTest => {
+  endpointTest.test('setup', async setupTest => {
     getEndpoint(app, db);
 
     setupTest.ok(
@@ -43,10 +43,9 @@ tap.test('user GET endpoint', endpointTest => {
       app.get.calledWith('/users', loggedInMiddleware, sinon.match.func),
       'all users GET endpoint is registered'
     );
-    setupTest.done();
   });
 
-  endpointTest.test('get all users handler', handlerTest => {
+  endpointTest.test('get all users handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
       getEndpoint(app, db);
@@ -69,7 +68,6 @@ tap.test('user GET endpoint', endpointTest => {
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
-        invalidTest.done();
       }
     );
 
@@ -89,13 +87,10 @@ tap.test('user GET endpoint', endpointTest => {
         res.send.calledWith(users),
         'body is set to the list of users'
       );
-      validTest.done();
     });
-
-    handlerTest.done();
   });
 
-  endpointTest.test('get single user handler', handlerTest => {
+  endpointTest.test('get single user handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
       getEndpoint(app, db);
@@ -103,7 +98,7 @@ tap.test('user GET endpoint', endpointTest => {
       done();
     });
 
-    handlerTest.test('rejects invalid requests', invalidTests => {
+    handlerTest.test('rejects invalid requests', async invalidTests => {
       const invalidCases = [
         {
           title: 'no user ID',
@@ -116,7 +111,7 @@ tap.test('user GET endpoint', endpointTest => {
       ];
 
       invalidCases.forEach(invalidCase => {
-        invalidTests.test(invalidCase.title, invalidTest => {
+        invalidTests.test(invalidCase.title, async invalidTest => {
           handler({ params: invalidCase.params }, res);
           invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
           invalidTest.ok(
@@ -124,11 +119,8 @@ tap.test('user GET endpoint', endpointTest => {
             'sets an error message'
           );
           invalidTest.ok(res.end.called, 'response is terminated');
-          invalidTest.done();
         });
       });
-
-      invalidTests.done();
     });
 
     handlerTest.test(
@@ -150,7 +142,6 @@ tap.test('user GET endpoint', endpointTest => {
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
-        invalidTest.done();
       }
     );
 
@@ -172,7 +163,6 @@ tap.test('user GET endpoint', endpointTest => {
         invalidTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
-        invalidTest.done();
       }
     );
 
@@ -194,11 +184,6 @@ tap.test('user GET endpoint', endpointTest => {
         res.send.calledWith({ id: 1, email: 'test-email@dotcom.com' }),
         'requested user is sent'
       );
-      validTest.done();
     });
-
-    handlerTest.done();
   });
-
-  endpointTest.done();
 });
