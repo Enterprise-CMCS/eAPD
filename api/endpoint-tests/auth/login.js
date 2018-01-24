@@ -61,15 +61,25 @@ tap.test('login endpoint | /auth/login', async loginTest => {
   ];
 
   badCredentialsCases.forEach(badCredentialsCase => {
-    loginTest.test(`Form body: ${badCredentialsCase.title}`, async invalidTest => {
-      const { response } = await request.post(url, { form: badCredentialsCase.data });
-      invalidTest.equal(response.statusCode, 401, 'gives a 401 status code');
-    });
+    loginTest.test(
+      `Form body: ${badCredentialsCase.title}`,
+      async invalidTest => {
+        const { response } = await request.post(url, {
+          form: badCredentialsCase.data
+        });
+        invalidTest.equal(response.statusCode, 401, 'gives a 401 status code');
+      }
+    );
 
-    loginTest.test(`JSON body: ${badCredentialsCase.title}`, async invalidTest => {
-      const { response } = await request.post(url, { json: badCredentialsCase.data });
-      invalidTest.equal(response.statusCode, 401, 'gives a 401 status code');
-    });
+    loginTest.test(
+      `JSON body: ${badCredentialsCase.title}`,
+      async invalidTest => {
+        const { response } = await request.post(url, {
+          json: badCredentialsCase.data
+        });
+        invalidTest.equal(response.statusCode, 401, 'gives a 401 status code');
+      }
+    );
   });
 
   loginTest.test(
@@ -77,9 +87,10 @@ tap.test('login endpoint | /auth/login', async loginTest => {
     async validTest => {
       // isolate cookies, so request doesn't reuse them
       const cookies = request.jar();
-      const { response, body } = await request.post(
-        url,
-        { jar: cookies, form: { username: 'em@il.com', password: 'password' } });
+      const { response, body } = await request.post(url, {
+        jar: cookies,
+        form: { username: 'em@il.com', password: 'password' }
+      });
 
       validTest.equal(response.statusCode, 200, 'gives a 200 status code');
       validTest.ok(
@@ -98,9 +109,10 @@ tap.test('login endpoint | /auth/login', async loginTest => {
     async validTest => {
       // isolate cookies, so request doesn't reuse them
       const cookies = request.jar();
-      const { response, body } = await request.post(
-        url,
-        { jar: cookies, json: { username: 'em@il.com', password: 'password' } });
+      const { response, body } = await request.post(url, {
+        jar: cookies,
+        json: { username: 'em@il.com', password: 'password' }
+      });
 
       validTest.equal(response.statusCode, 200, 'gives a 200 status code');
       validTest.ok(

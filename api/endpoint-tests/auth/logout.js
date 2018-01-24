@@ -35,8 +35,7 @@ tap.test('logout endpoint | /auth/logout', async logoutTest => {
     test.equal(response.statusCode, 200, 'gives a 200 status code');
     test.ok(
       response.headers['set-cookie'].some(
-        cookie =>
-          cookie.startsWith('session=') && cookie.endsWith('; httponly')
+        cookie => cookie.startsWith('session=') && cookie.endsWith('; httponly')
       ),
       'sends a new http-only session cookie'
     );

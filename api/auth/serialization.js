@@ -10,7 +10,9 @@ module.exports.serializeUser = (user, done) => {
 // into a user object.
 module.exports.deserializeUser = async (userID, done, db = defaultDB) => {
   try {
-    const users = await db('users').where({ id: userID }).select();
+    const users = await db('users')
+      .where({ id: userID })
+      .select();
     const role = users[0].auth_role;
     if (role) {
       const activityRows = await db('auth_role_activity_mapping')
