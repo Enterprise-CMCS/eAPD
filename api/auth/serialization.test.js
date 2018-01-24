@@ -57,23 +57,23 @@ tap.test('passport serialization', serializationTest => {
     });
 
     deserializeTest.test('that is in the database', validTest => {
-      validTest.test('with no role', noRoleTest => {
+      validTest.test('with no role', async noRoleTest => {
         select.resolves([{ email: 'test-email', id: 'test-id', role: null }]);
 
-        serialization.deserializeUser(userID, doneCallback, db).then(() => {
-          noRoleTest.ok(
-            doneCallback.calledWith(null, {
-              username: 'test-email',
-              id: 'test-id',
-              activities: sinon.match.array.deepEquals([])
-            }),
-            'deserializes the user ID to an object'
-          );
-          noRoleTest.done();
-        });
+        await serialization.deserializeUser(userID, doneCallback, db);
+
+        noRoleTest.ok(
+          doneCallback.calledWith(null, {
+            username: 'test-email',
+            id: 'test-id',
+            activities: sinon.match.array.deepEquals([])
+          }),
+          'deserializes the user ID to an object'
+        );
+        noRoleTest.done();
       });
 
-      validTest.test('with a role', adminRoleTest => {
+      validTest.test('with a role', async adminRoleTest => {
         select
           .onFirstCall()
           .resolves([
@@ -84,20 +84,20 @@ tap.test('passport serialization', serializationTest => {
           .onSecondCall()
           .resolves([{ name: 'activity 1' }, { name: 'activity 2' }]);
 
-        serialization.deserializeUser(userID, doneCallback, db).then(() => {
-          adminRoleTest.ok(
-            doneCallback.calledWith(null, {
-              username: 'test-email',
-              id: 'test-id',
-              activities: sinon.match.array.deepEquals([
-                'activity 1',
-                'activity 2'
-              ])
-            }),
-            'deserializes the user ID to an object'
-          );
-          adminRoleTest.done();
-        });
+        await serialization.deserializeUser(userID, doneCallback, db);
+
+        adminRoleTest.ok(
+          doneCallback.calledWith(null, {
+            username: 'test-email',
+            id: 'test-id',
+            activities: sinon.match.array.deepEquals([
+              'activity 1',
+              'activity 2'
+            ])
+          }),
+          'deserializes the user ID to an object'
+        );
+        adminRoleTest.done();
       });
 
       validTest.done();
