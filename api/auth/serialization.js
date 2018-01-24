@@ -13,7 +13,7 @@ module.exports.deserializeUser = async (userID, done, db = defaultDB) => {
     const users = await db('users').where({ id: userID }).select();
     const role = users[0].auth_role;
     if (role) {
-      db('auth_role_activity_mapping')
+      const activityRows = await db('auth_role_activity_mapping')
         .fullOuterJoin(
           'auth_roles',
           'auth_roles.id',
@@ -25,15 +25,13 @@ module.exports.deserializeUser = async (userID, done, db = defaultDB) => {
           'auth_activities.id',
           'auth_role_activity_mapping.activity_id'
         )
-        .select()
-        .then(activityRows => {
-          const activities = activityRows.map(row => row.name);
-          done(null, {
-            username: users[0].email,
-            id: users[0].id,
-            activities
-          });
-        });
+        .select();
+      const activities = activityRows.map(row => row.name);
+      done(null, {
+        username: users[0].email,
+        id: users[0].id,
+        activities
+      });
     } else {
       done(null, {
         username: users[0].email,
