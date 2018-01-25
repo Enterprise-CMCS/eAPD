@@ -13,9 +13,9 @@ const allUsersHandler = async (req, res, UserModel) => {
 const oneUserHandler = async (req, res, UserModel) => {
   if (req.params.id && !Number.isNaN(Number(req.params.id))) {
     try {
-      const user = await UserModel
-        .where({ id: Number(req.params.id) })
-        .fetch({ columns: ['id', 'email'] });
+      const user = await UserModel.where({ id: Number(req.params.id) }).fetch({
+        columns: ['id', 'email']
+      });
       if (user) {
         res.send(user);
       } else {
@@ -33,6 +33,10 @@ const oneUserHandler = async (req, res, UserModel) => {
 };
 
 module.exports = (app, UserModel = defaultUserModel) => {
-  app.get('/users', loggedIn, (req, res) => allUsersHandler(req, res, UserModel));
-  app.get('/user/:id', loggedIn, (req, res) => oneUserHandler(req, res, UserModel));
+  app.get('/users', loggedIn, (req, res) =>
+    allUsersHandler(req, res, UserModel)
+  );
+  app.get('/user/:id', loggedIn, (req, res) =>
+    oneUserHandler(req, res, UserModel)
+  );
 };

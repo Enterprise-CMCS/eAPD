@@ -5,7 +5,7 @@ const defaultConfig = require('../knexfile');
 const user = require('./user');
 const authorization = require('./authorization');
 
-const exportedModels = { };
+const exportedModels = {};
 
 const setup = (
   knex = defaultKnex,

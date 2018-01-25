@@ -61,7 +61,9 @@ tap.test('user GET endpoint', async endpointTest => {
         await handler({}, res);
 
         invalidTest.ok(
-          UserModel.fetchAll.calledWith({ columns: sinon.match.array.deepEquals(['id', 'email']) }),
+          UserModel.fetchAll.calledWith({
+            columns: sinon.match.array.deepEquals(['id', 'email'])
+          }),
           'selects only user ID and email'
         );
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
@@ -77,7 +79,9 @@ tap.test('user GET endpoint', async endpointTest => {
       await handler({}, res);
 
       validTest.ok(
-        UserModel.fetchAll.calledWith({ columns: sinon.match.array.deepEquals(['id', 'email']) }),
+        UserModel.fetchAll.calledWith({
+          columns: sinon.match.array.deepEquals(['id', 'email'])
+        }),
         'selects only user ID and email'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
@@ -133,7 +137,9 @@ tap.test('user GET endpoint', async endpointTest => {
           'looks for only the specific user'
         );
         invalidTest.ok(
-          UserModel.fetch.calledWith({ columns: sinon.match.array.deepEquals(['id', 'email']) }),
+          UserModel.fetch.calledWith({
+            columns: sinon.match.array.deepEquals(['id', 'email'])
+          }),
           'selects only user ID and email'
         );
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
@@ -153,7 +159,9 @@ tap.test('user GET endpoint', async endpointTest => {
           'looks for only the specific user'
         );
         invalidTest.ok(
-          UserModel.fetch.calledWith({ columns: sinon.match.array.deepEquals(['id', 'email']) }),
+          UserModel.fetch.calledWith({
+            columns: sinon.match.array.deepEquals(['id', 'email'])
+          }),
           'selects only user ID and email'
         );
         invalidTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
@@ -171,7 +179,9 @@ tap.test('user GET endpoint', async endpointTest => {
         'looks for only the specific user'
       );
       validTest.ok(
-        UserModel.fetch.calledWith({ columns: sinon.match.array.deepEquals(['id', 'email']) }),
+        UserModel.fetch.calledWith({
+          columns: sinon.match.array.deepEquals(['id', 'email'])
+        }),
         'selects only user ID and email'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');

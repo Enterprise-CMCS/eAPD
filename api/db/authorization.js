@@ -8,7 +8,12 @@ module.exports = (bookshelf = defaultBookshelf) => {
     activitiesModel = bookshelf.Model.extend({
       tableName: 'auth_activities',
       roles() {
-        return this.belongsToMany(rolesModel, 'auth_role_activity_mapping', 'activity_id', 'role_id');
+        return this.belongsToMany(
+          rolesModel,
+          'auth_role_activity_mapping',
+          'activity_id',
+          'role_id'
+        );
       }
     });
   }
@@ -17,7 +22,12 @@ module.exports = (bookshelf = defaultBookshelf) => {
     rolesModel = bookshelf.Model.extend({
       tableName: 'auth_roles',
       activities() {
-        return this.belongsToMany(activitiesModel, 'auth_role_activity_mapping', 'role_id', 'activity_id');
+        return this.belongsToMany(
+          activitiesModel,
+          'auth_role_activity_mapping',
+          'role_id',
+          'activity_id'
+        );
       }
     });
   }

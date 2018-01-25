@@ -3,9 +3,7 @@ const defaultUserModel = require('../../db/bookshelf').models.user;
 const loggedIn = require('../../auth/middleware').loggedIn;
 
 const userIsNew = async (email, UserModel) => {
-  const user = await UserModel
-    .where({ email })
-    .fetch();
+  const user = await UserModel.where({ email }).fetch();
 
   if (user) {
     return false;

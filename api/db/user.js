@@ -14,9 +14,17 @@ module.exports = (bookshelf = defaultBookshelf) => {
 
       activities() {
         if (this.relations.role) {
-          return Promise.resolve(this.related('role').related('activities').pluck('name'));
+          return Promise.resolve(
+            this.related('role')
+              .related('activities')
+              .pluck('name')
+          );
         }
-        return this.load('role.activities').then(() => this.related('role').related('activities').pluck('name'));
+        return this.load('role.activities').then(() =>
+          this.related('role')
+            .related('activities')
+            .pluck('name')
+        );
       }
     });
   }
