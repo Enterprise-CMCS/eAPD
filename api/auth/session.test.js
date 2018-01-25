@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const getSessionFunction = require('./session').getSessionFunction;
 
-tap.test('session function', sessionTest => {
+tap.test('session function', async sessionTest => {
   const sessions = sinon.spy();
 
   process.env.SESSION_SECRET = 'secret';
@@ -33,5 +33,4 @@ tap.test('session function', sessionTest => {
     config.duration < 30 * 24 * 60 * 60 * 1000,
     'session cookie lasts less than 30 days'
   );
-  sessionTest.done();
 });

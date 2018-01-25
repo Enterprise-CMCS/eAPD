@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const loggedInMiddleware = require('../../auth/middleware').loggedIn;
 const postEndpoint = require('./post');
 
-tap.test('user POST endpoint', endpointTest => {
+tap.test('user POST endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = {
     post: sandbox.stub()
@@ -32,17 +32,16 @@ tap.test('user POST endpoint', endpointTest => {
     done();
   });
 
-  endpointTest.test('setup', setupTest => {
+  endpointTest.test('setup', async setupTest => {
     postEndpoint(app, db);
 
     setupTest.ok(
       app.post.calledWith('/user', loggedInMiddleware, sinon.match.func),
       'user POST endpoint is registered'
     );
-    setupTest.done();
   });
 
-  endpointTest.test('handler', handlerTest => {
+  endpointTest.test('handler', async handlerTest => {
     let handler;
 
     handlerTest.beforeEach(done => {
@@ -51,7 +50,7 @@ tap.test('user POST endpoint', endpointTest => {
       done();
     });
 
-    handlerTest.test('rejects invalid requests', invalidTests => {
+    handlerTest.test('rejects invalid requests', async invalidTests => {
       const invalidCases = [
         {
           title: 'no email or password',
@@ -76,7 +75,7 @@ tap.test('user POST endpoint', endpointTest => {
       ];
 
       invalidCases.forEach(invalidCase => {
-        invalidTests.test(invalidCase.title, invalidTest => {
+        invalidTests.test(invalidCase.title, async invalidTest => {
           handler({ body: invalidCase.body }, res);
 
           invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
@@ -85,81 +84,77 @@ tap.test('user POST endpoint', endpointTest => {
             'sets an error message'
           );
           invalidTest.ok(res.end.called, 'response is terminated');
-          invalidTest.done();
         });
       });
-
-      invalidTests.done();
     });
 
-    handlerTest.test('rejects inserting an existing user', invalidTest => {
-      first.resolves({});
+    handlerTest.test(
+      'rejects inserting an existing user',
+      async invalidTest => {
+        first.resolves({});
 
-      handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler(
+          { body: { email: 'em@il.com', password: 'password' } },
+          res
+        );
 
-      setTimeout(() => {
         invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
         invalidTest.ok(
           res.send.calledWith({ error: 'add-user-email-exists' }),
           'sets an error message'
         );
         invalidTest.ok(res.end.called, 'response is terminated');
-        invalidTest.done();
-      }, 20);
-    });
+      }
+    );
 
     handlerTest.test(
       'sends a server error code if there is a database error checking for an existing user',
-      invalidTest => {
+      async invalidTest => {
         first.rejects();
 
-        handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler(
+          { body: { email: 'em@il.com', password: 'password' } },
+          res
+        );
 
-        setTimeout(() => {
-          invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-          invalidTest.ok(res.send.notCalled, 'does not send a message');
-          invalidTest.ok(res.end.called, 'response is terminated');
-          invalidTest.done();
-        }, 20);
+        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
+        invalidTest.ok(res.send.notCalled, 'does not send a message');
+        invalidTest.ok(res.end.called, 'response is terminated');
       }
     );
 
     handlerTest.test(
       'sends a server error code if there is a database error inserting a new user',
-      invalidTest => {
+      async invalidTest => {
         first.resolves();
         insert.rejects();
 
-        handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler(
+          { body: { email: 'em@il.com', password: 'password' } },
+          res
+        );
 
-        setTimeout(() => {
-          invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-          invalidTest.ok(res.send.notCalled, 'does not send a message');
-          invalidTest.ok(res.end.called, 'response is terminated');
-          invalidTest.done();
-        }, 20);
+        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
+        invalidTest.ok(res.send.notCalled, 'does not send a message');
+        invalidTest.ok(res.end.called, 'response is terminated');
       }
     );
 
     handlerTest.test(
       'inserts a new user and returns a success for a valid, new user',
-      validTest => {
+      async validTest => {
         first.resolves();
         insert.resolves();
 
-        handler({ body: { email: 'em@il.com', password: 'password' } }, res);
+        await handler(
+          { body: { email: 'em@il.com', password: 'password' } },
+          res
+        );
 
-        setTimeout(() => {
-          validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
-          validTest.ok(res.send.notCalled, 'does not send a message');
-          validTest.ok(res.end.called, 'response is terminated');
-          validTest.done();
-        }, 20);
+        validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
+        validTest.ok(res.send.notCalled, 'does not send a message');
+        validTest.ok(res.end.called, 'response is terminated');
       }
     );
-
-    handlerTest.done();
   });
-
-  endpointTest.done();
 });

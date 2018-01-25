@@ -20,11 +20,11 @@ tap.beforeEach(done => {
   done();
 });
 
-tap.test('logged in middleware', loggedInMiddlewareTest => {
+tap.test('logged in middleware', async loggedInMiddlewareTest => {
   const loggedIn = middleware.loggedIn;
   loggedInMiddlewareTest.test(
     'rejects if the user is not logged in',
-    invalidTest => {
+    async invalidTest => {
       loggedIn({}, res, next);
 
       invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403');
@@ -33,32 +33,28 @@ tap.test('logged in middleware', loggedInMiddlewareTest => {
         next.notCalled,
         'endpoint handling chain is not continued'
       );
-      invalidTest.done();
     }
   );
 
   loggedInMiddlewareTest.test(
     'continues if the user is logged in',
-    validTest => {
+    async validTest => {
       loggedIn({ user: true }, res, next);
 
       validTest.ok(res.send.notCalled, 'no body is sent');
       validTest.ok(res.status.notCalled, 'HTTP status not set');
       validTest.ok(res.end.notCalled, 'response is not terminated');
       validTest.ok(next.called, 'endpoint handling chain is continued');
-      validTest.done();
     }
   );
-
-  loggedInMiddlewareTest.done();
 });
 
-tap.test('"can" middleware', canMiddlewareTest => {
+tap.test('"can" middleware', async canMiddlewareTest => {
   const can = middleware.can;
 
   canMiddlewareTest.test(
     'rejects if the user is not logged in',
-    invalidTest => {
+    async invalidTest => {
       can('activity')({}, res, next);
 
       invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403');
@@ -67,13 +63,12 @@ tap.test('"can" middleware', canMiddlewareTest => {
         next.notCalled,
         'endpoint handling chain is not continued'
       );
-      invalidTest.done();
     }
   );
 
   canMiddlewareTest.test(
     'rejects if the user does not have the expected activity',
-    invalidTest => {
+    async invalidTest => {
       can('activity')({ user: { activities: [] } }, res, next);
 
       invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 401');
@@ -82,22 +77,18 @@ tap.test('"can" middleware', canMiddlewareTest => {
         next.notCalled,
         'endpoint handling chain is not continued'
       );
-      invalidTest.done();
     }
   );
 
   canMiddlewareTest.test(
     'continues if the user has the expected activity',
-    validTest => {
+    async validTest => {
       can('activity')({ user: { activities: ['activity'] } }, res, next);
 
       validTest.ok(res.send.notCalled, 'no body is sent');
       validTest.ok(res.status.notCalled, 'HTTP status not set');
       validTest.ok(res.end.notCalled, 'response is not terminated');
       validTest.ok(next.called, 'endpoint handling chain is continued');
-      validTest.done();
     }
   );
-
-  canMiddlewareTest.done();
 });
