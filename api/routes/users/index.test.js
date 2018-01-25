@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const usersIndex = require('./index');
 
-tap.test('users endpoint setup', endpointTest => {
+tap.test('users endpoint setup', async endpointTest => {
   const app = {};
   const postEndpoint = sinon.spy();
   const getEndpoint = sinon.spy();
@@ -18,5 +18,4 @@ tap.test('users endpoint setup', endpointTest => {
     getEndpoint.calledWith(app),
     'users GET endpoint is setup with the app'
   );
-  endpointTest.done();
 });

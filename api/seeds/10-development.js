@@ -1,11 +1,11 @@
 const users = require('./development/users');
 
-exports.seed = knex => {
+exports.seed = async knex => {
   // Don't seed this data if we're not in a development environment.
   if (process.env.NODE_ENV !== 'development') {
-    return Promise.resolve();
+    return;
   }
 
-  // Chain together specific seeds from here.
-  return users.seed(knex);
+  // Call specific seeds from here.
+  await users.seed(knex);
 };

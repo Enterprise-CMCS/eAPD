@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const db = require('./db');
 
-tap.test('database object module', dbTest => {
+tap.test('database object module', async dbTest => {
   const knex = sinon.stub().returns({
     thisIs: 'a database'
   });
@@ -24,5 +24,4 @@ tap.test('database object module', dbTest => {
   );
 
   process.env.NODE_ENV = nodeEnv;
-  dbTest.done();
 });
