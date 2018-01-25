@@ -1,5 +1,5 @@
 const defaultBcrypt = require('bcryptjs');
-const defaultUserModel = require('../db/user')();
+const defaultUserModel = require('../db/bookshelf').models.user;
 
 module.exports = (
   userModel = defaultUserModel,
