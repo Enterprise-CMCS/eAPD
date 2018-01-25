@@ -1,4 +1,4 @@
-const defaultUsersModel = require('../db/user')();
+const defaultUserModel = require('../db/bookshelf').models.user;
 
 // Serialize a user into a stringy type that will get
 // pushed into their session cookie.
@@ -11,10 +11,10 @@ module.exports.serializeUser = (user, done) => {
 module.exports.deserializeUser = async (
   userID,
   done,
-  usersModel = defaultUsersModel
+  userModel = defaultUserModel
 ) => {
   try {
-    const user = await usersModel.where({ id: userID }).fetch();
+    const user = await userModel.where({ id: userID }).fetch();
     done(null, {
       username: user.get('email'),
       id: user.get('id'),
