@@ -34,5 +34,3 @@ module.exports = (bookshelf = defaultBookshelf) => {
 
   return { activities: activitiesModel, roles: rolesModel };
 };
-
-module.exports.roles = () => rolesModel;
