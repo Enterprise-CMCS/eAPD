@@ -119,15 +119,49 @@ tap.test('authentication setup', async authTest => {
       'three middleware functions added to app'
     );
     setupTest.ok(
+      app.get.calledOnce,
+      'a single GET endpoint is added to the app'
+    );
+    setupTest.ok(
+      app.get.calledWith('/auth/logout', sinon.match.func),
+      'GET logout endpoint is setup'
+    );
+    setupTest.ok(
       app.post.calledOnce,
       'a single POST endpoint is added to the app'
     );
     setupTest.ok(
-      app.post.calledWith('/auth/login', sinon.match.func, sinon.match.func)
+      app.post.calledWith('/auth/login', sinon.match.func, sinon.match.func),
+      'POST login endpoint is setup'
     );
   });
 
-  authTest.test('POST endpoint behaves as expected', async postTest => {
+  authTest.test('GET logout endpoint behaves as expected', async getTest => {
+    authSetup(app, passport, strategies);
+    const get = app.get.args[0][1];
+
+    const req = {
+      logout: sinon.spy()
+    };
+
+    const res = {
+      send: sinon.stub(),
+      status: sinon.stub(),
+      end: sinon.spy()
+    };
+    res.send.returns(res);
+    res.status.returns(res);
+
+    get(req, res);
+
+    getTest.ok(req.logout.calledOnce, 'user is logged out');
+    getTest.ok(res.status.calledOnce, 'an HTTP status is set once');
+    getTest.ok(res.status.calledWith(200), 'sets a 200 HTTP status');
+    getTest.ok(res.send.notCalled, 'HTTP body is not sent');
+    getTest.ok(res.end.calledOnce, 'response is ended one time');
+  });
+
+  authTest.test('POST login endpoint behaves as expected', async postTest => {
     authSetup(app, passport, strategies);
     const post = app.post.args[0][2];
 
