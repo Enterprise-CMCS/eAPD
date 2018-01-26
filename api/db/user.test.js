@@ -9,12 +9,12 @@ tap.only('user data model', async userModelTests => {
       extend: sinon.stub()
     }
   };
-  const roleModel = sinon.stub();
+  const authModels = sinon.stub().returns({ roles: 'role-model' });
 
   userModelTests.test('setup', async setupTests => {
     bookshelf.Model.extend.returns('seven');
 
-    const model = user(bookshelf, roleModel);
+    const model = user(bookshelf, authModels);
 
     setupTests.ok(
       bookshelf.Model.extend.calledWith({
@@ -28,7 +28,7 @@ tap.only('user data model', async userModelTests => {
   });
 
   userModelTests.test('setups up a role relationship', async roleTests => {
-    roleModel.returns('role model setup');
+    authModels.returns({ roles: 'role-model' });
     const self = {
       hasOne: sinon.spy()
     };
@@ -37,9 +37,9 @@ tap.only('user data model', async userModelTests => {
     const role = extension.role.bind(self);
     role();
 
-    roleTests.ok(roleModel.calledOnce, 'a role model is instantiated');
+    roleTests.ok(authModels.calledOnce, 'the auth models are instantiated');
     roleTests.ok(
-      self.hasOne.calledWith('role model setup', 'name', 'auth_role'),
+      self.hasOne.calledWith('role-model', 'name', 'auth_role'),
       'sets up the data relationship'
     );
   });

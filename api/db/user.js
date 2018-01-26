@@ -1,18 +1,18 @@
 const defaultBookshelf = require('bookshelf');
-const defaultRoleModel = require('./authorization').roles;
+const defaultAuthModels = require('./authorization');
 
 let model;
 
 module.exports = (
   bookshelf = defaultBookshelf,
-  RoleModel = defaultRoleModel
+  AuthModels = defaultAuthModels
 ) => {
   if (!model) {
     model = bookshelf.Model.extend({
       tableName: 'users',
 
       role() {
-        return this.hasOne(RoleModel(), 'name', 'auth_role');
+        return this.hasOne(AuthModels().roles, 'name', 'auth_role');
       },
 
       async activities() {
