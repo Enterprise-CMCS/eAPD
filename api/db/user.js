@@ -3,7 +3,10 @@ const defaultRoleModel = require('./authorization').roles;
 
 let model;
 
-module.exports = (bookshelf = defaultBookshelf, RoleModel = defaultRoleModel) => {
+module.exports = (
+  bookshelf = defaultBookshelf,
+  RoleModel = defaultRoleModel
+) => {
   if (!model) {
     model = bookshelf.Model.extend({
       tableName: 'users',
