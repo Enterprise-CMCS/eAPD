@@ -10,7 +10,9 @@ tap.test('authentication setup', async authTest => {
   const app = {
     use: sandbox.spy(),
     get: sandbox.spy(),
-    post: sandbox.spy()
+    post: sandbox.spy(),
+    put: sandbox.spy(),
+    del: sandbox.spy()
   };
 
   const passport = {
@@ -108,6 +110,9 @@ tap.test('authentication setup', async authTest => {
       ),
       'adds a function handler to POST /auth/login using the passport authenticate middleware'
     );
+
+    setupTest.ok(app.put.notCalled, 'no PUT endpoints are added to the app');
+    setupTest.ok(app.del.notCalled, 'no DELETE endpoints are added to the app');
   });
 
   authTest.test('setup works with defaults, too', async setupTest => {
@@ -134,6 +139,9 @@ tap.test('authentication setup', async authTest => {
       app.post.calledWith('/auth/login', sinon.match.func, sinon.match.func),
       'POST login endpoint is setup'
     );
+
+    setupTest.ok(app.put.notCalled, 'no PUT endpoints are added to the app');
+    setupTest.ok(app.del.notCalled, 'no DELETE endpoints are added to the app');
   });
 
   authTest.test('GET logout endpoint behaves as expected', async getTest => {
