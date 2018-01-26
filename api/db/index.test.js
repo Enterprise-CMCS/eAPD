@@ -24,10 +24,24 @@ tap.test('database layer index', async dbTests => {
     ormTests.ok(knex.calledWith(config.test), 'knex is configured');
     ormTests.ok(bookshelf.calledWith(knexObject), 'bookshelf is configured');
 
-    ormTests.ok(models.one.calledWith(bookshelfObject), 'models are configured');
-    ormTests.ok(models.two.calledWith(bookshelfObject), 'models are configured');
+    ormTests.ok(
+      models.one.calledWith(bookshelfObject),
+      'models are configured'
+    );
+    ormTests.ok(
+      models.two.calledWith(bookshelfObject),
+      'models are configured'
+    );
 
-    ormTests.equal(db.models.one, 'one', 'the db index exports the configured models');
-    ormTests.equal(db.models.two, 'two', 'the db index exports the configured models');
+    ormTests.equal(
+      db.models.one,
+      'one',
+      'the db index exports the configured models'
+    );
+    ormTests.equal(
+      db.models.two,
+      'two',
+      'the db index exports the configured models'
+    );
   });
 });

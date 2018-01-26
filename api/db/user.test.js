@@ -16,11 +16,14 @@ tap.only('user data model', async userModelTests => {
 
     const model = user(bookshelf, roleModel);
 
-    setupTests.ok(bookshelf.Model.extend.calledWith({
-      tableName: 'users',
-      role: sinon.match.func,
-      activities: sinon.match.func
-    }), 'model is configured correctly');
+    setupTests.ok(
+      bookshelf.Model.extend.calledWith({
+        tableName: 'users',
+        role: sinon.match.func,
+        activities: sinon.match.func
+      }),
+      'model is configured correctly'
+    );
     setupTests.equal(model, 'seven', 'gives back an extended bookshelf model');
   });
 
@@ -35,7 +38,10 @@ tap.only('user data model', async userModelTests => {
     role();
 
     roleTests.ok(roleModel.calledOnce, 'a role model is instantiated');
-    roleTests.ok(self.hasOne.calledWith('role model setup', 'name', 'auth_role'), 'sets up the data relationship');
+    roleTests.ok(
+      self.hasOne.calledWith('role model setup', 'name', 'auth_role'),
+      'sets up the data relationship'
+    );
   });
 
   userModelTests.test('activities helper method', async activitesTests => {
@@ -65,29 +71,56 @@ tap.only('user data model', async userModelTests => {
       done();
     });
 
-    activitesTests.test('resolves a list of activites when the role relationship is already loaded', async alreadyLoadedTests => {
-      self.relations.role = true;
-      const list = await activities();
+    activitesTests.test(
+      'resolves a list of activites when the role relationship is already loaded',
+      async alreadyLoadedTests => {
+        self.relations.role = true;
+        const list = await activities();
 
-      alreadyLoadedTests.ok(self.load.notCalled, 'the model load method is not called');
-      alreadyLoadedTests.same(list, ['one', 'two', 'three'], 'returns the list of activities');
-    });
+        alreadyLoadedTests.ok(
+          self.load.notCalled,
+          'the model load method is not called'
+        );
+        alreadyLoadedTests.same(
+          list,
+          ['one', 'two', 'three'],
+          'returns the list of activities'
+        );
+      }
+    );
 
-    activitesTests.test('resolves a list of activites when the role relationship is not already loaded', async notAlreadyLoadedTests => {
-      self.relations.role = false;
-      const list = await activities();
+    activitesTests.test(
+      'resolves a list of activites when the role relationship is not already loaded',
+      async notAlreadyLoadedTests => {
+        self.relations.role = false;
+        const list = await activities();
 
-      notAlreadyLoadedTests.ok(self.load.calledOnce, 'the model load method is called');
-      notAlreadyLoadedTests.same(list, ['one', 'two', 'three'], 'returns the list of activities');
-    });
+        notAlreadyLoadedTests.ok(
+          self.load.calledOnce,
+          'the model load method is called'
+        );
+        notAlreadyLoadedTests.same(
+          list,
+          ['one', 'two', 'three'],
+          'returns the list of activities'
+        );
+      }
+    );
   });
 
-  userModelTests.test('subsequent calls to setup return cached values', async cacheTests => {
-    bookshelf.Model.extend.reset();
+  userModelTests.test(
+    'subsequent calls to setup return cached values',
+    async cacheTests => {
+      bookshelf.Model.extend.reset();
 
-    const model = user(bookshelf);
+      const model = user(bookshelf);
 
-    cacheTests.ok(bookshelf.Model.extend.notCalled);
-    cacheTests.equal(model, 'seven', 'gives back an extended bookshelf model');
-  });
+      cacheTests.ok(bookshelf.Model.extend.notCalled);
+      cacheTests.equal(
+        model,
+        'seven',
+        'gives back an extended bookshelf model'
+      );
+    }
+  );
 });
