@@ -45,6 +45,7 @@
     "react-x-ray": "^1.0.0-4",
     "rebass": "^1.0.4",
     "redux": "^3.7.2",
+    "redux-form": "^7.2.1",
     "styled-components": "^2.3.3"
   },
   "devDependencies": {

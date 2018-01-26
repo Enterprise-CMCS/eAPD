@@ -4,8 +4,7 @@ import { Container, NavLink, Provider, Toolbar } from 'rebass';
 
 import Demo from './Demo';
 import DevProvider from './DevProvider';
-import Hello from './Hello';
-import Home from '../containers/Home';
+import StateStart from '../containers/StateStart';
 
 const Wrapper = process.env.NODE_ENV !== 'production' ? DevProvider : Provider;
 
@@ -15,21 +14,14 @@ const App = () => (
       <NavLink to="/" is={Link}>
         CMS HITECH APD
       </NavLink>
-      <NavLink to="/" is={Link} ml="auto">
-        Home
-      </NavLink>
-      <NavLink to="/hello" is={Link}>
-        Hello
-      </NavLink>
-      <NavLink to="/demo" is={Link}>
-        Demo
+      <NavLink to="/start" is={Link} ml="auto">
+        Get started
       </NavLink>
     </Toolbar>
 
     <Container is="main">
-      <Route exact path="/" component={Home} />
-      <Route path="/hello" component={Hello} />
-      <Route path="/demo" component={Demo} />
+      <Route exact path="/" component={Demo} />
+      <Route path="/start" component={StateStart} />
     </Container>
   </Wrapper>
 );
