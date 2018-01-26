@@ -1,4 +1,4 @@
-const defaultUserModel = require('../../db/bookshelf').models.user;
+const defaultUserModel = require('../../db').models.user;
 const loggedIn = require('../../auth/middleware').loggedIn;
 
 const allUsersHandler = async (req, res, UserModel) => {
