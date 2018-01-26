@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const defaultUserModel = require('../../db/bookshelf').models.user;
+const defaultUserModel = require('../../db').models.user;
 const loggedIn = require('../../auth/middleware').loggedIn;
 
 const userIsNew = async (email, UserModel) => {
