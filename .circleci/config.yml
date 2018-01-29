@@ -181,7 +181,7 @@ workflows:
             - web test
             - api unit test
             - api endpoint test
-      - hold for approval:
+      - request deploy for UX testing:
           type: approval
       - deploy ux testing:
           filters:
@@ -189,7 +189,7 @@ workflows:
               only:
                 - master
           requires:
-            - hold for approval
+            - request deploy for UX testing
             - web test
             - api unit test
             - api endpoint test
