@@ -2,38 +2,13 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button } from 'rebass';
+import { Box, Button, Divider } from 'rebass';
 import { bindActionCreators } from 'redux';
-import { Field, reduxForm } from 'redux-form';
 
-let BasicForm = ({ handleSubmit }) => (
-  <form onSubmit={handleSubmit}>
-    <div>
-      <label htmlFor="firstName">First Name</label>
-      <Field id="firstName" name="firstName" component="input" type="text" />
-    </div>
-    <div>
-      <label htmlFor="lastName">Last Name</label>
-      <Field id="lastName" name="lastName" component="input" type="text" />
-    </div>
-    <div>
-      <label htmlFor="email">Email</label>
-      <Field id="email" name="email" component="input" type="email" />
-    </div>
-    <button type="submit">Submit</button>
-  </form>
-);
-
-BasicForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired
-};
-
-BasicForm = reduxForm({
-  form: 'test'
-})(BasicForm);
+import Form1 from '../components/Form1';
 
 class StateStart extends Component {
-  handleSubmit = data => {
+  showResults = data => {
     console.log(data);
   };
 
@@ -42,9 +17,9 @@ class StateStart extends Component {
 
     return (
       <Box py={4}>
-        <BasicForm onSubmit={this.handleSubmit} />
+        <Form1 onSubmit={this.showResults} />
 
-        <hr />
+        <Divider my={4} />
 
         <Button onClick={() => goTo('/')}>Continue</Button>
       </Box>
