@@ -129,7 +129,7 @@ jobs:
           working_directory: ~/project/api
           command: npm run test-endpoints
 
-  deploy-staging:
+  deploy staging:
     docker:
       - image: node:8
     steps:
@@ -140,7 +140,7 @@ jobs:
           name: deploy to prod
           command: ./bin/deploy.sh
 
-  deploy-ux-testing:
+  deploy ux testing:
     docker:
       - image: node:8
     steps:
@@ -172,21 +172,24 @@ workflows:
       - api endpoint test:
           requires:
              - prepare api dependencies cache
-      - deploy-staging:
+      - deploy staging:
           filters:
             branches:
               only:
                 - master
           requires:
-             - web test
-             - api unit test
-             - api endpoint test
-      - deploy-ux-testing:
+            - web test
+            - api unit test
+            - api endpoint test
+      - hold for approval:
+          type: approval
+      - deploy ux testing:
           filters:
             branches:
               only:
-                - ux-testing
+                - master
           requires:
-             - web test
-             - api unit test
-             - api endpoint test
+            - hold for approval
+            - web test
+            - api unit test
+            - api endpoint test
