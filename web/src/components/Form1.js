@@ -17,7 +17,7 @@ const Form1 = ({ handleSubmit, pristine, reset, submitting }) => (
       </div>
     </div>
     <div>
-      <label htmlFor="firstName">Last Name</label>
+      <label htmlFor="lastName">Last Name</label>
       <div>
         <Field
           id="lastName"
