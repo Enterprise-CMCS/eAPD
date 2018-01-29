@@ -19,7 +19,10 @@
           "some": ["nesting", "id"]
         }
       }
-    ]
+    ],
+
+    // unnecessary due to prettier
+    "object-curly-newline": "off"
   },
   "env": {
     "browser": true
