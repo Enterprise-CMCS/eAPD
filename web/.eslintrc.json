@@ -11,7 +11,18 @@
         "components": ["Link"],
         "specialLink": ["to"]
       }
-    ]
+    ],
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+
+    // unnecessary due to prettier
+    "object-curly-newline": "off"
   },
   "env": {
     "browser": true

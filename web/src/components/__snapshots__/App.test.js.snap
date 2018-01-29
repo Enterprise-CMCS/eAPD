@@ -30,21 +30,9 @@ ShallowWrapper {
           <Styled(Styled(Base))
             is={[Function]}
             ml="auto"
-            to="/"
+            to="/start"
           >
-            Home
-          </Styled(Styled(Base))>
-          <Styled(Styled(Base))
-            is={[Function]}
-            to="/hello"
-          >
-            Hello
-          </Styled(Styled(Base))>
-          <Styled(Styled(Base))
-            is={[Function]}
-            to="/demo"
-          >
-            Demo
+            Get started
           </Styled(Styled(Base))>
         </Styled(Styled(Base))>,
         <Styled(Styled(Base))
@@ -57,11 +45,7 @@ ShallowWrapper {
           />
           <Route
             component={[Function]}
-            path="/hello"
-          />
-          <Route
-            component={[Function]}
-            path="/demo"
+            path="/start"
           />
         </Styled(Styled(Base))>,
       ],
@@ -84,21 +68,9 @@ ShallowWrapper {
             <Styled(Styled(Base))
               is={[Function]}
               ml="auto"
-              to="/"
+              to="/start"
             >
-              Home
-            </Styled(Styled(Base))>,
-            <Styled(Styled(Base))
-              is={[Function]}
-              to="/hello"
-            >
-              Hello
-            </Styled(Styled(Base))>,
-            <Styled(Styled(Base))
-              is={[Function]}
-              to="/demo"
-            >
-              Demo
+              Get started
             </Styled(Styled(Base))>,
           ],
         },
@@ -122,39 +94,13 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": "Home",
+              "children": "Get started",
               "is": [Function],
               "ml": "auto",
-              "to": "/",
+              "to": "/start",
             },
             "ref": null,
-            "rendered": "Home",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Hello",
-              "is": [Function],
-              "to": "/hello",
-            },
-            "ref": null,
-            "rendered": "Hello",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Demo",
-              "is": [Function],
-              "to": "/demo",
-            },
-            "ref": null,
-            "rendered": "Demo",
+            "rendered": "Get started",
             "type": [Function],
           },
         ],
@@ -173,11 +119,7 @@ ShallowWrapper {
             />,
             <Route
               component={[Function]}
-              path="/hello"
-            />,
-            <Route
-              component={[Function]}
-              path="/demo"
+              path="/start"
             />,
           ],
           "is": "main",
@@ -203,19 +145,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "component": [Function],
-              "path": "/hello",
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "component": [Function],
-              "path": "/demo",
+              "path": "/start",
             },
             "ref": null,
             "rendered": null,
@@ -246,21 +176,9 @@ ShallowWrapper {
             <Styled(Styled(Base))
               is={[Function]}
               ml="auto"
-              to="/"
+              to="/start"
             >
-              Home
-            </Styled(Styled(Base))>
-            <Styled(Styled(Base))
-              is={[Function]}
-              to="/hello"
-            >
-              Hello
-            </Styled(Styled(Base))>
-            <Styled(Styled(Base))
-              is={[Function]}
-              to="/demo"
-            >
-              Demo
+              Get started
             </Styled(Styled(Base))>
           </Styled(Styled(Base))>,
           <Styled(Styled(Base))
@@ -273,11 +191,7 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
-              path="/hello"
-            />
-            <Route
-              component={[Function]}
-              path="/demo"
+              path="/start"
             />
           </Styled(Styled(Base))>,
         ],
@@ -300,21 +214,9 @@ ShallowWrapper {
               <Styled(Styled(Base))
                 is={[Function]}
                 ml="auto"
-                to="/"
+                to="/start"
               >
-                Home
-              </Styled(Styled(Base))>,
-              <Styled(Styled(Base))
-                is={[Function]}
-                to="/hello"
-              >
-                Hello
-              </Styled(Styled(Base))>,
-              <Styled(Styled(Base))
-                is={[Function]}
-                to="/demo"
-              >
-                Demo
+                Get started
               </Styled(Styled(Base))>,
             ],
           },
@@ -338,39 +240,13 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "children": "Home",
+                "children": "Get started",
                 "is": [Function],
                 "ml": "auto",
-                "to": "/",
+                "to": "/start",
               },
               "ref": null,
-              "rendered": "Home",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "Hello",
-                "is": [Function],
-                "to": "/hello",
-              },
-              "ref": null,
-              "rendered": "Hello",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "Demo",
-                "is": [Function],
-                "to": "/demo",
-              },
-              "ref": null,
-              "rendered": "Demo",
+              "rendered": "Get started",
               "type": [Function],
             },
           ],
@@ -389,11 +265,7 @@ ShallowWrapper {
               />,
               <Route
                 component={[Function]}
-                path="/hello"
-              />,
-              <Route
-                component={[Function]}
-                path="/demo"
+                path="/start"
               />,
             ],
             "is": "main",
@@ -419,19 +291,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "path": "/hello",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "component": [Function],
-                "path": "/demo",
+                "path": "/start",
               },
               "ref": null,
               "rendered": null,
