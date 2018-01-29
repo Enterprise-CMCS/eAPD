@@ -11,13 +11,19 @@ const setup = (
   knex = defaultKnex,
   bookshelf = defaultBookshelf,
   config = defaultConfig,
-  models = { user, authorization }
+  models = [user, authorization]
 ) => {
   const db = knex(config[process.env.NODE_ENV]);
-  const orm = bookshelf(db);
 
-  Object.keys(models).forEach(modelName => {
-    exportedModels[modelName] = models[modelName](orm);
+  const orm = bookshelf(db);
+  orm.plugin('registry');
+
+  models.forEach(modelObjects => {
+    Object.keys(modelObjects).forEach(modelName => {
+      const model = orm.Model.extend(modelObjects[modelName]);
+      orm.model(modelName, model);
+      exportedModels[modelName] = model;
+    });
   });
 };
 

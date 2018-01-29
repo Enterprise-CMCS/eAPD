@@ -1,31 +1,19 @@
-const defaultBookshelf = require('bookshelf');
-const defaultAuthModels = require('./authorization');
+module.exports = {
+  user: {
+    tableName: 'users',
 
-let model;
+    role() {
+      return this.hasOne('role', 'name', 'auth_role');
+    },
 
-module.exports = (
-  bookshelf = defaultBookshelf,
-  AuthModels = defaultAuthModels
-) => {
-  if (!model) {
-    model = bookshelf.Model.extend({
-      tableName: 'users',
-
-      role() {
-        return this.hasOne(AuthModels().roles, 'name', 'auth_role');
-      },
-
-      async activities() {
-        if (!this.relations.role) {
-          await this.load('role.activities');
-        }
-
-        return this.related('role')
-          .related('activities')
-          .pluck('name');
+    async activities() {
+      if (!this.relations.role) {
+        await this.load('role.activities');
       }
-    });
-  }
 
-  return model;
+      return this.related('role')
+        .related('activities')
+        .pluck('name');
+    }
+  }
 };
