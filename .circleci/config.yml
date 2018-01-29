@@ -183,6 +183,10 @@ workflows:
             - api endpoint test
       - request deploy for UX testing:
           type: approval
+          filters:
+            branches:
+              only:
+                - master
       - deploy ux testing:
           filters:
             branches:
