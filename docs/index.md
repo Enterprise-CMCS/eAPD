@@ -1,5 +1,12 @@
 # Technical documentation
 
+## Deployment
+
+We are using [CircleCI](https://circleci.com/gh/18Fworkflows/cms-hitech-apd)
+to automate our tests as well as our deployments.  We have some more
+[documentation](deployment.md) that takes about our deployments in a little
+more detail.
+
 ## Front end
 
 The front end is built in [React](https://reactjs.org/), and uses the following
