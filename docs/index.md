@@ -2,7 +2,7 @@
 
 ## Deployment
 
-We are using [CircleCI](https://circleci.com/gh/18Fworkflows/cms-hitech-apd)
+We are using [CircleCI](https://circleci.com/gh/18F/workflows/cms-hitech-apd)
 to automate our tests as well as our deployments.  We have some more
 [documentation](deployment.md) that takes about our deployments in a little
 more detail.
