@@ -3,57 +3,44 @@ const sinon = require('sinon');
 
 const authorization = require('./authorization');
 
-tap.test('authorization data model', async authModelTests => {
-  const bookshelf = {
-    Model: {
-      extend: sinon.stub()
-    }
-  };
-
+tap.test('authorization data models', async authModelTests => {
   authModelTests.test('setup', async setupTests => {
-    bookshelf.Model.extend.returns('seven');
-
-    const model = authorization(bookshelf);
-
-    setupTests.ok(
-      bookshelf.Model.extend.calledWith({
-        tableName: 'auth_activities',
-        roles: sinon.match.func
-      }),
-      'activities model is configured correctly'
+    setupTests.match(
+      authorization,
+      {
+        activity: {
+          tableName: 'auth_activities'
+        },
+        role: {
+          tableName: 'auth_roles'
+        }
+      },
+      'get the expected model definitions'
     );
-
-    setupTests.ok(
-      bookshelf.Model.extend.calledWith({
-        tableName: 'auth_roles',
-        activities: sinon.match.func
-      }),
-      'roles model is configured correctly'
+    setupTests.type(
+      authorization.activity.roles,
+      'function',
+      'creates a roles relationship for the activity model'
     );
-
-    setupTests.same(
-      model,
-      { activities: 'seven', roles: 'seven' },
-      'gives back extended bookshelf models'
+    setupTests.type(
+      authorization.role.activities,
+      'function',
+      'creates an activities relationship for the role model'
     );
   });
 
   authModelTests.test(
-    'activities model sets up roles relationship',
+    'activity model sets up roles relationship',
     async roleTests => {
-      const extension = bookshelf.Model.extend.args.filter(
-        args => args[0].tableName === 'auth_activities'
-      )[0][0];
       const self = {
         belongsToMany: sinon.stub().returns('poptart')
       };
-      const roles = extension.roles.bind(self);
 
-      const output = roles();
+      const output = authorization.activity.roles.bind(self)();
 
       roleTests.ok(
         self.belongsToMany.calledWith(
-          'seven',
+          'role',
           'auth_role_activity_mapping',
           'activity_id',
           'role_id'
@@ -65,21 +52,17 @@ tap.test('authorization data model', async authModelTests => {
   );
 
   authModelTests.test(
-    'roles model sets up activities relationship',
+    'role model sets up activities relationship',
     async activityTests => {
-      const extension = bookshelf.Model.extend.args.filter(
-        args => args[0].tableName === 'auth_roles'
-      )[0][0];
       const self = {
         belongsToMany: sinon.stub().returns('frootloop')
       };
-      const roles = extension.activities.bind(self);
 
-      const output = roles();
+      const output = authorization.role.activities.bind(self)();
 
       activityTests.ok(
         self.belongsToMany.calledWith(
-          'seven',
+          'activity',
           'auth_role_activity_mapping',
           'role_id',
           'activity_id'
@@ -87,22 +70,6 @@ tap.test('authorization data model', async authModelTests => {
         'sets up the relationship mapping to activities'
       );
       activityTests.equal(output, 'frootloop', 'returns the expected value');
-    }
-  );
-
-  authModelTests.test(
-    'subsequent calls to setup return cached values',
-    async cacheTests => {
-      bookshelf.Model.extend.reset();
-
-      const model = authorization(bookshelf);
-
-      cacheTests.ok(bookshelf.Model.extend.notCalled);
-      cacheTests.same(
-        model,
-        { activities: 'seven', roles: 'seven' },
-        'gives back extended bookshelf models'
-      );
     }
   );
 });

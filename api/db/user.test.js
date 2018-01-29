@@ -3,50 +3,47 @@ const sinon = require('sinon');
 
 const user = require('./user');
 
-tap.only('user data model', async userModelTests => {
-  const bookshelf = {
-    Model: {
-      extend: sinon.stub()
-    }
-  };
-  const authModels = sinon.stub().returns({ roles: 'role-model' });
-
+tap.test('user data model', async userModelTests => {
   userModelTests.test('setup', async setupTests => {
-    bookshelf.Model.extend.returns('seven');
-
-    const model = user(bookshelf, authModels);
-
-    setupTests.ok(
-      bookshelf.Model.extend.calledWith({
-        tableName: 'users',
-        role: sinon.match.func,
-        activities: sinon.match.func
-      }),
-      'model is configured correctly'
+    setupTests.match(
+      user,
+      {
+        user: {
+          tableName: 'users'
+        }
+      },
+      'get the expected model definitions'
     );
-    setupTests.equal(model, 'seven', 'gives back an extended bookshelf model');
-  });
-
-  userModelTests.test('setups up a role relationship', async roleTests => {
-    authModels.returns({ roles: 'role-model' });
-    const self = {
-      hasOne: sinon.spy()
-    };
-
-    const extension = bookshelf.Model.extend.args[0][0];
-    const role = extension.role.bind(self);
-    role();
-
-    roleTests.ok(authModels.calledOnce, 'the auth models are instantiated');
-    roleTests.ok(
-      self.hasOne.calledWith('role-model', 'name', 'auth_role'),
-      'sets up the data relationship'
+    setupTests.type(
+      user.user.role,
+      'function',
+      'creates a role relationship for the user model'
+    );
+    setupTests.type(
+      user.user.activities,
+      'function',
+      'creates an activities relationship for the user model'
     );
   });
+
+  userModelTests.test(
+    'user model sets up role relationship',
+    async roleTests => {
+      const self = {
+        hasOne: sinon.stub().returns('poptart')
+      };
+
+      const output = user.user.role.bind(self)();
+
+      roleTests.ok(
+        self.hasOne.calledWith('role', 'name', 'auth_role'),
+        'sets up the relationship mapping to a role'
+      );
+      roleTests.equal(output, 'poptart', 'returns the expected value');
+    }
+  );
 
   userModelTests.test('activities helper method', async activitesTests => {
-    let activities;
-
     const sandbox = sinon.createSandbox();
     const self = {
       load: sandbox.stub(),
@@ -55,11 +52,9 @@ tap.only('user data model', async userModelTests => {
     };
     const related = sandbox.stub();
     const pluck = sandbox.stub();
+    const activities = user.user.activities.bind(self);
 
     activitesTests.beforeEach(done => {
-      const extension = bookshelf.Model.extend.args[0][0];
-      activities = extension.activities.bind(self);
-
       sandbox.reset();
 
       self.load.resolves();
@@ -107,20 +102,4 @@ tap.only('user data model', async userModelTests => {
       }
     );
   });
-
-  userModelTests.test(
-    'subsequent calls to setup return cached values',
-    async cacheTests => {
-      bookshelf.Model.extend.reset();
-
-      const model = user(bookshelf);
-
-      cacheTests.ok(bookshelf.Model.extend.notCalled);
-      cacheTests.equal(
-        model,
-        'seven',
-        'gives back an extended bookshelf model'
-      );
-    }
-  );
 });
