@@ -4,7 +4,7 @@
   "rules": {
     "arrow-parens": ["error", "as-needed"],
     "comma-dangle": [1, "never"],
-    "react/jsx-filename-extension": 0,
+
     "jsx-a11y/anchor-is-valid": [
       2,
       {
@@ -20,6 +20,10 @@
         }
       }
     ],
+
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
+    "react/jsx-filename-extension": 0,
+    "react/no-array-index-key": "warn",
 
     // unnecessary due to prettier
     "object-curly-newline": "off"
