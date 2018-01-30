@@ -3,40 +3,42 @@ const sinon = require('sinon');
 
 const sandbox = sinon.createSandbox();
 
-const db = sandbox.stub();
-const where = sandbox.stub();
-const first = sandbox.stub();
+const userModel = {
+  where: sandbox.stub(),
+  fetch: sandbox.stub()
+};
+const get = sandbox.stub();
 
 const bcrypt = {
-  compareSync: sandbox.stub()
+  compare: sandbox.stub()
 };
 
-const auth = require('./authenticate.js')(db, bcrypt);
+const auth = require('./authenticate.js')(userModel, bcrypt);
 
 tap.test('local authentication', async authTest => {
   const doneCallback = sandbox.spy();
   authTest.beforeEach(done => {
     sandbox.reset();
-    db.returns({ first, where });
-    where.returns({ first, where });
+    userModel.where.returns({ where: userModel.where, fetch: userModel.fetch });
     done();
   });
 
   authTest.test('with a database error', async errorTest => {
-    first.rejects();
+    userModel.fetch.rejects();
 
     await auth('user', 'password', doneCallback);
 
-    errorTest.ok(db.calledOnce, 'a single table is queried');
-    errorTest.ok(db.calledWith('users'), 'it is the users table');
-    errorTest.ok(where.calledOnce, 'one set of WHERE clauses is added');
     errorTest.ok(
-      where.calledWith({ email: 'user' }),
+      userModel.where.calledOnce,
+      'one set of WHERE clauses is added'
+    );
+    errorTest.ok(
+      userModel.where.calledWith({ email: 'user' }),
       'it is the WHERE we expect'
     );
-    errorTest.ok(first.calledOnce, 'the query is executed one time');
+    errorTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
 
-    errorTest.ok(bcrypt.compareSync.notCalled, 'does not compare passwords');
+    errorTest.ok(bcrypt.compare.notCalled, 'does not compare passwords');
 
     errorTest.equal(doneCallback.callCount, 1, 'called done callback once');
     errorTest.ok(
@@ -45,51 +47,52 @@ tap.test('local authentication', async authTest => {
     );
   });
 
-  authTest.test('with no valid users', async noUserTest => {
-    first.resolves();
+  authTest.test('with no valid user', async noUserTest => {
+    userModel.fetch.resolves();
 
     await auth('user', 'password', doneCallback);
 
-    noUserTest.ok(db.calledOnce, 'a single table is queried');
-    noUserTest.ok(db.calledWith('users'), 'it is the users table');
-    noUserTest.ok(where.calledOnce, 'one set of WHERE clauses is added');
     noUserTest.ok(
-      where.calledWith({ email: 'user' }),
+      userModel.where.calledOnce,
+      'one set of WHERE clauses is added'
+    );
+    noUserTest.ok(
+      userModel.where.calledWith({ email: 'user' }),
       'it is the WHERE we expect'
     );
-    noUserTest.ok(first.calledOnce, 'the query is executed one time');
+    noUserTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
 
-    noUserTest.ok(bcrypt.compareSync.notCalled, 'does not compare password');
+    noUserTest.ok(bcrypt.compare.notCalled, 'does not compare password');
 
     noUserTest.equal(doneCallback.callCount, 1, 'called done callback once');
     noUserTest.ok(doneCallback.calledWith(null, false), 'got a false user');
   });
 
   authTest.test('with invalid password', async invalidTest => {
-    first.resolves({
-      email: 'hello@world',
-      password: 'test-password',
-      id: 57
-    });
-    bcrypt.compareSync.returns(false);
+    get.withArgs('email').returns('hello@world');
+    get.withArgs('password').returns('test-password');
+    get.withArgs('id').returns(57);
+    userModel.fetch.resolves({ get });
+    bcrypt.compare.resolves(false);
 
     await auth('user', 'password', doneCallback);
 
-    invalidTest.ok(db.calledOnce, 'a single table is queried');
-    invalidTest.ok(db.calledWith('users'), 'it is the users table');
-    invalidTest.ok(where.calledOnce, 'one set of WHERE clauses is added');
     invalidTest.ok(
-      where.calledWith({ email: 'user' }),
+      userModel.where.calledOnce,
+      'one set of WHERE clauses is added'
+    );
+    invalidTest.ok(
+      userModel.where.calledWith({ email: 'user' }),
       'it is the WHERE we expect'
     );
-    invalidTest.ok(first.calledOnce, 'the query is executed one time');
-
     invalidTest.ok(
-      bcrypt.compareSync.calledOnce,
-      'password is compared one time'
+      userModel.fetch.calledOnce,
+      'the query is executed one time'
     );
+
+    invalidTest.ok(bcrypt.compare.calledOnce, 'password is compared one time');
     invalidTest.ok(
-      bcrypt.compareSync.calledWith('password', 'test-password'),
+      bcrypt.compare.calledWith('password', 'test-password'),
       'password is compared to database value'
     );
 
@@ -98,30 +101,27 @@ tap.test('local authentication', async authTest => {
   });
 
   authTest.test('with a valid user', async validTest => {
-    first.resolves({
-      email: 'hello@world',
-      password: 'test-password',
-      id: 57
-    });
-    bcrypt.compareSync.returns(true);
+    get.withArgs('email').returns('hello@world');
+    get.withArgs('password').returns('test-password');
+    get.withArgs('id').returns(57);
+    userModel.fetch.resolves({ get });
+    bcrypt.compare.resolves(true);
 
     await auth('user', 'password', doneCallback);
 
-    validTest.ok(db.calledOnce, 'a single table is queried');
-    validTest.ok(db.calledWith('users'), 'it is the users table');
-    validTest.ok(where.calledOnce, 'one set of WHERE clauses is added');
     validTest.ok(
-      where.calledWith({ email: 'user' }),
+      userModel.where.calledOnce,
+      'one set of WHERE clauses is added'
+    );
+    validTest.ok(
+      userModel.where.calledWith({ email: 'user' }),
       'it is the WHERE we expect'
     );
-    validTest.ok(first.calledOnce, 'the query is executed one time');
+    validTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
 
+    validTest.ok(bcrypt.compare.calledOnce, 'password is compared one time');
     validTest.ok(
-      bcrypt.compareSync.calledOnce,
-      'password is compared one time'
-    );
-    validTest.ok(
-      bcrypt.compareSync.calledWith('password', 'test-password'),
+      bcrypt.compare.calledWith('password', 'test-password'),
       'password is compared to database value'
     );
 
