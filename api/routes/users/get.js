@@ -1,21 +1,21 @@
-const defaultDB = require('../../db')();
+const defaultUserModel = require('../../db').models.user;
 const loggedIn = require('../../auth/middleware').loggedIn;
 
-const allUsersHandler = async (req, res, db) => {
+const allUsersHandler = async (req, res, UserModel) => {
   try {
-    const users = await db('users').select('id', 'email');
+    const users = await UserModel.fetchAll({ columns: ['id', 'email'] });
     res.send(users);
   } catch (e) {
     res.status(500).end();
   }
 };
 
-const oneUserHandler = async (req, res, db) => {
+const oneUserHandler = async (req, res, UserModel) => {
   if (req.params.id && !Number.isNaN(Number(req.params.id))) {
     try {
-      const user = await db('users')
-        .where({ id: Number(req.params.id) })
-        .first('id', 'email');
+      const user = await UserModel.where({ id: Number(req.params.id) }).fetch({
+        columns: ['id', 'email']
+      });
       if (user) {
         res.send(user);
       } else {
@@ -32,7 +32,11 @@ const oneUserHandler = async (req, res, db) => {
   }
 };
 
-module.exports = (app, db = defaultDB) => {
-  app.get('/users', loggedIn, (req, res) => allUsersHandler(req, res, db));
-  app.get('/user/:id', loggedIn, (req, res) => oneUserHandler(req, res, db));
+module.exports = (app, UserModel = defaultUserModel) => {
+  app.get('/users', loggedIn, (req, res) =>
+    allUsersHandler(req, res, UserModel)
+  );
+  app.get('/user/:id', loggedIn, (req, res) =>
+    oneUserHandler(req, res, UserModel)
+  );
 };
