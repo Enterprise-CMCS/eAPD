@@ -1,4 +1,4 @@
-const defaultDB = require('../db')();
+const defaultUserModel = require('../db').models.user;
 
 // Serialize a user into a stringy type that will get
 // pushed into their session cookie.
@@ -8,39 +8,18 @@ module.exports.serializeUser = (user, done) => {
 
 // Deserialize a stringy from the user's session cookie
 // into a user object.
-module.exports.deserializeUser = async (userID, done, db = defaultDB) => {
+module.exports.deserializeUser = async (
+  userID,
+  done,
+  userModel = defaultUserModel
+) => {
   try {
-    const users = await db('users')
-      .where({ id: userID })
-      .select();
-    const role = users[0].auth_role;
-    if (role) {
-      const activityRows = await db('auth_role_activity_mapping')
-        .fullOuterJoin(
-          'auth_roles',
-          'auth_roles.id',
-          'auth_role_activity_mapping.role_id'
-        )
-        .where({ 'auth_roles.name': role })
-        .innerJoin(
-          'auth_activities',
-          'auth_activities.id',
-          'auth_role_activity_mapping.activity_id'
-        )
-        .select();
-      const activities = activityRows.map(row => row.name);
-      done(null, {
-        username: users[0].email,
-        id: users[0].id,
-        activities
-      });
-    } else {
-      done(null, {
-        username: users[0].email,
-        id: users[0].id,
-        activities: []
-      });
-    }
+    const user = await userModel.where({ id: userID }).fetch();
+    done(null, {
+      username: user.get('email'),
+      id: user.get('id'),
+      activities: await user.activities()
+    });
   } catch (e) {
     done('Could not deserialize user');
   }

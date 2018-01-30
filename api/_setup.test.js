@@ -8,8 +8,11 @@ const tap = require('tap');
 // to write tests for a new file and our automated
 // tools wouldn't warn us.
 
-require('./db');
 require('./env');
+
+require('./db');
+require('./db/authorization');
+require('./db/user');
 
 require('./auth');
 require('./auth/authenticate');
