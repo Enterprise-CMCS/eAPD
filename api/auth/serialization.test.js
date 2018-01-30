@@ -6,28 +6,17 @@ const sandbox = sinon.createSandbox();
 const serialization = require('./serialization');
 
 tap.test('passport serialization', async serializationTest => {
-  const db = sandbox.stub();
-  const where = sandbox.stub();
-  const select = sandbox.stub();
-  const fullOuterJoin = sandbox.stub();
-  const innerJoin = sandbox.stub();
-  const doneCallback = sandbox.stub().returns('hi');
-
-  const dbChainable = {
-    where,
-    select,
-    fullOuterJoin,
-    innerJoin
+  const userModel = {
+    where: sandbox.stub(),
+    fetch: sandbox.stub()
   };
+  const get = sandbox.stub();
+  const activities = sandbox.stub();
+  const doneCallback = sandbox.stub().returns('hi');
 
   serializationTest.beforeEach(done => {
     sandbox.reset();
-
-    db.returns(dbChainable);
-    where.returns(dbChainable);
-    fullOuterJoin.returns(dbChainable);
-    innerJoin.returns(dbChainable);
-
+    userModel.where.returns({ where: userModel.where, fetch: userModel.fetch });
     done();
   });
 
@@ -44,9 +33,9 @@ tap.test('passport serialization', async serializationTest => {
     const userID = 'the-user-id';
 
     deserializeTest.test('that is not in the database', async invalidTest => {
-      select.resolves([]);
+      userModel.fetch.resolves(null);
 
-      await serialization.deserializeUser(userID, doneCallback, db);
+      await serialization.deserializeUser(userID, doneCallback, userModel);
       invalidTest.ok(
         doneCallback.calledWith(sinon.match.string),
         'calls back with an error'
@@ -55,9 +44,12 @@ tap.test('passport serialization', async serializationTest => {
 
     deserializeTest.test('that is in the database', async validTest => {
       validTest.test('with no role', async noRoleTest => {
-        select.resolves([{ email: 'test-email', id: 'test-id', role: null }]);
+        get.withArgs('email').returns('test-email');
+        get.withArgs('id').returns('test-id');
+        activities.resolves([]);
+        userModel.fetch.resolves({ get, activities });
 
-        await serialization.deserializeUser(userID, doneCallback, db);
+        await serialization.deserializeUser(userID, doneCallback, userModel);
 
         noRoleTest.ok(
           doneCallback.calledWith(null, {
@@ -70,17 +62,12 @@ tap.test('passport serialization', async serializationTest => {
       });
 
       validTest.test('with a role', async adminRoleTest => {
-        select
-          .onFirstCall()
-          .resolves([
-            { email: 'test-email', id: 'test-id', auth_role: 'some-role' }
-          ]);
+        get.withArgs('email').returns('test-email');
+        get.withArgs('id').returns('test-id');
+        activities.resolves(['activity 1', 'activity 2']);
+        userModel.fetch.resolves({ get, activities });
 
-        select
-          .onSecondCall()
-          .resolves([{ name: 'activity 1' }, { name: 'activity 2' }]);
-
-        await serialization.deserializeUser(userID, doneCallback, db);
+        await serialization.deserializeUser(userID, doneCallback, userModel);
 
         adminRoleTest.ok(
           doneCallback.calledWith(null, {
