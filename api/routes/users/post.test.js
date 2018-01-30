@@ -9,10 +9,12 @@ tap.test('user POST endpoint', async endpointTest => {
   const app = {
     post: sandbox.stub()
   };
-  const db = sandbox.stub();
-  const where = sandbox.stub();
-  const first = sandbox.stub();
-  const insert = sandbox.stub();
+
+  const UserModel = sandbox.stub();
+  UserModel.where = sandbox.stub();
+  UserModel.fetch = sandbox.stub();
+  UserModel.save = sandbox.stub();
+
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -26,14 +28,14 @@ tap.test('user POST endpoint', async endpointTest => {
     res.send.returns(res);
     res.end.returns(res);
 
-    db.returns({ where, first, insert });
-    where.returns({ where, first, insert });
+    UserModel.returns({ save: UserModel.save });
+    UserModel.where.returns(UserModel);
 
     done();
   });
 
   endpointTest.test('setup', async setupTest => {
-    postEndpoint(app, db);
+    postEndpoint(app, UserModel);
 
     setupTest.ok(
       app.post.calledWith('/user', loggedInMiddleware, sinon.match.func),
@@ -45,7 +47,7 @@ tap.test('user POST endpoint', async endpointTest => {
     let handler;
 
     handlerTest.beforeEach(done => {
-      postEndpoint(app, db);
+      postEndpoint(app, UserModel);
       handler = app.post.args[0][2];
       done();
     });
@@ -91,7 +93,7 @@ tap.test('user POST endpoint', async endpointTest => {
     handlerTest.test(
       'rejects inserting an existing user',
       async invalidTest => {
-        first.resolves({});
+        UserModel.fetch.resolves({});
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },
@@ -110,7 +112,7 @@ tap.test('user POST endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error checking for an existing user',
       async invalidTest => {
-        first.rejects();
+        UserModel.fetch.rejects();
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },
@@ -126,8 +128,8 @@ tap.test('user POST endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error inserting a new user',
       async invalidTest => {
-        first.resolves();
-        insert.rejects();
+        UserModel.fetch.resolves();
+        UserModel.save.rejects();
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },
@@ -143,8 +145,8 @@ tap.test('user POST endpoint', async endpointTest => {
     handlerTest.test(
       'inserts a new user and returns a success for a valid, new user',
       async validTest => {
-        first.resolves();
-        insert.resolves();
+        UserModel.fetch.resolves();
+        UserModel.save.resolves();
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },

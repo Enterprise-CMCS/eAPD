@@ -9,10 +9,11 @@ tap.test('user GET endpoint', async endpointTest => {
   const app = {
     get: sandbox.stub()
   };
-  const db = sandbox.stub();
-  const where = sandbox.stub();
-  const select = sandbox.stub();
-  const first = sandbox.stub();
+  const UserModel = {
+    where: sandbox.stub(),
+    fetch: sandbox.stub(),
+    fetchAll: sandbox.stub()
+  };
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -26,14 +27,13 @@ tap.test('user GET endpoint', async endpointTest => {
     res.send.returns(res);
     res.end.returns(res);
 
-    db.returns({ where, select, first });
-    where.returns({ where, select, first });
+    UserModel.where.returns(UserModel);
 
     done();
   });
 
   endpointTest.test('setup', async setupTest => {
-    getEndpoint(app, db);
+    getEndpoint(app, UserModel);
 
     setupTest.ok(
       app.get.calledWith('/user/:id', loggedInMiddleware, sinon.match.func),
@@ -48,7 +48,7 @@ tap.test('user GET endpoint', async endpointTest => {
   endpointTest.test('get all users handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      getEndpoint(app, db);
+      getEndpoint(app, UserModel);
       handler = app.get.args.find(args => args[0] === '/users')[2];
       done();
     });
@@ -56,13 +56,14 @@ tap.test('user GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
-        select.rejects();
+        UserModel.fetchAll.rejects();
 
         await handler({}, res);
 
-        invalidTest.ok(db.calledWith('users'), 'queries the users table');
         invalidTest.ok(
-          select.calledWith('id', 'email'),
+          UserModel.fetchAll.calledWith({
+            columns: sinon.match.array.deepEquals(['id', 'email'])
+          }),
           'selects only user ID and email'
         );
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
@@ -73,13 +74,14 @@ tap.test('user GET endpoint', async endpointTest => {
 
     handlerTest.test('sends back a list of users', async validTest => {
       const users = [{ id: 1, email: 'hi' }, { id: 2, email: 'bye' }];
-      select.resolves(users);
+      UserModel.fetchAll.resolves(users);
 
       await handler({}, res);
 
-      validTest.ok(db.calledWith('users'), 'queries the users table');
       validTest.ok(
-        select.calledWith('id', 'email'),
+        UserModel.fetchAll.calledWith({
+          columns: sinon.match.array.deepEquals(['id', 'email'])
+        }),
         'selects only user ID and email'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
@@ -93,7 +95,7 @@ tap.test('user GET endpoint', async endpointTest => {
   endpointTest.test('get single user handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      getEndpoint(app, db);
+      getEndpoint(app, UserModel);
       handler = app.get.args.find(args => args[0] === '/user/:id')[2];
       done();
     });
@@ -126,17 +128,18 @@ tap.test('user GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
-        first.rejects();
+        UserModel.fetch.rejects();
 
         await handler({ params: { id: 1 } }, res);
 
-        invalidTest.ok(db.calledWith('users'), 'queries the users table');
         invalidTest.ok(
-          where.calledWith({ id: 1 }),
+          UserModel.where.calledWith({ id: 1 }),
           'looks for only the specific user'
         );
         invalidTest.ok(
-          first.calledWith('id', 'email'),
+          UserModel.fetch.calledWith({
+            columns: sinon.match.array.deepEquals(['id', 'email'])
+          }),
           'selects only user ID and email'
         );
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
@@ -148,16 +151,17 @@ tap.test('user GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends a not-found error if the requested user does not exist',
       async invalidTest => {
-        first.resolves();
+        UserModel.fetch.resolves();
         await handler({ params: { id: 1 } }, res);
 
-        invalidTest.ok(db.calledWith('users'), 'queries the users table');
         invalidTest.ok(
-          where.calledWith({ id: 1 }),
+          UserModel.where.calledWith({ id: 1 }),
           'looks for only the specific user'
         );
         invalidTest.ok(
-          first.calledWith('id', 'email'),
+          UserModel.fetch.calledWith({
+            columns: sinon.match.array.deepEquals(['id', 'email'])
+          }),
           'selects only user ID and email'
         );
         invalidTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
@@ -167,16 +171,17 @@ tap.test('user GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends the requested user', async validTest => {
-      first.resolves({ id: 1, email: 'test-email@dotcom.com' });
+      UserModel.fetch.resolves({ id: 1, email: 'test-email@dotcom.com' });
       await handler({ params: { id: 1 } }, res);
 
-      validTest.ok(db.calledWith('users'), 'queries the users table');
       validTest.ok(
-        where.calledWith({ id: 1 }),
+        UserModel.where.calledWith({ id: 1 }),
         'looks for only the specific user'
       );
       validTest.ok(
-        first.calledWith('id', 'email'),
+        UserModel.fetch.calledWith({
+          columns: sinon.match.array.deepEquals(['id', 'email'])
+        }),
         'selects only user ID and email'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
