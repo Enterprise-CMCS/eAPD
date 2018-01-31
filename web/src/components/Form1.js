@@ -3,7 +3,7 @@ import React from 'react';
 import { Divider, Select } from 'rebass';
 import { Field, reduxForm } from 'redux-form';
 
-import Input from './Input';
+import { Input } from './Inputs';
 
 const Form1 = ({ handleSubmit, pristine, reset, submitting }) => (
   <form onSubmit={handleSubmit}>

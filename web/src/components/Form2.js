@@ -3,7 +3,7 @@ import React from 'react';
 import { Box, Button, Divider, Subhead } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
-import Input from './Input';
+import { Input } from './Inputs';
 
 const Contacts = ({ fields, meta: { error, submitFailed } }) => (
   <div>
