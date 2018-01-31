@@ -1,50 +1,29 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Divider, Select } from 'rebass';
 import { Field, reduxForm } from 'redux-form';
+
+import Input from './Input';
 
 const Form1 = ({ handleSubmit, pristine, reset, submitting }) => (
   <form onSubmit={handleSubmit}>
-    <div>
-      <label htmlFor="firstName">First Name</label>
-      <div>
-        <Field
-          id="firstName"
-          name="firstName"
-          component="input"
-          type="text"
-          placeholder="First Name"
-        />
-      </div>
-    </div>
-    <div>
-      <label htmlFor="lastName">Last Name</label>
-      <div>
-        <Field
-          id="lastName"
-          name="lastName"
-          component="input"
-          type="text"
-          placeholder="Last Name"
-        />
-      </div>
-    </div>
+    <Field name="firstName" type="text" component={Input} label="First Name" />
+    <Field name="lastName" type="text" component={Input} label="Last Name" />
+
     <div>
       <label htmlFor="favoriteColor">Favorite Color</label>
       <div>
-        <Field id="favoriteColor" name="favoriteColor" component="select">
-          <option />
+        <Field id="favoriteColor" name="favoriteColor" component={Select}>
+          <option>--</option>
           <option value="ff0000">Red</option>
           <option value="00ff00">Green</option>
           <option value="0000ff">Blue</option>
         </Field>
       </div>
     </div>
-    <div>
-      <label htmlFor="notes">Notes</label>
-      <div>
-        <Field id="notes" name="notes" component="textarea" />
-      </div>
-    </div>
+
+    <Divider my={4} color="gray2" />
+
     <div>
       <button type="submit" disabled={pristine || submitting}>
         Submit
