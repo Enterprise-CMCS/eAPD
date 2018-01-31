@@ -5,9 +5,9 @@ import { push } from 'react-router-redux';
 import { Box, Button, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import Form1 from '../components/Form1';
+import Form2 from '../components/Form2';
 
-class StateStart extends Component {
+class StateContacts extends Component {
   showResults = data => {
     console.log(data);
   };
@@ -17,20 +17,20 @@ class StateStart extends Component {
 
     return (
       <Box py={4}>
-        <Heading>Let’s start by setting up your state profile</Heading>
-        <Form1 onSubmit={this.showResults} />
+        <Heading>Review your state contact information</Heading>
+        <Form2 onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
-        <Button onClick={() => goTo('/state-contacts')}>Continue</Button>
+        <Button onClick={() => goTo('/state-start')}>Continue</Button>
       </Box>
     );
   }
 }
 
-StateStart.propTypes = {
+StateContacts.propTypes = {
   goTo: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(StateStart);
+export default connect(null, mapDispatchToProps)(StateContacts);
