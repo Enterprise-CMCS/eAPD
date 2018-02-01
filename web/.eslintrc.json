@@ -26,6 +26,7 @@
     "react/no-array-index-key": "warn",
 
     // unnecessary due to prettier
+    "function-paren-newline": "off",
     "object-curly-newline": "off"
   },
   "env": {
