@@ -91,4 +91,8 @@ injectGlobal`
     line-height: 1.75;
     resize: vertical;
   }
+
+  button {
+    cursor: pointer;
+  }
 `;

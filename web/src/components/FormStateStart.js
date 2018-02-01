@@ -1,37 +1,44 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Divider, Select } from 'rebass';
 import { Field, reduxForm } from 'redux-form';
 
 import { Input } from './Inputs';
+import SectionHeader from './SectionHeader';
+import SelectInput from './SelectInput';
+import { STATES } from '../util';
 
 const FormStateStart = ({ handleSubmit, pristine, reset, submitting }) => (
   <form onSubmit={handleSubmit}>
-    <Field name="firstName" type="text" component={Input} label="First Name" />
-    <Field name="lastName" type="text" component={Input} label="Last Name" />
+    <SectionHeader>Your info:</SectionHeader>
+    <Field name="name" type="text" component={Input} label="Name" />
+    <Field name="position" type="text" component={Input} label="Position" />
+    <Field name="email" type="email" component={Input} label="Email address" />
+    <Field
+      name="phoneNumber"
+      type="tel"
+      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+      component={Input}
+      label="Phone number"
+    />
 
-    <div>
-      <label htmlFor="favoriteColor">Favorite Color</label>
+    <SectionHeader>State:</SectionHeader>
+    <Field
+      name="stateName"
+      component={SelectInput}
+      label="State"
+      options={STATES}
+    />
+
+    {false && (
       <div>
-        <Field id="favoriteColor" name="favoriteColor" component={Select}>
-          <option>--</option>
-          <option value="ff0000">Red</option>
-          <option value="00ff00">Green</option>
-          <option value="0000ff">Blue</option>
-        </Field>
+        <button type="submit" disabled={pristine || submitting}>
+          Submit
+        </button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>
+          Clear Values
+        </button>
       </div>
-    </div>
-
-    <Divider my={4} color="gray2" />
-
-    <div>
-      <button type="submit" disabled={pristine || submitting}>
-        Submit
-      </button>
-      <button type="button" disabled={pristine || submitting} onClick={reset}>
-        Clear Values
-      </button>
-    </div>
+    )}
   </form>
 );
 
@@ -42,4 +49,15 @@ FormStateStart.propTypes = {
   submitting: PropTypes.bool.isRequired
 };
 
-export default reduxForm({ form: 'stateStart' })(FormStateStart);
+const formConfig = {
+  form: 'stateStart',
+  initialValues: {
+    name: 'Denise Nagelschmidt',
+    position: 'Health Reform Portfolio Director',
+    email: 'denise.nagelschmidt@vermont.gov',
+    phoneNumber: '802-879-5900',
+    stateName: 'ak'
+  }
+};
+
+export default reduxForm(formConfig)(FormStateStart);

@@ -17,7 +17,7 @@ class StateStart extends Component {
 
     return (
       <Box py={4}>
-        <Heading>Let’s start by setting up your state profile</Heading>
+        <Heading mb={3}>Let’s start by setting up your state profile</Heading>
         <FormStateStart onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
         <Button onClick={() => goTo('/state-contacts')}>Continue</Button>
