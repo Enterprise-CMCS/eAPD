@@ -5,9 +5,9 @@ import { push } from 'react-router-redux';
 import { Box, Button, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import FormStateStart from '../components/FormStateStart';
+import FormApdOverview from '../components/FormApdOverview';
 
-class StateStart extends Component {
+class ApdOverview extends Component {
   showResults = data => {
     console.log(data);
   };
@@ -17,20 +17,20 @@ class StateStart extends Component {
 
     return (
       <Box py={4}>
-        <Heading>Let’s start by setting up your state profile</Heading>
-        <FormStateStart onSubmit={this.showResults} />
+        <Heading>Tell us more about your HITECH program</Heading>
+        <FormApdOverview onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
-        <Button onClick={() => goTo('/state-contacts')}>Continue</Button>
+        <Button onClick={() => goTo('/state-start')}>Continue</Button>
       </Box>
     );
   }
 }
 
-StateStart.propTypes = {
+ApdOverview.propTypes = {
   goTo: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(StateStart);
+export default connect(null, mapDispatchToProps)(ApdOverview);

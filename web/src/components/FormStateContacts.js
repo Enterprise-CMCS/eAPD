@@ -3,7 +3,7 @@ import React from 'react';
 import { Box, Button, Divider, Subhead } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
-import Input from './Input';
+import { Input } from './Inputs';
 
 const Contacts = ({ fields, meta: { error, submitFailed } }) => (
   <div>
@@ -43,7 +43,7 @@ Contacts.propTypes = {
   meta: PropTypes.object.isRequired
 };
 
-const Form2 = ({ handleSubmit, pristine, reset, submitting }) => (
+const FormStateContacts = ({ handleSubmit, pristine, reset, submitting }) => (
   <form onSubmit={handleSubmit}>
     <Field name="medicaidDirectorName" component={Input} label="Director" />
     <FieldArray name="contacts" component={Contacts} />
@@ -59,7 +59,7 @@ const Form2 = ({ handleSubmit, pristine, reset, submitting }) => (
   </form>
 );
 
-Form2.propTypes = {
+FormStateContacts.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   reset: PropTypes.func.isRequired,
@@ -67,8 +67,8 @@ Form2.propTypes = {
 };
 
 const formConfig = {
-  form: 'form2',
+  form: 'stateContacts',
   initialValues: { medicaidDirectorName: 'Bob' }
 };
 
-export default reduxForm(formConfig)(Form2);
+export default reduxForm(formConfig)(FormStateContacts);
