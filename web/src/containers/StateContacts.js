@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { Box, Button, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import Form2 from '../components/Form2';
+import FormStateContacts from '../components/FormStateContacts';
 
 class StateContacts extends Component {
   showResults = data => {
@@ -18,9 +18,9 @@ class StateContacts extends Component {
     return (
       <Box py={4}>
         <Heading>Review your state contact information</Heading>
-        <Form2 onSubmit={this.showResults} />
+        <FormStateContacts onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
-        <Button onClick={() => goTo('/state-start')}>Continue</Button>
+        <Button onClick={() => goTo('/apd-overview')}>Continue</Button>
       </Box>
     );
   }
