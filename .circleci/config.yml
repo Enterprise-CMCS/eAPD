@@ -129,7 +129,7 @@ jobs:
           working_directory: ~/project/api
           command: npm run test-endpoints
 
-  deploy:
+  deploy staging:
     docker:
       - image: node:8
     steps:
@@ -139,6 +139,17 @@ jobs:
       - run:
           name: deploy to prod
           command: ./bin/deploy.sh
+
+  deploy ux testing:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+      - run:
+          name: deploy to UX testing
+          command: ./bin/deploy-ux-testing.sh
 
 workflows:
   version: 2
@@ -161,12 +172,28 @@ workflows:
       - api endpoint test:
           requires:
              - prepare api dependencies cache
-      - deploy:
+      - deploy staging:
           filters:
             branches:
               only:
                 - master
           requires:
-             - web test
-             - api unit test
-             - api endpoint test
+            - web test
+            - api unit test
+            - api endpoint test
+      - request deploy for UX testing:
+          type: approval
+          filters:
+            branches:
+              only:
+                - master
+      - deploy ux testing:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - request deploy for UX testing
+            - web test
+            - api unit test
+            - api endpoint test
