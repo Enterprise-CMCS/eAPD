@@ -17,7 +17,7 @@ class StateContacts extends Component {
 
     return (
       <Box py={4}>
-        <Heading>Review your state contact information</Heading>
+        <Heading mb={3}>Review your state contact information</Heading>
         <FormStateContacts onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
         <ButtonOutline onClick={() => goTo('/state-start')}>
