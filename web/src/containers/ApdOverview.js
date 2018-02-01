@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { Box, Button, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import Form3 from '../components/Form3';
+import FormApdOverview from '../components/FormApdOverview';
 
 class ApdOverview extends Component {
   showResults = data => {
@@ -18,7 +18,7 @@ class ApdOverview extends Component {
     return (
       <Box py={4}>
         <Heading>Tell us more about your HITECH program</Heading>
-        <Form3 onSubmit={this.showResults} />
+        <FormApdOverview onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
         <Button onClick={() => goTo('/state-start')}>Continue</Button>
       </Box>

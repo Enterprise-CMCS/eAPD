@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import { Input } from './Inputs';
 
-const Form1 = ({ handleSubmit, pristine, reset, submitting }) => (
+const FormStateStart = ({ handleSubmit, pristine, reset, submitting }) => (
   <form onSubmit={handleSubmit}>
     <Field name="firstName" type="text" component={Input} label="First Name" />
     <Field name="lastName" type="text" component={Input} label="Last Name" />
@@ -35,11 +35,11 @@ const Form1 = ({ handleSubmit, pristine, reset, submitting }) => (
   </form>
 );
 
-Form1.propTypes = {
+FormStateStart.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   reset: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired
 };
 
-export default reduxForm({ form: 'form1' })(Form1);
+export default reduxForm({ form: 'stateStart' })(FormStateStart);
