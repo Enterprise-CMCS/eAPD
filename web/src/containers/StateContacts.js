@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, Divider, Heading } from 'rebass';
+import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormStateContacts from '../components/FormStateContacts';
@@ -20,6 +20,9 @@ class StateContacts extends Component {
         <Heading>Review your state contact information</Heading>
         <FormStateContacts onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
+        <ButtonOutline onClick={() => goTo('/state-start')}>
+          Back
+        </ButtonOutline>{' '}
         <Button onClick={() => goTo('/apd-overview')}>Continue</Button>
       </Box>
     );
