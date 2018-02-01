@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import { Textarea } from './Inputs';
 
-const Form3 = ({ handleSubmit, pristine, reset, submitting }) => (
+const FormApdOverview = ({ handleSubmit, pristine, reset, submitting }) => (
   <form onSubmit={handleSubmit}>
     <Field name="vision" component={Textarea} label="Vision" />
     <Field name="benefits" component={Textarea} label="Benefits" />
@@ -21,7 +21,7 @@ const Form3 = ({ handleSubmit, pristine, reset, submitting }) => (
   </form>
 );
 
-Form3.propTypes = {
+FormApdOverview.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   reset: PropTypes.func.isRequired,
@@ -29,7 +29,7 @@ Form3.propTypes = {
 };
 
 const formConfig = {
-  form: 'form3'
+  form: 'apdOverview'
 };
 
-export default reduxForm(formConfig)(Form3);
+export default reduxForm(formConfig)(FormApdOverview);

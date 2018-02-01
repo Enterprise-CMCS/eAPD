@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { Box, Button, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import Form1 from '../components/Form1';
+import FormStateStart from '../components/FormStateStart';
 
 class StateStart extends Component {
   showResults = data => {
@@ -18,7 +18,7 @@ class StateStart extends Component {
     return (
       <Box py={4}>
         <Heading>Let’s start by setting up your state profile</Heading>
-        <Form1 onSubmit={this.showResults} />
+        <FormStateStart onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
         <Button onClick={() => goTo('/state-contacts')}>Continue</Button>
       </Box>
