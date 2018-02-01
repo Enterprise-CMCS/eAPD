@@ -14,7 +14,7 @@ const FormStateStart = ({ handleSubmit, pristine, reset, submitting }) => (
     <Field name="position" type="text" component={Input} label="Position" />
     <Field name="email" type="email" component={Input} label="Email address" />
     <Field
-      name="phoneNumber"
+      name="phone"
       type="tel"
       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
       component={Input}
@@ -55,8 +55,8 @@ const formConfig = {
     name: 'Denise Nagelschmidt',
     position: 'Health Reform Portfolio Director',
     email: 'denise.nagelschmidt@vermont.gov',
-    phoneNumber: '802-879-5900',
-    stateName: 'ak'
+    phone: '802-879-5900',
+    stateName: 'vt'
   }
 };
 
