@@ -30,7 +30,7 @@ const makeInput = InputInner => {
     input: PropTypes.object.isRequired,
     meta: PropTypes.object.isRequired,
     label: PropTypes.string.isRequired,
-    hideLabel: PropTypes.bool.isRequired,
+    hideLabel: PropTypes.bool,
     type: PropTypes.string
   };
 
