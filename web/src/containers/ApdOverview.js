@@ -20,7 +20,7 @@ class ApdOverview extends Component {
         <Heading>Tell us more about your HITECH program</Heading>
         <FormApdOverview onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
-        <Button onClick={() => goTo('/state-start')}>Continue</Button>
+        <Button onClick={() => goTo('/state-personnel')}>Continue</Button>
       </Box>
     );
   }

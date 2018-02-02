@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
-import Input from './Input';
+import { Input } from './Inputs';
 
 const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
   <div>
@@ -56,6 +56,7 @@ const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
                 name={`${person}.nextCompensation`}
                 component={Input}
                 parse={value => Number(value)}
+                format={value => `${value}`}
                 type="number"
               />
             </td>
@@ -66,6 +67,7 @@ const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
                 name={`${person}.nextTime`}
                 component={Input}
                 parse={value => Number(value)}
+                format={value => `${value}`}
                 type="number"
               />
             </td>
@@ -77,6 +79,7 @@ const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
                 name={`${person}.nextNextTime`}
                 component={Input}
                 parse={value => Number(value)}
+                format={value => `${value}`}
                 type="number"
               />
             </td>
@@ -95,7 +98,7 @@ const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
       </tbody>
     </table>
     <Button
-      bg="green"
+      bg="black"
       onClick={() =>
         fields.push({ nextCompensation: 0, nextTime: 0, nextNextTime: 0 })
       }
@@ -122,7 +125,28 @@ PersonnelForm.propTypes = {
 
 const formConfig = {
   form: 'personnel',
-  initialValues: {}
+  initialValues: {
+    state: [{
+      name: 'Alicia Axelrod',
+      jobTitle: 'big cheese',
+      nextCompensation: 78400,
+      nextTime: 50,
+      nextNextTime: 30
+    }],
+    contracting: [{
+      name: 'Barbara Bigelow',
+      jobTitle: 'software engineer',
+      nextCompensation: 89324,
+      nextTime: 80,
+      nextNextTime: 80
+    }, {
+      name: 'Chandra Cogsworth',
+      jobTitle: 'content designer',
+      nextCompensation: 91535,
+      nextTime: 70,
+      nextNextTime: 80
+    }]
+  }
 };
 
 export default reduxForm(formConfig)(PersonnelForm);
