@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, Divider, Heading } from 'rebass';
+import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormApdOverview from '../components/FormApdOverview';
@@ -17,10 +17,13 @@ class ApdOverview extends Component {
 
     return (
       <Box py={4}>
-        <Heading>Tell us more about your HITECH program</Heading>
+        <Heading mb={3}>Tell us more about your HITECH program</Heading>
         <FormApdOverview onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
-        <Button onClick={() => goTo('/state-start')}>Continue</Button>
+        <ButtonOutline onClick={() => goTo('/state-contacts')}>
+          Back
+        </ButtonOutline>{' '}
+        <Button onClick={() => goTo('/activities-start')}>Continue</Button>
       </Box>
     );
   }
