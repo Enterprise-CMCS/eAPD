@@ -123,7 +123,8 @@ const formConfig = {
       email: 'cory.gustafson@vermont.gov',
       phone: '802-879‐5901'
     }
-  }
+  },
+  destroyOnUnmount: false
 };
 
 export default reduxForm(formConfig)(FormStateContacts);

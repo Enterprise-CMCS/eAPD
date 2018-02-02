@@ -57,7 +57,8 @@ const formConfig = {
     email: 'denise.nagelschmidt@vermont.gov',
     phone: '802-879-5900',
     stateName: 'vt'
-  }
+  },
+  destroyOnUnmount: false
 };
 
 export default reduxForm(formConfig)(FormStateStart);
