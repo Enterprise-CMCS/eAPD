@@ -5,9 +5,9 @@ import { push } from 'react-router-redux';
 import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import FormApdOverview from '../components/FormApdOverview';
+import FormActivitiesStart from '../components/FormActivitiesStart';
 
-class ApdOverview extends Component {
+class ActivitiesStart extends Component {
   showResults = data => {
     console.log(data);
   };
@@ -17,23 +17,23 @@ class ApdOverview extends Component {
 
     return (
       <Box py={4}>
-        <Heading mb={3}>Tell us more about your HITECH program</Heading>
-        <FormApdOverview onSubmit={this.showResults} />
+        <Heading mb={3}>Now let’s go over your program activities</Heading>
+        <FormActivitiesStart onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
-        <ButtonOutline onClick={() => goTo('/state-contacts')}>
+        <ButtonOutline onClick={() => goTo('/apd-overview')}>
           Back
         </ButtonOutline>{' '}
-        <Button onClick={() => goTo('/activities-start')}>Continue</Button>
+        <Button onClick={() => goTo('/state-personnel')}>Continue</Button>
       </Box>
     );
   }
 }
 
-ApdOverview.propTypes = {
+ActivitiesStart.propTypes = {
   goTo: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ApdOverview);
+export default connect(null, mapDispatchToProps)(ActivitiesStart);
