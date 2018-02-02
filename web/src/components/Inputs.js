@@ -9,10 +9,11 @@ const makeInput = InputInner => {
     input: { name, ...rest },
     meta: { touched, error },
     label,
+    hideLabel,
     type
   }) => (
     <Box mb={3}>
-      <Label htmlFor={name}>{label}</Label>
+      { hideLabel ? '' : (<Label htmlFor={name}>{label}</Label>) }
       <InputInner id={name} type={type} {...rest} />
       {touched && error && <span>{error}</span>}
     </Box>
@@ -22,11 +23,13 @@ const makeInput = InputInner => {
     input: PropTypes.object.isRequired,
     meta: PropTypes.object.isRequired,
     label: PropTypes.string.isRequired,
+    hideLabel: PropTypes.bool.isRequired,
     type: PropTypes.string
   };
 
   InputHolder.defaultProps = {
-    type: 'text'
+    type: 'text',
+    hideLabel: false
   };
 
   return InputHolder;
