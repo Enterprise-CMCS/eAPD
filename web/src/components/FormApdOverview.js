@@ -1,31 +1,26 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Divider } from 'rebass';
 import { Field, reduxForm } from 'redux-form';
 
 import { Textarea } from './Inputs';
+import SectionHeader from './SectionHeader';
 
-const FormApdOverview = ({ handleSubmit, pristine, reset, submitting }) => (
+const FormApdOverview = ({ handleSubmit }) => (
   <form onSubmit={handleSubmit}>
+    <SectionHeader>
+      Briefly describe the high-level vision of your program. What are you
+      trying to accomplish by 2020?
+    </SectionHeader>
     <Field name="vision" component={Textarea} label="Vision" />
+    <SectionHeader>
+      In 1–2 sentences, summarize the key benefits of the program:
+    </SectionHeader>
     <Field name="benefits" component={Textarea} label="Benefits" />
-    <Divider my={4} color="gray2" />
-    <div>
-      <button type="submit" disabled={submitting}>
-        Submit
-      </button>
-      <button type="button" disabled={pristine || submitting} onClick={reset}>
-        Clear Values
-      </button>
-    </div>
   </form>
 );
 
 FormApdOverview.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  reset: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired
+  handleSubmit: PropTypes.func.isRequired
 };
 
 const formConfig = {
