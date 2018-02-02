@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
+import FormLogger from '../util/formLogger';
 import FormActivitiesStart from '../components/FormActivitiesStart';
 
 class ActivitiesStart extends Component {
@@ -17,6 +18,7 @@ class ActivitiesStart extends Component {
 
     return (
       <Box py={4}>
+        <FormLogger />
         <Heading mb={3}>Now let’s go over your program activities</Heading>
         <FormActivitiesStart onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />

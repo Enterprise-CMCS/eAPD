@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Box, Button, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
+import FormLogger from '../util/formLogger';
 
 import FormStateStart from '../components/FormStateStart';
 
@@ -17,6 +18,7 @@ class StateStart extends Component {
 
     return (
       <Box py={4}>
+        <FormLogger />
         <Heading mb={3}>Let’s start by setting up your state profile</Heading>
         <FormStateStart onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
@@ -30,7 +32,6 @@ StateStart.propTypes = {
   goTo: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ goTo: path => push(path) }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ goTo: path => push(path) }, dispatch);
 
 export default connect(null, mapDispatchToProps)(StateStart);
