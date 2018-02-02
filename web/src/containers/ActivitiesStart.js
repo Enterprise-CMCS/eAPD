@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, Divider, Heading } from 'rebass';
+import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import Form4 from '../components/Form4';
+import FormActivitiesStart from '../components/FormActivitiesStart';
 
 class ActivitiesStart extends Component {
   showResults = data => {
@@ -17,9 +17,12 @@ class ActivitiesStart extends Component {
 
     return (
       <Box py={4}>
-        <Heading>Now let’s go over your program activities</Heading>
-        <Form4 onSubmit={this.showResults} />
+        <Heading mb={3}>Now let’s go over your program activities</Heading>
+        <FormActivitiesStart onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
+        <ButtonOutline onClick={() => goTo('/apd-overview')}>
+          Back
+        </ButtonOutline>{' '}
         <Button onClick={() => goTo('/state-start')}>Continue</Button>
       </Box>
     );
