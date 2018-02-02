@@ -45,6 +45,10 @@ ShallowWrapper {
           />
           <Route
             component={[Function]}
+            path="/activities-start"
+          />
+          <Route
+            component={[Function]}
             path="/apd-overview"
           />
           <Route
@@ -127,6 +131,10 @@ ShallowWrapper {
             />,
             <Route
               component={[Function]}
+              path="/activities-start"
+            />,
+            <Route
+              component={[Function]}
               path="/apd-overview"
             />,
             <Route
@@ -150,6 +158,18 @@ ShallowWrapper {
               "component": [Function],
               "exact": true,
               "path": "/",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "component": [Function],
+              "path": "/activities-start",
             },
             "ref": null,
             "rendered": null,
@@ -228,6 +248,10 @@ ShallowWrapper {
               component={[Function]}
               exact={true}
               path="/"
+            />
+            <Route
+              component={[Function]}
+              path="/activities-start"
             />
             <Route
               component={[Function]}
@@ -313,6 +337,10 @@ ShallowWrapper {
               />,
               <Route
                 component={[Function]}
+                path="/activities-start"
+              />,
+              <Route
+                component={[Function]}
                 path="/apd-overview"
               />,
               <Route
@@ -336,6 +364,18 @@ ShallowWrapper {
                 "component": [Function],
                 "exact": true,
                 "path": "/",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/activities-start",
               },
               "ref": null,
               "rendered": null,

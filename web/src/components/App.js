@@ -4,6 +4,7 @@ import { Container, NavLink, Provider, Toolbar } from 'rebass';
 
 import Demo from './Demo';
 import DevProvider from './DevProvider';
+import ActivitiesStart from '../containers/ActivitiesStart';
 import ApdOverview from '../containers/ApdOverview';
 import StateContacts from '../containers/StateContacts';
 import StateStart from '../containers/StateStart';
@@ -23,6 +24,7 @@ const App = () => (
 
     <Container is="main">
       <Route exact path="/" component={Demo} />
+      <Route path="/activities-start" component={ActivitiesStart} />
       <Route path="/apd-overview" component={ApdOverview} />
       <Route path="/state-start" component={StateStart} />
       <Route path="/state-contacts" component={StateContacts} />
