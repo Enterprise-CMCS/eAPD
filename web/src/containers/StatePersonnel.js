@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import { Box, Button, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
+import Dollars from '../components/Dollars';
 import PersonnelForm from '../components/FormPersonnel';
 
 class StatePersonnel extends Component {
@@ -54,9 +55,9 @@ class StatePersonnel extends Component {
               </td>
               <td>State personnel</td>
               <td>2019</td>
-              <td>{stateNextTotal}</td>
+              <td><Dollars value={stateNextTotal} hideCents /></td>
               <td>2020</td>
-              <td>{stateNextNextTotal}</td>
+              <td><Dollars value={stateNextNextTotal} hideCents /></td>
             </tr>
             <tr>
               <td>
@@ -64,9 +65,9 @@ class StatePersonnel extends Component {
               </td>
               <td>Contracting personnel</td>
               <td>2019</td>
-              <td>{contractingNextTotal}</td>
+              <td><Dollars value={contractingNextTotal} hideCents /></td>
               <td>2020</td>
-              <td>{contractingNextNextTotal}</td>
+              <td><Dollars value={contractingNextNextTotal} hideCents /></td>
             </tr>
           </tbody>
         </table>

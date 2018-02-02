@@ -36,6 +36,7 @@
   "homepage": "https://github.com/18F/cms-hitech-apd#readme",
   "dependencies": {
     "history": "^4.7.2",
+    "numeral": "^2.0.6",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
