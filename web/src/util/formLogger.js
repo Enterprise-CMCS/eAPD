@@ -6,20 +6,22 @@ const user = (new Date()).toString();
 const apiURL = process.env.API_URL;
 
 const FormLogger = ({ form }) => {
-  if (timeout) {
-    clearTimeout(timeout);
-  }
-  timeout = setTimeout(() => {
-    const formValues = {};
-    Object.keys(form).forEach(formKey => {
-      formValues[formKey] = form[formKey].values;
-    });
+  if (process.env.LOG_FORM_INTERACTIONS) {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => {
+      const formValues = {};
+      Object.keys(form).forEach(formKey => {
+        formValues[formKey] = form[formKey].values;
+      });
 
-    axios
-      .post(`${apiURL}/log-form`, { user, form: formValues })
-      .then(() => { timeout = null; })
-      .catch(() => { timeout = null; });
-  }, 2000);
+      axios
+        .post(`${apiURL}/log-form`, { user, form: formValues })
+        .then(() => { timeout = null; })
+        .catch(() => { timeout = null; });
+    }, 2000);
+  }
   return null;
 };
 

@@ -19,6 +19,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.EnvironmentPlugin(['API_URL'])
+    new webpack.EnvironmentPlugin({
+      API_URL: null,
+      LOG_FORM_INTERACTIONS: false
+    })
   ]
 };
