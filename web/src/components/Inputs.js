@@ -13,7 +13,9 @@ const makeInput = InputInner => {
     type
   }) => (
     <Box mb={3}>
-      <Label htmlFor={name} className={hideLabel ? 'sr-only' : ''}>{label}</Label>
+      <Label htmlFor={name} className={hideLabel ? 'sr-only' : ''}>
+        {label}
+      </Label>
       <InputInner id={name} type={type} {...rest} />
       {touched && error && <span>{error}</span>}
     </Box>
