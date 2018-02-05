@@ -10,7 +10,9 @@ const formats = {
 export default function Dollars(props) {
   return (
     <span className={`dollar ${props.className}`}>
-      {numeral(props.value).format(props.hideCents ? formats.noCents : formats.cents)}
+      {numeral(props.value).format(
+        props.hideCents ? formats.noCents : formats.cents
+      )}
     </span>
   );
 }

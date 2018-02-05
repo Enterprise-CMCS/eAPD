@@ -55,9 +55,13 @@ class StatePersonnel extends Component {
               </td>
               <td>State personnel</td>
               <td>2019</td>
-              <td><Dollars value={stateNextTotal} hideCents /></td>
+              <td>
+                <Dollars value={stateNextTotal} hideCents />
+              </td>
               <td>2020</td>
-              <td><Dollars value={stateNextNextTotal} hideCents /></td>
+              <td>
+                <Dollars value={stateNextNextTotal} hideCents />
+              </td>
             </tr>
             <tr>
               <td>
@@ -65,9 +69,13 @@ class StatePersonnel extends Component {
               </td>
               <td>Contracting personnel</td>
               <td>2019</td>
-              <td><Dollars value={contractingNextTotal} hideCents /></td>
+              <td>
+                <Dollars value={contractingNextTotal} hideCents />
+              </td>
               <td>2020</td>
-              <td><Dollars value={contractingNextNextTotal} hideCents /></td>
+              <td>
+                <Dollars value={contractingNextNextTotal} hideCents />
+              </td>
             </tr>
           </tbody>
         </table>
