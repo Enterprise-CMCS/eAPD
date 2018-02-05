@@ -3,7 +3,7 @@ import axios from 'axios';
 
 let timeout;
 const user = (new Date()).toString();
-const apiURL = 'http://localhost:8081';
+const apiURL = process.env.API_URL;
 
 const FormLogger = ({ form }) => {
   if (timeout) {
