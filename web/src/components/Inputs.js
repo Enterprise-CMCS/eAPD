@@ -2,13 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Box, Input, Label, Textarea } from 'rebass';
 
-const offscreenStyle = {
-  position: 'absolute',
-  left: '-1000em',
-  width: '1em',
-  overflow: 'hidden'
-};
-
 // a HOC for Text / Textarea input that includes
 // rebass components and accompanying label
 const makeInput = InputInner => {
@@ -20,7 +13,7 @@ const makeInput = InputInner => {
     type
   }) => (
     <Box mb={3}>
-      <Label htmlFor={name} style={hideLabel ? offscreenStyle : { }}>{label}</Label>
+      <Label htmlFor={name} className={hideLabel ? 'sr-only' : ''}>{label}</Label>
       <InputInner id={name} type={type} {...rest} />
       {touched && error && <span>{error}</span>}
     </Box>
