@@ -4,7 +4,7 @@
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
   "scripts": {
-    "scaffold": "mkdir -p dist && cp src/index.html dist/",
+    "scaffold": "mkdir -p dist && cp src/index.html dist/ && cp ../Staticfile dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --host 0.0.0.0 --port 8001 --history-api-fallback --content-base src/",
@@ -39,6 +39,7 @@
     "babel-polyfill": "^6.26.0",
     "history": "^4.7.2",
     "lodash.kebabcase": "^4.1.1",
+    "numeral": "^2.0.6",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
