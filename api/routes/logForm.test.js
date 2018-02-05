@@ -45,18 +45,19 @@ tap.test('form logger endpoint', async endpointTest => {
   });
 
   endpointTest.test('logger POST endpoint', async postTest => {
-    post({
-      body: {
-        user: 'theUser',
-        form: {
-          field1: 'value1',
-          field2: 'value2',
-          field3: [
-            'value3a', 'value3b', 'value3c'
-          ]
+    post(
+      {
+        body: {
+          user: 'theUser',
+          form: {
+            field1: 'value1',
+            field2: 'value2',
+            field3: ['value3a', 'value3b', 'value3c']
+          }
         }
-      }
-    }, res);
+      },
+      res
+    );
 
     postTest.ok(res.status.calledWith(200), 'sends a 200 HTTP status');
     postTest.ok(res.end.calledOnce, 'response is ended');
@@ -66,14 +67,16 @@ tap.test('form logger endpoint', async endpointTest => {
     get(null, res);
 
     getTest.ok(res.send.calledOnce, 'a response body is sent');
-    getTest.same(res.send.args[0][0], {
-      theUser: {
-        field1: 'value1',
-        field2: 'value2',
-        field3: [
-          'value3a', 'value3b', 'value3c'
-        ]
-      }
-    }, 'sends back the expected form content');
+    getTest.same(
+      res.send.args[0][0],
+      {
+        theUser: {
+          field1: 'value1',
+          field2: 'value2',
+          field3: ['value3a', 'value3b', 'value3c']
+        }
+      },
+      'sends back the expected form content'
+    );
   });
 });

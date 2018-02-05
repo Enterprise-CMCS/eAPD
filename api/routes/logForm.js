@@ -1,4 +1,4 @@
-const forms = { };
+const forms = {};
 
 module.exports = app => {
   app.post('/log-form', async (req, res) => {
