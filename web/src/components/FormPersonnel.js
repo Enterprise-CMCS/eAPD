@@ -55,7 +55,7 @@ const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
                 label="2019 compensation"
                 name={`${person}.nextCompensation`}
                 component={Input}
-                parse={value => Number(value)}
+                parse={value => +value}
                 format={value => `${value}`}
                 type="number"
               />
@@ -66,7 +66,7 @@ const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
                 label="2019 percentage time"
                 name={`${person}.nextTime`}
                 component={Input}
-                parse={value => Number(value)}
+                parse={value => +value}
                 format={value => `${value}`}
                 type="number"
               />
@@ -78,7 +78,7 @@ const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
                 label="2020 percentage time"
                 name={`${person}.nextNextTime`}
                 component={Input}
-                parse={value => Number(value)}
+                parse={value => +value}
                 format={value => `${value}`}
                 type="number"
               />
