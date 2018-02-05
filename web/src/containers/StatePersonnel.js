@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import { Box, Button, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
+import FormLogger from '../util/formLogger';
 import Dollars from '../components/Dollars';
 import PersonnelForm from '../components/FormPersonnel';
 
@@ -42,6 +43,7 @@ class StatePersonnel extends Component {
 
     return (
       <Box py={4}>
+        <FormLogger />
         <Heading>Personnel costs for Administration</Heading>
         Most activities include costs for state and contracting personnel. You
         may also want to hire consultants for legal services or outreach, for
