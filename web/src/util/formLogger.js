@@ -25,8 +25,6 @@ const FormLogger = ({ form }) => {
   return null;
 };
 
-const mapStateToProps = state => ({
-  form: state.form
-});
+const mapStateToProps = ({ form }) => ({ form });
 
 export default connect(mapStateToProps)(FormLogger);
