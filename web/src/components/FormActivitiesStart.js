@@ -1,10 +1,10 @@
-import kebabCase from 'lodash.kebabcase';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import CheckboxGroup from './CheckboxGroup';
 import SectionHeader from './SectionHeader';
+import { stringsToFormOptions } from '../util/helpers';
 
 // TODO(bren): activities (and activityOptions) should probably
 // live somewhere else, just not sure where yet...
@@ -19,10 +19,7 @@ const activities = [
   'Medicaid Information Technology Architecture State Self Assessment (MITA SS-A)'
 ];
 
-const activityOptions = activities.map(activity => ({
-  value: kebabCase(activity),
-  label: activity
-}));
+const activityOptions = stringsToFormOptions(activities);
 
 const FormActivitiesStart = ({ handleSubmit }) => (
   <form onSubmit={handleSubmit}>
