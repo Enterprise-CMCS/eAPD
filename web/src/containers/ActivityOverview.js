@@ -24,7 +24,9 @@ class ActivityOverview extends Component {
         </Heading>
         <FormActivityOverview onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />
-        <ButtonOutline onClick={() => goTo('#!')}>Back</ButtonOutline>{' '}
+        <ButtonOutline onClick={() => goTo('/activities-list')}>
+          Back
+        </ButtonOutline>{' '}
         <Button onClick={() => goTo('#!')}>Continue</Button>
       </Box>
     );

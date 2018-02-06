@@ -54,6 +54,10 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
+              path="/activity-overview"
+            />
+            <Route
+              component={[Function]}
               path="/apd-overview"
             />
             <Route
@@ -152,6 +156,10 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
+              path="/activity-overview"
+            />
+            <Route
+              component={[Function]}
               path="/apd-overview"
             />
             <Route
@@ -191,6 +199,10 @@ ShallowWrapper {
               <Route
                 component={[Function]}
                 path="/activities-list"
+              />,
+              <Route
+                component={[Function]}
+                path="/activity-overview"
               />,
               <Route
                 component={[Function]}
@@ -247,6 +259,18 @@ ShallowWrapper {
               "props": Object {
                 "component": [Function],
                 "path": "/activities-list",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/activity-overview",
               },
               "ref": null,
               "rendered": null,
@@ -362,6 +386,10 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
+                path="/activity-overview"
+              />
+              <Route
+                component={[Function]}
                 path="/apd-overview"
               />
               <Route
@@ -460,6 +488,10 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
+                path="/activity-overview"
+              />
+              <Route
+                component={[Function]}
                 path="/apd-overview"
               />
               <Route
@@ -499,6 +531,10 @@ ShallowWrapper {
                 <Route
                   component={[Function]}
                   path="/activities-list"
+                />,
+                <Route
+                  component={[Function]}
+                  path="/activity-overview"
                 />,
                 <Route
                   component={[Function]}
@@ -555,6 +591,18 @@ ShallowWrapper {
                 "props": Object {
                   "component": [Function],
                   "path": "/activities-list",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "path": "/activity-overview",
                 },
                 "ref": null,
                 "rendered": null,

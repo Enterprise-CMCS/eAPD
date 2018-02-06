@@ -10,8 +10,8 @@ import { bindActionCreators } from 'redux';
 // TODO(bren): update href for "Administration" entry once
 // that page is created
 const activities = [
-  ['Administration', 'Edit', '#!'],
-  ['Designing and Building HIE System', 'Start', '#!'],
+  ['Administration', 'Start', '/activity-overview'],
+  ['Designing and Building HIE System', 'Edit', '#!'],
   ['Technical Assistance', 'Start', '#!'],
   ['Outreach', 'Start', '#!']
 ];
