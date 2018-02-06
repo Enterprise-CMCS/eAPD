@@ -51,7 +51,8 @@ const formConfig = {
       'outreach',
       'design-and-development'
     ]
-  }
+  },
+  destroyOnUnmount: false
 };
 
 export default reduxForm(formConfig)(FormActivitiesStart);

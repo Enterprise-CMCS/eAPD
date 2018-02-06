@@ -34,6 +34,15 @@ purple button you click when you want the UX testing instance to update.
 This allows us to put designers and UX testers in charge of that environment
 without requiring that they know git or Github.
 
+##### Form logging
+
+To help with UX testing, we log everything that users into into the forms
+as they go.  This is only enabled in the UX environment - in order to enable
+form logging on the frontend, the `LOG_FORM_INTERACTIONS` environment
+variable must be set to a truthy value when the frontend code is compiled.
+See our [front end build documentation](frontend-build.md) for more information
+about build-time environment variables.
+
 ### Staging instance
 
 The staging instance deploys automatically with every commit to the `master`
