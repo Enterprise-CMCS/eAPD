@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import FormLogger from '../util/formLogger';
 import FormApproach from '../components/FormApproach';
 
-class StateContacts extends Component {
+class Approach extends Component {
   showResults = data => {
     console.log(data);
   };
@@ -33,11 +33,11 @@ class StateContacts extends Component {
   }
 }
 
-StateContacts.propTypes = {
+Approach.propTypes = {
   goTo: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(StateContacts);
+export default connect(null, mapDispatchToProps)(Approach);
