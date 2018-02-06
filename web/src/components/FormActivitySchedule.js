@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Button, Flex } from 'rebass';
+import { Box, Button } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { Input } from './Inputs';
