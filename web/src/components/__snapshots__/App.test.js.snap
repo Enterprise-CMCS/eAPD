@@ -74,6 +74,10 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
+              path="/goals-and-objectives"
+            />
+            <Route
+              component={[Function]}
             />
           </Switch>
         </Styled(Styled(Base))>,
@@ -176,6 +180,10 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
+              path="/goals-and-objectives"
+            />
+            <Route
+              component={[Function]}
             />
           </Switch>,
           "is": "main",
@@ -219,6 +227,10 @@ ShallowWrapper {
               <Route
                 component={[Function]}
                 path="/approach"
+              />,
+              <Route
+                component={[Function]}
+                path="/goals-and-objectives"
               />,
               <Route
                 component={[Function]}
@@ -330,6 +342,18 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
+                "path": "/goals-and-objectives",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
               },
               "ref": null,
               "rendered": null,
@@ -403,6 +427,10 @@ ShallowWrapper {
               <Route
                 component={[Function]}
                 path="/approach"
+              />
+              <Route
+                component={[Function]}
+                path="/goals-and-objectives"
               />
               <Route
                 component={[Function]}
@@ -508,6 +536,10 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
+                path="/goals-and-objectives"
+              />
+              <Route
+                component={[Function]}
               />
             </Switch>,
             "is": "main",
@@ -551,6 +583,10 @@ ShallowWrapper {
                 <Route
                   component={[Function]}
                   path="/approach"
+                />,
+                <Route
+                  component={[Function]}
+                  path="/goals-and-objectives"
                 />,
                 <Route
                   component={[Function]}
@@ -651,6 +687,18 @@ ShallowWrapper {
                 "props": Object {
                   "component": [Function],
                   "path": "/approach",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "path": "/goals-and-objectives",
                 },
                 "ref": null,
                 "rendered": null,
