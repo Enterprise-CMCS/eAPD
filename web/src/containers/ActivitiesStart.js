@@ -23,7 +23,7 @@ class ActivitiesStart extends Component {
         <ButtonOutline onClick={() => goTo('/apd-overview')}>
           Back
         </ButtonOutline>{' '}
-        <Button onClick={() => goTo('/state-personnel')}>Continue</Button>
+        <Button onClick={() => goTo('/activities-list')}>Continue</Button>
       </Box>
     );
   }
