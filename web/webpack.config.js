@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -16,5 +17,11 @@ module.exports = {
         use: { loader: 'babel-loader' }
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.EnvironmentPlugin({
+      API_URL: null,
+      LOG_FORM_INTERACTIONS: false
+    })
+  ]
 };

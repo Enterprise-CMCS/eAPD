@@ -24,6 +24,7 @@ require('./routes');
 require('./routes/users');
 require('./routes/users/get');
 require('./routes/users/post');
+require('./routes/logForm');
 
 // fin
 

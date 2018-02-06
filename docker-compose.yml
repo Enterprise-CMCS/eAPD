@@ -12,6 +12,8 @@ services:
 
   web:
     build: ./web
+    environment:
+      - API_URL=http://localhost:8081
     volumes:
       - ./web:/app
       - /app/node_modules

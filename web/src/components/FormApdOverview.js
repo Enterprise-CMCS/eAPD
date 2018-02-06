@@ -24,7 +24,8 @@ FormApdOverview.propTypes = {
 };
 
 const formConfig = {
-  form: 'apdOverview'
+  form: 'apdOverview',
+  destroyOnUnmount: false
 };
 
 export default reduxForm(formConfig)(FormApdOverview);
