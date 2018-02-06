@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
+import FormLogger from '../util/formLogger';
 import FormApdOverview from '../components/FormApdOverview';
 
 class ApdOverview extends Component {
@@ -17,6 +18,7 @@ class ApdOverview extends Component {
 
     return (
       <Box py={4}>
+        <FormLogger />
         <Heading mb={3}>Tell us more about your HITECH program</Heading>
         <FormApdOverview onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />

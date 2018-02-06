@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
+import FormLogger from '../util/formLogger';
 import FormStateContacts from '../components/FormStateContacts';
 
 class StateContacts extends Component {
@@ -17,6 +18,7 @@ class StateContacts extends Component {
 
     return (
       <Box py={4}>
+        <FormLogger />
         <Heading mb={3}>Review your state contact information</Heading>
         <FormStateContacts onSubmit={this.showResults} />
         <Divider my={4} color="gray2" />

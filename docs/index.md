@@ -16,6 +16,10 @@ libraries:
 * [Redux](https://redux.js.org/) for internal state management
 * [Webpack](https://webpack.js.org/) for bundling the app into a deliverable
 
+(We have more detailed
+[documentation about how our frontend build is configured](frontend-build.md),
+too).
+
 We use [Rebass](http://jxnblk.com/rebass/) as the foundation for styling, with
 custom [styled-components](https://www.styled-components.com/) for customization
 where appropriate.
@@ -33,6 +37,7 @@ The API is built on [Express](https://expressjs.com/) using a
   cookie-based sessions
 * [Passport](http://www.passportjs.org/) for authentication
 * [Knex](http://knexjs.org/) for interacting with the database
+* [Bookshelf.js](http://bookshelfjs.org) for managing database relationships
 
 For testing, we use [node-tap](http://www.node-tap.org/) as the runner and
 assertions, and [Sinon.JS](sinonjs.org) for mocking.
