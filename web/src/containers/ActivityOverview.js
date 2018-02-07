@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
+import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormLogger from '../util/formLogger';
 import FormActivityOverview from '../components/FormActivityOverview';
+import PageNavButtons from '../components/PageNavButtons';
 
 class ActivityOverview extends Component {
   showResults = data => {
@@ -23,11 +24,11 @@ class ActivityOverview extends Component {
           Tell us more about your plans for <em>Administration</em>
         </Heading>
         <FormActivityOverview onSubmit={this.showResults} />
-        <Divider my={4} color="gray2" />
-        <ButtonOutline onClick={() => goTo('/activities-list')}>
-          Back
-        </ButtonOutline>{' '}
-        <Button onClick={() => goTo('#!')}>Continue</Button>
+        <PageNavButtons
+          goTo={goTo}
+          prev="/activities-list"
+          next="/activity-goals"
+        />
       </Box>
     );
   }

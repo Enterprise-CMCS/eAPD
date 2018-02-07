@@ -46,11 +46,19 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
+              path="/activities-list"
+            />
+            <Route
+              component={[Function]}
               path="/activities-start"
             />
             <Route
               component={[Function]}
-              path="/activities-list"
+              path="/activity-approach"
+            />
+            <Route
+              component={[Function]}
+              path="/activity-goals"
             />
             <Route
               component={[Function]}
@@ -62,10 +70,6 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
-              path="/state-start"
-            />
-            <Route
-              component={[Function]}
               path="/state-contacts"
             />
             <Route
@@ -74,11 +78,7 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
-              path="/approach"
-            />
-            <Route
-              component={[Function]}
-              path="/goals-and-objectives"
+              path="/state-start"
             />
             <Route
               component={[Function]}
@@ -156,11 +156,19 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
+              path="/activities-list"
+            />
+            <Route
+              component={[Function]}
               path="/activities-start"
             />
             <Route
               component={[Function]}
-              path="/activities-list"
+              path="/activity-approach"
+            />
+            <Route
+              component={[Function]}
+              path="/activity-goals"
             />
             <Route
               component={[Function]}
@@ -172,10 +180,6 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
-              path="/state-start"
-            />
-            <Route
-              component={[Function]}
               path="/state-contacts"
             />
             <Route
@@ -184,11 +188,7 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
-              path="/approach"
-            />
-            <Route
-              component={[Function]}
-              path="/goals-and-objectives"
+              path="/state-start"
             />
             <Route
               component={[Function]}
@@ -210,11 +210,19 @@ ShallowWrapper {
               />,
               <Route
                 component={[Function]}
+                path="/activities-list"
+              />,
+              <Route
+                component={[Function]}
                 path="/activities-start"
               />,
               <Route
                 component={[Function]}
-                path="/activities-list"
+                path="/activity-approach"
+              />,
+              <Route
+                component={[Function]}
+                path="/activity-goals"
               />,
               <Route
                 component={[Function]}
@@ -226,10 +234,6 @@ ShallowWrapper {
               />,
               <Route
                 component={[Function]}
-                path="/state-start"
-              />,
-              <Route
-                component={[Function]}
                 path="/state-contacts"
               />,
               <Route
@@ -238,11 +242,7 @@ ShallowWrapper {
               />,
               <Route
                 component={[Function]}
-                path="/approach"
-              />,
-              <Route
-                component={[Function]}
-                path="/goals-and-objectives"
+                path="/state-start"
               />,
               <Route
                 component={[Function]}
@@ -270,6 +270,18 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
+                "path": "/activities-list",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
                 "path": "/activities-start",
               },
               "ref": null,
@@ -282,7 +294,19 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "path": "/activities-list",
+                "path": "/activity-approach",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/activity-goals",
               },
               "ref": null,
               "rendered": null,
@@ -318,18 +342,6 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "path": "/state-start",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "component": [Function],
                 "path": "/state-contacts",
               },
               "ref": null,
@@ -354,19 +366,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "path": "/approach",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "component": [Function],
-                "path": "/goals-and-objectives",
+                "path": "/state-start",
               },
               "ref": null,
               "rendered": null,
@@ -426,11 +426,19 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
+                path="/activities-list"
+              />
+              <Route
+                component={[Function]}
                 path="/activities-start"
               />
               <Route
                 component={[Function]}
-                path="/activities-list"
+                path="/activity-approach"
+              />
+              <Route
+                component={[Function]}
+                path="/activity-goals"
               />
               <Route
                 component={[Function]}
@@ -442,10 +450,6 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
-                path="/state-start"
-              />
-              <Route
-                component={[Function]}
                 path="/state-contacts"
               />
               <Route
@@ -454,11 +458,7 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
-                path="/approach"
-              />
-              <Route
-                component={[Function]}
-                path="/goals-and-objectives"
+                path="/state-start"
               />
               <Route
                 component={[Function]}
@@ -536,11 +536,19 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
+                path="/activities-list"
+              />
+              <Route
+                component={[Function]}
                 path="/activities-start"
               />
               <Route
                 component={[Function]}
-                path="/activities-list"
+                path="/activity-approach"
+              />
+              <Route
+                component={[Function]}
+                path="/activity-goals"
               />
               <Route
                 component={[Function]}
@@ -552,10 +560,6 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
-                path="/state-start"
-              />
-              <Route
-                component={[Function]}
                 path="/state-contacts"
               />
               <Route
@@ -564,11 +568,7 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
-                path="/approach"
-              />
-              <Route
-                component={[Function]}
-                path="/goals-and-objectives"
+                path="/state-start"
               />
               <Route
                 component={[Function]}
@@ -590,11 +590,19 @@ ShallowWrapper {
                 />,
                 <Route
                   component={[Function]}
+                  path="/activities-list"
+                />,
+                <Route
+                  component={[Function]}
                   path="/activities-start"
                 />,
                 <Route
                   component={[Function]}
-                  path="/activities-list"
+                  path="/activity-approach"
+                />,
+                <Route
+                  component={[Function]}
+                  path="/activity-goals"
                 />,
                 <Route
                   component={[Function]}
@@ -606,10 +614,6 @@ ShallowWrapper {
                 />,
                 <Route
                   component={[Function]}
-                  path="/state-start"
-                />,
-                <Route
-                  component={[Function]}
                   path="/state-contacts"
                 />,
                 <Route
@@ -618,11 +622,7 @@ ShallowWrapper {
                 />,
                 <Route
                   component={[Function]}
-                  path="/approach"
-                />,
-                <Route
-                  component={[Function]}
-                  path="/goals-and-objectives"
+                  path="/state-start"
                 />,
                 <Route
                   component={[Function]}
@@ -650,6 +650,18 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
+                  "path": "/activities-list",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
                   "path": "/activities-start",
                 },
                 "ref": null,
@@ -662,7 +674,19 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
-                  "path": "/activities-list",
+                  "path": "/activity-approach",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "path": "/activity-goals",
                 },
                 "ref": null,
                 "rendered": null,
@@ -698,18 +722,6 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
-                  "path": "/state-start",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "component": [Function],
                   "path": "/state-contacts",
                 },
                 "ref": null,
@@ -734,19 +746,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
-                  "path": "/approach",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "component": [Function],
-                  "path": "/goals-and-objectives",
+                  "path": "/state-start",
                 },
                 "ref": null,
                 "rendered": null,
