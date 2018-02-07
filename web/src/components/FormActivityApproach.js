@@ -1,47 +1,49 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Button, Flex } from 'rebass';
+import { Absolute, Box, Button, Relative } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
-import { Input } from './Inputs';
+import { Textarea } from './Inputs';
 import SectionHeader from './SectionHeader';
 
+const entryShell = { approach: '', alternatives: '', explanation: '' };
+
 const Approaches = ({ fields, meta: { error, submitFailed } }) => (
-  <Box mt={4}>
+  <Box>
     {fields.map((approach, idx) => (
       <Box mb={4} key={approach}>
-        <Flex wrap mx={-2}>
-          <Box p={2} w={[1, 1 / 3]}>
-            <Field
-              name={`${approach}.approach`}
-              component={Input}
-              label={`Approach ${idx + 1}`}
-            />
-            <Box ml={4}>
-              <Field
-                name={`${approach}.alternatives`}
-                component={Input}
-                label="Describe the alternatives"
-              />
-              <Field
-                name={`${approach}.explanation`}
-                component={Input}
-                label="Tell us why you chose this approach"
-              />
-            </Box>
-          </Box>
-        </Flex>
-        <button
-          type="button"
-          title="Remove approach"
-          onClick={() => fields.remove(idx)}
-        >
-          Remove approach
-        </button>
+        <Relative>
+          <Absolute right>
+            <button
+              type="button"
+              title="Remove Goal"
+              onClick={() => fields.remove(idx)}
+            >
+              Remove approach
+            </button>
+          </Absolute>
+          <SectionHeader>Approach #{idx + 1}:</SectionHeader>
+        </Relative>
+
+        <Field
+          name={`${approach}.approach`}
+          component={Textarea}
+          label="Approach"
+        />
+        <Field
+          name={`${approach}.alternatives`}
+          component={Textarea}
+          label="Describe the alternatives"
+        />
+        <Field
+          name={`${approach}.explanation`}
+          component={Textarea}
+          label="Tell us why you chose this approach"
+        />
       </Box>
     ))}
     <Box>
-      <Button bg="black" onClick={() => fields.push({})}>
+      <Button bg="black" onClick={() => fields.push({ ...entryShell })}>
         Add another approach
       </Button>
       {submitFailed && error && <div>{error}</div>}
@@ -91,7 +93,7 @@ FormActivityApproach.propTypes = {
 const formConfig = {
   form: 'activityApproach',
   initialValues: {
-    approaches: [{ approach: '', alternatives: '', explanation: '' }]
+    approaches: [{ ...entryShell }]
   },
   destroyOnUnmount: false
 };

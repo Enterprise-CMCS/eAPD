@@ -21,7 +21,7 @@ const FormStateStart = ({ handleSubmit, pristine, reset, submitting }) => (
       label="Phone number"
     />
 
-    <SectionHeader>State:</SectionHeader>
+    <SectionHeader>Your state:</SectionHeader>
     <Field
       name="stateName"
       component={SelectInput}
