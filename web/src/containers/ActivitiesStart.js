@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
+import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormLogger from '../util/formLogger';
 import FormActivitiesStart from '../components/FormActivitiesStart';
+import PageNavButtons from '../components/PageNavButtons';
 
 class ActivitiesStart extends Component {
   showResults = data => {
@@ -21,11 +22,11 @@ class ActivitiesStart extends Component {
         <FormLogger />
         <Heading mb={3}>Now let’s go over your program activities</Heading>
         <FormActivitiesStart onSubmit={this.showResults} />
-        <Divider my={4} color="gray2" />
-        <ButtonOutline onClick={() => goTo('/apd-overview')}>
-          Back
-        </ButtonOutline>{' '}
-        <Button onClick={() => goTo('/activities-list')}>Continue</Button>
+        <PageNavButtons
+          goTo={goTo}
+          prev="/apd-overview"
+          next="/activities-list"
+        />
       </Box>
     );
   }
