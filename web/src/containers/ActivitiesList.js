@@ -3,7 +3,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link as RRLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
-import { Absolute, Border, Box, Button, Heading, Link, Relative } from 'rebass';
+import {
+  Absolute,
+  Border,
+  Box,
+  Button,
+  ButtonOutline,
+  Heading,
+  Link,
+  Relative,
+  Tooltip
+} from 'rebass';
 import { bindActionCreators } from 'redux';
 
 // [Activity name, Link text, Link href]
@@ -33,9 +43,12 @@ const ActivitiesList = ({ goTo }) => (
         </Border>
       ))}
     </Box>
-    <Button onClick={() => goTo('activities-start')}>
-      Add another activity
-    </Button>
+    <ButtonOutline mr={2} onClick={() => goTo('/activities-start')}>
+      Back
+    </ButtonOutline>
+    <Tooltip text="Coming soon!">
+      <Button>Add another activity</Button>
+    </Tooltip>
   </Box>
 );
 

@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, Divider, Heading } from 'rebass';
+import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 import FormLogger from '../util/formLogger';
 
 import FormStateStart from '../components/FormStateStart';
+import PageNavButtons from '../components/PageNavButtons';
 
 class StateStart extends Component {
   showResults = data => {
@@ -21,8 +22,7 @@ class StateStart extends Component {
         <FormLogger />
         <Heading mb={3}>Let’s start by setting up your state profile</Heading>
         <FormStateStart onSubmit={this.showResults} />
-        <Divider my={4} color="gray2" />
-        <Button onClick={() => goTo('/state-contacts')}>Continue</Button>
+        <PageNavButtons goTo={goTo} next="/state-contacts" />
       </Box>
     );
   }
@@ -32,6 +32,7 @@ StateStart.propTypes = {
   goTo: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ goTo: path => push(path) }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ goTo: path => push(path) }, dispatch);
 
 export default connect(null, mapDispatchToProps)(StateStart);
