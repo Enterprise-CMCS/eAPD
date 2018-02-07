@@ -34,62 +34,52 @@ Objectives.propTypes = {
   meta: PropTypes.object.isRequired
 };
 
-const Approaches = ({ fields, meta: { error, submitFailed } }) => (
+const Goals = ({ fields, meta: { error, submitFailed } }) => (
   <Box mt={4}>
-    {fields.map((approach, idx) => (
-      <Box mb={4} key={approach}>
+    {fields.map((goal, idx) => (
+      <Box mb={4} key={goal}>
+        <SectionHeader>Goal #{idx + 1}:</SectionHeader>
         <Flex wrap mx={-2}>
           <Box p={2} w={[1, 1 / 3]}>
             <Field
-              name={`${approach}.approach`}
+              name={`${goal}.description`}
               component={Input}
-              label={`Approach ${idx + 1}`}
+              label="Description"
             />
-            <Box ml={4}>
-              <Field
-                name={`${approach}.alternatives`}
-                component={Input}
-                label="Describe the alternatives"
-              />
-              <Field
-                name={`${approach}.explanation`}
-                component={Input}
-                label="Tell us why you chose this approach"
-              />
-            </Box>
+
+            <FieldArray name={`${goal}.objectives`} component={Objectives} />
           </Box>
         </Flex>
         <button
           type="button"
-          title="Remove approach"
+          title="Remove Goal"
           onClick={() => fields.remove(idx)}
         >
-          Remove approach
+          Remove goal
         </button>
       </Box>
     ))}
     <Box>
       <Button bg="black" onClick={() => fields.push({})}>
-        Add another approach
+        Add another goal
       </Button>
       {submitFailed && error && <div>{error}</div>}
     </Box>
   </Box>
 );
 
-Approaches.propTypes = {
+Goals.propTypes = {
   fields: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired
 };
 
-const FormApproach = ({ handleSubmit, pristine, reset, submitting }) => (
+const FormActivityGoals = ({ handleSubmit, pristine, reset, submitting }) => (
   <form onSubmit={handleSubmit}>
     <SectionHeader>
-      Describe any alternative approaches that you considered when planning this
-      activity. Which options did you decide against, and why?
+      List the goals you&apos;re hoping to accomplish as part of this activity:
     </SectionHeader>
 
-    <FieldArray name="approaches" component={Approaches} />
+    <FieldArray name="goals" component={Goals} />
 
     {false && (
       <div>
@@ -104,7 +94,7 @@ const FormApproach = ({ handleSubmit, pristine, reset, submitting }) => (
   </form>
 );
 
-FormApproach.propTypes = {
+FormActivityGoals.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   reset: PropTypes.func.isRequired,
@@ -112,11 +102,9 @@ FormApproach.propTypes = {
 };
 
 const formConfig = {
-  form: 'approach',
-  initialValues: {
-    approaches: [{ approach: '', alternatives: '', explanation: '' }]
-  },
+  form: 'activityGoals',
+  initialValues: { goals: [{ description: '', objectives: ['', ''] }] },
   destroyOnUnmount: false
 };
 
-export default reduxForm(formConfig)(FormApproach);
+export default reduxForm(formConfig)(FormActivityGoals);

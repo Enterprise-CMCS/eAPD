@@ -2,8 +2,12 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 let timeout;
-const user = (new Date()).toString();
+const user = new Date().toString();
 const apiURL = process.env.API_URL;
+
+const nullifyTimeout = () => {
+  timeout = null;
+};
 
 const FormLogger = ({ form }) => {
   if (process.env.LOG_FORM_INTERACTIONS) {
@@ -18,10 +22,11 @@ const FormLogger = ({ form }) => {
 
       axios
         .post(`${apiURL}/log-form`, { user, form: formValues })
-        .then(() => { timeout = null; })
-        .catch(() => { timeout = null; });
+        .then(nullifyTimeout)
+        .catch(nullifyTimeout);
     }, 2000);
   }
+
   return null;
 };
 

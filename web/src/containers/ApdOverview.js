@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
+import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormLogger from '../util/formLogger';
 import FormApdOverview from '../components/FormApdOverview';
+import PageNavButtons from '../components/PageNavButtons';
 
 class ApdOverview extends Component {
   showResults = data => {
@@ -21,11 +22,11 @@ class ApdOverview extends Component {
         <FormLogger />
         <Heading mb={3}>Tell us more about your HITECH program</Heading>
         <FormApdOverview onSubmit={this.showResults} />
-        <Divider my={4} color="gray2" />
-        <ButtonOutline onClick={() => goTo('/state-contacts')}>
-          Back
-        </ButtonOutline>{' '}
-        <Button onClick={() => goTo('/activities-start')}>Continue</Button>
+        <PageNavButtons
+          goTo={goTo}
+          prev="/state-contacts"
+          next="/activities-start"
+        />
       </Box>
     );
   }

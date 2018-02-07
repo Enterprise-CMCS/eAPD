@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
+import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormLogger from '../util/formLogger';
-import FormApproach from '../components/FormApproach';
+import FormActivityApproach from '../components/FormActivityApproach';
+import PageNavButtons from '../components/PageNavButtons';
 
-class Approach extends Component {
+class ActivityApproach extends Component {
   showResults = data => {
     console.log(data);
   };
@@ -20,24 +21,20 @@ class Approach extends Component {
       <Box py={4}>
         <FormLogger />
         <Heading mb={3}>
-          Help us understand your approach to Administration
+          Help us understand your approach to <em>Administration</em>
         </Heading>
-        <FormApproach onSubmit={this.showResults} />
-        <Divider my={4} color="gray2" />
-        <ButtonOutline onClick={() => goTo('/state-start')}>
-          Back
-        </ButtonOutline>{' '}
-        <Button onClick={() => goTo('/apd-overview')}>Continue</Button>
+        <FormActivityApproach onSubmit={this.showResults} />
+        <PageNavButtons goTo={goTo} prev="/activity-goals" next="#!" />
       </Box>
     );
   }
 }
 
-Approach.propTypes = {
+ActivityApproach.propTypes = {
   goTo: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(Approach);
+export default connect(null, mapDispatchToProps)(ActivityApproach);
