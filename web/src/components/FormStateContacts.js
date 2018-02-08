@@ -120,7 +120,7 @@ const formConfig = {
     },
     medicaidDirector: {
       name: 'First Last',
-      email: 'first.last@vermont.gov',
+      email: 'first.last@state.gov',
       phone: '555-123-4567'
     }
   },
