@@ -3,7 +3,7 @@ import React from 'react';
 import { Box, Heading } from 'rebass';
 
 import NavButton from '../../components/PageNavButtons';
-import { ExpenseCategory } from '../../components/Form/expenses';
+import { ExpenseCategory } from '../../components/Form/Expenses';
 
 const Edit = ({ goTo, next }) => (
   <Box>

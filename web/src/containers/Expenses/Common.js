@@ -3,7 +3,7 @@ import React from 'react';
 import { Box, Heading } from 'rebass';
 
 import NavButton from '../../components/PageNavButtons';
-import { CommonExpenses } from '../../components/Form/expenses';
+import { CommonExpenses } from '../../components/Form/Expenses';
 
 const Common = ({ goTo, next, prev }) => (
   <Box>
