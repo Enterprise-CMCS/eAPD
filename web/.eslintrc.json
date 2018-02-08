@@ -27,6 +27,7 @@
 
     // unnecessary due to prettier
     "function-paren-newline": "off",
+    "indent": "off",
     "object-curly-newline": "off"
   },
   "env": {

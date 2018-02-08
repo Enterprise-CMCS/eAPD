@@ -52,10 +52,10 @@ FormStateStart.propTypes = {
 const formConfig = {
   form: 'stateStart',
   initialValues: {
-    name: 'Denise Nagelschmidt',
-    position: 'Health Reform Portfolio Director',
-    email: 'denise.nagelschmidt@vermont.gov',
-    phone: '802-879-5900',
+    name: 'First Last',
+    position: 'Director',
+    email: 'first.last@state.gov',
+    phone: '555-123-4567',
     stateName: 'vt'
   },
   destroyOnUnmount: false

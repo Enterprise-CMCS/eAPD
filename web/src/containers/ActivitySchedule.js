@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, ButtonOutline, Divider, Heading } from 'rebass';
+import { Box, Button, Divider, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import FormLogger from '../util/formLogger';
 import FormActivitySchedule from '../components/FormActivitySchedule';
+import ButtonOutline from '../styles/ButtonOutline';
+import FormLogger from '../util/formLogger';
 
 class ActivitySchedule extends Component {
   showResults = data => {
