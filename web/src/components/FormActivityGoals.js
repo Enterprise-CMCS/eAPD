@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Absolute, Box, Button, ButtonOutline, Relative } from 'rebass';
+import { Absolute, Box, Button, Relative } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { Input, Textarea } from './Inputs';
 import SectionHeader from './SectionHeader';
+import ButtonOutline from '../styles/ButtonOutline';
 
 const entryShell = { description: '', objectives: ['', ''] };
 
