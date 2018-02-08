@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, ButtonOutline, Divider } from 'rebass';
+import { Button, Divider } from 'rebass';
+
+import ButtonOutline from '../styles/ButtonOutline';
 
 const PageNavButtons = ({ goTo, prev, next }) => (
   <div>

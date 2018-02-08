@@ -119,9 +119,9 @@ const formConfig = {
       zip: '05671-1010'
     },
     medicaidDirector: {
-      name: 'Cory Gustafson',
-      email: 'cory.gustafson@vermont.gov',
-      phone: '802-879‐5901'
+      name: 'First Last',
+      email: 'first.last@vermont.gov',
+      phone: '555-123-4567'
     }
   },
   destroyOnUnmount: false
