@@ -35,7 +35,11 @@ class ExpensesLanding extends Component {
           />
           <Route
             component={() => (
-              <CommonExpenses goTo={goTo} next={`${root}/list`} prev="/apd-overview" />
+              <CommonExpenses
+                goTo={goTo}
+                next={`${root}/list`}
+                prev="/apd-overview"
+              />
             )}
           />
         </Switch>
