@@ -35,9 +35,7 @@ ShallowWrapper {
             Get started
           </Styled(Styled(Base))>
         </Styled(Styled(Base))>,
-        <Styled(Styled(Base))
-          is="main"
-        >
+        <Styled(Styled(Base))>
           <Switch>
             <Route
               component={[Function]}
@@ -202,7 +200,6 @@ ShallowWrapper {
               component={[Function]}
             />
           </Switch>,
-          "is": "main",
         },
         "ref": null,
         "rendered": Object {
@@ -439,9 +436,7 @@ ShallowWrapper {
               Get started
             </Styled(Styled(Base))>
           </Styled(Styled(Base))>,
-          <Styled(Styled(Base))
-            is="main"
-          >
+          <Styled(Styled(Base))>
             <Switch>
               <Route
                 component={[Function]}
@@ -606,7 +601,6 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>,
-            "is": "main",
           },
           "ref": null,
           "rendered": Object {

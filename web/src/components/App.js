@@ -29,7 +29,7 @@ const App = () => (
       </NavLink>
     </Toolbar>
 
-    <Container is="main">
+    <Container>
       <Switch>
         <Route exact path="/" component={Demo} />
         <Route path="/activities-list" component={ActivitiesList} />
