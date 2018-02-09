@@ -10,8 +10,8 @@ API="https://api.fr.cloud.gov"
 ORG="sandbox-gsa"
 SPACE="michael.walker"
 
-API_URL="https://hitech-api-ux.app.cloud.gov/"
-LOG_FORM_INTERACTIONS="true"
+export API_URL="https://hitech-api-ux.app.cloud.gov/"
+export LOG_FORM_INTERACTIONS="true"
 
 # Install `cf` cli
 curl -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'

@@ -1,30 +1,34 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Button, Flex } from 'rebass';
+import { Absolute, Box, Button, Relative } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
-import { Input } from './Inputs';
+import { Input, Textarea } from './Inputs';
 import SectionHeader from './SectionHeader';
+import ButtonOutline from '../styles/ButtonOutline';
+
+const entryShell = { description: '', objectives: ['', ''] };
 
 const Objectives = ({ fields, meta: { error, submitFailed } }) => (
-  <Box mt={4} ml={4}>
-    <span>
-      Tell us how you&apos;ll know when you&apos;ve achieved this goal:
-    </span>
-
-    {fields.map((objective, idx) => (
-      <Field
-        key={objective}
-        name={objective}
-        component={Input}
-        label={`Objective ${idx + 1}`}
-      />
-    ))}
-    <Box>
-      <Button bg="black" onClick={() => fields.push({})}>
-        Add another objective
-      </Button>
-      {submitFailed && error && <div>{error}</div>}
+  <Box mb={4}>
+    <SectionHeader>
+      Tell us how you’ll know when you’ve achieved this goal:
+    </SectionHeader>
+    <Box pl={4}>
+      {fields.map((objective, idx) => (
+        <Field
+          key={objective}
+          name={objective}
+          component={Input}
+          label={`Objective ${idx + 1}`}
+        />
+      ))}
+      <Box>
+        <ButtonOutline color="black" onClick={() => fields.push('')}>
+          Add another objective
+        </ButtonOutline>
+        {submitFailed && error && <div>{error}</div>}
+      </Box>
     </Box>
   </Box>
 );
@@ -35,32 +39,31 @@ Objectives.propTypes = {
 };
 
 const Goals = ({ fields, meta: { error, submitFailed } }) => (
-  <Box mt={4}>
+  <Box>
     {fields.map((goal, idx) => (
-      <Box mb={4} key={goal}>
-        <SectionHeader>Goal #{idx + 1}:</SectionHeader>
-        <Flex wrap mx={-2}>
-          <Box p={2} w={[1, 1 / 3]}>
-            <Field
-              name={`${goal}.description`}
-              component={Input}
-              label="Description"
-            />
-
-            <FieldArray name={`${goal}.objectives`} component={Objectives} />
-          </Box>
-        </Flex>
-        <button
-          type="button"
-          title="Remove Goal"
-          onClick={() => fields.remove(idx)}
-        >
-          Remove goal
-        </button>
+      <Box mb={5} key={goal}>
+        <Relative>
+          <Absolute right>
+            <button
+              type="button"
+              title="Remove Goal"
+              onClick={() => fields.remove(idx)}
+            >
+              Remove goal
+            </button>
+          </Absolute>
+          <SectionHeader>Goal #{idx + 1}:</SectionHeader>
+        </Relative>
+        <Field
+          name={`${goal}.description`}
+          component={Textarea}
+          label="Description"
+        />
+        <FieldArray name={`${goal}.objectives`} component={Objectives} />
       </Box>
     ))}
     <Box>
-      <Button bg="black" onClick={() => fields.push({})}>
+      <Button bg="black" onClick={() => fields.push({ ...entryShell })}>
         Add another goal
       </Button>
       {submitFailed && error && <div>{error}</div>}
@@ -76,11 +79,9 @@ Goals.propTypes = {
 const FormActivityGoals = ({ handleSubmit, pristine, reset, submitting }) => (
   <form onSubmit={handleSubmit}>
     <SectionHeader>
-      List the goals you&apos;re hoping to accomplish as part of this activity:
+      List the goals you’re hoping to accomplish as part of this activity:
     </SectionHeader>
-
     <FieldArray name="goals" component={Goals} />
-
     {false && (
       <div>
         <button type="submit" disabled={submitting}>
@@ -103,7 +104,7 @@ FormActivityGoals.propTypes = {
 
 const formConfig = {
   form: 'activityGoals',
-  initialValues: { goals: [{ description: '', objectives: ['', ''] }] },
+  initialValues: { goals: [{ ...entryShell }] },
   destroyOnUnmount: false
 };
 

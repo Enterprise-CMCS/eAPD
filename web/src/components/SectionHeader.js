@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Text } from 'rebass';
+import { Measure } from 'rebass';
 
 const SectionHeader = ({ children }) => (
-  <Text mb={2} fontSize={3}>
+  <Measure mt={4} mb={3} fontSize={3}>
     {children}
-  </Text>
+  </Measure>
 );
 
 SectionHeader.propTypes = {

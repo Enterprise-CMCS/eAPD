@@ -12,13 +12,13 @@ const Contacts = ({ fields, meta: { error, submitFailed } }) => (
       <Box mb={4} key={idx}>
         <SectionHeader>Contact #{idx + 1}:</SectionHeader>
         <Flex wrap mx={-2}>
-          <Box p={2} w={[1, 1 / 3]}>
+          <Box px={2} w={[1, 1 / 3]}>
             <Field name={`${contact}.name`} component={Input} label="Name" />
           </Box>
-          <Box p={2} w={[1, 1 / 3]}>
+          <Box px={2} w={[1, 1 / 3]}>
             <Field name={`${contact}.title`} component={Input} label="Title" />
           </Box>
-          <Box p={2} w={[1, 1 / 3]}>
+          <Box px={2} w={[1, 1 / 3]}>
             <Field
               name={`${contact}.email`}
               type="email"
@@ -61,13 +61,13 @@ const FormStateContacts = ({ handleSubmit, pristine, reset, submitting }) => (
       <Field name="address1" component={Input} label="Address" />
       <Field name="address2" component={Input} label="Address (continued)" />
       <Flex wrap mx={-2}>
-        <Box p={2} w={[1, 1 / 2]}>
+        <Box px={2} w={[1, 1 / 2]}>
           <Field name="city" component={Input} label="City" />
         </Box>
-        <Box p={2} w={[1 / 2, 1 / 4]}>
+        <Box px={2} w={[1 / 2, 1 / 4]}>
           <Field name="state" component={Input} label="State" />
         </Box>
-        <Box p={2} w={[1 / 2, 1 / 4]}>
+        <Box px={2} w={[1 / 2, 1 / 4]}>
           <Field name="zip" component={Input} label="Zip" />
         </Box>
       </Flex>
@@ -119,9 +119,9 @@ const formConfig = {
       zip: '05671-1010'
     },
     medicaidDirector: {
-      name: 'Cory Gustafson',
-      email: 'cory.gustafson@vermont.gov',
-      phone: '802-879‐5901'
+      name: 'First Last',
+      email: 'first.last@state.gov',
+      phone: '555-123-4567'
     }
   },
   destroyOnUnmount: false
