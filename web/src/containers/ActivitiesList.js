@@ -8,13 +8,14 @@ import {
   Border,
   Box,
   Button,
-  ButtonOutline,
   Heading,
   Link,
   Relative,
   Tooltip
 } from 'rebass';
 import { bindActionCreators } from 'redux';
+
+import ButtonOutline from '../styles/ButtonOutline';
 
 // [Activity name, Link text, Link href]
 // TODO(bren): update href for "Administration" entry once

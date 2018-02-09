@@ -24,7 +24,11 @@ class ActivityApproach extends Component {
           Help us understand your approach to <em>Administration</em>
         </Heading>
         <FormActivityApproach onSubmit={this.showResults} />
-        <PageNavButtons goTo={goTo} prev="/activity-goals" next="#!" />
+        <PageNavButtons
+          goTo={goTo}
+          prev="/activity-goals"
+          next="/activities-list"
+        />
       </Box>
     );
   }
