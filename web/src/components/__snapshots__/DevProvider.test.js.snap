@@ -2,7 +2,7 @@
 
 exports[`the DevProvider component renders correctly 1`] = `
 <div
-  className="sc-EHOje hzBkDV"
+  className="sc-htpNat kTkzZs"
 >
   <div
     className="nano1k2nybm"
@@ -20,11 +20,11 @@ exports[`the DevProvider component renders correctly 1`] = `
     }
   />
   <div
-    className="sc-iQNlJl itsyWL sc-epnACN gKJwmO"
+    className="sc-gwVKww kFhuhg sc-eTuwsz bOqZSL"
     is={null}
   >
     <button
-      className="sc-iwsKbI enyoio sc-dnqmqq rssUT"
+      className="sc-gzVnrw cTJOgo sc-bZQynM ewFMYo"
       is={null}
       onClick={[Function]}
     >
