@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Box, Button } from 'rebass';
+import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import CheckboxGroup from './CheckboxGroup';
+import { Input } from './Inputs';
 import SectionHeader from './SectionHeader';
 import { stringsToFormOptions } from '../util/helpers';
 
@@ -21,6 +23,30 @@ const activities = [
 
 const activityOptions = stringsToFormOptions(activities);
 
+const NewActivities = ({ fields, meta: { error, submitFailed } }) => (
+  <Box mt={4}>
+    {fields.map((act, idx) => (
+      <Field
+        key={act}
+        name={act}
+        component={Input}
+        label={`Additional activity (${idx + 1})`}
+      />
+    ))}
+    <Box>
+      <Button bg="black" onClick={() => fields.push('')}>
+        Add another activity
+      </Button>
+      {submitFailed && error && <div>{error}</div>}
+    </Box>
+  </Box>
+);
+
+NewActivities.propTypes = {
+  fields: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired
+};
+
 const FormActivitiesStart = ({ handleSubmit }) => (
   <form onSubmit={handleSubmit}>
     <SectionHeader>
@@ -32,6 +58,7 @@ const FormActivitiesStart = ({ handleSubmit }) => (
       component={CheckboxGroup}
       options={activityOptions}
     />
+    <FieldArray name="newActivities" component={NewActivities} />
   </form>
 );
 
