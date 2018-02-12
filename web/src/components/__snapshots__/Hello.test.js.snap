@@ -25,16 +25,20 @@ ShallowWrapper {
           Friend
           !
         </h1>,
-        <Styled(Styled(Box))
+        <Styled(Box)
           kind="error"
         >
-          <Styled(Styled(Base))>
+          <Subhead
+            f={4}
+            is="h3"
+            m={0}
+          >
             Hey-oh!
-          </Styled(Styled(Base))>
-          <Styled(Styled(Base))>
+          </Subhead>
+          <Measure>
             This is a fake alert :)
-          </Styled(Styled(Base))>
-        </Styled(Styled(Box))>,
+          </Measure>
+        </Styled(Box)>,
       ],
     },
     "ref": null,
@@ -64,12 +68,16 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <Styled(Styled(Base))>
+            <Subhead
+              f={4}
+              is="h3"
+              m={0}
+            >
               Hey-oh!
-            </Styled(Styled(Base))>,
-            <Styled(Styled(Base))>
+            </Subhead>,
+            <Measure>
               This is a fake alert :)
-            </Styled(Styled(Base))>,
+            </Measure>,
           ],
           "kind": "error",
         },
@@ -81,6 +89,9 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": "Hey-oh!",
+              "f": 4,
+              "is": "h3",
+              "m": 0,
             },
             "ref": null,
             "rendered": "Hey-oh!",
@@ -115,16 +126,20 @@ ShallowWrapper {
             Friend
             !
           </h1>,
-          <Styled(Styled(Box))
+          <Styled(Box)
             kind="error"
           >
-            <Styled(Styled(Base))>
+            <Subhead
+              f={4}
+              is="h3"
+              m={0}
+            >
               Hey-oh!
-            </Styled(Styled(Base))>
-            <Styled(Styled(Base))>
+            </Subhead>
+            <Measure>
               This is a fake alert :)
-            </Styled(Styled(Base))>
-          </Styled(Styled(Box))>,
+            </Measure>
+          </Styled(Box)>,
         ],
       },
       "ref": null,
@@ -154,12 +169,16 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <Styled(Styled(Base))>
+              <Subhead
+                f={4}
+                is="h3"
+                m={0}
+              >
                 Hey-oh!
-              </Styled(Styled(Base))>,
-              <Styled(Styled(Base))>
+              </Subhead>,
+              <Measure>
                 This is a fake alert :)
-              </Styled(Styled(Base))>,
+              </Measure>,
             ],
             "kind": "error",
           },
@@ -171,6 +190,9 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "children": "Hey-oh!",
+                "f": 4,
+                "is": "h3",
+                "m": 0,
               },
               "ref": null,
               "rendered": "Hey-oh!",
@@ -229,16 +251,20 @@ ShallowWrapper {
           Test Person
           !
         </h1>,
-        <Styled(Styled(Box))
+        <Styled(Box)
           kind="error"
         >
-          <Styled(Styled(Base))>
+          <Subhead
+            f={4}
+            is="h3"
+            m={0}
+          >
             Hey-oh!
-          </Styled(Styled(Base))>
-          <Styled(Styled(Base))>
+          </Subhead>
+          <Measure>
             This is a fake alert :)
-          </Styled(Styled(Base))>
-        </Styled(Styled(Box))>,
+          </Measure>
+        </Styled(Box)>,
       ],
     },
     "ref": null,
@@ -268,12 +294,16 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <Styled(Styled(Base))>
+            <Subhead
+              f={4}
+              is="h3"
+              m={0}
+            >
               Hey-oh!
-            </Styled(Styled(Base))>,
-            <Styled(Styled(Base))>
+            </Subhead>,
+            <Measure>
               This is a fake alert :)
-            </Styled(Styled(Base))>,
+            </Measure>,
           ],
           "kind": "error",
         },
@@ -285,6 +315,9 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": "Hey-oh!",
+              "f": 4,
+              "is": "h3",
+              "m": 0,
             },
             "ref": null,
             "rendered": "Hey-oh!",
@@ -319,16 +352,20 @@ ShallowWrapper {
             Test Person
             !
           </h1>,
-          <Styled(Styled(Box))
+          <Styled(Box)
             kind="error"
           >
-            <Styled(Styled(Base))>
+            <Subhead
+              f={4}
+              is="h3"
+              m={0}
+            >
               Hey-oh!
-            </Styled(Styled(Base))>
-            <Styled(Styled(Base))>
+            </Subhead>
+            <Measure>
               This is a fake alert :)
-            </Styled(Styled(Base))>
-          </Styled(Styled(Box))>,
+            </Measure>
+          </Styled(Box)>,
         ],
       },
       "ref": null,
@@ -358,12 +395,16 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <Styled(Styled(Base))>
+              <Subhead
+                f={4}
+                is="h3"
+                m={0}
+              >
                 Hey-oh!
-              </Styled(Styled(Base))>,
-              <Styled(Styled(Base))>
+              </Subhead>,
+              <Measure>
                 This is a fake alert :)
-              </Styled(Styled(Base))>,
+              </Measure>,
             ],
             "kind": "error",
           },
@@ -375,6 +416,9 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "children": "Hey-oh!",
+                "f": 4,
+                "is": "h3",
+                "m": 0,
               },
               "ref": null,
               "rendered": "Hey-oh!",
