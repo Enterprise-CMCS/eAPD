@@ -15,11 +15,15 @@ module.exports.deserializeUser = async (
 ) => {
   try {
     const user = await userModel.where({ id: userID }).fetch();
-    done(null, {
-      username: user.get('email'),
-      id: user.get('id'),
-      activities: await user.activities()
-    });
+    if (user) {
+      done(null, {
+        username: user.get('email'),
+        id: user.get('id'),
+        activities: await user.activities()
+      });
+    } else {
+      done(null, null);
+    }
   } catch (e) {
     done('Could not deserialize user');
   }
