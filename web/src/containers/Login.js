@@ -54,7 +54,7 @@ class Login extends Component {
                 onChange={this.handleChange}
               />
             </Box>
-            <Button bg="black" type="submit" disabled={fetching}>
+            <Button type="submit" disabled={fetching}>
               {fetching ? 'Submitting' : 'Submit'}
             </Button>
           </form>

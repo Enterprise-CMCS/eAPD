@@ -1,9 +1,12 @@
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import * as actions from './auth';
 
 const mockStore = configureStore([thunk]);
+const fetchMock = new MockAdapter(axios);
 
 describe('auth actions', () => {
   it('requestLogin should create LOGIN_REQUEST action', () => {
@@ -26,12 +29,31 @@ describe('auth actions', () => {
   });
 
   describe('attemptLogin (async)', () => {
+    afterEach(() => {
+      fetchMock.reset();
+    });
+
     it('creates LOGIN_SUCCESS after successful auth', () => {
       const store = mockStore({});
+      fetchMock.onPost().reply(200);
 
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_FAILURE }
+        { type: actions.LOGIN_SUCCESS }
+      ];
+
+      return store.dispatch(actions.attemptLogin()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+
+    it('creates LOGIN_FAILURE after unsuccessful auth', () => {
+      const store = mockStore({});
+      fetchMock.onPost().reply(401, 'foo');
+
+      const expectedActions = [
+        { type: actions.LOGIN_REQUEST },
+        { type: actions.LOGIN_FAILURE, error: 'foo' }
       ];
 
       return store.dispatch(actions.attemptLogin()).then(() => {

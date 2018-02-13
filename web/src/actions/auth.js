@@ -19,7 +19,7 @@ export const attemptLogin = (username, password) => dispatch => {
     .post(`${API_URL}/auth/login`, { username, password })
     .then(() => dispatch(completeLogin()))
     .catch(error => {
-      const reason = error.response.statusText;
+      const reason = error.response.data || 'N/A';
       dispatch(failLogin(reason));
     });
 };
