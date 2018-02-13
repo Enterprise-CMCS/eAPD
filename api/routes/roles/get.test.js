@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const canMiddleware = require('../../auth/middleware').can('view-roles');
 const getEndpoint = require('./get');
 
-tap.only('roles GET endpoint', async endpointTest => {
+tap.test('roles GET endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = {
     get: sandbox.stub()
