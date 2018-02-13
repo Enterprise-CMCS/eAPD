@@ -1,4 +1,9 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/auth';
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT_SUCCESS
+} from '../actions/auth';
 
 const initialState = {
   fetching: false,
@@ -14,6 +19,8 @@ const auth = (state = initialState, action) => {
       return { ...state, fetching: false, authenticated: true };
     case LOGIN_FAILURE:
       return { ...state, fetching: false, error: action.error };
+    case LOGOUT_SUCCESS:
+      return { ...initialState };
     default:
       return state;
   }
