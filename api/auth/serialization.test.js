@@ -37,8 +37,8 @@ tap.test('passport serialization', async serializationTest => {
 
       await serialization.deserializeUser(userID, doneCallback, userModel);
       invalidTest.ok(
-        doneCallback.calledWith(sinon.match.string),
-        'calls back with an error'
+        doneCallback.calledWith(null, null),
+        'deserializes to a null user'
       );
     });
 
