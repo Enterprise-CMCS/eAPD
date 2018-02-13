@@ -11,6 +11,7 @@ import ActivityApproach from '../containers/ActivityApproach';
 import ActivityGoals from '../containers/ActivityGoals';
 import ActivityOverview from '../containers/ActivityOverview';
 import ApdOverview from '../containers/ApdOverview';
+import Login from '../containers/Login';
 import StateContacts from '../containers/StateContacts';
 import StateStart from '../containers/StateStart';
 import StatePersonnel from '../containers/StatePersonnel';
@@ -32,6 +33,8 @@ const App = () => (
     <Container>
       <Switch>
         <Route exact path="/" component={Demo} />
+        <Route path="/login" component={Login} />
+
         <Route path="/activities-list" component={ActivitiesList} />
         <Route path="/activities-start" component={ActivitiesStart} />
         <Route path="/activity-approach" component={ActivityApproach} />
@@ -42,6 +45,7 @@ const App = () => (
         <Route path="/state-contacts" component={StateContacts} />
         <Route path="/state-personnel" component={StatePersonnel} />
         <Route path="/state-start" component={StateStart} />
+
         <Route component={NoMatch} />
       </Switch>
     </Container>

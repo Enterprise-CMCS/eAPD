@@ -50,6 +50,7 @@
     "rebass": "^1.0.4",
     "redux": "^3.7.2",
     "redux-form": "^7.2.1",
+    "redux-thunk": "^2.2.0",
     "styled-components": "^2.3.3"
   },
   "devDependencies": {
