@@ -18,37 +18,24 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <Toolbar
+        <Styled(Styled(Base))
           bg="black"
-          color="white"
-          pl={2}
-          pr={2}
         >
-          <NavLink
-            color="inherit"
-            f={1}
+          <Styled(Styled(Base))
             is={[Function]}
-            p={2}
             to="/"
           >
             CMS HITECH APD
-          </NavLink>
-          <NavLink
-            color="inherit"
-            f={1}
+          </Styled(Styled(Base))>
+          <Styled(Styled(Base))
             is={[Function]}
             ml="auto"
-            p={2}
             to="/state-start"
           >
             Get started
-          </NavLink>
-        </Toolbar>,
-        <Container
-          ml="auto"
-          mr="auto"
-          px={3}
-        >
+          </Styled(Styled(Base))>
+        </Styled(Styled(Base))>,
+        <Styled(Styled(Base))>
           <Switch>
             <Route
               component={[Function]}
@@ -99,7 +86,7 @@ ShallowWrapper {
               component={[Function]}
             />
           </Switch>
-        </Container>,
+        </Styled(Styled(Base))>,
       ],
     },
     "ref": null,
@@ -111,29 +98,20 @@ ShallowWrapper {
         "props": Object {
           "bg": "black",
           "children": Array [
-            <NavLink
-              color="inherit"
-              f={1}
+            <Styled(Styled(Base))
               is={[Function]}
-              p={2}
               to="/"
             >
               CMS HITECH APD
-            </NavLink>,
-            <NavLink
-              color="inherit"
-              f={1}
+            </Styled(Styled(Base))>,
+            <Styled(Styled(Base))
               is={[Function]}
               ml="auto"
-              p={2}
               to="/state-start"
             >
               Get started
-            </NavLink>,
+            </Styled(Styled(Base))>,
           ],
-          "color": "white",
-          "pl": 2,
-          "pr": 2,
         },
         "ref": null,
         "rendered": Array [
@@ -143,10 +121,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": "CMS HITECH APD",
-              "color": "inherit",
-              "f": 1,
               "is": [Function],
-              "p": 2,
               "to": "/",
             },
             "ref": null,
@@ -159,11 +134,8 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": "Get started",
-              "color": "inherit",
-              "f": 1,
               "is": [Function],
               "ml": "auto",
-              "p": 2,
               "to": "/state-start",
             },
             "ref": null,
@@ -228,9 +200,6 @@ ShallowWrapper {
               component={[Function]}
             />
           </Switch>,
-          "ml": "auto",
-          "mr": "auto",
-          "px": 3,
         },
         "ref": null,
         "rendered": Object {
@@ -450,37 +419,24 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <Toolbar
+          <Styled(Styled(Base))
             bg="black"
-            color="white"
-            pl={2}
-            pr={2}
           >
-            <NavLink
-              color="inherit"
-              f={1}
+            <Styled(Styled(Base))
               is={[Function]}
-              p={2}
               to="/"
             >
               CMS HITECH APD
-            </NavLink>
-            <NavLink
-              color="inherit"
-              f={1}
+            </Styled(Styled(Base))>
+            <Styled(Styled(Base))
               is={[Function]}
               ml="auto"
-              p={2}
               to="/state-start"
             >
               Get started
-            </NavLink>
-          </Toolbar>,
-          <Container
-            ml="auto"
-            mr="auto"
-            px={3}
-          >
+            </Styled(Styled(Base))>
+          </Styled(Styled(Base))>,
+          <Styled(Styled(Base))>
             <Switch>
               <Route
                 component={[Function]}
@@ -531,7 +487,7 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>
-          </Container>,
+          </Styled(Styled(Base))>,
         ],
       },
       "ref": null,
@@ -543,29 +499,20 @@ ShallowWrapper {
           "props": Object {
             "bg": "black",
             "children": Array [
-              <NavLink
-                color="inherit"
-                f={1}
+              <Styled(Styled(Base))
                 is={[Function]}
-                p={2}
                 to="/"
               >
                 CMS HITECH APD
-              </NavLink>,
-              <NavLink
-                color="inherit"
-                f={1}
+              </Styled(Styled(Base))>,
+              <Styled(Styled(Base))
                 is={[Function]}
                 ml="auto"
-                p={2}
                 to="/state-start"
               >
                 Get started
-              </NavLink>,
+              </Styled(Styled(Base))>,
             ],
-            "color": "white",
-            "pl": 2,
-            "pr": 2,
           },
           "ref": null,
           "rendered": Array [
@@ -575,10 +522,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "children": "CMS HITECH APD",
-                "color": "inherit",
-                "f": 1,
                 "is": [Function],
-                "p": 2,
                 "to": "/",
               },
               "ref": null,
@@ -591,11 +535,8 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "children": "Get started",
-                "color": "inherit",
-                "f": 1,
                 "is": [Function],
                 "ml": "auto",
-                "p": 2,
                 "to": "/state-start",
               },
               "ref": null,
@@ -660,9 +601,6 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>,
-            "ml": "auto",
-            "mr": "auto",
-            "px": 3,
           },
           "ref": null,
           "rendered": Object {
