@@ -18,23 +18,7 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <Styled(Styled(Base))
-          bg="black"
-        >
-          <Styled(Styled(Base))
-            is={[Function]}
-            to="/"
-          >
-            CMS HITECH APD
-          </Styled(Styled(Base))>
-          <Styled(Styled(Base))
-            is={[Function]}
-            ml="auto"
-            to="/state-start"
-          >
-            Get started
-          </Styled(Styled(Base))>
-        </Styled(Styled(Base))>,
+        <Connect(TopNav) />,
         <Styled(Styled(Base))>
           <Switch>
             <Route
@@ -99,54 +83,9 @@ ShallowWrapper {
         "instance": null,
         "key": undefined,
         "nodeType": "class",
-        "props": Object {
-          "bg": "black",
-          "children": Array [
-            <Styled(Styled(Base))
-              is={[Function]}
-              to="/"
-            >
-              CMS HITECH APD
-            </Styled(Styled(Base))>,
-            <Styled(Styled(Base))
-              is={[Function]}
-              ml="auto"
-              to="/state-start"
-            >
-              Get started
-            </Styled(Styled(Base))>,
-          ],
-        },
+        "props": Object {},
         "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "CMS HITECH APD",
-              "is": [Function],
-              "to": "/",
-            },
-            "ref": null,
-            "rendered": "CMS HITECH APD",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Get started",
-              "is": [Function],
-              "ml": "auto",
-              "to": "/state-start",
-            },
-            "ref": null,
-            "rendered": "Get started",
-            "type": [Function],
-          },
-        ],
+        "rendered": null,
         "type": [Function],
       },
       Object {
@@ -443,23 +382,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <Styled(Styled(Base))
-            bg="black"
-          >
-            <Styled(Styled(Base))
-              is={[Function]}
-              to="/"
-            >
-              CMS HITECH APD
-            </Styled(Styled(Base))>
-            <Styled(Styled(Base))
-              is={[Function]}
-              ml="auto"
-              to="/state-start"
-            >
-              Get started
-            </Styled(Styled(Base))>
-          </Styled(Styled(Base))>,
+          <Connect(TopNav) />,
           <Styled(Styled(Base))>
             <Switch>
               <Route
@@ -524,54 +447,9 @@ ShallowWrapper {
           "instance": null,
           "key": undefined,
           "nodeType": "class",
-          "props": Object {
-            "bg": "black",
-            "children": Array [
-              <Styled(Styled(Base))
-                is={[Function]}
-                to="/"
-              >
-                CMS HITECH APD
-              </Styled(Styled(Base))>,
-              <Styled(Styled(Base))
-                is={[Function]}
-                ml="auto"
-                to="/state-start"
-              >
-                Get started
-              </Styled(Styled(Base))>,
-            ],
-          },
+          "props": Object {},
           "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "CMS HITECH APD",
-                "is": [Function],
-                "to": "/",
-              },
-              "ref": null,
-              "rendered": "CMS HITECH APD",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "Get started",
-                "is": [Function],
-                "ml": "auto",
-                "to": "/state-start",
-              },
-              "ref": null,
-              "rendered": "Get started",
-              "type": [Function],
-            },
-          ],
+          "rendered": null,
           "type": [Function],
         },
         Object {
