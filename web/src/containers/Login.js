@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Box, Button, Code, Heading, Input, Label, Message } from 'rebass';
+import { Box, Button, Heading, Input, Label, Message } from 'rebass';
 import { attemptLogin } from '../actions/auth';
 
 class Login extends Component {
@@ -38,7 +38,7 @@ class Login extends Component {
           )}
           <form onSubmit={this.handleSubmit}>
             <Box mb={3}>
-              <Label>Username</Label>
+              <Label>Email</Label>
               <Input
                 name="username"
                 value={username}
@@ -59,7 +59,6 @@ class Login extends Component {
             </Button>
           </form>
         </Box>
-        <Code>{JSON.stringify({ fetching, error, authenticated })}</Code>
       </Box>
     );
   }
@@ -72,7 +71,12 @@ Login.propTypes = {
   attemptLogin: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ auth }) => ({ ...auth });
+const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
+  authenticated,
+  error,
+  fetching
+});
+
 const mapDispatchToProps = { attemptLogin };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
