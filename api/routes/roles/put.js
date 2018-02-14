@@ -50,7 +50,7 @@ module.exports = (
   RoleModel = defaultRoleModel,
   ActivityModel = defaultActivityModel
 ) => {
-  app.put('/roles/:id', can('create-roles'), async (req, res) => {
+  app.put('/roles/:id', can('edit-roles'), async (req, res) => {
     const role = await RoleModel.where({ id: req.params.id }).fetch();
     if (!role) {
       return res
@@ -70,7 +70,7 @@ module.exports = (
     }
 
     try {
-      role.activities().detach(role.getActivities());
+      role.activities().detach(await role.getActivities());
       role.activities().attach(roleMeta.activities);
       await role.save();
       return res.send({ roleID: role.get('id') });
