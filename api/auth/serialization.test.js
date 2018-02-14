@@ -32,6 +32,17 @@ tap.test('passport serialization', async serializationTest => {
   serializationTest.test('deserialize a user', async deserializeTest => {
     const userID = 'the-user-id';
 
+    deserializeTest.test('when there is a database problem', async invalidTest => {
+      userModel.fetch.rejects();
+
+      await serialization.deserializeUser(userID, doneCallback, userModel);
+      invalidTest.ok(
+        doneCallback.calledWith(sinon.match.string),
+        'calls back with an error'
+      );
+    });
+
+
     deserializeTest.test('that is not in the database', async invalidTest => {
       userModel.fetch.resolves(null);
 
