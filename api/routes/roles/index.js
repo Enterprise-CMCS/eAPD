@@ -1,9 +1,5 @@
-const post = require('./post');
 const get = require('./get');
-const put = require('./put');
 
-module.exports = (app, getEndpoint = get, postEndpoint = post, putEndpoint = put) => {
+module.exports = (app, getEndpoint = get) => {
   getEndpoint(app);
-  // postEndpoint(app);
-  // putEndpoint(app);
 };
