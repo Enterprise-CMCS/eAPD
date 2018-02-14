@@ -19,8 +19,8 @@ tap.test('roles endpoint setup', async endpointTest => {
   //   postEndpoint.calledWith(app),
   //   'users POST endpoint is setup with the app'
   // );
-  // endpointTest.ok(
-  //   putEndpoint.calledWith(app),
-  //   'users PUT endpoint is setup with the app'
-  // );
+  endpointTest.ok(
+    putEndpoint.calledWith(app),
+    'users PUT endpoint is setup with the app'
+  );
 });
