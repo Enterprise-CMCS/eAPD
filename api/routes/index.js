@@ -1,6 +1,8 @@
 const users = require('./users');
 const formLogger = require('./logForm');
 
+const openapi = require('./openAPI');
+
 module.exports = (
   app,
   usersEndpoint = users,
@@ -8,4 +10,8 @@ module.exports = (
 ) => {
   usersEndpoint(app);
   formLoggerEndopint(app);
+
+  app.get('/open-api', (req, res) => {
+    res.send(openapi);
+  });
 };
