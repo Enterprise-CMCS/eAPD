@@ -60,6 +60,10 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
+              path="/expenses"
+            />
+            <Route
+              component={[Function]}
               path="/state-contacts"
             />
             <Route
@@ -133,6 +137,10 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
+              path="/expenses"
+            />
+            <Route
+              component={[Function]}
               path="/state-contacts"
             />
             <Route
@@ -191,6 +199,10 @@ ShallowWrapper {
               <Route
                 component={[Function]}
                 path="/apd-overview"
+              />,
+              <Route
+                component={[Function]}
+                path="/expenses"
               />,
               <Route
                 component={[Function]}
@@ -326,6 +338,18 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
+                "path": "/expenses",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
                 "path": "/state-contacts",
               },
               "ref": null,
@@ -424,6 +448,10 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
+                path="/expenses"
+              />
+              <Route
+                component={[Function]}
                 path="/state-contacts"
               />
               <Route
@@ -497,6 +525,10 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
+                path="/expenses"
+              />
+              <Route
+                component={[Function]}
                 path="/state-contacts"
               />
               <Route
@@ -555,6 +587,10 @@ ShallowWrapper {
                 <Route
                   component={[Function]}
                   path="/apd-overview"
+                />,
+                <Route
+                  component={[Function]}
+                  path="/expenses"
                 />,
                 <Route
                   component={[Function]}
@@ -679,6 +715,18 @@ ShallowWrapper {
                 "props": Object {
                   "component": [Function],
                   "path": "/apd-overview",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "path": "/expenses",
                 },
                 "ref": null,
                 "rendered": null,
