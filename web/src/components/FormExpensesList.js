@@ -45,7 +45,7 @@ const List = ({ goTo, next, prev }) => (
       <Border py={2} bottom>
         <Relative>
           <Absolute right>
-            <Link to="edit/equipment-and-supplies" is={RRLink}>
+            <Link to="/expenses-details/equipment-and-supplies" is={RRLink}>
               Start
             </Link>
           </Absolute>
