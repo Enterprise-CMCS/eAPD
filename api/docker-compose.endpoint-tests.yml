@@ -40,6 +40,7 @@ services:
     depends_on:
       - db
       - api-for-testing
+      - api-migration
     environment:
       - NODE_ENV=test
     volumes:
