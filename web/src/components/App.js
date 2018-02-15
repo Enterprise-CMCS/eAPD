@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
-import { Container, NavLink, Provider, Toolbar } from 'rebass';
+import { Route, Switch } from 'react-router-dom';
+import { Container, Provider } from 'rebass';
 
 import Demo from './Demo';
 import DevProvider from './DevProvider';
@@ -11,9 +11,11 @@ import ActivityApproach from '../containers/ActivityApproach';
 import ActivityGoals from '../containers/ActivityGoals';
 import ActivityOverview from '../containers/ActivityOverview';
 import ApdOverview from '../containers/ApdOverview';
+import Login from '../containers/Login';
 import StateContacts from '../containers/StateContacts';
 import StateStart from '../containers/StateStart';
 import StatePersonnel from '../containers/StatePersonnel';
+import TopNav from '../containers/TopNav';
 import ActivitySchedule from '../containers/ActivitySchedule';
 import ActivityExpensesStart from '../containers/ActivityExpensesStart';
 import ActivityExpensesList from '../containers/ActivityExpensesList';
@@ -23,18 +25,13 @@ const Wrapper = process.env.NODE_ENV !== 'production' ? DevProvider : Provider;
 
 const App = () => (
   <Wrapper>
-    <Toolbar bg="black">
-      <NavLink to="/" is={Link}>
-        CMS HITECH APD
-      </NavLink>
-      <NavLink to="/state-start" is={Link} ml="auto">
-        Get started
-      </NavLink>
-    </Toolbar>
+    <TopNav />
 
-    <Container is="main">
+    <Container>
       <Switch>
         <Route exact path="/" component={Demo} />
+        <Route path="/login" component={Login} />
+
         <Route path="/activities-list" component={ActivitiesList} />
         <Route path="/activities-start" component={ActivitiesStart} />
         <Route path="/activity-approach" component={ActivityApproach} />
@@ -48,6 +45,7 @@ const App = () => (
         <Route path="/state-contacts" component={StateContacts} />
         <Route path="/state-personnel" component={StatePersonnel} />
         <Route path="/state-start" component={StateStart} />
+
         <Route component={NoMatch} />
       </Switch>
     </Container>
