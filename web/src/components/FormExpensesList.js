@@ -3,7 +3,7 @@ import React from 'react';
 import { Link as RRLink } from 'react-router-dom';
 import { Absolute, Box, Border, Heading, Link, Relative } from 'rebass';
 
-import NavButton from '../../components/PageNavButtons';
+import NavButton from './PageNavButtons';
 
 const List = ({ goTo, next, prev }) => (
   <Box>
