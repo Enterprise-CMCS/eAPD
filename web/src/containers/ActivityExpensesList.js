@@ -7,9 +7,9 @@ import { bindActionCreators } from 'redux';
 
 import FormLogger from '../util/formLogger';
 
-import ExpensesStart from '../components/FormExpensesStart';
+import ExpensesList from '../components/FormExpensesList';
 
-class ActivityExpensesStart extends Component {
+class ActivityExpensesList extends Component {
   showResults = () => {};
 
   render() {
@@ -18,17 +18,17 @@ class ActivityExpensesStart extends Component {
     return (
       <Box py={4}>
         <FormLogger />
-        <ExpensesStart goTo={goTo} next="/expenses-list" prev="/apd-overview" />
+        <ExpensesList goTo={goTo} next="/activities-list" prev="/expenses-start" />
       </Box>
     );
   }
 }
 
-ActivityExpensesStart.propTypes = {
+ActivityExpensesList.propTypes = {
   goTo: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ActivityExpensesStart);
+export default connect(null, mapDispatchToProps)(ActivityExpensesList);

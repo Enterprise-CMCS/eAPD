@@ -15,7 +15,9 @@ import StateContacts from '../containers/StateContacts';
 import StateStart from '../containers/StateStart';
 import StatePersonnel from '../containers/StatePersonnel';
 import ActivitySchedule from '../containers/ActivitySchedule';
-import ActivityExpenses from '../containers/ActivityExpenses';
+import ActivityExpensesStart from '../containers/ActivityExpensesStart';
+import ActivityExpensesList from '../containers/ActivityExpensesList';
+import ActivityExpensesDetails from '../containers/ActivityExpensesDetails';
 
 const Wrapper = process.env.NODE_ENV !== 'production' ? DevProvider : Provider;
 
@@ -40,7 +42,9 @@ const App = () => (
         <Route path="/activity-overview" component={ActivityOverview} />
         <Route path="/activity-schedule" component={ActivitySchedule} />
         <Route path="/apd-overview" component={ApdOverview} />
-        <Route path="/expenses" component={ActivityExpenses} />
+        <Route path="/expenses-start" component={ActivityExpensesStart} />
+        <Route path="/expenses-list" component={ActivityExpensesList} />
+        <Route path="/expenses-details" component={ActivityExpensesDetails} />
         <Route path="/state-contacts" component={StateContacts} />
         <Route path="/state-personnel" component={StatePersonnel} />
         <Route path="/state-start" component={StateStart} />
