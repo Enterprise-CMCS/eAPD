@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
-import { Container, NavLink, Provider, Toolbar } from 'rebass';
+import { Route, Switch } from 'react-router-dom';
+import { Container, Provider } from 'rebass';
 
 import Demo from './Demo';
 import DevProvider from './DevProvider';
@@ -15,20 +15,14 @@ import Login from '../containers/Login';
 import StateContacts from '../containers/StateContacts';
 import StateStart from '../containers/StateStart';
 import StatePersonnel from '../containers/StatePersonnel';
+import TopNav from '../containers/TopNav';
 import ActivitySchedule from '../containers/ActivitySchedule';
 
 const Wrapper = process.env.NODE_ENV !== 'production' ? DevProvider : Provider;
 
 const App = () => (
   <Wrapper>
-    <Toolbar bg="black">
-      <NavLink to="/" is={Link}>
-        CMS HITECH APD
-      </NavLink>
-      <NavLink to="/state-start" is={Link} ml="auto">
-        Get started
-      </NavLink>
-    </Toolbar>
+    <TopNav />
 
     <Container>
       <Switch>
