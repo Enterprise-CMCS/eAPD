@@ -74,7 +74,15 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
-              path="/expenses"
+              path="/expenses-start"
+            />
+            <Route
+              component={[Function]}
+              path="/expenses-list"
+            />
+            <Route
+              component={[Function]}
+              path="/expenses-details"
             />
             <Route
               component={[Function]}
@@ -192,7 +200,15 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
-              path="/expenses"
+              path="/expenses-start"
+            />
+            <Route
+              component={[Function]}
+              path="/expenses-list"
+            />
+            <Route
+              component={[Function]}
+              path="/expenses-details"
             />
             <Route
               component={[Function]}
@@ -254,7 +270,15 @@ ShallowWrapper {
               />,
               <Route
                 component={[Function]}
-                path="/expenses"
+                path="/expenses-start"
+              />,
+              <Route
+                component={[Function]}
+                path="/expenses-list"
+              />,
+              <Route
+                component={[Function]}
+                path="/expenses-details"
               />,
               <Route
                 component={[Function]}
@@ -378,7 +402,31 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "path": "/expenses",
+                "path": "/expenses-start",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/expenses-list",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/expenses-details",
               },
               "ref": null,
               "rendered": null,
@@ -502,7 +550,15 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
-                path="/expenses"
+                path="/expenses-start"
+              />
+              <Route
+                component={[Function]}
+                path="/expenses-list"
+              />
+              <Route
+                component={[Function]}
+                path="/expenses-details"
               />
               <Route
                 component={[Function]}
@@ -620,7 +676,15 @@ ShallowWrapper {
               />
               <Route
                 component={[Function]}
-                path="/expenses"
+                path="/expenses-start"
+              />
+              <Route
+                component={[Function]}
+                path="/expenses-list"
+              />
+              <Route
+                component={[Function]}
+                path="/expenses-details"
               />
               <Route
                 component={[Function]}
@@ -682,7 +746,15 @@ ShallowWrapper {
                 />,
                 <Route
                   component={[Function]}
-                  path="/expenses"
+                  path="/expenses-start"
+                />,
+                <Route
+                  component={[Function]}
+                  path="/expenses-list"
+                />,
+                <Route
+                  component={[Function]}
+                  path="/expenses-details"
                 />,
                 <Route
                   component={[Function]}
@@ -806,7 +878,31 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
-                  "path": "/expenses",
+                  "path": "/expenses-start",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "path": "/expenses-list",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "path": "/expenses-details",
                 },
                 "ref": null,
                 "rendered": null,

@@ -44,7 +44,6 @@ ExpensesStart.propTypes = {
   prev: PropTypes.string.isRequired
 };
 
-
 const formConfig = {
   form: 'expenses',
   initialValues: {

@@ -18,7 +18,11 @@ class ActivityExpensesList extends Component {
     return (
       <Box py={4}>
         <FormLogger />
-        <ExpensesList goTo={goTo} next="/activities-list" prev="/expenses-start" />
+        <ExpensesList
+          goTo={goTo}
+          next="/activities-list"
+          prev="/expenses-start"
+        />
       </Box>
     );
   }

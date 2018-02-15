@@ -14,8 +14,8 @@ const ExpenseDetails = ({ goTo, next }) => (
     </Heading>
     <Box py={4}>
       <SectionHeader>
-        Supplies include items you use regularly that last for less than one year.
-        Some examples include:
+        Supplies include items you use regularly that last for less than one
+        year. Some examples include:
       </SectionHeader>
       <ul>
         <li>Equipment accessories</li>
