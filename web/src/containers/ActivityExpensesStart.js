@@ -12,7 +12,7 @@ import ExpensesStart from '../components/FormExpensesStart';
 import ExpensesList from '../components/FormExpensesList';
 import ExpenseDetails from '../components/FormExpensesDetails';
 
-class ExpensesLanding extends Component {
+class ActivityExpensesStart extends Component {
   showResults = () => {};
 
   render() {
@@ -48,7 +48,7 @@ class ExpensesLanding extends Component {
   }
 }
 
-ExpensesLanding.propTypes = {
+ActivityExpensesStart.propTypes = {
   goTo: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired
 };
@@ -56,4 +56,4 @@ ExpensesLanding.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ExpensesLanding);
+export default connect(null, mapDispatchToProps)(ActivityExpensesStart);
