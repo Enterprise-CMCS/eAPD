@@ -6,11 +6,11 @@ import { push } from 'react-router-redux';
 import { Box } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import FormLogger from '../../util/formLogger';
+import FormLogger from '../util/formLogger';
 
-import CommonExpenses from './Common';
-import CategoryList from './List';
-import EditExpense from './Edit';
+import ExpensesStart from '../components/FormExpensesStart';
+import ExpensesList from '../components/FormExpensesList';
+import ExpenseDetails from '../components/FormExpensesDetails';
 
 class ExpensesLanding extends Component {
   showResults = () => {};
@@ -26,16 +26,16 @@ class ExpensesLanding extends Component {
           <Route
             path={`${root}/list`}
             component={() => (
-              <CategoryList goTo={goTo} next="/apd-overview" prev={root} />
+              <ExpensesList goTo={goTo} next="/apd-overview" prev={root} />
             )}
           />
           <Route
             path={`${root}/edit`}
-            component={() => <EditExpense goTo={goTo} next={`${root}/list`} />}
+            component={() => <ExpenseDetails goTo={goTo} next={`${root}/list`} />}
           />
           <Route
             component={() => (
-              <CommonExpenses
+              <ExpensesStart
                 goTo={goTo}
                 next={`${root}/list`}
                 prev="/apd-overview"
