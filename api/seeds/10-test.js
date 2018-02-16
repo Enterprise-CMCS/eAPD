@@ -1,3 +1,4 @@
+const roles = require('./test/roles');
 const users = require('./test/users');
 
 exports.seed = async knex => {
@@ -7,5 +8,6 @@ exports.seed = async knex => {
   }
 
   // Call specific seeds from here.
+  await roles.seed(knex);
   await users.seed(knex);
 };
