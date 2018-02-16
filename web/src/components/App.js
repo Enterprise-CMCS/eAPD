@@ -12,6 +12,7 @@ import ActivityGoals from '../containers/ActivityGoals';
 import ActivityOverview from '../containers/ActivityOverview';
 import ApdOverview from '../containers/ApdOverview';
 import Login from '../containers/Login';
+import PrivateRoute from '../containers/PrivateRoute';
 import StateContacts from '../containers/StateContacts';
 import StateStart from '../containers/StateStart';
 import StatePersonnel from '../containers/StatePersonnel';
@@ -29,16 +30,16 @@ const App = () => (
         <Route exact path="/" component={Demo} />
         <Route path="/login" component={Login} />
 
-        <Route path="/activities-list" component={ActivitiesList} />
-        <Route path="/activities-start" component={ActivitiesStart} />
-        <Route path="/activity-approach" component={ActivityApproach} />
-        <Route path="/activity-goals" component={ActivityGoals} />
-        <Route path="/activity-overview" component={ActivityOverview} />
-        <Route path="/activity-schedule" component={ActivitySchedule} />
-        <Route path="/apd-overview" component={ApdOverview} />
-        <Route path="/state-contacts" component={StateContacts} />
-        <Route path="/state-personnel" component={StatePersonnel} />
-        <Route path="/state-start" component={StateStart} />
+        <PrivateRoute path="/activities-list" component={ActivitiesList} />
+        <PrivateRoute path="/activities-start" component={ActivitiesStart} />
+        <PrivateRoute path="/activity-approach" component={ActivityApproach} />
+        <PrivateRoute path="/activity-goals" component={ActivityGoals} />
+        <PrivateRoute path="/activity-overview" component={ActivityOverview} />
+        <PrivateRoute path="/activity-schedule" component={ActivitySchedule} />
+        <PrivateRoute path="/apd-overview" component={ApdOverview} />
+        <PrivateRoute path="/state-contacts" component={StateContacts} />
+        <PrivateRoute path="/state-personnel" component={StatePersonnel} />
+        <PrivateRoute path="/state-start" component={StateStart} />
 
         <Route component={NoMatch} />
       </Switch>
