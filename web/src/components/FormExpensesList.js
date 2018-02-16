@@ -12,9 +12,7 @@ const List = ({ goTo, next, prev }) => (
       <Border py={2} bottom>
         <Relative>
           <Absolute right>
-            <Link to="#!" is={RRLink}>
-              Edit
-            </Link>
+            Edit
           </Absolute>
           Hardware, Software, and Licensing
         </Relative>
@@ -23,9 +21,7 @@ const List = ({ goTo, next, prev }) => (
       <Border py={2} bottom>
         <Relative>
           <Absolute right>
-            <Link to="#!" is={RRLink}>
-              Edit
-            </Link>
+            Edit
           </Absolute>
           State Travel
         </Relative>
@@ -34,9 +30,7 @@ const List = ({ goTo, next, prev }) => (
       <Border py={2} bottom>
         <Relative>
           <Absolute right>
-            <Link to="#!" is={RRLink}>
-              Start
-            </Link>
+            Start
           </Absolute>
           Training and Outreach
         </Relative>
