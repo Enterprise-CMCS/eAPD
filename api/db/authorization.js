@@ -20,6 +20,14 @@ module.exports = {
         'role_id',
         'activity_id'
       );
+    },
+
+    async getActivities() {
+      if (!this.relations.activities) {
+        await this.load('activities');
+      }
+
+      return this.related('activities').pluck('name');
     }
   }
 };
