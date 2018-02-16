@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Box, Button, Heading, Input, Label, Message } from 'rebass';
+
 import { attemptLogin } from '../actions/auth';
 
 class Login extends Component {
