@@ -21,6 +21,10 @@ require('./auth/serialization');
 require('./auth/session');
 
 require('./routes');
+require('./routes/roles');
+require('./routes/roles/get');
+require('./routes/roles/post');
+require('./routes/roles/put');
 require('./routes/users');
 require('./routes/users/get');
 require('./routes/users/post');
