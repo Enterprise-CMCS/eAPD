@@ -18,6 +18,9 @@ import StateStart from '../containers/StateStart';
 import StatePersonnel from '../containers/StatePersonnel';
 import TopNav from '../containers/TopNav';
 import ActivitySchedule from '../containers/ActivitySchedule';
+import ActivityExpensesStart from '../containers/ActivityExpensesStart';
+import ActivityExpensesList from '../containers/ActivityExpensesList';
+import ActivityExpensesDetails from '../containers/ActivityExpensesDetails';
 
 const Wrapper = process.env.NODE_ENV !== 'production' ? DevProvider : Provider;
 
@@ -37,6 +40,9 @@ const App = () => (
         <PrivateRoute path="/activity-overview" component={ActivityOverview} />
         <PrivateRoute path="/activity-schedule" component={ActivitySchedule} />
         <PrivateRoute path="/apd-overview" component={ApdOverview} />
+        <PrivateRoute path="/expenses-start" component={ActivityExpensesStart} />
+        <PrivateRoute path="/expenses-list" component={ActivityExpensesList} />
+        <PrivateRoute path="/expenses-details" component={ActivityExpensesDetails} />
         <PrivateRoute path="/state-contacts" component={StateContacts} />
         <PrivateRoute path="/state-personnel" component={StatePersonnel} />
         <PrivateRoute path="/state-start" component={StateStart} />
