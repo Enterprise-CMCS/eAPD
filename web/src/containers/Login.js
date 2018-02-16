@@ -21,11 +21,12 @@ class Login extends Component {
   };
 
   render() {
-    const { fetching, error, authenticated } = this.props;
+    const { authenticated, error, fetching, location } = this.props;
+    const { from } = location.state || { from: { pathname: '/' } };
     const { username, password } = this.state;
 
     if (authenticated) {
-      return <Redirect to="/" />;
+      return <Redirect to={from} />;
     }
 
     return (
@@ -66,10 +67,11 @@ class Login extends Component {
 }
 
 Login.propTypes = {
+  attemptLogin: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   fetching: PropTypes.bool.isRequired,
-  attemptLogin: PropTypes.func.isRequired
+  location: PropTypes.object.isRequired
 };
 
 const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({

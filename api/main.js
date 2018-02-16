@@ -10,7 +10,7 @@ const routes = require('./routes');
 const server = express();
 
 server.use(express.urlencoded({ extended: true }));
-server.use(cors());
+server.use(cors({ credentials: true, origin: true }));
 server.use(bodyParser.json());
 
 auth.setup(server);
