@@ -1,9 +1,9 @@
-import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import * as actions from './auth';
+import axios from '../util/api';
 
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios);
