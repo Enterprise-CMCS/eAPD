@@ -4,6 +4,7 @@
   "rules": {
     "arrow-parens": ["error", "as-needed"],
     "comma-dangle": [1, "never"],
+    "no-confusing-arrow": 0,
 
     "jsx-a11y/anchor-is-valid": [
       2,
