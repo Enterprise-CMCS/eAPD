@@ -9,6 +9,18 @@ tap.test('login endpoint | /auth/login', async loginTest => {
     invalidTest.equal(response.statusCode, 400, 'gives a 400 status code');
   });
 
+  loginTest.test('proper response headers', async headerTest => {
+    const { response } = await request.post(url);
+    const { headers } = response;
+
+    headerTest.equal(headers.vary, 'Origin', 'vary origin');
+    headerTest.equal(
+      headers['access-control-allow-credentials'],
+      'true',
+      'allow credentials'
+    );
+  });
+
   const invalidCases = [
     {
       title: 'with a post body, but no username or password',

@@ -1,5 +1,6 @@
-import axios from 'axios';
+import axiosClient from 'axios';
 
+const axios = axiosClient.create({ withCredentials: true });
 const API_URL = process.env.API_URL || 'http://localhost:8000';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
