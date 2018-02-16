@@ -3,6 +3,9 @@ const defaultActivityModel = require('../../db').models.activity;
 const can = require('../../auth/middleware').can;
 
 const validateRole = async (role, RoleModel, ActivityModel) => {
+  if (!role) {
+    throw new Error('Role must be specified');
+  }
   if (!role.name) {
     throw new Error('Role must have a name');
   }
@@ -52,8 +55,8 @@ module.exports = (
       roleMeta = await validateRole(req.body, RoleModel, ActivityModel);
     } catch (e) {
       return res
-        .send({ error: e.message })
         .status(400)
+        .send({ error: 'add-role-invalid' })
         .end();
     }
 
