@@ -30,55 +30,55 @@ ShallowWrapper {
               component={[Function]}
               path="/login"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activities-list"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activities-start"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activity-approach"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activity-goals"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activity-overview"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activity-schedule"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/apd-overview"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/expenses-start"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/expenses-list"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/expenses-details"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/state-contacts"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/state-personnel"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/state-start"
             />
@@ -115,55 +115,55 @@ ShallowWrapper {
               component={[Function]}
               path="/login"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activities-list"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activities-start"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activity-approach"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activity-goals"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activity-overview"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/activity-schedule"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/apd-overview"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/expenses-start"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/expenses-list"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/expenses-details"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/state-contacts"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/state-personnel"
             />
-            <Route
+            <Connect(PrivateRoute)
               component={[Function]}
               path="/state-start"
             />
@@ -188,55 +188,55 @@ ShallowWrapper {
                 component={[Function]}
                 path="/login"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activities-list"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activities-start"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-approach"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-goals"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-overview"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-schedule"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/apd-overview"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/expenses-start"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/expenses-list"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/expenses-details"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-contacts"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-personnel"
               />,
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-start"
               />,
@@ -466,55 +466,55 @@ ShallowWrapper {
                 component={[Function]}
                 path="/login"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activities-list"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activities-start"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-approach"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-goals"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-overview"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-schedule"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/apd-overview"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/expenses-start"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/expenses-list"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/expenses-details"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-contacts"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-personnel"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-start"
               />
@@ -551,55 +551,55 @@ ShallowWrapper {
                 component={[Function]}
                 path="/login"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activities-list"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activities-start"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-approach"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-goals"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-overview"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/activity-schedule"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/apd-overview"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/expenses-start"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/expenses-list"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/expenses-details"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-contacts"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-personnel"
               />
-              <Route
+              <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-start"
               />
@@ -624,55 +624,55 @@ ShallowWrapper {
                   component={[Function]}
                   path="/login"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/activities-list"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/activities-start"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/activity-approach"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/activity-goals"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/activity-overview"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/activity-schedule"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/apd-overview"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/expenses-start"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/expenses-list"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/expenses-details"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/state-contacts"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/state-personnel"
                 />,
-                <Route
+                <Connect(PrivateRoute)
                   component={[Function]}
                   path="/state-start"
                 />,
