@@ -1,9 +1,6 @@
 {
-  "extends": "airbnb-base",
+  "extends": ["airbnb-base", "prettier"],
   "rules": {
-    "arrow-parens": ["error", "as-needed"],
-    "comma-dangle": [1, "never"],
-    "function-paren-newline": [0],
     "prefer-destructuring": [0]
   },
   "env": {
