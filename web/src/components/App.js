@@ -5,6 +5,7 @@ import { Container, Provider } from 'rebass';
 import Demo from './Demo';
 import DevProvider from './DevProvider';
 import NoMatch from './NoMatch';
+import SubmissionSuccess from './SubmissionSuccess';
 import ActivitiesStart from '../containers/ActivitiesStart';
 import ActivitiesList from '../containers/ActivitiesList';
 import ActivityApproach from '../containers/ActivityApproach';
@@ -13,6 +14,7 @@ import ActivityOverview from '../containers/ActivityOverview';
 import ApdOverview from '../containers/ApdOverview';
 import Login from '../containers/Login';
 import PrivateRoute from '../containers/PrivateRoute';
+import ReviewAndSubmit from '../containers/ReviewAndSubmit';
 import StateContacts from '../containers/StateContacts';
 import StateStart from '../containers/StateStart';
 import StatePersonnel from '../containers/StatePersonnel';
@@ -40,12 +42,23 @@ const App = () => (
         <PrivateRoute path="/activity-overview" component={ActivityOverview} />
         <PrivateRoute path="/activity-schedule" component={ActivitySchedule} />
         <PrivateRoute path="/apd-overview" component={ApdOverview} />
-        <PrivateRoute path="/expenses-start" component={ActivityExpensesStart} />
+        <PrivateRoute
+          path="/expenses-start"
+          component={ActivityExpensesStart}
+        />
         <PrivateRoute path="/expenses-list" component={ActivityExpensesList} />
-        <PrivateRoute path="/expenses-details" component={ActivityExpensesDetails} />
+        <PrivateRoute
+          path="/expenses-details"
+          component={ActivityExpensesDetails}
+        />
+        <PrivateRoute path="/review-and-submit" component={ReviewAndSubmit} />
         <PrivateRoute path="/state-contacts" component={StateContacts} />
         <PrivateRoute path="/state-personnel" component={StatePersonnel} />
         <PrivateRoute path="/state-start" component={StateStart} />
+        <PrivateRoute
+          path="/submission-success"
+          component={SubmissionSuccess}
+        />
 
         <Route component={NoMatch} />
       </Switch>
