@@ -2,10 +2,10 @@
 
 ## Deployment
 
-We are using [CircleCI](https://circleci.com/gh/18F/workflows/cms-hitech-apd)
-to automate our tests as well as our deployments.  We have some more
-[documentation](deployment.md) that takes about our deployments in a little
-more detail.
+We are using [CircleCI](https://circleci.com/gh/18F/workflows/cms-hitech-apd) to
+automate our tests as well as our deployments. We have some more
+[documentation](deployment.md) that takes about our deployments in a little more
+detail.
 
 ## Front end
 
@@ -57,3 +57,10 @@ to get a nicer visualization.
 ## Testing
 
 We also have [documentation about how to run tests](testing.md).
+
+## Linting
+
+We use [eslint](https://eslint.org/) to analyze our JavaScript files and find
+patterns / code that doesn't adhere to our style rules. Our rules are based on
+[AirBnb's style guide](https://github.com/airbnb/javascript) and
+[Prettier](https://github.com/prettier/prettier).
