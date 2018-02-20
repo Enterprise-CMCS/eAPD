@@ -1,60 +1,39 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, Divider, Heading } from 'rebass';
+import { Box, Divider, Heading, Text } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import FormLogger from '../util/formLogger';
 import Dollars from '../components/Dollars';
-import PersonnelForm from '../components/FormPersonnel';
+import PageNavButtons from '../components/PageNavButtons';
+import FormPersonnel from '../components/FormPersonnel';
+import FormLogger from '../util/formLogger';
 
-class StatePersonnel extends Component {
-  showResults = data => {
-    console.log(data);
-  };
+const nextTot = (a, b) => a + b.nextCompensation * b.nextTime / 100;
+const nextNextTot = (a, b) =>
+  a + b.nextCompensation * b.nextNextTime * 1.03 / 100;
 
-  render() {
-    const { goTo } = this.props;
-    const { statePersonnel, contractingPersonnel } = this.props;
+const StatePersonnel = ({ goTo, statePersonnel, contractingPersonnel }) => {
+  const stateNextTotal = statePersonnel.reduce(nextTot, 0);
+  const stateNextNextTotal = statePersonnel.reduce(nextNextTot, 0);
+  const contractingNextTotal = contractingPersonnel.reduce(nextTot, 0);
+  const contractingNextNextTotal = contractingPersonnel.reduce(nextNextTot, 0);
 
-    const stateNextTotal = statePersonnel.reduce(
-      (total, personnel) =>
-        total + ((personnel.nextCompensation * personnel.nextTime) / 100),
-      0
-    );
-    const stateNextNextTotal = statePersonnel.reduce(
-      (total, personnel) =>
-        total +
-        ((personnel.nextCompensation * personnel.nextNextTime * 1.03) / 100),
-      0
-    );
-    const contractingNextTotal = contractingPersonnel.reduce(
-      (total, personnel) =>
-        total + ((personnel.nextCompensation * personnel.nextTime) / 100),
-      0
-    );
-    const contractingNextNextTotal = contractingPersonnel.reduce(
-      (total, personnel) =>
-        total +
-        ((personnel.nextCompensation * personnel.nextNextTime * 1.03) / 100),
-      0
-    );
-
-    return (
-      <Box py={4}>
-        <FormLogger />
-        <Heading>Personnel costs for Administration</Heading>
+  return (
+    <Box py={4}>
+      <FormLogger />
+      <Heading>Personnel costs for Administration</Heading>
+      <Text mb={4}>
         Most activities include costs for state and contracting personnel. You
         may also want to hire consultants for legal services or outreach, for
         example. We’ll go over other miscellaneous expenses like software
         licenses and supplies in the next section.
-        <table>
+      </Text>
+      <Box mb={4}>
+        <table className="table table-bordered">
           <tbody>
             <tr>
-              <td>
-                <li />
-              </td>
               <td>State personnel</td>
               <td>2019</td>
               <td>
@@ -66,9 +45,6 @@ class StatePersonnel extends Component {
               </td>
             </tr>
             <tr>
-              <td>
-                <li />
-              </td>
               <td>Contracting personnel</td>
               <td>2019</td>
               <td>
@@ -81,27 +57,30 @@ class StatePersonnel extends Component {
             </tr>
           </tbody>
         </table>
-        {/* <Form onSubmit={this.showResults} /> */}
-        <Heading>State personnel</Heading>
-        <PersonnelForm personnelType="state" />
-        <Divider my={4} color="gray2" />
-        <Heading>Contracting personnel</Heading>
-        <PersonnelForm personnelType="contracting" />
-        <Divider my={4} color="gray2" />
-        <Button onClick={() => goTo('/state-start')}>Continue</Button>
       </Box>
-    );
-  }
-}
+
+      <Heading>State personnel</Heading>
+      <FormPersonnel personnelType="state" />
+
+      <Divider my={4} color="gray2" />
+
+      <Heading>Contracting personnel</Heading>
+      <FormPersonnel personnelType="contracting" />
+
+      <PageNavButtons
+        goTo={goTo}
+        prev="/activity-schedule"
+        next="/expenses-start"
+      />
+    </Box>
+  );
+};
 
 StatePersonnel.propTypes = {
   goTo: PropTypes.func.isRequired,
   statePersonnel: PropTypes.array.isRequired,
   contractingPersonnel: PropTypes.array.isRequired
 };
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ goTo: path => push(path) }, dispatch);
 
 const mapStateToProps = state => {
   let contractingArray;
@@ -117,5 +96,8 @@ const mapStateToProps = state => {
     statePersonnel: stateArray || []
   };
 };
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ goTo: path => push(path) }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatePersonnel);
