@@ -24,11 +24,11 @@ describe('auth actions', () => {
     });
   });
 
-  it('logout should create LOGOUT_SUCCESS action', () => {
-    expect(actions.logout()).toEqual({ type: actions.LOGOUT_SUCCESS });
+  it('completeLogout should create LOGOUT_SUCCESS action', () => {
+    expect(actions.completeLogout()).toEqual({ type: actions.LOGOUT_SUCCESS });
   });
 
-  describe('attemptLogin (async)', () => {
+  describe('login (async)', () => {
     afterEach(() => {
       fetchMock.reset();
     });
@@ -42,7 +42,7 @@ describe('auth actions', () => {
         { type: actions.LOGIN_SUCCESS }
       ];
 
-      return store.dispatch(actions.attemptLogin()).then(() => {
+      return store.dispatch(actions.login()).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
@@ -56,7 +56,24 @@ describe('auth actions', () => {
         { type: actions.LOGIN_FAILURE, error: 'foo' }
       ];
 
-      return store.dispatch(actions.attemptLogin()).then(() => {
+      return store.dispatch(actions.login()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
+
+  describe('logout (async)', () => {
+    afterEach(() => {
+      fetchMock.reset();
+    });
+
+    it('creates LOGOUT_SUCCESS after successful request', () => {
+      const store = mockStore({});
+      fetchMock.onGet().reply(200);
+
+      const expectedActions = [{ type: actions.LOGOUT_SUCCESS }];
+
+      return store.dispatch(actions.logout()).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
