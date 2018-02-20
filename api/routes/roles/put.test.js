@@ -242,6 +242,7 @@ tap.test('roles POST endpoint', async endpointTest => {
         'the model is saved after new activities are attached'
       );
       saveTest.ok(res.status.calledWith(204), 'HTTP status set to 204');
+      saveTest.ok(res.end.calledOnce, 'response is terminated');
     });
   });
 });
