@@ -1,9 +1,9 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
-const getFullPath = require('../utils').getFullPath;
-const login = require('../utils').login;
-const request = require('../utils').request;
+const { db, getFullPath, login, request } = require('../utils');
 
 tap.test('users endpoint | GET /users', async getUsersTest => {
+  await db().seed.run();
+
   const url = getFullPath('/users');
 
   getUsersTest.test('when unauthenticated', async unauthenticatedTest => {
