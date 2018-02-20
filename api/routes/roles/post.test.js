@@ -224,14 +224,17 @@ tap.test('roles POST endpoint', async endpointTest => {
         { get: sinon.stub().returns(1) },
         { get: sinon.stub().returns(2) }
       ]);
-      RoleModel.forge.withArgs({ name: 'bob' }).returns({
+
+      const newUserModel = {
         save,
         activities: () => ({ attach }),
-        get: sinon
-          .stub()
-          .withArgs('id')
-          .returns('bob-id')
-      });
+        getActivities: async () => ['one', 'two'],
+        get: sinon.stub()
+      };
+      newUserModel.get.withArgs('id').returns('bob-id');
+      newUserModel.get.withArgs('name').returns('bob');
+
+      RoleModel.forge.withArgs({ name: 'bob' }).returns(newUserModel);
 
       await handler(req, res);
       saveTest.ok(true);
@@ -253,8 +256,12 @@ tap.test('roles POST endpoint', async endpointTest => {
         'the model is saved after activities are attached'
       );
       saveTest.ok(
-        res.send.calledWith({ roleID: 'bob-id' }),
-        'sends back the new role ID from the database'
+        res.status.calledWith(201),
+        'HTTP status set to 201'
+      );
+      saveTest.ok(
+        res.send.calledWith({ name: 'bob', id: 'bob-id', activities: sinon.match.array.deepEquals(['one', 'two']) }),
+        'sends back the new role object'
       );
     });
   });
