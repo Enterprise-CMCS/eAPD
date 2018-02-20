@@ -10,9 +10,12 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
 export const completeLogin = () => ({ type: LOGIN_SUCCESS });
 export const failLogin = error => ({ type: LOGIN_FAILURE, error });
-export const logout = () => ({ type: LOGOUT_SUCCESS });
+export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
-export const attemptLogin = (username, password) => dispatch => {
+export const logout = () => dispatch =>
+  axios.get(`${API_URL}/auth/logout`).then(() => dispatch(completeLogout()));
+
+export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
 
   return axios

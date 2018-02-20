@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Box, Button, Heading, Input, Label, Message } from 'rebass';
 
-import { attemptLogin } from '../actions/auth';
+import { login } from '../actions/auth';
 
 class Login extends Component {
   state = { username: '', password: '' };
@@ -17,7 +17,7 @@ class Login extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { username, password } = this.state;
-    this.props.attemptLogin(username, password);
+    this.props.login(username, password);
   };
 
   render() {
@@ -67,11 +67,11 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  attemptLogin: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   fetching: PropTypes.bool.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
@@ -80,6 +80,6 @@ const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
   fetching
 });
 
-const mapDispatchToProps = { attemptLogin };
+const mapDispatchToProps = { login };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
