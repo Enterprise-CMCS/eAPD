@@ -69,7 +69,7 @@ module.exports = (
     }
 
     try {
-      role.activities().detach(await role.getActivities());
+      role.activities().detach();
       await role.save();
       role.activities().attach(roleMeta.activities);
       await role.save();
