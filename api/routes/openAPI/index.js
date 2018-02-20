@@ -2,6 +2,7 @@ const pkg = require('../../package.json');
 
 const auth = require('./auth');
 const users = require('../users/openAPI');
+const roles = require('../roles/openAPI');
 
 module.exports = {
   openapi: '3.0',
@@ -12,7 +13,8 @@ module.exports = {
   },
   paths: {
     ...auth,
-    ...users
+    ...users,
+    ...roles
   },
   components: {
     securitySchemes: {
