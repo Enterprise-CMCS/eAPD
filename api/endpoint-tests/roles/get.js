@@ -26,19 +26,29 @@ tap.test('roles endpoint | GET /roles', async getUsersTest => {
     validTest.equal(response.statusCode, 200, 'gives a 200 status code');
     validTest.same(
       body,
-      [{
-        name: 'admin',
-        id: 1,
-        activities: ['view-roles', 'create-roles', 'edit-roles']
-      }, {
-        name: 'cms-reviewer',
-        id: 2,
-        activities: ['edit-roles']
-      }, {
-        name: 'state-submitter',
-        id: 3,
-        activities: []
-      }],
+      [
+        {
+          name: 'admin',
+          id: 1,
+          activities: [
+            'view-roles',
+            'create-roles',
+            'edit-roles',
+            'view-users',
+            'add-users'
+          ]
+        },
+        {
+          name: 'cms-reviewer',
+          id: 2,
+          activities: ['edit-roles']
+        },
+        {
+          name: 'state-submitter',
+          id: 3,
+          activities: []
+        }
+      ],
       'returns an array of known roles'
     );
   });
