@@ -5,6 +5,7 @@ Describe the pull request here, including any supplemental information needed to
 - [ ] This code has been reviewed by someone other than the original author
 - [ ] The experience passes a basic manual accessibility audit (keyboard nav, screenreader, text scaling) OR an exemption is documented
 - [ ] The change has been documented
+  - [ ] Associated OpenAPI documentation has been updated
 
 ### This feature is done when...
 - [ ] Design has approved the experience
