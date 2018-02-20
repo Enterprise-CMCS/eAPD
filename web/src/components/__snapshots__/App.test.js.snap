@@ -60,6 +60,18 @@ ShallowWrapper {
             />
             <Connect(PrivateRoute)
               component={[Function]}
+              path="/expenses-start"
+            />
+            <Connect(PrivateRoute)
+              component={[Function]}
+              path="/expenses-list"
+            />
+            <Connect(PrivateRoute)
+              component={[Function]}
+              path="/expenses-details"
+            />
+            <Connect(PrivateRoute)
+              component={[Function]}
               path="/state-contacts"
             />
             <Connect(PrivateRoute)
@@ -133,6 +145,18 @@ ShallowWrapper {
             />
             <Connect(PrivateRoute)
               component={[Function]}
+              path="/expenses-start"
+            />
+            <Connect(PrivateRoute)
+              component={[Function]}
+              path="/expenses-list"
+            />
+            <Connect(PrivateRoute)
+              component={[Function]}
+              path="/expenses-details"
+            />
+            <Connect(PrivateRoute)
+              component={[Function]}
               path="/state-contacts"
             />
             <Connect(PrivateRoute)
@@ -191,6 +215,18 @@ ShallowWrapper {
               <Connect(PrivateRoute)
                 component={[Function]}
                 path="/apd-overview"
+              />,
+              <Connect(PrivateRoute)
+                component={[Function]}
+                path="/expenses-start"
+              />,
+              <Connect(PrivateRoute)
+                component={[Function]}
+                path="/expenses-list"
+              />,
+              <Connect(PrivateRoute)
+                component={[Function]}
+                path="/expenses-details"
               />,
               <Connect(PrivateRoute)
                 component={[Function]}
@@ -326,6 +362,42 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
+                "path": "/expenses-start",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/expenses-list",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/expenses-details",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
                 "path": "/state-contacts",
               },
               "ref": null,
@@ -424,6 +496,18 @@ ShallowWrapper {
               />
               <Connect(PrivateRoute)
                 component={[Function]}
+                path="/expenses-start"
+              />
+              <Connect(PrivateRoute)
+                component={[Function]}
+                path="/expenses-list"
+              />
+              <Connect(PrivateRoute)
+                component={[Function]}
+                path="/expenses-details"
+              />
+              <Connect(PrivateRoute)
+                component={[Function]}
                 path="/state-contacts"
               />
               <Connect(PrivateRoute)
@@ -497,6 +581,18 @@ ShallowWrapper {
               />
               <Connect(PrivateRoute)
                 component={[Function]}
+                path="/expenses-start"
+              />
+              <Connect(PrivateRoute)
+                component={[Function]}
+                path="/expenses-list"
+              />
+              <Connect(PrivateRoute)
+                component={[Function]}
+                path="/expenses-details"
+              />
+              <Connect(PrivateRoute)
+                component={[Function]}
                 path="/state-contacts"
               />
               <Connect(PrivateRoute)
@@ -555,6 +651,18 @@ ShallowWrapper {
                 <Connect(PrivateRoute)
                   component={[Function]}
                   path="/apd-overview"
+                />,
+                <Connect(PrivateRoute)
+                  component={[Function]}
+                  path="/expenses-start"
+                />,
+                <Connect(PrivateRoute)
+                  component={[Function]}
+                  path="/expenses-list"
+                />,
+                <Connect(PrivateRoute)
+                  component={[Function]}
+                  path="/expenses-details"
                 />,
                 <Connect(PrivateRoute)
                   component={[Function]}
@@ -679,6 +787,42 @@ ShallowWrapper {
                 "props": Object {
                   "component": [Function],
                   "path": "/apd-overview",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "path": "/expenses-start",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "path": "/expenses-list",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "path": "/expenses-details",
                 },
                 "ref": null,
                 "rendered": null,
