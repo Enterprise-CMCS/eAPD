@@ -1,4 +1,6 @@
 const activities = {
+  'view-users': false,
+  'add-users': false,
   'view-roles': false,
   'create-roles': false,
   'edit-roles': false
@@ -12,6 +14,8 @@ const roles = {
 
 const roleToActivityMappings = {
   admin: [
+    'view-users',
+    'add-users',
     'view-roles',
     'create-roles',
     'edit-roles'
@@ -30,31 +34,49 @@ const insertAndGetIDs = async (knex, tableName, values) => {
   await knex(tableName).insert(insert);
   const asInserted = await knex(tableName).select('*');
 
-  const idMapping = { };
+  const idMapping = {};
   asInserted.forEach(as => {
     idMapping[as.name] = as.id;
   });
   return idMapping;
 };
 
-const setupMappings = async (knex, tableName, roleIDs, activityIDs, mappings) => {
+const setupMappings = async (
+  knex,
+  tableName,
+  roleIDs,
+  activityIDs,
+  mappings
+) => {
   const table = knex(tableName);
 
-  await Promise.all(Object.keys(mappings).map(async role => {
-    const roleID = roleIDs[role];
-    for (let i = 0; i < mappings[role].length; i += 1) {
-      const activityID = activityIDs[mappings[role][i]];
+  await Promise.all(
+    Object.keys(mappings).map(async role => {
+      const roleID = roleIDs[role];
+      for (let i = 0; i < mappings[role].length; i += 1) {
+        const activityID = activityIDs[mappings[role][i]];
 
-      // We actually need to block here, otherwise weird reference stuff happens
-      // and we just map the role to a single activity multiple times.
-      // eslint-disable-next-line no-await-in-loop
-      await table.insert({ role_id: roleID, activity_id: activityID });
-    }
-  }));
+        // We actually need to block here, otherwise weird reference stuff happens
+        // and we just map the role to a single activity multiple times.
+        // eslint-disable-next-line no-await-in-loop
+        await table.insert({ role_id: roleID, activity_id: activityID });
+      }
+    })
+  );
 };
 
 exports.seed = async knex => {
-  const activityIDs = await insertAndGetIDs(knex, 'auth_activities', activities);
+  const activityIDs = await insertAndGetIDs(
+    knex,
+    'auth_activities',
+    activities
+  );
   const roleIDs = await insertAndGetIDs(knex, 'auth_roles', roles);
-  await setupMappings(knex, 'auth_role_activity_mapping', roleIDs, activityIDs, roleToActivityMappings);
+  await setupMappings(
+    knex,
+    'auth_role_activity_mapping',
+    roleIDs,
+    activityIDs,
+    roleToActivityMappings
+  );
 };

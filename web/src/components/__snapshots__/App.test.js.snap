@@ -72,6 +72,10 @@ ShallowWrapper {
             />
             <Connect(PrivateRoute)
               component={[Function]}
+              path="/review-and-submit"
+            />
+            <Connect(PrivateRoute)
+              component={[Function]}
               path="/state-contacts"
             />
             <Connect(PrivateRoute)
@@ -81,6 +85,10 @@ ShallowWrapper {
             <Connect(PrivateRoute)
               component={[Function]}
               path="/state-start"
+            />
+            <Connect(PrivateRoute)
+              component={[Function]}
+              path="/submission-success"
             />
             <Route
               component={[Function]}
@@ -157,6 +165,10 @@ ShallowWrapper {
             />
             <Connect(PrivateRoute)
               component={[Function]}
+              path="/review-and-submit"
+            />
+            <Connect(PrivateRoute)
+              component={[Function]}
               path="/state-contacts"
             />
             <Connect(PrivateRoute)
@@ -166,6 +178,10 @@ ShallowWrapper {
             <Connect(PrivateRoute)
               component={[Function]}
               path="/state-start"
+            />
+            <Connect(PrivateRoute)
+              component={[Function]}
+              path="/submission-success"
             />
             <Route
               component={[Function]}
@@ -230,6 +246,10 @@ ShallowWrapper {
               />,
               <Connect(PrivateRoute)
                 component={[Function]}
+                path="/review-and-submit"
+              />,
+              <Connect(PrivateRoute)
+                component={[Function]}
                 path="/state-contacts"
               />,
               <Connect(PrivateRoute)
@@ -239,6 +259,10 @@ ShallowWrapper {
               <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-start"
+              />,
+              <Connect(PrivateRoute)
+                component={[Function]}
+                path="/submission-success"
               />,
               <Route
                 component={[Function]}
@@ -398,6 +422,18 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
+                "path": "/review-and-submit",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
                 "path": "/state-contacts",
               },
               "ref": null,
@@ -423,6 +459,18 @@ ShallowWrapper {
               "props": Object {
                 "component": [Function],
                 "path": "/state-start",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/submission-success",
               },
               "ref": null,
               "rendered": null,
@@ -508,6 +556,10 @@ ShallowWrapper {
               />
               <Connect(PrivateRoute)
                 component={[Function]}
+                path="/review-and-submit"
+              />
+              <Connect(PrivateRoute)
+                component={[Function]}
                 path="/state-contacts"
               />
               <Connect(PrivateRoute)
@@ -517,6 +569,10 @@ ShallowWrapper {
               <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-start"
+              />
+              <Connect(PrivateRoute)
+                component={[Function]}
+                path="/submission-success"
               />
               <Route
                 component={[Function]}
@@ -593,6 +649,10 @@ ShallowWrapper {
               />
               <Connect(PrivateRoute)
                 component={[Function]}
+                path="/review-and-submit"
+              />
+              <Connect(PrivateRoute)
+                component={[Function]}
                 path="/state-contacts"
               />
               <Connect(PrivateRoute)
@@ -602,6 +662,10 @@ ShallowWrapper {
               <Connect(PrivateRoute)
                 component={[Function]}
                 path="/state-start"
+              />
+              <Connect(PrivateRoute)
+                component={[Function]}
+                path="/submission-success"
               />
               <Route
                 component={[Function]}
@@ -666,6 +730,10 @@ ShallowWrapper {
                 />,
                 <Connect(PrivateRoute)
                   component={[Function]}
+                  path="/review-and-submit"
+                />,
+                <Connect(PrivateRoute)
+                  component={[Function]}
                   path="/state-contacts"
                 />,
                 <Connect(PrivateRoute)
@@ -675,6 +743,10 @@ ShallowWrapper {
                 <Connect(PrivateRoute)
                   component={[Function]}
                   path="/state-start"
+                />,
+                <Connect(PrivateRoute)
+                  component={[Function]}
+                  path="/submission-success"
                 />,
                 <Route
                   component={[Function]}
@@ -834,6 +906,18 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
+                  "path": "/review-and-submit",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
                   "path": "/state-contacts",
                 },
                 "ref": null,
@@ -859,6 +943,18 @@ ShallowWrapper {
                 "props": Object {
                   "component": [Function],
                   "path": "/state-start",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "path": "/submission-success",
                 },
                 "ref": null,
                 "rendered": null,
