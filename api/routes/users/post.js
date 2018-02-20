@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const defaultUserModel = require('../../db').models.user;
-const loggedIn = require('../../auth/middleware').loggedIn;
+const can = require('../../auth/middleware').can;
 
 const userIsNew = async (email, UserModel) => {
   const user = await UserModel.where({ email }).fetch();
@@ -18,7 +18,7 @@ const insert = async (email, password, UserModel) => {
 };
 
 module.exports = (app, UserModel = defaultUserModel) => {
-  app.post('/user', loggedIn, async (req, res) => {
+  app.post('/user', can('add-users'), async (req, res) => {
     if (req.body.email && req.body.password) {
       try {
         if (await userIsNew(req.body.email, UserModel)) {
