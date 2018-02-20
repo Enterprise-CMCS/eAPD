@@ -22,6 +22,13 @@ const post = async (...args) =>
     });
   });
 
+const put = async (...args) =>
+  new Promise(resolve => {
+    request.put(...args, (err, response, body) => {
+      resolve({ err, response, body });
+    });
+  });
+
 const login = async () => {
   const cookies = request.jar();
 
@@ -53,7 +60,7 @@ const db = () => {
 
 module.exports = {
   db,
-  request: { get, post, jar: request.jar },
+  request: { get, post, put, jar: request.jar },
   getFullPath,
   login
 };
