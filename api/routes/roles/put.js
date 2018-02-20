@@ -55,7 +55,6 @@ module.exports = (
     if (!role) {
       return res
         .status(404)
-        .send({ error: `No such role ID ${req.params.id}` })
         .end();
     }
 
@@ -65,12 +64,13 @@ module.exports = (
     } catch (e) {
       return res
         .status(400)
-        .send({ error: e.message })
+        .send({ error: 'edit-role-invalid' })
         .end();
     }
 
     try {
       role.activities().detach(await role.getActivities());
+      await role.save();
       role.activities().attach(roleMeta.activities);
       await role.save();
       return res.send({ roleID: role.get('id') });
