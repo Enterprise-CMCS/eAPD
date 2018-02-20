@@ -222,8 +222,16 @@ tap.test('roles POST endpoint', async endpointTest => {
         'activities are detached before new activities are added'
       );
       saveTest.ok(
-        detach.calledWith(sinon.match.array.deepEquals(['activity model 1', 'activity model 2'])),
-        'the existing activities are removed'
+        detach.calledWithExactly(),
+        'all existing related activities are removed'
+      );
+      saveTest.ok(
+        save.calledAfter(detach),
+        'the model is saved after old activities are detached'
+      );
+      saveTest.ok(
+        save.calledBefore(attach),
+        'the model is saved before new activities are attached'
       );
       saveTest.ok(
         attach.calledWith(sinon.match.array.deepEquals([1, 2])),
@@ -231,11 +239,7 @@ tap.test('roles POST endpoint', async endpointTest => {
       );
       saveTest.ok(
         save.calledAfter(attach),
-        'the model is saved after activities are attached'
-      );
-      saveTest.ok(
-        res.send.calledWith({ roleID: 'bob-id' }),
-        'sends back the role ID from the database'
+        'the model is saved after new activities are attached'
       );
     });
   });
