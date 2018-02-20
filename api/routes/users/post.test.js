@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const loggedInMiddleware = require('../../auth/middleware').loggedIn;
+const canMiddleware = require('../../auth/middleware').can('add-users');
 const postEndpoint = require('./post');
 
 tap.test('user POST endpoint', async endpointTest => {
@@ -38,7 +38,7 @@ tap.test('user POST endpoint', async endpointTest => {
     postEndpoint(app, UserModel);
 
     setupTest.ok(
-      app.post.calledWith('/user', loggedInMiddleware, sinon.match.func),
+      app.post.calledWith('/user', canMiddleware, sinon.match.func),
       'user POST endpoint is registered'
     );
   });
