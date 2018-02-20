@@ -35,24 +35,39 @@ const openAPI = {
   },
   '/roles/{id}': {
     put: {
-      description: 'Update an existing role in the system',
+      description: 'Change which activities an existing role is associated with',
       parameters: [{
         name: 'id',
         in: 'path',
         description: 'The ID of the role to update',
         required: true
-      }, {
-        name: 'activities',
-        in: 'body',
-        description: 'Array of activity IDs. IDs must be numeric, and must be IDs of existing activities',
-        required: 'true'
       }],
+      requestBody: {
+        description: 'The new values for the role',
+        required: true,
+        content: jsonResponse({
+          type: 'object',
+          properties: {
+            activities: {
+              description: 'List of activities to associate with this role; this list is definitive and after this operation, only the activities in this list will be associated with the role',
+              ...arrayOf({
+                type: 'number',
+                description: 'An activity ID'
+              })
+            }
+          }
+        })
+      },
       responses: {
         204: {
           description: 'The update was successful',
         },
+        400: {
+          description: 'The body of the request is invalid: there are no activities defined, some activities are not numeric, or some activities do not exist',
+          content: errorToken
+        },
         404: {
-          description: 'The user ID does not match any known users',
+          description: 'The role ID does not match any known roles',
           content: errorToken
         }
       }
