@@ -1,5 +1,5 @@
 const defaultUserModel = require('../../db').models.user;
-const loggedIn = require('../../auth/middleware').loggedIn;
+const can = require('../../auth/middleware').can;
 
 const allUsersHandler = async (req, res, UserModel) => {
   try {
@@ -33,10 +33,10 @@ const oneUserHandler = async (req, res, UserModel) => {
 };
 
 module.exports = (app, UserModel = defaultUserModel) => {
-  app.get('/users', loggedIn, (req, res) =>
+  app.get('/users', can('view-users'), (req, res) =>
     allUsersHandler(req, res, UserModel)
   );
-  app.get('/user/:id', loggedIn, (req, res) =>
+  app.get('/user/:id', can('view-users'), (req, res) =>
     oneUserHandler(req, res, UserModel)
   );
 };

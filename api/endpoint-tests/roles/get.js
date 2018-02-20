@@ -29,7 +29,7 @@ tap.test('roles endpoint | GET /roles', async getUsersTest => {
       [{
         name: 'admin',
         id: 1,
-        activities: ['view-roles', 'create-roles', 'edit-roles']
+        activities: ['view-roles', 'create-roles', 'edit-roles', 'view-users', 'add-users']
       }, {
         name: 'cms-reviewer',
         id: 2,
