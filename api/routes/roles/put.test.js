@@ -57,7 +57,7 @@ tap.test('roles POST endpoint', async endpointTest => {
       await handler(req, res);
 
       notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-      notFoundTest.ok(res.send.calledWith({ error: sinon.match.string }), 'sends back an error string');
+      notFoundTest.ok(res.send.notCalled, 'no body is sent');
       notFoundTest.ok(res.end.calledOnce, 'response is terminated');
     });
 
