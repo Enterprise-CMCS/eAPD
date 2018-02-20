@@ -99,9 +99,8 @@ tap.test('roles endpoint | PUT /roles/:roleID', async postRolesTests => {
         json: { activities: [1] }
       });
 
-      validTest.equal(response.statusCode, 200, 'gives a 200 status code');
-      validTest.ok(body, 'sends a body');
-      validTest.type(body.roleID, 'number', 'sends back a numeric role ID');
+      validTest.equal(response.statusCode, 204, 'gives a 204 status code');
+      validTest.notOk(body, 'does not send a body');
 
       const activities = await db()('auth_role_activity_mapping')
         .where({ role_id: 1 })

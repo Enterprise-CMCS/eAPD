@@ -73,7 +73,7 @@ module.exports = (
       await role.save();
       role.activities().attach(roleMeta.activities);
       await role.save();
-      return res.send({ roleID: role.get('id') });
+      return res.status(204);
     } catch (e) {
       return res.status(500).end();
     }
