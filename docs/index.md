@@ -49,6 +49,11 @@ about:
 * [our authorization model](api-authorization.md)
 * [how we handle authentication](api-authentication.md)
 
+The API is also documented with [OpenAPI](https://www.openapis.org/).  To see
+the spec document, once the API is running, you can browse to its `/open-api`
+endpoint.  You can also use a hosted version of [Swagger UI](http://petstore.swagger.io/)
+to get a nicer visualization.
+
 ## Testing
 
 We also have [documentation about how to run tests](testing.md).
