@@ -4,6 +4,8 @@ const {
 } = require('../utils');
 
 tap.test('roles endpoint | POST /roles', async postRolesTests => {
+  await db().seed.run();
+
   const url = getFullPath('/roles');
 
   const invalidCases = [{
@@ -74,9 +76,11 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
         json: { name: 'new-role', activities: [1, 2] }
       });
 
-      validTest.equal(response.statusCode, 200, 'gives a 200 status code');
+      validTest.equal(response.statusCode, 201, 'gives a 201 status code');
       validTest.ok(body, 'sends a body');
-      validTest.type(body.roleID, 'number', 'sends back a numeric role ID');
+      validTest.type(body.id, 'number', 'sends back a numeric role ID');
+      validTest.equal(body.name, 'new-role', 'sends back the new role name');
+      validTest.same(body.activities, ['view-roles', 'create-roles'], 'sends back the list of activities');
 
       const role = await db()('auth_roles')
         .where({ name: 'new-role' })
