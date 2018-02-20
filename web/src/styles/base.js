@@ -96,6 +96,39 @@ injectGlobal`
     cursor: pointer;
   }
 
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 0.5rem 1rem;
+    line-height: inherit;
+  }
+
+  th {
+    text-align: left;
+    font-weight: bold;
+    vertical-align: bottom;
+  }
+
+  td {
+    vertical-align: top;
+  }
+
+  .table th,
+  .table td {
+    border-top: 1px solid #e7e7e7;
+  }
+
+  .table-bordered td,
+  .table-bordered th {
+    border: 1px solid #e7e7e7;
+  }
+
   .sr-only {
     border: 0;
     clip: rect(0 0 0 0);
