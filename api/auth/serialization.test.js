@@ -66,6 +66,7 @@ tap.test('passport serialization', async serializationTest => {
           doneCallback.calledWith(null, {
             username: 'test-email',
             id: 'test-id',
+            role: undefined,
             activities: sinon.match.array.deepEquals([])
           }),
           'deserializes the user ID to an object'
@@ -75,6 +76,7 @@ tap.test('passport serialization', async serializationTest => {
       validTest.test('with a role', async adminRoleTest => {
         get.withArgs('email').returns('test-email');
         get.withArgs('id').returns('test-id');
+        get.withArgs('auth_role').returns('test-role');
         activities.resolves(['activity 1', 'activity 2']);
         userModel.fetch.resolves({ get, activities });
 
@@ -84,6 +86,7 @@ tap.test('passport serialization', async serializationTest => {
           doneCallback.calledWith(null, {
             username: 'test-email',
             id: 'test-id',
+            role: 'test-role',
             activities: sinon.match.array.deepEquals([
               'activity 1',
               'activity 2'
