@@ -67,8 +67,24 @@ const openAPI = {
           content: errorToken
         },
         404: {
-          description: 'The role ID does not match any known roles',
-          content: errorToken
+          description: 'The role ID does not match any known roles'
+        }
+      }
+    },
+    delete: {
+      description: 'Remove the associations between a role and activities, and delete the role',
+      parameters: [{
+        name: 'id',
+        in: 'path',
+        description: 'The ID of the role to delete',
+        required: true
+      }],
+      responses: {
+        204: {
+          description: 'The role was deleted successfully'
+        },
+        404: {
+          description: 'The role ID does not match any known roles'
         }
       }
     }
