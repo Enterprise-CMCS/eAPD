@@ -27,7 +27,7 @@ class ActivityApproach extends Component {
         <PageNavButtons
           goTo={goTo}
           prev="/activity-goals"
-          next="/activities-list"
+          next="/activity-schedule"
         />
       </Box>
     );

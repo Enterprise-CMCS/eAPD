@@ -1,32 +1,48 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { Link as RRLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
-import { Box } from 'rebass';
+import { Absolute, Box, Border, Heading, Link, Relative, Text } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import FormLogger from '../util/formLogger';
+import PageNavButtons from '../components/PageNavButtons';
 
-import ExpensesList from '../components/FormExpensesList';
+const expenses = [
+  ['Hardware, Software, and Licensing', 'Edit', '#!'],
+  ['State Travel', 'Edit', '#!'],
+  ['Training and Outreach', 'Start', '#!'],
+  [
+    'Equipment and Supplies',
+    'Start',
+    '/expenses-details/equipment-and-supplies'
+  ]
+];
 
-class ActivityExpensesList extends Component {
-  showResults = () => {};
-
-  render() {
-    const { goTo } = this.props;
-
-    return (
-      <Box py={4}>
-        <FormLogger />
-        <ExpensesList
-          goTo={goTo}
-          next="/activities-list"
-          prev="/expenses-start"
-        />
-      </Box>
-    );
-  }
-}
+const ActivityExpensesList = ({ goTo }) => (
+  <Box py={4}>
+    <Heading mb={3}>Expenses</Heading>
+    <Box mb={5}>
+      {expenses.map(([name, status, href]) => (
+        <Border key={name} py={2} bottom>
+          <Relative>
+            <Absolute right>
+              {href === '#!' ? (
+                <Text color="gray">{status}</Text>
+              ) : (
+                <Link to={href} is={RRLink}>
+                  {status}
+                </Link>
+              )}
+            </Absolute>
+            {name}
+          </Relative>
+        </Border>
+      ))}
+    </Box>
+    <PageNavButtons goTo={goTo} prev="/expenses-start" />
+  </Box>
+);
 
 ActivityExpensesList.propTypes = {
   goTo: PropTypes.func.isRequired
