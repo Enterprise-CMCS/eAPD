@@ -67,7 +67,7 @@ FormActivitiesStart.propTypes = {
 };
 
 const formConfig = {
-  form: 'form3',
+  form: 'activitiesStart',
   initialValues: {
     activities: [
       'administration',

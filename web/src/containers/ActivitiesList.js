@@ -11,6 +11,7 @@ import {
   Heading,
   Link,
   Relative,
+  Text,
   Tooltip
 } from 'rebass';
 import { bindActionCreators } from 'redux';
@@ -35,9 +36,13 @@ const ActivitiesList = ({ goTo }) => (
         <Border key={name} py={2} bottom>
           <Relative>
             <Absolute right>
-              <Link to={href} is={RRLink}>
-                {status}
-              </Link>
+              {href === '#!' ? (
+                <Text color="gray">{status}</Text>
+              ) : (
+                <Link to={href} is={RRLink}>
+                  {status}
+                </Link>
+              )}
             </Absolute>
             {name}
           </Relative>
