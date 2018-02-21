@@ -1,28 +1,28 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box } from 'rebass';
+import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
+import FormExpensesDetails from '../components/FormExpensesDetails';
+import PageNavButtons from '../components/PageNavButtons';
 import FormLogger from '../util/formLogger';
 
-import ExpenseDetails from '../components/FormExpensesDetails';
-
-class ActivityExpensesDetails extends Component {
-  showResults = () => {};
-
-  render() {
-    const { goTo } = this.props;
-
-    return (
-      <Box py={4}>
-        <FormLogger />
-        <ExpenseDetails goTo={goTo} next="" />
-      </Box>
-    );
-  }
-}
+const ActivityExpensesDetails = ({ goTo }) => (
+  <Box py={4}>
+    <FormLogger />
+    <Heading mb={3}>
+      Equipment and supplies for <em>Administration</em>
+    </Heading>
+    <FormExpensesDetails />
+    <PageNavButtons
+      goTo={goTo}
+      prev="/expenses-list"
+      next="/review-and-submit"
+    />
+  </Box>
+);
 
 ActivityExpensesDetails.propTypes = {
   goTo: PropTypes.func.isRequired

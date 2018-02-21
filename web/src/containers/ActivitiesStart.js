@@ -5,9 +5,9 @@ import { push } from 'react-router-redux';
 import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import FormLogger from '../util/formLogger';
 import FormActivitiesStart from '../components/FormActivitiesStart';
 import PageNavButtons from '../components/PageNavButtons';
+import FormLogger from '../util/formLogger';
 
 class ActivitiesStart extends Component {
   showResults = data => {
