@@ -139,4 +139,8 @@ injectGlobal`
     position: absolute;
     width: 1px;
   }
+
+  .overflow-auto {
+    overflow: auto;
+  }
 `;
