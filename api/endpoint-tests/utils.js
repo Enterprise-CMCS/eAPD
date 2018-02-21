@@ -8,6 +8,13 @@ const getFullPath = endpointPath =>
     process.env.PORT ||
     8000}${endpointPath}`;
 
+const del = async (...args) =>
+  new Promise(resolve => {
+    request.delete(...args, (err, response, body) => {
+      resolve({ err, response, body });
+    });
+  });
+
 const get = async (...args) =>
   new Promise(resolve => {
     request.get(...args, (err, response, body) => {
@@ -60,7 +67,7 @@ const db = () => {
 
 module.exports = {
   db,
-  request: { get, post, put, jar: request.jar },
+  request: { delete: del, get, post, put, jar: request.jar },
   getFullPath,
   login
 };
