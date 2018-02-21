@@ -74,11 +74,24 @@ tap.test('roles DELETE endpoint', async endpointTest => {
       'sends a server error if anything goes wrong',
       async saveTest => {
         const req = { user: { role: 'user-role' }, params: { id: 1 } };
-        const get1 = sinon.stub().withArgs('id').returns('role-id-1');
-        const get2 = sinon.stub().withArgs('id').returns('role-id-2');
-        const destroy = sinon.stub().rejects();
-        RoleModel.where.withArgs({ id: 1 }).returns({ fetch: sinon.stub().resolves({ destroy, get: get1 }) });
-        RoleModel.where.withArgs({ name: 'user-role' }).returns({ fetch: sinon.stub().resolves({ get: get2 }) });
+        const get = sinon.stub().withArgs('id').returns('role-id-2');
+        const fetch = sinon.stub();
+        const destroy = sinon.stub().resolves();
+        const save = sinon.stub().rejects();
+        const detach = sinon.stub();
+
+        RoleModel.where.withArgs({ id: 1 }).returns({ fetch });
+        RoleModel.where.withArgs({ name: 'user-role' }).returns({ fetch: sinon.stub().resolves({ get }) });
+
+        fetch.resolves({
+          save,
+          activities: () => ({ detach }),
+          destroy,
+          get: sinon
+            .stub()
+            .withArgs('id')
+            .returns('another-role-id')
+        });
 
         await handler(req, res);
 
@@ -88,16 +101,30 @@ tap.test('roles DELETE endpoint', async endpointTest => {
 
     handlerTest.test('deletes a role', async saveTest => {
       const req = { user: { role: 'user-role' }, params: { id: 1 } };
-      const get1 = sinon.stub().withArgs('id').returns('role-id-1');
-      const get2 = sinon.stub().withArgs('id').returns('role-id-2');
+      const get = sinon.stub().withArgs('id').returns('role-id-2');
+      const fetch = sinon.stub();
       const destroy = sinon.stub().resolves();
-      RoleModel.where.withArgs({ id: 1 }).returns({ fetch: sinon.stub().resolves({ destroy, get: get1 }) });
-      RoleModel.where.withArgs({ name: 'user-role' }).returns({ fetch: sinon.stub().resolves({ get: get2 }) });
+      const save = sinon.stub().resolves();
+      const detach = sinon.stub();
+
+      RoleModel.where.withArgs({ id: 1 }).returns({ fetch });
+      RoleModel.where.withArgs({ name: 'user-role' }).returns({ fetch: sinon.stub().resolves({ get }) });
+
+      fetch.resolves({
+        save,
+        activities: () => ({ detach }),
+        destroy,
+        get: sinon
+          .stub()
+          .withArgs('id')
+          .returns('another-role-id')
+      });
 
       await handler(req, res);
-      saveTest.ok(true);
 
-      saveTest.ok(destroy.calledOnce, 'model is destroyed');
+      saveTest.ok(detach.calledWithExactly(), 'activity associations are removed');
+      saveTest.ok(save.calledAfter(detach), 'model is saved after activities are disassociated');
+      saveTest.ok(destroy.calledAfter(save), 'model is destroyed after saving disassociation');
       saveTest.ok(res.status.calledWith(204), 'HTTP status set to 204');
       saveTest.ok(res.end.calledOnce, 'response is terminated');
     });
