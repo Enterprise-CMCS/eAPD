@@ -9,7 +9,7 @@ import SectionHeader from './SectionHeader';
 const AddButton = ({ fields, meta: { error, submitFailed } }) => (
   <Box>
     <Button bg="black" onClick={() => fields.push({})}>
-      Add another milestone
+      Add milestone
     </Button>
     {submitFailed && error && <div>{error}</div>}
   </Box>
@@ -22,7 +22,7 @@ AddButton.propTypes = {
 
 const Milestones = ({ fields }) =>
   fields.map((milestone, idx) => (
-    <tr>
+    <tr key={milestone}>
       <td>{idx + 1}</td>
       <td>
         <Field
@@ -78,7 +78,7 @@ const Milestones = ({ fields }) =>
           title="Remove Goal"
           onClick={() => fields.remove(idx)}
         >
-          Remove milestone
+          Remove
         </button>
       </td>
     </tr>
@@ -96,27 +96,28 @@ const FormActivitySchedule = ({
 }) => (
   <form onSubmit={handleSubmit}>
     <SectionHeader>
-      List the major milestones you&apos;re working towards as part of this
-      activity
+      List the major milestones you’re working towards as part of this activity
     </SectionHeader>
 
-    <table>
-      <thead>
-        <tr>
-          <th />
-          <th>Milestone</th>
-          <th>Status</th>
-          <th>Planned start date</th>
-          <th>Actual start date</th>
-          <th>Planned end date</th>
-          <th>Actual end date</th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        <FieldArray name="milestones" component={Milestones} />
-      </tbody>
-    </table>
+    <div className="overflow-auto">
+      <table className="table">
+        <thead>
+          <tr>
+            <th />
+            <th>Milestone</th>
+            <th>Status</th>
+            <th>Planned start date</th>
+            <th>Actual start date</th>
+            <th>Planned end date</th>
+            <th>Actual end date</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          <FieldArray name="milestones" component={Milestones} />
+        </tbody>
+      </table>
+    </div>
 
     <FieldArray name="milestones" component={AddButton} />
 

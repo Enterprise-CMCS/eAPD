@@ -12,18 +12,19 @@ const PageNavButtons = ({ goTo, prev, next }) => (
         Back
       </ButtonOutline>
     )}
-    <Button onClick={() => goTo(next)}>Continue</Button>
+    {next && <Button onClick={() => goTo(next)}>Continue</Button>}
   </div>
 );
 
 PageNavButtons.propTypes = {
   goTo: PropTypes.func.isRequired,
   prev: PropTypes.string,
-  next: PropTypes.string.isRequired
+  next: PropTypes.string
 };
 
 PageNavButtons.defaultProps = {
-  prev: ''
+  prev: '',
+  next: ''
 };
 
 export default PageNavButtons;

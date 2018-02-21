@@ -9,8 +9,12 @@ import SubmissionSuccess from './SubmissionSuccess';
 import ActivitiesStart from '../containers/ActivitiesStart';
 import ActivitiesList from '../containers/ActivitiesList';
 import ActivityApproach from '../containers/ActivityApproach';
+import ActivityExpensesDetails from '../containers/ActivityExpensesDetails';
+import ActivityExpensesList from '../containers/ActivityExpensesList';
+import ActivityExpensesStart from '../containers/ActivityExpensesStart';
 import ActivityGoals from '../containers/ActivityGoals';
 import ActivityOverview from '../containers/ActivityOverview';
+import ActivitySchedule from '../containers/ActivitySchedule';
 import ApdOverview from '../containers/ApdOverview';
 import Login from '../containers/Login';
 import PrivateRoute from '../containers/PrivateRoute';
@@ -19,10 +23,6 @@ import StateContacts from '../containers/StateContacts';
 import StateStart from '../containers/StateStart';
 import StatePersonnel from '../containers/StatePersonnel';
 import TopNav from '../containers/TopNav';
-import ActivitySchedule from '../containers/ActivitySchedule';
-import ActivityExpensesStart from '../containers/ActivityExpensesStart';
-import ActivityExpensesList from '../containers/ActivityExpensesList';
-import ActivityExpensesDetails from '../containers/ActivityExpensesDetails';
 
 const Wrapper = process.env.NODE_ENV !== 'production' ? DevProvider : Provider;
 
