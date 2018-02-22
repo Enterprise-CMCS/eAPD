@@ -31,6 +31,39 @@ const openAPI = {
           content: jsonResponse(arrayOf(roleObjectSchema))
         }
       }
+    },
+    post: {
+      description: 'Create a new role',
+      requestBody: {
+        description: 'The new values for the new role',
+        required: true,
+        content: jsonResponse({
+          type: 'object',
+          properties: {
+            name: {
+              description: 'The new role name. Must be unique.',
+              type: 'string'
+            },
+            activities: {
+              description: 'List of activities to associate with this role; this list is definitive and after this operation, only the activities in this list will be associated with the role',
+              ...arrayOf({
+                type: 'number',
+                description: 'An activity ID'
+              })
+            }
+          }
+        })
+      },
+      responses: {
+        201: {
+          description: 'The newly-created role object',
+          content: jsonResponse(roleObjectSchema)
+        },
+        400: {
+          description: 'The body of the request is invalid: there are no activities defined, some activities are not numeric, or some activities do not exist',
+          content: errorToken
+        }
+      }
     }
   },
   '/roles/{id}': {
