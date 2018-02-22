@@ -40,7 +40,7 @@ const validateRole = async (role, RoleModel, ActivityModel) => {
 
   return {
     name: role.name,
-    activities: role.activities.filter(id => !Number.isNaN(Number(id)))
+    activities: role.activities
   };
 };
 
@@ -65,7 +65,11 @@ module.exports = (
       await role.save();
       role.activities().attach(roleMeta.activities);
       await role.save();
-      return res.status(201).send({ name: role.get('name'), id: role.get('id'), activities: await role.getActivities() });
+      return res.status(201).send({
+        name: role.get('name'),
+        id: role.get('id'),
+        activities: await role.getActivities()
+      });
     } catch (e) {
       return res.status(500).end();
     }
