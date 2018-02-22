@@ -8,6 +8,7 @@ import FormLogger from '../util/formLogger';
 
 import FormStateStart from '../components/FormStateStart';
 import PageNavButtons from '../components/PageNavButtons';
+import withSidebar from '../components/withSidebar';
 
 class StateStart extends Component {
   showResults = data => {
@@ -35,4 +36,4 @@ StateStart.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(StateStart);
+export default connect(null, mapDispatchToProps)(withSidebar(StateStart));
