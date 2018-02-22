@@ -23,6 +23,7 @@ tap.test('roles endpoint | GET /roles', async getUsersTest => {
       json: true
     });
 
+    body.sort((role1, role2) => role1.id - role2.id);
     body.forEach(role => role.activities.sort());
 
     validTest.equal(response.statusCode, 200, 'gives a 200 status code');
