@@ -4,7 +4,8 @@ const activities = {
   'view-roles': false,
   'create-roles': false,
   'edit-roles': false,
-  'delete-roles': false
+  'delete-roles': false,
+  'view-activities': false
 };
 
 const roles = {
@@ -20,7 +21,8 @@ const roleToActivityMappings = {
     'view-roles',
     'create-roles',
     'edit-roles',
-    'delete-roles'
+    'delete-roles',
+    'view-activities'
   ],
   'cms-reviewer': [],
   'state-submitter': []
