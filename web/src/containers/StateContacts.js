@@ -5,9 +5,10 @@ import { push } from 'react-router-redux';
 import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import FormLogger from '../util/formLogger';
 import FormStateContacts from '../components/FormStateContacts';
 import PageNavButtons from '../components/PageNavButtons';
+import withSidebar from '../components/withSidebar';
+import FormLogger from '../util/formLogger';
 
 class StateContacts extends Component {
   showResults = data => {
@@ -35,4 +36,4 @@ StateContacts.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(StateContacts);
+export default connect(null, mapDispatchToProps)(withSidebar(StateContacts));
