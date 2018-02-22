@@ -98,7 +98,6 @@ tap.test('user GET endpoint', async endpointTest => {
         'selects only user ID and email'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-      console.log(res.send.args[0][0]);
       validTest.ok(
         res.send.calledWith([{ email: 'hi', id: 1 }, { email: 'bye', id: 2 }]),
         'body is set to the list of users'
