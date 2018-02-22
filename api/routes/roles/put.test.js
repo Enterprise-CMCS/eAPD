@@ -49,17 +49,20 @@ tap.test('roles POST endpoint', async endpointTest => {
       done();
     });
 
-    handlerTest.test('sends a not found error if requesting to edit a role that does not exist', async notFoundTest => {
-      const req = { params: { id: 1 }, body: { activities: [1, 2, 3] } };
-      RoleModel.where.withArgs({ id: 1 }).returns({ fetch: RoleModel.fetch });
-      RoleModel.fetch.resolves(null);
+    handlerTest.test(
+      'sends a not found error if requesting to edit a role that does not exist',
+      async notFoundTest => {
+        const req = { params: { id: 1 }, body: { activities: [1, 2, 3] } };
+        RoleModel.where.withArgs({ id: 1 }).returns({ fetch: RoleModel.fetch });
+        RoleModel.fetch.resolves(null);
 
-      await handler(req, res);
+        await handler(req, res);
 
-      notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-      notFoundTest.ok(res.send.notCalled, 'no body is sent');
-      notFoundTest.ok(res.end.calledOnce, 'response is terminated');
-    });
+        notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
+        notFoundTest.ok(res.send.notCalled, 'no body is sent');
+        notFoundTest.ok(res.end.calledOnce, 'response is terminated');
+      }
+    );
 
     handlerTest.test(
       'rejects invalid role objects...',
@@ -72,7 +75,7 @@ tap.test('roles POST endpoint', async endpointTest => {
         validationTest.test(
           'if the role does not have any activities',
           async invalidTest => {
-            const req = { params: { id: 1 }, body: { } };
+            const req = { params: { id: 1 }, body: {} };
             RoleModel.where
               .withArgs({ name: 'bob' })
               .returns({ fetch: RoleModel.fetch });
@@ -154,7 +157,10 @@ tap.test('roles POST endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error if anything goes wrong',
       async saveTest => {
-        const req = { params: { id: 1 }, body: { name: 'bob', activities: [1, 2] } };
+        const req = {
+          params: { id: 1 },
+          body: { name: 'bob', activities: [1, 2] }
+        };
         const save = sinon.stub().rejects();
         const attach = sinon.stub();
         const detach = sinon.stub();
@@ -187,7 +193,10 @@ tap.test('roles POST endpoint', async endpointTest => {
     );
 
     handlerTest.test('saves a valid role object', async saveTest => {
-      const req = { params: { id: 1 }, body: { name: 'bob', activities: [1, 2] } };
+      const req = {
+        params: { id: 1 },
+        body: { name: 'bob', activities: [1, 2] }
+      };
       const save = sinon.stub().resolves();
       const attach = sinon.stub();
       const detach = sinon.stub();

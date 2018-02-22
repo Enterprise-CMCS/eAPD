@@ -10,19 +10,21 @@ const openAPI = {
       responses: {
         200: {
           description: 'The list of activities known to the system',
-          content: jsonResponse(arrayOf({
-            type: 'object',
-            properties: {
-              id: {
-                type: 'number',
-                description: 'Activity ID'
-              },
-              name: {
-                type: 'string',
-                description: 'Activity name'
+          content: jsonResponse(
+            arrayOf({
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'number',
+                  description: 'Activity ID'
+                },
+                name: {
+                  type: 'string',
+                  description: 'Activity name'
+                }
               }
-            }
-          }))
+            })
+          )
         }
       }
     }
