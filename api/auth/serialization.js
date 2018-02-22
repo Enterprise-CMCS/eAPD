@@ -23,6 +23,7 @@ module.exports.deserializeUser = async (
       done(null, {
         username: user.get('email'),
         id: user.get('id'),
+        role: user.get('auth_role'),
         activities: await user.activities()
       });
     } else {

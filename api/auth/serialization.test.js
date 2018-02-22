@@ -32,16 +32,18 @@ tap.test('passport serialization', async serializationTest => {
   serializationTest.test('deserialize a user', async deserializeTest => {
     const userID = 'the-user-id';
 
-    deserializeTest.test('when there is a database problem', async invalidTest => {
-      userModel.fetch.rejects();
+    deserializeTest.test(
+      'when there is a database problem',
+      async invalidTest => {
+        userModel.fetch.rejects();
 
-      await serialization.deserializeUser(userID, doneCallback, userModel);
-      invalidTest.ok(
-        doneCallback.calledWith(sinon.match.string),
-        'calls back with an error'
-      );
-    });
-
+        await serialization.deserializeUser(userID, doneCallback, userModel);
+        invalidTest.ok(
+          doneCallback.calledWith(sinon.match.string),
+          'calls back with an error'
+        );
+      }
+    );
 
     deserializeTest.test('that is not in the database', async invalidTest => {
       userModel.fetch.resolves(null);
@@ -66,6 +68,7 @@ tap.test('passport serialization', async serializationTest => {
           doneCallback.calledWith(null, {
             username: 'test-email',
             id: 'test-id',
+            role: undefined,
             activities: sinon.match.array.deepEquals([])
           }),
           'deserializes the user ID to an object'
@@ -75,6 +78,7 @@ tap.test('passport serialization', async serializationTest => {
       validTest.test('with a role', async adminRoleTest => {
         get.withArgs('email').returns('test-email');
         get.withArgs('id').returns('test-id');
+        get.withArgs('auth_role').returns('test-role');
         activities.resolves(['activity 1', 'activity 2']);
         userModel.fetch.resolves({ get, activities });
 
@@ -84,6 +88,7 @@ tap.test('passport serialization', async serializationTest => {
           doneCallback.calledWith(null, {
             username: 'test-email',
             id: 'test-id',
+            role: 'test-role',
             activities: sinon.match.array.deepEquals([
               'activity 1',
               'activity 2'

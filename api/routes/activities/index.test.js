@@ -1,15 +1,15 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const canMiddleware = require('../../auth/middleware').can('view-roles');
-const getEndpoint = require('./get');
+const canMiddleware = require('../../auth/middleware').can('view-activities');
+const getEndpoint = require('./index');
 
-tap.test('roles GET endpoint', async endpointTest => {
+tap.test('activities GET endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = {
     get: sandbox.stub()
   };
-  const RoleModel = {
+  const ActivityModel = {
     fetchAll: sandbox.stub()
   };
   const res = {
@@ -27,34 +27,34 @@ tap.test('roles GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('setup', async setupTest => {
-    getEndpoint(app, RoleModel);
+    getEndpoint(app, ActivityModel);
 
     setupTest.ok(
-      app.get.calledWith('/roles', canMiddleware, sinon.match.func),
-      'roles GET endpoint is registered'
+      app.get.calledWith('/activities', canMiddleware, sinon.match.func),
+      'all activities GET endpoint is registered'
     );
   });
 
-  endpointTest.test('get roles handler', async handlerTest => {
+  endpointTest.test('get all activities handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      getEndpoint(app, RoleModel);
-      handler = app.get.args.find(args => args[0] === '/roles')[2];
+      getEndpoint(app, ActivityModel);
+      handler = app.get.args.find(args => args[0] === '/activities')[2];
       done();
     });
 
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
-        RoleModel.fetchAll.rejects();
+        ActivityModel.fetchAll.rejects();
 
         await handler({}, res);
 
         invalidTest.ok(
-          RoleModel.fetchAll.calledWith({
+          ActivityModel.fetchAll.calledWith({
             columns: sinon.match.array.deepEquals(['id', 'name'])
           }),
-          'selects only role ID and name'
+          'selects only user ID and email'
         );
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
@@ -62,32 +62,22 @@ tap.test('roles GET endpoint', async endpointTest => {
       }
     );
 
-    handlerTest.test('sends back a list of roles', async validTest => {
-      const get = sinon.stub();
-      get.withArgs('id').returns(1);
-      get.withArgs('name').returns('hi');
-
-      const getActivities = sinon
-        .stub()
-        .resolves(['activity1.1', 'activity1.2']);
-
-      const roles = [{ get, getActivities }];
-      RoleModel.fetchAll.resolves(roles);
+    handlerTest.test('sends back a list of activities', async validTest => {
+      const activities = [{ id: 1, name: 'hi' }, { id: 2, name: 'bye' }];
+      ActivityModel.fetchAll.resolves(activities);
 
       await handler({}, res);
 
       validTest.ok(
-        RoleModel.fetchAll.calledWith({
+        ActivityModel.fetchAll.calledWith({
           columns: sinon.match.array.deepEquals(['id', 'name'])
         }),
-        'selects only role ID and name'
+        'selects only activity ID and name'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        res.send.calledWith([
-          { id: 1, name: 'hi', activities: ['activity1.1', 'activity1.2'] }
-        ]),
-        'body is set to the list of roles'
+        res.send.calledWith(activities),
+        'body is set to the list of activities'
       );
     });
   });
