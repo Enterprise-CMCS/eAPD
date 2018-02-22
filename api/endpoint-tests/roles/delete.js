@@ -7,13 +7,13 @@ tap.test('roles endpoint | DELETE /roles/:roleID', async deleteRolesTests => {
   const url = getFullPath('/roles');
 
   deleteRolesTests.test('when unauthenticated', async unauthenticatedTests => {
-    unauthenticatedTests.test('with invalid ID', async invalidTest => {
+    unauthenticatedTests.test('with invalid role ID', async invalidTest => {
       const { response, body } = await request.delete(`${url}/9001`);
       invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
       invalidTest.notOk(body, 'does not send a body');
     });
 
-    unauthenticatedTests.test('with invalid ID', async invalidTest => {
+    unauthenticatedTests.test('with valid role ID', async invalidTest => {
       const { response, body } = await request.delete(`${url}/1`);
       invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
       invalidTest.notOk(body, 'does not send a body');
@@ -23,7 +23,7 @@ tap.test('roles endpoint | DELETE /roles/:roleID', async deleteRolesTests => {
   deleteRolesTests.test('when authenticated', async authenticatedTests => {
     const cookies = await login();
 
-    authenticatedTests.test('with an invalid ID', async invalidTest => {
+    authenticatedTests.test('with an invalid role ID', async invalidTest => {
       const { response, body } = await request.delete(`${url}/9001`, {
         jar: cookies
       });
@@ -32,7 +32,7 @@ tap.test('roles endpoint | DELETE /roles/:roleID', async deleteRolesTests => {
     });
 
     authenticatedTests.test(
-      'with an ID for a role that the user belongs to',
+      'deleting the role that the user belongs to',
       async invalidTest => {
         const { response, body } = await request.delete(`${url}/1`, {
           jar: cookies
@@ -43,7 +43,7 @@ tap.test('roles endpoint | DELETE /roles/:roleID', async deleteRolesTests => {
     );
 
     authenticatedTests.test(
-      'with a valid role ID that the user does not belong to',
+      'deleting a role that the user does not belong to',
       async validTest => {
         const { response, body } = await request.delete(`${url}/2`, {
           jar: cookies
