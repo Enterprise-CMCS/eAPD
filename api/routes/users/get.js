@@ -7,7 +7,9 @@ const allUsersHandler = async (req, res, UserModel) => {
   try {
     const users = await UserModel.fetchAll({ columns: ['id', 'email'] });
     logger.verbose(`sending users [${users.length} items]`);
-    res.send(users);
+    res.send(
+      users.map(user => ({ email: user.get('email'), id: user.get('id') }))
+    );
   } catch (e) {
     logger.error(e);
     res.status(500).end();
@@ -23,7 +25,7 @@ const oneUserHandler = async (req, res, UserModel) => {
       });
       if (user) {
         logger.verbose(`sending user [${user.get('email')}]`);
-        res.send(user);
+        res.send({ email: user.get('email'), id: user.get('id') });
       } else {
         logger.verbose(`no user found [${req.params.id}]`);
         res.status(404).end();

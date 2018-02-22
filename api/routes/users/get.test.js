@@ -73,7 +73,20 @@ tap.test('user GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends back a list of users', async validTest => {
-      const users = [{ id: 1, email: 'hi' }, { id: 2, email: 'bye' }];
+      const get = sinon.stub();
+      get
+        .withArgs('id')
+        .onFirstCall()
+        .returns(1)
+        .onSecondCall()
+        .returns(2);
+      get
+        .withArgs('email')
+        .onFirstCall()
+        .returns('hi')
+        .onSecondCall()
+        .returns('bye');
+      const users = [{ get }, { get }];
       UserModel.fetchAll.resolves(users);
 
       await handler({}, res);
@@ -85,8 +98,9 @@ tap.test('user GET endpoint', async endpointTest => {
         'selects only user ID and email'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
+      console.log(res.send.args[0][0]);
       validTest.ok(
-        res.send.calledWith(users),
+        res.send.calledWith([{ email: 'hi', id: 1 }, { email: 'bye', id: 2 }]),
         'body is set to the list of users'
       );
     });
@@ -171,7 +185,16 @@ tap.test('user GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends the requested user', async validTest => {
-      UserModel.fetch.resolves({ id: 1, email: 'test-email@dotcom.com' });
+      const get = sinon.stub();
+      get.withArgs('id').returns(1);
+      get.withArgs('email').returns('test-email@dotcom.com');
+
+      UserModel.fetch.resolves({
+        id: 1,
+        email: 'test-email@dotcom.com',
+        get
+      });
+
       await handler({ params: { id: 1 } }, res);
 
       validTest.ok(
