@@ -2,7 +2,6 @@ const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependen
 const { getFullPath, login, request } = require('../utils');
 
 tap.test('activities endpoint | GET /activities', async getUsersTest => {
-
   const url = getFullPath('/activities');
 
   getUsersTest.test('when unauthenticated', async unauthenticatedTest => {
@@ -22,7 +21,7 @@ tap.test('activities endpoint | GET /activities', async getUsersTest => {
       json: true
     });
 
-    body.sort((activity1, activity2) => ((activity1.id < activity2.id) ? -1 : 1));
+    body.sort((activity1, activity2) => activity1.id - activity2.id);
 
     validTest.equal(response.statusCode, 200, 'gives a 200 status code');
     validTest.same(
