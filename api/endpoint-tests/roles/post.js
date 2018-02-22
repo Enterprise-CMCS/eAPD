@@ -1,34 +1,40 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
-const {
-  db, request, getFullPath, login
-} = require('../utils');
+const { db, request, getFullPath, login } = require('../utils');
 
 tap.test('roles endpoint | POST /roles', async postRolesTests => {
   await db().seed.run();
 
   const url = getFullPath('/roles');
 
-  const invalidCases = [{
-    name: 'with no body'
-  }, {
-    name: 'with no name',
-    body: {}
-  }, {
-    name: 'with an existing name',
-    body: { name: 'admin' }
-  }, {
-    name: 'with no activities',
-    body: { name: 'new-role' }
-  }, {
-    name: 'with activities not an array',
-    body: { name: 'new-role', activities: 'wrong' }
-  }, {
-    name: 'with activities where some are not numbers',
-    body: { name: 'new-role', activities: [0, 'wrong', 2] }
-  }, {
-    name: 'with activities that are not valid',
-    body: { name: 'new-role', activities: [1, 2, 9001] }
-  }];
+  const invalidCases = [
+    {
+      name: 'with no body'
+    },
+    {
+      name: 'with no name',
+      body: {}
+    },
+    {
+      name: 'with an existing name',
+      body: { name: 'admin' }
+    },
+    {
+      name: 'with no activities',
+      body: { name: 'new-role' }
+    },
+    {
+      name: 'with activities not an array',
+      body: { name: 'new-role', activities: 'wrong' }
+    },
+    {
+      name: 'with activities where some are not numbers',
+      body: { name: 'new-role', activities: [0, 'wrong', 2] }
+    },
+    {
+      name: 'with activities that are not valid',
+      body: { name: 'new-role', activities: [1, 2, 9001] }
+    }
+  ];
 
   postRolesTests.test('when unauthenticated', async unauthenticatedTests => {
     [
@@ -80,7 +86,11 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
       validTest.ok(body, 'sends a body');
       validTest.type(body.id, 'number', 'sends back a numeric role ID');
       validTest.equal(body.name, 'new-role', 'sends back the new role name');
-      validTest.same(body.activities, ['view-roles', 'create-roles'], 'sends back the list of activities');
+      validTest.same(
+        body.activities,
+        ['view-roles', 'create-roles'],
+        'sends back the list of activities'
+      );
 
       const role = await db()('auth_roles')
         .where({ name: 'new-role' })
@@ -93,7 +103,11 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
         .select('activity_id')
         .map(activity => activity.activity_id);
 
-      validTest.same(activities, [1, 2], 'sets up a mapping between the new role and the requested activities');
+      validTest.same(
+        activities,
+        [1, 2],
+        'sets up a mapping between the new role and the requested activities'
+      );
     });
   });
 });
