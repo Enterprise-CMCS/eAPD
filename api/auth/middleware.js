@@ -3,7 +3,7 @@ const logger = require('../logger')('auth middleware');
 const canCache = {};
 
 module.exports.loggedIn = (req, res, next) => {
-  logger.silly('got a loggedIn middleware request');
+  logger.silly(req, 'got a loggedIn middleware request');
   if (req.user) {
     logger.verbose(req, `user is logged in`);
     next();
