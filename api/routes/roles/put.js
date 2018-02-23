@@ -53,9 +53,7 @@ module.exports = (
   app.put('/roles/:id', can('edit-roles'), async (req, res) => {
     const role = await RoleModel.where({ id: req.params.id }).fetch();
     if (!role) {
-      return res
-        .status(404)
-        .end();
+      return res.status(404).end();
     }
 
     let roleMeta;
