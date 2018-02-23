@@ -69,7 +69,8 @@ tap.test('user data model', async userModelTests => {
     activitesTests.test(
       'resolves a list of activites when the role relationship is already loaded',
       async alreadyLoadedTests => {
-        self.relations.role = true;
+        self.relations.role = {};
+        self.relations.role.activities = true;
         const list = await activities();
 
         alreadyLoadedTests.ok(

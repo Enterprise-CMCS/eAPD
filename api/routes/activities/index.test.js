@@ -63,7 +63,20 @@ tap.test('activities GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends back a list of activities', async validTest => {
-      const activities = [{ id: 1, name: 'hi' }, { id: 2, name: 'bye' }];
+      const get = sinon.stub();
+      get
+        .withArgs('id')
+        .onFirstCall()
+        .returns(1)
+        .onSecondCall()
+        .returns(2);
+      get
+        .withArgs('name')
+        .onFirstCall()
+        .returns('hi')
+        .onSecondCall()
+        .returns('bye');
+      const activities = [{ get }, { get }];
       ActivityModel.fetchAll.resolves(activities);
 
       await handler({}, res);
@@ -76,7 +89,7 @@ tap.test('activities GET endpoint', async endpointTest => {
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        res.send.calledWith(activities),
+        res.send.calledWith([{ id: 1, name: 'hi' }, { id: 2, name: 'bye' }]),
         'body is set to the list of activities'
       );
     });
