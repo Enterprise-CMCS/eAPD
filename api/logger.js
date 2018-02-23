@@ -39,17 +39,19 @@ module.exports = name => {
   }
 
   const logger = winston.loggers.get(name);
+  // Override the log function to append request information
+  // if it's provided
   logger.log = (level, req, ...args) => {
-    let middleBit = req;
+    let requestInfo = req;
     if (req && typeof req !== 'string') {
-      middleBit = {
+      requestInfo = {
         requestID: req.id
       };
       if (req.user) {
-        middleBit.userID = req.user.id;
+        requestInfo.userID = req.user.id;
       }
     }
-    winston.Logger.prototype.log.apply(logger, [level, ...args, middleBit]);
+    winston.Logger.prototype.log.apply(logger, [level, ...args, requestInfo]);
   };
 
   return logger;
