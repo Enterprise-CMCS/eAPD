@@ -52,37 +52,39 @@ module.exports = (
 ) => {
   logger.silly('setting up POST /roles route');
   app.post('/roles', can('create-roles'), async (req, res) => {
-    logger.silly('handling POST /roles route');
+    logger.silly(req, 'handling POST /roles route');
     let roleMeta;
     try {
-      logger.silly('validing the request', req.body);
+      logger.silly(req, 'validing the request', req.body);
       roleMeta = await validateRole(req.body, RoleModel, ActivityModel);
     } catch (e) {
-      logger.verbose('requested new role is invalid');
-      logger.verbose(e.message);
+      logger.verbose(req, 'requested new role is invalid');
+      logger.verbose(req, e.message);
       return res
         .status(400)
         .send({ error: 'add-role-invalid' })
         .end();
     }
 
-    logger.silly('request is valid');
+    logger.silly(req, 'request is valid');
 
     try {
-      logger.silly('creating new role');
+      logger.silly(req, 'creating new role');
       const role = RoleModel.forge({ name: roleMeta.name });
       await role.save();
-      logger.silly('attaching activities', roleMeta.activities);
+
+      logger.silly(req, 'attaching activities', roleMeta.activities);
       role.activities().attach(roleMeta.activities);
       await role.save();
-      logger.silly('all done');
+
+      logger.silly(req, 'all done');
       return res.status(201).send({
         name: role.get('name'),
         id: role.get('id'),
         activities: await role.getActivities()
       });
     } catch (e) {
-      logger.error(e);
+      logger.error(req, e);
       return res.status(500).end();
     }
   });

@@ -38,5 +38,19 @@ module.exports = name => {
     loggers[name] = true;
   }
 
-  return winston.loggers.get(name);
+  const logger = winston.loggers.get(name);
+  logger.log = (level, req, ...args) => {
+    let middleBit = req;
+    if (req && typeof req !== 'string') {
+      middleBit = {
+        requestID: req.id
+      };
+      if (req.user) {
+        middleBit.userID = req.user.id;
+      }
+    }
+    winston.Logger.prototype.log.apply(logger, [level, middleBit, ...args]);
+  };
+
+  return logger;
 };

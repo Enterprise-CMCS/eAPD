@@ -11,7 +11,8 @@ const routes = require('./routes');
 const server = express();
 
 server.use((req, res, next) => {
-  logger.verbose(`got ${req.method} request to ${req.path}`);
+  req.id = 'abc123';
+  logger.verbose(req, `got ${req.method} request to ${req.path}`);
   return next();
 });
 

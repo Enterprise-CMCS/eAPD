@@ -5,11 +5,12 @@ const can = require('../../auth/middleware').can;
 module.exports = (app, RoleModel = defaultRoleModel) => {
   logger.silly('setting up DELETE /roles route');
   app.delete('/roles/:id', can('delete-roles'), async (req, res) => {
-    logger.silly('handling up DELETE /roles route');
+    logger.silly(req, 'handling up DELETE /roles route');
     const targetRole = await RoleModel.where({ id: req.params.id }).fetch();
-    logger.verbose(`request to delete role [${targetRole.get('name')}]`);
+    logger.verbose(req, `request to delete role [${targetRole.get('name')}]`);
     if (!targetRole) {
       logger.info(
+        req,
         `requested to delete a role [${req.params.id}] that does not exist`
       );
       return res.status(404).end();
@@ -17,20 +18,23 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
 
     const userRole = await RoleModel.where({ name: req.user.role }).fetch();
     if (userRole.get('id') === targetRole.get('id')) {
-      logger.info(`requested to delete a user's own role [${req.params.id}]`);
+      logger.info(
+        req,
+        `requested to delete a user's own role [${req.params.id}]`
+      );
       return res.status(401).end();
     }
 
     try {
-      logger.silly('removing activities');
+      logger.silly(req, 'removing activities');
       targetRole.activities().detach();
       await targetRole.save();
-      logger.silly('destroying role');
+      logger.silly(req, 'destroying role');
       await targetRole.destroy();
-      logger.silly('okay, all good');
+      logger.silly(req, 'okay, all good');
       return res.status(204).end();
     } catch (e) {
-      logger.error(e);
+      logger.error(req, e);
       return res.status(500).end();
     }
   });
