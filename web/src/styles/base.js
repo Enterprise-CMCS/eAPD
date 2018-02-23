@@ -140,7 +140,16 @@ injectGlobal`
     width: 1px;
   }
 
+  .bold {
+    font-weight: bold;
+  }
+
   .overflow-auto {
     overflow: auto;
+  }
+
+  .list-reset {
+    list-style: none;
+    padding-left: 0;
   }
 `;
