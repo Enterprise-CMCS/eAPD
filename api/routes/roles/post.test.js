@@ -255,12 +255,13 @@ tap.test('roles POST endpoint', async endpointTest => {
         save.calledAfter(attach),
         'the model is saved after activities are attached'
       );
+      saveTest.ok(res.status.calledWith(201), 'HTTP status set to 201');
       saveTest.ok(
-        res.status.calledWith(201),
-        'HTTP status set to 201'
-      );
-      saveTest.ok(
-        res.send.calledWith({ name: 'bob', id: 'bob-id', activities: sinon.match.array.deepEquals(['one', 'two']) }),
+        res.send.calledWith({
+          name: 'bob',
+          id: 'bob-id',
+          activities: sinon.match.array.deepEquals(['one', 'two'])
+        }),
         'sends back the new role object'
       );
     });

@@ -73,60 +73,63 @@ tap.test('authorization data models', async authModelTests => {
     }
   );
 
-  authModelTests.test('activities getter helper method', async getActivitesTests => {
-    const sandbox = sinon.createSandbox();
-    const self = {
-      load: sandbox.stub(),
-      related: sandbox.stub(),
-      relations: { activities: false }
-    };
-    const pluck = sandbox.stub();
-    const getActivities = authorization.role.getActivities.bind(self);
+  authModelTests.test(
+    'activities getter helper method',
+    async getActivitesTests => {
+      const sandbox = sinon.createSandbox();
+      const self = {
+        load: sandbox.stub(),
+        related: sandbox.stub(),
+        relations: { activities: false }
+      };
+      const pluck = sandbox.stub();
+      const getActivities = authorization.role.getActivities.bind(self);
 
-    getActivitesTests.beforeEach(done => {
-      sandbox.reset();
+      getActivitesTests.beforeEach(done => {
+        sandbox.reset();
 
-      self.load.resolves();
-      self.related.withArgs('activities').returns({ pluck });
-      pluck.withArgs('name').returns(['one', 'two', 'three']);
+        self.load.resolves();
+        self.related.withArgs('activities').returns({ pluck });
+        pluck.withArgs('name').returns(['one', 'two', 'three']);
 
-      done();
-    });
+        done();
+      });
 
-    getActivitesTests.test(
-      'resolves a list of activites when the role relationship is already loaded',
-      async alreadyLoadedTests => {
-        self.relations.activities = true;
-        const list = await getActivities();
+      getActivitesTests.test(
+        'resolves a list of activites when the role relationship is already loaded',
+        async alreadyLoadedTests => {
+          self.relations.activities = true;
+          const list = await getActivities();
 
-        alreadyLoadedTests.ok(
-          self.load.notCalled,
-          'the model load method is not called'
-        );
-        alreadyLoadedTests.same(
-          list,
-          ['one', 'two', 'three'],
-          'returns the list of activities'
-        );
-      }
-    );
+          alreadyLoadedTests.ok(
+            self.load.notCalled,
+            'the model load method is not called'
+          );
+          alreadyLoadedTests.same(
+            list,
+            ['one', 'two', 'three'],
+            'returns the list of activities'
+          );
+        }
+      );
 
-    getActivitesTests.test(
-      'resolves a list of activites when the role relationship is not already loaded',
-      async notAlreadyLoadedTests => {
-        self.relations.activities = false;
-        const list = await getActivities();
+      getActivitesTests.test(
+        'resolves a list of activites when the role relationship is not already loaded',
+        async notAlreadyLoadedTests => {
+          self.relations.activities = false;
+          const list = await getActivities();
 
-        notAlreadyLoadedTests.ok(
-          self.load.calledOnce,
-          'the model load method is called'
-        );
-        notAlreadyLoadedTests.same(
-          list,
-          ['one', 'two', 'three'],
-          'returns the list of activities'
-        );
-      }
-    );
-  });
+          notAlreadyLoadedTests.ok(
+            self.load.calledOnce,
+            'the model load method is called'
+          );
+          notAlreadyLoadedTests.same(
+            list,
+            ['one', 'two', 'three'],
+            'returns the list of activities'
+          );
+        }
+      );
+    }
+  );
 });

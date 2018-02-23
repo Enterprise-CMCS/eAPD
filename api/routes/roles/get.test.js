@@ -67,11 +67,11 @@ tap.test('roles GET endpoint', async endpointTest => {
       get.withArgs('id').returns(1);
       get.withArgs('name').returns('hi');
 
-      const getActivities = sinon.stub().resolves(['activity1.1', 'activity1.2']);
+      const getActivities = sinon
+        .stub()
+        .resolves(['activity1.1', 'activity1.2']);
 
-      const roles = [
-        { get, getActivities }
-      ];
+      const roles = [{ get, getActivities }];
       RoleModel.fetchAll.resolves(roles);
 
       await handler({}, res);
