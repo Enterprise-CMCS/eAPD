@@ -1,9 +1,9 @@
 require('./env');
 const logger = require('./logger')('main');
-
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const uuid = require('uuid/v1');
 require('./db').setup();
 const auth = require('./auth');
 const routes = require('./routes');
@@ -11,7 +11,7 @@ const routes = require('./routes');
 const server = express();
 
 server.use((req, res, next) => {
-  req.id = 'abc123';
+  req.id = uuid();
   logger.verbose(req, `got ${req.method} request to ${req.path}`);
   return next();
 });
