@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import FormExpensesDetails from '../components/FormExpensesDetails';
 import PageNavButtons from '../components/PageNavButtons';
+import withSidebar from '../components/withSidebar';
 import FormLogger from '../util/formLogger';
 
 const ActivityExpensesDetails = ({ goTo }) => (
@@ -31,4 +32,6 @@ ActivityExpensesDetails.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ActivityExpensesDetails);
+export default connect(null, mapDispatchToProps)(
+  withSidebar(ActivityExpensesDetails)
+);

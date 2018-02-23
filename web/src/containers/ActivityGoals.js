@@ -5,9 +5,10 @@ import { push } from 'react-router-redux';
 import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
-import FormLogger from '../util/formLogger';
 import FormActivityGoals from '../components/FormActivityGoals';
 import PageNavButtons from '../components/PageNavButtons';
+import withSidebar from '../components/withSidebar';
+import FormLogger from '../util/formLogger';
 
 class ActivityGoals extends Component {
   showResults = data => {
@@ -41,4 +42,4 @@ ActivityGoals.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ActivityGoals);
+export default connect(null, mapDispatchToProps)(withSidebar(ActivityGoals));

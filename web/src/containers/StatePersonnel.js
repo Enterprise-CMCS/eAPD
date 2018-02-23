@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import Dollars from '../components/Dollars';
 import PageNavButtons from '../components/PageNavButtons';
 import FormPersonnel from '../components/FormPersonnel';
+import withSidebar from '../components/withSidebar';
 import FormLogger from '../util/formLogger';
 
 const nextTot = (a, b) => a + b.nextCompensation * b.nextTime / 100;
@@ -100,4 +101,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(StatePersonnel);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withSidebar(StatePersonnel)
+);
