@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import FormLogger from '../util/formLogger';
 import FormApdOverview from '../components/FormApdOverview';
 import PageNavButtons from '../components/PageNavButtons';
+import withSidebar from '../components/withSidebar';
 
 class ApdOverview extends Component {
   showResults = data => {
@@ -39,4 +40,4 @@ ApdOverview.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ApdOverview);
+export default connect(null, mapDispatchToProps)(withSidebar(ApdOverview));
