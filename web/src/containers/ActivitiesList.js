@@ -16,6 +16,7 @@ import {
 } from 'rebass';
 import { bindActionCreators } from 'redux';
 
+import withSidebar from '../components/withSidebar';
 import ButtonOutline from '../styles/ButtonOutline';
 
 // [Activity name, Link text, Link href]
@@ -65,4 +66,4 @@ ActivitiesList.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ActivitiesList);
+export default connect(null, mapDispatchToProps)(withSidebar(ActivitiesList));

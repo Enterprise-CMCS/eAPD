@@ -7,6 +7,7 @@ import { Absolute, Box, Border, Heading, Link, Relative, Text } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import PageNavButtons from '../components/PageNavButtons';
+import withSidebar from '../components/withSidebar';
 
 const expenses = [
   ['Hardware, Software, and Licensing', 'Edit', '#!'],
@@ -51,4 +52,6 @@ ActivityExpensesList.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ActivityExpensesList);
+export default connect(null, mapDispatchToProps)(
+  withSidebar(ActivityExpensesList)
+);
