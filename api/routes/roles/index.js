@@ -1,3 +1,4 @@
+const logger = require('../../logger')('roles route index');
 const del = require('./delete');
 const get = require('./get');
 const post = require('./post');
@@ -10,8 +11,12 @@ module.exports = (
   postEndpoint = post,
   putEndpoint = put
 ) => {
+  logger.silly('setting up DELETE endpoint');
   deleteEndpoint(app);
+  logger.silly('setting up GET endpoint');
   getEndpoint(app);
+  logger.silly('setting up POST endpoint');
   postEndpoint(app);
+  logger.silly('setting up PUT endpoint');
   putEndpoint(app);
 };
