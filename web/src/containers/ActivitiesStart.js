@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import FormActivitiesStart from '../components/FormActivitiesStart';
 import PageNavButtons from '../components/PageNavButtons';
 import FormLogger from '../util/formLogger';
+import withSidebar from '../components/withSidebar';
 
 class ActivitiesStart extends Component {
   showResults = data => {
@@ -39,4 +40,4 @@ ActivitiesStart.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ActivitiesStart);
+export default connect(null, mapDispatchToProps)(withSidebar(ActivitiesStart));

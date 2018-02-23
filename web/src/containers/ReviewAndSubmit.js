@@ -5,6 +5,8 @@ import { push } from 'react-router-redux';
 import { Box, Button, ButtonOutline, Heading, Text } from 'rebass';
 import { bindActionCreators } from 'redux';
 
+import withSidebar from '../components/withSidebar';
+
 const Section = ({ title }) => (
   <tbody>
     <tr>
@@ -78,4 +80,4 @@ ReviewAndSubmit.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ReviewAndSubmit);
+export default connect(null, mapDispatchToProps)(withSidebar(ReviewAndSubmit));
