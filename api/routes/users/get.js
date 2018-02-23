@@ -1,12 +1,12 @@
-const logger = require('../../logger')('GET /users');
+const logger = require('../../logger')('users route get');
 const defaultUserModel = require('../../db').models.user;
 const can = require('../../auth/middleware').can;
 
 const allUsersHandler = async (req, res, UserModel) => {
-  logger.silly('got request for all users');
+  logger.silly('handling GET /users route');
   try {
     const users = await UserModel.fetchAll({ columns: ['id', 'email'] });
-    logger.verbose(`sending users [${users.length} items]`);
+    logger.silly('sending users', JSON.parse(JSON.stringify(users)));
     res.send(
       users.map(user => ({ email: user.get('email'), id: user.get('id') }))
     );
@@ -17,6 +17,7 @@ const allUsersHandler = async (req, res, UserModel) => {
 };
 
 const oneUserHandler = async (req, res, UserModel) => {
+  logger.silly('handling GET /user/:id route');
   if (req.params.id && !Number.isNaN(Number(req.params.id))) {
     logger.silly('got a request for a single user', req.params.id);
     try {
@@ -24,7 +25,7 @@ const oneUserHandler = async (req, res, UserModel) => {
         columns: ['id', 'email']
       });
       if (user) {
-        logger.verbose(`sending user [${user.get('email')}]`);
+        logger.silly('sending user', JSON.parse(JSON.stringify(user)));
         res.send({ email: user.get('email'), id: user.get('id') });
       } else {
         logger.verbose(`no user found [${req.params.id}]`);
@@ -44,11 +45,11 @@ const oneUserHandler = async (req, res, UserModel) => {
 };
 
 module.exports = (app, UserModel = defaultUserModel) => {
-  logger.silly('adding route for GET /users');
+  logger.silly('setting up GET /users route');
   app.get('/users', can('view-users'), (req, res) =>
     allUsersHandler(req, res, UserModel)
   );
-  logger.silly('adding route for GET /user/:id');
+  logger.silly('setting up GET /user/:id route');
   app.get('/user/:id', can('view-users'), (req, res) =>
     oneUserHandler(req, res, UserModel)
   );
