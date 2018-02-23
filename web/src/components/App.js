@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Container, Provider } from 'rebass';
 
-import Demo from './Demo';
 import DevProvider from './DevProvider';
+import Hello from './Hello';
 import NoMatch from './NoMatch';
 import SubmissionSuccess from './SubmissionSuccess';
 import ActivitiesStart from '../containers/ActivitiesStart';
@@ -30,9 +30,9 @@ const App = () => (
   <Wrapper>
     <TopNav />
 
-    <Container>
+    <div className="container px2">
       <Switch>
-        <Route exact path="/" component={Demo} />
+        <Route exact path="/" component={Hello} />
         <Route path="/login" component={Login} />
 
         <PrivateRoute path="/activities-list" component={ActivitiesList} />
@@ -62,7 +62,7 @@ const App = () => (
 
         <Route component={NoMatch} />
       </Switch>
-    </Container>
+    </div>
   </Wrapper>
 );
 
