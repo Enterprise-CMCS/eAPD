@@ -49,7 +49,7 @@ module.exports = name => {
         middleBit.userID = req.user.id;
       }
     }
-    winston.Logger.prototype.log.apply(logger, [level, middleBit, ...args]);
+    winston.Logger.prototype.log.apply(logger, [level, ...args, middleBit]);
   };
 
   return logger;
