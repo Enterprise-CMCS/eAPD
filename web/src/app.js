@@ -12,6 +12,8 @@ import reducer from './reducers';
 import Root from './components/Root';
 import './styles/base';
 
+import './styles/index.css';
+
 const history = createHistory();
 
 const middleware = [thunk, routerMiddleware(history)];
