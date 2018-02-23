@@ -7,7 +7,6 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
   app.delete('/roles/:id', can('delete-roles'), async (req, res) => {
     logger.silly(req, 'handling up DELETE /roles route');
     const targetRole = await RoleModel.where({ id: req.params.id }).fetch();
-    logger.verbose(req, `request to delete role [${targetRole.get('name')}]`);
     if (!targetRole) {
       logger.info(
         req,
@@ -15,6 +14,7 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
       );
       return res.status(404).end();
     }
+    logger.verbose(req, `request to delete role [${targetRole.get('name')}]`);
 
     const userRole = await RoleModel.where({ name: req.user.role }).fetch();
     if (userRole.get('id') === targetRole.get('id')) {
