@@ -76,7 +76,7 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
       });
     });
 
-    authenticatedTests.test('with a valid new user', async validTest => {
+    authenticatedTests.test('with a valid new role', async validTest => {
       const { response, body } = await request.post(url, {
         jar: cookies,
         json: { name: 'new-role', activities: [1, 2] }
@@ -86,9 +86,10 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
       validTest.ok(body, 'sends a body');
       validTest.type(body.id, 'number', 'sends back a numeric role ID');
       validTest.equal(body.name, 'new-role', 'sends back the new role name');
+      body.activities.sort();
       validTest.same(
         body.activities,
-        ['view-roles', 'create-roles'],
+        ['create-roles', 'view-roles'],
         'sends back the list of activities'
       );
 
@@ -102,6 +103,7 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
         .where({ role_id: role.id })
         .select('activity_id')
         .map(activity => activity.activity_id);
+      activities.sort();
 
       validTest.same(
         activities,
