@@ -53,7 +53,8 @@ const openAPI = {
           description: 'The user was successfully added'
         },
         400: {
-          description: 'Invalid user submitted',
+          description:
+            'Invalid user submitted, such as email address already exists or password is weak',
           content: errorToken
         }
       }
