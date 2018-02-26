@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormExpensesStart from '../components/FormExpensesStart';
@@ -11,12 +10,12 @@ import withSidebar from '../components/withSidebar';
 import FormLogger from '../util/formLogger';
 
 const ActivityExpensesStart = ({ goTo }) => (
-  <Box py={4}>
+  <div>
     <FormLogger />
-    <Heading>Let’s take a look at your other expenses</Heading>
+    <h1>Let’s take a look at your other expenses</h1>
     <FormExpensesStart />
     <PageNavButtons goTo={goTo} prev="/state-personnel" next="/expenses-list" />
-  </Box>
+  </div>
 );
 
 ActivityExpensesStart.propTypes = {

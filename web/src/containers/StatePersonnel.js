@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Divider, Heading, Text } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import Dollars from '../components/Dollars';
@@ -22,16 +21,16 @@ const StatePersonnel = ({ goTo, statePersonnel, contractingPersonnel }) => {
   const contractingNextNextTotal = contractingPersonnel.reduce(nextNextTot, 0);
 
   return (
-    <Box py={4}>
+    <div>
       <FormLogger />
-      <Heading>Personnel costs for Administration</Heading>
-      <Text mb={4}>
+      <h1>Personnel costs for Administration</h1>
+      <p>
         Most activities include costs for state and contracting personnel. You
         may also want to hire consultants for legal services or outreach, for
         example. We’ll go over other miscellaneous expenses like software
         licenses and supplies in the next section.
-      </Text>
-      <Box mb={4}>
+      </p>
+      <div className="mb2">
         <table className="table table-bordered">
           <tbody>
             <tr>
@@ -58,14 +57,14 @@ const StatePersonnel = ({ goTo, statePersonnel, contractingPersonnel }) => {
             </tr>
           </tbody>
         </table>
-      </Box>
+      </div>
 
-      <Heading>State personnel</Heading>
+      <h2>State personnel</h2>
       <FormPersonnel personnelType="state" />
 
-      <Divider my={4} color="gray2" />
+      <hr className="my3" />
 
-      <Heading>Contracting personnel</Heading>
+      <h2>Contracting personnel</h2>
       <FormPersonnel personnelType="contracting" />
 
       <PageNavButtons
@@ -73,7 +72,7 @@ const StatePersonnel = ({ goTo, statePersonnel, contractingPersonnel }) => {
         prev="/activity-schedule"
         next="/expenses-start"
       />
-    </Box>
+    </div>
   );
 };
 

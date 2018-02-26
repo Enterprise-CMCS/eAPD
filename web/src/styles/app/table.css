@@ -1,0 +1,9 @@
+.table th,
+.table td {
+  border-top: 1px solid #e7e7e7;
+}
+
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid #e7e7e7;
+}

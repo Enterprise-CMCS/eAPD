@@ -10,13 +10,9 @@ import './src/actions';
 
 import './src/components/App';
 import './src/components/Counter';
-import './src/components/Demo';
-import './src/components/Hello';
 import './src/components/Root';
 
 import './src/containers/Home';
 
 import './src/reducers';
 import './src/reducers/counter';
-
-import './src/styles/Alert';

@@ -35,7 +35,7 @@ class Login extends Component {
           {error && <div className="mb2 bg-gray">{error}</div>}
           <form onSubmit={this.handleSubmit}>
             <div className="mb3">
-              <label>Email</label>
+              <label htmlFor="username">Email</label>
               <input
                 type="text"
                 name="username"
@@ -45,7 +45,7 @@ class Login extends Component {
               />
             </div>
             <div className="mb3">
-              <label>Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 name="password"
