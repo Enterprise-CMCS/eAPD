@@ -47,7 +47,8 @@
     "knex": "^0.14.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pg": "^7.4.0"
+    "pg": "^7.4.0",
+    "zxcvbn": "^4.4.2"
   },
   "engines": {
     "node": "^8.9"
