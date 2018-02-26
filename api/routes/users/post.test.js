@@ -15,6 +15,8 @@ tap.test('user POST endpoint', async endpointTest => {
   UserModel.fetch = sandbox.stub();
   UserModel.save = sandbox.stub();
 
+  const passwordChecker = sandbox.stub();
+
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -47,7 +49,7 @@ tap.test('user POST endpoint', async endpointTest => {
     let handler;
 
     handlerTest.beforeEach(done => {
-      postEndpoint(app, UserModel);
+      postEndpoint(app, UserModel, passwordChecker);
       handler = app.post.args[0][2];
       done();
     });
@@ -94,6 +96,7 @@ tap.test('user POST endpoint', async endpointTest => {
       'rejects inserting an existing user',
       async invalidTest => {
         UserModel.fetch.resolves({});
+        passwordChecker.returns({ score: 3 });
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },
@@ -113,6 +116,7 @@ tap.test('user POST endpoint', async endpointTest => {
       'sends a server error code if there is a database error checking for an existing user',
       async invalidTest => {
         UserModel.fetch.rejects();
+        passwordChecker.returns({ score: 3 });
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },
@@ -126,10 +130,35 @@ tap.test('user POST endpoint', async endpointTest => {
     );
 
     handlerTest.test(
+      'rejects if the password is too weak',
+      async invalidTest => {
+        UserModel.fetch.resolves();
+        passwordChecker.returns({ score: 0 });
+
+        await handler(
+          { body: { email: 'em@il.com', password: 'password' } },
+          res
+        );
+
+        invalidTest.ok(
+          passwordChecker.calledWith('password', ['em@il.com']),
+          'password is checked with supplemental data'
+        );
+        invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
+        invalidTest.ok(
+          res.send.calledWith({ error: 'add-user-weak-password' }),
+          'sets an error message'
+        );
+        invalidTest.ok(res.end.called, 'response is terminated');
+      }
+    );
+
+    handlerTest.test(
       'sends a server error code if there is a database error inserting a new user',
       async invalidTest => {
         UserModel.fetch.resolves();
         UserModel.save.rejects();
+        passwordChecker.returns({ score: 3 });
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },
@@ -147,12 +176,17 @@ tap.test('user POST endpoint', async endpointTest => {
       async validTest => {
         UserModel.fetch.resolves();
         UserModel.save.resolves();
+        passwordChecker.returns({ score: 3 });
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },
           res
         );
 
+        validTest.ok(
+          passwordChecker.calledWith('password', ['em@il.com']),
+          'password is checked with supplemental data'
+        );
         validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
         validTest.ok(res.send.notCalled, 'does not send a message');
         validTest.ok(res.end.called, 'response is terminated');
