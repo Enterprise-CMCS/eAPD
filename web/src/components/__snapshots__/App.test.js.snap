@@ -19,7 +19,11 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Connect(TopNav) />,
-        <Styled(Styled(Base))>
+        <Container
+          ml="auto"
+          mr="auto"
+          px={3}
+        >
           <Switch>
             <Route
               component={[Function]}
@@ -94,7 +98,7 @@ ShallowWrapper {
               component={[Function]}
             />
           </Switch>
-        </Styled(Styled(Base))>,
+        </Container>,
       ],
     },
     "ref": null,
@@ -187,6 +191,9 @@ ShallowWrapper {
               component={[Function]}
             />
           </Switch>,
+          "ml": "auto",
+          "mr": "auto",
+          "px": 3,
         },
         "ref": null,
         "rendered": Object {
@@ -503,7 +510,11 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Connect(TopNav) />,
-          <Styled(Styled(Base))>
+          <Container
+            ml="auto"
+            mr="auto"
+            px={3}
+          >
             <Switch>
               <Route
                 component={[Function]}
@@ -578,7 +589,7 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>
-          </Styled(Styled(Base))>,
+          </Container>,
         ],
       },
       "ref": null,
@@ -671,6 +682,9 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>,
+            "ml": "auto",
+            "mr": "auto",
+            "px": 3,
           },
           "ref": null,
           "rendered": Object {

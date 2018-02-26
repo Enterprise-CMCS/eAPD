@@ -2,80 +2,80 @@
 
 exports[`the Demo component renders correctly 1`] = `
 <div
-  className="sc-ifAKCX cFlEyZ sc-bdVaJa hoIHyY"
+  className="sc-bwzfXH uTxCW sc-bdVaJa hoIHyY"
   is={null}
 >
   <div
-    className="sc-eXEjpC Ektxw sc-kIPQKe gQkzp"
+    className="sc-kfGgVZ cucojL sc-kPVwWT btAOia"
     is={null}
   >
     <a
-      className="sc-RefOD iVdTDt sc-ibxdXY dRYPZn"
+      className="sc-kIPQKe eUbpZI sc-esjQYD fWMqOP"
       is={null}
     >
       Beep
     </a>
     <a
-      className="sc-RefOD cfkplI sc-ibxdXY dRYPZn"
+      className="sc-kIPQKe gJnPGB sc-esjQYD fWMqOP"
       is={null}
     >
       Boop
     </a>
     <a
-      className="sc-RefOD cfkplI sc-ibxdXY dRYPZn"
+      className="sc-kIPQKe gJnPGB sc-esjQYD fWMqOP"
       is={null}
     >
       Bop
     </a>
   </div>
   <h2
-    className="sc-eNQAEJ bpjgLe sc-jKJlTe FSDfo sc-ckVGcZ foYhJp sc-dxgOiQ jLStMh"
+    className="sc-dxgOiQ jydelQ sc-kpOJdX ghmnNB sc-kGXeez eIIwaK sc-kgoBCf bxyuuJ"
     is={null}
   >
     Hello
     <div
-      className="sc-iyvyFf ePQNFD sc-gzOgki cwiGqs"
+      className="sc-gxMtzJ cYOJIr sc-dqBHgY hAzyuT"
       is={null}
     >
       Beep
     </div>
   </h2>
   <div
-    className="sc-jtRfpW fASADh sc-elJkPf bpJyZp"
+    className="sc-lhVmIH eUVJAX sc-btzYZH bQykRe"
     is={null}
   >
     Message: a verbal, written, or recorded communication sent to or left for a recipient who cannot be contacted directly
   </div>
   <div
-    className="sc-bxivhb bUZGRr sc-htpNat jtWIOA sc-bdVaJa OUoyf"
+    className="sc-bdVaJa bDWFJH sc-htpNat jtWIOA sc-bdVaJa OUoyf"
     is={null}
   >
     <div
-      className="sc-ifAKCX cFlEyZ sc-bdVaJa WTnKA"
+      className="sc-bwzfXH uTxCW sc-bdVaJa WTnKA"
       is={null}
     >
       <div
-        className="sc-hEsumM ftUEpe sc-tilXH eyKWtt"
+        className="sc-jnlKLf jHiHbn sc-gGBfsJ jJGpDz"
         is={null}
       >
         <div
-          className="sc-hqyNC fwUope sc-kvZOFW jvYLmV"
+          className="sc-hmzhuo iweNdc sc-ksYbfQ hwXovf"
           is={null}
           src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2048&q=20"
         />
         <div
-          className="sc-ifAKCX cFlEyZ sc-bdVaJa iHSytp"
+          className="sc-bwzfXH uTxCW sc-bdVaJa iHSytp"
           is={null}
         >
           <h3
-            className="sc-kEYyzF gfWKdx sc-hMqMXs gdbeMS sc-eNQAEJ bpjgLe sc-jKJlTe ckzJsy sc-ckVGcZ foYhJp sc-dxgOiQ bwRFdG"
+            className="sc-jKJlTe loXQau sc-ckVGcZ cNmRMb sc-dxgOiQ jydelQ sc-kpOJdX iZiZvJ sc-kGXeez eIIwaK sc-kgoBCf cIXZav"
             is={null}
           >
             Card 
             A
           </h3>
           <small
-            className="sc-iAyFgw gPlgsX sc-kkGfuU kzFeiw sc-ckVGcZ foYhJp sc-dxgOiQ kAySVu"
+            className="sc-hMqMXs cPxEnv sc-eNQAEJ dLggIg sc-kGXeez eIIwaK sc-kgoBCf IoLsl"
             is={null}
           >
             Small meta text
@@ -84,31 +84,31 @@ exports[`the Demo component renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="sc-ifAKCX cFlEyZ sc-bdVaJa WTnKA"
+      className="sc-bwzfXH uTxCW sc-bdVaJa WTnKA"
       is={null}
     >
       <div
-        className="sc-hEsumM ftUEpe sc-tilXH eyKWtt"
+        className="sc-jnlKLf jHiHbn sc-gGBfsJ jJGpDz"
         is={null}
       >
         <div
-          className="sc-hqyNC fwUope sc-kvZOFW jvYLmV"
+          className="sc-hmzhuo iweNdc sc-ksYbfQ hwXovf"
           is={null}
           src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2048&q=20"
         />
         <div
-          className="sc-ifAKCX cFlEyZ sc-bdVaJa iHSytp"
+          className="sc-bwzfXH uTxCW sc-bdVaJa iHSytp"
           is={null}
         >
           <h3
-            className="sc-kEYyzF gfWKdx sc-hMqMXs gdbeMS sc-eNQAEJ bpjgLe sc-jKJlTe ckzJsy sc-ckVGcZ foYhJp sc-dxgOiQ bwRFdG"
+            className="sc-jKJlTe loXQau sc-ckVGcZ cNmRMb sc-dxgOiQ jydelQ sc-kpOJdX iZiZvJ sc-kGXeez eIIwaK sc-kgoBCf cIXZav"
             is={null}
           >
             Card 
             B
           </h3>
           <small
-            className="sc-iAyFgw gPlgsX sc-kkGfuU kzFeiw sc-ckVGcZ foYhJp sc-dxgOiQ kAySVu"
+            className="sc-hMqMXs cPxEnv sc-eNQAEJ dLggIg sc-kGXeez eIIwaK sc-kgoBCf IoLsl"
             is={null}
           >
             Small meta text
@@ -117,31 +117,31 @@ exports[`the Demo component renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="sc-ifAKCX cFlEyZ sc-bdVaJa WTnKA"
+      className="sc-bwzfXH uTxCW sc-bdVaJa WTnKA"
       is={null}
     >
       <div
-        className="sc-hEsumM ftUEpe sc-tilXH eyKWtt"
+        className="sc-jnlKLf jHiHbn sc-gGBfsJ jJGpDz"
         is={null}
       >
         <div
-          className="sc-hqyNC fwUope sc-kvZOFW jvYLmV"
+          className="sc-hmzhuo iweNdc sc-ksYbfQ hwXovf"
           is={null}
           src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2048&q=20"
         />
         <div
-          className="sc-ifAKCX cFlEyZ sc-bdVaJa iHSytp"
+          className="sc-bwzfXH uTxCW sc-bdVaJa iHSytp"
           is={null}
         >
           <h3
-            className="sc-kEYyzF gfWKdx sc-hMqMXs gdbeMS sc-eNQAEJ bpjgLe sc-jKJlTe ckzJsy sc-ckVGcZ foYhJp sc-dxgOiQ bwRFdG"
+            className="sc-jKJlTe loXQau sc-ckVGcZ cNmRMb sc-dxgOiQ jydelQ sc-kpOJdX iZiZvJ sc-kGXeez eIIwaK sc-kgoBCf cIXZav"
             is={null}
           >
             Card 
             C
           </h3>
           <small
-            className="sc-iAyFgw gPlgsX sc-kkGfuU kzFeiw sc-ckVGcZ foYhJp sc-dxgOiQ kAySVu"
+            className="sc-hMqMXs cPxEnv sc-eNQAEJ dLggIg sc-kGXeez eIIwaK sc-kgoBCf IoLsl"
             is={null}
           >
             Small meta text
@@ -150,31 +150,31 @@ exports[`the Demo component renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="sc-ifAKCX cFlEyZ sc-bdVaJa WTnKA"
+      className="sc-bwzfXH uTxCW sc-bdVaJa WTnKA"
       is={null}
     >
       <div
-        className="sc-hEsumM ftUEpe sc-tilXH eyKWtt"
+        className="sc-jnlKLf jHiHbn sc-gGBfsJ jJGpDz"
         is={null}
       >
         <div
-          className="sc-hqyNC fwUope sc-kvZOFW jvYLmV"
+          className="sc-hmzhuo iweNdc sc-ksYbfQ hwXovf"
           is={null}
           src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2048&q=20"
         />
         <div
-          className="sc-ifAKCX cFlEyZ sc-bdVaJa iHSytp"
+          className="sc-bwzfXH uTxCW sc-bdVaJa iHSytp"
           is={null}
         >
           <h3
-            className="sc-kEYyzF gfWKdx sc-hMqMXs gdbeMS sc-eNQAEJ bpjgLe sc-jKJlTe ckzJsy sc-ckVGcZ foYhJp sc-dxgOiQ bwRFdG"
+            className="sc-jKJlTe loXQau sc-ckVGcZ cNmRMb sc-dxgOiQ jydelQ sc-kpOJdX iZiZvJ sc-kGXeez eIIwaK sc-kgoBCf cIXZav"
             is={null}
           >
             Card 
             D
           </h3>
           <small
-            className="sc-iAyFgw gPlgsX sc-kkGfuU kzFeiw sc-ckVGcZ foYhJp sc-dxgOiQ kAySVu"
+            className="sc-hMqMXs cPxEnv sc-eNQAEJ dLggIg sc-kGXeez eIIwaK sc-kgoBCf IoLsl"
             is={null}
           >
             Small meta text
@@ -184,33 +184,33 @@ exports[`the Demo component renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="sc-ifAKCX cFlEyZ sc-bdVaJa jrVbSM"
+    className="sc-bwzfXH uTxCW sc-bdVaJa jrVbSM"
     is={null}
   >
     <button
-      className="sc-iwsKbI hAPDJb sc-dnqmqq uKddu"
+      className="sc-gzVnrw frTmqP sc-bZQynM iNtIVM"
       is={null}
     >
       Hello
     </button>
     <button
-      className="sc-jTzLTM cuxBAu sc-VigVT htunsm sc-iwsKbI hAPDJb sc-dnqmqq uKddu"
+      className="sc-gZMcBi dqzZqo sc-iwsKbI ihLBDt sc-gzVnrw frTmqP sc-bZQynM iNtIVM"
       is={null}
     >
       Hello
     </button>
     <button
-      className="sc-gqjmRU gqRUPg sc-gZMcBi gqXijI sc-iwsKbI euIPqd sc-dnqmqq jdUsdO"
+      className="sc-dnqmqq ktCjaN sc-htoDjs bHprPZ sc-gzVnrw hkZbzw sc-bZQynM egLdTL"
       is={null}
     >
       Hello
     </button>
     <div
-      className="sc-bAeIUo ctPUXC sc-bMVAic gPfCFy"
+      className="sc-gqPbQI kpoLrC sc-cLQEGU jJlbS"
       is={null}
     >
       <p
-        className="sc-ckVGcZ foYhJp sc-dxgOiQ kMqakB"
+        className="sc-kGXeez eIIwaK sc-kgoBCf ddRfmP"
         is={null}
       >
         Hover Me
@@ -218,44 +218,44 @@ exports[`the Demo component renders correctly 1`] = `
     </div>
   </div>
   <h2
-    className="sc-eNQAEJ bpjgLe sc-jKJlTe ePiGln sc-ckVGcZ foYhJp sc-dxgOiQ jYtIvp"
+    className="sc-dxgOiQ jydelQ sc-kpOJdX fQHLPT sc-kGXeez eIIwaK sc-kgoBCf kmPWrT"
     is={null}
   >
     Form elements
   </h2>
   <form>
     <div
-      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      className="sc-bwzfXH uTxCW sc-bdVaJa kdjLZs"
       is={null}
     >
       <label
-        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        className="sc-csuQGl dBeIhk sc-gipzik hgHqrk"
         is={null}
       >
         Input
       </label>
       <input
-        className="sc-fBuWsC jFadsW sc-jhAzac dklNqo"
+        className="sc-bRBYWo daqqCA sc-Rmtcm ezQfUF"
         defaultValue="Hello"
         is={null}
         type="text"
       />
     </div>
     <div
-      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      className="sc-bwzfXH uTxCW sc-bdVaJa kdjLZs"
       is={null}
     >
       <label
-        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        className="sc-csuQGl dBeIhk sc-gipzik hgHqrk"
         is={null}
       >
         Select
       </label>
       <div
-        className="sc-dVhcbM lcjAwY sc-fMiknA krFHnr sc-bZQynM iMWVsx"
+        className="sc-jhAzac bzDGUC sc-hzDkRC hNSHXE sc-bxivhb cdiCYE"
       >
         <select
-          className="sc-gzVnrw jwFyqx"
+          className="sc-ifAKCX gGAxQN"
           color="inherit"
           defaultValue="Hello"
         >
@@ -267,7 +267,7 @@ exports[`the Demo component renders correctly 1`] = `
           </option>
         </select>
         <svg
-          className="sc-htoDjs ldjFnT"
+          className="sc-EHOje fGhhCY"
           viewBox="0 0 32 32"
         >
           <path
@@ -277,31 +277,31 @@ exports[`the Demo component renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      className="sc-bwzfXH uTxCW sc-bdVaJa kdjLZs"
       is={null}
     >
       <label
-        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        className="sc-csuQGl dBeIhk sc-gipzik hgHqrk"
         is={null}
       >
         Input
       </label>
       <textarea
-        className="sc-fAjcbJ vYpGm sc-eqIVtm tHpjC"
+        className="sc-fMiknA jldedd sc-fBuWsC gzxlMr"
         defaultValue="Hello"
         is={null}
       />
     </div>
     <div
-      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      className="sc-bwzfXH uTxCW sc-bdVaJa kdjLZs"
       is={null}
     >
       <label
-        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        className="sc-csuQGl dBeIhk sc-gipzik hgHqrk"
         is={null}
       >
         <input
-          className="sc-gisBJw kDlVKO sc-caSCKo fXbvQO"
+          className="sc-eqIVtm kRufpp sc-dVhcbM llQgmY"
           is={null}
           type="checkbox"
         />
@@ -309,15 +309,15 @@ exports[`the Demo component renders correctly 1`] = `
       </label>
     </div>
     <div
-      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      className="sc-bwzfXH uTxCW sc-bdVaJa kdjLZs"
       is={null}
     >
       <label
-        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        className="sc-csuQGl dBeIhk sc-gipzik hgHqrk"
         is={null}
       >
         <input
-          className="sc-cHGsZl bHiaRe sc-kjoXOD buzgFW"
+          className="sc-caSCKo jjNSwx sc-fAjcbJ gVhsen"
           defaultChecked={true}
           is={null}
           name="foo"
@@ -326,11 +326,11 @@ exports[`the Demo component renders correctly 1`] = `
         Pick me
       </label>
       <label
-        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        className="sc-csuQGl dBeIhk sc-gipzik hgHqrk"
         is={null}
       >
         <input
-          className="sc-cHGsZl bHiaRe sc-kjoXOD buzgFW"
+          className="sc-caSCKo jjNSwx sc-fAjcbJ gVhsen"
           is={null}
           name="foo"
           type="radio"
@@ -339,33 +339,33 @@ exports[`the Demo component renders correctly 1`] = `
       </label>
     </div>
     <div
-      className="sc-ifAKCX cFlEyZ sc-bdVaJa kdjLZs"
+      className="sc-bwzfXH uTxCW sc-bdVaJa kdjLZs"
       is={null}
     >
       <label
-        className="sc-hzDkRC fsyfQm sc-bRBYWo jEyBFk"
+        className="sc-csuQGl dBeIhk sc-gipzik hgHqrk"
         is={null}
       >
         Slider
       </label>
       <input
-        className="sc-kgAjT iqeAVc sc-TOsTZ DlFFt"
+        className="sc-kjoXOD jkcGLm sc-gisBJw dBkAEY"
         is={null}
         type="range"
       />
     </div>
   </form>
   <section
-    className="sc-dNLxif cTKadY sc-jbKcbu hWvDCc"
+    className="sc-kvZOFW bkHKYt sc-frDJqD fOlDmN"
     id="Typographic Scale"
     is={null}
   >
     <h2
-      className="sc-eNQAEJ bpjgLe sc-jKJlTe cAcSXe sc-ckVGcZ foYhJp sc-dxgOiQ iRMEPR"
+      className="sc-dxgOiQ jydelQ sc-kpOJdX cQNwGm sc-kGXeez eIIwaK sc-kgoBCf jQJkDM"
       is={null}
     >
       <a
-        className="sc-kpOJdX bCROIv sc-kGXeez eIIwaK"
+        className="sc-chPdSV jxKHxO sc-kAzzGY gzqKJV"
         href="#Typographic Scale"
         is={null}
       >
@@ -373,76 +373,76 @@ exports[`the Demo component renders correctly 1`] = `
       </a>
     </h2>
     <p
-      className="sc-ckVGcZ foYhJp sc-dxgOiQ kMqakB"
+      className="sc-kGXeez eIIwaK sc-kgoBCf ddRfmP"
       is={null}
     >
       The default typographic scale is basedo n a 16px base and common sizes, well suited for responsive typography that helps maintain a natural feeling visual rhythm.
     </p>
     <p
-      className="sc-Rmtcm epEsCW sc-csuQGl ievhzw sc-ckVGcZ foYhJp sc-dxgOiQ jmahZm"
+      className="sc-jlyJG eJxvSk sc-iRbamj bgmzYQ sc-kGXeez eIIwaK sc-kgoBCf GVgPE"
       is={null}
     >
       96
       px The quick brown fox jumped over the lazy dog.
     </p>
     <p
-      className="sc-Rmtcm epEsCW sc-csuQGl dKMNYJ sc-ckVGcZ foYhJp sc-dxgOiQ gCVBHD"
+      className="sc-jlyJG eJxvSk sc-iRbamj bDBZxU sc-kGXeez eIIwaK sc-kgoBCf jcdTRH"
       is={null}
     >
       72
       px The quick brown fox jumped over the lazy dog.
     </p>
     <p
-      className="sc-Rmtcm epEsCW sc-csuQGl gdWlZS sc-ckVGcZ foYhJp sc-dxgOiQ jVOolO"
+      className="sc-jlyJG eJxvSk sc-iRbamj eTSvah sc-kGXeez eIIwaK sc-kgoBCf fvpxDK"
       is={null}
     >
       64
       px The quick brown fox jumped over the lazy dog.
     </p>
     <p
-      className="sc-Rmtcm epEsCW sc-csuQGl cfZBpJ sc-ckVGcZ foYhJp sc-dxgOiQ dVmXvX"
+      className="sc-jlyJG eJxvSk sc-iRbamj ioKtax sc-kGXeez eIIwaK sc-kgoBCf cLetFe"
       is={null}
     >
       48
       px The quick brown fox jumped over the lazy dog.
     </p>
     <p
-      className="sc-Rmtcm epEsCW sc-csuQGl ccxVEJ sc-ckVGcZ foYhJp sc-dxgOiQ jYtIvp"
+      className="sc-jlyJG eJxvSk sc-iRbamj lhISXK sc-kGXeez eIIwaK sc-kgoBCf kmPWrT"
       is={null}
     >
       32
       px The quick brown fox jumped over the lazy dog.
     </p>
     <p
-      className="sc-Rmtcm epEsCW sc-csuQGl OGEXm sc-ckVGcZ foYhJp sc-dxgOiQ gTpgse"
+      className="sc-jlyJG eJxvSk sc-iRbamj inPxbO sc-kGXeez eIIwaK sc-kgoBCf bIZSOK"
       is={null}
     >
       24
       px The quick brown fox jumped over the lazy dog.
     </p>
     <p
-      className="sc-Rmtcm epEsCW sc-csuQGl cMAKDi sc-ckVGcZ foYhJp sc-dxgOiQ gEomQh"
+      className="sc-jlyJG eJxvSk sc-iRbamj gIfheg sc-kGXeez eIIwaK sc-kgoBCf QnJuD"
       is={null}
     >
       20
       px The quick brown fox jumped over the lazy dog.
     </p>
     <p
-      className="sc-Rmtcm epEsCW sc-csuQGl cfpKmS sc-ckVGcZ foYhJp sc-dxgOiQ cUErUG"
+      className="sc-jlyJG eJxvSk sc-iRbamj ipQOGJ sc-kGXeez eIIwaK sc-kgoBCf gRfSuj"
       is={null}
     >
       16
       px The quick brown fox jumped over the lazy dog.
     </p>
     <p
-      className="sc-Rmtcm epEsCW sc-csuQGl eaiYnG sc-ckVGcZ foYhJp sc-dxgOiQ fPNQWW"
+      className="sc-jlyJG eJxvSk sc-iRbamj dVsOnz sc-kGXeez eIIwaK sc-kgoBCf ffFSiE"
       is={null}
     >
       14
       px The quick brown fox jumped over the lazy dog.
     </p>
     <p
-      className="sc-Rmtcm epEsCW sc-csuQGl kumjpo sc-ckVGcZ foYhJp sc-dxgOiQ bqpYRM"
+      className="sc-jlyJG eJxvSk sc-iRbamj eelfrF sc-kGXeez eIIwaK sc-kgoBCf dGYvSF"
       is={null}
     >
       12
