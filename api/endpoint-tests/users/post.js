@@ -52,6 +52,12 @@ tap.test('users endpoint | POST /user', async postUsersTest => {
           'gives a 403 status code'
         );
         unauthenticatedTest.notOk(body, 'does not send a body');
+
+        const newUsers = await usersInTheDatabase();
+        unauthenticatedTest.notOk(
+          newUsers,
+          'a user object is not inserted into the database'
+        );
       });
     });
   });
@@ -71,6 +77,12 @@ tap.test('users endpoint | POST /user', async postUsersTest => {
           { error: 'add-user-invalid' },
           'sends a token indicating the failure'
         );
+
+        const newUsers = await usersInTheDatabase();
+        invalidTest.notOk(
+          newUsers,
+          'a user object is not inserted into the database'
+        );
       });
     });
 
@@ -86,6 +98,11 @@ tap.test('users endpoint | POST /user', async postUsersTest => {
           body,
           { error: 'add-user-email-exists' },
           'sends a token indicating the failure'
+        );
+        const newUsers = await usersInTheDatabase();
+        invalidTest.notOk(
+          newUsers,
+          'a user object is not inserted into the database'
         );
       }
     );
@@ -119,11 +136,12 @@ tap.test('users endpoint | POST /user', async postUsersTest => {
       validTest.equal(response.statusCode, 200, 'gives a 200 status code');
       validTest.notOk(body, 'does not send a body');
 
-      const user = await db()('users')
-        .where({ email: 'newuser@email.com' })
-        .first();
-
-      validTest.ok(user, 'a user object is inserted into the database');
+      const newUsers = await usersInTheDatabase();
+      validTest.equal(
+        newUsers.length,
+        1,
+        'a user object is inserted into the database'
+      );
     });
   });
 });
