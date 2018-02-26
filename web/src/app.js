@@ -10,7 +10,6 @@ import thunk from 'redux-thunk';
 
 import reducer from './reducers';
 import Root from './components/Root';
-import './styles/base';
 
 import './styles/index.css';
 

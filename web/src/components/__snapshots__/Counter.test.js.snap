@@ -19,151 +19,153 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Styled(Styled(Base))
-          mb={2}
-        >
+        <h1>
           Clicks: 
           5
-        </Styled(Styled(Base))>,
-        <Styled(Styled(Base))
+        </h1>,
+        <button
           onClick={[Function]}
+          type="button"
         >
           -
-        </Styled(Styled(Base))>,
+        </button>,
         " ",
-        <Styled(Styled(Base))
+        <button
           onClick={[Function]}
+          type="button"
         >
           +
-        </Styled(Styled(Base))>,
+        </button>,
       ],
-      "py": 3,
+      "className": "py3",
     },
     "ref": null,
     "rendered": Array [
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "host",
         "props": Object {
           "children": Array [
             "Clicks: ",
             5,
           ],
-          "mb": 2,
         },
         "ref": null,
         "rendered": Array [
           "Clicks: ",
           5,
         ],
-        "type": [Function],
+        "type": "h1",
       },
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "host",
         "props": Object {
           "children": "-",
           "onClick": [Function],
+          "type": "button",
         },
         "ref": null,
         "rendered": "-",
-        "type": [Function],
+        "type": "button",
       },
       " ",
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "host",
         "props": Object {
           "children": "+",
           "onClick": [Function],
+          "type": "button",
         },
         "ref": null,
         "rendered": "+",
-        "type": [Function],
+        "type": "button",
       },
     ],
-    "type": [Function],
+    "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Styled(Styled(Base))
-            mb={2}
-          >
+          <h1>
             Clicks: 
             5
-          </Styled(Styled(Base))>,
-          <Styled(Styled(Base))
+          </h1>,
+          <button
             onClick={[Function]}
+            type="button"
           >
             -
-          </Styled(Styled(Base))>,
+          </button>,
           " ",
-          <Styled(Styled(Base))
+          <button
             onClick={[Function]}
+            type="button"
           >
             +
-          </Styled(Styled(Base))>,
+          </button>,
         ],
-        "py": 3,
+        "className": "py3",
       },
       "ref": null,
       "rendered": Array [
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "host",
           "props": Object {
             "children": Array [
               "Clicks: ",
               5,
             ],
-            "mb": 2,
           },
           "ref": null,
           "rendered": Array [
             "Clicks: ",
             5,
           ],
-          "type": [Function],
+          "type": "h1",
         },
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "host",
           "props": Object {
             "children": "-",
             "onClick": [Function],
+            "type": "button",
           },
           "ref": null,
           "rendered": "-",
-          "type": [Function],
+          "type": "button",
         },
         " ",
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "host",
           "props": Object {
             "children": "+",
             "onClick": [Function],
+            "type": "button",
           },
           "ref": null,
           "rendered": "+",
-          "type": [Function],
+          "type": "button",
         },
       ],
-      "type": [Function],
+      "type": "div",
     },
   ],
   Symbol(enzyme.__options__): Object {

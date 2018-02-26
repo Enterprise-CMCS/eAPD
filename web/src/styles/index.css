@@ -1,15 +1,12 @@
 @import 'ace-css';
 
 @import 'app/base';
+@import 'app/table';
 
 :root {
   --base-font-size: 16px;
-  --base-font-family: -apple-system, BlinkMacSystemFont,
-                      'avenir next', avenir,
-                      'helvetica neue', helvetica,
-                       roboto, noto,
-                       'segoe ui', arial,
-                       sans-serif;
+  --base-font-family: -apple-system, BlinkMacSystemFont, 'avenir next', avenir,
+    'helvetica neue', helvetica, roboto, noto, 'segoe ui', arial, sans-serif;
 
   --h1: 2rem;
   --h2: 1.5rem;
@@ -17,11 +14,14 @@
   --h4: 1rem;
   --h5: 0.875rem;
   --h6: 0.75rem;
+
   --bold-font-weight: bold;
+
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 2rem;
   --space-4: 4rem;
+
   --border-width: 1px;
   --border-radius: 3px;
 }

@@ -1,9 +1,10 @@
 module.exports = {
-  plugins: {
-    'postcss-import': {},
-    'postcss-cssnext': {
+  plugins: [
+    require('postcss-import'),
+    require('postcss-url'),
+    require('postcss-cssnext')({
       browsers: ['last 2 versions', '> 2%']
-    },
-    cssnano: { autoprefixer: false }
-  }
+    }),
+    require('cssnano')({ autoprefixer: false })
+  ]
 };

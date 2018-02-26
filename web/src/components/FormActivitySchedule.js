@@ -1,18 +1,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Button } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { Input } from './Inputs';
 import SectionHeader from './SectionHeader';
 
 const AddButton = ({ fields, meta: { error, submitFailed } }) => (
-  <Box>
-    <Button bg="black" onClick={() => fields.push({})}>
+  <div>
+    <button
+      type="button"
+      className="btn btn-primary bg-black"
+      onClick={() => fields.push({})}
+    >
       Add milestone
-    </Button>
+    </button>
     {submitFailed && error && <div>{error}</div>}
-  </Box>
+  </div>
 );
 
 AddButton.propTypes = {

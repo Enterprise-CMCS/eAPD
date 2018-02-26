@@ -1,10 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Container, Provider } from 'rebass';
 
-import DevProvider from './DevProvider';
 import Hello from './Hello';
 import NoMatch from './NoMatch';
+import Wrapper from './Wrapper';
 import SubmissionSuccess from './SubmissionSuccess';
 import ActivitiesStart from '../containers/ActivitiesStart';
 import ActivitiesList from '../containers/ActivitiesList';
@@ -23,8 +22,6 @@ import StateContacts from '../containers/StateContacts';
 import StateStart from '../containers/StateStart';
 import StatePersonnel from '../containers/StatePersonnel';
 import TopNav from '../containers/TopNav';
-
-const Wrapper = process.env.NODE_ENV !== 'production' ? DevProvider : Provider;
 
 const App = () => (
   <Wrapper>

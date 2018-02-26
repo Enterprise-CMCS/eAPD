@@ -1,8 +1,90 @@
-html { font-size: var(--base-font-size); }
-body { font-family: var(--base-font-family); }
+/* Base elemental resets / styles */
+
+html {
+  font-size: var(--base-font-size);
+}
+
+body {
+  font-family: var(--base-font-family);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--base-font-family);
+  font-weight: bold;
+  line-height: 1.25;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+p,
+dl,
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+input,
+select,
+textarea,
+fieldset {
+  font-family: inherit;
+  font-size: 1rem;
+  box-sizing: border-box;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+textarea {
+  line-height: 1.75;
+  resize: vertical;
+}
+
+button {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  max-width: 100%;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 0.5rem 1rem;
+  line-height: inherit;
+}
+
+th {
+  text-align: left;
+  font-weight: bold;
+  vertical-align: bottom;
+}
+
+td {
+  vertical-align: top;
+}
 
 .container {
   margin-left: auto;
   margin-right: auto;
   max-width: 960px;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }

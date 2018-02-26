@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Label, Select } from 'rebass';
 
 const SelectInput = ({
   input: { name, ...rest },
@@ -8,17 +7,17 @@ const SelectInput = ({
   label,
   options
 }) => (
-  <Box mb={3}>
-    <Label htmlFor={name}>{label}</Label>
-    <Select id={name} {...rest}>
+  <div className="mb2">
+    <label htmlFor={name}>{label}</label>
+    <select id={name} className="select" {...rest}>
       {options.map(o => (
         <option key={o.id} value={o.id}>
           {o.name}
         </option>
       ))}
-    </Select>
+    </select>
     {touched && error && <span>{error}</span>}
-  </Box>
+  </div>
 );
 
 SelectInput.propTypes = {

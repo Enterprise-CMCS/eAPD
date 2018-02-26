@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { Input } from './Inputs';
@@ -8,103 +7,106 @@ import { Input } from './Inputs';
 const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
   <div>
     <div>{submitFailed && error && <span>{error}</span>}</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Job title</th>
-          <th>Job description</th>
-          <th>2019 compensation</th>
-          <th>2019 percentage of time</th>
-          <th>2019 cost to activity</th>
-          <th>2020 percentage of time</th>
-          <th>2020 cost to activity</th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        {fields.map((person, idx) => (
-          <tr key={person}>
-            <td>
-              <Field
-                hideLabel
-                label="personnel name"
-                name={`${person}.name`}
-                component={Input}
-              />
-            </td>
-            <td>
-              <Field
-                hideLabel
-                label="job title"
-                name={`${person}.jobTitle`}
-                component={Input}
-              />
-            </td>
-            <td>
-              <Field
-                hideLabel
-                label="job description"
-                name={`${person}.jobDescription`}
-                component={Input}
-              />
-            </td>
-            <td>
-              <Field
-                hideLabel
-                label="2019 compensation"
-                name={`${person}.nextCompensation`}
-                component={Input}
-                parse={value => +value}
-                format={value => `${value}`}
-                type="number"
-              />
-            </td>
-            <td>
-              <Field
-                hideLabel
-                label="2019 percentage time"
-                name={`${person}.nextTime`}
-                component={Input}
-                parse={value => +value}
-                format={value => `${value}`}
-                type="number"
-              />
-            </td>
-            <td>0</td>
-            <td>
-              <Field
-                hideLabel
-                label="2020 percentage time"
-                name={`${person}.nextNextTime`}
-                component={Input}
-                parse={value => +value}
-                format={value => `${value}`}
-                type="number"
-              />
-            </td>
-            <td>0</td>
-            <td>
-              <button
-                type="button"
-                title="Remove Contact"
-                onClick={() => fields.remove(idx)}
-              >
-                Remove
-              </button>
-            </td>
+    <div className="overflow-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Job title</th>
+            <th>Job description</th>
+            <th>2019 compensation</th>
+            <th>2019 percentage of time</th>
+            <th>2019 cost to activity</th>
+            <th>2020 percentage of time</th>
+            <th>2020 cost to activity</th>
+            <th />
           </tr>
-        ))}
-      </tbody>
-    </table>
-    <Button
-      bg="black"
+        </thead>
+        <tbody>
+          {fields.map((person, idx) => (
+            <tr key={person}>
+              <td>
+                <Field
+                  hideLabel
+                  label="personnel name"
+                  name={`${person}.name`}
+                  component={Input}
+                />
+              </td>
+              <td>
+                <Field
+                  hideLabel
+                  label="job title"
+                  name={`${person}.jobTitle`}
+                  component={Input}
+                />
+              </td>
+              <td>
+                <Field
+                  hideLabel
+                  label="job description"
+                  name={`${person}.jobDescription`}
+                  component={Input}
+                />
+              </td>
+              <td>
+                <Field
+                  hideLabel
+                  label="2019 compensation"
+                  name={`${person}.nextCompensation`}
+                  component={Input}
+                  parse={value => +value}
+                  format={value => `${value}`}
+                  type="number"
+                />
+              </td>
+              <td>
+                <Field
+                  hideLabel
+                  label="2019 percentage time"
+                  name={`${person}.nextTime`}
+                  component={Input}
+                  parse={value => +value}
+                  format={value => `${value}`}
+                  type="number"
+                />
+              </td>
+              <td>0</td>
+              <td>
+                <Field
+                  hideLabel
+                  label="2020 percentage time"
+                  name={`${person}.nextNextTime`}
+                  component={Input}
+                  parse={value => +value}
+                  format={value => `${value}`}
+                  type="number"
+                />
+              </td>
+              <td>0</td>
+              <td>
+                <button
+                  type="button"
+                  title="Remove Contact"
+                  onClick={() => fields.remove(idx)}
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <button
+      type="button"
+      className="btn btn-primary bg-black"
       onClick={() =>
         fields.push({ nextCompensation: 0, nextTime: 0, nextNextTime: 0 })
       }
     >
       Add Contact
-    </Button>
+    </button>
   </div>
 );
 

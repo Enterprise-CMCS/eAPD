@@ -49,11 +49,9 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-x-ray": "^1.0.0-4",
-    "rebass": "^1.0.4",
     "redux": "^3.7.2",
     "redux-form": "^7.2.1",
-    "redux-thunk": "^2.2.0",
-    "styled-components": "^2.3.3"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.13.1",
@@ -76,10 +74,13 @@
     "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "jest": "^21.2.1",
-    "jest-styled-components": "^4.9.0",
+    "postcss": "^6.0.19",
+    "postcss-cli": "^5.0.0",
     "postcss-cssnext": "^3.1.0",
+    "postcss-custom-properties": "^6.2.0",
     "postcss-import": "^11.1.0",
-    "postcss-loader": "^2.1.0",
+    "postcss-loader": "^2.1.1",
+    "postcss-url": "^7.3.1",
     "prettier": "^1.9.1",
     "react-test-renderer": "^16.2.0",
     "redux-logger": "^3.0.6",
