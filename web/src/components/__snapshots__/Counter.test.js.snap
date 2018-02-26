@@ -22,23 +22,41 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <Styled(Styled(Base))
+        <Heading
+          bold={true}
+          f={5}
+          is="h2"
+          m={0}
           mb={2}
         >
           Clicks: 
           5
-        </Styled(Styled(Base))>,
-        <Styled(Styled(Base))
+        </Heading>,
+        <Button
+          color="white"
+          f={1}
+          m={0}
           onClick={[Function]}
+          pb={2}
+          pl={3}
+          pr={3}
+          pt={2}
         >
           -
-        </Styled(Styled(Base))>,
+        </Button>,
         " ",
-        <Styled(Styled(Base))
+        <Button
+          color="white"
+          f={1}
+          m={0}
           onClick={[Function]}
+          pb={2}
+          pl={3}
+          pr={3}
+          pt={2}
         >
           +
-        </Styled(Styled(Base))>,
+        </Button>,
       ],
       "py": 3,
     },
@@ -49,10 +67,14 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
+          "bold": true,
           "children": Array [
             "Clicks: ",
             5,
           ],
+          "f": 5,
+          "is": "h2",
+          "m": 0,
           "mb": 2,
         },
         "ref": null,
@@ -68,7 +90,14 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": "-",
+          "color": "white",
+          "f": 1,
+          "m": 0,
           "onClick": [Function],
+          "pb": 2,
+          "pl": 3,
+          "pr": 3,
+          "pt": 2,
         },
         "ref": null,
         "rendered": "-",
@@ -81,7 +110,14 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": "+",
+          "color": "white",
+          "f": 1,
+          "m": 0,
           "onClick": [Function],
+          "pb": 2,
+          "pl": 3,
+          "pr": 3,
+          "pt": 2,
         },
         "ref": null,
         "rendered": "+",
@@ -97,23 +133,41 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <Styled(Styled(Base))
+          <Heading
+            bold={true}
+            f={5}
+            is="h2"
+            m={0}
             mb={2}
           >
             Clicks: 
             5
-          </Styled(Styled(Base))>,
-          <Styled(Styled(Base))
+          </Heading>,
+          <Button
+            color="white"
+            f={1}
+            m={0}
             onClick={[Function]}
+            pb={2}
+            pl={3}
+            pr={3}
+            pt={2}
           >
             -
-          </Styled(Styled(Base))>,
+          </Button>,
           " ",
-          <Styled(Styled(Base))
+          <Button
+            color="white"
+            f={1}
+            m={0}
             onClick={[Function]}
+            pb={2}
+            pl={3}
+            pr={3}
+            pt={2}
           >
             +
-          </Styled(Styled(Base))>,
+          </Button>,
         ],
         "py": 3,
       },
@@ -124,10 +178,14 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "bold": true,
             "children": Array [
               "Clicks: ",
               5,
             ],
+            "f": 5,
+            "is": "h2",
+            "m": 0,
             "mb": 2,
           },
           "ref": null,
@@ -143,7 +201,14 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": "-",
+            "color": "white",
+            "f": 1,
+            "m": 0,
             "onClick": [Function],
+            "pb": 2,
+            "pl": 3,
+            "pr": 3,
+            "pt": 2,
           },
           "ref": null,
           "rendered": "-",
@@ -156,7 +221,14 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": "+",
+            "color": "white",
+            "f": 1,
+            "m": 0,
             "onClick": [Function],
+            "pb": 2,
+            "pl": 3,
+            "pr": 3,
+            "pt": 2,
           },
           "ref": null,
           "rendered": "+",
