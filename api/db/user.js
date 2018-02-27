@@ -1,3 +1,5 @@
+const logger = require('../logger')('db user model');
+
 module.exports = {
   user: {
     tableName: 'users',
@@ -7,7 +9,9 @@ module.exports = {
     },
 
     async activities() {
-      if (!this.relations.role) {
+      logger.silly('getting user activities');
+      if (!this.relations.role || !this.relations.role.activities) {
+        logger.silly('user activities are not loaded yet... loading them');
         await this.load('role.activities');
       }
 

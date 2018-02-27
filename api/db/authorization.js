@@ -1,3 +1,5 @@
+const logger = require('../logger')('db authorization model');
+
 module.exports = {
   activity: {
     tableName: 'auth_activities',
@@ -23,7 +25,9 @@ module.exports = {
     },
 
     async getActivities() {
+      logger.silly('getting role activities');
       if (!this.relations.activities) {
+        logger.silly('role activities are not loaded yet... loading them');
         await this.load('activities');
       }
 

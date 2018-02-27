@@ -9,21 +9,17 @@
     "seed": "knex seed:run",
     "start": "node main.js",
     "start-dev": "nodemon ./main.js",
-    "test": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec '{,!(node_modules)/**/}*.test.js'",
+    "test":
+      "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
     "test-endpoints": "tap --reporter=spec 'endpoint-tests/*/*.js'",
-    "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
+    "prettier":
+      "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/18F/cms-hitech-apd.git"
   },
-  "keywords": [
-    "cms",
-    "medicaid",
-    "hitech",
-    "emr",
-    "apd"
-  ],
+  "keywords": ["cms", "medicaid", "hitech", "emr", "apd"],
   "contributors": [
     "Nicole Fenton",
     "Meghana Khandekar",
@@ -47,7 +43,9 @@
     "knex": "^0.14.4",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pg": "^7.4.1"
+    "pg": "^7.4.1",
+    "uuid": "^3.2.1",
+    "winston": "^2.4.0"
   },
   "engines": {
     "node": "^8.9"
