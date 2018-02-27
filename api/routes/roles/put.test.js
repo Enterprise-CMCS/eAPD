@@ -68,7 +68,7 @@ tap.test('roles POST endpoint', async endpointTest => {
       'rejects invalid role objects...',
       async validationTest => {
         validationTest.beforeEach(async () => {
-          const fetch = sinon.stub.resolves(true);
+          const fetch = sinon.stub().resolves(true);
           RoleModel.where.withArgs({ id: 1 }).returns({ fetch });
         });
 
@@ -164,7 +164,7 @@ tap.test('roles POST endpoint', async endpointTest => {
         const save = sinon.stub().rejects();
         const attach = sinon.stub();
         const detach = sinon.stub();
-        const fetch = sinon.stub;
+        const fetch = sinon.stub();
         RoleModel.where.withArgs({ id: 1 }).returns({ fetch });
         RoleModel.where
           .withArgs({ name: 'bob' })
