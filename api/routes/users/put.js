@@ -24,42 +24,42 @@ module.exports = (
     logger.silly(req, 'handling PUT /user/:id route');
     logger.silly(req, `attempting to update user [${req.params.id}]`);
 
-    const user = await UserModel.where({ id: req.params.id }).fetch();
-    if (!user) {
-      logger.verbose(req, `no user found for [${req.params.id}]`);
-      return res.status(404).end();
-    }
-
-    if (req.body.email && req.body.email !== user.get('email')) {
-      if (!await userIsNew(req.body.email, UserModel)) {
-        logger.verbose(
-          req,
-          `user with email already exists [${req.body.email}]`
-        );
-        return res
-          .status(400)
-          .send({ error: 'edit-user-email-exists' })
-          .end();
-      }
-    }
-
-    if (req.body.password) {
-      const passwordScore = passwordChecker(req.body.password, [
-        req.body.email
-      ]);
-
-      if (passwordScore.score < 3) {
-        logger.verbose(`password is too weak: score ${passwordScore.score}`);
-        return res
-          .status(400)
-          .send({ error: 'edit-user-weak-password' })
-          .end();
-      }
-
-      user.set({ password: bcrypt.hashSync(req.body.password) });
-    }
-
     try {
+      const user = await UserModel.where({ id: req.params.id }).fetch();
+      if (!user) {
+        logger.verbose(req, `no user found for [${req.params.id}]`);
+        return res.status(404).end();
+      }
+
+      if (req.body.email && req.body.email !== user.get('email')) {
+        if (!await userIsNew(req.body.email, UserModel)) {
+          logger.verbose(
+            req,
+            `user with email already exists [${req.body.email}]`
+          );
+          return res
+            .status(400)
+            .send({ error: 'edit-user-email-exists' })
+            .end();
+        }
+      }
+
+      if (req.body.password) {
+        const passwordScore = passwordChecker(req.body.password, [
+          req.body.email
+        ]);
+
+        if (passwordScore.score < 3) {
+          logger.verbose(`password is too weak: score ${passwordScore.score}`);
+          return res
+            .status(400)
+            .send({ error: 'edit-user-weak-password' })
+            .end();
+        }
+
+        user.set({ password: bcrypt.hashSync(req.body.password) });
+      }
+
       logger.silly(req, 'updating user fields');
       const fields = ['email', 'name', 'position', 'phone', 'state'];
       fields.forEach(field => {
