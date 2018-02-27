@@ -27,7 +27,7 @@ const App = () => (
   <Wrapper>
     <TopNav />
 
-    <div className="container px2">
+    <div className="container p2">
       <Switch>
         <Route exact path="/" component={Hello} />
         <Route path="/login" component={Login} />
