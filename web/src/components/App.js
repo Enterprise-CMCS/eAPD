@@ -1,10 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Container, Provider } from 'rebass';
 
-import Demo from './Demo';
-import DevProvider from './DevProvider';
+import Hello from './Hello';
 import NoMatch from './NoMatch';
+import Wrapper from './Wrapper';
 import SubmissionSuccess from './SubmissionSuccess';
 import ActivitiesStart from '../containers/ActivitiesStart';
 import ActivitiesList from '../containers/ActivitiesList';
@@ -24,15 +23,13 @@ import StateStart from '../containers/StateStart';
 import StatePersonnel from '../containers/StatePersonnel';
 import TopNav from '../containers/TopNav';
 
-const Wrapper = process.env.NODE_ENV !== 'production' ? DevProvider : Provider;
-
 const App = () => (
   <Wrapper>
     <TopNav />
 
-    <Container>
+    <div className="container px2">
       <Switch>
-        <Route exact path="/" component={Demo} />
+        <Route exact path="/" component={Hello} />
         <Route path="/login" component={Login} />
 
         <PrivateRoute path="/activities-list" component={ActivitiesList} />
@@ -62,7 +59,7 @@ const App = () => (
 
         <Route component={NoMatch} />
       </Switch>
-    </Container>
+    </div>
   </Wrapper>
 );
 

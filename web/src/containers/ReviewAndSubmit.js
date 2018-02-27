@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, ButtonOutline, Heading, Text } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import withSidebar from '../components/withSidebar';
@@ -32,13 +31,13 @@ Section.propTypes = {
 };
 
 const ReviewAndSubmit = ({ goTo }) => (
-  <Box py={4}>
-    <Heading mb={1}>Here’s a quick summary of the numbers</Heading>
-    <Text mb={4}>
+  <div className="mb3">
+    <h1>Here’s a quick summary of the numbers</h1>
+    <p className="mb3">
       This table outlines the total requested amount for 2019–2020 with the cost
       broken down by funding stream.
-    </Text>
-    <Box mb={3}>
+    </p>
+    <div className="mb2">
       <table className="table table-bordered">
         <thead>
           <tr>
@@ -60,17 +59,27 @@ const ReviewAndSubmit = ({ goTo }) => (
           </tr>
         </tbody>
       </table>
-    </Box>
-    <Box mb={4}>
-      <ButtonOutline mr={2}>Download PDF</ButtonOutline>
-      <ButtonOutline>Print</ButtonOutline>
-    </Box>
-    <Text mb={3}>
+    </div>
+    <div className="mb2">
+      <button type="button" className="btn btn-outline blue mr1">
+        Download PDF
+      </button>
+      <button type="button" className="btn btn-outline blue">
+        Print
+      </button>
+    </div>
+    <p>
       By clicking Submit, you agree that your funding request fulfills our{' '}
       <a href="#!">standards and requirements</a>.
-    </Text>
-    <Button onClick={() => goTo('/submission-success')}>Submit</Button>
-  </Box>
+    </p>
+    <button
+      type="button"
+      className="btn btn-primary"
+      onClick={() => goTo('/submission-success')}
+    >
+      Submit
+    </button>
+  </div>
 );
 
 ReviewAndSubmit.propTypes = {

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Absolute, Box, Button, Relative } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { Textarea } from './Inputs';
@@ -9,22 +8,20 @@ import SectionHeader from './SectionHeader';
 const entryShell = { approach: '', alternatives: '', explanation: '' };
 
 const Approaches = ({ fields, meta: { error, submitFailed } }) => (
-  <Box>
+  <div>
     {fields.map((approach, idx) => (
-      <Box mb={4} key={approach}>
-        <Relative>
-          <Absolute right>
-            <button
-              type="button"
-              title="Remove Goal"
-              onClick={() => fields.remove(idx)}
-            >
-              Remove approach
-            </button>
-          </Absolute>
+      <div key={approach} className="mb3">
+        <div className="relative">
+          <button
+            type="button"
+            className="absolute right-0"
+            title="Remove Goal"
+            onClick={() => fields.remove(idx)}
+          >
+            Remove approach
+          </button>
           <SectionHeader>Approach #{idx + 1}:</SectionHeader>
-        </Relative>
-
+        </div>
         <Field
           name={`${approach}.approach`}
           component={Textarea}
@@ -40,15 +37,19 @@ const Approaches = ({ fields, meta: { error, submitFailed } }) => (
           component={Textarea}
           label="Tell us why you chose this approach"
         />
-      </Box>
+      </div>
     ))}
-    <Box>
-      <Button bg="black" onClick={() => fields.push({ ...entryShell })}>
+    <div>
+      <button
+        type="button"
+        className="btn btn-primary bg-black"
+        onClick={() => fields.push({ ...entryShell })}
+      >
         Add another approach
-      </Button>
+      </button>
       {submitFailed && error && <div>{error}</div>}
-    </Box>
-  </Box>
+    </div>
+  </div>
 );
 
 Approaches.propTypes = {

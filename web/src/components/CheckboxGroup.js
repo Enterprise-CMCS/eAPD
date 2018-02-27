@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Checkbox, Label } from 'rebass';
 
 const CheckboxGroup = ({ input, meta, options }) => {
   const { name, onChange, value: inputVal } = input;
@@ -18,23 +17,24 @@ const CheckboxGroup = ({ input, meta, options }) => {
     };
 
     return (
-      <Label key={`checkbox-${value}`}>
-        <Checkbox
+      <label key={`checkbox-${value}`} className="block">
+        <input
+          type="checkbox"
           name={`${name}[${idx}]`}
           value={value}
           checked={inputVal.includes(value)}
           onChange={handleChange}
         />
         <span>{label}</span>
-      </Label>
+      </label>
     );
   });
 
   return (
-    <Box mb={3}>
+    <div className="mb3">
       {checkboxes}
       {touched && error && <div>{error}</div>}
-    </Box>
+    </div>
   );
 };
 
