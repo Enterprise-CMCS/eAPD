@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Input, Label, Textarea } from 'rebass';
+
+const Input = props => <input className="input" {...props} />;
+const Textarea = props => <textarea className="textarea" {...props} />;
 
 // a HOC for Text / Textarea input that includes
-// rebass components and accompanying label
+// div wrapper and accompanying label
 const makeInput = InputInner => {
   const InputHolder = ({
     input: { name, ...rest },
@@ -12,13 +14,13 @@ const makeInput = InputInner => {
     hideLabel,
     type
   }) => (
-    <Box mb={3}>
-      <Label htmlFor={name} className={hideLabel ? 'sr-only' : ''}>
+    <div className="mb2">
+      <label htmlFor={name} className={hideLabel ? 'sr-only' : ''}>
         {label}
-      </Label>
+      </label>
       <InputInner id={name} type={type} {...rest} />
       {touched && error && <span>{error}</span>}
-    </Box>
+    </div>
   );
 
   InputHolder.propTypes = {

@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormStateContacts from '../components/FormStateContacts';
@@ -19,12 +18,12 @@ class StateContacts extends Component {
     const { goTo } = this.props;
 
     return (
-      <Box py={4}>
+      <div>
         <FormLogger />
-        <Heading mb={3}>Review your state contact information</Heading>
+        <h1>Review your state contact information</h1>
         <FormStateContacts onSubmit={this.showResults} />
         <PageNavButtons goTo={goTo} prev="/state-start" next="/apd-overview" />
-      </Box>
+      </div>
     );
   }
 }

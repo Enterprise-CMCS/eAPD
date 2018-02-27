@@ -19,7 +19,9 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Connect(TopNav) />,
-        <Styled(Styled(Base))>
+        <div
+          className="container px2"
+        >
           <Switch>
             <Route
               component={[Function]}
@@ -94,7 +96,7 @@ ShallowWrapper {
               component={[Function]}
             />
           </Switch>
-        </Styled(Styled(Base))>,
+        </div>,
       ],
     },
     "ref": null,
@@ -111,7 +113,7 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "host",
         "props": Object {
           "children": <Switch>
             <Route
@@ -187,6 +189,7 @@ ShallowWrapper {
               component={[Function]}
             />
           </Switch>,
+          "className": "container px2",
         },
         "ref": null,
         "rendered": Object {
@@ -490,7 +493,7 @@ ShallowWrapper {
           ],
           "type": [Function],
         },
-        "type": [Function],
+        "type": "div",
       },
     ],
     "type": [Function],
@@ -503,7 +506,9 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Connect(TopNav) />,
-          <Styled(Styled(Base))>
+          <div
+            className="container px2"
+          >
             <Switch>
               <Route
                 component={[Function]}
@@ -578,7 +583,7 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>
-          </Styled(Styled(Base))>,
+          </div>,
         ],
       },
       "ref": null,
@@ -595,7 +600,7 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "host",
           "props": Object {
             "children": <Switch>
               <Route
@@ -671,6 +676,7 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>,
+            "className": "container px2",
           },
           "ref": null,
           "rendered": Object {
@@ -974,7 +980,7 @@ ShallowWrapper {
             ],
             "type": [Function],
           },
-          "type": [Function],
+          "type": "div",
         },
       ],
       "type": [Function],
