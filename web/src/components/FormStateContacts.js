@@ -1,32 +1,31 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Button, Flex } from 'rebass';
 import { Field, FieldArray, FormSection, reduxForm } from 'redux-form';
 
 import { Input } from './Inputs';
 import SectionHeader from './SectionHeader';
 
 const Contacts = ({ fields, meta: { error, submitFailed } }) => (
-  <Box mt={4}>
+  <div className="mt2">
     {fields.map((contact, idx) => (
-      <Box mb={4} key={idx}>
+      <div key={idx} className="mb2">
         <SectionHeader>Contact #{idx + 1}:</SectionHeader>
-        <Flex wrap mx={-2}>
-          <Box px={2} w={[1, 1 / 3]}>
+        <div className="clearfix mxn1">
+          <div className="col col-12 sm-col-4 px1">
             <Field name={`${contact}.name`} component={Input} label="Name" />
-          </Box>
-          <Box px={2} w={[1, 1 / 3]}>
+          </div>
+          <div className="col col-12 sm-col-4 px1">
             <Field name={`${contact}.title`} component={Input} label="Title" />
-          </Box>
-          <Box px={2} w={[1, 1 / 3]}>
+          </div>
+          <div className="col col-12 sm-col-4 px1">
             <Field
               name={`${contact}.email`}
               type="email"
               component={Input}
               label="Email address"
             />
-          </Box>
-        </Flex>
+          </div>
+        </div>
         <button
           type="button"
           title="Remove Contact"
@@ -34,15 +33,19 @@ const Contacts = ({ fields, meta: { error, submitFailed } }) => (
         >
           Remove
         </button>
-      </Box>
+      </div>
     ))}
-    <Box>
-      <Button bg="black" onClick={() => fields.push({})}>
+    <div>
+      <button
+        type="button"
+        className="btn btn-primary bg-blue"
+        onClick={() => fields.push({})}
+      >
         Add another contact
-      </Button>
+      </button>
       {submitFailed && error && <div>{error}</div>}
-    </Box>
-  </Box>
+    </div>
+  </div>
 );
 
 Contacts.propTypes = {
@@ -60,17 +63,17 @@ const FormStateContacts = ({ handleSubmit, pristine, reset, submitting }) => (
     <FormSection name="medicaidOffice">
       <Field name="address1" component={Input} label="Address" />
       <Field name="address2" component={Input} label="Address (continued)" />
-      <Flex wrap mx={-2}>
-        <Box px={2} w={[1, 1 / 2]}>
+      <div className="clearfix mxn1">
+        <div className="col col-12 sm-col-6 px1">
           <Field name="city" component={Input} label="City" />
-        </Box>
-        <Box px={2} w={[1 / 2, 1 / 4]}>
+        </div>
+        <div className="col col-6 sm-col-3 px1">
           <Field name="state" component={Input} label="State" />
-        </Box>
-        <Box px={2} w={[1 / 2, 1 / 4]}>
+        </div>
+        <div className="col col-6 sm-col-3 px1">
           <Field name="zip" component={Input} label="Zip" />
-        </Box>
-      </Flex>
+        </div>
+      </div>
     </FormSection>
 
     <SectionHeader>Medicaid Director:</SectionHeader>

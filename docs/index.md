@@ -20,9 +20,10 @@ libraries:
 [documentation about how our frontend build is configured](frontend-build.md),
 too).
 
-We use [Rebass](http://jxnblk.com/rebass/) as the foundation for styling, with
-custom [styled-components](https://www.styled-components.com/) for customization
-where appropriate.
+We use [Basscss](http://basscss.com/), an atomic CSS library, as the foundation
+for styling, and add additional stylesheets where appropriate. We use
+[PostCSS](https://github.com/postcss/postcss) to consolidate, transform (i.e.,
+add vendor prefixes), and minify our CSS.
 
 For testing, we use [Jest](https://facebook.github.io/jest/) as the test runner
 and [Enzyme](http://airbnb.io/enzyme/) as a React renderer.
@@ -49,9 +50,9 @@ about:
 * [our authorization model](api-authorization.md)
 * [how we handle authentication](api-authentication.md)
 
-The API is also documented with [OpenAPI](https://www.openapis.org/).  To see
+The API is also documented with [OpenAPI](https://www.openapis.org/). To see
 the spec document, once the API is running, you can browse to its `/open-api`
-endpoint.  You can also use a hosted version of [Swagger UI](http://petstore.swagger.io/)
+endpoint. You can also use a hosted version of [Swagger UI](http://petstore.swagger.io/)
 to get a nicer visualization.
 
 ## Testing

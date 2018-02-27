@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Button } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import CheckboxGroup from './CheckboxGroup';
@@ -24,7 +23,7 @@ const activities = [
 const activityOptions = stringsToFormOptions(activities);
 
 const NewActivities = ({ fields, meta: { error, submitFailed } }) => (
-  <Box mt={4}>
+  <div>
     {fields.map((act, idx) => (
       <Field
         key={act}
@@ -33,13 +32,17 @@ const NewActivities = ({ fields, meta: { error, submitFailed } }) => (
         label={`Additional activity (${idx + 1})`}
       />
     ))}
-    <Box>
-      <Button bg="black" onClick={() => fields.push('')}>
+    <div>
+      <button
+        type="button"
+        className="btn btn-primary bg-black"
+        onClick={() => fields.push('')}
+      >
         Add another activity
-      </Button>
+      </button>
       {submitFailed && error && <div>{error}</div>}
-    </Box>
-  </Box>
+    </div>
+  </div>
 );
 
 NewActivities.propTypes = {

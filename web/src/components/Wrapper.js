@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import XRay from 'react-x-ray';
-import { Button, Fixed, Provider } from 'rebass';
 
-class DevProvider extends Component {
+class DevWrapper extends Component {
   state = { xray: false };
 
   componentDidMount() {
@@ -25,20 +24,33 @@ class DevProvider extends Component {
     const { xray } = this.state;
 
     return (
-      <Provider>
+      <div>
         <XRay disabled={!xray}>{children}</XRay>
-        <Fixed m={2} z={1} right bottom>
-          <Button px={2} bg="black" onClick={this.toggleXray}>
+        <div className="fixed m1 z1 bottom-0 right-0">
+          <button
+            type="button"
+            className="btn btn-primary bg-black px1"
+            onClick={this.toggleXray}
+          >
             X-Ray
-          </Button>
-        </Fixed>
-      </Provider>
+          </button>
+        </div>
+      </div>
     );
   }
 }
 
-DevProvider.propTypes = {
+DevWrapper.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-export default DevProvider;
+const ProdWrapper = ({ children }) => <div>{children}</div>;
+
+ProdWrapper.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+const Wrapper =
+  process.env.NODE_ENV !== 'production' ? DevWrapper : ProdWrapper;
+
+export default Wrapper;

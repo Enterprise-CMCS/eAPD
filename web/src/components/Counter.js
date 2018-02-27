@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Button, Heading } from 'rebass';
 
 const Counter = ({ total, onIncrement, onDecrement }) => (
-  <Box py={3}>
-    <Heading mb={2}>Clicks: {total}</Heading>
-    <Button onClick={onDecrement}>-</Button>{' '}
-    <Button onClick={onIncrement}>+</Button>
-  </Box>
+  <div className="py3">
+    <h1>Clicks: {total}</h1>
+    <button type="button" onClick={onDecrement}>
+      -
+    </button>{' '}
+    <button type="button" onClick={onIncrement}>
+      +
+    </button>
+  </div>
 );
 
 Counter.propTypes = {
