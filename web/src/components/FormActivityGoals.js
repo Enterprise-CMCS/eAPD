@@ -1,20 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Absolute, Box, Button, Relative } from 'rebass';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { Input, Textarea } from './Inputs';
 import SectionHeader from './SectionHeader';
-import ButtonOutline from '../styles/ButtonOutline';
 
 const entryShell = { description: '', objectives: ['', ''] };
 
 const Objectives = ({ fields, meta: { error, submitFailed } }) => (
-  <Box mb={4}>
+  <div>
     <SectionHeader>
       Tell us how you’ll know when you’ve achieved this goal:
     </SectionHeader>
-    <Box pl={4}>
+    <div className="pl3">
       {fields.map((objective, idx) => (
         <Field
           key={objective}
@@ -23,14 +21,18 @@ const Objectives = ({ fields, meta: { error, submitFailed } }) => (
           label={`Objective ${idx + 1}`}
         />
       ))}
-      <Box>
-        <ButtonOutline color="black" onClick={() => fields.push('')}>
+      <div>
+        <button
+          type="button"
+          className="btn btn-outline black"
+          onClick={() => fields.push('')}
+        >
           Add another objective
-        </ButtonOutline>
+        </button>
         {submitFailed && error && <div>{error}</div>}
-      </Box>
-    </Box>
-  </Box>
+      </div>
+    </div>
+  </div>
 );
 
 Objectives.propTypes = {
@@ -39,36 +41,39 @@ Objectives.propTypes = {
 };
 
 const Goals = ({ fields, meta: { error, submitFailed } }) => (
-  <Box>
+  <div>
     {fields.map((goal, idx) => (
-      <Box mb={5} key={goal}>
-        <Relative>
-          <Absolute right>
-            <button
-              type="button"
-              title="Remove Goal"
-              onClick={() => fields.remove(idx)}
-            >
-              Remove goal
-            </button>
-          </Absolute>
+      <div key={goal} className="mb3">
+        <div className="relative">
+          <button
+            type="button"
+            className="absolute right-0"
+            title="Remove Goal"
+            onClick={() => fields.remove(idx)}
+          >
+            Remove goal
+          </button>
           <SectionHeader>Goal #{idx + 1}:</SectionHeader>
-        </Relative>
+        </div>
         <Field
           name={`${goal}.description`}
           component={Textarea}
           label="Description"
         />
         <FieldArray name={`${goal}.objectives`} component={Objectives} />
-      </Box>
+      </div>
     ))}
-    <Box>
-      <Button bg="black" onClick={() => fields.push({ ...entryShell })}>
+    <div>
+      <button
+        type="button"
+        className="btn btn-primary bg-black"
+        onClick={() => fields.push({ ...entryShell })}
+      >
         Add another goal
-      </Button>
+      </button>
       {submitFailed && error && <div>{error}</div>}
-    </Box>
-  </Box>
+    </div>
+  </div>
 );
 
 Goals.propTypes = {
