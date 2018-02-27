@@ -1,4 +1,5 @@
 const logger = require('../logger')('routes index');
+const loggedIn = require('../auth/middleware').loggedIn;
 const activities = require('./activities');
 const roles = require('./roles');
 const users = require('./users');
@@ -13,6 +14,10 @@ module.exports = (
   formLoggerEndopint = formLogger,
   openAPIdoc = openAPI
 ) => {
+  app.get('/me', loggedIn, (req, res) => {
+    res.send(req.user);
+  });
+
   logger.silly('setting up routes for activities');
   activitiesEndpoint(app);
   logger.silly('setting up routes for roles');
