@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormActivityGoals from '../components/FormActivityGoals';
@@ -19,18 +18,18 @@ class ActivityGoals extends Component {
     const { goTo } = this.props;
 
     return (
-      <Box py={4}>
+      <div>
         <FormLogger />
-        <Heading mb={3}>
+        <h1>
           Add goals and objectives for <em>Administration</em>
-        </Heading>
+        </h1>
         <FormActivityGoals onSubmit={this.showResults} />
         <PageNavButtons
           goTo={goTo}
           prev="/activity-overview"
           next="/activity-approach"
         />
-      </Box>
+      </div>
     );
   }
 }

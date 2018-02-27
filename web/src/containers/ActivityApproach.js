@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormActivityApproach from '../components/FormActivityApproach';
@@ -19,18 +18,18 @@ class ActivityApproach extends Component {
     const { goTo } = this.props;
 
     return (
-      <Box py={4}>
+      <div>
         <FormLogger />
-        <Heading mb={3}>
+        <h1>
           Help us understand your approach to <em>Administration</em>
-        </Heading>
+        </h1>
         <FormActivityApproach onSubmit={this.showResults} />
         <PageNavButtons
           goTo={goTo}
           prev="/activity-goals"
           next="/activity-schedule"
         />
-      </Box>
+      </div>
     );
   }
 }

@@ -19,223 +19,153 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Heading
-          bold={true}
-          f={5}
-          is="h2"
-          m={0}
-          mb={2}
-        >
+        <h1>
           Clicks: 
           5
-        </Heading>,
-        <Button
-          color="white"
-          f={1}
-          m={0}
+        </h1>,
+        <button
           onClick={[Function]}
-          pb={2}
-          pl={3}
-          pr={3}
-          pt={2}
+          type="button"
         >
           -
-        </Button>,
+        </button>,
         " ",
-        <Button
-          color="white"
-          f={1}
-          m={0}
+        <button
           onClick={[Function]}
-          pb={2}
-          pl={3}
-          pr={3}
-          pt={2}
+          type="button"
         >
           +
-        </Button>,
+        </button>,
       ],
-      "py": 3,
+      "className": "py3",
     },
     "ref": null,
     "rendered": Array [
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "host",
         "props": Object {
-          "bold": true,
           "children": Array [
             "Clicks: ",
             5,
           ],
-          "f": 5,
-          "is": "h2",
-          "m": 0,
-          "mb": 2,
         },
         "ref": null,
         "rendered": Array [
           "Clicks: ",
           5,
         ],
-        "type": [Function],
+        "type": "h1",
       },
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "host",
         "props": Object {
           "children": "-",
-          "color": "white",
-          "f": 1,
-          "m": 0,
           "onClick": [Function],
-          "pb": 2,
-          "pl": 3,
-          "pr": 3,
-          "pt": 2,
+          "type": "button",
         },
         "ref": null,
         "rendered": "-",
-        "type": [Function],
+        "type": "button",
       },
       " ",
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "host",
         "props": Object {
           "children": "+",
-          "color": "white",
-          "f": 1,
-          "m": 0,
           "onClick": [Function],
-          "pb": 2,
-          "pl": 3,
-          "pr": 3,
-          "pt": 2,
+          "type": "button",
         },
         "ref": null,
         "rendered": "+",
-        "type": [Function],
+        "type": "button",
       },
     ],
-    "type": [Function],
+    "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Heading
-            bold={true}
-            f={5}
-            is="h2"
-            m={0}
-            mb={2}
-          >
+          <h1>
             Clicks: 
             5
-          </Heading>,
-          <Button
-            color="white"
-            f={1}
-            m={0}
+          </h1>,
+          <button
             onClick={[Function]}
-            pb={2}
-            pl={3}
-            pr={3}
-            pt={2}
+            type="button"
           >
             -
-          </Button>,
+          </button>,
           " ",
-          <Button
-            color="white"
-            f={1}
-            m={0}
+          <button
             onClick={[Function]}
-            pb={2}
-            pl={3}
-            pr={3}
-            pt={2}
+            type="button"
           >
             +
-          </Button>,
+          </button>,
         ],
-        "py": 3,
+        "className": "py3",
       },
       "ref": null,
       "rendered": Array [
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "host",
           "props": Object {
-            "bold": true,
             "children": Array [
               "Clicks: ",
               5,
             ],
-            "f": 5,
-            "is": "h2",
-            "m": 0,
-            "mb": 2,
           },
           "ref": null,
           "rendered": Array [
             "Clicks: ",
             5,
           ],
-          "type": [Function],
+          "type": "h1",
         },
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "host",
           "props": Object {
             "children": "-",
-            "color": "white",
-            "f": 1,
-            "m": 0,
             "onClick": [Function],
-            "pb": 2,
-            "pl": 3,
-            "pr": 3,
-            "pt": 2,
+            "type": "button",
           },
           "ref": null,
           "rendered": "-",
-          "type": [Function],
+          "type": "button",
         },
         " ",
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "host",
           "props": Object {
             "children": "+",
-            "color": "white",
-            "f": 1,
-            "m": 0,
             "onClick": [Function],
-            "pb": 2,
-            "pl": 3,
-            "pr": 3,
-            "pt": 2,
+            "type": "button",
           },
           "ref": null,
           "rendered": "+",
-          "type": [Function],
+          "type": "button",
         },
       ],
-      "type": [Function],
+      "type": "div",
     },
   ],
   Symbol(enzyme.__options__): Object {

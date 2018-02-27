@@ -1,19 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Box, Flex } from 'rebass';
 
 import Sidebar from './Sidebar';
 
 const withSidebar = WrappedComponent => {
   const Wrapper = props => (
-    <Flex mx={-2}>
-      <Box p={2} width={[1, 1 / 3, 1 / 4]}>
+    <div className="clearfix mxn2">
+      <div className="col col-12 sm-col-3 px2">
         <Sidebar />
-      </Box>
-      <Box p={2} width={[1, 2 / 3, 3 / 4]}>
+      </div>
+      <div className="col col-12 sm-col-9 px2">
         <WrappedComponent {...props} />
-      </Box>
-    </Flex>
+      </div>
+    </div>
   );
 
   Wrapper.propTypes = {
