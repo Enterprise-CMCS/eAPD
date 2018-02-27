@@ -1,12 +1,12 @@
 const logger = require('../../logger')('users route index');
+const get = require('./get');
 const post = require('./post');
 const put = require('./put');
-const get = require('./get');
 
 module.exports = (
   app,
-  postEndpoint = post,
   getEndpoint = get,
+  postEndpoint = post,
   putEndpoint = put
 ) => {
   logger.silly('setting up GET endpoint');

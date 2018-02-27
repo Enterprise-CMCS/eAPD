@@ -21,7 +21,8 @@ tap.test('user GET endpoint', async endpointTest => {
   };
 
   endpointTest.beforeEach(done => {
-    sandbox.reset();
+    sandbox.resetBehavior();
+    sandbox.resetHistory();
 
     res.status.returns(res);
     res.send.returns(res);
@@ -64,7 +65,7 @@ tap.test('user GET endpoint', async endpointTest => {
           UserModel.fetchAll.calledWith({
             columns: sinon.match.array.deepEquals(['id', 'email'])
           }),
-          'selects only user ID and email'
+          'selects only the fields we want'
         );
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
@@ -95,7 +96,7 @@ tap.test('user GET endpoint', async endpointTest => {
         UserModel.fetchAll.calledWith({
           columns: sinon.match.array.deepEquals(['id', 'email'])
         }),
-        'selects only user ID and email'
+        'selects only the fields we want'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
@@ -151,9 +152,16 @@ tap.test('user GET endpoint', async endpointTest => {
         );
         invalidTest.ok(
           UserModel.fetch.calledWith({
-            columns: sinon.match.array.deepEquals(['id', 'email'])
+            columns: sinon.match.array.deepEquals([
+              'id',
+              'email',
+              'name',
+              'position',
+              'phone',
+              'state'
+            ])
           }),
-          'selects only user ID and email'
+          'selects only the fields we want'
         );
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
@@ -173,9 +181,16 @@ tap.test('user GET endpoint', async endpointTest => {
         );
         invalidTest.ok(
           UserModel.fetch.calledWith({
-            columns: sinon.match.array.deepEquals(['id', 'email'])
+            columns: sinon.match.array.deepEquals([
+              'id',
+              'email',
+              'name',
+              'position',
+              'phone',
+              'state'
+            ])
           }),
-          'selects only user ID and email'
+          'selects only the fields we want'
         );
         invalidTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
@@ -184,14 +199,13 @@ tap.test('user GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends the requested user', async validTest => {
-      const get = sinon.stub();
-      get.withArgs('id').returns(1);
-      get.withArgs('email').returns('test-email@dotcom.com');
-
       UserModel.fetch.resolves({
         id: 1,
         email: 'test-email@dotcom.com',
-        get
+        name: 'Person Name',
+        position: 'position',
+        phone: '555-555-5555',
+        state: 'FR'
       });
 
       await handler({ params: { id: 1 } }, res);
@@ -202,13 +216,27 @@ tap.test('user GET endpoint', async endpointTest => {
       );
       validTest.ok(
         UserModel.fetch.calledWith({
-          columns: sinon.match.array.deepEquals(['id', 'email'])
+          columns: sinon.match.array.deepEquals([
+            'id',
+            'email',
+            'name',
+            'position',
+            'phone',
+            'state'
+          ])
         }),
-        'selects only user ID and email'
+        'selects only the fields we want'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        res.send.calledWith({ id: 1, email: 'test-email@dotcom.com' }),
+        res.send.calledWith({
+          id: 1,
+          email: 'test-email@dotcom.com',
+          name: 'Person Name',
+          position: 'position',
+          phone: '555-555-5555',
+          state: 'FR'
+        }),
         'requested user is sent'
       );
     });
