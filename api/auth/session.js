@@ -1,3 +1,4 @@
+const logger = require('../logger')('auth session');
 const clientSessions = require('client-sessions');
 
 // Sets up sessions to be stored in browser cookies.  This
@@ -5,6 +6,7 @@ const clientSessions = require('client-sessions');
 module.exports.getSessionFunction = function getSessionFunction(
   sessions = clientSessions
 ) {
+  logger.silly('setting up client sessions');
   return sessions({
     // Passport's session support writes to the 'session'
     // cookie, so we have to use that name
