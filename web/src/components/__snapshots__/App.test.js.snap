@@ -19,10 +19,8 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Connect(TopNav) />,
-        <Container
-          ml="auto"
-          mr="auto"
-          px={3}
+        <div
+          className="container px2"
         >
           <Switch>
             <Route
@@ -98,7 +96,7 @@ ShallowWrapper {
               component={[Function]}
             />
           </Switch>
-        </Container>,
+        </div>,
       ],
     },
     "ref": null,
@@ -115,7 +113,7 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "host",
         "props": Object {
           "children": <Switch>
             <Route
@@ -191,9 +189,7 @@ ShallowWrapper {
               component={[Function]}
             />
           </Switch>,
-          "ml": "auto",
-          "mr": "auto",
-          "px": 3,
+          "className": "container px2",
         },
         "ref": null,
         "rendered": Object {
@@ -497,7 +493,7 @@ ShallowWrapper {
           ],
           "type": [Function],
         },
-        "type": [Function],
+        "type": "div",
       },
     ],
     "type": [Function],
@@ -510,10 +506,8 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Connect(TopNav) />,
-          <Container
-            ml="auto"
-            mr="auto"
-            px={3}
+          <div
+            className="container px2"
           >
             <Switch>
               <Route
@@ -589,7 +583,7 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>
-          </Container>,
+          </div>,
         ],
       },
       "ref": null,
@@ -606,7 +600,7 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "host",
           "props": Object {
             "children": <Switch>
               <Route
@@ -682,9 +676,7 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>,
-            "ml": "auto",
-            "mr": "auto",
-            "px": 3,
+            "className": "container px2",
           },
           "ref": null,
           "rendered": Object {
@@ -988,7 +980,7 @@ ShallowWrapper {
             ],
             "type": [Function],
           },
-          "type": [Function],
+          "type": "div",
         },
       ],
       "type": [Function],

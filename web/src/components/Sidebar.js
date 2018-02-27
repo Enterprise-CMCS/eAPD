@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link as RRLink, withRouter } from 'react-router-dom';
-import { Box, Link } from 'rebass';
+import { Link, withRouter } from 'react-router-dom';
 
 const routes = [
   { path: '/state-start', name: 'State set-up' },
@@ -21,21 +20,17 @@ const routes = [
 ];
 
 const Sidebar = ({ match }) => (
-  <Box py={4}>
+  <div className="mt3">
     <ul className="list-reset">
       {routes.map(({ path, name }) => (
         <li key={path}>
-          <Link
-            className={match.path === path ? 'bold' : ''}
-            to={path}
-            is={RRLink}
-          >
+          <Link to={path} className={match.path === path ? 'bold' : ''}>
             {name}
           </Link>
         </li>
       ))}
     </ul>
-  </Box>
+  </div>
 );
 
 Sidebar.propTypes = {
