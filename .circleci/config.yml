@@ -6,13 +6,13 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
       - run:
           name: install dependencies
           working_directory: ~/project/web
           command: npm install
       - save_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
           paths:
             - web/node_modules
 
@@ -22,7 +22,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
       - run:
           name: run linter
           working_directory: ~/project/web
@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
       - run:
           name: run tests
           working_directory: ~/project/web
@@ -51,13 +51,13 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
+          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
       - run:
           name: install dependencies
           working_directory: ~/project/api
           command: npm install
       - save_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
+          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
           paths:
             - api/node_modules
 
@@ -67,7 +67,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
+          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
       - run:
           name: run linter
           working_directory: ~/project/api
@@ -79,7 +79,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
+          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
       - run:
           name: run tests
           working_directory: ~/project/api
@@ -104,7 +104,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package.json" }}
+          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
       - run:
           name: wait for database
           command: sleep 5
@@ -135,7 +135,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
       - run:
           name: deploy to prod
           command: ./bin/deploy.sh
@@ -146,7 +146,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package.json" }}
+          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
       - run:
           name: deploy to UX testing
           command: ./bin/deploy-ux-testing.sh
