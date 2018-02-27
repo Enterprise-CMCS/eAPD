@@ -1,3 +1,4 @@
+const logger = require('../logger')('auth index');
 const Passport = require('passport');
 const LocalStrategy = require('passport-local');
 
@@ -24,24 +25,29 @@ module.exports.setup = function setup(
   session = sessionFunction
 ) {
   // Handle all of the authentication strategies that we support
+  logger.silly('setting up strategies with Passport');
   strategies.forEach(strategy => passport.use(strategy));
 
   // Register our user serialization methods with passport
+  logger.silly('setting up our user serializer with Passport');
   passport.serializeUser(serialization.serializeUser);
   passport.deserializeUser(serialization.deserializeUser);
 
   // Add our session function and passport to our app's
   // middleware
+  logger.silly('adding session and Passport middleware');
   app.use(session);
   app.use(passport.initialize());
   app.use(passport.session());
 
+  logger.silly('setting up a logout handler');
   app.get('/auth/logout', (req, res) => {
     req.logout();
     res.status(200).end();
   });
 
   // Add a local authentication endpoint
+  logger.silly('setting up a local login handler');
   app.post('/auth/login', passport.authenticate('local'), (req, res) => {
     res.status(200).end();
   });
