@@ -1,6 +1,7 @@
 const activities = {
   'view-users': false,
   'add-users': false,
+  'edit-users': false,
   'view-roles': false,
   'create-roles': false,
   'edit-roles': false,
@@ -18,6 +19,7 @@ const roleToActivityMappings = {
   admin: [
     'view-users',
     'add-users',
+    'edit-users',
     'view-roles',
     'create-roles',
     'edit-roles',
