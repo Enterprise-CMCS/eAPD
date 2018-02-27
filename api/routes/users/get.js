@@ -22,11 +22,12 @@ const oneUserHandler = async (req, res, UserModel) => {
     logger.silly(req, 'got a request for a single user', req.params.id);
     try {
       const user = await UserModel.where({ id: Number(req.params.id) }).fetch({
-        columns: ['id', 'email']
+        columns: ['id', 'email', 'name', 'position', 'phone', 'state']
       });
       if (user) {
-        logger.silly(req, 'sending user', JSON.parse(JSON.stringify(user)));
-        res.send({ email: user.get('email'), id: user.get('id') });
+        const userObj = JSON.parse(JSON.stringify(user));
+        logger.silly(req, 'sending user', userObj);
+        res.send(userObj);
       } else {
         logger.verbose(req, `no user found [${req.params.id}]`);
         res.status(404).end();
