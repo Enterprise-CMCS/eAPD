@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link as RRLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
-import { Absolute, Box, Border, Heading, Link, Relative, Text } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import PageNavButtons from '../components/PageNavButtons';
@@ -21,28 +20,24 @@ const expenses = [
 ];
 
 const ActivityExpensesList = ({ goTo }) => (
-  <Box py={4}>
-    <Heading mb={3}>Expenses</Heading>
-    <Box mb={5}>
+  <div>
+    <h1>Expenses</h1>
+    <div className="mb2">
       {expenses.map(([name, status, href]) => (
-        <Border key={name} py={2} bottom>
-          <Relative>
-            <Absolute right>
-              {href === '#!' ? (
-                <Text color="gray">{status}</Text>
-              ) : (
-                <Link to={href} is={RRLink}>
-                  {status}
-                </Link>
-              )}
-            </Absolute>
-            {name}
-          </Relative>
-        </Border>
+        <div key={name} className="py1 relative border-bottom border-silver">
+          <div className="absolute right-0">
+            {href === '#!' ? (
+              <span className="gray">{status}</span>
+            ) : (
+              <Link to={href}>{status}</Link>
+            )}
+          </div>
+          {name}
+        </div>
       ))}
-    </Box>
+    </div>
     <PageNavButtons goTo={goTo} prev="/expenses-start" />
-  </Box>
+  </div>
 );
 
 ActivityExpensesList.propTypes = {

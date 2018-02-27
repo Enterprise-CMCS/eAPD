@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormActivitiesStart from '../components/FormActivitiesStart';
@@ -19,16 +18,16 @@ class ActivitiesStart extends Component {
     const { goTo } = this.props;
 
     return (
-      <Box py={4}>
+      <div>
         <FormLogger />
-        <Heading mb={3}>Now let’s go over your program activities</Heading>
+        <h1>Now let’s go over your program activities</h1>
         <FormActivitiesStart onSubmit={this.showResults} />
         <PageNavButtons
           goTo={goTo}
           prev="/apd-overview"
           next="/activities-list"
         />
-      </Box>
+      </div>
     );
   }
 }
