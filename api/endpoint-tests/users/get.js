@@ -97,7 +97,14 @@ tap.test('users endpoint | GET /user/:userID', async getUserTest => {
         validTest.equal(response.statusCode, 200, 'gives a 200 status code');
         validTest.same(
           body,
-          { id: 57, email: 'em@il.com' },
+          {
+            id: 57,
+            email: 'em@il.com',
+            name: null,
+            position: null,
+            phone: null,
+            state: null
+          },
           'returns an object for the requested user'
         );
       }

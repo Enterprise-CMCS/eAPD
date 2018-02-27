@@ -49,7 +49,6 @@ module.exports.setup = function setup(
   // Add a local authentication endpoint
   logger.silly('setting up a local login handler');
   app.post('/auth/login', passport.authenticate('local'), (req, res) => {
-    // TODO [GW] Send back user ID; add another endpoint to send the current user's ID
     res
       .status(200)
       .send({ id: req.user.id })
