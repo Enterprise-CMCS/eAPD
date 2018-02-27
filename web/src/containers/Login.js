@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Box, Button, Heading, Input, Label, Message } from 'rebass';
 
 import { login } from '../actions/auth';
 
@@ -30,38 +29,41 @@ class Login extends Component {
     }
 
     return (
-      <Box py={4}>
-        <Heading mb={3}>Please log in.</Heading>
-        <Box mb={3} w={[1, 1 / 2, 1 / 3]}>
-          {error && (
-            <Message mb={2} bg="gray">
-              {error}
-            </Message>
-          )}
+      <div>
+        <h1>Please log in.</h1>
+        <div className="mb3 sm-col-6 md-col-4">
+          {error && <div className="mb2 bg-gray">{error}</div>}
           <form onSubmit={this.handleSubmit}>
-            <Box mb={3}>
-              <Label>Email</Label>
-              <Input
+            <div className="mb3">
+              <label htmlFor="username">Email</label>
+              <input
+                type="text"
                 name="username"
+                className="input"
                 value={username}
                 onChange={this.handleChange}
               />
-            </Box>
-            <Box mb={3}>
-              <Label>Password</Label>
-              <Input
-                name="password"
+            </div>
+            <div className="mb3">
+              <label htmlFor="password">Password</label>
+              <input
                 type="password"
+                name="password"
+                className="input"
                 value={password}
                 onChange={this.handleChange}
               />
-            </Box>
-            <Button type="submit" disabled={fetching}>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={fetching}
+            >
               {fetching ? 'Submitting' : 'Submit'}
-            </Button>
+            </button>
           </form>
-        </Box>
-      </Box>
+        </div>
+      </div>
     );
   }
 }

@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 
 import FormLogger from '../util/formLogger';
@@ -19,16 +18,16 @@ class ApdOverview extends Component {
     const { goTo } = this.props;
 
     return (
-      <Box py={4}>
+      <div>
         <FormLogger />
-        <Heading mb={3}>Tell us more about your HITECH program</Heading>
+        <h1>Tell us more about your HITECH program</h1>
         <FormApdOverview onSubmit={this.showResults} />
         <PageNavButtons
           goTo={goTo}
           prev="/state-contacts"
           next="/activities-start"
         />
-      </Box>
+      </div>
     );
   }
 }

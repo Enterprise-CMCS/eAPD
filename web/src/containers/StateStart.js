@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Heading } from 'rebass';
 import { bindActionCreators } from 'redux';
 import FormLogger from '../util/formLogger';
 
@@ -19,12 +18,12 @@ class StateStart extends Component {
     const { goTo } = this.props;
 
     return (
-      <Box py={4}>
+      <div>
         <FormLogger />
-        <Heading mb={3}>Let’s start by setting up your state profile</Heading>
+        <h1>Let’s start by setting up your state profile</h1>
         <FormStateStart onSubmit={this.showResults} />
         <PageNavButtons goTo={goTo} next="/state-contacts" />
-      </Box>
+      </div>
     );
   }
 }
