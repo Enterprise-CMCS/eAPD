@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const authorization = require('./authorization');
+const authorization = require('./authorization')();
 
 tap.test('authorization data models', async authModelTests => {
   authModelTests.test('setup', async setupTests => {

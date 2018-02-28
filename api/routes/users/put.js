@@ -1,23 +1,8 @@
 const logger = require('../../logger')('users route post');
-const bcrypt = require('bcryptjs');
-const zxcvbn = require('zxcvbn');
 const defaultUserModel = require('../../db').models.user;
 const can = require('../../auth/middleware').can;
 
-const userIsNew = async (email, UserModel) => {
-  const user = await UserModel.where({ email }).fetch();
-
-  if (user) {
-    return false;
-  }
-  return true;
-};
-
-module.exports = (
-  app,
-  UserModel = defaultUserModel,
-  passwordChecker = zxcvbn
-) => {
+module.exports = (app, UserModel = defaultUserModel) => {
   logger.silly('setting up PUT /users/:id route');
   // TODO [GW]: update authorization check here so users can edit themselves
   app.put('/users/:id', can('edit-users'), async (req, res) => {
@@ -31,45 +16,30 @@ module.exports = (
         return res.status(404).end();
       }
 
-      if (req.body.email && req.body.email !== user.get('email')) {
-        if (!await userIsNew(req.body.email, UserModel)) {
-          logger.verbose(
-            req,
-            `user with email already exists [${req.body.email}]`
-          );
-          return res
-            .status(400)
-            .send({ error: 'edit-user-email-exists' })
-            .end();
-        }
-      }
-
-      if (req.body.password) {
-        const passwordScore = passwordChecker(req.body.password, [
-          req.body.email
-        ]);
-
-        if (passwordScore.score < 3) {
-          logger.verbose(`password is too weak: score ${passwordScore.score}`);
-          return res
-            .status(400)
-            .send({ error: 'edit-user-weak-password' })
-            .end();
-        }
-
-        user.set({ password: bcrypt.hashSync(req.body.password) });
-      }
-
       logger.silly(req, 'updating user fields');
-      const fields = ['email', 'name', 'position', 'phone', 'state'];
+      const fields = [
+        'email',
+        'password',
+        'name',
+        'position',
+        'phone',
+        'state'
+      ];
       fields.forEach(field => {
         if (req.body[field]) {
           user.set({ [field]: req.body[field] });
         }
       });
 
-      // TODO Need more validation - phone and state have restrictions
-      // Remove non-numeric characters from phone numbers, too
+      try {
+        await user.validate();
+      } catch (e) {
+        logger.verbose('validation fail');
+        return res
+          .status(400)
+          .send({ error: `edit-user-${e.message}` })
+          .end();
+      }
 
       await user.save();
       logger.silly(req, 'all done');
