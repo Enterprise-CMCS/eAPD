@@ -9,13 +9,13 @@ import PageNavButtons from '../components/PageNavButtons';
 import withSidebar from '../components/withSidebar';
 import FormLogger from '../util/formLogger';
 
-const sample = {
-  name: '',
-  position: 'Director',
-  email: 'first.last@state.gov',
-  phone: '555-123-4567',
-  state: 'vt'
-};
+// const sample = {
+//   name: '',
+//   position: 'Director',
+//   email: 'first.last@state.gov',
+//   phone: '555-123-4567',
+//   state: 'vt'
+// };
 
 class StateStart extends Component {
   componentDidMount() {
@@ -44,6 +44,7 @@ class StateStart extends Component {
 
 StateStart.propTypes = {
   goTo: PropTypes.func.isRequired,
+  fetchUserDataIfNeeded: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired
 };
 

@@ -30,4 +30,6 @@ export const fetchUserDataIfNeeded = () => (dispatch, getState) => {
   if (shouldFetchUser(getState())) {
     return dispatch(fetchUser(57));
   }
+
+  return null;
 };

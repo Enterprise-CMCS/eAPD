@@ -43,8 +43,7 @@ const FormStateStart = ({ handleSubmit, submitting }) => (
 
 FormStateStart.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  initialValues: PropTypes.object.isRequired
+  submitting: PropTypes.bool.isRequired
 };
 
 const formConfig = {
