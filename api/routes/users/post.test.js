@@ -24,7 +24,8 @@ tap.test('user POST endpoint', async endpointTest => {
   };
 
   endpointTest.beforeEach(done => {
-    sandbox.reset();
+    sandbox.resetBehavior();
+    sandbox.resetHistory();
 
     res.status.returns(res);
     res.send.returns(res);
@@ -40,7 +41,7 @@ tap.test('user POST endpoint', async endpointTest => {
     postEndpoint(app, UserModel);
 
     setupTest.ok(
-      app.post.calledWith('/user', canMiddleware, sinon.match.func),
+      app.post.calledWith('/users', canMiddleware, sinon.match.func),
       'user POST endpoint is registered'
     );
   });

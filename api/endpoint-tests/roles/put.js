@@ -1,7 +1,7 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const { db, request, getFullPath, login } = require('../utils');
 
-tap.test('roles endpoint | PUT /roles/:roleID', async postRolesTests => {
+tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
   await db().seed.run();
 
   const url = getFullPath('/roles');
@@ -28,7 +28,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async postRolesTests => {
     }
   ];
 
-  postRolesTests.test(
+  putRolesTests.test(
     'when unauthenticated, invalid ID',
     async unauthenticatedTests => {
       [
@@ -53,7 +53,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async postRolesTests => {
     }
   );
 
-  postRolesTests.test(
+  putRolesTests.test(
     'when unauthenticated, valid ID',
     async unauthenticatedTests => {
       [
@@ -78,7 +78,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async postRolesTests => {
     }
   );
 
-  postRolesTests.test('when authenticated', async authenticatedTests => {
+  putRolesTests.test('when authenticated', async authenticatedTests => {
     const cookies = await login();
 
     authenticatedTests.test('with an invalid ID', async invalidTest => {
