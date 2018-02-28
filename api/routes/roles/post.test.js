@@ -53,6 +53,19 @@ tap.test('roles POST endpoint', async endpointTest => {
     handlerTest.test(
       'rejects invalid role objects...',
       async validationTest => {
+        validationTest.test('if no role is sent', async invalidTest => {
+          const req = {};
+
+          await handler(req, res);
+
+          invalidTest.ok(
+            res.send.calledWith({ error: sinon.match.string }),
+            'sends back an error string'
+          );
+          invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
+          invalidTest.ok(res.end.calledOnce, 'response is terminated');
+        });
+
         validationTest.test(
           'if the role does not have a name',
           async invalidTest => {
