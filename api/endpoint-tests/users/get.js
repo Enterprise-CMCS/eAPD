@@ -24,10 +24,9 @@ tap.test('users endpoint | GET /users', async getUsersTest => {
     });
 
     validTest.equal(response.statusCode, 200, 'gives a 200 status code');
-    validTest.same(
-      body,
-      [{ id: 57, email: 'em@il.com' }],
-      'returns an array of known users'
+    validTest.ok(Array.isArray(body), 'body is an array');
+    body.forEach(user =>
+      validTest.match(user, { id: /\d+/, email: /.+/ }, 'ever user is valid')
     );
   });
 });
