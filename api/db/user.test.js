@@ -55,7 +55,8 @@ tap.test('user data model', async userModelTests => {
     const activities = user.user.activities.bind(self);
 
     activitesTests.beforeEach(done => {
-      sandbox.reset();
+      sandbox.resetBehavior();
+      sandbox.resetHistory();
 
       self.load.resolves();
       self.related.withArgs('role').returns({ related });

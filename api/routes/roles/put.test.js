@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const canMiddleware = require('../../auth/middleware').can('edit-roles');
 const putEndpoint = require('./put');
 
-tap.test('roles POST endpoint', async endpointTest => {
+tap.test('roles PUT endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = {
     put: sandbox.stub()
@@ -25,7 +25,8 @@ tap.test('roles POST endpoint', async endpointTest => {
   };
 
   endpointTest.beforeEach(async () => {
-    sandbox.reset();
+    sandbox.resetBehavior();
+    sandbox.resetHistory();
 
     res.status.returns(res);
     res.send.returns(res);
