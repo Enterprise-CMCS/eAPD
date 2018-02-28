@@ -33,7 +33,7 @@ tap.test('users PUT endpoint', async endpointTest => {
     putEndpoint(app, UserModel, passwordChecker);
 
     setupTest.ok(
-      app.put.calledWith('/user/:id', canMiddleware, sinon.match.func),
+      app.put.calledWith('/users/:id', canMiddleware, sinon.match.func),
       'users PUT endpoint is registered'
     );
   });
@@ -42,7 +42,7 @@ tap.test('users PUT endpoint', async endpointTest => {
     let handler;
     handlerTest.beforeEach(async () => {
       putEndpoint(app, UserModel, passwordChecker);
-      handler = app.put.args.find(args => args[0] === '/user/:id')[2];
+      handler = app.put.args.find(args => args[0] === '/users/:id')[2];
     });
 
     handlerTest.test(

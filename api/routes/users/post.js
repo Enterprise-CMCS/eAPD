@@ -24,9 +24,9 @@ module.exports = (
   UserModel = defaultUserModel,
   passwordChecker = zxcvbn
 ) => {
-  logger.silly('setting up POST /user route');
-  app.post('/user', can('add-users'), async (req, res) => {
-    logger.silly(req, 'handling POST /user route');
+  logger.silly('setting up POST /users route');
+  app.post('/users', can('add-users'), async (req, res) => {
+    logger.silly(req, 'handling POST /users route');
     logger.silly(req, `attempting to create new user [${req.body.email}]`);
     if (req.body.email && req.body.password) {
       try {

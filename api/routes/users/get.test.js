@@ -37,7 +37,7 @@ tap.test('user GET endpoint', async endpointTest => {
     getEndpoint(app, UserModel);
 
     setupTest.ok(
-      app.get.calledWith('/user/:id', canMiddleware, sinon.match.func),
+      app.get.calledWith('/users/:id', canMiddleware, sinon.match.func),
       'single user GET endpoint is registered'
     );
     setupTest.ok(
@@ -110,7 +110,7 @@ tap.test('user GET endpoint', async endpointTest => {
     let handler;
     handlerTest.beforeEach(done => {
       getEndpoint(app, UserModel);
-      handler = app.get.args.find(args => args[0] === '/user/:id')[2];
+      handler = app.get.args.find(args => args[0] === '/users/:id')[2];
       done();
     });
 

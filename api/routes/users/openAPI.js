@@ -60,7 +60,7 @@ const openAPI = {
       }
     }
   },
-  '/user/{id}': {
+  '/users/{id}': {
     get: {
       description: 'Get a specific user in the system',
       parameters: [

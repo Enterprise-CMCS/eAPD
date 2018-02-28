@@ -41,7 +41,7 @@ tap.test('user POST endpoint', async endpointTest => {
     postEndpoint(app, UserModel);
 
     setupTest.ok(
-      app.post.calledWith('/user', canMiddleware, sinon.match.func),
+      app.post.calledWith('/users', canMiddleware, sinon.match.func),
       'user POST endpoint is registered'
     );
   });

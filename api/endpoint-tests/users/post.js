@@ -11,10 +11,10 @@ const newUsersInTheDatabase = async () => {
   return users.length ? users : false;
 };
 
-tap.test('users endpoint | POST /user', async postUsersTest => {
+tap.test('users endpoint | POST /users', async postUsersTest => {
   await db().seed.run();
 
-  const url = getFullPath('/user');
+  const url = getFullPath('/users');
 
   const invalidCases = [
     {
