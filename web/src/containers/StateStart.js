@@ -8,16 +8,10 @@ import FormLogger from '../util/formLogger';
 import FormStateStart from '../components/FormStateStart';
 import PageNavButtons from '../components/PageNavButtons';
 import withSidebar from '../components/withSidebar';
-import axios from '../util/api';
 
 class StateStart extends Component {
   showResults = data => {
     console.log(data);
-
-    axios
-      .put('http://localhost:8081/user/57', { ...data })
-      .then(req => console.log(req))
-      .catch(error => console.log(error));
   };
 
   render() {
