@@ -1,6 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
+const loggedInMiddleware = require('../auth/middleware').loggedIn;
 const endpointIndex = require('./index');
 
 tap.test('endpoint setup', async endpointTest => {
@@ -44,13 +45,39 @@ tap.test('endpoint setup', async endpointTest => {
   );
 
   endpointTest.ok(
+    app.get.calledWith('/me', loggedInMiddleware, sinon.match.func),
+    'sets up an endpoint to fetch the current user'
+  );
+
+  endpointTest.ok(
     app.get.calledWith('/open-api', sinon.match.func),
     'sets up an endpoint to fetch OpenAPI spec'
   );
 
-  const openAPIHandler = app.get.args[0][1];
+  endpointTest.test(
+    'OpenAPI handler returns expected documentation',
+    async openAPItest => {
+      const openAPIHandler = app.get.args.filter(
+        arg => arg[0] === '/open-api'
+      )[0][1];
 
-  openAPIHandler({}, res);
+      openAPIHandler({}, res);
 
-  endpointTest.ok(res.send.calledWith(openAPI));
+      openAPItest.ok(
+        res.send.calledWith(openAPI),
+        'sends back OpenAPI documentation'
+      );
+    }
+  );
+
+  endpointTest.test('"me" handler returns the current user', async meTest => {
+    const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][2];
+
+    meHandler({ user: { id: 'user-id' } }, res);
+
+    meTest.ok(
+      res.send.calledWith({ id: 'user-id' }),
+      'sends back the user object'
+    );
+  });
 });
