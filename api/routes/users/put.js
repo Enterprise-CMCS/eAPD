@@ -18,10 +18,10 @@ module.exports = (
   UserModel = defaultUserModel,
   passwordChecker = zxcvbn
 ) => {
-  logger.silly('setting up PUT /user/:id route');
+  logger.silly('setting up PUT /users/:id route');
   // TODO [GW]: update authorization check here so users can edit themselves
-  app.put('/user/:id', can('edit-users'), async (req, res) => {
-    logger.silly(req, 'handling PUT /user/:id route');
+  app.put('/users/:id', can('edit-users'), async (req, res) => {
+    logger.silly(req, 'handling PUT /users/:id route');
     logger.silly(req, `attempting to update user [${req.params.id}]`);
 
     try {

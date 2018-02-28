@@ -17,7 +17,7 @@ const allUsersHandler = async (req, res, UserModel) => {
 };
 
 const oneUserHandler = async (req, res, UserModel) => {
-  logger.silly(req, 'handling GET /user/:id route');
+  logger.silly(req, 'handling GET /users/:id route');
   if (req.params.id && !Number.isNaN(Number(req.params.id))) {
     logger.silly(req, 'got a request for a single user', req.params.id);
     try {
@@ -50,8 +50,8 @@ module.exports = (app, UserModel = defaultUserModel) => {
   app.get('/users', can('view-users'), (req, res) =>
     allUsersHandler(req, res, UserModel)
   );
-  logger.silly('setting up GET /user/:id route');
-  app.get('/user/:id', can('view-users'), (req, res) =>
+  logger.silly('setting up GET /users/:id route');
+  app.get('/users/:id', can('view-users'), (req, res) =>
     oneUserHandler(req, res, UserModel)
   );
 };
