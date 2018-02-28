@@ -38,6 +38,7 @@ tap.test('roles endpoint | GET /roles', async getUsersTest => {
             'create-roles',
             'delete-roles',
             'edit-roles',
+            'edit-users',
             'view-activities',
             'view-roles',
             'view-users'

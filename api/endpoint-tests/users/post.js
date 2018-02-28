@@ -1,14 +1,14 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const { db, request, getFullPath, login } = require('../utils');
 
-const usersInTheDatabase = async () => {
-  const users = await db()('users').select('*');
-  if (users.length > 1) {
-    // Return all users other than the original.  User ID
-    // 57 is created when the database is seeded.
-    return users.filter(user => user.id !== 57);
-  }
-  return false;
+const newUsersInTheDatabase = async () => {
+  // Get all users other than the originals.  User IDs
+  // 57 and 58 are created when the database is seeded.
+  const users = (await db()('users').select('*')).filter(
+    user => user.id !== 57 && user.id !== 58
+  );
+
+  return users.length ? users : false;
 };
 
 tap.test('users endpoint | POST /user', async postUsersTest => {
@@ -53,7 +53,7 @@ tap.test('users endpoint | POST /user', async postUsersTest => {
         );
         unauthenticatedTest.notOk(body, 'does not send a body');
 
-        const newUsers = await usersInTheDatabase();
+        const newUsers = await newUsersInTheDatabase();
         unauthenticatedTest.notOk(
           newUsers,
           'a user object is not inserted into the database'
@@ -78,7 +78,7 @@ tap.test('users endpoint | POST /user', async postUsersTest => {
           'sends a token indicating the failure'
         );
 
-        const newUsers = await usersInTheDatabase();
+        const newUsers = await newUsersInTheDatabase();
         invalidTest.notOk(
           newUsers,
           'a user object is not inserted into the database'
@@ -99,7 +99,7 @@ tap.test('users endpoint | POST /user', async postUsersTest => {
           { error: 'add-user-email-exists' },
           'sends a token indicating the failure'
         );
-        const newUsers = await usersInTheDatabase();
+        const newUsers = await newUsersInTheDatabase();
         invalidTest.notOk(
           newUsers,
           'a user object is not inserted into the database'
@@ -120,7 +120,7 @@ tap.test('users endpoint | POST /user', async postUsersTest => {
         'sends a token indicating a weak password'
       );
 
-      const newUsers = await usersInTheDatabase();
+      const newUsers = await newUsersInTheDatabase();
       invalidTest.notOk(
         newUsers,
         'a user object is not inserted into the database'
@@ -136,7 +136,7 @@ tap.test('users endpoint | POST /user', async postUsersTest => {
       validTest.equal(response.statusCode, 200, 'gives a 200 status code');
       validTest.notOk(body, 'does not send a body');
 
-      const newUsers = await usersInTheDatabase();
+      const newUsers = await newUsersInTheDatabase();
       validTest.equal(
         newUsers.length,
         1,
