@@ -29,14 +29,16 @@ const FormStateStart = ({ handleSubmit, pristine, reset, submitting }) => (
       options={STATES}
     />
 
-    <div>
-      <button type="submit" disabled={pristine || submitting}>
-        Submit
-      </button>
-      <button type="button" disabled={pristine || submitting} onClick={reset}>
-        Clear Values
-      </button>
-    </div>
+    {false && (
+      <div>
+        <button type="submit" disabled={pristine || submitting}>
+          Submit
+        </button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>
+          Clear Values
+        </button>
+      </div>
+    )}
   </form>
 );
 
