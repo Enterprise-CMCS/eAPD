@@ -73,7 +73,7 @@ module.exports = (
 
       await user.save();
       logger.silly(req, 'all done');
-      return res.status(200).end();
+      return res.status(204).end();
     } catch (e) {
       logger.error(req, e);
       return res.status(500).end();
