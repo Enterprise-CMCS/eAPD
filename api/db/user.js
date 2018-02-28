@@ -1,12 +1,10 @@
+const defaultBcrypt = require('bcryptjs');
+const defaultZxcvbn = require('zxcvbn');
 const logger = require('../logger')('db user model');
 
-module.exports = {
+module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
   user: {
     tableName: 'users',
-
-    initialize() {
-      this.on('saving', this.validate);
-    },
 
     role() {
       return this.hasOne('role', 'name', 'auth_role');
@@ -24,29 +22,55 @@ module.exports = {
         .pluck('name');
     },
 
-    validate(model) {
-      console.log('validation:');
-      console.log(model.attributes);
-      console.log(model.hasChanged('email'));
-    },
+    async validate(model = this) {
+      logger.silly('validating user data model');
+      if (model.hasChanged('email')) {
+        logger.silly('email address changed; making sure it is unique');
 
-    format(attributes) {
-      const out = { ...attributes };
+        const otherUsersWithThisEmail = await this.where({
+          email: model.attributes.email
+        }).fetchAll();
 
-      if (out.phone) {
-        // Remove non-number characters
-        out.phone = out.phone.replace(/[^\d]/g, '');
-
-        // If the phone number is 11 digits and begins with a 1,
-        // just strip off the leading 1, it's probably a country
-        // code and we don't need it since all US states and
-        // territories use the same country code.
-        if (out.phone.length === 11 && out.phone.startsWith('1')) {
-          out.phone = out.phone.substr(1);
+        if (otherUsersWithThisEmail.length) {
+          logger.verbose(
+            `user with email already exists [${model.attributes.email}]`
+          );
+          throw new Error('email-exists');
         }
+
+        logger.silly('new email is unique!');
       }
 
-      return out;
+      if (model.hasChanged('password')) {
+        logger.silly('password changed; verifying complexity/strength');
+
+        const passwordScore = zxcvbn(model.attributes.password, [
+          model.attributes.email,
+          model.attributes.name
+        ]);
+        if (passwordScore.score < 3) {
+          logger.verbose(`password is too weak: score ${passwordScore.score}`);
+          throw new Error('weak-password');
+        }
+
+        logger.silly('password is sufficiently complex; hashing it');
+        model.set({ password: bcrypt.hashSync(model.attributes.password) });
+      }
+
+      if (model.hasChanged('phone')) {
+        logger.silly('phone changed; verifying that it is just 10 digits');
+
+        const phone = model.attributes.phone.replace(/[^\d]/g, '');
+        if (phone.length > 10) {
+          logger.verbose(`phone number is invalid [${model.attributes.phone}]`);
+          throw new Error('invalid-phone');
+        }
+
+        logger.silly('phone is valid; updating to just numbmers');
+        model.set({ phone });
+      }
+
+      logger.silly('model is valid!');
     }
   }
-};
+});

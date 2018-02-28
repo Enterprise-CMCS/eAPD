@@ -10,12 +10,13 @@ tap.test('user POST endpoint', async endpointTest => {
     post: sandbox.stub()
   };
 
-  const UserModel = sandbox.stub();
-  UserModel.where = sandbox.stub();
-  UserModel.fetch = sandbox.stub();
-  UserModel.save = sandbox.stub();
-
-  const passwordChecker = sandbox.stub();
+  const User = {
+    save: sandbox.stub(),
+    validate: sandbox.stub()
+  };
+  const UserModel = {
+    forge: sandbox.stub()
+  };
 
   const res = {
     status: sandbox.stub(),
@@ -31,8 +32,7 @@ tap.test('user POST endpoint', async endpointTest => {
     res.send.returns(res);
     res.end.returns(res);
 
-    UserModel.returns({ save: UserModel.save });
-    UserModel.where.returns(UserModel);
+    UserModel.forge.returns(User);
 
     done();
   });
@@ -50,54 +50,36 @@ tap.test('user POST endpoint', async endpointTest => {
     let handler;
 
     handlerTest.beforeEach(done => {
-      postEndpoint(app, UserModel, passwordChecker);
+      postEndpoint(app, UserModel);
       handler = app.post.args[0][2];
       done();
     });
 
-    handlerTest.test('rejects invalid requests', async invalidTests => {
-      const invalidCases = [
-        {
-          title: 'no email or password',
-          body: {}
-        },
-        {
-          title: 'email, but no password',
-          body: { email: 'em@il.com' }
-        },
-        {
-          title: 'no email, but password',
-          body: { password: 'password' }
-        },
-        {
-          title: 'email exists but is blank, valid password',
-          body: { email: '', password: 'password' }
-        },
-        {
-          title: 'valid email, password exists but is blank',
-          body: { email: 'em@il.com', password: '' }
-        }
-      ];
+    handlerTest.test(
+      'rejects if the data is missing',
+      async missingDataTests => {
+        [{}, { email: 'em@il' }, { password: 'password' }].forEach(scenario => {
+          missingDataTests.test('', async invalidTest => {
+            await handler({ body: scenario }, res);
 
-      invalidCases.forEach(invalidCase => {
-        invalidTests.test(invalidCase.title, async invalidTest => {
-          handler({ body: invalidCase.body }, res);
-
-          invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
-          invalidTest.ok(
-            res.send.calledWith({ error: 'add-user-invalid' }),
-            'sets an error message'
-          );
-          invalidTest.ok(res.end.called, 'response is terminated');
+            invalidTest.ok(
+              res.status.calledWith(400),
+              'HTTP status set to 400'
+            );
+            invalidTest.ok(
+              res.send.calledWith({ error: 'add-user-invalid' }),
+              'error token is set'
+            );
+            invalidTest.ok(res.end.called, 'response is terminated');
+          });
         });
-      });
-    });
+      }
+    );
 
     handlerTest.test(
-      'rejects inserting an existing user',
+      'rejects if the data model validation fails',
       async invalidTest => {
-        UserModel.fetch.resolves({});
-        passwordChecker.returns({ score: 3 });
+        User.validate.rejects(new Error('invalidate-test'));
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },
@@ -106,49 +88,8 @@ tap.test('user POST endpoint', async endpointTest => {
 
         invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
         invalidTest.ok(
-          res.send.calledWith({ error: 'add-user-email-exists' }),
-          'sets an error message'
-        );
-        invalidTest.ok(res.end.called, 'response is terminated');
-      }
-    );
-
-    handlerTest.test(
-      'sends a server error code if there is a database error checking for an existing user',
-      async invalidTest => {
-        UserModel.fetch.rejects();
-        passwordChecker.returns({ score: 3 });
-
-        await handler(
-          { body: { email: 'em@il.com', password: 'password' } },
-          res
-        );
-
-        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-        invalidTest.ok(res.send.notCalled, 'does not send a message');
-        invalidTest.ok(res.end.called, 'response is terminated');
-      }
-    );
-
-    handlerTest.test(
-      'rejects if the password is too weak',
-      async invalidTest => {
-        UserModel.fetch.resolves();
-        passwordChecker.returns({ score: 0 });
-
-        await handler(
-          { body: { email: 'em@il.com', password: 'password' } },
-          res
-        );
-
-        invalidTest.ok(
-          passwordChecker.calledWith('password', ['em@il.com']),
-          'password is checked with supplemental data'
-        );
-        invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
-        invalidTest.ok(
-          res.send.calledWith({ error: 'add-user-weak-password' }),
-          'sets an error message'
+          res.send.calledWith({ error: 'add-user-invalidate-test' }),
+          'error token is set'
         );
         invalidTest.ok(res.end.called, 'response is terminated');
       }
@@ -157,9 +98,8 @@ tap.test('user POST endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error inserting a new user',
       async invalidTest => {
-        UserModel.fetch.resolves();
-        UserModel.save.rejects();
-        passwordChecker.returns({ score: 3 });
+        User.validate.resolves();
+        User.save.rejects();
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },
@@ -175,19 +115,14 @@ tap.test('user POST endpoint', async endpointTest => {
     handlerTest.test(
       'inserts a new user and returns a success for a valid, new user',
       async validTest => {
-        UserModel.fetch.resolves();
-        UserModel.save.resolves();
-        passwordChecker.returns({ score: 3 });
+        User.validate.resolves();
+        User.save.resolves();
 
         await handler(
           { body: { email: 'em@il.com', password: 'password' } },
           res
         );
 
-        validTest.ok(
-          passwordChecker.calledWith('password', ['em@il.com']),
-          'password is checked with supplemental data'
-        );
         validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
         validTest.ok(res.send.notCalled, 'does not send a message');
         validTest.ok(res.end.called, 'response is terminated');
