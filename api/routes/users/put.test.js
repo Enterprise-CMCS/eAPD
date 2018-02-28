@@ -183,7 +183,7 @@ tap.test('users PUT endpoint', async endpointTest => {
           save.calledAfter(set),
           'the model is called after values are set'
         );
-        validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
+        validTest.ok(res.status.calledWith(204), 'HTTP status set to 200');
       }
     );
 
@@ -221,7 +221,7 @@ tap.test('users PUT endpoint', async endpointTest => {
           save.calledAfter(set),
           'the model is called after values are set'
         );
-        validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
+        validTest.ok(res.status.calledWith(204), 'HTTP status set to 200');
       }
     );
 
@@ -255,7 +255,7 @@ tap.test('users PUT endpoint', async endpointTest => {
           save.calledAfter(set),
           'the model is called after values are set'
         );
-        validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
+        validTest.ok(res.status.calledWith(204), 'HTTP status set to 200');
       }
     );
   });
