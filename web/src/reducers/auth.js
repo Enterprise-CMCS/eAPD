@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   fetching: false,
-  authenticated: true,
+  authenticated: false,
   error: ''
 };
 
