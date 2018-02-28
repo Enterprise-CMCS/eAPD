@@ -33,7 +33,11 @@ const user = (state = initialState, action) => {
     case UPDATE_USER_REQUEST:
       return { ...state, fetching: true, error: '' };
     case UPDATE_USER_SUCCESS:
-      return { ...state, fetching: false };
+      return {
+        ...state,
+        fetching: false,
+        data: { ...state.data, ...action.data }
+      };
     case UPDATE_USER_FAILURE:
       return { ...state, fetching: false, error: action.error };
     default:
