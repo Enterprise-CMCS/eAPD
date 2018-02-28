@@ -184,6 +184,7 @@ tap.test('users PUT endpoint', async endpointTest => {
           'the model is called after values are set'
         );
         validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
+        validTest.ok(res.send.calledWith({}), 'updated user data is sent');
       }
     );
 
@@ -222,6 +223,7 @@ tap.test('users PUT endpoint', async endpointTest => {
           'the model is called after values are set'
         );
         validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
+        validTest.ok(res.send.calledWith({}), 'updated user data is sent');
       }
     );
 
@@ -256,6 +258,7 @@ tap.test('users PUT endpoint', async endpointTest => {
           'the model is called after values are set'
         );
         validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
+        validTest.ok(res.send.calledWith({}), 'updated user data is sent');
       }
     );
   });
