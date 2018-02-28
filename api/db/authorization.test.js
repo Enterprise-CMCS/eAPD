@@ -86,7 +86,8 @@ tap.test('authorization data models', async authModelTests => {
       const getActivities = authorization.role.getActivities.bind(self);
 
       getActivitesTests.beforeEach(done => {
-        sandbox.reset();
+        sandbox.resetBehavior();
+        sandbox.resetHistory();
 
         self.load.resolves();
         self.related.withArgs('activities').returns({ pluck });

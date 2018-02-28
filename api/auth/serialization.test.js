@@ -15,7 +15,8 @@ tap.test('passport serialization', async serializationTest => {
   const doneCallback = sandbox.stub().returns('hi');
 
   serializationTest.beforeEach(done => {
-    sandbox.reset();
+    sandbox.resetBehavior();
+    sandbox.resetHistory();
     userModel.where.returns({ where: userModel.where, fetch: userModel.fetch });
     done();
   });

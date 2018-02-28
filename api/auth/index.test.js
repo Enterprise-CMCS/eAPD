@@ -185,7 +185,10 @@ tap.test('authentication setup', async authTest => {
 
     postTest.ok(res.status.calledOnce, 'an HTTP status is set once');
     postTest.ok(res.status.calledWith(200), 'sets a 200 HTTP status');
-    postTest.ok(res.send.notCalled, 'HTTP body is not sent');
+    postTest.ok(
+      res.send.calledWith({ id: 'test-user-id' }),
+      'HTTP body is set to the user ID'
+    );
     postTest.ok(res.end.calledOnce, 'response is ended one time');
   });
 });

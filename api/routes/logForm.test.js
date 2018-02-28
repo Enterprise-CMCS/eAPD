@@ -19,7 +19,8 @@ tap.test('form logger endpoint', async endpointTest => {
   let post;
 
   endpointTest.beforeEach(done => {
-    sandbox.reset();
+    sandbox.resetBehavior();
+    sandbox.resetHistory();
 
     res.status.returns(res);
     res.send.returns(res);
