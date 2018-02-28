@@ -14,12 +14,20 @@ export const requestUserUpdate = () => ({ type: UPDATE_USER_REQUEST });
 export const receiveUserUpdate = data => ({ type: UPDATE_USER_SUCCESS, data });
 export const failUserUpdate = error => ({ type: UPDATE_USER_FAILURE, error });
 
-export const fetchUser = () => dispatch => {
+export const fetchUser = id => dispatch => {
   dispatch(requestUser());
-  dispatch(receiveUser({ name: 'Bren' }));
+  dispatch(receiveUser({ id, name: 'Bren' }));
 };
 
 export const updateUser = data => dispatch => {
   dispatch(requestUserUpdate());
   dispatch(receiveUserUpdate(data));
+};
+
+const shouldFetchUser = state => state.user.loaded;
+
+export const fetchUserDataIfNeeded = () => (dispatch, getState) => {
+  if (shouldFetchUser(getState())) {
+    return dispatch(fetchUser(57));
+  }
 };

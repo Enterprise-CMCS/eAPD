@@ -43,19 +43,14 @@ const FormStateStart = ({ handleSubmit, submitting }) => (
 
 FormStateStart.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired
+  submitting: PropTypes.bool.isRequired,
+  initialValues: PropTypes.object.isRequired
 };
 
 const formConfig = {
   form: 'stateStart',
-  initialValues: {
-    name: '',
-    position: 'Director',
-    email: 'first.last@state.gov',
-    phone: '555-123-4567',
-    state: 'vt'
-  },
-  destroyOnUnmount: false
+  destroyOnUnmount: false,
+  enableReinitialize: true
 };
 
 export default reduxForm(formConfig)(FormStateStart);

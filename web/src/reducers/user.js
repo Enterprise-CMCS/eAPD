@@ -7,11 +7,13 @@ import {
   UPDATE_USER_FAILURE
 } from '../actions/user';
 
-const userFields = ['id', 'email', 'name', 'position', 'phone', 'state'];
+const fields = ['id', 'email', 'name', 'position', 'phone', 'state'];
+const fieldsObj = Object.assign({}, ...fields.map(f => ({ [f]: '' })));
 
 const initialState = {
-  ...userFields.map(field => ({ [field]: '' })),
+  profile: { ...fieldsObj },
   fetching: false,
+  loaded: false,
   error: ''
 };
 
