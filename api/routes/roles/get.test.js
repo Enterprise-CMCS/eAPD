@@ -19,7 +19,8 @@ tap.test('roles GET endpoint', async endpointTest => {
   };
 
   endpointTest.beforeEach(async () => {
-    sandbox.reset();
+    sandbox.resetBehavior();
+    sandbox.resetHistory();
 
     res.status.returns(res);
     res.send.returns(res);

@@ -18,7 +18,8 @@ const auth = require('./authenticate.js')(userModel, bcrypt);
 tap.test('local authentication', async authTest => {
   const doneCallback = sandbox.spy();
   authTest.beforeEach(done => {
-    sandbox.reset();
+    sandbox.resetBehavior();
+    sandbox.resetHistory();
     userModel.where.returns({ where: userModel.where, fetch: userModel.fetch });
     done();
   });

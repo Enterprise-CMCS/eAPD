@@ -11,7 +11,8 @@ const res = {
 const next = sandbox.spy();
 
 tap.beforeEach(done => {
-  sandbox.reset();
+  sandbox.resetBehavior();
+  sandbox.resetHistory();
 
   res.status.returns(res);
   res.send.returns(res);
