@@ -38,11 +38,12 @@ export const updateUser = (id, data) => dispatch => {
     .put(`${API_URL}/users/${id}`, data)
     .then(req => {
       console.log('update user success!', req);
-      dispatch(receiveUserUpdate({}));
+      dispatch(receiveUserUpdate(req.data));
     })
     .catch(error => {
       console.log('update user error!', error);
-      dispatch(failUserUpdate(''));
+      const reason = error.response.data || 'N/A';
+      dispatch(failUserUpdate(reason));
     });
 };
 
