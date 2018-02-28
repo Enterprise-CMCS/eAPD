@@ -6,7 +6,7 @@ const can = require('../../auth/middleware').can;
 
 const userIsNew = async (email, UserModel) => {
   const user = await UserModel.where({ email }).fetch();
-  return user ? false : true;
+  return !user;
 };
 
 // TODO: figure out better/cleaner solution.
