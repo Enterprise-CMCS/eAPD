@@ -1,3 +1,7 @@
+import axios from '../util/api';
+
+const API_URL = process.env.API_URL || 'http://localhost:8000';
+
 export const GET_USER_REQUEST = 'GET_USER_REQUEST';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAILURE = 'GET_USER_FAILURE';
@@ -16,19 +20,37 @@ export const failUserUpdate = error => ({ type: UPDATE_USER_FAILURE, error });
 
 export const fetchUser = id => dispatch => {
   dispatch(requestUser());
-  dispatch(receiveUser({ id, name: 'Bren' }));
+
+  return axios
+    .get(`${API_URL}/users/${id}`)
+    .then(req => dispatch(receiveUser(req.data)))
+    .catch(error => {
+      const reason = error.response.data || 'N/A';
+      dispatch(failUser(reason));
+    });
 };
 
-export const updateUser = data => dispatch => {
+export const updateUser = (id, data) => dispatch => {
   dispatch(requestUserUpdate());
-  dispatch(receiveUserUpdate(data));
+
+  // TODO: clean up callbacks
+  return axios
+    .put(`${API_URL}/users/${id}`, data)
+    .then(req => {
+      console.log('update user success!', req);
+      dispatch(receiveUserUpdate({}));
+    })
+    .catch(error => {
+      console.log('update user error!', error);
+      dispatch(failUserUpdate(''));
+    });
 };
 
-const shouldFetchUser = state => state.user.loaded;
+const shouldFetchUser = state => !state.user.loaded;
 
-export const fetchUserDataIfNeeded = () => (dispatch, getState) => {
+export const fetchUserDataIfNeeded = id => (dispatch, getState) => {
   if (shouldFetchUser(getState())) {
-    return dispatch(fetchUser(57));
+    return dispatch(fetchUser(id));
   }
 
   return null;

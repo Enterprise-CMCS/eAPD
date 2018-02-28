@@ -5,7 +5,7 @@ describe('user reducer', () => {
     error: '',
     fetching: false,
     loaded: false,
-    profile: { email: '', id: '', name: '', phone: '', position: '', state: '' }
+    data: { email: '', id: '', name: '', phone: '', position: '', state: '' }
   };
 
   it('should handle initial state', () => {

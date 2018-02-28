@@ -19,24 +19,34 @@ import FormLogger from '../util/formLogger';
 
 class StateStart extends Component {
   componentDidMount() {
-    console.log('state start!');
-    this.props.fetchUserDataIfNeeded();
+    // TODO: don't hardcode user id
+    this.props.fetchUserDataIfNeeded(57);
   }
 
   showResults = data => {
-    console.log(data);
-    this.props.updateUser(data);
+    // TODO: don't hardcode user id
+    this.props.updateUser(57, data);
   };
 
   render() {
-    const { goTo } = this.props;
+    const { goTo, user } = this.props;
+    console.log(user);
 
     return (
       <div>
         <FormLogger />
         <h1>Let’s start by setting up your state profile</h1>
-        <FormStateStart initialValues={{}} onSubmit={this.showResults} />
-        <PageNavButtons goTo={goTo} next="/state-contacts" />
+        {!user.loaded ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <FormStateStart
+              initialValues={user.data}
+              onSubmit={this.showResults}
+            />
+            <PageNavButtons goTo={goTo} next="/state-contacts" />
+          </div>
+        )}
       </div>
     );
   }
@@ -45,8 +55,11 @@ class StateStart extends Component {
 StateStart.propTypes = {
   goTo: PropTypes.func.isRequired,
   fetchUserDataIfNeeded: PropTypes.func.isRequired,
-  updateUser: PropTypes.func.isRequired
+  updateUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
 };
+
+const mapStateToProps = ({ user }) => ({ user });
 
 const mapDispatchToProps = {
   goTo: path => push(path),
@@ -54,4 +67,6 @@ const mapDispatchToProps = {
   updateUser
 };
 
-export default connect(null, mapDispatchToProps)(withSidebar(StateStart));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withSidebar(StateStart)
+);

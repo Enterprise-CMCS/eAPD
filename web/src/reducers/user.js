@@ -11,7 +11,7 @@ const fields = ['id', 'email', 'name', 'position', 'phone', 'state'];
 const fieldsObj = Object.assign({}, ...fields.map(f => ({ [f]: '' })));
 
 const initialState = {
-  profile: { ...fieldsObj },
+  data: { ...fieldsObj },
   fetching: false,
   loaded: false,
   error: ''
@@ -22,7 +22,12 @@ const user = (state = initialState, action) => {
     case GET_USER_REQUEST:
       return { ...state, fetching: true, error: '' };
     case GET_USER_SUCCESS:
-      return { ...state, fetching: false };
+      return {
+        ...state,
+        fetching: false,
+        loaded: true,
+        data: { ...action.data }
+      };
     case GET_USER_FAILURE:
       return { ...state, fetching: false, error: action.error };
     case UPDATE_USER_REQUEST:
