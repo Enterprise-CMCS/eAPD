@@ -32,7 +32,7 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
     },
     {
       name: 'with activities that are not valid',
-      body: { name: 'new-role', activities: [1, 2, 9001] }
+      body: { name: 'new-role', activities: [1001, 1002, 9001] }
     }
   ];
 
@@ -79,7 +79,7 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
     authenticatedTests.test('with a valid new role', async validTest => {
       const { response, body } = await request.post(url, {
         jar: cookies,
-        json: { name: 'new-role', activities: [1, 2] }
+        json: { name: 'new-role', activities: [1001, 1002] }
       });
 
       validTest.equal(response.statusCode, 201, 'gives a 201 status code');
@@ -107,7 +107,7 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
 
       validTest.same(
         activities,
-        [1, 2],
+        [1001, 1002],
         'sets up a mapping between the new role and the requested activities'
       );
     });
