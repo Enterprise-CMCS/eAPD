@@ -30,3 +30,6 @@ cd ..
 # Log into CF and push
 cf login -a $API -u $CF_USER_UX -p $CF_PASSWORD_UX -o $ORG -s $SPACE
 cf push -f manifest-ux-testing.yml
+
+# Migrate and seed the database
+cf run-task hitech-apd-api "npm run migrate && npm run seed"

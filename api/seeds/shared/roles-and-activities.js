@@ -36,7 +36,17 @@ const roleToActivityMappings = {
 // attempts the insert again, which is bad of course, but it also causes
 // a key constraint error.
 const insertAndGetIDs = async (knex, tableName, values) => {
-  const insert = Object.keys(values).map(name => ({ name }));
+  // Get a list of existing names
+  const alreadyExisting = (await knex(tableName).select('name')).map(
+    e => e.name
+  );
+
+  // Map the list of names into objects to be inserted,
+  // but filter out names that already exist.
+  const insert = Object.keys(values)
+    .filter(name => !alreadyExisting.includes(name))
+    .map(name => ({ name }));
+
   await knex(tableName).insert(insert);
   const asInserted = await knex(tableName).select('*');
 
@@ -56,16 +66,24 @@ const setupMappings = async (
 ) => {
   const table = knex(tableName);
 
+  // Get a list of existing mappings
+  const alreadyExisting = await table.select('*');
+  const match = (roleID, activityID) => role =>
+    role.role_id === roleID && role.activity_id === activityID;
+
   await Promise.all(
     Object.keys(mappings).map(async role => {
       const roleID = roleIDs[role];
       for (let i = 0; i < mappings[role].length; i += 1) {
         const activityID = activityIDs[mappings[role][i]];
 
-        // We actually need to block here, otherwise weird reference stuff happens
-        // and we just map the role to a single activity multiple times.
-        // eslint-disable-next-line no-await-in-loop
-        await table.insert({ role_id: roleID, activity_id: activityID });
+        // Don't recreate existing matches
+        if (!alreadyExisting.some(match(roleID, activityID))) {
+          // We actually need to block here, otherwise weird reference stuff happens
+          // and we just map the role to a single activity multiple times.
+          // eslint-disable-next-line no-await-in-loop
+          await table.insert({ role_id: roleID, activity_id: activityID });
+        }
       }
     })
   );
