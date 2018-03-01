@@ -1,9 +1,20 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const user = require('./user');
+const userCreator = require('./user');
 
 tap.test('user data model', async userModelTests => {
+  const sandbox = sinon.createSandbox();
+  userModelTests.beforeEach(async () => {
+    sandbox.resetBehavior();
+    sandbox.resetHistory();
+  });
+
+  const passwordChecker = sandbox.stub();
+  const bcrypt = { hashSync: sandbox.stub() };
+
+  const user = userCreator(passwordChecker, bcrypt);
+
   userModelTests.test('setup', async setupTests => {
     setupTests.match(
       user,
@@ -43,8 +54,131 @@ tap.test('user data model', async userModelTests => {
     }
   );
 
+  userModelTests.test('validation', async validationTests => {
+    const self = {
+      where: sandbox.stub(),
+      fetchAll: sandbox.stub()
+    };
+
+    const model = {
+      attributes: {},
+      hasChanged: sandbox.stub(),
+      set: sandbox.stub()
+    };
+
+    const validate = user.user.validate.bind(self);
+
+    validationTests.beforeEach(async () => {
+      self.where.returns({ fetchAll: self.fetchAll });
+
+      model.attributes = {};
+      model.hasChanged.returns(false);
+    });
+
+    validationTests.test('valid if nothing has changed', async validTest => {
+      validTest.resolves(validate(model), 'resolves');
+    });
+
+    validationTests.test('if the email is changed...', async email => {
+      email.beforeEach(async () => {
+        model.attributes.email = 'new@email';
+        model.hasChanged.withArgs('email').returns(true);
+      });
+
+      email.test(
+        'and another user already has that email',
+        async invalidTest => {
+          self.fetchAll.resolves([{}]);
+
+          invalidTest.rejects(
+            validate(model),
+            { message: 'email-exists' },
+            'rejects'
+          );
+        }
+      );
+
+      email.test('and the email is unique', async validTest => {
+        self.fetchAll.resolves([]);
+        validTest.resolves(validate(model), 'resolves');
+      });
+    });
+
+    validationTests.test('if the password is changed...', async password => {
+      password.beforeEach(async () => {
+        model.attributes.email = 'email';
+        model.attributes.name = 'Bob';
+        model.attributes.password = 'password';
+        model.hasChanged.withArgs('password').returns(true);
+      });
+
+      password.test('and the password is too weak', async invalidTest => {
+        passwordChecker.returns({ score: 2 });
+
+        let error;
+        try {
+          await validate(model);
+        } catch (e) {
+          error = e;
+        }
+
+        invalidTest.match(
+          error,
+          { message: 'weak-password' },
+          'rejects with a message'
+        );
+        invalidTest.ok(
+          passwordChecker.calledWith('password', ['email', 'Bob']),
+          'password checker called with extra data'
+        );
+      });
+
+      password.test('and the password is strong', async validTest => {
+        passwordChecker.returns({ score: 4 });
+        bcrypt.hashSync.returns('hashed-password');
+
+        await validate(model);
+
+        validTest.ok(
+          passwordChecker.calledWith('password', ['email', 'Bob']),
+          'password checker called with extra data'
+        );
+        validTest.ok(
+          model.set.calledWith({ password: 'hashed-password' }),
+          'updates the model with a hashed password'
+        );
+      });
+    });
+
+    validationTests.test('if the phone number is changed...', async phone => {
+      phone.beforeEach(async () => {
+        model.hasChanged.withArgs('phone').returns(true);
+      });
+
+      phone.test(
+        'and the phone number has more than 10 digits, after removing non-numeric characters',
+        async invalidTest => {
+          model.attributes.phone = 'abc123-zyx-456:789(0123)';
+
+          invalidTest.rejects(
+            () => validate(model),
+            { message: 'invalid-phone' },
+            'rejects with a message'
+          );
+        }
+      );
+
+      phone.test(
+        'and the phone number has 10 or fewer digits, after removing non-numeric characters',
+        async validTest => {
+          model.attributes.phone = 'abc123-zyx-456:789';
+          validTest.resolves(validate(model), 'resolves');
+        }
+      );
+    });
+  });
+
   userModelTests.test('activities helper method', async activitesTests => {
-    const sandbox = sinon.createSandbox();
     const self = {
       load: sandbox.stub(),
       related: sandbox.stub(),
@@ -55,9 +189,6 @@ tap.test('user data model', async userModelTests => {
     const activities = user.user.activities.bind(self);
 
     activitesTests.beforeEach(done => {
-      sandbox.resetBehavior();
-      sandbox.resetHistory();
-
       self.load.resolves();
       self.related.withArgs('role').returns({ related });
       self.relations.role = false;
