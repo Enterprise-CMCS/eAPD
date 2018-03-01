@@ -27,14 +27,14 @@ tap.test('activities endpoint | GET /activities', async getUsersTest => {
     validTest.same(
       body,
       [
-        { id: 1, name: 'view-roles' },
-        { id: 2, name: 'create-roles' },
-        { id: 3, name: 'edit-roles' },
-        { id: 4, name: 'delete-roles' },
-        { id: 5, name: 'view-users' },
-        { id: 6, name: 'add-users' },
-        { id: 7, name: 'view-activities' },
-        { id: 8, name: 'edit-users' }
+        { id: 1001, name: 'view-roles' },
+        { id: 1002, name: 'create-roles' },
+        { id: 1003, name: 'edit-roles' },
+        { id: 1004, name: 'delete-roles' },
+        { id: 1005, name: 'view-users' },
+        { id: 1006, name: 'add-users' },
+        { id: 1007, name: 'view-activities' },
+        { id: 1008, name: 'edit-users' }
       ],
       'returns an array of activities'
     );

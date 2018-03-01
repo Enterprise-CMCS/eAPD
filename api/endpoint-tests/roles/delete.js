@@ -34,7 +34,7 @@ tap.test('roles endpoint | DELETE /roles/:roleID', async deleteRolesTests => {
     authenticatedTests.test(
       'deleting the role that the user belongs to',
       async invalidTest => {
-        const { response, body } = await request.delete(`${url}/1`, {
+        const { response, body } = await request.delete(`${url}/1001`, {
           jar: cookies
         });
         invalidTest.equal(response.statusCode, 401, 'gives a 401 status code');
@@ -45,7 +45,7 @@ tap.test('roles endpoint | DELETE /roles/:roleID', async deleteRolesTests => {
     authenticatedTests.test(
       'deleting a role that the user does not belong to',
       async validTest => {
-        const { response, body } = await request.delete(`${url}/2`, {
+        const { response, body } = await request.delete(`${url}/1002`, {
           jar: cookies
         });
 
