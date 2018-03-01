@@ -1,60 +1,30 @@
 const logger = require('../../logger')('users route post');
-const bcrypt = require('bcryptjs');
-const zxcvbn = require('zxcvbn');
 const defaultUserModel = require('../../db').models.user;
 const can = require('../../auth/middleware').can;
 
-const userIsNew = async (email, UserModel) => {
-  const user = await UserModel.where({ email }).fetch();
-
-  if (user) {
-    return false;
-  }
-  return true;
-};
-
-const insert = async (email, password, UserModel) => {
-  const hashed = bcrypt.hashSync(password);
-  const user = new UserModel({ email, password: hashed });
-  await user.save();
-};
-
-module.exports = (
-  app,
-  UserModel = defaultUserModel,
-  passwordChecker = zxcvbn
-) => {
+module.exports = (app, UserModel = defaultUserModel) => {
   logger.silly('setting up POST /users route');
   app.post('/users', can('add-users'), async (req, res) => {
     logger.silly(req, 'handling POST /users route');
     logger.silly(req, `attempting to create new user [${req.body.email}]`);
     if (req.body.email && req.body.password) {
       try {
-        if (!await userIsNew(req.body.email, UserModel)) {
-          logger.verbose(
-            req,
-            `user with email already exists [${req.body.email}]`
-          );
+        const user = UserModel.forge({
+          email: req.body.email,
+          password: req.body.password
+        });
+
+        try {
+          await user.validate();
+        } catch (e) {
+          logger.verbose('validation fail');
           return res
             .status(400)
-            .send({ error: 'add-user-email-exists' })
+            .send({ error: `add-user-${e.message}` })
             .end();
         }
 
-        logger.silly(req, 'email address is unique - adding user');
-        const passwordScore = passwordChecker(req.body.password, [
-          req.body.email
-        ]);
-
-        if (passwordScore.score < 3) {
-          logger.verbose(`password is too weak: score ${passwordScore.score}`);
-          return res
-            .status(400)
-            .send({ error: 'add-user-weak-password' })
-            .end();
-        }
-
-        await insert(req.body.email, req.body.password, UserModel);
+        await user.save();
         logger.silly(req, 'all done');
         return res.status(200).end();
       } catch (e) {
