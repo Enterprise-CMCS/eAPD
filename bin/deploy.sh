@@ -26,6 +26,13 @@ npm install
 npm run build
 cd ..
 
+# Don't deliver seed files that might be dangerous.
+cd api
+rm -rf seeds/development
+rm -rf seeds/test
+rm seeds/shared/delete-everything.js
+cd ..
+
 # Log into CF and push
 cf login -a $API -u $CF_USER -p $CF_PASSWORD -o $ORG -s $SPACE
 cf push -f manifest.yml
