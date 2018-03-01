@@ -9,6 +9,13 @@ tap.test('users PUT endpoint', async endpointTest => {
   const app = {
     put: sandbox.stub()
   };
+  const User = {
+    get: sandbox.stub(),
+    set: sandbox.stub(),
+    save: sandbox.stub(),
+    toJSON: sandbox.stub(),
+    validate: sandbox.stub()
+  };
   const UserModel = {
     fetch: sandbox.stub(),
     where: sandbox.stub()
@@ -18,7 +25,6 @@ tap.test('users PUT endpoint', async endpointTest => {
     send: sandbox.stub(),
     end: sandbox.stub()
   };
-  const passwordChecker = sandbox.stub();
 
   endpointTest.beforeEach(async () => {
     sandbox.resetBehavior();
@@ -27,10 +33,12 @@ tap.test('users PUT endpoint', async endpointTest => {
     res.status.returns(res);
     res.send.returns(res);
     res.end.returns(res);
+
+    UserModel.where.returns({ fetch: UserModel.fetch });
   });
 
   endpointTest.test('setup', async setupTest => {
-    putEndpoint(app, UserModel, passwordChecker);
+    putEndpoint(app, UserModel);
 
     setupTest.ok(
       app.put.calledWith('/users/:id', canMiddleware, sinon.match.func),
@@ -41,7 +49,7 @@ tap.test('users PUT endpoint', async endpointTest => {
   endpointTest.test('edit users handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(async () => {
-      putEndpoint(app, UserModel, passwordChecker);
+      putEndpoint(app, UserModel);
       handler = app.put.args.find(args => args[0] === '/users/:id')[2];
     });
 
@@ -49,7 +57,6 @@ tap.test('users PUT endpoint', async endpointTest => {
       'sends a not found error if requesting to edit a user that does not exist',
       async notFoundTest => {
         const req = { params: { id: 1 }, body: { name: 'person' } };
-        UserModel.where.withArgs({ id: 1 }).returns({ fetch: UserModel.fetch });
         UserModel.fetch.resolves(null);
 
         await handler(req, res);
@@ -61,72 +68,6 @@ tap.test('users PUT endpoint', async endpointTest => {
     );
 
     handlerTest.test(
-      'rejects invalid user objects...',
-      async validationTest => {
-        validationTest.beforeEach(async () => {
-          const get = sinon.stub();
-          get.withArgs('email').returns('test-email');
-          const fetch = sinon.stub().resolves({ get });
-          UserModel.where.withArgs({ id: 1 }).returns({ fetch });
-        });
-
-        validationTest.test(
-          'if the user sends a new email that is already in the system',
-          async invalidTest => {
-            const req = { params: { id: 1 }, body: { email: 'new-email' } };
-            UserModel.where
-              .withArgs({ email: 'new-email' })
-              .returns({ fetch: UserModel.fetch });
-            UserModel.fetch.resolves(true);
-
-            await handler(req, res);
-
-            invalidTest.ok(
-              res.send.calledWith({ error: sinon.match.string }),
-              'sends back an error string'
-            );
-            invalidTest.ok(
-              res.status.calledWith(400),
-              'HTTP status set to 400'
-            );
-            invalidTest.ok(
-              res.send.calledWith({ error: 'edit-user-email-exists' }),
-              'body set to error token'
-            );
-            invalidTest.ok(res.end.calledOnce, 'response is terminated');
-          }
-        );
-
-        validationTest.test(
-          'if the user sends a new password that is weak',
-          async invalidTest => {
-            const req = {
-              params: { id: 1 },
-              body: { password: 'test-password' }
-            };
-            passwordChecker.returns({ score: 1 });
-
-            await handler(req, res);
-
-            invalidTest.ok(
-              res.send.calledWith({ error: sinon.match.string }),
-              'sends back an error string'
-            );
-            invalidTest.ok(
-              res.status.calledWith(400),
-              'HTTP status set to 400'
-            );
-            invalidTest.ok(
-              res.send.calledWith({ error: 'edit-user-weak-password' }),
-              'body set to error token'
-            );
-            invalidTest.ok(res.end.calledOnce, 'response is terminated');
-          }
-        );
-      }
-    );
-
-    handlerTest.test(
       'sends a server error if anything goes wrong',
       async saveTest => {
         const req = {
@@ -134,7 +75,6 @@ tap.test('users PUT endpoint', async endpointTest => {
           body: { name: 'bob', activities: [1, 2] }
         };
 
-        UserModel.where.withArgs({ id: 1 }).returns({ fetch: UserModel.fetch });
         UserModel.fetch.rejects();
 
         await handler(req, res);
@@ -144,149 +84,72 @@ tap.test('users PUT endpoint', async endpointTest => {
     );
 
     handlerTest.test(
-      'updates a valid user object where the email is updated',
-      async validTest => {
+      'rejects if the data model validation fails',
+      async invalidTest => {
         const req = {
           params: { id: 1 },
           body: { name: 'Bob', email: 'new@email.com' }
         };
-        const save = sinon.stub().resolves();
-        const set = sinon.stub();
-        const toJSON = sinon.stub().returns({ name: 'json-name' });
-        UserModel.where.withArgs({ id: 1 }).returns({ fetch: UserModel.fetch });
+        User.get
+          .withArgs('id')
+          .returns('bob-id')
+          .withArgs('email')
+          .returns('old@email.com');
+        User.save.resolves();
+        User.validate.rejects(new Error('invalidate-test'));
 
-        UserModel.fetch.resolves({
-          save,
-          set,
-          get: sinon
-            .stub()
-            .withArgs('id')
-            .returns('bob-id')
-            .withArgs('email')
-            .returns('old@email.com'),
-          toJSON
-        });
-
-        UserModel.where
-          .withArgs({ email: 'new@email.com' })
-          .returns({ fetch: sinon.stub().resolves(null) });
+        UserModel.fetch.resolves(User);
 
         await handler(req, res);
 
-        validTest.ok(
-          set.calledWith({ name: 'Bob' }),
-          'sets the user name field'
+        invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
+        invalidTest.ok(
+          res.send.calledWith({ error: 'edit-user-invalidate-test' }),
+          'error token is set'
         );
-        validTest.ok(
-          set.calledWith({ email: 'new@email.com' }),
-          'sets the new user email'
-        );
-        validTest.ok(
-          save.calledAfter(set),
-          'the model is called after values are set'
-        );
-        validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-        validTest.ok(
-          toJSON.calledOnce,
-          'database object is converted to pure object'
-        );
-        validTest.ok(
-          res.send.calledWith({ name: 'json-name' }),
-          'updated user data is sent'
-        );
+        invalidTest.ok(res.end.called, 'response is terminated');
       }
     );
 
-    handlerTest.test(
-      'updates a valid user object where the password is updated',
-      async validTest => {
-        const req = {
-          params: { id: 1 },
-          body: { name: 'Bob', password: 'newpassword' }
-        };
-        const save = sinon.stub().resolves();
-        const set = sinon.stub();
-        const toJSON = sinon.stub().returns({ name: 'json-name' });
-        UserModel.where.withArgs({ id: 1 }).returns({ fetch: UserModel.fetch });
-        UserModel.fetch.resolves({
-          save,
-          set,
-          get: sinon
-            .stub()
-            .withArgs('id')
-            .returns('bob-id'),
-          toJSON
-        });
-        passwordChecker.returns({ score: 4 });
+    handlerTest.test('updates a valid user object', async validTest => {
+      const req = {
+        params: { id: 1 },
+        body: { name: 'Bob', email: 'new@email.com' }
+      };
+      User.get
+        .withArgs('id')
+        .returns('bob-id')
+        .withArgs('email')
+        .returns('old@email.com');
+      User.save.resolves();
+      User.toJSON.returns({ name: 'json-name' });
+      User.validate.resolves();
 
-        await handler(req, res);
+      UserModel.fetch.resolves(User);
 
-        validTest.ok(
-          set.calledWith({ name: 'Bob' }),
-          'sets the user name field'
-        );
-        validTest.ok(
-          set.calledWith({ password: sinon.match(/^\$2a\$10\$.{53}$/) }),
-          'sets the new user password to a hashed value'
-        );
-        validTest.ok(
-          save.calledAfter(set),
-          'the model is called after values are set'
-        );
-        validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-        validTest.ok(
-          toJSON.calledOnce,
-          'database object is converted to pure object'
-        );
-        validTest.ok(
-          res.send.calledWith({ name: 'json-name' }),
-          'updated user data is sent'
-        );
-      }
-    );
+      await handler(req, res);
 
-    handlerTest.test(
-      'updates a valid user object where neither the email or password is updated',
-      async validTest => {
-        const req = {
-          params: { id: 1 },
-          body: { name: 'Bob' }
-        };
-        const save = sinon.stub().resolves();
-        const set = sinon.stub();
-        const toJSON = sinon.stub().returns({ name: 'json-name' });
-        UserModel.where.withArgs({ id: 1 }).returns({ fetch: UserModel.fetch });
-
-        UserModel.fetch.resolves({
-          save,
-          set,
-          get: sinon
-            .stub()
-            .withArgs('id')
-            .returns('bob-id'),
-          toJSON
-        });
-
-        await handler(req, res);
-
-        validTest.ok(
-          set.calledWith({ name: 'Bob' }),
-          'sets the user name field'
-        );
-        validTest.ok(
-          save.calledAfter(set),
-          'the model is called after values are set'
-        );
-        validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-        validTest.ok(
-          toJSON.calledOnce,
-          'database object is converted to pure object'
-        );
-        validTest.ok(
-          res.send.calledWith({ name: 'json-name' }),
-          'updated user data is sent'
-        );
-      }
-    );
+      validTest.ok(
+        User.set.calledWith({ name: 'Bob' }),
+        'sets the user name field'
+      );
+      validTest.ok(
+        User.set.calledWith({ email: 'new@email.com' }),
+        'sets the new user email'
+      );
+      validTest.ok(
+        User.save.calledAfter(User.set),
+        'the model is saved after values are set'
+      );
+      validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
+      validTest.ok(
+        User.toJSON.calledOnce,
+        'database object is converted to pure object'
+      );
+      validTest.ok(
+        res.send.calledWith({ name: 'json-name' }),
+        'updated user data is sent'
+      );
+    });
   });
 });

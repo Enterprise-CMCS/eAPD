@@ -28,6 +28,7 @@ services:
       - PORT=8000
       - DATABASE_URL=postgres://postgres:cms@db/hitech_apd
       - NODE_ENV=development
+      - SESSION_SECRET=super-secret-docker-secret-shhhh
     volumes:
       - ./api:/app
       - /app/node_modules
