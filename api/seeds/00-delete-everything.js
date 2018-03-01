@@ -1,5 +1,5 @@
 exports.seed = async knex => {
-  // has a foreign key relationship on auth_roles
+  // has a foreign key relationship on auth_roles and states
   await knex('users').del();
 
   // has a foreign key relationship on auth_roles and auth_activities
@@ -7,4 +7,6 @@ exports.seed = async knex => {
 
   await knex('auth_roles').del();
   await knex('auth_activities').del();
+
+  await knex('states').del();
 };

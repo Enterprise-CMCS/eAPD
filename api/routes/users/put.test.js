@@ -139,7 +139,8 @@ tap.test('users PUT endpoint', async endpointTest => {
         User.save.calledAfter(User.set),
         'the model is saved after values are set'
       );
-      validTest.ok(res.status.calledWith(204), 'HTTP status set to 200');
+      validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
+      validTest.ok(res.send.calledWith({}), 'updated user data is sent');
     });
   });
 });

@@ -2,6 +2,10 @@ const logger = require('../../logger')('users route post');
 const defaultUserModel = require('../../db').models.user;
 const can = require('../../auth/middleware').can;
 
+// TODO: figure out better/cleaner solution.
+// At the very least, move this helper to a better location
+const toObj = entry => JSON.parse(JSON.stringify(entry));
+
 module.exports = (app, UserModel = defaultUserModel) => {
   logger.silly('setting up PUT /users/:id route');
   // TODO [GW]: update authorization check here so users can edit themselves
@@ -10,7 +14,10 @@ module.exports = (app, UserModel = defaultUserModel) => {
     logger.silly(req, `attempting to update user [${req.params.id}]`);
 
     try {
-      const user = await UserModel.where({ id: req.params.id }).fetch();
+      const user = await UserModel.where({ id: req.params.id }).fetch({
+        columns: ['id', 'email', 'name', 'position', 'phone', 'state']
+      });
+
       if (!user) {
         logger.verbose(req, `no user found for [${req.params.id}]`);
         return res.status(404).end();
@@ -43,7 +50,7 @@ module.exports = (app, UserModel = defaultUserModel) => {
 
       await user.save();
       logger.silly(req, 'all done');
-      return res.status(204).end();
+      return res.send(toObj(user));
     } catch (e) {
       logger.error(req, e);
       return res.status(500).end();
