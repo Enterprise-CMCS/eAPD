@@ -99,8 +99,19 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
           state: 'FR'
         }
       });
-      validTest.equal(response.statusCode, 204, 'gives a 204 status code');
-      validTest.notOk(body, 'does not send a body');
+      validTest.equal(response.statusCode, 200, 'gives a 200 status code');
+      validTest.same(
+        body,
+        {
+          id: 57,
+          email: 'new-email',
+          name: 'Inigo Montoya',
+          position: 'Centerfield',
+          phone: '5558675309',
+          state: 'FR'
+        },
+        'returns an object for the requested user'
+      );
 
       const user = await db()('users')
         .where({ id: 57 })
