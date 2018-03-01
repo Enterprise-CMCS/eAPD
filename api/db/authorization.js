@@ -1,6 +1,6 @@
 const logger = require('../logger')('db authorization model');
 
-module.exports = {
+module.exports = () => ({
   activity: {
     tableName: 'auth_activities',
     roles() {
@@ -34,4 +34,4 @@ module.exports = {
       return this.related('activities').pluck('name');
     }
   }
-};
+});
