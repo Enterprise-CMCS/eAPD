@@ -24,7 +24,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
     },
     {
       name: 'with activities that are not valid',
-      body: { name: 'new-role', activities: [1, 2, 9001] }
+      body: { name: 'new-role', activities: [1001, 1002, 9001] }
     }
   ];
 
@@ -64,7 +64,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
         }
       ].forEach(situation => {
         unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
-          const { response, body } = await request.put(`${url}/1`, {
+          const { response, body } = await request.put(`${url}/1001`, {
             json: situation.body
           });
           unauthenticatedTest.equal(
@@ -92,7 +92,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
 
     invalidCases.forEach(situation => {
       authenticatedTests.test(situation.name, async invalidTest => {
-        const { response, body } = await request.put(`${url}/1`, {
+        const { response, body } = await request.put(`${url}/1001`, {
           jar: cookies,
           json: situation.body || true
         });
@@ -106,22 +106,22 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
     });
 
     authenticatedTests.test('with a valid updated role', async validTest => {
-      const { response, body } = await request.put(`${url}/1`, {
+      const { response, body } = await request.put(`${url}/1001`, {
         jar: cookies,
-        json: { activities: [1] }
+        json: { activities: [1001] }
       });
 
       validTest.equal(response.statusCode, 204, 'gives a 204 status code');
       validTest.notOk(body, 'does not send a body');
 
       const activities = await db()('auth_role_activity_mapping')
-        .where({ role_id: 1 })
+        .where({ role_id: 1001 })
         .select('activity_id')
         .map(activity => activity.activity_id);
 
       validTest.same(
         activities,
-        [1],
+        [1001],
         'sets up a mapping between the role and the newly-requested activities'
       );
     });
