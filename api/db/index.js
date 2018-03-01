@@ -12,7 +12,7 @@ const setup = (
   knex = defaultKnex,
   bookshelf = defaultBookshelf,
   config = defaultConfig,
-  models = [user, authorization]
+  models = [user(), authorization()]
 ) => {
   logger.silly(
     `setting up models using [${process.env.NODE_ENV}] configuration`
