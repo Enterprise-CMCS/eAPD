@@ -29,3 +29,6 @@ cd ..
 # Log into CF and push
 cf login -a $API -u $CF_USER -p $CF_PASSWORD -o $ORG -s $SPACE
 cf push -f manifest.yml
+
+# Migrate and seed the database
+cf run-task hitech-apd-api "npm run migrate && npm run seed"
