@@ -13,6 +13,7 @@ tap.test('users PUT endpoint', async endpointTest => {
     get: sandbox.stub(),
     set: sandbox.stub(),
     save: sandbox.stub(),
+    toJSON: sandbox.stub(),
     validate: sandbox.stub()
   };
   const UserModel = {
@@ -121,6 +122,7 @@ tap.test('users PUT endpoint', async endpointTest => {
         .withArgs('email')
         .returns('old@email.com');
       User.save.resolves();
+      User.toJSON.returns({ name: 'json-name' });
       User.validate.resolves();
 
       UserModel.fetch.resolves(User);
@@ -140,7 +142,14 @@ tap.test('users PUT endpoint', async endpointTest => {
         'the model is saved after values are set'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-      validTest.ok(res.send.calledWith({}), 'updated user data is sent');
+      validTest.ok(
+        User.toJSON.calledOnce,
+        'database object is converted to pure object'
+      );
+      validTest.ok(
+        res.send.calledWith({ name: 'json-name' }),
+        'updated user data is sent'
+      );
     });
   });
 });
