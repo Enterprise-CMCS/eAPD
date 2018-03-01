@@ -4,24 +4,26 @@ import React from 'react';
 const PageNavButtons = ({ goTo, prev, next }) => (
   <div>
     <hr className="my3" />
-    {prev && (
-      <button
-        type="button"
-        className="btn btn-outline blue mr1"
-        onClick={() => goTo(prev)}
-      >
-        Back
-      </button>
-    )}
-    {next && (
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => goTo(next)}
-      >
-        Continue
-      </button>
-    )}
+    <div className="clearfix">
+      {prev && (
+        <button
+          type="button"
+          className="btn btn-outline blue mr1"
+          onClick={() => goTo(prev)}
+        >
+          ‹ Back
+        </button>
+      )}
+      {next && (
+        <button
+          type="button"
+          className="btn btn-primary sm-right"
+          onClick={() => goTo(next)}
+        >
+          Continue ›
+        </button>
+      )}
+    </div>
   </div>
 );
 
