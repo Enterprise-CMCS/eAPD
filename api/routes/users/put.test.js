@@ -152,6 +152,7 @@ tap.test('users PUT endpoint', async endpointTest => {
         };
         const save = sinon.stub().resolves();
         const set = sinon.stub();
+        const toJSON = sinon.stub().returns({ name: 'json-name' });
         UserModel.where.withArgs({ id: 1 }).returns({ fetch: UserModel.fetch });
 
         UserModel.fetch.resolves({
@@ -162,7 +163,8 @@ tap.test('users PUT endpoint', async endpointTest => {
             .withArgs('id')
             .returns('bob-id')
             .withArgs('email')
-            .returns('old@email.com')
+            .returns('old@email.com'),
+          toJSON
         });
 
         UserModel.where
@@ -184,7 +186,14 @@ tap.test('users PUT endpoint', async endpointTest => {
           'the model is called after values are set'
         );
         validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-        validTest.ok(res.send.calledWith({}), 'updated user data is sent');
+        validTest.ok(
+          toJSON.calledOnce,
+          'database object is converted to pure object'
+        );
+        validTest.ok(
+          res.send.calledWith({ name: 'json-name' }),
+          'updated user data is sent'
+        );
       }
     );
 
@@ -197,6 +206,7 @@ tap.test('users PUT endpoint', async endpointTest => {
         };
         const save = sinon.stub().resolves();
         const set = sinon.stub();
+        const toJSON = sinon.stub().returns({ name: 'json-name' });
         UserModel.where.withArgs({ id: 1 }).returns({ fetch: UserModel.fetch });
         UserModel.fetch.resolves({
           save,
@@ -204,7 +214,8 @@ tap.test('users PUT endpoint', async endpointTest => {
           get: sinon
             .stub()
             .withArgs('id')
-            .returns('bob-id')
+            .returns('bob-id'),
+          toJSON
         });
         passwordChecker.returns({ score: 4 });
 
@@ -223,7 +234,14 @@ tap.test('users PUT endpoint', async endpointTest => {
           'the model is called after values are set'
         );
         validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-        validTest.ok(res.send.calledWith({}), 'updated user data is sent');
+        validTest.ok(
+          toJSON.calledOnce,
+          'database object is converted to pure object'
+        );
+        validTest.ok(
+          res.send.calledWith({ name: 'json-name' }),
+          'updated user data is sent'
+        );
       }
     );
 
@@ -236,6 +254,7 @@ tap.test('users PUT endpoint', async endpointTest => {
         };
         const save = sinon.stub().resolves();
         const set = sinon.stub();
+        const toJSON = sinon.stub().returns({ name: 'json-name' });
         UserModel.where.withArgs({ id: 1 }).returns({ fetch: UserModel.fetch });
 
         UserModel.fetch.resolves({
@@ -244,7 +263,8 @@ tap.test('users PUT endpoint', async endpointTest => {
           get: sinon
             .stub()
             .withArgs('id')
-            .returns('bob-id')
+            .returns('bob-id'),
+          toJSON
         });
 
         await handler(req, res);
@@ -258,7 +278,14 @@ tap.test('users PUT endpoint', async endpointTest => {
           'the model is called after values are set'
         );
         validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-        validTest.ok(res.send.calledWith({}), 'updated user data is sent');
+        validTest.ok(
+          toJSON.calledOnce,
+          'database object is converted to pure object'
+        );
+        validTest.ok(
+          res.send.calledWith({ name: 'json-name' }),
+          'updated user data is sent'
+        );
       }
     );
   });
