@@ -7,7 +7,7 @@ import SectionHeader from './SectionHeader';
 import SelectInput from './SelectInput';
 import { STATES } from '../util';
 
-const FormStateStart = ({ handleSubmit, pristine, reset, submitting }) => (
+const FormStateStart = ({ handleSubmit, submitting }) => (
   <form onSubmit={handleSubmit}>
     <SectionHeader>Your info:</SectionHeader>
     <Field name="name" type="text" component={Input} label="Name" />
@@ -23,42 +23,33 @@ const FormStateStart = ({ handleSubmit, pristine, reset, submitting }) => (
 
     <SectionHeader>Your state:</SectionHeader>
     <Field
-      name="stateName"
+      name="state"
       component={SelectInput}
       label="State"
-      options={STATES}
+      options={[{ id: '', name: '--' }, ...STATES]}
     />
 
-    {false && (
-      <div>
-        <button type="submit" disabled={pristine || submitting}>
-          Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
-        </button>
-      </div>
-    )}
+    <div className="mt3">
+      <button
+        type="submit"
+        className="btn btn-primary bg-green"
+        disabled={submitting}
+      >
+        {submitting ? 'Saving' : 'Submit'}
+      </button>
+    </div>
   </form>
 );
 
 FormStateStart.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  reset: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired
 };
 
 const formConfig = {
   form: 'stateStart',
-  initialValues: {
-    name: 'First Last',
-    position: 'Director',
-    email: 'first.last@state.gov',
-    phone: '555-123-4567',
-    stateName: 'vt'
-  },
-  destroyOnUnmount: false
+  destroyOnUnmount: false,
+  enableReinitialize: true
 };
 
 export default reduxForm(formConfig)(FormStateStart);

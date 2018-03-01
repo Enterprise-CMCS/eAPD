@@ -20,7 +20,7 @@ ShallowWrapper {
       "children": Array [
         <Connect(TopNav) />,
         <div
-          className="container px2"
+          className="container p2"
         >
           <Switch>
             <Route
@@ -189,7 +189,7 @@ ShallowWrapper {
               component={[Function]}
             />
           </Switch>,
-          "className": "container px2",
+          "className": "container p2",
         },
         "ref": null,
         "rendered": Object {
@@ -507,7 +507,7 @@ ShallowWrapper {
         "children": Array [
           <Connect(TopNav) />,
           <div
-            className="container px2"
+            className="container p2"
           >
             <Switch>
               <Route
@@ -676,7 +676,7 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>,
-            "className": "container px2",
+            "className": "container p2",
           },
           "ref": null,
           "rendered": Object {

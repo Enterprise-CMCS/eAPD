@@ -49,6 +49,9 @@ module.exports.setup = function setup(
   // Add a local authentication endpoint
   logger.silly('setting up a local login handler');
   app.post('/auth/login', passport.authenticate('local'), (req, res) => {
-    res.status(200).end();
+    res
+      .status(200)
+      .send({ id: req.user.id })
+      .end();
   });
 };
