@@ -1,3 +1,5 @@
+const truncate = require('./shared/delete-everything');
+const roles = require('./shared/roles-and-activities');
 const users = require('./development/users');
 
 exports.seed = async knex => {
@@ -7,5 +9,7 @@ exports.seed = async knex => {
   }
 
   // Call specific seeds from here.
+  await truncate.seed(knex);
+  await roles.seed(knex);
   await users.seed(knex);
 };
