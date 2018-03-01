@@ -6,12 +6,12 @@ const can = require('../../auth/middleware').can;
 
 const userIsNew = async (email, UserModel) => {
   const user = await UserModel.where({ email }).fetch();
-
-  if (user) {
-    return false;
-  }
-  return true;
+  return !user;
 };
+
+// TODO: figure out better/cleaner solution.
+// At the very least, move this helper to a better location
+const toObj = entry => JSON.parse(JSON.stringify(entry));
 
 module.exports = (
   app,
@@ -25,7 +25,10 @@ module.exports = (
     logger.silly(req, `attempting to update user [${req.params.id}]`);
 
     try {
-      const user = await UserModel.where({ id: req.params.id }).fetch();
+      const user = await UserModel.where({ id: req.params.id }).fetch({
+        columns: ['id', 'email', 'name', 'position', 'phone', 'state']
+      });
+
       if (!user) {
         logger.verbose(req, `no user found for [${req.params.id}]`);
         return res.status(404).end();
@@ -73,7 +76,7 @@ module.exports = (
 
       await user.save();
       logger.silly(req, 'all done');
-      return res.status(204).end();
+      return res.send(toObj(user));
     } catch (e) {
       logger.error(req, e);
       return res.status(500).end();
