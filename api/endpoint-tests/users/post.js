@@ -1,11 +1,18 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
-const { db, request, getFullPath, login } = require('../utils');
+const {
+  db,
+  request,
+  getFullPath,
+  login,
+  unauthenticatedTest,
+  unauthorizedTest
+} = require('../utils');
 
 const newUsersInTheDatabase = async () => {
   // Get all users other than the originals.  User IDs
   // 57 and 58 are created when the database is seeded.
   const users = (await db()('users').select('*')).filter(
-    user => user.id !== 57 && user.id !== 58
+    user => ![57, 58, 1000].includes(user.id)
   );
 
   return users.length ? users : false;
@@ -34,33 +41,8 @@ tap.test('users endpoint | POST /users', async postUsersTest => {
     }
   ];
 
-  postUsersTest.test('when unauthenticated', async unauthenticatedTests => {
-    [
-      ...invalidCases,
-      {
-        name: 'with a valid body',
-        body: { email: 'newuser@email.com', password: 'newpassword' }
-      }
-    ].forEach(situation => {
-      unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
-        const { response, body } = await request.post(url, {
-          json: situation.body
-        });
-        unauthenticatedTest.equal(
-          response.statusCode,
-          403,
-          'gives a 403 status code'
-        );
-        unauthenticatedTest.notOk(body, 'does not send a body');
-
-        const newUsers = await newUsersInTheDatabase();
-        unauthenticatedTest.notOk(
-          newUsers,
-          'a user object is not inserted into the database'
-        );
-      });
-    });
-  });
+  unauthenticatedTest('post', url, postUsersTest);
+  unauthorizedTest('post', url, postUsersTest);
 
   postUsersTest.test('when authenticated', async authenticatedTests => {
     const cookies = await login();

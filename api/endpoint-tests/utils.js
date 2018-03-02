@@ -41,7 +41,7 @@ const unauthenticatedTest = (method, url, test) => {
 
 const unauthorizedTest = (method, url, test) => {
   test.test('with unauthorized', async invalidTest => {
-    const jar = await login('user2@email', 'something'); // this user has no permissions
+    const jar = await login('no-permissions', 'password'); // this user has no permissions
     const { response: { statusCode }, body } = await requestFor(method)(url, {
       jar
     });
