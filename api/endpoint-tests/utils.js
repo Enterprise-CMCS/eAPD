@@ -36,12 +36,12 @@ const put = async (...args) =>
     });
   });
 
-const login = async () => {
+const login = async (username = 'em@il.com', password = 'password') => {
   const cookies = request.jar();
 
   const { response } = await post(getFullPath('/auth/login'), {
     jar: cookies,
-    json: { username: 'em@il.com', password: 'password' }
+    json: { username, password }
   });
 
   if (response.statusCode === 200) {
