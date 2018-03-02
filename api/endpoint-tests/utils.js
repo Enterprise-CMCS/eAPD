@@ -16,12 +16,12 @@ const execRequest = async (method, ...args) =>
   });
 const requestFor = method => (...args) => execRequest(method, ...args);
 
-const login = async () => {
+const login = async (username = 'em@il.com', password = 'password') => {
   const cookies = request.jar();
 
   const { response } = await execRequest('post', getFullPath('/auth/login'), {
     jar: cookies,
-    json: { username: 'em@il.com', password: 'password' }
+    json: { username, password }
   });
 
   if (response.statusCode === 200) {

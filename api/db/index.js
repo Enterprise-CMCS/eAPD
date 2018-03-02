@@ -5,6 +5,7 @@ const defaultConfig = require('../knexfile');
 
 const user = require('./user');
 const authorization = require('./authorization');
+const state = require('./state');
 
 const exportedModels = {};
 
@@ -12,7 +13,7 @@ const setup = (
   knex = defaultKnex,
   bookshelf = defaultBookshelf,
   config = defaultConfig,
-  models = [user(), authorization()]
+  models = [user(), authorization(), state()]
 ) => {
   logger.silly(
     `setting up models using [${process.env.NODE_ENV}] configuration`
