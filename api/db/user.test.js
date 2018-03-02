@@ -31,6 +31,11 @@ tap.test('user data model', async userModelTests => {
       'creates a role relationship for the user model'
     );
     setupTests.type(
+      user.user.state,
+      'function',
+      'creates a state relationship for the user model'
+    );
+    setupTests.type(
       user.user.activities,
       'function',
       'creates an activities relationship for the user model'
@@ -51,6 +56,23 @@ tap.test('user data model', async userModelTests => {
         'sets up the relationship mapping to a role'
       );
       roleTests.equal(output, 'poptart', 'returns the expected value');
+    }
+  );
+
+  userModelTests.test(
+    'user model sets up state relationship',
+    async stateTests => {
+      const self = {
+        hasOne: sinon.stub().returns('cali')
+      };
+
+      const output = user.user.state.bind(self)();
+
+      stateTests.ok(
+        self.hasOne.calledWith('state'),
+        'sets up the relationship mapping to a state'
+      );
+      stateTests.equal(output, 'cali', 'returns the expected value');
     }
   );
 
