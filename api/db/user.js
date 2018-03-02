@@ -10,6 +10,10 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
       return this.hasOne('role', 'name', 'auth_role');
     },
 
+    state() {
+      return this.hasOne('state', 'id', 'state_id');
+    },
+
     async activities() {
       logger.silly('getting user activities');
       if (!this.relations.role || !this.relations.role.activities) {
