@@ -1,20 +1,20 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
-const { db, getFullPath, login, request } = require('../utils');
+const {
+  db,
+  getFullPath,
+  login,
+  request,
+  unauthenticatedTest,
+  unauthorizedTest
+} = require('../utils');
 
 tap.test('roles endpoint | GET /roles', async getUsersTest => {
   await db().seed.run();
 
   const url = getFullPath('/roles');
 
-  getUsersTest.test('when unauthenticated', async unauthenticatedTest => {
-    const { response, body } = await request.get(url);
-    unauthenticatedTest.equal(
-      response.statusCode,
-      403,
-      'gives a 403 status code'
-    );
-    unauthenticatedTest.notOk(body, 'does not send a body');
-  });
+  unauthenticatedTest('get', url, getUsersTest);
+  unauthorizedTest('get', url, getUsersTest);
 
   getUsersTest.test('when authenticated', async validTest => {
     const cookies = await login();

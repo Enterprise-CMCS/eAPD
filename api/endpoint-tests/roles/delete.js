@@ -1,24 +1,20 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
-const { db, request, getFullPath, login } = require('../utils');
+const {
+  db,
+  request,
+  getFullPath,
+  login,
+  unauthenticatedTest,
+  unauthorizedTest
+} = require('../utils');
 
 tap.test('roles endpoint | DELETE /roles/:roleID', async deleteRolesTests => {
   await db().seed.run();
 
   const url = getFullPath('/roles');
 
-  deleteRolesTests.test('when unauthenticated', async unauthenticatedTests => {
-    unauthenticatedTests.test('with invalid role ID', async invalidTest => {
-      const { response, body } = await request.delete(`${url}/9001`);
-      invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
-      invalidTest.notOk(body, 'does not send a body');
-    });
-
-    unauthenticatedTests.test('with valid role ID', async invalidTest => {
-      const { response, body } = await request.delete(`${url}/1`);
-      invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
-      invalidTest.notOk(body, 'does not send a body');
-    });
-  });
+  unauthenticatedTest('delete', `${url}/1001`, deleteRolesTests);
+  unauthorizedTest('delete', `${url}/1001`, deleteRolesTests);
 
   deleteRolesTests.test('when authenticated', async authenticatedTests => {
     const cookies = await login();
