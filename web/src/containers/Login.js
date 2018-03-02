@@ -3,10 +3,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { login } from '../actions/auth';
+import { checkAuth, login } from '../actions/auth';
 
 class Login extends Component {
   state = { username: '', password: '' };
+
+  componentWillMount() {
+    this.props.checkAuth();
+  }
 
   handleChange = e => {
     const { name, value } = e.target;
@@ -20,9 +24,11 @@ class Login extends Component {
   };
 
   render() {
-    const { authenticated, error, fetching, location } = this.props;
+    const { authenticated, checked, error, fetching, location } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
     const { username, password } = this.state;
+
+    if (!checked) return null;
 
     if (authenticated) {
       return <Redirect to={from} />;
@@ -76,12 +82,15 @@ Login.propTypes = {
   login: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
+const mapStateToProps = ({
+  auth: { authenticated, checked, error, fetching }
+}) => ({
   authenticated,
+  checked,
   error,
   fetching
 });
 
-const mapDispatchToProps = { login };
+const mapDispatchToProps = { checkAuth, login };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
