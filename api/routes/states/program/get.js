@@ -39,7 +39,7 @@ module.exports = (
       const state = user.related('state');
       if (!state.get('id')) {
         logger.verbose('user does not have an associated state');
-        return res.status(403).end();
+        return res.status(401).end();
       }
 
       logger.silly(
