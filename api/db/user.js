@@ -11,7 +11,7 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
     },
 
     state() {
-      return this.hasOne('state');
+      return this.hasOne('state', 'id', 'state_id');
     },
 
     async activities() {
