@@ -14,6 +14,7 @@ tap.test('endpoint setup', async endpointTest => {
 
   const activitiesEndpoint = sinon.spy();
   const rolesEndpoint = sinon.spy();
+  const statesProgramsEndpoint = sinon.spy();
   const usersEndpoint = sinon.spy();
   const formLoggerEndpoint = sinon.spy();
   const openAPI = {};
@@ -22,6 +23,7 @@ tap.test('endpoint setup', async endpointTest => {
     app,
     activitiesEndpoint,
     rolesEndpoint,
+    statesProgramsEndpoint,
     usersEndpoint,
     formLoggerEndpoint,
     {}
@@ -34,6 +36,10 @@ tap.test('endpoint setup', async endpointTest => {
   endpointTest.ok(
     rolesEndpoint.calledWith(app),
     'roles endpoint is setup with the app'
+  );
+  endpointTest.ok(
+    statesProgramsEndpoint.calledWith(app),
+    'states/program endpoint is setup with the app'
   );
   endpointTest.ok(
     usersEndpoint.calledWith(app),
