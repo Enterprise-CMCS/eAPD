@@ -54,6 +54,23 @@ tap.test('user data model', async userModelTests => {
     }
   );
 
+  userModelTests.test(
+    'user model sets up state relationship',
+    async stateTests => {
+      const self = {
+        hasOne: sinon.stub().returns('poptart')
+      };
+
+      const output = user.user.state.bind(self)();
+
+      stateTests.ok(
+        self.hasOne.calledWith('state', 'id', 'state_id'),
+        'sets up the relationship mapping to a state'
+      );
+      stateTests.equal(output, 'poptart', 'returns the expected value');
+    }
+  );
+
   userModelTests.test('validation', async validationTests => {
     const self = {
       where: sandbox.stub(),
