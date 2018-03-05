@@ -8,38 +8,18 @@ const getFullPath = endpointPath =>
     process.env.PORT ||
     8000}${endpointPath}`;
 
-const del = async (...args) =>
+const execRequest = async (method, ...args) =>
   new Promise(resolve => {
-    request.delete(...args, (err, response, body) => {
+    request[method](...args, (err, response, body) => {
       resolve({ err, response, body });
     });
   });
-
-const get = async (...args) =>
-  new Promise(resolve => {
-    request.get(...args, (err, response, body) => {
-      resolve({ err, response, body });
-    });
-  });
-
-const post = async (...args) =>
-  new Promise(resolve => {
-    request.post(...args, (err, response, body) => {
-      resolve({ err, response, body });
-    });
-  });
-
-const put = async (...args) =>
-  new Promise(resolve => {
-    request.put(...args, (err, response, body) => {
-      resolve({ err, response, body });
-    });
-  });
+const requestFor = method => (...args) => execRequest(method, ...args);
 
 const login = async (username = 'em@il.com', password = 'password') => {
   const cookies = request.jar();
 
-  const { response } = await post(getFullPath('/auth/login'), {
+  const { response } = await execRequest('post', getFullPath('/auth/login'), {
     jar: cookies,
     json: { username, password }
   });
@@ -67,7 +47,13 @@ const db = () => {
 
 module.exports = {
   db,
-  request: { delete: del, get, post, put, jar: request.jar },
+  request: {
+    delete: requestFor('delete'),
+    get: requestFor('get'),
+    post: requestFor('post'),
+    put: requestFor('put'),
+    jar: request.jar
+  },
   getFullPath,
   login
 };
