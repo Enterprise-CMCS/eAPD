@@ -76,10 +76,10 @@ describe('auth reducer', () => {
 
   describe('when user is already logged in', () => {
     it('should reset auth after LOGOUT_SUCCESS', () => {
-      const state = { authenticated: true };
+      const state = { initialCheck: true, authenticated: true };
 
       expect(auth(state, { type: LOGOUT_SUCCESS })).toEqual({
-        initialCheck: false,
+        initialCheck: true,
         authenticated: false,
         error: '',
         fetching: false
