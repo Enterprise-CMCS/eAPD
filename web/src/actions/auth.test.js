@@ -78,4 +78,38 @@ describe('auth actions', () => {
       });
     });
   });
+
+  describe('checkAuth (async)', () => {
+    afterEach(() => {
+      fetchMock.reset();
+    });
+
+    it('creates LOGIN_SUCCESS after successful auth', () => {
+      const store = mockStore({});
+      fetchMock.onGet().reply(200);
+
+      const expectedActions = [
+        { type: actions.AUTH_CHECK_REQUEST },
+        { type: actions.AUTH_CHECK_SUCCESS }
+      ];
+
+      return store.dispatch(actions.checkAuth()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+
+    it('creates LOGIN_FAILURE after unsuccessful auth', () => {
+      const store = mockStore({});
+      fetchMock.onGet().reply(403);
+
+      const expectedActions = [
+        { type: actions.AUTH_CHECK_REQUEST },
+        { type: actions.AUTH_CHECK_FAILURE }
+      ];
+
+      return store.dispatch(actions.checkAuth()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
 });
