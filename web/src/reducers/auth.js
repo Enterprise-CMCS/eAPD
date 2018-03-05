@@ -27,7 +27,7 @@ const auth = (state = initialState, action) => {
     case LOGIN_FAILURE:
       return { ...state, fetching: false, error: action.error };
     case LOGOUT_SUCCESS:
-      return { ...initialState };
+      return { ...initialState, initialCheck: state.initialCheck };
     default:
       return state;
   }
