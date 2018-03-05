@@ -24,7 +24,7 @@ class DevWrapper extends Component {
     const { xray } = this.state;
 
     return (
-      <div>
+      <div className="site">
         <XRay disabled={!xray}>{children}</XRay>
         <div className="fixed m1 z1 bottom-0 right-0">
           <button
@@ -44,7 +44,7 @@ DevWrapper.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const ProdWrapper = ({ children }) => <div>{children}</div>;
+const ProdWrapper = ({ children }) => <div className="site">{children}</div>;
 
 ProdWrapper.propTypes = {
   children: PropTypes.node.isRequired
