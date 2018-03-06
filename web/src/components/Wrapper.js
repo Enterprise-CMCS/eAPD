@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import XRay from 'react-x-ray';
 
-class DevWrapper extends Component {
-  state = { xray: false };
-
+class Wrapper extends Component {
   componentDidMount() {
+    if (!this.props.isDev) return;
     this.addTota11y();
   }
 
@@ -15,42 +13,15 @@ class DevWrapper extends Component {
     document.body.appendChild(script);
   };
 
-  toggleXray = () => {
-    this.setState(prev => ({ xray: !prev.xray }));
-  };
-
   render() {
     const { children } = this.props;
-    const { xray } = this.state;
-
-    return (
-      <div>
-        <XRay disabled={!xray}>{children}</XRay>
-        <div className="fixed m1 z1 bottom-0 right-0">
-          <button
-            type="button"
-            className="btn btn-primary bg-black px1"
-            onClick={this.toggleXray}
-          >
-            X-Ray
-          </button>
-        </div>
-      </div>
-    );
+    return <div className="site">{children}</div>;
   }
 }
 
-DevWrapper.propTypes = {
-  children: PropTypes.node.isRequired
+Wrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+  isDev: PropTypes.bool.isRequired
 };
-
-const ProdWrapper = ({ children }) => <div>{children}</div>;
-
-ProdWrapper.propTypes = {
-  children: PropTypes.node.isRequired
-};
-
-const Wrapper =
-  process.env.NODE_ENV !== 'production' ? DevWrapper : ProdWrapper;
 
 export default Wrapper;

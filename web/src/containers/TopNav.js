@@ -15,7 +15,7 @@ class TopNav extends Component {
     const { authenticated } = this.props;
 
     return (
-      <nav className="clearfix py1 white bg-black">
+      <header className="clearfix py1 border-bottom border-silver">
         <div className="sm-col">
           <Link to="/" className="btn">
             CMS HITECH APD
@@ -37,7 +37,7 @@ class TopNav extends Component {
             </Link>
           )}
         </div>
-      </nav>
+      </header>
     );
   }
 }
