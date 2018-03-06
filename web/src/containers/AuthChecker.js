@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { checkAuth } from '../actions/auth';
@@ -13,7 +13,7 @@ class AuthChecker extends Component {
     const { authInit, children } = this.props;
 
     if (!authInit) return null;
-    return <div>{children}</div>;
+    return <Fragment>{children}</Fragment>;
   }
 }
 
