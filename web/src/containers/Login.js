@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { login } from '../actions/auth';
+import Container from '../components/Container';
 
 class Login extends Component {
   state = { username: '', password: '' };
@@ -29,7 +30,7 @@ class Login extends Component {
     }
 
     return (
-      <div>
+      <Container>
         <h1>Please log in.</h1>
         <div className="mb3 sm-col-6 md-col-4">
           {error && <div className="mb2 bg-gray">{error}</div>}
@@ -63,7 +64,7 @@ class Login extends Component {
             </button>
           </form>
         </div>
-      </div>
+      </Container>
     );
   }
 }
