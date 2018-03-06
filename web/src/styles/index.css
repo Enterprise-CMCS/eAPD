@@ -8,7 +8,6 @@
 @custom-media --breakpoint-sm (min-width: 40rem);
 @custom-media --breakpoint-md (min-width: 52rem);
 @custom-media --breakpoint-lg (min-width: 64rem);
-@custom-media --breakpoint-md-max (max-width: 52rem);
 
 :root {
   --base-font-size: 16px;

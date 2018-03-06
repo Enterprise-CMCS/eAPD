@@ -1,29 +1,29 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from 'prop-types'
+import React from 'react'
 
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar'
 
 const withSidebar = WrappedComponent => {
   const Wrapper = props => (
-    <div className="sm-flex mxn2">
-      <div className="col col-12 sm-col-3 px2 bg-yellow">
+    <div className="site-body">
+      <div className="site-sidebar bg-yellow">
         <Sidebar />
       </div>
-      <div className="col col-12 sm-col-9 px2">
+      <div className="site-content p2 sm-px3">
         <WrappedComponent {...props} />
       </div>
     </div>
-  );
+  )
 
   Wrapper.propTypes = {
     props: PropTypes.object
-  };
+  }
 
   Wrapper.defaultProps = {
     props: {}
-  };
+  }
 
-  return Wrapper;
-};
+  return Wrapper
+}
 
-export default withSidebar;
+export default withSidebar
