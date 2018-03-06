@@ -6,7 +6,7 @@ import AuthChecker from '../containers/AuthChecker';
 import TopNav from '../containers/TopNav';
 
 const App = () => (
-  <Wrapper>
+  <Wrapper isDev={process.env.NODE_ENV !== 'production'}>
     <AuthChecker>
       <TopNav />
       <Routes />
