@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types'
+import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
 
 const routes = [
   { path: '/state-start', name: 'State set-up' },
@@ -17,10 +17,10 @@ const routes = [
   { path: '/expenses-list', name: 'Expense list' },
   { path: '/expenses-details', name: 'Expense details' },
   { path: '/review-and-submit', name: 'Program summary' }
-];
+]
 
 const Sidebar = ({ match }) => (
-  <div className="mt3">
+  <div className="p2">
     <ul className="list-reset">
       {routes.map(({ path, name }) => (
         <li key={path}>
@@ -31,11 +31,11 @@ const Sidebar = ({ match }) => (
       ))}
     </ul>
   </div>
-);
+)
 
 Sidebar.propTypes = {
   match: PropTypes.object.isRequired
-};
+}
 
-export { Sidebar as SidebarPure };
-export default withRouter(Sidebar);
+export { Sidebar as SidebarPure }
+export default withRouter(Sidebar)

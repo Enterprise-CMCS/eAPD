@@ -1,35 +1,36 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
-import { login } from '../actions/auth';
+import { login } from '../actions/auth'
+import Container from '../components/Container'
 
 class Login extends Component {
-  state = { username: '', password: '' };
+  state = { username: '', password: '' }
 
   handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
+    const { name, value } = e.target
+    this.setState({ [name]: value })
+  }
 
   handleSubmit = e => {
-    e.preventDefault();
-    const { username, password } = this.state;
-    this.props.login(username, password);
-  };
+    e.preventDefault()
+    const { username, password } = this.state
+    this.props.login(username, password)
+  }
 
   render() {
-    const { authenticated, error, fetching, location } = this.props;
-    const { from } = location.state || { from: { pathname: '/' } };
-    const { username, password } = this.state;
+    const { authenticated, error, fetching, location } = this.props
+    const { from } = location.state || { from: { pathname: '/' } }
+    const { username, password } = this.state
 
     if (authenticated) {
-      return <Redirect to={from} />;
+      return <Redirect to={from} />
     }
 
     return (
-      <div>
+      <Container>
         <h1>Please log in.</h1>
         <div className="mb3 sm-col-6 md-col-4">
           {error && <div className="mb2 bg-gray">{error}</div>}
@@ -63,8 +64,8 @@ class Login extends Component {
             </button>
           </form>
         </div>
-      </div>
-    );
+      </Container>
+    )
   }
 }
 
@@ -74,14 +75,14 @@ Login.propTypes = {
   fetching: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired
-};
+}
 
 const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
   authenticated,
   error,
   fetching
-});
+})
 
-const mapDispatchToProps = { login };
+const mapDispatchToProps = { login }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

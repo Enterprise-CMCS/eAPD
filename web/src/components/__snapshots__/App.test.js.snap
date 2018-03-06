@@ -21,6 +21,7 @@ ShallowWrapper {
         <Connect(TopNav) />
         <Routes />
       </Connect(AuthChecker)>,
+      "isDev": true,
     },
     "ref": null,
     "rendered": Object {
@@ -68,6 +69,7 @@ ShallowWrapper {
           <Connect(TopNav) />
           <Routes />
         </Connect(AuthChecker)>,
+        "isDev": true,
       },
       "ref": null,
       "rendered": Object {
