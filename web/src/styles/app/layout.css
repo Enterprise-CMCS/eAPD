@@ -1,0 +1,43 @@
+/* modeled after https://philipwalton.github.io/solved-by-flexbox/demos/holy-grail/ */
+
+html {
+  height: 100%;
+}
+
+body,
+#app {
+  min-height: 100%;
+}
+
+header,
+footer {
+  flex: none;
+}
+
+.site {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.site-body {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+@media (--breakpoint-md) {
+  .site-body {
+    flex-direction: row;
+  }
+
+  .site-content {
+    flex: 1;
+  }
+
+  .site-sidebar {
+    display: block;
+    flex: 0 0 18rem;
+  }
+}

@@ -19,12 +19,18 @@ const routes = [
   { path: '/review-and-submit', name: 'Program summary' }
 ];
 
+const linkClass = (path, curr) => {
+  let cls = 'inline-block white text-decoration-none';
+  if (path === curr) cls += ' bold border-bottom border-width-3 border-blue';
+  return cls;
+};
+
 const Sidebar = ({ match }) => (
-  <div className="mt3">
+  <div className="p2">
     <ul className="list-reset">
       {routes.map(({ path, name }) => (
-        <li key={path}>
-          <Link to={path} className={match.path === path ? 'bold' : ''}>
+        <li key={path} className="mb1">
+          <Link to={path} className={linkClass(path, match.path)}>
             {name}
           </Link>
         </li>

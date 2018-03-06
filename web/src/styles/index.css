@@ -1,7 +1,14 @@
 @import 'ace-css';
 
 @import 'app/base';
+
+@import 'app/border';
+@import 'app/layout';
 @import 'app/table';
+
+@custom-media --breakpoint-sm (min-width: 40rem);
+@custom-media --breakpoint-md (min-width: 52rem);
+@custom-media --breakpoint-lg (min-width: 64rem);
 
 :root {
   --base-font-size: 16px;

@@ -5,11 +5,11 @@ import Sidebar from './Sidebar';
 
 const withSidebar = WrappedComponent => {
   const Wrapper = props => (
-    <div className="clearfix mxn2">
-      <div className="col col-12 sm-col-3 px2">
+    <div className="site-body">
+      <div className="site-sidebar bg-navy">
         <Sidebar />
       </div>
-      <div className="col col-12 sm-col-9 px2">
+      <div className="site-content p2 pb4 sm-px3">
         <WrappedComponent {...props} />
       </div>
     </div>
