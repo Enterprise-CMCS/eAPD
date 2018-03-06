@@ -1,4 +1,5 @@
 require('./env');
+const fs = require('fs');
 const logger = require('./logger')('main');
 const express = require('express');
 const cors = require('cors');
@@ -9,6 +10,27 @@ const auth = require('./auth');
 const routes = require('./routes');
 
 const server = express();
+
+if (process.env.ENDPOINT_COVERAGE_CAPTURE) {
+  server.use((req, res, next) => {
+    const end = res.end.bind(res);
+    res.end = (...args) => {
+      let path = req.path;
+      if (req.route) {
+        path = req.route.path;
+      }
+      const result = {
+        path,
+        method: req.method,
+        status: res.statusCode
+      };
+      fs.appendFileSync('./endpoints-hit.txt', `${JSON.stringify(result)}\n`);
+      return end(...args);
+    };
+
+    next();
+  });
+}
 
 server.use((req, res, next) => {
   req.id = uuid();
@@ -28,6 +50,16 @@ logger.silly('setting up routes');
 routes(server);
 
 logger.silly('starting the server');
-server.listen(process.env.PORT, () =>
-  logger.verbose(`server listening on :${process.env.PORT}`)
-);
+server.listen(process.env.PORT, () => {
+  logger.verbose(`server listening on :${process.env.PORT}`);
+
+  if (process.env.ENDPOINT_COVERAGE_CAPTURE) {
+    const allRoutes = server._router.stack // eslint-disable-line no-underscore-dangle
+      .filter(a => !!a.route)
+      .map(({ route: { path, methods } }) => ({
+        path,
+        method: Object.keys(methods)[0]
+      }));
+    fs.writeFileSync('./endpoints-all.txt', JSON.stringify(allRoutes));
+  }
+});

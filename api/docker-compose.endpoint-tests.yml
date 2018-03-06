@@ -17,6 +17,8 @@ services:
       - NODE_ENV=test
       - API_PORT=8000
       - API_HOST=api-for-testing
+      - ENDPOINT_COVERAGE_CAPTURE=yes
+    command: npm start
     expose:
       - 8000
     volumes:
