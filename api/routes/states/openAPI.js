@@ -1,11 +1,14 @@
 const {
   requiresAuth,
-  schema: { arrayOf, jsonResponse }
-} = require('../../openAPI/helpers');
+  schema: { jsonResponse }
+} = require('../openAPI/helpers');
 
-const programObjectSchema = {
+const stateObjectSchema = {
   type: 'object',
   properties: {
+    id: {},
+    medicaid_office: {},
+    name: {},
     program_vision: {
       type: 'string',
       description: 'Program vision statement'
@@ -13,26 +16,26 @@ const programObjectSchema = {
     program_benefits: {
       type: 'string',
       description: 'Planned benefits of the program'
-    }
+    },
+    state_pocs: { type: 'string', format: 'json', description: '' }
   }
 };
 
 const openAPI = {
-  '/states/program': {
+  '/states': {
     get: {
-      description: `Get the program vision and key benefits for the current users's state`,
+      description: `Get information about the users's state`,
       responses: {
         200: {
-          description: 'Vision and benefit of the state',
-          content: jsonResponse(arrayOf(programObjectSchema))
+          description: 'Information about the state',
+          content: jsonResponse(stateObjectSchema)
         }
       }
     }
   },
-  '/states/{id}/program': {
+  '/states/{id}': {
     get: {
-      description:
-        'Get the program vision and key benefits for a specific state',
+      description: 'Get information about a specific state',
       parameters: [
         {
           name: 'id',
@@ -44,8 +47,8 @@ const openAPI = {
       ],
       responses: {
         200: {
-          description: 'Vision and benefit of the state',
-          content: jsonResponse(programObjectSchema)
+          description: 'Information about the state',
+          content: jsonResponse(stateObjectSchema)
         },
         404: {
           description: 'The state ID does not match any known states'
