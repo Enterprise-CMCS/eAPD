@@ -8,7 +8,7 @@ const allUsersHandler = async (req, res, UserModel) => {
     const users = await UserModel.fetchAll({ columns: ['id', 'email'] });
     logger.silly(req, 'sending users', JSON.parse(JSON.stringify(users)));
     res.send(
-      users.map(user => ({ email: user.get('email'), id: user.get('id') }))
+      users.map((user) => ({ email: user.get('email'), id: user.get('id') }))
     );
   } catch (e) {
     logger.error(req, e);

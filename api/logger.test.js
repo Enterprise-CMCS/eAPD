@@ -4,7 +4,7 @@ const loggerCreator = require('./logger');
 let originalEnv;
 let originalArgs;
 
-tap.test('logger', async loggerTests => {
+tap.test('logger', async (loggerTests) => {
   loggerTests.beforeEach(async () => {
     originalEnv = process.env;
     originalArgs = process.argv;
@@ -16,7 +16,7 @@ tap.test('logger', async loggerTests => {
 
   loggerTests.test(
     'sets up a silent console transport if console logging is disabled',
-    async test => {
+    async (test) => {
       process.env.LOG_CONSOLE = 'false';
       const logger = loggerCreator('no-console-test');
 
@@ -27,14 +27,14 @@ tap.test('logger', async loggerTests => {
 
   loggerTests.test(
     'sets up a console transport if console logging is enabled',
-    async consoleTest => {
+    async (consoleTest) => {
       consoleTest.beforeEach(async () => {
         process.env.LOG_CONSOLE = 'true';
       });
 
       consoleTest.test(
         'and it is silent if the --silent argument is supplied',
-        async test => {
+        async (test) => {
           process.argv = ['--silent'];
           const logger = loggerCreator('silent-console-test');
 
@@ -48,7 +48,7 @@ tap.test('logger', async loggerTests => {
 
       consoleTest.test(
         'it is not silent if the --silent argument is not supplied',
-        async test => {
+        async (test) => {
           process.argv = [];
           const logger = loggerCreator('regular-console-test');
 
@@ -67,7 +67,7 @@ tap.test('logger', async loggerTests => {
 
   loggerTests.test(
     'sets up a file transport if file logging is enabled',
-    async test => {
+    async (test) => {
       process.env.LOG_FILE = 'true';
       const logger = loggerCreator('regular-file-test');
 
@@ -78,7 +78,7 @@ tap.test('logger', async loggerTests => {
 
   loggerTests.test(
     'sets the log level on all transports to the value specified in the LOG_LEVEL environment variable',
-    async test => {
+    async (test) => {
       process.env.LOG_FILE = 'true';
       process.env.LOG_CONSOLE = 'true';
       process.env.LOG_LEVEL = 'test-level';

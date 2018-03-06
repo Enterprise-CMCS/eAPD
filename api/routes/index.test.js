@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const loggedInMiddleware = require('../auth/middleware').loggedIn;
 const endpointIndex = require('./index');
 
-tap.test('endpoint setup', async endpointTest => {
+tap.test('endpoint setup', async (endpointTest) => {
   const app = {
     get: sinon.spy()
   };
@@ -62,9 +62,9 @@ tap.test('endpoint setup', async endpointTest => {
 
   endpointTest.test(
     'OpenAPI handler returns expected documentation',
-    async openAPItest => {
+    async (openAPItest) => {
       const openAPIHandler = app.get.args.filter(
-        arg => arg[0] === '/open-api'
+        (arg) => arg[0] === '/open-api'
       )[0][1];
 
       openAPIHandler({}, res);
@@ -76,8 +76,8 @@ tap.test('endpoint setup', async endpointTest => {
     }
   );
 
-  endpointTest.test('"me" handler returns the current user', async meTest => {
-    const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][2];
+  endpointTest.test('"me" handler returns the current user', async (meTest) => {
+    const meHandler = app.get.args.filter((arg) => arg[0] === '/me')[0][2];
 
     meHandler({ user: { id: 'user-id' } }, res);
 

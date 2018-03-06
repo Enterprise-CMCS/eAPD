@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const rolesIndex = require('./index');
 
-tap.test('roles endpoint setup', async endpointTest => {
+tap.test('roles endpoint setup', async (endpointTest) => {
   const app = {};
   const delEndpoint = sinon.spy();
   const getEndpoint = sinon.spy();

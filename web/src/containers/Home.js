@@ -21,11 +21,11 @@ Home.propTypes = {
   total: PropTypes.number.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   total: state.counter
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     {
       increment,

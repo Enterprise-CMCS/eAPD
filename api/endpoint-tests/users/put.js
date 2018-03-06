@@ -1,7 +1,7 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const { db, request, getFullPath, login } = require('../utils');
 
-tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
+tap.test('users endpoint | PUT /users/:userID', async (putUsersTests) => {
   await db().seed.run();
 
   const url = getFullPath('/users');
@@ -19,46 +19,52 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
 
   putUsersTests.test(
     'when unauthenticated, invalid ID',
-    async unauthenticatedTests => {
-      invalidCases.forEach(situation => {
-        unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
-          const { response, body } = await request.put(`${url}/9001`, {
-            json: situation.body
-          });
-          unauthenticatedTest.equal(
-            response.statusCode,
-            403,
-            'gives a 403 status code'
-          );
-          unauthenticatedTest.notOk(body, 'does not send a body');
-        });
+    async (unauthenticatedTests) => {
+      invalidCases.forEach((situation) => {
+        unauthenticatedTests.test(
+          situation.name,
+          async (unauthenticatedTest) => {
+            const { response, body } = await request.put(`${url}/9001`, {
+              json: situation.body
+            });
+            unauthenticatedTest.equal(
+              response.statusCode,
+              403,
+              'gives a 403 status code'
+            );
+            unauthenticatedTest.notOk(body, 'does not send a body');
+          }
+        );
       });
     }
   );
 
   putUsersTests.test(
     'when unauthenticated, valid ID',
-    async unauthenticatedTests => {
-      invalidCases.forEach(situation => {
-        unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
-          const { response, body } = await request.put(`${url}/57`, {
-            json: situation.body
-          });
-          unauthenticatedTest.equal(
-            response.statusCode,
-            403,
-            'gives a 403 status code'
-          );
-          unauthenticatedTest.notOk(body, 'does not send a body');
-        });
+    async (unauthenticatedTests) => {
+      invalidCases.forEach((situation) => {
+        unauthenticatedTests.test(
+          situation.name,
+          async (unauthenticatedTest) => {
+            const { response, body } = await request.put(`${url}/57`, {
+              json: situation.body
+            });
+            unauthenticatedTest.equal(
+              response.statusCode,
+              403,
+              'gives a 403 status code'
+            );
+            unauthenticatedTest.notOk(body, 'does not send a body');
+          }
+        );
       });
     }
   );
 
-  putUsersTests.test('when authenticated', async authenticatedTests => {
+  putUsersTests.test('when authenticated', async (authenticatedTests) => {
     const cookies = await login();
 
-    authenticatedTests.test('with an invalid ID', async invalidTest => {
+    authenticatedTests.test('with an invalid ID', async (invalidTest) => {
       const { response, body } = await request.put(`${url}/9001`, {
         jar: cookies,
         json: {}
@@ -69,7 +75,7 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
 
     authenticatedTests.test(
       'with email that already exists',
-      async invalidTest => {
+      async (invalidTest) => {
         const { response, body } = await request.put(`${url}/57`, {
           jar: cookies,
           json: { email: 'user2@email' }
@@ -79,7 +85,7 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
       }
     );
 
-    authenticatedTests.test('with simple password', async invalidTest => {
+    authenticatedTests.test('with simple password', async (invalidTest) => {
       const { response, body } = await request.put(`${url}/57`, {
         jar: cookies,
         json: { password: 'password' }
@@ -88,7 +94,7 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
       invalidTest.same(body, { error: 'edit-user-weak-password' });
     });
 
-    authenticatedTests.test('with valid user info', async validTest => {
+    authenticatedTests.test('with valid user info', async (validTest) => {
       const { response, body } = await request.put(`${url}/57`, {
         jar: cookies,
         json: {

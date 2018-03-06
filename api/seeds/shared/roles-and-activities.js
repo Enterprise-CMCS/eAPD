@@ -40,20 +40,20 @@ const roleToActivityMappings = {
 const insertAndGetIDs = async (knex, tableName, values) => {
   // Get a list of existing names
   const alreadyExisting = (await knex(tableName).select('name')).map(
-    e => e.name
+    (e) => e.name
   );
 
   // Map the list of names into objects to be inserted,
   // but filter out names that already exist.
   const insert = Object.keys(values)
-    .filter(name => !alreadyExisting.includes(name))
-    .map(name => ({ name }));
+    .filter((name) => !alreadyExisting.includes(name))
+    .map((name) => ({ name }));
 
   await knex(tableName).insert(insert);
   const asInserted = await knex(tableName).select('*');
 
   const idMapping = {};
-  asInserted.forEach(as => {
+  asInserted.forEach((as) => {
     idMapping[as.name] = as.id;
   });
   return idMapping;
@@ -70,11 +70,11 @@ const setupMappings = async (
 
   // Get a list of existing mappings
   const alreadyExisting = await table.select('*');
-  const match = (roleID, activityID) => role =>
+  const match = (roleID, activityID) => (role) =>
     role.role_id === roleID && role.activity_id === activityID;
 
   await Promise.all(
-    Object.keys(mappings).map(async role => {
+    Object.keys(mappings).map(async (role) => {
       const roleID = roleIDs[role];
       for (let i = 0; i < mappings[role].length; i += 1) {
         const activityID = activityIDs[mappings[role][i]];
@@ -91,7 +91,7 @@ const setupMappings = async (
   );
 };
 
-exports.seed = async knex => {
+exports.seed = async (knex) => {
   const activityIDs = await insertAndGetIDs(
     knex,
     'auth_activities',

@@ -10,7 +10,7 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
       const roles = await RoleModel.fetchAll({ columns: ['id', 'name'] });
       logger.silly(req, 'getting all the activities for all the roles...');
       const sendRoles = await Promise.all(
-        roles.map(async role => ({
+        roles.map(async (role) => ({
           id: role.get('id'),
           name: role.get('name'),
           activities: await role.getActivities()

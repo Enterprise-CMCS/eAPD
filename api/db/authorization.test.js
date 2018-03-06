@@ -3,8 +3,8 @@ const sinon = require('sinon');
 
 const authorization = require('./authorization')();
 
-tap.test('authorization data models', async authModelTests => {
-  authModelTests.test('setup', async setupTests => {
+tap.test('authorization data models', async (authModelTests) => {
+  authModelTests.test('setup', async (setupTests) => {
     setupTests.match(
       authorization,
       {
@@ -31,7 +31,7 @@ tap.test('authorization data models', async authModelTests => {
 
   authModelTests.test(
     'activity model sets up roles relationship',
-    async roleTests => {
+    async (roleTests) => {
       const self = {
         belongsToMany: sinon.stub().returns('poptart')
       };
@@ -53,7 +53,7 @@ tap.test('authorization data models', async authModelTests => {
 
   authModelTests.test(
     'role model sets up activities relationship',
-    async activityTests => {
+    async (activityTests) => {
       const self = {
         belongsToMany: sinon.stub().returns('frootloop')
       };
@@ -75,7 +75,7 @@ tap.test('authorization data models', async authModelTests => {
 
   authModelTests.test(
     'activities getter helper method',
-    async getActivitesTests => {
+    async (getActivitesTests) => {
       const sandbox = sinon.createSandbox();
       const self = {
         load: sandbox.stub(),
@@ -85,7 +85,7 @@ tap.test('authorization data models', async authModelTests => {
       const pluck = sandbox.stub();
       const getActivities = authorization.role.getActivities.bind(self);
 
-      getActivitesTests.beforeEach(done => {
+      getActivitesTests.beforeEach((done) => {
         sandbox.resetBehavior();
         sandbox.resetHistory();
 
@@ -98,7 +98,7 @@ tap.test('authorization data models', async authModelTests => {
 
       getActivitesTests.test(
         'resolves a list of activites when the role relationship is already loaded',
-        async alreadyLoadedTests => {
+        async (alreadyLoadedTests) => {
           self.relations.activities = true;
           const list = await getActivities();
 
@@ -116,7 +116,7 @@ tap.test('authorization data models', async authModelTests => {
 
       getActivitesTests.test(
         'resolves a list of activites when the role relationship is not already loaded',
-        async notAlreadyLoadedTests => {
+        async (notAlreadyLoadedTests) => {
           self.relations.activities = false;
           const list = await getActivities();
 

@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const canMiddleware = require('../../auth/middleware').can('edit-users');
 const putEndpoint = require('./put');
 
-tap.test('users PUT endpoint', async endpointTest => {
+tap.test('users PUT endpoint', async (endpointTest) => {
   const sandbox = sinon.createSandbox();
   const app = {
     put: sandbox.stub()
@@ -37,7 +37,7 @@ tap.test('users PUT endpoint', async endpointTest => {
     UserModel.where.returns({ fetch: UserModel.fetch });
   });
 
-  endpointTest.test('setup', async setupTest => {
+  endpointTest.test('setup', async (setupTest) => {
     putEndpoint(app, UserModel);
 
     setupTest.ok(
@@ -46,16 +46,16 @@ tap.test('users PUT endpoint', async endpointTest => {
     );
   });
 
-  endpointTest.test('edit users handler', async handlerTest => {
+  endpointTest.test('edit users handler', async (handlerTest) => {
     let handler;
     handlerTest.beforeEach(async () => {
       putEndpoint(app, UserModel);
-      handler = app.put.args.find(args => args[0] === '/users/:id')[2];
+      handler = app.put.args.find((args) => args[0] === '/users/:id')[2];
     });
 
     handlerTest.test(
       'sends a not found error if requesting to edit a user that does not exist',
-      async notFoundTest => {
+      async (notFoundTest) => {
         const req = { params: { id: 1 }, body: { name: 'person' } };
         UserModel.fetch.resolves(null);
 
@@ -69,7 +69,7 @@ tap.test('users PUT endpoint', async endpointTest => {
 
     handlerTest.test(
       'sends a server error if anything goes wrong',
-      async saveTest => {
+      async (saveTest) => {
         const req = {
           params: { id: 1 },
           body: { name: 'bob', activities: [1, 2] }
@@ -85,7 +85,7 @@ tap.test('users PUT endpoint', async endpointTest => {
 
     handlerTest.test(
       'rejects if the data model validation fails',
-      async invalidTest => {
+      async (invalidTest) => {
         const req = {
           params: { id: 1 },
           body: { name: 'Bob', email: 'new@email.com' }
@@ -111,7 +111,7 @@ tap.test('users PUT endpoint', async endpointTest => {
       }
     );
 
-    handlerTest.test('updates a valid user object', async validTest => {
+    handlerTest.test('updates a valid user object', async (validTest) => {
       const req = {
         params: { id: 1 },
         body: { name: 'Bob', email: 'new@email.com' }

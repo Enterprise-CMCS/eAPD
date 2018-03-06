@@ -5,13 +5,13 @@ const newUsersInTheDatabase = async () => {
   // Get all users other than the originals.  User IDs
   // 57 and 58 are created when the database is seeded.
   const users = (await db()('users').select('*')).filter(
-    user => user.id !== 57 && user.id !== 58
+    (user) => user.id !== 57 && user.id !== 58
   );
 
   return users.length ? users : false;
 };
 
-tap.test('users endpoint | POST /users', async postUsersTest => {
+tap.test('users endpoint | POST /users', async (postUsersTest) => {
   await db().seed.run();
 
   const url = getFullPath('/users');
@@ -34,15 +34,15 @@ tap.test('users endpoint | POST /users', async postUsersTest => {
     }
   ];
 
-  postUsersTest.test('when unauthenticated', async unauthenticatedTests => {
+  postUsersTest.test('when unauthenticated', async (unauthenticatedTests) => {
     [
       ...invalidCases,
       {
         name: 'with a valid body',
         body: { email: 'newuser@email.com', password: 'newpassword' }
       }
-    ].forEach(situation => {
-      unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
+    ].forEach((situation) => {
+      unauthenticatedTests.test(situation.name, async (unauthenticatedTest) => {
         const { response, body } = await request.post(url, {
           json: situation.body
         });
@@ -62,11 +62,11 @@ tap.test('users endpoint | POST /users', async postUsersTest => {
     });
   });
 
-  postUsersTest.test('when authenticated', async authenticatedTests => {
+  postUsersTest.test('when authenticated', async (authenticatedTests) => {
     const cookies = await login();
 
-    invalidCases.forEach(situation => {
-      authenticatedTests.test(situation.name, async invalidTest => {
+    invalidCases.forEach((situation) => {
+      authenticatedTests.test(situation.name, async (invalidTest) => {
         const { response, body } = await request.post(url, {
           jar: cookies,
           json: situation.body || true
@@ -88,7 +88,7 @@ tap.test('users endpoint | POST /users', async postUsersTest => {
 
     authenticatedTests.test(
       'with existing email address',
-      async invalidTest => {
+      async (invalidTest) => {
         const { response, body } = await request.post(url, {
           jar: cookies,
           json: { email: 'em@il.com', password: 'anything' }
@@ -107,7 +107,7 @@ tap.test('users endpoint | POST /users', async postUsersTest => {
       }
     );
 
-    authenticatedTests.test('with a weak password', async invalidTest => {
+    authenticatedTests.test('with a weak password', async (invalidTest) => {
       const { response, body } = await request.post(url, {
         jar: cookies,
         json: { email: 'newuser@email.com', password: 'Newp@ssw0rd!' }
@@ -127,7 +127,7 @@ tap.test('users endpoint | POST /users', async postUsersTest => {
       );
     });
 
-    authenticatedTests.test('with a valid new user', async validTest => {
+    authenticatedTests.test('with a valid new user', async (validTest) => {
       const { response, body } = await request.post(url, {
         jar: cookies,
         json: { email: 'newuser@email.com', password: 'Q%&jsruW$%Jaej' }

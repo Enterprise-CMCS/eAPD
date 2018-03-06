@@ -3,10 +3,10 @@ const { db, getFullPath, login, request } = require('../utils');
 
 const url = getFullPath('/users');
 
-tap.test('users endpoint | GET /users', async getUsersTest => {
+tap.test('users endpoint | GET /users', async (getUsersTest) => {
   await db().seed.run();
 
-  getUsersTest.test('when unauthenticated', async unauthenticatedTest => {
+  getUsersTest.test('when unauthenticated', async (unauthenticatedTest) => {
     const { response, body } = await request.get(url);
     unauthenticatedTest.equal(
       response.statusCode,
@@ -16,7 +16,7 @@ tap.test('users endpoint | GET /users', async getUsersTest => {
     unauthenticatedTest.notOk(body, 'does not send a body');
   });
 
-  getUsersTest.test('when authenticated', async validTest => {
+  getUsersTest.test('when authenticated', async (validTest) => {
     const cookies = await login();
     const { response, body } = await request.get(url, {
       jar: cookies,
@@ -25,22 +25,22 @@ tap.test('users endpoint | GET /users', async getUsersTest => {
 
     validTest.equal(response.statusCode, 200, 'gives a 200 status code');
     validTest.ok(Array.isArray(body), 'body is an array');
-    body.forEach(user =>
+    body.forEach((user) =>
       validTest.match(user, { id: /\d+/, email: /.+/ }, 'ever user is valid')
     );
   });
 });
 
-tap.test('users endpoint | GET /users/:userID', async getUserTest => {
+tap.test('users endpoint | GET /users/:userID', async (getUserTest) => {
   await db().seed.run();
 
-  getUserTest.test('when unauthenticated', async unauthenticatedTests => {
+  getUserTest.test('when unauthenticated', async (unauthenticatedTests) => {
     [
       { name: 'when requesting an invalid user ID', id: 'random-id' },
       { name: 'when requesting a non-existing user ID', id: 500 },
       { name: 'when requesting a valid user ID', id: 57 }
-    ].forEach(situation => {
-      unauthenticatedTests.test(situation.name, async unauthentedTest => {
+    ].forEach((situation) => {
+      unauthenticatedTests.test(situation.name, async (unauthentedTest) => {
         const { response, body } = await request.get(`${url}/${situation.id}`);
         unauthentedTest.equal(
           response.statusCode,
@@ -52,10 +52,10 @@ tap.test('users endpoint | GET /users/:userID', async getUserTest => {
     });
   });
 
-  getUserTest.test('when authenticated', async authenticatedTests => {
+  getUserTest.test('when authenticated', async (authenticatedTests) => {
     authenticatedTests.test(
       'when requesting an invalid user ID',
-      async invalidTest => {
+      async (invalidTest) => {
         const cookies = await login();
         const { response, body } = await request.get(`${url}/random-id`, {
           jar: cookies,
@@ -73,7 +73,7 @@ tap.test('users endpoint | GET /users/:userID', async getUserTest => {
 
     authenticatedTests.test(
       'when requesting a non-existant user ID',
-      async invalidTest => {
+      async (invalidTest) => {
         const cookies = await login();
         const { response, body } = await request.get(`${url}/500`, {
           jar: cookies,
@@ -87,7 +87,7 @@ tap.test('users endpoint | GET /users/:userID', async getUserTest => {
 
     authenticatedTests.test(
       'when requesting a valid user ID',
-      async validTest => {
+      async (validTest) => {
         const cookies = await login();
         const { response, body } = await request.get(`${url}/57`, {
           jar: cookies,

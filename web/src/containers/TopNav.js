@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/auth';
 
 class TopNav extends Component {
-  handleLogout = e => {
+  handleLogout = (e) => {
     e.preventDefault();
     this.props.logout();
   };

@@ -9,12 +9,12 @@ import Container from '../components/Container';
 class Login extends Component {
   state = { username: '', password: '' };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { username, password } = this.state;
     this.props.login(username, password);

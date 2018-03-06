@@ -82,7 +82,7 @@ StatePersonnel.propTypes = {
   contractingPersonnel: PropTypes.array.isRequired
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   let contractingArray;
   let stateArray;
 
@@ -97,8 +97,8 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ goTo: path => push(path) }, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ goTo: (path) => push(path) }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withSidebar(StatePersonnel)

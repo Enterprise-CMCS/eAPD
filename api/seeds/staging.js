@@ -1,7 +1,7 @@
 const roles = require('./shared/roles-and-activities');
 const states = require('./shared/states');
 
-exports.seed = async knex => {
+exports.seed = async (knex) => {
   // Don't seed this data if we're not in a development environment.
   if (process.env.NODE_ENV !== 'staging') {
     return;

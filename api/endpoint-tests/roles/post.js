@@ -1,7 +1,7 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const { db, request, getFullPath, login } = require('../utils');
 
-tap.test('roles endpoint | POST /roles', async postRolesTests => {
+tap.test('roles endpoint | POST /roles', async (postRolesTests) => {
   await db().seed.run();
 
   const url = getFullPath('/roles');
@@ -36,15 +36,15 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
     }
   ];
 
-  postRolesTests.test('when unauthenticated', async unauthenticatedTests => {
+  postRolesTests.test('when unauthenticated', async (unauthenticatedTests) => {
     [
       ...invalidCases,
       {
         name: 'with a valid body',
         body: { name: 'new-role', activities: [1, 2] }
       }
-    ].forEach(situation => {
-      unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
+    ].forEach((situation) => {
+      unauthenticatedTests.test(situation.name, async (unauthenticatedTest) => {
         const { response, body } = await request.post(url, {
           json: situation.body
         });
@@ -58,11 +58,11 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
     });
   });
 
-  postRolesTests.test('when authenticated', async authenticatedTests => {
+  postRolesTests.test('when authenticated', async (authenticatedTests) => {
     const cookies = await login();
 
-    invalidCases.forEach(situation => {
-      authenticatedTests.test(situation.name, async invalidTest => {
+    invalidCases.forEach((situation) => {
+      authenticatedTests.test(situation.name, async (invalidTest) => {
         const { response, body } = await request.post(url, {
           jar: cookies,
           json: situation.body || true
@@ -76,7 +76,7 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
       });
     });
 
-    authenticatedTests.test('with a valid new role', async validTest => {
+    authenticatedTests.test('with a valid new role', async (validTest) => {
       const { response, body } = await request.post(url, {
         jar: cookies,
         json: { name: 'new-role', activities: [1001, 1002] }
@@ -102,7 +102,7 @@ tap.test('roles endpoint | POST /roles', async postRolesTests => {
       const activities = await db()('auth_role_activity_mapping')
         .where({ role_id: role.id })
         .select('activity_id')
-        .map(activity => activity.activity_id);
+        .map((activity) => activity.activity_id);
       activities.sort();
 
       validTest.same(

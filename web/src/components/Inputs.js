@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Input = props => <input className="input" {...props} />;
-const Textarea = props => <textarea className="textarea" {...props} />;
+const Input = (props) => <input className="input" {...props} />;
+const Textarea = (props) => <textarea className="textarea" {...props} />;
 
 // a HOC for Text / Textarea input that includes
 // div wrapper and accompanying label
-const makeInput = InputInner => {
+const makeInput = (InputInner) => {
   const InputHolder = ({
     input: { name, ...rest },
     meta: { touched, error },

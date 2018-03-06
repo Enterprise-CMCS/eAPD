@@ -1,29 +1,32 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const { db, request, getFullPath, login } = require('../utils');
 
-tap.test('roles endpoint | DELETE /roles/:roleID', async deleteRolesTests => {
+tap.test('roles endpoint | DELETE /roles/:roleID', async (deleteRolesTests) => {
   await db().seed.run();
 
   const url = getFullPath('/roles');
 
-  deleteRolesTests.test('when unauthenticated', async unauthenticatedTests => {
-    unauthenticatedTests.test('with invalid role ID', async invalidTest => {
-      const { response, body } = await request.delete(`${url}/9001`);
-      invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
-      invalidTest.notOk(body, 'does not send a body');
-    });
+  deleteRolesTests.test(
+    'when unauthenticated',
+    async (unauthenticatedTests) => {
+      unauthenticatedTests.test('with invalid role ID', async (invalidTest) => {
+        const { response, body } = await request.delete(`${url}/9001`);
+        invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
+        invalidTest.notOk(body, 'does not send a body');
+      });
 
-    unauthenticatedTests.test('with valid role ID', async invalidTest => {
-      const { response, body } = await request.delete(`${url}/1`);
-      invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
-      invalidTest.notOk(body, 'does not send a body');
-    });
-  });
+      unauthenticatedTests.test('with valid role ID', async (invalidTest) => {
+        const { response, body } = await request.delete(`${url}/1`);
+        invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
+        invalidTest.notOk(body, 'does not send a body');
+      });
+    }
+  );
 
-  deleteRolesTests.test('when authenticated', async authenticatedTests => {
+  deleteRolesTests.test('when authenticated', async (authenticatedTests) => {
     const cookies = await login();
 
-    authenticatedTests.test('with an invalid role ID', async invalidTest => {
+    authenticatedTests.test('with an invalid role ID', async (invalidTest) => {
       const { response, body } = await request.delete(`${url}/9001`, {
         jar: cookies
       });
@@ -33,7 +36,7 @@ tap.test('roles endpoint | DELETE /roles/:roleID', async deleteRolesTests => {
 
     authenticatedTests.test(
       'deleting the role that the user belongs to',
-      async invalidTest => {
+      async (invalidTest) => {
         const { response, body } = await request.delete(`${url}/1001`, {
           jar: cookies
         });
@@ -44,7 +47,7 @@ tap.test('roles endpoint | DELETE /roles/:roleID', async deleteRolesTests => {
 
     authenticatedTests.test(
       'deleting a role that the user does not belong to',
-      async validTest => {
+      async (validTest) => {
         const { response, body } = await request.delete(`${url}/1002`, {
           jar: cookies
         });

@@ -1,4 +1,4 @@
-exports.seed = async knex => {
+exports.seed = async (knex) => {
   // has a foreign key relationship on auth_roles and states
   await knex('users').del();
 

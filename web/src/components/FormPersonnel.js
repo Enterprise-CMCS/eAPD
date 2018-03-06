@@ -55,8 +55,8 @@ const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
                   label="2019 compensation"
                   name={`${person}.nextCompensation`}
                   component={Input}
-                  parse={value => +value}
-                  format={value => `${value}`}
+                  parse={(value) => +value}
+                  format={(value) => `${value}`}
                   type="number"
                 />
               </td>
@@ -66,8 +66,8 @@ const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
                   label="2019 percentage time"
                   name={`${person}.nextTime`}
                   component={Input}
-                  parse={value => +value}
-                  format={value => `${value}`}
+                  parse={(value) => +value}
+                  format={(value) => `${value}`}
                   type="number"
                 />
               </td>
@@ -78,8 +78,8 @@ const PersonnelList = ({ fields, meta: { error, submitFailed } }) => (
                   label="2020 percentage time"
                   name={`${person}.nextNextTime`}
                   component={Input}
-                  parse={value => +value}
-                  format={value => `${value}`}
+                  parse={(value) => +value}
+                  format={(value) => `${value}`}
                   type="number"
                 />
               </td>
@@ -116,7 +116,7 @@ PersonnelList.propTypes = {
 };
 
 const PersonnelForm = ({ personnelType }) => (
-  <form onSubmit={e => e.preventDefault()}>
+  <form onSubmit={(e) => e.preventDefault()}>
     <FieldArray name={`${personnelType}`} component={PersonnelList} />
   </form>
 );

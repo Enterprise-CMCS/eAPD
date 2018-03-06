@@ -5,7 +5,7 @@ const loggedInMiddleware = require('../../../auth/middleware').loggedIn;
 const canMiddleware = require('../../../auth/middleware').can('view-state');
 const getEndpoint = require('./get');
 
-tap.test('states/program GET endpoints', async endpointTest => {
+tap.test('states/program GET endpoints', async (endpointTest) => {
   const sandbox = sinon.createSandbox();
   const app = {
     get: sandbox.stub()
@@ -27,7 +27,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
     end: sandbox.stub()
   };
 
-  endpointTest.beforeEach(done => {
+  endpointTest.beforeEach((done) => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
@@ -41,7 +41,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
     done();
   });
 
-  endpointTest.test('setup', async setupTest => {
+  endpointTest.test('setup', async (setupTest) => {
     getEndpoint(app);
 
     setupTest.ok(
@@ -62,16 +62,18 @@ tap.test('states/program GET endpoints', async endpointTest => {
     );
   });
 
-  endpointTest.test('get specific state handler', async handlerTest => {
+  endpointTest.test('get specific state handler', async (handlerTest) => {
     let handler;
     handlerTest.beforeEach(async () => {
       getEndpoint(app, StateModel, UserModel);
-      handler = app.get.args.find(args => args[0] === '/states/:id/program')[2];
+      handler = app.get.args.find(
+        (args) => args[0] === '/states/:id/program'
+      )[2];
     });
 
     handlerTest.test(
       'sends a server error code if there is a database error',
-      async invalidTest => {
+      async (invalidTest) => {
         StateModel.fetch.rejects();
 
         await handler({ params: {} }, res);
@@ -84,7 +86,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
 
     handlerTest.test(
       'sends a not-found error if the requested state does not exist',
-      async invalidTest => {
+      async (invalidTest) => {
         StateModel.fetch.resolves(null);
 
         await handler({ params: {} }, res);
@@ -95,7 +97,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
       }
     );
 
-    handlerTest.test('sends state program info', async validTest => {
+    handlerTest.test('sends state program info', async (validTest) => {
       pick
         .withArgs(['program_benefits', 'program_vision'])
         .returns('program info');
@@ -111,16 +113,16 @@ tap.test('states/program GET endpoints', async endpointTest => {
     });
   });
 
-  endpointTest.test('get user-specific state handler', async handlerTest => {
+  endpointTest.test('get user-specific state handler', async (handlerTest) => {
     let handler;
     handlerTest.beforeEach(async () => {
       getEndpoint(app, StateModel, UserModel);
-      handler = app.get.args.find(args => args[0] === '/states/program')[2];
+      handler = app.get.args.find((args) => args[0] === '/states/program')[2];
     });
 
     handlerTest.test(
       'sends a server error code if there is a database error',
-      async invalidTest => {
+      async (invalidTest) => {
         UserModel.fetch.rejects();
 
         await handler({}, res);
@@ -133,7 +135,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
 
     handlerTest.test(
       'sends an unauthorized error code if the user does not have an associated state',
-      async invalidTest => {
+      async (invalidTest) => {
         UserModel.fetch.resolves({ related });
         related.returns({ get });
         get.withArgs('id').returns(null);
@@ -146,7 +148,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
       }
     );
 
-    handlerTest.test('sends state program info', async validTest => {
+    handlerTest.test('sends state program info', async (validTest) => {
       UserModel.fetch.resolves({ related });
       related.returns({ get, pick });
       get.withArgs('id').returns('state-id');

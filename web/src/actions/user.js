@@ -11,45 +11,48 @@ export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 
 export const requestUser = () => ({ type: GET_USER_REQUEST });
-export const receiveUser = data => ({ type: GET_USER_SUCCESS, data });
-export const failUser = error => ({ type: GET_USER_FAILURE, error });
+export const receiveUser = (data) => ({ type: GET_USER_SUCCESS, data });
+export const failUser = (error) => ({ type: GET_USER_FAILURE, error });
 
 export const requestUserUpdate = () => ({ type: UPDATE_USER_REQUEST });
-export const receiveUserUpdate = data => ({ type: UPDATE_USER_SUCCESS, data });
-export const failUserUpdate = error => ({ type: UPDATE_USER_FAILURE, error });
+export const receiveUserUpdate = (data) => ({
+  type: UPDATE_USER_SUCCESS,
+  data
+});
+export const failUserUpdate = (error) => ({ type: UPDATE_USER_FAILURE, error });
 
-export const fetchUser = id => dispatch => {
+export const fetchUser = (id) => (dispatch) => {
   dispatch(requestUser());
 
   return axios
     .get(`${API_URL}/users/${id}`)
-    .then(req => dispatch(receiveUser(req.data)))
-    .catch(error => {
+    .then((req) => dispatch(receiveUser(req.data)))
+    .catch((error) => {
       const reason = error.response.data || 'N/A';
       dispatch(failUser(reason));
     });
 };
 
-export const updateUser = (id, data) => dispatch => {
+export const updateUser = (id, data) => (dispatch) => {
   dispatch(requestUserUpdate());
 
   // TODO: clean up callbacks
   return axios
     .put(`${API_URL}/users/${id}`, data)
-    .then(req => {
+    .then((req) => {
       console.log('update user success!', req);
       dispatch(receiveUserUpdate(req.data));
     })
-    .catch(error => {
+    .catch((error) => {
       console.log('update user error!', error);
       const reason = error.response.data || 'N/A';
       dispatch(failUserUpdate(reason));
     });
 };
 
-const shouldFetchUser = state => !state.user.loaded;
+const shouldFetchUser = (state) => !state.user.loaded;
 
-export const fetchUserDataIfNeeded = id => (dispatch, getState) => {
+export const fetchUserDataIfNeeded = (id) => (dispatch, getState) => {
   if (shouldFetchUser(getState())) {
     return dispatch(fetchUser(id));
   }

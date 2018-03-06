@@ -23,8 +23,8 @@ const setup = (
   const orm = bookshelf(db);
   orm.plugin('registry');
 
-  models.forEach(modelObjects => {
-    Object.keys(modelObjects).forEach(modelName => {
+  models.forEach((modelObjects) => {
+    Object.keys(modelObjects).forEach((modelName) => {
       logger.silly(`loading model [${modelName}]`);
       const model = orm.Model.extend(modelObjects[modelName]);
       logger.silly(`registering model [${modelName}]`);

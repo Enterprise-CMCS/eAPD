@@ -8,7 +8,7 @@ import {
 } from '../actions/user';
 
 const fields = ['id', 'email', 'name', 'position', 'phone', 'state'];
-const fieldsObj = Object.assign({}, ...fields.map(f => ({ [f]: '' })));
+const fieldsObj = Object.assign({}, ...fields.map((f) => ({ [f]: '' })));
 
 const initialState = {
   data: { ...fieldsObj },

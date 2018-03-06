@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const getSessionFunction = require('./session').getSessionFunction;
 
-tap.test('session function', async sessionTest => {
+tap.test('session function', async (sessionTest) => {
   const sessions = sinon.spy();
 
   process.env.SESSION_SECRET = 'secret';

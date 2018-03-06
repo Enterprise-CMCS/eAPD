@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const stateCreator = require('./state');
 
-tap.test('state data model', async stateModelTests => {
+tap.test('state data model', async (stateModelTests) => {
   const sandbox = sinon.createSandbox();
   stateModelTests.beforeEach(async () => {
     sandbox.resetBehavior();
@@ -12,7 +12,7 @@ tap.test('state data model', async stateModelTests => {
 
   const state = stateCreator();
 
-  stateModelTests.test('setup', async setupTests => {
+  stateModelTests.test('setup', async (setupTests) => {
     setupTests.match(
       state,
       {
@@ -24,7 +24,7 @@ tap.test('state data model', async stateModelTests => {
     );
   });
 
-  stateModelTests.test('validation', async validationTests => {
+  stateModelTests.test('validation', async (validationTests) => {
     const model = {
       attributes: {},
       hasChanged: sandbox.stub()
@@ -37,18 +37,18 @@ tap.test('state data model', async stateModelTests => {
       model.hasChanged.returns(false);
     });
 
-    validationTests.test('valid if nothing has changed', async validTest => {
+    validationTests.test('valid if nothing has changed', async (validTest) => {
       validTest.resolves(validate(model), 'resolves');
     });
 
-    validationTests.test('if the office is changed...', async office => {
+    validationTests.test('if the office is changed...', async (office) => {
       office.beforeEach(async () => {
         model.hasChanged.withArgs('medicaid_office').returns(true);
       });
 
       office.test(
         "and the office doesn't have the proper keys (address, city, zip)",
-        async invalidTest => {
+        async (invalidTest) => {
           model.attributes.medicaid_office = { foo: 'bar' };
 
           invalidTest.rejects(
@@ -59,7 +59,7 @@ tap.test('state data model', async stateModelTests => {
         }
       );
 
-      office.test('and the office data shape is valid', async validTest => {
+      office.test('and the office data shape is valid', async (validTest) => {
         model.attributes.medicaid_office = {
           address: 'foo',
           city: 'bar',

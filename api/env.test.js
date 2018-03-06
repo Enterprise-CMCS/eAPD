@@ -1,12 +1,12 @@
 const tap = require('tap');
 
-tap.beforeEach(done => {
+tap.beforeEach((done) => {
   delete require.cache[require.resolve('./env')];
   process.env = {};
   done();
 });
 
-tap.test('environment setup', async envTest => {
+tap.test('environment setup', async (envTest) => {
   const knownEnvironmentVariables = [
     { name: 'PORT', type: 'number' },
     { name: 'SESSION_SECRET', type: 'string' }
@@ -14,9 +14,9 @@ tap.test('environment setup', async envTest => {
 
   envTest.test(
     'sets default values for known environment variables',
-    setsDefaultTest => {
+    (setsDefaultTest) => {
       require('./env'); // eslint-disable-line global-require
-      knownEnvironmentVariables.forEach(envVar => {
+      knownEnvironmentVariables.forEach((envVar) => {
         setsDefaultTest.type(
           process.env[envVar.name],
           envVar.type,
@@ -29,13 +29,13 @@ tap.test('environment setup', async envTest => {
 
   envTest.test(
     'does not override environment variables that have been set externally',
-    doesNotOverrideTest => {
-      knownEnvironmentVariables.forEach(envVar => {
+    (doesNotOverrideTest) => {
+      knownEnvironmentVariables.forEach((envVar) => {
         process.env[envVar.name] = 'test-value';
       });
 
       require('./env'); // eslint-disable-line global-require
-      knownEnvironmentVariables.forEach(envVar => {
+      knownEnvironmentVariables.forEach((envVar) => {
         doesNotOverrideTest.same(
           process.env[envVar.name],
           'test-value',

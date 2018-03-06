@@ -6,7 +6,7 @@ const CheckboxGroup = ({ input, meta, options }) => {
   const { touched, error } = meta;
 
   const checkboxes = options.map(({ label, value }, idx) => {
-    const handleChange = e => {
+    const handleChange = (e) => {
       const { checked } = e.target;
       const vals = [...inputVal];
 

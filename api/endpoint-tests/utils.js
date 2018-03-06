@@ -3,18 +3,18 @@ const request = require('request'); // eslint-disable-line import/no-extraneous-
 const knex = require('knex');
 const knexConfig = require('../knexfile');
 
-const getFullPath = endpointPath =>
+const getFullPath = (endpointPath) =>
   `http://${process.env.API_HOST || 'localhost'}:${process.env.API_PORT ||
     process.env.PORT ||
     8000}${endpointPath}`;
 
 const execRequest = async (method, ...args) =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     request[method](...args, (err, response, body) => {
       resolve({ err, response, body });
     });
   });
-const requestFor = method => (...args) => execRequest(method, ...args);
+const requestFor = (method) => (...args) => execRequest(method, ...args);
 
 const login = async (username = 'em@il.com', password = 'password') => {
   const cookies = request.jar();
