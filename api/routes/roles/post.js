@@ -16,7 +16,7 @@ const validateRole = async (role, RoleModel, ActivityModel) => {
   if (!Array.isArray(role.activities)) {
     throw new Error('Role must have a list of activities');
   }
-  if (role.activities.filter(id => typeof id !== 'number').length > 0) {
+  if (role.activities.filter((id) => typeof id !== 'number').length > 0) {
     throw new Error('Role activites must be numbers');
   }
 
@@ -25,9 +25,9 @@ const validateRole = async (role, RoleModel, ActivityModel) => {
     'in',
     role.activities
   ).fetchAll({ columns: ['id'] });
-  const validIDs = validActivities.map(activity => activity.get('id'));
+  const validIDs = validActivities.map((activity) => activity.get('id'));
   const invalidIDs = role.activities.filter(
-    roleID => !validIDs.includes(roleID)
+    (roleID) => !validIDs.includes(roleID)
   );
 
   if (invalidIDs.length) {

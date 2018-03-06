@@ -15,16 +15,16 @@ const bcrypt = {
 
 const auth = require('./authenticate.js')(userModel, bcrypt);
 
-tap.test('local authentication', async authTest => {
+tap.test('local authentication', async (authTest) => {
   const doneCallback = sandbox.spy();
-  authTest.beforeEach(done => {
+  authTest.beforeEach((done) => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
     userModel.where.returns({ where: userModel.where, fetch: userModel.fetch });
     done();
   });
 
-  authTest.test('with a database error', async errorTest => {
+  authTest.test('with a database error', async (errorTest) => {
     userModel.fetch.rejects();
 
     await auth('user', 'password', doneCallback);
@@ -48,7 +48,7 @@ tap.test('local authentication', async authTest => {
     );
   });
 
-  authTest.test('with no valid user', async noUserTest => {
+  authTest.test('with no valid user', async (noUserTest) => {
     userModel.fetch.resolves();
 
     await auth('user', 'password', doneCallback);
@@ -69,7 +69,7 @@ tap.test('local authentication', async authTest => {
     noUserTest.ok(doneCallback.calledWith(null, false), 'got a false user');
   });
 
-  authTest.test('with invalid password', async invalidTest => {
+  authTest.test('with invalid password', async (invalidTest) => {
     get.withArgs('email').returns('hello@world');
     get.withArgs('password').returns('test-password');
     get.withArgs('id').returns(57);
@@ -101,7 +101,7 @@ tap.test('local authentication', async authTest => {
     invalidTest.ok(doneCallback.calledWith(null, false), 'got a false user');
   });
 
-  authTest.test('with a valid user', async validTest => {
+  authTest.test('with a valid user', async (validTest) => {
     get.withArgs('email').returns('hello@world');
     get.withArgs('password').returns('test-password');
     get.withArgs('id').returns(57);

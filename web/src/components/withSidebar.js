@@ -3,8 +3,8 @@ import React from 'react';
 
 import Sidebar from './Sidebar';
 
-const withSidebar = WrappedComponent => {
-  const Wrapper = props => (
+const withSidebar = (WrappedComponent) => {
+  const Wrapper = (props) => (
     <div className="site-body">
       <div className="site-sidebar bg-navy">
         <Sidebar />

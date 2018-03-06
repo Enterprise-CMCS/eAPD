@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const canMiddleware = require('../../auth/middleware').can('delete-roles');
 const deleteEndpoint = require('./delete');
 
-tap.test('roles DELETE endpoint', async endpointTest => {
+tap.test('roles DELETE endpoint', async (endpointTest) => {
   const sandbox = sinon.createSandbox();
   const app = {
     delete: sandbox.stub()
@@ -28,7 +28,7 @@ tap.test('roles DELETE endpoint', async endpointTest => {
     res.end.returns(res);
   });
 
-  endpointTest.test('setup', async setupTest => {
+  endpointTest.test('setup', async (setupTest) => {
     deleteEndpoint(app, RoleModel);
 
     setupTest.ok(
@@ -37,17 +37,17 @@ tap.test('roles DELETE endpoint', async endpointTest => {
     );
   });
 
-  endpointTest.test('delete role handler', async handlerTest => {
+  endpointTest.test('delete role handler', async (handlerTest) => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach((done) => {
       deleteEndpoint(app, RoleModel);
-      handler = app.delete.args.find(args => args[0] === '/roles/:id')[2];
+      handler = app.delete.args.find((args) => args[0] === '/roles/:id')[2];
       done();
     });
 
     handlerTest.test(
       'sends a not found error if requesting to delete a role that does not exist',
-      async notFoundTest => {
+      async (notFoundTest) => {
         const req = { user: { role: 'user-role' }, params: { id: 1 } };
         RoleModel.where.withArgs({ id: 1 }).returns({ fetch: RoleModel.fetch });
         RoleModel.fetch.resolves(null);
@@ -62,7 +62,7 @@ tap.test('roles DELETE endpoint', async endpointTest => {
 
     handlerTest.test(
       'sends an unauthorized error if requesting to delete a role that the user belongs to',
-      async unauthorizedTest => {
+      async (unauthorizedTest) => {
         const req = { user: { role: 'user-role' }, params: { id: 1 } };
         const get = sinon
           .stub()
@@ -87,7 +87,7 @@ tap.test('roles DELETE endpoint', async endpointTest => {
 
     handlerTest.test(
       'sends a server error if anything goes wrong',
-      async saveTest => {
+      async (saveTest) => {
         const req = { user: { role: 'user-role' }, params: { id: 1 } };
         const get = sinon
           .stub()
@@ -119,7 +119,7 @@ tap.test('roles DELETE endpoint', async endpointTest => {
       }
     );
 
-    handlerTest.test('deletes a role', async saveTest => {
+    handlerTest.test('deletes a role', async (saveTest) => {
       const req = { user: { role: 'user-role' }, params: { id: 1 } };
       const get = sinon
         .stub()

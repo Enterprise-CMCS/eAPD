@@ -4,7 +4,7 @@ const can = require('../../auth/middleware').can;
 
 // TODO: figure out better/cleaner solution.
 // At the very least, move this helper to a better location
-const toObj = entry => JSON.parse(JSON.stringify(entry));
+const toObj = (entry) => JSON.parse(JSON.stringify(entry));
 
 module.exports = (app, UserModel = defaultUserModel) => {
   logger.silly('setting up PUT /users/:id route');
@@ -32,7 +32,7 @@ module.exports = (app, UserModel = defaultUserModel) => {
         'phone',
         'state'
       ];
-      fields.forEach(field => {
+      fields.forEach((field) => {
         if (req.body[field]) {
           user.set({ [field]: req.body[field] });
         }

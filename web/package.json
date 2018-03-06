@@ -10,7 +10,7 @@
     "start": "webpack-dev-server --host 0.0.0.0 --port 8001 --history-api-fallback --content-base src/",
     "test": "jest --collectCoverage",
     "test-watch": "jest --watch",
-    "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
+    "prettier": "prettier --single-quote --trailing-comma none --arrow-parens always --write \"src/**/*.js\""
   },
   "repository": {
     "type": "git",

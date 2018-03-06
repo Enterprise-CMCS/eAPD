@@ -10,7 +10,7 @@ const SelectInput = ({
   <div className="mb2">
     <label htmlFor={name}>{label}</label>
     <select id={name} className="select" {...rest}>
-      {options.map(o => (
+      {options.map((o) => (
         <option key={o.id} value={o.id}>
           {o.name}
         </option>

@@ -19,7 +19,7 @@ const commonExpenses = stringsToFormOptions(
 );
 
 const FormExpensesStart = () => (
-  <form onSubmit={e => e.preventDefault()}>
+  <form onSubmit={(e) => e.preventDefault()}>
     <SectionHeader>
       Here are some common expenses for the HITECH programs. Do any of these
       apply to your budget for <em>Administration</em>?

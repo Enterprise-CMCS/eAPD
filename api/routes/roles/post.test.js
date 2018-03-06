@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const canMiddleware = require('../../auth/middleware').can('create-roles');
 const postEndpoint = require('./post');
 
-tap.test('roles POST endpoint', async endpointTest => {
+tap.test('roles POST endpoint', async (endpointTest) => {
   const sandbox = sinon.createSandbox();
   const app = {
     post: sandbox.stub()
@@ -33,7 +33,7 @@ tap.test('roles POST endpoint', async endpointTest => {
     res.end.returns(res);
   });
 
-  endpointTest.test('setup', async setupTest => {
+  endpointTest.test('setup', async (setupTest) => {
     postEndpoint(app, RoleModel, ActivityModel);
 
     setupTest.ok(
@@ -42,20 +42,20 @@ tap.test('roles POST endpoint', async endpointTest => {
     );
   });
 
-  endpointTest.test('create role handler', async handlerTest => {
+  endpointTest.test('create role handler', async (handlerTest) => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach((done) => {
       postEndpoint(app, RoleModel, ActivityModel);
-      handler = app.post.args.find(args => args[0] === '/roles')[2];
+      handler = app.post.args.find((args) => args[0] === '/roles')[2];
       done();
     });
 
     handlerTest.test(
       'rejects invalid role objects...',
-      async validationTest => {
+      async (validationTest) => {
         validationTest.test(
           'if the role does not have a name',
-          async invalidTest => {
+          async (invalidTest) => {
             const req = { body: {} };
 
             await handler(req, res);
@@ -74,7 +74,7 @@ tap.test('roles POST endpoint', async endpointTest => {
 
         validationTest.test(
           'if the role name already exists',
-          async invalidTest => {
+          async (invalidTest) => {
             const req = { body: { name: 'bob' } };
             RoleModel.where
               .withArgs({ name: 'bob' })
@@ -97,7 +97,7 @@ tap.test('roles POST endpoint', async endpointTest => {
 
         validationTest.test(
           'if the role does not have any activities',
-          async invalidTest => {
+          async (invalidTest) => {
             const req = { body: { name: 'bob' } };
             RoleModel.where
               .withArgs({ name: 'bob' })
@@ -120,7 +120,7 @@ tap.test('roles POST endpoint', async endpointTest => {
 
         validationTest.test(
           'if the role has non-numeric activities',
-          async invalidTest => {
+          async (invalidTest) => {
             const req = { body: { name: 'bob', activities: [1, 'one'] } };
             RoleModel.where
               .withArgs({ name: 'bob' })
@@ -143,7 +143,7 @@ tap.test('roles POST endpoint', async endpointTest => {
 
         validationTest.test(
           'if the role has activity IDs that do not match any activities',
-          async invalidTest => {
+          async (invalidTest) => {
             const req = { body: { name: 'bob', activities: [1, 2, 3] } };
             RoleModel.where
               .withArgs({ name: 'bob' })
@@ -179,7 +179,7 @@ tap.test('roles POST endpoint', async endpointTest => {
 
     handlerTest.test(
       'sends a server error if anything goes wrong',
-      async saveTest => {
+      async (saveTest) => {
         const req = { body: { name: 'bob', activities: [1, 2] } };
         const save = sinon.stub().rejects();
         const attach = sinon.stub();
@@ -210,7 +210,7 @@ tap.test('roles POST endpoint', async endpointTest => {
       }
     );
 
-    handlerTest.test('saves a valid role object', async saveTest => {
+    handlerTest.test('saves a valid role object', async (saveTest) => {
       const req = { body: { name: 'bob', activities: [1, 2] } };
       const save = sinon.stub().resolves();
       const attach = sinon.stub();

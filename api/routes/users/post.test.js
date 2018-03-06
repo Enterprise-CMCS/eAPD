@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const canMiddleware = require('../../auth/middleware').can('add-users');
 const postEndpoint = require('./post');
 
-tap.test('user POST endpoint', async endpointTest => {
+tap.test('user POST endpoint', async (endpointTest) => {
   const sandbox = sinon.createSandbox();
   const app = {
     post: sandbox.stub()
@@ -24,7 +24,7 @@ tap.test('user POST endpoint', async endpointTest => {
     end: sandbox.stub()
   };
 
-  endpointTest.beforeEach(done => {
+  endpointTest.beforeEach((done) => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
@@ -37,7 +37,7 @@ tap.test('user POST endpoint', async endpointTest => {
     done();
   });
 
-  endpointTest.test('setup', async setupTest => {
+  endpointTest.test('setup', async (setupTest) => {
     postEndpoint(app, UserModel);
 
     setupTest.ok(
@@ -46,10 +46,10 @@ tap.test('user POST endpoint', async endpointTest => {
     );
   });
 
-  endpointTest.test('handler', async handlerTest => {
+  endpointTest.test('handler', async (handlerTest) => {
     let handler;
 
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach((done) => {
       postEndpoint(app, UserModel);
       handler = app.post.args[0][2];
       done();
@@ -57,28 +57,30 @@ tap.test('user POST endpoint', async endpointTest => {
 
     handlerTest.test(
       'rejects if the data is missing',
-      async missingDataTests => {
-        [{}, { email: 'em@il' }, { password: 'password' }].forEach(scenario => {
-          missingDataTests.test('', async invalidTest => {
-            await handler({ body: scenario }, res);
+      async (missingDataTests) => {
+        [{}, { email: 'em@il' }, { password: 'password' }].forEach(
+          (scenario) => {
+            missingDataTests.test('', async (invalidTest) => {
+              await handler({ body: scenario }, res);
 
-            invalidTest.ok(
-              res.status.calledWith(400),
-              'HTTP status set to 400'
-            );
-            invalidTest.ok(
-              res.send.calledWith({ error: 'add-user-invalid' }),
-              'error token is set'
-            );
-            invalidTest.ok(res.end.called, 'response is terminated');
-          });
-        });
+              invalidTest.ok(
+                res.status.calledWith(400),
+                'HTTP status set to 400'
+              );
+              invalidTest.ok(
+                res.send.calledWith({ error: 'add-user-invalid' }),
+                'error token is set'
+              );
+              invalidTest.ok(res.end.called, 'response is terminated');
+            });
+          }
+        );
       }
     );
 
     handlerTest.test(
       'rejects if the data model validation fails',
-      async invalidTest => {
+      async (invalidTest) => {
         User.validate.rejects(new Error('invalidate-test'));
 
         await handler(
@@ -97,7 +99,7 @@ tap.test('user POST endpoint', async endpointTest => {
 
     handlerTest.test(
       'sends a server error code if there is a database error inserting a new user',
-      async invalidTest => {
+      async (invalidTest) => {
         User.validate.resolves();
         User.save.rejects();
 
@@ -114,7 +116,7 @@ tap.test('user POST endpoint', async endpointTest => {
 
     handlerTest.test(
       'inserts a new user and returns a success for a valid, new user',
-      async validTest => {
+      async (validTest) => {
         User.validate.resolves();
         User.save.resolves();
 

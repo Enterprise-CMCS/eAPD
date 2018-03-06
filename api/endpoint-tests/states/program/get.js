@@ -3,20 +3,23 @@ const { db, getFullPath, login, request } = require('../../utils');
 
 tap.test(
   'states/program endpoint | GET /states/program',
-  async getUserStateProgramTest => {
+  async (getUserStateProgramTest) => {
     const url = getFullPath('/states/program');
     await db().seed.run();
 
-    getUserStateProgramTest.test('when unauthenticated', async invalidTest => {
-      const { response, body } = await request.get(url);
+    getUserStateProgramTest.test(
+      'when unauthenticated',
+      async (invalidTest) => {
+        const { response, body } = await request.get(url);
 
-      invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
-      invalidTest.notOk(body, 'does not send a body');
-    });
+        invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
+        invalidTest.notOk(body, 'does not send a body');
+      }
+    );
 
     getUserStateProgramTest.test(
       'when authenticated as a user without an associated state',
-      async invalidTest => {
+      async (invalidTest) => {
         const cookies = await login();
         const { response, body } = await request.get(url, {
           jar: cookies,
@@ -30,7 +33,7 @@ tap.test(
 
     getUserStateProgramTest.test(
       'when authenticated as a user with an associated state',
-      async validTest => {
+      async (validTest) => {
         const cookies = await login('user2@email', 'something');
         const { response, body } = await request.get(url, {
           jar: cookies,
@@ -53,11 +56,11 @@ tap.test(
 
 tap.test(
   'states/:id/program endpoint | GET /states/:id/program',
-  async getStateProgramTest => {
+  async (getStateProgramTest) => {
     const url = getFullPath('/states/mn/program');
     await db().seed.run();
 
-    getStateProgramTest.test('when unauthenticated', async invalidTest => {
+    getStateProgramTest.test('when unauthenticated', async (invalidTest) => {
       const { response, body } = await request.get(url);
 
       invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
@@ -66,7 +69,7 @@ tap.test(
 
     getStateProgramTest.test(
       'when authenticated as a user without permission',
-      async invalidTest => {
+      async (invalidTest) => {
         const cookies = await login('user2@email', 'something');
         const { response, body } = await request.get(url, {
           jar: cookies,
@@ -80,12 +83,12 @@ tap.test(
 
     getStateProgramTest.test(
       'when authenticated as a user with permission',
-      async authenticatedTest => {
+      async (authenticatedTest) => {
         const cookies = await login();
 
         authenticatedTest.test(
           'with a non-existant state ID',
-          async invalidTest => {
+          async (invalidTest) => {
             const { response, body } = await request.get(
               getFullPath('/states/baloney/program'),
               {
@@ -103,7 +106,7 @@ tap.test(
           }
         );
 
-        authenticatedTest.test('with a real state ID', async validTest => {
+        authenticatedTest.test('with a real state ID', async (validTest) => {
           const { response, body } = await request.get(url, {
             jar: cookies,
             json: true

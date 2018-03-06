@@ -10,7 +10,7 @@ import withSidebar from '../components/withSidebar';
 import FormLogger from '../util/formLogger';
 
 class StateContacts extends Component {
-  showResults = data => {
+  showResults = (data) => {
     console.log(data);
   };
 
@@ -32,7 +32,7 @@ StateContacts.propTypes = {
   goTo: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ goTo: path => push(path) }, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ goTo: (path) => push(path) }, dispatch);
 
 export default connect(null, mapDispatchToProps)(withSidebar(StateContacts));

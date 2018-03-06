@@ -28,8 +28,8 @@ ActivityExpensesDetails.propTypes = {
   goTo: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ goTo: path => push(path) }, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ goTo: (path) => push(path) }, dispatch);
 
 export default connect(null, mapDispatchToProps)(
   withSidebar(ActivityExpensesDetails)

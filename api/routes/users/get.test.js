@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const canMiddleware = require('../../auth/middleware').can('view-users');
 const getEndpoint = require('./get');
 
-tap.test('user GET endpoint', async endpointTest => {
+tap.test('user GET endpoint', async (endpointTest) => {
   const sandbox = sinon.createSandbox();
   const app = {
     get: sandbox.stub()
@@ -20,7 +20,7 @@ tap.test('user GET endpoint', async endpointTest => {
     end: sandbox.stub()
   };
 
-  endpointTest.beforeEach(done => {
+  endpointTest.beforeEach((done) => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
@@ -33,7 +33,7 @@ tap.test('user GET endpoint', async endpointTest => {
     done();
   });
 
-  endpointTest.test('setup', async setupTest => {
+  endpointTest.test('setup', async (setupTest) => {
     getEndpoint(app, UserModel);
 
     setupTest.ok(
@@ -46,17 +46,17 @@ tap.test('user GET endpoint', async endpointTest => {
     );
   });
 
-  endpointTest.test('get all users handler', async handlerTest => {
+  endpointTest.test('get all users handler', async (handlerTest) => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach((done) => {
       getEndpoint(app, UserModel);
-      handler = app.get.args.find(args => args[0] === '/users')[2];
+      handler = app.get.args.find((args) => args[0] === '/users')[2];
       done();
     });
 
     handlerTest.test(
       'sends a server error code if there is a database error',
-      async invalidTest => {
+      async (invalidTest) => {
         UserModel.fetchAll.rejects();
 
         await handler({}, res);
@@ -73,7 +73,7 @@ tap.test('user GET endpoint', async endpointTest => {
       }
     );
 
-    handlerTest.test('sends back a list of users', async validTest => {
+    handlerTest.test('sends back a list of users', async (validTest) => {
       const get = sinon.stub();
       get
         .withArgs('id')
@@ -106,15 +106,15 @@ tap.test('user GET endpoint', async endpointTest => {
     });
   });
 
-  endpointTest.test('get single user handler', async handlerTest => {
+  endpointTest.test('get single user handler', async (handlerTest) => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach((done) => {
       getEndpoint(app, UserModel);
-      handler = app.get.args.find(args => args[0] === '/users/:id')[2];
+      handler = app.get.args.find((args) => args[0] === '/users/:id')[2];
       done();
     });
 
-    handlerTest.test('rejects invalid requests', async invalidTests => {
+    handlerTest.test('rejects invalid requests', async (invalidTests) => {
       const invalidCases = [
         {
           title: 'no user ID',
@@ -126,8 +126,8 @@ tap.test('user GET endpoint', async endpointTest => {
         }
       ];
 
-      invalidCases.forEach(invalidCase => {
-        invalidTests.test(invalidCase.title, async invalidTest => {
+      invalidCases.forEach((invalidCase) => {
+        invalidTests.test(invalidCase.title, async (invalidTest) => {
           handler({ params: invalidCase.params }, res);
           invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
           invalidTest.ok(
@@ -141,7 +141,7 @@ tap.test('user GET endpoint', async endpointTest => {
 
     handlerTest.test(
       'sends a server error code if there is a database error',
-      async invalidTest => {
+      async (invalidTest) => {
         UserModel.fetch.rejects();
 
         await handler({ params: { id: 1 } }, res);
@@ -171,7 +171,7 @@ tap.test('user GET endpoint', async endpointTest => {
 
     handlerTest.test(
       'sends a not-found error if the requested user does not exist',
-      async invalidTest => {
+      async (invalidTest) => {
         UserModel.fetch.resolves();
         await handler({ params: { id: 1 } }, res);
 
@@ -198,7 +198,7 @@ tap.test('user GET endpoint', async endpointTest => {
       }
     );
 
-    handlerTest.test('sends the requested user', async validTest => {
+    handlerTest.test('sends the requested user', async (validTest) => {
       UserModel.fetch.resolves({
         id: 1,
         email: 'test-email@dotcom.com',

@@ -80,7 +80,7 @@ const vermontPocs = [
   }
 ];
 
-exports.seed = async knex => {
+exports.seed = async (knex) => {
   await knex('states').insert(stateEntries);
 
   await knex

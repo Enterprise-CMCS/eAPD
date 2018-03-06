@@ -18,26 +18,26 @@ export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
 export const completeLogin = () => ({ type: LOGIN_SUCCESS });
-export const failLogin = error => ({ type: LOGIN_FAILURE, error });
+export const failLogin = (error) => ({ type: LOGIN_FAILURE, error });
 
 export const completeLogout = () => ({ type: LOGOUT_SUCCESS });
 
-export const login = (username, password) => dispatch => {
+export const login = (username, password) => (dispatch) => {
   dispatch(requestLogin());
 
   return axios
     .post(`${API_URL}/auth/login`, { username, password })
     .then(() => dispatch(completeLogin()))
-    .catch(error => {
+    .catch((error) => {
       const reason = error.response.data || 'N/A';
       dispatch(failLogin(reason));
     });
 };
 
-export const logout = () => dispatch =>
+export const logout = () => (dispatch) =>
   axios.get(`${API_URL}/auth/logout`).then(() => dispatch(completeLogout()));
 
-export const checkAuth = () => dispatch => {
+export const checkAuth = () => (dispatch) => {
   dispatch(requestAuthCheck());
 
   return axios

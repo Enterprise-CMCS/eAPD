@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 
 // Deletes ALL existing entries
-exports.seed = async knex => {
+exports.seed = async (knex) => {
   await knex('users').insert([
     {
       id: 57,

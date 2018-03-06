@@ -2,7 +2,7 @@ const winston = require('winston');
 
 const loggers = {};
 
-module.exports = name => {
+module.exports = (name) => {
   if (!loggers[name]) {
     const transports = {};
 

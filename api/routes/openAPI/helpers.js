@@ -9,13 +9,13 @@ module.exports.responses = {
   }
 };
 
-const jsonResponse = schema => ({
+const jsonResponse = (schema) => ({
   'application/json': {
     schema
   }
 });
 
-const arrayOf = schema => ({
+const arrayOf = (schema) => ({
   type: 'array',
   items: schema
 });
@@ -36,10 +36,10 @@ module.exports.schema = {
   })
 };
 
-module.exports.requiresAuth = openAPI => {
+module.exports.requiresAuth = (openAPI) => {
   const authed = { ...openAPI };
-  Object.keys(authed).forEach(route => {
-    Object.keys(authed[route]).forEach(verb => {
+  Object.keys(authed).forEach((route) => {
+    Object.keys(authed[route]).forEach((verb) => {
       authed[route][verb].security = ['sessionCookie'];
 
       const responses = authed[route][verb].responses;

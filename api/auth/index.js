@@ -26,7 +26,7 @@ module.exports.setup = function setup(
 ) {
   // Handle all of the authentication strategies that we support
   logger.silly('setting up strategies with Passport');
-  strategies.forEach(strategy => passport.use(strategy));
+  strategies.forEach((strategy) => passport.use(strategy));
 
   // Register our user serialization methods with passport
   logger.silly('setting up our user serializer with Passport');

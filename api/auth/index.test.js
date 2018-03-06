@@ -6,7 +6,7 @@ const sandbox = sinon.createSandbox();
 process.env.SESSION_SECRET = 'secret';
 const authSetup = require('./index').setup;
 
-tap.test('authentication setup', async authTest => {
+tap.test('authentication setup', async (authTest) => {
   const app = {
     use: sandbox.spy(),
     get: sandbox.spy(),
@@ -26,12 +26,12 @@ tap.test('authentication setup', async authTest => {
 
   const strategies = ['strategy1', 'strategy2'];
 
-  authTest.beforeEach(done => {
+  authTest.beforeEach((done) => {
     sandbox.resetHistory();
     done();
   });
 
-  authTest.test('setup calls everything we expect it to', async setupTest => {
+  authTest.test('setup calls everything we expect it to', async (setupTest) => {
     authSetup(app, passport, strategies);
 
     setupTest.equal(
@@ -115,7 +115,7 @@ tap.test('authentication setup', async authTest => {
     setupTest.ok(app.del.notCalled, 'no DELETE endpoints are added to the app');
   });
 
-  authTest.test('setup works with defaults, too', async setupTest => {
+  authTest.test('setup works with defaults, too', async (setupTest) => {
     authSetup(app);
 
     setupTest.equal(
@@ -144,7 +144,7 @@ tap.test('authentication setup', async authTest => {
     setupTest.ok(app.del.notCalled, 'no DELETE endpoints are added to the app');
   });
 
-  authTest.test('GET logout endpoint behaves as expected', async getTest => {
+  authTest.test('GET logout endpoint behaves as expected', async (getTest) => {
     authSetup(app, passport, strategies);
     const get = app.get.args[0][1];
 
@@ -169,7 +169,7 @@ tap.test('authentication setup', async authTest => {
     getTest.ok(res.end.calledOnce, 'response is ended one time');
   });
 
-  authTest.test('POST login endpoint behaves as expected', async postTest => {
+  authTest.test('POST login endpoint behaves as expected', async (postTest) => {
     authSetup(app, passport, strategies);
     const post = app.post.args[0][2];
 

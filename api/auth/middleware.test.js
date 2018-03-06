@@ -10,7 +10,7 @@ const res = {
 };
 const next = sandbox.spy();
 
-tap.beforeEach(done => {
+tap.beforeEach((done) => {
   sandbox.resetBehavior();
   sandbox.resetHistory();
 
@@ -21,11 +21,11 @@ tap.beforeEach(done => {
   done();
 });
 
-tap.test('logged in middleware', async loggedInMiddlewareTest => {
+tap.test('logged in middleware', async (loggedInMiddlewareTest) => {
   const loggedIn = middleware.loggedIn;
   loggedInMiddlewareTest.test(
     'rejects if the user is not logged in',
-    async invalidTest => {
+    async (invalidTest) => {
       loggedIn({}, res, next);
 
       invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403');
@@ -39,7 +39,7 @@ tap.test('logged in middleware', async loggedInMiddlewareTest => {
 
   loggedInMiddlewareTest.test(
     'continues if the user is logged in',
-    async validTest => {
+    async (validTest) => {
       loggedIn({ user: true }, res, next);
 
       validTest.ok(res.send.notCalled, 'no body is sent');
@@ -50,12 +50,12 @@ tap.test('logged in middleware', async loggedInMiddlewareTest => {
   );
 });
 
-tap.test('"can" middleware', async canMiddlewareTest => {
+tap.test('"can" middleware', async (canMiddlewareTest) => {
   const can = middleware.can;
 
   canMiddlewareTest.test(
     'rejects if the user is not logged in',
-    async invalidTest => {
+    async (invalidTest) => {
       can('activity')({}, res, next);
 
       invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403');
@@ -69,7 +69,7 @@ tap.test('"can" middleware', async canMiddlewareTest => {
 
   canMiddlewareTest.test(
     'rejects if the user does not have the expected activity',
-    async invalidTest => {
+    async (invalidTest) => {
       can('activity')({ user: { activities: [] } }, res, next);
 
       invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 401');
@@ -83,7 +83,7 @@ tap.test('"can" middleware', async canMiddlewareTest => {
 
   canMiddlewareTest.test(
     'continues if the user has the expected activity',
-    async validTest => {
+    async (validTest) => {
       can('activity')({ user: { activities: ['activity'] } }, res, next);
 
       validTest.ok(res.send.notCalled, 'no body is sent');

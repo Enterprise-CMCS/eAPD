@@ -14,14 +14,14 @@ const testItem = {
   }
 };
 
-tap.test('form logging endpoint | POST /log-form', async postTests => {
+tap.test('form logging endpoint | POST /log-form', async (postTests) => {
   const { response, body } = await request.post(url, { json: testItem });
 
   postTests.equal(response.statusCode, 200, 'gives a 200 status code');
   postTests.notOk(body, 'sends an empty body');
 });
 
-tap.test('form logging endpoint | GET /log-form', async getTests => {
+tap.test('form logging endpoint | GET /log-form', async (getTests) => {
   const { response, body } = await request.get(url);
 
   getTests.equal(response.statusCode, 200, 'gives a 200 status code');

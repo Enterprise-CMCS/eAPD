@@ -1,15 +1,15 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const { request, getFullPath } = require('../utils');
 
-tap.test('login endpoint | /auth/login', async loginTest => {
+tap.test('login endpoint | /auth/login', async (loginTest) => {
   const url = getFullPath('/auth/login');
 
-  loginTest.test('with no post body at all', async invalidTest => {
+  loginTest.test('with no post body at all', async (invalidTest) => {
     const { response } = await request.post(url);
     invalidTest.equal(response.statusCode, 400, 'gives a 400 status code');
   });
 
-  loginTest.test('proper response headers', async headerTest => {
+  loginTest.test('proper response headers', async (headerTest) => {
     const { response } = await request.post(url);
     const { headers } = response;
 
@@ -36,13 +36,13 @@ tap.test('login endpoint | /auth/login', async loginTest => {
     }
   ];
 
-  invalidCases.forEach(invalidCase => {
-    loginTest.test(`Form body: ${invalidCase.title}`, async invalidTest => {
+  invalidCases.forEach((invalidCase) => {
+    loginTest.test(`Form body: ${invalidCase.title}`, async (invalidTest) => {
       const { response } = await request.post(url, { form: invalidCase.data });
       invalidTest.equal(response.statusCode, 400, 'gives a 400 status code');
     });
 
-    loginTest.test(`JSON body: ${invalidCase.title}`, async invalidTest => {
+    loginTest.test(`JSON body: ${invalidCase.title}`, async (invalidTest) => {
       const { response } = await request.post(url, { json: invalidCase.data });
       invalidTest.equal(response.statusCode, 400, 'gives a 400 status code');
     });
@@ -72,10 +72,10 @@ tap.test('login endpoint | /auth/login', async loginTest => {
     }
   ];
 
-  badCredentialsCases.forEach(badCredentialsCase => {
+  badCredentialsCases.forEach((badCredentialsCase) => {
     loginTest.test(
       `Form body: ${badCredentialsCase.title}`,
-      async invalidTest => {
+      async (invalidTest) => {
         const { response } = await request.post(url, {
           form: badCredentialsCase.data
         });
@@ -85,7 +85,7 @@ tap.test('login endpoint | /auth/login', async loginTest => {
 
     loginTest.test(
       `JSON body: ${badCredentialsCase.title}`,
-      async invalidTest => {
+      async (invalidTest) => {
         const { response } = await request.post(url, {
           json: badCredentialsCase.data
         });
@@ -96,7 +96,7 @@ tap.test('login endpoint | /auth/login', async loginTest => {
 
   loginTest.test(
     'Form body: with valid username and valid password',
-    async validTest => {
+    async (validTest) => {
       // isolate cookies, so request doesn't reuse them
       const cookies = request.jar();
       const { response, body } = await request.post(url, {
@@ -108,7 +108,7 @@ tap.test('login endpoint | /auth/login', async loginTest => {
       validTest.equal(response.statusCode, 200, 'gives a 200 status code');
       validTest.ok(
         response.headers['set-cookie'].some(
-          cookie =>
+          (cookie) =>
             cookie.startsWith('session=') && cookie.endsWith('; httponly')
         ),
         'sends an http-only session cookie'
@@ -119,7 +119,7 @@ tap.test('login endpoint | /auth/login', async loginTest => {
 
   loginTest.test(
     'JSON body: with valid username and valid password',
-    async validTest => {
+    async (validTest) => {
       // isolate cookies, so request doesn't reuse them
       const cookies = request.jar();
       const { response, body } = await request.post(url, {
@@ -130,7 +130,7 @@ tap.test('login endpoint | /auth/login', async loginTest => {
       validTest.equal(response.statusCode, 200, 'gives a 200 status code');
       validTest.ok(
         response.headers['set-cookie'].some(
-          cookie =>
+          (cookie) =>
             cookie.startsWith('session=') && cookie.endsWith('; httponly')
         ),
         'sends an http-only session cookie'

@@ -9,7 +9,7 @@ module.exports = (app, ActivityModel = defaultActivityModel) => {
     try {
       const activities = (await ActivityModel.fetchAll({
         columns: ['id', 'name']
-      })).map(a => ({ id: a.get('id'), name: a.get('name') }));
+      })).map((a) => ({ id: a.get('id'), name: a.get('name') }));
       logger.silly(req, `got activities:`);
       logger.silly(req, activities);
       res.send(activities);

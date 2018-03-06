@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const userCreator = require('./user');
 
-tap.test('user data model', async userModelTests => {
+tap.test('user data model', async (userModelTests) => {
   const sandbox = sinon.createSandbox();
   userModelTests.beforeEach(async () => {
     sandbox.resetBehavior();
@@ -15,7 +15,7 @@ tap.test('user data model', async userModelTests => {
 
   const user = userCreator(passwordChecker, bcrypt);
 
-  userModelTests.test('setup', async setupTests => {
+  userModelTests.test('setup', async (setupTests) => {
     setupTests.match(
       user,
       {
@@ -44,7 +44,7 @@ tap.test('user data model', async userModelTests => {
 
   userModelTests.test(
     'user model sets up role relationship',
-    async roleTests => {
+    async (roleTests) => {
       const self = {
         hasOne: sinon.stub().returns('poptart')
       };
@@ -61,7 +61,7 @@ tap.test('user data model', async userModelTests => {
 
   userModelTests.test(
     'user model sets up state relationship',
-    async stateTests => {
+    async (stateTests) => {
       const self = {
         hasOne: sinon.stub().returns('cali')
       };
@@ -76,7 +76,7 @@ tap.test('user data model', async userModelTests => {
     }
   );
 
-  userModelTests.test('validation', async validationTests => {
+  userModelTests.test('validation', async (validationTests) => {
     const self = {
       where: sandbox.stub(),
       fetchAll: sandbox.stub()
@@ -97,11 +97,11 @@ tap.test('user data model', async userModelTests => {
       model.hasChanged.returns(false);
     });
 
-    validationTests.test('valid if nothing has changed', async validTest => {
+    validationTests.test('valid if nothing has changed', async (validTest) => {
       validTest.resolves(validate(model), 'resolves');
     });
 
-    validationTests.test('if the email is changed...', async email => {
+    validationTests.test('if the email is changed...', async (email) => {
       email.beforeEach(async () => {
         model.attributes.email = 'new@email';
         model.hasChanged.withArgs('email').returns(true);
@@ -109,7 +109,7 @@ tap.test('user data model', async userModelTests => {
 
       email.test(
         'and another user already has that email',
-        async invalidTest => {
+        async (invalidTest) => {
           self.fetchAll.resolves([{}]);
 
           invalidTest.rejects(
@@ -120,13 +120,13 @@ tap.test('user data model', async userModelTests => {
         }
       );
 
-      email.test('and the email is unique', async validTest => {
+      email.test('and the email is unique', async (validTest) => {
         self.fetchAll.resolves([]);
         validTest.resolves(validate(model), 'resolves');
       });
     });
 
-    validationTests.test('if the password is changed...', async password => {
+    validationTests.test('if the password is changed...', async (password) => {
       password.beforeEach(async () => {
         model.attributes.email = 'email';
         model.attributes.name = 'Bob';
@@ -134,7 +134,7 @@ tap.test('user data model', async userModelTests => {
         model.hasChanged.withArgs('password').returns(true);
       });
 
-      password.test('and the password is too weak', async invalidTest => {
+      password.test('and the password is too weak', async (invalidTest) => {
         passwordChecker.returns({ score: 2 });
 
         let error;
@@ -155,7 +155,7 @@ tap.test('user data model', async userModelTests => {
         );
       });
 
-      password.test('and the password is strong', async validTest => {
+      password.test('and the password is strong', async (validTest) => {
         passwordChecker.returns({ score: 4 });
         bcrypt.hashSync.returns('hashed-password');
 
@@ -172,14 +172,14 @@ tap.test('user data model', async userModelTests => {
       });
     });
 
-    validationTests.test('if the phone number is changed...', async phone => {
+    validationTests.test('if the phone number is changed...', async (phone) => {
       phone.beforeEach(async () => {
         model.hasChanged.withArgs('phone').returns(true);
       });
 
       phone.test(
         'and the phone number has more than 10 digits, after removing non-numeric characters',
-        async invalidTest => {
+        async (invalidTest) => {
           model.attributes.phone = 'abc123-zyx-456:789(0123)';
 
           invalidTest.rejects(
@@ -192,7 +192,7 @@ tap.test('user data model', async userModelTests => {
 
       phone.test(
         'and the phone number has 10 or fewer digits, after removing non-numeric characters',
-        async validTest => {
+        async (validTest) => {
           model.attributes.phone = 'abc123-zyx-456:789';
           validTest.resolves(validate(model), 'resolves');
         }
@@ -200,7 +200,7 @@ tap.test('user data model', async userModelTests => {
     });
   });
 
-  userModelTests.test('activities helper method', async activitesTests => {
+  userModelTests.test('activities helper method', async (activitesTests) => {
     const self = {
       load: sandbox.stub(),
       related: sandbox.stub(),
@@ -210,7 +210,7 @@ tap.test('user data model', async userModelTests => {
     const pluck = sandbox.stub();
     const activities = user.user.activities.bind(self);
 
-    activitesTests.beforeEach(done => {
+    activitesTests.beforeEach((done) => {
       self.load.resolves();
       self.related.withArgs('role').returns({ related });
       self.relations.role = false;
@@ -222,7 +222,7 @@ tap.test('user data model', async userModelTests => {
 
     activitesTests.test(
       'resolves a list of activites when the role relationship is already loaded',
-      async alreadyLoadedTests => {
+      async (alreadyLoadedTests) => {
         self.relations.role = {};
         self.relations.role.activities = true;
         const list = await activities();
@@ -241,7 +241,7 @@ tap.test('user data model', async userModelTests => {
 
     activitesTests.test(
       'resolves a list of activites when the role relationship is not already loaded',
-      async notAlreadyLoadedTests => {
+      async (notAlreadyLoadedTests) => {
         self.relations.role = false;
         const list = await activities();
 

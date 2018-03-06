@@ -16,7 +16,7 @@ const FormLogger = ({ form }) => {
     }
     timeout = setTimeout(() => {
       const formValues = {};
-      Object.keys(form).forEach(formKey => {
+      Object.keys(form).forEach((formKey) => {
         formValues[formKey] = form[formKey].values;
       });
 

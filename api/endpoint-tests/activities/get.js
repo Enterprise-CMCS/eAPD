@@ -1,10 +1,10 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const { getFullPath, login, request } = require('../utils');
 
-tap.test('activities endpoint | GET /activities', async getUsersTest => {
+tap.test('activities endpoint | GET /activities', async (getUsersTest) => {
   const url = getFullPath('/activities');
 
-  getUsersTest.test('when unauthenticated', async unauthenticatedTest => {
+  getUsersTest.test('when unauthenticated', async (unauthenticatedTest) => {
     const { response, body } = await request.get(url);
     unauthenticatedTest.equal(
       response.statusCode,
@@ -14,7 +14,7 @@ tap.test('activities endpoint | GET /activities', async getUsersTest => {
     unauthenticatedTest.notOk(body, 'does not send a body');
   });
 
-  getUsersTest.test('when authenticated', async validTest => {
+  getUsersTest.test('when authenticated', async (validTest) => {
     const cookies = await login();
     const { response, body } = await request.get(url, {
       jar: cookies,

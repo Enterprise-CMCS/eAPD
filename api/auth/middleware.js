@@ -13,7 +13,7 @@ module.exports.loggedIn = (req, res, next) => {
   }
 };
 
-module.exports.can = activity => {
+module.exports.can = (activity) => {
   if (!canCache[activity]) {
     logger.silly(`can[${activity}] cache miss`);
 

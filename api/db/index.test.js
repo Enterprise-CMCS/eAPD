@@ -3,8 +3,8 @@ const sinon = require('sinon');
 
 const db = require('./index');
 
-tap.test('database layer index', async dbTests => {
-  dbTests.test('the ORM is setup correctly', async ormTests => {
+tap.test('database layer index', async (dbTests) => {
+  dbTests.test('the ORM is setup correctly', async (ormTests) => {
     const knexObject = {};
     const bookshelfObject = {
       plugin: sinon.spy(),

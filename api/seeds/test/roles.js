@@ -1,4 +1,4 @@
-exports.seed = async knex => {
+exports.seed = async (knex) => {
   // For testing, put in our hard-coded stuff so we know what IDs to expect.
   await knex('auth_activities').insert({ id: 1001, name: 'view-roles' });
   await knex('auth_activities').insert({ id: 1002, name: 'create-roles' });

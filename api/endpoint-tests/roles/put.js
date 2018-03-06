@@ -1,7 +1,7 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const { db, request, getFullPath, login } = require('../utils');
 
-tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
+tap.test('roles endpoint | PUT /roles/:roleID', async (putRolesTests) => {
   await db().seed.run();
 
   const url = getFullPath('/roles');
@@ -30,58 +30,64 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
 
   putRolesTests.test(
     'when unauthenticated, invalid ID',
-    async unauthenticatedTests => {
+    async (unauthenticatedTests) => {
       [
         ...invalidCases,
         {
           name: 'with a valid body',
           body: { activities: [1, 2] }
         }
-      ].forEach(situation => {
-        unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
-          const { response, body } = await request.put(`${url}/9001`, {
-            json: situation.body
-          });
-          unauthenticatedTest.equal(
-            response.statusCode,
-            403,
-            'gives a 403 status code'
-          );
-          unauthenticatedTest.notOk(body, 'does not send a body');
-        });
+      ].forEach((situation) => {
+        unauthenticatedTests.test(
+          situation.name,
+          async (unauthenticatedTest) => {
+            const { response, body } = await request.put(`${url}/9001`, {
+              json: situation.body
+            });
+            unauthenticatedTest.equal(
+              response.statusCode,
+              403,
+              'gives a 403 status code'
+            );
+            unauthenticatedTest.notOk(body, 'does not send a body');
+          }
+        );
       });
     }
   );
 
   putRolesTests.test(
     'when unauthenticated, valid ID',
-    async unauthenticatedTests => {
+    async (unauthenticatedTests) => {
       [
         ...invalidCases,
         {
           name: 'with a valid body',
           body: { activities: [1, 2] }
         }
-      ].forEach(situation => {
-        unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
-          const { response, body } = await request.put(`${url}/1001`, {
-            json: situation.body
-          });
-          unauthenticatedTest.equal(
-            response.statusCode,
-            403,
-            'gives a 403 status code'
-          );
-          unauthenticatedTest.notOk(body, 'does not send a body');
-        });
+      ].forEach((situation) => {
+        unauthenticatedTests.test(
+          situation.name,
+          async (unauthenticatedTest) => {
+            const { response, body } = await request.put(`${url}/1001`, {
+              json: situation.body
+            });
+            unauthenticatedTest.equal(
+              response.statusCode,
+              403,
+              'gives a 403 status code'
+            );
+            unauthenticatedTest.notOk(body, 'does not send a body');
+          }
+        );
       });
     }
   );
 
-  putRolesTests.test('when authenticated', async authenticatedTests => {
+  putRolesTests.test('when authenticated', async (authenticatedTests) => {
     const cookies = await login();
 
-    authenticatedTests.test('with an invalid ID', async invalidTest => {
+    authenticatedTests.test('with an invalid ID', async (invalidTest) => {
       const { response, body } = await request.put(`${url}/9001`, {
         jar: cookies,
         json: {}
@@ -90,8 +96,8 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
       invalidTest.notOk(body, 'does not send a body');
     });
 
-    invalidCases.forEach(situation => {
-      authenticatedTests.test(situation.name, async invalidTest => {
+    invalidCases.forEach((situation) => {
+      authenticatedTests.test(situation.name, async (invalidTest) => {
         const { response, body } = await request.put(`${url}/1001`, {
           jar: cookies,
           json: situation.body || true
@@ -105,7 +111,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
       });
     });
 
-    authenticatedTests.test('with a valid updated role', async validTest => {
+    authenticatedTests.test('with a valid updated role', async (validTest) => {
       const { response, body } = await request.put(`${url}/1001`, {
         jar: cookies,
         json: { activities: [1001] }
@@ -117,7 +123,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
       const activities = await db()('auth_role_activity_mapping')
         .where({ role_id: 1001 })
         .select('activity_id')
-        .map(activity => activity.activity_id);
+        .map((activity) => activity.activity_id);
 
       validTest.same(
         activities,

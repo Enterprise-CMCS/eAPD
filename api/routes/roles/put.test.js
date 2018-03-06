@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const canMiddleware = require('../../auth/middleware').can('edit-roles');
 const putEndpoint = require('./put');
 
-tap.test('roles PUT endpoint', async endpointTest => {
+tap.test('roles PUT endpoint', async (endpointTest) => {
   const sandbox = sinon.createSandbox();
   const app = {
     put: sandbox.stub()
@@ -33,7 +33,7 @@ tap.test('roles PUT endpoint', async endpointTest => {
     res.end.returns(res);
   });
 
-  endpointTest.test('setup', async setupTest => {
+  endpointTest.test('setup', async (setupTest) => {
     putEndpoint(app, RoleModel, ActivityModel);
 
     setupTest.ok(
@@ -42,17 +42,17 @@ tap.test('roles PUT endpoint', async endpointTest => {
     );
   });
 
-  endpointTest.test('edit role handler', async handlerTest => {
+  endpointTest.test('edit role handler', async (handlerTest) => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach((done) => {
       putEndpoint(app, RoleModel, ActivityModel);
-      handler = app.put.args.find(args => args[0] === '/roles/:id')[2];
+      handler = app.put.args.find((args) => args[0] === '/roles/:id')[2];
       done();
     });
 
     handlerTest.test(
       'sends a not found error if requesting to edit a role that does not exist',
-      async notFoundTest => {
+      async (notFoundTest) => {
         const req = { params: { id: 1 }, body: { activities: [1, 2, 3] } };
         RoleModel.where.withArgs({ id: 1 }).returns({ fetch: RoleModel.fetch });
         RoleModel.fetch.resolves(null);
@@ -67,7 +67,7 @@ tap.test('roles PUT endpoint', async endpointTest => {
 
     handlerTest.test(
       'rejects invalid role objects...',
-      async validationTest => {
+      async (validationTest) => {
         validationTest.beforeEach(async () => {
           const fetch = sinon.stub().resolves(true);
           RoleModel.where.withArgs({ id: 1 }).returns({ fetch });
@@ -75,7 +75,7 @@ tap.test('roles PUT endpoint', async endpointTest => {
 
         validationTest.test(
           'if the role does not have any activities',
-          async invalidTest => {
+          async (invalidTest) => {
             const req = { params: { id: 1 }, body: {} };
             RoleModel.where
               .withArgs({ name: 'bob' })
@@ -98,7 +98,7 @@ tap.test('roles PUT endpoint', async endpointTest => {
 
         validationTest.test(
           'if the role has non-numeric activities',
-          async invalidTest => {
+          async (invalidTest) => {
             const req = { params: { id: 1 }, body: { activities: [1, 'one'] } };
             RoleModel.where
               .withArgs({ name: 'bob' })
@@ -121,7 +121,7 @@ tap.test('roles PUT endpoint', async endpointTest => {
 
         validationTest.test(
           'if the role has activity IDs that do not match any activities',
-          async invalidTest => {
+          async (invalidTest) => {
             const req = { params: { id: 1 }, body: { activities: [1, 2, 3] } };
             RoleModel.where
               .withArgs({ name: 'bob' })
@@ -157,7 +157,7 @@ tap.test('roles PUT endpoint', async endpointTest => {
 
     handlerTest.test(
       'sends a server error if anything goes wrong',
-      async saveTest => {
+      async (saveTest) => {
         const req = {
           params: { id: 1 },
           body: { name: 'bob', activities: [1, 2] }
@@ -193,7 +193,7 @@ tap.test('roles PUT endpoint', async endpointTest => {
       }
     );
 
-    handlerTest.test('saves a valid role object', async saveTest => {
+    handlerTest.test('saves a valid role object', async (saveTest) => {
       const req = {
         params: { id: 1 },
         body: { name: 'bob', activities: [1, 2] }

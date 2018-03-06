@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const formLoggerEndpoint = require('./logForm');
 
-tap.test('form logger endpoint', async endpointTest => {
+tap.test('form logger endpoint', async (endpointTest) => {
   const sandbox = sinon.createSandbox();
   const app = {
     get: sandbox.stub(),
@@ -18,7 +18,7 @@ tap.test('form logger endpoint', async endpointTest => {
   let get;
   let post;
 
-  endpointTest.beforeEach(done => {
+  endpointTest.beforeEach((done) => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
@@ -29,7 +29,7 @@ tap.test('form logger endpoint', async endpointTest => {
     done();
   });
 
-  endpointTest.test('setup', async setupTest => {
+  endpointTest.test('setup', async (setupTest) => {
     formLoggerEndpoint(app);
 
     setupTest.ok(
@@ -45,7 +45,7 @@ tap.test('form logger endpoint', async endpointTest => {
     post = app.post.args[0][1];
   });
 
-  endpointTest.test('logger POST endpoint', async postTest => {
+  endpointTest.test('logger POST endpoint', async (postTest) => {
     post(
       {
         body: {
@@ -64,7 +64,7 @@ tap.test('form logger endpoint', async endpointTest => {
     postTest.ok(res.end.calledOnce, 'response is ended');
   });
 
-  endpointTest.test('logger GET endpont', async getTest => {
+  endpointTest.test('logger GET endpont', async (getTest) => {
     get(null, res);
 
     getTest.ok(res.send.calledOnce, 'a response body is sent');

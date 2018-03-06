@@ -23,7 +23,7 @@ class StateStart extends Component {
     this.props.fetchUserDataIfNeeded(57);
   }
 
-  showResults = data => {
+  showResults = (data) => {
     // TODO: don't hardcode user id
     this.props.updateUser(57, data);
   };
@@ -62,7 +62,7 @@ StateStart.propTypes = {
 const mapStateToProps = ({ user }) => ({ user });
 
 const mapDispatchToProps = {
-  goTo: path => push(path),
+  goTo: (path) => push(path),
   fetchUserDataIfNeeded,
   updateUser
 };

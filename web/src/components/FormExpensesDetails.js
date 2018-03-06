@@ -17,7 +17,7 @@ const Expenses = ({ fields, meta: { error, submitFailed } }) => (
         </tr>
       </thead>
       <tbody>
-        {fields.map(expense => (
+        {fields.map((expense) => (
           <tr key={expense}>
             <td>
               <Field
@@ -74,7 +74,7 @@ Expenses.propTypes = {
 };
 
 const FormExpensesDetails = () => (
-  <form onSubmit={e => e.preventDefault()}>
+  <form onSubmit={(e) => e.preventDefault()}>
     <SectionHeader>
       Supplies include items you use regularly that last for less than one year.
       Some examples include:

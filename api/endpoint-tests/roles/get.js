@@ -1,12 +1,12 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
 const { db, getFullPath, login, request } = require('../utils');
 
-tap.test('roles endpoint | GET /roles', async getUsersTest => {
+tap.test('roles endpoint | GET /roles', async (getUsersTest) => {
   await db().seed.run();
 
   const url = getFullPath('/roles');
 
-  getUsersTest.test('when unauthenticated', async unauthenticatedTest => {
+  getUsersTest.test('when unauthenticated', async (unauthenticatedTest) => {
     const { response, body } = await request.get(url);
     unauthenticatedTest.equal(
       response.statusCode,
@@ -16,7 +16,7 @@ tap.test('roles endpoint | GET /roles', async getUsersTest => {
     unauthenticatedTest.notOk(body, 'does not send a body');
   });
 
-  getUsersTest.test('when authenticated', async validTest => {
+  getUsersTest.test('when authenticated', async (validTest) => {
     const cookies = await login();
     const { response, body } = await request.get(url, {
       jar: cookies,
@@ -24,7 +24,7 @@ tap.test('roles endpoint | GET /roles', async getUsersTest => {
     });
 
     body.sort((role1, role2) => role1.id - role2.id);
-    body.forEach(role => role.activities.sort());
+    body.forEach((role) => role.activities.sort());
 
     validTest.equal(response.statusCode, 200, 'gives a 200 status code');
     validTest.same(

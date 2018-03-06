@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const canMiddleware = require('../../auth/middleware').can('view-roles');
 const getEndpoint = require('./get');
 
-tap.test('roles GET endpoint', async endpointTest => {
+tap.test('roles GET endpoint', async (endpointTest) => {
   const sandbox = sinon.createSandbox();
   const app = {
     get: sandbox.stub()
@@ -27,7 +27,7 @@ tap.test('roles GET endpoint', async endpointTest => {
     res.end.returns(res);
   });
 
-  endpointTest.test('setup', async setupTest => {
+  endpointTest.test('setup', async (setupTest) => {
     getEndpoint(app, RoleModel);
 
     setupTest.ok(
@@ -36,17 +36,17 @@ tap.test('roles GET endpoint', async endpointTest => {
     );
   });
 
-  endpointTest.test('get roles handler', async handlerTest => {
+  endpointTest.test('get roles handler', async (handlerTest) => {
     let handler;
-    handlerTest.beforeEach(done => {
+    handlerTest.beforeEach((done) => {
       getEndpoint(app, RoleModel);
-      handler = app.get.args.find(args => args[0] === '/roles')[2];
+      handler = app.get.args.find((args) => args[0] === '/roles')[2];
       done();
     });
 
     handlerTest.test(
       'sends a server error code if there is a database error',
-      async invalidTest => {
+      async (invalidTest) => {
         RoleModel.fetchAll.rejects();
 
         await handler({}, res);
@@ -63,7 +63,7 @@ tap.test('roles GET endpoint', async endpointTest => {
       }
     );
 
-    handlerTest.test('sends back a list of roles', async validTest => {
+    handlerTest.test('sends back a list of roles', async (validTest) => {
       const get = sinon.stub();
       get.withArgs('id').returns(1);
       get.withArgs('name').returns('hi');
