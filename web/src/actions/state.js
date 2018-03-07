@@ -1,7 +1,5 @@
 import axios from '../util/api';
 
-const API_URL = process.env.API_URL || 'http://localhost:8000';
-
 export const GET_STATE_REQUEST = 'GET_STATE_REQUEST';
 export const GET_STATE_SUCCESS = 'GET_STATE_SUCCESS';
 export const GET_STATE_FAILURE = 'GET_STATE_FAILURE';
@@ -24,7 +22,7 @@ export const failStateUpdate = error => ({ type: UPDATE_STATE_FAILURE, error });
 export const fetchState = id => dispatch => {
   dispatch(requestState());
 
-  const url = `${API_URL}/states${id ? `/${id}` : ''}`;
+  const url = `/states${id ? `/${id}` : ''}`;
 
   return axios
     .get(url)
@@ -38,7 +36,7 @@ export const fetchState = id => dispatch => {
 export const updateState = (id, data) => dispatch => {
   dispatch(requestStateUpdate());
 
-  const url = `${API_URL}/states/${id}`;
+  const url = `/states/${id}`;
 
   if (data.medicaid_office) {
     const { medicaid_office: { director } } = data;

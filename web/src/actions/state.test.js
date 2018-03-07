@@ -54,31 +54,63 @@ describe('state actions', () => {
       fetchMock.reset();
     });
 
-    it('creates GET_STATE_SUCCESS after successful state fetch', () => {
-      const store = mockStore({});
-      fetchMock.onGet().reply(200, { foo: 'bar' });
+    describe('without an explicit ID', () => {
+      it('creates GET_STATE_SUCCESS after successful state fetch', () => {
+        const store = mockStore({});
+        fetchMock.onGet('/states').reply(200, { foo: 'bar' });
 
-      const expectedActions = [
-        { type: actions.GET_STATE_REQUEST },
-        { type: actions.GET_STATE_SUCCESS, data: { foo: 'bar' } }
-      ];
+        const expectedActions = [
+          { type: actions.GET_STATE_REQUEST },
+          { type: actions.GET_STATE_SUCCESS, data: { foo: 'bar' } }
+        ];
 
-      return store.dispatch(actions.fetchState()).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
+        return store.dispatch(actions.fetchState()).then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+      });
+
+      it('creates GET_STATE_FAILURE after unsuccessful state fetch', () => {
+        const store = mockStore({});
+        fetchMock.onGet('/states').reply(403, 'foo');
+
+        const expectedActions = [
+          { type: actions.GET_STATE_REQUEST },
+          { type: actions.GET_STATE_FAILURE, error: 'foo' }
+        ];
+
+        return store.dispatch(actions.fetchState()).then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
       });
     });
 
-    it('creates GET_STATE_FAILURE after unsuccessful state fetch', () => {
-      const store = mockStore({});
-      fetchMock.onGet().reply(403, 'foo');
+    describe('with an explicit ID', () => {
+      it('creates GET_STATE_SUCCESS after successful state fetch', () => {
+        const store = mockStore({});
+        fetchMock.onGet('/states/fr').reply(200, { foo: 'bar' });
 
-      const expectedActions = [
-        { type: actions.GET_STATE_REQUEST },
-        { type: actions.GET_STATE_FAILURE, error: 'foo' }
-      ];
+        const expectedActions = [
+          { type: actions.GET_STATE_REQUEST },
+          { type: actions.GET_STATE_SUCCESS, data: { foo: 'bar' } }
+        ];
 
-      return store.dispatch(actions.fetchState()).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
+        return store.dispatch(actions.fetchState('fr')).then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+      });
+
+      it('creates GET_STATE_FAILURE after unsuccessful state fetch', () => {
+        const store = mockStore({});
+        fetchMock.onGet('/states/fr').reply(403, 'foo');
+
+        const expectedActions = [
+          { type: actions.GET_STATE_REQUEST },
+          { type: actions.GET_STATE_FAILURE, error: 'foo' }
+        ];
+
+        return store.dispatch(actions.fetchState('fr')).then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
       });
     });
   });
@@ -90,30 +122,51 @@ describe('state actions', () => {
 
     it('creates UPDATE_STATE_SUCCESS after successful state fetch', () => {
       const store = mockStore({});
-      fetchMock.onPut().reply(200, { foo: 'bar' });
+      fetchMock.onPut('/states/fr').reply(200, { foo: 'bar' });
 
       const expectedActions = [
         { type: actions.UPDATE_STATE_REQUEST },
         { type: actions.UPDATE_STATE_SUCCESS, data: { foo: 'bar' } }
       ];
 
-      return store.dispatch(actions.updateState()).then(() => {
+      return store.dispatch(actions.updateState('fr', {})).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
 
     it('creates UPDATE_STATE_FAILURE after unsuccessful state fetch', () => {
       const store = mockStore({});
-      fetchMock.onPut().reply(403, 'foo');
+      fetchMock.onPut('/states/fr').reply(403, 'foo');
 
       const expectedActions = [
         { type: actions.UPDATE_STATE_REQUEST },
         { type: actions.UPDATE_STATE_FAILURE, error: 'foo' }
       ];
 
-      return store.dispatch(actions.updateState()).then(() => {
+      return store.dispatch(actions.updateState('fr', {})).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
+    });
+
+    it('deletes the medicaid director if all fields are empty', () => {
+      const store = mockStore({});
+      fetchMock
+        .onPut('/states/fr', { medicaid_office: {} })
+        .reply(200, { foo: 'bar' });
+
+      const expectedActions = [
+        { type: actions.UPDATE_STATE_REQUEST },
+        { type: actions.UPDATE_STATE_SUCCESS, data: { foo: 'bar' } }
+      ];
+
+      const newStateInfo = {
+        medicaid_office: { director: { name: '', email: '', phone: '' } }
+      };
+      return store
+        .dispatch(actions.updateState('fr', newStateInfo))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
     });
   });
 
