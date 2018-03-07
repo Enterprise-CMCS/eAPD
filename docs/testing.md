@@ -65,7 +65,7 @@ If you're not using Docker, here are the steps:
 
 1. Make sure you have a database called `hitech_apd_test` in your Postgres instance
 2. set the `NODE_ENV` environment variable to `test`
-3. et the `ENDPOINT_COVERAGE_CAPTURE` environment variable to `yes`
+3. set the `ENDPOINT_COVERAGE_CAPTURE` environment variable to `yes`
 4. set the `TEST_DB_HOST` environment variable to the hostname/address of your Postgres instance
 5. open a command line, and switch to the API directory (`cd api`)
 6. run `npm run migrate` to create the database structures
