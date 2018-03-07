@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const apd = require('./apd')();
 
-tap.test('state data model', async apdModelTests => {
+tap.test('apd data model', async apdModelTests => {
   apdModelTests.test('setup', async setupTests => {
     setupTests.match(
       apd,
