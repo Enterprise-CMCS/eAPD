@@ -15,10 +15,7 @@ if (process.env.ENDPOINT_COVERAGE_CAPTURE) {
   server.use((req, res, next) => {
     const end = res.end.bind(res);
     res.end = (...args) => {
-      let path = req.path;
-      if (req.route) {
-        path = req.route.path;
-      }
+      const path = req.route ? req.route.path : req.path;
       const result = {
         path,
         method: req.method,
