@@ -57,13 +57,7 @@ Contacts.propTypes = {
   meta: PropTypes.object.isRequired
 };
 
-const FormStateContacts = ({
-  handleSubmit,
-  pristine,
-  reset,
-  submitting,
-  stateName
-}) => (
+const FormStateContacts = ({ handleSubmit, submitting, stateName }) => (
   <form onSubmit={handleSubmit}>
     <SectionHeader>
       We already have some information about {stateName} from our records.
@@ -115,8 +109,6 @@ const FormStateContacts = ({
 
 FormStateContacts.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  reset: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   stateName: PropTypes.string.isRequired
 };
