@@ -38,9 +38,19 @@ export const fetchState = id => dispatch => {
 export const updateState = (id, data) => dispatch => {
   dispatch(requestStateUpdate());
 
-  const url = `${API_URL}/states${id ? `/${id}` : ''}`;
+  const url = `${API_URL}/states/${id}`;
 
-  // TODO: clean up callbacks
+  if (data.medicaid_office) {
+    const { medicaid_office: { director } } = data;
+    if (!director.name && !director.email && !director.phone) {
+      // The director field is not required, but if it is present, all
+      // of its properties are required.  If none of its properties are
+      // set, we can just delete it here.  This will also have the
+      // effect of deleting it from the API.
+      delete data.medicaid_office.director; // eslint-disable-line no-param-reassign
+    }
+  }
+
   return axios
     .put(url, data)
     .then(req => {
