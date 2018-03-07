@@ -3,6 +3,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+// to optimize bundle, explicitly importing only the icons used
+// TODO: once we're using icons more, move these to a central location
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faHelp from '@fortawesome/fontawesome-free-regular/faQuestionCircle';
+import faBell from '@fortawesome/fontawesome-free-solid/faBell';
+import faSignOut from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
+
 import { logout } from '../actions/auth';
 
 class TopNav extends Component {
@@ -24,15 +31,25 @@ class TopNav extends Component {
         <div className="sm-col-right h5">
           {authenticated ? (
             <div>
-              <Link to="/state-start" className="btn">
-                Get started
-              </Link>
-              <button type="button" className="btn" onClick={this.handleLogout}>
-                Log out
+              <button type="button" className="btn h5 regular">
+                <span className="mr-tiny">Notifications</span>
+                <FontAwesomeIcon icon={faBell} />
+              </button>
+              <button type="button" className="btn h5 regular">
+                <span className="mr-tiny">Help</span>
+                <FontAwesomeIcon icon={faHelp} />
+              </button>
+              <button
+                type="button"
+                className="btn h5 regular"
+                onClick={this.handleLogout}
+              >
+                <span className="mr-tiny">Log out</span>
+                <FontAwesomeIcon icon={faSignOut} />
               </button>
             </div>
           ) : (
-            <Link to="/login" className="btn">
+            <Link to="/login" className="btn h5 regular">
               Log in
             </Link>
           )}
