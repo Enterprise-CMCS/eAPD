@@ -36,14 +36,15 @@ const hitsReader = readline.createInterface({ input: hitsStream });
 
 hitsReader.on('line', line => {
   const { path, method, status } = JSON.parse(line);
+  const endpoint = allEndpoints[path][method.toLowerCase()];
 
-  if (!allEndpoints[path][method.toLowerCase()].tested) {
-    allEndpoints[path][method.toLowerCase()].tested = [];
+  if (!endpoint.tested) {
+    endpoint.tested = [];
   }
-  if (!allEndpoints[path][method.toLowerCase()].tested.includes(status)) {
-    allEndpoints[path][method.toLowerCase()].tested.push(status);
+  if (!endpoint.tested.includes(status)) {
+    endpoint.tested.push(status);
   }
-  allEndpoints[path][method.toLowerCase()].tested.sort();
+  endpoint.tested.sort();
 });
 
 hitsReader.on('close', () => {
