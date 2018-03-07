@@ -37,43 +37,7 @@ tap.test('users endpoint | GET /users/:userID', async getUserTest => {
   unauthenticatedTest('get', `${url}/some-id`, getUserTest);
   unauthorizedTest('get', `${url}/some-id`, getUserTest);
 
-  getUserTest.test('when unauthenticated', async unauthenticatedTests => {
-    [
-      { name: 'when requesting an invalid user ID', id: 'random-id' },
-      { name: 'when requesting a non-existing user ID', id: 500 },
-      { name: 'when requesting a valid user ID', id: 57 }
-    ].forEach(situation => {
-      unauthenticatedTests.test(situation.name, async unauthentedTest => {
-        const { response, body } = await request.get(`${url}/${situation.id}`);
-        unauthentedTest.equal(
-          response.statusCode,
-          403,
-          'gives a 403 status code'
-        );
-        unauthentedTest.notOk(body, 'does not send a body');
-      });
-    });
-  });
-
   getUserTest.test('when authenticated', async authenticatedTests => {
-    authenticatedTests.test(
-      'when requesting an invalid user ID',
-      async invalidTest => {
-        const cookies = await login();
-        const { response, body } = await request.get(`${url}/random-id`, {
-          jar: cookies,
-          json: true
-        });
-
-        invalidTest.equal(response.statusCode, 400, 'gives a 400 status code');
-        invalidTest.same(
-          body,
-          { error: 'get-user-invalid' },
-          'sends a token indicating the failure'
-        );
-      }
-    );
-
     authenticatedTests.test(
       'when requesting a non-existant user ID',
       async invalidTest => {
