@@ -7,9 +7,11 @@ const uuid = require('uuid/v1');
 require('./db').setup();
 const auth = require('./auth');
 const routes = require('./routes');
+const endpointCoverage = require('./endpointCoverageMiddleware');
 
 const server = express();
 
+endpointCoverage.registerCoverageMiddleware(server);
 server.use((req, res, next) => {
   req.id = uuid();
   logger.verbose(req, `got ${req.method} request to ${req.path}`);
@@ -28,6 +30,7 @@ logger.silly('setting up routes');
 routes(server);
 
 logger.silly('starting the server');
-server.listen(process.env.PORT, () =>
-  logger.verbose(`server listening on :${process.env.PORT}`)
-);
+server.listen(process.env.PORT, () => {
+  logger.verbose(`server listening on :${process.env.PORT}`);
+  endpointCoverage.getCoverageEndpoints(server);
+});
