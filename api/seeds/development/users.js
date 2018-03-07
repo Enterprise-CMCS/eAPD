@@ -7,7 +7,8 @@ exports.seed = async knex => {
       id: 57,
       email: 'em@il.com',
       password: bcrypt.hashSync('password'),
-      auth_role: 'admin'
+      auth_role: 'admin',
+      state_id: 'mo'
     }
   ]);
 };

@@ -1,6 +1,6 @@
 const {
   requiresAuth,
-  schema: { arrayOf, jsonResponse }
+  schema: { arrayOf, errorToken, jsonResponse }
 } = require('../openAPI/helpers');
 
 const stateObjectSchema = {
@@ -61,6 +61,11 @@ const stateObjectSchema = {
   }
 };
 
+// deeply clone
+const putSchema = JSON.parse(JSON.stringify(stateObjectSchema));
+delete putSchema.properties.id;
+delete putSchema.properties.name;
+
 const openAPI = {
   '/states': {
     get: {
@@ -69,6 +74,29 @@ const openAPI = {
         200: {
           description: 'Information about the state, territory, or district',
           content: jsonResponse(stateObjectSchema)
+        }
+      }
+    },
+    put: {
+      description: `Update information about the users's state, territory, or district`,
+      requestBody: {
+        description:
+          'The new state information.  Any extraneous fields will be discarded.',
+        content: {
+          'application/json': {
+            schema: putSchema
+          }
+        }
+      },
+      responses: {
+        200: {
+          description:
+            'Information about the state, territory, or district was successfully updated. Returns the full, updated state object',
+          content: jsonResponse(stateObjectSchema)
+        },
+        400: {
+          description: 'The request was invalid',
+          content: errorToken
         }
       }
     }
@@ -90,6 +118,44 @@ const openAPI = {
         200: {
           description: 'Information about the state, territory, or district',
           content: jsonResponse(stateObjectSchema)
+        },
+        404: {
+          description:
+            'The requested ID does not match any known states, territories, or districts'
+        }
+      }
+    },
+
+    put: {
+      description:
+        'Update information about a specific state, territory, or district',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description:
+            'The ID (2-letter abbreviation, lowercase) of the state, territory, or district to fetch',
+          required: true
+        }
+      ],
+      requestBody: {
+        description:
+          'The new state information.  Any extraneous fields will be discarded.',
+        content: {
+          'application/json': {
+            schema: putSchema
+          }
+        }
+      },
+      responses: {
+        200: {
+          description:
+            'Information about the state, territory, or district was successfully updated. Returns the full, updated state object.',
+          content: jsonResponse(stateObjectSchema)
+        },
+        400: {
+          description: 'The request was invalid',
+          content: errorToken
         },
         404: {
           description:

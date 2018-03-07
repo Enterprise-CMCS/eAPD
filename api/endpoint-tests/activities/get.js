@@ -35,7 +35,8 @@ tap.test('activities endpoint | GET /activities', async getUsersTest => {
         { id: 1006, name: 'add-users' },
         { id: 1007, name: 'view-activities' },
         { id: 1008, name: 'edit-users' },
-        { id: 1009, name: 'view-state' }
+        { id: 1009, name: 'view-state' },
+        { id: 1010, name: 'edit-state' }
       ],
       'returns an array of activities'
     );

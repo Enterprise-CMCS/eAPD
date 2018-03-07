@@ -9,6 +9,7 @@ exports.seed = async knex => {
   await knex('auth_activities').insert({ id: 1007, name: 'view-activities' });
   await knex('auth_activities').insert({ id: 1008, name: 'edit-users' });
   await knex('auth_activities').insert({ id: 1009, name: 'view-state' });
+  await knex('auth_activities').insert({ id: 1010, name: 'edit-state' });
 
   await knex('auth_roles').insert({ id: 1001, name: 'admin' });
   await knex('auth_roles').insert({ id: 1002, name: 'cms-reviewer' });
@@ -49,6 +50,10 @@ exports.seed = async knex => {
   await knex('auth_role_activity_mapping').insert({
     role_id: 1001,
     activity_id: 1009
+  });
+  await knex('auth_role_activity_mapping').insert({
+    role_id: 1001,
+    activity_id: 1010
   });
   await knex('auth_role_activity_mapping').insert({
     role_id: 1002,

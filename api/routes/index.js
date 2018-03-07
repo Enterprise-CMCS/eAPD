@@ -2,7 +2,7 @@ const logger = require('../logger')('routes index');
 const loggedIn = require('../auth/middleware').loggedIn;
 const activities = require('./activities');
 const roles = require('./roles');
-const statesPrograms = require('./states/get');
+const states = require('./states');
 const users = require('./users');
 const formLogger = require('./logForm');
 const openAPI = require('./openAPI');
@@ -11,7 +11,7 @@ module.exports = (
   app,
   activitiesEndpoint = activities,
   rolesEndpoint = roles,
-  statesProgramsEndpoint = statesPrograms,
+  statesEndpoint = states,
   usersEndpoint = users,
   formLoggerEndopint = formLogger,
   openAPIdoc = openAPI
@@ -24,8 +24,8 @@ module.exports = (
   activitiesEndpoint(app);
   logger.silly('setting up routes for roles');
   rolesEndpoint(app);
-  logger.silly('setting up routes for states/program');
-  statesProgramsEndpoint(app);
+  logger.silly('setting up routes for states');
+  statesEndpoint(app);
   logger.silly('setting up routes for users');
   usersEndpoint(app);
   logger.silly('setting up routes for form logger');
