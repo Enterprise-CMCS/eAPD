@@ -3,23 +3,25 @@ const joi = require('joi');
 const pick = require('lodash.pick');
 const can = require('../../auth/middleware').can;
 const loggedIn = require('../../auth/middleware').loggedIn;
-const { getFields, putFields, getStateFromUserOrID } = require('./util');
+const defaultDataHelper = require('./data');
 
-module.exports = (app, validator = joi) => {
-  const medicaidOfficeSchema = validator.object().keys({
-    address: validator.string().required(),
-    city: validator.string().required(),
-    zip: validator.string().required()
+module.exports = (app, dataHelper = defaultDataHelper) => {
+  const { getFields, putFields, getStateFromUserOrID } = dataHelper;
+
+  const medicaidOfficeSchema = joi.object().keys({
+    address: joi.string().required(),
+    city: joi.string().required(),
+    zip: joi.string().required()
   });
 
-  const pocSchema = validator.array().items(
-    validator.object().keys({
-      name: validator.string().required(),
-      email: validator
+  const pocSchema = joi.array().items(
+    joi.object().keys({
+      name: joi.string().required(),
+      email: joi
         .string()
         .email()
         .required(),
-      position: validator.string().required()
+      position: joi.string().required()
     })
   );
 
@@ -49,17 +51,10 @@ module.exports = (app, validator = joi) => {
 
       logger.silly(req, 'picking out just updateable fields');
       const newData = pick(req.body, putFields);
-      // const newData = Object.keys(req.body).reduce(
-      //   (data, propName) =>
-      //     putFields.includes(propName)
-      //       ? { ...data, [propName]: req.body[propName] }
-      //       : data,
-      //   {}
-      // );
       logger.silly(req, newData);
 
       logger.silly(req, 'validating program benefits');
-      if (validator.string().validate(newData.program_benefits).error) {
+      if (joi.string().validate(newData.program_benefits).error) {
         logger.verbose(req, 'invalid program benefits');
         return res
           .status(400)
@@ -68,7 +63,7 @@ module.exports = (app, validator = joi) => {
       }
 
       logger.silly(req, 'validating program vision');
-      if (validator.string().validate(newData.program_vision).error) {
+      if (joi.string().validate(newData.program_vision).error) {
         logger.verbose(req, 'invalid program vision');
         return res
           .status(400)
