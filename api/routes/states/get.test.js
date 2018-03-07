@@ -1,11 +1,11 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const loggedInMiddleware = require('../../../auth/middleware').loggedIn;
-const canMiddleware = require('../../../auth/middleware').can('view-state');
+const loggedInMiddleware = require('../../auth/middleware').loggedIn;
+const canMiddleware = require('../../auth/middleware').can('view-state');
 const getEndpoint = require('./get');
 
-tap.test('states/program GET endpoints', async endpointTest => {
+tap.test('states GET endpoints', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = {
     get: sandbox.stub()
@@ -45,20 +45,12 @@ tap.test('states/program GET endpoints', async endpointTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith(
-        '/states/:id/program',
-        canMiddleware,
-        sinon.match.func
-      ),
-      'specific states/program GET endpoint is registered'
+      app.get.calledWith('/states/:id', canMiddleware, sinon.match.func),
+      'specific states GET endpoint is registered'
     );
     setupTest.ok(
-      app.get.calledWith(
-        '/states/program',
-        loggedInMiddleware,
-        sinon.match.func
-      ),
-      'user-specific states/program GET endpoint is registered'
+      app.get.calledWith('/states', loggedInMiddleware, sinon.match.func),
+      'user-specific states GET endpoint is registered'
     );
   });
 
@@ -66,7 +58,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
     let handler;
     handlerTest.beforeEach(async () => {
       getEndpoint(app, StateModel, UserModel);
-      handler = app.get.args.find(args => args[0] === '/states/:id/program')[2];
+      handler = app.get.args.find(args => args[0] === '/states/:id')[2];
     });
 
     handlerTest.test(
@@ -74,7 +66,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
       async invalidTest => {
         StateModel.fetch.rejects();
 
-        await handler({ params: {} }, res);
+        await handler({ params: { id: 'state' }, user: {} }, res);
 
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
@@ -87,7 +79,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
       async invalidTest => {
         StateModel.fetch.resolves(null);
 
-        await handler({ params: {} }, res);
+        await handler({ params: { id: 'state' }, user: {} }, res);
 
         invalidTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
@@ -97,11 +89,18 @@ tap.test('states/program GET endpoints', async endpointTest => {
 
     handlerTest.test('sends state program info', async validTest => {
       pick
-        .withArgs(['program_benefits', 'program_vision'])
+        .withArgs([
+          'id',
+          'medicaid_office',
+          'name',
+          'program_benefits',
+          'program_vision',
+          'state_pocs'
+        ])
         .returns('program info');
       StateModel.fetch.resolves({ pick });
 
-      await handler({ params: {} }, res);
+      await handler({ params: { id: 'state' }, user: {} }, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
       validTest.ok(
@@ -115,7 +114,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
     let handler;
     handlerTest.beforeEach(async () => {
       getEndpoint(app, StateModel, UserModel);
-      handler = app.get.args.find(args => args[0] === '/states/program')[2];
+      handler = app.get.args.find(args => args[0] === '/states')[2];
     });
 
     handlerTest.test(
@@ -123,7 +122,7 @@ tap.test('states/program GET endpoints', async endpointTest => {
       async invalidTest => {
         UserModel.fetch.rejects();
 
-        await handler({}, res);
+        await handler({ params: {}, user: {} }, res);
 
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
@@ -138,9 +137,9 @@ tap.test('states/program GET endpoints', async endpointTest => {
         related.returns({ get });
         get.withArgs('id').returns(null);
 
-        await handler({ user: {} }, res);
+        await handler({ params: {}, user: {} }, res);
 
-        invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 403');
+        invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 401');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
         invalidTest.ok(res.end.called, 'response is terminated');
       }
@@ -151,10 +150,17 @@ tap.test('states/program GET endpoints', async endpointTest => {
       related.returns({ get, pick });
       get.withArgs('id').returns('state-id');
       pick
-        .withArgs(['program_benefits', 'program_vision'])
+        .withArgs([
+          'id',
+          'medicaid_office',
+          'name',
+          'program_benefits',
+          'program_vision',
+          'state_pocs'
+        ])
         .returns('program info');
 
-      await handler({ user: {} }, res);
+      await handler({ params: {}, user: {} }, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
       validTest.ok(

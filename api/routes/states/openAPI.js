@@ -68,6 +68,15 @@ delete putSchema.properties.name;
 
 const openAPI = {
   '/states': {
+    get: {
+      description: `Get information about the users's state, territory, or district`,
+      responses: {
+        200: {
+          description: 'Information about the state, territory, or district',
+          content: jsonResponse(stateObjectSchema)
+        }
+      }
+    },
     put: {
       description: `Update information about the users's state, territory, or district`,
       requestBody: {
@@ -93,6 +102,30 @@ const openAPI = {
     }
   },
   '/states/{id}': {
+    get: {
+      description:
+        'Get information about a specific state, territory, or district',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description:
+            'The ID (2-letter abbreviation, lowercase) of the state, territory, or district to fetch',
+          required: true
+        }
+      ],
+      responses: {
+        200: {
+          description: 'Information about the state, territory, or district',
+          content: jsonResponse(stateObjectSchema)
+        },
+        404: {
+          description:
+            'The requested ID does not match any known states, territories, or districts'
+        }
+      }
+    },
+
     put: {
       description:
         'Update information about a specific state, territory, or district',
