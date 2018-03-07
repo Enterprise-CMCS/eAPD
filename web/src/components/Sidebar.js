@@ -26,7 +26,7 @@ const linkClass = (path, curr) => {
 };
 
 const Sidebar = ({ match }) => (
-  <div className="p2">
+  <div className="p2 xs-hide sm-hide">
     <ul className="list-reset">
       {routes.map(({ path, name }) => (
         <li key={path} className="mb1">
