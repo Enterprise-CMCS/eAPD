@@ -6,7 +6,12 @@ exports.seed = async knex => {
       medicaid_office: JSON.stringify({
         address: '100 Round Sq',
         city: 'Cityville',
-        zip: '12345'
+        zip: '12345',
+        director: {
+          name: 'Cornelius Fudge',
+          email: 'c.fudge@ministry.magic',
+          phone: '5551234567'
+        }
       }),
       program_benefits: 'The program will have benefits',
       program_vision: 'The program vision is 20/20',

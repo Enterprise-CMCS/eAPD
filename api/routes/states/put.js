@@ -11,7 +11,15 @@ module.exports = (app, dataHelper = defaultDataHelper) => {
   const medicaidOfficeSchema = joi.object().keys({
     address: joi.string().required(),
     city: joi.string().required(),
-    zip: joi.string().required()
+    zip: joi.string().required(),
+    director: joi.object().keys({
+      name: joi.string().required(),
+      phone: joi.string().required(),
+      email: joi
+        .string()
+        .email()
+        .required()
+    })
   });
 
   const pocSchema = joi.array().items(
