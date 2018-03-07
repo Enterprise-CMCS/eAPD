@@ -30,6 +30,8 @@ cd ..
 cd api
 rm -rf seeds/development
 rm -rf seeds/test
+rm seeds/development.js
+rm seeds/test.js
 rm seeds/shared/delete-everything.js
 cd ..
 
