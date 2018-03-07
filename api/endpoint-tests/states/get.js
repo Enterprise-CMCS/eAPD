@@ -40,11 +40,21 @@ tap.test('states endpoint | GET /states', async getUserStateProgramTest => {
         body,
         {
           id: 'mn',
-          medicaid_office: { office: 'address' },
+          medicaid_office: {
+            address: '100 Round Sq',
+            city: 'Cityville',
+            zip: '12345'
+          },
           name: 'Minnesota',
           program_benefits: 'The program will have benefits',
           program_vision: 'The program vision is 20/20',
-          state_pocs: { pocs: 'people' }
+          state_pocs: [
+            {
+              name: 'Corinne Johnson',
+              email: 'corinne@thatplace',
+              position: 'Head of Muggle Studies'
+            }
+          ]
         },
         'sends the expected body'
       );
@@ -113,11 +123,21 @@ tap.test('states/:id endpoint | GET /states/:id', async getStateProgramTest => {
           body,
           {
             id: 'mn',
-            medicaid_office: { office: 'address' },
+            medicaid_office: {
+              address: '100 Round Sq',
+              city: 'Cityville',
+              zip: '12345'
+            },
             name: 'Minnesota',
             program_benefits: 'The program will have benefits',
             program_vision: 'The program vision is 20/20',
-            state_pocs: { pocs: 'people' }
+            state_pocs: [
+              {
+                name: 'Corinne Johnson',
+                email: 'corinne@thatplace',
+                position: 'Head of Muggle Studies'
+              }
+            ]
           },
           'sends the expected body'
         );
