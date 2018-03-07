@@ -5,6 +5,8 @@ const loggedInMiddleware = require('../../auth/middleware').loggedIn;
 const canMiddleware = require('../../auth/middleware').can('edit-state');
 const putEndpoint = require('./put');
 
+const { invalid: invalidData } = require('../../test-data/state');
+
 tap.test('states PUT endpoints', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = {
@@ -143,149 +145,7 @@ tap.test('states PUT endpoints', async endpointTest => {
         validStateTests.test(
           'sends a data validation error for invalid updates...',
           async invalidTests => {
-            [
-              {
-                name: 'with an empty medicaid office',
-                token: 'edit-state-invalid-medicaid-office',
-                body: {
-                  medicaid_office: {}
-                }
-              },
-              {
-                name: 'with a medicaid office with an invalid address',
-                token: 'edit-state-invalid-medicaid-office',
-                body: {
-                  medicaid_office: {
-                    address: 0xdeadbeef,
-                    city: 'city',
-                    zip: 'zip'
-                  }
-                }
-              },
-              {
-                name: 'with a medicaid office with an invalid city',
-                token: 'edit-state-invalid-medicaid-office',
-                body: {
-                  medicaid_office: {
-                    address: 'address',
-                    city: 0xdeadbeef,
-                    zip: 'zip'
-                  }
-                }
-              },
-              {
-                name: 'with a medicaid office with an invalid zip',
-                token: 'edit-state-invalid-medicaid-office',
-                body: {
-                  medicaid_office: {
-                    address: 'address',
-                    city: 'city',
-                    zip: 0xdeadbeef
-                  }
-                }
-              },
-              {
-                name: 'with a medicaid director with an invalid name',
-                token: 'edit-state-invalid-medicaid-office',
-                body: {
-                  medicaid_office: {
-                    address: 'address',
-                    city: 'city',
-                    zip: 'zip',
-                    directory: {
-                      name: 0xdeadbeef,
-                      email: 'email',
-                      phone: 'phone'
-                    }
-                  }
-                }
-              },
-              {
-                name: 'with a medicaid director with an invalid email',
-                token: 'edit-state-invalid-medicaid-office',
-                body: {
-                  medicaid_office: {
-                    address: 'address',
-                    city: 'city',
-                    zip: 'zip',
-                    directory: {
-                      name: 'name',
-                      email: 0xdeadbeef,
-                      phone: 'phone'
-                    }
-                  }
-                }
-              },
-              {
-                name: 'with a medicaid director with an invalid phone',
-                token: 'edit-state-invalid-medicaid-office',
-                body: {
-                  medicaid_office: {
-                    address: 'address',
-                    city: 'city',
-                    zip: 'zip',
-                    directory: {
-                      name: 'name',
-                      email: 'email',
-                      phone: 0xdeadbeef
-                    }
-                  }
-                }
-              },
-              {
-                name: 'with an invalid program benefits statement',
-                token: 'edit-state-invalid-benefits',
-                body: {
-                  program_benefits: 0xdeadbeef
-                }
-              },
-              {
-                name: 'with an invalid program vision statement',
-                token: 'edit-state-invalid-vision',
-                body: {
-                  program_vision: 0xdeadbeef
-                }
-              },
-              {
-                name: 'with points of contact with invalid name',
-                token: 'edit-state-invalid-state-pocs',
-                body: {
-                  state_pocs: [
-                    {
-                      name: 0xdeadbeef,
-                      email: 'em@il',
-                      position: 'position'
-                    }
-                  ]
-                }
-              },
-              {
-                name: 'with points of contact with invalid email',
-                token: 'edit-state-invalid-state-pocs',
-                body: {
-                  state_pocs: [
-                    {
-                      name: 'name',
-                      email: 'email',
-                      position: 'position'
-                    }
-                  ]
-                }
-              },
-              {
-                name: 'with points of contact with invalid position',
-                token: 'edit-state-invalid-state-pocs',
-                body: {
-                  state_pocs: [
-                    {
-                      name: 'name',
-                      email: 'em@il',
-                      position: 0xdeadbeef
-                    }
-                  ]
-                }
-              }
-            ].forEach(scenario => {
+            invalidData.forEach(scenario => {
               invalidTests.test(scenario.name, async invalidTest => {
                 req.body = scenario.body;
 
