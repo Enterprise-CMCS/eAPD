@@ -2,3 +2,6 @@
 .nyc_output
 coverage
 hitech_api*.log*
+
+endpoint-tests/endpoints-all.txt
+endpoint-tests/endpoints-hit.txt

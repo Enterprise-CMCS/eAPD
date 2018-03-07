@@ -11,7 +11,7 @@
     "start": "node main.js",
     "start-dev": "nodemon ./main.js",
     "test": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
-    "test-endpoints": "tap --reporter=spec 'endpoint-tests/**/*.js'",
+    "test-endpoints": "tap --reporter=spec 'endpoint-tests/*/**/*.js'",
     "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
   "repository": {
