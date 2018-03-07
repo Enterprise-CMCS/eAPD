@@ -185,6 +185,54 @@ tap.test('states PUT endpoints', async endpointTest => {
                 }
               },
               {
+                name: 'with a medicaid director with an invalid name',
+                token: 'edit-state-invalid-medicaid-office',
+                body: {
+                  medicaid_office: {
+                    address: 'address',
+                    city: 'city',
+                    zip: 'zip',
+                    directory: {
+                      name: 0xdeadbeef,
+                      email: 'email',
+                      phone: 'phone'
+                    }
+                  }
+                }
+              },
+              {
+                name: 'with a medicaid director with an invalid email',
+                token: 'edit-state-invalid-medicaid-office',
+                body: {
+                  medicaid_office: {
+                    address: 'address',
+                    city: 'city',
+                    zip: 'zip',
+                    directory: {
+                      name: 'name',
+                      email: 0xdeadbeef,
+                      phone: 'phone'
+                    }
+                  }
+                }
+              },
+              {
+                name: 'with a medicaid director with an invalid phone',
+                token: 'edit-state-invalid-medicaid-office',
+                body: {
+                  medicaid_office: {
+                    address: 'address',
+                    city: 'city',
+                    zip: 'zip',
+                    directory: {
+                      name: 'name',
+                      email: 'email',
+                      phone: 0xdeadbeef
+                    }
+                  }
+                }
+              },
+              {
                 name: 'with an invalid program benefits statement',
                 token: 'edit-state-invalid-benefits',
                 body: {
