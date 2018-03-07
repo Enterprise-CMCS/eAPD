@@ -71,7 +71,7 @@ const FormStateContacts = ({
 
     <SectionHeader>Medicaid office:</SectionHeader>
     <FormSection name="medicaid_office">
-      <Field name="address" component={Input} label="Address" />
+      <Field name="address1" component={Input} label="Address" />
       <Field name="address2" component={Input} label="Address (continued)" />
       <div className="clearfix mxn1">
         <div className="col col-12 sm-col-6 px1">
