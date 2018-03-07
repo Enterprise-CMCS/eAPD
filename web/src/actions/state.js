@@ -40,7 +40,7 @@ export const updateState = (id, data) => dispatch => {
 
   if (data.medicaid_office) {
     const { medicaid_office: { director } } = data;
-    if (!director.name && !director.email && !director.phone) {
+    if (director && !director.name && !director.email && !director.phone) {
       // The director field is not required, but if it is present, all
       // of its properties are required.  If none of its properties are
       // set, we can just delete it here.  This will also have the
