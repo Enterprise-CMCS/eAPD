@@ -1,38 +1,67 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { bindActionCreators } from 'redux';
 
+import { fetchStateDataIfNeeded, updateState } from '../actions/state';
 import FormStateContacts from '../components/FormStateContacts';
 import PageNavButtons from '../components/PageNavButtons';
 import withSidebar from '../components/withSidebar';
 import FormLogger from '../util/formLogger';
 
 class StateContacts extends Component {
-  showResults = data => {
-    console.log(data);
+  componentDidMount() {
+    // TODO: don't hardcode user id
+    this.props.fetchStateDataIfNeeded();
+  }
+
+  updateForm = data => {
+    this.props.updateState(this.props.state.data.id, data);
   };
 
   render() {
-    const { goTo } = this.props;
+    const { goTo, state } = this.props;
 
     return (
       <div>
         <FormLogger />
         <h1>Review your state contact information</h1>
-        <FormStateContacts onSubmit={this.showResults} />
-        <PageNavButtons goTo={goTo} prev="/state-start" next="/apd-overview" />
+        {!state.loaded ? (
+          <p>Loading...</p>
+        ) : (
+          <Fragment>
+            <FormStateContacts
+              initialValues={state.data}
+              onSubmit={this.updateForm}
+              stateName={state.data.name}
+            />
+            <PageNavButtons
+              goTo={goTo}
+              prev="/state-start"
+              next="/apd-overview"
+            />
+          </Fragment>
+        )}
       </div>
     );
   }
 }
 
 StateContacts.propTypes = {
-  goTo: PropTypes.func.isRequired
+  goTo: PropTypes.func.isRequired,
+  fetchStateDataIfNeeded: PropTypes.func.isRequired,
+  updateState: PropTypes.func.isRequired,
+  state: PropTypes.object.isRequired
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ goTo: path => push(path) }, dispatch);
+const mapStateToProps = ({ state }) => ({ state });
 
-export default connect(null, mapDispatchToProps)(withSidebar(StateContacts));
+const mapDispatchToProps = {
+  goTo: path => push(path),
+  fetchStateDataIfNeeded,
+  updateState
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withSidebar(StateContacts)
+);
