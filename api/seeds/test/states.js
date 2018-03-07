@@ -4,9 +4,10 @@ exports.seed = async knex => {
     .where({ id: 'mn' })
     .update({
       medicaid_office: JSON.stringify({
-        address: '100 Round Sq',
+        address1: '100 Round Sq',
         city: 'Cityville',
         zip: '12345',
+        state: 'Minnesota',
         director: {
           name: 'Cornelius Fudge',
           email: 'c.fudge@ministry.magic',
