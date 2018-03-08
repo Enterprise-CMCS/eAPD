@@ -5,6 +5,7 @@
 @import 'app/alert';
 @import 'app/border';
 @import 'app/layout';
+@import 'app/spacing';
 @import 'app/table';
 
 @custom-media --breakpoint-sm (min-width: 40rem);

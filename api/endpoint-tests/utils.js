@@ -30,6 +30,27 @@ const login = async (username = 'em@il.com', password = 'password') => {
   throw new Error('Failed to login');
 };
 
+const unauthenticatedTest = (method, url, test) => {
+  test.test('when unauthenticated', async invalidTest => {
+    const { response: { statusCode }, body } = await requestFor(method)(url);
+
+    invalidTest.equal(statusCode, 403, 'gives a 403 status code');
+    invalidTest.notOk(body, 'does not send a body');
+  });
+};
+
+const unauthorizedTest = (method, url, test) => {
+  test.test('with unauthorized', async invalidTest => {
+    const jar = await login('no-permissions', 'password'); // this user has no permissions
+    const { response: { statusCode }, body } = await requestFor(method)(url, {
+      jar
+    });
+
+    invalidTest.equal(statusCode, 401, 'gives a 401 status code');
+    invalidTest.notOk(body, 'does not send a body');
+  });
+};
+
 const db = () => {
   // tap runs each test file in its own process, which is awesome for
   // test isolation.  However, knex keeps connections open indefinitely
@@ -55,5 +76,7 @@ module.exports = {
     jar: request.jar
   },
   getFullPath,
-  login
+  login,
+  unauthenticatedTest,
+  unauthorizedTest
 };

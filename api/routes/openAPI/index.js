@@ -4,7 +4,7 @@ const auth = require('./auth');
 const activities = require('../activities/openAPI');
 const users = require('../users/openAPI');
 const roles = require('../roles/openAPI');
-const stateProgram = require('../states/program/openAPI');
+const states = require('../states/openAPI');
 
 module.exports = {
   openapi: '3.0',
@@ -18,7 +18,7 @@ module.exports = {
     ...activities,
     ...users,
     ...roles,
-    ...stateProgram
+    ...states
   },
   components: {
     securitySchemes: {

@@ -36,6 +36,10 @@
   },
   "homepage": "https://github.com/18F/cms-hitech-apd#readme",
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.4",
+    "@fortawesome/fontawesome-free-regular": "^5.0.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.8",
+    "@fortawesome/react-fontawesome": "0.0.17",
     "ace-css": "^1.1.0",
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
@@ -85,6 +89,7 @@
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.1",
     "style-loader": "^0.20.2",
+    "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
   },
