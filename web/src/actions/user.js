@@ -37,11 +37,9 @@ export const updateUser = (id, data) => dispatch => {
   return axios
     .put(`${API_URL}/users/${id}`, data)
     .then(req => {
-      console.log('update user success!', req);
       dispatch(receiveUserUpdate(req.data));
     })
     .catch(error => {
-      console.log('update user error!', error);
       const reason = error.response.data || 'N/A';
       dispatch(failUserUpdate(reason));
     });

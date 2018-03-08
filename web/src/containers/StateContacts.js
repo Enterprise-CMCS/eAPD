@@ -57,7 +57,7 @@ StateContacts.propTypes = {
 const mapStateToProps = ({ state }) => ({ state });
 
 const mapDispatchToProps = {
-  goTo: path => push(path),
+  goTo: push,
   fetchStateDataIfNeeded,
   updateState
 };
@@ -65,3 +65,9 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
   withSidebar(StateContacts)
 );
+
+export {
+  StateContacts as RawStateContacts,
+  mapStateToProps,
+  mapDispatchToProps
+};
