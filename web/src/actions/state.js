@@ -39,7 +39,7 @@ export const updateState = (id, data) => dispatch => {
   const url = `/states/${id}`;
 
   if (data.medicaid_office) {
-    const { medicaid_office: { director } } = data;
+    const { director } = data.medicaid_office;
     if (director && !director.name && !director.email && !director.phone) {
       // The director field is not required, but if it is present, all
       // of its properties are required.  If none of its properties are
