@@ -8,7 +8,7 @@ import SectionHeader from './SectionHeader';
 const Contacts = ({ fields, meta: { error, submitFailed } }) => (
   <div className="mt2">
     {fields.map((contact, idx) => (
-      <div key={idx} className="mb2">
+      <div key={contact} className="mb2">
         <SectionHeader>Contact #{idx + 1}:</SectionHeader>
         <div className="clearfix mxn1">
           <div className="col col-12 sm-col-4 px1">
@@ -119,3 +119,5 @@ const formConfig = {
 };
 
 export default reduxForm(formConfig)(FormStateContacts);
+
+export { Contacts as RawContacts, FormStateContacts as RawFormStateContacts };
