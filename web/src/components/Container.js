@@ -1,10 +1,15 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
+
+import TopNav from '../containers/TopNav';
 
 const Container = ({ children }) => (
-  <div className="site-main">
-    <div className="container p2">{children}</div>
-  </div>
+  <Fragment>
+    <TopNav />
+    <div className="site-main">
+      <div className="container p2">{children}</div>
+    </div>
+  </Fragment>
 );
 
 Container.propTypes = {
