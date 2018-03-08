@@ -11,7 +11,6 @@ import FormLogger from '../util/formLogger';
 
 class StateContacts extends Component {
   componentDidMount() {
-    // TODO: don't hardcode user id
     this.props.fetchStateDataIfNeeded();
   }
 
