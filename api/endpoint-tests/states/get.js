@@ -1,18 +1,20 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
-const { db, getFullPath, login, request } = require('../utils');
+const {
+  db,
+  getFullPath,
+  login,
+  request,
+  unauthenticatedTest,
+  unauthorizedTest
+} = require('../utils');
 
-tap.test('states endpoint | GET /states', async getUserStateProgramTest => {
+tap.test('states endpoint | GET /states', async getUserStateTest => {
   const url = getFullPath('/states');
   await db().seed.run();
 
-  getUserStateProgramTest.test('when unauthenticated', async invalidTest => {
-    const { response, body } = await request.get(url);
+  unauthenticatedTest('get', url, getUserStateTest);
 
-    invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
-    invalidTest.notOk(body, 'does not send a body');
-  });
-
-  getUserStateProgramTest.test(
+  getUserStateTest.test(
     'when authenticated as a user without an associated state',
     async invalidTest => {
       const cookies = await login();
@@ -26,7 +28,7 @@ tap.test('states endpoint | GET /states', async getUserStateProgramTest => {
     }
   );
 
-  getUserStateProgramTest.test(
+  getUserStateTest.test(
     'when authenticated as a user with an associated state',
     async validTest => {
       const cookies = await login('user2@email', 'something');
@@ -68,32 +70,14 @@ tap.test('states endpoint | GET /states', async getUserStateProgramTest => {
   );
 });
 
-tap.test('states/:id endpoint | GET /states/:id', async getStateProgramTest => {
+tap.test('states/:id endpoint | GET /states/:id', async getStateTest => {
   const url = getFullPath('/states/mn');
   await db().seed.run();
 
-  getStateProgramTest.test('when unauthenticated', async invalidTest => {
-    const { response, body } = await request.get(url);
+  unauthenticatedTest('get', url, getStateTest);
+  unauthorizedTest('get', url, getStateTest);
 
-    invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
-    invalidTest.notOk(body, 'does not send a body');
-  });
-
-  getStateProgramTest.test(
-    'when authenticated as a user without permission',
-    async invalidTest => {
-      const cookies = await login('user2@email', 'something');
-      const { response, body } = await request.get(url, {
-        jar: cookies,
-        json: true
-      });
-
-      invalidTest.equal(response.statusCode, 401, 'gives a 401 status code');
-      invalidTest.notOk(body, 'does not send a body');
-    }
-  );
-
-  getStateProgramTest.test(
+  getStateTest.test(
     'when authenticated as a user with permission',
     async authenticatedTest => {
       const cookies = await login();

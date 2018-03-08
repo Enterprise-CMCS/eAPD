@@ -18,7 +18,6 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": <Connect(AuthChecker)>
-        <Connect(TopNav) />
         <Routes />
       </Connect(AuthChecker)>,
       "isDev": true,
@@ -29,32 +28,18 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "children": Array [
-          <Connect(TopNav) />,
-          <Routes />,
-        ],
+        "children": <Routes />,
       },
       "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-      ],
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
       "type": [Function],
     },
     "type": [Function],
@@ -66,7 +51,6 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": <Connect(AuthChecker)>
-          <Connect(TopNav) />
           <Routes />
         </Connect(AuthChecker)>,
         "isDev": true,
@@ -77,32 +61,18 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": Array [
-            <Connect(TopNav) />,
-            <Routes />,
-          ],
+          "children": <Routes />,
         },
         "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {},
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {},
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-        ],
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
         "type": [Function],
       },
       "type": [Function],
