@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Sidebar from './Sidebar';
+import TopNav from '../containers/TopNav';
 
 const withSidebar = WrappedComponent => {
   const Wrapper = props => (
@@ -9,8 +10,11 @@ const withSidebar = WrappedComponent => {
       <div className="site-sidebar bg-navy">
         <Sidebar />
       </div>
-      <div className="site-content p2 pb4 sm-px3">
-        <WrappedComponent {...props} />
+      <div className="site-content">
+        <TopNav />
+        <div className="p2 pb4 sm-px3">
+          <WrappedComponent {...props} />
+        </div>
       </div>
     </div>
   );

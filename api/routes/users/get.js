@@ -18,30 +18,22 @@ const allUsersHandler = async (req, res, UserModel) => {
 
 const oneUserHandler = async (req, res, UserModel) => {
   logger.silly(req, 'handling GET /users/:id route');
-  if (req.params.id && !Number.isNaN(Number(req.params.id))) {
-    logger.silly(req, 'got a request for a single user', req.params.id);
-    try {
-      const user = await UserModel.where({ id: Number(req.params.id) }).fetch({
-        columns: ['id', 'email', 'name', 'position', 'phone', 'state']
-      });
-      if (user) {
-        const userObj = JSON.parse(JSON.stringify(user));
-        logger.silly(req, 'sending user', userObj);
-        res.send(userObj);
-      } else {
-        logger.verbose(req, `no user found [${req.params.id}]`);
-        res.status(404).end();
-      }
-    } catch (e) {
-      logger.error(req, e);
-      res.status(500).end();
+  logger.silly(req, 'got a request for a single user', req.params.id);
+  try {
+    const user = await UserModel.where({ id: Number(req.params.id) }).fetch({
+      columns: ['id', 'email', 'name', 'position', 'phone', 'state']
+    });
+    if (user) {
+      const userObj = JSON.parse(JSON.stringify(user));
+      logger.silly(req, 'sending user', userObj);
+      res.send(userObj);
+    } else {
+      logger.verbose(req, `no user found [${req.params.id}]`);
+      res.status(404).end();
     }
-  } else {
-    logger.verbose(req, `invalid request: [${req.params.id}]`);
-    res
-      .status(400)
-      .send({ error: 'get-user-invalid' })
-      .end();
+  } catch (e) {
+    logger.error(req, e);
+    res.status(500).end();
   }
 };
 

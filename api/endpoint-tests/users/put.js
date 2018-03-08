@@ -1,59 +1,20 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
-const { db, request, getFullPath, login } = require('../utils');
+const {
+  db,
+  request,
+  getFullPath,
+  login,
+  unauthenticatedTest,
+  unauthorizedTest
+} = require('../utils');
 
 tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
   await db().seed.run();
 
   const url = getFullPath('/users');
 
-  const invalidCases = [
-    {
-      name: 'with email that already exists',
-      body: { email: 'user2@email' }
-    },
-    {
-      name: 'with simple password',
-      body: { password: 'password' }
-    }
-  ];
-
-  putUsersTests.test(
-    'when unauthenticated, invalid ID',
-    async unauthenticatedTests => {
-      invalidCases.forEach(situation => {
-        unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
-          const { response, body } = await request.put(`${url}/9001`, {
-            json: situation.body
-          });
-          unauthenticatedTest.equal(
-            response.statusCode,
-            403,
-            'gives a 403 status code'
-          );
-          unauthenticatedTest.notOk(body, 'does not send a body');
-        });
-      });
-    }
-  );
-
-  putUsersTests.test(
-    'when unauthenticated, valid ID',
-    async unauthenticatedTests => {
-      invalidCases.forEach(situation => {
-        unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
-          const { response, body } = await request.put(`${url}/57`, {
-            json: situation.body
-          });
-          unauthenticatedTest.equal(
-            response.statusCode,
-            403,
-            'gives a 403 status code'
-          );
-          unauthenticatedTest.notOk(body, 'does not send a body');
-        });
-      });
-    }
-  );
+  unauthenticatedTest('put', `${url}/1001`, putUsersTests);
+  unauthorizedTest('put', `${url}/1001`, putUsersTests);
 
   putUsersTests.test('when authenticated', async authenticatedTests => {
     const cookies = await login();

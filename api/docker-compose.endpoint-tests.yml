@@ -17,33 +17,10 @@ services:
       - NODE_ENV=test
       - API_PORT=8000
       - API_HOST=api-for-testing
+      - ENDPOINT_COVERAGE_CAPTURE=yes
+    command: npm start
     expose:
       - 8000
     volumes:
       - ./:/app
       - /app/node_modules
-
-  api-migration:
-    build: .
-    depends_on:
-      - db
-      - api-for-testing
-    environment:
-      - NODE_ENV=test
-    volumes:
-      - ./:/app
-      - /app/node_modules
-    command: npm run migrate
-
-  api-seed:
-    build: .
-    depends_on:
-      - db
-      - api-for-testing
-      - api-migration
-    environment:
-      - NODE_ENV=test
-    volumes:
-      - ./:/app
-      - /app/node_modules
-    command: npm run seed

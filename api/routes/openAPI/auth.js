@@ -27,6 +27,9 @@ module.exports = {
             }
           }
         },
+        400: {
+          description: 'Missing username or password'
+        },
         401: {
           description: 'Unsuccessful login'
         }
@@ -35,13 +38,16 @@ module.exports = {
   },
   '/auth/logout': {
     get: {
-      200: {
-        description: 'Clears the session cookie',
-        headers: {
-          'Set-Cookie': {
-            schema: {
-              type: 'string',
-              example: 'session=; expires=; httponly'
+      description: 'Logs the user out by invalidating the session cookie',
+      responses: {
+        200: {
+          description: 'Clears the session cookie',
+          headers: {
+            'Set-Cookie': {
+              schema: {
+                type: 'string',
+                example: 'session=; expires=; httponly'
+              }
             }
           }
         }
