@@ -2,6 +2,7 @@
 
 @import 'app/base';
 
+@import 'app/alert';
 @import 'app/border';
 @import 'app/layout';
 @import 'app/table';
