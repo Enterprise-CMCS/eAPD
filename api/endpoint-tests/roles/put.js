@@ -1,5 +1,12 @@
 const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
-const { db, request, getFullPath, login } = require('../utils');
+const {
+  db,
+  request,
+  getFullPath,
+  login,
+  unauthenticatedTest,
+  unauthorizedTest
+} = require('../utils');
 
 tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
   await db().seed.run();
@@ -28,55 +35,8 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
     }
   ];
 
-  putRolesTests.test(
-    'when unauthenticated, invalid ID',
-    async unauthenticatedTests => {
-      [
-        ...invalidCases,
-        {
-          name: 'with a valid body',
-          body: { activities: [1, 2] }
-        }
-      ].forEach(situation => {
-        unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
-          const { response, body } = await request.put(`${url}/9001`, {
-            json: situation.body
-          });
-          unauthenticatedTest.equal(
-            response.statusCode,
-            403,
-            'gives a 403 status code'
-          );
-          unauthenticatedTest.notOk(body, 'does not send a body');
-        });
-      });
-    }
-  );
-
-  putRolesTests.test(
-    'when unauthenticated, valid ID',
-    async unauthenticatedTests => {
-      [
-        ...invalidCases,
-        {
-          name: 'with a valid body',
-          body: { activities: [1, 2] }
-        }
-      ].forEach(situation => {
-        unauthenticatedTests.test(situation.name, async unauthenticatedTest => {
-          const { response, body } = await request.put(`${url}/1001`, {
-            json: situation.body
-          });
-          unauthenticatedTest.equal(
-            response.statusCode,
-            403,
-            'gives a 403 status code'
-          );
-          unauthenticatedTest.notOk(body, 'does not send a body');
-        });
-      });
-    }
-  );
+  unauthenticatedTest('put', `${url}/1001`, putRolesTests);
+  unauthorizedTest('put', `${url}/1001`, putRolesTests);
 
   putRolesTests.test('when authenticated', async authenticatedTests => {
     const cookies = await login();

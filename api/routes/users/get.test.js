@@ -114,31 +114,6 @@ tap.test('user GET endpoint', async endpointTest => {
       done();
     });
 
-    handlerTest.test('rejects invalid requests', async invalidTests => {
-      const invalidCases = [
-        {
-          title: 'no user ID',
-          params: {}
-        },
-        {
-          title: 'non-numeric ID',
-          params: { id: 'letters' }
-        }
-      ];
-
-      invalidCases.forEach(invalidCase => {
-        invalidTests.test(invalidCase.title, async invalidTest => {
-          handler({ params: invalidCase.params }, res);
-          invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
-          invalidTest.ok(
-            res.send.calledWith({ error: 'get-user-invalid' }),
-            'sets an error message'
-          );
-          invalidTest.ok(res.end.called, 'response is terminated');
-        });
-      });
-    });
-
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
