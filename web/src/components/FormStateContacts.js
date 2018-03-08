@@ -8,14 +8,18 @@ import SectionHeader from './SectionHeader';
 const Contacts = ({ fields, meta: { error, submitFailed } }) => (
   <div className="mt2">
     {fields.map((contact, idx) => (
-      <div key={idx} className="mb2">
+      <div key={contact} className="mb2">
         <SectionHeader>Contact #{idx + 1}:</SectionHeader>
         <div className="clearfix mxn1">
           <div className="col col-12 sm-col-4 px1">
             <Field name={`${contact}.name`} component={Input} label="Name" />
           </div>
           <div className="col col-12 sm-col-4 px1">
-            <Field name={`${contact}.title`} component={Input} label="Title" />
+            <Field
+              name={`${contact}.position`}
+              component={Input}
+              label="Title"
+            />
           </div>
           <div className="col col-12 sm-col-4 px1">
             <Field
@@ -53,14 +57,14 @@ Contacts.propTypes = {
   meta: PropTypes.object.isRequired
 };
 
-const FormStateContacts = ({ handleSubmit, pristine, reset, submitting }) => (
+const FormStateContacts = ({ handleSubmit, submitting, stateName }) => (
   <form onSubmit={handleSubmit}>
     <SectionHeader>
-      We already have some information about Vermont from our records.
+      We already have some information about {stateName} from our records.
     </SectionHeader>
 
     <SectionHeader>Medicaid office:</SectionHeader>
-    <FormSection name="medicaidOffice">
+    <FormSection name="medicaid_office">
       <Field name="address1" component={Input} label="Address" />
       <Field name="address2" component={Input} label="Address (continued)" />
       <div className="clearfix mxn1">
@@ -77,7 +81,7 @@ const FormStateContacts = ({ handleSubmit, pristine, reset, submitting }) => (
     </FormSection>
 
     <SectionHeader>Medicaid Director:</SectionHeader>
-    <FormSection name="medicaidDirector">
+    <FormSection name="medicaid_office.director">
       <Field name="name" component={Input} label="Name" />
       <Field name="email" component={Input} label="Email address" />
       <Field
@@ -89,45 +93,31 @@ const FormStateContacts = ({ handleSubmit, pristine, reset, submitting }) => (
       />
     </FormSection>
 
-    <FieldArray name="contacts" component={Contacts} />
+    <FieldArray name="state_pocs" component={Contacts} />
 
-    {false && (
-      <div>
-        <button type="submit" disabled={submitting}>
-          Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
-        </button>
-      </div>
-    )}
+    <div className="mt3">
+      <button
+        type="submit"
+        className="btn btn-primary bg-green"
+        disabled={submitting}
+      >
+        {submitting ? 'Saving' : 'Submit'}
+      </button>
+    </div>
   </form>
 );
 
 FormStateContacts.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  reset: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired
+  submitting: PropTypes.bool.isRequired,
+  stateName: PropTypes.string.isRequired
 };
 
 const formConfig = {
   form: 'stateContacts',
-  initialValues: {
-    medicaidOffice: {
-      address1: 'Department of Vermont Health Access',
-      address2: '280 State Drive',
-      city: 'Waterbury',
-      state: 'Vermont',
-      zip: '05671-1010'
-    },
-    medicaidDirector: {
-      name: 'First Last',
-      email: 'first.last@state.gov',
-      phone: '555-123-4567'
-    }
-  },
   destroyOnUnmount: false
 };
 
 export default reduxForm(formConfig)(FormStateContacts);
+
+export { Contacts as RawContacts, FormStateContacts as RawFormStateContacts };
