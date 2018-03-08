@@ -33,7 +33,11 @@ class Login extends Component {
       <Container>
         <h1>Please log in.</h1>
         <div className="mb3 sm-col-6 md-col-4">
-          {error && <div className="mb2 bg-gray">{error}</div>}
+          {error && (
+            <div className="mb2 p1 h6 alert alert-error">
+              <strong>Sorry!</strong> Something went wrong. Please try again.
+            </div>
+          )}
           <form onSubmit={this.handleSubmit}>
             <div className="mb3">
               <label htmlFor="username">Email</label>

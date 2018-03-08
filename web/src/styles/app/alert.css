@@ -1,0 +1,9 @@
+.alert {
+  background-color: #eee;
+  border-left: 0.5rem solid #ccc;
+}
+
+.alert-error {
+  background-color: #f9dede;
+  border-color: #e31c3d;
+}
