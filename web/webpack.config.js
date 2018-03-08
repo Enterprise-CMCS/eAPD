@@ -1,9 +1,12 @@
 const path = require('path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
-module.exports = {
+const isProd = process.env.NODE_ENV === 'production';
+
+const config = {
   entry: {
     js: path.join(__dirname, 'src/app.js')
   },
@@ -35,3 +38,9 @@ module.exports = {
     new ExtractTextPlugin('app.css')
   ]
 };
+
+if (isProd) {
+  config.plugins.push(new UglifyJSPlugin());
+}
+
+module.exports = config;
