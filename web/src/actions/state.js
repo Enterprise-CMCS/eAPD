@@ -55,7 +55,7 @@ export const updateState = (id, data) => dispatch => {
       dispatch(receiveStateUpdate(req.data));
     })
     .catch(error => {
-      const reason = error.response.data || 'N/A';
+      const reason = error.response ? error.response.data : 'N/A';
       dispatch(failStateUpdate(reason));
     });
 };
