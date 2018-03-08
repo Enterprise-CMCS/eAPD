@@ -1,10 +1,13 @@
 import React from 'react';
 
 import Container from './Container';
+import UsaAnimated from './UsaAnimated';
 
 const Hello = () => (
   <Container>
-    <h1 className="center">Hello!</h1>
+    <div className="my3 py4 center">
+      <UsaAnimated />
+    </div>
   </Container>
 );
 
