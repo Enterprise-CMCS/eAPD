@@ -28,7 +28,7 @@ export const fetchState = id => dispatch => {
     .get(url)
     .then(req => dispatch(receiveState(req.data)))
     .catch(error => {
-      const reason = error.response.data || 'N/A';
+      const reason = error.response ? error.response.data : 'N/A';
       dispatch(failState(reason));
     });
 };
