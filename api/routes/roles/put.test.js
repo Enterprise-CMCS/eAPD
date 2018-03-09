@@ -66,17 +66,42 @@ tap.test('roles PUT endpoint', async endpointTest => {
     );
 
     handlerTest.test(
+      'rejects if the user attempts to edit own role',
+      async invalidTest => {
+        const req = { user: { role: 'role' }, params: { id: 1 } };
+        const fetchTrue = sinon.stub().resolves(true);
+        RoleModel.where
+          .withArgs({ id: 1 })
+          .returns({ fetch: RoleModel.fetch })
+          .withArgs({ id: 1, name: 'role' })
+          .returns({ fetch: fetchTrue });
+        RoleModel.fetch.resolves({});
+
+        await handler(req, res);
+
+        invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403');
+        invalidTest.ok(res.send.notCalled, 'no body is sent');
+        invalidTest.ok(res.end.calledOnce, 'response is terminated');
+      }
+    );
+
+    handlerTest.test(
       'rejects invalid role objects...',
       async validationTest => {
         validationTest.beforeEach(async () => {
-          const fetch = sinon.stub().resolves(true);
-          RoleModel.where.withArgs({ id: 1 }).returns({ fetch });
+          RoleModel.where
+            // query to make sure the role exists
+            .withArgs({ id: 1 })
+            .returns({ fetch: sinon.stub().resolves(true) })
+            // query to make sure the role is not this user's role
+            .withArgs({ id: 1, name: 'role' })
+            .returns({ fetch: sinon.stub().resolves(false) });
         });
 
         validationTest.test(
           'if the role does not have any activities',
           async invalidTest => {
-            const req = { params: { id: 1 }, body: {} };
+            const req = { user: { role: 'role' }, params: { id: 1 }, body: {} };
             RoleModel.where
               .withArgs({ name: 'bob' })
               .returns({ fetch: RoleModel.fetch });
@@ -99,7 +124,11 @@ tap.test('roles PUT endpoint', async endpointTest => {
         validationTest.test(
           'if the role has non-numeric activities',
           async invalidTest => {
-            const req = { params: { id: 1 }, body: { activities: [1, 'one'] } };
+            const req = {
+              user: { role: 'role' },
+              params: { id: 1 },
+              body: { activities: [1, 'one'] }
+            };
             RoleModel.where
               .withArgs({ name: 'bob' })
               .returns({ fetch: RoleModel.fetch });
@@ -122,7 +151,11 @@ tap.test('roles PUT endpoint', async endpointTest => {
         validationTest.test(
           'if the role has activity IDs that do not match any activities',
           async invalidTest => {
-            const req = { params: { id: 1 }, body: { activities: [1, 2, 3] } };
+            const req = {
+              user: { role: 'role' },
+              params: { id: 1 },
+              body: { activities: [1, 2, 3] }
+            };
             RoleModel.where
               .withArgs({ name: 'bob' })
               .returns({ fetch: RoleModel.fetch });
@@ -157,44 +190,24 @@ tap.test('roles PUT endpoint', async endpointTest => {
 
     handlerTest.test(
       'sends a server error if anything goes wrong',
-      async saveTest => {
+      async errorTest => {
         const req = {
-          params: { id: 1 },
-          body: { name: 'bob', activities: [1, 2] }
+          params: { id: 1 }
         };
-        const save = sinon.stub().rejects();
-        const attach = sinon.stub();
-        const detach = sinon.stub();
-        const fetch = sinon.stub();
-        RoleModel.where.withArgs({ id: 1 }).returns({ fetch });
-        RoleModel.where
-          .withArgs({ name: 'bob' })
-          .returns({ fetch: RoleModel.fetch });
-        RoleModel.fetch.resolves(null);
-        ActivityModel.where
-          .withArgs('id', 'in', sinon.match.array)
-          .returns({ fetchAll: ActivityModel.fetchAll });
-        ActivityModel.fetchAll.resolves([
-          { get: sinon.stub().returns(1) },
-          { get: sinon.stub().returns(2) }
-        ]);
-        fetch.resolves({
-          save,
-          activities: () => ({ attach, detach }),
-          get: sinon
-            .stub()
-            .withArgs('id')
-            .returns('bob-id')
-        });
+        RoleModel.where.withArgs({ id: 1 }).returns({ fetch: RoleModel.fetch });
+        RoleModel.fetch.rejects();
 
         await handler(req, res);
 
-        saveTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
+        errorTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
+        errorTest.ok(res.send.notCalled, 'body is not sent');
+        errorTest.ok(res.end.calledOnce, 'response is terminated');
       }
     );
 
     handlerTest.test('saves a valid role object', async saveTest => {
       const req = {
+        user: { role: 'role' },
         params: { id: 1 },
         body: { name: 'bob', activities: [1, 2] }
       };
@@ -202,8 +215,14 @@ tap.test('roles PUT endpoint', async endpointTest => {
       const attach = sinon.stub();
       const detach = sinon.stub();
       const fetch = sinon.stub();
-      RoleModel.where.withArgs({ id: 1 }).returns({ fetch });
       RoleModel.where
+        // query to make sure the role exists
+        .withArgs({ id: 1 })
+        .returns({ fetch })
+        // query to make sure the role is not this user's role
+        .withArgs({ id: 1, name: 'role' })
+        .returns({ fetch: sinon.stub().resolves(false) })
+        // query to make sure the role name is unique
         .withArgs({ name: 'bob' })
         .returns({ fetch: RoleModel.fetch });
       RoleModel.fetch.resolves(null);
