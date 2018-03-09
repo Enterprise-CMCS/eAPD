@@ -51,14 +51,23 @@ module.exports = (
   RoleModel = defaultRoleModel,
   ActivityModel = defaultActivityModel
 ) => {
-  logger.silly('setting up PUT /roles route');
+  logger.silly('setting up PUT /roles/:id route');
   app.put('/roles/:id', can('edit-roles'), async (req, res) => {
-    logger.silly(req, 'handling PUT /roles route');
+    logger.silly(req, 'handling PUT /roles/:id route');
     logger.silly(req, 'looking for existing role');
     const role = await RoleModel.where({ id: req.params.id }).fetch();
     if (!role) {
       logger.verbose(req, `no role found for [${req.params.id}]`);
       return res.status(404).end();
+    }
+
+    const userRole = await RoleModel.where({
+      id: req.params.id,
+      name: req.user.role
+    }).fetch();
+    if (userRole) {
+      logger.verbose(req, `attempting to delete own role [${req.params.id}]`);
+      return res.status(403).end();
     }
 
     logger.silly(
