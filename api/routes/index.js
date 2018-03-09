@@ -1,6 +1,7 @@
 const logger = require('../logger')('routes index');
 const loggedIn = require('../auth/middleware').loggedIn;
 const activities = require('./activities');
+const apds = require('./apds');
 const roles = require('./roles');
 const states = require('./states');
 const users = require('./users');
@@ -10,6 +11,7 @@ const openAPI = require('./openAPI');
 module.exports = (
   app,
   activitiesEndpoint = activities,
+  apdsEndpoint = apds,
   rolesEndpoint = roles,
   statesEndpoint = states,
   usersEndpoint = users,
@@ -22,6 +24,8 @@ module.exports = (
 
   logger.silly('setting up routes for activities');
   activitiesEndpoint(app);
+  logger.silly('setting up routes for apds');
+  apdsEndpoint(app);
   logger.silly('setting up routes for roles');
   rolesEndpoint(app);
   logger.silly('setting up routes for states');
