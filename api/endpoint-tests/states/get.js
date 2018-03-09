@@ -43,9 +43,15 @@ tap.test('states endpoint | GET /states', async getUserStateTest => {
         {
           id: 'mn',
           medicaid_office: {
-            address: '100 Round Sq',
+            address1: '100 Round Sq',
             city: 'Cityville',
-            zip: '12345'
+            state: 'Minnesota',
+            zip: '12345',
+            director: {
+              name: 'Cornelius Fudge',
+              email: 'c.fudge@ministry.magic',
+              phone: '5551234567'
+            }
           },
           name: 'Minnesota',
           program_benefits: 'The program will have benefits',
@@ -108,9 +114,15 @@ tap.test('states/:id endpoint | GET /states/:id', async getStateTest => {
           {
             id: 'mn',
             medicaid_office: {
-              address: '100 Round Sq',
+              address1: '100 Round Sq',
               city: 'Cityville',
-              zip: '12345'
+              state: 'Minnesota',
+              zip: '12345',
+              director: {
+                name: 'Cornelius Fudge',
+                email: 'c.fudge@ministry.magic',
+                phone: '5551234567'
+              }
             },
             name: 'Minnesota',
             program_benefits: 'The program will have benefits',

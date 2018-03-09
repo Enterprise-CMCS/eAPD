@@ -1,0 +1,391 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the state contacts container renders correctly when data is loaded 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <StateContacts
+    fetchStateDataIfNeeded={[Function]}
+    goTo={[Function]}
+    state={
+      Object {
+        "data": Object {
+          "id": "fr",
+        },
+        "loaded": true,
+      }
+    }
+    updateState={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <Connect(FormLogger) />,
+        <h1>
+          Review your state contact information
+        </h1>,
+        <UNDEFINED>
+          <ReduxForm
+            initialValues={
+              Object {
+                "id": "fr",
+              }
+            }
+            onSubmit={[Function]}
+            stateName={undefined}
+          />
+          <PageNavButtons
+            goTo={[Function]}
+            next="/apd-overview"
+            prev="/state-start"
+          />
+        </UNDEFINED>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Review your state contact information",
+        },
+        "ref": null,
+        "rendered": "Review your state contact information",
+        "type": "h1",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <ReduxForm
+              initialValues={
+                Object {
+                  "id": "fr",
+                }
+              }
+              onSubmit={[Function]}
+              stateName={undefined}
+            />,
+            <PageNavButtons
+              goTo={[Function]}
+              next="/apd-overview"
+              prev="/state-start"
+            />,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "initialValues": Object {
+                "id": "fr",
+              },
+              "onSubmit": [Function],
+              "stateName": undefined,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "goTo": [Function],
+              "next": "/apd-overview",
+              "prev": "/state-start",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": Symbol(react.fragment),
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <Connect(FormLogger) />,
+          <h1>
+            Review your state contact information
+          </h1>,
+          <UNDEFINED>
+            <ReduxForm
+              initialValues={
+                Object {
+                  "id": "fr",
+                }
+              }
+              onSubmit={[Function]}
+              stateName={undefined}
+            />
+            <PageNavButtons
+              goTo={[Function]}
+              next="/apd-overview"
+              prev="/state-start"
+            />
+          </UNDEFINED>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Review your state contact information",
+          },
+          "ref": null,
+          "rendered": "Review your state contact information",
+          "type": "h1",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <ReduxForm
+                initialValues={
+                  Object {
+                    "id": "fr",
+                  }
+                }
+                onSubmit={[Function]}
+                stateName={undefined}
+              />,
+              <PageNavButtons
+                goTo={[Function]}
+                next="/apd-overview"
+                prev="/state-start"
+              />,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "initialValues": Object {
+                  "id": "fr",
+                },
+                "onSubmit": [Function],
+                "stateName": undefined,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "goTo": [Function],
+                "next": "/apd-overview",
+                "prev": "/state-start",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": Symbol(react.fragment),
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`the state contacts container renders correctly when data is not loaded 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <StateContacts
+    fetchStateDataIfNeeded={[Function]}
+    goTo={[Function]}
+    state={
+      Object {
+        "data": Object {
+          "id": "fr",
+        },
+        "loaded": false,
+      }
+    }
+    updateState={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <Connect(FormLogger) />,
+        <h1>
+          Review your state contact information
+        </h1>,
+        <p>
+          Loading...
+        </p>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Review your state contact information",
+        },
+        "ref": null,
+        "rendered": "Review your state contact information",
+        "type": "h1",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Loading...",
+        },
+        "ref": null,
+        "rendered": "Loading...",
+        "type": "p",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <Connect(FormLogger) />,
+          <h1>
+            Review your state contact information
+          </h1>,
+          <p>
+            Loading...
+          </p>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Review your state contact information",
+          },
+          "ref": null,
+          "rendered": "Review your state contact information",
+          "type": "h1",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Loading...",
+          },
+          "ref": null,
+          "rendered": "Loading...",
+          "type": "p",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
