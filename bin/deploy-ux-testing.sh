@@ -46,7 +46,7 @@ if [[ $route =~ .+\ hitech-api-ux.app.cloud.gov ]]
 then
   # ...delete the database and add a new one.  This
   # guarantees us a fresh database for each deploy.
-  cf delete-service cms-db
+  cf delete-service cms-db -f
   cf create-service aws-rds shared-psql cms-db
   cf bind-service hitech-apd-api cms-db
 fi
