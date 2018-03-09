@@ -16,7 +16,7 @@ module.exports = (app, UserModel = defaultUserModel) => {
 
       if (req.user.id === targetID) {
         logger.verbose(req, 'User attempting to delete self');
-        return res.status(401).end();
+        return res.status(403).end();
       }
 
       const targetUser = await UserModel.where({ id: targetID }).fetch();
