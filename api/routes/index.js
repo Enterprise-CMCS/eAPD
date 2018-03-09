@@ -15,7 +15,7 @@ module.exports = (
   rolesEndpoint = roles,
   statesEndpoint = states,
   usersEndpoint = users,
-  formLoggerEndopint = formLogger,
+  formLoggerEndpoint = formLogger,
   openAPIdoc = openAPI
 ) => {
   app.get('/me', loggedIn, (req, res) => {
@@ -33,7 +33,7 @@ module.exports = (
   logger.silly('setting up routes for users');
   usersEndpoint(app);
   logger.silly('setting up routes for form logger');
-  formLoggerEndopint(app);
+  formLoggerEndpoint(app);
 
   logger.silly('setting up route for OpenAPI');
   app.get('/open-api', (req, res) => {
