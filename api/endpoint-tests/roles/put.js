@@ -41,6 +41,18 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
   putRolesTests.test('when authenticated', async authenticatedTests => {
     const cookies = await login();
 
+    authenticatedTests.test(
+      'when updating the role that the user belongs to',
+      async invalidTest => {
+        const { response, body } = await request.put(`${url}/1001`, {
+          jar: cookies,
+          json: { activities: [1001] }
+        });
+        invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
+        invalidTest.notOk(body, 'does not send a body');
+      }
+    );
+
     authenticatedTests.test('with an invalid ID', async invalidTest => {
       const { response, body } = await request.put(`${url}/9001`, {
         jar: cookies,
@@ -52,7 +64,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
 
     invalidCases.forEach(situation => {
       authenticatedTests.test(situation.name, async invalidTest => {
-        const { response, body } = await request.put(`${url}/1001`, {
+        const { response, body } = await request.put(`${url}/1002`, {
           jar: cookies,
           json: situation.body || true
         });
@@ -66,7 +78,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
     });
 
     authenticatedTests.test('with a valid updated role', async validTest => {
-      const { response, body } = await request.put(`${url}/1001`, {
+      const { response, body } = await request.put(`${url}/1002`, {
         jar: cookies,
         json: { activities: [1001] }
       });
@@ -75,7 +87,7 @@ tap.test('roles endpoint | PUT /roles/:roleID', async putRolesTests => {
       validTest.notOk(body, 'does not send a body');
 
       const activities = await db()('auth_role_activity_mapping')
-        .where({ role_id: 1001 })
+        .where({ role_id: 1002 })
         .select('activity_id')
         .map(activity => activity.activity_id);
 
