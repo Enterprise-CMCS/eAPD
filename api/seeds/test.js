@@ -1,3 +1,4 @@
+const apds = require('./shared/apds');
 const truncate = require('./shared/delete-everything');
 const states = require('./shared/states');
 const roles = require('./test/roles');
@@ -14,6 +15,7 @@ exports.seed = async knex => {
   await truncate.seed(knex);
   await roles.seed(knex);
   await states.seed(knex);
+  await apds.seed(knex);
   await testStates.seed(knex);
   await users.seed(knex);
 };
