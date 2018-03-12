@@ -8,5 +8,6 @@ exports.seed = async knex => {
   await knex('auth_roles').del();
   await knex('auth_activities').del();
 
+  await knex('apds').del();
   await knex('states').del();
 };
