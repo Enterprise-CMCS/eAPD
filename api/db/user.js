@@ -26,6 +26,18 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
         .pluck('name');
     },
 
+    async apds() {
+      logger.silly('getting user apds');
+      if (!this.relations.state || !this.relations.state.apds) {
+        logger.silly('user apds are not loaded yet... loading them');
+        await this.load('state.apds');
+      }
+
+      return this.related('state')
+        .related('apds')
+        .pluck('id');
+    },
+
     async validate(model = this) {
       logger.silly('validating user data model');
       if (model.hasChanged('email')) {
