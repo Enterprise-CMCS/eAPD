@@ -6,19 +6,11 @@ const getEndpoint = require('./get');
 
 tap.test('apds GET endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
-  const app = {
-    get: sandbox.stub()
-  };
-  const get = sandbox.stub();
-  const related = sandbox.stub();
+  const app = { get: sandbox.stub() };
   const toJSON = sandbox.stub();
   const ApdModel = {
     where: sandbox.stub(),
     fetchAll: sandbox.stub()
-  };
-  const UserModel = {
-    where: sandbox.stub(),
-    fetch: sandbox.stub()
   };
   const res = {
     status: sandbox.stub(),
@@ -31,7 +23,6 @@ tap.test('apds GET endpoint', async endpointTest => {
     sandbox.resetHistory();
 
     ApdModel.where.returns(ApdModel);
-    UserModel.where.returns(UserModel);
 
     res.status.returns(res);
     res.send.returns(res);
@@ -52,7 +43,7 @@ tap.test('apds GET endpoint', async endpointTest => {
   endpointTest.test('get all apds handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      getEndpoint(app, ApdModel, UserModel);
+      getEndpoint(app, ApdModel);
       handler = app.get.args.find(args => args[0] === '/apds')[2];
       done();
     });
@@ -60,9 +51,9 @@ tap.test('apds GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error code if there is a database error',
       async invalidTest => {
-        UserModel.fetch.rejects();
+        ApdModel.fetchAll.rejects();
 
-        await handler({ params: {}, user: {} }, res);
+        await handler({ params: {}, user: { state: 'va' } }, res);
 
         invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
@@ -73,11 +64,7 @@ tap.test('apds GET endpoint', async endpointTest => {
     handlerTest.test(
       'sends an unauthorized error code if the user does not have an associated state',
       async invalidTest => {
-        UserModel.fetch.resolves({ related });
-        related.returns({ get });
-        get.withArgs('id').returns(null);
-
-        await handler({ params: {}, user: {} }, res);
+        await handler({ params: {}, user: { state: null } }, res);
 
         invalidTest.ok(res.status.calledWith(401), 'HTTP status set to 401');
         invalidTest.ok(res.send.notCalled, 'no body is sent');
@@ -86,14 +73,10 @@ tap.test('apds GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends apds', async validTest => {
-      UserModel.fetch.resolves({ related });
-      related.returns({ get });
-      get.withArgs('id').returns('state-id');
-
       ApdModel.fetchAll.resolves({ toJSON });
       toJSON.returns(['a', 'b', 'c']);
 
-      await handler({ params: {}, user: {} }, res);
+      await handler({ params: {}, user: { state: 'va' } }, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
       validTest.ok(
