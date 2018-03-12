@@ -61,6 +61,28 @@ const openAPI = {
     }
   },
   '/users/{id}': {
+    delete: {
+      description: 'Delete a user from the system',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the user to delete',
+          required: true
+        }
+      ],
+      responses: {
+        204: {
+          description: 'The user was successfully deleted'
+        },
+        400: {
+          description: 'The provided user ID was invalid'
+        },
+        404: {
+          description: 'The user ID does not match any known users'
+        }
+      }
+    },
     get: {
       description: 'Get a specific user in the system',
       parameters: [
