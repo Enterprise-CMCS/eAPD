@@ -22,13 +22,13 @@ tap.test('apd data model', async apdModelTests => {
     'apd model sets up state relationship',
     async stateTests => {
       const self = {
-        hasOne: sinon.stub().returns('beep')
+        belongsTo: sinon.stub().returns('beep')
       };
 
       const output = apd.apd.state.bind(self)();
 
       stateTests.ok(
-        self.hasOne.calledWith('state', 'id', 'state_id'),
+        self.belongsTo.calledWith('state'),
         'sets up the relationship mapping to a state'
       );
       stateTests.equal(output, 'beep', 'returns the expected value');
