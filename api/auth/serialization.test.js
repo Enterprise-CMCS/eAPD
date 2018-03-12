@@ -70,6 +70,7 @@ tap.test('passport serialization', async serializationTest => {
             username: 'test-email',
             id: 'test-id',
             role: undefined,
+            state: undefined,
             activities: sinon.match.array.deepEquals([])
           }),
           'deserializes the user ID to an object'
@@ -90,6 +91,32 @@ tap.test('passport serialization', async serializationTest => {
             username: 'test-email',
             id: 'test-id',
             role: 'test-role',
+            state: undefined,
+            activities: sinon.match.array.deepEquals([
+              'activity 1',
+              'activity 2'
+            ])
+          }),
+          'deserializes the user ID to an object'
+        );
+      });
+
+      validTest.test('with a role & state', async adminStateTest => {
+        get.withArgs('email').returns('test-email');
+        get.withArgs('id').returns('test-id');
+        get.withArgs('auth_role').returns('test-role');
+        get.withArgs('state_id').returns('test-state');
+        activities.resolves(['activity 1', 'activity 2']);
+        userModel.fetch.resolves({ get, activities });
+
+        await serialization.deserializeUser(userID, doneCallback, userModel);
+
+        adminStateTest.ok(
+          doneCallback.calledWith(null, {
+            username: 'test-email',
+            id: 'test-id',
+            role: 'test-role',
+            state: 'test-state',
             activities: sinon.match.array.deepEquals([
               'activity 1',
               'activity 2'

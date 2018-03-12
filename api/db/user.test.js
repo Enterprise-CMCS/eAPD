@@ -40,6 +40,11 @@ tap.test('user data model', async userModelTests => {
       'function',
       'creates an activities relationship for the user model'
     );
+    setupTests.type(
+      user.user.apds,
+      'function',
+      'creates an apds relationship for the user model'
+    );
   });
 
   userModelTests.test(
@@ -254,6 +259,56 @@ tap.test('user data model', async userModelTests => {
           ['one', 'two', 'three'],
           'returns the list of activities'
         );
+      }
+    );
+  });
+
+  userModelTests.test('apds helper method', async apdsTests => {
+    const self = {
+      load: sandbox.stub(),
+      related: sandbox.stub(),
+      relations: { state: false }
+    };
+    const related = sandbox.stub();
+    const pluck = sandbox.stub();
+    const apds = user.user.apds.bind(self);
+
+    apdsTests.beforeEach(done => {
+      self.load.resolves();
+      self.related.withArgs('state').returns({ related });
+      self.relations.role = false;
+      related.withArgs('apds').returns({ pluck });
+      pluck.withArgs('id').returns([1, 2, 3]);
+
+      done();
+    });
+
+    apdsTests.test(
+      'resolves a list of apds when the state relationship is already loaded',
+      async alreadyLoadedTests => {
+        self.relations.state = {};
+        self.relations.state.apds = true;
+        const list = await apds();
+
+        alreadyLoadedTests.ok(
+          self.load.notCalled,
+          'the model load method is not called'
+        );
+        alreadyLoadedTests.same(list, [1, 2, 3], 'returns the list of apds');
+      }
+    );
+
+    apdsTests.test(
+      'resolves a list of apds when the state relationship is not already loaded',
+      async notAlreadyLoadedTests => {
+        self.relations.state = false;
+        const list = await apds();
+
+        notAlreadyLoadedTests.ok(
+          self.load.calledOnce,
+          'the model load method is called'
+        );
+        notAlreadyLoadedTests.same(list, [1, 2, 3], 'returns the list of apds');
       }
     );
   });
