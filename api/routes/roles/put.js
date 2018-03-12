@@ -51,38 +51,47 @@ module.exports = (
   RoleModel = defaultRoleModel,
   ActivityModel = defaultActivityModel
 ) => {
-  logger.silly('setting up PUT /roles route');
+  logger.silly('setting up PUT /roles/:id route');
   app.put('/roles/:id', can('edit-roles'), async (req, res) => {
-    logger.silly(req, 'handling PUT /roles route');
-    logger.silly(req, 'looking for existing role');
-    const role = await RoleModel.where({ id: req.params.id }).fetch();
-    if (!role) {
-      logger.verbose(req, `no role found for [${req.params.id}]`);
-      return res.status(404).end();
-    }
-
-    logger.silly(
-      req,
-      'attempting to update role',
-      JSON.parse(JSON.stringify(role))
-    );
-
-    let roleMeta;
+    logger.silly(req, 'handling PUT /roles/:id route');
     try {
-      logger.silly(req, 'validing the request', req.body);
-      roleMeta = await validateRole(req.body, null, ActivityModel);
-    } catch (e) {
-      logger.verbose(req, 'requested new role information is invalid');
-      logger.verbose(req, e.message);
-      return res
-        .status(400)
-        .send({ error: 'edit-role-invalid' })
-        .end();
-    }
+      logger.silly(req, 'looking for existing role');
+      const role = await RoleModel.where({ id: req.params.id }).fetch();
+      if (!role) {
+        logger.verbose(req, `no role found for [${req.params.id}]`);
+        return res.status(404).end();
+      }
 
-    logger.silly(req, 'request is valid');
+      const userRole = await RoleModel.where({
+        id: req.params.id,
+        name: req.user.role
+      }).fetch();
+      if (userRole) {
+        logger.verbose(req, `attempting to delete own role [${req.params.id}]`);
+        return res.status(403).end();
+      }
 
-    try {
+      logger.silly(
+        req,
+        'attempting to update role',
+        JSON.parse(JSON.stringify(role))
+      );
+
+      let roleMeta;
+      try {
+        logger.silly(req, 'validing the request', req.body);
+        roleMeta = await validateRole(req.body, null, ActivityModel);
+      } catch (e) {
+        logger.verbose(req, 'requested new role information is invalid');
+        logger.verbose(req, e.message);
+        return res
+          .status(400)
+          .send({ error: 'edit-role-invalid' })
+          .end();
+      }
+
+      logger.silly(req, 'request is valid');
+
       logger.silly(req, 'removing previous activities');
       role.activities().detach();
       await role.save();
