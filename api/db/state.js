@@ -6,6 +6,10 @@ module.exports = () => ({
   state: {
     tableName: 'states',
 
+    apds() {
+      return this.hasMany('apd');
+    },
+
     async validate(model = this) {
       logger.silly('validating state data model');
 
