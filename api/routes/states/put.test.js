@@ -171,6 +171,7 @@ tap.test('states PUT endpoints', async endpointTest => {
             req.body = {
               name: 'do not allow the state name to be changed...',
               program_benefits: 'new benefits goes here',
+              program_vision: '',
               propertyWeDoNotSupport: 'this gets stripped out'
             };
 
@@ -182,6 +183,7 @@ tap.test('states PUT endpoints', async endpointTest => {
               // If they're not set, bookshelf throws an error.
               stateModel.set.calledWith({
                 program_benefits: 'new benefits goes here',
+                program_vision: '',
                 medicaid_office: undefined,
                 state_pocs: undefined
               }),
@@ -197,7 +199,7 @@ tap.test('states PUT endpoints', async endpointTest => {
                 medicaid_office: 'old Medicaid office',
                 name: 'state name',
                 program_benefits: 'new benefits goes here',
-                program_vision: 'old vision',
+                program_vision: '',
                 state_pocs: 'old pocs'
               }),
               'sends back the updated state object'
