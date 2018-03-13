@@ -3,7 +3,7 @@ const pick = require('lodash.pick');
 const logger = require('../../logger')('apds route put');
 const defaultApdModel = require('../../db').models.apd;
 const loggedIn = require('../../auth/middleware').loggedIn;
-const { defaultUserCanEditAPD } = require('./utils');
+const { userCanEditAPD: defaultUserCanEditAPD } = require('./utils');
 
 module.exports = (
   app,
