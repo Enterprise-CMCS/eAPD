@@ -7,7 +7,6 @@ const putEndpoint = require('./put');
 tap.test('apds PUT endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = { put: sandbox.stub() };
-  const apds = sandbox.stub();
   const ApdModel = {
     where: sandbox.stub(),
     fetch: sandbox.stub()
@@ -15,6 +14,11 @@ tap.test('apds PUT endpoint', async endpointTest => {
   const UserModel = {
     where: sandbox.stub(),
     fetch: sandbox.stub()
+  };
+  const Apd = {
+    set: sandbox.stub(),
+    save: sandbox.stub(),
+    toJSON: sandbox.stub()
   };
   const res = {
     status: sandbox.stub(),
@@ -75,8 +79,7 @@ tap.test('apds PUT endpoint', async endpointTest => {
           body: { status: 'foo' }
         };
         ApdModel.fetch.resolves(true);
-        UserModel.fetch.resolves({ apds });
-        apds.returns([2, 3, 4]);
+        UserModel.fetch.resolves({ apds: () => [2, 3, 4] });
 
         await handler(req, res);
 
@@ -97,5 +100,38 @@ tap.test('apds PUT endpoint', async endpointTest => {
         saveTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
       }
     );
+
+    handlerTest.test('updates a valid apd object', async validTest => {
+      const req = {
+        params: { id: 1 },
+        user: { id: 123 },
+        body: { status: 'foo', misc: 'baz' }
+      };
+
+      Apd.toJSON.returns({ status: 'json-status' });
+      Apd.save.resolves();
+      ApdModel.fetch.resolves(Apd);
+      UserModel.fetch.resolves({ apds: () => [1, 2, 3] });
+
+      await handler(req, res);
+
+      validTest.ok(
+        Apd.set.calledWith({ status: 'foo' }),
+        'sets the apd status field'
+      );
+      validTest.ok(
+        Apd.save.calledAfter(Apd.set),
+        'the model is saved after values are set'
+      );
+      validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
+      validTest.ok(
+        Apd.toJSON.calledOnce,
+        'database object is converted to pure object'
+      );
+      validTest.ok(
+        res.send.calledWith({ status: 'json-status' }),
+        'updated apd data is sent'
+      );
+    });
   });
 });
