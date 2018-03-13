@@ -98,6 +98,35 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
+    'activity model overrides toJSON method',
+    async apdTests => {
+      const self = {
+        get: sinon.stub(),
+        related: sinon
+          .stub()
+          .withArgs('goals')
+          .returns('goooooaaaaals')
+      };
+      self.get.withArgs('id').returns('eye-dee');
+      self.get.withArgs('name').returns('Jerome Lee');
+      self.get.withArgs('description').returns('cool CMS person');
+
+      const output = activity.apdActivity.toJSON.bind(self)();
+
+      apdTests.match(
+        output,
+        {
+          id: 'eye-dee',
+          name: 'Jerome Lee',
+          description: 'cool CMS person',
+          goals: 'goooooaaaaals'
+        },
+        'gives us back the right JSON-ified object'
+      );
+    }
+  );
+
+  activityModelTests.test(
     'goal model sets up objectives relationship',
     async apdTests => {
       const self = {
@@ -115,6 +144,33 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
+    'activity goal model overrides toJSON method',
+    async apdTests => {
+      const self = {
+        get: sinon
+          .stub()
+          .withArgs('description')
+          .returns('to eat a whole bucket of ice cream in one sitting'),
+        related: sinon
+          .stub()
+          .withArgs('objectives')
+          .returns('twenty-seven')
+      };
+
+      const output = activity.apdActivityGoal.toJSON.bind(self)();
+
+      apdTests.match(
+        output,
+        {
+          description: 'to eat a whole bucket of ice cream in one sitting',
+          objectives: 'twenty-seven'
+        },
+        'gives us back the right JSON-ified object'
+      );
+    }
+  );
+
+  activityModelTests.test(
     'objective model sets up goal relationship',
     async apdTests => {
       const self = {
@@ -128,6 +184,26 @@ tap.test('activity data model', async activityModelTests => {
         'sets up the relationship mapping to goal'
       );
       apdTests.equal(output, 'floppity', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
+    'activity objective model overrides toJSON method',
+    async apdTests => {
+      const self = {
+        get: sinon
+          .stub()
+          .withArgs('description')
+          .returns('solar flares are deadly')
+      };
+
+      const output = activity.apdActivityGoalObjective.toJSON.bind(self)();
+
+      apdTests.equal(
+        output,
+        'solar flares are deadly',
+        'gives us back the right JSON-ified object'
+      );
     }
   );
 });
