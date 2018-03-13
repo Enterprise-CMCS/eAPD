@@ -3,7 +3,7 @@ module.exports = () => ({
     tableName: 'activities',
 
     apd() {
-      return this.hasOne('apd', 'id', 'apd_id');
+      return this.belongsTo('apd');
     },
 
     goals() {

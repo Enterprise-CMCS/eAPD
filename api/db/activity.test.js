@@ -50,13 +50,13 @@ tap.test('activity data model', async activityModelTests => {
     'activity model sets up apd relationship',
     async apdTests => {
       const self = {
-        hasOne: sinon.stub().returns('baz')
+        belongsTo: sinon.stub().returns('baz')
       };
 
       const output = activity.apdActivity.apd.bind(self)();
 
       apdTests.ok(
-        self.hasOne.calledWith('apd', 'id', 'apd_id'),
+        self.belongsTo.calledWith('apd'),
         'sets up the relationship mapping to a apd'
       );
       apdTests.equal(output, 'baz', 'returns the expected value');
