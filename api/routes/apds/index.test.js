@@ -1,16 +1,21 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const statesIndex = require('./index');
+const apdsIndex = require('./index');
 
-tap.test('states endpoint setup', async endpointTest => {
+tap.test('apds endpoint setup', async endpointTest => {
   const app = {};
   const getEndpoint = sinon.spy();
+  const putEndpoint = sinon.spy();
 
-  statesIndex(app, getEndpoint);
+  apdsIndex(app, getEndpoint, putEndpoint);
 
   endpointTest.ok(
     getEndpoint.calledWith(app),
-    'states GET endpoint is setup with the app'
+    'apds GET endpoint is setup with the app'
+  );
+  endpointTest.ok(
+    putEndpoint.calledWith(app),
+    'apds PUT endpoint is setup with the app'
   );
 });
