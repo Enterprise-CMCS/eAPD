@@ -1,4 +1,4 @@
-const apds = require('./shared/apds');
+const apds = require('./test/apds');
 const truncate = require('./shared/delete-everything');
 const states = require('./shared/states');
 const roles = require('./test/roles');

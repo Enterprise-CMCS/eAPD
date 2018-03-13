@@ -11,15 +11,12 @@ tap.test('apds PUT endpoint', async endpointTest => {
     where: sandbox.stub(),
     fetch: sandbox.stub()
   };
-  const UserModel = {
-    where: sandbox.stub(),
-    fetch: sandbox.stub()
-  };
   const Apd = {
     set: sandbox.stub(),
     save: sandbox.stub(),
     toJSON: sandbox.stub()
   };
+  const userCanEditAPD = sandbox.stub();
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -31,7 +28,6 @@ tap.test('apds PUT endpoint', async endpointTest => {
     sandbox.resetHistory();
 
     ApdModel.where.returns(ApdModel);
-    UserModel.where.returns(UserModel);
 
     res.status.returns(res);
     res.send.returns(res);
@@ -41,7 +37,7 @@ tap.test('apds PUT endpoint', async endpointTest => {
   });
 
   endpointTest.test('setup', async setupTest => {
-    putEndpoint(app, ApdModel, UserModel);
+    putEndpoint(app, ApdModel, userCanEditAPD);
 
     setupTest.ok(
       app.put.calledWith('/apds/:id', loggedInMiddleware, sinon.match.func),
@@ -52,7 +48,7 @@ tap.test('apds PUT endpoint', async endpointTest => {
   endpointTest.test('edit apds handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(async () => {
-      putEndpoint(app, ApdModel, UserModel);
+      putEndpoint(app, ApdModel, userCanEditAPD);
       handler = app.put.args.find(args => args[0] === '/apds/:id')[2];
     });
 
@@ -79,7 +75,7 @@ tap.test('apds PUT endpoint', async endpointTest => {
           body: { status: 'foo' }
         };
         ApdModel.fetch.resolves(true);
-        UserModel.fetch.resolves({ apds: () => [2, 3, 4] });
+        userCanEditAPD.resolves(false);
 
         await handler(req, res);
 
@@ -111,7 +107,7 @@ tap.test('apds PUT endpoint', async endpointTest => {
       Apd.toJSON.returns({ status: 'json-status' });
       Apd.save.resolves();
       ApdModel.fetch.resolves(Apd);
-      UserModel.fetch.resolves({ apds: () => [1, 2, 3] });
+      userCanEditAPD.resolves(true);
 
       await handler(req, res);
 
