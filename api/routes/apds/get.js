@@ -17,7 +17,9 @@ module.exports = (app, ApdModel = defaultApdModel) => {
       }
 
       const whereCondits = { state_id: stateId };
-      const apds = (await ApdModel.where(whereCondits).fetchAll()).toJSON();
+      const apds = (await ApdModel.where(whereCondits).fetchAll({
+        withRelated: ['activities.goals.objectives']
+      })).toJSON();
 
       logger.silly(req, `got apds:`);
       logger.silly(req, apds);
