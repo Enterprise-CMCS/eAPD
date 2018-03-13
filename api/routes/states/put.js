@@ -64,7 +64,12 @@ module.exports = (app, dataHelper = defaultDataHelper) => {
       logger.silly(req, newData);
 
       logger.silly(req, 'validating program benefits');
-      if (joi.string().validate(newData.program_benefits).error) {
+      if (
+        joi
+          .string()
+          .allow('')
+          .validate(newData.program_benefits).error
+      ) {
         logger.verbose(req, 'invalid program benefits');
         return res
           .status(400)
@@ -73,7 +78,12 @@ module.exports = (app, dataHelper = defaultDataHelper) => {
       }
 
       logger.silly(req, 'validating program vision');
-      if (joi.string().validate(newData.program_vision).error) {
+      if (
+        joi
+          .string()
+          .allow('')
+          .validate(newData.program_vision).error
+      ) {
         logger.verbose(req, 'invalid program vision');
         return res
           .status(400)
