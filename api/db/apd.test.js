@@ -12,11 +12,34 @@ tap.test('apd data model', async apdModelTests => {
     );
 
     setupTests.type(
+      apd.apd.activities,
+      'function',
+      'creates an activities relationship for the apd model'
+    );
+
+    setupTests.type(
       apd.apd.state,
       'function',
       'creates a state relationship for the apd model'
     );
   });
+
+  apdModelTests.test(
+    'apd model sets up activities relationship',
+    async activitiesTests => {
+      const self = {
+        hasMany: sinon.stub().returns('florp')
+      };
+
+      const output = apd.apd.activities.bind(self)();
+
+      activitiesTests.ok(
+        self.hasMany.calledWith('apdActivity'),
+        'sets up the relationship mapping to activities'
+      );
+      activitiesTests.equal(output, 'florp', 'returns the expected value');
+    }
+  );
 
   apdModelTests.test(
     'apd model sets up state relationship',
