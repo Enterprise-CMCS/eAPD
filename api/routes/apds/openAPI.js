@@ -29,7 +29,50 @@ const apdObjectSchema = {
     approved_at: {
       type: 'dateTime',
       description: 'Approval date'
-    }
+    },
+    activities: arrayOf({
+      type: 'object',
+      properties: {
+        id: {
+          type: 'number',
+          description: 'Activity ID'
+        },
+        name: {
+          type: 'string',
+          description: 'Short name for the activity'
+        },
+        description: {
+          type: 'string',
+          description: 'A description of this activity'
+        },
+        goals: arrayOf({
+          type: 'object',
+          properties: {
+            id: {
+              type: 'number',
+              description: 'Goal ID'
+            },
+            description: {
+              type: 'string',
+              description: 'A description of this goal'
+            },
+            objectives: arrayOf({
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'number',
+                  description: 'Objective ID'
+                },
+                description: {
+                  type: 'string',
+                  description: 'A description of this objective'
+                }
+              }
+            })
+          }
+        })
+      }
+    })
   }
 };
 
