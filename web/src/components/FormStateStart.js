@@ -6,13 +6,26 @@ import { Input } from './Inputs';
 import SectionHeader from './SectionHeader';
 import SelectInput from './SelectInput';
 import { STATES } from '../util';
+import { email, required } from '../util/validation';
 
 const FormStateStart = ({ handleSubmit, submitting }) => (
   <form onSubmit={handleSubmit}>
     <SectionHeader>Your info:</SectionHeader>
-    <Field name="name" type="text" component={Input} label="Name" />
+    <Field
+      name="name"
+      type="text"
+      component={Input}
+      label="Name"
+      validate={required}
+    />
     <Field name="position" type="text" component={Input} label="Position" />
-    <Field name="email" type="email" component={Input} label="Email address" />
+    <Field
+      name="email"
+      type="email"
+      component={Input}
+      label="Email address"
+      validate={[required, email]}
+    />
     <Field
       name="phone"
       type="tel"
