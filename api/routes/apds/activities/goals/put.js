@@ -4,14 +4,15 @@ const {
   apdActivityGoal: defaultGoalModel,
   apdActivityGoalObjective: defaultObjectiveModel
 } = require('../../../../db').models;
-const { userCanEditAPD } = require('../../utils');
+const { userCanEditAPD: defaultUserCanEditAPD } = require('../../utils');
 const loggedIn = require('../../../../auth/middleware').loggedIn;
 
 module.exports = (
   app,
   ActivityModel = defaultActivityModel,
   GoalModel = defaultGoalModel,
-  ObjectiveModel = defaultObjectiveModel
+  ObjectiveModel = defaultObjectiveModel,
+  userCanEditAPD = defaultUserCanEditAPD
 ) => {
   logger.silly('setting up PUT /activities/:id/goals route');
   app.put('/activities/:id/goals', loggedIn, async (req, res) => {
@@ -32,7 +33,7 @@ module.exports = (
       }
       const apdID = activity.related('apd').get('id');
 
-      if (!userCanEditAPD(req.user.id, apdID)) {
+      if (!await userCanEditAPD(req.user.id, apdID)) {
         logger.verbose(
           req,
           'user (state) not associated with the apd this activity belongs to'
