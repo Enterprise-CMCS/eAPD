@@ -1,10 +1,14 @@
 const logger = require('../../../logger')('apd activites route put');
 const pick = require('lodash.pick');
 const { apdActivity: defaultActivityModel } = require('../../../db').models;
-const { userCanEditAPD } = require('../utils');
+const { userCanEditAPD: defaultUserCanEditAPD } = require('../utils');
 const loggedIn = require('../../../auth/middleware').loggedIn;
 
-module.exports = (app, ActivityModel = defaultActivityModel) => {
+module.exports = (
+  app,
+  ActivityModel = defaultActivityModel,
+  userCanEditAPD = defaultUserCanEditAPD
+) => {
   logger.silly('setting up PUT /activities/:id route');
   app.put('/activities/:id', loggedIn, async (req, res) => {
     logger.silly(req, 'handling PUT /activities/:id route');
@@ -21,7 +25,7 @@ module.exports = (app, ActivityModel = defaultActivityModel) => {
       }
       const apdID = activity.related('apd').get('id');
 
-      if (!userCanEditAPD(req.user.id, apdID)) {
+      if (!await userCanEditAPD(req.user.id, apdID)) {
         logger.verbose(
           req,
           'user (state) not associated with the apd this activity belongs to'

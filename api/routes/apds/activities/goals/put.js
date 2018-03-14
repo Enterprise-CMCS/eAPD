@@ -95,15 +95,3 @@ module.exports = (
     }
   });
 };
-
-/*
-
-PUT /apds/:apd_id/activities
-  - replaces the list of activities for the APD with the new list
-
-PUT /apds/:apd_id/activities/:activity_id
-  - replaces the name and/or description for the activity
-
-PUT /apds/:apd_id/activities/:activity_id/goals
-  - replaces the list of goals for the activity with the new list
-*/
