@@ -79,3 +79,9 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
   withSidebar(ActivitiesList)
 );
+
+export {
+  ActivitiesList as RawActivitiesList,
+  mapStateToProps,
+  mapDispatchToProps
+};
