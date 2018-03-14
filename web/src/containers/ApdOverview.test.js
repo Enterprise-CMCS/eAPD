@@ -79,6 +79,6 @@ describe('the apd overview container', () => {
     const newData = {};
     form.simulate('submit', newData);
 
-    expect(updateState.calledWith('fr', newData));
+    expect(updateState.calledWith('fr', newData)).toBe(true);
   });
 });
