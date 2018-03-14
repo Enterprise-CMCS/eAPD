@@ -12,12 +12,12 @@ module.exports = (
   ApdModel = defaultApdModel,
   userCanEditAPD = defaultUserCanEditAPD
 ) => {
-  const check404 = async req => {
+  const getApd = async req => {
     const apdID = +req.params.apdID;
 
     if (!await userCanEditAPD(req.user.id, apdID)) {
       logger.verbose(req, 'user (state) not associated with this apd');
-      return false;
+      return null;
     }
 
     const apd = await ApdModel.where({ id: apdID }).fetch({
@@ -25,7 +25,6 @@ module.exports = (
     });
     if (!apd) {
       logger.verbose(req, `no such apd [${apdID}]`);
-      return false;
     }
 
     return apd;
@@ -40,7 +39,7 @@ module.exports = (
     );
 
     try {
-      const apd = await check404(req, res);
+      const apd = await getApd(req, res);
       if (!apd) {
         return res.status(404).end();
       }
