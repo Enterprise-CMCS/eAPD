@@ -3,13 +3,14 @@ const {
   apdActivity: defaultActivityModel,
   apd: defaultApdModel
 } = require('../../../db').models;
-const { userCanEditAPD } = require('../utils');
+const { userCanEditAPD: defaultUserCanEditAPD } = require('../utils');
 const loggedIn = require('../../../auth/middleware').loggedIn;
 
 module.exports = (
   app,
   ActivityModel = defaultActivityModel,
-  ApdModel = defaultApdModel
+  ApdModel = defaultApdModel,
+  userCanEditAPD = defaultUserCanEditAPD
 ) => {
   const check404 = async req => {
     const apdID = +req.params.apdID;
@@ -74,15 +75,3 @@ module.exports = (
     }
   });
 };
-
-/*
-
-PUT /apds/:apd_id/activities
-  - replaces the list of activities for the APD with the new list
-
-PUT /apds/:apd_id/activities/:activity_id
-  - replaces the name and/or description for the activity
-
-PUT /apds/:apd_id/activities/:activity_id/goals
-  - replaces the list of goals for the activity with the new list
-*/
