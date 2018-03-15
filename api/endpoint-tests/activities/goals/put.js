@@ -98,7 +98,6 @@ tap.only(
               200,
               'gives a 200 status code'
             );
-            console.log(body);
             validTest.match(
               body,
               {
