@@ -1,4 +1,4 @@
-const logger = require('../../logger')('roles route index');
+const logger = require('../../../logger')('auth roles route index');
 const del = require('./delete');
 const get = require('./get');
 const post = require('./post');
