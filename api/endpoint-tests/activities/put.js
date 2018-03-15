@@ -4,8 +4,7 @@ const {
   getFullPath,
   login,
   request,
-  unauthenticatedTest,
-  unauthorizedTest
+  unauthenticatedTest
 } = require('../utils');
 
 tap.test(
@@ -98,7 +97,7 @@ tap.test(
           );
         });
 
-        authenticated.test('with a valid activity', async invalidTest => {
+        authenticated.test('with a valid activity', async validTest => {
           const { response, body } = await request.put(`${url}/1000`, {
             jar: cookies,
             json: {
@@ -107,12 +106,8 @@ tap.test(
             }
           });
 
-          invalidTest.equal(
-            response.statusCode,
-            200,
-            'gives a 200 status code'
-          );
-          invalidTest.same(
+          validTest.equal(response.statusCode, 200, 'gives a 200 status code');
+          validTest.same(
             body,
             {
               id: 1000,
