@@ -129,7 +129,7 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
 
         invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
         invalidTest.ok(
-          res.send.calledWith({ error: 'add-activity-name-exists' }),
+          res.send.calledWith({ error: 'update-activity-name-exists' }),
           'sends back an error string'
         );
         invalidTest.ok(res.end.calledOnce, 'response is terminated');
