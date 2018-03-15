@@ -105,6 +105,38 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
     );
 
     handlerTest.test(
+      'sends an error if the activity name is an empty string',
+      async invalidTest => {
+        const req = {
+          user: { id: 1 },
+          params: { id: 1 },
+          body: {
+            name: '',
+            description: 'fishing on the ice'
+          }
+        };
+        const related = sinon.stub();
+        const some = sinon.stub();
+        related
+          .withArgs('apd')
+          .returns({ get: sinon.stub().returns('apd-id'), related });
+        related.withArgs('activities').returns({ some });
+        some.returns(true);
+        ActivityModel.fetch.resolves({ related });
+        userCanEditAPD.resolves(true);
+
+        await handler(req, res);
+
+        invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
+        invalidTest.ok(
+          res.send.calledWith({ error: 'update-activity-invalid-name' }),
+          'sends back an error string'
+        );
+        invalidTest.ok(res.end.calledOnce, 'response is terminated');
+      }
+    );
+
+    handlerTest.test(
       'sends an error if the activity name already exists within the APD',
       async invalidTest => {
         const req = {
