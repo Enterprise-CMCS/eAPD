@@ -1,10 +1,10 @@
 const {
   requiresAuth,
   schema: { arrayOf, jsonResponse }
-} = require('../openAPI/helpers');
+} = require('../../openAPI/helpers');
 
 const openAPI = {
-  '/activities': {
+  '/auth/activities': {
     get: {
       description: 'Get a list of all activities in the system',
       responses: {

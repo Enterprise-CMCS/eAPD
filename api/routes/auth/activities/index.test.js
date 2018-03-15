@@ -1,10 +1,12 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const canMiddleware = require('../../auth/middleware').can('view-activities');
+const canMiddleware = require('../../../auth/middleware').can(
+  'view-activities'
+);
 const getEndpoint = require('./index');
 
-tap.test('activities GET endpoint', async endpointTest => {
+tap.test('auth activities GET endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = {
     get: sandbox.stub()
@@ -31,7 +33,7 @@ tap.test('activities GET endpoint', async endpointTest => {
     getEndpoint(app, ActivityModel);
 
     setupTest.ok(
-      app.get.calledWith('/activities', canMiddleware, sinon.match.func),
+      app.get.calledWith('/auth/activities', canMiddleware, sinon.match.func),
       'all activities GET endpoint is registered'
     );
   });
@@ -40,7 +42,7 @@ tap.test('activities GET endpoint', async endpointTest => {
     let handler;
     handlerTest.beforeEach(done => {
       getEndpoint(app, ActivityModel);
-      handler = app.get.args.find(args => args[0] === '/activities')[2];
+      handler = app.get.args.find(args => args[0] === '/auth/activities')[2];
       done();
     });
 

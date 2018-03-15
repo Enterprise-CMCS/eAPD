@@ -1,10 +1,10 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const canMiddleware = require('../../auth/middleware').can('create-roles');
+const canMiddleware = require('../../../auth/middleware').can('create-roles');
 const postEndpoint = require('./post');
 
-tap.test('roles POST endpoint', async endpointTest => {
+tap.test('auth roles POST endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = {
     post: sandbox.stub()
@@ -37,7 +37,7 @@ tap.test('roles POST endpoint', async endpointTest => {
     postEndpoint(app, RoleModel, ActivityModel);
 
     setupTest.ok(
-      app.post.calledWith('/roles', canMiddleware, sinon.match.func),
+      app.post.calledWith('/auth/roles', canMiddleware, sinon.match.func),
       'roles POST endpoint is registered'
     );
   });
@@ -46,7 +46,7 @@ tap.test('roles POST endpoint', async endpointTest => {
     let handler;
     handlerTest.beforeEach(done => {
       postEndpoint(app, RoleModel, ActivityModel);
-      handler = app.post.args.find(args => args[0] === '/roles')[2];
+      handler = app.post.args.find(args => args[0] === '/auth/roles')[2];
       done();
     });
 
