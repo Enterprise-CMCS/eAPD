@@ -92,7 +92,7 @@ tap.test('users endpoint | POST /users', async postUsersTest => {
     authenticatedTests.test('with a weak password', async invalidTest => {
       const { response, body } = await request.post(url, {
         jar: cookies,
-        json: { email: 'newuser@email.com', password: 'Newp@ssw0rd!' }
+        json: { email: 'weakuser@email.com', password: 'Newp@ssw0rd!' }
       });
 
       invalidTest.equal(response.statusCode, 400, 'gives a 400 status code');

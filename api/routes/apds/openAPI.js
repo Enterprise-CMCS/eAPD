@@ -3,6 +3,8 @@ const {
   schema: { arrayOf, jsonResponse }
 } = require('../openAPI/helpers');
 
+const activities = require('./activities/openAPI');
+
 const apdObjectSchema = {
   type: 'object',
   properties: {
@@ -127,7 +129,8 @@ const openAPI = {
         }
       }
     }
-  }
+  },
+  ...activities
 };
 
 module.exports = requiresAuth(openAPI);
