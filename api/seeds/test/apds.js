@@ -1,9 +1,16 @@
 exports.seed = async knex => {
-  await knex('apds').insert({
-    id: 1000,
-    state_id: 'mo',
-    status: 'draft'
-  });
+  await knex('apds').insert([
+    {
+      id: 1000,
+      state_id: 'mn',
+      status: 'draft'
+    },
+    {
+      id: 1001,
+      state_id: 'az',
+      status: 'draft'
+    }
+  ]);
 
   await knex('activities').insert([
     {
@@ -17,6 +24,11 @@ exports.seed = async knex => {
       name: 'My Second Activity',
       description: 'More gunk',
       apd_id: 1000
+    },
+    {
+      id: 2000,
+      name: 'Inaccessible Activity',
+      apd_id: 1001
     }
   ]);
 
