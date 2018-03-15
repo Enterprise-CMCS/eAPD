@@ -1,7 +1,5 @@
 const tap = require('tap');
 const sinon = require('sinon');
-
-const loggedInMiddleware = require('../auth/middleware').loggedIn;
 const endpointIndex = require('./index');
 
 tap.test('endpoint setup', async endpointTest => {
