@@ -7,7 +7,7 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
   app.post('/auth/roles', can('create-roles'), async (req, res) => {
     logger.silly(req, 'handling POST /auth/roles route');
     try {
-      const role = RoleModel.forge({ name: req.body.name });
+      const role = RoleModel.forge({ name: req.body.name || false });
 
       try {
         logger.silly(req, 'validing the request', req.body);
