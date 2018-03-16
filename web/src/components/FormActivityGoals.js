@@ -81,36 +81,35 @@ Goals.propTypes = {
   meta: PropTypes.object.isRequired
 };
 
-const FormActivityGoals = ({ handleSubmit, pristine, reset, submitting }) => (
+const FormActivityGoals = ({ handleSubmit, submitting }) => (
   <form onSubmit={handleSubmit}>
     <SectionHeader>
       List the goals you’re hoping to accomplish as part of this activity:
     </SectionHeader>
     <FieldArray name="goals" component={Goals} />
-    {false && (
-      <div>
-        <button type="submit" disabled={submitting}>
-          Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
-        </button>
-      </div>
-    )}
+
+    <div className="mt3">
+      <button
+        type="submit"
+        className="btn btn-primary bg-green"
+        disabled={submitting}
+      >
+        {submitting ? 'Saving' : 'Submit'}
+      </button>
+    </div>
   </form>
 );
 
 FormActivityGoals.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  reset: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired
 };
 
 const formConfig = {
   form: 'activityGoals',
   initialValues: { goals: [{ ...entryShell }] },
-  destroyOnUnmount: false
+  destroyOnUnmount: false,
+  enableReinitialize: true
 };
 
 export default reduxForm(formConfig)(FormActivityGoals);

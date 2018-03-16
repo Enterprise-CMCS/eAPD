@@ -9,28 +9,19 @@ import PageNavButtons from '../components/PageNavButtons';
 import withSidebar from '../components/withSidebar';
 import FormLogger from '../util/formLogger';
 
-// const sample = {
-//   name: '',
-//   position: 'Director',
-//   email: 'first.last@state.gov',
-//   phone: '555-123-4567',
-//   state: 'vt'
-// };
-
 class StateStart extends Component {
   componentDidMount() {
     // TODO: don't hardcode user id
     this.props.fetchUserDataIfNeeded(57);
   }
 
-  showResults = data => {
+  updateForm = data => {
     // TODO: don't hardcode user id
     this.props.updateUser(57, data);
   };
 
   render() {
     const { goTo, user } = this.props;
-    console.log(user);
 
     return (
       <div>
@@ -42,7 +33,7 @@ class StateStart extends Component {
           <div>
             <FormStateStart
               initialValues={user.data}
-              onSubmit={this.showResults}
+              onSubmit={this.updateForm}
             />
             <PageNavButtons goTo={goTo} next="/state-contacts" />
           </div>
