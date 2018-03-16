@@ -50,10 +50,10 @@ about:
 * [our authorization model](api-authorization.md)
 * [how we handle authentication](api-authentication.md)
 
-The API is also documented with [OpenAPI](https://www.openapis.org/). To see
-the spec document, once the API is running, you can browse to its `/open-api`
-endpoint. You can also use a hosted version of [Swagger UI](http://petstore.swagger.io/)
-to get a nicer visualization.
+The API is also documented with [OpenAPI](https://www.openapis.org/). To see the
+spec document, once the API is running, you can browse to its `/open-api`
+endpoint. You can also use a hosted version of
+[Swagger UI](http://petstore.swagger.io/) to get a nicer visualization.
 
 ## Testing
 
@@ -65,3 +65,10 @@ We use [eslint](https://eslint.org/) to analyze our JavaScript files and find
 patterns / code that doesn't adhere to our style rules. Our rules are based on
 [AirBnb's style guide](https://github.com/airbnb/javascript) and
 [Prettier](https://github.com/prettier/prettier).
+
+## Accessibility
+
+We use [tota11y](http://khan.github.io/tota11y/) to manually test our pages
+during development for accessibility violations. We also utilize
+[eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) for
+automated checks for a11y rules within React components.
