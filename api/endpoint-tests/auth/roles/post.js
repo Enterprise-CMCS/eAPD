@@ -6,12 +6,12 @@ const {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../utils');
+} = require('../../utils');
 
-tap.test('roles endpoint | POST /roles', async postRolesTests => {
+tap.test('auth roles endpoint | POST /auth/roles', async postRolesTests => {
   await db().seed.run();
 
-  const url = getFullPath('/roles');
+  const url = getFullPath('/auth/roles');
 
   const invalidCases = [
     {

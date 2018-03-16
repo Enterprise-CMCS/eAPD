@@ -1,7 +1,7 @@
 const {
   requiresAuth,
   schema: { arrayOf, jsonResponse, errorToken }
-} = require('../openAPI/helpers');
+} = require('../../openAPI/helpers');
 
 const roleObjectSchema = {
   type: 'object',
@@ -22,7 +22,7 @@ const roleObjectSchema = {
 };
 
 const openAPI = {
-  '/roles': {
+  '/auth/roles': {
     get: {
       description: 'Get a list of all roles in the system',
       responses: {
@@ -68,7 +68,7 @@ const openAPI = {
       }
     }
   },
-  '/roles/{id}': {
+  '/auth/roles/{id}': {
     put: {
       description:
         'Change which activities an existing role is associated with',

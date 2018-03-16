@@ -1,7 +1,7 @@
-const logger = require('../../logger')('roles route post');
-const defaultRoleModel = require('../../db').models.role;
-const defaultActivityModel = require('../../db').models.activity;
-const can = require('../../auth/middleware').can;
+const logger = require('../../../logger')('roles route post');
+const defaultRoleModel = require('../../../db').models.role;
+const defaultActivityModel = require('../../../db').models.activity;
+const can = require('../../../auth/middleware').can;
 
 const validateRole = async (role, RoleModel, ActivityModel) => {
   if (!role) {
@@ -50,9 +50,9 @@ module.exports = (
   RoleModel = defaultRoleModel,
   ActivityModel = defaultActivityModel
 ) => {
-  logger.silly('setting up POST /roles route');
-  app.post('/roles', can('create-roles'), async (req, res) => {
-    logger.silly(req, 'handling POST /roles route');
+  logger.silly('setting up POST /auth/roles route');
+  app.post('/auth/roles', can('create-roles'), async (req, res) => {
+    logger.silly(req, 'handling POST /auth/roles route');
     let roleMeta;
     try {
       logger.silly(req, 'validing the request', req.body);

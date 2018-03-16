@@ -6,12 +6,12 @@ const {
   request,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../utils');
+} = require('../../utils');
 
-tap.test('roles endpoint | GET /roles', async getUsersTest => {
+tap.test('auth roles endpoint | GET /auth/roles', async getUsersTest => {
   await db().seed.run();
 
-  const url = getFullPath('/roles');
+  const url = getFullPath('/auth/roles');
 
   unauthenticatedTest('get', url, getUsersTest);
   unauthorizedTest('get', url, getUsersTest);

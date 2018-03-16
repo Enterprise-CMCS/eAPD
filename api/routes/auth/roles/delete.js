@@ -1,11 +1,11 @@
-const logger = require('../../logger')('roles route delete');
-const defaultRoleModel = require('../../db').models.role;
-const can = require('../../auth/middleware').can;
+const logger = require('../../../logger')('auth roles route delete');
+const defaultRoleModel = require('../../../db').models.role;
+const can = require('../../../auth/middleware').can;
 
 module.exports = (app, RoleModel = defaultRoleModel) => {
-  logger.silly('setting up DELETE /roles route');
-  app.delete('/roles/:id', can('delete-roles'), async (req, res) => {
-    logger.silly(req, 'handling up DELETE /roles route');
+  logger.silly('setting up DELETE /auth/roles route');
+  app.delete('/auth/roles/:id', can('delete-roles'), async (req, res) => {
+    logger.silly(req, 'handling up DELETE /auth/roles route');
     const targetRole = await RoleModel.where({ id: req.params.id }).fetch();
     if (!targetRole) {
       logger.info(
