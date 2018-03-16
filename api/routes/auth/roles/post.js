@@ -1,77 +1,33 @@
 const logger = require('../../../logger')('roles route post');
 const defaultRoleModel = require('../../../db').models.role;
-const defaultActivityModel = require('../../../db').models.activity;
 const can = require('../../../auth/middleware').can;
 
-const validateRole = async (role, RoleModel, ActivityModel) => {
-  if (!role.name) {
-    throw new Error('Role must have a name');
-  }
-  if (await RoleModel.where({ name: role.name }).fetch()) {
-    throw new Error(`Role name "${role.name}" already exists`);
-  }
-  if (!Array.isArray(role.activities)) {
-    throw new Error('Role must have a list of activities');
-  }
-  if (role.activities.filter(id => typeof id !== 'number').length > 0) {
-    throw new Error('Role activites must be numbers');
-  }
-
-  const validActivities = await ActivityModel.where(
-    'id',
-    'in',
-    role.activities
-  ).fetchAll({ columns: ['id'] });
-  const validIDs = validActivities.map(activity => activity.get('id'));
-  const invalidIDs = role.activities.filter(
-    roleID => !validIDs.includes(roleID)
-  );
-
-  if (invalidIDs.length) {
-    throw new Error(
-      `Activity IDs ${JSON.stringify(invalidIDs).replace(
-        /\[(.+)\]/,
-        '$1'
-      )} are invalid`
-    );
-  }
-
-  return {
-    name: role.name,
-    activities: role.activities
-  };
-};
-
-module.exports = (
-  app,
-  RoleModel = defaultRoleModel,
-  ActivityModel = defaultActivityModel
-) => {
+module.exports = (app, RoleModel = defaultRoleModel) => {
   logger.silly('setting up POST /auth/roles route');
   app.post('/auth/roles', can('create-roles'), async (req, res) => {
     logger.silly(req, 'handling POST /auth/roles route');
-    let roleMeta;
     try {
-      logger.silly(req, 'validing the request', req.body);
-      roleMeta = await validateRole(req.body, RoleModel, ActivityModel);
-    } catch (e) {
-      logger.verbose(req, 'requested new role is invalid');
-      logger.verbose(req, e.message);
-      return res
-        .status(400)
-        .send({ error: 'add-role-invalid' })
-        .end();
-    }
+      const role = RoleModel.forge({ name: req.body.name });
 
-    logger.silly(req, 'request is valid');
+      try {
+        logger.silly(req, 'validing the request', req.body);
+        await role.validate(req.body.activities);
+      } catch (e) {
+        logger.verbose(req, 'requested new role is invalid');
+        logger.verbose(req, e.message);
+        return res
+          .status(400)
+          .send({ error: `add-role-${e.message}` })
+          .end();
+      }
 
-    try {
+      logger.silly(req, 'request is valid');
+
       logger.silly(req, 'creating new role');
-      const role = RoleModel.forge({ name: roleMeta.name });
       await role.save();
 
-      logger.silly(req, 'attaching activities', roleMeta.activities);
-      role.activities().attach(roleMeta.activities);
+      logger.silly(req, 'attaching activities', req.body.activities);
+      role.activities().attach(req.body.activities);
       await role.save();
 
       logger.silly(req, 'all done');

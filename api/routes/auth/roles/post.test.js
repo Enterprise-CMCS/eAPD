@@ -9,13 +9,20 @@ tap.test('auth roles POST endpoint', async endpointTest => {
   const app = {
     post: sandbox.stub()
   };
+  const activities = {
+    attach: sandbox.spy(),
+    detach: sandbox.spy()
+  };
+  const roleObj = {
+    activities: sandbox.stub(),
+    get: sandbox.stub(),
+    getActivities: sandbox.stub(),
+    save: sandbox.stub(),
+    validate: sandbox.stub()
+  };
   const RoleModel = {
     fetch: sandbox.stub(),
     forge: sandbox.stub(),
-    where: sandbox.stub()
-  };
-  const ActivityModel = {
-    fetchAll: sandbox.stub(),
     where: sandbox.stub()
   };
   const res = {
@@ -28,13 +35,16 @@ tap.test('auth roles POST endpoint', async endpointTest => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
+    RoleModel.forge.returns(roleObj);
+    roleObj.activities.returns(activities);
+
     res.status.returns(res);
     res.send.returns(res);
     res.end.returns(res);
   });
 
   endpointTest.test('setup', async setupTest => {
-    postEndpoint(app, RoleModel, ActivityModel);
+    postEndpoint(app, RoleModel);
 
     setupTest.ok(
       app.post.calledWith('/auth/roles', canMiddleware, sinon.match.func),
@@ -45,166 +55,31 @@ tap.test('auth roles POST endpoint', async endpointTest => {
   endpointTest.test('create role handler', async handlerTest => {
     let handler;
     handlerTest.beforeEach(done => {
-      postEndpoint(app, RoleModel, ActivityModel);
+      postEndpoint(app, RoleModel);
       handler = app.post.args.find(args => args[0] === '/auth/roles')[2];
       done();
     });
 
-    handlerTest.test(
-      'rejects invalid role objects...',
-      async validationTest => {
-        validationTest.test(
-          'if the role does not have a name',
-          async invalidTest => {
-            const req = { body: {} };
+    handlerTest.test('rejects if model validation fails', async invalidTest => {
+      roleObj.validate.rejects(new Error('oh-noes'));
 
-            await handler(req, res);
+      await handler({ body: { name: 'Bob' } }, res);
 
-            invalidTest.ok(
-              res.send.calledWith({ error: sinon.match.string }),
-              'sends back an error string'
-            );
-            invalidTest.ok(
-              res.status.calledWith(400),
-              'HTTP status set to 400'
-            );
-            invalidTest.ok(res.end.calledOnce, 'response is terminated');
-          }
-        );
-
-        validationTest.test(
-          'if the role name already exists',
-          async invalidTest => {
-            const req = { body: { name: 'bob' } };
-            RoleModel.where
-              .withArgs({ name: 'bob' })
-              .returns({ fetch: RoleModel.fetch });
-            RoleModel.fetch.resolves({ id: 'existing-role' });
-
-            await handler(req, res);
-
-            invalidTest.ok(
-              res.send.calledWith({ error: sinon.match.string }),
-              'sends back an error string'
-            );
-            invalidTest.ok(
-              res.status.calledWith(400),
-              'HTTP status set to 400'
-            );
-            invalidTest.ok(res.end.calledOnce, 'response is terminated');
-          }
-        );
-
-        validationTest.test(
-          'if the role does not have any activities',
-          async invalidTest => {
-            const req = { body: { name: 'bob' } };
-            RoleModel.where
-              .withArgs({ name: 'bob' })
-              .returns({ fetch: RoleModel.fetch });
-            RoleModel.fetch.resolves(null);
-
-            await handler(req, res);
-
-            invalidTest.ok(
-              res.send.calledWith({ error: sinon.match.string }),
-              'sends back an error string'
-            );
-            invalidTest.ok(
-              res.status.calledWith(400),
-              'HTTP status set to 400'
-            );
-            invalidTest.ok(res.end.calledOnce, 'response is terminated');
-          }
-        );
-
-        validationTest.test(
-          'if the role has non-numeric activities',
-          async invalidTest => {
-            const req = { body: { name: 'bob', activities: [1, 'one'] } };
-            RoleModel.where
-              .withArgs({ name: 'bob' })
-              .returns({ fetch: RoleModel.fetch });
-            RoleModel.fetch.resolves(null);
-
-            await handler(req, res);
-
-            invalidTest.ok(
-              res.send.calledWith({ error: sinon.match.string }),
-              'sends back an error string'
-            );
-            invalidTest.ok(
-              res.status.calledWith(400),
-              'HTTP status set to 400'
-            );
-            invalidTest.ok(res.end.calledOnce, 'response is terminated');
-          }
-        );
-
-        validationTest.test(
-          'if the role has activity IDs that do not match any activities',
-          async invalidTest => {
-            const req = { body: { name: 'bob', activities: [1, 2, 3] } };
-            RoleModel.where
-              .withArgs({ name: 'bob' })
-              .returns({ fetch: RoleModel.fetch });
-            RoleModel.fetch.resolves(null);
-            ActivityModel.where
-              .withArgs('id', 'in', sinon.match.array)
-              .returns({ fetchAll: ActivityModel.fetchAll });
-
-            // This fetchAll returns the activity IDs that ARE KNOWN to the
-            // system, so we trigger this invalidation route by leaving out
-            // one or more of the activity IDs from the test data
-            ActivityModel.fetchAll.resolves([
-              { get: sinon.stub().returns(1) },
-              { get: sinon.stub().returns(2) }
-            ]);
-
-            await handler(req, res);
-
-            invalidTest.ok(
-              res.send.calledWith({ error: sinon.match.string }),
-              'sends back an error string'
-            );
-            invalidTest.ok(
-              res.status.calledWith(400),
-              'HTTP status set to 400'
-            );
-            invalidTest.ok(res.end.calledOnce, 'response is terminated');
-          }
-        );
-      }
-    );
+      invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
+      invalidTest.ok(
+        res.send.calledWith({ error: 'add-role-oh-noes' }),
+        'sends an error token'
+      );
+      invalidTest.ok(res.end.calledOnce, 'response is terminated');
+    });
 
     handlerTest.test(
       'sends a server error if anything goes wrong',
       async saveTest => {
         const req = { body: { name: 'bob', activities: [1, 2] } };
-        const save = sinon.stub().rejects();
-        const attach = sinon.stub();
-        RoleModel.where
-          .withArgs({ name: 'bob' })
-          .returns({ fetch: RoleModel.fetch });
-        RoleModel.fetch.resolves(null);
-        ActivityModel.where
-          .withArgs('id', 'in', sinon.match.array)
-          .returns({ fetchAll: ActivityModel.fetchAll });
-        ActivityModel.fetchAll.resolves([
-          { get: sinon.stub().returns(1) },
-          { get: sinon.stub().returns(2) }
-        ]);
-        RoleModel.forge.withArgs({ name: 'bob' }).returns({
-          save,
-          activities: () => ({ attach }),
-          get: sinon
-            .stub()
-            .withArgs('id')
-            .returns('bob-id')
-        });
+        RoleModel.forge.throws();
 
         await handler(req, res);
-        saveTest.ok(true);
 
         saveTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
       }
@@ -212,56 +87,39 @@ tap.test('auth roles POST endpoint', async endpointTest => {
 
     handlerTest.test('saves a valid role object', async saveTest => {
       const req = { body: { name: 'bob', activities: [1, 2] } };
-      const save = sinon.stub().resolves();
-      const attach = sinon.stub();
-      RoleModel.where
-        .withArgs({ name: 'bob' })
-        .returns({ fetch: RoleModel.fetch });
-      RoleModel.fetch.resolves(null);
-      ActivityModel.where
-        .withArgs('id', 'in', sinon.match.array)
-        .returns({ fetchAll: ActivityModel.fetchAll });
-      ActivityModel.fetchAll.resolves([
-        { get: sinon.stub().returns(1) },
-        { get: sinon.stub().returns(2) }
-      ]);
-
-      const newUserModel = {
-        save,
-        activities: () => ({ attach }),
-        getActivities: async () => ['one', 'two'],
-        get: sinon.stub()
-      };
-      newUserModel.get.withArgs('id').returns('bob-id');
-      newUserModel.get.withArgs('name').returns('bob');
-
-      RoleModel.forge.withArgs({ name: 'bob' }).returns(newUserModel);
+      roleObj.validate.resolves();
+      roleObj.save.resolves();
+      roleObj.get
+        .withArgs('id')
+        .returns('bob-id')
+        .withArgs('name')
+        .returns('bob-role');
+      roleObj.getActivities.resolves(['activity1', 'activity2']);
 
       await handler(req, res);
-      saveTest.ok(true);
 
       saveTest.ok(
         RoleModel.forge.calledWith({ name: 'bob' }),
         'new role created'
       );
       saveTest.ok(
-        save.calledBefore(attach),
+        roleObj.save.calledBefore(activities.attach),
         'the model is saved before activities are attached'
       );
       saveTest.ok(
-        attach.calledWith(sinon.match.array.deepEquals([1, 2])),
+        activities.attach.calledWith(sinon.match.array.deepEquals([1, 2])),
         'the role is associated with activities'
       );
       saveTest.ok(
-        save.calledAfter(attach),
+        roleObj.save.calledAfter(activities.attach),
         'the model is saved after activities are attached'
       );
       saveTest.ok(res.status.calledWith(201), 'HTTP status set to 201');
       saveTest.ok(
         res.send.calledWith({
-          name: 'bob',
+          name: 'bob-role',
           id: 'bob-id',
-          activities: sinon.match.array.deepEquals(['one', 'two'])
+          activities: sinon.match.array.deepEquals(['activity1', 'activity2'])
         }),
         'sends back the new role object'
       );
