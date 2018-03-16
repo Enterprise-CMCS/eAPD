@@ -1,7 +1,7 @@
-const logger = require('../../logger')('roles route put');
-const defaultRoleModel = require('../../db').models.role;
-const defaultActivityModel = require('../../db').models.activity;
-const can = require('../../auth/middleware').can;
+const logger = require('../../../logger')('roles route put');
+const defaultRoleModel = require('../../../db').models.role;
+const defaultActivityModel = require('../../../db').models.activity;
+const can = require('../../../auth/middleware').can;
 
 const validateRole = async (role, RoleModel, ActivityModel) => {
   if (RoleModel) {
@@ -51,9 +51,9 @@ module.exports = (
   RoleModel = defaultRoleModel,
   ActivityModel = defaultActivityModel
 ) => {
-  logger.silly('setting up PUT /roles/:id route');
-  app.put('/roles/:id', can('edit-roles'), async (req, res) => {
-    logger.silly(req, 'handling PUT /roles/:id route');
+  logger.silly('setting up PUT /auth/roles/:id route');
+  app.put('/auth/roles/:id', can('edit-roles'), async (req, res) => {
+    logger.silly(req, 'handling PUT /auth/roles/:id route');
     try {
       logger.silly(req, 'looking for existing role');
       const role = await RoleModel.where({ id: req.params.id }).fetch();
