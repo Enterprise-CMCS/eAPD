@@ -13,7 +13,7 @@ describe('the apd overview container', () => {
   const goTo = sandbox.spy();
   const fetchStateDataIfNeeded = sandbox.spy();
   const state = { loaded: true };
-  const stateInfo = { loaded: true, id: 'ny' };
+  const stateInfo = { loaded: true, id: 'fr' };
   const formData = { program_vision: 'foo', program_benefits: 'bar' };
   const updateState = sandbox.spy();
 
@@ -79,6 +79,6 @@ describe('the apd overview container', () => {
     const newData = {};
     form.simulate('submit', newData);
 
-    expect(updateState.calledWith('fr', newData));
+    expect(updateState.calledWith('fr', newData)).toBe(true);
   });
 });

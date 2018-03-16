@@ -15,13 +15,13 @@ class ActivityApproach extends Component {
   };
 
   render() {
-    const { goTo } = this.props;
+    const { activity, goTo } = this.props;
 
     return (
       <div>
         <FormLogger />
         <h1>
-          Help us understand your approach to <em>Administration</em>
+          Help us understand your approach to <em>{activity.name}</em>
         </h1>
         <FormActivityApproach onSubmit={this.showResults} />
         <PageNavButtons
@@ -35,10 +35,25 @@ class ActivityApproach extends Component {
 }
 
 ActivityApproach.propTypes = {
+  activity: PropTypes.object.isRequired,
   goTo: PropTypes.func.isRequired
+};
+
+const mapStateToProps = ({ apd }, props) => {
+  const activity =
+    apd.data.activities.filter(
+      a => a.name === props.match.params.activityName
+    )[0] || {};
+
+  return {
+    apd,
+    activity
+  };
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ goTo: path => push(path) }, dispatch);
 
-export default connect(null, mapDispatchToProps)(withSidebar(ActivityApproach));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withSidebar(ActivityApproach)
+);
