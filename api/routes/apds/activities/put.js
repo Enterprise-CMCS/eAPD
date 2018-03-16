@@ -17,7 +17,7 @@ module.exports = (
     try {
       const activityID = +req.params.id;
       const activity = await ActivityModel.where({ id: activityID }).fetch({
-        withRelated: ['apd.activities']
+        withRelated: ['apd.activities', 'goals.objectives']
       });
       if (!activity) {
         logger.verbose(req, 'activity not found');
@@ -35,6 +35,14 @@ module.exports = (
 
       const newData = pick(req.body, ['name', 'description']);
 
+      if (typeof newData.name !== 'string' || newData.name.length < 1) {
+        logger.verbose(req, 'Invalid activity name');
+        return res
+          .status(400)
+          .send({ error: 'update-activity-invalid-name' })
+          .end();
+      }
+
       const hasNameConflict = activity
         .related('apd')
         .related('activities')
@@ -46,7 +54,7 @@ module.exports = (
         logger.verbose(req, 'Activity name already exists for this APD');
         return res
           .status(400)
-          .send({ error: 'add-activity-name-exists' })
+          .send({ error: 'update-activity-name-exists' })
           .end();
       }
 

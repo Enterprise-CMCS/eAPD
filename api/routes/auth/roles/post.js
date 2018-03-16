@@ -4,9 +4,6 @@ const defaultActivityModel = require('../../../db').models.activity;
 const can = require('../../../auth/middleware').can;
 
 const validateRole = async (role, RoleModel, ActivityModel) => {
-  if (!role) {
-    throw new Error('Role must be specified');
-  }
   if (!role.name) {
     throw new Error('Role must have a name');
   }

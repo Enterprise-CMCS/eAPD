@@ -4,6 +4,7 @@ const auth = require('./auth');
 const apds = require('../apds/openAPI');
 const authActivities = require('../auth/activities/openAPI');
 const authRoles = require('../auth/roles/openAPI');
+const me = require('../me/openAPI');
 const users = require('../users/openAPI');
 const states = require('../states/openAPI');
 
@@ -19,8 +20,19 @@ module.exports = {
     ...auth,
     ...authActivities,
     ...authRoles,
+    ...me,
     ...users,
-    ...states
+    ...states,
+    '/open-api': {
+      get: {
+        description: 'Returns this document',
+        responses: {
+          200: {
+            description: 'This OpenAPI document'
+          }
+        }
+      }
+    }
   },
   components: {
     securitySchemes: {
