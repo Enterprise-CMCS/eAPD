@@ -17,6 +17,7 @@ tap.test('auth roles POST endpoint', async endpointTest => {
     activities: sandbox.stub(),
     get: sandbox.stub(),
     getActivities: sandbox.stub(),
+    load: sandbox.stub(),
     save: sandbox.stub(),
     validate: sandbox.stub()
   };
@@ -95,6 +96,7 @@ tap.test('auth roles POST endpoint', async endpointTest => {
         .withArgs('name')
         .returns('bob-role');
       roleObj.getActivities.resolves(['activity1', 'activity2']);
+      roleObj.load.withArgs('activities').resolves();
 
       await handler(req, res);
 
@@ -113,6 +115,10 @@ tap.test('auth roles POST endpoint', async endpointTest => {
       saveTest.ok(
         roleObj.save.calledAfter(activities.attach),
         'the model is saved after activities are attached'
+      );
+      saveTest.ok(
+        roleObj.load.calledBefore(roleObj.getActivities),
+        'activities are loaded before trying to read them [bookshelf quirk]'
       );
       saveTest.ok(res.status.calledWith(201), 'HTTP status set to 201');
       saveTest.ok(
