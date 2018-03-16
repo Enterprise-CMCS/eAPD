@@ -30,6 +30,8 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
       role.activities().attach(req.body.activities);
       await role.save();
 
+      await role.load('activities');
+
       logger.silly(req, 'all done');
       return res.status(201).send({
         name: role.get('name'),
