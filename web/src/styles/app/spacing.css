@@ -4,5 +4,9 @@
 */
 
 .mr-tiny {
-  margin-right: 4px;
+  margin-right: var(--space-tiny);
+}
+
+.mt-tiny {
+  margin-top: var(--space-tiny);
 }
