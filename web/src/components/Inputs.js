@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Input = props => <input className="input" {...props} />;
-const Textarea = props => <textarea className="textarea" {...props} />;
+const Input = props => <input className="m0 input" {...props} />;
+const Textarea = props => <textarea className="m0 textarea" {...props} />;
 
 // a HOC for Text / Textarea input that includes
 // div wrapper and accompanying label
@@ -13,15 +13,19 @@ const makeInput = InputInner => {
     label,
     hideLabel,
     type
-  }) => (
-    <div className="mb2">
-      <label htmlFor={name} className={hideLabel ? 'sr-only' : ''}>
-        {label}
-      </label>
-      <InputInner id={name} type={type} {...rest} />
-      {touched && error && <span>{error}</span>}
-    </div>
-  );
+  }) => {
+    const hasError = touched && error;
+
+    return (
+      <div className={`mb2 ${hasError ? 'has-error' : ''}`}>
+        <label htmlFor={name} className={hideLabel ? 'sr-only' : ''}>
+          {label}
+        </label>
+        <InputInner id={name} type={type} {...rest} />
+        {hasError && <div className="mt-tiny h6 red">{error}</div>}
+      </div>
+    );
+  };
 
   InputHolder.propTypes = {
     input: PropTypes.object.isRequired,
