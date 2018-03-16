@@ -1,19 +1,31 @@
 import I18n from 'i18n-js';
 
-// Import locales
+// Import locale translations
 import en from './locales/en.json';
 import fr from './locales/fr.json';
 
-// Set locale
-I18n.defaultLocale = 'en';
-I18n.locale = 'en';
+// Initial locale settings
+const DEFAULT_LOCALE = 'en';
+I18n.defaultLocale = DEFAULT_LOCALE;
+I18n.locale = DEFAULT_LOCALE;
 
 // Define the supported translations
 I18n.translations = { en, fr };
 
-// The method we'll use instead of a regular string
-export function t(name, params = {}) {
-  return I18n.t(name, params);
-}
+export const SUPPORTED_LOCALES = Object.keys(I18n.translations).sort();
+
+export const BROWSER_LANGUAGE =
+  (navigator.languages && navigator.languages[0]) ||
+  navigator.language ||
+  navigator.userLanguage;
+
+export const initI18n = () => {
+  let locale = BROWSER_LANGUAGE && BROWSER_LANGUAGE.slice(0, 2);
+  if (!locale || !SUPPORTED_LOCALES.includes(locale)) locale = DEFAULT_LOCALE;
+
+  I18n.locale = locale;
+};
+
+export const t = (name, params = {}) => I18n.t(name, params);
 
 export default I18n;
