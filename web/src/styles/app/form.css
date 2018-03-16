@@ -1,0 +1,11 @@
+/* error states */
+
+.has-error input {
+  border-color: var(--red);
+
+  &:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 2px color(var(--red) a(50%));
+    outline: none;
+  }
+}

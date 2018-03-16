@@ -15,7 +15,7 @@ ShallowWrapper {
     goTo={[Function]}
     stateInfo={
       Object {
-        "id": "ny",
+        "id": "fr",
         "loaded": true,
       }
     }
@@ -271,7 +271,7 @@ ShallowWrapper {
     goTo={[Function]}
     stateInfo={
       Object {
-        "id": "ny",
+        "id": "fr",
         "loaded": true,
       }
     }
