@@ -4,6 +4,7 @@
 
 @import 'app/alert';
 @import 'app/border';
+@import 'app/form';
 @import 'app/layout';
 @import 'app/spacing';
 @import 'app/table';
@@ -26,6 +27,7 @@
 
   --bold-font-weight: bold;
 
+  --space-tiny: 4px;
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 2rem;
@@ -33,4 +35,6 @@
 
   --border-width: 1px;
   --border-radius: 3px;
+
+  --red: #e21c3d;
 }

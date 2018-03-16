@@ -2,13 +2,13 @@ const pick = require('lodash.pick');
 
 const logger = require('../../logger')('apds route put');
 const defaultApdModel = require('../../db').models.apd;
-const defaultUserModel = require('../../db').models.user;
 const loggedIn = require('../../auth/middleware').loggedIn;
+const { userCanEditAPD: defaultUserCanEditAPD } = require('./utils');
 
 module.exports = (
   app,
   ApdModel = defaultApdModel,
-  UserModel = defaultUserModel
+  userCanEditAPD = defaultUserCanEditAPD
 ) => {
   logger.silly('setting up PUT /apds/:id route');
   app.put('/apds/:id', loggedIn, async (req, res) => {
@@ -24,10 +24,7 @@ module.exports = (
         return res.status(404).end();
       }
 
-      const user = await UserModel.where({ id: req.user.id }).fetch();
-      const userApds = await user.apds();
-
-      if (!userApds.includes(apdID)) {
+      if (!await userCanEditAPD(req.user.id, apdID)) {
         logger.verbose(req, 'user (state) not associated with this apd');
         return res.status(404).end();
       }
