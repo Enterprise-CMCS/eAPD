@@ -8,6 +8,7 @@ const authorization = require('./authorization');
 const state = require('./state');
 const apd = require('./apd');
 const apdActivity = require('./activity');
+const expense = require('./expense');
 
 const exportedModels = {};
 
@@ -15,7 +16,7 @@ const setup = (
   knex = defaultKnex,
   bookshelf = defaultBookshelf,
   config = defaultConfig,
-  models = [user(), authorization(), state(), apd(), apdActivity()]
+  models = [user(), authorization(), state(), apd(), apdActivity(), expense()]
 ) => {
   logger.silly(
     `setting up models using [${process.env.NODE_ENV}] configuration`

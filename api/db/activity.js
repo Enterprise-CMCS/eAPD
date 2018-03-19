@@ -19,7 +19,8 @@ module.exports = () => ({
         id: this.get('id'),
         name: this.get('name'),
         description: this.get('description'),
-        goals: this.related('goals')
+        goals: this.related('goals'),
+        expenses: this.related('expenses')
       };
     }
   },
@@ -57,17 +58,21 @@ module.exports = () => ({
 
   apdActivityExpense: {
     tableName: 'activity_expenses',
+    idAttribute: null,
 
     activity() {
       return this.belongsTo('apdActivity');
+    },
+
+    expense() {
+      return this.belongsTo('expense');
     },
 
     toJSON() {
       return {
         year: this.get('year'),
         amount: this.get('amount'),
-        description: this.get('description'),
-        activity: this.related('activity')
+        description: this.get('description')
       };
     }
   }
