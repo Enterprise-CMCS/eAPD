@@ -66,7 +66,7 @@ const mapStateToProps = ({ apd }) => ({
   activities: apd.data.activities.map(activity => ({
     id: activity.id,
     name: activity.name,
-    started: activity.goals.length > 0
+    started: !!(activity.goals && activity.goals.length > 0)
   }))
 });
 

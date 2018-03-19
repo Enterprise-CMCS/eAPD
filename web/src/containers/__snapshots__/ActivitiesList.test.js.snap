@@ -40,6 +40,7 @@ ShallowWrapper {
           Activities
         </h1>,
         <UNDEFINED>
+          Now we will fill out the details of each activity. You will be able to describe the activity, its goals and approaches, schedule, personnel, and expenses on the following screens.
           <div
             className="mb3"
           >
@@ -81,12 +82,6 @@ ShallowWrapper {
           >
             Back
           </button>
-          <button
-            className="btn btn-primary"
-            type="button"
-          >
-            Add another activity
-          </button>
         </UNDEFINED>,
       ],
     },
@@ -109,6 +104,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "children": Array [
+            "Now we will fill out the details of each activity. You will be able to describe the activity, its goals and approaches, schedule, personnel, and expenses on the following screens.",
             <div
               className="mb3"
             >
@@ -150,16 +146,11 @@ ShallowWrapper {
             >
               Back
             </button>,
-            <button
-              className="btn btn-primary"
-              type="button"
-            >
-              Add another activity
-            </button>,
           ],
         },
         "ref": null,
         "rendered": Array [
+          "Now we will fill out the details of each activity. You will be able to describe the activity, its goals and approaches, schedule, personnel, and expenses on the following screens.",
           Object {
             "instance": null,
             "key": undefined,
@@ -328,19 +319,6 @@ ShallowWrapper {
             "rendered": "Back",
             "type": "button",
           },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Add another activity",
-              "className": "btn btn-primary",
-              "type": "button",
-            },
-            "ref": null,
-            "rendered": "Add another activity",
-            "type": "button",
-          },
         ],
         "type": Symbol(react.fragment),
       },
@@ -358,6 +336,7 @@ ShallowWrapper {
             Activities
           </h1>,
           <UNDEFINED>
+            Now we will fill out the details of each activity. You will be able to describe the activity, its goals and approaches, schedule, personnel, and expenses on the following screens.
             <div
               className="mb3"
             >
@@ -399,12 +378,6 @@ ShallowWrapper {
             >
               Back
             </button>
-            <button
-              className="btn btn-primary"
-              type="button"
-            >
-              Add another activity
-            </button>
           </UNDEFINED>,
         ],
       },
@@ -427,6 +400,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "children": Array [
+              "Now we will fill out the details of each activity. You will be able to describe the activity, its goals and approaches, schedule, personnel, and expenses on the following screens.",
               <div
                 className="mb3"
               >
@@ -468,16 +442,11 @@ ShallowWrapper {
               >
                 Back
               </button>,
-              <button
-                className="btn btn-primary"
-                type="button"
-              >
-                Add another activity
-              </button>,
             ],
           },
           "ref": null,
           "rendered": Array [
+            "Now we will fill out the details of each activity. You will be able to describe the activity, its goals and approaches, schedule, personnel, and expenses on the following screens.",
             Object {
               "instance": null,
               "key": undefined,
@@ -644,19 +613,6 @@ ShallowWrapper {
               },
               "ref": null,
               "rendered": "Back",
-              "type": "button",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Add another activity",
-                "className": "btn btn-primary",
-                "type": "button",
-              },
-              "ref": null,
-              "rendered": "Add another activity",
               "type": "button",
             },
           ],
