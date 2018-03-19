@@ -10,7 +10,8 @@ tap.test('activity data model', async activityModelTests => {
       {
         apdActivity: { tableName: 'activities' },
         apdActivityGoal: { tableName: 'activity_goals' },
-        apdActivityGoalObjective: { tableName: 'activity_goal_objectives' }
+        apdActivityGoalObjective: { tableName: 'activity_goal_objectives' },
+        apdActivityExpense: { tableName: 'activity_expenses' }
       },
       'get the expected model definitions'
     );
@@ -25,6 +26,12 @@ tap.test('activity data model', async activityModelTests => {
       activity.apdActivity.goals,
       'function',
       'creates a goals relationship for the activity model'
+    );
+
+    setupTests.type(
+      activity.apdActivity.expenses,
+      'function',
+      'creates a expenses relationship for the activity model'
     );
 
     setupTests.type(
@@ -43,6 +50,12 @@ tap.test('activity data model', async activityModelTests => {
       activity.apdActivityGoalObjective.goal,
       'function',
       'creates a goal relationship for the objective model'
+    );
+
+    setupTests.type(
+      activity.apdActivityExpense.activity,
+      'function',
+      'creates a activity relationship for the expense model'
     );
   });
 
@@ -88,6 +101,40 @@ tap.test('activity data model', async activityModelTests => {
       };
 
       const output = activity.apdActivityGoal.activity.bind(self)();
+
+      apdTests.ok(
+        self.belongsTo.calledWith('apdActivity'),
+        'sets up the relationship mapping to activity'
+      );
+      apdTests.equal(output, 'frood', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
+    'activity model sets up expenses relationship',
+    async apdTests => {
+      const self = {
+        hasMany: sinon.stub().returns('bag')
+      };
+
+      const output = activity.apdActivity.expenses.bind(self)();
+
+      apdTests.ok(
+        self.hasMany.calledWith('apdActivityExpense'),
+        'sets up the relationship mapping to expense'
+      );
+      apdTests.equal(output, 'bag', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
+    'activity model sets up expenses relationship',
+    async apdTests => {
+      const self = {
+        belongsTo: sinon.stub().returns('frood')
+      };
+
+      const output = activity.apdActivityExpense.activity.bind(self)();
 
       apdTests.ok(
         self.belongsTo.calledWith('apdActivity'),
@@ -202,6 +249,35 @@ tap.test('activity data model', async activityModelTests => {
       apdTests.equal(
         output,
         'solar flares are deadly',
+        'gives us back the right JSON-ified object'
+      );
+    }
+  );
+
+  activityModelTests.test(
+    'activity expense model overrides toJSON method',
+    async apdTests => {
+      const self = {
+        get: sinon.stub(),
+        related: sinon
+          .stub()
+          .withArgs('activity')
+          .returns('having a good time')
+      };
+      self.get.withArgs('year').returns('2018');
+      self.get.withArgs('amount').returns(1000000);
+      self.get.withArgs('description').returns('la croix');
+
+      const output = activity.apdActivityExpense.toJSON.bind(self)();
+
+      apdTests.match(
+        output,
+        {
+          year: '2018',
+          amount: 1000000,
+          description: 'la croix',
+          activity: 'having a good time'
+        },
         'gives us back the right JSON-ified object'
       );
     }
