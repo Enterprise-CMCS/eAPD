@@ -4,9 +4,9 @@ export const GET_APD_REQUEST = 'GET_APD_REQUEST';
 export const GET_APD_SUCCESS = 'GET_APD_SUCCESS';
 export const GET_APD_FAILURE = 'GET_APD_FAILURE';
 
-export const ADD_APD_ACTIVITY_REQUEST = 'ADD_APD_ACTIVITY_REQUEST';
-export const ADD_APD_ACTIVITY_SUCCESS = 'ADD_APD_ACTIVITY_SUCCESS';
-export const ADD_APD_ACTIVITY_FAILURE = 'ADD_APD_ACTIVITY_FAILURE';
+export const ADD_APD_ACTIVITIES_REQUEST = 'ADD_APD_ACTIVITIES_REQUEST';
+export const ADD_APD_ACTIVITIES_SUCCESS = 'ADD_APD_ACTIVITIES_SUCCESS';
+export const ADD_APD_ACTIVITIES_FAILURE = 'ADD_APD_ACTIVITIES_FAILURE';
 
 export const UPDATE_APD_ACTIVITY_REQUEST = 'UPDATE_APD_ACTIVITY_REQUEST';
 export const UPDATE_APD_ACTIVITY_SUCCESS = 'UPDATE_APD_ACTIVITY_SUCCESS';
@@ -16,15 +16,15 @@ export const requestApd = () => ({ type: GET_APD_REQUEST });
 export const receiveApd = data => ({ type: GET_APD_SUCCESS, data });
 export const failApd = error => ({ type: GET_APD_FAILURE, error });
 
-export const requestApdActivityAdd = () => ({
-  type: ADD_APD_ACTIVITY_REQUEST
+export const requestApdActivitiesAdd = () => ({
+  type: ADD_APD_ACTIVITIES_REQUEST
 });
-export const receiveApdActivityAdd = data => ({
-  type: ADD_APD_ACTIVITY_SUCCESS,
+export const receiveApdActivitiesAdd = data => ({
+  type: ADD_APD_ACTIVITIES_SUCCESS,
   data
 });
-export const failApdActivityAdd = error => ({
-  type: ADD_APD_ACTIVITY_FAILURE,
+export const failApdActivitiesAdd = error => ({
+  type: ADD_APD_ACTIVITIES_FAILURE,
   error
 });
 
@@ -55,14 +55,15 @@ export const fetchApd = () => dispatch => {
 };
 
 export const addApdActivity = (apdID, activity) => dispatch => {
-  dispatch(requestApdActivityAdd());
+  dispatch(requestApdActivitiesAdd());
 
   return axios
     .post(`/apds/${apdID}/activities`, activity)
-    .then(req => dispatch(receiveApdActivityAdd(req.data)))
+    .then(req => dispatch(receiveApdActivitiesAdd(req.data)))
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A/';
-      dispatch(failApdActivityAdd(reason));
+      dispatch(failApdActivitiesAdd(reason));
+      throw reason;
     });
 };
 
