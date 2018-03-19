@@ -67,8 +67,7 @@ const mapStateToProps = ({ apd }) => ({
   activities: apd.data.activities.map(activity => ({
     id: activity.id,
     name: activity.name,
-    // TODO [GW] figure out how this should be set
-    started: true
+    started: activity.goals.length > 0
   }))
 });
 
