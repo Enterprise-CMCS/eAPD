@@ -4,6 +4,10 @@ export const GET_APD_REQUEST = 'GET_APD_REQUEST';
 export const GET_APD_SUCCESS = 'GET_APD_SUCCESS';
 export const GET_APD_FAILURE = 'GET_APD_FAILURE';
 
+export const ADD_APD_ACTIVITY_REQUEST = 'ADD_APD_ACTIVITY_REQUEST';
+export const ADD_APD_ACTIVITY_SUCCESS = 'ADD_APD_ACTIVITY_SUCCESS';
+export const ADD_APD_ACTIVITY_FAILURE = 'ADD_APD_ACTIVITY_FAILURE';
+
 export const UPDATE_APD_ACTIVITY_REQUEST = 'UPDATE_APD_ACTIVITY_REQUEST';
 export const UPDATE_APD_ACTIVITY_SUCCESS = 'UPDATE_APD_ACTIVITY_SUCCESS';
 export const UPDATE_APD_ACTIVITY_FAILURE = 'UPDATE_APD_ACTIVITY_FAILURE';
@@ -11,6 +15,18 @@ export const UPDATE_APD_ACTIVITY_FAILURE = 'UPDATE_APD_ACTIVITY_FAILURE';
 export const requestApd = () => ({ type: GET_APD_REQUEST });
 export const receiveApd = data => ({ type: GET_APD_SUCCESS, data });
 export const failApd = error => ({ type: GET_APD_FAILURE, error });
+
+export const requestApdActivityAdd = () => ({
+  type: ADD_APD_ACTIVITY_REQUEST
+});
+export const receiveApdActivityAdd = data => ({
+  type: ADD_APD_ACTIVITY_SUCCESS,
+  data
+});
+export const failApdActivityAdd = error => ({
+  type: ADD_APD_ACTIVITY_FAILURE,
+  error
+});
 
 export const requestApdActivityUpdate = () => ({
   type: UPDATE_APD_ACTIVITY_REQUEST
@@ -35,6 +51,18 @@ export const fetchApd = () => dispatch => {
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
       dispatch(failApd(reason));
+    });
+};
+
+export const addApdActivity = (apdID, activity) => dispatch => {
+  dispatch(requestApdActivityAdd());
+
+  return axios
+    .post(`/apds/${apdID}/activities`, activity)
+    .then(req => dispatch(receiveApdActivityAdd(req.data)))
+    .catch(error => {
+      const reason = error.response ? error.response.data : 'N/A/';
+      dispatch(failApdActivityAdd(reason));
     });
 };
 

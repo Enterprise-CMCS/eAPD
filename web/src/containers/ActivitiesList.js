@@ -13,10 +13,17 @@ class ActivitiesList extends Component {
     this.props.fetchApdDataIfNeeded();
   }
 
-  submit = activity =>
-    this.props.addApdActivity(this.props.apd.data.id, activity).then(() => {
-      // finish nav?
-    });
+  submit = data =>
+    this.props
+      .addApdActivity(this.props.apdID, data.activities)
+      .then(() => {
+        // finish nav?
+        console.log('all done with adding activities');
+      })
+      .catch(e => {
+        console.log('oh snaps something broke');
+        console.log(e);
+      });
 
   render() {
     const { apd, activities, goTo } = this.props;
@@ -28,7 +35,10 @@ class ActivitiesList extends Component {
           <p>Loading...</p>
         ) : (
           <Fragment>
-            <FormActivitiesList initialValues={{ activities }} />
+            <FormActivitiesList
+              onSubmit={this.submit}
+              initialValues={{ activities }}
+            />
 
             <PageNavButtons
               goTo={goTo}
@@ -46,12 +56,14 @@ ActivitiesList.propTypes = {
   activities: PropTypes.array.isRequired,
   addApdActivity: PropTypes.func.isRequired,
   apd: PropTypes.object.isRequired,
+  apdID: PropTypes.number.isRequired,
   fetchApdDataIfNeeded: PropTypes.func.isRequired,
   goTo: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ apd }) => ({
   apd,
+  apdID: apd.data.id,
   activities: apd.data.activities.map(activity => ({
     id: activity.id,
     name: activity.name,
