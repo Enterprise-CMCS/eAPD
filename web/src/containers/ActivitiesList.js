@@ -15,7 +15,7 @@ class ActivitiesList extends Component {
 
   submit = data =>
     this.props
-      .addApdActivity(this.props.apdID, data.activities)
+      .addApdActivity(this.props.apdID, data.activities.filter(a => a.name))
       .then(() => {
         // finish nav?
         console.log('all done with adding activities');
