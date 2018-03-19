@@ -79,9 +79,9 @@ tap.test(
             400,
             'gives a 400 status code'
           );
-          invalidTest.same(
+          invalidTest.match(
             body,
-            { error: 'edit-role-invalid' },
+            { error: /^edit-role-.+$/ },
             'sends a token indicating the failure'
           );
         });

@@ -56,9 +56,9 @@ tap.test('auth roles endpoint | POST /auth/roles', async postRolesTests => {
           json: situation.body || true
         });
         invalidTest.equal(response.statusCode, 400, 'gives a 400 status code');
-        invalidTest.same(
+        invalidTest.match(
           body,
-          { error: 'add-role-invalid' },
+          { error: /^add-role-.+$/ },
           'sends a token indicating the failure'
         );
       });
