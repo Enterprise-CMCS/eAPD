@@ -1,16 +1,22 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
 
+import PageNavButtons from '../components/PageNavButtons';
+import FormActivitiesList from '../components/FormActivitiesList';
 import withSidebar from '../components/withSidebar';
-import { fetchApdDataIfNeeded } from '../actions/apd';
+import { fetchApdDataIfNeeded, addApdActivity } from '../actions/apd';
 
 class ActivitiesList extends Component {
   componentDidMount() {
     this.props.fetchApdDataIfNeeded();
   }
+
+  submit = activity =>
+    this.props.addApdActivity(this.props.apd.data.id, activity).then(() => {
+      // finish nav?
+    });
 
   render() {
     const { apd, activities, goTo } = this.props;
@@ -22,31 +28,13 @@ class ActivitiesList extends Component {
           <p>Loading...</p>
         ) : (
           <Fragment>
-            <div className="mb3">
-              {activities.map(({ name, status }) => (
-                <div
-                  key={name}
-                  className="py1 relative border-bottom border-silver"
-                >
-                  <div className="absolute right-0">
-                    <Link to={`/activity-overview/${name}`}>
-                      {status ? 'Edit' : 'Start'}
-                    </Link>
-                  </div>
-                  {name}
-                </div>
-              ))}
-            </div>
-            <button
-              type="button"
-              className="btn btn-outline blue mr1"
-              onClick={() => goTo('/activities-start')}
-            >
-              Back
-            </button>
-            <button type="button" className="btn btn-primary">
-              Add another activity
-            </button>
+            <FormActivitiesList initialValues={{ activities }} />
+
+            <PageNavButtons
+              goTo={goTo}
+              prev="/activities-start/"
+              next="whoknows"
+            />
           </Fragment>
         )}
       </div>
@@ -56,6 +44,7 @@ class ActivitiesList extends Component {
 
 ActivitiesList.propTypes = {
   activities: PropTypes.array.isRequired,
+  addApdActivity: PropTypes.func.isRequired,
   apd: PropTypes.object.isRequired,
   fetchApdDataIfNeeded: PropTypes.func.isRequired,
   goTo: PropTypes.func.isRequired
@@ -73,7 +62,8 @@ const mapStateToProps = ({ apd }) => ({
 
 const mapDispatchToProps = {
   goTo: push,
-  fetchApdDataIfNeeded
+  fetchApdDataIfNeeded,
+  addApdActivity
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
