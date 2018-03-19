@@ -8,7 +8,7 @@ const FormActivitiesList = ({ handleSubmit }) => (
   <form onSubmit={handleSubmit}>
     <FieldArray
       name="activities"
-      component={({ fields }) => (
+      component={({ fields, meta: { submitting } }) => (
         <Fragment>
           {fields.map(activity => (
             <Field
@@ -26,6 +26,16 @@ const FormActivitiesList = ({ handleSubmit }) => (
           >
             Add another activity
           </button>
+
+          <div className="mt3">
+            <button
+              type="submit"
+              className="btn btn-primary bg-green"
+              disabled={submitting}
+            >
+              {submitting ? 'Saving' : 'Submit'}
+            </button>
+          </div>
         </Fragment>
       )}
     />
