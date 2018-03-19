@@ -2,10 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
 import { Field, FieldArray, reduxForm } from 'redux-form';
+import SectionHeader from './SectionHeader';
 import { Input } from '../components/Inputs';
 
 const FormActivitiesList = ({ handleSubmit }) => (
   <form onSubmit={handleSubmit}>
+    <SectionHeader>
+      List the activities for your HITECH program for 2018–2020:
+    </SectionHeader>
     <FieldArray
       name="activities"
       component={({ fields, meta: { submitting } }) => (
