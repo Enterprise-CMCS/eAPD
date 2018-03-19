@@ -32,6 +32,50 @@ module.exports = () => ({
       }
 
       return this.related('activities').pluck('name');
+    },
+
+    async validate(activities, model = this, activityModel) {
+      logger.silly('validating role model');
+      const ActivityModel = activityModel || this.related('activities').model;
+
+      if (model.hasChanged('name')) {
+        const name = model.attributes.name;
+
+        if (typeof name !== 'string' || name.length < 1) {
+          logger.verbose('name is not a string or is empty');
+          throw new Error('missing-name');
+        }
+
+        if (await model.where({ name }).fetch()) {
+          logger.verbose('another role already has this name');
+          throw new Error('duplicate-name');
+        }
+      }
+      logger.silly('role name is valid and unique');
+
+      if (!Array.isArray(activities)) {
+        logger.verbose('role activities is not an array');
+        throw new Error('invalid-activities');
+      }
+      logger.silly('role activities is an array');
+
+      if (activities.filter(id => typeof id !== 'number').length > 0) {
+        logger.verbose('role activities are not all numbers');
+        throw new Error('invalid-activities');
+      }
+      logger.silly('all role activities are numbers');
+
+      const validActivities = await ActivityModel.fetchAll({
+        columns: ['id']
+      });
+
+      const validIDs = validActivities.map(activity => activity.get('id'));
+      if (activities.some(activityID => !validIDs.includes(activityID))) {
+        logger.verbose('one or more activitiy IDs are invalid');
+        throw new Error('invalid-activities');
+      }
+      logger.silly('all role activities refer to real activities');
+      logger.silly('model is valid');
     }
   }
 });
