@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 import PageNavButtons from '../components/PageNavButtons';
-import FormActivitiesList from '../components/FormActivitiesList';
+import FormActivitiesStart from '../components/FormActivitiesStart';
 import withSidebar from '../components/withSidebar';
 import { fetchApdDataIfNeeded, addApdActivity } from '../actions/apd';
 
@@ -14,16 +14,10 @@ class ActivitiesList extends Component {
   }
 
   submit = data =>
-    this.props
-      .addApdActivity(this.props.apdID, data.activities.filter(a => a.name))
-      .then(() => {
-        // finish nav?
-        console.log('all done with adding activities');
-      })
-      .catch(e => {
-        console.log('oh snaps something broke');
-        console.log(e);
-      });
+    this.props.addApdActivity(
+      this.props.apdID,
+      data.activities.filter(a => a.name)
+    );
 
   render() {
     const { apd, activities, goTo } = this.props;
@@ -35,7 +29,7 @@ class ActivitiesList extends Component {
           <p>Loading...</p>
         ) : (
           <Fragment>
-            <FormActivitiesList
+            <FormActivitiesStart
               onSubmit={this.submit}
               initialValues={{ activities }}
             />
