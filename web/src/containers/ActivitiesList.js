@@ -1,50 +1,52 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
 
-import PageNavButtons from '../components/PageNavButtons';
-import FormActivitiesList from '../components/FormActivitiesList';
 import withSidebar from '../components/withSidebar';
-import { fetchApdDataIfNeeded, addApdActivity } from '../actions/apd';
+import { fetchApdDataIfNeeded } from '../actions/apd';
 
 class ActivitiesList extends Component {
   componentDidMount() {
     this.props.fetchApdDataIfNeeded();
   }
 
-  submit = data =>
-    this.props
-      .addApdActivity(this.props.apdID, data.activities.filter(a => a.name))
-      .then(() => {
-        // finish nav?
-        console.log('all done with adding activities');
-      })
-      .catch(e => {
-        console.log('oh snaps something broke');
-        console.log(e);
-      });
-
   render() {
     const { apd, activities, goTo } = this.props;
 
     return (
       <div>
-        <h1>Now let’s go over your program activities</h1>
+        <h1>Activities</h1>
         {!apd.loaded ? (
           <p>Loading...</p>
         ) : (
           <Fragment>
-            <FormActivitiesList
-              onSubmit={this.submit}
-              initialValues={{ activities }}
-            />
-
-            <PageNavButtons
-              goTo={goTo}
-              prev="/activities-start/"
-              next="whoknows"
-            />
+            Now we will fill out the details of each activity. You will be able
+            to describe the activity, its goals and approaches, schedule,
+            personnel, and expenses on the following screens.
+            <div className="mb3">
+              {activities.map(({ name, started }) => (
+                <div
+                  key={name}
+                  className="py1 relative border-bottom border-silver"
+                >
+                  <div className="absolute right-0">
+                    <Link to={`/activity-overview/${name}`}>
+                      {started ? 'Continue' : 'Start'}
+                    </Link>
+                  </div>
+                  {name}
+                </div>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="btn btn-outline blue mr1"
+              onClick={() => goTo('/activities-start')}
+            >
+              Back
+            </button>
           </Fragment>
         )}
       </div>
@@ -54,16 +56,13 @@ class ActivitiesList extends Component {
 
 ActivitiesList.propTypes = {
   activities: PropTypes.array.isRequired,
-  addApdActivity: PropTypes.func.isRequired,
   apd: PropTypes.object.isRequired,
-  apdID: PropTypes.number.isRequired,
   fetchApdDataIfNeeded: PropTypes.func.isRequired,
   goTo: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ apd }) => ({
   apd,
-  apdID: apd.data.id,
   activities: apd.data.activities.map(activity => ({
     id: activity.id,
     name: activity.name,
@@ -73,8 +72,7 @@ const mapStateToProps = ({ apd }) => ({
 
 const mapDispatchToProps = {
   goTo: push,
-  fetchApdDataIfNeeded,
-  addApdActivity
+  fetchApdDataIfNeeded
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
