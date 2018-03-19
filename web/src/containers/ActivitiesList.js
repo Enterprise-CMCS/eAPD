@@ -30,7 +30,7 @@ class ActivitiesList extends Component {
 
     return (
       <div>
-        <h1>Activities</h1>
+        <h1>Now let’s go over your program activities</h1>
         {!apd.loaded ? (
           <p>Loading...</p>
         ) : (
