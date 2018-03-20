@@ -6,7 +6,7 @@ exports.up = async knex => {
     table.text('explanation');
     table.integer('activity_id');
 
-    table.foreign('apd_id').references('activities.id');
+    table.foreign('activity_id').references('activities.id');
   });
 };
 
