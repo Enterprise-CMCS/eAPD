@@ -51,13 +51,16 @@ module.exports = (
 
       // Delete the previous goals and objectives for this activity
       logger.silly('deleting previous goals and objectives for this activity');
-      activity.related('goals').forEach(async goal => {
-        goal.related('objectives').forEach(async objective => {
-          await objective.destroy();
-        });
-        await goal.destroy();
+      const awaitingGoals = activity.related('goals').map(async goal => {
+        const awaitingObjectives = goal
+          .related('objectives')
+          .map(async objective => objective.destroy());
+        await Promise.all(awaitingObjectives);
+        return goal.destroy();
       });
+      await Promise.all(awaitingGoals);
 
+      const alsoAwaiting = [];
       const awaiting = req.body.map(async goal => {
         if (goal.description) {
           const goalModel = GoalModel.forge({
@@ -74,7 +77,7 @@ module.exports = (
                   description: objective,
                   activity_goal_id: goalID
                 });
-                await objectiveModel.save();
+                alsoAwaiting.push(objectiveModel.save());
               }
             });
           }
@@ -82,6 +85,7 @@ module.exports = (
       });
 
       await Promise.all(awaiting);
+      await Promise.all(alsoAwaiting);
 
       const updatedActivity = await ActivityModel.where({
         id: activityID
