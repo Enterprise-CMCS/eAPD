@@ -11,7 +11,8 @@ tap.test('activity data model', async activityModelTests => {
         apdActivity: { tableName: 'activities' },
         apdActivityGoal: { tableName: 'activity_goals' },
         apdActivityGoalObjective: { tableName: 'activity_goal_objectives' },
-        apdActivityExpense: { tableName: 'activity_expenses' }
+        apdActivityExpense: { tableName: 'activity_expenses' },
+        apdActivityExpenseEntry: { tableName: 'activity_expense_entries' }
       },
       'get the expected model definitions'
     );
@@ -68,6 +69,18 @@ tap.test('activity data model', async activityModelTests => {
       activity.apdActivityExpense.activity,
       'function',
       'creates a activity relationship for the expense model'
+    );
+
+    setupTests.type(
+      activity.apdActivityExpense.entries,
+      'function',
+      'creates a expense entry relationship for the expense model'
+    );
+
+    setupTests.type(
+      activity.apdActivityExpenseEntry.expense,
+      'function',
+      'creates an expense relationship for the expense entry model'
     );
   });
 
@@ -157,23 +170,6 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
-    'activity model sets up expenses relationship',
-    async apdTests => {
-      const self = {
-        belongsTo: sinon.stub().returns('frood')
-      };
-
-      const output = activity.apdActivityExpense.activity.bind(self)();
-
-      apdTests.ok(
-        self.belongsTo.calledWith('apdActivity'),
-        'sets up the relationship mapping to activity'
-      );
-      apdTests.equal(output, 'frood', 'returns the expected value');
-    }
-  );
-
-  activityModelTests.test(
     'activity model overrides toJSON method',
     async apdTests => {
       const self = {
@@ -204,6 +200,23 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
+    'goal model sets up activity relationship',
+    async apdTests => {
+      const self = {
+        belongsTo: sinon.stub().returns('frood')
+      };
+
+      const output = activity.apdActivityGoal.activity.bind(self)();
+
+      apdTests.ok(
+        self.belongsTo.calledWith('apdActivity'),
+        'sets up the relationship mapping to activity'
+      );
+      apdTests.equal(output, 'frood', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
     'goal model sets up objectives relationship',
     async apdTests => {
       const self = {
@@ -221,7 +234,7 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
-    'activity goal model overrides toJSON method',
+    'goal model overrides toJSON method',
     async apdTests => {
       const self = {
         get: sinon
@@ -265,7 +278,7 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
-    'activity objective model overrides toJSON method',
+    'objective model overrides toJSON method',
     async apdTests => {
       const self = {
         get: sinon
@@ -302,6 +315,22 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
+    'expense model sets up activity relationship',
+    async apdTests => {
+      const self = {
+        belongsTo: sinon.stub().returns('frood')
+      };
+
+      const output = activity.apdActivityExpense.activity.bind(self)();
+      apdTests.ok(
+        self.belongsTo.calledWith('apdActivity'),
+        'sets up the relationship mapping to activity'
+      );
+      apdTests.equal(output, 'frood', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
     'approach model overrides toJSON method',
     async apdTests => {
       const self = {
@@ -327,28 +356,84 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
-    'activity expense model overrides toJSON method',
+    'expense model sets up entries relationship',
+    async apdTests => {
+      const self = {
+        hasMany: sinon.stub().returns('flippity')
+      };
+
+      const output = activity.apdActivityExpense.entries.bind(self)();
+
+      apdTests.ok(
+        self.hasMany.calledWith('apdActivityExpenseEntry'),
+        'sets up the relationship mapping to entries'
+      );
+      apdTests.equal(output, 'flippity', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
+    'expense model overrides toJSON method',
     async apdTests => {
       const self = {
         get: sinon.stub(),
         related: sinon
           .stub()
-          .withArgs('activity')
-          .returns('having a good time')
+          .withArgs('entries')
+          .returns('$$$')
       };
-      self.get.withArgs('year').returns('2018');
-      self.get.withArgs('amount').returns(1000000);
-      self.get.withArgs('description').returns('la croix');
+      self.get.withArgs('id').returns(1);
+      self.get.withArgs('name').returns('paperclips');
 
       const output = activity.apdActivityExpense.toJSON.bind(self)();
 
       apdTests.match(
         output,
         {
+          id: 1,
+          name: 'paperclips',
+          entries: '$$$'
+        },
+        'gives us back the right JSON-ified object'
+      );
+    }
+  );
+
+  activityModelTests.test(
+    'expense entry model sets up expense relationship',
+    async apdTests => {
+      const self = {
+        belongsTo: sinon.stub().returns('frood')
+      };
+
+      const output = activity.apdActivityExpenseEntry.expense.bind(self)();
+
+      apdTests.ok(
+        self.belongsTo.calledWith('apdActivityExpense'),
+        'sets up the relationship mapping to expense'
+      );
+      apdTests.equal(output, 'frood', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
+    'expense entry model overrides toJSON method',
+    async apdTests => {
+      const self = { get: sinon.stub() };
+      self.get.withArgs('id').returns(1);
+      self.get.withArgs('year').returns('2018');
+      self.get.withArgs('amount').returns(1000000);
+      self.get.withArgs('description').returns('need it');
+
+      const output = activity.apdActivityExpenseEntry.toJSON.bind(self)();
+
+      apdTests.match(
+        output,
+        {
+          id: 1,
           year: '2018',
           amount: 1000000,
-          description: 'la croix',
-          activity: 'having a good time'
+          description: 'need it'
         },
         'gives us back the right JSON-ified object'
       );
