@@ -1,5 +1,5 @@
 exports.up = async knex => {
-  await knex.schema.createTable('approaches', table => {
+  await knex.schema.createTable('activity_approaches', table => {
     table.increments('id');
     table.text('description');
     table.text('alternatives');
