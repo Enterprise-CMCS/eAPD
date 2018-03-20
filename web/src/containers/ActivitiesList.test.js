@@ -50,7 +50,8 @@ describe('APD activities list container', () => {
             activities: [
               {
                 id: 1,
-                name: 'one'
+                name: 'one',
+                goals: ['hello']
               },
               {
                 id: 2,
@@ -74,7 +75,7 @@ describe('APD activities list container', () => {
           {
             id: 2,
             name: 'two',
-            started: true
+            started: false
           }
         ]
       });
