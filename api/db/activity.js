@@ -10,6 +10,10 @@ module.exports = () => ({
       return this.hasMany('apdActivityGoal');
     },
 
+    approaches() {
+      return this.hasMany('apdActivityApproach');
+    },
+
     expenses() {
       return this.hasMany('apdActivityExpense');
     },
@@ -19,7 +23,8 @@ module.exports = () => ({
         id: this.get('id'),
         name: this.get('name'),
         description: this.get('description'),
-        goals: this.related('goals')
+        goals: this.related('goals'),
+        approaches: this.related('approaches')
       };
     }
   },
@@ -52,6 +57,22 @@ module.exports = () => ({
 
     toJSON() {
       return this.get('description');
+    }
+  },
+
+  apdActivityApproach: {
+    tableName: 'activity_approaches',
+
+    activity() {
+      return this.belongsTo('apdActivity');
+    },
+
+    toJSON() {
+      return {
+        description: this.get('description'),
+        alternatives: this.get('alternatives'),
+        explanation: this.get('explanation')
+      };
     }
   },
 

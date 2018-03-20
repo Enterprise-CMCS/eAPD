@@ -113,6 +113,7 @@ tap.test(
               id: 1000,
               name: 'updated name',
               description: 'updated description',
+              approaches: [],
               goals: [
                 {
                   description: 'Be a super successful artist',
