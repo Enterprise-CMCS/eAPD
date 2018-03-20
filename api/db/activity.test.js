@@ -30,6 +30,12 @@ tap.test('activity data model', async activityModelTests => {
     );
 
     setupTests.type(
+      activity.apdActivity.approaches,
+      'function',
+      'creates an approaches relationship for the activity model'
+    );
+
+    setupTests.type(
       activity.apdActivity.expenses,
       'function',
       'creates a expenses relationship for the activity model'
@@ -51,6 +57,12 @@ tap.test('activity data model', async activityModelTests => {
       activity.apdActivityGoalObjective.goal,
       'function',
       'creates a goal relationship for the objective model'
+    );
+
+    setupTests.type(
+      activity.apdActivityApproach.activity,
+      'function',
+      'creates a activity relationship for the approach model'
     );
 
     setupTests.type(
@@ -107,6 +119,40 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
+    'activity model sets up goals relationship',
+    async apdTests => {
+      const self = {
+        belongsTo: sinon.stub().returns('frood')
+      };
+
+      const output = activity.apdActivityGoal.activity.bind(self)();
+
+      apdTests.ok(
+        self.belongsTo.calledWith('apdActivity'),
+        'sets up the relationship mapping to activity'
+      );
+      apdTests.equal(output, 'frood', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
+    'activity model sets up approaches relationship',
+    async apdTests => {
+      const self = {
+        hasMany: sinon.stub().returns('starsky')
+      };
+
+      const output = activity.apdActivity.approaches.bind(self)();
+
+      apdTests.ok(
+        self.hasMany.calledWith('apdActivityApproach'),
+        'sets up the relationship mapping to approach'
+      );
+      apdTests.equal(output, 'starsky', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
     'activity model sets up expenses relationship',
     async apdTests => {
       const self = {
@@ -128,14 +174,14 @@ tap.test('activity data model', async activityModelTests => {
     async apdTests => {
       const self = {
         get: sinon.stub(),
-        related: sinon
-          .stub()
-          .withArgs('goals')
-          .returns('goooooaaaaals')
+        related: sinon.stub()
       };
       self.get.withArgs('id').returns('eye-dee');
       self.get.withArgs('name').returns('Jerome Lee');
       self.get.withArgs('description').returns('cool CMS person');
+
+      self.related.withArgs('goals').returns('goooooaaaaals');
+      self.related.withArgs('approaches').returns('quietly from the left');
 
       const output = activity.apdActivity.toJSON.bind(self)();
 
@@ -145,7 +191,8 @@ tap.test('activity data model', async activityModelTests => {
           id: 'eye-dee',
           name: 'Jerome Lee',
           description: 'cool CMS person',
-          goals: 'goooooaaaaals'
+          goals: 'goooooaaaaals',
+          approaches: 'quietly from the left'
         },
         'gives us back the right JSON-ified object'
       );
@@ -251,6 +298,23 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
+    'approach model sets up activity relationship',
+    async apdTests => {
+      const self = {
+        belongsTo: sinon.stub().returns('hutch')
+      };
+
+      const output = activity.apdActivityApproach.activity.bind(self)();
+
+      apdTests.ok(
+        self.belongsTo.calledWith('apdActivity'),
+        'sets up the relationship mapping to activity'
+      );
+      apdTests.equal(output, 'hutch', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
     'expense model sets up activity relationship',
     async apdTests => {
       const self = {
@@ -258,12 +322,36 @@ tap.test('activity data model', async activityModelTests => {
       };
 
       const output = activity.apdActivityExpense.activity.bind(self)();
-
       apdTests.ok(
         self.belongsTo.calledWith('apdActivity'),
         'sets up the relationship mapping to activity'
       );
       apdTests.equal(output, 'frood', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
+    'approach model overrides toJSON method',
+    async apdTests => {
+      const self = {
+        get: sinon.stub()
+      };
+
+      self.get.withArgs('description').returns('going to Mars is the future');
+      self.get.withArgs('alternatives').returns('staying on Earth forever');
+      self.get.withArgs('explanation').returns('Mars is probably cool');
+
+      const output = activity.apdActivityApproach.toJSON.bind(self)();
+
+      apdTests.match(
+        output,
+        {
+          description: 'going to Mars is the future',
+          alternatives: 'staying on Earth forever',
+          explanation: 'Mars is probably cool'
+        },
+        'gives us back the right JSON-ified object'
+      );
     }
   );
 
