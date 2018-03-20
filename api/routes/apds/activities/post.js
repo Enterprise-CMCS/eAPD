@@ -91,7 +91,7 @@ module.exports = (
         await syncActivitiesListWithDB(
           req.body,
           existingActivities,
-          apd.id,
+          apd.get('id'),
           ActivityModel
         );
       } else {
@@ -116,7 +116,7 @@ module.exports = (
         apd_id: apd.get('id')
       }).fetchAll();
 
-      return res.send(allActivities);
+      return res.send(allActivities.toJSON());
     } catch (e) {
       logger.error(req, e);
       return res.status(500).end();
