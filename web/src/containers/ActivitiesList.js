@@ -22,15 +22,18 @@ class ActivitiesList extends Component {
           <p>Loading...</p>
         ) : (
           <Fragment>
+            Now we will fill out the details of each activity. You will be able
+            to describe the activity, its goals and approaches, schedule,
+            personnel, and expenses on the following screens.
             <div className="mb3">
-              {activities.map(({ name, status }) => (
+              {activities.map(({ name, started }) => (
                 <div
                   key={name}
                   className="py1 relative border-bottom border-silver"
                 >
                   <div className="absolute right-0">
                     <Link to={`/activity-overview/${name}`}>
-                      {status ? 'Edit' : 'Start'}
+                      {started ? 'Continue' : 'Start'}
                     </Link>
                   </div>
                   {name}
@@ -43,9 +46,6 @@ class ActivitiesList extends Component {
               onClick={() => goTo('/activities-start')}
             >
               Back
-            </button>
-            <button type="button" className="btn btn-primary">
-              Add another activity
             </button>
           </Fragment>
         )}
@@ -66,8 +66,7 @@ const mapStateToProps = ({ apd }) => ({
   activities: apd.data.activities.map(activity => ({
     id: activity.id,
     name: activity.name,
-    // TODO [GW] figure out how this should be set
-    started: true
+    started: !!(activity.goals && activity.goals.length > 0)
   }))
 });
 

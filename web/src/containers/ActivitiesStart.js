@@ -1,42 +1,82 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { bindActionCreators } from 'redux';
 
-import FormActivitiesStart from '../components/FormActivitiesStart';
 import PageNavButtons from '../components/PageNavButtons';
-import FormLogger from '../util/formLogger';
+import FormActivitiesStart from '../components/FormActivitiesStart';
 import withSidebar from '../components/withSidebar';
+import { fetchApdDataIfNeeded, addApdActivity } from '../actions/apd';
 
-class ActivitiesStart extends Component {
-  showResults = data => {
-    console.log(data);
-  };
+class ActivitiesList extends Component {
+  componentDidMount() {
+    this.props.fetchApdDataIfNeeded();
+  }
+
+  submit = data =>
+    this.props.addApdActivity(
+      this.props.apdID,
+      data.activities.filter(a => a.name)
+    );
 
   render() {
-    const { goTo } = this.props;
+    const { apd, activities, goTo } = this.props;
 
     return (
       <div>
-        <FormLogger />
         <h1>Now let’s go over your program activities</h1>
-        <FormActivitiesStart onSubmit={this.showResults} />
-        <PageNavButtons
-          goTo={goTo}
-          prev="/apd-overview"
-          next="/activities-list"
-        />
+        {!apd.loaded ? (
+          <p>Loading...</p>
+        ) : (
+          <Fragment>
+            <FormActivitiesStart
+              onSubmit={this.submit}
+              initialValues={{ activities }}
+            />
+
+            <PageNavButtons
+              goTo={goTo}
+              prev="/apd-overview/"
+              next="/activities-list"
+            />
+          </Fragment>
+        )}
       </div>
     );
   }
 }
 
-ActivitiesStart.propTypes = {
+ActivitiesList.propTypes = {
+  activities: PropTypes.array.isRequired,
+  addApdActivity: PropTypes.func.isRequired,
+  apd: PropTypes.object.isRequired,
+  apdID: PropTypes.number.isRequired,
+  fetchApdDataIfNeeded: PropTypes.func.isRequired,
   goTo: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ goTo: path => push(path) }, dispatch);
+const mapStateToProps = ({ apd }) => ({
+  apd,
+  apdID: apd.data.id,
+  activities: apd.data.activities.map(activity => ({
+    id: activity.id,
+    name: activity.name,
+    started: activity.goals.length > 0
+  }))
+});
 
-export default connect(null, mapDispatchToProps)(withSidebar(ActivitiesStart));
+const mapDispatchToProps = {
+  goTo: push,
+  fetchApdDataIfNeeded,
+  addApdActivity
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withSidebar(ActivitiesList)
+);
+
+export {
+  ActivitiesList as RawActivitiesList,
+  mapStateToProps,
+  mapDispatchToProps
+};

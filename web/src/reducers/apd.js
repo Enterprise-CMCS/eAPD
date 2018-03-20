@@ -2,6 +2,9 @@ import {
   GET_APD_REQUEST,
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
+  ADD_APD_ACTIVITIES_REQUEST,
+  ADD_APD_ACTIVITIES_SUCCESS,
+  ADD_APD_ACTIVITIES_FAILURE,
   UPDATE_APD_ACTIVITY_REQUEST,
   UPDATE_APD_ACTIVITY_SUCCESS,
   UPDATE_APD_ACTIVITY_FAILURE
@@ -30,6 +33,15 @@ const apdReducer = (apd = initialState, action) => {
       };
     case GET_APD_FAILURE:
       return { ...apd, fetching: false, error: action.error };
+    case ADD_APD_ACTIVITIES_REQUEST:
+      return { ...apd, error: '' };
+    case ADD_APD_ACTIVITIES_SUCCESS: {
+      const newState = { ...apd };
+      newState.data.activities = action.data;
+      return newState;
+    }
+    case ADD_APD_ACTIVITIES_FAILURE:
+      return { ...apd, error: action.error };
     case UPDATE_APD_ACTIVITY_REQUEST:
       return { ...apd, error: '' };
     case UPDATE_APD_ACTIVITY_SUCCESS: {

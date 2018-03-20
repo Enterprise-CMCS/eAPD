@@ -55,6 +55,62 @@ describe('APD reducer', () => {
     });
   });
 
+  it('should handle a request to add an APD activity', () => {
+    expect(apd(initialState, { type: 'ADD_APD_ACTIVITIES_REQUEST' })).toEqual({
+      data: {
+        id: '',
+        activities: []
+      },
+      fetching: false,
+      loaded: false,
+      error: ''
+    });
+  });
+
+  it('should handle a successful APD activity add', () => {
+    const initialWithActivity = {
+      data: {
+        id: '',
+        activities: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Christie' }]
+      },
+      fetching: false,
+      loaded: false,
+      error: ''
+    };
+
+    expect(
+      apd(initialWithActivity, {
+        type: 'ADD_APD_ACTIVITIES_SUCCESS',
+        data: [{ id: 1, name: 'Bob' }]
+      })
+    ).toEqual({
+      data: {
+        id: '',
+        activities: [{ id: 1, name: 'Bob' }]
+      },
+      fetching: false,
+      loaded: false,
+      error: ''
+    });
+  });
+
+  it('should handle an unsuccessful APD activity add', () => {
+    expect(
+      apd(initialState, {
+        type: 'ADD_APD_ACTIVITIES_FAILURE',
+        error: 'some error'
+      })
+    ).toEqual({
+      data: {
+        id: '',
+        activities: []
+      },
+      fetching: false,
+      loaded: false,
+      error: 'some error'
+    });
+  });
+
   it('should handle a request to update an APD activity', () => {
     expect(apd(initialState, { type: 'UPDATE_APD_ACTIVITY_REQUEST' })).toEqual({
       data: {
