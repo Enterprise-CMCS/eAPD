@@ -83,12 +83,32 @@ module.exports = () => ({
       return this.belongsTo('apdActivity');
     },
 
+    entries() {
+      return this.hasMany('apdActivityExpenseEntry');
+    },
+
     toJSON() {
       return {
+        id: this.get('id'),
+        name: this.get('name'),
+        entries: this.related('entries')
+      };
+    }
+  },
+
+  apdActivityExpenseEntry: {
+    tableName: 'activity_expense_entries',
+
+    expense() {
+      return this.belongsTo('apdActivityExpense');
+    },
+
+    toJSON() {
+      return {
+        id: this.get('id'),
         year: this.get('year'),
         amount: this.get('amount'),
-        description: this.get('description'),
-        activity: this.related('activity')
+        description: this.get('description')
       };
     }
   }
