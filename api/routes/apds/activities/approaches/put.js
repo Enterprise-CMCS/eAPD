@@ -68,7 +68,13 @@ module.exports = (
         })
       );
 
-      return res.status(200).end();
+      const updatedActivity = await ActivityModel.where({
+        id: activityID
+      }).fetch({
+        withRelated: ['goals.objectives']
+      });
+
+      return res.send(updatedActivity.toJSON());
     } catch (e) {
       logger.error(req, e);
       return res.status(500).end();
