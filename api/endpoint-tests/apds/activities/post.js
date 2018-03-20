@@ -52,67 +52,172 @@ tap.test(
         );
 
         authenticated.test(
-          'with an activity name that already exists for the APD',
-          async invalidTest => {
-            const { response, body } = await request.post(url(1000), {
-              jar: cookies,
-              json: {
-                name: 'Find Success'
-              }
-            });
+          'when creating a single new activity',
+          async singleTests => {
+            await db().seed.run();
 
-            invalidTest.equal(
-              response.statusCode,
-              400,
-              'gives a 400 status code'
+            singleTests.test(
+              'with an activity name that already exists for the APD',
+              async invalidTest => {
+                const { response, body } = await request.post(url(1000), {
+                  jar: cookies,
+                  json: {
+                    name: 'Find Success'
+                  }
+                });
+
+                invalidTest.equal(
+                  response.statusCode,
+                  400,
+                  'gives a 400 status code'
+                );
+                invalidTest.same(
+                  body,
+                  { error: 'add-activity-name-exists' },
+                  'sends back an error token'
+                );
+              }
             );
-            invalidTest.same(
-              body,
-              { error: 'add-activity-name-exists' },
-              'sends back an error token'
+
+            singleTests.test(
+              'with an empty activity name',
+              async invalidTest => {
+                const { response, body } = await request.post(url(1000), {
+                  jar: cookies,
+                  json: {
+                    name: ''
+                  }
+                });
+
+                invalidTest.equal(
+                  response.statusCode,
+                  400,
+                  'gives a 400 status code'
+                );
+                invalidTest.same(
+                  body,
+                  { error: 'add-activity-invalid-name' },
+                  'sends back an error token'
+                );
+              }
             );
+
+            singleTests.test('with a valid activity', async validTest => {
+              const { response, body } = await request.post(url(1000), {
+                jar: cookies,
+                json: {
+                  name: 'new activity name',
+                  description:
+                    'description is ignored when the activity is created'
+                }
+              });
+
+              validTest.equal(
+                response.statusCode,
+                200,
+                'gives a 200 status code'
+              );
+              validTest.match(
+                body,
+                [
+                  {
+                    id: 1000,
+                    name: 'Find Success'
+                  },
+                  {
+                    id: 1001,
+                    name: 'My Second Activity'
+                  },
+                  {
+                    name: 'new activity name'
+                  }
+                ],
+                'sends back all activities, including the new activity object'
+              );
+              validTest.ok(
+                !Number.isNaN(+body[2].id),
+                'new activity ID is a number'
+              );
+            });
           }
         );
 
-        authenticated.test('with an empty activity name', async invalidTest => {
-          const { response, body } = await request.post(url(1000), {
-            jar: cookies,
-            json: {
-              name: ''
-            }
-          });
+        authenticated.test(
+          'when sending multiple activities',
+          async multipleTests => {
+            await db().seed.run();
 
-          invalidTest.equal(
-            response.statusCode,
-            400,
-            'gives a 400 status code'
-          );
-          invalidTest.same(
-            body,
-            { error: 'add-activity-invalid-name' },
-            'sends back an error token'
-          );
-        });
+            multipleTests.test(
+              'when an activity has an invalid name',
+              async invalidTest => {
+                const { response, body } = await request.post(url(1000), {
+                  jar: cookies,
+                  json: [
+                    {
+                      name: 'hello'
+                    },
+                    {
+                      name: 1
+                    }
+                  ]
+                });
 
-        authenticated.test('with a valid activity', async validTest => {
-          const { response, body } = await request.post(url(1000), {
-            jar: cookies,
-            json: {
-              name: 'new activity name',
-              description: 'description is ignored when the activity is created'
-            }
-          });
+                invalidTest.equal(
+                  response.statusCode,
+                  400,
+                  'gives a 400 status code'
+                );
+                invalidTest.same(
+                  body,
+                  { error: 'add-activity-invalid-name' },
+                  'sends back an error token'
+                );
+              }
+            );
 
-          validTest.equal(response.statusCode, 200, 'gives a 200 status code');
-          validTest.match(
-            body,
-            {
-              name: 'new activity name'
-            },
-            'sends back the new activity object'
-          );
-          validTest.ok(!Number.isNaN(+body.id), 'new activity ID is a number');
-        });
+            multipleTests.test('with valid activities', async validTest => {
+              const { response, body } = await request.post(url(1000), {
+                jar: cookies,
+                json: [
+                  {
+                    name: 'new activity name'
+                  },
+                  {
+                    id: 1001,
+                    name: 'activity new name'
+                  }
+                ]
+              });
+
+              validTest.equal(
+                response.statusCode,
+                200,
+                'gives a 200 status code'
+              );
+              validTest.match(
+                body,
+                [
+                  {
+                    id: 1000,
+                    name: 'Find Success'
+                  },
+                  {
+                    id: 1001,
+                    name: 'activity new name'
+                  },
+                  {
+                    name: 'new activity name'
+                  }
+                ],
+                'sends back all activities, including new and updated activity objects'
+              );
+              validTest.ok(
+                !Number.isNaN(+body[2].id),
+                'new activity ID is a number'
+              );
+            });
+          }
+        );
       }
     );
   }

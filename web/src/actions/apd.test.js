@@ -28,6 +28,24 @@ describe('state actions', () => {
     });
   });
 
+  it('requestApdActivitiesAdd should create ADD_APD_ACTIVITIES_REQUEST action', () => {
+    expect(actions.requestApdActivitiesAdd()).toEqual({
+      type: actions.ADD_APD_ACTIVITIES_REQUEST
+    });
+  });
+
+  it('receiveApdActivitiesAdd should create ADD_APD_ACTIVITIES_REQUEST action', () => {
+    expect(actions.receiveApdActivitiesAdd()).toEqual({
+      type: actions.ADD_APD_ACTIVITIES_SUCCESS
+    });
+  });
+
+  it('failApdActivitiesAdd should create ADD_APD_ACTIVITIES_REQUEST action', () => {
+    expect(actions.failApdActivitiesAdd()).toEqual({
+      type: actions.ADD_APD_ACTIVITIES_FAILURE
+    });
+  });
+
   it('requestApdActivityUpdate should create UPDATE_APD_ACTIVITY_REQUEST action', () => {
     expect(actions.requestApdActivityUpdate()).toEqual({
       type: actions.UPDATE_APD_ACTIVITY_REQUEST
@@ -83,6 +101,40 @@ describe('state actions', () => {
     });
   });
 
+  describe('addApdActivity (async)', () => {
+    afterEach(() => {
+      fetchMock.reset();
+    });
+
+    it('creates ADD_APD_ACTIVITIES_SUCCESS after successful APD activity creation', () => {
+      const store = mockStore({});
+      fetchMock.onPost('/apds/apd-id/activities').reply(200, { foo: 'bar' });
+
+      const expectedActions = [
+        { type: actions.ADD_APD_ACTIVITIES_REQUEST },
+        { type: actions.ADD_APD_ACTIVITIES_SUCCESS, data: { foo: 'bar' } }
+      ];
+
+      return store.dispatch(actions.addApdActivity('apd-id', {})).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+
+    it('creates ADD_APD_ACTIVITY_FAILURE after unsuccessful APD activity update', () => {
+      const store = mockStore({});
+      fetchMock.onPost('/apds/apd-id/activities').reply(403, 'foo');
+
+      const expectedActions = [
+        { type: actions.ADD_APD_ACTIVITIES_REQUEST },
+        { type: actions.ADD_APD_ACTIVITIES_FAILURE, error: 'foo' }
+      ];
+
+      return store.dispatch(actions.addApdActivity('apd-id', {})).catch(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
+
   describe('updateApdActivity (async)', () => {
     afterEach(() => {
       fetchMock.reset();
@@ -121,7 +173,7 @@ describe('state actions', () => {
     });
   });
 
-  describe('updateApdActivity (async)', () => {
+  describe('updateApdActivityGoals (async)', () => {
     afterEach(() => {
       fetchMock.reset();
     });
