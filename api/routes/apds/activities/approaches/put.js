@@ -58,20 +58,23 @@ module.exports = (
 
       await Promise.all(
         req.body.map(async ({ description, alternatives, explanation }) => {
-          const approach = ApproachModel.forge({
-            description,
-            alternatives,
-            explanation,
-            activity_id: activityID
-          });
-          await approach.save();
+          // don't insert empty objects, that's silly
+          if (description || alternatives || explanation) {
+            const approach = ApproachModel.forge({
+              description,
+              alternatives,
+              explanation,
+              activity_id: activityID
+            });
+            await approach.save();
+          }
         })
       );
 
       const updatedActivity = await ActivityModel.where({
         id: activityID
       }).fetch({
-        withRelated: ['goals.objectives']
+        withRelated: ['goals.objectives', 'approaches']
       });
 
       return res.send(updatedActivity.toJSON());

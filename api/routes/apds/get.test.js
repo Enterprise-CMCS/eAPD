@@ -81,7 +81,7 @@ tap.test('apds GET endpoint', async endpointTest => {
       validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
       validTest.ok(
         ApdModel.fetchAll.calledWith({
-          withRelated: ['activities.goals.objectives']
+          withRelated: ['activities.goals.objectives', 'activities.approaches']
         }),
         'fetches related activities, goals, and objectives'
       );

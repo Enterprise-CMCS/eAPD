@@ -157,6 +157,10 @@ tap.test('apd activity approach PUT endpoint', async endpointTest => {
               description: 'approach 2',
               alternatives: 'alt 2',
               explanation: 'exp 2'
+            },
+            {
+              invalid: 'this one is ignored',
+              because: 'it does not have any expected fields'
             }
           ]
         };
