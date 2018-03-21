@@ -7,7 +7,7 @@ const {
   unauthenticatedTest
 } = require('../../utils');
 
-tap.only(
+tap.saveTest(
   'APD activity goals endpoint | PUT /activities/:id/goals',
   async putGoalsTest => {
     const url = apdID => getFullPath(`/activities/${apdID}/goals`);
