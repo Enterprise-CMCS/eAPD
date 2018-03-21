@@ -48,6 +48,7 @@ tap.test('APD endpoint | GET /apds', async getAPDsTest => {
                 id: 1000,
                 name: 'Find Success',
                 description: 'Some text goes here',
+                expenses: [],
                 goals: [
                   {
                     description: 'Be a super successful artist',
@@ -75,6 +76,7 @@ tap.test('APD endpoint | GET /apds', async getAPDsTest => {
                 id: 1001,
                 name: 'My Second Activity',
                 description: 'More gunk',
+                expenses: [],
                 goals: []
               }
             ]
