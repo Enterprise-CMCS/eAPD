@@ -24,7 +24,8 @@ module.exports = () => ({
         name: this.get('name'),
         description: this.get('description'),
         goals: this.related('goals'),
-        approaches: this.related('approaches')
+        approaches: this.related('approaches'),
+        expenses: this.related('expenses')
       };
     }
   },
@@ -84,7 +85,7 @@ module.exports = () => ({
     },
 
     entries() {
-      return this.hasMany('apdActivityExpenseEntry');
+      return this.hasMany('apdActivityExpenseEntry', 'expense_id');
     },
 
     toJSON() {
@@ -100,7 +101,7 @@ module.exports = () => ({
     tableName: 'activity_expense_entries',
 
     expense() {
-      return this.belongsTo('apdActivityExpense');
+      return this.belongsTo('apdActivityExpense', 'expense_id');
     },
 
     toJSON() {
