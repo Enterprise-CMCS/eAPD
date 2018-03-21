@@ -2,7 +2,7 @@ const logger = require('../../../logger')('apd activites route index');
 const post = require('./post');
 const put = require('./put');
 const goals = require('./goals/put');
-const approaches = require('./approaches');
+const approaches = require('./approaches/put');
 
 module.exports = (
   app,
