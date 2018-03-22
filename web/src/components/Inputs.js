@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Input = props => <input className="m0 input" {...props} />;
-const Textarea = props => <textarea className="m0 textarea" {...props} />;
+const Textarea = props => (
+  <textarea className="m0 textarea" spellCheck="true" {...props} />
+);
 
 // a HOC for Text / Textarea input that includes
 // div wrapper and accompanying label
