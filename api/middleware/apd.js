@@ -75,8 +75,8 @@ module.exports.userCanEditAPD = (model = ApdModel, idParam = 'id') => {
 };
 
 module.exports.loadActivity = (
-  model = defaultActivityModel,
-  idParam = 'id'
+  idParam = 'id',
+  model = defaultActivityModel
 ) => {
   if (!cache[['loadActivity', model, idParam]]) {
     const loadActivity = async (req, res, next) => {
