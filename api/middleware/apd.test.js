@@ -173,7 +173,7 @@ tap.test('APD-related middleware', async middlewareTests => {
         OtherModel.fetch.resolves(false);
         const req = { meta: {}, params: { 'activity-id': 7 } };
 
-        await middleware.loadActivity(OtherModel, 'activity-id')(
+        await middleware.loadActivity('activity-id', OtherModel)(
           req,
           res,
           next
@@ -191,7 +191,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       OtherModel.fetch.resolves(activity);
       const req = { meta: {}, params: { 'activity-id': 7 } };
 
-      await middleware.loadActivity(OtherModel, 'activity-id')(req, res, next);
+      await middleware.loadActivity('activity-id', OtherModel)(req, res, next);
 
       validTest.ok(res.status.notCalled, 'HTTP status is not set');
       validTest.ok(res.end.notCalled, 'response is not closed');
