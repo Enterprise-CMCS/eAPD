@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const canMiddleware = require('../../../auth/middleware').can('delete-roles');
+const can = require('../../../middleware').can;
 const deleteEndpoint = require('./delete');
 
 tap.test('auth roles DELETE endpoint', async endpointTest => {
@@ -32,7 +32,11 @@ tap.test('auth roles DELETE endpoint', async endpointTest => {
     deleteEndpoint(app, RoleModel);
 
     setupTest.ok(
-      app.delete.calledWith('/auth/roles/:id', canMiddleware, sinon.match.func),
+      app.delete.calledWith(
+        '/auth/roles/:id',
+        can('delete-roles'),
+        sinon.match.func
+      ),
       'roles DELETE endpoint is registered'
     );
   });

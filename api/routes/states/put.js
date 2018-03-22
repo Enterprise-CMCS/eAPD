@@ -1,8 +1,7 @@
 const logger = require('../../logger')('states route put');
 const joi = require('joi');
 const pick = require('lodash.pick');
-const can = require('../../auth/middleware').can;
-const loggedIn = require('../../auth/middleware').loggedIn;
+const { can, loggedIn } = require('../../middleware');
 const defaultDataHelper = require('./data');
 
 module.exports = (app, dataHelper = defaultDataHelper) => {

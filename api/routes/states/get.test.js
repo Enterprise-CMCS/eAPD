@@ -1,8 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const loggedInMiddleware = require('../../auth/middleware').loggedIn;
-const canMiddleware = require('../../auth/middleware').can('view-state');
+const { loggedIn, can } = require('../../middleware');
 const getEndpoint = require('./get');
 
 tap.test('states GET endpoints', async endpointTest => {
@@ -45,11 +44,11 @@ tap.test('states GET endpoints', async endpointTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/states/:id', canMiddleware, sinon.match.func),
+      app.get.calledWith('/states/:id', can('view-state'), sinon.match.func),
       'specific states GET endpoint is registered'
     );
     setupTest.ok(
-      app.get.calledWith('/states', loggedInMiddleware, sinon.match.func),
+      app.get.calledWith('/states', loggedIn, sinon.match.func),
       'user-specific states GET endpoint is registered'
     );
   });
