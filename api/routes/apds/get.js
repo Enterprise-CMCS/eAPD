@@ -1,6 +1,6 @@
 const logger = require('../../logger')('apds route get');
 const defaultApdModel = require('../../db').models.apd;
-const loggedIn = require('../../auth/middleware').loggedIn;
+const loggedIn = require('../../middleware').loggedIn;
 
 module.exports = (app, ApdModel = defaultApdModel) => {
   logger.silly('setting up GET /apds route');

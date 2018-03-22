@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const loggedInMiddleware = require('../../auth/middleware').loggedIn;
+const loggedIn = require('../..//middleware').loggedIn;
 const getEndpoint = require('./get');
 
 tap.test('me GET endpoint', async endpointTest => {
@@ -28,7 +28,7 @@ tap.test('me GET endpoint', async endpointTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/me', loggedInMiddleware, sinon.match.func),
+      app.get.calledWith('/me', loggedIn, sinon.match.func),
       'me GET endpoint is registered'
     );
   });

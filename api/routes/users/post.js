@@ -1,6 +1,6 @@
 const logger = require('../../logger')('users route post');
 const defaultUserModel = require('../../db').models.user;
-const can = require('../../auth/middleware').can;
+const can = require('../../middleware').can;
 
 module.exports = (app, UserModel = defaultUserModel) => {
   logger.silly('setting up POST /users route');

@@ -61,7 +61,8 @@ tap.test('passport serialization', async serializationTest => {
         get.withArgs('email').returns('test-email');
         get.withArgs('id').returns('test-id');
         activities.resolves([]);
-        userModel.fetch.resolves({ get, activities });
+        const user = { get, activities };
+        userModel.fetch.resolves(user);
 
         await serialization.deserializeUser(userID, doneCallback, userModel);
 
@@ -71,7 +72,8 @@ tap.test('passport serialization', async serializationTest => {
             id: 'test-id',
             role: undefined,
             state: undefined,
-            activities: sinon.match.array.deepEquals([])
+            activities: sinon.match.array.deepEquals([]),
+            model: user
           }),
           'deserializes the user ID to an object'
         );
@@ -82,7 +84,8 @@ tap.test('passport serialization', async serializationTest => {
         get.withArgs('id').returns('test-id');
         get.withArgs('auth_role').returns('test-role');
         activities.resolves(['activity 1', 'activity 2']);
-        userModel.fetch.resolves({ get, activities });
+        const user = { get, activities };
+        userModel.fetch.resolves(user);
 
         await serialization.deserializeUser(userID, doneCallback, userModel);
 
@@ -95,7 +98,8 @@ tap.test('passport serialization', async serializationTest => {
             activities: sinon.match.array.deepEquals([
               'activity 1',
               'activity 2'
-            ])
+            ]),
+            model: user
           }),
           'deserializes the user ID to an object'
         );
@@ -107,7 +111,8 @@ tap.test('passport serialization', async serializationTest => {
         get.withArgs('auth_role').returns('test-role');
         get.withArgs('state_id').returns('test-state');
         activities.resolves(['activity 1', 'activity 2']);
-        userModel.fetch.resolves({ get, activities });
+        const user = { get, activities };
+        userModel.fetch.resolves(user);
 
         await serialization.deserializeUser(userID, doneCallback, userModel);
 
@@ -120,7 +125,8 @@ tap.test('passport serialization', async serializationTest => {
             activities: sinon.match.array.deepEquals([
               'activity 1',
               'activity 2'
-            ])
+            ]),
+            model: user
           }),
           'deserializes the user ID to an object'
         );

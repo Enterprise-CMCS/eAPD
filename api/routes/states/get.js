@@ -1,8 +1,7 @@
 const logger = require('../../logger')('states route get');
 const defaultStateModel = require('../../db').models.state;
 const defaultUserModel = require('../../db').models.user;
-const can = require('../../auth/middleware').can;
-const loggedIn = require('../../auth/middleware').loggedIn;
+const { can, loggedIn } = require('../../middleware');
 
 const stateFields = [
   'id',

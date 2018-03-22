@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const loggedInMiddleware = require('../../auth/middleware').loggedIn;
+const loggedIn = require('../../middleware').loggedIn;
 const getEndpoint = require('./get');
 
 tap.test('apds GET endpoint', async endpointTest => {
@@ -35,7 +35,7 @@ tap.test('apds GET endpoint', async endpointTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/apds', loggedInMiddleware, sinon.match.func),
+      app.get.calledWith('/apds', loggedIn, sinon.match.func),
       'user-specific apds GET endpoint is registered'
     );
   });
