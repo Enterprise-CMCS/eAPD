@@ -26,6 +26,211 @@ ShallowWrapper {
         >
           Hello!
         </p>
+        <hr />
+        <div
+          className="left-align"
+        >
+          <img
+            alt="Alabama"
+            src="/static/img/al.svg"
+          />
+          <img
+            alt="Alaska"
+            src="/static/img/ak.svg"
+          />
+          <img
+            alt="Arizona"
+            src="/static/img/az.svg"
+          />
+          <img
+            alt="Arkansas"
+            src="/static/img/ar.svg"
+          />
+          <img
+            alt="California"
+            src="/static/img/ca.svg"
+          />
+          <img
+            alt="Colorado"
+            src="/static/img/co.svg"
+          />
+          <img
+            alt="Connecticut"
+            src="/static/img/ct.svg"
+          />
+          <img
+            alt="Delaware"
+            src="/static/img/de.svg"
+          />
+          <img
+            alt="Florida"
+            src="/static/img/fl.svg"
+          />
+          <img
+            alt="Georgia"
+            src="/static/img/ga.svg"
+          />
+          <img
+            alt="Hawaii"
+            src="/static/img/hi.svg"
+          />
+          <img
+            alt="Idaho"
+            src="/static/img/id.svg"
+          />
+          <img
+            alt="Iowa"
+            src="/static/img/ia.svg"
+          />
+          <img
+            alt="Illinois"
+            src="/static/img/il.svg"
+          />
+          <img
+            alt="Indiana"
+            src="/static/img/in.svg"
+          />
+          <img
+            alt="Kansas"
+            src="/static/img/ks.svg"
+          />
+          <img
+            alt="Kentucky"
+            src="/static/img/ky.svg"
+          />
+          <img
+            alt="Louisiana"
+            src="/static/img/la.svg"
+          />
+          <img
+            alt="Maine"
+            src="/static/img/me.svg"
+          />
+          <img
+            alt="Maryland"
+            src="/static/img/md.svg"
+          />
+          <img
+            alt="Massachusetts"
+            src="/static/img/ma.svg"
+          />
+          <img
+            alt="Michigan"
+            src="/static/img/mi.svg"
+          />
+          <img
+            alt="Minnesota"
+            src="/static/img/mn.svg"
+          />
+          <img
+            alt="Mississippi"
+            src="/static/img/ms.svg"
+          />
+          <img
+            alt="Missouri"
+            src="/static/img/mo.svg"
+          />
+          <img
+            alt="Montana"
+            src="/static/img/mt.svg"
+          />
+          <img
+            alt="Nebraska"
+            src="/static/img/ne.svg"
+          />
+          <img
+            alt="North Carolina"
+            src="/static/img/nc.svg"
+          />
+          <img
+            alt="North Dakota"
+            src="/static/img/nd.svg"
+          />
+          <img
+            alt="New Hampshire"
+            src="/static/img/nh.svg"
+          />
+          <img
+            alt="New Jersey"
+            src="/static/img/nj.svg"
+          />
+          <img
+            alt="New Mexico"
+            src="/static/img/nm.svg"
+          />
+          <img
+            alt="Nevada"
+            src="/static/img/nv.svg"
+          />
+          <img
+            alt="New York"
+            src="/static/img/ny.svg"
+          />
+          <img
+            alt="Ohio"
+            src="/static/img/oh.svg"
+          />
+          <img
+            alt="Oklahoma"
+            src="/static/img/ok.svg"
+          />
+          <img
+            alt="Oregon"
+            src="/static/img/or.svg"
+          />
+          <img
+            alt="Pennsylvania"
+            src="/static/img/pa.svg"
+          />
+          <img
+            alt="Rhode Island"
+            src="/static/img/ri.svg"
+          />
+          <img
+            alt="South Carolina"
+            src="/static/img/sc.svg"
+          />
+          <img
+            alt="South Dakota"
+            src="/static/img/sd.svg"
+          />
+          <img
+            alt="Tennessee"
+            src="/static/img/tn.svg"
+          />
+          <img
+            alt="Texas"
+            src="/static/img/tx.svg"
+          />
+          <img
+            alt="Utah"
+            src="/static/img/ut.svg"
+          />
+          <img
+            alt="Vermont"
+            src="/static/img/vt.svg"
+          />
+          <img
+            alt="Virginia"
+            src="/static/img/va.svg"
+          />
+          <img
+            alt="Washington"
+            src="/static/img/wa.svg"
+          />
+          <img
+            alt="West Virginia"
+            src="/static/img/wv.svg"
+          />
+          <img
+            alt="Wisconsin"
+            src="/static/img/wi.svg"
+          />
+          <img
+            alt="Wyoming"
+            src="/static/img/wy.svg"
+          />
+        </div>
       </div>,
     },
     "ref": null,
@@ -41,6 +246,211 @@ ShallowWrapper {
           >
             Hello!
           </p>,
+          <hr />,
+          <div
+            className="left-align"
+          >
+            <img
+              alt="Alabama"
+              src="/static/img/al.svg"
+            />
+            <img
+              alt="Alaska"
+              src="/static/img/ak.svg"
+            />
+            <img
+              alt="Arizona"
+              src="/static/img/az.svg"
+            />
+            <img
+              alt="Arkansas"
+              src="/static/img/ar.svg"
+            />
+            <img
+              alt="California"
+              src="/static/img/ca.svg"
+            />
+            <img
+              alt="Colorado"
+              src="/static/img/co.svg"
+            />
+            <img
+              alt="Connecticut"
+              src="/static/img/ct.svg"
+            />
+            <img
+              alt="Delaware"
+              src="/static/img/de.svg"
+            />
+            <img
+              alt="Florida"
+              src="/static/img/fl.svg"
+            />
+            <img
+              alt="Georgia"
+              src="/static/img/ga.svg"
+            />
+            <img
+              alt="Hawaii"
+              src="/static/img/hi.svg"
+            />
+            <img
+              alt="Idaho"
+              src="/static/img/id.svg"
+            />
+            <img
+              alt="Iowa"
+              src="/static/img/ia.svg"
+            />
+            <img
+              alt="Illinois"
+              src="/static/img/il.svg"
+            />
+            <img
+              alt="Indiana"
+              src="/static/img/in.svg"
+            />
+            <img
+              alt="Kansas"
+              src="/static/img/ks.svg"
+            />
+            <img
+              alt="Kentucky"
+              src="/static/img/ky.svg"
+            />
+            <img
+              alt="Louisiana"
+              src="/static/img/la.svg"
+            />
+            <img
+              alt="Maine"
+              src="/static/img/me.svg"
+            />
+            <img
+              alt="Maryland"
+              src="/static/img/md.svg"
+            />
+            <img
+              alt="Massachusetts"
+              src="/static/img/ma.svg"
+            />
+            <img
+              alt="Michigan"
+              src="/static/img/mi.svg"
+            />
+            <img
+              alt="Minnesota"
+              src="/static/img/mn.svg"
+            />
+            <img
+              alt="Mississippi"
+              src="/static/img/ms.svg"
+            />
+            <img
+              alt="Missouri"
+              src="/static/img/mo.svg"
+            />
+            <img
+              alt="Montana"
+              src="/static/img/mt.svg"
+            />
+            <img
+              alt="Nebraska"
+              src="/static/img/ne.svg"
+            />
+            <img
+              alt="North Carolina"
+              src="/static/img/nc.svg"
+            />
+            <img
+              alt="North Dakota"
+              src="/static/img/nd.svg"
+            />
+            <img
+              alt="New Hampshire"
+              src="/static/img/nh.svg"
+            />
+            <img
+              alt="New Jersey"
+              src="/static/img/nj.svg"
+            />
+            <img
+              alt="New Mexico"
+              src="/static/img/nm.svg"
+            />
+            <img
+              alt="Nevada"
+              src="/static/img/nv.svg"
+            />
+            <img
+              alt="New York"
+              src="/static/img/ny.svg"
+            />
+            <img
+              alt="Ohio"
+              src="/static/img/oh.svg"
+            />
+            <img
+              alt="Oklahoma"
+              src="/static/img/ok.svg"
+            />
+            <img
+              alt="Oregon"
+              src="/static/img/or.svg"
+            />
+            <img
+              alt="Pennsylvania"
+              src="/static/img/pa.svg"
+            />
+            <img
+              alt="Rhode Island"
+              src="/static/img/ri.svg"
+            />
+            <img
+              alt="South Carolina"
+              src="/static/img/sc.svg"
+            />
+            <img
+              alt="South Dakota"
+              src="/static/img/sd.svg"
+            />
+            <img
+              alt="Tennessee"
+              src="/static/img/tn.svg"
+            />
+            <img
+              alt="Texas"
+              src="/static/img/tx.svg"
+            />
+            <img
+              alt="Utah"
+              src="/static/img/ut.svg"
+            />
+            <img
+              alt="Vermont"
+              src="/static/img/vt.svg"
+            />
+            <img
+              alt="Virginia"
+              src="/static/img/va.svg"
+            />
+            <img
+              alt="Washington"
+              src="/static/img/wa.svg"
+            />
+            <img
+              alt="West Virginia"
+              src="/static/img/wv.svg"
+            />
+            <img
+              alt="Wisconsin"
+              src="/static/img/wi.svg"
+            />
+            <img
+              alt="Wyoming"
+              src="/static/img/wy.svg"
+            />
+          </div>,
         ],
         "className": "my3 py4 center",
       },
@@ -67,6 +477,829 @@ ShallowWrapper {
           "rendered": "Hello!",
           "type": "p",
         },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": "hr",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <img
+                alt="Alabama"
+                src="/static/img/al.svg"
+              />,
+              <img
+                alt="Alaska"
+                src="/static/img/ak.svg"
+              />,
+              <img
+                alt="Arizona"
+                src="/static/img/az.svg"
+              />,
+              <img
+                alt="Arkansas"
+                src="/static/img/ar.svg"
+              />,
+              <img
+                alt="California"
+                src="/static/img/ca.svg"
+              />,
+              <img
+                alt="Colorado"
+                src="/static/img/co.svg"
+              />,
+              <img
+                alt="Connecticut"
+                src="/static/img/ct.svg"
+              />,
+              <img
+                alt="Delaware"
+                src="/static/img/de.svg"
+              />,
+              <img
+                alt="Florida"
+                src="/static/img/fl.svg"
+              />,
+              <img
+                alt="Georgia"
+                src="/static/img/ga.svg"
+              />,
+              <img
+                alt="Hawaii"
+                src="/static/img/hi.svg"
+              />,
+              <img
+                alt="Idaho"
+                src="/static/img/id.svg"
+              />,
+              <img
+                alt="Iowa"
+                src="/static/img/ia.svg"
+              />,
+              <img
+                alt="Illinois"
+                src="/static/img/il.svg"
+              />,
+              <img
+                alt="Indiana"
+                src="/static/img/in.svg"
+              />,
+              <img
+                alt="Kansas"
+                src="/static/img/ks.svg"
+              />,
+              <img
+                alt="Kentucky"
+                src="/static/img/ky.svg"
+              />,
+              <img
+                alt="Louisiana"
+                src="/static/img/la.svg"
+              />,
+              <img
+                alt="Maine"
+                src="/static/img/me.svg"
+              />,
+              <img
+                alt="Maryland"
+                src="/static/img/md.svg"
+              />,
+              <img
+                alt="Massachusetts"
+                src="/static/img/ma.svg"
+              />,
+              <img
+                alt="Michigan"
+                src="/static/img/mi.svg"
+              />,
+              <img
+                alt="Minnesota"
+                src="/static/img/mn.svg"
+              />,
+              <img
+                alt="Mississippi"
+                src="/static/img/ms.svg"
+              />,
+              <img
+                alt="Missouri"
+                src="/static/img/mo.svg"
+              />,
+              <img
+                alt="Montana"
+                src="/static/img/mt.svg"
+              />,
+              <img
+                alt="Nebraska"
+                src="/static/img/ne.svg"
+              />,
+              <img
+                alt="North Carolina"
+                src="/static/img/nc.svg"
+              />,
+              <img
+                alt="North Dakota"
+                src="/static/img/nd.svg"
+              />,
+              <img
+                alt="New Hampshire"
+                src="/static/img/nh.svg"
+              />,
+              <img
+                alt="New Jersey"
+                src="/static/img/nj.svg"
+              />,
+              <img
+                alt="New Mexico"
+                src="/static/img/nm.svg"
+              />,
+              <img
+                alt="Nevada"
+                src="/static/img/nv.svg"
+              />,
+              <img
+                alt="New York"
+                src="/static/img/ny.svg"
+              />,
+              <img
+                alt="Ohio"
+                src="/static/img/oh.svg"
+              />,
+              <img
+                alt="Oklahoma"
+                src="/static/img/ok.svg"
+              />,
+              <img
+                alt="Oregon"
+                src="/static/img/or.svg"
+              />,
+              <img
+                alt="Pennsylvania"
+                src="/static/img/pa.svg"
+              />,
+              <img
+                alt="Rhode Island"
+                src="/static/img/ri.svg"
+              />,
+              <img
+                alt="South Carolina"
+                src="/static/img/sc.svg"
+              />,
+              <img
+                alt="South Dakota"
+                src="/static/img/sd.svg"
+              />,
+              <img
+                alt="Tennessee"
+                src="/static/img/tn.svg"
+              />,
+              <img
+                alt="Texas"
+                src="/static/img/tx.svg"
+              />,
+              <img
+                alt="Utah"
+                src="/static/img/ut.svg"
+              />,
+              <img
+                alt="Vermont"
+                src="/static/img/vt.svg"
+              />,
+              <img
+                alt="Virginia"
+                src="/static/img/va.svg"
+              />,
+              <img
+                alt="Washington"
+                src="/static/img/wa.svg"
+              />,
+              <img
+                alt="West Virginia"
+                src="/static/img/wv.svg"
+              />,
+              <img
+                alt="Wisconsin"
+                src="/static/img/wi.svg"
+              />,
+              <img
+                alt="Wyoming"
+                src="/static/img/wy.svg"
+              />,
+            ],
+            "className": "left-align",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": "al",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Alabama",
+                "src": "/static/img/al.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ak",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Alaska",
+                "src": "/static/img/ak.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "az",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Arizona",
+                "src": "/static/img/az.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ar",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Arkansas",
+                "src": "/static/img/ar.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ca",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "California",
+                "src": "/static/img/ca.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "co",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Colorado",
+                "src": "/static/img/co.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ct",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Connecticut",
+                "src": "/static/img/ct.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "de",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Delaware",
+                "src": "/static/img/de.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "fl",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Florida",
+                "src": "/static/img/fl.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ga",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Georgia",
+                "src": "/static/img/ga.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "hi",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Hawaii",
+                "src": "/static/img/hi.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "id",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Idaho",
+                "src": "/static/img/id.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ia",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Iowa",
+                "src": "/static/img/ia.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "il",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Illinois",
+                "src": "/static/img/il.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "in",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Indiana",
+                "src": "/static/img/in.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ks",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Kansas",
+                "src": "/static/img/ks.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ky",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Kentucky",
+                "src": "/static/img/ky.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "la",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Louisiana",
+                "src": "/static/img/la.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "me",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Maine",
+                "src": "/static/img/me.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "md",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Maryland",
+                "src": "/static/img/md.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ma",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Massachusetts",
+                "src": "/static/img/ma.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "mi",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Michigan",
+                "src": "/static/img/mi.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "mn",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Minnesota",
+                "src": "/static/img/mn.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ms",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Mississippi",
+                "src": "/static/img/ms.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "mo",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Missouri",
+                "src": "/static/img/mo.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "mt",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Montana",
+                "src": "/static/img/mt.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ne",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Nebraska",
+                "src": "/static/img/ne.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "nc",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "North Carolina",
+                "src": "/static/img/nc.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "nd",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "North Dakota",
+                "src": "/static/img/nd.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "nh",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "New Hampshire",
+                "src": "/static/img/nh.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "nj",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "New Jersey",
+                "src": "/static/img/nj.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "nm",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "New Mexico",
+                "src": "/static/img/nm.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "nv",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Nevada",
+                "src": "/static/img/nv.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ny",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "New York",
+                "src": "/static/img/ny.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "oh",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Ohio",
+                "src": "/static/img/oh.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ok",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Oklahoma",
+                "src": "/static/img/ok.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "or",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Oregon",
+                "src": "/static/img/or.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "pa",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Pennsylvania",
+                "src": "/static/img/pa.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ri",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Rhode Island",
+                "src": "/static/img/ri.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "sc",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "South Carolina",
+                "src": "/static/img/sc.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "sd",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "South Dakota",
+                "src": "/static/img/sd.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "tn",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Tennessee",
+                "src": "/static/img/tn.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "tx",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Texas",
+                "src": "/static/img/tx.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "ut",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Utah",
+                "src": "/static/img/ut.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "vt",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Vermont",
+                "src": "/static/img/vt.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "va",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Virginia",
+                "src": "/static/img/va.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "wa",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Washington",
+                "src": "/static/img/wa.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "wv",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "West Virginia",
+                "src": "/static/img/wv.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "wi",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Wisconsin",
+                "src": "/static/img/wi.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": "wy",
+              "nodeType": "host",
+              "props": Object {
+                "alt": "Wyoming",
+                "src": "/static/img/wy.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+          ],
+          "type": "div",
+        },
       ],
       "type": "div",
     },
@@ -87,6 +1320,211 @@ ShallowWrapper {
           >
             Hello!
           </p>
+          <hr />
+          <div
+            className="left-align"
+          >
+            <img
+              alt="Alabama"
+              src="/static/img/al.svg"
+            />
+            <img
+              alt="Alaska"
+              src="/static/img/ak.svg"
+            />
+            <img
+              alt="Arizona"
+              src="/static/img/az.svg"
+            />
+            <img
+              alt="Arkansas"
+              src="/static/img/ar.svg"
+            />
+            <img
+              alt="California"
+              src="/static/img/ca.svg"
+            />
+            <img
+              alt="Colorado"
+              src="/static/img/co.svg"
+            />
+            <img
+              alt="Connecticut"
+              src="/static/img/ct.svg"
+            />
+            <img
+              alt="Delaware"
+              src="/static/img/de.svg"
+            />
+            <img
+              alt="Florida"
+              src="/static/img/fl.svg"
+            />
+            <img
+              alt="Georgia"
+              src="/static/img/ga.svg"
+            />
+            <img
+              alt="Hawaii"
+              src="/static/img/hi.svg"
+            />
+            <img
+              alt="Idaho"
+              src="/static/img/id.svg"
+            />
+            <img
+              alt="Iowa"
+              src="/static/img/ia.svg"
+            />
+            <img
+              alt="Illinois"
+              src="/static/img/il.svg"
+            />
+            <img
+              alt="Indiana"
+              src="/static/img/in.svg"
+            />
+            <img
+              alt="Kansas"
+              src="/static/img/ks.svg"
+            />
+            <img
+              alt="Kentucky"
+              src="/static/img/ky.svg"
+            />
+            <img
+              alt="Louisiana"
+              src="/static/img/la.svg"
+            />
+            <img
+              alt="Maine"
+              src="/static/img/me.svg"
+            />
+            <img
+              alt="Maryland"
+              src="/static/img/md.svg"
+            />
+            <img
+              alt="Massachusetts"
+              src="/static/img/ma.svg"
+            />
+            <img
+              alt="Michigan"
+              src="/static/img/mi.svg"
+            />
+            <img
+              alt="Minnesota"
+              src="/static/img/mn.svg"
+            />
+            <img
+              alt="Mississippi"
+              src="/static/img/ms.svg"
+            />
+            <img
+              alt="Missouri"
+              src="/static/img/mo.svg"
+            />
+            <img
+              alt="Montana"
+              src="/static/img/mt.svg"
+            />
+            <img
+              alt="Nebraska"
+              src="/static/img/ne.svg"
+            />
+            <img
+              alt="North Carolina"
+              src="/static/img/nc.svg"
+            />
+            <img
+              alt="North Dakota"
+              src="/static/img/nd.svg"
+            />
+            <img
+              alt="New Hampshire"
+              src="/static/img/nh.svg"
+            />
+            <img
+              alt="New Jersey"
+              src="/static/img/nj.svg"
+            />
+            <img
+              alt="New Mexico"
+              src="/static/img/nm.svg"
+            />
+            <img
+              alt="Nevada"
+              src="/static/img/nv.svg"
+            />
+            <img
+              alt="New York"
+              src="/static/img/ny.svg"
+            />
+            <img
+              alt="Ohio"
+              src="/static/img/oh.svg"
+            />
+            <img
+              alt="Oklahoma"
+              src="/static/img/ok.svg"
+            />
+            <img
+              alt="Oregon"
+              src="/static/img/or.svg"
+            />
+            <img
+              alt="Pennsylvania"
+              src="/static/img/pa.svg"
+            />
+            <img
+              alt="Rhode Island"
+              src="/static/img/ri.svg"
+            />
+            <img
+              alt="South Carolina"
+              src="/static/img/sc.svg"
+            />
+            <img
+              alt="South Dakota"
+              src="/static/img/sd.svg"
+            />
+            <img
+              alt="Tennessee"
+              src="/static/img/tn.svg"
+            />
+            <img
+              alt="Texas"
+              src="/static/img/tx.svg"
+            />
+            <img
+              alt="Utah"
+              src="/static/img/ut.svg"
+            />
+            <img
+              alt="Vermont"
+              src="/static/img/vt.svg"
+            />
+            <img
+              alt="Virginia"
+              src="/static/img/va.svg"
+            />
+            <img
+              alt="Washington"
+              src="/static/img/wa.svg"
+            />
+            <img
+              alt="West Virginia"
+              src="/static/img/wv.svg"
+            />
+            <img
+              alt="Wisconsin"
+              src="/static/img/wi.svg"
+            />
+            <img
+              alt="Wyoming"
+              src="/static/img/wy.svg"
+            />
+          </div>
         </div>,
       },
       "ref": null,
@@ -102,6 +1540,211 @@ ShallowWrapper {
             >
               Hello!
             </p>,
+            <hr />,
+            <div
+              className="left-align"
+            >
+              <img
+                alt="Alabama"
+                src="/static/img/al.svg"
+              />
+              <img
+                alt="Alaska"
+                src="/static/img/ak.svg"
+              />
+              <img
+                alt="Arizona"
+                src="/static/img/az.svg"
+              />
+              <img
+                alt="Arkansas"
+                src="/static/img/ar.svg"
+              />
+              <img
+                alt="California"
+                src="/static/img/ca.svg"
+              />
+              <img
+                alt="Colorado"
+                src="/static/img/co.svg"
+              />
+              <img
+                alt="Connecticut"
+                src="/static/img/ct.svg"
+              />
+              <img
+                alt="Delaware"
+                src="/static/img/de.svg"
+              />
+              <img
+                alt="Florida"
+                src="/static/img/fl.svg"
+              />
+              <img
+                alt="Georgia"
+                src="/static/img/ga.svg"
+              />
+              <img
+                alt="Hawaii"
+                src="/static/img/hi.svg"
+              />
+              <img
+                alt="Idaho"
+                src="/static/img/id.svg"
+              />
+              <img
+                alt="Iowa"
+                src="/static/img/ia.svg"
+              />
+              <img
+                alt="Illinois"
+                src="/static/img/il.svg"
+              />
+              <img
+                alt="Indiana"
+                src="/static/img/in.svg"
+              />
+              <img
+                alt="Kansas"
+                src="/static/img/ks.svg"
+              />
+              <img
+                alt="Kentucky"
+                src="/static/img/ky.svg"
+              />
+              <img
+                alt="Louisiana"
+                src="/static/img/la.svg"
+              />
+              <img
+                alt="Maine"
+                src="/static/img/me.svg"
+              />
+              <img
+                alt="Maryland"
+                src="/static/img/md.svg"
+              />
+              <img
+                alt="Massachusetts"
+                src="/static/img/ma.svg"
+              />
+              <img
+                alt="Michigan"
+                src="/static/img/mi.svg"
+              />
+              <img
+                alt="Minnesota"
+                src="/static/img/mn.svg"
+              />
+              <img
+                alt="Mississippi"
+                src="/static/img/ms.svg"
+              />
+              <img
+                alt="Missouri"
+                src="/static/img/mo.svg"
+              />
+              <img
+                alt="Montana"
+                src="/static/img/mt.svg"
+              />
+              <img
+                alt="Nebraska"
+                src="/static/img/ne.svg"
+              />
+              <img
+                alt="North Carolina"
+                src="/static/img/nc.svg"
+              />
+              <img
+                alt="North Dakota"
+                src="/static/img/nd.svg"
+              />
+              <img
+                alt="New Hampshire"
+                src="/static/img/nh.svg"
+              />
+              <img
+                alt="New Jersey"
+                src="/static/img/nj.svg"
+              />
+              <img
+                alt="New Mexico"
+                src="/static/img/nm.svg"
+              />
+              <img
+                alt="Nevada"
+                src="/static/img/nv.svg"
+              />
+              <img
+                alt="New York"
+                src="/static/img/ny.svg"
+              />
+              <img
+                alt="Ohio"
+                src="/static/img/oh.svg"
+              />
+              <img
+                alt="Oklahoma"
+                src="/static/img/ok.svg"
+              />
+              <img
+                alt="Oregon"
+                src="/static/img/or.svg"
+              />
+              <img
+                alt="Pennsylvania"
+                src="/static/img/pa.svg"
+              />
+              <img
+                alt="Rhode Island"
+                src="/static/img/ri.svg"
+              />
+              <img
+                alt="South Carolina"
+                src="/static/img/sc.svg"
+              />
+              <img
+                alt="South Dakota"
+                src="/static/img/sd.svg"
+              />
+              <img
+                alt="Tennessee"
+                src="/static/img/tn.svg"
+              />
+              <img
+                alt="Texas"
+                src="/static/img/tx.svg"
+              />
+              <img
+                alt="Utah"
+                src="/static/img/ut.svg"
+              />
+              <img
+                alt="Vermont"
+                src="/static/img/vt.svg"
+              />
+              <img
+                alt="Virginia"
+                src="/static/img/va.svg"
+              />
+              <img
+                alt="Washington"
+                src="/static/img/wa.svg"
+              />
+              <img
+                alt="West Virginia"
+                src="/static/img/wv.svg"
+              />
+              <img
+                alt="Wisconsin"
+                src="/static/img/wi.svg"
+              />
+              <img
+                alt="Wyoming"
+                src="/static/img/wy.svg"
+              />
+            </div>,
           ],
           "className": "my3 py4 center",
         },
@@ -127,6 +1770,829 @@ ShallowWrapper {
             "ref": null,
             "rendered": "Hello!",
             "type": "p",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": "hr",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <img
+                  alt="Alabama"
+                  src="/static/img/al.svg"
+                />,
+                <img
+                  alt="Alaska"
+                  src="/static/img/ak.svg"
+                />,
+                <img
+                  alt="Arizona"
+                  src="/static/img/az.svg"
+                />,
+                <img
+                  alt="Arkansas"
+                  src="/static/img/ar.svg"
+                />,
+                <img
+                  alt="California"
+                  src="/static/img/ca.svg"
+                />,
+                <img
+                  alt="Colorado"
+                  src="/static/img/co.svg"
+                />,
+                <img
+                  alt="Connecticut"
+                  src="/static/img/ct.svg"
+                />,
+                <img
+                  alt="Delaware"
+                  src="/static/img/de.svg"
+                />,
+                <img
+                  alt="Florida"
+                  src="/static/img/fl.svg"
+                />,
+                <img
+                  alt="Georgia"
+                  src="/static/img/ga.svg"
+                />,
+                <img
+                  alt="Hawaii"
+                  src="/static/img/hi.svg"
+                />,
+                <img
+                  alt="Idaho"
+                  src="/static/img/id.svg"
+                />,
+                <img
+                  alt="Iowa"
+                  src="/static/img/ia.svg"
+                />,
+                <img
+                  alt="Illinois"
+                  src="/static/img/il.svg"
+                />,
+                <img
+                  alt="Indiana"
+                  src="/static/img/in.svg"
+                />,
+                <img
+                  alt="Kansas"
+                  src="/static/img/ks.svg"
+                />,
+                <img
+                  alt="Kentucky"
+                  src="/static/img/ky.svg"
+                />,
+                <img
+                  alt="Louisiana"
+                  src="/static/img/la.svg"
+                />,
+                <img
+                  alt="Maine"
+                  src="/static/img/me.svg"
+                />,
+                <img
+                  alt="Maryland"
+                  src="/static/img/md.svg"
+                />,
+                <img
+                  alt="Massachusetts"
+                  src="/static/img/ma.svg"
+                />,
+                <img
+                  alt="Michigan"
+                  src="/static/img/mi.svg"
+                />,
+                <img
+                  alt="Minnesota"
+                  src="/static/img/mn.svg"
+                />,
+                <img
+                  alt="Mississippi"
+                  src="/static/img/ms.svg"
+                />,
+                <img
+                  alt="Missouri"
+                  src="/static/img/mo.svg"
+                />,
+                <img
+                  alt="Montana"
+                  src="/static/img/mt.svg"
+                />,
+                <img
+                  alt="Nebraska"
+                  src="/static/img/ne.svg"
+                />,
+                <img
+                  alt="North Carolina"
+                  src="/static/img/nc.svg"
+                />,
+                <img
+                  alt="North Dakota"
+                  src="/static/img/nd.svg"
+                />,
+                <img
+                  alt="New Hampshire"
+                  src="/static/img/nh.svg"
+                />,
+                <img
+                  alt="New Jersey"
+                  src="/static/img/nj.svg"
+                />,
+                <img
+                  alt="New Mexico"
+                  src="/static/img/nm.svg"
+                />,
+                <img
+                  alt="Nevada"
+                  src="/static/img/nv.svg"
+                />,
+                <img
+                  alt="New York"
+                  src="/static/img/ny.svg"
+                />,
+                <img
+                  alt="Ohio"
+                  src="/static/img/oh.svg"
+                />,
+                <img
+                  alt="Oklahoma"
+                  src="/static/img/ok.svg"
+                />,
+                <img
+                  alt="Oregon"
+                  src="/static/img/or.svg"
+                />,
+                <img
+                  alt="Pennsylvania"
+                  src="/static/img/pa.svg"
+                />,
+                <img
+                  alt="Rhode Island"
+                  src="/static/img/ri.svg"
+                />,
+                <img
+                  alt="South Carolina"
+                  src="/static/img/sc.svg"
+                />,
+                <img
+                  alt="South Dakota"
+                  src="/static/img/sd.svg"
+                />,
+                <img
+                  alt="Tennessee"
+                  src="/static/img/tn.svg"
+                />,
+                <img
+                  alt="Texas"
+                  src="/static/img/tx.svg"
+                />,
+                <img
+                  alt="Utah"
+                  src="/static/img/ut.svg"
+                />,
+                <img
+                  alt="Vermont"
+                  src="/static/img/vt.svg"
+                />,
+                <img
+                  alt="Virginia"
+                  src="/static/img/va.svg"
+                />,
+                <img
+                  alt="Washington"
+                  src="/static/img/wa.svg"
+                />,
+                <img
+                  alt="West Virginia"
+                  src="/static/img/wv.svg"
+                />,
+                <img
+                  alt="Wisconsin"
+                  src="/static/img/wi.svg"
+                />,
+                <img
+                  alt="Wyoming"
+                  src="/static/img/wy.svg"
+                />,
+              ],
+              "className": "left-align",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": "al",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Alabama",
+                  "src": "/static/img/al.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ak",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Alaska",
+                  "src": "/static/img/ak.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "az",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Arizona",
+                  "src": "/static/img/az.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ar",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Arkansas",
+                  "src": "/static/img/ar.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ca",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "California",
+                  "src": "/static/img/ca.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "co",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Colorado",
+                  "src": "/static/img/co.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ct",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Connecticut",
+                  "src": "/static/img/ct.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "de",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Delaware",
+                  "src": "/static/img/de.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "fl",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Florida",
+                  "src": "/static/img/fl.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ga",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Georgia",
+                  "src": "/static/img/ga.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "hi",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Hawaii",
+                  "src": "/static/img/hi.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "id",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Idaho",
+                  "src": "/static/img/id.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ia",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Iowa",
+                  "src": "/static/img/ia.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "il",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Illinois",
+                  "src": "/static/img/il.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "in",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Indiana",
+                  "src": "/static/img/in.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ks",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Kansas",
+                  "src": "/static/img/ks.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ky",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Kentucky",
+                  "src": "/static/img/ky.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "la",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Louisiana",
+                  "src": "/static/img/la.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "me",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Maine",
+                  "src": "/static/img/me.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "md",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Maryland",
+                  "src": "/static/img/md.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ma",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Massachusetts",
+                  "src": "/static/img/ma.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "mi",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Michigan",
+                  "src": "/static/img/mi.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "mn",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Minnesota",
+                  "src": "/static/img/mn.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ms",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Mississippi",
+                  "src": "/static/img/ms.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "mo",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Missouri",
+                  "src": "/static/img/mo.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "mt",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Montana",
+                  "src": "/static/img/mt.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ne",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Nebraska",
+                  "src": "/static/img/ne.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "nc",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "North Carolina",
+                  "src": "/static/img/nc.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "nd",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "North Dakota",
+                  "src": "/static/img/nd.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "nh",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "New Hampshire",
+                  "src": "/static/img/nh.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "nj",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "New Jersey",
+                  "src": "/static/img/nj.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "nm",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "New Mexico",
+                  "src": "/static/img/nm.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "nv",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Nevada",
+                  "src": "/static/img/nv.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ny",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "New York",
+                  "src": "/static/img/ny.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "oh",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Ohio",
+                  "src": "/static/img/oh.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ok",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Oklahoma",
+                  "src": "/static/img/ok.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "or",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Oregon",
+                  "src": "/static/img/or.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "pa",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Pennsylvania",
+                  "src": "/static/img/pa.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ri",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Rhode Island",
+                  "src": "/static/img/ri.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "sc",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "South Carolina",
+                  "src": "/static/img/sc.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "sd",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "South Dakota",
+                  "src": "/static/img/sd.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "tn",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Tennessee",
+                  "src": "/static/img/tn.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "tx",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Texas",
+                  "src": "/static/img/tx.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "ut",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Utah",
+                  "src": "/static/img/ut.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "vt",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Vermont",
+                  "src": "/static/img/vt.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "va",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Virginia",
+                  "src": "/static/img/va.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "wa",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Washington",
+                  "src": "/static/img/wa.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "wv",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "West Virginia",
+                  "src": "/static/img/wv.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "wi",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Wisconsin",
+                  "src": "/static/img/wi.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": "wy",
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "Wyoming",
+                  "src": "/static/img/wy.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+            ],
+            "type": "div",
           },
         ],
         "type": "div",
