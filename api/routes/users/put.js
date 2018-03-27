@@ -1,6 +1,6 @@
 const logger = require('../../logger')('users route post');
 const defaultUserModel = require('../../db').models.user;
-const can = require('../../auth/middleware').can;
+const can = require('../../middleware').can;
 
 // TODO: figure out better/cleaner solution.
 // At the very least, move this helper to a better location
