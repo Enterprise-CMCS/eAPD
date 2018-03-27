@@ -12,6 +12,7 @@ exports.seed = async knex => {
   // delete them in the right order
   await knex('activity_goal_objectives').del();
   await knex('activity_goals').del();
+  await knex('activity_approaches').del();
   await knex('activities').del();
 
   await knex('apds').del();
