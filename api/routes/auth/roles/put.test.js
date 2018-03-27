@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const canMiddleware = require('../../../auth/middleware').can('edit-roles');
+const can = require('../../../middleware').can;
 const putEndpoint = require('./put');
 
 tap.test('auth roles PUT endpoint', async endpointTest => {
@@ -33,7 +33,11 @@ tap.test('auth roles PUT endpoint', async endpointTest => {
     putEndpoint(app, RoleModel);
 
     setupTest.ok(
-      app.put.calledWith('/auth/roles/:id', canMiddleware, sinon.match.func),
+      app.put.calledWith(
+        '/auth/roles/:id',
+        can('edit-roles'),
+        sinon.match.func
+      ),
       'roles PUT endpoint is registered'
     );
   });

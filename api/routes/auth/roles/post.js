@@ -1,6 +1,6 @@
 const logger = require('../../../logger')('roles route post');
 const defaultRoleModel = require('../../../db').models.role;
-const can = require('../../../auth/middleware').can;
+const can = require('../../../middleware').can;
 
 module.exports = (app, RoleModel = defaultRoleModel) => {
   logger.silly('setting up POST /auth/roles route');

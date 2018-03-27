@@ -48,8 +48,17 @@ export const STATES = [
   { id: 'vt', name: 'Vermont' },
   { id: 'va', name: 'Virginia' },
   { id: 'wa', name: 'Washington' },
-  { id: 'dc', name: 'Washington, DC' },
   { id: 'wv', name: 'West Virginia' },
   { id: 'wi', name: 'Wisconsin' },
-  { id: 'wy', name: 'Wyoming' }
+  { id: 'wy', name: 'Wyoming' },
+
+  // Federal district
+  { id: 'dc', name: 'District of Columbia' },
+
+  // Territories
+  { id: 'as', name: 'American Samoa' },
+  { id: 'gu', name: 'Guam' },
+  { id: 'mp', name: 'Northern Mariana Islands' },
+  { id: 'pr', name: 'Puerto Rico' },
+  { id: 'vi', name: 'U.S. Virgin Islands' }
 ];
