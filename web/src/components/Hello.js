@@ -13,7 +13,7 @@ const Hello = () => (
       <hr />
       <div className="left-align">
         {STATES.slice(0, 50).map(s => (
-          <img src={`/static/img/${s.id}.svg`} alt={s.name} />
+          <img key={s.id} src={`/static/img/${s.id}.svg`} alt={s.name} />
         ))}
       </div>
     </div>
