@@ -22,41 +22,29 @@ module.exports.loadApd = (
           }).fetch({
             withRelated: ['activities']
           });
-          next();
         } else {
           const obj = await model
             .where({ id: req.params[idParam] })
             .fetch({ withRelated: ['apd.activities'] });
           if (obj) {
             req.meta.apd = obj.related('apd');
+          } else {
+            logger.verbose(req, 'requested object does not exist');
           }
-          next();
         }
-      } catch (e) {
-        logger.error(req, e);
-        next();
-      }
-    };
-    cache[key] = loadApd;
-  }
-  return cache[key];
-};
 
-module.exports.requireApd = (model = defaultApdModel, idParam = 'id') => {
-  const key = ['requireApd', model, idParam];
-  if (!cache[key]) {
-    const requireApd = async (req, res, next) => {
-      logger.silly(req, 'verifying that APD exists');
-      await module.exports.loadApd(model, idParam)(req, res, () => {
         if (!req.meta.apd) {
           logger.verbose(req, 'no APD associated with request');
           res.status(404).end();
         } else {
           next();
         }
-      });
+      } catch (e) {
+        logger.error(req, e);
+        res.status(500).end();
+      }
     };
-    cache[key] = requireApd;
+    cache[key] = loadApd;
   }
   return cache[key];
 };
@@ -66,7 +54,7 @@ module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') => {
   if (!cache[key]) {
     const userCanEditAPD = async (req, res, next) => {
       logger.silly(req, 'verifying the user can access this APD');
-      await module.exports.requireApd(model, idParam)(req, res, async () => {
+      await module.exports.loadApd(model, idParam)(req, res, async () => {
         const userApds = await req.user.model.apds();
         if (userApds.includes(req.meta.apd.get('id'))) {
           next();
