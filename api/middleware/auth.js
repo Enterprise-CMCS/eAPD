@@ -15,7 +15,7 @@ const loggedIn = (req, res, next) => {
 
 module.exports.loggedIn = loggedIn;
 
-module.exports.can = activity => {
+const canCreator = activity => {
   if (!canCache[activity]) {
     logger.silly(`can[${activity}] cache miss`);
 
@@ -38,3 +38,5 @@ module.exports.can = activity => {
   }
   return canCache[activity];
 };
+
+module.exports = { loggedIn, can: canCreator };
