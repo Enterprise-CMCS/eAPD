@@ -1,13 +1,17 @@
 const logger = require('../logger')('apd middleware');
 const {
-  apd: ApdModel,
+  apd: defaultApdModel,
   apdActivity: defaultActivityModel
 } = require('../db').models;
 
 const cache = {};
 
-module.exports.loadApd = (model = ApdModel, idParam = 'id') => {
-  const key = ['loadApd', model, idParam];
+module.exports.loadApd = (
+  model = defaultApdModel,
+  idParam = 'id',
+  ApdModel = defaultApdModel
+) => {
+  const key = ['loadApd', model, idParam, ApdModel];
   if (!cache[key]) {
     const loadApd = async (req, res, next) => {
       logger.silly(req, 'loading APD for request');
@@ -38,7 +42,7 @@ module.exports.loadApd = (model = ApdModel, idParam = 'id') => {
   return cache[key];
 };
 
-module.exports.requireApd = (model = ApdModel, idParam = 'id') => {
+module.exports.requireApd = (model = defaultApdModel, idParam = 'id') => {
   const key = ['requireApd', model, idParam];
   if (!cache[key]) {
     const requireApd = async (req, res, next) => {
@@ -57,7 +61,7 @@ module.exports.requireApd = (model = ApdModel, idParam = 'id') => {
   return cache[key];
 };
 
-module.exports.userCanEditAPD = (model = ApdModel, idParam = 'id') => {
+module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') => {
   const key = ['userCanEditAPD', model, idParam];
   if (!cache[key]) {
     const userCanEditAPD = async (req, res, next) => {

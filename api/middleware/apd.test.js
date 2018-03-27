@@ -15,26 +15,39 @@ const res = {
 };
 const next = sandbox.spy();
 
-tap.beforeEach(done => {
-  sandbox.resetBehavior();
-  sandbox.resetHistory();
-
-  res.status.returns(res);
-  res.send.returns(res);
-  res.end.returns(res);
-
-  done();
-});
-
 tap.test('APD-related middleware', async middlewareTests => {
+  middlewareTests.beforeEach(done => {
+    sandbox.resetBehavior();
+    sandbox.resetHistory();
+
+    res.status.returns(res);
+    res.send.returns(res);
+    res.end.returns(res);
+
+    done();
+  });
+
   middlewareTests.test('load apd', async loadApdTests => {
-    loadApdTests.skip('from an APD model', async () => {
-      // There's an in-built dependency on the real APD model,
-      // so we need to figure out how to either mock that in
-      // such a way that we fool the code, OR we need to find
-      // a different way of identifying which model the code
-      // is using; i.e., get rid of:
-      //   if (model === ApdModel) {
+    loadApdTests.test('from an APD model', async apdModelTest => {
+      const apd = { hello: 'world' };
+      OtherModel.where.withArgs({ id: 9 }).returns(OtherModel);
+      OtherModel.fetch.resolves(apd);
+
+      const req = { meta: {}, params: { 'apd-id': 9 } };
+      await middleware.loadApd(OtherModel, 'apd-id', OtherModel)(
+        req,
+        res,
+        next
+      );
+
+      apdModelTest.ok(res.status.notCalled, 'HTTP status is not set');
+      apdModelTest.ok(res.end.notCalled, 'response is not closed');
+      apdModelTest.ok(next.calledOnce, 'next is called');
+      apdModelTest.equal(
+        req.meta.apd,
+        apd,
+        'sets the APD on the request object'
+      );
     });
 
     loadApdTests.test('from a non-APD model', async apdModelTest => {
