@@ -1,5 +1,5 @@
 const logger = require('../../logger')('me route get');
-const loggedIn = require('../../auth/middleware').loggedIn;
+const loggedIn = require('../../middleware').loggedIn;
 
 module.exports = app => {
   logger.silly('setting up GET endpoint');

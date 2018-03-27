@@ -1,6 +1,6 @@
 const logger = require('../../../logger')('auth activities route index');
 const defaultActivityModel = require('../../../db').models.activity;
-const can = require('../../../auth/middleware').can;
+const can = require('../../../middleware').can;
 
 module.exports = (app, ActivityModel = defaultActivityModel) => {
   logger.silly('setting up GET /auth/activities route');
