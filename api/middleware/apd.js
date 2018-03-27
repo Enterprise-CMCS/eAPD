@@ -7,7 +7,8 @@ const {
 const cache = {};
 
 module.exports.loadApd = (model = ApdModel, idParam = 'id') => {
-  if (!cache[['loadApd', model, idParam]]) {
+  const key = ['loadApd', model, idParam];
+  if (!cache[key]) {
     const loadApd = async (req, res, next) => {
       logger.silly(req, 'loading APD for request');
       try {
@@ -32,13 +33,14 @@ module.exports.loadApd = (model = ApdModel, idParam = 'id') => {
         next();
       }
     };
-    cache[['loadApd', model, idParam]] = loadApd;
+    cache[key] = loadApd;
   }
-  return cache[['loadApd', model, idParam]];
+  return cache[key];
 };
 
 module.exports.requireApd = (model = ApdModel, idParam = 'id') => {
-  if (!cache[['requireApd', model, idParam]]) {
+  const key = ['requireApd', model, idParam];
+  if (!cache[key]) {
     const requireApd = async (req, res, next) => {
       logger.silly(req, 'verifying that APD exists');
       await module.exports.loadApd(model, idParam)(req, res, () => {
@@ -50,13 +52,14 @@ module.exports.requireApd = (model = ApdModel, idParam = 'id') => {
         }
       });
     };
-    cache[['requireApd', model, idParam]] = requireApd;
+    cache[key] = requireApd;
   }
-  return cache[['requireApd', model, idParam]];
+  return cache[key];
 };
 
 module.exports.userCanEditAPD = (model = ApdModel, idParam = 'id') => {
-  if (!cache[['userCanEditAPD', model, idParam]]) {
+  const key = ['userCanEditAPD', model, idParam];
+  if (!cache[key]) {
     const userCanEditAPD = async (req, res, next) => {
       logger.silly(req, 'verifying the user can access this APD');
       await module.exports.requireApd(model, idParam)(req, res, async () => {
@@ -69,16 +72,17 @@ module.exports.userCanEditAPD = (model = ApdModel, idParam = 'id') => {
         }
       });
     };
-    cache[['userCanEditAPD', model, idParam]] = userCanEditAPD;
+    cache[key] = userCanEditAPD;
   }
-  return cache[['userCanEditAPD', model, idParam]];
+  return cache[key];
 };
 
 module.exports.loadActivity = (
   idParam = 'id',
   model = defaultActivityModel
 ) => {
-  if (!cache[['loadActivity', model, idParam]]) {
+  const key = ['loadActivity', model, idParam];
+  if (!cache[key]) {
     const loadActivity = async (req, res, next) => {
       try {
         logger.silly(req, 'loading APD activity for request');
@@ -102,7 +106,7 @@ module.exports.loadActivity = (
         res.status(500).end();
       }
     };
-    cache[['loadActivity', model, idParam]] = loadActivity;
+    cache[key] = loadActivity;
   }
-  return cache[['loadActivity', model, idParam]];
+  return cache[key];
 };
