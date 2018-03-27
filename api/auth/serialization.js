@@ -25,7 +25,8 @@ module.exports.deserializeUser = async (
         id: user.get('id'),
         role: user.get('auth_role'),
         state: user.get('state_id'),
-        activities: await user.activities()
+        activities: await user.activities(),
+        model: user
       });
     } else {
       logger.verbose(`could not deserialize user`, userID);
