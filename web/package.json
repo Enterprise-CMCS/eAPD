@@ -4,7 +4,8 @@
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
   "scripts": {
-    "scaffold": "mkdir -p dist && cp src/index.html dist/ && cp ../Staticfile dist/",
+    "make-state-icons": "babel-node scripts/stateIcons.js",
+    "scaffold": "mkdir -p dist && cp src/index.html dist/ && cp ../Staticfile dist/ && cp -r src/static dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --host 0.0.0.0 --port 8001 --history-api-fallback --content-base src/",
@@ -63,6 +64,7 @@
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.14.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^21.2.0",
@@ -72,6 +74,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.10",
     "cssnano": "^3.10.0",
+    "d3-geo": "^1.4.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.18.1",
@@ -94,6 +97,7 @@
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.1",
     "style-loader": "^0.20.2",
+    "topojson": "^2.2.0",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
