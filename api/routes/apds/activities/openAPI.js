@@ -2,6 +2,7 @@ const {
   requiresAuth,
   schema: { arrayOf, errorToken, jsonResponse }
 } = require('../../openAPI/helpers');
+const approaches = require('./approaches/openAPI');
 const goals = require('./goals/openAPI');
 
 const activityObjectSchema = {
@@ -129,6 +130,7 @@ const openAPI = {
     }
   },
 
+  ...approaches,
   ...goals
 };
 
