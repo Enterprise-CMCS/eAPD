@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const canMiddleware = require('../../auth/middleware').can('edit-users');
+const can = require('../../middleware').can;
 const putEndpoint = require('./put');
 
 tap.test('users PUT endpoint', async endpointTest => {
@@ -41,7 +41,7 @@ tap.test('users PUT endpoint', async endpointTest => {
     putEndpoint(app, UserModel);
 
     setupTest.ok(
-      app.put.calledWith('/users/:id', canMiddleware, sinon.match.func),
+      app.put.calledWith('/users/:id', can('edit-users'), sinon.match.func),
       'users PUT endpoint is registered'
     );
   });

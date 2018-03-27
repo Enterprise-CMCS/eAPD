@@ -1,7 +1,11 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const loggedInMiddleware = require('../../../../auth/middleware').loggedIn;
+const {
+  loggedIn,
+  loadActivity,
+  userCanEditAPD
+} = require('../../../../middleware');
 const putEndpoint = require('./put');
 
 tap.test('apd activity approach PUT endpoint', async endpointTest => {
@@ -26,8 +30,6 @@ tap.test('apd activity approach PUT endpoint', async endpointTest => {
     get: sandbox.stub()
   };
 
-  const userCanEditAPD = sandbox.stub();
-
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -50,12 +52,14 @@ tap.test('apd activity approach PUT endpoint', async endpointTest => {
   });
 
   endpointTest.test('setup', async setupTest => {
-    putEndpoint(app, ActivityModel, ApproachModel, userCanEditAPD);
+    putEndpoint(app, ActivityModel, ApproachModel);
 
     setupTest.ok(
       app.put.calledWith(
         '/activities/:id/approaches',
-        loggedInMiddleware,
+        loggedIn,
+        loadActivity(),
+        userCanEditAPD(ActivityModel),
         sinon.match.func
       ),
       'apd activity approach PUT endpoint is registered'
@@ -67,10 +71,10 @@ tap.test('apd activity approach PUT endpoint', async endpointTest => {
     async handlerTest => {
       let handler;
       handlerTest.beforeEach(async () => {
-        putEndpoint(app, ActivityModel, ApproachModel, userCanEditAPD);
+        putEndpoint(app, ActivityModel, ApproachModel);
         handler = app.put.args.find(
           args => args[0] === '/activities/:id/approaches'
-        )[2];
+        )[4];
       });
 
       handlerTest.test(
@@ -79,45 +83,13 @@ tap.test('apd activity approach PUT endpoint', async endpointTest => {
           const req = {
             user: { id: 1 },
             params: { id: 1 },
-            body: { status: 'foo' }
+            body: { status: 'foo' },
+            meta: null
           };
-          ActivityModel.fetch.rejects();
 
           await handler(req, res);
 
           saveTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-        }
-      );
-
-      handlerTest.test(
-        'sends a not found error if requesting to edit an activity that does not exist',
-        async notFoundTest => {
-          const req = { params: { id: 1 } };
-          ActivityModel.fetch.resolves(null);
-
-          await handler(req, res);
-
-          notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-          notFoundTest.ok(res.send.notCalled, 'no body is sent');
-          notFoundTest.ok(res.end.calledOnce, 'response is terminated');
-        }
-      );
-
-      handlerTest.test(
-        'sends an error if requesting to edit a apd not associated with user',
-        async notFoundTest => {
-          const req = {
-            user: { id: 1 },
-            params: { id: 1 }
-          };
-          activityObj.get.withArgs('id').returns('apd-id');
-          userCanEditAPD.resolves(false);
-
-          await handler(req, res);
-
-          notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-          notFoundTest.ok(res.send.notCalled, 'no body is sent');
-          notFoundTest.ok(res.end.calledOnce, 'response is terminated');
         }
       );
 
@@ -127,10 +99,10 @@ tap.test('apd activity approach PUT endpoint', async endpointTest => {
           const req = {
             user: { id: 1 },
             params: { id: 1 },
-            body: 'hello'
+            body: 'hello',
+            meta: { activity: activityObj }
           };
           activityObj.get.withArgs('id').returns('apd-id');
-          userCanEditAPD.resolves(true);
 
           await handler(req, res);
 
@@ -162,7 +134,8 @@ tap.test('apd activity approach PUT endpoint', async endpointTest => {
               invalid: 'this one is ignored',
               because: 'it does not have any expected fields'
             }
-          ]
+          ],
+          meta: { activity: activityObj }
         };
         activityObj.get.withArgs('id').returns('apd-id');
 
@@ -174,7 +147,6 @@ tap.test('apd activity approach PUT endpoint', async endpointTest => {
         ];
 
         activityObj.related.withArgs('approaches').returns(existingApproaches);
-        userCanEditAPD.resolves(true);
 
         const approach = {
           save: sandbox.stub().resolves()
@@ -182,7 +154,7 @@ tap.test('apd activity approach PUT endpoint', async endpointTest => {
 
         ApproachModel.forge.returns(approach);
 
-        ActivityModel.fetch.onSecondCall().resolves({
+        ActivityModel.fetch.resolves({
           toJSON: sandbox.stub().returns('activity-from-json')
         });
 
