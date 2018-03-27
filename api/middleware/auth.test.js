@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sandbox = require('sinon').createSandbox();
 
-const middleware = require('./middleware');
+const middleware = require('./auth');
 
 const res = {
   status: sandbox.stub(),

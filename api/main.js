@@ -14,6 +14,7 @@ const server = express();
 endpointCoverage.registerCoverageMiddleware(server);
 server.use((req, res, next) => {
   req.id = uuid();
+  req.meta = {};
   logger.verbose(req, `got ${req.method} request to ${req.path}`);
   return next();
 });

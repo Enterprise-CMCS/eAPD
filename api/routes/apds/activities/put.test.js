@@ -1,7 +1,11 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const loggedInMiddleware = require('../../../auth/middleware').loggedIn;
+const {
+  loggedIn,
+  loadActivity,
+  userCanEditAPD
+} = require('../../../middleware');
 const putEndpoint = require('./put');
 
 tap.test('apd activity PUT endpoint', async endpointTest => {
@@ -12,8 +16,6 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
     where: sandbox.stub(),
     fetch: sandbox.stub()
   };
-
-  const userCanEditAPD = sandbox.stub();
 
   const res = {
     status: sandbox.stub(),
@@ -35,12 +37,14 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
   });
 
   endpointTest.test('setup', async setupTest => {
-    putEndpoint(app, ActivityModel, userCanEditAPD);
+    putEndpoint(app, ActivityModel);
 
     setupTest.ok(
       app.put.calledWith(
         '/activities/:id',
-        loggedInMiddleware,
+        loggedIn,
+        loadActivity(),
+        userCanEditAPD(ActivityModel),
         sinon.match.func
       ),
       'apd activity PUT endpoint is registered'
@@ -49,55 +53,40 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
 
   endpointTest.test('edit APD activity handler', async handlerTest => {
     let handler;
+    let req;
     handlerTest.beforeEach(async () => {
-      putEndpoint(app, ActivityModel, userCanEditAPD);
-      handler = app.put.args.find(args => args[0] === '/activities/:id')[2];
+      putEndpoint(app, ActivityModel);
+      handler = app.put.args.find(args => args[0] === '/activities/:id').pop();
+
+      req = {
+        user: { id: 1 },
+        params: { id: 1 },
+        meta: {
+          activity: {
+            get: sandbox
+              .stub()
+              .withArgs('id')
+              .returns('activity-id-from-db'),
+            related: sandbox.stub(),
+            save: sandbox.stub().resolves(),
+            set: sandbox.spy(),
+            toJSON: sandbox.stub().returns('activity-as-json')
+          },
+          apd: {
+            get: sandbox
+              .stub()
+              .withArgs('id')
+              .returns('apd-id-from-db'),
+            related: sandbox.stub()
+          }
+        }
+      };
     });
-
-    handlerTest.test(
-      'sends a not found error if requesting to edit an activity that does not exist',
-      async notFoundTest => {
-        const req = { params: { id: 1 } };
-        ActivityModel.fetch.resolves(null);
-
-        await handler(req, res);
-
-        notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-        notFoundTest.ok(res.send.notCalled, 'no body is sent');
-        notFoundTest.ok(res.end.calledOnce, 'response is terminated');
-      }
-    );
-
-    handlerTest.test(
-      'sends an error if requesting to edit a apd not associated with user',
-      async notFoundTest => {
-        const req = {
-          user: { id: 1 },
-          params: { id: 1 }
-        };
-        ActivityModel.fetch.resolves({
-          related: sinon.stub().returns({ get: sinon.stub().returns('apd-id') })
-        });
-        userCanEditAPD.resolves(false);
-
-        await handler(req, res);
-
-        notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-        notFoundTest.ok(res.send.notCalled, 'no body is sent');
-        notFoundTest.ok(res.end.calledOnce, 'response is terminated');
-      }
-    );
 
     handlerTest.test(
       'sends a server error if anything goes wrong',
       async saveTest => {
-        const req = {
-          user: { id: 1 },
-          params: { id: 1 },
-          body: { status: 'foo' }
-        };
-        ActivityModel.fetch.rejects();
-
+        delete req.meta;
         await handler(req, res);
 
         saveTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
@@ -107,23 +96,10 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
     handlerTest.test(
       'sends an error if the activity name is an empty string',
       async invalidTest => {
-        const req = {
-          user: { id: 1 },
-          params: { id: 1 },
-          body: {
-            name: '',
-            description: 'fishing on the ice'
-          }
+        req.body = {
+          name: '',
+          description: 'fishing on the ice'
         };
-        const related = sinon.stub();
-        const some = sinon.stub();
-        related
-          .withArgs('apd')
-          .returns({ get: sinon.stub().returns('apd-id'), related });
-        related.withArgs('activities').returns({ some });
-        some.returns(true);
-        ActivityModel.fetch.resolves({ related });
-        userCanEditAPD.resolves(true);
 
         await handler(req, res);
 
@@ -139,23 +115,13 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
     handlerTest.test(
       'sends an error if the activity name already exists within the APD',
       async invalidTest => {
-        const req = {
-          user: { id: 1 },
-          params: { id: 1 },
-          body: {
-            name: 'ice fishing',
-            description: 'fishing on the ice'
-          }
+        req.body = {
+          name: 'ice fishing',
+          description: 'fishing on the ice'
         };
-        const related = sinon.stub();
-        const some = sinon.stub();
-        related
-          .withArgs('apd')
-          .returns({ get: sinon.stub().returns('apd-id'), related });
-        related.withArgs('activities').returns({ some });
-        some.returns(true);
-        ActivityModel.fetch.resolves({ related });
-        userCanEditAPD.resolves(true);
+
+        const some = sinon.stub().returns(true);
+        req.meta.apd.related.withArgs('activities').returns({ some });
 
         await handler(req, res);
 
@@ -177,7 +143,7 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
             someTests.test(
               'returns false if the input activity has the same ID as the current activity, but different name',
               async falseTest => {
-                obj.get.withArgs('id').returns(1);
+                obj.get.withArgs('id').returns('activity-id-from-db');
                 obj.get.withArgs('name').returns('bloop');
                 const result = someFn(obj);
                 falseTest.notOk(result, 'returns false');
@@ -187,7 +153,7 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
             someTests.test(
               'returns false if the input activity has the same ID as the current activity, and the same name',
               async falseTest => {
-                obj.get.withArgs('id').returns(1);
+                obj.get.withArgs('id').returns('activity-id-from-db');
                 obj.get.withArgs('name').returns('ice fishing');
                 const result = someFn(obj);
                 falseTest.notOk(result, 'returns false');
@@ -219,46 +185,29 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
     );
 
     handlerTest.test('updates a valid APD activity', async validTest => {
-      const req = {
-        user: { id: 1 },
-        params: { id: 1 },
-        body: {
-          name: 'ice fishing',
-          description: 'fishing on the ice'
-        }
+      req.body = {
+        name: 'ice fishing',
+        description: 'fishing on the ice'
       };
-      const related = sinon.stub();
-      const some = sinon.stub();
-      userCanEditAPD.resolves(true);
-      related
-        .withArgs('apd')
-        .returns({ get: sinon.stub().returns('apd-id'), related });
-      related.withArgs('activities').returns({ some });
-      some.returns(false);
-      const activityObj = {
-        related,
-        set: sinon.spy(),
-        save: sinon.stub().resolves(),
-        toJSON: sinon.stub().returns('Nick Aretakis')
-      };
-      ActivityModel.fetch.resolves(activityObj);
+      const some = sinon.stub().returns(false);
+      req.meta.apd.related.withArgs('activities').returns({ some });
 
       await handler(req, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
       validTest.ok(
-        res.send.calledWith('Nick Aretakis'),
+        res.send.calledWith('activity-as-json'),
         'sends back the toJSON results'
       );
       validTest.ok(
-        activityObj.set.calledWith({
+        req.meta.activity.set.calledWith({
           name: 'ice fishing',
           description: 'fishing on the ice'
         }),
         'model is updated with data from the request body'
       );
       validTest.ok(
-        activityObj.save.calledAfter(activityObj.set),
+        req.meta.activity.save.calledAfter(req.meta.activity.set),
         'model is saved after updating'
       );
     });

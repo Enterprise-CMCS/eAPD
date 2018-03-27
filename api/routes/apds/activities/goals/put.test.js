@@ -1,7 +1,11 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const loggedInMiddleware = require('../../../../auth/middleware').loggedIn;
+const {
+  loggedIn,
+  loadActivity,
+  userCanEditAPD
+} = require('../../../../middleware');
 const putEndpoint = require('./put');
 
 tap.test('apd activity goal PUT endpoint', async endpointTest => {
@@ -33,8 +37,6 @@ tap.test('apd activity goal PUT endpoint', async endpointTest => {
     get: sandbox.stub()
   };
 
-  const userCanEditAPD = sandbox.stub();
-
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -60,12 +62,14 @@ tap.test('apd activity goal PUT endpoint', async endpointTest => {
   });
 
   endpointTest.test('setup', async setupTest => {
-    putEndpoint(app, ActivityModel, GoalModel, ObjectiveModel, userCanEditAPD);
+    putEndpoint(app, ActivityModel, GoalModel, ObjectiveModel);
 
     setupTest.ok(
       app.put.calledWith(
         '/activities/:id/goals',
-        loggedInMiddleware,
+        loggedIn,
+        loadActivity(),
+        userCanEditAPD(ActivityModel),
         sinon.match.func
       ),
       'apd activity PUT endpoint is registered'
@@ -74,29 +78,29 @@ tap.test('apd activity goal PUT endpoint', async endpointTest => {
 
   endpointTest.test('edit APD activity handler', async handlerTest => {
     let handler;
+    let req;
     handlerTest.beforeEach(async () => {
-      putEndpoint(
-        app,
-        ActivityModel,
-        GoalModel,
-        ObjectiveModel,
-        userCanEditAPD
-      );
-      handler = app.put.args.find(
-        args => args[0] === '/activities/:id/goals'
-      )[2];
+      putEndpoint(app, ActivityModel, GoalModel, ObjectiveModel);
+      handler = app.put.args
+        .find(args => args[0] === '/activities/:id/goals')
+        .pop();
+
+      req = {
+        user: { id: 1 },
+        params: { id: 1 },
+        meta: {
+          activity: {
+            get: sandbox.stub(),
+            related: sandbox.stub()
+          }
+        }
+      };
     });
 
     handlerTest.test(
       'sends a server error if anything goes wrong',
       async saveTest => {
-        const req = {
-          user: { id: 1 },
-          params: { id: 1 },
-          body: { status: 'foo' }
-        };
-        ActivityModel.fetch.rejects();
-
+        delete req.meta;
         await handler(req, res);
 
         saveTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
@@ -104,47 +108,9 @@ tap.test('apd activity goal PUT endpoint', async endpointTest => {
     );
 
     handlerTest.test(
-      'sends a not found error if requesting to edit an activity that does not exist',
-      async notFoundTest => {
-        const req = { params: { id: 1 } };
-        ActivityModel.fetch.resolves(null);
-
-        await handler(req, res);
-
-        notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-        notFoundTest.ok(res.send.notCalled, 'no body is sent');
-        notFoundTest.ok(res.end.calledOnce, 'response is terminated');
-      }
-    );
-
-    handlerTest.test(
-      'sends an error if requesting to edit a apd not associated with user',
-      async notFoundTest => {
-        const req = {
-          user: { id: 1 },
-          params: { id: 1 }
-        };
-        activityObj.get.withArgs('id').returns('apd-id');
-        userCanEditAPD.resolves(false);
-
-        await handler(req, res);
-
-        notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-        notFoundTest.ok(res.send.notCalled, 'no body is sent');
-        notFoundTest.ok(res.end.calledOnce, 'response is terminated');
-      }
-    );
-
-    handlerTest.test(
       'sends an error if request body is not an array',
       async invalidTest => {
-        const req = {
-          user: { id: 1 },
-          params: { id: 1 },
-          body: 'hello'
-        };
-        activityObj.get.withArgs('id').returns('apd-id');
-        userCanEditAPD.resolves(true);
+        req.body = 'hello';
 
         await handler(req, res);
 
@@ -158,19 +124,14 @@ tap.test('apd activity goal PUT endpoint', async endpointTest => {
     );
 
     handlerTest.test('updates valid goals', async validTest => {
-      const req = {
-        user: { id: 1 },
-        params: { id: 1 },
-        body: [
-          {
-            description: 'goal 1',
-            objectives: ['objective 1.1', 'objective 1.2']
-          },
-          { description: 'goal 2', objectives: ['objective 2.1'] },
-          { hello: 'world', objectives: ['objective 3.1', 'objective 3.2'] }
-        ]
-      };
-      activityObj.get.withArgs('id').returns('apd-id');
+      req.body = [
+        {
+          description: 'goal 1',
+          objectives: ['objective 1.1', 'objective 1.2']
+        },
+        { description: 'goal 2', objectives: ['objective 2.1'] },
+        { hello: 'world', objectives: ['objective 3.1', 'objective 3.2'] }
+      ];
 
       const existingGoals = [];
       for (let i = 0; i < 3; i += 1) {
@@ -188,8 +149,8 @@ tap.test('apd activity goal PUT endpoint', async endpointTest => {
         });
       }
 
-      activityObj.related.withArgs('goals').returns(existingGoals);
-      userCanEditAPD.resolves(true);
+      req.meta.activity.related.withArgs('goals').returns(existingGoals);
+      req.meta.activity.get.withArgs('id').returns('activity-id');
 
       const goal = {
         save: sandbox.stub().resolves(),
@@ -204,7 +165,7 @@ tap.test('apd activity goal PUT endpoint', async endpointTest => {
 
       ObjectiveModel.forge.returns(objective);
 
-      ActivityModel.fetch.onSecondCall().resolves({
+      ActivityModel.fetch.resolves({
         toJSON: sandbox.stub().returns('activity-from-json')
       });
 
@@ -242,8 +203,14 @@ tap.test('apd activity goal PUT endpoint', async endpointTest => {
         'two goals are created (the invalid one is left out)'
       );
       validTest.ok(
-        GoalModel.forge.calledWith({ description: 'goal 1', activity_id: 1 }) &&
-          GoalModel.forge.calledWith({ description: 'goal 2', activity_id: 1 }),
+        GoalModel.forge.calledWith({
+          description: 'goal 1',
+          activity_id: 'activity-id'
+        }) &&
+          GoalModel.forge.calledWith({
+            description: 'goal 2',
+            activity_id: 'activity-id'
+          }),
         'the two expected goals are created'
       );
       validTest.ok(

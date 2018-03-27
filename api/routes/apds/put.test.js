@@ -1,22 +1,12 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const loggedInMiddleware = require('../../auth/middleware').loggedIn;
+const { loggedIn, userCanEditAPD } = require('../../middleware');
 const putEndpoint = require('./put');
 
 tap.test('apds PUT endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = { put: sandbox.stub() };
-  const ApdModel = {
-    where: sandbox.stub(),
-    fetch: sandbox.stub()
-  };
-  const Apd = {
-    set: sandbox.stub(),
-    save: sandbox.stub(),
-    toJSON: sandbox.stub()
-  };
-  const userCanEditAPD = sandbox.stub();
   const res = {
     status: sandbox.stub(),
     send: sandbox.stub(),
@@ -27,8 +17,6 @@ tap.test('apds PUT endpoint', async endpointTest => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
-    ApdModel.where.returns(ApdModel);
-
     res.status.returns(res);
     res.send.returns(res);
     res.end.returns(res);
@@ -37,59 +25,48 @@ tap.test('apds PUT endpoint', async endpointTest => {
   });
 
   endpointTest.test('setup', async setupTest => {
-    putEndpoint(app, ApdModel, userCanEditAPD);
+    putEndpoint(app);
 
     setupTest.ok(
-      app.put.calledWith('/apds/:id', loggedInMiddleware, sinon.match.func),
+      app.put.calledWith(
+        '/apds/:id',
+        loggedIn,
+        userCanEditAPD(),
+        sinon.match.func
+      ),
       'apds PUT endpoint is registered'
     );
   });
 
   endpointTest.test('edit apds handler', async handlerTest => {
     let handler;
+    let req;
     handlerTest.beforeEach(async () => {
-      putEndpoint(app, ApdModel, userCanEditAPD);
-      handler = app.put.args.find(args => args[0] === '/apds/:id')[2];
+      putEndpoint(app);
+      handler = app.put.args.find(args => args[0] === '/apds/:id').pop();
+
+      req = {
+        user: { id: 1 },
+        params: { id: 1 },
+        meta: {
+          apd: {
+            get: sandbox
+              .stub()
+              .withArgs('id')
+              .returns('apd-id-from-db'),
+            related: sandbox.stub(),
+            set: sandbox.spy(),
+            save: sandbox.stub().resolves(),
+            toJSON: sandbox.stub().returns('apd-as-json')
+          }
+        }
+      };
     });
-
-    handlerTest.test(
-      'sends a not found error if requesting to edit a apd that does not exist',
-      async notFoundTest => {
-        const req = { params: { id: 1 }, body: { status: 'foo' } };
-        ApdModel.fetch.resolves(null);
-
-        await handler(req, res);
-
-        notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-        notFoundTest.ok(res.send.notCalled, 'no body is sent');
-        notFoundTest.ok(res.end.calledOnce, 'response is terminated');
-      }
-    );
-
-    handlerTest.test(
-      'sends an error if requesting to edit a apd not associated with user',
-      async notFoundTest => {
-        const req = {
-          params: { id: 1 },
-          user: { id: 123 },
-          body: { status: 'foo' }
-        };
-        ApdModel.fetch.resolves(true);
-        userCanEditAPD.resolves(false);
-
-        await handler(req, res);
-
-        notFoundTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-        notFoundTest.ok(res.send.notCalled, 'no body is sent');
-        notFoundTest.ok(res.end.calledOnce, 'response is terminated');
-      }
-    );
 
     handlerTest.test(
       'sends a server error if anything goes wrong',
       async saveTest => {
-        const req = { params: { id: 1 }, body: { status: 'foo' } };
-        ApdModel.fetch.rejects();
+        req.meta.apd.save.rejects();
 
         await handler(req, res);
 
@@ -98,34 +75,25 @@ tap.test('apds PUT endpoint', async endpointTest => {
     );
 
     handlerTest.test('updates a valid apd object', async validTest => {
-      const req = {
-        params: { id: 1 },
-        user: { id: 123 },
-        body: { status: 'foo', misc: 'baz' }
-      };
-
-      Apd.toJSON.returns({ status: 'json-status' });
-      Apd.save.resolves();
-      ApdModel.fetch.resolves(Apd);
-      userCanEditAPD.resolves(true);
+      req.body = { status: 'foo', misc: 'baz' };
 
       await handler(req, res);
 
       validTest.ok(
-        Apd.set.calledWith({ status: 'foo' }),
+        req.meta.apd.set.calledWith({ status: 'foo' }),
         'sets the apd status field'
       );
       validTest.ok(
-        Apd.save.calledAfter(Apd.set),
+        req.meta.apd.save.calledAfter(req.meta.apd.set),
         'the model is saved after values are set'
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        Apd.toJSON.calledOnce,
+        req.meta.apd.toJSON.calledOnce,
         'database object is converted to pure object'
       );
       validTest.ok(
-        res.send.calledWith({ status: 'json-status' }),
+        res.send.calledWith('apd-as-json'),
         'updated apd data is sent'
       );
     });

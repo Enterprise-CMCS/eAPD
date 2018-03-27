@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const canMiddleware = require('../../auth/middleware').can('view-users');
+const can = require('../..//middleware').can;
 const getEndpoint = require('./get');
 
 tap.test('user GET endpoint', async endpointTest => {
@@ -37,11 +37,11 @@ tap.test('user GET endpoint', async endpointTest => {
     getEndpoint(app, UserModel);
 
     setupTest.ok(
-      app.get.calledWith('/users/:id', canMiddleware, sinon.match.func),
+      app.get.calledWith('/users/:id', can('view-users'), sinon.match.func),
       'single user GET endpoint is registered'
     );
     setupTest.ok(
-      app.get.calledWith('/users', canMiddleware, sinon.match.func),
+      app.get.calledWith('/users', can('view-users'), sinon.match.func),
       'all users GET endpoint is registered'
     );
   });

@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const canMiddleware = require('../../../auth/middleware').can('view-roles');
+const can = require('../../../middleware').can;
 const getEndpoint = require('./get');
 
 tap.test('auth roles GET endpoint', async endpointTest => {
@@ -31,7 +31,7 @@ tap.test('auth roles GET endpoint', async endpointTest => {
     getEndpoint(app, RoleModel);
 
     setupTest.ok(
-      app.get.calledWith('/auth/roles', canMiddleware, sinon.match.func),
+      app.get.calledWith('/auth/roles', can('view-roles'), sinon.match.func),
       'roles GET endpoint is registered'
     );
   });
