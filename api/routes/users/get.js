@@ -1,6 +1,6 @@
 const logger = require('../../logger')('users route get');
 const defaultUserModel = require('../../db').models.user;
-const can = require('../../auth/middleware').can;
+const can = require('../../middleware').can;
 
 const allUsersHandler = async (req, res, UserModel) => {
   logger.silly(req, 'handling GET /users route');
