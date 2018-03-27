@@ -1,6 +1,6 @@
 const logger = require('../../../logger')('auth roles route delete');
 const defaultRoleModel = require('../../../db').models.role;
-const can = require('../../../auth/middleware').can;
+const can = require('../../../middleware').can;
 
 module.exports = (app, RoleModel = defaultRoleModel) => {
   logger.silly('setting up DELETE /auth/roles route');

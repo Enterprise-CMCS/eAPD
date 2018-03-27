@@ -16,9 +16,10 @@ require('./db/user');
 
 require('./auth');
 require('./auth/authenticate');
-require('./auth/middleware');
 require('./auth/serialization');
 require('./auth/session');
+
+require('./middleware');
 
 require('./routes');
 require('./routes/apds');
