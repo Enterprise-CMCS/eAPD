@@ -1,0 +1,7 @@
+---
+applications:
+  - name: hitech-apd-storybook
+    memory: 64M
+    path: web/.storybook-dist
+    host: hitech-apd-storybook
+    buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git

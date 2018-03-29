@@ -1,2 +1,4 @@
 dist
 coverage
+
+.storybook-dist/public
