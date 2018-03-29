@@ -151,6 +151,17 @@ jobs:
           name: deploy to UX testing
           command: ./bin/deploy-ux-testing.sh
 
+  deploy storybook:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
+      - run:
+          name: deploy storybook
+          command: ./bin/deploy-storybook.sh
+
 workflows:
   version: 2
   web:
@@ -197,3 +208,17 @@ workflows:
             - web test
             - api unit test
             - api endpoint test
+      - request deploy for storybook:
+          type: approval
+          filters:
+            branches:
+              only:
+                - master
+      - deploy storybook:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - request deploy for storybook
+            - web test
