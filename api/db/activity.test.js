@@ -11,6 +11,7 @@ tap.test('activity data model', async activityModelTests => {
         apdActivity: { tableName: 'activities' },
         apdActivityGoal: { tableName: 'activity_goals' },
         apdActivityGoalObjective: { tableName: 'activity_goal_objectives' },
+        apdActivityCostAllocation: { tableName: 'activity_cost_allocations' },
         apdActivityExpense: { tableName: 'activity_expenses' },
         apdActivityExpenseEntry: { tableName: 'activity_expense_entries' }
       },
@@ -33,6 +34,12 @@ tap.test('activity data model', async activityModelTests => {
       activity.apdActivity.approaches,
       'function',
       'creates an approaches relationship for the activity model'
+    );
+
+    setupTests.type(
+      activity.apdActivity.costAllocations,
+      'function',
+      'creates a cost allocation relationship for the activity model'
     );
 
     setupTests.type(
@@ -63,6 +70,12 @@ tap.test('activity data model', async activityModelTests => {
       activity.apdActivityApproach.activity,
       'function',
       'creates a activity relationship for the approach model'
+    );
+
+    setupTests.type(
+      activity.apdActivityCostAllocation.activity,
+      'function',
+      'creates a activity relationship for the cost allocation model'
     );
 
     setupTests.type(

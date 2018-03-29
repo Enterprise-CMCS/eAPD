@@ -14,6 +14,10 @@ module.exports = () => ({
       return this.hasMany('apdActivityApproach');
     },
 
+    costAllocations() {
+      return this.hasMany('apdActivityCostAllocation');
+    },
+
     expenses() {
       return this.hasMany('apdActivityExpense');
     },
@@ -73,6 +77,21 @@ module.exports = () => ({
         description: this.get('description'),
         alternatives: this.get('alternatives'),
         explanation: this.get('explanation')
+      };
+    }
+  },
+
+  apdActivityCostAllocation: {
+    tableName: 'activity_cost_allocations',
+
+    activity() {
+      return this.belongsTo('apdActivity');
+    },
+
+    toJSON() {
+      return {
+        name: this.get('name'),
+        share: this.get('share')
       };
     }
   },
