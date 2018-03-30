@@ -1,3 +1,5 @@
+const logger = require('../logger')('db activity model');
+
 module.exports = () => ({
   apdActivity: {
     tableName: 'activities',
@@ -16,6 +18,25 @@ module.exports = () => ({
 
     expenses() {
       return this.hasMany('apdActivityExpense');
+    },
+
+    async validate() {
+      logger.silly('validating');
+
+      if (this.hasChanged('name')) {
+        const name = this.attributes.name;
+
+        if (typeof name !== 'string' || name.length < 1) {
+          logger.verbose('name is not a string or is empty');
+          throw new Error('invalid-name');
+        }
+
+        const hasName = await this.where({ name }).fetchAll();
+        if (hasName.length) {
+          logger.verbose('another activity already has this name');
+          throw new Error('name-exists');
+        }
+      }
     },
 
     toJSON() {
