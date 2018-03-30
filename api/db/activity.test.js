@@ -12,7 +12,8 @@ tap.test('activity data model', async activityModelTests => {
         apdActivityGoal: { tableName: 'activity_goals' },
         apdActivityGoalObjective: { tableName: 'activity_goal_objectives' },
         apdActivityExpense: { tableName: 'activity_expenses' },
-        apdActivityExpenseEntry: { tableName: 'activity_expense_entries' }
+        apdActivityExpenseEntry: { tableName: 'activity_expense_entries' },
+        apdActivitySchedule: { tableName: 'activity_schedule' }
       },
       'get the expected model definitions'
     );
@@ -39,6 +40,12 @@ tap.test('activity data model', async activityModelTests => {
       activity.apdActivity.expenses,
       'function',
       'creates a expenses relationship for the activity model'
+    );
+
+    setupTests.type(
+      activity.apdActivity.schedule,
+      'function',
+      'creates a schedule relationship for the activity model'
     );
 
     setupTests.type(
@@ -166,6 +173,23 @@ tap.test('activity data model', async activityModelTests => {
         'sets up the relationship mapping to expense'
       );
       apdTests.equal(output, 'bag', 'returns the expected value');
+    }
+  );
+
+  activityModelTests.test(
+    'activity model sets up schedule relationship',
+    async apdTests => {
+      const self = {
+        hasMany: sinon.stub().returns('can')
+      };
+
+      const output = activity.apdActivity.schedule.bind(self)();
+
+      apdTests.ok(
+        self.hasMany.calledWith('apdActivitySchedule'),
+        'sets up the relationship mapping to schedule'
+      );
+      apdTests.equal(output, 'can', 'returns the expected value');
     }
   );
 
@@ -439,4 +463,54 @@ tap.test('activity data model', async activityModelTests => {
       );
     }
   );
+
+  activityModelTests.test('activity schedule model', async scheduleTests => {
+    scheduleTests.test('setup', async setupTests => {
+      setupTests.type(
+        activity.apdActivitySchedule.activity,
+        'function',
+        'creates an activity relationship for the schedule model'
+      );
+    });
+
+    scheduleTests.test(
+      'sets up activity relationship',
+      async relationshipTest => {
+        const self = {
+          belongsTo: sinon.stub().returns('zaphod')
+        };
+
+        const output = activity.apdActivitySchedule.activity.bind(self)();
+
+        relationshipTest.ok(
+          self.belongsTo.calledWith('apdActivity'),
+          'sets up the relationship mapping to activity'
+        );
+        relationshipTest.equal(output, 'zaphod', 'returns the expected value');
+      }
+    );
+
+    scheduleTests.test('overrides toJSON method', async jsonTests => {
+      const self = { get: sinon.stub() };
+      self.get.withArgs('id').returns('zaphod');
+      self.get.withArgs('actual_end').returns('beeblebrox');
+      self.get.withArgs('actual_start').returns('is');
+      self.get.withArgs('milestone').returns('one');
+      self.get.withArgs('planned_end').returns('real');
+      self.get.withArgs('planned_start').returns('cool');
+      self.get.withArgs('status').returns('frood');
+
+      const output = activity.apdActivitySchedule.toJSON.bind(self)();
+
+      jsonTests.match(output, {
+        id: 'zaphod',
+        actualEnd: 'beeblebrox',
+        actualStart: 'is',
+        milestone: 'one',
+        plannedEnd: 'real',
+        plannedStart: 'cool',
+        status: 'frood'
+      });
+    });
+  });
 });
