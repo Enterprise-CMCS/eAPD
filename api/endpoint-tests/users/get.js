@@ -42,7 +42,7 @@ tap.test('users endpoint | GET /users/:userID', async getUserTest => {
       'when requesting a non-existant user ID',
       async invalidTest => {
         const cookies = await login();
-        const { response, body } = await request.get(`${url}/500`, {
+        const { response, body } = await request.get(`${url}/0`, {
           jar: cookies,
           json: true
         });
@@ -56,7 +56,7 @@ tap.test('users endpoint | GET /users/:userID', async getUserTest => {
       'when requesting a valid user ID',
       async validTest => {
         const cookies = await login();
-        const { response, body } = await request.get(`${url}/57`, {
+        const { response, body } = await request.get(`${url}/2000`, {
           jar: cookies,
           json: true
         });
@@ -64,7 +64,7 @@ tap.test('users endpoint | GET /users/:userID', async getUserTest => {
         validTest.same(
           body,
           {
-            id: 57,
+            id: 2000,
             email: 'em@il.com',
             name: null,
             position: null,

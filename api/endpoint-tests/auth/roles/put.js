@@ -13,7 +13,7 @@ tap.test(
   async putRolesTests => {
     await db().seed.run();
 
-    const url = getFullPath('/auth/roles');
+    const url = roleID => getFullPath(`/auth/roles/${roleID}`);
 
     const invalidCases = [
       {
@@ -37,8 +37,8 @@ tap.test(
       }
     ];
 
-    unauthenticatedTest('put', `${url}/1001`, putRolesTests);
-    unauthorizedTest('put', `${url}/1001`, putRolesTests);
+    unauthenticatedTest('put', url(1101), putRolesTests);
+    unauthorizedTest('put', url(1101), putRolesTests);
 
     putRolesTests.test('when authenticated', async authenticatedTests => {
       const cookies = await login();
@@ -46,7 +46,7 @@ tap.test(
       authenticatedTests.test(
         'when updating the role that the user belongs to',
         async invalidTest => {
-          const { response, body } = await request.put(`${url}/1001`, {
+          const { response, body } = await request.put(url(1101), {
             jar: cookies,
             json: { activities: [1001] }
           });
@@ -60,7 +60,7 @@ tap.test(
       );
 
       authenticatedTests.test('with an invalid ID', async invalidTest => {
-        const { response, body } = await request.put(`${url}/9001`, {
+        const { response, body } = await request.put(url(9001), {
           jar: cookies,
           json: {}
         });
@@ -70,7 +70,7 @@ tap.test(
 
       invalidCases.forEach(situation => {
         authenticatedTests.test(situation.name, async invalidTest => {
-          const { response, body } = await request.put(`${url}/1002`, {
+          const { response, body } = await request.put(url(1102), {
             jar: cookies,
             json: situation.body || true
           });
@@ -88,7 +88,7 @@ tap.test(
       });
 
       authenticatedTests.test('with a valid updated role', async validTest => {
-        const { response, body } = await request.put(`${url}/1002`, {
+        const { response, body } = await request.put(url(1102), {
           jar: cookies,
           json: { activities: [1001] }
         });
@@ -97,7 +97,7 @@ tap.test(
         validTest.notOk(body, 'does not send a body');
 
         const activities = await db()('auth_role_activity_mapping')
-          .where({ role_id: 1002 })
+          .where({ role_id: 1102 })
           .select('activity_id')
           .map(activity => activity.activity_id);
 

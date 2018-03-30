@@ -11,16 +11,16 @@ const {
 tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
   await db().seed.run();
 
-  const url = getFullPath('/users');
+  const url = userID => getFullPath(`/users/${userID}`);
 
-  unauthenticatedTest('put', `${url}/1001`, putUsersTests);
-  unauthorizedTest('put', `${url}/1001`, putUsersTests);
+  unauthenticatedTest('put', url(0), putUsersTests);
+  unauthorizedTest('put', url(0), putUsersTests);
 
   putUsersTests.test('when authenticated', async authenticatedTests => {
     const cookies = await login();
 
     authenticatedTests.test('with an invalid ID', async invalidTest => {
-      const { response, body } = await request.put(`${url}/9001`, {
+      const { response, body } = await request.put(url(9001), {
         jar: cookies,
         json: {}
       });
@@ -31,7 +31,7 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
     authenticatedTests.test(
       'with email that already exists',
       async invalidTest => {
-        const { response, body } = await request.put(`${url}/57`, {
+        const { response, body } = await request.put(url(2000), {
           jar: cookies,
           json: { email: 'user2@email' }
         });
@@ -41,7 +41,7 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
     );
 
     authenticatedTests.test('with simple password', async invalidTest => {
-      const { response, body } = await request.put(`${url}/57`, {
+      const { response, body } = await request.put(url(2000), {
         jar: cookies,
         json: { password: 'password' }
       });
@@ -50,7 +50,7 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
     });
 
     authenticatedTests.test('with valid user info', async validTest => {
-      const { response, body } = await request.put(`${url}/57`, {
+      const { response, body } = await request.put(url(2000), {
         jar: cookies,
         json: {
           email: 'new-email',
@@ -64,7 +64,7 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
       validTest.same(
         body,
         {
-          id: 57,
+          id: 2000,
           email: 'new-email',
           name: 'Inigo Montoya',
           position: 'Centerfield',
@@ -75,7 +75,7 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
       );
 
       const user = await db()('users')
-        .where({ id: 57 })
+        .where({ id: 2000 })
         .first();
 
       validTest.equal(

@@ -40,7 +40,7 @@ tap.test(
         authenticated.test(
           `with an activity on an APD in a state other than the user's state`,
           async invalidTest => {
-            const { response, body } = await request.put(`${url}/2000`, {
+            const { response, body } = await request.put(`${url}/4110`, {
               jar: cookies,
               json: true
             });
@@ -57,7 +57,7 @@ tap.test(
         authenticated.test(
           'with an activity name that already exists for the APD',
           async invalidTest => {
-            const { response, body } = await request.put(`${url}/1000`, {
+            const { response, body } = await request.put(`${url}/4100`, {
               jar: cookies,
               json: {
                 name: 'My Second Activity'
@@ -78,7 +78,7 @@ tap.test(
         );
 
         authenticated.test('with an empty activity name', async invalidTest => {
-          const { response, body } = await request.put(`${url}/1000`, {
+          const { response, body } = await request.put(`${url}/4100`, {
             jar: cookies,
             json: {
               name: ''
@@ -98,7 +98,7 @@ tap.test(
         });
 
         authenticated.test('with a valid activity', async validTest => {
-          const { response, body } = await request.put(`${url}/1000`, {
+          const { response, body } = await request.put(`${url}/4100`, {
             jar: cookies,
             json: {
               name: 'updated name',
@@ -110,7 +110,7 @@ tap.test(
           validTest.same(
             body,
             {
-              id: 1000,
+              id: 4100,
               name: 'updated name',
               description: 'updated description',
               approaches: [],

@@ -113,7 +113,7 @@ tap.test('login endpoint | /auth/login', async loginTest => {
         ),
         'sends an http-only session cookie'
       );
-      validTest.same(body, { id: 57 }, 'sends back the user ID');
+      validTest.same(body, { id: 2000 }, 'sends back the user ID');
     }
   );
 
@@ -135,7 +135,7 @@ tap.test('login endpoint | /auth/login', async loginTest => {
         ),
         'sends an http-only session cookie'
       );
-      validTest.same(body, { id: 57 }, 'sends back the user ID');
+      validTest.same(body, { id: 2000 }, 'sends back the user ID');
     }
   );
 });
