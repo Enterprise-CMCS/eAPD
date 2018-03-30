@@ -170,6 +170,117 @@ tap.test('activity data model', async activityModelTests => {
   );
 
   activityModelTests.test(
+    'activity model validate method',
+    async validationTests => {
+      const sandbox = sinon.createSandbox();
+      const self = {
+        hasChanged: sandbox.stub(),
+        where: sandbox.stub(),
+        fetchAll: sandbox.stub(),
+        attributes: {}
+      };
+      const validate = activity.apdActivity.validate.bind(self);
+
+      validationTests.beforeEach(async () => {
+        sandbox.resetBehavior();
+        sandbox.resetHistory();
+
+        self.attributes = {};
+
+        self.where.returns(self);
+      });
+
+      validationTests.test(
+        'does not throw if the name has not changed',
+        async test => {
+          self.hasChanged.withArgs('name').returns(false);
+
+          test.resolves(validate(), 'validate resolves');
+        }
+      );
+
+      validationTests.test(
+        'does not throw if the name has changed, is valid, and is unique',
+        async test => {
+          self.hasChanged.withArgs('name').returns(true);
+          self.attributes.name = 'valid name';
+          self.fetchAll.resolves([]);
+
+          test.resolves(validate(), 'validate resolves');
+        }
+      );
+
+      validationTests.test('throws if the name is null', async test => {
+        self.hasChanged.withArgs('name').returns(true);
+        self.attributes.name = null;
+
+        try {
+          await validate();
+        } catch (e) {
+          test.ok('rejects on an empty name');
+          test.equal(
+            e.message,
+            'invalid-name',
+            'rejects with the expected message'
+          );
+        }
+      });
+
+      validationTests.test('throws if the name is not a number', async test => {
+        self.hasChanged.withArgs('name').returns(true);
+        self.attributes.name = 7;
+
+        try {
+          await validate();
+        } catch (e) {
+          test.ok('rejects on an empty name');
+          test.equal(
+            e.message,
+            'invalid-name',
+            'rejects with the expected message'
+          );
+        }
+      });
+
+      validationTests.test(
+        'throws if the name is an empty string',
+        async test => {
+          self.hasChanged.withArgs('name').returns(true);
+          self.attributes.name = '';
+
+          try {
+            await validate();
+          } catch (e) {
+            test.ok('rejects on an empty name');
+            test.equal(
+              e.message,
+              'invalid-name',
+              'rejects with the expected message'
+            );
+          }
+        }
+      );
+
+      validationTests.test('throws if the name already exists', async test => {
+        self.hasChanged.withArgs('name').returns(true);
+        self.attributes.name = 'valid name';
+        self.fetchAll.resolves([{ hello: 'world' }]);
+
+        try {
+          await validate();
+        } catch (e) {
+          test.ok('rejects if the name already exists');
+          test.equal(
+            e.message,
+            'name-exists',
+            'rejects with the expected message'
+          );
+        }
+      });
+    }
+  );
+
+  activityModelTests.test(
     'activity model overrides toJSON method',
     async apdTests => {
       const self = {
