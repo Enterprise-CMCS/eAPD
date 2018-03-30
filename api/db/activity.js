@@ -18,6 +18,10 @@ module.exports = () => ({
       return this.hasMany('apdActivityExpense');
     },
 
+    schedule() {
+      return this.hasMany('apdActivitySchedule');
+    },
+
     toJSON() {
       return {
         id: this.get('id'),
@@ -110,6 +114,26 @@ module.exports = () => ({
         year: this.get('year'),
         amount: this.get('amount'),
         description: this.get('description')
+      };
+    }
+  },
+
+  apdActivitySchedule: {
+    tableName: 'activity_schedule',
+
+    activity() {
+      return this.belongsTo('apdActivity');
+    },
+
+    toJSON() {
+      return {
+        id: this.get('id'),
+        actualEnd: this.get('actual_end'),
+        actualStart: this.get('actual_start'),
+        milestone: this.get('milestone'),
+        plannedEnd: this.get('planned_end'),
+        plannedStart: this.get('planned_start'),
+        status: this.get('status')
       };
     }
   }
