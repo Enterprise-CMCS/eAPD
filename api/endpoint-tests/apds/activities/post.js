@@ -175,6 +175,34 @@ tap.test(
               }
             );
 
+            multipleTests.test(
+              'when an activity has an existing name',
+              async invalidTest => {
+                const { response, body } = await request.post(url(4000), {
+                  jar: cookies,
+                  json: [
+                    {
+                      name: 'Find Success'
+                    },
+                    {
+                      name: 'hello'
+                    }
+                  ]
+                });
+
+                invalidTest.equal(
+                  response.statusCode,
+                  400,
+                  'gives a 400 status code'
+                );
+                invalidTest.same(
+                  body,
+                  { error: 'add-activity-name-exists' },
+                  'sends back an error token'
+                );
+              }
+            );
+
             multipleTests.test('with valid activities', async validTest => {
               const { response, body } = await request.post(url(4000), {
                 jar: cookies,
