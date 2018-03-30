@@ -176,14 +176,14 @@ tap.test(
             );
 
             multipleTests.test('with valid activities', async validTest => {
-              const { response, body } = await request.post(url(4100), {
+              const { response, body } = await request.post(url(4000), {
                 jar: cookies,
                 json: [
                   {
                     name: 'new activity name'
                   },
                   {
-                    id: 1001,
+                    id: 4101,
                     name: 'activity new name'
                   }
                 ]
