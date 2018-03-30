@@ -10,7 +10,8 @@ const {
 tap.test(
   'APD activity approaches endpoint | PUT /activities/:id/approaches',
   async putGoalsTest => {
-    const url = apdID => getFullPath(`/activities/${apdID}/approaches`);
+    const url = activityID =>
+      getFullPath(`/activities/${activityID}/approaches`);
     await db().seed.run();
 
     unauthenticatedTest('put', url(1), putGoalsTest);
@@ -23,7 +24,7 @@ tap.test(
         authenticated.test(
           'with a non-existant activity ID',
           async invalidTest => {
-            const { response, body } = await request.put(url(9000), {
+            const { response, body } = await request.put(url(1), {
               jar: cookies,
               json: true
             });
@@ -40,7 +41,7 @@ tap.test(
         authenticated.test(
           `with an activity on an APD in a state other than the user's state`,
           async invalidTest => {
-            const { response, body } = await request.put(url(2000), {
+            const { response, body } = await request.put(url(4110), {
               jar: cookies,
               json: true
             });
@@ -57,7 +58,7 @@ tap.test(
         authenticated.test(
           'with approaches that are not an array',
           async invalidTest => {
-            const { response, body } = await request.put(url(1000), {
+            const { response, body } = await request.put(url(4100), {
               jar: cookies,
               json: { hello: 'world' }
             });
@@ -76,7 +77,7 @@ tap.test(
         );
 
         authenticated.test('with an array of approaches', async validTest => {
-          const { response, body } = await request.put(url(1000), {
+          const { response, body } = await request.put(url(4100), {
             jar: cookies,
             json: true,
             body: [
@@ -97,7 +98,7 @@ tap.test(
           validTest.match(
             body,
             {
-              id: 1000,
+              id: 4100,
               name: 'Find Success',
               description: 'Some text goes here',
               approaches: [

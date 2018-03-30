@@ -8,18 +8,18 @@ const {
   unauthorizedTest
 } = require('../utils');
 
-const url = getFullPath('/users');
+const url = userID => getFullPath(`/users/${userID}`);
 
 tap.test('users endpoint | DELETE /users/:userID', async getUserTest => {
   await db().seed.run();
 
-  unauthenticatedTest('delete', `${url}/some-id`, getUserTest);
-  unauthorizedTest('delete', `${url}/some-id`, getUserTest);
+  unauthenticatedTest('delete', url(0), getUserTest);
+  unauthorizedTest('delete', url(0), getUserTest);
 
   getUserTest.test('when authenticated', async authenticatedTests => {
     const cookies = await login();
     const del = id =>
-      request.delete(`${url}/${id}`, {
+      request.delete(url(id), {
         jar: cookies,
         json: true
       });
@@ -37,7 +37,7 @@ tap.test('users endpoint | DELETE /users/:userID', async getUserTest => {
     authenticatedTests.test(
       'when deleting a non-existant user ID',
       async invalidTest => {
-        const { response, body } = await del(500);
+        const { response, body } = await del(0);
 
         invalidTest.equal(response.statusCode, 404, 'gives a 404 status code');
         invalidTest.notOk(body, 'does not send a body');
@@ -47,7 +47,7 @@ tap.test('users endpoint | DELETE /users/:userID', async getUserTest => {
     authenticatedTests.test(
       'when attempting to delete self',
       async invalidTest => {
-        const { response, body } = await del(57);
+        const { response, body } = await del(2000);
 
         invalidTest.equal(response.statusCode, 403, 'gives a 403 status code');
         invalidTest.notOk(body, 'does not send a body');
@@ -57,7 +57,7 @@ tap.test('users endpoint | DELETE /users/:userID', async getUserTest => {
     authenticatedTests.test(
       'when deleting a valid user ID',
       async validTest => {
-        const { response, body } = await del(1000);
+        const { response, body } = await del(2001);
 
         validTest.equal(response.statusCode, 204, 'gives a 204 status code');
         validTest.notOk(body, 'does not send a body');
