@@ -25,7 +25,7 @@ class TopNav extends Component {
       <header className="clearfix py1 border-bottom border-silver">
         <div className="sm-col">
           <Link to="/" className="btn">
-            CMS HITECH APD
+            2018 HITECH APD
           </Link>
         </div>
         <div className="sm-col-right h5">
