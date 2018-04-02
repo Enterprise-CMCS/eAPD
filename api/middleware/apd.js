@@ -1,18 +1,17 @@
 const logger = require('../logger')('apd middleware');
+const { cache, modelIndex } = require('./cache');
+
 const {
   apd: defaultApdModel,
   apdActivity: defaultActivityModel
 } = require('../db').models;
 
-const cache = {};
-
 module.exports.loadApd = (
   model = defaultApdModel,
   idParam = 'id',
   ApdModel = defaultApdModel
-) => {
-  const key = ['loadApd', model, idParam, ApdModel];
-  if (!cache[key]) {
+) =>
+  cache(['loadApd', modelIndex(model), idParam, ApdModel], () => {
     const loadApd = async (req, res, next) => {
       logger.silly(req, 'loading APD for request');
       try {
@@ -44,14 +43,11 @@ module.exports.loadApd = (
         res.status(500).end();
       }
     };
-    cache[key] = loadApd;
-  }
-  return cache[key];
-};
+    return loadApd;
+  });
 
-module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') => {
-  const key = ['userCanEditAPD', model, idParam];
-  if (!cache[key]) {
+module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') =>
+  cache(['userCanEditAPD', modelIndex(model), idParam], () => {
     const userCanEditAPD = async (req, res, next) => {
       logger.silly(req, 'verifying the user can access this APD');
       await module.exports.loadApd(model, idParam)(req, res, async () => {
@@ -64,17 +60,11 @@ module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') => {
         }
       });
     };
-    cache[key] = userCanEditAPD;
-  }
-  return cache[key];
-};
+    return userCanEditAPD;
+  });
 
-module.exports.loadActivity = (
-  idParam = 'id',
-  model = defaultActivityModel
-) => {
-  const key = ['loadActivity', model, idParam];
-  if (!cache[key]) {
+module.exports.loadActivity = (idParam = 'id', model = defaultActivityModel) =>
+  cache(['loadActivity', modelIndex(model), idParam], () => {
     const loadActivity = async (req, res, next) => {
       try {
         logger.silly(req, 'loading APD activity for request');
@@ -98,7 +88,5 @@ module.exports.loadActivity = (
         res.status(500).end();
       }
     };
-    cache[key] = loadActivity;
-  }
-  return cache[key];
-};
+    return loadActivity;
+  });
