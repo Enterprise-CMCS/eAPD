@@ -8,11 +8,10 @@ const cache = (key, getMiddleware) => {
 
 const knownModels = [];
 const modelIndex = model => {
-  if (knownModels.includes(model)) {
-    return knownModels.indexOf(model);
+  if (!knownModels.includes(model)) {
+    knownModels.push(model);
   }
-  knownModels.push(model);
-  return knownModels.length - 1;
+  return knownModels.indexOf(model);
 };
 
 module.exports = { cache, modelIndex };
