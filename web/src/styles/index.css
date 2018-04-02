@@ -8,6 +8,7 @@
 @import 'app/layout';
 @import 'app/spacing';
 @import 'app/table';
+@import 'app/type';
 
 @custom-media --breakpoint-sm (min-width: 40rem);
 @custom-media --breakpoint-md (min-width: 52rem);
