@@ -10,6 +10,7 @@ tap.test('apd activities endpoint setup', async endpointTest => {
   const approachesEndpoint = sinon.spy();
   const goalsEndpoint = sinon.spy();
   const expensesEndpoints = sinon.spy();
+  const scheduleEndpoints = sinon.spy();
 
   apdsIndex(
     app,
@@ -17,7 +18,8 @@ tap.test('apd activities endpoint setup', async endpointTest => {
     putEndpoint,
     approachesEndpoint,
     expensesEndpoints,
-    goalsEndpoint
+    goalsEndpoint,
+    scheduleEndpoints
   );
 
   endpointTest.ok(
@@ -39,5 +41,9 @@ tap.test('apd activities endpoint setup', async endpointTest => {
   endpointTest.ok(
     goalsEndpoint.calledWith(app),
     'apd activity goals endpoints are setup with the app'
+  );
+  endpointTest.ok(
+    scheduleEndpoints.calledWith(app),
+    'apd activity schedule endpoints are setup with the app'
   );
 });
