@@ -39,5 +39,6 @@ footer {
   .site-sidebar {
     display: block;
     flex: 0 0 18rem;
+    overflow: auto;
   }
 }
