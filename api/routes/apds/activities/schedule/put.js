@@ -1,5 +1,5 @@
 const logger = require('../../../../logger')(
-  'apd activity approaches route post'
+  'apd activity schedule route post'
 );
 const {
   apdActivity: defaultActivityModel,
@@ -27,7 +27,7 @@ module.exports = (
       logger.silly(req, `handling PUT ${route} route`);
       logger.silly(
         req,
-        `attempting to set approaches on apd activity [${req.params.id}]`
+        `attempting to set schedule on apd activity [${req.params.id}]`
       );
 
       try {
@@ -52,12 +52,12 @@ module.exports = (
           req.body.map(async ({ milestone, status }) => {
             // don't insert empty objects, that's silly
             if (milestone || status) {
-              const approach = ScheduleModel.forge({
+              const schedule = ScheduleModel.forge({
                 milestone,
                 status,
                 activity_id: activityID
               });
-              await approach.save();
+              await schedule.save();
             }
           })
         );
