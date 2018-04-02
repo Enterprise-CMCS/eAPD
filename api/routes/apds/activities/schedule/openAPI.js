@@ -36,36 +36,51 @@ const activityObjectSchema = {
 };
 
 const openAPI = {
-  '/activities/{id}/approaches': {
+  '/activities/{id}/schedule': {
     put: {
-      description: 'Set the approaches for a specific activity',
+      description: 'Set the schedule for a specific activity',
       parameters: [
         {
           name: 'id',
           in: 'path',
-          description: 'The ID of the activity to set the approaches for',
+          description: 'The ID of the activity to set the schedule for',
           required: true
         }
       ],
       requestBody: {
-        description: 'The new approaches',
+        description: 'The new schedule',
         required: true,
         content: jsonResponse(
           arrayOf({
             type: 'object',
             properties: {
-              description: {
+              milestone: {
                 type: 'string',
-                description: 'The description of this approach'
+                description: 'The milestone this schedule entry applies to'
               },
-              alternatives: {
+              status: {
                 type: 'string',
-                description: 'The alternatives considered for this approach'
+                description: 'The current status of the milestone'
               },
-              explanation: {
+              plannedStart: {
                 type: 'string',
                 description:
-                  'An explanation of why this approach was chosen over the alternatives'
+                  'The planned start date for the milestone as an ISO-8601 date string.'
+              },
+              actualStart: {
+                type: 'string',
+                description:
+                  'The actual start date for the milestone, if known, as an ISO-8601 date string.'
+              },
+              plannedEnd: {
+                type: 'string',
+                description:
+                  'The planned end date for the milestone as an ISO-8601 date string.'
+              },
+              actualEnd: {
+                type: 'string',
+                description:
+                  'The actual end date for the milestone, if known, as an ISO-8601 date string.'
               }
             }
           })
@@ -77,7 +92,7 @@ const openAPI = {
           content: jsonResponse(activityObjectSchema)
         },
         400: {
-          description: 'The approaches are invalid (e.g., not an array)',
+          description: 'The schedule entries are invalid (e.g., not an array)',
           content: errorToken
         },
         404: {

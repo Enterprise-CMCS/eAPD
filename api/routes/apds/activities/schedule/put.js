@@ -3,7 +3,7 @@ const logger = require('../../../../logger')(
 );
 const {
   apdActivity: defaultActivityModel,
-  apdActivityApproach: defaultApproachModel
+  apdActivitySchedule: defaultActivitySchedule
 } = require('../../../../db').models;
 const {
   loggedIn,
@@ -14,9 +14,9 @@ const {
 module.exports = (
   app,
   ActivityModel = defaultActivityModel,
-  ApproachModel = defaultApproachModel
+  ScheduleModel = defaultActivitySchedule
 ) => {
-  const route = '/activities/:id/approaches';
+  const route = '/activities/:id/schedule';
   logger.silly(`setting up PUT ${route} route`);
   app.put(
     route,
@@ -38,26 +38,23 @@ module.exports = (
           logger.verbose('request is not an array');
           return res
             .status(400)
-            .send({ error: 'edit-activity-invalid-approaches' })
+            .send({ error: 'edit-activity-invalid-schedule' })
             .end();
         }
 
-        // Delete the previous approaches for this activity
-        logger.silly('deleting previous approaches activity');
+        // Delete the previous schedule for this activity
+        logger.silly('deleting previous activity schedule');
         await Promise.all(
-          activity
-            .related('approaches')
-            .map(async approach => approach.destroy())
+          activity.related('schedule').map(async schedule => schedule.destroy())
         );
 
         await Promise.all(
-          req.body.map(async ({ description, alternatives, explanation }) => {
+          req.body.map(async ({ milestone, status }) => {
             // don't insert empty objects, that's silly
-            if (description || alternatives || explanation) {
-              const approach = ApproachModel.forge({
-                description,
-                alternatives,
-                explanation,
+            if (milestone || status) {
+              const approach = ScheduleModel.forge({
+                milestone,
+                status,
                 activity_id: activityID
               });
               await approach.save();
@@ -68,7 +65,12 @@ module.exports = (
         const updatedActivity = await ActivityModel.where({
           id: activityID
         }).fetch({
-          withRelated: ['goals.objectives', 'approaches']
+          withRelated: [
+            'goals.objectives',
+            'approaches',
+            'expenses.entries',
+            'schedule'
+          ]
         });
 
         return res.send(updatedActivity.toJSON());
