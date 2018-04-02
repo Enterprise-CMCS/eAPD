@@ -50,7 +50,8 @@ module.exports = () => ({
         description: this.get('description'),
         goals: this.related('goals'),
         approaches: this.related('approaches'),
-        expenses: this.related('expenses')
+        expenses: this.related('expenses'),
+        schedule: this.related('schedule')
       };
     }
   },
