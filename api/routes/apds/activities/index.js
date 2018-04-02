@@ -4,6 +4,7 @@ const put = require('./put');
 const goals = require('./goals/put');
 const approaches = require('./approaches/put');
 const expenses = require('./expenses/put');
+const schedule = require('./schedule/put');
 
 module.exports = (
   app,
@@ -11,7 +12,8 @@ module.exports = (
   putEndpoint = put,
   approachesEndpoint = approaches,
   expensesEndpoints = expenses,
-  goalsEndpoints = goals
+  goalsEndpoints = goals,
+  scheduleEndpoints = schedule
 ) => {
   logger.silly('setting up POST endpoint');
   postEndpoint(app);
@@ -23,4 +25,6 @@ module.exports = (
   expensesEndpoints(app);
   logger.silly('setting up goals endpoints');
   goalsEndpoints(app);
+  logger.silly('setting up schedule endpoints');
+  scheduleEndpoints(app);
 };
