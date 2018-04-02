@@ -20,7 +20,7 @@ const Hello = () => (
       <div className="clearfix mxn1">
         {statesWithImg.map(s => (
           <div key={s.id} className="col col-3 sm-col-2 px1 mb2">
-            <div className="p1 border">
+            <div className="p1 bg-black white rounded">
               <img key={s.id} src={`/static/img/${s.id}.svg`} alt={s.name} />
               <div className="h6 truncate">{s.name}</div>
             </div>
