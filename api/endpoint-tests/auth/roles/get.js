@@ -32,7 +32,7 @@ tap.test('auth roles endpoint | GET /auth/roles', async getUsersTest => {
       [
         {
           name: 'admin',
-          id: 1001,
+          id: 1101,
           activities: [
             'add-users',
             'create-roles',
@@ -49,12 +49,12 @@ tap.test('auth roles endpoint | GET /auth/roles', async getUsersTest => {
         },
         {
           name: 'cms-reviewer',
-          id: 1002,
+          id: 1102,
           activities: ['edit-roles']
         },
         {
           name: 'state-submitter',
-          id: 1003,
+          id: 1103,
           activities: []
         }
       ],

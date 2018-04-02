@@ -13,16 +13,16 @@ tap.test(
   async deleteRolesTests => {
     await db().seed.run();
 
-    const url = getFullPath('/auth/roles');
+    const url = roleID => getFullPath(`/auth/roles/${roleID}`);
 
-    unauthenticatedTest('delete', `${url}/1001`, deleteRolesTests);
-    unauthorizedTest('delete', `${url}/1001`, deleteRolesTests);
+    unauthenticatedTest('delete', url(1001), deleteRolesTests);
+    unauthorizedTest('delete', url(1001), deleteRolesTests);
 
     deleteRolesTests.test('when authenticated', async authenticatedTests => {
       const cookies = await login();
 
       authenticatedTests.test('with an invalid role ID', async invalidTest => {
-        const { response, body } = await request.delete(`${url}/9001`, {
+        const { response, body } = await request.delete(url(9001), {
           jar: cookies
         });
         invalidTest.equal(response.statusCode, 404, 'gives a 404 status code');
@@ -32,7 +32,7 @@ tap.test(
       authenticatedTests.test(
         'deleting the role that the user belongs to',
         async invalidTest => {
-          const { response, body } = await request.delete(`${url}/1001`, {
+          const { response, body } = await request.delete(url(1101), {
             jar: cookies
           });
           invalidTest.equal(
@@ -47,7 +47,7 @@ tap.test(
       authenticatedTests.test(
         'deleting a role that the user does not belong to',
         async validTest => {
-          const { response, body } = await request.delete(`${url}/1002`, {
+          const { response, body } = await request.delete(url(1102), {
             jar: cookies
           });
 
@@ -55,10 +55,10 @@ tap.test(
           validTest.notOk(body, 'does not send a body');
 
           const role = await db()('auth_roles')
-            .where({ id: 2 })
+            .where({ id: 1102 })
             .first();
           const mappings = await db()('auth_role_activity_mapping')
-            .where({ role_id: 2 })
+            .where({ role_id: 1102 })
             .select('*');
 
           validTest.notOk(role, 'deletes the role from the database');

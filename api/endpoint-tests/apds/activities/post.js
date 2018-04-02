@@ -37,7 +37,7 @@ tap.test(
         authenticated.test(
           `with an APD in a state other than the user's state`,
           async invalidTest => {
-            const { response, body } = await request.post(url(1001), {
+            const { response, body } = await request.post(url(4001), {
               jar: cookies,
               json: true
             });
@@ -59,7 +59,7 @@ tap.test(
             singleTests.test(
               'with an activity name that already exists for the APD',
               async invalidTest => {
-                const { response, body } = await request.post(url(1000), {
+                const { response, body } = await request.post(url(4000), {
                   jar: cookies,
                   json: {
                     name: 'Find Success'
@@ -82,7 +82,7 @@ tap.test(
             singleTests.test(
               'with an empty activity name',
               async invalidTest => {
-                const { response, body } = await request.post(url(1000), {
+                const { response, body } = await request.post(url(4000), {
                   jar: cookies,
                   json: {
                     name: ''
@@ -103,7 +103,7 @@ tap.test(
             );
 
             singleTests.test('with a valid activity', async validTest => {
-              const { response, body } = await request.post(url(1000), {
+              const { response, body } = await request.post(url(4000), {
                 jar: cookies,
                 json: {
                   name: 'new activity name',
@@ -121,11 +121,11 @@ tap.test(
                 body,
                 [
                   {
-                    id: 1000,
+                    id: 4100,
                     name: 'Find Success'
                   },
                   {
-                    id: 1001,
+                    id: 4101,
                     name: 'My Second Activity'
                   },
                   {
@@ -150,7 +150,7 @@ tap.test(
             multipleTests.test(
               'when an activity has an invalid name',
               async invalidTest => {
-                const { response, body } = await request.post(url(1000), {
+                const { response, body } = await request.post(url(4000), {
                   jar: cookies,
                   json: [
                     {
@@ -175,15 +175,43 @@ tap.test(
               }
             );
 
+            multipleTests.test(
+              'when an activity has an existing name',
+              async invalidTest => {
+                const { response, body } = await request.post(url(4000), {
+                  jar: cookies,
+                  json: [
+                    {
+                      name: 'Find Success'
+                    },
+                    {
+                      name: 'hello'
+                    }
+                  ]
+                });
+
+                invalidTest.equal(
+                  response.statusCode,
+                  400,
+                  'gives a 400 status code'
+                );
+                invalidTest.same(
+                  body,
+                  { error: 'add-activity-name-exists' },
+                  'sends back an error token'
+                );
+              }
+            );
+
             multipleTests.test('with valid activities', async validTest => {
-              const { response, body } = await request.post(url(1000), {
+              const { response, body } = await request.post(url(4000), {
                 jar: cookies,
                 json: [
                   {
                     name: 'new activity name'
                   },
                   {
-                    id: 1001,
+                    id: 4101,
                     name: 'activity new name'
                   }
                 ]
@@ -198,11 +226,11 @@ tap.test(
                 body,
                 [
                   {
-                    id: 1000,
+                    id: 4100,
                     name: 'Find Success'
                   },
                   {
-                    id: 1001,
+                    id: 4101,
                     name: 'activity new name'
                   },
                   {

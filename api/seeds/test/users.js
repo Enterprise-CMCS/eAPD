@@ -1,22 +1,21 @@
 const bcrypt = require('bcryptjs');
 
-// Deletes ALL existing entries
 exports.seed = async knex => {
   await knex('users').insert([
     {
-      id: 57,
+      id: 2000,
       email: 'em@il.com',
       password: bcrypt.hashSync('password'),
       auth_role: 'admin'
     },
     {
-      id: 58,
+      id: 2001,
       email: 'user2@email',
       password: bcrypt.hashSync('something'),
       state_id: 'mn'
     },
     {
-      id: 1000,
+      id: 2010,
       email: 'no-permissions',
       password: bcrypt.hashSync('password')
     }

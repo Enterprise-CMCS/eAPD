@@ -31,7 +31,7 @@ tap.test('APD endpoint | PUT /apds/:id', async putAPDTest => {
       authenticated.test(
         `with an APD in a state other than the user's state`,
         async invalidTest => {
-          const { response, body } = await request.put(url(1001), {
+          const { response, body } = await request.put(url(4001), {
             jar: cookies,
             json: true
           });
@@ -46,7 +46,7 @@ tap.test('APD endpoint | PUT /apds/:id', async putAPDTest => {
       );
 
       authenticated.test('with a valid update', async validTest => {
-        const { response, body } = await request.put(url(1000), {
+        const { response, body } = await request.put(url(4000), {
           jar: cookies,
           json: {
             status: 'new status',
@@ -58,7 +58,7 @@ tap.test('APD endpoint | PUT /apds/:id', async putAPDTest => {
         validTest.match(
           body,
           {
-            id: 1000,
+            id: 4000,
             period: 'new period',
             status: 'new status',
             state_id: 'mn'

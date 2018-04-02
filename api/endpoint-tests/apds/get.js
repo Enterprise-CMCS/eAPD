@@ -40,12 +40,12 @@ tap.test('APD endpoint | GET /apds', async getAPDsTest => {
         body,
         [
           {
-            id: 1000,
+            id: 4000,
             status: 'draft',
             state_id: 'mn',
             activities: [
               {
-                id: 1000,
+                id: 4100,
                 name: 'Find Success',
                 description: 'Some text goes here',
                 expenses: [],
@@ -73,7 +73,7 @@ tap.test('APD endpoint | GET /apds', async getAPDsTest => {
                 ]
               },
               {
-                id: 1001,
+                id: 4101,
                 name: 'My Second Activity',
                 description: 'More gunk',
                 expenses: [],
