@@ -3,38 +3,6 @@ const {
   schema: { arrayOf, errorToken, jsonResponse }
 } = require('../../../openAPI/helpers');
 
-const activityObjectSchema = {
-  type: 'object',
-  properties: {
-    id: {
-      type: 'number',
-      description: 'Activity globally-unique ID'
-    },
-    name: {
-      type: 'string',
-      description: 'Activity name, unique within an APD'
-    },
-    description: {
-      type: 'string',
-      description: 'Activity description'
-    },
-    goals: arrayOf({
-      type: 'object',
-      description: 'Activity goal',
-      properties: {
-        description: {
-          type: 'string',
-          description: 'Goal description'
-        },
-        objectives: arrayOf({
-          type: 'string',
-          description: 'Goal objective'
-        })
-      }
-    })
-  }
-};
-
 const openAPI = {
   '/activities/{id}/schedule': {
     put: {
@@ -89,7 +57,7 @@ const openAPI = {
       responses: {
         200: {
           description: 'The updated activity',
-          content: jsonResponse(activityObjectSchema)
+          content: jsonResponse({ $ref: '#/components/schemas/activity' })
         },
         400: {
           description: 'The schedule entries are invalid (e.g., not an array)',
