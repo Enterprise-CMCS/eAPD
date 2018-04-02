@@ -12,6 +12,7 @@ import ActivityOverview from './containers/ActivityOverview';
 import ActivitySchedule from './containers/ActivitySchedule';
 import ApdOverview from './containers/ApdOverview';
 import Login from './containers/Login';
+import PoC from './components/PoC';
 import ReviewAndSubmit from './containers/ReviewAndSubmit';
 import StateContacts from './containers/StateContacts';
 import StateStart from './containers/StateStart';
@@ -20,6 +21,7 @@ import StatePersonnel from './containers/StatePersonnel';
 const routes = [
   { path: '/', component: Hello, exact: true, nonPrivate: true },
   { path: '/login', component: Login, nonPrivate: true },
+  { path: '/poc', component: PoC, nonPrivate: true },
   { path: '/activities-list', component: ActivitiesList },
   { path: '/activities-start', component: ActivitiesStart },
   { path: '/activity-approach/:activityName', component: ActivityApproach },
