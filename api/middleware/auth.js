@@ -1,6 +1,5 @@
 const logger = require('../logger')('auth middleware');
-
-const canCache = {};
+const { cache } = require('./cache');
 
 const loggedIn = (req, res, next) => {
   logger.silly(req, 'got a loggedIn middleware request');
@@ -15,10 +14,8 @@ const loggedIn = (req, res, next) => {
 
 module.exports.loggedIn = loggedIn;
 
-const canCreator = activity => {
-  if (!canCache[activity]) {
-    logger.silly(`can[${activity}] cache miss`);
-
+const canCreator = activity =>
+  cache(['can', activity], () => {
     const can = (req, res, next) => {
       logger.silly(req, `got a can middleware request for [${activity}]`);
       // First check if they're logged in
@@ -33,10 +30,7 @@ const canCreator = activity => {
         }
       });
     };
-    canCache[activity] = can;
-    logger.silly(`added handler for [${activity}] can middleware`);
-  }
-  return canCache[activity];
-};
+    return can;
+  });
 
 module.exports = { loggedIn, can: canCreator };
