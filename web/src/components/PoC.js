@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import Icon from '@fortawesome/react-fontawesome';
 
 import Collapsible from './Collapsible';
-import TopNav from '../containers/TopNav';
+import FormActivityGoals from './FormActivityGoals';
+import { faHelp, faChevronDown, faSignOut } from './Icons';
+import { getParams, stateLookup } from '../util';
 
 const sections = [
   'Short Summary of Activity',
@@ -10,12 +13,27 @@ const sections = [
   'Goals and Objectives'
 ];
 
-const Sidebar = ({ activities }) => {
+const activityDisplay = (a, i) => {
+  let display = `Activity ${i}`;
+  if (a.name) display += `: ${a.name}`;
+  return `${display} (${a.type})`;
+};
+
+const Sidebar = ({ activities, place }) => {
   const linkClass = 'inline-block white text-decoration-none truncate';
 
   return (
     <div className="site-sidebar bg-navy">
       <div className="p2 xs-hide sm-hide">
+        <div className="mb3 center">
+          <img
+            src={`/static/img/${place.id}.svg`}
+            alt={place.name}
+            width="80"
+            height="80"
+          />
+        </div>
+
         <ul className="list-reset">
           <li className="mb1">
             <a href="#!" className={linkClass}>
@@ -32,7 +50,8 @@ const Sidebar = ({ activities }) => {
               <Fragment key={a.id}>
                 <li className="mb1">
                   <a href="#!" className={linkClass}>
-                    {i + 1}. {a.name || 'N/A'} ({a.type})
+                    {activityDisplay(a, i + 1)}{' '}
+                    <Icon icon={faChevronDown} color="#02bfe7" size="sm" />
                   </a>
                 </li>
                 <ul className="ml3 list-reset">
@@ -48,20 +67,57 @@ const Sidebar = ({ activities }) => {
             ))}
           </ul>
         </ul>
+        <div className="mt2 pt2 border-top border-white">
+          <button type="button" className="btn btn-primary bg-white navy">
+            Save as PDF
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 Sidebar.propTypes = {
-  activities: PropTypes.array.isRequired
+  activities: PropTypes.array.isRequired,
+  place: PropTypes.object.isRequired
+};
+
+const TopNav = ({ place }) => (
+  <header className="clearfix py1 bg-white">
+    <div className="sm-col">
+      <a href="#!" className="btn caps">
+        2018 {place.name} HITECH APD
+      </a>
+    </div>
+    <div className="sm-col-right h5">
+      <div>
+        <button type="button" className="btn h5 regular">
+          <span className="mr-tiny">Help</span>
+          <Icon icon={faHelp} />
+        </button>
+        <button type="button" className="btn h5 regular">
+          <span className="mr-tiny">Log out</span>
+          <Icon icon={faSignOut} />
+        </button>
+      </div>
+    </div>
+  </header>
+);
+
+TopNav.propTypes = {
+  place: PropTypes.object.isRequired
 };
 
 class PoC extends Component {
   constructor(props) {
     super(props);
 
+    const fallback = 'ca';
+    const { state: stateId } = getParams(window.location.hash);
+    const place = stateLookup(stateId || fallback) || stateLookup(fallback);
+
     this.state = {
+      place,
       activities: [
         {
           id: 1,
@@ -102,14 +158,14 @@ class PoC extends Component {
   };
 
   render() {
-    const { activities } = this.state;
+    const { activities, place } = this.state;
 
     return (
       <div className="site-body">
-        <Sidebar activities={activities} />
+        <Sidebar activities={activities} place={place} />
         <div className="site-content">
-          <TopNav />
-          <div className="p2 pb4 sm-p3">
+          <TopNav place={place} />
+          <div className="p2 pb4 sm-p3 bg-darken-1">
             <Collapsible title="Activity List" open>
               <div className="mb2">
                 {activities.map((a, i) => (
@@ -170,9 +226,7 @@ class PoC extends Component {
 
             {activities.map((a, i) => (
               <div key={a.id} className="mb3">
-                <h3>
-                  Activity {i + 1}: {a.name || 'N/A'} ({a.type})
-                </h3>
+                <h3>{activityDisplay(a, i + 1)}</h3>
                 <Collapsible title="Short Summary of Activity" open>
                   <div className="mb1 bold">Summary of the activity</div>
                   <textarea
@@ -185,8 +239,8 @@ class PoC extends Component {
                 <Collapsible title="Activity Description">
                   <div className="py2 h1 center">...</div>
                 </Collapsible>
-                <Collapsible title="Goals and Objectives">
-                  <div className="py2 h1 center">...</div>
+                <Collapsible title="Goals and Objectives" open>
+                  <FormActivityGoals form={`activity-${i + 1}-goals`} />
                 </Collapsible>
                 <Collapsible title="Alternative Analysis">
                   <div className="py2 h1 center">...</div>

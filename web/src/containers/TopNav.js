@@ -2,14 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Icon from '@fortawesome/react-fontawesome';
 
-// to optimize bundle, explicitly importing only the icons used
-// TODO: once we're using icons more, move these to a central location
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faHelp from '@fortawesome/fontawesome-free-regular/faQuestionCircle';
-import faBell from '@fortawesome/fontawesome-free-solid/faBell';
-import faSignOut from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
-
+import { faHelp, faBell, faSignOut } from '../components/Icons';
 import { logout } from '../actions/auth';
 
 class TopNav extends Component {
@@ -33,11 +28,11 @@ class TopNav extends Component {
             <div>
               <button type="button" className="btn h5 regular">
                 <span className="mr-tiny">Notifications</span>
-                <FontAwesomeIcon icon={faBell} />
+                <Icon icon={faBell} />
               </button>
               <button type="button" className="btn h5 regular">
                 <span className="mr-tiny">Help</span>
-                <FontAwesomeIcon icon={faHelp} />
+                <Icon icon={faHelp} />
               </button>
               <button
                 type="button"
@@ -45,7 +40,7 @@ class TopNav extends Component {
                 onClick={this.handleLogout}
               >
                 <span className="mr-tiny">Log out</span>
-                <FontAwesomeIcon icon={faSignOut} />
+                <Icon icon={faSignOut} />
               </button>
             </div>
           ) : (
