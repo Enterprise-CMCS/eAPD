@@ -9,10 +9,10 @@ const {
 } = require('../utils');
 
 const newUsersInTheDatabase = async () => {
-  // Get all users other than the originals.  User IDs
-  // 57 and 58 are created when the database is seeded.
+  // Get all users other than the originals.  User IDs 2000,
+  // 2001, and 2010 are created when the database is seeded.
   const users = (await db()('users').select('*')).filter(
-    user => ![57, 58, 1000].includes(user.id)
+    user => ![2000, 2001, 2010].includes(user.id)
   );
 
   return users.length ? users : false;
