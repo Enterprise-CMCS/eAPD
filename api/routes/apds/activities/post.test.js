@@ -82,63 +82,25 @@ tap.test('apd activity POST endpoint', async endpointTest => {
 
     handlerTest.test('adding a single activity...', async singleTests => {
       singleTests.test(
-        'sends an error if activity name is not a string',
+        'sends an error if activity does not validate',
         async invalidTest => {
           req.body = {
             name: 7,
             description: 'bloop blorp'
           };
 
-          await handler(req, res);
-
-          invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
-          invalidTest.ok(
-            res.send.calledWith({ error: 'add-activity-invalid-name' }),
-            'sends back an error string'
-          );
-          invalidTest.ok(res.end.calledOnce, 'response is terminated');
-        }
-      );
-
-      singleTests.test(
-        'sends an error if activity name is an empty string',
-        async invalidTest => {
-          req.body = {
-            name: '',
-            description: 'bloop blorp'
+          const activityObj = {
+            toJSON: sandbox.stub().returns('activity-as-json'),
+            save: sandbox.stub().resolves(),
+            validate: sandbox.stub().rejects(new Error('REJECTED'))
           };
+          ActivityModel.forge.returns(activityObj);
 
           await handler(req, res);
 
           invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
           invalidTest.ok(
-            res.send.calledWith({ error: 'add-activity-invalid-name' }),
-            'sends back an error string'
-          );
-          invalidTest.ok(res.end.calledOnce, 'response is terminated');
-        }
-      );
-
-      singleTests.test(
-        'sends an error if activity name already exists in the APD',
-        async invalidTest => {
-          req.body = {
-            name: 'activity name',
-            description: 'bloop blorp'
-          };
-
-          req.meta.apd.related.withArgs('activities').returns({
-            pluck: sinon
-              .stub()
-              .withArgs(['name'])
-              .returns(['other name', 'activity name'])
-          });
-
-          await handler(req, res);
-
-          invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
-          invalidTest.ok(
-            res.send.calledWith({ error: 'add-activity-name-exists' }),
+            res.send.calledWith({ error: 'add-activity-REJECTED' }),
             'sends back an error string'
           );
           invalidTest.ok(res.end.calledOnce, 'response is terminated');
@@ -165,7 +127,8 @@ tap.test('apd activity POST endpoint', async endpointTest => {
           });
           const activityObj = {
             toJSON: sandbox.stub().returns('activity-as-json'),
-            save: sandbox.stub().resolves()
+            save: sandbox.stub().resolves(),
+            validate: sandbox.stub().resolves()
           };
           ActivityModel.forge.returns(activityObj);
 
@@ -190,49 +153,49 @@ tap.test('apd activity POST endpoint', async endpointTest => {
 
     handlerTest.test('adding multiple activities...', async multipleTests => {
       multipleTests.test(
-        'sends an error if any activity name is not a string',
+        'sends an error if any activity is not valid',
         async invalidTest => {
           req.body = [
             {
-              name: 'seven',
+              name: 'activity name',
               description: 'bloop blorp'
             },
             {
-              name: 8,
-              description: 'florp florp'
+              id: 'existing-activity',
+              name: 'new-name!'
             }
           ];
+
+          const existing = [
+            {
+              get: sinon
+                .stub()
+                .withArgs('id')
+                .returns('existing-activity'),
+              set: sinon.stub(),
+              save: sinon.stub().resolves(),
+              validate: sandbox.stub().rejects(new Error('REJECTED'))
+            }
+          ];
+
+          req.meta.apd.related.withArgs('activities').returns(existing);
+
+          ActivityModel.fetchAll.resolves({
+            toJSON: sinon.stub().returns('activity-as-json')
+          });
+
+          const activityObj = {
+            toJSON: sandbox.stub().returns('activity-as-json'),
+            save: sandbox.stub().resolves(),
+            validate: sandbox.stub().rejects(new Error('REJECTED'))
+          };
+          ActivityModel.forge.returns(activityObj);
 
           await handler(req, res);
 
           invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
           invalidTest.ok(
-            res.send.calledWith({ error: 'add-activity-invalid-name' }),
-            'sends back an error string'
-          );
-          invalidTest.ok(res.end.calledOnce, 'response is terminated');
-        }
-      );
-
-      multipleTests.test(
-        'sends an error if any activity name is an empty string',
-        async invalidTest => {
-          req.body = [
-            {
-              name: '',
-              description: 'bloop blorp'
-            },
-            {
-              name: 'eight',
-              description: 'florp florp'
-            }
-          ];
-
-          await handler(req, res);
-
-          invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
-          invalidTest.ok(
-            res.send.calledWith({ error: 'add-activity-invalid-name' }),
+            res.send.calledWith({ error: 'add-activity-REJECTED' }),
             'sends back an error string'
           );
           invalidTest.ok(res.end.calledOnce, 'response is terminated');
@@ -260,7 +223,8 @@ tap.test('apd activity POST endpoint', async endpointTest => {
                 .withArgs('id')
                 .returns('existing-activity'),
               set: sinon.stub(),
-              save: sinon.stub().resolves()
+              save: sinon.stub().resolves(),
+              validate: sinon.stub().resolves()
             }
           ];
 
@@ -272,7 +236,8 @@ tap.test('apd activity POST endpoint', async endpointTest => {
 
           const activityObj = {
             toJSON: sandbox.stub().returns('activity-as-json'),
-            save: sandbox.stub().resolves()
+            save: sandbox.stub().resolves(),
+            validate: sandbox.stub().resolves()
           };
           ActivityModel.forge.returns(activityObj);
 
