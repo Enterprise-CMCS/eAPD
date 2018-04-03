@@ -98,6 +98,8 @@ tap.test(
               200,
               'gives a 200 status code'
             );
+
+            body.goals.forEach(goal => goal.objectives.sort());
             validTest.match(
               body,
               {
@@ -105,12 +107,14 @@ tap.test(
                 name: 'Find Success',
                 description: 'Some text goes here',
                 approaches: [],
+                expenses: [],
                 goals: [
                   {
                     description: 'new goal 1',
                     objectives: ['o1', 'o2']
                   }
-                ]
+                ],
+                schedule: []
               },
               'sends back the updated activity object'
             );
