@@ -62,3 +62,16 @@ export const STATES = [
   { id: 'pr', name: 'Puerto Rico' },
   { id: 'vi', name: 'U.S. Virgin Islands' }
 ];
+
+export const stateLookup = id => STATES.find(s => s.id === id.toLowerCase());
+
+export const getParams = str =>
+  str
+    .slice(1)
+    .split('&')
+    .filter(d => d.length)
+    .reduce((params, hash) => {
+      const [key, val] = hash.split('=');
+      const valGood = val === undefined ? null : decodeURIComponent(val);
+      return Object.assign(params, { [key]: valGood });
+    }, {});

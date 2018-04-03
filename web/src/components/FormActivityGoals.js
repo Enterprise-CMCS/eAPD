@@ -87,16 +87,17 @@ const FormActivityGoals = ({ handleSubmit, submitting }) => (
       List the goals you’re hoping to accomplish as part of this activity:
     </SectionHeader>
     <FieldArray name="goals" component={Goals} />
-
-    <div className="mt3">
-      <button
-        type="submit"
-        className="btn btn-primary bg-green"
-        disabled={submitting}
-      >
-        {submitting ? 'Saving' : 'Submit'}
-      </button>
-    </div>
+    {false && (
+      <div className="mt3">
+        <button
+          type="submit"
+          className="btn btn-primary bg-green"
+          disabled={submitting}
+        >
+          {submitting ? 'Saving' : 'Submit'}
+        </button>
+      </div>
+    )}
   </form>
 );
 

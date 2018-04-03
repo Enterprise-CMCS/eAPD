@@ -34,7 +34,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Alabama"
@@ -51,7 +51,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Alaska"
@@ -68,7 +68,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Arizona"
@@ -85,7 +85,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Arkansas"
@@ -102,7 +102,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="California"
@@ -119,7 +119,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Colorado"
@@ -136,7 +136,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Connecticut"
@@ -153,7 +153,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Delaware"
@@ -170,7 +170,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Florida"
@@ -187,7 +187,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Georgia"
@@ -204,7 +204,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Hawaii"
@@ -221,7 +221,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Idaho"
@@ -238,7 +238,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Iowa"
@@ -255,7 +255,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Illinois"
@@ -272,7 +272,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Indiana"
@@ -289,7 +289,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Kansas"
@@ -306,7 +306,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Kentucky"
@@ -323,7 +323,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Louisiana"
@@ -340,7 +340,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Maine"
@@ -357,7 +357,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Maryland"
@@ -374,7 +374,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Massachusetts"
@@ -391,7 +391,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Michigan"
@@ -408,7 +408,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Minnesota"
@@ -425,7 +425,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Mississippi"
@@ -442,7 +442,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Missouri"
@@ -459,7 +459,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Montana"
@@ -476,7 +476,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Nebraska"
@@ -493,7 +493,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="North Carolina"
@@ -510,7 +510,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="North Dakota"
@@ -527,7 +527,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="New Hampshire"
@@ -544,7 +544,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="New Jersey"
@@ -561,7 +561,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="New Mexico"
@@ -578,7 +578,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Nevada"
@@ -595,7 +595,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="New York"
@@ -612,7 +612,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Ohio"
@@ -629,7 +629,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Oklahoma"
@@ -646,7 +646,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Oregon"
@@ -663,7 +663,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Pennsylvania"
@@ -680,7 +680,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Rhode Island"
@@ -697,7 +697,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="South Carolina"
@@ -714,7 +714,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="South Dakota"
@@ -731,7 +731,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Tennessee"
@@ -748,7 +748,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Texas"
@@ -765,7 +765,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Utah"
@@ -782,7 +782,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Vermont"
@@ -799,7 +799,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Virginia"
@@ -816,7 +816,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Washington"
@@ -833,7 +833,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="West Virginia"
@@ -850,7 +850,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Wisconsin"
@@ -867,7 +867,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Wyoming"
@@ -884,7 +884,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="District of Columbia"
@@ -901,7 +901,7 @@ ShallowWrapper {
             className="col col-3 sm-col-2 px1 mb2"
           >
             <div
-              className="p1 border"
+              className="p1 bg-black white rounded"
             >
               <img
                 alt="Puerto Rico"
@@ -938,7 +938,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Alabama"
@@ -955,7 +955,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Alaska"
@@ -972,7 +972,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Arizona"
@@ -989,7 +989,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Arkansas"
@@ -1006,7 +1006,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="California"
@@ -1023,7 +1023,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Colorado"
@@ -1040,7 +1040,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Connecticut"
@@ -1057,7 +1057,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Delaware"
@@ -1074,7 +1074,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Florida"
@@ -1091,7 +1091,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Georgia"
@@ -1108,7 +1108,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Hawaii"
@@ -1125,7 +1125,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Idaho"
@@ -1142,7 +1142,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Iowa"
@@ -1159,7 +1159,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Illinois"
@@ -1176,7 +1176,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Indiana"
@@ -1193,7 +1193,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Kansas"
@@ -1210,7 +1210,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Kentucky"
@@ -1227,7 +1227,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Louisiana"
@@ -1244,7 +1244,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Maine"
@@ -1261,7 +1261,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Maryland"
@@ -1278,7 +1278,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Massachusetts"
@@ -1295,7 +1295,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Michigan"
@@ -1312,7 +1312,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Minnesota"
@@ -1329,7 +1329,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Mississippi"
@@ -1346,7 +1346,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Missouri"
@@ -1363,7 +1363,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Montana"
@@ -1380,7 +1380,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Nebraska"
@@ -1397,7 +1397,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="North Carolina"
@@ -1414,7 +1414,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="North Dakota"
@@ -1431,7 +1431,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="New Hampshire"
@@ -1448,7 +1448,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="New Jersey"
@@ -1465,7 +1465,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="New Mexico"
@@ -1482,7 +1482,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Nevada"
@@ -1499,7 +1499,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="New York"
@@ -1516,7 +1516,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Ohio"
@@ -1533,7 +1533,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Oklahoma"
@@ -1550,7 +1550,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Oregon"
@@ -1567,7 +1567,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Pennsylvania"
@@ -1584,7 +1584,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Rhode Island"
@@ -1601,7 +1601,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="South Carolina"
@@ -1618,7 +1618,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="South Dakota"
@@ -1635,7 +1635,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Tennessee"
@@ -1652,7 +1652,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Texas"
@@ -1669,7 +1669,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Utah"
@@ -1686,7 +1686,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Vermont"
@@ -1703,7 +1703,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Virginia"
@@ -1720,7 +1720,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Washington"
@@ -1737,7 +1737,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="West Virginia"
@@ -1754,7 +1754,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Wisconsin"
@@ -1771,7 +1771,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Wyoming"
@@ -1788,7 +1788,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="District of Columbia"
@@ -1805,7 +1805,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Puerto Rico"
@@ -1864,7 +1864,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Alabama"
@@ -1881,7 +1881,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Alaska"
@@ -1898,7 +1898,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Arizona"
@@ -1915,7 +1915,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Arkansas"
@@ -1932,7 +1932,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="California"
@@ -1949,7 +1949,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Colorado"
@@ -1966,7 +1966,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Connecticut"
@@ -1983,7 +1983,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Delaware"
@@ -2000,7 +2000,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Florida"
@@ -2017,7 +2017,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Georgia"
@@ -2034,7 +2034,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Hawaii"
@@ -2051,7 +2051,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Idaho"
@@ -2068,7 +2068,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Iowa"
@@ -2085,7 +2085,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Illinois"
@@ -2102,7 +2102,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Indiana"
@@ -2119,7 +2119,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Kansas"
@@ -2136,7 +2136,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Kentucky"
@@ -2153,7 +2153,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Louisiana"
@@ -2170,7 +2170,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Maine"
@@ -2187,7 +2187,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Maryland"
@@ -2204,7 +2204,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Massachusetts"
@@ -2221,7 +2221,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Michigan"
@@ -2238,7 +2238,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Minnesota"
@@ -2255,7 +2255,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Mississippi"
@@ -2272,7 +2272,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Missouri"
@@ -2289,7 +2289,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Montana"
@@ -2306,7 +2306,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Nebraska"
@@ -2323,7 +2323,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="North Carolina"
@@ -2340,7 +2340,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="North Dakota"
@@ -2357,7 +2357,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New Hampshire"
@@ -2374,7 +2374,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New Jersey"
@@ -2391,7 +2391,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New Mexico"
@@ -2408,7 +2408,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Nevada"
@@ -2425,7 +2425,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New York"
@@ -2442,7 +2442,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Ohio"
@@ -2459,7 +2459,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Oklahoma"
@@ -2476,7 +2476,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Oregon"
@@ -2493,7 +2493,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Pennsylvania"
@@ -2510,7 +2510,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Rhode Island"
@@ -2527,7 +2527,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="South Carolina"
@@ -2544,7 +2544,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="South Dakota"
@@ -2561,7 +2561,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Tennessee"
@@ -2578,7 +2578,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Texas"
@@ -2595,7 +2595,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Utah"
@@ -2612,7 +2612,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Vermont"
@@ -2629,7 +2629,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Virginia"
@@ -2646,7 +2646,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Washington"
@@ -2663,7 +2663,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="West Virginia"
@@ -2680,7 +2680,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Wisconsin"
@@ -2697,7 +2697,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Wyoming"
@@ -2714,7 +2714,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="District of Columbia"
@@ -2731,7 +2731,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Puerto Rico"
@@ -2755,7 +2755,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Alabama"
@@ -2786,7 +2786,7 @@ ShallowWrapper {
                       Alabama
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -2825,7 +2825,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Alaska"
@@ -2856,7 +2856,7 @@ ShallowWrapper {
                       Alaska
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -2895,7 +2895,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Arizona"
@@ -2926,7 +2926,7 @@ ShallowWrapper {
                       Arizona
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -2965,7 +2965,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Arkansas"
@@ -2996,7 +2996,7 @@ ShallowWrapper {
                       Arkansas
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3035,7 +3035,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="California"
@@ -3066,7 +3066,7 @@ ShallowWrapper {
                       California
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3105,7 +3105,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Colorado"
@@ -3136,7 +3136,7 @@ ShallowWrapper {
                       Colorado
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3175,7 +3175,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Connecticut"
@@ -3206,7 +3206,7 @@ ShallowWrapper {
                       Connecticut
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3245,7 +3245,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Delaware"
@@ -3276,7 +3276,7 @@ ShallowWrapper {
                       Delaware
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3315,7 +3315,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Florida"
@@ -3346,7 +3346,7 @@ ShallowWrapper {
                       Florida
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3385,7 +3385,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Georgia"
@@ -3416,7 +3416,7 @@ ShallowWrapper {
                       Georgia
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3455,7 +3455,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Hawaii"
@@ -3486,7 +3486,7 @@ ShallowWrapper {
                       Hawaii
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3525,7 +3525,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Idaho"
@@ -3556,7 +3556,7 @@ ShallowWrapper {
                       Idaho
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3595,7 +3595,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Iowa"
@@ -3626,7 +3626,7 @@ ShallowWrapper {
                       Iowa
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3665,7 +3665,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Illinois"
@@ -3696,7 +3696,7 @@ ShallowWrapper {
                       Illinois
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3735,7 +3735,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Indiana"
@@ -3766,7 +3766,7 @@ ShallowWrapper {
                       Indiana
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3805,7 +3805,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Kansas"
@@ -3836,7 +3836,7 @@ ShallowWrapper {
                       Kansas
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3875,7 +3875,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Kentucky"
@@ -3906,7 +3906,7 @@ ShallowWrapper {
                       Kentucky
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -3945,7 +3945,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Louisiana"
@@ -3976,7 +3976,7 @@ ShallowWrapper {
                       Louisiana
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4015,7 +4015,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Maine"
@@ -4046,7 +4046,7 @@ ShallowWrapper {
                       Maine
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4085,7 +4085,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Maryland"
@@ -4116,7 +4116,7 @@ ShallowWrapper {
                       Maryland
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4155,7 +4155,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Massachusetts"
@@ -4186,7 +4186,7 @@ ShallowWrapper {
                       Massachusetts
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4225,7 +4225,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Michigan"
@@ -4256,7 +4256,7 @@ ShallowWrapper {
                       Michigan
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4295,7 +4295,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Minnesota"
@@ -4326,7 +4326,7 @@ ShallowWrapper {
                       Minnesota
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4365,7 +4365,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Mississippi"
@@ -4396,7 +4396,7 @@ ShallowWrapper {
                       Mississippi
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4435,7 +4435,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Missouri"
@@ -4466,7 +4466,7 @@ ShallowWrapper {
                       Missouri
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4505,7 +4505,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Montana"
@@ -4536,7 +4536,7 @@ ShallowWrapper {
                       Montana
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4575,7 +4575,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Nebraska"
@@ -4606,7 +4606,7 @@ ShallowWrapper {
                       Nebraska
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4645,7 +4645,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="North Carolina"
@@ -4676,7 +4676,7 @@ ShallowWrapper {
                       North Carolina
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4715,7 +4715,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="North Dakota"
@@ -4746,7 +4746,7 @@ ShallowWrapper {
                       North Dakota
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4785,7 +4785,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New Hampshire"
@@ -4816,7 +4816,7 @@ ShallowWrapper {
                       New Hampshire
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4855,7 +4855,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New Jersey"
@@ -4886,7 +4886,7 @@ ShallowWrapper {
                       New Jersey
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4925,7 +4925,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New Mexico"
@@ -4956,7 +4956,7 @@ ShallowWrapper {
                       New Mexico
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -4995,7 +4995,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Nevada"
@@ -5026,7 +5026,7 @@ ShallowWrapper {
                       Nevada
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5065,7 +5065,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New York"
@@ -5096,7 +5096,7 @@ ShallowWrapper {
                       New York
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5135,7 +5135,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Ohio"
@@ -5166,7 +5166,7 @@ ShallowWrapper {
                       Ohio
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5205,7 +5205,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Oklahoma"
@@ -5236,7 +5236,7 @@ ShallowWrapper {
                       Oklahoma
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5275,7 +5275,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Oregon"
@@ -5306,7 +5306,7 @@ ShallowWrapper {
                       Oregon
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5345,7 +5345,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Pennsylvania"
@@ -5376,7 +5376,7 @@ ShallowWrapper {
                       Pennsylvania
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5415,7 +5415,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Rhode Island"
@@ -5446,7 +5446,7 @@ ShallowWrapper {
                       Rhode Island
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5485,7 +5485,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="South Carolina"
@@ -5516,7 +5516,7 @@ ShallowWrapper {
                       South Carolina
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5555,7 +5555,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="South Dakota"
@@ -5586,7 +5586,7 @@ ShallowWrapper {
                       South Dakota
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5625,7 +5625,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Tennessee"
@@ -5656,7 +5656,7 @@ ShallowWrapper {
                       Tennessee
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5695,7 +5695,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Texas"
@@ -5726,7 +5726,7 @@ ShallowWrapper {
                       Texas
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5765,7 +5765,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Utah"
@@ -5796,7 +5796,7 @@ ShallowWrapper {
                       Utah
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5835,7 +5835,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Vermont"
@@ -5866,7 +5866,7 @@ ShallowWrapper {
                       Vermont
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5905,7 +5905,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Virginia"
@@ -5936,7 +5936,7 @@ ShallowWrapper {
                       Virginia
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -5975,7 +5975,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Washington"
@@ -6006,7 +6006,7 @@ ShallowWrapper {
                       Washington
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -6045,7 +6045,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="West Virginia"
@@ -6076,7 +6076,7 @@ ShallowWrapper {
                       West Virginia
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -6115,7 +6115,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Wisconsin"
@@ -6146,7 +6146,7 @@ ShallowWrapper {
                       Wisconsin
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -6185,7 +6185,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Wyoming"
@@ -6216,7 +6216,7 @@ ShallowWrapper {
                       Wyoming
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -6255,7 +6255,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="District of Columbia"
@@ -6286,7 +6286,7 @@ ShallowWrapper {
                       District of Columbia
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -6325,7 +6325,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Puerto Rico"
@@ -6356,7 +6356,7 @@ ShallowWrapper {
                       Puerto Rico
                     </div>,
                   ],
-                  "className": "p1 border",
+                  "className": "p1 bg-black white rounded",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -6420,7 +6420,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Alabama"
@@ -6437,7 +6437,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Alaska"
@@ -6454,7 +6454,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Arizona"
@@ -6471,7 +6471,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Arkansas"
@@ -6488,7 +6488,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="California"
@@ -6505,7 +6505,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Colorado"
@@ -6522,7 +6522,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Connecticut"
@@ -6539,7 +6539,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Delaware"
@@ -6556,7 +6556,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Florida"
@@ -6573,7 +6573,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Georgia"
@@ -6590,7 +6590,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Hawaii"
@@ -6607,7 +6607,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Idaho"
@@ -6624,7 +6624,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Iowa"
@@ -6641,7 +6641,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Illinois"
@@ -6658,7 +6658,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Indiana"
@@ -6675,7 +6675,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Kansas"
@@ -6692,7 +6692,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Kentucky"
@@ -6709,7 +6709,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Louisiana"
@@ -6726,7 +6726,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Maine"
@@ -6743,7 +6743,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Maryland"
@@ -6760,7 +6760,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Massachusetts"
@@ -6777,7 +6777,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Michigan"
@@ -6794,7 +6794,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Minnesota"
@@ -6811,7 +6811,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Mississippi"
@@ -6828,7 +6828,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Missouri"
@@ -6845,7 +6845,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Montana"
@@ -6862,7 +6862,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Nebraska"
@@ -6879,7 +6879,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="North Carolina"
@@ -6896,7 +6896,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="North Dakota"
@@ -6913,7 +6913,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="New Hampshire"
@@ -6930,7 +6930,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="New Jersey"
@@ -6947,7 +6947,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="New Mexico"
@@ -6964,7 +6964,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Nevada"
@@ -6981,7 +6981,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="New York"
@@ -6998,7 +6998,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Ohio"
@@ -7015,7 +7015,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Oklahoma"
@@ -7032,7 +7032,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Oregon"
@@ -7049,7 +7049,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Pennsylvania"
@@ -7066,7 +7066,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Rhode Island"
@@ -7083,7 +7083,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="South Carolina"
@@ -7100,7 +7100,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="South Dakota"
@@ -7117,7 +7117,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Tennessee"
@@ -7134,7 +7134,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Texas"
@@ -7151,7 +7151,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Utah"
@@ -7168,7 +7168,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Vermont"
@@ -7185,7 +7185,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Virginia"
@@ -7202,7 +7202,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Washington"
@@ -7219,7 +7219,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="West Virginia"
@@ -7236,7 +7236,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Wisconsin"
@@ -7253,7 +7253,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Wyoming"
@@ -7270,7 +7270,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="District of Columbia"
@@ -7287,7 +7287,7 @@ ShallowWrapper {
               className="col col-3 sm-col-2 px1 mb2"
             >
               <div
-                className="p1 border"
+                className="p1 bg-black white rounded"
               >
                 <img
                   alt="Puerto Rico"
@@ -7324,7 +7324,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Alabama"
@@ -7341,7 +7341,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Alaska"
@@ -7358,7 +7358,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Arizona"
@@ -7375,7 +7375,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Arkansas"
@@ -7392,7 +7392,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="California"
@@ -7409,7 +7409,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Colorado"
@@ -7426,7 +7426,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Connecticut"
@@ -7443,7 +7443,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Delaware"
@@ -7460,7 +7460,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Florida"
@@ -7477,7 +7477,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Georgia"
@@ -7494,7 +7494,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Hawaii"
@@ -7511,7 +7511,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Idaho"
@@ -7528,7 +7528,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Iowa"
@@ -7545,7 +7545,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Illinois"
@@ -7562,7 +7562,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Indiana"
@@ -7579,7 +7579,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Kansas"
@@ -7596,7 +7596,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Kentucky"
@@ -7613,7 +7613,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Louisiana"
@@ -7630,7 +7630,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Maine"
@@ -7647,7 +7647,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Maryland"
@@ -7664,7 +7664,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Massachusetts"
@@ -7681,7 +7681,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Michigan"
@@ -7698,7 +7698,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Minnesota"
@@ -7715,7 +7715,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Mississippi"
@@ -7732,7 +7732,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Missouri"
@@ -7749,7 +7749,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Montana"
@@ -7766,7 +7766,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Nebraska"
@@ -7783,7 +7783,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="North Carolina"
@@ -7800,7 +7800,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="North Dakota"
@@ -7817,7 +7817,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New Hampshire"
@@ -7834,7 +7834,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New Jersey"
@@ -7851,7 +7851,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New Mexico"
@@ -7868,7 +7868,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Nevada"
@@ -7885,7 +7885,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="New York"
@@ -7902,7 +7902,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Ohio"
@@ -7919,7 +7919,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Oklahoma"
@@ -7936,7 +7936,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Oregon"
@@ -7953,7 +7953,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Pennsylvania"
@@ -7970,7 +7970,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Rhode Island"
@@ -7987,7 +7987,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="South Carolina"
@@ -8004,7 +8004,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="South Dakota"
@@ -8021,7 +8021,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Tennessee"
@@ -8038,7 +8038,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Texas"
@@ -8055,7 +8055,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Utah"
@@ -8072,7 +8072,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Vermont"
@@ -8089,7 +8089,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Virginia"
@@ -8106,7 +8106,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Washington"
@@ -8123,7 +8123,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="West Virginia"
@@ -8140,7 +8140,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Wisconsin"
@@ -8157,7 +8157,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Wyoming"
@@ -8174,7 +8174,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="District of Columbia"
@@ -8191,7 +8191,7 @@ ShallowWrapper {
                 className="col col-3 sm-col-2 px1 mb2"
               >
                 <div
-                  className="p1 border"
+                  className="p1 bg-black white rounded"
                 >
                   <img
                     alt="Puerto Rico"
@@ -8250,7 +8250,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Alabama"
@@ -8267,7 +8267,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Alaska"
@@ -8284,7 +8284,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Arizona"
@@ -8301,7 +8301,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Arkansas"
@@ -8318,7 +8318,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="California"
@@ -8335,7 +8335,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Colorado"
@@ -8352,7 +8352,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Connecticut"
@@ -8369,7 +8369,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Delaware"
@@ -8386,7 +8386,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Florida"
@@ -8403,7 +8403,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Georgia"
@@ -8420,7 +8420,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Hawaii"
@@ -8437,7 +8437,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Idaho"
@@ -8454,7 +8454,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Iowa"
@@ -8471,7 +8471,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Illinois"
@@ -8488,7 +8488,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Indiana"
@@ -8505,7 +8505,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Kansas"
@@ -8522,7 +8522,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Kentucky"
@@ -8539,7 +8539,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Louisiana"
@@ -8556,7 +8556,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Maine"
@@ -8573,7 +8573,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Maryland"
@@ -8590,7 +8590,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Massachusetts"
@@ -8607,7 +8607,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Michigan"
@@ -8624,7 +8624,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Minnesota"
@@ -8641,7 +8641,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Mississippi"
@@ -8658,7 +8658,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Missouri"
@@ -8675,7 +8675,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Montana"
@@ -8692,7 +8692,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Nebraska"
@@ -8709,7 +8709,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="North Carolina"
@@ -8726,7 +8726,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="North Dakota"
@@ -8743,7 +8743,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="New Hampshire"
@@ -8760,7 +8760,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="New Jersey"
@@ -8777,7 +8777,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="New Mexico"
@@ -8794,7 +8794,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Nevada"
@@ -8811,7 +8811,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="New York"
@@ -8828,7 +8828,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Ohio"
@@ -8845,7 +8845,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Oklahoma"
@@ -8862,7 +8862,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Oregon"
@@ -8879,7 +8879,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Pennsylvania"
@@ -8896,7 +8896,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Rhode Island"
@@ -8913,7 +8913,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="South Carolina"
@@ -8930,7 +8930,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="South Dakota"
@@ -8947,7 +8947,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Tennessee"
@@ -8964,7 +8964,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Texas"
@@ -8981,7 +8981,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Utah"
@@ -8998,7 +8998,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Vermont"
@@ -9015,7 +9015,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Virginia"
@@ -9032,7 +9032,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Washington"
@@ -9049,7 +9049,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="West Virginia"
@@ -9066,7 +9066,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Wisconsin"
@@ -9083,7 +9083,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Wyoming"
@@ -9100,7 +9100,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="District of Columbia"
@@ -9117,7 +9117,7 @@ ShallowWrapper {
                   className="col col-3 sm-col-2 px1 mb2"
                 >
                   <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Puerto Rico"
@@ -9141,7 +9141,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Alabama"
@@ -9172,7 +9172,7 @@ ShallowWrapper {
                         Alabama
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9211,7 +9211,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Alaska"
@@ -9242,7 +9242,7 @@ ShallowWrapper {
                         Alaska
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9281,7 +9281,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Arizona"
@@ -9312,7 +9312,7 @@ ShallowWrapper {
                         Arizona
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9351,7 +9351,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Arkansas"
@@ -9382,7 +9382,7 @@ ShallowWrapper {
                         Arkansas
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9421,7 +9421,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="California"
@@ -9452,7 +9452,7 @@ ShallowWrapper {
                         California
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9491,7 +9491,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Colorado"
@@ -9522,7 +9522,7 @@ ShallowWrapper {
                         Colorado
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9561,7 +9561,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Connecticut"
@@ -9592,7 +9592,7 @@ ShallowWrapper {
                         Connecticut
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9631,7 +9631,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Delaware"
@@ -9662,7 +9662,7 @@ ShallowWrapper {
                         Delaware
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9701,7 +9701,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Florida"
@@ -9732,7 +9732,7 @@ ShallowWrapper {
                         Florida
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9771,7 +9771,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Georgia"
@@ -9802,7 +9802,7 @@ ShallowWrapper {
                         Georgia
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9841,7 +9841,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Hawaii"
@@ -9872,7 +9872,7 @@ ShallowWrapper {
                         Hawaii
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9911,7 +9911,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Idaho"
@@ -9942,7 +9942,7 @@ ShallowWrapper {
                         Idaho
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -9981,7 +9981,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Iowa"
@@ -10012,7 +10012,7 @@ ShallowWrapper {
                         Iowa
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10051,7 +10051,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Illinois"
@@ -10082,7 +10082,7 @@ ShallowWrapper {
                         Illinois
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10121,7 +10121,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Indiana"
@@ -10152,7 +10152,7 @@ ShallowWrapper {
                         Indiana
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10191,7 +10191,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Kansas"
@@ -10222,7 +10222,7 @@ ShallowWrapper {
                         Kansas
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10261,7 +10261,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Kentucky"
@@ -10292,7 +10292,7 @@ ShallowWrapper {
                         Kentucky
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10331,7 +10331,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Louisiana"
@@ -10362,7 +10362,7 @@ ShallowWrapper {
                         Louisiana
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10401,7 +10401,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Maine"
@@ -10432,7 +10432,7 @@ ShallowWrapper {
                         Maine
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10471,7 +10471,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Maryland"
@@ -10502,7 +10502,7 @@ ShallowWrapper {
                         Maryland
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10541,7 +10541,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Massachusetts"
@@ -10572,7 +10572,7 @@ ShallowWrapper {
                         Massachusetts
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10611,7 +10611,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Michigan"
@@ -10642,7 +10642,7 @@ ShallowWrapper {
                         Michigan
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10681,7 +10681,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Minnesota"
@@ -10712,7 +10712,7 @@ ShallowWrapper {
                         Minnesota
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10751,7 +10751,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Mississippi"
@@ -10782,7 +10782,7 @@ ShallowWrapper {
                         Mississippi
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10821,7 +10821,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Missouri"
@@ -10852,7 +10852,7 @@ ShallowWrapper {
                         Missouri
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10891,7 +10891,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Montana"
@@ -10922,7 +10922,7 @@ ShallowWrapper {
                         Montana
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -10961,7 +10961,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Nebraska"
@@ -10992,7 +10992,7 @@ ShallowWrapper {
                         Nebraska
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11031,7 +11031,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="North Carolina"
@@ -11062,7 +11062,7 @@ ShallowWrapper {
                         North Carolina
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11101,7 +11101,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="North Dakota"
@@ -11132,7 +11132,7 @@ ShallowWrapper {
                         North Dakota
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11171,7 +11171,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="New Hampshire"
@@ -11202,7 +11202,7 @@ ShallowWrapper {
                         New Hampshire
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11241,7 +11241,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="New Jersey"
@@ -11272,7 +11272,7 @@ ShallowWrapper {
                         New Jersey
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11311,7 +11311,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="New Mexico"
@@ -11342,7 +11342,7 @@ ShallowWrapper {
                         New Mexico
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11381,7 +11381,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Nevada"
@@ -11412,7 +11412,7 @@ ShallowWrapper {
                         Nevada
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11451,7 +11451,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="New York"
@@ -11482,7 +11482,7 @@ ShallowWrapper {
                         New York
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11521,7 +11521,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Ohio"
@@ -11552,7 +11552,7 @@ ShallowWrapper {
                         Ohio
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11591,7 +11591,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Oklahoma"
@@ -11622,7 +11622,7 @@ ShallowWrapper {
                         Oklahoma
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11661,7 +11661,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Oregon"
@@ -11692,7 +11692,7 @@ ShallowWrapper {
                         Oregon
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11731,7 +11731,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Pennsylvania"
@@ -11762,7 +11762,7 @@ ShallowWrapper {
                         Pennsylvania
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11801,7 +11801,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Rhode Island"
@@ -11832,7 +11832,7 @@ ShallowWrapper {
                         Rhode Island
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11871,7 +11871,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="South Carolina"
@@ -11902,7 +11902,7 @@ ShallowWrapper {
                         South Carolina
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -11941,7 +11941,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="South Dakota"
@@ -11972,7 +11972,7 @@ ShallowWrapper {
                         South Dakota
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12011,7 +12011,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Tennessee"
@@ -12042,7 +12042,7 @@ ShallowWrapper {
                         Tennessee
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12081,7 +12081,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Texas"
@@ -12112,7 +12112,7 @@ ShallowWrapper {
                         Texas
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12151,7 +12151,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Utah"
@@ -12182,7 +12182,7 @@ ShallowWrapper {
                         Utah
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12221,7 +12221,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Vermont"
@@ -12252,7 +12252,7 @@ ShallowWrapper {
                         Vermont
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12291,7 +12291,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Virginia"
@@ -12322,7 +12322,7 @@ ShallowWrapper {
                         Virginia
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12361,7 +12361,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Washington"
@@ -12392,7 +12392,7 @@ ShallowWrapper {
                         Washington
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12431,7 +12431,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="West Virginia"
@@ -12462,7 +12462,7 @@ ShallowWrapper {
                         West Virginia
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12501,7 +12501,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Wisconsin"
@@ -12532,7 +12532,7 @@ ShallowWrapper {
                         Wisconsin
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12571,7 +12571,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Wyoming"
@@ -12602,7 +12602,7 @@ ShallowWrapper {
                         Wyoming
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12641,7 +12641,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="District of Columbia"
@@ -12672,7 +12672,7 @@ ShallowWrapper {
                         District of Columbia
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -12711,7 +12711,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": <div
-                    className="p1 border"
+                    className="p1 bg-black white rounded"
                   >
                     <img
                       alt="Puerto Rico"
@@ -12742,7 +12742,7 @@ ShallowWrapper {
                         Puerto Rico
                       </div>,
                     ],
-                    "className": "p1 border",
+                    "className": "p1 bg-black white rounded",
                   },
                   "ref": null,
                   "rendered": Array [
