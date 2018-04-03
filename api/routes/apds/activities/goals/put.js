@@ -83,7 +83,7 @@ module.exports = (
         const updatedActivity = await ActivityModel.where({
           id: activity.get('id')
         }).fetch({
-          withRelated: ['goals.objectives']
+          withRelated: ActivityModel.withRelated
         });
 
         return res.send(updatedActivity.toJSON());

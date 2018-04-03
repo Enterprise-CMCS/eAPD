@@ -65,12 +65,7 @@ module.exports = (
         const updatedActivity = await ActivityModel.where({
           id: activityID
         }).fetch({
-          withRelated: [
-            'goals.objectives',
-            'approaches',
-            'expenses.entries',
-            'schedule'
-          ]
+          withRelated: ActivityModel.withRelated
         });
 
         return res.send(updatedActivity.toJSON());
