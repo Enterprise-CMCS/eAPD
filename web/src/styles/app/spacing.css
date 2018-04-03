@@ -3,8 +3,16 @@
   could call it "tiny" or "05"; using the former for now
 */
 
+.ml-tiny {
+  margin-left: var(--space-tiny);
+}
+
 .mr-tiny {
   margin-right: var(--space-tiny);
+}
+
+.mb-tiny {
+  margin-bottom: var(--space-tiny);
 }
 
 .mt-tiny {

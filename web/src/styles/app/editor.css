@@ -1,0 +1,28 @@
+@import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
+/* misc overrides */
+
+.rdw-editor-toolbar * {
+  box-sizing: content-box;
+}
+
+.rdw-editor-main {
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  min-height: 15rem;
+  padding: 0.5rem;
+}
+
+.public-DraftStyleDefault-block {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.rdw-dropdown-wrapper a {
+  color: inherit;
+}
+
+.rdw-option-active {
+  background-color: #eee;
+  border-color: #ddd;
+}

@@ -7,3 +7,7 @@
 .table-bordered th {
   border: 1px solid #e7e7e7;
 }
+
+.table-fixed {
+  table-layout: fixed;
+}
