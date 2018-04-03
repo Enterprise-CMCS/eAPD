@@ -5,79 +5,6 @@ const {
 
 const activities = require('./activities/openAPI');
 
-const apdObjectSchema = {
-  type: 'object',
-  properties: {
-    id: {
-      type: 'number',
-      description: 'APD ID'
-    },
-    status: {
-      type: 'string',
-      description: 'Status'
-    },
-    period: {
-      type: 'string',
-      description: 'Covered time period'
-    },
-    created_at: {
-      type: 'dateTime',
-      description: 'Creation date'
-    },
-    updated_at: {
-      type: 'dateTime',
-      description: 'Last updated date'
-    },
-    approved_at: {
-      type: 'dateTime',
-      description: 'Approval date'
-    },
-    activities: arrayOf({
-      type: 'object',
-      properties: {
-        id: {
-          type: 'number',
-          description: 'Activity ID'
-        },
-        name: {
-          type: 'string',
-          description: 'Short name for the activity'
-        },
-        description: {
-          type: 'string',
-          description: 'A description of this activity'
-        },
-        goals: arrayOf({
-          type: 'object',
-          properties: {
-            id: {
-              type: 'number',
-              description: 'Goal ID'
-            },
-            description: {
-              type: 'string',
-              description: 'A description of this goal'
-            },
-            objectives: arrayOf({
-              type: 'object',
-              properties: {
-                id: {
-                  type: 'number',
-                  description: 'Objective ID'
-                },
-                description: {
-                  type: 'string',
-                  description: 'A description of this objective'
-                }
-              }
-            })
-          }
-        })
-      }
-    })
-  }
-};
-
 const openAPI = {
   '/apds': {
     get: {
@@ -85,7 +12,7 @@ const openAPI = {
       responses: {
         200: {
           description: 'The list of a user’s apds',
-          content: jsonResponse(arrayOf(apdObjectSchema))
+          content: jsonResponse(arrayOf({ $ref: '#/components/schemas/apd' }))
         }
       }
     }
@@ -122,7 +49,7 @@ const openAPI = {
       responses: {
         200: {
           description: 'The update was successful',
-          content: jsonResponse(apdObjectSchema)
+          content: jsonResponse({ $ref: '#/components/schemas/apd' })
         },
         404: {
           description: 'The apd ID does not match any known apds for the user'
