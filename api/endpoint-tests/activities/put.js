@@ -136,7 +136,8 @@ tap.test(
                   description: 'Go on Ellen',
                   objectives: ['Learn to dance', 'Bring audience gifts']
                 }
-              ]
+              ],
+              schedule: []
             },
             'sends back the updated activity object'
           );
