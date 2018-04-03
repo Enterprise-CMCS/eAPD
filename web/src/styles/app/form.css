@@ -1,3 +1,9 @@
+.input,
+.select,
+.textarea {
+  border-radius: var(--border-radius);
+}
+
 /* error states */
 
 .has-error input {

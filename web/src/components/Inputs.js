@@ -13,13 +13,14 @@ const makeInput = InputInner => {
     input: { name, ...rest },
     meta: { touched, error },
     label,
+    type,
     hideLabel,
-    type
+    className
   }) => {
     const hasError = touched && error;
 
     return (
-      <div className={`mb2 ${hasError ? 'has-error' : ''}`}>
+      <div className={`${className || 'mb2'} ${hasError ? 'has-error' : ''}`}>
         <label htmlFor={name} className={hideLabel ? 'sr-only' : ''}>
           {label}
         </label>
@@ -33,13 +34,15 @@ const makeInput = InputInner => {
     input: PropTypes.object.isRequired,
     meta: PropTypes.object.isRequired,
     label: PropTypes.string.isRequired,
+    type: PropTypes.string,
     hideLabel: PropTypes.bool,
-    type: PropTypes.string
+    className: PropTypes.string
   };
 
   InputHolder.defaultProps = {
     type: 'text',
-    hideLabel: false
+    hideLabel: false,
+    className: ''
   };
 
   return InputHolder;

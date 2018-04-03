@@ -4,11 +4,14 @@
 
 @import 'app/alert';
 @import 'app/border';
+@import 'app/color';
 @import 'app/form';
 @import 'app/layout';
 @import 'app/spacing';
 @import 'app/table';
 @import 'app/type';
+
+@import 'app/editor';
 
 @custom-media --breakpoint-sm (min-width: 40rem);
 @custom-media --breakpoint-md (min-width: 52rem);
@@ -35,7 +38,8 @@
   --space-4: 4rem;
 
   --border-width: 1px;
-  --border-radius: 3px;
+  --border-radius: 5px;
 
   --red: #e21c3d;
+  --teal: #02bfe7;
 }
