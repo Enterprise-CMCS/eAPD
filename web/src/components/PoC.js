@@ -1,16 +1,23 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import { Editor } from 'react-draft-wysiwyg';
 import Icon from '@fortawesome/react-fontawesome';
 
 import Collapsible from './Collapsible';
+import FormActivityApproach from './FormActivityApproach';
 import FormActivityGoals from './FormActivityGoals';
-import { faHelp, faChevronDown, faSignOut } from './Icons';
+import FormActivitySchedule from './FormActivitySchedule';
+import { faHelp, faHelpSolid, faChevronDown, faSignOut } from './Icons';
 import { getParams, stateLookup } from '../util';
+import { EDITOR_CONFIG } from '../util/editor';
 
 const sections = [
   'Short Summary of Activity',
   'Activity Description',
-  'Goals and Objectives'
+  'Goals and Objectives',
+  'Alternative Analysis',
+  'Personnel Resources',
+  'Activity Schedule'
 ];
 
 const activityDisplay = (a, i) => {
@@ -26,38 +33,38 @@ const Sidebar = ({ activities, place }) => {
   return (
     <div className="site-sidebar bg-navy">
       <div className="p2 xs-hide sm-hide">
-        <div className="mb3 center">
+        <div className="mb2 center">
           <img
             src={`/static/img/${place.id}.svg`}
             alt={place.name}
-            width="80"
-            height="80"
+            width="60"
+            height="60"
           />
         </div>
 
-        <ul className="list-reset">
-          <li className="mb1">
+        <ul className="list-reset h5">
+          <li>
             <a href="#!" className={linkClass}>
               Program Summary
             </a>
           </li>
-          <li className="mb1">
+          <li>
             <a href="#!" className={linkClass}>
               Program Activities
             </a>
           </li>
-          <ul className="ml3 list-reset">
+          <ul className="ml2 list-reset">
             {activities.map((a, i) => (
               <Fragment key={a.id}>
-                <li className="mb1">
+                <li>
                   <a href="#!" className={linkClass}>
                     {activityDisplay(a, i + 1)}{' '}
-                    <Icon icon={faChevronDown} color="#02bfe7" size="sm" />
+                    <Icon icon={faChevronDown} className="teal" size="sm" />
                   </a>
                 </li>
-                <ul className="ml3 list-reset">
+                <ul className="ml2 mb0 list-reset">
                   {sections.map((s, j) => (
-                    <li key={j} className="mb1">
+                    <li key={j}>
                       <a href="#!" className={linkClass}>
                         {s}
                       </a>
@@ -107,6 +114,22 @@ const TopNav = ({ place }) => (
 
 TopNav.propTypes = {
   place: PropTypes.object.isRequired
+};
+
+const HelpBox = ({ children }) => (
+  <div className="my2 p2 h5 sm-col-7 lg-col-6 bg-teal-light border border-teal border-width-2 rounded relative">
+    <div
+      className="inline-block absolute line-height-1 bg-white circle"
+      style={{ top: '-.5em', left: '-.5em' }}
+    >
+      <Icon icon={faHelpSolid} className="teal" />
+    </div>
+    {children}
+  </div>
+);
+
+HelpBox.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 class PoC extends Component {
@@ -230,7 +253,16 @@ class PoC extends Component {
               <div key={a.id} className="mb3">
                 <h3>{activityDisplay(a, i + 1)}</h3>
                 <Collapsible title="Short Summary of Activity" open>
-                  <div className="mb1 bold">Summary of the activity</div>
+                  <div className="mb1 bold">
+                    Summary of the activity
+                    <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
+                  </div>
+                  <HelpBox>
+                    <p>Here is something to keep in mind...</p>
+                    <p className="mb0">
+                      You may also want to think about this...
+                    </p>
+                  </HelpBox>
                   <textarea
                     className="textarea col-10"
                     rows="5"
@@ -238,14 +270,24 @@ class PoC extends Component {
                     placeholder="A brief statement of what the activity involves..."
                   />
                 </Collapsible>
-                <Collapsible title="Activity Description">
-                  <div className="py2 h1 center">...</div>
+                <Collapsible title="Activity Description" open>
+                  <div className="mb1 bold">
+                    Please describe the activity
+                    <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
+                  </div>
+                  <Editor toolbar={EDITOR_CONFIG} />
                 </Collapsible>
-                <Collapsible title="Goals and Objectives" open>
+                <Collapsible title="Goals and Objectives">
                   <FormActivityGoals form={`activity-${i + 1}-goals`} />
                 </Collapsible>
                 <Collapsible title="Alternative Analysis">
-                  <div className="py2 h1 center">...</div>
+                  <FormActivityApproach form={`activity-${i + 1}-approach`} />
+                </Collapsible>
+                <Collapsible title="Activity Schedule">
+                  <FormActivitySchedule form={`activity-${i + 1}-schedule`} />
+                </Collapsible>
+                <Collapsible title="Personnel Resources">
+                  <div>...</div>
                 </Collapsible>
               </div>
             ))}
