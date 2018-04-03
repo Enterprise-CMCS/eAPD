@@ -3,52 +3,6 @@ const {
   schema: { arrayOf, errorToken, jsonResponse }
 } = require('../../../openAPI/helpers');
 
-const activityObjectSchema = {
-  type: 'object',
-  properties: {
-    id: {
-      type: 'number',
-      description: 'Activity globally-unique ID'
-    },
-    name: {
-      type: 'string',
-      description: 'Activity name, unique within an APD'
-    },
-    description: {
-      type: 'string',
-      description: 'Activity description'
-    },
-    expenses: arrayOf({
-      type: 'object',
-      description: 'Activity expense',
-      properties: {
-        name: {
-          type: 'string',
-          description: 'Expense name'
-        },
-        entries: arrayOf({
-          type: 'object',
-          description: 'Expense entry',
-          properties: {
-            year: {
-              type: 'string',
-              description: 'Expense entry year'
-            },
-            amount: {
-              type: 'decimal',
-              description: 'Expense entry amount'
-            },
-            description: {
-              type: 'string',
-              description: 'Expense entry description'
-            }
-          }
-        })
-      }
-    })
-  }
-};
-
 const openAPI = {
   '/activities/{id}/expenses': {
     put: {
@@ -97,7 +51,7 @@ const openAPI = {
       responses: {
         200: {
           description: 'The updated activity',
-          content: jsonResponse(activityObjectSchema)
+          content: jsonResponse({ $ref: '#/components/schemas/activity' })
         },
         400: {
           description: 'The expenses are invalid (e.g., not an array)',
