@@ -1,6 +1,9 @@
 import kebabCase from 'lodash.kebabcase';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import Icon from '@fortawesome/react-fontawesome';
+
+import { faChevronDown, faChevronUp } from './Icons';
 
 class Collapsible extends Component {
   constructor(props) {
@@ -17,21 +20,26 @@ class Collapsible extends Component {
     const { isOpen } = this.state;
 
     const id = kebabCase(title);
-    const innerCss = `p2 border border-silver ${isOpen ? '' : 'display-none'}`;
 
     return (
-      <div className="mb2">
+      <div className="mb2 bg-white border border-silver">
         <button
           type="button"
-          className="btn bg-silver block col-12 left-align"
+          className="btn block col-12 left-align h2 py2"
           aria-expanded={isOpen}
           aria-controls={id}
           onClick={this.handleClick}
         >
-          <span className="right">{isOpen ? '-' : '+'}</span>
+          <span className="right">
+            {isOpen ? (
+              <Icon icon={faChevronUp} size="sm" />
+            ) : (
+              <Icon icon={faChevronDown} size="sm" />
+            )}
+          </span>
           {title}
         </button>
-        <div className={innerCss} id={id}>
+        <div className={`p2 ${isOpen ? '' : 'display-none'}`} id={id}>
           {children}
         </div>
       </div>
