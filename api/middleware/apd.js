@@ -6,6 +6,10 @@ const {
   apdActivity: defaultActivityModel
 } = require('../db').models;
 
+const apdRelations = (defaultApdModel ? defaultApdModel.withRelated : []).map(
+  relation => `apd.${relation}`
+);
+
 module.exports.loadApd = (model = defaultApdModel, idParam = 'id') =>
   cache(['loadApd', modelIndex(model), idParam], () => {
     const loadApd = async (req, res, next) => {
@@ -22,7 +26,7 @@ module.exports.loadApd = (model = defaultApdModel, idParam = 'id') =>
         } else {
           const obj = await model
             .where({ id: req.params[idParam] })
-            .fetch({ withRelated: model.withRelated });
+            .fetch({ withRelated: apdRelations });
           if (obj) {
             req.meta.apd = obj.related('apd');
           } else {
