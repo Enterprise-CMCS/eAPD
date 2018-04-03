@@ -28,7 +28,14 @@ const setup = (
   models.forEach(modelObjects => {
     Object.keys(modelObjects).forEach(modelName => {
       logger.silly(`loading model [${modelName}]`);
-      const model = orm.Model.extend(modelObjects[modelName]);
+
+      const modelObj = modelObjects[modelName];
+      let staticProps = { modelName };
+      if (modelObj.static) {
+        staticProps = { modelName, ...modelObj.static };
+      }
+
+      const model = orm.Model.extend(modelObjects[modelName], staticProps);
       logger.silly(`registering model [${modelName}]`);
       orm.model(modelName, model);
       exportedModels[modelName] = model;
