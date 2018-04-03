@@ -16,7 +16,8 @@ const sections = [
 const activityDisplay = (a, i) => {
   let display = `Activity ${i}`;
   if (a.name) display += `: ${a.name}`;
-  return `${display} (${a.type})`;
+  if (a.type.length) display += ` (${a.type.join(', ')})`;
+  return display;
 };
 
 const Sidebar = ({ activities, place }) => {
@@ -122,12 +123,12 @@ class PoC extends Component {
         {
           id: 1,
           name: 'Test',
-          type: 'HIT'
+          type: ['HIT']
         },
         {
           id: 2,
           name: 'Test 2',
-          type: 'MMIS'
+          type: ['MMIS']
         }
       ]
     };
@@ -140,19 +141,38 @@ class PoC extends Component {
         {
           id: activities.reduce((maxId, a) => Math.max(a.id, maxId), -1) + 1,
           name: '',
-          type: 'HIT'
+          type: ['HIT']
         }
       ]
     }));
   };
 
-  editActivity = e => {
+  editActivityName = e => {
     const { name: nameRaw, value } = e.target;
     const [id, name] = nameRaw.split('.');
 
     this.setState(({ activities }) => ({
       activities: activities.map(
         a => (a.id === +id ? { ...a, [name]: value } : a)
+      )
+    }));
+  };
+
+  editActivityType = e => {
+    const { name, value } = e.target;
+    const id = name.split('.')[0];
+
+    this.setState(({ activities }) => ({
+      activities: activities.map(
+        a =>
+          a.id === +id
+            ? {
+                ...a,
+                type: a.type.includes(value)
+                  ? a.type.filter(t => t !== value)
+                  : [...a.type, value]
+              }
+            : a
       )
     }));
   };
@@ -169,48 +189,30 @@ class PoC extends Component {
             <Collapsible title="Activity List" open>
               <div className="mb2">
                 {activities.map((a, i) => (
-                  <div key={a.id} className="flex mb1">
+                  <div key={a.id} className="flex items-center mb1">
                     <div className="mr1 bold mono">{i + 1}.</div>
                     <div className="mr1 col-4">
                       <input
                         type="text"
-                        className="col-12"
+                        className="col-12 input m0"
                         name={`${a.id}.name`}
                         value={a.name}
-                        onChange={this.editActivity}
+                        onChange={this.editActivityName}
                       />
                     </div>
                     <div>
-                      <label>
-                        <input
-                          type="radio"
-                          name={`${a.id}.type`}
-                          value="HIT"
-                          checked={a.type === 'HIT'}
-                          onChange={this.editActivity}
-                        />{' '}
-                        HIT
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name={`${a.id}.type`}
-                          value="HIE"
-                          checked={a.type === 'HIE'}
-                          onChange={this.editActivity}
-                        />{' '}
-                        HIE
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name={`${a.id}.type`}
-                          value="MMIS"
-                          checked={a.type === 'MMIS'}
-                          onChange={this.editActivity}
-                        />{' '}
-                        MMIS
-                      </label>
+                      {['HIT', 'HIE', 'MMIS'].map(aType => (
+                        <label key={aType} className="mr1">
+                          <input
+                            type="checkbox"
+                            name={`${a.id}.type`}
+                            value={aType}
+                            checked={a.type.includes(aType)}
+                            onChange={this.editActivityType}
+                          />
+                          {aType}
+                        </label>
+                      ))}
                     </div>
                   </div>
                 ))}
