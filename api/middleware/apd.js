@@ -6,25 +6,27 @@ const {
   apdActivity: defaultActivityModel
 } = require('../db').models;
 
-module.exports.loadApd = (
-  model = defaultApdModel,
-  idParam = 'id',
-  ApdModel = defaultApdModel
-) =>
-  cache(['loadApd', modelIndex(model), idParam, ApdModel], () => {
+const apdRelations = (defaultApdModel ? defaultApdModel.withRelated : []).map(
+  relation => `apd.${relation}`
+);
+
+module.exports.loadApd = (model = defaultApdModel, idParam = 'id') =>
+  cache(['loadApd', modelIndex(model), idParam], () => {
     const loadApd = async (req, res, next) => {
       logger.silly(req, 'loading APD for request');
       try {
-        if (model === ApdModel) {
-          req.meta.apd = await ApdModel.where({
-            id: +req.params[idParam]
-          }).fetch({
-            withRelated: ['activities']
-          });
+        if (model.modelName === 'apd') {
+          req.meta.apd = await model
+            .where({
+              id: +req.params[idParam]
+            })
+            .fetch({
+              withRelated: model.withRelated
+            });
         } else {
           const obj = await model
             .where({ id: req.params[idParam] })
-            .fetch({ withRelated: ['apd.activities'] });
+            .fetch({ withRelated: apdRelations });
           if (obj) {
             req.meta.apd = obj.related('apd');
           } else {
@@ -73,7 +75,7 @@ module.exports.loadActivity = (idParam = 'id', model = defaultActivityModel) =>
             id: +req.params[idParam]
           })
           .fetch({
-            withRelated: ['goals.objectives', 'approaches', 'expenses.entries']
+            withRelated: model.withRelated
           });
 
         if (!activity) {
