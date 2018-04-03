@@ -74,15 +74,14 @@ tap.test('apds GET endpoint', async endpointTest => {
 
     handlerTest.test('sends apds', async validTest => {
       ApdModel.fetchAll.resolves({ toJSON });
+      ApdModel.withRelated = 'this is related stuff';
       toJSON.returns(['a', 'b', 'c']);
 
       await handler({ params: {}, user: { state: 'va' } }, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
       validTest.ok(
-        ApdModel.fetchAll.calledWith({
-          withRelated: ['activities.goals.objectives', 'activities.approaches']
-        }),
+        ApdModel.fetchAll.calledWith({ withRelated: 'this is related stuff' }),
         'fetches related activities, goals, and objectives'
       );
       validTest.ok(

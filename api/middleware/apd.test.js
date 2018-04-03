@@ -5,7 +5,9 @@ const middleware = require('./apd');
 
 const OtherModel = {
   where: sandbox.stub(),
-  fetch: sandbox.stub()
+  fetch: sandbox.stub(),
+  withRelated: {},
+  modelName: ''
 };
 
 const res = {
@@ -20,6 +22,8 @@ tap.test('APD-related middleware', async middlewareTests => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
+    OtherModel.modelName = '';
+
     res.status.returns(res);
     res.send.returns(res);
     res.end.returns(res);
@@ -30,6 +34,7 @@ tap.test('APD-related middleware', async middlewareTests => {
   middlewareTests.test('load apd', async loadApdTests => {
     loadApdTests.test('from an APD model', async apdModelTest => {
       apdModelTest.beforeEach(async () => {
+        OtherModel.modelName = 'apd';
         OtherModel.where.withArgs({ id: 9 }).returns(OtherModel);
       });
 
@@ -39,11 +44,7 @@ tap.test('APD-related middleware', async middlewareTests => {
           OtherModel.fetch.rejects();
 
           const req = { meta: {}, params: { 'apd-id': 9 } };
-          await middleware.loadApd(OtherModel, 'apd-id', OtherModel)(
-            req,
-            res,
-            next
-          );
+          await middleware.loadApd(OtherModel, 'apd-id')(req, res, next);
 
           invalidTest.ok(
             res.status.calledWith(500),
@@ -60,11 +61,7 @@ tap.test('APD-related middleware', async middlewareTests => {
           OtherModel.fetch.resolves(false);
 
           const req = { meta: {}, params: { 'apd-id': 9 } };
-          await middleware.loadApd(OtherModel, 'apd-id', OtherModel)(
-            req,
-            res,
-            next
-          );
+          await middleware.loadApd(OtherModel, 'apd-id')(req, res, next);
 
           invalidTest.ok(
             res.status.calledWith(404),
@@ -80,11 +77,7 @@ tap.test('APD-related middleware', async middlewareTests => {
         OtherModel.fetch.resolves(apd);
 
         const req = { meta: {}, params: { 'apd-id': 9 } };
-        await middleware.loadApd(OtherModel, 'apd-id', OtherModel)(
-          req,
-          res,
-          next
-        );
+        await middleware.loadApd(OtherModel, 'apd-id')(req, res, next);
 
         validTest.ok(res.status.notCalled, 'HTTP status is not set');
         validTest.ok(res.end.notCalled, 'response is not closed');
@@ -274,6 +267,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       const activity = { hello: 'world' };
       OtherModel.where.withArgs({ id: 7 }).returns(OtherModel);
       OtherModel.fetch.resolves(activity);
+      OtherModel.withRelated = 'chickens are related to dinosaurs';
       const req = { meta: {}, params: { 'activity-id': 7 } };
 
       await middleware.loadActivity('activity-id', OtherModel)(req, res, next);
