@@ -24,6 +24,17 @@ module.exports = () => ({
       return this.hasMany('apdActivitySchedule');
     },
 
+    static: {
+      withRelated: [
+        'approaches',
+        'goals',
+        'goals.objectives',
+        'expenses',
+        'expenses.entries',
+        'schedule'
+      ]
+    },
+
     async validate() {
       logger.silly('validating');
 
