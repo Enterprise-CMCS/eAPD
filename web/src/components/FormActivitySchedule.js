@@ -6,7 +6,7 @@ import { Input } from './Inputs';
 import SectionHeader from './SectionHeader';
 
 const AddButton = ({ fields, meta: { error, submitFailed } }) => (
-  <div>
+  <div className="mt2">
     <button
       type="button"
       className="btn btn-primary bg-black"
@@ -25,13 +25,13 @@ AddButton.propTypes = {
 
 const Milestones = ({ fields }) =>
   fields.map((milestone, idx) => (
-    <tr key={milestone}>
-      <td>{idx + 1}</td>
+    <tr key={milestone} className="h5">
       <td>
         <Field
           name={`${milestone}.name`}
           component={Input}
           label="name"
+          className="m0"
           hideLabel
         />
       </td>
@@ -40,6 +40,7 @@ const Milestones = ({ fields }) =>
           name={`${milestone}.status`}
           component={Input}
           label="status"
+          className="m0"
           hideLabel
         />
       </td>
@@ -48,14 +49,8 @@ const Milestones = ({ fields }) =>
           name={`${milestone}.plannedStart`}
           component={Input}
           label="planned start date"
-          hideLabel
-        />
-      </td>
-      <td>
-        <Field
-          name={`${milestone}.actualStart`}
-          component={Input}
-          label="actual start date"
+          type="date"
+          className="m0"
           hideLabel
         />
       </td>
@@ -64,14 +59,8 @@ const Milestones = ({ fields }) =>
           name={`${milestone}.plannedEnd`}
           component={Input}
           label="planned end date"
-          hideLabel
-        />
-      </td>
-      <td>
-        <Field
-          name={`${milestone}.actualEnd`}
-          component={Input}
-          label="actual end date"
+          type="date"
+          className="m0"
           hideLabel
         />
       </td>
@@ -81,7 +70,7 @@ const Milestones = ({ fields }) =>
           title="Remove Goal"
           onClick={() => fields.remove(idx)}
         >
-          Remove
+          ✕
         </button>
       </td>
     </tr>
@@ -103,17 +92,14 @@ const FormActivitySchedule = ({
     </SectionHeader>
 
     <div className="overflow-auto">
-      <table className="table">
+      <table className="table table-fixed">
         <thead>
           <tr>
-            <th />
-            <th>Milestone</th>
-            <th>Status</th>
-            <th>Planned start date</th>
-            <th>Actual start date</th>
-            <th>Planned end date</th>
-            <th>Actual end date</th>
-            <th />
+            <th className="col-3">Milestone</th>
+            <th className="col-2">Status</th>
+            <th className="col-3">Planned start</th>
+            <th className="col-3">Planned end</th>
+            <th className="col-1" />
           </tr>
         </thead>
         <tbody>
