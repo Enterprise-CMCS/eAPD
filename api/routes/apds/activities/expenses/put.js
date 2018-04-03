@@ -82,7 +82,7 @@ module.exports = (
         const updatedActivity = await ActivityModel.where({
           id: req.meta.activity.get('id')
         }).fetch({
-          withRelated: ['expenses.entries']
+          withRelated: ActivityModel.withRelated
         });
 
         return res.send(updatedActivity.toJSON());
