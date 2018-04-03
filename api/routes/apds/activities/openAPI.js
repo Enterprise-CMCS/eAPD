@@ -1,41 +1,10 @@
 const {
   requiresAuth,
-  schema: { arrayOf, errorToken, jsonResponse }
+  schema: { errorToken, jsonResponse }
 } = require('../../openAPI/helpers');
 const approaches = require('./approaches/openAPI');
 const goals = require('./goals/openAPI');
-
-const activityObjectSchema = {
-  type: 'object',
-  properties: {
-    id: {
-      type: 'number',
-      description: 'Activity globally-unique ID'
-    },
-    name: {
-      type: 'string',
-      description: 'Activity name, unique within an APD'
-    },
-    description: {
-      type: 'string',
-      description: 'Activity description'
-    },
-    goals: arrayOf({
-      type: 'object',
-      description: 'Activity goal',
-      properties: {
-        description: {
-          type: 'string',
-          description: 'Goal description'
-        },
-        objectives: arrayOf({
-          type: 'string',
-          description: 'Goal objective'
-        })
-      }
-    })
-  }
-};
+const schedule = require('./schedule/openAPI');
 
 const openAPI = {
   '/apds/{apdID}/activities': {
@@ -67,7 +36,7 @@ const openAPI = {
       responses: {
         200: {
           description: 'The newly-created activity',
-          content: jsonResponse(activityObjectSchema)
+          content: jsonResponse({ $ref: '#/components/schemas/activity' })
         },
         400: {
           description:
@@ -115,7 +84,7 @@ const openAPI = {
       responses: {
         200: {
           description: 'The update was successful',
-          content: jsonResponse(activityObjectSchema)
+          content: jsonResponse({ $ref: '#/components/schemas/activity' })
         },
         400: {
           description:
@@ -131,7 +100,8 @@ const openAPI = {
   },
 
   ...approaches,
-  ...goals
+  ...goals,
+  ...schedule
 };
 
 module.exports = requiresAuth(openAPI);

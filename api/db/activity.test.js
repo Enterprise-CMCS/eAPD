@@ -614,7 +614,6 @@ tap.test('activity data model', async activityModelTests => {
       const output = activity.apdActivitySchedule.toJSON.bind(self)();
 
       jsonTests.match(output, {
-        id: 'zaphod',
         actualEnd: 'beeblebrox',
         actualStart: 'is',
         milestone: 'one',

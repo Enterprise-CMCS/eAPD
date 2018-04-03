@@ -149,7 +149,6 @@ module.exports = () => ({
 
     toJSON() {
       return {
-        id: this.get('id'),
         actualEnd: this.get('actual_end'),
         actualStart: this.get('actual_start'),
         milestone: this.get('milestone'),
