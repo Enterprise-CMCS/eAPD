@@ -3,14 +3,13 @@ import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { Textarea } from './Inputs';
-import SectionHeader from './SectionHeader';
 
 const entryShell = { approach: '', alternatives: '', explanation: '' };
 
 const Approaches = ({ fields, meta: { error, submitFailed } }) => (
   <div>
     {fields.map((approach, idx) => (
-      <div key={approach} className="mb3">
+      <div key={approach} className="mb3 sm-col-8">
         <div className="relative">
           <button
             type="button"
@@ -18,24 +17,15 @@ const Approaches = ({ fields, meta: { error, submitFailed } }) => (
             title="Remove Goal"
             onClick={() => fields.remove(idx)}
           >
-            Remove approach
+            Remove
           </button>
-          <SectionHeader>Approach #{idx + 1}:</SectionHeader>
+          <div className="mb-tiny">Alternative #{idx + 1}:</div>
         </div>
-        <Field
-          name={`${approach}.approach`}
-          component={Textarea}
-          label="Approach"
-        />
         <Field
           name={`${approach}.alternatives`}
           component={Textarea}
-          label="Describe the alternatives"
-        />
-        <Field
-          name={`${approach}.explanation`}
-          component={Textarea}
-          label="Tell us why you chose this approach"
+          label="Describe alternative and justification"
+          hideLabel
         />
       </div>
     ))}
@@ -45,7 +35,7 @@ const Approaches = ({ fields, meta: { error, submitFailed } }) => (
         className="btn btn-primary bg-black"
         onClick={() => fields.push({ ...entryShell })}
       >
-        Add another approach
+        Add another consideration
       </button>
       {submitFailed && error && <div>{error}</div>}
     </div>
@@ -64,10 +54,9 @@ const FormActivityApproach = ({
   submitting
 }) => (
   <form onSubmit={handleSubmit}>
-    <SectionHeader>
-      Describe any alternative approaches that you considered when planning this
-      activity. Which options did you decide against, and why?
-    </SectionHeader>
+    <div className="mb3 bold">
+      Statement of alternative considerations and supporting justification
+    </div>
 
     <FieldArray name="approaches" component={Approaches} />
 

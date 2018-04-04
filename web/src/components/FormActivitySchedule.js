@@ -37,15 +37,6 @@ const Milestones = ({ fields }) =>
       </td>
       <td>
         <Field
-          name={`${milestone}.status`}
-          component={Input}
-          label="status"
-          className="m0"
-          hideLabel
-        />
-      </td>
-      <td>
-        <Field
           name={`${milestone}.plannedStart`}
           component={Input}
           label="planned start date"
@@ -95,8 +86,7 @@ const FormActivitySchedule = ({
       <table className="table table-fixed">
         <thead>
           <tr>
-            <th className="col-3">Milestone</th>
-            <th className="col-2">Status</th>
+            <th className="col-5">Milestone</th>
             <th className="col-3">Planned start</th>
             <th className="col-3">Planned end</th>
             <th className="col-1" />
