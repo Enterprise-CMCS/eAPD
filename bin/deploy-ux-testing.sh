@@ -10,7 +10,7 @@ API="https://api.fr.cloud.gov"
 ORG="sandbox-gsa"
 SPACE="michael.walker"
 
-export API_URL="https://hitech-api-ux.app.cloud.gov/"
+export API_URL="https://hitech-api-ux.app.cloud.gov"
 export LOG_FORM_INTERACTIONS="true"
 
 # Install `cf` cli
