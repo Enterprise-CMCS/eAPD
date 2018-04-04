@@ -42,3 +42,7 @@ footer {
     overflow: auto;
   }
 }
+
+.measure {
+  max-width: 30em;
+}
