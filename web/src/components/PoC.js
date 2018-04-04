@@ -12,12 +12,14 @@ import { getParams, stateLookup } from '../util';
 import { EDITOR_CONFIG } from '../util/editor';
 
 const sections = [
-  'Short Summary of Activity',
   'Activity Description',
-  'Goals and Objectives',
-  'Alternative Analysis',
-  'Personnel Resources',
-  'Activity Schedule'
+  'Needs and Objectives',
+  'Proposed Activity Schedule',
+  'State Personnel',
+  'Contractor Resources',
+  'Expenses',
+  'Cost Allocation',
+  'Standards & Conditions'
 ];
 
 const activityDisplay = (a, i) => {
@@ -146,12 +148,14 @@ class PoC extends Component {
         {
           id: 1,
           name: 'Test',
-          type: ['HIT']
+          type: ['HIT'],
+          years: ['2018']
         },
         {
           id: 2,
           name: 'Test 2',
-          type: ['MMIS']
+          type: ['MMIS'],
+          years: ['2018']
         }
       ]
     };
@@ -164,13 +168,14 @@ class PoC extends Component {
         {
           id: activities.reduce((maxId, a) => Math.max(a.id, maxId), -1) + 1,
           name: '',
-          type: ['HIT']
+          type: ['HIT'],
+          years: ['2018']
         }
       ]
     }));
   };
 
-  editActivityName = e => {
+  editActivityText = e => {
     const { name: nameRaw, value } = e.target;
     const [id, name] = nameRaw.split('.');
 
@@ -181,9 +186,9 @@ class PoC extends Component {
     }));
   };
 
-  editActivityType = e => {
-    const { name, value } = e.target;
-    const id = name.split('.')[0];
+  editActivityChecks = e => {
+    const { name: nameRaw, value } = e.target;
+    const [id, name] = nameRaw.split('.');
 
     this.setState(({ activities }) => ({
       activities: activities.map(
@@ -191,9 +196,9 @@ class PoC extends Component {
           a.id === +id
             ? {
                 ...a,
-                type: a.type.includes(value)
-                  ? a.type.filter(t => t !== value)
-                  : [...a.type, value]
+                [name]: a[name].includes(value)
+                  ? a[name].filter(t => t !== value)
+                  : [...a[name], value]
               }
             : a
       )
@@ -220,7 +225,7 @@ class PoC extends Component {
                         className="col-12 input m0"
                         name={`${a.id}.name`}
                         value={a.name}
-                        onChange={this.editActivityName}
+                        onChange={this.editActivityText}
                       />
                     </div>
                     <div>
@@ -231,7 +236,7 @@ class PoC extends Component {
                             name={`${a.id}.type`}
                             value={aType}
                             checked={a.type.includes(aType)}
-                            onChange={this.editActivityType}
+                            onChange={this.editActivityChecks}
                           />
                           {aType}
                         </label>
@@ -252,41 +257,79 @@ class PoC extends Component {
             {activities.map((a, i) => (
               <div key={a.id} className="mb3">
                 <h3>{activityDisplay(a, i + 1)}</h3>
-                <Collapsible title="Short Summary of Activity" open>
+                <Collapsible title="Activity Description" open>
                   <div className="mb1 bold">
                     Summary of the activity
                     <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
                   </div>
+
                   <HelpBox>
                     <p>Here is something to keep in mind...</p>
                     <p className="mb0">
                       You may also want to think about this...
                     </p>
                   </HelpBox>
-                  <textarea
-                    className="textarea col-10"
-                    rows="5"
-                    spellCheck="true"
-                    placeholder="A brief statement of what the activity involves..."
-                  />
-                </Collapsible>
-                <Collapsible title="Activity Description" open>
-                  <div className="mb1 bold">
-                    Please describe the activity
-                    <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
+
+                  <div className="mb3">
+                    <textarea
+                      className="m0 textarea col-8"
+                      rows="5"
+                      spellCheck="true"
+                      maxLength="280"
+                      placeholder="A brief statement of what the activity involves..."
+                    />
                   </div>
-                  <Editor toolbar={EDITOR_CONFIG} />
-                </Collapsible>
-                <Collapsible title="Goals and Objectives">
-                  <FormActivityGoals form={`activity-${i + 1}-goals`} />
-                </Collapsible>
-                <Collapsible title="Alternative Analysis">
+
+                  <div className="mb3">
+                    <div className="mb1 bold">
+                      Please describe the activity
+                      <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
+                    </div>
+                    <Editor toolbar={EDITOR_CONFIG} />
+                  </div>
+
+                  <div className="mb3">
+                    <div className="mb1 bold">
+                      What years does this activity cover?
+                    </div>
+                    {['2018', '2019', '2020'].map(year => (
+                      <label key={year} className="mr1">
+                        <input
+                          type="checkbox"
+                          name={`${a.id}.years`}
+                          value={year}
+                          checked={a.years.includes(year)}
+                          onChange={this.editActivityChecks}
+                        />
+                        {year}
+                      </label>
+                    ))}
+                  </div>
+
                   <FormActivityApproach form={`activity-${i + 1}-approach`} />
                 </Collapsible>
-                <Collapsible title="Activity Schedule">
+                <Collapsible title="Needs and Objectives">
+                  <FormActivityGoals form={`activity-${i + 1}-goals`} />
+                </Collapsible>
+                <Collapsible title="Proposed Activity Schedule">
                   <FormActivitySchedule form={`activity-${i + 1}-schedule`} />
                 </Collapsible>
-                <Collapsible title="Personnel Resources">
+                <Collapsible title="State Personnel" open>
+                  <div>Title, Description, {a.years.join(', ')}</div>
+                </Collapsible>
+                <Collapsible title="Contractor Resources" open>
+                  <div>
+                    Name, Description of Services, Term Start, Term End,{' '}
+                    {a.years.join(', ')}
+                  </div>
+                </Collapsible>
+                <Collapsible title="Expenses" open>
+                  <div>Name, {a.years.join(', ')}</div>
+                </Collapsible>
+                <Collapsible title="Cost Allocation">
+                  <div>...</div>
+                </Collapsible>
+                <Collapsible title="Standards & Conditions">
                   <div>...</div>
                 </Collapsible>
               </div>
