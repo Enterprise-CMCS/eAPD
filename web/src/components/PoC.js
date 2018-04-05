@@ -134,6 +134,147 @@ HelpBox.propTypes = {
   children: PropTypes.node.isRequired
 };
 
+const ActivityDescription = ({ activity, updateYears }) => (
+  <div>
+    <div className="mb1 bold">
+      Summary of the activity
+      <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
+    </div>
+
+    <HelpBox>
+      <p>Here is something to keep in mind...</p>
+      <p className="mb0">You may also want to think about this...</p>
+    </HelpBox>
+
+    <div className="mb3">
+      <textarea
+        className="m0 textarea col-8"
+        rows="5"
+        spellCheck="true"
+        maxLength="280"
+        placeholder="A brief statement of what the activity involves..."
+      />
+    </div>
+
+    <div className="mb3">
+      <div className="mb1 bold">
+        Please describe the activity
+        <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
+      </div>
+      <Editor toolbar={EDITOR_CONFIG} />
+    </div>
+
+    <div className="mb3">
+      <div className="mb1 bold">What years does this activity cover?</div>
+      {['2018', '2019', '2020'].map(year => (
+        <label key={year} className="mr1">
+          <input
+            type="checkbox"
+            name={`${activity.id}.years`}
+            value={year}
+            checked={activity.years.includes(year)}
+            onChange={updateYears}
+          />
+          {year}
+        </label>
+      ))}
+    </div>
+
+    <FormActivityApproach form={`activity-${activity.id}-approach`} />
+  </div>
+);
+
+ActivityDescription.propTypes = {
+  activity: PropTypes.object.isRequired,
+  updateYears: PropTypes.func.isRequired
+};
+
+const StatePersonnel = ({ activity }) => (
+  <div className="overflow-auto">
+    <table className="mb2 h5 table table-fixed" style={{ minWidth: 700 }}>
+      <thead>
+        <tr>
+          <th className="col-1">#</th>
+          <th className="col-4">Title</th>
+          <th className="col-5">Description</th>
+          {activity.years.map(year => (
+            <th key={year} className="col-3">
+              {year}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {[...Array(5)].map((_, i) => (
+          <tr key={i}>
+            <td className="mono">{i + 1}.</td>
+            <td>
+              <input type="text" className="m0 input" />
+            </td>
+            <td>
+              <textarea className="m0 textarea" />
+            </td>
+            {activity.years.map(year => (
+              <td key={year}>
+                <input type="number" className="m0 input" />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+StatePersonnel.propTypes = {
+  activity: PropTypes.object.isRequired
+};
+
+const ContractorResources = ({ activity }) => (
+  <div className="overflow-auto">
+    <table className="mb2 h5 table table-fixed" style={{ minWidth: 700 }}>
+      <thead>
+        <tr>
+          <th className="col-1">#</th>
+          <th className="col-4">Name</th>
+          <th className="col-5">Description of Services</th>
+          <th className="col-4">Term</th>
+          {activity.years.map(year => (
+            <th key={year} className="col-3">
+              {year}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {[...Array(5)].map((_, i) => (
+          <tr key={i}>
+            <td className="mono">{i + 1}.</td>
+            <td>
+              <input type="text" className="m0 input" />
+            </td>
+            <td>
+              <textarea className="m0 textarea" />
+            </td>
+            <td>
+              <input type="text" className="m0 input" />
+            </td>
+            {activity.years.map(year => (
+              <td key={year}>
+                <input type="number" className="m0 input" />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+ContractorResources.propTypes = {
+  activity: PropTypes.object.isRequired
+};
+
 class PoC extends Component {
   constructor(props) {
     super(props);
@@ -149,7 +290,7 @@ class PoC extends Component {
           id: 1,
           name: 'Test',
           type: ['HIT'],
-          years: ['2018']
+          years: ['2018', '2019']
         },
         {
           id: 2,
@@ -169,7 +310,7 @@ class PoC extends Component {
           id: activities.reduce((maxId, a) => Math.max(a.id, maxId), -1) + 1,
           name: '',
           type: ['HIT'],
-          years: ['2018']
+          years: ['2018', '2019']
         }
       ]
     }));
@@ -198,7 +339,7 @@ class PoC extends Component {
                 ...a,
                 [name]: a[name].includes(value)
                   ? a[name].filter(t => t !== value)
-                  : [...a[name], value]
+                  : [...a[name], value].sort()
               }
             : a
       )
@@ -254,81 +395,43 @@ class PoC extends Component {
               </button>
             </Collapsible>
 
-            {activities.map((a, i) => (
-              <div key={a.id} className="mb3">
-                <h3>{activityDisplay(a, i + 1)}</h3>
-                <Collapsible title="Activity Description" open>
-                  <div className="mb1 bold">
-                    Summary of the activity
-                    <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
-                  </div>
+            {activities.map((activity, i) => (
+              <div key={activity.id} className="mb3">
+                <h3>{activityDisplay(activity, i + 1)}</h3>
 
-                  <HelpBox>
-                    <p>Here is something to keep in mind...</p>
-                    <p className="mb0">
-                      You may also want to think about this...
-                    </p>
-                  </HelpBox>
-
-                  <div className="mb3">
-                    <textarea
-                      className="m0 textarea col-8"
-                      rows="5"
-                      spellCheck="true"
-                      maxLength="280"
-                      placeholder="A brief statement of what the activity involves..."
-                    />
-                  </div>
-
-                  <div className="mb3">
-                    <div className="mb1 bold">
-                      Please describe the activity
-                      <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
-                    </div>
-                    <Editor toolbar={EDITOR_CONFIG} />
-                  </div>
-
-                  <div className="mb3">
-                    <div className="mb1 bold">
-                      What years does this activity cover?
-                    </div>
-                    {['2018', '2019', '2020'].map(year => (
-                      <label key={year} className="mr1">
-                        <input
-                          type="checkbox"
-                          name={`${a.id}.years`}
-                          value={year}
-                          checked={a.years.includes(year)}
-                          onChange={this.editActivityChecks}
-                        />
-                        {year}
-                      </label>
-                    ))}
-                  </div>
-
-                  <FormActivityApproach form={`activity-${i + 1}-approach`} />
+                <Collapsible title="Activity Description" open={i === 0}>
+                  <ActivityDescription
+                    activity={activity}
+                    updateYears={this.editActivityChecks}
+                  />
                 </Collapsible>
+
                 <Collapsible title="Needs and Objectives">
-                  <FormActivityGoals form={`activity-${i + 1}-goals`} />
+                  <FormActivityGoals form={`activity-${activity.id}-goals`} />
                 </Collapsible>
+
                 <Collapsible title="Proposed Activity Schedule">
-                  <FormActivitySchedule form={`activity-${i + 1}-schedule`} />
+                  <FormActivitySchedule
+                    form={`activity-${activity.id}-schedule`}
+                  />
                 </Collapsible>
-                <Collapsible title="State Personnel" open>
-                  <div>Title, Description, {a.years.join(', ')}</div>
+
+                <Collapsible title="State Personnel">
+                  <StatePersonnel activity={activity} />
                 </Collapsible>
-                <Collapsible title="Contractor Resources" open>
-                  <div>
-                    Name, Description of Services, Term Start, Term End,{' '}
-                    {a.years.join(', ')}
-                  </div>
+
+                <Collapsible title="Contractor Resources">
+                  <ContractorResources activity={activity} />
                 </Collapsible>
-                <Collapsible title="Expenses" open>
-                  <div>Name, {a.years.join(', ')}</div>
+
+                <Collapsible title="Expenses">
+                  <div>Name, {activity.years.join(', ')}</div>
                 </Collapsible>
+
                 <Collapsible title="Cost Allocation">
                   <div>...</div>
                 </Collapsible>
+
                 <Collapsible title="Standards & Conditions">
                   <div>...</div>
                 </Collapsible>
