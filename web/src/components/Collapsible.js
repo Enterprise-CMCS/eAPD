@@ -25,7 +25,7 @@ class Collapsible extends Component {
       <div className="mb2 bg-white border border-silver">
         <button
           type="button"
-          className="btn block col-12 left-align h2 py2"
+          className="btn block col-12 left-align h2 py2 line-height-1"
           aria-expanded={isOpen}
           aria-controls={id}
           onClick={this.handleClick}
