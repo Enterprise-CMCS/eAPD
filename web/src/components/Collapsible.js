@@ -16,16 +16,16 @@ class Collapsible extends Component {
   };
 
   render() {
-    const { children, title } = this.props;
+    const { bgColor, children, title } = this.props;
     const { isOpen } = this.state;
 
     const id = kebabCase(title);
 
     return (
-      <div className="mb2 bg-white border border-silver">
+      <div className={`mb2 bg-${bgColor} border border-silver`}>
         <button
           type="button"
-          className="btn block col-12 left-align h2 py2 line-height-1"
+          className="btn block col-12 left-align h3 py2 line-height-1"
           aria-expanded={isOpen}
           aria-controls={id}
           onClick={this.handleClick}
@@ -48,12 +48,14 @@ class Collapsible extends Component {
 }
 
 Collapsible.propTypes = {
+  bgColor: PropTypes.string,
   children: PropTypes.node,
   open: PropTypes.bool,
   title: PropTypes.string.isRequired
 };
 
 Collapsible.defaultProps = {
+  bgColor: 'white',
   children: null,
   open: false
 };
