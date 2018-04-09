@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import Icon from '@fortawesome/react-fontawesome';
 
@@ -7,20 +7,9 @@ import Collapsible from './Collapsible';
 import FormActivityApproach from './FormActivityApproach';
 import FormActivityGoals from './FormActivityGoals';
 import FormActivitySchedule from './FormActivitySchedule';
-import { faHelp, faHelpSolid, faChevronDown, faSignOut } from './Icons';
+import { faHelp, faHelpSolid, faSignOut } from './Icons';
 import { getParams, stateLookup } from '../util';
 import { EDITOR_CONFIG } from '../util/editor';
-
-const sections = [
-  'Activity Description',
-  'Needs and Objectives',
-  'Proposed Activity Schedule',
-  'State Personnel',
-  'Contractor Resources',
-  'Expenses',
-  'Cost Allocation',
-  'Standards & Conditions'
-];
 
 const activityDisplay = (a, i) => {
   let display = `Activity ${i}`;
@@ -29,63 +18,66 @@ const activityDisplay = (a, i) => {
   return display;
 };
 
-const Sidebar = ({ activities, place }) => {
-  const linkClass = 'inline-block white text-decoration-none truncate';
+const Section = ({ children }) => (
+  <div className="p2 sm-px3 border-bottom border-gray">{children}</div>
+);
 
-  return (
-    <div className="site-sidebar bg-navy">
-      <div className="p2 xs-hide sm-hide">
-        <div className="mb2 center">
-          <img
-            src={`/static/img/${place.id}.svg`}
-            alt={place.name}
-            width="60"
-            height="60"
-          />
-        </div>
+Section.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
-        <ul className="list-reset h5">
-          <li>
-            <a href="#!" className={linkClass}>
-              Program Summary
-            </a>
-          </li>
-          <li>
-            <a href="#!" className={linkClass}>
-              Program Activities
-            </a>
-          </li>
-          <ul className="ml2 list-reset">
-            {activities.map((a, i) => (
-              <Fragment key={a.id}>
-                <li>
-                  <a href="#!" className={linkClass}>
-                    {activityDisplay(a, i + 1)}{' '}
-                    <Icon icon={faChevronDown} className="teal" size="sm" />
-                  </a>
-                </li>
-                <ul className="ml2 mb0 list-reset">
-                  {sections.map((s, j) => (
-                    <li key={j}>
-                      <a href="#!" className={linkClass}>
-                        {s}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </Fragment>
-            ))}
-          </ul>
+const SectionTitle = ({ children }) => (
+  <h2 className="mt1 mb2 fw-800">{children}</h2>
+);
+
+SectionTitle.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+const SidebarLink = ({ children }) => (
+  <li>
+    <a href="#!" className="inline-block white text-decoration-none truncate">
+      {children}
+    </a>
+  </li>
+);
+
+SidebarLink.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+const Sidebar = ({ activities, place }) => (
+  <div className="site-sidebar bg-navy">
+    <div className="p2 xs-hide sm-hide">
+      <div className="mb2 center">
+        <img
+          src={`/static/img/${place.id}.svg`}
+          alt={place.name}
+          width="60"
+          height="60"
+        />
+      </div>
+      <ul className="list-reset h5">
+        <SidebarLink>Program Summary</SidebarLink>
+        <SidebarLink>Program Activities</SidebarLink>
+        <ul className="mb0 ml2 list-reset">
+          {activities.map((a, i) => (
+            <SidebarLink key={a.id}>{activityDisplay(a, i + 1)}</SidebarLink>
+          ))}
         </ul>
-        <div className="mt2 pt2 border-top border-white">
-          <button type="button" className="btn btn-primary bg-white navy">
-            Save as PDF
-          </button>
-        </div>
+        <SidebarLink>Proposed Budget</SidebarLink>
+        <SidebarLink>Assurances and Compliance</SidebarLink>
+        <SidebarLink>Executive/Overall Summary</SidebarLink>
+        <SidebarLink>Certify and Submit</SidebarLink>
+      </ul>
+      <div className="mt2 pt2 border-top border-white">
+        <button type="button" className="btn btn-primary bg-white navy">
+          Save as PDF
+        </button>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
@@ -275,6 +267,182 @@ ContractorResources.propTypes = {
   activity: PropTypes.object.isRequired
 };
 
+const ProgramSummary = () => (
+  <Section>
+    <SectionTitle>Program Summary</SectionTitle>
+    <Collapsible title="HIT Narrative">
+      <div>
+        <label htmlFor="hit-narrative">HIT Narrative</label>
+        <textarea
+          className="m0 textarea col-8"
+          id="hit-narrative"
+          rows="5"
+          spellCheck="true"
+        />
+      </div>
+    </Collapsible>
+    <Collapsible title="HIE Narrative">
+      <div>
+        <label htmlFor="hie-narrative">HIE Narrative</label>
+        <textarea
+          className="m0 textarea col-8"
+          id="hie-narrative"
+          rows="5"
+          spellCheck="true"
+        />
+      </div>
+    </Collapsible>
+  </Section>
+);
+
+const ProgramActivities = ({
+  activities,
+  addActivity,
+  editActivityChecks,
+  editActivityText
+}) => (
+  <Section>
+    <SectionTitle>Program Activities</SectionTitle>
+    <Collapsible title="Activity List" open>
+      <div className="mb2">
+        {activities.map((a, i) => (
+          <div key={a.id} className="flex items-center mb1">
+            <div className="mr1 bold mono">{i + 1}.</div>
+            <div className="mr1 col-4">
+              <input
+                type="text"
+                className="col-12 input m0"
+                name={`${a.id}.name`}
+                value={a.name}
+                onChange={editActivityText}
+              />
+            </div>
+            <div>
+              {['HIT', 'HIE', 'MMIS'].map(aType => (
+                <label key={aType} className="mr1">
+                  <input
+                    type="checkbox"
+                    name={`${a.id}.type`}
+                    value={aType}
+                    checked={a.type.includes(aType)}
+                    onChange={editActivityChecks}
+                  />
+                  {aType}
+                </label>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <button
+        type="button"
+        className="mt2 btn btn-primary"
+        onClick={addActivity}
+      >
+        Add activity
+      </button>
+    </Collapsible>
+
+    {activities.map((a, i) => (
+      <Collapsible
+        key={a.id}
+        title={`Program Activities › ${activityDisplay(a, i + 1)}`}
+        bgColor="darken-1"
+      >
+        <Collapsible title="Activity Description">
+          <ActivityDescription activity={a} updateYears={editActivityChecks} />
+        </Collapsible>
+
+        <Collapsible title="Needs and Objectives">
+          <FormActivityGoals form={`activity-${a.id}-goals`} />
+        </Collapsible>
+
+        <Collapsible title="Proposed Activity Schedule">
+          <FormActivitySchedule form={`activity-${a.id}-schedule`} />
+        </Collapsible>
+
+        <Collapsible title="State Personnel">
+          <StatePersonnel activity={a} />
+        </Collapsible>
+
+        <Collapsible title="Contractor Resources">
+          <ContractorResources activity={a} />
+        </Collapsible>
+
+        <Collapsible title="Expenses">
+          <div>Name, {a.years.join(', ')}</div>
+        </Collapsible>
+
+        <Collapsible title="Cost Allocation">
+          <div>...</div>
+        </Collapsible>
+
+        <Collapsible title="Standards & Conditions">
+          <div>...</div>
+        </Collapsible>
+      </Collapsible>
+    ))}
+  </Section>
+);
+
+ProgramActivities.propTypes = {
+  activities: PropTypes.array.isRequired,
+  addActivity: PropTypes.func.isRequired,
+  editActivityChecks: PropTypes.func.isRequired,
+  editActivityText: PropTypes.func.isRequired
+};
+
+const ProposedBudget = () => (
+  <Section>
+    <SectionTitle>Proposed Budget</SectionTitle>
+    <Collapsible title="Short Activity Summary Budget">
+      <div>...</div>
+    </Collapsible>
+    <Collapsible title="Incentive Payments by FFY Quarter">
+      <div>...</div>
+    </Collapsible>
+  </Section>
+);
+
+const AssurancesAndCompliance = () => (
+  <Section>
+    <SectionTitle>Assurances and Compliance</SectionTitle>
+    <Collapsible title="Procurement Standards">
+      <div>...</div>
+    </Collapsible>
+    <Collapsible title="Access to Records">
+      <div>...</div>
+    </Collapsible>
+    <Collapsible title="Software Rights">
+      <div>...</div>
+    </Collapsible>
+    <Collapsible title="Security">
+      <div>...</div>
+    </Collapsible>
+  </Section>
+);
+
+const ExecutiveSummary = () => (
+  <Section>
+    <SectionTitle>Executive/Overall Summary</SectionTitle>
+    <Collapsible title="Executive Summary">
+      <div>...</div>
+    </Collapsible>
+    <Collapsible title="Program Budget Table">
+      <div>...</div>
+    </Collapsible>
+  </Section>
+);
+
+const CertifyAndSubmit = () => (
+  <Section>
+    <SectionTitle>Certify and Submit</SectionTitle>
+    <Collapsible title="Certify and Submit">
+      <div>...</div>
+    </Collapsible>
+  </Section>
+);
+
 class PoC extends Component {
   constructor(props) {
     super(props);
@@ -316,17 +484,6 @@ class PoC extends Component {
     }));
   };
 
-  editActivityText = e => {
-    const { name: nameRaw, value } = e.target;
-    const [id, name] = nameRaw.split('.');
-
-    this.setState(({ activities }) => ({
-      activities: activities.map(
-        a => (a.id === +id ? { ...a, [name]: value } : a)
-      )
-    }));
-  };
-
   editActivityChecks = e => {
     const { name: nameRaw, value } = e.target;
     const [id, name] = nameRaw.split('.');
@@ -346,97 +503,37 @@ class PoC extends Component {
     }));
   };
 
+  editActivityText = e => {
+    const { name: nameRaw, value } = e.target;
+    const [id, name] = nameRaw.split('.');
+
+    this.setState(({ activities }) => ({
+      activities: activities.map(
+        a => (a.id === +id ? { ...a, [name]: value } : a)
+      )
+    }));
+  };
+
   render() {
     const { activities, place } = this.state;
 
     return (
       <div className="site-body">
         <Sidebar activities={activities} place={place} />
-        <div className="site-content">
+        <div className="site-content flex flex-column">
           <TopNav place={place} />
-          <div className="p2 pb4 sm-p3 bg-darken-1">
-            <Collapsible title="Activity List" open>
-              <div className="mb2">
-                {activities.map((a, i) => (
-                  <div key={a.id} className="flex items-center mb1">
-                    <div className="mr1 bold mono">{i + 1}.</div>
-                    <div className="mr1 col-4">
-                      <input
-                        type="text"
-                        className="col-12 input m0"
-                        name={`${a.id}.name`}
-                        value={a.name}
-                        onChange={this.editActivityText}
-                      />
-                    </div>
-                    <div>
-                      {['HIT', 'HIE', 'MMIS'].map(aType => (
-                        <label key={aType} className="mr1">
-                          <input
-                            type="checkbox"
-                            name={`${a.id}.type`}
-                            value={aType}
-                            checked={a.type.includes(aType)}
-                            onChange={this.editActivityChecks}
-                          />
-                          {aType}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={this.addActivity}
-              >
-                Add activity
-              </button>
-            </Collapsible>
-
-            {activities.map((activity, i) => (
-              <div key={activity.id} className="mb3">
-                <h3>{activityDisplay(activity, i + 1)}</h3>
-
-                <Collapsible title="Activity Description" open={i === 0}>
-                  <ActivityDescription
-                    activity={activity}
-                    updateYears={this.editActivityChecks}
-                  />
-                </Collapsible>
-
-                <Collapsible title="Needs and Objectives">
-                  <FormActivityGoals form={`activity-${activity.id}-goals`} />
-                </Collapsible>
-
-                <Collapsible title="Proposed Activity Schedule">
-                  <FormActivitySchedule
-                    form={`activity-${activity.id}-schedule`}
-                  />
-                </Collapsible>
-
-                <Collapsible title="State Personnel">
-                  <StatePersonnel activity={activity} />
-                </Collapsible>
-
-                <Collapsible title="Contractor Resources">
-                  <ContractorResources activity={activity} />
-                </Collapsible>
-
-                <Collapsible title="Expenses">
-                  <div>Name, {activity.years.join(', ')}</div>
-                </Collapsible>
-
-                <Collapsible title="Cost Allocation">
-                  <div>...</div>
-                </Collapsible>
-
-                <Collapsible title="Standards & Conditions">
-                  <div>...</div>
-                </Collapsible>
-              </div>
-            ))}
+          <div className="bg-darken-1 flex-auto">
+            <ProgramSummary />
+            <ProgramActivities
+              activities={activities}
+              addActivity={this.addActivity}
+              editActivityChecks={this.editActivityChecks}
+              editActivityText={this.editActivityText}
+            />
+            <ProposedBudget />
+            <AssurancesAndCompliance />
+            <ExecutiveSummary />
+            <CertifyAndSubmit />
           </div>
         </div>
       </div>
