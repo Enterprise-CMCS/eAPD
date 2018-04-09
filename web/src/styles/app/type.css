@@ -6,3 +6,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+
+.fw-800 {
+  font-weight: 800;
+}
