@@ -25,6 +25,14 @@ module.exports = () => ({
     },
 
     static: {
+      updateableFields: ['name', 'description'],
+      owns: {
+        goals: 'apdActivityGoal',
+        approaches: 'apdActivityApproach',
+        expenses: 'apdActivityExpense',
+        schedule: 'apdActivitySchedule'
+      },
+      foreignKey: 'activity_id',
       withRelated: [
         'approaches',
         'goals',
@@ -83,6 +91,12 @@ module.exports = () => ({
         description: this.get('description'),
         objectives: this.related('objectives')
       };
+    },
+
+    static: {
+      updateableFields: ['description'],
+      owns: { objectives: 'apdActivityGoalObjective' },
+      foreignKey: 'activity_goal_id'
     }
   },
 
@@ -95,6 +109,10 @@ module.exports = () => ({
 
     toJSON() {
       return this.get('description');
+    },
+
+    static: {
+      updateableFields: ['description']
     }
   },
 
@@ -111,6 +129,10 @@ module.exports = () => ({
         alternatives: this.get('alternatives'),
         explanation: this.get('explanation')
       };
+    },
+
+    static: {
+      updateableFields: ['description', 'alternatives', 'explanation']
     }
   },
 
@@ -131,6 +153,12 @@ module.exports = () => ({
         name: this.get('name'),
         entries: this.related('entries')
       };
+    },
+
+    static: {
+      updateableFields: ['name'],
+      owns: { entries: 'apdActivityExpenseEntry' },
+      foreignKey: 'expense_id'
     }
   },
 
@@ -148,6 +176,10 @@ module.exports = () => ({
         amount: this.get('amount'),
         description: this.get('description')
       };
+    },
+
+    static: {
+      updateableFields: ['year', 'amount', 'description']
     }
   },
 
@@ -167,6 +199,17 @@ module.exports = () => ({
         plannedStart: this.get('planned_start'),
         status: this.get('status')
       };
+    },
+
+    static: {
+      updateableFields: [
+        'actualEnd',
+        'actualStart',
+        'milestone',
+        'plannedEnd',
+        'plannedStart',
+        'status'
+      ]
     }
   }
 });

@@ -10,6 +10,13 @@ services:
     ports:
       - 54325:5432
 
+  dynamo:
+    image: dwmkerr/dynamodb:latest
+    environment:
+      - PORT=5433
+    expose:
+      - 5433
+
   web:
     build: ./web
     environment:
@@ -24,6 +31,7 @@ services:
     build: ./api
     depends_on:
       - db
+      - dynamo
     environment:
       - PORT=8000
       - DATABASE_URL=postgres://postgres:cms@db/hitech_apd
