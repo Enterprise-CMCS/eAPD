@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import Icon from '@fortawesome/react-fontawesome';
 
@@ -10,6 +10,54 @@ import FormActivitySchedule from './FormActivitySchedule';
 import { faHelp, faHelpSolid, faSignOut } from './Icons';
 import { getParams, stateLookup } from '../util';
 import { EDITOR_CONFIG } from '../util/editor';
+
+const STANDARDS = [
+  {
+    id: 'modularity',
+    title: 'Modularity'
+  },
+  {
+    id: 'mita',
+    title: 'Medicaid Information Technology Architecture (MITA)'
+  },
+  {
+    id: 'industry',
+    title: 'Industry Standards'
+  },
+  {
+    id: 'leverage',
+    title: 'Leverage'
+  },
+  {
+    id: 'biz-results',
+    title: 'Business Results'
+  },
+  {
+    id: 'reporting',
+    title: 'Reporting'
+  },
+  {
+    id: 'interoperability',
+    title: 'Interoperability'
+  },
+  {
+    id: 'mitigation',
+    title: 'Mitigation Strategy'
+  },
+  {
+    id: 'key-personnel',
+    title: 'Key Personnel'
+  },
+  {
+    id: 'documentation',
+    title: 'Documentation'
+  },
+  {
+    id: 'minimize-cost',
+    title:
+      'Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System'
+  }
+];
 
 const activityDisplay = (a, i) => {
   let display = `Activity ${i}`;
@@ -59,6 +107,7 @@ const Sidebar = ({ activities, place }) => (
       </div>
       <ul className="list-reset h5">
         <SidebarLink>Program Summary</SidebarLink>
+        <SidebarLink>Results of Previous Activities</SidebarLink>
         <SidebarLink>Program Activities</SidebarLink>
         <ul className="mb0 ml2 list-reset">
           {activities.map((a, i) => (
@@ -183,16 +232,30 @@ ActivityDescription.propTypes = {
 
 const StatePersonnel = ({ activity }) => (
   <div className="overflow-auto">
-    <table className="mb2 h5 table table-fixed" style={{ minWidth: 700 }}>
+    <table
+      className="mb2 h5 table table-condensed table-fixed"
+      style={{ minWidth: 700 }}
+    >
       <thead>
+        <tr>
+          <th className="col-1" />
+          <th className="col-4" />
+          <th className="col-5" />
+          {activity.years.map(year => (
+            <th key={year} className="col-4" colSpan="2">
+              {year} Cost
+            </th>
+          ))}
+        </tr>
         <tr>
           <th className="col-1">#</th>
           <th className="col-4">Title</th>
           <th className="col-5">Description</th>
           {activity.years.map(year => (
-            <th key={year} className="col-3">
-              {year}
-            </th>
+            <Fragment key={year}>
+              <th>Amount</th>
+              <th>% FTE</th>
+            </Fragment>
           ))}
         </tr>
       </thead>
@@ -207,9 +270,14 @@ const StatePersonnel = ({ activity }) => (
               <textarea className="m0 textarea" />
             </td>
             {activity.years.map(year => (
-              <td key={year}>
-                <input type="number" className="m0 input" />
-              </td>
+              <Fragment key={year}>
+                <td>
+                  <input type="number" className="m0 input" />
+                </td>
+                <td>
+                  <input type="number" className="m0 input" />
+                </td>
+              </Fragment>
             ))}
           </tr>
         ))}
@@ -224,13 +292,16 @@ StatePersonnel.propTypes = {
 
 const ContractorResources = ({ activity }) => (
   <div className="overflow-auto">
-    <table className="mb2 h5 table table-fixed" style={{ minWidth: 700 }}>
+    <table
+      className="mb2 h5 table table-condensed table-fixed"
+      style={{ minWidth: 700 }}
+    >
       <thead>
         <tr>
           <th className="col-1">#</th>
           <th className="col-4">Name</th>
           <th className="col-5">Description of Services</th>
-          <th className="col-4">Term</th>
+          <th className="col-4">Term (Start-End)</th>
           {activity.years.map(year => (
             <th key={year} className="col-3">
               {year}
@@ -267,6 +338,51 @@ ContractorResources.propTypes = {
   activity: PropTypes.object.isRequired
 };
 
+const Expenses = ({ activity }) => (
+  <div className="overflow-auto">
+    <table
+      className="mb2 h5 table table-condensed table-fixed"
+      style={{ minWidth: 700 }}
+    >
+      <thead>
+        <tr>
+          <th className="col-1">#</th>
+          <th className="col-6">Name</th>
+          {activity.years.map(year => (
+            <th key={year} className="col-3">
+              {year}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {[...Array(5)].map((_, i) => (
+          <tr key={i}>
+            <td className="mono">{i + 1}.</td>
+            <td>
+              <select className="m0 select">
+                <option>Expense A</option>
+                <option>Expense B</option>
+                <option>Expense C</option>
+                <option>Other</option>
+              </select>
+            </td>
+            {activity.years.map(year => (
+              <td key={year}>
+                <input type="number" className="m0 input" />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+Expenses.propTypes = {
+  activity: PropTypes.object.isRequired
+};
+
 const ProgramSummary = () => (
   <Section>
     <SectionTitle>Program Summary</SectionTitle>
@@ -295,6 +411,21 @@ const ProgramSummary = () => (
   </Section>
 );
 
+const PreviousActivities = () => (
+  <Section>
+    <SectionTitle>Results of Previous Activities</SectionTitle>
+    <Collapsible title="Prior Activities Outline">
+      <div>...</div>
+    </Collapsible>
+    <Collapsible title="Approved Expenses">
+      <div>...</div>
+    </Collapsible>
+    <Collapsible title="Actual Expenses">
+      <div>...</div>
+    </Collapsible>
+  </Section>
+);
+
 const ProgramActivities = ({
   activities,
   addActivity,
@@ -303,7 +434,7 @@ const ProgramActivities = ({
 }) => (
   <Section>
     <SectionTitle>Program Activities</SectionTitle>
-    <Collapsible title="Activity List" open>
+    <Collapsible title="Activity List">
       <div className="mb2">
         {activities.map((a, i) => (
           <div key={a.id} className="flex items-center mb1">
@@ -370,15 +501,71 @@ const ProgramActivities = ({
         </Collapsible>
 
         <Collapsible title="Expenses">
-          <div>Name, {a.years.join(', ')}</div>
+          <Expenses activity={a} />
         </Collapsible>
 
-        <Collapsible title="Cost Allocation">
-          <div>...</div>
+        <Collapsible title="Cost Allocation and Other Funding Sources">
+          <div>
+            <label htmlFor={`a-${a.id}-cost-methodology`}>Methodology</label>
+            <textarea
+              className="m0 textarea sm-col-9"
+              id={`a-${a.id}-cost-methodology`}
+              rows="5"
+              spellCheck="true"
+            />
+          </div>
+          <div className="mt3 mb2 overflow-auto">
+            <table className="h5 table table-fixed sm-col-9">
+              <thead>
+                <tr>
+                  <th className="col-1">#</th>
+                  <th className="col-7">Entity</th>
+                  <th className="col-4">Percent of Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...Array(3)].map((_, j) => (
+                  <tr key={j}>
+                    <td className="mono">{j + 1}.</td>
+                    <td>
+                      <input type="text" className="m0 input" />
+                    </td>
+                    <td>
+                      <input type="number" className="m0 input" />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </Collapsible>
 
         <Collapsible title="Standards & Conditions">
-          <div>...</div>
+          <p>Tell us how you’ll meet the Medicaid standards and conditions.</p>
+          {STANDARDS.map(std => {
+            const inputId = `a-${a.id}-standards-${std.id}`;
+            return (
+              <div key={std.id}>
+                <h3>{std.title}</h3>
+                <p>
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                  accusantium doloremque laudantium, totam rem aperiam, eaque
+                  ipsa quae ab illo inventore veritatis et quasi architecto...
+                </p>
+                <div>
+                  <label htmlFor={inputId}>
+                    Describe how you’ll meet this condition
+                  </label>
+                  <textarea
+                    className="m0 textarea md-col-8"
+                    id={inputId}
+                    rows="3"
+                    spellCheck="true"
+                  />
+                </div>
+              </div>
+            );
+          })}
         </Collapsible>
       </Collapsible>
     ))}
@@ -524,6 +711,7 @@ class PoC extends Component {
           <TopNav place={place} />
           <div className="bg-darken-1 flex-auto">
             <ProgramSummary />
+            <PreviousActivities />
             <ProgramActivities
               activities={activities}
               addActivity={this.addActivity}
