@@ -12,12 +12,17 @@ module.exports = app => {
     try {
       logger.silly(req, 'updating apd fields');
       logger.silly(req, 'filter body data to editable fields');
-      const newData = pick(req.body, ['status', 'period']);
-      const apd = req.meta.apd;
-      apd.set(newData);
+      // const newData = pick(req.body, ['status', 'period']);
+      // const apd = req.meta.apd;
+      // apd.set(newData);
 
-      await apd.save();
+      await req.meta.apd.update(req.body);
+
+      // await apd.save();
       logger.silly(req, 'all done');
+      const apd = await req.meta.apd.fetch({
+        withRelated: req.meta.apd.static.withRelated
+      });
       return res.send(apd.toJSON());
     } catch (e) {
       logger.error(req, e);
