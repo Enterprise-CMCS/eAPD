@@ -22,7 +22,7 @@ class Collapsible extends Component {
     const id = kebabCase(title);
 
     return (
-      <div className={`mb2 bg-${bgColor} border border-silver`}>
+      <div className={`mb2 bg-${bgColor} border border-gray`}>
         <button
           type="button"
           className="btn block col-12 left-align h3 py2 line-height-1"
@@ -39,7 +39,12 @@ class Collapsible extends Component {
           </span>
           {title}
         </button>
-        <div className={`p2 ${isOpen ? '' : 'display-none'}`} id={id}>
+        <div
+          className={`p2 border-top border-gray ${
+            isOpen ? '' : 'display-none'
+          }`}
+          id={id}
+        >
           {children}
         </div>
       </div>

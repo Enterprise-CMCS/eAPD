@@ -1,17 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 
 export const EDITOR_CONFIG = {
-  options: [
-    'inline',
-    'blockType',
-    'fontSize',
-    'emoji',
-    'image',
-    'list',
-    'link'
-  ],
+  options: ['inline', 'blockType', 'fontSize', 'image', 'list', 'link'],
   inline: {
-    options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace']
+    options: ['bold', 'italic', 'underline']
   },
   image: {
     className: undefined,
@@ -28,5 +20,8 @@ export const EDITOR_CONFIG = {
       height: 'auto',
       width: 'auto'
     }
+  },
+  list: {
+    options: ['unordered', 'ordered']
   }
 };

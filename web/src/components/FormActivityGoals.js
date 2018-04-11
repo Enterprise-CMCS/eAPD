@@ -5,7 +5,7 @@ import { Field, FieldArray, reduxForm } from 'redux-form';
 import { Input, Textarea } from './Inputs';
 import SectionHeader from './SectionHeader';
 
-const entryShell = { description: '', objectives: ['', ''] };
+const entryShell = { description: '', objectives: [''] };
 
 const Objectives = ({ fields, meta: { error, submitFailed } }) => (
   <div>
@@ -27,7 +27,7 @@ const Objectives = ({ fields, meta: { error, submitFailed } }) => (
           className="btn btn-outline black"
           onClick={() => fields.push('')}
         >
-          Add another objective
+          Add objective
         </button>
         {submitFailed && error && <div>{error}</div>}
       </div>
@@ -45,14 +45,16 @@ const Goals = ({ fields, meta: { error, submitFailed } }) => (
     {fields.map((goal, idx) => (
       <div key={goal} className="mb3">
         <div className="relative">
-          <button
-            type="button"
-            className="absolute right-0"
-            title="Remove Goal"
-            onClick={() => fields.remove(idx)}
-          >
-            Remove goal
-          </button>
+          {fields.length > 1 && (
+            <button
+              type="button"
+              className="absolute right-0"
+              title="Remove Goal"
+              onClick={() => fields.remove(idx)}
+            >
+              Remove goal
+            </button>
+          )}
           <SectionHeader>Goal #{idx + 1}:</SectionHeader>
         </div>
         <Field
@@ -69,7 +71,7 @@ const Goals = ({ fields, meta: { error, submitFailed } }) => (
         className="btn btn-primary bg-black"
         onClick={() => fields.push({ ...entryShell })}
       >
-        Add another goal
+        Add goal
       </button>
       {submitFailed && error && <div>{error}</div>}
     </div>
