@@ -11,3 +11,8 @@
 .table-fixed {
   table-layout: fixed;
 }
+
+.table-condensed th,
+.table-condensed td {
+  padding: 0.25rem;
+}
