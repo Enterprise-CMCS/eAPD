@@ -11,14 +11,16 @@ const Approaches = ({ fields, meta: { error, submitFailed } }) => (
     {fields.map((approach, idx) => (
       <div key={approach} className="mb3 sm-col-8">
         <div className="relative">
-          <button
-            type="button"
-            className="absolute right-0"
-            title="Remove Goal"
-            onClick={() => fields.remove(idx)}
-          >
-            Remove
-          </button>
+          {idx !== 0 && (
+            <button
+              type="button"
+              className="absolute right-0"
+              title="Remove Goal"
+              onClick={() => fields.remove(idx)}
+            >
+              Remove
+            </button>
+          )}
           <div className="mb-tiny">Alternative #{idx + 1}:</div>
         </div>
         <Field
