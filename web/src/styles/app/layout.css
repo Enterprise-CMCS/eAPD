@@ -46,3 +46,7 @@ footer {
 .measure {
   max-width: 30em;
 }
+
+.w-3 {
+  width: 3rem;
+}
