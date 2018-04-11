@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import { Editor } from 'react-draft-wysiwyg';
+import { FieldArray, reduxForm } from 'redux-form';
 
-import { Textarea } from './Inputs';
+import { EDITOR_CONFIG } from '../util/editor';
 
 const entryShell = { approach: '', alternatives: '', explanation: '' };
 
@@ -11,7 +12,7 @@ const Approaches = ({ fields, meta: { error, submitFailed } }) => (
     {fields.map((approach, idx) => (
       <div key={approach} className="mb3 sm-col-8">
         <div className="relative">
-          {idx !== 0 && (
+          {fields.length > 1 && (
             <button
               type="button"
               className="absolute right-0"
@@ -23,12 +24,7 @@ const Approaches = ({ fields, meta: { error, submitFailed } }) => (
           )}
           <div className="mb-tiny">Alternative #{idx + 1}:</div>
         </div>
-        <Field
-          name={`${approach}.alternatives`}
-          component={Textarea}
-          label="Describe alternative and justification"
-          hideLabel
-        />
+        <Editor toolbar={EDITOR_CONFIG} />
       </div>
     ))}
     <div>

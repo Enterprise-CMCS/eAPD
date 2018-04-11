@@ -18,3 +18,8 @@
 .mt-tiny {
   margin-top: var(--space-tiny);
 }
+
+.py-tiny {
+  padding-bottom: var(--space-tiny);
+  padding-top: var(--space-tiny);
+}

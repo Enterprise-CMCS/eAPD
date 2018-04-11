@@ -55,13 +55,14 @@ const Milestones = ({ fields }) =>
           hideLabel
         />
       </td>
-      <td>
+      <td className="center align-middle">
         <button
           type="button"
+          className="btn btn-outline px1 py-tiny"
           title="Remove Goal"
           onClick={() => fields.remove(idx)}
         >
-          ✕
+          ✗
         </button>
       </td>
     </tr>
@@ -125,28 +126,13 @@ const formConfig = {
   initialValues: {
     milestones: [
       {
-        name: 'Kickoff meeting',
-        status: 'Complete'
+        name: ''
       },
       {
-        name: 'Design studio',
-        status: 'In progress'
+        name: ''
       },
       {
-        name: 'MVP development',
-        status: 'In progress'
-      },
-      {
-        name: 'Usability testing',
-        status: 'Not started'
-      },
-      {
-        name: 'Beta launch',
-        status: 'Not started'
-      },
-      {
-        name: 'Educate providers about progress',
-        status: 'On hold'
+        name: ''
       }
     ]
   },
