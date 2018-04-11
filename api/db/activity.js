@@ -43,7 +43,7 @@ module.exports = () => ({
       ]
     },
 
-    async validate() {
+    async validate({ transacting }) {
       logger.silly('validating');
 
       if (this.hasChanged('name')) {
@@ -51,13 +51,13 @@ module.exports = () => ({
 
         if (typeof name !== 'string' || name.length < 1) {
           logger.verbose('name is not a string or is empty');
-          throw new Error('invalid-name');
+          throw new Error('activity-name-invalid');
         }
 
-        const hasName = await this.where({ name }).fetchAll();
+        const hasName = await this.where({ name }).fetchAll({ transacting });
         if (hasName.length) {
           logger.verbose('another activity already has this name');
-          throw new Error('name-exists');
+          throw new Error('activity-name-exists');
         }
       }
     },

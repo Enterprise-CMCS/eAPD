@@ -1,4 +1,5 @@
 require('./env');
+
 const logger = require('./logger')('main');
 const express = require('express');
 const cors = require('cors');
