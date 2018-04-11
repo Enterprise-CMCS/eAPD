@@ -1,5 +1,7 @@
+/* eslint-disable react/no-multi-comp */
+
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import Icon from '@fortawesome/react-fontawesome';
 
@@ -10,6 +12,54 @@ import FormActivitySchedule from './FormActivitySchedule';
 import { faHelp, faHelpSolid, faSignOut } from './Icons';
 import { getParams, stateLookup } from '../util';
 import { EDITOR_CONFIG } from '../util/editor';
+
+const STANDARDS = [
+  {
+    id: 'modularity',
+    title: 'Modularity'
+  },
+  {
+    id: 'mita',
+    title: 'Medicaid Information Technology Architecture (MITA)'
+  },
+  {
+    id: 'industry',
+    title: 'Industry Standards'
+  },
+  {
+    id: 'leverage',
+    title: 'Leverage'
+  },
+  {
+    id: 'biz-results',
+    title: 'Business Results'
+  },
+  {
+    id: 'reporting',
+    title: 'Reporting'
+  },
+  {
+    id: 'interoperability',
+    title: 'Interoperability'
+  },
+  {
+    id: 'mitigation',
+    title: 'Mitigation Strategy'
+  },
+  {
+    id: 'key-personnel',
+    title: 'Key Personnel'
+  },
+  {
+    id: 'documentation',
+    title: 'Documentation'
+  },
+  {
+    id: 'minimize-cost',
+    title:
+      'Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System'
+  }
+];
 
 const activityDisplay = (a, i) => {
   let display = `Activity ${i}`;
@@ -59,6 +109,7 @@ const Sidebar = ({ activities, place }) => (
       </div>
       <ul className="list-reset h5">
         <SidebarLink>Program Summary</SidebarLink>
+        <SidebarLink>Results of Previous Activities</SidebarLink>
         <SidebarLink>Program Activities</SidebarLink>
         <ul className="mb0 ml2 list-reset">
           {activities.map((a, i) => (
@@ -126,7 +177,7 @@ HelpBox.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const ActivityDescription = ({ activity, updateYears }) => (
+const ActivityDescription = ({ activity }) => (
   <div>
     <div className="mb1 bold">
       Summary of the activity
@@ -156,65 +207,72 @@ const ActivityDescription = ({ activity, updateYears }) => (
       <Editor toolbar={EDITOR_CONFIG} />
     </div>
 
-    <div className="mb3">
-      <div className="mb1 bold">What years does this activity cover?</div>
-      {['2018', '2019', '2020'].map(year => (
-        <label key={year} className="mr1">
-          <input
-            type="checkbox"
-            name={`${activity.id}.years`}
-            value={year}
-            checked={activity.years.includes(year)}
-            onChange={updateYears}
-          />
-          {year}
-        </label>
-      ))}
-    </div>
-
     <FormActivityApproach form={`activity-${activity.id}-approach`} />
   </div>
 );
 
 ActivityDescription.propTypes = {
-  activity: PropTypes.object.isRequired,
-  updateYears: PropTypes.func.isRequired
+  activity: PropTypes.object.isRequired
 };
 
 const StatePersonnel = ({ activity }) => (
-  <div className="overflow-auto">
-    <table className="mb2 h5 table table-fixed" style={{ minWidth: 700 }}>
-      <thead>
-        <tr>
-          <th className="col-1">#</th>
-          <th className="col-4">Title</th>
-          <th className="col-5">Description</th>
-          {activity.years.map(year => (
-            <th key={year} className="col-3">
-              {year}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {[...Array(5)].map((_, i) => (
-          <tr key={i}>
-            <td className="mono">{i + 1}.</td>
-            <td>
-              <input type="text" className="m0 input" />
-            </td>
-            <td>
-              <textarea className="m0 textarea" />
-            </td>
+  <div>
+    <div className="overflow-auto">
+      <table
+        className="mb2 h5 table table-condensed table-fixed"
+        style={{ minWidth: 700 }}
+      >
+        <thead>
+          <tr>
+            <th className="col-1" />
+            <th className="col-4" />
+            <th className="col-5" />
             {activity.years.map(year => (
-              <td key={year}>
-                <input type="number" className="m0 input" />
-              </td>
+              <th key={year} className="col-4" colSpan="2">
+                {year} Cost
+              </th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+          <tr>
+            <th className="col-1">#</th>
+            <th className="col-4">Title</th>
+            <th className="col-5">Description</th>
+            {activity.years.map(year => (
+              <Fragment key={year}>
+                <th>Amount</th>
+                <th>% FTE</th>
+              </Fragment>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {[...Array(5)].map((_, i) => (
+            <tr key={i}>
+              <td className="mono">{i + 1}.</td>
+              <td>
+                <input type="text" className="m0 input" />
+              </td>
+              <td>
+                <textarea className="mb2 textarea" rows="3" />
+              </td>
+              {activity.years.map(year => (
+                <Fragment key={year}>
+                  <td>
+                    <input type="text" className="m0 input" />
+                  </td>
+                  <td>
+                    <input type="text" className="m0 input" />
+                  </td>
+                </Fragment>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <button type="button" className="btn btn-primary bg-black">
+      Add entry
+    </button>
   </div>
 );
 
@@ -223,17 +281,79 @@ StatePersonnel.propTypes = {
 };
 
 const ContractorResources = ({ activity }) => (
+  <div>
+    <div className="overflow-auto">
+      <table
+        className="mb2 h5 table table-condensed table-fixed"
+        style={{ minWidth: 700 }}
+      >
+        <thead>
+          <tr>
+            <th className="col-1">#</th>
+            <th className="col-4">Name</th>
+            <th className="col-5">Description of Services</th>
+            <th className="col-4">Term Period</th>
+            {activity.years.map(year => (
+              <th key={year} className="col-2">
+                {year} Cost
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {[...Array(5)].map((_, i) => (
+            <tr key={i}>
+              <td className="mono">{i + 1}.</td>
+              <td>
+                <input type="text" className="m0 input" />
+              </td>
+              <td>
+                <textarea className="mb2 textarea" rows="5" />
+              </td>
+              <td>
+                <div className="mb1 flex items-baseline h6">
+                  <span className="mr-tiny w-3 right-align">Start:</span>
+                  <input type="date" className="m0 input" />
+                </div>
+                <div className="mb1 flex items-baseline h6">
+                  <span className="mr-tiny w-3 right-align">End:</span>
+                  <input type="date" className="m0 input" />
+                </div>
+              </td>
+              {activity.years.map(year => (
+                <td key={year}>
+                  <input type="text" className="m0 input" />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <button type="button" className="btn btn-primary bg-black">
+      Add entry
+    </button>
+  </div>
+);
+
+ContractorResources.propTypes = {
+  activity: PropTypes.object.isRequired
+};
+
+const Expenses = ({ activity }) => (
   <div className="overflow-auto">
-    <table className="mb2 h5 table table-fixed" style={{ minWidth: 700 }}>
+    <table
+      className="mb2 h5 table table-condensed table-fixed"
+      style={{ minWidth: 700 }}
+    >
       <thead>
         <tr>
           <th className="col-1">#</th>
-          <th className="col-4">Name</th>
-          <th className="col-5">Description of Services</th>
-          <th className="col-4">Term</th>
+          <th className="col-3">Category</th>
+          <th className="col-4">Description</th>
           {activity.years.map(year => (
-            <th key={year} className="col-3">
-              {year}
+            <th key={year} className="col-2">
+              {year} Cost
             </th>
           ))}
         </tr>
@@ -243,13 +363,15 @@ const ContractorResources = ({ activity }) => (
           <tr key={i}>
             <td className="mono">{i + 1}.</td>
             <td>
-              <input type="text" className="m0 input" />
+              <select className="m0 select">
+                <option>Expense A</option>
+                <option>Expense B</option>
+                <option>Expense C</option>
+                <option>Other</option>
+              </select>
             </td>
             <td>
-              <textarea className="m0 textarea" />
-            </td>
-            <td>
-              <input type="text" className="m0 input" />
+              <textarea className="mb2 textarea" rows="5" />
             </td>
             {activity.years.map(year => (
               <td key={year}>
@@ -263,13 +385,128 @@ const ContractorResources = ({ activity }) => (
   </div>
 );
 
-ContractorResources.propTypes = {
+Expenses.propTypes = {
   activity: PropTypes.object.isRequired
 };
 
-const ProgramSummary = () => (
+class CostAllocation extends Component {
+  state = {
+    entries: [
+      { id: 1, name: 'Medicaid', value: 100 },
+      { id: 2, name: '', value: 0 },
+      { id: 3, name: '', value: 0 }
+    ]
+  };
+
+  update = id => e => {
+    const { name, value } = e.target;
+    const valNorm = name === 'value' ? Number(value) : value;
+
+    this.setState(prev => ({
+      entries: prev.entries.map(
+        d => (d.id === id ? { ...d, [name]: valNorm } : d)
+      )
+    }));
+  };
+
+  render() {
+    const { entries } = this.state;
+    const total = entries.reduce((acc, curr) => acc + curr.value, 0);
+
+    return (
+      <div>
+        <div className="mb3">
+          <div className="mb1 bold">
+            Methodology
+            <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
+          </div>
+          <Editor toolbar={EDITOR_CONFIG} />
+        </div>
+        <div className="mb3 overflow-auto">
+          <table
+            className="h5 table table-fixed sm-col-9"
+            style={{ minWidth: 400 }}
+          >
+            <thead>
+              <tr>
+                <th className="col-1">#</th>
+                <th className="col-7">Entity</th>
+                <th className="col-4">Percent of Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              {entries.map(d => (
+                <tr key={d.id}>
+                  <td className="mono">{d.id}.</td>
+                  <td>
+                    <input
+                      type="text"
+                      className="m0 input"
+                      name="name"
+                      value={d.name}
+                      onChange={this.update(d.id)}
+                    />
+                  </td>
+                  <td className="align-middle">
+                    <div className="flex">
+                      <input
+                        type="range"
+                        className="input-range"
+                        name="value"
+                        step="5"
+                        value={d.value}
+                        onChange={this.update(d.id)}
+                      />
+                      <span
+                        className={`ml-tiny mono bold ${
+                          total !== 100 ? 'red' : ''
+                        }`}
+                      >
+                        {d.value}%
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <div className="mb1 bold">Other Funding Sources</div>
+          <div className="clearfix mxn2">
+            <div className="col col-12 sm-col-9 px2">
+              <div className="mb-tiny h5">Description:</div>
+              <Editor toolbar={EDITOR_CONFIG} />
+            </div>
+            <div className="col col-12 sm-col-3 px2">
+              <div className="mb-tiny h5">Total Amount:</div>
+              <input type="text" className="m0 input" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+const ProgramSummary = ({ editYears, selectedYears }) => (
   <Section>
     <SectionTitle>Program Summary</SectionTitle>
+    <Collapsible title="Overview" open>
+      <div className="mb1 bold">What years does this APD cover?</div>
+      {['2018', '2019', '2020'].map(year => (
+        <label key={year} className="mr1">
+          <input
+            type="checkbox"
+            value={year}
+            checked={selectedYears.includes(year)}
+            onChange={editYears(year, selectedYears)}
+          />
+          {year}
+        </label>
+      ))}
+    </Collapsible>
     <Collapsible title="HIT Narrative">
       <div>
         <label htmlFor="hit-narrative">HIT Narrative</label>
@@ -295,6 +532,26 @@ const ProgramSummary = () => (
   </Section>
 );
 
+ProgramSummary.propTypes = {
+  editYears: PropTypes.func.isRequired,
+  selectedYears: PropTypes.array.isRequired
+};
+
+const PreviousActivities = () => (
+  <Section>
+    <SectionTitle>Results of Previous Activities</SectionTitle>
+    <Collapsible title="Prior Activities Outline">
+      <div>...</div>
+    </Collapsible>
+    <Collapsible title="Approved Expenses">
+      <div>...</div>
+    </Collapsible>
+    <Collapsible title="Actual Expenses">
+      <div>...</div>
+    </Collapsible>
+  </Section>
+);
+
 const ProgramActivities = ({
   activities,
   addActivity,
@@ -303,7 +560,7 @@ const ProgramActivities = ({
 }) => (
   <Section>
     <SectionTitle>Program Activities</SectionTitle>
-    <Collapsible title="Activity List" open>
+    <Collapsible title="Activity List">
       <div className="mb2">
         {activities.map((a, i) => (
           <div key={a.id} className="flex items-center mb1">
@@ -350,7 +607,7 @@ const ProgramActivities = ({
         bgColor="darken-1"
       >
         <Collapsible title="Activity Description">
-          <ActivityDescription activity={a} updateYears={editActivityChecks} />
+          <ActivityDescription activity={a} />
         </Collapsible>
 
         <Collapsible title="Needs and Objectives">
@@ -370,15 +627,39 @@ const ProgramActivities = ({
         </Collapsible>
 
         <Collapsible title="Expenses">
-          <div>Name, {a.years.join(', ')}</div>
+          <Expenses activity={a} />
         </Collapsible>
 
-        <Collapsible title="Cost Allocation">
-          <div>...</div>
+        <Collapsible title="Cost Allocation and Other Funding Sources">
+          <CostAllocation />
         </Collapsible>
 
         <Collapsible title="Standards & Conditions">
-          <div>...</div>
+          <p>Tell us how you’ll meet the Medicaid standards and conditions.</p>
+          {STANDARDS.map(std => {
+            const inputId = `a-${a.id}-standards-${std.id}`;
+            return (
+              <div key={std.id}>
+                <h3>{std.title}</h3>
+                <p>
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                  accusantium doloremque laudantium, totam rem aperiam, eaque
+                  ipsa quae ab illo inventore veritatis et quasi architecto...
+                </p>
+                <div>
+                  <label htmlFor={inputId}>
+                    Describe how you’ll meet this condition
+                  </label>
+                  <textarea
+                    className="m0 textarea md-col-8"
+                    id={inputId}
+                    rows="3"
+                    spellCheck="true"
+                  />
+                </div>
+              </div>
+            );
+          })}
         </Collapsible>
       </Collapsible>
     ))}
@@ -453,18 +734,17 @@ class PoC extends Component {
 
     this.state = {
       place,
+      apdYears: ['2018', '2019'],
       activities: [
         {
           id: 1,
           name: 'Test',
-          type: ['HIT'],
-          years: ['2018', '2019']
+          type: ['HIT']
         },
         {
           id: 2,
           name: 'Test 2',
-          type: ['MMIS'],
-          years: ['2018']
+          type: ['MMIS']
         }
       ]
     };
@@ -477,8 +757,7 @@ class PoC extends Component {
         {
           id: activities.reduce((maxId, a) => Math.max(a.id, maxId), -1) + 1,
           name: '',
-          type: ['HIT'],
-          years: ['2018', '2019']
+          type: ['HIT']
         }
       ]
     }));
@@ -514,8 +793,17 @@ class PoC extends Component {
     }));
   };
 
+  editYears = (val, currVals) => () => {
+    const apdYears = currVals.includes(val)
+      ? currVals.filter(v => v !== val)
+      : [...currVals, val].sort();
+
+    this.setState({ apdYears });
+  };
+
   render() {
-    const { activities, place } = this.state;
+    const { activities, apdYears, place } = this.state;
+    const activitiesEnriched = activities.map(a => ({ ...a, years: apdYears }));
 
     return (
       <div className="site-body">
@@ -523,9 +811,13 @@ class PoC extends Component {
         <div className="site-content flex flex-column">
           <TopNav place={place} />
           <div className="bg-darken-1 flex-auto">
-            <ProgramSummary />
+            <ProgramSummary
+              selectedYears={apdYears}
+              editYears={this.editYears}
+            />
+            <PreviousActivities />
             <ProgramActivities
-              activities={activities}
+              activities={activitiesEnriched}
               addActivity={this.addActivity}
               editActivityChecks={this.editActivityChecks}
               editActivityText={this.editActivityText}
