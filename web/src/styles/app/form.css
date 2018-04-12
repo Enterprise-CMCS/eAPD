@@ -15,3 +15,10 @@
     outline: none;
   }
 }
+
+.input:disabled,
+.select:disabled,
+.textarea:disabled {
+  background-color: rgba(0, 0, 0, 0.125);
+  opacity: 0.5;
+}
