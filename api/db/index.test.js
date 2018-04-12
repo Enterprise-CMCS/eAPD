@@ -21,12 +21,14 @@ tap.test('database layer index', async dbTests => {
 
     const baseModel = { extend: sinon.stub() };
     const baseConstructor = sinon.stub().returns(baseModel);
-    baseModel.extend.withArgs('modelDefinitionOne').returns(1);
+    baseModel.extend
+      .withArgs({ name: 'modelDefinitionOne', static: { props: 'are here' } })
+      .returns(1);
     baseModel.extend.withArgs('modelDefinitionTwo').returns(2);
     baseModel.extend.withArgs('modelDefinitionThree').returns(3);
 
     const models = [
-      { one: 'modelDefinitionOne' },
+      { one: { name: 'modelDefinitionOne', static: { props: 'are here' } } },
       { two: 'modelDefinitionTwo', three: 'modelDefinitionThree' }
     ];
 
@@ -43,15 +45,20 @@ tap.test('database layer index', async dbTests => {
     );
 
     ormTests.ok(
-      baseModel.extend.calledWith('modelDefinitionOne'),
+      baseModel.extend.calledWith(
+        { name: 'modelDefinitionOne', static: { props: 'are here' } },
+        { props: 'are here', modelName: 'one' }
+      ),
       'model object created from first model definition'
     );
     ormTests.ok(
-      baseModel.extend.calledWith('modelDefinitionTwo'),
+      baseModel.extend.calledWith('modelDefinitionTwo', { modelName: 'two' }),
       'model object created from second model definition'
     );
     ormTests.ok(
-      baseModel.extend.calledWith('modelDefinitionThree'),
+      baseModel.extend.calledWith('modelDefinitionThree', {
+        modelName: 'three'
+      }),
       'model object created from third model definition'
     );
 
