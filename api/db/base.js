@@ -52,7 +52,7 @@ const instanceExtension = (orm, models) => ({
     logger.silly(
       `${this.modelName()} | deleting, id=${this.get('id')}; recursive`
     );
-    const childModels = this.static.owns || {};
+    const childModels = (this.static || {}).owns || {};
     await Promise.all(
       Object.values(childModels).map(async model => {
         const children = await this.models[model]
@@ -65,17 +65,14 @@ const instanceExtension = (orm, models) => ({
     return orm.Model.prototype.destroy.apply(this, args);
   },
 
-  async validate() {
-    logger.silly(`${this.modelName()} | validation not implemented`);
-    return true;
-  },
-
   async save(...args) {
-    try {
-      await this.validate(args[1] || null);
-    } catch (e) {
-      logger.error(`${this.modelName()} | validation error: ${e.message} | `);
-      throw new ValidationError(e.message);
+    if (this.validate) {
+      try {
+        await this.validate(args[1] || {});
+      } catch (e) {
+        logger.error(`${this.modelName()} | validation error: ${e.message} | `);
+        throw new ValidationError(e.message);
+      }
     }
     logger.silly(`${this.modelName()} | saving`);
     return orm.Model.prototype.save.apply(this, args);
