@@ -3,7 +3,7 @@ const defaultKnex = require('knex');
 const defaultBookshelf = require('bookshelf');
 const defaultConfig = require('../knexfile');
 
-const base = require('./base');
+const defaultBase = require('./base');
 const user = require('./user');
 const authorization = require('./authorization');
 const state = require('./state');
@@ -16,6 +16,7 @@ const setup = (
   knex = defaultKnex,
   bookshelf = defaultBookshelf,
   config = defaultConfig,
+  baseModel = defaultBase,
   models = [user(), authorization(), state(), apd(), apdActivity()]
 ) => {
   logger.silly(
@@ -26,7 +27,7 @@ const setup = (
   const orm = bookshelf(db);
   orm.plugin('registry');
 
-  const BaseModel = base(orm, exportedModels);
+  const BaseModel = baseModel(orm, exportedModels);
 
   models.forEach(modelObjects => {
     Object.keys(modelObjects).forEach(modelName => {
