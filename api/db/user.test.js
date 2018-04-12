@@ -84,10 +84,7 @@ tap.test('user data model', async userModelTests => {
   userModelTests.test('validation', async validationTests => {
     const self = {
       where: sandbox.stub(),
-      fetchAll: sandbox.stub()
-    };
-
-    const model = {
+      fetchAll: sandbox.stub(),
       attributes: {},
       hasChanged: sandbox.stub(),
       set: sandbox.stub()
@@ -98,18 +95,18 @@ tap.test('user data model', async userModelTests => {
     validationTests.beforeEach(async () => {
       self.where.returns({ fetchAll: self.fetchAll });
 
-      model.attributes = {};
-      model.hasChanged.returns(false);
+      self.attributes = {};
+      self.hasChanged.returns(false);
     });
 
     validationTests.test('valid if nothing has changed', async validTest => {
-      validTest.resolves(validate(model), 'resolves');
+      validTest.resolves(validate(), 'resolves');
     });
 
     validationTests.test('if the email is changed...', async email => {
       email.beforeEach(async () => {
-        model.attributes.email = 'new@email';
-        model.hasChanged.withArgs('email').returns(true);
+        self.attributes.email = 'new@email';
+        self.hasChanged.withArgs('email').returns(true);
       });
 
       email.test(
@@ -118,7 +115,7 @@ tap.test('user data model', async userModelTests => {
           self.fetchAll.resolves([{}]);
 
           invalidTest.rejects(
-            validate(model),
+            validate(),
             { message: 'email-exists' },
             'rejects'
           );
@@ -127,16 +124,16 @@ tap.test('user data model', async userModelTests => {
 
       email.test('and the email is unique', async validTest => {
         self.fetchAll.resolves([]);
-        validTest.resolves(validate(model), 'resolves');
+        validTest.resolves(validate(), 'resolves');
       });
     });
 
     validationTests.test('if the password is changed...', async password => {
       password.beforeEach(async () => {
-        model.attributes.email = 'email';
-        model.attributes.name = 'Bob';
-        model.attributes.password = 'password';
-        model.hasChanged.withArgs('password').returns(true);
+        self.attributes.email = 'email';
+        self.attributes.name = 'Bob';
+        self.attributes.password = 'password';
+        self.hasChanged.withArgs('password').returns(true);
       });
 
       password.test('and the password is too weak', async invalidTest => {
@@ -144,7 +141,7 @@ tap.test('user data model', async userModelTests => {
 
         let error;
         try {
-          await validate(model);
+          await validate();
         } catch (e) {
           error = e;
         }
@@ -164,14 +161,14 @@ tap.test('user data model', async userModelTests => {
         passwordChecker.returns({ score: 4 });
         bcrypt.hashSync.returns('hashed-password');
 
-        await validate(model);
+        await validate();
 
         validTest.ok(
           passwordChecker.calledWith('password', ['email', 'Bob']),
           'password checker called with extra data'
         );
         validTest.ok(
-          model.set.calledWith({ password: 'hashed-password' }),
+          self.set.calledWith({ password: 'hashed-password' }),
           'updates the model with a hashed password'
         );
       });
@@ -179,16 +176,16 @@ tap.test('user data model', async userModelTests => {
 
     validationTests.test('if the phone number is changed...', async phone => {
       phone.beforeEach(async () => {
-        model.hasChanged.withArgs('phone').returns(true);
+        self.hasChanged.withArgs('phone').returns(true);
       });
 
       phone.test(
         'and the phone number has more than 10 digits, after removing non-numeric characters',
         async invalidTest => {
-          model.attributes.phone = 'abc123-zyx-456:789(0123)';
+          self.attributes.phone = 'abc123-zyx-456:789(0123)';
 
           invalidTest.rejects(
-            () => validate(model),
+            () => validate(),
             { message: 'invalid-phone' },
             'rejects with a message'
           );
@@ -198,8 +195,8 @@ tap.test('user data model', async userModelTests => {
       phone.test(
         'and the phone number has 10 or fewer digits, after removing non-numeric characters',
         async validTest => {
-          model.attributes.phone = 'abc123-zyx-456:789';
-          validTest.resolves(validate(model), 'resolves');
+          self.attributes.phone = 'abc123-zyx-456:789';
+          validTest.resolves(validate(), 'resolves');
         }
       );
     });

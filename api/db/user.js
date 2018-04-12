@@ -38,18 +38,18 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
         .pluck('id');
     },
 
-    async validate(model = this) {
+    async validate() {
       logger.silly('validating user data model');
-      if (model.hasChanged('email')) {
+      if (this.hasChanged('email')) {
         logger.silly('email address changed; making sure it is unique');
 
         const otherUsersWithThisEmail = await this.where({
-          email: model.attributes.email
+          email: this.attributes.email
         }).fetchAll();
 
         if (otherUsersWithThisEmail.length) {
           logger.verbose(
-            `user with email already exists [${model.attributes.email}]`
+            `user with email already exists [${this.attributes.email}]`
           );
           throw new Error('email-exists');
         }
@@ -57,12 +57,12 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
         logger.silly('new email is unique!');
       }
 
-      if (model.hasChanged('password')) {
+      if (this.hasChanged('password')) {
         logger.silly('password changed; verifying complexity/strength');
 
-        const passwordScore = zxcvbn(model.attributes.password, [
-          model.attributes.email,
-          model.attributes.name
+        const passwordScore = zxcvbn(this.attributes.password, [
+          this.attributes.email,
+          this.attributes.name
         ]);
         if (passwordScore.score < 3) {
           logger.verbose(`password is too weak: score ${passwordScore.score}`);
@@ -70,20 +70,20 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
         }
 
         logger.silly('password is sufficiently complex; hashing it');
-        model.set({ password: bcrypt.hashSync(model.attributes.password) });
+        this.set({ password: bcrypt.hashSync(this.attributes.password) });
       }
 
-      if (model.hasChanged('phone')) {
+      if (this.hasChanged('phone')) {
         logger.silly('phone changed; verifying that it is just 10 digits');
 
-        const phone = model.attributes.phone.replace(/[^\d]/g, '');
+        const phone = this.attributes.phone.replace(/[^\d]/g, '');
         if (phone.length > 10) {
-          logger.verbose(`phone number is invalid [${model.attributes.phone}]`);
+          logger.verbose(`phone number is invalid [${this.attributes.phone}]`);
           throw new Error('invalid-phone');
         }
 
         logger.silly('phone is valid; updating to just numbmers');
-        model.set({ phone });
+        this.set({ phone });
       }
 
       logger.silly('model is valid!');
