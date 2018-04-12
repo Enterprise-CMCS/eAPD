@@ -43,7 +43,7 @@ module.exports = {
       ]
     },
 
-    async validate({ transacting }) {
+    async validate({ transacting } = {}) {
       logger.silly('validating');
 
       if (this.hasChanged('name')) {
