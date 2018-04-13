@@ -128,10 +128,7 @@ const classExtension = (orm, models) => ({
 
     const needsSaving = [];
     const updating = dataArray.filter(d => d.id).map(async raw => {
-      const existing = await this.where({
-        id: raw.id,
-        ...parentID
-      }).fetch();
+      const existing = all.find(row => row.get('id'));
       if (existing) {
         logger.silly(`${this.modelName} | updating id=${raw.id}`);
 
