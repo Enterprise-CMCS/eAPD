@@ -142,29 +142,31 @@ tap.test('authorization data models', async authModelTests => {
 
     roleModelTests.test('validation...', async validationTests => {
       const sandbox = sinon.createSandbox();
-      const roleModel = {
+      const self = {
         attributes: {},
         hasChanged: sandbox.stub(),
         where: sandbox.stub(),
-        fetch: sandbox.stub()
+        fetch: sandbox.stub(),
+        related: sandbox.stub()
       };
 
       validationTests.beforeEach(async () => {
         sandbox.resetBehavior();
         sandbox.resetHistory();
 
-        roleModel.attributes = {};
-        roleModel.where.returns({ fetch: roleModel.fetch });
+        self.attributes = {};
+        self.related.returns({});
+        self.where.returns({ fetch: self.fetch });
       });
 
       validationTests.test(
         'fails if name is not a string',
         async invalidTest => {
           try {
-            roleModel.hasChanged.withArgs('name').returns(true);
-            roleModel.attributes.name = 7;
+            self.hasChanged.withArgs('name').returns(true);
+            self.attributes.name = 7;
 
-            await authorization.role.validate([], roleModel, {});
+            await authorization.role.validate.bind(self)({ activities: [] });
             invalidTest.fail('should throw');
             invalidTest.equal(
               '',
@@ -184,10 +186,10 @@ tap.test('authorization data models', async authModelTests => {
 
       validationTests.test('fails if name is empty', async invalidTest => {
         try {
-          roleModel.hasChanged.withArgs('name').returns(true);
-          roleModel.attributes.name = '';
+          self.hasChanged.withArgs('name').returns(true);
+          self.attributes.name = '';
 
-          await authorization.role.validate([], roleModel, {});
+          await authorization.role.validate.bind(self)({ activities: [] });
           invalidTest.fail('should throw');
           invalidTest.equal('', 'missing-name', 'throws the expected message');
         } catch (e) {
@@ -204,11 +206,11 @@ tap.test('authorization data models', async authModelTests => {
         'fails if name already exists',
         async invalidTest => {
           try {
-            roleModel.hasChanged.withArgs('name').returns(true);
-            roleModel.attributes.name = 'hello';
-            roleModel.fetch.resolves(true);
+            self.hasChanged.withArgs('name').returns(true);
+            self.attributes.name = 'hello';
+            self.fetch.resolves(true);
 
-            await authorization.role.validate([], roleModel, {});
+            await authorization.role.validate.bind(self)({ activities: [] });
             invalidTest.fail('should throw');
             invalidTest.equal(
               '',
@@ -230,9 +232,11 @@ tap.test('authorization data models', async authModelTests => {
         'fails if activities is not an array',
         async invalidTest => {
           try {
-            roleModel.hasChanged.withArgs('name').returns(false);
+            self.hasChanged.withArgs('name').returns(false);
 
-            await authorization.role.validate('hello', roleModel, {});
+            await authorization.role.validate.bind(self)({
+              activities: 'hello'
+            });
             invalidTest.fail('should throw');
             invalidTest.equal(
               '',
@@ -254,9 +258,11 @@ tap.test('authorization data models', async authModelTests => {
         'fails if activities are not numeric',
         async invalidTest => {
           try {
-            roleModel.hasChanged.withArgs('name').returns(false);
+            self.hasChanged.withArgs('name').returns(false);
 
-            await authorization.role.validate([1, 'a', 3], roleModel, {});
+            await authorization.role.validate.bind(self)({
+              activities: [1, 'a', 3]
+            });
             invalidTest.fail('should throw');
             invalidTest.equal(
               '',
@@ -278,7 +284,7 @@ tap.test('authorization data models', async authModelTests => {
         'fails if activities do not match known activities',
         async invalidTest => {
           try {
-            roleModel.hasChanged.withArgs('name').returns(false);
+            self.hasChanged.withArgs('name').returns(false);
 
             const activityModel = {
               fetchAll: sinon.stub().resolves([
@@ -290,12 +296,13 @@ tap.test('authorization data models', async authModelTests => {
                 }
               ])
             };
+            self.related
+              .withArgs('activities')
+              .returns({ model: activityModel });
 
-            await authorization.role.validate(
-              [1, 2, 3],
-              roleModel,
-              activityModel
-            );
+            await authorization.role.validate.bind(self)({
+              activities: [1, 2, 3]
+            });
             invalidTest.fail('should throw');
             invalidTest.equal(
               '',
@@ -315,9 +322,9 @@ tap.test('authorization data models', async authModelTests => {
 
       validationTests.test('passes if everything is valid', async validTest => {
         try {
-          roleModel.hasChanged.withArgs('name').returns(true);
-          roleModel.attributes.name = 'hello';
-          roleModel.fetch.resolves(false);
+          self.hasChanged.withArgs('name').returns(true);
+          self.attributes.name = 'hello';
+          self.fetch.resolves(false);
 
           const activityModel = {
             fetchAll: sinon.stub().resolves([
@@ -329,8 +336,9 @@ tap.test('authorization data models', async authModelTests => {
               }
             ])
           };
+          self.related.withArgs('activities').returns({ model: activityModel });
 
-          await authorization.role.validate([1, 2], roleModel, activityModel);
+          await authorization.role.validate.bind(self)({ activities: [1, 2] });
           validTest.pass('should not throw');
         } catch (e) {
           validTest.fail('should not throw');
