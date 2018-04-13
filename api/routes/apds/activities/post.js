@@ -72,7 +72,7 @@ module.exports = (app, ActivityModel = defaultActivityModel) => {
         } catch (e) {
           return res
             .status(400)
-            .send({ error: `add-activity-${e.message}` })
+            .send({ action: 'add-activity', error: e.message })
             .end();
         }
 
