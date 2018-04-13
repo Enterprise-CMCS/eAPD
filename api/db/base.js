@@ -14,7 +14,7 @@ class ValidationError extends Error {
   }
 }
 
-const syncChildren = async (
+const defaultSyncChildren = async (
   data,
   childModels,
   allModels,
@@ -78,7 +78,7 @@ const instanceExtension = (orm, models) => ({
     return orm.Model.prototype.save.apply(this, args);
   },
 
-  async synchronize(rawData) {
+  async synchronize(rawData, syncChildren = defaultSyncChildren) {
     logger.silly(`${this.modelName()} | synchronizing instance`);
     logger.silly(null, rawData);
     const newData = this.pickUpdateable(rawData);
@@ -110,7 +110,12 @@ const classExtension = (orm, models) => ({
 
   models,
 
-  async synchronize(rawData, parentID = {}, transacting) {
+  async synchronize(
+    rawData,
+    parentID = {},
+    transacting,
+    syncChildren = defaultSyncChildren
+  ) {
     logger.silly(`${this.modelName} | synchronizing all`);
     logger.silly(null, parentID);
     logger.silly(null, rawData);
@@ -182,3 +187,5 @@ const classExtension = (orm, models) => ({
 
 module.exports = (orm, models) =>
   orm.Model.extend(instanceExtension(orm, models), classExtension(orm, models));
+
+module.exports.defaultSyncChildren = defaultSyncChildren;
