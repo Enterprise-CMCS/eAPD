@@ -85,7 +85,7 @@ const instanceExtension = (orm, models) => ({
 
     await orm.transaction(async transacting => {
       logger.silly(`${this.modelName()} | synchronizing children`);
-      const childModels = this.static.owns || {};
+      const childModels = (this.static || {}).owns || {};
       await syncChildren(
         rawData,
         childModels,

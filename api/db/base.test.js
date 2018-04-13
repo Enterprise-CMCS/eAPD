@@ -8,12 +8,13 @@ tap.test('base data model', async baseModelTests => {
 
   const orm = {
     Model: {
-      extend: sinon.stub(),
+      extend: sandbox.stub(),
       prototype: {
-        destroy: sinon.stub(),
-        save: sinon.stub()
+        destroy: sandbox.stub(),
+        save: sandbox.stub()
       }
-    }
+    },
+    transaction: sandbox.stub()
   };
 
   const Model = {
@@ -181,5 +182,109 @@ tap.test('base data model', async baseModelTests => {
         });
       }
     );
+
+    instanceTests.test('adds a synchronize method', async syncTests => {
+      const self = {
+        get: sandbox.stub(),
+        modelName: sandbox.stub().returns('TestModel'),
+        pickUpdateable: sandbox.stub(),
+        save: sandbox.stub(),
+        set: sandbox.spy(),
+        static: {
+          foreignKey: 'foreign-key'
+        }
+      };
+
+      syncTests.beforeEach(async () => {
+        self.modelName.returns('TestModel');
+        self.pickUpdateable.returns('the-fields-to-update');
+        self.get.withArgs('id').returns('model-id');
+        self.save.resolves();
+      });
+
+      syncTests.test(
+        'filters incoming data and creates a transaction',
+        async test => {
+          orm.transaction.resolves();
+
+          await instanceExtension.synchronize.bind(self)({
+            bad: 'should go away',
+            good: 'should stay'
+          });
+
+          test.ok(
+            self.pickUpdateable.calledWith({
+              bad: 'should go away',
+              good: 'should stay'
+            }),
+            'filters raw data'
+          );
+          test.ok(orm.transaction.calledOnce, 'starts a database transaction');
+        }
+      );
+
+      syncTests.test(
+        'does not attempt to save children if not defined',
+        async test => {
+          orm.transaction.resolves();
+
+          await instanceExtension.synchronize.bind(self)('raw-data');
+
+          const transaction = orm.transaction.args[0][0];
+          const transacting = 'this is the transaction object';
+
+          await transaction(transacting);
+
+          test.ok(
+            self.set.calledWith('the-fields-to-update'),
+            'model is updated with filtered data, not raw data'
+          );
+          test.ok(
+            self.save.calledWith(null, { transacting }),
+            'this model is saved within the transaction'
+          );
+        }
+      );
+
+      syncTests.test('attempts to save children if defined', async test => {
+        orm.transaction.resolves();
+        self.static.owns = {
+          child1: 'ChildModel1',
+          child2: 'ChildModel2'
+        };
+        self.models = {
+          ChildModel1: { synchronize: sandbox.stub().resolves() },
+          ChildModel2: { synchronize: sandbox.stub().resolves() }
+        };
+
+        await instanceExtension.synchronize.bind(self)({
+          child1: 'this-is-child-1-data'
+        });
+
+        const transaction = orm.transaction.args[0][0];
+        const transacting = 'this is the transaction object';
+
+        await transaction(transacting);
+
+        test.ok(
+          self.models.ChildModel1.synchronize.calledWith(
+            'this-is-child-1-data'
+          ),
+          'child model represented in the data is synchronized'
+        );
+        test.ok(
+          self.models.ChildModel2.synchronize.notCalled,
+          'child model NOT represented in the data is NOT synchronized'
+        );
+        test.ok(
+          self.set.calledWith('the-fields-to-update'),
+          'model is updated with filtered data, not raw data'
+        );
+        test.ok(
+          self.save.calledWith(null, { transacting }),
+          'this model is saved within the transaction'
+        );
+      });
+    });
   });
 });
