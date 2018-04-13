@@ -100,7 +100,10 @@ tap.test('apd activity POST endpoint', async endpointTest => {
 
           invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
           invalidTest.ok(
-            res.send.calledWith({ error: 'add-activity-REJECTED' }),
+            res.send.calledWith({
+              action: 'add-activity',
+              error: 'REJECTED'
+            }),
             'sends back an error string'
           );
           invalidTest.ok(res.end.calledOnce, 'response is terminated');
@@ -195,7 +198,7 @@ tap.test('apd activity POST endpoint', async endpointTest => {
 
           invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
           invalidTest.ok(
-            res.send.calledWith({ error: 'add-activity-REJECTED' }),
+            res.send.calledWith({ action: 'add-activity', error: 'REJECTED' }),
             'sends back an error string'
           );
           invalidTest.ok(res.end.calledOnce, 'response is terminated');

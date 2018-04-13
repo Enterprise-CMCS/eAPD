@@ -73,7 +73,7 @@ tap.test(
                 );
                 invalidTest.same(
                   body,
-                  { error: 'add-activity-name-exists' },
+                  { action: 'add-activity', error: 'activity-name-exists' },
                   'sends back an error token'
                 );
               }
@@ -96,7 +96,7 @@ tap.test(
                 );
                 invalidTest.same(
                   body,
-                  { error: 'add-activity-invalid-name' },
+                  { action: 'add-activity', error: 'activity-name-invalid' },
                   'sends back an error token'
                 );
               }
@@ -169,7 +169,7 @@ tap.test(
                 );
                 invalidTest.same(
                   body,
-                  { error: 'add-activity-invalid-name' },
+                  { action: 'add-activity', error: 'activity-name-invalid' },
                   'sends back an error token'
                 );
               }
@@ -197,7 +197,7 @@ tap.test(
                 );
                 invalidTest.same(
                   body,
-                  { error: 'add-activity-name-exists' },
+                  { action: 'add-activity', error: 'activity-name-exists' },
                   'sends back an error token'
                 );
               }
