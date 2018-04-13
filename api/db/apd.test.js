@@ -7,7 +7,25 @@ tap.test('apd data model', async apdModelTests => {
   apdModelTests.test('setup', async setupTests => {
     setupTests.match(
       apd,
-      { apd: { tableName: 'apds' } },
+      {
+        apd: {
+          tableName: 'apds',
+          static: {
+            updateableFields: ['status', 'period'],
+            foreignKey: 'apd_id',
+            owns: { activities: 'apdActivity' },
+            withRelated: [
+              { activities: Function },
+              'activities.approaches',
+              'activities.goals',
+              'activities.goals.objectives',
+              'activities.expenses',
+              'activities.expenses.entries',
+              'activities.schedule'
+            ]
+          }
+        }
+      },
       'get the expected model definitions'
     );
 
@@ -22,6 +40,19 @@ tap.test('apd data model', async apdModelTests => {
       'function',
       'creates a state relationship for the apd model'
     );
+  });
+
+  apdModelTests.test('with-related fields order themselves', async test => {
+    const query = { orderBy: sinon.stub() };
+    const withRelated = apd.apd.static.withRelated;
+
+    withRelated.filter(w => typeof w === 'object').forEach(related => {
+      Object.keys(related).forEach(relation => {
+        related[relation](query);
+        test.ok(query.orderBy.calledWith('id'), `${relation} is ordered by ID`);
+        query.orderBy.resetHistory();
+      });
+    });
   });
 
   apdModelTests.test(
