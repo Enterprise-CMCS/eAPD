@@ -45,6 +45,37 @@ tap.test('base data model', async baseModelTests => {
     test.equal(baseModel, 'extended model', 'returns the new model');
   });
 
+  baseModelTests.test('can synchronize children', async test => {
+    const Model1 = {
+      synchronize: sandbox.stub().resolves()
+    };
+    const Model2 = {
+      synchronize: sandbox.spy()
+    };
+
+    await base.defaultSyncChildren(
+      { child1: `I am the walrus goo goo g'joob`, child3: 'I am useless data' },
+      { child1: 'ChildModel1', child2: 'ChildModel2' },
+      { ChildModel1: Model1, ChildModel2: Model2 },
+      'foreign-key',
+      'transaction',
+      'TestModel'
+    );
+
+    test.ok(
+      Model1.synchronize.calledWith(
+        `I am the walrus goo goo g'joob`,
+        'foreign-key',
+        'transaction'
+      ),
+      'child model with relevant data is synchronized'
+    );
+    test.ok(
+      Model2.synchronize.notCalled,
+      'child model without relevant data is NOT synchronized'
+    );
+  });
+
   baseModelTests.test('instance-specific additions', async instanceTests => {
     base(orm, models);
     const instanceExtension = orm.Model.extend.args[0][0];
@@ -187,19 +218,25 @@ tap.test('base data model', async baseModelTests => {
       const self = {
         get: sandbox.stub(),
         modelName: sandbox.stub().returns('TestModel'),
+        models,
         pickUpdateable: sandbox.stub(),
         save: sandbox.stub(),
         set: sandbox.spy(),
         static: {
-          foreignKey: 'foreign-key'
+          foreignKey: 'foreign-key',
+          owns: {
+            Child1: 'child-model-1'
+          }
         }
       };
+      const syncChildren = sinon.stub().resolves();
 
       syncTests.beforeEach(async () => {
         self.modelName.returns('TestModel');
         self.pickUpdateable.returns('the-fields-to-update');
         self.get.withArgs('id').returns('model-id');
         self.save.resolves();
+        syncChildren.resolves();
       });
 
       syncTests.test(
@@ -224,14 +261,17 @@ tap.test('base data model', async baseModelTests => {
       );
 
       syncTests.test(
-        'does not attempt to save children if not defined',
+        'within the transaction, synchronizes children and saves self',
         async test => {
           orm.transaction.resolves();
 
-          await instanceExtension.synchronize.bind(self)('raw-data');
+          await instanceExtension.synchronize.bind(self)(
+            'raw-data',
+            syncChildren
+          );
 
           const transaction = orm.transaction.args[0][0];
-          const transacting = 'this is the transaction object';
+          const transacting = 'transaction';
 
           await transaction(transacting);
 
@@ -243,48 +283,154 @@ tap.test('base data model', async baseModelTests => {
             self.save.calledWith(null, { transacting }),
             'this model is saved within the transaction'
           );
+          test.ok(
+            syncChildren.calledWith(
+              'raw-data',
+              { Child1: 'child-model-1' },
+              models,
+              { 'foreign-key': 'model-id' },
+              'transaction',
+              'TestModel'
+            ),
+            'synchronizes children'
+          );
         }
       );
+    });
+  });
 
-      syncTests.test('attempts to save children if defined', async test => {
-        orm.transaction.resolves();
-        self.static.owns = {
-          child1: 'ChildModel1',
-          child2: 'ChildModel2'
-        };
-        self.models = {
-          ChildModel1: { synchronize: sandbox.stub().resolves() },
-          ChildModel2: { synchronize: sandbox.stub().resolves() }
+  baseModelTests.test('class-level additions', async classTests => {
+    base(orm, models);
+    const classExtension = orm.Model.extend.args[0][1];
+
+    classTests.test(
+      'provides a method to filter input down to updateable fields',
+      async test => {
+        const self = {
+          updateableFields: ['a', 'b']
         };
 
-        await instanceExtension.synchronize.bind(self)({
-          child1: 'this-is-child-1-data'
+        const picked = classExtension.pickUpdateable.bind(self)({
+          a: 1,
+          b: 2,
+          c: 3
         });
 
-        const transaction = orm.transaction.args[0][0];
-        const transacting = 'this is the transaction object';
+        test.same(picked, { a: 1, b: 2 }, 'returns the picked object');
+      }
+    );
 
-        await transaction(transacting);
+    classTests.test('adds a synchronize method', async test => {
+      const owns = {};
+      const self = {
+        fetchAll: sandbox.stub(),
+        foreignKey: 'parent-id',
+        forge: sandbox.stub(),
+        modelName: 'TestModel',
+        models,
+        owns,
+        pickUpdateable: sandbox.stub().returns({ good: 'filtered-data' }),
+        where: sandbox.stub()
+      };
 
-        test.ok(
-          self.models.ChildModel1.synchronize.calledWith(
-            'this-is-child-1-data'
-          ),
-          'child model represented in the data is synchronized'
-        );
-        test.ok(
-          self.models.ChildModel2.synchronize.notCalled,
-          'child model NOT represented in the data is NOT synchronized'
-        );
-        test.ok(
-          self.set.calledWith('the-fields-to-update'),
-          'model is updated with filtered data, not raw data'
-        );
-        test.ok(
-          self.save.calledWith(null, { transacting }),
-          'this model is saved within the transaction'
-        );
-      });
+      self.where
+        .withArgs({ parentID: 'parent' })
+        .returns({ fetchAll: self.fetchAll });
+
+      const DeleteModel = {
+        get: sinon
+          .stub()
+          .withArgs('id')
+          .returns('delete-me'),
+        destroy: sandbox.stub().resolves()
+      };
+      const UpdateModel = {
+        get: sinon
+          .stub()
+          .withArgs('id')
+          .returns(100),
+        save: sandbox.stub().resolves(),
+        set: sandbox.stub()
+      };
+      const InsertModel = {
+        get: sandbox.stub().returns('101'),
+        save: sandbox.stub().resolves()
+      };
+
+      self.fetchAll.resolves([DeleteModel, UpdateModel]);
+      self.forge.returns(InsertModel);
+
+      const syncChildren = sinon.stub().resolves();
+
+      await classExtension.synchronize.bind(self)(
+        [
+          {
+            id: 100,
+            a: 1,
+            c: 7
+          },
+          {
+            id: 0xdeadbeef
+          },
+          { b: 3, d: 9 }
+        ],
+        { parentID: 'parent' },
+        'transaction',
+        syncChildren
+      );
+
+      test.ok(
+        DeleteModel.destroy.calledWith({ transacting: 'transaction' }),
+        'existing model that is not present in the new data is deleted'
+      );
+      test.ok(
+        DeleteModel.destroy.calledBefore(UpdateModel.save),
+        'old models are deleted before existing models are updated or new ones are inserted'
+      );
+      test.ok(
+        DeleteModel.destroy.calledBefore(InsertModel.save),
+        'old models are deleted before existing models are updated or new ones are inserted'
+      );
+
+      test.ok(
+        UpdateModel.set.calledWith({ good: 'filtered-data' }),
+        'existing model is updated with filtered data'
+      );
+      test.ok(
+        UpdateModel.save.calledWith(null, { transacting: 'transaction' }),
+        'existing model is saved'
+      );
+      test.ok(
+        syncChildren.calledWith(
+          { id: 100, a: 1, c: 7 },
+          owns,
+          models,
+          { 'parent-id': 100 },
+          'transaction',
+          'TestModel'
+        ),
+        'synchronizes the children of updated existing models'
+      );
+
+      test.ok(
+        self.forge.calledWith({ good: 'filtered-data', parentID: 'parent' }),
+        'a new model is forged from filtered data'
+      );
+      test.ok(
+        InsertModel.save.calledWith(null, { transacting: 'transaction' }),
+        'new model is saved'
+      );
+      test.ok(
+        syncChildren.calledWith(
+          { b: 3, d: 9 },
+          owns,
+          models,
+          { 'parent-id': '101' },
+          'transaction',
+          'TestModel'
+        ),
+        'synchronizes the children of new models'
+      );
     });
   });
 });
