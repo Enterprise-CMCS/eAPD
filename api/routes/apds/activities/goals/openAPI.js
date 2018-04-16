@@ -28,9 +28,14 @@ const openAPI = {
                   'The description of this goal. Goal is not added if description is missing.'
               },
               objectives: arrayOf({
-                type: 'string',
-                description:
-                  'The description of the objective associated with this goal'
+                type: 'object',
+                properties: {
+                  description: {
+                    type: 'string',
+                    description:
+                      'The description of the objective associated with this goal'
+                  }
+                }
               })
             }
           })
