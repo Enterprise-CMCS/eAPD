@@ -78,7 +78,7 @@ tap.test(
             );
             invalidTest.same(
               body,
-              { error: 'edit-activity-invalid-goals' },
+              { action: 'update-activity', error: 'invalid-goals' },
               'sends back an error token'
             );
           }

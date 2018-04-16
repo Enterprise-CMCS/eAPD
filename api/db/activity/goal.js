@@ -12,7 +12,7 @@ module.exports = {
 
     async validate() {
       if (!this.attributes.description) {
-        throw new Error('invalid-approaches');
+        throw new Error('invalid-goals');
       }
     },
 

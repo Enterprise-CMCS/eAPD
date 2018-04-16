@@ -7,6 +7,7 @@ const {
 } = require('../../../middleware');
 
 const syncResponder = (req, ActivityModel = defaultActivityModel) => ({
+  action: 'add-activity',
   modelClass: ActivityModel,
   foreignKey: { apd_id: req.meta.apd.get('id') }
 });
