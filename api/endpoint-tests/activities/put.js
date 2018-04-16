@@ -117,6 +117,7 @@ tap.test(
               expenses: [],
               goals: [
                 {
+                  id: 4200,
                   description: 'Be a super successful artist',
                   objectives: [
                     'Paint a pretty picture',
@@ -126,6 +127,7 @@ tap.test(
                   ]
                 },
                 {
+                  id: 4201,
                   description: 'Win a Nobel prize for physics',
                   objectives: [
                     'Discover a new particle',
@@ -133,6 +135,7 @@ tap.test(
                   ]
                 },
                 {
+                  id: 4202,
                   description: 'Go on Ellen',
                   objectives: ['Learn to dance', 'Bring audience gifts']
                 }

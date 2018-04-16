@@ -11,8 +11,11 @@ module.exports = () => ({
     },
 
     static: {
+      updateableFields: ['status', 'period'],
+      foreignKey: 'apd_id',
+      owns: { activities: 'apdActivity' },
       withRelated: [
-        'activities',
+        { activities: query => query.orderBy('id') },
         'activities.approaches',
         'activities.goals',
         'activities.goals.objectives',
