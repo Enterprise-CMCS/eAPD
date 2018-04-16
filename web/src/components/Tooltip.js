@@ -4,9 +4,6 @@ import { createPortal } from 'react-dom';
 
 import tippy from 'tippy.js/dist/tippy.standalone';
 
-import 'tippy.js/dist/tippy.css';
-import '../styles/app/tooltip.css';
-
 const applyIfFunction = fn => (typeof fn === 'function' ? fn() : fn);
 
 class Tooltip extends Component {

@@ -1,3 +1,7 @@
+@import 'tippy.js/dist/tippy.css';
+
+/* overrides / additions */
+
 .tippy-popper[x-placement^='top'] .tippy-tooltip.light-theme .tippy-arrow {
   border-top: 7px solid #fff;
   border-right: 7px solid transparent;
