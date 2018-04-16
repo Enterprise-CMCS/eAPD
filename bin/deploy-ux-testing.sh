@@ -5,12 +5,7 @@
 
 set -e
 
-# CF environment
-API="https://api.fr.cloud.gov"
-ORG="sandbox-gsa"
-SPACE="michael.walker"
-
-export API_URL="https://hitech-api-ux.app.cloud.gov"
+export API_URL=$UX_API_URL
 export LOG_FORM_INTERACTIONS="true"
 
 # Install `cf` cli
@@ -37,7 +32,7 @@ rm seeds/test.js
 cd ..
 
 # Log into CF
-cf login -a $API -u $CF_USER_UX -p $CF_PASSWORD_UX -o $ORG -s $SPACE
+cf login -a $UX_CF_API -u $UX_CF_USER -p $UX_CF_PASSWORD -o $UX_CF_ORG -s $UX_CF_SPACE
 
 # Double-check that we're pointing at the UX
 # testing instance, and if so...
