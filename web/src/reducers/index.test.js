@@ -6,7 +6,6 @@ describe('root reducer', () => {
     expect(stateKeys).toEqual([
       'apd',
       'auth',
-      'counter',
       'state',
       'user',
       'router',
