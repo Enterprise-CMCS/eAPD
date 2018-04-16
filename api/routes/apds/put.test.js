@@ -46,18 +46,12 @@ tap.test('apds PUT endpoint', async endpointTest => {
       handler = app.put.args.find(args => args[0] === '/apds/:id').pop();
 
       req = {
-        user: { id: 1 },
         params: { id: 1 },
         meta: {
           apd: {
-            get: sandbox
-              .stub()
-              .withArgs('id')
-              .returns('apd-id-from-db'),
-            related: sandbox.stub(),
-            set: sandbox.spy(),
-            save: sandbox.stub().resolves(),
-            toJSON: sandbox.stub().returns('apd-as-json')
+            synchronize: sandbox.stub(),
+            fetch: sandbox.stub(),
+            static: { withRelated: ['aunt', 'brother', 'cousin'] }
           }
         }
       };
@@ -66,7 +60,7 @@ tap.test('apds PUT endpoint', async endpointTest => {
     handlerTest.test(
       'sends a server error if anything goes wrong',
       async saveTest => {
-        req.meta.apd.save.rejects();
+        req.meta.apd.synchronize.rejects();
 
         await handler(req, res);
 
@@ -74,28 +68,47 @@ tap.test('apds PUT endpoint', async endpointTest => {
       }
     );
 
-    handlerTest.test('updates a valid apd object', async validTest => {
-      req.body = { status: 'foo', misc: 'baz' };
+    handlerTest.test(
+      'sends a request error if the new body is invalid',
+      async test => {
+        const error = new Error('error-message');
+        error.statusCode = 400;
+        req.meta.apd.synchronize.rejects(error);
+        await handler(req, res);
 
-      await handler(req, res);
+        test.ok(res.status.calledWith(400));
+      }
+    );
 
-      validTest.ok(
-        req.meta.apd.set.calledWith({ status: 'foo' }),
-        'sets the apd status field'
-      );
-      validTest.ok(
-        req.meta.apd.save.calledAfter(req.meta.apd.set),
-        'the model is saved after values are set'
-      );
-      validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-      validTest.ok(
-        req.meta.apd.toJSON.calledOnce,
-        'database object is converted to pure object'
-      );
-      validTest.ok(
-        res.send.calledWith('apd-as-json'),
-        'updated apd data is sent'
-      );
-    });
+    handlerTest.test(
+      'synchronizes the APD with the request body',
+      async validTest => {
+        const updatedApd = {
+          toJSON: sandbox.stub().returns('apd-as-json')
+        };
+
+        req.body = { hello: 'world' };
+        req.meta.apd.synchronize.resolves();
+        req.meta.apd.fetch.resolves(updatedApd);
+
+        await handler(req, res);
+
+        validTest.ok(
+          req.meta.apd.synchronize.calledWith({ hello: 'world' }),
+          'APD is synchronized with the request body'
+        );
+        validTest.ok(
+          req.meta.apd.fetch.calledWith({
+            withRelated: ['aunt', 'brother', 'cousin']
+          }),
+          'fetches updated APD with related fields'
+        );
+        validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
+        validTest.ok(
+          res.send.calledWith('apd-as-json'),
+          'updated apd data is sent'
+        );
+      }
+    );
   });
 });

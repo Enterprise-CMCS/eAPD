@@ -17,13 +17,6 @@ tap.test(
 
     const invalidCases = [
       {
-        name: 'with no body'
-      },
-      {
-        name: 'with no activities',
-        body: { name: 'new-role' }
-      },
-      {
         name: 'with activities not an array',
         body: { name: 'new-role', activities: 'wrong' }
       },

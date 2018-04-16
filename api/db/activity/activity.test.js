@@ -1,0 +1,294 @@
+const tap = require('tap');
+const sinon = require('sinon');
+
+const activity = require('./activity');
+
+tap.test('activity data model', async activityModelTests => {
+  activityModelTests.test('setup', async setupTests => {
+    setupTests.match(
+      activity,
+      {
+        apdActivity: {
+          tableName: 'activities',
+          static: {
+            updateableFields: ['name', 'description'],
+            owns: {
+              goals: 'apdActivityGoal',
+              approaches: 'apdActivityApproach',
+              expenses: 'apdActivityExpense',
+              schedule: 'apdActivitySchedule'
+            },
+            foreignKey: 'activity_id',
+            withRelated: [
+              'approaches',
+              'goals',
+              'goals.objectives',
+              'expenses',
+              'expenses.entries',
+              'schedule'
+            ]
+          }
+        }
+      },
+      'get the expected model definitions'
+    );
+
+    setupTests.type(
+      activity.apdActivity.apd,
+      'function',
+      'creates a apd relationship for the activity model'
+    );
+
+    setupTests.type(
+      activity.apdActivity.goals,
+      'function',
+      'creates a goals relationship for the activity model'
+    );
+
+    setupTests.type(
+      activity.apdActivity.approaches,
+      'function',
+      'creates an approaches relationship for the activity model'
+    );
+
+    setupTests.type(
+      activity.apdActivity.expenses,
+      'function',
+      'creates a expenses relationship for the activity model'
+    );
+
+    setupTests.type(
+      activity.apdActivity.schedule,
+      'function',
+      'creates a schedule relationship for the activity model'
+    );
+  });
+
+  activityModelTests.test('sets up relationships', async relationshipTests => {
+    relationshipTests.test(
+      'activity model sets up apd relationship',
+      async apdTests => {
+        const self = {
+          belongsTo: sinon.stub().returns('baz')
+        };
+
+        const output = activity.apdActivity.apd.bind(self)();
+
+        apdTests.ok(
+          self.belongsTo.calledWith('apd'),
+          'sets up the relationship mapping to a apd'
+        );
+        apdTests.equal(output, 'baz', 'returns the expected value');
+      }
+    );
+
+    relationshipTests.test(
+      'activity model sets up goals relationship',
+      async apdTests => {
+        const self = {
+          hasMany: sinon.stub().returns('bag')
+        };
+
+        const output = activity.apdActivity.goals.bind(self)();
+
+        apdTests.ok(
+          self.hasMany.calledWith('apdActivityGoal'),
+          'sets up the relationship mapping to goal'
+        );
+        apdTests.equal(output, 'bag', 'returns the expected value');
+      }
+    );
+
+    relationshipTests.test(
+      'activity model sets up approaches relationship',
+      async apdTests => {
+        const self = {
+          hasMany: sinon.stub().returns('starsky')
+        };
+
+        const output = activity.apdActivity.approaches.bind(self)();
+
+        apdTests.ok(
+          self.hasMany.calledWith('apdActivityApproach'),
+          'sets up the relationship mapping to approach'
+        );
+        apdTests.equal(output, 'starsky', 'returns the expected value');
+      }
+    );
+
+    relationshipTests.test(
+      'activity model sets up expenses relationship',
+      async apdTests => {
+        const self = {
+          hasMany: sinon.stub().returns('bag')
+        };
+
+        const output = activity.apdActivity.expenses.bind(self)();
+
+        apdTests.ok(
+          self.hasMany.calledWith('apdActivityExpense'),
+          'sets up the relationship mapping to expense'
+        );
+        apdTests.equal(output, 'bag', 'returns the expected value');
+      }
+    );
+
+    relationshipTests.test(
+      'activity model sets up schedule relationship',
+      async apdTests => {
+        const self = {
+          hasMany: sinon.stub().returns('can')
+        };
+
+        const output = activity.apdActivity.schedule.bind(self)();
+
+        apdTests.ok(
+          self.hasMany.calledWith('apdActivitySchedule'),
+          'sets up the relationship mapping to schedule'
+        );
+        apdTests.equal(output, 'can', 'returns the expected value');
+      }
+    );
+  });
+
+  activityModelTests.test(
+    'activity model validate method',
+    async validationTests => {
+      const sandbox = sinon.createSandbox();
+      const self = {
+        hasChanged: sandbox.stub(),
+        where: sandbox.stub(),
+        fetchAll: sandbox.stub(),
+        attributes: {}
+      };
+      const validate = activity.apdActivity.validate.bind(self);
+
+      validationTests.beforeEach(async () => {
+        sandbox.resetBehavior();
+        sandbox.resetHistory();
+
+        self.attributes = {};
+
+        self.where.returns(self);
+      });
+
+      validationTests.test(
+        'does not throw if the name has not changed',
+        async test => {
+          self.hasChanged.withArgs('name').returns(false);
+
+          test.resolves(validate(), 'validate resolves');
+        }
+      );
+
+      validationTests.test(
+        'does not throw if the name has changed, is valid, and is unique',
+        async test => {
+          self.hasChanged.withArgs('name').returns(true);
+          self.attributes.name = 'valid name';
+          self.fetchAll.resolves([]);
+
+          test.resolves(validate(), 'validate resolves');
+        }
+      );
+
+      validationTests.test('throws if the name is null', async test => {
+        self.hasChanged.withArgs('name').returns(true);
+        self.attributes.name = null;
+
+        try {
+          await validate();
+        } catch (e) {
+          test.ok('rejects on an empty name');
+          test.equal(
+            e.message,
+            'activity-name-invalid',
+            'rejects with the expected message'
+          );
+        }
+      });
+
+      validationTests.test('throws if the name is not a number', async test => {
+        self.hasChanged.withArgs('name').returns(true);
+        self.attributes.name = 7;
+
+        try {
+          await validate();
+        } catch (e) {
+          test.ok('rejects on an empty name');
+          test.equal(
+            e.message,
+            'activity-name-invalid',
+            'rejects with the expected message'
+          );
+        }
+      });
+
+      validationTests.test(
+        'throws if the name is an empty string',
+        async test => {
+          self.hasChanged.withArgs('name').returns(true);
+          self.attributes.name = '';
+
+          try {
+            await validate();
+          } catch (e) {
+            test.ok('rejects on an empty name');
+            test.equal(
+              e.message,
+              'activity-name-invalid',
+              'rejects with the expected message'
+            );
+          }
+        }
+      );
+
+      validationTests.test('throws if the name already exists', async test => {
+        self.hasChanged.withArgs('name').returns(true);
+        self.attributes.name = 'valid name';
+        self.fetchAll.resolves([{ hello: 'world' }]);
+
+        try {
+          await validate();
+        } catch (e) {
+          test.ok('rejects if the name already exists');
+          test.equal(
+            e.message,
+            'activity-name-exists',
+            'rejects with the expected message'
+          );
+        }
+      });
+    }
+  );
+
+  activityModelTests.test(
+    'activity model overrides toJSON method',
+    async apdTests => {
+      const self = {
+        get: sinon.stub(),
+        related: sinon.stub()
+      };
+      self.get.withArgs('id').returns('eye-dee');
+      self.get.withArgs('name').returns('Jerome Lee');
+      self.get.withArgs('description').returns('cool CMS person');
+
+      self.related.withArgs('goals').returns('goooooaaaaals');
+      self.related.withArgs('approaches').returns('quietly from the left');
+
+      const output = activity.apdActivity.toJSON.bind(self)();
+
+      apdTests.match(
+        output,
+        {
+          id: 'eye-dee',
+          name: 'Jerome Lee',
+          description: 'cool CMS person',
+          goals: 'goooooaaaaals',
+          approaches: 'quietly from the left'
+        },
+        'gives us back the right JSON-ified object'
+      );
+    }
+  );
+});
