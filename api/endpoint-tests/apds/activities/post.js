@@ -129,6 +129,7 @@ tap.test(
                     name: 'My Second Activity'
                   },
                   {
+                    id: Number,
                     name: 'new activity name'
                   }
                 ],
@@ -222,18 +223,20 @@ tap.test(
                 200,
                 'gives a 200 status code'
               );
+              body.sort((a, b) => a.name.localeCompare(b.name));
               validTest.match(
                 body,
                 [
-                  {
-                    id: 4100,
-                    name: 'Find Success'
-                  },
                   {
                     id: 4101,
                     name: 'activity new name'
                   },
                   {
+                    id: 4100,
+                    name: 'Find Success'
+                  },
+                  {
+                    id: Number,
                     name: 'new activity name'
                   }
                 ],
