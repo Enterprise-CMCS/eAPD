@@ -26,10 +26,6 @@ tap.test('auth roles endpoint | POST /auth/roles', async postRolesTests => {
       body: { name: 'admin' }
     },
     {
-      name: 'with no activities',
-      body: { name: 'new-role' }
-    },
-    {
       name: 'with activities not an array',
       body: { name: 'new-role', activities: 'wrong' }
     },

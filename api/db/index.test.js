@@ -8,15 +8,8 @@ tap.test('database layer index', async dbTests => {
     const knexObject = {};
     const bookshelfObject = {
       plugin: sinon.spy(),
-      model: sinon.stub(),
-      Model: {
-        extend: sinon.stub()
-      }
+      model: sinon.stub()
     };
-
-    bookshelfObject.Model.extend.withArgs('modelDefinitionOne').returns(1);
-    bookshelfObject.Model.extend.withArgs('modelDefinitionTwo').returns(2);
-    bookshelfObject.Model.extend.withArgs('modelDefinitionThree').returns(3);
 
     bookshelfObject.model.withArgs('one').returns(1);
     bookshelfObject.model.withArgs('two').returns(2);
@@ -25,14 +18,23 @@ tap.test('database layer index', async dbTests => {
     const knex = sinon.stub().returns(knexObject);
     const bookshelf = sinon.stub().returns(bookshelfObject);
     const config = { test: {} };
+
+    const baseModel = { extend: sinon.stub() };
+    const baseConstructor = sinon.stub().returns(baseModel);
+    baseModel.extend
+      .withArgs({ name: 'modelDefinitionOne', static: { props: 'are here' } })
+      .returns(1);
+    baseModel.extend.withArgs('modelDefinitionTwo').returns(2);
+    baseModel.extend.withArgs('modelDefinitionThree').returns(3);
+
     const models = [
-      { one: 'modelDefinitionOne' },
+      { one: { name: 'modelDefinitionOne', static: { props: 'are here' } } },
       { two: 'modelDefinitionTwo', three: 'modelDefinitionThree' }
     ];
 
     const env = process.env.NODE_ENV;
     process.env.NODE_ENV = 'test';
-    db.setup(knex, bookshelf, config, models);
+    db.setup(knex, bookshelf, config, baseConstructor, models);
     process.env.NODE_ENV = env;
 
     ormTests.ok(knex.calledWith(config.test), 'knex is configured');
@@ -43,15 +45,20 @@ tap.test('database layer index', async dbTests => {
     );
 
     ormTests.ok(
-      bookshelfObject.Model.extend.calledWith('modelDefinitionOne'),
+      baseModel.extend.calledWith(
+        { name: 'modelDefinitionOne', static: { props: 'are here' } },
+        { props: 'are here', modelName: 'one' }
+      ),
       'model object created from first model definition'
     );
     ormTests.ok(
-      bookshelfObject.Model.extend.calledWith('modelDefinitionTwo'),
+      baseModel.extend.calledWith('modelDefinitionTwo', { modelName: 'two' }),
       'model object created from second model definition'
     );
     ormTests.ok(
-      bookshelfObject.Model.extend.calledWith('modelDefinitionThree'),
+      baseModel.extend.calledWith('modelDefinitionThree', {
+        modelName: 'three'
+      }),
       'model object created from third model definition'
     );
 
