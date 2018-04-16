@@ -1,3 +1,5 @@
+import Icon from '@fortawesome/react-fontawesome';
+
 // to optimize bundle, explicitly importing only the icons used
 import faHelp from '@fortawesome/fontawesome-free-regular/faQuestionCircle';
 import faBell from '@fortawesome/fontawesome-free-solid/faBell';
@@ -16,3 +18,5 @@ export {
   faCog,
   faSignOut
 };
+
+export default Icon;

@@ -19,8 +19,9 @@ import StateStart from './containers/StateStart';
 import StatePersonnel from './containers/StatePersonnel';
 
 const routes = [
-  { path: '/', component: Hello, exact: true, nonPrivate: true },
+  { path: '/', component: PoC, exact: true, nonPrivate: true },
   { path: '/login', component: Login, nonPrivate: true },
+  { path: '/hello', component: Hello, nonPrivate: true },
   { path: '/poc', component: PoC, nonPrivate: true },
   { path: '/activities-list', component: ActivitiesList },
   { path: '/activities-start', component: ActivitiesStart },
