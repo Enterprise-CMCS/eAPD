@@ -5,12 +5,7 @@
 
 set -e
 
-# CF environment
-API="https://api.fr.cloud.gov"
-ORG="sandbox-gsa"
-SPACE="brendan.sudol"
-
-export API_URL="https://hitech-api.app.cloud.gov"
+export API_URL=$STAGING_API_URL
 
 # Install `cf` cli
 curl -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
@@ -36,7 +31,7 @@ rm seeds/shared/delete-everything.js
 cd ..
 
 # Log into CF and push
-cf login -a $API -u $CF_USER -p $CF_PASSWORD -o $ORG -s $SPACE
+cf login -a $STAGING_CF_API -u $STAGING_CF_USER -p $STAGING_CF_PASSWORD -o $STAGING_CF_ORG -s $STAGING_CF_SPACE
 cf push -f manifest.yml
 
 # Migrate and seed the database
