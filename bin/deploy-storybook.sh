@@ -5,11 +5,6 @@
 
 set -e
 
-# CF environment
-API="https://api.fr.cloud.gov"
-ORG="sandbox-gsa"
-SPACE="brendan.sudol"
-
 # Install `cf` cli
 curl -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
 dpkg -i cf-cli_amd64.deb
@@ -25,5 +20,5 @@ npm run build-storybook
 cd ..
 
 # Log into CF and push
-cf login -a $API -u $CF_USER -p $CF_PASSWORD -o $ORG -s $SPACE
+cf login -a $SB_CF_API -u $SB_CF_USER -p $SB_CF_PASSWORD -o $SB_CF_ORG -s $SB_CF_SPACE
 cf push -f manifest-storybook.yml
