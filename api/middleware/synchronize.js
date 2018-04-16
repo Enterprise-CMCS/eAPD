@@ -13,7 +13,7 @@ const synchronizeAll = getSpecifics =>
 
       await modelClass.synchronize(req.body, foreignKey, false);
 
-      const synced = await modelClass.fetchAll({
+      const synced = await modelClass.where(foreignKey).fetchAll({
         withRelated: modelClass.withRelated
       });
       res.send(synced.toJSON());
