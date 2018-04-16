@@ -7,7 +7,16 @@ const {
 } = require('../db').models;
 
 const apdRelations = (defaultApdModel ? defaultApdModel.withRelated : []).map(
-  relation => `apd.${relation}`
+  relation => {
+    if (typeof relation === 'object') {
+      const out = {};
+      Object.keys(relation).forEach(key => {
+        out[`apd.${key}`] = relation[key];
+      });
+      return out;
+    }
+    return `apd.${relation}`;
+  }
 );
 
 module.exports.loadApd = (model = defaultApdModel, idParam = 'id') =>

@@ -31,7 +31,7 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
 
       try {
         logger.silly(req, 'validing the request', req.body);
-        await role.validate(req.body.activities);
+        await role.validate({ activities: req.body.activities });
       } catch (e) {
         logger.verbose(req, 'requested new role information is invalid');
         logger.verbose(req, e.message);

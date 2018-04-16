@@ -34,19 +34,19 @@ module.exports = () => ({
       return this.related('activities').pluck('name');
     },
 
-    async validate(activities, model = this, activityModel) {
+    async validate({ transacting, activities = [] } = {}) {
       logger.silly('validating role model');
-      const ActivityModel = activityModel || this.related('activities').model;
+      const ActivityModel = this.related('activities').model;
 
-      if (model.hasChanged('name')) {
-        const name = model.attributes.name;
+      if (this.hasChanged('name')) {
+        const name = this.attributes.name;
 
         if (typeof name !== 'string' || name.length < 1) {
           logger.verbose('name is not a string or is empty');
           throw new Error('missing-name');
         }
 
-        if (await model.where({ name }).fetch()) {
+        if (await this.where({ name }).fetch()) {
           logger.verbose('another role already has this name');
           throw new Error('duplicate-name');
         }
@@ -66,7 +66,8 @@ module.exports = () => ({
       logger.silly('all role activities are numbers');
 
       const validActivities = await ActivityModel.fetchAll({
-        columns: ['id']
+        columns: ['id'],
+        transacting
       });
 
       const validIDs = validActivities.map(activity => activity.get('id'));
