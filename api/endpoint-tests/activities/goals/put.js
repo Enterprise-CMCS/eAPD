@@ -93,7 +93,7 @@ tap.test(
               body: [
                 {
                   description: 'new goal 1',
-                  objectives: ['o1', 'o2']
+                  objectives: [{ description: 'o1' }, { description: 'o2' }]
                 }
               ]
             });
@@ -115,6 +115,7 @@ tap.test(
                 expenses: [],
                 goals: [
                   {
+                    id: Number,
                     description: 'new goal 1',
                     objectives: ['o1', 'o2']
                   }
