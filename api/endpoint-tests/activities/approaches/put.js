@@ -56,11 +56,22 @@ tap.test(
         );
 
         authenticated.test(
-          'with approaches that are not an array',
+          'with approaches that are invalid',
           async invalidTest => {
             const { response, body } = await request.put(url(4100), {
               jar: cookies,
-              json: { hello: 'world' }
+              json: [
+                {
+                  description: 'new approach 1',
+                  alternatives: 'new alternative 1',
+                  explanation: 'new explanation 1'
+                },
+                {
+                  thisOne: 'is invalid',
+                  because: 'it does not have',
+                  theFields: 'we expect'
+                }
+              ]
             });
 
             invalidTest.equal(
@@ -70,7 +81,7 @@ tap.test(
             );
             invalidTest.same(
               body,
-              { error: 'edit-activity-invalid-approaches' },
+              { action: 'update-activity', error: 'invalid-approaches' },
               'sends back an error token'
             );
           }
@@ -85,11 +96,6 @@ tap.test(
                 description: 'new approach 1',
                 alternatives: 'new alternative 1',
                 explanation: 'new explanation 1'
-              },
-              {
-                thisOne: 'is ignored',
-                because: 'it does not have',
-                theFields: 'we expect'
               }
             ]
           });

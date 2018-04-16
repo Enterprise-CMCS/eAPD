@@ -217,6 +217,7 @@ const classExtension = (orm, models) => ({
             childModels,
             this.models,
             { [this.foreignKey]: existing.get('id') },
+            deleteOthers,
             transacting,
             this.modelName
           );
