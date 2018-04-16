@@ -37,16 +37,17 @@ const defaultSyncChildren = async (
 ) =>
   Promise.all(
     Object.keys(childModels).map(async fieldName => {
-      if (data[fieldName]) {
-        logger.silly(
-          `${modelName} | synchornize ${fieldName} with ${
-            childModels[fieldName]
-          } model`
-        );
-        const Model = allModels[childModels[fieldName]];
-        return Model.synchronize(data[fieldName], foreignKey, transacting);
+      if (!data[fieldName]) {
+        return true;
       }
-      return true;
+
+      logger.silly(
+        `${modelName} | synchornize ${fieldName} with ${
+          childModels[fieldName]
+        } model`
+      );
+      const Model = allModels[childModels[fieldName]];
+      return Model.synchronize(data[fieldName], foreignKey, transacting);
     })
   );
 
