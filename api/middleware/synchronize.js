@@ -3,8 +3,14 @@ const { cache, modelIndex } = require('./cache');
 
 const synchronizeAll = getSpecifics =>
   cache(['sync-all', modelIndex(getSpecifics)], () => async (req, res) => {
+    let action;
+
     try {
-      const { modelClass, foreignKey } = getSpecifics(req);
+      const { modelClass, foreignKey, action: actionToReport } = getSpecifics(
+        req
+      );
+      action = actionToReport;
+
       await modelClass.synchronize(req.body, foreignKey, false);
 
       const synced = await modelClass.fetchAll({
@@ -15,7 +21,7 @@ const synchronizeAll = getSpecifics =>
       if (e.statusCode) {
         res
           .status(e.statusCode)
-          .send({ action: 'add-activity', ...e.error })
+          .send({ action, ...e.error })
           .end();
       } else {
         logger.error(req, e);
@@ -26,8 +32,10 @@ const synchronizeAll = getSpecifics =>
 
 const synchronizeSpecific = getModelToSync =>
   cache(['sync-one', modelIndex(getModelToSync)], () => async (req, res) => {
+    let action;
     try {
-      const model = getModelToSync(req);
+      const { model, action: actionToReport } = getModelToSync(req);
+      action = actionToReport;
       await model.synchronize(req.body);
 
       const updated = await model.fetch({
@@ -38,7 +46,7 @@ const synchronizeSpecific = getModelToSync =>
       if (e.statusCode) {
         res
           .status(e.statusCode)
-          .send({ action: 'update-activity', ...e.error })
+          .send({ action, ...e.error })
           .end();
       } else {
         logger.error(req, e);

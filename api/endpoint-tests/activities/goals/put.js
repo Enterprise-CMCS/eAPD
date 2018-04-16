@@ -55,11 +55,20 @@ tap.test(
         );
 
         authenticated.test(
-          'with goals that are not an array',
+          'with goals that are not valid',
           async invalidTest => {
             const { response, body } = await request.put(url(4100), {
               jar: cookies,
-              json: { hello: 'world' }
+              json: [
+                {
+                  description: 'new goal 1',
+                  objectives: ['o1', 'o2']
+                },
+                {
+                  lacksDescription: 'this one should not come back',
+                  objectives: ['o3']
+                }
+              ]
             });
 
             invalidTest.equal(
@@ -85,10 +94,6 @@ tap.test(
                 {
                   description: 'new goal 1',
                   objectives: ['o1', 'o2']
-                },
-                {
-                  lacksDescription: 'this one should not come back',
-                  objectives: ['o3']
                 }
               ]
             });

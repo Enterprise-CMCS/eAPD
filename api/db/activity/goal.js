@@ -10,6 +10,12 @@ module.exports = {
       return this.hasMany('apdActivityGoalObjective');
     },
 
+    async validate() {
+      if (!this.attributes.description) {
+        throw new Error('invalid-approaches');
+      }
+    },
+
     toJSON() {
       return {
         id: this.get('id'),

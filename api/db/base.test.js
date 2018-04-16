@@ -289,6 +289,7 @@ tap.test('base data model', async baseModelTests => {
               { Child1: 'child-model-1' },
               models,
               { 'foreign-key': 'model-id' },
+              true,
               'transaction',
               'TestModel'
             ),
@@ -375,6 +376,7 @@ tap.test('base data model', async baseModelTests => {
           { b: 3, d: 9 }
         ],
         { parentID: 'parent' },
+        true,
         'transaction',
         syncChildren
       );
@@ -406,6 +408,7 @@ tap.test('base data model', async baseModelTests => {
           owns,
           models,
           { 'parent-id': 100 },
+          true,
           'transaction',
           'TestModel'
         ),
@@ -426,6 +429,7 @@ tap.test('base data model', async baseModelTests => {
           owns,
           models,
           { 'parent-id': '101' },
+          true,
           'transaction',
           'TestModel'
         ),
