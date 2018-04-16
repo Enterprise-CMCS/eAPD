@@ -11,7 +11,9 @@
 @import 'app/table';
 @import 'app/type';
 
+/* third-party things */
 @import 'app/editor';
+@import 'app/tooltip';
 
 @custom-media --breakpoint-sm (min-width: 40rem);
 @custom-media --breakpoint-md (min-width: 52rem);

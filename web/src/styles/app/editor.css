@@ -1,6 +1,6 @@
 @import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-/* misc overrides */
+/* overrides */
 
 .rdw-editor-toolbar * {
   box-sizing: content-box;
