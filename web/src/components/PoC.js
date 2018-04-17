@@ -26,11 +26,15 @@ class PoC extends Component {
         {
           id: 1,
           name: 'Test',
+          descShort: 'Once upon a time...',
+          descLong: '',
           type: ['HIT']
         },
         {
           id: 2,
           name: 'Test 2',
+          descShort: 'tl;dr: ',
+          descLong: '',
           type: ['MMIS']
         }
       ]
@@ -44,6 +48,8 @@ class PoC extends Component {
         {
           id: activities.reduce((maxId, a) => Math.max(a.id, maxId), -1) + 1,
           name: '',
+          descShort: '',
+          descLong: '',
           type: ['HIT']
         }
       ]

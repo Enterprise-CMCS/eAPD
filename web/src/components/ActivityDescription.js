@@ -7,7 +7,7 @@ import FormActivityApproach from './FormActivityApproach';
 import Icon, { faHelp } from './Icons';
 import { EDITOR_CONFIG } from '../util';
 
-const ActivityDescription = ({ activity }) => (
+const ActivityDescription = ({ activity, editActivityText }) => (
   <div>
     <div className="mb1 bold">
       Summary of the activity
@@ -26,6 +26,9 @@ const ActivityDescription = ({ activity }) => (
         spellCheck="true"
         maxLength="280"
         placeholder="A brief statement of what the activity involves..."
+        name={`${activity.id}.descShort`}
+        value={activity.descShort}
+        onChange={editActivityText}
       />
     </div>
 
@@ -42,7 +45,8 @@ const ActivityDescription = ({ activity }) => (
 );
 
 ActivityDescription.propTypes = {
-  activity: PropTypes.object.isRequired
+  activity: PropTypes.object.isRequired,
+  editActivityText: PropTypes.func.isRequired
 };
 
 export default ActivityDescription;
