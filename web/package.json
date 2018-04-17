@@ -120,8 +120,7 @@
     "rootDir": "src",
     "setupFiles": [
       "../polyfills.test.js",
-      "../setup.test.js",
-      "../files.test.js"
+      "../setup.test.js"
     ]
   }
 }
