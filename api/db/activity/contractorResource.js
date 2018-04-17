@@ -47,7 +47,7 @@ module.exports = {
   apdActivityContractorResourceCost: {
     tableName: 'activity_contractor_resources_yearly',
 
-    personnel() {
+    contractorResource() {
       return this.belongsTo(
         'apdActivityContractorResource',
         'contractor_resource_id'
