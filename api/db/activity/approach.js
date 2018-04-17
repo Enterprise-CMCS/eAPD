@@ -6,6 +6,16 @@ module.exports = {
       return this.belongsTo('apdActivity');
     },
 
+    async validate() {
+      if (
+        !this.attributes.description &&
+        !this.attributes.alternatives &&
+        !this.attributes.explanation
+      ) {
+        throw new Error('invalid-approaches');
+      }
+    },
+
     toJSON() {
       return {
         id: this.get('id'),
