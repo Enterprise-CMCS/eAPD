@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Icon, { faHelp, faSignOut } from '../Icons';
+import Icon, { faHelp, faSignOut } from './Icons';
 
 const TopNav = ({ place }) => (
   <header className="clearfix py1 bg-white">

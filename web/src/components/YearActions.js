@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Icon, { faCog } from '../Icons';
-import Tooltip from '../Tooltip';
+import Icon, { faCog } from './Icons';
+import Tooltip from './Tooltip';
 
 const YearActions = ({ update }) => (
   <Tooltip

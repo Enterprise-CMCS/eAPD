@@ -1,47 +1,46 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
 
-const routes = [
-  { path: '/state-start', name: 'State set-up' },
-  { path: '/state-contacts', name: 'State set-up 2' },
-  { path: '/apd-overview', name: 'Program overview' },
-  { path: '/activities-start', name: 'Select activities' },
-  { path: '/activities-list', name: 'Activity list' },
-  { path: '/activity-overview/:activityName', name: 'Activity overview' },
-  { path: '/activity-goals/:activityName', name: 'Activity goals' },
-  { path: '/activity-approach/:activityName', name: 'Activity approach' },
-  { path: '/activity-schedule', name: 'Activity schedule' },
-  { path: '/state-personnel', name: 'Personnel' },
-  { path: '/expenses-start', name: 'Select expenses' },
-  { path: '/expenses-list', name: 'Expense list' },
-  { path: '/expenses-details', name: 'Expense details' },
-  { path: '/review-and-submit', name: 'Program summary' }
-];
+import SidebarLink from './SidebarLink';
+import { activityDisplay } from '../util';
 
-const linkClass = (path, curr) => {
-  let cls = 'inline-block white text-decoration-none';
-  if (path === curr) cls += ' bold border-bottom border-width-3 border-blue';
-  return cls;
-};
-
-const Sidebar = ({ match }) => (
-  <div className="p2 xs-hide sm-hide">
-    <ul className="list-reset">
-      {routes.map(({ path, name }) => (
-        <li key={path} className="mb1">
-          <Link to={path} className={linkClass(path, match.path)}>
-            {name}
-          </Link>
-        </li>
-      ))}
-    </ul>
+const Sidebar = ({ activities, place }) => (
+  <div className="site-sidebar bg-navy">
+    <div className="p2 xs-hide sm-hide">
+      <div className="mb2 center">
+        <img
+          src={`/static/img/${place.id}.svg`}
+          alt={place.name}
+          width="60"
+          height="60"
+        />
+      </div>
+      <ul className="list-reset h5">
+        <SidebarLink>Program Summary</SidebarLink>
+        <SidebarLink>Results of Previous Activities</SidebarLink>
+        <SidebarLink>Program Activities</SidebarLink>
+        <ul className="mb0 ml2 list-reset">
+          {activities.map((a, i) => (
+            <SidebarLink key={a.id}>{activityDisplay(a, i + 1)}</SidebarLink>
+          ))}
+        </ul>
+        <SidebarLink>Proposed Budget</SidebarLink>
+        <SidebarLink>Assurances and Compliance</SidebarLink>
+        <SidebarLink>Executive/Overall Summary</SidebarLink>
+        <SidebarLink>Certify and Submit</SidebarLink>
+      </ul>
+      <div className="mt2 pt2 border-top border-white">
+        <button type="button" className="btn btn-primary bg-white navy">
+          Save as PDF
+        </button>
+      </div>
+    </div>
   </div>
 );
 
 Sidebar.propTypes = {
-  match: PropTypes.object.isRequired
+  activities: PropTypes.array.isRequired,
+  place: PropTypes.object.isRequired
 };
 
-export { Sidebar as SidebarPure };
-export default withRouter(Sidebar);
+export default Sidebar;

@@ -4,8 +4,8 @@ import { Editor } from 'react-draft-wysiwyg';
 
 import Section from './Section';
 import SectionTitle from './SectionTitle';
-import Collapsible from '../Collapsible';
-import { EDITOR_CONFIG } from '../../util/editor';
+import Collapsible from './Collapsible';
+import { EDITOR_CONFIG } from '../util';
 
 const ProgramSummary = ({ editYears, selectedYears }) => (
   <Section>
