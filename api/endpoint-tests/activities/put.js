@@ -71,7 +71,7 @@ tap.test(
             );
             invalidTest.same(
               body,
-              { error: 'update-activity-name-exists' },
+              { action: 'update-activity', error: 'activity-name-exists' },
               'sends back an error token'
             );
           }
@@ -92,7 +92,7 @@ tap.test(
           );
           invalidTest.same(
             body,
-            { error: 'update-activity-invalid-name' },
+            { action: 'update-activity', error: 'activity-name-invalid' },
             'sends back an error token'
           );
         });
