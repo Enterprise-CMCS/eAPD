@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-import AssurancesAndCompliance from './v2/AssurancesAndCompliance';
-import CertifyAndSubmit from './v2/CertifyAndSubmit';
-import ExecutiveSummary from './v2/ExecutiveSummary';
-import PreviousActivities from './v2/PreviousActivities';
-import Activities from './v2/Activities';
-import ProgramSummary from './v2/ProgramSummary';
-import ProposedBudget from './v2/ProposedBudget';
-import Sidebar from './v2/Sidebar';
-import TopNav from './v2/TopNav';
+import AssurancesAndCompliance from './AssurancesAndCompliance';
+import CertifyAndSubmit from './CertifyAndSubmit';
+import ExecutiveSummary from './ExecutiveSummary';
+import PreviousActivities from './PreviousActivities';
+import Activities from './Activities';
+import ProgramSummary from './ProgramSummary';
+import ProposedBudget from './ProposedBudget';
+import Sidebar from './Sidebar';
+import TopNav from './TopNav';
 import { getParams, stateLookup } from '../util';
 
 class PoC extends Component {

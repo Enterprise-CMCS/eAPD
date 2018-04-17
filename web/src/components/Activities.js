@@ -8,10 +8,10 @@ import Expenses from './Expenses';
 import Section from './Section';
 import SectionTitle from './SectionTitle';
 import StatePersonnel from './StatePersonnel';
-import Collapsible from '../Collapsible';
-import FormActivityGoals from '../FormActivityGoals';
-import FormActivitySchedule from '../FormActivitySchedule';
-import { STANDARDS, activityDisplay } from '../../util';
+import Collapsible from './Collapsible';
+import FormActivityGoals from './FormActivityGoals';
+import FormActivitySchedule from './FormActivitySchedule';
+import { STANDARDS, activityDisplay } from '../util';
 
 const Activities = ({
   activities,

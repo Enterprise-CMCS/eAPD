@@ -2,7 +2,7 @@ import React from 'react';
 
 import Section from './Section';
 import SectionTitle from './SectionTitle';
-import Collapsible from '../Collapsible';
+import Collapsible from './Collapsible';
 
 const PreviousActivities = () => (
   <Section>
