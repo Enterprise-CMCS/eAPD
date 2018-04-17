@@ -87,7 +87,7 @@ tap.test('Data model synchronization middleware', async middlewareTests => {
       );
 
       syncAllTests.test(
-        'sends an HTTP request error if validation fails',
+        'synchronizes the models and sends back the updated objects',
         async test => {
           getDetails.returns({
             modelClass,
@@ -123,6 +123,94 @@ tap.test('Data model synchronization middleware', async middlewareTests => {
           test.ok(
             res.send.calledWith('jsonified model'),
             'response body is the JSON-ified models'
+          );
+        }
+      );
+    }
+  );
+
+  middlewareTests.test(
+    'has a method to synchronize a specific model instance',
+    async syncSpecificTests => {
+      const model = {
+        fetch: sandbox.stub(),
+        synchronize: sandbox.stub()
+      };
+
+      syncSpecificTests.test(
+        'sends an HTTP server error if something goes wrong',
+        async test => {
+          getDetails.throws();
+          await middleware.synchronizeSpecific(getDetails)({}, res, next);
+
+          test.ok(next.notCalled, 'the middleware chain is broken');
+          test.ok(res.status.calledWith(500), 'HTTP status is set to 500');
+          test.ok(res.send.notCalled, 'no response body is sent');
+          test.ok(res.end.calledOnce, 'response is terminated');
+        }
+      );
+
+      syncSpecificTests.test(
+        'sends an HTTP request error if validation fails',
+        async test => {
+          getDetails.returns({
+            model,
+            action: 'test-action'
+          });
+
+          const err = new Error();
+          err.statusCode = 999;
+          err.error = { error: 'it went wrong' };
+          model.synchronize.throws(err);
+
+          const body = {};
+
+          await middleware.synchronizeSpecific(getDetails)({ body }, res, next);
+
+          test.ok(model.synchronize.calledWith(body), 'model is synchronized');
+          test.ok(next.notCalled, 'the middleware chain is broken');
+          test.ok(
+            res.status.calledWith(999),
+            'HTTP status is set according to the error'
+          );
+          test.ok(
+            res.send.calledWith({
+              action: 'test-action',
+              error: 'it went wrong'
+            }),
+            'response body is an error token'
+          );
+          test.ok(res.end.calledOnce, 'response is terminated');
+        }
+      );
+
+      syncSpecificTests.test(
+        'synchronizes the model and sends back the updated objects',
+        async test => {
+          getDetails.returns({
+            model,
+            action: 'test-action'
+          });
+          model.static = { withRelated: 'list of relationships' };
+          model.synchronize.resolves();
+          model.fetch.resolves({
+            toJSON: sinon.stub().returns('jsonified model')
+          });
+
+          const body = {};
+
+          await middleware.synchronizeSpecific(getDetails)({ body }, res, next);
+
+          test.ok(model.synchronize.calledWith(body), 'model is synchronized');
+          test.ok(
+            model.fetch.calledWith({ withRelated: 'list of relationships' }),
+            'model is fetched with relations'
+          );
+          test.ok(next.calledOnce, 'the middleware chain is not broken');
+          test.ok(res.status.notCalled, 'HTTP status is not explicitly set');
+          test.ok(
+            res.send.calledWith('jsonified model'),
+            'response body the JSON-ified model'
           );
         }
       );
