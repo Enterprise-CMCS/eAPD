@@ -43,7 +43,11 @@ tap.test('apd activity POST endpoint', async endpointTest => {
 
       test.same(
         out,
-        { foreignKey: { apd_id: 'apd-id' }, modelClass: ActivityModel },
+        {
+          action: 'add-activity',
+          foreignKey: { apd_id: 'apd-id' },
+          modelClass: ActivityModel
+        },
         'sets the foreign key and model class'
       );
     }
