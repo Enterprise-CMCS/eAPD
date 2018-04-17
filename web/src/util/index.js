@@ -63,6 +63,54 @@ export const STATES = [
   { id: 'vi', name: 'U.S. Virgin Islands' }
 ];
 
+export const STANDARDS = [
+  {
+    id: 'modularity',
+    title: 'Modularity'
+  },
+  {
+    id: 'mita',
+    title: 'Medicaid Information Technology Architecture (MITA)'
+  },
+  {
+    id: 'industry',
+    title: 'Industry Standards'
+  },
+  {
+    id: 'leverage',
+    title: 'Leverage'
+  },
+  {
+    id: 'biz-results',
+    title: 'Business Results'
+  },
+  {
+    id: 'reporting',
+    title: 'Reporting'
+  },
+  {
+    id: 'interoperability',
+    title: 'Interoperability'
+  },
+  {
+    id: 'mitigation',
+    title: 'Mitigation Strategy'
+  },
+  {
+    id: 'key-personnel',
+    title: 'Key Personnel'
+  },
+  {
+    id: 'documentation',
+    title: 'Documentation'
+  },
+  {
+    id: 'minimize-cost',
+    title:
+      'Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System'
+  }
+];
+
 export const stateLookup = id => STATES.find(s => s.id === id.toLowerCase());
 
 export const getParams = str =>
@@ -75,3 +123,10 @@ export const getParams = str =>
       const valGood = val === undefined ? null : decodeURIComponent(val);
       return Object.assign(params, { [key]: valGood });
     }, {});
+
+export const activityDisplay = (a, i) => {
+  let display = `Activity ${i}`;
+  if (a.name) display += `: ${a.name}`;
+  if (a.type.length) display += ` (${a.type.join(', ')})`;
+  return display;
+};
