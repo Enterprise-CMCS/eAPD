@@ -40,6 +40,57 @@ tap.test('approach data model', async approachModelTests => {
     }
   );
 
+  approachModelTests.test('has validate method', async validationTests => {
+    validationTests.test(
+      'throws if description, alternatives, and explanation are all empty',
+      async test => {
+        test.rejects(
+          approach.validate.bind({
+            attributes: {
+              description: undefined,
+              alternatives: undefined,
+              explanation: undefined
+            }
+          }),
+          'fails if values are undefined'
+        );
+
+        test.rejects(
+          approach.validate.bind({
+            attributes: {
+              description: undefined,
+              alternatives: undefined,
+              explanation: null
+            }
+          }),
+          'fails if values are null'
+        );
+
+        test.rejects(
+          approach.validate.bind({
+            attributes: {
+              description: undefined,
+              alternatives: '',
+              explanation: null
+            }
+          }),
+          'fails if values are empty strings'
+        );
+
+        test.resolves(
+          approach.validate.bind({
+            attributes: {
+              description: 'something',
+              alternatives: undefined,
+              explanation: undefined
+            }
+          }),
+          'passes if at least one value is not empty'
+        );
+      }
+    );
+  });
+
   approachModelTests.test('overrides toJSON method', async jsonTests => {
     const self = { get: sinon.stub() };
     self.get.withArgs('id').returns('Nick');

@@ -65,6 +65,46 @@ tap.test('goal data model', async goalModelTests => {
     }
   );
 
+  goalModelTests.test('has validate method', async validationTests => {
+    validationTests.test('throws if description is empty', async test => {
+      test.rejects(
+        goal.validate.bind({
+          attributes: {
+            description: undefined
+          }
+        }),
+        'fails if description is undefined'
+      );
+
+      test.rejects(
+        goal.validate.bind({
+          attributes: {
+            description: null
+          }
+        }),
+        'fails if description is null'
+      );
+
+      test.rejects(
+        goal.validate.bind({
+          attributes: {
+            description: ''
+          }
+        }),
+        'fails if description is empty string'
+      );
+
+      test.resolves(
+        goal.validate.bind({
+          attributes: {
+            description: 'something'
+          }
+        }),
+        'passes if description is not empty'
+      );
+    });
+  });
+
   goalModelTests.test('overrides toJSON method', async jsonTests => {
     const self = { get: sinon.stub(), related: sinon.stub() };
     self.get.withArgs('id').returns('Everyone');
