@@ -3,9 +3,9 @@ import React from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 
 import HelpBox from './HelpBox';
-import FormActivityApproach from '../FormActivityApproach';
-import Icon, { faHelp } from '../Icons';
-import { EDITOR_CONFIG } from '../../util/editor';
+import FormActivityApproach from './FormActivityApproach';
+import Icon, { faHelp } from './Icons';
+import { EDITOR_CONFIG } from '../util';
 
 const ActivityDescription = ({ activity }) => (
   <div>
