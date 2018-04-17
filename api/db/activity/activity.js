@@ -51,9 +51,9 @@ module.exports = {
         'goals.objectives',
         'expenses',
         'expenses.entries',
-        'personnel',
-        'personnel.years',
-        'schedule'
+        'schedule',
+        'statePersonnel',
+        'statePersonnel.years'
       ]
     },
 
