@@ -16,6 +16,10 @@ module.exports = {
       return this.hasMany('apdActivityApproach');
     },
 
+    contractorResources() {
+      return this.hasMany('apdActivityContractorResource');
+    },
+
     expenses() {
       return this.hasMany('apdActivityExpense');
     },
@@ -24,21 +28,31 @@ module.exports = {
       return this.hasMany('apdActivitySchedule');
     },
 
+    statePersonnel() {
+      return this.hasMany('apdActivityStatePersonnel');
+    },
+
     static: {
       updateableFields: ['name', 'description'],
       owns: {
         goals: 'apdActivityGoal',
         approaches: 'apdActivityApproach',
+        contractorResources: 'apdActivityContractorResource',
         expenses: 'apdActivityExpense',
-        schedule: 'apdActivitySchedule'
+        schedule: 'apdActivitySchedule',
+        statePersonnel: 'apdActivityStatePersonnel'
       },
       foreignKey: 'activity_id',
       withRelated: [
         'approaches',
+        'contractorResources',
+        'contractorResources.years',
         'goals',
         'goals.objectives',
         'expenses',
         'expenses.entries',
+        'personnel',
+        'personnel.years',
         'schedule'
       ]
     },
@@ -69,8 +83,10 @@ module.exports = {
         description: this.get('description'),
         goals: this.related('goals'),
         approaches: this.related('approaches'),
+        contractorResources: this.related('contractorResources'),
         expenses: this.related('expenses'),
-        schedule: this.related('schedule')
+        schedule: this.related('schedule'),
+        statePersonnel: this.related('statePersonnel')
       };
     }
   }
