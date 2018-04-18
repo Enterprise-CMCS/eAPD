@@ -17,11 +17,15 @@ tap.test('apd data model', async apdModelTests => {
             withRelated: [
               { activities: Function },
               'activities.approaches',
+              'activities.contractorResources',
+              'activities.contractorResources.years',
               'activities.goals',
               'activities.goals.objectives',
               'activities.expenses',
               'activities.expenses.entries',
-              'activities.schedule'
+              'activities.schedule',
+              'activities.statePersonnel',
+              'activities.statePersonnel.years'
             ]
           }
         }
