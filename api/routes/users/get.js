@@ -9,7 +9,7 @@ const allUsersHandler = async (req, res, UserModel) => {
       columns: ['id', 'email', 'state_id']
     });
     logger.silly(req, 'sending users', users.toJSON());
-    res.send(users);
+    res.send(users.toJSON());
   } catch (e) {
     logger.error(req, e);
     res.status(500).end();
@@ -23,7 +23,7 @@ const oneUserHandler = async (req, res, UserModel) => {
     const user = await UserModel.where({ id: Number(req.params.id) }).fetch();
     if (user) {
       logger.silly(req, 'sending user', user.toJSON());
-      res.send(user);
+      res.send(user.toJSON());
     } else {
       logger.verbose(req, `no user found [${req.params.id}]`);
       res.status(404).end();
