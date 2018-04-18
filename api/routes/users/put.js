@@ -44,7 +44,7 @@ module.exports = (app, UserModel = defaultUserModel) => {
 
       await user.save();
       logger.silly(req, 'all done');
-      return res.send(user);
+      return res.send(user.toJSON());
     } catch (e) {
       logger.error(req, e);
       return res.status(500).end();
