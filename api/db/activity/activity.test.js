@@ -10,57 +10,42 @@ tap.test('activity data model', async activityModelTests => {
       {
         apdActivity: {
           tableName: 'activities',
+
+          apd: Function,
+          goals: Function,
+          approaches: Function,
+          contractorResources: Function,
+          expenses: Function,
+          schedule: Function,
+          statePersonnel: Function,
+
           static: {
             updateableFields: ['name', 'description'],
             owns: {
               goals: 'apdActivityGoal',
               approaches: 'apdActivityApproach',
+              contractorResources: 'apdActivityContractorResource',
               expenses: 'apdActivityExpense',
-              schedule: 'apdActivitySchedule'
+              schedule: 'apdActivitySchedule',
+              statePersonnel: 'apdActivityStatePersonnel'
             },
             foreignKey: 'activity_id',
             withRelated: [
               'approaches',
+              'contractorResources',
+              'contractorResources.years',
               'goals',
               'goals.objectives',
               'expenses',
               'expenses.entries',
-              'schedule'
+              'schedule',
+              'statePersonnel',
+              'statePersonnel.years'
             ]
           }
         }
       },
       'get the expected model definitions'
-    );
-
-    setupTests.type(
-      activity.apdActivity.apd,
-      'function',
-      'creates a apd relationship for the activity model'
-    );
-
-    setupTests.type(
-      activity.apdActivity.goals,
-      'function',
-      'creates a goals relationship for the activity model'
-    );
-
-    setupTests.type(
-      activity.apdActivity.approaches,
-      'function',
-      'creates an approaches relationship for the activity model'
-    );
-
-    setupTests.type(
-      activity.apdActivity.expenses,
-      'function',
-      'creates a expenses relationship for the activity model'
-    );
-
-    setupTests.type(
-      activity.apdActivity.schedule,
-      'function',
-      'creates a schedule relationship for the activity model'
     );
   });
 
@@ -117,6 +102,23 @@ tap.test('activity data model', async activityModelTests => {
     );
 
     relationshipTests.test(
+      'activity model sets up contract resources relationship',
+      async apdTests => {
+        const self = {
+          hasMany: sinon.stub().returns('southwest')
+        };
+
+        const output = activity.apdActivity.contractorResources.bind(self)();
+
+        apdTests.ok(
+          self.hasMany.calledWith('apdActivityContractorResource'),
+          'sets up the relationship mapping to contractor resources'
+        );
+        apdTests.equal(output, 'southwest', 'returns the expected value');
+      }
+    );
+
+    relationshipTests.test(
       'activity model sets up expenses relationship',
       async apdTests => {
         const self = {
@@ -130,6 +132,23 @@ tap.test('activity data model', async activityModelTests => {
           'sets up the relationship mapping to expense'
         );
         apdTests.equal(output, 'bag', 'returns the expected value');
+      }
+    );
+
+    relationshipTests.test(
+      'activity model sets up state personnel relationship',
+      async apdTests => {
+        const self = {
+          hasMany: sinon.stub().returns('locomotion')
+        };
+
+        const output = activity.apdActivity.statePersonnel.bind(self)();
+
+        apdTests.ok(
+          self.hasMany.calledWith('apdActivityStatePersonnel'),
+          'sets up the relationship mapping to state personnel'
+        );
+        apdTests.equal(output, 'locomotion', 'returns the expected value');
       }
     );
 
