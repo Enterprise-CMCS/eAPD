@@ -57,7 +57,7 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
           name: 'Inigo Montoya',
           position: 'Centerfield',
           phone: '5558675309',
-          state: 'FR'
+          state_id: 'pr'
         }
       });
       validTest.equal(response.statusCode, 200, 'gives a 200 status code');
@@ -69,7 +69,7 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
           name: 'Inigo Montoya',
           position: 'Centerfield',
           phone: '5558675309',
-          state: 'FR'
+          state_id: 'pr'
         },
         'returns an object for the requested user'
       );
@@ -99,8 +99,8 @@ tap.test('users endpoint | PUT /users/:userID', async putUsersTests => {
         'user phone was updated in the database'
       );
       validTest.equal(
-        user.state,
-        'FR',
+        user.state_id,
+        'pr',
         'user state was updated in the database'
       );
     });

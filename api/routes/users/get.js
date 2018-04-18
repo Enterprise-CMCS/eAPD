@@ -5,11 +5,11 @@ const can = require('../../middleware').can;
 const allUsersHandler = async (req, res, UserModel) => {
   logger.silly(req, 'handling GET /users route');
   try {
-    const users = await UserModel.fetchAll({ columns: ['id', 'email'] });
-    logger.silly(req, 'sending users', JSON.parse(JSON.stringify(users)));
-    res.send(
-      users.map(user => ({ email: user.get('email'), id: user.get('id') }))
-    );
+    const users = await UserModel.fetchAll({
+      columns: ['id', 'email', 'state_id']
+    });
+    logger.silly(req, 'sending users', users.toJSON());
+    res.send(users);
   } catch (e) {
     logger.error(req, e);
     res.status(500).end();
@@ -20,13 +20,10 @@ const oneUserHandler = async (req, res, UserModel) => {
   logger.silly(req, 'handling GET /users/:id route');
   logger.silly(req, 'got a request for a single user', req.params.id);
   try {
-    const user = await UserModel.where({ id: Number(req.params.id) }).fetch({
-      columns: ['id', 'email', 'name', 'position', 'phone', 'state']
-    });
+    const user = await UserModel.where({ id: Number(req.params.id) }).fetch();
     if (user) {
-      const userObj = JSON.parse(JSON.stringify(user));
-      logger.silly(req, 'sending user', userObj);
-      res.send(userObj);
+      logger.silly(req, 'sending user', user.toJSON());
+      res.send(user);
     } else {
       logger.verbose(req, `no user found [${req.params.id}]`);
       res.status(404).end();
