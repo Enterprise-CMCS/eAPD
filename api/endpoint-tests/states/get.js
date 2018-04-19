@@ -74,7 +74,6 @@ tap.test('states/:id endpoint | GET /states/:id', async getStateTest => {
   await db().seed.run();
 
   unauthenticatedTest('get', url, getStateTest);
-  // unauthorizedTest('get', url, getStateTest);
 
   getStateTest.test(
     'when authenticated as a user with permission',
