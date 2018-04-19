@@ -4,7 +4,7 @@ const can = require('../../../middleware').can;
 
 module.exports = (app, RoleModel = defaultRoleModel) => {
   logger.silly('setting up DELETE /auth/roles route');
-  app.delete('/auth/roles/:id', can('delete-roles'), async (req, res) => {
+  app.delete('/auth/roles/:id', can('edit-roles'), async (req, res) => {
     logger.silly(req, 'handling up DELETE /auth/roles route');
     const targetRole = await RoleModel.where({ id: req.params.id }).fetch();
     if (!targetRole) {

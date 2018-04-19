@@ -1,39 +1,66 @@
 const activities = {
   'view-users': false,
   'add-users': false,
-  'edit-users': false,
-  'delete-users': false,
   'view-roles': false,
   'create-roles': false,
   'edit-roles': false,
-  'delete-roles': false,
-  'view-activities': false,
-  'view-state': false,
-  'edit-state': false
+  'submit-federal-response': false,
+  'submit-clearance': false,
+  'edit-comments': false,
+  'submit-document': false,
+  'submit-state-response': false,
+  'create-draft': false,
+  'edit-document': false,
+  'edit-response': false,
+  'delete-users': false
 };
 
 const roles = {
   admin: false,
-  'cms-reviewer': false,
-  'state-submitter': false
+  'federal analyst': false,
+  'federal leadership': false,
+  'federal SME': false,
+  'state coordinator': false,
+  'state SME': false
 };
 
 const roleToActivityMappings = {
   admin: [
     'view-users',
     'add-users',
-    'edit-users',
-    'delete-users',
     'view-roles',
     'create-roles',
     'edit-roles',
-    'delete-roles',
-    'view-activities',
-    'view-state',
-    'edit-state'
+    'submit-federal-response',
+    'submit-clearance',
+    'edit-comments',
+    'submit-document',
+    'submit-state-response',
+    'create-draft',
+    'edit-document',
+    'edit-response',
+    'delete-users'
   ],
-  'cms-reviewer': [],
-  'state-submitter': []
+  'federal analyst': [
+    'view-users',
+    'add-users',
+    'view-roles',
+    'create-roles',
+    'edit-roles',
+    'submit-federal-response',
+    'submit-clearance',
+    'edit-comments'
+  ],
+  'federal leadership': ['view-users'],
+  'federal SME': ['edit-comments'],
+  'state coordinator': [
+    'submit-document',
+    'submit-state-response',
+    'create-draft',
+    'edit-document',
+    'edit-response'
+  ],
+  'state SME': ['edit-document', 'edit-response']
 };
 
 // Take the knex object and the table name as arguments, instead of just

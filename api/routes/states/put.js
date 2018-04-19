@@ -128,8 +128,8 @@ module.exports = (app, dataHelper = defaultDataHelper) => {
     }
   };
 
-  logger.silly('setting up PUT /states/:id route');
-  app.put('/states/:id', can('edit-state'), put);
+  // logger.silly('setting up PUT /states/:id route');
+  // app.put('/states/:id', can('edit-state'), put);
 
   logger.silly('setting up PUT /states route');
   app.put('/states', loggedIn, put);
