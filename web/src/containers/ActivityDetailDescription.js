@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import { EditorState, ContentState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { connect } from 'react-redux';
@@ -9,41 +11,46 @@ import Collapsible from '../components/Collapsible';
 import Icon, { faHelp } from '../components/Icons';
 import { EDITOR_CONFIG } from '../util';
 
+const htmlToEditor = html => {
+  if (!html) return EditorState.createEmpty();
+
+  const { contentBlocks, entityMap } = htmlToDraft(html);
+  const content = ContentState.createFromBlockArray(contentBlocks, entityMap);
+  return EditorState.createWithContent(content);
+};
+
+const editorToHtml = editorState => {
+  const content = convertToRaw(editorState.getCurrentContent());
+  return draftToHtml(content);
+};
+
 class ActivityDetailDescription extends Component {
   constructor(props) {
     super(props);
 
-    const { descLong } = props.activity;
-
-    const descLongEditor = !descLong
-      ? EditorState.createEmpty()
-      : EditorState.createWithContent(convertFromRaw(JSON.parse(descLong)));
+    const { descLong, altApproach } = props.activity;
 
     this.state = {
-      descLongEditor
+      descLong: htmlToEditor(descLong),
+      altApproach: htmlToEditor(altApproach)
     };
   }
 
   onEditorChange = name => editorState => {
-    // TODO [bren]: clean up / consolidate editor key name interpolation
-    const key = `${name}Editor`;
-    this.setState({ [key]: editorState });
+    this.setState({ [name]: editorState });
   };
 
   syncEditorState = name => () => {
-    const editorState = this.state[`${name}Editor`];
-    const contentObj = editorState.getCurrentContent();
-    const contentRaw = convertToRaw(contentObj);
-
+    const html = editorToHtml(this.state[name]);
     const { activity, updateActivity } = this.props;
-    const data = { id: activity.id, name, value: JSON.stringify(contentRaw) };
+    const data = { id: activity.id, name, value: html };
 
     updateActivity(data);
   };
 
   render() {
     const { activity, updateActivity } = this.props;
-    const { descLongEditor } = this.state;
+    const { descLong, altApproach } = this.state;
 
     return (
       <Collapsible title="Activity Description" open>
@@ -75,13 +82,23 @@ class ActivityDetailDescription extends Component {
           </div>
           <Editor
             toolbar={EDITOR_CONFIG}
-            editorState={descLongEditor}
+            editorState={descLong}
             onEditorStateChange={this.onEditorChange('descLong')}
             onBlur={this.syncEditorState('descLong')}
           />
         </div>
 
-        <div>ADD ALT APPROACH TEXTBOX</div>
+        <div className="mb3">
+          <div className="mb1 bold">
+            Statement of alternative considerations and supporting justification
+          </div>
+          <Editor
+            toolbar={EDITOR_CONFIG}
+            editorState={altApproach}
+            onEditorStateChange={this.onEditorChange('altApproach')}
+            onBlur={this.syncEditorState('altApproach')}
+          />
+        </div>
       </Collapsible>
     );
   }
