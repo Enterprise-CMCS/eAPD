@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const { loggedIn, can } = require('../../middleware');
+const { loggedIn } = require('../../middleware');
 const putEndpoint = require('./put');
 
 const { invalid: invalidData } = require('../../test-data/state');
