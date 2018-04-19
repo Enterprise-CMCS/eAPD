@@ -43,71 +43,71 @@ tap.test('states GET endpoints', async endpointTest => {
   endpointTest.test('setup', async setupTest => {
     getEndpoint(app);
 
-    setupTest.ok(
-      app.get.calledWith('/states/:id', can('view-state'), sinon.match.func),
-      'specific states GET endpoint is registered'
-    );
+    // setupTest.ok(
+    //   app.get.calledWith('/states/:id', can('view-state'), sinon.match.func),
+    //   'specific states GET endpoint is registered'
+    // );
     setupTest.ok(
       app.get.calledWith('/states', loggedIn, sinon.match.func),
       'user-specific states GET endpoint is registered'
     );
   });
 
-  endpointTest.test('get specific state handler', async handlerTest => {
-    let handler;
-    handlerTest.beforeEach(async () => {
-      getEndpoint(app, StateModel, UserModel);
-      handler = app.get.args.find(args => args[0] === '/states/:id')[2];
-    });
-
-    handlerTest.test(
-      'sends a server error code if there is a database error',
-      async invalidTest => {
-        StateModel.fetch.rejects();
-
-        await handler({ params: { id: 'state' }, user: {} }, res);
-
-        invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
-        invalidTest.ok(res.end.called, 'response is terminated');
-      }
-    );
-
-    handlerTest.test(
-      'sends a not-found error if the requested state does not exist',
-      async invalidTest => {
-        StateModel.fetch.resolves(null);
-
-        await handler({ params: { id: 'state' }, user: {} }, res);
-
-        invalidTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
-        invalidTest.ok(res.send.notCalled, 'no body is sent');
-        invalidTest.ok(res.end.called, 'response is terminated');
-      }
-    );
-
-    handlerTest.test('sends state program info', async validTest => {
-      pick
-        .withArgs([
-          'id',
-          'medicaid_office',
-          'name',
-          'program_benefits',
-          'program_vision',
-          'state_pocs'
-        ])
-        .returns('program info');
-      StateModel.fetch.resolves({ pick });
-
-      await handler({ params: { id: 'state' }, user: {} }, res);
-
-      validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
-      validTest.ok(
-        res.send.calledWith('program info'),
-        'program info is sent back'
-      );
-    });
-  });
+  // endpointTest.test('get specific state handler', async handlerTest => {
+  //   let handler;
+  //   handlerTest.beforeEach(async () => {
+  //     getEndpoint(app, StateModel, UserModel);
+  //     handler = app.get.args.find(args => args[0] === '/states/:id')[2];
+  //   });
+  //
+  //   handlerTest.test(
+  //     'sends a server error code if there is a database error',
+  //     async invalidTest => {
+  //       StateModel.fetch.rejects();
+  //
+  //       await handler({ params: { id: 'state' }, user: {} }, res);
+  //
+  //       invalidTest.ok(res.status.calledWith(500), 'HTTP status set to 500');
+  //       invalidTest.ok(res.send.notCalled, 'no body is sent');
+  //       invalidTest.ok(res.end.called, 'response is terminated');
+  //     }
+  //   );
+  //
+  //   handlerTest.test(
+  //     'sends a not-found error if the requested state does not exist',
+  //     async invalidTest => {
+  //       StateModel.fetch.resolves(null);
+  //
+  //       await handler({ params: { id: 'state' }, user: {} }, res);
+  //
+  //       invalidTest.ok(res.status.calledWith(404), 'HTTP status set to 404');
+  //       invalidTest.ok(res.send.notCalled, 'no body is sent');
+  //       invalidTest.ok(res.end.called, 'response is terminated');
+  //     }
+  //   );
+  //
+  //   handlerTest.test('sends state program info', async validTest => {
+  //     pick
+  //       .withArgs([
+  //         'id',
+  //         'medicaid_office',
+  //         'name',
+  //         'program_benefits',
+  //         'program_vision',
+  //         'state_pocs'
+  //       ])
+  //       .returns('program info');
+  //     StateModel.fetch.resolves({ pick });
+  //
+  //     await handler({ params: { id: 'state' }, user: {} }, res);
+  //
+  //     validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
+  //     validTest.ok(
+  //       res.send.calledWith('program info'),
+  //       'program info is sent back'
+  //     );
+  //   });
+  // });
 
   endpointTest.test('get user-specific state handler', async handlerTest => {
     let handler;
