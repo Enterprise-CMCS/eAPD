@@ -3,16 +3,14 @@ import { connect } from 'react-redux';
 
 import Collapsible from '../components/Collapsible';
 
-// <ActivityDescription activity={a} />
-
 const ActivityDetailDescription = () => (
   <Collapsible title="Needs and Objectives">
     <div>...</div>
   </Collapsible>
 );
 
-const mapStateToProps = ({ activities }) => ({
-  activityIds: activities.allIds
+const mapStateToProps = ({ activities: { byId } }, { aId }) => ({
+  activity: byId[aId]
 });
 
 export default connect(mapStateToProps)(ActivityDetailDescription);
