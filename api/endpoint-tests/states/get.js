@@ -4,8 +4,7 @@ const {
   getFullPath,
   login,
   request,
-  unauthenticatedTest,
-  unauthorizedTest
+  unauthenticatedTest
 } = require('../utils');
 
 tap.test('states endpoint | GET /states', async getUserStateTest => {

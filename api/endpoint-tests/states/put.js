@@ -4,8 +4,7 @@ const {
   getFullPath,
   login,
   request,
-  unauthenticatedTest,
-  unauthorizedTest
+  unauthenticatedTest
 } = require('../utils');
 
 const { invalid: invalidData } = require('../../test-data/state');
