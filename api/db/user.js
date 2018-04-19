@@ -87,6 +87,17 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
       }
 
       logger.silly('model is valid!');
+    },
+
+    toJSON() {
+      return {
+        id: this.get('id'),
+        email: this.get('email'),
+        name: this.get('name'),
+        position: this.get('position'),
+        phone: this.get('phone'),
+        state_id: this.get('state_id')
+      };
     }
   }
 });
