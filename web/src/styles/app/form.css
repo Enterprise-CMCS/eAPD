@@ -4,7 +4,20 @@
   border-radius: var(--border-radius);
 }
 
-/* error states */
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: 0;
+  border-color: #0074d9;
+  box-shadow: 0 0 0 2px rgba(0, 116, 217, 0.5);
+}
+
+.input:disabled,
+.select:disabled,
+.textarea:disabled {
+  background-color: rgba(0, 0, 0, 0.125);
+  opacity: 0.5;
+}
 
 .has-error input {
   border-color: var(--red);
@@ -14,11 +27,4 @@
     box-shadow: 0 0 0 2px color(var(--red) a(50%));
     outline: none;
   }
-}
-
-.input:disabled,
-.select:disabled,
-.textarea:disabled {
-  background-color: rgba(0, 0, 0, 0.125);
-  opacity: 0.5;
 }
