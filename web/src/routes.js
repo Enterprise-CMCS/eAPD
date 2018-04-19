@@ -1,3 +1,4 @@
+import Activities from './containers/Activities';
 import Hello from './components/Hello';
 import NoMatch from './components/NoMatch';
 import Login from './containers/Login';
@@ -8,6 +9,7 @@ const routes = [
   { path: '/login', component: Login, nonPrivate: true },
   { path: '/hello', component: Hello, nonPrivate: true },
   { path: '/poc', component: PoC, nonPrivate: true },
+  { path: '/activities', component: Activities, nonPrivate: true },
   { component: NoMatch, nonPrivate: true }
 ];
 
