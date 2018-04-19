@@ -3,9 +3,10 @@ import { ADD_ACTIVITY, UPDATE_ACTIVITY } from '../actions/activities';
 const newActivity = id => ({
   id,
   name: '',
+  types: ['HIT'],
   descShort: '',
   descLong: '',
-  types: []
+  altApproach: ''
 });
 
 const updateEntry = (state, action) => {

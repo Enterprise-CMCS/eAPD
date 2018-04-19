@@ -2,20 +2,46 @@
 
 /* overrides */
 
-.rdw-editor-toolbar * {
-  box-sizing: content-box;
+.rdw-editor-toolbar {
+  background-color: #f5f5f5;
+  border: 0;
+  border-radius: var(--border-radius);
+
+  & * {
+    box-sizing: content-box;
+  }
+}
+
+.rdw-dropdown-wrapper,
+.rdw-option-wrapper {
+  border: 1px solid #eee;
+  border-radius: var(--border-radius);
 }
 
 .rdw-editor-main {
-  border: 1px solid #f1f1f1;
-  border-radius: 5px;
-  min-height: 15rem;
+  overflow: inherit;
+}
+
+.DraftEditor-root {
+  height: 15rem;
+}
+
+.public-DraftEditor-content {
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  overflow: auto;
   padding: 0.5rem;
 }
 
+.public-DraftEditor-content:focus {
+  outline: 0;
+  border-color: #0074d9;
+  box-shadow: 0 0 0 2px rgba(0, 116, 217, 0.5);
+}
+
 .public-DraftStyleDefault-block {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  line-height: 1.75;
+  margin: 0;
 }
 
 .rdw-dropdown-wrapper a {
