@@ -114,6 +114,7 @@ tap.test(
               name: 'updated name',
               description: 'updated description',
               approaches: [],
+              contractorResources: [],
               expenses: [],
               goals: [
                 {
@@ -140,7 +141,8 @@ tap.test(
                   objectives: ['Learn to dance', 'Bring audience gifts']
                 }
               ],
-              schedule: []
+              schedule: [],
+              statePersonnel: []
             },
             'sends back the updated activity object'
           );
