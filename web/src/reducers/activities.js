@@ -15,7 +15,20 @@ const newActivity = id => ({
   descShort: '',
   descLong: '',
   altApproach: '',
-  goals: [newGoal()]
+  goals: [newGoal()],
+  standardsAndConditions: {
+    modularity: '',
+    mita: '',
+    industry: '',
+    leverage: '',
+    bizResults: '',
+    reporting: '',
+    interoperability: '',
+    mitigation: '',
+    keyPersonnel: '',
+    documentation: '',
+    minimizeCost: ''
+  }
 });
 
 const initialState = {

@@ -81,7 +81,7 @@ export const STANDARDS = [
     title: 'Leverage'
   },
   {
-    id: 'biz-results',
+    id: 'bizResults',
     title: 'Business Results'
   },
   {
@@ -97,7 +97,7 @@ export const STANDARDS = [
     title: 'Mitigation Strategy'
   },
   {
-    id: 'key-personnel',
+    id: 'keyPersonnel',
     title: 'Key Personnel'
   },
   {
@@ -105,7 +105,7 @@ export const STANDARDS = [
     title: 'Documentation'
   },
   {
-    id: 'minimize-cost',
+    id: 'minimizeCost',
     title:
       'Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System'
   }
