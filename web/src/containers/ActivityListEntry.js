@@ -16,18 +16,11 @@ class ActivityListEntry extends Component {
       ? types.filter(t => t !== value)
       : [...types, value].sort();
 
-    const data = { id, name: 'types', value: newValue };
-
-    updateActivity(data);
+    updateActivity(id, { types: newValue });
   };
 
   handleName = id => e => {
-    const { value } = e.target;
-    const { updateActivity } = this.props;
-    const name = 'name';
-    const data = { id, name, value };
-
-    updateActivity(data);
+    this.props.updateActivity(id, { name: e.target.value });
   };
 
   render() {
