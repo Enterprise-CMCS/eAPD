@@ -141,6 +141,10 @@ tap.test(
                   objectives: ['Learn to dance', 'Bring audience gifts']
                 }
               ],
+              otherFundingSources: {
+                description: '',
+                amount: '0.00'
+              },
               schedule: [],
               statePersonnel: []
             },
