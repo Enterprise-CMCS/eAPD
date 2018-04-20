@@ -183,7 +183,7 @@ exports.down = async knex => {
 
   await knex.schema.dropTable('activities');
 
-  await knex.schema.dropTable('apd');
+  await knex.schema.dropTable('apds');
   await knex.schema.dropTable('users');
 
   await knex.schema.dropTable('auth_role_activity_mapping');

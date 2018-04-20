@@ -1,20 +1,32 @@
 exports.seed = async knex => {
-  // has a foreign key relationship on auth_roles and states
-  await knex('users').del();
+  // These need to be deleted in a particular order to handle
+  // relationships between them, otherwise we get a key
+  // constraint violation.
 
-  // has a foreign key relationship on auth_roles and auth_activities
-  await knex('auth_role_activity_mapping').del();
+  await knex('activity_contractor_resources_yearly').del();
+  await knex('activity_contractor_resources').del();
 
-  await knex('auth_roles').del();
-  await knex('auth_activities').del();
+  await knex('activity_expense_entries').del();
+  await knex('activity_expenses').del();
 
-  // have cascading foreign key relationships, so make sure we
-  // delete them in the right order
   await knex('activity_goal_objectives').del();
   await knex('activity_goals').del();
+
   await knex('activity_approaches').del();
+  await knex('activity_state_peronnel').del();
+  await knex('activity_state_personnel_yearly').del();
+
+  await knex('activity_schedule').del();
+
   await knex('activities').del();
 
   await knex('apds').del();
+
+  await knex('users').del();
+
+  await knex('auth_role_activity_mapping').del();
+  await knex('auth_activities').del();
+  await knex('auth_roles').del();
+
   await knex('states').del();
 };
