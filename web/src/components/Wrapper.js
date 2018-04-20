@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+import DataInspector from '../containers/DataInspector';
+
 class Wrapper extends Component {
   componentDidMount() {
     if (!this.props.isDev) return;
@@ -14,8 +16,13 @@ class Wrapper extends Component {
   };
 
   render() {
-    const { children } = this.props;
-    return <div className="site">{children}</div>;
+    const { children, isDev } = this.props;
+    return (
+      <div className="site">
+        {children}
+        {isDev && <DataInspector />}
+      </div>
+    );
   }
 }
 
