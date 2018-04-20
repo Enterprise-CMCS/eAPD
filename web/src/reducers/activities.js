@@ -1,4 +1,12 @@
-import { ADD_ACTIVITY, UPDATE_ACTIVITY } from '../actions/activities';
+import u from 'updeep';
+
+import {
+  ADD_ACTIVITY,
+  ADD_ACTIVITY_GOAL,
+  UPDATE_ACTIVITY
+} from '../actions/activities';
+
+const newGoal = () => ({ desc: '', obj: '' });
 
 const newActivity = id => ({
   id,
@@ -6,21 +14,9 @@ const newActivity = id => ({
   types: ['HIT'],
   descShort: '',
   descLong: '',
-  altApproach: ''
+  altApproach: '',
+  goals: [newGoal()]
 });
-
-const updateEntry = (state, action) => {
-  const { id, name, value } = action.data;
-  const prior = state.byId[id];
-
-  return {
-    ...state,
-    byId: {
-      ...state.byId,
-      [id]: { ...prior, [name]: value }
-    }
-  };
-};
 
 const initialState = {
   byId: { 1: newActivity(1) },
@@ -39,8 +35,27 @@ const reducer = (state = initialState, action) => {
         allIds: [...state.allIds, id]
       };
     }
+    case ADD_ACTIVITY_GOAL:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              goals: goals => [...goals, newGoal()]
+            }
+          }
+        },
+        state
+      );
     case UPDATE_ACTIVITY:
-      return updateEntry(state, action);
+      return u(
+        {
+          byId: {
+            [action.id]: { ...action.updates }
+          }
+        },
+        state
+      );
+
     default:
       return state;
   }
