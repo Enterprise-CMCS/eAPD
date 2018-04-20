@@ -43,9 +43,8 @@ class ActivityDetailDescription extends Component {
   syncEditorState = name => () => {
     const html = editorToHtml(this.state[name]);
     const { activity, updateActivity } = this.props;
-    const data = { id: activity.id, name, value: html };
 
-    updateActivity(data);
+    updateActivity(activity.id, { [name]: html });
   };
 
   render() {
@@ -53,8 +52,8 @@ class ActivityDetailDescription extends Component {
     const { descLong, altApproach } = this.state;
 
     return (
-      <Collapsible title="Activity Description" open>
-        <div className="mb1 bold">
+      <Collapsible title="Activity Description">
+        <div className="mb-tiny bold">
           Summary
           <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
         </div>
@@ -66,17 +65,13 @@ class ActivityDetailDescription extends Component {
             spellCheck="true"
             value={activity.descShort}
             onChange={e =>
-              updateActivity({
-                id: activity.id,
-                name: 'descShort',
-                value: e.target.value
-              })
+              updateActivity(activity.id, { descShort: e.target.value })
             }
           />
         </div>
 
         <div className="mb3">
-          <div className="mb1 bold">
+          <div className="mb-tiny bold">
             Please describe the activity in detail
             <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
           </div>
@@ -89,7 +84,7 @@ class ActivityDetailDescription extends Component {
         </div>
 
         <div className="mb3">
-          <div className="mb1 bold">
+          <div className="mb-tiny bold">
             Statement of alternative considerations and supporting justification
           </div>
           <Editor
