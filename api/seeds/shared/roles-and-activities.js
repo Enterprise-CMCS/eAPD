@@ -77,22 +77,18 @@ const setupMappings = async (
   const match = (roleID, activityID) => role =>
     role.role_id === roleID && role.activity_id === activityID;
 
-  await Promise.all(
-    Object.keys(mappings).map(async role => {
-      const roleID = roleIDs[role];
-      for (let i = 0; i < mappings[role].length; i += 1) {
-        const activityID = activityIDs[mappings[role][i]];
-
-        // Don't recreate existing matches
-        if (!alreadyExisting.some(match(roleID, activityID))) {
-          // We actually need to block here, otherwise weird reference stuff happens
-          // and we just map the role to a single activity multiple times.
-          // eslint-disable-next-line no-await-in-loop
-          await table.insert({ role_id: roleID, activity_id: activityID });
-        }
+  const inserts = [];
+  Object.keys(mappings).forEach(role => {
+    const roleID = roleIDs[role];
+    mappings[role].forEach(activity => {
+      const activityID = activityIDs[activity];
+      if (!alreadyExisting.some(match(roleID, activityID))) {
+        inserts.push({ role_id: roleID, activity_id: activityID });
       }
-    })
-  );
+    });
+  });
+
+  await table.insert(inserts);
 };
 
 exports.seed = async knex => {
