@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const { loggedIn, can } = require('../../middleware');
+const { loggedIn } = require('../../middleware');
 const putEndpoint = require('./put');
 
 const { invalid: invalidData } = require('../../test-data/state');
@@ -46,10 +46,6 @@ tap.test('states PUT endpoints', async endpointTest => {
   endpointTest.test('setup', async setupTest => {
     putEndpoint(app);
 
-    setupTest.ok(
-      app.put.calledWith('/states/:id', can('edit-state'), sinon.match.func),
-      'specific states PUT endpoint is registered'
-    );
     setupTest.ok(
       app.put.calledWith('/states', loggedIn, sinon.match.func),
       'user-specific states PUT endpoint is registered'

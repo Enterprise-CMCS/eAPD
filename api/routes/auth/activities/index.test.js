@@ -33,7 +33,7 @@ tap.test('auth activities GET endpoint', async endpointTest => {
     setupTest.ok(
       app.get.calledWith(
         '/auth/activities',
-        can('view-activities'),
+        can('view-roles'),
         sinon.match.func
       ),
       'all activities GET endpoint is registered'
