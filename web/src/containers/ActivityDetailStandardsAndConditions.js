@@ -32,20 +32,15 @@ class ActivityDetailStandardsAndConditions extends Component {
                 accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
                 quae ab illo inventore veritatis et quasi architecto...
               </p>
-              <div>
-                <label htmlFor={inputId}>
-                  Describe how you’ll meet this condition
-                </label>
-                <Textarea
-                  id={inputId}
-                  name={`condition-${std.id}`}
-                  label={`Describe how you'll meet the ${std.title} condition`}
-                  rows="3"
-                  spellCheck="true"
-                  value={activity.standardsAndConditions[std.id]}
-                  onChange={this.handleChange(std.id)}
-                />
-              </div>
+              <Textarea
+                id={inputId}
+                name={`condition-${std.id}`}
+                label={`Describe how you'll meet the ${std.title} condition`}
+                rows="3"
+                spellCheck="true"
+                value={activity.standardsAndConditions[std.id]}
+                onChange={this.handleChange(std.id)}
+              />
             </div>
           );
         })}
