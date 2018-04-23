@@ -5,6 +5,7 @@ import {
   ADD_ACTIVITY_GOAL,
   ADD_ACTIVITY_EXPENSE,
   ADD_ACTIVITY_MILESTONE,
+  REMOVE_ACTIVITY_EXPENSE,
   REMOVE_ACTIVITY_MILESTONE,
   UPDATE_ACTIVITY
 } from '../actions/activities';
@@ -82,6 +83,18 @@ const reducer = (state = initialState, action) => {
           byId: {
             [action.id]: {
               expenses: expenses => [...expenses, newExpense(expenses.length)]
+            }
+          }
+        },
+        state
+      );
+    case REMOVE_ACTIVITY_EXPENSE:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              expenses: expenses =>
+                expenses.filter(expense => expense.idx !== action.expenseIdx)
             }
           }
         },
