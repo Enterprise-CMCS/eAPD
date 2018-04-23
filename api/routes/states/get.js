@@ -1,7 +1,7 @@
 const logger = require('../../logger')('states route get');
 const defaultStateModel = require('../../db').models.state;
 const defaultUserModel = require('../../db').models.user;
-const { can, loggedIn } = require('../../middleware');
+const { loggedIn } = require('../../middleware');
 
 const stateFields = [
   'id',
@@ -50,7 +50,7 @@ module.exports = (
   };
 
   logger.silly('setting up GET /states/:id route');
-  app.get('/states/:id', can('view-state'), get);
+  app.get('/states/:id', loggedIn, get);
 
   logger.silly('setting up GET /states route');
   app.get('/states', loggedIn, get);

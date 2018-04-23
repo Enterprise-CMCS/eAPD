@@ -8,9 +8,8 @@ tap.test('users endpoint setup', async endpointTest => {
   const delEndpoint = sinon.spy();
   const getEndpoint = sinon.spy();
   const postEndpoint = sinon.spy();
-  const putEndpoint = sinon.spy();
 
-  usersIndex(app, delEndpoint, getEndpoint, postEndpoint, putEndpoint);
+  usersIndex(app, delEndpoint, getEndpoint, postEndpoint);
 
   endpointTest.ok(
     delEndpoint.calledWith(app),
@@ -23,9 +22,5 @@ tap.test('users endpoint setup', async endpointTest => {
   endpointTest.ok(
     postEndpoint.calledWith(app),
     'users POST endpoint is setup with the app'
-  );
-  endpointTest.ok(
-    putEndpoint.calledWith(app),
-    'users PUT endpoint is setup with the app'
   );
 });
