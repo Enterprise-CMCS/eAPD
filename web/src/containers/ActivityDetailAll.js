@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ActivityDetailContractorResources from './ActivityDetailContractorResources';
 import ActivityDetailDescription from './ActivityDetailDescription';
 import ActivityDetailGoals from './ActivityDetailGoals';
 import ActivityDetailSchedule from './ActivityDetailSchedule';
@@ -20,6 +21,7 @@ const ActivityDetailAll = ({ aId, title }) => (
     <ActivityDetailDescription aId={aId} />
     <ActivityDetailGoals aId={aId} />
     <ActivityDetailSchedule aId={aId} />
+    <ActivityDetailContractorResources aId={aId} />
     <ActivityDetailStandardsAndConditions aId={aId} />
   </Collapsible>
 );
