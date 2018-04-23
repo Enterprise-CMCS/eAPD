@@ -4,8 +4,7 @@ const {
   getFullPath,
   login,
   request,
-  unauthenticatedTest,
-  unauthorizedTest
+  unauthenticatedTest
 } = require('../utils');
 
 const { invalid: invalidData } = require('../../test-data/state');
@@ -89,36 +88,6 @@ tap.test('states endpoint | PUT /states', async putUserStateTest => {
     'when authenticated as a user with an associated state',
     async validUserTests => {
       const cookies = await login('user2@email', 'something');
-      sharedTests(url, cookies, validUserTests);
-    }
-  );
-});
-
-tap.test('states endpoint | PUT /states/:id', async putUserStateTest => {
-  const url = getFullPath('/states/mn');
-  await db().seed.run();
-
-  unauthenticatedTest('put', url, putUserStateTest);
-  unauthorizedTest('put', url, putUserStateTest);
-
-  putUserStateTest.test(
-    'when authenticated as a user with permission',
-    async validUserTests => {
-      const cookies = await login();
-
-      validUserTests.test('with a non-existant state ID', async invalidTest => {
-        const { response, body } = await request.put(
-          getFullPath('/states/baloney'),
-          {
-            jar: cookies,
-            json: true
-          }
-        );
-
-        invalidTest.equal(response.statusCode, 404, 'gives a 404 status code');
-        invalidTest.notOk(body, 'does not send a body');
-      });
-
       sharedTests(url, cookies, validUserTests);
     }
   );

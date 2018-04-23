@@ -28,17 +28,20 @@ tap.test(
       validTest.same(
         body,
         [
-          { id: 1001, name: 'view-roles' },
-          { id: 1002, name: 'create-roles' },
-          { id: 1003, name: 'edit-roles' },
-          { id: 1004, name: 'delete-roles' },
-          { id: 1005, name: 'view-users' },
-          { id: 1006, name: 'add-users' },
-          { id: 1007, name: 'view-activities' },
-          { id: 1008, name: 'edit-users' },
-          { id: 1009, name: 'view-state' },
-          { id: 1010, name: 'edit-state' },
-          { id: 1011, name: 'delete-users' }
+          { id: 1001, name: 'view-users' },
+          { id: 1002, name: 'add-users' },
+          { id: 1003, name: 'view-roles' },
+          { id: 1004, name: 'create-roles' },
+          { id: 1005, name: 'edit-roles' },
+          { id: 1006, name: 'submit-federal-response' },
+          { id: 1007, name: 'submit-clearance' },
+          { id: 1008, name: 'edit-comments' },
+          { id: 1009, name: 'submit-document' },
+          { id: 1010, name: 'submit-state-response' },
+          { id: 1011, name: 'create-draft' },
+          { id: 1012, name: 'edit-document' },
+          { id: 1013, name: 'edit-response' },
+          { id: 1014, name: 'delete-users' }
         ],
         'returns an array of activities'
       );

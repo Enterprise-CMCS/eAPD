@@ -35,26 +35,44 @@ tap.test('auth roles endpoint | GET /auth/roles', async getUsersTest => {
           id: 1101,
           activities: [
             'add-users',
+            'create-draft',
             'create-roles',
-            'delete-roles',
             'delete-users',
+            'edit-comments',
+            'edit-document',
+            'edit-response',
             'edit-roles',
-            'edit-state',
-            'edit-users',
-            'view-activities',
+            'submit-clearance',
+            'submit-document',
+            'submit-federal-response',
+            'submit-state-response',
             'view-roles',
-            'view-state',
             'view-users'
           ]
         },
         {
-          name: 'cms-reviewer',
+          name: 'federal analyst',
           id: 1102,
           activities: ['edit-roles']
         },
         {
-          name: 'state-submitter',
+          name: 'federal leadership',
           id: 1103,
+          activities: []
+        },
+        {
+          name: 'federal SME',
+          id: 1104,
+          activities: []
+        },
+        {
+          name: 'state coordinator',
+          id: 1105,
+          activities: []
+        },
+        {
+          name: 'state SME',
+          id: 1106,
           activities: []
         }
       ],
