@@ -20,7 +20,20 @@ const newActivity = id => ({
   descLong: '',
   altApproach: '',
   goals: [newGoal()],
-  milestones: [newMilestone(), newMilestone(), newMilestone()]
+  milestones: [newMilestone(), newMilestone(), newMilestone()],
+  standardsAndConditions: {
+    modularity: '',
+    mita: '',
+    industry: '',
+    leverage: '',
+    bizResults: '',
+    reporting: '',
+    interoperability: '',
+    mitigation: '',
+    keyPersonnel: '',
+    documentation: '',
+    minimizeCost: ''
+  }
 });
 
 const initialState = {
