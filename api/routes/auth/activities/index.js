@@ -4,7 +4,7 @@ const can = require('../../../middleware').can;
 
 module.exports = (app, ActivityModel = defaultActivityModel) => {
   logger.silly('setting up GET /auth/activities route');
-  app.get('/auth/activities', can('view-activities'), async (req, res) => {
+  app.get('/auth/activities', can('view-roles'), async (req, res) => {
     logger.silly(req, 'handling GET /auth/activities');
     try {
       const activities = (await ActivityModel.fetchAll({
