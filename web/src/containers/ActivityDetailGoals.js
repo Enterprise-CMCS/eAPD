@@ -22,7 +22,7 @@ class ActivityDetailGoals extends Component {
     const { activity, addActivityGoal } = this.props;
 
     return (
-      <Collapsible title="Needs and Objectives" open>
+      <Collapsible title="Needs and Objectives">
         <div className="mb2">
           List the goals you’re hoping to accomplish as part of this activity:
         </div>

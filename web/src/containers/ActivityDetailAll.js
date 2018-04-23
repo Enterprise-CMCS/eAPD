@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import ActivityDetailDescription from './ActivityDetailDescription';
 import ActivityDetailGoals from './ActivityDetailGoals';
+import ActivityDetailSchedule from './ActivityDetailSchedule';
 import Collapsible from '../components/Collapsible';
 
 const activityTitle = (a, i) => {
@@ -17,6 +18,7 @@ const ActivityDetailAll = ({ aId, title }) => (
   <Collapsible title={title} bgColor="darken-1" open>
     <ActivityDetailDescription aId={aId} />
     <ActivityDetailGoals aId={aId} />
+    <ActivityDetailSchedule aId={aId} />
   </Collapsible>
 );
 
