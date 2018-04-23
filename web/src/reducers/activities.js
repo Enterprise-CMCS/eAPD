@@ -3,12 +3,22 @@ import u from 'updeep';
 import {
   ADD_ACTIVITY,
   ADD_ACTIVITY_GOAL,
+  ADD_ACTIVITY_EXPENSE,
   ADD_ACTIVITY_MILESTONE,
   REMOVE_ACTIVITY_MILESTONE,
   UPDATE_ACTIVITY
 } from '../actions/activities';
 
 const newGoal = () => ({ desc: '', obj: '' });
+
+const newExpense = () => ({
+  category: 'Expense A',
+  desc: '',
+  years: {
+    2018: 100,
+    2019: 100
+  }
+});
 
 const newMilestone = () => ({ name: '', start: '', end: '' });
 
@@ -20,6 +30,7 @@ const newActivity = id => ({
   descLong: '',
   altApproach: '',
   goals: [newGoal()],
+  expenses: [newExpense(), newExpense(), newExpense()],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
   standardsAndConditions: {
     modularity: '',
@@ -64,6 +75,14 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case ADD_ACTIVITY_EXPENSE:
+      return u({
+        byId: {
+          [action.id]: {
+            expenses: expenses => [...expenses, newExpense()]
+          }
+        }
+      });
     case ADD_ACTIVITY_MILESTONE:
       return u(
         {
