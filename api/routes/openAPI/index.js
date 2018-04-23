@@ -52,6 +52,21 @@ module.exports = {
             type: 'string',
             description: 'Activity description'
           },
+          otherFundingSources: {
+            type: 'object',
+            properties: {
+              description: {
+                type: 'string',
+                description:
+                  'Description of the other funding sources for this activity'
+              },
+              amount: {
+                type: 'number',
+                description:
+                  'The total funding provided by the other sources described here'
+              }
+            }
+          },
           expenses: arrayOf({
             type: 'object',
             description: 'Activity expense',

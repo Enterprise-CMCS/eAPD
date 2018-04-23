@@ -32,8 +32,21 @@ module.exports = {
       return this.hasMany('apdActivityStatePersonnel');
     },
 
+    format: attr => ({
+      id: attr.id,
+      apd_id: attr.apd_id,
+      name: attr.name,
+      description: attr.description,
+      other_funding_sources_description: attr.otherFundingSources
+        ? attr.otherFundingSources.description
+        : '',
+      other_funding_sources_amount: attr.otherFundingSources
+        ? attr.otherFundingSources.amount
+        : 0
+    }),
+
     static: {
-      updateableFields: ['name', 'description'],
+      updateableFields: ['name', 'description', 'otherFundingSources'],
       owns: {
         goals: 'apdActivityGoal',
         approaches: 'apdActivityApproach',
@@ -86,7 +99,11 @@ module.exports = {
         contractorResources: this.related('contractorResources'),
         expenses: this.related('expenses'),
         schedule: this.related('schedule'),
-        statePersonnel: this.related('statePersonnel')
+        statePersonnel: this.related('statePersonnel'),
+        otherFundingSources: {
+          description: this.get('other_funding_sources_description'),
+          amount: this.get('other_funding_sources_amount')
+        }
       };
     }
   }
