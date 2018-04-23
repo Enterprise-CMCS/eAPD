@@ -34,7 +34,7 @@ tap.test('auth roles DELETE endpoint', async endpointTest => {
     setupTest.ok(
       app.delete.calledWith(
         '/auth/roles/:id',
-        can('delete-roles'),
+        can('edit-roles'),
         sinon.match.func
       ),
       'roles DELETE endpoint is registered'

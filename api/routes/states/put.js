@@ -1,7 +1,7 @@
 const logger = require('../../logger')('states route put');
 const joi = require('joi');
 const pick = require('lodash.pick');
-const { can, loggedIn } = require('../../middleware');
+const { loggedIn } = require('../../middleware');
 const defaultDataHelper = require('./data');
 
 module.exports = (app, dataHelper = defaultDataHelper) => {
@@ -127,9 +127,6 @@ module.exports = (app, dataHelper = defaultDataHelper) => {
       return res.status(500).end();
     }
   };
-
-  logger.silly('setting up PUT /states/:id route');
-  app.put('/states/:id', can('edit-state'), put);
 
   logger.silly('setting up PUT /states route');
   app.put('/states', loggedIn, put);

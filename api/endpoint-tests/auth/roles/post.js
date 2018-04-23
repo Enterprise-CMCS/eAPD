@@ -73,7 +73,7 @@ tap.test('auth roles endpoint | POST /auth/roles', async postRolesTests => {
       body.activities.sort();
       validTest.same(
         body.activities,
-        ['create-roles', 'view-roles'],
+        ['add-users', 'view-users'],
         'sends back the list of activities'
       );
 
