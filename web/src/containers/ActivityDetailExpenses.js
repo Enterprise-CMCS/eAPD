@@ -51,7 +51,7 @@ class ActivityDetailExpenses extends Component {
             </thead>
             <tbody>
               {expenses.map((expense, i) => (
-                <tr key={`expense-${i}`}>
+                <tr key={expense.idx}>
                   <td className="mono">{i + 1}.</td>
                   <td>
                     <select

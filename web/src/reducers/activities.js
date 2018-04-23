@@ -11,7 +11,8 @@ import {
 
 const newGoal = () => ({ desc: '', obj: '' });
 
-const newExpense = () => ({
+const newExpense = idx => ({
+  idx,
   category: 'Expense A',
   desc: '',
   years: {
@@ -30,7 +31,7 @@ const newActivity = id => ({
   descLong: '',
   altApproach: '',
   goals: [newGoal()],
-  expenses: [newExpense(), newExpense(), newExpense()],
+  expenses: [newExpense(0), newExpense(1), newExpense(2)],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
   standardsAndConditions: {
     modularity: '',
@@ -76,13 +77,16 @@ const reducer = (state = initialState, action) => {
         state
       );
     case ADD_ACTIVITY_EXPENSE:
-      return u({
-        byId: {
-          [action.id]: {
-            expenses: expenses => [...expenses, newExpense()]
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              expenses: expenses => [...expenses, newExpense(expenses.length)]
+            }
           }
-        }
-      });
+        },
+        state
+      );
     case ADD_ACTIVITY_MILESTONE:
       return u(
         {
