@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import ActivityDetailAll from './ActivityDetailAll';
 import ActivityListEntry from './ActivityListEntry';
-import ActivityDetailStandardsAndConditions from './ActivityDetailStandardsAndConditions';
 import { addActivity as addActivityAction } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import Container from '../components/Container';
@@ -32,7 +31,6 @@ const Activities = ({ activityIds, addActivity }) => (
       {activityIds.map((aId, idx) => (
         <Fragment key={aId}>
           <ActivityDetailAll aId={aId} num={idx + 1} />
-          <ActivityDetailStandardsAndConditions aId={aId} />
         </Fragment>
       ))}
     </Section>
