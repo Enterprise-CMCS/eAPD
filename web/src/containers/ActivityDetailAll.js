@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import ActivityDetailDescription from './ActivityDetailDescription';
 import ActivityDetailGoals from './ActivityDetailGoals';
 import ActivityDetailSchedule from './ActivityDetailSchedule';
+import ActivityDetailExpenses from './ActivityDetailExpenses';
 import ActivityDetailStandardsAndConditions from './ActivityDetailStandardsAndConditions';
 import Collapsible from '../components/Collapsible';
 
@@ -20,6 +21,7 @@ const ActivityDetailAll = ({ aId, title }) => (
     <ActivityDetailDescription aId={aId} />
     <ActivityDetailGoals aId={aId} />
     <ActivityDetailSchedule aId={aId} />
+    <ActivityDetailExpenses aId={aId} />
     <ActivityDetailStandardsAndConditions aId={aId} />
   </Collapsible>
 );

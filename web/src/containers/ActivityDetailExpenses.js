@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import {
   addActivityExpense,
+  removeActivityExpense,
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
@@ -27,7 +28,12 @@ class ActivityDetailExpenses extends Component {
   };
 
   render() {
-    const { activity: { expenses }, years } = this.props;
+    const {
+      activity: { id: activityID, expenses },
+      years,
+      addExpense,
+      removeExpense
+    } = this.props;
 
     return (
       <Collapsible title="Expenses">
@@ -47,6 +53,7 @@ class ActivityDetailExpenses extends Component {
                     {year} Cost
                   </th>
                 ))}
+                <th className="col-1" />
               </tr>
             </thead>
             <tbody>
@@ -86,11 +93,28 @@ class ActivityDetailExpenses extends Component {
                       />
                     </td>
                   ))}
+                  <td className="center align-middle">
+                    <button
+                      type="button"
+                      className="btn btn-outline border-silver px1 py-tiny"
+                      title="Remove Expense"
+                      onClick={() => removeExpense(activityID, i)}
+                    >
+                      ✗
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <button
+          type="button"
+          className="btn btn-primary bg-black"
+          onClick={() => addExpense(activityID)}
+        >
+          Add expense
+        </button>
       </Collapsible>
     );
   }
@@ -99,7 +123,8 @@ class ActivityDetailExpenses extends Component {
 ActivityDetailExpenses.propTypes = {
   activity: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
-  addActivityExpense: PropTypes.object.isRequired,
+  addExpense: PropTypes.func.isRequired,
+  removeExpense: PropTypes.func.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
 
@@ -121,6 +146,7 @@ const mapStateToProps = ({ activities: { byId } }, { aId }) => {
 
 const mapDispatchToProps = {
   addExpense: addActivityExpense,
+  removeExpense: removeActivityExpense,
   updateActivity: updateActivityAction
 };
 
