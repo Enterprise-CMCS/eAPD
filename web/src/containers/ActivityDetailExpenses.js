@@ -8,7 +8,7 @@ import {
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { Textarea } from '../components/Inputs2';
+import { Input, Textarea } from '../components/Inputs2';
 
 class ActivityDetailExpenses extends Component {
   handleChange = (index, key) => e => {
@@ -85,9 +85,10 @@ class ActivityDetailExpenses extends Component {
                   </td>
                   {years.map(year => (
                     <td key={year}>
-                      <input
+                      <Input
+                        name={`expense-${i}-${year}-cost`}
+                        label={`Cost for ${year}`}
                         type="number"
-                        className="m0 input"
                         value={expense.years[year]}
                         onChange={this.handleYearChange(i, year)}
                       />
