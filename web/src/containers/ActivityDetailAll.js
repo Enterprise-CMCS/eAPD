@@ -7,6 +7,7 @@ import ActivityDetailGoals from './ActivityDetailGoals';
 import ActivityDetailSchedule from './ActivityDetailSchedule';
 import ActivityDetailExpenses from './ActivityDetailExpenses';
 import ActivityDetailStandardsAndConditions from './ActivityDetailStandardsAndConditions';
+import DeleteActivity from './DeleteActivity';
 import Collapsible from '../components/Collapsible';
 
 const activityTitle = (a, i) => {
@@ -23,6 +24,7 @@ const ActivityDetailAll = ({ aId, title }) => (
     <ActivityDetailSchedule aId={aId} />
     <ActivityDetailExpenses aId={aId} />
     <ActivityDetailStandardsAndConditions aId={aId} />
+    <DeleteActivity aId={aId} />
   </Collapsible>
 );
 
