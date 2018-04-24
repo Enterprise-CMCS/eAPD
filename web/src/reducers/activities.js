@@ -4,6 +4,7 @@ import {
   ADD_ACTIVITY,
   ADD_ACTIVITY_GOAL,
   ADD_ACTIVITY_MILESTONE,
+  REMOVE_ACTIVITY,
   REMOVE_ACTIVITY_MILESTONE,
   UPDATE_ACTIVITY
 } from '../actions/activities';
@@ -75,6 +76,15 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case REMOVE_ACTIVITY: {
+      const byId = { ...state.byId };
+      delete byId[action.id];
+
+      return {
+        byId,
+        allIds: state.allIds.filter(id => id !== action.id)
+      };
+    }
     case REMOVE_ACTIVITY_MILESTONE:
       return u(
         {
