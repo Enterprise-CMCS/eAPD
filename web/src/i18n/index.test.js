@@ -1,6 +1,5 @@
 import I18n, { t } from './index';
 
-import en from './locales/en.json';
 import fr from './locales/fr.json';
 
 describe('i18n translations', () => {
