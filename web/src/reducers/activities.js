@@ -55,10 +55,12 @@ const initialState = {
   allIds: [1]
 };
 
+const nextSequence = list => Math.max(...list, 0) + 1;
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ACTIVITY: {
-      const id = Math.max(...state.allIds, 0) + 1;
+      const id = nextSequence(state.allIds);
       return {
         byId: {
           ...state.byId,
@@ -83,7 +85,10 @@ const reducer = (state = initialState, action) => {
         {
           byId: {
             [action.id]: {
-              expenses: expenses => [...expenses, newExpense(expenses.length)]
+              expenses: expenses => [
+                ...expenses,
+                newExpense(nextSequence(expenses.map(e => e.idx)))
+              ]
             }
           }
         },
