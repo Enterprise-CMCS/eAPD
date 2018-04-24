@@ -30,7 +30,7 @@
     "schedule": {
       "title": "Activity Schedule",
       "subheader":
-        "List the major milestones you're working towards as part of this activity",
+        "List the major milestones you’re working towards as part of this activity",
       "noMilestonesNotice": "Oh no! Please add milestones for this activity.",
       "milestoneHeader": "Milestone",
       "milestoneLabel": "milestone name",
