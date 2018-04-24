@@ -27,7 +27,7 @@ class ActivityDetailSchedule extends Component {
     } = this.props;
 
     return (
-      <Collapsible title="Activity Schedule" open>
+      <Collapsible title="Activity Schedule">
         <div className="mb2">
           List the major milestones you’re working towards as part of this
           activity:
