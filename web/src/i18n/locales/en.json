@@ -1,3 +1,117 @@
 {
-  "test": "Hello!"
+  "title": "{{year}} HITECH APD",
+  "login": "Log in",
+  "logout": "Log out",
+  "notifications": "Notifications",
+  "help": "Help",
+
+  "activities": {
+    "title": "Program Activities",
+    "listTitle": "Activity List",
+    "addActivityButtonText": "Add activity",
+    "header": "Program Activities",
+    "namePrefix": "Activity",
+    "description": {
+      "title": "Activity Description",
+      "summaryHeader": "Summary",
+      "detailHeader": "Please describe the activity in detail",
+      "alternativesHeader":
+        "State of alternative considerations and supporting justification"
+    },
+    "goals": {
+      "title": "Needs and Objectives",
+      "subheader":
+        "List the goals you're hoping to accomplish as part of this activity:",
+      "goalHeader": "Goal #{{number}}",
+      "objectiveHeader":
+        "Tell us how you'll know when you've achieved this goal",
+      "addGoalButtonText": "Add goal"
+    },
+    "schedule": {
+      "title": "Activity Schedule",
+      "subheader":
+        "List the major milestones you're working towards as part of this activity",
+      "noMilestonesNotice": "Oh no! Please add milestones for this activity.",
+      "milestoneHeader": "Milestone",
+      "milestoneLabel": "milestone name",
+      "startHeader": "Planned start",
+      "startLabel": "planned start date",
+      "endHeader": "Planned end",
+      "endLabel": "planned end date",
+      "removeLabel": "remove milestone",
+      "addMilestoneButtonText": "Add milestone"
+    },
+    "standardsAndConditions": {
+      "title": "Standards & Conditions",
+      "subheader":
+        "Tell us how you'll meet the Medicaid standards and conditions",
+      "modularity": {
+        "title": "Modularity",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the Modularity condition"
+      },
+      "mita": {
+        "title": "Medicaid Information Technology Architecture (MITA)",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the MITA condition"
+      },
+      "industry": {
+        "title": "Industry Standards",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the Industry Standards condition"
+      },
+      "leverage": {
+        "title": "Leverage",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the Leverage condition"
+      },
+      "bizResults": {
+        "title": "Business Results",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the Business Results condition"
+      },
+      "reporting": {
+        "title": "Reporting",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the Reporting condition"
+      },
+      "interoperability": {
+        "title": "Interoperability",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the Interoperability condition"
+      },
+      "mitigation": {
+        "title": "Mitigation Strategy",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the Mitigation Strategy condition"
+      },
+      "keyPersonnel": {
+        "title": "Key Personnel",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the Key Personnel condition"
+      },
+      "documentation": {
+        "title": "Documentation",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the Documentation condition"
+      },
+      "minimizeCost": {
+        "title":
+          "Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System",
+        "description":
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto...",
+        "prompt": "Describe how you'll meet the Cost Minimization condition"
+      }
+    }
+  }
 }
