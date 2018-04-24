@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { t } from '../i18n';
 
@@ -30,9 +30,7 @@ const Activities = ({ activityIds, addActivity }) => (
         </button>
       </Collapsible>
       {activityIds.map((aId, idx) => (
-        <Fragment key={aId}>
-          <ActivityDetailAll aId={aId} num={idx + 1} />
-        </Fragment>
+        <ActivityDetailAll key={aId} aId={aId} num={idx + 1} />
       ))}
     </Section>
   </Container>

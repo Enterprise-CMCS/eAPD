@@ -28,7 +28,7 @@ class ActivityDetailSchedule extends Component {
     } = this.props;
 
     return (
-      <Collapsible title={t('activities.schedule.title')} open>
+      <Collapsible title={t('activities.schedule.title')}>
         <div className="mb2">{t('activities.schedule.subheader')}</div>
 
         {activity.milestones.length === 0 ? (
