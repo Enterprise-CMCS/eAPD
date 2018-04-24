@@ -9,6 +9,13 @@
     "title": "Program Activities",
     "listTitle": "Activity List",
     "addActivityButtonText": "Add activity",
+    "deleteActivityButtonText": "Remove Activity",
+    "delete": {
+      "header": "Please confirm",
+      "body": "Are you sure you’d like to remove this activity?",
+      "yes": "Yes",
+      "no": "Cancel"
+    },
     "header": "Program Activities",
     "namePrefix": "Activity",
     "description": {
