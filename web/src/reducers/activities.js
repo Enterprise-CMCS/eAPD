@@ -2,20 +2,34 @@ import u from 'updeep';
 
 import {
   ADD_ACTIVITY,
-  ADD_ACTIVITY_CONTRACTOR_RESOURCE,
+  ADD_ACTIVITY_CONTRACTOR,
   ADD_ACTIVITY_GOAL,
   ADD_ACTIVITY_EXPENSE,
   ADD_ACTIVITY_MILESTONE,
+  ADD_ACTIVITY_STATE_PERSON,
   REMOVE_ACTIVITY,
-  REMOVE_ACTIVITY_CONTRACTOR_RESOURCE,
+  REMOVE_ACTIVITY_CONTRACTOR,
   REMOVE_ACTIVITY_EXPENSE,
   REMOVE_ACTIVITY_MILESTONE,
+  REMOVE_ACTIVITY_STATE_PERSON,
   UPDATE_ACTIVITY
 } from '../actions/activities';
 
 const newGoal = () => ({ desc: '', obj: '' });
 
-const newContractorResource = id => ({
+const newMilestone = () => ({ name: '', start: '', end: '' });
+
+const newStatePerson = id => ({
+  id,
+  title: '',
+  desc: '',
+  years: {
+    2018: { amt: '', perc: '' },
+    2019: { amt: '', perc: '' }
+  }
+});
+
+const newContractor = id => ({
   id,
   name: '',
   desc: '',
@@ -37,18 +51,6 @@ const newExpense = id => ({
   }
 });
 
-const newMilestone = () => ({ name: '', start: '', end: '' });
-
-const newStatePerson = id => ({
-  id,
-  title: '',
-  desc: '',
-  years: {
-    2018: { amt: '', perc: '' },
-    2019: { amt: '', perc: '' }
-  }
-});
-
 const newActivity = id => ({
   id,
   name: '',
@@ -56,17 +58,13 @@ const newActivity = id => ({
   descShort: '',
   descLong: '',
   altApproach: '',
-  contractorResources: [
-    newContractorResource(0),
-    newContractorResource(1),
-    newContractorResource(2)
-  ],
-  goals: [newGoal()],
-  milestones: [newMilestone(), newMilestone(), newMilestone()],
   costAllocateDesc: '',
   otherFundingDesc: '',
   otherFundingAmt: '',
-  statePersonnel: [newStatePerson(1), newStatePerson(2)],
+  goals: [newGoal()],
+  milestones: [newMilestone(), newMilestone(), newMilestone()],
+  statePersonnel: [newStatePerson(1), newStatePerson(2), newStatePerson(3)],
+  contractorResources: [newContractor(1), newContractor(2), newContractor(3)],
   expenses: [newExpense(1), newExpense(2), newExpense(3)],
   standardsAndConditions: {
     modularity: '',
@@ -102,15 +100,61 @@ const reducer = (state = initialState, action) => {
         allIds: [...state.allIds, id]
       };
     }
-    case ADD_ACTIVITY_CONTRACTOR_RESOURCE:
+    case REMOVE_ACTIVITY: {
+      const byId = { ...state.byId };
+      delete byId[action.id];
+      return {
+        byId,
+        allIds: state.allIds.filter(id => id !== action.id)
+      };
+    }
+    case ADD_ACTIVITY_CONTRACTOR:
       return u(
         {
           byId: {
             [action.id]: {
               contractorResources: contractors => [
                 ...contractors,
-                newContractorResource(nextSequence(contractors.map(c => c.id)))
+                newContractor(nextSequence(contractors.map(c => c.id)))
               ]
+            }
+          }
+        },
+        state
+      );
+    case REMOVE_ACTIVITY_CONTRACTOR:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              contractorResources: contractors =>
+                contractors.filter(c => c.id !== action.contractorId)
+            }
+          }
+        },
+        state
+      );
+    case ADD_ACTIVITY_STATE_PERSON:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              statePersonnel: people => [
+                ...people,
+                newStatePerson(nextSequence(people.map(p => p.id)))
+              ]
+            }
+          }
+        },
+        state
+      );
+    case REMOVE_ACTIVITY_STATE_PERSON:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              statePersonnel: people =>
+                people.filter(p => p.id !== action.personId)
             }
           }
         },
@@ -164,28 +208,6 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
-    case REMOVE_ACTIVITY: {
-      const byId = { ...state.byId };
-      delete byId[action.id];
-
-      return {
-        byId,
-        allIds: state.allIds.filter(id => id !== action.id)
-      };
-    }
-    case REMOVE_ACTIVITY_CONTRACTOR_RESOURCE:
-      return u(
-        {
-          byId: {
-            [action.id]: {
-              contractorResources: contractors =>
-                contractors.filter(c => c.id !== action.contractorResourceId)
-            }
-          }
-        },
-        state
-      );
-
     case REMOVE_ACTIVITY_MILESTONE:
       return u(
         {
