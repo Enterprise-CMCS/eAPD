@@ -2,16 +2,30 @@ import u from 'updeep';
 
 import {
   ADD_ACTIVITY,
+  ADD_ACTIVITY_CONTRACTOR_RESOURCE,
   ADD_ACTIVITY_GOAL,
   ADD_ACTIVITY_EXPENSE,
   ADD_ACTIVITY_MILESTONE,
   REMOVE_ACTIVITY,
+  REMOVE_ACTIVITY_CONTRACTOR_RESOURCE,
   REMOVE_ACTIVITY_EXPENSE,
   REMOVE_ACTIVITY_MILESTONE,
   UPDATE_ACTIVITY
 } from '../actions/activities';
 
 const newGoal = () => ({ desc: '', obj: '' });
+
+const newContractorResource = id => ({
+  id,
+  name: '',
+  desc: '',
+  start: '',
+  end: '',
+  years: {
+    2018: 0,
+    2019: 0
+  }
+});
 
 const newExpense = id => ({
   id,
@@ -32,6 +46,11 @@ const newActivity = id => ({
   descShort: '',
   descLong: '',
   altApproach: '',
+  contractorResources: [
+    newContractorResource(0),
+    newContractorResource(1),
+    newContractorResource(2)
+  ],
   goals: [newGoal()],
   expenses: [newExpense(0), newExpense(1), newExpense(2)],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
@@ -72,6 +91,20 @@ const reducer = (state = initialState, action) => {
         allIds: [...state.allIds, id]
       };
     }
+    case ADD_ACTIVITY_CONTRACTOR_RESOURCE:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              contractorResources: contractors => [
+                ...contractors,
+                newContractorResource(nextSequence(contractors.map(c => c.id)))
+              ]
+            }
+          }
+        },
+        state
+      );
     case ADD_ACTIVITY_GOAL:
       return u(
         {
@@ -129,6 +162,19 @@ const reducer = (state = initialState, action) => {
         allIds: state.allIds.filter(id => id !== action.id)
       };
     }
+    case REMOVE_ACTIVITY_CONTRACTOR_RESOURCE:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              contractorResources: contractors =>
+                contractors.filter(c => c.id !== action.contractorResourceId)
+            }
+          }
+        },
+        state
+      );
+
     case REMOVE_ACTIVITY_MILESTONE:
       return u(
         {
