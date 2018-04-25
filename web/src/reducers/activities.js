@@ -39,6 +39,16 @@ const newExpense = id => ({
 
 const newMilestone = () => ({ name: '', start: '', end: '' });
 
+const newStatePerson = id => ({
+  id,
+  title: '',
+  desc: '',
+  years: {
+    2018: { amt: '', perc: '' },
+    2019: { amt: '', perc: '' }
+  }
+});
+
 const newActivity = id => ({
   id,
   name: '',
@@ -52,11 +62,12 @@ const newActivity = id => ({
     newContractorResource(2)
   ],
   goals: [newGoal()],
-  expenses: [newExpense(0), newExpense(1), newExpense(2)],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
   costAllocateDesc: '',
   otherFundingDesc: '',
   otherFundingAmt: '',
+  statePersonnel: [newStatePerson(1), newStatePerson(2)],
+  expenses: [newExpense(1), newExpense(2), newExpense(3)],
   standardsAndConditions: {
     modularity: '',
     mita: '',
