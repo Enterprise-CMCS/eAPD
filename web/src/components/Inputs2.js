@@ -14,10 +14,10 @@ const makeInput = InputInner => {
     label,
     type,
     hideLabel,
-    className,
+    wrapperClass,
     ...rest
   }) => (
-    <div className={className || 'mb2'}>
+    <div className={wrapperClass || 'mb2'}>
       <label
         htmlFor={name}
         className={hideLabel ? 'sr-only' : 'block mb-tiny bold'}
@@ -33,13 +33,13 @@ const makeInput = InputInner => {
     label: PropTypes.string.isRequired,
     type: PropTypes.string,
     hideLabel: PropTypes.bool,
-    className: PropTypes.string
+    wrapperClass: PropTypes.string
   };
 
   InputHolder.defaultProps = {
     type: 'text',
     hideLabel: false,
-    className: ''
+    wrapperClass: ''
   };
 
   return InputHolder;
