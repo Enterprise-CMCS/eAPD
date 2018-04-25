@@ -17,13 +17,10 @@ export const addActivityContractorResource = id => ({
   type: ADD_ACTIVITY_CONTRACTOR_RESOURCE,
   id
 });
-export const removeActivityContractorResource = (
-  id,
-  contractorResourceIdx
-) => ({
+export const removeActivityContractorResource = (id, contractorResourceId) => ({
   type: REMOVE_ACTIVITY_CONTRACTOR_RESOURCE,
   id,
-  contractorResourceIdx
+  contractorResourceId
 });
 
 export const addActivityGoal = id => ({ type: ADD_ACTIVITY_GOAL, id });
