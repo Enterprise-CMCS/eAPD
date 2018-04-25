@@ -9,6 +9,7 @@ import ActivityDetailGoals from './ActivityDetailGoals';
 import ActivityDetailSchedule from './ActivityDetailSchedule';
 import ActivityDetailExpenses from './ActivityDetailExpenses';
 import ActivityDetailStandardsAndConditions from './ActivityDetailStandardsAndConditions';
+import ActivityDetailStatePersonnel from './ActivityDetailStatePersonnel';
 import DeleteActivity from './DeleteActivity';
 import Collapsible from '../components/Collapsible';
 import { t } from '../i18n';
@@ -25,6 +26,7 @@ const ActivityDetailAll = ({ aId, title }) => (
     <ActivityDetailDescription aId={aId} />
     <ActivityDetailGoals aId={aId} />
     <ActivityDetailSchedule aId={aId} />
+    <ActivityDetailStatePersonnel aId={aId} />
     <ActivityDetailContractorResources aId={aId} />
     <ActivityDetailExpenses aId={aId} />
     <ActivityDetailCostAllocate aId={aId} />
