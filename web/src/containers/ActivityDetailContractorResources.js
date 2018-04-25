@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { t } from '../i18n';
 import {
   addActivityContractorResource,
   removeActivityContractorResource,
@@ -38,7 +39,7 @@ class ActivityDetailContractorExpenses extends Component {
     } = this.props;
 
     return (
-      <Collapsible title="Contractor Resources" open>
+      <Collapsible title={t('activities.contractorResources.title')} open>
         <div>
           <div className="overflow-auto">
             <table
@@ -47,13 +48,23 @@ class ActivityDetailContractorExpenses extends Component {
             >
               <thead>
                 <tr>
-                  <th className="col-1">#</th>
-                  <th className="col-4">Name</th>
-                  <th className="col-5">Description of Services</th>
-                  <th className="col-4">Term Period</th>
+                  <th className="col-1">
+                    {t('activities.contractorResources.labels.entryNumber')}
+                  </th>
+                  <th className="col-4">
+                    {t('activities.contractorResources.labels.contractorName')}
+                  </th>
+                  <th className="col-5">
+                    {t('activities.contractorResources.labels.description')}
+                  </th>
+                  <th className="col-4">
+                    {t('activities.contractorResources.labels.term')}
+                  </th>
                   {years.map(year => (
                     <th key={year} className="col-2">
-                      {year} Cost
+                      {t('activities.contractorResources.labels.yearCost', {
+                        year
+                      })}
                     </th>
                   ))}
                   <th className="col-1" />
@@ -66,7 +77,9 @@ class ActivityDetailContractorExpenses extends Component {
                     <td>
                       <Input
                         name={`contractor-${i}-name`}
-                        label="Contractor's name"
+                        label={t(
+                          'activities.contractorResources.srLabels.name'
+                        )}
                         hideLabel
                         type="text"
                         value={contractor.name}
@@ -77,7 +90,9 @@ class ActivityDetailContractorExpenses extends Component {
                       <Textarea
                         id={`contractor-${i}-desc`}
                         name={`contractor-${i}-desc`}
-                        label="Describe the services the contractor will provide"
+                        label={t(
+                          'activities.contractorResources.srLabels.description'
+                        )}
                         rows="3"
                         hideLabel
                         spellCheck="true"
@@ -87,10 +102,14 @@ class ActivityDetailContractorExpenses extends Component {
                     </td>
                     <td>
                       <div className="mb1 flex items-baseline h6">
-                        <span className="mr-tiny w-3 right-align">Start:</span>
+                        <span className="mr-tiny w-3 right-align">
+                          {t('activities.contractorResources.labels.start')}
+                        </span>
                         <Input
                           name={`contractor-${i}-start`}
-                          label="Contractor term start"
+                          label={t(
+                            'activities.contractorResources.srLabels.start'
+                          )}
                           hideLabel
                           type="date"
                           value={contractor.start}
@@ -98,10 +117,14 @@ class ActivityDetailContractorExpenses extends Component {
                         />
                       </div>
                       <div className="mb1 flex items-baseline h6">
-                        <span className="mr-tiny w-3 right-align">End:</span>
+                        <span className="mr-tiny w-3 right-align">
+                          {t('activities.contractorResources.labels.end')}
+                        </span>
                         <Input
                           name={`contractor-${i}-end`}
-                          label="Contractor term end"
+                          label={t(
+                            'activities.contractorResources.srLabels.end'
+                          )}
                           hideLabel
                           type="date"
                           value={contractor.end}
@@ -113,7 +136,10 @@ class ActivityDetailContractorExpenses extends Component {
                       <td key={year}>
                         <Input
                           name={`contractor-${i}-cost-${year}`}
-                          label={`Contractor cost for ${year}`}
+                          label={t(
+                            'activities.contractorResources.srLabels.cost',
+                            { year }
+                          )}
                           hideLabel
                           type="number"
                           value={contractor.years[year]}
@@ -125,7 +151,7 @@ class ActivityDetailContractorExpenses extends Component {
                       <button
                         type="button"
                         className="btn btn-outline border-silver px1 py-tiny"
-                        title="Remove Contractor"
+                        title={t('activities.contractorResources.removeLabel')}
                         onClick={() =>
                           removeContractor(activityID, contractor.id)
                         }
@@ -144,7 +170,7 @@ class ActivityDetailContractorExpenses extends Component {
           className="btn btn-primary bg-black"
           onClick={() => addContractor(activityID)}
         >
-          Add contractor resource
+          {t('activities.contractorResources.addContractorButtonText')}
         </button>
       </Collapsible>
     );
