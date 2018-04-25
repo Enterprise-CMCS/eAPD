@@ -48,6 +48,27 @@
       "removeLabel": "remove milestone",
       "addMilestoneButtonText": "Add milestone"
     },
+    "contractorResources": {
+      "title": "Contractor Resources",
+      "labels": {
+        "entryNumber": "#",
+        "contractorName": "Name",
+        "description": "Description of Services",
+        "term": "Term Period",
+        "start": "Start:",
+        "end": "End:",
+        "yearCost": "{{year}} Cost"
+      },
+      "srLabels": {
+        "name": "Contractor's name",
+        "description": "Describe the services the contractor will provide",
+        "start": "Contractor term start",
+        "end": "Contractor term end",
+        "cost": "Contractor cost for {{year}}"
+      },
+      "removeLabel": "remove contractor",
+      "addContractorButtonText": "Add contractor resource"
+    },
     "costAllocate": {
       "title": "Cost Allocation and Other Funding Sources",
       "label": {
