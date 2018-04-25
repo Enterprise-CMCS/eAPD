@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { t } from '../i18n';
 import { removeActivity as removeActivityAction } from '../actions/activities';
 import { confirmAlert } from '../components/ConfirmAlert';
 
 const DeleteConfirm = ({ onClose, onConfirm }) => (
   <div className="p2 sm-p3 bg-white rounded confirm-body">
-    <h2 className="mt0">Please confirm.</h2>
-    <p>Are you sure you’d like to remove this activity?</p>
+    <h2 className="mt0">{t('activities.delete.header')}</h2>
+    <p>{t('activities.delete.body')}</p>
     <button
       className="btn btn-small btn-primary bg-black h6"
       onClick={() => {
@@ -16,10 +17,10 @@ const DeleteConfirm = ({ onClose, onConfirm }) => (
         onClose();
       }}
     >
-      Yes
+      {t('activities.delete.yes')}
     </button>{' '}
     <button className="btn btn-small btn-outline h6" onClick={onClose}>
-      Cancel
+      {t('activities.delete.no')}
     </button>
   </div>
 );
@@ -51,7 +52,7 @@ class DeleteActivity extends Component {
           className="btn btn-small btn-primary bg-black h6"
           onClick={this.handleClick}
         >
-          Remove Activity
+          {t('activities.deleteActivityButtonText')}
         </button>
       </div>
     );

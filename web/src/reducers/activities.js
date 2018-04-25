@@ -3,13 +3,25 @@ import u from 'updeep';
 import {
   ADD_ACTIVITY,
   ADD_ACTIVITY_GOAL,
+  ADD_ACTIVITY_EXPENSE,
   ADD_ACTIVITY_MILESTONE,
   REMOVE_ACTIVITY,
+  REMOVE_ACTIVITY_EXPENSE,
   REMOVE_ACTIVITY_MILESTONE,
   UPDATE_ACTIVITY
 } from '../actions/activities';
 
 const newGoal = () => ({ desc: '', obj: '' });
+
+const newExpense = idx => ({
+  idx,
+  category: 'Expense A',
+  desc: '',
+  years: {
+    2018: 100,
+    2019: 100
+  }
+});
 
 const newMilestone = () => ({ name: '', start: '', end: '' });
 
@@ -21,6 +33,7 @@ const newActivity = id => ({
   descLong: '',
   altApproach: '',
   goals: [newGoal()],
+  expenses: [newExpense(0), newExpense(1), newExpense(2)],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
   standardsAndConditions: {
     modularity: '',
@@ -42,10 +55,12 @@ const initialState = {
   allIds: [1]
 };
 
+const nextSequence = list => Math.max(...list, 0) + 1;
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ACTIVITY: {
-      const id = Math.max(...state.allIds, 0) + 1;
+      const id = nextSequence(state.allIds);
       return {
         byId: {
           ...state.byId,
@@ -60,6 +75,32 @@ const reducer = (state = initialState, action) => {
           byId: {
             [action.id]: {
               goals: goals => [...goals, newGoal()]
+            }
+          }
+        },
+        state
+      );
+    case ADD_ACTIVITY_EXPENSE:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              expenses: expenses => [
+                ...expenses,
+                newExpense(nextSequence(expenses.map(e => e.idx)))
+              ]
+            }
+          }
+        },
+        state
+      );
+    case REMOVE_ACTIVITY_EXPENSE:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              expenses: expenses =>
+                expenses.filter(expense => expense.idx !== action.expenseIdx)
             }
           }
         },
