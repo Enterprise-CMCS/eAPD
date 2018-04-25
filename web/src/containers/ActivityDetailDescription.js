@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { connect } from 'react-redux';
 
+import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import Icon, { faHelp } from '../components/Icons';
@@ -52,9 +53,9 @@ class ActivityDetailDescription extends Component {
     const { descLong, altApproach } = this.state;
 
     return (
-      <Collapsible title="Activity Description">
+      <Collapsible title={t('activities.description.title')}>
         <div className="mb-tiny bold">
-          Summary
+          {t('activities.description.summaryHeader')}
           <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
         </div>
         <div className="mb3">
@@ -72,7 +73,7 @@ class ActivityDetailDescription extends Component {
 
         <div className="mb3">
           <div className="mb-tiny bold">
-            Please describe the activity in detail
+            {t('activities.description.detailHeader')}
             <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
           </div>
           <Editor
@@ -85,7 +86,7 @@ class ActivityDetailDescription extends Component {
 
         <div className="mb3">
           <div className="mb-tiny bold">
-            Statement of alternative considerations and supporting justification
+            {t('activities.description.alternativesHeader')}
           </div>
           <Editor
             toolbar={EDITOR_CONFIG}

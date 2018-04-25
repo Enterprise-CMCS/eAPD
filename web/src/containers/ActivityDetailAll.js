@@ -9,9 +9,10 @@ import ActivityDetailExpenses from './ActivityDetailExpenses';
 import ActivityDetailStandardsAndConditions from './ActivityDetailStandardsAndConditions';
 import DeleteActivity from './DeleteActivity';
 import Collapsible from '../components/Collapsible';
+import { t } from '../i18n';
 
 const activityTitle = (a, i) => {
-  let title = `Activity ${i}`;
+  let title = `${t('activities.namePrefix')} ${i}`;
   if (a.name) title += `: ${a.name}`;
   if (a.types.length) title += ` (${a.types.join(', ')})`;
   return title;
@@ -35,7 +36,7 @@ ActivityDetailAll.propTypes = {
 
 const mapStateToProps = ({ activities: { byId } }, { aId, num }) => {
   const activity = byId[aId];
-  const title = `Program Activities › ${activityTitle(activity, num)}`;
+  const title = `${t('activities.header')} › ${activityTitle(activity, num)}`;
 
   return { title };
 };
