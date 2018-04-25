@@ -13,10 +13,10 @@ export const addActivityGoal = id => ({ type: ADD_ACTIVITY_GOAL, id });
 
 export const addActivityExpense = id => ({ type: ADD_ACTIVITY_EXPENSE, id });
 
-export const removeActivityExpense = (id, expenseIdx) => ({
+export const removeActivityExpense = (id, expenseId) => ({
   type: REMOVE_ACTIVITY_EXPENSE,
   id,
-  expenseIdx
+  expenseId
 });
 
 export const addActivityMilestone = id => ({

@@ -13,8 +13,8 @@ import {
 
 const newGoal = () => ({ desc: '', obj: '' });
 
-const newExpense = idx => ({
-  idx,
+const newExpense = id => ({
+  id,
   category: 'Expense A',
   desc: '',
   years: {
@@ -55,7 +55,7 @@ const initialState = {
   allIds: [1]
 };
 
-const nextSequence = list => Math.max(...list, 0) + 1;
+const nextSequence = arrOfNums => Math.max(...arrOfNums, 0) + 1;
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -87,7 +87,7 @@ const reducer = (state = initialState, action) => {
             [action.id]: {
               expenses: expenses => [
                 ...expenses,
-                newExpense(nextSequence(expenses.map(e => e.idx)))
+                newExpense(nextSequence(expenses.map(e => e.id)))
               ]
             }
           }
@@ -100,7 +100,7 @@ const reducer = (state = initialState, action) => {
           byId: {
             [action.id]: {
               expenses: expenses =>
-                expenses.filter(expense => expense.idx !== action.expenseIdx)
+                expenses.filter(e => e.id !== action.expenseId)
             }
           }
         },
