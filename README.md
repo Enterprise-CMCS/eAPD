@@ -1,4 +1,4 @@
-[![Build status](https://img.shields.io/circleci/project/github/18F/cms-hitech-apd.svg)](https://circleci.com/gh/18F/cms-hitech-apd)
+[![Build status](https://img.shields.io/circleci/project/github/18F/cms-hitech-apd.svg)](https://circleci.com/gh/18F/workflows/cms-hitech-apd)
 [![Maintainability](https://img.shields.io/codeclimate/maintainability/18F/cms-hitech-apd.svg)](https://codeclimate.com/github/18F/cms-hitech-apd/maintainability)
 [![Test coverage](https://img.shields.io/codecov/c/github/18F/cms-hitech-apd.svg)](https://codecov.io/gh/18F/cms-hitech-apd)
 [![Dependency status](https://img.shields.io/gemnasium/18F/cms-hitech-apd.svg)](https://gemnasium.com/github.com/18F/cms-hitech-apd)
@@ -33,8 +33,7 @@ npm start
 Then, open http://localhost:8001/ in your browser.
 
 To start the API server, make sure (a) your environment variables are
-[configured](docs/api-configuration.md), (b) Postgres is running (i.e., `brew
-services start postgresql`), and (c) the development database exists
+[configured](docs/api-configuration.md), (b) Postgres is running (i.e., `brew services start postgresql`), and (c) the development database exists
 ([db settings](api/knexfile.js)). Then, run these commands from the repo root:
 
 ```
