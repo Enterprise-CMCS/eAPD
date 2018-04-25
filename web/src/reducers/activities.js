@@ -4,8 +4,11 @@ import {
   ADD_ACTIVITY,
   ADD_ACTIVITY_CONTRACTOR_RESOURCE,
   ADD_ACTIVITY_GOAL,
+  ADD_ACTIVITY_EXPENSE,
   ADD_ACTIVITY_MILESTONE,
+  REMOVE_ACTIVITY,
   REMOVE_ACTIVITY_CONTRACTOR_RESOURCE,
+  REMOVE_ACTIVITY_EXPENSE,
   REMOVE_ACTIVITY_MILESTONE,
   UPDATE_ACTIVITY
 } from '../actions/activities';
@@ -24,6 +27,16 @@ const newContractorResource = idx => ({
   }
 });
 
+const newExpense = id => ({
+  id,
+  category: 'Expense A',
+  desc: '',
+  years: {
+    2018: 100,
+    2019: 100
+  }
+});
+
 const newMilestone = () => ({ name: '', start: '', end: '' });
 
 const newActivity = id => ({
@@ -39,7 +52,11 @@ const newActivity = id => ({
     newContractorResource(2)
   ],
   goals: [newGoal()],
+  expenses: [newExpense(0), newExpense(1), newExpense(2)],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
+  costAllocateDesc: '',
+  otherFundingDesc: '',
+  otherFundingAmt: '',
   standardsAndConditions: {
     modularity: '',
     mita: '',
@@ -60,10 +77,12 @@ const initialState = {
   allIds: [1]
 };
 
+const nextSequence = arrOfNums => Math.max(...arrOfNums, 0) + 1;
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ACTIVITY: {
-      const id = Math.max(...state.allIds, 0) + 1;
+      const id = nextSequence(state.allIds);
       return {
         byId: {
           ...state.byId,
@@ -97,6 +116,32 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case ADD_ACTIVITY_EXPENSE:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              expenses: expenses => [
+                ...expenses,
+                newExpense(nextSequence(expenses.map(e => e.id)))
+              ]
+            }
+          }
+        },
+        state
+      );
+    case REMOVE_ACTIVITY_EXPENSE:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              expenses: expenses =>
+                expenses.filter(e => e.id !== action.expenseId)
+            }
+          }
+        },
+        state
+      );
     case ADD_ACTIVITY_MILESTONE:
       return u(
         {
@@ -108,6 +153,15 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case REMOVE_ACTIVITY: {
+      const byId = { ...state.byId };
+      delete byId[action.id];
+
+      return {
+        byId,
+        allIds: state.allIds.filter(id => id !== action.id)
+      };
+    }
     case REMOVE_ACTIVITY_CONTRACTOR_RESOURCE:
       return u(
         {
