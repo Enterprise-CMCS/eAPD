@@ -3,6 +3,11 @@ jobs:
   prepare web dependencies cache:
     docker:
       - image: node:8
+        command:
+          - npm
+          - install
+          - -g
+          - npm@6
     steps:
       - checkout
       - restore_cache:
@@ -10,7 +15,7 @@ jobs:
       - run:
           name: install dependencies
           working_directory: ~/project/web
-          command: npm install
+          command: npm ci
       - save_cache:
           key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
           paths:
@@ -48,7 +53,11 @@ jobs:
   prepare api dependencies cache:
     docker:
       - image: node:8
-      - command: ["npm", "install", "-g", "npm@6"]
+        command:
+          - npm
+          - install
+          - -g
+          - npm@6
     steps:
       - checkout
       - restore_cache:
@@ -56,7 +65,7 @@ jobs:
       - run:
           name: install dependencies
           working_directory: ~/project/api
-          command: npm install
+          command: npm ci
       - save_cache:
           key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
           paths:
@@ -133,6 +142,11 @@ jobs:
   deploy staging:
     docker:
       - image: node:8
+        command:
+          - npm
+          - install
+          - -g
+          - npm@6
     steps:
       - checkout
       - restore_cache:
@@ -146,6 +160,11 @@ jobs:
   deploy ux testing:
     docker:
       - image: node:8
+        command:
+          - npm
+          - install
+          - -g
+          - npm@6
     steps:
       - checkout
       - restore_cache:
@@ -159,6 +178,11 @@ jobs:
   deploy storybook:
     docker:
       - image: node:8
+        command:
+          - npm
+          - install
+          - -g
+          - npm@6
     steps:
       - checkout
       - restore_cache:

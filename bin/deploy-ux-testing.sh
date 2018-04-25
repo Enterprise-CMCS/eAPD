@@ -18,7 +18,7 @@ cf install-plugin autopilot -f -r CF-Community
 
 # Build the front-end
 cd web
-npm install
+npm ci
 npm run build
 cd ..
 
