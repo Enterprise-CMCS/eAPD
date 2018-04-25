@@ -9,7 +9,7 @@ const Select = ({ name, options, label, hideLabel, wrapperClass, ...rest }) => (
     >
       {label}
     </label>
-    <select className="m0 select" {...rest}>
+    <select id={name} className="m0 select" {...rest}>
       {options.map(o => <option key={o}>{o}</option>)}
     </select>
   </div>
