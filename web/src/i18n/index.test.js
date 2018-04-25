@@ -1,6 +1,5 @@
 import I18n, { t } from './index';
 
-import en from './locales/en.json';
 import fr from './locales/fr.json';
 
 describe('i18n translations', () => {
@@ -9,7 +8,7 @@ describe('i18n translations', () => {
   });
 
   test('t function', () => {
-    expect(t('test')).toBe(en.test);
+    expect(t('title', { year: 2018 })).toBe('2018 HITECH APD');
     expect(t('nonsense')).toBe('[missing "en.nonsense" translation]');
   });
 

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { t } from '../i18n';
 import {
   addActivityGoal as addActivityGoalAction,
   updateActivity as updateActivityAction
@@ -22,22 +23,20 @@ class ActivityDetailGoals extends Component {
     const { activity, addActivityGoal } = this.props;
 
     return (
-      <Collapsible title="Needs and Objectives">
-        <div className="mb2">
-          List the goals you’re hoping to accomplish as part of this activity:
-        </div>
+      <Collapsible title={t('activities.goals.title')}>
+        <div className="mb2">{t('activities.goals.subheader')}</div>
         {activity.goals.map((d, i) => (
           <div key={i} className="mb3">
             <Textarea
               name={`goal-${i}`}
-              label={`Goal #${i + 1}`}
+              label={t('activities.goals.goalHeader', { number: i + 1 })}
               rows="5"
               value={d.desc}
               onChange={this.handleChange(i, 'desc')}
             />
             <Textarea
               name={`obj-${i}`}
-              label="Tell us how you’ll know when you’ve achieved this goal"
+              label={t('activities.goals.objectiveHeader')}
               value={d.obj}
               onChange={this.handleChange(i, 'obj')}
             />
@@ -49,7 +48,7 @@ class ActivityDetailGoals extends Component {
           className="btn btn-primary bg-black"
           onClick={() => addActivityGoal(activity.id)}
         >
-          Add goal
+          {t('activities.goals.addGoalButtonText')}
         </button>
       </Collapsible>
     );

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { t } from '../i18n';
 import {
   addActivityMilestone as addActivityMilestoneAction,
   removeActivityMilestone as removeActivityMilestoneAction,
@@ -27,24 +28,27 @@ class ActivityDetailSchedule extends Component {
     } = this.props;
 
     return (
-      <Collapsible title="Activity Schedule">
-        <div className="mb2">
-          List the major milestones you’re working towards as part of this
-          activity:
-        </div>
+      <Collapsible title={t('activities.schedule.title')}>
+        <div className="mb2">{t('activities.schedule.subheader')}</div>
 
         {activity.milestones.length === 0 ? (
           <div className="mb2 p1 h6 alert">
-            <strong>Oh no!</strong> Please add milestones for this activity.
+            {t('activities.schedule.noMilestonesNotice')}
           </div>
         ) : (
           <div className="mb3 overflow-auto">
             <table className="h5 table table-fixed" style={{ minWidth: 500 }}>
               <thead>
                 <tr>
-                  <th className="col-4 sm-col-5">Milestone</th>
-                  <th className="col-4 sm-col-3">Planned start</th>
-                  <th className="col-4 sm-col-3">Planned end</th>
+                  <th className="col-4 sm-col-5">
+                    {t('activities.schedule.milestoneHeader')}
+                  </th>
+                  <th className="col-4 sm-col-3">
+                    {t('activities.schedule.startHeader')}
+                  </th>
+                  <th className="col-4 sm-col-3">
+                    {t('activities.schedule.endHeader')}
+                  </th>
                   <th className="col-1" />
                 </tr>
               </thead>
@@ -54,7 +58,7 @@ class ActivityDetailSchedule extends Component {
                     <td>
                       <Input
                         name={`milestone-${i}-name`}
-                        label="Name"
+                        label={t('activities.schedule.milestoneLabel')}
                         className="m0"
                         hideLabel
                         value={d.name}
@@ -64,7 +68,7 @@ class ActivityDetailSchedule extends Component {
                     <td>
                       <Input
                         name={`milestone-${i}-start`}
-                        label="Planned start date"
+                        label={t('activities.schedule.startLabel')}
                         type="date"
                         className="m0"
                         hideLabel
@@ -75,7 +79,7 @@ class ActivityDetailSchedule extends Component {
                     <td>
                       <Input
                         name={`milestone-${i}-end`}
-                        label="Planned end date"
+                        label={t('activities.schedule.endLabel')}
                         type="date"
                         className="m0"
                         hideLabel
@@ -87,7 +91,7 @@ class ActivityDetailSchedule extends Component {
                       <button
                         type="button"
                         className="btn btn-outline border-silver px1 py-tiny"
-                        title="Remove Milestone"
+                        title={t('activities.schedule.removeLabel')}
                         onClick={() => removeActivityMilestone(activity.id, i)}
                       >
                         ✗
@@ -104,7 +108,7 @@ class ActivityDetailSchedule extends Component {
           className="btn btn-primary bg-black"
           onClick={() => addActivityMilestone(activity.id)}
         >
-          Add milestone
+          {t('activities.schedule.addMilestoneButtonText')}
         </button>
       </Collapsible>
     );

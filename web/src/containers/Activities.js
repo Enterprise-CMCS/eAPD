@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { t } from '../i18n';
 
 import ActivityDetailAll from './ActivityDetailAll';
 import ActivityListEntry from './ActivityListEntry';
@@ -13,8 +14,8 @@ import SectionTitle from '../components/SectionTitle';
 const Activities = ({ activityIds, addActivity }) => (
   <Container>
     <Section>
-      <SectionTitle>Program Activities</SectionTitle>
-      <Collapsible title="Activity List" open>
+      <SectionTitle>{t('activities.title')}</SectionTitle>
+      <Collapsible title={t('activities.listTitle')} open>
         <div className="mb2">
           {activityIds.map((aId, idx) => (
             <ActivityListEntry key={aId} aId={aId} num={idx + 1} />
@@ -25,7 +26,7 @@ const Activities = ({ activityIds, addActivity }) => (
           className="mt2 btn btn-primary"
           onClick={addActivity}
         >
-          Add activity
+          {t('activities.addActivityButtonText')}
         </button>
       </Collapsible>
       {activityIds.map((aId, idx) => (

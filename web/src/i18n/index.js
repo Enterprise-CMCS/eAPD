@@ -26,6 +26,15 @@ export const initI18n = () => {
   I18n.locale = locale;
 };
 
-export const t = (name, params = {}) => I18n.t(name, params);
+export const t =
+  process.env.NODE_ENV === 'production'
+    ? (name, params = {}) => I18n.t(name, params)
+    : (name, params = {}) => {
+        // eslint-disable-next-line no-restricted-globals
+        if (location.hash.includes('i18n')) {
+          return `[${Array.isArray(name) ? name.join('.') : name}]`;
+        }
+        return I18n.t(name, params);
+      };
 
 export default I18n;
