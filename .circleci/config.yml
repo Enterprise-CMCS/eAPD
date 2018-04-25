@@ -131,7 +131,7 @@ jobs:
 
   try restoring multiple:
     docker:
-      -image: node:8
+      - image: node:8
     steps:
       - checkout
       - restore_cache:
