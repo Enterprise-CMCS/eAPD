@@ -24,7 +24,7 @@ ShallowWrapper {
         <p
           className="mt3"
         >
-          Hello!
+          2018 HITECH APD
         </p>
       </div>,
     },
@@ -39,7 +39,7 @@ ShallowWrapper {
           <p
             className="mt3"
           >
-            Hello!
+            2018 HITECH APD
           </p>,
         ],
         "className": "my3 py4 center",
@@ -60,11 +60,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Hello!",
+            "children": "2018 HITECH APD",
             "className": "mt3",
           },
           "ref": null,
-          "rendered": "Hello!",
+          "rendered": "2018 HITECH APD",
           "type": "p",
         },
       ],
@@ -85,7 +85,7 @@ ShallowWrapper {
           <p
             className="mt3"
           >
-            Hello!
+            2018 HITECH APD
           </p>
         </div>,
       },
@@ -100,7 +100,7 @@ ShallowWrapper {
             <p
               className="mt3"
             >
-              Hello!
+              2018 HITECH APD
             </p>,
           ],
           "className": "my3 py4 center",
@@ -121,11 +121,11 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "Hello!",
+              "children": "2018 HITECH APD",
               "className": "mt3",
             },
             "ref": null,
-            "rendered": "Hello!",
+            "rendered": "2018 HITECH APD",
             "type": "p",
           },
         ],
