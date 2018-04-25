@@ -129,6 +129,19 @@ jobs:
           working_directory: ~/project/api
           command: npm run test-endpoints
 
+  try restoring multiple:
+    docker:
+      -image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
+      - restore_cache:
+          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - run:
+          name: iunno
+          command: echo 'hi'
+
   deploy staging:
     docker:
       - image: node:8
@@ -136,6 +149,8 @@ jobs:
       - checkout
       - restore_cache:
           key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
+      - restore_cache:
+          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
       - run:
           name: deploy to prod
           command: ./bin/deploy.sh
@@ -183,6 +198,12 @@ workflows:
       - api endpoint test:
           requires:
              - prepare api dependencies cache
+
+      - try restoring multiple:
+          requires:
+            - prepare web dependencies cache
+            - prepare api dependencies cache
+
       - deploy staging:
           filters:
             branches:
