@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 
 import Icon, { faHelp } from './Icons';
-import { EDITOR_CONFIG } from '../util';
+import { EDITOR_CONFIG } from '../util/editor';
 
 class CostAllocation extends Component {
   state = {

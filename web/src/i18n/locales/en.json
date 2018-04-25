@@ -48,6 +48,14 @@
       "removeLabel": "remove milestone",
       "addMilestoneButtonText": "Add milestone"
     },
+    "costAllocate": {
+      "title": "Cost Allocation and Other Funding Sources",
+      "label": {
+        "costAllocateDesc": "Cost allocation methodology",
+        "otherFundingDesc": "Other funding description",
+        "otherFundingAmt": "Other funding amount"
+      }
+    },
     "standardsAndConditions": {
       "title": "Standards & Conditions",
       "subheader":

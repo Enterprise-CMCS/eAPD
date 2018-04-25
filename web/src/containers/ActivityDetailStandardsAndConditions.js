@@ -23,36 +23,21 @@ class ActivityDetailStandardsAndConditions extends Component {
     return (
       <Collapsible title={t('activities.standardsAndConditions.title')}>
         <p>{t('activities.standardsAndConditions.subheader')}</p>
-        {STANDARDS.map(std => {
-          const inputId = `a-${activity.id}-standards-${std.id}`;
-          return (
-            <div key={std.id}>
-              <h3>
-                {t([`activities.standardsAndConditions`, std.id, 'title'])}
-              </h3>
-              <p>
-                {t([
-                  `activities.standardsAndConditions`,
-                  std.id,
-                  'description'
-                ])}
-              </p>
-              <Textarea
-                id={inputId}
-                name={`condition-${std.id}`}
-                label={t([
-                  `activities.standardsAndConditions`,
-                  std.id,
-                  'prompt'
-                ])}
-                rows="3"
-                spellCheck="true"
-                value={activity.standardsAndConditions[std.id]}
-                onChange={this.handleChange(std.id)}
-              />
-            </div>
-          );
-        })}
+        {STANDARDS.map(std => (
+          <div key={std.id}>
+            <h3>{t([`activities.standardsAndConditions`, std.id, 'title'])}</h3>
+            <p>
+              {t([`activities.standardsAndConditions`, std.id, 'description'])}
+            </p>
+            <Textarea
+              name={`activity-${activity.id}-condition-${std.id}`}
+              label={t([`activities.standardsAndConditions`, std.id, 'prompt'])}
+              rows="3"
+              value={activity.standardsAndConditions[std.id]}
+              onChange={this.handleChange(std.id)}
+            />
+          </div>
+        ))}
       </Collapsible>
     );
   }

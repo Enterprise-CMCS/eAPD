@@ -59,8 +59,8 @@ class ActivityDetailSchedule extends Component {
                       <Input
                         name={`milestone-${i}-name`}
                         label={t('activities.schedule.milestoneLabel')}
-                        className="m0"
                         hideLabel
+                        wrapperClass="m0"
                         value={d.name}
                         onChange={this.handleChange(i, 'name')}
                       />
@@ -69,9 +69,9 @@ class ActivityDetailSchedule extends Component {
                       <Input
                         name={`milestone-${i}-start`}
                         label={t('activities.schedule.startLabel')}
-                        type="date"
-                        className="m0"
                         hideLabel
+                        type="date"
+                        wrapperClass="m0"
                         value={d.start}
                         onChange={this.handleChange(i, 'start')}
                       />
@@ -80,9 +80,9 @@ class ActivityDetailSchedule extends Component {
                       <Input
                         name={`milestone-${i}-end`}
                         label={t('activities.schedule.endLabel')}
-                        type="date"
-                        className="m0"
                         hideLabel
+                        type="date"
+                        wrapperClass="m0"
                         value={d.end}
                         onChange={this.handleChange(i, 'end')}
                       />

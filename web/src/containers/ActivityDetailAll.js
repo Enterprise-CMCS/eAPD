@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ActivityDetailCostAllocate from './ActivityDetailCostAllocate';
 import ActivityDetailDescription from './ActivityDetailDescription';
 import ActivityDetailGoals from './ActivityDetailGoals';
 import ActivityDetailSchedule from './ActivityDetailSchedule';
@@ -24,6 +25,7 @@ const ActivityDetailAll = ({ aId, title }) => (
     <ActivityDetailGoals aId={aId} />
     <ActivityDetailSchedule aId={aId} />
     <ActivityDetailExpenses aId={aId} />
+    <ActivityDetailCostAllocate aId={aId} />
     <ActivityDetailStandardsAndConditions aId={aId} />
     <DeleteActivity aId={aId} />
   </Collapsible>
