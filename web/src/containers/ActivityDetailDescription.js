@@ -1,7 +1,4 @@
 import PropTypes from 'prop-types';
-import { EditorState, ContentState, convertToRaw } from 'draft-js';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
 import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { connect } from 'react-redux';
@@ -10,20 +7,7 @@ import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import Icon, { faHelp } from '../components/Icons';
-import { EDITOR_CONFIG } from '../util';
-
-const htmlToEditor = html => {
-  if (!html) return EditorState.createEmpty();
-
-  const { contentBlocks, entityMap } = htmlToDraft(html);
-  const content = ContentState.createFromBlockArray(contentBlocks, entityMap);
-  return EditorState.createWithContent(content);
-};
-
-const editorToHtml = editorState => {
-  const content = convertToRaw(editorState.getCurrentContent());
-  return draftToHtml(content);
-};
+import { EDITOR_CONFIG, htmlToEditor, editorToHtml } from '../util/editor';
 
 class ActivityDetailDescription extends Component {
   constructor(props) {

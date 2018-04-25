@@ -35,6 +35,9 @@ const newActivity = id => ({
   goals: [newGoal()],
   expenses: [newExpense(0), newExpense(1), newExpense(2)],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
+  costAllocateDesc: '',
+  otherFundingDesc: '',
+  otherFundingAmt: '',
   standardsAndConditions: {
     modularity: '',
     mita: '',
