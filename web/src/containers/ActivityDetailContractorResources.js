@@ -61,7 +61,7 @@ class ActivityDetailContractorExpenses extends Component {
               </thead>
               <tbody>
                 {contractorResources.map((contractor, i) => (
-                  <tr key={contractor.idx}>
+                  <tr key={contractor.id}>
                     <td className="mono">{i + 1}.</td>
                     <td>
                       <Input
@@ -127,7 +127,7 @@ class ActivityDetailContractorExpenses extends Component {
                         className="btn btn-outline border-silver px1 py-tiny"
                         title="Remove Contractor"
                         onClick={() =>
-                          removeContractor(activityID, contractor.idx)
+                          removeContractor(activityID, contractor.id)
                         }
                       >
                         ✗

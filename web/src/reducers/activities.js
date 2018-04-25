@@ -15,8 +15,8 @@ import {
 
 const newGoal = () => ({ desc: '', obj: '' });
 
-const newContractorResource = idx => ({
-  idx,
+const newContractorResource = id => ({
+  id,
   name: '',
   desc: '',
   start: '',
@@ -98,7 +98,7 @@ const reducer = (state = initialState, action) => {
             [action.id]: {
               contractorResources: contractors => [
                 ...contractors,
-                newContractorResource(contractors.length)
+                newContractorResource(nextSequence(contractors.map(c => c.id)))
               ]
             }
           }
@@ -168,7 +168,7 @@ const reducer = (state = initialState, action) => {
           byId: {
             [action.id]: {
               contractorResources: contractors =>
-                contractors.filter(c => c.idx !== action.contractorResourceIdx)
+                contractors.filter(c => c.id !== action.contractorResourceId)
             }
           }
         },
