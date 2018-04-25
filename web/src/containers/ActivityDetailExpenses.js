@@ -9,6 +9,7 @@ import {
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import { Input, Textarea } from '../components/Inputs2';
+import Select from '../components/Select';
 
 class ActivityDetailExpenses extends Component {
   handleChange = (index, key) => e => {
@@ -58,27 +59,24 @@ class ActivityDetailExpenses extends Component {
             </thead>
             <tbody>
               {expenses.map((expense, i) => (
-                <tr key={expense.idx}>
+                <tr key={expense.id}>
                   <td className="mono">{i + 1}.</td>
                   <td>
-                    <select
-                      className="m0 select"
+                    <Select
+                      name={`expense-${i}-desc`}
+                      options={['Expense A', 'Expense B', 'Other']}
+                      label="Expense category"
+                      hideLabel
                       value={expense.category}
                       onChange={this.handleChange(i, 'category')}
-                    >
-                      <option>Expense A</option>
-                      <option>Expense B</option>
-                      <option>Expense C</option>
-                      <option>Other</option>
-                    </select>
+                    />
                   </td>
                   <td>
                     <Textarea
-                      id={`expense-${i}-desc`}
                       name={`expense-${i}-desc`}
                       label="Describe the expense"
+                      hideLabel
                       rows="3"
-                      spellCheck="true"
                       value={expense.desc}
                       onChange={this.handleChange(i, 'desc')}
                     />
@@ -88,18 +86,19 @@ class ActivityDetailExpenses extends Component {
                       <Input
                         name={`expense-${i}-${year}-cost`}
                         label={`Cost for ${year}`}
+                        hideLabel
                         type="number"
                         value={expense.years[year]}
                         onChange={this.handleYearChange(i, year)}
                       />
                     </td>
                   ))}
-                  <td className="center align-middle">
+                  <td className="center">
                     <button
                       type="button"
-                      className="btn btn-outline border-silver px1 py-tiny"
+                      className="btn btn-outline border-silver px1 py-tiny mt-tiny"
                       title="Remove Expense"
-                      onClick={() => removeExpense(activityID, i)}
+                      onClick={() => removeExpense(activityID, expense.id)}
                     >
                       ✗
                     </button>
