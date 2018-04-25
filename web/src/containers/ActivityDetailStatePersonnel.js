@@ -3,44 +3,40 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  addActivityExpense,
-  removeActivityExpense,
+  addActivityStatePerson,
+  removeActivityStatePerson,
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import { Input, Textarea } from '../components/Inputs2';
+import { t } from '../i18n';
 
 class ActivityDetailStatePersonnel extends Component {
-  handleChange = (index, key) => e => {
+  handleChange = (idx, key, year) => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
 
-    const updates = { statePersonnel: { [index]: { [key]: value } } };
-    updateActivity(activity.id, updates);
-  };
+    const toUpdate =
+      year !== undefined
+        ? { years: { [year]: { [key]: value } } }
+        : { [key]: value };
 
-  handleYearChange = (index, year) => e => {
-    const { value } = e.target;
-    const { activity, updateActivity } = this.props;
-
-    const updates = {
-      statePersonnel: { [index]: { years: { [year]: +value } } }
-    };
-    updateActivity(activity.id, updates);
+    updateActivity(activity.id, {
+      statePersonnel: { [idx]: toUpdate }
+    });
   };
 
   render() {
     const {
       activity: { id: activityID, statePersonnel },
-      addExpense,
-      removeExpense
+      years,
+      addPerson,
+      removePerson
     } = this.props;
 
-    const years = ['2018', '2019'];
-
     return (
-      <Collapsible title="State Personnel" open>
-        <p>Tell us about your state personnel.</p>
+      <Collapsible title={t('activities.statePersonnel.title')} open>
+        <p>{t('activities.statePersonnel.subheader')}</p>
         <div className="overflow-auto">
           <table
             className="mb2 h5 table table-condensed table-fixed"
@@ -53,19 +49,27 @@ class ActivityDetailStatePersonnel extends Component {
                 <th className="col-5" />
                 {years.map(year => (
                   <th key={year} className="col-4" colSpan="2">
-                    {year} Cost
+                    {t('activities.statePersonnel.labels.yearCost', {
+                      year
+                    })}
                   </th>
                 ))}
                 <th className="col-1" />
               </tr>
               <tr>
-                <th className="col-1">#</th>
-                <th className="col-4">Title</th>
-                <th className="col-5">Description</th>
+                <th className="col-1">
+                  {t('activities.statePersonnel.labels.entryNum')}
+                </th>
+                <th className="col-4">
+                  {t('activities.statePersonnel.labels.title')}
+                </th>
+                <th className="col-5">
+                  {t('activities.statePersonnel.labels.desc')}
+                </th>
                 {years.map(year => (
                   <Fragment key={year}>
-                    <th>Amount</th>
-                    <th>% FTE</th>
+                    <th>{t('activities.statePersonnel.labels.costAmt')}</th>
+                    <th>{t('activities.statePersonnel.labels.costPerc')}</th>
                   </Fragment>
                 ))}
                 <th className="col-1" />
@@ -73,12 +77,12 @@ class ActivityDetailStatePersonnel extends Component {
             </thead>
             <tbody>
               {statePersonnel.map((d, i) => (
-                <tr key={i}>
+                <tr key={d.id}>
                   <td className="mono">{i + 1}.</td>
                   <td>
                     <Input
                       name={`state-person-${d.id}-title`}
-                      label="Title"
+                      label={t('activities.statePersonnel.labels.title')}
                       hideLabel
                       value={d.title}
                       onChange={this.handleChange(i, 'title')}
@@ -87,7 +91,7 @@ class ActivityDetailStatePersonnel extends Component {
                   <td>
                     <Textarea
                       name={`state-person-${d.id}-desc`}
-                      label="Description"
+                      label={t('activities.statePersonnel.labels.desc')}
                       hideLabel
                       rows="3"
                       value={d.desc}
@@ -97,10 +101,22 @@ class ActivityDetailStatePersonnel extends Component {
                   {years.map(year => (
                     <Fragment key={year}>
                       <td>
-                        <input type="text" className="m0 input" />
+                        <Input
+                          name={`state-person-${d.id}-${year}-amt`}
+                          label={t('activities.statePersonnel.labels.costAmt')}
+                          hideLabel
+                          value={d.years[year].amt}
+                          onChange={this.handleChange(i, 'amt', year)}
+                        />
                       </td>
                       <td>
-                        <input type="text" className="m0 input" />
+                        <Input
+                          name={`state-person-${d.id}-${year}-amt`}
+                          label={t('activities.statePersonnel.labels.costPerc')}
+                          hideLabel
+                          value={d.years[year].perc}
+                          onChange={this.handleChange(i, 'perc', year)}
+                        />
                       </td>
                     </Fragment>
                   ))}
@@ -108,8 +124,8 @@ class ActivityDetailStatePersonnel extends Component {
                     <button
                       type="button"
                       className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                      title="Remove personnel"
-                      onClick={() => {}}
+                      title={t('activities.statePersonnel.removeLabel')}
+                      onClick={() => removePerson(activityID, d.id)}
                     >
                       ✗
                     </button>
@@ -122,9 +138,9 @@ class ActivityDetailStatePersonnel extends Component {
         <button
           type="button"
           className="btn btn-primary bg-black"
-          onClick={() => addExpense(activityID)}
+          onClick={() => addPerson(activityID)}
         >
-          Add personnel
+          {t('activities.statePersonnel.addButtonText')}
         </button>
       </Collapsible>
     );
@@ -134,30 +150,26 @@ class ActivityDetailStatePersonnel extends Component {
 ActivityDetailStatePersonnel.propTypes = {
   activity: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
-  addExpense: PropTypes.func.isRequired,
-  removeExpense: PropTypes.func.isRequired,
+  addPerson: PropTypes.func.isRequired,
+  removePerson: PropTypes.func.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ activities: { byId } }, { aId }) => {
-  const { expenses } = byId[aId];
-  const expenseYears = expenses
-    .reduce((years, e) => {
-      years.push(...Object.keys(e.years));
-      return years;
-    }, [])
-    .filter((y, i, a) => a.lastIndexOf(y) === i)
-    .sort();
+  const activity = byId[aId];
+  const { statePersonnel } = activity;
 
-  return {
-    activity: byId[aId],
-    years: expenseYears
-  };
+  // TODO [bren]: replace with APD-driven dynamic years field
+  const years = !statePersonnel.length
+    ? ['2018', '2019']
+    : Object.keys(statePersonnel[0].years).sort();
+
+  return { activity, years };
 };
 
 const mapDispatchToProps = {
-  addExpense: addActivityExpense,
-  removeExpense: removeActivityExpense,
+  addPerson: addActivityStatePerson,
+  removePerson: removeActivityStatePerson,
   updateActivity: updateActivityAction
 };
 
