@@ -3,7 +3,7 @@ import React from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { FieldArray, reduxForm } from 'redux-form';
 
-import { EDITOR_CONFIG } from '../util';
+import { EDITOR_CONFIG } from '../util/editor';
 
 const entryShell = { approach: '', alternatives: '', explanation: '' };
 
