@@ -48,7 +48,7 @@ jobs:
   prepare api dependencies cache:
     docker:
       - image: node:8
-      - command: npm i -g npm@6
+      - command: "npm i -g npm@6"
     steps:
       - checkout
       - restore_cache:
