@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { connect } from 'react-redux';
 
+import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import { Input } from '../components/Inputs2';
@@ -36,9 +37,11 @@ class ActivityDetailCostAllocate extends Component {
     const { costAllocateDesc, otherFundingDesc } = this.state;
 
     return (
-      <Collapsible title="Cost Allocation and Other Funding Sources" open>
+      <Collapsible title={t('activities.costAllocate.title')}>
         <div className="mb3">
-          <div className="mb-tiny bold">Cost allocation methodology</div>
+          <div className="mb-tiny bold">
+            {t('activities.costAllocate.label.costAllocateDesc')}
+          </div>
           <Editor
             toolbar={EDITOR_CONFIG}
             editorState={costAllocateDesc}
@@ -46,9 +49,10 @@ class ActivityDetailCostAllocate extends Component {
             onBlur={this.syncEditorState('costAllocateDesc')}
           />
         </div>
-
         <div className="mb3">
-          <div className="mb-tiny bold">Other funding description</div>
+          <div className="mb-tiny bold">
+            {t('activities.costAllocate.label.otherFundingDesc')}
+          </div>
           <Editor
             toolbar={EDITOR_CONFIG}
             editorState={otherFundingDesc}
@@ -56,10 +60,9 @@ class ActivityDetailCostAllocate extends Component {
             onBlur={this.syncEditorState('otherFundingDesc')}
           />
         </div>
-
         <Input
           name="other-funding-amt"
-          label="Other funding amount"
+          label={t('activities.costAllocate.label.otherFundingAmt')}
           wrapperClass="mb2 sm-col-4"
           value={activity.otherFundingAmt}
           onChange={e =>
