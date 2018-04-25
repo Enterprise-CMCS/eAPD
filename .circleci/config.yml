@@ -3,11 +3,7 @@ jobs:
   prepare web dependencies cache:
     docker:
       - image: node:8
-        command:
-          - npm
-          - install
-          - -g
-          - npm@6
+        command: npm install -g npm@6
     steps:
       - checkout
       - restore_cache:
