@@ -1,5 +1,47 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
+import { Editor } from 'react-draft-wysiwyg';
+
+import { EDITOR_CONFIG, htmlToEditor, editorToHtml } from '../util/editor';
+
+class RichText extends Component {
+  constructor(props) {
+    super(props);
+
+    const { content, onSync } = props;
+
+    this.state = {
+      content: htmlToEditor(content)
+    };
+
+    this.onEditorChange = newContent => {
+      this.setState({ content: newContent });
+    };
+
+    this.onBlur = () => {
+      const html = editorToHtml(this.state.content);
+      onSync(html);
+    };
+  }
+
+  render() {
+    return (
+      <Editor
+        toolbar={EDITOR_CONFIG}
+        editorState={this.state.content}
+        onEditorStateChange={this.onEditorChange}
+        onBlur={this.onBlur}
+      />
+    );
+  }
+}
+RichText.propTypes = {
+  content: PropTypes.string.isRequired,
+  onSync: PropTypes.func
+};
+RichText.defaultProps = {
+  onSync: () => {}
+};
 
 const Input = props => <input className="m0 input" {...props} />;
 const Textarea = props => (
@@ -52,4 +94,4 @@ makeInput.propTypes = {
 const InputHolder = makeInput(Input);
 const TextareaHolder = makeInput(Textarea);
 
-export { InputHolder as Input, TextareaHolder as Textarea };
+export { InputHolder as Input, TextareaHolder as Textarea, RichText };

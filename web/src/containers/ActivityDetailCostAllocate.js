@@ -1,78 +1,52 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { Editor } from 'react-draft-wysiwyg';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { Input } from '../components/Inputs';
-import { EDITOR_CONFIG, htmlToEditor, editorToHtml } from '../util/editor';
+import { Input, RichText } from '../components/Inputs';
 
-class ActivityDetailCostAllocate extends Component {
-  constructor(props) {
-    super(props);
+const ActivityDetailCostAllocate = props => {
+  const { activity, updateActivity } = props;
+  const { costAllocateDesc, otherFundingDesc } = activity;
 
-    const { costAllocateDesc, otherFundingDesc } = props.activity;
-
-    this.state = {
-      costAllocateDesc: htmlToEditor(costAllocateDesc),
-      otherFundingDesc: htmlToEditor(otherFundingDesc)
-    };
-  }
-
-  onEditorChange = name => editorState => {
-    this.setState({ [name]: editorState });
-  };
-
-  syncEditorState = name => () => {
-    const html = editorToHtml(this.state[name]);
-    const { activity, updateActivity } = this.props;
-
+  const sync = name => html => {
     updateActivity(activity.id, { [name]: html });
   };
 
-  render() {
-    const { activity, updateActivity } = this.props;
-    const { costAllocateDesc, otherFundingDesc } = this.state;
-
-    return (
-      <Collapsible title={t('activities.costAllocate.title')}>
-        <div className="mb3">
-          <div className="mb-tiny bold">
-            {t('activities.costAllocate.label.costAllocateDesc')}
-          </div>
-          <Editor
-            toolbar={EDITOR_CONFIG}
-            editorState={costAllocateDesc}
-            onEditorStateChange={this.onEditorChange('costAllocateDesc')}
-            onBlur={this.syncEditorState('costAllocateDesc')}
-          />
+  return (
+    <Collapsible title={t('activities.costAllocate.title')}>
+      <div className="mb3">
+        <div className="mb-tiny bold">
+          {t('activities.costAllocate.label.costAllocateDesc')}
         </div>
-        <div className="mb3">
-          <div className="mb-tiny bold">
-            {t('activities.costAllocate.label.otherFundingDesc')}
-          </div>
-          <Editor
-            toolbar={EDITOR_CONFIG}
-            editorState={otherFundingDesc}
-            onEditorStateChange={this.onEditorChange('otherFundingDesc')}
-            onBlur={this.syncEditorState('otherFundingDesc')}
-          />
-        </div>
-        <Input
-          name="other-funding-amt"
-          label={t('activities.costAllocate.label.otherFundingAmt')}
-          wrapperClass="mb2 sm-col-4"
-          value={activity.otherFundingAmt}
-          onChange={e =>
-            updateActivity(activity.id, { otherFundingAmt: e.target.value })
-          }
+        <RichText
+          content={costAllocateDesc}
+          onSync={sync('costAllocateDesc')}
         />
-      </Collapsible>
-    );
-  }
-}
+      </div>
+      <div className="mb3">
+        <div className="mb-tiny bold">
+          {t('activities.costAllocate.label.otherFundingDesc')}
+        </div>
+        <RichText
+          content={otherFundingDesc}
+          onSync={sync('otherFundingDesc')}
+        />
+      </div>
+      <Input
+        name="other-funding-amt"
+        label={t('activities.costAllocate.label.otherFundingAmt')}
+        wrapperClass="mb2 sm-col-4"
+        value={activity.otherFundingAmt}
+        onChange={e =>
+          updateActivity(activity.id, { otherFundingAmt: e.target.value })
+        }
+      />
+    </Collapsible>
+  );
+};
 
 ActivityDetailCostAllocate.propTypes = {
   activity: PropTypes.object.isRequired,
