@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import { t } from '../i18n';
 import {
-  addActivityContractorResource,
-  removeActivityContractorResource,
+  addActivityContractor,
+  removeActivityContractor,
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
@@ -202,8 +202,8 @@ const mapStateToProps = ({ activities: { byId } }, { aId }) => {
 };
 
 const mapDispatchToProps = {
-  addContractor: addActivityContractorResource,
-  removeContractor: removeActivityContractorResource,
+  addContractor: addActivityContractor,
+  removeContractor: removeActivityContractor,
   updateActivity: updateActivityAction
 };
 
