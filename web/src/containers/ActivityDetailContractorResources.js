@@ -40,6 +40,7 @@ class ActivityDetailContractorExpenses extends Component {
 
     return (
       <Collapsible title={t('activities.contractorResources.title')} open>
+        <p>{t('activities.contractorResources.subheader')}</p>
         <div>
           <div className="overflow-auto">
             <table
@@ -106,12 +107,13 @@ class ActivityDetailContractorExpenses extends Component {
                           {t('activities.contractorResources.labels.start')}
                         </span>
                         <Input
+                          type="date"
                           name={`contractor-${i}-start`}
                           label={t(
                             'activities.contractorResources.srLabels.start'
                           )}
                           hideLabel
-                          type="date"
+                          wrapperClass="mb1 flex-auto"
                           value={contractor.start}
                           onChange={this.handleChange(i, 'start')}
                         />
@@ -121,12 +123,13 @@ class ActivityDetailContractorExpenses extends Component {
                           {t('activities.contractorResources.labels.end')}
                         </span>
                         <Input
+                          type="date"
                           name={`contractor-${i}-end`}
                           label={t(
                             'activities.contractorResources.srLabels.end'
                           )}
                           hideLabel
-                          type="date"
+                          wrapperClass="mb1 flex-auto"
                           value={contractor.end}
                           onChange={this.handleChange(i, 'end')}
                         />
@@ -147,10 +150,10 @@ class ActivityDetailContractorExpenses extends Component {
                         />
                       </td>
                     ))}
-                    <td className="center align-middle">
+                    <td className="center">
                       <button
                         type="button"
-                        className="btn btn-outline border-silver px1 py-tiny"
+                        className="btn btn-outline border-silver px1 py-tiny mt-tiny"
                         title={t('activities.contractorResources.removeLabel')}
                         onClick={() =>
                           removeContractor(activityID, contractor.id)
