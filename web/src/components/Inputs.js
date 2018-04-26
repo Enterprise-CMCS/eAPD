@@ -8,21 +8,19 @@ class RichText extends Component {
   constructor(props) {
     super(props);
 
-    const { content, onSync } = props;
-
     this.state = {
-      content: htmlToEditor(content)
-    };
-
-    this.onEditorChange = newContent => {
-      this.setState({ content: newContent });
-    };
-
-    this.onBlur = () => {
-      const html = editorToHtml(this.state.content);
-      onSync(html);
+      content: htmlToEditor(props.content)
     };
   }
+
+  onEditorChange = newContent => {
+    this.setState({ content: newContent });
+  };
+
+  onBlur = () => {
+    const html = editorToHtml(this.state.content);
+    this.props.onSync(html);
+  };
 
   render() {
     return (
