@@ -1,40 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Editor } from 'react-draft-wysiwyg';
 import { connect } from 'react-redux';
 
 import { t } from '../i18n';
 import { updateApd as updateApdAction } from '../actions/apd';
 import Collapsible from '../components/Collapsible';
-import { Textarea } from '../components/Inputs';
+import { RichText, Textarea } from '../components/Inputs';
 import Section from '../components/Section';
 import SectionTitle from '../components/SectionTitle';
-import { EDITOR_CONFIG, htmlToEditor, editorToHtml } from '../util/editor';
 
 const YEAR_OPTIONS = ['2018', '2019', '2020'];
 
 class ApdSummary extends Component {
-  constructor(props) {
-    super(props);
-
-    const { overview } = props.apd;
-
-    this.state = {
-      overview: htmlToEditor(overview)
-    };
-  }
-
-  onEditorChange = name => editorState => {
-    this.setState({ [name]: editorState });
-  };
-
-  syncEditorState = name => () => {
-    const html = editorToHtml(this.state[name]);
-    const { updateApd } = this.props;
-
-    updateApd({ [name]: html });
-  };
-
   handleYears = e => {
     const { value } = e.target;
     const { apd, updateApd } = this.props;
@@ -47,9 +24,12 @@ class ApdSummary extends Component {
     updateApd({ years: yearsNew });
   };
 
+  syncRichText = name => html => {
+    this.props.updateApd({ [name]: html });
+  };
+
   render() {
     const { apd, updateApd } = this.props;
-    const { overview } = this.state;
 
     return (
       <Section>
@@ -71,15 +51,13 @@ class ApdSummary extends Component {
           </div>
           <div>
             <div className="mb-tiny bold">{t('apd.overview.labels.desc')}</div>
-            <Editor
-              toolbar={EDITOR_CONFIG}
-              editorState={overview}
-              onEditorStateChange={this.onEditorChange('overview')}
-              onBlur={this.syncEditorState('overview')}
+            <RichText
+              content={apd.overview}
+              onSync={this.syncRichText('overview')}
             />
           </div>
         </Collapsible>
-        <Collapsible title={t('apd.hit')} open>
+        <Collapsible title={t('apd.hit')}>
           <Textarea
             name="hit-narrative"
             label={t('apd.hit')}
