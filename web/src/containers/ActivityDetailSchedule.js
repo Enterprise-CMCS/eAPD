@@ -9,7 +9,7 @@ import {
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { Input } from '../components/Inputs2';
+import { Input } from '../components/Inputs';
 
 class ActivityDetailSchedule extends Component {
   handleChange = (idx, key) => e => {

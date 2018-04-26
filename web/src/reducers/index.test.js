@@ -9,8 +9,7 @@ describe('root reducer', () => {
       'auth',
       'state',
       'user',
-      'router',
-      'form'
+      'router'
     ]);
   });
 });

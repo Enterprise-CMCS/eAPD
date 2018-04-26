@@ -9,7 +9,7 @@ import {
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { Input, Textarea } from '../components/Inputs2';
+import { Input, Textarea } from '../components/Inputs';
 
 class ActivityDetailContractorExpenses extends Component {
   handleChange = (index, key) => e => {
@@ -39,7 +39,7 @@ class ActivityDetailContractorExpenses extends Component {
     } = this.props;
 
     return (
-      <Collapsible title={t('activities.contractorResources.title')} open>
+      <Collapsible title={t('activities.contractorResources.title')}>
         <p>{t('activities.contractorResources.subheader')}</p>
         <div>
           <div className="overflow-auto">
