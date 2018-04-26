@@ -1,67 +1,44 @@
+import u from 'updeep';
+
 import {
   GET_APD_REQUEST,
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
-  ADD_APD_ACTIVITIES_REQUEST,
-  ADD_APD_ACTIVITIES_SUCCESS,
-  ADD_APD_ACTIVITIES_FAILURE,
-  UPDATE_APD_ACTIVITY_REQUEST,
-  UPDATE_APD_ACTIVITY_SUCCESS,
-  UPDATE_APD_ACTIVITY_FAILURE
+  UPDATE_APD
 } from '../actions/apd';
 
 const initialState = {
   data: {
     id: '',
-    activities: []
+    years: ['2018'],
+    overview: '',
+    hitNarrative: '',
+    hieNarrative: '',
+    mmisNarrative: ''
   },
   fetching: false,
   loaded: false,
   error: ''
 };
 
-const apdReducer = (apd = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_APD_REQUEST:
-      return { ...apd, fetching: true, error: '' };
+      return { ...state, fetching: true, error: '' };
     case GET_APD_SUCCESS:
       return {
-        ...apd,
+        ...state,
         fetching: false,
         loaded: true,
         data: { ...action.data[0] }
       };
     case GET_APD_FAILURE:
-      return { ...apd, fetching: false, error: action.error };
-    case ADD_APD_ACTIVITIES_REQUEST:
-      return { ...apd, error: '' };
-    case ADD_APD_ACTIVITIES_SUCCESS: {
-      const newState = { ...apd };
-      newState.data.activities = action.data;
-      return newState;
-    }
-    case ADD_APD_ACTIVITIES_FAILURE:
-      return { ...apd, error: action.error };
-    case UPDATE_APD_ACTIVITY_REQUEST:
-      return { ...apd, error: '' };
-    case UPDATE_APD_ACTIVITY_SUCCESS: {
-      const newState = { ...apd };
-      const updatedActivity = action.data;
-
-      newState.data.activities = newState.data.activities.map(activity => {
-        if (activity.id === updatedActivity.id) {
-          return updatedActivity;
-        }
-        return activity;
-      });
-
-      return newState;
-    }
-    case UPDATE_APD_ACTIVITY_FAILURE:
-      return { ...apd, error: action.error };
+      return { ...state, fetching: false, error: action.error };
+    case UPDATE_APD:
+      return u({ data: { ...action.updates } }, state);
     default:
-      return apd;
+      return state;
   }
 };
 
-export default apdReducer;
+export default reducer;
