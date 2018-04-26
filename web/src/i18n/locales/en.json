@@ -5,6 +5,20 @@
   "notifications": "Notifications",
   "help": "Help",
 
+  "apd": {
+    "sectionTitle": "Program Summary",
+    "overview": {
+      "title": "Overview",
+      "yearsCovered": "What years does this APD cover?",
+      "labels": {
+        "desc": "Please provide an overview of your program."
+      }
+    },
+    "hit": "HIT Narrative",
+    "hie": "HIE Narrative",
+    "mmis": "MMIS Narrative"
+  },
+
   "activities": {
     "title": "Program Activities",
     "listTitle": "Activity List",
