@@ -69,6 +69,20 @@
       "removeLabel": "remove contractor",
       "addContractorButtonText": "Add contractor resource"
     },
+    "statePersonnel": {
+      "title": "State Personnel",
+      "subheader": "Tell us about your state personnel.",
+      "labels": {
+        "entryNum": "#",
+        "title": "Title",
+        "desc": "Description",
+        "yearCost": "{{year}} Cost",
+        "costAmt": "Amount",
+        "costPerc": "% FTE"
+      },
+      "removeLabel": "Remove personnel",
+      "addButtonText": "Add personnel"
+    },
     "costAllocate": {
       "title": "Cost Allocation and Other Funding Sources",
       "label": {
