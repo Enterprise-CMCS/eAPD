@@ -1,6 +1,7 @@
 .alert {
   background-color: #eee;
   border-left: 0.5rem solid #ccc;
+  border-radius: 3px;
 }
 
 .alert-error {

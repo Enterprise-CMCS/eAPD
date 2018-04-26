@@ -1,6 +1,5 @@
 import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
 import activities from './activities';
 import apd from './apd';
@@ -14,8 +13,7 @@ const rootReducer = combineReducers({
   auth,
   state,
   user,
-  router: routerReducer,
-  form: formReducer
+  router: routerReducer
 });
 
 export default rootReducer;
