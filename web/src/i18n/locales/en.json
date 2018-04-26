@@ -28,7 +28,7 @@
     "goals": {
       "title": "Needs and Objectives",
       "subheader":
-        "List the goals you're hoping to accomplish as part of this activity:",
+        "List the goals you're hoping to accomplish as part of this activity.",
       "goalHeader": "Goal #{{number}}",
       "objectiveHeader":
         "Tell us how you'll know when you've achieved this goal",
@@ -37,7 +37,7 @@
     "schedule": {
       "title": "Activity Schedule",
       "subheader":
-        "List the major milestones you’re working towards as part of this activity",
+        "List the major milestones you’re working towards as part of this activity.",
       "noMilestonesNotice": "Oh no! Please add milestones for this activity.",
       "milestoneHeader": "Milestone",
       "milestoneLabel": "milestone name",
@@ -50,6 +50,7 @@
     },
     "contractorResources": {
       "title": "Contractor Resources",
+      "subheader": "Tell us about your contractor resources.",
       "labels": {
         "entryNumber": "#",
         "contractorName": "Name",
@@ -66,8 +67,8 @@
         "end": "Contractor term end",
         "cost": "Contractor cost for {{year}}"
       },
-      "removeLabel": "remove contractor",
-      "addContractorButtonText": "Add contractor resource"
+      "removeLabel": "Remove contractor",
+      "addContractorButtonText": "Add contractor"
     },
     "statePersonnel": {
       "title": "State Personnel",

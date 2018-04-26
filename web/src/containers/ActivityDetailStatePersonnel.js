@@ -35,7 +35,7 @@ class ActivityDetailStatePersonnel extends Component {
     } = this.props;
 
     return (
-      <Collapsible title={t('activities.statePersonnel.title')} open>
+      <Collapsible title={t('activities.statePersonnel.title')}>
         <p>{t('activities.statePersonnel.subheader')}</p>
         <div className="overflow-auto">
           <table
