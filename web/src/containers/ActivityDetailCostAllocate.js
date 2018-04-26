@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { Input } from '../components/Inputs2';
+import { Input } from '../components/Inputs';
 import { EDITOR_CONFIG, htmlToEditor, editorToHtml } from '../util/editor';
 
 class ActivityDetailCostAllocate extends Component {

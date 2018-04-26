@@ -10,39 +10,36 @@ const Textarea = props => (
 // div wrapper and accompanying label
 const makeInput = InputInner => {
   const InputHolder = ({
-    input: { name, ...rest },
-    meta: { touched, error },
+    name,
     label,
     type,
     hideLabel,
-    className
-  }) => {
-    const hasError = touched && error;
-
-    return (
-      <div className={`${className || 'mb2'} ${hasError ? 'has-error' : ''}`}>
-        <label htmlFor={name} className={hideLabel ? 'sr-only' : ''}>
-          {label}
-        </label>
-        <InputInner id={name} type={type} {...rest} />
-        {hasError && <div className="mt-tiny h6 red">{error}</div>}
-      </div>
-    );
-  };
+    wrapperClass,
+    ...rest
+  }) => (
+    <div className={wrapperClass || 'mb2'}>
+      <label
+        htmlFor={name}
+        className={hideLabel ? 'sr-only' : 'block mb-tiny bold'}
+      >
+        {label}
+      </label>
+      <InputInner id={name} type={type} {...rest} />
+    </div>
+  );
 
   InputHolder.propTypes = {
-    input: PropTypes.object.isRequired,
-    meta: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     type: PropTypes.string,
     hideLabel: PropTypes.bool,
-    className: PropTypes.string
+    wrapperClass: PropTypes.string
   };
 
   InputHolder.defaultProps = {
     type: 'text',
     hideLabel: false,
-    className: ''
+    wrapperClass: ''
   };
 
   return InputHolder;

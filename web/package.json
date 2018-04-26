@@ -64,7 +64,6 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
-    "redux-form": "^7.2.3",
     "redux-thunk": "^2.2.0",
     "sinon": "^4.4.2",
     "tippy.js": "^2.5.0",
