@@ -6,7 +6,7 @@ import { STANDARDS } from '../util';
 import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { Textarea } from '../components/Inputs2';
+import { Textarea } from '../components/Inputs';
 
 class ActivityDetailStandardsAndConditions extends Component {
   handleChange = key => e => {

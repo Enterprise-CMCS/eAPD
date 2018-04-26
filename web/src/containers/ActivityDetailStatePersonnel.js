@@ -8,7 +8,7 @@ import {
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { Input, Textarea } from '../components/Inputs2';
+import { Input, Textarea } from '../components/Inputs';
 import { t } from '../i18n';
 
 class ActivityDetailStatePersonnel extends Component {

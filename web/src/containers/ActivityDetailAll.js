@@ -22,7 +22,7 @@ const activityTitle = (a, i) => {
 };
 
 const ActivityDetailAll = ({ aId, title }) => (
-  <Collapsible title={title} bgColor="darken-1" open>
+  <Collapsible title={title} bgColor="darken-1">
     <ActivityDetailDescription aId={aId} />
     <ActivityDetailGoals aId={aId} />
     <ActivityDetailSchedule aId={aId} />

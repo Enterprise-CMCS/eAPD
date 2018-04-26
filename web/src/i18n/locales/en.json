@@ -10,6 +10,8 @@
     "listTitle": "Activity List",
     "addActivityButtonText": "Add activity",
     "deleteActivityButtonText": "Remove Activity",
+    "noActivityMessage":
+      "It looks like you don’t have any activities. Please add one below.",
     "delete": {
       "header": "Please confirm",
       "body": "Are you sure you’d like to remove this activity?",

@@ -51,9 +51,9 @@ const newExpense = id => ({
   }
 });
 
-const newActivity = id => ({
+const newActivity = (id, name = '') => ({
   id,
-  name: '',
+  name,
   types: ['HIT'],
   descShort: '',
   descLong: '',
@@ -82,7 +82,7 @@ const newActivity = id => ({
 });
 
 const initialState = {
-  byId: { 1: newActivity(1) },
+  byId: { 1: newActivity(1, 'Test') },
   allIds: [1]
 };
 
