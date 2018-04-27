@@ -5,7 +5,7 @@ import SectionTitle from './SectionTitle';
 import Collapsible from './Collapsible';
 
 const PreviousActivities = () => (
-  <Section>
+  <Section id="prev-activities">
     <SectionTitle>Results of Previous Activities</SectionTitle>
     <Collapsible title="Prior Activities Outline">
       <div>...</div>
