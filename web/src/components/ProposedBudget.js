@@ -5,7 +5,7 @@ import SectionTitle from './SectionTitle';
 import Collapsible from './Collapsible';
 
 const ProposedBudget = () => (
-  <Section>
+  <Section id="budget">
     <SectionTitle>Proposed Budget</SectionTitle>
     <Collapsible title="Short Activity Summary Budget">
       <div>...</div>
