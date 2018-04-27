@@ -5,7 +5,7 @@ import SectionTitle from './SectionTitle';
 import Collapsible from './Collapsible';
 
 const ExecutiveSummary = () => (
-  <Section>
+  <Section id="executive-summary">
     <SectionTitle>Executive/Overall Summary</SectionTitle>
     <Collapsible title="Executive Summary">
       <div>...</div>

@@ -32,7 +32,7 @@ class ApdSummary extends Component {
     const { apd, updateApd } = this.props;
 
     return (
-      <Section>
+      <Section id="apd-summary">
         <SectionTitle>{t('apd.sectionTitle')}</SectionTitle>
         <Collapsible title={t('apd.overview.title')}>
           <div className="mb3">
