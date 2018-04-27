@@ -5,7 +5,7 @@ import SectionTitle from './SectionTitle';
 import Collapsible from './Collapsible';
 
 const AssurancesAndCompliance = () => (
-  <Section>
+  <Section id="assurances-compliance">
     <SectionTitle>Assurances and Compliance</SectionTitle>
     <Collapsible title="Procurement Standards">
       <div>...</div>

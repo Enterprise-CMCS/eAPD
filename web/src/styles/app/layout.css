@@ -37,9 +37,12 @@ footer {
   }
 
   .site-sidebar {
-    display: block;
-    flex: 0 0 18rem;
-    overflow: auto;
+    flex: 0 0 auto;
+    max-height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 0px;
+    width: 16rem;
   }
 }
 

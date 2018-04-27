@@ -13,7 +13,7 @@ import ProposedBudget from './ProposedBudget';
 import Sidebar from './Sidebar';
 import TopNav from './TopNav';
 
-const PLACE = { id: 'ca', name: 'California' };
+const PLACE = { id: 'tx', name: 'Texas' };
 
 const PoC = () => (
   <div className="site-body">

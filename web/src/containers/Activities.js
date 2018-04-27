@@ -11,7 +11,7 @@ import Section from '../components/Section';
 import SectionTitle from '../components/SectionTitle';
 
 const Activities = ({ activityIds, addActivity }) => (
-  <Section>
+  <Section id="activities">
     <SectionTitle>{t('activities.title')}</SectionTitle>
     <Collapsible title={t('activities.listTitle')} open>
       {activityIds.length === 0 ? (
