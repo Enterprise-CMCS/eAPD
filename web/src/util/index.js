@@ -123,10 +123,3 @@ export const getParams = str =>
       const valGood = val === undefined ? null : decodeURIComponent(val);
       return Object.assign(params, { [key]: valGood });
     }, {});
-
-export const activityDisplay = (a, i) => {
-  let display = `Activity ${i}`;
-  if (a.name) display += `: ${a.name}`;
-  if (a.type.length) display += ` (${a.type.join(', ')})`;
-  return display;
-};

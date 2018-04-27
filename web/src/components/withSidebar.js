@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Sidebar from './Sidebar';
+import Sidebar from '../containers/Sidebar';
 import TopNav from '../containers/TopNav';
 
 const withSidebar = WrappedComponent => {
