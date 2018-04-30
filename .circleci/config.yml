@@ -3,11 +3,13 @@ jobs:
   prepare web dependencies cache:
     docker:
       - image: node:8
-        command: npm install -g npm@6
     steps:
       - checkout
       - restore_cache:
           key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
+      - run:
+          name: update npm
+          command: npm install -g npm@6
       - run:
           name: install dependencies
           working_directory: ~/project/web
@@ -49,15 +51,13 @@ jobs:
   prepare api dependencies cache:
     docker:
       - image: node:8
-        command:
-          - npm
-          - install
-          - -g
-          - npm@6
     steps:
       - checkout
       - restore_cache:
           key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - run:
+          name: update npm
+          command: npm install -g npm@6
       - run:
           name: install dependencies
           working_directory: ~/project/api
@@ -138,17 +138,15 @@ jobs:
   deploy staging:
     docker:
       - image: node:8
-        command:
-          - npm
-          - install
-          - -g
-          - npm@6
     steps:
       - checkout
       - restore_cache:
           key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
       - restore_cache:
           key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - run:
+          name: update npm
+          command: npm install -g npm@6
       - run:
           name: deploy to prod
           command: ./bin/deploy.sh
@@ -156,11 +154,6 @@ jobs:
   deploy ux testing:
     docker:
       - image: node:8
-        command:
-          - npm
-          - install
-          - -g
-          - npm@6
     steps:
       - checkout
       - restore_cache:
@@ -168,23 +161,24 @@ jobs:
       - restore_cache:
           key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
       - run:
+          name: update npm
+          command: npm install -g npm@6
+      - run:
           name: deploy to UX testing
           command: ./bin/deploy-ux-testing.sh
 
   deploy storybook:
     docker:
       - image: node:8
-        command:
-          - npm
-          - install
-          - -g
-          - npm@6
     steps:
       - checkout
       - restore_cache:
           key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
       - restore_cache:
           key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - run:
+          name: update npm
+          command: npm install -g npm@6
       - run:
           name: deploy storybook
           command: ./bin/deploy-storybook.sh
