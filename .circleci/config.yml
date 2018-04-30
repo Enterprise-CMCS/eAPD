@@ -1,23 +1,35 @@
 version: 2
 jobs:
-  prepare web dependencies cache:
+  prepare dependencies cache:
     docker:
       - image: node:8
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
+          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
       - run:
           name: update npm
           command: npm install -g npm@6
       - run:
-          name: install dependencies
+          name: install web dependencies
           working_directory: ~/project/web
           command: npm ci
+      - run:
+          name: install api dependencies
+          working_directory: ~/project/api
+          command: npm ci
+      - save_cache:
+          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+          paths:
+            - /root/.npm
       - save_cache:
           key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
           paths:
             - web/node_modules
+      - save_cache:
+          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+          paths:
+            - api/node_modules
 
   web lint:
     docker:
@@ -47,25 +59,6 @@ jobs:
           when: always
           working_directory: ~/project/web
           command: bash <(curl -s https://codecov.io/bash)
-
-  prepare api dependencies cache:
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
-      - run:
-          name: install dependencies
-          working_directory: ~/project/api
-          command: npm ci
-      - save_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
-          paths:
-            - api/node_modules
 
   api lint:
     docker:
@@ -141,9 +134,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
       - run:
           name: update npm
           command: npm install -g npm@6
@@ -157,9 +148,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
       - run:
           name: update npm
           command: npm install -g npm@6
@@ -173,9 +162,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
       - run:
           name: update npm
           command: npm install -g npm@6
@@ -187,23 +174,22 @@ workflows:
   version: 2
   web:
     jobs:
-      - prepare web dependencies cache
-      - prepare api dependencies cache
+      - prepare dependencies cache
       - web lint:
           requires:
-            - prepare web dependencies cache
+            - prepare dependencies cache
       - web test:
           requires:
-            - prepare web dependencies cache
+            - prepare dependencies cache
       - api lint:
           requires:
-             - prepare api dependencies cache
+             - prepare dependencies cache
       - api unit test:
           requires:
-             - prepare api dependencies cache
+             - prepare dependencies cache
       - api endpoint test:
           requires:
-             - prepare api dependencies cache
+             - prepare dependencies cache
       - deploy staging:
           filters:
             branches:
