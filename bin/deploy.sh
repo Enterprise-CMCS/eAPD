@@ -28,6 +28,7 @@ rm -rf seeds/test
 rm seeds/development.js
 rm seeds/test.js
 rm seeds/shared/delete-everything.js
+npm ci
 cd ..
 
 # Log into CF and push
