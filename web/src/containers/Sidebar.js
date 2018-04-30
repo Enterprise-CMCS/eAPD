@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
-import SidebarLink from './SidebarLink';
-import { activityDisplay } from '../util';
+import SidebarLink from '../components/SidebarLink';
 
 const Sidebar = ({ activities, place }) => (
   <div className="site-sidebar bg-navy">
@@ -22,9 +22,12 @@ const Sidebar = ({ activities, place }) => (
           Results of Previous Activities
         </SidebarLink>
         <SidebarLink anchor="activities">Program Activities</SidebarLink>
-        <ul className="mb0 ml2 list-reset">
+        <ul className="mb0 ml2 list-reset h5">
           {activities.map((a, i) => (
-            <SidebarLink key={a.id}>{activityDisplay(a, i + 1)}</SidebarLink>
+            <SidebarLink key={a.id} anchor={`activity-${a.id}`}>
+              Activity {i + 1}
+              {a.name ? `: ${a.name}` : ''}
+            </SidebarLink>
           ))}
         </ul>
         <SidebarLink anchor="budget">Proposed Budget</SidebarLink>
@@ -50,4 +53,8 @@ Sidebar.propTypes = {
   place: PropTypes.object.isRequired
 };
 
-export default Sidebar;
+const mapStateToProps = ({ activities: { byId, allIds } }) => ({
+  activities: allIds.map(id => ({ id, name: byId[id].name }))
+});
+
+export default connect(mapStateToProps)(Sidebar);
