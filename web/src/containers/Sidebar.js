@@ -4,7 +4,20 @@ import { connect } from 'react-redux';
 
 import SidebarLink from '../components/SidebarLink';
 
-const Sidebar = ({ activities, place }) => (
+const linkGroup1 = [
+  { id: 'apd-summary', name: 'Program Summary' },
+  { id: 'prev-activities', name: 'Results of Previous Activities' },
+  { id: 'activities', name: 'Program Activities' }
+];
+
+const linkGroup2 = [
+  { id: 'budget', name: 'Proposed Budget' },
+  { id: 'assurances-compliance', name: 'Assurances and Compliance' },
+  { id: 'executive-summary', name: 'Executive/Overall Summary' },
+  { id: 'certify-submit', name: 'Certify and Submit' }
+];
+
+const Sidebar = ({ activities, place, hash }) => (
   <div className="site-sidebar bg-navy">
     <div className="p2 xs-hide sm-hide">
       <div className="mb2">
@@ -17,28 +30,30 @@ const Sidebar = ({ activities, place }) => (
         />
       </div>
       <ul className="list-reset">
-        <SidebarLink anchor="apd-summary">Program Summary</SidebarLink>
-        <SidebarLink anchor="prev-activities">
-          Results of Previous Activities
-        </SidebarLink>
-        <SidebarLink anchor="activities">Program Activities</SidebarLink>
+        {linkGroup1.map(d => (
+          <SidebarLink key={d.id} anchor={d.id} isActive={d.id === hash}>
+            {d.name}
+          </SidebarLink>
+        ))}
         <ul className="mb0 ml2 list-reset h5">
           {activities.map((a, i) => (
-            <SidebarLink key={a.id} anchor={`activity-${a.id}`}>
+            <SidebarLink
+              key={a.id}
+              anchor={a.anchor}
+              isActive={a.anchor === hash}
+            >
               Activity {i + 1}
               {a.name ? `: ${a.name}` : ''}
             </SidebarLink>
           ))}
         </ul>
-        <SidebarLink anchor="budget">Proposed Budget</SidebarLink>
-        <SidebarLink anchor="assurances-compliance">
-          Assurances and Compliance
-        </SidebarLink>
-        <SidebarLink anchor="executive-summary">
-          Executive/Overall Summary
-        </SidebarLink>
-        <SidebarLink anchor="certify-submit">Certify and Submit</SidebarLink>
+        {linkGroup2.map(d => (
+          <SidebarLink key={d.id} anchor={d.id} isActive={d.id === hash}>
+            {d.name}
+          </SidebarLink>
+        ))}
       </ul>
+
       <div className="mt2 pt2 border-top border-white">
         <button type="button" className="btn btn-primary bg-white navy">
           Save as PDF
@@ -50,11 +65,17 @@ const Sidebar = ({ activities, place }) => (
 
 Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
-  place: PropTypes.object.isRequired
+  place: PropTypes.object.isRequired,
+  hash: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId, allIds } }) => ({
-  activities: allIds.map(id => ({ id, name: byId[id].name }))
+const mapStateToProps = ({ activities: { byId, allIds }, router }) => ({
+  activities: allIds.map(id => ({
+    id,
+    anchor: `activity-${id}`,
+    name: byId[id].name
+  })),
+  hash: router.location.hash.slice(1) || ''
 });
 
 export default connect(mapStateToProps)(Sidebar);

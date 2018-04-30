@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Section = ({ children, id }) => (
-  <div id={id} className="p2 sm-px3 border-bottom border-gray">
+  <section id={id} className="p2 sm-px3 border-bottom border-gray">
     {children}
-  </div>
+  </section>
 );
 
 Section.propTypes = {
