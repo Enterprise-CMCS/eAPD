@@ -7,6 +7,7 @@ import { updateActivity as updateActivityAction } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import Icon, { faHelp } from '../components/Icons';
 import { RichText } from '../components/Inputs';
+import HelpText from '../components/HelpText';
 
 const ActivityDetailDescription = props => {
   const { activity, updateActivity } = props;
@@ -22,6 +23,7 @@ const ActivityDetailDescription = props => {
         {t('activities.description.summaryHeader')}
         <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
       </div>
+      <HelpText text="activities.description.helpText" />
       <div className="mb3">
         <textarea
           className="m0 textarea"
@@ -47,6 +49,10 @@ const ActivityDetailDescription = props => {
         <div className="mb-tiny bold">
           {t('activities.description.alternativesHeader')}
         </div>
+        <HelpText
+          text="activities.description.alternativesHelpText"
+          reminder="activities.description.alternativesHelpReminder"
+        />
         <RichText content={altApproach} onSync={sync('altApproach')} />
       </div>
     </Collapsible>
