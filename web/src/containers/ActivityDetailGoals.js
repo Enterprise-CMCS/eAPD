@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { t } from '../i18n';
 import {
   addActivityGoal as addActivityGoalAction,
+  removeActivityGoal as removeActivityGoalAction,
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
@@ -20,13 +21,22 @@ class ActivityDetailGoals extends Component {
   };
 
   render() {
-    const { activity, addActivityGoal } = this.props;
+    const { activity, addActivityGoal, removeActivityGoal } = this.props;
 
     return (
       <Collapsible title={t('activities.goals.title')}>
         <div className="mb2">{t('activities.goals.subheader')}</div>
         {activity.goals.map((d, i) => (
           <div key={i} className="mb3">
+            {activity.goals.length > 1 && (
+              <button
+                type="button"
+                className="mb-tiny px1 py-tiny right btn btn-outline border-silver h6 line-height-1"
+                onClick={() => removeActivityGoal(activity.id, i)}
+              >
+                Remove
+              </button>
+            )}
             <Textarea
               name={`goal-${i}`}
               label={t('activities.goals.goalHeader', { number: i + 1 })}
@@ -37,6 +47,7 @@ class ActivityDetailGoals extends Component {
             <Textarea
               name={`obj-${i}`}
               label={t('activities.goals.objectiveHeader')}
+              rows="4"
               value={d.obj}
               onChange={this.handleChange(i, 'obj')}
             />
@@ -58,6 +69,7 @@ class ActivityDetailGoals extends Component {
 ActivityDetailGoals.propTypes = {
   activity: PropTypes.object.isRequired,
   addActivityGoal: PropTypes.func.isRequired,
+  removeActivityGoal: PropTypes.func.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
 
@@ -67,6 +79,7 @@ const mapStateToProps = ({ activities: { byId } }, { aId }) => ({
 
 const mapDispatchToProps = {
   addActivityGoal: addActivityGoalAction,
+  removeActivityGoal: removeActivityGoalAction,
   updateActivity: updateActivityAction
 };
 
