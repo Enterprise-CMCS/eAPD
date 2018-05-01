@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { expandActivitySection } from '../actions/activities';
 import SidebarLink from '../components/SidebarLink';
 
 const linkGroup1 = [
@@ -17,7 +18,7 @@ const linkGroup2 = [
   { id: 'certify-submit', name: 'Certify and Submit' }
 ];
 
-const Sidebar = ({ activities, place, hash }) => (
+const Sidebar = ({ activities, place, hash, expandSection }) => (
   <div className="site-sidebar bg-navy">
     <div className="p2 xs-hide sm-hide">
       <div className="mb2">
@@ -41,6 +42,7 @@ const Sidebar = ({ activities, place, hash }) => (
               key={a.id}
               anchor={a.anchor}
               isActive={a.anchor === hash}
+              onClick={() => expandSection(a.id)}
             >
               Activity {i + 1}
               {a.name ? `: ${a.name}` : ''}
@@ -66,7 +68,8 @@ const Sidebar = ({ activities, place, hash }) => (
 Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
   place: PropTypes.object.isRequired,
-  hash: PropTypes.string.isRequired
+  hash: PropTypes.string.isRequired,
+  expandSection: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ activities: { byId, allIds }, router }) => ({
@@ -78,4 +81,8 @@ const mapStateToProps = ({ activities: { byId, allIds }, router }) => ({
   hash: router.location.hash.slice(1) || ''
 });
 
-export default connect(mapStateToProps)(Sidebar);
+const mapDispatchToProps = {
+  expandSection: expandActivitySection
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

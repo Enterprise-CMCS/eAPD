@@ -11,6 +11,7 @@ import ActivityDetailExpenses from './ActivityDetailExpenses';
 import ActivityDetailStandardsAndConditions from './ActivityDetailStandardsAndConditions';
 import ActivityDetailStatePersonnel from './ActivityDetailStatePersonnel';
 import DeleteActivity from './DeleteActivity';
+import { toggleActivitySection } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import { t } from '../i18n';
 
@@ -21,8 +22,14 @@ const activityTitle = (a, i) => {
   return title;
 };
 
-const ActivityDetailAll = ({ aId, title }) => (
-  <Collapsible id={`activity-${aId}`} title={title} bgColor="darken-1">
+const ActivityDetailAll = ({ aId, expanded, title, toggleSection }) => (
+  <Collapsible
+    id={`activity-${aId}`}
+    title={title}
+    bgColor="darken-1"
+    open={expanded}
+    onChange={() => toggleSection(aId)}
+  >
     <ActivityDetailDescription aId={aId} />
     <ActivityDetailGoals aId={aId} />
     <ActivityDetailSchedule aId={aId} />
@@ -37,14 +44,21 @@ const ActivityDetailAll = ({ aId, title }) => (
 
 ActivityDetailAll.propTypes = {
   aId: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired
+  expanded: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  toggleSection: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ activities: { byId } }, { aId, num }) => {
   const activity = byId[aId];
+  const { expanded } = activity.meta;
   const title = `${t('activities.header')} › ${activityTitle(activity, num)}`;
 
-  return { title };
+  return { expanded, title };
 };
 
-export default connect(mapStateToProps)(ActivityDetailAll);
+const mapDispatchToProps = {
+  toggleSection: toggleActivitySection
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityDetailAll);
