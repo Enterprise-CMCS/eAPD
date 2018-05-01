@@ -65,8 +65,8 @@
       "addMilestoneButtonText": "Add milestone"
     },
     "contractorResources": {
-      "title": "Contractor Resources",
-      "subheader": "Tell us about your contractor resources.",
+      "title": "Contracting Resources",
+      "subheader": "Tell us about your contracting resources.",
       "labels": {
         "entryNumber": "#",
         "contractorName": "Name",
@@ -83,8 +83,8 @@
         "end": "Contractor term end",
         "cost": "Contractor cost for {{year}}"
       },
-      "removeLabel": "Remove contractor",
-      "addContractorButtonText": "Add contractor"
+      "removeLabel": "Remove resource",
+      "addContractorButtonText": "Add resource"
     },
     "statePersonnel": {
       "title": "State Personnel",
