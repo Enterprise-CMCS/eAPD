@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { t } from '../i18n';
 import { updateApd as updateApdAction } from '../actions/apd';
 import Collapsible from '../components/Collapsible';
-import { RichText, Textarea } from '../components/Inputs';
+import { RichText } from '../components/Inputs';
 import Section from '../components/Section';
 import SectionTitle from '../components/SectionTitle';
 
@@ -29,7 +29,13 @@ class ApdSummary extends Component {
   };
 
   render() {
-    const { apd, updateApd } = this.props;
+    const {
+      years,
+      overview,
+      hitNarrative,
+      hieNarrative,
+      mmisNarrative
+    } = this.props.apd;
 
     return (
       <Section id="apd-summary">
@@ -42,7 +48,7 @@ class ApdSummary extends Component {
                 <input
                   type="checkbox"
                   value={option}
-                  checked={apd.years.includes(option)}
+                  checked={years.includes(option)}
                   onChange={this.handleYears}
                 />
                 {option}
@@ -52,36 +58,30 @@ class ApdSummary extends Component {
           <div>
             <div className="mb-tiny bold">{t('apd.overview.labels.desc')}</div>
             <RichText
-              content={apd.overview}
+              content={overview}
               onSync={this.syncRichText('overview')}
             />
           </div>
         </Collapsible>
         <Collapsible title={t('apd.hit')}>
-          <Textarea
-            name="hit-narrative"
-            label={t('apd.hit')}
-            rows="5"
-            value={apd.hitNarrative}
-            onChange={e => updateApd({ hitNarrative: e.target.value })}
+          <div className="mb-tiny bold">{t('apd.hit')}</div>
+          <RichText
+            content={hitNarrative}
+            onSync={this.syncRichText('hitNarrative')}
           />
         </Collapsible>
         <Collapsible title={t('apd.hie')}>
-          <Textarea
-            name="hie-narrative"
-            label={t('apd.hie')}
-            rows="5"
-            value={apd.hieNarrative}
-            onChange={e => updateApd({ hieNarrative: e.target.value })}
+          <div className="mb-tiny bold">{t('apd.hie')}</div>
+          <RichText
+            content={hieNarrative}
+            onSync={this.syncRichText('hieNarrative')}
           />
         </Collapsible>
         <Collapsible title={t('apd.mmis')}>
-          <Textarea
-            name="mmis-narrative"
-            label={t('apd.mmis')}
-            rows="5"
-            value={apd.mmisNarrative}
-            onChange={e => updateApd({ mmisNarrative: e.target.value })}
+          <div className="mb-tiny bold">{t('apd.mmis')}</div>
+          <RichText
+            content={mmisNarrative}
+            onSync={this.syncRichText('mmisNarrative')}
           />
         </Collapsible>
       </Section>
