@@ -10,6 +10,7 @@ import {
   EXPAND_ACTIVITY_SECTION,
   REMOVE_ACTIVITY,
   REMOVE_ACTIVITY_CONTRACTOR,
+  REMOVE_ACTIVITY_GOAL,
   REMOVE_ACTIVITY_EXPENSE,
   REMOVE_ACTIVITY_MILESTONE,
   REMOVE_ACTIVITY_STATE_PERSON,
@@ -87,8 +88,12 @@ const newActivity = (id, name = '') => ({
 });
 
 const initialState = {
-  byId: { 1: newActivity(1, 'Test') },
-  allIds: [1]
+  byId: {
+    1: newActivity(1, 'SLR Administration'),
+    2: newActivity(2, 'Auditing'),
+    3: newActivity(3, '...')
+  },
+  allIds: [1, 2, 3]
 };
 
 const nextSequence = arrOfNums => Math.max(...arrOfNums, 0) + 1;
@@ -176,6 +181,17 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case REMOVE_ACTIVITY_GOAL:
+      return u(
+        {
+          byId: {
+            [action.id]: {
+              goals: goals => goals.filter((_, i) => i !== action.goalIdx)
+            }
+          }
+        },
+        state
+      );
     case ADD_ACTIVITY_EXPENSE:
       return u(
         {
@@ -190,8 +206,6 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
-    case EXPAND_ACTIVITY_SECTION:
-      return u({ byId: { [action.id]: { meta: { expanded: true } } } }, state);
     case REMOVE_ACTIVITY_EXPENSE:
       return u(
         {
@@ -227,6 +241,8 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case EXPAND_ACTIVITY_SECTION:
+      return u({ byId: { [action.id]: { meta: { expanded: true } } } }, state);
     case TOGGLE_ACTIVITY_SECTION:
       return u(
         { byId: { [action.id]: { meta: { expanded: val => !val } } } },
