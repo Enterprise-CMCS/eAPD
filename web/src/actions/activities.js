@@ -7,6 +7,7 @@ export const ADD_ACTIVITY_STATE_PERSON = 'ADD_ACTIVITY_STATE_PERSON';
 export const EXPAND_ACTIVITY_SECTION = 'EXPAND_ACTIVITY_SECTION';
 export const REMOVE_ACTIVITY = 'REMOVE_ACTIVITY';
 export const REMOVE_ACTIVITY_CONTRACTOR = 'REMOVE_ACTIVITY_CONTRACTOR';
+export const REMOVE_ACTIVITY_GOAL = 'REMOVE_ACTIVITY_GOAL';
 export const REMOVE_ACTIVITY_EXPENSE = 'REMOVE_ACTIVITY_EXPENSE';
 export const REMOVE_ACTIVITY_MILESTONE = 'REMOVE_ACTIVITY_MILESTONE';
 export const REMOVE_ACTIVITY_STATE_PERSON = 'REMOVE_ACTIVITY_STATE_PERSON';
@@ -45,6 +46,12 @@ export const removeActivityContractor = (id, contractorId) => ({
   type: REMOVE_ACTIVITY_CONTRACTOR,
   id,
   contractorId
+});
+
+export const removeActivityGoal = (id, goalIdx) => ({
+  type: REMOVE_ACTIVITY_GOAL,
+  id,
+  goalIdx
 });
 
 export const removeActivityExpense = (id, expenseId) => ({
