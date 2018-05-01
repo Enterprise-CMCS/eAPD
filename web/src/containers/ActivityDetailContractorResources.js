@@ -10,6 +10,7 @@ import {
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import { Input, Textarea } from '../components/Inputs';
+import HelpText from '../components/HelpText';
 
 class ActivityDetailContractorExpenses extends Component {
   handleChange = (index, key) => e => {
@@ -40,7 +41,7 @@ class ActivityDetailContractorExpenses extends Component {
 
     return (
       <Collapsible title={t('activities.contractorResources.title')}>
-        <p>{t('activities.contractorResources.subheader')}</p>
+        <HelpText text="activities.contractorResources.helpText" />
         <div>
           <div className="overflow-auto">
             <table

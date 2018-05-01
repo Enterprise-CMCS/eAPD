@@ -10,6 +10,7 @@ import {
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import { Input } from '../components/Inputs';
+import HelpText from '../components/HelpText';
 
 class ActivityDetailSchedule extends Component {
   handleChange = (idx, key) => e => {
@@ -29,7 +30,7 @@ class ActivityDetailSchedule extends Component {
 
     return (
       <Collapsible title={t('activities.schedule.title')}>
-        <div className="mb2">{t('activities.schedule.subheader')}</div>
+        <HelpText text="activities.schedule.helpText" />
 
         {activity.milestones.length === 0 ? (
           <div className="mb2 p1 h6 alert">

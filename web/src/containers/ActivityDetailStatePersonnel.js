@@ -9,6 +9,7 @@ import {
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import { Input, Textarea } from '../components/Inputs';
+import HelpText from '../components/HelpText';
 import { t } from '../i18n';
 
 class ActivityDetailStatePersonnel extends Component {
@@ -36,7 +37,7 @@ class ActivityDetailStatePersonnel extends Component {
 
     return (
       <Collapsible title={t('activities.statePersonnel.title')}>
-        <p>{t('activities.statePersonnel.subheader')}</p>
+        <HelpText text="activities.statePersonnel.helpText" />
         <div className="overflow-auto">
           <table
             className="mb2 h5 table table-condensed table-fixed"
