@@ -8,17 +8,16 @@ import { faChevronDown, faChevronUp } from './Icons';
 class Collapsible extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: !!props.open };
+    this.state = { open: props.open };
   }
 
   handleClick = () => {
-    this.setState(prev => ({ isOpen: !prev.isOpen }));
+    this.setState(prev => ({ open: !prev.open }));
   };
 
   render() {
-    const { bgColor, children, id, title } = this.props;
-    const { isOpen } = this.state;
-
+    const { bgColor, children, id, title, onChange } = this.props;
+    const isOpen = onChange ? this.props.open : this.state.open;
     const contentId = kebabCase(title);
 
     return (
@@ -28,7 +27,7 @@ class Collapsible extends Component {
           className="btn block col-12 left-align h3 py2 line-height-1"
           aria-expanded={isOpen}
           aria-controls={contentId}
-          onClick={this.handleClick}
+          onClick={onChange || this.handleClick}
         >
           <span className="right">
             {isOpen ? (
@@ -57,14 +56,16 @@ Collapsible.propTypes = {
   children: PropTypes.node,
   id: PropTypes.string,
   open: PropTypes.bool,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  onChange: PropTypes.func
 };
 
 Collapsible.defaultProps = {
   bgColor: 'white',
   children: null,
   id: null,
-  open: false
+  open: false,
+  onChange: null
 };
 
 export default Collapsible;

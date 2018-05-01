@@ -7,11 +7,13 @@ import {
   ADD_ACTIVITY_EXPENSE,
   ADD_ACTIVITY_MILESTONE,
   ADD_ACTIVITY_STATE_PERSON,
+  EXPAND_ACTIVITY_SECTION,
   REMOVE_ACTIVITY,
   REMOVE_ACTIVITY_CONTRACTOR,
   REMOVE_ACTIVITY_EXPENSE,
   REMOVE_ACTIVITY_MILESTONE,
   REMOVE_ACTIVITY_STATE_PERSON,
+  TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
 
@@ -78,6 +80,9 @@ const newActivity = (id, name = '') => ({
     keyPersonnel: '',
     documentation: '',
     minimizeCost: ''
+  },
+  meta: {
+    expanded: false
   }
 });
 
@@ -185,6 +190,8 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case EXPAND_ACTIVITY_SECTION:
+      return u({ byId: { [action.id]: { meta: { expanded: true } } } }, state);
     case REMOVE_ACTIVITY_EXPENSE:
       return u(
         {
@@ -218,6 +225,11 @@ const reducer = (state = initialState, action) => {
             }
           }
         },
+        state
+      );
+    case TOGGLE_ACTIVITY_SECTION:
+      return u(
+        { byId: { [action.id]: { meta: { expanded: val => !val } } } },
         state
       );
     case UPDATE_ACTIVITY:
