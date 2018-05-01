@@ -17,7 +17,7 @@ cf install-plugin autopilot -f -r CF-Community
 
 # Build the front-end
 cd web
-npm install
+npm ci
 npm run build
 cd ..
 
@@ -28,6 +28,7 @@ rm -rf seeds/test
 rm seeds/development.js
 rm seeds/test.js
 rm seeds/shared/delete-everything.js
+npm ci
 cd ..
 
 # Log into CF and push
