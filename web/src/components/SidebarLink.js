@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const SidebarLink = ({ anchor, children, isActive }) => (
+const SidebarLink = ({ anchor, children, isActive, ...rest }) => (
   <li className="mb-tiny">
     <a
       href={`#${anchor || '!'}`}
       className={`inline-block white text-decoration-none truncate ${
         isActive ? 'bold border-bottom border-width-3 border-blue' : ''
       }`}
+      {...rest}
     >
       {children}
     </a>
