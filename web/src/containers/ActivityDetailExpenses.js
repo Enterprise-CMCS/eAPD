@@ -64,7 +64,14 @@ class ActivityDetailExpenses extends Component {
                   <td>
                     <Select
                       name={`expense-${i}-desc`}
-                      options={['Expense A', 'Expense B', 'Other']}
+                      options={[
+                        'Hardware, software, and licensing',
+                        'Equipment and supplies',
+                        'Training and outreach',
+                        'Travel',
+                        'Administrative operations',
+                        'Miscellaneous expenses for the project'
+                      ]}
                       label="Expense category"
                       hideLabel
                       value={expense.category}
