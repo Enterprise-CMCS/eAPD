@@ -10,6 +10,7 @@ import {
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import { Textarea } from '../components/Inputs';
+import HelpText from '../components/HelpText';
 
 class ActivityDetailGoals extends Component {
   handleChange = (idx, key) => e => {
@@ -25,7 +26,12 @@ class ActivityDetailGoals extends Component {
 
     return (
       <Collapsible title={t('activities.goals.title')}>
-        <div className="mb2">{t('activities.goals.subheader')}</div>
+        <div className="mb2">
+          <HelpText
+            text="activities.goals.helpText"
+            reminder="activities.goals.reminder"
+          />
+        </div>
         {activity.goals.map((d, i) => (
           <div key={i} className="mb3">
             {activity.goals.length > 1 && (
