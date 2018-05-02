@@ -133,7 +133,7 @@
     },
     "expenses": {
       "helpText":
-        "7) “Miscellaneous expenses” include materials and supplies, communications‐related expenses, printing costs and facilities expenses; these costs can be broken out into distinct cost categories in the budget detail per the state’s Chart of Account\n\n8) Provide an explanation of these projected expenditures"
+        "1) “Miscellaneous expenses” include materials and supplies, communications‐related expenses, printing costs and facilities expenses; these costs can be broken out into distinct cost categories in the budget detail per the state’s Chart of Account\n\n2) Provide an explanation of these projected expenditures"
     },
     "costAllocate": {
       "title": "Cost Allocation and Other Funding Sources",
