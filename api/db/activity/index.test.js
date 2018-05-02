@@ -14,6 +14,7 @@ tap.test('activity model index', async activityIndexTests => {
       'apdActivityApproach',
       'apdActivityContractorResource',
       'apdActivityContractorResourceCost',
+      'apdActivityCostAllocation',
       'apdActivityExpense',
       'apdActivityExpenseEntry',
       'apdActivityGoal',

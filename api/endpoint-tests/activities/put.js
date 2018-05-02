@@ -115,6 +115,7 @@ tap.test(
               description: 'updated description',
               approaches: [],
               contractorResources: [],
+              costAllocation: [],
               expenses: [],
               goals: [
                 {
