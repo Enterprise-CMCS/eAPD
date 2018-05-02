@@ -18,6 +18,21 @@
         "desc": "Please provide an overview of your program."
       }
     },
+    "keyPersonnel": {
+      "title": "Key Personnel",
+      "helpText":
+        "Tell us about your key state personnel associated with this APD.",
+      "labels": {
+        "entryNum": "#",
+        "title": "Title",
+        "desc": "Description",
+        "yearCost": "{{year}} Cost",
+        "costAmt": "Amount",
+        "costPerc": "% FTE"
+      },
+      "removeLabel": "Remove personnel",
+      "addButtonText": "Add personnel"
+    },
     "hit": {
       "title": "HIT Narrative",
       "helpText":
