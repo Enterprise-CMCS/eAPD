@@ -46,7 +46,7 @@ const newContractor = id => ({
 
 const newExpense = id => ({
   id,
-  category: 'Expense A',
+  category: 'Hardware, software, and licensing',
   desc: '',
   years: {
     2018: 100,
