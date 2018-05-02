@@ -123,3 +123,5 @@ export const getParams = str =>
       const valGood = val === undefined ? null : decodeURIComponent(val);
       return Object.assign(params, { [key]: valGood });
     }, {});
+
+export const nextSequence = arrOfNums => Math.max(...arrOfNums, 0) + 1;
