@@ -105,8 +105,12 @@ jobs:
       - restore_cache:
           key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
       - run:
+          name: get wait-on
+          command: |
+            npm i -g wait-on
+      - run:
           name: wait for database
-          command: sleep 5
+          command: wait-on tcp:db:5432 -t 300000
       - run:
           name: database migration
           working_directory: ~/project/api
@@ -122,7 +126,7 @@ jobs:
           background: true
       - run:
           name: wait for API
-          command: sleep 5
+          command: wait-on tcp:localhost:8000 -t 300000
       - run:
           name: run tests
           working_directory: ~/project/api
