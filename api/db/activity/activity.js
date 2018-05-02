@@ -32,6 +32,10 @@ module.exports = {
       return this.hasMany('apdActivityStatePersonnel');
     },
 
+    costAllocation() {
+      return this.hasMany('apdActivityCostAllocation');
+    },
+
     format: attr => ({
       id: attr.id,
       apd_id: attr.apd_id,
@@ -53,7 +57,8 @@ module.exports = {
         contractorResources: 'apdActivityContractorResource',
         expenses: 'apdActivityExpense',
         schedule: 'apdActivitySchedule',
-        statePersonnel: 'apdActivityStatePersonnel'
+        statePersonnel: 'apdActivityStatePersonnel',
+        costAllocation: 'apdActivityCostAllocation'
       },
       foreignKey: 'activity_id',
       withRelated: [
@@ -66,7 +71,8 @@ module.exports = {
         'expenses.entries',
         'schedule',
         'statePersonnel',
-        'statePersonnel.years'
+        'statePersonnel.years',
+        'costAllocation'
       ]
     },
 
@@ -100,6 +106,7 @@ module.exports = {
         expenses: this.related('expenses'),
         schedule: this.related('schedule'),
         statePersonnel: this.related('statePersonnel'),
+        costAllocation: this.related('costAllocation'),
         otherFundingSources: {
           description: this.get('other_funding_sources_description'),
           amount: this.get('other_funding_sources_amount')

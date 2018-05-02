@@ -18,6 +18,7 @@ tap.test('activity data model', async activityModelTests => {
           expenses: Function,
           schedule: Function,
           statePersonnel: Function,
+          costAllocation: Function,
 
           static: {
             updateableFields: ['name', 'description'],
@@ -27,7 +28,8 @@ tap.test('activity data model', async activityModelTests => {
               contractorResources: 'apdActivityContractorResource',
               expenses: 'apdActivityExpense',
               schedule: 'apdActivitySchedule',
-              statePersonnel: 'apdActivityStatePersonnel'
+              statePersonnel: 'apdActivityStatePersonnel',
+              costAllocation: 'apdActivityCostAllocation'
             },
             foreignKey: 'activity_id',
             withRelated: [
@@ -40,7 +42,8 @@ tap.test('activity data model', async activityModelTests => {
               'expenses.entries',
               'schedule',
               'statePersonnel',
-              'statePersonnel.years'
+              'statePersonnel.years',
+              'costAllocation'
             ]
           }
         }
@@ -164,6 +167,23 @@ tap.test('activity data model', async activityModelTests => {
         apdTests.ok(
           self.hasMany.calledWith('apdActivitySchedule'),
           'sets up the relationship mapping to schedule'
+        );
+        apdTests.equal(output, 'can', 'returns the expected value');
+      }
+    );
+
+    relationshipTests.test(
+      'activity model sets up cost allocation relationship',
+      async apdTests => {
+        const self = {
+          hasMany: sinon.stub().returns('can')
+        };
+
+        const output = activity.apdActivity.costAllocation.bind(self)();
+
+        apdTests.ok(
+          self.hasMany.calledWith('apdActivityCostAllocation'),
+          'sets up the relationship mapping to cost allocation'
         );
         apdTests.equal(output, 'can', 'returns the expected value');
       }
