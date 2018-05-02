@@ -17,6 +17,7 @@ import {
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
+import { nextSequence } from '../util';
 
 const newGoal = () => ({ desc: '', obj: '' });
 
@@ -95,8 +96,6 @@ const initialState = {
   },
   allIds: [1, 2, 3]
 };
-
-const nextSequence = arrOfNums => Math.max(...arrOfNums, 0) + 1;
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {

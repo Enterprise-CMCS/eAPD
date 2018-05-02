@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../i18n';
+import ApdKeyPersonnel from './ApdKeyPersonnel';
 import { updateApd as updateApdAction } from '../actions/apd';
 import Collapsible from '../components/Collapsible';
 import { RichText } from '../components/Inputs';
 import Section from '../components/Section';
 import SectionTitle from '../components/SectionTitle';
 import HelpText from '../components/HelpText';
+import { t } from '../i18n';
 
 const YEAR_OPTIONS = ['2018', '2019', '2020'];
 
@@ -68,6 +69,7 @@ class ApdSummary extends Component {
             />
           </div>
         </Collapsible>
+        <ApdKeyPersonnel />
         <Collapsible title={t('apd.hit.title')}>
           <HelpText text="apd.hit.helpText" />
           <RichText
