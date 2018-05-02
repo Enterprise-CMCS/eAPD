@@ -6,6 +6,7 @@ import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
 import { Input, RichText } from '../components/Inputs';
+import HelpText from '../components/HelpText';
 
 const ActivityDetailCostAllocate = props => {
   const { activity, updateActivity } = props;
@@ -18,6 +19,10 @@ const ActivityDetailCostAllocate = props => {
   return (
     <Collapsible title={t('activities.costAllocate.title')}>
       <div className="mb3">
+        <HelpText
+          text="activities.costAllocate.help.costAllocate"
+          reminder="activities.costAllocate.reminder.costAllocate"
+        />
         <div className="mb-tiny bold">
           {t('activities.costAllocate.label.costAllocateDesc')}
         </div>
@@ -27,6 +32,10 @@ const ActivityDetailCostAllocate = props => {
         />
       </div>
       <div className="mb3">
+        <HelpText
+          text="activities.costAllocate.help.otherFunding"
+          reminder="activities.costAllocate.reminder.otherFunding"
+        />
         <div className="mb-tiny bold">
           {t('activities.costAllocate.label.otherFundingDesc')}
         </div>

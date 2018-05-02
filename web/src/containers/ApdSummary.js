@@ -8,6 +8,7 @@ import Collapsible from '../components/Collapsible';
 import { RichText } from '../components/Inputs';
 import Section from '../components/Section';
 import SectionTitle from '../components/SectionTitle';
+import HelpText from '../components/HelpText';
 
 const YEAR_OPTIONS = ['2018', '2019', '2020'];
 
@@ -41,6 +42,10 @@ class ApdSummary extends Component {
       <Section id="apd-summary">
         <SectionTitle>{t('apd.sectionTitle')}</SectionTitle>
         <Collapsible title={t('apd.overview.title')}>
+          <HelpText
+            text="apd.overview.helpText"
+            reminder="apd.overview.reminder"
+          />
           <div className="mb3">
             <div className="mb-tiny bold">{t('apd.overview.yearsCovered')}</div>
             {YEAR_OPTIONS.map(option => (
@@ -63,22 +68,22 @@ class ApdSummary extends Component {
             />
           </div>
         </Collapsible>
-        <Collapsible title={t('apd.hit')}>
-          <div className="mb-tiny bold">{t('apd.hit')}</div>
+        <Collapsible title={t('apd.hit.title')}>
+          <HelpText text="apd.hit.helpText" />
           <RichText
             content={hitNarrative}
             onSync={this.syncRichText('hitNarrative')}
           />
         </Collapsible>
-        <Collapsible title={t('apd.hie')}>
-          <div className="mb-tiny bold">{t('apd.hie')}</div>
+        <Collapsible title={t('apd.hie.title')}>
+          <HelpText text="apd.hie.helpText" />
           <RichText
             content={hieNarrative}
             onSync={this.syncRichText('hieNarrative')}
           />
         </Collapsible>
-        <Collapsible title={t('apd.mmis')}>
-          <div className="mb-tiny bold">{t('apd.mmis')}</div>
+        <Collapsible title={t('apd.mmis.title')}>
+          <HelpText text="apd.mmis.helpText" />
           <RichText
             content={mmisNarrative}
             onSync={this.syncRichText('mmisNarrative')}
