@@ -1,4 +1,4 @@
-import apd from './apd';
+import apd, { newPerson } from './apd';
 
 describe('APD reducer', () => {
   const initialState = {
@@ -6,6 +6,7 @@ describe('APD reducer', () => {
       id: '',
       years: ['2018'],
       overview: '',
+      keyPersonnel: [newPerson(1), newPerson(2), newPerson(3)],
       hitNarrative: '',
       hieNarrative: '',
       mmisNarrative: ''
