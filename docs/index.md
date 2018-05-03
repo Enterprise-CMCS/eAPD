@@ -55,6 +55,12 @@ spec document, once the API is running, you can browse to its `/open-api`
 endpoint. You can also use a hosted version of
 [Swagger UI](http://petstore.swagger.io/) to get a nicer visualization.
 
+## Database
+
+The current database model is presented here.  The `knex_*` tables are used to manage migration versions by our database interaction library.
+
+![database model diagram](./database-diagram.png)
+
 ## Testing
 
 We also have [documentation about how to run tests](testing.md).
