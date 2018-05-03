@@ -10,19 +10,22 @@
     "seed": "knex seed:run",
     "start": "node main.js",
     "start-dev": "nodemon ./main.js",
-    "test":
-      "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-browser --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
+    "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-browser --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
     "test-endpoints": "tap --reporter=spec 'endpoint-tests/*/**/*.js'",
-    "test-specific":
-      "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec",
-    "prettier":
-      "prettier --single-quote --trailing-comma none --write \"**/*.js\""
+    "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec",
+    "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/18F/cms-hitech-apd.git"
   },
-  "keywords": ["cms", "medicaid", "hitech", "emr", "apd"],
+  "keywords": [
+    "cms",
+    "medicaid",
+    "hitech",
+    "emr",
+    "apd"
+  ],
   "contributors": [
     "Nicole Fenton",
     "Meghana Khandekar",
@@ -41,31 +44,30 @@
     "bookshelf": "^0.12.1",
     "client-sessions": "^0.8.0",
     "cors": "^2.8.4",
-    "dotenv": "^5.0.0",
-    "express": "^4.16.2",
-    "joi": "^13.1.2",
-    "knex": "^0.14.4",
-    "lodash.isequal": "^4.5.0",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "joi": "^13.2.0",
+    "knex": "^0.14.6",
     "lodash.pick": "^4.4.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "uuid": "^3.2.1",
-    "winston": "^2.4.0",
+    "winston": "^2.4.2",
     "zxcvbn": "^4.4.2"
   },
   "engines": {
     "node": "^8.9"
   },
   "devDependencies": {
-    "eslint": "^4.18.1",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.9.0",
-    "nodemon": "^1.15.1",
-    "prettier": "^1.10.2",
-    "request": "^2.83.0",
-    "sinon": "^4.4.2",
-    "tap": "^11.1.1"
+    "eslint-plugin-import": "^2.11.0",
+    "nodemon": "^1.17.3",
+    "prettier": "^1.12.1",
+    "request": "^2.85.0",
+    "sinon": "^5.0.3",
+    "tap": "^11.1.4"
   }
 }
