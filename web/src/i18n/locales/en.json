@@ -83,7 +83,7 @@
       "subheader":
         "List the goals you're hoping to accomplish as part of this activity.",
       "helpText":
-        "Consider organizing the objectives of the projects as they relate to specific goals and vision for the overall HIT program (see example in the Addendum)\n\nDescribe how the state will measure progress toward goals and objectives (refer to the latest version of the SMHP as deemed appropriate) ",
+        "Consider organizing objectives of projects as related to specific goals. Also, include your vision for the overall HIT program (see example in the Addendum.)\n\nDescribe how the state will measure progress toward goals and objectives (refer to the latest version of the SMHP as deemed appropriate) ",
       "reminder":
         "DON'T FORGET: Add a clear statement of goals and/or objectives and how the state will measure and monitor progress toward them.",
       "goalHeader": "Goal #{{number}}",
@@ -97,7 +97,7 @@
         "List the major milestones you’re working towards as part of this activity.",
       "helpText":
         "1) List out all activity milestones, including activities that have occurred under previously approved APDs.\n2) For each activity, include start date, end date or projected end date, and status (completed, ongoing, not started, etc.)",
-      "noMilestonesNotice": "Oh no! Please add milestones for this activity.",
+      "noMilestonesNotice": "Did you forget to add milestones? Please add milestones for this activity.",
       "milestoneHeader": "Milestone",
       "milestoneLabel": "milestone name",
       "startHeader": "Planned start",
@@ -167,7 +167,7 @@
         "costAllocate":
           "REMEMBER: Do not assume that the absence of other payers is sufficient cause for Medicaid to be the primary payer. Also, limit ambiguity about other potential federal funding sources; for example, if no CHIP funds are being requested, include a statement to that effect in this section.",
         "otherFunding":
-          "1) Do not get bogged down in detailed descriptions of the grant activities; high level descriptions are appropriate (see addendum for example)\n\n2) Don’t forget to make sure any funding amounts are consistent with the IAPD‐U request"
+          "1) High level descriptions are appropriate for grant activities (see addendum for example)\n\n2) Ensure funding amounts are consistent with the IAPD‐U request"
       }
     },
     "standardsAndConditions": {
