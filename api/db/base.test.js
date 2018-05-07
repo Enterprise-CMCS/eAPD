@@ -244,18 +244,8 @@ tap.test('base data model', async baseModelTests => {
         async test => {
           orm.transaction.resolves();
 
-          await instanceExtension.synchronize.bind(self)({
-            bad: 'should go away',
-            good: 'should stay'
-          });
+          await instanceExtension.synchronize.bind(self)({});
 
-          test.ok(
-            self.pickUpdateable.calledWith({
-              bad: 'should go away',
-              good: 'should stay'
-            }),
-            'filters raw data'
-          );
           test.ok(orm.transaction.calledOnce, 'starts a database transaction');
         }
       );
