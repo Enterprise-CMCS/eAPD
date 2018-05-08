@@ -36,17 +36,17 @@
     "hit": {
       "title": "HIT Narrative",
       "helpText":
-        "Briefly summarize your program HIT activities contained within this APD."
+        "Briefly summarize your program HIT activities contained within this APD. If you don't have any HIT activities, you can skip this section."
     },
     "hie": {
       "title": "HIE Narrative",
       "helpText":
-        "Briefly summarize your program HIE activities contained within this APD."
+        "Briefly summarize your program HIE activities contained within this APD. If you don't have any HIE activities, you can skip this section."
     },
     "mmis": {
       "title": "MMIS Narrative",
       "helpText":
-        "Briefly summarize your program MMIS activities contained within this APD."
+        "Briefly summarize your program MMIS activities contained within this APD. If you don't have any MMIS activities, you can skip this section."
     }
   },
 
@@ -61,7 +61,7 @@
       "header": "Please confirm",
       "body": "Are you sure you’d like to remove this activity?",
       "yes": "Yes",
-      "no": "Cancel"
+      "no": "No"
     },
     "header": "Program Activities",
     "namePrefix": "Activity",
