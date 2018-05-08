@@ -5,6 +5,23 @@
   "notifications": "Notifications",
   "help": "Help",
 
+  "sidebar": {
+    "titles": {
+      "programSummary": "Program Summary",
+      "previousActivities": "Results of Previous Activities",
+      "activities": "Program Activities",
+      "activity": {
+        "zero": "Activity {{number}}",
+        "other": "Activity {{number}}: {{name}}"
+      },
+      "budget": "Proposed Budget",
+      "assurances": "Assurances and Compliance",
+      "summary": "Executive/Overall Summary",
+      "submit": "Certify and Submit"
+    },
+    "savePdfButtonText": "Save as PDF"
+  },
+
   "apd": {
     "sectionTitle": "Program Summary",
     "overview": {
@@ -97,7 +114,8 @@
         "List the major milestones you’re working towards as part of this activity.",
       "helpText":
         "1) List out all activity milestones, including activities that have occurred under previously approved APDs.\n2) For each activity, include start date, end date or projected end date, and status (completed, ongoing, not started, etc.)",
-      "noMilestonesNotice": "Did you forget to add milestones? Please add milestones for this activity.",
+      "noMilestonesNotice":
+        "Did you forget to add milestones? Please add milestones for this activity.",
       "milestoneHeader": "Milestone",
       "milestoneLabel": "milestone name",
       "startHeader": "Planned start",
