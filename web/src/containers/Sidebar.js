@@ -45,9 +45,8 @@ const Sidebar = ({ activities, place, hash, expandSection }) => (
               isActive={a.anchor === hash}
               onClick={() => expandSection(a.id)}
             >
-              {t('sidebar.titles.activity', {
+              {t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
                 number: i + 1,
-                count: a.name ? a.name.length : 0,
                 name: a.name
               })}
             </SidebarLink>

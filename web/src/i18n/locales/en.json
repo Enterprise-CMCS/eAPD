@@ -10,10 +10,8 @@
       "programSummary": "Program Summary",
       "previousActivities": "Results of Previous Activities",
       "activities": "Program Activities",
-      "activity": {
-        "zero": "Activity {{number}}",
-        "other": "Activity {{number}}: {{name}}"
-      },
+      "activity-set": "Activity {{number}}: {{name}}",
+      "activity-unset": "Activity {{number}}",
       "budget": "Proposed Budget",
       "assurances": "Assurances and Compliance",
       "summary": "Executive/Overall Summary",
