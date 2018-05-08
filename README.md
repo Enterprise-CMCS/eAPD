@@ -1,7 +1,7 @@
 [![Build status](https://img.shields.io/circleci/project/github/18F/cms-hitech-apd.svg)](https://circleci.com/gh/18F/workflows/cms-hitech-apd)
-[![Maintainability](https://img.shields.io/codeclimate/maintainability/18F/cms-hitech-apd.svg)](https://codeclimate.com/github/18F/cms-hitech-apd/maintainability)
 [![Test coverage](https://img.shields.io/codecov/c/github/18F/cms-hitech-apd.svg)](https://codecov.io/gh/18F/cms-hitech-apd)
-[![Dependency status](https://img.shields.io/gemnasium/18F/cms-hitech-apd.svg)](https://gemnasium.com/github.com/18F/cms-hitech-apd)
+[![Known Vulnerabilities](https://snyk.io/test/github/18f/cms-hitech-apd/badge.svg?targetFile=web%2Fpackage.json)](https://snyk.io/test/github/18f/cms-hitech-apd?targetFile=web%2Fpackage.json)
+[![Known Vulnerabilities](https://snyk.io/test/github/18f/cms-hitech-apd/badge.svg?targetFile=api%2Fpackage.json)](https://snyk.io/test/github/18f/cms-hitech-apd?targetFile=api%2Fpackage.json)
 
 # CMS HITECH APD app
 
