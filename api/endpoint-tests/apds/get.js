@@ -42,7 +42,11 @@ tap.test('APD endpoint | GET /apds', async getAPDsTest => {
           {
             id: 4000,
             status: 'draft',
-            state_id: 'mn',
+            state: 'mn',
+            programOverview: null,
+            narrativeHIE: null,
+            narrativeHIT: null,
+            narrativeMMIS: null,
             activities: [
               {
                 id: 4100,
