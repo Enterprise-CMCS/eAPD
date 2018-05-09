@@ -1,0 +1,258 @@
+/*
+ * Graphviz of 'dump.sql', created 2018-05-03 21:04:08.249581
+ * Generated from https://github.com/rm-hull/sql_graphviz
+ */
+digraph g { graph [ rankdir = "LR" ];
+
+  "activities" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activities</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="name"><font face="Times-bold">name</font>  <font color="#535353">character varying ( 128 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="apd_id"><font face="Times-bold">apd_id</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="other_funding_sources_description"><font face="Times-bold">other_funding_sources_description</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="other_funding_sources_amount"><font face="Times-bold">other_funding_sources_amount</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+      </table>
+    >];
+
+  "activity_approaches" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_approaches</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="alternatives"><font face="Times-bold">alternatives</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="explanation"><font face="Times-bold">explanation</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "activity_contractor_resources" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_contractor_resources</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="name"><font face="Times-bold">name</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="start"><font face="Times-bold">start</font>  <font color="#535353">date</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="end"><font face="Times-bold">"end"</font>  <font color="#535353">date</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "activity_contractor_resources_yearly" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_contractor_resources_yearly</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="year"><font face="Times-bold">year</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="cost"><font face="Times-bold">cost</font>  <font color="#535353">numeric ( 15,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="contractor_resource_id"><font face="Times-bold">contractor_resource_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "activity_expense_entries" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_expense_entries</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="year"><font face="Times-bold">year</font>  <font color="#535353">character varying ( 4 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="amount"><font face="Times-bold">amount</font>  <font color="#535353">numeric ( 10,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="expense_id"><font face="Times-bold">expense_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "activity_expenses" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_expenses</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="name"><font face="Times-bold">name</font>  <font color="#535353">character varying ( 64 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "activity_goal_objectives" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_goal_objectives</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_goal_id"><font face="Times-bold">activity_goal_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "activity_goals" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_goals</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "activity_schedule" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_schedule</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="actual_end"><font face="Times-bold">actual_end</font>  <font color="#535353">date</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="actual_start"><font face="Times-bold">actual_start</font>  <font color="#535353">date</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="milestone"><font face="Times-bold">milestone</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="planned_end"><font face="Times-bold">planned_end</font>  <font color="#535353">date</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="planned_start"><font face="Times-bold">planned_start</font>  <font color="#535353">date</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="status"><font face="Times-bold">status</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "activity_state_peronnel" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_state_peronnel</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="title"><font face="Times-bold">title</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "activity_state_personnel_yearly" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_state_personnel_yearly</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="year"><font face="Times-bold">year</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="cost"><font face="Times-bold">cost</font>  <font color="#535353">numeric ( 15,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="fte"><font face="Times-bold">fte</font>  <font color="#535353">numeric ( 3,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="personnel_id"><font face="Times-bold">personnel_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "apds" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">apds</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="status"><font face="Times-bold">status</font>  <font color="#535353">character varying ( 64 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="period"><font face="Times-bold">period</font>  <font color="#535353">character varying ( 64 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="created_at"><font face="Times-bold">created_at</font>  <font color="#535353">timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="updated_at"><font face="Times-bold">updated_at</font>  <font color="#535353">timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="approved_at"><font face="Times-bold">approved_at</font>  <font color="#535353">timestamp with time zone</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="state_id"><font face="Times-bold">state_id</font>  <font color="#535353">character varying ( 2 )</font></td></tr>
+      </table>
+    >];
+
+  "auth_activities" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">auth_activities</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="name"><font face="Times-bold">name</font>  <font color="#535353">character varying ( 64 )</font></td></tr>
+      </table>
+    >];
+
+  "auth_role_activity_mapping" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">auth_role_activity_mapping</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="role_id"><font face="Times-bold">role_id</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "auth_roles" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">auth_roles</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="name"><font face="Times-bold">name</font>  <font color="#535353">character varying ( 64 )</font></td></tr>
+      </table>
+    >];
+
+  "knex_migrations" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">knex_migrations</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="name"><font face="Times-bold">name</font>  <font color="#535353">character varying ( 255 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="batch"><font face="Times-bold">batch</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="migration_time"><font face="Times-bold">migration_time</font>  <font color="#535353">timestamp with time zone</font></td></tr>
+      </table>
+    >];
+
+  "knex_migrations_lock" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">knex_migrations_lock</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="is_locked"><font face="Times-bold">is_locked</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "states" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">states</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">character varying ( 2 ) NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="name"><font face="Times-bold">name</font>  <font color="#535353">character varying ( 64 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="medicaid_office"><font face="Times-bold">medicaid_office</font>  <font color="#535353">json</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="state_pocs"><font face="Times-bold">state_pocs</font>  <font color="#535353">json</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="program_vision"><font face="Times-bold">program_vision</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="program_benefits"><font face="Times-bold">program_benefits</font>  <font color="#535353">text</font></td></tr>
+      </table>
+    >];
+
+  "users" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">users</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="email"><font face="Times-bold">email</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="password"><font face="Times-bold">password</font>  <font color="#535353">character varying ( 60 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="auth_role"><font face="Times-bold">auth_role</font>  <font color="#535353">character varying ( 64 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="name"><font face="Times-bold">name</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="position"><font face="Times-bold">"position"</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="phone"><font face="Times-bold">phone</font>  <font color="#535353">character varying ( 10 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="state_id"><font face="Times-bold">state_id</font>  <font color="#535353">character varying ( 2 )</font></td></tr>
+      </table>
+    >];
+  "activities":apd_id -> "apds":id
+  "activity_approaches":activity_id -> "activities":id
+  "activity_contractor_resources":activity_id -> "activities":id
+  "activity_contractor_resources_yearly":contractor_resource_id -> "activity_contractor_resources":id
+  "activity_expense_entries":expense_id -> "activity_expenses":id
+  "activity_expenses":activity_id -> "activities":id
+  "activity_goal_objectives":activity_goal_id -> "activity_goals":id
+  "activity_goals":activity_id -> "activities":id
+  "activity_schedule":activity_id -> "activities":id
+  "activity_state_peronnel":activity_id -> "activities":id
+  "activity_state_personnel_yearly":personnel_id -> "activity_state_peronnel":id
+  "apds":state_id -> "states":id
+  "auth_role_activity_mapping":activity_id -> "auth_activities":id
+  "auth_role_activity_mapping":role_id -> "auth_roles":id
+  "users":auth_role -> "auth_roles":name
+  "users":state_id -> "states":id
+}
