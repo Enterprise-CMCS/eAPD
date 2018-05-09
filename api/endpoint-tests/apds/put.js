@@ -4,7 +4,8 @@ const {
   getFullPath,
   login,
   request,
-  unauthenticatedTest
+  unauthenticatedTest,
+  unauthorizedTest
 } = require('../utils');
 
 tap.test('APD endpoint | PUT /apds/:id', async putAPDTest => {
@@ -12,11 +13,12 @@ tap.test('APD endpoint | PUT /apds/:id', async putAPDTest => {
   await db().seed.run();
 
   unauthenticatedTest('put', url(1), putAPDTest);
+  unauthorizedTest('put', url(1), putAPDTest);
 
   putAPDTest.test(
     'when authenticated as a user with permission',
     async authenticated => {
-      const cookies = await login('user2@email', 'something');
+      const cookies = await login();
 
       authenticated.test('with a non-existant apd ID', async invalidTest => {
         const { response, body } = await request.put(url(9000), {

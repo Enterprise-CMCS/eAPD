@@ -4,7 +4,8 @@ const {
   getFullPath,
   login,
   request,
-  unauthenticatedTest
+  unauthenticatedTest,
+  unauthorizedTest
 } = require('../utils');
 
 tap.test('APD endpoint | GET /apds', async getAPDsTest => {
@@ -12,11 +13,12 @@ tap.test('APD endpoint | GET /apds', async getAPDsTest => {
   await db().seed.run();
 
   unauthenticatedTest('get', url, getAPDsTest);
+  unauthorizedTest('get', url, getAPDsTest);
 
   getAPDsTest.test(
-    'when authenticated as a user with a state',
+    'when authenticated as a user without a state',
     async invalidTest => {
-      const cookies = await login();
+      const cookies = await login('all-permissions-no-state', 'passwordq');
 
       const { response, body } = await request.get(url, { jar: cookies });
 
@@ -28,7 +30,7 @@ tap.test('APD endpoint | GET /apds', async getAPDsTest => {
   getAPDsTest.test(
     'when authenticated as a user with a state',
     async validTest => {
-      const cookies = await login('user2@email', 'something');
+      const cookies = await login();
 
       const { response, body } = await request.get(url, {
         jar: cookies,

@@ -16,7 +16,10 @@ const execRequest = async (method, ...args) =>
   });
 const requestFor = method => (...args) => execRequest(method, ...args);
 
-const login = async (username = 'em@il.com', password = 'password') => {
+const login = async (
+  username = 'all-permissions-and-state',
+  password = 'password'
+) => {
   const cookies = request.jar();
 
   const { response } = await execRequest('post', getFullPath('/auth/login'), {

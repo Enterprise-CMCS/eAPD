@@ -46,6 +46,7 @@ tap.test('auth roles endpoint | GET /auth/roles', async getUsersTest => {
             'submit-document',
             'submit-federal-response',
             'submit-state-response',
+            'view-document',
             'view-roles',
             'view-users'
           ]

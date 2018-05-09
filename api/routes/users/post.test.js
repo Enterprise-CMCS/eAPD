@@ -82,7 +82,7 @@ tap.test('user POST endpoint', async endpointTest => {
         User.validate.rejects(new Error('invalidate-test'));
 
         await handler(
-          { body: { email: 'em@il.com', password: 'password' } },
+          { body: { email: 'all-permissions-and-state', password: 'password' } },
           res
         );
 
@@ -102,7 +102,7 @@ tap.test('user POST endpoint', async endpointTest => {
         User.save.rejects();
 
         await handler(
-          { body: { email: 'em@il.com', password: 'password' } },
+          { body: { email: 'all-permissions-and-state', password: 'password' } },
           res
         );
 
@@ -119,7 +119,7 @@ tap.test('user POST endpoint', async endpointTest => {
         User.save.resolves();
 
         await handler(
-          { body: { email: 'em@il.com', password: 'password' } },
+          { body: { email: 'all-permissions-and-state', password: 'password' } },
           res
         );
 

@@ -1,7 +1,7 @@
 const logger = require('../../../logger')('apd activites route put');
 const { apdActivity: defaultActivityModel } = require('../../../db').models;
 const {
-  loggedIn,
+  can,
   loadActivity,
   synchronizeSpecific,
   userCanEditAPD
@@ -25,7 +25,7 @@ module.exports = (app, ActivityModel = defaultActivityModel) => {
 
     app.put(
       `/activities/:id${putter ? `/${putter}` : ''}`,
-      loggedIn,
+      can('edit-document'),
       loadActivity(),
       userCanEditAPD(ActivityModel),
       synchronizeSpecific(syncResponder)

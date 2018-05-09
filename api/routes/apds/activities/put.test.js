@@ -2,7 +2,7 @@ const tap = require('tap');
 const sinon = require('sinon');
 
 const {
-  loggedIn,
+  can,
   loadActivity,
   synchronizeSpecific,
   userCanEditAPD
@@ -18,7 +18,7 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
   endpointTest.ok(
     app.put.calledWith(
       '/activities/:id',
-      loggedIn,
+      can('edit-document'),
       loadActivity(),
       userCanEditAPD(ActivityModel),
       synchronizeSpecific(putEndpoint.syncResponders.base)
@@ -50,7 +50,7 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
     endpointTest.ok(
       app.put.calledWith(
         `/activities/:id/${component}`,
-        loggedIn,
+        can('edit-document'),
         loadActivity(),
         userCanEditAPD(ActivityModel),
         synchronizeSpecific(putEndpoint.syncResponders[component])
