@@ -12,7 +12,8 @@ const activities = {
   'create-draft': false,
   'edit-document': false,
   'edit-response': false,
-  'delete-users': false
+  'delete-users': false,
+  'view-document': true
 };
 
 const roles = {
@@ -39,7 +40,8 @@ const roleToActivityMappings = {
     'create-draft',
     'edit-document',
     'edit-response',
-    'delete-users'
+    'delete-users',
+    'view-document'
   ],
   'federal analyst': [
     'view-users',
@@ -47,20 +49,22 @@ const roleToActivityMappings = {
     'view-roles',
     'create-roles',
     'edit-roles',
+    'view-document',
     'submit-federal-response',
     'submit-clearance',
     'edit-comments'
   ],
-  'federal leadership': ['view-users'],
+  'federal leadership': ['view-users', 'view-document'],
   'federal SME': ['edit-comments'],
   'state coordinator': [
+    'view-document',
     'submit-document',
     'submit-state-response',
     'create-draft',
     'edit-document',
     'edit-response'
   ],
-  'state SME': ['edit-document', 'edit-response']
+  'state SME': ['view-document', 'edit-document', 'edit-response']
 };
 
 // Take the knex object and the table name as arguments, instead of just
