@@ -11,6 +11,10 @@ const openAPI = {
         200: {
           description: 'Information about the state, territory, or district',
           content: jsonResponse({ $ref: '#/components/schemas/state' })
+        },
+        401: {
+          description: 'User does not have access to any state',
+          content: errorToken
         }
       }
     },
@@ -29,6 +33,10 @@ const openAPI = {
         },
         400: {
           description: 'The request was invalid',
+          content: errorToken
+        },
+        401: {
+          description: 'User does not have access to any state',
           content: errorToken
         }
       }
@@ -61,4 +69,4 @@ const openAPI = {
   }
 };
 
-module.exports = requiresAuth(openAPI);
+module.exports = requiresAuth(openAPI, { has401: false });
