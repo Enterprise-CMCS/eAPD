@@ -14,32 +14,30 @@ class ValidationError extends Error {
   }
 }
 
+/**
+ * @description Syncs children of a parent object
+ * @param {object} data The raw data that was sent into the parent, from which child objects will be synchronized
+ * @param {Object} childModels The child models to sync.  Keys are property names from data, and values are the model names that those properties should be synced with.
+ *   E.g., if childModels is { prop: 'MyModel' }, then data.prop will be used to synchronize instances of MyModel
+ * @param {Object[]} allModels List of all models.  Keys are model names, values are model classes.
+ * @param {Object} foreignKey An object describing how to relate children back to the parent.  Should be something that can be passed to "where", and used to populate new objects.  E.g., { apd_id: 7 }
+ * @param {boolean} deleteOthers Whether to delete child models that aren't represented in the new data
+ * @param {Object} transacting Transaction object, if this is being executed in a transaction
+ * @param {string} modelName The name of the parent model, used for logging.
+ */
 const defaultSyncChildren = async (
-  // The raw data that was sent into the parent, from which child
-  // objects will be synchronized
   data,
-  // Objects mapping data fields to child data models.  The keys
-  // this object are expected field names on the raw data, while
-  // the values are the corresponding model names.
   childModels,
-  // An object describing all known models.  Keys are model names,
-  // values are model objects.
   allModels,
-  // An object describing how to relate children back to the parent.
-  // Should be something that can be passed to where, and used to
-  // populate new objects.  E.g., { apd_id: 7 }
   foreignKey,
-  // Whether to delete other models that aren't present in the
-  // new data
   deleteOthers,
-  // Transaction object, if this is being executed in a transaction
-  // (and in this base model, it always is, so 🤷‍♂️)
   transacting,
-  // The name of the parent model.  Only used for logging.
   modelName
 ) =>
   Promise.all(
     Object.keys(childModels).map(async fieldName => {
+      // If there's no data for this child model,
+      // just skip it.
       if (!data[fieldName]) {
         return true;
       }
@@ -49,6 +47,8 @@ const defaultSyncChildren = async (
           childModels[fieldName]
         } model`
       );
+
+      // Otherwise, synchronize it
       const Model = allModels[childModels[fieldName]];
       return Model.synchronize(
         data[fieldName],
@@ -119,12 +119,12 @@ const instanceExtension = (orm, models) => ({
     logger.silly(`${this.modelName()} | synchronizing instance`);
     logger.silly(null, rawData);
 
-    const newData = this.pickUpdateable(rawData);
-
+    // When synchronzing an instance, assume it's not already
+    // happening inside a transaction so create one now
     await orm.transaction(async transacting => {
       logger.silly(`${this.modelName()} | synchronizing children`);
 
-      // Be defenseive!
+      // Be defensive!
       const childModels = (this.static || {}).owns || {};
 
       await syncChildren(
@@ -139,6 +139,9 @@ const instanceExtension = (orm, models) => ({
         this.modelName()
       );
 
+      // Update the model with the new data, but only
+      // the updateable fields.
+      const newData = this.pickUpdateable(rawData);
       this.set(newData);
       await this.save(null, { transacting });
     });
@@ -162,6 +165,9 @@ const classExtension = (orm, models) => ({
     transaction,
     syncChildren = defaultSyncChildren
   ) {
+    // Wrap the actual sync in a function that we can call inside
+    // a transaction, in case we're not already in one.  See
+    // the bottom of the function.
     const exec = async transacting => {
       logger.silly(`${this.modelName} | synchronizing all`);
       logger.silly(null, parentID);
@@ -261,6 +267,9 @@ const classExtension = (orm, models) => ({
       await Promise.all(synchronizing);
     };
 
+    // If there's already a transaction, execute within
+    // that context; if there's not, create one to
+    // execute in.
     if (transaction) {
       await exec(transaction);
     } else {
