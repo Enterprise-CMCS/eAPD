@@ -18,7 +18,7 @@ tap.test('APD endpoint | GET /apds', async getAPDsTest => {
   getAPDsTest.test(
     'when authenticated as a user without a state',
     async invalidTest => {
-      const cookies = await login('all-permissions-no-state', 'passwordq');
+      const cookies = await login('all-permissions-no-state', 'password');
 
       const { response, body } = await request.get(url, { jar: cookies });
 
