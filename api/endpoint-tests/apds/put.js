@@ -61,7 +61,7 @@ tap.test('APD endpoint | PUT /apds/:id', async putAPDTest => {
             id: 4000,
             period: 'new period',
             status: 'new status',
-            state_id: 'mn'
+            state: 'mn'
           },
           'sends back the updated APD object'
         );

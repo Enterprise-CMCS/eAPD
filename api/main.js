@@ -1,3 +1,5 @@
+// Sets up dotenv, sets default environment
+// variables if not defined
 require('./env');
 
 const logger = require('./logger')('main');
@@ -25,6 +27,8 @@ server.use(express.urlencoded({ extended: true }));
 server.use(cors({ credentials: true, origin: true }));
 server.use(bodyParser.json());
 
+// Registers Passport, related handlers, and
+// login/logout endpoints
 logger.silly('setting up authentication');
 auth.setup(server);
 

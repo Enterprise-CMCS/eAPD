@@ -10,8 +10,17 @@ tap.test('apd data model', async apdModelTests => {
       {
         apd: {
           tableName: 'apds',
+          format: Function,
+          toJSON: Function,
           static: {
-            updateableFields: ['status', 'period'],
+            updateableFields: [
+              'status',
+              'period',
+              'programOverview',
+              'narrativeHIE',
+              'narrativeHIT',
+              'narrativeMMIS'
+            ],
             foreignKey: 'apd_id',
             owns: { activities: 'apdActivity' },
             withRelated: [
@@ -92,4 +101,65 @@ tap.test('apd data model', async apdModelTests => {
       stateTests.equal(output, 'beep', 'returns the expected value');
     }
   );
+
+  apdModelTests.test('converts from camel case to snake case', async test => {
+    const attributes = {
+      fine: 'no change',
+      good: 'also no change',
+      programOverview: 'changed over',
+      narrativeHIE: undefined,
+      narrativeHIT: null,
+      narrativeMMIS: 'also changed'
+    };
+
+    const out = apd.apd.format(attributes);
+
+    test.same(
+      out,
+      {
+        fine: 'no change',
+        good: 'also no change',
+        program_overview: 'changed over',
+        narrative_hit: null,
+        narrative_mmis: 'also changed'
+      },
+      'converts to snake case, if defined'
+    );
+  });
+
+  apdModelTests.test('converts to JSON', async test => {
+    const self = {
+      get: sinon.stub(),
+      related: sinon
+        .stub()
+        .withArgs('activities')
+        .returns({ toJSON: sinon.stub().returns('apd-activities') })
+    };
+    self.get.withArgs('id').returns('apd-id');
+    self.get.withArgs('state_id').returns('apd-state');
+    self.get.withArgs('status').returns('apd-status');
+    self.get.withArgs('period').returns('apd-period');
+    self.get.withArgs('program_overview').returns('apd-overview');
+    self.get.withArgs('narrative_hie').returns('apd-hie');
+    self.get.withArgs('narrative_hit').returns('apd-hit');
+    self.get.withArgs('narrative_mmis').returns('apd-mmis');
+
+    const output = apd.apd.toJSON.bind(self)();
+
+    test.same(
+      output,
+      {
+        id: 'apd-id',
+        state: 'apd-state',
+        status: 'apd-status',
+        period: 'apd-period',
+        programOverview: 'apd-overview',
+        narrativeHIE: 'apd-hie',
+        narrativeHIT: 'apd-hit',
+        narrativeMMIS: 'apd-mmis',
+        activities: 'apd-activities'
+      },
+      'gives the expected JSON'
+    );
+  });
 });
