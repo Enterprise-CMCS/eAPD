@@ -5,6 +5,21 @@
   "notifications": "Notifications",
   "help": "Help",
 
+  "sidebar": {
+    "titles": {
+      "programSummary": "Program Summary",
+      "previousActivities": "Results of Previous Activities",
+      "activities": "Program Activities",
+      "activity-set": "Activity {{number}}: {{name}}",
+      "activity-unset": "Activity {{number}}",
+      "budget": "Proposed Budget",
+      "assurances": "Assurances and Compliance",
+      "summary": "Executive/Overall Summary",
+      "submit": "Certify and Submit"
+    },
+    "savePdfButtonText": "Save as PDF"
+  },
+
   "apd": {
     "sectionTitle": "Program Summary",
     "overview": {
@@ -36,17 +51,17 @@
     "hit": {
       "title": "HIT Narrative",
       "helpText":
-        "Briefly summarize your program HIT activities contained within this APD."
+        "Briefly summarize your program HIT activities contained within this APD. If you don't have any HIT activities, you can skip this section."
     },
     "hie": {
       "title": "HIE Narrative",
       "helpText":
-        "Briefly summarize your program HIE activities contained within this APD."
+        "Briefly summarize your program HIE activities contained within this APD. If you don't have any HIE activities, you can skip this section."
     },
     "mmis": {
       "title": "MMIS Narrative",
       "helpText":
-        "Briefly summarize your program MMIS activities contained within this APD."
+        "Briefly summarize your program MMIS activities contained within this APD. If you don't have any MMIS activities, you can skip this section."
     }
   },
 
@@ -61,7 +76,7 @@
       "header": "Please confirm",
       "body": "Are you sure you’d like to remove this activity?",
       "yes": "Yes",
-      "no": "Cancel"
+      "no": "No"
     },
     "header": "Program Activities",
     "namePrefix": "Activity",
@@ -97,7 +112,8 @@
         "List the major milestones you’re working towards as part of this activity.",
       "helpText":
         "1) List out all activity milestones, including activities that have occurred under previously approved APDs.\n2) For each activity, include start date, end date or projected end date, and status (completed, ongoing, not started, etc.)",
-      "noMilestonesNotice": "Did you forget to add milestones? Please add milestones for this activity.",
+      "noMilestonesNotice":
+        "Did you forget to add milestones? Please add milestones for this activity.",
       "milestoneHeader": "Milestone",
       "milestoneLabel": "milestone name",
       "startHeader": "Planned start",
