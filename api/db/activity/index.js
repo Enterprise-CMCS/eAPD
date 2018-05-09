@@ -9,6 +9,8 @@ const goalObjective = require('./goalObjective');
 const schedule = require('./schedule');
 const statePersonnel = require('./statePersonnel');
 
+// Just rolls up activity models into one object
+// so db/index only has to load this one thing
 module.exports = () => ({
   ...activity,
   ...approach,
