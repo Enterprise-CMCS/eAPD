@@ -6,6 +6,11 @@ module.exports = {
       return this.belongsTo('apdActivity');
     },
 
+    // In addition to switching from camel case to
+    // snake case, we also convert to date objects
+    // since we don't know what might have been put
+    // here from the outside.  (E.g., the API takes
+    // JSON, so dates will come in as strings.)
     format(attributes) {
       return {
         id: attributes.id,
