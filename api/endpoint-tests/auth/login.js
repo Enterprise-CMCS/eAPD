@@ -66,7 +66,7 @@ tap.test('login endpoint | /auth/login', async loginTest => {
     {
       title: 'with valid username, invalid password',
       data: {
-        username: 'em@il.com',
+        username: 'all-permissions-and-state',
         password: 'nothing'
       }
     }
@@ -101,7 +101,7 @@ tap.test('login endpoint | /auth/login', async loginTest => {
       const cookies = request.jar();
       const { response, body } = await request.post(url, {
         jar: cookies,
-        form: { username: 'em@il.com', password: 'password' },
+        form: { username: 'all-permissions-and-state', password: 'password' },
         json: true
       });
 
@@ -124,7 +124,7 @@ tap.test('login endpoint | /auth/login', async loginTest => {
       const cookies = request.jar();
       const { response, body } = await request.post(url, {
         jar: cookies,
-        json: { username: 'em@il.com', password: 'password' }
+        json: { username: 'all-permissions-and-state', password: 'password' }
       });
 
       validTest.equal(response.statusCode, 200, 'gives a 200 status code');

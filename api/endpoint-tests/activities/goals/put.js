@@ -4,7 +4,8 @@ const {
   getFullPath,
   login,
   request,
-  unauthenticatedTest
+  unauthenticatedTest,
+  unauthorizedTest
 } = require('../../utils');
 
 tap.test(
@@ -14,11 +15,12 @@ tap.test(
     await db().seed.run();
 
     unauthenticatedTest('put', url(1), putGoalsTest);
+    unauthorizedTest('put', url(1), putGoalsTest);
 
     putGoalsTest.test(
       'when authenticated as a user with permission',
       async authenticated => {
-        const cookies = await login('user2@email', 'something');
+        const cookies = await login();
 
         authenticated.test(
           'with a non-existant activity ID',

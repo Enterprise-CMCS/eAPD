@@ -1,11 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const {
-  loggedIn,
-  synchronizeAll,
-  userCanEditAPD
-} = require('../../../middleware');
+const { can, synchronizeAll, userCanEditAPD } = require('../../../middleware');
 const postEndpoint = require('./post');
 
 tap.test('apd activity POST endpoint', async endpointTest => {
@@ -16,7 +12,7 @@ tap.test('apd activity POST endpoint', async endpointTest => {
   endpointTest.ok(
     app.post.calledWith(
       '/apds/:id/activities',
-      loggedIn,
+      can('edit-document'),
       userCanEditAPD(),
       synchronizeAll(postEndpoint.syncResponder)
     ),
