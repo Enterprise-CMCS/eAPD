@@ -7,7 +7,16 @@ const {
   userCanEditAPD
 } = require('../../../middleware');
 
-const putters = [null, 'approaches', 'expenses', 'goals', 'schedule'];
+const putters = [
+  null,
+  'approaches',
+  'contractorResources',
+  'costAllocation',
+  'expenses',
+  'goals',
+  'schedule',
+  'statePersonnel'
+];
 
 module.exports = (app, ActivityModel = defaultActivityModel) => {
   putters.forEach(putter => {
