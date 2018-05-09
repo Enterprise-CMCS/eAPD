@@ -24,16 +24,27 @@ const setup = (
   );
   const db = knex(config[process.env.NODE_ENV]);
 
+  // Get bookshelf instance with our knex config, then
+  // load the "registry" plugin - lets us map model
+  // names to actual models to get rid of ciruclar
+  // dependency graphs
   const orm = bookshelf(db);
   orm.plugin('registry');
 
   const BaseModel = baseModel(orm, exportedModels);
 
   models.forEach(modelObjects => {
+    // The models come to us as objects whose keys are
+    // the model names and values are the model
+    // descriptors.
     Object.keys(modelObjects).forEach(modelName => {
       logger.silly(`loading model [${modelName}]`);
 
       const modelObj = modelObjects[modelName];
+
+      // Apply some properties to the model statically
+      // so we can query them without needing an instance;
+      // models can also define their own static props
       let staticProps = { modelName };
       if (modelObj.static) {
         staticProps = { ...modelObj.static, ...staticProps };
