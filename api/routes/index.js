@@ -4,7 +4,6 @@ const apds = require('./apds');
 const me = require('./me/get');
 const states = require('./states');
 const users = require('./users');
-const formLogger = require('./logForm');
 const openAPI = require('./openAPI');
 
 module.exports = (
@@ -14,7 +13,6 @@ module.exports = (
   meEndpoint = me,
   statesEndpoint = states,
   usersEndpoint = users,
-  formLoggerEndpoint = formLogger,
   openAPIdoc = openAPI
 ) => {
   logger.silly('setting up routes for apds');
@@ -27,8 +25,6 @@ module.exports = (
   statesEndpoint(app);
   logger.silly('setting up routes for users');
   usersEndpoint(app);
-  logger.silly('setting up routes for form logger');
-  formLoggerEndpoint(app);
 
   logger.silly('setting up route for OpenAPI');
   app.get('/open-api', (req, res) => {
