@@ -1,6 +1,6 @@
 const logger = require('../../../logger')('roles route post');
 const defaultRoleModel = require('../../../db').models.role;
-const can = require('../../../middleware').can;
+const { can } = require('../../../middleware');
 
 module.exports = (app, RoleModel = defaultRoleModel) => {
   logger.silly('setting up POST /auth/roles route');
@@ -33,11 +33,7 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
       await role.load('activities');
 
       logger.silly(req, 'all done');
-      return res.status(201).send({
-        name: role.get('name'),
-        id: role.get('id'),
-        activities: await role.getActivities()
-      });
+      return res.status(201).send(role.toJSON());
     } catch (e) {
       logger.error(req, e);
       return res.status(500).end();
