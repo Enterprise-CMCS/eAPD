@@ -2,20 +2,21 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { t } from '../i18n';
 import { expandActivitySection } from '../actions/activities';
 import SidebarLink from '../components/SidebarLink';
 
 const linkGroup1 = [
-  { id: 'apd-summary', name: 'Program Summary' },
-  { id: 'prev-activities', name: 'Results of Previous Activities' },
-  { id: 'activities', name: 'Program Activities' }
+  { id: 'apd-summary', name: t('sidebar.titles.programSummary') },
+  { id: 'prev-activities', name: t('sidebar.titles.previousActivities') },
+  { id: 'activities', name: t('sidebar.titles.activities') }
 ];
 
 const linkGroup2 = [
-  { id: 'budget', name: 'Proposed Budget' },
-  { id: 'assurances-compliance', name: 'Assurances and Compliance' },
-  { id: 'executive-summary', name: 'Executive/Overall Summary' },
-  { id: 'certify-submit', name: 'Certify and Submit' }
+  { id: 'budget', name: t('sidebar.titles.budget') },
+  { id: 'assurances-compliance', name: t('sidebar.titles.assurances') },
+  { id: 'executive-summary', name: t('sidebar.titles.summary') },
+  { id: 'certify-submit', name: t('sidebar.titles.submit') }
 ];
 
 const Sidebar = ({ activities, place, hash, expandSection }) => (
@@ -44,8 +45,10 @@ const Sidebar = ({ activities, place, hash, expandSection }) => (
               isActive={a.anchor === hash}
               onClick={() => expandSection(a.id)}
             >
-              Activity {i + 1}
-              {a.name ? `: ${a.name}` : ''}
+              {t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
+                number: i + 1,
+                name: a.name
+              })}
             </SidebarLink>
           ))}
         </ul>
@@ -58,7 +61,7 @@ const Sidebar = ({ activities, place, hash, expandSection }) => (
 
       <div className="mt2 pt2 border-top border-white">
         <button type="button" className="btn btn-primary bg-white navy">
-          Save as PDF
+          {t('sidebar.savePdfButtonText')}
         </button>
       </div>
     </div>
