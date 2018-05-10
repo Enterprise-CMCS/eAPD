@@ -20,7 +20,7 @@ tap.test('auth roles POST endpoint', async endpointTest => {
     load: sandbox.stub(),
     save: sandbox.stub(),
     validate: sandbox.stub(),
-    toJSON: sandbox.stub().returns('as json')
+    toJSON: sandbox.stub()
   };
   const RoleModel = {
     fetch: sandbox.stub(),
@@ -93,6 +93,7 @@ tap.test('auth roles POST endpoint', async endpointTest => {
       roleObj.save.resolves();
       roleObj.getActivities.resolves(['activity1', 'activity2']);
       roleObj.load.withArgs('activities').resolves();
+      roleObj.toJSON.returns('as json');
 
       await handler(req, res);
 
@@ -118,7 +119,7 @@ tap.test('auth roles POST endpoint', async endpointTest => {
       );
       saveTest.ok(res.status.calledWith(201), 'HTTP status set to 201');
       saveTest.ok(
-        res.send.calledWith('as-json'),
+        res.send.calledWith('as json'),
         'sends back the JSON-ified new role object'
       );
     });

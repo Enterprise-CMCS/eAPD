@@ -17,9 +17,9 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
       const userRole = await RoleModel.where({
         id: req.params.id,
         name: req.user.role
-      }).fetch({ withRelated: RoleModel.withRelated });
+      }).fetch();
       if (userRole) {
-        logger.verbose(req, `attempting to delete own role [${req.params.id}]`);
+        logger.verbose(req, `attempting to update own role [${req.params.id}]`);
         return res.status(403).end();
       }
 
