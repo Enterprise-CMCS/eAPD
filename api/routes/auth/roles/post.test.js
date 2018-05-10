@@ -19,7 +19,8 @@ tap.test('auth roles POST endpoint', async endpointTest => {
     getActivities: sandbox.stub(),
     load: sandbox.stub(),
     save: sandbox.stub(),
-    validate: sandbox.stub()
+    validate: sandbox.stub(),
+    toJSON: sandbox.stub().returns('as json')
   };
   const RoleModel = {
     fetch: sandbox.stub(),
@@ -90,11 +91,6 @@ tap.test('auth roles POST endpoint', async endpointTest => {
       const req = { body: { name: 'bob', activities: [1, 2] } };
       roleObj.validate.resolves();
       roleObj.save.resolves();
-      roleObj.get
-        .withArgs('id')
-        .returns('bob-id')
-        .withArgs('name')
-        .returns('bob-role');
       roleObj.getActivities.resolves(['activity1', 'activity2']);
       roleObj.load.withArgs('activities').resolves();
 
@@ -122,12 +118,8 @@ tap.test('auth roles POST endpoint', async endpointTest => {
       );
       saveTest.ok(res.status.calledWith(201), 'HTTP status set to 201');
       saveTest.ok(
-        res.send.calledWith({
-          name: 'bob-role',
-          id: 'bob-id',
-          activities: sinon.match.array.deepEquals(['activity1', 'activity2'])
-        }),
-        'sends back the new role object'
+        res.send.calledWith('as-json'),
+        'sends back the JSON-ified new role object'
       );
     });
   });
