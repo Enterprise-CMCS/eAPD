@@ -35,4 +35,4 @@ const openAPI = {
   }
 };
 
-module.exports = requiresAuth(openAPI);
+module.exports = requiresAuth(openAPI, { has401: false });
