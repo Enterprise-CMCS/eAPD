@@ -125,7 +125,7 @@
     },
     "contractorResources": {
       "title": "Contracting Resources",
-      "subheader": "Tell us about your contracting resources.",
+      "subheader": "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section.",
       "helpText":
         "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs",
       "labels": {
@@ -138,7 +138,7 @@
         "yearCost": "{{year}} Cost"
       },
       "srLabels": {
-        "name": "Contractor's name",
+        "name": "Contractor name",
         "description": "Describe the services the contractor will provide",
         "start": "Contractor term start",
         "end": "Contractor term end",
@@ -149,7 +149,7 @@
     },
     "statePersonnel": {
       "title": "State Personnel",
-      "subheader": "Tell us about your state personnel.",
+      "subheader": "Outline the personnel resources for this section. This includes anyone with FTE on your particular IAPD project(s). This does not include personnel listed in the contract section.",
       "helpText": "Personnel costs must include salaries and benefits",
       "labels": {
         "entryNum": "#",
@@ -164,7 +164,7 @@
     },
     "expenses": {
       "helpText":
-        "1) “Miscellaneous expenses” include materials and supplies, communications‐related expenses, printing costs and facilities expenses; these costs can be broken out into distinct cost categories in the budget detail per the state’s Chart of Account\n\n2) Provide an explanation of these projected expenditures"
+        "1. “Miscellaneous expenses” include materials and supplies, communications‐related expenses, printing costs and facilities expenses; these costs can be broken out into distinct cost categories in the budget detail per the state’s Chart of Account\n\n2. Provide an explanation of these projected expenditures"
     },
     "costAllocate": {
       "title": "Cost Allocation and Other Funding Sources",
@@ -175,9 +175,9 @@
       },
       "help": {
         "costAllocate":
-          "1) As specified in OMB Circular A‐87, a cost allocation plan must be included that identifies all participants and their associated cost allocation to depict non‐Medicaid activities and non‐Medicaid FTEs participating in this project, if any\n2) HITECH cost allocation formulas should be based on the direct benefit to the Medicaid EHR Incentive Program, taking into account State projections of eligible Medicaid provider participation in the incentive program (leveraging actual data/experience as deemed appropriate)\n3) Cost allocation must account for other available Federal funding sources, the division of resources and activities across relevant payers, and the relative benefit to the State Medicaid program, among other factors\n4) Be sure that cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested.",
+          "1. As specified in OMB Circular A‐87, a cost allocation plan must be included that identifies all participants and their associated cost allocation to depict non‐Medicaid activities and non‐Medicaid FTEs participating in this project, if any\n2. HITECH cost allocation formulas should be based on the direct benefit to the Medicaid EHR Incentive Program, taking into account State projections of eligible Medicaid provider participation in the incentive program (leveraging actual data/experience as deemed appropriate)\n3. Cost allocation must account for other available Federal funding sources, the division of resources and activities across relevant payers, and the relative benefit to the State Medicaid program, among other factors\n4. Be sure that cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested.",
         "otherFunding":
-          "1) Make sure that the State accounts for all grant funding that is used to support any activities mentioned in the IAPD‐U request\n2) Review the State Medicaid Director Letter 10‐016 for examples of grants that might need to be included as well as other guidance\n3) Consider using the table in the addendum to make sure key information regarding each grant is provided\n4) Make sure that any new grants are included and any expired grants are removed"
+          "1. Make sure that the State accounts for all grant funding that is used to support any activities mentioned in the IAPD‐U request\n2. Review the State Medicaid Director Letter 10‐016 for examples of grants that might need to be included as well as other guidance\n3. Consider using the table in the addendum to make sure key information regarding each grant is provided\n4. Make sure that any new grants are included and any expired grants are removed"
       },
       "reminder": {
         "costAllocate":
