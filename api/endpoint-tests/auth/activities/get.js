@@ -41,7 +41,8 @@ tap.test(
           { id: 1011, name: 'create-draft' },
           { id: 1012, name: 'edit-document' },
           { id: 1013, name: 'edit-response' },
-          { id: 1014, name: 'delete-users' }
+          { id: 1014, name: 'delete-users' },
+          { id: 1015, name: 'view-document' }
         ],
         'returns an array of activities'
       );

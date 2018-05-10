@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const { loggedIn, userCanEditAPD } = require('../../middleware');
+const { can, userCanEditAPD } = require('../../middleware');
 const putEndpoint = require('./put');
 
 tap.test('apds PUT endpoint', async endpointTest => {
@@ -13,7 +13,7 @@ tap.test('apds PUT endpoint', async endpointTest => {
     setupTest.ok(
       app.put.calledWith(
         '/apds/:id',
-        loggedIn,
+        can('edit-document'),
         userCanEditAPD(),
         sinon.match.func
       ),

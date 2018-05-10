@@ -1,11 +1,11 @@
 const logger = require('../../logger')('apds route get');
 const defaultApdModel = require('../../db').models.apd;
-const loggedIn = require('../../middleware').loggedIn;
+const { can } = require('../../middleware');
 
 module.exports = (app, ApdModel = defaultApdModel) => {
   logger.silly('setting up GET /apds route');
 
-  app.get('/apds', loggedIn, async (req, res) => {
+  app.get('/apds', can('view-document'), async (req, res) => {
     logger.silly(req, 'handling GET /apds');
 
     try {

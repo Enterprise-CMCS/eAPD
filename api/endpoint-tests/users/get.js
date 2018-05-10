@@ -65,11 +65,11 @@ tap.test('users endpoint | GET /users/:userID', async getUserTest => {
           body,
           {
             id: 2000,
-            email: 'em@il.com',
+            email: 'all-permissions-and-state',
             name: null,
             position: null,
             phone: null,
-            state_id: null
+            state_id: 'mn'
           },
           'returns an object for the requested user'
         );
