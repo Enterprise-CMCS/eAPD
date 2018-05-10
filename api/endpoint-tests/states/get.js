@@ -16,7 +16,7 @@ tap.test('states endpoint | GET /states', async getUserStateTest => {
   getUserStateTest.test(
     'when authenticated as a user without an associated state',
     async invalidTest => {
-      const cookies = await login();
+      const cookies = await login('all-permissions-no-state', 'password');
       const { response, body } = await request.get(url, {
         jar: cookies,
         json: true
@@ -30,7 +30,7 @@ tap.test('states endpoint | GET /states', async getUserStateTest => {
   getUserStateTest.test(
     'when authenticated as a user with an associated state',
     async validTest => {
-      const cookies = await login('user2@email', 'something');
+      const cookies = await login();
       const { response, body } = await request.get(url, {
         jar: cookies,
         json: true

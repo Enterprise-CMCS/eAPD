@@ -1,10 +1,6 @@
 const logger = require('../../../logger')('apd activites route post');
 const { apdActivity: defaultActivityModel } = require('../../../db').models;
-const {
-  loggedIn,
-  synchronizeAll,
-  userCanEditAPD
-} = require('../../../middleware');
+const { can, synchronizeAll, userCanEditAPD } = require('../../../middleware');
 
 const syncResponder = (req, ActivityModel = defaultActivityModel) => ({
   action: 'add-activity',
@@ -16,7 +12,7 @@ module.exports = app => {
   logger.silly('setting up POST /apds/:id/activities route');
   app.post(
     '/apds/:id/activities',
-    loggedIn,
+    can('edit-document'),
     userCanEditAPD(),
     synchronizeAll(syncResponder)
   );

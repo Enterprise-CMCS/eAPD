@@ -1,6 +1,6 @@
 const logger = require('../../logger')('apds route put');
 const {
-  loggedIn,
+  can,
   synchronizeSpecific,
   userCanEditAPD
 } = require('../../middleware');
@@ -11,7 +11,7 @@ module.exports = app => {
   logger.silly('setting up PUT /apds/:id route');
   app.put(
     '/apds/:id',
-    loggedIn,
+    can('edit-document'),
     userCanEditAPD(),
     synchronizeSpecific(syncResponder)
   );
