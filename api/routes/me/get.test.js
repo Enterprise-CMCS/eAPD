@@ -40,7 +40,7 @@ tap.test('me GET endpoint', async endpointTest => {
     meHandler({ user: { id: 'user-id' } }, res);
 
     handlerTest.ok(
-      res.send.calledWith({ id: 'user-id' }),
+      res.send.calledWith(sinon.match({ id: 'user-id' })),
       'sends back the user object'
     );
   });
