@@ -5,7 +5,7 @@
 
 .table-bordered td,
 .table-bordered th {
-  border: 1px solid #e7e7e7;
+  border: 1px solid rgba(0, 0, 0, 0.0625);
 }
 
 .table-fixed {
@@ -15,4 +15,13 @@
 .table-condensed th,
 .table-condensed td {
   padding: 0.25rem;
+}
+
+.table-budget {
+  border: 3px solid var(--black);
+}
+
+.table-budget tr th:nth-child(3n + 1),
+.table-budget tr td:nth-child(3n + 1) {
+  border-right: 3px solid var(--black);
 }
