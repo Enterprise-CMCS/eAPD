@@ -1,10 +1,10 @@
 module.exports.responses = {
   unauthed: {
     401: {
-      description: 'Not logged in'
+      description: 'Does not have permission to this activity'
     },
     403: {
-      description: 'Does not have permission to this activity'
+      description: 'Not logged in'
     }
   }
 };
@@ -36,16 +36,29 @@ module.exports.schema = {
   })
 };
 
-module.exports.requiresAuth = openAPI => {
+module.exports.requiresAuth = (
+  openAPI,
+  { has401 = true, has403 = true } = {}
+) => {
   const authed = { ...openAPI };
   Object.keys(authed).forEach(route => {
     Object.keys(authed[route]).forEach(verb => {
-      authed[route][verb].security = ['sessionCookie'];
+      if (has403) {
+        authed[route][verb].security = ['sessionCookie'];
+      }
+
+      const authResponses = { ...module.exports.responses.unauthed };
+      if (!has401) {
+        authResponses[401] = undefined;
+      }
+      if (!has403) {
+        authResponses[403] = undefined;
+      }
 
       const responses = authed[route][verb].responses;
       authed[route][verb].responses = {
-        ...responses,
-        ...module.exports.responses.unauthed
+        ...authResponses,
+        ...responses
       };
     });
   });

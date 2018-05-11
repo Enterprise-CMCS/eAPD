@@ -3,7 +3,11 @@
 const fs = require('fs');
 const readline = require('readline');
 
-const openAPI = require('../routes/openAPI');
+// Treat it the same as the outside world will see it.  If we
+// don't do this, the object could contain undefineds, which
+// can mess up our reporting.  Stringifying and parsing will
+// strip out the undefineds, since those don't survive stringing
+const openAPI = JSON.parse(JSON.stringify(require('../routes/openAPI')));
 
 const allEndpoints = JSON.parse(
   fs.readFileSync(`${__dirname}/endpoints-all.txt`)

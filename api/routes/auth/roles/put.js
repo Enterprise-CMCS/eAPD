@@ -1,6 +1,6 @@
 const logger = require('../../../logger')('roles route put');
 const defaultRoleModel = require('../../../db').models.role;
-const can = require('../../../middleware').can;
+const { can } = require('../../../middleware');
 
 module.exports = (app, RoleModel = defaultRoleModel) => {
   logger.silly('setting up PUT /auth/roles/:id route');
@@ -19,15 +19,11 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
         name: req.user.role
       }).fetch();
       if (userRole) {
-        logger.verbose(req, `attempting to delete own role [${req.params.id}]`);
+        logger.verbose(req, `attempting to update own role [${req.params.id}]`);
         return res.status(403).end();
       }
 
-      logger.silly(
-        req,
-        'attempting to update role',
-        JSON.parse(JSON.stringify(role))
-      );
+      logger.silly(req, 'attempting to update role', role.toJSON());
 
       try {
         logger.silly(req, 'validing the request', req.body);
@@ -43,6 +39,10 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
 
       logger.silly(req, 'request is valid');
 
+      if (req.body.name) {
+        role.set({ name: req.body.name });
+      }
+
       logger.silly(req, 'removing previous activities');
       role.activities().detach();
       await role.save();
@@ -51,8 +51,12 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
       role.activities().attach(req.body.activities);
       await role.save();
 
+      const updated = await RoleModel.where({ id: req.params.id }).fetch({
+        withRelated: RoleModel.withRelated
+      });
+
       logger.silly(req, 'all done');
-      return res.status(204).end();
+      return res.send(updated.toJSON()).end();
     } catch (e) {
       logger.error(req, e);
       return res.status(500).end();

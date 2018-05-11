@@ -10,6 +10,13 @@ module.exports = () => ({
         'activity_id',
         'role_id'
       );
+    },
+
+    toJSON() {
+      return {
+        id: this.get('id'),
+        name: this.get('name')
+      };
     }
   },
 
@@ -22,6 +29,18 @@ module.exports = () => ({
         'role_id',
         'activity_id'
       );
+    },
+
+    toJSON() {
+      return {
+        id: this.get('id'),
+        name: this.get('name'),
+        activities: this.related('activities').map(a => a.get('name'))
+      };
+    },
+
+    static: {
+      withRelated: ['activities']
     },
 
     async getActivities() {

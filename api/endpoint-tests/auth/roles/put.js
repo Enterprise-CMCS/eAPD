@@ -83,11 +83,15 @@ tap.test(
       authenticatedTests.test('with a valid updated role', async validTest => {
         const { response, body } = await request.put(url(1102), {
           jar: cookies,
-          json: { activities: [1001] }
+          json: { name: 'new name', activities: [1001] }
         });
 
-        validTest.equal(response.statusCode, 204, 'gives a 204 status code');
-        validTest.notOk(body, 'does not send a body');
+        validTest.equal(response.statusCode, 200, 'gives a 200 status code');
+        validTest.match(
+          body,
+          { name: 'new name', activities: ['view-users'] },
+          'sends the updated role'
+        );
 
         const activities = await db()('auth_role_activity_mapping')
           .where({ role_id: 1102 })
