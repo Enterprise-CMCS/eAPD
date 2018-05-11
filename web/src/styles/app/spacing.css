@@ -19,6 +19,11 @@
   margin-top: var(--space-tiny);
 }
 
+.px-tiny {
+  padding-left: var(--space-tiny);
+  padding-right: var(--space-tiny);
+}
+
 .py-tiny {
   padding-bottom: var(--space-tiny);
   padding-top: var(--space-tiny);
