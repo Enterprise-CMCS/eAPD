@@ -22,6 +22,7 @@
 
   "apd": {
     "sectionTitle": "Program Summary",
+    "helpText": "Bloop bloop, program summary",
     "overview": {
       "title": "Overview",
       "helpText":
@@ -65,8 +66,19 @@
     }
   },
 
+  "previousActivities": {
+    "title": "Results of Previous Activities",
+    "helpText": "Zip zorp, previous activities",
+    "sections": {
+      "outline": "Prior Activities Outline",
+      "approvedExpenses": "Approved Expenses",
+      "actualExpenses": "Actual Expenses"
+    }
+  },
+
   "activities": {
     "title": "Program Activities",
+    "helpText": "Flip flop, program activities",
     "listTitle": "Activity List",
     "addActivityButtonText": "Add activity",
     "deleteActivityButtonText": "Remove Activity",
@@ -125,7 +137,8 @@
     },
     "contractorResources": {
       "title": "Contracting Resources",
-      "subheader": "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section.",
+      "subheader":
+        "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section.",
       "helpText":
         "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs",
       "labels": {
@@ -149,7 +162,8 @@
     },
     "statePersonnel": {
       "title": "State Personnel",
-      "subheader": "Outline the personnel resources for this section. This includes anyone with FTE on your particular IAPD project(s). This does not include personnel listed in the contract section.",
+      "subheader":
+        "Outline the personnel resources for this section. This includes anyone with FTE on your particular IAPD project(s). This does not include personnel listed in the contract section.",
       "helpText": "Personnel costs must include salaries and benefits",
       "labels": {
         "entryNum": "#",
@@ -258,5 +272,22 @@
         "prompt": "Describe how you'll meet the Cost Minimization condition"
       }
     }
+  },
+  "proposedBudget": {
+    "title": "Proposed Budget",
+    "helpText": "Drip drop, proposed budget"
+  },
+
+  "assurancesAndCompliance": {
+    "title": "Assurances and Compliance",
+    "helpText": "Hippity hoppity, assurances and compliance"
+  },
+  "executiveSummary": {
+    "title": "Executive/Overall Summary",
+    "helpText": "Diggity doo, executive summary"
+  },
+  "certifyAndSubmit": {
+    "title": "Certify and Submit",
+    "helpText": "Moop moop, certify and submit"
   }
 }
