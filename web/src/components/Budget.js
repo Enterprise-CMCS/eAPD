@@ -1,23 +1,74 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import Container from './Container';
 import Collapsible from './Collapsible';
 
-const NumberRow = ({ title, n = 9 }) => (
-  <tr>
-    <td>{title}</td>
-    {[...Array(n)].map((_, i) => (
-      <td key={i} className="mono right-align">
-        123
-      </td>
-    ))}
-  </tr>
-);
+class NumberRow extends Component {
+  state = { detailsOpen: false };
+
+  toggleDetails = () => {
+    this.setState(prev => ({ detailsOpen: !prev.detailsOpen }));
+  };
+
+  render() {
+    const { n, title } = this.props;
+    const { detailsOpen } = this.state;
+
+    return (
+      <Fragment>
+        <tr>
+          <td>
+            <button
+              type="button"
+              className="right btn px-tiny py0"
+              onClick={this.toggleDetails}
+            >
+              {detailsOpen ? '-' : '+'}
+            </button>
+            {title}
+          </td>
+          {[...Array(n)].map((_, i) => (
+            <td key={i} className="mono right-align">
+              123
+            </td>
+          ))}
+        </tr>
+        {detailsOpen && (
+          <tr className="bg-white">
+            <td colSpan={n + 1}>
+              <div className="p1">
+                <p className="bold">
+                  Details will go here! Could be words or another table:
+                </p>
+                <table className="table-bordered col-6">
+                  <tbody>
+                    <tr>
+                      <td>abc</td>
+                      <td>123</td>
+                    </tr>
+                    <tr>
+                      <td>def</td>
+                      <td>456</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+        )}
+      </Fragment>
+    );
+  }
+}
 
 NumberRow.propTypes = {
-  title: PropTypes.string.isRequired,
-  n: PropTypes.number.isRequired
+  n: PropTypes.number,
+  title: PropTypes.string.isRequired
+};
+
+NumberRow.defaultProps = {
+  n: 9
 };
 
 const Filler = () => (
@@ -29,7 +80,7 @@ const Filler = () => (
   </Fragment>
 );
 
-const ActivitiesPage = () => (
+const BudgetTable = () => (
   <Container>
     <Collapsible title="Budget Table" open>
       <div className="py1 overflow-auto">
@@ -39,11 +90,7 @@ const ActivitiesPage = () => (
         >
           <thead>
             <tr>
-              <th
-                style={{
-                  width: 175
-                }}
-              />
+              <th style={{ width: 200 }} />
               <th className="bg-black white center" colSpan="3">
                 FFY 2018
               </th>
@@ -102,4 +149,4 @@ const ActivitiesPage = () => (
   </Container>
 );
 
-export default ActivitiesPage;
+export default BudgetTable;
