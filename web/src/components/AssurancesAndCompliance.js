@@ -1,12 +1,16 @@
 import React from 'react';
 
+import { t } from '../i18n';
 import Section from './Section';
 import SectionTitle from './SectionTitle';
 import Collapsible from './Collapsible';
 
 const AssurancesAndCompliance = () => (
   <Section id="assurances-compliance">
-    <SectionTitle>Assurances and Compliance</SectionTitle>
+    <SectionTitle>{t('assurancesAndCompliance.title')}</SectionTitle>
+
+    <h3>{t('assurancesAndCompliance.helpText')}</h3>
+
     <Collapsible title="Procurement Standards">
       <div>...</div>
     </Collapsible>
