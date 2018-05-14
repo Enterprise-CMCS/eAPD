@@ -42,6 +42,9 @@ class ApdSummary extends Component {
     return (
       <Section id="apd-summary">
         <SectionTitle>{t('apd.sectionTitle')}</SectionTitle>
+
+        <h3>{t('apd.helpText')}</h3>
+
         <Collapsible title={t('apd.overview.title')}>
           <HelpText
             text="apd.overview.helpText"
