@@ -146,6 +146,20 @@ jobs:
           name: deploy to prod
           command: ./bin/deploy.sh
 
+  deploy pr:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+      - run:
+          name: update npm
+          command: npm install -g npm@6
+      - run:
+          name: deploy for pull request
+          command: ./bin/deploy-pr.sh
+
   deploy ux testing:
     docker:
       - image: node:8
@@ -174,8 +188,26 @@ jobs:
           name: deploy storybook
           command: ./bin/deploy-storybook.sh
 
+  cleanup PR-specific deploys:
+    docker:
+      - image: node:8
+    steps:
+      - run:
+          name: run nightly script
+          command: ./bin/nightly.sh
+
 workflows:
   version: 2
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 4 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cleanup PR-specific deploys
   web:
     jobs:
       - prepare dependencies cache
@@ -194,6 +226,13 @@ workflows:
       - api endpoint test:
           requires:
              - prepare dependencies cache
+      - deploy pr:
+          filters:
+            branches:
+              ignore:
+                - master
+          requires:
+            - web test
       - deploy staging:
           filters:
             branches:
