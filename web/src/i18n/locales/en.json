@@ -68,8 +68,7 @@
 
   "previousActivities": {
     "title": "Results of Previous Activities",
-    "helpText": "Include results of previously approved HIE
-    activities, if applicable.",
+    "helpText": "Include results of previously approved HIE activities, if applicable.",
     "sections": {
       "outline": "Prior Activities Outline",
       "approvedExpenses": "Approved Expenses",
@@ -79,11 +78,7 @@
 
   "activities": {
     "title": "Program Activities",
-    "helpText": "Include results of previously approved HIE
-    activities, if applicable. It should also include a table that summarizes the state’s
-    last HIE funding request, approval amount, expenditures, and amount of
-    funding remaining from that approval. CMS recommends showing the full HIE
-    funding history, or the most recent approval and expenditures, at minimum.",
+    "helpText": "Include results of previously approved HIE activities, if applicable. It should also include a table that summarizes the state’s last HIE funding request, approval amount, expenditures, and amount of funding remaining from that approval. CMS recommends showing the full HIE funding history, or the most recent approval and expenditures, at minimum.",
     "listTitle": "Activity List",
     "addActivityButtonText": "Add activity",
     "deleteActivityButtonText": "Remove Activity",
@@ -280,10 +275,7 @@
   },
   "proposedBudget": {
     "title": "Proposed Budget",
-    "helpText": "Include an itemized budget for the period requested, broken out by FFY and
-    showing breakout of Federal Financial Participation (FFP), State Cost, and
-    Total value (FFP + State Cost). You should also include a breakout of this same budget by
-    FFY quarter. Line items for state staff costs and contractor costs should match the totals in personnel resources section."
+    "helpText": "Include an itemized budget for the period requested, broken out by FFY and showing breakout of Federal Financial Participation (FFP), State Cost, and Total value (FFP + State Cost). You should also include a breakout of this same budget by FFY quarter. Line items for state staff costs and contractor costs should match the totals in personnel resources section."
   },
 
   "assurancesAndCompliance": {
@@ -292,8 +284,7 @@
   },
   "executiveSummary": {
     "title": "Executive Summary",
-    "helpText": "Description of the HIE approach (statewide, sub-state health information office (HIOs), etc.); anticipated risks and mitigation strategies; the short and long
-    term value proposition to providers; role of State government in governance and policy-setting. This section is normally at the top of your existing IAPD template, but for the purposes of this prototype, we've placed it last."
+    "helpText": "Description of the HIE approach (statewide, sub-state health information office (HIOs), etc.); anticipated risks and mitigation strategies; the short and long term value proposition to providers; role of State government in governance and policy-setting. This section is normally at the top of your existing IAPD template, but for the purposes of this prototype, we've placed it last."
   },
   "certifyAndSubmit": {
     "title": "Certify and Submit",
