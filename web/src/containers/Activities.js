@@ -13,6 +13,9 @@ import SectionTitle from '../components/SectionTitle';
 const Activities = ({ activityIds, addActivity }) => (
   <Section id="activities">
     <SectionTitle>{t('activities.title')}</SectionTitle>
+
+    <h3>{t('activities.helpText')}</h3>
+
     <Collapsible title={t('activities.listTitle')} open>
       {activityIds.length === 0 ? (
         <div className="mb2 p1 h6 alert">
