@@ -51,12 +51,12 @@
     "hit": {
       "title": "HIT Narrative",
       "helpText":
-        "Briefly summarize your program HIT activities contained within this APD. If you don't have any HIT activities, you can skip this section."
+        "Briefly summarize your program HIT activities contained within this APD. If you don't have any HIT activities, you can skip this section. Previously located in Appendix A"
     },
     "hie": {
       "title": "HIE Narrative",
       "helpText":
-        "Briefly summarize your program HIE activities contained within this APD. If you don't have any HIE activities, you can skip this section."
+        "Briefly summarize your program HIE activities contained within this APD. If you don't have any HIE activities, you can skip this section Previously located in Appendix A."
     },
     "mmis": {
       "title": "MMIS Narrative",
@@ -96,7 +96,19 @@
     "goals": {
       "title": "Needs and Objectives",
       "subheader":
-        "List the goals you're hoping to accomplish as part of this activity.",
+        "1. Annual benchmarks and performance
+        goals (Year 1, Year 2 of funding, etc.).
+        Describe the benchmarks and performance
+        goals that will be used to track progress in
+        implementing the HIE activities outlined in
+        the IAPD. States will be asked to provide
+        updates to CMS on these benchmarks and
+        goals with each IAPD-U.
+        2. Performance measures should allow
+        states to provide updates to CMS on the
+        progress of their projects. Listed below are
+        examples of a few benchmarks. States
+        should choose benchmarks that relate to their projects.",
       "helpText":
         "Consider organizing objectives of projects as related to specific goals. Also, include your vision for the overall HIT program (see example in the Addendum.)\n\nDescribe how the state will measure progress toward goals and objectives (refer to the latest version of the SMHP as deemed appropriate) ",
       "reminder":
@@ -127,7 +139,7 @@
       "title": "Contracting Resources",
       "subheader": "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section.",
       "helpText":
-        "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs",
+        "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. What we mean by contract resources",
       "labels": {
         "entryNumber": "#",
         "contractorName": "Name",
