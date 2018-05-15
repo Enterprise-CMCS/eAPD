@@ -1,3 +1,4 @@
+import deline from 'deline';
 import kebabCase from 'lodash.kebabcase';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -16,15 +17,21 @@ class Collapsible extends Component {
   };
 
   render() {
-    const { bgColor, children, id, title, onChange } = this.props;
+    const { bgColor, children, id, sticky, title, onChange } = this.props;
     const isOpen = onChange ? this.props.open : this.state.open;
     const contentId = kebabCase(title);
+
+    const btnClass = deline`
+      btn block col-12 py2 h3 line-height-1 left-align
+      ${isOpen ? 'border-bottom border-bottom-silver' : ''}
+      bg-${bgColor} ${sticky ? 'sticky-top' : ''}
+    `;
 
     return (
       <div id={id} className={`mb2 bg-${bgColor} border border-silver`}>
         <button
           type="button"
-          className="btn block col-12 left-align h3 py2 line-height-1"
+          className={btnClass}
           aria-expanded={isOpen}
           aria-controls={contentId}
           onClick={onChange || this.handleClick}
@@ -38,12 +45,7 @@ class Collapsible extends Component {
           </span>
           {title}
         </button>
-        <div
-          className={`p2 border-top border-silver ${
-            isOpen ? '' : 'display-none'
-          }`}
-          id={contentId}
-        >
+        <div className={`p2 ${isOpen ? '' : 'display-none'}`} id={contentId}>
           {children}
         </div>
       </div>
@@ -56,6 +58,7 @@ Collapsible.propTypes = {
   children: PropTypes.node,
   id: PropTypes.string,
   open: PropTypes.bool,
+  sticky: PropTypes.bool,
   title: PropTypes.string.isRequired,
   onChange: PropTypes.func
 };
@@ -65,6 +68,7 @@ Collapsible.defaultProps = {
   children: null,
   id: null,
   open: false,
+  sticky: false,
   onChange: null
 };
 
