@@ -22,7 +22,10 @@ export const fetchApd = () => dispatch => {
 
   return axios
     .get(url)
-    .then(req => dispatch(receiveApd(req.data)))
+    .then(req => {
+      const apd = Array.isArray(req.data) ? req.data[0] : null;
+      dispatch(receiveApd(apd));
+    })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
       dispatch(failApd(reason));
