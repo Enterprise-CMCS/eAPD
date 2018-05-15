@@ -139,7 +139,7 @@
       "title": "Contracting Resources",
       "subheader": "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section.",
       "helpText":
-        "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. What we mean by contract resources",
+        "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. For contracting resources, we're referring to contracting staff and/or corporate resources (as applicable.) If contracting personnel are split between activities, enter their time/FTE % as one, rather than split.",
       "labels": {
         "entryNumber": "#",
         "contractorName": "Name",
