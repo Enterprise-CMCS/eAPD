@@ -314,7 +314,7 @@ const reducer = (state = initialState, action) => {
             id: e.id,
             category: 'Hardware, software, and licensing', // TODO
             desc: '', // TODO
-            years: e.years.reduce(
+            years: e.entries.reduce(
               (years, y) => ({
                 ...years,
                 [y.year]: +y.amount
