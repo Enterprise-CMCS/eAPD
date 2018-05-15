@@ -17,6 +17,8 @@ import {
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
+import { GET_APD_SUCCESS } from '../actions/apd';
+
 import { nextSequence } from '../util';
 
 const newGoal = () => ({ desc: '', obj: '' });
@@ -256,6 +258,95 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case GET_APD_SUCCESS: {
+      const byId = {};
+      const htmlDate = date =>
+        `${date.getFullYear()}-${
+          date.getMonth() > 8 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`
+        }-${date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`}`;
+
+      action.data.activities.forEach(a => {
+        byId[a.id] = {
+          id: a.id,
+          name: a.name,
+          types: ['HIT'], // TODO
+          descShort: '', // TODO
+          descLong: a.description,
+          altApproach: '', // TODO
+          costAllocateDesc: '', // TODO
+          otherFundingDesc: a.otherFundingSources.description,
+          otherFundingAmt: +a.otherFundingSources.amount,
+          goals: a.goals.map(g => ({
+            desc: g.description,
+            obj: g.objectives[0]
+          })),
+          milestones: [newMilestone(), newMilestone(), newMilestone()], // TODO
+          statePersonnel: a.statePersonnel.map(s => ({
+            id: s.id,
+            title: s.title,
+            desc: s.description,
+            years: s.years.reduce(
+              (years, y) => ({
+                ...years,
+                [y.year]: {
+                  amt: y.cost,
+                  perc: y.fte
+                }
+              }),
+              {}
+            )
+          })),
+          contractorResources: a.contractorResources.map(c => ({
+            id: c.id,
+            name: c.name,
+            desc: c.description,
+            start: htmlDate(new Date(c.start)),
+            end: htmlDate(new Date(c.end)),
+            years: c.years.reduce(
+              (years, y) => ({
+                ...years,
+                [y.year]: +y.cost
+              }),
+              {}
+            )
+          })),
+          expenses: a.expenses.map(e => ({
+            id: e.id,
+            category: 'Hardware, software, and licensing', // TODO
+            desc: '', // TODO
+            years: e.years.reduce(
+              (years, y) => ({
+                ...years,
+                [y.year]: +y.amount
+              }),
+              {}
+            )
+          })),
+
+          standardsAndConditions: {
+            modularity: '',
+            mita: '',
+            industry: '',
+            leverage: '',
+            bizResults: '',
+            reporting: '',
+            interoperability: '',
+            mitigation: '',
+            keyPersonnel: '',
+            documentation: '',
+            minimizeCost: ''
+          },
+          meta: {
+            expanded: false
+          }
+        };
+      });
+
+      return {
+        byId,
+        allIds: action.data.activities.map(a => a.id)
+      };
+    }
     default:
       return state;
   }
