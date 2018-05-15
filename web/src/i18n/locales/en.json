@@ -22,7 +22,7 @@
 
   "apd": {
     "sectionTitle": "Program Summary",
-    "helpText": "Bloop bloop, program summary",
+    "helpText": "CMS recommends that states reach out to their regional CMS HITECH contacts prior to developing an HIE funding request. HIE funding requests are complex, and early consultation with CMS facilitates a more efficient approval process.",
     "overview": {
       "title": "Overview",
       "helpText":
@@ -68,7 +68,7 @@
 
   "previousActivities": {
     "title": "Results of Previous Activities",
-    "helpText": "Zip zorp, previous activities",
+    "helpText": "Include results of previously approved HIE activities, if applicable.",
     "sections": {
       "outline": "Prior Activities Outline",
       "approvedExpenses": "Approved Expenses",
@@ -78,7 +78,7 @@
 
   "activities": {
     "title": "Program Activities",
-    "helpText": "Flip flop, program activities",
+    "helpText": "Include results of previously approved HIE activities, if applicable. It should also include a table that summarizes the state’s last HIE funding request, approval amount, expenditures, and amount of funding remaining from that approval. CMS recommends showing the full HIE funding history, or the most recent approval and expenditures, at minimum.",
     "listTitle": "Activity List",
     "addActivityButtonText": "Add activity",
     "deleteActivityButtonText": "Remove Activity",
@@ -275,19 +275,19 @@
   },
   "proposedBudget": {
     "title": "Proposed Budget",
-    "helpText": "Drip drop, proposed budget"
+    "helpText": "Include an itemized budget for the period requested, broken out by FFY and showing breakout of Federal Financial Participation (FFP), State Cost, and Total value (FFP + State Cost). You should also include a breakout of this same budget by FFY quarter. Line items for state staff costs and contractor costs should match the totals in personnel resources section."
   },
 
   "assurancesAndCompliance": {
     "title": "Assurances and Compliance",
-    "helpText": "Hippity hoppity, assurances and compliance"
+    "helpText": "This section ensures compliance with federal regulations and State Medicaid citations."
   },
   "executiveSummary": {
-    "title": "Executive/Overall Summary",
-    "helpText": "Diggity doo, executive summary"
+    "title": "Executive Summary",
+    "helpText": "Description of the HIE approach (statewide, sub-state health information office (HIOs), etc.); anticipated risks and mitigation strategies; the short and long term value proposition to providers; role of State government in governance and policy-setting. This section is normally at the top of your existing IAPD template, but for the purposes of this prototype, we've placed it last."
   },
   "certifyAndSubmit": {
     "title": "Certify and Submit",
-    "helpText": "Moop moop, certify and submit"
+    "helpText": "Certify results are complete and submit your IAPD."
   }
 }
