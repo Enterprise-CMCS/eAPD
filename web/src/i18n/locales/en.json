@@ -22,7 +22,7 @@
 
   "apd": {
     "sectionTitle": "Program Summary",
-    "helpText": "CMS recommends that states reach out to their regional CMS HITECH contacts prior to developing an HIE funding request. HIE funding requests are complex, and early consultation with CMS facilitates a more efficient approval process.",
+    "helpText": "Describe your state's program. Provide context for your funding request by providing information such as current size of program and future vision. DON'T FORGET! Review the SMHP to make sure that it aligns with the IAPD.",
     "overview": {
       "title": "Overview",
       "helpText":
@@ -50,17 +50,17 @@
       "addButtonText": "Add personnel"
     },
     "hit": {
-      "title": "HIT Narrative",
+      "title": "HIT Overview",
       "helpText":
         "Briefly summarize your program HIT activities contained within this APD. If you don't have any HIT activities, you can skip this section."
     },
     "hie": {
-      "title": "HIE Narrative",
+      "title": "HIE Overview",
       "helpText":
-        "Briefly summarize your program HIE activities contained within this APD. If you don't have any HIE activities, you can skip this section."
+        "Description of the HIE approach (statewide, sub-state health information office (HIOs), etc.); anticipated risks and mitigation strategies; the short and long term value proposition to providers; role of State government in governance and policy-setting. CMS recommends that states reach out to their regional CMS HITECH contacts prior to developing an HIE funding request. HIE funding requests are complex, and early consultation with CMS facilitates a more efficient approval process."
     },
     "mmis": {
-      "title": "MMIS Narrative",
+      "title": "MMIS Overview",
       "helpText":
         "Briefly summarize your program MMIS activities contained within this APD. If you don't have any MMIS activities, you can skip this section."
     }
