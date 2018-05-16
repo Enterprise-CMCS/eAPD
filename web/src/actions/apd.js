@@ -86,7 +86,7 @@ export const saveApd = () => (dispatch, state) => {
       costAllocationMethodology: activity.costAllocateDesc,
       otherFundingSources: {
         description: activity.otherFundingDesc,
-        amount: activity.otherFundingAmt
+        amount: +activity.otherFundingAmt || 0
       },
       goals: activity.goals.map(g => ({
         description: g.desc,
@@ -94,8 +94,8 @@ export const saveApd = () => (dispatch, state) => {
       })),
       schedule: activity.milestones.map(m => ({
         milestone: m.name,
-        plannedStart: m.start,
-        plannedEnd: m.end
+        plannedStart: m.start || undefined,
+        plannedEnd: m.end || undefined
       })),
       statePersonnel: activity.statePersonnel.map(s => ({
         title: s.title,
@@ -109,8 +109,8 @@ export const saveApd = () => (dispatch, state) => {
       contractorResources: activity.contractorResources.map(c => ({
         name: c.name,
         description: c.desc,
-        start: c.start,
-        end: c.end,
+        start: c.start || undefined,
+        end: c.end || undefined,
         years: Object.keys(c.years).map(year => ({
           cost: +c.years[year],
           year
