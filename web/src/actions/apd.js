@@ -140,5 +140,8 @@ export const saveApd = () => (dispatch, state) => {
     });
   });
 
-  console.log(JSON.stringify(apd));
+  return axios
+    .put(`/apds/${updatedApd.id}`, apd)
+    .then(res => dispatch(saveSuccess(res.data)))
+    .catch(() => dispatch(saveFailure())); // TODO handle the error
 };
