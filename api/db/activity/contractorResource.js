@@ -1,5 +1,7 @@
 const moment = require('moment');
 
+const getDate = date => (date ? moment(date).format('YYYY-MM-DD') : null);
+
 module.exports = {
   apdActivityContractorResource: {
     tableName: 'activity_contractor_resources',
@@ -37,8 +39,8 @@ module.exports = {
         id: this.get('id'),
         name: this.get('name'),
         description: this.get('description'),
-        start: moment(this.get('start')).format('YYYY-MM-DD'),
-        end: moment(this.get('end')).format('YYYY-MM-DD'),
+        start: getDate(this.get('start')),
+        end: getDate(this.get('end')),
         years: this.related('years')
       };
     },
