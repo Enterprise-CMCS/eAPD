@@ -84,7 +84,11 @@ export const saveApd = () => (dispatch, state) => {
         description: g.desc,
         objectives: [{ description: g.obj }]
       })),
-      schedule: null, // TODO
+      schedule: activity.milestones.map(m => ({
+        milestone: m.name,
+        plannedStart: m.start,
+        plannedEnd: m.end
+      })),
       statePersonnel: activity.statePersonnel.map(s => ({
         title: s.title,
         description: s.desc,
@@ -97,8 +101,8 @@ export const saveApd = () => (dispatch, state) => {
       contractorResources: activity.contractorResources.map(c => ({
         name: c.name,
         description: c.desc,
-        start: new Date(c.start).toISOString(),
-        end: new Date(c.end).toISOString(),
+        start: c.start,
+        end: c.end,
         years: Object.keys(c.years).map(year => ({
           cost: +c.years[year],
           year
