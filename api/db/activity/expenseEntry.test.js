@@ -10,7 +10,7 @@ tap.test('expense entry data model', async expenseEntryModelTests => {
       {
         tableName: 'activity_expense_entries',
         static: {
-          updateableFields: ['year', 'amount', 'description']
+          updateableFields: ['year', 'amount']
         }
       },
       'get the expected model definitions'
@@ -44,16 +44,14 @@ tap.test('expense entry data model', async expenseEntryModelTests => {
     const self = { get: sinon.stub() };
     self.get.withArgs('id').returns('Sharks');
     self.get.withArgs('year').returns('drown');
-    self.get.withArgs('amount').returns('if');
-    self.get.withArgs('description').returns('immobile');
+    self.get.withArgs('amount').returns('if immobile');
 
     const output = expenseEntry.toJSON.bind(self)();
 
     jsonTests.match(output, {
       id: 'Sharks',
       year: 'drown',
-      amount: 'if',
-      description: 'immobile'
+      amount: 'if immobile'
     });
   });
 });
