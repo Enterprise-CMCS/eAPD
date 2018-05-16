@@ -260,11 +260,6 @@ const reducer = (state = initialState, action) => {
       );
     case GET_APD_SUCCESS: {
       const byId = {};
-      const htmlDate = date =>
-        `${date.getFullYear()}-${
-          date.getMonth() > 8 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`
-        }-${date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`}`;
-
       action.data.activities.forEach(a => {
         byId[a.id] = {
           id: a.id,
@@ -280,7 +275,12 @@ const reducer = (state = initialState, action) => {
             desc: g.description,
             obj: g.objectives[0]
           })),
-          milestones: [newMilestone(), newMilestone(), newMilestone()], // TODO
+          milestones: a.schedule.map(s => ({
+            id: s.id,
+            name: s.milestone,
+            start: s.plannedStart,
+            end: s.plannedEnd
+          })),
           statePersonnel: a.statePersonnel.map(s => ({
             id: s.id,
             title: s.title,
@@ -300,8 +300,8 @@ const reducer = (state = initialState, action) => {
             id: c.id,
             name: c.name,
             desc: c.description,
-            start: htmlDate(new Date(c.start)),
-            end: htmlDate(new Date(c.end)),
+            start: c.start,
+            end: c.end,
             years: c.years.reduce(
               (years, y) => ({
                 ...years,
