@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = {
   apdActivitySchedule: {
     tableName: 'activity_schedule',
@@ -15,36 +17,43 @@ module.exports = {
       return {
         id: attributes.id,
         activity_id: attributes.activity_id,
-        actual_end: new Date(attributes.actualEnd),
-        actual_start: new Date(attributes.actualStart),
+        actual_end: attributes.actualEnd,
+        actual_start: attributes.actualStart,
         milestone: attributes.milestone,
-        planned_end: new Date(attributes.plannedEnd),
-        planned_start: new Date(attributes.plannedStart),
+        planned_end: attributes.plannedEnd,
+        planned_start: attributes.plannedStart,
         status: attributes.status
       };
     },
 
-    parse(attributes) {
-      return {
-        id: attributes.id,
-        activity_id: attributes.activity_id,
-        actualEnd: attributes.actual_end,
-        actualStart: attributes.actual_start,
-        milestone: attributes.milestone,
-        plannedEnd: attributes.planned_end,
-        plannedStart: attributes.planned_start,
-        status: attributes.status
-      };
+    async validate() {
+      [
+        ['actualEnd', 'actual-end-date'],
+        ['actualStart', 'actual-end-date'],
+        ['plannedEnd', 'planned-end-date'],
+        ['plannedStart', 'planned-start-date']
+      ].forEach(([attribute, name]) => {
+        if (this.attributes[attribute]) {
+          // true to enforce strict parsing
+          const date = moment(this.attributes[attribute], 'YYYY-MM-DD', true);
+          if (!date.isValid()) {
+            throw new Error(`${name}-invalid`);
+          }
+
+          // convert to JS date object
+          this.attributes[attribute] = date.toDate();
+        }
+      });
     },
 
     toJSON() {
       return {
         id: this.get('id'),
-        actualEnd: this.get('actualEnd'),
-        actualStart: this.get('actualStart'),
+        actualEnd: moment(this.get('actual_end')).format('YYYY-MM-DD'),
+        actualStart: moment(this.get('actual_start')).format('YYYY-MM-DD'),
         milestone: this.get('milestone'),
-        plannedEnd: this.get('plannedEnd'),
-        plannedStart: this.get('plannedStart'),
+        plannedEnd: moment(this.get('planned_end')).format('YYYY-MM-DD'),
+        plannedStart: moment(this.get('planned_start')).format('YYYY-MM-DD'),
         status: this.get('status')
       };
     },
