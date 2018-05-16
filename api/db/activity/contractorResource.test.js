@@ -1,5 +1,6 @@
 const tap = require('tap');
 const sinon = require('sinon');
+const moment = require('moment');
 
 const {
   apdActivityContractorResource: contractor,
@@ -63,28 +64,38 @@ tap.test(
       }
     );
 
-    contractorResourceModelTests.test('validation', async validationTests => {
-      validationTests.test('fails if dates cannot be parsed', async test => {
-        const self = { attributes: { start: 'invalid date', end: 0 } };
+    contractorResourceModelTests.test('validation', async test => {
+      await Promise.all(
+        ['end', 'start'].map(async attr => {
+          await Promise.all(
+            [7, 'bob', 'January 3, 1947', '14 October 1066', '2014-3-9'].map(
+              async invalidValue => {
+                try {
+                  const self = { attributes: { [attr]: invalidValue } };
+                  await contractor.validate.bind(self)();
+                  test.fail(`rejects if ${attr} is "${invalidValue}"`);
+                } catch (e) {
+                  test.pass(`rejects if ${attr} is "${invalidValue}"`);
+                }
+              }
+            )
+          );
+        })
+      );
 
-        test.rejects(
-          contractor.validate.bind(self),
-          'rejects if start date is invalid'
-        );
+      const self = {
+        attributes: {
+          end: '2000-01-01',
+          start: '2000-01-01'
+        }
+      };
 
-        self.attributes.start = 0;
-        self.attributes.end = 'invalidate date';
-
-        test.rejects(
-          contractor.validate.bind(self),
-          'rejects if end date is invalid'
-        );
-      });
-
-      validationTests.test('pass if dates are valid', async test => {
-        const self = { attributes: { start: 0, end: 0 } };
-        test.resolves(contractor.validate.bind(self), 'resolves');
-      });
+      try {
+        await contractor.validate.bind(self)();
+        test.pass('resolves if all values are valid');
+      } catch (e) {
+        test.fail('resolves if all values are valid');
+      }
     });
 
     contractorResourceModelTests.test(
@@ -95,8 +106,8 @@ tap.test(
         self.get.withArgs('id').returns('id field');
         self.get.withArgs('name').returns('name field');
         self.get.withArgs('description').returns('description field');
-        self.get.withArgs('start').returns('start field');
-        self.get.withArgs('end').returns('end field');
+        self.get.withArgs('start').returns(moment('2001-01-01').toDate());
+        self.get.withArgs('end').returns(moment('2002-02-02').toDate());
         self.related.withArgs('years').returns('some times');
 
         const output = contractor.toJSON.bind(self)();
@@ -105,8 +116,8 @@ tap.test(
           id: 'id field',
           name: 'name field',
           description: 'description field',
-          start: 'start field',
-          end: 'end field',
+          start: '2001-01-01',
+          end: '2002-02-02',
           years: 'some times'
         });
       }
