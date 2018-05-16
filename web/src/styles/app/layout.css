@@ -53,3 +53,8 @@ footer {
 .w-3 {
   width: 3rem;
 }
+
+.sticky-top {
+  position: sticky;
+  top: 0;
+}
