@@ -9,8 +9,19 @@ class RichText extends Component {
     super(props);
 
     this.state = {
-      content: htmlToEditor(props.content)
+      content: htmlToEditor(props.content),
+      lastContent: props.content
     };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.content !== this.state.lastContent) {
+      this.setState({
+        content: htmlToEditor(nextProps.content),
+        lastContent: nextProps.content
+      });
+    }
+    return nextState.content !== this.state.content;
   }
 
   onEditorChange = newContent => {
