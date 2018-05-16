@@ -185,7 +185,7 @@
       "helpText":
         "Please provide a detailed breakout of any non-personnel and non-contracted costs related to this activity. This should icnlude a brief description of these projected costs.",
       "reminder":
-        "“Miscellaneous expenses” include materials and supplies, communications‐related expenses, printing costs and facilities expenses; these costs can be broken out into distinct cost categories in the budget detail per the state’s Chart of Account.",
+        "“Miscellaneous expenses” include materials and supplies, communications‐related expenses, printing costs and facilities expenses; these costs can be broken out into distinct cost categories in the budget detail per the state’s Chart of Account."
     },
     "costAllocate": {
       "title": "Cost Allocation and Other Funding Sources",
