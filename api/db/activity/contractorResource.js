@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = {
   apdActivityContractorResource: {
     tableName: 'activity_contractor_resources',
@@ -14,16 +16,20 @@ module.exports = {
     },
 
     async validate() {
-      if (Number.isNaN(Date.parse(this.attributes.start))) {
-        throw new Error('start-date-invalid');
-      }
-      if (Number.isNaN(Date.parse(this.attributes.end))) {
-        throw new Error('end-date-invalid');
-      }
+      [['end', 'end-date'], ['start', 'start-date']].forEach(
+        ([attribute, name]) => {
+          if (this.attributes[attribute]) {
+            // true to enforce strict parsing
+            const date = moment(this.attributes[attribute], 'YYYY-MM-DD', true);
+            if (!date.isValid()) {
+              throw new Error(`${name}-invalid`);
+            }
 
-      // Once we've validated the dates, go ahead and convert them
-      this.attributes.start = new Date(this.attributes.start);
-      this.attributes.end = new Date(this.attributes.end);
+            // convert to JS date object
+            this.attributes[attribute] = date.toDate();
+          }
+        }
+      );
     },
 
     toJSON() {
@@ -31,8 +37,8 @@ module.exports = {
         id: this.get('id'),
         name: this.get('name'),
         description: this.get('description'),
-        start: this.get('start'),
-        end: this.get('end'),
+        start: moment(this.get('start')).format('YYYY-MM-DD'),
+        end: moment(this.get('end')).format('YYYY-MM-DD'),
         years: this.related('years')
       };
     },
