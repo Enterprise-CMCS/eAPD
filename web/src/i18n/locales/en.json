@@ -52,7 +52,7 @@
     "hit": {
       "title": "HIT Overview",
       "helpText":
-        "Briefly summarize your program HIT activities contained within this APD. If you don't have any HIT activities, you can skip this section."
+        "Briefly summarize your program HIT activities contained within this APD."
     },
     "hie": {
       "title": "HIE Overview",
