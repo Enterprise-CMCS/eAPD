@@ -59,7 +59,15 @@ export const saveApd = () => (dispatch, state) => {
 
   const apd = {
     activities: [],
-    keyPersonnel: updatedApd.keyPersonnel,
+    keyPersonnel: updatedApd.keyPersonnel.map(p => ({
+      title: p.title,
+      description: p.desc,
+      years: Object.keys(p.years).map(year => ({
+        year,
+        cost: p.years[year].amt,
+        fte: p.years[year].perc
+      }))
+    })),
     narrativeHIE: updatedApd.hieNarrative,
     narrativeHIT: updatedApd.hitNarrative,
     narrativeMMIS: updatedApd.mmisNarrative,
@@ -75,14 +83,14 @@ export const saveApd = () => (dispatch, state) => {
       summary: activity.descShort,
       description: activity.descLong,
       alternatives: activity.altApproach,
-      costAllocationDescription: activity.costAllocateDesc,
+      costAllocationMethodology: activity.costAllocateDesc,
       otherFundingSources: {
         description: activity.otherFundingDesc,
         amount: activity.otherFundingAmt
       },
       goals: activity.goals.map(g => ({
         description: g.desc,
-        objectives: [{ description: g.obj }]
+        objectives: [{ description: g.obj }] // TODO - objective should mape 1:1 to goals, instead of being an array (needs backend change first)
       })),
       schedule: activity.milestones.map(m => ({
         milestone: m.name,
@@ -115,7 +123,20 @@ export const saveApd = () => (dispatch, state) => {
           amount: +e.years[year],
           year
         }))
-      }))
+      })),
+      standardsAndConditions: {
+        businessResults: activity.standardsAndConditions.bizResults,
+        documentation: activity.standardsAndConditions.documentation,
+        industryStandards: activity.standardsAndConditions.industry,
+        interoperability: activity.standardsAndConditions.interoperability,
+        keyPersonnel: activity.standardsAndConditions.keyPersonnel,
+        leverage: activity.standardsAndConditions.leverage,
+        minimizeCost: activity.standardsAndConditions.minimizeCost,
+        mitigationStrategy: activity.standardsAndConditions.mitigation,
+        modularity: activity.standardsAndConditions.modularity,
+        mita: activity.standardsAndConditions.mita,
+        reporting: activity.standardsAndConditions.reporting
+      }
     });
   });
 

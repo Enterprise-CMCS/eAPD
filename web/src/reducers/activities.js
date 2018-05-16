@@ -273,7 +273,7 @@ const reducer = (state = initialState, action) => {
           otherFundingAmt: +a.otherFundingSources.amount,
           goals: a.goals.map(g => ({
             desc: g.description,
-            obj: g.objectives[0]
+            obj: g.objectives[0] // TODO - don't assume there's one objective; tie objective directly to the goal instead of a mapped table
           })),
           milestones: a.schedule.map(s => ({
             id: s.id,
@@ -312,8 +312,8 @@ const reducer = (state = initialState, action) => {
           })),
           expenses: a.expenses.map(e => ({
             id: e.id,
-            category: 'Hardware, software, and licensing', // TODO
-            desc: '', // TODO
+            category: e.category,
+            desc: e.description,
             years: e.entries.reduce(
               (years, y) => ({
                 ...years,
@@ -324,6 +324,7 @@ const reducer = (state = initialState, action) => {
           })),
 
           standardsAndConditions: {
+            // TODO
             modularity: '',
             mita: '',
             industry: '',
