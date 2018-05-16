@@ -5,3 +5,7 @@
 .border-width-3 {
   border-width: 3px;
 }
+
+.border-bottom-silver {
+  border-bottom-color: var(--silver);
+}
