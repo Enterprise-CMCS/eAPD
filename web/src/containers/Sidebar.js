@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { t } from '../i18n';
 import { expandActivitySection } from '../actions/activities';
+import { saveApd } from '../actions/apd';
 import SidebarLink from '../components/SidebarLink';
 
 const linkGroup1 = [
@@ -19,7 +20,7 @@ const linkGroup2 = [
   { id: 'certify-submit', name: t('sidebar.titles.submit') }
 ];
 
-const Sidebar = ({ activities, place, hash, expandSection }) => (
+const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
   <div className="site-sidebar bg-navy">
     <div className="p2 xs-hide sm-hide">
       <div className="mb2">
@@ -60,6 +61,14 @@ const Sidebar = ({ activities, place, hash, expandSection }) => (
       </ul>
 
       <div className="mt2 pt2 border-top border-white">
+        <button
+          type="button"
+          className="btn btn-primary mb1"
+          onClick={() => saveApdToAPI()}
+        >
+          Save APD
+        </button>
+
         <button type="button" className="btn btn-primary bg-white navy">
           {t('sidebar.savePdfButtonText')}
         </button>
@@ -72,7 +81,8 @@ Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
   place: PropTypes.object.isRequired,
   hash: PropTypes.string.isRequired,
-  expandSection: PropTypes.func.isRequired
+  expandSection: PropTypes.func.isRequired,
+  saveApdToAPI: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ activities: { byId, allIds }, router }) => ({
@@ -85,7 +95,8 @@ const mapStateToProps = ({ activities: { byId, allIds }, router }) => ({
 });
 
 const mapDispatchToProps = {
-  expandSection: expandActivitySection
+  expandSection: expandActivitySection,
+  saveApdToAPI: saveApd
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
