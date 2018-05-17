@@ -33,10 +33,24 @@ describe('APD reducer', () => {
     expect(
       apd(initialState, {
         type: 'GET_APD_SUCCESS',
-        data: [{ name: 'Bob' }]
+        data: {
+          id: 'apd-id',
+          programOverview: 'moop moop',
+          narrativeHIT: 'HIT, but as a play',
+          narrativeHIE: 'HIE, but as a novel',
+          narrativeMMIS: 'MMIS, but as a script'
+        }
       })
     ).toEqual({
-      data: { name: 'Bob' },
+      data: {
+        id: 'apd-id',
+        years: ['2018'],
+        overview: 'moop moop',
+        keyPersonnel: [],
+        hitNarrative: 'HIT, but as a play',
+        hieNarrative: 'HIE, but as a novel',
+        mmisNarrative: 'MMIS, but as a script'
+      },
       fetching: false,
       loaded: true,
       error: ''

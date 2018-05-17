@@ -1,5 +1,7 @@
 import axios from '../util/api';
 
+import { fetchApd } from './apd';
+
 const API_URL = process.env.API_URL || 'http://localhost:8000';
 
 export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
@@ -27,7 +29,10 @@ export const login = (username, password) => dispatch => {
 
   return axios
     .post(`${API_URL}/auth/login`, { username, password })
-    .then(() => dispatch(completeLogin()))
+    .then(() => {
+      dispatch(completeLogin());
+      dispatch(fetchApd());
+    })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
       dispatch(failLogin(reason));
@@ -42,6 +47,9 @@ export const checkAuth = () => dispatch => {
 
   return axios
     .get(`${API_URL}/me`)
-    .then(() => dispatch(completeAuthCheck()))
+    .then(() => {
+      dispatch(completeAuthCheck());
+      dispatch(fetchApd());
+    })
     .catch(() => dispatch(failAuthCheck()));
 };
