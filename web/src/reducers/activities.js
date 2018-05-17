@@ -17,6 +17,8 @@ import {
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
+import { GET_APD_SUCCESS } from '../actions/apd';
+
 import { nextSequence } from '../util';
 
 const newGoal = () => ({ desc: '', obj: '' });
@@ -256,6 +258,96 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case GET_APD_SUCCESS: {
+      const byId = {};
+      action.data.activities.forEach(a => {
+        byId[a.id] = {
+          id: a.id,
+          name: a.name,
+          types: ['HIT'], // TODO
+          descShort: '', // TODO
+          descLong: a.description,
+          altApproach: '', // TODO
+          costAllocateDesc: '', // TODO
+          otherFundingDesc: a.otherFundingSources.description,
+          otherFundingAmt: +a.otherFundingSources.amount,
+          goals: a.goals.map(g => ({
+            desc: g.description,
+            obj: g.objectives[0] // TODO - don't assume there's one objective; tie objective directly to the goal instead of a mapped table
+          })),
+          milestones: a.schedule.map(s => ({
+            id: s.id,
+            name: s.milestone,
+            start: s.plannedStart,
+            end: s.plannedEnd
+          })),
+          statePersonnel: a.statePersonnel.map(s => ({
+            id: s.id,
+            title: s.title,
+            desc: s.description,
+            years: s.years.reduce(
+              (years, y) => ({
+                ...years,
+                [y.year]: {
+                  amt: y.cost,
+                  perc: y.fte
+                }
+              }),
+              {}
+            )
+          })),
+          contractorResources: a.contractorResources.map(c => ({
+            id: c.id,
+            name: c.name,
+            desc: c.description,
+            start: c.start,
+            end: c.end,
+            years: c.years.reduce(
+              (years, y) => ({
+                ...years,
+                [y.year]: +y.cost
+              }),
+              {}
+            )
+          })),
+          expenses: a.expenses.map(e => ({
+            id: e.id,
+            category: e.category,
+            desc: e.description,
+            years: e.entries.reduce(
+              (years, y) => ({
+                ...years,
+                [y.year]: +y.amount
+              }),
+              {}
+            )
+          })),
+
+          standardsAndConditions: {
+            // TODO
+            modularity: '',
+            mita: '',
+            industry: '',
+            leverage: '',
+            bizResults: '',
+            reporting: '',
+            interoperability: '',
+            mitigation: '',
+            keyPersonnel: '',
+            documentation: '',
+            minimizeCost: ''
+          },
+          meta: {
+            expanded: false
+          }
+        };
+      });
+
+      return {
+        byId,
+        allIds: action.data.activities.map(a => a.id)
+      };
+    }
     default:
       return state;
   }
