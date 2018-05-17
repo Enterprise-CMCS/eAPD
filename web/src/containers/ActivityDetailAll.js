@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ActivityDetailContractorResources from './ActivityDetailContractorResources';
@@ -22,25 +22,36 @@ const activityTitle = (a, i) => {
   return title;
 };
 
-const ActivityDetailAll = ({ aId, expanded, title, toggleSection }) => (
-  <Collapsible
-    id={`activity-${aId}`}
-    title={title}
-    bgColor="darken-1"
-    open={expanded}
-    onChange={() => toggleSection(aId)}
-  >
-    <ActivityDetailDescription aId={aId} />
-    <ActivityDetailGoals aId={aId} />
-    <ActivityDetailSchedule aId={aId} />
-    <ActivityDetailStatePersonnel aId={aId} />
-    <ActivityDetailContractorResources aId={aId} />
-    <ActivityDetailExpenses aId={aId} />
-    <ActivityDetailCostAllocate aId={aId} />
-    <ActivityDetailStandardsAndConditions aId={aId} />
-    <DeleteActivity aId={aId} />
-  </Collapsible>
-);
+class ActivityDetailAll extends Component {
+  handleChange = id => () => {
+    this.props.toggleSection(id);
+  };
+
+  render() {
+    const { aId, expanded, title } = this.props;
+
+    return (
+      <Collapsible
+        id={`activity-${aId}`}
+        title={title}
+        bgColor="light-gray"
+        open={expanded}
+        onChange={this.handleChange(aId)}
+        sticky
+      >
+        <ActivityDetailDescription aId={aId} />
+        <ActivityDetailGoals aId={aId} />
+        <ActivityDetailSchedule aId={aId} />
+        <ActivityDetailStatePersonnel aId={aId} />
+        <ActivityDetailContractorResources aId={aId} />
+        <ActivityDetailExpenses aId={aId} />
+        <ActivityDetailCostAllocate aId={aId} />
+        <ActivityDetailStandardsAndConditions aId={aId} />
+        <DeleteActivity aId={aId} />
+      </Collapsible>
+    );
+  }
+}
 
 ActivityDetailAll.propTypes = {
   aId: PropTypes.number.isRequired,
