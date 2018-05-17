@@ -8,9 +8,10 @@ import {
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { Input, Textarea } from '../components/Inputs';
+import { Input, MaskedInput, Textarea } from '../components/Inputs';
 import HelpText from '../components/HelpText';
 import { t } from '../i18n';
+import { dollarMask, percentMask } from '../util/masks';
 
 class ActivityDetailStatePersonnel extends Component {
   handleChange = (idx, key, year) => e => {
@@ -102,7 +103,8 @@ class ActivityDetailStatePersonnel extends Component {
                   {years.map(year => (
                     <Fragment key={year}>
                       <td>
-                        <Input
+                        <MaskedInput
+                          mask={dollarMask}
                           name={`state-person-${d.id}-${year}-amt`}
                           label={t('activities.statePersonnel.labels.costAmt')}
                           hideLabel
@@ -111,8 +113,9 @@ class ActivityDetailStatePersonnel extends Component {
                         />
                       </td>
                       <td>
-                        <Input
-                          name={`state-person-${d.id}-${year}-amt`}
+                        <MaskedInput
+                          mask={percentMask}
+                          name={`state-person-${d.id}-${year}-perc`}
                           label={t('activities.statePersonnel.labels.costPerc')}
                           hideLabel
                           value={d.years[year].perc}
