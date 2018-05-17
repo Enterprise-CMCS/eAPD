@@ -8,10 +8,9 @@ import {
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { MaskedInput, Textarea } from '../components/Inputs';
+import { DollarInput, Textarea } from '../components/Inputs';
 import Select from '../components/Select';
 import HelpText from '../components/HelpText';
-import { dollarMask } from '../util/masks';
 
 class ActivityDetailExpenses extends Component {
   handleChange = (index, key) => e => {
@@ -92,8 +91,7 @@ class ActivityDetailExpenses extends Component {
                   </td>
                   {years.map(year => (
                     <td key={year}>
-                      <MaskedInput
-                        mask={dollarMask}
+                      <DollarInput
                         name={`expense-${i}-${year}-cost`}
                         label={`Cost for ${year}`}
                         hideLabel
