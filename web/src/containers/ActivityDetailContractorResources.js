@@ -9,8 +9,9 @@ import {
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { Input, Textarea } from '../components/Inputs';
+import { Input, MaskedInput, Textarea } from '../components/Inputs';
 import HelpText from '../components/HelpText';
+import { dollarMask } from '../util/masks';
 
 class ActivityDetailContractorExpenses extends Component {
   handleChange = (index, key) => e => {
@@ -26,7 +27,7 @@ class ActivityDetailContractorExpenses extends Component {
     const { activity, updateActivity } = this.props;
 
     const updates = {
-      contractorResources: { [index]: { years: { [year]: +value } } }
+      contractorResources: { [index]: { years: { [year]: value } } }
     };
     updateActivity(activity.id, updates);
   };
@@ -138,14 +139,14 @@ class ActivityDetailContractorExpenses extends Component {
                     </td>
                     {years.map(year => (
                       <td key={year}>
-                        <Input
+                        <MaskedInput
+                          mask={dollarMask}
                           name={`contractor-${i}-cost-${year}`}
                           label={t(
                             'activities.contractorResources.srLabels.cost',
                             { year }
                           )}
                           hideLabel
-                          type="number"
                           value={contractor.years[year]}
                           onChange={this.handleYearChange(i, year)}
                         />

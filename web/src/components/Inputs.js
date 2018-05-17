@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
+import TextMask from 'react-text-mask';
 
 import { EDITOR_CONFIG, htmlToEditor, editorToHtml } from '../util/editor';
 
@@ -42,6 +43,7 @@ RichText.defaultProps = {
 };
 
 const Input = props => <input className="m0 input" {...props} />;
+const MaskedInput = props => <TextMask className="m0 input mono" {...props} />;
 const Textarea = props => (
   <textarea className="m0 textarea" spellCheck="true" {...props} />
 );
@@ -90,6 +92,12 @@ makeInput.propTypes = {
 };
 
 const InputHolder = makeInput(Input);
+const MaskedInputHolder = makeInput(MaskedInput);
 const TextareaHolder = makeInput(Textarea);
 
-export { InputHolder as Input, TextareaHolder as Textarea, RichText };
+export {
+  InputHolder as Input,
+  MaskedInputHolder as MaskedInput,
+  TextareaHolder as Textarea,
+  RichText
+};
