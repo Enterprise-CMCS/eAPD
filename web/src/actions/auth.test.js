@@ -3,6 +3,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import * as actions from './auth';
+import * as apdActions from './apd';
 import axios from '../util/api';
 
 const mockStore = configureStore([thunk]);
@@ -39,7 +40,8 @@ describe('auth actions', () => {
 
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_SUCCESS }
+        { type: actions.LOGIN_SUCCESS },
+        { type: apdActions.GET_APD_REQUEST }
       ];
 
       return store.dispatch(actions.login()).then(() => {
@@ -90,7 +92,8 @@ describe('auth actions', () => {
 
       const expectedActions = [
         { type: actions.AUTH_CHECK_REQUEST },
-        { type: actions.AUTH_CHECK_SUCCESS }
+        { type: actions.AUTH_CHECK_SUCCESS },
+        { type: apdActions.GET_APD_REQUEST }
       ];
 
       return store.dispatch(actions.checkAuth()).then(() => {
