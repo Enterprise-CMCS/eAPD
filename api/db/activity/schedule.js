@@ -1,5 +1,7 @@
 const moment = require('moment');
 
+const getDate = date => (date ? moment(date).format('YYYY-MM-DD') : null);
+
 module.exports = {
   apdActivitySchedule: {
     tableName: 'activity_schedule',
@@ -49,11 +51,11 @@ module.exports = {
     toJSON() {
       return {
         id: this.get('id'),
-        actualEnd: moment(this.get('actual_end')).format('YYYY-MM-DD'),
-        actualStart: moment(this.get('actual_start')).format('YYYY-MM-DD'),
+        actualEnd: getDate(this.get('actual_end')),
+        actualStart: getDate(this.get('actual_start')),
         milestone: this.get('milestone'),
-        plannedEnd: moment(this.get('planned_end')).format('YYYY-MM-DD'),
-        plannedStart: moment(this.get('planned_start')).format('YYYY-MM-DD'),
+        plannedEnd: getDate(this.get('planned_end')),
+        plannedStart: getDate(this.get('planned_start')),
         status: this.get('status')
       };
     },
