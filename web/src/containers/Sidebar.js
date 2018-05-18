@@ -21,7 +21,7 @@ const linkGroup2 = [
 ];
 
 const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
-  <div className="site-sidebar bg-navy">
+  <div className="site-sidebar bg-navy relative">
     <div className="p2 xs-hide sm-hide">
       <div className="mb2">
         <img
@@ -59,18 +59,18 @@ const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
           </SidebarLink>
         ))}
       </ul>
-
       <div className="mt2 pt2 border-top border-white">
+        <button type="button" className="btn btn-primary bg-white navy">
+          {t('sidebar.savePdfButtonText')}
+        </button>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p2">
         <button
           type="button"
-          className="btn btn-primary mb1"
+          className="btn btn-primary col-12"
           onClick={() => saveApdToAPI()}
         >
           Save APD
-        </button>
-
-        <button type="button" className="btn btn-primary bg-white navy">
-          {t('sidebar.savePdfButtonText')}
         </button>
       </div>
     </div>
