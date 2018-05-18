@@ -1,6 +1,7 @@
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
-const toNum = x => (x.length ? +x.replace(/\D+/g, '') : '');
+// eslint-disable-next-line no-useless-escape
+const toNum = x => (x.length ? +x.replace(/[^0-9\.]+/g, '') : '');
 
 const MASKS = {
   dollar: {
