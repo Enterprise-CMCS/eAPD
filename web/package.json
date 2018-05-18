@@ -66,9 +66,11 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
+    "react-text-mask": "^5.4.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "sinon": "^4.4.2",
+    "text-mask-addons": "^3.7.2",
     "tippy.js": "^2.5.0",
     "updeep": "^1.0.0"
   },
