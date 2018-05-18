@@ -4,6 +4,7 @@ exports.up = async knex => {
     table.text('alternatives');
     table.text('cost_allocation_methodology');
     table.json('types');
+    table.json('standards_and_conditions');
   });
 
   await knex.schema.alterTable('activity_goals', table => {
