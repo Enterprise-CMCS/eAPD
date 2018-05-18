@@ -48,7 +48,8 @@ module.exports = {
       other_funding_sources_amount: attr.otherFundingSources
         ? attr.otherFundingSources.amount
         : 0,
-      types: JSON.stringify(attr.types)
+      types: JSON.stringify(attr.types),
+      standards_and_conditions: JSON.stringify(attr.standardsAndConditions)
     }),
 
     static: {
@@ -59,7 +60,8 @@ module.exports = {
         'alternatives',
         'costAllocationMethodology',
         'otherFundingSources',
-        'types'
+        'types',
+        'standardsAndConditions'
       ],
       owns: {
         goals: 'apdActivityGoal',
@@ -124,7 +126,8 @@ module.exports = {
         otherFundingSources: {
           description: this.get('other_funding_sources_description'),
           amount: this.get('other_funding_sources_amount')
-        }
+        },
+        standardsAndConditions: this.get('standards_and_conditions')
       };
     }
   }
