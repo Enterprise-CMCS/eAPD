@@ -41,16 +41,26 @@ module.exports = {
       apd_id: attr.apd_id,
       name: attr.name,
       description: attr.description,
+      cost_allocation_methodology: attr.costAllocationMethodology,
       other_funding_sources_description: attr.otherFundingSources
         ? attr.otherFundingSources.description
         : '',
       other_funding_sources_amount: attr.otherFundingSources
         ? attr.otherFundingSources.amount
-        : 0
+        : 0,
+      types: JSON.stringify(attr.types)
     }),
 
     static: {
-      updateableFields: ['name', 'description', 'otherFundingSources'],
+      updateableFields: [
+        'name',
+        'summary',
+        'description',
+        'alternatives',
+        'costAllocationMethodology',
+        'otherFundingSources',
+        'types'
+      ],
       owns: {
         goals: 'apdActivityGoal',
         approaches: 'apdActivityApproach',
@@ -99,13 +109,17 @@ module.exports = {
       return {
         id: this.get('id'),
         name: this.get('name'),
+        types: this.get('types'),
+        summary: this.get('summary'),
         description: this.get('description'),
+        alternatives: this.get('alternatives'),
         goals: this.related('goals'),
         approaches: this.related('approaches'),
         contractorResources: this.related('contractorResources'),
         expenses: this.related('expenses'),
         schedule: this.related('schedule'),
         statePersonnel: this.related('statePersonnel'),
+        costAllocationMethodology: this.get('costAllocationMethodology'),
         costAllocation: this.related('costAllocation'),
         otherFundingSources: {
           description: this.get('other_funding_sources_description'),
