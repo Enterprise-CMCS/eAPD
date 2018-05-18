@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import Collapsible from '../components/Collapsible';
-import { Input, RichText } from '../components/Inputs';
+import { DollarInput, RichText } from '../components/Inputs';
 import HelpText from '../components/HelpText';
 
 const ActivityDetailCostAllocate = props => {
@@ -44,7 +44,7 @@ const ActivityDetailCostAllocate = props => {
           onSync={sync('otherFundingDesc')}
         />
       </div>
-      <Input
+      <DollarInput
         name="other-funding-amt"
         label={t('activities.costAllocate.label.otherFundingAmt')}
         wrapperClass="mb2 sm-col-4"
