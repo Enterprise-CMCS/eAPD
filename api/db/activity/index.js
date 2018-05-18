@@ -5,7 +5,6 @@ const costAllocation = require('./costAllocation');
 const expense = require('./expense');
 const expenseEntry = require('./expenseEntry');
 const goal = require('./goal');
-const goalObjective = require('./goalObjective');
 const schedule = require('./schedule');
 const statePersonnel = require('./statePersonnel');
 
@@ -19,7 +18,6 @@ module.exports = () => ({
   ...expense,
   ...expenseEntry,
   ...goal,
-  ...goalObjective,
   ...schedule,
   ...statePersonnel
 });
