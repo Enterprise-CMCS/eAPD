@@ -6,10 +6,10 @@ import PoC from './components/PoC';
 import Login from './containers/Login';
 
 const routes = [
-  { path: '/', component: PoC, exact: true, nonPrivate: true },
+  { path: '/', component: PoC, exact: true, nonPrivate: false },
   { path: '/login', component: Login, nonPrivate: true },
   { path: '/hello', component: Hello, nonPrivate: true },
-  { path: '/poc', component: PoC, nonPrivate: true },
+  { path: '/poc', component: PoC, nonPrivate: false },
   { path: '/activities', component: ActivitiesPage, nonPrivate: true },
   { path: '/budget', component: Budget, nonPrivate: true },
   { component: NoMatch, nonPrivate: true }
