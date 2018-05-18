@@ -44,7 +44,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         fetching: false,
         loaded: true,
-        data: { ...action.data[0] }
+        data: {
+          id: action.data.id,
+          years: ['2018'], // TODO
+          overview: action.data.programOverview,
+          keyPersonnel: [], // TODO
+          hitNarrative: action.data.narrativeHIT,
+          hieNarrative: action.data.narrativeHIE,
+          mmisNarrative: action.data.narrativeMMIS
+        }
       };
     case GET_APD_FAILURE:
       return { ...state, fetching: false, error: action.error };

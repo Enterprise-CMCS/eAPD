@@ -35,7 +35,7 @@ describe('state actions', () => {
 
     it('creates GET_APD_SUCCESS after successful APD fetch', () => {
       const store = mockStore({});
-      fetchMock.onGet('/apds').reply(200, { foo: 'bar' });
+      fetchMock.onGet('/apds').reply(200, [{ foo: 'bar' }]);
 
       const expectedActions = [
         { type: actions.GET_APD_REQUEST },
