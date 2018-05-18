@@ -13,9 +13,6 @@ curl -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&
 dpkg -i cf-cli_amd64.deb
 rm cf-cli_amd64.deb
 
-# Install `autopilot` plugin
-cf install-plugin autopilot -f -r CF-Community
-
 # Build the front-end
 cd web
 npm ci
