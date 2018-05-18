@@ -23,12 +23,12 @@ class Collapsible extends Component {
 
     const btnClass = deline`
       btn block col-12 py2 h3 line-height-1 left-align
-      ${isOpen ? 'border-bottom border-bottom-silver' : ''}
+      ${isOpen ? 'border-bottom border-bottom-gray' : ''}
       bg-${bgColor} ${sticky ? 'sticky-top' : ''}
     `;
 
     return (
-      <div id={id} className={`mb2 bg-${bgColor} border border-silver`}>
+      <div id={id} className={`mb2 bg-${bgColor}`}>
         <button
           type="button"
           className={btnClass}

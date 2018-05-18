@@ -1,17 +1,18 @@
-import ActivitiesPage from './components/ActivitiesPage';
-import Budget from './components/Budget';
-import Hello from './components/Hello';
+import ApdApplication from './components/ApdApplication';
 import NoMatch from './components/NoMatch';
-import PoC from './components/PoC';
 import Login from './containers/Login';
 
+// temp pages for more targeted development & iteration
+import ActivitiesPage from './components/temp/ActivitiesPage';
+import BudgetPage from './components/temp/BudgetPage';
+
 const routes = [
-  { path: '/', component: PoC, exact: true, nonPrivate: false },
+  { path: '/', component: ApdApplication, exact: true, nonPrivate: false },
   { path: '/login', component: Login, nonPrivate: true },
-  { path: '/hello', component: Hello, nonPrivate: true },
-  { path: '/poc', component: PoC, nonPrivate: false },
-  { path: '/activities', component: ActivitiesPage, nonPrivate: true },
-  { path: '/budget', component: Budget, nonPrivate: true },
+
+  { path: '/temp/activities', component: ActivitiesPage, nonPrivate: true },
+  { path: '/temp/budget', component: BudgetPage, nonPrivate: true },
+
   { component: NoMatch, nonPrivate: true }
 ];
 
