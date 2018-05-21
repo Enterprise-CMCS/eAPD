@@ -11,7 +11,7 @@ class Wrapper extends Component {
 
   addTota11y = () => {
     const script = document.createElement('script');
-    script.src = '_dev/tota11y.min.js';
+    script.src = '/_dev/tota11y.min.js';
     document.body.appendChild(script);
   };
 
