@@ -47,10 +47,11 @@ class RichText extends Component {
   }
 }
 RichText.propTypes = {
-  content: PropTypes.string.isRequired,
+  content: PropTypes.string,
   onSync: PropTypes.func
 };
 RichText.defaultProps = {
+  content: '',
   onSync: () => {}
 };
 

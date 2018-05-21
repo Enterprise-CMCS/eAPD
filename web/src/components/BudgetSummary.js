@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 
-import Container from './Container';
-import Collapsible from './Collapsible';
 import { formatMoney } from '../util/formats';
 
 const fakeData = {
@@ -202,77 +200,69 @@ HeaderRow.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-const BudgetTable = () => {
+const BudgetSummary = () => {
   const { hit, hie, mmis, totals } = enrichedFakedData;
 
   return (
-    <Container>
-      <Collapsible title="Budget Table" open>
-        <div className="py1 overflow-auto">
-          <table
-            className="h6 table-fixed table-bordered table-budget"
-            style={{ minWidth: 1000 }}
-          >
-            <thead>
-              <tr>
-                <th style={{ width: 200 }} />
-                <th className="bg-black white center" colSpan="3">
-                  FFY 2018
-                </th>
-                <th className="bg-black white center" colSpan="3">
-                  FFY 2019
-                </th>
-                <th className="bg-black white center" colSpan="3">
-                  Total
-                </th>
-              </tr>
-              <tr>
-                <th />
-                {[...Array(3)].map((_, i) => (
-                  <Fragment key={i}>
-                    <th className="col-4">Total</th>
-                    <th className="col-4">Federal share</th>
-                    <th className="col-4">State share</th>
-                  </Fragment>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="bg-light-blue">
-              <HeaderRow title="HIT activities" />
-              <DataRowGroup data={hit} />
-            </tbody>
-            <tbody className="bg-light-yellow">
-              <HeaderRow title="HIE activities" />
-              <DataRowGroup data={hie} />
-            </tbody>
-            <tbody className="bg-light-green">
-              <HeaderRow title="MMIS activities" />
-              <DataRowGroup data={mmis} />
-            </tbody>
-            <tbody>
-              <tr className="bold">
-                <td>Project total</td>
-                {Object.keys(totals).map(yr => {
-                  const val = totals[yr];
-                  return (
-                    <Fragment key={yr}>
-                      <td className="mono right-align">{formatMoney(val)}</td>
-                      <td className="mono right-align">
-                        {formatMoney(val * 0.9)}
-                      </td>
-                      <td className="mono right-align">
-                        {formatMoney(val * 0.1)}
-                      </td>
-                    </Fragment>
-                  );
-                })}
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </Collapsible>
-    </Container>
+    <div className="py1 overflow-auto">
+      <table
+        className="h6 table-fixed table-bordered table-budget"
+        style={{ minWidth: 1000 }}
+      >
+        <thead>
+          <tr>
+            <th style={{ width: 200 }} />
+            <th className="bg-black white center" colSpan="3">
+              FFY 2018
+            </th>
+            <th className="bg-black white center" colSpan="3">
+              FFY 2019
+            </th>
+            <th className="bg-black white center" colSpan="3">
+              Total
+            </th>
+          </tr>
+          <tr>
+            <th />
+            {[...Array(3)].map((_, i) => (
+              <Fragment key={i}>
+                <th className="col-4">Total</th>
+                <th className="col-4">Federal share</th>
+                <th className="col-4">State share</th>
+              </Fragment>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="bg-light-blue">
+          <HeaderRow title="HIT activities" />
+          <DataRowGroup data={hit} />
+        </tbody>
+        <tbody className="bg-light-yellow">
+          <HeaderRow title="HIE activities" />
+          <DataRowGroup data={hie} />
+        </tbody>
+        <tbody className="bg-light-green">
+          <HeaderRow title="MMIS activities" />
+          <DataRowGroup data={mmis} />
+        </tbody>
+        <tbody>
+          <tr className="bold">
+            <td>Project total</td>
+            {Object.keys(totals).map(yr => {
+              const val = totals[yr];
+              return (
+                <Fragment key={yr}>
+                  <td className="mono right-align">{formatMoney(val)}</td>
+                  <td className="mono right-align">{formatMoney(val * 0.9)}</td>
+                  <td className="mono right-align">{formatMoney(val * 0.1)}</td>
+                </Fragment>
+              );
+            })}
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 
-export default BudgetTable;
+export default BudgetSummary;
