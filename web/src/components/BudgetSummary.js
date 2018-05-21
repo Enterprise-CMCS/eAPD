@@ -206,7 +206,7 @@ const BudgetSummary = () => {
   return (
     <div className="py1 overflow-auto">
       <table
-        className="h6 table-fixed table-bordered table-budget"
+        className="h6 table-fixed table-bordered table-budget table-budget-summary"
         style={{ minWidth: 1000 }}
       >
         <thead>
