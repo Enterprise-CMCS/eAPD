@@ -7,6 +7,7 @@ import { updateApd as updateApdAction } from '../actions/apd';
 import Collapsible from '../components/Collapsible';
 import { RichText } from '../components/Inputs';
 import Section from '../components/Section';
+import SectionDesc from '../components/SectionDesc';
 import SectionTitle from '../components/SectionTitle';
 import HelpText from '../components/HelpText';
 import { t } from '../i18n';
@@ -42,9 +43,7 @@ class ApdSummary extends Component {
     return (
       <Section id="apd-summary">
         <SectionTitle>{t('apd.sectionTitle')}</SectionTitle>
-
-        <h3>{t('apd.helpText')}</h3>
-
+        <SectionDesc>{t('apd.helpText')}</SectionDesc>
         <Collapsible title={t('apd.overview.title')}>
           <HelpText
             text="apd.overview.helpText"

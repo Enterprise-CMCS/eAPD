@@ -15,7 +15,7 @@ import TopNav from './TopNav';
 
 const PLACE = { id: 'tx', name: 'Texas' };
 
-const PoC = () => (
+const ApdApplication = () => (
   <div className="site-body">
     <Sidebar place={PLACE} />
     <div className="site-content flex flex-column">
@@ -33,4 +33,4 @@ const PoC = () => (
   </div>
 );
 
-export default PoC;
+export default ApdApplication;
