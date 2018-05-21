@@ -29,7 +29,6 @@ tap.test('apd data model', async apdModelTests => {
               'activities.contractorResources',
               'activities.contractorResources.years',
               'activities.goals',
-              'activities.goals.objectives',
               'activities.expenses',
               'activities.expenses.entries',
               'activities.schedule',

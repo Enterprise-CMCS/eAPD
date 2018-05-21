@@ -22,7 +22,6 @@ module.exports = {
 
     static: {
       updateableFields: ['description', 'objective'],
-      owns: { objectives: 'apdActivityGoalObjective' },
       foreignKey: 'activity_goal_id'
     }
   }
