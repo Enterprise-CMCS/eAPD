@@ -21,27 +21,12 @@ while read -r app; do
   NAME=$(echo $app | jq -r '.name')
   if [[ "$NAME" =~ hitech-apd-frontend-pr([0-9]+) ]]; then
     PULL=`echo ${BASH_REMATCH[1]}`
-    echo "APP $NAME: related to PR #$PULL"
 
     PR_STATE=$(curl -s "https://api.github.com/repos/18f/cms-hitech-apd/pulls/$PULL" | jq -r .state)
     if [[ "$PR_STATE" != "open" ]]; then
-      GUID=$(echo $app | jq -r '.guid')
-      ROUTES_URL=$(echo $app | jq -r '.routes')
-      echo " -- PR is closed; need to delete the app"
-      echo " -- app GUID is $GUID"
-
-      ROUTES=$(cf curl "$ROUTES_URL" | jq -c -r ".resources[] | { guid: .metadata.guid, host: .entity.host }")
-      while read -r route; do
-        ROUTE_GUID=$(echo $route | jq -r '.guid')
-        ROUTE_HOST=$(echo $route | jq -r '.host')
-        echo " -- deleting route $ROUTE_HOST [$ROUTE_GUID]"
-        cf curl -X DELETE "/v2/routes/$ROUTE_GUID"
-      done <<< "$ROUTES"
-
-      echo " -- deleting app $NAME [$GUID]"
-      cf curl -X DELETE "/v2/apps/$GUID"
-    else
-      echo " -- PR is still open; don't do anything"
+      echo "PR $PULL is closed"
+      # -r to delete mapped routes, -f to skip the prompt
+      cf delete $NAME -r -f
     fi
   fi
 done <<< "$APPS"

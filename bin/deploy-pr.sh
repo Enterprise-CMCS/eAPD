@@ -20,9 +20,6 @@ if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
   dpkg -i cf-cli_amd64.deb
   rm cf-cli_amd64.deb
 
-  # Install `autopilot` plugin
-  cf install-plugin autopilot -f -r CF-Community
-
   # Build the front-end
   cd web
   npm ci
