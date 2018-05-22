@@ -31,9 +31,10 @@ rm seeds/shared/delete-everything.js
 npm ci
 cd ..
 
-# Log into CF and push
 cf login -a $STAGING_CF_API -u $STAGING_CF_USER -p $STAGING_CF_PASSWORD -o $STAGING_CF_ORG -s $STAGING_CF_SPACE
-cf push -f manifest.yml
+
+cf zero-downtime-push hitech-apd-frontend -f manifest.yml
+cf zero-downtime-push hitech-apd-api -f manifest.yml
 
 # Migrate and seed the database
 cf run-task hitech-apd-api "npm run migrate && npm run seed"
