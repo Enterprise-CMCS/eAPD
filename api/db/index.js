@@ -8,6 +8,7 @@ const user = require('./user');
 const authorization = require('./authorization');
 const state = require('./state');
 const apd = require('./apd');
+const keyPersonnel = require('./apdKeyPersonnel');
 const apdActivity = require('./activity');
 
 const exportedModels = {};
@@ -17,7 +18,14 @@ const setup = (
   bookshelf = defaultBookshelf,
   config = defaultConfig,
   baseModel = defaultBase,
-  models = [user(), authorization(), state(), apd(), apdActivity()]
+  models = [
+    user(),
+    authorization(),
+    state(),
+    apd(),
+    keyPersonnel(),
+    apdActivity()
+  ]
 ) => {
   logger.silly(
     `setting up models using [${process.env.NODE_ENV}] configuration`

@@ -41,60 +41,20 @@ exports.seed = async knex => {
     {
       id: 4200,
       description: 'Be a super successful artist',
+      objective: 'Paint a pretty picture',
       activity_id: 4100
     },
     {
       id: 4201,
       description: 'Win a Nobel prize for physics',
+      objective: 'Discover a new particle',
       activity_id: 4100
     },
     {
       id: 4202,
       description: 'Go on Ellen',
+      objective: 'Learn to dance',
       activity_id: 4100
-    }
-  ]);
-
-  await knex('activity_goal_objectives').insert([
-    {
-      id: 4300,
-      description: 'Paint a pretty picture',
-      activity_goal_id: 4200
-    },
-    {
-      id: 4301,
-      description: 'Paint a confusing picture',
-      activity_goal_id: 4200
-    },
-    {
-      id: 4302,
-      description: 'Paint an offensive picture',
-      activity_goal_id: 4200
-    },
-    {
-      id: 4303,
-      description: '...Profit',
-      activity_goal_id: 4200
-    },
-    {
-      id: 4304,
-      description: 'Discover a new particle',
-      activity_goal_id: 4201
-    },
-    {
-      id: 4305,
-      description: 'Lie about the Moonmen',
-      activity_goal_id: 4201
-    },
-    {
-      id: 4306,
-      description: 'Learn to dance',
-      activity_goal_id: 4202
-    },
-    {
-      id: 4307,
-      description: 'Bring audience gifts',
-      activity_goal_id: 4202
     }
   ]);
 };

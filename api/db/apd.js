@@ -6,6 +6,10 @@ module.exports = () => ({
       return this.hasMany('apdActivity');
     },
 
+    keyPersonnel() {
+      return this.hasMany('apdKeyPersonnel');
+    },
+
     state() {
       return this.belongsTo('state');
     },
@@ -29,14 +33,15 @@ module.exports = () => ({
     toJSON() {
       return {
         id: this.get('id'),
-        state: this.get('state_id'),
-        status: this.get('status'),
-        period: this.get('period'),
-        programOverview: this.get('program_overview'),
+        activities: this.related('activities').toJSON(),
+        keyPersonnel: this.related('keyPersonnel').toJSON(),
         narrativeHIE: this.get('narrative_hie'),
         narrativeHIT: this.get('narrative_hit'),
         narrativeMMIS: this.get('narrative_mmis'),
-        activities: this.related('activities').toJSON()
+        period: this.get('period'),
+        programOverview: this.get('program_overview'),
+        state: this.get('state_id'),
+        status: this.get('status')
       };
     },
 
@@ -50,19 +55,20 @@ module.exports = () => ({
         'narrativeMMIS'
       ],
       foreignKey: 'apd_id',
-      owns: { activities: 'apdActivity' },
+      owns: { activities: 'apdActivity', keyPersonnel: 'apdKeyPersonnel' },
       withRelated: [
         { activities: query => query.orderBy('id') },
         'activities.approaches',
         'activities.contractorResources',
         'activities.contractorResources.years',
         'activities.goals',
-        'activities.goals.objectives',
         'activities.expenses',
         'activities.expenses.entries',
         'activities.schedule',
         'activities.statePersonnel',
-        'activities.statePersonnel.years'
+        'activities.statePersonnel.years',
+        'keyPersonnel',
+        'keyPersonnel.years'
       ]
     }
   }
