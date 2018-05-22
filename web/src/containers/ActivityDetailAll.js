@@ -28,7 +28,7 @@ class ActivityDetailAll extends Component {
   };
 
   render() {
-    const { aId, expanded, title } = this.props;
+    const { aId, expanded, num, title } = this.props;
 
     return (
       <Collapsible
@@ -47,7 +47,7 @@ class ActivityDetailAll extends Component {
         <ActivityDetailExpenses aId={aId} />
         <ActivityDetailCostAllocate aId={aId} />
         <ActivityDetailStandardsAndConditions aId={aId} />
-        <DeleteActivity aId={aId} />
+        {num > 1 && <DeleteActivity aId={aId} />}
       </Collapsible>
     );
   }
@@ -56,6 +56,7 @@ class ActivityDetailAll extends Component {
 ActivityDetailAll.propTypes = {
   aId: PropTypes.number.isRequired,
   expanded: PropTypes.bool.isRequired,
+  num: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   toggleSection: PropTypes.func.isRequired
 };
