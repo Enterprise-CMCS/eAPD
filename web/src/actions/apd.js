@@ -59,15 +59,6 @@ export const saveApd = () => (dispatch, state) => {
 
   const apd = {
     activities: [],
-    keyPersonnel: updatedApd.keyPersonnel.map(p => ({
-      title: p.title,
-      description: p.desc,
-      years: Object.keys(p.years).map(year => ({
-        year,
-        cost: p.years[year].amt,
-        fte: p.years[year].perc
-      }))
-    })),
     narrativeHIE: updatedApd.hieNarrative,
     narrativeHIT: updatedApd.hitNarrative,
     narrativeMMIS: updatedApd.mmisNarrative,
