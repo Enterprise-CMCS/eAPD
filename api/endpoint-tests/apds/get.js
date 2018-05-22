@@ -58,23 +58,15 @@ tap.test('APD endpoint | GET /apds', async getAPDsTest => {
                 goals: [
                   {
                     description: 'Be a super successful artist',
-                    objectives: [
-                      'Paint a pretty picture',
-                      'Paint a confusing picture',
-                      'Paint an offensive picture',
-                      '...Profit'
-                    ]
+                    objective: 'Paint a pretty picture'
                   },
                   {
                     description: 'Win a Nobel prize for physics',
-                    objectives: [
-                      'Discover a new particle',
-                      'Lie about the Moonmen'
-                    ]
+                    objective: 'Discover a new particle'
                   },
                   {
                     description: 'Go on Ellen',
-                    objectives: ['Learn to dance', 'Bring audience gifts']
+                    objective: 'Learn to dance'
                   }
                 ]
               },
