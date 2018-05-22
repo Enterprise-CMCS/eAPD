@@ -72,17 +72,23 @@ const synchronizeSpecific = getModelToSync =>
     () => async (req, res, next) => {
       let action;
       try {
-        const { model, action: actionToReport } = getModelToSync(req);
+        const { model, modelClass, action: actionToReport } = getModelToSync(
+          req
+        );
         action = actionToReport;
 
         // Sync based on what we got from the callback
         await model.synchronize(req.body);
 
         // Now re-fetch what we synced; this makes sure we
-        // send the udpated data
-        const updated = await model.fetch({
-          withRelated: model.static.withRelated
-        });
+        // send the updated data
+        const updated = modelClass
+          ? await modelClass
+              .where({ id: model.get('id') })
+              .fetch({ withRelated: modelClass.withRelated })
+          : await model.fetch({
+              withRelated: model.static.withRelated
+            });
         res.send(updated.toJSON());
         next();
       } catch (e) {

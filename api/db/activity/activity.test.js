@@ -19,9 +19,19 @@ tap.test('activity data model', async activityModelTests => {
           schedule: Function,
           statePersonnel: Function,
           costAllocation: Function,
+          format: Function,
 
           static: {
-            updateableFields: ['name', 'description'],
+            updateableFields: [
+              'name',
+              'summary',
+              'description',
+              'alternatives',
+              'costAllocationMethodology',
+              'otherFundingSources',
+              'types',
+              'standardsAndConditions'
+            ],
             owns: {
               goals: 'apdActivityGoal',
               approaches: 'apdActivityApproach',
@@ -37,7 +47,6 @@ tap.test('activity data model', async activityModelTests => {
               'contractorResources',
               'contractorResources.years',
               'goals',
-              'goals.objectives',
               'expenses',
               'expenses.entries',
               'schedule',
@@ -310,7 +319,20 @@ tap.test('activity data model', async activityModelTests => {
       };
       self.get.withArgs('id').returns('eye-dee');
       self.get.withArgs('name').returns('Jerome Lee');
+      self.get.withArgs('summary').returns('US Public Health Service officer');
       self.get.withArgs('description').returns('cool CMS person');
+      self.get.withArgs('alternatives').returns('Nick Aretakis');
+      self.get.withArgs('cost_allocation_methodology').returns('moop moop');
+      self.get
+        .withArgs('other_funding_sources_description')
+        .returns('panhandling, funny videos online');
+      self.get
+        .withArgs('other_funding_sources_amount')
+        .returns('37¢ and some lint');
+      self.get.withArgs('types').returns('on a typewriter');
+      self.get
+        .withArgs('standards_and_conditions')
+        .returns('nobody reads them');
 
       self.related.withArgs('goals').returns('goooooaaaaals');
       self.related.withArgs('approaches').returns('quietly from the left');
@@ -322,9 +344,18 @@ tap.test('activity data model', async activityModelTests => {
         {
           id: 'eye-dee',
           name: 'Jerome Lee',
+          summary: 'US Public Health Service officer',
           description: 'cool CMS person',
+          alternatives: 'Nick Aretakis',
+          costAllocationMethodology: 'moop moop',
+          otherFundingSources: {
+            description: 'panhandling, funny videos online',
+            amount: '37¢ and some lint'
+          },
           goals: 'goooooaaaaals',
-          approaches: 'quietly from the left'
+          approaches: 'quietly from the left',
+          types: 'on a typewriter',
+          standardsAndConditions: 'nobody reads them'
         },
         'gives us back the right JSON-ified object'
       );

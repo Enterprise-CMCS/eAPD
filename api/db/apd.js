@@ -62,7 +62,6 @@ module.exports = () => ({
         'activities.contractorResources',
         'activities.contractorResources.years',
         'activities.goals',
-        'activities.goals.objectives',
         'activities.expenses',
         'activities.expenses.entries',
         'activities.schedule',
