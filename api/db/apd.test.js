@@ -22,7 +22,10 @@ tap.test('apd data model', async apdModelTests => {
               'narrativeMMIS'
             ],
             foreignKey: 'apd_id',
-            owns: { activities: 'apdActivity' },
+            owns: {
+              activities: 'apdActivity',
+              keyPersonnel: 'apdKeyPersonnel'
+            },
             withRelated: [
               { activities: Function },
               'activities.approaches',
@@ -33,7 +36,9 @@ tap.test('apd data model', async apdModelTests => {
               'activities.expenses.entries',
               'activities.schedule',
               'activities.statePersonnel',
-              'activities.statePersonnel.years'
+              'activities.statePersonnel.years',
+              'keyPersonnel',
+              'keyPersonnel.years'
             ]
           }
         }
@@ -45,6 +50,12 @@ tap.test('apd data model', async apdModelTests => {
       apd.apd.activities,
       'function',
       'creates an activities relationship for the apd model'
+    );
+
+    setupTests.type(
+      apd.apd.keyPersonnel,
+      'function',
+      'creates a key personnel relationship for the apd model'
     );
 
     setupTests.type(
@@ -79,6 +90,23 @@ tap.test('apd data model', async apdModelTests => {
       activitiesTests.ok(
         self.hasMany.calledWith('apdActivity'),
         'sets up the relationship mapping to activities'
+      );
+      activitiesTests.equal(output, 'florp', 'returns the expected value');
+    }
+  );
+
+  apdModelTests.test(
+    'apd model sets up key personnel relationship',
+    async activitiesTests => {
+      const self = {
+        hasMany: sinon.stub().returns('florp')
+      };
+
+      const output = apd.apd.keyPersonnel.bind(self)();
+
+      activitiesTests.ok(
+        self.hasMany.calledWith('apdKeyPersonnel'),
+        'sets up the relationship mapping to key personnel'
       );
       activitiesTests.equal(output, 'florp', 'returns the expected value');
     }
@@ -129,11 +157,15 @@ tap.test('apd data model', async apdModelTests => {
   apdModelTests.test('converts to JSON', async test => {
     const self = {
       get: sinon.stub(),
-      related: sinon
-        .stub()
-        .withArgs('activities')
-        .returns({ toJSON: sinon.stub().returns('apd-activities') })
+      related: sinon.stub()
     };
+
+    self.related
+      .withArgs('activities')
+      .returns({ toJSON: sinon.stub().returns('apd-activities') });
+    self.related
+      .withArgs('keyPersonnel')
+      .returns({ toJSON: sinon.stub().returns('key-personnel') });
     self.get.withArgs('id').returns('apd-id');
     self.get.withArgs('state_id').returns('apd-state');
     self.get.withArgs('status').returns('apd-status');
@@ -149,14 +181,15 @@ tap.test('apd data model', async apdModelTests => {
       output,
       {
         id: 'apd-id',
-        state: 'apd-state',
-        status: 'apd-status',
-        period: 'apd-period',
-        programOverview: 'apd-overview',
+        activities: 'apd-activities',
+        keyPersonnel: 'key-personnel',
         narrativeHIE: 'apd-hie',
         narrativeHIT: 'apd-hit',
         narrativeMMIS: 'apd-mmis',
-        activities: 'apd-activities'
+        period: 'apd-period',
+        programOverview: 'apd-overview',
+        state: 'apd-state',
+        status: 'apd-status'
       },
       'gives the expected JSON'
     );
