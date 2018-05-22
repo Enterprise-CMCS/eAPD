@@ -14,7 +14,7 @@ Currently, the API is configured entirely with environment variables:
     * `development` - used during development (surprise!). If you're developing
       with Docker, this gets set by the Docker config.
     * `test` - used during testing, eventually. Not used right now.
-    * `staging` - used in our cloud staging environment.
+    * `production` - used in our staging and production environments.
   * **default**: development
 
 * ### `SESSION_SECRET`
@@ -33,8 +33,8 @@ Currently, the API is configured entirely with environment variables:
 
 * ### `DATABASE_URL`
 
-  * This variable is only used if `NODE_ENV` is set to `staging`.
-  * This is the connection URL for the staging environment database. In our
+  * This variable is only used if `NODE_ENV` is set to `production`.
+  * This is the connection URL for the production environment database. In our
     current deployment setup, the cloud provider sets this for us. If it has to
     be set manually, it must be something that the underlying database client
     understands.
