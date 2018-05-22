@@ -62,34 +62,37 @@ class ApdSummary extends Component {
               </label>
             ))}
           </div>
-          <div>
+          <div className="mb3">
             <div className="mb-tiny bold">{t('apd.overview.labels.desc')}</div>
             <RichText
               content={overview}
               onSync={this.syncRichText('overview')}
             />
           </div>
-        </Collapsible>
-        <Collapsible title={t('apd.hit.title')}>
-          <HelpText text="apd.hit.helpText" />
-          <RichText
-            content={hitNarrative}
-            onSync={this.syncRichText('hitNarrative')}
-          />
-        </Collapsible>
-        <Collapsible title={t('apd.hie.title')}>
-          <HelpText text="apd.hie.helpText" />
-          <RichText
-            content={hieNarrative}
-            onSync={this.syncRichText('hieNarrative')}
-          />
-        </Collapsible>
-        <Collapsible title={t('apd.mmis.title')}>
-          <HelpText text="apd.mmis.helpText" />
-          <RichText
-            content={mmisNarrative}
-            onSync={this.syncRichText('mmisNarrative')}
-          />
+          <div className="mb3">
+            <div className="bold">{t('apd.hit.title')}</div>
+            <HelpText text="apd.hit.helpText" />
+            <RichText
+              content={hitNarrative}
+              onSync={this.syncRichText('hitNarrative')}
+            />
+          </div>
+          <div className="mb3">
+            <div className="bold">{t('apd.hie.title')}</div>
+            <HelpText text="apd.hie.helpText" />
+            <RichText
+              content={hieNarrative}
+              onSync={this.syncRichText('hieNarrative')}
+            />
+          </div>
+          <div>
+            <div className="bold">{t('apd.mmis.title')}</div>
+            <HelpText text="apd.mmis.helpText" />
+            <RichText
+              content={mmisNarrative}
+              onSync={this.syncRichText('mmisNarrative')}
+            />
+          </div>
         </Collapsible>
       </Section>
     );
