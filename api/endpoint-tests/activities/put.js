@@ -115,40 +115,37 @@ tap.test(
               id: 4100,
               name: 'updated name',
               description: 'updated description',
+              alternatives: null,
               approaches: [],
               contractorResources: [],
               costAllocation: [],
+              costAllocationMethodology: null,
               expenses: [],
               goals: [
                 {
                   id: 4200,
                   description: 'Be a super successful artist',
-                  objectives: [
-                    'Paint a pretty picture',
-                    'Paint a confusing picture',
-                    'Paint an offensive picture',
-                    '...Profit'
-                  ]
+                  objective: 'Paint a pretty picture'
                 },
                 {
                   id: 4201,
                   description: 'Win a Nobel prize for physics',
-                  objectives: [
-                    'Discover a new particle',
-                    'Lie about the Moonmen'
-                  ]
+                  objective: 'Discover a new particle'
                 },
                 {
                   id: 4202,
                   description: 'Go on Ellen',
-                  objectives: ['Learn to dance', 'Bring audience gifts']
+                  objective: 'Learn to dance'
                 }
               ],
               otherFundingSources: {
-                description: '',
-                amount: '0.00'
+                description: null,
+                amount: null
               },
               schedule: [],
+              standardsAndConditions: null,
+              summary: null,
+              types: null,
               statePersonnel: []
             },
             'sends back the updated activity object'
