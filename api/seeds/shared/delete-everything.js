@@ -9,7 +9,6 @@ exports.seed = async knex => {
   await knex('activity_expense_entries').del();
   await knex('activity_expenses').del();
 
-  await knex('activity_goal_objectives').del();
   await knex('activity_goals').del();
 
   await knex('activity_approaches').del();

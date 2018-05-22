@@ -36,21 +36,46 @@ module.exports = {
       return this.hasMany('apdActivityCostAllocation');
     },
 
-    format: attr => ({
-      id: attr.id,
-      apd_id: attr.apd_id,
-      name: attr.name,
-      description: attr.description,
-      other_funding_sources_description: attr.otherFundingSources
-        ? attr.otherFundingSources.description
-        : '',
-      other_funding_sources_amount: attr.otherFundingSources
-        ? attr.otherFundingSources.amount
-        : 0
-    }),
+    format: attr =>
+      Object.keys(attr).reduce((builtUp, field) => {
+        const out = { ...builtUp };
+        const value = attr[field];
+        const outField = field.replace(/([A-Z])/g, m => `_${m.toLowerCase()}`);
+
+        if (field === 'otherFundingSources') {
+          if (value.description) {
+            out.other_funding_sources_description = value.description;
+          }
+          if (value.amount) {
+            out.other_funding_sources_amount = value.amount;
+          }
+        } else if (
+          // stringify the types and standardsAndConditions fields,
+          // but only if they're not null; if they are null, stringify
+          // returns the string 'null', which is invalid JSON and will
+          // cause Postgres to throw
+          (field === 'types' || field === 'standardsAndConditions') &&
+          value
+        ) {
+          out[outField] = JSON.stringify(value);
+        } else {
+          out[outField] = value;
+        }
+
+        return out;
+      }, {}),
 
     static: {
-      updateableFields: ['name', 'description', 'otherFundingSources'],
+      updateableFields: [
+        'name',
+        'summary',
+        'description',
+        'alternatives',
+        'costAllocationMethodology',
+        'otherFundingSources',
+        'types',
+        'standardsAndConditions'
+      ],
       owns: {
         goals: 'apdActivityGoal',
         approaches: 'apdActivityApproach',
@@ -66,7 +91,6 @@ module.exports = {
         'contractorResources',
         'contractorResources.years',
         'goals',
-        'goals.objectives',
         'expenses',
         'expenses.entries',
         'schedule',
@@ -99,18 +123,23 @@ module.exports = {
       return {
         id: this.get('id'),
         name: this.get('name'),
+        types: this.get('types'),
+        summary: this.get('summary'),
         description: this.get('description'),
+        alternatives: this.get('alternatives'),
         goals: this.related('goals'),
         approaches: this.related('approaches'),
         contractorResources: this.related('contractorResources'),
         expenses: this.related('expenses'),
         schedule: this.related('schedule'),
         statePersonnel: this.related('statePersonnel'),
+        costAllocationMethodology: this.get('cost_allocation_methodology'),
         costAllocation: this.related('costAllocation'),
         otherFundingSources: {
           description: this.get('other_funding_sources_description'),
           amount: this.get('other_funding_sources_amount')
-        }
+        },
+        standardsAndConditions: this.get('standards_and_conditions')
       };
     }
   }

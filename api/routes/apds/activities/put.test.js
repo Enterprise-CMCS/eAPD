@@ -38,7 +38,11 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
 
       test.same(
         out,
-        { model: activity, action: 'update-activity' },
+        {
+          action: 'update-activity',
+          model: activity,
+          modelClass: ActivityModel
+        },
         'gives the activity model and action'
       );
     }
@@ -81,7 +85,11 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
         );
         test.same(
           out,
-          { model: activity, action: 'update-activity' },
+          {
+            model: activity,
+            modelClass: ActivityModel,
+            action: 'update-activity'
+          },
           'gives the activity model and action'
         );
       }
