@@ -28,7 +28,11 @@ module.exports = (app, ActivityModel = defaultActivityModel) => {
       if (putter) {
         req.body = { [putter]: req.body };
       }
-      return { model: req.meta.activity, action: 'update-activity' };
+      return {
+        model: req.meta.activity,
+        modelClass: ActivityModel,
+        action: 'update-activity'
+      };
     };
     module.exports.syncResponders[putter || 'base'] = syncResponder;
 
