@@ -1,302 +1,255 @@
 {
-  "title": "{{year}} HITECH APD",
-  "login": "Log in",
-  "logout": "Log out",
-  "notifications": "Notifications",
-  "help": "Help",
+	"title": "{{year}} HITECH APD",
+	"login": "Log in",
+	"logout": "Log out",
+	"notifications": "Notifications",
+	"help": "Help",
 
-  "sidebar": {
-    "titles": {
-      "programSummary": "Program Summary",
-      "previousActivities": "Results of Previous Activities",
-      "activities": "Program Activities",
-      "activity-set": "Activity {{number}}: {{name}}",
-      "activity-unset": "Activity {{number}}",
-      "budget": "Proposed Budget",
-      "assurances": "Assurances and Compliance",
-      "summary": "Executive/Overall Summary",
-      "submit": "Certify and Submit"
-    },
-    "savePdfButtonText": "Save as PDF"
-  },
+	"sidebar": {
+		"titles": {
+			"programSummary": "Program Summary",
+			"previousActivities": "Results of Previous Activities",
+			"activities": "Program Activities",
+			"activity-set": "Activity {{number}}: {{name}}",
+			"activity-unset": "Activity {{number}}",
+			"budget": "Proposed Budget",
+			"assurances": "Assurances and Compliance",
+			"summary": "Executive/Overall Summary",
+			"submit": "Certify and Submit"
+		},
+		"savePdfButtonText": "Save as PDF"
+	},
 
-  "apd": {
-    "sectionTitle": "Program Summary",
-    "sectiontitlehelptext":
-      "Provide an introduction for your state's program. This should include context for your funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD TEMPLATE: EXECUTIVE SUMMARY.",
-    "overview": {
-      "title": "Overview",
-      "titlehelptext":
-        "Provide a high level summary of your state's program, history, and future vision.",
-      "titlereminder":
-        "Indicate the Federal Fiscal Years for which this APD is requesting funding.",
-      "yearsCovered": "What years does this APD cover?",
-      "labels": {
-        "desc": "Program Introduction"
-      }
-    },
-    "keyPersonnel": {
-      "title": "Key Personnel",
-      "titlehelptext":
-        "Tell us about your key state personnel associated with this APD.",
-      "labels": {
-        "entryNum": "#",
-        "title": "Title",
-        "desc": "Description",
-        "yearCost": "{{year}} Cost",
-        "costAmt": "Amount",
-        "costPerc": "% FTE"
-      },
-      "removeLabel": "Remove personnel",
-      "addButtonText": "Add personnel"
-    },
-    "hit": {
-      "title": "HIT Overview",
-      "titlehelptext":
-        "Briefly summarize your planned HIT funded activities contained within this APD. This section should be a brief description, we'll ask for more specific details later."
-    },
-    "hie": {
-      "title": "HIE Overview",
-      "titlehelptext":
-        "Briefly summarize your planned HIE funded activities contained within this APD. If you don't have any HIE activities, you can skip this section. This section should be a brief description for each item below, however, we'll ask for more specific details later. \n\n(1) Description of your state's HIE approach (statewide, sub-state health information office (HIOs), etc.);\n(2) anticipated risks and mitigation strategies;\n(3) the short and long term value proposition to providers;\n(4) role of State government in governance and policy-setting.\n\nCMS recommends that states reach out to their regional CMS HITECH contacts prior to developing an HIE funding request. HIE funding requests are complex, and early consultation with CMS facilitates a more efficient approval process."
-    },
-    "mmis": {
-      "title": "MMIS Overview",
-      "titlehelptext":
-        "Briefly summarize your planned MMIS funded activities contained within this APD. If you don't have any MMIS activities, you can skip this section."
-    }
-  },
+	"apd": {
+		"sectionTitle": "Program Summary",
+		"sectiontitlehelptext": "Provide an introduction for your state's program. This should include context for your funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD TEMPLATE: EXECUTIVE SUMMARY.",
+		"overview": {
+			"title": "Overview",
+			"titlehelptext": "Provide a high level summary of your state's program, history, and future vision.",
+			"titlereminder": "Indicate the Federal Fiscal Years for which this APD is requesting funding.",
+			"yearsCovered": "What years does this APD cover?",
+			"labels": {
+				"desc": "Program Introduction"
+			}
+		},
+		"keyPersonnel": {
+			"title": "Key Personnel",
+			"titlehelptext": "Tell us about your key state personnel associated with this APD.",
+			"labels": {
+				"entryNum": "#",
+				"title": "Title",
+				"desc": "Description",
+				"yearCost": "{{year}} Cost",
+				"costAmt": "Amount",
+				"costPerc": "% FTE"
+			},
+			"removeLabel": "Remove personnel",
+			"addButtonText": "Add personnel"
+		},
+		"hit": {
+			"title": "HIT Overview",
+			"titlehelptext": "Briefly summarize your planned HIT funded activities contained within this APD. This section should be a brief description, we'll ask for more specific details later."
+		},
+		"hie": {
+			"title": "HIE Overview",
+			"titlehelptext": "Briefly summarize your planned HIE funded activities contained within this APD. If you don't have any HIE activities, you can skip this section. This section should be a brief description for each item below, however, we'll ask for more specific details later. \n\n(1) Description of your state's HIE approach (statewide, sub-state health information office (HIOs), etc.);\n(2) anticipated risks and mitigation strategies;\n(3) the short and long term value proposition to providers;\n(4) role of State government in governance and policy-setting.\n\nCMS recommends that states reach out to their regional CMS HITECH contacts prior to developing an HIE funding request. HIE funding requests are complex, and early consultation with CMS facilitates a more efficient approval process."
+		},
+		"mmis": {
+			"title": "MMIS Overview",
+			"titlehelptext": "Briefly summarize your planned MMIS funded activities contained within this APD. If you don't have any MMIS activities, you can skip this section."
+		}
+	},
 
-  "previousActivities": {
-    "title": "Results of Previous Activities",
-    "helptext":
-      "Please include a description of the results of previously approved activities.\nThis information is similar to the content from the IAPD TEMPLATE: RESULTS OF PREVIOUS ACTIVITIES.",
-    "sections": {
-      "outline": "Prior Activities Outline",
-      "approvedExpenses": "Approved Expenses",
-      "actualExpenses": "Actual Expenses"
-    }
-  },
+	"previousActivities": {
+		"title": "Results of Previous Activities",
+		"helptext": "Please include a description of the results of previously approved activities.\nThis information is similar to the content from the IAPD TEMPLATE: RESULTS OF PREVIOUS ACTIVITIES.",
+		"sections": {
+			"outline": "Prior Activities Outline",
+			"approvedExpenses": "Approved Expenses",
+			"actualExpenses": "Actual Expenses"
+		}
+	},
 
-  "activities": {
-    "title": "Program Activities",
-    "titlehelptext": "Please individually identify the activities referenced from the OVERVIEW Section. We'll spend time collecting information for each individual activity.",
-    "listTitle": "Activity List",
-    "listtitlehelptext":
-      "Examples of individual activities include: Auditing, Outreach, Environmental Scans, HIE Registry Development, CQM Database Development, Data and Analytics, HIE Onboarding, etc.",
-    "listtitlereminder":
-      "Please Note: The first activity in this list is Program Administration. Program Administration is where you should include information that pertains to implementing the EHR Incentive program. Examples of information that belongs within this activity includes: State and Contractor costs associated with operating the EHR incentive program and SLR Enhancements/Upgrades.",
-    "addActivityButtonText": "Add activity",
-    "deleteActivityButtonText": "Remove Activity",
-    "noActivityMessage":
-      "It looks like you don’t have any activities. Please add one below.",
-    "delete": {
-      "header": "Please confirm",
-      "body": "Are you sure you’d like to remove this activity?",
-      "yes": "Yes",
-      "no": "No"
-    },
-    "header": "Program Activities",
-    "namePrefix": "Activity",
-    "description": {
-      "title": "Activity Description",
-      "titlehelptext":
-        "Describe at a high level the needs of the activity for which requested funding will be used (e.g. Administrative, Outreach, Auditing, Public Health Registry Development, etc)",
-      "titlereminder":
-        "Please Note, this section is limited to 280 characters or less",
-      "detailHeader": "Please describe the activity in detail",
-      "alternativesHeader":
-        "State of alternative considerations and supporting justification",
-      "alternativeshelptext":
-        "If no substantive changes have been made to this activity, include a statement that refers back to the Statement of Alternative Considerations contained in previous versions of the IAPD or in the SMHP.\nIf substantive changes have been made, include a statement describing the alternatives that the state considered when making the change.",
-      "alternativesHelpReminder":
-        "Remember to update the SMHP as necessary with any substantive changes to the approach for implementing EHR incentives."
-    },
-    "goals": {
-      "title": "Needs and Objectives",
-      "subheader":
-        "List the goals and objectives you're hoping to accomplish as part of this activity.",
-      "subheaderhelptext":
-        "Please include a brief description of each goal, and how they relate to the vision identified in the Program Summary section\n\n Within the Objectives section describe how the state will measure progress toward the goal identified.",
-      "subheaderreminder": "DON'T FORGET: Each goal should have a matching objective.",
-      "goalHeader": "Goal #{{number}}",
-      "objectiveHeader": "Objective (How the you'll achieve the goal)",
-      "objectiveheaderhelptext":
-        "Please include a brief description of how the state will measure progress toward the corresponding goal identified.",
-      "addGoalButtonText": "Add goal"
-    },
-    "schedule": {
-      "title": "Activity Schedule",
-      "subheader":
-        "List the major milestones you’re working towards as part of this activity.",
-      "subheaderhelptext":
-        "List out key activity milestones, including activities that have occurred under previously approved APDs.",
-      "noMilestonesNotice":
-        "Did you forget to add milestones? Please add milestones for this activity.",
-      "milestoneHeader": "Milestone",
-      "milestoneLabel": "milestone name",
-      "startHeader": "Planned start",
-      "startLabel": "planned start date",
-      "endHeader": "Planned end",
-      "endLabel": "planned end date",
-      "removeLabel": "remove milestone",
-      "addMilestoneButtonText": "Add milestone"
-    },
-    "contractorResources": {
-      "title": "Contracting Resources",
-      "subheader":
-        "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section.",
-      "subheaderhelptext":
-        "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs.",
-      "labels": {
-        "entryNumber": "#",
-        "contractorName": "Name",
-        "description": "Description of Services",
-        "term": "Term Period",
-        "start": "Start:",
-        "end": "End:",
-        "yearCost": "{{year}} Cost"
-      },
-      "srLabels": {
-        "name": "Contractor name",
-        "description": "Describe the services the contractor will provide",
-        "start": "Contractor term start",
-        "end": "Contractor term end",
-        "cost": "Contractor cost for {{year}}"
-      },
-      "removeLabel": "Remove resource",
-      "addContractorButtonText": "Add resource"
-    },
-    "statePersonnel": {
-      "title": "State Personnel",
-      "subheader":
-        "Outline the personnel resources for this section. This includes anyone with FTE on your particular IAPD project(s). This does not include personnel listed in the contract section.",
-      "subheaderhelptext": "Personnel costs must include salaries and benefits.",
-      "labels": {
-        "entryNum": "#",
-        "title": "Title",
-        "desc": "Description",
-        "yearCost": "{{year}} Cost",
-        "costAmt": "Amount",
-        "costPerc": "% FTE"
-      },
-      "removeLabel": "Remove personnel",
-      "addButtonText": "Add personnel"
-    },
-    "expenses": {
-      "title": "Non-Personnel Costs",
-      "titlehelptext":
-        "Please provide a detailed breakout of any non-personnel and non-contracted costs related to this activity. This should icnlude a brief description of these projected costs.",
-      "titlereminder":
-        "“Miscellaneous expenses” include materials and supplies, communications‐related expenses, printing costs and facilities expenses; these costs can be broken out into distinct cost categories in the budget detail per the state’s Chart of Account."
-    },
-    "costAllocate": {
-      "title": "Cost Allocation and Other Funding Sources",
-      "titlehelptext":
-        "As specified in OMB Circular A‐87, a cost allocation plan must be included that identifies all participants and their associated cost allocation to depict non‐Medicaid activities and non‐Medicaid FTEs participating in this project, if any.\n\nHITECH cost allocation formulas should be based on the direct benefit to the Medicaid EHR Incentive Program, taking into account State projections of eligible Medicaid provider participation in the incentive program (leveraging actual data/experience as deemed appropriate).\n\nCost allocation must account for other available Federal funding sources, the division of resources and activities across relevant payers, and the relative benefit to the State Medicaid program, among other factors\n\nBe sure that cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested.",
-      "label": {
-        "costAllocateDesc": "Cost allocation methodology description",
-        "costAllocateDescReminder": "Do not assume that the absence of other payers is sufficient cause for Medicaid to be the primary payer. Also, limit ambiguity about other potential federal funding sources; for example, if no CHIP funds are being requested, include a statement to that effect in this section.",
-        "otherFundingDesc": "Other funding description",
-        "otherfundingDeschelptext":
-          "Please account for any and all grant funding that is used to support this activity.\n\nReview the State Medicaid Director Letter 10‐016 for examples of grants that might need to be included as well as other guidance\n\nMake sure that any new grants are included and any expired grants are removed.",
-        "otherfundingDescReminder":
-        "High level descriptions are appropriate for grant activities",
-        "otherFundingAmt": "Other funding amount"
-      },
-      },
-    },
-    "standardsAndConditions": {
-      "title": "Standards & Conditions",
-      "subheader":
-        "Please tell us how you'll meet the Medicaid standards and conditions for this activity.",
-      "modularity": {
-        "title": "Modularity",
-        "description":
-          "This condition requires the use of a modular, flexible approach to systems development, including the use of open interfaces and exposed application programming interfaces (API); the separation of business rules from core programming; and the availability of business rules in both human and machine-readable formats. The commitment to formal system development methodology and open, reusable system architecture is extremely important in order to ensure that states can more easily change and maintain systems, as well as integrate and interoperate with a clinical and administrative ecosystem designed to deliver person-centric services and benefits. Modularity is breaking down systems requirements into component parts. Extremely complex systems can be developed as part of a service-oriented architecture (SOA). Modularity also helps address the challenges of customization. Baseline web services and capabilities can be developed for and used by anyone, with exceptions for specific business processes handled by a separate module that interoperates with the baseline modules. With modularity, changes can be made independently to the baseline capabilities without affecting how the extension works. By doing so, the design ensures that future iterations of software can be deployed without breaking custom functionality. A critical element of compliance with this condition is providing CMS with an understanding of where services and code will be tightly coupled, and where the state will pursue a more aggressive decoupling strategy.CMS description text goes here.",
-        "prompt": "Describe how you'll meet the Modularity condition"
-      },
-      "mita": {
-        "title": "Medicaid Information Technology Architecture (MITA)",
-        "description":
-          "This condition requires states to align to and advance increasingly in MITA maturity for business, architecture, and data. CMS expects the states to complete and continue to make measurable progress in implementing their MITA roadmaps. Already the MITA investments by federal, state, and private partners have allowed us to make important incremental improvements to share data and reuse business models, applications, and components. CMS strives, however, to build on and accelerate the modernization of the Medicaid enterprise that has thus far been achieved.CMS description text goes here.",
-        "prompt": "Describe how you'll meet the MITA condition"
-      },
-      "industry": {
-        "title": "Industry Standards",
-        "description":
-          "States must ensure alignment with, and incorporation of, industry standards: the Health Insurance Portability and Accountability Act of 1996 (HIPAA) security, privacy and transaction standards; accessibility standards established under section 508 of the Rehabilitation Act, or standards that provide greater accessibility for individuals with disabilities, and compliance with federal civil rights laws; standards adopted by the Secretary under section 1104 of the Affordable Care Act; and standards and protocols adopted by the Secretary under section 1561 of the Affordable Care Act. CMS must ensure that Medicaid infrastructure and information system investments are made with the assurance that timely and reliable adoption of industry standards and productive use of those standards are part of the investments. Industry standards promote reuse, data exchange, and reduction of administrative burden on patients, providers, and applicants.CMS description text goes here.",
-        "prompt": "Describe how you'll meet the Industry Standards condition"
-      },
-      "leverage": {
-        "title": "Leverage",
-        "description":
-          "State solutions should promote sharing, leverage, and reuse of Medicaid technologies and systems within and among states. States can benefit substantially from the experience and investments of other states through the reuse of components and technologies already developed, consistent with a service-oriented architecture, from publicly available or commercially sold components and products, and from the use of cloud technologies to share infrastructure and applications. CMS commits to work assertively with the states to identify promising state systems that can be leveraged and used by other states. Further, CMS would strongly encourage the states to move to regional or multistate solutions when cost effective, and will seek to support and facilitate such solutions. In addition, CMS will expedite APD approvals for states that are participating in shared development activities with other states, and that are developing components and solutions expressly intended for successful reuse by other states. CMS will also review carefully any proposed investments in sub-state systems when the federal government is asked to share in the costs of updating or maintaining multiple systems performing essentially the same functions within the same state.CMS description text goes here.",
-        "prompt": "Describe how you'll meet the Leverage condition"
-      },
-      "bizResults": {
-        "title": "Business Results",
-        "description":
-          "Systems should support accurate and timely processing of claims (including claims of eligibility), adjudications, and effective communications with providers, beneficiaries, and the public. Ultimately, the test of an effective and efficient system is whether it supports and enables an effective and efficient business process, producing and communicating the intended operational results with a high degree of reliability and accuracy. It would be inappropriate to provide enhanced federal funding for systems that are unable to support desired business outcomes. CMS description text goes here.",
-        "prompt": "Describe how you'll meet the Business Results condition"
-      },
-      "reporting": {
-        "title": "Reporting",
-        "description":
-          "Solutions should produce transaction data, reports, and performance information that would contribute to program evaluation, continuous improvement in business operations, and transparency and accountability. Systems should be able to produce and to expose electronically the accurate data that are necessary for oversight, administration, evaluation, integrity, and transparency. These reports should be automatically generated through open interfaces to designated federal repositories or data hubs, with appropriate audit trails. MITA 3.0 will provide additional detail about reporting requirements and needs that arise from the Affordable Care Act. Additional details about data definitions, specifications, timing, and routing of information will be supplied later this year. CMS description text goes here.",
-        "prompt": "Describe how you'll meet the Reporting condition"
-      },
-      "interoperability": {
-        "title": "Interoperability",
-        "description":
-          "Systems must ensure seamless coordination and integration with the Exchange (whether run by the state or federal government), and allow interoperability with health information exchanges, public health agencies, human services programs, and community organizations providing outreach and enrollment assistance services. CMS expects that a key outcome of the government’s technology investments will be a much higher degree of interaction and interoperability in order to maximize value and minimize burden and costs on providers, beneficiaries, and other stakeholders. CMS is emphasizing in this standard and condition an expectation that Medicaid agencies work in concert with Exchanges (whether state or federally administered) to share business services and technology investments in order to produce seamless and efficient customer experiences. Systems must also be built with the appropriate architecture and using standardized messaging and communication protocols in order to preserve the ability to efficiently, effectively, and appropriately exchange data with other participants in the health and human services enterprise. As stated in MITA Framework 2.0, each state is “responsible for knowing and understanding its environment (data, applications and infrastructure) in order to map its data to information sharing requirements. The data-sharing architecture also addresses the conceptual and logical mechanisms used for data sharing (i.e., data hubs, repositories, and registries). The data-sharing architecture will also address data semantics, data harmonization strategies, shared-data ownership, security and privacy implications of shared data, and the quality of shared data.CMS description text goes here.",
-        "prompt": "Describe how you'll meet the Interoperability condition"
-      },
-      "mitigation": {
-        "title": "Mitigation Strategy",
-        "description":
-          "The condition described at § 433.112(b)(18) requires that states submit mitigation plans addressing strategies to reduce the consequences of failure for all major milestones and functionality. Maintaining a mitigation plan is an industry standard best practice for any major IT build; CMS expects that states will identify potential risks and develop strategies to address those risks throughout the system lifecycle. Mitigation plans for major Medicaid E&E system or MMIS projects should address minimum expected functionality, critical success factors, and risk factors as tied to major milestones identified in the APD. The mitigation plans should also reflect key events and dates that would trigger the mitigation, and projected timeframe for the mitigation sunset. States should consider strategies to address risks for the M&O phase of the project, such as staffing issues and software upgrades. CMS expects states to revise and resubmit their plans to CMS as risks and mitigations change along the system life cycle. States’ proposed mitigations should be commensurate with the nature and scope of the identified risks. We also expect that states will submit their mitigation plans with the APDs to demonstrate compliance with this condition.CMS description text goes here.",
-        "prompt": "Describe how you'll meet the Mitigation Strategy condition"
-      },
-      "keyPersonnel": {
-        "title": "Key Personnel",
-        "description":
-          "The condition described at § 433.112(b)(19) requires that states identify their key state personnel assigned to each major project by name, role, and time commitment. Before we approve a state to launch a major IT initiative, CMS wants to ensure that the state team is adequately resourced. States do not need to provide key vendor personnel for this requirement. As stated in the provision, this information must be included in the APD. For changes to key personnel that occur after an APD is approved, states should notify their CMS points of contact in writing (including by email) and formally reflect the change in the next planned APD update. This condition refines and strengthens the existing APD requirements regarding personnel resource statements as required under 45 CFR 95.610. For Medicaid E&E APDs, states should include this information in the “Medicaid Eligibility and Enrollment (EE) Implementation Advance Planning Document (IAPD) Template” (OMB Approval Number: 0938-1268). Although there is currently no APD template for MMIS APDs, states must include this information in all MMIS APDs for major IT initiatives.CMS description text goes here.",
-        "prompt": "Describe how you'll meet the Key Personnel condition"
-      },
-      "documentation": {
-        "title": "Documentation",
-        "description":
-          "The condition described at § 433.112(b)(20) requires that states maintain documentation for certain software such that the software could be operated by contractors and other users. This condition is limited to software that is developed using federal funds; it does not apply to Commercial Off-the-Shelf (COTS) software, Software-as-a-Service, or Business-Solutions-as-a-Service. Adequate documentation means that other users could operate the software with reasonable alterations for a specific hardware or operating system. CMS is neutral as to the specific hardware or operating system that the software uses. Documentation must follow industry standards and best practices, and must include components, procedures, layouts, interfaces, inputs, outputs, and other necessary information so that the systems could be installed and operated by a variety of contractors or other users. While the APD should address how the state plans to maintain documentation, such documentation is not required to be submitted along with the APD. It is the state’s responsibility to make the documentation available upon request and to upload documentation to CALT or successor systems as needed for gate reviews or for reuse. Submission to other repositories may be required as CMS explores other options.CMS description text goes here.",
-        "prompt": "Describe how you'll meet the Documentation condition"
-      },
-      "minimizeCost": {
-        "title":
-          "Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System",
-        "description":
-          "The condition described at § 433.112(b)(21) requires that states consider strategies to minimize the costs and difficulty of operating the software on alternate hardware or operating systems. This condition recognizes the significant federal and state investments that are involved with major Medicaid IT projects and requires that states consider options beyond software that will reduce costs or promote reuse. States should describe in the APD the strategies that were considered when deciding which solution was the most economical and efficient. States are not required to adopt a particular strategy, but CMS must have sufficient description to evaluate the extent to which the state looked at other solutions. States should consider, at a minimum, the options that offer more opportunities for reuse, lower development costs, lower long-term operating costs, and shorter development time as well as the extent to which the solutions can be readily implemented with alternate hardware and operating systems. States should consider this new condition in conjunction with existing APD requirements regarding cost benefit analyses required at 45 CFR 95.605 or § 95.610. CMS description text goes here.",
-        "prompt": "Describe how you'll meet the Cost Minimization condition"
-      }
-    }
-  },
-  "proposedBudget": {
-    "title": "Proposed Budget",
-    "titlehelptext":
-      "Please review the itemized budget, which has summed the funding requested for each activity specified.\n\nIt is broken out by FFY, and shows breakout of Federal Financial Participation (FFP), state match, and Total value (FFP + state match).\n\n We have also included a proposed breakout of this same budget by FFY quarter in the second table."
-  },
+	"activities": {
+		"title": "Program Activities",
+		"titlehelptext": "Please individually identify the activities referenced from the OVERVIEW Section. We'll spend time collecting information for each individual activity.",
+		"listTitle": "Activity List",
+		"listtitlehelptext": "Examples of individual activities include: Auditing, Outreach, Environmental Scans, HIE Registry Development, CQM Database Development, Data and Analytics, HIE Onboarding, etc.",
+		"listtitlereminder": "Please Note: The first activity in this list is Program Administration. Program Administration is where you should include information that pertains to implementing the EHR Incentive program. Examples of information that belongs within this activity includes: State and Contractor costs associated with operating the EHR incentive program and SLR Enhancements/Upgrades.",
+		"addActivityButtonText": "Add activity",
+		"deleteActivityButtonText": "Remove Activity",
+		"noActivityMessage": "It looks like you don’t have any activities. Please add one below.",
+		"delete": {
+			"header": "Please confirm",
+			"body": "Are you sure you’d like to remove this activity?",
+			"yes": "Yes",
+			"no": "No"
+		},
+		"header": "Program Activities",
+		"namePrefix": "Activity",
+		"description": {
+			"title": "Activity Description",
+			"titlehelptext": "Describe at a high level the needs of the activity for which requested funding will be used (e.g. Administrative, Outreach, Auditing, Public Health Registry Development, etc)",
+			"titlereminder": "Please Note, this section is limited to 280 characters or less",
+			"detailHeader": "Please describe the activity in detail",
+			"alternativesHeader": "State of alternative considerations and supporting justification",
+			"alternativeshelptext": "If no substantive changes have been made to this activity, include a statement that refers back to the Statement of Alternative Considerations contained in previous versions of the IAPD or in the SMHP.\nIf substantive changes have been made, include a statement describing the alternatives that the state considered when making the change.",
+			"alternativesHelpReminder": "Remember to update the SMHP as necessary with any substantive changes to the approach for implementing EHR incentives."
+		},
+		"goals": {
+			"title": "Needs and Objectives",
+			"subheader": "List the goals and objectives you're hoping to accomplish as part of this activity.",
+			"subheaderhelptext": "Please include a brief description of each goal, and how they relate to the vision identified in the Program Summary section\n\n Within the Objectives section describe how the state will measure progress toward the goal identified.",
+			"subheaderreminder": "DON'T FORGET: Each goal should have a matching objective.",
+			"goalHeader": "Goal #{{number}}",
+			"objectiveHeader": "Objective (How the you'll achieve the goal)",
+			"objectiveheaderhelptext": "Please include a brief description of how the state will measure progress toward the corresponding goal identified.",
+			"addGoalButtonText": "Add goal"
+		},
+		"schedule": {
+			"title": "Activity Schedule",
+			"subheader": "List the major milestones you’re working towards as part of this activity.",
+			"subheaderhelptext": "List out key activity milestones, including activities that have occurred under previously approved APDs.",
+			"noMilestonesNotice": "Did you forget to add milestones? Please add milestones for this activity.",
+			"milestoneHeader": "Milestone",
+			"milestoneLabel": "milestone name",
+			"startHeader": "Planned start",
+			"startLabel": "planned start date",
+			"endHeader": "Planned end",
+			"endLabel": "planned end date",
+			"removeLabel": "remove milestone",
+			"addMilestoneButtonText": "Add milestone"
+		},
+		"contractorResources": {
+			"title": "Contracting Resources",
+			"subheader": "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section.",
+			"subheaderhelptext": "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs.",
+			"labels": {
+				"entryNumber": "#",
+				"contractorName": "Name",
+				"description": "Description of Services",
+				"term": "Term Period",
+				"start": "Start:",
+				"end": "End:",
+				"yearCost": "{{year}} Cost"
+			},
+			"srLabels": {
+				"name": "Contractor name",
+				"description": "Describe the services the contractor will provide",
+				"start": "Contractor term start",
+				"end": "Contractor term end",
+				"cost": "Contractor cost for {{year}}"
+			},
+			"removeLabel": "Remove resource",
+			"addContractorButtonText": "Add resource"
+		},
+		"statePersonnel": {
+			"title": "State Personnel",
+			"subheader": "Outline the personnel resources for this section. This includes anyone with FTE on your particular IAPD project(s). This does not include personnel listed in the contract section.",
+			"subheaderhelptext": "Personnel costs must include salaries and benefits.",
+			"labels": {
+				"entryNum": "#",
+				"title": "Title",
+				"desc": "Description",
+				"yearCost": "{{year}} Cost",
+				"costAmt": "Amount",
+				"costPerc": "% FTE"
+			},
+			"removeLabel": "Remove personnel",
+			"addButtonText": "Add personnel"
+		},
+		"expenses": {
+			"title": "Non-Personnel Costs",
+			"titlehelptext": "Please provide a detailed breakout of any non-personnel and non-contracted costs related to this activity. This should icnlude a brief description of these projected costs.",
+			"titlereminder": "“Miscellaneous expenses” include materials and supplies, communications‐related expenses, printing costs and facilities expenses; these costs can be broken out into distinct cost categories in the budget detail per the state’s Chart of Account."
+		},
+		"costAllocate": {
+			"title": "Cost Allocation and Other Funding Sources",
+			"titlehelptext": "As specified in OMB Circular A‐87, a cost allocation plan must be included that identifies all participants and their associated cost allocation to depict non‐Medicaid activities and non‐Medicaid FTEs participating in this project, if any.\n\nHITECH cost allocation formulas should be based on the direct benefit to the Medicaid EHR Incentive Program, taking into account State projections of eligible Medicaid provider participation in the incentive program (leveraging actual data/experience as deemed appropriate).\n\nCost allocation must account for other available Federal funding sources, the division of resources and activities across relevant payers, and the relative benefit to the State Medicaid program, among other factors\n\nBe sure that cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested.",
+			"label": {
+				"costAllocateDesc": "Cost allocation methodology description",
+				"costAllocateDescReminder": "Do not assume that the absence of other payers is sufficient cause for Medicaid to be the primary payer. Also, limit ambiguity about other potential federal funding sources; for example, if no CHIP funds are being requested, include a statement to that effect in this section.",
+				"otherFundingDesc": "Other funding description",
+				"otherfundingDeschelptext": "Please account for any and all grant funding that is used to support this activity.\n\nReview the State Medicaid Director Letter 10‐016 for examples of grants that might need to be included as well as other guidance\n\nMake sure that any new grants are included and any expired grants are removed.",
+				"otherfundingDescReminder": "High level descriptions are appropriate for grant activities",
+				"otherFundingAmt": "Other funding amount"
+			}
+		},
+		"standardsAndConditions": {
+			"title": "Standards & Conditions",
+			"subheader": "Please tell us how you'll meet the Medicaid standards and conditions for this activity.",
+			"modularity": {
+				"title": "Modularity",
+				"description": "This condition requires the use of a modular, flexible approach to systems development, including the use of open interfaces and exposed application programming interfaces (API); the separation of business rules from core programming; and the availability of business rules in both human and machine-readable formats. The commitment to formal system development methodology and open, reusable system architecture is extremely important in order to ensure that states can more easily change and maintain systems, as well as integrate and interoperate with a clinical and administrative ecosystem designed to deliver person-centric services and benefits. Modularity is breaking down systems requirements into component parts. Extremely complex systems can be developed as part of a service-oriented architecture (SOA). Modularity also helps address the challenges of customization. Baseline web services and capabilities can be developed for and used by anyone, with exceptions for specific business processes handled by a separate module that interoperates with the baseline modules. With modularity, changes can be made independently to the baseline capabilities without affecting how the extension works. By doing so, the design ensures that future iterations of software can be deployed without breaking custom functionality. A critical element of compliance with this condition is providing CMS with an understanding of where services and code will be tightly coupled, and where the state will pursue a more aggressive decoupling strategy.CMS description text goes here.",
+				"prompt": "Describe how you'll meet the Modularity condition"
+			},
+			"mita": {
+				"title": "Medicaid Information Technology Architecture (MITA)",
+				"description": "This condition requires states to align to and advance increasingly in MITA maturity for business, architecture, and data. CMS expects the states to complete and continue to make measurable progress in implementing their MITA roadmaps. Already the MITA investments by federal, state, and private partners have allowed us to make important incremental improvements to share data and reuse business models, applications, and components. CMS strives, however, to build on and accelerate the modernization of the Medicaid enterprise that has thus far been achieved.CMS description text goes here.",
+				"prompt": "Describe how you'll meet the MITA condition"
+			},
+			"industry": {
+				"title": "Industry Standards",
+				"description": "States must ensure alignment with, and incorporation of, industry standards: the Health Insurance Portability and Accountability Act of 1996 (HIPAA) security, privacy and transaction standards; accessibility standards established under section 508 of the Rehabilitation Act, or standards that provide greater accessibility for individuals with disabilities, and compliance with federal civil rights laws; standards adopted by the Secretary under section 1104 of the Affordable Care Act; and standards and protocols adopted by the Secretary under section 1561 of the Affordable Care Act. CMS must ensure that Medicaid infrastructure and information system investments are made with the assurance that timely and reliable adoption of industry standards and productive use of those standards are part of the investments. Industry standards promote reuse, data exchange, and reduction of administrative burden on patients, providers, and applicants.CMS description text goes here.",
+				"prompt": "Describe how you'll meet the Industry Standards condition"
+			},
+			"leverage": {
+				"title": "Leverage",
+				"description": "State solutions should promote sharing, leverage, and reuse of Medicaid technologies and systems within and among states. States can benefit substantially from the experience and investments of other states through the reuse of components and technologies already developed, consistent with a service-oriented architecture, from publicly available or commercially sold components and products, and from the use of cloud technologies to share infrastructure and applications. CMS commits to work assertively with the states to identify promising state systems that can be leveraged and used by other states. Further, CMS would strongly encourage the states to move to regional or multistate solutions when cost effective, and will seek to support and facilitate such solutions. In addition, CMS will expedite APD approvals for states that are participating in shared development activities with other states, and that are developing components and solutions expressly intended for successful reuse by other states. CMS will also review carefully any proposed investments in sub-state systems when the federal government is asked to share in the costs of updating or maintaining multiple systems performing essentially the same functions within the same state.CMS description text goes here.",
+				"prompt": "Describe how you'll meet the Leverage condition"
+			},
+			"bizResults": {
+				"title": "Business Results",
+				"description": "Systems should support accurate and timely processing of claims (including claims of eligibility), adjudications, and effective communications with providers, beneficiaries, and the public. Ultimately, the test of an effective and efficient system is whether it supports and enables an effective and efficient business process, producing and communicating the intended operational results with a high degree of reliability and accuracy. It would be inappropriate to provide enhanced federal funding for systems that are unable to support desired business outcomes. CMS description text goes here.",
+				"prompt": "Describe how you'll meet the Business Results condition"
+			},
+			"reporting": {
+				"title": "Reporting",
+				"description": "Solutions should produce transaction data, reports, and performance information that would contribute to program evaluation, continuous improvement in business operations, and transparency and accountability. Systems should be able to produce and to expose electronically the accurate data that are necessary for oversight, administration, evaluation, integrity, and transparency. These reports should be automatically generated through open interfaces to designated federal repositories or data hubs, with appropriate audit trails. MITA 3.0 will provide additional detail about reporting requirements and needs that arise from the Affordable Care Act. Additional details about data definitions, specifications, timing, and routing of information will be supplied later this year. CMS description text goes here.",
+				"prompt": "Describe how you'll meet the Reporting condition"
+			},
+			"interoperability": {
+				"title": "Interoperability",
+				"description": "Systems must ensure seamless coordination and integration with the Exchange (whether run by the state or federal government), and allow interoperability with health information exchanges, public health agencies, human services programs, and community organizations providing outreach and enrollment assistance services. CMS expects that a key outcome of the government’s technology investments will be a much higher degree of interaction and interoperability in order to maximize value and minimize burden and costs on providers, beneficiaries, and other stakeholders. CMS is emphasizing in this standard and condition an expectation that Medicaid agencies work in concert with Exchanges (whether state or federally administered) to share business services and technology investments in order to produce seamless and efficient customer experiences. Systems must also be built with the appropriate architecture and using standardized messaging and communication protocols in order to preserve the ability to efficiently, effectively, and appropriately exchange data with other participants in the health and human services enterprise. As stated in MITA Framework 2.0, each state is “responsible for knowing and understanding its environment (data, applications and infrastructure) in order to map its data to information sharing requirements. The data-sharing architecture also addresses the conceptual and logical mechanisms used for data sharing (i.e., data hubs, repositories, and registries). The data-sharing architecture will also address data semantics, data harmonization strategies, shared-data ownership, security and privacy implications of shared data, and the quality of shared data.CMS description text goes here.",
+				"prompt": "Describe how you'll meet the Interoperability condition"
+			},
+			"mitigation": {
+				"title": "Mitigation Strategy",
+				"description": "The condition described at § 433.112(b)(18) requires that states submit mitigation plans addressing strategies to reduce the consequences of failure for all major milestones and functionality. Maintaining a mitigation plan is an industry standard best practice for any major IT build; CMS expects that states will identify potential risks and develop strategies to address those risks throughout the system lifecycle. Mitigation plans for major Medicaid E&E system or MMIS projects should address minimum expected functionality, critical success factors, and risk factors as tied to major milestones identified in the APD. The mitigation plans should also reflect key events and dates that would trigger the mitigation, and projected timeframe for the mitigation sunset. States should consider strategies to address risks for the M&O phase of the project, such as staffing issues and software upgrades. CMS expects states to revise and resubmit their plans to CMS as risks and mitigations change along the system life cycle. States’ proposed mitigations should be commensurate with the nature and scope of the identified risks. We also expect that states will submit their mitigation plans with the APDs to demonstrate compliance with this condition.CMS description text goes here.",
+				"prompt": "Describe how you'll meet the Mitigation Strategy condition"
+			},
+			"keyPersonnel": {
+				"title": "Key Personnel",
+				"description": "The condition described at § 433.112(b)(19) requires that states identify their key state personnel assigned to each major project by name, role, and time commitment. Before we approve a state to launch a major IT initiative, CMS wants to ensure that the state team is adequately resourced. States do not need to provide key vendor personnel for this requirement. As stated in the provision, this information must be included in the APD. For changes to key personnel that occur after an APD is approved, states should notify their CMS points of contact in writing (including by email) and formally reflect the change in the next planned APD update. This condition refines and strengthens the existing APD requirements regarding personnel resource statements as required under 45 CFR 95.610. For Medicaid E&E APDs, states should include this information in the “Medicaid Eligibility and Enrollment (EE) Implementation Advance Planning Document (IAPD) Template” (OMB Approval Number: 0938-1268). Although there is currently no APD template for MMIS APDs, states must include this information in all MMIS APDs for major IT initiatives.CMS description text goes here.",
+				"prompt": "Describe how you'll meet the Key Personnel condition"
+			},
+			"documentation": {
+				"title": "Documentation",
+				"description": "The condition described at § 433.112(b)(20) requires that states maintain documentation for certain software such that the software could be operated by contractors and other users. This condition is limited to software that is developed using federal funds; it does not apply to Commercial Off-the-Shelf (COTS) software, Software-as-a-Service, or Business-Solutions-as-a-Service. Adequate documentation means that other users could operate the software with reasonable alterations for a specific hardware or operating system. CMS is neutral as to the specific hardware or operating system that the software uses. Documentation must follow industry standards and best practices, and must include components, procedures, layouts, interfaces, inputs, outputs, and other necessary information so that the systems could be installed and operated by a variety of contractors or other users. While the APD should address how the state plans to maintain documentation, such documentation is not required to be submitted along with the APD. It is the state’s responsibility to make the documentation available upon request and to upload documentation to CALT or successor systems as needed for gate reviews or for reuse. Submission to other repositories may be required as CMS explores other options.CMS description text goes here.",
+				"prompt": "Describe how you'll meet the Documentation condition"
+			},
+			"minimizeCost": {
+				"title": "Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System",
+				"description": "The condition described at § 433.112(b)(21) requires that states consider strategies to minimize the costs and difficulty of operating the software on alternate hardware or operating systems. This condition recognizes the significant federal and state investments that are involved with major Medicaid IT projects and requires that states consider options beyond software that will reduce costs or promote reuse. States should describe in the APD the strategies that were considered when deciding which solution was the most economical and efficient. States are not required to adopt a particular strategy, but CMS must have sufficient description to evaluate the extent to which the state looked at other solutions. States should consider, at a minimum, the options that offer more opportunities for reuse, lower development costs, lower long-term operating costs, and shorter development time as well as the extent to which the solutions can be readily implemented with alternate hardware and operating systems. States should consider this new condition in conjunction with existing APD requirements regarding cost benefit analyses required at 45 CFR 95.605 or § 95.610. CMS description text goes here.",
+				"prompt": "Describe how you'll meet the Cost Minimization condition"
+			}
+		}
+	},
+	"proposedBudget": {
+		"title": "Proposed Budget",
+		"titlehelptext": "Please review the itemized budget, which has summed the funding requested for each activity specified.\n\nIt is broken out by FFY, and shows breakout of Federal Financial Participation (FFP), state match, and Total value (FFP + state match).\n\n We have also included a proposed breakout of this same budget by FFY quarter in the second table."
+	},
 
-  "assurancesAndCompliance": {
-    "title": "Assurances and Compliance",
-    "titlehelptext":
-      "This section ensures compliance with federal regulations and State Medicaid citations."
-  },
-  "executiveSummary": {
-    "title": "Executive Summary",
-    "titlehelptext":
-      "Please see the executive summary that has been generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review. If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
-  },
-  "certifyAndSubmit": {
-    "title": "Certify and Submit",
-    "titlehelptext": "Certify that the APD is complete and submit your IAPD."
-  }
+	"assurancesAndCompliance": {
+		"title": "Assurances and Compliance",
+		"titlehelptext": "This section ensures compliance with federal regulations and State Medicaid citations."
+	},
+	"executiveSummary": {
+		"title": "Executive Summary",
+		"titlehelptext": "Please see the executive summary that has been generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review. If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
+	},
+	"certifyAndSubmit": {
+		"title": "Certify and Submit",
+		"titlehelptext": "Certify that the APD is complete and submit your IAPD."
+	}
 }
