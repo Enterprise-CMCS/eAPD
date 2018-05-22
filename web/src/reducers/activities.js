@@ -60,7 +60,7 @@ const newExpense = id => ({
 const newActivity = (id, name = '') => ({
   id,
   name,
-  types: ['HIT'],
+  types: [],
   descShort: '',
   descLong: '',
   altApproach: '',
@@ -92,11 +92,9 @@ const newActivity = (id, name = '') => ({
 
 const initialState = {
   byId: {
-    1: newActivity(1, 'SLR Administration'),
-    2: newActivity(2, 'Auditing'),
-    3: newActivity(3, '...')
+    1: newActivity(1, 'Program Administration')
   },
-  allIds: [1, 2, 3]
+  allIds: [1]
 };
 
 const reducer = (state = initialState, action) => {

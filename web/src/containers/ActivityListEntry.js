@@ -36,6 +36,7 @@ class ActivityListEntry extends Component {
             className="col-12 input m0"
             value={activity.name}
             onChange={this.handleName(id)}
+            disabled={num === 1}
           />
         </div>
         <div>
@@ -46,6 +47,7 @@ class ActivityListEntry extends Component {
                 value={option}
                 checked={activity.types.includes(option)}
                 onChange={this.handleTypes(id)}
+                disabled={num === 1}
               />
               {option}
             </label>
