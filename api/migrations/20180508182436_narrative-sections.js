@@ -6,4 +6,4 @@ exports.up = async knex =>
     table.text('narrative_mmis');
   });
 
-exports.down = Promise.resolve;
+exports.down = async () => {};

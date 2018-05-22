@@ -64,11 +64,11 @@ tap.test(
               json: [
                 {
                   description: 'new goal 1',
-                  objectives: ['o1', 'o2']
+                  objective: 'o1'
                 },
                 {
                   lacksDescription: 'this one should not come back',
-                  objectives: ['o3']
+                  objective: 'o3'
                 }
               ]
             });
@@ -95,7 +95,7 @@ tap.test(
               body: [
                 {
                   description: 'new goal 1',
-                  objectives: [{ description: 'o1' }, { description: 'o2' }]
+                  objective: 'o1'
                 }
               ]
             });
@@ -106,7 +106,6 @@ tap.test(
               'gives a 200 status code'
             );
 
-            body.goals.forEach(goal => goal.objectives.sort());
             validTest.match(
               body,
               {
@@ -119,7 +118,7 @@ tap.test(
                   {
                     id: Number,
                     description: 'new goal 1',
-                    objectives: ['o1', 'o2']
+                    objective: 'o1'
                   }
                 ],
                 schedule: []
