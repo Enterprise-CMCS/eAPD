@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ApdKeyPersonnel from './ApdKeyPersonnel';
 import { updateApd as updateApdAction } from '../actions/apd';
 import Collapsible from '../components/Collapsible';
 import { RichText } from '../components/Inputs';
@@ -71,7 +70,6 @@ class ApdSummary extends Component {
             />
           </div>
         </Collapsible>
-        <ApdKeyPersonnel />
         <Collapsible title={t('apd.hit.title')}>
           <HelpText text="apd.hit.helpText" />
           <RichText
