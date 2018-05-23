@@ -7,6 +7,9 @@ set -e
 
 export API_URL=$STAGING_API_URL
 
+apt-get update
+apt-get install zip -y
+
 # Install `cf` cli
 curl -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
 dpkg -i cf-cli_amd64.deb
@@ -19,6 +22,7 @@ cf install-plugin autopilot -f -r CF-Community
 cd web
 npm ci
 npm run build
+zip -r /tmp/webapp.zip dist/*
 cd ..
 
 # Don't deliver seed files that might be dangerous.
