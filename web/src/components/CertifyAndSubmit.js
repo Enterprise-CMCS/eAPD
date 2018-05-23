@@ -1,18 +1,12 @@
 import React from 'react';
 
-import { t } from '../i18n';
-import Section from './Section';
-import SectionDesc from './SectionDesc';
-import SectionTitle from './SectionTitle';
-import Collapsible from './Collapsible';
+import { Section, Subsection } from './Section';
 
 const CertifyAndSubmit = () => (
-  <Section id="certify-submit">
-    <SectionTitle>{t('certifyAndSubmit.title')}</SectionTitle>
-    <SectionDesc>{t('certifyAndSubmit.helpText')}</SectionDesc>
-    <Collapsible title="Certify and Submit">
+  <Section id="certify-submit" resource="certifyAndSubmit">
+    <Subsection resource="certifyAndSubmit.certify">
       <div>...</div>
-    </Collapsible>
+    </Subsection>
   </Section>
 );
 
