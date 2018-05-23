@@ -26,12 +26,11 @@ class ActivityDetailGoals extends Component {
 
     return (
       <Collapsible title={t('activities.goals.title')}>
-        <div className="mb2">
-          <HelpText
-            text="activities.goals.helpText"
-            reminder="activities.goals.reminder"
-          />
-        </div>
+        <p className="bold">{t('activities.goals.subheader')}</p>
+        <HelpText
+          text="activities.goals.helpText"
+          reminder="activities.goals.reminder"
+        />
         {activity.goals.map((d, i) => (
           <div key={i} className="mb3">
             {activity.goals.length > 1 && (
