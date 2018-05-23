@@ -120,7 +120,7 @@
       "reminder": "DON'T FORGET: Each goal should have a matching objective.",
       "goalHeader": "Goal #{{number}}",
       "objectiveHeader": "Objective (How the you'll achieve the goal)",
-      "helpText":
+      "objectivehelpText":
         "Include a brief description of how the state will measure progress toward each goal identified.",
       "addGoalButtonText": "Add goal"
     },
@@ -128,7 +128,7 @@
       "title": "Activity Schedule",
       "subheader":
         "List major milestones you’re working towards as part of this activity.",
-      "helpText":
+      "subheaderhelpText":
         "Detail key activity milestones, including activities that have occurred under previously approved APDs.",
       "noMilestonesNotice":
         "Did you forget to add milestones? Please add milestones for this activity.",
