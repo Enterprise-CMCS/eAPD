@@ -10,7 +10,6 @@ import {
 } from '../actions/activities';
 import { Subsection } from '../components/Section';
 import { Input, DollarInput, Textarea } from '../components/Inputs';
-import HelpText from '../components/HelpText';
 
 class ActivityDetailContractorExpenses extends Component {
   handleChange = (index, key) => e => {
