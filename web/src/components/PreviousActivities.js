@@ -1,24 +1,18 @@
 import React from 'react';
 
-import { t } from '../i18n';
-import Section from './Section';
-import SectionDesc from './SectionDesc';
-import SectionTitle from './SectionTitle';
-import Collapsible from './Collapsible';
+import { Section, Subsection } from './Section';
 
 const PreviousActivities = () => (
-  <Section id="prev-activities">
-    <SectionTitle>{t('previousActivities.title')}</SectionTitle>
-    <SectionDesc>{t('previousActivities.helpText')}</SectionDesc>
-    <Collapsible title={t('previousActivities.sections.outline')}>
+  <Section id="prev-activities" resource="previousActivities">
+    <Subsection resource="previousActivities.outline">
       <div>...</div>
-    </Collapsible>
-    <Collapsible title={t('previousActivities.sections.approvedExpenses')}>
+    </Subsection>
+    <Subsection resource="previousActivities.approvedExpenses">
       <div>...</div>
-    </Collapsible>
-    <Collapsible title={t('previousActivities.sections.actualExpenses')}>
+    </Subsection>
+    <Subsection resource="previousActivities.actualExpenses">
       <div>...</div>
-    </Collapsible>
+    </Subsection>
   </Section>
 );
 

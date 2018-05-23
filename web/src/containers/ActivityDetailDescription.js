@@ -2,12 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
-import Collapsible from '../components/Collapsible';
-import Icon, { faHelp } from '../components/Icons';
+import { Chunk, Subsection } from '../components/Section';
 import { RichText } from '../components/Inputs';
-import HelpText from '../components/HelpText';
 
 const ActivityDetailDescription = props => {
   const { activity, updateActivity } = props;
@@ -18,44 +15,34 @@ const ActivityDetailDescription = props => {
   };
 
   return (
-    <Collapsible title={t('activities.description.title')}>
-      <div className="mb-tiny bold">
-        {t('activities.description.summaryHeader')}
-        <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
-      </div>
-      <HelpText text="activities.description.helpText" />
-      <div className="mb3">
-        <textarea
-          className="m0 textarea"
-          rows="5"
-          maxLength="280"
-          spellCheck="true"
-          value={activity.descShort}
-          onChange={e =>
-            updateActivity(activity.id, { descShort: e.target.value })
-          }
-        />
-      </div>
-
-      <div className="mb3">
-        <div className="mb-tiny bold">
-          {t('activities.description.detailHeader')}
-          <Icon icon={faHelp} className="ml-tiny teal" size="sm" />
+    <Subsection resource="activities.description">
+      <Chunk resource="activities.description.summary">
+        <div className="mb3">
+          <textarea
+            className="m0 textarea"
+            rows="5"
+            maxLength="280"
+            spellCheck="true"
+            value={activity.descShort}
+            onChange={e =>
+              updateActivity(activity.id, { descShort: e.target.value })
+            }
+          />
         </div>
-        <RichText content={descLong} onSync={sync('descLong')} />
-      </div>
+      </Chunk>
 
-      <div className="mb3">
-        <div className="mb-tiny bold">
-          {t('activities.description.alternativesHeader')}
+      <Chunk resource="activities.description.detail">
+        <div className="mb3">
+          <RichText content={descLong} onSync={sync('descLong')} />
         </div>
-        <HelpText
-          text="activities.description.alternativesHelpText"
-          reminder="activities.description.alternativesHelpReminder"
-        />
-        <RichText content={altApproach} onSync={sync('altApproach')} />
-      </div>
-    </Collapsible>
+      </Chunk>
+
+      <Chunk resource="activities.description.alternatives">
+        <div className="mb3">
+          <RichText content={altApproach} onSync={sync('altApproach')} />
+        </div>
+      </Chunk>
+    </Subsection>
   );
 };
 // }
