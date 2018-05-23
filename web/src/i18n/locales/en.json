@@ -88,7 +88,9 @@
       "Please identify individual activities referenced from the overview section. CMS will collect information for each activity. Examples of individual activities include: Auditing, Outreach, Environmental Scans, HIE Registry Development, CQM Database Development, Data and Analytics, HIE Onboarding, etc.",
     "reminder":
       "Note: The first activity in this list is program administration. Program administration information pertains to implementing EHR Incentive program. Examples include: state & contractor costs associated with operating the EHR incentive program and SLR enhancements/upgrades.",
-    "listTitle": "Activity List",
+    "list": {
+      "title": "Activity List"
+    },
     "addActivityButtonText": "Add activity",
     "deleteActivityButtonText": "Remove Activity",
     "noActivityMessage":
@@ -287,21 +289,48 @@
   "proposedBudget": {
     "title": "Proposed Budget",
     "helpText":
-      "Please review the itemized budget, which has summed the funding requested for each activity specified.\n\nIt is broken out by FFY, and shows breakout of Federal Financial Participation (FFP), state match, and Total value (FFP + state match).\n\n We have also included a proposed breakout of this same budget by FFY quarter in the second table."
+      "Please review the itemized budget, which has summed the funding requested for each activity specified.\n\nIt is broken out by FFY, and shows breakout of Federal Financial Participation (FFP), state match, and Total value (FFP + state match).\n\n We have also included a proposed breakout of this same budget by FFY quarter in the second table.",
+    "summaryBudget": {
+      "title": "Short Activity Summary Budget"
+    },
+    "paymentsByFFYQuarter": {
+      "title": "Incentive Payments by FFY Quarter"
+    }
   },
 
   "assurancesAndCompliance": {
     "title": "Assurances and Compliance",
     "helpText":
-      "This section ensures compliance with federal regulations and State Medicaid citations."
+      "This section ensures compliance with federal regulations and State Medicaid citations.",
+    "procurement": {
+      "title": "Procurement Standards"
+    },
+    "recordsAccess": {
+      "title": "Access to Records"
+    },
+    "softwareRights": {
+      "title": "Software Rights"
+    },
+    "security": {
+      "title": "Security"
+    }
   },
   "executiveSummary": {
     "title": "Executive Summary",
     "helpText":
-      "Please see the executive summary that has been generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review. If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
+      "Please see the executive summary that has been generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review. If the APD is approved, these program budget tables will be referenced on the CMS approval letter.",
+    "summary": {
+      "title": "Executive Summary"
+    },
+    "budgetTable": {
+      "title": "Program Budget Table"
+    }
   },
   "certifyAndSubmit": {
     "title": "Certify and Submit",
-    "helpText": "Certify that the APD is complete and submit your IAPD."
+    "helpText": "Certify that the APD is complete and submit your IAPD.",
+    "certify": {
+      "title": "Certify and Submit"
+    }
   }
 }
