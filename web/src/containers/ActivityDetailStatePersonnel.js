@@ -42,6 +42,7 @@ class ActivityDetailStatePersonnel extends Component {
 
     return (
       <Collapsible title={t('activities.statePersonnel.title')}>
+        <p className="bold">{t('activities.statePersonnel.subheader')}</p>
         <HelpText text="activities.statePersonnel.helpText" />
         <div className="overflow-auto">
           <table
