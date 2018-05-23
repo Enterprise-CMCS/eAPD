@@ -1,22 +1,16 @@
 import React from 'react';
 
 import BudgetSummary from './BudgetSummary';
-import Collapsible from './Collapsible';
-import Section from './Section';
-import SectionDesc from './SectionDesc';
-import SectionTitle from './SectionTitle';
-import { t } from '../i18n';
+import { Section, Subsection } from './Section';
 
 const ProposedBudget = () => (
-  <Section id="budget">
-    <SectionTitle>{t('proposedBudget.title')}</SectionTitle>
-    <SectionDesc>{t('proposedBudget.helpText')}</SectionDesc>
-    <Collapsible title="Proposed Detailed Budget Table">
+  <Section id="budget" resource="proposedBudget">
+    <Subsection resource="proposedBudget.summaryBudget">
       <BudgetSummary />
-    </Collapsible>
-    <Collapsible title="Incentive Payments by FFY Quarter">
+    </Subsection>
+    <Subsection resource="proposedBudget.paymentsByFFYQuarter">
       <div>...</div>
-    </Collapsible>
+    </Subsection>
   </Section>
 );
 
