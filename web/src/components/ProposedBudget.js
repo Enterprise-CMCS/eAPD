@@ -11,7 +11,7 @@ const ProposedBudget = () => (
   <Section id="budget">
     <SectionTitle>{t('proposedBudget.title')}</SectionTitle>
     <SectionDesc>{t('proposedBudget.helpText')}</SectionDesc>
-    <Collapsible title="Short Activity Summary Budget">
+    <Collapsible title="Proposed Detailed Budget Table">
       <BudgetSummary />
     </Collapsible>
     <Collapsible title="Incentive Payments by FFY Quarter">
