@@ -15,10 +15,44 @@ export const editorToHtml = editorState => {
   return draftToHtml(content);
 };
 
+const uploadImageCallBack = file =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => resolve({ data: { link: e.target.result } });
+    reader.onerror = e => reject(e);
+    reader.readAsDataURL(file);
+  });
+
 export const EDITOR_CONFIG = {
-  options: ['inline', 'blockType', 'fontSize', 'image', 'list', 'link'],
+  options: [
+    'inline',
+    'blockType',
+    'fontSize',
+    'emoji',
+    'image',
+    'list',
+    'link'
+  ],
   inline: {
     options: ['bold', 'italic', 'underline']
+  },
+  emoji: {
+    emojis: [
+      '😀',
+      '😉',
+      '😎',
+      '👈',
+      '👉',
+      '👉',
+      '👆',
+      '👌',
+      '👍',
+      '👎',
+      '💰',
+      '📅',
+      '✅',
+      '❎'
+    ]
   },
   image: {
     className: undefined,
@@ -26,9 +60,9 @@ export const EDITOR_CONFIG = {
     popupClassName: undefined,
     urlEnabled: true,
     uploadEnabled: true,
-    alignmentEnabled: true,
-    uploadCallback: undefined,
-    previewImage: false,
+    alignmentEnabled: false,
+    uploadCallback: uploadImageCallBack,
+    previewImage: true,
     inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
     alt: { present: false, mandatory: false },
     defaultSize: {
