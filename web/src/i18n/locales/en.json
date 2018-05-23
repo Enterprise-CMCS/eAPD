@@ -69,7 +69,7 @@
 
   "previousActivities": {
     "title": "Results of Previous Activities",
-    "helptext":
+    "titlehelptext":
       "Please include a description of the results of previously approved activities.\nThis information is similar to the content from the IAPD TEMPLATE: RESULTS OF PREVIOUS ACTIVITIES.",
     "sections": {
       "outline": "Prior Activities Outline",
