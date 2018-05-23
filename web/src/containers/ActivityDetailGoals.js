@@ -8,9 +8,8 @@ import {
   removeActivityGoal as removeActivityGoalAction,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import Collapsible from '../components/Collapsible';
+import { Subsection } from '../components/Section';
 import { Textarea } from '../components/Inputs';
-import HelpText from '../components/HelpText';
 
 class ActivityDetailGoals extends Component {
   handleChange = (idx, key) => e => {
@@ -25,12 +24,7 @@ class ActivityDetailGoals extends Component {
     const { activity, addActivityGoal, removeActivityGoal } = this.props;
 
     return (
-      <Collapsible title={t('activities.goals.title')}>
-        <p className="bold">{t('activities.goals.subheader')}</p>
-        <HelpText
-          text="activities.goals.helpText"
-          reminder="activities.goals.reminder"
-        />
+      <Subsection resource="activities.goals">
         {activity.goals.map((d, i) => (
           <div key={i} className="mb3">
             {activity.goals.length > 1 && (
@@ -66,7 +60,7 @@ class ActivityDetailGoals extends Component {
         >
           {t('activities.goals.addGoalButtonText')}
         </button>
-      </Collapsible>
+      </Subsection>
     );
   }
 }

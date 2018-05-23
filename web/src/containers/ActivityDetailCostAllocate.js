@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
-import Collapsible from '../components/Collapsible';
+import { Subsection } from '../components/Section';
 import { DollarInput, RichText } from '../components/Inputs';
 import HelpText from '../components/HelpText';
 
@@ -17,14 +17,14 @@ const ActivityDetailCostAllocate = props => {
   };
 
   return (
-    <Collapsible title={t('activities.costAllocate.title')}>
+    <Subsection resource="activities.costAllocate">
       <div className="mb3">
         <HelpText
-          text="activities.costAllocate.help.costAllocate"
-          reminder="activities.costAllocate.reminder.costAllocate"
+          text="activities.costAllocate.methodology.helpText"
+          reminder="activities.costAllocate.methodology.reminder"
         />
         <div className="mb-tiny bold">
-          {t('activities.costAllocate.label.costAllocateDesc')}
+          {t('activities.costAllocate.methodology.title')}
         </div>
         <RichText
           content={costAllocateDesc}
@@ -33,11 +33,11 @@ const ActivityDetailCostAllocate = props => {
       </div>
       <div className="mb3">
         <HelpText
-          text="activities.costAllocate.help.otherFunding"
-          reminder="activities.costAllocate.reminder.otherFunding"
+          text="activities.costAllocate.otherFunding.helpText"
+          reminder="activities.costAllocate.otherFunding.reminder"
         />
         <div className="mb-tiny bold">
-          {t('activities.costAllocate.label.otherFundingDesc')}
+          {t('activities.costAllocate.otherFunding.title')}
         </div>
         <RichText
           content={otherFundingDesc}
@@ -46,14 +46,14 @@ const ActivityDetailCostAllocate = props => {
       </div>
       <DollarInput
         name="other-funding-amt"
-        label={t('activities.costAllocate.label.otherFundingAmt')}
+        label={t('activities.costAllocate.otherFunding.amount')}
         wrapperClass="mb2 sm-col-4"
         value={activity.otherFundingAmt}
         onChange={e =>
           updateActivity(activity.id, { otherFundingAmt: e.target.value })
         }
       />
-    </Collapsible>
+    </Subsection>
   );
 };
 
