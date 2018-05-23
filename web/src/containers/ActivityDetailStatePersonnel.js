@@ -162,17 +162,10 @@ ActivityDetailStatePersonnel.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId } }, { aId }) => {
-  const activity = byId[aId];
-  const { statePersonnel } = activity;
-
-  // TODO [bren]: replace with APD-driven dynamic years field
-  const years = !statePersonnel.length
-    ? ['2018', '2019']
-    : Object.keys(statePersonnel[0].years).sort();
-
-  return { activity, years };
-};
+const mapStateToProps = ({ activities: { byId }, apd }, { aId }) => ({
+  activity: byId[aId],
+  years: apd.data.years
+});
 
 const mapDispatchToProps = {
   addPerson: addActivityStatePerson,

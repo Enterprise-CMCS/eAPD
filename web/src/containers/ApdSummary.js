@@ -10,8 +10,7 @@ import SectionDesc from '../components/SectionDesc';
 import SectionTitle from '../components/SectionTitle';
 import HelpText from '../components/HelpText';
 import { t } from '../i18n';
-
-const YEAR_OPTIONS = ['2018', '2019', '2020'];
+import { YEAR_OPTIONS } from '../util';
 
 class ApdSummary extends Component {
   handleYears = e => {

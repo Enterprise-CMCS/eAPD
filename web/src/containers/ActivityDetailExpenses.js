@@ -135,21 +135,10 @@ ActivityDetailExpenses.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId } }, { aId }) => {
-  const { expenses } = byId[aId];
-  const expenseYears = expenses
-    .reduce((years, e) => {
-      years.push(...Object.keys(e.years));
-      return years;
-    }, [])
-    .filter((y, i, a) => a.lastIndexOf(y) === i)
-    .sort();
-
-  return {
-    activity: byId[aId],
-    years: expenseYears
-  };
-};
+const mapStateToProps = ({ activities: { byId }, apd }, { aId }) => ({
+  activity: byId[aId],
+  years: apd.data.years
+});
 
 const mapDispatchToProps = {
   addExpense: addActivityExpense,
