@@ -21,8 +21,8 @@
   },
 
   "apd": {
-    "sectionTitle": "Program Summary",
-    "helpText":
+    "title": "Program Summary",
+    "helptext":
       "Provide an introduction for your state's program. This should include context for your funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. (Note: This information is similar to the content from the IAPD template executive summary section).",
     "overview": {
       "title": "Overview",
@@ -71,10 +71,14 @@
     "title": "Results of Previous Activities",
     "helpText":
       "Please include a description of the results of previously approved activities. This information is similar to the content from the (IAPD template, results of previous activities)",
-    "sections": {
-      "outline": "Prior Activities Outline",
-      "approvedExpenses": "Approved Expenses",
-      "actualExpenses": "Actual Expenses"
+    "outline": {
+      "title": "Prior Activities Outline"
+    },
+    "approvedExpenses": {
+      "title": "Approved Expenses"
+    },
+    "actualExpenses": {
+      "title": "Actual Expenses"
     }
   },
 
@@ -101,8 +105,7 @@
       "title": "Activity Description",
       "helpText":
         "Describe at a high level the needs of the activity for which requested funding will be used (e.g. administrative, outreach, auditing, public health registry development, etc)",
-      "reminder":
-        "Note: This section is limited to 280 characters or less",
+      "reminder": "Note: This section is limited to 280 characters or less",
       "detailHeader": "Describe the activity in detail",
       "alternativesHeader":
         "State of alternative considerations and supporting justification",
