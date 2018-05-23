@@ -108,13 +108,21 @@
       "helpText":
         "Describe at a high level the needs of the activity for which requested funding will be used (e.g. administrative, outreach, auditing, public health registry development, etc)",
       "reminder": "Note: This section is limited to 280 characters or less",
-      "detailHeader": "Describe the activity in detail",
-      "alternativesHeader":
-        "State of alternative considerations and supporting justification",
-      "alternativesHelpText":
-        "If no substantive changes have been made to this activity, include a statement that refers back to the Statement of Alternative Considerations contained in previous versions of the IAPD or in the SMHP.\n\nIf substantive changes have been made, include a statement describing the alternatives that the state considered when making the change.",
-      "alternativesHelpReminder":
-        "Remember to update the SMHP as necessary with any substantive changes to the approach for implementing EHR incentives."
+      "summary": {
+        "subheader":
+          "Summarize the activity --- <- not sure what this is supposed to be"
+      },
+      "detail": {
+        "subheader": "Describe the activity in detail"
+      },
+      "alternatives": {
+        "subheader":
+          "State of alternative considerations and supporting justification",
+        "helpText":
+          "If no substantive changes have been made to this activity, include a statement that refers back to the Statement of Alternative Considerations contained in previous versions of the IAPD or in the SMHP.\n\nIf substantive changes have been made, include a statement describing the alternatives that the state considered when making the change.",
+        "reminder":
+          "Remember to update the SMHP as necessary with any substantive changes to the approach for implementing EHR incentives."
+      }
     },
     "goals": {
       "title": "Needs and Objectives",
