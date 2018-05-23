@@ -41,6 +41,7 @@ class ActivityDetailContractorExpenses extends Component {
 
     return (
       <Collapsible title={t('activities.contractorResources.title')}>
+        <p className="bold">{t('activities.contractorResources.subheader')}</p>
         <HelpText text="activities.contractorResources.helpText" />
         <div>
           <div className="overflow-auto">
