@@ -22,7 +22,9 @@ class ActivityDetailStandardsAndConditions extends Component {
 
     return (
       <Collapsible title={t('activities.standardsAndConditions.title')}>
-        <p>{t('activities.standardsAndConditions.subheader')}</p>
+        <p className="bold">
+          {t('activities.standardsAndConditions.subheader')}
+        </p>
         {STANDARDS.map(std => (
           <div key={std.id}>
             <h3>{t([`activities.standardsAndConditions`, std.id, 'title'])}</h3>
