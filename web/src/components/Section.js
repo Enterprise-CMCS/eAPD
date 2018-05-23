@@ -13,9 +13,9 @@ const Section = ({ children, id, resource }) => {
 
   return (
     <section id={id} className="p2 sm-px3 border-bottom border-gray">
-      {title ? <SectionTitle>{title}</SectionTitle> : null}
-      {subheader ? <div>{subheader}</div> : null}
-      {helptext ? <SectionDesc>{helptext}</SectionDesc> : null}
+      {title && <SectionTitle>{title}</SectionTitle>}
+      {subheader && <div>{subheader}</div>}
+      {helptext && <SectionDesc>{helptext}</SectionDesc>}
       {children}
     </section>
   );
@@ -32,20 +32,20 @@ Section.defaultProps = {
   resource: null
 };
 
-const Subsection = ({ children, resource }) => {
+const Subsection = ({ children, open, resource }) => {
   const title = t([resource, 'title'], { defaultValue: false });
   const subheader = t([resource, 'subheader'], { defaultValue: false });
   const helptext = t([resource, 'helpText'], { defaultValue: false });
 
   return (
-    <Collapsible title={title}>
-      {subheader ? <div>{subheader}</div> : null}
-      {helptext ? (
+    <Collapsible title={title} open={open}>
+      {subheader && <div>{subheader}</div>}
+      {helptext && (
         <HelpText
           text={`${resource}.helpText`}
           reminder={`${resource}.reminder`}
         />
-      ) : null}
+      )}
       {children}
     </Collapsible>
   );
@@ -53,11 +53,13 @@ const Subsection = ({ children, resource }) => {
 
 Subsection.propTypes = {
   children: PropTypes.node.isRequired,
+  open: PropTypes.bool,
   resource: PropTypes.string
 };
 
 Subsection.defaultProps = {
-  resource: null
+  resource: null,
+  open: false
 };
 
 export default Section;

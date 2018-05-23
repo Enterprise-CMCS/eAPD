@@ -6,16 +6,11 @@ import { t } from '../i18n';
 import ActivityDetailAll from './ActivityDetailAll';
 import ActivityListEntry from './ActivityListEntry';
 import { addActivity as addActivityAction } from '../actions/activities';
-import Collapsible from '../components/Collapsible';
-import Section from '../components/Section';
-import SectionDesc from '../components/SectionDesc';
-import SectionTitle from '../components/SectionTitle';
+import { Section, Subsection } from '../components/Section';
 
 const Activities = ({ activityIds, addActivity }) => (
-  <Section id="activities">
-    <SectionTitle>{t('activities.title')}</SectionTitle>
-    <SectionDesc>{t('activities.helpText')}</SectionDesc>
-    <Collapsible title={t('activities.listTitle')} open>
+  <Section id="activities" resource="activities">
+    <Subsection resource="activities.list" open>
       {activityIds.length === 0 ? (
         <div className="mb2 p1 h6 alert">
           {t('activities.noActivityMessage')}
@@ -30,7 +25,7 @@ const Activities = ({ activityIds, addActivity }) => (
       <button type="button" className="btn btn-primary" onClick={addActivity}>
         {t('activities.addActivityButtonText')}
       </button>
-    </Collapsible>
+    </Subsection>
     {activityIds.map((aId, idx) => (
       <ActivityDetailAll key={aId} aId={aId} num={idx + 1} />
     ))}
