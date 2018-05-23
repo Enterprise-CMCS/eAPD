@@ -8,7 +8,7 @@ import {
   removeActivityContractor,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import Collapsible from '../components/Collapsible';
+import { Subsection } from '../components/Section';
 import { Input, DollarInput, Textarea } from '../components/Inputs';
 import HelpText from '../components/HelpText';
 
@@ -40,9 +40,7 @@ class ActivityDetailContractorExpenses extends Component {
     } = this.props;
 
     return (
-      <Collapsible title={t('activities.contractorResources.title')}>
-        <p className="bold">{t('activities.contractorResources.subheader')}</p>
-        <HelpText text="activities.contractorResources.helpText" />
+      <Subsection resource="activities.contractorResources">
         <div>
           <div className="overflow-auto">
             <table
@@ -176,7 +174,7 @@ class ActivityDetailContractorExpenses extends Component {
         >
           {t('activities.contractorResources.addContractorButtonText')}
         </button>
-      </Collapsible>
+      </Subsection>
     );
   }
 }
