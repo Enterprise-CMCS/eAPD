@@ -30,8 +30,8 @@ class ActivityDetailSchedule extends Component {
 
     return (
       <Collapsible title={t('activities.schedule.title')}>
+        <p className="bold">{t('activities.schedule.subheader')}</p>
         <HelpText text="activities.schedule.helpText" />
-
         {activity.milestones.length === 0 ? (
           <div className="mb2 p1 h6 alert">
             {t('activities.schedule.noMilestonesNotice')}

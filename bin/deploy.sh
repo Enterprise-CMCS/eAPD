@@ -7,6 +7,9 @@ set -e
 
 export API_URL=$STAGING_API_URL
 
+apt-get update
+apt-get install zip -y
+
 # Install `cf` cli
 curl -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
 dpkg -i cf-cli_amd64.deb
@@ -19,6 +22,7 @@ cf install-plugin autopilot -f -r CF-Community
 cd web
 npm ci
 npm run build
+zip -r /tmp/webapp.zip dist/*
 cd ..
 
 # Don't deliver seed files that might be dangerous.
@@ -31,9 +35,10 @@ rm seeds/shared/delete-everything.js
 npm ci
 cd ..
 
-# Log into CF and push
 cf login -a $STAGING_CF_API -u $STAGING_CF_USER -p $STAGING_CF_PASSWORD -o $STAGING_CF_ORG -s $STAGING_CF_SPACE
-cf push -f manifest.yml
+
+cf zero-downtime-push hitech-apd-frontend -f manifest.yml
+cf zero-downtime-push hitech-apd-api -f manifest.yml
 
 # Migrate and seed the database
 cf run-task hitech-apd-api "npm run migrate && npm run seed"
