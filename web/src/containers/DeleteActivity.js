@@ -17,10 +17,10 @@ const DeleteConfirm = ({ onClose, onConfirm }) => (
         onClose();
       }}
     >
-      {t('activities.delete.yes')}
+      {t('activities.delete._yes')}
     </button>{' '}
     <button className="btn btn-small btn-outline h6" onClick={onClose}>
-      {t('activities.delete.no')}
+      {t('activities.delete._no')}
     </button>
   </div>
 );

@@ -27,6 +27,10 @@ const config = {
           fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader']
         })
+      },
+      {
+        test: /\.yaml$/,
+        use: ['json-loader', 'yaml-loader']
       }
     ]
   },
