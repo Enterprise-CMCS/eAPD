@@ -111,7 +111,7 @@
         "Describe at a high level the needs of the activity for which requested funding will be used (e.g. Administrative, Outreach, Auditing, Public Health Registry Development, etc)",
       "reminder":
         "Please Note, this section is limited to 280 characters or less",
-      "subheader": {
+      "summary": {
         "subheader":
         "Brief Activity Summary"
       },
