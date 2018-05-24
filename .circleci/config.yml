@@ -230,13 +230,13 @@ workflows:
       - api endpoint test:
           requires:
              - prepare dependencies cache
-      # - deploy pr:
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - master
-      #     requires:
-      #       - web test
+      - deploy pr:
+          filters:
+            branches:
+              ignore:
+                - master
+          requires:
+            - web test
       - deploy staging:
           filters:
             branches:
