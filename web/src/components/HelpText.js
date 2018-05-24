@@ -8,10 +8,12 @@ const HelpText = ({ text: textResource, reminder: reminderResource }) => {
   const reminder = t(reminderResource, { defaultValue: false });
 
   return (
-    <div className="mb2" style={{ whiteSpace: 'pre-line' }}>
-      {text && <div>{text}</div>}
-      {reminder && <div className="red">{reminder}</div>}
-    </div>
+    (text || reminder) && (
+      <div className="mb2" style={{ whiteSpace: 'pre-line' }}>
+        {text && <div>{text}</div>}
+        {reminder && <div className="red">{reminder}</div>}
+      </div>
+    )
   );
 };
 
