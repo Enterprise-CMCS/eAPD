@@ -19,7 +19,7 @@ import {
 } from '../actions/activities';
 import { GET_APD_SUCCESS } from '../actions/apd';
 
-import { nextSequence } from '../util';
+import { YEAR_OPTIONS, arrToObj, nextSequence } from '../util';
 
 const newGoal = () => ({ desc: '', obj: '' });
 
@@ -29,10 +29,7 @@ const newStatePerson = id => ({
   id,
   title: '',
   desc: '',
-  years: {
-    2018: { amt: '', perc: '' },
-    2019: { amt: '', perc: '' }
-  }
+  years: arrToObj(YEAR_OPTIONS, { amt: '', perc: '' })
 });
 
 const newContractor = id => ({
@@ -41,20 +38,14 @@ const newContractor = id => ({
   desc: '',
   start: '',
   end: '',
-  years: {
-    2018: 0,
-    2019: 0
-  }
+  years: arrToObj(YEAR_OPTIONS, 0)
 });
 
 const newExpense = id => ({
   id,
   category: 'Hardware, software, and licensing',
   desc: '',
-  years: {
-    2018: 100,
-    2019: 100
-  }
+  years: arrToObj(YEAR_OPTIONS, 100)
 });
 
 const newActivity = (id, name = '') => ({
