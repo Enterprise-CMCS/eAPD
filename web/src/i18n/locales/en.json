@@ -22,7 +22,7 @@
 
   "apd": {
     "title": "Program Summary",
-    "helptext":
+    "helpText":
       "Provide an introduction for your state's program. This should include context for your funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD template section: executive summary.",
     "overview": {
       "title": "Program Overview",
@@ -112,13 +112,12 @@
       "reminder":
         "Please Note, this section is limited to 280 characters or less",
       "summary": {
-        "subheader":
-        "Brief Activity Summary"
+        "subheader": "Brief Activity Summary"
       },
       "detail": {
-        "subheader": "Describe the activity in detail including images, diagrams, and other pertinant content."
-      }
-    },
+        "subheader":
+          "Describe the activity in detail including images, diagrams, and other pertinant content."
+      },
       "alternatives": {
         "subheader":
           "Statement of alternative considerations and supporting justification",
@@ -128,27 +127,29 @@
           "Remember to update the SMHP as necessary with any substantive changes to the approach for implementing EHR incentives."
       }
     },
+
     "goals": {
       "title": "Needs and Objectives",
       "subheader":
         "List the goals and objectives you're hoping to accomplish as part of this activity.",
-      "helptext":
+      "helpText":
         "Please include a brief description of how each goal relates to the vision identified in the program summary section.\n\n Within the objectives section, describe how the state will measure progress toward the goal identified.",
-      "reminder":
-        "DON'T FORGET: Each goal should have a matching objective.",
+      "reminder": "DON'T FORGET: Each goal should have a matching objective.",
       "goal": {
-        "goalHeader": "Goal #{{number}}",
-        "objectiveHeader": "Objective (How the you'll achieve the goal)",
-        "helptext":
-          "Include a brief description of how the state will measure progress toward each goal identified.",
-        "addGoalButtonText": "Add goal"
-      }
+        "title": "Goal #{{number}}"
+      },
+      "objective": {
+        "title": "Objective (How the you'll achieve the goal)",
+        "helpText":
+          "Include a brief description of how the state will measure progress toward each goal identified."
+      },
+      "addGoalButtonText": "Add goal"
     },
     "schedule": {
       "title": "Activity Schedule",
       "subheader":
         "List major milestones you’re working towards as part of this activity.",
-      "helptext":
+      "helpText":
         "Detail key activity milestones, including activities that have occurred under previously approved APDs.",
       "noMilestonesNotice":
         "Did you forget to add milestones? Please add milestones for this activity.",
@@ -165,7 +166,7 @@
       "title": "Contracting Resources",
       "subheader":
         "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section.",
-      "helptext":
+      "helpText":
         "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs.",
       "labels": {
         "entryNumber": "#",
@@ -190,8 +191,7 @@
       "title": "State Personnel",
       "subheader":
         "Outline the personnel resources for this section. This includes anyone with FTE on your particular IAPD project(s). This does not include personnel listed in the contract section.",
-      "helptext":
-        "Personnel costs must include salaries and benefits.",
+      "helpText": "Personnel costs must include salaries and benefits.",
       "labels": {
         "entryNum": "#",
         "title": "Title",
@@ -226,7 +226,8 @@
         "reminder":
           "High level descriptions are appropriate for grant activities",
         "amount": "Other funding amount"
-      },
+      }
+    },
     "standardsAndConditions": {
       "title": "Standards & Conditions",
       "subheader":

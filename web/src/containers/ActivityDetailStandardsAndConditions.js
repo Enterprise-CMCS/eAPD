@@ -7,6 +7,7 @@ import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { Subsection } from '../components/Section';
 import { Textarea } from '../components/Inputs';
+import HelpText from '../components/HelpText';
 
 class ActivityDetailStandardsAndConditions extends Component {
   handleChange = key => e => {
@@ -30,6 +31,10 @@ class ActivityDetailStandardsAndConditions extends Component {
             <p>
               {t([`activities.standardsAndConditions`, std.id, 'subheader'])}
             </p>
+            <HelpText
+              text={`activities.standardsAndConditions.${std.id}.helpText`}
+              reminder={`activities.standardsAndConditions.${std.id}.reminder`}
+            />
             <Textarea
               name={`activity-${activity.id}-condition-${std.id}`}
               label={t([`activities.standardsAndConditions`, std.id, 'title'])}
