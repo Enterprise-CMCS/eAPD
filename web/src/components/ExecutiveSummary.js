@@ -1,21 +1,15 @@
 import React from 'react';
 
-import { t } from '../i18n';
-import Section from './Section';
-import SectionDesc from './SectionDesc';
-import SectionTitle from './SectionTitle';
-import Collapsible from './Collapsible';
+import { Section, Subsection } from './Section';
 
 const ExecutiveSummary = () => (
-  <Section id="executive-summary">
-    <SectionTitle>{t('executiveSummary.title')}</SectionTitle>
-    <SectionDesc>{t('executiveSummary.helpText')}</SectionDesc>
-    <Collapsible title="Executive Summary">
+  <Section id="executive-summary" resource="executiveSummary">
+    <Subsection resource="executiveSummary.summary">
       <div>...</div>
-    </Collapsible>
-    <Collapsible title="Program Budget Table">
+    </Subsection>
+    <Subsection resource="executiveSummary.budgetTable">
       <div>...</div>
-    </Collapsible>
+    </Subsection>
   </Section>
 );
 
