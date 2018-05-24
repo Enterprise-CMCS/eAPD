@@ -5,27 +5,25 @@
   "main": "app.js",
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "build-storybook": "build-storybook -c .storybook -o .storybook-dist/public",
+    "build-storybook":
+      "build-storybook -c .storybook -o .storybook-dist/public",
     "make-state-icons": "babel-node scripts/stateIcons.js",
-    "scaffold": "mkdir -p dist && cp src/index.html dist/ && cp ../Staticfile dist/ && cp -r src/static dist/",
+    "scaffold":
+      "mkdir -p dist && cp src/index.html dist/ && cp ../Staticfile dist/ && cp -r src/static dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
-    "start": "webpack-dev-server --host 0.0.0.0 --port 8001 --history-api-fallback --content-base src/",
+    "start":
+      "webpack-dev-server --host 0.0.0.0 --port 8001 --history-api-fallback --content-base src/",
     "test": "jest --collectCoverage",
     "test-watch": "jest --watch",
-    "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
+    "prettier":
+      "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/18F/cms-hitech-apd.git"
   },
-  "keywords": [
-    "cms",
-    "medicaid",
-    "hitech",
-    "emr",
-    "apd"
-  ],
+  "keywords": ["cms", "medicaid", "hitech", "emr", "apd"],
   "contributors": [
     "Nicole Fenton",
     "Meghana Khandekar",
@@ -115,21 +113,19 @@
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1",
+    "yaml-jest": "^1.0.5",
     "yaml-loader": "^0.5.0"
   },
   "babel": {
-    "presets": [
-      "env",
-      "react",
-      "stage-2"
-    ]
+    "presets": ["env", "react", "stage-2"]
   },
   "jest": {
     "coverageDirectory": "../coverage",
     "rootDir": "src",
-    "setupFiles": [
-      "../polyfills.test.js",
-      "../setup.test.js"
-    ]
+    "setupFiles": ["../polyfills.test.js", "../setup.test.js"],
+    "transform": {
+      "\\.js?$": "babel-jest",
+      "\\.yaml$": "yaml-jest"
+    }
   }
 }
