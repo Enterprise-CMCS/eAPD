@@ -1,5 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
+export const YEAR_OPTIONS = ['2018', '2019', '2020'];
+
 export const STATES = [
   { id: 'al', name: 'Alabama' },
   { id: 'ak', name: 'Alaska' },
@@ -125,3 +127,6 @@ export const getParams = str =>
     }, {});
 
 export const nextSequence = arrOfNums => Math.max(...arrOfNums, 0) + 1;
+
+export const arrToObj = (array, initialValue = 0) =>
+  Object.assign({}, ...array.map(a => ({ [a]: initialValue })));
