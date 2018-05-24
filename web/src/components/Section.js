@@ -34,17 +34,14 @@ Section.defaultProps = {
 
 const Chunk = ({ children, resource }) => {
   const subheader = t([resource, 'subheader'], { defaultValue: false });
-  const helptext = t([resource, 'helpText'], { defaultValue: false });
 
   return (
     <Fragment>
       {subheader && <div className="mb-tiny bold">{subheader}</div>}
-      {helptext && (
-        <HelpText
-          text={`${resource}.helpText`}
-          reminder={`${resource}.reminder`}
-        />
-      )}
+      <HelpText
+        text={`${resource}.helpText`}
+        reminder={`${resource}.reminder`}
+      />
       {children}
     </Fragment>
   );
