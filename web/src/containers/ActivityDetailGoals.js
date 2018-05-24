@@ -10,6 +10,7 @@ import {
 } from '../actions/activities';
 import { Subsection } from '../components/Section';
 import { Textarea } from '../components/Inputs';
+import HelpText from '../components/HelpText';
 
 class ActivityDetailGoals extends Component {
   handleChange = (idx, key) => e => {
@@ -36,16 +37,24 @@ class ActivityDetailGoals extends Component {
                 Remove
               </button>
             )}
+            <HelpText
+              text="activities.goals.goal.helpText"
+              reminder="activities.goals.goal.reminder"
+            />
             <Textarea
               name={`goal-${i}`}
-              label={t('activities.goals.goalHeader', { number: i + 1 })}
+              label={t('activities.goals.goal.title', { number: i + 1 })}
               rows="5"
               value={d.desc}
               onChange={this.handleChange(i, 'desc')}
             />
+            <HelpText
+              text="activities.goals.objective.helpText"
+              reminder="activities.goals.objective.reminder"
+            />
             <Textarea
               name={`obj-${i}`}
-              label={t('activities.goals.objectiveHeader')}
+              label={t('activities.goals.objective.title')}
               rows="4"
               value={d.obj}
               onChange={this.handleChange(i, 'obj')}
