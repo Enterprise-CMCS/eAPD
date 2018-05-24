@@ -6,11 +6,14 @@ import {
   GET_APD_FAILURE,
   UPDATE_APD
 } from '../actions/apd';
+import { YEAR_OPTIONS } from '../util';
+
+const firstTwoYears = YEAR_OPTIONS.slice(0, 2);
 
 const initialState = {
   data: {
     id: '',
-    years: ['2018'],
+    years: firstTwoYears,
     overview: '',
     hitNarrative: '',
     hieNarrative: '',
@@ -32,7 +35,7 @@ const reducer = (state = initialState, action) => {
         loaded: true,
         data: {
           id: action.data.id,
-          years: ['2018'], // TODO
+          years: firstTwoYears, // TODO
           overview: action.data.programOverview,
           hitNarrative: action.data.narrativeHIT,
           hieNarrative: action.data.narrativeHIE,
