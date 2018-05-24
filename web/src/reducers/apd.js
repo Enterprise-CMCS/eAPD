@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) => {
         loaded: true,
         data: {
           id: action.data.id,
-          years: firstTwoYears, // TODO
+          years: action.data.years,
           overview: action.data.programOverview,
           hitNarrative: action.data.narrativeHIT,
           hieNarrative: action.data.narrativeHIE,
