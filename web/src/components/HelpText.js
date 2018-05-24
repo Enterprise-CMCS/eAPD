@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 
 import { t } from '../i18n';
 
-const HelpText = ({ text, reminder }) => (
-  <div className="mb2" style={{ whiteSpace: 'pre-line' }}>
-    <div>{t(text)}</div>
-    {reminder ? <div className="red">{t(reminder)}</div> : null}
-  </div>
-);
+const HelpText = ({ text: textResource, reminder: reminderResource }) => {
+  const text = t(textResource, { defaultValue: false });
+  const reminder = t(reminderResource, { defaultValue: false });
+
+  return (
+    <div className="mb2" style={{ whiteSpace: 'pre-line' }}>
+      {text && <div>{text}</div>}
+      {reminder && <div className="red">{reminder}</div>}
+    </div>
+  );
+};
 
 HelpText.propTypes = {
   text: PropTypes.string.isRequired,

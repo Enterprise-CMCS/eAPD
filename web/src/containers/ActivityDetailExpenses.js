@@ -7,10 +7,9 @@ import {
   removeActivityExpense,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import Collapsible from '../components/Collapsible';
+import { Subsection } from '../components/Section';
 import { DollarInput, Textarea } from '../components/Inputs';
 import Select from '../components/Select';
-import HelpText from '../components/HelpText';
 
 class ActivityDetailExpenses extends Component {
   handleChange = (index, key) => e => {
@@ -38,8 +37,7 @@ class ActivityDetailExpenses extends Component {
     } = this.props;
 
     return (
-      <Collapsible title="Expenses">
-        <HelpText text="activities.expenses.helpText" />
+      <Subsection resource="activities.expenses">
         <div className="overflow-auto">
           <table
             className="mb2 h5 table table-condensed table-fixed"
@@ -122,7 +120,7 @@ class ActivityDetailExpenses extends Component {
         >
           Add expense
         </button>
-      </Collapsible>
+      </Subsection>
     );
   }
 }

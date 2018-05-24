@@ -5,7 +5,7 @@ import { STANDARDS } from '../util';
 
 import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
-import Collapsible from '../components/Collapsible';
+import { Subsection } from '../components/Section';
 import { Textarea } from '../components/Inputs';
 
 class ActivityDetailStandardsAndConditions extends Component {
@@ -21,26 +21,25 @@ class ActivityDetailStandardsAndConditions extends Component {
     const { activity } = this.props;
 
     return (
-      <Collapsible title={t('activities.standardsAndConditions.title')}>
-        <p className="bold">
-          {t('activities.standardsAndConditions.subheader')}
-        </p>
+      <Subsection resource="activities.standardsAndConditions">
         {STANDARDS.map(std => (
           <div key={std.id}>
-            <h3>{t([`activities.standardsAndConditions`, std.id, 'title'])}</h3>
+            <h3>
+              {t([`activities.standardsAndConditions`, std.id, 'header'])}
+            </h3>
             <p>
-              {t([`activities.standardsAndConditions`, std.id, 'description'])}
+              {t([`activities.standardsAndConditions`, std.id, 'subheader'])}
             </p>
             <Textarea
               name={`activity-${activity.id}-condition-${std.id}`}
-              label={t([`activities.standardsAndConditions`, std.id, 'prompt'])}
+              label={t([`activities.standardsAndConditions`, std.id, 'title'])}
               rows="3"
               value={activity.standardsAndConditions[std.id]}
               onChange={this.handleChange(std.id)}
             />
           </div>
         ))}
-      </Collapsible>
+      </Subsection>
     );
   }
 }

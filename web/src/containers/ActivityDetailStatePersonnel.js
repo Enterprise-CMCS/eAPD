@@ -7,14 +7,13 @@ import {
   removeActivityStatePerson,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import Collapsible from '../components/Collapsible';
+import { Subsection } from '../components/Section';
 import {
   Input,
   DollarInput,
   PercentInput,
   Textarea
 } from '../components/Inputs';
-import HelpText from '../components/HelpText';
 import { t } from '../i18n';
 
 class ActivityDetailStatePersonnel extends Component {
@@ -41,9 +40,7 @@ class ActivityDetailStatePersonnel extends Component {
     } = this.props;
 
     return (
-      <Collapsible title={t('activities.statePersonnel.title')}>
-        <p className="bold">{t('activities.statePersonnel.subheader')}</p>
-        <HelpText text="activities.statePersonnel.helpText" />
+      <Subsection resource="activities.statePersonnel">
         <div className="overflow-auto">
           <table
             className="mb2 h5 table table-condensed table-fixed"
@@ -149,7 +146,7 @@ class ActivityDetailStatePersonnel extends Component {
         >
           {t('activities.statePersonnel.addButtonText')}
         </button>
-      </Collapsible>
+      </Subsection>
     );
   }
 }

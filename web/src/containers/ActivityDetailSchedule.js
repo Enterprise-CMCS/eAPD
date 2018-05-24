@@ -8,9 +8,8 @@ import {
   removeActivityMilestone as removeActivityMilestoneAction,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import Collapsible from '../components/Collapsible';
+import { Subsection } from '../components/Section';
 import { Input } from '../components/Inputs';
-import HelpText from '../components/HelpText';
 
 class ActivityDetailSchedule extends Component {
   handleChange = (idx, key) => e => {
@@ -29,9 +28,7 @@ class ActivityDetailSchedule extends Component {
     } = this.props;
 
     return (
-      <Collapsible title={t('activities.schedule.title')}>
-        <p className="bold">{t('activities.schedule.subheader')}</p>
-        <HelpText text="activities.schedule.helpText" />
+      <Subsection resource="activities.schedule">
         {activity.milestones.length === 0 ? (
           <div className="mb2 p1 h6 alert">
             {t('activities.schedule.noMilestonesNotice')}
@@ -111,7 +108,7 @@ class ActivityDetailSchedule extends Component {
         >
           {t('activities.schedule.addMilestoneButtonText')}
         </button>
-      </Collapsible>
+      </Subsection>
     );
   }
 }

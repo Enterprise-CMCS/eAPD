@@ -3,11 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
-import Collapsible from '../components/Collapsible';
 import { RichText } from '../components/Inputs';
-import Section from '../components/Section';
-import SectionDesc from '../components/SectionDesc';
-import SectionTitle from '../components/SectionTitle';
+import { Section, Subsection } from '../components/Section';
 import HelpText from '../components/HelpText';
 import { t } from '../i18n';
 import { YEAR_OPTIONS } from '../util';
@@ -39,14 +36,8 @@ class ApdSummary extends Component {
     } = this.props.apd;
 
     return (
-      <Section id="apd-summary">
-        <SectionTitle>{t('apd.sectionTitle')}</SectionTitle>
-        <SectionDesc>{t('apd.helpText')}</SectionDesc>
-        <Collapsible title={t('apd.overview.title')}>
-          <HelpText
-            text="apd.overview.helpText"
-            reminder="apd.overview.reminder"
-          />
+      <Section id="apd-summary" resource="apd">
+        <Subsection resource="apd.overview">
           <div className="mb3">
             <div className="mb-tiny bold">{t('apd.overview.yearsCovered')}</div>
             {YEAR_OPTIONS.map(option => (
@@ -92,7 +83,7 @@ class ApdSummary extends Component {
               onSync={this.syncRichText('mmisNarrative')}
             />
           </div>
-        </Collapsible>
+        </Subsection>
       </Section>
     );
   }

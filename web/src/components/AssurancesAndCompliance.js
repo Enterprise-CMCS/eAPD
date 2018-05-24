@@ -1,27 +1,21 @@
 import React from 'react';
 
-import { t } from '../i18n';
-import Section from './Section';
-import SectionDesc from './SectionDesc';
-import SectionTitle from './SectionTitle';
-import Collapsible from './Collapsible';
+import { Section, Subsection } from './Section';
 
 const AssurancesAndCompliance = () => (
-  <Section id="assurances-compliance">
-    <SectionTitle>{t('assurancesAndCompliance.title')}</SectionTitle>
-    <SectionDesc>{t('assurancesAndCompliance.helpText')}</SectionDesc>
-    <Collapsible title="Procurement Standards">
+  <Section id="assurances-compliance" resource="assurancesAndCompliance">
+    <Subsection resource="assurancesAndCompliance.procurement">
       <div>...</div>
-    </Collapsible>
-    <Collapsible title="Access to Records">
+    </Subsection>
+    <Subsection resource="assurancesAndCompliance.recordsAccess">
       <div>...</div>
-    </Collapsible>
-    <Collapsible title="Software Rights">
+    </Subsection>
+    <Subsection resource="assurancesAndCompliance.softwareRights">
       <div>...</div>
-    </Collapsible>
-    <Collapsible title="Security">
+    </Subsection>
+    <Subsection resource="assurancesAndCompliance.security">
       <div>...</div>
-    </Collapsible>
+    </Subsection>
   </Section>
 );
 
