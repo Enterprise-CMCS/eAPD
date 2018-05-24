@@ -186,21 +186,10 @@ ActivityDetailContractorExpenses.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId } }, { aId }) => {
-  const { contractorResources } = byId[aId];
-  const contractorYears = contractorResources
-    .reduce((years, e) => {
-      years.push(...Object.keys(e.years));
-      return years;
-    }, [])
-    .filter((y, i, a) => a.lastIndexOf(y) === i)
-    .sort();
-
-  return {
-    activity: byId[aId],
-    years: contractorYears
-  };
-};
+const mapStateToProps = ({ activities: { byId }, apd }, { aId }) => ({
+  activity: byId[aId],
+  years: apd.data.years
+});
 
 const mapDispatchToProps = {
   addContractor: addActivityContractor,

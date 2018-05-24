@@ -4,7 +4,7 @@ describe('APD reducer', () => {
   const initialState = {
     data: {
       id: '',
-      years: ['2018'],
+      years: ['2018', '2019'],
       overview: '',
       hitNarrative: '',
       hieNarrative: '',
@@ -43,7 +43,7 @@ describe('APD reducer', () => {
     ).toEqual({
       data: {
         id: 'apd-id',
-        years: ['2018'],
+        years: ['2018', '2019'],
         overview: 'moop moop',
         hitNarrative: 'HIT, but as a play',
         hieNarrative: 'HIE, but as a novel',
