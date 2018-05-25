@@ -19,8 +19,8 @@ if (process.env.VCAP_SERVICES) {
     const vcap = JSON.parse(process.env.VCAP_SERVICES);
     if (Array.isArray(vcap['user-provided'])) {
       vcap['user-provided'].forEach(ups => {
-        Object.keys(ups.credentials).forEach(name => {
-          upsEnv[name] = ups.credentials[name];
+        Object.entries(ups.credentials).forEach(([name, value]) => {
+          upsEnv[name] = value;
         });
       });
     }
