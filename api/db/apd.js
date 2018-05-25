@@ -27,6 +27,11 @@ module.exports = () => ({
           out[b] = attributes[a];
         }
       });
+
+      if (attributes.years) {
+        out.years = JSON.stringify(attributes.years);
+      }
+
       return out;
     },
 
@@ -41,7 +46,8 @@ module.exports = () => ({
         period: this.get('period'),
         programOverview: this.get('program_overview'),
         state: this.get('state_id'),
-        status: this.get('status')
+        status: this.get('status'),
+        years: this.get('years')
       };
     },
 
@@ -52,7 +58,8 @@ module.exports = () => ({
         'programOverview',
         'narrativeHIE',
         'narrativeHIT',
-        'narrativeMMIS'
+        'narrativeMMIS',
+        'years'
       ],
       foreignKey: 'apd_id',
       owns: { activities: 'apdActivity', keyPersonnel: 'apdKeyPersonnel' },

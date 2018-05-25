@@ -24,16 +24,17 @@ tap.test('apds PUT endpoint', async endpointTest => {
   endpointTest.test(
     'synchronize responder returns the expected data',
     async test => {
-      const apd = {};
-      const out = putEndpoint.syncResponder({
+      const model = {};
+      const modelClass = {};
+      const out = putEndpoint.syncResponder(modelClass)({
         meta: {
-          apd
+          apd: model
         }
       });
 
       test.same(
         out,
-        { model: apd, action: 'update-apd' },
+        { model, modelClass, action: 'update-apd' },
         'returns the specific model to synchronize'
       );
     }
