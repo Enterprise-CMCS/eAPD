@@ -234,7 +234,7 @@
       title: "Incentive Payments by FFY Quarter"
   assurancesAndCompliance: 
     title: "Assurances and Compliance"
-    helpText: "This section ensures compliance with federal regulations and State Medicaid citations."
+    helpText: "Ensure that your state complies with all applicable Code of Federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
     procurement: 
       title: "Procurement Standards"
     recordsAccess: 
@@ -252,7 +252,7 @@
       title: "Program Budget Table"
   certifyAndSubmit: 
     title: "Certify and Submit"
-    helpText: "Certify that the APD is complete and submit your IAPD."
+    helpText: "By clicking Submit, you agree that your funding request fulfills our standards and requirements."
     certify: 
       title: "Certify and Submit"
 
