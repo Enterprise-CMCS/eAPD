@@ -3,6 +3,11 @@
   could call it "tiny" or "05"; using the former for now
 */
 
+.mxn-tiny {
+  margin-left: -var(--space-tiny);
+  margin-right: -var(--space-tiny);
+}
+
 .ml-tiny {
   margin-left: var(--space-tiny);
 }
