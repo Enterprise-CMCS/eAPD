@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../i18n';
+import ActivityDetailCostAllocateFFP from './ActivityDetailCostAllocateFFP';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { Subsection } from '../components/Section';
 import { DollarInput, RichText } from '../components/Inputs';
 import HelpText from '../components/HelpText';
+import { t } from '../i18n';
 
 const ActivityDetailCostAllocate = props => {
   const { activity, updateActivity } = props;
@@ -19,26 +20,27 @@ const ActivityDetailCostAllocate = props => {
   return (
     <Subsection resource="activities.costAllocate">
       <div className="mb3">
+        <div className="mb-tiny bold">
+          {t('activities.costAllocate.methodology.title')}
+        </div>
         <HelpText
           text="activities.costAllocate.methodology.helpText"
           reminder="activities.costAllocate.methodology.reminder"
         />
-        <div className="mb-tiny bold">
-          {t('activities.costAllocate.methodology.title')}
-        </div>
         <RichText
           content={costAllocateDesc}
           onSync={sync('costAllocateDesc')}
         />
       </div>
+      <ActivityDetailCostAllocateFFP aId={activity.id} />
       <div className="mb3">
+        <div className="mb-tiny bold">
+          {t('activities.costAllocate.otherFunding.title')}
+        </div>
         <HelpText
           text="activities.costAllocate.otherFunding.helpText"
           reminder="activities.costAllocate.otherFunding.reminder"
         />
-        <div className="mb-tiny bold">
-          {t('activities.costAllocate.otherFunding.title')}
-        </div>
         <RichText
           content={otherFundingDesc}
           onSync={sync('otherFundingDesc')}
