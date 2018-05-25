@@ -19,7 +19,8 @@ tap.test('apd data model', async apdModelTests => {
               'programOverview',
               'narrativeHIE',
               'narrativeHIT',
-              'narrativeMMIS'
+              'narrativeMMIS',
+              'years'
             ],
             foreignKey: 'apd_id',
             owns: {
@@ -129,30 +130,35 @@ tap.test('apd data model', async apdModelTests => {
     }
   );
 
-  apdModelTests.test('converts from camel case to snake case', async test => {
-    const attributes = {
-      fine: 'no change',
-      good: 'also no change',
-      programOverview: 'changed over',
-      narrativeHIE: undefined,
-      narrativeHIT: null,
-      narrativeMMIS: 'also changed'
-    };
-
-    const out = apd.apd.format(attributes);
-
-    test.same(
-      out,
-      {
+  apdModelTests.test(
+    'converts from camel case to snake case and stringifies',
+    async test => {
+      const attributes = {
         fine: 'no change',
         good: 'also no change',
-        program_overview: 'changed over',
-        narrative_hit: null,
-        narrative_mmis: 'also changed'
-      },
-      'converts to snake case, if defined'
-    );
-  });
+        programOverview: 'changed over',
+        narrativeHIE: undefined,
+        narrativeHIT: null,
+        narrativeMMIS: 'also changed',
+        years: { key: 'value' }
+      };
+
+      const out = apd.apd.format(attributes);
+
+      test.same(
+        out,
+        {
+          fine: 'no change',
+          good: 'also no change',
+          program_overview: 'changed over',
+          narrative_hit: null,
+          narrative_mmis: 'also changed',
+          years: '{"key":"value"}'
+        },
+        'converts to snake case, if defined'
+      );
+    }
+  );
 
   apdModelTests.test('converts to JSON', async test => {
     const self = {
@@ -174,6 +180,7 @@ tap.test('apd data model', async apdModelTests => {
     self.get.withArgs('narrative_hie').returns('apd-hie');
     self.get.withArgs('narrative_hit').returns('apd-hit');
     self.get.withArgs('narrative_mmis').returns('apd-mmis');
+    self.get.withArgs('years').returns('apd-years');
 
     const output = apd.apd.toJSON.bind(self)();
 
@@ -189,7 +196,8 @@ tap.test('apd data model', async apdModelTests => {
         period: 'apd-period',
         programOverview: 'apd-overview',
         state: 'apd-state',
-        status: 'apd-status'
+        status: 'apd-status',
+        years: 'apd-years'
       },
       'gives the expected JSON'
     );

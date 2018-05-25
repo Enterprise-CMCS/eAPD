@@ -1,5 +1,5 @@
 /*
- * Graphviz of 'dump.sql', created 2018-05-08 19:08:03.521812
+ * Graphviz of 'dump.sql', created 2018-05-24 20:31:41.787902
  * Generated from https://github.com/rm-hull/sql_graphviz
  */
 digraph g { graph [ rankdir = "LR" ];
@@ -16,6 +16,10 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="other_funding_sources_description"><font face="Times-bold">other_funding_sources_description</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="other_funding_sources_amount"><font face="Times-bold">other_funding_sources_amount</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="cost_allocation_methodology"><font face="Times-bold">cost_allocation_methodology</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="summary"><font face="Times-bold">summary</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="alternatives"><font face="Times-bold">alternatives</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="types"><font face="Times-bold">types</font>  <font color="#535353">json</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="standards_and_conditions"><font face="Times-bold">standards_and_conditions</font>  <font color="#535353">json</font></td></tr>
       </table>
     >];
 
@@ -78,7 +82,6 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="year"><font face="Times-bold">year</font>  <font color="#535353">character varying ( 4 )</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="amount"><font face="Times-bold">amount</font>  <font color="#535353">numeric ( 10,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="expense_id"><font face="Times-bold">expense_id</font>  <font color="#535353">integer</font></td></tr>
       </table>
     >];
@@ -89,19 +92,9 @@ digraph g { graph [ rankdir = "LR" ];
       <table border="0" cellspacing="0" cellborder="1">
         <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_expenses</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="name"><font face="Times-bold">name</font>  <font color="#535353">character varying ( 64 )</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
-      </table>
-    >];
-
-  "activity_goal_objectives" [
-    shape=none
-    label=<
-      <table border="0" cellspacing="0" cellborder="1">
-        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_goal_objectives</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="activity_goal_id"><font face="Times-bold">activity_goal_id</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="category"><font face="Times-bold">category</font>  <font color="#535353">text</font></td></tr>
       </table>
     >];
 
@@ -113,6 +106,7 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="objective"><font face="Times-bold">objective</font>  <font color="#535353">text</font></td></tr>
       </table>
     >];
 
@@ -157,6 +151,31 @@ digraph g { graph [ rankdir = "LR" ];
       </table>
     >];
 
+  "apd_key_personnel" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">apd_key_personnel</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="title"><font face="Times-bold">title</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="apd_id"><font face="Times-bold">apd_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "apd_key_personnel_years" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">apd_key_personnel_years</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="cost"><font face="Times-bold">cost</font>  <font color="#535353">numeric ( 15,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="fte"><font face="Times-bold">fte</font>  <font color="#535353">numeric ( 3,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="year"><font face="Times-bold">year</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="apd_key_personnel_id"><font face="Times-bold">apd_key_personnel_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
   "apds" [
     shape=none
     label=<
@@ -173,6 +192,7 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="narrative_hie"><font face="Times-bold">narrative_hie</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="narrative_hit"><font face="Times-bold">narrative_hit</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="narrative_mmis"><font face="Times-bold">narrative_mmis</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="years"><font face="Times-bold">years</font>  <font color="#535353">json</font></td></tr>
       </table>
     >];
 
@@ -263,11 +283,12 @@ digraph g { graph [ rankdir = "LR" ];
   "activity_cost_allocation":activity_id -> "activities":id
   "activity_expense_entries":expense_id -> "activity_expenses":id
   "activity_expenses":activity_id -> "activities":id
-  "activity_goal_objectives":activity_goal_id -> "activity_goals":id
   "activity_goals":activity_id -> "activities":id
   "activity_schedule":activity_id -> "activities":id
   "activity_state_peronnel":activity_id -> "activities":id
   "activity_state_personnel_yearly":personnel_id -> "activity_state_peronnel":id
+  "apd_key_personnel":apd_id -> "apds":id
+  "apd_key_personnel_years":apd_key_personnel_id -> "apd_key_personnel":id
   "apds":state_id -> "states":id
   "auth_role_activity_mapping":activity_id -> "auth_activities":id
   "auth_role_activity_mapping":role_id -> "auth_roles":id

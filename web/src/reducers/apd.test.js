@@ -37,13 +37,14 @@ describe('APD reducer', () => {
           programOverview: 'moop moop',
           narrativeHIT: 'HIT, but as a play',
           narrativeHIE: 'HIE, but as a novel',
-          narrativeMMIS: 'MMIS, but as a script'
+          narrativeMMIS: 'MMIS, but as a script',
+          years: 'the years for the APD'
         }
       })
     ).toEqual({
       data: {
         id: 'apd-id',
-        years: ['2018', '2019'],
+        years: 'the years for the APD',
         overview: 'moop moop',
         hitNarrative: 'HIT, but as a play',
         hieNarrative: 'HIE, but as a novel',
