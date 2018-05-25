@@ -18,12 +18,16 @@
   border-radius: var(--border-radius);
 }
 
+.rdw-emoji-modal {
+  height: auto;
+}
+
 .rdw-editor-main {
   overflow: inherit;
 }
 
 .DraftEditor-root {
-  height: 15rem;
+  height: 400px;
 }
 
 .public-DraftEditor-content {
