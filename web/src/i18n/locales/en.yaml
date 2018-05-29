@@ -240,9 +240,9 @@
   proposedBudget: 
     title: "Proposed Budget"
     helpText: "This itemized budget table has combined the costs for each activity into a single itemized table.
-    It is broken out by FFY, and shows the Total, Federal share, and state share. We have also included a proposed breakout of this same budget by FFY quarter in the second table."
+    It is broken out by FFY, and shows the Total, Federal share, and State share. We have also included a proposed breakout of this same budget by FFY quarter in the second table."
     summaryBudget: 
-      title: "Proposed Detailed Budget Table"
+      title: "Summary Budget Table"
     paymentsByFFYQuarter: 
       title: "Incentive Payments by FFY Quarter"
   assurancesAndCompliance: 
