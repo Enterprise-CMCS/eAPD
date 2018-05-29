@@ -52,8 +52,11 @@
 
         (1) Description of your state's HIE approach (statewide, sub-state
         health information office (HIOs), etc.);
+        
         (2) Anticipated risks and mitigation strategies;
+        
         (3) The short and long term value proposition to providers;
+        
         (4) The role of State government in governance and policy-setting.
 
 
@@ -169,7 +172,16 @@
       reminder: "“Miscellaneous expenses” from the drop down, includes materials and supplies, communications‐related expenses, printing costs and facilities expenses."
     costAllocate: 
       title: "Cost Allocation and Other Funding Sources"
-      helpText: "As specified in OMB Circular A‐87, a cost allocation plan must be included that identifies all participants and their associated cost allocation to depict non‐Medicaid activities and non‐Medicaid FTEs participating in this project, if any.\n\nHITECH cost allocation formulas should be based on the direct benefit to the Medicaid EHR Incentive Program, taking into account State projections of eligible Medicaid provider participation in the incentive program (leveraging actual data/experience as deemed appropriate).\n\nCost allocation must account for other available Federal funding sources, the division of resources and activities across relevant payers, and the relative benefit to the State Medicaid program, among other factors\n\nBe sure that cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested."
+      helpText: "As specified in OMB Circular A‐87, a cost allocation plan must be included that identifies all participants and their associated cost allocation to depict non‐Medicaid activities and non‐Medicaid FTEs participating in this project, if any.
+      
+      
+      HITECH cost allocation formulas should be based on the direct benefit to the Medicaid EHR Incentive Program, taking into account State projections of eligible Medicaid provider participation in the incentive program (leveraging actual data/experience as deemed appropriate).
+      
+      
+      Cost allocation must account for other available Federal funding sources, the division of resources and activities across relevant payers, and the relative benefit to the State Medicaid program, among other factors.
+      
+      
+      Be sure that cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested."
       methodology: 
         title: "Cost allocation methodology description"
         reminder: "Do not assume that the absence of other payers is sufficient cause for Medicaid to be the primary payer. Also, limit ambiguity about other potential federal funding sources; for example, if no CHIP funds are being requested, include a statement to that effect in this section."
@@ -227,9 +239,10 @@
         title: "Describe how you'll meet the Cost Minimization condition"
   proposedBudget: 
     title: "Proposed Budget"
-    helpText: "Please review the itemized budget, which has summed the funding requested for each activity specified.\n\nIt is broken out by FFY, and shows breakout of Federal Financial Participation (FFP), state match, and Total value (FFP + state match).\n\n We have also included a proposed breakout of this same budget by FFY quarter in the second table."
+    helpText: "This itemized budget table has combined the costs for each activity into a single itemized table.
+    It is broken out by FFY, and shows the Total, Federal share, and state share. We have also included a proposed breakout of this same budget by FFY quarter in the second table."
     summaryBudget: 
-      title: "Short Activity Summary Budget"
+      title: "Proposed Detailed Budget Table"
     paymentsByFFYQuarter: 
       title: "Incentive Payments by FFY Quarter"
   assurancesAndCompliance: 
