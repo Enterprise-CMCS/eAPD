@@ -82,6 +82,30 @@ const newActivity = (id, name = '') => ({
   }
 });
 
+export const getCategoryTotal = (entries, iteratee = x => x) =>
+  entries.reduce((accum, { years }) => {
+    const totals = accum;
+    YEAR_OPTIONS.forEach(yr => {
+      totals[yr] += +iteratee(years[yr]);
+    });
+    return totals;
+  }, arrToObj(YEAR_OPTIONS, 0));
+
+export const getAllCategoryTotal = activity => ({
+  statePersonnel: getCategoryTotal(activity.statePersonnel, d => d.amt),
+  contractors: getCategoryTotal(activity.contractorResources),
+  expenses: getCategoryTotal(activity.expenses)
+});
+
+export const getActivityTotal = activity =>
+  Object.values(getAllCategoryTotal(activity)).reduce((accum, vals) => {
+    const totals = accum;
+    YEAR_OPTIONS.forEach(yr => {
+      totals[yr] += vals[yr];
+    });
+    return totals;
+  }, arrToObj(YEAR_OPTIONS, 0));
+
 const initialState = {
   byId: {
     1: newActivity(1, 'Program Administration')

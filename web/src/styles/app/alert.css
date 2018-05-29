@@ -4,6 +4,11 @@
   border-radius: 3px;
 }
 
+.alert-success {
+  background-color: #e7f4e4;
+  border-color: #2e8540;
+}
+
 .alert-error {
   background-color: #f9dede;
   border-color: #e31c3d;
