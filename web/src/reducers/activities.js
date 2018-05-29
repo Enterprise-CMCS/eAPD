@@ -63,6 +63,7 @@ const newActivity = (id, name = '') => ({
   statePersonnel: [newStatePerson(1), newStatePerson(2), newStatePerson(3)],
   contractorResources: [newContractor(1), newContractor(2), newContractor(3)],
   expenses: [newExpense(1), newExpense(2), newExpense(3)],
+  costFFP: arrToObj(YEAR_OPTIONS, { fed: 90, state: 10, other: 0 }),
   standardsAndConditions: {
     modularity: '',
     mita: '',
