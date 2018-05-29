@@ -4,38 +4,33 @@ import { connect } from 'react-redux';
 
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { PercentInput } from '../components/Inputs';
+import { getActivityTotal } from '../reducers/activities';
 import { formatMoney } from '../util/formats';
 
-const ffpOptions = [
-  { id: 'fed', display: 'Fed' },
-  { id: 'state', display: 'State' },
-  { id: 'other', display: 'Other' }
-];
+const ffpDisplay = {
+  fed: 'Fed',
+  state: 'State',
+  other: 'Other'
+};
 
-const ActivityDetailCostAllocateFFP = ({
-  aId,
-  costFFP,
-  totals,
-  years,
-  updateActivity
-}) => (
+const ActivityDetailCostAllocateFFP = ({ aId, byYearData, updateActivity }) => (
   <div className="mb3">
     <h4>Federal Financial Partipation (FFP) and Cost Allocation</h4>
     <div className="clearfix mxn1">
-      {years.map(year => (
+      {byYearData.map(({ year, total, ffpLeft, ffpData }) => (
         <div key={year} className="col col-12 sm-col-4 px1">
           <div className="p2 bg-darken-1">
             <div>{year}</div>
-            <div className="h3 bold mono">{formatMoney(totals[year])}</div>
+            <div className="h3 bold mono">{formatMoney(total)}</div>
             <hr />
             <div className="flex mxn-tiny">
-              {ffpOptions.map(({ id, display }) => (
+              {ffpData.map(({ id, percent }) => (
                 <PercentInput
                   key={id}
                   name={`ffp-fed-${year}`}
-                  label={display}
+                  label={ffpDisplay[id]}
                   wrapperClass="px-tiny"
-                  defaultValue={costFFP[year][id]}
+                  value={percent}
                   onChange={e =>
                     updateActivity(aId, {
                       costFFP: { [year]: { [id]: e.target.value } }
@@ -44,14 +39,19 @@ const ActivityDetailCostAllocateFFP = ({
                 />
               ))}
             </div>
+            {ffpLeft !== 0 && (
+              <div className="mt2 p1 h6 alert alert-error">
+                {ffpLeft < 0
+                  ? `You're over by ${Math.abs(ffpLeft)}%`
+                  : `Please allocate an additional ${ffpLeft}%`}
+              </div>
+            )}
             <hr />
             <div className="flex mxn-tiny">
-              {ffpOptions.map(({ id, display }) => (
+              {ffpData.map(({ id, amount }) => (
                 <div key={id} className="col-12">
-                  <div>{display}</div>
-                  <div className="bold mono">
-                    {formatMoney(totals[year] * costFFP[year][id] / 100)}
-                  </div>
+                  <div>{ffpDisplay[id]}</div>
+                  <div className="bold mono">{formatMoney(amount)}</div>
                 </div>
               ))}
             </div>
@@ -64,51 +64,29 @@ const ActivityDetailCostAllocateFFP = ({
 
 ActivityDetailCostAllocateFFP.propTypes = {
   aId: PropTypes.number.isRequired,
-  costFFP: PropTypes.object.isRequired,
-  totals: PropTypes.object.isRequired,
-  years: PropTypes.array.isRequired,
+  byYearData: PropTypes.array.isRequired,
   updateActivity: PropTypes.func.isRequired
-};
-
-const sumEntriesByYear = (objArr, valFn = v => v) =>
-  objArr.reduce((acc, obj) => {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [year, value] of Object.entries(obj.years)) {
-      acc[year] = (acc[year] || 0) + +valFn(value);
-    }
-    return acc;
-  }, {});
-
-const combineTotals = (totals, keys) =>
-  keys.reduce((acc, yr) => {
-    acc[yr] = totals.map(d => d[yr] || 0).reduce((a, b) => a + b);
-    return acc;
-  }, {});
-
-const computeActivityGrandTotal = ({
-  contractorResources,
-  expenses,
-  statePersonnel
-}) => {
-  const statePeepTotal = sumEntriesByYear(statePersonnel, v => v.amt);
-  const contractorTotal = sumEntriesByYear(contractorResources);
-  const expenseTotal = sumEntriesByYear(expenses);
-
-  const combined = combineTotals(
-    [statePeepTotal, contractorTotal, expenseTotal],
-    Object.keys(statePeepTotal)
-  );
-
-  return combined;
 };
 
 const mapStateToProps = ({ activities: { byId } }, { aId }) => {
   const activity = byId[aId];
-  const { costFFP } = activity;
-  const totals = computeActivityGrandTotal(activity);
-  const years = Object.keys(totals);
+  const totals = getActivityTotal(activity);
 
-  return { activity, costFFP, totals, years };
+  const byYearData = Object.keys(totals).map(year => {
+    const total = totals[year];
+    const ffp = activity.costFFP[year];
+
+    const ffpLeft = 100 - Object.values(ffp).reduce((a, b) => a + b, 0);
+    const ffpData = Object.entries(ffp).map(([id, percent]) => ({
+      id,
+      percent,
+      amount: total * percent / 100
+    }));
+
+    return { year, total, ffpLeft, ffpData };
+  });
+
+  return { byYearData };
 };
 
 const mapDispatchToProps = {
