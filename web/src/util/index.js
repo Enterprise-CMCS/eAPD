@@ -1,5 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
+export const ACTIVITY_TYPES = ['HIT', 'HIE', 'MMIS'];
+
 export const YEAR_OPTIONS = ['2018', '2019', '2020'];
 
 export const STATES = [
