@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Icon from '@fortawesome/react-fontawesome';
 
 import { t } from '../i18n';
-import { faHelp, faBell, faSignOut } from '../components/Icons';
+import { faHelp, faSignOut } from '../components/Icons';
 import { logout } from '../actions/auth';
 
 class TopNav extends Component {
@@ -18,21 +18,17 @@ class TopNav extends Component {
     const { authenticated } = this.props;
 
     return (
-      <header className="clearfix py1 border-bottom border-silver">
+      <header className="clearfix py1 bg-white">
         <div className="sm-col">
-          <Link to="/" className="btn">
-            {t('title', { year: 2018 })}
+          <Link to="/" className="btn caps">
+            {t('title', { place: this.props.place.name, year: 2018 })}
           </Link>
         </div>
         <div className="sm-col-right h5">
           {authenticated ? (
             <div>
               <button type="button" className="btn h5 regular">
-                <span className="mr-tiny">{t('notifications')}</span>
-                <Icon icon={faBell} />
-              </button>
-              <button type="button" className="btn h5 regular">
-                <span className="mr-tiny">{t('notifications')}</span>
+                <span className="mr-tiny">{t('help')}</span>
                 <Icon icon={faHelp} />
               </button>
               <button
@@ -57,6 +53,7 @@ class TopNav extends Component {
 
 TopNav.propTypes = {
   authenticated: PropTypes.bool.isRequired,
+  place: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired
 };
 
