@@ -1,5 +1,6 @@
 ---
   title: "{{year}} {{place}} HITECH APD"
+  titleBasic: "HITECH APD"
   login: "Log in"
   logout: "Log out"
   notifications: "Notifications"
