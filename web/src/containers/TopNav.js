@@ -15,13 +15,15 @@ class TopNav extends Component {
   };
 
   render() {
-    const { authenticated } = this.props;
+    const { authenticated, place } = this.props;
 
     return (
-      <header className="clearfix py1 bg-white">
+      <header className="clearfix py1 bg-white border-bottom border-silver">
         <div className="sm-col">
           <Link to="/" className="btn caps">
-            {t('title', { place: this.props.place.name, year: 2018 })}
+            {place
+              ? t('title', { place: place.name, year: 2018 })
+              : t('titleBasic')}
           </Link>
         </div>
         <div className="sm-col-right h5">
@@ -53,8 +55,12 @@ class TopNav extends Component {
 
 TopNav.propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  place: PropTypes.object.isRequired,
+  place: PropTypes.object,
   logout: PropTypes.func.isRequired
+};
+
+TopNav.defaultProps = {
+  place: null
 };
 
 const mapStateToProps = ({ auth: { authenticated } }) => ({ authenticated });
