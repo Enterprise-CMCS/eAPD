@@ -17,7 +17,8 @@ const initialState = {
     overview: '',
     hitNarrative: '',
     hieNarrative: '',
-    mmisNarrative: ''
+    mmisNarrative: '',
+    previousActivitySummary: ''
   },
   fetching: false,
   loaded: false,
@@ -28,20 +29,32 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_APD_REQUEST:
       return { ...state, fetching: true, error: '' };
-    case GET_APD_SUCCESS:
+    case GET_APD_SUCCESS: {
+      const {
+        id,
+        years,
+        programOverview: overview,
+        narrativeHIT: hitNarrative,
+        narrativeHIE: hieNarrative,
+        narrativeMMIS: mmisNarrative,
+        previousActivitySummary
+      } = action.data;
+
       return {
         ...state,
         fetching: false,
         loaded: true,
         data: {
-          id: action.data.id,
-          years: action.data.years || firstTwoYears,
-          overview: action.data.programOverview,
-          hitNarrative: action.data.narrativeHIT,
-          hieNarrative: action.data.narrativeHIE,
-          mmisNarrative: action.data.narrativeMMIS
+          id,
+          overview,
+          hitNarrative,
+          hieNarrative,
+          mmisNarrative,
+          years: years || firstTwoYears,
+          previousActivitySummary: previousActivitySummary || ''
         }
       };
+    }
     case GET_APD_FAILURE:
       return { ...state, fetching: false, error: action.error };
     case UPDATE_APD:

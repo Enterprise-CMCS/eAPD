@@ -5,6 +5,7 @@
   logout: "Log out"
   notifications: "Notifications"
   help: "Help"
+  wip: "**Stay tuned!** This section is a work in progress."
   sidebar: 
     titles: 
       programSummary: "Program Summary"
@@ -27,18 +28,8 @@
       yearsCovered: "What year(s) does this APD cover?"
       labels: 
         desc: "Program Introduction"
-    keyPersonnel: 
-      title: "Key Personnel"
-      helpText: "This section includes any personnel associated with this APD, and includes their cost amount and percentage full-time equivalent (FTE)."
-      labels: 
-        entryNum: "#"
-        title: "Title"
-        desc: "Description"
-        yearCost: "{{year}} Cost"
-        costAmt: "Amount"
-        costPerc: "% FTE"
-      removeLabel: "Remove personnel"
-      addButtonText: "Add personnel"
+    previousActivitySummary:
+      title: Previous Activities Summary
     hit: 
       title: "HIT Overview"
       helpText: "Briefly summarize your planned HIT funded activities contained within this APD, we'll ask for more specific details later."
