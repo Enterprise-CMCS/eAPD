@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
-export const ACTIVITY_TYPES = ['HIT', 'HIE', 'MMIS'];
+export const ACTIVITY_FUNDING_SOURCES = ['HIT', 'HIE', 'MMIS'];
 
 export const YEAR_OPTIONS = ['2018', '2019', '2020'];
 

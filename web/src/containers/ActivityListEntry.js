@@ -3,28 +3,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity as updateActivityAction } from '../actions/activities';
-import { ACTIVITY_TYPES } from '../util';
+import { ACTIVITY_FUNDING_SOURCES } from '../util';
 
 class ActivityListEntry extends Component {
-  handleTypes = id => e => {
-    const { value } = e.target;
+  handleChange = field => e => {
     const { activity, updateActivity } = this.props;
-    const { types } = activity;
-
-    const newValue = types.includes(value)
-      ? types.filter(t => t !== value)
-      : [...types, value].sort();
-
-    updateActivity(id, { types: newValue });
-  };
-
-  handleName = id => e => {
-    this.props.updateActivity(id, { name: e.target.value });
+    updateActivity(activity.id, { [field]: e.target.value });
   };
 
   render() {
     const { activity, num } = this.props;
-    const { id } = activity;
+    const { name, fundingSource } = activity;
 
     return (
       <div className="flex items-center mb1">
@@ -33,19 +22,19 @@ class ActivityListEntry extends Component {
           <input
             type="text"
             className="col-12 input m0"
-            value={activity.name}
-            onChange={this.handleName(id)}
+            value={name}
+            onChange={this.handleChange('name')}
             disabled={num === 1}
           />
         </div>
         <div>
-          {ACTIVITY_TYPES.map(option => (
+          {ACTIVITY_FUNDING_SOURCES.map(option => (
             <label key={option} className="mr1">
               <input
-                type="checkbox"
+                type="radio"
                 value={option}
-                checked={activity.types.includes(option)}
-                onChange={this.handleTypes(id)}
+                checked={fundingSource === option}
+                onChange={this.handleChange('fundingSource')}
                 disabled={num === 1}
               />
               {option}

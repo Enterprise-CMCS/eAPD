@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { getActivitiesCategoryTotals } from '../reducers/activities';
-import { ACTIVITY_TYPES, YEAR_OPTIONS } from '../util';
+import { ACTIVITY_FUNDING_SOURCES, YEAR_OPTIONS } from '../util';
 import { formatMoney } from '../util/formats';
 
 const categoryLookup = {
@@ -183,10 +183,9 @@ const aggregateObjectArrays = data =>
   }, {});
 
 const getDataByActivityType = activities =>
-  ACTIVITY_TYPES.reduce((obj, id) => {
-    // filter by activity type (this isn't great because we'll be
-    // double-counting activities that belong to 2+ types
-    const filtered = activities.filter(a => a.types.includes(id));
+  ACTIVITY_FUNDING_SOURCES.reduce((obj, id) => {
+    // filter by funding source
+    const filtered = activities.filter(a => a.fundingSource === id);
 
     // roll up amounts by category across activities
     const byCat = getActivitiesCategoryTotals(filtered);
