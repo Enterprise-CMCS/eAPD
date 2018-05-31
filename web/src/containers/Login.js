@@ -31,15 +31,15 @@ class Login extends Component {
 
     return (
       <Container>
-        <h1>Please log in.</h1>
-        <div className="mb3 sm-col-6 md-col-4">
+        <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-lightest-gray rounded">
+          <h1 className="mt0 h2">Please log in.</h1>
           {error && (
             <div className="mb2 p1 h6 alert alert-error">
               <strong>Sorry!</strong> Something went wrong. Please try again.
             </div>
           )}
           <form onSubmit={this.handleSubmit}>
-            <div className="mb3">
+            <div className="mb2">
               <label htmlFor="username">Email</label>
               <input
                 type="text"
@@ -49,7 +49,7 @@ class Login extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="mb3">
+            <div className="mb2">
               <label htmlFor="password">Password</label>
               <input
                 type="password"
