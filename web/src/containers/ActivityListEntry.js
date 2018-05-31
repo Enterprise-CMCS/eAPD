@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity as updateActivityAction } from '../actions/activities';
-
-const ACTIVITY_TYPES = ['HIT', 'HIE', 'MMIS'];
+import { ACTIVITY_TYPES } from '../util';
 
 class ActivityListEntry extends Component {
   handleTypes = id => e => {
