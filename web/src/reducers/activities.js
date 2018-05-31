@@ -48,10 +48,10 @@ const newExpense = id => ({
   years: arrToObj(YEAR_OPTIONS, 100)
 });
 
-const newActivity = (id, name = '', types = []) => ({
+const newActivity = (id, name = '', fundingSource = 'HIT') => ({
   id,
   name,
-  types,
+  fundingSource,
   descShort: '',
   descLong: '',
   altApproach: '',
@@ -84,8 +84,8 @@ const newActivity = (id, name = '', types = []) => ({
 
 const initialState = {
   byId: {
-    1: newActivity(1, 'Program Administration', ['HIT']),
-    2: newActivity(2, 'Test', ['HIE'])
+    1: newActivity(1, 'Program Administration', 'HIT'),
+    2: newActivity(2, 'Test', 'HIE')
   },
   allIds: [1, 2]
 };
@@ -255,7 +255,7 @@ const reducer = (state = initialState, action) => {
         byId[a.id] = {
           id: a.id,
           name: a.name,
-          types: ['HIT'], // TODO
+          fundingSource: 'HIT', // TODO
           descShort: '', // TODO
           descLong: a.description,
           altApproach: '', // TODO
