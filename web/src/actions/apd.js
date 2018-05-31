@@ -70,7 +70,7 @@ export const saveApd = () => (dispatch, state) => {
     const activity = activitiesByID[id];
     apd.activities.push({
       name: activity.name,
-      types: activity.types,
+      fundingSource: activity.fundingSource,
       summary: activity.descShort,
       description: activity.descLong,
       alternatives: activity.altApproach,
