@@ -28,8 +28,6 @@
       yearsCovered: "What year(s) does this APD cover?"
       labels: 
         desc: "Program Introduction"
-    previousActivitySummary:
-      title: Previous Activities Summary
     hit: 
       title: "HIT Overview"
       helpText: "Briefly summarize your planned HIT funded activities contained within this APD, we'll ask for more specific details later."
@@ -67,7 +65,8 @@
       This information is similar to the content from the IAPD template
       section: results of previous activities
     outline: 
-      title: "Prior Activities Outline"
+      title: Prior Activities Outline
+      label: Previous Activities Summary
     approvedExpenses: 
       title: "Approved Expenses"
     actualExpenses: 
