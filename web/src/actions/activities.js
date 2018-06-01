@@ -77,8 +77,9 @@ export const toggleActivitySection = id => ({
   id
 });
 
-export const updateActivity = (id, updates) => ({
+export const updateActivity = (id, updates, isExpense = false) => ({
   type: UPDATE_ACTIVITY,
   id,
-  updates
+  updates,
+  isExpense
 });
