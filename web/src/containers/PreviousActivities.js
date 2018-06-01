@@ -12,7 +12,7 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
   <Section id="prev-activities" resource="previousActivities">
     <Subsection resource="previousActivities.outline">
       <div className="mb-tiny bold">
-        {t('apd.previousActivitySummary.title')}
+        {t('previousActivities.outline.label')}
       </div>
       <RichText
         content={previousActivitySummary}
