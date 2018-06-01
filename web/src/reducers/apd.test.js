@@ -8,7 +8,8 @@ describe('APD reducer', () => {
       overview: '',
       hitNarrative: '',
       hieNarrative: '',
-      mmisNarrative: ''
+      mmisNarrative: '',
+      previousActivitySummary: ''
     },
     fetching: false,
     loaded: false,
@@ -48,7 +49,8 @@ describe('APD reducer', () => {
         overview: 'moop moop',
         hitNarrative: 'HIT, but as a play',
         hieNarrative: 'HIE, but as a novel',
-        mmisNarrative: 'MMIS, but as a script'
+        mmisNarrative: 'MMIS, but as a script',
+        previousActivitySummary: ''
       },
       fetching: false,
       loaded: true,
