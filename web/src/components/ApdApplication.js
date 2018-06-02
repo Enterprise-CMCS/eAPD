@@ -3,6 +3,7 @@ import React from 'react';
 // Wired-up components
 import Activities from '../containers/Activities';
 import ApdSummary from '../containers/ApdSummary';
+import ExecutiveSummary from '../containers/ExecutiveSummary';
 import PreviousActivities from '../containers/PreviousActivities';
 import Sidebar from '../containers/Sidebar';
 import TopNav from '../containers/TopNav';
@@ -10,7 +11,6 @@ import TopNav from '../containers/TopNav';
 // Static / WIP components
 import AssurancesAndCompliance from './AssurancesAndCompliance';
 import CertifyAndSubmit from './CertifyAndSubmit';
-import ExecutiveSummary from './ExecutiveSummary';
 import ProposedBudget from './ProposedBudget';
 
 const PLACE = { id: 'tx', name: 'Texas' };
