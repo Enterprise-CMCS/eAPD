@@ -1,4 +1,4 @@
-import { UPDATE_ACTIVITY } from '../actions/activities';
+import { UPDATE_BUDGET } from '../actions/activities';
 import { GET_APD_SUCCESS } from '../actions/apd';
 import { YEAR_OPTIONS } from '../util';
 
@@ -135,12 +135,12 @@ const buildBudget = wholeState => {
   return newState;
 };
 
-const reducer = (state = initialState(), action, wholeState) => {
+const reducer = (state = initialState(), action) => {
   switch (action.type) {
-    case UPDATE_ACTIVITY:
-      return action.isExpense ? buildBudget(wholeState, action) : state;
+    case UPDATE_BUDGET:
+      return buildBudget(action.state);
     case GET_APD_SUCCESS:
-      return buildBudget(wholeState, action);
+      return buildBudget(action.state);
     default:
       return state;
   }
