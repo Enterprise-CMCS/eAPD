@@ -1,19 +1,23 @@
+const { schema: { jsonResponse } } = require('./helpers');
+
 module.exports = {
   '/auth/login': {
     post: {
       description: 'Authenticate a user against the local database',
-      parameters: [
-        {
-          name: 'username',
-          in: 'body',
-          required: true
-        },
-        {
-          name: 'password',
-          in: 'body',
-          required: true
-        }
-      ],
+      requestBody: {
+        required: true,
+        content: jsonResponse({
+          type: 'object',
+          properties: {
+            username: {
+              type: 'string'
+            },
+            password: {
+              type: 'string'
+            }
+          }
+        })
+      },
       responses: {
         200: {
           description: 'Successful login',

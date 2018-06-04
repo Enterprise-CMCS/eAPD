@@ -10,7 +10,7 @@ const states = require('../states/openAPI');
 const { arrayOf } = require('./helpers').schema;
 
 module.exports = {
-  openapi: '3.0',
+  openapi: '3.0.0',
   info: {
     title: 'CMS HITECH APD API',
     description: 'The API for the CMS HITECH APD app.',
@@ -48,32 +48,129 @@ module.exports = {
             type: 'string',
             description: 'Activity name, unique within an APD'
           },
+          types: arrayOf({
+            type: 'string',
+            description:
+              'List of federal funding sources that apply to this activity'
+          }),
+          summary: {
+            type: 'string',
+            description: 'Short summary of the activity'
+          },
           description: {
             type: 'string',
             description: 'Activity description'
           },
-          otherFundingSources: {
+          alernatives: {
+            type: 'string',
+            description: 'Alternative considerations for the activity'
+          },
+
+          contractorResources: arrayOf({
             type: 'object',
+            description: 'Activity contractor resource',
+            properties: {
+              name: {
+                type: 'string',
+                description: 'Name of the contractor resource'
+              },
+              description: {
+                type: 'string',
+                description: 'Description'
+              },
+              start: {
+                type: 'string',
+                format: 'date-time',
+                description:
+                  'When the contractor resource will begin work; date only'
+              },
+              end: {
+                type: 'string',
+                format: 'date-time',
+                description:
+                  'When the contractor resource will end work; date only'
+              },
+              years: arrayOf({
+                type: 'object',
+                description:
+                  'Details of each year the contractor resource will be working',
+                properties: {
+                  year: {
+                    type: 'string',
+                    description: 'Year this detail applies to'
+                  },
+                  cost: {
+                    type: 'string',
+                    description: 'Contractor resource cost of the year'
+                  }
+                }
+              })
+            }
+          }),
+          costAllocation: {
+            type: 'object',
+            properties: {
+              methodology: {
+                type: 'string',
+                description: 'Description of the cost allocation methodology'
+              },
+              otherSources: {
+                type: 'string',
+                description: 'Description of other funding sources'
+              },
+              years: arrayOf({
+                type: 'object',
+                properties: {
+                  federal: {
+                    type: 'number',
+                    description:
+                      'Federal share for this activity for this year, from 0 to 1'
+                  },
+                  state: {
+                    type: 'number',
+                    description:
+                      'State share for this activity for this year, from 0 to 1'
+                  },
+                  other: {
+                    type: 'number',
+                    description:
+                      'Other share for this activity for this year, from 0 to 1'
+                  },
+                  year: {
+                    type: 'number',
+                    description:
+                      'Federal fiscal year this cost allocation applies to'
+                  }
+                }
+              })
+            }
+          },
+          goals: arrayOf({
+            type: 'object',
+            description: 'Activity goal',
             properties: {
               description: {
                 type: 'string',
-                description:
-                  'Description of the other funding sources for this activity'
+                description: 'Goal description'
               },
-              amount: {
-                type: 'number',
-                description:
-                  'The total funding provided by the other sources described here'
+              objective: {
+                type: 'string',
+                description: 'Goal objective'
               }
             }
-          },
+          }),
           expenses: arrayOf({
             type: 'object',
             description: 'Activity expense',
             properties: {
-              name: {
+              category: {
                 type: 'string',
-                description: 'Expense name'
+                description:
+                  'Expense category, such as "Hardware, software, and licensing"'
+              },
+              description: {
+                type: 'string',
+                description: 'Short description of the expense'
               },
               entries: arrayOf({
                 type: 'object',
@@ -84,28 +181,10 @@ module.exports = {
                     description: 'Expense entry year'
                   },
                   amount: {
-                    type: 'decimal',
+                    type: 'number',
                     description: 'Expense entry amount'
-                  },
-                  description: {
-                    type: 'string',
-                    description: 'Expense entry description'
                   }
                 }
-              })
-            }
-          }),
-          goals: arrayOf({
-            type: 'object',
-            description: 'Activity goal',
-            properties: {
-              description: {
-                type: 'string',
-                description: 'Goal description'
-              },
-              objectives: arrayOf({
-                type: 'string',
-                description: 'Goal objective'
               })
             }
           }),
@@ -145,6 +224,41 @@ module.exports = {
                 description: 'The status of the milestone'
               }
             }
+          }),
+          standardsAndConditions: {
+            type: 'object'
+          },
+          statePersonnel: arrayOf({
+            type: 'object',
+            properties: {
+              title: {
+                type: 'string',
+                description: 'Title for the state personnel'
+              },
+              description: {
+                type: 'string',
+                description: 'Description of the role'
+              },
+              years: arrayOf({
+                type: 'object',
+                properties: {
+                  cost: {
+                    type: 'string',
+                    description: `This personnel's cost for the given federal fiscal year`
+                  },
+                  fte: {
+                    type: 'string',
+                    description:
+                      'Percent of time this personnel is dedicating to the activity'
+                  },
+                  year: {
+                    type: 'string',
+                    description:
+                      'Federal fiscal year this information applies to'
+                  }
+                }
+              })
+            }
           })
         }
       },
@@ -155,32 +269,23 @@ module.exports = {
             type: 'number',
             description: 'APD ID'
           },
+          activities: {
+            $ref: '#/components/schemas/activity'
+          },
+          narrativeHIE: { type: 'string', description: '' },
+          narrativeHIT: { type: 'string', description: '' },
+          narrativeMMIS: { type: 'string', description: '' },
+          programOverview: {
+            type: 'string',
+            description: 'An overview of the overall program'
+          },
           status: {
             type: 'string',
             description: 'Status'
           },
-          period: {
-            type: 'string',
-            description: 'Covered time period'
-          },
-          created_at: {
-            type: 'string',
-            format: 'date-time',
-            description: 'Creation date'
-          },
-          updated_at: {
-            type: 'string',
-            format: 'date-time',
-            description: 'Last updated date'
-          },
-          approved_at: {
-            type: 'string',
-            format: 'date-time',
-            description: 'Approval date'
-          },
-          activities: {
-            $ref: '#/components/schemas/activity'
-          }
+          years: arrayOf({
+            type: 'number'
+          })
         }
       },
       state: {
