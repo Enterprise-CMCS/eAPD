@@ -38,12 +38,12 @@ module.exports = {
         const value = attr[field];
         const outField = field.replace(/([A-Z])/g, m => `_${m.toLowerCase()}`);
 
-        if (field === 'otherFundingSources') {
-          if (value.description) {
-            out.other_funding_sources_description = value.description;
+        if (field === 'costAllocationNarrative') {
+          if (value.methodology) {
+            out.cost_allocation_methodology = value.methodology;
           }
-          if (value.amount) {
-            out.other_funding_sources_amount = value.amount;
+          if (value.otherSources) {
+            out.other_funding_sources_description = value.otherSources;
           }
         } else if (
           // stringify the types and standardsAndConditions fields,
@@ -58,6 +58,7 @@ module.exports = {
           out[outField] = value;
         }
 
+        // console.log(out);
         return out;
       }, {}),
 
@@ -67,8 +68,7 @@ module.exports = {
         'summary',
         'description',
         'alternatives',
-        'costAllocationMethodology',
-        'otherFundingSources',
+        'costAllocationNarrative',
         'types',
         'standardsAndConditions'
       ],
@@ -126,12 +126,11 @@ module.exports = {
         expenses: this.related('expenses'),
         schedule: this.related('schedule'),
         statePersonnel: this.related('statePersonnel'),
-        costAllocationMethodology: this.get('cost_allocation_methodology'),
-        costAllocation: this.related('costAllocation'),
-        otherFundingSources: {
-          description: this.get('other_funding_sources_description'),
-          amount: this.get('other_funding_sources_amount')
+        costAllocationNarrative: {
+          methodology: this.get('cost_allocation_methodology'),
+          otherSources: this.get('other_funding_sources_description')
         },
+        costAllocation: this.related('costAllocation'),
         standardsAndConditions: this.get('standards_and_conditions')
       };
     }
