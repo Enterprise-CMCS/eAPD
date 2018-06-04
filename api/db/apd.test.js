@@ -5,6 +5,9 @@ const apd = require('./apd')();
 
 tap.test('apd data model', async apdModelTests => {
   apdModelTests.test('setup', async setupTests => {
+    console.log('----');
+    console.log(apd);
+    console.log('----');
     setupTests.match(
       apd,
       {
@@ -29,7 +32,6 @@ tap.test('apd data model', async apdModelTests => {
             },
             withRelated: [
               { activities: Function },
-              'activities.approaches',
               'activities.contractorResources',
               'activities.contractorResources.years',
               'activities.goals',

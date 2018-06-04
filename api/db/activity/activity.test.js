@@ -13,7 +13,6 @@ tap.test('activity data model', async activityModelTests => {
 
           apd: Function,
           goals: Function,
-          approaches: Function,
           contractorResources: Function,
           expenses: Function,
           schedule: Function,
@@ -34,7 +33,6 @@ tap.test('activity data model', async activityModelTests => {
             ],
             owns: {
               goals: 'apdActivityGoal',
-              approaches: 'apdActivityApproach',
               contractorResources: 'apdActivityContractorResource',
               expenses: 'apdActivityExpense',
               schedule: 'apdActivitySchedule',
@@ -43,7 +41,6 @@ tap.test('activity data model', async activityModelTests => {
             },
             foreignKey: 'activity_id',
             withRelated: [
-              'approaches',
               'contractorResources',
               'contractorResources.years',
               'goals',
@@ -93,23 +90,6 @@ tap.test('activity data model', async activityModelTests => {
           'sets up the relationship mapping to goal'
         );
         apdTests.equal(output, 'bag', 'returns the expected value');
-      }
-    );
-
-    relationshipTests.test(
-      'activity model sets up approaches relationship',
-      async apdTests => {
-        const self = {
-          hasMany: sinon.stub().returns('starsky')
-        };
-
-        const output = activity.apdActivity.approaches.bind(self)();
-
-        apdTests.ok(
-          self.hasMany.calledWith('apdActivityApproach'),
-          'sets up the relationship mapping to approach'
-        );
-        apdTests.equal(output, 'starsky', 'returns the expected value');
       }
     );
 
@@ -335,7 +315,6 @@ tap.test('activity data model', async activityModelTests => {
         .returns('nobody reads them');
 
       self.related.withArgs('goals').returns('goooooaaaaals');
-      self.related.withArgs('approaches').returns('quietly from the left');
 
       const output = activity.apdActivity.toJSON.bind(self)();
 
@@ -353,7 +332,6 @@ tap.test('activity data model', async activityModelTests => {
             amount: '37¢ and some lint'
           },
           goals: 'goooooaaaaals',
-          approaches: 'quietly from the left',
           types: 'on a typewriter',
           standardsAndConditions: 'nobody reads them'
         },
