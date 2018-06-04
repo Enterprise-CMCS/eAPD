@@ -112,7 +112,6 @@ tap.test(
                 id: 4100,
                 name: 'Find Success',
                 description: 'Some text goes here',
-                approaches: [],
                 expenses: [],
                 goals: [
                   {
