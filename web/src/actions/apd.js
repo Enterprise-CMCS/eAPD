@@ -74,11 +74,18 @@ export const saveApd = () => (dispatch, state) => {
       summary: activity.descShort,
       description: activity.descLong,
       alternatives: activity.altApproach,
-      costAllocationMethodology: activity.costAllocateDesc,
-      otherFundingSources: {
-        description: activity.otherFundingDesc,
-        amount: +activity.otherFundingAmt || 0
+      costAllocationNarrative: {
+        methodology: activity.costAllocateDesc,
+        otherSources: activity.otherFundingDesc
       },
+      costAllocation: Object.entries(activity.costFFP).map(
+        ([year, allocation]) => ({
+          federal: +allocation.fed / 100,
+          state: +allocation.state / 100,
+          other: +allocation.other / 100,
+          year
+        })
+      ),
       goals: activity.goals.map(g => ({
         description: g.desc,
         objectives: [{ description: g.obj }] // TODO - objective should mape 1:1 to goals, instead of being an array (needs backend change first)
