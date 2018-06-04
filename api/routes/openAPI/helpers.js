@@ -44,7 +44,7 @@ module.exports.requiresAuth = (
   Object.keys(authed).forEach(route => {
     Object.keys(authed[route]).forEach(verb => {
       if (has403) {
-        authed[route][verb].security = ['sessionCookie'];
+        authed[route][verb].security = [{ sessionCookie: [] }];
       }
 
       const authResponses = { ...module.exports.responses.unauthed };

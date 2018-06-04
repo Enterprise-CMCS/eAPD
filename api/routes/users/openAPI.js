@@ -31,23 +31,23 @@ const openAPI = {
     },
     post: {
       description: 'Add a new user to the system',
-      parameters: [
-        {
-          name: 'email',
-          in: 'body',
-          type: 'string',
-          format: 'email',
-          description: "The new user's email address",
-          required: true
-        },
-        {
-          name: 'password',
-          in: 'body',
-          type: 'string',
-          description: "The new user's password",
-          required: true
-        }
-      ],
+      requestBody: {
+        content: jsonResponse({
+          type: 'object',
+          properties: {
+            email: {
+              type: 'string',
+              format: 'email',
+              description: `The new user's email address`
+            },
+            password: {
+              type: 'string',
+              description: `The new user's password`
+            }
+          },
+          required: ['email', 'password']
+        })
+      },
       responses: {
         200: {
           description: 'The user was successfully added'
@@ -68,7 +68,10 @@ const openAPI = {
           name: 'id',
           in: 'path',
           description: 'The ID of the user to delete',
-          required: true
+          required: true,
+          schema: {
+            type: 'integer'
+          }
         }
       ],
       responses: {
@@ -90,7 +93,10 @@ const openAPI = {
           name: 'id',
           in: 'path',
           description: 'The ID of the user to fetch',
-          required: true
+          required: true,
+          schema: {
+            type: 'integer'
+          }
         }
       ],
       responses: {

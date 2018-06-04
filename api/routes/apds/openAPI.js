@@ -26,7 +26,10 @@ const openAPI = {
           name: 'id',
           in: 'path',
           description: 'The ID of the apd to update',
-          required: true
+          required: true,
+          schema: {
+            type: 'number'
+          }
         }
       ],
       requestBody: {
