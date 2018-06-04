@@ -58,7 +58,6 @@ module.exports = {
           out[outField] = value;
         }
 
-        // console.log(out);
         return out;
       }, {}),
 
