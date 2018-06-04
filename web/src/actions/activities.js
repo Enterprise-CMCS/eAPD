@@ -13,6 +13,7 @@ export const REMOVE_ACTIVITY_MILESTONE = 'REMOVE_ACTIVITY_MILESTONE';
 export const REMOVE_ACTIVITY_STATE_PERSON = 'REMOVE_ACTIVITY_STATE_PERSON';
 export const TOGGLE_ACTIVITY_SECTION = 'TOGGLE_ACTIVITY_SECTION';
 export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY';
+export const UPDATE_BUDGET = 'UPDATE_BUDGET';
 
 export const addActivity = () => ({ type: ADD_ACTIVITY });
 
@@ -77,9 +78,16 @@ export const toggleActivitySection = id => ({
   id
 });
 
-export const updateActivity = (id, updates, isExpense = false) => ({
-  type: UPDATE_ACTIVITY,
-  id,
-  updates,
-  isExpense
-});
+export const updateActivity = (id, updates, isExpense = false) => (
+  dispatch,
+  getState
+) => {
+  dispatch({
+    type: UPDATE_ACTIVITY,
+    id,
+    updates
+  });
+  if (isExpense) {
+    dispatch({ type: UPDATE_BUDGET, state: getState() });
+  }
+};
