@@ -179,16 +179,16 @@ tap.test('APD-related middleware', async middlewareTests => {
   });
 
   middlewareTests.test('user can edit apd', async editApdTests => {
+    const apdFromDb = {
+      get: sandbox.stub()
+    };
+
     editApdTests.beforeEach(async () => {
       OtherModel.where.returns(OtherModel);
       OtherModel.fetch.resolves({
-        related: sandbox.stub().returns({
-          get: sandbox
-            .stub()
-            .withArgs('id')
-            .returns('florp')
-        })
+        related: sandbox.stub().returns(apdFromDb)
       });
+      apdFromDb.get.withArgs('id').returns('florp');
     });
 
     editApdTests.test(
@@ -207,9 +207,28 @@ tap.test('APD-related middleware', async middlewareTests => {
       }
     );
 
+    editApdTests.test('sends a 400 if the APD is not editable', async test => {
+      const req = {
+        user: { model: { apds: sandbox.stub().resolves(['florp', 2, 3]) } },
+        meta: {},
+        params: { 'apd-id': 'florp' }
+      };
+
+      await middleware.userCanEditAPD(OtherModel, 'apd-id')(req, res, next);
+
+      test.ok(res.status.calledWith(400), 'HTTP status is set to 400');
+      test.ok(
+        res.send.calledWith({ error: 'apd-not-editable' }),
+        'sends error token'
+      );
+      test.ok(res.end.calledOnce, 'response is closed');
+      test.ok(next.notCalled, 'next is not called');
+    });
+
     editApdTests.test(
       'passes if the user has access to the APD',
       async validTest => {
+        apdFromDb.get.withArgs('status').returns('draft');
         const req = {
           user: { model: { apds: sandbox.stub().resolves(['florp', 2, 3]) } },
           meta: {},
