@@ -24,7 +24,7 @@
     overview: 
       title: "Program Overview"
       helpText: "Provide a high level summary of your state's program, history, and future vision."
-      reminder: "Indicate the Federal Fiscal Years for which this APD is requesting funding."
+      reminder: "Indicate the federal fiscal years for which this APD is requesting funding."
       yearsCovered: "What year(s) does this APD cover?"
       labels: 
         desc: "Program Introduction"
@@ -72,11 +72,11 @@
       helpText: "Input the most recent actual expenses."
   activities: 
     title: "Program Activities"
-    helpText: "Please individually identify the activities referenced from the overview section. We'll collect information for each activity."
+    helpText: "Identify each of the activities referenced from the overview section. We'll collect information for each activity."
     list: 
       title: "Activity List"
       helpText: "Examples of individual activities include: Auditing, Outreach, Environmental Scans, HIE Registry Development, CQM Database Development, Data and Analytics, HIE Onboarding, etc."
-      reminder: "Please Note: The first activity in this list is Program Administration. Program Administration is where you should include information that pertains to implementing the EHR Incentive program. Examples of information that belongs within this activity includes: State and Contractor costs associated with operating the EHR incentive program and SLR Enhancements/Upgrades."
+      reminder: "The first activity in this list is Program Administration. Program Administration is where you should include information that pertains to implementing the EHR Incentive program. Examples of information that belongs within this activity includes: State and Contractor costs associated with operating the EHR incentive program and SLR Enhancements/Upgrades."
     addActivityButtonText: "Add activity"
     deleteActivityButtonText: "Remove Activity"
     noActivityMessage: "It looks like you don’t have any activities. Please add one below."
@@ -89,15 +89,15 @@
     namePrefix: "Activity"
     description: 
       title: "Activity Description"
-      helpText: "Describe at a high level the needs of the activity for which requested funding will be used (e.g. Administrative, Outreach, Auditing, Public Health Registry Development, etc)"
-      reminder: "Please Note, this section is limited to 280 characters or less"
+      helpText: "Summarize the needs of the activity for which requested funding will be used (e.g. administrative, outreach, auditing, Public Health Registry Development, etc)"
+      reminder: "Note: This section is limited to 280 characters or less"
       summary: 
         subheader: "Brief Activity Summary"
       detail: 
-        subheader: "Describe the activity in detail including images, diagrams, and other pertinant content."
+        subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
       alternatives: 
         subheader: "Statement of alternative considerations and supporting justification"
-        helpText: "If no substantive changes have been made to this activity, include a statement that refers back to the Statement of Alternative Considerations contained in previous versions of the IAPD or in the SMHP. If substantive changes have been made, include a statement describing the alternatives that the state considered when making the change."
+        helpText: "If no substantive changes have been made to this activity, include a statement that refers to the Statement of Alternative Considerations contained in previous versions of the IAPD or in the SMHP. If substantive changes have been made, include a statement describing the alternatives your state considered when making the change."
         reminder: "Remember to update the SMHP as necessary with any substantive changes to the approach for implementing EHR incentives."
     goals: 
       title: "Needs and Objectives"
@@ -108,11 +108,11 @@
         title: "Goal #{{number}}"
       objective: 
         title: "Objective (How the you'll achieve the goal)"
-        helpText: "Include a brief description of how the state will measure progress toward each goal identified."
+        helpText: "Include a brief description of how your state will measure progress toward each goal identified."
       addGoalButtonText: "Add goal"
     schedule: 
       title: "Activity Schedule"
-      subheader: "List major milestones you’re working towards as part of this activity."
+      subheader: "List major milestones your state is working towards as part of this activity."
       helpText: "Detail key activity milestones, including activities that have occurred under previously approved APDs."
       noMilestonesNotice: "Did you forget to add milestones? Please add milestones for this activity."
       milestoneHeader: "Milestone"
@@ -168,21 +168,21 @@
       HITECH cost allocation formulas should be based on the direct benefit to the Medicaid EHR Incentive Program, taking into account State projections of eligible Medicaid provider participation in the incentive program (leveraging actual data/experience as deemed appropriate).
       
       
-      Cost allocation must account for other available Federal funding sources, the division of resources and activities across relevant payers, and the relative benefit to the State Medicaid program, among other factors.
+      Cost allocation must account for other available federal funding sources, the division of resources and activities across relevant payers, and the relative benefit to the State Medicaid program, among other factors.
       
       
-      Be sure that cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested."
+     Ensure cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested."
       methodology: 
         title: "Cost allocation methodology description"
-        reminder: "Do not assume that the absence of other payers is sufficient cause for Medicaid to be the primary payer. Also, limit ambiguity about other potential federal funding sources; for example, if no CHIP funds are being requested, include a statement to that effect in this section."
+        reminder: "Do not assume that the absence of other payers is sufficient cause for Medicaid to be the primary payer. Limit ambiguity about other potential federal funding sources. For example, if no CHIP funds are being requested, include a statement to that effect in this section."
       otherFunding: 
         title: "Other funding description"
-        helpText: "Please account for any and all grant funding that is used to support this activity, and review the State Medicaid Director Letter 10‐016 for examples of grants that might need to be included."
-        reminder: "High level descriptions are appropriate for grant activities, however make sure that any new grants are included and any expired grants are removed."
+        helpText: "Account for any and all grant funding that is used to support this activity, and review the State Medicaid Director Letter 10‐016 for examples of grants that might need to be included."
+        reminder: "High level descriptions are appropriate for grant activities. Ensure any new grants are included and any expired grants are removed."
         amount: "Other funding amount"
     standardsAndConditions: 
       title: "Standards & Conditions"
-      subheader: "Please tell us how you'll meet the Medicaid standards and conditions for this activity."
+      subheader: "Describe us how you'll meet the Medicaid standards and conditions for this activity."
       modularity: 
         header: "Modularity"
         subheader: "This condition requires the use of a modular, flexible approach to systems development, including the use of open interfaces and exposed application programming interfaces (API); the separation of business rules from core programming; and the availability of business rules in both human and machine-readable formats. The commitment to formal system development methodology and open, reusable system architecture is extremely important in order to ensure that states can more easily change and maintain systems, as well as integrate and interoperate with a clinical and administrative ecosystem designed to deliver person-centric services and benefits. Modularity is breaking down systems requirements into component parts. Extremely complex systems can be developed as part of a service-oriented architecture (SOA). Modularity also helps address the challenges of customization. Baseline web services and capabilities can be developed for and used by anyone, with exceptions for specific business processes handled by a separate module that interoperates with the baseline modules. With modularity, changes can be made independently to the baseline capabilities without affecting how the extension works. By doing so, the design ensures that future iterations of software can be deployed without breaking custom functionality. A critical element of compliance with this condition is providing CMS with an understanding of where services and code will be tightly coupled, and where the state will pursue a more aggressive decoupling strategy."
@@ -229,15 +229,14 @@
         title: "Describe how you'll meet the Cost Minimization condition"
   proposedBudget: 
     title: "Proposed Budget"
-    helpText: "This itemized budget table has combined the costs for each activity into a single itemized table.
-    It is broken out by FFY, and shows the Total, Federal share, and State share. We have also included a proposed breakout of this same budget by FFY quarter in the second table."
+    helpText: "This itemized budget table has combined the costs for each activity into a single itemized table by federal fiscal year (FFY). The table displays total share, federal share, and state share. The second table also includes a proposed breakout of the budget by FFY quarter."
     summaryBudget: 
       title: "Summary Budget Table"
     paymentsByFFYQuarter: 
       title: "Incentive Payments by FFY Quarter"
   assurancesAndCompliance: 
     title: "Assurances and Compliance"
-    helpText: "Ensure that your state complies with all applicable Code of Federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
+    helpText: "Ensure that your state complies with all applicable Code of federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
     procurement: 
       title: "Procurement Standards"
     recordsAccess: 
