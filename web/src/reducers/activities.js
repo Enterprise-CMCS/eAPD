@@ -48,10 +48,10 @@ const newExpense = id => ({
   years: arrToObj(YEAR_OPTIONS, 100)
 });
 
-const newActivity = (id, name = '') => ({
+const newActivity = (id, name = '', fundingSource = 'HIT') => ({
   id,
   name,
-  types: [],
+  fundingSource,
   descShort: '',
   descLong: '',
   altApproach: '',
@@ -82,35 +82,12 @@ const newActivity = (id, name = '') => ({
   }
 });
 
-export const getCategoryTotal = (entries, iteratee = x => x) =>
-  entries.reduce((accum, { years }) => {
-    const totals = accum;
-    YEAR_OPTIONS.forEach(yr => {
-      totals[yr] += +iteratee(years[yr]);
-    });
-    return totals;
-  }, arrToObj(YEAR_OPTIONS, 0));
-
-export const getAllCategoryTotal = activity => ({
-  statePersonnel: getCategoryTotal(activity.statePersonnel, d => d.amt),
-  contractors: getCategoryTotal(activity.contractorResources),
-  expenses: getCategoryTotal(activity.expenses)
-});
-
-export const getActivityTotal = activity =>
-  Object.values(getAllCategoryTotal(activity)).reduce((accum, vals) => {
-    const totals = accum;
-    YEAR_OPTIONS.forEach(yr => {
-      totals[yr] += vals[yr];
-    });
-    return totals;
-  }, arrToObj(YEAR_OPTIONS, 0));
-
 const initialState = {
   byId: {
-    1: newActivity(1, 'Program Administration')
+    1: newActivity(1, 'Program Administration', 'HIT'),
+    2: newActivity(2, 'Test', 'HIE')
   },
-  allIds: [1]
+  allIds: [1, 2]
 };
 
 const reducer = (state = initialState, action) => {
@@ -278,7 +255,7 @@ const reducer = (state = initialState, action) => {
         byId[a.id] = {
           id: a.id,
           name: a.name,
-          types: ['HIT'], // TODO
+          fundingSource: 'HIT', // TODO
           descShort: '', // TODO
           descLong: a.description,
           altApproach: '', // TODO
@@ -368,3 +345,43 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
+
+// data munging / aggregation functions
+
+export const aggregateByYear = (
+  dataArray,
+  iteratee = x => x,
+  years = YEAR_OPTIONS
+) =>
+  dataArray.reduce((accum, datum) => {
+    const totals = accum;
+    years.forEach(yr => {
+      totals[yr] += +iteratee(datum[yr]);
+    });
+    return totals;
+  }, arrToObj(years, 0));
+
+export const getCategoryTotals = (entries, iteratee = x => x) =>
+  aggregateByYear(entries.map(e => e.years), iteratee);
+
+export const getActivityCategoryTotals = activity => ({
+  statePersonnel: getCategoryTotals(activity.statePersonnel, d => d.amt),
+  contractors: getCategoryTotals(activity.contractorResources),
+  expenses: getCategoryTotals(activity.expenses)
+});
+
+export const getActivitiesCategoryTotals = activities => {
+  const totalsByCat = activities.map(a => getActivityCategoryTotals(a));
+  const catNames = ['statePersonnel', 'contractors', 'expenses'];
+
+  return catNames.reduce((obj, cat) => {
+    obj[cat] = aggregateByYear(totalsByCat.map(t => t[cat])); // eslint-disable-line no-param-reassign
+    return obj;
+  }, {});
+};
+
+export const getActivityTotals = activity =>
+  aggregateByYear(Object.values(getActivityCategoryTotals(activity)));
+
+export const getActivitiesTotals = activities =>
+  aggregateByYear(activities.map(a => getActivityTotals(a)));

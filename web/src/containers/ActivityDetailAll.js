@@ -18,7 +18,7 @@ import { t } from '../i18n';
 const activityTitle = (a, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
   if (a.name) title += `: ${a.name}`;
-  if (a.types.length) title += ` (${a.types.join(', ')})`;
+  if (a.fundingSource) title += ` (${a.fundingSource})`;
   return title;
 };
 

@@ -3,15 +3,15 @@ import React from 'react';
 // Wired-up components
 import Activities from '../containers/Activities';
 import ApdSummary from '../containers/ApdSummary';
+import PreviousActivities from '../containers/PreviousActivities';
 import Sidebar from '../containers/Sidebar';
+import TopNav from '../containers/TopNav';
 
 // Static / WIP components
 import AssurancesAndCompliance from './AssurancesAndCompliance';
 import CertifyAndSubmit from './CertifyAndSubmit';
 import ExecutiveSummary from './ExecutiveSummary';
-import PreviousActivities from './PreviousActivities';
 import ProposedBudget from './ProposedBudget';
-import TopNav from './TopNav';
 
 const PLACE = { id: 'tx', name: 'Texas' };
 
