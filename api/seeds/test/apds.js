@@ -14,6 +14,11 @@ exports.seed = async knex => {
       id: 4001,
       state_id: 'az',
       status: 'draft'
+    },
+    {
+      id: 4002,
+      state_id: 'mn',
+      status: 'not draft'
     }
   ]);
 
