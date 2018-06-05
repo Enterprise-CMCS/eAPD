@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { PercentInput } from '../components/Inputs';
-import { getActivityTotal } from '../reducers/activities';
+import { getActivityTotals } from '../reducers/activities';
 import { formatMoney } from '../util/formats';
 
 const ffpDisplay = {
@@ -70,7 +70,7 @@ ActivityDetailCostAllocateFFP.propTypes = {
 
 const mapStateToProps = ({ activities: { byId } }, { aId }) => {
   const activity = byId[aId];
-  const totals = getActivityTotal(activity);
+  const totals = getActivityTotals(activity);
 
   const byYearData = Object.keys(totals).map(year => {
     const total = totals[year];

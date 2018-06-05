@@ -8,7 +8,9 @@ describe('i18n translations', () => {
   });
 
   test('t function', () => {
-    expect(t('title', { year: 2018 })).toBe('2018 HITECH APD');
+    expect(t('title', { place: 'Tortuga', year: 2018 })).toBe(
+      '2018 Tortuga HITECH APD'
+    );
     expect(t('nonsense')).toBe('[missing "en.nonsense" translation]');
   });
 

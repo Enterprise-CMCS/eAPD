@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BudgetSummary from './BudgetSummary';
 import { Section, Subsection } from './Section';
+import BudgetSummary from '../containers/BudgetSummary';
 
 const ProposedBudget = () => (
   <Section id="budget" resource="proposedBudget">
