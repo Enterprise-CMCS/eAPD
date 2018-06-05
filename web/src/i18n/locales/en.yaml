@@ -59,18 +59,17 @@
       helpText: "Briefly summarize your planned MMIS funded activities contained within this APD, if you don't have any MMIS activities you can skip this section."
   previousActivities: 
     title: "Results of Previous Activities"
-    helpText: >-
-      Please include a description of the results of previously approved activities.
-
-      This information is similar to the content from the IAPD template
-      section: results of previous activities
+    helpText: "Include a description of the results of previously approved activities. This information is similar to the content from the IAPD template section: results of previous activities."
     outline: 
       title: Prior Activities Outline
+      helpText: "Include a high level description of the activities approved in the previous APD that are completed, in-progress, or on-hold."
       label: Previous Activities Summary
     approvedExpenses: 
-      title: "Approved Expenses"
+      title: "Approved Costs"
+      helpText: "Input the most recent approved costs."
     actualExpenses: 
       title: "Actual Expenses"
+      helpText: "Input the most recent actual expenses."
   activities: 
     title: "Program Activities"
     helpText: "Please individually identify the activities referenced from the overview section. We'll collect information for each activity."
