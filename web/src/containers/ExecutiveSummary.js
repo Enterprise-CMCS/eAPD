@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { Section, Subsection } from '../components/Section';
 import StayTuned from '../components/StayTuned';
+import { t } from '../i18n';
 import { aggregateByYear, getActivityTotals } from '../reducers/activities';
 import { formatMoney } from '../util/formats';
 
@@ -16,13 +17,18 @@ const ExecutiveSummary = ({ data, years }) => (
           className="mb2 p2 sm-flex items-center alert alert-success"
         >
           <div className="p1 sm-m0 flex-auto">
-            {d.id !== 'all' && <div className="h5">Activity {i + 1}</div>}
+            {d.id !== 'all' && (
+              <div className="h5">
+                {t('activities.namePrefixAndNum', { number: i + 1 })}
+              </div>
+            )}
             <div className="h3 bold">{d.name}</div>
+            {d.descShort && <div>{d.descShort}</div>}
           </div>
           <div className="sm-flex sm-col-5">
             {years.map(year => (
               <div key={year} className="p1 flex-auto">
-                <div className="h5">FFY {year}</div>
+                <div className="h5">{t('ffy', { year })}</div>
                 <div className="h3 mono bold">
                   {formatMoney(d.totals[year])}
                 </div>
@@ -49,12 +55,14 @@ const mapStateToProps = ({ activities, apd }) => {
   const data = activitiesArray.map(a => ({
     id: a.id,
     name: a.name,
+    descShort: a.descShort,
     totals: getActivityTotals(a)
   }));
 
   data.push({
     id: 'all',
     name: 'Total Cost',
+    descShort: null,
     totals: aggregateByYear(data.map(d => d.totals))
   });
 
