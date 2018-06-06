@@ -95,9 +95,22 @@ module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') =>
         // ...then get a list of APDs this user is associated with
         const userApds = await req.user.model.apds();
 
-        // ...and make sure there's overlap
+        // Make sure there's overlap
         if (userApds.includes(req.meta.apd.get('id'))) {
-          next();
+          if (req.meta.apd.get('status') === 'draft') {
+            next();
+          } else {
+            logger.verbose(
+              req,
+              `apd status is [${req.meta.apd.get('status')}], not editable`
+            );
+            res
+              .status(400)
+              .send({
+                error: 'apd-not-editable'
+              })
+              .end();
+          }
         } else {
           logger.verbose(req, 'user does not have access to the APD');
           res.status(404).end();

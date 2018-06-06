@@ -2,7 +2,6 @@ exports.seed = async knex => {
   // These need to be deleted in a particular order to handle
   // relationships between them, otherwise we get a key
   // constraint violation.
-
   await knex('activity_contractor_resources_yearly').del();
   await knex('activity_contractor_resources').del();
 
@@ -19,6 +18,7 @@ exports.seed = async knex => {
 
   await knex('activities').del();
 
+  await knex('apd_versions').del();
   await knex('apds').del();
 
   await knex('users').del();

@@ -2,12 +2,14 @@ const logger = require('../../logger')('apds route index');
 const get = require('./get');
 const put = require('./put');
 const activities = require('./activities');
+const versions = require('./versions/post');
 
 module.exports = (
   app,
   getEndpoint = get,
   putEndpoint = put,
-  activitiesEndpoints = activities
+  activitiesEndpoints = activities,
+  versionsEndpoints = versions
 ) => {
   logger.silly('setting up GET endpoint');
   getEndpoint(app);
@@ -16,4 +18,7 @@ module.exports = (
 
   logger.silly('setting up APD activities endpoints');
   activitiesEndpoints(app);
+
+  logger.silly('setting up APD versions endpoints');
+  versionsEndpoints(app);
 };
