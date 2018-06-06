@@ -1,3 +1,5 @@
+import { updateBudget } from './apd';
+
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
 export const ADD_ACTIVITY_CONTRACTOR = 'ADD_ACTIVITY_CONTRACTOR';
 export const ADD_ACTIVITY_GOAL = 'ADD_ACTIVITY_GOAL';
@@ -13,28 +15,27 @@ export const REMOVE_ACTIVITY_MILESTONE = 'REMOVE_ACTIVITY_MILESTONE';
 export const REMOVE_ACTIVITY_STATE_PERSON = 'REMOVE_ACTIVITY_STATE_PERSON';
 export const TOGGLE_ACTIVITY_SECTION = 'TOGGLE_ACTIVITY_SECTION';
 export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY';
-export const UPDATE_BUDGET = 'UPDATE_BUDGET';
 
-export const addActivity = () => ({ type: ADD_ACTIVITY });
+const actionWithYears = (type, other) => (dispatch, getState) =>
+  dispatch({ type, ...other, years: getState().apd.data.years });
 
-export const addActivityContractor = id => ({
-  type: ADD_ACTIVITY_CONTRACTOR,
-  id
-});
+export const addActivity = () => actionWithYears(ADD_ACTIVITY);
+
+export const addActivityContractor = id =>
+  actionWithYears(ADD_ACTIVITY_CONTRACTOR, { id });
 
 export const addActivityGoal = id => ({ type: ADD_ACTIVITY_GOAL, id });
 
-export const addActivityExpense = id => ({ type: ADD_ACTIVITY_EXPENSE, id });
+export const addActivityExpense = id =>
+  actionWithYears(ADD_ACTIVITY_EXPENSE, { id });
 
 export const addActivityMilestone = id => ({
   type: ADD_ACTIVITY_MILESTONE,
   id
 });
 
-export const addActivityStatePerson = id => ({
-  type: ADD_ACTIVITY_STATE_PERSON,
-  id
-});
+export const addActivityStatePerson = id =>
+  actionWithYears(ADD_ACTIVITY_STATE_PERSON, { id });
 
 export const expandActivitySection = id => ({
   type: EXPAND_ACTIVITY_SECTION,
@@ -78,16 +79,13 @@ export const toggleActivitySection = id => ({
   id
 });
 
-export const updateActivity = (id, updates, isExpense = false) => (
-  dispatch,
-  getState
-) => {
+export const updateActivity = (id, updates, isExpense = false) => dispatch => {
   dispatch({
     type: UPDATE_ACTIVITY,
     id,
     updates
   });
   if (isExpense) {
-    dispatch({ type: UPDATE_BUDGET, state: getState() });
+    dispatch(updateBudget());
   }
 };

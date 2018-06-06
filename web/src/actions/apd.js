@@ -9,6 +9,10 @@ export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
 export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
 export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
 export const UPDATE_APD = 'UPDATE_APD';
+export const UPDATE_BUDGET = 'UPDATE_BUDGET';
+
+export const updateBudget = () => (dispatch, getState) =>
+  dispatch({ type: UPDATE_BUDGET, state: getState() });
 
 export const requestApd = () => ({ type: GET_APD_REQUEST });
 export const receiveApd = data => ({ type: GET_APD_SUCCESS, data });
@@ -16,7 +20,12 @@ export const failApd = error => ({ type: GET_APD_FAILURE, error });
 
 export const addApdKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
 export const removeApdKeyPerson = id => ({ type: REMOVE_APD_KEY_PERSON, id });
-export const updateApd = updates => ({ type: UPDATE_APD, updates });
+export const updateApd = updates => dispatch => {
+  dispatch({ type: UPDATE_APD, updates });
+  if (updates.years) {
+    dispatch(updateBudget());
+  }
+};
 
 export const requestSave = () => ({ type: SAVE_APD_REQUEST });
 export const saveSuccess = () => ({ type: SAVE_APD_SUCCESS });
@@ -32,6 +41,7 @@ export const fetchApd = () => dispatch => {
     .then(req => {
       const apd = Array.isArray(req.data) ? req.data[0] : null;
       dispatch(receiveApd(apd));
+      dispatch(updateBudget());
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';

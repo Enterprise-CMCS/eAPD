@@ -2,8 +2,6 @@
 
 export const ACTIVITY_FUNDING_SOURCES = ['HIT', 'HIE', 'MMIS'];
 
-export const YEAR_OPTIONS = ['2018', '2019', '2020'];
-
 export const STATES = [
   { id: 'al', name: 'Alabama' },
   { id: 'ak', name: 'Alaska' },
