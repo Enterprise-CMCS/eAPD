@@ -69,7 +69,6 @@ module.exports = () => ({
       owns: { activities: 'apdActivity', keyPersonnel: 'apdKeyPersonnel' },
       withRelated: [
         { activities: query => query.orderBy('id') },
-        'activities.approaches',
         'activities.contractorResources',
         'activities.contractorResources.years',
         'activities.goals',

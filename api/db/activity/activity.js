@@ -12,10 +12,6 @@ module.exports = {
       return this.hasMany('apdActivityGoal');
     },
 
-    approaches() {
-      return this.hasMany('apdActivityApproach');
-    },
-
     contractorResources() {
       return this.hasMany('apdActivityContractorResource');
     },
@@ -78,7 +74,6 @@ module.exports = {
       ],
       owns: {
         goals: 'apdActivityGoal',
-        approaches: 'apdActivityApproach',
         contractorResources: 'apdActivityContractorResource',
         expenses: 'apdActivityExpense',
         schedule: 'apdActivitySchedule',
@@ -87,7 +82,6 @@ module.exports = {
       },
       foreignKey: 'activity_id',
       withRelated: [
-        'approaches',
         'contractorResources',
         'contractorResources.years',
         'goals',
@@ -128,7 +122,6 @@ module.exports = {
         description: this.get('description'),
         alternatives: this.get('alternatives'),
         goals: this.related('goals'),
-        approaches: this.related('approaches'),
         contractorResources: this.related('contractorResources'),
         expenses: this.related('expenses'),
         schedule: this.related('schedule'),

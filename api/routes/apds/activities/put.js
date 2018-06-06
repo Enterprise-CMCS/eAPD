@@ -9,7 +9,6 @@ const {
 
 const putters = [
   null,
-  'approaches',
   'contractorResources',
   'costAllocation',
   'expenses',
