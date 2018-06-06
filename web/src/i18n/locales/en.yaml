@@ -6,6 +6,7 @@
   notifications: "Notifications"
   help: "Help"
   wip: "**Stay tuned!** This section is a work in progress."
+  ffy: FFY {{year}}
   sidebar: 
     titles: 
       programSummary: "Program Summary"
@@ -87,6 +88,7 @@
       _no: "No"
     header: "Program Activities"
     namePrefix: "Activity"
+    namePrefixAndNum: "Activity {{number}}"
     description: 
       title: "Activity Description"
       helpText: "Summarize the needs of the activity for which requested funding will be used (e.g. administrative, outreach, auditing, Public Health Registry Development, etc)"
