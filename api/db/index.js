@@ -8,6 +8,7 @@ const user = require('./user');
 const authorization = require('./authorization');
 const state = require('./state');
 const apd = require('./apd');
+const apdVersion = require('./apdVersion');
 const keyPersonnel = require('./apdKeyPersonnel');
 const apdActivity = require('./activity');
 
@@ -23,6 +24,7 @@ const setup = (
     authorization(),
     state(),
     apd(),
+    apdVersion(),
     keyPersonnel(),
     apdActivity()
   ]
