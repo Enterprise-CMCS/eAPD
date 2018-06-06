@@ -117,8 +117,11 @@ tap.test(
               description: 'updated description',
               alternatives: null,
               contractorResources: [],
+              costAllocationNarrative: {
+                methodology: null,
+                otherSources: null
+              },
               costAllocation: [],
-              costAllocationMethodology: null,
               expenses: [],
               goals: [
                 {
@@ -137,10 +140,6 @@ tap.test(
                   objective: 'Learn to dance'
                 }
               ],
-              otherFundingSources: {
-                description: null,
-                amount: null
-              },
               schedule: [],
               standardsAndConditions: null,
               summary: null,
