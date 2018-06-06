@@ -98,7 +98,7 @@ export const saveApd = () => (dispatch, state) => {
       ),
       goals: activity.goals.map(g => ({
         description: g.desc,
-        objectives: [{ description: g.obj }] // TODO - objective should mape 1:1 to goals, instead of being an array (needs backend change first)
+        objective: g.obj
       })),
       schedule: activity.milestones.map(m => ({
         milestone: m.name,
