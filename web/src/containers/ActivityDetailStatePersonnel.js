@@ -26,9 +26,13 @@ class ActivityDetailStatePersonnel extends Component {
         ? { years: { [year]: { [key]: value } } }
         : { [key]: value };
 
-    updateActivity(activity.id, {
-      statePersonnel: { [idx]: toUpdate }
-    });
+    updateActivity(
+      activity.id,
+      {
+        statePersonnel: { [idx]: toUpdate }
+      },
+      key === 'amt'
+    );
   };
 
   render() {
