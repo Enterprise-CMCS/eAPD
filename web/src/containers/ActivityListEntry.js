@@ -8,7 +8,11 @@ import { ACTIVITY_FUNDING_SOURCES } from '../util';
 class ActivityListEntry extends Component {
   handleChange = field => e => {
     const { activity, updateActivity } = this.props;
-    updateActivity(activity.id, { [field]: e.target.value });
+    updateActivity(
+      activity.id,
+      { [field]: e.target.value },
+      field === 'fundingSource'
+    );
   };
 
   render() {

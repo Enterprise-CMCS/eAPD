@@ -25,7 +25,7 @@ class ActivityDetailExpenses extends Component {
     const { activity, updateActivity } = this.props;
 
     const updates = { expenses: { [index]: { years: { [year]: value } } } };
-    updateActivity(activity.id, updates);
+    updateActivity(activity.id, updates, true);
   };
 
   render() {
