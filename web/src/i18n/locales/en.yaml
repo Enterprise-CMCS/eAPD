@@ -21,7 +21,7 @@
     savePdfButtonText: "Save as PDF"
   apd: 
     title: "Program Summary"
-    helpText: "Provide an introduction for your state's program. This should include context for your funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD template section: executive summary."
+    helpText: "Provide an introduction for your state's program. Include context for your funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD executive summary template section."
     overview: 
       title: "Program Overview"
       helpText: "Provide a high level summary of your state's program, history, and future vision."
@@ -51,7 +51,7 @@
         (4) The role of State government in governance and policy-setting.
 
 
-        CMS recommends that states reach out to their regional CMS HITECH
+        CMS recommends states reach out to their regional CMS HITECH
         contacts prior to developing an HIE funding request. HIE funding
         requests are complex, and early consultation with CMS facilitates a
         more efficient approval process.
@@ -80,9 +80,9 @@
       reminder: "The first activity in this list is Program Administration. Program Administration is where you should include information that pertains to implementing the EHR Incentive program. Examples of information that belongs within this activity includes: State and Contractor costs associated with operating the EHR incentive program and SLR Enhancements/Upgrades."
     addActivityButtonText: "Add activity"
     deleteActivityButtonText: "Remove Activity"
-    noActivityMessage: "It looks like you don’t have any activities. Please add one below."
+    noActivityMessage: "It looks like you don’t have any activities. Add one below."
     delete: 
-      header: "Please confirm"
+      header: "Confirm"
       body: "Are you sure you’d like to remove this activity?"
       _yes: "Yes"
       _no: "No"
@@ -99,12 +99,12 @@
         subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
       alternatives: 
         subheader: "Statement of alternative considerations and supporting justification"
-        helpText: "If no substantive changes have been made to this activity, include a statement that refers to the Statement of Alternative Considerations contained in previous versions of the IAPD or in the SMHP. If substantive changes have been made, include a statement describing the alternatives your state considered when making the change."
+        helpText: "If no substantive changes have been made to this activity, include a statement referring to the Statement of Alternative Considerations contained in previous versions of the IAPD or in the SMHP. If substantive changes have been made, include a statement describing the alternatives your state considered when making the change."
         reminder: "Remember to update the SMHP as necessary with any substantive changes to the approach for implementing EHR incentives."
     goals: 
       title: "Needs and Objectives"
       subheader: "List the goals and objectives you're hoping to accomplish as part of this activity."
-      helpText: "Please include a brief description of how each goal relates to the vision identified in the program summary section."
+      helpText: "Include a brief description of how each goal relates to the vision identified in the program summary section."
       reminder: "DON'T FORGET: Each goal should have a matching objective."
       goal: 
         title: "Goal #{{number}}"
@@ -115,8 +115,8 @@
     schedule: 
       title: "Activity Schedule"
       subheader: "List major milestones your state is working towards as part of this activity."
-      helpText: "Detail key activity milestones, including activities that have occurred under previously approved APDs."
-      noMilestonesNotice: "Did you forget to add milestones? Please add milestones for this activity."
+      helpText: "Detail key activity milestones, including activities occurring under previously approved APDs."
+      noMilestonesNotice: "Did you forget to add milestones? Add milestones for this activity."
       milestoneHeader: "Milestone"
       milestoneLabel: "milestone name"
       startHeader: "Planned start"
@@ -160,11 +160,11 @@
       addButtonText: "Add personnel"
     expenses: 
       title: "Non-Personnel Costs"
-      helpText: "Please provide a detailed breakout of any non-personnel and non-contracted costs related to this activity. This should include a brief description of these projected costs."
+      helpText: "Provide a detailed breakout of any non-personnel and non-contracted costs related to this activity. This should include a brief description of these projected costs."
       reminder: "“Miscellaneous expenses” from the drop down, includes materials and supplies, communications‐related expenses, printing costs and facilities expenses."
     costAllocate: 
       title: "Cost Allocation and Other Funding Sources"
-      helpText: "As specified in OMB Circular A‐87, a cost allocation plan must be included that identifies all participants and their associated cost allocation to depict non‐Medicaid activities and non‐Medicaid FTEs participating in this project, if any.
+      helpText: "As specified in OMB Circular A‐87, a cost allocation plan must be included identifying all participants and their associated cost allocation to depict non‐Medicaid activities and non‐Medicaid FTEs participating in this project, if any.
       
       
       HITECH cost allocation formulas should be based on the direct benefit to the Medicaid EHR Incentive Program, taking into account State projections of eligible Medicaid provider participation in the incentive program (leveraging actual data/experience as deemed appropriate).
@@ -176,10 +176,10 @@
      Ensure cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested."
       methodology: 
         title: "Cost allocation methodology description"
-        reminder: "Do not assume that the absence of other payers is sufficient cause for Medicaid to be the primary payer. Limit ambiguity about other potential federal funding sources. For example, if no CHIP funds are being requested, include a statement to that effect in this section."
+        reminder: "Do not assume the absence of other payers is sufficient cause for Medicaid to be the primary payer. Limit ambiguity about other potential federal funding sources. For example, if no CHIP funds are being requested, include a statement in this section."
       otherFunding: 
         title: "Other funding description"
-        helpText: "Account for any and all grant funding that is used to support this activity, and review the State Medicaid Director Letter 10‐016 for examples of grants that might need to be included."
+        helpText: "Account for any and all grant funding used to support this activity, and review the state Medicaid director Letter 10‐016 for examples of grants needed to be included."
         reminder: "High level descriptions are appropriate for grant activities. Ensure any new grants are included and any expired grants are removed."
         amount: "Other funding amount"
     standardsAndConditions: 
@@ -223,7 +223,7 @@
         title: "Describe how you'll meet the Key Personnel condition"
       documentation: 
         header: "Documentation"
-        subheader: "The condition described at § 433.112(b)(20) requires that states maintain documentation for certain software such that the software could be operated by contractors and other users. This condition is limited to software that is developed using federal funds; it does not apply to Commercial Off-the-Shelf (COTS) software, Software-as-a-Service, or Business-Solutions-as-a-Service. Adequate documentation means that other users could operate the software with reasonable alterations for a specific hardware or operating system. CMS is neutral as to the specific hardware or operating system that the software uses. Documentation must follow industry standards and best practices, and must include components, procedures, layouts, interfaces, inputs, outputs, and other necessary information so that the systems could be installed and operated by a variety of contractors or other users. While the APD should address how the state plans to maintain documentation, such documentation is not required to be submitted along with the APD. It is the state’s responsibility to make the documentation available upon request and to upload documentation to CALT or successor systems as needed for gate reviews or for reuse. Submission to other repositories may be required as CMS explores other options."
+        subheader: "The condition described at § 433.112(b)(20) requires that states maintain documentation for certain software such that the software could be operated by contractors and other users. This condition is limited to software that is developed using federal funds; it does not apply to Commercial Off-the-Shelf (COTS) software, software-as-a-service, or business-solutions-as-a-service. Adequate documentation means that other users could operate the software with reasonable alterations for a specific hardware or operating system. CMS is neutral as to the specific hardware or operating system that the software uses. Documentation must follow industry standards and best practices, and must include components, procedures, layouts, interfaces, inputs, outputs, and other necessary information so that the systems could be installed and operated by a variety of contractors or other users. While the APD should address how the state plans to maintain documentation, such documentation is not required to be submitted along with the APD. It is the state’s responsibility to make the documentation available upon request and to upload documentation to CALT or successor systems as needed for gate reviews or for reuse. Submission to other repositories may be required as CMS explores other options."
         title: "Describe how you'll meet the Documentation condition"
       minimizeCost: 
         header: "Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System"
@@ -238,22 +238,28 @@
       title: "Incentive Payments by FFY Quarter"
   assurancesAndCompliance: 
     title: "Assurances and Compliance"
-    helpText: "Ensure that your state complies with all applicable Code of federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
+    helpText: "Ensure your state complies with all applicable code of federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
     procurement: 
       title: "Procurement Standards"
+      helpText: ""
     recordsAccess: 
       title: "Access to Records"
+      helpText: ""
     softwareRights: 
       title: "Software Rights"
+      helpText: ""
     security: 
       title: "Security"
+      helpText: ""
   executiveSummary: 
     title: "Executive Summary"
-    helpText: "Please see the executive summary that has been generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review. If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
+    helpText: "See the executive summary generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review. If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
     summary: 
       title: "Executive Summary"
+      helpText: ""
     budgetTable: 
       title: "Program Budget Table"
+      helpText: ""
   certifyAndSubmit: 
     title: "Certify and Submit"
     helpText: "By clicking Submit, you agree that your funding request fulfills our standards and requirements."
