@@ -2,8 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { getActivitiesCategoryTotals } from '../reducers/activities';
-import { ACTIVITY_FUNDING_SOURCES, YEAR_OPTIONS } from '../util';
+import { YEAR_OPTIONS } from '../util';
 import { formatMoney } from '../util/formats';
 
 const categoryLookup = {
@@ -59,9 +58,9 @@ class DataRow extends Component {
             const val = data[yr];
             return (
               <Fragment key={yr}>
-                <td className="mono right-align">{formatMoney(val)}</td>
-                <td className="mono right-align">{formatMoney(val * 0.9)}</td>
-                <td className="mono right-align">{formatMoney(val * 0.1)}</td>
+                <td className="mono right-align">{formatMoney(val.total)}</td>
+                <td className="mono right-align">{formatMoney(val.federal)}</td>
+                <td className="mono right-align">{formatMoney(val.state)}</td>
               </Fragment>
             );
           })}
@@ -117,7 +116,7 @@ const BudgetSummary = ({ data }) => (
       <thead>
         <tr>
           <th style={{ width: 200 }} />
-          {YEAR_OPTIONS.map(yr => (
+          {data.years.map(yr => (
             <th key={yr} className="bg-black white center" colSpan="3">
               FFY {yr}
             </th>
@@ -139,26 +138,32 @@ const BudgetSummary = ({ data }) => (
       </thead>
       <tbody className="bg-light-blue">
         <HeaderRow title="HIT activities" />
-        <DataRowGroup data={data.HIT} />
+        <DataRowGroup data={data.hit} />
       </tbody>
       <tbody className="bg-light-yellow">
         <HeaderRow title="HIE activities" />
-        <DataRowGroup data={data.HIE} />
+        <DataRowGroup data={data.hie} />
       </tbody>
       <tbody className="bg-light-green">
         <HeaderRow title="MMIS activities" />
-        <DataRowGroup data={data.MMIS} />
+        <DataRowGroup data={data.mmis} />
       </tbody>
       <tbody>
         <tr className="bold">
           <td>Project total</td>
-          {Object.keys(data.combined).map(key => {
-            const val = data.combined[key];
+          {Object.keys(data.combined).map(ffy => {
+            const combined = data.combined[ffy];
             return (
-              <Fragment key={key}>
-                <td className="mono right-align">{formatMoney(val)}</td>
-                <td className="mono right-align">{formatMoney(val * 0.9)}</td>
-                <td className="mono right-align">{formatMoney(val * 0.1)}</td>
+              <Fragment key={ffy}>
+                <td className="mono right-align">
+                  {formatMoney(combined.total)}
+                </td>
+                <td className="mono right-align">
+                  {formatMoney(combined.federal)}
+                </td>
+                <td className="mono right-align">
+                  {formatMoney(combined.state)}
+                </td>
               </Fragment>
             );
           })}
@@ -172,56 +177,6 @@ BudgetSummary.propTypes = {
   data: PropTypes.object.isRequired
 };
 
-// merge and aggregate an array of objects
-// i.e., [{ a: 1, b: 2 }, { a: 3, b: 4 }] => { a: 4, b: 6 }
-const aggregateObjectArrays = data =>
-  data.reduce((obj, datum) => {
-    Object.keys(datum).forEach(key => {
-      obj[key] = (obj[key] || 0) + datum[key]; // eslint-disable-line no-param-reassign
-    });
-    return obj;
-  }, {});
-
-const getDataByActivityType = activities =>
-  ACTIVITY_FUNDING_SOURCES.reduce((obj, id) => {
-    // filter by funding source
-    const filtered = activities.filter(a => a.fundingSource === id);
-
-    // roll up amounts by category across activities
-    const byCat = getActivitiesCategoryTotals(filtered);
-
-    // aggregate across activity categories
-    const byYear = {
-      ...byCat,
-      combined: aggregateObjectArrays(Object.values(byCat))
-    };
-
-    // add totals across years (by category)
-    const dataAll = Object.entries(byYear).reduce((obj2, [cat, yearly]) => {
-      const allYears = Object.values(yearly).reduce((a, b) => a + b, 0);
-      obj2[cat] = { ...yearly, allYears }; // eslint-disable-line no-param-reassign
-      return obj2;
-    }, {});
-
-    obj[id] = dataAll; // eslint-disable-line no-param-reassign
-    return obj;
-  }, {});
-
-const mapStateToProps = ({ activities }) => {
-  const { allIds, byId } = activities;
-
-  const activityData = allIds.map(id => byId[id]);
-  const dataByActivityType = getDataByActivityType(activityData);
-  const combinedAcrossType = aggregateObjectArrays(
-    Object.values(dataByActivityType).map(d => d.combined)
-  );
-
-  const data = {
-    ...dataByActivityType,
-    combined: combinedAcrossType
-  };
-
-  return { data };
-};
+const mapStateToProps = ({ budget }) => ({ data: budget });
 
 export default connect(mapStateToProps)(BudgetSummary);
