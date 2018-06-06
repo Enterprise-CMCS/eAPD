@@ -52,7 +52,10 @@ const openAPI = {
           in: 'path',
           description:
             'The ID (2-letter abbreviation, lowercase) of the state, territory, or district to fetch',
-          required: true
+          required: true,
+          schema: {
+            type: 'integer'
+          }
         }
       ],
       responses: {

@@ -77,7 +77,10 @@ const openAPI = {
           name: 'id',
           in: 'path',
           description: 'The ID of the role to update',
-          required: true
+          required: true,
+          schema: {
+            type: 'integer'
+          }
         }
       ],
       requestBody: {
@@ -119,7 +122,10 @@ const openAPI = {
           name: 'id',
           in: 'path',
           description: 'The ID of the role to delete',
-          required: true
+          required: true,
+          schema: {
+            type: 'integer'
+          }
         }
       ],
       responses: {

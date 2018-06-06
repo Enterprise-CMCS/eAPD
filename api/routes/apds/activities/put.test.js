@@ -49,7 +49,6 @@ tap.test('apd activity PUT endpoint', async endpointTest => {
   );
 
   const components = [
-    'approaches',
     'contractorResources',
     'costAllocation',
     'expenses',
