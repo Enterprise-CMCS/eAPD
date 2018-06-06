@@ -8,14 +8,15 @@ module.exports = {
 
     toJSON() {
       return {
-        id: this.get('id'),
-        entity: this.get('entity'),
-        percent_of_cost: this.get('percent_of_cost')
+        year: this.get('year'),
+        federal: this.get('federal'),
+        state: this.get('state'),
+        other: this.get('other')
       };
     },
 
     static: {
-      updateableFields: ['entity', 'percent_of_cost']
+      updateableFields: ['year', 'federal', 'state', 'other']
     }
   }
 };
