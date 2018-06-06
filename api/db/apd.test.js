@@ -66,6 +66,12 @@ tap.test('apd data model', async apdModelTests => {
       'function',
       'creates a state relationship for the apd model'
     );
+
+    setupTests.type(
+      apd.apd.versions,
+      'function',
+      'creates a versions relationship for the apd model'
+    );
   });
 
   apdModelTests.test('with-related fields order themselves', async test => {
@@ -131,6 +137,20 @@ tap.test('apd data model', async apdModelTests => {
       stateTests.equal(output, 'beep', 'returns the expected value');
     }
   );
+
+  apdModelTests.test('apd model sets up versions relationship', async test => {
+    const self = {
+      hasMany: sinon.stub().returns('beep')
+    };
+
+    const output = apd.apd.versions.bind(self)();
+
+    test.ok(
+      self.hasMany.calledWith('apdVersion'),
+      'sets up the relationship mapping to versions'
+    );
+    test.equal(output, 'beep', 'returns the expected value');
+  });
 
   apdModelTests.test(
     'converts from camel case to snake case and stringifies',
