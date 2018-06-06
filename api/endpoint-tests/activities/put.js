@@ -116,7 +116,6 @@ tap.test(
               name: 'updated name',
               description: 'updated description',
               alternatives: null,
-              approaches: [],
               contractorResources: [],
               costAllocation: [],
               costAllocationMethodology: null,
