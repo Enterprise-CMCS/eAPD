@@ -32,9 +32,13 @@ const ActivityDetailCostAllocateFFP = ({ aId, byYearData, updateActivity }) => (
                   wrapperClass="px-tiny"
                   value={percent}
                   onChange={e =>
-                    updateActivity(aId, {
-                      costFFP: { [year]: { [id]: e.target.value } }
-                    })
+                    updateActivity(
+                      aId,
+                      {
+                        costFFP: { [year]: { [id]: e.target.value } }
+                      },
+                      true
+                    )
                   }
                 />
               ))}

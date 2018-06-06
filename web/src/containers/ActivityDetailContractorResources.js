@@ -27,7 +27,7 @@ class ActivityDetailContractorExpenses extends Component {
     const updates = {
       contractorResources: { [index]: { years: { [year]: value } } }
     };
-    updateActivity(activity.id, updates);
+    updateActivity(activity.id, updates, true);
   };
 
   render() {
