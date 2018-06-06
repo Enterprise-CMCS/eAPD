@@ -331,6 +331,7 @@ const reducer = (state = initialState, action) => {
           id: a.id,
           name: a.name,
           fundingSource: 'HIT', // TODO
+          years: action.data.years,
           descShort: a.summary,
           descLong: a.description,
           altApproach: a.alternatives,
@@ -441,7 +442,7 @@ export default reducer;
 
 // data munging / aggregation functions
 
-const aggregateByYear = (dataArray, years, iteratee = x => x) =>
+export const aggregateByYear = (dataArray, years, iteratee = x => x) =>
   dataArray.reduce((accum, datum) => {
     const totals = accum;
     years.forEach(yr => {
