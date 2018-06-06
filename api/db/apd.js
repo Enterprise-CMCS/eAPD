@@ -14,6 +14,10 @@ module.exports = () => ({
       return this.belongsTo('state');
     },
 
+    versions() {
+      return this.hasMany('apdVersion');
+    },
+
     format(attributes) {
       const out = { ...attributes };
       [

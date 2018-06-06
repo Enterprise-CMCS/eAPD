@@ -1,6 +1,6 @@
 const {
   requiresAuth,
-  schema: { arrayOf, jsonResponse }
+  schema: { arrayOf, errorToken, jsonResponse }
 } = require('../openAPI/helpers');
 
 const activities = require('./activities/openAPI');
@@ -60,6 +60,32 @@ const openAPI = {
       }
     }
   },
+
+  '/apds/{id}/versions': {
+    post: {
+      description: 'Create a new saved version of an APD',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the APD to update',
+          required: true,
+          schema: { type: 'number' }
+        }
+      ],
+      responses: {
+        204: {
+          description: 'The save was successful'
+        },
+        400: {
+          description:
+            'The APD is not currently in draft status, so it cannot be saved. Error is { error: "apd-not-editable" }',
+          content: errorToken
+        }
+      }
+    }
+  },
+
   ...activities
 };
 
