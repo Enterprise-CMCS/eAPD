@@ -19,7 +19,7 @@ import {
 } from '../actions/activities';
 import { GET_APD_SUCCESS, UPDATE_APD } from '../actions/apd';
 
-import { arrToObj, nextSequence } from '../util';
+import { arrToObj, defaultAPDYears, nextSequence } from '../util';
 
 const newGoal = () => ({ desc: '', obj: '' });
 
@@ -326,7 +326,7 @@ const reducer = (state = initialState, action) => {
       return state;
     case GET_APD_SUCCESS: {
       const byId = {};
-      action.data.activities.forEach(a => {
+      ((action.data || {}).activities || []).forEach(a => {
         byId[a.id] = {
           id: a.id,
           name: a.name,
@@ -420,11 +420,11 @@ const reducer = (state = initialState, action) => {
         };
       });
 
-      if (action.data.activities.length === 0) {
+      if (Object.keys(byId).length === 0) {
         byId[1] = newActivity(1, {
           name: 'Program Administration',
           fundingSource: 'HIT',
-          years: action.data.years
+          years: defaultAPDYears
         });
       }
 
