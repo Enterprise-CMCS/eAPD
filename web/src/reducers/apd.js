@@ -7,6 +7,12 @@ import {
   GET_APD_FAILURE,
   UPDATE_APD
 } from '../actions/apd';
+import { INCENTIVE_ENTRIES, arrToObj } from '../util';
+
+export const incentivePayments = arrToObj(
+  INCENTIVE_ENTRIES.map(e => e.id),
+  arrToObj(defaultAPDYears, { 1: 0, 2: 0, 3: 0, 4: 0 })
+);
 
 const initialState = {
   data: {
@@ -17,7 +23,8 @@ const initialState = {
     hitNarrative: '',
     hieNarrative: '',
     mmisNarrative: '',
-    previousActivitySummary: ''
+    previousActivitySummary: '',
+    incentivePayments
   },
   fetching: false,
   loaded: false,

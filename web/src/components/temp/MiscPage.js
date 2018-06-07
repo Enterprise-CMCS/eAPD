@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Container from '../Container';
-import ExecutiveSummary from '../../containers/ExecutiveSummary';
+import IncentivePayments from '../../containers/IncentivePayments';
 
 const MiscPage = () => (
   <Container>
-    <ExecutiveSummary />
+    <IncentivePayments />
   </Container>
 );
 
