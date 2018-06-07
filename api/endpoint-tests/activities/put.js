@@ -143,7 +143,7 @@ tap.test(
               schedule: [],
               standardsAndConditions: null,
               summary: null,
-              types: null,
+              fundingSource: null,
               statePersonnel: []
             },
             'sends back the updated activity object'

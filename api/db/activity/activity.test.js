@@ -27,8 +27,8 @@ tap.test('activity data model', async activityModelTests => {
               'description',
               'alternatives',
               'costAllocationNarrative',
-              'types',
-              'standardsAndConditions'
+              'standardsAndConditions',
+              'fundingSource'
             ],
             owns: {
               goals: 'apdActivityGoal',
@@ -305,7 +305,7 @@ tap.test('activity data model', async activityModelTests => {
       self.get
         .withArgs('other_funding_sources_description')
         .returns('panhandling, funny videos online');
-      self.get.withArgs('types').returns('on a typewriter');
+      self.get.withArgs('funding_source').returns('bitcoin');
       self.get
         .withArgs('standards_and_conditions')
         .returns('nobody reads them');
@@ -331,8 +331,8 @@ tap.test('activity data model', async activityModelTests => {
           },
           costAllocation: 'cost allocation by year',
           goals: 'goooooaaaaals',
-          types: 'on a typewriter',
-          standardsAndConditions: 'nobody reads them'
+          standardsAndConditions: 'nobody reads them',
+          fundingSource: 'bitcoin'
         },
         'gives us back the right JSON-ified object'
       );
