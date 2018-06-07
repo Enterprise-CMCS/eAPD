@@ -48,11 +48,10 @@ module.exports = {
             type: 'string',
             description: 'Activity name, unique within an APD'
           },
-          types: arrayOf({
+          fundingSource: {
             type: 'string',
-            description:
-              'List of federal funding sources that apply to this activity'
-          }),
+            description: 'Federal funding source that applies to this activity'
+          },
           summary: {
             type: 'string',
             description: 'Short summary of the activity'

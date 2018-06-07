@@ -46,11 +46,11 @@ module.exports = {
             out.other_funding_sources_description = value.otherSources;
           }
         } else if (
-          // stringify the types and standardsAndConditions fields,
-          // but only if they're not null; if they are null, stringify
+          // stringify the standardsAndConditions field,
+          // but only if it's not null; if null, stringify
           // returns the string 'null', which is invalid JSON and will
           // cause Postgres to throw
-          (field === 'types' || field === 'standardsAndConditions') &&
+          field === 'standardsAndConditions' &&
           value
         ) {
           out[outField] = JSON.stringify(value);
@@ -68,8 +68,8 @@ module.exports = {
         'description',
         'alternatives',
         'costAllocationNarrative',
-        'types',
-        'standardsAndConditions'
+        'standardsAndConditions',
+        'fundingSource'
       ],
       owns: {
         goals: 'apdActivityGoal',
@@ -116,7 +116,6 @@ module.exports = {
       return {
         id: this.get('id'),
         name: this.get('name'),
-        types: this.get('types'),
         summary: this.get('summary'),
         description: this.get('description'),
         alternatives: this.get('alternatives'),
@@ -130,7 +129,8 @@ module.exports = {
           otherSources: this.get('other_funding_sources_description')
         },
         costAllocation: this.related('costAllocation'),
-        standardsAndConditions: this.get('standards_and_conditions')
+        standardsAndConditions: this.get('standards_and_conditions'),
+        fundingSource: this.get('funding_source')
       };
     }
   }
