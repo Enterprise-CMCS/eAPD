@@ -256,15 +256,26 @@ const reducer = (state = initialState, action) => {
           id: a.id,
           name: a.name,
           fundingSource: 'HIT', // TODO
-          descShort: '', // TODO
+          descShort: a.summary,
           descLong: a.description,
-          altApproach: '', // TODO
-          costAllocateDesc: '', // TODO
-          otherFundingDesc: a.otherFundingSources.description,
-          otherFundingAmt: +a.otherFundingSources.amount,
+          altApproach: a.alternatives,
+          costAllocateDesc: a.costAllocationNarrative.methodology,
+          otherFundingDesc: a.costAllocationNarrative.otherSources,
+          otherFundingAmt: 0,
+          costFFP: a.costAllocation.reduce(
+            (all, ffp) => ({
+              ...all,
+              [ffp.year]: {
+                fed: ffp.federal * 100,
+                state: ffp.state * 100,
+                other: ffp.other * 100
+              }
+            }),
+            {}
+          ),
           goals: a.goals.map(g => ({
             desc: g.description,
-            obj: g.objectives[0] // TODO - don't assume there's one objective; tie objective directly to the goal instead of a mapped table
+            obj: g.objective
           })),
           milestones: a.schedule.map(s => ({
             id: s.id,
@@ -315,18 +326,17 @@ const reducer = (state = initialState, action) => {
           })),
 
           standardsAndConditions: {
-            // TODO
-            modularity: '',
-            mita: '',
-            industry: '',
-            leverage: '',
-            bizResults: '',
-            reporting: '',
-            interoperability: '',
-            mitigation: '',
-            keyPersonnel: '',
-            documentation: '',
-            minimizeCost: ''
+            bizResults: a.standardsAndConditions.businessResults,
+            documentation: a.standardsAndConditions.documentation,
+            industry: a.standardsAndConditions.industryStandards,
+            interoperability: a.standardsAndConditions.interoperability,
+            keyPersonnel: a.standardsAndConditions.keyPersonnel,
+            leverage: a.standardsAndConditions.leverage,
+            modularity: a.standardsAndConditions.modularity,
+            minimizeCost: a.standardsAndConditions.minimizeCost,
+            mita: a.standardsAndConditions.mita,
+            mitigation: a.standardsAndConditions.mitigationStrategy,
+            reporting: a.standardsAndConditions.reporting
           },
           meta: {
             expanded: false

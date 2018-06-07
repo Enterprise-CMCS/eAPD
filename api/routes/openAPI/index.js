@@ -48,11 +48,10 @@ module.exports = {
             type: 'string',
             description: 'Activity name, unique within an APD'
           },
-          types: arrayOf({
+          fundingSource: {
             type: 'string',
-            description:
-              'List of federal funding sources that apply to this activity'
-          }),
+            description: 'Federal funding source that applies to this activity'
+          },
           summary: {
             type: 'string',
             description: 'Short summary of the activity'
@@ -107,7 +106,7 @@ module.exports = {
               })
             }
           }),
-          costAllocation: {
+          costAllocationNarrative: {
             type: 'object',
             properties: {
               methodology: {
@@ -117,34 +116,34 @@ module.exports = {
               otherSources: {
                 type: 'string',
                 description: 'Description of other funding sources'
-              },
-              years: arrayOf({
-                type: 'object',
-                properties: {
-                  federal: {
-                    type: 'number',
-                    description:
-                      'Federal share for this activity for this year, from 0 to 1'
-                  },
-                  state: {
-                    type: 'number',
-                    description:
-                      'State share for this activity for this year, from 0 to 1'
-                  },
-                  other: {
-                    type: 'number',
-                    description:
-                      'Other share for this activity for this year, from 0 to 1'
-                  },
-                  year: {
-                    type: 'number',
-                    description:
-                      'Federal fiscal year this cost allocation applies to'
-                  }
-                }
-              })
+              }
             }
           },
+          costAllocation: arrayOf({
+            type: 'object',
+            properties: {
+              federal: {
+                type: 'number',
+                description:
+                  'Federal share for this activity for this year, from 0 to 1'
+              },
+              state: {
+                type: 'number',
+                description:
+                  'State share for this activity for this year, from 0 to 1'
+              },
+              other: {
+                type: 'number',
+                description:
+                  'Other share for this activity for this year, from 0 to 1'
+              },
+              year: {
+                type: 'number',
+                description:
+                  'Federal fiscal year this cost allocation applies to'
+              }
+            }
+          }),
           goals: arrayOf({
             type: 'object',
             description: 'Activity goal',

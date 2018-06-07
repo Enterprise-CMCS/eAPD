@@ -1,13 +1,11 @@
 import React from 'react';
 
 import Container from '../Container';
-import ActivityDetailCostAllocateFFP from '../../containers/ActivityDetailCostAllocateFFP';
-import BudgetSummary from '../../containers/BudgetSummary';
+import ExecutiveSummary from '../../containers/ExecutiveSummary';
 
 const MiscPage = () => (
   <Container>
-    <BudgetSummary />
-    <ActivityDetailCostAllocateFFP aId={1} />
+    <ExecutiveSummary />
   </Container>
 );
 
