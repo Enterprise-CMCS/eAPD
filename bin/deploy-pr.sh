@@ -34,12 +34,17 @@ if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
   # Push
   cf push "hitech-apd-frontend-pr$PRNUM" -n "hitech-apd-pr$PRNUM" -b https://github.com/cloudfoundry/staticfile-buildpack.git -m 64M --no-manifest -p web/dist
 
-  # Add a comment on Github, if there's not one already
+  # Delete comment on Github, if there's one already
   COMMENTS=$(curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
-  if ! [ "$COMMENTS" ]; then
-    URL="https://hitech-apd-pr$PRNUM.app.cloud.gov/"
-    curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" -d '{"body":"See this pull request in action: '"$URL"'"}' -H "Content-Type: application/json" -X POST "https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments"
+  if [ "$COMMENTS" ]; then
+    ID=$(echo "$COMMENTS" | jq -c -r .id)
+    curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" -X DELETE "https://api.github.com/repos/18f/cms-hitech-apd/issues/comments/$ID"
   fi
+
+  # Post again.  This way we'll know the bot updated the thing.
+  URL="https://hitech-apd-pr$PRNUM.app.cloud.gov/"
+  curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" -d '{"body":"See this pull request in action: '"$URL"'"}' -H "Content-Type: application/json" -X POST "https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments"
+
 
 elif [ "$WEBCHANGES" -eq 0 ]; then
   echo "No changes to /web"
