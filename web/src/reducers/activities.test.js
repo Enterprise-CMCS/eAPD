@@ -6,33 +6,48 @@ describe('activities reducer', () => {
     allIds: []
   };
 
+  const newContractor = {
+    id: 0,
+    desc: '',
+    end: '',
+    name: '',
+    start: '',
+    years: { '1': 0, '2': 0 }
+  };
+
+  const newPerson = {
+    id: 0,
+    desc: '',
+    title: '',
+    years: { '1': { amt: '', perc: '' }, '2': { amt: '', perc: '' } }
+  };
+
+  const newGoal = { desc: '', obj: '' };
+
+  const newExpense = {
+    id: 0,
+    category: 'Hardware, software, and licensing',
+    desc: '',
+    years: { '1': 0, '2': 0 }
+  };
+
+  const newMilestone = { end: '', name: '', start: '' };
+
   const newActivity = {
     id: 1,
     altApproach: '',
     contractorResources: [
       {
-        id: 1,
-        desc: '',
-        end: '',
-        name: '',
-        start: '',
-        years: { '1': 0, '2': 0 }
+        ...newContractor,
+        id: 1
       },
       {
-        id: 2,
-        desc: '',
-        end: '',
-        name: '',
-        start: '',
-        years: { '1': 0, '2': 0 }
+        ...newContractor,
+        id: 2
       },
       {
-        id: 3,
-        desc: '',
-        end: '',
-        name: '',
-        start: '',
-        years: { '1': 0, '2': 0 }
+        ...newContractor,
+        id: 3
       }
     ],
     costAllocateDesc: '',
@@ -44,32 +59,22 @@ describe('activities reducer', () => {
     descShort: '',
     expenses: [
       {
-        id: 1,
-        category: 'Hardware, software, and licensing',
-        desc: '',
-        years: { '1': 0, '2': 0 }
+        ...newExpense,
+        id: 1
       },
       {
-        id: 2,
-        category: 'Hardware, software, and licensing',
-        desc: '',
-        years: { '1': 0, '2': 0 }
+        ...newExpense,
+        id: 2
       },
       {
-        id: 3,
-        category: 'Hardware, software, and licensing',
-        desc: '',
-        years: { '1': 0, '2': 0 }
+        ...newExpense,
+        id: 3
       }
     ],
     fundingSource: 'HIT',
-    goals: [{ desc: '', obj: '' }],
+    goals: [{ ...newGoal }],
     meta: { expanded: false },
-    milestones: [
-      { end: '', name: '', start: '' },
-      { end: '', name: '', start: '' },
-      { end: '', name: '', start: '' }
-    ],
+    milestones: [{ ...newMilestone }, { ...newMilestone }, { ...newMilestone }],
     name: '',
     otherFundingAmt: '',
     otherFundingDesc: '',
@@ -88,22 +93,16 @@ describe('activities reducer', () => {
     },
     statePersonnel: [
       {
-        id: 1,
-        desc: '',
-        title: '',
-        years: { '1': { amt: '', perc: '' }, '2': { amt: '', perc: '' } }
+        ...newPerson,
+        id: 1
       },
       {
-        id: 2,
-        desc: '',
-        title: '',
-        years: { '1': { amt: '', perc: '' }, '2': { amt: '', perc: '' } }
+        ...newPerson,
+        id: 2
       },
       {
-        id: 3,
-        desc: '',
-        title: '',
-        years: { '1': { amt: '', perc: '' }, '2': { amt: '', perc: '' } }
+        ...newPerson,
+        id: 3
       }
     ],
     years: ['1', '2']
@@ -135,6 +134,167 @@ describe('activities reducer', () => {
     ).toEqual({
       byId: {},
       allIds: []
+    });
+  });
+
+  [
+    [
+      'contractor',
+      'ADD_ACTIVITY_CONTRACTOR',
+      'contractorResources',
+      newContractor
+    ],
+    ['person', 'ADD_ACTIVITY_STATE_PERSON', 'statePersonnel', newPerson],
+    ['goal', 'ADD_ACTIVITY_GOAL', 'goals', newGoal],
+    ['expense', 'ADD_ACTIVITY_EXPENSE', 'expenses', newExpense],
+    ['milestone', 'ADD_ACTIVITY_MILESTONE', 'milestones', newMilestone]
+  ].forEach(([title, action, property, newObject]) => {
+    it(`handles adding ${title}`, () => {
+      expect(
+        activities(stateWithOne, {
+          type: action,
+          id: 1,
+          years: ['1', '2']
+        })
+      ).toEqual({
+        ...stateWithOne,
+        byId: {
+          '1': {
+            ...stateWithOne.byId['1'],
+            [property]: [
+              ...stateWithOne.byId['1'][property],
+              {
+                ...newObject,
+                // For the activity properties that we create distinct
+                // IDs for, make sure we made the right new one. For the
+                // properties that are just plain arrays, don't bother
+                // checking the ID.
+                id: stateWithOne.byId['1'][property][0].id
+                  ? stateWithOne.byId['1'][property].length + 1
+                  : undefined
+              }
+            ]
+          }
+        }
+      });
+    });
+  });
+
+  [
+    {
+      title: 'contractor',
+      action: 'REMOVE_ACTIVITY_CONTRACTOR',
+      id: 'contractorId',
+      property: 'contractorResources'
+    },
+    {
+      title: 'state personnel',
+      action: 'REMOVE_ACTIVITY_STATE_PERSON',
+      id: 'personId',
+      property: 'statePersonnel'
+    },
+    {
+      title: 'goal',
+      action: 'REMOVE_ACTIVITY_GOAL',
+      id: 'goalIdx',
+      property: 'goals'
+    },
+    {
+      title: 'expense',
+      action: 'REMOVE_ACTIVITY_EXPENSE',
+      id: 'expenseId',
+      property: 'expenses'
+    },
+    {
+      title: 'mileston',
+      action: 'REMOVE_ACTIVITY_MILESTONE',
+      id: 'milestoneIdx',
+      property: 'milestones'
+    }
+  ].forEach(({ title, action, id, property }) => {
+    it(`handles removing ${title}`, () => {
+      let propId = stateWithOne.byId['1'][property].length;
+
+      // For properties that have distinct IDs, they being
+      // at 1.  For properties that we key off indices,
+      // they begin at 0.  This accounts for that.
+      if (id.endsWith('Idx')) {
+        propId -= 1;
+      }
+
+      expect(
+        activities(stateWithOne, {
+          type: action,
+          id: 1,
+          [id]: propId
+        })
+      ).toEqual({
+        ...stateWithOne,
+        byId: {
+          '1': {
+            ...stateWithOne.byId['1'],
+            [property]: stateWithOne.byId['1'][property].slice(
+              0,
+              stateWithOne.byId['1'][property].length - 1
+            )
+          }
+        }
+      });
+    });
+  });
+
+  it('sets the activity to expanded', () => {
+    expect(
+      activities(stateWithOne, { type: 'EXPAND_ACTIVITY_SECTION', id: 1 })
+    ).toEqual({
+      ...stateWithOne,
+      byId: {
+        '1': {
+          ...stateWithOne.byId['1'],
+          meta: { ...stateWithOne.byId['1'].meta, expanded: true }
+        }
+      }
+    });
+  });
+
+  describe('it toggles the activity expanded flag', () => {
+    expect(
+      activities(
+        { byId: { '1': { meta: { expanded: false } } } },
+        { type: 'TOGGLE_ACTIVITY_SECTION', id: 1 }
+      )
+    ).toEqual({ byId: { '1': { meta: { expanded: true } } } });
+
+    expect(
+      activities(
+        { byId: { '1': { meta: { expanded: true } } } },
+        { type: 'TOGGLE_ACTIVITY_SECTION', id: 1 }
+      )
+    ).toEqual({ byId: { '1': { meta: { expanded: false } } } });
+  });
+
+  it('handles arbitrary activity updates', () => {
+    expect(
+      activities(stateWithOne, {
+        type: 'UPDATE_ACTIVITY',
+        id: '1',
+        updates: {
+          descShort: 'new short description',
+          standardsAndConditions: { mita: 'new mita text' }
+        }
+      })
+    ).toEqual({
+      ...stateWithOne,
+      byId: {
+        '1': {
+          ...stateWithOne.byId['1'],
+          descShort: 'new short description',
+          standardsAndConditions: {
+            ...stateWithOne.byId['1'].standardsAndConditions,
+            mita: 'new mita text'
+          }
+        }
+      }
     });
   });
 });
