@@ -20,6 +20,7 @@ export const failApd = error => ({ type: GET_APD_FAILURE, error });
 
 export const addApdKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
 export const removeApdKeyPerson = id => ({ type: REMOVE_APD_KEY_PERSON, id });
+
 export const updateApd = updates => dispatch => {
   dispatch({ type: UPDATE_APD, updates });
   if (updates.years) {
