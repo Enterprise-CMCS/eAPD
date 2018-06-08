@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { YEAR_OPTIONS } from '../util';
 import { formatMoney } from '../util/formats';
 
 const categoryLookup = {
@@ -107,7 +106,7 @@ HeaderRow.defaultProps = {
   numberCells: 12
 };
 
-const BudgetSummary = ({ data }) => (
+const BudgetSummary = ({ data, years }) => (
   <div className="py1 overflow-auto">
     <table
       className="h6 table-fixed table-bordered table-budget table-budget-summary"
@@ -116,7 +115,7 @@ const BudgetSummary = ({ data }) => (
       <thead>
         <tr>
           <th style={{ width: 200 }} />
-          {data.years.map(yr => (
+          {years.map(yr => (
             <th key={yr} className="bg-black white center" colSpan="3">
               FFY {yr}
             </th>
@@ -127,7 +126,7 @@ const BudgetSummary = ({ data }) => (
         </tr>
         <tr>
           <th />
-          {[...Array(YEAR_OPTIONS.length + 1)].map((_, i) => (
+          {[...Array(years.length + 1)].map((_, i) => (
             <Fragment key={i}>
               <th className="col-4">Total</th>
               <th className="col-4">Federal share</th>
@@ -137,15 +136,24 @@ const BudgetSummary = ({ data }) => (
         </tr>
       </thead>
       <tbody className="bg-light-blue">
-        <HeaderRow title="HIT activities" />
+        <HeaderRow
+          title="HIT activities"
+          numberCells={(years.length + 1) * 3}
+        />
         <DataRowGroup data={data.hit} />
       </tbody>
       <tbody className="bg-light-yellow">
-        <HeaderRow title="HIE activities" />
+        <HeaderRow
+          title="HIE activities"
+          numberCells={(years.length + 1) * 3}
+        />
         <DataRowGroup data={data.hie} />
       </tbody>
       <tbody className="bg-light-green">
-        <HeaderRow title="MMIS activities" />
+        <HeaderRow
+          title="MMIS activities"
+          numberCells={(years.length + 1) * 3}
+        />
         <DataRowGroup data={data.mmis} />
       </tbody>
       <tbody>
@@ -174,9 +182,13 @@ const BudgetSummary = ({ data }) => (
 );
 
 BudgetSummary.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  years: PropTypes.array.isRequired
 };
 
-const mapStateToProps = ({ budget }) => ({ data: budget });
+const mapStateToProps = ({ apd, budget }) => ({
+  years: apd.data.years,
+  data: budget
+});
 
 export default connect(mapStateToProps)(BudgetSummary);
