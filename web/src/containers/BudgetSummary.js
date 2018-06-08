@@ -135,21 +135,21 @@ const BudgetSummary = ({ data, years }) => (
           ))}
         </tr>
       </thead>
-      <tbody className="bg-light-blue">
+      <tbody className="bg-blue-light">
         <HeaderRow
           title="HIT activities"
           numberCells={(years.length + 1) * 3}
         />
         <DataRowGroup data={data.hit} />
       </tbody>
-      <tbody className="bg-light-yellow">
+      <tbody className="bg-yellow-light">
         <HeaderRow
           title="HIE activities"
           numberCells={(years.length + 1) * 3}
         />
         <DataRowGroup data={data.hie} />
       </tbody>
-      <tbody className="bg-light-green">
+      <tbody className="bg-green-light">
         <HeaderRow
           title="MMIS activities"
           numberCells={(years.length + 1) * 3}

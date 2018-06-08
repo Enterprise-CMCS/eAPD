@@ -7,22 +7,22 @@
   background-color: #e1f3f8;
 }
 
-.bg-light-blue {
+.bg-blue-light {
   background-color: #e8f1fb;
 }
 
-.bg-light-yellow {
+.bg-yellow-light {
   background-color: #fffce3;
 }
 
-.bg-light-green {
+.bg-green-light {
   background-color: #f9fff1;
 }
 
-.bg-light-gray {
-  background-color: #ddd;
+.bg-gray-light {
+  background-color: #eee;
 }
 
-.bg-lightest-gray {
+.bg-gray-lightest {
   background-color: #f5f5f5;
 }
