@@ -1,6 +1,7 @@
-import apd, { incentivePayments } from './apd';
+import apd, { initIncentiveData } from './apd';
 
 describe('APD reducer', () => {
+  const incentivePayments = initIncentiveData();
   const initialState = {
     data: {
       id: '',
