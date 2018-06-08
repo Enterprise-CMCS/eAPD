@@ -36,7 +36,7 @@ const initialState = years => ({
 
 const activities = src => Object.values(src.activities.byId);
 
-const addBudgetBlocks = (into, from) => {
+const addBudgetBlocks = (into, from = { total: 0, federal: 0, state: 0 }) => {
   const out = into;
   out.total += from.total;
   out.federal += from.federal;
