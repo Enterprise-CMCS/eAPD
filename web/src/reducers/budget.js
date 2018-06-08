@@ -36,6 +36,10 @@ const initialState = years => ({
 
 const activities = src => Object.values(src.activities.byId);
 
+// The default for from is to handle the case where an expense
+// block doesn't have any rows.  In that case, from is never
+// populated.  But that block doesn't conribute to the budget,
+// either, so easiest thing to do is just zero it out.
 const addBudgetBlocks = (into, from = { total: 0, federal: 0, state: 0 }) => {
   const out = into;
   out.total += from.total;
