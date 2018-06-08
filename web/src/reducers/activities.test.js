@@ -297,4 +297,181 @@ describe('activities reducer', () => {
       }
     });
   });
+
+  describe('it responds to APD updates', () => {
+    const type = 'UPDATE_APD';
+
+    it(`doesn't do anything if APD years aren't being updated`, () => {
+      expect(activities(stateWithOne, { type, updates: {} })).toEqual(
+        stateWithOne
+      );
+    });
+
+    it('adds year-based pieces if a new year was added', () => {
+      expect(
+        activities(stateWithOne, {
+          type,
+          updates: { years: ['1', '2', '3'] }
+        })
+      ).toEqual({
+        ...stateWithOne,
+        byId: {
+          '1': {
+            ...stateWithOne.byId['1'],
+            contractorResources: [
+              {
+                ...stateWithOne.byId['1'].contractorResources[0],
+                years: {
+                  ...stateWithOne.byId['1'].contractorResources[0].years,
+                  '3': 0
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].contractorResources[1],
+                years: {
+                  ...stateWithOne.byId['1'].contractorResources[1].years,
+                  '3': 0
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].contractorResources[2],
+                years: {
+                  ...stateWithOne.byId['1'].contractorResources[2].years,
+                  '3': 0
+                }
+              }
+            ],
+            costFFP: {
+              ...stateWithOne.byId['1'].costFFP,
+              '3': { fed: 90, other: 0, state: 10 }
+            },
+            expenses: [
+              {
+                ...stateWithOne.byId['1'].expenses[0],
+                years: {
+                  ...stateWithOne.byId['1'].expenses[0].years,
+                  '3': 0
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].expenses[1],
+                years: {
+                  ...stateWithOne.byId['1'].expenses[1].years,
+                  '3': 0
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].expenses[2],
+                years: {
+                  ...stateWithOne.byId['1'].expenses[2].years,
+                  '3': 0
+                }
+              }
+            ],
+            statePersonnel: [
+              {
+                ...stateWithOne.byId['1'].statePersonnel[0],
+                years: {
+                  ...stateWithOne.byId['1'].statePersonnel[0].years,
+                  '3': { amt: '', perc: '' }
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].statePersonnel[1],
+                years: {
+                  ...stateWithOne.byId['1'].statePersonnel[1].years,
+                  '3': { amt: '', perc: '' }
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].statePersonnel[2],
+                years: {
+                  ...stateWithOne.byId['1'].statePersonnel[2].years,
+                  '3': { amt: '', perc: '' }
+                }
+              }
+            ],
+            years: ['1', '2', '3']
+          }
+        }
+      });
+    });
+
+    it('removes year-based pieces if a year was removed', () => {
+      expect(
+        activities(stateWithOne, { type, updates: { years: ['1'] } })
+      ).toEqual({
+        ...stateWithOne,
+        byId: {
+          '1': {
+            ...stateWithOne.byId['1'],
+            contractorResources: [
+              {
+                ...stateWithOne.byId['1'].contractorResources[0],
+                years: {
+                  '1': 0
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].contractorResources[1],
+                years: {
+                  '1': 0
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].contractorResources[2],
+                years: {
+                  '1': 0
+                }
+              }
+            ],
+            costFFP: {
+              '1': { fed: 90, other: 0, state: 10 }
+            },
+            expenses: [
+              {
+                ...stateWithOne.byId['1'].expenses[0],
+                years: {
+                  '1': 0
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].expenses[1],
+                years: {
+                  '1': 0
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].expenses[2],
+                years: {
+                  '1': 0
+                }
+              }
+            ],
+            statePersonnel: [
+              {
+                ...stateWithOne.byId['1'].statePersonnel[0],
+                years: {
+                  '1': { amt: '', perc: '' }
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].statePersonnel[1],
+                years: {
+                  '1': { amt: '', perc: '' }
+                }
+              },
+              {
+                ...stateWithOne.byId['1'].statePersonnel[2],
+                years: {
+                  '1': { amt: '', perc: '' }
+                }
+              }
+            ],
+            years: ['1']
+          }
+        }
+      });
+    });
+  });
 });
