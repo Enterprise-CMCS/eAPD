@@ -111,7 +111,7 @@ const buildBudget = wholeState => {
   activities(wholeState).forEach(activity => {
     const totaller = getTotalsForActivity(activity);
     totaller
-      .collapse('statePersonnel', year => +year.amt)
+      .collapse('statePersonnel', year => +year.amt * +year.perc / 100)
       .totals()
       .merge(newState);
 
