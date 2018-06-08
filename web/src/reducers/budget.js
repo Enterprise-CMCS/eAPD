@@ -1,8 +1,6 @@
-import { UPDATE_BUDGET } from '../actions/activities';
-import { GET_APD_SUCCESS } from '../actions/apd';
-import { YEAR_OPTIONS } from '../util';
+import { UPDATE_BUDGET } from '../actions/apd';
 
-const getFundingSourcesByYear = (years = YEAR_OPTIONS) => ({
+const getFundingSourcesByYear = years => ({
   ...years.reduce(
     (o, year) => ({
       ...o,
@@ -21,19 +19,19 @@ const getFundingSourcesByYear = (years = YEAR_OPTIONS) => ({
   }
 });
 
-const expenseTypes = () => ({
-  statePersonnel: getFundingSourcesByYear(),
-  contractors: getFundingSourcesByYear(),
-  expenses: getFundingSourcesByYear(),
-  combined: getFundingSourcesByYear()
+const expenseTypes = years => ({
+  statePersonnel: getFundingSourcesByYear(years),
+  contractors: getFundingSourcesByYear(years),
+  expenses: getFundingSourcesByYear(years),
+  combined: getFundingSourcesByYear(years)
 });
 
-const initialState = () => ({
-  combined: getFundingSourcesByYear(),
-  hie: expenseTypes(),
-  hit: expenseTypes(),
-  mmis: expenseTypes(),
-  years: YEAR_OPTIONS
+const initialState = years => ({
+  combined: getFundingSourcesByYear(years),
+  hie: expenseTypes(years),
+  hit: expenseTypes(years),
+  mmis: expenseTypes(years),
+  years: []
 });
 
 const activities = src => Object.values(src.activities.byId);
@@ -108,7 +106,7 @@ const getTotalsForFundingSource = (bigState, fundingSource) => {
 };
 
 const buildBudget = wholeState => {
-  const newState = initialState();
+  const newState = initialState(wholeState.apd.data.years);
 
   activities(wholeState).forEach(activity => {
     const totaller = getTotalsForActivity(activity);
@@ -135,11 +133,9 @@ const buildBudget = wholeState => {
   return newState;
 };
 
-const reducer = (state = initialState(), action) => {
+const reducer = (state = initialState([]), action) => {
   switch (action.type) {
     case UPDATE_BUDGET:
-      return buildBudget(action.state);
-    case GET_APD_SUCCESS:
       return buildBudget(action.state);
     default:
       return state;

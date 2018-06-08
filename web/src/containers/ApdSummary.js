@@ -7,7 +7,6 @@ import { RichText } from '../components/Inputs';
 import { Section, Subsection } from '../components/Section';
 import HelpText from '../components/HelpText';
 import { t } from '../i18n';
-import { YEAR_OPTIONS } from '../util';
 
 class ApdSummary extends Component {
   handleYears = e => {
@@ -29,6 +28,7 @@ class ApdSummary extends Component {
   render() {
     const {
       years,
+      yearOptions,
       overview,
       hitNarrative,
       hieNarrative,
@@ -40,7 +40,7 @@ class ApdSummary extends Component {
         <Subsection resource="apd.overview">
           <div className="mb3">
             <div className="mb-tiny bold">{t('apd.overview.yearsCovered')}</div>
-            {YEAR_OPTIONS.map(option => (
+            {yearOptions.map(option => (
               <label key={option} className="mr1">
                 <input
                   type="checkbox"

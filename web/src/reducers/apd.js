@@ -1,19 +1,18 @@
 import u from 'updeep';
 
+import { defaultAPDYearOptions, defaultAPDYears } from '../util';
 import {
   GET_APD_REQUEST,
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
   UPDATE_APD
 } from '../actions/apd';
-import { YEAR_OPTIONS } from '../util';
-
-const firstTwoYears = YEAR_OPTIONS.slice(0, 2);
 
 const initialState = {
   data: {
     id: '',
-    years: firstTwoYears,
+    years: defaultAPDYears,
+    yearOptions: defaultAPDYearOptions,
     overview: '',
     hitNarrative: '',
     hieNarrative: '',
@@ -38,7 +37,8 @@ const reducer = (state = initialState, action) => {
         narrativeHIE: hieNarrative,
         narrativeMMIS: mmisNarrative,
         previousActivitySummary
-      } = action.data;
+      } =
+        action.data || {};
 
       return {
         ...state,
@@ -50,7 +50,8 @@ const reducer = (state = initialState, action) => {
           hitNarrative,
           hieNarrative,
           mmisNarrative,
-          years: years || firstTwoYears,
+          years: (years || defaultAPDYears).map(y => `${y}`),
+          yearOptions: defaultAPDYearOptions,
           previousActivitySummary: previousActivitySummary || ''
         }
       };
