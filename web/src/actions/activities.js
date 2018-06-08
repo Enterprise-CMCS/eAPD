@@ -42,7 +42,10 @@ export const expandActivitySection = id => ({
   id
 });
 
-export const removeActivity = id => ({ type: REMOVE_ACTIVITY, id });
+export const removeActivity = id => dispatch => {
+  dispatch({ type: REMOVE_ACTIVITY, id });
+  dispatch(updateBudget());
+};
 
 export const removeActivityContractor = (id, contractorId) => dispatch => {
   dispatch({
