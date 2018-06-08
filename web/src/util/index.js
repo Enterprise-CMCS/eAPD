@@ -2,8 +2,6 @@
 
 export const ACTIVITY_FUNDING_SOURCES = ['HIT', 'HIE', 'MMIS'];
 
-export const YEAR_OPTIONS = ['2018', '2019', '2020'];
-
 export const STATES = [
   { id: 'al', name: 'Alabama' },
   { id: 'ak', name: 'Alaska' },
@@ -114,6 +112,26 @@ export const STANDARDS = [
       'Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System'
   }
 ];
+
+const thisFFY = (() => {
+  const year = new Date().getFullYear();
+
+  // Federal fiscal year starts October 1,
+  // but Javascript months start with 0 for
+  // some reason, so October is month 9.
+  if (new Date().getMonth() > 8) {
+    return year + 1;
+  }
+  return year;
+})();
+
+// The UI turns the years into strings, so let's
+// just make them strings in the state as well;
+// that simplifies things
+const threeYears = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
+
+export const defaultAPDYearOptions = threeYears;
+export const defaultAPDYears = threeYears.slice(0, 2);
 
 export const stateLookup = id => STATES.find(s => s.id === id.toLowerCase());
 

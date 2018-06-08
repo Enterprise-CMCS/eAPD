@@ -5,6 +5,7 @@ describe('APD reducer', () => {
     data: {
       id: '',
       years: ['2018', '2019'],
+      yearOptions: ['2018', '2019', '2020'],
       overview: '',
       hitNarrative: '',
       hieNarrative: '',
@@ -39,13 +40,17 @@ describe('APD reducer', () => {
           narrativeHIT: 'HIT, but as a play',
           narrativeHIE: 'HIE, but as a novel',
           narrativeMMIS: 'MMIS, but as a script',
-          years: 'the years for the APD'
+          years: []
         }
       })
     ).toEqual({
       data: {
         id: 'apd-id',
-        years: 'the years for the APD',
+        years: [],
+        // TODO: This value is computed based on the current datetime.
+        // Probably ought to mock the time (sinon can do this) so
+        // the test is deterministic.
+        yearOptions: ['2018', '2019', '2020'],
         overview: 'moop moop',
         hitNarrative: 'HIT, but as a play',
         hieNarrative: 'HIE, but as a novel',

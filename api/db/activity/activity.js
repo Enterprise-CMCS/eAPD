@@ -38,19 +38,19 @@ module.exports = {
         const value = attr[field];
         const outField = field.replace(/([A-Z])/g, m => `_${m.toLowerCase()}`);
 
-        if (field === 'otherFundingSources') {
-          if (value.description) {
-            out.other_funding_sources_description = value.description;
+        if (field === 'costAllocationNarrative') {
+          if (value.methodology) {
+            out.cost_allocation_methodology = value.methodology;
           }
-          if (value.amount) {
-            out.other_funding_sources_amount = value.amount;
+          if (value.otherSources) {
+            out.other_funding_sources_description = value.otherSources;
           }
         } else if (
-          // stringify the types and standardsAndConditions fields,
-          // but only if they're not null; if they are null, stringify
+          // stringify the standardsAndConditions field,
+          // but only if it's not null; if null, stringify
           // returns the string 'null', which is invalid JSON and will
           // cause Postgres to throw
-          (field === 'types' || field === 'standardsAndConditions') &&
+          field === 'standardsAndConditions' &&
           value
         ) {
           out[outField] = JSON.stringify(value);
@@ -67,10 +67,9 @@ module.exports = {
         'summary',
         'description',
         'alternatives',
-        'costAllocationMethodology',
-        'otherFundingSources',
-        'types',
-        'standardsAndConditions'
+        'costAllocationNarrative',
+        'standardsAndConditions',
+        'fundingSource'
       ],
       owns: {
         goals: 'apdActivityGoal',
@@ -117,7 +116,6 @@ module.exports = {
       return {
         id: this.get('id'),
         name: this.get('name'),
-        types: this.get('types'),
         summary: this.get('summary'),
         description: this.get('description'),
         alternatives: this.get('alternatives'),
@@ -126,13 +124,13 @@ module.exports = {
         expenses: this.related('expenses'),
         schedule: this.related('schedule'),
         statePersonnel: this.related('statePersonnel'),
-        costAllocationMethodology: this.get('cost_allocation_methodology'),
-        costAllocation: this.related('costAllocation'),
-        otherFundingSources: {
-          description: this.get('other_funding_sources_description'),
-          amount: this.get('other_funding_sources_amount')
+        costAllocationNarrative: {
+          methodology: this.get('cost_allocation_methodology'),
+          otherSources: this.get('other_funding_sources_description')
         },
-        standardsAndConditions: this.get('standards_and_conditions')
+        costAllocation: this.related('costAllocation'),
+        standardsAndConditions: this.get('standards_and_conditions'),
+        fundingSource: this.get('funding_source')
       };
     }
   }
