@@ -7,6 +7,11 @@ import * as apdActions from './apd';
 const mockStore = configureStore([thunk]);
 
 describe('activities actions', () => {
+  const updatedBudgetAction = state => ({
+    type: apdActions.UPDATE_BUDGET,
+    state
+  });
+
   it('addActivity creates ADD_ACTIVITY action', () => {
     const store = mockStore({ apd: { data: { years: 'years' } } });
 
@@ -27,14 +32,25 @@ describe('activities actions', () => {
     ['addActivityGoal', 'ADD_ACTIVITY_GOAL'],
     ['addActivityMilestone', 'ADD_ACTIVITY_MILESTONE'],
     ['expandActivitySection', 'EXPAND_ACTIVITY_SECTION'],
-    ['removeActivity', 'REMOVE_ACTIVITY'],
+    ['removeActivity', 'REMOVE_ACTIVITY', true],
     ['toggleActivitySection', 'TOGGLE_ACTIVITY_SECTION']
-  ].forEach(([method, action]) => {
+  ].forEach(([method, action, updatesBudget]) => {
     it(`${method} creates ${action} action`, () => {
-      expect(actions[method]('activity id')).toEqual({
-        type: actions[action],
-        id: 'activity id'
-      });
+      const store = mockStore({});
+
+      const expectedActions = [
+        {
+          type: actions[action],
+          id: 'activity id'
+        }
+      ];
+      if (updatesBudget) {
+        expectedActions.push(updatedBudgetAction({}));
+      }
+
+      store.dispatch(actions[method]('activity id'));
+
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 
@@ -61,18 +77,40 @@ describe('activities actions', () => {
   // These are the REMOVE_* actions that take an activity ID and
   // and item ID
   [
-    ['removeActivityContractor', 'REMOVE_ACTIVITY_CONTRACTOR', 'contractorId'],
+    [
+      'removeActivityContractor',
+      'REMOVE_ACTIVITY_CONTRACTOR',
+      'contractorId',
+      true
+    ],
     ['removeActivityGoal', 'REMOVE_ACTIVITY_GOAL', 'goalIdx'],
-    ['removeActivityExpense', 'REMOVE_ACTIVITY_EXPENSE', 'expenseId'],
+    ['removeActivityExpense', 'REMOVE_ACTIVITY_EXPENSE', 'expenseId', true],
     ['removeActivityMilestone', 'REMOVE_ACTIVITY_MILESTONE', 'milestoneIdx'],
-    ['removeActivityStatePerson', 'REMOVE_ACTIVITY_STATE_PERSON', 'personId']
-  ].forEach(([method, action, idName]) => {
+    [
+      'removeActivityStatePerson',
+      'REMOVE_ACTIVITY_STATE_PERSON',
+      'personId',
+      true
+    ]
+  ].forEach(([method, action, idName, updatesBudget]) => {
     it(`${method} creates ${action} action`, () => {
-      expect(actions[method]('activity id', 'item id')).toEqual({
-        type: actions[action],
-        id: 'activity id',
-        [idName]: 'item id'
-      });
+      const state = { apd: { data: { years: 'years' } } };
+      const store = mockStore(state);
+
+      const expectedActions = [
+        {
+          type: actions[action],
+          id: 'activity id',
+          [idName]: 'item id'
+        }
+      ];
+      if (updatesBudget) {
+        expectedActions.push(updatedBudgetAction(state));
+      }
+
+      store.dispatch(actions[method]('activity id', 'item id'));
+
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 
