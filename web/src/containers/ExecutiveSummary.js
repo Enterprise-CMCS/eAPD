@@ -63,7 +63,7 @@ const mapStateToProps = ({ activities, apd }) => {
     id: 'all',
     name: 'Total Cost',
     descShort: null,
-    totals: aggregateByYear(data.map(d => d.totals))
+    totals: aggregateByYear(data.map(d => d.totals), apd.data.years)
   });
 
   return {
