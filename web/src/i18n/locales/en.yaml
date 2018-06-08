@@ -239,16 +239,33 @@
     helpText: "Ensure your state complies with all applicable code of federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
     procurement: 
       title: "Procurement Standards"
-      helpText: ""
+      helpText: "Procurement Standards (Competition / Sole Source)"
+      helpText: "42 CFR Part 495.348			✓ Yes         •  No
+                 SMM Section 11267			✓   Yes       •  No
+                45 CFR Part 95.615			✓  Yes        •  No 
+                45 CFR Part 92.36			✓  Yes         •  No"
     recordsAccess: 
       title: "Access to Records"
-      helpText: ""
+      helpText: "Access to Records, Reporting and Agency Attestations"
+      helptext: "42 CFR Part 495.350			✓  Yes        •  No
+42 CFR Part 495.352			✓  Yes        •  No
+42 CFR Part 495.346			✓  Yes        •  No
+42 CFR Part 433.112(b)(5) – (9)	✓ Yes         •  No
+45 CFR Part 95.615			✓ Yes         •  No
+SMM Section 11267			✓  Yes        •  No
+"
     softwareRights: 
       title: "Software Rights"
-      helpText: ""
+      helpText: "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA Compliance, and Progress Reports"
+      helpText: "42 CFR Part 495.360			✓ Yes        •  No
+45 CFR Part 95.617			✓ Yes        •  No
+42 CFR Part 431.300			✓ Yes        •  No
+42 CFR Part 433.112			✓  Yes       •  No"
+
     security: 
       title: "Security"
-      helpText: ""
+      helpText: "Security and interface requirements to be employed for all State HIT systems."
+      helpText: "45 CFR 164 Securities and Privacy	✓ Yes  •  No"
   executiveSummary: 
     title: "Executive Summary"
     helpText: "See the executive summary generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review. If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
@@ -261,6 +278,6 @@
   certifyAndSubmit: 
     title: "Certify and Submit"
     helpText: "By clicking Submit, you agree that your funding request fulfills our standards and requirements."
-    certify: 
+    certify: "Upon submission, you understand this APD submission will be locked from further edits until reviewed by a CMS analyst. If you agree, select the submit button below."
       title: "Certify and Submit"
 
