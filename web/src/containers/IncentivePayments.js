@@ -9,10 +9,7 @@ import { INCENTIVE_ENTRIES } from '../util';
 import { formatMoney, formatNum } from '../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
-const COLORS = {
-  '2018': 'bg-teal',
-  '2019': 'bg-green'
-};
+const COLORS = ['teal', 'green', 'yellow'];
 
 class IncentivePayments extends Component {
   handleChange = (key, year, quarter) => e => {
@@ -24,8 +21,8 @@ class IncentivePayments extends Component {
   render() {
     const { data, totals, years } = this.props;
 
-    const yearsWithColors = years.map(year => {
-      const color = COLORS[year] || 'bg-gray';
+    const yearsWithColors = years.map((year, i) => {
+      const color = `bg-${COLORS[i] || 'gray'}`;
       const colorLight = `${color}-light`;
       return { year, color, colorLight };
     });
