@@ -17,38 +17,46 @@ import {
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
-import { GET_APD_SUCCESS } from '../actions/apd';
+import { GET_APD_SUCCESS, UPDATE_APD } from '../actions/apd';
 
-import { YEAR_OPTIONS, arrToObj, nextSequence } from '../util';
+import { arrToObj, defaultAPDYears, nextSequence } from '../util';
 
 const newGoal = () => ({ desc: '', obj: '' });
 
 const newMilestone = () => ({ name: '', start: '', end: '' });
 
-const newStatePerson = id => ({
+const statePersonDefaultYear = () => ({ amt: '', perc: '' });
+const newStatePerson = (id, years) => ({
   id,
   title: '',
   desc: '',
-  years: arrToObj(YEAR_OPTIONS, { amt: '', perc: '' })
+  years: arrToObj(years, statePersonDefaultYear())
 });
 
-const newContractor = id => ({
+const contractorDefaultYear = () => 0;
+const newContractor = (id, years) => ({
   id,
   name: '',
   desc: '',
   start: '',
   end: '',
-  years: arrToObj(YEAR_OPTIONS, 0)
+  years: arrToObj(years, contractorDefaultYear())
 });
 
-const newExpense = id => ({
+const expenseDefaultYear = () => 0;
+const newExpense = (id, years) => ({
   id,
   category: 'Hardware, software, and licensing',
   desc: '',
-  years: arrToObj(YEAR_OPTIONS, 100)
+  years: arrToObj(years, expenseDefaultYear())
 });
 
-const newActivity = (id, name = '', fundingSource = 'HIT') => ({
+const costFFPDefaultYear = () => ({ fed: 90, state: 10, other: 0 });
+
+const newActivity = (
+  id,
+  { name = '', fundingSource = 'HIT', years = [] } = {}
+) => ({
   id,
   name,
   fundingSource,
@@ -60,10 +68,18 @@ const newActivity = (id, name = '', fundingSource = 'HIT') => ({
   otherFundingAmt: '',
   goals: [newGoal()],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
-  statePersonnel: [newStatePerson(1), newStatePerson(2), newStatePerson(3)],
-  contractorResources: [newContractor(1), newContractor(2), newContractor(3)],
-  expenses: [newExpense(1), newExpense(2), newExpense(3)],
-  costFFP: arrToObj(YEAR_OPTIONS, { fed: 90, state: 10, other: 0 }),
+  statePersonnel: [
+    newStatePerson(1, years),
+    newStatePerson(2, years),
+    newStatePerson(3, years)
+  ],
+  contractorResources: [
+    newContractor(1, years),
+    newContractor(2, years),
+    newContractor(3, years)
+  ],
+  expenses: [newExpense(1, years), newExpense(2, years), newExpense(3, years)],
+  costFFP: arrToObj(years, { fed: 90, state: 10, other: 0 }),
   standardsAndConditions: {
     modularity: '',
     mita: '',
@@ -77,17 +93,15 @@ const newActivity = (id, name = '', fundingSource = 'HIT') => ({
     documentation: '',
     minimizeCost: ''
   },
+  years,
   meta: {
     expanded: false
   }
 });
 
 const initialState = {
-  byId: {
-    1: newActivity(1, 'Program Administration', 'HIT'),
-    2: newActivity(2, 'Test', 'HIE')
-  },
-  allIds: [1, 2]
+  byId: {},
+  allIds: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -97,7 +111,7 @@ const reducer = (state = initialState, action) => {
       return {
         byId: {
           ...state.byId,
-          [id]: newActivity(id)
+          [id]: newActivity(id, { years: action.years })
         },
         allIds: [...state.allIds, id]
       };
@@ -249,22 +263,95 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case UPDATE_APD:
+      if (action.updates.years) {
+        const { years } = action.updates;
+        const update = { byId: {} };
+
+        const fixupYears = (obj, defaultValue) => {
+          // Can't clone in the typical way because the incoming
+          // object derives from redux state and preventExtensions()
+          // has been called on it.  That means we can't add
+          // years if necessary.  To get around that, stringify
+          // then parse.  It's brute force but it works.
+          const out = JSON.parse(JSON.stringify(obj));
+
+          Object.keys(obj).forEach(year => {
+            if (!years.includes(year)) {
+              delete out[year];
+            }
+          });
+
+          years.forEach(year => {
+            if (!out[year]) {
+              out[year] = defaultValue();
+            }
+          });
+
+          return out;
+        };
+
+        const fixupExpenses = (objects, defaultValue) => () => {
+          // contractorResources, statePersonnel, and expenses
+          // are all arrays with years subproperties
+          if (Array.isArray(objects)) {
+            return objects.map(o => ({
+              ...o,
+              years: fixupYears(o.years, defaultValue)
+            }));
+          }
+          // but costFFP is just an object whose properties
+          // are the years
+          return fixupYears(objects, defaultValue);
+        };
+
+        Object.entries(state.byId).forEach(([id, activity]) => {
+          update.byId[id] = {
+            years,
+            statePersonnel: fixupExpenses(
+              activity.statePersonnel,
+              statePersonDefaultYear
+            ),
+            contractorResources: fixupExpenses(
+              activity.contractorResources,
+              contractorDefaultYear
+            ),
+            expenses: fixupExpenses(activity.expenses, expenseDefaultYear),
+            costFFP: fixupExpenses(activity.costFFP, costFFPDefaultYear)
+          };
+        });
+
+        return u(update, state);
+      }
+      return state;
     case GET_APD_SUCCESS: {
       const byId = {};
-      action.data.activities.forEach(a => {
+      ((action.data || {}).activities || []).forEach(a => {
         byId[a.id] = {
           id: a.id,
           name: a.name,
           fundingSource: 'HIT', // TODO
-          descShort: '', // TODO
+          years: action.data.years,
+          descShort: a.summary,
           descLong: a.description,
-          altApproach: '', // TODO
-          costAllocateDesc: '', // TODO
-          otherFundingDesc: a.otherFundingSources.description,
-          otherFundingAmt: +a.otherFundingSources.amount,
+          altApproach: a.alternatives,
+          costAllocateDesc: a.costAllocationNarrative.methodology,
+          otherFundingDesc: a.costAllocationNarrative.otherSources,
+          otherFundingAmt: 0,
+          costFFP: a.costAllocation.reduce(
+            (all, ffp) => ({
+              ...all,
+              [ffp.year]: {
+                fed: ffp.federal * 100,
+                state: ffp.state * 100,
+                other: ffp.other * 100
+              }
+            }),
+            {}
+          ),
           goals: a.goals.map(g => ({
             desc: g.description,
-            obj: g.objectives[0] // TODO - don't assume there's one objective; tie objective directly to the goal instead of a mapped table
+            obj: g.objective
           })),
           milestones: a.schedule.map(s => ({
             id: s.id,
@@ -315,18 +402,17 @@ const reducer = (state = initialState, action) => {
           })),
 
           standardsAndConditions: {
-            // TODO
-            modularity: '',
-            mita: '',
-            industry: '',
-            leverage: '',
-            bizResults: '',
-            reporting: '',
-            interoperability: '',
-            mitigation: '',
-            keyPersonnel: '',
-            documentation: '',
-            minimizeCost: ''
+            bizResults: a.standardsAndConditions.businessResults,
+            documentation: a.standardsAndConditions.documentation,
+            industry: a.standardsAndConditions.industryStandards,
+            interoperability: a.standardsAndConditions.interoperability,
+            keyPersonnel: a.standardsAndConditions.keyPersonnel,
+            leverage: a.standardsAndConditions.leverage,
+            modularity: a.standardsAndConditions.modularity,
+            minimizeCost: a.standardsAndConditions.minimizeCost,
+            mita: a.standardsAndConditions.mita,
+            mitigation: a.standardsAndConditions.mitigationStrategy,
+            reporting: a.standardsAndConditions.reporting
           },
           meta: {
             expanded: false
@@ -334,9 +420,17 @@ const reducer = (state = initialState, action) => {
         };
       });
 
+      if (Object.keys(byId).length === 0) {
+        byId[1] = newActivity(1, {
+          name: 'Program Administration',
+          fundingSource: 'HIT',
+          years: defaultAPDYears
+        });
+      }
+
       return {
         byId,
-        allIds: action.data.activities.map(a => a.id)
+        allIds: Object.keys(byId)
       };
     }
     default:
@@ -348,11 +442,7 @@ export default reducer;
 
 // data munging / aggregation functions
 
-export const aggregateByYear = (
-  dataArray,
-  iteratee = x => x,
-  years = YEAR_OPTIONS
-) =>
+export const aggregateByYear = (dataArray, years, iteratee = x => x) =>
   dataArray.reduce((accum, datum) => {
     const totals = accum;
     years.forEach(yr => {
@@ -361,8 +451,13 @@ export const aggregateByYear = (
     return totals;
   }, arrToObj(years, 0));
 
-export const getCategoryTotals = (entries, iteratee = x => x) =>
-  aggregateByYear(entries.map(e => e.years), iteratee);
+export const getCategoryTotals = (entries, iteratee = x => x) => {
+  let years = [];
+  if (entries.length) {
+    years = Object.keys(entries[0].years);
+  }
+  return aggregateByYear(entries.map(e => e.years), years, iteratee);
+};
 
 export const getActivityCategoryTotals = activity => ({
   statePersonnel: getCategoryTotals(activity.statePersonnel, d => d.amt),
@@ -370,18 +465,8 @@ export const getActivityCategoryTotals = activity => ({
   expenses: getCategoryTotals(activity.expenses)
 });
 
-export const getActivitiesCategoryTotals = activities => {
-  const totalsByCat = activities.map(a => getActivityCategoryTotals(a));
-  const catNames = ['statePersonnel', 'contractors', 'expenses'];
-
-  return catNames.reduce((obj, cat) => {
-    obj[cat] = aggregateByYear(totalsByCat.map(t => t[cat])); // eslint-disable-line no-param-reassign
-    return obj;
-  }, {});
-};
-
 export const getActivityTotals = activity =>
-  aggregateByYear(Object.values(getActivityCategoryTotals(activity)));
-
-export const getActivitiesTotals = activities =>
-  aggregateByYear(activities.map(a => getActivityTotals(a)));
+  aggregateByYear(
+    Object.values(getActivityCategoryTotals(activity)),
+    activity.years
+  );

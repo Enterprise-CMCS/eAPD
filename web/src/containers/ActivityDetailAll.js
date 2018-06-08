@@ -54,7 +54,7 @@ class ActivityDetailAll extends Component {
 }
 
 ActivityDetailAll.propTypes = {
-  aId: PropTypes.number.isRequired,
+  aId: PropTypes.string.isRequired,
   expanded: PropTypes.bool.isRequired,
   num: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,

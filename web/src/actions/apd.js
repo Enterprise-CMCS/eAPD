@@ -9,6 +9,10 @@ export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
 export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
 export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
 export const UPDATE_APD = 'UPDATE_APD';
+export const UPDATE_BUDGET = 'UPDATE_BUDGET';
+
+export const updateBudget = () => (dispatch, getState) =>
+  dispatch({ type: UPDATE_BUDGET, state: getState() });
 
 export const requestApd = () => ({ type: GET_APD_REQUEST });
 export const receiveApd = data => ({ type: GET_APD_SUCCESS, data });
@@ -16,7 +20,12 @@ export const failApd = error => ({ type: GET_APD_FAILURE, error });
 
 export const addApdKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
 export const removeApdKeyPerson = id => ({ type: REMOVE_APD_KEY_PERSON, id });
-export const updateApd = updates => ({ type: UPDATE_APD, updates });
+export const updateApd = updates => dispatch => {
+  dispatch({ type: UPDATE_APD, updates });
+  if (updates.years) {
+    dispatch(updateBudget());
+  }
+};
 
 export const requestSave = () => ({ type: SAVE_APD_REQUEST });
 export const saveSuccess = () => ({ type: SAVE_APD_SUCCESS });
@@ -32,6 +41,7 @@ export const fetchApd = () => dispatch => {
     .then(req => {
       const apd = Array.isArray(req.data) ? req.data[0] : null;
       dispatch(receiveApd(apd));
+      dispatch(updateBudget());
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
@@ -74,14 +84,21 @@ export const saveApd = () => (dispatch, state) => {
       summary: activity.descShort,
       description: activity.descLong,
       alternatives: activity.altApproach,
-      costAllocationMethodology: activity.costAllocateDesc,
-      otherFundingSources: {
-        description: activity.otherFundingDesc,
-        amount: +activity.otherFundingAmt || 0
+      costAllocationNarrative: {
+        methodology: activity.costAllocateDesc,
+        otherSources: activity.otherFundingDesc
       },
+      costAllocation: Object.entries(activity.costFFP).map(
+        ([year, allocation]) => ({
+          federal: +allocation.fed / 100,
+          state: +allocation.state / 100,
+          other: +allocation.other / 100,
+          year
+        })
+      ),
       goals: activity.goals.map(g => ({
         description: g.desc,
-        objectives: [{ description: g.obj }] // TODO - objective should mape 1:1 to goals, instead of being an array (needs backend change first)
+        objective: g.obj
       })),
       schedule: activity.milestones.map(m => ({
         milestone: m.name,

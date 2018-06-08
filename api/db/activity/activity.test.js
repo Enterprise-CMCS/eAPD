@@ -26,10 +26,9 @@ tap.test('activity data model', async activityModelTests => {
               'summary',
               'description',
               'alternatives',
-              'costAllocationMethodology',
-              'otherFundingSources',
-              'types',
-              'standardsAndConditions'
+              'costAllocationNarrative',
+              'standardsAndConditions',
+              'fundingSource'
             ],
             owns: {
               goals: 'apdActivityGoal',
@@ -306,15 +305,15 @@ tap.test('activity data model', async activityModelTests => {
       self.get
         .withArgs('other_funding_sources_description')
         .returns('panhandling, funny videos online');
-      self.get
-        .withArgs('other_funding_sources_amount')
-        .returns('37¢ and some lint');
-      self.get.withArgs('types').returns('on a typewriter');
+      self.get.withArgs('funding_source').returns('bitcoin');
       self.get
         .withArgs('standards_and_conditions')
         .returns('nobody reads them');
 
       self.related.withArgs('goals').returns('goooooaaaaals');
+      self.related
+        .withArgs('costAllocation')
+        .returns('cost allocation by year');
 
       const output = activity.apdActivity.toJSON.bind(self)();
 
@@ -326,14 +325,14 @@ tap.test('activity data model', async activityModelTests => {
           summary: 'US Public Health Service officer',
           description: 'cool CMS person',
           alternatives: 'Nick Aretakis',
-          costAllocationMethodology: 'moop moop',
-          otherFundingSources: {
-            description: 'panhandling, funny videos online',
-            amount: '37¢ and some lint'
+          costAllocationNarrative: {
+            methodology: 'moop moop',
+            otherSources: 'panhandling, funny videos online'
           },
+          costAllocation: 'cost allocation by year',
           goals: 'goooooaaaaals',
-          types: 'on a typewriter',
-          standardsAndConditions: 'nobody reads them'
+          standardsAndConditions: 'nobody reads them',
+          fundingSource: 'bitcoin'
         },
         'gives us back the right JSON-ified object'
       );
