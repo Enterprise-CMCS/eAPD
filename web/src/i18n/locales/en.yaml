@@ -71,6 +71,17 @@
     actualExpenses: 
       title: "Actual Expenses"
       helpText: "Input the most recent actual expenses."
+  hieactivities:	
+title: "HIE Activity Details"	
+helpText: "Describe the activity in detail including images, diagrams, or other relevant information. If this an HIE activity, the activity details must also include a description of three items: 	
+- How the activity is linked to meaningful use;	
+- Value proposition to providers;	
+- Sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.	
+Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how you'll complete the activity."
+list:
+title: "Activity List"	
+title: "Program Activities"
+helpText: "Identify each of the activities referenced from the overview section. CMS will collect information for each activity."
   activities: 
     title: "Program Activities"
     helpText: "Identify each of the activities referenced from the overview section. We'll collect information for each activity."
