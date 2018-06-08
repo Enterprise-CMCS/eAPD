@@ -1,17 +1,21 @@
 import u from 'updeep';
 
-import { defaultAPDYearOptions, defaultAPDYears } from '../util';
 import {
   GET_APD_REQUEST,
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
   UPDATE_APD
 } from '../actions/apd';
-import { INCENTIVE_ENTRIES, arrToObj } from '../util';
+import {
+  INCENTIVE_ENTRIES,
+  arrToObj,
+  defaultAPDYearOptions,
+  defaultAPDYears
+} from '../util';
 
 export const incentivePayments = arrToObj(
   INCENTIVE_ENTRIES.map(e => e.id),
-  arrToObj(defaultAPDYears, { 1: 0, 2: 0, 3: 0, 4: 0 })
+  arrToObj(defaultAPDYearOptions, { 1: 0, 2: 0, 3: 0, 4: 0 })
 );
 
 const initialState = {
@@ -52,6 +56,7 @@ const reducer = (state = initialState, action) => {
         fetching: false,
         loaded: true,
         data: {
+          ...state.data,
           id,
           overview,
           hitNarrative,

@@ -4,11 +4,15 @@ import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
 import { Input, DollarInput } from '../components/Inputs';
+import { t } from '../i18n';
 import { INCENTIVE_ENTRIES } from '../util';
 import { formatMoney, formatNum } from '../util/formats';
 
-const YEARS = ['2018'];
 const QUARTERS = [1, 2, 3, 4];
+const COLORS = {
+  '2018': 'bg-teal',
+  '2019': 'bg-green'
+};
 
 class IncentivePayments extends Component {
   handleChange = (key, year, quarter) => e => {
@@ -18,33 +22,45 @@ class IncentivePayments extends Component {
   };
 
   render() {
-    const { data, totals } = this.props;
+    const { data, totals, years } = this.props;
+
+    const yearsWithColors = years.map(year => {
+      const color = COLORS[year] || 'bg-gray';
+      const colorLight = `${color}-light`;
+      return { year, color, colorLight };
+    });
 
     return (
       <div className="py1 overflow-auto">
-        <table className="h6 table-fixed table-bordered">
+        <table
+          className="h6 table-fixed table-bordered table-budget"
+          style={{ minWidth: 1200 }}
+        >
           <thead>
             <tr>
-              <th style={{ width: 200 }} />
-              {YEARS.map(year => (
-                <th key={year} className="bg-teal white center" colSpan="5">
-                  FFY {year}
+              <th style={{ width: 160 }} />
+              {yearsWithColors.map(({ year, color }) => (
+                <th key={year} className={`white center ${color}`} colSpan="5">
+                  {t('ffy', { year })}
                 </th>
               ))}
-              <th className="bg-black white center">Total</th>
+              <th className="bg-black white center">{t('table.total')}</th>
             </tr>
             <tr>
               <th />
-              {YEARS.map(year => (
+              {yearsWithColors.map(({ year, colorLight }) => (
                 <Fragment key={year}>
-                  <th className="right-align">Q1</th>
-                  <th className="right-align">Q2</th>
-                  <th className="right-align">Q3</th>
-                  <th className="right-align">Q4</th>
-                  <th className="right-align">Subtotal</th>
+                  {QUARTERS.map(q => (
+                    <th key={q} className="right-align">
+                      {t('table.quarter', { q })}
+                    </th>
+                  ))}
+                  <th className={`right-align ${colorLight}`}>
+                    {t('table.subtotal')}
+                  </th>
                 </Fragment>
               ))}
-              <th />
+              <th className="bg-gray-light" />
             </tr>
           </thead>
           <tbody>
@@ -57,7 +73,7 @@ class IncentivePayments extends Component {
                   <td className={`align-middle ${i % 2 === 0 ? 'bold' : ''}`}>
                     {name}
                   </td>
-                  {YEARS.map(year => (
+                  {yearsWithColors.map(({ year, colorLight }) => (
                     <Fragment key={year}>
                       {QUARTERS.map(q => (
                         <td key={q}>
@@ -72,12 +88,14 @@ class IncentivePayments extends Component {
                           />
                         </td>
                       ))}
-                      <td className="bold mono right-align align-middle">
+                      <td
+                        className={`bold mono right-align align-middle ${colorLight}`}
+                      >
                         {fmt(totals[id].byYear[year])}
                       </td>
                     </Fragment>
                   ))}
-                  <td className="bold mono right-align align-middle">
+                  <td className="bold mono right-align align-middle bg-gray-light">
                     {fmt(totals[id].allYears)}
                   </td>
                 </tr>
@@ -93,16 +111,17 @@ class IncentivePayments extends Component {
 IncentivePayments.propTypes = {
   data: PropTypes.object.isRequired,
   totals: PropTypes.object.isRequired,
-  updateApd: PropTypes.func.isRequired
+  updateApd: PropTypes.func.isRequired,
+  years: PropTypes.array.isRequired
 };
 
 const addObjVals = obj => Object.values(obj).reduce((a, b) => +a + +b, 0);
 
 /* eslint-disable no-param-reassign */
-const getTotals = data =>
+const getTotals = (data, years) =>
   INCENTIVE_ENTRIES.reduce((obj, entry) => {
     const datum = data[entry.id];
-    const byYear = YEARS.reduce((obj2, yr) => {
+    const byYear = years.reduce((obj2, yr) => {
       obj2[yr] = addObjVals(datum[yr]);
       return obj2;
     }, {});
@@ -112,10 +131,10 @@ const getTotals = data =>
   }, {});
 
 const mapStateToProps = ({ apd }) => {
-  const data = apd.data.incentivePayments;
-  const totals = getTotals(data);
+  const { incentivePayments: data, years } = apd.data;
+  const totals = getTotals(data, years);
 
-  return { data, totals };
+  return { data, totals, years };
 };
 
 const mapDispatchToProps = { updateApd: updateApdAction };
