@@ -241,28 +241,28 @@
     helpText: "Ensure your state complies with all applicable code of federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
     procurement: 
       title: "Procurement Standards"
-      helpText: ""
+      helpText: "Procurement Standards (Competition / Sole Source)"
     recordsAccess: 
       title: "Access to Records"
-      helpText: ""
+      helpText: "Access to Records, Reporting and Agency Attestations"
     softwareRights: 
       title: "Software Rights"
-      helpText: ""
+      helpText: "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA Compliance, and Progress Reports"
     security: 
       title: "Security"
-      helpText: ""
+      helpText: "Security and interface requirements to be employed for all State HIT systems."
   executiveSummary: 
     title: "Executive Summary"
-    helpText: "See the executive summary generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review. If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
+    helpText: "See the executive summary generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review."
     summary: 
       title: "Executive Summary"
-      helpText: ""
+      helpText: "If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
     budgetTable: 
       title: "Program Budget Table"
       helpText: ""
   certifyAndSubmit: 
     title: "Certify and Submit"
-    helpText: "By clicking Submit, you agree that your funding request fulfills our standards and requirements."
-    certify: 
+    helpText: "Note, this application will be locked upon submission until after a CMS analyst reviews it."
+    certify: "Note, this application will be locked upon submission until after a CMS analyst reviews it."
       title: "Certify and Submit"
 
