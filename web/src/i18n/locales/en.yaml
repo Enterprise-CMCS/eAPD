@@ -71,20 +71,9 @@
     actualExpenses: 
       title: "Actual Expenses"
       helpText: "Input the most recent actual expenses."
-  hieactivities:
-  title: "HIE Activity Details"
-  helpText: "Describe the activity in detail including images, diagrams, or other relevant information. If this an HIE activity, the activity details must also include a description of three items: 
-  - How the activity is linked to meaningful use;
-  - Value proposition to providers;
-  - Sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.
-
-  Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how you'll complete the activity."
-  list:
-  title: "Activity List"
-  helptext: ""
   activities: 
     title: "Program Activities"
-    helpText: "Identify each of the activities referenced from the overview section. CMS will collect information for each activity."
+    helpText: "Identify each of the activities referenced from the overview section. We'll collect information for each activity."
     list: 
       title: "Activity List"
       helpText: "Examples of individual activities include: Auditing, Outreach, Environmental Scans, HIE Registry Development, CQM Database Development, Data and Analytics, HIE Onboarding, etc."
@@ -159,13 +148,13 @@
     statePersonnel: 
       title: "State Personnel"
       subheader: "Outline the personnel resources for this section. This includes anyone funded as a part of this activity. This does not include personnel listed in the contract section."
-      helpText: "Personnel costs must include salaries and benefits."
+      helpText: "Personnel costs must include salaries and benefits. FTE% will be generated automatically, after you list a salary amount in the table below."
       labels: 
         entryNum: "#"
         title: "Title"
         desc: "Description"
         yearCost: "{{year}} Cost"
-        costAmt: "Amount"
+        costAmt: "Salary Amount"
         costPerc: "% FTE"
       removeLabel: "Remove personnel"
       addButtonText: "Add personnel"
@@ -252,33 +241,16 @@
     helpText: "Ensure your state complies with all applicable code of federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
     procurement: 
       title: "Procurement Standards"
-      helpText: "Procurement Standards (Competition / Sole Source)"
-      helpText: "42 CFR Part 495.348			✓ Yes         •  No
-                 SMM Section 11267			✓   Yes       •  No
-                45 CFR Part 95.615			✓  Yes        •  No 
-                45 CFR Part 92.36			✓  Yes         •  No"
+      helpText: ""
     recordsAccess: 
       title: "Access to Records"
-      helpText: "Access to Records, Reporting and Agency Attestations"
-      helptext: "42 CFR Part 495.350			✓  Yes        •  No
-42 CFR Part 495.352			✓  Yes        •  No
-42 CFR Part 495.346			✓  Yes        •  No
-42 CFR Part 433.112(b)(5) – (9)	✓ Yes         •  No
-45 CFR Part 95.615			✓ Yes         •  No
-SMM Section 11267			✓  Yes        •  No
-"
+      helpText: ""
     softwareRights: 
       title: "Software Rights"
-      helpText: "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA Compliance, and Progress Reports"
-      helpText: "42 CFR Part 495.360			✓ Yes        •  No
-45 CFR Part 95.617			✓ Yes        •  No
-42 CFR Part 431.300			✓ Yes        •  No
-42 CFR Part 433.112			✓  Yes       •  No"
-
+      helpText: ""
     security: 
       title: "Security"
-      helpText: "Security and interface requirements to be employed for all State HIT systems."
-      helpText: "45 CFR 164 Securities and Privacy	✓ Yes  •  No"
+      helpText: ""
   executiveSummary: 
     title: "Executive Summary"
     helpText: "See the executive summary generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review. If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
@@ -291,6 +263,6 @@ SMM Section 11267			✓  Yes        •  No
   certifyAndSubmit: 
     title: "Certify and Submit"
     helpText: "By clicking Submit, you agree that your funding request fulfills our standards and requirements."
-    certify: "Upon submission, you understand this APD submission will be locked from further edits until reviewed by a CMS analyst. If you agree, select the submit button below."
+    certify: 
       title: "Certify and Submit"
 
