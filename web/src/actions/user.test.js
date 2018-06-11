@@ -116,4 +116,27 @@ describe('user actions', () => {
       });
     });
   });
+
+  describe('shouldFetchUser)', () => {
+    it('does nothing if a user is already loaded', () => {
+      const store = mockStore({ user: { loaded: true } });
+      store.dispatch(actions.fetchUserDataIfNeeded('id'));
+
+      expect(store.getActions()).toEqual([]);
+    });
+
+    it('fetches the current users if not already loaded', () => {
+      const store = mockStore({ user: { loaded: false } });
+
+      const expectedActions = [
+        {
+          type: actions.GET_USER_REQUEST
+        }
+      ];
+
+      store.dispatch(actions.fetchUserDataIfNeeded('id'));
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
 });

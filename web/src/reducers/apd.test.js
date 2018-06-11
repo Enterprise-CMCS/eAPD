@@ -42,13 +42,13 @@ describe('APD reducer', () => {
           narrativeHIT: 'HIT, but as a play',
           narrativeHIE: 'HIE, but as a novel',
           narrativeMMIS: 'MMIS, but as a script',
-          years: []
+          years: [2013, 2014]
         }
       })
     ).toEqual({
       data: {
         id: 'apd-id',
-        years: [],
+        years: ['2013', '2014'],
         // TODO: This value is computed based on the current datetime.
         // Probably ought to mock the time (sinon can do this) so
         // the test is deterministic.
@@ -74,6 +74,18 @@ describe('APD reducer', () => {
       fetching: false,
       loaded: false,
       error: 'some error'
+    });
+  });
+
+  it('should handle an arbitrary APD update', () => {
+    expect(
+      apd(initialState, { type: 'UPDATE_APD', updates: { overview: 'bloop' } })
+    ).toEqual({
+      ...initialState,
+      data: {
+        ...initialState.data,
+        overview: 'bloop'
+      }
     });
   });
 });
