@@ -1,6 +1,7 @@
 import React from 'react';
 
 // Wired-up components
+import ProposedBudget from './ProposedBudget';
 import Activities from '../containers/Activities';
 import ApdSummary from '../containers/ApdSummary';
 import ExecutiveSummary from '../containers/ExecutiveSummary';
@@ -11,7 +12,6 @@ import TopNav from '../containers/TopNav';
 // Static / WIP components
 import AssurancesAndCompliance from './AssurancesAndCompliance';
 import CertifyAndSubmit from './CertifyAndSubmit';
-import ProposedBudget from './ProposedBudget';
 
 const PLACE = { id: 'tx', name: 'Texas' };
 
