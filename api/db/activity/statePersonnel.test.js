@@ -129,17 +129,11 @@ tap.test(
         }
       );
 
-      validationTests.test(
-        'fails if FTE is too small or too large',
-        async test => {
-          self.attributes.year = 2019;
-          self.attributes.fte = -0.3;
-          test.rejects(cost.validate.bind(self), 'rejects if fte is negative');
-
-          self.attributes.fte = 1.3;
-          test.rejects(cost.validate.bind(self), 'rejects if fte is over 100%');
-        }
-      );
+      validationTests.test('fails if FTE is too small', async test => {
+        self.attributes.year = 2019;
+        self.attributes.fte = -0.3;
+        test.rejects(cost.validate.bind(self), 'rejects if fte is negative');
+      });
 
       validationTests.test('succeeds if data is valid', async test => {
         self.attributes.year = 2019;
