@@ -75,6 +75,10 @@
     actualExpenses: 
       title: "Actual Expenses"
       helpText: "Input the most recent actual expenses."
+  hieactivities:	
+title: "HIE Activity Details"	
+helpText: "Describe the activity in detail including images, diagrams, or other relevant information. If this an HIE activity, the activity details must also include a description of three items: how the activity is linked to meaningful use; value proposition to providers, and sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.	Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how you'll complete the activity."
+title: "Activity List"	
   activities: 
     title: "Program Activities"
     helpText: "Identify each of the activities referenced from the overview section. We'll collect information for each activity."
@@ -152,13 +156,13 @@
     statePersonnel: 
       title: "State Personnel"
       subheader: "Outline the personnel resources for this section. This includes anyone funded as a part of this activity. This does not include personnel listed in the contract section."
-      helpText: "Personnel costs must include salaries and benefits."
+      helpText: "Personnel costs must include salaries and benefits. FTE% will be generated automatically, after you list a salary amount in the table below."
       labels: 
         entryNum: "#"
         title: "Title"
         desc: "Description"
         yearCost: "{{year}} Cost"
-        costAmt: "Amount"
+        costAmt: "Salary Amount"
         costPerc: "% FTE"
       removeLabel: "Remove personnel"
       addButtonText: "Add personnel"
@@ -245,28 +249,28 @@
     helpText: "Ensure your state complies with all applicable code of federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
     procurement: 
       title: "Procurement Standards"
-      helpText: ""
+      helpText: "Procurement Standards (Competition / Sole Source)"
     recordsAccess: 
       title: "Access to Records"
-      helpText: ""
+      helpText: "Access to Records, Reporting and Agency Attestations"
     softwareRights: 
       title: "Software Rights"
-      helpText: ""
+      helpText: "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA Compliance, and Progress Reports"
     security: 
       title: "Security"
-      helpText: ""
+      helpText: "Security and interface requirements to be employed for all State HIT systems."
   executiveSummary: 
     title: "Executive Summary"
-    helpText: "See the executive summary generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review. If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
+    helpText: "See the executive summary generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review."
     summary: 
       title: "Executive Summary"
-      helpText: ""
+      helpText: "If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
     budgetTable: 
       title: "Program Budget Table"
       helpText: ""
   certifyAndSubmit: 
     title: "Certify and Submit"
-    helpText: "By clicking Submit, you agree that your funding request fulfills our standards and requirements."
-    certify: 
+    helpText: "Note, this application will be locked upon submission until after a CMS analyst reviews it."
+    certify:
       title: "Certify and Submit"
 
