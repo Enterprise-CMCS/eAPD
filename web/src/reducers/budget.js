@@ -36,7 +36,11 @@ const initialState = years => ({
 
 const activities = src => Object.values(src.activities.byId);
 
-const addBudgetBlocks = (into, from) => {
+// The default for from is to handle the case where an expense
+// block doesn't have any rows.  In that case, from is never
+// populated.  But that block doesn't conribute to the budget,
+// either, so easiest thing to do is just zero it out.
+const addBudgetBlocks = (into, from = { total: 0, federal: 0, state: 0 }) => {
   const out = into;
   out.total += from.total;
   out.federal += from.federal;
@@ -111,7 +115,7 @@ const buildBudget = wholeState => {
   activities(wholeState).forEach(activity => {
     const totaller = getTotalsForActivity(activity);
     totaller
-      .collapse('statePersonnel', year => +year.amt)
+      .collapse('statePersonnel', year => +year.amt * +year.perc / 100)
       .totals()
       .merge(newState);
 
