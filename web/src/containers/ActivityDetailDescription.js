@@ -31,7 +31,13 @@ const ActivityDetailDescription = props => {
         </div>
       </Chunk>
 
-      <Chunk resource="activities.description.detail">
+      <Chunk
+        resource={
+          activity.fundingSource === 'HIE'
+            ? 'activities.description.detail.hie'
+            : 'activities.description.detail.standard'
+        }
+      >
         <div className="mb3">
           <RichText content={descLong} onSync={sync('descLong')} />
         </div>
