@@ -274,6 +274,6 @@ helpText: "Identify each of the activities referenced from the overview section.
   certifyAndSubmit: 
     title: "Certify and Submit"
     helpText: "Note, this application will be locked upon submission until after a CMS analyst reviews it."
-    certify: "Note, this application will be locked upon submission until after a CMS analyst reviews it."
+    certify:
       title: "Certify and Submit"
 
