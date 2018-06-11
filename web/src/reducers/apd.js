@@ -1,12 +1,23 @@
 import u from 'updeep';
 
-import { defaultAPDYearOptions, defaultAPDYears } from '../util';
 import {
   GET_APD_REQUEST,
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
   UPDATE_APD
 } from '../actions/apd';
+import {
+  INCENTIVE_ENTRIES,
+  arrToObj,
+  defaultAPDYearOptions,
+  defaultAPDYears
+} from '../util';
+
+export const initIncentiveData = () =>
+  arrToObj(
+    INCENTIVE_ENTRIES.map(e => e.id),
+    arrToObj(defaultAPDYearOptions, { 1: 0, 2: 0, 3: 0, 4: 0 })
+  );
 
 const initialState = {
   data: {
@@ -17,7 +28,8 @@ const initialState = {
     hitNarrative: '',
     hieNarrative: '',
     mmisNarrative: '',
-    previousActivitySummary: ''
+    previousActivitySummary: '',
+    incentivePayments: initIncentiveData()
   },
   fetching: false,
   loaded: false,
@@ -36,7 +48,8 @@ const reducer = (state = initialState, action) => {
         narrativeHIT: hitNarrative,
         narrativeHIE: hieNarrative,
         narrativeMMIS: mmisNarrative,
-        previousActivitySummary
+        previousActivitySummary,
+        incentivePayments
       } =
         action.data || {};
 
@@ -52,7 +65,8 @@ const reducer = (state = initialState, action) => {
           mmisNarrative,
           years: (years || defaultAPDYears).map(y => `${y}`),
           yearOptions: defaultAPDYearOptions,
-          previousActivitySummary: previousActivitySummary || ''
+          previousActivitySummary: previousActivitySummary || '',
+          incentivePayments: incentivePayments || initIncentiveData()
         }
       };
     }
