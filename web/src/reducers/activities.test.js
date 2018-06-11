@@ -670,8 +670,8 @@ describe('activities reducer', () => {
                 title: 'job title 1',
                 desc: 'desc 1',
                 years: {
-                  2018: { amt: 100, perc: 0.5 }, // TODO: multiply by 100
-                  2019: { amt: 200, perc: 0.8 } // TODO: multiply by 100
+                  2018: { amt: 100, perc: 50 },
+                  2019: { amt: 200, perc: 80 }
                 }
               },
               {
@@ -679,8 +679,8 @@ describe('activities reducer', () => {
                 title: 'job title 2',
                 desc: 'desc 2',
                 years: {
-                  2018: { amt: 300, perc: 0.3 }, // TODO: multiply by 100
-                  2019: { amt: 400, perc: 0.6 } // TODO: multiply by 100
+                  2018: { amt: 300, perc: 30 },
+                  2019: { amt: 400, perc: 60 }
                 }
               }
             ],
