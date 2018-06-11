@@ -1,10 +1,15 @@
-import { fmt, formatDec, formatMoney, formatPerc } from './formats';
+import { fmt, formatNum, formatDec, formatMoney, formatPerc } from './formats';
 
 describe('formatting util', () => {
   test('supports generic number formatting', () => {
     expect(fmt(30000, '.4f')).toEqual('30000.0000');
     expect(fmt(30000)).toEqual('30,000.00');
     expect(fmt(NaN)).toEqual('--');
+  });
+
+  test('formats integers', () => {
+    expect(formatNum(30)).toEqual('30');
+    expect(formatNum(30.112)).toEqual('30');
   });
 
   test('formats decimal numbers', () => {
