@@ -75,9 +75,6 @@
     actualExpenses: 
       title: "Actual Expenses"
       helpText: "Input the most recent actual expenses."
-  hieactivities:	
-    title: "HIE Activity Details"
-    helpText: "Describe the activity in detail including images, diagrams, or other relevant information. If this an HIE activity, the activity details must also include a description of three items: how the activity is linked to meaningful use; value proposition to providers, and sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.	Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how you'll complete the activity."
   activities: 
     title: "Program Activities"
     helpText: "Identify each of the activities referenced from the overview section. We'll collect information for each activity."
@@ -102,8 +99,12 @@
       reminder: "Note: This section is limited to 280 characters or less"
       summary: 
         subheader: "Brief Activity Summary"
-      detail: 
-        subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
+      detail:
+        standard:
+          subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
+        hie:
+          subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
+          helpText: "The activity details must also include a description of three items: how the activity is linked to meaningful use; value proposition to providers, and sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.	Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how you'll complete the activity."
       alternatives: 
         subheader: "Statement of alternative considerations and supporting justification"
         helpText: "If no substantive changes have been made to this activity, include a statement referring to the Statement of Alternative Considerations contained in previous versions of the IAPD or in the SMHP. If substantive changes have been made, include a statement describing the alternatives your state considered when making the change."
