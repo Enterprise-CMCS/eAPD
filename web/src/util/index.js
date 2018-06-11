@@ -2,6 +2,13 @@
 
 export const ACTIVITY_FUNDING_SOURCES = ['HIT', 'HIE', 'MMIS'];
 
+export const INCENTIVE_ENTRIES = [
+  { id: 'ehAmt', name: 'EH Payments', type: 'amount' },
+  { id: 'ehCt', name: 'EH Count (optional)', type: 'count' },
+  { id: 'epAmt', name: 'EP Payments', type: 'amount' },
+  { id: 'epCt', name: 'EP Count (optional)', type: 'count' }
+];
+
 export const STATES = [
   { id: 'al', name: 'Alabama' },
   { id: 'ak', name: 'Alaska' },
