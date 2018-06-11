@@ -8,7 +8,7 @@ import axios from '../util/api';
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios);
 
-describe('state actions', () => {
+describe('apd actions', () => {
   it('requestApd should create GET_APD_REQUEST action', () => {
     expect(actions.requestApd()).toEqual({ type: actions.GET_APD_REQUEST });
   });
@@ -25,6 +25,83 @@ describe('state actions', () => {
     expect(actions.failApd('foo')).toEqual({
       type: actions.GET_APD_FAILURE,
       error: 'foo'
+    });
+  });
+
+  it('addApdKeyPerson should create ADD_APD_KEY_PERSON action', () => {
+    expect(actions.addApdKeyPerson()).toEqual({
+      type: actions.ADD_APD_KEY_PERSON
+    });
+  });
+
+  it('removeApdKeyPerson should create REMOVE_APD_KEY_PERSON action', () => {
+    expect(actions.removeApdKeyPerson('id')).toEqual({
+      type: actions.REMOVE_APD_KEY_PERSON,
+      id: 'id'
+    });
+  });
+
+  it('requestSave should create SAVE_APD_REQUEST action', () => {
+    expect(actions.requestSave()).toEqual({ type: actions.SAVE_APD_REQUEST });
+  });
+
+  it('saveSuccess should create SAVE_APD_SUCCESS action', () => {
+    expect(actions.saveSuccess()).toEqual({ type: actions.SAVE_APD_SUCCESS });
+  });
+
+  it('saveFailure should create SAVE_APD_FAILURE action', () => {
+    expect(actions.saveFailure()).toEqual({ type: actions.SAVE_APD_FAILURE });
+  });
+
+  it('updateBudget should create UPDATE_BUDGET action', () => {
+    const state = { this: 'is', my: 'state ' };
+    const store = mockStore(state);
+
+    const expectedActions = [
+      {
+        type: actions.UPDATE_BUDGET,
+        state
+      }
+    ];
+
+    store.dispatch(actions.updateBudget());
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  describe('update APD', () => {
+    it('creates UPDATE_APD action and does not update the budget if the APD years did not change', () => {
+      const store = mockStore({});
+      const updates = {};
+      store.dispatch(actions.updateApd(updates));
+
+      const expectedActions = [
+        {
+          type: actions.UPDATE_APD,
+          updates
+        }
+      ];
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('creates UPDATE_APD action and UPDATE_BUDGET if the APD years changed', () => {
+      const store = mockStore({});
+      const updates = { years: true };
+      store.dispatch(actions.updateApd(updates));
+
+      const expectedActions = [
+        {
+          type: actions.UPDATE_APD,
+          updates
+        },
+        {
+          type: actions.UPDATE_BUDGET,
+          state: {}
+        }
+      ];
+
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 
@@ -88,6 +165,120 @@ describe('state actions', () => {
 
       await store.dispatch(actions.fetchApdDataIfNeeded());
       expect(store.getActions()).toEqual([]);
+    });
+  });
+
+  describe('save APD to API', () => {
+    const state = {
+      apd: {
+        data: {
+          id: 'id-to-update',
+          hieNarrative: 'HIE narrative text',
+          hitNarrative: 'HIT narrative text',
+          mmisNarrative: 'MMIS narrative text',
+          overview: 'APD overview text',
+          years: ['1992', '1993']
+        }
+      },
+      activities: {
+        byId: {
+          '1': {
+            name: 'activity name',
+            fundingSource: 'funding source',
+            descShort: 'activity summary',
+            descLong: 'activity description',
+            altApproach: 'alternatives approach',
+            costAllocateDesc: 'cost allocation methodology',
+            otherFundingDesc: 'other funding sources',
+            costFFP: {
+              '1993': { fed: 90, state: 10, other: 0 },
+              '1994': { fed: 70, state: 20, other: 10 }
+            },
+            goals: [
+              { desc: 'goal 1 description', obj: 'objective 1' },
+              { desc: 'goal 2 description', obj: 'objective 2' }
+            ],
+            milestones: [
+              { name: 'milestone 1', start: 'start 1', end: 'end 1' },
+              { name: 'milestone 2', start: 'start 2', end: 'end 2' }
+            ],
+            statePersonnel: [
+              {
+                title: 'title 1',
+                desc: 'description 1',
+                years: {
+                  '1993': { amt: 100, perc: 100 },
+                  '1994': { amt: 200, perc: 40 }
+                }
+              }
+            ],
+            contractorResources: [
+              {
+                name: 'name 1',
+                desc: 'description 1',
+                years: { '1993': 100, '1994': 200 }
+              }
+            ],
+            expenses: [
+              {
+                category: 'category 1',
+                desc: 'description 1',
+                years: { '1993': 100, '1994': 200 }
+              },
+              {
+                category: 'category 2',
+                desc: 'description 2',
+                years: { '1993': 300, '1994': 400 }
+              }
+            ],
+            standardsAndConditions: {
+              bizResults: 'business results',
+              documentation: 'documentation',
+              industry: 'industry standards',
+              interoperability: 'interoperability',
+              keyPersonnel: 'key personnel',
+              leverage: 'leverage',
+              minimizeCost: 'minimize cost',
+              mitigation: 'mitigation',
+              modularity: 'modularity',
+              mita: 'mita',
+              reporting: 'reporting'
+            }
+          }
+        }
+      }
+    };
+
+    beforeEach(() => {
+      fetchMock.reset();
+    });
+
+    it('creates save request and save failure actions if the save fails', () => {
+      const store = mockStore(state);
+      fetchMock.onPut('/apds/id-to-update').reply(403, [{ foo: 'bar' }]);
+
+      const expectedActions = [
+        { type: actions.SAVE_APD_REQUEST },
+        { type: actions.SAVE_APD_FAILURE }
+      ];
+
+      store.dispatch(actions.saveApd()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+
+    it('creates save request and save success actions if the save succeeds', () => {
+      const store = mockStore(state);
+      fetchMock.onPut('/apds/id-to-update').reply(200, [{ foo: 'bar' }]);
+
+      const expectedActions = [
+        { type: actions.SAVE_APD_REQUEST },
+        { type: actions.SAVE_APD_SUCCESS }
+      ];
+
+      store.dispatch(actions.saveApd()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
     });
   });
 });

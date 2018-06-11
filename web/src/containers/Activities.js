@@ -37,12 +37,14 @@ Activities.propTypes = {
   addActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities }) => ({
+export const mapStateToProps = ({ activities }) => ({
   activityIds: activities.allIds
 });
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   addActivity: addActivityAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Activities);
+
+export const raw = Activities;
