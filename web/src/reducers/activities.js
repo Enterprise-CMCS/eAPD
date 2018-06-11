@@ -131,7 +131,10 @@ const reducer = (state = initialState, action) => {
             [action.id]: {
               contractorResources: contractors => [
                 ...contractors,
-                newContractor(nextSequence(contractors.map(c => c.id)))
+                newContractor(
+                  nextSequence(contractors.map(c => c.id)),
+                  action.years
+                )
               ]
             }
           }
@@ -157,7 +160,10 @@ const reducer = (state = initialState, action) => {
             [action.id]: {
               statePersonnel: people => [
                 ...people,
-                newStatePerson(nextSequence(people.map(p => p.id)))
+                newStatePerson(
+                  nextSequence(people.map(p => p.id)),
+                  action.years
+                )
               ]
             }
           }
@@ -205,7 +211,7 @@ const reducer = (state = initialState, action) => {
             [action.id]: {
               expenses: expenses => [
                 ...expenses,
-                newExpense(nextSequence(expenses.map(e => e.id)))
+                newExpense(nextSequence(expenses.map(e => e.id)), action.years)
               ]
             }
           }
@@ -368,7 +374,7 @@ const reducer = (state = initialState, action) => {
                 ...years,
                 [y.year]: {
                   amt: y.cost,
-                  perc: y.fte
+                  perc: y.fte * 100
                 }
               }),
               {}
