@@ -34,7 +34,7 @@ class ActivityDetailAll extends Component {
       <Collapsible
         id={`activity-${aId}`}
         title={title}
-        bgColor="light-gray"
+        bgColor="gray-light"
         open={expanded}
         onChange={this.handleChange(aId)}
         sticky
