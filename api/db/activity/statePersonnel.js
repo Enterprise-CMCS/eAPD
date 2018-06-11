@@ -34,7 +34,7 @@ module.exports = {
     },
 
     async validate() {
-      if (this.attributes.fte < 0 || this.attributes.fte > 1) {
+      if (this.attributes.fte < 0) {
         throw new Error('fte-out-of-range');
       }
       if (this.attributes.year < 2010 || this.attributes.year > 3000) {

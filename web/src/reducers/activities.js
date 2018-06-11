@@ -374,7 +374,7 @@ const reducer = (state = initialState, action) => {
                 ...years,
                 [y.year]: {
                   amt: y.cost,
-                  perc: y.fte
+                  perc: y.fte * 100
                 }
               }),
               {}

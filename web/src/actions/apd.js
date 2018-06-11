@@ -111,7 +111,7 @@ export const saveApd = () => (dispatch, state) => {
         description: s.desc,
         years: Object.keys(s.years).map(year => ({
           cost: +s.years[year].amt,
-          fte: +s.years[year].perc,
+          fte: +s.years[year].perc / 100,
           year
         }))
       })),
