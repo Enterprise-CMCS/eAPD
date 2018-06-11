@@ -31,7 +31,7 @@ class ActivityDetailStatePersonnel extends Component {
       {
         statePersonnel: { [idx]: toUpdate }
       },
-      key === 'amt'
+      key === 'amt' || key === 'perc'
     );
   };
 
