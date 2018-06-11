@@ -31,7 +31,7 @@ class Login extends Component {
 
     return (
       <Container>
-        <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-lightest-gray rounded">
+        <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-gray-lightest rounded">
           <h1 className="mt0 h2">Please log in.</h1>
           {error && (
             <div className="mb2 p1 h6 alert alert-error">

@@ -1,6 +1,7 @@
-import apd from './apd';
+import apd, { initIncentiveData } from './apd';
 
 describe('APD reducer', () => {
+  const incentivePayments = initIncentiveData();
   const initialState = {
     data: {
       id: '',
@@ -10,7 +11,8 @@ describe('APD reducer', () => {
       hitNarrative: '',
       hieNarrative: '',
       mmisNarrative: '',
-      previousActivitySummary: ''
+      previousActivitySummary: '',
+      incentivePayments
     },
     fetching: false,
     loaded: false,
@@ -55,7 +57,8 @@ describe('APD reducer', () => {
         hitNarrative: 'HIT, but as a play',
         hieNarrative: 'HIE, but as a novel',
         mmisNarrative: 'MMIS, but as a script',
-        previousActivitySummary: ''
+        previousActivitySummary: '',
+        incentivePayments
       },
       fetching: false,
       loaded: true,
