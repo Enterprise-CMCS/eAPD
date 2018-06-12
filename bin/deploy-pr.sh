@@ -8,6 +8,13 @@ WEBCHANGES=$?
 if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
   PRNUM=`basename $CI_PULL_REQUESTS`
 
+  # check PR title and if it contains "[skip deploy]" then obey its wishes
+  TITLE=$(curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM | jq -r '.title')
+  if [[ $TITLE = *"[skip deploy]"* ]]; then
+    echo "Skipping deploy. All done."
+    exit 0
+  fi
+
   # CF_USER, CF_PASSWORD are defined as private Environment Variables
   # in CircleCI web UI: https://circleci.com/gh/18F/cms-hitech-apd/edit#env-vars
 
