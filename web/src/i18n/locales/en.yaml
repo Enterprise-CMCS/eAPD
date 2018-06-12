@@ -241,9 +241,11 @@
     title: "Proposed Budget"
     helpText: "This itemized budget table has combined the costs for each activity into a single itemized table by federal fiscal year (FFY). The table displays total share, federal share, and state share. The second table also includes a proposed breakout of the budget by FFY quarter."
     summaryBudget: 
-      title: "Summary Budget Table"
+      title: Summary Budget Table
+    quarterlyBudget: 
+      title: Federal Share by FFY Quarter
     paymentsByFFYQuarter: 
-      title: "Incentive Payments by FFY Quarter"
+      title: Incentive Payments by FFY Quarter
   assurancesAndCompliance: 
     title: "Assurances and Compliance"
     helpText: "Ensure your state complies with all applicable code of federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
