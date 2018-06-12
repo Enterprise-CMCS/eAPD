@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoMatch component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <NoMatch />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <h1
+          className="mb1"
+        >
+          Whoops, we can’t find that page.
+        </h1>,
+        <p>
+          You might want to double-check your link and try again. (404)
+        </p>,
+      ],
+      "className": "py3 center",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Whoops, we can’t find that page.",
+          "className": "mb1",
+        },
+        "ref": null,
+        "rendered": "Whoops, we can’t find that page.",
+        "type": "h1",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "You might want to double-check your link and try again. (404)",
+        },
+        "ref": null,
+        "rendered": "You might want to double-check your link and try again. (404)",
+        "type": "p",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h1
+            className="mb1"
+          >
+            Whoops, we can’t find that page.
+          </h1>,
+          <p>
+            You might want to double-check your link and try again. (404)
+          </p>,
+        ],
+        "className": "py3 center",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Whoops, we can’t find that page.",
+            "className": "mb1",
+          },
+          "ref": null,
+          "rendered": "Whoops, we can’t find that page.",
+          "type": "h1",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "You might want to double-check your link and try again. (404)",
+          },
+          "ref": null,
+          "rendered": "You might want to double-check your link and try again. (404)",
+          "type": "p",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

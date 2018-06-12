@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App component renders correctly 1`] = `
+exports[`CertifyAndSubmit component renders correctly 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <App />,
+  Symbol(enzyme.__unrendered__): <CertifyAndSubmit />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -15,30 +15,42 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
-      "children": <Connect(AuthChecker)>
-        <Routes />
-      </Connect(AuthChecker)>,
-      "isDev": true,
+      "children": <Subsection
+        open={false}
+        resource="certifyAndSubmit.certify"
+      >
+        <div>
+          ...
+        </div>
+      </Subsection>,
+      "id": "certify-submit",
+      "resource": "certifyAndSubmit",
     },
     "ref": null,
     "rendered": Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
-        "children": <Routes />,
+        "children": <div>
+          ...
+        </div>,
+        "open": false,
+        "resource": "certifyAndSubmit.certify",
       },
       "ref": null,
       "rendered": Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "function",
-        "props": Object {},
+        "nodeType": "host",
+        "props": Object {
+          "children": "...",
+        },
         "ref": null,
-        "rendered": null,
-        "type": [Function],
+        "rendered": "...",
+        "type": "div",
       },
       "type": [Function],
     },
@@ -48,30 +60,42 @@ ShallowWrapper {
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
-        "children": <Connect(AuthChecker)>
-          <Routes />
-        </Connect(AuthChecker)>,
-        "isDev": true,
+        "children": <Subsection
+          open={false}
+          resource="certifyAndSubmit.certify"
+        >
+          <div>
+            ...
+          </div>
+        </Subsection>,
+        "id": "certify-submit",
+        "resource": "certifyAndSubmit",
       },
       "ref": null,
       "rendered": Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "children": <Routes />,
+          "children": <div>
+            ...
+          </div>,
+          "open": false,
+          "resource": "certifyAndSubmit.certify",
         },
         "ref": null,
         "rendered": Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "function",
-          "props": Object {},
+          "nodeType": "host",
+          "props": Object {
+            "children": "...",
+          },
           "ref": null,
-          "rendered": null,
-          "type": [Function],
+          "rendered": "...",
+          "type": "div",
         },
         "type": [Function],
       },
