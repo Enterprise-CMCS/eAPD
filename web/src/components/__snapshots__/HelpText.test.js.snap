@@ -1,0 +1,345 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HelpText component renders correctly if reminder is not-empty but title is 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <HelpText
+    reminder="title"
+    text="something made up"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        false,
+        <div
+          className="red"
+        >
+          [missing {{year}} value] [missing {{place}} value] HITECH APD
+        </div>,
+      ],
+      "className": "mb2",
+      "style": Object {
+        "whiteSpace": "pre-line",
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      false,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "className": "red",
+        },
+        "ref": null,
+        "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          false,
+          <div
+            className="red"
+          >
+            [missing {{year}} value] [missing {{place}} value] HITECH APD
+          </div>,
+        ],
+        "className": "mb2",
+        "style": Object {
+          "whiteSpace": "pre-line",
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        false,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+            "className": "red",
+          },
+          "ref": null,
+          "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`HelpText component renders correctly if title and reminder are emtpy 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <HelpText
+    reminder={null}
+    text="something made up"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): false,
+  Symbol(enzyme.__nodes__): Array [
+    false,
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`HelpText component renders correctly if title and reminder are not-empty 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <HelpText
+    reminder="title"
+    text="title"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div>
+          [missing {{year}} value] [missing {{place}} value] HITECH APD
+        </div>,
+        <div
+          className="red"
+        >
+          [missing {{year}} value] [missing {{place}} value] HITECH APD
+        </div>,
+      ],
+      "className": "mb2",
+      "style": Object {
+        "whiteSpace": "pre-line",
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+        },
+        "ref": null,
+        "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "className": "red",
+        },
+        "ref": null,
+        "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div>
+            [missing {{year}} value] [missing {{place}} value] HITECH APD
+          </div>,
+          <div
+            className="red"
+          >
+            [missing {{year}} value] [missing {{place}} value] HITECH APD
+          </div>,
+        ],
+        "className": "mb2",
+        "style": Object {
+          "whiteSpace": "pre-line",
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          },
+          "ref": null,
+          "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+            "className": "red",
+          },
+          "ref": null,
+          "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`HelpText component renders correctly if title is not-empty but reminder is 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <HelpText
+    reminder={null}
+    text="title"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div>
+          [missing {{year}} value] [missing {{place}} value] HITECH APD
+        </div>,
+        false,
+      ],
+      "className": "mb2",
+      "style": Object {
+        "whiteSpace": "pre-line",
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+        },
+        "ref": null,
+        "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+        "type": "div",
+      },
+      false,
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div>
+            [missing {{year}} value] [missing {{place}} value] HITECH APD
+          </div>,
+          false,
+        ],
+        "className": "mb2",
+        "style": Object {
+          "whiteSpace": "pre-line",
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          },
+          "ref": null,
+          "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "type": "div",
+        },
+        false,
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

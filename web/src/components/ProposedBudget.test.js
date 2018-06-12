@@ -1,11 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import App from './App';
+import ProposedBudget from './ProposedBudget';
 
-describe('App component', () => {
+describe('ProposedBudget component', () => {
   test('renders correctly', () => {
-    const component = shallow(<App />);
+    const component = shallow(<ProposedBudget />);
     expect(component).toMatchSnapshot();
   });
 });

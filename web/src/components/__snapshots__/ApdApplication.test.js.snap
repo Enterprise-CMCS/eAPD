@@ -1,0 +1,405 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApdApplication component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ApdApplication />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <Connect(Sidebar)
+          place={
+            Object {
+              "id": "tx",
+              "name": "Texas",
+            }
+          }
+        />,
+        <div
+          className="site-content flex flex-column"
+        >
+          <Connect(TopNav)
+            place={
+              Object {
+                "id": "tx",
+                "name": "Texas",
+              }
+            }
+          />
+          <div
+            className="bg-darken-1 flex-auto"
+          >
+            <Connect(ApdSummary) />
+            <Connect(PreviousActivities) />
+            <Connect(Activities) />
+            <ProposedBudget />
+            <AssurancesAndCompliance />
+            <Connect(ExecutiveSummary) />
+            <CertifyAndSubmit />
+          </div>
+        </div>,
+      ],
+      "className": "site-body",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "place": Object {
+            "id": "tx",
+            "name": "Texas",
+          },
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <Connect(TopNav)
+              place={
+                Object {
+                  "id": "tx",
+                  "name": "Texas",
+                }
+              }
+            />,
+            <div
+              className="bg-darken-1 flex-auto"
+            >
+              <Connect(ApdSummary) />
+              <Connect(PreviousActivities) />
+              <Connect(Activities) />
+              <ProposedBudget />
+              <AssurancesAndCompliance />
+              <Connect(ExecutiveSummary) />
+              <CertifyAndSubmit />
+            </div>,
+          ],
+          "className": "site-content flex flex-column",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "place": Object {
+                "id": "tx",
+                "name": "Texas",
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <Connect(ApdSummary) />,
+                <Connect(PreviousActivities) />,
+                <Connect(Activities) />,
+                <ProposedBudget />,
+                <AssurancesAndCompliance />,
+                <Connect(ExecutiveSummary) />,
+                <CertifyAndSubmit />,
+              ],
+              "className": "bg-darken-1 flex-auto",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <Connect(Sidebar)
+            place={
+              Object {
+                "id": "tx",
+                "name": "Texas",
+              }
+            }
+          />,
+          <div
+            className="site-content flex flex-column"
+          >
+            <Connect(TopNav)
+              place={
+                Object {
+                  "id": "tx",
+                  "name": "Texas",
+                }
+              }
+            />
+            <div
+              className="bg-darken-1 flex-auto"
+            >
+              <Connect(ApdSummary) />
+              <Connect(PreviousActivities) />
+              <Connect(Activities) />
+              <ProposedBudget />
+              <AssurancesAndCompliance />
+              <Connect(ExecutiveSummary) />
+              <CertifyAndSubmit />
+            </div>
+          </div>,
+        ],
+        "className": "site-body",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "place": Object {
+              "id": "tx",
+              "name": "Texas",
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <Connect(TopNav)
+                place={
+                  Object {
+                    "id": "tx",
+                    "name": "Texas",
+                  }
+                }
+              />,
+              <div
+                className="bg-darken-1 flex-auto"
+              >
+                <Connect(ApdSummary) />
+                <Connect(PreviousActivities) />
+                <Connect(Activities) />
+                <ProposedBudget />
+                <AssurancesAndCompliance />
+                <Connect(ExecutiveSummary) />
+                <CertifyAndSubmit />
+              </div>,
+            ],
+            "className": "site-content flex flex-column",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "place": Object {
+                  "id": "tx",
+                  "name": "Texas",
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <Connect(ApdSummary) />,
+                  <Connect(PreviousActivities) />,
+                  <Connect(Activities) />,
+                  <ProposedBudget />,
+                  <AssurancesAndCompliance />,
+                  <Connect(ExecutiveSummary) />,
+                  <CertifyAndSubmit />,
+                ],
+                "className": "bg-darken-1 flex-auto",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
