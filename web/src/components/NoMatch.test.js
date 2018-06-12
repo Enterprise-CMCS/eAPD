@@ -1,11 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import App from './App';
+import NoMatch from './NoMatch';
 
-describe('App component', () => {
+describe('NoMatch component', () => {
   test('renders correctly', () => {
-    const component = shallow(<App />);
+    const component = shallow(<NoMatch />);
     expect(component).toMatchSnapshot();
   });
 });

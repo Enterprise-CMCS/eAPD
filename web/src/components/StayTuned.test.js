@@ -1,11 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import App from './App';
+import StayTuned from './StayTuned';
 
-describe('App component', () => {
+describe('StayTuned component', () => {
   test('renders correctly', () => {
-    const component = shallow(<App />);
+    const component = shallow(<StayTuned />);
     expect(component).toMatchSnapshot();
   });
 });

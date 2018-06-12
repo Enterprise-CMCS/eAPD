@@ -1,11 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import App from './App';
+import ApdApplication from './ApdApplication';
 
-describe('App component', () => {
+describe('ApdApplication component', () => {
   test('renders correctly', () => {
-    const component = shallow(<App />);
+    const component = shallow(<ApdApplication />);
     expect(component).toMatchSnapshot();
   });
 });
