@@ -632,7 +632,7 @@ describe('budget reducer', () => {
           }
         }
       },
-      years: []
+      years: ['1931', '1932', '1933']
     });
   });
 });

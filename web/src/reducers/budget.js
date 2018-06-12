@@ -31,7 +31,7 @@ const initialState = years => ({
   hie: expenseTypes(years),
   hit: expenseTypes(years),
   mmis: expenseTypes(years),
-  years: []
+  years
 });
 
 const activities = src => Object.values(src.activities.byId);
