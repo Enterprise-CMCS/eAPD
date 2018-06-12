@@ -1,11 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import App from './App';
+import Routes from './Routes';
 
-describe('App component', () => {
+describe('Routes component', () => {
   test('renders correctly', () => {
-    const component = shallow(<App />);
+    const component = shallow(<Routes />);
     expect(component).toMatchSnapshot();
   });
 });
