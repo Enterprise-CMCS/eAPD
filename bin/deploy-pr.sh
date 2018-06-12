@@ -15,6 +15,13 @@ if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
   apt-get update
   apt-get install jq
 
+  # check PR title and if it contains "[skip deploy]" then obey its wishes
+  TITLE=$(curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM | jq -r '.title')
+  if [[ $TITLE = *"[skip deploy]"* ]]; then
+    echo "Skipping deploy. All done."
+    exit 0
+  fi
+
   export API_URL=$STAGING_API_URL
 
   # Install `cf` cli
