@@ -5,7 +5,7 @@ import IncentivePayments from '../../containers/IncentivePayments';
 
 const MiscPage = () => (
   <Container>
-    <h1>Misc.</h1>
+    <h1>Misc</h1>
     <IncentivePayments />
   </Container>
 );
