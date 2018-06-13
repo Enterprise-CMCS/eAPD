@@ -42,7 +42,7 @@ describe('provides default years based on now', () => {
 });
 
 describe('utility functions', () => {
-  const { arrToObj, getParams, nextSequence, stateLookup } = load();
+  const { addObjVals, arrToObj, getParams, nextSequence, stateLookup } = load();
 
   test('finds a state by two-letter code', () => {
     expect(stateLookup('Mo')).toEqual({ id: 'mo', name: 'Missouri' });
@@ -73,5 +73,10 @@ describe('utility functions', () => {
       b: 'boop',
       c: 'boop'
     });
+  });
+
+  test('sums up the object values for a given object', () => {
+    expect(addObjVals({ foo: 1, bar: 2 })).toEqual(3);
+    expect(addObjVals({ a: 1, b: 2, c: -3 })).toEqual(0);
   });
 });
