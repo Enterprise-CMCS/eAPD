@@ -1,6 +1,7 @@
 import React from 'react';
 
 // Wired-up components
+import StateProfile from '../containers/ApdStateProfile';
 import ProposedBudget from './ProposedBudget';
 import Activities from '../containers/Activities';
 import ApdSummary from '../containers/ApdSummary';
@@ -21,6 +22,7 @@ const ApdApplication = () => (
     <div className="site-content flex flex-column">
       <TopNav place={PLACE} />
       <div className="bg-darken-1 flex-auto">
+        <StateProfile />
         <ApdSummary />
         <PreviousActivities />
         <Activities />

@@ -177,7 +177,12 @@ describe('apd actions', () => {
           hitNarrative: 'HIT narrative text',
           mmisNarrative: 'MMIS narrative text',
           overview: 'APD overview text',
-          years: ['1992', '1993']
+          years: ['1992', '1993'],
+          state: {
+            id: 'state-id',
+            medicaidDirector: 'an object goes here',
+            medicaidOffice: 'an object goes here'
+          }
         }
       },
       activities: {
