@@ -1,4 +1,6 @@
-import { UPDATE_BUDGET } from '../actions/apd';
+import u from 'updeep';
+
+import { UPDATE_BUDGET, UPDATE_BUDGET_QUARTERLY_SHARE } from '../actions/apd';
 
 const getFundingSourcesByYear = years => ({
   ...years.reduce(
@@ -19,19 +21,45 @@ const getFundingSourcesByYear = years => ({
   }
 });
 
-const expenseTypes = years => ({
-  statePersonnel: getFundingSourcesByYear(years),
-  contractors: getFundingSourcesByYear(years),
-  expenses: getFundingSourcesByYear(years),
-  combined: getFundingSourcesByYear(years)
+const expenseTypeNames = [
+  'statePersonnel',
+  'contractors',
+  'expenses',
+  'combined'
+];
+
+const expenseTypes = years =>
+  expenseTypeNames.reduce(
+    (o, name) => ({
+      ...o,
+      [name]: getFundingSourcesByYear(years)
+    }),
+    {}
+  );
+
+const defaultQuarterlyShares = years => ({
+  ...years.reduce(
+    (o, year) => ({
+      ...o,
+      [year]: { 1: 25, 2: 25, 3: 25, 4: 25 }
+    }),
+    {}
+  )
+});
+
+const initQuarterly = years => ({
+  hitAndHie: defaultQuarterlyShares(years),
+  mmis: defaultQuarterlyShares(years)
 });
 
 const initialState = years => ({
   combined: getFundingSourcesByYear(years),
+  hitAndHie: expenseTypes(years),
   hie: expenseTypes(years),
   hit: expenseTypes(years),
   mmis: expenseTypes(years),
-  years: []
+  quarterly: initQuarterly(years),
+  years
 });
 
 const activities = src => Object.values(src.activities.byId);
@@ -109,6 +137,17 @@ const getTotalsForFundingSource = (bigState, fundingSource) => {
   });
 };
 
+const combineHitAndHie = bigState => {
+  const { hit, hie, hitAndHie } = bigState;
+  const entries = [...Object.entries(hit), ...Object.entries(hie)];
+
+  entries.forEach(([type, values]) => {
+    Object.entries(values).forEach(([year, value]) => {
+      addBudgetBlocks(hitAndHie[type][year], value);
+    });
+  });
+};
+
 const buildBudget = wholeState => {
   const newState = initialState(wholeState.apd.data.years);
 
@@ -133,6 +172,7 @@ const buildBudget = wholeState => {
   getTotalsForFundingSource(newState, 'hie');
   getTotalsForFundingSource(newState, 'hit');
   getTotalsForFundingSource(newState, 'mmis');
+  combineHitAndHie(newState);
 
   return newState;
 };
@@ -141,9 +181,12 @@ const reducer = (state = initialState([]), action) => {
   switch (action.type) {
     case UPDATE_BUDGET:
       return buildBudget(action.state);
+    case UPDATE_BUDGET_QUARTERLY_SHARE:
+      return u({ quarterly: { ...action.updates } }, state);
     default:
       return state;
   }
 };
 
+export { expenseTypeNames, initialState };
 export default reducer;
