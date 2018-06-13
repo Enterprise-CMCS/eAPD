@@ -29,7 +29,22 @@ const initialState = {
     hieNarrative: '',
     mmisNarrative: '',
     previousActivitySummary: '',
-    incentivePayments: initIncentiveData()
+    incentivePayments: initIncentiveData(),
+    state: {
+      id: '--',
+      medicaidDirector: {
+        name: '',
+        email: '',
+        phone: ''
+      },
+      medicaidOffice: {
+        address1: '',
+        address2: '',
+        city: '',
+        state: '',
+        zip: ''
+      }
+    }
   },
   fetching: false,
   loaded: false,
@@ -66,7 +81,8 @@ const reducer = (state = initialState, action) => {
           years: (years || defaultAPDYears).map(y => `${y}`),
           yearOptions: defaultAPDYearOptions,
           previousActivitySummary: previousActivitySummary || '',
-          incentivePayments: incentivePayments || initIncentiveData()
+          incentivePayments: incentivePayments || initIncentiveData(),
+          state: { ...initialState.data.state } // TODO: get from API
         }
       };
     }

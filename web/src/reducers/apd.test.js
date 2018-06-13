@@ -12,7 +12,22 @@ describe('APD reducer', () => {
       hieNarrative: '',
       mmisNarrative: '',
       previousActivitySummary: '',
-      incentivePayments
+      incentivePayments,
+      state: {
+        id: '--',
+        medicaidDirector: {
+          name: '',
+          email: '',
+          phone: ''
+        },
+        medicaidOffice: {
+          address1: '',
+          address2: '',
+          city: '',
+          state: '',
+          zip: ''
+        }
+      }
     },
     fetching: false,
     loaded: false,
@@ -58,7 +73,23 @@ describe('APD reducer', () => {
         hieNarrative: 'HIE, but as a novel',
         mmisNarrative: 'MMIS, but as a script',
         previousActivitySummary: '',
-        incentivePayments
+        incentivePayments,
+        state: {
+          // TODO: Update this when we actually get data from the API
+          id: '--',
+          medicaidDirector: {
+            name: '',
+            email: '',
+            phone: ''
+          },
+          medicaidOffice: {
+            address1: '',
+            address2: '',
+            city: '',
+            state: '',
+            zip: ''
+          }
+        }
       },
       fetching: false,
       loaded: true,
