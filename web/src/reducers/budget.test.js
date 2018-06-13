@@ -130,7 +130,10 @@ describe('budget reducer', () => {
         }
       }
     },
-    quarterly: {},
+    quarterly: {
+      hitAndHie: {},
+      mmis: {}
+    },
     years: []
   };
 
@@ -142,14 +145,11 @@ describe('budget reducer', () => {
     const state = initialStateFn(['2018']);
     const newState = budget(state, {
       type: 'UPDATE_BUDGET_QUARTERLY_SHARE',
-      updates: { '2018': { 1: 10 } }
+      updates: { hitAndHie: { '2018': { 1: 10 } } }
     });
 
-    expect(newState.quarterly).toEqual({
-      '2018': {
-        ...state.quarterly['2018'],
-        1: 10
-      }
+    expect(newState.quarterly.hitAndHie).toEqual({
+      '2018': { 1: 10, 2: 25, 3: 25, 4: 25 }
     });
   });
 
@@ -705,9 +705,16 @@ describe('budget reducer', () => {
         }
       },
       quarterly: {
-        '1931': { 1: 25, 2: 25, 3: 25, 4: 25 },
-        '1932': { 1: 25, 2: 25, 3: 25, 4: 25 },
-        '1933': { 1: 25, 2: 25, 3: 25, 4: 25 }
+        hitAndHie: {
+          '1931': { '1': 25, '2': 25, '3': 25, '4': 25 },
+          '1932': { '1': 25, '2': 25, '3': 25, '4': 25 },
+          '1933': { '1': 25, '2': 25, '3': 25, '4': 25 }
+        },
+        mmis: {
+          '1931': { '1': 25, '2': 25, '3': 25, '4': 25 },
+          '1932': { '1': 25, '2': 25, '3': 25, '4': 25 },
+          '1933': { '1': 25, '2': 25, '3': 25, '4': 25 }
+        }
       },
       years: ['1931', '1932', '1933']
     });
