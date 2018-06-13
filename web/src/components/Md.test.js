@@ -1,11 +1,13 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import App from './App';
+import Md from './Md';
 
-describe('App component', () => {
+describe('Md component', () => {
   test('renders correctly', () => {
-    const component = shallow(<App />);
+    const component = shallow(
+      <Md content="# This is markdown" wrapper="div" />
+    );
     expect(component).toMatchSnapshot();
   });
 });
