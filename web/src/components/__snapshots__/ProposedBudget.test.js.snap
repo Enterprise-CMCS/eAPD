@@ -26,6 +26,12 @@ ShallowWrapper {
         </Subsection>,
         <Subsection
           open={false}
+          resource="proposedBudget.quarterlyBudget"
+        >
+          <Connect(QuarterlyBudgetSummary) />
+        </Subsection>,
+        <Subsection
+          open={false}
           resource="proposedBudget.paymentsByFFYQuarter"
         >
           <Connect(IncentivePayments) />
@@ -44,6 +50,27 @@ ShallowWrapper {
           "children": <Connect(BudgetSummary) />,
           "open": false,
           "resource": "proposedBudget.summaryBudget",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": <Connect(QuarterlyBudgetSummary) />,
+          "open": false,
+          "resource": "proposedBudget.quarterlyBudget",
         },
         "ref": null,
         "rendered": Object {
@@ -96,6 +123,12 @@ ShallowWrapper {
           </Subsection>,
           <Subsection
             open={false}
+            resource="proposedBudget.quarterlyBudget"
+          >
+            <Connect(QuarterlyBudgetSummary) />
+          </Subsection>,
+          <Subsection
+            open={false}
             resource="proposedBudget.paymentsByFFYQuarter"
           >
             <Connect(IncentivePayments) />
@@ -114,6 +147,27 @@ ShallowWrapper {
             "children": <Connect(BudgetSummary) />,
             "open": false,
             "resource": "proposedBudget.summaryBudget",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <Connect(QuarterlyBudgetSummary) />,
+            "open": false,
+            "resource": "proposedBudget.quarterlyBudget",
           },
           "ref": null,
           "rendered": Object {
