@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import axios from '../util/api';
 
 export const ADD_APD_KEY_PERSON = 'ADD_APD_KEY_PERSON';
@@ -8,6 +9,7 @@ export const REMOVE_APD_KEY_PERSON = 'REMOVE_APD_KEY_PERSON';
 export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
 export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
 export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
+export const SELECT_APD = 'SELECT_APD';
 export const UPDATE_APD = 'UPDATE_APD';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
 
@@ -40,7 +42,7 @@ export const fetchApd = () => dispatch => {
   return axios
     .get(url)
     .then(req => {
-      const apd = Array.isArray(req.data) ? req.data[0] : null;
+      const apd = Array.isArray(req.data) ? req.data : null;
       dispatch(receiveApd(apd));
       dispatch(updateBudget());
     })
@@ -58,6 +60,11 @@ export const fetchApdDataIfNeeded = () => (dispatch, getState) => {
   }
 
   return null;
+};
+
+export const selectApd = id => (dispatch, getState) => {
+  dispatch({ type: SELECT_APD, apd: getState().apd.byId[id] });
+  dispatch(push('/apd'));
 };
 
 export const saveApd = () => (dispatch, state) => {
