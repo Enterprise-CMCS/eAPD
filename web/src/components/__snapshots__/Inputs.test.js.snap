@@ -1,0 +1,739 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DollarInput component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <InputHolder
+    hideLabel={false}
+    label="label"
+    name="name"
+    type="text"
+    wrapperClass=""
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <label
+          className="block mb-tiny bold"
+          htmlFor="name"
+        >
+          label
+        </label>,
+        <MaskedInput
+          id="name"
+          onChange={null}
+          type="text"
+        />,
+      ],
+      "className": "mb2",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "label",
+          "className": "block mb-tiny bold",
+          "htmlFor": "name",
+        },
+        "ref": null,
+        "rendered": "label",
+        "type": "label",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "id": "name",
+          "onChange": null,
+          "type": "text",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <label
+            className="block mb-tiny bold"
+            htmlFor="name"
+          >
+            label
+          </label>,
+          <MaskedInput
+            id="name"
+            onChange={null}
+            type="text"
+          />,
+        ],
+        "className": "mb2",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "label",
+            "className": "block mb-tiny bold",
+            "htmlFor": "name",
+          },
+          "ref": null,
+          "rendered": "label",
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "id": "name",
+            "onChange": null,
+            "type": "text",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`Input component renders correctly 1`] = `
+ReactWrapper {
+  "length": 1,
+  Symbol(enzyme.__unrendered__): <InputHolder
+    hideLabel={false}
+    label="label"
+    name="name"
+    type="text"
+    wrapperClass=""
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "hideLabel": false,
+      "label": "label",
+      "name": "name",
+      "type": "text",
+      "wrapperClass": "",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": <div
+        class="mb2"
+      >
+        <label
+          class="block mb-tiny bold"
+          for="name"
+        >
+          label
+        </label>
+        <input
+          class="m0 input"
+          id="name"
+          type="text"
+        />
+      </div>,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <label
+            className="block mb-tiny bold"
+            htmlFor="name"
+          >
+            label
+          </label>,
+          <Input
+            id="name"
+            type="text"
+          />,
+        ],
+        "className": "mb2",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": <label
+            class="block mb-tiny bold"
+            for="name"
+          >
+            label
+          </label>,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "label",
+            "className": "block mb-tiny bold",
+            "htmlFor": "name",
+          },
+          "ref": null,
+          "rendered": Array [
+            "label",
+          ],
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "id": "name",
+            "type": "text",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": <input
+              class="m0 input"
+              id="name"
+              type="text"
+            />,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "className": "m0 input",
+              "id": "name",
+              "type": "text",
+            },
+            "ref": null,
+            "rendered": Array [
+              undefined,
+            ],
+            "type": "input",
+          },
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "hideLabel": false,
+        "label": "label",
+        "name": "name",
+        "type": "text",
+        "wrapperClass": "",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": <div
+          class="mb2"
+        >
+          <label
+            class="block mb-tiny bold"
+            for="name"
+          >
+            label
+          </label>
+          <input
+            class="m0 input"
+            id="name"
+            type="text"
+          />
+        </div>,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <label
+              className="block mb-tiny bold"
+              htmlFor="name"
+            >
+              label
+            </label>,
+            <Input
+              id="name"
+              type="text"
+            />,
+          ],
+          "className": "mb2",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": <label
+              class="block mb-tiny bold"
+              for="name"
+            >
+              label
+            </label>,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "label",
+              "className": "block mb-tiny bold",
+              "htmlFor": "name",
+            },
+            "ref": null,
+            "rendered": Array [
+              "label",
+            ],
+            "type": "label",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "id": "name",
+              "type": "text",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": <input
+                class="m0 input"
+                id="name"
+                type="text"
+              />,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "className": "m0 input",
+                "id": "name",
+                "type": "text",
+              },
+              "ref": null,
+              "rendered": Array [
+                undefined,
+              ],
+              "type": "input",
+            },
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`PercentInput component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <InputHolder
+    hideLabel={false}
+    label="label"
+    name="name"
+    type="text"
+    wrapperClass=""
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <label
+          className="block mb-tiny bold"
+          htmlFor="name"
+        >
+          label
+        </label>,
+        <MaskedInput
+          id="name"
+          onChange={null}
+          type="text"
+        />,
+      ],
+      "className": "mb2",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "label",
+          "className": "block mb-tiny bold",
+          "htmlFor": "name",
+        },
+        "ref": null,
+        "rendered": "label",
+        "type": "label",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "id": "name",
+          "onChange": null,
+          "type": "text",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <label
+            className="block mb-tiny bold"
+            htmlFor="name"
+          >
+            label
+          </label>,
+          <MaskedInput
+            id="name"
+            onChange={null}
+            type="text"
+          />,
+        ],
+        "className": "mb2",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "label",
+            "className": "block mb-tiny bold",
+            "htmlFor": "name",
+          },
+          "ref": null,
+          "rendered": "label",
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "id": "name",
+            "onChange": null,
+            "type": "text",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`Textarea component renders correctly 1`] = `
+ReactWrapper {
+  "length": 1,
+  Symbol(enzyme.__unrendered__): <InputHolder
+    hideLabel={false}
+    label="label"
+    name="name"
+    type="text"
+    wrapperClass=""
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "hideLabel": false,
+      "label": "label",
+      "name": "name",
+      "type": "text",
+      "wrapperClass": "",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": <div
+        class="mb2"
+      >
+        <label
+          class="block mb-tiny bold"
+          for="name"
+        >
+          label
+        </label>
+        <textarea
+          class="m0 textarea"
+          id="name"
+          spellcheck="true"
+          type="text"
+        />
+      </div>,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <label
+            className="block mb-tiny bold"
+            htmlFor="name"
+          >
+            label
+          </label>,
+          <Textarea
+            id="name"
+            type="text"
+          />,
+        ],
+        "className": "mb2",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": <label
+            class="block mb-tiny bold"
+            for="name"
+          >
+            label
+          </label>,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "label",
+            "className": "block mb-tiny bold",
+            "htmlFor": "name",
+          },
+          "ref": null,
+          "rendered": Array [
+            "label",
+          ],
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "id": "name",
+            "type": "text",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": <textarea
+              class="m0 textarea"
+              id="name"
+              spellcheck="true"
+              type="text"
+            />,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "className": "m0 textarea",
+              "id": "name",
+              "spellCheck": "true",
+              "type": "text",
+            },
+            "ref": null,
+            "rendered": Array [
+              undefined,
+            ],
+            "type": "textarea",
+          },
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "hideLabel": false,
+        "label": "label",
+        "name": "name",
+        "type": "text",
+        "wrapperClass": "",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": <div
+          class="mb2"
+        >
+          <label
+            class="block mb-tiny bold"
+            for="name"
+          >
+            label
+          </label>
+          <textarea
+            class="m0 textarea"
+            id="name"
+            spellcheck="true"
+            type="text"
+          />
+        </div>,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <label
+              className="block mb-tiny bold"
+              htmlFor="name"
+            >
+              label
+            </label>,
+            <Textarea
+              id="name"
+              type="text"
+            />,
+          ],
+          "className": "mb2",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": <label
+              class="block mb-tiny bold"
+              for="name"
+            >
+              label
+            </label>,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "label",
+              "className": "block mb-tiny bold",
+              "htmlFor": "name",
+            },
+            "ref": null,
+            "rendered": Array [
+              "label",
+            ],
+            "type": "label",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "id": "name",
+              "type": "text",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": <textarea
+                class="m0 textarea"
+                id="name"
+                spellcheck="true"
+                type="text"
+              />,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "className": "m0 textarea",
+                "id": "name",
+                "spellCheck": "true",
+                "type": "text",
+              },
+              "ref": null,
+              "rendered": Array [
+                undefined,
+              ],
+              "type": "textarea",
+            },
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
