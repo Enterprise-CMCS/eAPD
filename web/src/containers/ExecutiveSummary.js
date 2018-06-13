@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import { Section, Subsection } from '../components/Section';
-import StayTuned from '../components/StayTuned';
 import { t } from '../i18n';
 import { aggregateByYear, getActivityTotals } from '../reducers/activities';
 import { formatMoney } from '../util/formats';
@@ -39,7 +39,7 @@ const ExecutiveSummary = ({ data, years }) => (
       ))}
     </Subsection>
     <Subsection resource="executiveSummary.budgetTable">
-      <StayTuned />
+      <ExecutiveSummaryBudget />
     </Subsection>
   </Section>
 );
