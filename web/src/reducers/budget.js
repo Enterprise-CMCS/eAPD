@@ -37,7 +37,7 @@ const expenseTypes = years =>
     {}
   );
 
-const quarterlyShare = years => ({
+const defaultQuarterlyShares = years => ({
   ...years.reduce(
     (o, year) => ({
       ...o,
@@ -47,13 +47,18 @@ const quarterlyShare = years => ({
   )
 });
 
+const initQuarterly = years => ({
+  hitAndHie: defaultQuarterlyShares(years),
+  mmis: defaultQuarterlyShares(years)
+});
+
 const initialState = years => ({
   combined: getFundingSourcesByYear(years),
   hitAndHie: expenseTypes(years),
   hie: expenseTypes(years),
   hit: expenseTypes(years),
   mmis: expenseTypes(years),
-  quarterly: quarterlyShare(years),
+  quarterly: initQuarterly(years),
   years
 });
 

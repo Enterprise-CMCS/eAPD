@@ -21,16 +21,14 @@ const EXPENSE_NAME_DISPLAY = {
 const color = idx => `bg-${COLORS[idx] || 'gray'}`;
 
 class QuarterlyBudgetSummary extends Component {
-  handleChange = (year, q) => e => {
-    const change = { [year]: { [q]: +e.target.value } };
+  handleChange = (source, year, q) => e => {
+    const change = { [source]: { [year]: { [q]: +e.target.value } } };
     this.props.update(change);
   };
 
   render() {
     const { budget } = this.props;
     const { quarterly, years } = budget;
-
-    console.log(budget);
 
     // wait until budget is loaded
     if (!years.length) return null;
@@ -66,7 +64,8 @@ class QuarterlyBudgetSummary extends Component {
                     <tr>
                       <th />
                       {years.map((year, i) => {
-                        const incomplete = addObjVals(quarterly[year]) !== 100;
+                        const incomplete =
+                          addObjVals(quarterly[source][year]) !== 100;
                         return (
                           <Fragment key={year}>
                             {QUARTERS.map(q => (
@@ -81,15 +80,19 @@ class QuarterlyBudgetSummary extends Component {
                                     min="0"
                                     max="100"
                                     step="5"
-                                    value={quarterly[year][q]}
-                                    onChange={this.handleChange(year, q)}
+                                    value={quarterly[source][year][q]}
+                                    onChange={this.handleChange(
+                                      source,
+                                      year,
+                                      q
+                                    )}
                                   />
                                   <div
                                     className={`ml-tiny flex-none mono right-align ${
                                       incomplete ? 'red' : ''
                                     }`}
                                   >
-                                    {quarterly[year][q]}%
+                                    {quarterly[source][year][q]}%
                                   </div>
                                 </div>
                               </th>
@@ -120,7 +123,7 @@ class QuarterlyBudgetSummary extends Component {
                                 key={q}
                               >
                                 {formatMoney(
-                                  quarterly[year][q] *
+                                  quarterly[source][year][q] *
                                     data[name][year].federal /
                                     100
                                 )}
