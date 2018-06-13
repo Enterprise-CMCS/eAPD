@@ -1,4 +1,4 @@
-import budget from './budget';
+import budget, { initialState as initialStateFn } from './budget';
 import { UPDATE_BUDGET } from '../actions/apd';
 
 describe('budget reducer', () => {
@@ -8,6 +8,36 @@ describe('budget reducer', () => {
         total: 0,
         federal: 0,
         state: 0
+      }
+    },
+    hitAndHie: {
+      combined: {
+        total: {
+          total: 0,
+          federal: 0,
+          state: 0
+        }
+      },
+      contractors: {
+        total: {
+          total: 0,
+          federal: 0,
+          state: 0
+        }
+      },
+      expenses: {
+        total: {
+          total: 0,
+          federal: 0,
+          state: 0
+        }
+      },
+      statePersonnel: {
+        total: {
+          total: 0,
+          federal: 0,
+          state: 0
+        }
       }
     },
     hie: {
@@ -100,11 +130,27 @@ describe('budget reducer', () => {
         }
       }
     },
+    quarterly: {},
     years: []
   };
 
   it('should handle initial state', () => {
     expect(budget(undefined, {})).toEqual(initialState);
+  });
+
+  it('handles quarterly share updates', () => {
+    const state = initialStateFn(['2018']);
+    const newState = budget(state, {
+      type: 'UPDATE_BUDGET_QUARTERLY_SHARE',
+      updates: { '2018': { 1: 10 } }
+    });
+
+    expect(newState.quarterly).toEqual({
+      '2018': {
+        ...state.quarterly['2018'],
+        1: 10
+      }
+    });
   });
 
   it('computes new budget data from state', () => {
@@ -360,6 +406,32 @@ describe('budget reducer', () => {
           total: 2618877,
           federal: 793863.11,
           state: 462173.6
+        }
+      },
+      hitAndHie: {
+        combined: {
+          '1931': { federal: 34726, state: 40726, total: 645452 },
+          '1932': { federal: 79747.6, state: 208747.6, total: 647476 },
+          '1933': { federal: 491589.51, state: 99000, total: 635949 },
+          total: { federal: 606063.11, state: 348473.6, total: 1928877 }
+        },
+        contractors: {
+          '1931': { federal: 12012, state: 14012, total: 216024 },
+          '1932': { federal: 27049.1, state: 70049.1, total: 220491 },
+          '1933': { federal: 174062.15, state: 33000, total: 222285 },
+          total: { federal: 213123.25, state: 117061.1, total: 658800 }
+        },
+        expenses: {
+          '1931': { federal: 13173.5, state: 15173.5, total: 218347 },
+          '1932': { federal: 26121.6, state: 69121.6, total: 211216 },
+          '1933': { federal: 159553.7, state: 33000, total: 207630 },
+          total: { federal: 198848.8, state: 117295.1, total: 637193 }
+        },
+        statePersonnel: {
+          '1931': { federal: 9540.5, state: 11540.5, total: 211081 },
+          '1932': { federal: 26576.9, state: 69576.9, total: 215769 },
+          '1933': { federal: 157973.66, state: 33000, total: 206034 },
+          total: { federal: 194091.06, state: 114117.4, total: 632884 }
         }
       },
       hie: {
@@ -631,6 +703,11 @@ describe('budget reducer', () => {
             state: 11700
           }
         }
+      },
+      quarterly: {
+        '1931': { 1: 25, 2: 25, 3: 25, 4: 25 },
+        '1932': { 1: 25, 2: 25, 3: 25, 4: 25 },
+        '1933': { 1: 25, 2: 25, 3: 25, 4: 25 }
       },
       years: ['1931', '1932', '1933']
     });

@@ -69,6 +69,13 @@ describe('apd actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
+  it('updateBudgetQuarterlyShare should create UPDATE_BUDGET_QUARTERLY_SHARE action', () => {
+    expect(actions.updateBudgetQuarterlyShare('updates')).toEqual({
+      type: actions.UPDATE_BUDGET_QUARTERLY_SHARE,
+      updates: 'updates'
+    });
+  });
+
   describe('update APD', () => {
     it('creates UPDATE_APD action and does not update the budget if the APD years did not change', () => {
       const store = mockStore({});
