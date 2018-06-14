@@ -1,6 +1,11 @@
+import { push } from 'react-router-redux';
 import axios from '../util/api';
 
 export const ADD_APD_KEY_PERSON = 'ADD_APD_KEY_PERSON';
+export const CREATE_APD = 'CREATE_APD';
+export const CREATE_APD_REQUEST = 'CREATE_APD_REQUEST';
+export const CREATE_APD_SUCCESS = 'CREATE_APD_SUCCESS';
+export const CREATE_APD_FAILURE = 'CREATE_APD_FAILURE';
 export const GET_APD_REQUEST = 'GET_APD_REQUEST';
 export const GET_APD_SUCCESS = 'GET_APD_SUCCESS';
 export const GET_APD_FAILURE = 'GET_APD_FAILURE';
@@ -8,6 +13,7 @@ export const REMOVE_APD_KEY_PERSON = 'REMOVE_APD_KEY_PERSON';
 export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
 export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
 export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
+export const SELECT_APD = 'SELECT_APD';
 export const UPDATE_APD = 'UPDATE_APD';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
 export const UPDATE_BUDGET_QUARTERLY_SHARE = 'UPDATE_BUDGET_QUARTERLY_SHARE';
@@ -34,6 +40,22 @@ export const updateApd = updates => dispatch => {
   }
 };
 
+export const createRequest = () => ({ type: CREATE_APD_REQUEST });
+export const createSuccess = () => ({ type: CREATE_APD_SUCCESS });
+export const createFailure = () => ({ type: CREATE_APD_FAILURE });
+export const createApd = () => dispatch => {
+  dispatch(createRequest());
+  axios
+    .post('/apds')
+    .then(req => {
+      console.log(req.data);
+    })
+    .catch(error => {
+      const reason = error.response ? error.response.data : 'N/A';
+      dispatch(createFailure(reason));
+    });
+};
+
 export const requestSave = () => ({ type: SAVE_APD_REQUEST });
 export const saveSuccess = () => ({ type: SAVE_APD_SUCCESS });
 export const saveFailure = () => ({ type: SAVE_APD_FAILURE });
@@ -46,7 +68,7 @@ export const fetchApd = () => dispatch => {
   return axios
     .get(url)
     .then(req => {
-      const apd = Array.isArray(req.data) ? req.data[0] : null;
+      const apd = Array.isArray(req.data) ? req.data : null;
       dispatch(receiveApd(apd));
       dispatch(updateBudget());
     })
@@ -64,6 +86,11 @@ export const fetchApdDataIfNeeded = () => (dispatch, getState) => {
   }
 
   return null;
+};
+
+export const selectApd = id => (dispatch, getState) => {
+  dispatch({ type: SELECT_APD, apd: getState().apd.byId[id] });
+  dispatch(push('/apd'));
 };
 
 export const saveApd = () => (dispatch, state) => {
