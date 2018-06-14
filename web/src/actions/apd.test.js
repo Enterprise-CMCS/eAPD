@@ -123,7 +123,7 @@ describe('apd actions', () => {
 
       const expectedActions = [
         { type: actions.GET_APD_REQUEST },
-        { type: actions.GET_APD_SUCCESS, data: { foo: 'bar' } },
+        { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] },
         { type: actions.UPDATE_BUDGET, state: {} }
       ];
 
