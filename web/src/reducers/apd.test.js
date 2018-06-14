@@ -3,6 +3,7 @@ import apd, { initIncentiveData } from './apd';
 describe('APD reducer', () => {
   const incentivePayments = initIncentiveData();
   const initialState = {
+    byId: {},
     data: {
       id: '',
       years: ['2018', '2019'],
@@ -25,6 +26,7 @@ describe('APD reducer', () => {
 
   it('should handle a request to get an APD', () => {
     expect(apd(initialState, { type: 'GET_APD_REQUEST' })).toEqual({
+      byId: {},
       data: { ...initialState.data },
       fetching: true,
       loaded: false,
@@ -36,29 +38,48 @@ describe('APD reducer', () => {
     expect(
       apd(initialState, {
         type: 'GET_APD_SUCCESS',
-        data: {
-          id: 'apd-id',
-          programOverview: 'moop moop',
-          narrativeHIT: 'HIT, but as a play',
-          narrativeHIE: 'HIE, but as a novel',
-          narrativeMMIS: 'MMIS, but as a script',
-          years: [2013, 2014]
-        }
+        data: [
+          {
+            id: 'apd-id',
+            programOverview: 'moop moop',
+            narrativeHIT: 'HIT, but as a play',
+            narrativeHIE: 'HIE, but as a novel',
+            narrativeMMIS: 'MMIS, but as a script',
+            years: [2013, 2014]
+          }
+        ]
       })
     ).toEqual({
+      byId: {
+        'apd-id': {
+          activities: undefined,
+          id: 'apd-id',
+          years: ['2013', '2014'],
+          // TODO: This value is computed based on the current datetime.
+          // Probably ought to mock the time (sinon can do this) so
+          // the test is deterministic.
+          yearOptions: ['2018', '2019', '2020'],
+          overview: 'moop moop',
+          hitNarrative: 'HIT, but as a play',
+          hieNarrative: 'HIE, but as a novel',
+          mmisNarrative: 'MMIS, but as a script',
+          previousActivitySummary: '',
+          incentivePayments
+        }
+      },
       data: {
-        id: 'apd-id',
-        years: ['2013', '2014'],
+        id: '',
+        overview: '',
+        hitNarrative: '',
+        hieNarrative: '',
+        mmisNarrative: '',
+        previousActivitySummary: '',
+        incentivePayments,
         // TODO: This value is computed based on the current datetime.
         // Probably ought to mock the time (sinon can do this) so
         // the test is deterministic.
-        yearOptions: ['2018', '2019', '2020'],
-        overview: 'moop moop',
-        hitNarrative: 'HIT, but as a play',
-        hieNarrative: 'HIE, but as a novel',
-        mmisNarrative: 'MMIS, but as a script',
-        previousActivitySummary: '',
-        incentivePayments
+        years: ['2018', '2019'],
+        yearOptions: ['2018', '2019', '2020']
       },
       fetching: false,
       loaded: true,
@@ -70,6 +91,7 @@ describe('APD reducer', () => {
     expect(
       apd(initialState, { type: 'GET_APD_FAILURE', error: 'some error' })
     ).toEqual({
+      byId: {},
       data: { ...initialState.data },
       fetching: false,
       loaded: false,

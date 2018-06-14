@@ -6,6 +6,7 @@ const apdsIndex = require('./index');
 tap.test('apds endpoint setup', async endpointTest => {
   const app = {};
   const getEndpoint = sinon.spy();
+  const postEndpoint = sinon.spy();
   const putEndpoint = sinon.spy();
   const activitiesEndpoint = sinon.spy();
   const versionsEndpoint = sinon.spy();
@@ -13,6 +14,7 @@ tap.test('apds endpoint setup', async endpointTest => {
   apdsIndex(
     app,
     getEndpoint,
+    postEndpoint,
     putEndpoint,
     activitiesEndpoint,
     versionsEndpoint
@@ -21,6 +23,10 @@ tap.test('apds endpoint setup', async endpointTest => {
   endpointTest.ok(
     getEndpoint.calledWith(app),
     'apds GET endpoint is setup with the app'
+  );
+  endpointTest.ok(
+    postEndpoint.calledWith(app),
+    'apds POST endpoint is setup with the app'
   );
   endpointTest.ok(
     putEndpoint.calledWith(app),
