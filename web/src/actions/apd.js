@@ -16,9 +16,15 @@ export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
 export const SELECT_APD = 'SELECT_APD';
 export const UPDATE_APD = 'UPDATE_APD';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
+export const UPDATE_BUDGET_QUARTERLY_SHARE = 'UPDATE_BUDGET_QUARTERLY_SHARE';
 
 export const updateBudget = () => (dispatch, getState) =>
   dispatch({ type: UPDATE_BUDGET, state: getState() });
+
+export const updateBudgetQuarterlyShare = updates => ({
+  type: UPDATE_BUDGET_QUARTERLY_SHARE,
+  updates
+});
 
 export const requestApd = () => ({ type: GET_APD_REQUEST });
 export const receiveApd = data => ({ type: GET_APD_SUCCESS, data });
