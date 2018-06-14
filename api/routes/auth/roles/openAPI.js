@@ -24,6 +24,8 @@ const roleObjectSchema = {
 const openAPI = {
   '/auth/roles': {
     get: {
+      tags: ['Authentication and authorization'],
+      summary: 'Gets the list of all roles',
       description: 'Get a list of all roles in the system',
       responses: {
         200: {
@@ -33,6 +35,8 @@ const openAPI = {
       }
     },
     post: {
+      tags: ['Authentication and authorization'],
+      summary: 'Creates a new role',
       description: 'Create a new role',
       requestBody: {
         description: 'The new values for the new role',
@@ -70,6 +74,8 @@ const openAPI = {
   },
   '/auth/roles/{id}': {
     put: {
+      tags: ['Authentication and authorization'],
+      summary: 'Sets the activities for a role',
       description:
         'Change which activities an existing role is associated with',
       parameters: [
@@ -115,6 +121,8 @@ const openAPI = {
       }
     },
     delete: {
+      tags: ['Authentication and authorization'],
+      summary: 'Deletes a role',
       description:
         'Remove the associations between a role and activities, and delete the role',
       parameters: [
