@@ -25,7 +25,7 @@ const ScheduleSummary = ({ milestones }) => (
                   <td>{m.activityName}</td>
                   <td>{m.name || 'N/A'}</td>
                   <td>{m.start || 'N/A'}</td>
-                  <td>{m.start || 'N/A'}</td>
+                  <td>{m.end || 'N/A'}</td>
                 </tr>
               ))}
             </tbody>
