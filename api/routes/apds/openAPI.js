@@ -15,6 +15,15 @@ const openAPI = {
           content: jsonResponse(arrayOf({ $ref: '#/components/schemas/apd' }))
         }
       }
+    },
+    post: {
+      description: `Create a new draft APD for the current user's state`,
+      responses: {
+        200: {
+          description: 'The new APD',
+          content: jsonResponse({ $ref: '#/components/schemas/apd' })
+        }
+      }
     }
   },
 
