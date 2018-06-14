@@ -23,6 +23,11 @@ ShallowWrapper {
           exact={true}
           path="/"
         />,
+        <Connect(PrivateRoute)
+          component={[Function]}
+          exact={true}
+          path="/apd"
+        />,
         <Route
           component={[Function]}
           path="/login"
@@ -50,6 +55,19 @@ ShallowWrapper {
           "component": [Function],
           "exact": true,
           "path": "/",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "/apd",
+        "nodeType": "class",
+        "props": Object {
+          "component": [Function],
+          "exact": true,
+          "path": "/apd",
         },
         "ref": null,
         "rendered": null,
@@ -117,6 +135,11 @@ ShallowWrapper {
             exact={true}
             path="/"
           />,
+          <Connect(PrivateRoute)
+            component={[Function]}
+            exact={true}
+            path="/apd"
+          />,
           <Route
             component={[Function]}
             path="/login"
@@ -144,6 +167,19 @@ ShallowWrapper {
             "component": [Function],
             "exact": true,
             "path": "/",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "/apd",
+          "nodeType": "class",
+          "props": Object {
+            "component": [Function],
+            "exact": true,
+            "path": "/apd",
           },
           "ref": null,
           "rendered": null,

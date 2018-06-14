@@ -491,7 +491,7 @@ describe('activities reducer', () => {
             replaced: true
           },
           {
-            type: 'GET_APD_SUCCESS',
+            type: 'SELECT_APD',
             data: {
               activities: []
             }
@@ -521,8 +521,8 @@ describe('activities reducer', () => {
             replaced: true
           },
           {
-            type: 'GET_APD_SUCCESS',
-            data: {
+            type: 'SELECT_APD',
+            apd: {
               activities: [
                 {
                   id: 998,
