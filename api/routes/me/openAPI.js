@@ -6,7 +6,9 @@ const {
 const openAPI = {
   '/me': {
     get: {
-      description: `Get information about the current users`,
+      tags: ['Users'],
+      summary: `Gets the current user's information`,
+      description: `Get information about the current user`,
       responses: {
         200: {
           description: 'The current user',

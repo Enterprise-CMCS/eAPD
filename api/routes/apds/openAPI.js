@@ -8,6 +8,8 @@ const activities = require('./activities/openAPI');
 const openAPI = {
   '/apds': {
     get: {
+      tags: ['APDs'],
+      summary: 'Get all of the APDs available to the user',
       description: 'Get a list of all apds associated with requesting user',
       responses: {
         200: {
@@ -17,6 +19,8 @@ const openAPI = {
       }
     },
     post: {
+      tags: ['APDs'],
+      summary: `Create a new draft APD associated with the user's state`,
       description: `Create a new draft APD for the current user's state`,
       responses: {
         200: {
@@ -29,6 +33,8 @@ const openAPI = {
 
   '/apds/{id}': {
     put: {
+      tags: ['APDs'],
+      summary: 'Update a specific APD',
       description: 'Update an apd in the system',
       parameters: [
         {
@@ -72,7 +78,10 @@ const openAPI = {
 
   '/apds/{id}/versions': {
     post: {
-      description: 'Create a new saved version of an APD',
+      tags: ['APDs'],
+      summary: 'Save a submitted version of a specific APD',
+      description:
+        'Create a new saved version of an APD and makes the APD non-draft so it cannot be edited',
       parameters: [
         {
           name: 'id',
