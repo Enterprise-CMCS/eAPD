@@ -17,7 +17,7 @@ import {
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
-import { GET_APD_SUCCESS, SELECT_APD, UPDATE_APD } from '../actions/apd';
+import { SELECT_APD, UPDATE_APD } from '../actions/apd';
 
 import { arrToObj, defaultAPDYears, nextSequence } from '../util';
 
