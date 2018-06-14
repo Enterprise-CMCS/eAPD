@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { updateApd as updateApdAction } from '../actions/apd';
 import { RichText } from '../components/Inputs';
 import { Section, Subsection } from '../components/Section';
-import StayTuned from '../components/StayTuned';
+import ApdPreviousActivityTable from './ApdPreviousActivityTable';
 import { t } from '../i18n';
 
 const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
@@ -19,11 +19,8 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
         onSync={html => updateApd({ previousActivitySummary: html })}
       />
     </Subsection>
-    <Subsection resource="previousActivities.approvedExpenses">
-      <StayTuned />
-    </Subsection>
-    <Subsection resource="previousActivities.actualExpenses">
-      <StayTuned />
+    <Subsection resource="previousActivities.actualExpenses" open>
+      <ApdPreviousActivityTable />
     </Subsection>
   </Section>
 );
