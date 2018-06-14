@@ -43,6 +43,7 @@ ShallowWrapper {
             <Connect(ApdSummary) />
             <Connect(PreviousActivities) />
             <Connect(Activities) />
+            <Connect(ScheduleSummary) />
             <ProposedBudget />
             <AssurancesAndCompliance />
             <Connect(ExecutiveSummary) />
@@ -88,6 +89,7 @@ ShallowWrapper {
               <Connect(ApdSummary) />
               <Connect(PreviousActivities) />
               <Connect(Activities) />
+              <Connect(ScheduleSummary) />
               <ProposedBudget />
               <AssurancesAndCompliance />
               <Connect(ExecutiveSummary) />
@@ -121,6 +123,7 @@ ShallowWrapper {
                 <Connect(ApdSummary) />,
                 <Connect(PreviousActivities) />,
                 <Connect(Activities) />,
+                <Connect(ScheduleSummary) />,
                 <ProposedBudget />,
                 <AssurancesAndCompliance />,
                 <Connect(ExecutiveSummary) />,
@@ -130,6 +133,15 @@ ShallowWrapper {
             },
             "ref": null,
             "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
               Object {
                 "instance": null,
                 "key": undefined,
@@ -234,6 +246,7 @@ ShallowWrapper {
               <Connect(ApdSummary) />
               <Connect(PreviousActivities) />
               <Connect(Activities) />
+              <Connect(ScheduleSummary) />
               <ProposedBudget />
               <AssurancesAndCompliance />
               <Connect(ExecutiveSummary) />
@@ -279,6 +292,7 @@ ShallowWrapper {
                 <Connect(ApdSummary) />
                 <Connect(PreviousActivities) />
                 <Connect(Activities) />
+                <Connect(ScheduleSummary) />
                 <ProposedBudget />
                 <AssurancesAndCompliance />
                 <Connect(ExecutiveSummary) />
@@ -312,6 +326,7 @@ ShallowWrapper {
                   <Connect(ApdSummary) />,
                   <Connect(PreviousActivities) />,
                   <Connect(Activities) />,
+                  <Connect(ScheduleSummary) />,
                   <ProposedBudget />,
                   <AssurancesAndCompliance />,
                   <Connect(ExecutiveSummary) />,
@@ -321,6 +336,15 @@ ShallowWrapper {
               },
               "ref": null,
               "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
                 Object {
                   "instance": null,
                   "key": undefined,
