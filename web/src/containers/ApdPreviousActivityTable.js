@@ -2,13 +2,14 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { defaultAPDYearOptions } from '../util';
 import { formatMoney } from '../util/formats';
 import { DollarInput } from '../components/Inputs';
 
 const ApdPreviousActivityTable = () => {
   const sections = { hit: 'HIT', hie: 'HIE', hitAndHie: 'HIT + HIE' };
   const colors = ['aqua', 'blue', 'navy'];
-  const years = ['2018', '2019', '2020'];
+  const years = defaultAPDYearOptions.map(y => +y - 2); // ['2018', '2019', '2020'];
 
   const borderClass = i => `border-left border-${i < 0 ? 'gray' : colors[i]}`;
 
