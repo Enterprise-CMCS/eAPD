@@ -1,11 +1,10 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { formatMoney } from '../util/formats';
-import { t } from '../i18n';
 
-const ApdPreviousActivityTable = ({ updateApd }) => {
+const ApdPreviousActivityTable = () => {
   const sections = { hit: 'HIT', hie: 'HIE', hitAndHie: 'HIT + HIE' };
   const colors = ['aqua', 'blue', 'navy'];
   const years = ['2018', '2019', '2020'];
@@ -95,7 +94,7 @@ const ApdPreviousActivityTable = ({ updateApd }) => {
 };
 
 ApdPreviousActivityTable.propTypes = {
-  updateApd: PropTypes.func.isRequired
+  // updateApd: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = { updateApd: () => {} };
