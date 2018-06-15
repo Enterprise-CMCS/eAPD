@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { formatMoney } from '../util/formats';
+import { DollarInput } from '../components/Inputs';
 
 const ApdPreviousActivityTable = () => {
   const sections = { hit: 'HIT', hie: 'HIE', hitAndHie: 'HIT + HIE' };
@@ -13,7 +14,9 @@ const ApdPreviousActivityTable = () => {
 
   return (
     <table
-      className="h6 table-fixed table-condensed"
+      className={`h6 table-fixed table-condensed border-right border-${
+        colors[2]
+      }`}
       style={{ minWidth: 1200 }}
     >
       <thead>
@@ -69,17 +72,43 @@ const ApdPreviousActivityTable = () => {
       <tbody>
         {years.map(year => (
           <tr className="border border-gray">
-            <td>FFY {year}</td>
-            {Object.keys(sections).map((_, i) => (
+            <th>FFY {year}</th>
+            {Object.keys(sections).map((program, i) => (
               <Fragment>
                 <td className={`bg-${colors[i]}-light ${borderClass(i)}`}>
-                  {formatMoney(9000)}
+                  <DollarInput
+                    name={`approved-federal-${program}-${year}`}
+                    label={`approved federal share for ${program}, FFY ${year}`}
+                    hideLabel
+                    value={0}
+                  />
                 </td>
-                <td className={borderClass(-1)}>{formatMoney(9000)}</td>
+                <td className={borderClass(-1)}>
+                  <DollarInput
+                    name={`actual-federal-${program}-${year}`}
+                    label={`actual federal share for ${program}, FFY ${year}`}
+                    hideLabel
+                    value={0}
+                  />
+                </td>
+
                 <td className={`bg-${colors[i]}-light ${borderClass(i)}`}>
-                  {formatMoney(1000)}
+                  <DollarInput
+                    name={`approved-state-${program}-${year}`}
+                    label={`approved state share for ${program}, FFY ${year}`}
+                    hideLabel
+                    value={0}
+                  />
                 </td>
-                <td className={borderClass(-1)}>{formatMoney(1000)}</td>
+                <td className={borderClass(-1)}>
+                  {' '}
+                  <DollarInput
+                    name={`actual-state-${program}-${year}`}
+                    label={`actual state share for ${program}, FFY ${year}`}
+                    hideLabel
+                    value={0}
+                  />
+                </td>
               </Fragment>
             ))}
             <td className={`bg-${colors[2]}-light ${borderClass(2)}`}>
