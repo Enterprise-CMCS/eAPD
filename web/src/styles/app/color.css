@@ -3,6 +3,14 @@
   http://basscss.com/ace/#colors
 */
 
+.bg-aqua {
+  background-color: #67b6f4;
+}
+
+.border-aqua {
+  border-color: #67b6f4;
+}
+
 .bg-teal-light {
   background-color: #e1f3f8;
 }
