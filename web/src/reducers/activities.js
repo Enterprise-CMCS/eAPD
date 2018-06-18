@@ -43,7 +43,9 @@ const newContractor = (id, years) => ({
   years: arrToObj(years, contractorDefaultYear())
 });
 
-const expenseDefaultYear = () => 100;
+const expenseDefaultYear = () => 0;
+// const expenseDefaultYear = () => 100;
+
 const newExpense = (id, years) => ({
   id,
   category: 'Hardware, software, and licensing',
@@ -99,9 +101,14 @@ const newActivity = (
 });
 
 const initialState = {
-  byId: { 1: newActivity(1, { years: ['2018', '2019'] }) },
-  allIds: [1]
+  byId: {},
+  allIds: []
 };
+
+// const initialState = {
+//   byId: { 1: newActivity(1, { years: ['2018', '2019'] }) },
+//   allIds: [1]
+// };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {

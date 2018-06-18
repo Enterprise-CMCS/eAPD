@@ -57,8 +57,8 @@ describe('activities reducer', () => {
     ],
     costAllocateDesc: '',
     costFFP: {
-      '2018': { fed: 90, other: 0, state: 10 },
-      '2019': { fed: 90, other: 0, state: 10 }
+      '2018': { fed: 90, state: 10, otherAmt: 0 },
+      '2019': { fed: 90, state: 10, otherAmt: 0 }
     },
     descLong: '',
     descShort: '',
@@ -81,7 +81,6 @@ describe('activities reducer', () => {
     meta: { expanded: false },
     milestones: [{ ...newMilestone }, { ...newMilestone }, { ...newMilestone }],
     name: '',
-    otherFundingAmt: '',
     otherFundingDesc: '',
     standardsAndConditions: {
       bizResults: '',
@@ -348,7 +347,7 @@ describe('activities reducer', () => {
             ],
             costFFP: {
               ...stateWithOne.byId['1'].costFFP,
-              '2020': { fed: 90, other: 0, state: 10 }
+              '2020': { fed: 90, state: 10, otherAmt: 0 }
             },
             expenses: [
               {
@@ -431,7 +430,7 @@ describe('activities reducer', () => {
               }
             ],
             costFFP: {
-              '2018': { fed: 90, other: 0, state: 10 }
+              '2018': { fed: 90, state: 10, otherAmt: 0 }
             },
             expenses: [
               {
@@ -652,10 +651,9 @@ describe('activities reducer', () => {
             altApproach: 'different things',
             costAllocateDesc: 'how',
             otherFundingDesc: 'which',
-            otherFundingAmt: 0,
             costFFP: {
-              2018: { fed: 80, state: 15, other: 5 },
-              2019: { fed: 60, state: 20, other: 20 }
+              2018: { fed: 80, state: 15, otherAmt: 5 },
+              2019: { fed: 60, state: 20, otherAmt: 20 }
             },
             goals: [
               { desc: 'goal 1 description', obj: 'goal 1 objective' },

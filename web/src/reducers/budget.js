@@ -1,6 +1,7 @@
 import u from 'updeep';
 
 import { UPDATE_BUDGET, UPDATE_BUDGET_QUARTERLY_SHARE } from '../actions/apd';
+import { arrToObj } from '../util';
 
 const getFundingSourcesByYear = years => ({
   ...years.reduce(
@@ -62,6 +63,18 @@ const initialState = years => ({
   years
 });
 
+const budgetInput = (id, value = v => +v, target = null) => ({
+  id,
+  value,
+  target: target || id
+});
+
+const budgetInputs = [
+  budgetInput('statePersonnel', year => +year.amt * +year.perc / 100),
+  budgetInput('contractorResources', undefined, 'contractors'),
+  budgetInput('expenses')
+];
+
 const activities = src => Object.values(src.activities.byId);
 
 // The default for from is to handle the case where an expense
@@ -78,6 +91,13 @@ const addBudgetBlocks = (into, from = { total: 0, federal: 0, state: 0 }) => {
 const getTotalsForActivity = activity => {
   const fundingSource = activity.fundingSource.toLowerCase();
   const ffp = activity.costFFP;
+
+  // get overall activity total by year
+  // (state personnel + contractors + expenses)
+  // this is needed to compute the amount of money
+  // to not count towards the fed/state allocation
+  const activityTotalByYear = arrToObj(activity.years);
+  console.log(activityTotalByYear);
 
   return {
     collapse: (type, value = v => +v) => {
@@ -153,20 +173,13 @@ const buildBudget = wholeState => {
 
   activities(wholeState).forEach(activity => {
     const totaller = getTotalsForActivity(activity);
-    totaller
-      .collapse('statePersonnel', year => +year.amt * +year.perc / 100)
-      .totals()
-      .merge(newState);
 
-    totaller
-      .collapse('contractorResources')
-      .totals()
-      .merge(newState, 'contractors');
-
-    totaller
-      .collapse('expenses')
-      .totals()
-      .merge(newState);
+    budgetInputs.forEach(({ id, value, target }) => {
+      totaller
+        .collapse(id, value)
+        .totals()
+        .merge(newState, target);
+    });
   });
 
   getTotalsForFundingSource(newState, 'hie');
