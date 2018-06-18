@@ -1,11 +1,10 @@
 import React from 'react';
 
 import Container from '../Container';
-import ActivityDetailCostAllocateFFP from '../../containers/ActivityDetailCostAllocateFFP';
 
 const MiscPage = () => (
   <Container>
-    <ActivityDetailCostAllocateFFP aId={1} />
+    <h1 className="h2">Misc Components (for testing purposes)</h1>
   </Container>
 );
 

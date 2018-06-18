@@ -44,7 +44,6 @@ const newContractor = (id, years) => ({
 });
 
 const expenseDefaultYear = () => 0;
-// const expenseDefaultYear = () => 100;
 
 const newExpense = (id, years) => ({
   id,
@@ -53,7 +52,10 @@ const newExpense = (id, years) => ({
   years: arrToObj(years, expenseDefaultYear())
 });
 
-const costFFPDefaultYear = () => ({ fed: 90, state: 10, otherAmt: 0 });
+const costAllocationDefaultYear = () => ({
+  other: 0,
+  ffp: { federal: 90, state: 10 }
+});
 
 const newActivity = (
   id,
@@ -65,7 +67,7 @@ const newActivity = (
   descShort: '',
   descLong: '',
   altApproach: '',
-  costAllocateDesc: '',
+  costAllocationDesc: '',
   otherFundingDesc: '',
   goals: [newGoal()],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
@@ -80,7 +82,7 @@ const newActivity = (
     newContractor(3, years)
   ],
   expenses: [newExpense(1, years), newExpense(2, years), newExpense(3, years)],
-  costFFP: arrToObj(years, costFFPDefaultYear()),
+  costAllocation: arrToObj(years, costAllocationDefaultYear()),
   standardsAndConditions: {
     modularity: '',
     mita: '',
@@ -104,11 +106,6 @@ const initialState = {
   byId: {},
   allIds: []
 };
-
-// const initialState = {
-//   byId: { 1: newActivity(1, { years: ['2018', '2019'] }) },
-//   allIds: [1]
-// };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -312,7 +309,7 @@ const reducer = (state = initialState, action) => {
               years: fixupYears(o.years, defaultValue)
             }));
           }
-          // but costFFP is just an object whose properties
+          // but costAllocation is just an object whose properties
           // are the years
           return fixupYears(objects, defaultValue);
         };
@@ -329,7 +326,10 @@ const reducer = (state = initialState, action) => {
               contractorDefaultYear
             ),
             expenses: fixupExpenses(activity.expenses, expenseDefaultYear),
-            costFFP: fixupExpenses(activity.costFFP, costFFPDefaultYear)
+            costAllocation: fixupExpenses(
+              activity.costAllocation,
+              costAllocationDefaultYear
+            )
           };
         });
 
@@ -347,15 +347,17 @@ const reducer = (state = initialState, action) => {
           descShort: a.summary || '',
           descLong: a.description || '',
           altApproach: a.alternatives || '',
-          costAllocateDesc: a.costAllocationNarrative.methodology || '',
+          costAllocationDesc: a.costAllocationNarrative.methodology || '',
           otherFundingDesc: a.costAllocationNarrative.otherSources || '',
-          costFFP: a.costAllocation.reduce(
+          costAllocation: a.costAllocation.reduce(
             (all, ffp) => ({
               ...all,
               [ffp.year]: {
-                fed: ffp.federal * 100,
-                state: ffp.state * 100,
-                otherAmt: ffp.other * 100
+                other: ffp.other || 0,
+                ffp: {
+                  federal: ffp.federal * 100,
+                  state: ffp.state * 100
+                }
               }
             }),
             {}

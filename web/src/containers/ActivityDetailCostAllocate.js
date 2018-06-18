@@ -11,7 +11,7 @@ import { t } from '../i18n';
 
 const ActivityDetailCostAllocate = props => {
   const { activity, updateActivity } = props;
-  const { costAllocateDesc, otherFundingDesc } = activity;
+  const { costAllocationDesc, otherFundingDesc } = activity;
 
   const sync = name => html => {
     updateActivity(activity.id, { [name]: html });
@@ -28,8 +28,8 @@ const ActivityDetailCostAllocate = props => {
           reminder="activities.costAllocate.methodology.reminder"
         />
         <RichText
-          content={costAllocateDesc}
-          onSync={sync('costAllocateDesc')}
+          content={costAllocationDesc}
+          onSync={sync('costAllocationDesc')}
         />
       </div>
       <ActivityDetailCostAllocateFFP aId={activity.id} />

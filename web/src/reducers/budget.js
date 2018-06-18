@@ -63,10 +63,10 @@ const initialState = years => ({
   years
 });
 
-const budgetInput = (id, value = v => +v, target = null) => ({
-  id,
+const budgetInput = (type, value = v => +v, target = null) => ({
+  type,
   value,
-  target: target || id
+  target: target || type
 });
 
 const budgetInputs = [
@@ -88,16 +88,30 @@ const addBudgetBlocks = (into, from = { total: 0, federal: 0, state: 0 }) => {
   out.state += from.state;
 };
 
+const collapseAllAmounts = activity => {
+  const totals = arrToObj(activity.years);
+
+  budgetInputs.forEach(({ type, value }) => {
+    activity[type].forEach(entry => {
+      Object.keys(entry.years).forEach(year => {
+        totals[year] += value(entry.years[year]);
+      });
+    });
+  });
+
+  return totals;
+};
+
 const getTotalsForActivity = activity => {
   const fundingSource = activity.fundingSource.toLowerCase();
-  const ffp = activity.costFFP;
+  const allocate = activity.costAllocation;
+  const totalByYear = collapseAllAmounts(activity);
 
-  // get overall activity total by year
-  // (state personnel + contractors + expenses)
-  // this is needed to compute the amount of money
-  // to not count towards the fed/state allocation
-  const activityTotalByYear = arrToObj(activity.years);
-  console.log(activityTotalByYear);
+  const netOtherPercent = year => {
+    const { other } = allocate[year];
+    const total = totalByYear[year];
+    return total ? 1 - other / total : 1;
+  };
 
   return {
     collapse: (type, value = v => +v) => {
@@ -107,11 +121,15 @@ const getTotalsForActivity = activity => {
           if (!collapsed[year]) {
             collapsed[year] = { total: 0, federal: 0, state: 0 };
           }
-          const v = value(expense.years[year]);
+
+          const total = value(expense.years[year]);
+          const totalNetOther = total * netOtherPercent(year);
+          const { federal, state } = allocate[year].ffp;
+
           addBudgetBlocks(collapsed[year], {
-            total: v,
-            federal: v * ffp[year].fed / 100,
-            state: v * ffp[year].state / 100
+            total,
+            federal: totalNetOther * federal / 100,
+            state: totalNetOther * state / 100
           });
         });
       });
@@ -174,9 +192,9 @@ const buildBudget = wholeState => {
   activities(wholeState).forEach(activity => {
     const totaller = getTotalsForActivity(activity);
 
-    budgetInputs.forEach(({ id, value, target }) => {
+    budgetInputs.forEach(({ type, value, target }) => {
       totaller
-        .collapse(id, value)
+        .collapse(type, value)
         .totals()
         .merge(newState, target);
     });
