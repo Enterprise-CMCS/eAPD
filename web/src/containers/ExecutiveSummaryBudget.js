@@ -31,24 +31,38 @@ const ExecutiveSummaryBudget = ({ budget }) => {
             <tr>
               <th />
               <th className="center" colSpan="2">
-                HIT
+                HIT (90/10)
               </th>
               <th className="center" colSpan="2">
-                HIE
+                HIE (90/10)
               </th>
               <th className="center" colSpan="3">
-                HIT + HIE
+                HIT + HIE (90/10)
               </th>
             </tr>
             <tr>
               <th />
-              <th className="right-align">Federal share</th>
-              <th className="right-align">Federal share</th>
-              <th className="right-align">Federal share</th>
-              <th className="right-align">Federal share</th>
-              <th className="right-align">Federal share</th>
-              <th className="right-align">Federal share</th>
-              <th className="right-align">Grand total</th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.fedShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.stateShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.fedShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.stateShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.fedShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.stateShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.grandTotal')}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -73,24 +87,63 @@ const ExecutiveSummaryBudget = ({ budget }) => {
           <thead>
             <tr>
               <th />
+              <th className="center" colSpan="2">
+                MMIS (90/10)
+              </th>
+              <th className="center" colSpan="2">
+                MMIS (75/25)
+              </th>
+              <th className="center" colSpan="2">
+                MMIS (50/50)
+              </th>
               <th className="center" colSpan="3">
-                MMIS
+                MMIS (Total)
               </th>
             </tr>
             <tr>
               <th />
-              <th className="right-align">Federal share</th>
-              <th className="right-align">Federal share</th>
-              <th className="right-align">Grand total</th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.fedShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.stateShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.fedShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.stateShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.fedShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.stateShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.fedShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.stateShare')}
+              </th>
+              <th className="right-align">
+                {t('executiveSummary.budgetTable.grandTotal')}
+              </th>
             </tr>
           </thead>
           <tbody>
             {rowKeys.map(({ year, display }) => (
               <tr key={year}>
                 <td>{display}</td>
-                <DollarCell value={hitAndHie.combined[year].federal} />
-                <DollarCell value={hitAndHie.combined[year].state} />
-                <DollarCell value={hitAndHie.combined[year].total} />
+                <DollarCell value="--" />
+                <DollarCell value="--" />
+                <DollarCell value="--" />
+                <DollarCell value="--" />
+                <DollarCell value="--" />
+                <DollarCell value="--" />
+                <DollarCell value="--" />
+                <DollarCell value="--" />
+                <DollarCell value="--" />
               </tr>
             ))}
           </tbody>
