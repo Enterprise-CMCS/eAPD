@@ -43,7 +43,7 @@ const newContractor = (id, years) => ({
   years: arrToObj(years, contractorDefaultYear())
 });
 
-const expenseDefaultYear = () => 0;
+const expenseDefaultYear = () => 100;
 const newExpense = (id, years) => ({
   id,
   category: 'Hardware, software, and licensing',
@@ -51,7 +51,7 @@ const newExpense = (id, years) => ({
   years: arrToObj(years, expenseDefaultYear())
 });
 
-const costFFPDefaultYear = () => ({ fed: 90, state: 10, other: 0 });
+const costFFPDefaultYear = () => ({ fed: 90, state: 10, otherAmt: 0 });
 
 const newActivity = (
   id,
@@ -65,7 +65,6 @@ const newActivity = (
   altApproach: '',
   costAllocateDesc: '',
   otherFundingDesc: '',
-  otherFundingAmt: '',
   goals: [newGoal()],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
   statePersonnel: [
@@ -79,7 +78,7 @@ const newActivity = (
     newContractor(3, years)
   ],
   expenses: [newExpense(1, years), newExpense(2, years), newExpense(3, years)],
-  costFFP: arrToObj(years, { fed: 90, state: 10, other: 0 }),
+  costFFP: arrToObj(years, costFFPDefaultYear()),
   standardsAndConditions: {
     modularity: '',
     mita: '',
@@ -100,8 +99,8 @@ const newActivity = (
 });
 
 const initialState = {
-  byId: {},
-  allIds: []
+  byId: { 1: newActivity(1, { years: ['2018', '2019'] }) },
+  allIds: [1]
 };
 
 const reducer = (state = initialState, action) => {
@@ -343,14 +342,13 @@ const reducer = (state = initialState, action) => {
           altApproach: a.alternatives || '',
           costAllocateDesc: a.costAllocationNarrative.methodology || '',
           otherFundingDesc: a.costAllocationNarrative.otherSources || '',
-          otherFundingAmt: 0,
           costFFP: a.costAllocation.reduce(
             (all, ffp) => ({
               ...all,
               [ffp.year]: {
                 fed: ffp.federal * 100,
                 state: ffp.state * 100,
-                other: ffp.other * 100
+                otherAmt: ffp.other * 100
               }
             }),
             {}
