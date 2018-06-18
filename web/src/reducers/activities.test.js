@@ -55,10 +55,10 @@ describe('activities reducer', () => {
         id: 3
       }
     ],
-    costAllocateDesc: '',
-    costFFP: {
-      '2018': { fed: 90, state: 10, otherAmt: 0 },
-      '2019': { fed: 90, state: 10, otherAmt: 0 }
+    costAllocationDesc: '',
+    costAllocation: {
+      '2018': { ffp: { federal: 90, state: 10 }, other: 0 },
+      '2019': { ffp: { federal: 90, state: 10 }, other: 0 }
     },
     descLong: '',
     descShort: '',
@@ -345,9 +345,9 @@ describe('activities reducer', () => {
                 }
               }
             ],
-            costFFP: {
-              ...stateWithOne.byId['1'].costFFP,
-              '2020': { fed: 90, state: 10, otherAmt: 0 }
+            costAllocation: {
+              ...stateWithOne.byId['1'].costAllocation,
+              '2020': { ffp: { federal: 90, state: 10 }, other: 0 }
             },
             expenses: [
               {
@@ -429,8 +429,8 @@ describe('activities reducer', () => {
                 }
               }
             ],
-            costFFP: {
-              '2018': { fed: 90, state: 10, otherAmt: 0 }
+            costAllocation: {
+              '2018': { ffp: { federal: 90, state: 10 }, other: 0 }
             },
             expenses: [
               {
@@ -535,8 +535,8 @@ describe('activities reducer', () => {
                     otherSources: 'which'
                   },
                   costAllocation: [
-                    { year: 2018, federal: 0.8, state: 0.15, other: 0.05 },
-                    { year: 2019, federal: 0.6, state: 0.2, other: 0.2 }
+                    { year: 2018, federal: 0.8, state: 0.15, other: 100 },
+                    { year: 2019, federal: 0.6, state: 0.2, other: 200 }
                   ],
                   goals: [
                     {
@@ -649,11 +649,11 @@ describe('activities reducer', () => {
             descShort: 'summary',
             descLong: 'description',
             altApproach: 'different things',
-            costAllocateDesc: 'how',
+            costAllocationDesc: 'how',
             otherFundingDesc: 'which',
-            costFFP: {
-              2018: { fed: 80, state: 15, otherAmt: 5 },
-              2019: { fed: 60, state: 20, otherAmt: 20 }
+            costAllocation: {
+              2018: { ffp: { federal: 80, state: 15 }, other: 100 },
+              2019: { ffp: { federal: 60, state: 20 }, other: 200 }
             },
             goals: [
               { desc: 'goal 1 description', obj: 'goal 1 objective' },
