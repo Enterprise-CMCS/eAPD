@@ -35,38 +35,47 @@ class ActivityDetailCostAllocateFFP extends Component {
       <div className="mb3">
         <h4>{t('activities.costAllocate.ffp.title')}</h4>
         <div className="clearfix mxn1">
-          {byYearData.map(({ year, total, totalNetOther, allocations }) => (
-            <div key={year} className="col col-12 sm-col-4 px1">
-              <div className="p2 bg-darken-1">
-                <div>{year}</div>
-                <div className="h3 bold mono">{formatMoney(total)}</div>
-                <hr />
-                <DollarInput
-                  name={`cost-allocate-other-${year}`}
-                  label={t('activities.costAllocate.ffp.labels.other')}
-                  value={costAllocation[year].other}
-                  onChange={this.handleOther(year)}
-                />
-                <div>{t('activities.costAllocate.ffp.totalNetOther')}</div>
-                <div className="h3 bold mono">{formatMoney(totalNetOther)}</div>
-                <hr />
-                <Select
-                  name={`ffp-${year}`}
-                  label={t('activities.costAllocate.ffp.labels.fedStateSplit')}
-                  options={['90-10', '75-25', '50-50']}
-                  onChange={this.handleFFP(year)}
-                />
-                <div className="flex mxn-tiny">
-                  {allocations.map(({ id, amount }) => (
-                    <div key={id} className="col-12">
-                      <div>{titleCase(id)}</div>
-                      <div className="h3 bold mono">{formatMoney(amount)}</div>
-                    </div>
-                  ))}
+          {byYearData.map(
+            ({ year, total, totalNetOther, ffpSelectVal, allocations }) => (
+              <div key={year} className="col col-12 sm-col-4 px1">
+                <div className="p2 bg-darken-1">
+                  <div>{year}</div>
+                  <div className="h3 bold mono">{formatMoney(total)}</div>
+                  <hr />
+                  <DollarInput
+                    name={`cost-allocate-other-${year}`}
+                    label={t('activities.costAllocate.ffp.labels.other')}
+                    value={costAllocation[year].other}
+                    onChange={this.handleOther(year)}
+                  />
+                  <div>{t('activities.costAllocate.ffp.totalNetOther')}</div>
+                  <div className="h3 bold mono">
+                    {formatMoney(totalNetOther)}
+                  </div>
+                  <hr />
+                  <Select
+                    name={`ffp-${year}`}
+                    label={t(
+                      'activities.costAllocate.ffp.labels.fedStateSplit'
+                    )}
+                    options={['90-10', '75-25', '50-50']}
+                    value={ffpSelectVal}
+                    onChange={this.handleFFP(year)}
+                  />
+                  <div className="flex mxn-tiny">
+                    {allocations.map(({ id, amount }) => (
+                      <div key={id} className="col-12">
+                        <div>{titleCase(id)}</div>
+                        <div className="h3 bold mono">
+                          {formatMoney(amount)}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
       </div>
     );
@@ -90,13 +99,13 @@ const mapStateToProps = ({ activities: { byId } }, { aId }) => {
     const total = totals[year];
     const { ffp, other } = costAllocation[year];
     const totalNetOther = total - other;
-
+    const ffpSelectVal = `${ffp.federal}-${ffp.state}`;
     const allocations = Object.keys(ffp).map(id => ({
       id,
       amount: totalNetOther * ffp[id] / 100
     }));
 
-    return { year, total, totalNetOther, allocations };
+    return { year, total, totalNetOther, ffpSelectVal, allocations };
   });
 
   return { byYearData, costAllocation };
