@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ActivityDetailCostAllocateFFP from './ActivityDetailCostAllocateFFP';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { Subsection } from '../components/Section';
-import { DollarInput, RichText } from '../components/Inputs';
+import { RichText } from '../components/Inputs';
 import HelpText from '../components/HelpText';
 import { t } from '../i18n';
 
@@ -46,15 +46,6 @@ const ActivityDetailCostAllocate = props => {
           onSync={sync('otherFundingDesc')}
         />
       </div>
-      <DollarInput
-        name="other-funding-amt"
-        label={t('activities.costAllocate.otherFunding.amount')}
-        wrapperClass="mb2 sm-col-4"
-        value={activity.otherFundingAmt}
-        onChange={e =>
-          updateActivity(activity.id, { otherFundingAmt: e.target.value })
-        }
-      />
     </Subsection>
   );
 };
