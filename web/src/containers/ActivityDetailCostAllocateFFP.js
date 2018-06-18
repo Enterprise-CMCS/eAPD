@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { DollarInput } from '../components/Inputs';
 import Select from '../components/Select';
+import { t } from '../i18n';
 import { getActivityTotals } from '../reducers/activities';
 import { titleCase } from '../util';
 import { formatMoney } from '../util/formats';
@@ -32,9 +33,9 @@ class ActivityDetailCostAllocateFFP extends Component {
 
     return (
       <div className="mb3">
-        <h4>Federal Financial Partipation (FFP) and Cost Allocation</h4>
+        <h4>{t('activities.costAllocate.ffp.title')}</h4>
         <div className="clearfix mxn1">
-          {byYearData.map(({ year, total, allocations }) => (
+          {byYearData.map(({ year, total, totalNetOther, allocations }) => (
             <div key={year} className="col col-12 sm-col-4 px1">
               <div className="p2 bg-darken-1">
                 <div>{year}</div>
@@ -42,23 +43,24 @@ class ActivityDetailCostAllocateFFP extends Component {
                 <hr />
                 <DollarInput
                   name={`cost-allocate-other-${year}`}
-                  label="Other (amount)"
+                  label={t('activities.costAllocate.ffp.labels.other')}
                   value={costAllocation[year].other}
                   onChange={this.handleOther(year)}
                 />
+                <div>{t('activities.costAllocate.ffp.totalNetOther')}</div>
+                <div className="h3 bold mono">{formatMoney(totalNetOther)}</div>
                 <hr />
                 <Select
                   name={`ffp-${year}`}
-                  label="Federal / State (percent)"
+                  label={t('activities.costAllocate.ffp.labels.fedStateSplit')}
                   options={['90-10', '75-25', '50-50']}
                   onChange={this.handleFFP(year)}
                 />
-                <hr />
                 <div className="flex mxn-tiny">
                   {allocations.map(({ id, amount }) => (
                     <div key={id} className="col-12">
                       <div>{titleCase(id)}</div>
-                      <div className="bold mono">{formatMoney(amount)}</div>
+                      <div className="h3 bold mono">{formatMoney(amount)}</div>
                     </div>
                   ))}
                 </div>
@@ -89,14 +91,12 @@ const mapStateToProps = ({ activities: { byId } }, { aId }) => {
     const { ffp, other } = costAllocation[year];
     const totalNetOther = total - other;
 
-    const allocations = Object.keys(ffp)
-      .map(id => ({
-        id,
-        amount: totalNetOther * ffp[id] / 100
-      }))
-      .concat({ id: 'other', amount: other });
+    const allocations = Object.keys(ffp).map(id => ({
+      id,
+      amount: totalNetOther * ffp[id] / 100
+    }));
 
-    return { year, total, allocations };
+    return { year, total, totalNetOther, allocations };
   });
 
   return { byYearData, costAllocation };
