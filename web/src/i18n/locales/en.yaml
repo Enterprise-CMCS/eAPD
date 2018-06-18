@@ -285,6 +285,9 @@
     budgetTable: 
       title: "Program Budget Table"
       helpText: ""
+      fedShare: Federal
+      stateShare: State
+      grandTotal: Total
   certifyAndSubmit: 
     title: "Certify and Submit"
     helpText: "Note, this application will be locked upon submission until after a CMS analyst reviews it."
