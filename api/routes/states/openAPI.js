@@ -6,6 +6,8 @@ const {
 const openAPI = {
   '/states': {
     get: {
+      tags: ['States, territories, and districts'],
+      summary: `Gets information about the current user's state/territory/district`,
       description: `Get information about the users's state, territory, or district`,
       responses: {
         200: {
@@ -19,6 +21,8 @@ const openAPI = {
       }
     },
     put: {
+      tags: ['States, territories, and districts'],
+      summary: `Sets information about the current user's state/territory/district`,
       description: `Update information about the users's state, territory, or district`,
       requestBody: {
         description:
@@ -44,6 +48,8 @@ const openAPI = {
   },
   '/states/{id}': {
     get: {
+      tags: ['States, territories, and districts'],
+      summary: 'Gets information about a specific state/territory/district',
       description:
         'Get information about a specific state, territory, or district',
       parameters: [

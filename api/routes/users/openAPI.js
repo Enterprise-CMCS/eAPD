@@ -21,6 +21,8 @@ const userObjectSchema = {
 const openAPI = {
   '/users': {
     get: {
+      tags: ['Users'],
+      summary: 'Gets a list of all users',
       description: 'Get a list of all users in the system',
       responses: {
         200: {
@@ -30,6 +32,8 @@ const openAPI = {
       }
     },
     post: {
+      tags: ['Users'],
+      summary: 'Adds a new user',
       description: 'Add a new user to the system',
       requestBody: {
         content: jsonResponse({
@@ -62,6 +66,8 @@ const openAPI = {
   },
   '/users/{id}': {
     delete: {
+      tags: ['Users'],
+      summary: 'Removes a user',
       description: 'Delete a user from the system',
       parameters: [
         {
@@ -87,6 +93,8 @@ const openAPI = {
       }
     },
     get: {
+      tags: ['Users'],
+      summary: 'Gets the information for a specific user',
       description: 'Get a specific user in the system',
       parameters: [
         {
