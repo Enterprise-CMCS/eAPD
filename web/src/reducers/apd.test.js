@@ -92,6 +92,11 @@ describe('APD reducer', () => {
           hieNarrative: 'HIE, but as a novel',
           mmisNarrative: 'MMIS, but as a script',
           previousActivitySummary: '',
+          previousActivityExpenses: {
+            2016: getPreviousActivityExpense(),
+            2017: getPreviousActivityExpense(),
+            2018: getPreviousActivityExpense()
+          },
           incentivePayments
         }
       },
@@ -129,6 +134,18 @@ describe('APD reducer', () => {
       fetching: false,
       loaded: false,
       error: 'some error'
+    });
+  });
+
+  it('should handle selecting an APD', () => {
+    expect(
+      apd(initialState, {
+        type: 'SELECT_APD',
+        apd: { value: `hurr hurr i'm a burr` }
+      })
+    ).toEqual({
+      ...initialState,
+      data: { value: `hurr hurr i'm a burr` }
     });
   });
 
