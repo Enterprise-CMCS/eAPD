@@ -1,15 +1,27 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { defaultAPDYearOptions } from '../util';
 import { formatMoney } from '../util/formats';
 import { DollarInput } from '../components/Inputs';
+import { updateApd } from '../actions/apd';
 
-const ApdPreviousActivityTable = () => {
-  const sections = { hit: 'HIT', hie: 'HIE', hitAndHie: 'HIT + HIE' };
+const ApdPreviousActivityTable = ({
+  previousActivityExpenses,
+  updateApd: dispatchUpdateApd
+}) => {
+  const programs = { hit: 'HIT', hie: 'HIE', hitAndHie: 'HIT + HIE' };
   const colors = ['aqua', 'blue', 'navy'];
-  const years = defaultAPDYearOptions.map(y => +y - 2); // ['2018', '2019', '2020'];
+  const years = Object.keys(previousActivityExpenses);
+
+  const handleChange = (year, program, type) => e => {
+    const update = {
+      previousActivityExpenses: {
+        [year]: { [program]: { [type]: e.target.value } }
+      }
+    };
+    dispatchUpdateApd(update);
+  };
 
   const borderClass = i => `border-left border-${i < 0 ? 'gray' : colors[i]}`;
 
@@ -23,8 +35,9 @@ const ApdPreviousActivityTable = () => {
       <thead>
         <tr>
           <th />
-          {Object.values(sections).map((name, i) => (
+          {Object.values(programs).map((name, i) => (
             <th
+              key={name}
               colSpan={4 + (i === 2 ? 2 : 0)}
               className={`bg-${colors[i]} white center border border-${
                 colors[i]
@@ -36,8 +49,8 @@ const ApdPreviousActivityTable = () => {
         </tr>
         <tr>
           <th className="border-none" />
-          {Object.values(sections).map((_, i) => (
-            <Fragment>
+          {Object.values(programs).map((name, i) => (
+            <Fragment key={name}>
               <th colSpan="2" className={borderClass(i)}>
                 Federal share<br />90% FFP
               </th>
@@ -52,8 +65,8 @@ const ApdPreviousActivityTable = () => {
         </tr>
         <tr>
           <th />
-          {Object.values(sections).map((_, i) => (
-            <Fragment>
+          {Object.values(programs).map((name, i) => (
+            <Fragment key={name}>
               <th className={`bg-${colors[i]}-light ${borderClass(i)}`}>
                 Approved
               </th>
@@ -72,16 +85,19 @@ const ApdPreviousActivityTable = () => {
       </thead>
       <tbody>
         {years.map(year => (
-          <tr className="border border-gray">
+          <tr key={year} className="border border-gray">
             <th>FFY {year}</th>
-            {Object.keys(sections).map((program, i) => (
-              <Fragment>
+            {Object.keys(programs).map((program, i) => (
+              <Fragment key={program}>
                 <td className={`bg-${colors[i]}-light ${borderClass(i)}`}>
                   <DollarInput
                     name={`approved-federal-${program}-${year}`}
                     label={`approved federal share for ${program}, FFY ${year}`}
                     hideLabel
-                    value={0}
+                    value={
+                      previousActivityExpenses[year][program].federalApproved
+                    }
+                    onChange={handleChange(year, program, 'federalApproved')}
                   />
                 </td>
                 <td className={borderClass(-1)}>
@@ -89,7 +105,10 @@ const ApdPreviousActivityTable = () => {
                     name={`actual-federal-${program}-${year}`}
                     label={`actual federal share for ${program}, FFY ${year}`}
                     hideLabel
-                    value={0}
+                    value={
+                      previousActivityExpenses[year][program].federalActual
+                    }
+                    onChange={handleChange(year, program, 'federalActual')}
                   />
                 </td>
 
@@ -98,7 +117,10 @@ const ApdPreviousActivityTable = () => {
                     name={`approved-state-${program}-${year}`}
                     label={`approved state share for ${program}, FFY ${year}`}
                     hideLabel
-                    value={0}
+                    value={
+                      previousActivityExpenses[year][program].stateApproved
+                    }
+                    onChange={handleChange(year, program, 'stateApproved')}
                   />
                 </td>
                 <td className={borderClass(-1)}>
@@ -107,7 +129,8 @@ const ApdPreviousActivityTable = () => {
                     name={`actual-state-${program}-${year}`}
                     label={`actual state share for ${program}, FFY ${year}`}
                     hideLabel
-                    value={0}
+                    value={previousActivityExpenses[year][program].stateActual}
+                    onChange={handleChange(year, program, 'stateActual')}
                   />
                 </td>
               </Fragment>
@@ -124,9 +147,16 @@ const ApdPreviousActivityTable = () => {
 };
 
 ApdPreviousActivityTable.propTypes = {
-  // updateApd: PropTypes.func.isRequired
+  previousActivityExpenses: PropTypes.object.isRequired,
+  updateApd: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = { updateApd: () => {} };
+const mapStateToProps = ({ apd: { data: { previousActivityExpenses } } }) => ({
+  previousActivityExpenses
+});
 
-export default connect(null, mapDispatchToProps)(ApdPreviousActivityTable);
+const mapDispatchToProps = { updateApd };
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ApdPreviousActivityTable
+);
