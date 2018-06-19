@@ -10,11 +10,11 @@ const DollarCell = ({ value }) => (
 );
 
 DollarCell.propTypes = {
-  value: PropTypes.number.isRequired
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 };
 
 const ExecutiveSummaryBudget = ({ budget }) => {
-  const { hit, hie, hitAndHie, years } = budget;
+  const { hit, hie, hitAndHie, mmisByFFP, years } = budget;
 
   if (!years.length) return null;
 
@@ -31,13 +31,13 @@ const ExecutiveSummaryBudget = ({ budget }) => {
             <tr>
               <th />
               <th className="center" colSpan="2">
-                HIT (90/10)
+                {t('executiveSummary.budgetTable.hit')}
               </th>
               <th className="center" colSpan="2">
-                HIE (90/10)
+                {t('executiveSummary.budgetTable.hie')}
               </th>
               <th className="center" colSpan="3">
-                HIT + HIE (90/10)
+                {t('executiveSummary.budgetTable.hitHie')}
               </th>
             </tr>
             <tr>
@@ -88,16 +88,16 @@ const ExecutiveSummaryBudget = ({ budget }) => {
             <tr>
               <th />
               <th className="center" colSpan="2">
-                MMIS (90/10)
+                {t('executiveSummary.budgetTable.mmis90')}
               </th>
               <th className="center" colSpan="2">
-                MMIS (75/25)
+                {t('executiveSummary.budgetTable.mmis75')}
               </th>
               <th className="center" colSpan="2">
-                MMIS (50/50)
+                {t('executiveSummary.budgetTable.mmis50')}
               </th>
               <th className="center" colSpan="3">
-                MMIS (Total)
+                {t('executiveSummary.budgetTable.mmisTotal')}
               </th>
             </tr>
             <tr>
@@ -135,15 +135,15 @@ const ExecutiveSummaryBudget = ({ budget }) => {
             {rowKeys.map(({ year, display }) => (
               <tr key={year}>
                 <td>{display}</td>
-                <DollarCell value="--" />
-                <DollarCell value="--" />
-                <DollarCell value="--" />
-                <DollarCell value="--" />
-                <DollarCell value="--" />
-                <DollarCell value="--" />
-                <DollarCell value="--" />
-                <DollarCell value="--" />
-                <DollarCell value="--" />
+                <DollarCell value={mmisByFFP['90-10'][year].federal} />
+                <DollarCell value={mmisByFFP['90-10'][year].state} />
+                <DollarCell value={mmisByFFP['75-25'][year].federal} />
+                <DollarCell value={mmisByFFP['75-25'][year].state} />
+                <DollarCell value={mmisByFFP['50-50'][year].federal} />
+                <DollarCell value={mmisByFFP['50-50'][year].state} />
+                <DollarCell value={mmisByFFP.combined[year].federal} />
+                <DollarCell value={mmisByFFP.combined[year].state} />
+                <DollarCell value={mmisByFFP.combined[year].total} />
               </tr>
             ))}
           </tbody>
