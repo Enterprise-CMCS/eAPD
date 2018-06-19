@@ -208,7 +208,13 @@
         title: "Other funding description"
         helpText: "Account for any and all grant funding used to support this activity, and review the state Medicaid director Letter 10‐016 for examples of grants needed to be included."
         reminder: "High level descriptions are appropriate for grant activities. Ensure any new grants are included and any expired grants are removed."
-        amount: "Other funding amount"
+      ffp:
+        title: Federal Financial Partipation (FFP) and Cost Allocation
+        totalNetOther: Medicaid Share
+        labels:
+          other: Other Funding Amount
+          fedStateSplit: Federal-State Split
+
     standardsAndConditions: 
       title: "Key Standards & Conditions"
       subheader: "Describe us how you'll meet the Medicaid standards and conditions for this activity."
@@ -256,13 +262,24 @@
         header: "Strategies to Minimize Cost and Difficulty on Alternative Hardware or Operating System"
         subheader: "The condition described at § 433.112(b)(21) requires that states consider strategies to minimize the costs and difficulty of operating the software on alternate hardware or operating systems. This condition recognizes the significant federal and state investments that are involved with major Medicaid IT projects and requires that states consider options beyond software that will reduce costs or promote reuse. States should describe in the APD the strategies that were considered when deciding which solution was the most economical and efficient. States are not required to adopt a particular strategy, but CMS must have sufficient description to evaluate the extent to which the state looked at other solutions. States should consider, at a minimum, the options that offer more opportunities for reuse, lower development costs, lower long-term operating costs, and shorter development time as well as the extent to which the solutions can be readily implemented with alternate hardware and operating systems. States should consider this new condition in conjunction with existing APD requirements regarding cost benefit analyses required at 45 CFR 95.605 or § 95.610."
         title: "Describe how you'll meet the Cost Minimization condition"
+  scheduleSummary: 
+    title: Activity Schedule Summary
+    main: 
+      title: Summary Schedule Table
+      table:
+        activity: Activity
+        milestone: Milestone
+        start: Planned start
+        end: Planned end
   proposedBudget: 
     title: "Proposed Budget"
     helpText: "This itemized budget table has combined the costs for each activity into a single itemized table by federal fiscal year (FFY). The table displays total share, federal share, and state share. The second table also includes a proposed breakout of the budget by FFY quarter."
     summaryBudget: 
-      title: "Summary Budget Table"
+      title: Summary Budget Table
+    quarterlyBudget: 
+      title: Federal Share by FFY Quarter
     paymentsByFFYQuarter: 
-      title: "Incentive Payments by FFY Quarter"
+      title: Incentive Payments by FFY Quarter
   assurancesAndCompliance: 
     title: "Assurances and Compliance"
     helpText: "Ensure your state complies with all applicable code of federal Regulations (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses must be explained; CMS will contact you to discuss reasons for non‐compliance prior to approving your request."
