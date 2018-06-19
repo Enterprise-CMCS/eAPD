@@ -52,14 +52,14 @@ const newExpense = (id, years) => ({
   years: arrToObj(years, expenseDefaultYear())
 });
 
-const costAllocationDefaultYear = () => ({
-  other: 0,
-  ffp: { federal: 90, state: 10 }
+const costAllocationEntry = (other = 0, federal = 90, state = 10) => ({
+  other,
+  ffp: { federal, state }
 });
 
 const newActivity = (
   id,
-  { name = '', fundingSource = 'HIT', years = [] } = {}
+  { name = '', fundingSource = 'HIT', years = [], ...rest } = {}
 ) => ({
   id,
   name,
@@ -82,7 +82,7 @@ const newActivity = (
     newContractor(3, years)
   ],
   expenses: [newExpense(1, years), newExpense(2, years), newExpense(3, years)],
-  costAllocation: arrToObj(years, costAllocationDefaultYear()),
+  costAllocation: arrToObj(years, costAllocationEntry()),
   standardsAndConditions: {
     modularity: '',
     mita: '',
@@ -99,7 +99,8 @@ const newActivity = (
   years,
   meta: {
     expanded: false
-  }
+  },
+  ...rest
 });
 
 const initialState = {
@@ -328,7 +329,7 @@ const reducer = (state = initialState, action) => {
             expenses: fixupExpenses(activity.expenses, expenseDefaultYear),
             costAllocation: fixupExpenses(
               activity.costAllocation,
-              costAllocationDefaultYear
+              costAllocationEntry
             )
           };
         });

@@ -285,6 +285,13 @@
     budgetTable: 
       title: "Program Budget Table"
       helpText: ""
+      hit: HIT (90/10)
+      hie: HIE (90/10)
+      hitHie: HIT + HIE (90/10)
+      mmis90: MMIS (90/10)
+      mmis75: MMIS (75/25)
+      mmis50: MMIS (50/50)
+      mmisTotal: MMIS (Total)
       fedShare: Federal
       stateShare: State
       grandTotal: Total
