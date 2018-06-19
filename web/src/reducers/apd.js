@@ -101,6 +101,13 @@ const reducer = (state = initialState, action) => {
               years: (years || defaultAPDYears).map(y => `${y}`),
               yearOptions: defaultAPDYearOptions,
               previousActivitySummary: previousActivitySummary || '',
+              previousActivityExpenses: defaultAPDYearOptions.reduce(
+                (previous, year) => ({
+                  ...previous,
+                  [year - 2]: getPreviousActivityExpense()
+                }),
+                {}
+              ),
               incentivePayments: incentivePayments || initIncentiveData(),
               activities
             }

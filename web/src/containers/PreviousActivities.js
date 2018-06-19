@@ -19,7 +19,7 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
         onSync={html => updateApd({ previousActivitySummary: html })}
       />
     </Subsection>
-    <Subsection resource="previousActivities.actualExpenses" open>
+    <Subsection resource="previousActivities.actualExpenses">
       <ApdPreviousActivityTable />
     </Subsection>
   </Section>
