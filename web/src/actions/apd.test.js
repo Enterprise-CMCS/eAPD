@@ -195,11 +195,11 @@ describe('apd actions', () => {
             descShort: 'activity summary',
             descLong: 'activity description',
             altApproach: 'alternatives approach',
-            costAllocateDesc: 'cost allocation methodology',
+            costAllocationDesc: 'cost allocation methodology',
             otherFundingDesc: 'other funding sources',
-            costFFP: {
-              '1993': { fed: 90, state: 10, other: 0 },
-              '1994': { fed: 70, state: 20, other: 10 }
+            costAllocation: {
+              '1993': { ffp: { federal: 90, state: 10 }, other: 0 },
+              '1994': { ffp: { federal: 70, state: 20 }, other: 10 }
             },
             goals: [
               { desc: 'goal 1 description', obj: 'objective 1' },

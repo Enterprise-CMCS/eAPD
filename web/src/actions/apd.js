@@ -119,14 +119,14 @@ export const saveApd = () => (dispatch, state) => {
       description: activity.descLong,
       alternatives: activity.altApproach,
       costAllocationNarrative: {
-        methodology: activity.costAllocateDesc,
+        methodology: activity.costAllocationDesc,
         otherSources: activity.otherFundingDesc
       },
-      costAllocation: Object.entries(activity.costFFP).map(
+      costAllocation: Object.entries(activity.costAllocation).map(
         ([year, allocation]) => ({
-          federal: +allocation.fed / 100,
-          state: +allocation.state / 100,
-          other: +allocation.other / 100,
+          federal: +allocation.ffp.federal / 100,
+          state: +allocation.ffp.state / 100,
+          other: +allocation.other,
           year
         })
       ),

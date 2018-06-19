@@ -26,6 +26,8 @@ module.exports = {
     ...states,
     '/open-api': {
       get: {
+        tags: ['Metadata'],
+        summary: 'Gets this document',
         description: 'Returns this document',
         responses: {
           200: {
