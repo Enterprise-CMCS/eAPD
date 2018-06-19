@@ -42,12 +42,6 @@ describe('APD reducer', () => {
         federalApproved: 0,
         stateActual: 0,
         stateApproved: 0
-      },
-      hitAndHie: {
-        federalActual: 0,
-        federalApproved: 0,
-        stateActual: 0,
-        stateApproved: 0
       }
     });
   });
