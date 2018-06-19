@@ -17,7 +17,7 @@ import {
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
-import { GET_APD_SUCCESS, UPDATE_APD } from '../actions/apd';
+import { SELECT_APD, UPDATE_APD } from '../actions/apd';
 
 import { arrToObj, defaultAPDYears, nextSequence } from '../util';
 
@@ -44,6 +44,7 @@ const newContractor = (id, years) => ({
 });
 
 const expenseDefaultYear = () => 0;
+
 const newExpense = (id, years) => ({
   id,
   category: 'Hardware, software, and licensing',
@@ -51,7 +52,10 @@ const newExpense = (id, years) => ({
   years: arrToObj(years, expenseDefaultYear())
 });
 
-const costFFPDefaultYear = () => ({ fed: 90, state: 10, other: 0 });
+const costAllocationDefaultYear = () => ({
+  other: 0,
+  ffp: { federal: 90, state: 10 }
+});
 
 const newActivity = (
   id,
@@ -63,9 +67,8 @@ const newActivity = (
   descShort: '',
   descLong: '',
   altApproach: '',
-  costAllocateDesc: '',
+  costAllocationDesc: '',
   otherFundingDesc: '',
-  otherFundingAmt: '',
   goals: [newGoal()],
   milestones: [newMilestone(), newMilestone(), newMilestone()],
   statePersonnel: [
@@ -79,7 +82,7 @@ const newActivity = (
     newContractor(3, years)
   ],
   expenses: [newExpense(1, years), newExpense(2, years), newExpense(3, years)],
-  costFFP: arrToObj(years, { fed: 90, state: 10, other: 0 }),
+  costAllocation: arrToObj(years, costAllocationDefaultYear()),
   standardsAndConditions: {
     modularity: '',
     mita: '',
@@ -306,7 +309,7 @@ const reducer = (state = initialState, action) => {
               years: fixupYears(o.years, defaultValue)
             }));
           }
-          // but costFFP is just an object whose properties
+          // but costAllocation is just an object whose properties
           // are the years
           return fixupYears(objects, defaultValue);
         };
@@ -323,52 +326,56 @@ const reducer = (state = initialState, action) => {
               contractorDefaultYear
             ),
             expenses: fixupExpenses(activity.expenses, expenseDefaultYear),
-            costFFP: fixupExpenses(activity.costFFP, costFFPDefaultYear)
+            costAllocation: fixupExpenses(
+              activity.costAllocation,
+              costAllocationDefaultYear
+            )
           };
         });
 
         return u(update, state);
       }
       return state;
-    case GET_APD_SUCCESS: {
+    case SELECT_APD: {
       const byId = {};
-      ((action.data || {}).activities || []).forEach(a => {
+      ((action.apd || {}).activities || []).forEach(a => {
         byId[a.id] = {
           id: a.id,
           name: a.name,
           fundingSource: 'HIT', // TODO
-          years: action.data.years,
-          descShort: a.summary,
-          descLong: a.description,
-          altApproach: a.alternatives,
-          costAllocateDesc: a.costAllocationNarrative.methodology,
-          otherFundingDesc: a.costAllocationNarrative.otherSources,
-          otherFundingAmt: 0,
-          costFFP: a.costAllocation.reduce(
+          years: action.apd.years,
+          descShort: a.summary || '',
+          descLong: a.description || '',
+          altApproach: a.alternatives || '',
+          costAllocationDesc: a.costAllocationNarrative.methodology || '',
+          otherFundingDesc: a.costAllocationNarrative.otherSources || '',
+          costAllocation: a.costAllocation.reduce(
             (all, ffp) => ({
               ...all,
               [ffp.year]: {
-                fed: ffp.federal * 100,
-                state: ffp.state * 100,
-                other: ffp.other * 100
+                other: ffp.other || 0,
+                ffp: {
+                  federal: ffp.federal * 100,
+                  state: ffp.state * 100
+                }
               }
             }),
             {}
           ),
           goals: a.goals.map(g => ({
-            desc: g.description,
-            obj: g.objective
+            desc: g.description || '',
+            obj: g.objective || ''
           })),
           milestones: a.schedule.map(s => ({
             id: s.id,
-            name: s.milestone,
-            start: s.plannedStart,
-            end: s.plannedEnd
+            name: s.milestone || '',
+            start: s.plannedStart || '',
+            end: s.plannedEnd || ''
           })),
           statePersonnel: a.statePersonnel.map(s => ({
             id: s.id,
-            title: s.title,
-            desc: s.description,
+            title: s.title || '',
+            desc: s.description || '',
             years: s.years.reduce(
               (years, y) => ({
                 ...years,
@@ -382,10 +389,10 @@ const reducer = (state = initialState, action) => {
           })),
           contractorResources: a.contractorResources.map(c => ({
             id: c.id,
-            name: c.name,
-            desc: c.description,
-            start: c.start,
-            end: c.end,
+            name: c.name || '',
+            desc: c.description || '',
+            start: c.start || '',
+            end: c.end || '',
             years: c.years.reduce(
               (years, y) => ({
                 ...years,
@@ -396,8 +403,8 @@ const reducer = (state = initialState, action) => {
           })),
           expenses: a.expenses.map(e => ({
             id: e.id,
-            category: e.category,
-            desc: e.description,
+            category: e.category || '',
+            desc: e.description || '',
             years: e.entries.reduce(
               (years, y) => ({
                 ...years,
@@ -408,17 +415,17 @@ const reducer = (state = initialState, action) => {
           })),
 
           standardsAndConditions: {
-            bizResults: a.standardsAndConditions.businessResults,
-            documentation: a.standardsAndConditions.documentation,
-            industry: a.standardsAndConditions.industryStandards,
-            interoperability: a.standardsAndConditions.interoperability,
-            keyPersonnel: a.standardsAndConditions.keyPersonnel,
-            leverage: a.standardsAndConditions.leverage,
-            modularity: a.standardsAndConditions.modularity,
-            minimizeCost: a.standardsAndConditions.minimizeCost,
-            mita: a.standardsAndConditions.mita,
-            mitigation: a.standardsAndConditions.mitigationStrategy,
-            reporting: a.standardsAndConditions.reporting
+            bizResults: a.standardsAndConditions.businessResults || '',
+            documentation: a.standardsAndConditions.documentation || '',
+            industry: a.standardsAndConditions.industryStandards || '',
+            interoperability: a.standardsAndConditions.interoperability || '',
+            keyPersonnel: a.standardsAndConditions.keyPersonnel || '',
+            leverage: a.standardsAndConditions.leverage || '',
+            modularity: a.standardsAndConditions.modularity || '',
+            minimizeCost: a.standardsAndConditions.minimizeCost || '',
+            mita: a.standardsAndConditions.mita || '',
+            mitigation: a.standardsAndConditions.mitigationStrategy || '',
+            reporting: a.standardsAndConditions.reporting || ''
           },
           meta: {
             expanded: false

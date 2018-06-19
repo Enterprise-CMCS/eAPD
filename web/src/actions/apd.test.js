@@ -69,6 +69,13 @@ describe('apd actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
+  it('updateBudgetQuarterlyShare should create UPDATE_BUDGET_QUARTERLY_SHARE action', () => {
+    expect(actions.updateBudgetQuarterlyShare('updates')).toEqual({
+      type: actions.UPDATE_BUDGET_QUARTERLY_SHARE,
+      updates: 'updates'
+    });
+  });
+
   describe('update APD', () => {
     it('creates UPDATE_APD action and does not update the budget if the APD years did not change', () => {
       const store = mockStore({});
@@ -116,7 +123,7 @@ describe('apd actions', () => {
 
       const expectedActions = [
         { type: actions.GET_APD_REQUEST },
-        { type: actions.GET_APD_SUCCESS, data: { foo: 'bar' } },
+        { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] },
         { type: actions.UPDATE_BUDGET, state: {} }
       ];
 
@@ -193,11 +200,11 @@ describe('apd actions', () => {
             descShort: 'activity summary',
             descLong: 'activity description',
             altApproach: 'alternatives approach',
-            costAllocateDesc: 'cost allocation methodology',
+            costAllocationDesc: 'cost allocation methodology',
             otherFundingDesc: 'other funding sources',
-            costFFP: {
-              '1993': { fed: 90, state: 10, other: 0 },
-              '1994': { fed: 70, state: 20, other: 10 }
+            costAllocation: {
+              '1993': { ffp: { federal: 90, state: 10 }, other: 0 },
+              '1994': { ffp: { federal: 70, state: 20 }, other: 10 }
             },
             goals: [
               { desc: 'goal 1 description', obj: 'objective 1' },

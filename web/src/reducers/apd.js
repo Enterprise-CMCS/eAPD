@@ -4,6 +4,7 @@ import {
   GET_APD_REQUEST,
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
+  SELECT_APD,
   UPDATE_APD
 } from '../actions/apd';
 import {
@@ -46,6 +47,7 @@ const initialState = {
       }
     }
   },
+  byId: {},
   fetching: false,
   loaded: false,
   error: ''
@@ -56,38 +58,48 @@ const reducer = (state = initialState, action) => {
     case GET_APD_REQUEST:
       return { ...state, fetching: true, error: '' };
     case GET_APD_SUCCESS: {
-      const {
-        id,
-        years,
-        programOverview: overview,
-        narrativeHIT: hitNarrative,
-        narrativeHIE: hieNarrative,
-        narrativeMMIS: mmisNarrative,
-        previousActivitySummary,
-        incentivePayments
-      } =
-        action.data || {};
-
       return {
         ...state,
         fetching: false,
         loaded: true,
-        data: {
-          id,
-          overview,
-          hitNarrative,
-          hieNarrative,
-          mmisNarrative,
-          years: (years || defaultAPDYears).map(y => `${y}`),
-          yearOptions: defaultAPDYearOptions,
-          previousActivitySummary: previousActivitySummary || '',
-          incentivePayments: incentivePayments || initIncentiveData(),
-          state: { ...initialState.data.state } // TODO: get from API
-        }
+        byId: action.data.reduce((acc, apd) => {
+          const {
+            id,
+            years,
+            programOverview: overview,
+            narrativeHIT: hitNarrative,
+            narrativeHIE: hieNarrative,
+            narrativeMMIS: mmisNarrative,
+            previousActivitySummary,
+            incentivePayments,
+            activities
+          } =
+            apd || {};
+
+          return {
+            ...acc,
+            [apd.id]: {
+              id,
+              overview,
+              hitNarrative,
+              hieNarrative,
+              mmisNarrative,
+              years: (years || defaultAPDYears).map(y => `${y}`),
+              yearOptions: defaultAPDYearOptions,
+              previousActivitySummary: previousActivitySummary || '',
+              incentivePayments: incentivePayments || initIncentiveData(),
+              state: { ...initialState.data.state }, // TODO: get from API
+              activities
+            }
+          };
+        }, {}),
+        data: { ...initialState.data }
       };
     }
     case GET_APD_FAILURE:
       return { ...state, fetching: false, error: action.error };
+    case SELECT_APD:
+      return { ...state, data: { ...action.apd } };
     case UPDATE_APD:
       return u({ data: { ...action.updates } }, state);
     default:

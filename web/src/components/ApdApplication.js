@@ -7,6 +7,7 @@ import Activities from '../containers/Activities';
 import ApdSummary from '../containers/ApdSummary';
 import ExecutiveSummary from '../containers/ExecutiveSummary';
 import PreviousActivities from '../containers/PreviousActivities';
+import ScheduleSummary from '../containers/ScheduleSummary';
 import Sidebar from '../containers/Sidebar';
 import TopNav from '../containers/TopNav';
 
@@ -26,6 +27,7 @@ const ApdApplication = () => (
         <ApdSummary />
         <PreviousActivities />
         <Activities />
+        <ScheduleSummary />
         <ProposedBudget />
         <AssurancesAndCompliance />
         <ExecutiveSummary />

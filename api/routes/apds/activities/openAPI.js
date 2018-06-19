@@ -15,6 +15,8 @@ const activitySubParts = [
 const openAPI = {
   '/apds/{id}/activities': {
     post: {
+      tags: ['APD activities'],
+      summary: 'Add a new activity to an APD',
       description: 'Add a new activity to the specified APD',
       parameters: [
         {
@@ -53,6 +55,8 @@ const openAPI = {
 
   '/activities/{id}': {
     put: {
+      tags: ['APD activities'],
+      summary: 'Update a specific activity',
       description: 'Update an APD activity in the system',
       parameters: [
         {
@@ -93,6 +97,8 @@ const openAPI = {
 activitySubParts.forEach(sub => {
   openAPI[`/activities/{id}/${sub}`] = {
     put: {
+      tags: ['APD activities'],
+      summary: `Set the ${sub} for a specific activity`,
       description: `Set the ${sub} for a specific activity`,
       parameters: [
         {

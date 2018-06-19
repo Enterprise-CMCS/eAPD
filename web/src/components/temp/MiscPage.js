@@ -1,12 +1,10 @@
 import React from 'react';
 
 import Container from '../Container';
-import IncentivePayments from '../../containers/IncentivePayments';
 
 const MiscPage = () => (
   <Container>
-    <h1>Misc</h1>
-    <IncentivePayments />
+    <h1 className="h2">Misc Components (for testing purposes)</h1>
   </Container>
 );
 

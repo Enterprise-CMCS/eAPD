@@ -3,6 +3,8 @@ const { schema: { jsonResponse } } = require('./helpers');
 module.exports = {
   '/auth/login': {
     post: {
+      tags: ['Authentication and authorization'],
+      summary: 'Logs a user in',
       description: 'Authenticate a user against the local database',
       requestBody: {
         required: true,
@@ -42,6 +44,8 @@ module.exports = {
   },
   '/auth/logout': {
     get: {
+      tags: ['Authentication and authorization'],
+      summary: 'Logs the current user out',
       description: 'Logs the user out by invalidating the session cookie',
       responses: {
         200: {
