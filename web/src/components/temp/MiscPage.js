@@ -1,11 +1,10 @@
 import React from 'react';
 
 import Container from '../Container';
-import QuarterlyBudgetSummary from '../../containers/QuarterlyBudgetSummary';
 
 const MiscPage = () => (
   <Container>
-    <QuarterlyBudgetSummary />
+    <h1 className="h2">Misc Components (for testing purposes)</h1>
   </Container>
 );
 
