@@ -189,7 +189,13 @@
         title: "Other funding description"
         helpText: "Account for any and all grant funding used to support this activity, and review the state Medicaid director Letter 10‐016 for examples of grants needed to be included."
         reminder: "High level descriptions are appropriate for grant activities. Ensure any new grants are included and any expired grants are removed."
-        amount: "Other funding amount"
+      ffp:
+        title: Federal Financial Partipation (FFP) and Cost Allocation
+        totalNetOther: Medicaid Share
+        labels:
+          other: Other Funding Amount
+          fedStateSplit: Federal-State Split
+
     standardsAndConditions: 
       title: "Key Standards & Conditions"
       subheader: "Describe us how you'll meet the Medicaid standards and conditions for this activity."
