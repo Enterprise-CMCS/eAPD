@@ -1,4 +1,4 @@
-import apd, { initIncentiveData } from './apd';
+import apd, { initIncentiveData, getPreviousActivityExpense } from './apd';
 
 describe('APD reducer', () => {
   const incentivePayments = initIncentiveData();
@@ -13,6 +13,11 @@ describe('APD reducer', () => {
       hieNarrative: '',
       mmisNarrative: '',
       previousActivitySummary: '',
+      previousActivityExpenses: {
+        2016: getPreviousActivityExpense(),
+        2017: getPreviousActivityExpense(),
+        2018: getPreviousActivityExpense()
+      },
       incentivePayments
     },
     fetching: false,
@@ -22,6 +27,29 @@ describe('APD reducer', () => {
 
   it('should handle initial state', () => {
     expect(apd(undefined, {})).toEqual(initialState);
+  });
+
+  it('has helper to build previous activities expenses', () => {
+    expect(getPreviousActivityExpense()).toEqual({
+      hie: {
+        federalActual: 0,
+        federalApproved: 0,
+        stateActual: 0,
+        stateApproved: 0
+      },
+      hit: {
+        federalActual: 0,
+        federalApproved: 0,
+        stateActual: 0,
+        stateApproved: 0
+      },
+      hitAndHie: {
+        federalActual: 0,
+        federalApproved: 0,
+        stateActual: 0,
+        stateApproved: 0
+      }
+    });
   });
 
   it('should handle a request to get an APD', () => {
@@ -74,6 +102,11 @@ describe('APD reducer', () => {
         hieNarrative: '',
         mmisNarrative: '',
         previousActivitySummary: '',
+        previousActivityExpenses: {
+          2016: getPreviousActivityExpense(),
+          2017: getPreviousActivityExpense(),
+          2018: getPreviousActivityExpense()
+        },
         incentivePayments,
         // TODO: This value is computed based on the current datetime.
         // Probably ought to mock the time (sinon can do this) so
