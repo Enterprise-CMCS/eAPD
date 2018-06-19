@@ -14,6 +14,8 @@ import {
   defaultAPDYears
 } from '../util';
 
+import assurancesList from '../data/assurancesAndCompliance.yaml';
+
 export const initIncentiveData = () =>
   arrToObj(
     INCENTIVE_ENTRIES.map(e => e.id),
@@ -66,7 +68,18 @@ const initialState = {
         state: '',
         zip: ''
       }
-    }
+    },
+    assurancesAndCompliance: Object.entries(assurancesList).reduce(
+      (acc, [name, regulations]) => ({
+        ...acc,
+        [name]: Object.keys(regulations).map(reg => ({
+          title: reg,
+          checked: false,
+          explanation: ''
+        }))
+      }),
+      {}
+    )
   },
   byId: {},
   fetching: false,
@@ -110,6 +123,12 @@ const reducer = (state = initialState, action) => {
               years: (years || defaultAPDYears).map(y => `${y}`),
               yearOptions: defaultAPDYearOptions,
               previousActivitySummary: previousActivitySummary || '',
+              activities,
+
+              // TODO: Get these from the API
+              assurancesAndCompliance: {
+                ...initialState.assurancesAndCompliance
+              },
               previousActivityExpenses: defaultAPDYearOptions.reduce(
                 (previous, year) => ({
                   ...previous,
@@ -117,9 +136,13 @@ const reducer = (state = initialState, action) => {
                 }),
                 {}
               ),
+<<<<<<< HEAD
               incentivePayments: incentivePayments || initIncentiveData(),
               stateProfile,
               activities
+=======
+              incentivePayments: incentivePayments || initIncentiveData()
+>>>>>>> round 1
             }
           };
         }, {}),
