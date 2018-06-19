@@ -167,20 +167,26 @@ describe('budget reducer', () => {
             byId: {
               hieOne: {
                 fundingSource: 'HIE',
-                costFFP: {
+                costAllocation: {
                   '1931': {
-                    fed: 50,
-                    state: 50,
+                    ffp: {
+                      federal: 50,
+                      state: 50
+                    },
                     other: 0
                   },
                   '1932': {
-                    fed: 10,
-                    state: 10,
+                    ffp: {
+                      federal: 10,
+                      state: 10
+                    },
                     other: 80
                   },
                   '1933': {
-                    fed: 99,
-                    state: 0,
+                    ffp: {
+                      federal: 99,
+                      state: 0
+                    },
                     other: 1
                   }
                 },
@@ -242,20 +248,26 @@ describe('budget reducer', () => {
               },
               hieTwo: {
                 fundingSource: 'HIE',
-                costFFP: {
+                costAllocation: {
                   '1931': {
-                    fed: 1,
-                    state: 1,
+                    ffp: {
+                      federal: 1,
+                      state: 1
+                    },
                     other: 98
                   },
                   '1932': {
-                    fed: 13,
-                    state: 31,
+                    ffp: {
+                      federal: 13,
+                      state: 31
+                    },
                     other: 56
                   },
                   '1933': {
-                    fed: 74,
-                    state: 19,
+                    ffp: {
+                      federal: 74,
+                      state: 19
+                    },
                     other: 7
                   }
                 },
@@ -289,20 +301,26 @@ describe('budget reducer', () => {
               },
               hitOne: {
                 fundingSource: 'HIT',
-                costFFP: {
+                costAllocation: {
                   '1931': {
-                    fed: 3,
-                    state: 5,
+                    ffp: {
+                      federal: 3,
+                      state: 5
+                    },
                     other: 92
                   },
                   '1932': {
-                    fed: 12,
-                    state: 37,
+                    ffp: {
+                      federal: 12,
+                      state: 37
+                    },
                     other: 51
                   },
                   '1933': {
-                    fed: 78,
-                    state: 14,
+                    ffp: {
+                      federal: 78,
+                      state: 14
+                    },
                     other: 8
                   }
                 },
@@ -336,20 +354,26 @@ describe('budget reducer', () => {
               },
               mmisOne: {
                 fundingSource: 'MMIS',
-                costFFP: {
+                costAllocation: {
                   '1931': {
-                    fed: 1,
-                    state: 1,
+                    ffp: {
+                      federal: 1,
+                      state: 1
+                    },
                     other: 98
                   },
                   '1932': {
-                    fed: 13,
-                    state: 31,
+                    ffp: {
+                      federal: 13,
+                      state: 31
+                    },
                     other: 56
                   },
                   '1933': {
-                    fed: 74,
-                    state: 19,
+                    ffp: {
+                      federal: 74,
+                      state: 19
+                    },
                     other: 7
                   }
                 },
