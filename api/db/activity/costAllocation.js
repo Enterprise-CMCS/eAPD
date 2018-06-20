@@ -9,14 +9,19 @@ module.exports = {
     toJSON() {
       return {
         year: this.get('year'),
-        federal: this.get('federal'),
-        state: this.get('state'),
-        other: this.get('other')
+        federalPercent: this.get('federal_percent'),
+        statePercent: this.get('state_percent'),
+        otherAmount: this.get('other_amount')
       };
     },
 
     static: {
-      updateableFields: ['year', 'federal', 'state', 'other']
+      updateableFields: [
+        'year',
+        'federalPercent',
+        'statePercent',
+        'otherAmount'
+      ]
     }
   }
 };

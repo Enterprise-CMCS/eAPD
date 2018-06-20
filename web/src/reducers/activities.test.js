@@ -535,8 +535,18 @@ describe('activities reducer', () => {
                     otherSources: 'which'
                   },
                   costAllocation: [
-                    { year: 2018, federal: 0.8, state: 0.15, other: 100 },
-                    { year: 2019, federal: 0.6, state: 0.2, other: 200 }
+                    {
+                      year: 2018,
+                      federalPercent: 0.8,
+                      statePercent: 0.15,
+                      otherAmount: 100
+                    },
+                    {
+                      year: 2019,
+                      federalPercent: 0.6,
+                      statePercent: 0.2,
+                      otherAmount: 200
+                    }
                   ],
                   goals: [
                     {
