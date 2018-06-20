@@ -87,10 +87,11 @@
             90% FFP
           stateShare: >-
             State share
+
             10% FFP
           grandTotal: >-
-            Federal + state
-            Grand total computable
+            Federal + State
+            Grand Total Computable
           approved: Approved
           actual: Actual
 
