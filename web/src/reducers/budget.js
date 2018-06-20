@@ -29,8 +29,10 @@ const expenseTypeNames = [
   'combined'
 ];
 
-const expenseTypes = years =>
-  expenseTypeNames.reduce(
+const FFPOptions = new Set(['90-10', '75-25', '50-50']);
+
+const expenseTypes = (years, names = expenseTypeNames) =>
+  names.reduce(
     (o, name) => ({
       ...o,
       [name]: getFundingSourcesByYear(years)
@@ -55,10 +57,11 @@ const initQuarterly = years => ({
 
 const initialState = years => ({
   combined: getFundingSourcesByYear(years),
-  hitAndHie: expenseTypes(years),
   hie: expenseTypes(years),
   hit: expenseTypes(years),
   mmis: expenseTypes(years),
+  hitAndHie: expenseTypes(years),
+  mmisByFFP: expenseTypes(years, [...FFPOptions, 'combined']),
   quarterly: initQuarterly(years),
   years
 });
@@ -76,6 +79,11 @@ const budgetInputs = [
 ];
 
 const activities = src => Object.values(src.activities.byId);
+
+const fixNum = (value, digits = 2) => {
+  const mult = 10 ** digits;
+  return Math.round(value * mult) / mult;
+};
 
 // The default for from is to handle the case where an expense
 // block doesn't have any rows.  In that case, from is never
@@ -128,8 +136,8 @@ const getTotalsForActivity = activity => {
 
           addBudgetBlocks(collapsed[year], {
             total,
-            federal: totalNetOther * federal / 100,
-            state: totalNetOther * state / 100
+            federal: fixNum(totalNetOther * federal / 100),
+            state: fixNum(totalNetOther * state / 100)
           });
         });
       });
@@ -186,10 +194,39 @@ const combineHitAndHie = bigState => {
   });
 };
 
+const computeMmisByFFP = (bigState, activityEntries) => {
+  const { mmisByFFP } = bigState;
+  const grandTotals = mmisByFFP.combined;
+
+  activityEntries.filter(a => a.fundingSource === 'MMIS').forEach(activity => {
+    const allocate = activity.costAllocation;
+    const totalByYear = collapseAllAmounts(activity);
+
+    Object.keys(totalByYear).forEach(year => {
+      const { ffp, other } = allocate[year];
+      const ffpKey = `${ffp.federal}-${ffp.state}`;
+
+      if (FFPOptions.has(ffpKey)) {
+        const total = totalByYear[year];
+        const totalNetOther = total - other;
+        const federal = totalNetOther * ffp.federal / 100;
+        const state = totalNetOther * ffp.state / 100;
+        const result = { total, federal, state };
+
+        addBudgetBlocks(mmisByFFP[ffpKey][year], result);
+        addBudgetBlocks(mmisByFFP[ffpKey].total, result);
+        addBudgetBlocks(grandTotals[year], result);
+        addBudgetBlocks(grandTotals.total, result);
+      }
+    });
+  });
+};
+
 const buildBudget = wholeState => {
   const newState = initialState(wholeState.apd.data.years);
+  const activityEntries = activities(wholeState);
 
-  activities(wholeState).forEach(activity => {
+  activityEntries.forEach(activity => {
     const totaller = getTotalsForActivity(activity);
 
     budgetInputs.forEach(({ type, value, target }) => {
@@ -203,7 +240,9 @@ const buildBudget = wholeState => {
   getTotalsForFundingSource(newState, 'hie');
   getTotalsForFundingSource(newState, 'hit');
   getTotalsForFundingSource(newState, 'mmis');
+
   combineHitAndHie(newState);
+  computeMmisByFFP(newState, activityEntries);
 
   return newState;
 };
