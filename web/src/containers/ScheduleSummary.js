@@ -1,62 +1,71 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import ReactTable from 'react-table';
 
 import { t } from '../i18n';
 import { Section, Subsection } from '../components/Section';
 
-const ScheduleSummary = ({ milestones }) => (
+const ScheduleSummary = ({ tableData }) => (
   <Section id="schedule-summary" resource="scheduleSummary">
-    <Subsection resource="scheduleSummary.main">
-      {milestones.length > 0 && (
-        <div className="overflow-auto">
-          <table className="h6 table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>{t('scheduleSummary.main.table.activity')}</th>
-                <th>{t('scheduleSummary.main.table.milestone')}</th>
-                <th>{t('scheduleSummary.main.table.start')}</th>
-                <th>{t('scheduleSummary.main.table.end')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {milestones.map(m => (
-                <tr key={m.id}>
-                  <td>{m.activityName}</td>
-                  <td>{m.name || 'N/A'}</td>
-                  <td>{m.start || 'N/A'}</td>
-                  <td>{m.end || 'N/A'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+    <Subsection resource="scheduleSummary.main" open>
+      {tableData.data.length > 0 && (
+        <ReactTable
+          showPagination={false}
+          resizable={false}
+          minRows={0}
+          className="mb3 h6 -striped"
+          {...tableData}
+        />
       )}
     </Subsection>
   </Section>
 );
 
 ScheduleSummary.propTypes = {
-  milestones: PropTypes.array.isRequired
+  tableData: PropTypes.shape({
+    data: PropTypes.array,
+    columns: PropTypes.array,
+    defaultSorted: PropTypes.array
+  }).isRequired
 };
 
+const Cell = row => row.value || 'N/A';
+
 const mapStateToProps = ({ activities }) => {
-  const milestones = [];
+  const data = [];
 
   Object.values(activities.byId).forEach(activity => {
-    activity.milestones.forEach((milestone, i) => {
-      milestones.push({
-        ...milestone,
-        id: `${activity.id}-${i + 1}`,
-        activityId: activity.id,
-        activityName: activity.name
-      });
+    activity.milestones.forEach(milestone => {
+      data.push({ ...milestone, activityName: activity.name });
     });
   });
 
-  milestones.sort((a, b) => a.start - b.start);
+  const columns = [
+    {
+      accessor: 'activityName',
+      Header: t('scheduleSummary.main.table.activity')
+    },
+    {
+      accessor: 'name',
+      Header: t('scheduleSummary.main.table.milestone'),
+      Cell
+    },
+    {
+      accessor: 'start',
+      Header: t('scheduleSummary.main.table.start'),
+      Cell
+    },
+    {
+      accessor: 'end',
+      Header: t('scheduleSummary.main.table.end'),
+      Cell
+    }
+  ];
 
-  return { milestones };
+  const defaultSorted = [{ id: 'start', desc: false }];
+
+  return { tableData: { data, columns, defaultSorted } };
 };
 
 export default connect(mapStateToProps)(ScheduleSummary);
