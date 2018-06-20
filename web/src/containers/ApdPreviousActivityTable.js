@@ -11,7 +11,7 @@ const i18nBase = { scope: 'previousActivities.actualExpenses.table' };
 
 const programs = {
   hit: t('program.hit', i18nBase),
-  hie: t('program.hit', i18nBase)
+  hie: t('program.hie', i18nBase)
 };
 const colors = ['aqua', 'blue', 'navy'];
 const borderClass = i => `border-left border-${i < 0 ? 'gray' : colors[i]}`;
