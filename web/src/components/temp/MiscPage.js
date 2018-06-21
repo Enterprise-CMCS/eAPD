@@ -1,12 +1,16 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 import Container from '../Container';
-import ExecutiveSummaryBudget from '../../containers/ExecutiveSummaryBudget';
+import Snack from '../Snack';
 
 const MiscPage = () => (
   <Container>
     <h1 className="h2">Misc Components (for testing purposes)</h1>
-    <ExecutiveSummaryBudget />
+    <Button variant="contained" color="primary">
+      Hello World
+    </Button>
+    <Snack message="Saved!" />
   </Container>
 );
 
