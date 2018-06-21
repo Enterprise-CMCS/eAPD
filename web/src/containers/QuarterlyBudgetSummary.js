@@ -12,10 +12,12 @@ const FUNDING_SOURCES = [['hitAndHie', 'HIT and HIE'], ['mmis', 'MMIS']];
 const QUARTERS = [1, 2, 3, 4];
 const COLORS = ['teal', 'green', 'yellow'];
 const EXPENSE_NAME_DISPLAY = {
-  statePersonnel: 'Project state staff',
-  expenses: 'Non-personnel',
-  contractors: 'Contracted resources',
-  combined: 'Total Enhanced FFP'
+  statePersonnel: t(
+    'proposedBudget.quarterlyBudget.expenseNames.statePersonnel'
+  ),
+  expenses: t('proposedBudget.quarterlyBudget.expenseNames.expenses'),
+  contractors: t('proposedBudget.quarterlyBudget.expenseNames.contractors'),
+  combined: t('proposedBudget.quarterlyBudget.expenseNames.combined')
 };
 
 const color = idx => `bg-${COLORS[idx] || 'gray'}`;
