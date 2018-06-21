@@ -5,25 +5,27 @@
   "main": "app.js",
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "build-storybook":
-      "build-storybook -c .storybook -o .storybook-dist/public",
+    "build-storybook": "build-storybook -c .storybook -o .storybook-dist/public",
     "make-state-icons": "babel-node scripts/stateIcons.js",
-    "scaffold":
-      "mkdir -p dist && cp src/index.html dist/ && cp ../Staticfile dist/ && cp -r src/static dist/",
+    "scaffold": "mkdir -p dist && cp src/index.html dist/ && cp ../Staticfile dist/ && cp -r src/static dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
-    "start":
-      "webpack-dev-server --host 0.0.0.0 --port 8001 --history-api-fallback --content-base src/",
+    "start": "webpack-dev-server --host 0.0.0.0 --port 8001 --history-api-fallback --content-base src/",
     "test": "jest --collectCoverage",
     "test-watch": "jest --watch",
-    "prettier":
-      "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
+    "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/18F/cms-hitech-apd.git"
   },
-  "keywords": ["cms", "medicaid", "hitech", "emr", "apd"],
+  "keywords": [
+    "cms",
+    "medicaid",
+    "hitech",
+    "emr",
+    "apd"
+  ],
   "contributors": [
     "Nicole Fenton",
     "Meghana Khandekar",
@@ -41,6 +43,7 @@
     "@fortawesome/fontawesome-free-regular": "^5.0.8",
     "@fortawesome/fontawesome-free-solid": "^5.0.8",
     "@fortawesome/react-fontawesome": "0.0.17",
+    "@material-ui/core": "^1.2.3",
     "ace-css": "^1.1.0",
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
@@ -58,8 +61,8 @@
     "markdown-it": "^8.4.1",
     "numeral": "^2.0.6",
     "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "react-draft-wysiwyg": "^1.12.11",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
@@ -117,12 +120,19 @@
     "yaml-loader": "^0.5.0"
   },
   "babel": {
-    "presets": ["env", "react", "stage-2"]
+    "presets": [
+      "env",
+      "react",
+      "stage-2"
+    ]
   },
   "jest": {
     "coverageDirectory": "../coverage",
     "rootDir": "src",
-    "setupFiles": ["../polyfills.test.js", "../setup.test.js"],
+    "setupFiles": [
+      "../polyfills.test.js",
+      "../setup.test.js"
+    ],
     "transform": {
       "\\.js?$": "babel-jest",
       "\\.yaml$": "yaml-jest"
