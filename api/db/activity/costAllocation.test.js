@@ -10,7 +10,12 @@ tap.test('costAllocation data model', async costAllocationModelTests => {
       {
         tableName: 'activity_cost_allocation',
         static: {
-          updateableFields: ['year', 'federal', 'state', 'other']
+          updateableFields: [
+            'year',
+            'federalPercent',
+            'statePercent',
+            'otherAmount'
+          ]
         }
       },
       'get the expected model definitions'
@@ -43,17 +48,17 @@ tap.test('costAllocation data model', async costAllocationModelTests => {
   costAllocationModelTests.test('overrides toJSON method', async jsonTests => {
     const self = { get: sinon.stub() };
     self.get.withArgs('year').returns(1);
-    self.get.withArgs('federal').returns('CMS');
-    self.get.withArgs('state').returns('Franklin');
-    self.get.withArgs('other').returns('Alvin the Chipmunk');
+    self.get.withArgs('federal_percent').returns('CMS');
+    self.get.withArgs('state_percent').returns('Franklin');
+    self.get.withArgs('other_amount').returns('Alvin the Chipmunk');
 
     const output = costAllocation.toJSON.bind(self)();
 
     jsonTests.match(output, {
       year: 1,
-      federal: 'CMS',
-      state: 'Franklin',
-      other: 'Alvin the Chipmunk'
+      federalPercent: 'CMS',
+      statePercent: 'Franklin',
+      otherAmount: 'Alvin the Chipmunk'
     });
   });
 });
