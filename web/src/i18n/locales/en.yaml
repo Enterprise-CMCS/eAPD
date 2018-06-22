@@ -279,6 +279,11 @@
       title: Summary Budget Table
     quarterlyBudget: 
       title: Federal Share by FFY Quarter
+      expenseNames:
+          statePersonnel: Project state staff
+          expenses: Non-personnel
+          contractors: Contracted resources
+          combined: Total Enhanced FFP
     paymentsByFFYQuarter: 
       title: Incentive Payments by FFY Quarter
   assurancesAndCompliance: 

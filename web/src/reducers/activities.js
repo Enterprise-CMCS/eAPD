@@ -23,7 +23,11 @@ import { arrToObj, defaultAPDYears, nextSequence } from '../util';
 
 const newGoal = () => ({ desc: '', obj: '' });
 
-const newMilestone = () => ({ name: '', start: '', end: '' });
+const newMilestone = (name = '', start = '', end = '') => ({
+  name,
+  start,
+  end
+});
 
 const statePersonDefaultYear = () => ({ amt: '', perc: '' });
 const newStatePerson = (id, years) => ({
@@ -354,10 +358,10 @@ const reducer = (state = initialState, action) => {
             (all, ffp) => ({
               ...all,
               [ffp.year]: {
-                other: ffp.other || 0,
+                other: ffp.otherAmount || 0,
                 ffp: {
-                  federal: ffp.federal * 100,
-                  state: ffp.state * 100
+                  federal: ffp.federalPercent * 100,
+                  state: ffp.statePercent * 100
                 }
               }
             }),
