@@ -24,13 +24,17 @@ class Notification extends Component {
     return (
       <Snackbar
         key={key}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         open={open}
         autoHideDuration={duration}
         onClose={this.handleClose}
         onExited={this.handleExited}
         ContentProps={{ 'aria-describedby': 'notify-msg' }}
-        message={<span id="notify-msg">{message}</span>}
+        message={
+          <span className="sans" id="notify-msg">
+            {message}
+          </span>
+        }
       />
     );
   }
