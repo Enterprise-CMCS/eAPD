@@ -8,6 +8,7 @@ describe('root reducer', () => {
       'apd',
       'auth',
       'budget',
+      'notification',
       'state',
       'user',
       'router'
