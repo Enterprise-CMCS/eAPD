@@ -52,7 +52,22 @@ const initialState = {
       }),
       {}
     ),
-    incentivePayments: initIncentiveData()
+    incentivePayments: initIncentiveData(),
+    state: {
+      id: '--',
+      medicaidDirector: {
+        name: '',
+        email: '',
+        phone: ''
+      },
+      medicaidOffice: {
+        address1: '',
+        address2: '',
+        city: '',
+        state: '',
+        zip: ''
+      }
+    }
   },
   byId: {},
   fetching: false,
@@ -103,6 +118,7 @@ const reducer = (state = initialState, action) => {
                 {}
               ),
               incentivePayments: incentivePayments || initIncentiveData(),
+              state: { ...initialState.data.state }, // TODO: get from API
               activities
             }
           };
