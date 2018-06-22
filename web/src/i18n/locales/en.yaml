@@ -94,6 +94,26 @@
     actualExpenses: 
       title: "Actual Expenses"
       helpText: "Input the most recent actual expenses."
+      table:
+        program:
+          hie: HIE
+          hit: HIT
+          combined: HIT + HIE
+        labels:
+          federalShare: >-
+            Federal share
+
+            90% FFP
+          stateShare: >-
+            State share
+
+            10% FFP
+          grandTotal: >-
+            Federal + State
+            Grand Total Computable
+          approved: Approved
+          actual: Actual
+
   activities: 
     title: "Program Activities"
     helpText: "Identify each of the activities referenced from the overview section. We'll collect information for each activity."
@@ -278,6 +298,11 @@
       title: Summary Budget Table
     quarterlyBudget: 
       title: Federal Share by FFY Quarter
+      expenseNames:
+          statePersonnel: Project state staff
+          expenses: Non-personnel
+          contractors: Contracted resources
+          combined: Total Enhanced FFP
     paymentsByFFYQuarter: 
       title: Incentive Payments by FFY Quarter
   assurancesAndCompliance: 

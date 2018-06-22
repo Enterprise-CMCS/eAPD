@@ -124,20 +124,20 @@ module.exports = {
           costAllocation: arrayOf({
             type: 'object',
             properties: {
-              federal: {
+              federalPercent: {
                 type: 'number',
                 description:
                   'Federal share for this activity for this year, from 0 to 1'
               },
-              state: {
+              statePercent: {
                 type: 'number',
                 description:
                   'State share for this activity for this year, from 0 to 1'
               },
-              other: {
+              otherAmount: {
                 type: 'number',
                 description:
-                  'Other share for this activity for this year, from 0 to 1'
+                  'Other amount (dollars) for this activity for this year'
               },
               year: {
                 type: 'number',

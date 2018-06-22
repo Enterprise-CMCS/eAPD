@@ -125,9 +125,9 @@ export const saveApd = () => (dispatch, state) => {
       },
       costAllocation: Object.entries(activity.costAllocation).map(
         ([year, allocation]) => ({
-          federal: +allocation.ffp.federal / 100,
-          state: +allocation.ffp.state / 100,
-          other: +allocation.other,
+          federalPercent: +allocation.ffp.federal / 100,
+          statePercent: +allocation.ffp.state / 100,
+          otherAmount: +allocation.other,
           year
         })
       ),
