@@ -6,6 +6,16 @@ module.exports = {
       return this.belongsTo('apdActivity');
     },
 
+    format(attrs) {
+      return {
+        year: attrs.year,
+        federal_percent: attrs.federalPercent,
+        state_percent: attrs.statePercent,
+        other_amount: attrs.otherAmount,
+        activity_id: attrs.activity_id
+      };
+    },
+
     toJSON() {
       return {
         year: this.get('year'),
