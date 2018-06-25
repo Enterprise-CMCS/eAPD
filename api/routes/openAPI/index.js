@@ -280,6 +280,54 @@ module.exports = {
             type: 'string',
             description: 'An overview of the overall program'
           },
+          stateProfile: {
+            type: 'object',
+            description: 'The state profile for this specific APD',
+            properties: {
+              medicaidDirector: {
+                type: 'object',
+                properties: {
+                  name: {
+                    type: 'string',
+                    description: `State Medicaid director's name`
+                  },
+                  email: {
+                    type: 'string',
+                    description: `State Medicaid director's email address`
+                  },
+                  phone: {
+                    type: 'string',
+                    description: `State Medicaid director's phone number`
+                  }
+                }
+              },
+              medicaidOffice: {
+                type: 'object',
+                properties: {
+                  address1: {
+                    type: 'string',
+                    description: 'State Medicaid office address'
+                  },
+                  address2: {
+                    type: 'string',
+                    description: 'State Medicaid office address'
+                  },
+                  city: {
+                    type: 'string',
+                    description: 'State Medicaid office address city'
+                  },
+                  state: {
+                    type: 'string',
+                    description: 'State Medicaid office address state'
+                  },
+                  zip: {
+                    type: 'string',
+                    description: 'State Medicaid office address ZIP code'
+                  }
+                }
+              }
+            }
+          },
           status: {
             type: 'string',
             description: 'Status'

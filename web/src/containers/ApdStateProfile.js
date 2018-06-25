@@ -10,11 +10,11 @@ import { t } from '../i18n';
 class ApdStateProfile extends Component {
   handleChange = (area, field) => e => {
     const { updateApd } = this.props;
-    updateApd({ state: { [area]: { [field]: e.target.value } } });
+    updateApd({ stateProfile: { [area]: { [field]: e.target.value } } });
   };
 
   render() {
-    const { medicaidDirector, medicaidOffice } = this.props.stateInfo;
+    const { medicaidDirector, medicaidOffice } = this.props.stateProfile;
     const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
     const offTRoot = 'apd.stateProfile.directorAndAddress.address';
 
@@ -91,12 +91,12 @@ class ApdStateProfile extends Component {
 }
 
 ApdStateProfile.propTypes = {
-  stateInfo: PropTypes.object.isRequired,
+  stateProfile: PropTypes.object.isRequired,
   updateApd: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ apd: { data: { state } } }) => ({
-  stateInfo: state
+const mapStateToProps = ({ apd: { data: { stateProfile } } }) => ({
+  stateProfile
 });
 const mapDispatchToProps = { updateApd: updateApdAction };
 
