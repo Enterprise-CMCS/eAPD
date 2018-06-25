@@ -2,6 +2,10 @@
   font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }
 
+.sans {
+  font-family: var(--base-font-family);
+}
+
 .caps {
   text-transform: uppercase;
   letter-spacing: 0.1em;
