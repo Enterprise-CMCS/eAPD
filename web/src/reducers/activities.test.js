@@ -526,7 +526,7 @@ describe('activities reducer', () => {
                 {
                   id: 998,
                   name: 'activity 998',
-                  // fundingSource TODO:
+                  fundingSource: 'bob',
                   summary: 'summary',
                   description: 'description',
                   alternatives: 'different things',
@@ -654,7 +654,7 @@ describe('activities reducer', () => {
           '998': {
             id: 998,
             name: 'activity 998',
-            fundingSource: 'HIT',
+            fundingSource: 'bob',
             years: ['2018', '2019'],
             descShort: 'summary',
             descLong: 'description',
