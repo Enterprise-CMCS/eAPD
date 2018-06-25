@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { t } from '../i18n';
 import { Input } from '../components/Inputs';
 import { Section, Subsection } from '../components/Section';
 import { updateApd as updateApdAction } from '../actions/apd';
 
 import regLinks from '../data/assurancesAndCompliance.yaml';
+
+const yes = t('assurancesAndCompliance.formLabels._yes');
+const no = t('assurancesAndCompliance.formLabels._no');
 
 const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
   const handleCheckChange = (section, index, newValue) => () => {
@@ -22,6 +26,8 @@ const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
       }
     });
   };
+
+  console.log(apdSections);
 
   return (
     <Section id="assurances-compliance" resource="assurancesAndCompliance">
@@ -48,11 +54,11 @@ const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
                         <label className="mr1">
                           <input
                             type="radio"
-                            value="Yes"
+                            value={yes}
                             checked={checked}
                             onChange={handleCheckChange(name, index, true)}
                           />
-                          Yes
+                          {yes}
                         </label>
                       </td>
                       <td>
@@ -60,11 +66,11 @@ const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
                         <label className="mr1">
                           <input
                             type="radio"
-                            value="No"
+                            value={no}
                             checked={!checked}
                             onChange={handleCheckChange(name, index, false)}
                           />
-                          No
+                          {no}
                         </label>
                       </td>
                       <td>
