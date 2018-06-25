@@ -187,8 +187,7 @@ describe('apd actions', () => {
           mmisNarrative: 'MMIS narrative text',
           overview: 'APD overview text',
           years: ['1992', '1993'],
-          state: {
-            id: 'state-id',
+          stateProfile: {
             medicaidDirector: 'an object goes here',
             medicaidOffice: 'an object goes here'
           }

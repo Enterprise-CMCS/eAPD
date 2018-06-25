@@ -36,6 +36,30 @@ module.exports = () => ({
         out.years = JSON.stringify(attributes.years);
       }
 
+      if (attributes.stateProfile) {
+        if (attributes.stateProfile.medicaidDirector) {
+          out.medicaid_director_name =
+            attributes.stateProfile.medicaidDirector.name || null;
+          out.medicaid_director_email =
+            attributes.stateProfile.medicaidDirector.email || null;
+          out.medicaid_director_phone =
+            attributes.stateProfile.medicaidDirector.phone || null;
+        }
+        if (attributes.stateProfile.medicaidOffice) {
+          out.medicaid_office_address1 =
+            attributes.stateProfile.medicaidOffice.address1 || null;
+          out.medicaid_office_address2 =
+            attributes.stateProfile.medicaidOffice.address2 || null;
+          out.medicaid_office_city =
+            attributes.stateProfile.medicaidOffice.city || null;
+          out.medicaid_office_state =
+            attributes.stateProfile.medicaidOffice.state || null;
+          out.medicaid_office_zip =
+            attributes.stateProfile.medicaidOffice.zip || null;
+        }
+        delete out.stateProfile;
+      }
+
       return out;
     },
 
@@ -50,6 +74,20 @@ module.exports = () => ({
         period: this.get('period'),
         programOverview: this.get('program_overview'),
         state: this.get('state_id'),
+        stateProfile: {
+          medicaidDirector: {
+            name: this.get('medicaid_director_name'),
+            email: this.get('medicaid_director_email'),
+            phone: this.get('medicaid_director_phone')
+          },
+          medicaidOffice: {
+            address1: this.get('medicaid_office_address1'),
+            address2: this.get('medicaid_office_address2'),
+            city: this.get('medicaid_office_city'),
+            state: this.get('medicaid_office_state'),
+            zip: this.get('medicaid_office_zip')
+          }
+        },
         status: this.get('status'),
         years: this.get('years')
       };
@@ -63,6 +101,7 @@ module.exports = () => ({
         'narrativeHIE',
         'narrativeHIT',
         'narrativeMMIS',
+        'stateProfile',
         'years'
       ],
       foreignKey: 'apd_id',

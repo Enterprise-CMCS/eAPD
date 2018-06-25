@@ -53,8 +53,7 @@ const initialState = {
       {}
     ),
     incentivePayments: initIncentiveData(),
-    state: {
-      id: '--',
+    stateProfile: {
       medicaidDirector: {
         name: '',
         email: '',
@@ -95,6 +94,7 @@ const reducer = (state = initialState, action) => {
             narrativeMMIS: mmisNarrative,
             previousActivitySummary,
             incentivePayments,
+            stateProfile,
             activities
           } =
             apd || {};
@@ -118,7 +118,7 @@ const reducer = (state = initialState, action) => {
                 {}
               ),
               incentivePayments: incentivePayments || initIncentiveData(),
-              state: { ...initialState.data.state }, // TODO: get from API
+              stateProfile,
               activities
             }
           };

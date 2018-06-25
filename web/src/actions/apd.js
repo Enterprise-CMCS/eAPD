@@ -109,7 +109,7 @@ export const saveApd = () => (dispatch, state) => {
     narrativeHIT: updatedApd.hitNarrative,
     narrativeMMIS: updatedApd.mmisNarrative,
     programOverview: updatedApd.overview,
-    state: updatedApd.state,
+    stateProfile: updatedApd.stateProfile,
     years: updatedApd.years
   };
 
