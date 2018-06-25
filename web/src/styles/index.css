@@ -4,6 +4,7 @@
 
 @import 'app/alert';
 @import 'app/border';
+@import 'app/button';
 @import 'app/color';
 @import 'app/confirm';
 @import 'app/form';
