@@ -20,6 +20,7 @@ tap.test('apd data model', async apdModelTests => {
               'narrativeHIE',
               'narrativeHIT',
               'narrativeMMIS',
+              'stateProfile',
               'years'
             ],
             foreignKey: 'apd_id',
@@ -160,6 +161,17 @@ tap.test('apd data model', async apdModelTests => {
         narrativeHIE: undefined,
         narrativeHIT: null,
         narrativeMMIS: 'also changed',
+        stateProfile: {
+          medicaidDirector: {
+            name: 'their name'
+          },
+          medicaidOffice: {
+            address2: 'skip address 1',
+            city: 'city',
+            state: 'somewhere',
+            zip: 'hello'
+          }
+        },
         years: { key: 'value' }
       };
 
@@ -171,6 +183,14 @@ tap.test('apd data model', async apdModelTests => {
           fine: 'no change',
           good: 'also no change',
           program_overview: 'changed over',
+          medicaid_director_name: 'their name',
+          medicaid_director_email: null,
+          medicaid_director_phone: null,
+          medicaid_office_address1: null,
+          medicaid_office_address2: 'skip address 1',
+          medicaid_office_city: 'city',
+          medicaid_office_state: 'somewhere',
+          medicaid_office_zip: 'hello',
           narrative_hit: null,
           narrative_mmis: 'also changed',
           years: '{"key":"value"}'
@@ -201,6 +221,18 @@ tap.test('apd data model', async apdModelTests => {
     self.get.withArgs('narrative_hit').returns('apd-hit');
     self.get.withArgs('narrative_mmis').returns('apd-mmis');
     self.get.withArgs('years').returns('apd-years');
+    self.get.withArgs('medicaid_director_name').returns('Carrie Feher');
+    self.get.withArgs('medicaid_director_email').returns('em@il');
+    self.get.withArgs('medicaid_director_phone').returns('☎️');
+    self.get.withArgs('medicaid_office_address1').returns('place for street');
+    self.get
+      .withArgs('medicaid_office_address2')
+      .returns('office, po box, whatever');
+    self.get.withArgs('medicaid_office_city').returns('a place within a state');
+    self.get.withArgs('medicaid_office_state').returns('a state');
+    self.get
+      .withArgs('medicaid_office_zip')
+      .returns('a code to help the USPS get stuff there');
 
     const output = apd.apd.toJSON.bind(self)();
 
@@ -216,6 +248,20 @@ tap.test('apd data model', async apdModelTests => {
         period: 'apd-period',
         programOverview: 'apd-overview',
         state: 'apd-state',
+        stateProfile: {
+          medicaidDirector: {
+            name: 'Carrie Feher',
+            email: 'em@il',
+            phone: '☎️'
+          },
+          medicaidOffice: {
+            address1: 'place for street',
+            address2: 'office, po box, whatever',
+            city: 'a place within a state',
+            state: 'a state',
+            zip: 'a code to help the USPS get stuff there'
+          }
+        },
         status: 'apd-status',
         years: 'apd-years'
       },
