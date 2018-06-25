@@ -10,6 +10,7 @@ const state = require('./state');
 const apd = require('./apd');
 const apdVersion = require('./apdVersion');
 const keyPersonnel = require('./apdKeyPersonnel');
+const previousActivityExpense = require('./apdPreviousActivityExpense');
 const apdActivity = require('./activity');
 
 const exportedModels = {};
@@ -26,6 +27,7 @@ const setup = (
     apd(),
     apdVersion(),
     keyPersonnel(),
+    previousActivityExpense(),
     apdActivity()
   ]
 ) => {
