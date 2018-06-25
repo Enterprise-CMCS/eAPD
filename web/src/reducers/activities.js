@@ -23,7 +23,11 @@ import { arrToObj, defaultAPDYears, nextSequence } from '../util';
 
 const newGoal = () => ({ desc: '', obj: '' });
 
-const newMilestone = () => ({ name: '', start: '', end: '' });
+const newMilestone = (name = '', start = '', end = '') => ({
+  name,
+  start,
+  end
+});
 
 const statePersonDefaultYear = () => ({ amt: '', perc: '' });
 const newStatePerson = (id, years) => ({

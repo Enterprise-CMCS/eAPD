@@ -20,6 +20,21 @@ export const initIncentiveData = () =>
     arrToObj(defaultAPDYearOptions, { 1: 0, 2: 0, 3: 0, 4: 0 })
   );
 
+export const getPreviousActivityExpense = () => ({
+  hie: {
+    federalActual: 0,
+    federalApproved: 0,
+    stateActual: 0,
+    stateApproved: 0
+  },
+  hit: {
+    federalActual: 0,
+    federalApproved: 0,
+    stateActual: 0,
+    stateApproved: 0
+  }
+});
+
 const initialState = {
   data: {
     id: '',
@@ -30,7 +45,29 @@ const initialState = {
     hieNarrative: '',
     mmisNarrative: '',
     previousActivitySummary: '',
-    incentivePayments: initIncentiveData()
+    previousActivityExpenses: defaultAPDYearOptions.reduce(
+      (acc, year) => ({
+        ...acc,
+        [year - 2]: getPreviousActivityExpense()
+      }),
+      {}
+    ),
+    incentivePayments: initIncentiveData(),
+    state: {
+      id: '--',
+      medicaidDirector: {
+        name: '',
+        email: '',
+        phone: ''
+      },
+      medicaidOffice: {
+        address1: '',
+        address2: '',
+        city: '',
+        state: '',
+        zip: ''
+      }
+    }
   },
   byId: {},
   fetching: false,
@@ -48,6 +85,7 @@ const reducer = (state = initialState, action) => {
         fetching: false,
         loaded: true,
         byId: action.data.reduce((acc, apd) => {
+          // TODO: capture previous activity expenses when it's returned by the API
           const {
             id,
             years,
@@ -72,7 +110,15 @@ const reducer = (state = initialState, action) => {
               years: (years || defaultAPDYears).map(y => `${y}`),
               yearOptions: defaultAPDYearOptions,
               previousActivitySummary: previousActivitySummary || '',
+              previousActivityExpenses: defaultAPDYearOptions.reduce(
+                (previous, year) => ({
+                  ...previous,
+                  [year - 2]: getPreviousActivityExpense()
+                }),
+                {}
+              ),
               incentivePayments: incentivePayments || initIncentiveData(),
+              state: { ...initialState.data.state }, // TODO: get from API
               activities
             }
           };
