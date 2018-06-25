@@ -28,7 +28,7 @@ ShallowWrapper {
         <button
           aria-controls="default-render-case"
           aria-expanded={false}
-          className="btn block col-12 py2 h3 line-height-1 left-align
+          className="btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white"
           onClick={[Function]}
           type="button"
@@ -121,7 +121,7 @@ bg-white"
             </span>,
             "default render case",
           ],
-          "className": "btn block col-12 py2 h3 line-height-1 left-align
+          "className": "btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white",
           "onClick": [Function],
           "type": "button",
@@ -232,7 +232,7 @@ bg-white",
           <button
             aria-controls="default-render-case"
             aria-expanded={false}
-            className="btn block col-12 py2 h3 line-height-1 left-align
+            className="btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white"
             onClick={[Function]}
             type="button"
@@ -325,7 +325,7 @@ bg-white"
               </span>,
               "default render case",
             ],
-            "className": "btn block col-12 py2 h3 line-height-1 left-align
+            "className": "btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white",
             "onClick": [Function],
             "type": "button",
@@ -465,7 +465,7 @@ ShallowWrapper {
         <button
           aria-controls="open-render-case"
           aria-expanded={true}
-          className="btn block col-12 py2 h3 line-height-1 left-align border-bottom border-bottom-gray bg-white"
+          className="btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align border-bottom border-bottom-gray bg-white"
           onClick={[Function]}
           type="button"
         >
@@ -557,7 +557,7 @@ ShallowWrapper {
             </span>,
             "open render case",
           ],
-          "className": "btn block col-12 py2 h3 line-height-1 left-align border-bottom border-bottom-gray bg-white",
+          "className": "btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align border-bottom border-bottom-gray bg-white",
           "onClick": [Function],
           "type": "button",
         },
@@ -667,7 +667,7 @@ ShallowWrapper {
           <button
             aria-controls="open-render-case"
             aria-expanded={true}
-            className="btn block col-12 py2 h3 line-height-1 left-align border-bottom border-bottom-gray bg-white"
+            className="btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align border-bottom border-bottom-gray bg-white"
             onClick={[Function]}
             type="button"
           >
@@ -759,7 +759,7 @@ ShallowWrapper {
               </span>,
               "open render case",
             ],
-            "className": "btn block col-12 py2 h3 line-height-1 left-align border-bottom border-bottom-gray bg-white",
+            "className": "btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align border-bottom border-bottom-gray bg-white",
             "onClick": [Function],
             "type": "button",
           },
@@ -898,7 +898,7 @@ ShallowWrapper {
         <button
           aria-controls="open-render-case"
           aria-expanded={false}
-          className="btn block col-12 py2 h3 line-height-1 left-align
+          className="btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white sticky-top"
           onClick={[Function]}
           type="button"
@@ -991,7 +991,7 @@ bg-white sticky-top"
             </span>,
             "open render case",
           ],
-          "className": "btn block col-12 py2 h3 line-height-1 left-align
+          "className": "btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white sticky-top",
           "onClick": [Function],
           "type": "button",
@@ -1102,7 +1102,7 @@ bg-white sticky-top",
           <button
             aria-controls="open-render-case"
             aria-expanded={false}
-            className="btn block col-12 py2 h3 line-height-1 left-align
+            className="btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white sticky-top"
             onClick={[Function]}
             type="button"
@@ -1195,7 +1195,7 @@ bg-white sticky-top"
               </span>,
               "open render case",
             ],
-            "className": "btn block col-12 py2 h3 line-height-1 left-align
+            "className": "btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white sticky-top",
             "onClick": [Function],
             "type": "button",
@@ -1335,7 +1335,7 @@ ShallowWrapper {
         <button
           aria-controls="toggle-to-open-case"
           aria-expanded={true}
-          className="btn block col-12 py2 h3 line-height-1 left-align border-bottom border-bottom-gray bg-white"
+          className="btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align border-bottom border-bottom-gray bg-white"
           onClick={[Function]}
           type="button"
         >
@@ -1427,7 +1427,7 @@ ShallowWrapper {
             </span>,
             "toggle to open case",
           ],
-          "className": "btn block col-12 py2 h3 line-height-1 left-align border-bottom border-bottom-gray bg-white",
+          "className": "btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align border-bottom border-bottom-gray bg-white",
           "onClick": [Function],
           "type": "button",
         },
@@ -1537,7 +1537,7 @@ ShallowWrapper {
           <button
             aria-controls="toggle-to-open-case"
             aria-expanded={true}
-            className="btn block col-12 py2 h3 line-height-1 left-align border-bottom border-bottom-gray bg-white"
+            className="btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align border-bottom border-bottom-gray bg-white"
             onClick={[Function]}
             type="button"
           >
@@ -1629,7 +1629,7 @@ ShallowWrapper {
               </span>,
               "toggle to open case",
             ],
-            "className": "btn block col-12 py2 h3 line-height-1 left-align border-bottom border-bottom-gray bg-white",
+            "className": "btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align border-bottom border-bottom-gray bg-white",
             "onClick": [Function],
             "type": "button",
           },
@@ -1768,7 +1768,7 @@ ShallowWrapper {
         <button
           aria-controls="toggle-to-closed-case"
           aria-expanded={false}
-          className="btn block col-12 py2 h3 line-height-1 left-align
+          className="btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white"
           onClick={[Function]}
           type="button"
@@ -1861,7 +1861,7 @@ bg-white"
             </span>,
             "toggle to closed case",
           ],
-          "className": "btn block col-12 py2 h3 line-height-1 left-align
+          "className": "btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white",
           "onClick": [Function],
           "type": "button",
@@ -1972,7 +1972,7 @@ bg-white",
           <button
             aria-controls="toggle-to-closed-case"
             aria-expanded={false}
-            className="btn block col-12 py2 h3 line-height-1 left-align
+            className="btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white"
             onClick={[Function]}
             type="button"
@@ -2065,7 +2065,7 @@ bg-white"
               </span>,
               "toggle to closed case",
             ],
-            "className": "btn block col-12 py2 h3 line-height-1 left-align
+            "className": "btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
 bg-white",
             "onClick": [Function],
             "type": "button",

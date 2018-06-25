@@ -38,7 +38,7 @@ ShallowWrapper {
             }
           />
           <div
-            className="bg-darken-1 flex-auto"
+            className="bg-grey-light flex-auto"
           >
             <Connect(ApdStateProfile) />
             <Connect(ApdSummary) />
@@ -85,7 +85,7 @@ ShallowWrapper {
               }
             />,
             <div
-              className="bg-darken-1 flex-auto"
+              className="bg-grey-light flex-auto"
             >
               <Connect(ApdStateProfile) />
               <Connect(ApdSummary) />
@@ -132,7 +132,7 @@ ShallowWrapper {
                 <Connect(ExecutiveSummary) />,
                 <CertifyAndSubmit />,
               ],
-              "className": "bg-darken-1 flex-auto",
+              "className": "bg-grey-light flex-auto",
             },
             "ref": null,
             "rendered": Array [
@@ -253,7 +253,7 @@ ShallowWrapper {
               }
             />
             <div
-              className="bg-darken-1 flex-auto"
+              className="bg-grey-light flex-auto"
             >
               <Connect(ApdStateProfile) />
               <Connect(ApdSummary) />
@@ -300,7 +300,7 @@ ShallowWrapper {
                 }
               />,
               <div
-                className="bg-darken-1 flex-auto"
+                className="bg-grey-light flex-auto"
               >
                 <Connect(ApdStateProfile) />
                 <Connect(ApdSummary) />
@@ -347,7 +347,7 @@ ShallowWrapper {
                   <Connect(ExecutiveSummary) />,
                   <CertifyAndSubmit />,
                 ],
-                "className": "bg-darken-1 flex-auto",
+                "className": "bg-grey-light flex-auto",
               },
               "ref": null,
               "rendered": Array [

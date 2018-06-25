@@ -23,9 +23,11 @@
 
 :root {
   --base-font-size: 16px;
-  --base-font-family: -apple-system, BlinkMacSystemFont, 'avenir next', avenir,
-    'helvetica neue', helvetica, roboto, noto, 'segoe ui', arial, sans-serif;
+  --base-font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'avenir next', avenir, 'helvetica neue', helvetica, roboto, noto, 'segoe ui',
+    arial, sans-serif;
 
+  --h0: 2.5rem;
   --h1: 2rem;
   --h2: 1.5rem;
   --h3: 1.25rem;
@@ -44,7 +46,28 @@
   --border-width: 1px;
   --border-radius: 5px;
 
+  --button-font-weight: normal;
+
+  /* ace color overrides */
+
   --gray: #ccc;
   --red: #e21c3d;
-  --teal: #02bfe7;
+
+  /* app colors */
+
+  --teal: #167f91;
+  --teal-light: #d0f1f7;
+  --teal-lightest: #e8f7fa;
+  --teal-bright: #6ecbdb;
+
+  --yellow: #fdd430;
+  --yellow-light: #f7e8b0;
+  --yellow-bright: #f0d04f;
+
+  --blue: #0c4d82;
+  --blue-light: #dae9f7;
+  --blue-bright: #317cb9;
+
+  --grey: #e6e6e6;
+  --grey-light: #f1f1f1;
 }

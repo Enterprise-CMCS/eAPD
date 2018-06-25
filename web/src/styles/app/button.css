@@ -1,3 +1,8 @@
 .btn-pill {
   border-radius: 2rem;
 }
+
+.btn-primary {
+  background-color: var(--yellow);
+  color: var(--black);
+}

@@ -2,10 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Icon from '@fortawesome/react-fontawesome';
 
 import { t } from '../i18n';
-import { faHelp, faSignOut } from '../components/Icons';
 import { logout } from '../actions/auth';
 
 class TopNav extends Component {
@@ -16,34 +14,33 @@ class TopNav extends Component {
 
   render() {
     const { authenticated, place } = this.props;
+    const btnClass = 'btn btn-primary px1 py-tiny';
 
     return (
       <header className="clearfix py1 bg-white border-bottom border-silver">
         <div className="sm-col">
-          <Link to="/" className="btn caps">
+          <Link to="/" className="btn bold caps">
             {place
               ? t('title', { place: place.name, year: 2018 })
               : t('titleBasic')}
           </Link>
         </div>
-        <div className="sm-col-right h5">
+        <div className="sm-col-right px2 py-tiny h5">
           {authenticated ? (
             <div>
-              <button type="button" className="btn h5 regular">
-                <span className="mr-tiny">{t('help')}</span>
-                <Icon icon={faHelp} />
+              <button type="button" className={`${btnClass} mr1`}>
+                {t('help')}
               </button>
               <button
                 type="button"
-                className="btn h5 regular"
+                className={btnClass}
                 onClick={this.handleLogout}
               >
-                <span className="mr-tiny">{t('logout')}</span>
-                <Icon icon={faSignOut} />
+                {t('logout')}
               </button>
             </div>
           ) : (
-            <Link to="/login" className="btn h5 regular">
+            <Link to="/login" className={btnClass}>
               {t('login')}
             </Link>
           )}
