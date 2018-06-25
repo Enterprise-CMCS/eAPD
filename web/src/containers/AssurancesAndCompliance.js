@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -31,70 +31,78 @@ const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
 
   return (
     <Section id="assurances-compliance" resource="assurancesAndCompliance">
-      {Object.entries(regLinks).map(([name, regulations]) => (
-        <Subsection key={name} resource={`assurancesAndCompliance.${name}`}>
-          <table>
-            <tbody>
-              {apdSections[name].map(
-                ({ title, checked, explanation }, index) => {
-                  const link = regulations[title];
-                  return (
-                    <tr key={title}>
-                      <td>
-                        {link ? (
-                          <a href={link} target="_blank">
-                            {title}
-                          </a>
-                        ) : (
-                          title
-                        )}
-                      </td>
-                      <td>
-                        {' '}
-                        <label className="mr1">
-                          <input
-                            type="radio"
-                            value={yes}
-                            checked={checked}
-                            onChange={handleCheckChange(name, index, true)}
-                          />
-                          {yes}
-                        </label>
-                      </td>
-                      <td>
-                        {' '}
-                        <label className="mr1">
-                          <input
-                            type="radio"
-                            value={no}
-                            checked={!checked}
-                            onChange={handleCheckChange(name, index, false)}
-                          />
-                          {no}
-                        </label>
-                      </td>
-                      <td>
-                        {checked || (
-                          <Input
-                            name={`explanation-${name}-${title}`.replace(
-                              /\s/g,
-                              '_'
-                            )}
-                            label={`explanation-${name}-${title}`}
-                            hideLabel
-                            value={explanation}
-                            onChange={handleExplanationChange(name, index)}
-                          />
-                        )}
-                      </td>
-                    </tr>
-                  );
-                }
-              )}
-            </tbody>
-          </table>
-        </Subsection>
-      ))}
+      <Subsection resource="assurancesAndCompliance.citations">
+        <table>
+          <tbody>
+            {Object.entries(regLinks).map(([name, regulations]) => (
+              <Fragment key={name}>
+                <tr>
+                  <td colSpan="4">
+                    <h3>{t(`assurancesAndCompliance.headers.${name}`)}</h3>
+                  </td>
+                </tr>
+
+                {apdSections[name].map(
+                  ({ title, checked, explanation }, index) => {
+                    const link = regulations[title];
+                    return (
+                      <tr style={{ height: '4.5em' }}>
+                        <td style={{ width: '40%' }}>
+                          {link ? (
+                            <a href={link} target="_blank">
+                              {title}
+                            </a>
+                          ) : (
+                            title
+                          )}
+                        </td>
+                        <td style={{ width: 1 }}>
+                          {' '}
+                          <label className="mr1">
+                            <input
+                              type="radio"
+                              value={yes}
+                              checked={checked}
+                              onChange={handleCheckChange(name, index, true)}
+                            />
+                            {yes}
+                          </label>
+                        </td>
+                        <td style={{ width: 1 }}>
+                          {' '}
+                          <label className="mr1">
+                            <input
+                              type="radio"
+                              value={no}
+                              checked={!checked}
+                              onChange={handleCheckChange(name, index, false)}
+                            />
+                            {no}
+                          </label>
+                        </td>
+                        <td>
+                          {checked || (
+                            <Input
+                              name={`explanation-${name}-${title}`.replace(
+                                /\s/g,
+                                '_'
+                              )}
+                              label={`explanation for why you do not comply with ${title}`}
+                              hideLabel
+                              value={explanation}
+                              onChange={handleExplanationChange(name, index)}
+                            />
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  }
+                )}
+              </Fragment>
+            ))}
+          </tbody>
+        </table>
+      </Subsection>
     </Section>
   );
 };
