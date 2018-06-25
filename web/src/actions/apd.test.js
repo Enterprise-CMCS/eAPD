@@ -3,6 +3,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import * as actions from './apd';
+import * as notificationActions from './notification';
 import axios from '../util/api';
 
 const mockStore = configureStore([thunk]);
@@ -177,6 +178,7 @@ describe('apd actions', () => {
 
   describe('save APD to API', () => {
     const state = {
+      notification: { open: false, queue: [] },
       apd: {
         data: {
           id: 'id-to-update',
@@ -270,6 +272,10 @@ describe('apd actions', () => {
 
       const expectedActions = [
         { type: actions.SAVE_APD_REQUEST },
+        {
+          type: notificationActions.ADD_NOTIFICATION,
+          message: 'Save failed (not-sure-why)'
+        },
         { type: actions.SAVE_APD_FAILURE }
       ];
 
@@ -284,6 +290,10 @@ describe('apd actions', () => {
 
       const expectedActions = [
         { type: actions.SAVE_APD_REQUEST },
+        {
+          type: notificationActions.ADD_NOTIFICATION,
+          message: 'Save successful!'
+        },
         { type: actions.SAVE_APD_SUCCESS }
       ];
 
