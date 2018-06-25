@@ -29,11 +29,13 @@ const reducer = (state = initialState, action) => {
         open: false
       };
     case PROCESS_QUEUE:
-      return {
-        open: true,
-        messageInfo: state.queue[0],
-        queue: state.queue.slice(1)
-      };
+      return state.queue.length === 0
+        ? state
+        : {
+            open: true,
+            messageInfo: state.queue[0],
+            queue: state.queue.slice(1)
+          };
     default:
       return state;
   }
