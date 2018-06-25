@@ -18,7 +18,22 @@ describe('APD reducer', () => {
         2017: getPreviousActivityExpense(),
         2018: getPreviousActivityExpense()
       },
-      incentivePayments
+      incentivePayments,
+      state: {
+        id: '--',
+        medicaidDirector: {
+          name: '',
+          email: '',
+          phone: ''
+        },
+        medicaidOffice: {
+          address1: '',
+          address2: '',
+          city: '',
+          state: '',
+          zip: ''
+        }
+      }
     },
     fetching: false,
     loaded: false,
@@ -91,7 +106,23 @@ describe('APD reducer', () => {
             2017: getPreviousActivityExpense(),
             2018: getPreviousActivityExpense()
           },
-          incentivePayments
+          incentivePayments,
+          state: {
+            // TODO: Update this when we actually get data from the API
+            id: '--',
+            medicaidDirector: {
+              name: '',
+              email: '',
+              phone: ''
+            },
+            medicaidOffice: {
+              address1: '',
+              address2: '',
+              city: '',
+              state: '',
+              zip: ''
+            }
+          }
         }
       },
       data: {
@@ -107,6 +138,22 @@ describe('APD reducer', () => {
           2018: getPreviousActivityExpense()
         },
         incentivePayments,
+        state: {
+          // TODO: Update this when we actually get data from the API
+          id: '--',
+          medicaidDirector: {
+            name: '',
+            email: '',
+            phone: ''
+          },
+          medicaidOffice: {
+            address1: '',
+            address2: '',
+            city: '',
+            state: '',
+            zip: ''
+          }
+        },
         // TODO: This value is computed based on the current datetime.
         // Probably ought to mock the time (sinon can do this) so
         // the test is deterministic.
