@@ -347,7 +347,7 @@ const reducer = (state = initialState, action) => {
         byId[a.id] = {
           id: a.id,
           name: a.name,
-          fundingSource: 'HIT', // TODO
+          fundingSource: a.fundingSource,
           years: action.apd.years,
           descShort: a.summary || '',
           descLong: a.description || '',
