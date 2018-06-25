@@ -19,8 +19,7 @@ describe('APD reducer', () => {
         2018: getPreviousActivityExpense()
       },
       incentivePayments,
-      state: {
-        id: '--',
+      stateProfile: {
         medicaidDirector: {
           name: '',
           email: '',
@@ -82,6 +81,7 @@ describe('APD reducer', () => {
             narrativeHIT: 'HIT, but as a play',
             narrativeHIE: 'HIE, but as a novel',
             narrativeMMIS: 'MMIS, but as a script',
+            stateProfile: 'this is the state profile as a string',
             years: [2013, 2014]
           }
         ]
@@ -107,22 +107,7 @@ describe('APD reducer', () => {
             2018: getPreviousActivityExpense()
           },
           incentivePayments,
-          state: {
-            // TODO: Update this when we actually get data from the API
-            id: '--',
-            medicaidDirector: {
-              name: '',
-              email: '',
-              phone: ''
-            },
-            medicaidOffice: {
-              address1: '',
-              address2: '',
-              city: '',
-              state: '',
-              zip: ''
-            }
-          }
+          stateProfile: 'this is the state profile as a string'
         }
       },
       data: {
@@ -138,9 +123,7 @@ describe('APD reducer', () => {
           2018: getPreviousActivityExpense()
         },
         incentivePayments,
-        state: {
-          // TODO: Update this when we actually get data from the API
-          id: '--',
+        stateProfile: {
           medicaidDirector: {
             name: '',
             email: '',
