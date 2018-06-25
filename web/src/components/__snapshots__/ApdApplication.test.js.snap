@@ -40,6 +40,7 @@ ShallowWrapper {
           <div
             className="bg-darken-1 flex-auto"
           >
+            <Connect(ApdStateProfile) />
             <Connect(ApdSummary) />
             <Connect(PreviousActivities) />
             <Connect(Activities) />
@@ -86,6 +87,7 @@ ShallowWrapper {
             <div
               className="bg-darken-1 flex-auto"
             >
+              <Connect(ApdStateProfile) />
               <Connect(ApdSummary) />
               <Connect(PreviousActivities) />
               <Connect(Activities) />
@@ -120,6 +122,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
+                <Connect(ApdStateProfile) />,
                 <Connect(ApdSummary) />,
                 <Connect(PreviousActivities) />,
                 <Connect(Activities) />,
@@ -133,6 +136,15 @@ ShallowWrapper {
             },
             "ref": null,
             "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
               Object {
                 "instance": null,
                 "key": undefined,
@@ -243,6 +255,7 @@ ShallowWrapper {
             <div
               className="bg-darken-1 flex-auto"
             >
+              <Connect(ApdStateProfile) />
               <Connect(ApdSummary) />
               <Connect(PreviousActivities) />
               <Connect(Activities) />
@@ -289,6 +302,7 @@ ShallowWrapper {
               <div
                 className="bg-darken-1 flex-auto"
               >
+                <Connect(ApdStateProfile) />
                 <Connect(ApdSummary) />
                 <Connect(PreviousActivities) />
                 <Connect(Activities) />
@@ -323,6 +337,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
+                  <Connect(ApdStateProfile) />,
                   <Connect(ApdSummary) />,
                   <Connect(PreviousActivities) />,
                   <Connect(Activities) />,
@@ -336,6 +351,15 @@ ShallowWrapper {
               },
               "ref": null,
               "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
                 Object {
                   "instance": null,
                   "key": undefined,
