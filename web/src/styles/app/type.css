@@ -11,6 +11,10 @@
   letter-spacing: 0.1em;
 }
 
+.light {
+  font-weight: 300;
+}
+
 .fw-800 {
   font-weight: 800;
 }
