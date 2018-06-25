@@ -22,6 +22,18 @@ export const initIncentiveData = () =>
     arrToObj(defaultAPDYearOptions, { 1: 0, 2: 0, 3: 0, 4: 0 })
   );
 
+export const initialAssurances = Object.entries(assurancesList).reduce(
+  (acc, [name, regulations]) => ({
+    ...acc,
+    [name]: Object.keys(regulations).map(reg => ({
+      title: reg,
+      checked: false,
+      explanation: ''
+    }))
+  }),
+  {}
+);
+
 export const getPreviousActivityExpense = () => ({
   hie: {
     federalActual: 0,
@@ -69,17 +81,7 @@ const initialState = {
         zip: ''
       }
     },
-    assurancesAndCompliance: Object.entries(assurancesList).reduce(
-      (acc, [name, regulations]) => ({
-        ...acc,
-        [name]: Object.keys(regulations).map(reg => ({
-          title: reg,
-          checked: false,
-          explanation: ''
-        }))
-      }),
-      {}
-    )
+    assurancesAndCompliance: { ...initialAssurances }
   },
   byId: {},
   fetching: false,
@@ -124,10 +126,9 @@ const reducer = (state = initialState, action) => {
               yearOptions: defaultAPDYearOptions,
               previousActivitySummary: previousActivitySummary || '',
               activities,
-
               // TODO: Get these from the API
               assurancesAndCompliance: {
-                ...initialState.assurancesAndCompliance
+                ...initialState.data.assurancesAndCompliance
               },
               previousActivityExpenses: defaultAPDYearOptions.reduce(
                 (previous, year) => ({
@@ -136,13 +137,8 @@ const reducer = (state = initialState, action) => {
                 }),
                 {}
               ),
-<<<<<<< HEAD
               incentivePayments: incentivePayments || initIncentiveData(),
-              stateProfile,
-              activities
-=======
-              incentivePayments: incentivePayments || initIncentiveData()
->>>>>>> round 1
+              stateProfile
             }
           };
         }, {}),
