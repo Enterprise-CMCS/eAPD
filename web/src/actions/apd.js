@@ -1,4 +1,6 @@
 import { push } from 'react-router-redux';
+
+import { notify } from './notification';
 import axios from '../util/api';
 
 export const ADD_APD_KEY_PERSON = 'ADD_APD_KEY_PERSON';
@@ -185,6 +187,16 @@ export const saveApd = () => (dispatch, state) => {
 
   return axios
     .put(`/apds/${updatedApd.id}`, apd)
-    .then(res => dispatch(saveSuccess(res.data)))
-    .catch(() => dispatch(saveFailure())); // TODO handle the error
+    .then(res => {
+      dispatch(notify('Save successful!'));
+      dispatch(saveSuccess(res.data));
+    })
+    .catch(error => {
+      // TODO [bren]: map backend error message to content in resource file
+      const { response: res } = error;
+      const reason = (res && (res.data || {}).error) || 'not-sure-why';
+
+      dispatch(notify(`Save failed (${reason})`));
+      dispatch(saveFailure());
+    });
 };
