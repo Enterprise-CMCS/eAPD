@@ -50,19 +50,7 @@ const openAPI = {
       requestBody: {
         description: 'The new values for the apd.  All fields are optional.',
         required: true,
-        content: jsonResponse({
-          type: 'object',
-          properties: {
-            status: {
-              description: 'The new status for the apd.',
-              type: 'string'
-            },
-            period: {
-              description: 'The new period for the apd.',
-              type: 'string'
-            }
-          }
-        })
+        content: jsonResponse({ $ref: '#/components/schemas/apd' })
       },
       responses: {
         200: {
