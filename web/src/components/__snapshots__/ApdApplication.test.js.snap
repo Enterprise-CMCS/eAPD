@@ -36,7 +36,7 @@ ShallowWrapper {
           <Connect(Activities) />
           <Connect(ScheduleSummary) />
           <ProposedBudget />
-          <AssurancesAndCompliance />
+          <Connect(AssurancesAndCompliance) />
           <Connect(ExecutiveSummary) />
           <Connect(CertifyAndSubmit) />
         </div>,
@@ -72,7 +72,7 @@ ShallowWrapper {
             <Connect(Activities) />,
             <Connect(ScheduleSummary) />,
             <ProposedBudget />,
-            <AssurancesAndCompliance />,
+            <Connect(AssurancesAndCompliance) />,
             <Connect(ExecutiveSummary) />,
             <Connect(CertifyAndSubmit) />,
           ],
@@ -146,7 +146,7 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "function",
+            "nodeType": "class",
             "props": Object {},
             "ref": null,
             "rendered": null,
@@ -201,7 +201,7 @@ ShallowWrapper {
             <Connect(Activities) />
             <Connect(ScheduleSummary) />
             <ProposedBudget />
-            <AssurancesAndCompliance />
+            <Connect(AssurancesAndCompliance) />
             <Connect(ExecutiveSummary) />
             <Connect(CertifyAndSubmit) />
           </div>,
@@ -237,7 +237,7 @@ ShallowWrapper {
               <Connect(Activities) />,
               <Connect(ScheduleSummary) />,
               <ProposedBudget />,
-              <AssurancesAndCompliance />,
+              <Connect(AssurancesAndCompliance) />,
               <Connect(ExecutiveSummary) />,
               <Connect(CertifyAndSubmit) />,
             ],
@@ -311,7 +311,7 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "function",
+              "nodeType": "class",
               "props": Object {},
               "ref": null,
               "rendered": null,
