@@ -185,6 +185,13 @@ describe('apd actions', () => {
           hieNarrative: 'HIE narrative text',
           hitNarrative: 'HIT narrative text',
           mmisNarrative: 'MMIS narrative text',
+          previousActivityExpenses: {
+            1066: {
+              hie: 'battle of hastings',
+              hit: 'moop moop'
+            }
+          },
+          previousActivitySummary: 'other activities happened in the past',
           overview: 'APD overview text',
           years: ['1992', '1993'],
           stateProfile: {
@@ -202,6 +209,14 @@ describe('apd actions', () => {
             descLong: 'activity description',
             altApproach: 'alternatives approach',
             costAllocationDesc: 'cost allocation methodology',
+            previousActivitySummary: 'other activities happened in the past',
+            previousActivityExpenses: [
+              {
+                year: 1066,
+                hie: 'battle of hastings',
+                hit: 'moop moop'
+              }
+            ],
             otherFundingDesc: 'other funding sources',
             costAllocation: {
               '1993': { ffp: { federal: 90, state: 10 }, other: 0 },
