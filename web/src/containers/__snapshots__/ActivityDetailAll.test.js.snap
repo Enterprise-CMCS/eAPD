@@ -1,0 +1,321 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Activities details container component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ActivityDetailAll
+    aId="activity-id"
+    expanded={false}
+    num={3}
+    title="Activity title"
+    toggleSection={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "bgColor": "grey",
+      "children": Array [
+        <Connect(ActivityDetailDescription)
+          aId="activity-id"
+        />,
+        <Connect(ActivityDetailGoals)
+          aId="activity-id"
+        />,
+        <Connect(ActivityDetailSchedule)
+          aId="activity-id"
+        />,
+        <Connect(ActivityDetailStatePersonnel)
+          aId="activity-id"
+        />,
+        <Connect(ActivityDetailContractorExpenses)
+          aId="activity-id"
+        />,
+        <Connect(ActivityDetailExpenses)
+          aId="activity-id"
+        />,
+        <Connect(ActivityDetailCostAllocate)
+          aId="activity-id"
+        />,
+        <Connect(ActivityDetailStandardsAndConditions)
+          aId="activity-id"
+        />,
+        <Connect(DeleteActivity)
+          aId="activity-id"
+        />,
+      ],
+      "id": "activity-activity-id",
+      "onChange": [Function],
+      "open": false,
+      "sticky": true,
+      "title": "Activity title",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "aId": "activity-id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "aId": "activity-id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "aId": "activity-id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "aId": "activity-id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "aId": "activity-id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "aId": "activity-id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "aId": "activity-id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "aId": "activity-id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "aId": "activity-id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "bgColor": "grey",
+        "children": Array [
+          <Connect(ActivityDetailDescription)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailGoals)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailSchedule)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailStatePersonnel)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailContractorExpenses)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailExpenses)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailCostAllocate)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailStandardsAndConditions)
+            aId="activity-id"
+          />,
+          <Connect(DeleteActivity)
+            aId="activity-id"
+          />,
+        ],
+        "id": "activity-activity-id",
+        "onChange": [Function],
+        "open": false,
+        "sticky": true,
+        "title": "Activity title",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "aId": "activity-id",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "aId": "activity-id",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "aId": "activity-id",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "aId": "activity-id",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "aId": "activity-id",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "aId": "activity-id",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "aId": "activity-id",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "aId": "activity-id",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "aId": "activity-id",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
