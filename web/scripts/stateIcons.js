@@ -15,7 +15,7 @@ const gPath = geoPath().projection(null);
 const file = path.join(__dirname, '../src/data/state-icons.json');
 const data = JSON.parse(fs.readFileSync(file));
 
-const makeSvg = (path, size = 100, color = '#fff') =>
+const makeSvg = (path, size = 100, color = '#0C4D82') =>
   `<?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 64 64">

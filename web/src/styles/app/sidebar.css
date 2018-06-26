@@ -1,0 +1,12 @@
+.sb-item-active {
+  font-weight: var(--bold-font-weight);
+}
+
+.sb-item-active:before {
+  border-left: 3px solid var(--yellow);
+  content: ' ';
+  height: 20px;
+  margin-top: 2px;
+  position: absolute;
+  left: -8px;
+}

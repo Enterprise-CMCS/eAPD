@@ -41,7 +41,7 @@ class Landing extends Component {
           <hr />
           <button
             type="button"
-            className="btn btn-outline btn-pill blue"
+            className="btn btn-outline btn-pill bg-white blue"
             onClick={this.createApd}
           >
             Create new APD
