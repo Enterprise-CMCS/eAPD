@@ -16,6 +16,9 @@ export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
 export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
 export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
 export const SELECT_APD = 'SELECT_APD';
+export const SUBMIT_APD_REQUEST = 'SUBMIT_APD_REQUEST';
+export const SUBMIT_APD_SUCCESS = 'SUBMIT_APD_SUCCESS';
+export const SUBMIT_APD_FAILURE = 'SUBMIT_APD_FAILURE';
 export const UPDATE_APD = 'UPDATE_APD';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
 export const UPDATE_BUDGET_QUARTERLY_SHARE = 'UPDATE_BUDGET_QUARTERLY_SHARE';
@@ -47,7 +50,7 @@ export const createSuccess = () => ({ type: CREATE_APD_SUCCESS });
 export const createFailure = () => ({ type: CREATE_APD_FAILURE });
 export const createApd = () => dispatch => {
   dispatch(createRequest());
-  axios
+  return axios
     .post('/apds')
     .then(req => {
       console.log(req.data);
@@ -90,9 +93,16 @@ export const fetchApdDataIfNeeded = () => (dispatch, getState) => {
   return null;
 };
 
-export const selectApd = id => (dispatch, getState) => {
+export const selectApd = (id, pushRoute = push) => (dispatch, getState) => {
   dispatch({ type: SELECT_APD, apd: getState().apd.byId[id] });
-  dispatch(push('/apd'));
+  dispatch(pushRoute('/apd'));
+};
+
+export const notifyNetError = (action, error) => {
+  const { response: res } = error;
+  const reason = (res && (res.data || {}).error) || 'not-sure-why';
+
+  return notify(`${action} failed (${reason})`);
 };
 
 export const saveApd = () => (dispatch, state) => {
@@ -200,11 +210,30 @@ export const saveApd = () => (dispatch, state) => {
       dispatch(saveSuccess(res.data));
     })
     .catch(error => {
-      // TODO [bren]: map backend error message to content in resource file
-      const { response: res } = error;
-      const reason = (res && (res.data || {}).error) || 'not-sure-why';
-
-      dispatch(notify(`Save failed (${reason})`));
+      dispatch(notifyNetError('Save', error));
       dispatch(saveFailure());
+      throw error;
     });
 };
+
+export const submitAPD = (save = saveApd) => (dispatch, getState) =>
+  dispatch(save())
+    .then(() => {
+      dispatch({ type: SUBMIT_APD_REQUEST });
+
+      const { apd: { data: apd } } = getState();
+
+      return axios
+        .post(`/apds/${apd.id}/versions`)
+        .then(() => {
+          dispatch(notify('Submission successful!'));
+          dispatch({ type: SUBMIT_APD_SUCCESS });
+        })
+        .catch(error => {
+          dispatch(notifyNetError('Submit', error));
+          dispatch({ type: SUBMIT_APD_FAILURE });
+        });
+    })
+    .catch(error => {
+      dispatch(notifyNetError('Submit', error));
+    });

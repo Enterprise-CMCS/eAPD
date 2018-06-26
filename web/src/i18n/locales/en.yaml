@@ -345,4 +345,7 @@
     helpText: "Note, this application will be locked upon submission until after a CMS analyst reviews it."
     certify:
       title: "Certify and Submit"
+      helpText: Upon submission, you understand this APD submission will be locked from further edits until reviewed by a CMS analyst. If you agree, select the submit button below.
+      buttonText: Submit
+
 

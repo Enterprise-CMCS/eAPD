@@ -38,7 +38,7 @@ ShallowWrapper {
           <ProposedBudget />
           <AssurancesAndCompliance />
           <Connect(ExecutiveSummary) />
-          <CertifyAndSubmit />
+          <Connect(CertifyAndSubmit) />
         </div>,
       ],
       "className": "site-body",
@@ -74,7 +74,7 @@ ShallowWrapper {
             <ProposedBudget />,
             <AssurancesAndCompliance />,
             <Connect(ExecutiveSummary) />,
-            <CertifyAndSubmit />,
+            <Connect(CertifyAndSubmit) />,
           ],
           "className": "site-content p2 sm-p3 md-px4 md-py3",
         },
@@ -164,7 +164,7 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "function",
+            "nodeType": "class",
             "props": Object {},
             "ref": null,
             "rendered": null,
@@ -203,7 +203,7 @@ ShallowWrapper {
             <ProposedBudget />
             <AssurancesAndCompliance />
             <Connect(ExecutiveSummary) />
-            <CertifyAndSubmit />
+            <Connect(CertifyAndSubmit) />
           </div>,
         ],
         "className": "site-body",
@@ -239,7 +239,7 @@ ShallowWrapper {
               <ProposedBudget />,
               <AssurancesAndCompliance />,
               <Connect(ExecutiveSummary) />,
-              <CertifyAndSubmit />,
+              <Connect(CertifyAndSubmit) />,
             ],
             "className": "site-content p2 sm-p3 md-px4 md-py3",
           },
@@ -329,7 +329,7 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "function",
+              "nodeType": "class",
               "props": Object {},
               "ref": null,
               "rendered": null,
