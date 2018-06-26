@@ -317,7 +317,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <SectionTitle>
-          Key Needs and Objectives
+          Needs and Objectives
         </SectionTitle>,
         <div>
           List the goals and objectives you're hoping to accomplish as part of this activity.
@@ -337,10 +337,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "Key Needs and Objectives",
+          "children": "Needs and Objectives",
         },
         "ref": null,
-        "rendered": "Key Needs and Objectives",
+        "rendered": "Needs and Objectives",
         "type": [Function],
       },
       Object {
@@ -377,7 +377,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <SectionTitle>
-            Key Needs and Objectives
+            Needs and Objectives
           </SectionTitle>,
           <div>
             List the goals and objectives you're hoping to accomplish as part of this activity.
@@ -397,10 +397,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "Key Needs and Objectives",
+            "children": "Needs and Objectives",
           },
           "ref": null,
-          "rendered": "Key Needs and Objectives",
+          "rendered": "Needs and Objectives",
           "type": [Function],
         },
         Object {
@@ -445,6 +445,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Subsection
+    isKey={false}
     open={false}
     resource={null}
   >
