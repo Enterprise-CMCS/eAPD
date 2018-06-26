@@ -25,7 +25,7 @@ ShallowWrapper {
         <div
           className="red"
         >
-          [missing {{year}} value] [missing {{place}} value] HITECH APD
+          [missing {{year}} value] HITECH APD
         </div>,
       ],
       "className": "mb2",
@@ -41,11 +41,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "children": "[missing {{year}} value] HITECH APD",
           "className": "red",
         },
         "ref": null,
-        "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+        "rendered": "[missing {{year}} value] HITECH APD",
         "type": "div",
       },
     ],
@@ -62,7 +62,7 @@ ShallowWrapper {
           <div
             className="red"
           >
-            [missing {{year}} value] [missing {{place}} value] HITECH APD
+            [missing {{year}} value] HITECH APD
           </div>,
         ],
         "className": "mb2",
@@ -78,11 +78,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+            "children": "[missing {{year}} value] HITECH APD",
             "className": "red",
           },
           "ref": null,
-          "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "rendered": "[missing {{year}} value] HITECH APD",
           "type": "div",
         },
       ],
@@ -150,12 +150,12 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <div>
-          [missing {{year}} value] [missing {{place}} value] HITECH APD
+          [missing {{year}} value] HITECH APD
         </div>,
         <div
           className="red"
         >
-          [missing {{year}} value] [missing {{place}} value] HITECH APD
+          [missing {{year}} value] HITECH APD
         </div>,
       ],
       "className": "mb2",
@@ -170,10 +170,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "children": "[missing {{year}} value] HITECH APD",
         },
         "ref": null,
-        "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+        "rendered": "[missing {{year}} value] HITECH APD",
         "type": "div",
       },
       Object {
@@ -181,11 +181,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "children": "[missing {{year}} value] HITECH APD",
           "className": "red",
         },
         "ref": null,
-        "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+        "rendered": "[missing {{year}} value] HITECH APD",
         "type": "div",
       },
     ],
@@ -199,12 +199,12 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <div>
-            [missing {{year}} value] [missing {{place}} value] HITECH APD
+            [missing {{year}} value] HITECH APD
           </div>,
           <div
             className="red"
           >
-            [missing {{year}} value] [missing {{place}} value] HITECH APD
+            [missing {{year}} value] HITECH APD
           </div>,
         ],
         "className": "mb2",
@@ -219,10 +219,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+            "children": "[missing {{year}} value] HITECH APD",
           },
           "ref": null,
-          "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "rendered": "[missing {{year}} value] HITECH APD",
           "type": "div",
         },
         Object {
@@ -230,11 +230,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+            "children": "[missing {{year}} value] HITECH APD",
             "className": "red",
           },
           "ref": null,
-          "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "rendered": "[missing {{year}} value] HITECH APD",
           "type": "div",
         },
       ],
@@ -273,7 +273,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <div>
-          [missing {{year}} value] [missing {{place}} value] HITECH APD
+          [missing {{year}} value] HITECH APD
         </div>,
         false,
       ],
@@ -289,10 +289,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "children": "[missing {{year}} value] HITECH APD",
         },
         "ref": null,
-        "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+        "rendered": "[missing {{year}} value] HITECH APD",
         "type": "div",
       },
       false,
@@ -307,7 +307,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <div>
-            [missing {{year}} value] [missing {{place}} value] HITECH APD
+            [missing {{year}} value] HITECH APD
           </div>,
           false,
         ],
@@ -323,10 +323,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+            "children": "[missing {{year}} value] HITECH APD",
           },
           "ref": null,
-          "rendered": "[missing {{year}} value] [missing {{place}} value] HITECH APD",
+          "rendered": "[missing {{year}} value] HITECH APD",
           "type": "div",
         },
         false,
