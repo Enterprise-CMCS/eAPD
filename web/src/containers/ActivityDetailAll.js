@@ -61,7 +61,7 @@ ActivityDetailAll.propTypes = {
   toggleSection: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId } }, { aId, num }) => {
+export const mapStateToProps = ({ activities: { byId } }, { aId, num }) => {
   const activity = byId[aId];
   const { expanded } = activity.meta;
   const title = `${t('activities.header')} › ${activityTitle(activity, num)}`;
@@ -69,8 +69,10 @@ const mapStateToProps = ({ activities: { byId } }, { aId, num }) => {
   return { expanded, title };
 };
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   toggleSection: toggleActivitySection
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivityDetailAll);
+
+export const raw = ActivityDetailAll;
