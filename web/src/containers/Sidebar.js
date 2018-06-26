@@ -22,56 +22,62 @@ const linkGroup2 = [
 
 const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
   <div className="site-sidebar bg-teal relative">
-    <div className="p2 xs-hide sm-hide">
-      <div className="mb2">
+    <div className="xs-hide sm-hide">
+      <div className="p2 lg-p3 bg-white flex items-center">
         <img
           src={`/static/img/${place.id}.svg`}
           alt={place.name}
-          className="align-middle"
+          className="align-middle mr1"
           width="50"
           height="50"
         />
+        <div className="blue h3 light caps line-height-2">
+          {place.name} <br />
+          {t('title', { year: '2018' })}
+        </div>
       </div>
-      <ul className="list-reset">
-        {linkGroup1.map(d => (
-          <SidebarLink key={d.id} anchor={d.id} isActive={d.id === hash}>
-            {d.name}
-          </SidebarLink>
-        ))}
-        <ul className="mb0 ml2 list-reset h5">
-          {activities.map((a, i) => (
-            <SidebarLink
-              key={a.id}
-              anchor={a.anchor}
-              isActive={a.anchor === hash}
-              onClick={() => expandSection(a.id)}
-            >
-              {t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
-                number: i + 1,
-                name: a.name
-              })}
+      <div className="p2 lg-p3">
+        <ul className="list-reset">
+          {linkGroup1.map(d => (
+            <SidebarLink key={d.id} anchor={d.id} isActive={d.id === hash}>
+              {d.name}
+            </SidebarLink>
+          ))}
+          <ul className="mb0 ml2 list-reset">
+            {activities.map((a, i) => (
+              <SidebarLink
+                key={a.id}
+                anchor={a.anchor}
+                isActive={a.anchor === hash}
+                onClick={() => expandSection(a.id)}
+              >
+                {t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
+                  number: i + 1,
+                  name: a.name
+                })}
+              </SidebarLink>
+            ))}
+          </ul>
+          {linkGroup2.map(d => (
+            <SidebarLink key={d.id} anchor={d.id} isActive={d.id === hash}>
+              {d.name}
             </SidebarLink>
           ))}
         </ul>
-        {linkGroup2.map(d => (
-          <SidebarLink key={d.id} anchor={d.id} isActive={d.id === hash}>
-            {d.name}
-          </SidebarLink>
-        ))}
-      </ul>
-      <div className="mt2 pt2 border-top border-white">
-        <button type="button" className="btn bg-white rounded">
-          {t('sidebar.savePdfButtonText')}
-        </button>
-      </div>
-      <div className="absolute bottom-0 left-0 right-0 p2">
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => saveApdToAPI()}
-        >
-          Save APD
-        </button>
+        <div className="mt2">
+          <button type="button" className="btn bg-white blue rounded">
+            {t('sidebar.savePdfButtonText')}
+          </button>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 p2 lg-px3">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => saveApdToAPI()}
+          >
+            Save APD
+          </button>
+        </div>
       </div>
     </div>
   </div>

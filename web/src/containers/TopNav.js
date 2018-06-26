@@ -14,33 +14,27 @@ class TopNav extends Component {
 
   render() {
     const { authenticated, place } = this.props;
-    const btnClass = 'btn btn-primary px1 py-tiny';
 
     return (
-      <header className="clearfix py1 bg-white border-bottom border-silver">
-        <div className="sm-col">
-          <Link to="/" className="btn bold caps">
+      <header className="clearfix px2 py1 bg-white">
+        <div className="left">
+          <Link to="/" className="btn px0 bold caps">
             {place
               ? t('title', { place: place.name, year: 2018 })
               : t('titleBasic')}
           </Link>
         </div>
-        <div className="sm-col-right px2 py-tiny h5">
+        <div className="right py-tiny h5">
           {authenticated ? (
-            <div>
-              <button type="button" className={`${btnClass} mr1`}>
-                {t('help')}
-              </button>
-              <button
-                type="button"
-                className={btnClass}
-                onClick={this.handleLogout}
-              >
-                {t('logout')}
-              </button>
-            </div>
+            <button
+              type="button"
+              className="btn btn-primary px1 py-tiny"
+              onClick={this.handleLogout}
+            >
+              {t('logout')}
+            </button>
           ) : (
-            <Link to="/login" className={btnClass}>
+            <Link to="/login" className="btn btn-primary px1 py-tiny">
               {t('login')}
             </Link>
           )}
