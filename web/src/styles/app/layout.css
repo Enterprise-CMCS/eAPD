@@ -39,10 +39,11 @@ footer {
   .site-sidebar {
     flex: 0 0 auto;
     max-height: 100vh;
+    min-width: 16rem;
     overflow-y: auto;
     position: sticky;
     top: 0px;
-    width: 16rem;
+    width: 25%;
   }
 }
 

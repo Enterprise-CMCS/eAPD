@@ -24,7 +24,7 @@ ShallowWrapper {
       "children": <div
         className="test child"
       />,
-      "className": "mt1 mb2 fw-800",
+      "className": "mt1 mb2 h1 sm-h0 teal light",
     },
     "ref": null,
     "rendered": Object {
@@ -49,7 +49,7 @@ ShallowWrapper {
         "children": <div
           className="test child"
         />,
-        "className": "mt1 mb2 fw-800",
+        "className": "mt1 mb2 h1 sm-h0 teal light",
       },
       "ref": null,
       "rendered": Object {

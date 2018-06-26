@@ -1,6 +1,20 @@
 /*
+  app colors
+*/
+
+.bg-grey {
+  background-color: var(--grey);
+}
+
+.bg-grey-light {
+  background-color: var(--grey-light);
+}
+
+/*
   additional colors not represented by
   http://basscss.com/ace/#colors
+
+  TODO [bren]: remove old colorz;
 */
 
 .bg-aqua {
