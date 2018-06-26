@@ -5,6 +5,7 @@ html {
 }
 
 body {
+  background-color: var(--grey-light);
   font-family: var(--base-font-family);
 }
 
