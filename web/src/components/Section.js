@@ -12,7 +12,7 @@ const Section = ({ children, id, resource }) => {
   const helptext = t([resource, 'helpText'], { defaultValue: false });
 
   return (
-    <section id={id} className="p2 sm-px3 border-bottom border-gray">
+    <section id={id} className="py2 border-bottom border-gray">
       {title && <SectionTitle>{title}</SectionTitle>}
       {subheader && <div>{subheader}</div>}
       {helptext && <SectionDesc>{helptext}</SectionDesc>}
