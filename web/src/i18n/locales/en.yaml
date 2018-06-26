@@ -133,7 +133,7 @@
     namePrefix: "Activity"
     namePrefixAndNum: "Core Activity {{number}}"
     description: 
-      title: "Program Administration Information"
+      title: "Activity Overview"
       helpText: "Summarize the needs of the activity for which requested funding will be used (e.g. administrative, outreach, auditing, Public Health Registry Development, etc)"
       reminder: "Note: This section is limited to 280 characters or less"
       summary: 
