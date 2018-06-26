@@ -108,6 +108,14 @@ export const saveApd = () => (dispatch, state) => {
     narrativeHIE: updatedApd.hieNarrative,
     narrativeHIT: updatedApd.hitNarrative,
     narrativeMMIS: updatedApd.mmisNarrative,
+    previousActivityExpenses: Object.entries(
+      updatedApd.previousActivityExpenses
+    ).map(([year, o]) => ({
+      year,
+      hie: o.hie,
+      hit: o.hit
+    })),
+    previousActivitySummary: updatedApd.previousActivitySummary,
     programOverview: updatedApd.overview,
     stateProfile: updatedApd.stateProfile,
     years: updatedApd.years

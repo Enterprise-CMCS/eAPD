@@ -1,8 +1,6 @@
 procurement:
-  # The format for these is
-  # 
   42 CFR Part 495.348: https://www.ecfr.gov/cgi-bin/text-idx?SID=60f02a079c6f091871999372387e5750&mc=true&node=se42.5.495_1348&rgn=div8
-  SMM Section 11267:
+  SMM Section 11267: https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html
   45 CFR Part 95.615: https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8
   45 CFR 92.36: 
 recordsAccess:
@@ -11,7 +9,7 @@ recordsAccess:
   42 CFR Part 495.346: https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1346&rgn=div8
   42 CFR Part 433.112(b)(5) - (9): https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8
   45 CFR Part 95.615: https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8
-  SMM Section 11267:
+  SMM Section 11267: https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html
 softwareRights:
   42 CFR 495.360: https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1360&rgn=div8
   45 CFR 95.617: https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1617&rgn=div8
