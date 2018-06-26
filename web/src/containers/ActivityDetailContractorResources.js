@@ -186,12 +186,12 @@ ActivityDetailContractorExpenses.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId }, apd }, { aId }) => ({
+export const mapStateToProps = ({ activities: { byId }, apd }, { aId }) => ({
   activity: byId[aId],
   years: apd.data.years
 });
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   addContractor: addActivityContractor,
   removeContractor: removeActivityContractor,
   updateActivity: updateActivityAction
@@ -200,3 +200,5 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
   ActivityDetailContractorExpenses
 );
+
+export const raw = ActivityDetailContractorExpenses;
