@@ -22,7 +22,7 @@ const ApdApplication = () => (
     <Sidebar place={PLACE} />
     <div className="site-content flex flex-column">
       <TopNav place={PLACE} />
-      <div className="bg-darken-1 flex-auto">
+      <div className="bg-grey-light flex-auto">
         <StateProfile />
         <ApdSummary />
         <PreviousActivities />
