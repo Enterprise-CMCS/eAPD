@@ -2,6 +2,7 @@ import React from 'react';
 
 // Wired-up components
 import StateProfile from '../containers/ApdStateProfile';
+import AssurancesAndCompliance from '../containers/AssurancesAndCompliance';
 import ProposedBudget from './ProposedBudget';
 import Activities from '../containers/Activities';
 import ApdSummary from '../containers/ApdSummary';
@@ -12,7 +13,6 @@ import Sidebar from '../containers/Sidebar';
 import TopBtns from '../containers/TopBtns';
 
 // Static / WIP components
-import AssurancesAndCompliance from './AssurancesAndCompliance';
 import CertifyAndSubmit from './CertifyAndSubmit';
 
 const PLACE = { id: 'tx', name: 'Texas' };
