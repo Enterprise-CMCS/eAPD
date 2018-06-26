@@ -22,7 +22,7 @@ class Collapsible extends Component {
     const contentId = kebabCase(title);
 
     const btnClass = deline`
-      btn block col-12 py2 h3 line-height-1 left-align
+      btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
       ${isOpen ? 'border-bottom border-bottom-gray' : ''}
       bg-${bgColor} ${sticky ? 'sticky-top' : ''}
     `;
