@@ -161,3 +161,6 @@ export const arrToObj = (array = [], initialValue = 0) =>
 export const addObjVals = obj => Object.values(obj).reduce((a, b) => a + b, 0);
 
 export const titleCase = str => str.replace(/\b\S/g, t => t.toUpperCase());
+
+export const isProgamAdmin = activity =>
+  activity.name === 'Program Administration' || activity.id === 1;

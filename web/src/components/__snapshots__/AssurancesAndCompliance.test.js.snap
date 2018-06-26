@@ -19,6 +19,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Subsection
+          isKey={false}
           open={false}
           resource="assurancesAndCompliance.procurement"
         >
@@ -27,6 +28,7 @@ ShallowWrapper {
           </div>
         </Subsection>,
         <Subsection
+          isKey={false}
           open={false}
           resource="assurancesAndCompliance.recordsAccess"
         >
@@ -35,6 +37,7 @@ ShallowWrapper {
           </div>
         </Subsection>,
         <Subsection
+          isKey={false}
           open={false}
           resource="assurancesAndCompliance.softwareRights"
         >
@@ -43,6 +46,7 @@ ShallowWrapper {
           </div>
         </Subsection>,
         <Subsection
+          isKey={false}
           open={false}
           resource="assurancesAndCompliance.security"
         >
@@ -64,6 +68,7 @@ ShallowWrapper {
           "children": <div>
             ...
           </div>,
+          "isKey": false,
           "open": false,
           "resource": "assurancesAndCompliance.procurement",
         },
@@ -89,6 +94,7 @@ ShallowWrapper {
           "children": <div>
             ...
           </div>,
+          "isKey": false,
           "open": false,
           "resource": "assurancesAndCompliance.recordsAccess",
         },
@@ -114,6 +120,7 @@ ShallowWrapper {
           "children": <div>
             ...
           </div>,
+          "isKey": false,
           "open": false,
           "resource": "assurancesAndCompliance.softwareRights",
         },
@@ -139,6 +146,7 @@ ShallowWrapper {
           "children": <div>
             ...
           </div>,
+          "isKey": false,
           "open": false,
           "resource": "assurancesAndCompliance.security",
         },
@@ -167,6 +175,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Subsection
+            isKey={false}
             open={false}
             resource="assurancesAndCompliance.procurement"
           >
@@ -175,6 +184,7 @@ ShallowWrapper {
             </div>
           </Subsection>,
           <Subsection
+            isKey={false}
             open={false}
             resource="assurancesAndCompliance.recordsAccess"
           >
@@ -183,6 +193,7 @@ ShallowWrapper {
             </div>
           </Subsection>,
           <Subsection
+            isKey={false}
             open={false}
             resource="assurancesAndCompliance.softwareRights"
           >
@@ -191,6 +202,7 @@ ShallowWrapper {
             </div>
           </Subsection>,
           <Subsection
+            isKey={false}
             open={false}
             resource="assurancesAndCompliance.security"
           >
@@ -212,6 +224,7 @@ ShallowWrapper {
             "children": <div>
               ...
             </div>,
+            "isKey": false,
             "open": false,
             "resource": "assurancesAndCompliance.procurement",
           },
@@ -237,6 +250,7 @@ ShallowWrapper {
             "children": <div>
               ...
             </div>,
+            "isKey": false,
             "open": false,
             "resource": "assurancesAndCompliance.recordsAccess",
           },
@@ -262,6 +276,7 @@ ShallowWrapper {
             "children": <div>
               ...
             </div>,
+            "isKey": false,
             "open": false,
             "resource": "assurancesAndCompliance.softwareRights",
           },
@@ -287,6 +302,7 @@ ShallowWrapper {
             "children": <div>
               ...
             </div>,
+            "isKey": false,
             "open": false,
             "resource": "assurancesAndCompliance.security",
           },

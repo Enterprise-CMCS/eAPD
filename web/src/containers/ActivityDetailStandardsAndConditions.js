@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { STANDARDS } from '../util';
 
 import { t } from '../i18n';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { Subsection } from '../components/Section';
 import { Textarea } from '../components/Inputs';
 import HelpText from '../components/HelpText';
+import { STANDARDS, isProgamAdmin } from '../util';
 
 class ActivityDetailStandardsAndConditions extends Component {
   handleChange = key => e => {
@@ -22,7 +22,10 @@ class ActivityDetailStandardsAndConditions extends Component {
     const { activity } = this.props;
 
     return (
-      <Subsection resource="activities.standardsAndConditions">
+      <Subsection
+        resource="activities.standardsAndConditions"
+        isKey={isProgamAdmin(activity)}
+      >
         {STANDARDS.map(std => (
           <div key={std.id}>
             <h3>
