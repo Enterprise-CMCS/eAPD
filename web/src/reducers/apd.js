@@ -92,6 +92,7 @@ const reducer = (state = initialState, action) => {
             narrativeHIT: hitNarrative,
             narrativeHIE: hieNarrative,
             narrativeMMIS: mmisNarrative,
+            previousActivityExpenses,
             previousActivitySummary,
             incentivePayments,
             stateProfile,
@@ -110,13 +111,24 @@ const reducer = (state = initialState, action) => {
               years: (years || defaultAPDYears).map(y => `${y}`),
               yearOptions: defaultAPDYearOptions,
               previousActivitySummary: previousActivitySummary || '',
-              previousActivityExpenses: defaultAPDYearOptions.reduce(
-                (previous, year) => ({
-                  ...previous,
-                  [year - 2]: getPreviousActivityExpense()
-                }),
-                {}
-              ),
+              previousActivityExpenses: previousActivityExpenses
+                ? previousActivityExpenses.reduce(
+                    (previous, year) => ({
+                      ...previous,
+                      [year.year]: {
+                        hie: year.hie,
+                        hit: year.hit
+                      }
+                    }),
+                    {}
+                  )
+                : defaultAPDYearOptions.reduce(
+                    (previous, year) => ({
+                      ...previous,
+                      [year - 2]: getPreviousActivityExpense()
+                    }),
+                    {}
+                  ),
               incentivePayments: incentivePayments || initIncentiveData(),
               stateProfile,
               activities

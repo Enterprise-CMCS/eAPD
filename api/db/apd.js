@@ -10,6 +10,10 @@ module.exports = () => ({
       return this.hasMany('apdKeyPersonnel');
     },
 
+    previousActivityExpenses() {
+      return this.hasMany('apdPreviousActivityExpense');
+    },
+
     state() {
       return this.belongsTo('state');
     },
@@ -21,6 +25,7 @@ module.exports = () => ({
     format(attributes) {
       const out = { ...attributes };
       [
+        ['previousActivitySummary', 'previous_activity_summary'],
         ['programOverview', 'program_overview'],
         ['narrativeHIE', 'narrative_hie'],
         ['narrativeHIT', 'narrative_hit'],
@@ -72,6 +77,10 @@ module.exports = () => ({
         narrativeHIT: this.get('narrative_hit'),
         narrativeMMIS: this.get('narrative_mmis'),
         period: this.get('period'),
+        previousActivityExpenses: this.related(
+          'previousActivityExpenses'
+        ).toJSON(),
+        previousActivitySummary: this.get('previous_activity_summary'),
         programOverview: this.get('program_overview'),
         state: this.get('state_id'),
         stateProfile: {
@@ -97,6 +106,7 @@ module.exports = () => ({
       updateableFields: [
         'status',
         'period',
+        'previousActivitySummary',
         'programOverview',
         'narrativeHIE',
         'narrativeHIT',
@@ -105,7 +115,11 @@ module.exports = () => ({
         'years'
       ],
       foreignKey: 'apd_id',
-      owns: { activities: 'apdActivity', keyPersonnel: 'apdKeyPersonnel' },
+      owns: {
+        activities: 'apdActivity',
+        keyPersonnel: 'apdKeyPersonnel',
+        previousActivityExpenses: 'apdPreviousActivityExpense'
+      },
       withRelated: [
         { activities: query => query.orderBy('id') },
         'activities.contractorResources',
@@ -118,7 +132,8 @@ module.exports = () => ({
         'activities.statePersonnel',
         'activities.statePersonnel.years',
         'keyPersonnel',
-        'keyPersonnel.years'
+        'keyPersonnel.years',
+        'previousActivityExpenses'
       ]
     }
   }
