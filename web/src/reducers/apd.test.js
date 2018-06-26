@@ -1,4 +1,8 @@
-import apd, { initIncentiveData, getPreviousActivityExpense } from './apd';
+import apd, {
+  initIncentiveData,
+  initialAssurances,
+  getPreviousActivityExpense
+} from './apd';
 
 describe('APD reducer', () => {
   const incentivePayments = initIncentiveData();
@@ -12,6 +16,7 @@ describe('APD reducer', () => {
       hitNarrative: '',
       hieNarrative: '',
       mmisNarrative: '',
+      assurancesAndCompliance: initialAssurances,
       previousActivitySummary: '',
       previousActivityExpenses: {
         2016: getPreviousActivityExpense(),
@@ -100,6 +105,7 @@ describe('APD reducer', () => {
           hitNarrative: 'HIT, but as a play',
           hieNarrative: 'HIE, but as a novel',
           mmisNarrative: 'MMIS, but as a script',
+          assurancesAndCompliance: initialAssurances,
           previousActivitySummary: '',
           previousActivityExpenses: {
             2016: getPreviousActivityExpense(),
@@ -116,6 +122,7 @@ describe('APD reducer', () => {
         hitNarrative: '',
         hieNarrative: '',
         mmisNarrative: '',
+        assurancesAndCompliance: initialAssurances,
         previousActivitySummary: '',
         previousActivityExpenses: {
           2016: getPreviousActivityExpense(),
