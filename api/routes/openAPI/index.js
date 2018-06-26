@@ -244,11 +244,11 @@ module.exports = {
                 type: 'object',
                 properties: {
                   cost: {
-                    type: 'string',
+                    type: 'number',
                     description: `This personnel's cost for the given federal fiscal year`
                   },
                   fte: {
-                    type: 'string',
+                    type: 'number',
                     description:
                       'Percent of time this personnel is dedicating to the activity'
                   },
@@ -273,9 +273,83 @@ module.exports = {
           activities: {
             $ref: '#/components/schemas/activity'
           },
-          narrativeHIE: { type: 'string', description: '' },
-          narrativeHIT: { type: 'string', description: '' },
-          narrativeMMIS: { type: 'string', description: '' },
+          narrativeHIE: {
+            type: 'string',
+            description:
+              'Brief description of HIE-funded activities contained in this APD'
+          },
+          narrativeHIT: {
+            type: 'string',
+            description:
+              'Brief description of HIT-funded activities contained in this APD'
+          },
+          narrativeMMIS: {
+            type: 'string',
+            description:
+              'Brief description of MMIS-funded activities contained in this APD'
+          },
+          previousActivityExpenses: arrayOf({
+            type: 'object',
+            properties: {
+              year: {
+                type: 'string',
+                description: 'Federal fiscal year this information applies to'
+              },
+              hie: {
+                type: 'object',
+                description: 'HIE-funded expenses',
+                properties: {
+                  federalActual: {
+                    type: 'number',
+                    description: 'Total federal share actually spent'
+                  },
+                  federalApproved: {
+                    type: 'number',
+                    description:
+                      'Total federal share approved in the previous APD'
+                  },
+                  stateActual: {
+                    type: 'number',
+                    description: 'Total state share actually spent'
+                  },
+                  stateApproved: {
+                    type: 'number',
+                    description:
+                      'Total state share approved in the previous APD'
+                  }
+                }
+              },
+              hit: {
+                type: 'object',
+                description: 'HIT-funded expenses',
+                properties: {
+                  federalActual: {
+                    type: 'number',
+                    description: 'Total federal share actually spent'
+                  },
+                  federalApproved: {
+                    type: 'number',
+                    description:
+                      'Total federal share approved in the previous APD'
+                  },
+                  stateActual: {
+                    type: 'number',
+                    description: 'Total state share actually spent'
+                  },
+                  stateApproved: {
+                    type: 'number',
+                    description:
+                      'Total state share approved in the previous APD'
+                  }
+                }
+              }
+            }
+          }),
+          previousActivitySummary: {
+            type: 'string',
+            description:
+              'High-level outline of activities approved in previous APD'
+          },
           programOverview: {
             type: 'string',
             description: 'An overview of the overall program'
