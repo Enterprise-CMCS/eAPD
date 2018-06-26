@@ -2,12 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { t } from '../i18n';
+import { updateApd as updateApdAction } from '../actions/apd';
 import { Input } from '../components/Inputs';
 import { Section, Subsection } from '../components/Section';
-import { updateApd as updateApdAction } from '../actions/apd';
-
 import regLinks from '../data/assurancesAndCompliance.yaml';
+import { t } from '../i18n';
 
 const yes = t('assurancesAndCompliance.formLabels._yes');
 const no = t('assurancesAndCompliance.formLabels._no');
@@ -26,8 +25,6 @@ const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
       }
     });
   };
-
-  console.log(apdSections);
 
   return (
     <Section id="assurances-compliance" resource="assurancesAndCompliance">
