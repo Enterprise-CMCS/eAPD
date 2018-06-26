@@ -54,16 +54,71 @@ describe('apd actions', () => {
     expect(actions.saveFailure()).toEqual({ type: actions.SAVE_APD_FAILURE });
   });
 
+  it('selectAPD should create SELECT_APD action and redirect to /apd', () => {
+    const store = mockStore({ apd: { byId: { apdID: 'hello there' } } });
+    const push = route => ({ type: 'FAKE_PUSH', pushRoute: route });
+
+    const expectedActions = [
+      { type: actions.SELECT_APD, apd: 'hello there' },
+      { type: 'FAKE_PUSH', pushRoute: '/apd' }
+    ];
+
+    store.dispatch(actions.selectApd('apdID', push));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('createRequest should create CREATE_APD_REQUEST action', () => {
+    expect(actions.createRequest()).toEqual({
+      type: actions.CREATE_APD_REQUEST
+    });
+  });
+
+  it('createSuccess should create CREATE_APD_SUCCESS action', () => {
+    expect(actions.createSuccess()).toEqual({
+      type: actions.CREATE_APD_SUCCESS
+    });
+  });
+
+  it('createFailure should create CREATE_APD_FAILURE action', () => {
+    expect(actions.createFailure()).toEqual({
+      type: actions.CREATE_APD_FAILURE
+    });
+  });
+
+  describe('create APD', () => {
+    // TODO: But for real.
+    it('uh...  does not do anything on success... we should change this', () => {
+      fetchMock.onPost('/apds').reply(200);
+      const store = mockStore();
+
+      const expectedActions = [{ type: actions.CREATE_APD_REQUEST }];
+
+      store.dispatch(actions.createApd()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+
+    it('does not do very much if it fails, either', () => {
+      fetchMock.onPost('/apds').reply(403);
+      const store = mockStore();
+
+      const expectedActions = [
+        { type: actions.CREATE_APD_REQUEST },
+        { type: actions.CREATE_APD_FAILURE }
+      ];
+
+      store.dispatch(actions.createApd()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
+
   it('updateBudget should create UPDATE_BUDGET action', () => {
     const state = { this: 'is', my: 'state ' };
     const store = mockStore(state);
 
-    const expectedActions = [
-      {
-        type: actions.UPDATE_BUDGET,
-        state
-      }
-    ];
+    const expectedActions = [{ type: actions.UPDATE_BUDGET, state }];
 
     store.dispatch(actions.updateBudget());
 
@@ -294,7 +349,7 @@ describe('apd actions', () => {
         { type: actions.SAVE_APD_FAILURE }
       ];
 
-      store.dispatch(actions.saveApd()).then(() => {
+      store.dispatch(actions.saveApd()).catch(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
@@ -313,6 +368,78 @@ describe('apd actions', () => {
       ];
 
       store.dispatch(actions.saveApd()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
+
+  describe('submit an APD', () => {
+    beforeEach(() => {
+      fetchMock.reset();
+    });
+
+    it('sets a notification if the preceding save fails', () => {
+      const store = mockStore({
+        apd: { data: { id: 'id-to-update' } },
+        notification: { open: false, queue: [] }
+      });
+
+      const save = () => () => Promise.reject(new Error());
+
+      const expectedActions = [
+        {
+          type: notificationActions.ADD_NOTIFICATION,
+          message: 'Submit failed (not-sure-why)'
+        }
+      ];
+
+      store.dispatch(actions.submitAPD(save)).catch(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+
+    it('sets a notification if the submission fails', () => {
+      const store = mockStore({
+        apd: { data: { id: 'id-to-update' } },
+        notification: { open: false, queue: [] }
+      });
+      const save = () => () => Promise.resolve();
+
+      fetchMock.onPost('/apds/id-to-update/versions').reply(403);
+
+      const expectedActions = [
+        { type: actions.SUBMIT_APD_REQUEST },
+        {
+          type: notificationActions.ADD_NOTIFICATION,
+          message: 'Submit failed (not-sure-why)'
+        },
+        { type: actions.SUBMIT_APD_FAILURE }
+      ];
+
+      store.dispatch(actions.submitAPD(save)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+
+    it('sets a notification if the submission succeeds', () => {
+      const store = mockStore({
+        apd: { data: { id: 'id-to-update' } },
+        notification: { open: false, queue: [] }
+      });
+      const save = () => () => Promise.resolve();
+
+      fetchMock.onPost('/apds/id-to-update/versions').reply(204);
+
+      const expectedActions = [
+        { type: actions.SUBMIT_APD_REQUEST },
+        {
+          type: notificationActions.ADD_NOTIFICATION,
+          message: 'Submission successful!'
+        },
+        { type: actions.SUBMIT_APD_SUCCESS }
+      ];
+
+      store.dispatch(actions.submitAPD(save)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
