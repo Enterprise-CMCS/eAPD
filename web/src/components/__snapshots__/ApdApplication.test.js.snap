@@ -27,29 +27,18 @@ ShallowWrapper {
           }
         />,
         <div
-          className="site-content flex flex-column"
+          className="site-content p2 sm-p3 md-px4 md-py3"
         >
-          <Connect(TopNav)
-            place={
-              Object {
-                "id": "tx",
-                "name": "Texas",
-              }
-            }
-          />
-          <div
-            className="bg-grey-light flex-auto"
-          >
-            <Connect(ApdStateProfile) />
-            <Connect(ApdSummary) />
-            <Connect(PreviousActivities) />
-            <Connect(Activities) />
-            <Connect(ScheduleSummary) />
-            <ProposedBudget />
-            <AssurancesAndCompliance />
-            <Connect(ExecutiveSummary) />
-            <CertifyAndSubmit />
-          </div>
+          <Connect(TopBtns) />
+          <Connect(ApdStateProfile) />
+          <Connect(ApdSummary) />
+          <Connect(PreviousActivities) />
+          <Connect(Activities) />
+          <Connect(ScheduleSummary) />
+          <ProposedBudget />
+          <AssurancesAndCompliance />
+          <Connect(ExecutiveSummary) />
+          <CertifyAndSubmit />
         </div>,
       ],
       "className": "site-body",
@@ -76,29 +65,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <Connect(TopNav)
-              place={
-                Object {
-                  "id": "tx",
-                  "name": "Texas",
-                }
-              }
-            />,
-            <div
-              className="bg-grey-light flex-auto"
-            >
-              <Connect(ApdStateProfile) />
-              <Connect(ApdSummary) />
-              <Connect(PreviousActivities) />
-              <Connect(Activities) />
-              <Connect(ScheduleSummary) />
-              <ProposedBudget />
-              <AssurancesAndCompliance />
-              <Connect(ExecutiveSummary) />
-              <CertifyAndSubmit />
-            </div>,
+            <Connect(TopBtns) />,
+            <Connect(ApdStateProfile) />,
+            <Connect(ApdSummary) />,
+            <Connect(PreviousActivities) />,
+            <Connect(Activities) />,
+            <Connect(ScheduleSummary) />,
+            <ProposedBudget />,
+            <AssurancesAndCompliance />,
+            <Connect(ExecutiveSummary) />,
+            <CertifyAndSubmit />,
           ],
-          "className": "site-content flex flex-column",
+          "className": "site-content p2 sm-p3 md-px4 md-py3",
         },
         "ref": null,
         "rendered": Array [
@@ -106,12 +84,7 @@ ShallowWrapper {
             "instance": null,
             "key": undefined,
             "nodeType": "class",
-            "props": Object {
-              "place": Object {
-                "id": "tx",
-                "name": "Texas",
-              },
-            },
+            "props": Object {},
             "ref": null,
             "rendered": null,
             "type": [Function],
@@ -119,106 +92,83 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <Connect(ApdStateProfile) />,
-                <Connect(ApdSummary) />,
-                <Connect(PreviousActivities) />,
-                <Connect(Activities) />,
-                <Connect(ScheduleSummary) />,
-                <ProposedBudget />,
-                <AssurancesAndCompliance />,
-                <Connect(ExecutiveSummary) />,
-                <CertifyAndSubmit />,
-              ],
-              "className": "bg-grey-light flex-auto",
-            },
+            "nodeType": "class",
+            "props": Object {},
             "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
-            "type": "div",
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
           },
         ],
         "type": "div",
@@ -242,29 +192,18 @@ ShallowWrapper {
             }
           />,
           <div
-            className="site-content flex flex-column"
+            className="site-content p2 sm-p3 md-px4 md-py3"
           >
-            <Connect(TopNav)
-              place={
-                Object {
-                  "id": "tx",
-                  "name": "Texas",
-                }
-              }
-            />
-            <div
-              className="bg-grey-light flex-auto"
-            >
-              <Connect(ApdStateProfile) />
-              <Connect(ApdSummary) />
-              <Connect(PreviousActivities) />
-              <Connect(Activities) />
-              <Connect(ScheduleSummary) />
-              <ProposedBudget />
-              <AssurancesAndCompliance />
-              <Connect(ExecutiveSummary) />
-              <CertifyAndSubmit />
-            </div>
+            <Connect(TopBtns) />
+            <Connect(ApdStateProfile) />
+            <Connect(ApdSummary) />
+            <Connect(PreviousActivities) />
+            <Connect(Activities) />
+            <Connect(ScheduleSummary) />
+            <ProposedBudget />
+            <AssurancesAndCompliance />
+            <Connect(ExecutiveSummary) />
+            <CertifyAndSubmit />
           </div>,
         ],
         "className": "site-body",
@@ -291,29 +230,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <Connect(TopNav)
-                place={
-                  Object {
-                    "id": "tx",
-                    "name": "Texas",
-                  }
-                }
-              />,
-              <div
-                className="bg-grey-light flex-auto"
-              >
-                <Connect(ApdStateProfile) />
-                <Connect(ApdSummary) />
-                <Connect(PreviousActivities) />
-                <Connect(Activities) />
-                <Connect(ScheduleSummary) />
-                <ProposedBudget />
-                <AssurancesAndCompliance />
-                <Connect(ExecutiveSummary) />
-                <CertifyAndSubmit />
-              </div>,
+              <Connect(TopBtns) />,
+              <Connect(ApdStateProfile) />,
+              <Connect(ApdSummary) />,
+              <Connect(PreviousActivities) />,
+              <Connect(Activities) />,
+              <Connect(ScheduleSummary) />,
+              <ProposedBudget />,
+              <AssurancesAndCompliance />,
+              <Connect(ExecutiveSummary) />,
+              <CertifyAndSubmit />,
             ],
-            "className": "site-content flex flex-column",
+            "className": "site-content p2 sm-p3 md-px4 md-py3",
           },
           "ref": null,
           "rendered": Array [
@@ -321,12 +249,7 @@ ShallowWrapper {
               "instance": null,
               "key": undefined,
               "nodeType": "class",
-              "props": Object {
-                "place": Object {
-                  "id": "tx",
-                  "name": "Texas",
-                },
-              },
+              "props": Object {},
               "ref": null,
               "rendered": null,
               "type": [Function],
@@ -334,106 +257,83 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <Connect(ApdStateProfile) />,
-                  <Connect(ApdSummary) />,
-                  <Connect(PreviousActivities) />,
-                  <Connect(Activities) />,
-                  <Connect(ScheduleSummary) />,
-                  <ProposedBudget />,
-                  <AssurancesAndCompliance />,
-                  <Connect(ExecutiveSummary) />,
-                  <CertifyAndSubmit />,
-                ],
-                "className": "bg-grey-light flex-auto",
-              },
+              "nodeType": "class",
+              "props": Object {},
               "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-              ],
-              "type": "div",
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
             },
           ],
           "type": "div",
