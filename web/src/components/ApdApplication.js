@@ -5,6 +5,7 @@ import StateProfile from '../containers/ApdStateProfile';
 import ProposedBudget from './ProposedBudget';
 import Activities from '../containers/Activities';
 import ApdSummary from '../containers/ApdSummary';
+import CertifyAndSubmit from '../containers/CertifyAndSubmit';
 import ExecutiveSummary from '../containers/ExecutiveSummary';
 import PreviousActivities from '../containers/PreviousActivities';
 import ScheduleSummary from '../containers/ScheduleSummary';
@@ -13,7 +14,6 @@ import TopBtns from '../containers/TopBtns';
 
 // Static / WIP components
 import AssurancesAndCompliance from './AssurancesAndCompliance';
-import CertifyAndSubmit from './CertifyAndSubmit';
 
 const PLACE = { id: 'tx', name: 'Texas' };
 
