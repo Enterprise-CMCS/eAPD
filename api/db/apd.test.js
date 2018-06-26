@@ -16,6 +16,7 @@ tap.test('apd data model', async apdModelTests => {
             updateableFields: [
               'status',
               'period',
+              'previousActivitySummary',
               'programOverview',
               'narrativeHIE',
               'narrativeHIT',
@@ -40,7 +41,8 @@ tap.test('apd data model', async apdModelTests => {
               'activities.statePersonnel',
               'activities.statePersonnel.years',
               'keyPersonnel',
-              'keyPersonnel.years'
+              'keyPersonnel.years',
+              'previousActivityExpenses'
             ]
           }
         }
@@ -58,6 +60,12 @@ tap.test('apd data model', async apdModelTests => {
       apd.apd.keyPersonnel,
       'function',
       'creates a key personnel relationship for the apd model'
+    );
+
+    setupTests.type(
+      apd.apd.previousActivityExpenses,
+      'function',
+      'creates a previous activity expenses relationship for the apd model'
     );
 
     setupTests.type(
@@ -121,6 +129,23 @@ tap.test('apd data model', async apdModelTests => {
   );
 
   apdModelTests.test(
+    'apd model sets up previous activity expenses relationship',
+    async activitiesTests => {
+      const self = {
+        hasMany: sinon.stub().returns('florp')
+      };
+
+      const output = apd.apd.previousActivityExpenses.bind(self)();
+
+      activitiesTests.ok(
+        self.hasMany.calledWith('apdPreviousActivityExpense'),
+        'sets up the relationship mapping to previous activity expenses'
+      );
+      activitiesTests.equal(output, 'florp', 'returns the expected value');
+    }
+  );
+
+  apdModelTests.test(
     'apd model sets up state relationship',
     async stateTests => {
       const self = {
@@ -161,6 +186,7 @@ tap.test('apd data model', async apdModelTests => {
         narrativeHIE: undefined,
         narrativeHIT: null,
         narrativeMMIS: 'also changed',
+        previousActivitySummary: 'blip blop',
         stateProfile: {
           medicaidDirector: {
             name: 'their name'
@@ -182,6 +208,7 @@ tap.test('apd data model', async apdModelTests => {
         {
           fine: 'no change',
           good: 'also no change',
+          previous_activity_summary: 'blip blop',
           program_overview: 'changed over',
           medicaid_director_name: 'their name',
           medicaid_director_email: null,
@@ -216,6 +243,12 @@ tap.test('apd data model', async apdModelTests => {
     self.get.withArgs('state_id').returns('apd-state');
     self.get.withArgs('status').returns('apd-status');
     self.get.withArgs('period').returns('apd-period');
+    self.get
+      .withArgs('previous_activity_summary')
+      .returns('apd-previous-activity-summary');
+    self.related.withArgs('previousActivityExpenses').returns({
+      toJSON: sinon.stub().returns('apd-previous-activity-expenses')
+    });
     self.get.withArgs('program_overview').returns('apd-overview');
     self.get.withArgs('narrative_hie').returns('apd-hie');
     self.get.withArgs('narrative_hit').returns('apd-hit');
@@ -246,6 +279,8 @@ tap.test('apd data model', async apdModelTests => {
         narrativeHIT: 'apd-hit',
         narrativeMMIS: 'apd-mmis',
         period: 'apd-period',
+        previousActivitySummary: 'apd-previous-activity-summary',
+        previousActivityExpenses: 'apd-previous-activity-expenses',
         programOverview: 'apd-overview',
         state: 'apd-state',
         stateProfile: {
