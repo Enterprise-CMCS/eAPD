@@ -10,6 +10,7 @@ import {
 } from '../actions/activities';
 import { Subsection } from '../components/Section';
 import { Input } from '../components/Inputs';
+import { isProgamAdmin } from '../util';
 
 class ActivityDetailSchedule extends Component {
   handleChange = (idx, key) => e => {
@@ -28,7 +29,10 @@ class ActivityDetailSchedule extends Component {
     } = this.props;
 
     return (
-      <Subsection resource="activities.schedule">
+      <Subsection
+        resource="activities.schedule"
+        isKey={isProgamAdmin(activity)}
+      >
         {activity.milestones.length === 0 ? (
           <div className="mb2 p1 h6 alert">
             {t('activities.schedule.noMilestonesNotice')}

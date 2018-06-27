@@ -10,6 +10,7 @@ import {
 } from '../actions/activities';
 import { Subsection } from '../components/Section';
 import { Input, DollarInput, Textarea } from '../components/Inputs';
+import { isProgamAdmin } from '../util';
 
 class ActivityDetailContractorExpenses extends Component {
   handleChange = (index, key) => e => {
@@ -31,15 +32,14 @@ class ActivityDetailContractorExpenses extends Component {
   };
 
   render() {
-    const {
-      activity: { id: activityID, contractorResources },
-      years,
-      addContractor,
-      removeContractor
-    } = this.props;
+    const { activity, years, addContractor, removeContractor } = this.props;
+    const { id: activityID, contractorResources } = activity;
 
     return (
-      <Subsection resource="activities.contractorResources">
+      <Subsection
+        resource="activities.contractorResources"
+        isKey={isProgamAdmin(activity)}
+      >
         <div>
           <div className="overflow-auto">
             <table

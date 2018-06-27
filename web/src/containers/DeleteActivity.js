@@ -60,7 +60,7 @@ class DeleteActivity extends Component {
 }
 
 DeleteActivity.propTypes = {
-  aId: PropTypes.string.isRequired,
+  aId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   removeActivity: PropTypes.func.isRequired
 };
 

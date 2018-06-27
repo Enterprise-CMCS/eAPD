@@ -19,18 +19,21 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Subsection
+          isKey={false}
           open={false}
           resource="proposedBudget.summaryBudget"
         >
           <Connect(BudgetSummary) />
         </Subsection>,
         <Subsection
+          isKey={false}
           open={false}
           resource="proposedBudget.quarterlyBudget"
         >
           <Connect(QuarterlyBudgetSummary) />
         </Subsection>,
         <Subsection
+          isKey={false}
           open={false}
           resource="proposedBudget.paymentsByFFYQuarter"
         >
@@ -48,6 +51,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "children": <Connect(BudgetSummary) />,
+          "isKey": false,
           "open": false,
           "resource": "proposedBudget.summaryBudget",
         },
@@ -69,6 +73,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "children": <Connect(QuarterlyBudgetSummary) />,
+          "isKey": false,
           "open": false,
           "resource": "proposedBudget.quarterlyBudget",
         },
@@ -90,6 +95,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "children": <Connect(IncentivePayments) />,
+          "isKey": false,
           "open": false,
           "resource": "proposedBudget.paymentsByFFYQuarter",
         },
@@ -116,18 +122,21 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Subsection
+            isKey={false}
             open={false}
             resource="proposedBudget.summaryBudget"
           >
             <Connect(BudgetSummary) />
           </Subsection>,
           <Subsection
+            isKey={false}
             open={false}
             resource="proposedBudget.quarterlyBudget"
           >
             <Connect(QuarterlyBudgetSummary) />
           </Subsection>,
           <Subsection
+            isKey={false}
             open={false}
             resource="proposedBudget.paymentsByFFYQuarter"
           >
@@ -145,6 +154,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "children": <Connect(BudgetSummary) />,
+            "isKey": false,
             "open": false,
             "resource": "proposedBudget.summaryBudget",
           },
@@ -166,6 +176,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "children": <Connect(QuarterlyBudgetSummary) />,
+            "isKey": false,
             "open": false,
             "resource": "proposedBudget.quarterlyBudget",
           },
@@ -187,6 +198,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "children": <Connect(IncentivePayments) />,
+            "isKey": false,
             "open": false,
             "resource": "proposedBudget.paymentsByFFYQuarter",
           },
