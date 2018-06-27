@@ -82,6 +82,8 @@ describe('APD reducer', () => {
         data: [
           {
             id: 'apd-id',
+            federalCitations:
+              'The Third Sentence of the Ninth Paragraph of the Three Hundred and Twenty-First Section of the Ninety-Fifth Part of the Forty-Fifth Title of the Federal Code of Regulations',
             programOverview: 'moop moop',
             narrativeHIT: 'HIT, but as a play',
             narrativeHIE: 'HIE, but as a novel',
@@ -105,7 +107,8 @@ describe('APD reducer', () => {
           hitNarrative: 'HIT, but as a play',
           hieNarrative: 'HIE, but as a novel',
           mmisNarrative: 'MMIS, but as a script',
-          assurancesAndCompliance: initialAssurances,
+          assurancesAndCompliance:
+            'The Third Sentence of the Ninth Paragraph of the Three Hundred and Twenty-First Section of the Ninety-Fifth Part of the Forty-Fifth Title of the Federal Code of Regulations',
           previousActivitySummary: '',
           previousActivityExpenses: {
             2016: getPreviousActivityExpense(),
