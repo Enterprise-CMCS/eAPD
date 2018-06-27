@@ -69,10 +69,10 @@ tap.test('apds PUT endpoint', async endpointTest => {
         'fetches the associated state'
       );
       test.ok(
-        state.set.calledWith(
-          'medicaid_office',
-          '{"info":"goes here","toBe":"saved"}'
-        ),
+        state.set.calledWith('medicaid_office', {
+          info: 'goes here',
+          toBe: 'saved'
+        }),
         'updates the state with profile info from the request body'
       );
     }
