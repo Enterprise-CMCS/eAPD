@@ -79,7 +79,7 @@ describe('activities reducer', () => {
     fundingSource: 'HIT',
     goals: [{ ...newGoal }],
     meta: { expanded: false },
-    milestones: [{ ...newMilestone }, { ...newMilestone }, { ...newMilestone }],
+    milestones: [{ ...newMilestone }],
     name: '',
     otherFundingDesc: '',
     standardsAndConditions: {
