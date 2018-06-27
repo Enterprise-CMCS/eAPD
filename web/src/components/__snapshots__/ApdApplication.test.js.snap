@@ -27,7 +27,7 @@ ShallowWrapper {
           }
         />,
         <div
-          className="site-content p2 sm-p3 md-px4 md-py3"
+          className="p2 sm-p4 md-px0 mx-auto col-12 md-col-7"
         >
           <Connect(TopBtns) />
           <Connect(ApdStateProfile) />
@@ -76,7 +76,7 @@ ShallowWrapper {
             <Connect(ExecutiveSummary) />,
             <Connect(CertifyAndSubmit) />,
           ],
-          "className": "site-content p2 sm-p3 md-px4 md-py3",
+          "className": "p2 sm-p4 md-px0 mx-auto col-12 md-col-7",
         },
         "ref": null,
         "rendered": Array [
@@ -192,7 +192,7 @@ ShallowWrapper {
             }
           />,
           <div
-            className="site-content p2 sm-p3 md-px4 md-py3"
+            className="p2 sm-p4 md-px0 mx-auto col-12 md-col-7"
           >
             <Connect(TopBtns) />
             <Connect(ApdStateProfile) />
@@ -241,7 +241,7 @@ ShallowWrapper {
               <Connect(ExecutiveSummary) />,
               <Connect(CertifyAndSubmit) />,
             ],
-            "className": "site-content p2 sm-p3 md-px4 md-py3",
+            "className": "p2 sm-p4 md-px0 mx-auto col-12 md-col-7",
           },
           "ref": null,
           "rendered": Array [

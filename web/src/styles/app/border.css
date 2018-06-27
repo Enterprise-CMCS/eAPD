@@ -6,6 +6,10 @@
   border-width: 3px;
 }
 
-.border-bottom-gray {
-  border-bottom-color: var(--gray);
+.border-grey {
+  border-color: var(--grey);
+}
+
+.border-bottom-darken-1 {
+  border-bottom-color: rgba(0, 0, 0, 0.0625);
 }
