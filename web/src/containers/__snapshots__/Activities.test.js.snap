@@ -28,6 +28,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Subsection
+          isKey={false}
           open={true}
           resource="activities.list"
         >
@@ -105,6 +106,7 @@ ShallowWrapper {
               Add activity
             </button>,
           ],
+          "isKey": false,
           "open": true,
           "resource": "activities.list",
         },
@@ -236,6 +238,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Subsection
+            isKey={false}
             open={true}
             resource="activities.list"
           >
@@ -313,6 +316,7 @@ ShallowWrapper {
                 Add activity
               </button>,
             ],
+            "isKey": false,
             "open": true,
             "resource": "activities.list",
           },

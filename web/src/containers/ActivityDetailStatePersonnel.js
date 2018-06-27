@@ -15,6 +15,7 @@ import {
   Textarea
 } from '../components/Inputs';
 import { t } from '../i18n';
+import { isProgamAdmin } from '../util';
 
 class ActivityDetailStatePersonnel extends Component {
   handleChange = (idx, key, year) => e => {
@@ -36,15 +37,14 @@ class ActivityDetailStatePersonnel extends Component {
   };
 
   render() {
-    const {
-      activity: { id: activityID, statePersonnel },
-      years,
-      addPerson,
-      removePerson
-    } = this.props;
+    const { activity, years, addPerson, removePerson } = this.props;
+    const { id: activityID, statePersonnel } = activity;
 
     return (
-      <Subsection resource="activities.statePersonnel">
+      <Subsection
+        resource="activities.statePersonnel"
+        isKey={isProgamAdmin(activity)}
+      >
         <div className="overflow-auto">
           <table
             className="mb2 h5 table table-condensed table-fixed"
