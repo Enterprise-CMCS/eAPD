@@ -28,20 +28,17 @@ class IncentivePayments extends Component {
     });
 
     return (
-      <div className="py1 overflow-auto">
-        <table
-          className="h6 table-fixed table-bordered table-budget"
-          style={{ minWidth: 1200 }}
-        >
+      <div className="overflow-auto">
+        <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
           <thead>
             <tr>
               <th style={{ width: 160 }} />
               {yearsWithColors.map(({ year, color }) => (
-                <th key={year} className={`white center ${color}`} colSpan="5">
+                <th key={year} className={`center ${color}`} colSpan="5">
                   {t('ffy', { year })}
                 </th>
               ))}
-              <th className="bg-black white center">{t('table.total')}</th>
+              <th className="bg-black center">{t('table.total')}</th>
             </tr>
             <tr>
               <th />
@@ -78,7 +75,7 @@ class IncentivePayments extends Component {
                             name={`eh-payments-${year}-q1`}
                             label={`eh-payments-${year}-q1`}
                             wrapperClass="m0"
-                            className="m0 input mono right-align"
+                            className="m0 input input-condensed mono right-align"
                             value={data[id][year][q]}
                             onChange={this.handleChange(id, year, q)}
                             hideLabel
