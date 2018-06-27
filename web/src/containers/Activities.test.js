@@ -4,7 +4,7 @@ import React from 'react';
 
 import { raw as Activities, mapStateToProps } from './Activities';
 
-describe('the Root component', () => {
+describe('the Activities list component', () => {
   const props = {
     activityIds: ['1', '2', '3'],
     addActivity: sinon.stub()

@@ -1,0 +1,420 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the activities cost allocation container component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ActivityDetailCostAllocate
+    activity={
+      Object {
+        "costAllocationDesc": "cost allocation",
+        "id": "activity id",
+        "otherFundingDesc": "other funding",
+      }
+    }
+    updateActivity={[Function]}
+    years={
+      Array [
+        "1066",
+        "1067",
+      ]
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <div
+          className="mb3"
+        >
+          <div
+            className="mb-tiny bold"
+          >
+            Cost allocation methodology description
+          </div>
+          <HelpText
+            reminder="activities.costAllocate.methodology.reminder"
+            text="activities.costAllocate.methodology.helpText"
+          />
+          <RichText
+            content="cost allocation"
+            onSync={[Function]}
+          />
+        </div>,
+        <Connect(ActivityDetailCostAllocateFFP)
+          aId="activity id"
+        />,
+        <div
+          className="mb3"
+        >
+          <div
+            className="mb-tiny bold"
+          >
+            Other funding description
+          </div>
+          <HelpText
+            reminder="activities.costAllocate.otherFunding.reminder"
+            text="activities.costAllocate.otherFunding.helpText"
+          />
+          <RichText
+            content="other funding"
+            onSync={[Function]}
+          />
+        </div>,
+      ],
+      "isKey": false,
+      "open": false,
+      "resource": "activities.costAllocate",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="mb-tiny bold"
+            >
+              Cost allocation methodology description
+            </div>,
+            <HelpText
+              reminder="activities.costAllocate.methodology.reminder"
+              text="activities.costAllocate.methodology.helpText"
+            />,
+            <RichText
+              content="cost allocation"
+              onSync={[Function]}
+            />,
+          ],
+          "className": "mb3",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Cost allocation methodology description",
+              "className": "mb-tiny bold",
+            },
+            "ref": null,
+            "rendered": "Cost allocation methodology description",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "reminder": "activities.costAllocate.methodology.reminder",
+              "text": "activities.costAllocate.methodology.helpText",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "content": "cost allocation",
+              "onSync": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "aId": "activity id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="mb-tiny bold"
+            >
+              Other funding description
+            </div>,
+            <HelpText
+              reminder="activities.costAllocate.otherFunding.reminder"
+              text="activities.costAllocate.otherFunding.helpText"
+            />,
+            <RichText
+              content="other funding"
+              onSync={[Function]}
+            />,
+          ],
+          "className": "mb3",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Other funding description",
+              "className": "mb-tiny bold",
+            },
+            "ref": null,
+            "rendered": "Other funding description",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "reminder": "activities.costAllocate.otherFunding.reminder",
+              "text": "activities.costAllocate.otherFunding.helpText",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "content": "other funding",
+              "onSync": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <div
+            className="mb3"
+          >
+            <div
+              className="mb-tiny bold"
+            >
+              Cost allocation methodology description
+            </div>
+            <HelpText
+              reminder="activities.costAllocate.methodology.reminder"
+              text="activities.costAllocate.methodology.helpText"
+            />
+            <RichText
+              content="cost allocation"
+              onSync={[Function]}
+            />
+          </div>,
+          <Connect(ActivityDetailCostAllocateFFP)
+            aId="activity id"
+          />,
+          <div
+            className="mb3"
+          >
+            <div
+              className="mb-tiny bold"
+            >
+              Other funding description
+            </div>
+            <HelpText
+              reminder="activities.costAllocate.otherFunding.reminder"
+              text="activities.costAllocate.otherFunding.helpText"
+            />
+            <RichText
+              content="other funding"
+              onSync={[Function]}
+            />
+          </div>,
+        ],
+        "isKey": false,
+        "open": false,
+        "resource": "activities.costAllocate",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="mb-tiny bold"
+              >
+                Cost allocation methodology description
+              </div>,
+              <HelpText
+                reminder="activities.costAllocate.methodology.reminder"
+                text="activities.costAllocate.methodology.helpText"
+              />,
+              <RichText
+                content="cost allocation"
+                onSync={[Function]}
+              />,
+            ],
+            "className": "mb3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Cost allocation methodology description",
+                "className": "mb-tiny bold",
+              },
+              "ref": null,
+              "rendered": "Cost allocation methodology description",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "reminder": "activities.costAllocate.methodology.reminder",
+                "text": "activities.costAllocate.methodology.helpText",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "content": "cost allocation",
+                "onSync": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "aId": "activity id",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="mb-tiny bold"
+              >
+                Other funding description
+              </div>,
+              <HelpText
+                reminder="activities.costAllocate.otherFunding.reminder"
+                text="activities.costAllocate.otherFunding.helpText"
+              />,
+              <RichText
+                content="other funding"
+                onSync={[Function]}
+              />,
+            ],
+            "className": "mb3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Other funding description",
+                "className": "mb-tiny bold",
+              },
+              "ref": null,
+              "rendered": "Other funding description",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "reminder": "activities.costAllocate.otherFunding.reminder",
+                "text": "activities.costAllocate.otherFunding.helpText",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "content": "other funding",
+                "onSync": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
