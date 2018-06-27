@@ -213,9 +213,14 @@ tap.test('activity data model', async activityModelTests => {
         async test => {
           self.hasChanged.withArgs('name').returns(true);
           self.attributes.name = 'valid name';
+          self.attributes.apd_id = 'apd id';
           self.fetchAll.resolves([]);
 
-          test.resolves(validate(), 'validate resolves');
+          await validate();
+          test.ok('validate resolves');
+          test.ok(
+            self.where.calledWith({ apd_id: 'apd id', name: 'valid name' })
+          );
         }
       );
 
@@ -235,14 +240,14 @@ tap.test('activity data model', async activityModelTests => {
         }
       });
 
-      validationTests.test('throws if the name is not a number', async test => {
+      validationTests.test('throws if the name is a number', async test => {
         self.hasChanged.withArgs('name').returns(true);
         self.attributes.name = 7;
 
         try {
           await validate();
         } catch (e) {
-          test.ok('rejects on an empty name');
+          test.ok('rejects on an numeric name');
           test.equal(
             e.message,
             'activity-name-invalid',
@@ -273,12 +278,16 @@ tap.test('activity data model', async activityModelTests => {
       validationTests.test('throws if the name already exists', async test => {
         self.hasChanged.withArgs('name').returns(true);
         self.attributes.name = 'valid name';
+        self.attributes.apd_id = 'apd id';
         self.fetchAll.resolves([{ hello: 'world' }]);
 
         try {
           await validate();
         } catch (e) {
           test.ok('rejects if the name already exists');
+          test.ok(
+            self.where.calledWith({ apd_id: 'apd id', name: 'valid name' })
+          );
           test.equal(
             e.message,
             'activity-name-exists',
