@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const SidebarLink = ({ anchor, children, isActive, ...rest }) => (
-  <li className={`mb-tiny relative ${isActive ? 'sb-item-active' : ''}`}>
+  <li className={`mb1 relative ${isActive ? 'sb-item-active' : ''}`}>
     <a
       href={`#${anchor || '!'}`}
       className="inline-block white text-decoration-none truncate"

@@ -28,7 +28,7 @@ ShallowWrapper {
       >
         link text
       </a>,
-      "className": "mb-tiny relative sb-item-active",
+      "className": "mb1 relative sb-item-active",
     },
     "ref": null,
     "rendered": Object {
@@ -58,7 +58,7 @@ ShallowWrapper {
         >
           link text
         </a>,
-        "className": "mb-tiny relative sb-item-active",
+        "className": "mb1 relative sb-item-active",
       },
       "ref": null,
       "rendered": Object {
@@ -115,7 +115,7 @@ ShallowWrapper {
       >
         link text
       </a>,
-      "className": "mb-tiny relative ",
+      "className": "mb1 relative ",
     },
     "ref": null,
     "rendered": Object {
@@ -145,7 +145,7 @@ ShallowWrapper {
         >
           link text
         </a>,
-        "className": "mb-tiny relative ",
+        "className": "mb1 relative ",
       },
       "ref": null,
       "rendered": Object {
@@ -202,7 +202,7 @@ ShallowWrapper {
       >
         link text
       </a>,
-      "className": "mb-tiny relative ",
+      "className": "mb1 relative ",
     },
     "ref": null,
     "rendered": Object {
@@ -232,7 +232,7 @@ ShallowWrapper {
         >
           link text
         </a>,
-        "className": "mb-tiny relative ",
+        "className": "mb1 relative ",
       },
       "ref": null,
       "rendered": Object {
