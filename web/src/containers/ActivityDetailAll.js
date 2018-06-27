@@ -22,6 +22,17 @@ const activityTitle = (a, i) => {
   return title;
 };
 
+const activityComponents = [
+  ActivityDetailDescription,
+  ActivityDetailGoals,
+  ActivityDetailSchedule,
+  ActivityDetailStatePersonnel,
+  ActivityDetailContractorResources,
+  ActivityDetailExpenses,
+  ActivityDetailCostAllocate,
+  ActivityDetailStandardsAndConditions
+];
+
 class ActivityDetailAll extends Component {
   handleChange = id => () => {
     this.props.toggleSection(id);
@@ -39,14 +50,9 @@ class ActivityDetailAll extends Component {
         onChange={this.handleChange(aId)}
         sticky
       >
-        <ActivityDetailDescription aId={aId} />
-        <ActivityDetailGoals aId={aId} />
-        <ActivityDetailSchedule aId={aId} />
-        <ActivityDetailStatePersonnel aId={aId} />
-        <ActivityDetailContractorResources aId={aId} />
-        <ActivityDetailExpenses aId={aId} />
-        <ActivityDetailCostAllocate aId={aId} />
-        <ActivityDetailStandardsAndConditions aId={aId} />
+        {activityComponents.map((ActivityComponent, i) => (
+          <ActivityComponent key={i} aId={aId} />
+        ))}
         {num > 1 && <DeleteActivity aId={aId} />}
       </Collapsible>
     );
@@ -54,7 +60,7 @@ class ActivityDetailAll extends Component {
 }
 
 ActivityDetailAll.propTypes = {
-  aId: PropTypes.string.isRequired,
+  aId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   expanded: PropTypes.bool.isRequired,
   num: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
