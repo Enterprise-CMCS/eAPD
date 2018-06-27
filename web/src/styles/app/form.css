@@ -28,3 +28,8 @@
     outline: none;
   }
 }
+
+.input-condensed,
+.select-condensed {
+  height: 2rem;
+}

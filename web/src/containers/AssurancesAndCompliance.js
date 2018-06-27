@@ -43,7 +43,7 @@ const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
                   ({ title, checked, explanation }, index) => {
                     const link = regulations[title];
                     return (
-                      <tr style={{ height: '4.5em' }}>
+                      <tr key={title} style={{ height: '4.5em' }}>
                         <td style={{ width: '40%' }}>
                           {link ? (
                             <a href={link} target="_blank">
@@ -54,7 +54,6 @@ const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
                           )}
                         </td>
                         <td style={{ width: 1 }}>
-                          {' '}
                           <label className="mr1">
                             <input
                               type="radio"
@@ -66,7 +65,6 @@ const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
                           </label>
                         </td>
                         <td style={{ width: 1 }}>
-                          {' '}
                           <label className="mr1">
                             <input
                               type="radio"
