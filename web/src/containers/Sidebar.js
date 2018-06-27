@@ -23,7 +23,7 @@ const linkGroup2 = [
 const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
   <div className="site-sidebar bg-teal relative">
     <div className="xs-hide sm-hide">
-      <div className="p2 lg-p3 bg-white flex items-center">
+      <div className="px2 py3 lg-px3 lg-py4 bg-white flex items-center">
         <img
           src={`/static/img/${place.id}.svg`}
           alt={place.name}
