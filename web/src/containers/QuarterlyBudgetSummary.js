@@ -44,7 +44,7 @@ class QuarterlyBudgetSummary extends Component {
               <h4 className="mt0">{sourceDisplay}</h4>
               <div className="overflow-auto">
                 <table
-                  className="h6 table-fixed table-condensed table-bordered table-budget"
+                  className="table-cms table-fixed"
                   style={{ minWidth: 1200 }}
                 >
                   <thead>
@@ -53,15 +53,13 @@ class QuarterlyBudgetSummary extends Component {
                       {years.map((year, i) => (
                         <th
                           key={year}
-                          className={`white center ${color(i)}`}
+                          className={`center ${color(i)}`}
                           colSpan="5"
                         >
                           {t('ffy', { year })}
                         </th>
                       ))}
-                      <th className="bg-black white center">
-                        {t('table.total')}
-                      </th>
+                      <th className="center">{t('table.total')}</th>
                     </tr>
                     <tr>
                       <th />
@@ -72,7 +70,7 @@ class QuarterlyBudgetSummary extends Component {
                           <Fragment key={year}>
                             {QUARTERS.map(q => (
                               <th key={q} className="center">
-                                <div className="mb1 h4">
+                                <div className="mb-tiny">
                                   {t('table.quarter', { q })}
                                 </div>
                                 <div className="flex items-center">
