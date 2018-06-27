@@ -11,6 +11,7 @@ import {
 import { Subsection } from '../components/Section';
 import { Textarea } from '../components/Inputs';
 import HelpText from '../components/HelpText';
+import { isProgamAdmin } from '../util';
 
 class ActivityDetailGoals extends Component {
   handleChange = (idx, key) => e => {
@@ -25,7 +26,7 @@ class ActivityDetailGoals extends Component {
     const { activity, addActivityGoal, removeActivityGoal } = this.props;
 
     return (
-      <Subsection resource="activities.goals">
+      <Subsection resource="activities.goals" isKey={isProgamAdmin(activity)}>
         {activity.goals.map((d, i) => (
           <div key={i} className="mb3">
             {activity.goals.length > 1 && (
