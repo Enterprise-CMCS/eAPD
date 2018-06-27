@@ -54,6 +54,11 @@ const synchronizeAll = getSpecifics =>
   );
 
 /**
+ * @callback SyncEventHandler
+ * @param {object} request The request object.
+ */
+
+/**
  * @description Middleware to synchronize a single model instance
  * based on incoming request data
  * @param {function} getModelToSync Function that returns the
@@ -65,13 +70,27 @@ const synchronizeAll = getSpecifics =>
  *      - action: (optional) the name of the action being
  *          performed; sent to the client in the case of
  *          a client error (e.g., validation failure)
+ * @param {object} events Event handlers.  Must be async/return
+ *    a promise.  If an event handler throws, the request will
+ *    terminate with a 500 server error unless the thrown error
+ *    has a statusCode property.
+ * @param {SyncEventHandler} events.afterSync Called after the model has
+ *    been synced.
+ * @param {SyncEventHandler} events.beforeSync Called before the model is
+ *    synced.  A good opportunity to massage the request object.
  */
-const synchronizeSpecific = getModelToSync =>
+const synchronizeSpecific = (getModelToSync, events = {}) =>
   cache(
-    ['sync-one', modelIndex(getModelToSync)],
+    ['sync-one', modelIndex(getModelToSync), modelIndex(events)],
     () => async (req, res, next) => {
+      const { afterSync, beforeSync } = events;
+
       let action;
       try {
+        if (typeof beforeSync === 'function') {
+          await beforeSync(req);
+        }
+
         const { model, modelClass, action: actionToReport } = getModelToSync(
           req
         );
@@ -79,6 +98,10 @@ const synchronizeSpecific = getModelToSync =>
 
         // Sync based on what we got from the callback
         await model.synchronize(req.body);
+
+        if (typeof afterSync === 'function') {
+          await afterSync(req);
+        }
 
         // Now re-fetch what we synced; this makes sure we
         // send the updated data
