@@ -14,7 +14,7 @@ import {
   mapDispatchToProps
 } from './ActivityDetailContractorResources';
 
-describe('the Activities details container component', () => {
+describe('the activities contractors component', () => {
   const sandbox = sinon.createSandbox();
   const props = {
     activity: {
