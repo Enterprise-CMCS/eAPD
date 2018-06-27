@@ -25,30 +25,32 @@ ShallowWrapper {
     "props": Object {
       "bgColor": "grey",
       "children": Array [
-        <Connect(ActivityDetailDescription)
-          aId="activity-id"
-        />,
-        <Connect(ActivityDetailGoals)
-          aId="activity-id"
-        />,
-        <Connect(ActivityDetailSchedule)
-          aId="activity-id"
-        />,
-        <Connect(ActivityDetailStatePersonnel)
-          aId="activity-id"
-        />,
-        <Connect(ActivityDetailContractorExpenses)
-          aId="activity-id"
-        />,
-        <Connect(ActivityDetailExpenses)
-          aId="activity-id"
-        />,
-        <Connect(ActivityDetailCostAllocate)
-          aId="activity-id"
-        />,
-        <Connect(ActivityDetailStandardsAndConditions)
-          aId="activity-id"
-        />,
+        Array [
+          <Connect(ActivityDetailDescription)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailGoals)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailSchedule)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailStatePersonnel)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailContractorExpenses)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailExpenses)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailCostAllocate)
+            aId="activity-id"
+          />,
+          <Connect(ActivityDetailStandardsAndConditions)
+            aId="activity-id"
+          />,
+        ],
         <Connect(DeleteActivity)
           aId="activity-id"
         />,
@@ -63,7 +65,7 @@ ShallowWrapper {
     "rendered": Array [
       Object {
         "instance": null,
-        "key": undefined,
+        "key": "0",
         "nodeType": "class",
         "props": Object {
           "aId": "activity-id",
@@ -74,7 +76,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": undefined,
+        "key": "1",
         "nodeType": "class",
         "props": Object {
           "aId": "activity-id",
@@ -85,7 +87,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": undefined,
+        "key": "2",
         "nodeType": "class",
         "props": Object {
           "aId": "activity-id",
@@ -96,7 +98,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": undefined,
+        "key": "3",
         "nodeType": "class",
         "props": Object {
           "aId": "activity-id",
@@ -107,7 +109,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": undefined,
+        "key": "4",
         "nodeType": "class",
         "props": Object {
           "aId": "activity-id",
@@ -118,7 +120,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": undefined,
+        "key": "5",
         "nodeType": "class",
         "props": Object {
           "aId": "activity-id",
@@ -129,7 +131,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": undefined,
+        "key": "6",
         "nodeType": "class",
         "props": Object {
           "aId": "activity-id",
@@ -140,7 +142,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": undefined,
+        "key": "7",
         "nodeType": "class",
         "props": Object {
           "aId": "activity-id",
@@ -171,30 +173,32 @@ ShallowWrapper {
       "props": Object {
         "bgColor": "grey",
         "children": Array [
-          <Connect(ActivityDetailDescription)
-            aId="activity-id"
-          />,
-          <Connect(ActivityDetailGoals)
-            aId="activity-id"
-          />,
-          <Connect(ActivityDetailSchedule)
-            aId="activity-id"
-          />,
-          <Connect(ActivityDetailStatePersonnel)
-            aId="activity-id"
-          />,
-          <Connect(ActivityDetailContractorExpenses)
-            aId="activity-id"
-          />,
-          <Connect(ActivityDetailExpenses)
-            aId="activity-id"
-          />,
-          <Connect(ActivityDetailCostAllocate)
-            aId="activity-id"
-          />,
-          <Connect(ActivityDetailStandardsAndConditions)
-            aId="activity-id"
-          />,
+          Array [
+            <Connect(ActivityDetailDescription)
+              aId="activity-id"
+            />,
+            <Connect(ActivityDetailGoals)
+              aId="activity-id"
+            />,
+            <Connect(ActivityDetailSchedule)
+              aId="activity-id"
+            />,
+            <Connect(ActivityDetailStatePersonnel)
+              aId="activity-id"
+            />,
+            <Connect(ActivityDetailContractorExpenses)
+              aId="activity-id"
+            />,
+            <Connect(ActivityDetailExpenses)
+              aId="activity-id"
+            />,
+            <Connect(ActivityDetailCostAllocate)
+              aId="activity-id"
+            />,
+            <Connect(ActivityDetailStandardsAndConditions)
+              aId="activity-id"
+            />,
+          ],
           <Connect(DeleteActivity)
             aId="activity-id"
           />,
@@ -209,7 +213,7 @@ ShallowWrapper {
       "rendered": Array [
         Object {
           "instance": null,
-          "key": undefined,
+          "key": "0",
           "nodeType": "class",
           "props": Object {
             "aId": "activity-id",
@@ -220,7 +224,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": undefined,
+          "key": "1",
           "nodeType": "class",
           "props": Object {
             "aId": "activity-id",
@@ -231,7 +235,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": undefined,
+          "key": "2",
           "nodeType": "class",
           "props": Object {
             "aId": "activity-id",
@@ -242,7 +246,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": undefined,
+          "key": "3",
           "nodeType": "class",
           "props": Object {
             "aId": "activity-id",
@@ -253,7 +257,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": undefined,
+          "key": "4",
           "nodeType": "class",
           "props": Object {
             "aId": "activity-id",
@@ -264,7 +268,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": undefined,
+          "key": "5",
           "nodeType": "class",
           "props": Object {
             "aId": "activity-id",
@@ -275,7 +279,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": undefined,
+          "key": "6",
           "nodeType": "class",
           "props": Object {
             "aId": "activity-id",
@@ -286,7 +290,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": undefined,
+          "key": "7",
           "nodeType": "class",
           "props": Object {
             "aId": "activity-id",
