@@ -104,7 +104,10 @@ module.exports = {
           throw new Error('activity-name-invalid');
         }
 
-        const hasName = await this.where({ name }).fetchAll({ transacting });
+        const hasName = await this.where({
+          apd_id: this.attributes.apd_id,
+          name
+        }).fetchAll({ transacting });
         if (hasName.length) {
           logger.verbose('another activity already has this name');
           throw new Error('activity-name-exists');
