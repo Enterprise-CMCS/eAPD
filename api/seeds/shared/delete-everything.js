@@ -5,6 +5,8 @@ exports.seed = async knex => {
   await knex('activity_contractor_resources_yearly').del();
   await knex('activity_contractor_resources').del();
 
+  await knex('activity_cost_allocation').del();
+
   await knex('activity_expense_entries').del();
   await knex('activity_expenses').del();
 
