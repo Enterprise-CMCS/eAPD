@@ -21,8 +21,8 @@ class ApdStateProfile extends Component {
     return (
       <Section id="apd-state-profile" resource="apd.stateProfile">
         <Subsection resource="apd.stateProfile.directorAndAddress">
-          <h3>{t(`${dirTRoot}.title`)}</h3>
-          <div>
+          <h3 className="mt0">{t(`${dirTRoot}.title`)}</h3>
+          <div className="mb3">
             <Input
               name="apd-state-profile-mdname"
               label={t(`${dirTRoot}.labels.name`)}
@@ -42,8 +42,7 @@ class ApdStateProfile extends Component {
               onChange={this.handleChange('medicaidDirector', 'phone')}
             />
           </div>
-
-          <h3>{t(`${offTRoot}.title`)}</h3>
+          <h3 className="mt0">{t(`${offTRoot}.title`)}</h3>
           <div>
             <Input
               name="apd-state-profile-addr1"
