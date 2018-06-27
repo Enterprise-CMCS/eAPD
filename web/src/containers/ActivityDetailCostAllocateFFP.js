@@ -90,7 +90,7 @@ ActivityDetailCostAllocateFFP.propTypes = {
 };
 
 // TODO [bren]: tidy up this data munging
-const mapStateToProps = ({ activities: { byId } }, { aId }) => {
+export const mapStateToProps = ({ activities: { byId } }, { aId }) => {
   const activity = byId[aId];
   const { costAllocation } = activity;
   const totals = getActivityTotals(activity);
@@ -111,10 +111,12 @@ const mapStateToProps = ({ activities: { byId } }, { aId }) => {
   return { byYearData, costAllocation };
 };
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   ActivityDetailCostAllocateFFP
 );
+
+export const raw = ActivityDetailCostAllocateFFP;

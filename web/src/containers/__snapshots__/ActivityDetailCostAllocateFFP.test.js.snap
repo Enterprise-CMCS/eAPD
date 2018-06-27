@@ -1,0 +1,2390 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the activities cost allocation FFP component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ActivityDetailCostAllocateFFP
+    aId={1337}
+    byYearData={
+      Array [
+        Object {
+          "allocations": Array [
+            Object {
+              "amount": 261,
+              "id": "federal",
+            },
+            Object {
+              "amount": 29,
+              "id": "state",
+            },
+          ],
+          "ffpSelectVal": "90-10",
+          "total": 300,
+          "totalNetOther": 290,
+          "year": "1066",
+        },
+        Object {
+          "allocations": Array [
+            Object {
+              "amount": 300,
+              "id": "federal",
+            },
+            Object {
+              "amount": 2700,
+              "id": "state",
+            },
+          ],
+          "ffpSelectVal": "10-90",
+          "total": 3000,
+          "totalNetOther": 3000,
+          "year": "1067",
+        },
+      ]
+    }
+    costAllocation={
+      Object {
+        "1066": Object {
+          "ffp": Object {
+            "federal": 90,
+            "state": 10,
+          },
+          "other": 10,
+        },
+        "1067": Object {
+          "ffp": Object {
+            "federal": 10,
+            "state": 90,
+          },
+          "other": 0,
+        },
+      }
+    }
+    updateActivity={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <h4>
+          Federal Financial Partipation (FFP) and Cost Allocation
+        </h4>,
+        <div
+          className="clearfix mxn1"
+        >
+          <div
+            className="col col-12 sm-col-4 px1"
+          >
+            <div
+              className="p2 bg-darken-1"
+            >
+              <div>
+                1066
+              </div>
+              <div
+                className="h3 bold mono"
+              >
+                $300
+              </div>
+              <hr />
+              <InputHolder
+                hideLabel={false}
+                label="Other Funding Amount"
+                name="cost-allocate-other-1066"
+                onChange={[Function]}
+                type="text"
+                value={10}
+                wrapperClass=""
+              />
+              <div>
+                Medicaid Share
+              </div>
+              <div
+                className="h3 bold mono"
+              >
+                $290
+              </div>
+              <hr />
+              <Select
+                hideLabel={false}
+                label="Federal-State Split"
+                name="ffp-1066"
+                onChange={[Function]}
+                options={
+                  Array [
+                    "90-10",
+                    "75-25",
+                    "50-50",
+                  ]
+                }
+                value="90-10"
+                wrapperClass=""
+              />
+              <div
+                className="flex mxn-tiny"
+              >
+                <div
+                  className="col-12"
+                >
+                  <div>
+                    Federal
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $261
+                  </div>
+                </div>
+                <div
+                  className="col-12"
+                >
+                  <div>
+                    State
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $29
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="col col-12 sm-col-4 px1"
+          >
+            <div
+              className="p2 bg-darken-1"
+            >
+              <div>
+                1067
+              </div>
+              <div
+                className="h3 bold mono"
+              >
+                $3,000
+              </div>
+              <hr />
+              <InputHolder
+                hideLabel={false}
+                label="Other Funding Amount"
+                name="cost-allocate-other-1067"
+                onChange={[Function]}
+                type="text"
+                value={0}
+                wrapperClass=""
+              />
+              <div>
+                Medicaid Share
+              </div>
+              <div
+                className="h3 bold mono"
+              >
+                $3,000
+              </div>
+              <hr />
+              <Select
+                hideLabel={false}
+                label="Federal-State Split"
+                name="ffp-1067"
+                onChange={[Function]}
+                options={
+                  Array [
+                    "90-10",
+                    "75-25",
+                    "50-50",
+                  ]
+                }
+                value="10-90"
+                wrapperClass=""
+              />
+              <div
+                className="flex mxn-tiny"
+              >
+                <div
+                  className="col-12"
+                >
+                  <div>
+                    Federal
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $300
+                  </div>
+                </div>
+                <div
+                  className="col-12"
+                >
+                  <div>
+                    State
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $2,700
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>,
+      ],
+      "className": "mb3",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Federal Financial Partipation (FFP) and Cost Allocation",
+        },
+        "ref": null,
+        "rendered": "Federal Financial Partipation (FFP) and Cost Allocation",
+        "type": "h4",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="col col-12 sm-col-4 px1"
+            >
+              <div
+                className="p2 bg-darken-1"
+              >
+                <div>
+                  1066
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $300
+                </div>
+                <hr />
+                <InputHolder
+                  hideLabel={false}
+                  label="Other Funding Amount"
+                  name="cost-allocate-other-1066"
+                  onChange={[Function]}
+                  type="text"
+                  value={10}
+                  wrapperClass=""
+                />
+                <div>
+                  Medicaid Share
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $290
+                </div>
+                <hr />
+                <Select
+                  hideLabel={false}
+                  label="Federal-State Split"
+                  name="ffp-1066"
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "90-10",
+                      "75-25",
+                      "50-50",
+                    ]
+                  }
+                  value="90-10"
+                  wrapperClass=""
+                />
+                <div
+                  className="flex mxn-tiny"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      Federal
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $261
+                    </div>
+                  </div>
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      State
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $29
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>,
+            <div
+              className="col col-12 sm-col-4 px1"
+            >
+              <div
+                className="p2 bg-darken-1"
+              >
+                <div>
+                  1067
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $3,000
+                </div>
+                <hr />
+                <InputHolder
+                  hideLabel={false}
+                  label="Other Funding Amount"
+                  name="cost-allocate-other-1067"
+                  onChange={[Function]}
+                  type="text"
+                  value={0}
+                  wrapperClass=""
+                />
+                <div>
+                  Medicaid Share
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $3,000
+                </div>
+                <hr />
+                <Select
+                  hideLabel={false}
+                  label="Federal-State Split"
+                  name="ffp-1067"
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "90-10",
+                      "75-25",
+                      "50-50",
+                    ]
+                  }
+                  value="10-90"
+                  wrapperClass=""
+                />
+                <div
+                  className="flex mxn-tiny"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      Federal
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $300
+                    </div>
+                  </div>
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      State
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $2,700
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>,
+          ],
+          "className": "clearfix mxn1",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": "1066",
+            "nodeType": "host",
+            "props": Object {
+              "children": <div
+                className="p2 bg-darken-1"
+              >
+                <div>
+                  1066
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $300
+                </div>
+                <hr />
+                <InputHolder
+                  hideLabel={false}
+                  label="Other Funding Amount"
+                  name="cost-allocate-other-1066"
+                  onChange={[Function]}
+                  type="text"
+                  value={10}
+                  wrapperClass=""
+                />
+                <div>
+                  Medicaid Share
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $290
+                </div>
+                <hr />
+                <Select
+                  hideLabel={false}
+                  label="Federal-State Split"
+                  name="ffp-1066"
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "90-10",
+                      "75-25",
+                      "50-50",
+                    ]
+                  }
+                  value="90-10"
+                  wrapperClass=""
+                />
+                <div
+                  className="flex mxn-tiny"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      Federal
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $261
+                    </div>
+                  </div>
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      State
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $29
+                    </div>
+                  </div>
+                </div>
+              </div>,
+              "className": "col col-12 sm-col-4 px1",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div>
+                    1066
+                  </div>,
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $300
+                  </div>,
+                  <hr />,
+                  <InputHolder
+                    hideLabel={false}
+                    label="Other Funding Amount"
+                    name="cost-allocate-other-1066"
+                    onChange={[Function]}
+                    type="text"
+                    value={10}
+                    wrapperClass=""
+                  />,
+                  <div>
+                    Medicaid Share
+                  </div>,
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $290
+                  </div>,
+                  <hr />,
+                  <Select
+                    hideLabel={false}
+                    label="Federal-State Split"
+                    name="ffp-1066"
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "90-10",
+                        "75-25",
+                        "50-50",
+                      ]
+                    }
+                    value="90-10"
+                    wrapperClass=""
+                  />,
+                  <div
+                    className="flex mxn-tiny"
+                  >
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        Federal
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $261
+                      </div>
+                    </div>
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        State
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $29
+                      </div>
+                    </div>
+                  </div>,
+                ],
+                "className": "p2 bg-darken-1",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "1066",
+                  },
+                  "ref": null,
+                  "rendered": "1066",
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "$300",
+                    "className": "h3 bold mono",
+                  },
+                  "ref": null,
+                  "rendered": "$300",
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": "hr",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hideLabel": false,
+                    "label": "Other Funding Amount",
+                    "name": "cost-allocate-other-1066",
+                    "onChange": [Function],
+                    "type": "text",
+                    "value": 10,
+                    "wrapperClass": "",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Medicaid Share",
+                  },
+                  "ref": null,
+                  "rendered": "Medicaid Share",
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "$290",
+                    "className": "h3 bold mono",
+                  },
+                  "ref": null,
+                  "rendered": "$290",
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": "hr",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hideLabel": false,
+                    "label": "Federal-State Split",
+                    "name": "ffp-1066",
+                    "onChange": [Function],
+                    "options": Array [
+                      "90-10",
+                      "75-25",
+                      "50-50",
+                    ],
+                    "value": "90-10",
+                    "wrapperClass": "",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <div
+                        className="col-12"
+                      >
+                        <div>
+                          Federal
+                        </div>
+                        <div
+                          className="h3 bold mono"
+                        >
+                          $261
+                        </div>
+                      </div>,
+                      <div
+                        className="col-12"
+                      >
+                        <div>
+                          State
+                        </div>
+                        <div
+                          className="h3 bold mono"
+                        >
+                          $29
+                        </div>
+                      </div>,
+                    ],
+                    "className": "flex mxn-tiny",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": "federal",
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": Array [
+                          <div>
+                            Federal
+                          </div>,
+                          <div
+                            className="h3 bold mono"
+                          >
+                            $261
+                          </div>,
+                        ],
+                        "className": "col-12",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Federal",
+                          },
+                          "ref": null,
+                          "rendered": "Federal",
+                          "type": "div",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "$261",
+                            "className": "h3 bold mono",
+                          },
+                          "ref": null,
+                          "rendered": "$261",
+                          "type": "div",
+                        },
+                      ],
+                      "type": "div",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": "state",
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": Array [
+                          <div>
+                            State
+                          </div>,
+                          <div
+                            className="h3 bold mono"
+                          >
+                            $29
+                          </div>,
+                        ],
+                        "className": "col-12",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "State",
+                          },
+                          "ref": null,
+                          "rendered": "State",
+                          "type": "div",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "$29",
+                            "className": "h3 bold mono",
+                          },
+                          "ref": null,
+                          "rendered": "$29",
+                          "type": "div",
+                        },
+                      ],
+                      "type": "div",
+                    },
+                  ],
+                  "type": "div",
+                },
+              ],
+              "type": "div",
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": "1067",
+            "nodeType": "host",
+            "props": Object {
+              "children": <div
+                className="p2 bg-darken-1"
+              >
+                <div>
+                  1067
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $3,000
+                </div>
+                <hr />
+                <InputHolder
+                  hideLabel={false}
+                  label="Other Funding Amount"
+                  name="cost-allocate-other-1067"
+                  onChange={[Function]}
+                  type="text"
+                  value={0}
+                  wrapperClass=""
+                />
+                <div>
+                  Medicaid Share
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $3,000
+                </div>
+                <hr />
+                <Select
+                  hideLabel={false}
+                  label="Federal-State Split"
+                  name="ffp-1067"
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "90-10",
+                      "75-25",
+                      "50-50",
+                    ]
+                  }
+                  value="10-90"
+                  wrapperClass=""
+                />
+                <div
+                  className="flex mxn-tiny"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      Federal
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $300
+                    </div>
+                  </div>
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      State
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $2,700
+                    </div>
+                  </div>
+                </div>
+              </div>,
+              "className": "col col-12 sm-col-4 px1",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div>
+                    1067
+                  </div>,
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $3,000
+                  </div>,
+                  <hr />,
+                  <InputHolder
+                    hideLabel={false}
+                    label="Other Funding Amount"
+                    name="cost-allocate-other-1067"
+                    onChange={[Function]}
+                    type="text"
+                    value={0}
+                    wrapperClass=""
+                  />,
+                  <div>
+                    Medicaid Share
+                  </div>,
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $3,000
+                  </div>,
+                  <hr />,
+                  <Select
+                    hideLabel={false}
+                    label="Federal-State Split"
+                    name="ffp-1067"
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "90-10",
+                        "75-25",
+                        "50-50",
+                      ]
+                    }
+                    value="10-90"
+                    wrapperClass=""
+                  />,
+                  <div
+                    className="flex mxn-tiny"
+                  >
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        Federal
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $300
+                      </div>
+                    </div>
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        State
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $2,700
+                      </div>
+                    </div>
+                  </div>,
+                ],
+                "className": "p2 bg-darken-1",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "1067",
+                  },
+                  "ref": null,
+                  "rendered": "1067",
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "$3,000",
+                    "className": "h3 bold mono",
+                  },
+                  "ref": null,
+                  "rendered": "$3,000",
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": "hr",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hideLabel": false,
+                    "label": "Other Funding Amount",
+                    "name": "cost-allocate-other-1067",
+                    "onChange": [Function],
+                    "type": "text",
+                    "value": 0,
+                    "wrapperClass": "",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Medicaid Share",
+                  },
+                  "ref": null,
+                  "rendered": "Medicaid Share",
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "$3,000",
+                    "className": "h3 bold mono",
+                  },
+                  "ref": null,
+                  "rendered": "$3,000",
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": "hr",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hideLabel": false,
+                    "label": "Federal-State Split",
+                    "name": "ffp-1067",
+                    "onChange": [Function],
+                    "options": Array [
+                      "90-10",
+                      "75-25",
+                      "50-50",
+                    ],
+                    "value": "10-90",
+                    "wrapperClass": "",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <div
+                        className="col-12"
+                      >
+                        <div>
+                          Federal
+                        </div>
+                        <div
+                          className="h3 bold mono"
+                        >
+                          $300
+                        </div>
+                      </div>,
+                      <div
+                        className="col-12"
+                      >
+                        <div>
+                          State
+                        </div>
+                        <div
+                          className="h3 bold mono"
+                        >
+                          $2,700
+                        </div>
+                      </div>,
+                    ],
+                    "className": "flex mxn-tiny",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": "federal",
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": Array [
+                          <div>
+                            Federal
+                          </div>,
+                          <div
+                            className="h3 bold mono"
+                          >
+                            $300
+                          </div>,
+                        ],
+                        "className": "col-12",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Federal",
+                          },
+                          "ref": null,
+                          "rendered": "Federal",
+                          "type": "div",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "$300",
+                            "className": "h3 bold mono",
+                          },
+                          "ref": null,
+                          "rendered": "$300",
+                          "type": "div",
+                        },
+                      ],
+                      "type": "div",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": "state",
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": Array [
+                          <div>
+                            State
+                          </div>,
+                          <div
+                            className="h3 bold mono"
+                          >
+                            $2,700
+                          </div>,
+                        ],
+                        "className": "col-12",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "State",
+                          },
+                          "ref": null,
+                          "rendered": "State",
+                          "type": "div",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "$2,700",
+                            "className": "h3 bold mono",
+                          },
+                          "ref": null,
+                          "rendered": "$2,700",
+                          "type": "div",
+                        },
+                      ],
+                      "type": "div",
+                    },
+                  ],
+                  "type": "div",
+                },
+              ],
+              "type": "div",
+            },
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h4>
+            Federal Financial Partipation (FFP) and Cost Allocation
+          </h4>,
+          <div
+            className="clearfix mxn1"
+          >
+            <div
+              className="col col-12 sm-col-4 px1"
+            >
+              <div
+                className="p2 bg-darken-1"
+              >
+                <div>
+                  1066
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $300
+                </div>
+                <hr />
+                <InputHolder
+                  hideLabel={false}
+                  label="Other Funding Amount"
+                  name="cost-allocate-other-1066"
+                  onChange={[Function]}
+                  type="text"
+                  value={10}
+                  wrapperClass=""
+                />
+                <div>
+                  Medicaid Share
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $290
+                </div>
+                <hr />
+                <Select
+                  hideLabel={false}
+                  label="Federal-State Split"
+                  name="ffp-1066"
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "90-10",
+                      "75-25",
+                      "50-50",
+                    ]
+                  }
+                  value="90-10"
+                  wrapperClass=""
+                />
+                <div
+                  className="flex mxn-tiny"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      Federal
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $261
+                    </div>
+                  </div>
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      State
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $29
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="col col-12 sm-col-4 px1"
+            >
+              <div
+                className="p2 bg-darken-1"
+              >
+                <div>
+                  1067
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $3,000
+                </div>
+                <hr />
+                <InputHolder
+                  hideLabel={false}
+                  label="Other Funding Amount"
+                  name="cost-allocate-other-1067"
+                  onChange={[Function]}
+                  type="text"
+                  value={0}
+                  wrapperClass=""
+                />
+                <div>
+                  Medicaid Share
+                </div>
+                <div
+                  className="h3 bold mono"
+                >
+                  $3,000
+                </div>
+                <hr />
+                <Select
+                  hideLabel={false}
+                  label="Federal-State Split"
+                  name="ffp-1067"
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "90-10",
+                      "75-25",
+                      "50-50",
+                    ]
+                  }
+                  value="10-90"
+                  wrapperClass=""
+                />
+                <div
+                  className="flex mxn-tiny"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      Federal
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $300
+                    </div>
+                  </div>
+                  <div
+                    className="col-12"
+                  >
+                    <div>
+                      State
+                    </div>
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $2,700
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>,
+        ],
+        "className": "mb3",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Federal Financial Partipation (FFP) and Cost Allocation",
+          },
+          "ref": null,
+          "rendered": "Federal Financial Partipation (FFP) and Cost Allocation",
+          "type": "h4",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="col col-12 sm-col-4 px1"
+              >
+                <div
+                  className="p2 bg-darken-1"
+                >
+                  <div>
+                    1066
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $300
+                  </div>
+                  <hr />
+                  <InputHolder
+                    hideLabel={false}
+                    label="Other Funding Amount"
+                    name="cost-allocate-other-1066"
+                    onChange={[Function]}
+                    type="text"
+                    value={10}
+                    wrapperClass=""
+                  />
+                  <div>
+                    Medicaid Share
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $290
+                  </div>
+                  <hr />
+                  <Select
+                    hideLabel={false}
+                    label="Federal-State Split"
+                    name="ffp-1066"
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "90-10",
+                        "75-25",
+                        "50-50",
+                      ]
+                    }
+                    value="90-10"
+                    wrapperClass=""
+                  />
+                  <div
+                    className="flex mxn-tiny"
+                  >
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        Federal
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $261
+                      </div>
+                    </div>
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        State
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $29
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>,
+              <div
+                className="col col-12 sm-col-4 px1"
+              >
+                <div
+                  className="p2 bg-darken-1"
+                >
+                  <div>
+                    1067
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $3,000
+                  </div>
+                  <hr />
+                  <InputHolder
+                    hideLabel={false}
+                    label="Other Funding Amount"
+                    name="cost-allocate-other-1067"
+                    onChange={[Function]}
+                    type="text"
+                    value={0}
+                    wrapperClass=""
+                  />
+                  <div>
+                    Medicaid Share
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $3,000
+                  </div>
+                  <hr />
+                  <Select
+                    hideLabel={false}
+                    label="Federal-State Split"
+                    name="ffp-1067"
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "90-10",
+                        "75-25",
+                        "50-50",
+                      ]
+                    }
+                    value="10-90"
+                    wrapperClass=""
+                  />
+                  <div
+                    className="flex mxn-tiny"
+                  >
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        Federal
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $300
+                      </div>
+                    </div>
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        State
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $2,700
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>,
+            ],
+            "className": "clearfix mxn1",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": "1066",
+              "nodeType": "host",
+              "props": Object {
+                "children": <div
+                  className="p2 bg-darken-1"
+                >
+                  <div>
+                    1066
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $300
+                  </div>
+                  <hr />
+                  <InputHolder
+                    hideLabel={false}
+                    label="Other Funding Amount"
+                    name="cost-allocate-other-1066"
+                    onChange={[Function]}
+                    type="text"
+                    value={10}
+                    wrapperClass=""
+                  />
+                  <div>
+                    Medicaid Share
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $290
+                  </div>
+                  <hr />
+                  <Select
+                    hideLabel={false}
+                    label="Federal-State Split"
+                    name="ffp-1066"
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "90-10",
+                        "75-25",
+                        "50-50",
+                      ]
+                    }
+                    value="90-10"
+                    wrapperClass=""
+                  />
+                  <div
+                    className="flex mxn-tiny"
+                  >
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        Federal
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $261
+                      </div>
+                    </div>
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        State
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $29
+                      </div>
+                    </div>
+                  </div>
+                </div>,
+                "className": "col col-12 sm-col-4 px1",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <div>
+                      1066
+                    </div>,
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $300
+                    </div>,
+                    <hr />,
+                    <InputHolder
+                      hideLabel={false}
+                      label="Other Funding Amount"
+                      name="cost-allocate-other-1066"
+                      onChange={[Function]}
+                      type="text"
+                      value={10}
+                      wrapperClass=""
+                    />,
+                    <div>
+                      Medicaid Share
+                    </div>,
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $290
+                    </div>,
+                    <hr />,
+                    <Select
+                      hideLabel={false}
+                      label="Federal-State Split"
+                      name="ffp-1066"
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          "90-10",
+                          "75-25",
+                          "50-50",
+                        ]
+                      }
+                      value="90-10"
+                      wrapperClass=""
+                    />,
+                    <div
+                      className="flex mxn-tiny"
+                    >
+                      <div
+                        className="col-12"
+                      >
+                        <div>
+                          Federal
+                        </div>
+                        <div
+                          className="h3 bold mono"
+                        >
+                          $261
+                        </div>
+                      </div>
+                      <div
+                        className="col-12"
+                      >
+                        <div>
+                          State
+                        </div>
+                        <div
+                          className="h3 bold mono"
+                        >
+                          $29
+                        </div>
+                      </div>
+                    </div>,
+                  ],
+                  "className": "p2 bg-darken-1",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "1066",
+                    },
+                    "ref": null,
+                    "rendered": "1066",
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "$300",
+                      "className": "h3 bold mono",
+                    },
+                    "ref": null,
+                    "rendered": "$300",
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {},
+                    "ref": null,
+                    "rendered": null,
+                    "type": "hr",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "hideLabel": false,
+                      "label": "Other Funding Amount",
+                      "name": "cost-allocate-other-1066",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": 10,
+                      "wrapperClass": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Medicaid Share",
+                    },
+                    "ref": null,
+                    "rendered": "Medicaid Share",
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "$290",
+                      "className": "h3 bold mono",
+                    },
+                    "ref": null,
+                    "rendered": "$290",
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {},
+                    "ref": null,
+                    "rendered": null,
+                    "type": "hr",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "hideLabel": false,
+                      "label": "Federal-State Split",
+                      "name": "ffp-1066",
+                      "onChange": [Function],
+                      "options": Array [
+                        "90-10",
+                        "75-25",
+                        "50-50",
+                      ],
+                      "value": "90-10",
+                      "wrapperClass": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        <div
+                          className="col-12"
+                        >
+                          <div>
+                            Federal
+                          </div>
+                          <div
+                            className="h3 bold mono"
+                          >
+                            $261
+                          </div>
+                        </div>,
+                        <div
+                          className="col-12"
+                        >
+                          <div>
+                            State
+                          </div>
+                          <div
+                            className="h3 bold mono"
+                          >
+                            $29
+                          </div>
+                        </div>,
+                      ],
+                      "className": "flex mxn-tiny",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": "federal",
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": Array [
+                            <div>
+                              Federal
+                            </div>,
+                            <div
+                              className="h3 bold mono"
+                            >
+                              $261
+                            </div>,
+                          ],
+                          "className": "col-12",
+                        },
+                        "ref": null,
+                        "rendered": Array [
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Federal",
+                            },
+                            "ref": null,
+                            "rendered": "Federal",
+                            "type": "div",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "$261",
+                              "className": "h3 bold mono",
+                            },
+                            "ref": null,
+                            "rendered": "$261",
+                            "type": "div",
+                          },
+                        ],
+                        "type": "div",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": "state",
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": Array [
+                            <div>
+                              State
+                            </div>,
+                            <div
+                              className="h3 bold mono"
+                            >
+                              $29
+                            </div>,
+                          ],
+                          "className": "col-12",
+                        },
+                        "ref": null,
+                        "rendered": Array [
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "State",
+                            },
+                            "ref": null,
+                            "rendered": "State",
+                            "type": "div",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "$29",
+                              "className": "h3 bold mono",
+                            },
+                            "ref": null,
+                            "rendered": "$29",
+                            "type": "div",
+                          },
+                        ],
+                        "type": "div",
+                      },
+                    ],
+                    "type": "div",
+                  },
+                ],
+                "type": "div",
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": "1067",
+              "nodeType": "host",
+              "props": Object {
+                "children": <div
+                  className="p2 bg-darken-1"
+                >
+                  <div>
+                    1067
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $3,000
+                  </div>
+                  <hr />
+                  <InputHolder
+                    hideLabel={false}
+                    label="Other Funding Amount"
+                    name="cost-allocate-other-1067"
+                    onChange={[Function]}
+                    type="text"
+                    value={0}
+                    wrapperClass=""
+                  />
+                  <div>
+                    Medicaid Share
+                  </div>
+                  <div
+                    className="h3 bold mono"
+                  >
+                    $3,000
+                  </div>
+                  <hr />
+                  <Select
+                    hideLabel={false}
+                    label="Federal-State Split"
+                    name="ffp-1067"
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "90-10",
+                        "75-25",
+                        "50-50",
+                      ]
+                    }
+                    value="10-90"
+                    wrapperClass=""
+                  />
+                  <div
+                    className="flex mxn-tiny"
+                  >
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        Federal
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $300
+                      </div>
+                    </div>
+                    <div
+                      className="col-12"
+                    >
+                      <div>
+                        State
+                      </div>
+                      <div
+                        className="h3 bold mono"
+                      >
+                        $2,700
+                      </div>
+                    </div>
+                  </div>
+                </div>,
+                "className": "col col-12 sm-col-4 px1",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <div>
+                      1067
+                    </div>,
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $3,000
+                    </div>,
+                    <hr />,
+                    <InputHolder
+                      hideLabel={false}
+                      label="Other Funding Amount"
+                      name="cost-allocate-other-1067"
+                      onChange={[Function]}
+                      type="text"
+                      value={0}
+                      wrapperClass=""
+                    />,
+                    <div>
+                      Medicaid Share
+                    </div>,
+                    <div
+                      className="h3 bold mono"
+                    >
+                      $3,000
+                    </div>,
+                    <hr />,
+                    <Select
+                      hideLabel={false}
+                      label="Federal-State Split"
+                      name="ffp-1067"
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          "90-10",
+                          "75-25",
+                          "50-50",
+                        ]
+                      }
+                      value="10-90"
+                      wrapperClass=""
+                    />,
+                    <div
+                      className="flex mxn-tiny"
+                    >
+                      <div
+                        className="col-12"
+                      >
+                        <div>
+                          Federal
+                        </div>
+                        <div
+                          className="h3 bold mono"
+                        >
+                          $300
+                        </div>
+                      </div>
+                      <div
+                        className="col-12"
+                      >
+                        <div>
+                          State
+                        </div>
+                        <div
+                          className="h3 bold mono"
+                        >
+                          $2,700
+                        </div>
+                      </div>
+                    </div>,
+                  ],
+                  "className": "p2 bg-darken-1",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "1067",
+                    },
+                    "ref": null,
+                    "rendered": "1067",
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "$3,000",
+                      "className": "h3 bold mono",
+                    },
+                    "ref": null,
+                    "rendered": "$3,000",
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {},
+                    "ref": null,
+                    "rendered": null,
+                    "type": "hr",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "hideLabel": false,
+                      "label": "Other Funding Amount",
+                      "name": "cost-allocate-other-1067",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": 0,
+                      "wrapperClass": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Medicaid Share",
+                    },
+                    "ref": null,
+                    "rendered": "Medicaid Share",
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "$3,000",
+                      "className": "h3 bold mono",
+                    },
+                    "ref": null,
+                    "rendered": "$3,000",
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {},
+                    "ref": null,
+                    "rendered": null,
+                    "type": "hr",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "hideLabel": false,
+                      "label": "Federal-State Split",
+                      "name": "ffp-1067",
+                      "onChange": [Function],
+                      "options": Array [
+                        "90-10",
+                        "75-25",
+                        "50-50",
+                      ],
+                      "value": "10-90",
+                      "wrapperClass": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        <div
+                          className="col-12"
+                        >
+                          <div>
+                            Federal
+                          </div>
+                          <div
+                            className="h3 bold mono"
+                          >
+                            $300
+                          </div>
+                        </div>,
+                        <div
+                          className="col-12"
+                        >
+                          <div>
+                            State
+                          </div>
+                          <div
+                            className="h3 bold mono"
+                          >
+                            $2,700
+                          </div>
+                        </div>,
+                      ],
+                      "className": "flex mxn-tiny",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": "federal",
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": Array [
+                            <div>
+                              Federal
+                            </div>,
+                            <div
+                              className="h3 bold mono"
+                            >
+                              $300
+                            </div>,
+                          ],
+                          "className": "col-12",
+                        },
+                        "ref": null,
+                        "rendered": Array [
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Federal",
+                            },
+                            "ref": null,
+                            "rendered": "Federal",
+                            "type": "div",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "$300",
+                              "className": "h3 bold mono",
+                            },
+                            "ref": null,
+                            "rendered": "$300",
+                            "type": "div",
+                          },
+                        ],
+                        "type": "div",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": "state",
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": Array [
+                            <div>
+                              State
+                            </div>,
+                            <div
+                              className="h3 bold mono"
+                            >
+                              $2,700
+                            </div>,
+                          ],
+                          "className": "col-12",
+                        },
+                        "ref": null,
+                        "rendered": Array [
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "State",
+                            },
+                            "ref": null,
+                            "rendered": "State",
+                            "type": "div",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "$2,700",
+                              "className": "h3 bold mono",
+                            },
+                            "ref": null,
+                            "rendered": "$2,700",
+                            "type": "div",
+                          },
+                        ],
+                        "type": "div",
+                      },
+                    ],
+                    "type": "div",
+                  },
+                ],
+                "type": "div",
+              },
+              "type": "div",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
