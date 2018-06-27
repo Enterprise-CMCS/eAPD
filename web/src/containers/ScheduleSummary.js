@@ -9,12 +9,14 @@ import { Section, Subsection } from '../components/Section';
 const ScheduleSummary = ({ tableData }) => (
   <Section id="schedule-summary" resource="scheduleSummary">
     <Subsection resource="scheduleSummary.main">
-      {tableData.data.length > 0 && (
+      {tableData.data.length === 0 ? (
+        <div className="p1 h6 alert">{t('scheduleSummary.noDataMessage')}</div>
+      ) : (
         <ReactTable
           showPagination={false}
           resizable={false}
           minRows={0}
-          className="mb3 h6 -striped"
+          className="h6 -striped"
           {...tableData}
         />
       )}

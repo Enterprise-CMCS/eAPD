@@ -29,9 +29,6 @@ ShallowWrapper {
         </div>,
       ],
       "className": "mb2",
-      "style": Object {
-        "whiteSpace": "pre-line",
-      },
     },
     "ref": null,
     "rendered": Array [
@@ -66,9 +63,6 @@ ShallowWrapper {
           </div>,
         ],
         "className": "mb2",
-        "style": Object {
-          "whiteSpace": "pre-line",
-        },
       },
       "ref": null,
       "rendered": Array [
@@ -159,9 +153,6 @@ ShallowWrapper {
         </div>,
       ],
       "className": "mb2",
-      "style": Object {
-        "whiteSpace": "pre-line",
-      },
     },
     "ref": null,
     "rendered": Array [
@@ -208,9 +199,6 @@ ShallowWrapper {
           </div>,
         ],
         "className": "mb2",
-        "style": Object {
-          "whiteSpace": "pre-line",
-        },
       },
       "ref": null,
       "rendered": Array [
@@ -278,9 +266,6 @@ ShallowWrapper {
         false,
       ],
       "className": "mb2",
-      "style": Object {
-        "whiteSpace": "pre-line",
-      },
     },
     "ref": null,
     "rendered": Array [
@@ -312,9 +297,6 @@ ShallowWrapper {
           false,
         ],
         "className": "mb2",
-        "style": Object {
-          "whiteSpace": "pre-line",
-        },
       },
       "ref": null,
       "rendered": Array [
