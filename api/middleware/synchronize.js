@@ -79,12 +79,15 @@ const synchronizeAll = getSpecifics =>
  * @param {SyncEventHandler} events.beforeSync Called before the model is
  *    synced.  A good opportunity to massage the request object.
  */
-const synchronizeSpecific = (getModelToSync, events = {}) =>
+const synchronizeSpecific = (getModelToSync, { afterSync, beforeSync } = {}) =>
   cache(
-    ['sync-one', modelIndex(getModelToSync), modelIndex(events)],
+    [
+      'sync-one',
+      modelIndex(getModelToSync),
+      modelIndex(afterSync),
+      modelIndex(beforeSync)
+    ],
     () => async (req, res, next) => {
-      const { afterSync, beforeSync } = events;
-
       let action;
       try {
         if (typeof beforeSync === 'function') {

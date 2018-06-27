@@ -35,3 +35,4 @@ module.exports = app => {
 };
 
 module.exports.syncResponder = syncResponder;
+module.exports.updateStateProfile = updateStateProfile;
