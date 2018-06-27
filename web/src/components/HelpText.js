@@ -9,7 +9,7 @@ const HelpText = ({ text: textResource, reminder: reminderResource }) => {
 
   return (
     (text || reminder) && (
-      <div className="mb2" style={{ whiteSpace: 'pre-line' }}>
+      <div className="mb2">
         {text && <div>{text}</div>}
         {reminder && <div className="red">{reminder}</div>}
       </div>
