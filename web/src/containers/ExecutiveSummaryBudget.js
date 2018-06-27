@@ -26,10 +26,10 @@ const ExecutiveSummaryBudget = ({ budget }) => {
   return (
     <div>
       <div className="mb3 overflow-auto">
-        <table className="h6 table-condensed table-bordered">
+        <table className="table-cms table-fixed" style={{ minWidth: 700 }}>
           <thead>
             <tr>
-              <th />
+              <th style={{ width: 90 }} />
               <th className="center" colSpan="2">
                 {t('executiveSummary.budgetTable.hit')}
               </th>
@@ -83,10 +83,10 @@ const ExecutiveSummaryBudget = ({ budget }) => {
       </div>
 
       <div className="overflow-auto">
-        <table className="h6 table-condensed table-bordered">
+        <table className="table-cms table-fixed" style={{ minWidth: 700 }}>
           <thead>
             <tr>
-              <th />
+              <th style={{ width: 90 }} />
               <th className="center" colSpan="2">
                 {t('executiveSummary.budgetTable.mmis90')}
               </th>

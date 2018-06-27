@@ -285,6 +285,7 @@
         title: "Describe how you'll meet the Cost Minimization condition"
   scheduleSummary: 
     title: Activity Schedule Summary
+    noDataMessage: It looks like there are no milestones scheduled yet.
     main: 
       title: Summary Schedule Table
       table:
