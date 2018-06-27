@@ -9,6 +9,7 @@
 @import 'app/confirm';
 @import 'app/form';
 @import 'app/layout';
+@import 'app/misc';
 @import 'app/sidebar';
 @import 'app/spacing';
 @import 'app/table';
@@ -41,8 +42,8 @@
   --space-tiny: 4px;
   --space-1: 0.5rem;
   --space-2: 1rem;
-  --space-3: 2rem;
-  --space-4: 4rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
 
   --border-width: 1px;
   --border-radius: 5px;
