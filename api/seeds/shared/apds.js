@@ -6,5 +6,5 @@ const apdEntries = states.map(state => ({
 }));
 
 exports.seed = async knex => {
-  await knex('apds').insert(apdEntries);
+  // await knex('apds').insert(apdEntries);
 };
