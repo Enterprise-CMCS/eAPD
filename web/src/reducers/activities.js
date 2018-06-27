@@ -74,7 +74,7 @@ const newActivity = (
   costAllocationDesc: '',
   otherFundingDesc: '',
   goals: [newGoal()],
-  milestones: [newMilestone(), newMilestone(), newMilestone()],
+  milestones: [newMilestone()],
   statePersonnel: [
     newStatePerson(1, years),
     newStatePerson(2, years),
