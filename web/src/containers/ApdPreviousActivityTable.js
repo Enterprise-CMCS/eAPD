@@ -53,161 +53,138 @@ const ApdPreviousActivityTable = ({
   };
 
   return (
-    <table
-      className={`h6 table-fixed table-condensed border-right border-${
-        colors[2]
-      }`}
-      style={{ minWidth: 1200 }}
-    >
-      <thead>
-        <tr>
-          <th />
-          {Object.values(programs).map((name, i) => (
-            <th
-              key={name}
-              colSpan={4}
-              className={`bg-${colors[i]} white center border border-${
-                colors[i]
-              }`}
-            >
-              {name}
+    <div className="overflow-auto">
+      <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
+        <thead>
+          <tr>
+            <th style={{ width: 90 }} />
+            {Object.values(programs).map((name, i) => (
+              <th key={name} colSpan={4} className={`bg-${colors[i]} center`}>
+                {name}
+              </th>
+            ))}
+            <th colSpan={6} className={`bg-${colors[2]} center`}>
+              {t('program.combined', i18nBase)}
             </th>
-          ))}
-          <th
-            colSpan={6}
-            className={`bg-${colors[2]} white center border border-${
-              colors[2]
-            }`}
-          >
-            {t('program.combined', i18nBase)}
-          </th>
-        </tr>
-        <tr>
-          <th className="border-none" />
-          {[...Array(3)].map((_, i) => (
-            <Fragment key={i}>
-              <th
-                colSpan="2"
-                style={{ whiteSpace: 'pre-line' }}
-                className={borderClass(i)}
-              >
-                {t('labels.federalShare', i18nBase)}
-              </th>
-              <th
-                colSpan="2"
-                style={{ whiteSpace: 'pre-line' }}
-                className={borderClass(i)}
-              >
-                {t('labels.stateShare', i18nBase)}
-              </th>
-            </Fragment>
-          ))}
-          <th
-            colSpan="2"
-            style={{ whiteSpace: 'pre-line' }}
-            className={`border-right ${borderClass(2)}`}
-          >
-            {t('labels.grandTotal', i18nBase)}
-          </th>
-        </tr>
-        <tr>
-          <th />
-          {[...Array(3)].map((_, i) => (
-            <Fragment key={i}>
-              <th className={`bg-${colors[i]}-light ${borderClass(i)}`}>
-                {t('labels.approved', i18nBase)}
-              </th>
-              <th className={borderClass(-1)}>
-                {t('labels.actual', i18nBase)}
-              </th>
-              <th className={`bg-${colors[i]}-light ${borderClass(i)}`}>
-                {t('labels.approved', i18nBase)}
-              </th>
-              <th className={borderClass(-1)}>
-                {t('labels.actual', i18nBase)}
-              </th>
-            </Fragment>
-          ))}
-          <th className={`bg-${colors[2]}-light ${borderClass(2)}`}>
-            {t('labels.approved', i18nBase)}
-          </th>
-          <th className={borderClass(-1)}>{t('labels.actual', i18nBase)}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {years.map(year => {
-          const totals = rollup(previousActivityExpenses[year]);
+          </tr>
+          <tr>
+            <th />
+            {[...Array(3)].map((_, i) => (
+              <Fragment key={i}>
+                <th colSpan="2" className="pre-line">
+                  {t('labels.federalShare', i18nBase)}
+                </th>
+                <th colSpan="2" className="pre-line">
+                  {t('labels.stateShare', i18nBase)}
+                </th>
+              </Fragment>
+            ))}
+            <th colSpan="2" className="pre-line">
+              {t('labels.grandTotal', i18nBase)}
+            </th>
+          </tr>
+          <tr>
+            <th />
+            {[...Array(3)].map((_, i) => (
+              <Fragment key={i}>
+                <th className={`bg-${colors[i]}-light`}>
+                  {t('labels.approved', i18nBase)}
+                </th>
+                <th className={borderClass(-1)}>
+                  {t('labels.actual', i18nBase)}
+                </th>
+                <th className={`bg-${colors[i]}-light`}>
+                  {t('labels.approved', i18nBase)}
+                </th>
+                <th>{t('labels.actual', i18nBase)}</th>
+              </Fragment>
+            ))}
+            <th className={`bg-${colors[2]}-light`}>
+              {t('labels.approved', i18nBase)}
+            </th>
+            <th>{t('labels.actual', i18nBase)}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {years.map(year => {
+            const totals = rollup(previousActivityExpenses[year]);
 
-          return (
-            <tr key={year} className="border border-gray">
-              <th>{t('ffy', { year })}</th>
-              {Object.keys(programs).map((program, i) => (
-                <Fragment key={program}>
-                  <td className={`bg-${colors[i]}-light ${borderClass(i)}`}>
-                    <DollarInput
-                      name={`approved-federal-${program}-${year}`}
-                      label={`approved federal share for ${program}, FFY ${year}`}
-                      hideLabel
-                      value={
-                        previousActivityExpenses[year][program].federalApproved
-                      }
-                      onChange={handleChange(year, program, 'federalApproved')}
-                    />
-                  </td>
-                  <td className={borderClass(-1)}>
-                    <DollarInput
-                      name={`actual-federal-${program}-${year}`}
-                      label={`actual federal share for ${program}, FFY ${year}`}
-                      hideLabel
-                      value={
-                        previousActivityExpenses[year][program].federalActual
-                      }
-                      onChange={handleChange(year, program, 'federalActual')}
-                    />
-                  </td>
-
-                  <td className={`bg-${colors[i]}-light ${borderClass(i)}`}>
-                    <DollarInput
-                      name={`approved-state-${program}-${year}`}
-                      label={`approved state share for ${program}, FFY ${year}`}
-                      hideLabel
-                      value={
-                        previousActivityExpenses[year][program].stateApproved
-                      }
-                      onChange={handleChange(year, program, 'stateApproved')}
-                    />
-                  </td>
-                  <td className={borderClass(-1)}>
-                    {' '}
-                    <DollarInput
-                      name={`actual-state-${program}-${year}`}
-                      label={`actual state share for ${program}, FFY ${year}`}
-                      hideLabel
-                      value={
-                        previousActivityExpenses[year][program].stateActual
-                      }
-                      onChange={handleChange(year, program, 'stateActual')}
-                    />
-                  </td>
-                </Fragment>
-              ))}
-              <td className={`bg-${colors[2]}-light ${borderClass(2)}`}>
-                {formatMoney(totals.combined.federalApproved)}
-              </td>
-              <td>{formatMoney(totals.combined.federalActual)}</td>
-              <td className={`bg-${colors[2]}-light ${borderClass(2)}`}>
-                {formatMoney(totals.combined.stateApproved)}
-              </td>
-              <td>{formatMoney(totals.combined.stateActual)}</td>
-              <td className={`bg-${colors[2]}-light ${borderClass(2)}`}>
-                {formatMoney(totals.total.approved)}
-              </td>
-              <td>{formatMoney(totals.total.actual)}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+            return (
+              <tr key={year} className="align-middle">
+                <th>{t('ffy', { year })}</th>
+                {Object.keys(programs).map(program => (
+                  <Fragment key={program}>
+                    <td>
+                      <DollarInput
+                        name={`approved-federal-${program}-${year}`}
+                        label={`approved federal share for ${program}, FFY ${year}`}
+                        hideLabel
+                        wrapperClass="m0"
+                        className="m0 input input-condensed mono right-align"
+                        value={
+                          previousActivityExpenses[year][program]
+                            .federalApproved
+                        }
+                        onChange={handleChange(
+                          year,
+                          program,
+                          'federalApproved'
+                        )}
+                      />
+                    </td>
+                    <td>
+                      <DollarInput
+                        name={`actual-federal-${program}-${year}`}
+                        label={`actual federal share for ${program}, FFY ${year}`}
+                        hideLabel
+                        wrapperClass="m0"
+                        className="m0 input input-condensed mono right-align"
+                        value={
+                          previousActivityExpenses[year][program].federalActual
+                        }
+                        onChange={handleChange(year, program, 'federalActual')}
+                      />
+                    </td>
+                    <td>
+                      <DollarInput
+                        name={`approved-state-${program}-${year}`}
+                        label={`approved state share for ${program}, FFY ${year}`}
+                        hideLabel
+                        wrapperClass="m0"
+                        className="m0 input input-condensed mono right-align"
+                        value={
+                          previousActivityExpenses[year][program].stateApproved
+                        }
+                        onChange={handleChange(year, program, 'stateApproved')}
+                      />
+                    </td>
+                    <td>
+                      <DollarInput
+                        name={`actual-state-${program}-${year}`}
+                        label={`actual state share for ${program}, FFY ${year}`}
+                        hideLabel
+                        wrapperClass="m0"
+                        className="m0 input input-condensed mono right-align"
+                        value={
+                          previousActivityExpenses[year][program].stateActual
+                        }
+                        onChange={handleChange(year, program, 'stateActual')}
+                      />
+                    </td>
+                  </Fragment>
+                ))}
+                <td>{formatMoney(totals.combined.federalApproved)}</td>
+                <td>{formatMoney(totals.combined.federalActual)}</td>
+                <td>{formatMoney(totals.combined.stateApproved)}</td>
+                <td>{formatMoney(totals.combined.stateActual)}</td>
+                <td>{formatMoney(totals.total.approved)}</td>
+                <td>{formatMoney(totals.total.actual)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
