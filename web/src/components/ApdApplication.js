@@ -18,7 +18,7 @@ const PLACE = { id: 'tx', name: 'Texas' };
 const ApdApplication = () => (
   <div className="site-body">
     <Sidebar place={PLACE} />
-    <div className="site-content p2 sm-p3 md-px4 md-py3">
+    <div className="p2 sm-p4 md-px0 mx-auto col-12 md-col-7">
       <TopBtns />
       <StateProfile />
       <ApdSummary />
