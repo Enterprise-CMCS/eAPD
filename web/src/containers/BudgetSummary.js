@@ -107,20 +107,17 @@ HeaderRow.defaultProps = {
 };
 
 const BudgetSummary = ({ data, years }) => (
-  <div className="py1 overflow-auto">
-    <table
-      className="h6 table-fixed table-bordered table-budget table-budget-summary"
-      style={{ minWidth: 1000 }}
-    >
+  <div className="overflow-auto">
+    <table className="table-cms table-fixed" style={{ minWidth: 1000 }}>
       <thead>
         <tr>
-          <th style={{ width: 200 }} />
+          <th style={{ width: 180 }} />
           {years.map(yr => (
-            <th key={yr} className="bg-black white center" colSpan="3">
+            <th key={yr} className="center" colSpan="3">
               FFY {yr}
             </th>
           ))}
-          <th className="bg-black white center" colSpan="3">
+          <th className="center" colSpan="3">
             Total
           </th>
         </tr>
@@ -128,9 +125,9 @@ const BudgetSummary = ({ data, years }) => (
           <th />
           {[...Array(years.length + 1)].map((_, i) => (
             <Fragment key={i}>
-              <th className="col-4">Total</th>
-              <th className="col-4">Federal share</th>
-              <th className="col-4">State share</th>
+              <th className="col-4 right-align">Total</th>
+              <th className="col-4 right-align">Federal</th>
+              <th className="col-4 right-align">State</th>
             </Fragment>
           ))}
         </tr>
