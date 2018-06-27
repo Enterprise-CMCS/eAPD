@@ -20,7 +20,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": "test child",
-      "className": "h3",
+      "className": "mb4 h3",
     },
     "ref": null,
     "rendered": "test child",
@@ -33,7 +33,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": "test child",
-        "className": "h3",
+        "className": "mb4 h3",
       },
       "ref": null,
       "rendered": "test child",

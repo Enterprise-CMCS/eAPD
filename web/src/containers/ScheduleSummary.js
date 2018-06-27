@@ -8,7 +8,7 @@ import { Section, Subsection } from '../components/Section';
 
 const ScheduleSummary = ({ tableData }) => (
   <Section id="schedule-summary" resource="scheduleSummary">
-    <Subsection resource="scheduleSummary.main" open>
+    <Subsection resource="scheduleSummary.main">
       {tableData.data.length > 0 && (
         <ReactTable
           showPagination={false}
