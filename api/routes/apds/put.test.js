@@ -1,11 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const {
-  can,
-  userCanEditAPD,
-  synchronizeSpecific
-} = require('../../middleware');
+const { can, userCanEditAPD } = require('../../middleware');
 const putEndpoint = require('./put');
 
 tap.test('apds PUT endpoint', async endpointTest => {
