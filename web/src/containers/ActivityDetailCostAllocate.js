@@ -59,14 +59,16 @@ ActivityDetailCostAllocate.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId } }, { aId }) => ({
+export const mapStateToProps = ({ activities: { byId } }, { aId }) => ({
   activity: byId[aId]
 });
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   ActivityDetailCostAllocate
 );
+
+export const raw = ActivityDetailCostAllocate;
