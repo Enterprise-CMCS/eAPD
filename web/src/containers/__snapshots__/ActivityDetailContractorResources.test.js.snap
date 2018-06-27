@@ -213,6 +213,7 @@ ShallowWrapper {
           Add resource
         </button>,
       ],
+      "isKey": false,
       "open": false,
       "resource": "activities.contractorResources",
     },
@@ -1670,6 +1671,7 @@ ShallowWrapper {
             Add resource
           </button>,
         ],
+        "isKey": false,
         "open": false,
         "resource": "activities.contractorResources",
       },

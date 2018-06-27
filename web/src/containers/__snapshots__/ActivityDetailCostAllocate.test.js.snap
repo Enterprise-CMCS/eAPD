@@ -71,6 +71,7 @@ ShallowWrapper {
           />
         </div>,
       ],
+      "isKey": false,
       "open": false,
       "resource": "activities.costAllocate",
     },
@@ -261,6 +262,7 @@ ShallowWrapper {
             />
           </div>,
         ],
+        "isKey": false,
         "open": false,
         "resource": "activities.costAllocate",
       },
