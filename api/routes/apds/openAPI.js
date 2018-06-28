@@ -35,7 +35,7 @@ const openAPI = {
     put: {
       tags: ['APDs'],
       summary: 'Update a specific APD',
-      description: 'Update an apd in the system',
+      description: `Update an APD in the system.  If state profile information is included, the profile information is also updated for the user's state.`,
       parameters: [
         {
           name: 'id',
