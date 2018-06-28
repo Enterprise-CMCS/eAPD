@@ -137,12 +137,12 @@
     description: 
       title: "Activity Overview"
       helpText: "Summarize the needs of the activity for which requested funding will be used (e.g. administrative, outreach, auditing, Public Health Registry Development, etc)"
-      reminder: "Note: This section is limited to 280 characters or less"
+      reminder: "This should be very brief."
       summary: 
         subheader: "Brief Activity Summary"
       detail:
         standard:
-          subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
+          subheader: "Describe the activity and include relevant information."
         hie:
           subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
           helpText: "The activity details must also include a description of three items: how the activity is linked to meaningful use; value proposition to providers, and sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.	Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how you'll complete the activity."
@@ -177,7 +177,7 @@
     contractorResources: 
       title: "Contract Resources"
       subheader: "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section."
-      reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs."
+      reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. It is not necessary to know exact names of all contractors at this stage. "
       labels: 
         entryNumber: "#"
         contractorName: "Name"
