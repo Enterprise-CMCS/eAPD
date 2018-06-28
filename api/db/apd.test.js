@@ -14,8 +14,6 @@ tap.test('apd data model', async apdModelTests => {
           toJSON: Function,
           static: {
             updateableFields: [
-              'status',
-              'period',
               'previousActivitySummary',
               'programOverview',
               'narrativeHIE',
