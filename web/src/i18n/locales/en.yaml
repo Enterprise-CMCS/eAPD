@@ -180,7 +180,7 @@
       reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. It is not necessary to know exact names of all contractors at this stage. "
       labels: 
         entryNumber: "#"
-        contractorName: "Name"
+        contractorName: "Contractor Name"
         description: "Description of Services"
         term: "Term Period"
         start: "Start:"
