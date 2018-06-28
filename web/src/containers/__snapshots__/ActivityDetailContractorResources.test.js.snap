@@ -68,7 +68,7 @@ ShallowWrapper {
                   <th
                     className="col-4"
                   >
-                    Name
+                    Contractor Name
                   </th>
                   <th
                     className="col-5"
@@ -245,7 +245,7 @@ ShallowWrapper {
                   <th
                     className="col-4"
                   >
-                    Name
+                    Contractor Name
                   </th>
                   <th
                     className="col-5"
@@ -406,7 +406,7 @@ ShallowWrapper {
                   <th
                     className="col-4"
                   >
-                    Name
+                    Contractor Name
                   </th>
                   <th
                     className="col-5"
@@ -560,7 +560,7 @@ ShallowWrapper {
                     <th
                       className="col-4"
                     >
-                      Name
+                      Contractor Name
                     </th>
                     <th
                       className="col-5"
@@ -716,7 +716,7 @@ ShallowWrapper {
                     <th
                       className="col-4"
                     >
-                      Name
+                      Contractor Name
                     </th>
                     <th
                       className="col-5"
@@ -758,7 +758,7 @@ ShallowWrapper {
                       <th
                         className="col-4"
                       >
-                        Name
+                        Contractor Name
                       </th>,
                       <th
                         className="col-5"
@@ -806,11 +806,11 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "host",
                       "props": Object {
-                        "children": "Name",
+                        "children": "Contractor Name",
                         "className": "col-4",
                       },
                       "ref": null,
-                      "rendered": "Name",
+                      "rendered": "Contractor Name",
                       "type": "th",
                     },
                     Object {
@@ -1526,7 +1526,7 @@ ShallowWrapper {
                     <th
                       className="col-4"
                     >
-                      Name
+                      Contractor Name
                     </th>
                     <th
                       className="col-5"
@@ -1703,7 +1703,7 @@ ShallowWrapper {
                     <th
                       className="col-4"
                     >
-                      Name
+                      Contractor Name
                     </th>
                     <th
                       className="col-5"
@@ -1864,7 +1864,7 @@ ShallowWrapper {
                     <th
                       className="col-4"
                     >
-                      Name
+                      Contractor Name
                     </th>
                     <th
                       className="col-5"
@@ -2018,7 +2018,7 @@ ShallowWrapper {
                       <th
                         className="col-4"
                       >
-                        Name
+                        Contractor Name
                       </th>
                       <th
                         className="col-5"
@@ -2174,7 +2174,7 @@ ShallowWrapper {
                       <th
                         className="col-4"
                       >
-                        Name
+                        Contractor Name
                       </th>
                       <th
                         className="col-5"
@@ -2216,7 +2216,7 @@ ShallowWrapper {
                         <th
                           className="col-4"
                         >
-                          Name
+                          Contractor Name
                         </th>,
                         <th
                           className="col-5"
@@ -2264,11 +2264,11 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "host",
                         "props": Object {
-                          "children": "Name",
+                          "children": "Contractor Name",
                           "className": "col-4",
                         },
                         "ref": null,
-                        "rendered": "Name",
+                        "rendered": "Contractor Name",
                         "type": "th",
                       },
                       Object {
