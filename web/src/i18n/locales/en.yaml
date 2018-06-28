@@ -53,6 +53,7 @@
       yearsCovered: "What federal fiscal year(s) does this APD cover?"
       labels: 
         desc: "Program Introduction"
+        helpText: "Describe the scope of what you intend to do. It is not meant to replicate the executive summary section. You will have an opportunity to explain in more detail later in this application."
     hit: 
       title: "HIT Overview"
       helpText: "Briefly summarize your planned HIT funded activities contained within this APD, we'll ask for more specific details later."
