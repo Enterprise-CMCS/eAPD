@@ -197,7 +197,7 @@
     statePersonnel: 
       title: "Personnel"
       subheader: "Outline the personnel resources for this section. This includes anyone funded as a part of this activity. This does not include personnel listed in the contract section."
-      helpText: "Personnel costs must include salaries and benefits. FTE% will be generated automatically, after you list a salary amount in the table below."
+      helpText: "Personnel costs must include salaries and benefits. FTE% attributable to the project."
       labels: 
         entryNum: "#"
         title: "Title"
