@@ -51,8 +51,7 @@ tap.test('APD endpoint | PUT /apds/:id', async putAPDTest => {
         const { response, body } = await request.put(url(4000), {
           jar: cookies,
           json: {
-            status: 'new status',
-            period: 'new period'
+            programOverview: 'new overview'
           }
         });
 
@@ -61,8 +60,7 @@ tap.test('APD endpoint | PUT /apds/:id', async putAPDTest => {
           body,
           {
             id: 4000,
-            period: 'new period',
-            status: 'new status',
+            programOverview: 'new overview',
             state: 'mn'
           },
           'sends back the updated APD object'
