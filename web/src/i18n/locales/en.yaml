@@ -50,7 +50,7 @@
       title: "Program Overview"
       helpText: "Provide a high level summary of your state's program, history, and future vision."
       reminder: "Indicate the federal fiscal years for which this APD is requesting funding."
-      yearsCovered: "What year(s) does this APD cover?"
+      yearsCovered: "What federal fiscal year(s) does this APD cover?"
       labels: 
         desc: "Program Introduction"
     hit: 
