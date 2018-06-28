@@ -173,14 +173,9 @@ tap.test('states PUT endpoints', async endpointTest => {
             await handler(req, res);
 
             validTest.ok(
-              // Medicaid office and state POCs are always set - if they
-              // are not passed as arguments, they are set to undefined.
-              // If they're not set, bookshelf throws an error.
               stateModel.set.calledWith({
                 program_benefits: 'new benefits goes here',
-                program_vision: '',
-                medicaid_office: undefined,
-                state_pocs: undefined
+                program_vision: ''
               }),
               'updates the model with only supported fields'
             );
