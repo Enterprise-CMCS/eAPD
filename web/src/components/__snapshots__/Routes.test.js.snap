@@ -34,6 +34,10 @@ ShallowWrapper {
         />,
         <Route
           component={[Function]}
+          path="/dash"
+        />,
+        <Route
+          component={[Function]}
           path="/temp/activities"
         />,
         <Route
@@ -80,6 +84,18 @@ ShallowWrapper {
         "props": Object {
           "component": [Function],
           "path": "/login",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "/dash",
+        "nodeType": "class",
+        "props": Object {
+          "component": [Function],
+          "path": "/dash",
         },
         "ref": null,
         "rendered": null,
@@ -146,6 +162,10 @@ ShallowWrapper {
           />,
           <Route
             component={[Function]}
+            path="/dash"
+          />,
+          <Route
+            component={[Function]}
             path="/temp/activities"
           />,
           <Route
@@ -192,6 +212,18 @@ ShallowWrapper {
           "props": Object {
             "component": [Function],
             "path": "/login",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "/dash",
+          "nodeType": "class",
+          "props": Object {
+            "component": [Function],
+            "path": "/dash",
           },
           "ref": null,
           "rendered": null,
