@@ -50,9 +50,10 @@
       title: "Program Overview"
       helpText: "Provide a high level summary of your state's program, history, and future vision."
       reminder: "Indicate the federal fiscal years for which this APD is requesting funding."
-      yearsCovered: "What year(s) does this APD cover?"
+      yearsCovered: "What federal fiscal year(s) does this APD cover?"
       labels: 
         desc: "Program Introduction"
+        helpText: "Describe the scope of what you intend to do. It is not meant to replicate the executive summary section. You will have an opportunity to explain in more detail later in this application."
     hit: 
       title: "HIT Overview"
       helpText: "Briefly summarize your planned HIT funded activities contained within this APD, we'll ask for more specific details later."
@@ -136,12 +137,12 @@
     description: 
       title: "Activity Overview"
       helpText: "Summarize the needs of the activity for which requested funding will be used (e.g. administrative, outreach, auditing, Public Health Registry Development, etc)"
-      reminder: "Note: This section is limited to 280 characters or less"
+      reminder: "This should be very brief."
       summary: 
         subheader: "Brief Activity Summary"
       detail:
         standard:
-          subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
+          subheader: "Describe the activity and include relevant information."
         hie:
           subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
           helpText: "The activity details must also include a description of three items: how the activity is linked to meaningful use; value proposition to providers, and sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.	Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how you'll complete the activity."
@@ -176,10 +177,10 @@
     contractorResources: 
       title: "Contract Resources"
       subheader: "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section."
-      reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs."
+      reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. It is not necessary to know exact names of all contractors at this stage. "
       labels: 
         entryNumber: "#"
-        contractorName: "Name"
+        contractorName: "Contractor Name"
         description: "Description of Services"
         term: "Term Period"
         start: "Start:"
@@ -196,7 +197,7 @@
     statePersonnel: 
       title: "Personnel"
       subheader: "Outline the personnel resources for this section. This includes anyone funded as a part of this activity. This does not include personnel listed in the contract section."
-      helpText: "Personnel costs must include salaries and benefits. FTE% will be generated automatically, after you list a salary amount in the table below."
+      helpText: "Personnel costs must include salaries and benefits. FTE is percentage attributable to the activity. Enter individuals only once."
       labels: 
         entryNum: "#"
         title: "Title"

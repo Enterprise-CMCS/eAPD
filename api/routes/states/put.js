@@ -108,15 +108,7 @@ module.exports = (app, dataHelper = defaultDataHelper) => {
           .end();
       }
 
-      state.set({
-        ...newData,
-        // These fields have to be stringified, which is kind of unexpected
-        // since bookshelf converts them into objects when we read them...
-        // They also must be present, even if undefined, or bookshelf throws
-        // an error.
-        medicaid_office: JSON.stringify(newData.medicaid_office),
-        state_pocs: JSON.stringify(newData.state_pocs)
-      });
+      state.set(newData);
       await state.save();
 
       // Overwrite the old data with the new, and we will have what now
