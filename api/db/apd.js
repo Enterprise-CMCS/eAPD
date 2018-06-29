@@ -109,8 +109,6 @@ module.exports = () => ({
 
     static: {
       updateableFields: [
-        'status',
-        'period',
         'federalCitations',
         'previousActivitySummary',
         'programOverview',
