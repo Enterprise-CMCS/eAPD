@@ -99,7 +99,6 @@ const reducer = (state = initialState, action) => {
         fetching: false,
         loaded: true,
         byId: action.data.reduce((acc, apd) => {
-          // TODO: capture previous activity expenses when it's returned by the API
           const {
             id,
             activities,
@@ -127,24 +126,25 @@ const reducer = (state = initialState, action) => {
               hitNarrative,
               mmisNarrative,
               overview,
-              previousActivityExpenses: previousActivityExpenses
-                ? previousActivityExpenses.reduce(
-                    (previous, year) => ({
-                      ...previous,
-                      [year.year]: {
-                        hie: year.hie,
-                        hit: year.hit
-                      }
-                    }),
-                    {}
-                  )
-                : defaultAPDYearOptions.reduce(
-                    (previous, year) => ({
-                      ...previous,
-                      [year - 2]: getPreviousActivityExpense()
-                    }),
-                    {}
-                  ),
+              previousActivityExpenses:
+                previousActivityExpenses && previousActivityExpenses.length
+                  ? previousActivityExpenses.reduce(
+                      (previous, year) => ({
+                        ...previous,
+                        [year.year]: {
+                          hie: year.hie,
+                          hit: year.hit
+                        }
+                      }),
+                      {}
+                    )
+                  : defaultAPDYearOptions.reduce(
+                      (previous, year) => ({
+                        ...previous,
+                        [year - 2]: getPreviousActivityExpense()
+                      }),
+                      {}
+                    ),
               previousActivitySummary: previousActivitySummary || '',
               stateProfile,
               years: (years || defaultAPDYears).map(y => `${y}`),
