@@ -10,11 +10,13 @@ module.exports = (app, VersionModel = defaultVersionModel) => {
     userCanEditAPD(),
     loadApd(),
     async (req, res) => {
+      const tables = req.body.tables || null;
       const apd = req.meta.apd;
+
       const version = VersionModel.forge({
         apd_id: apd.get('id'),
         user_id: req.user.id,
-        content: apd.toJSON()
+        content: { ...tables, ...apd.toJSON() }
       });
 
       apd.set({ status: 'in review' });

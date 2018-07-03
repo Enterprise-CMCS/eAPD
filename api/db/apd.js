@@ -25,18 +25,22 @@ module.exports = () => ({
     format(attributes) {
       const out = { ...attributes };
       [
+        ['federalCitations', 'federal_citations'],
         ['previousActivitySummary', 'previous_activity_summary'],
         ['programOverview', 'program_overview'],
         ['narrativeHIE', 'narrative_hie'],
         ['narrativeHIT', 'narrative_hit'],
         ['narrativeMMIS', 'narrative_mmis']
-      ].forEach(([a, b]) => {
-        delete out[a];
-        if (attributes[a] !== undefined) {
-          out[b] = attributes[a];
+      ].forEach(([camel, snake]) => {
+        delete out[camel];
+        if (attributes[camel] !== undefined) {
+          out[snake] = attributes[camel];
         }
       });
 
+      if (attributes.federalCitations) {
+        out.federal_citations = JSON.stringify(out.federal_citations);
+      }
       if (attributes.years) {
         out.years = JSON.stringify(attributes.years);
       }
@@ -72,6 +76,7 @@ module.exports = () => ({
       return {
         id: this.get('id'),
         activities: this.related('activities').toJSON(),
+        federalCitations: this.get('federal_citations'),
         keyPersonnel: this.related('keyPersonnel').toJSON(),
         narrativeHIE: this.get('narrative_hie'),
         narrativeHIT: this.get('narrative_hit'),
@@ -104,6 +109,7 @@ module.exports = () => ({
 
     static: {
       updateableFields: [
+        'federalCitations',
         'previousActivitySummary',
         'programOverview',
         'narrativeHIE',
