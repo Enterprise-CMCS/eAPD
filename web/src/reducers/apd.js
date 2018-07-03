@@ -99,19 +99,19 @@ const reducer = (state = initialState, action) => {
         fetching: false,
         loaded: true,
         byId: action.data.reduce((acc, apd) => {
-          // TODO: capture previous activity expenses when it's returned by the API
           const {
             id,
-            years,
-            programOverview: overview,
-            narrativeHIT: hitNarrative,
+            activities,
+            federalCitations: assurancesAndCompliance,
+            incentivePayments,
             narrativeHIE: hieNarrative,
+            narrativeHIT: hitNarrative,
             narrativeMMIS: mmisNarrative,
             previousActivityExpenses,
             previousActivitySummary,
-            incentivePayments,
+            programOverview: overview,
             stateProfile,
-            activities
+            years
           } =
             apd || {};
 
@@ -119,36 +119,12 @@ const reducer = (state = initialState, action) => {
             ...acc,
             [apd.id]: {
               id,
-              overview,
-              hitNarrative,
-              hieNarrative,
-              mmisNarrative,
-              years: (years || defaultAPDYears).map(y => `${y}`),
-              yearOptions: defaultAPDYearOptions,
-              previousActivitySummary: previousActivitySummary || '',
               activities,
-              // TODO: Get these from the API
-              assurancesAndCompliance: {
-                ...initialState.data.assurancesAndCompliance
-              },
-              previousActivityExpenses: previousActivityExpenses
-                ? previousActivityExpenses.reduce(
-                    (previous, year) => ({
-                      ...previous,
-                      [year.year]: {
-                        hie: year.hie,
-                        hit: year.hit
-                      }
-                    }),
-                    {}
-                  )
-                : defaultAPDYearOptions.reduce(
-                    (previous, year) => ({
-                      ...previous,
-                      [year - 2]: getPreviousActivityExpense()
-                    }),
-                    {}
-                  ),
+              assurancesAndCompliance,
+              hieNarrative,
+              hitNarrative,
+              mmisNarrative,
+              overview,
               incentivePayments:
                 incentivePayments && incentivePayments.length
                   ? incentivePayments.reduce(
@@ -191,7 +167,30 @@ const reducer = (state = initialState, action) => {
                       }
                     )
                   : initIncentiveData(),
-              stateProfile
+              previousActivityExpenses:
+                previousActivityExpenses && previousActivityExpenses.length
+                  ? previousActivityExpenses.reduce(
+                      (previous, year) => ({
+                        ...previous,
+                        [year.year]: {
+                          hie: year.hie,
+                          hit: year.hit
+                        }
+                      }),
+                      {}
+                    )
+                  : defaultAPDYearOptions.reduce(
+                      (previous, year) => ({
+                        ...previous,
+                        [year - 2]: getPreviousActivityExpense()
+                      }),
+                      {}
+                    ),
+              previousActivitySummary: previousActivitySummary || '',
+
+              stateProfile,
+              years: (years || defaultAPDYears).map(y => `${y}`),
+              yearOptions: defaultAPDYearOptions
             }
           };
         }, {}),

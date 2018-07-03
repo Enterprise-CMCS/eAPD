@@ -273,6 +273,11 @@ module.exports = {
           activities: {
             $ref: '#/components/schemas/activity'
           },
+          federalCitations: {
+            type: 'object',
+            description:
+              'Federal citations that states must assert compliance with. This is a free-form object.'
+          },
           incentivePayments: arrayOf({
             type: 'object',
             properties: {
