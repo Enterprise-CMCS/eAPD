@@ -120,6 +120,7 @@ const reducer = (state = initialState, action) => {
             narrativeHIE: hieNarrative,
             narrativeHIT: hitNarrative,
             narrativeMMIS: mmisNarrative,
+            pointsOfContact,
             previousActivityExpenses,
             previousActivitySummary,
             programOverview: overview,
@@ -180,6 +181,7 @@ const reducer = (state = initialState, action) => {
                       }
                     )
                   : initIncentiveData(),
+              pointsOfContact,
               previousActivityExpenses:
                 previousActivityExpenses && previousActivityExpenses.length
                   ? previousActivityExpenses.reduce(

@@ -17,6 +17,7 @@ describe('APD reducer', () => {
       hieNarrative: '',
       mmisNarrative: '',
       assurancesAndCompliance: initialAssurances,
+      pointsOfContact: [{ email: '', name: '', position: '' }],
       previousActivitySummary: '',
       previousActivityExpenses: {
         2016: getPreviousActivityExpense(),
@@ -65,6 +66,14 @@ describe('APD reducer', () => {
     });
   });
 
+  it('should handle adding a POC', () => {
+    expect(
+      apd({ data: { pointsOfContact: [] } }, { type: 'ADD_APD_POC' })
+    ).toEqual({
+      data: { pointsOfContact: [{ email: '', name: '', position: '' }] }
+    });
+  });
+
   it('should handle a request to get an APD', () => {
     expect(apd(initialState, { type: 'GET_APD_REQUEST' })).toEqual({
       byId: {},
@@ -85,6 +94,7 @@ describe('APD reducer', () => {
         federalCitations:
           'The Third Sentence of the Ninth Paragraph of the Three Hundred and Twenty-First Section of the Ninety-Fifth Part of the Forty-Fifth Title of the Federal Code of Regulations',
         programOverview: 'moop moop',
+        pointsOfContact: 'here be points of contact',
         narrativeHIT: 'HIT, but as a play',
         narrativeHIE: 'HIE, but as a novel',
         narrativeMMIS: 'MMIS, but as a script',
@@ -171,6 +181,7 @@ describe('APD reducer', () => {
                 }
               }
             },
+            pointsOfContact: 'here be points of contact',
             previousActivitySummary: '',
             previousActivityExpenses: {
               2016: getPreviousActivityExpense(),
@@ -187,6 +198,7 @@ describe('APD reducer', () => {
           hieNarrative: '',
           mmisNarrative: '',
           assurancesAndCompliance: initialAssurances,
+          pointsOfContact: [{ email: '', name: '', position: '' }],
           previousActivitySummary: '',
           previousActivityExpenses: {
             2016: getPreviousActivityExpense(),
