@@ -149,7 +149,48 @@ const reducer = (state = initialState, action) => {
                     }),
                     {}
                   ),
-              incentivePayments: incentivePayments || initIncentiveData(),
+              incentivePayments:
+                incentivePayments && incentivePayments.length
+                  ? incentivePayments.reduce(
+                      (ipAcc, ipByQuarter) => {
+                        const ip = ipAcc;
+                        ip.ehAmt[ipByQuarter.year] = {
+                          1: ipByQuarter.q1.ehPayment,
+                          2: ipByQuarter.q2.ehPayment,
+                          3: ipByQuarter.q3.ehPayment,
+                          4: ipByQuarter.q4.ehPayment
+                        };
+
+                        ip.ehCt[ipByQuarter.year] = {
+                          1: ipByQuarter.q1.ehCount,
+                          2: ipByQuarter.q2.ehCount,
+                          3: ipByQuarter.q3.ehCount,
+                          4: ipByQuarter.q4.ehCount
+                        };
+
+                        ip.epAmt[ipByQuarter.year] = {
+                          1: ipByQuarter.q1.epPayment,
+                          2: ipByQuarter.q2.epPayment,
+                          3: ipByQuarter.q3.epPayment,
+                          4: ipByQuarter.q4.epPayment
+                        };
+
+                        ip.epCt[ipByQuarter.year] = {
+                          1: ipByQuarter.q1.epCount,
+                          2: ipByQuarter.q2.epCount,
+                          3: ipByQuarter.q3.epCount,
+                          4: ipByQuarter.q4.epCount
+                        };
+                        return ip;
+                      },
+                      {
+                        ehAmt: {},
+                        ehCt: {},
+                        epAmt: {},
+                        epCt: {}
+                      }
+                    )
+                  : initIncentiveData(),
               stateProfile
             }
           };
