@@ -237,6 +237,40 @@ describe('apd actions', () => {
       apd: {
         data: {
           id: 'id-to-update',
+          incentivePayments: {
+            ehAmt: {
+              1337: {
+                1: 1,
+                2: 2,
+                3: 3,
+                4: 4
+              }
+            },
+            ehCt: {
+              1337: {
+                1: 10,
+                2: 20,
+                3: 30,
+                4: 40
+              }
+            },
+            epAmt: {
+              1337: {
+                1: 100,
+                2: 200,
+                3: 300,
+                4: 400
+              }
+            },
+            epCt: {
+              1337: {
+                1: 1000,
+                2: 2000,
+                3: 3000,
+                4: 4000
+              }
+            }
+          },
           hieNarrative: 'HIE narrative text',
           hitNarrative: 'HIT narrative text',
           mmisNarrative: 'MMIS narrative text',
