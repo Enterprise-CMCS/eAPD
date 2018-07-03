@@ -8,6 +8,7 @@ const user = require('./user');
 const authorization = require('./authorization');
 const state = require('./state');
 const apd = require('./apd');
+const apdIncentivePayment = require('./apdIncentivePayment');
 const apdVersion = require('./apdVersion');
 const keyPersonnel = require('./apdKeyPersonnel');
 const previousActivityExpense = require('./apdPreviousActivityExpense');
@@ -25,6 +26,7 @@ const setup = (
     authorization(),
     state(),
     apd(),
+    apdIncentivePayment(),
     apdVersion(),
     keyPersonnel(),
     previousActivityExpense(),

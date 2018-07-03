@@ -6,6 +6,10 @@ module.exports = () => ({
       return this.hasMany('apdActivity');
     },
 
+    incentivePayments() {
+      return this.hasMany('apdIncentivePayment');
+    },
+
     keyPersonnel() {
       return this.hasMany('apdKeyPersonnel');
     },
@@ -77,6 +81,7 @@ module.exports = () => ({
         id: this.get('id'),
         activities: this.related('activities').toJSON(),
         federalCitations: this.get('federal_citations'),
+        incentivePayments: this.related('incentivePayments').toJSON(),
         keyPersonnel: this.related('keyPersonnel').toJSON(),
         narrativeHIE: this.get('narrative_hie'),
         narrativeHIT: this.get('narrative_hit'),
@@ -121,6 +126,7 @@ module.exports = () => ({
       foreignKey: 'apd_id',
       owns: {
         activities: 'apdActivity',
+        incentivePayments: 'apdIncentivePayment',
         keyPersonnel: 'apdKeyPersonnel',
         previousActivityExpenses: 'apdPreviousActivityExpense'
       },
@@ -135,6 +141,7 @@ module.exports = () => ({
         'activities.schedule',
         'activities.statePersonnel',
         'activities.statePersonnel.years',
+        'incentivePayments',
         'keyPersonnel',
         'keyPersonnel.years',
         'previousActivityExpenses'

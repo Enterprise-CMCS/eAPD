@@ -114,9 +114,40 @@ export const saveApd = () => (dispatch, state) => {
     activities: { byId: activitiesByID }
   } = state();
 
+  const incentivePayments = Object.entries(
+    updatedApd.incentivePayments.ehAmt
+  ).map(([year, quarters]) => ({
+    year,
+    q1: {
+      ehPayment: quarters[1],
+      ehCount: updatedApd.incentivePayments.ehCt[year][1],
+      epPayment: updatedApd.incentivePayments.epAmt[year][1],
+      epCount: updatedApd.incentivePayments.epCt[year][1]
+    },
+    q2: {
+      ehPayment: quarters[2],
+      ehCount: updatedApd.incentivePayments.ehCt[year][2],
+      epPayment: updatedApd.incentivePayments.epAmt[year][2],
+      epCount: updatedApd.incentivePayments.epCt[year][2]
+    },
+    q3: {
+      ehPayment: quarters[3],
+      ehCount: updatedApd.incentivePayments.ehCt[year][3],
+      epPayment: updatedApd.incentivePayments.epAmt[year][3],
+      epCount: updatedApd.incentivePayments.epCt[year][3]
+    },
+    q4: {
+      ehPayment: quarters[4],
+      ehCount: updatedApd.incentivePayments.ehCt[year][4],
+      epPayment: updatedApd.incentivePayments.epAmt[year][4],
+      epCount: updatedApd.incentivePayments.epCt[year][4]
+    }
+  }));
+
   const apd = {
     activities: [],
     federalCitations: updatedApd.assurancesAndCompliance,
+    incentivePayments,
     narrativeHIE: updatedApd.hieNarrative,
     narrativeHIT: updatedApd.hitNarrative,
     narrativeMMIS: updatedApd.mmisNarrative,
