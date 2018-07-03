@@ -55,11 +55,13 @@ describe('apd actions', () => {
   });
 
   it('selectAPD should create SELECT_APD action and redirect to /apd', () => {
-    const store = mockStore({ apd: { byId: { apdID: 'hello there' } } });
+    const state = { apd: { byId: { apdID: 'hello there' } } };
+    const store = mockStore(state);
     const push = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
     const expectedActions = [
       { type: actions.SELECT_APD, apd: 'hello there' },
+      { type: actions.UPDATE_BUDGET, state },
       { type: 'FAKE_PUSH', pushRoute: '/apd' }
     ];
 
