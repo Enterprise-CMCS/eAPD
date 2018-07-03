@@ -1,5 +1,5 @@
 /*
- * Graphviz of '<open file '<stdin>', mode 'r' at 0x7fb5bebb40c0>', created 2018-07-03 00:08:55.948051
+ * Graphviz of '<open file '<stdin>', mode 'r' at 0x7fb5c1f140c0>', created 2018-07-03 17:22:49.276882
  * Generated from https://github.com/rm-hull/sql_graphviz
  */
 digraph g { graph [ rankdir = "LR" ];
@@ -263,6 +263,7 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="medicaid_office_state"><font face="Times-bold">medicaid_office_state</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="medicaid_office_zip"><font face="Times-bold">medicaid_office_zip</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="previous_activity_summary"><font face="Times-bold">previous_activity_summary</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="federal_citations"><font face="Times-bold">federal_citations</font>  <font color="#535353">json</font></td></tr>
       </table>
     >];
 

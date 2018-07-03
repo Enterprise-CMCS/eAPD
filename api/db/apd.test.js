@@ -17,11 +17,11 @@ tap.test('apd data model', async apdModelTests => {
           previousActivityExpenses: Function,
           state: Function,
           versions: Function,
-
           format: Function,
           toJSON: Function,
           static: {
             updateableFields: [
+              'federalCitations',
               'previousActivitySummary',
               'programOverview',
               'narrativeHIE',
@@ -178,6 +178,7 @@ tap.test('apd data model', async apdModelTests => {
       const attributes = {
         fine: 'no change',
         good: 'also no change',
+        federalCitations: { obj: 'gets converted', toJson: 3 },
         programOverview: 'changed over',
         narrativeHIE: undefined,
         narrativeHIT: null,
@@ -204,6 +205,7 @@ tap.test('apd data model', async apdModelTests => {
         {
           fine: 'no change',
           good: 'also no change',
+          federal_citations: '{"obj":"gets converted","toJson":3}',
           previous_activity_summary: 'blip blop',
           program_overview: 'changed over',
           medicaid_director_name: 'their name',
@@ -241,6 +243,7 @@ tap.test('apd data model', async apdModelTests => {
     self.get.withArgs('id').returns('apd-id');
     self.get.withArgs('state_id').returns('apd-state');
     self.get.withArgs('status').returns('apd-status');
+    self.get.withArgs('federal_citations').returns('assurances and stuff');
     self.get.withArgs('period').returns('apd-period');
     self.get
       .withArgs('previous_activity_summary')
@@ -273,6 +276,7 @@ tap.test('apd data model', async apdModelTests => {
       {
         id: 'apd-id',
         activities: 'apd-activities',
+        federalCitations: 'assurances and stuff',
         incentivePayments: 'incentive-payments',
         keyPersonnel: 'key-personnel',
         narrativeHIE: 'apd-hie',
