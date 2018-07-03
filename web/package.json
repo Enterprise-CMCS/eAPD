@@ -27,11 +27,15 @@
     "apd"
   ],
   "contributors": [
+    "Nicolas Aretakis",
+    "Ronald Bronson",
     "Nicole Fenton",
     "Meghana Khandekar",
+    "Jerome Lee",
     "Nikki Lee",
+    "Laura Poncé",
     "Brendan Sudol",
-    "Greg Walker"
+    "Greg Walker" 
   ],
   "license": "CC0-1.0",
   "bugs": {
