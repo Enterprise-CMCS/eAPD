@@ -1,6 +1,7 @@
 import u from 'updeep';
 
 import {
+  ADD_APD_POC,
   GET_APD_REQUEST,
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
@@ -49,6 +50,8 @@ export const getPreviousActivityExpense = () => ({
   }
 });
 
+export const getPointOfContact = () => ({ name: '', position: '', email: '' });
+
 const initialState = {
   data: {
     id: '',
@@ -58,6 +61,7 @@ const initialState = {
     hitNarrative: '',
     hieNarrative: '',
     mmisNarrative: '',
+    pointsOfContact: [getPointOfContact()],
     previousActivitySummary: '',
     previousActivityExpenses: defaultAPDYearOptions.reduce(
       (acc, year) => ({
@@ -91,6 +95,15 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_APD_POC:
+      return u(
+        {
+          data: {
+            pointsOfContact: pocs => [...pocs, getPointOfContact()]
+          }
+        },
+        state
+      );
     case GET_APD_REQUEST:
       return { ...state, fetching: true, error: '' };
     case GET_APD_SUCCESS: {

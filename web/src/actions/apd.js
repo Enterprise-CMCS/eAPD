@@ -4,6 +4,7 @@ import { notify } from './notification';
 import axios from '../util/api';
 
 export const ADD_APD_KEY_PERSON = 'ADD_APD_KEY_PERSON';
+export const ADD_APD_POC = 'ADD_APD_POC';
 export const CREATE_APD = 'CREATE_APD';
 export const CREATE_APD_REQUEST = 'CREATE_APD_REQUEST';
 export const CREATE_APD_SUCCESS = 'CREATE_APD_SUCCESS';
@@ -22,6 +23,8 @@ export const SUBMIT_APD_FAILURE = 'SUBMIT_APD_FAILURE';
 export const UPDATE_APD = 'UPDATE_APD';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
 export const UPDATE_BUDGET_QUARTERLY_SHARE = 'UPDATE_BUDGET_QUARTERLY_SHARE';
+
+export const addPointOfContact = () => ({ type: ADD_APD_POC });
 
 export const updateBudget = () => (dispatch, getState) =>
   dispatch({ type: UPDATE_BUDGET, state: getState() });
