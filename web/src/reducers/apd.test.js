@@ -88,6 +88,35 @@ describe('APD reducer', () => {
         narrativeHIT: 'HIT, but as a play',
         narrativeHIE: 'HIE, but as a novel',
         narrativeMMIS: 'MMIS, but as a script',
+        incentivePayments: [
+          {
+            year: 1909, // Taft becomes President; good year
+            q1: {
+              ehPayment: 1,
+              ehCount: 2,
+              epPayment: 3,
+              epCount: 4
+            },
+            q2: {
+              ehPayment: 10,
+              ehCount: 20,
+              epPayment: 30,
+              epCount: 40
+            },
+            q3: {
+              ehPayment: 100,
+              ehCount: 200,
+              epPayment: 300,
+              epCount: 400
+            },
+            q4: {
+              ehPayment: 1000,
+              ehCount: 2000,
+              epPayment: 3000,
+              epCount: 4000
+            }
+          }
+        ],
         stateProfile: 'this is the state profile as a string',
         years: [2013, 2014]
       };
@@ -108,13 +137,46 @@ describe('APD reducer', () => {
             hitNarrative: 'HIT, but as a play',
             hieNarrative: 'HIE, but as a novel',
             mmisNarrative: 'MMIS, but as a script',
+            incentivePayments: {
+              ehAmt: {
+                1909: {
+                  1: 1,
+                  2: 10,
+                  3: 100,
+                  4: 1000
+                }
+              },
+              ehCt: {
+                1909: {
+                  1: 2,
+                  2: 20,
+                  3: 200,
+                  4: 2000
+                }
+              },
+              epAmt: {
+                1909: {
+                  1: 3,
+                  2: 30,
+                  3: 300,
+                  4: 3000
+                }
+              },
+              epCt: {
+                1909: {
+                  1: 4,
+                  2: 40,
+                  3: 400,
+                  4: 4000
+                }
+              }
+            },
             previousActivitySummary: '',
             previousActivityExpenses: {
               2016: getPreviousActivityExpense(),
               2017: getPreviousActivityExpense(),
               2018: getPreviousActivityExpense()
             },
-            incentivePayments,
             stateProfile: 'this is the state profile as a string'
           }
         },
