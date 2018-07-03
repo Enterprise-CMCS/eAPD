@@ -10,6 +10,14 @@ tap.test('apd data model', async apdModelTests => {
       {
         apd: {
           tableName: 'apds',
+
+          activities: Function,
+          incentivePayments: Function,
+          keyPersonnel: Function,
+          previousActivityExpenses: Function,
+          state: Function,
+          versions: Function,
+
           format: Function,
           toJSON: Function,
           static: {
@@ -25,7 +33,9 @@ tap.test('apd data model', async apdModelTests => {
             foreignKey: 'apd_id',
             owns: {
               activities: 'apdActivity',
-              keyPersonnel: 'apdKeyPersonnel'
+              incentivePayments: 'apdIncentivePayment',
+              keyPersonnel: 'apdKeyPersonnel',
+              previousActivityExpenses: 'apdPreviousActivityExpense'
             },
             withRelated: [
               { activities: Function },
@@ -38,6 +48,7 @@ tap.test('apd data model', async apdModelTests => {
               'activities.schedule',
               'activities.statePersonnel',
               'activities.statePersonnel.years',
+              'incentivePayments',
               'keyPersonnel',
               'keyPersonnel.years',
               'previousActivityExpenses'
@@ -46,36 +57,6 @@ tap.test('apd data model', async apdModelTests => {
         }
       },
       'get the expected model definitions'
-    );
-
-    setupTests.type(
-      apd.apd.activities,
-      'function',
-      'creates an activities relationship for the apd model'
-    );
-
-    setupTests.type(
-      apd.apd.keyPersonnel,
-      'function',
-      'creates a key personnel relationship for the apd model'
-    );
-
-    setupTests.type(
-      apd.apd.previousActivityExpenses,
-      'function',
-      'creates a previous activity expenses relationship for the apd model'
-    );
-
-    setupTests.type(
-      apd.apd.state,
-      'function',
-      'creates a state relationship for the apd model'
-    );
-
-    setupTests.type(
-      apd.apd.versions,
-      'function',
-      'creates a versions relationship for the apd model'
     );
   });
 
@@ -106,6 +87,23 @@ tap.test('apd data model', async apdModelTests => {
         'sets up the relationship mapping to activities'
       );
       activitiesTests.equal(output, 'florp', 'returns the expected value');
+    }
+  );
+
+  apdModelTests.test(
+    'apd model sets up incentive payments relationship',
+    async test => {
+      const self = {
+        hasMany: sinon.stub().returns('snop')
+      };
+
+      const output = apd.apd.incentivePayments.bind(self)();
+
+      test.ok(
+        self.hasMany.calledWith('apdIncentivePayment'),
+        'sets up the relationship mapping to incentive payments'
+      );
+      test.equal(output, 'snop', 'returns the expected value');
     }
   );
 
@@ -235,6 +233,9 @@ tap.test('apd data model', async apdModelTests => {
       .withArgs('activities')
       .returns({ toJSON: sinon.stub().returns('apd-activities') });
     self.related
+      .withArgs('incentivePayments')
+      .returns({ toJSON: sinon.stub().returns('incentive-payments') });
+    self.related
       .withArgs('keyPersonnel')
       .returns({ toJSON: sinon.stub().returns('key-personnel') });
     self.get.withArgs('id').returns('apd-id');
@@ -272,6 +273,7 @@ tap.test('apd data model', async apdModelTests => {
       {
         id: 'apd-id',
         activities: 'apd-activities',
+        incentivePayments: 'incentive-payments',
         keyPersonnel: 'key-personnel',
         narrativeHIE: 'apd-hie',
         narrativeHIT: 'apd-hit',
