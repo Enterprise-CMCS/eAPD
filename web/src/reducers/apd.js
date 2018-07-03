@@ -102,16 +102,17 @@ const reducer = (state = initialState, action) => {
           // TODO: capture previous activity expenses when it's returned by the API
           const {
             id,
-            years,
-            programOverview: overview,
-            narrativeHIT: hitNarrative,
+            activities,
+            federalCitations: assurancesAndCompliance,
+            incentivePayments,
             narrativeHIE: hieNarrative,
+            narrativeHIT: hitNarrative,
             narrativeMMIS: mmisNarrative,
             previousActivityExpenses,
             previousActivitySummary,
-            incentivePayments,
+            programOverview: overview,
             stateProfile,
-            activities
+            years
           } =
             apd || {};
 
@@ -119,18 +120,13 @@ const reducer = (state = initialState, action) => {
             ...acc,
             [apd.id]: {
               id,
-              overview,
-              hitNarrative,
-              hieNarrative,
-              mmisNarrative,
-              years: (years || defaultAPDYears).map(y => `${y}`),
-              yearOptions: defaultAPDYearOptions,
-              previousActivitySummary: previousActivitySummary || '',
               activities,
-              // TODO: Get these from the API
-              assurancesAndCompliance: {
-                ...initialState.data.assurancesAndCompliance
-              },
+              assurancesAndCompliance,
+              incentivePayments: incentivePayments || initIncentiveData(),
+              hieNarrative,
+              hitNarrative,
+              mmisNarrative,
+              overview,
               previousActivityExpenses: previousActivityExpenses
                 ? previousActivityExpenses.reduce(
                     (previous, year) => ({
@@ -149,8 +145,10 @@ const reducer = (state = initialState, action) => {
                     }),
                     {}
                   ),
-              incentivePayments: incentivePayments || initIncentiveData(),
-              stateProfile
+              previousActivitySummary: previousActivitySummary || '',
+              stateProfile,
+              years: (years || defaultAPDYears).map(y => `${y}`),
+              yearOptions: defaultAPDYearOptions
             }
           };
         }, {}),

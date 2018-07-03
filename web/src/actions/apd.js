@@ -116,6 +116,7 @@ export const saveApd = () => (dispatch, state) => {
 
   const apd = {
     activities: [],
+    federalCitations: updatedApd.assurancesAndCompliance,
     narrativeHIE: updatedApd.hieNarrative,
     narrativeHIT: updatedApd.hitNarrative,
     narrativeMMIS: updatedApd.mmisNarrative,
