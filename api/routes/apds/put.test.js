@@ -57,7 +57,17 @@ tap.test('apds PUT endpoint', async endpointTest => {
 
       await putEndpoint.updateStateProfile(StateModel)({
         user: { state: 'zz' },
-        body: { stateProfile: { info: 'goes here', toBe: 'saved' } }
+        body: {
+          stateProfile: { info: 'goes here', toBe: 'saved' },
+          pointsOfContact: [
+            {
+              id: 'remove',
+              name: 'Bob',
+              position: 'Builder',
+              email: 'bob@builder.org'
+            }
+          ]
+        }
       });
 
       test.ok(
@@ -70,6 +80,12 @@ tap.test('apds PUT endpoint', async endpointTest => {
           toBe: 'saved'
         }),
         'updates the state with profile info from the request body'
+      );
+      test.ok(
+        state.set.calledWith('state_pocs', [
+          { name: 'Bob', position: 'Builder', email: 'bob@builder.org' }
+        ]),
+        'updates the state with points of contact from the request body'
       );
     }
   );
