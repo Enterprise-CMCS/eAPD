@@ -70,7 +70,7 @@ class ActivityDetailGoals extends Component {
         <button
           type="button"
           className="btn btn-primary bg-black"
-          onClick={this.handleAdd()}
+          onClick={this.handleAdd}
         >
           {t('activities.goals.addGoalButtonText')}
         </button>
