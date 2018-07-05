@@ -30,7 +30,7 @@ ShallowWrapper {
           className="p2 sm-p4 md-px0 mx-auto col-12 md-col-7"
         >
           <Connect(TopBtns) />
-          <Connect(ApdStateProfile) />
+          <ApdStateProfile />
           <Connect(ApdSummary) />
           <Connect(PreviousActivities) />
           <Connect(Activities) />
@@ -66,7 +66,7 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <Connect(TopBtns) />,
-            <Connect(ApdStateProfile) />,
+            <ApdStateProfile />,
             <Connect(ApdSummary) />,
             <Connect(PreviousActivities) />,
             <Connect(Activities) />,
@@ -92,7 +92,7 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {},
             "ref": null,
             "rendered": null,
@@ -195,7 +195,7 @@ ShallowWrapper {
             className="p2 sm-p4 md-px0 mx-auto col-12 md-col-7"
           >
             <Connect(TopBtns) />
-            <Connect(ApdStateProfile) />
+            <ApdStateProfile />
             <Connect(ApdSummary) />
             <Connect(PreviousActivities) />
             <Connect(Activities) />
@@ -231,7 +231,7 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <Connect(TopBtns) />,
-              <Connect(ApdStateProfile) />,
+              <ApdStateProfile />,
               <Connect(ApdSummary) />,
               <Connect(PreviousActivities) />,
               <Connect(Activities) />,
@@ -257,7 +257,7 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {},
               "ref": null,
               "rendered": null,
