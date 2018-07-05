@@ -12,6 +12,10 @@ exports.seed = async knex => {
 
   await knex('activity_goals').del();
 
+  await knex('apd_incentive_payments').del();
+
+  await knex('apd_points_of_contact').del();
+
   await knex('activity_approaches').del();
   await knex('activity_state_personnel_yearly').del();
   await knex('activity_state_peronnel').del();

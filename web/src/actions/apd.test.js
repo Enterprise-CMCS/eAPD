@@ -276,6 +276,7 @@ describe('apd actions', () => {
           hieNarrative: 'HIE narrative text',
           hitNarrative: 'HIT narrative text',
           mmisNarrative: 'MMIS narrative text',
+          pointsOfContact: 'people to call if stuff goes sour',
           previousActivityExpenses: {
             1066: {
               hie: 'battle of hastings',

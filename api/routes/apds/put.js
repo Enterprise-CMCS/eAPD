@@ -16,10 +16,23 @@ const syncResponder = (ApdModel = defaultApdModel) => req => ({
 });
 
 const updateStateProfile = (StateModel = defaultStateModel) => async req => {
-  const profile = req.body.stateProfile;
-  if (profile) {
+  const { pointsOfContact, stateProfile } = req.body;
+  if (pointsOfContact || stateProfile) {
     const state = await StateModel.where({ id: req.user.state }).fetch();
-    state.set('medicaid_office', profile);
+    if (pointsOfContact) {
+      state.set(
+        'state_pocs',
+        pointsOfContact.map(p => ({
+          // don't save the id
+          name: p.name,
+          position: p.position,
+          email: p.email
+        }))
+      );
+    }
+    if (stateProfile) {
+      state.set('medicaid_office', stateProfile);
+    }
     await state.save();
   }
 };

@@ -303,6 +303,14 @@ module.exports = {
             description:
               'Brief description of MMIS-funded activities contained in this APD'
           },
+          pointsOfContact: arrayOf({
+            type: 'object',
+            properties: {
+              name: { type: 'string', description: `Contact's name` },
+              position: { type: 'string', description: `Contact's position` },
+              email: { type: 'string', description: `Contact's email address` }
+            }
+          }),
           previousActivityExpenses: arrayOf({
             type: 'object',
             properties: {
