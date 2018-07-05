@@ -51,6 +51,7 @@ class ApdStateProfile extends Component {
               onChange={this.handleChange('email', i)}
             />
             <DeleteButton
+              className="btn btn-small btn-outline bg-white blue h5"
               remove={() => removePoc(i)}
               resource={`${tRoot}.delete`}
             />
