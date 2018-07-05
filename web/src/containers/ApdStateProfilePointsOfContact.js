@@ -47,7 +47,9 @@ class ApdStateProfile extends Component {
           </div>
         ))}
         <button type="button" className="btn btn-primary" onClick={addPoc}>
-          {t('apd.stateProfile.pointsOfContact.labels.addButton')}
+          {t('apd.stateProfile.pointsOfContact.labels.addButton', {
+            count: poc.length
+          })}
         </button>
       </Fragment>
     );

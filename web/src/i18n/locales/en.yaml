@@ -52,7 +52,10 @@
           name: Name
           position: Position
           email: Email address
-          addButton: Add point-of-contact
+          addButton: 
+            zero: Add point-of-contact
+            one: Add another contact
+            other: Add another contact
     overview: 
       title: "Program Overview"
       helpText: "Provide a high level summary of your state's program, history, and future vision."
