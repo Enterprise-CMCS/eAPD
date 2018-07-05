@@ -14,6 +14,10 @@ module.exports = () => ({
       return this.hasMany('apdKeyPersonnel');
     },
 
+    pointsOfContact() {
+      return this.hasMany('apdPointOfContact');
+    },
+
     previousActivityExpenses() {
       return this.hasMany('apdPreviousActivityExpense');
     },
@@ -87,6 +91,7 @@ module.exports = () => ({
         narrativeHIT: this.get('narrative_hit'),
         narrativeMMIS: this.get('narrative_mmis'),
         period: this.get('period'),
+        pointsOfContact: this.related('pointsOfContact').toJSON(),
         previousActivityExpenses: this.related(
           'previousActivityExpenses'
         ).toJSON(),
@@ -128,6 +133,7 @@ module.exports = () => ({
         activities: 'apdActivity',
         incentivePayments: 'apdIncentivePayment',
         keyPersonnel: 'apdKeyPersonnel',
+        pointsOfContact: 'apdPointOfContact',
         previousActivityExpenses: 'apdPreviousActivityExpense'
       },
       withRelated: [
@@ -144,6 +150,7 @@ module.exports = () => ({
         'incentivePayments',
         'keyPersonnel',
         'keyPersonnel.years',
+        'pointsOfContact',
         'previousActivityExpenses'
       ]
     }

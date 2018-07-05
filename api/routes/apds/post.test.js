@@ -10,7 +10,13 @@ tap.test('apds POST endpoint', async endpointTest => {
 
   const ApdModel = {
     forge: sandbox.stub(),
+    save: sandbox.stub(),
     where: sandbox.stub()
+  };
+
+  const POCModel = {
+    forge: sandbox.stub(),
+    save: sandbox.stub()
   };
 
   const StateModel = {
@@ -19,7 +25,7 @@ tap.test('apds POST endpoint', async endpointTest => {
   };
 
   endpointTest.test('setup', async test => {
-    postEndpoint(app, ApdModel, StateModel);
+    postEndpoint(app, ApdModel, POCModel, StateModel);
 
     test.ok(
       app.post.calledWith('/apds', can('edit-document'), sinon.match.func),
@@ -54,12 +60,17 @@ tap.test('apds POST endpoint', async endpointTest => {
           .withArgs('id')
           .returns('new-apd-id'),
         set,
-        save: sandbox.stub().resolves()
+        save: ApdModel.save
       });
 
       ApdModel.where.returns({
         fetch: sandbox.stub().resolves('this is the new APD')
       });
+
+      POCModel.forge.returns({
+        save: POCModel.save
+      });
+      POCModel.save.resolves();
 
       StateModel.where.returns(StateModel);
 
@@ -76,25 +87,27 @@ tap.test('apds POST endpoint', async endpointTest => {
     });
 
     tests.test('sends back the new APD if everything works', async test => {
-      StateModel.fetch.resolves({
-        get: sinon
-          .stub()
-          .withArgs('medicaid_office')
-          .returns({
-            medicaidDirector: {
-              name: 'Abraham Lincoln',
-              email: 'honestabe@presidents.gov',
-              phone: '555-ABE-LNCN'
-            },
-            medicaidOffice: {
-              address1: '1600 Pennsylvania Ave',
-              address2: 'c/o 1865',
-              city: 'Washington',
-              state: 'DC',
-              zip: '20500'
-            }
-          })
+      const get = sinon.stub();
+      get.withArgs('medicaid_office').returns({
+        medicaidDirector: {
+          name: 'Abraham Lincoln',
+          email: 'honestabe@presidents.gov',
+          phone: '555-ABE-LNCN'
+        },
+        medicaidOffice: {
+          address1: '1600 Pennsylvania Ave',
+          address2: 'c/o 1865',
+          city: 'Washington',
+          state: 'DC',
+          zip: '20500'
+        }
       });
+      get
+        .withArgs('state_pocs')
+        .returns([{ name: 'bloop' }, { name: 'blorp' }]);
+
+      StateModel.fetch.resolves({ get });
+      POCModel.forge.returns({ save: sinon.stub() });
 
       await handler(req, res);
 
@@ -102,8 +115,10 @@ tap.test('apds POST endpoint', async endpointTest => {
         ApdModel.forge.calledWith({
           state_id: 'st',
           status: 'draft'
-        })
+        }),
+        'new APD is created'
       );
+
       test.ok(
         set.calledWith({
           stateProfile: {
@@ -120,8 +135,25 @@ tap.test('apds POST endpoint', async endpointTest => {
               zip: '20500'
             }
           }
-        })
+        }),
+        'state profile is populated'
       );
+
+      test.ok(ApdModel.save.calledOnce, 'apd is saved');
+      test.ok(
+        ApdModel.save.calledBefore(POCModel.forge),
+        'APD must be saved before POCs are created because they need the APD ID'
+      );
+
+      test.ok(
+        POCModel.forge.calledWith({ name: 'bloop', apd_id: 'new-apd-id' }),
+        'creates POC model'
+      );
+      test.ok(
+        POCModel.forge.calledWith({ name: 'blorp', apd_id: 'new-apd-id' }),
+        'creates POC model'
+      );
+
       test.ok(
         res.send.calledWith('this is the new APD'),
         'sends back the new APD'
