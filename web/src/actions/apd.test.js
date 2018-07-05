@@ -110,7 +110,7 @@ describe('apd actions', () => {
         { type: actions.CREATE_APD_FAILURE }
       ];
 
-      store.dispatch(actions.createApd()).then(() => {
+      return store.dispatch(actions.createApd()).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
@@ -239,6 +239,40 @@ describe('apd actions', () => {
       apd: {
         data: {
           id: 'id-to-update',
+          incentivePayments: {
+            ehAmt: {
+              1337: {
+                1: 1,
+                2: 2,
+                3: 3,
+                4: 4
+              }
+            },
+            ehCt: {
+              1337: {
+                1: 10,
+                2: 20,
+                3: 30,
+                4: 40
+              }
+            },
+            epAmt: {
+              1337: {
+                1: 100,
+                2: 200,
+                3: 300,
+                4: 400
+              }
+            },
+            epCt: {
+              1337: {
+                1: 1000,
+                2: 2000,
+                3: 3000,
+                4: 4000
+              }
+            }
+          },
           hieNarrative: 'HIE narrative text',
           hitNarrative: 'HIT narrative text',
           mmisNarrative: 'MMIS narrative text',
@@ -351,7 +385,7 @@ describe('apd actions', () => {
         { type: actions.SAVE_APD_FAILURE }
       ];
 
-      store.dispatch(actions.saveApd()).catch(() => {
+      return store.dispatch(actions.saveApd()).catch(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
@@ -369,13 +403,48 @@ describe('apd actions', () => {
         { type: actions.SAVE_APD_SUCCESS }
       ];
 
-      store.dispatch(actions.saveApd()).then(() => {
+      return store.dispatch(actions.saveApd()).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
   });
 
   describe('submit an APD', () => {
+    const budget = {
+      hie: {},
+      hit: {},
+      hitAndHie: {
+        combined: { '1878': { federal: 300 }, total: { federal: 600 } },
+        contractors: { '1878': { federal: 100 }, total: { federal: 200 } },
+        expenses: { '1878': { federal: 100 }, total: { federal: 200 } },
+        statePersonnel: { '1878': { federal: 100 }, total: { federal: 200 } }
+      },
+      mmis: {
+        combined: { '1878': { federal: 300 }, total: { federal: 600 } },
+        contractors: { '1878': { federal: 100 }, total: { federal: 200 } },
+        expenses: { '1878': { federal: 100 }, total: { federal: 200 } },
+        statePersonnel: { '1878': { federal: 100 }, total: { federal: 200 } }
+      },
+      quarterly: {
+        hitAndHie: {
+          '1878': {
+            1: 10,
+            2: 20,
+            3: 30,
+            4: 40
+          }
+        },
+        mmis: {
+          '1878': {
+            1: 40,
+            2: 30,
+            3: 20,
+            4: 10
+          }
+        }
+      }
+    };
+
     beforeEach(() => {
       fetchMock.reset();
     });
@@ -383,10 +452,13 @@ describe('apd actions', () => {
     it('sets a notification if the preceding save fails', () => {
       const store = mockStore({
         apd: { data: { id: 'id-to-update' } },
+        budget,
         notification: { open: false, queue: [] }
       });
 
-      const save = () => () => Promise.reject(new Error());
+      const save = () => () =>
+        Promise.reject(new Error('preceding save failed (set by test)'));
+      const spy = jest.spyOn(axios, 'post');
 
       const expectedActions = [
         {
@@ -395,17 +467,20 @@ describe('apd actions', () => {
         }
       ];
 
-      store.dispatch(actions.submitAPD(save)).catch(() => {
+      return store.dispatch(actions.submitAPD(save)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
+        expect(spy).not.toHaveBeenCalled();
       });
     });
 
     it('sets a notification if the submission fails', () => {
       const store = mockStore({
         apd: { data: { id: 'id-to-update' } },
+        budget,
         notification: { open: false, queue: [] }
       });
       const save = () => () => Promise.resolve();
+      const spy = jest.spyOn(axios, 'post');
 
       fetchMock.onPost('/apds/id-to-update/versions').reply(403);
 
@@ -418,17 +493,20 @@ describe('apd actions', () => {
         { type: actions.SUBMIT_APD_FAILURE }
       ];
 
-      store.dispatch(actions.submitAPD(save)).then(() => {
+      return store.dispatch(actions.submitAPD(save)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
+        expect(spy).toHaveBeenCalled();
       });
     });
 
     it('sets a notification if the submission succeeds', () => {
       const store = mockStore({
         apd: { data: { id: 'id-to-update' } },
+        budget,
         notification: { open: false, queue: [] }
       });
       const save = () => () => Promise.resolve();
+      const spy = jest.spyOn(axios, 'post');
 
       fetchMock.onPost('/apds/id-to-update/versions').reply(204);
 
@@ -441,8 +519,9 @@ describe('apd actions', () => {
         { type: actions.SUBMIT_APD_SUCCESS }
       ];
 
-      store.dispatch(actions.submitAPD(save)).then(() => {
+      return store.dispatch(actions.submitAPD(save)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
+        expect(spy).toHaveBeenCalled();
       });
     });
   });
