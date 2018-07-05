@@ -8,65 +8,69 @@ import {
   removeActivityGoal as removeActivityGoalAction,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import { Subsection } from '../components/Section';
-import { Textarea } from '../components/Inputs';
-import HelpText from '../components/HelpText';
+import { Chunk, Subsection } from '../components/Section';
+import { RichText } from '../components/Inputs';
 import { isProgamAdmin } from '../util';
 
 class ActivityDetailGoals extends Component {
-  handleChange = (idx, key) => e => {
-    const { value } = e.target;
+  handleSync = (idx, key) => html => {
     const { activity, updateActivity } = this.props;
-
-    const updates = { goals: { [idx]: { [key]: value } } };
+    const updates = { goals: { [idx]: { [key]: html } } };
     updateActivity(activity.id, updates);
   };
 
+  handleDelete = idx => () => {
+    const { activity, removeActivityGoal } = this.props;
+    removeActivityGoal(activity.id, idx);
+  };
+
+  handleAdd = () => {
+    const { activity, addActivityGoal } = this.props;
+    addActivityGoal(activity.id);
+  };
+
   render() {
-    const { activity, addActivityGoal, removeActivityGoal } = this.props;
+    const { activity } = this.props;
 
     return (
       <Subsection resource="activities.goals" isKey={isProgamAdmin(activity)}>
         {activity.goals.map((d, i) => (
           <div key={i} className="mb3">
-            {activity.goals.length > 1 && (
-              <button
-                type="button"
-                className="mb-tiny px1 py-tiny right btn btn-outline border-silver h6 line-height-1"
-                onClick={() => removeActivityGoal(activity.id, i)}
-              >
-                Remove
-              </button>
-            )}
-            <HelpText
-              text="activities.goals.goal.helpText"
-              reminder="activities.goals.goal.reminder"
-            />
-            <Textarea
-              name={`goal-${i}`}
-              label={t('activities.goals.goal.title', { number: i + 1 })}
-              rows="5"
-              value={d.desc}
-              onChange={this.handleChange(i, 'desc')}
-            />
-            <HelpText
-              text="activities.goals.objective.helpText"
-              reminder="activities.goals.objective.reminder"
-            />
-            <Textarea
-              name={`obj-${i}`}
-              label={t('activities.goals.objective.title')}
-              rows="4"
-              value={d.obj}
-              onChange={this.handleChange(i, 'obj')}
-            />
+            <Chunk resource="activities.goals.goal">
+              <div className="mb3">
+                <div className="mb-tiny">
+                  {activity.goals.length > 1 && (
+                    <button
+                      type="button"
+                      className="px1 py-tiny right btn btn-outline border-silver h6 line-height-1"
+                      onClick={this.handleDelete(i)}
+                    >
+                      Remove
+                    </button>
+                  )}
+                  {t('activities.goals.goal.title', { number: i + 1 })}
+                </div>
+                <RichText
+                  content={d.desc}
+                  onSync={this.handleSync(i, 'desc')}
+                />
+              </div>
+            </Chunk>
+            <Chunk resource="activities.goals.objective">
+              <div className="mb3">
+                <div className="mb-tiny">
+                  {t('activities.goals.objective.title')}
+                </div>
+                <RichText content={d.obj} onSync={this.handleSync(i, 'obj')} />
+              </div>
+            </Chunk>
           </div>
         ))}
 
         <button
           type="button"
           className="btn btn-primary bg-black"
-          onClick={() => addActivityGoal(activity.id)}
+          onClick={this.handleAdd()}
         >
           {t('activities.goals.addGoalButtonText')}
         </button>
