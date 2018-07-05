@@ -49,12 +49,12 @@ class DeleteButton extends Component {
   };
 
   render() {
-    const { resource } = this.props;
+    const { className, resource } = this.props;
     return (
       <div>
         <button
           type="button"
-          className="btn btn-small btn-primary bg-black h6"
+          className={className || 'btn btn-small btn-primary bg-black h6'}
           onClick={this.handleClick}
         >
           {t(`${resource}.text`)}
@@ -65,8 +65,12 @@ class DeleteButton extends Component {
 }
 
 DeleteButton.propTypes = {
+  className: PropTypes.string,
   resource: PropTypes.string.isRequired,
   remove: PropTypes.func.isRequired
+};
+DeleteButton.defaultProps = {
+  className: null
 };
 
 export default DeleteButton;
