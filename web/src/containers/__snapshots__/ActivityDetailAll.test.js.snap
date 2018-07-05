@@ -51,8 +51,9 @@ ShallowWrapper {
             aId="activity-id"
           />,
         ],
-        <Connect(DeleteActivity)
-          aId="activity-id"
+        <DeleteButton
+          remove={[Function]}
+          resource="activities.delete"
         />,
       ],
       "id": "activity-activity-id",
@@ -156,7 +157,8 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "aId": "activity-id",
+          "remove": [Function],
+          "resource": "activities.delete",
         },
         "ref": null,
         "rendered": null,
@@ -199,8 +201,9 @@ ShallowWrapper {
               aId="activity-id"
             />,
           ],
-          <Connect(DeleteActivity)
-            aId="activity-id"
+          <DeleteButton
+            remove={[Function]}
+            resource="activities.delete"
           />,
         ],
         "id": "activity-activity-id",
@@ -304,7 +307,8 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "aId": "activity-id",
+            "remove": [Function],
+            "resource": "activities.delete",
           },
           "ref": null,
           "rendered": null,
