@@ -53,7 +53,7 @@
       yearsCovered: "What federal fiscal year(s) does this APD cover?"
       labels: 
         desc: "Program Introduction"
-        helpText: "Describe the scope of what you intend to do. It is not meant to replicate the executive summary section. You will have an opportunity to explain in more detail later in this application."
+        helpText: "Describe the scope of what you intend to do. This summary will be used in other parts of this application. You will have an opportunity to explain in more detail in the activity details section."
     hit: 
       title: "HIT Overview"
       helpText: "Briefly summarize your planned HIT funded activities contained within this APD, we'll ask for more specific details later."
@@ -142,7 +142,7 @@
         subheader: "Brief Activity Summary"
       detail:
         standard:
-          subheader: "Describe the activity and include relevant information."
+          subheader: "There will be opportunities to add aditional text in other sections."
         hie:
           subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
           helpText: "The activity details must also include a description of three items: how the activity is linked to meaningful use; value proposition to providers, and sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.	Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how you'll complete the activity."
