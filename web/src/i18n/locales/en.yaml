@@ -48,7 +48,7 @@
             zip: ZIP
     overview: 
       title: "Program Overview"
-      helpText: "Provide a high level summary of your state's program, history, and future vision."
+      helpText: "Provide a high level summary of your state's program, history, and future vision. This initial overview is intended to be brief, there will be opportunities to explain in more detail in the activity details section."
       reminder: "Indicate the federal fiscal years for which this APD is requesting funding."
       yearsCovered: "What federal fiscal year(s) does this APD cover?"
       labels: 
