@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import DeleteActivity from './DeleteActivity';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { ACTIVITY_FUNDING_SOURCES } from '../util';
 
@@ -17,7 +18,7 @@ class ActivityListEntry extends Component {
 
   render() {
     const { activity, num } = this.props;
-    const { name, fundingSource } = activity;
+    const { id, name, fundingSource } = activity;
 
     return (
       <div className="flex items-center mb1">
@@ -31,7 +32,7 @@ class ActivityListEntry extends Component {
             disabled={num === 1}
           />
         </div>
-        <div>
+        <div className="mr1">
           {ACTIVITY_FUNDING_SOURCES.map(option => (
             <label key={option} className="mr1">
               <input
@@ -45,6 +46,7 @@ class ActivityListEntry extends Component {
             </label>
           ))}
         </div>
+        {num > 1 && <DeleteActivity aId={id} />}
       </div>
     );
   }
