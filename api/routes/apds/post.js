@@ -1,6 +1,7 @@
 const logger = require('../../logger')('apds route post');
 const {
   apd: defaultApdModel,
+  apdPointOfContact: defaultPOCModel,
   state: defaultStateModel
 } = require('../../db').models;
 const { can } = require('../../middleware');
@@ -8,6 +9,7 @@ const { can } = require('../../middleware');
 module.exports = (
   app,
   ApdModel = defaultApdModel,
+  POCModel = defaultPOCModel,
   StateModel = defaultStateModel
 ) => {
   logger.silly('setting up POST /apds/ route');
@@ -26,6 +28,15 @@ module.exports = (
       }
 
       await newApd.save();
+
+      if (state.get('state_pocs')) {
+        await Promise.all(
+          state.get('state_pocs').map(async poc => {
+            const newPOC = POCModel.forge({ ...poc, apd_id: newApd.get('id') });
+            await newPOC.save();
+          })
+        );
+      }
 
       const apd = await ApdModel.where({ id: newApd.get('id') }).fetch({
         withRelated: ApdModel.withRelated

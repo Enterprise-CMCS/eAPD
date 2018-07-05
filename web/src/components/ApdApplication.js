@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Wired-up components
-import StateProfile from '../containers/ApdStateProfile';
+import StateProfile from '../components/ApdStateProfile';
 import AssurancesAndCompliance from '../containers/AssurancesAndCompliance';
 import ProposedBudget from './ProposedBudget';
 import Activities from '../containers/Activities';

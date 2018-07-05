@@ -14,6 +14,7 @@ tap.test('apd data model', async apdModelTests => {
           activities: Function,
           incentivePayments: Function,
           keyPersonnel: Function,
+          pointsOfContact: Function,
           previousActivityExpenses: Function,
           state: Function,
           versions: Function,
@@ -35,6 +36,7 @@ tap.test('apd data model', async apdModelTests => {
               activities: 'apdActivity',
               incentivePayments: 'apdIncentivePayment',
               keyPersonnel: 'apdKeyPersonnel',
+              pointsOfContact: 'apdPointOfContact',
               previousActivityExpenses: 'apdPreviousActivityExpense'
             },
             withRelated: [
@@ -51,6 +53,7 @@ tap.test('apd data model', async apdModelTests => {
               'incentivePayments',
               'keyPersonnel',
               'keyPersonnel.years',
+              'pointsOfContact',
               'previousActivityExpenses'
             ]
           }
@@ -245,6 +248,9 @@ tap.test('apd data model', async apdModelTests => {
     self.get.withArgs('status').returns('apd-status');
     self.get.withArgs('federal_citations').returns('assurances and stuff');
     self.get.withArgs('period').returns('apd-period');
+    self.related
+      .withArgs('pointsOfContact')
+      .returns({ toJSON: () => 'points-of-contact' });
     self.get
       .withArgs('previous_activity_summary')
       .returns('apd-previous-activity-summary');
@@ -283,6 +289,7 @@ tap.test('apd data model', async apdModelTests => {
         narrativeHIT: 'apd-hit',
         narrativeMMIS: 'apd-mmis',
         period: 'apd-period',
+        pointsOfContact: 'points-of-contact',
         previousActivitySummary: 'apd-previous-activity-summary',
         previousActivityExpenses: 'apd-previous-activity-expenses',
         programOverview: 'apd-overview',

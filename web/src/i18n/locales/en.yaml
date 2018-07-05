@@ -46,6 +46,13 @@
             city: City
             state: State
             zip: ZIP
+      pointsOfContact:
+        title: Points of Contact
+        labels:
+          name: Name
+          position: Position
+          email: Email address
+          addButton: Add point-of-contact
     overview: 
       title: "Program Overview"
       helpText: "Provide a high level summary of your state's program, history, and future vision. This initial overview is intended to be brief, there will be opportunities to explain in more detail in the activity details section."
@@ -324,6 +331,7 @@
   executiveSummary: 
     title: "Executive Summary"
     helpText: "See the executive summary generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review."
+    total: Total
     summary: 
       title: "Executive Summary"
       helpText: "If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
