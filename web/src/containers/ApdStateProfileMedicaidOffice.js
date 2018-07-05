@@ -3,7 +3,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
-import { Section, Subsection } from '../components/Section';
 import { Input } from '../components/Inputs';
 import { t } from '../i18n';
 
