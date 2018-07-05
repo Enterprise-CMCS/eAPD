@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types'
-import React, { Fragment } from 'react'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 
-import ExecutiveSummaryBudget from './ExecutiveSummaryBudget'
-import { expandActivitySection } from '../actions/activities'
-import { Section, Subsection } from '../components/Section'
-import { t } from '../i18n'
-import { aggregateByYear, getActivityTotals } from '../reducers/activities'
-import { formatMoney } from '../util/formats'
+import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
+import { expandActivitySection } from '../actions/activities';
+import { Section, Subsection } from '../components/Section';
+import { t } from '../i18n';
+import { aggregateByYear, getActivityTotals } from '../reducers/activities';
+import { formatMoney } from '../util/formats';
 
 const ExecutiveSummary = ({ data, years, expandSection }) => (
   <Section id="executive-summary" resource="executiveSummary">
@@ -53,39 +53,39 @@ const ExecutiveSummary = ({ data, years, expandSection }) => (
       <ExecutiveSummaryBudget />
     </Subsection>
   </Section>
-)
+);
 
 ExecutiveSummary.propTypes = {
   data: PropTypes.array.isRequired,
   years: PropTypes.array.isRequired,
   expandSection: PropTypes.func.isRequired
-}
+};
 
 const mapStateToProps = ({ activities, apd }) => {
-  const activitiesArray = Object.values(activities.byId)
+  const activitiesArray = Object.values(activities.byId);
 
   const data = activitiesArray.map(a => ({
     id: a.id,
     name: a.name,
     descShort: a.descShort,
     totals: getActivityTotals(a)
-  }))
+  }));
 
   data.push({
     id: 'all',
     name: 'Total Cost',
     descShort: null,
     totals: aggregateByYear(data.map(d => d.totals), apd.data.years)
-  })
+  });
 
   return {
     data,
     years: apd.data.years
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   expandSection: expandActivitySection
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExecutiveSummary)
+export default connect(mapStateToProps, mapDispatchToProps)(ExecutiveSummary);
