@@ -278,6 +278,16 @@ module.exports = {
             description:
               'Federal citations that states must assert compliance with. This is a free-form object.'
           },
+          incentivePayments: arrayOf({
+            type: 'object',
+            properties: {
+              year: {},
+              q1: { $ref: '#/components/schemas/incentivePaymentQuarter' },
+              q2: { $ref: '#/components/schemas/incentivePaymentQuarter' },
+              q3: { $ref: '#/components/schemas/incentivePaymentQuarter' },
+              q4: { $ref: '#/components/schemas/incentivePaymentQuarter' }
+            }
+          }),
           narrativeHIE: {
             type: 'string',
             description:
@@ -414,6 +424,15 @@ module.exports = {
           years: arrayOf({
             type: 'number'
           })
+        }
+      },
+      incentivePaymentQuarter: {
+        type: 'object',
+        properties: {
+          ehPayment: { type: 'number' },
+          ehCount: { type: 'number' },
+          epPayment: { type: 'number' },
+          epCount: { type: 'number' }
         }
       },
       state: {

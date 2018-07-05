@@ -99,7 +99,6 @@ const reducer = (state = initialState, action) => {
         fetching: false,
         loaded: true,
         byId: action.data.reduce((acc, apd) => {
-          // TODO: capture previous activity expenses when it's returned by the API
           const {
             id,
             activities,
@@ -122,30 +121,73 @@ const reducer = (state = initialState, action) => {
               id,
               activities,
               assurancesAndCompliance,
-              incentivePayments: incentivePayments || initIncentiveData(),
               hieNarrative,
               hitNarrative,
               mmisNarrative,
               overview,
-              previousActivityExpenses: previousActivityExpenses
-                ? previousActivityExpenses.reduce(
-                    (previous, year) => ({
-                      ...previous,
-                      [year.year]: {
-                        hie: year.hie,
-                        hit: year.hit
+              incentivePayments:
+                incentivePayments && incentivePayments.length
+                  ? incentivePayments.reduce(
+                      (ipAcc, ipByQuarter) => {
+                        const ip = ipAcc;
+                        ip.ehAmt[ipByQuarter.year] = {
+                          1: ipByQuarter.q1.ehPayment,
+                          2: ipByQuarter.q2.ehPayment,
+                          3: ipByQuarter.q3.ehPayment,
+                          4: ipByQuarter.q4.ehPayment
+                        };
+
+                        ip.ehCt[ipByQuarter.year] = {
+                          1: ipByQuarter.q1.ehCount,
+                          2: ipByQuarter.q2.ehCount,
+                          3: ipByQuarter.q3.ehCount,
+                          4: ipByQuarter.q4.ehCount
+                        };
+
+                        ip.epAmt[ipByQuarter.year] = {
+                          1: ipByQuarter.q1.epPayment,
+                          2: ipByQuarter.q2.epPayment,
+                          3: ipByQuarter.q3.epPayment,
+                          4: ipByQuarter.q4.epPayment
+                        };
+
+                        ip.epCt[ipByQuarter.year] = {
+                          1: ipByQuarter.q1.epCount,
+                          2: ipByQuarter.q2.epCount,
+                          3: ipByQuarter.q3.epCount,
+                          4: ipByQuarter.q4.epCount
+                        };
+                        return ip;
+                      },
+                      {
+                        ehAmt: {},
+                        ehCt: {},
+                        epAmt: {},
+                        epCt: {}
                       }
-                    }),
-                    {}
-                  )
-                : defaultAPDYearOptions.reduce(
-                    (previous, year) => ({
-                      ...previous,
-                      [year - 2]: getPreviousActivityExpense()
-                    }),
-                    {}
-                  ),
+                    )
+                  : initIncentiveData(),
+              previousActivityExpenses:
+                previousActivityExpenses && previousActivityExpenses.length
+                  ? previousActivityExpenses.reduce(
+                      (previous, year) => ({
+                        ...previous,
+                        [year.year]: {
+                          hie: year.hie,
+                          hit: year.hit
+                        }
+                      }),
+                      {}
+                    )
+                  : defaultAPDYearOptions.reduce(
+                      (previous, year) => ({
+                        ...previous,
+                        [year - 2]: getPreviousActivityExpense()
+                      }),
+                      {}
+                    ),
               previousActivitySummary: previousActivitySummary || '',
+
               stateProfile,
               years: (years || defaultAPDYears).map(y => `${y}`),
               yearOptions: defaultAPDYearOptions
