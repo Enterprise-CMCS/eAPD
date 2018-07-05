@@ -46,6 +46,7 @@ const Chunk = ({ children, resource }) => {
     </Fragment>
   );
 };
+
 Chunk.propTypes = {
   children: PropTypes.node.isRequired,
   resource: PropTypes.string
