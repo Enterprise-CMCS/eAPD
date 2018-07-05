@@ -8,6 +8,7 @@ ShallowWrapper {
     aId="activity-id"
     expanded={false}
     num={3}
+    removeActivity={[Function]}
     title="Activity title"
     toggleSection={[Function]}
   />,
@@ -52,6 +53,7 @@ ShallowWrapper {
           />,
         ],
         <DeleteButton
+          className={null}
           remove={[Function]}
           resource="activities.delete"
         />,
@@ -157,6 +159,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
+          "className": null,
           "remove": [Function],
           "resource": "activities.delete",
         },
@@ -202,6 +205,7 @@ ShallowWrapper {
             />,
           ],
           <DeleteButton
+            className={null}
             remove={[Function]}
             resource="activities.delete"
           />,
@@ -307,6 +311,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "className": null,
             "remove": [Function],
             "resource": "activities.delete",
           },

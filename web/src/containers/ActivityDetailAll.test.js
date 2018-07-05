@@ -15,6 +15,7 @@ describe('the Activities details container component', () => {
     aId: 'activity-id',
     expanded: false,
     num: 3,
+    removeActivity: sinon.stub(),
     title: 'Activity title',
     toggleSection: sinon.stub()
   };
