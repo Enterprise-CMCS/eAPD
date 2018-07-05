@@ -331,6 +331,7 @@
   executiveSummary: 
     title: "Executive Summary"
     helpText: "See the executive summary generated based upon the activity details provided above.\n\n We have also automatically included the Program Budget tables for your review."
+    total: Total
     summary: 
       title: "Executive Summary"
       helpText: "If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
