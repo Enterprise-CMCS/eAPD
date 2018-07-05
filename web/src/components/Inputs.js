@@ -46,16 +46,19 @@ class RichText extends Component {
     );
   }
 }
+
 RichText.propTypes = {
   content: PropTypes.string,
   onSync: PropTypes.func
 };
+
 RichText.defaultProps = {
   content: '',
   onSync: () => {}
 };
 
 const Input = props => <input className="m0 input" {...props} />;
+
 const Textarea = props => (
   <textarea className="m0 textarea" spellCheck="true" {...props} />
 );
