@@ -134,7 +134,8 @@ const reducer = (state = initialState, action) => {
             [apd.id]: {
               id,
               activities,
-              assurancesAndCompliance,
+              assurancesAndCompliance:
+                assurancesAndCompliance || initialAssurances,
               hieNarrative,
               hitNarrative,
               mmisNarrative,
