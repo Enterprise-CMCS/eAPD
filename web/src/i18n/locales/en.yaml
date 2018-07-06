@@ -155,12 +155,12 @@
     description: 
       title: "Activity Overview"
       helpText: "Summarize the needs of the activity for which requested funding will be used (e.g. administrative, outreach, auditing, Public Health Registry Development, etc)"
-      reminder: "This should be very brief."
+      reminder: "The activity overview should be a brief summary of the activity needs."
       summary: 
         subheader: "Brief Activity Summary"
       detail:
         standard:
-          subheader: "There will be opportunities to add aditional text in other sections."
+          subheader: "The activity summary should be brief, there will be additional opportunities to expand in other sections."
         hie:
           subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
           helpText: "The activity details must also include a description of three items: how the activity is linked to meaningful use; value proposition to providers, and sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.	Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how you'll complete the activity."
@@ -215,7 +215,7 @@
     statePersonnel: 
       title: "Personnel"
       subheader: "Outline the personnel resources for this section. This includes anyone funded as a part of this activity. This does not include personnel listed in the contract section."
-      helpText: "Personnel costs must include salaries and benefits. FTE is percentage attributable to the activity. Enter individuals only once."
+      helpText: "Personnel costs for this section includes the combined salary and benefits. FTE% is the percentage attributable to the activity. You only need to enter personnel once. Percentages are generated automatically, you only have to insert a number in each section by FFY."
       labels: 
         entryNum: "#"
         title: "Title"
@@ -243,7 +243,7 @@
      Ensure cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested."
       methodology: 
         title: "Cost allocation methodology description"
-        reminder: "Do not assume the absence of other payers is sufficient cause for Medicaid to be the primary payer. Limit ambiguity about other potential federal funding sources. For example, if no CHIP funds are being requested, include a statement in this section."
+        reminder: "Do not assume the absence of other payers is sufficient cause for Medicaid to be the primary payer. Limit ambiguity about other potential federal funding sources. (For example, if no CHIP funds are being requested, include a statement in this section.)"
       otherFunding: 
         title: "Other funding description"
         helpText: "Account for any and all grant funding used to support this activity, and review the state Medicaid director Letter 10‐016 for examples of grants needed to be included."
@@ -291,7 +291,7 @@
         subheader: "The condition described at § 433.112(b)(18) requires that states submit mitigation plans addressing strategies to reduce the consequences of failure for all major milestones and functionality. Maintaining a mitigation plan is an industry standard best practice for any major IT build; CMS expects that states will identify potential risks and develop strategies to address those risks throughout the system lifecycle. Mitigation plans for major Medicaid E&E system or MMIS projects should address minimum expected functionality, critical success factors, and risk factors as tied to major milestones identified in the APD. The mitigation plans should also reflect key events and dates that would trigger the mitigation, and projected timeframe for the mitigation sunset. States should consider strategies to address risks for the M&O phase of the project, such as staffing issues and software upgrades. CMS expects states to revise and resubmit their plans to CMS as risks and mitigations change along the system life cycle. States’ proposed mitigations should be commensurate with the nature and scope of the identified risks. We also expect that states will submit their mitigation plans with the APDs to demonstrate compliance with this condition."
         title: "Describe how you'll meet the Mitigation Strategy condition"
       keyPersonnel: 
-        header: "Key Personnel"
+        header: Personnel"
         subheader: "The condition described at § 433.112(b)(19) requires that states identify their key state personnel assigned to each major project by name, role, and time commitment. Before we approve a state to launch a major IT initiative, CMS wants to ensure that the state team is adequately resourced. States do not need to provide key vendor personnel for this requirement. As stated in the provision, this information must be included in the APD. For changes to key personnel that occur after an APD is approved, states should notify their CMS points of contact in writing (including by email) and formally reflect the change in the next planned APD update. This condition refines and strengthens the existing APD requirements regarding personnel resource statements as required under 45 CFR 95.610. For Medicaid E&E APDs, states should include this information in the “Medicaid Eligibility and Enrollment (EE) Implementation Advance Planning Document (IAPD) Template” (OMB Approval Number: 0938-1268). Although there is currently no APD template for MMIS APDs, states must include this information in all MMIS APDs for major IT initiatives."
         title: "Describe how you'll meet the Key Personnel condition"
       documentation: 
@@ -317,8 +317,10 @@
     helpText: "This itemized budget table has combined the costs for each activity into a single itemized table by federal fiscal year (FFY). The table displays total share, federal share, and state share. The second table also includes a proposed breakout of the budget by FFY quarter."
     summaryBudget: 
       title: Summary Budget Table
+      helpText: "Totals are calculated automatically."
     quarterlyBudget: 
       title: Federal Share by FFY Quarter
+      helpText: "Personnel costs for this section includes the combined salary and benefits. FTE% is the percentage attributable to the activity. You only need to enter personnel once. Percentages are generated automatically, you only have to insert a number in each section by FFY."
       expenseNames:
           statePersonnel: Project state staff
           expenses: Non-personnel
