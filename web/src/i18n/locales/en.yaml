@@ -52,7 +52,17 @@
           name: Name
           position: Position
           email: Email address
-          addButton: Add point-of-contact
+          addButton: 
+            zero: Add point-of-contact
+            one: Add another contact
+            other: Add another contact
+        delete:
+          text: Remove contact
+          confirm:
+            header: Confirm
+            body: Are you sure you’d like to remove this contact?
+            _yes: "Yes"
+            _no: "No"
     overview: 
       title: "Program Overview"
       helpText: "Provide a high level summary of your state's program, history, and future vision."
@@ -131,13 +141,14 @@
       helpText: "Examples of individual activities include: Auditing, Outreach, Environmental Scans, HIE Registry Development, CQM Database Development, Data and Analytics, HIE Onboarding, etc."
       reminder: "The first activity in this list is Program Administration. Program Administration is where you should include information that pertains to implementing the EHR Incentive program. Examples of information that belongs within this activity includes: State and Contractor costs associated with operating the EHR incentive program and SLR Enhancements/Upgrades."
     addActivityButtonText: "Add activity"
-    deleteActivityButtonText: "Remove Activity"
     noActivityMessage: "It looks like you don’t have any activities. Add one below."
-    delete: 
-      header: "Confirm"
-      body: "Are you sure you’d like to remove this activity?"
-      _yes: "Yes"
-      _no: "No"
+    delete:
+      text: Remove Activity
+      confirm:
+        header: Confirm
+        body: Are you sure you’d like to remove this activity?
+        _yes: "Yes"
+        _no: "No"
     header: "Program Activities"
     namePrefix: "Activity"
     namePrefixAndNum: "Core Activity {{number}}"
