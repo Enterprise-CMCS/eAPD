@@ -8,38 +8,38 @@ import { saveApd } from '../actions/apd';
 import SidebarLink from '../components/SidebarLink';
 
 const linkGroup1 = [
-  { id: 'apd-state-profile', name: t('sidebar.titles.stateProfile') },
+  { id: 'apd-state-profile', name: t('apd.stateProfile.title') },
   {
     id: 'apd-summary',
-    name: t('sidebar.titles.programSummary'),
+    name: t('apd.title'),
     sub: [
       {
         id: 'apd-summary-overview',
-        name: t('sidebar.titles.programSummaryOverview')
+        name: t('apd.overview.title')
       }
     ]
   },
   {
     id: 'prev-activities',
-    name: t('sidebar.titles.previousActivities'),
+    name: t('previousActivities.title'),
     sub: [
       {
         id: 'prev-activities-outline',
-        name: t('sidebar.titles.previousActivitiesOutline')
+        name: t('previousActivities.outline.title')
       },
       {
         id: 'prev-activities-table',
-        name: t('sidebar.titles.previousActivitiesActual')
+        name: t('previousActivities.actualExpenses.title')
       }
     ]
   },
   {
     id: 'activities',
-    name: t('sidebar.titles.activities'),
+    name: t('activities.title'),
     sub: [
       {
         id: 'activities-list',
-        name: t('sidebar.titles.activitiesList')
+        name: t('activities.list.title')
       }
     ]
   }
@@ -48,61 +48,61 @@ const linkGroup1 = [
 const linkGroup2 = [
   {
     id: 'schedule-summary',
-    name: t('sidebar.titles.summarySchedule'),
+    name: t('scheduleSummary.title'),
     sub: [
       {
         id: 'schedule-summary-table',
-        name: t('sidebar.titles.summaryScheduleTable')
+        name: t('scheduleSummary.main.title')
       }
     ]
   },
   {
     id: 'budget',
-    name: t('sidebar.titles.budget'),
+    name: t('proposedBudget.title'),
     sub: [
       {
         id: 'budget-summary-table',
-        name: t('sidebar.titles.budgetSummaryTable')
+        name: t('proposedBudget.summaryBudget.title')
       },
       {
         id: 'budget-federal-by-quarter',
-        name: t('sidebar.titles.budgetFederalShareByQuarter')
+        name: t('proposedBudget.quarterlyBudget.title')
       },
       {
         id: 'budget-incentive-by-quarter',
-        name: t('sidebar.titles.budgetIncentivePaymentByQuarter')
+        name: t('proposedBudget.paymentsByFFYQuarter.title')
       }
     ]
   },
   {
     id: 'assurances-compliance',
-    name: t('sidebar.titles.assurances'),
+    name: t('assurancesAndCompliance.title'),
     sub: [
       {
         id: 'assurances-compliance-fed-citations',
-        name: t('sidebar.titles.assurancesFederalCitations')
+        name: t('assurancesAndCompliance.citations.title')
       }
     ]
   },
   {
     id: 'executive-summary',
-    name: t('sidebar.titles.summary'),
+    name: t('executiveSummary.title'),
     sub: [
       {
         id: 'executive-summary-overview',
-        name: t('sidebar.titles.summaryOverview')
+        name: t('executiveSummary.summary.title')
       },
       {
         id: 'executive-summary-budget-table',
-        name: t('sidebar.titles.summaryBudgetTable')
+        name: t('executiveSummary.budgetTable.title')
       }
     ]
   },
   {
     id: 'certify-submit',
-    name: t('sidebar.titles.submit'),
+    name: t('certifyAndSubmit.title'),
     sub: [
-      { id: 'certify-submit-submit', name: t('sidebar.titles.submitSubmit') }
+      { id: 'certify-submit-submit', name: t('certifyAndSubmit.certify.title') }
     ]
   }
 ];
@@ -151,18 +151,16 @@ const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
             </SidebarLink>
           ))}
         </ul>
-        <div className="mt2">
-          <button type="button" className="btn bg-white blue rounded">
-            {t('sidebar.savePdfButtonText')}
-          </button>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 p2 lg-px3">
+        <div className="mt2 center">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary mx1"
             onClick={() => saveApdToAPI()}
           >
-            Save APD
+            {t('sidebar.saveApdButtonText')}
+          </button>
+          <button type="button" className="btn bg-white blue mx1 rounded">
+            {t('sidebar.savePdfButtonText')}
           </button>
         </div>
       </div>
