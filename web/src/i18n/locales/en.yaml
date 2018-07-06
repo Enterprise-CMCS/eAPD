@@ -232,7 +232,7 @@
     statePersonnel: 
       title: "Personnel"
       subheader: "Outline the personnel resources for this section. This includes anyone funded as a part of this activity. This does not include personnel listed in the contract section."
-      helpText: "Personnel costs for this section includes the combined salary and benefits. FTE% is the percentage attributable to the activity. You only need to enter personnel once. Percentages are generated automatically, you only have to insert a number in each section by FFY."
+      helpText: "Personnel costs for this section includes combined salary and benefits. Salary amount is the yearly cost of the individual personnel listed and personnel only need to be listed once. FTE% is the percentage attributable to the activity. Percentages are automatically calculated from the %FTE provided."
       labels: 
         entryNum: "#"
         title: "Title"
@@ -337,7 +337,7 @@
       helpText: "Totals are calculated automatically."
     quarterlyBudget: 
       title: Federal Share by FFY Quarter
-      helpText: "Personnel costs for this section includes combined salary and benefits. Salary amount is the yearly cost of the individual personnel listed and personnel only need to be listed once. FTE% is the percentage attributable to the activity. Percentages are automatically calculated from the %FTE provided."
+      helpText: ""
       expenseNames:
           statePersonnel: Project state staff
           expenses: Non-personnel
