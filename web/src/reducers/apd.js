@@ -47,6 +47,12 @@ export const getPreviousActivityExpense = () => ({
     federalApproved: 0,
     stateActual: 0,
     stateApproved: 0
+  },
+  mmis: {
+    federalActual: 0,
+    federalApproved: 0,
+    stateActual: 0,
+    stateApproved: 0
   }
 });
 
@@ -190,7 +196,8 @@ const reducer = (state = initialState, action) => {
                         ...previous,
                         [year.year]: {
                           hie: year.hie,
-                          hit: year.hit
+                          hit: year.hit,
+                          mmis: year.mmis
                         }
                       }),
                       {}

@@ -108,6 +108,7 @@
           hie: HIE
           hit: HIT
           combined: HIT + HIE
+          mmis: MMIS
         labels:
           federalShare: >-
             Federal share

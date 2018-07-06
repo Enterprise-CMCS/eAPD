@@ -15,7 +15,7 @@ tap.test('apd previous activity expense data model', async tests => {
         format: Function,
         toJSON: Function,
         static: {
-          updateableFields: ['hie', 'hit', 'year']
+          updateableFields: ['hie', 'hit', 'mmis', 'year']
         }
       },
       'get the expected model definitions'
@@ -44,13 +44,22 @@ tap.test('apd previous activity expense data model', async tests => {
         federalActual: 1,
         federalApproved: 2,
         stateActual: 3,
-        stateApproved: 4
+        stateApproved: 4,
+        someJunk: 'goes away'
       },
       hit: {
         federalActual: 10,
         federalApproved: 20,
         stateActual: 30,
-        stateApproved: 40
+        stateApproved: 40,
+        thisWillNot: 'survive'
+      },
+      mmis: {
+        federalActual: 100,
+        federalApproved: 200,
+        stateActual: 300,
+        stateApproved: 400,
+        this: 'neither'
       },
       otherStuff: 'deleted'
     };
@@ -67,7 +76,11 @@ tap.test('apd previous activity expense data model', async tests => {
       hit_federal_actual: 10,
       hit_federal_approved: 20,
       hit_state_actual: 30,
-      hit_state_approved: 40
+      hit_state_approved: 40,
+      mmis_federal_actual: 100,
+      mmis_federal_approved: 200,
+      mmis_state_actual: 300,
+      mmis_state_approved: 400
     });
   });
 
@@ -82,6 +95,10 @@ tap.test('apd previous activity expense data model', async tests => {
     self.get.withArgs('hit_federal_approved').returns('2000');
     self.get.withArgs('hit_state_actual').returns('3000');
     self.get.withArgs('hit_state_approved').returns('4000');
+    self.get.withArgs('mmis_federal_actual').returns('10');
+    self.get.withArgs('mmis_federal_approved').returns('20');
+    self.get.withArgs('mmis_state_actual').returns('30');
+    self.get.withArgs('mmis_state_approved').returns('40');
     self.get.withArgs('year').returns('year');
 
     const output = expense.toJSON.bind(self)();
@@ -98,6 +115,12 @@ tap.test('apd previous activity expense data model', async tests => {
         federalApproved: 2000,
         stateActual: 3000,
         stateApproved: 4000
+      },
+      mmis: {
+        federalActual: 10,
+        federalApproved: 20,
+        stateActual: 30,
+        stateApproved: 40
       },
       year: 'year'
     });
