@@ -10,7 +10,10 @@ import { t } from '../i18n';
 
 const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
   <Section id="prev-activities" resource="previousActivities">
-    <Subsection resource="previousActivities.outline">
+    <Subsection
+      id="prev-activities-outline"
+      resource="previousActivities.outline"
+    >
       <div className="mb-tiny bold">
         {t('previousActivities.outline.label')}
       </div>
@@ -19,7 +22,10 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
         onSync={html => updateApd({ previousActivitySummary: html })}
       />
     </Subsection>
-    <Subsection resource="previousActivities.actualExpenses">
+    <Subsection
+      id="prev-activities-table"
+      resource="previousActivities.actualExpenses"
+    >
       <ApdPreviousActivityTable />
     </Subsection>
   </Section>

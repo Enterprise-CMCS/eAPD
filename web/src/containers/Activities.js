@@ -10,7 +10,7 @@ import { Section, Subsection } from '../components/Section';
 
 const Activities = ({ activityIds, addActivity }) => (
   <Section id="activities" resource="activities">
-    <Subsection resource="activities.list" open>
+    <Subsection id="activities-list" resource="activities.list" open>
       {activityIds.length === 0 ? (
         <div className="mb2 p1 h6 alert">
           {t('activities.noActivityMessage')}

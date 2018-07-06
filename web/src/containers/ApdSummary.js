@@ -37,7 +37,7 @@ class ApdSummary extends Component {
 
     return (
       <Section id="apd-summary" resource="apd">
-        <Subsection resource="apd.overview">
+        <Subsection id="apd-summary-overview" resource="apd.overview">
           <div className="mb3">
             <div className="mb-tiny bold">{t('apd.overview.yearsCovered')}</div>
             {yearOptions.map(option => (
