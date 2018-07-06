@@ -160,7 +160,8 @@ export const saveApd = () => (dispatch, state) => {
     ).map(([year, o]) => ({
       year,
       hie: o.hie,
-      hit: o.hit
+      hit: o.hit,
+      mmis: o.mmis
     })),
     previousActivitySummary: updatedApd.previousActivitySummary,
     programOverview: updatedApd.overview,
