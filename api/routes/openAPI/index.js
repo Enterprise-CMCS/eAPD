@@ -370,23 +370,59 @@ module.exports = {
                 type: 'object',
                 description: 'HIT-funded expenses',
                 properties: {
-                  federalActual: {
+                  federal90Actual: {
                     type: 'number',
-                    description: 'Total federal share actually spent'
+                    description: 'Total federal 90% share actually spent'
                   },
-                  federalApproved: {
+                  federal90Approved: {
                     type: 'number',
                     description:
-                      'Total federal share approved in the previous APD'
+                      'Total federal 90% share approved in the previous APD'
                   },
-                  stateActual: {
+                  state10Actual: {
                     type: 'number',
-                    description: 'Total state share actually spent'
+                    description: 'Total state 10% share actually spent'
                   },
-                  stateApproved: {
+                  state10Approved: {
                     type: 'number',
                     description:
-                      'Total state share approved in the previous APD'
+                      'Total state 10% share approved in the previous APD'
+                  },
+                  federal75Actual: {
+                    type: 'number',
+                    description: 'Total federal 75% share actually spent'
+                  },
+                  federal75Approved: {
+                    type: 'number',
+                    description:
+                      'Total federal 75% share approved in the previous APD'
+                  },
+                  state25Actual: {
+                    type: 'number',
+                    description: 'Total state 25% share actually spent'
+                  },
+                  state25Approved: {
+                    type: 'number',
+                    description:
+                      'Total state 25% share approved in the previous APD'
+                  },
+                  federal50Actual: {
+                    type: 'number',
+                    description: 'Total federal 50% share actually spent'
+                  },
+                  federal50Approved: {
+                    type: 'number',
+                    description:
+                      'Total federal 50% share approved in the previous APD'
+                  },
+                  state50Actual: {
+                    type: 'number',
+                    description: 'Total state 50% share actually spent'
+                  },
+                  state50Approved: {
+                    type: 'number',
+                    description:
+                      'Total state 50% share approved in the previous APD'
                   }
                 }
               }
