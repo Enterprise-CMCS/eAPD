@@ -55,10 +55,18 @@ tap.test('apd previous activity expense data model', async tests => {
         thisWillNot: 'survive'
       },
       mmis: {
-        federalActual: 100,
-        federalApproved: 200,
-        stateActual: 300,
-        stateApproved: 400,
+        federal90Actual: 100,
+        federal90Approved: 200,
+        state10Actual: 300,
+        state10Approved: 400,
+        federal75Actual: 500,
+        federal75Approved: 600,
+        state25Actual: 700,
+        state25Approved: 800,
+        federal50Actual: 900,
+        federal50Approved: 901,
+        state50Actual: 902,
+        state50Approved: 903,
         this: 'neither'
       },
       otherStuff: 'deleted'
@@ -77,10 +85,18 @@ tap.test('apd previous activity expense data model', async tests => {
       hit_federal_approved: 20,
       hit_state_actual: 30,
       hit_state_approved: 40,
-      mmis_federal_actual: 100,
-      mmis_federal_approved: 200,
-      mmis_state_actual: 300,
-      mmis_state_approved: 400
+      mmis_federal90_actual: 100,
+      mmis_federal90_approved: 200,
+      mmis_state10_actual: 300,
+      mmis_state10_approved: 400,
+      mmis_federal75_actual: 500,
+      mmis_federal75_approved: 600,
+      mmis_state25_actual: 700,
+      mmis_state25_approved: 800,
+      mmis_federal50_actual: 900,
+      mmis_federal50_approved: 901,
+      mmis_state50_actual: 902,
+      mmis_state50_approved: 903
     });
   });
 
@@ -95,10 +111,18 @@ tap.test('apd previous activity expense data model', async tests => {
     self.get.withArgs('hit_federal_approved').returns('2000');
     self.get.withArgs('hit_state_actual').returns('3000');
     self.get.withArgs('hit_state_approved').returns('4000');
-    self.get.withArgs('mmis_federal_actual').returns('10');
-    self.get.withArgs('mmis_federal_approved').returns('20');
-    self.get.withArgs('mmis_state_actual').returns('30');
-    self.get.withArgs('mmis_state_approved').returns('40');
+    self.get.withArgs('mmis_federal90_actual').returns('10');
+    self.get.withArgs('mmis_federal90_approved').returns('20');
+    self.get.withArgs('mmis_state10_actual').returns('30');
+    self.get.withArgs('mmis_state10_approved').returns('40');
+    self.get.withArgs('mmis_federal75_actual').returns('50');
+    self.get.withArgs('mmis_federal75_approved').returns('60');
+    self.get.withArgs('mmis_state25_actual').returns('70');
+    self.get.withArgs('mmis_state25_approved').returns('80');
+    self.get.withArgs('mmis_federal50_actual').returns('90');
+    self.get.withArgs('mmis_federal50_approved').returns('91');
+    self.get.withArgs('mmis_state50_actual').returns('92');
+    self.get.withArgs('mmis_state50_approved').returns('93');
     self.get.withArgs('year').returns('year');
 
     const output = expense.toJSON.bind(self)();
@@ -117,10 +141,18 @@ tap.test('apd previous activity expense data model', async tests => {
         stateApproved: 4000
       },
       mmis: {
-        federalActual: 10,
-        federalApproved: 20,
-        stateActual: 30,
-        stateApproved: 40
+        federal90Actual: 10,
+        federal90Approved: 20,
+        state10Actual: 30,
+        state10Approved: 40,
+        federal75Actual: 50,
+        federal75Approved: 60,
+        state25Actual: 70,
+        state25Approved: 80,
+        federal50Actual: 90,
+        federal50Approved: 91,
+        state50Actual: 92,
+        state50Approved: 93
       },
       year: 'year'
     });

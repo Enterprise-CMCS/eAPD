@@ -50,10 +50,18 @@ export const getPreviousActivityExpense = () => ({
     stateApproved: 0
   },
   mmis: {
-    federalActual: 0,
-    federalApproved: 0,
-    stateActual: 0,
-    stateApproved: 0
+    federal90Actual: 0,
+    federal90Approved: 0,
+    federal75Actual: 0,
+    federal75Approved: 0,
+    federal50Actual: 0,
+    federal50Approved: 0,
+    state10Actual: 0,
+    state10Approved: 0,
+    state25Actual: 0,
+    state25Approved: 0,
+    state50Actual: 0,
+    state50Approved: 0
   }
 });
 
