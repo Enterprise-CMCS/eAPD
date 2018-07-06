@@ -13,6 +13,7 @@ export const GET_APD_REQUEST = 'GET_APD_REQUEST';
 export const GET_APD_SUCCESS = 'GET_APD_SUCCESS';
 export const GET_APD_FAILURE = 'GET_APD_FAILURE';
 export const REMOVE_APD_KEY_PERSON = 'REMOVE_APD_KEY_PERSON';
+export const REMOVE_APD_POC = 'REMOVE_APD_POC';
 export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
 export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
 export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
@@ -25,6 +26,7 @@ export const UPDATE_BUDGET = 'UPDATE_BUDGET';
 export const UPDATE_BUDGET_QUARTERLY_SHARE = 'UPDATE_BUDGET_QUARTERLY_SHARE';
 
 export const addPointOfContact = () => ({ type: ADD_APD_POC });
+export const removePointOfContact = index => ({ type: REMOVE_APD_POC, index });
 
 export const updateBudget = () => (dispatch, getState) =>
   dispatch({ type: UPDATE_BUDGET, state: getState() });

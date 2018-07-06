@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
-import { toggleActivitySection } from '../actions/activities';
+import { removeActivity, toggleActivitySection } from '../actions/activities';
 
 import {
   raw as ActivityDetailAll,
@@ -15,6 +15,7 @@ describe('the Activities details container component', () => {
     aId: 'activity-id',
     expanded: false,
     num: 3,
+    removeActivity: sinon.stub(),
     title: 'Activity title',
     toggleSection: sinon.stub()
   };
@@ -62,6 +63,7 @@ describe('the Activities details container component', () => {
 
   test('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
+      removeActivity,
       toggleSection: toggleActivitySection
     });
   });

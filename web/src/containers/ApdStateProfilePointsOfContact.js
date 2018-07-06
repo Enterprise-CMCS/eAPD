@@ -3,9 +3,11 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  updateApd as updateApdAction,
-  addPointOfContact
+  addPointOfContact,
+  removePointOfContact,
+  updateApd as updateApdAction
 } from '../actions/apd';
+import DeleteButton from '../components/DeleteConfirm';
 import { Input } from '../components/Inputs';
 import { t } from '../i18n';
 
@@ -18,7 +20,11 @@ class ApdStateProfile extends Component {
   };
 
   render() {
-    const { addPointOfContact: addPoc, poc } = this.props;
+    const {
+      addPointOfContact: addPoc,
+      poc,
+      removePointOfContact: removePoc
+    } = this.props;
     const tRoot = 'apd.stateProfile.pointsOfContact';
 
     return (
@@ -44,10 +50,17 @@ class ApdStateProfile extends Component {
               value={person.email}
               onChange={this.handleChange('email', i)}
             />
+            <DeleteButton
+              className="btn btn-small btn-outline bg-white blue h5"
+              remove={() => removePoc(i)}
+              resource={`${tRoot}.delete`}
+            />
           </div>
         ))}
         <button type="button" className="btn btn-primary" onClick={addPoc}>
-          {t('apd.stateProfile.pointsOfContact.labels.addButton')}
+          {t('apd.stateProfile.pointsOfContact.labels.addButton', {
+            count: poc.length
+          })}
         </button>
       </Fragment>
     );
@@ -57,12 +70,17 @@ class ApdStateProfile extends Component {
 ApdStateProfile.propTypes = {
   addPointOfContact: PropTypes.func.isRequired,
   poc: PropTypes.array.isRequired,
+  removePointOfContact: PropTypes.func.isRequired,
   updateApd: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ apd: { data: { pointsOfContact } } }) => ({
   poc: pointsOfContact
 });
-const mapDispatchToProps = { updateApd: updateApdAction, addPointOfContact };
+const mapDispatchToProps = {
+  addPointOfContact,
+  updateApd: updateApdAction,
+  removePointOfContact
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdStateProfile);

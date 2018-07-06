@@ -5,6 +5,7 @@ import {
   GET_APD_REQUEST,
   GET_APD_SUCCESS,
   GET_APD_FAILURE,
+  REMOVE_APD_POC,
   SELECT_APD,
   UPDATE_APD
 } from '../actions/apd';
@@ -222,6 +223,15 @@ const reducer = (state = initialState, action) => {
     }
     case GET_APD_FAILURE:
       return { ...state, fetching: false, error: action.error };
+    case REMOVE_APD_POC:
+      return u(
+        {
+          data: {
+            pointsOfContact: pocs => pocs.filter((_, i) => i !== action.index)
+          }
+        },
+        state
+      );
     case SELECT_APD:
       return { ...state, data: { ...action.apd } };
     case UPDATE_APD:
