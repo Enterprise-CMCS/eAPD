@@ -14,15 +14,29 @@
     quarter: Q{{q}}
   sidebar: 
     titles: 
+      stateProfile: State Profile Contact Information
       programSummary: "Program Summary"
+      programSummaryOverview: Program Overview
       previousActivities: "Results of Previous Activities"
+      previousActivitiesOutline: Prior Activities Outline
+      previousActivitiesActual: Actual Expenses
       activities: "Program Activities"
+      activitiesList: Activity List
       activity-set: "Activity {{number}}: {{name}}"
       activity-unset: "Activity {{number}}"
+      summarySchedule: Activity Schedule Table
+      summaryScheduleTable: Activity Schedule Table
       budget: "Proposed Budget"
+      budgetSummaryTable: Summary Budget Table
+      budgetFederalShareByQuarter: Federal Share by FFY Quarter
+      budgetIncentivePaymentByQuarter: Incentive Payments by FFY Quarter
       assurances: "Assurances and Compliance"
+      assurancesFederalCitations: Federal Citations and Justifications
       summary: "Executive/Overall Summary"
+      summaryOverview: Executive Summary Overview
+      summaryBudgetTable: Program Budget Table
       submit: "Certify and Submit"
+      submitSubmit: Submit APD
     savePdfButtonText: "Save as PDF"
   apd: 
     title: "Program Summary"

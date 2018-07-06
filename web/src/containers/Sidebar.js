@@ -8,16 +8,103 @@ import { saveApd } from '../actions/apd';
 import SidebarLink from '../components/SidebarLink';
 
 const linkGroup1 = [
-  { id: 'apd-summary', name: t('sidebar.titles.programSummary') },
-  { id: 'prev-activities', name: t('sidebar.titles.previousActivities') },
-  { id: 'activities', name: t('sidebar.titles.activities') }
+  { id: 'apd-state-profile', name: t('sidebar.titles.stateProfile') },
+  {
+    id: 'apd-summary',
+    name: t('sidebar.titles.programSummary'),
+    sub: [
+      {
+        id: 'apd-summary-overview',
+        name: t('sidebar.titles.programSummaryOverview')
+      }
+    ]
+  },
+  {
+    id: 'prev-activities',
+    name: t('sidebar.titles.previousActivities'),
+    sub: [
+      {
+        id: 'prev-activities-outline',
+        name: t('sidebar.titles.previousActivitiesOutline')
+      },
+      {
+        id: 'prev-activities-table',
+        name: t('sidebar.titles.previousActivitiesActual')
+      }
+    ]
+  },
+  {
+    id: 'activities',
+    name: t('sidebar.titles.activities'),
+    sub: [
+      {
+        id: 'activities-list',
+        name: t('sidebar.titles.activitiesList')
+      }
+    ]
+  }
 ];
 
 const linkGroup2 = [
-  { id: 'budget', name: t('sidebar.titles.budget') },
-  { id: 'assurances-compliance', name: t('sidebar.titles.assurances') },
-  { id: 'executive-summary', name: t('sidebar.titles.summary') },
-  { id: 'certify-submit', name: t('sidebar.titles.submit') }
+  {
+    id: 'schedule-summary',
+    name: t('sidebar.titles.summarySchedule'),
+    sub: [
+      {
+        id: 'schedule-summary-table',
+        name: t('sidebar.titles.summaryScheduleTable')
+      }
+    ]
+  },
+  {
+    id: 'budget',
+    name: t('sidebar.titles.budget'),
+    sub: [
+      {
+        id: 'budget-summary-table',
+        name: t('sidebar.titles.budgetSummaryTable')
+      },
+      {
+        id: 'budget-federal-by-quarter',
+        name: t('sidebar.titles.budgetFederalShareByQuarter')
+      },
+      {
+        id: 'budget-incentive-by-quarter',
+        name: t('sidebar.titles.budgetIncentivePaymentByQuarter')
+      }
+    ]
+  },
+  {
+    id: 'assurances-compliance',
+    name: t('sidebar.titles.assurances'),
+    sub: [
+      {
+        id: 'assurances-compliance-fed-citations',
+        name: t('sidebar.titles.assurancesFederalCitations')
+      }
+    ]
+  },
+  {
+    id: 'executive-summary',
+    name: t('sidebar.titles.summary'),
+    sub: [
+      {
+        id: 'executive-summary-overview',
+        name: t('sidebar.titles.summaryOverview')
+      },
+      {
+        id: 'executive-summary-budget-table',
+        name: t('sidebar.titles.summaryBudgetTable')
+      }
+    ]
+  },
+  {
+    id: 'certify-submit',
+    name: t('sidebar.titles.submit'),
+    sub: [
+      { id: 'certify-submit-submit', name: t('sidebar.titles.submitSubmit') }
+    ]
+  }
 ];
 
 const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
@@ -39,7 +126,7 @@ const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
       <div className="p2 lg-p3">
         <ul className="list-reset">
           {linkGroup1.map(d => (
-            <SidebarLink key={d.id} anchor={d.id} isActive={d.id === hash}>
+            <SidebarLink key={d.id} anchor={d.id} hash={hash} sub={d.sub}>
               {d.name}
             </SidebarLink>
           ))}
@@ -48,7 +135,7 @@ const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
               <SidebarLink
                 key={a.id}
                 anchor={a.anchor}
-                isActive={a.anchor === hash}
+                hash={hash}
                 onClick={() => expandSection(a.id)}
               >
                 {t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
@@ -59,7 +146,7 @@ const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
             ))}
           </ul>
           {linkGroup2.map(d => (
-            <SidebarLink key={d.id} anchor={d.id} isActive={d.id === hash}>
+            <SidebarLink key={d.id} anchor={d.id} hash={hash} sub={d.sub}>
               {d.name}
             </SidebarLink>
           ))}

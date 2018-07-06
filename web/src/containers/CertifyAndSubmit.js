@@ -8,7 +8,7 @@ import { t } from '../i18n';
 
 const CertifyAndSubmit = ({ submitAPD }) => (
   <Section id="certify-submit" resource="certifyAndSubmit">
-    <Subsection resource="certifyAndSubmit.certify">
+    <Subsection id="certify-submit-submit" resource="certifyAndSubmit.certify">
       <button
         type="button"
         className="btn btn-primary"
