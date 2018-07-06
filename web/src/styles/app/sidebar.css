@@ -1,7 +1,9 @@
+.sb-item:hover,
 .sb-item-active {
   font-weight: var(--bold-font-weight);
 }
 
+.sb-item:hover:before,
 .sb-item-active:before {
   border-left: 3px solid var(--yellow);
   content: ' ';
