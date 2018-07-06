@@ -26,7 +26,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative pl0 sb-item-active"
+          className="mb1 relative 0 sb-item sb-item-active"
         >
           <a
             className="inline-block white text-decoration-none truncate"
@@ -51,7 +51,7 @@ ShallowWrapper {
           >
             link text
           </a>,
-          "className": "mb1 relative pl0 sb-item-active",
+          "className": "mb1 relative 0 sb-item sb-item-active",
         },
         "ref": null,
         "rendered": Object {
@@ -80,7 +80,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative pl0 sb-item-active"
+            className="mb1 relative 0 sb-item sb-item-active"
           >
             <a
               className="inline-block white text-decoration-none truncate"
@@ -105,7 +105,7 @@ ShallowWrapper {
             >
               link text
             </a>,
-            "className": "mb1 relative pl0 sb-item-active",
+            "className": "mb1 relative 0 sb-item sb-item-active",
           },
           "ref": null,
           "rendered": Object {
@@ -163,7 +163,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative pl0 sb-item-active"
+          className="mb1 relative 0 sb-item sb-item-active"
         >
           <a
             className="inline-block white text-decoration-none truncate"
@@ -188,7 +188,7 @@ ShallowWrapper {
           >
             link text
           </a>,
-          "className": "mb1 relative pl0 sb-item-active",
+          "className": "mb1 relative 0 sb-item sb-item-active",
         },
         "ref": null,
         "rendered": Object {
@@ -217,7 +217,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative pl0 sb-item-active"
+            className="mb1 relative 0 sb-item sb-item-active"
           >
             <a
               className="inline-block white text-decoration-none truncate"
@@ -242,7 +242,7 @@ ShallowWrapper {
             >
               link text
             </a>,
-            "className": "mb1 relative pl0 sb-item-active",
+            "className": "mb1 relative 0 sb-item sb-item-active",
           },
           "ref": null,
           "rendered": Object {
@@ -300,7 +300,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative pl0 "
+          className="mb1 relative 0 sb-item "
         >
           <a
             className="inline-block white text-decoration-none truncate"
@@ -325,7 +325,7 @@ ShallowWrapper {
           >
             link text
           </a>,
-          "className": "mb1 relative pl0 ",
+          "className": "mb1 relative 0 sb-item ",
         },
         "ref": null,
         "rendered": Object {
@@ -354,7 +354,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative pl0 "
+            className="mb1 relative 0 sb-item "
           >
             <a
               className="inline-block white text-decoration-none truncate"
@@ -379,7 +379,7 @@ ShallowWrapper {
             >
               link text
             </a>,
-            "className": "mb1 relative pl0 ",
+            "className": "mb1 relative 0 sb-item ",
           },
           "ref": null,
           "rendered": Object {
