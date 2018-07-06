@@ -23,7 +23,7 @@ ShallowWrapper {
       "children": Array [
         false,
         <div
-          className="red"
+          className="my1 p1 h6 alert alert-info"
         >
           [missing {{year}} value] HITECH APD
         </div>,
@@ -39,7 +39,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "[missing {{year}} value] HITECH APD",
-          "className": "red",
+          "className": "my1 p1 h6 alert alert-info",
         },
         "ref": null,
         "rendered": "[missing {{year}} value] HITECH APD",
@@ -57,7 +57,7 @@ ShallowWrapper {
         "children": Array [
           false,
           <div
-            className="red"
+            className="my1 p1 h6 alert alert-info"
           >
             [missing {{year}} value] HITECH APD
           </div>,
@@ -73,7 +73,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "[missing {{year}} value] HITECH APD",
-            "className": "red",
+            "className": "my1 p1 h6 alert alert-info",
           },
           "ref": null,
           "rendered": "[missing {{year}} value] HITECH APD",
@@ -147,7 +147,7 @@ ShallowWrapper {
           [missing {{year}} value] HITECH APD
         </div>,
         <div
-          className="red"
+          className="my1 p1 h6 alert alert-info"
         >
           [missing {{year}} value] HITECH APD
         </div>,
@@ -173,7 +173,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "[missing {{year}} value] HITECH APD",
-          "className": "red",
+          "className": "my1 p1 h6 alert alert-info",
         },
         "ref": null,
         "rendered": "[missing {{year}} value] HITECH APD",
@@ -193,7 +193,7 @@ ShallowWrapper {
             [missing {{year}} value] HITECH APD
           </div>,
           <div
-            className="red"
+            className="my1 p1 h6 alert alert-info"
           >
             [missing {{year}} value] HITECH APD
           </div>,
@@ -219,7 +219,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "[missing {{year}} value] HITECH APD",
-            "className": "red",
+            "className": "my1 p1 h6 alert alert-info",
           },
           "ref": null,
           "rendered": "[missing {{year}} value] HITECH APD",
