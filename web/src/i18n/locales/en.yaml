@@ -128,6 +128,22 @@
             State share
 
             10% FFP
+          federalShare75: >-
+            Federal share
+
+            75% FFP
+          stateShare25: >-
+            State share
+
+            25% FFP
+          federalShare50: >-
+            Federal share
+
+            50% FFP
+          stateShare50: >-
+            State share
+
+            50% FFP
           grandTotal: >-
             Federal + State
             Grand Total Computable
