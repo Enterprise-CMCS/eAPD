@@ -2,8 +2,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import DeleteActivity from './DeleteActivity';
-import { updateActivity as updateActivityAction } from '../actions/activities';
+import {
+  removeActivity as removeActivityAction,
+  updateActivity as updateActivityAction
+} from '../actions/activities';
+import DeleteButton from '../components/DeleteConfirm';
 import { ACTIVITY_FUNDING_SOURCES } from '../util';
 
 class ActivityListEntry extends Component {
@@ -17,7 +20,7 @@ class ActivityListEntry extends Component {
   };
 
   render() {
-    const { activity, num } = this.props;
+    const { activity, num, removeActivity } = this.props;
     const { id, name, fundingSource } = activity;
 
     return (
@@ -46,7 +49,12 @@ class ActivityListEntry extends Component {
             </label>
           ))}
         </div>
-        {num > 1 && <DeleteActivity aId={id} />}
+        {num > 1 && (
+          <DeleteButton
+            remove={() => removeActivity(id)}
+            resource="activities.delete"
+          />
+        )}
       </div>
     );
   }
@@ -55,6 +63,7 @@ class ActivityListEntry extends Component {
 ActivityListEntry.propTypes = {
   activity: PropTypes.object.isRequired,
   num: PropTypes.number.isRequired,
+  removeActivity: PropTypes.func.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
 
@@ -63,7 +72,8 @@ const mapStateToProps = ({ activities: { byId } }, props) => ({
 });
 
 const mapDispatchToProps = {
-  updateActivity: updateActivityAction
+  updateActivity: updateActivityAction,
+  removeActivity: removeActivityAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivityListEntry);
