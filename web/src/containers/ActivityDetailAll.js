@@ -10,9 +10,12 @@ import ActivityDetailSchedule from './ActivityDetailSchedule';
 import ActivityDetailExpenses from './ActivityDetailExpenses';
 import ActivityDetailStandardsAndConditions from './ActivityDetailStandardsAndConditions';
 import ActivityDetailStatePersonnel from './ActivityDetailStatePersonnel';
-import DeleteActivity from './DeleteActivity';
-import { toggleActivitySection } from '../actions/activities';
+import {
+  removeActivity as removeActivityAction,
+  toggleActivitySection
+} from '../actions/activities';
 import Collapsible from '../components/Collapsible';
+import DeleteButton from '../components/DeleteConfirm';
 import { t } from '../i18n';
 
 const activityTitle = (a, i) => {
@@ -39,7 +42,7 @@ class ActivityDetailAll extends Component {
   };
 
   render() {
-    const { aId, expanded, num, title } = this.props;
+    const { aId, expanded, num, removeActivity, title } = this.props;
 
     return (
       <Collapsible
@@ -53,7 +56,12 @@ class ActivityDetailAll extends Component {
         {activityComponents.map((ActivityComponent, i) => (
           <ActivityComponent key={i} aId={aId} />
         ))}
-        {num > 1 && <DeleteActivity aId={aId} />}
+        {num > 1 && (
+          <DeleteButton
+            remove={() => removeActivity(aId)}
+            resource="activities.delete"
+          />
+        )}
       </Collapsible>
     );
   }
@@ -63,6 +71,7 @@ ActivityDetailAll.propTypes = {
   aId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   expanded: PropTypes.bool.isRequired,
   num: PropTypes.number.isRequired,
+  removeActivity: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   toggleSection: PropTypes.func.isRequired
 };
@@ -76,6 +85,7 @@ export const mapStateToProps = ({ activities: { byId } }, { aId, num }) => {
 };
 
 export const mapDispatchToProps = {
+  removeActivity: removeActivityAction,
   toggleSection: toggleActivitySection
 };
 
