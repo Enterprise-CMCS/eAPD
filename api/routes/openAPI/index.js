@@ -365,6 +365,30 @@ module.exports = {
                       'Total state share approved in the previous APD'
                   }
                 }
+              },
+              mmis: {
+                type: 'object',
+                description: 'HIT-funded expenses',
+                properties: {
+                  federalActual: {
+                    type: 'number',
+                    description: 'Total federal share actually spent'
+                  },
+                  federalApproved: {
+                    type: 'number',
+                    description:
+                      'Total federal share approved in the previous APD'
+                  },
+                  stateActual: {
+                    type: 'number',
+                    description: 'Total state share actually spent'
+                  },
+                  stateApproved: {
+                    type: 'number',
+                    description:
+                      'Total state share approved in the previous APD'
+                  }
+                }
               }
             }
           }),
