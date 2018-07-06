@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 const SidebarLink = ({ anchor, children, depth, hash, sub, ...rest }) => (
   <Fragment>
     <li
-      className={`mb1 relative ${depth && 'pl3'} sb-item ${
+      className={`mb1 relative ${depth && 'pl2'} sb-item ${
         hash === anchor ? 'sb-item-active' : ''
       }`}
     >

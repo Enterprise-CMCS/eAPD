@@ -130,11 +130,12 @@ const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
               {d.name}
             </SidebarLink>
           ))}
-          <ul className="mb0 ml2 list-reset">
+          <ul className="mb0 list-reset">
             {activities.map((a, i) => (
               <SidebarLink
                 key={a.id}
                 anchor={a.anchor}
+                depth={1}
                 hash={hash}
                 onClick={() => expandSection(a.id)}
               >
