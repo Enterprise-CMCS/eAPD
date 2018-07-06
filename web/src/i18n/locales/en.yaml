@@ -13,6 +13,9 @@
     subtotal: Subtotal
     quarter: Q{{q}}
   sidebar: 
+    titles:
+      activity-set: "Activity {{number}}: {{name}}"
+      activity-unset: "Activity {{number}}"
     savePdfButtonText: "Save as PDF"
     saveApdButtonText: Save APD
   apd: 
