@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { updateApd as updateApdAction } from '../actions/apd';
 import { RichText } from '../components/Inputs';
 import { Section, Subsection } from '../components/Section';
-import ApdPreviousActivityTable from './ApdPreviousActivityTable';
+import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
+import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
 import { t } from '../i18n';
 
 const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
@@ -26,7 +27,12 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
       id="prev-activities-table"
       resource="previousActivities.actualExpenses"
     >
-      <ApdPreviousActivityTable />
+      <div className="mb3">
+        <ApdPreviousActivityTableHI />
+      </div>
+      <div className="mb3">
+        <ApdPreviousActivityTableMMIS />
+      </div>
     </Subsection>
   </Section>
 );

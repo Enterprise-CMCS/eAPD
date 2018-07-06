@@ -1,3 +1,38 @@
+// Federal and state shares of expenses.  In each
+// child array, the first element is the federal
+// share and the second element is the state share.
+const shareDistributions = [[90, 10], [75, 25], [50, 50]];
+
+const getDBValues = (model, attr, shares = [['', '']]) =>
+  shares.reduce(
+    (acc, [fed, state]) => ({
+      ...acc,
+      [`federal${fed}Actual`]: +model.get(`${attr}_federal${fed}_actual`),
+      [`federal${fed}Approved`]: +model.get(`${attr}_federal${fed}_approved`),
+      [`state${state}Actual`]: +model.get(`${attr}_state${state}_actual`),
+      [`state${state}Approved`]: +model.get(`${attr}_state${state}_approved`)
+    }),
+    {}
+  );
+
+const getAttrValues = (attributes, attr, shares = [['', '']]) =>
+  attributes[attr]
+    ? shares.reduce(
+        (acc, [fed, state]) => ({
+          ...acc,
+          [`${attr}_federal${fed}_actual`]:
+            attributes[attr][`federal${fed}Actual`] || 0,
+          [`${attr}_federal${fed}_approved`]:
+            attributes[attr][`federal${fed}Approved`] || 0,
+          [`${attr}_state${state}_actual`]:
+            attributes[attr][`state${state}Actual`] || 0,
+          [`${attr}_state${state}_approved`]:
+            attributes[attr][`state${state}Approved`] || 0
+        }),
+        {}
+      )
+    : null;
+
 module.exports = () => ({
   apdPreviousActivityExpense: {
     tableName: 'apd_previous_activity_expenses',
@@ -7,43 +42,28 @@ module.exports = () => ({
     },
 
     format(attributes) {
-      const out = { year: attributes.year, apd_id: attributes.apd_id };
-      if (attributes.hie) {
-        out.hie_federal_actual = attributes.hie.federalActual || 0;
-        out.hie_federal_approved = attributes.hie.federalApproved || 0;
-        out.hie_state_actual = attributes.hie.stateActual || 0;
-        out.hie_state_approved = attributes.hie.stateApproved || 0;
-      }
-      if (attributes.hit) {
-        out.hit_federal_actual = attributes.hit.federalActual || 0;
-        out.hit_federal_approved = attributes.hit.federalApproved || 0;
-        out.hit_state_actual = attributes.hit.stateActual || 0;
-        out.hit_state_approved = attributes.hit.stateApproved || 0;
-      }
+      const out = {
+        ...getAttrValues(attributes, 'hie'),
+        ...getAttrValues(attributes, 'hit'),
+        ...getAttrValues(attributes, 'mmis', shareDistributions),
+        year: attributes.year,
+        apd_id: attributes.apd_id
+      };
 
       return out;
     },
 
     toJSON() {
       return {
-        hie: {
-          federalActual: +this.get('hie_federal_actual'),
-          federalApproved: +this.get('hie_federal_approved'),
-          stateActual: +this.get('hie_state_actual'),
-          stateApproved: +this.get('hie_state_approved')
-        },
-        hit: {
-          federalActual: +this.get('hit_federal_actual'),
-          federalApproved: +this.get('hit_federal_approved'),
-          stateActual: +this.get('hit_state_actual'),
-          stateApproved: +this.get('hit_state_approved')
-        },
+        hie: getDBValues(this, 'hie'),
+        hit: getDBValues(this, 'hit'),
+        mmis: getDBValues(this, 'mmis', shareDistributions),
         year: `${this.get('year')}`
       };
     },
 
     static: {
-      updateableFields: ['hie', 'hit', 'year']
+      updateableFields: ['hie', 'hit', 'mmis', 'year']
     }
   }
 });
