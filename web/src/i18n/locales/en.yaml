@@ -13,17 +13,11 @@
     subtotal: Subtotal
     quarter: Q{{q}}
   sidebar: 
-    titles: 
-      programSummary: "Program Summary"
-      previousActivities: "Results of Previous Activities"
-      activities: "Program Activities"
+    titles:
       activity-set: "Activity {{number}}: {{name}}"
       activity-unset: "Activity {{number}}"
-      budget: "Proposed Budget"
-      assurances: "Assurances and Compliance"
-      summary: "Executive/Overall Summary"
-      submit: "Certify and Submit"
     savePdfButtonText: "Save as PDF"
+    saveApdButtonText: Save APD
   apd: 
     title: "Program Summary"
     helpText: "Provide an introduction for your state's program. Include context for your funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD executive summary template section."

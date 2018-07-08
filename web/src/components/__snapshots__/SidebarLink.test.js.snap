@@ -5,8 +5,10 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <SidebarLink
-    anchor={null}
-    isActive={true}
+    anchor="moop"
+    depth={0}
+    hash="moop"
+    sub={Array []}
   >
     link text
   </SidebarLink>,
@@ -20,61 +22,109 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
-      "children": <a
-        className="inline-block white text-decoration-none truncate"
-        href="#!"
-      >
-        link text
-      </a>,
-      "className": "mb1 relative sb-item-active",
+      "children": Array [
+        <li
+          className="mb1 relative 0 sb-item sb-item-active"
+        >
+          <a
+            className="inline-block white text-decoration-none truncate"
+            href="#moop"
+          >
+            link text
+          </a>
+        </li>,
+        Array [],
+      ],
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": "link text",
-        "className": "inline-block white text-decoration-none truncate",
-        "href": "#!",
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <a
+            className="inline-block white text-decoration-none truncate"
+            href="#moop"
+          >
+            link text
+          </a>,
+          "className": "mb1 relative 0 sb-item sb-item-active",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "link text",
+            "className": "inline-block white text-decoration-none truncate",
+            "href": "#moop",
+          },
+          "ref": null,
+          "rendered": "link text",
+          "type": "a",
+        },
+        "type": "li",
       },
-      "ref": null,
-      "rendered": "link text",
-      "type": "a",
-    },
-    "type": "li",
+    ],
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
-        "children": <a
-          className="inline-block white text-decoration-none truncate"
-          href="#!"
-        >
-          link text
-        </a>,
-        "className": "mb1 relative sb-item-active",
+        "children": Array [
+          <li
+            className="mb1 relative 0 sb-item sb-item-active"
+          >
+            <a
+              className="inline-block white text-decoration-none truncate"
+              href="#moop"
+            >
+              link text
+            </a>
+          </li>,
+          Array [],
+        ],
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "link text",
-          "className": "inline-block white text-decoration-none truncate",
-          "href": "#!",
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <a
+              className="inline-block white text-decoration-none truncate"
+              href="#moop"
+            >
+              link text
+            </a>,
+            "className": "mb1 relative 0 sb-item sb-item-active",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "link text",
+              "className": "inline-block white text-decoration-none truncate",
+              "href": "#moop",
+            },
+            "ref": null,
+            "rendered": "link text",
+            "type": "a",
+          },
+          "type": "li",
         },
-        "ref": null,
-        "rendered": "link text",
-        "type": "a",
-      },
-      "type": "li",
+      ],
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -93,7 +143,9 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <SidebarLink
     anchor={null}
-    isActive={false}
+    depth={0}
+    hash={null}
+    sub={Array []}
   >
     link text
   </SidebarLink>,
@@ -107,61 +159,109 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
-      "children": <a
-        className="inline-block white text-decoration-none truncate"
-        href="#!"
-      >
-        link text
-      </a>,
-      "className": "mb1 relative ",
+      "children": Array [
+        <li
+          className="mb1 relative 0 sb-item sb-item-active"
+        >
+          <a
+            className="inline-block white text-decoration-none truncate"
+            href="#!"
+          >
+            link text
+          </a>
+        </li>,
+        Array [],
+      ],
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": "link text",
-        "className": "inline-block white text-decoration-none truncate",
-        "href": "#!",
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <a
+            className="inline-block white text-decoration-none truncate"
+            href="#!"
+          >
+            link text
+          </a>,
+          "className": "mb1 relative 0 sb-item sb-item-active",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "link text",
+            "className": "inline-block white text-decoration-none truncate",
+            "href": "#!",
+          },
+          "ref": null,
+          "rendered": "link text",
+          "type": "a",
+        },
+        "type": "li",
       },
-      "ref": null,
-      "rendered": "link text",
-      "type": "a",
-    },
-    "type": "li",
+    ],
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
-        "children": <a
-          className="inline-block white text-decoration-none truncate"
-          href="#!"
-        >
-          link text
-        </a>,
-        "className": "mb1 relative ",
+        "children": Array [
+          <li
+            className="mb1 relative 0 sb-item sb-item-active"
+          >
+            <a
+              className="inline-block white text-decoration-none truncate"
+              href="#!"
+            >
+              link text
+            </a>
+          </li>,
+          Array [],
+        ],
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "link text",
-          "className": "inline-block white text-decoration-none truncate",
-          "href": "#!",
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <a
+              className="inline-block white text-decoration-none truncate"
+              href="#!"
+            >
+              link text
+            </a>,
+            "className": "mb1 relative 0 sb-item sb-item-active",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "link text",
+              "className": "inline-block white text-decoration-none truncate",
+              "href": "#!",
+            },
+            "ref": null,
+            "rendered": "link text",
+            "type": "a",
+          },
+          "type": "li",
         },
-        "ref": null,
-        "rendered": "link text",
-        "type": "a",
-      },
-      "type": "li",
+      ],
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -180,7 +280,9 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <SidebarLink
     anchor="moop"
-    isActive={false}
+    depth={0}
+    hash={null}
+    sub={Array []}
   >
     link text
   </SidebarLink>,
@@ -194,61 +296,109 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
-      "children": <a
-        className="inline-block white text-decoration-none truncate"
-        href="#moop"
-      >
-        link text
-      </a>,
-      "className": "mb1 relative ",
+      "children": Array [
+        <li
+          className="mb1 relative 0 sb-item "
+        >
+          <a
+            className="inline-block white text-decoration-none truncate"
+            href="#moop"
+          >
+            link text
+          </a>
+        </li>,
+        Array [],
+      ],
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": "link text",
-        "className": "inline-block white text-decoration-none truncate",
-        "href": "#moop",
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <a
+            className="inline-block white text-decoration-none truncate"
+            href="#moop"
+          >
+            link text
+          </a>,
+          "className": "mb1 relative 0 sb-item ",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "link text",
+            "className": "inline-block white text-decoration-none truncate",
+            "href": "#moop",
+          },
+          "ref": null,
+          "rendered": "link text",
+          "type": "a",
+        },
+        "type": "li",
       },
-      "ref": null,
-      "rendered": "link text",
-      "type": "a",
-    },
-    "type": "li",
+    ],
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
-        "children": <a
-          className="inline-block white text-decoration-none truncate"
-          href="#moop"
-        >
-          link text
-        </a>,
-        "className": "mb1 relative ",
+        "children": Array [
+          <li
+            className="mb1 relative 0 sb-item "
+          >
+            <a
+              className="inline-block white text-decoration-none truncate"
+              href="#moop"
+            >
+              link text
+            </a>
+          </li>,
+          Array [],
+        ],
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "link text",
-          "className": "inline-block white text-decoration-none truncate",
-          "href": "#moop",
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <a
+              className="inline-block white text-decoration-none truncate"
+              href="#moop"
+            >
+              link text
+            </a>,
+            "className": "mb1 relative 0 sb-item ",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "link text",
+              "className": "inline-block white text-decoration-none truncate",
+              "href": "#moop",
+            },
+            "ref": null,
+            "rendered": "link text",
+            "type": "a",
+          },
+          "type": "li",
         },
-        "ref": null,
-        "rendered": "link text",
-        "type": "a",
-      },
-      "type": "li",
+      ],
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {
