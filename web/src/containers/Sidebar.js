@@ -8,16 +8,103 @@ import { saveApd } from '../actions/apd';
 import SidebarLink from '../components/SidebarLink';
 
 const linkGroup1 = [
-  { id: 'apd-summary', name: t('sidebar.titles.programSummary') },
-  { id: 'prev-activities', name: t('sidebar.titles.previousActivities') },
-  { id: 'activities', name: t('sidebar.titles.activities') }
+  { id: 'apd-state-profile', name: t('apd.stateProfile.title') },
+  {
+    id: 'apd-summary',
+    name: t('apd.title'),
+    sub: [
+      {
+        id: 'apd-summary-overview',
+        name: t('apd.overview.title')
+      }
+    ]
+  },
+  {
+    id: 'prev-activities',
+    name: t('previousActivities.title'),
+    sub: [
+      {
+        id: 'prev-activities-outline',
+        name: t('previousActivities.outline.title')
+      },
+      {
+        id: 'prev-activities-table',
+        name: t('previousActivities.actualExpenses.title')
+      }
+    ]
+  },
+  {
+    id: 'activities',
+    name: t('activities.title'),
+    sub: [
+      {
+        id: 'activities-list',
+        name: t('activities.list.title')
+      }
+    ]
+  }
 ];
 
 const linkGroup2 = [
-  { id: 'budget', name: t('sidebar.titles.budget') },
-  { id: 'assurances-compliance', name: t('sidebar.titles.assurances') },
-  { id: 'executive-summary', name: t('sidebar.titles.summary') },
-  { id: 'certify-submit', name: t('sidebar.titles.submit') }
+  {
+    id: 'schedule-summary',
+    name: t('scheduleSummary.title'),
+    sub: [
+      {
+        id: 'schedule-summary-table',
+        name: t('scheduleSummary.main.title')
+      }
+    ]
+  },
+  {
+    id: 'budget',
+    name: t('proposedBudget.title'),
+    sub: [
+      {
+        id: 'budget-summary-table',
+        name: t('proposedBudget.summaryBudget.title')
+      },
+      {
+        id: 'budget-federal-by-quarter',
+        name: t('proposedBudget.quarterlyBudget.title')
+      },
+      {
+        id: 'budget-incentive-by-quarter',
+        name: t('proposedBudget.paymentsByFFYQuarter.title')
+      }
+    ]
+  },
+  {
+    id: 'assurances-compliance',
+    name: t('assurancesAndCompliance.title'),
+    sub: [
+      {
+        id: 'assurances-compliance-fed-citations',
+        name: t('assurancesAndCompliance.citations.title')
+      }
+    ]
+  },
+  {
+    id: 'executive-summary',
+    name: t('executiveSummary.title'),
+    sub: [
+      {
+        id: 'executive-summary-overview',
+        name: t('executiveSummary.summary.title')
+      },
+      {
+        id: 'executive-summary-budget-table',
+        name: t('executiveSummary.budgetTable.title')
+      }
+    ]
+  },
+  {
+    id: 'certify-submit',
+    name: t('certifyAndSubmit.title'),
+    sub: [
+      { id: 'certify-submit-submit', name: t('certifyAndSubmit.certify.title') }
+    ]
+  }
 ];
 
 const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
@@ -39,16 +126,17 @@ const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
       <div className="p2 lg-p3">
         <ul className="list-reset">
           {linkGroup1.map(d => (
-            <SidebarLink key={d.id} anchor={d.id} isActive={d.id === hash}>
+            <SidebarLink key={d.id} anchor={d.id} hash={hash} sub={d.sub}>
               {d.name}
             </SidebarLink>
           ))}
-          <ul className="mb0 ml2 list-reset">
+          <ul className="mb0 list-reset">
             {activities.map((a, i) => (
               <SidebarLink
                 key={a.id}
                 anchor={a.anchor}
-                isActive={a.anchor === hash}
+                depth={1}
+                hash={hash}
                 onClick={() => expandSection(a.id)}
               >
                 {t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
@@ -59,23 +147,21 @@ const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
             ))}
           </ul>
           {linkGroup2.map(d => (
-            <SidebarLink key={d.id} anchor={d.id} isActive={d.id === hash}>
+            <SidebarLink key={d.id} anchor={d.id} hash={hash} sub={d.sub}>
               {d.name}
             </SidebarLink>
           ))}
         </ul>
-        <div className="mt2">
-          <button type="button" className="btn bg-white blue rounded">
-            {t('sidebar.savePdfButtonText')}
-          </button>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 p2 lg-px3">
+        <div className="mt2 center">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary mx1"
             onClick={() => saveApdToAPI()}
           >
-            Save APD
+            {t('sidebar.saveApdButtonText')}
+          </button>
+          <button type="button" className="btn bg-white blue mx1 rounded">
+            {t('sidebar.savePdfButtonText')}
           </button>
         </div>
       </div>
