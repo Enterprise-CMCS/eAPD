@@ -60,6 +60,22 @@ jobs:
           working_directory: ~/project/web
           command: bash <(curl -s https://codecov.io/bash)
 
+  validate openapi:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: save OpenAPI JSON
+          command: node -e "console.log(JSON.stringify(require('./api/routes/openAPI/index.js')))" > openapi.json
+      - run:
+          name: validate
+          command: |
+            docker create -v /openapi --name openapi alpine /bin/true
+            docker cp ./openapi.json openapi:/openapi
+            docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
+
   api lint:
     docker:
       - image: node:8
@@ -219,6 +235,9 @@ workflows:
           requires:
             - prepare dependencies cache
       - web test:
+          requires:
+            - prepare dependencies cache
+      - validate openapi:
           requires:
             - prepare dependencies cache
       - api lint:
