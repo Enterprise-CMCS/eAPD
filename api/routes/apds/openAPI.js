@@ -83,12 +83,16 @@ const openAPI = {
         description:
           'Additional data to save with the APD.  For example, computed values that the state has certified.',
         required: false,
-        schema: {
-          type: 'object',
-          properties: {
-            tables: {
+        content: {
+          'application/json': {
+            schema: {
               type: 'object',
-              description: 'Computed data tables'
+              properties: {
+                tables: {
+                  type: 'object',
+                  description: 'Computed data tables'
+                }
+              }
             }
           }
         }
