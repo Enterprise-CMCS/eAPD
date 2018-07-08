@@ -17,7 +17,11 @@ describe('SidebarLink component', () => {
   });
 
   test('renders correctly if link is active', () => {
-    const component = shallow(<SidebarLink isActive>link text</SidebarLink>);
+    const component = shallow(
+      <SidebarLink hash="moop" anchor="moop">
+        link text
+      </SidebarLink>
+    );
     expect(component).toMatchSnapshot();
   });
 });
