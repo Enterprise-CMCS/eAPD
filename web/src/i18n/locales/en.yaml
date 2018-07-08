@@ -13,17 +13,11 @@
     subtotal: Subtotal
     quarter: Q{{q}}
   sidebar: 
-    titles: 
-      programSummary: "Program Summary"
-      previousActivities: "Results of Previous Activities"
-      activities: "Program Activities"
+    titles:
       activity-set: "Activity {{number}}: {{name}}"
       activity-unset: "Activity {{number}}"
-      budget: "Proposed Budget"
-      assurances: "Assurances and Compliance"
-      summary: "Executive/Overall Summary"
-      submit: "Certify and Submit"
     savePdfButtonText: "Save as PDF"
+    saveApdButtonText: Save APD
   apd: 
     title: "Program Summary"
     helpText: "Provide an introduction for your state's program. Include context for your funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD executive summary template section."
@@ -65,12 +59,12 @@
             _no: "No"
     overview: 
       title: "Program Overview"
-      helpText: "Provide a high level summary of your state's program, history, and future vision."
+      helpText: "Provide a high level summary of your state's program, history, and future vision. This initial overview is intended to be brief, there will be opportunities to explain in more detail in the activity details section."
       reminder: "Indicate the federal fiscal years for which this APD is requesting funding."
       yearsCovered: "What federal fiscal year(s) does this APD cover?"
       labels: 
         desc: "Program Introduction"
-        helpText: "Describe the scope of what you intend to do. It is not meant to replicate the executive summary section. You will have an opportunity to explain in more detail later in this application."
+        helpText: "Provide a brief, high level summary of the state's program, history, and future vision. Specific activities for the program will be explained in the program activities section of this update."
     hit: 
       title: "HIT Overview"
       helpText: "Briefly summarize your planned HIT funded activities contained within this APD, we'll ask for more specific details later."
@@ -172,18 +166,18 @@
     description: 
       title: "Activity Overview"
       helpText: "Summarize the needs of the activity for which requested funding will be used (e.g. administrative, outreach, auditing, Public Health Registry Development, etc)"
-      reminder: "This should be very brief."
+      reminder: "The activity overview should be a brief summary of the activity needs."
       summary: 
-        subheader: "Brief Activity Summary"
+        title: "Brief Activity Summary"
       detail:
         standard:
-          subheader: "Describe the activity and include relevant information."
+          subheader: "Include as much detail as necessary to explain the activity."
         hie:
           subheader: "Describe the activity in detail including images, diagrams, or other relevant information."
           helpText: "The activity details must also include a description of three items: how the activity is linked to meaningful use; value proposition to providers, and sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.	Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how you'll complete the activity."
       alternatives: 
         subheader: "Statement of alternative considerations and supporting justification"
-        helpText: "If no substantive changes have been made to this activity, include a statement referring to the Statement of Alternative Considerations contained in previous versions of the IAPD or in the SMHP. If substantive changes have been made, include a statement describing the alternatives your state considered when making the change."
+        helpText: "If no substantive changes have been made to this activity, include a statement referring to the Statement of Alternative Considerations contained in previous versions of the IAPD update or in the SMHP. If substantive changes have been made (or this is a new activity), include a statement describing what alternative considerations were made before selecting the strategy for implementation."
         reminder: "Remember to update the SMHP as necessary with any substantive changes to the approach for implementing EHR incentives."
     goals: 
       title: Needs and Objectives
@@ -232,7 +226,7 @@
     statePersonnel: 
       title: "Personnel"
       subheader: "Outline the personnel resources for this section. This includes anyone funded as a part of this activity. This does not include personnel listed in the contract section."
-      helpText: "Personnel costs must include salaries and benefits. FTE is percentage attributable to the activity. Enter individuals only once."
+      helpText: "Personnel costs for this section includes combined salary and benefits. Salary amount is the yearly cost of the individual personnel listed and personnel only need to be listed once. FTE% is the percentage attributable to the activity. Personnel costs are automatically calculated from the %FTE provided. "
       labels: 
         entryNum: "#"
         title: "Title"
@@ -260,7 +254,7 @@
      Ensure cost allocations involve the timely and insured financial participation of all parties. States should demonstrate that other payers who stand to benefit are contributing their share, ideally from the beginning of the program/activity/service for which funding is being requested."
       methodology: 
         title: "Cost allocation methodology description"
-        reminder: "Do not assume the absence of other payers is sufficient cause for Medicaid to be the primary payer. Limit ambiguity about other potential federal funding sources. For example, if no CHIP funds are being requested, include a statement in this section."
+        reminder: "Do not assume the absence of other payers is sufficient cause for Medicaid to be the primary payer. Limit ambiguity about other potential federal funding sources. (For example, if no CHIP funds are being requested, include a statement in this section.)"
       otherFunding: 
         title: "Other funding description"
         helpText: "Account for any and all grant funding used to support this activity, and review the state Medicaid director Letter 10‐016 for examples of grants needed to be included."
@@ -334,8 +328,10 @@
     helpText: "This itemized budget table has combined the costs for each activity into a single itemized table by federal fiscal year (FFY). The table displays total share, federal share, and state share. The second table also includes a proposed breakout of the budget by FFY quarter."
     summaryBudget: 
       title: Summary Budget Table
+      helpText: "Totals are calculated automatically."
     quarterlyBudget: 
       title: Federal Share by FFY Quarter
+      helpText: ""
       expenseNames:
           statePersonnel: Project state staff
           expenses: Non-personnel

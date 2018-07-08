@@ -7,13 +7,22 @@ import QuarterlyBudgetSummary from '../containers/QuarterlyBudgetSummary';
 
 const ProposedBudget = () => (
   <Section id="budget" resource="proposedBudget">
-    <Subsection resource="proposedBudget.summaryBudget">
+    <Subsection
+      id="budget-summary-table"
+      resource="proposedBudget.summaryBudget"
+    >
       <BudgetSummary />
     </Subsection>
-    <Subsection resource="proposedBudget.quarterlyBudget">
+    <Subsection
+      id="budget-federal-by-quarter"
+      resource="proposedBudget.quarterlyBudget"
+    >
       <QuarterlyBudgetSummary />
     </Subsection>
-    <Subsection resource="proposedBudget.paymentsByFFYQuarter">
+    <Subsection
+      id="budget-incentive-by-quarter"
+      resource="proposedBudget.paymentsByFFYQuarter"
+    >
       <IncentivePayments />
     </Subsection>
   </Section>

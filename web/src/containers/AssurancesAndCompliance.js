@@ -28,7 +28,10 @@ const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
 
   return (
     <Section id="assurances-compliance" resource="assurancesAndCompliance">
-      <Subsection resource="assurancesAndCompliance.citations">
+      <Subsection
+        id="assurances-compliance-fed-citations"
+        resource="assurancesAndCompliance.citations"
+      >
         <table>
           <tbody>
             {Object.entries(regLinks).map(([name, regulations]) => (

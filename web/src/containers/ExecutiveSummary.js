@@ -12,7 +12,10 @@ import { formatMoney } from '../util/formats';
 
 const ExecutiveSummary = ({ data, years, expandSection }) => (
   <Section id="executive-summary" resource="executiveSummary">
-    <Subsection resource="executiveSummary.summary">
+    <Subsection
+      id="executive-summary-overview"
+      resource="executiveSummary.summary"
+    >
       {data.map((d, i) => (
         <div
           key={d.id}
@@ -54,7 +57,10 @@ const ExecutiveSummary = ({ data, years, expandSection }) => (
         </div>
       ))}
     </Subsection>
-    <Subsection resource="executiveSummary.budgetTable">
+    <Subsection
+      id="executive-summary-budget-table"
+      resource="executiveSummary.budgetTable"
+    >
       <ExecutiveSummaryBudget />
     </Subsection>
   </Section>
