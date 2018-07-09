@@ -19,7 +19,7 @@ const rollup = previous => {
   return total;
 };
 
-const ApdPreviousActivityTable = ({
+const ApdPreviousActivityTableMMIS = ({
   previousActivityExpenses,
   updateApd: dispatchUpdateApd
 }) => {
@@ -95,7 +95,7 @@ const ApdPreviousActivityTable = ({
                 <th>{t('ffy', { year })}</th>
                 {[[90, 10], [75, 25], [50, 50]].map(
                   ([federalShare, stateShare]) => (
-                    <Fragment>
+                    <Fragment key={`${federalShare}-${stateShare}`}>
                       <td>
                         <DollarInput
                           name={`approved-federal${federalShare}-mmis-${year}`}
@@ -186,7 +186,7 @@ const ApdPreviousActivityTable = ({
   );
 };
 
-ApdPreviousActivityTable.propTypes = {
+ApdPreviousActivityTableMMIS.propTypes = {
   previousActivityExpenses: PropTypes.object.isRequired,
   updateApd: PropTypes.func.isRequired
 };
@@ -198,5 +198,5 @@ const mapStateToProps = ({ apd: { data: { previousActivityExpenses } } }) => ({
 const mapDispatchToProps = { updateApd };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  ApdPreviousActivityTable
+  ApdPreviousActivityTableMMIS
 );
