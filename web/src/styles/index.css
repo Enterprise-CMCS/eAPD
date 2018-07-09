@@ -50,6 +50,19 @@
 
   --button-font-weight: normal;
 
+  --col-1: calc(1/12 * 100%);
+  --col-2: calc(2/12 * 100%);
+  --col-3: calc(3/12 * 100%);
+  --col-4: calc(4/12 * 100%);
+  --col-5: calc(5/12 * 100%);
+  --col-6: calc(6/12 * 100%);
+  --col-7: calc(7/12 * 100%);
+  --col-8: calc(8/12 * 100%);
+  --col-9: calc(9/12 * 100%);
+  --col-10: calc(10/12 * 100%);
+  --col-11: calc(11/12 * 100%);
+  --col-12: calc(12/12 * 100%);
+
   /* ace color overrides */
 
   --gray: #ccc;
