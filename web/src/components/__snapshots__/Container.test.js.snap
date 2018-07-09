@@ -24,7 +24,7 @@ ShallowWrapper {
       "children": Array [
         <Connect(TopNav) />,
         <div
-          className="site-main"
+          className="flex-none"
         >
           <div
             className="container p2"
@@ -59,7 +59,7 @@ ShallowWrapper {
               className="test child"
             />
           </div>,
-          "className": "site-main",
+          "className": "flex-none",
         },
         "ref": null,
         "rendered": Object {
@@ -100,7 +100,7 @@ ShallowWrapper {
         "children": Array [
           <Connect(TopNav) />,
           <div
-            className="site-main"
+            className="flex-none"
           >
             <div
               className="container p2"
@@ -135,7 +135,7 @@ ShallowWrapper {
                 className="test child"
               />
             </div>,
-            "className": "site-main",
+            "className": "flex-none",
           },
           "ref": null,
           "rendered": Object {
