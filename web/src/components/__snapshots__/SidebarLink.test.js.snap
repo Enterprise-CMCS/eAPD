@@ -26,10 +26,10 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative 0 sb-item sb-item-active"
+          className="mb1 relative sb-item  sb-item-active"
         >
           <a
-            className="inline-block white text-decoration-none truncate"
+            className="block white text-decoration-none truncate"
             href="#moop"
           >
             link text
@@ -46,12 +46,12 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": <a
-            className="inline-block white text-decoration-none truncate"
+            className="block white text-decoration-none truncate"
             href="#moop"
           >
             link text
           </a>,
-          "className": "mb1 relative 0 sb-item sb-item-active",
+          "className": "mb1 relative sb-item  sb-item-active",
         },
         "ref": null,
         "rendered": Object {
@@ -60,7 +60,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "link text",
-            "className": "inline-block white text-decoration-none truncate",
+            "className": "block white text-decoration-none truncate",
             "href": "#moop",
           },
           "ref": null,
@@ -80,10 +80,10 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative 0 sb-item sb-item-active"
+            className="mb1 relative sb-item  sb-item-active"
           >
             <a
-              className="inline-block white text-decoration-none truncate"
+              className="block white text-decoration-none truncate"
               href="#moop"
             >
               link text
@@ -100,12 +100,12 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": <a
-              className="inline-block white text-decoration-none truncate"
+              className="block white text-decoration-none truncate"
               href="#moop"
             >
               link text
             </a>,
-            "className": "mb1 relative 0 sb-item sb-item-active",
+            "className": "mb1 relative sb-item  sb-item-active",
           },
           "ref": null,
           "rendered": Object {
@@ -114,7 +114,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": "link text",
-              "className": "inline-block white text-decoration-none truncate",
+              "className": "block white text-decoration-none truncate",
               "href": "#moop",
             },
             "ref": null,
@@ -163,10 +163,10 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative 0 sb-item sb-item-active"
+          className="mb1 relative sb-item  sb-item-active"
         >
           <a
-            className="inline-block white text-decoration-none truncate"
+            className="block white text-decoration-none truncate"
             href="#!"
           >
             link text
@@ -183,12 +183,12 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": <a
-            className="inline-block white text-decoration-none truncate"
+            className="block white text-decoration-none truncate"
             href="#!"
           >
             link text
           </a>,
-          "className": "mb1 relative 0 sb-item sb-item-active",
+          "className": "mb1 relative sb-item  sb-item-active",
         },
         "ref": null,
         "rendered": Object {
@@ -197,7 +197,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "link text",
-            "className": "inline-block white text-decoration-none truncate",
+            "className": "block white text-decoration-none truncate",
             "href": "#!",
           },
           "ref": null,
@@ -217,10 +217,10 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative 0 sb-item sb-item-active"
+            className="mb1 relative sb-item  sb-item-active"
           >
             <a
-              className="inline-block white text-decoration-none truncate"
+              className="block white text-decoration-none truncate"
               href="#!"
             >
               link text
@@ -237,12 +237,12 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": <a
-              className="inline-block white text-decoration-none truncate"
+              className="block white text-decoration-none truncate"
               href="#!"
             >
               link text
             </a>,
-            "className": "mb1 relative 0 sb-item sb-item-active",
+            "className": "mb1 relative sb-item  sb-item-active",
           },
           "ref": null,
           "rendered": Object {
@@ -251,7 +251,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": "link text",
-              "className": "inline-block white text-decoration-none truncate",
+              "className": "block white text-decoration-none truncate",
               "href": "#!",
             },
             "ref": null,
@@ -300,10 +300,10 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative 0 sb-item "
+          className="mb1 relative sb-item  "
         >
           <a
-            className="inline-block white text-decoration-none truncate"
+            className="block white text-decoration-none truncate"
             href="#moop"
           >
             link text
@@ -320,12 +320,12 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": <a
-            className="inline-block white text-decoration-none truncate"
+            className="block white text-decoration-none truncate"
             href="#moop"
           >
             link text
           </a>,
-          "className": "mb1 relative 0 sb-item ",
+          "className": "mb1 relative sb-item  ",
         },
         "ref": null,
         "rendered": Object {
@@ -334,7 +334,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "link text",
-            "className": "inline-block white text-decoration-none truncate",
+            "className": "block white text-decoration-none truncate",
             "href": "#moop",
           },
           "ref": null,
@@ -354,10 +354,10 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative 0 sb-item "
+            className="mb1 relative sb-item  "
           >
             <a
-              className="inline-block white text-decoration-none truncate"
+              className="block white text-decoration-none truncate"
               href="#moop"
             >
               link text
@@ -374,12 +374,12 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": <a
-              className="inline-block white text-decoration-none truncate"
+              className="block white text-decoration-none truncate"
               href="#moop"
             >
               link text
             </a>,
-            "className": "mb1 relative 0 sb-item ",
+            "className": "mb1 relative sb-item  ",
           },
           "ref": null,
           "rendered": Object {
@@ -388,7 +388,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": "link text",
-              "className": "inline-block white text-decoration-none truncate",
+              "className": "block white text-decoration-none truncate",
               "href": "#moop",
             },
             "ref": null,
