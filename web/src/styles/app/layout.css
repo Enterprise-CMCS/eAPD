@@ -33,13 +33,19 @@ footer {
   }
 
   .site-sidebar {
+    bottom: 0;
     flex: 0 0 auto;
     max-height: 100vh;
-    min-width: 16rem;
     overflow-y: auto;
-    position: sticky;
-    top: 0px;
-    width: 25%;
+    position: fixed;
+    top: 0;
+    width: var(--col-3);
+  }
+
+  .site-main {
+    margin-left: var(--col-4);
+    margin-right: var(--col-1);
+    width: var(--col-7);
   }
 }
 

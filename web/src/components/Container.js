@@ -6,7 +6,7 @@ import TopNav from '../containers/TopNav';
 const Container = ({ children }) => (
   <Fragment>
     <TopNav />
-    <div className="site-main">
+    <div className="flex-none">
       <div className="container p2">{children}</div>
     </div>
   </Fragment>
