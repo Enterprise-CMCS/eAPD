@@ -3,12 +3,15 @@
   font-weight: var(--bold-font-weight);
 }
 
-.sb-item:hover:before,
 .sb-item-active:before {
   border-left: 3px solid var(--yellow);
   content: ' ';
-  height: 20px;
-  margin-top: 2px;
+  height: 1.25rem;
+  margin-top: 0.375rem;
   position: absolute;
-  left: -8px;
+  left: -0.5rem;
+}
+
+.sb-item a {
+  line-height: 2;
 }

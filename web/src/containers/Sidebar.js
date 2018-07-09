@@ -152,15 +152,15 @@ const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
             </SidebarLink>
           ))}
         </ul>
-        <div className="mt2 center">
+        <div className="mt3">
           <button
             type="button"
-            className="btn btn-primary mx1"
+            className="btn btn-primary mr1"
             onClick={() => saveApdToAPI()}
           >
             {t('sidebar.saveApdButtonText')}
           </button>
-          <button type="button" className="btn bg-white blue mx1 rounded">
+          <button type="button" className="btn btn-outline bg-white blue">
             {t('sidebar.savePdfButtonText')}
           </button>
         </div>

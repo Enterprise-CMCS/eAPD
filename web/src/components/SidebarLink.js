@@ -1,16 +1,19 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
+const addIf = (condit, yes, no = '') => (condit ? yes : no);
+
 const SidebarLink = ({ anchor, children, depth, hash, sub, ...rest }) => (
   <Fragment>
     <li
-      className={`mb1 relative ${depth && 'pl2'} sb-item ${
-        hash === anchor ? 'sb-item-active' : ''
-      }`}
+      className={`mb1 relative sb-item ${addIf(depth, 'pl2')} ${addIf(
+        hash === anchor,
+        'sb-item-active'
+      )}`}
     >
       <a
         href={`#${anchor || '!'}`}
-        className="inline-block white text-decoration-none truncate"
+        className="block white text-decoration-none truncate"
         {...rest}
       >
         {children}
