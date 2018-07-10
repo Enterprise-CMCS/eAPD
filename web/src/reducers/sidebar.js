@@ -1,4 +1,3 @@
-import u from 'updeep';
 import { SIDEBAR_TOGGLE_EXPAND } from '../actions/sidebar';
 
 const initialState = {
