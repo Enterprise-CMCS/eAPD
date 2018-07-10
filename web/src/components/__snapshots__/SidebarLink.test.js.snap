@@ -7,8 +7,10 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <SidebarLink
     anchor="moop"
     depth={0}
+    expanded={null}
     hash="moop"
     sub={Array []}
+    toggleExpand={[Function]}
   >
     link text
   </SidebarLink>,
@@ -29,13 +31,13 @@ ShallowWrapper {
           className="mb1 relative sb-item  sb-item-active"
         >
           <a
-            className="block white text-decoration-none truncate"
+            className="white text-decoration-none truncate"
             href="#moop"
           >
             link text
           </a>
         </li>,
-        Array [],
+        null,
       ],
     },
     "ref": null,
@@ -45,30 +47,37 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <a
-            className="block white text-decoration-none truncate"
-            href="#moop"
-          >
-            link text
-          </a>,
+          "children": Array [
+            <a
+              className="white text-decoration-none truncate"
+              href="#moop"
+            >
+              link text
+            </a>,
+            null,
+          ],
           "className": "mb1 relative sb-item  sb-item-active",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "link text",
-            "className": "block white text-decoration-none truncate",
-            "href": "#moop",
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "link text",
+              "className": "white text-decoration-none truncate",
+              "href": "#moop",
+            },
+            "ref": null,
+            "rendered": "link text",
+            "type": "a",
           },
-          "ref": null,
-          "rendered": "link text",
-          "type": "a",
-        },
+          null,
+        ],
         "type": "li",
       },
+      null,
     ],
     "type": Symbol(react.fragment),
   },
@@ -83,13 +92,13 @@ ShallowWrapper {
             className="mb1 relative sb-item  sb-item-active"
           >
             <a
-              className="block white text-decoration-none truncate"
+              className="white text-decoration-none truncate"
               href="#moop"
             >
               link text
             </a>
           </li>,
-          Array [],
+          null,
         ],
       },
       "ref": null,
@@ -99,30 +108,37 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <a
-              className="block white text-decoration-none truncate"
-              href="#moop"
-            >
-              link text
-            </a>,
+            "children": Array [
+              <a
+                className="white text-decoration-none truncate"
+                href="#moop"
+              >
+                link text
+              </a>,
+              null,
+            ],
             "className": "mb1 relative sb-item  sb-item-active",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "link text",
-              "className": "block white text-decoration-none truncate",
-              "href": "#moop",
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "link text",
+                "className": "white text-decoration-none truncate",
+                "href": "#moop",
+              },
+              "ref": null,
+              "rendered": "link text",
+              "type": "a",
             },
-            "ref": null,
-            "rendered": "link text",
-            "type": "a",
-          },
+            null,
+          ],
           "type": "li",
         },
+        null,
       ],
       "type": Symbol(react.fragment),
     },
@@ -144,8 +160,10 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <SidebarLink
     anchor={null}
     depth={0}
+    expanded={null}
     hash={null}
     sub={Array []}
+    toggleExpand={[Function]}
   >
     link text
   </SidebarLink>,
@@ -166,13 +184,13 @@ ShallowWrapper {
           className="mb1 relative sb-item  sb-item-active"
         >
           <a
-            className="block white text-decoration-none truncate"
+            className="white text-decoration-none truncate"
             href="#!"
           >
             link text
           </a>
         </li>,
-        Array [],
+        null,
       ],
     },
     "ref": null,
@@ -182,30 +200,37 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <a
-            className="block white text-decoration-none truncate"
-            href="#!"
-          >
-            link text
-          </a>,
+          "children": Array [
+            <a
+              className="white text-decoration-none truncate"
+              href="#!"
+            >
+              link text
+            </a>,
+            null,
+          ],
           "className": "mb1 relative sb-item  sb-item-active",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "link text",
-            "className": "block white text-decoration-none truncate",
-            "href": "#!",
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "link text",
+              "className": "white text-decoration-none truncate",
+              "href": "#!",
+            },
+            "ref": null,
+            "rendered": "link text",
+            "type": "a",
           },
-          "ref": null,
-          "rendered": "link text",
-          "type": "a",
-        },
+          null,
+        ],
         "type": "li",
       },
+      null,
     ],
     "type": Symbol(react.fragment),
   },
@@ -220,13 +245,13 @@ ShallowWrapper {
             className="mb1 relative sb-item  sb-item-active"
           >
             <a
-              className="block white text-decoration-none truncate"
+              className="white text-decoration-none truncate"
               href="#!"
             >
               link text
             </a>
           </li>,
-          Array [],
+          null,
         ],
       },
       "ref": null,
@@ -236,30 +261,37 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <a
-              className="block white text-decoration-none truncate"
-              href="#!"
-            >
-              link text
-            </a>,
+            "children": Array [
+              <a
+                className="white text-decoration-none truncate"
+                href="#!"
+              >
+                link text
+              </a>,
+              null,
+            ],
             "className": "mb1 relative sb-item  sb-item-active",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "link text",
-              "className": "block white text-decoration-none truncate",
-              "href": "#!",
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "link text",
+                "className": "white text-decoration-none truncate",
+                "href": "#!",
+              },
+              "ref": null,
+              "rendered": "link text",
+              "type": "a",
             },
-            "ref": null,
-            "rendered": "link text",
-            "type": "a",
-          },
+            null,
+          ],
           "type": "li",
         },
+        null,
       ],
       "type": Symbol(react.fragment),
     },
@@ -281,8 +313,10 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <SidebarLink
     anchor="moop"
     depth={0}
+    expanded={null}
     hash={null}
     sub={Array []}
+    toggleExpand={[Function]}
   >
     link text
   </SidebarLink>,
@@ -303,13 +337,13 @@ ShallowWrapper {
           className="mb1 relative sb-item  "
         >
           <a
-            className="block white text-decoration-none truncate"
+            className="white text-decoration-none truncate"
             href="#moop"
           >
             link text
           </a>
         </li>,
-        Array [],
+        null,
       ],
     },
     "ref": null,
@@ -319,30 +353,37 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <a
-            className="block white text-decoration-none truncate"
-            href="#moop"
-          >
-            link text
-          </a>,
+          "children": Array [
+            <a
+              className="white text-decoration-none truncate"
+              href="#moop"
+            >
+              link text
+            </a>,
+            null,
+          ],
           "className": "mb1 relative sb-item  ",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "link text",
-            "className": "block white text-decoration-none truncate",
-            "href": "#moop",
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "link text",
+              "className": "white text-decoration-none truncate",
+              "href": "#moop",
+            },
+            "ref": null,
+            "rendered": "link text",
+            "type": "a",
           },
-          "ref": null,
-          "rendered": "link text",
-          "type": "a",
-        },
+          null,
+        ],
         "type": "li",
       },
+      null,
     ],
     "type": Symbol(react.fragment),
   },
@@ -357,13 +398,13 @@ ShallowWrapper {
             className="mb1 relative sb-item  "
           >
             <a
-              className="block white text-decoration-none truncate"
+              className="white text-decoration-none truncate"
               href="#moop"
             >
               link text
             </a>
           </li>,
-          Array [],
+          null,
         ],
       },
       "ref": null,
@@ -373,30 +414,37 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <a
-              className="block white text-decoration-none truncate"
-              href="#moop"
-            >
-              link text
-            </a>,
+            "children": Array [
+              <a
+                className="white text-decoration-none truncate"
+                href="#moop"
+              >
+                link text
+              </a>,
+              null,
+            ],
             "className": "mb1 relative sb-item  ",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "link text",
-              "className": "block white text-decoration-none truncate",
-              "href": "#moop",
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "link text",
+                "className": "white text-decoration-none truncate",
+                "href": "#moop",
+              },
+              "ref": null,
+              "rendered": "link text",
+              "type": "a",
             },
-            "ref": null,
-            "rendered": "link text",
-            "type": "a",
-          },
+            null,
+          ],
           "type": "li",
         },
+        null,
       ],
       "type": Symbol(react.fragment),
     },
