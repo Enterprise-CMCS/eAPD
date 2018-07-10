@@ -4,6 +4,14 @@ import { UPDATE_BUDGET } from '../actions/apd';
 describe('budget reducer', () => {
   const initialState = {
     combined: { total: { total: 0, federal: 0, state: 0 } },
+    federalShareByFFYQuarter: {
+      hitAndHie: {
+        total: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 }
+      },
+      mmis: {
+        total: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 }
+      }
+    },
     hie: {
       combined: { total: { total: 0, federal: 0, state: 0 } },
       contractors: { total: { total: 0, federal: 0, state: 0 } },
@@ -177,6 +185,240 @@ describe('budget reducer', () => {
         '1932': { federal: 12300, state: 1700.0100000000002, total: 15000 },
         '1933': { federal: 11790, state: 1310.01, total: 14100 },
         total: { federal: 35640, state: 4960.02, total: 43600 }
+      },
+      federalShareByFFYQuarter: {
+        hitAndHie: {
+          '1931': {
+            '1': {
+              percent: 25,
+              contractors: 900,
+              expenses: 900,
+              statePersonnel: 900,
+              total: 2700
+            },
+            '2': {
+              percent: 25,
+              contractors: 900,
+              expenses: 900,
+              statePersonnel: 900,
+              total: 2700
+            },
+            '3': {
+              percent: 25,
+              contractors: 900,
+              expenses: 900,
+              statePersonnel: 900,
+              total: 2700
+            },
+            '4': {
+              percent: 25,
+              contractors: 900,
+              expenses: 900,
+              statePersonnel: 900,
+              total: 2700
+            },
+            subtotal: {
+              contractors: 3600,
+              expenses: 3600,
+              statePersonnel: 3600,
+              total: 10800
+            }
+          },
+          '1932': {
+            '1': {
+              percent: 25,
+              contractors: 900,
+              expenses: 900,
+              statePersonnel: 900,
+              total: 2700
+            },
+            '2': {
+              percent: 25,
+              contractors: 900,
+              expenses: 900,
+              statePersonnel: 900,
+              total: 2700
+            },
+            '3': {
+              percent: 25,
+              contractors: 900,
+              expenses: 900,
+              statePersonnel: 900,
+              total: 2700
+            },
+            '4': {
+              percent: 25,
+              contractors: 900,
+              expenses: 900,
+              statePersonnel: 900,
+              total: 2700
+            },
+            subtotal: {
+              contractors: 3600,
+              expenses: 3600,
+              statePersonnel: 3600,
+              total: 10800
+            }
+          },
+          '1933': {
+            '1': {
+              percent: 25,
+              contractors: 825,
+              expenses: 825,
+              statePersonnel: 825,
+              total: 2475
+            },
+            '2': {
+              percent: 25,
+              contractors: 825,
+              expenses: 825,
+              statePersonnel: 825,
+              total: 2475
+            },
+            '3': {
+              percent: 25,
+              contractors: 825,
+              expenses: 825,
+              statePersonnel: 825,
+              total: 2475
+            },
+            '4': {
+              percent: 25,
+              contractors: 825,
+              expenses: 825,
+              statePersonnel: 825,
+              total: 2475
+            },
+            subtotal: {
+              contractors: 3300,
+              expenses: 3300,
+              statePersonnel: 3300,
+              total: 9900
+            }
+          },
+          total: {
+            contractors: 10500,
+            expenses: 10500,
+            statePersonnel: 10500,
+            total: 31500
+          }
+        },
+        mmis: {
+          '1931': {
+            '1': {
+              percent: 25,
+              contractors: 75,
+              expenses: 75,
+              statePersonnel: 37.5,
+              total: 187.5
+            },
+            '2': {
+              percent: 25,
+              contractors: 75,
+              expenses: 75,
+              statePersonnel: 37.5,
+              total: 187.5
+            },
+            '3': {
+              percent: 25,
+              contractors: 75,
+              expenses: 75,
+              statePersonnel: 37.5,
+              total: 187.5
+            },
+            '4': {
+              percent: 25,
+              contractors: 75,
+              expenses: 75,
+              statePersonnel: 37.5,
+              total: 187.5
+            },
+            subtotal: {
+              contractors: 300,
+              expenses: 300,
+              statePersonnel: 150,
+              total: 750
+            }
+          },
+          '1932': {
+            '1': {
+              percent: 25,
+              contractors: 125,
+              expenses: 125,
+              statePersonnel: 125,
+              total: 375
+            },
+            '2': {
+              percent: 25,
+              contractors: 125,
+              expenses: 125,
+              statePersonnel: 125,
+              total: 375
+            },
+            '3': {
+              percent: 25,
+              contractors: 125,
+              expenses: 125,
+              statePersonnel: 125,
+              total: 375
+            },
+            '4': {
+              percent: 25,
+              contractors: 125,
+              expenses: 125,
+              statePersonnel: 125,
+              total: 375
+            },
+            subtotal: {
+              contractors: 500,
+              expenses: 500,
+              statePersonnel: 500,
+              total: 1500
+            }
+          },
+          '1933': {
+            '1': {
+              percent: 25,
+              contractors: 225,
+              expenses: 225,
+              statePersonnel: 22.5,
+              total: 472.5
+            },
+            '2': {
+              percent: 25,
+              contractors: 225,
+              expenses: 225,
+              statePersonnel: 22.5,
+              total: 472.5
+            },
+            '3': {
+              percent: 25,
+              contractors: 225,
+              expenses: 225,
+              statePersonnel: 22.5,
+              total: 472.5
+            },
+            '4': {
+              percent: 25,
+              contractors: 225,
+              expenses: 225,
+              statePersonnel: 22.5,
+              total: 472.5
+            },
+            subtotal: {
+              contractors: 900,
+              expenses: 900,
+              statePersonnel: 90,
+              total: 1890
+            }
+          },
+          total: {
+            contractors: 1700,
+            expenses: 1700,
+            statePersonnel: 740,
+            total: 4140
+          }
+        }
       },
       hie: {
         combined: {
