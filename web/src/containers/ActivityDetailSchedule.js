@@ -2,14 +2,15 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../i18n';
 import {
   addActivityMilestone as addActivityMilestoneAction,
   removeActivityMilestone as removeActivityMilestoneAction,
   updateActivity as updateActivityAction
 } from '../actions/activities';
+import NoDataMsg from '../components/NoDataMsg';
 import { Subsection } from '../components/Section';
 import { Input } from '../components/Inputs';
+import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
 class ActivityDetailSchedule extends Component {
@@ -34,9 +35,7 @@ class ActivityDetailSchedule extends Component {
         isKey={isProgamAdmin(activity)}
       >
         {activity.milestones.length === 0 ? (
-          <div className="mb2 p1 h6 alert">
-            {t('activities.schedule.noMilestonesNotice')}
-          </div>
+          <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (
           <div className="mb3 overflow-auto">
             <table className="h5 table table-fixed" style={{ minWidth: 500 }}>
