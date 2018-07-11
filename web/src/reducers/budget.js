@@ -40,6 +40,41 @@ const expenseTypes = (years, names = expenseTypeNames) =>
     {}
   );
 
+const defaultFederalShare = years =>
+  years.reduce(
+    (o, year) => ({
+      ...o,
+      [year]: [1, 2, 3, 4].reduce(
+        (q, quarter) => ({
+          ...q,
+          [quarter]: {
+            percent: 25,
+            contractors: 50000,
+            expenses: 0,
+            statePersonnel: 0,
+            total: 0
+          }
+        }),
+        {
+          subtotal: {
+            contractors: 0,
+            expenses: 0,
+            statePersonnel: 0,
+            total: 0
+          }
+        }
+      )
+    }),
+    {
+      total: {
+        contractors: 0,
+        expenses: 0,
+        statePersonnel: 0,
+        total: 0
+      }
+    }
+  );
+
 const defaultQuarterlyShares = years => ({
   ...years.reduce(
     (o, year) => ({
@@ -57,6 +92,10 @@ const initQuarterly = years => ({
 
 const initialState = years => ({
   combined: getFundingSourcesByYear(years),
+  federalShareByFFYQuarter: {
+    hitAndHie: defaultFederalShare(years),
+    mmis: defaultFederalShare(years)
+  },
   hie: expenseTypes(years),
   hit: expenseTypes(years),
   mmis: expenseTypes(years),
@@ -109,6 +148,42 @@ const collapseAllAmounts = activity => {
 
   return totals;
 };
+
+const getFederalShareByFFYQuarter = (quartersByFFY, fundingSource) =>
+  Object.entries(quartersByFFY).reduce(
+    (accum, [ffy, quarters]) => ({
+      ...accum,
+      [ffy]: Object.entries(quarters).reduce(
+        (qAccum, [quarter, percent]) => ({
+          ...qAccum,
+          [quarter]: {
+            percent,
+            contractors: fundingSource.contractors[ffy].federal * percent / 100,
+            expenses: fundingSource.expenses[ffy].federal * percent / 100,
+            statePersonnel:
+              fundingSource.statePersonnel[ffy].federal * percent / 100,
+            total: fundingSource.combined[ffy].federal * percent / 100
+          }
+        }),
+        {
+          subtotal: {
+            contractors: fundingSource.contractors[ffy].federal,
+            expenses: fundingSource.expenses[ffy].federal,
+            statePersonnel: fundingSource.statePersonnel[ffy].federal,
+            total: fundingSource.combined[ffy].federal
+          }
+        }
+      )
+    }),
+    {
+      total: {
+        contractors: fundingSource.contractors.total.federal,
+        expenses: fundingSource.expenses.total.federal,
+        statePersonnel: fundingSource.statePersonnel.total.federal,
+        total: fundingSource.combined.total.federal
+      }
+    }
+  );
 
 const getTotalsForActivity = activity => {
   const fundingSource = activity.fundingSource.toLowerCase();
@@ -243,6 +318,14 @@ const buildBudget = wholeState => {
 
   combineHitAndHie(newState);
   computeMmisByFFP(newState, activityEntries);
+
+  newState.federalShareByFFYQuarter = {
+    hitAndHie: getFederalShareByFFYQuarter(
+      newState.quarterly.hitAndHie,
+      newState.hitAndHie
+    ),
+    mmis: getFederalShareByFFYQuarter(newState.quarterly.mmis, newState.mmis)
+  };
 
   return newState;
 };

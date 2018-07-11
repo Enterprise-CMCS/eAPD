@@ -158,7 +158,8 @@ export const nextSequence = arrOfNums => Math.max(...arrOfNums, 0) + 1;
 export const arrToObj = (array = [], initialValue = 0) =>
   Object.assign({}, ...array.map(a => ({ [a]: initialValue })));
 
-export const addObjVals = obj => Object.values(obj).reduce((a, b) => a + b, 0);
+export const addObjVals = (obj, getVal = a => a) =>
+  Object.values(obj).reduce((a, b) => a + getVal(b), 0);
 
 export const titleCase = str => str.replace(/\b\S/g, t => t.toUpperCase());
 
