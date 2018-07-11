@@ -258,6 +258,14 @@
       methodology: 
         title: "Cost allocation methodology description"
         reminder: "Do not assume the absence of other payers is sufficient cause for Medicaid to be the primary payer. Limit ambiguity about other potential federal funding sources. (For example, if no CHIP funds are being requested, include a statement in this section.)"
+      quarterly:
+        title: moop moop - real text here plz
+        helpText: probably ought to describe what this - percent of federal share that the state wants each quarter, right?
+        reminder:
+        expenseNames:
+          state: State personnel + non-personnel expenses
+          contractor: Congrator resources
+          combined: Total enhanced FFP
       otherFunding: 
         title: "Other funding description"
         helpText: "Account for any and all grant funding used to support this activity, and review the state Medicaid director Letter 10‐016 for examples of grants needed to be included."

@@ -59,6 +59,19 @@ ShallowWrapper {
           <div
             className="mb-tiny bold"
           >
+            bloop
+          </div>
+          <HelpText
+            reminder={null}
+          />
+          <Connect(QuarterlyBudgetSummary) />
+        </div>,
+        <div
+          className="mb3"
+        >
+          <div
+            className="mb-tiny bold"
+          >
             Other funding description
           </div>
           <HelpText
@@ -161,6 +174,61 @@ ShallowWrapper {
             <div
               className="mb-tiny bold"
             >
+              bloop
+            </div>,
+            <HelpText
+              reminder={null}
+            />,
+            <Connect(QuarterlyBudgetSummary) />,
+          ],
+          "className": "mb3",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "bloop",
+              "className": "mb-tiny bold",
+            },
+            "ref": null,
+            "rendered": "bloop",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "reminder": null,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="mb-tiny bold"
+            >
               Other funding description
             </div>,
             <HelpText
@@ -245,6 +313,19 @@ ShallowWrapper {
           <Connect(ActivityDetailCostAllocateFFP)
             aId="activity id"
           />,
+          <div
+            className="mb3"
+          >
+            <div
+              className="mb-tiny bold"
+            >
+              bloop
+            </div>
+            <HelpText
+              reminder={null}
+            />
+            <Connect(QuarterlyBudgetSummary) />
+          </div>,
           <div
             className="mb3"
           >
@@ -343,6 +424,61 @@ ShallowWrapper {
           "ref": null,
           "rendered": null,
           "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="mb-tiny bold"
+              >
+                bloop
+              </div>,
+              <HelpText
+                reminder={null}
+              />,
+              <Connect(QuarterlyBudgetSummary) />,
+            ],
+            "className": "mb3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "bloop",
+                "className": "mb-tiny bold",
+              },
+              "ref": null,
+              "rendered": "bloop",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "reminder": null,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
         },
         Object {
           "instance": null,
