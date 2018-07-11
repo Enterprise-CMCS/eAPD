@@ -7,9 +7,11 @@ import {
   removeActivityExpense,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import { Subsection } from '../components/Section';
+import NoDataMsg from '../components/NoDataMsg';
 import { DollarInput, Textarea } from '../components/Inputs';
+import { Subsection } from '../components/Section';
 import Select from '../components/Select';
+import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
 class ActivityDetailExpenses extends Component {
@@ -38,81 +40,82 @@ class ActivityDetailExpenses extends Component {
         resource="activities.expenses"
         isKey={isProgamAdmin(activity)}
       >
-        <div className="overflow-auto">
-          <table
-            className="mb2 h5 table table-condensed table-fixed"
-            style={{ minWidth: 700 }}
-          >
-            <thead>
-              <tr>
-                <th className="col-1">#</th>
-                <th className="col-3">Category</th>
-                <th className="col-4">Description</th>
-                {years.map(year => (
-                  <th key={year} className="col-2">
-                    {year} Cost
-                  </th>
-                ))}
-                <th className="col-1" />
-              </tr>
-            </thead>
-            <tbody>
-              {expenses.map((expense, i) => (
-                <tr key={expense.id}>
-                  <td className="mono">{i + 1}.</td>
-                  <td>
-                    <Select
-                      name={`expense-${i}-desc`}
-                      options={[
-                        'Hardware, software, and licensing',
-                        'Equipment and supplies',
-                        'Training and outreach',
-                        'Travel',
-                        'Administrative operations',
-                        'Miscellaneous expenses for the project'
-                      ]}
-                      label="Expense category"
-                      hideLabel
-                      value={expense.category}
-                      onChange={this.handleChange(i, 'category')}
-                    />
-                  </td>
-                  <td>
-                    <Textarea
-                      name={`expense-${i}-desc`}
-                      label="Describe the expense"
-                      hideLabel
-                      rows="3"
-                      value={expense.desc}
-                      onChange={this.handleChange(i, 'desc')}
-                    />
-                  </td>
+        {expenses.length === 0 ? (
+          <NoDataMsg>{t('activities.expenses.noDataNotice')}</NoDataMsg>
+        ) : (
+          <div className="overflow-auto">
+            <table className="mb2 h5 table table-condensed table-fixed">
+              <thead>
+                <tr>
+                  <th className="col-1">#</th>
+                  <th className="col-3">Category</th>
+                  <th className="col-4">Description</th>
                   {years.map(year => (
-                    <td key={year}>
-                      <DollarInput
-                        name={`expense-${i}-${year}-cost`}
-                        label={`Cost for ${year}`}
+                    <th key={year} className="col-2">
+                      {year} Cost
+                    </th>
+                  ))}
+                  <th className="col-1" />
+                </tr>
+              </thead>
+              <tbody>
+                {expenses.map((expense, i) => (
+                  <tr key={expense.id}>
+                    <td className="mono">{i + 1}.</td>
+                    <td>
+                      <Select
+                        name={`expense-${i}-desc`}
+                        options={[
+                          'Hardware, software, and licensing',
+                          'Equipment and supplies',
+                          'Training and outreach',
+                          'Travel',
+                          'Administrative operations',
+                          'Miscellaneous expenses for the project'
+                        ]}
+                        label="Expense category"
                         hideLabel
-                        value={expense.years[year]}
-                        onChange={this.handleYearChange(i, year)}
+                        value={expense.category}
+                        onChange={this.handleChange(i, 'category')}
                       />
                     </td>
-                  ))}
-                  <td className="center">
-                    <button
-                      type="button"
-                      className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                      title="Remove Expense"
-                      onClick={() => removeExpense(activityID, expense.id)}
-                    >
-                      ✗
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                    <td>
+                      <Textarea
+                        name={`expense-${i}-desc`}
+                        label="Describe the expense"
+                        hideLabel
+                        rows="3"
+                        value={expense.desc}
+                        onChange={this.handleChange(i, 'desc')}
+                      />
+                    </td>
+                    {years.map(year => (
+                      <td key={year}>
+                        <DollarInput
+                          name={`expense-${i}-${year}-cost`}
+                          label={`Cost for ${year}`}
+                          hideLabel
+                          value={expense.years[year]}
+                          onChange={this.handleYearChange(i, year)}
+                        />
+                      </td>
+                    ))}
+                    <td className="center">
+                      <button
+                        type="button"
+                        className="btn btn-outline border-silver px1 py-tiny mt-tiny"
+                        title="Remove Expense"
+                        onClick={() => removeExpense(activityID, expense.id)}
+                      >
+                        ✗
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
         <button
           type="button"
           className="btn btn-primary bg-black"

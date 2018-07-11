@@ -7,13 +7,14 @@ import {
   removeActivityStatePerson,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import { Subsection } from '../components/Section';
+import NoDataMsg from '../components/NoDataMsg';
 import {
   Input,
   DollarInput,
   PercentInput,
   Textarea
 } from '../components/Inputs';
+import { Subsection } from '../components/Section';
 import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
@@ -45,104 +46,112 @@ class ActivityDetailStatePersonnel extends Component {
         resource="activities.statePersonnel"
         isKey={isProgamAdmin(activity)}
       >
-        <div className="overflow-auto">
-          <table
-            className="mb2 h5 table table-condensed table-fixed"
-            style={{ minWidth: 700 }}
-          >
-            <thead>
-              <tr>
-                <th className="col-1" />
-                <th className="col-4" />
-                <th className="col-5" />
-                {years.map(year => (
-                  <th key={year} className="col-4" colSpan="2">
-                    {t('activities.statePersonnel.labels.yearCost', {
-                      year
-                    })}
+        {statePersonnel.length === 0 ? (
+          <NoDataMsg>{t('activities.statePersonnel.noDataNotice')}</NoDataMsg>
+        ) : (
+          <div className="overflow-auto">
+            <table
+              className="mb2 h5 table table-condensed table-fixed"
+              style={{ minWidth: 800 }}
+            >
+              <thead>
+                <tr>
+                  <th className="col-1" />
+                  <th className="col-4" />
+                  <th className="col-5" />
+                  {years.map(year => (
+                    <th key={year} className="col-4" colSpan="2">
+                      {t('activities.statePersonnel.labels.yearCost', {
+                        year
+                      })}
+                    </th>
+                  ))}
+                  <th className="col-1" />
+                </tr>
+                <tr>
+                  <th className="col-1">
+                    {t('activities.statePersonnel.labels.entryNum')}
                   </th>
-                ))}
-                <th className="col-1" />
-              </tr>
-              <tr>
-                <th className="col-1">
-                  {t('activities.statePersonnel.labels.entryNum')}
-                </th>
-                <th className="col-4">
-                  {t('activities.statePersonnel.labels.title')}
-                </th>
-                <th className="col-5">
-                  {t('activities.statePersonnel.labels.desc')}
-                </th>
-                {years.map(year => (
-                  <Fragment key={year}>
-                    <th>{t('activities.statePersonnel.labels.costAmt')}</th>
-                    <th>{t('activities.statePersonnel.labels.costPerc')}</th>
-                  </Fragment>
-                ))}
-                <th className="col-1" />
-              </tr>
-            </thead>
-            <tbody>
-              {statePersonnel.map((d, i) => (
-                <tr key={d.id}>
-                  <td className="mono">{i + 1}.</td>
-                  <td>
-                    <Input
-                      name={`state-person-${d.id}-title`}
-                      label={t('activities.statePersonnel.labels.title')}
-                      hideLabel
-                      value={d.title}
-                      onChange={this.handleChange(i, 'title')}
-                    />
-                  </td>
-                  <td>
-                    <Textarea
-                      name={`state-person-${d.id}-desc`}
-                      label={t('activities.statePersonnel.labels.desc')}
-                      hideLabel
-                      rows="3"
-                      value={d.desc}
-                      onChange={this.handleChange(i, 'desc')}
-                    />
-                  </td>
+                  <th className="col-4">
+                    {t('activities.statePersonnel.labels.title')}
+                  </th>
+                  <th className="col-5">
+                    {t('activities.statePersonnel.labels.desc')}
+                  </th>
                   {years.map(year => (
                     <Fragment key={year}>
-                      <td>
-                        <DollarInput
-                          name={`state-person-${d.id}-${year}-amt`}
-                          label={t('activities.statePersonnel.labels.costAmt')}
-                          hideLabel
-                          value={d.years[year].amt}
-                          onChange={this.handleChange(i, 'amt', year)}
-                        />
-                      </td>
-                      <td>
-                        <PercentInput
-                          name={`state-person-${d.id}-${year}-perc`}
-                          label={t('activities.statePersonnel.labels.costPerc')}
-                          hideLabel
-                          value={d.years[year].perc}
-                          onChange={this.handleChange(i, 'perc', year)}
-                        />
-                      </td>
+                      <th>{t('activities.statePersonnel.labels.costAmt')}</th>
+                      <th>{t('activities.statePersonnel.labels.costPerc')}</th>
                     </Fragment>
                   ))}
-                  <td className="center">
-                    <button
-                      type="button"
-                      className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                      title={t('activities.statePersonnel.removeLabel')}
-                      onClick={() => removePerson(activityID, d.id)}
-                    >
-                      ✗
-                    </button>
-                  </td>
+                  <th className="col-1" />
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {statePersonnel.map((d, i) => (
+                  <tr key={d.id}>
+                    <td className="mono">{i + 1}.</td>
+                    <td>
+                      <Input
+                        name={`state-person-${d.id}-title`}
+                        label={t('activities.statePersonnel.labels.title')}
+                        hideLabel
+                        value={d.title}
+                        onChange={this.handleChange(i, 'title')}
+                      />
+                    </td>
+                    <td>
+                      <Textarea
+                        name={`state-person-${d.id}-desc`}
+                        label={t('activities.statePersonnel.labels.desc')}
+                        hideLabel
+                        rows="3"
+                        value={d.desc}
+                        onChange={this.handleChange(i, 'desc')}
+                      />
+                    </td>
+                    {years.map(year => (
+                      <Fragment key={year}>
+                        <td>
+                          <DollarInput
+                            name={`state-person-${d.id}-${year}-amt`}
+                            label={t(
+                              'activities.statePersonnel.labels.costAmt'
+                            )}
+                            hideLabel
+                            value={d.years[year].amt}
+                            onChange={this.handleChange(i, 'amt', year)}
+                          />
+                        </td>
+                        <td>
+                          <PercentInput
+                            name={`state-person-${d.id}-${year}-perc`}
+                            label={t(
+                              'activities.statePersonnel.labels.costPerc'
+                            )}
+                            hideLabel
+                            value={d.years[year].perc}
+                            onChange={this.handleChange(i, 'perc', year)}
+                          />
+                        </td>
+                      </Fragment>
+                    ))}
+                    <td className="center">
+                      <button
+                        type="button"
+                        className="btn btn-outline border-silver px1 py-tiny mt-tiny"
+                        title={t('activities.statePersonnel.removeLabel')}
+                        onClick={() => removePerson(activityID, d.id)}
+                      >
+                        ✗
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
         <button
           type="button"
           className="btn btn-primary bg-black"

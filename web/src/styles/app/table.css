@@ -27,9 +27,18 @@
 
 /* additional styles */
 
-.align-middle > th,
-.align-middle > td {
-  vertical-align: middle;
+.table th,
+.table td {
+  border-top: 1px solid #e7e7e7;
+}
+
+.table-fixed {
+  table-layout: fixed;
+}
+
+.table-condensed th,
+.table-condensed td {
+  padding: 0.25rem 0.375rem;
 }
 
 .table-cms {
@@ -56,11 +65,7 @@
   border-left: none;
 }
 
-.table-fixed {
-  table-layout: fixed;
-}
-
-.table-condensed th,
-.table-condensed td {
-  padding: 0.25rem 0.375rem;
+.align-middle > th,
+.align-middle > td {
+  vertical-align: middle;
 }

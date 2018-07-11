@@ -2,14 +2,15 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../i18n';
 import {
   addActivityContractor,
   removeActivityContractor,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import { Subsection } from '../components/Section';
+import NoDataMsg from '../components/NoDataMsg';
 import { Input, DollarInput, Textarea } from '../components/Inputs';
+import { Subsection } from '../components/Section';
+import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
 class ActivityDetailContractorExpenses extends Component {
@@ -40,11 +41,15 @@ class ActivityDetailContractorExpenses extends Component {
         resource="activities.contractorResources"
         isKey={isProgamAdmin(activity)}
       >
-        <div>
+        {contractorResources.length === 0 ? (
+          <NoDataMsg>
+            {t('activities.contractorResources.noDataNotice')}
+          </NoDataMsg>
+        ) : (
           <div className="overflow-auto">
             <table
               className="mb2 h5 table table-condensed table-fixed"
-              style={{ minWidth: 700 }}
+              style={{ minWidth: 800 }}
             >
               <thead>
                 <tr>
@@ -165,7 +170,7 @@ class ActivityDetailContractorExpenses extends Component {
               </tbody>
             </table>
           </div>
-        </div>
+        )}
         <button
           type="button"
           className="btn btn-primary bg-black"
