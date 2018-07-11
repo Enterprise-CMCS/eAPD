@@ -80,7 +80,6 @@ export const fetchApd = () => dispatch => {
     .then(req => {
       const apd = Array.isArray(req.data) ? req.data : null;
       dispatch(receiveApd(apd));
-      dispatch(updateBudget());
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';

@@ -61,6 +61,19 @@ const costAllocationEntry = (other = 0, federal = 90, state = 10) => ({
   ffp: { federal, state }
 });
 
+const quarterlyFFPEntry = () =>
+  [1, 2, 3, 4].reduce(
+    (acc, quarter) => ({
+      ...acc,
+      [quarter]: {
+        state: 25,
+        contractors: 25,
+        combined: 25
+      }
+    }),
+    {}
+  );
+
 const newActivity = (
   id,
   { name = '', fundingSource = 'HIT', years = [], ...rest } = {}
@@ -100,6 +113,7 @@ const newActivity = (
     documentation: '',
     minimizeCost: ''
   },
+  quarterlyFFP: arrToObj(years, quarterlyFFPEntry()),
   years,
   meta: {
     expanded: false
@@ -334,7 +348,9 @@ const reducer = (state = initialState, action) => {
             costAllocation: fixupExpenses(
               activity.costAllocation,
               costAllocationEntry
-            )
+            ),
+            quarterlyFFP: () =>
+              fixupYears(activity.quarterlyFFP, quarterlyFFPEntry)
           };
         });
 
@@ -432,6 +448,10 @@ const reducer = (state = initialState, action) => {
             mitigation: a.standardsAndConditions.mitigationStrategy || '',
             reporting: a.standardsAndConditions.reporting || ''
           },
+          quarterlyFFP: {
+            ...arrToObj(action.apd.years, quarterlyFFPEntry())
+          },
+
           meta: {
             expanded: false
           }

@@ -14,6 +14,7 @@ const config = {
     path: path.join(__dirname, 'dist'),
     filename: 'app.js'
   },
+  devtool: 'cheap-module-eval-source-map',
   module: {
     rules: [
       {
