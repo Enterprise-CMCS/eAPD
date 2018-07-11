@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { t } from '../i18n';
 import { expandActivitySection } from '../actions/activities';
 import { saveApd } from '../actions/apd';
+import { toggleExpand as toggleExpandAction } from '../actions/sidebar';
 import SidebarLink from '../components/SidebarLink';
 
 const linkGroup1 = [
@@ -107,7 +108,15 @@ const linkGroup2 = [
   }
 ];
 
-const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
+const Sidebar = ({
+  activities,
+  place,
+  hash,
+  expanded,
+  expandSection,
+  saveApdToAPI,
+  toggleExpand
+}) => (
   <div className="site-sidebar bg-teal relative">
     <div className="xs-hide sm-hide">
       <div className="px2 py3 lg-px3 lg-py4 bg-white flex items-center">
@@ -126,28 +135,44 @@ const Sidebar = ({ activities, place, hash, expandSection, saveApdToAPI }) => (
       <div className="p2 lg-p3">
         <ul className="list-reset">
           {linkGroup1.map(d => (
-            <SidebarLink key={d.id} anchor={d.id} hash={hash} sub={d.sub}>
+            <SidebarLink
+              key={d.id}
+              anchor={d.id}
+              expanded={expanded[d.id]}
+              hash={hash}
+              sub={d.sub}
+              toggleExpand={() => toggleExpand(d.id)}
+            >
               {d.name}
             </SidebarLink>
           ))}
-          <ul className="mb0 list-reset">
-            {activities.map((a, i) => (
-              <SidebarLink
-                key={a.id}
-                anchor={a.anchor}
-                depth={1}
-                hash={hash}
-                onClick={() => expandSection(a.id)}
-              >
-                {t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
-                  number: i + 1,
-                  name: a.name
-                })}
-              </SidebarLink>
-            ))}
-          </ul>
+          {expanded.activities && (
+            <ul className="mb0 list-reset">
+              {activities.map((a, i) => (
+                <SidebarLink
+                  key={a.id}
+                  anchor={a.anchor}
+                  depth={1}
+                  hash={hash}
+                  onClick={() => expandSection(a.id)}
+                >
+                  {t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
+                    number: i + 1,
+                    name: a.name
+                  })}
+                </SidebarLink>
+              ))}
+            </ul>
+          )}
           {linkGroup2.map(d => (
-            <SidebarLink key={d.id} anchor={d.id} hash={hash} sub={d.sub}>
+            <SidebarLink
+              key={d.id}
+              anchor={d.id}
+              expanded={expanded[d.id]}
+              hash={hash}
+              sub={d.sub}
+              toggleExpand={() => toggleExpand(d.id)}
+            >
               {d.name}
             </SidebarLink>
           ))}
@@ -173,22 +198,30 @@ Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
   place: PropTypes.object.isRequired,
   hash: PropTypes.string.isRequired,
+  expanded: PropTypes.object.isRequired,
   expandSection: PropTypes.func.isRequired,
-  saveApdToAPI: PropTypes.func.isRequired
+  saveApdToAPI: PropTypes.func.isRequired,
+  toggleExpand: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId, allIds }, router }) => ({
+const mapStateToProps = ({
+  activities: { byId, allIds },
+  sidebar,
+  router
+}) => ({
   activities: allIds.map(id => ({
     id,
     anchor: `activity-${id}`,
     name: byId[id].name
   })),
+  expanded: sidebar.expanded,
   hash: router.location.hash.slice(1) || ''
 });
 
 const mapDispatchToProps = {
   expandSection: expandActivitySection,
-  saveApdToAPI: saveApd
+  saveApdToAPI: saveApd,
+  toggleExpand: toggleExpandAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
