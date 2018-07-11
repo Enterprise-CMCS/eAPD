@@ -46,18 +46,345 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        <div>
-          <div
-            className="overflow-auto"
-          >
-            <table
-              className="mb2 h5 table table-condensed table-fixed"
-              style={
-                Object {
-                  "minWidth": 700,
-                }
+        <div
+          className="overflow-auto"
+        >
+          <table
+            className="mb2 h5 table table-condensed table-fixed"
+            style={
+              Object {
+                "minWidth": 800,
               }
-            >
+            }
+          >
+            <thead>
+              <tr>
+                <th
+                  className="col-1"
+                >
+                  #
+                </th>
+                <th
+                  className="col-4"
+                >
+                  Contractor Name
+                </th>
+                <th
+                  className="col-5"
+                >
+                  Description of Services
+                </th>
+                <th
+                  className="col-4"
+                >
+                  Term Period
+                </th>
+                <th
+                  className="col-2"
+                >
+                  1066 Cost
+                </th>
+                <th
+                  className="col-2"
+                >
+                  1067 Cost
+                </th>
+                <th
+                  className="col-1"
+                />
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  className="mono"
+                >
+                  1
+                  .
+                </td>
+                <td>
+                  <InputHolder
+                    hideLabel={true}
+                    label="Contractor name"
+                    name="contractor-0-name"
+                    onChange={[Function]}
+                    type="text"
+                    value="contractor name"
+                    wrapperClass=""
+                  />
+                </td>
+                <td>
+                  <InputHolder
+                    hideLabel={true}
+                    id="contractor-0-desc"
+                    label="Describe the services the contractor will provide"
+                    name="contractor-0-desc"
+                    onChange={[Function]}
+                    rows="3"
+                    spellCheck="true"
+                    type="text"
+                    value="contractor description"
+                    wrapperClass=""
+                  />
+                </td>
+                <td>
+                  <div
+                    className="mb1 flex items-baseline h6"
+                  >
+                    <span
+                      className="mr-tiny w-3 right-align"
+                    >
+                      Start:
+                    </span>
+                    <InputHolder
+                      hideLabel={true}
+                      label="Contractor term start"
+                      name="contractor-0-start"
+                      onChange={[Function]}
+                      type="date"
+                      value="start date"
+                      wrapperClass="mb1 flex-auto"
+                    />
+                  </div>
+                  <div
+                    className="mb1 flex items-baseline h6"
+                  >
+                    <span
+                      className="mr-tiny w-3 right-align"
+                    >
+                      End:
+                    </span>
+                    <InputHolder
+                      hideLabel={true}
+                      label="Contractor term end"
+                      name="contractor-0-end"
+                      onChange={[Function]}
+                      type="date"
+                      value="end date"
+                      wrapperClass="mb1 flex-auto"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <InputHolder
+                    hideLabel={true}
+                    label="Contractor cost for 1066"
+                    name="contractor-0-cost-1066"
+                    onChange={[Function]}
+                    type="text"
+                    value={100}
+                    wrapperClass=""
+                  />
+                </td>
+                <td>
+                  <InputHolder
+                    hideLabel={true}
+                    label="Contractor cost for 1067"
+                    name="contractor-0-cost-1067"
+                    onChange={[Function]}
+                    type="text"
+                    value={200}
+                    wrapperClass=""
+                  />
+                </td>
+                <td
+                  className="center"
+                >
+                  <button
+                    className="btn btn-outline border-silver px1 py-tiny mt-tiny"
+                    onClick={[Function]}
+                    title="Remove resource"
+                    type="button"
+                  >
+                    ✗
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>,
+        <button
+          className="btn btn-primary bg-black"
+          onClick={[Function]}
+          type="button"
+        >
+          Add resource
+        </button>,
+      ],
+      "id": null,
+      "isKey": false,
+      "open": false,
+      "resource": "activities.contractorResources",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <table
+            className="mb2 h5 table table-condensed table-fixed"
+            style={
+              Object {
+                "minWidth": 800,
+              }
+            }
+          >
+            <thead>
+              <tr>
+                <th
+                  className="col-1"
+                >
+                  #
+                </th>
+                <th
+                  className="col-4"
+                >
+                  Contractor Name
+                </th>
+                <th
+                  className="col-5"
+                >
+                  Description of Services
+                </th>
+                <th
+                  className="col-4"
+                >
+                  Term Period
+                </th>
+                <th
+                  className="col-2"
+                >
+                  1066 Cost
+                </th>
+                <th
+                  className="col-2"
+                >
+                  1067 Cost
+                </th>
+                <th
+                  className="col-1"
+                />
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  className="mono"
+                >
+                  1
+                  .
+                </td>
+                <td>
+                  <InputHolder
+                    hideLabel={true}
+                    label="Contractor name"
+                    name="contractor-0-name"
+                    onChange={[Function]}
+                    type="text"
+                    value="contractor name"
+                    wrapperClass=""
+                  />
+                </td>
+                <td>
+                  <InputHolder
+                    hideLabel={true}
+                    id="contractor-0-desc"
+                    label="Describe the services the contractor will provide"
+                    name="contractor-0-desc"
+                    onChange={[Function]}
+                    rows="3"
+                    spellCheck="true"
+                    type="text"
+                    value="contractor description"
+                    wrapperClass=""
+                  />
+                </td>
+                <td>
+                  <div
+                    className="mb1 flex items-baseline h6"
+                  >
+                    <span
+                      className="mr-tiny w-3 right-align"
+                    >
+                      Start:
+                    </span>
+                    <InputHolder
+                      hideLabel={true}
+                      label="Contractor term start"
+                      name="contractor-0-start"
+                      onChange={[Function]}
+                      type="date"
+                      value="start date"
+                      wrapperClass="mb1 flex-auto"
+                    />
+                  </div>
+                  <div
+                    className="mb1 flex items-baseline h6"
+                  >
+                    <span
+                      className="mr-tiny w-3 right-align"
+                    >
+                      End:
+                    </span>
+                    <InputHolder
+                      hideLabel={true}
+                      label="Contractor term end"
+                      name="contractor-0-end"
+                      onChange={[Function]}
+                      type="date"
+                      value="end date"
+                      wrapperClass="mb1 flex-auto"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <InputHolder
+                    hideLabel={true}
+                    label="Contractor cost for 1066"
+                    name="contractor-0-cost-1066"
+                    onChange={[Function]}
+                    type="text"
+                    value={100}
+                    wrapperClass=""
+                  />
+                </td>
+                <td>
+                  <InputHolder
+                    hideLabel={true}
+                    label="Contractor cost for 1067"
+                    name="contractor-0-cost-1067"
+                    onChange={[Function]}
+                    type="text"
+                    value={200}
+                    wrapperClass=""
+                  />
+                </td>
+                <td
+                  className="center"
+                >
+                  <button
+                    className="btn btn-outline border-silver px1 py-tiny mt-tiny"
+                    onClick={[Function]}
+                    title="Remove resource"
+                    type="button"
+                  >
+                    ✗
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>,
+          "className": "overflow-auto",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
               <thead>
                 <tr>
                   <th
@@ -94,7 +421,7 @@ ShallowWrapper {
                     className="col-1"
                   />
                 </tr>
-              </thead>
+              </thead>,
               <tbody>
                 <tr>
                   <td
@@ -201,38 +528,823 @@ ShallowWrapper {
                     </button>
                   </td>
                 </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>,
-        <button
-          className="btn btn-primary bg-black"
-          onClick={[Function]}
-          type="button"
-        >
-          Add resource
-        </button>,
-      ],
-      "id": null,
-      "isKey": false,
-      "open": false,
-      "resource": "activities.contractorResources",
-    },
-    "ref": null,
-    "rendered": Array [
+              </tbody>,
+            ],
+            "className": "mb2 h5 table table-condensed table-fixed",
+            "style": Object {
+              "minWidth": 800,
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <tr>
+                  <th
+                    className="col-1"
+                  >
+                    #
+                  </th>
+                  <th
+                    className="col-4"
+                  >
+                    Contractor Name
+                  </th>
+                  <th
+                    className="col-5"
+                  >
+                    Description of Services
+                  </th>
+                  <th
+                    className="col-4"
+                  >
+                    Term Period
+                  </th>
+                  <th
+                    className="col-2"
+                  >
+                    1066 Cost
+                  </th>
+                  <th
+                    className="col-2"
+                  >
+                    1067 Cost
+                  </th>
+                  <th
+                    className="col-1"
+                  />
+                </tr>,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <th
+                      className="col-1"
+                    >
+                      #
+                    </th>,
+                    <th
+                      className="col-4"
+                    >
+                      Contractor Name
+                    </th>,
+                    <th
+                      className="col-5"
+                    >
+                      Description of Services
+                    </th>,
+                    <th
+                      className="col-4"
+                    >
+                      Term Period
+                    </th>,
+                    Array [
+                      <th
+                        className="col-2"
+                      >
+                        1066 Cost
+                      </th>,
+                      <th
+                        className="col-2"
+                      >
+                        1067 Cost
+                      </th>,
+                    ],
+                    <th
+                      className="col-1"
+                    />,
+                  ],
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "#",
+                      "className": "col-1",
+                    },
+                    "ref": null,
+                    "rendered": "#",
+                    "type": "th",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Contractor Name",
+                      "className": "col-4",
+                    },
+                    "ref": null,
+                    "rendered": "Contractor Name",
+                    "type": "th",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Description of Services",
+                      "className": "col-5",
+                    },
+                    "ref": null,
+                    "rendered": "Description of Services",
+                    "type": "th",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Term Period",
+                      "className": "col-4",
+                    },
+                    "ref": null,
+                    "rendered": "Term Period",
+                    "type": "th",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": "1066",
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "1066 Cost",
+                      "className": "col-2",
+                    },
+                    "ref": null,
+                    "rendered": "1066 Cost",
+                    "type": "th",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": "1067",
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "1067 Cost",
+                      "className": "col-2",
+                    },
+                    "ref": null,
+                    "rendered": "1067 Cost",
+                    "type": "th",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "col-1",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "th",
+                  },
+                ],
+                "type": "tr",
+              },
+              "type": "thead",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <tr>
+                    <td
+                      className="mono"
+                    >
+                      1
+                      .
+                    </td>
+                    <td>
+                      <InputHolder
+                        hideLabel={true}
+                        label="Contractor name"
+                        name="contractor-0-name"
+                        onChange={[Function]}
+                        type="text"
+                        value="contractor name"
+                        wrapperClass=""
+                      />
+                    </td>
+                    <td>
+                      <InputHolder
+                        hideLabel={true}
+                        id="contractor-0-desc"
+                        label="Describe the services the contractor will provide"
+                        name="contractor-0-desc"
+                        onChange={[Function]}
+                        rows="3"
+                        spellCheck="true"
+                        type="text"
+                        value="contractor description"
+                        wrapperClass=""
+                      />
+                    </td>
+                    <td>
+                      <div
+                        className="mb1 flex items-baseline h6"
+                      >
+                        <span
+                          className="mr-tiny w-3 right-align"
+                        >
+                          Start:
+                        </span>
+                        <InputHolder
+                          hideLabel={true}
+                          label="Contractor term start"
+                          name="contractor-0-start"
+                          onChange={[Function]}
+                          type="date"
+                          value="start date"
+                          wrapperClass="mb1 flex-auto"
+                        />
+                      </div>
+                      <div
+                        className="mb1 flex items-baseline h6"
+                      >
+                        <span
+                          className="mr-tiny w-3 right-align"
+                        >
+                          End:
+                        </span>
+                        <InputHolder
+                          hideLabel={true}
+                          label="Contractor term end"
+                          name="contractor-0-end"
+                          onChange={[Function]}
+                          type="date"
+                          value="end date"
+                          wrapperClass="mb1 flex-auto"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <InputHolder
+                        hideLabel={true}
+                        label="Contractor cost for 1066"
+                        name="contractor-0-cost-1066"
+                        onChange={[Function]}
+                        type="text"
+                        value={100}
+                        wrapperClass=""
+                      />
+                    </td>
+                    <td>
+                      <InputHolder
+                        hideLabel={true}
+                        label="Contractor cost for 1067"
+                        name="contractor-0-cost-1067"
+                        onChange={[Function]}
+                        type="text"
+                        value={200}
+                        wrapperClass=""
+                      />
+                    </td>
+                    <td
+                      className="center"
+                    >
+                      <button
+                        className="btn btn-outline border-silver px1 py-tiny mt-tiny"
+                        onClick={[Function]}
+                        title="Remove resource"
+                        type="button"
+                      >
+                        ✗
+                      </button>
+                    </td>
+                  </tr>,
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": "contractor id",
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <td
+                        className="mono"
+                      >
+                        1
+                        .
+                      </td>,
+                      <td>
+                        <InputHolder
+                          hideLabel={true}
+                          label="Contractor name"
+                          name="contractor-0-name"
+                          onChange={[Function]}
+                          type="text"
+                          value="contractor name"
+                          wrapperClass=""
+                        />
+                      </td>,
+                      <td>
+                        <InputHolder
+                          hideLabel={true}
+                          id="contractor-0-desc"
+                          label="Describe the services the contractor will provide"
+                          name="contractor-0-desc"
+                          onChange={[Function]}
+                          rows="3"
+                          spellCheck="true"
+                          type="text"
+                          value="contractor description"
+                          wrapperClass=""
+                        />
+                      </td>,
+                      <td>
+                        <div
+                          className="mb1 flex items-baseline h6"
+                        >
+                          <span
+                            className="mr-tiny w-3 right-align"
+                          >
+                            Start:
+                          </span>
+                          <InputHolder
+                            hideLabel={true}
+                            label="Contractor term start"
+                            name="contractor-0-start"
+                            onChange={[Function]}
+                            type="date"
+                            value="start date"
+                            wrapperClass="mb1 flex-auto"
+                          />
+                        </div>
+                        <div
+                          className="mb1 flex items-baseline h6"
+                        >
+                          <span
+                            className="mr-tiny w-3 right-align"
+                          >
+                            End:
+                          </span>
+                          <InputHolder
+                            hideLabel={true}
+                            label="Contractor term end"
+                            name="contractor-0-end"
+                            onChange={[Function]}
+                            type="date"
+                            value="end date"
+                            wrapperClass="mb1 flex-auto"
+                          />
+                        </div>
+                      </td>,
+                      Array [
+                        <td>
+                          <InputHolder
+                            hideLabel={true}
+                            label="Contractor cost for 1066"
+                            name="contractor-0-cost-1066"
+                            onChange={[Function]}
+                            type="text"
+                            value={100}
+                            wrapperClass=""
+                          />
+                        </td>,
+                        <td>
+                          <InputHolder
+                            hideLabel={true}
+                            label="Contractor cost for 1067"
+                            name="contractor-0-cost-1067"
+                            onChange={[Function]}
+                            type="text"
+                            value={200}
+                            wrapperClass=""
+                          />
+                        </td>,
+                      ],
+                      <td
+                        className="center"
+                      >
+                        <button
+                          className="btn btn-outline border-silver px1 py-tiny mt-tiny"
+                          onClick={[Function]}
+                          title="Remove resource"
+                          type="button"
+                        >
+                          ✗
+                        </button>
+                      </td>,
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": Array [
+                          1,
+                          ".",
+                        ],
+                        "className": "mono",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        1,
+                        ".",
+                      ],
+                      "type": "td",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <InputHolder
+                          hideLabel={true}
+                          label="Contractor name"
+                          name="contractor-0-name"
+                          onChange={[Function]}
+                          type="text"
+                          value="contractor name"
+                          wrapperClass=""
+                        />,
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "function",
+                        "props": Object {
+                          "hideLabel": true,
+                          "label": "Contractor name",
+                          "name": "contractor-0-name",
+                          "onChange": [Function],
+                          "type": "text",
+                          "value": "contractor name",
+                          "wrapperClass": "",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      "type": "td",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <InputHolder
+                          hideLabel={true}
+                          id="contractor-0-desc"
+                          label="Describe the services the contractor will provide"
+                          name="contractor-0-desc"
+                          onChange={[Function]}
+                          rows="3"
+                          spellCheck="true"
+                          type="text"
+                          value="contractor description"
+                          wrapperClass=""
+                        />,
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "function",
+                        "props": Object {
+                          "hideLabel": true,
+                          "id": "contractor-0-desc",
+                          "label": "Describe the services the contractor will provide",
+                          "name": "contractor-0-desc",
+                          "onChange": [Function],
+                          "rows": "3",
+                          "spellCheck": "true",
+                          "type": "text",
+                          "value": "contractor description",
+                          "wrapperClass": "",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      "type": "td",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": Array [
+                          <div
+                            className="mb1 flex items-baseline h6"
+                          >
+                            <span
+                              className="mr-tiny w-3 right-align"
+                            >
+                              Start:
+                            </span>
+                            <InputHolder
+                              hideLabel={true}
+                              label="Contractor term start"
+                              name="contractor-0-start"
+                              onChange={[Function]}
+                              type="date"
+                              value="start date"
+                              wrapperClass="mb1 flex-auto"
+                            />
+                          </div>,
+                          <div
+                            className="mb1 flex items-baseline h6"
+                          >
+                            <span
+                              className="mr-tiny w-3 right-align"
+                            >
+                              End:
+                            </span>
+                            <InputHolder
+                              hideLabel={true}
+                              label="Contractor term end"
+                              name="contractor-0-end"
+                              onChange={[Function]}
+                              type="date"
+                              value="end date"
+                              wrapperClass="mb1 flex-auto"
+                            />
+                          </div>,
+                        ],
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": Array [
+                              <span
+                                className="mr-tiny w-3 right-align"
+                              >
+                                Start:
+                              </span>,
+                              <InputHolder
+                                hideLabel={true}
+                                label="Contractor term start"
+                                name="contractor-0-start"
+                                onChange={[Function]}
+                                type="date"
+                                value="start date"
+                                wrapperClass="mb1 flex-auto"
+                              />,
+                            ],
+                            "className": "mb1 flex items-baseline h6",
+                          },
+                          "ref": null,
+                          "rendered": Array [
+                            Object {
+                              "instance": null,
+                              "key": undefined,
+                              "nodeType": "host",
+                              "props": Object {
+                                "children": "Start:",
+                                "className": "mr-tiny w-3 right-align",
+                              },
+                              "ref": null,
+                              "rendered": "Start:",
+                              "type": "span",
+                            },
+                            Object {
+                              "instance": null,
+                              "key": undefined,
+                              "nodeType": "function",
+                              "props": Object {
+                                "hideLabel": true,
+                                "label": "Contractor term start",
+                                "name": "contractor-0-start",
+                                "onChange": [Function],
+                                "type": "date",
+                                "value": "start date",
+                                "wrapperClass": "mb1 flex-auto",
+                              },
+                              "ref": null,
+                              "rendered": null,
+                              "type": [Function],
+                            },
+                          ],
+                          "type": "div",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": Array [
+                              <span
+                                className="mr-tiny w-3 right-align"
+                              >
+                                End:
+                              </span>,
+                              <InputHolder
+                                hideLabel={true}
+                                label="Contractor term end"
+                                name="contractor-0-end"
+                                onChange={[Function]}
+                                type="date"
+                                value="end date"
+                                wrapperClass="mb1 flex-auto"
+                              />,
+                            ],
+                            "className": "mb1 flex items-baseline h6",
+                          },
+                          "ref": null,
+                          "rendered": Array [
+                            Object {
+                              "instance": null,
+                              "key": undefined,
+                              "nodeType": "host",
+                              "props": Object {
+                                "children": "End:",
+                                "className": "mr-tiny w-3 right-align",
+                              },
+                              "ref": null,
+                              "rendered": "End:",
+                              "type": "span",
+                            },
+                            Object {
+                              "instance": null,
+                              "key": undefined,
+                              "nodeType": "function",
+                              "props": Object {
+                                "hideLabel": true,
+                                "label": "Contractor term end",
+                                "name": "contractor-0-end",
+                                "onChange": [Function],
+                                "type": "date",
+                                "value": "end date",
+                                "wrapperClass": "mb1 flex-auto",
+                              },
+                              "ref": null,
+                              "rendered": null,
+                              "type": [Function],
+                            },
+                          ],
+                          "type": "div",
+                        },
+                      ],
+                      "type": "td",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": "1066",
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <InputHolder
+                          hideLabel={true}
+                          label="Contractor cost for 1066"
+                          name="contractor-0-cost-1066"
+                          onChange={[Function]}
+                          type="text"
+                          value={100}
+                          wrapperClass=""
+                        />,
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "function",
+                        "props": Object {
+                          "hideLabel": true,
+                          "label": "Contractor cost for 1066",
+                          "name": "contractor-0-cost-1066",
+                          "onChange": [Function],
+                          "type": "text",
+                          "value": 100,
+                          "wrapperClass": "",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      "type": "td",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": "1067",
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <InputHolder
+                          hideLabel={true}
+                          label="Contractor cost for 1067"
+                          name="contractor-0-cost-1067"
+                          onChange={[Function]}
+                          type="text"
+                          value={200}
+                          wrapperClass=""
+                        />,
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "function",
+                        "props": Object {
+                          "hideLabel": true,
+                          "label": "Contractor cost for 1067",
+                          "name": "contractor-0-cost-1067",
+                          "onChange": [Function],
+                          "type": "text",
+                          "value": 200,
+                          "wrapperClass": "",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      "type": "td",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <button
+                          className="btn btn-outline border-silver px1 py-tiny mt-tiny"
+                          onClick={[Function]}
+                          title="Remove resource"
+                          type="button"
+                        >
+                          ✗
+                        </button>,
+                        "className": "center",
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "✗",
+                          "className": "btn btn-outline border-silver px1 py-tiny mt-tiny",
+                          "onClick": [Function],
+                          "title": "Remove resource",
+                          "type": "button",
+                        },
+                        "ref": null,
+                        "rendered": "✗",
+                        "type": "button",
+                      },
+                      "type": "td",
+                    },
+                  ],
+                  "type": "tr",
+                },
+              ],
+              "type": "tbody",
+            },
+          ],
+          "type": "table",
+        },
+        "type": "div",
+      },
       Object {
         "instance": null,
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <div
+          "children": "Add resource",
+          "className": "btn btn-primary bg-black",
+          "onClick": [Function],
+          "type": "button",
+        },
+        "ref": null,
+        "rendered": "Add resource",
+        "type": "button",
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <div
             className="overflow-auto"
           >
             <table
               className="mb2 h5 table table-condensed table-fixed"
               style={
                 Object {
-                  "minWidth": 700,
+                  "minWidth": 800,
                 }
               }
             >
@@ -382,9 +1494,22 @@ ShallowWrapper {
               </tbody>
             </table>
           </div>,
-        },
-        "ref": null,
-        "rendered": Object {
+          <button
+            className="btn btn-primary bg-black"
+            onClick={[Function]}
+            type="button"
+          >
+            Add resource
+          </button>,
+        ],
+        "id": null,
+        "isKey": false,
+        "open": false,
+        "resource": "activities.contractorResources",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
           "instance": null,
           "key": undefined,
           "nodeType": "host",
@@ -393,7 +1518,7 @@ ShallowWrapper {
               className="mb2 h5 table table-condensed table-fixed"
               style={
                 Object {
-                  "minWidth": 700,
+                  "minWidth": 800,
                 }
               }
             >
@@ -698,7 +1823,7 @@ ShallowWrapper {
               ],
               "className": "mb2 h5 table table-condensed table-fixed",
               "style": Object {
-                "minWidth": 700,
+                "minWidth": 800,
               },
             },
             "ref": null,
@@ -1476,1467 +2601,6 @@ ShallowWrapper {
               },
             ],
             "type": "table",
-          },
-          "type": "div",
-        },
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "Add resource",
-          "className": "btn btn-primary bg-black",
-          "onClick": [Function],
-          "type": "button",
-        },
-        "ref": null,
-        "rendered": "Add resource",
-        "type": "button",
-      },
-    ],
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "children": Array [
-          <div>
-            <div
-              className="overflow-auto"
-            >
-              <table
-                className="mb2 h5 table table-condensed table-fixed"
-                style={
-                  Object {
-                    "minWidth": 700,
-                  }
-                }
-              >
-                <thead>
-                  <tr>
-                    <th
-                      className="col-1"
-                    >
-                      #
-                    </th>
-                    <th
-                      className="col-4"
-                    >
-                      Contractor Name
-                    </th>
-                    <th
-                      className="col-5"
-                    >
-                      Description of Services
-                    </th>
-                    <th
-                      className="col-4"
-                    >
-                      Term Period
-                    </th>
-                    <th
-                      className="col-2"
-                    >
-                      1066 Cost
-                    </th>
-                    <th
-                      className="col-2"
-                    >
-                      1067 Cost
-                    </th>
-                    <th
-                      className="col-1"
-                    />
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td
-                      className="mono"
-                    >
-                      1
-                      .
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        label="Contractor name"
-                        name="contractor-0-name"
-                        onChange={[Function]}
-                        type="text"
-                        value="contractor name"
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        id="contractor-0-desc"
-                        label="Describe the services the contractor will provide"
-                        name="contractor-0-desc"
-                        onChange={[Function]}
-                        rows="3"
-                        spellCheck="true"
-                        type="text"
-                        value="contractor description"
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td>
-                      <div
-                        className="mb1 flex items-baseline h6"
-                      >
-                        <span
-                          className="mr-tiny w-3 right-align"
-                        >
-                          Start:
-                        </span>
-                        <InputHolder
-                          hideLabel={true}
-                          label="Contractor term start"
-                          name="contractor-0-start"
-                          onChange={[Function]}
-                          type="date"
-                          value="start date"
-                          wrapperClass="mb1 flex-auto"
-                        />
-                      </div>
-                      <div
-                        className="mb1 flex items-baseline h6"
-                      >
-                        <span
-                          className="mr-tiny w-3 right-align"
-                        >
-                          End:
-                        </span>
-                        <InputHolder
-                          hideLabel={true}
-                          label="Contractor term end"
-                          name="contractor-0-end"
-                          onChange={[Function]}
-                          type="date"
-                          value="end date"
-                          wrapperClass="mb1 flex-auto"
-                        />
-                      </div>
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        label="Contractor cost for 1066"
-                        name="contractor-0-cost-1066"
-                        onChange={[Function]}
-                        type="text"
-                        value={100}
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        label="Contractor cost for 1067"
-                        name="contractor-0-cost-1067"
-                        onChange={[Function]}
-                        type="text"
-                        value={200}
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td
-                      className="center"
-                    >
-                      <button
-                        className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                        onClick={[Function]}
-                        title="Remove resource"
-                        type="button"
-                      >
-                        ✗
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>,
-          <button
-            className="btn btn-primary bg-black"
-            onClick={[Function]}
-            type="button"
-          >
-            Add resource
-          </button>,
-        ],
-        "id": null,
-        "isKey": false,
-        "open": false,
-        "resource": "activities.contractorResources",
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": <div
-              className="overflow-auto"
-            >
-              <table
-                className="mb2 h5 table table-condensed table-fixed"
-                style={
-                  Object {
-                    "minWidth": 700,
-                  }
-                }
-              >
-                <thead>
-                  <tr>
-                    <th
-                      className="col-1"
-                    >
-                      #
-                    </th>
-                    <th
-                      className="col-4"
-                    >
-                      Contractor Name
-                    </th>
-                    <th
-                      className="col-5"
-                    >
-                      Description of Services
-                    </th>
-                    <th
-                      className="col-4"
-                    >
-                      Term Period
-                    </th>
-                    <th
-                      className="col-2"
-                    >
-                      1066 Cost
-                    </th>
-                    <th
-                      className="col-2"
-                    >
-                      1067 Cost
-                    </th>
-                    <th
-                      className="col-1"
-                    />
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td
-                      className="mono"
-                    >
-                      1
-                      .
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        label="Contractor name"
-                        name="contractor-0-name"
-                        onChange={[Function]}
-                        type="text"
-                        value="contractor name"
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        id="contractor-0-desc"
-                        label="Describe the services the contractor will provide"
-                        name="contractor-0-desc"
-                        onChange={[Function]}
-                        rows="3"
-                        spellCheck="true"
-                        type="text"
-                        value="contractor description"
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td>
-                      <div
-                        className="mb1 flex items-baseline h6"
-                      >
-                        <span
-                          className="mr-tiny w-3 right-align"
-                        >
-                          Start:
-                        </span>
-                        <InputHolder
-                          hideLabel={true}
-                          label="Contractor term start"
-                          name="contractor-0-start"
-                          onChange={[Function]}
-                          type="date"
-                          value="start date"
-                          wrapperClass="mb1 flex-auto"
-                        />
-                      </div>
-                      <div
-                        className="mb1 flex items-baseline h6"
-                      >
-                        <span
-                          className="mr-tiny w-3 right-align"
-                        >
-                          End:
-                        </span>
-                        <InputHolder
-                          hideLabel={true}
-                          label="Contractor term end"
-                          name="contractor-0-end"
-                          onChange={[Function]}
-                          type="date"
-                          value="end date"
-                          wrapperClass="mb1 flex-auto"
-                        />
-                      </div>
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        label="Contractor cost for 1066"
-                        name="contractor-0-cost-1066"
-                        onChange={[Function]}
-                        type="text"
-                        value={100}
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        label="Contractor cost for 1067"
-                        name="contractor-0-cost-1067"
-                        onChange={[Function]}
-                        type="text"
-                        value={200}
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td
-                      className="center"
-                    >
-                      <button
-                        className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                        onClick={[Function]}
-                        title="Remove resource"
-                        type="button"
-                      >
-                        ✗
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>,
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": <table
-                className="mb2 h5 table table-condensed table-fixed"
-                style={
-                  Object {
-                    "minWidth": 700,
-                  }
-                }
-              >
-                <thead>
-                  <tr>
-                    <th
-                      className="col-1"
-                    >
-                      #
-                    </th>
-                    <th
-                      className="col-4"
-                    >
-                      Contractor Name
-                    </th>
-                    <th
-                      className="col-5"
-                    >
-                      Description of Services
-                    </th>
-                    <th
-                      className="col-4"
-                    >
-                      Term Period
-                    </th>
-                    <th
-                      className="col-2"
-                    >
-                      1066 Cost
-                    </th>
-                    <th
-                      className="col-2"
-                    >
-                      1067 Cost
-                    </th>
-                    <th
-                      className="col-1"
-                    />
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td
-                      className="mono"
-                    >
-                      1
-                      .
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        label="Contractor name"
-                        name="contractor-0-name"
-                        onChange={[Function]}
-                        type="text"
-                        value="contractor name"
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        id="contractor-0-desc"
-                        label="Describe the services the contractor will provide"
-                        name="contractor-0-desc"
-                        onChange={[Function]}
-                        rows="3"
-                        spellCheck="true"
-                        type="text"
-                        value="contractor description"
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td>
-                      <div
-                        className="mb1 flex items-baseline h6"
-                      >
-                        <span
-                          className="mr-tiny w-3 right-align"
-                        >
-                          Start:
-                        </span>
-                        <InputHolder
-                          hideLabel={true}
-                          label="Contractor term start"
-                          name="contractor-0-start"
-                          onChange={[Function]}
-                          type="date"
-                          value="start date"
-                          wrapperClass="mb1 flex-auto"
-                        />
-                      </div>
-                      <div
-                        className="mb1 flex items-baseline h6"
-                      >
-                        <span
-                          className="mr-tiny w-3 right-align"
-                        >
-                          End:
-                        </span>
-                        <InputHolder
-                          hideLabel={true}
-                          label="Contractor term end"
-                          name="contractor-0-end"
-                          onChange={[Function]}
-                          type="date"
-                          value="end date"
-                          wrapperClass="mb1 flex-auto"
-                        />
-                      </div>
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        label="Contractor cost for 1066"
-                        name="contractor-0-cost-1066"
-                        onChange={[Function]}
-                        type="text"
-                        value={100}
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td>
-                      <InputHolder
-                        hideLabel={true}
-                        label="Contractor cost for 1067"
-                        name="contractor-0-cost-1067"
-                        onChange={[Function]}
-                        type="text"
-                        value={200}
-                        wrapperClass=""
-                      />
-                    </td>
-                    <td
-                      className="center"
-                    >
-                      <button
-                        className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                        onClick={[Function]}
-                        title="Remove resource"
-                        type="button"
-                      >
-                        ✗
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>,
-              "className": "overflow-auto",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <thead>
-                    <tr>
-                      <th
-                        className="col-1"
-                      >
-                        #
-                      </th>
-                      <th
-                        className="col-4"
-                      >
-                        Contractor Name
-                      </th>
-                      <th
-                        className="col-5"
-                      >
-                        Description of Services
-                      </th>
-                      <th
-                        className="col-4"
-                      >
-                        Term Period
-                      </th>
-                      <th
-                        className="col-2"
-                      >
-                        1066 Cost
-                      </th>
-                      <th
-                        className="col-2"
-                      >
-                        1067 Cost
-                      </th>
-                      <th
-                        className="col-1"
-                      />
-                    </tr>
-                  </thead>,
-                  <tbody>
-                    <tr>
-                      <td
-                        className="mono"
-                      >
-                        1
-                        .
-                      </td>
-                      <td>
-                        <InputHolder
-                          hideLabel={true}
-                          label="Contractor name"
-                          name="contractor-0-name"
-                          onChange={[Function]}
-                          type="text"
-                          value="contractor name"
-                          wrapperClass=""
-                        />
-                      </td>
-                      <td>
-                        <InputHolder
-                          hideLabel={true}
-                          id="contractor-0-desc"
-                          label="Describe the services the contractor will provide"
-                          name="contractor-0-desc"
-                          onChange={[Function]}
-                          rows="3"
-                          spellCheck="true"
-                          type="text"
-                          value="contractor description"
-                          wrapperClass=""
-                        />
-                      </td>
-                      <td>
-                        <div
-                          className="mb1 flex items-baseline h6"
-                        >
-                          <span
-                            className="mr-tiny w-3 right-align"
-                          >
-                            Start:
-                          </span>
-                          <InputHolder
-                            hideLabel={true}
-                            label="Contractor term start"
-                            name="contractor-0-start"
-                            onChange={[Function]}
-                            type="date"
-                            value="start date"
-                            wrapperClass="mb1 flex-auto"
-                          />
-                        </div>
-                        <div
-                          className="mb1 flex items-baseline h6"
-                        >
-                          <span
-                            className="mr-tiny w-3 right-align"
-                          >
-                            End:
-                          </span>
-                          <InputHolder
-                            hideLabel={true}
-                            label="Contractor term end"
-                            name="contractor-0-end"
-                            onChange={[Function]}
-                            type="date"
-                            value="end date"
-                            wrapperClass="mb1 flex-auto"
-                          />
-                        </div>
-                      </td>
-                      <td>
-                        <InputHolder
-                          hideLabel={true}
-                          label="Contractor cost for 1066"
-                          name="contractor-0-cost-1066"
-                          onChange={[Function]}
-                          type="text"
-                          value={100}
-                          wrapperClass=""
-                        />
-                      </td>
-                      <td>
-                        <InputHolder
-                          hideLabel={true}
-                          label="Contractor cost for 1067"
-                          name="contractor-0-cost-1067"
-                          onChange={[Function]}
-                          type="text"
-                          value={200}
-                          wrapperClass=""
-                        />
-                      </td>
-                      <td
-                        className="center"
-                      >
-                        <button
-                          className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                          onClick={[Function]}
-                          title="Remove resource"
-                          type="button"
-                        >
-                          ✗
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>,
-                ],
-                "className": "mb2 h5 table table-condensed table-fixed",
-                "style": Object {
-                  "minWidth": 700,
-                },
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": <tr>
-                      <th
-                        className="col-1"
-                      >
-                        #
-                      </th>
-                      <th
-                        className="col-4"
-                      >
-                        Contractor Name
-                      </th>
-                      <th
-                        className="col-5"
-                      >
-                        Description of Services
-                      </th>
-                      <th
-                        className="col-4"
-                      >
-                        Term Period
-                      </th>
-                      <th
-                        className="col-2"
-                      >
-                        1066 Cost
-                      </th>
-                      <th
-                        className="col-2"
-                      >
-                        1067 Cost
-                      </th>
-                      <th
-                        className="col-1"
-                      />
-                    </tr>,
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        <th
-                          className="col-1"
-                        >
-                          #
-                        </th>,
-                        <th
-                          className="col-4"
-                        >
-                          Contractor Name
-                        </th>,
-                        <th
-                          className="col-5"
-                        >
-                          Description of Services
-                        </th>,
-                        <th
-                          className="col-4"
-                        >
-                          Term Period
-                        </th>,
-                        Array [
-                          <th
-                            className="col-2"
-                          >
-                            1066 Cost
-                          </th>,
-                          <th
-                            className="col-2"
-                          >
-                            1067 Cost
-                          </th>,
-                        ],
-                        <th
-                          className="col-1"
-                        />,
-                      ],
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "#",
-                          "className": "col-1",
-                        },
-                        "ref": null,
-                        "rendered": "#",
-                        "type": "th",
-                      },
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "Contractor Name",
-                          "className": "col-4",
-                        },
-                        "ref": null,
-                        "rendered": "Contractor Name",
-                        "type": "th",
-                      },
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "Description of Services",
-                          "className": "col-5",
-                        },
-                        "ref": null,
-                        "rendered": "Description of Services",
-                        "type": "th",
-                      },
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "Term Period",
-                          "className": "col-4",
-                        },
-                        "ref": null,
-                        "rendered": "Term Period",
-                        "type": "th",
-                      },
-                      Object {
-                        "instance": null,
-                        "key": "1066",
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "1066 Cost",
-                          "className": "col-2",
-                        },
-                        "ref": null,
-                        "rendered": "1066 Cost",
-                        "type": "th",
-                      },
-                      Object {
-                        "instance": null,
-                        "key": "1067",
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "1067 Cost",
-                          "className": "col-2",
-                        },
-                        "ref": null,
-                        "rendered": "1067 Cost",
-                        "type": "th",
-                      },
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "host",
-                        "props": Object {
-                          "className": "col-1",
-                        },
-                        "ref": null,
-                        "rendered": null,
-                        "type": "th",
-                      },
-                    ],
-                    "type": "tr",
-                  },
-                  "type": "thead",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <tr>
-                        <td
-                          className="mono"
-                        >
-                          1
-                          .
-                        </td>
-                        <td>
-                          <InputHolder
-                            hideLabel={true}
-                            label="Contractor name"
-                            name="contractor-0-name"
-                            onChange={[Function]}
-                            type="text"
-                            value="contractor name"
-                            wrapperClass=""
-                          />
-                        </td>
-                        <td>
-                          <InputHolder
-                            hideLabel={true}
-                            id="contractor-0-desc"
-                            label="Describe the services the contractor will provide"
-                            name="contractor-0-desc"
-                            onChange={[Function]}
-                            rows="3"
-                            spellCheck="true"
-                            type="text"
-                            value="contractor description"
-                            wrapperClass=""
-                          />
-                        </td>
-                        <td>
-                          <div
-                            className="mb1 flex items-baseline h6"
-                          >
-                            <span
-                              className="mr-tiny w-3 right-align"
-                            >
-                              Start:
-                            </span>
-                            <InputHolder
-                              hideLabel={true}
-                              label="Contractor term start"
-                              name="contractor-0-start"
-                              onChange={[Function]}
-                              type="date"
-                              value="start date"
-                              wrapperClass="mb1 flex-auto"
-                            />
-                          </div>
-                          <div
-                            className="mb1 flex items-baseline h6"
-                          >
-                            <span
-                              className="mr-tiny w-3 right-align"
-                            >
-                              End:
-                            </span>
-                            <InputHolder
-                              hideLabel={true}
-                              label="Contractor term end"
-                              name="contractor-0-end"
-                              onChange={[Function]}
-                              type="date"
-                              value="end date"
-                              wrapperClass="mb1 flex-auto"
-                            />
-                          </div>
-                        </td>
-                        <td>
-                          <InputHolder
-                            hideLabel={true}
-                            label="Contractor cost for 1066"
-                            name="contractor-0-cost-1066"
-                            onChange={[Function]}
-                            type="text"
-                            value={100}
-                            wrapperClass=""
-                          />
-                        </td>
-                        <td>
-                          <InputHolder
-                            hideLabel={true}
-                            label="Contractor cost for 1067"
-                            name="contractor-0-cost-1067"
-                            onChange={[Function]}
-                            type="text"
-                            value={200}
-                            wrapperClass=""
-                          />
-                        </td>
-                        <td
-                          className="center"
-                        >
-                          <button
-                            className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                            onClick={[Function]}
-                            title="Remove resource"
-                            type="button"
-                          >
-                            ✗
-                          </button>
-                        </td>
-                      </tr>,
-                    ],
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": "contractor id",
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": Array [
-                          <td
-                            className="mono"
-                          >
-                            1
-                            .
-                          </td>,
-                          <td>
-                            <InputHolder
-                              hideLabel={true}
-                              label="Contractor name"
-                              name="contractor-0-name"
-                              onChange={[Function]}
-                              type="text"
-                              value="contractor name"
-                              wrapperClass=""
-                            />
-                          </td>,
-                          <td>
-                            <InputHolder
-                              hideLabel={true}
-                              id="contractor-0-desc"
-                              label="Describe the services the contractor will provide"
-                              name="contractor-0-desc"
-                              onChange={[Function]}
-                              rows="3"
-                              spellCheck="true"
-                              type="text"
-                              value="contractor description"
-                              wrapperClass=""
-                            />
-                          </td>,
-                          <td>
-                            <div
-                              className="mb1 flex items-baseline h6"
-                            >
-                              <span
-                                className="mr-tiny w-3 right-align"
-                              >
-                                Start:
-                              </span>
-                              <InputHolder
-                                hideLabel={true}
-                                label="Contractor term start"
-                                name="contractor-0-start"
-                                onChange={[Function]}
-                                type="date"
-                                value="start date"
-                                wrapperClass="mb1 flex-auto"
-                              />
-                            </div>
-                            <div
-                              className="mb1 flex items-baseline h6"
-                            >
-                              <span
-                                className="mr-tiny w-3 right-align"
-                              >
-                                End:
-                              </span>
-                              <InputHolder
-                                hideLabel={true}
-                                label="Contractor term end"
-                                name="contractor-0-end"
-                                onChange={[Function]}
-                                type="date"
-                                value="end date"
-                                wrapperClass="mb1 flex-auto"
-                              />
-                            </div>
-                          </td>,
-                          Array [
-                            <td>
-                              <InputHolder
-                                hideLabel={true}
-                                label="Contractor cost for 1066"
-                                name="contractor-0-cost-1066"
-                                onChange={[Function]}
-                                type="text"
-                                value={100}
-                                wrapperClass=""
-                              />
-                            </td>,
-                            <td>
-                              <InputHolder
-                                hideLabel={true}
-                                label="Contractor cost for 1067"
-                                name="contractor-0-cost-1067"
-                                onChange={[Function]}
-                                type="text"
-                                value={200}
-                                wrapperClass=""
-                              />
-                            </td>,
-                          ],
-                          <td
-                            className="center"
-                          >
-                            <button
-                              className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                              onClick={[Function]}
-                              title="Remove resource"
-                              type="button"
-                            >
-                              ✗
-                            </button>
-                          </td>,
-                        ],
-                      },
-                      "ref": null,
-                      "rendered": Array [
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "host",
-                          "props": Object {
-                            "children": Array [
-                              1,
-                              ".",
-                            ],
-                            "className": "mono",
-                          },
-                          "ref": null,
-                          "rendered": Array [
-                            1,
-                            ".",
-                          ],
-                          "type": "td",
-                        },
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "host",
-                          "props": Object {
-                            "children": <InputHolder
-                              hideLabel={true}
-                              label="Contractor name"
-                              name="contractor-0-name"
-                              onChange={[Function]}
-                              type="text"
-                              value="contractor name"
-                              wrapperClass=""
-                            />,
-                          },
-                          "ref": null,
-                          "rendered": Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "function",
-                            "props": Object {
-                              "hideLabel": true,
-                              "label": "Contractor name",
-                              "name": "contractor-0-name",
-                              "onChange": [Function],
-                              "type": "text",
-                              "value": "contractor name",
-                              "wrapperClass": "",
-                            },
-                            "ref": null,
-                            "rendered": null,
-                            "type": [Function],
-                          },
-                          "type": "td",
-                        },
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "host",
-                          "props": Object {
-                            "children": <InputHolder
-                              hideLabel={true}
-                              id="contractor-0-desc"
-                              label="Describe the services the contractor will provide"
-                              name="contractor-0-desc"
-                              onChange={[Function]}
-                              rows="3"
-                              spellCheck="true"
-                              type="text"
-                              value="contractor description"
-                              wrapperClass=""
-                            />,
-                          },
-                          "ref": null,
-                          "rendered": Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "function",
-                            "props": Object {
-                              "hideLabel": true,
-                              "id": "contractor-0-desc",
-                              "label": "Describe the services the contractor will provide",
-                              "name": "contractor-0-desc",
-                              "onChange": [Function],
-                              "rows": "3",
-                              "spellCheck": "true",
-                              "type": "text",
-                              "value": "contractor description",
-                              "wrapperClass": "",
-                            },
-                            "ref": null,
-                            "rendered": null,
-                            "type": [Function],
-                          },
-                          "type": "td",
-                        },
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "host",
-                          "props": Object {
-                            "children": Array [
-                              <div
-                                className="mb1 flex items-baseline h6"
-                              >
-                                <span
-                                  className="mr-tiny w-3 right-align"
-                                >
-                                  Start:
-                                </span>
-                                <InputHolder
-                                  hideLabel={true}
-                                  label="Contractor term start"
-                                  name="contractor-0-start"
-                                  onChange={[Function]}
-                                  type="date"
-                                  value="start date"
-                                  wrapperClass="mb1 flex-auto"
-                                />
-                              </div>,
-                              <div
-                                className="mb1 flex items-baseline h6"
-                              >
-                                <span
-                                  className="mr-tiny w-3 right-align"
-                                >
-                                  End:
-                                </span>
-                                <InputHolder
-                                  hideLabel={true}
-                                  label="Contractor term end"
-                                  name="contractor-0-end"
-                                  onChange={[Function]}
-                                  type="date"
-                                  value="end date"
-                                  wrapperClass="mb1 flex-auto"
-                                />
-                              </div>,
-                            ],
-                          },
-                          "ref": null,
-                          "rendered": Array [
-                            Object {
-                              "instance": null,
-                              "key": undefined,
-                              "nodeType": "host",
-                              "props": Object {
-                                "children": Array [
-                                  <span
-                                    className="mr-tiny w-3 right-align"
-                                  >
-                                    Start:
-                                  </span>,
-                                  <InputHolder
-                                    hideLabel={true}
-                                    label="Contractor term start"
-                                    name="contractor-0-start"
-                                    onChange={[Function]}
-                                    type="date"
-                                    value="start date"
-                                    wrapperClass="mb1 flex-auto"
-                                  />,
-                                ],
-                                "className": "mb1 flex items-baseline h6",
-                              },
-                              "ref": null,
-                              "rendered": Array [
-                                Object {
-                                  "instance": null,
-                                  "key": undefined,
-                                  "nodeType": "host",
-                                  "props": Object {
-                                    "children": "Start:",
-                                    "className": "mr-tiny w-3 right-align",
-                                  },
-                                  "ref": null,
-                                  "rendered": "Start:",
-                                  "type": "span",
-                                },
-                                Object {
-                                  "instance": null,
-                                  "key": undefined,
-                                  "nodeType": "function",
-                                  "props": Object {
-                                    "hideLabel": true,
-                                    "label": "Contractor term start",
-                                    "name": "contractor-0-start",
-                                    "onChange": [Function],
-                                    "type": "date",
-                                    "value": "start date",
-                                    "wrapperClass": "mb1 flex-auto",
-                                  },
-                                  "ref": null,
-                                  "rendered": null,
-                                  "type": [Function],
-                                },
-                              ],
-                              "type": "div",
-                            },
-                            Object {
-                              "instance": null,
-                              "key": undefined,
-                              "nodeType": "host",
-                              "props": Object {
-                                "children": Array [
-                                  <span
-                                    className="mr-tiny w-3 right-align"
-                                  >
-                                    End:
-                                  </span>,
-                                  <InputHolder
-                                    hideLabel={true}
-                                    label="Contractor term end"
-                                    name="contractor-0-end"
-                                    onChange={[Function]}
-                                    type="date"
-                                    value="end date"
-                                    wrapperClass="mb1 flex-auto"
-                                  />,
-                                ],
-                                "className": "mb1 flex items-baseline h6",
-                              },
-                              "ref": null,
-                              "rendered": Array [
-                                Object {
-                                  "instance": null,
-                                  "key": undefined,
-                                  "nodeType": "host",
-                                  "props": Object {
-                                    "children": "End:",
-                                    "className": "mr-tiny w-3 right-align",
-                                  },
-                                  "ref": null,
-                                  "rendered": "End:",
-                                  "type": "span",
-                                },
-                                Object {
-                                  "instance": null,
-                                  "key": undefined,
-                                  "nodeType": "function",
-                                  "props": Object {
-                                    "hideLabel": true,
-                                    "label": "Contractor term end",
-                                    "name": "contractor-0-end",
-                                    "onChange": [Function],
-                                    "type": "date",
-                                    "value": "end date",
-                                    "wrapperClass": "mb1 flex-auto",
-                                  },
-                                  "ref": null,
-                                  "rendered": null,
-                                  "type": [Function],
-                                },
-                              ],
-                              "type": "div",
-                            },
-                          ],
-                          "type": "td",
-                        },
-                        Object {
-                          "instance": null,
-                          "key": "1066",
-                          "nodeType": "host",
-                          "props": Object {
-                            "children": <InputHolder
-                              hideLabel={true}
-                              label="Contractor cost for 1066"
-                              name="contractor-0-cost-1066"
-                              onChange={[Function]}
-                              type="text"
-                              value={100}
-                              wrapperClass=""
-                            />,
-                          },
-                          "ref": null,
-                          "rendered": Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "function",
-                            "props": Object {
-                              "hideLabel": true,
-                              "label": "Contractor cost for 1066",
-                              "name": "contractor-0-cost-1066",
-                              "onChange": [Function],
-                              "type": "text",
-                              "value": 100,
-                              "wrapperClass": "",
-                            },
-                            "ref": null,
-                            "rendered": null,
-                            "type": [Function],
-                          },
-                          "type": "td",
-                        },
-                        Object {
-                          "instance": null,
-                          "key": "1067",
-                          "nodeType": "host",
-                          "props": Object {
-                            "children": <InputHolder
-                              hideLabel={true}
-                              label="Contractor cost for 1067"
-                              name="contractor-0-cost-1067"
-                              onChange={[Function]}
-                              type="text"
-                              value={200}
-                              wrapperClass=""
-                            />,
-                          },
-                          "ref": null,
-                          "rendered": Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "function",
-                            "props": Object {
-                              "hideLabel": true,
-                              "label": "Contractor cost for 1067",
-                              "name": "contractor-0-cost-1067",
-                              "onChange": [Function],
-                              "type": "text",
-                              "value": 200,
-                              "wrapperClass": "",
-                            },
-                            "ref": null,
-                            "rendered": null,
-                            "type": [Function],
-                          },
-                          "type": "td",
-                        },
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "host",
-                          "props": Object {
-                            "children": <button
-                              className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                              onClick={[Function]}
-                              title="Remove resource"
-                              type="button"
-                            >
-                              ✗
-                            </button>,
-                            "className": "center",
-                          },
-                          "ref": null,
-                          "rendered": Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "host",
-                            "props": Object {
-                              "children": "✗",
-                              "className": "btn btn-outline border-silver px1 py-tiny mt-tiny",
-                              "onClick": [Function],
-                              "title": "Remove resource",
-                              "type": "button",
-                            },
-                            "ref": null,
-                            "rendered": "✗",
-                            "type": "button",
-                          },
-                          "type": "td",
-                        },
-                      ],
-                      "type": "tr",
-                    },
-                  ],
-                  "type": "tbody",
-                },
-              ],
-              "type": "table",
-            },
-            "type": "div",
           },
           "type": "div",
         },
