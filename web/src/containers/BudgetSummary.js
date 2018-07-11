@@ -38,19 +38,23 @@ class DataRow extends Component {
   render() {
     const { data, title } = this.props;
     const { detailsOpen } = this.state;
+
     const years = Object.keys(data);
+    const hasData = data.total.total > 0;
 
     return (
       <Fragment>
         <tr>
           <td>
-            <button
-              type="button"
-              className="right btn px-tiny py0"
-              onClick={this.toggleDetails}
-            >
-              {detailsOpen ? '-' : '+'}
-            </button>
+            {hasData && (
+              <button
+                type="button"
+                className="right btn px-tiny py0"
+                onClick={this.toggleDetails}
+              >
+                {detailsOpen ? '-' : '+'}
+              </button>
+            )}
             {title}
           </td>
           {years.map(yr => {
@@ -64,10 +68,12 @@ class DataRow extends Component {
             );
           })}
         </tr>
-        <DataRowDetails
-          colSpan={years.length * 3 + 1}
-          isVisible={detailsOpen}
-        />
+        {hasData && (
+          <DataRowDetails
+            colSpan={years.length * 3 + 1}
+            isVisible={detailsOpen}
+          />
+        )}
       </Fragment>
     );
   }
