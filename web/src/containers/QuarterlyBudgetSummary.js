@@ -29,8 +29,7 @@ class QuarterlyBudgetSummary extends Component {
   };
 
   render() {
-    const { budget } = this.props;
-    const { quarterly, years } = budget;
+    const { budget, years } = this.props;
 
     // wait until budget is loaded
     if (!years.length) return null;
@@ -65,7 +64,7 @@ class QuarterlyBudgetSummary extends Component {
                       <th />
                       {years.map((year, i) => {
                         const incomplete =
-                          addObjVals(quarterly[source][year]) !== 100;
+                          addObjVals(data[year], q => q.percent || 0) !== 100;
                         return (
                           <Fragment key={year}>
                             {QUARTERS.map(q => (
@@ -80,7 +79,7 @@ class QuarterlyBudgetSummary extends Component {
                                     min="0"
                                     max="100"
                                     step="5"
-                                    value={quarterly[source][year][q]}
+                                    value={data[year][q].percent}
                                     onChange={this.handleChange(
                                       source,
                                       year,
@@ -92,7 +91,7 @@ class QuarterlyBudgetSummary extends Component {
                                       incomplete ? 'red' : ''
                                     }`}
                                   >
-                                    {quarterly[source][year][q]}%
+                                    {data[year][q].percent}%
                                   </div>
                                 </div>
                               </th>
@@ -122,11 +121,7 @@ class QuarterlyBudgetSummary extends Component {
                                 }`}
                                 key={q}
                               >
-                                {formatMoney(
-                                  quarterly[source][year][q] *
-                                    data[name][year].federal /
-                                    100
-                                )}
+                                {formatMoney(data[year][q][name])}
                               </td>
                             ))}
                             <td
@@ -134,12 +129,12 @@ class QuarterlyBudgetSummary extends Component {
                                 i
                               )}-light`}
                             >
-                              {formatMoney(data[name][year].federal)}
+                              {formatMoney(data[year].subtotal[name])}
                             </td>
                           </Fragment>
                         ))}
                         <td className="bold mono right-align bg-gray-light">
-                          {formatMoney(data[name].total.federal)}
+                          {formatMoney(data.total[name])}
                         </td>
                       </tr>
                     ))}
@@ -156,10 +151,14 @@ class QuarterlyBudgetSummary extends Component {
 
 QuarterlyBudgetSummary.propTypes = {
   budget: PropTypes.object.isRequired,
+  years: PropTypes.array.isRequired,
   update: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ budget }) => ({ budget });
+const mapStateToProps = ({ budget, apd }) => ({
+  budget: budget.federalShareByFFYQuarter,
+  years: apd.data.years
+});
 const mapDispatchToProps = { update: updateBudgetQuarterlyShare };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
