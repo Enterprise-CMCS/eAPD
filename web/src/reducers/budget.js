@@ -102,6 +102,7 @@ const initialState = years => ({
   hitAndHie: expenseTypes(years),
   mmisByFFP: expenseTypes(years, [...FFPOptions, 'combined']),
   quarterly: initQuarterly(years),
+  activityTotals: [],
   years
 });
 
@@ -225,6 +226,7 @@ const getTotalsForActivity = activity => {
           });
 
           return {
+            data: { ...collapsed, total },
             merge: (bigState, target = type) => {
               const merged = bigState[fundingSource][target];
 
@@ -297,6 +299,30 @@ const computeMmisByFFP = (bigState, activityEntries) => {
   });
 };
 
+const computeTotalsByActivity = (bigState, activityEntries) => {
+  const { activityTotals, years } = bigState;
+
+  activityEntries.forEach(activity => {
+    const { id, fundingSource } = activity;
+    const totaller = getTotalsForActivity(activity);
+
+    const data = expenseTypes(years);
+    const grandTotals = data.combined;
+
+    budgetInputs.forEach(({ type, value, target }) => {
+      const byType = totaller.collapse(type, value).totals().data;
+
+      Object.keys(byType).forEach(year => {
+        addBudgetBlocks(data[target][year], byType[year]);
+        addBudgetBlocks(grandTotals[year], byType[year]);
+      });
+    });
+
+    const entry = { id, fundingSource, data };
+    activityTotals.push(entry);
+  });
+};
+
 const buildBudget = wholeState => {
   const newState = initialState(wholeState.apd.data.years);
   const activityEntries = activities(wholeState);
@@ -318,6 +344,7 @@ const buildBudget = wholeState => {
 
   combineHitAndHie(newState);
   computeMmisByFFP(newState, activityEntries);
+  computeTotalsByActivity(newState, activityEntries);
 
   newState.federalShareByFFYQuarter = {
     hitAndHie: getFederalShareByFFYQuarter(
