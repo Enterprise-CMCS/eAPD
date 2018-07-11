@@ -223,7 +223,7 @@
         end: "Contractor term end"
         cost: "Contractor cost for {{year}}"
       removeLabel: "Remove resource"
-      addContractorButtonText: "Add resource"
+      addContractorButtonText: "Add contractor"
     statePersonnel: 
       title: "Personnel"
       subheader: "Outline the personnel resources for this section. This includes anyone funded as a part of this activity. This does not include personnel listed in the contract section."
