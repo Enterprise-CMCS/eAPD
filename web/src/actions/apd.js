@@ -262,50 +262,6 @@ export const submitAPD = (save = saveApd) => (dispatch, getState) =>
       dispatch({ type: SUBMIT_APD_REQUEST });
 
       const { apd: { data: { id: apdID } }, budget } = getState();
-      const getFederalShareByFFYQuarter = fundingSource =>
-        Object.entries(budget.quarterly[fundingSource]).reduce(
-          (accum, [ffy, quarters]) => ({
-            ...accum,
-            [ffy]: Object.entries(quarters).reduce(
-              (qAccum, [quarter, percent]) => ({
-                ...qAccum,
-                [quarter]: {
-                  percent,
-                  contractors:
-                    budget[fundingSource].contractors[ffy].federal *
-                    percent /
-                    100,
-                  expenses:
-                    budget[fundingSource].expenses[ffy].federal * percent / 100,
-                  statePersonnel:
-                    budget[fundingSource].statePersonnel[ffy].federal *
-                    percent /
-                    100,
-                  total:
-                    budget[fundingSource].combined[ffy].federal * percent / 100
-                }
-              }),
-              {
-                subtotal: {
-                  contractors: budget[fundingSource].contractors[ffy].federal,
-                  expenses: budget[fundingSource].expenses[ffy].federal,
-                  statePersonnel:
-                    budget[fundingSource].statePersonnel[ffy].federal,
-                  total: budget[fundingSource].combined[ffy].federal
-                }
-              }
-            )
-          }),
-          {
-            total: {
-              contractors: budget[fundingSource].contractors.total.federal,
-              expenses: budget[fundingSource].expenses.total.federal,
-              statePersonnel:
-                budget[fundingSource].statePersonnel.total.federal,
-              total: budget[fundingSource].combined.total.federal
-            }
-          }
-        );
 
       const tables = {
         summaryBudgetTable: {
@@ -314,10 +270,7 @@ export const submitAPD = (save = saveApd) => (dispatch, getState) =>
           mmis: budget.mmis,
           total: budget.combined
         },
-        federalShareByFFYQuarter: {
-          hitAndHie: getFederalShareByFFYQuarter('hitAndHie'),
-          mmis: getFederalShareByFFYQuarter('mmis')
-        },
+        federalShareByFFYQuarter: budget.federalShareByFFYQuarter,
         programBudgetTable: {
           hitAndHie: {
             hit: budget.hit.combined,
