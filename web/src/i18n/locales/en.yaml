@@ -205,9 +205,9 @@
       addMilestoneButtonText: "Add milestone"
     contractorResources: 
       title: "Contract Resources"
-      subheader: "Do you have contracting resources? In this section, outline contracts by vendor name or contract. Mirror your existing IAPD template structure for this section."
-      reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. It is not necessary to know exact names of all contractors at this stage. "
-      noDataNotice: "It looks like you don’t have any contracting resources for this activity."
+      subheader: "If you have contract resources, outline contracts by contract or vendor name. This section is similar to the existing IAPD template contracts section."
+      reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. If you do not know specific contract (vendor) names, you may generalize by resource name (e.g. Computer resources)"
+      noDataNotice: "You are missing a contract resource to this activity."
       labels: 
         entryNumber: "#"
         contractorName: "Contractor Name"
@@ -218,7 +218,7 @@
         yearCost: "{{year}} Cost"
       srLabels: 
         name: "Contractor name"
-        description: "Describe the services the contractor will provide"
+        description: "Describe services contractor will provide"
         start: "Contractor term start"
         end: "Contractor term end"
         cost: "Contractor cost for {{year}}"
