@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { ACTIVITY_FUNDING_SOURCES } from '../util';
 import { formatMoney } from '../util/formats';
 
 const categoryLookup = {
@@ -9,23 +10,6 @@ const categoryLookup = {
   expenses: 'Non-personnel',
   contractors: 'Contracted resources',
   combined: 'Subtotal'
-};
-
-const DataRowDetails = ({ colSpan, isVisible }) => (
-  <tr className={`bg-white ${!isVisible ? 'display-none' : ''}`}>
-    <td colSpan={colSpan}>
-      <div className="py2">
-        <div className="p2 h5 sm-col-6 alert">
-          Details will go here! Could be words, numbers, tables, anything!
-        </div>
-      </div>
-    </td>
-  </tr>
-);
-
-DataRowDetails.propTypes = {
-  colSpan: PropTypes.number.isRequired,
-  isVisible: PropTypes.bool.isRequired
 };
 
 class DataRow extends Component {
@@ -36,7 +20,7 @@ class DataRow extends Component {
   };
 
   render() {
-    const { data, title } = this.props;
+    const { category, data, entries, title } = this.props;
     const { detailsOpen } = this.state;
 
     const years = Object.keys(data);
@@ -68,12 +52,20 @@ class DataRow extends Component {
             );
           })}
         </tr>
-        {hasData && (
-          <DataRowDetails
-            colSpan={years.length * 3 + 1}
-            isVisible={detailsOpen}
-          />
-        )}
+        {hasData &&
+          detailsOpen && (
+            <tr>
+              <td colSpan={years.length * 3 + 1}>
+                <div className="py2">
+                  {entries.map(e => (
+                    <div key={e.id} className="mono h6">
+                      Activity #{e.id}: {JSON.stringify(e.data[category])}
+                    </div>
+                  ))}
+                </div>
+              </td>
+            </tr>
+          )}
       </Fragment>
     );
   }
@@ -84,16 +76,23 @@ DataRow.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-const DataRowGroup = ({ data }) => (
+const DataRowGroup = ({ data, entries }) => (
   <Fragment>
     {Object.keys(data).map(key => (
-      <DataRow key={key} data={data[key]} title={categoryLookup[key]} />
+      <DataRow
+        key={key}
+        category={key}
+        data={data[key]}
+        entries={entries}
+        title={categoryLookup[key]}
+      />
     ))}
   </Fragment>
 );
 
 DataRowGroup.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  entries: PropTypes.array.isRequired
 };
 
 const HeaderRow = ({ title, numberCells }) => (
@@ -112,7 +111,7 @@ HeaderRow.defaultProps = {
   numberCells: 12
 };
 
-const BudgetSummary = ({ data, years }) => (
+const BudgetSummary = ({ activities, data, years }) => (
   <div className="overflow-auto">
     <table className="table-cms table-fixed" style={{ minWidth: 1000 }}>
       <thead>
@@ -143,21 +142,21 @@ const BudgetSummary = ({ data, years }) => (
           title="HIT activities"
           numberCells={(years.length + 1) * 3}
         />
-        <DataRowGroup data={data.hit} />
+        <DataRowGroup data={data.hit} entries={activities.hit} />
       </tbody>
       <tbody className="bg-yellow-light">
         <HeaderRow
           title="HIE activities"
           numberCells={(years.length + 1) * 3}
         />
-        <DataRowGroup data={data.hie} />
+        <DataRowGroup data={data.hie} entries={activities.hie} />
       </tbody>
       <tbody className="bg-green-light">
         <HeaderRow
           title="MMIS activities"
           numberCells={(years.length + 1) * 3}
         />
-        <DataRowGroup data={data.mmis} />
+        <DataRowGroup data={data.mmis} entries={activities.mmis} />
       </tbody>
       <tbody>
         <tr className="bold">
@@ -185,13 +184,26 @@ const BudgetSummary = ({ data, years }) => (
 );
 
 BudgetSummary.propTypes = {
+  activities: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
 
-const mapStateToProps = ({ apd, budget }) => ({
-  years: apd.data.years,
-  data: budget
-});
+const mapStateToProps = ({ apd, budget }) => {
+  const { activityTotals: aTots } = budget;
+  const activities = ACTIVITY_FUNDING_SOURCES.reduce(
+    (o, source) => ({
+      ...o,
+      [source.toLowerCase()]: aTots.filter(a => a.fundingSource === source)
+    }),
+    {}
+  );
+
+  return {
+    activities,
+    data: budget,
+    years: apd.data.years
+  };
+};
 
 export default connect(mapStateToProps)(BudgetSummary);
