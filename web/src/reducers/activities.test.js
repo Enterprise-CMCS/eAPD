@@ -109,6 +109,52 @@ describe('activities reducer', () => {
         id: 3
       }
     ],
+    quarterlyFFP: {
+      '2018': {
+        '1': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '2': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '3': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '4': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        }
+      },
+      '2019': {
+        '1': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '2': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '3': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '4': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        }
+      }
+    },
     years: ['2018', '2019']
   };
 
@@ -395,6 +441,31 @@ describe('activities reducer', () => {
                 }
               }
             ],
+            quarterlyFFP: {
+              ...stateWithOne.byId['1'].quarterlyFFP,
+              '2020': {
+                '1': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '2': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '3': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '4': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                }
+              }
+            },
             years: ['2018', '2019', '2020']
           }
         }
@@ -472,6 +543,10 @@ describe('activities reducer', () => {
                 }
               }
             ],
+            quarterlyFFP: {
+              '2018': stateWithOne.byId['1'].quarterlyFFP['2018'],
+              total: stateWithOne.byId['1'].quarterlyFFP.total
+            },
             years: ['2018']
           }
         }
@@ -736,6 +811,52 @@ describe('activities reducer', () => {
               mitigation: 'run away',
               modularity: 'lego blocks',
               reporting: 'moop moop'
+            },
+            quarterlyFFP: {
+              '2018': {
+                '1': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '2': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '3': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '4': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                }
+              },
+              '2019': {
+                '1': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '2': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '3': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '4': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                }
+              }
             },
             meta: { expanded: false }
           }

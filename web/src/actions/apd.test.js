@@ -175,14 +175,13 @@ describe('apd actions', () => {
       fetchMock.reset();
     });
 
-    it('creates GET_APD_SUCCESS and UPDATE_BUDGET after successful APD fetch', () => {
+    it('creates GET_APD_SUCCESS after successful APD fetch', () => {
       const store = mockStore({});
       fetchMock.onGet('/apds').reply(200, [{ foo: 'bar' }]);
 
       const expectedActions = [
         { type: actions.GET_APD_REQUEST },
-        { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] },
-        { type: actions.UPDATE_BUDGET, state: {} }
+        { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] }
       ];
 
       return store.dispatch(actions.fetchApd()).then(() => {

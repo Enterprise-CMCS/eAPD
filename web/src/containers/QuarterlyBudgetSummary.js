@@ -4,18 +4,14 @@ import { connect } from 'react-redux';
 
 import { updateBudgetQuarterlyShare } from '../actions/apd';
 import { t } from '../i18n';
-import { expenseTypeNames } from '../reducers/budget';
 import { formatMoney } from '../util/formats';
 
 const FUNDING_SOURCES = [['hitAndHie', 'HIT and HIE'], ['mmis', 'MMIS']];
 const QUARTERS = [1, 2, 3, 4];
 const COLORS = ['teal', 'green', 'yellow'];
 const EXPENSE_NAME_DISPLAY = {
-  statePersonnel: t(
-    'proposedBudget.quarterlyBudget.expenseNames.statePersonnel'
-  ),
-  expenses: t('proposedBudget.quarterlyBudget.expenseNames.expenses'),
-  contractors: t('proposedBudget.quarterlyBudget.expenseNames.contractors'),
+  state: t('proposedBudget.quarterlyBudget.expenseNames.state'),
+  contractors: t('proposedBudget.quarterlyBudget.expenseNames.contractor'),
   combined: t('proposedBudget.quarterlyBudget.expenseNames.combined')
 };
 
@@ -77,7 +73,7 @@ class QuarterlyBudgetSummary extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {expenseTypeNames.map(name => (
+                    {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
                       <tr
                         key={name}
                         className={`${name === 'combined' ? 'bold' : ''}`}

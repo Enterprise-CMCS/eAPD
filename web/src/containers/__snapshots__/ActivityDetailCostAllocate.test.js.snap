@@ -59,12 +59,15 @@ ShallowWrapper {
           <div
             className="mb-tiny bold"
           >
-            bloop
+            moop moop - real text here plz
           </div>
           <HelpText
-            reminder={null}
+            reminder="activities.costAllocate.quarterly.reminder"
+            text="activities.costAllocate.quarterly.helpText"
           />
-          <Connect(QuarterlyBudgetSummary) />
+          <Connect(ActivityQuarterlyBudgetSummary)
+            aId="activity id"
+          />
         </div>,
         <div
           className="mb3"
@@ -174,12 +177,15 @@ ShallowWrapper {
             <div
               className="mb-tiny bold"
             >
-              bloop
+              moop moop - real text here plz
             </div>,
             <HelpText
-              reminder={null}
+              reminder="activities.costAllocate.quarterly.reminder"
+              text="activities.costAllocate.quarterly.helpText"
             />,
-            <Connect(QuarterlyBudgetSummary) />,
+            <Connect(ActivityQuarterlyBudgetSummary)
+              aId="activity id"
+            />,
           ],
           "className": "mb3",
         },
@@ -190,11 +196,11 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "bloop",
+              "children": "moop moop - real text here plz",
               "className": "mb-tiny bold",
             },
             "ref": null,
-            "rendered": "bloop",
+            "rendered": "moop moop - real text here plz",
             "type": "div",
           },
           Object {
@@ -202,7 +208,8 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
-              "reminder": null,
+              "reminder": "activities.costAllocate.quarterly.reminder",
+              "text": "activities.costAllocate.quarterly.helpText",
             },
             "ref": null,
             "rendered": null,
@@ -212,7 +219,9 @@ ShallowWrapper {
             "instance": null,
             "key": undefined,
             "nodeType": "class",
-            "props": Object {},
+            "props": Object {
+              "aId": "activity id",
+            },
             "ref": null,
             "rendered": null,
             "type": [Function],
@@ -319,12 +328,15 @@ ShallowWrapper {
             <div
               className="mb-tiny bold"
             >
-              bloop
+              moop moop - real text here plz
             </div>
             <HelpText
-              reminder={null}
+              reminder="activities.costAllocate.quarterly.reminder"
+              text="activities.costAllocate.quarterly.helpText"
             />
-            <Connect(QuarterlyBudgetSummary) />
+            <Connect(ActivityQuarterlyBudgetSummary)
+              aId="activity id"
+            />
           </div>,
           <div
             className="mb3"
@@ -434,12 +446,15 @@ ShallowWrapper {
               <div
                 className="mb-tiny bold"
               >
-                bloop
+                moop moop - real text here plz
               </div>,
               <HelpText
-                reminder={null}
+                reminder="activities.costAllocate.quarterly.reminder"
+                text="activities.costAllocate.quarterly.helpText"
               />,
-              <Connect(QuarterlyBudgetSummary) />,
+              <Connect(ActivityQuarterlyBudgetSummary)
+                aId="activity id"
+              />,
             ],
             "className": "mb3",
           },
@@ -450,11 +465,11 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "bloop",
+                "children": "moop moop - real text here plz",
                 "className": "mb-tiny bold",
               },
               "ref": null,
-              "rendered": "bloop",
+              "rendered": "moop moop - real text here plz",
               "type": "div",
             },
             Object {
@@ -462,7 +477,8 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "reminder": null,
+                "reminder": "activities.costAllocate.quarterly.reminder",
+                "text": "activities.costAllocate.quarterly.helpText",
               },
               "ref": null,
               "rendered": null,
@@ -472,7 +488,9 @@ ShallowWrapper {
               "instance": null,
               "key": undefined,
               "nodeType": "class",
-              "props": Object {},
+              "props": Object {
+                "aId": "activity id",
+              },
               "ref": null,
               "rendered": null,
               "type": [Function],

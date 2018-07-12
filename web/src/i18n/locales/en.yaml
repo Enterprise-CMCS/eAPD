@@ -344,10 +344,9 @@
       title: Federal Share by FFY Quarter
       helpText: ""
       expenseNames:
-          statePersonnel: Project state staff
-          expenses: Non-personnel
-          contractors: Contracted resources
-          combined: Total Enhanced FFP
+        state: State personnel + non-personnel expenses
+        contractor: Congrator resources
+        combined: Total enhanced FFP
     paymentsByFFYQuarter: 
       title: Incentive Payments by FFY Quarter
   assurancesAndCompliance: 
