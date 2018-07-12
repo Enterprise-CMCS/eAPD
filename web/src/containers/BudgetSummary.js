@@ -12,6 +12,34 @@ const categoryLookup = {
   combined: 'Subtotal'
 };
 
+const formatActivityName = a => `Activity ${a.name ? a.name : `#${a.id}`}`;
+const formatYear = yr => (yr === 'total' ? 'All Years' : `${yr} Total`);
+
+const DataRowDetails = ({ category, entries, years }) => (
+  <tr>
+    <td colSpan={years.length * 3 + 1}>
+      <div className="py2">
+        {entries.map(e => (
+          <div key={e.id} className="mono h6">
+            <span className="bold">{formatActivityName(e)}:</span>{' '}
+            {years.map(yr => (
+              <span key={yr} className="mr2">
+                {formatYear(yr)}: {formatMoney(e.data[category][yr])}
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+    </td>
+  </tr>
+);
+
+DataRowDetails.propTypes = {
+  category: PropTypes.string.isRequired,
+  entries: PropTypes.array.isRequired,
+  years: PropTypes.array.isRequired
+};
+
 class DataRow extends Component {
   state = { detailsOpen: false };
 
@@ -54,17 +82,11 @@ class DataRow extends Component {
         </tr>
         {hasData &&
           detailsOpen && (
-            <tr>
-              <td colSpan={years.length * 3 + 1}>
-                <div className="py2">
-                  {entries.map(e => (
-                    <div key={e.id} className="mono h6">
-                      Activity #{e.id}: {JSON.stringify(e.data[category])}
-                    </div>
-                  ))}
-                </div>
-              </td>
-            </tr>
+            <DataRowDetails
+              category={category}
+              entries={entries}
+              years={years}
+            />
           )}
       </Fragment>
     );
@@ -72,7 +94,9 @@ class DataRow extends Component {
 }
 
 DataRow.propTypes = {
+  category: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
+  entries: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired
 };
 
@@ -190,11 +214,12 @@ BudgetSummary.propTypes = {
 };
 
 const mapStateToProps = ({ apd, budget }) => {
-  const { activityTotals: aTots } = budget;
   const activities = ACTIVITY_FUNDING_SOURCES.reduce(
-    (o, source) => ({
-      ...o,
-      [source.toLowerCase()]: aTots.filter(a => a.fundingSource === source)
+    (obj, source) => ({
+      ...obj,
+      [source.toLowerCase()]: budget.activityTotals.filter(
+        a => a.fundingSource === source
+      )
     }),
     {}
   );

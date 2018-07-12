@@ -37,8 +37,7 @@ const newStatePerson = (id, years) => ({
   years: arrToObj(years, statePersonDefaultYear())
 });
 
-// const contractorDefaultYear = () => 0;
-const contractorDefaultYear = () => 1000;
+const contractorDefaultYear = () => 0;
 const newContractor = (id, years) => ({
   id,
   name: '',
@@ -48,8 +47,7 @@ const newContractor = (id, years) => ({
   years: arrToObj(years, contractorDefaultYear())
 });
 
-// const expenseDefaultYear = () => 0;
-const expenseDefaultYear = () => 100;
+const expenseDefaultYear = () => 0;
 
 const newExpense = (id, years) => ({
   id,
@@ -109,29 +107,9 @@ const newActivity = (
   ...rest
 });
 
-// const initialState = {
-//   byId: {},
-//   allIds: []
-// };
 const initialState = {
-  byId: {
-    1: newActivity(1, {
-      years: ['2018', '2019'],
-      name: 'foo',
-      fundingSource: 'HIT'
-    }),
-    2: newActivity(2, {
-      years: ['2018', '2019'],
-      name: 'bar',
-      fundingSource: 'HIT'
-    }),
-    3: newActivity(3, {
-      years: ['2018', '2019'],
-      name: 'baz',
-      fundingSource: 'MMIS'
-    })
-  },
-  allIds: [1, 2, 3]
+  byId: {},
+  allIds: []
 };
 
 const reducer = (state = initialState, action) => {
