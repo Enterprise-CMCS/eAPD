@@ -13,14 +13,12 @@ const ProposedBudget = () => (
     >
       <BudgetSummary />
     </Subsection>
-    {false && (
-      <Subsection
-        id="budget-federal-by-quarter"
-        resource="proposedBudget.quarterlyBudget"
-      >
-        <QuarterlyBudgetSummary />
-      </Subsection>
-    )}
+    <Subsection
+      id="budget-federal-by-quarter"
+      resource="proposedBudget.quarterlyBudget"
+    >
+      <QuarterlyBudgetSummary />
+    </Subsection>
     <Subsection
       id="budget-incentive-by-quarter"
       resource="proposedBudget.paymentsByFFYQuarter"

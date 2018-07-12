@@ -43,6 +43,7 @@ describe('budget reducer', () => {
       combined: { total: { federal: 0, state: 0, total: 0 } }
     },
     quarterly: { hitAndHie: {}, mmis: {} },
+    activityTotals: [],
     years: []
   };
 
@@ -71,6 +72,8 @@ describe('budget reducer', () => {
           activities: {
             byId: {
               hieOne: {
+                id: 1,
+                name: 'hieOne',
                 fundingSource: 'HIE',
                 years: ['1931', '1932', '1933'],
                 costAllocation: {
@@ -104,6 +107,8 @@ describe('budget reducer', () => {
                 ]
               },
               hieTwo: {
+                id: 2,
+                name: 'hieTwo',
                 fundingSource: 'HIE',
                 years: ['1931', '1932', '1933'],
                 costAllocation: {
@@ -128,6 +133,8 @@ describe('budget reducer', () => {
                 ]
               },
               hitOne: {
+                id: 3,
+                name: 'hitOne',
                 fundingSource: 'HIT',
                 years: ['1931', '1932', '1933'],
                 costAllocation: {
@@ -152,6 +159,8 @@ describe('budget reducer', () => {
                 ]
               },
               mmisOne: {
+                id: 4,
+                name: 'mmisOne',
                 fundingSource: 'MMIS',
                 years: ['1931', '1932', '1933'],
                 costAllocation: {
@@ -562,6 +571,92 @@ describe('budget reducer', () => {
           '1933': { '1': 25, '2': 25, '3': 25, '4': 25 }
         }
       },
+      activityTotals: [
+        {
+          id: 1,
+          name: 'hieOne',
+          fundingSource: 'HIE',
+          data: {
+            statePersonnel: {
+              '1931': 2000,
+              '1932': 2000,
+              '1933': 2000,
+              total: 6000
+            },
+            contractors: {
+              '1931': 2000,
+              '1932': 2000,
+              '1933': 2000,
+              total: 6000
+            },
+            expenses: { '1931': 2000, '1932': 2000, '1933': 2000, total: 6000 },
+            combined: { '1931': 6000, '1932': 6000, '1933': 6000, total: 18000 }
+          }
+        },
+        {
+          id: 2,
+          name: 'hieTwo',
+          fundingSource: 'HIE',
+          data: {
+            statePersonnel: {
+              '1931': 1000,
+              '1932': 1000,
+              '1933': 1000,
+              total: 3000
+            },
+            contractors: {
+              '1931': 1000,
+              '1932': 1000,
+              '1933': 1000,
+              total: 3000
+            },
+            expenses: { '1931': 1000, '1932': 1000, '1933': 1000, total: 3000 },
+            combined: { '1931': 3000, '1932': 3000, '1933': 3000, total: 9000 }
+          }
+        },
+        {
+          id: 3,
+          name: 'hitOne',
+          fundingSource: 'HIT',
+          data: {
+            statePersonnel: {
+              '1931': 1000,
+              '1932': 1000,
+              '1933': 1000,
+              total: 3000
+            },
+            contractors: {
+              '1931': 1000,
+              '1932': 1000,
+              '1933': 1000,
+              total: 3000
+            },
+            expenses: { '1931': 1000, '1932': 1000, '1933': 1000, total: 3000 },
+            combined: { '1931': 3000, '1932': 3000, '1933': 3000, total: 9000 }
+          }
+        },
+        {
+          id: 4,
+          name: 'mmisOne',
+          fundingSource: 'MMIS',
+          data: {
+            statePersonnel: {
+              '1931': 500,
+              '1932': 1000,
+              '1933': 100,
+              total: 1600
+            },
+            contractors: {
+              '1931': 1000,
+              '1932': 1000,
+              '1933': 1000,
+              total: 3000
+            },
+            expenses: { '1931': 1000, '1932': 1000, '1933': 1000, total: 3000 },
+            combined: { '1931': 2500, '1932': 3000, '1933': 2100, total: 7600 }
+          }
+        }
+      ],
       years: ['1931', '1932', '1933']
     });
   });

@@ -40,6 +40,12 @@ const expenseTypes = (years, names = expenseTypeNames) =>
     {}
   );
 
+const initTotalsByExpenseType = years =>
+  expenseTypeNames.reduce(
+    (obj, name) => ({ ...obj, [name]: arrToObj(years) }),
+    {}
+  );
+
 const defaultFederalShare = years =>
   years.reduce(
     (o, year) => ({
@@ -299,26 +305,28 @@ const computeMmisByFFP = (bigState, activityEntries) => {
   });
 };
 
+// state personnel, contractor, other expenses totals by year and activity
 const computeTotalsByActivity = (bigState, activityEntries) => {
   const { activityTotals, years } = bigState;
+  const yearsWithTotal = [...years, 'total'];
 
   activityEntries.forEach(activity => {
-    const { id, fundingSource } = activity;
+    const { id, name, fundingSource } = activity;
     const totaller = getTotalsForActivity(activity);
 
-    const data = expenseTypes(years);
+    const data = initTotalsByExpenseType(yearsWithTotal);
     const grandTotals = data.combined;
 
     budgetInputs.forEach(({ type, value, target }) => {
       const byType = totaller.collapse(type, value).totals().data;
 
       Object.keys(byType).forEach(year => {
-        addBudgetBlocks(data[target][year], byType[year]);
-        addBudgetBlocks(grandTotals[year], byType[year]);
+        data[target][year] += byType[year].total;
+        grandTotals[year] += byType[year].total;
       });
     });
 
-    const entry = { id, fundingSource, data };
+    const entry = { id, name, fundingSource, data };
     activityTotals.push(entry);
   });
 };
