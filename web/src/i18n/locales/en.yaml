@@ -20,7 +20,7 @@
     saveApdButtonText: Save APD
   apd: 
     title: "Program Summary"
-    helpText: "Provide an introduction for your state's program. Include context for your funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD executive summary template section."
+    helpText: "Provide an introduction for your state's program. clude context for your funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD executive summary template section."
     stateProfile:
       title: State Profile Contact Information
       helpText: In this section, provide information about relevant state contacts. You will only need to input this information once. If we have information on record, it will be listed below. Ensure the director's name and office address are listed correctly.
@@ -264,7 +264,7 @@
         reminder:
         expenseNames:
           state: State personnel + non-personnel expenses
-          contractor: Congrator resources
+          contractor: Contractor resources
           combined: Total enhanced FFP
       otherFunding: 
         title: "Other funding description"
@@ -345,7 +345,7 @@
       helpText: ""
       expenseNames:
         state: State personnel + non-personnel expenses
-        contractor: Congrator resources
+        contractor: Contractor resources
         combined: Total enhanced FFP
     paymentsByFFYQuarter: 
       title: Incentive Payments by FFY Quarter
