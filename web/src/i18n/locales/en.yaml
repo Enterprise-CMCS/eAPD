@@ -259,8 +259,8 @@
         title: "Cost allocation methodology description"
         reminder: "Do not assume the absence of other payers is sufficient cause for Medicaid to be the primary payer. Limit ambiguity about other potential federal funding sources. (For example, if no CHIP funds are being requested, include a statement in this section.)"
       quarterly:
-        title: moop moop - real text here plz
-        helpText: probably ought to describe what this - percent of federal share that the state wants each quarter, right?
+        title: Breakout of federal share by quarter
+        helpText: "In this section, indicate allocations of state personnel & contract resources in the current FFY by quarter."
         reminder:
         expenseNames:
           state: State personnel + non-personnel expenses
