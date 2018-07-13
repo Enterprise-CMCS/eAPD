@@ -498,7 +498,10 @@ export const getCategoryTotals = (entries, iteratee = x => x) => {
 };
 
 export const getActivityCategoryTotals = activity => ({
-  statePersonnel: getCategoryTotals(activity.statePersonnel, d => d.amt),
+  statePersonnel: getCategoryTotals(
+    activity.statePersonnel,
+    d => d.amt * d.perc / 100
+  ),
   contractors: getCategoryTotals(activity.contractorResources),
   expenses: getCategoryTotals(activity.expenses)
 });
