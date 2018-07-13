@@ -898,15 +898,30 @@ describe('activities reducer', () => {
           { years: { '2018': 6, '2019': 60 } }
         ],
         statePersonnel: [
-          { years: { '2018': { amt: 3 }, '2019': { amt: 30 } } },
-          { years: { '2018': { amt: 6 }, '2019': { amt: 60 } } },
-          { years: { '2018': { amt: 9 }, '2019': { amt: 90 } } }
+          {
+            years: {
+              '2018': { amt: 3, perc: 40 },
+              '2019': { amt: 30, perc: 100 }
+            }
+          },
+          {
+            years: {
+              '2018': { amt: 6, perc: 55 },
+              '2019': { amt: 60, perc: 90 }
+            }
+          },
+          {
+            years: {
+              '2018': { amt: 9, perc: 99 },
+              '2019': { amt: 90, perc: 30 }
+            }
+          }
         ]
       })
     ).toEqual({
       contractors: { '2018': 6, '2019': 60 },
       expenses: { '2018': 12, '2019': 120 },
-      statePersonnel: { '2018': 18, '2019': 180 }
+      statePersonnel: { '2018': 13.41, '2019': 111 }
     });
   });
 
@@ -924,12 +939,27 @@ describe('activities reducer', () => {
           { years: { '2018': 6, '2019': 60 } }
         ],
         statePersonnel: [
-          { years: { '2018': { amt: 3 }, '2019': { amt: 30 } } },
-          { years: { '2018': { amt: 6 }, '2019': { amt: 60 } } },
-          { years: { '2018': { amt: 9 }, '2019': { amt: 90 } } }
+          {
+            years: {
+              '2018': { amt: 3, perc: 100 },
+              '2019': { amt: 30, perc: 80 }
+            }
+          },
+          {
+            years: {
+              '2018': { amt: 6, perc: 90 },
+              '2019': { amt: 60, perc: 100 }
+            }
+          },
+          {
+            years: {
+              '2018': { amt: 9, perc: 40 },
+              '2019': { amt: 90, perc: 10 }
+            }
+          }
         ],
         years: ['2018', '2019']
       })
-    ).toEqual({ '2018': 36, '2019': 360 });
+    ).toEqual({ '2018': 30, '2019': 273 });
   });
 });
