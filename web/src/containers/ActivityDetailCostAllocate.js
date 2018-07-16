@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ActivityDetailCostAllocateFFP from './ActivityDetailCostAllocateFFP';
+import ActivityQuarterlyBudgetSummary from './ActivityQuarterlyBudgetSummary';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { Subsection } from '../components/Section';
 import { RichText } from '../components/Inputs';
@@ -37,6 +38,18 @@ const ActivityDetailCostAllocate = props => {
         />
       </div>
       <ActivityDetailCostAllocateFFP aId={activity.id} />
+
+      <div className="mb3">
+        <div className="mb-tiny bold">
+          {t('activities.costAllocate.quarterly.title')}
+        </div>
+        <HelpText
+          text="activities.costAllocate.quarterly.helpText"
+          reminder="activities.costAllocate.quarterly.reminder"
+        />
+        <ActivityQuarterlyBudgetSummary aId={activity.id} />
+      </div>
+
       <div className="mb3">
         <div className="mb-tiny bold">
           {t('activities.costAllocate.otherFunding.title')}
