@@ -254,6 +254,14 @@
       methodology: 
         title: "Cost allocation methodology description"
         reminder: "Do not assume the absence of other payers is sufficient cause for Medicaid to be the primary payer. Limit ambiguity about other potential federal funding sources. (For example, if no CHIP funds are being requested, include a statement in this section.)"
+      quarterly:
+        title: Breakout of federal share by quarter
+        helpText: "In this section, indicate allocations of state personnel & contract resources in the current FFY by quarter."
+        reminder:
+        expenseNames:
+          state: State personnel + non-personnel expenses
+          contractor: Contractor resources
+          combined: Total enhanced FFP
       otherFunding: 
         title: "Other funding description"
         helpText: "Account for any and all grant funding used to support this activity, and review the state Medicaid director Letter 10‐016 for examples of grants needed to be included."
@@ -332,10 +340,9 @@
       title: Federal Share by FFY Quarter
       helpText: ""
       expenseNames:
-          statePersonnel: Project state staff
-          expenses: Non-personnel
-          contractors: Contracted resources
-          combined: Total Enhanced FFP
+        state: State personnel + non-personnel expenses
+        contractor: Contractor resources
+        combined: Total enhanced FFP
     paymentsByFFYQuarter: 
       title: Incentive Payments by FFY Quarter
   assurancesAndCompliance: 
