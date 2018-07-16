@@ -4,19 +4,14 @@ import { connect } from 'react-redux';
 
 import { updateBudgetQuarterlyShare } from '../actions/apd';
 import { t } from '../i18n';
-import { expenseTypeNames } from '../reducers/budget';
-import { addObjVals } from '../util';
 import { formatMoney } from '../util/formats';
 
 const FUNDING_SOURCES = [['hitAndHie', 'HIT and HIE'], ['mmis', 'MMIS']];
 const QUARTERS = [1, 2, 3, 4];
 const COLORS = ['teal', 'green', 'yellow'];
 const EXPENSE_NAME_DISPLAY = {
-  statePersonnel: t(
-    'proposedBudget.quarterlyBudget.expenseNames.statePersonnel'
-  ),
-  expenses: t('proposedBudget.quarterlyBudget.expenseNames.expenses'),
-  contractors: t('proposedBudget.quarterlyBudget.expenseNames.contractors'),
+  state: t('proposedBudget.quarterlyBudget.expenseNames.state'),
+  contractors: t('proposedBudget.quarterlyBudget.expenseNames.contractor'),
   combined: t('proposedBudget.quarterlyBudget.expenseNames.combined')
 };
 
@@ -62,51 +57,23 @@ class QuarterlyBudgetSummary extends Component {
                     </tr>
                     <tr>
                       <th />
-                      {years.map((year, i) => {
-                        const incomplete =
-                          addObjVals(data[year], q => q.percent || 0) !== 100;
-                        return (
-                          <Fragment key={year}>
-                            {QUARTERS.map(q => (
-                              <th key={q} className="center">
-                                <div className="mb-tiny">
-                                  {t('table.quarter', { q })}
-                                </div>
-                                <div className="flex items-center">
-                                  <input
-                                    type="range"
-                                    className="flex-auto input-range"
-                                    min="0"
-                                    max="100"
-                                    step="5"
-                                    value={data[year][q].percent}
-                                    onChange={this.handleChange(
-                                      source,
-                                      year,
-                                      q
-                                    )}
-                                  />
-                                  <div
-                                    className={`ml-tiny flex-none mono right-align ${
-                                      incomplete ? 'red' : ''
-                                    }`}
-                                  >
-                                    {data[year][q].percent}%
-                                  </div>
-                                </div>
-                              </th>
-                            ))}
-                            <th className={`right-align ${color(i)}-light`}>
-                              {t('table.subtotal')}
+                      {years.map((year, i) => (
+                        <Fragment key={year}>
+                          {QUARTERS.map(q => (
+                            <th key={q} className="center">
+                              {t('table.quarter', { q })}
                             </th>
-                          </Fragment>
-                        );
-                      })}
+                          ))}
+                          <th className={`right-align ${color(i)}-light`}>
+                            {t('table.subtotal')}
+                          </th>
+                        </Fragment>
+                      ))}
                       <th className="bg-gray-light" />
                     </tr>
                   </thead>
                   <tbody>
-                    {expenseTypeNames.map(name => (
+                    {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
                       <tr
                         key={name}
                         className={`${name === 'combined' ? 'bold' : ''}`}

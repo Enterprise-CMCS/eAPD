@@ -59,6 +59,22 @@ ShallowWrapper {
           <div
             className="mb-tiny bold"
           >
+            Breakout of federal share by quarter
+          </div>
+          <HelpText
+            reminder="activities.costAllocate.quarterly.reminder"
+            text="activities.costAllocate.quarterly.helpText"
+          />
+          <Connect(ActivityQuarterlyBudgetSummary)
+            aId="activity id"
+          />
+        </div>,
+        <div
+          className="mb3"
+        >
+          <div
+            className="mb-tiny bold"
+          >
             Other funding description
           </div>
           <HelpText
@@ -161,6 +177,67 @@ ShallowWrapper {
             <div
               className="mb-tiny bold"
             >
+              Breakout of federal share by quarter
+            </div>,
+            <HelpText
+              reminder="activities.costAllocate.quarterly.reminder"
+              text="activities.costAllocate.quarterly.helpText"
+            />,
+            <Connect(ActivityQuarterlyBudgetSummary)
+              aId="activity id"
+            />,
+          ],
+          "className": "mb3",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Breakout of federal share by quarter",
+              "className": "mb-tiny bold",
+            },
+            "ref": null,
+            "rendered": "Breakout of federal share by quarter",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "reminder": "activities.costAllocate.quarterly.reminder",
+              "text": "activities.costAllocate.quarterly.helpText",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "aId": "activity id",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="mb-tiny bold"
+            >
               Other funding description
             </div>,
             <HelpText
@@ -245,6 +322,22 @@ ShallowWrapper {
           <Connect(ActivityDetailCostAllocateFFP)
             aId="activity id"
           />,
+          <div
+            className="mb3"
+          >
+            <div
+              className="mb-tiny bold"
+            >
+              Breakout of federal share by quarter
+            </div>
+            <HelpText
+              reminder="activities.costAllocate.quarterly.reminder"
+              text="activities.costAllocate.quarterly.helpText"
+            />
+            <Connect(ActivityQuarterlyBudgetSummary)
+              aId="activity id"
+            />
+          </div>,
           <div
             className="mb3"
           >
@@ -343,6 +436,67 @@ ShallowWrapper {
           "ref": null,
           "rendered": null,
           "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="mb-tiny bold"
+              >
+                Breakout of federal share by quarter
+              </div>,
+              <HelpText
+                reminder="activities.costAllocate.quarterly.reminder"
+                text="activities.costAllocate.quarterly.helpText"
+              />,
+              <Connect(ActivityQuarterlyBudgetSummary)
+                aId="activity id"
+              />,
+            ],
+            "className": "mb3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Breakout of federal share by quarter",
+                "className": "mb-tiny bold",
+              },
+              "ref": null,
+              "rendered": "Breakout of federal share by quarter",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "reminder": "activities.costAllocate.quarterly.reminder",
+                "text": "activities.costAllocate.quarterly.helpText",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "aId": "activity id",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
         },
         Object {
           "instance": null,

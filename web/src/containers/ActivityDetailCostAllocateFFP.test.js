@@ -52,8 +52,8 @@ describe('the activities cost allocation FFP component', () => {
           statePersonnel: [
             {
               years: {
-                '1066': { amt: 100 },
-                '1067': { amt: 1000 }
+                '1066': { amt: 100, perc: 41 },
+                '1067': { amt: 1000, perc: 63 }
               }
             }
           ],
@@ -138,22 +138,22 @@ describe('the activities cost allocation FFP component', () => {
       byYearData: [
         {
           allocations: [
-            { amount: 261, id: 'federal' },
-            { amount: 29, id: 'state' }
+            { amount: 207.9, id: 'federal' },
+            { amount: 23.1, id: 'state' }
           ],
           ffpSelectVal: '90-10',
-          total: 300,
-          totalNetOther: 290,
+          total: 241,
+          totalNetOther: 231,
           year: '1066'
         },
         {
           allocations: [
-            { amount: 300, id: 'federal' },
-            { amount: 2700, id: 'state' }
+            { amount: 263, id: 'federal' },
+            { amount: 2367, id: 'state' }
           ],
           ffpSelectVal: '10-90',
-          total: 3000,
-          totalNetOther: 3000,
+          total: 2630,
+          totalNetOther: 2630,
           year: '1067'
         }
       ],
