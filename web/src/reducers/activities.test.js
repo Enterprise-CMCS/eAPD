@@ -109,6 +109,52 @@ describe('activities reducer', () => {
         id: 3
       }
     ],
+    quarterlyFFP: {
+      '2018': {
+        '1': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '2': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '3': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '4': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        }
+      },
+      '2019': {
+        '1': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '2': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '3': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        },
+        '4': {
+          combined: 25,
+          contractors: 25,
+          state: 25
+        }
+      }
+    },
     years: ['2018', '2019']
   };
 
@@ -395,6 +441,31 @@ describe('activities reducer', () => {
                 }
               }
             ],
+            quarterlyFFP: {
+              ...stateWithOne.byId['1'].quarterlyFFP,
+              '2020': {
+                '1': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '2': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '3': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '4': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                }
+              }
+            },
             years: ['2018', '2019', '2020']
           }
         }
@@ -472,6 +543,10 @@ describe('activities reducer', () => {
                 }
               }
             ],
+            quarterlyFFP: {
+              '2018': stateWithOne.byId['1'].quarterlyFFP['2018'],
+              total: stateWithOne.byId['1'].quarterlyFFP.total
+            },
             years: ['2018']
           }
         }
@@ -737,6 +812,52 @@ describe('activities reducer', () => {
               modularity: 'lego blocks',
               reporting: 'moop moop'
             },
+            quarterlyFFP: {
+              '2018': {
+                '1': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '2': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '3': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '4': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                }
+              },
+              '2019': {
+                '1': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '2': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '3': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                },
+                '4': {
+                  combined: 25,
+                  contractors: 25,
+                  state: 25
+                }
+              }
+            },
             meta: { expanded: false }
           }
         },
@@ -777,15 +898,30 @@ describe('activities reducer', () => {
           { years: { '2018': 6, '2019': 60 } }
         ],
         statePersonnel: [
-          { years: { '2018': { amt: 3 }, '2019': { amt: 30 } } },
-          { years: { '2018': { amt: 6 }, '2019': { amt: 60 } } },
-          { years: { '2018': { amt: 9 }, '2019': { amt: 90 } } }
+          {
+            years: {
+              '2018': { amt: 3, perc: 40 },
+              '2019': { amt: 30, perc: 100 }
+            }
+          },
+          {
+            years: {
+              '2018': { amt: 6, perc: 55 },
+              '2019': { amt: 60, perc: 90 }
+            }
+          },
+          {
+            years: {
+              '2018': { amt: 9, perc: 99 },
+              '2019': { amt: 90, perc: 30 }
+            }
+          }
         ]
       })
     ).toEqual({
       contractors: { '2018': 6, '2019': 60 },
       expenses: { '2018': 12, '2019': 120 },
-      statePersonnel: { '2018': 18, '2019': 180 }
+      statePersonnel: { '2018': 13.41, '2019': 111 }
     });
   });
 
@@ -803,12 +939,27 @@ describe('activities reducer', () => {
           { years: { '2018': 6, '2019': 60 } }
         ],
         statePersonnel: [
-          { years: { '2018': { amt: 3 }, '2019': { amt: 30 } } },
-          { years: { '2018': { amt: 6 }, '2019': { amt: 60 } } },
-          { years: { '2018': { amt: 9 }, '2019': { amt: 90 } } }
+          {
+            years: {
+              '2018': { amt: 3, perc: 100 },
+              '2019': { amt: 30, perc: 80 }
+            }
+          },
+          {
+            years: {
+              '2018': { amt: 6, perc: 90 },
+              '2019': { amt: 60, perc: 100 }
+            }
+          },
+          {
+            years: {
+              '2018': { amt: 9, perc: 40 },
+              '2019': { amt: 90, perc: 10 }
+            }
+          }
         ],
         years: ['2018', '2019']
       })
-    ).toEqual({ '2018': 36, '2019': 360 });
+    ).toEqual({ '2018': 30, '2019': 273 });
   });
 });

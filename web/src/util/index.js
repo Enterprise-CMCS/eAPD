@@ -165,3 +165,17 @@ export const titleCase = str => str.replace(/\b\S/g, t => t.toUpperCase());
 
 export const isProgamAdmin = activity =>
   activity.name === 'Program Administration' || activity.id === 1;
+
+export const replaceNulls = (obj, newValue = '') => {
+  const replace = o => {
+    Object.keys(o).forEach(k => {
+      // eslint-disable-next-line no-param-reassign
+      if (o[k] === null) o[k] = newValue;
+      else if (typeof o[k] === 'object') replace(o[k]);
+    });
+  };
+
+  const objNew = JSON.parse(JSON.stringify(obj));
+  replace(objNew);
+  return objNew;
+};
