@@ -144,7 +144,8 @@ tap.test(
               standardsAndConditions: null,
               summary: null,
               fundingSource: null,
-              statePersonnel: []
+              statePersonnel: [],
+              quarterlyFFP: []
             },
             'sends back the updated activity object'
           );

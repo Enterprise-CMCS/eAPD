@@ -32,6 +32,10 @@ module.exports = {
       return this.hasMany('apdActivityCostAllocation');
     },
 
+    quarterlyFFP() {
+      return this.hasMany('apdActivityQuarterlyFFP');
+    },
+
     format: attr =>
       Object.keys(attr).reduce((builtUp, field) => {
         const out = { ...builtUp };
@@ -77,7 +81,8 @@ module.exports = {
         expenses: 'apdActivityExpense',
         schedule: 'apdActivitySchedule',
         statePersonnel: 'apdActivityStatePersonnel',
-        costAllocation: 'apdActivityCostAllocation'
+        costAllocation: 'apdActivityCostAllocation',
+        quarterlyFFP: 'apdActivityQuarterlyFFP'
       },
       foreignKey: 'activity_id',
       withRelated: [
@@ -89,7 +94,8 @@ module.exports = {
         'schedule',
         'statePersonnel',
         'statePersonnel.years',
-        'costAllocation'
+        'costAllocation',
+        'quarterlyFFP'
       ]
     },
 
@@ -133,7 +139,8 @@ module.exports = {
         },
         costAllocation: this.related('costAllocation'),
         standardsAndConditions: this.get('standards_and_conditions'),
-        fundingSource: this.get('funding_source')
+        fundingSource: this.get('funding_source'),
+        quarterlyFFP: this.related('quarterlyFFP')
       };
     }
   }

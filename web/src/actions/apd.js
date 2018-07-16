@@ -2,6 +2,7 @@ import { push } from 'react-router-redux';
 
 import { notify } from './notification';
 import axios from '../util/api';
+import { applyToNumbers } from '../util';
 
 export const ADD_APD_KEY_PERSON = 'ADD_APD_KEY_PERSON';
 export const ADD_APD_POC = 'ADD_APD_POC';
@@ -238,7 +239,16 @@ export const saveApd = () => (dispatch, state) => {
         modularity: activity.standardsAndConditions.modularity,
         mita: activity.standardsAndConditions.mita,
         reporting: activity.standardsAndConditions.reporting
-      }
+      },
+      quarterlyFFP: Object.entries(activity.quarterlyFFP).map(
+        ([year, ffp]) => ({
+          q1: applyToNumbers(ffp[1], v => v / 100),
+          q2: applyToNumbers(ffp[2], v => v / 100),
+          q3: applyToNumbers(ffp[3], v => v / 100),
+          q4: applyToNumbers(ffp[4], v => v / 100),
+          year
+        })
+      )
     });
   });
 
