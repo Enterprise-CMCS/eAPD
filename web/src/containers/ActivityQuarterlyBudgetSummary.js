@@ -33,7 +33,7 @@ class ActivityQuarterlyBudgetSummary extends Component {
   };
 
   render() {
-    const { quarterlyFFP, years } = this.props;
+    const { aId, quarterlyFFP, years } = this.props;
 
     // Wait until the budget is ready
     if (!quarterlyFFP) return null;
@@ -88,7 +88,7 @@ class ActivityQuarterlyBudgetSummary extends Component {
                               key={q}
                             >
                               <PercentInput
-                                name={`ffp-ACTIVITYIDHERE-${year}-${q}-${name}`}
+                                name={`ffp-${aId}-${year}-${q}-${name}`}
                                 hideLabel
                                 label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
                                 onChange={this.handleChange(year, q, name)}
