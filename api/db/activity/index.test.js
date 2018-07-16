@@ -20,7 +20,8 @@ tap.test('activity model index', async activityIndexTests => {
       'apdActivityGoal',
       'apdActivitySchedule',
       'apdActivityStatePersonnel',
-      'apdActivityStatePersonnelCost'
+      'apdActivityStatePersonnelCost',
+      'apdActivityQuarterlyFFP'
     ],
     'exports the expected models'
   );

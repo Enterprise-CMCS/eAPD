@@ -717,7 +717,55 @@ describe('activities reducer', () => {
                     mita: 'meeta',
                     mitigationStrategy: 'run away',
                     reporting: 'moop moop'
-                  }
+                  },
+                  quarterlyFFP: [
+                    {
+                      q1: {
+                        combined: 0.2,
+                        contractors: 0.3,
+                        state: 0.4
+                      },
+                      q2: {
+                        combined: 0.4,
+                        contractors: 0.3,
+                        state: 0.2
+                      },
+                      q3: {
+                        combined: 0.3,
+                        contractors: 0.2,
+                        state: 0.4
+                      },
+                      q4: {
+                        combined: 0.3,
+                        contractors: 0.4,
+                        state: 0.2
+                      },
+                      year: 2018
+                    },
+                    {
+                      q1: {
+                        combined: 0.25,
+                        contractors: 0.25,
+                        state: 0.25
+                      },
+                      q2: {
+                        combined: 0.25,
+                        contractors: 0.25,
+                        state: 0.25
+                      },
+                      q3: {
+                        combined: 0.25,
+                        contractors: 0.25,
+                        state: 0.25
+                      },
+                      q4: {
+                        combined: 0.25,
+                        contractors: 0.25,
+                        state: 0.25
+                      },
+                      year: 2019
+                    }
+                  ]
                 }
               ],
               years: ['2018', '2019']
@@ -815,24 +863,24 @@ describe('activities reducer', () => {
             quarterlyFFP: {
               '2018': {
                 '1': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
+                  combined: 20,
+                  contractors: 30,
+                  state: 40
                 },
                 '2': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
+                  combined: 40,
+                  contractors: 30,
+                  state: 20
                 },
                 '3': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
+                  combined: 30,
+                  contractors: 20,
+                  state: 40
                 },
                 '4': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
+                  combined: 30,
+                  contractors: 40,
+                  state: 20
                 }
               },
               '2019': {

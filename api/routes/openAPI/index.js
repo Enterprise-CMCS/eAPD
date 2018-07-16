@@ -66,7 +66,6 @@ module.exports = {
             type: 'string',
             description: 'Alternative considerations for the activity'
           },
-
           contractorResources: arrayOf({
             type: 'object',
             description: 'Activity contractor resource',
@@ -259,6 +258,101 @@ module.exports = {
                   }
                 }
               })
+            }
+          }),
+          quarterlyFFP: arrayOf({
+            type: 'object',
+            description:
+              'Federal share of this activity cost, by expense type, per fiscal quarter',
+            properties: {
+              q1: {
+                type: 'object',
+                description: 'First fiscal quarter FFP',
+                properties: {
+                  combined: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total to be paid in this quarter'
+                  },
+                  contractors: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
+                  },
+                  state: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
+                  }
+                }
+              },
+              q2: {
+                type: 'object',
+                description: 'Second fiscal quarter FFP',
+                properties: {
+                  combined: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total to be paid in this quarter'
+                  },
+                  contractors: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
+                  },
+                  state: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
+                  }
+                }
+              },
+              q3: {
+                type: 'object',
+                description: 'Third fiscal quarter FFP',
+                properties: {
+                  combined: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total to be paid in this quarter'
+                  },
+                  contractors: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
+                  },
+                  state: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
+                  }
+                }
+              },
+              q4: {
+                type: 'object',
+                description: 'Fourth fiscal quarter FFP',
+                properties: {
+                  combined: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total to be paid in this quarter'
+                  },
+                  contractors: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
+                  },
+                  state: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
+                  }
+                }
+              },
+              year: {
+                type: 'number',
+                description: 'Federal fiscal year this quarterly FFP applies to'
+              }
             }
           })
         }
