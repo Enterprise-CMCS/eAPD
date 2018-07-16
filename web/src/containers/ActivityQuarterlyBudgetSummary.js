@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { updateActivity } from '../actions/activities';
 import { PercentInput } from '../components/Inputs';
 import { t } from '../i18n';
-// import { expenseTypeNames } from '../reducers/budget';
 import { formatMoney, formatPerc } from '../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
