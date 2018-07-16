@@ -59,7 +59,7 @@ ShallowWrapper {
           <div
             className="mb-tiny bold"
           >
-            moop moop - real text here plz
+            Breakout of federal share by quarter
           </div>
           <HelpText
             reminder="activities.costAllocate.quarterly.reminder"
@@ -177,7 +177,7 @@ ShallowWrapper {
             <div
               className="mb-tiny bold"
             >
-              moop moop - real text here plz
+              Breakout of federal share by quarter
             </div>,
             <HelpText
               reminder="activities.costAllocate.quarterly.reminder"
@@ -196,11 +196,11 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "moop moop - real text here plz",
+              "children": "Breakout of federal share by quarter",
               "className": "mb-tiny bold",
             },
             "ref": null,
-            "rendered": "moop moop - real text here plz",
+            "rendered": "Breakout of federal share by quarter",
             "type": "div",
           },
           Object {
@@ -328,7 +328,7 @@ ShallowWrapper {
             <div
               className="mb-tiny bold"
             >
-              moop moop - real text here plz
+              Breakout of federal share by quarter
             </div>
             <HelpText
               reminder="activities.costAllocate.quarterly.reminder"
@@ -446,7 +446,7 @@ ShallowWrapper {
               <div
                 className="mb-tiny bold"
               >
-                moop moop - real text here plz
+                Breakout of federal share by quarter
               </div>,
               <HelpText
                 reminder="activities.costAllocate.quarterly.reminder"
@@ -465,11 +465,11 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "moop moop - real text here plz",
+                "children": "Breakout of federal share by quarter",
                 "className": "mb-tiny bold",
               },
               "ref": null,
-              "rendered": "moop moop - real text here plz",
+              "rendered": "Breakout of federal share by quarter",
               "type": "div",
             },
             Object {
