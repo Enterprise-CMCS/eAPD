@@ -13,7 +13,8 @@ import {
   INCENTIVE_ENTRIES,
   arrToObj,
   defaultAPDYearOptions,
-  defaultAPDYears
+  defaultAPDYears,
+  replaceNulls
 } from '../util';
 
 import assurancesList from '../data/assurancesAndCompliance.yaml';
@@ -220,7 +221,7 @@ const reducer = (state = initialState, action) => {
                     ),
               previousActivitySummary: previousActivitySummary || '',
 
-              stateProfile,
+              stateProfile: replaceNulls(stateProfile),
               years: (years || defaultAPDYears).map(y => `${y}`),
               yearOptions: defaultAPDYearOptions
             }

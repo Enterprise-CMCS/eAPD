@@ -47,9 +47,24 @@ describe('utility functions', () => {
     arrToObj,
     getParams,
     nextSequence,
+    replaceNulls,
     stateLookup,
     titleCase
   } = load();
+
+  test('replace nulls with empty strings in an object', () => {
+    expect(replaceNulls({ foo: null, bar: 123 })).toEqual({
+      foo: '',
+      bar: 123
+    });
+
+    expect(replaceNulls({ foo: { bar: null, baz: 'abc' }, foo2: 123 })).toEqual(
+      {
+        foo: { bar: '', baz: 'abc' },
+        foo2: 123
+      }
+    );
+  });
 
   test('finds a state by two-letter code', () => {
     expect(stateLookup('Mo')).toEqual({ id: 'mo', name: 'Missouri' });
