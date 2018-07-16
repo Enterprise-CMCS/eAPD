@@ -292,7 +292,7 @@ const buildBudget = wholeState => {
 
     // This is the percent of the federal share per fiscal quarter,
     // by expense type.  This is entered in the
-    // Activi
+    // ActivityQuarterlyBudgetSummary table
     const ffpPercents = activity.quarterlyFFP;
 
     // The grand total of the federal share of this activity's
@@ -385,14 +385,6 @@ const buildBudget = wholeState => {
       });
     });
   });
-
-  // newState.federalShareByFFYQuarter = {
-  //   hitAndHie: getFederalShareByFFYQuarter(
-  //     newState.quarterly.hitAndHie,
-  //     newState.hitAndHie
-  //   ),
-  //   mmis: getFederalShareByFFYQuarter(newState.quarterly.mmis, newState.mmis)
-  // };
 
   return newState;
 };
