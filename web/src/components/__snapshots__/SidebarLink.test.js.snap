@@ -12,7 +12,7 @@ ShallowWrapper {
     sub={
       Array [
         Object {
-          "id": 1,
+          "id": "1",
           "name": "child",
         },
       ]
@@ -325,7 +325,7 @@ ShallowWrapper {
     sub={
       Array [
         Object {
-          "id": 1,
+          "id": "1",
           "name": "child",
         },
       ]
@@ -767,7 +767,7 @@ ShallowWrapper {
     sub={
       Array [
         Object {
-          "id": 1,
+          "id": "1",
           "name": "child",
         },
       ]
@@ -835,7 +835,7 @@ ShallowWrapper {
         </li>,
         Array [
           <SidebarLink
-            anchor={1}
+            anchor="1"
             depth={1}
             expanded={null}
             hash={null}
@@ -996,7 +996,7 @@ ShallowWrapper {
         "key": "1",
         "nodeType": "function",
         "props": Object {
-          "anchor": 1,
+          "anchor": "1",
           "children": "child",
           "depth": 1,
           "expanded": null,
@@ -1064,7 +1064,7 @@ ShallowWrapper {
           </li>,
           Array [
             <SidebarLink
-              anchor={1}
+              anchor="1"
               depth={1}
               expanded={null}
               hash={null}
@@ -1225,7 +1225,7 @@ ShallowWrapper {
           "key": "1",
           "nodeType": "function",
           "props": Object {
-            "anchor": 1,
+            "anchor": "1",
             "children": "child",
             "depth": 1,
             "expanded": null,
