@@ -40,6 +40,12 @@ const expenseTypes = (years, names = expenseTypeNames) =>
     {}
   );
 
+const initTotalsByExpenseType = years =>
+  expenseTypeNames.reduce(
+    (obj, name) => ({ ...obj, [name]: arrToObj(years) }),
+    {}
+  );
+
 const defaultFederalShare = years =>
   years.reduce(
     (o, year) => ({
@@ -99,6 +105,7 @@ const initialState = years => ({
   hitAndHie: expenseTypes(years),
   mmisByFFP: expenseTypes(years, [...FFPOptions, 'combined']),
   quarterly: initQuarterly(years),
+  activityTotals: [],
   years
 });
 
@@ -187,6 +194,7 @@ const getTotalsForActivity = activity => {
           });
 
           return {
+            data: { ...collapsed, total },
             merge: (bigState, target = type) => {
               const merged = bigState[fundingSource][target];
 
@@ -256,6 +264,32 @@ const computeMmisByFFP = (bigState, activityEntries) => {
         addBudgetBlocks(grandTotals.total, result);
       }
     });
+  });
+};
+
+// state personnel, contractor, other expenses totals by year and activity
+const computeTotalsByActivity = (bigState, activityEntries) => {
+  const { activityTotals, years } = bigState;
+  const yearsWithTotal = [...years, 'total'];
+
+  activityEntries.forEach(activity => {
+    const { id, name, fundingSource } = activity;
+    const totaller = getTotalsForActivity(activity);
+
+    const data = initTotalsByExpenseType(yearsWithTotal);
+    const grandTotals = data.combined;
+
+    budgetInputs.forEach(({ type, value, target }) => {
+      const byType = totaller.collapse(type, value).totals().data;
+
+      Object.keys(byType).forEach(year => {
+        data[target][year] += byType[year].total;
+        grandTotals[year] += byType[year].total;
+      });
+    });
+
+    const entry = { id, name, fundingSource, data };
+    activityTotals.push(entry);
   });
 };
 
@@ -367,6 +401,7 @@ const buildBudget = wholeState => {
 
   combineHitAndHie(newState);
   computeMmisByFFP(newState, activityEntries);
+  computeTotalsByActivity(newState, activityEntries);
 
   activityEntries.forEach(activity => {
     const target =

@@ -27,14 +27,14 @@ describe('SidebarLink component', () => {
 
   test('renders correctly if link has sub-links', () => {
     const component = shallow(
-      <SidebarLink sub={[{ id: 1, name: 'child' }]}>link text</SidebarLink>
+      <SidebarLink sub={[{ id: '1', name: 'child' }]}>link text</SidebarLink>
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders correctly if link is collapsed', () => {
     const component = shallow(
-      <SidebarLink expanded={false} sub={[{ id: 1, name: 'child' }]}>
+      <SidebarLink expanded={false} sub={[{ id: '1', name: 'child' }]}>
         link text
       </SidebarLink>
     );
@@ -43,7 +43,7 @@ describe('SidebarLink component', () => {
 
   test('renders correctly if link is expanded', () => {
     const component = shallow(
-      <SidebarLink expanded sub={[{ id: 1, name: 'child' }]}>
+      <SidebarLink expanded sub={[{ id: '1', name: 'child' }]}>
         link text
       </SidebarLink>
     );

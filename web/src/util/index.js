@@ -166,6 +166,15 @@ export const titleCase = str => str.replace(/\b\S/g, t => t.toUpperCase());
 export const isProgamAdmin = activity =>
   activity.name === 'Program Administration' || activity.id === 1;
 
+export const applyToNumbers = (obj, fn) => {
+  const o = { ...obj };
+  Object.keys(o).forEach(k => {
+    if (typeof o[k] === 'number') o[k] = fn(o[k]);
+    else if (typeof o[k] === 'object') o[k] = applyToNumbers(o[k], fn);
+  });
+  return o;
+};
+
 export const replaceNulls = (obj, newValue = '') => {
   const replace = o => {
     Object.keys(o).forEach(k => {
