@@ -5,7 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ActivityDetailAll
-    aId="activity-id"
+    aKey="activity-key"
     expanded={false}
     num={3}
     removeActivity={[Function]}
@@ -30,28 +30,28 @@ ShallowWrapper {
       "children": Array [
         Array [
           <Connect(ActivityDetailDescription)
-            aId="activity-id"
+            aKey="activity-key"
           />,
           <Connect(ActivityDetailGoals)
-            aId="activity-id"
+            aKey="activity-key"
           />,
           <Connect(ActivityDetailSchedule)
-            aId="activity-id"
+            aKey="activity-key"
           />,
           <Connect(ActivityDetailStatePersonnel)
-            aId="activity-id"
+            aKey="activity-key"
           />,
           <Connect(ActivityDetailContractorExpenses)
-            aId="activity-id"
+            aKey="activity-key"
           />,
           <Connect(ActivityDetailExpenses)
-            aId="activity-id"
+            aKey="activity-key"
           />,
           <Connect(ActivityDetailCostAllocate)
-            aId="activity-id"
+            aKey="activity-key"
           />,
           <Connect(ActivityDetailStandardsAndConditions)
-            aId="activity-id"
+            aKey="activity-key"
           />,
         ],
         <DeleteButton
@@ -60,7 +60,7 @@ ShallowWrapper {
           resource="activities.delete"
         />,
       ],
-      "id": "activity-activity-id",
+      "id": "activity-activity-key",
       "onChange": [Function],
       "open": false,
       "sticky": true,
@@ -73,7 +73,7 @@ ShallowWrapper {
         "key": "0",
         "nodeType": "class",
         "props": Object {
-          "aId": "activity-id",
+          "aKey": "activity-key",
         },
         "ref": null,
         "rendered": null,
@@ -84,7 +84,7 @@ ShallowWrapper {
         "key": "1",
         "nodeType": "class",
         "props": Object {
-          "aId": "activity-id",
+          "aKey": "activity-key",
         },
         "ref": null,
         "rendered": null,
@@ -95,7 +95,7 @@ ShallowWrapper {
         "key": "2",
         "nodeType": "class",
         "props": Object {
-          "aId": "activity-id",
+          "aKey": "activity-key",
         },
         "ref": null,
         "rendered": null,
@@ -106,7 +106,7 @@ ShallowWrapper {
         "key": "3",
         "nodeType": "class",
         "props": Object {
-          "aId": "activity-id",
+          "aKey": "activity-key",
         },
         "ref": null,
         "rendered": null,
@@ -117,7 +117,7 @@ ShallowWrapper {
         "key": "4",
         "nodeType": "class",
         "props": Object {
-          "aId": "activity-id",
+          "aKey": "activity-key",
         },
         "ref": null,
         "rendered": null,
@@ -128,7 +128,7 @@ ShallowWrapper {
         "key": "5",
         "nodeType": "class",
         "props": Object {
-          "aId": "activity-id",
+          "aKey": "activity-key",
         },
         "ref": null,
         "rendered": null,
@@ -139,7 +139,7 @@ ShallowWrapper {
         "key": "6",
         "nodeType": "class",
         "props": Object {
-          "aId": "activity-id",
+          "aKey": "activity-key",
         },
         "ref": null,
         "rendered": null,
@@ -150,7 +150,7 @@ ShallowWrapper {
         "key": "7",
         "nodeType": "class",
         "props": Object {
-          "aId": "activity-id",
+          "aKey": "activity-key",
         },
         "ref": null,
         "rendered": null,
@@ -184,28 +184,28 @@ ShallowWrapper {
         "children": Array [
           Array [
             <Connect(ActivityDetailDescription)
-              aId="activity-id"
+              aKey="activity-key"
             />,
             <Connect(ActivityDetailGoals)
-              aId="activity-id"
+              aKey="activity-key"
             />,
             <Connect(ActivityDetailSchedule)
-              aId="activity-id"
+              aKey="activity-key"
             />,
             <Connect(ActivityDetailStatePersonnel)
-              aId="activity-id"
+              aKey="activity-key"
             />,
             <Connect(ActivityDetailContractorExpenses)
-              aId="activity-id"
+              aKey="activity-key"
             />,
             <Connect(ActivityDetailExpenses)
-              aId="activity-id"
+              aKey="activity-key"
             />,
             <Connect(ActivityDetailCostAllocate)
-              aId="activity-id"
+              aKey="activity-key"
             />,
             <Connect(ActivityDetailStandardsAndConditions)
-              aId="activity-id"
+              aKey="activity-key"
             />,
           ],
           <DeleteButton
@@ -214,7 +214,7 @@ ShallowWrapper {
             resource="activities.delete"
           />,
         ],
-        "id": "activity-activity-id",
+        "id": "activity-activity-key",
         "onChange": [Function],
         "open": false,
         "sticky": true,
@@ -227,7 +227,7 @@ ShallowWrapper {
           "key": "0",
           "nodeType": "class",
           "props": Object {
-            "aId": "activity-id",
+            "aKey": "activity-key",
           },
           "ref": null,
           "rendered": null,
@@ -238,7 +238,7 @@ ShallowWrapper {
           "key": "1",
           "nodeType": "class",
           "props": Object {
-            "aId": "activity-id",
+            "aKey": "activity-key",
           },
           "ref": null,
           "rendered": null,
@@ -249,7 +249,7 @@ ShallowWrapper {
           "key": "2",
           "nodeType": "class",
           "props": Object {
-            "aId": "activity-id",
+            "aKey": "activity-key",
           },
           "ref": null,
           "rendered": null,
@@ -260,7 +260,7 @@ ShallowWrapper {
           "key": "3",
           "nodeType": "class",
           "props": Object {
-            "aId": "activity-id",
+            "aKey": "activity-key",
           },
           "ref": null,
           "rendered": null,
@@ -271,7 +271,7 @@ ShallowWrapper {
           "key": "4",
           "nodeType": "class",
           "props": Object {
-            "aId": "activity-id",
+            "aKey": "activity-key",
           },
           "ref": null,
           "rendered": null,
@@ -282,7 +282,7 @@ ShallowWrapper {
           "key": "5",
           "nodeType": "class",
           "props": Object {
-            "aId": "activity-id",
+            "aKey": "activity-key",
           },
           "ref": null,
           "rendered": null,
@@ -293,7 +293,7 @@ ShallowWrapper {
           "key": "6",
           "nodeType": "class",
           "props": Object {
-            "aId": "activity-id",
+            "aKey": "activity-key",
           },
           "ref": null,
           "rendered": null,
@@ -304,7 +304,7 @@ ShallowWrapper {
           "key": "7",
           "nodeType": "class",
           "props": Object {
-            "aId": "activity-id",
+            "aKey": "activity-key",
           },
           "ref": null,
           "rendered": null,

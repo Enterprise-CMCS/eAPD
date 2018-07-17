@@ -15,8 +15,8 @@ describe('the activities cost allocation FFP component', () => {
 
   const state = {
     activities: {
-      byId: {
-        id: {
+      byKey: {
+        key: {
           costAllocation: {
             '1066': {
               other: 10,
@@ -64,7 +64,7 @@ describe('the activities cost allocation FFP component', () => {
   };
 
   const props = {
-    aId: 1337,
+    aKey: 'activity key',
     byYearData: [
       {
         allocations: [
@@ -87,7 +87,7 @@ describe('the activities cost allocation FFP component', () => {
         year: '1067'
       }
     ],
-    costAllocation: state.activities.byId.id.costAllocation,
+    costAllocation: state.activities.byKey.key.costAllocation,
     updateActivity: sandbox.stub()
   };
 
@@ -110,7 +110,7 @@ describe('the activities cost allocation FFP component', () => {
 
     expect(
       props.updateActivity.calledWith(
-        1337,
+        'activity key',
         { costAllocation: { '1066': { other: 150 } } },
         true
       )
@@ -126,7 +126,7 @@ describe('the activities cost allocation FFP component', () => {
 
     expect(
       props.updateActivity.calledWith(
-        1337,
+        'activity key',
         { costAllocation: { '1066': { ffp: { federal: 35, state: 65 } } } },
         true
       )
@@ -134,7 +134,7 @@ describe('the activities cost allocation FFP component', () => {
   });
 
   test('maps redux state to component props', () => {
-    expect(mapStateToProps(state, { aId: 'id' })).toEqual({
+    expect(mapStateToProps(state, { aKey: 'key' })).toEqual({
       byYearData: [
         {
           allocations: [
@@ -157,7 +157,7 @@ describe('the activities cost allocation FFP component', () => {
           year: '1067'
         }
       ],
-      costAllocation: state.activities.byId.id.costAllocation
+      costAllocation: state.activities.byKey.key.costAllocation
     });
   });
 

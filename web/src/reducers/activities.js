@@ -19,7 +19,17 @@ import {
 } from '../actions/activities';
 import { SELECT_APD, UPDATE_APD } from '../actions/apd';
 
-import { arrToObj, defaultAPDYears, generateKey } from '../util';
+import {
+  arrToObj,
+  defaultAPDYears,
+  generateKey as defaultGenerateKey
+} from '../util';
+
+// Make this thing injectible for testing.
+let generateKey = defaultGenerateKey;
+export const setKeyGenerator = fn => {
+  generateKey = fn;
+};
 
 const newGoal = () => ({ key: generateKey(), desc: '', obj: '' });
 
