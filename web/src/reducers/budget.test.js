@@ -44,6 +44,7 @@ describe('budget reducer', () => {
       combined: { total: { federal: 0, state: 0, total: 0 } }
     },
     quarterly: { hitAndHie: {}, mmis: {} },
+    activityTotals: [],
     years: []
   };
 
@@ -71,8 +72,9 @@ describe('budget reducer', () => {
           apd: { data: { years: ['1931', '1932', '1933'] } },
           activities: {
             byId: {
-              hieOne: {
-                id: 'hieOne',
+              '1': {
+                id: 1,
+                name: 'hieOne',
                 fundingSource: 'HIE',
                 years: ['1931', '1932', '1933'],
                 costAllocation: {
@@ -125,8 +127,9 @@ describe('budget reducer', () => {
                   }
                 }
               },
-              hieTwo: {
-                id: 'hieTwo',
+              '2': {
+                id: 2,
+                name: 'hieTwo',
                 fundingSource: 'HIE',
                 years: ['1931', '1932', '1933'],
                 costAllocation: {
@@ -170,8 +173,9 @@ describe('budget reducer', () => {
                   }
                 }
               },
-              hitOne: {
-                id: 'hitOne',
+              '3': {
+                id: 3,
+                name: 'hitOne',
                 fundingSource: 'HIT',
                 years: ['1931', '1932', '1933'],
                 costAllocation: {
@@ -215,8 +219,9 @@ describe('budget reducer', () => {
                   }
                 }
               },
-              mmisOne: {
-                id: 'mmisOne',
+              '4': {
+                id: 4,
+                name: 'mmisOne',
                 fundingSource: 'MMIS',
                 years: ['1931', '1932', '1933'],
                 costAllocation: {
@@ -266,7 +271,7 @@ describe('budget reducer', () => {
       })
     ).toEqual({
       activities: {
-        hieOne: {
+        '1': {
           quarterlyFFP: {
             '1931': {
               '1': {
@@ -352,7 +357,7 @@ describe('budget reducer', () => {
             total: { state: 8370, contractors: 5400, combined: 13770 }
           }
         },
-        hieTwo: {
+        '2': {
           quarterlyFFP: {
             '1931': {
               '1': {
@@ -438,7 +443,7 @@ describe('budget reducer', () => {
             total: { state: 5400, contractors: 2700, combined: 8100 }
           }
         },
-        hitOne: {
+        '3': {
           quarterlyFFP: {
             '1931': {
               '1': {
@@ -524,7 +529,7 @@ describe('budget reducer', () => {
             total: { state: 4800, contractors: 2520, combined: 7320 }
           }
         },
-        mmisOne: {
+        '4': {
           quarterlyFFP: {
             '1931': {
               '1': {
@@ -809,6 +814,92 @@ describe('budget reducer', () => {
           '1933': { '1': 25, '2': 25, '3': 25, '4': 25 }
         }
       },
+      activityTotals: [
+        {
+          id: 1,
+          name: 'hieOne',
+          fundingSource: 'HIE',
+          data: {
+            statePersonnel: {
+              '1931': 1400,
+              '1932': 1200,
+              '1933': 700,
+              total: 3300
+            },
+            contractors: {
+              '1931': 2000,
+              '1932': 2000,
+              '1933': 2000,
+              total: 6000
+            },
+            expenses: { '1931': 2000, '1932': 2000, '1933': 2000, total: 6000 },
+            combined: { '1931': 5400, '1932': 5200, '1933': 4700, total: 15300 }
+          }
+        },
+        {
+          id: 2,
+          name: 'hieTwo',
+          fundingSource: 'HIE',
+          data: {
+            statePersonnel: {
+              '1931': 1000,
+              '1932': 1000,
+              '1933': 1000,
+              total: 3000
+            },
+            contractors: {
+              '1931': 1000,
+              '1932': 1000,
+              '1933': 1000,
+              total: 3000
+            },
+            expenses: { '1931': 1000, '1932': 1000, '1933': 1000, total: 3000 },
+            combined: { '1931': 3000, '1932': 3000, '1933': 3000, total: 9000 }
+          }
+        },
+        {
+          id: 3,
+          name: 'hitOne',
+          fundingSource: 'HIT',
+          data: {
+            statePersonnel: {
+              '1931': 1000,
+              '1932': 1000,
+              '1933': 1000,
+              total: 3000
+            },
+            contractors: {
+              '1931': 1000,
+              '1932': 1000,
+              '1933': 1000,
+              total: 3000
+            },
+            expenses: { '1931': 1000, '1932': 1000, '1933': 1000, total: 3000 },
+            combined: { '1931': 3000, '1932': 3000, '1933': 3000, total: 9000 }
+          }
+        },
+        {
+          id: 4,
+          name: 'mmisOne',
+          fundingSource: 'MMIS',
+          data: {
+            statePersonnel: {
+              '1931': 500,
+              '1932': 1000,
+              '1933': 100,
+              total: 1600
+            },
+            contractors: {
+              '1931': 1000,
+              '1932': 1000,
+              '1933': 1000,
+              total: 3000
+            },
+            expenses: { '1931': 1000, '1932': 1000, '1933': 1000, total: 3000 },
+            combined: { '1931': 2500, '1932': 3000, '1933': 2100, total: 7600 }
+          }
+        }
+      ],
       years: ['1931', '1932', '1933']
     });
   });
