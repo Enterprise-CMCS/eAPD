@@ -25,7 +25,7 @@ ShallowWrapper {
         <div
           className="mb-tiny bold"
         >
-          List the goals and objectives you're hoping to accomplish as part of this activity.
+          List the goals and objectives planned as part of this activity.
         </div>,
         <HelpText
           reminder="activities.goals.reminder"
@@ -41,11 +41,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "List the goals and objectives you're hoping to accomplish as part of this activity.",
+          "children": "List the goals and objectives planned as part of this activity.",
           "className": "mb-tiny bold",
         },
         "ref": null,
-        "rendered": "List the goals and objectives you're hoping to accomplish as part of this activity.",
+        "rendered": "List the goals and objectives planned as part of this activity.",
         "type": "div",
       },
       Object {
@@ -74,7 +74,7 @@ ShallowWrapper {
           <div
             className="mb-tiny bold"
           >
-            List the goals and objectives you're hoping to accomplish as part of this activity.
+            List the goals and objectives planned as part of this activity.
           </div>,
           <HelpText
             reminder="activities.goals.reminder"
@@ -90,11 +90,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "List the goals and objectives you're hoping to accomplish as part of this activity.",
+            "children": "List the goals and objectives planned as part of this activity.",
             "className": "mb-tiny bold",
           },
           "ref": null,
-          "rendered": "List the goals and objectives you're hoping to accomplish as part of this activity.",
+          "rendered": "List the goals and objectives planned as part of this activity.",
           "type": "div",
         },
         Object {
@@ -320,7 +320,7 @@ ShallowWrapper {
           Needs and Objectives
         </SectionTitle>,
         <div>
-          List the goals and objectives you're hoping to accomplish as part of this activity.
+          List the goals and objectives planned as part of this activity.
         </div>,
         <SectionDesc>
           Include a brief description of how each goal relates to the vision identified in the program summary section.
@@ -348,10 +348,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "List the goals and objectives you're hoping to accomplish as part of this activity.",
+          "children": "List the goals and objectives planned as part of this activity.",
         },
         "ref": null,
-        "rendered": "List the goals and objectives you're hoping to accomplish as part of this activity.",
+        "rendered": "List the goals and objectives planned as part of this activity.",
         "type": "div",
       },
       Object {
@@ -380,7 +380,7 @@ ShallowWrapper {
             Needs and Objectives
           </SectionTitle>,
           <div>
-            List the goals and objectives you're hoping to accomplish as part of this activity.
+            List the goals and objectives planned as part of this activity.
           </div>,
           <SectionDesc>
             Include a brief description of how each goal relates to the vision identified in the program summary section.
@@ -408,10 +408,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "List the goals and objectives you're hoping to accomplish as part of this activity.",
+            "children": "List the goals and objectives planned as part of this activity.",
           },
           "ref": null,
-          "rendered": "List the goals and objectives you're hoping to accomplish as part of this activity.",
+          "rendered": "List the goals and objectives planned as part of this activity.",
           "type": "div",
         },
         Object {
