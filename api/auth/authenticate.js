@@ -8,7 +8,10 @@ module.exports = (
 ) => async (username, password, done) => {
   try {
     logger.verbose(`got authentication request for [${username}]`);
-    const user = await userModel.where({ email: username }).fetch();
+
+    const user = await userModel
+      .query('whereRaw', 'LOWER(email) = ?', [username.toLowerCase()])
+      .fetch();
 
     if (user && (await bcrypt.compare(password, user.get('password')))) {
       logger.verbose(`authenticated user [${username}]`);
@@ -22,6 +25,7 @@ module.exports = (
     }
   } catch (e) {
     logger.error(e);
+    console.log(e);
     done('Database error');
   }
 };

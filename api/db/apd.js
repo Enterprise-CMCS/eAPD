@@ -147,6 +147,7 @@ module.exports = () => ({
         'activities.schedule',
         'activities.statePersonnel',
         'activities.statePersonnel.years',
+        'activities.quarterlyFFP',
         'incentivePayments',
         'keyPersonnel',
         'keyPersonnel.years',
