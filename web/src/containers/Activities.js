@@ -8,17 +8,17 @@ import ActivityListEntry from './ActivityListEntry';
 import { addActivity as addActivityAction } from '../actions/activities';
 import { Section, Subsection } from '../components/Section';
 
-const Activities = ({ activityIds, addActivity }) => (
+const Activities = ({ activityKeys, addActivity }) => (
   <Section id="activities" resource="activities">
     <Subsection id="activities-list" resource="activities.list" open>
-      {activityIds.length === 0 ? (
+      {activityKeys.length === 0 ? (
         <div className="mb2 p1 h6 alert">
           {t('activities.noActivityMessage')}
         </div>
       ) : (
         <div className="mb3">
-          {activityIds.map((aId, idx) => (
-            <ActivityListEntry key={aId} aId={aId} num={idx + 1} />
+          {activityKeys.map((key, idx) => (
+            <ActivityListEntry key={key} aKey={key} num={idx + 1} />
           ))}
         </div>
       )}
@@ -26,19 +26,19 @@ const Activities = ({ activityIds, addActivity }) => (
         {t('activities.addActivityButtonText')}
       </button>
     </Subsection>
-    {activityIds.map((aId, idx) => (
-      <ActivityDetailAll key={aId} aId={aId} num={idx + 1} />
+    {activityKeys.map((key, idx) => (
+      <ActivityDetailAll key={key} aKey={key} num={idx + 1} />
     ))}
   </Section>
 );
 
 Activities.propTypes = {
-  activityIds: PropTypes.array.isRequired,
+  activityKeys: PropTypes.array.isRequired,
   addActivity: PropTypes.func.isRequired
 };
 
 export const mapStateToProps = ({ activities }) => ({
-  activityIds: activities.allIds
+  activityKeys: activities.allKeys
 });
 
 export const mapDispatchToProps = {

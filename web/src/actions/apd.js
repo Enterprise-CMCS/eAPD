@@ -116,7 +116,7 @@ export const saveApd = () => (dispatch, state) => {
 
   const {
     apd: { data: updatedApd },
-    activities: { byId: activitiesByID }
+    activities: { byKey: activitiesByKey }
   } = state();
 
   const incentivePayments = Object.entries(
@@ -171,9 +171,10 @@ export const saveApd = () => (dispatch, state) => {
     years: updatedApd.years
   };
 
-  Object.keys(activitiesByID).forEach(id => {
-    const activity = activitiesByID[id];
+  Object.keys(activitiesByKey).forEach(key => {
+    const activity = activitiesByKey[key];
     apd.activities.push({
+      id: activity.id,
       name: activity.name,
       fundingSource: activity.fundingSource,
       summary: activity.descShort,
@@ -192,15 +193,18 @@ export const saveApd = () => (dispatch, state) => {
         })
       ),
       goals: activity.goals.map(g => ({
+        id: g.id,
         description: g.desc,
         objective: g.obj
       })),
       schedule: activity.milestones.map(m => ({
+        id: m.id,
         milestone: m.name,
         plannedStart: m.start || undefined,
         plannedEnd: m.end || undefined
       })),
       statePersonnel: activity.statePersonnel.map(s => ({
+        id: s.id,
         title: s.title,
         description: s.desc,
         years: Object.keys(s.years).map(year => ({
@@ -210,6 +214,7 @@ export const saveApd = () => (dispatch, state) => {
         }))
       })),
       contractorResources: activity.contractorResources.map(c => ({
+        id: c.id,
         name: c.name,
         description: c.desc,
         start: c.start || undefined,
@@ -220,6 +225,7 @@ export const saveApd = () => (dispatch, state) => {
         }))
       })),
       expenses: activity.expenses.map(e => ({
+        id: e.id,
         category: e.category,
         description: e.desc,
         entries: Object.keys(e.years).map(year => ({

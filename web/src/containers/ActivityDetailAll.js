@@ -37,30 +37,30 @@ const activityComponents = [
 ];
 
 class ActivityDetailAll extends Component {
-  handleChange = id => () => {
-    this.props.toggleSection(id);
+  handleChange = key => () => {
+    this.props.toggleSection(key);
   };
 
   render() {
-    const { aId, expanded, num, removeActivity, title } = this.props;
+    const { aKey, expanded, num, removeActivity, title } = this.props;
 
     return (
       <Collapsible
-        id={`activity-${aId}`}
+        id={`activity-${aKey}`}
         title={title}
         bgColor="blue-light"
         btnBgColor="blue-bright"
         btnColor="white"
         open={expanded}
-        onChange={this.handleChange(aId)}
+        onChange={this.handleChange(aKey)}
         sticky
       >
         {activityComponents.map((ActivityComponent, i) => (
-          <ActivityComponent key={i} aId={aId} />
+          <ActivityComponent key={i} aKey={aKey} />
         ))}
         {num > 1 && (
           <DeleteButton
-            remove={() => removeActivity(aId)}
+            remove={() => removeActivity(aKey)}
             resource="activities.delete"
           />
         )}
@@ -70,7 +70,7 @@ class ActivityDetailAll extends Component {
 }
 
 ActivityDetailAll.propTypes = {
-  aId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  aKey: PropTypes.string.isRequired,
   expanded: PropTypes.bool.isRequired,
   num: PropTypes.number.isRequired,
   removeActivity: PropTypes.func.isRequired,
@@ -78,8 +78,8 @@ ActivityDetailAll.propTypes = {
   toggleSection: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = ({ activities: { byId } }, { aId, num }) => {
-  const activity = byId[aId];
+export const mapStateToProps = ({ activities: { byKey } }, { aKey, num }) => {
+  const activity = byKey[aKey];
   const { expanded } = activity.meta;
   const title = `${t('activities.header')} › ${activityTitle(activity, num)}`;
 

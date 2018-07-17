@@ -19,27 +19,28 @@ import {
 } from '../actions/activities';
 import { SELECT_APD, UPDATE_APD } from '../actions/apd';
 
-import { arrToObj, defaultAPDYears, nextSequence } from '../util';
+import { arrToObj, defaultAPDYears, generateKey } from '../util';
 
-const newGoal = () => ({ desc: '', obj: '' });
+const newGoal = () => ({ key: generateKey(), desc: '', obj: '' });
 
 const newMilestone = (name = '', start = '', end = '') => ({
+  key: generateKey(),
   name,
   start,
   end
 });
 
 const statePersonDefaultYear = () => ({ amt: '', perc: '' });
-const newStatePerson = (id, years) => ({
-  id,
+const newStatePerson = years => ({
+  key: generateKey(),
   title: '',
   desc: '',
   years: arrToObj(years, statePersonDefaultYear())
 });
 
 const contractorDefaultYear = () => 0;
-const newContractor = (id, years) => ({
-  id,
+const newContractor = years => ({
+  key: generateKey(),
   name: '',
   desc: '',
   start: '',
@@ -49,8 +50,8 @@ const newContractor = (id, years) => ({
 
 const expenseDefaultYear = () => 0;
 
-const newExpense = (id, years) => ({
-  id,
+const newExpense = years => ({
+  key: generateKey(),
   category: 'Hardware, software, and licensing',
   desc: '',
   years: arrToObj(years, expenseDefaultYear())
@@ -74,11 +75,13 @@ const quarterlyFFPEntry = () =>
     {}
   );
 
-const newActivity = (
-  id,
-  { name = '', fundingSource = 'HIT', years = [], ...rest } = {}
-) => ({
-  id,
+const newActivity = ({
+  name = '',
+  fundingSource = 'HIT',
+  years = [],
+  ...rest
+} = {}) => ({
+  key: generateKey(),
   name,
   fundingSource,
   descShort: '',
@@ -89,16 +92,16 @@ const newActivity = (
   goals: [newGoal()],
   milestones: [newMilestone()],
   statePersonnel: [
-    newStatePerson(1, years),
-    newStatePerson(2, years),
-    newStatePerson(3, years)
+    newStatePerson(years),
+    newStatePerson(years),
+    newStatePerson(years)
   ],
   contractorResources: [
-    newContractor(1, years),
-    newContractor(2, years),
-    newContractor(3, years)
+    newContractor(years),
+    newContractor(years),
+    newContractor(years)
   ],
-  expenses: [newExpense(1, years), newExpense(2, years), newExpense(3, years)],
+  expenses: [newExpense(years), newExpense(years), newExpense(years)],
   costAllocation: arrToObj(years, costAllocationEntry()),
   standardsAndConditions: {
     modularity: '',
@@ -122,41 +125,38 @@ const newActivity = (
 });
 
 const initialState = {
-  byId: {},
-  allIds: []
+  byKey: {},
+  allKeys: []
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ACTIVITY: {
-      const id = nextSequence(state.allIds);
+      const activity = newActivity({ years: action.years });
       return {
-        byId: {
-          ...state.byId,
-          [id]: newActivity(id, { years: action.years })
+        byKey: {
+          ...state.byKey,
+          [activity.key]: activity
         },
-        allIds: [...state.allIds, id]
+        allKeys: [...state.allKeys, activity.key]
       };
     }
     case REMOVE_ACTIVITY: {
-      const byId = { ...state.byId };
-      delete byId[action.id];
+      const byKey = { ...state.byKey };
+      delete byKey[action.key];
       return {
-        byId,
-        allIds: state.allIds.filter(id => id !== action.id)
+        byKey,
+        allKeys: state.allKeys.filter(key => key !== action.key)
       };
     }
     case ADD_ACTIVITY_CONTRACTOR:
       return u(
         {
-          byId: {
-            [action.id]: {
+          byKey: {
+            [action.key]: {
               contractorResources: contractors => [
                 ...contractors,
-                newContractor(
-                  nextSequence(contractors.map(c => c.id)),
-                  action.years
-                )
+                newContractor(action.years)
               ]
             }
           }
@@ -166,10 +166,11 @@ const reducer = (state = initialState, action) => {
     case REMOVE_ACTIVITY_CONTRACTOR:
       return u(
         {
-          byId: {
-            [action.id]: {
+          byKey: {
+            [action.key]: {
               contractorResources: contractors =>
-                contractors.filter(c => c.id !== action.contractorId)
+                contractors.filter(c => c.key !== action.contractorKey)
+              // TODO: UPDATE ACTION PROP
             }
           }
         },
@@ -178,14 +179,11 @@ const reducer = (state = initialState, action) => {
     case ADD_ACTIVITY_STATE_PERSON:
       return u(
         {
-          byId: {
-            [action.id]: {
+          byKey: {
+            [action.key]: {
               statePersonnel: people => [
                 ...people,
-                newStatePerson(
-                  nextSequence(people.map(p => p.id)),
-                  action.years
-                )
+                newStatePerson(action.years)
               ]
             }
           }
@@ -195,10 +193,11 @@ const reducer = (state = initialState, action) => {
     case REMOVE_ACTIVITY_STATE_PERSON:
       return u(
         {
-          byId: {
-            [action.id]: {
+          byKey: {
+            [action.key]: {
               statePersonnel: people =>
-                people.filter(p => p.id !== action.personId)
+                people.filter(p => p.key !== action.personKey)
+              // TODO: UPDATE ACTION PROP
             }
           }
         },
@@ -207,8 +206,8 @@ const reducer = (state = initialState, action) => {
     case ADD_ACTIVITY_GOAL:
       return u(
         {
-          byId: {
-            [action.id]: {
+          byKey: {
+            [action.key]: {
               goals: goals => [...goals, newGoal()]
             }
           }
@@ -218,9 +217,10 @@ const reducer = (state = initialState, action) => {
     case REMOVE_ACTIVITY_GOAL:
       return u(
         {
-          byId: {
-            [action.id]: {
-              goals: goals => goals.filter((_, i) => i !== action.goalIdx)
+          byKey: {
+            [action.key]: {
+              goals: goals => goals.filter(g => g.key !== action.goalKey)
+              // TODO: UPDATE ACTION PROP
             }
           }
         },
@@ -229,12 +229,9 @@ const reducer = (state = initialState, action) => {
     case ADD_ACTIVITY_EXPENSE:
       return u(
         {
-          byId: {
-            [action.id]: {
-              expenses: expenses => [
-                ...expenses,
-                newExpense(nextSequence(expenses.map(e => e.id)), action.years)
-              ]
+          byKey: {
+            [action.key]: {
+              expenses: expenses => [...expenses, newExpense(action.years)]
             }
           }
         },
@@ -243,10 +240,11 @@ const reducer = (state = initialState, action) => {
     case REMOVE_ACTIVITY_EXPENSE:
       return u(
         {
-          byId: {
-            [action.id]: {
+          byKey: {
+            [action.key]: {
               expenses: expenses =>
-                expenses.filter(e => e.id !== action.expenseId)
+                expenses.filter(e => e.key !== action.expenseKey)
+              // TODO: UPDATE ACTION PROP
             }
           }
         },
@@ -255,8 +253,8 @@ const reducer = (state = initialState, action) => {
     case ADD_ACTIVITY_MILESTONE:
       return u(
         {
-          byId: {
-            [action.id]: {
+          byKey: {
+            [action.key]: {
               milestones: milestones => [...milestones, newMilestone()]
             }
           }
@@ -266,27 +264,34 @@ const reducer = (state = initialState, action) => {
     case REMOVE_ACTIVITY_MILESTONE:
       return u(
         {
-          byId: {
-            [action.id]: {
+          byKey: {
+            [action.key]: {
               milestones: milestones =>
-                milestones.filter((_, i) => i !== action.milestoneIdx)
+                milestones.filter(m => m.key !== action.milestoneKey)
+              // TODO: UPDATE ACTION PROP
             }
           }
         },
         state
       );
     case EXPAND_ACTIVITY_SECTION:
-      return u({ byId: { [action.id]: { meta: { expanded: true } } } }, state);
+      return u(
+        { byKey: { [action.key]: { meta: { expanded: true } } } },
+        // TODO: UPDATE ACTION PROP
+        state
+      );
     case TOGGLE_ACTIVITY_SECTION:
       return u(
-        { byId: { [action.id]: { meta: { expanded: val => !val } } } },
+        { byKey: { [action.key]: { meta: { expanded: val => !val } } } },
+        // TODO: UPDATE ACTION PROP
         state
       );
     case UPDATE_ACTIVITY:
       return u(
         {
-          byId: {
-            [action.id]: { ...action.updates }
+          byKey: {
+            [action.key]: { ...action.updates }
+            // TODO: UPDATE ACTION PROP
           }
         },
         state
@@ -294,7 +299,7 @@ const reducer = (state = initialState, action) => {
     case UPDATE_APD:
       if (action.updates.years) {
         const { years } = action.updates;
-        const update = { byId: {} };
+        const update = { byKey: {} };
 
         const fixupYears = (obj, defaultValue) => {
           // Can't clone in the typical way because the incoming
@@ -333,8 +338,8 @@ const reducer = (state = initialState, action) => {
           return fixupYears(objects, defaultValue);
         };
 
-        Object.entries(state.byId).forEach(([id, activity]) => {
-          update.byId[id] = {
+        Object.entries(state.byKey).forEach(([key, activity]) => {
+          update.byKey[key] = {
             years,
             statePersonnel: fixupExpenses(
               activity.statePersonnel,
@@ -358,9 +363,11 @@ const reducer = (state = initialState, action) => {
       }
       return state;
     case SELECT_APD: {
-      const byId = {};
+      const byKey = {};
       ((action.apd || {}).activities || []).forEach(a => {
-        byId[a.id] = {
+        const key = generateKey();
+        byKey[key] = {
+          key,
           id: a.id,
           name: a.name,
           fundingSource: a.fundingSource,
@@ -384,16 +391,20 @@ const reducer = (state = initialState, action) => {
             {}
           ),
           goals: a.goals.map(g => ({
+            key: generateKey(),
+            id: g.id,
             desc: g.description || '',
             obj: g.objective || ''
           })),
           milestones: a.schedule.map(s => ({
+            key: generateKey(),
             id: s.id,
             name: s.milestone || '',
             start: s.plannedStart || '',
             end: s.plannedEnd || ''
           })),
           statePersonnel: a.statePersonnel.map(s => ({
+            key: generateKey(),
             id: s.id,
             title: s.title || '',
             desc: s.description || '',
@@ -409,6 +420,7 @@ const reducer = (state = initialState, action) => {
             )
           })),
           contractorResources: a.contractorResources.map(c => ({
+            key: generateKey(),
             id: c.id,
             name: c.name || '',
             desc: c.description || '',
@@ -423,6 +435,7 @@ const reducer = (state = initialState, action) => {
             )
           })),
           expenses: a.expenses.map(e => ({
+            key: generateKey(),
             id: e.id,
             category: e.category || '',
             desc: e.description || '',
@@ -485,17 +498,18 @@ const reducer = (state = initialState, action) => {
         };
       });
 
-      if (Object.keys(byId).length === 0) {
-        byId[1] = newActivity(1, {
+      if (Object.keys(byKey).length === 0) {
+        const defaultActivity = newActivity({
           name: 'Program Administration',
           fundingSource: 'HIT',
           years: defaultAPDYears
         });
+        byKey[defaultActivity.key] = defaultActivity;
       }
 
       return {
-        byId,
-        allIds: Object.keys(byId)
+        byKey,
+        allKeys: Object.keys(byKey)
       };
     }
     default:
