@@ -465,6 +465,8 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "bgColor": "white",
+      "btnBgColor": "white",
+      "btnColor": "blue",
       "children": <Chunk
         resource={null}
       >
@@ -498,6 +500,8 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "bgColor": "white",
+        "btnBgColor": "white",
+        "btnColor": "blue",
         "children": <Chunk
           resource={null}
         >
