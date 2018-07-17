@@ -138,4 +138,26 @@ tap.test('login endpoint | /auth/login', async loginTest => {
       validTest.same(body, { id: 2000 }, 'sends back the user ID');
     }
   );
+
+  loginTest.test(
+    'JSON body: with valid (UPPERCASED) username and valid password',
+    async validTest => {
+      // isolate cookies, so request doesn't reuse them
+      const cookies = request.jar();
+      const { response, body } = await request.post(url, {
+        jar: cookies,
+        json: { username: 'ALL-PERMISSIONS-AND-STATE', password: 'password' }
+      });
+
+      validTest.equal(response.statusCode, 200, 'gives a 200 status code');
+      validTest.ok(
+        response.headers['set-cookie'].some(
+          cookie =>
+            cookie.startsWith('session=') && cookie.endsWith('; httponly')
+        ),
+        'sends an http-only session cookie'
+      );
+      validTest.same(body, { id: 2000 }, 'sends back the user ID');
+    }
+  );
 });
