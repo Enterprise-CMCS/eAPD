@@ -10,6 +10,14 @@
   background-color: var(--grey-light);
 }
 
+.bg-blue-light {
+  background-color: var(--blue-light);
+}
+
+.bg-blue-bright {
+  background-color: var(--blue-bright);
+}
+
 /*
   additional colors not represented by
   http://basscss.com/ace/#colors
@@ -27,10 +35,6 @@
 
 .bg-teal-light {
   background-color: #e1f3f8;
-}
-
-.bg-blue-light {
-  background-color: #e8f1fb;
 }
 
 .bg-aqua-light {
