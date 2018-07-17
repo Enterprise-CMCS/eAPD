@@ -116,7 +116,7 @@ const newActivity = (
   quarterlyFFP: arrToObj(years, quarterlyFFPEntry()),
   years,
   meta: {
-    expanded: false
+    expanded: name === 'Program Administration'
   },
   ...rest
 });
@@ -480,7 +480,7 @@ const reducer = (state = initialState, action) => {
                 )
               : { ...arrToObj(action.apd.years, quarterlyFFPEntry()) },
           meta: {
-            expanded: false
+            expanded: a.name === 'Program Administration'
           }
         };
       });
