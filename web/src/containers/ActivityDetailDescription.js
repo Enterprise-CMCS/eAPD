@@ -12,7 +12,7 @@ const ActivityDetailDescription = props => {
   const { descLong, altApproach } = activity;
 
   const sync = name => html => {
-    updateActivity(activity.id, { [name]: html });
+    updateActivity(activity.key, { [name]: html });
   };
 
   return (
@@ -29,7 +29,7 @@ const ActivityDetailDescription = props => {
             spellCheck="true"
             value={activity.descShort}
             onChange={e =>
-              updateActivity(activity.id, { descShort: e.target.value })
+              updateActivity(activity.key, { descShort: e.target.value })
             }
           />
         </div>
@@ -62,8 +62,8 @@ ActivityDetailDescription.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId } }, { aId }) => ({
-  activity: byId[aId]
+const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
+  activity: byKey[aKey]
 });
 
 const mapDispatchToProps = {

@@ -21,80 +21,80 @@ const actionWithYears = (type, other) => (dispatch, getState) =>
 
 export const addActivity = () => actionWithYears(ADD_ACTIVITY);
 
-export const addActivityContractor = id =>
-  actionWithYears(ADD_ACTIVITY_CONTRACTOR, { id });
+export const addActivityContractor = key =>
+  actionWithYears(ADD_ACTIVITY_CONTRACTOR, { key });
 
-export const addActivityGoal = id => ({ type: ADD_ACTIVITY_GOAL, id });
+export const addActivityGoal = key => ({ type: ADD_ACTIVITY_GOAL, key });
 
-export const addActivityExpense = id =>
-  actionWithYears(ADD_ACTIVITY_EXPENSE, { id });
+export const addActivityExpense = key =>
+  actionWithYears(ADD_ACTIVITY_EXPENSE, { key });
 
-export const addActivityMilestone = id => ({
+export const addActivityMilestone = key => ({
   type: ADD_ACTIVITY_MILESTONE,
-  id
+  key
 });
 
-export const addActivityStatePerson = id =>
-  actionWithYears(ADD_ACTIVITY_STATE_PERSON, { id });
+export const addActivityStatePerson = key =>
+  actionWithYears(ADD_ACTIVITY_STATE_PERSON, { key });
 
-export const expandActivitySection = id => ({
+export const expandActivitySection = key => ({
   type: EXPAND_ACTIVITY_SECTION,
-  id
+  key
 });
 
-export const removeActivity = id => dispatch => {
-  dispatch({ type: REMOVE_ACTIVITY, id });
+export const removeActivity = key => dispatch => {
+  dispatch({ type: REMOVE_ACTIVITY, key });
   dispatch(updateBudget());
 };
 
-export const removeActivityContractor = (id, contractorId) => dispatch => {
+export const removeActivityContractor = (key, contractorKey) => dispatch => {
   dispatch({
     type: REMOVE_ACTIVITY_CONTRACTOR,
-    id,
-    contractorId
+    key,
+    contractorKey
   });
   dispatch(updateBudget());
 };
 
-export const removeActivityGoal = (id, goalIdx) => ({
+export const removeActivityGoal = (key, goalKey) => ({
   type: REMOVE_ACTIVITY_GOAL,
-  id,
-  goalIdx
+  key,
+  goalKey
 });
 
-export const removeActivityExpense = (id, expenseId) => dispatch => {
+export const removeActivityExpense = (key, expenseKey) => dispatch => {
   dispatch({
     type: REMOVE_ACTIVITY_EXPENSE,
-    id,
-    expenseId
+    key,
+    expenseKey
   });
   dispatch(updateBudget());
 };
 
-export const removeActivityMilestone = (id, milestoneIdx) => ({
+export const removeActivityMilestone = (key, milestoneKey) => ({
   type: REMOVE_ACTIVITY_MILESTONE,
-  id,
-  milestoneIdx
+  key,
+  milestoneKey
 });
 
-export const removeActivityStatePerson = (id, personId) => dispatch => {
+export const removeActivityStatePerson = (key, personKey) => dispatch => {
   dispatch({
     type: REMOVE_ACTIVITY_STATE_PERSON,
-    id,
-    personId
+    key,
+    personKey
   });
   dispatch(updateBudget());
 };
 
-export const toggleActivitySection = id => ({
+export const toggleActivitySection = key => ({
   type: TOGGLE_ACTIVITY_SECTION,
-  id
+  key
 });
 
-export const updateActivity = (id, updates, isExpense = false) => dispatch => {
+export const updateActivity = (key, updates, isExpense = false) => dispatch => {
   dispatch({
     type: UPDATE_ACTIVITY,
-    id,
+    key,
     updates
   });
   if (isExpense) {

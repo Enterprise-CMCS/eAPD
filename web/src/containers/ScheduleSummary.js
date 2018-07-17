@@ -37,7 +37,7 @@ const Cell = row => row.value || 'N/A';
 const mapStateToProps = ({ activities }) => {
   const data = [];
 
-  Object.values(activities.byId).forEach(activity => {
+  Object.values(activities.byKey).forEach(activity => {
     activity.milestones.forEach(milestone => {
       data.push({ ...milestone, activityName: activity.name });
     });

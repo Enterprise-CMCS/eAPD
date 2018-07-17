@@ -15,12 +15,12 @@ import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
 class ActivityDetailExpenses extends Component {
-  handleChange = (index, key) => e => {
+  handleChange = (index, field) => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
 
-    const updates = { expenses: { [index]: { [key]: value } } };
-    updateActivity(activity.id, updates);
+    const updates = { expenses: { [index]: { [field]: value } } };
+    updateActivity(activity.key, updates);
   };
 
   handleYearChange = (index, year) => e => {
@@ -28,12 +28,12 @@ class ActivityDetailExpenses extends Component {
     const { activity, updateActivity } = this.props;
 
     const updates = { expenses: { [index]: { years: { [year]: value } } } };
-    updateActivity(activity.id, updates, true);
+    updateActivity(activity.key, updates, true);
   };
 
   render() {
     const { activity, years, addExpense, removeExpense } = this.props;
-    const { id: activityID, expenses } = activity;
+    const { key: activityKey, expenses } = activity;
 
     return (
       <Subsection
@@ -60,11 +60,11 @@ class ActivityDetailExpenses extends Component {
               </thead>
               <tbody>
                 {expenses.map((expense, i) => (
-                  <tr key={expense.id}>
+                  <tr key={expense.key}>
                     <td className="mono">{i + 1}.</td>
                     <td>
                       <Select
-                        name={`expense-${i}-desc`}
+                        name={`expense-${expense.key}-desc`}
                         options={[
                           'Hardware, software, and licensing',
                           'Equipment and supplies',
@@ -81,7 +81,7 @@ class ActivityDetailExpenses extends Component {
                     </td>
                     <td>
                       <Textarea
-                        name={`expense-${i}-desc`}
+                        name={`expense-${expense.key}-desc`}
                         label="Describe the expense"
                         hideLabel
                         rows="3"
@@ -92,7 +92,7 @@ class ActivityDetailExpenses extends Component {
                     {years.map(year => (
                       <td key={year}>
                         <DollarInput
-                          name={`expense-${i}-${year}-cost`}
+                          name={`expense-${expense.key}-${year}-cost`}
                           label={`Cost for ${year}`}
                           hideLabel
                           value={expense.years[year]}
@@ -105,7 +105,7 @@ class ActivityDetailExpenses extends Component {
                         type="button"
                         className="btn btn-outline border-silver px1 py-tiny mt-tiny"
                         title="Remove Expense"
-                        onClick={() => removeExpense(activityID, expense.id)}
+                        onClick={() => removeExpense(activityKey, expense.key)}
                       >
                         ✗
                       </button>
@@ -119,7 +119,7 @@ class ActivityDetailExpenses extends Component {
         <button
           type="button"
           className="btn btn-primary bg-black"
-          onClick={() => addExpense(activityID)}
+          onClick={() => addExpense(activityKey)}
         >
           Add expense
         </button>
@@ -136,8 +136,8 @@ ActivityDetailExpenses.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId }, apd }, { aId }) => ({
-  activity: byId[aId],
+const mapStateToProps = ({ activities: { byKey }, apd }, { aKey }) => ({
+  activity: byKey[aKey],
   years: apd.data.years
 });
 

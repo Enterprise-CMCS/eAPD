@@ -19,27 +19,27 @@ import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
 class ActivityDetailStatePersonnel extends Component {
-  handleChange = (idx, key, year) => e => {
+  handleChange = (index, field, year) => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
 
     const toUpdate =
       year !== undefined
-        ? { years: { [year]: { [key]: value } } }
-        : { [key]: value };
+        ? { years: { [year]: { [field]: value } } }
+        : { [field]: value };
 
     updateActivity(
-      activity.id,
+      activity.key,
       {
-        statePersonnel: { [idx]: toUpdate }
+        statePersonnel: { [index]: toUpdate }
       },
-      key === 'amt' || key === 'perc'
+      field === 'amt' || field === 'perc'
     );
   };
 
   render() {
     const { activity, years, addPerson, removePerson } = this.props;
-    const { id: activityID, statePersonnel } = activity;
+    const { key: activityKey, statePersonnel } = activity;
 
     return (
       <Subsection
@@ -89,11 +89,11 @@ class ActivityDetailStatePersonnel extends Component {
               </thead>
               <tbody>
                 {statePersonnel.map((d, i) => (
-                  <tr key={d.id}>
+                  <tr key={d.key}>
                     <td className="mono">{i + 1}.</td>
                     <td>
                       <Input
-                        name={`state-person-${d.id}-title`}
+                        name={`state-person-${d.key}-title`}
                         label={t('activities.statePersonnel.labels.title')}
                         hideLabel
                         value={d.title}
@@ -102,7 +102,7 @@ class ActivityDetailStatePersonnel extends Component {
                     </td>
                     <td>
                       <Textarea
-                        name={`state-person-${d.id}-desc`}
+                        name={`state-person-${d.key}-desc`}
                         label={t('activities.statePersonnel.labels.desc')}
                         hideLabel
                         rows="3"
@@ -114,7 +114,7 @@ class ActivityDetailStatePersonnel extends Component {
                       <Fragment key={year}>
                         <td>
                           <DollarInput
-                            name={`state-person-${d.id}-${year}-amt`}
+                            name={`state-person-${d.key}-${year}-amt`}
                             label={t(
                               'activities.statePersonnel.labels.costAmt'
                             )}
@@ -125,7 +125,7 @@ class ActivityDetailStatePersonnel extends Component {
                         </td>
                         <td>
                           <PercentInput
-                            name={`state-person-${d.id}-${year}-perc`}
+                            name={`state-person-${d.key}-${year}-perc`}
                             label={t(
                               'activities.statePersonnel.labels.costPerc'
                             )}
@@ -141,7 +141,7 @@ class ActivityDetailStatePersonnel extends Component {
                         type="button"
                         className="btn btn-outline border-silver px1 py-tiny mt-tiny"
                         title={t('activities.statePersonnel.removeLabel')}
-                        onClick={() => removePerson(activityID, d.id)}
+                        onClick={() => removePerson(activityKey, d.key)}
                       >
                         ✗
                       </button>
@@ -155,7 +155,7 @@ class ActivityDetailStatePersonnel extends Component {
         <button
           type="button"
           className="btn btn-primary bg-black"
-          onClick={() => addPerson(activityID)}
+          onClick={() => addPerson(activityKey)}
         >
           {t('activities.statePersonnel.addButtonText')}
         </button>
@@ -172,8 +172,8 @@ ActivityDetailStatePersonnel.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId }, apd }, { aId }) => ({
-  activity: byId[aId],
+const mapStateToProps = ({ activities: { byKey }, apd }, { aKey }) => ({
+  activity: byKey[aKey],
   years: apd.data.years
 });
 

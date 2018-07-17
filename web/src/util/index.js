@@ -153,6 +153,12 @@ export const getParams = str =>
       return Object.assign(params, { [key]: valGood });
     }, {});
 
+/**
+ * Get a random 8-hex-digit string
+ */
+export const generateKey = () =>
+  Math.floor(Math.random() * 4026531839 + 268435456).toString(16);
+
 export const nextSequence = arrOfNums => Math.max(...arrOfNums, 0) + 1;
 
 export const arrToObj = (array = [], initialValue = 0) =>
