@@ -12,7 +12,7 @@ import {
 
 describe('the Activities details container component', () => {
   const props = {
-    aId: 'activity-id',
+    aKey: 'activity-key',
     expanded: false,
     num: 3,
     removeActivity: sinon.stub(),
@@ -44,8 +44,8 @@ describe('the Activities details container component', () => {
       mapStateToProps(
         {
           activities: {
-            byId: {
-              id: {
+            byKey: {
+              key: {
                 fundingSource: 'FUNDING!',
                 meta: { expanded: 'bloop' },
                 name: 'activity name'
@@ -53,7 +53,7 @@ describe('the Activities details container component', () => {
             }
           }
         },
-        { aId: 'id', num: 3 }
+        { aKey: 'key', num: 3 }
       )
     ).toEqual({
       expanded: 'bloop',
