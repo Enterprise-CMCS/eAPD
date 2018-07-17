@@ -17,14 +17,23 @@ class Collapsible extends Component {
   };
 
   render() {
-    const { bgColor, children, id, sticky, title, onChange } = this.props;
+    const {
+      bgColor,
+      btnBgColor,
+      btnColor,
+      children,
+      id,
+      sticky,
+      title,
+      onChange
+    } = this.props;
     const isOpen = onChange ? this.props.open : this.state.open;
     const contentId = kebabCase(title);
 
     const btnClass = deline`
-      btn block col-12 py2 blue h3 sm-h2 line-height-1 left-align
+      btn block col-12 py2 h3 sm-h2 line-height-1 left-align
       ${isOpen ? 'border-bottom border-bottom-darken-1 rounded-top' : 'rounded'}
-      bg-${bgColor} ${sticky ? 'sticky-top' : ''}
+      bg-${btnBgColor} ${btnColor} ${sticky ? 'sticky-top' : ''}
     `;
 
     return (
@@ -55,6 +64,8 @@ class Collapsible extends Component {
 
 Collapsible.propTypes = {
   bgColor: PropTypes.string,
+  btnBgColor: PropTypes.string,
+  btnColor: PropTypes.string,
   children: PropTypes.node,
   id: PropTypes.string,
   open: PropTypes.bool,
@@ -65,6 +76,8 @@ Collapsible.propTypes = {
 
 Collapsible.defaultProps = {
   bgColor: 'white',
+  btnBgColor: 'white',
+  btnColor: 'blue',
   children: null,
   id: null,
   open: false,
