@@ -362,6 +362,52 @@ describe('apd actions', () => {
               modularity: 'modularity',
               mita: 'mita',
               reporting: 'reporting'
+            },
+            quarterlyFFP: {
+              '1993': {
+                '1': {
+                  combined: 20,
+                  contractors: 30,
+                  state: 40
+                },
+                '2': {
+                  combined: 20,
+                  contractors: 30,
+                  state: 40
+                },
+                '3': {
+                  combined: 20,
+                  contractors: 30,
+                  state: 40
+                },
+                '4': {
+                  combined: 20,
+                  contractors: 30,
+                  state: 40
+                }
+              },
+              '1994': {
+                '1': {
+                  combined: 20,
+                  contractors: 30,
+                  state: 40
+                },
+                '2': {
+                  combined: 20,
+                  contractors: 30,
+                  state: 40
+                },
+                '3': {
+                  combined: 20,
+                  contractors: 30,
+                  state: 40
+                },
+                '4': {
+                  combined: 20,
+                  contractors: 30,
+                  state: 40
+                }
+              }
             }
           }
         }
@@ -393,6 +439,8 @@ describe('apd actions', () => {
     it('creates save request and save success actions if the save succeeds', () => {
       const store = mockStore(state);
       fetchMock.onPut('/apds/id-to-update').reply(200, [{ foo: 'bar' }]);
+
+      // TODO: Need to test what's actually sent to the API to make sure transformations are right
 
       const expectedActions = [
         { type: actions.SAVE_APD_REQUEST },

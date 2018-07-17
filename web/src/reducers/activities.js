@@ -448,10 +448,37 @@ const reducer = (state = initialState, action) => {
             mitigation: a.standardsAndConditions.mitigationStrategy || '',
             reporting: a.standardsAndConditions.reporting || ''
           },
-          quarterlyFFP: {
-            ...arrToObj(action.apd.years, quarterlyFFPEntry())
-          },
-
+          quarterlyFFP:
+            a.quarterlyFFP && a.quarterlyFFP.length
+              ? a.quarterlyFFP.reduce(
+                  (quarterlyAcc, ffy) => ({
+                    ...quarterlyAcc,
+                    [ffy.year]: {
+                      1: {
+                        combined: ffy.q1.combined * 100,
+                        contractors: ffy.q1.contractors * 100,
+                        state: ffy.q1.state * 100
+                      },
+                      2: {
+                        combined: ffy.q2.combined * 100,
+                        contractors: ffy.q2.contractors * 100,
+                        state: ffy.q2.state * 100
+                      },
+                      3: {
+                        combined: ffy.q3.combined * 100,
+                        contractors: ffy.q3.contractors * 100,
+                        state: ffy.q3.state * 100
+                      },
+                      4: {
+                        combined: ffy.q4.combined * 100,
+                        contractors: ffy.q4.contractors * 100,
+                        state: ffy.q4.state * 100
+                      }
+                    }
+                  }),
+                  {}
+                )
+              : { ...arrToObj(action.apd.years, quarterlyFFPEntry()) },
           meta: {
             expanded: false
           }

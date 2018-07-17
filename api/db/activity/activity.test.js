@@ -19,6 +19,7 @@ tap.test('activity data model', async activityModelTests => {
           statePersonnel: Function,
           costAllocation: Function,
           format: Function,
+          quarterlyFFP: Function,
 
           static: {
             updateableFields: [
@@ -36,7 +37,8 @@ tap.test('activity data model', async activityModelTests => {
               expenses: 'apdActivityExpense',
               schedule: 'apdActivitySchedule',
               statePersonnel: 'apdActivityStatePersonnel',
-              costAllocation: 'apdActivityCostAllocation'
+              costAllocation: 'apdActivityCostAllocation',
+              quarterlyFFP: 'apdActivityQuarterlyFFP'
             },
             foreignKey: 'activity_id',
             withRelated: [
@@ -48,7 +50,8 @@ tap.test('activity data model', async activityModelTests => {
               'schedule',
               'statePersonnel',
               'statePersonnel.years',
-              'costAllocation'
+              'costAllocation',
+              'quarterlyFFP'
             ]
           }
         }
@@ -172,6 +175,23 @@ tap.test('activity data model', async activityModelTests => {
         apdTests.ok(
           self.hasMany.calledWith('apdActivityCostAllocation'),
           'sets up the relationship mapping to cost allocation'
+        );
+        apdTests.equal(output, 'can', 'returns the expected value');
+      }
+    );
+
+    relationshipTests.test(
+      'activity model sets up quarterly FFP relationship',
+      async apdTests => {
+        const self = {
+          hasMany: sinon.stub().returns('can')
+        };
+
+        const output = activity.apdActivity.quarterlyFFP.bind(self)();
+
+        apdTests.ok(
+          self.hasMany.calledWith('apdActivityQuarterlyFFP'),
+          'sets up the relationship mapping to quarterly FFP'
         );
         apdTests.equal(output, 'can', 'returns the expected value');
       }
