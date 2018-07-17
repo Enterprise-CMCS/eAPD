@@ -24,7 +24,9 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "bgColor": "grey",
+      "bgColor": "blue-light",
+      "btnBgColor": "blue-bright",
+      "btnColor": "white",
       "children": Array [
         Array [
           <Connect(ActivityDetailDescription)
@@ -176,7 +178,9 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "bgColor": "grey",
+        "bgColor": "blue-light",
+        "btnBgColor": "blue-bright",
+        "btnColor": "white",
         "children": Array [
           Array [
             <Connect(ActivityDetailDescription)
