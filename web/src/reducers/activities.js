@@ -180,7 +180,6 @@ const reducer = (state = initialState, action) => {
             [action.key]: {
               contractorResources: contractors =>
                 contractors.filter(c => c.key !== action.contractorKey)
-              // TODO: UPDATE ACTION PROP
             }
           }
         },
@@ -207,7 +206,6 @@ const reducer = (state = initialState, action) => {
             [action.key]: {
               statePersonnel: people =>
                 people.filter(p => p.key !== action.personKey)
-              // TODO: UPDATE ACTION PROP
             }
           }
         },
@@ -230,7 +228,6 @@ const reducer = (state = initialState, action) => {
           byKey: {
             [action.key]: {
               goals: goals => goals.filter(g => g.key !== action.goalKey)
-              // TODO: UPDATE ACTION PROP
             }
           }
         },
@@ -254,7 +251,6 @@ const reducer = (state = initialState, action) => {
             [action.key]: {
               expenses: expenses =>
                 expenses.filter(e => e.key !== action.expenseKey)
-              // TODO: UPDATE ACTION PROP
             }
           }
         },
@@ -278,7 +274,6 @@ const reducer = (state = initialState, action) => {
             [action.key]: {
               milestones: milestones =>
                 milestones.filter(m => m.key !== action.milestoneKey)
-              // TODO: UPDATE ACTION PROP
             }
           }
         },
@@ -287,13 +282,11 @@ const reducer = (state = initialState, action) => {
     case EXPAND_ACTIVITY_SECTION:
       return u(
         { byKey: { [action.key]: { meta: { expanded: true } } } },
-        // TODO: UPDATE ACTION PROP
         state
       );
     case TOGGLE_ACTIVITY_SECTION:
       return u(
         { byKey: { [action.key]: { meta: { expanded: val => !val } } } },
-        // TODO: UPDATE ACTION PROP
         state
       );
     case UPDATE_ACTIVITY:
@@ -301,7 +294,6 @@ const reducer = (state = initialState, action) => {
         {
           byKey: {
             [action.key]: { ...action.updates }
-            // TODO: UPDATE ACTION PROP
           }
         },
         state
