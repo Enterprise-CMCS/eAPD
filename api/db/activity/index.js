@@ -7,6 +7,7 @@ const expenseEntry = require('./expenseEntry');
 const goal = require('./goal');
 const schedule = require('./schedule');
 const statePersonnel = require('./statePersonnel');
+const quarterlyFFP = require('./quarterlyFFP');
 
 // Just rolls up activity models into one object
 // so db/index only has to load this one thing
@@ -19,5 +20,6 @@ module.exports = () => ({
   ...expenseEntry,
   ...goal,
   ...schedule,
-  ...statePersonnel
+  ...statePersonnel,
+  ...quarterlyFFP
 });

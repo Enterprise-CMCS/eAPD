@@ -44,6 +44,7 @@ describe('provides default years based on now', () => {
 describe('utility functions', () => {
   const {
     addObjVals,
+    applyToNumbers,
     arrToObj,
     getParams,
     nextSequence,
@@ -64,6 +65,14 @@ describe('utility functions', () => {
         foo2: 123
       }
     );
+  });
+
+  test('apply a function to numbers in an object, deeply', () => {
+    expect(applyToNumbers({ a: 1, b: 2, c: { d: 7 } }, () => 'boop')).toEqual({
+      a: 'boop',
+      b: 'boop',
+      c: { d: 'boop' }
+    });
   });
 
   test('finds a state by two-letter code', () => {
