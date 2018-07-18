@@ -1,5 +1,5 @@
-import ApdApplication from './components/ApdApplication';
 import NoMatch from './components/NoMatch';
+import ApdApplication from './containers/ApdApplication';
 import Login from './containers/Login';
 
 // temp pages for more targeted development & iteration
