@@ -68,7 +68,7 @@ export const createApd = () => dispatch => {
 };
 
 export const requestSave = () => ({ type: SAVE_APD_REQUEST });
-export const saveSuccess = () => ({ type: SAVE_APD_SUCCESS });
+export const saveSuccess = data => ({ type: SAVE_APD_SUCCESS, data });
 export const saveFailure = () => ({ type: SAVE_APD_FAILURE });
 
 export const fetchApd = () => dispatch => {
@@ -276,9 +276,20 @@ export const submitAPD = (save = saveApd) => (dispatch, getState) =>
     .then(() => {
       dispatch({ type: SUBMIT_APD_REQUEST });
 
-      const { apd: { data: { id: apdID } }, budget } = getState();
+      const {
+        activities: { byKey: activities },
+        apd: { data: { id: apdID } },
+        budget
+      } = getState();
 
       const tables = {
+        activityQuarterlyFederalShare: Object.entries(budget.activities).reduce(
+          (acc, [key, activity]) => ({
+            ...acc,
+            [activities[key].name]: activity.quarterlyFFP
+          }),
+          {}
+        ),
         summaryBudgetTable: {
           hie: budget.hie,
           hit: budget.hit,

@@ -930,6 +930,54 @@ describe('activities reducer', () => {
     });
   });
 
+  describe('assigns IDs to new activities after an APD save', () => {
+    it('skips updates if all local activities have IDs', () => {
+      const state = {
+        byKey: {
+          activityKey1: { id: 1, key: 'activityKey1', name: 'one' },
+          activityKey2: { id: 2, key: 'activityKey2', name: 'two' }
+        }
+      };
+
+      expect(activities(state, { type: 'SAVE_APD_SUCCESS', data: {} })).toEqual(
+        state
+      );
+    });
+
+    it('only updates local activities without IDs', () => {
+      expect(
+        activities(
+          {
+            byKey: {
+              activityKey1: { id: 1, key: 'activityKey1', name: 'one' },
+              activityKey2: { key: 'activityKey2', name: 'two' }
+            }
+          },
+          {
+            type: 'SAVE_APD_SUCCESS',
+            data: {
+              activities: [
+                {
+                  id: 1,
+                  name: 'one'
+                },
+                {
+                  id: 2,
+                  name: 'two'
+                }
+              ]
+            }
+          }
+        )
+      ).toMatchObject({
+        byKey: {
+          activityKey1: { id: 1, key: 'activityKey1', name: 'one' },
+          activityKey2: { id: 2, key: 'activityKey2', name: 'two' }
+        }
+      });
+    });
+  });
+
   it('aggregates data by year', () => {
     expect(
       aggregateByYear(
