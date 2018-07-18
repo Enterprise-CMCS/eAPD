@@ -10,12 +10,12 @@ import HelpText from '../components/HelpText';
 import { STANDARDS, isProgamAdmin } from '../util';
 
 class ActivityDetailStandardsAndConditions extends Component {
-  handleChange = key => e => {
+  handleChange = field => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
 
-    const updates = { standardsAndConditions: { [key]: value } };
-    updateActivity(activity.id, updates);
+    const updates = { standardsAndConditions: { [field]: value } };
+    updateActivity(activity.key, updates);
   };
 
   render() {
@@ -57,8 +57,8 @@ ActivityDetailStandardsAndConditions.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId } }, { aId }) => ({
-  activity: byId[aId]
+const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
+  activity: byKey[aKey]
 });
 
 const mapDispatchToProps = {

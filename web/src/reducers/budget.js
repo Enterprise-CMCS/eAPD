@@ -121,7 +121,7 @@ const budgetInputs = [
   budgetInput('expenses')
 ];
 
-const activities = src => Object.values(src.activities.byId);
+const activities = src => Object.values(src.activities.byKey);
 
 const fixNum = (value, digits = 2) => {
   const mult = 10 ** digits;
@@ -298,7 +298,7 @@ const buildBudget = wholeState => {
   const activityEntries = activities(wholeState);
 
   activityEntries.forEach(activity => {
-    newState.activities[activity.id] = {};
+    newState.activities[activity.key] = {};
     const totaller = getTotalsForActivity(activity);
 
     budgetInputs.forEach(({ type, value, target }) => {
@@ -334,7 +334,7 @@ const buildBudget = wholeState => {
     // and fiscal years
     const total = { state: 0, contractors: 0, combined: 0 };
 
-    newState.activities[activity.id].quarterlyFFP = Object.keys(
+    newState.activities[activity.key].quarterlyFFP = Object.keys(
       stateExpenses
     ).reduce(
       (ffyCumulate, year) => ({
@@ -392,7 +392,7 @@ const buildBudget = wholeState => {
       }),
       {}
     );
-    newState.activities[activity.id].quarterlyFFP.total = total;
+    newState.activities[activity.key].quarterlyFFP.total = total;
   });
 
   getTotalsForFundingSource(newState, 'hie');
@@ -409,7 +409,7 @@ const buildBudget = wholeState => {
         activity.fundingSource === 'MMIS' ? 'mmis' : 'hitAndHie'
       ];
 
-    const { quarterlyFFP } = newState.activities[activity.id];
+    const { quarterlyFFP } = newState.activities[activity.key];
 
     Object.entries(quarterlyFFP).forEach(([yearKey, yearValue]) => {
       Object.entries(yearValue).forEach(([quarterKey, quarterValue]) => {

@@ -16,7 +16,7 @@ const ActivityDetailCostAllocate = props => {
   const { costAllocationDesc, otherFundingDesc } = activity;
 
   const sync = name => html => {
-    updateActivity(activity.id, { [name]: html });
+    updateActivity(activity.key, { [name]: html });
   };
 
   return (
@@ -37,7 +37,7 @@ const ActivityDetailCostAllocate = props => {
           onSync={sync('costAllocationDesc')}
         />
       </div>
-      <ActivityDetailCostAllocateFFP aId={activity.id} />
+      <ActivityDetailCostAllocateFFP aKey={activity.key} />
 
       <div className="mb3">
         <div className="mb-tiny bold">
@@ -47,7 +47,7 @@ const ActivityDetailCostAllocate = props => {
           text="activities.costAllocate.quarterly.helpText"
           reminder="activities.costAllocate.quarterly.reminder"
         />
-        <ActivityQuarterlyBudgetSummary aId={activity.id} />
+        <ActivityQuarterlyBudgetSummary aKey={activity.key} />
       </div>
 
       <div className="mb3">
@@ -72,8 +72,8 @@ ActivityDetailCostAllocate.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = ({ activities: { byId } }, { aId }) => ({
-  activity: byId[aId]
+export const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
+  activity: byKey[aKey]
 });
 
 export const mapDispatchToProps = {

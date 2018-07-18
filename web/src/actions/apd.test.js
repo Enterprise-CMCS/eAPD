@@ -292,7 +292,7 @@ describe('apd actions', () => {
         }
       },
       activities: {
-        byId: {
+        byKey: {
           '1': {
             name: 'activity name',
             fundingSource: 'funding source',

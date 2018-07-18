@@ -12,20 +12,20 @@ import { formatMoney } from '../util/formats';
 
 class ActivityDetailCostAllocateFFP extends Component {
   handleOther = year => e => {
-    const { aId, updateActivity } = this.props;
+    const { aKey, updateActivity } = this.props;
     const { value } = e.target;
     const updates = { costAllocation: { [year]: { other: +value } } };
 
-    updateActivity(aId, updates, true);
+    updateActivity(aKey, updates, true);
   };
 
   handleFFP = year => e => {
-    const { aId, updateActivity } = this.props;
+    const { aKey, updateActivity } = this.props;
     const { value } = e.target;
     const [federal, state] = value.split('-').map(Number);
     const updates = { costAllocation: { [year]: { ffp: { federal, state } } } };
 
-    updateActivity(aId, updates, true);
+    updateActivity(aKey, updates, true);
   };
 
   render() {
@@ -83,15 +83,15 @@ class ActivityDetailCostAllocateFFP extends Component {
 }
 
 ActivityDetailCostAllocateFFP.propTypes = {
-  aId: PropTypes.number.isRequired,
+  aKey: PropTypes.string.isRequired,
   byYearData: PropTypes.array.isRequired,
   costAllocation: PropTypes.object.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
 
 // TODO [bren]: tidy up this data munging
-export const mapStateToProps = ({ activities: { byId } }, { aId }) => {
-  const activity = byId[aId];
+export const mapStateToProps = ({ activities: { byKey } }, { aKey }) => {
+  const activity = byKey[aKey];
   const { costAllocation } = activity;
   const totals = getActivityTotals(activity);
 
