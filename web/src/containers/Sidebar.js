@@ -150,11 +150,11 @@ const Sidebar = ({
             <ul className="mb0 list-reset">
               {activities.map((a, i) => (
                 <SidebarLink
-                  key={a.id}
+                  key={a.key}
                   anchor={a.anchor}
                   depth={1}
                   hash={hash}
-                  onClick={() => expandSection(a.id)}
+                  onClick={() => expandSection(a.key)}
                 >
                   {t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
                     number: i + 1,
