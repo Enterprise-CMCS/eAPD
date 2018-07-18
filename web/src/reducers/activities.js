@@ -368,9 +368,6 @@ const reducer = (state = initialState, action) => {
     case SELECT_APD: {
       const byKey = {};
       ((action.apd || {}).activities || []).forEach(a => {
-        // const activity = fromAPI(a, action.apd.years, {
-        //   quarterlyFFP: { ...arrToObj(action.apd.years, quarterlyFFPEntry()) }
-        // });
         byKey[a.key] = a;
         byKey[a.key].meta = { expanded: a.name === 'Program Administration' };
       });
