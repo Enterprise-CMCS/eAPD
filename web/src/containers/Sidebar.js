@@ -205,14 +205,14 @@ Sidebar.propTypes = {
 };
 
 const mapStateToProps = ({
-  activities: { byId, allIds },
+  activities: { byKey, allKeys },
   sidebar,
   router
 }) => ({
-  activities: allIds.map(id => ({
-    id,
-    anchor: `activity-${id}`,
-    name: byId[id].name
+  activities: allKeys.map(key => ({
+    key,
+    anchor: `activity-${key}`,
+    name: byKey[key].name
   })),
   expanded: sidebar.expanded,
   hash: router.location.hash.slice(1) || ''

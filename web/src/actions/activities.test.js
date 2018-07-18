@@ -27,7 +27,7 @@ describe('activities actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  // These are the actions that JUST take an activity ID
+  // These are the actions that JUST take an activity key
   [
     ['addActivityGoal', 'ADD_ACTIVITY_GOAL'],
     ['addActivityMilestone', 'ADD_ACTIVITY_MILESTONE'],
@@ -41,20 +41,20 @@ describe('activities actions', () => {
       const expectedActions = [
         {
           type: actions[action],
-          id: 'activity id'
+          key: 'activity key'
         }
       ];
       if (updatesBudget) {
         expectedActions.push(updatedBudgetAction({}));
       }
 
-      store.dispatch(actions[method]('activity id'));
+      store.dispatch(actions[method]('activity key'));
 
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
 
-  // These are the ADD_* actions that take an activity ID, but
+  // These are the ADD_* actions that take an activity key, but
   // are also loaded with years data
   [
     ['addActivityContractor', 'ADD_ACTIVITY_CONTRACTOR'],
@@ -65,34 +65,34 @@ describe('activities actions', () => {
       const store = mockStore({ apd: { data: { years: 'years' } } });
 
       const expectedActions = [
-        { type: actions[action], id: 'activity id', years: 'years' }
+        { type: actions[action], key: 'activity key', years: 'years' }
       ];
 
-      store.dispatch(actions[method]('activity id'));
+      store.dispatch(actions[method]('activity key'));
 
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
 
-  // These are the REMOVE_* actions that take an activity ID and
-  // and item ID
+  // These are the REMOVE_* actions that take an activity key and
+  // and item key
   [
     [
       'removeActivityContractor',
       'REMOVE_ACTIVITY_CONTRACTOR',
-      'contractorId',
+      'contractorKey',
       true
     ],
-    ['removeActivityGoal', 'REMOVE_ACTIVITY_GOAL', 'goalIdx'],
-    ['removeActivityExpense', 'REMOVE_ACTIVITY_EXPENSE', 'expenseId', true],
-    ['removeActivityMilestone', 'REMOVE_ACTIVITY_MILESTONE', 'milestoneIdx'],
+    ['removeActivityGoal', 'REMOVE_ACTIVITY_GOAL', 'goalKey'],
+    ['removeActivityExpense', 'REMOVE_ACTIVITY_EXPENSE', 'expenseKey', true],
+    ['removeActivityMilestone', 'REMOVE_ACTIVITY_MILESTONE', 'milestoneKey'],
     [
       'removeActivityStatePerson',
       'REMOVE_ACTIVITY_STATE_PERSON',
-      'personId',
+      'personKey',
       true
     ]
-  ].forEach(([method, action, idName, updatesBudget]) => {
+  ].forEach(([method, action, keyName, updatesBudget]) => {
     it(`${method} creates ${action} action`, () => {
       const state = { apd: { data: { years: 'years' } } };
       const store = mockStore(state);
@@ -100,15 +100,15 @@ describe('activities actions', () => {
       const expectedActions = [
         {
           type: actions[action],
-          id: 'activity id',
-          [idName]: 'item id'
+          key: 'activity key',
+          [keyName]: 'item key'
         }
       ];
       if (updatesBudget) {
         expectedActions.push(updatedBudgetAction(state));
       }
 
-      store.dispatch(actions[method]('activity id', 'item id'));
+      store.dispatch(actions[method]('activity key', 'item key'));
 
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -120,10 +120,10 @@ describe('activities actions', () => {
       const updates = { this: 'is', my: 'update' };
 
       const expectedActions = [
-        { type: actions.UPDATE_ACTIVITY, id: 'activity id', updates }
+        { type: actions.UPDATE_ACTIVITY, key: 'activity key', updates }
       ];
 
-      store.dispatch(actions.updateActivity('activity id', updates));
+      store.dispatch(actions.updateActivity('activity key', updates));
 
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -135,11 +135,11 @@ describe('activities actions', () => {
     const updates = { this: 'is', my: 'update' };
 
     const expectedActions = [
-      { type: actions.UPDATE_ACTIVITY, id: 'activity id', updates },
+      { type: actions.UPDATE_ACTIVITY, key: 'activity key', updates },
       { type: apdActions.UPDATE_BUDGET, state }
     ];
 
-    store.dispatch(actions.updateActivity('activity id', updates, true));
+    store.dispatch(actions.updateActivity('activity key', updates, true));
 
     expect(store.getActions()).toEqual(expectedActions);
   });

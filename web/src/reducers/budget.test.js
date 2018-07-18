@@ -71,9 +71,10 @@ describe('budget reducer', () => {
         state: {
           apd: { data: { years: ['1931', '1932', '1933'] } },
           activities: {
-            byId: {
+            byKey: {
               '1': {
                 id: 1,
+                key: '1',
                 name: 'hieOne',
                 fundingSource: 'HIE',
                 years: ['1931', '1932', '1933'],
@@ -129,6 +130,7 @@ describe('budget reducer', () => {
               },
               '2': {
                 id: 2,
+                key: '2',
                 name: 'hieTwo',
                 fundingSource: 'HIE',
                 years: ['1931', '1932', '1933'],
@@ -175,6 +177,7 @@ describe('budget reducer', () => {
               },
               '3': {
                 id: 3,
+                key: '3',
                 name: 'hitOne',
                 fundingSource: 'HIT',
                 years: ['1931', '1932', '1933'],
@@ -221,6 +224,7 @@ describe('budget reducer', () => {
               },
               '4': {
                 id: 4,
+                key: '4',
                 name: 'mmisOne',
                 fundingSource: 'MMIS',
                 years: ['1931', '1932', '1933'],

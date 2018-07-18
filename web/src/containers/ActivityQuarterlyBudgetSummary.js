@@ -28,11 +28,11 @@ class ActivityQuarterlyBudgetSummary extends Component {
         [year]: { [q]: { [name]: +e.target.value } }
       }
     };
-    this.props.update(this.props.aId, change, true);
+    this.props.update(this.props.aKey, change, true);
   };
 
   render() {
-    const { aId, quarterlyFFP, years } = this.props;
+    const { aKey, quarterlyFFP, years } = this.props;
 
     // Wait until the budget is ready
     if (!quarterlyFFP) return null;
@@ -87,7 +87,7 @@ class ActivityQuarterlyBudgetSummary extends Component {
                               key={q}
                             >
                               <PercentInput
-                                name={`ffp-${aId}-${year}-${q}-${name}`}
+                                name={`ffp-${aKey}-${year}-${q}-${name}`}
                                 hideLabel
                                 label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
                                 onChange={this.handleChange(year, q, name)}
@@ -175,14 +175,14 @@ class ActivityQuarterlyBudgetSummary extends Component {
 }
 
 ActivityQuarterlyBudgetSummary.propTypes = {
-  aId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  aKey: PropTypes.string.isRequired,
   quarterlyFFP: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
   update: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ apd, budget: { activities } }, { aId }) => {
-  const budget = activities[aId];
+const mapStateToProps = ({ apd, budget: { activities } }, { aKey }) => {
+  const budget = activities[aKey];
 
   return {
     quarterlyFFP: budget ? budget.quarterlyFFP : null,

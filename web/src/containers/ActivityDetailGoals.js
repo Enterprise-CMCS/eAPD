@@ -13,20 +13,20 @@ import { RichText } from '../components/Inputs';
 import { isProgamAdmin } from '../util';
 
 class ActivityDetailGoals extends Component {
-  handleSync = (idx, key) => html => {
+  handleSync = (index, field) => html => {
     const { activity, updateActivity } = this.props;
-    const updates = { goals: { [idx]: { [key]: html } } };
-    updateActivity(activity.id, updates);
+    const updates = { goals: { [index]: { [field]: html } } };
+    updateActivity(activity.key, updates);
   };
 
-  handleDelete = idx => () => {
+  handleDelete = key => () => {
     const { activity, removeActivityGoal } = this.props;
-    removeActivityGoal(activity.id, idx);
+    removeActivityGoal(activity.key, key);
   };
 
   handleAdd = () => {
     const { activity, addActivityGoal } = this.props;
-    addActivityGoal(activity.id);
+    addActivityGoal(activity.key);
   };
 
   render() {
@@ -35,7 +35,7 @@ class ActivityDetailGoals extends Component {
     return (
       <Subsection resource="activities.goals" isKey={isProgamAdmin(activity)}>
         {activity.goals.map((d, i) => (
-          <div key={i} className="mb3">
+          <div key={d.key} className="mb3">
             <Chunk resource="activities.goals.goal">
               <div className="mb3">
                 <div className="mb-tiny">
@@ -43,7 +43,7 @@ class ActivityDetailGoals extends Component {
                     <button
                       type="button"
                       className="px1 py-tiny right btn btn-outline border-silver h6 line-height-1"
-                      onClick={this.handleDelete(i)}
+                      onClick={this.handleDelete(d.key)}
                     >
                       Remove
                     </button>
@@ -86,8 +86,8 @@ ActivityDetailGoals.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId } }, { aId }) => ({
-  activity: byId[aId]
+const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
+  activity: byKey[aKey]
 });
 
 const mapDispatchToProps = {

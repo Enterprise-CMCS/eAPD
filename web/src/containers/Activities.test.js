@@ -6,7 +6,7 @@ import { raw as Activities, mapStateToProps } from './Activities';
 
 describe('the Activities list component', () => {
   const props = {
-    activityIds: ['1', '2', '3'],
+    activityKeys: ['1', '2', '3'],
     addActivity: sinon.stub()
   };
 
@@ -23,7 +23,7 @@ describe('the Activities list component', () => {
 
   test('maps redux state to component props', () => {
     expect(
-      mapStateToProps({ activities: { allIds: ['1', 'two', '3'] } })
-    ).toEqual({ activityIds: ['1', 'two', '3'] });
+      mapStateToProps({ activities: { allKeys: ['1', 'two', '3'] } })
+    ).toEqual({ activityKeys: ['1', 'two', '3'] });
   });
 });
