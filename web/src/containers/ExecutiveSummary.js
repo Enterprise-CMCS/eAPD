@@ -32,7 +32,7 @@ const ExecutiveSummary = ({ data, years, expandSection }) => (
                   className="h3 bold black"
                   onClick={() => expandSection(d.key)}
                 >
-                  {d.name}
+                  {d.name || t('activities.noNameYet')}
                 </a>
               </Fragment>
             ) : (
