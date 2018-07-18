@@ -567,7 +567,8 @@ describe('activities reducer', () => {
             ...newActivity(key),
             name: 'Program Administration',
             fundingSource: 'HIT',
-            years: ['2018', '2019']
+            years: ['2018', '2019'],
+            meta: { ...newActivity.meta, expanded: true }
           }
         },
         allKeys: ['default key']

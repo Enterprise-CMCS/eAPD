@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const sandbox = sinon.createSandbox();
 
 const userModel = {
-  where: sandbox.stub(),
+  query: sandbox.stub(),
   fetch: sandbox.stub()
 };
 const get = sandbox.stub();
@@ -20,7 +20,7 @@ tap.test('local authentication', async authTest => {
   authTest.beforeEach(done => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
-    userModel.where.returns({ where: userModel.where, fetch: userModel.fetch });
+    userModel.query.returns({ query: userModel.query, fetch: userModel.fetch });
     done();
   });
 
@@ -30,12 +30,12 @@ tap.test('local authentication', async authTest => {
     await auth('user', 'password', doneCallback);
 
     errorTest.ok(
-      userModel.where.calledOnce,
-      'one set of WHERE clauses is added'
+      userModel.query.calledOnce,
+      'one set of QUERY clauses is added'
     );
     errorTest.ok(
-      userModel.where.calledWith({ email: 'user' }),
-      'it is the WHERE we expect'
+      userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
+      'it is the QUERY we expect'
     );
     errorTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
 
@@ -54,12 +54,12 @@ tap.test('local authentication', async authTest => {
     await auth('user', 'password', doneCallback);
 
     noUserTest.ok(
-      userModel.where.calledOnce,
-      'one set of WHERE clauses is added'
+      userModel.query.calledOnce,
+      'one set of QUERY clauses is added'
     );
     noUserTest.ok(
-      userModel.where.calledWith({ email: 'user' }),
-      'it is the WHERE we expect'
+      userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
+      'it is the QUERY we expect'
     );
     noUserTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
 
@@ -79,12 +79,12 @@ tap.test('local authentication', async authTest => {
     await auth('user', 'password', doneCallback);
 
     invalidTest.ok(
-      userModel.where.calledOnce,
-      'one set of WHERE clauses is added'
+      userModel.query.calledOnce,
+      'one set of QUERY clauses is added'
     );
     invalidTest.ok(
-      userModel.where.calledWith({ email: 'user' }),
-      'it is the WHERE we expect'
+      userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
+      'it is the QUERY we expect'
     );
     invalidTest.ok(
       userModel.fetch.calledOnce,
@@ -111,12 +111,12 @@ tap.test('local authentication', async authTest => {
     await auth('user', 'password', doneCallback);
 
     validTest.ok(
-      userModel.where.calledOnce,
-      'one set of WHERE clauses is added'
+      userModel.query.calledOnce,
+      'one set of QUERY clauses is added'
     );
     validTest.ok(
-      userModel.where.calledWith({ email: 'user' }),
-      'it is the WHERE we expect'
+      userModel.query.calledWith('whereRaw', 'LOWER(email) = ?', ['user']),
+      'it is the QUERY we expect'
     );
     validTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
 
