@@ -13,9 +13,9 @@ import {
   INCENTIVE_ENTRIES,
   arrToObj,
   defaultAPDYearOptions,
-  defaultAPDYears,
-  replaceNulls
+  defaultAPDYears
 } from '../util';
+import { fromAPI } from '../util/serialization/apd';
 
 import assurancesList from '../data/assurancesAndCompliance.yaml';
 
@@ -127,106 +127,28 @@ const reducer = (state = initialState, action) => {
         ...state,
         fetching: false,
         loaded: true,
-        byId: action.data.reduce((acc, apd) => {
-          const {
-            id,
-            activities,
-            federalCitations: assurancesAndCompliance,
-            incentivePayments,
-            narrativeHIE: hieNarrative,
-            narrativeHIT: hitNarrative,
-            narrativeMMIS: mmisNarrative,
-            pointsOfContact,
-            previousActivityExpenses,
-            previousActivitySummary,
-            programOverview: overview,
-            stateProfile,
-            years
-          } =
-            apd || {};
-
-          return {
+        byId: action.data.reduce(
+          (acc, apd) => ({
             ...acc,
             [apd.id]: {
-              id,
-              activities,
-              assurancesAndCompliance:
-                assurancesAndCompliance || initialAssurances,
-              hieNarrative,
-              hitNarrative,
-              mmisNarrative,
-              overview,
-              incentivePayments:
-                incentivePayments && incentivePayments.length
-                  ? incentivePayments.reduce(
-                      (ipAcc, ipByQuarter) => {
-                        const ip = ipAcc;
-                        ip.ehAmt[ipByQuarter.year] = {
-                          1: ipByQuarter.q1.ehPayment,
-                          2: ipByQuarter.q2.ehPayment,
-                          3: ipByQuarter.q3.ehPayment,
-                          4: ipByQuarter.q4.ehPayment
-                        };
-
-                        ip.ehCt[ipByQuarter.year] = {
-                          1: ipByQuarter.q1.ehCount,
-                          2: ipByQuarter.q2.ehCount,
-                          3: ipByQuarter.q3.ehCount,
-                          4: ipByQuarter.q4.ehCount
-                        };
-
-                        ip.epAmt[ipByQuarter.year] = {
-                          1: ipByQuarter.q1.epPayment,
-                          2: ipByQuarter.q2.epPayment,
-                          3: ipByQuarter.q3.epPayment,
-                          4: ipByQuarter.q4.epPayment
-                        };
-
-                        ip.epCt[ipByQuarter.year] = {
-                          1: ipByQuarter.q1.epCount,
-                          2: ipByQuarter.q2.epCount,
-                          3: ipByQuarter.q3.epCount,
-                          4: ipByQuarter.q4.epCount
-                        };
-                        return ip;
-                      },
-                      {
-                        ehAmt: {},
-                        ehCt: {},
-                        epAmt: {},
-                        epCt: {}
-                      }
-                    )
-                  : initIncentiveData(),
-              pointsOfContact,
-              previousActivityExpenses:
-                previousActivityExpenses && previousActivityExpenses.length
-                  ? previousActivityExpenses.reduce(
-                      (previous, year) => ({
-                        ...previous,
-                        [year.year]: {
-                          hie: year.hie,
-                          hit: year.hit,
-                          mmis: year.mmis
-                        }
-                      }),
-                      {}
-                    )
-                  : defaultAPDYearOptions.reduce(
-                      (previous, year) => ({
-                        ...previous,
-                        [year - 2]: getPreviousActivityExpense()
-                      }),
-                      {}
-                    ),
-              previousActivitySummary: previousActivitySummary || '',
-
-              stateProfile: replaceNulls(stateProfile),
-              years: (years || defaultAPDYears).map(y => `${y}`),
+              ...fromAPI(apd, {
+                assurancesAndCompliance: initialAssurances,
+                incentivePayments: initIncentiveData(),
+                previousActivityExpenses: defaultAPDYearOptions.reduce(
+                  (previous, year) => ({
+                    ...previous,
+                    [year - 2]: getPreviousActivityExpense()
+                  }),
+                  {}
+                ),
+                previousActivitySummary: '',
+                years: defaultAPDYears
+              }),
               yearOptions: defaultAPDYearOptions
             }
-          };
-        }, {}),
+          }),
+          {}
+        ),
         data: { ...initialState.data }
       };
     }
