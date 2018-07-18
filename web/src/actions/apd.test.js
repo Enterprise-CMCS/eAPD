@@ -438,7 +438,7 @@ describe('apd actions', () => {
 
     it('creates save request and save success actions if the save succeeds', () => {
       const store = mockStore(state);
-      fetchMock.onPut('/apds/id-to-update').reply(200, [{ foo: 'bar' }]);
+      fetchMock.onPut('/apds/id-to-update').reply(200, { foo: 'bar' });
 
       // TODO: Need to test what's actually sent to the API to make sure transformations are right
 
@@ -448,7 +448,7 @@ describe('apd actions', () => {
           type: notificationActions.ADD_NOTIFICATION,
           message: 'Save successful!'
         },
-        { type: actions.SAVE_APD_SUCCESS }
+        { type: actions.SAVE_APD_SUCCESS, data: { foo: 'bar' } }
       ];
 
       return store.dispatch(actions.saveApd()).then(() => {
@@ -459,38 +459,29 @@ describe('apd actions', () => {
 
   describe('submit an APD', () => {
     const budget = {
-      hie: {},
-      hit: {},
+      activities: {
+        'activity-key': {
+          quarterlyFFP: 'quarterly ffp'
+        }
+      },
+      combined: 'overall combined',
+      federalShareByFFYQuarter: 'federal share, ffy quarter',
+      hie: {
+        hello: 'from hie',
+        combined: 'hie combined'
+      },
+      hit: {
+        also: 'from hit',
+        combined: 'hit combined'
+      },
       hitAndHie: {
-        combined: { '1878': { federal: 300 }, total: { federal: 600 } },
-        contractors: { '1878': { federal: 100 }, total: { federal: 200 } },
-        expenses: { '1878': { federal: 100 }, total: { federal: 200 } },
-        statePersonnel: { '1878': { federal: 100 }, total: { federal: 200 } }
+        combined: 'hit and hie combined'
       },
       mmis: {
-        combined: { '1878': { federal: 300 }, total: { federal: 600 } },
-        contractors: { '1878': { federal: 100 }, total: { federal: 200 } },
-        expenses: { '1878': { federal: 100 }, total: { federal: 200 } },
-        statePersonnel: { '1878': { federal: 100 }, total: { federal: 200 } }
+        greetings: 'from mmis',
+        combined: 'mmis combined'
       },
-      quarterly: {
-        hitAndHie: {
-          '1878': {
-            1: 10,
-            2: 20,
-            3: 30,
-            4: 40
-          }
-        },
-        mmis: {
-          '1878': {
-            1: 40,
-            2: 30,
-            3: 20,
-            4: 10
-          }
-        }
-      }
+      mmisByFFP: 'mmis by ffp'
     };
 
     beforeEach(() => {
@@ -499,6 +490,9 @@ describe('apd actions', () => {
 
     it('sets a notification if the preceding save fails', () => {
       const store = mockStore({
+        activities: {
+          byKey: { 'activity-key': { name: 'number one best activity' } }
+        },
         apd: { data: { id: 'id-to-update' } },
         budget,
         notification: { open: false, queue: [] }
@@ -523,6 +517,9 @@ describe('apd actions', () => {
 
     it('sets a notification if the submission fails', () => {
       const store = mockStore({
+        activities: {
+          byKey: { 'activity-key': { name: 'number one best activity' } }
+        },
         apd: { data: { id: 'id-to-update' } },
         budget,
         notification: { open: false, queue: [] }
@@ -549,6 +546,9 @@ describe('apd actions', () => {
 
     it('sets a notification if the submission succeeds', () => {
       const store = mockStore({
+        activities: {
+          byKey: { 'activity-key': { name: 'number one best activity' } }
+        },
         apd: { data: { id: 'id-to-update' } },
         budget,
         notification: { open: false, queue: [] }
@@ -567,9 +567,35 @@ describe('apd actions', () => {
         { type: actions.SUBMIT_APD_SUCCESS }
       ];
 
+      beforeEach(() => {
+        fetchMock.reset();
+      });
+
       return store.dispatch(actions.submitAPD(save)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
         expect(spy).toHaveBeenCalled();
+        expect(spy.mock.calls[0][1]).toMatchObject({
+          tables: {
+            activityQuarterlyFederalShare: {
+              'number one best activity': 'quarterly ffp'
+            },
+            summaryBudgetTable: {
+              hie: { hello: 'from hie', combined: 'hie combined' },
+              hit: { also: 'from hit', combined: 'hit combined' },
+              mmis: { greetings: 'from mmis', combined: 'mmis combined' },
+              total: 'overall combined'
+            },
+            federalShareByFFYQuarter: 'federal share, ffy quarter',
+            programBudgetTable: {
+              hitAndHie: {
+                hie: 'hie combined',
+                hit: 'hit combined',
+                hitAndHie: 'hit and hie combined'
+              },
+              mmis: 'mmis by ffp'
+            }
+          }
+        });
       });
     });
   });
