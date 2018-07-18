@@ -18,19 +18,19 @@ const ExecutiveSummary = ({ data, years, expandSection }) => (
     >
       {data.map((d, i) => (
         <div
-          key={d.id}
+          key={d.key}
           className="mb2 md-flex items-center alert alert-success"
         >
           <div className="p2 sm-m0 flex-auto">
-            {d.id !== 'all' ? (
+            {d.key !== 'all' ? (
               <Fragment>
                 <div className="h5">
                   {t('activities.namePrefixAndNum', { number: i + 1 })}
                 </div>
                 <a
-                  href={`#activity-${d.id}`}
+                  href={`#activity-${d.key}`}
                   className="h3 bold black"
-                  onClick={() => expandSection(d.id)}
+                  onClick={() => expandSection(d.key)}
                 >
                   {d.name}
                 </a>
@@ -73,14 +73,14 @@ ExecutiveSummary.propTypes = {
 };
 
 const mapStateToProps = ({ activities, apd }) => {
-  const activitiesArray = Object.values(activities.byId);
+  const activitiesArray = Object.values(activities.byKey);
 
   const data = activitiesArray.map(a => {
-    const { id, name, descShort } = a;
+    const { key, name, descShort } = a;
     const totals = getActivityTotals(a);
 
     return {
-      id,
+      key,
       name,
       descShort,
       totals,
@@ -91,7 +91,7 @@ const mapStateToProps = ({ activities, apd }) => {
   const allTotals = aggregateByYear(data.map(d => d.totals), apd.data.years);
 
   data.push({
-    id: 'all',
+    key: 'all',
     name: 'Total Cost',
     descShort: null,
     totals: allTotals,

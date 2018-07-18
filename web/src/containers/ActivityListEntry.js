@@ -13,7 +13,7 @@ class ActivityListEntry extends Component {
   handleChange = field => e => {
     const { activity, updateActivity } = this.props;
     updateActivity(
-      activity.id,
+      activity.key,
       { [field]: e.target.value },
       field === 'fundingSource'
     );
@@ -21,7 +21,7 @@ class ActivityListEntry extends Component {
 
   render() {
     const { activity, num, removeActivity } = this.props;
-    const { id, name, fundingSource } = activity;
+    const { key, name, fundingSource } = activity;
 
     return (
       <div className="flex items-center mb1">
@@ -51,7 +51,7 @@ class ActivityListEntry extends Component {
         </div>
         {num > 1 && (
           <DeleteButton
-            remove={() => removeActivity(id)}
+            remove={() => removeActivity(key)}
             resource="activities.delete"
           />
         )}
@@ -67,8 +67,8 @@ ActivityListEntry.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId } }, props) => ({
-  activity: byId[props.aId]
+const mapStateToProps = ({ activities: { byKey } }, props) => ({
+  activity: byKey[props.aKey]
 });
 
 const mapDispatchToProps = {

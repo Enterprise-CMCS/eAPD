@@ -5,7 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Activities
-    activityIds={
+    activityKeys={
       Array [
         "1",
         "2",
@@ -37,15 +37,15 @@ ShallowWrapper {
             className="mb3"
           >
             <Connect(ActivityListEntry)
-              aId="1"
+              aKey="1"
               num={1}
             />
             <Connect(ActivityListEntry)
-              aId="2"
+              aKey="2"
               num={2}
             />
             <Connect(ActivityListEntry)
-              aId="3"
+              aKey="3"
               num={3}
             />
           </div>
@@ -59,15 +59,15 @@ ShallowWrapper {
         </Subsection>,
         Array [
           <Connect(ActivityDetailAll)
-            aId="1"
+            aKey="1"
             num={1}
           />,
           <Connect(ActivityDetailAll)
-            aId="2"
+            aKey="2"
             num={2}
           />,
           <Connect(ActivityDetailAll)
-            aId="3"
+            aKey="3"
             num={3}
           />,
         ],
@@ -87,15 +87,15 @@ ShallowWrapper {
               className="mb3"
             >
               <Connect(ActivityListEntry)
-                aId="1"
+                aKey="1"
                 num={1}
               />
               <Connect(ActivityListEntry)
-                aId="2"
+                aKey="2"
                 num={2}
               />
               <Connect(ActivityListEntry)
-                aId="3"
+                aKey="3"
                 num={3}
               />
             </div>,
@@ -121,15 +121,15 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <Connect(ActivityListEntry)
-                  aId="1"
+                  aKey="1"
                   num={1}
                 />,
                 <Connect(ActivityListEntry)
-                  aId="2"
+                  aKey="2"
                   num={2}
                 />,
                 <Connect(ActivityListEntry)
-                  aId="3"
+                  aKey="3"
                   num={3}
                 />,
               ],
@@ -142,7 +142,7 @@ ShallowWrapper {
                 "key": "1",
                 "nodeType": "class",
                 "props": Object {
-                  "aId": "1",
+                  "aKey": "1",
                   "num": 1,
                 },
                 "ref": null,
@@ -154,7 +154,7 @@ ShallowWrapper {
                 "key": "2",
                 "nodeType": "class",
                 "props": Object {
-                  "aId": "2",
+                  "aKey": "2",
                   "num": 2,
                 },
                 "ref": null,
@@ -166,7 +166,7 @@ ShallowWrapper {
                 "key": "3",
                 "nodeType": "class",
                 "props": Object {
-                  "aId": "3",
+                  "aKey": "3",
                   "num": 3,
                 },
                 "ref": null,
@@ -198,7 +198,7 @@ ShallowWrapper {
         "key": "1",
         "nodeType": "class",
         "props": Object {
-          "aId": "1",
+          "aKey": "1",
           "num": 1,
         },
         "ref": null,
@@ -210,7 +210,7 @@ ShallowWrapper {
         "key": "2",
         "nodeType": "class",
         "props": Object {
-          "aId": "2",
+          "aKey": "2",
           "num": 2,
         },
         "ref": null,
@@ -222,7 +222,7 @@ ShallowWrapper {
         "key": "3",
         "nodeType": "class",
         "props": Object {
-          "aId": "3",
+          "aKey": "3",
           "num": 3,
         },
         "ref": null,
@@ -249,15 +249,15 @@ ShallowWrapper {
               className="mb3"
             >
               <Connect(ActivityListEntry)
-                aId="1"
+                aKey="1"
                 num={1}
               />
               <Connect(ActivityListEntry)
-                aId="2"
+                aKey="2"
                 num={2}
               />
               <Connect(ActivityListEntry)
-                aId="3"
+                aKey="3"
                 num={3}
               />
             </div>
@@ -271,15 +271,15 @@ ShallowWrapper {
           </Subsection>,
           Array [
             <Connect(ActivityDetailAll)
-              aId="1"
+              aKey="1"
               num={1}
             />,
             <Connect(ActivityDetailAll)
-              aId="2"
+              aKey="2"
               num={2}
             />,
             <Connect(ActivityDetailAll)
-              aId="3"
+              aKey="3"
               num={3}
             />,
           ],
@@ -299,15 +299,15 @@ ShallowWrapper {
                 className="mb3"
               >
                 <Connect(ActivityListEntry)
-                  aId="1"
+                  aKey="1"
                   num={1}
                 />
                 <Connect(ActivityListEntry)
-                  aId="2"
+                  aKey="2"
                   num={2}
                 />
                 <Connect(ActivityListEntry)
-                  aId="3"
+                  aKey="3"
                   num={3}
                 />
               </div>,
@@ -333,15 +333,15 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <Connect(ActivityListEntry)
-                    aId="1"
+                    aKey="1"
                     num={1}
                   />,
                   <Connect(ActivityListEntry)
-                    aId="2"
+                    aKey="2"
                     num={2}
                   />,
                   <Connect(ActivityListEntry)
-                    aId="3"
+                    aKey="3"
                     num={3}
                   />,
                 ],
@@ -354,7 +354,7 @@ ShallowWrapper {
                   "key": "1",
                   "nodeType": "class",
                   "props": Object {
-                    "aId": "1",
+                    "aKey": "1",
                     "num": 1,
                   },
                   "ref": null,
@@ -366,7 +366,7 @@ ShallowWrapper {
                   "key": "2",
                   "nodeType": "class",
                   "props": Object {
-                    "aId": "2",
+                    "aKey": "2",
                     "num": 2,
                   },
                   "ref": null,
@@ -378,7 +378,7 @@ ShallowWrapper {
                   "key": "3",
                   "nodeType": "class",
                   "props": Object {
-                    "aId": "3",
+                    "aKey": "3",
                     "num": 3,
                   },
                   "ref": null,
@@ -410,7 +410,7 @@ ShallowWrapper {
           "key": "1",
           "nodeType": "class",
           "props": Object {
-            "aId": "1",
+            "aKey": "1",
             "num": 1,
           },
           "ref": null,
@@ -422,7 +422,7 @@ ShallowWrapper {
           "key": "2",
           "nodeType": "class",
           "props": Object {
-            "aId": "2",
+            "aKey": "2",
             "num": 2,
           },
           "ref": null,
@@ -434,7 +434,7 @@ ShallowWrapper {
           "key": "3",
           "nodeType": "class",
           "props": Object {
-            "aId": "3",
+            "aKey": "3",
             "num": 3,
           },
           "ref": null,

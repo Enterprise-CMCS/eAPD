@@ -14,12 +14,12 @@ import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
 class ActivityDetailContractorExpenses extends Component {
-  handleChange = (index, key) => e => {
+  handleChange = (index, field) => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
 
-    const updates = { contractorResources: { [index]: { [key]: value } } };
-    updateActivity(activity.id, updates);
+    const updates = { contractorResources: { [index]: { [field]: value } } };
+    updateActivity(activity.key, updates);
   };
 
   handleYearChange = (index, year) => e => {
@@ -29,12 +29,12 @@ class ActivityDetailContractorExpenses extends Component {
     const updates = {
       contractorResources: { [index]: { years: { [year]: value } } }
     };
-    updateActivity(activity.id, updates, true);
+    updateActivity(activity.key, updates, true);
   };
 
   render() {
     const { activity, years, addContractor, removeContractor } = this.props;
-    const { id: activityID, contractorResources } = activity;
+    const { key: activityKey, contractorResources } = activity;
 
     return (
       <Subsection
@@ -77,11 +77,11 @@ class ActivityDetailContractorExpenses extends Component {
               </thead>
               <tbody>
                 {contractorResources.map((contractor, i) => (
-                  <tr key={contractor.id}>
+                  <tr key={contractor.key}>
                     <td className="mono">{i + 1}.</td>
                     <td>
                       <Input
-                        name={`contractor-${i}-name`}
+                        name={`contractor-${contractor.key}-name`}
                         label={t(
                           'activities.contractorResources.srLabels.name'
                         )}
@@ -93,8 +93,8 @@ class ActivityDetailContractorExpenses extends Component {
                     </td>
                     <td>
                       <Textarea
-                        id={`contractor-${i}-desc`}
-                        name={`contractor-${i}-desc`}
+                        id={`contractor-${contractor.key}-desc`}
+                        name={`contractor-${contractor.key}-desc`}
                         label={t(
                           'activities.contractorResources.srLabels.description'
                         )}
@@ -112,7 +112,7 @@ class ActivityDetailContractorExpenses extends Component {
                         </span>
                         <Input
                           type="date"
-                          name={`contractor-${i}-start`}
+                          name={`contractor-${contractor.key}-start`}
                           label={t(
                             'activities.contractorResources.srLabels.start'
                           )}
@@ -128,7 +128,7 @@ class ActivityDetailContractorExpenses extends Component {
                         </span>
                         <Input
                           type="date"
-                          name={`contractor-${i}-end`}
+                          name={`contractor-${contractor.key}-end`}
                           label={t(
                             'activities.contractorResources.srLabels.end'
                           )}
@@ -142,7 +142,7 @@ class ActivityDetailContractorExpenses extends Component {
                     {years.map(year => (
                       <td key={year}>
                         <DollarInput
-                          name={`contractor-${i}-cost-${year}`}
+                          name={`contractor-${contractor.key}-cost-${year}`}
                           label={t(
                             'activities.contractorResources.srLabels.cost',
                             { year }
@@ -159,7 +159,7 @@ class ActivityDetailContractorExpenses extends Component {
                         className="btn btn-outline border-silver px1 py-tiny mt-tiny"
                         title={t('activities.contractorResources.removeLabel')}
                         onClick={() =>
-                          removeContractor(activityID, contractor.id)
+                          removeContractor(activityKey, contractor.key)
                         }
                       >
                         ✗
@@ -174,7 +174,7 @@ class ActivityDetailContractorExpenses extends Component {
         <button
           type="button"
           className="btn btn-primary bg-black"
-          onClick={() => addContractor(activityID)}
+          onClick={() => addContractor(activityKey)}
         >
           {t('activities.contractorResources.addContractorButtonText')}
         </button>
@@ -191,8 +191,8 @@ ActivityDetailContractorExpenses.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = ({ activities: { byId }, apd }, { aId }) => ({
-  activity: byId[aId],
+export const mapStateToProps = ({ activities: { byKey }, apd }, { aKey }) => ({
+  activity: byKey[aKey],
   years: apd.data.years
 });
 
