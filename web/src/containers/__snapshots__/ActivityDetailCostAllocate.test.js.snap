@@ -8,7 +8,7 @@ ShallowWrapper {
     activity={
       Object {
         "costAllocationDesc": "cost allocation",
-        "id": "activity id",
+        "key": "activity key",
         "otherFundingDesc": "other funding",
       }
     }
@@ -51,7 +51,7 @@ ShallowWrapper {
           />
         </div>,
         <Connect(ActivityDetailCostAllocateFFP)
-          aId="activity id"
+          aKey="activity key"
         />,
         <div
           className="mb3"
@@ -66,7 +66,7 @@ ShallowWrapper {
             text="activities.costAllocate.quarterly.helpText"
           />
           <Connect(ActivityQuarterlyBudgetSummary)
-            aId="activity id"
+            aKey="activity key"
           />
         </div>,
         <div
@@ -162,7 +162,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "aId": "activity id",
+          "aKey": "activity key",
         },
         "ref": null,
         "rendered": null,
@@ -184,7 +184,7 @@ ShallowWrapper {
               text="activities.costAllocate.quarterly.helpText"
             />,
             <Connect(ActivityQuarterlyBudgetSummary)
-              aId="activity id"
+              aKey="activity key"
             />,
           ],
           "className": "mb3",
@@ -220,7 +220,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "aId": "activity id",
+              "aKey": "activity key",
             },
             "ref": null,
             "rendered": null,
@@ -320,7 +320,7 @@ ShallowWrapper {
             />
           </div>,
           <Connect(ActivityDetailCostAllocateFFP)
-            aId="activity id"
+            aKey="activity key"
           />,
           <div
             className="mb3"
@@ -335,7 +335,7 @@ ShallowWrapper {
               text="activities.costAllocate.quarterly.helpText"
             />
             <Connect(ActivityQuarterlyBudgetSummary)
-              aId="activity id"
+              aKey="activity key"
             />
           </div>,
           <div
@@ -431,7 +431,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "aId": "activity id",
+            "aKey": "activity key",
           },
           "ref": null,
           "rendered": null,
@@ -453,7 +453,7 @@ ShallowWrapper {
                 text="activities.costAllocate.quarterly.helpText"
               />,
               <Connect(ActivityQuarterlyBudgetSummary)
-                aId="activity id"
+                aKey="activity key"
               />,
             ],
             "className": "mb3",
@@ -489,7 +489,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "aId": "activity id",
+                "aKey": "activity key",
               },
               "ref": null,
               "rendered": null,

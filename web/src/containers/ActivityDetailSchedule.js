@@ -14,12 +14,12 @@ import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
 class ActivityDetailSchedule extends Component {
-  handleChange = (idx, key) => e => {
+  handleChange = (index, field) => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
 
-    const updates = { milestones: { [idx]: { [key]: value } } };
-    updateActivity(activity.id, updates);
+    const updates = { milestones: { [index]: { [field]: value } } };
+    updateActivity(activity.key, updates);
   };
 
   render() {
@@ -55,10 +55,10 @@ class ActivityDetailSchedule extends Component {
               </thead>
               <tbody>
                 {activity.milestones.map((d, i) => (
-                  <tr key={i}>
+                  <tr key={d.key}>
                     <td>
                       <Input
-                        name={`milestone-${i}-name`}
+                        name={`milestone-${d.key}-name`}
                         label={t('activities.schedule.milestoneLabel')}
                         hideLabel
                         wrapperClass="m0"
@@ -68,7 +68,7 @@ class ActivityDetailSchedule extends Component {
                     </td>
                     <td>
                       <Input
-                        name={`milestone-${i}-start`}
+                        name={`milestone-${d.key}-start`}
                         label={t('activities.schedule.startLabel')}
                         hideLabel
                         type="date"
@@ -79,7 +79,7 @@ class ActivityDetailSchedule extends Component {
                     </td>
                     <td>
                       <Input
-                        name={`milestone-${i}-end`}
+                        name={`milestone-${d.key}-end`}
                         label={t('activities.schedule.endLabel')}
                         hideLabel
                         type="date"
@@ -93,7 +93,9 @@ class ActivityDetailSchedule extends Component {
                         type="button"
                         className="btn btn-outline border-silver px1 py-tiny"
                         title={t('activities.schedule.removeLabel')}
-                        onClick={() => removeActivityMilestone(activity.id, i)}
+                        onClick={() =>
+                          removeActivityMilestone(activity.key, d.key)
+                        }
                       >
                         ✗
                       </button>
@@ -107,7 +109,7 @@ class ActivityDetailSchedule extends Component {
         <button
           type="button"
           className="btn btn-primary bg-black"
-          onClick={() => addActivityMilestone(activity.id)}
+          onClick={() => addActivityMilestone(activity.key)}
         >
           {t('activities.schedule.addMilestoneButtonText')}
         </button>
@@ -123,8 +125,8 @@ ActivityDetailSchedule.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byId } }, { aId }) => ({
-  activity: byId[aId]
+const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
+  activity: byKey[aKey]
 });
 
 const mapDispatchToProps = {

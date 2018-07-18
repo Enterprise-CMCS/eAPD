@@ -18,10 +18,11 @@ describe('the activities contractors component', () => {
   const sandbox = sinon.createSandbox();
   const props = {
     activity: {
-      id: 'activity id',
+      key: 'activity key',
       contractorResources: [
         {
           id: 'contractor id',
+          key: 'contractor key',
           name: 'contractor name',
           desc: 'contractor description',
           start: 'start date',
@@ -52,13 +53,15 @@ describe('the activities contractors component', () => {
   test('adds a new contractor', () => {
     const component = shallow(<ActivityDetailContractorExpenses {...props} />);
     component.find('button.btn-primary').simulate('click');
-    expect(props.addContractor.calledWith('activity id')).toBeTruthy();
+    expect(props.addContractor.calledWith('activity key')).toBeTruthy();
   });
 
   test('removes a contractor', () => {
     const component = shallow(<ActivityDetailContractorExpenses {...props} />);
     component.find('button.border-silver').simulate('click');
-    expect(props.addContractor.calledWith('activity id')).toBeTruthy();
+    expect(
+      props.removeContractor.calledWith('activity key', 'contractor key')
+    ).toBeTruthy();
   });
 
   test('handles changing contractor info', () => {
@@ -69,7 +72,7 @@ describe('the activities contractors component', () => {
       .filterWhere(n => n.props().value === 'contractor name');
     nameInput.simulate('change', { target: { value: 'bloop' } });
     expect(
-      props.updateActivity.calledWith('activity id', {
+      props.updateActivity.calledWith('activity key', {
         contractorResources: { '0': { name: 'bloop' } }
       })
     ).toBeTruthy();
@@ -79,7 +82,7 @@ describe('the activities contractors component', () => {
       .filterWhere(n => n.props().value === 'contractor description');
     descInput.simulate('change', { target: { value: 'florp' } });
     expect(
-      props.updateActivity.calledWith('activity id', {
+      props.updateActivity.calledWith('activity key', {
         contractorResources: { '0': { desc: 'florp' } }
       })
     ).toBeTruthy();
@@ -94,7 +97,7 @@ describe('the activities contractors component', () => {
     yearInput.simulate('change', { target: { value: '300' } });
     expect(
       props.updateActivity.calledWith(
-        'activity id',
+        'activity key',
         { contractorResources: { '0': { years: { '1066': '300' } } } },
         true
       )
@@ -106,8 +109,8 @@ describe('the activities contractors component', () => {
       mapStateToProps(
         {
           activities: {
-            byId: {
-              id: 'this is the activity'
+            byKey: {
+              key: 'this is the activity'
             }
           },
           apd: {
@@ -116,7 +119,7 @@ describe('the activities contractors component', () => {
             }
           }
         },
-        { aId: 'id' }
+        { aKey: 'key' }
       )
     ).toEqual({
       activity: 'this is the activity',

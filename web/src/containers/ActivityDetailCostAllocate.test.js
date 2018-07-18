@@ -14,7 +14,7 @@ describe('the activities cost allocation container component', () => {
   const sandbox = sinon.createSandbox();
   const props = {
     activity: {
-      id: 'activity id',
+      key: 'activity key',
       costAllocationDesc: 'cost allocation',
       otherFundingDesc: 'other funding'
     },
@@ -61,12 +61,12 @@ describe('the activities cost allocation container component', () => {
       mapStateToProps(
         {
           activities: {
-            byId: {
-              id: 'this is the activity'
+            byKey: {
+              key: 'this is the activity'
             }
           }
         },
-        { aId: 'id' }
+        { aKey: 'key' }
       )
     ).toEqual({
       activity: 'this is the activity'

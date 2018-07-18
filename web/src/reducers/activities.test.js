@@ -2,58 +2,55 @@ import activities, {
   aggregateByYear,
   getCategoryTotals,
   getActivityCategoryTotals,
-  getActivityTotals
+  getActivityTotals,
+  setKeyGenerator
 } from './activities';
 
 describe('activities reducer', () => {
   const initialState = {
-    byId: {},
-    allIds: []
+    byKey: {},
+    allKeys: []
   };
 
-  const newContractor = {
-    id: 0,
+  const newContractor = keyFn => ({
+    key: keyFn(),
     desc: '',
     end: '',
     name: '',
     start: '',
     years: { '2018': 0, '2019': 0 }
-  };
+  });
 
-  const newPerson = {
-    id: 0,
+  const newPerson = keyFn => ({
+    key: keyFn(),
     desc: '',
     title: '',
     years: { '2018': { amt: '', perc: '' }, '2019': { amt: '', perc: '' } }
-  };
+  });
 
-  const newGoal = { desc: '', obj: '' };
+  const newGoal = keyFn => ({ key: keyFn(), desc: '', obj: '' });
 
-  const newExpense = {
-    id: 0,
+  const newExpense = keyFn => ({
+    key: keyFn(),
     category: 'Hardware, software, and licensing',
     desc: '',
     years: { '2018': 0, '2019': 0 }
-  };
+  });
 
-  const newMilestone = { end: '', name: '', start: '' };
+  const newMilestone = keyFn => ({
+    key: keyFn(),
+    end: '',
+    name: '',
+    start: ''
+  });
 
-  const newActivity = {
-    id: 1,
+  const newActivity = keyFn => ({
+    key: keyFn(),
     altApproach: '',
     contractorResources: [
-      {
-        ...newContractor,
-        id: 1
-      },
-      {
-        ...newContractor,
-        id: 2
-      },
-      {
-        ...newContractor,
-        id: 3
-      }
+      newContractor(keyFn),
+      newContractor(keyFn),
+      newContractor(keyFn)
     ],
     costAllocationDesc: '',
     costAllocation: {
@@ -62,24 +59,11 @@ describe('activities reducer', () => {
     },
     descLong: '',
     descShort: '',
-    expenses: [
-      {
-        ...newExpense,
-        id: 1
-      },
-      {
-        ...newExpense,
-        id: 2
-      },
-      {
-        ...newExpense,
-        id: 3
-      }
-    ],
+    expenses: [newExpense(keyFn), newExpense(keyFn), newExpense(keyFn)],
     fundingSource: 'HIT',
-    goals: [{ ...newGoal }],
+    goals: [newGoal(keyFn)],
     meta: { expanded: false },
-    milestones: [{ ...newMilestone }],
+    milestones: [newMilestone(keyFn)],
     name: '',
     otherFundingDesc: '',
     standardsAndConditions: {
@@ -95,20 +79,7 @@ describe('activities reducer', () => {
       modularity: '',
       reporting: ''
     },
-    statePersonnel: [
-      {
-        ...newPerson,
-        id: 1
-      },
-      {
-        ...newPerson,
-        id: 2
-      },
-      {
-        ...newPerson,
-        id: 3
-      }
-    ],
+    statePersonnel: [newPerson(keyFn), newPerson(keyFn), newPerson(keyFn)],
     quarterlyFFP: {
       '2018': {
         '1': {
@@ -156,34 +127,47 @@ describe('activities reducer', () => {
       }
     },
     years: ['2018', '2019']
+  });
+
+  const uniqueKey = () => {
+    let key = 0;
+    return () => {
+      key += 1;
+      return key;
+    };
   };
 
-  const stateWithOne = { byId: { '1': newActivity }, allIds: [1] };
+  const stateWithOne = {
+    byKey: { '1': newActivity(uniqueKey()) },
+    allKeys: ['1']
+  };
 
   it('should handle initial state', () => {
     expect(activities(undefined, {})).toEqual(initialState);
   });
 
   it('handles adding a new activity', () => {
+    const key = () => 'new key';
+    setKeyGenerator(key);
     expect(
       activities(initialState, {
         type: 'ADD_ACTIVITY',
         years: ['2018', '2019']
       })
     ).toEqual({
-      byId: {
-        '1': newActivity
+      byKey: {
+        'new key': newActivity(key)
       },
-      allIds: [1]
+      allKeys: ['new key']
     });
   });
 
   it('handles removing an activity', () => {
     expect(
-      activities(stateWithOne, { type: 'REMOVE_ACTIVITY', id: 1 })
+      activities(stateWithOne, { type: 'REMOVE_ACTIVITY', key: '1' })
     ).toEqual({
-      byId: {},
-      allIds: []
+      byKey: {},
+      allKeys: []
     });
   });
 
@@ -192,36 +176,45 @@ describe('activities reducer', () => {
       'contractor',
       'ADD_ACTIVITY_CONTRACTOR',
       'contractorResources',
-      newContractor
+      newContractor(() => 'new key')
     ],
-    ['person', 'ADD_ACTIVITY_STATE_PERSON', 'statePersonnel', newPerson],
-    ['goal', 'ADD_ACTIVITY_GOAL', 'goals', newGoal],
-    ['expense', 'ADD_ACTIVITY_EXPENSE', 'expenses', newExpense],
-    ['milestone', 'ADD_ACTIVITY_MILESTONE', 'milestones', newMilestone]
+    [
+      'person',
+      'ADD_ACTIVITY_STATE_PERSON',
+      'statePersonnel',
+      newPerson(() => 'new key')
+    ],
+    ['goal', 'ADD_ACTIVITY_GOAL', 'goals', newGoal(() => 'new key')],
+    [
+      'expense',
+      'ADD_ACTIVITY_EXPENSE',
+      'expenses',
+      newExpense(() => 'new key')
+    ],
+    [
+      'milestone',
+      'ADD_ACTIVITY_MILESTONE',
+      'milestones',
+      newMilestone(() => 'new key')
+    ]
   ].forEach(([title, action, property, newObject]) => {
     it(`handles adding ${title}`, () => {
       expect(
         activities(stateWithOne, {
           type: action,
-          id: 1,
+          key: 1,
           years: ['2018', '2019']
         })
       ).toEqual({
         ...stateWithOne,
-        byId: {
+        byKey: {
           '1': {
-            ...stateWithOne.byId['1'],
+            ...stateWithOne.byKey['1'],
             [property]: [
-              ...stateWithOne.byId['1'][property],
+              ...stateWithOne.byKey['1'][property],
               {
                 ...newObject,
-                // For the activity properties that we create distinct
-                // IDs for, make sure we made the right new one. For the
-                // properties that are just plain arrays, don't bother
-                // checking the ID.
-                id: stateWithOne.byId['1'][property][0].id
-                  ? stateWithOne.byId['1'][property].length + 1
-                  : undefined
+                key: 'new key'
               }
             ]
           }
@@ -234,58 +227,53 @@ describe('activities reducer', () => {
     {
       title: 'contractor',
       action: 'REMOVE_ACTIVITY_CONTRACTOR',
-      id: 'contractorId',
+      actionKey: 'contractorKey',
       property: 'contractorResources'
     },
     {
       title: 'state personnel',
       action: 'REMOVE_ACTIVITY_STATE_PERSON',
-      id: 'personId',
+      actionKey: 'personKey',
       property: 'statePersonnel'
     },
     {
       title: 'goal',
       action: 'REMOVE_ACTIVITY_GOAL',
-      id: 'goalIdx',
+      actionKey: 'goalKey',
       property: 'goals'
     },
     {
       title: 'expense',
       action: 'REMOVE_ACTIVITY_EXPENSE',
-      id: 'expenseId',
+      actionKey: 'expenseKey',
       property: 'expenses'
     },
     {
-      title: 'mileston',
+      title: 'milestone',
       action: 'REMOVE_ACTIVITY_MILESTONE',
-      id: 'milestoneIdx',
+      actionKey: 'milestoneKey',
       property: 'milestones'
     }
-  ].forEach(({ title, action, id, property }) => {
+  ].forEach(({ title, action, actionKey, property }) => {
     it(`handles removing ${title}`, () => {
-      let propId = stateWithOne.byId['1'][property].length;
-
-      // For properties that have distinct IDs, they being
-      // at 1.  For properties that we key off indices,
-      // they begin at 0.  This accounts for that.
-      if (id.endsWith('Idx')) {
-        propId -= 1;
-      }
+      const propId = Math.max(
+        ...stateWithOne.byKey['1'][property].map(p => p.key)
+      );
 
       expect(
         activities(stateWithOne, {
           type: action,
-          id: 1,
-          [id]: propId
+          key: 1,
+          [actionKey]: propId
         })
       ).toEqual({
         ...stateWithOne,
-        byId: {
+        byKey: {
           '1': {
-            ...stateWithOne.byId['1'],
-            [property]: stateWithOne.byId['1'][property].slice(
+            ...stateWithOne.byKey['1'],
+            [property]: stateWithOne.byKey['1'][property].slice(
               0,
-              stateWithOne.byId['1'][property].length - 1
+              stateWithOne.byKey['1'][property].length - 1
             )
           }
         }
@@ -295,13 +283,13 @@ describe('activities reducer', () => {
 
   it('sets the activity to expanded', () => {
     expect(
-      activities(stateWithOne, { type: 'EXPAND_ACTIVITY_SECTION', id: 1 })
+      activities(stateWithOne, { type: 'EXPAND_ACTIVITY_SECTION', key: 1 })
     ).toEqual({
       ...stateWithOne,
-      byId: {
+      byKey: {
         '1': {
-          ...stateWithOne.byId['1'],
-          meta: { ...stateWithOne.byId['1'].meta, expanded: true }
+          ...stateWithOne.byKey['1'],
+          meta: { ...stateWithOne.byKey['1'].meta, expanded: true }
         }
       }
     });
@@ -310,24 +298,24 @@ describe('activities reducer', () => {
   describe('it toggles the activity expanded flag', () => {
     expect(
       activities(
-        { byId: { '1': { meta: { expanded: false } } } },
-        { type: 'TOGGLE_ACTIVITY_SECTION', id: 1 }
+        { byKey: { '1': { meta: { expanded: false } } } },
+        { type: 'TOGGLE_ACTIVITY_SECTION', key: 1 }
       )
-    ).toEqual({ byId: { '1': { meta: { expanded: true } } } });
+    ).toEqual({ byKey: { '1': { meta: { expanded: true } } } });
 
     expect(
       activities(
-        { byId: { '1': { meta: { expanded: true } } } },
-        { type: 'TOGGLE_ACTIVITY_SECTION', id: 1 }
+        { byKey: { '1': { meta: { expanded: true } } } },
+        { type: 'TOGGLE_ACTIVITY_SECTION', key: 1 }
       )
-    ).toEqual({ byId: { '1': { meta: { expanded: false } } } });
+    ).toEqual({ byKey: { '1': { meta: { expanded: false } } } });
   });
 
   it('handles arbitrary activity updates', () => {
     expect(
       activities(stateWithOne, {
         type: 'UPDATE_ACTIVITY',
-        id: '1',
+        key: '1',
         updates: {
           descShort: 'new short description',
           standardsAndConditions: { mita: 'new mita text' }
@@ -335,12 +323,12 @@ describe('activities reducer', () => {
       })
     ).toEqual({
       ...stateWithOne,
-      byId: {
+      byKey: {
         '1': {
-          ...stateWithOne.byId['1'],
+          ...stateWithOne.byKey['1'],
           descShort: 'new short description',
           standardsAndConditions: {
-            ...stateWithOne.byId['1'].standardsAndConditions,
+            ...stateWithOne.byKey['1'].standardsAndConditions,
             mita: 'new mita text'
           }
         }
@@ -365,84 +353,84 @@ describe('activities reducer', () => {
         })
       ).toEqual({
         ...stateWithOne,
-        byId: {
+        byKey: {
           '1': {
-            ...stateWithOne.byId['1'],
+            ...stateWithOne.byKey['1'],
             contractorResources: [
               {
-                ...stateWithOne.byId['1'].contractorResources[0],
+                ...stateWithOne.byKey['1'].contractorResources[0],
                 years: {
-                  ...stateWithOne.byId['1'].contractorResources[0].years,
+                  ...stateWithOne.byKey['1'].contractorResources[0].years,
                   '2020': 0
                 }
               },
               {
-                ...stateWithOne.byId['1'].contractorResources[1],
+                ...stateWithOne.byKey['1'].contractorResources[1],
                 years: {
-                  ...stateWithOne.byId['1'].contractorResources[1].years,
+                  ...stateWithOne.byKey['1'].contractorResources[1].years,
                   '2020': 0
                 }
               },
               {
-                ...stateWithOne.byId['1'].contractorResources[2],
+                ...stateWithOne.byKey['1'].contractorResources[2],
                 years: {
-                  ...stateWithOne.byId['1'].contractorResources[2].years,
+                  ...stateWithOne.byKey['1'].contractorResources[2].years,
                   '2020': 0
                 }
               }
             ],
             costAllocation: {
-              ...stateWithOne.byId['1'].costAllocation,
+              ...stateWithOne.byKey['1'].costAllocation,
               '2020': { ffp: { federal: 90, state: 10 }, other: 0 }
             },
             expenses: [
               {
-                ...stateWithOne.byId['1'].expenses[0],
+                ...stateWithOne.byKey['1'].expenses[0],
                 years: {
-                  ...stateWithOne.byId['1'].expenses[0].years,
+                  ...stateWithOne.byKey['1'].expenses[0].years,
                   '2020': 0
                 }
               },
               {
-                ...stateWithOne.byId['1'].expenses[1],
+                ...stateWithOne.byKey['1'].expenses[1],
                 years: {
-                  ...stateWithOne.byId['1'].expenses[1].years,
+                  ...stateWithOne.byKey['1'].expenses[1].years,
                   '2020': 0
                 }
               },
               {
-                ...stateWithOne.byId['1'].expenses[2],
+                ...stateWithOne.byKey['1'].expenses[2],
                 years: {
-                  ...stateWithOne.byId['1'].expenses[2].years,
+                  ...stateWithOne.byKey['1'].expenses[2].years,
                   '2020': 0
                 }
               }
             ],
             statePersonnel: [
               {
-                ...stateWithOne.byId['1'].statePersonnel[0],
+                ...stateWithOne.byKey['1'].statePersonnel[0],
                 years: {
-                  ...stateWithOne.byId['1'].statePersonnel[0].years,
+                  ...stateWithOne.byKey['1'].statePersonnel[0].years,
                   '2020': { amt: '', perc: '' }
                 }
               },
               {
-                ...stateWithOne.byId['1'].statePersonnel[1],
+                ...stateWithOne.byKey['1'].statePersonnel[1],
                 years: {
-                  ...stateWithOne.byId['1'].statePersonnel[1].years,
+                  ...stateWithOne.byKey['1'].statePersonnel[1].years,
                   '2020': { amt: '', perc: '' }
                 }
               },
               {
-                ...stateWithOne.byId['1'].statePersonnel[2],
+                ...stateWithOne.byKey['1'].statePersonnel[2],
                 years: {
-                  ...stateWithOne.byId['1'].statePersonnel[2].years,
+                  ...stateWithOne.byKey['1'].statePersonnel[2].years,
                   '2020': { amt: '', perc: '' }
                 }
               }
             ],
             quarterlyFFP: {
-              ...stateWithOne.byId['1'].quarterlyFFP,
+              ...stateWithOne.byKey['1'].quarterlyFFP,
               '2020': {
                 '1': {
                   combined: 25,
@@ -477,24 +465,24 @@ describe('activities reducer', () => {
         activities(stateWithOne, { type, updates: { years: ['2018'] } })
       ).toEqual({
         ...stateWithOne,
-        byId: {
+        byKey: {
           '1': {
-            ...stateWithOne.byId['1'],
+            ...stateWithOne.byKey['1'],
             contractorResources: [
               {
-                ...stateWithOne.byId['1'].contractorResources[0],
+                ...stateWithOne.byKey['1'].contractorResources[0],
                 years: {
                   '2018': 0
                 }
               },
               {
-                ...stateWithOne.byId['1'].contractorResources[1],
+                ...stateWithOne.byKey['1'].contractorResources[1],
                 years: {
                   '2018': 0
                 }
               },
               {
-                ...stateWithOne.byId['1'].contractorResources[2],
+                ...stateWithOne.byKey['1'].contractorResources[2],
                 years: {
                   '2018': 0
                 }
@@ -505,19 +493,19 @@ describe('activities reducer', () => {
             },
             expenses: [
               {
-                ...stateWithOne.byId['1'].expenses[0],
+                ...stateWithOne.byKey['1'].expenses[0],
                 years: {
                   '2018': 0
                 }
               },
               {
-                ...stateWithOne.byId['1'].expenses[1],
+                ...stateWithOne.byKey['1'].expenses[1],
                 years: {
                   '2018': 0
                 }
               },
               {
-                ...stateWithOne.byId['1'].expenses[2],
+                ...stateWithOne.byKey['1'].expenses[2],
                 years: {
                   '2018': 0
                 }
@@ -525,27 +513,27 @@ describe('activities reducer', () => {
             ],
             statePersonnel: [
               {
-                ...stateWithOne.byId['1'].statePersonnel[0],
+                ...stateWithOne.byKey['1'].statePersonnel[0],
                 years: {
                   '2018': { amt: '', perc: '' }
                 }
               },
               {
-                ...stateWithOne.byId['1'].statePersonnel[1],
+                ...stateWithOne.byKey['1'].statePersonnel[1],
                 years: {
                   '2018': { amt: '', perc: '' }
                 }
               },
               {
-                ...stateWithOne.byId['1'].statePersonnel[2],
+                ...stateWithOne.byKey['1'].statePersonnel[2],
                 years: {
                   '2018': { amt: '', perc: '' }
                 }
               }
             ],
             quarterlyFFP: {
-              '2018': stateWithOne.byId['1'].quarterlyFFP['2018'],
-              total: stateWithOne.byId['1'].quarterlyFFP.total
+              '2018': stateWithOne.byKey['1'].quarterlyFFP['2018'],
+              total: stateWithOne.byKey['1'].quarterlyFFP.total
             },
             years: ['2018']
           }
@@ -556,6 +544,8 @@ describe('activities reducer', () => {
 
   describe('handles receiving an APD', () => {
     it(`adds a default activity if the APD doesn't have any`, () => {
+      const key = () => 'default key';
+      setKeyGenerator(key);
       expect(
         activities(
           {
@@ -572,21 +562,21 @@ describe('activities reducer', () => {
           }
         )
       ).toEqual({
-        byId: {
-          '1': {
-            ...newActivity,
-            id: 1,
+        byKey: {
+          'default key': {
+            ...newActivity(key),
             name: 'Program Administration',
             fundingSource: 'HIT',
             years: ['2018', '2019'],
             meta: { ...newActivity.meta, expanded: true }
           }
         },
-        allIds: ['1']
+        allKeys: ['default key']
       });
     });
 
     it('ingests activities from the incoming APD object', () => {
+      setKeyGenerator(() => 'incoming key');
       expect(
         activities(
           {
@@ -626,10 +616,12 @@ describe('activities reducer', () => {
                   ],
                   goals: [
                     {
+                      id: 'g1',
                       description: 'goal 1 description',
                       objective: 'goal 1 objective'
                     },
                     {
+                      id: 'g2',
                       description: 'goal 2 description',
                       objective: 'goal 2 objective'
                     }
@@ -774,9 +766,10 @@ describe('activities reducer', () => {
           }
         )
       ).toEqual({
-        byId: {
-          '998': {
+        byKey: {
+          'incoming key': {
             id: 998,
+            key: 'incoming key',
             name: 'activity 998',
             fundingSource: 'bob',
             years: ['2018', '2019'],
@@ -790,15 +783,32 @@ describe('activities reducer', () => {
               2019: { ffp: { federal: 60, state: 20 }, other: 200 }
             },
             goals: [
-              { desc: 'goal 1 description', obj: 'goal 1 objective' },
-              { desc: 'goal 2 description', obj: 'goal 2 objective' }
+              {
+                id: 'g1',
+                key: 'incoming key',
+                desc: 'goal 1 description',
+                obj: 'goal 1 objective'
+              },
+              {
+                id: 'g2',
+                key: 'incoming key',
+                desc: 'goal 2 description',
+                obj: 'goal 2 objective'
+              }
             ],
             milestones: [
-              { id: 'm1', name: 'milestone name', start: 'start', end: 'end' }
+              {
+                id: 'm1',
+                key: 'incoming key',
+                name: 'milestone name',
+                start: 'start',
+                end: 'end'
+              }
             ],
             statePersonnel: [
               {
                 id: 'person 1',
+                key: 'incoming key',
                 title: 'job title 1',
                 desc: 'desc 1',
                 years: {
@@ -808,6 +818,7 @@ describe('activities reducer', () => {
               },
               {
                 id: 'person 2',
+                key: 'incoming key',
                 title: 'job title 2',
                 desc: 'desc 2',
                 years: {
@@ -819,6 +830,7 @@ describe('activities reducer', () => {
             contractorResources: [
               {
                 id: 'contractor 1',
+                key: 'incoming key',
                 name: 'contractor 1',
                 desc: 'desc 1',
                 start: 'start 1',
@@ -827,6 +839,7 @@ describe('activities reducer', () => {
               },
               {
                 id: 'contractor 2',
+                key: 'incoming key',
                 name: 'contractor 2',
                 desc: 'desc 2',
                 start: 'start 2',
@@ -837,12 +850,14 @@ describe('activities reducer', () => {
             expenses: [
               {
                 id: 'e1',
+                key: 'incoming key',
                 category: 'category 1',
                 desc: 'desc 1',
                 years: { 2018: 10, 2019: 20 }
               },
               {
                 id: 'e2',
+                key: 'incoming key',
                 category: 'category 2',
                 desc: 'desc 2',
                 years: { 2018: 30, 2019: 40 }
@@ -910,7 +925,7 @@ describe('activities reducer', () => {
             meta: { expanded: false }
           }
         },
-        allIds: ['998']
+        allKeys: ['incoming key']
       });
     });
   });
