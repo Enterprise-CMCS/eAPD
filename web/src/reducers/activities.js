@@ -24,7 +24,6 @@ import {
   defaultAPDYears,
   generateKey as defaultGenerateKey
 } from '../util';
-import { fromAPI } from '../util/serialization/activities';
 
 // Make this thing injectible for testing.
 let generateKey = defaultGenerateKey;
