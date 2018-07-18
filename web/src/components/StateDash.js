@@ -27,7 +27,7 @@ const Events = ({ month, events }) => (
     {events.map((e, i) => (
       <div key={i} className="mb1 flex items-center">
         <div>{e.day}</div>
-        <div className="ml2 flex-auto p1 bg-yellow rounded">{e.title}</div>
+        <div className="ml2 flex-auto p1 bg-blue-light rounded">{e.title}</div>
       </div>
     ))}
   </div>
@@ -38,14 +38,68 @@ Events.propTypes = {
   events: PropTypes.array.isRequired
 };
 
+const StatusEntry = () => (
+  <div className="sm-flex items-center mb2">
+    <div className="sm-col-2">
+      <div className="bold">2018 IAPD-U</div>
+    </div>
+    <div className="sm-col-8 progress-bar-basic">
+      <div className="dot complete" />
+      <div className="bar complete" />
+      <div className="dot complete" />
+      <div className="bar" />
+      <div className="dot" />
+    </div>
+    <div className="sm-col-2 sm-right-align">
+      <button className="btn btn-primary">Respond</button>
+    </div>
+  </div>
+);
+
+const TaskTable = () => (
+  <table className="table-cms table-fixed">
+    <thead>
+      <tr>
+        <th className="col-2">Document type</th>
+        <th className="col-2">Priority</th>
+        <th className="col-4">Status</th>
+        <th className="col-2">Due date</th>
+        <th className="col-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="align-middle">
+        <td>APD</td>
+        <td>High</td>
+        <td>Awaiting state response</td>
+        <td>ASAP</td>
+        <td>
+          <button className="btn btn-primary btn-small col-12">Respond</button>
+        </td>
+      </tr>
+      <tr className="align-middle">
+        <td>Contract</td>
+        <td>Medium</td>
+        <td>Awaiting state response</td>
+        <td>ASAP</td>
+        <td>
+          <button className="btn btn-primary btn-small col-12">Start</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+);
+
 const StateDash = () => (
   <Container>
     <SectionTitle>My Dashboard</SectionTitle>
     <Collapsible title="My tasks" open>
-      ...
+      <TaskTable />
     </Collapsible>
     <Collapsible title="Current statuses" open>
-      ...
+      <StatusEntry />
+      <StatusEntry />
+      <StatusEntry />
     </Collapsible>
     <div className="sm-flex mxn2">
       <div className="sm-col-6 px2">

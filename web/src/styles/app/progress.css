@@ -1,0 +1,24 @@
+.progress-bar-basic {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+
+  & .dot {
+    background-color: #aaa;
+    max-width: 1.5rem;
+    height: 1.5rem;
+    flex-grow: 1;
+    border-radius: 50%;
+    border: 0.25rem solid #fff;
+  }
+
+  & .bar {
+    background-color: #ddd;
+    flex-grow: 1;
+    height: 3px;
+  }
+
+  & .complete {
+    background-color: var(--blue);
+  }
+}
