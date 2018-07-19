@@ -109,6 +109,20 @@ const initialState = {
   error: ''
 };
 
+const defaults = () => ({
+  assurancesAndCompliance: initialAssurances,
+  incentivePayments: initIncentiveData(),
+  previousActivityExpenses: defaultAPDYearOptions.reduce(
+    (previous, year) => ({
+      ...previous,
+      [year - 2]: getPreviousActivityExpense()
+    }),
+    {}
+  ),
+  previousActivitySummary: '',
+  years: defaultAPDYears
+});
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_APD_POC:
@@ -131,19 +145,7 @@ const reducer = (state = initialState, action) => {
           (acc, apd) => ({
             ...acc,
             [apd.id]: {
-              ...fromAPI(apd, {
-                assurancesAndCompliance: initialAssurances,
-                incentivePayments: initIncentiveData(),
-                previousActivityExpenses: defaultAPDYearOptions.reduce(
-                  (previous, year) => ({
-                    ...previous,
-                    [year - 2]: getPreviousActivityExpense()
-                  }),
-                  {}
-                ),
-                previousActivitySummary: '',
-                years: defaultAPDYears
-              }),
+              ...fromAPI(apd, defaults()),
               yearOptions: defaultAPDYearOptions
             }
           }),
