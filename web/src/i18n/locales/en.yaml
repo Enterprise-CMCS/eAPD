@@ -41,7 +41,7 @@
             state: State
             zip: ZIP
       pointsOfContact:
-        title: Points of Contact
+        title: Main Contact
         labels:
           name: Name
           position: Position
@@ -178,7 +178,7 @@
           helpText: "The activity details must also include a description of three items: how the activity is linked to meaningful use; value proposition to providers, and sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.	Additionally, include diagrams and descriptions of other HIE linkages as needed if they provide more context for how the state will complete the activity."
       alternatives: 
         subheader: "Statement of alternative considerations and supporting justification"
-        helpText: "If no substantive changes have been made to this activity, include a statement referring to the Statement of Alternative Considerations contained in previous versions of the IAPD update or in the SMHP. If substantive changes have been made (or this is a new activity), include a statement describing what alternative considerations were made before selecting the strategy for implementation."
+        helpText: "If no substantive changes have been made to this activity, include a statement referring to the statement of alternative considerations contained in previous versions of the IAPD update or in the SMHP. If substantive changes have been made (or this is a new activity), include a statement describing what alternative considerations were made before selecting the strategy for implementation."
         reminder: "Remember to update the SMHP as necessary with any substantive changes to the approach for implementing EHR incentives."
     goals: 
       title: Needs and Objectives
@@ -291,8 +291,8 @@
         title: "Describe how this activity will support the Industry Standards condition"
       leverage: 
         header: "Leverage"
-        subheader: "State solutions should promote sharing, leverage, and reuse of Medicaid technologies and systems within and among states. States can benefit substantially from the experience and investments of other states through the reuse of components and technologies already developed, consistent with a service-oriented architecture, from publicly available or commercially sold components and products, and from the use of cloud technologies to share infrastructure and applications. CMS commits to work assertively with the states to identify promising state systems that can be leveraged and used by other states. Further, CMS would strongly encourage the states to move to regional or multistate solutions when cost effective, and will seek to support and facilitate such solutions. In addition, CMS will expedite APD approvals for states that are participating in shared development activities with other states, and that are developing components and solutions expressly intended for successful reuse by other states. CMS will also review carefully any proposed investments in sub-state systems when the federal government is asked to share in the costs of updating or maintaining multiple systems performing essentially the same functions within the same state."
-        title: "DDescribe how this activity will support the Leverage condition"
+        subheader: "State solutions should promote sharing, leverage, and reuse of Medicaid technologies and systems within and among states. States can benefit substantially from the experience and investments of other states through the reuse of components and technologies already developed, consistent with a service-oriented architecture, from publicly available or commercially sold components and products, and from the use of cloud technologies to share infrastructure and applications. CMS commits to work assertively with the states to identify promising state systems that can be leveraged and used by other states. Further, CMS would strongly encourage the states to move to regional or multistate solutions when cost effective, and will seek to support and facilitate such solutions. In addition, CMS will expedite APD approvals for states that are participating in shared development activities with other states,and those developing components and solutions expressly intended for successful reuse by other states. CMS will also review carefully any proposed investments in sub-state systems when the federal government is asked to share in the costs of updating or maintaining multiple systems performing essentially the same functions within the same state."
+        title: "Describe how this activity will support the Leverage condition"
       bizResults: 
         header: "Business Results"
         subheader: "Systems should support accurate and timely processing of claims (including claims of eligibility), adjudications, and effective communications with providers, beneficiaries, and the public. Ultimately, the test of an effective and efficient system is whether it supports and enables an effective and efficient business process, producing and communicating the intended operational results with a high degree of reliability and accuracy. It would be inappropriate to provide enhanced federal funding for systems that are unable to support desired business outcomes."
@@ -365,7 +365,7 @@
     total: Total
     summary: 
       title: "Executive Summary"
-      helpText: "If the APD is approved, these program budget tables will be referenced on the CMS approval letter."
+      helpText: "If approved, APD program budget tables listed below will be referenced on the CMS approval letter."
     budgetTable: 
       title: "Program Budget Table"
       helpText: ""
@@ -381,7 +381,7 @@
       grandTotal: Total
   certifyAndSubmit: 
     title: "Certify and Submit"
-    helpText: "Note, this application will be locked upon submission until after a CMS analyst reviews it."
+    helpText: "Complete your APD submission below."
     certify:
       title: "Certify and Submit"
       helpText: Upon submission, you understand this APD submission will be locked from further edits until reviewed by a CMS analyst. If you agree, select the submit button below.
