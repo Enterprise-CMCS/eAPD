@@ -1,6 +1,9 @@
 import { Formik, Field, Form } from 'formik';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
+
+import { updateApd as updateApdAction } from '../actions/apd';
 
 const InputFeedback = ({ children }) => (
   <span className="block red">{children}</span>
@@ -48,15 +51,18 @@ class TextInput extends Component {
   }
 }
 
-const FormikExample = () => (
+const FormikExample = ({ apd, updateApd }) => (
   <div className="app">
     <h3>Form Validation (with Formik) Demo</h3>
     <Formik
-      initialValues={{ email: '', name: 'Bren' }}
+      initialValues={{ email: '', name: apd.overview }}
       validationSchema={Yup.object().shape({
         email: Yup.string()
           .email('Invalid email address')
-          .required('Email is required!')
+          .required('Email is required!'),
+        name: Yup.string()
+          .min(2, "C'mon, your name is longer than that")
+          .required('Name is required.')
       })}
       onSubmit={(values, actions) => {
         console.log(JSON.stringify(values, null, 2));
@@ -64,16 +70,15 @@ const FormikExample = () => (
       }}
       render={({ isSubmitting }) => (
         <Form>
+          <Field name="email" label="Email" component={TextInput} />
           <Field
-            name="email"
-            label="Email"
+            name="name"
+            label="Name"
             component={TextInput}
             onChange={e => {
-              console.log('boom!');
-              console.log(e.target.value);
+              updateApd({ overview: e.target.value });
             }}
           />
-          <Field name="name" label="Name" component={TextInput} />
           <button type="submit" disabled={isSubmitting}>
             Submit
           </button>
@@ -83,4 +88,7 @@ const FormikExample = () => (
   </div>
 );
 
-export default FormikExample;
+const mapStateToProps = ({ apd: { data } }) => ({ apd: data });
+const mapDispatchToProps = { updateApd: updateApdAction };
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormikExample);
