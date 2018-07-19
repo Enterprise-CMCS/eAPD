@@ -17,7 +17,7 @@ import {
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
-import { SELECT_APD, UPDATE_APD } from '../actions/apd';
+import { SAVE_APD_SUCCESS, SELECT_APD, UPDATE_APD } from '../actions/apd';
 
 import {
   arrToObj,
@@ -513,6 +513,30 @@ const reducer = (state = initialState, action) => {
         byKey,
         allKeys: Object.keys(byKey)
       };
+    }
+    case SAVE_APD_SUCCESS: {
+      // When an APD is saved, we should grab any local activities that
+      // don't have IDs and pull their new IDs from the API data.
+      const activitiesWithoutIDs = Object.values(state.byKey).filter(
+        a => !a.id
+      );
+      if (activitiesWithoutIDs.length) {
+        const updates = { byKey: {} };
+        activitiesWithoutIDs.forEach(localActivity => {
+          const { id } = [
+            ...action.data.activities.filter(
+              apdActivity => apdActivity.name === localActivity.name
+            ),
+            {}
+          ][0];
+          if (id) {
+            updates.byKey[localActivity.key] = { id };
+          }
+        });
+
+        return u(updates, state);
+      }
+      return state;
     }
     default:
       return state;

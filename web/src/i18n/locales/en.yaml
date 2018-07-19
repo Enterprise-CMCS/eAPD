@@ -153,6 +153,7 @@
       reminder: "The first activity in this list is Program Administration. Program Administration includes information that pertains to implementing the EHR Incentive program. Examples of information that belongs within this activity includes: State and Contractor costs associated with operating the EHR incentive program and SLR Enhancements/Upgrades."
     addActivityButtonText: "Add activity"
     noActivityMessage: "There are no activities. Add one below."
+    noNameYet: (No name provided yet)
     delete:
       text: Remove Activity
       confirm:
