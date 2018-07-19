@@ -10,6 +10,7 @@
 @import 'app/form';
 @import 'app/layout';
 @import 'app/misc';
+@import 'app/progress';
 @import 'app/sidebar';
 @import 'app/spacing';
 @import 'app/table';
