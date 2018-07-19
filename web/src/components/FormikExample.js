@@ -51,24 +51,22 @@ class TextInput extends Component {
   }
 }
 
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required!'),
+  name: Yup.string()
+    .min(2, "C'mon, your name is longer than that")
+    .required('Name is required.')
+});
+
 const FormikExample = ({ apd, updateApd }) => (
   <div className="app">
     <h3>Form Validation (with Formik) Demo</h3>
     <Formik
       initialValues={{ email: '', name: apd.overview }}
-      validationSchema={Yup.object().shape({
-        email: Yup.string()
-          .email('Invalid email address')
-          .required('Email is required!'),
-        name: Yup.string()
-          .min(2, "C'mon, your name is longer than that")
-          .required('Name is required.')
-      })}
-      onSubmit={(values, actions) => {
-        console.log(JSON.stringify(values, null, 2));
-        actions.setSubmitting(false);
-      }}
-      render={({ isSubmitting }) => (
+      validationSchema={validationSchema}
+      render={() => (
         <Form>
           <Field name="email" label="Email" component={TextInput} />
           <Field
@@ -79,9 +77,6 @@ const FormikExample = ({ apd, updateApd }) => (
               updateApd({ overview: e.target.value });
             }}
           />
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
         </Form>
       )}
     />
