@@ -31,6 +31,20 @@ jobs:
           paths:
             - api/node_modules
 
+  web dependency vulnerability scan:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
+      - run:
+          name: vulnerability scan
+          working_directory: ~/project/web
+          command: |
+            npx snyk auth $SNYK_TOKEN
+            npx snyk test
+
   web lint:
     docker:
       - image: node:8
@@ -75,6 +89,20 @@ jobs:
             docker create -v /openapi --name openapi alpine /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
+
+  api dependency vulnerability scan:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - run:
+          name: vulnerability scan
+          working_directory: ~/project/api
+          command: |
+            npx snyk auth $SNYK_TOKEN
+            npx snyk test
 
   api lint:
     docker:
@@ -231,6 +259,9 @@ workflows:
   web:
     jobs:
       - prepare dependencies cache
+      - web dependency vulnerability scan:
+          requires:
+            - prepare dependencies cache
       - web lint:
           requires:
             - prepare dependencies cache
@@ -238,6 +269,9 @@ workflows:
           requires:
             - prepare dependencies cache
       - validate openapi:
+          requires:
+            - prepare dependencies cache
+      - api dependency vulnerability scan:
           requires:
             - prepare dependencies cache
       - api lint:
