@@ -32,7 +32,7 @@ rm -rf seeds/test
 rm seeds/development.js
 rm seeds/test.js
 rm seeds/shared/delete-everything.js
-npm ci
+npm ci --only=production
 cd ..
 
 cf login -a $STAGING_CF_API -u $STAGING_CF_USER -p $STAGING_CF_PASSWORD -o $STAGING_CF_ORG -s $STAGING_CF_SPACE
