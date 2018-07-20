@@ -2,7 +2,7 @@ import { push } from 'react-router-redux';
 
 import { notify } from './notification';
 import axios from '../util/api';
-import { applyToNumbers } from '../util';
+import { toAPI } from '../util/serialization/apd';
 
 export const ADD_APD_KEY_PERSON = 'ADD_APD_KEY_PERSON';
 export const ADD_APD_POC = 'ADD_APD_POC';
@@ -114,149 +114,9 @@ export const notifyNetError = (action, error) => {
 export const saveApd = () => (dispatch, state) => {
   dispatch(requestSave());
 
-  const {
-    apd: { data: updatedApd },
-    activities: { byKey: activitiesByKey }
-  } = state();
+  const { apd: { data: updatedApd }, activities } = state();
 
-  const incentivePayments = Object.entries(
-    updatedApd.incentivePayments.ehAmt
-  ).map(([year, quarters]) => ({
-    year,
-    q1: {
-      ehPayment: quarters[1],
-      ehCount: updatedApd.incentivePayments.ehCt[year][1],
-      epPayment: updatedApd.incentivePayments.epAmt[year][1],
-      epCount: updatedApd.incentivePayments.epCt[year][1]
-    },
-    q2: {
-      ehPayment: quarters[2],
-      ehCount: updatedApd.incentivePayments.ehCt[year][2],
-      epPayment: updatedApd.incentivePayments.epAmt[year][2],
-      epCount: updatedApd.incentivePayments.epCt[year][2]
-    },
-    q3: {
-      ehPayment: quarters[3],
-      ehCount: updatedApd.incentivePayments.ehCt[year][3],
-      epPayment: updatedApd.incentivePayments.epAmt[year][3],
-      epCount: updatedApd.incentivePayments.epCt[year][3]
-    },
-    q4: {
-      ehPayment: quarters[4],
-      ehCount: updatedApd.incentivePayments.ehCt[year][4],
-      epPayment: updatedApd.incentivePayments.epAmt[year][4],
-      epCount: updatedApd.incentivePayments.epCt[year][4]
-    }
-  }));
-
-  const apd = {
-    activities: [],
-    federalCitations: updatedApd.assurancesAndCompliance,
-    incentivePayments,
-    narrativeHIE: updatedApd.hieNarrative,
-    narrativeHIT: updatedApd.hitNarrative,
-    narrativeMMIS: updatedApd.mmisNarrative,
-    pointsOfContact: updatedApd.pointsOfContact,
-    previousActivityExpenses: Object.entries(
-      updatedApd.previousActivityExpenses
-    ).map(([year, o]) => ({
-      year,
-      hie: o.hie,
-      hit: o.hit,
-      mmis: o.mmis
-    })),
-    previousActivitySummary: updatedApd.previousActivitySummary,
-    programOverview: updatedApd.overview,
-    stateProfile: updatedApd.stateProfile,
-    years: updatedApd.years
-  };
-
-  Object.keys(activitiesByKey).forEach(key => {
-    const activity = activitiesByKey[key];
-    apd.activities.push({
-      id: activity.id,
-      name: activity.name,
-      fundingSource: activity.fundingSource,
-      summary: activity.descShort,
-      description: activity.descLong,
-      alternatives: activity.altApproach,
-      costAllocationNarrative: {
-        methodology: activity.costAllocationDesc,
-        otherSources: activity.otherFundingDesc
-      },
-      costAllocation: Object.entries(activity.costAllocation).map(
-        ([year, allocation]) => ({
-          federalPercent: +allocation.ffp.federal / 100,
-          statePercent: +allocation.ffp.state / 100,
-          otherAmount: +allocation.other,
-          year
-        })
-      ),
-      goals: activity.goals.map(g => ({
-        id: g.id,
-        description: g.desc,
-        objective: g.obj
-      })),
-      schedule: activity.milestones.map(m => ({
-        id: m.id,
-        milestone: m.name,
-        plannedStart: m.start || undefined,
-        plannedEnd: m.end || undefined
-      })),
-      statePersonnel: activity.statePersonnel.map(s => ({
-        id: s.id,
-        title: s.title,
-        description: s.desc,
-        years: Object.keys(s.years).map(year => ({
-          cost: +s.years[year].amt,
-          fte: +s.years[year].perc / 100,
-          year
-        }))
-      })),
-      contractorResources: activity.contractorResources.map(c => ({
-        id: c.id,
-        name: c.name,
-        description: c.desc,
-        start: c.start || undefined,
-        end: c.end || undefined,
-        years: Object.keys(c.years).map(year => ({
-          cost: +c.years[year],
-          year
-        }))
-      })),
-      expenses: activity.expenses.map(e => ({
-        id: e.id,
-        category: e.category,
-        description: e.desc,
-        entries: Object.keys(e.years).map(year => ({
-          amount: +e.years[year],
-          year
-        }))
-      })),
-      standardsAndConditions: {
-        businessResults: activity.standardsAndConditions.bizResults,
-        documentation: activity.standardsAndConditions.documentation,
-        industryStandards: activity.standardsAndConditions.industry,
-        interoperability: activity.standardsAndConditions.interoperability,
-        keyPersonnel: activity.standardsAndConditions.keyPersonnel,
-        leverage: activity.standardsAndConditions.leverage,
-        minimizeCost: activity.standardsAndConditions.minimizeCost,
-        mitigationStrategy: activity.standardsAndConditions.mitigation,
-        modularity: activity.standardsAndConditions.modularity,
-        mita: activity.standardsAndConditions.mita,
-        reporting: activity.standardsAndConditions.reporting
-      },
-      quarterlyFFP: Object.entries(activity.quarterlyFFP).map(
-        ([year, ffp]) => ({
-          q1: applyToNumbers(ffp[1], v => v / 100),
-          q2: applyToNumbers(ffp[2], v => v / 100),
-          q3: applyToNumbers(ffp[3], v => v / 100),
-          q4: applyToNumbers(ffp[4], v => v / 100),
-          year
-        })
-      )
-    });
-  });
+  const apd = toAPI(updatedApd, activities);
 
   return axios
     .put(`/apds/${updatedApd.id}`, apd)
