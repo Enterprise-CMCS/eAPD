@@ -150,7 +150,7 @@
     list: 
       title: "Activity List"
       helpText: "Examples of individual activities include: Auditing, Outreach, Environmental Scans, HIE Registry Development, CQM Database Development, Data and Analytics, HIE Onboarding, etc."
-      reminder: "The first activity in this list is Program Administration. Program Administration includes information that pertains to implementing the EHR Incentive program. Examples of information that belongs within this activity includes: State and Contractor costs associated with operating the EHR incentive program and SLR Enhancements/Upgrades."
+      reminder: "The first activity in this list is program administration. Program Administration includes information that pertains to implementing the EHR Incentive program. Examples of information that belongs within this activity includes: State and Contractor costs associated with operating the EHR incentive program and SLR enhancements/upgrades."
     addActivityButtonText: "Add activity"
     noActivityMessage: "There are no activities. Add one below."
     noNameYet: (No name provided yet)
@@ -190,7 +190,7 @@
       objective: 
         title: "Objective (How the the goal will be achieved)"
         helpText: "Include a brief description of how the state will measure progress toward each goal identified."
-      addGoalButtonText: "Add goal"
+      addGoalButtonText: "Add a goal"
     schedule: 
       title: "Activity Schedule"
       subheader: "List major milestones the state is working towards as part of this activity."
@@ -207,7 +207,7 @@
     contractorResources: 
       title: "Contract Resources"
       subheader: "If there are contract resources, outline contracts by contract or vendor name. This section is similar to the existing IAPD template contracts section."
-      reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. If the vendor name is unknown or do not know specific contract (vendor) names, generalize by resource name (e.g. Computer resources/TBD)"
+      reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. If the vendor name is unknown or do not know specific contract (vendor) names, generalize by resource name (e.g. computer resources/TBD)"
       noDataNotice: "There are no contracts assigned to this activity."
       labels: 
         entryNumber: "#"
