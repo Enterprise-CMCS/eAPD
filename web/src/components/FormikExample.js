@@ -1,5 +1,5 @@
 import { Formik, Field, Form } from 'formik';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -67,7 +67,7 @@ const FormikExample = ({ apd, updateApd }) => (
       initialValues={{ email: '', name: apd.overview }}
       validationSchema={validationSchema}
       render={() => (
-        <Form>
+        <Fragment>
           <Field name="email" label="Email" component={TextInput} />
           <Field
             name="name"
@@ -77,7 +77,7 @@ const FormikExample = ({ apd, updateApd }) => (
               updateApd({ overview: e.target.value });
             }}
           />
-        </Form>
+        </Fragment>
       )}
     />
   </div>
