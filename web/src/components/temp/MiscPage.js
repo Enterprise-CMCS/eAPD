@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Container from '../Container';
-import FormikExample from '../FormikExample';
+import FormikExample from '../FormikExample2';
 
 const MiscPage = () => (
   <Container>
