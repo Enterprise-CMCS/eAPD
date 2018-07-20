@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import { updateApd as updateApdAction } from '../actions/apd';
 import { Input } from '../components/Inputs';
-import { Input as InputV } from '../components/InputsWithValidation';
+import { Input as InputValidate } from '../components/InputsWithValidation';
 import { t } from '../i18n';
 
 class ApdStateProfile extends Component {
@@ -23,7 +23,7 @@ class ApdStateProfile extends Component {
       <Fragment>
         <h3 className="mt0">{t(`${dirTRoot}.title`)}</h3>
         <div className="mb3">
-          <InputV
+          <InputValidate
             name="apd-state-profile-mdname"
             label={t(`${dirTRoot}.labels.name`)}
             value={medicaidDirector.name}
