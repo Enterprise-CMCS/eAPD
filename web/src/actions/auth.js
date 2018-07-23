@@ -15,7 +15,10 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const requestAuthCheck = () => ({ type: AUTH_CHECK_REQUEST });
-export const completeAuthCheck = () => ({ type: AUTH_CHECK_SUCCESS });
+export const completeAuthCheck = user => ({
+  type: AUTH_CHECK_SUCCESS,
+  data: user
+});
 export const failAuthCheck = () => ({ type: AUTH_CHECK_FAILURE });
 
 export const requestLogin = () => ({ type: LOGIN_REQUEST });
@@ -47,8 +50,8 @@ export const checkAuth = () => dispatch => {
 
   return axios
     .get(`${API_URL}/me`)
-    .then(() => {
-      dispatch(completeAuthCheck());
+    .then(req => {
+      dispatch(completeAuthCheck(req.data));
       dispatch(fetchApd());
     })
     .catch(() => dispatch(failAuthCheck()));

@@ -1,3 +1,4 @@
+import { AUTH_CHECK_SUCCESS } from '../actions/auth';
 import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
@@ -22,6 +23,7 @@ const user = (state = initialState, action) => {
     case GET_USER_REQUEST:
       return { ...state, fetching: true, error: '' };
     case GET_USER_SUCCESS:
+    case AUTH_CHECK_SUCCESS:
       return {
         ...state,
         fetching: false,
