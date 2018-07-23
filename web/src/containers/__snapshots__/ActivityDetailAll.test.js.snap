@@ -41,7 +41,7 @@ ShallowWrapper {
           <Connect(ActivityDetailStatePersonnel)
             aKey="activity-key"
           />,
-          <Connect(ActivityDetailContractorExpenses)
+          <Connect(ContractorExpenses)
             aKey="activity-key"
           />,
           <Connect(ActivityDetailExpenses)
@@ -195,7 +195,7 @@ ShallowWrapper {
             <Connect(ActivityDetailStatePersonnel)
               aKey="activity-key"
             />,
-            <Connect(ActivityDetailContractorExpenses)
+            <Connect(ContractorExpenses)
               aKey="activity-key"
             />,
             <Connect(ActivityDetailExpenses)

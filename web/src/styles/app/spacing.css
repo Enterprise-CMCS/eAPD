@@ -24,6 +24,11 @@
   margin-top: var(--space-tiny);
 }
 
+.my-tiny {
+  margin-bottom: var(--space-tiny);
+  margin-top: var(--space-tiny);
+}
+
 .px-tiny {
   padding-left: var(--space-tiny);
   padding-right: var(--space-tiny);
