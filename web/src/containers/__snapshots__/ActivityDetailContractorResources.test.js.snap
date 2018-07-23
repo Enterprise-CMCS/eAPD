@@ -118,7 +118,7 @@ ShallowWrapper {
                   <InputHolder
                     hideLabel={true}
                     id="contractor-contractor key-desc"
-                    label="Describe services contractor will provide"
+                    label="Describe the services each contractor will provide."
                     name="contractor-contractor key-desc"
                     onChange={[Function]}
                     rows="3"
@@ -292,7 +292,7 @@ ShallowWrapper {
                   <InputHolder
                     hideLabel={true}
                     id="contractor-contractor key-desc"
-                    label="Describe services contractor will provide"
+                    label="Describe the services each contractor will provide."
                     name="contractor-contractor key-desc"
                     onChange={[Function]}
                     rows="3"
@@ -446,7 +446,7 @@ ShallowWrapper {
                     <InputHolder
                       hideLabel={true}
                       id="contractor-contractor key-desc"
-                      label="Describe services contractor will provide"
+                      label="Describe the services each contractor will provide."
                       name="contractor-contractor key-desc"
                       onChange={[Function]}
                       rows="3"
@@ -741,7 +741,7 @@ ShallowWrapper {
                       <InputHolder
                         hideLabel={true}
                         id="contractor-contractor key-desc"
-                        label="Describe services contractor will provide"
+                        label="Describe the services each contractor will provide."
                         name="contractor-contractor key-desc"
                         onChange={[Function]}
                         rows="3"
@@ -855,7 +855,7 @@ ShallowWrapper {
                         <InputHolder
                           hideLabel={true}
                           id="contractor-contractor key-desc"
-                          label="Describe services contractor will provide"
+                          label="Describe the services each contractor will provide."
                           name="contractor-contractor key-desc"
                           onChange={[Function]}
                           rows="3"
@@ -1004,7 +1004,7 @@ ShallowWrapper {
                         "children": <InputHolder
                           hideLabel={true}
                           id="contractor-contractor key-desc"
-                          label="Describe services contractor will provide"
+                          label="Describe the services each contractor will provide."
                           name="contractor-contractor key-desc"
                           onChange={[Function]}
                           rows="3"
@@ -1022,7 +1022,7 @@ ShallowWrapper {
                         "props": Object {
                           "hideLabel": true,
                           "id": "contractor-contractor key-desc",
-                          "label": "Describe services contractor will provide",
+                          "label": "Describe the services each contractor will provide.",
                           "name": "contractor-contractor key-desc",
                           "onChange": [Function],
                           "rows": "3",
@@ -1409,7 +1409,7 @@ ShallowWrapper {
                     <InputHolder
                       hideLabel={true}
                       id="contractor-contractor key-desc"
-                      label="Describe services contractor will provide"
+                      label="Describe the services each contractor will provide."
                       name="contractor-contractor key-desc"
                       onChange={[Function]}
                       rows="3"
@@ -1583,7 +1583,7 @@ ShallowWrapper {
                     <InputHolder
                       hideLabel={true}
                       id="contractor-contractor key-desc"
-                      label="Describe services contractor will provide"
+                      label="Describe the services each contractor will provide."
                       name="contractor-contractor key-desc"
                       onChange={[Function]}
                       rows="3"
@@ -1737,7 +1737,7 @@ ShallowWrapper {
                       <InputHolder
                         hideLabel={true}
                         id="contractor-contractor key-desc"
-                        label="Describe services contractor will provide"
+                        label="Describe the services each contractor will provide."
                         name="contractor-contractor key-desc"
                         onChange={[Function]}
                         rows="3"
@@ -2032,7 +2032,7 @@ ShallowWrapper {
                         <InputHolder
                           hideLabel={true}
                           id="contractor-contractor key-desc"
-                          label="Describe services contractor will provide"
+                          label="Describe the services each contractor will provide."
                           name="contractor-contractor key-desc"
                           onChange={[Function]}
                           rows="3"
@@ -2146,7 +2146,7 @@ ShallowWrapper {
                           <InputHolder
                             hideLabel={true}
                             id="contractor-contractor key-desc"
-                            label="Describe services contractor will provide"
+                            label="Describe the services each contractor will provide."
                             name="contractor-contractor key-desc"
                             onChange={[Function]}
                             rows="3"
@@ -2295,7 +2295,7 @@ ShallowWrapper {
                           "children": <InputHolder
                             hideLabel={true}
                             id="contractor-contractor key-desc"
-                            label="Describe services contractor will provide"
+                            label="Describe the services each contractor will provide."
                             name="contractor-contractor key-desc"
                             onChange={[Function]}
                             rows="3"
@@ -2313,7 +2313,7 @@ ShallowWrapper {
                           "props": Object {
                             "hideLabel": true,
                             "id": "contractor-contractor key-desc",
-                            "label": "Describe services contractor will provide",
+                            "label": "Describe the services each contractor will provide.",
                             "name": "contractor-contractor key-desc",
                             "onChange": [Function],
                             "rows": "3",
