@@ -9,7 +9,7 @@ import {
 } from '../actions/activities';
 
 import {
-  raw as ActivityDetailContractorExpenses,
+  raw as ContractorExpenses,
   mapStateToProps,
   mapDispatchToProps
 } from './ActivityDetailContractorResources';
@@ -46,26 +46,26 @@ describe('the activities contractors component', () => {
   });
 
   test('renders correctly', () => {
-    const component = shallow(<ActivityDetailContractorExpenses {...props} />);
+    const component = shallow(<ContractorExpenses {...props} />);
     expect(component).toMatchSnapshot();
   });
 
   test('adds a new contractor', () => {
-    const component = shallow(<ActivityDetailContractorExpenses {...props} />);
+    const component = shallow(<ContractorExpenses {...props} />);
     component.find('button.btn-primary').simulate('click');
     expect(props.addContractor.calledWith('activity key')).toBeTruthy();
   });
 
   test('removes a contractor', () => {
-    const component = shallow(<ActivityDetailContractorExpenses {...props} />);
-    component.find('button.border-silver').simulate('click');
+    const component = shallow(<ContractorExpenses {...props} />);
+    component.find('button.border-black').simulate('click');
     expect(
       props.removeContractor.calledWith('activity key', 'contractor key')
     ).toBeTruthy();
   });
 
   test('handles changing contractor info', () => {
-    const component = shallow(<ActivityDetailContractorExpenses {...props} />);
+    const component = shallow(<ContractorExpenses {...props} />);
 
     const nameInput = component
       .find('InputHolder')
@@ -89,7 +89,7 @@ describe('the activities contractors component', () => {
   });
 
   test('handles changing contractor expense info', () => {
-    const component = shallow(<ActivityDetailContractorExpenses {...props} />);
+    const component = shallow(<ContractorExpenses {...props} />);
     const yearInput = component
       .find('InputHolder')
       .filterWhere(n => n.props().value === 100);
