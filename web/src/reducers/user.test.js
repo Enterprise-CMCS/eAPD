@@ -20,19 +20,23 @@ describe('user reducer', () => {
     });
   });
 
-  it('should handle a successful user fetch', () => {
-    expect(
-      user(initialState, {
-        type: 'GET_USER_SUCCESS',
-        data: { this: 'is', my: 'user' }
-      })
-    ).toEqual({
-      ...initialState,
-      fetching: false,
-      error: '',
-      loaded: true,
-      data: { this: 'is', my: 'user' }
-    });
+  it('should handle a successful user fetch, user check, or login', () => {
+    ['AUTH_CHECK_SUCCESS', 'GET_USER_SUCCESS', 'LOGIN_SUCCESS'].forEach(
+      action => {
+        expect(
+          user(initialState, {
+            type: action,
+            data: { this: 'is', my: 'user' }
+          })
+        ).toEqual({
+          ...initialState,
+          fetching: false,
+          error: '',
+          loaded: true,
+          data: { this: 'is', my: 'user' }
+        });
+      }
+    );
   });
 
   it('should handle an unsuccessful user fetch', () => {
@@ -76,5 +80,11 @@ describe('user reducer', () => {
       loaded: false,
       error: 'booped'
     });
+  });
+
+  it('should handle a logout', () => {
+    expect(user({ not: 'initial state' }, { type: 'LOGOUT_SUCCESS' })).toEqual(
+      initialState
+    );
   });
 });

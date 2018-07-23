@@ -36,11 +36,11 @@ describe('auth actions', () => {
 
     it('creates LOGIN_SUCCESS after successful auth', () => {
       const store = mockStore({});
-      fetchMock.onPost().reply(200);
+      fetchMock.onPost().reply(200, { moop: 'moop' });
 
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_SUCCESS },
+        { type: actions.LOGIN_SUCCESS, data: { moop: 'moop' } },
         { type: apdActions.GET_APD_REQUEST }
       ];
 

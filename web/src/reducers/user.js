@@ -1,4 +1,8 @@
-import { AUTH_CHECK_SUCCESS } from '../actions/auth';
+import {
+  AUTH_CHECK_SUCCESS,
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS
+} from '../actions/auth';
 import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
@@ -22,8 +26,9 @@ const user = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_REQUEST:
       return { ...state, fetching: true, error: '' };
-    case GET_USER_SUCCESS:
     case AUTH_CHECK_SUCCESS:
+    case GET_USER_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -32,6 +37,8 @@ const user = (state = initialState, action) => {
       };
     case GET_USER_FAILURE:
       return { ...state, fetching: false, error: action.error };
+    case LOGOUT_SUCCESS:
+      return initialState;
     case UPDATE_USER_REQUEST:
       return { ...state, fetching: true, error: '' };
     case UPDATE_USER_SUCCESS:
