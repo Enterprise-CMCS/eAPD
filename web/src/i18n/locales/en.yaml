@@ -380,7 +380,7 @@
       stateShare: State
       grandTotal: Total
   certifyAndSubmit: 
-    title: "Certify and Submit"
+    title: "Submission"
     helpText: "Complete your APD submission below."
     certify:
       title: "Certify and Submit"
