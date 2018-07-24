@@ -37,10 +37,31 @@ tap.test('me GET endpoint', async endpointTest => {
     getEndpoint(app);
     const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][2];
 
-    meHandler({ user: { id: 'user-id' } }, res);
+    const get = sinon.stub();
+    get.withArgs('id').returns('state id');
+    get.withArgs('name').returns('state name');
+
+    const userModel = {
+      related: sinon
+        .stub()
+        .withArgs('state')
+        .returns({ get })
+    };
+
+    const user = {
+      id: 'user-id',
+      model: userModel
+    };
+
+    meHandler({ user }, res);
 
     handlerTest.ok(
-      res.send.calledWith(sinon.match({ id: 'user-id' })),
+      res.send.calledWith(
+        sinon.match({
+          id: 'user-id',
+          state: { id: 'state id', name: 'state name' }
+        })
+      ),
       'sends back the user object'
     );
   });
