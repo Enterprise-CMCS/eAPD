@@ -43,7 +43,7 @@ class ContractorExpenses extends Component {
 
   handleDrop = index => files => {
     const { activity, updateActivity } = this.props;
-    const { files: existingFiles } = activity.contractorResources[index];
+    const existingFiles = activity.contractorResources[index].files || [];
     const newFiles = files.map(({ name, preview, size, type }) => ({
       name,
       preview,
@@ -51,13 +51,8 @@ class ContractorExpenses extends Component {
       type
     }));
 
-    const updates = {
-      contractorResources: {
-        [index]: { files: [...existingFiles, ...newFiles] }
-      }
-    };
-
-    updateActivity(activity.key, updates);
+    const updates = { [index]: { files: [...existingFiles, ...newFiles] } };
+    updateActivity(activity.key, { contractorResources: updates });
   };
 
   render() {
