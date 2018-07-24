@@ -67,7 +67,7 @@
         helpText: "Provide a brief, high level summary of the state's program, history, and future vision. Specific activities for the program will be explained in the program activities section of this update."
     hit: 
       title: "HIT Overview"
-      helpText: "Briefly summarize planned HIT funded activities contained within this APD, ask for more specific details later."
+      helpText: "Briefly summarize planned HIT funded activities contained within this APD. Additional details will be provided later."
     hie: 
       title: "HIE Overview"
       helpText: >-
