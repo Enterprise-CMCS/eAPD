@@ -181,12 +181,34 @@ tap.test('authentication setup', async authTest => {
     res.send.returns(res);
     res.status.returns(res);
 
-    post({ user: { id: 'test-user-id' } }, res);
+    const state = sinon.stub();
+    state.withArgs('id').returns('state id');
+    state.withArgs('name').returns('state name');
+
+    const req = {
+      user: {
+        im: 'weasel',
+        ir: 'baboon',
+        model: {
+          related: sinon
+            .stub()
+            .withArgs('state')
+            .returns({ get: state })
+        }
+      }
+    };
+
+    post(req, res);
 
     postTest.ok(res.status.calledOnce, 'an HTTP status is set once');
     postTest.ok(res.status.calledWith(200), 'sets a 200 HTTP status');
     postTest.ok(
-      res.send.calledWith({ id: 'test-user-id' }),
+      res.send.calledWith({
+        im: 'weasel',
+        ir: 'baboon',
+        model: undefined,
+        state: { id: 'state id', name: 'state name' }
+      }),
       'HTTP body is set to the user ID'
     );
     postTest.ok(res.end.calledOnce, 'response is ended one time');
