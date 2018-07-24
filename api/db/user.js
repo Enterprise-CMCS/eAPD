@@ -28,7 +28,7 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
 
     async apds() {
       logger.silly('getting user apds');
-      if (!this.relations.state || !this.relations.state.apds) {
+      if (!this.relations.state || !this.relations.state.relations.apds) {
         logger.silly('user apds are not loaded yet... loading them');
         await this.load('state.apds');
       }

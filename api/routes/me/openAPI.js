@@ -24,7 +24,21 @@ const openAPI = {
                 description: `User's unique ID, used internally and for identifying the user when interacting with the API`
               },
               role: {},
-              state: {},
+              state: {
+                type: 'object',
+                description:
+                  'The state/territory/district that this user is assigned to',
+                properties: {
+                  id: {
+                    type: 'string',
+                    description: 'Lowercase 2-letter code'
+                  },
+                  name: {
+                    type: 'string',
+                    description: 'State/territory/district full name'
+                  }
+                }
+              },
               username: {
                 type: 'string',
                 description: `User's unique username (email address)`
