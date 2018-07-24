@@ -55,6 +55,7 @@ const newContractor = years => ({
   desc: '',
   start: '',
   end: '',
+  files: [],
   years: arrToObj(years, contractorDefaultYear())
 });
 

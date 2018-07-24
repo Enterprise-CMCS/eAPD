@@ -1,11 +1,12 @@
 import React from 'react';
 
-import FormFieldTest from './FormFieldTest';
 import Container from '../Container';
+import ContractorResources from '../../containers/ActivityDetailContractorResources';
 
 const MiscPage = () => (
   <Container>
-    <FormFieldTest />
+    <h1>Misc UI bits for testing...</h1>
+    <ContractorResources aKey={123} />
   </Container>
 );
 
