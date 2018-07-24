@@ -11,13 +11,17 @@ module.exports = (
 
     const user = await userModel
       .query('whereRaw', 'LOWER(email) = ?', [username.toLowerCase()])
-      .fetch();
+      .fetch({ withRelated: ['state'] });
 
     if (user && (await bcrypt.compare(password, user.get('password')))) {
       logger.verbose(`authenticated user [${username}]`);
       done(null, {
         username: user.get('email'),
-        id: user.get('id')
+        id: user.get('id'),
+        role: user.get('auth_role'),
+        state: user.get('state_id'),
+        activities: await user.activities(),
+        model: user
       });
     } else {
       logger.verbose(`no user found or password mismatch for [${username}]`);
@@ -25,7 +29,6 @@ module.exports = (
     }
   } catch (e) {
     logger.error(e);
-    console.log(e);
     done('Database error');
   }
 };
