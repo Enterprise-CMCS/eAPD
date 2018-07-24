@@ -105,7 +105,14 @@ tap.test('local authentication', async authTest => {
     get.withArgs('email').returns('hello@world');
     get.withArgs('password').returns('test-password');
     get.withArgs('id').returns(57);
-    userModel.fetch.resolves({ get });
+    get.withArgs('auth_role').returns('do a barrel role');
+    get.withArgs('state_id').returns('liquid');
+
+    const model = {
+      activities: sinon.stub().resolves('play fetch'),
+      get
+    };
+    userModel.fetch.resolves(model);
     bcrypt.compare.resolves(true);
 
     await auth('user', 'password', doneCallback);
@@ -128,7 +135,14 @@ tap.test('local authentication', async authTest => {
 
     validTest.equal(doneCallback.callCount, 1, 'called done callback once');
     validTest.ok(
-      doneCallback.calledWith(null, { username: 'hello@world', id: 57 }),
+      doneCallback.calledWith(null, {
+        username: 'hello@world',
+        id: 57,
+        role: 'do a barrel role',
+        state: 'liquid',
+        activities: 'play fetch',
+        model
+      }),
       'did not get an error message, did get a user object'
     );
   });

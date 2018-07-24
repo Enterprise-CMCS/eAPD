@@ -17,7 +17,9 @@ module.exports.deserializeUser = async (
 ) => {
   try {
     logger.silly(`attempting to deserialize a user`, userID);
-    const user = await userModel.where({ id: userID }).fetch();
+    const user = await userModel
+      .where({ id: userID })
+      .fetch({ withRelated: ['state'] });
     if (user) {
       logger.silly(`successfully deserialized the user`);
       done(null, {

@@ -30,7 +30,7 @@ tap.test('own-info endpoint | GET /me', async meTests => {
         id: 2000,
         username: 'all-permissions-and-state',
         role: 'admin',
-        state: 'mn',
+        state: { id: 'mn', name: 'Minnesota' },
         activities: [
           'add-users',
           'create-draft',

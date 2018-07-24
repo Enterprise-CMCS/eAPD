@@ -36,11 +36,11 @@ describe('auth actions', () => {
 
     it('creates LOGIN_SUCCESS after successful auth', () => {
       const store = mockStore({});
-      fetchMock.onPost().reply(200);
+      fetchMock.onPost().reply(200, { moop: 'moop' });
 
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_SUCCESS },
+        { type: actions.LOGIN_SUCCESS, data: { moop: 'moop' } },
         { type: apdActions.GET_APD_REQUEST }
       ];
 
@@ -86,13 +86,13 @@ describe('auth actions', () => {
       fetchMock.reset();
     });
 
-    it('creates LOGIN_SUCCESS after successful auth', () => {
+    it('creates AUTH_CHEK_SUCCESS after successful auth and loads APDs', () => {
       const store = mockStore({});
-      fetchMock.onGet().reply(200);
+      fetchMock.onGet().reply(200, { name: 'bloop' });
 
       const expectedActions = [
         { type: actions.AUTH_CHECK_REQUEST },
-        { type: actions.AUTH_CHECK_SUCCESS },
+        { type: actions.AUTH_CHECK_SUCCESS, data: { name: 'bloop' } },
         { type: apdActions.GET_APD_REQUEST }
       ];
 
@@ -101,7 +101,7 @@ describe('auth actions', () => {
       });
     });
 
-    it('creates LOGIN_FAILURE after unsuccessful auth', () => {
+    it('creates AUTH_CHECK_FAILURE after unsuccessful auth and does not load APDs', () => {
       const store = mockStore({});
       fetchMock.onGet().reply(403);
 
