@@ -46,6 +46,7 @@
     "cors": "^2.8.4",
     "dotenv": "^5.0.0",
     "express": "^4.16.2",
+    "fs-blob-store": "^5.2.1",
     "joi": "^13.1.2",
     "knex": "^0.14.4",
     "lodash.isequal": "^4.5.0",
@@ -70,6 +71,7 @@
     "prettier": "^1.10.2",
     "request": "^2.83.0",
     "sinon": "^4.4.2",
+    "stream-mock": "^1.2.0",
     "tap": "^11.1.1"
   }
 }
