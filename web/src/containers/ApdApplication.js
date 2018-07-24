@@ -15,16 +15,14 @@ import TopBtns from './TopBtns';
 import StateProfile from '../components/ApdStateProfile';
 import ProposedBudget from '../components/ProposedBudget';
 
-const PLACE = { id: 'tx', name: 'Texas' };
-
-const ApdApplication = ({ apdSelected }) => {
+const ApdApplication = ({ apdSelected, place }) => {
   if (!apdSelected) {
     return <Redirect to="/" />;
   }
 
   return (
     <div className="site-body">
-      <Sidebar place={PLACE} />
+      <Sidebar place={place} />
       <div className="site-main p2 sm-p4 md-px0">
         <TopBtns />
         <StateProfile />
@@ -42,9 +40,13 @@ const ApdApplication = ({ apdSelected }) => {
 };
 
 ApdApplication.propTypes = {
-  apdSelected: PropTypes.bool.isRequired
+  apdSelected: PropTypes.bool.isRequired,
+  place: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ apd: { data } }) => ({ apdSelected: !!data.id });
+const mapStateToProps = ({ apd: { data }, user: { data: { state } } }) => ({
+  apdSelected: !!data.id,
+  place: state
+});
 
 export default connect(mapStateToProps)(ApdApplication);
