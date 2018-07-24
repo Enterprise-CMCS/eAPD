@@ -38,7 +38,6 @@ const getBlobStore = (type, path) => {
 };
 
 logger.silly('setting up...');
-// const store = getBlobStore(process.env.STORE_TYPE, process.env.STORE_PATH);
 
 class Store {
   constructor(store) {
