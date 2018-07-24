@@ -113,7 +113,17 @@ tap.test('login endpoint | /auth/login', async loginTest => {
         ),
         'sends an http-only session cookie'
       );
-      validTest.same(body, { id: 2000 }, 'sends back the user ID');
+      validTest.match(
+        body,
+        {
+          activities: Array,
+          id: 2000,
+          role: 'admin',
+          state: { id: 'mn', name: 'Minnesota' },
+          username: 'all-permissions-and-state'
+        },
+        'sends back the user'
+      );
     }
   );
 
@@ -135,7 +145,17 @@ tap.test('login endpoint | /auth/login', async loginTest => {
         ),
         'sends an http-only session cookie'
       );
-      validTest.same(body, { id: 2000 }, 'sends back the user ID');
+      validTest.match(
+        body,
+        {
+          activities: Array,
+          id: 2000,
+          role: 'admin',
+          state: { id: 'mn', name: 'Minnesota' },
+          username: 'all-permissions-and-state'
+        },
+        'sends back the user'
+      );
     }
   );
 
@@ -157,7 +177,17 @@ tap.test('login endpoint | /auth/login', async loginTest => {
         ),
         'sends an http-only session cookie'
       );
-      validTest.same(body, { id: 2000 }, 'sends back the user ID');
+      validTest.match(
+        body,
+        {
+          activities: Array,
+          id: 2000,
+          role: 'admin',
+          state: { id: 'mn', name: 'Minnesota' },
+          username: 'all-permissions-and-state'
+        },
+        'sends back the user'
+      );
     }
   );
 });

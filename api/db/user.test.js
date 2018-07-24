@@ -283,8 +283,7 @@ tap.test('user data model', async userModelTests => {
     apdsTests.test(
       'resolves a list of apds when the state relationship is already loaded',
       async alreadyLoadedTests => {
-        self.relations.state = {};
-        self.relations.state.apds = true;
+        self.relations.state = { relations: { apds: true } };
         const list = await apds();
 
         alreadyLoadedTests.ok(
@@ -292,6 +291,17 @@ tap.test('user data model', async userModelTests => {
           'the model load method is not called'
         );
         alreadyLoadedTests.same(list, [1, 2, 3], 'returns the list of apds');
+      }
+    );
+
+    apdsTests.test(
+      'resolves a list of apds when the state relationship is loaded but its APDs are not',
+      async test => {
+        self.relations.state = { relations: {} };
+        const list = await apds();
+
+        test.ok(self.load.calledOnce, 'the model load method is called');
+        test.same(list, [1, 2, 3], 'returns the list of apds');
       }
     );
 

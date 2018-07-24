@@ -51,7 +51,14 @@ module.exports.setup = function setup(
   app.post('/auth/login', passport.authenticate('local'), (req, res) => {
     res
       .status(200)
-      .send({ id: req.user.id })
+      .send({
+        ...req.user,
+        state: {
+          id: req.user.model.related('state').get('id'),
+          name: req.user.model.related('state').get('name')
+        },
+        model: undefined
+      })
       .end();
   });
 };
