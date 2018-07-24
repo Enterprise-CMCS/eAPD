@@ -18,6 +18,7 @@ describe('activities reducer', () => {
     end: '',
     name: '',
     start: '',
+    files: [],
     years: { '2018': 0, '2019': 0 }
   });
 

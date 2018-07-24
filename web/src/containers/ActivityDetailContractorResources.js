@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 
 import {
@@ -40,8 +41,30 @@ class ContractorExpenses extends Component {
     updateActivity(activity.key, updates, true);
   };
 
+  handleDrop = index => files => {
+    const { activity, updateActivity } = this.props;
+    const { files: existingFiles } = activity.contractorResources[index];
+    const newFiles = files.map(({ name, preview, size, type }) => ({
+      name,
+      preview,
+      size,
+      type
+    }));
+
+    const updates = {
+      contractorResources: {
+        [index]: { files: [...existingFiles, ...newFiles] }
+      }
+    };
+
+    updateActivity(activity.key, updates);
+  };
+
   render() {
     const { activity, years, addContractor, removeContractor } = this.props;
+
+    if (!activity) return null;
+
     const { key: activityKey, contractorResources } = activity;
 
     return (
@@ -95,7 +118,7 @@ class ContractorExpenses extends Component {
                   <Label>
                     {t('activities.contractorResources.labels.term')}
                   </Label>
-                  <div className="md-col-5 flex">
+                  <div className="md-col-6 flex">
                     <Input
                       type="date"
                       name={`contractor-${contractor.key}-start`}
@@ -118,13 +141,37 @@ class ContractorExpenses extends Component {
                   <Label>
                     {t('activities.contractorResources.labels.attachments')}
                   </Label>
-                  <input type="file" className="p2 bg-darken-1 rounded" />
+                  <div className="md-col-9 md-flex">
+                    <div className="md-col-4">
+                      <Dropzone
+                        className="btn btn-primary"
+                        onDrop={this.handleDrop(i)}
+                      >
+                        Select file(s)
+                      </Dropzone>
+                    </div>
+                    {(contractor.files || []).length > 0 && (
+                      <div className="md-col-6">
+                        <h5 className="md-mt0 mb-tiny">Attached files</h5>
+                        {contractor.files.map((f, fIdx) => (
+                          <a
+                            key={`${f.name}-${fIdx}`}
+                            className="block bold truncate"
+                            href={f.preview}
+                            target="_blank"
+                          >
+                            {f.name}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div className="mb3 md-flex">
                   <Label>
                     {t('activities.contractorResources.labels.cost')}
                   </Label>
-                  <div className="md-col-5 flex">
+                  <div className="md-col-6 flex">
                     {years.map(year => (
                       <DollarInput
                         key={year}

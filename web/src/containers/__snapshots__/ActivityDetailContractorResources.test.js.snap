@@ -93,7 +93,7 @@ ShallowWrapper {
                 Term Period
               </Label>
               <div
-                className="md-col-5 flex"
+                className="md-col-6 flex"
               >
                 <InputHolder
                   hideLabel={false}
@@ -121,10 +121,28 @@ ShallowWrapper {
               <Label>
                 Attachments
               </Label>
-              <input
-                className="p2 bg-darken-1 rounded"
-                type="file"
-              />
+              <div
+                className="md-col-9 md-flex"
+              >
+                <div
+                  className="md-col-4"
+                >
+                  <t
+                    className="btn btn-primary"
+                    disableClick={false}
+                    disablePreview={false}
+                    disabled={false}
+                    inputProps={Object {}}
+                    maxSize={Infinity}
+                    minSize={0}
+                    multiple={true}
+                    onDrop={[Function]}
+                    preventDropOnDocument={true}
+                  >
+                    Select file(s)
+                  </t>
+                </div>
+              </div>
             </div>
             <div
               className="mb3 md-flex"
@@ -133,7 +151,7 @@ ShallowWrapper {
                 Cost
               </Label>
               <div
-                className="md-col-5 flex"
+                className="md-col-6 flex"
               >
                 <InputHolder
                   hideLabel={false}
@@ -230,7 +248,7 @@ ShallowWrapper {
                   Term Period
                 </Label>
                 <div
-                  className="md-col-5 flex"
+                  className="md-col-6 flex"
                 >
                   <InputHolder
                     hideLabel={false}
@@ -258,10 +276,28 @@ ShallowWrapper {
                 <Label>
                   Attachments
                 </Label>
-                <input
-                  className="p2 bg-darken-1 rounded"
-                  type="file"
-                />
+                <div
+                  className="md-col-9 md-flex"
+                >
+                  <div
+                    className="md-col-4"
+                  >
+                    <t
+                      className="btn btn-primary"
+                      disableClick={false}
+                      disablePreview={false}
+                      disabled={false}
+                      inputProps={Object {}}
+                      maxSize={Infinity}
+                      minSize={0}
+                      multiple={true}
+                      onDrop={[Function]}
+                      preventDropOnDocument={true}
+                    >
+                      Select file(s)
+                    </t>
+                  </div>
+                </div>
               </div>
               <div
                 className="mb3 md-flex"
@@ -270,7 +306,7 @@ ShallowWrapper {
                   Cost
                 </Label>
                 <div
-                  className="md-col-5 flex"
+                  className="md-col-6 flex"
                 >
                   <InputHolder
                     hideLabel={false}
@@ -353,7 +389,7 @@ ShallowWrapper {
                     Term Period
                   </Label>
                   <div
-                    className="md-col-5 flex"
+                    className="md-col-6 flex"
                   >
                     <InputHolder
                       hideLabel={false}
@@ -381,10 +417,28 @@ ShallowWrapper {
                   <Label>
                     Attachments
                   </Label>
-                  <input
-                    className="p2 bg-darken-1 rounded"
-                    type="file"
-                  />
+                  <div
+                    className="md-col-9 md-flex"
+                  >
+                    <div
+                      className="md-col-4"
+                    >
+                      <t
+                        className="btn btn-primary"
+                        disableClick={false}
+                        disablePreview={false}
+                        disabled={false}
+                        inputProps={Object {}}
+                        maxSize={Infinity}
+                        minSize={0}
+                        multiple={true}
+                        onDrop={[Function]}
+                        preventDropOnDocument={true}
+                      >
+                        Select file(s)
+                      </t>
+                    </div>
+                  </div>
                 </div>,
                 <div
                   className="mb3 md-flex"
@@ -393,7 +447,7 @@ ShallowWrapper {
                     Cost
                   </Label>
                   <div
-                    className="md-col-5 flex"
+                    className="md-col-6 flex"
                   >
                     <InputHolder
                       hideLabel={false}
@@ -549,7 +603,7 @@ ShallowWrapper {
                       Term Period
                     </Label>,
                     <div
-                      className="md-col-5 flex"
+                      className="md-col-6 flex"
                     >
                       <InputHolder
                         hideLabel={false}
@@ -611,7 +665,7 @@ ShallowWrapper {
                           wrapperClass="mr2 flex-auto"
                         />,
                       ],
-                      "className": "md-col-5 flex",
+                      "className": "md-col-6 flex",
                     },
                     "ref": null,
                     "rendered": Array [
@@ -664,10 +718,28 @@ ShallowWrapper {
                     <Label>
                       Attachments
                     </Label>,
-                    <input
-                      className="p2 bg-darken-1 rounded"
-                      type="file"
-                    />,
+                    <div
+                      className="md-col-9 md-flex"
+                    >
+                      <div
+                        className="md-col-4"
+                      >
+                        <t
+                          className="btn btn-primary"
+                          disableClick={false}
+                          disablePreview={false}
+                          disabled={false}
+                          inputProps={Object {}}
+                          maxSize={Infinity}
+                          minSize={0}
+                          multiple={true}
+                          onDrop={[Function]}
+                          preventDropOnDocument={true}
+                        >
+                          Select file(s)
+                        </t>
+                      </div>
+                    </div>,
                   ],
                   "className": "mb3 md-flex",
                 },
@@ -689,12 +761,79 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "host",
                     "props": Object {
-                      "className": "p2 bg-darken-1 rounded",
-                      "type": "file",
+                      "children": Array [
+                        <div
+                          className="md-col-4"
+                        >
+                          <t
+                            className="btn btn-primary"
+                            disableClick={false}
+                            disablePreview={false}
+                            disabled={false}
+                            inputProps={Object {}}
+                            maxSize={Infinity}
+                            minSize={0}
+                            multiple={true}
+                            onDrop={[Function]}
+                            preventDropOnDocument={true}
+                          >
+                            Select file(s)
+                          </t>
+                        </div>,
+                        false,
+                      ],
+                      "className": "md-col-9 md-flex",
                     },
                     "ref": null,
-                    "rendered": null,
-                    "type": "input",
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": <t
+                            className="btn btn-primary"
+                            disableClick={false}
+                            disablePreview={false}
+                            disabled={false}
+                            inputProps={Object {}}
+                            maxSize={Infinity}
+                            minSize={0}
+                            multiple={true}
+                            onDrop={[Function]}
+                            preventDropOnDocument={true}
+                          >
+                            Select file(s)
+                          </t>,
+                          "className": "md-col-4",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "children": "Select file(s)",
+                            "className": "btn btn-primary",
+                            "disableClick": false,
+                            "disablePreview": false,
+                            "disabled": false,
+                            "inputProps": Object {},
+                            "maxSize": Infinity,
+                            "minSize": 0,
+                            "multiple": true,
+                            "onDrop": [Function],
+                            "preventDropOnDocument": true,
+                          },
+                          "ref": null,
+                          "rendered": "Select file(s)",
+                          "type": [Function],
+                        },
+                        "type": "div",
+                      },
+                      false,
+                    ],
+                    "type": "div",
                   },
                 ],
                 "type": "div",
@@ -709,7 +848,7 @@ ShallowWrapper {
                       Cost
                     </Label>,
                     <div
-                      className="md-col-5 flex"
+                      className="md-col-6 flex"
                     >
                       <InputHolder
                         hideLabel={false}
@@ -771,7 +910,7 @@ ShallowWrapper {
                           wrapperClass="mr2 flex-auto"
                         />,
                       ],
-                      "className": "md-col-5 flex",
+                      "className": "md-col-6 flex",
                     },
                     "ref": null,
                     "rendered": Array [
@@ -921,7 +1060,7 @@ ShallowWrapper {
                   Term Period
                 </Label>
                 <div
-                  className="md-col-5 flex"
+                  className="md-col-6 flex"
                 >
                   <InputHolder
                     hideLabel={false}
@@ -949,10 +1088,28 @@ ShallowWrapper {
                 <Label>
                   Attachments
                 </Label>
-                <input
-                  className="p2 bg-darken-1 rounded"
-                  type="file"
-                />
+                <div
+                  className="md-col-9 md-flex"
+                >
+                  <div
+                    className="md-col-4"
+                  >
+                    <t
+                      className="btn btn-primary"
+                      disableClick={false}
+                      disablePreview={false}
+                      disabled={false}
+                      inputProps={Object {}}
+                      maxSize={Infinity}
+                      minSize={0}
+                      multiple={true}
+                      onDrop={[Function]}
+                      preventDropOnDocument={true}
+                    >
+                      Select file(s)
+                    </t>
+                  </div>
+                </div>
               </div>
               <div
                 className="mb3 md-flex"
@@ -961,7 +1118,7 @@ ShallowWrapper {
                   Cost
                 </Label>
                 <div
-                  className="md-col-5 flex"
+                  className="md-col-6 flex"
                 >
                   <InputHolder
                     hideLabel={false}
@@ -1058,7 +1215,7 @@ ShallowWrapper {
                     Term Period
                   </Label>
                   <div
-                    className="md-col-5 flex"
+                    className="md-col-6 flex"
                   >
                     <InputHolder
                       hideLabel={false}
@@ -1086,10 +1243,28 @@ ShallowWrapper {
                   <Label>
                     Attachments
                   </Label>
-                  <input
-                    className="p2 bg-darken-1 rounded"
-                    type="file"
-                  />
+                  <div
+                    className="md-col-9 md-flex"
+                  >
+                    <div
+                      className="md-col-4"
+                    >
+                      <t
+                        className="btn btn-primary"
+                        disableClick={false}
+                        disablePreview={false}
+                        disabled={false}
+                        inputProps={Object {}}
+                        maxSize={Infinity}
+                        minSize={0}
+                        multiple={true}
+                        onDrop={[Function]}
+                        preventDropOnDocument={true}
+                      >
+                        Select file(s)
+                      </t>
+                    </div>
+                  </div>
                 </div>
                 <div
                   className="mb3 md-flex"
@@ -1098,7 +1273,7 @@ ShallowWrapper {
                     Cost
                   </Label>
                   <div
-                    className="md-col-5 flex"
+                    className="md-col-6 flex"
                   >
                     <InputHolder
                       hideLabel={false}
@@ -1181,7 +1356,7 @@ ShallowWrapper {
                       Term Period
                     </Label>
                     <div
-                      className="md-col-5 flex"
+                      className="md-col-6 flex"
                     >
                       <InputHolder
                         hideLabel={false}
@@ -1209,10 +1384,28 @@ ShallowWrapper {
                     <Label>
                       Attachments
                     </Label>
-                    <input
-                      className="p2 bg-darken-1 rounded"
-                      type="file"
-                    />
+                    <div
+                      className="md-col-9 md-flex"
+                    >
+                      <div
+                        className="md-col-4"
+                      >
+                        <t
+                          className="btn btn-primary"
+                          disableClick={false}
+                          disablePreview={false}
+                          disabled={false}
+                          inputProps={Object {}}
+                          maxSize={Infinity}
+                          minSize={0}
+                          multiple={true}
+                          onDrop={[Function]}
+                          preventDropOnDocument={true}
+                        >
+                          Select file(s)
+                        </t>
+                      </div>
+                    </div>
                   </div>,
                   <div
                     className="mb3 md-flex"
@@ -1221,7 +1414,7 @@ ShallowWrapper {
                       Cost
                     </Label>
                     <div
-                      className="md-col-5 flex"
+                      className="md-col-6 flex"
                     >
                       <InputHolder
                         hideLabel={false}
@@ -1377,7 +1570,7 @@ ShallowWrapper {
                         Term Period
                       </Label>,
                       <div
-                        className="md-col-5 flex"
+                        className="md-col-6 flex"
                       >
                         <InputHolder
                           hideLabel={false}
@@ -1439,7 +1632,7 @@ ShallowWrapper {
                             wrapperClass="mr2 flex-auto"
                           />,
                         ],
-                        "className": "md-col-5 flex",
+                        "className": "md-col-6 flex",
                       },
                       "ref": null,
                       "rendered": Array [
@@ -1492,10 +1685,28 @@ ShallowWrapper {
                       <Label>
                         Attachments
                       </Label>,
-                      <input
-                        className="p2 bg-darken-1 rounded"
-                        type="file"
-                      />,
+                      <div
+                        className="md-col-9 md-flex"
+                      >
+                        <div
+                          className="md-col-4"
+                        >
+                          <t
+                            className="btn btn-primary"
+                            disableClick={false}
+                            disablePreview={false}
+                            disabled={false}
+                            inputProps={Object {}}
+                            maxSize={Infinity}
+                            minSize={0}
+                            multiple={true}
+                            onDrop={[Function]}
+                            preventDropOnDocument={true}
+                          >
+                            Select file(s)
+                          </t>
+                        </div>
+                      </div>,
                     ],
                     "className": "mb3 md-flex",
                   },
@@ -1517,12 +1728,79 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "host",
                       "props": Object {
-                        "className": "p2 bg-darken-1 rounded",
-                        "type": "file",
+                        "children": Array [
+                          <div
+                            className="md-col-4"
+                          >
+                            <t
+                              className="btn btn-primary"
+                              disableClick={false}
+                              disablePreview={false}
+                              disabled={false}
+                              inputProps={Object {}}
+                              maxSize={Infinity}
+                              minSize={0}
+                              multiple={true}
+                              onDrop={[Function]}
+                              preventDropOnDocument={true}
+                            >
+                              Select file(s)
+                            </t>
+                          </div>,
+                          false,
+                        ],
+                        "className": "md-col-9 md-flex",
                       },
                       "ref": null,
-                      "rendered": null,
-                      "type": "input",
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": <t
+                              className="btn btn-primary"
+                              disableClick={false}
+                              disablePreview={false}
+                              disabled={false}
+                              inputProps={Object {}}
+                              maxSize={Infinity}
+                              minSize={0}
+                              multiple={true}
+                              onDrop={[Function]}
+                              preventDropOnDocument={true}
+                            >
+                              Select file(s)
+                            </t>,
+                            "className": "md-col-4",
+                          },
+                          "ref": null,
+                          "rendered": Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "class",
+                            "props": Object {
+                              "children": "Select file(s)",
+                              "className": "btn btn-primary",
+                              "disableClick": false,
+                              "disablePreview": false,
+                              "disabled": false,
+                              "inputProps": Object {},
+                              "maxSize": Infinity,
+                              "minSize": 0,
+                              "multiple": true,
+                              "onDrop": [Function],
+                              "preventDropOnDocument": true,
+                            },
+                            "ref": null,
+                            "rendered": "Select file(s)",
+                            "type": [Function],
+                          },
+                          "type": "div",
+                        },
+                        false,
+                      ],
+                      "type": "div",
                     },
                   ],
                   "type": "div",
@@ -1537,7 +1815,7 @@ ShallowWrapper {
                         Cost
                       </Label>,
                       <div
-                        className="md-col-5 flex"
+                        className="md-col-6 flex"
                       >
                         <InputHolder
                           hideLabel={false}
@@ -1599,7 +1877,7 @@ ShallowWrapper {
                             wrapperClass="mr2 flex-auto"
                           />,
                         ],
-                        "className": "md-col-5 flex",
+                        "className": "md-col-6 flex",
                       },
                       "ref": null,
                       "rendered": Array [
