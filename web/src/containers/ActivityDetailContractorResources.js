@@ -66,7 +66,6 @@ class ContractorExpenses extends Component {
       <Subsection
         resource="activities.contractorResources"
         isKey={isProgamAdmin(activity)}
-        open
       >
         {contractorResources.length === 0 ? (
           <NoDataMsg>

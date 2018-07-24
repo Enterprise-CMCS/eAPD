@@ -48,11 +48,7 @@ describe('activities reducer', () => {
   const newActivity = keyFn => ({
     key: keyFn(),
     altApproach: '',
-    contractorResources: [
-      newContractor(keyFn),
-      newContractor(keyFn),
-      newContractor(keyFn)
-    ],
+    contractorResources: [newContractor(keyFn)],
     costAllocationDesc: '',
     costAllocation: {
       '2018': { ffp: { federal: 90, state: 10 }, other: 0 },
