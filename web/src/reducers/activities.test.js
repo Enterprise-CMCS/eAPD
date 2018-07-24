@@ -360,20 +360,6 @@ describe('activities reducer', () => {
                   ...stateWithOne.byKey['1'].contractorResources[0].years,
                   '2020': 0
                 }
-              },
-              {
-                ...stateWithOne.byKey['1'].contractorResources[1],
-                years: {
-                  ...stateWithOne.byKey['1'].contractorResources[1].years,
-                  '2020': 0
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].contractorResources[2],
-                years: {
-                  ...stateWithOne.byKey['1'].contractorResources[2].years,
-                  '2020': 0
-                }
               }
             ],
             costAllocation: {
@@ -468,18 +454,6 @@ describe('activities reducer', () => {
             contractorResources: [
               {
                 ...stateWithOne.byKey['1'].contractorResources[0],
-                years: {
-                  '2018': 0
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].contractorResources[1],
-                years: {
-                  '2018': 0
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].contractorResources[2],
                 years: {
                   '2018': 0
                 }
