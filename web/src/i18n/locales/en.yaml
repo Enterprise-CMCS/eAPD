@@ -67,7 +67,7 @@
         helpText: "Provide a brief, high level summary of the state's program, history, and future vision. Specific activities for the program will be explained in the program activities section of this update."
     hit: 
       title: "HIT Overview"
-      helpText: "Briefly summarize planned HIT funded activities contained within this APD, we'll ask for more specific details later."
+      helpText: "Briefly summarize planned HIT funded activities contained within this APD. Additional details will be provided later."
     hie: 
       title: "HIE Overview"
       helpText: >-
@@ -146,7 +146,7 @@
 
   activities: 
     title: "Program Activities"
-    helpText: "Identify each of the activities referenced from the overview section. We'll collect information for each activity."
+    helpText: "Identify each of the activities referenced from the overview section. The information will be collected for each activity."
     list: 
       title: "Activity List"
       helpText: "Examples of individual activities include: Auditing, Outreach, Environmental Scans, HIE Registry Development, CQM Database Development, Data and Analytics, HIE Onboarding, etc."
