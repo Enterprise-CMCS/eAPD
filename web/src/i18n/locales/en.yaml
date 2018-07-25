@@ -209,6 +209,13 @@
       subheader: "If there are contract resources, outline contracts by contract or vendor name. This section is similar to the existing IAPD template contracts section."
       reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. If the vendor name is unknown or do not know specific contract (vendor) names, generalize by resource name (e.g. computer resources/TBD)"
       noDataNotice: "There are no contracts assigned to this activity."
+      delete:
+        text: ✗
+        confirm:
+          header: Please Confirm
+          body: Remove this file?
+          _yes: "Yes"
+          _no: "No"
       labels: 
         entryNumber: "#"
         contractorName: "Contractor Name"
