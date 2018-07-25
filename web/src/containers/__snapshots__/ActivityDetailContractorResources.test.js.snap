@@ -122,11 +122,25 @@ ShallowWrapper {
                 Attachments
               </Label>
               <div
-                className="md-col-9 md-flex"
+                className="md-col-9 md-flex items-start"
               >
                 <div
-                  className="md-col-4"
+                  className="md-col-6 flex items-end mr2"
                 >
+                  <Select
+                    hideLabel={false}
+                    label="Document Type"
+                    name="contractor key-attachment-type"
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Contract",
+                        "RFP",
+                      ]
+                    }
+                    value="Contract"
+                    wrapperClass="col-6 mr2"
+                  />
                   <t
                     className="btn btn-primary"
                     disableClick={false}
@@ -139,7 +153,7 @@ ShallowWrapper {
                     onDrop={[Function]}
                     preventDropOnDocument={true}
                   >
-                    Select file(s)
+                    Select file
                   </t>
                 </div>
               </div>
@@ -277,11 +291,25 @@ ShallowWrapper {
                   Attachments
                 </Label>
                 <div
-                  className="md-col-9 md-flex"
+                  className="md-col-9 md-flex items-start"
                 >
                   <div
-                    className="md-col-4"
+                    className="md-col-6 flex items-end mr2"
                   >
+                    <Select
+                      hideLabel={false}
+                      label="Document Type"
+                      name="contractor key-attachment-type"
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          "Contract",
+                          "RFP",
+                        ]
+                      }
+                      value="Contract"
+                      wrapperClass="col-6 mr2"
+                    />
                     <t
                       className="btn btn-primary"
                       disableClick={false}
@@ -294,7 +322,7 @@ ShallowWrapper {
                       onDrop={[Function]}
                       preventDropOnDocument={true}
                     >
-                      Select file(s)
+                      Select file
                     </t>
                   </div>
                 </div>
@@ -418,11 +446,25 @@ ShallowWrapper {
                     Attachments
                   </Label>
                   <div
-                    className="md-col-9 md-flex"
+                    className="md-col-9 md-flex items-start"
                   >
                     <div
-                      className="md-col-4"
+                      className="md-col-6 flex items-end mr2"
                     >
+                      <Select
+                        hideLabel={false}
+                        label="Document Type"
+                        name="contractor key-attachment-type"
+                        onChange={[Function]}
+                        options={
+                          Array [
+                            "Contract",
+                            "RFP",
+                          ]
+                        }
+                        value="Contract"
+                        wrapperClass="col-6 mr2"
+                      />
                       <t
                         className="btn btn-primary"
                         disableClick={false}
@@ -435,7 +477,7 @@ ShallowWrapper {
                         onDrop={[Function]}
                         preventDropOnDocument={true}
                       >
-                        Select file(s)
+                        Select file
                       </t>
                     </div>
                   </div>
@@ -719,11 +761,25 @@ ShallowWrapper {
                       Attachments
                     </Label>,
                     <div
-                      className="md-col-9 md-flex"
+                      className="md-col-9 md-flex items-start"
                     >
                       <div
-                        className="md-col-4"
+                        className="md-col-6 flex items-end mr2"
                       >
+                        <Select
+                          hideLabel={false}
+                          label="Document Type"
+                          name="contractor key-attachment-type"
+                          onChange={[Function]}
+                          options={
+                            Array [
+                              "Contract",
+                              "RFP",
+                            ]
+                          }
+                          value="Contract"
+                          wrapperClass="col-6 mr2"
+                        />
                         <t
                           className="btn btn-primary"
                           disableClick={false}
@@ -736,7 +792,7 @@ ShallowWrapper {
                           onDrop={[Function]}
                           preventDropOnDocument={true}
                         >
-                          Select file(s)
+                          Select file
                         </t>
                       </div>
                     </div>,
@@ -763,8 +819,22 @@ ShallowWrapper {
                     "props": Object {
                       "children": Array [
                         <div
-                          className="md-col-4"
+                          className="md-col-6 flex items-end mr2"
                         >
+                          <Select
+                            hideLabel={false}
+                            label="Document Type"
+                            name="contractor key-attachment-type"
+                            onChange={[Function]}
+                            options={
+                              Array [
+                                "Contract",
+                                "RFP",
+                              ]
+                            }
+                            value="Contract"
+                            wrapperClass="col-6 mr2"
+                          />
                           <t
                             className="btn btn-primary"
                             disableClick={false}
@@ -777,12 +847,12 @@ ShallowWrapper {
                             onDrop={[Function]}
                             preventDropOnDocument={true}
                           >
-                            Select file(s)
+                            Select file
                           </t>
                         </div>,
                         false,
                       ],
-                      "className": "md-col-9 md-flex",
+                      "className": "md-col-9 md-flex items-start",
                     },
                     "ref": null,
                     "rendered": Array [
@@ -791,44 +861,82 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "host",
                         "props": Object {
-                          "children": <t
-                            className="btn btn-primary"
-                            disableClick={false}
-                            disablePreview={false}
-                            disabled={false}
-                            inputProps={Object {}}
-                            maxSize={Infinity}
-                            minSize={0}
-                            multiple={true}
-                            onDrop={[Function]}
-                            preventDropOnDocument={true}
-                          >
-                            Select file(s)
-                          </t>,
-                          "className": "md-col-4",
+                          "children": Array [
+                            <Select
+                              hideLabel={false}
+                              label="Document Type"
+                              name="contractor key-attachment-type"
+                              onChange={[Function]}
+                              options={
+                                Array [
+                                  "Contract",
+                                  "RFP",
+                                ]
+                              }
+                              value="Contract"
+                              wrapperClass="col-6 mr2"
+                            />,
+                            <t
+                              className="btn btn-primary"
+                              disableClick={false}
+                              disablePreview={false}
+                              disabled={false}
+                              inputProps={Object {}}
+                              maxSize={Infinity}
+                              minSize={0}
+                              multiple={true}
+                              onDrop={[Function]}
+                              preventDropOnDocument={true}
+                            >
+                              Select file
+                            </t>,
+                          ],
+                          "className": "md-col-6 flex items-end mr2",
                         },
                         "ref": null,
-                        "rendered": Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "class",
-                          "props": Object {
-                            "children": "Select file(s)",
-                            "className": "btn btn-primary",
-                            "disableClick": false,
-                            "disablePreview": false,
-                            "disabled": false,
-                            "inputProps": Object {},
-                            "maxSize": Infinity,
-                            "minSize": 0,
-                            "multiple": true,
-                            "onDrop": [Function],
-                            "preventDropOnDocument": true,
+                        "rendered": Array [
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "function",
+                            "props": Object {
+                              "hideLabel": false,
+                              "label": "Document Type",
+                              "name": "contractor key-attachment-type",
+                              "onChange": [Function],
+                              "options": Array [
+                                "Contract",
+                                "RFP",
+                              ],
+                              "value": "Contract",
+                              "wrapperClass": "col-6 mr2",
+                            },
+                            "ref": null,
+                            "rendered": null,
+                            "type": [Function],
                           },
-                          "ref": null,
-                          "rendered": "Select file(s)",
-                          "type": [Function],
-                        },
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "class",
+                            "props": Object {
+                              "children": "Select file",
+                              "className": "btn btn-primary",
+                              "disableClick": false,
+                              "disablePreview": false,
+                              "disabled": false,
+                              "inputProps": Object {},
+                              "maxSize": Infinity,
+                              "minSize": 0,
+                              "multiple": true,
+                              "onDrop": [Function],
+                              "preventDropOnDocument": true,
+                            },
+                            "ref": null,
+                            "rendered": "Select file",
+                            "type": [Function],
+                          },
+                        ],
                         "type": "div",
                       },
                       false,
@@ -1089,11 +1197,25 @@ ShallowWrapper {
                   Attachments
                 </Label>
                 <div
-                  className="md-col-9 md-flex"
+                  className="md-col-9 md-flex items-start"
                 >
                   <div
-                    className="md-col-4"
+                    className="md-col-6 flex items-end mr2"
                   >
+                    <Select
+                      hideLabel={false}
+                      label="Document Type"
+                      name="contractor key-attachment-type"
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          "Contract",
+                          "RFP",
+                        ]
+                      }
+                      value="Contract"
+                      wrapperClass="col-6 mr2"
+                    />
                     <t
                       className="btn btn-primary"
                       disableClick={false}
@@ -1106,7 +1228,7 @@ ShallowWrapper {
                       onDrop={[Function]}
                       preventDropOnDocument={true}
                     >
-                      Select file(s)
+                      Select file
                     </t>
                   </div>
                 </div>
@@ -1244,11 +1366,25 @@ ShallowWrapper {
                     Attachments
                   </Label>
                   <div
-                    className="md-col-9 md-flex"
+                    className="md-col-9 md-flex items-start"
                   >
                     <div
-                      className="md-col-4"
+                      className="md-col-6 flex items-end mr2"
                     >
+                      <Select
+                        hideLabel={false}
+                        label="Document Type"
+                        name="contractor key-attachment-type"
+                        onChange={[Function]}
+                        options={
+                          Array [
+                            "Contract",
+                            "RFP",
+                          ]
+                        }
+                        value="Contract"
+                        wrapperClass="col-6 mr2"
+                      />
                       <t
                         className="btn btn-primary"
                         disableClick={false}
@@ -1261,7 +1397,7 @@ ShallowWrapper {
                         onDrop={[Function]}
                         preventDropOnDocument={true}
                       >
-                        Select file(s)
+                        Select file
                       </t>
                     </div>
                   </div>
@@ -1385,11 +1521,25 @@ ShallowWrapper {
                       Attachments
                     </Label>
                     <div
-                      className="md-col-9 md-flex"
+                      className="md-col-9 md-flex items-start"
                     >
                       <div
-                        className="md-col-4"
+                        className="md-col-6 flex items-end mr2"
                       >
+                        <Select
+                          hideLabel={false}
+                          label="Document Type"
+                          name="contractor key-attachment-type"
+                          onChange={[Function]}
+                          options={
+                            Array [
+                              "Contract",
+                              "RFP",
+                            ]
+                          }
+                          value="Contract"
+                          wrapperClass="col-6 mr2"
+                        />
                         <t
                           className="btn btn-primary"
                           disableClick={false}
@@ -1402,7 +1552,7 @@ ShallowWrapper {
                           onDrop={[Function]}
                           preventDropOnDocument={true}
                         >
-                          Select file(s)
+                          Select file
                         </t>
                       </div>
                     </div>
@@ -1686,11 +1836,25 @@ ShallowWrapper {
                         Attachments
                       </Label>,
                       <div
-                        className="md-col-9 md-flex"
+                        className="md-col-9 md-flex items-start"
                       >
                         <div
-                          className="md-col-4"
+                          className="md-col-6 flex items-end mr2"
                         >
+                          <Select
+                            hideLabel={false}
+                            label="Document Type"
+                            name="contractor key-attachment-type"
+                            onChange={[Function]}
+                            options={
+                              Array [
+                                "Contract",
+                                "RFP",
+                              ]
+                            }
+                            value="Contract"
+                            wrapperClass="col-6 mr2"
+                          />
                           <t
                             className="btn btn-primary"
                             disableClick={false}
@@ -1703,7 +1867,7 @@ ShallowWrapper {
                             onDrop={[Function]}
                             preventDropOnDocument={true}
                           >
-                            Select file(s)
+                            Select file
                           </t>
                         </div>
                       </div>,
@@ -1730,8 +1894,22 @@ ShallowWrapper {
                       "props": Object {
                         "children": Array [
                           <div
-                            className="md-col-4"
+                            className="md-col-6 flex items-end mr2"
                           >
+                            <Select
+                              hideLabel={false}
+                              label="Document Type"
+                              name="contractor key-attachment-type"
+                              onChange={[Function]}
+                              options={
+                                Array [
+                                  "Contract",
+                                  "RFP",
+                                ]
+                              }
+                              value="Contract"
+                              wrapperClass="col-6 mr2"
+                            />
                             <t
                               className="btn btn-primary"
                               disableClick={false}
@@ -1744,12 +1922,12 @@ ShallowWrapper {
                               onDrop={[Function]}
                               preventDropOnDocument={true}
                             >
-                              Select file(s)
+                              Select file
                             </t>
                           </div>,
                           false,
                         ],
-                        "className": "md-col-9 md-flex",
+                        "className": "md-col-9 md-flex items-start",
                       },
                       "ref": null,
                       "rendered": Array [
@@ -1758,44 +1936,82 @@ ShallowWrapper {
                           "key": undefined,
                           "nodeType": "host",
                           "props": Object {
-                            "children": <t
-                              className="btn btn-primary"
-                              disableClick={false}
-                              disablePreview={false}
-                              disabled={false}
-                              inputProps={Object {}}
-                              maxSize={Infinity}
-                              minSize={0}
-                              multiple={true}
-                              onDrop={[Function]}
-                              preventDropOnDocument={true}
-                            >
-                              Select file(s)
-                            </t>,
-                            "className": "md-col-4",
+                            "children": Array [
+                              <Select
+                                hideLabel={false}
+                                label="Document Type"
+                                name="contractor key-attachment-type"
+                                onChange={[Function]}
+                                options={
+                                  Array [
+                                    "Contract",
+                                    "RFP",
+                                  ]
+                                }
+                                value="Contract"
+                                wrapperClass="col-6 mr2"
+                              />,
+                              <t
+                                className="btn btn-primary"
+                                disableClick={false}
+                                disablePreview={false}
+                                disabled={false}
+                                inputProps={Object {}}
+                                maxSize={Infinity}
+                                minSize={0}
+                                multiple={true}
+                                onDrop={[Function]}
+                                preventDropOnDocument={true}
+                              >
+                                Select file
+                              </t>,
+                            ],
+                            "className": "md-col-6 flex items-end mr2",
                           },
                           "ref": null,
-                          "rendered": Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "class",
-                            "props": Object {
-                              "children": "Select file(s)",
-                              "className": "btn btn-primary",
-                              "disableClick": false,
-                              "disablePreview": false,
-                              "disabled": false,
-                              "inputProps": Object {},
-                              "maxSize": Infinity,
-                              "minSize": 0,
-                              "multiple": true,
-                              "onDrop": [Function],
-                              "preventDropOnDocument": true,
+                          "rendered": Array [
+                            Object {
+                              "instance": null,
+                              "key": undefined,
+                              "nodeType": "function",
+                              "props": Object {
+                                "hideLabel": false,
+                                "label": "Document Type",
+                                "name": "contractor key-attachment-type",
+                                "onChange": [Function],
+                                "options": Array [
+                                  "Contract",
+                                  "RFP",
+                                ],
+                                "value": "Contract",
+                                "wrapperClass": "col-6 mr2",
+                              },
+                              "ref": null,
+                              "rendered": null,
+                              "type": [Function],
                             },
-                            "ref": null,
-                            "rendered": "Select file(s)",
-                            "type": [Function],
-                          },
+                            Object {
+                              "instance": null,
+                              "key": undefined,
+                              "nodeType": "class",
+                              "props": Object {
+                                "children": "Select file",
+                                "className": "btn btn-primary",
+                                "disableClick": false,
+                                "disablePreview": false,
+                                "disabled": false,
+                                "inputProps": Object {},
+                                "maxSize": Infinity,
+                                "minSize": 0,
+                                "multiple": true,
+                                "onDrop": [Function],
+                                "preventDropOnDocument": true,
+                              },
+                              "ref": null,
+                              "rendered": "Select file",
+                              "type": [Function],
+                            },
+                          ],
                           "type": "div",
                         },
                         false,

@@ -11,6 +11,7 @@ import {
 import NoDataMsg from '../components/NoDataMsg';
 import { Input, DollarInput, Textarea } from '../components/Inputs';
 import { Subsection } from '../components/Section';
+import Select from '../components/Select';
 import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
@@ -22,7 +23,15 @@ Label.propTypes = {
   children: PropTypes.node.isRequired
 };
 
+const DOC_TYPES = ['Contract', 'RFP'];
+
 class ContractorExpenses extends Component {
+  state = { docType: DOC_TYPES[0] };
+
+  updateDocType = e => {
+    this.setState({ docType: e.target.value });
+  };
+
   handleChange = (index, field) => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
@@ -41,22 +50,36 @@ class ContractorExpenses extends Component {
     updateActivity(activity.key, updates, true);
   };
 
-  handleDrop = index => files => {
-    const { activity, updateActivity } = this.props;
-    const existingFiles = activity.contractorResources[index].files || [];
-    const newFiles = files.map(({ name, preview, size, type }) => ({
-      name,
-      preview,
-      size,
-      type
-    }));
+  handleFileUpload = index => files => {
+    if (!files.length) return;
 
-    const updates = { [index]: { files: [...existingFiles, ...newFiles] } };
+    const { activity, updateActivity } = this.props;
+    const { docType } = this.state;
+
+    // only do one file at a time
+    const { name, preview, size, type } = files[0];
+    const newFile = { name, preview, size, type, category: docType };
+    const existingFiles = activity.contractorResources[index].files || [];
+
+    const updates = { [index]: { files: [...existingFiles, newFile] } };
+    updateActivity(activity.key, { contractorResources: updates });
+
+    // reset document category if necessary
+    if (docType !== DOC_TYPES[0]) this.setState({ docType: DOC_TYPES[0] });
+  };
+
+  handleFileDelete = (cIdx, fIdx) => () => {
+    const { activity, updateActivity } = this.props;
+    const { files } = activity.contractorResources[cIdx];
+    const updatedFiles = files.filter((_, i) => i !== fIdx);
+
+    const updates = { [cIdx]: { files: updatedFiles } };
     updateActivity(activity.key, { contractorResources: updates });
   };
 
   render() {
     const { activity, years, addContractor, removeContractor } = this.props;
+    const { docType } = this.state;
 
     if (!activity) return null;
 
@@ -135,27 +158,46 @@ class ContractorExpenses extends Component {
                   <Label>
                     {t('activities.contractorResources.labels.attachments')}
                   </Label>
-                  <div className="md-col-9 md-flex">
-                    <div className="md-col-4">
+                  <div className="md-col-9 md-flex items-start">
+                    <div className="md-col-6 flex items-end mr2">
+                      <Select
+                        name={`${contractor.key}-attachment-type`}
+                        options={DOC_TYPES}
+                        label="Document Type"
+                        wrapperClass="col-6 mr2"
+                        value={docType}
+                        onChange={this.updateDocType}
+                      />
                       <Dropzone
                         className="btn btn-primary"
-                        onDrop={this.handleDrop(i)}
+                        onDrop={this.handleFileUpload(i)}
                       >
-                        Select file(s)
+                        Select file
                       </Dropzone>
                     </div>
                     {(contractor.files || []).length > 0 && (
-                      <div className="md-col-6">
+                      <div className="md-col-4">
                         <h5 className="md-mt0 mb-tiny">Attached files</h5>
-                        {contractor.files.map((f, fIdx) => (
-                          <a
-                            key={`${f.name}-${fIdx}`}
-                            className="block bold truncate"
-                            href={f.preview}
-                            target="_blank"
-                          >
-                            {f.name}
-                          </a>
+                        {contractor.files.map((f, j) => (
+                          <div key={`${f.name}-${j}`} className="mb1">
+                            <div>
+                              <button
+                                type="button"
+                                className="btn btn-outline border-silver px-tiny py0 right"
+                                onClick={this.handleFileDelete(i, j)}
+                              >
+                                ✗
+                              </button>
+                              <a
+                                className="block bold truncate"
+                                href={f.preview}
+                                target="_blank"
+                              >
+                                {f.name}
+                              </a>
+                            </div>
+                            <div className="h6">({f.category})</div>
+                          </div>
                         ))}
                       </div>
                     )}
