@@ -49,6 +49,7 @@ const newStatePerson = years => ({
 });
 
 const contractorDefaultYear = () => 0;
+const contractorDefaultHourly = () => ({ hours: '', rate: '' });
 const newContractor = years => ({
   key: generateKey(),
   name: '',
@@ -56,7 +57,11 @@ const newContractor = years => ({
   start: '',
   end: '',
   files: [],
-  years: arrToObj(years, contractorDefaultYear())
+  years: arrToObj(years, contractorDefaultYear()),
+  hourly: {
+    hasHourlyData: false,
+    data: arrToObj(years, contractorDefaultHourly())
+  }
 });
 
 const expenseDefaultYear = () => 0;
@@ -131,9 +136,15 @@ const newActivity = ({
   ...rest
 });
 
+// const initialState = {
+//   byKey: {},
+//   allKeys: []
+// };
 const initialState = {
-  byKey: {},
-  allKeys: []
+  byKey: {
+    123: newActivity({ key: 123, name: 'foo', years: ['2018', '2019'] })
+  },
+  allKeys: [123]
 };
 
 const reducer = (state = initialState, action) => {
