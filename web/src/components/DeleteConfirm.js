@@ -31,25 +31,24 @@ DeleteConfirm.propTypes = {
 
 class DeleteButton extends Component {
   handleClick = () => {
-    const { resource } = this.props;
     confirmAlert({
       customUI: ({ onClose }) => (
         <DeleteConfirm
           onClose={onClose}
           onConfirm={this.handleConfirm}
-          resource={resource}
+          resource={this.props.resource}
         />
       )
     });
   };
 
   handleConfirm = () => {
-    const { remove } = this.props;
-    remove();
+    this.props.remove();
   };
 
   render() {
     const { className, resource } = this.props;
+
     return (
       <div>
         <button
@@ -69,6 +68,7 @@ DeleteButton.propTypes = {
   resource: PropTypes.string.isRequired,
   remove: PropTypes.func.isRequired
 };
+
 DeleteButton.defaultProps = {
   className: null
 };

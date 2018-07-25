@@ -8,8 +8,9 @@ import {
   removeActivityContractor,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import NoDataMsg from '../components/NoDataMsg';
+import DeleteButton from '../components/DeleteConfirm';
 import { Input, DollarInput, Textarea } from '../components/Inputs';
+import NoDataMsg from '../components/NoDataMsg';
 import { Subsection } from '../components/Section';
 import Select from '../components/Select';
 import { t } from '../i18n';
@@ -23,7 +24,7 @@ Label.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const DOC_TYPES = ['Contract', 'RFP'];
+const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
 
 class ContractorExpenses extends Component {
   state = { docType: DOC_TYPES[0] };
@@ -171,6 +172,7 @@ class ContractorExpenses extends Component {
                       <Dropzone
                         className="btn btn-primary"
                         onDrop={this.handleFileUpload(i)}
+                        multiple={false}
                       >
                         Select file
                       </Dropzone>
@@ -181,13 +183,11 @@ class ContractorExpenses extends Component {
                         {contractor.files.map((f, j) => (
                           <div key={`${f.name}-${j}`} className="mb1">
                             <div>
-                              <button
-                                type="button"
+                              <DeleteButton
                                 className="btn btn-outline border-silver px-tiny py0 right"
-                                onClick={this.handleFileDelete(i, j)}
-                              >
-                                ✗
-                              </button>
+                                remove={this.handleFileDelete(i, j)}
+                                resource="activities.contractorResources.delete"
+                              />
                               <a
                                 className="block bold truncate"
                                 href={f.preview}
