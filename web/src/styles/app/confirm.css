@@ -77,4 +77,5 @@
 .confirm-body {
   box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.125);
   max-width: 300px;
+  min-width: 220px;
 }
