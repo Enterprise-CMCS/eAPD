@@ -50,9 +50,28 @@ Currently, the API is configured entirely with environment variables:
   * **default**: none
 
 * ### `TEST_DB_HOST`
+
   * This variable is only used if `NODE_ENV` is set to `test`.
   * If you are running tests and _not_ using Docker, the default test database
     configuration won't work for you because it expects to use a database host
     that is provided by Docker. To get around that, set this variable to the
     hostname of your local PostgreSQL instance.
   * **default**: none
+
+# File/blob store
+
+The API also supports blob storage to different stores, depending on
+configuration.  The following environment variables determine which blob store
+we use:
+
+* ### `STORE_TYPE`
+
+  * This determines which type of store to use.  For invalid values, we use a
+    null store, where writes are ignored and reads return 0 bytes.  
+    Valid vlues are:
+     * `fs`
+
+* ### `STORE_PATH`
+
+  * This sets the path for the blob store.  For the `fs` store, it's the
+    local file path.
