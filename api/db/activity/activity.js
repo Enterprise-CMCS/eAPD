@@ -20,6 +20,15 @@ module.exports = {
       return this.hasMany('apdActivityExpense');
     },
 
+    files() {
+      return this.belongsToMany(
+        'file',
+        'activity_files',
+        'activity_id',
+        'file_id'
+      );
+    },
+
     schedule() {
       return this.hasMany('apdActivitySchedule');
     },
@@ -87,10 +96,12 @@ module.exports = {
       foreignKey: 'activity_id',
       withRelated: [
         'contractorResources',
+        'contractorResources.files',
         'contractorResources.years',
         'goals',
         'expenses',
         'expenses.entries',
+        'files',
         'schedule',
         'statePersonnel',
         'statePersonnel.years',
@@ -131,6 +142,7 @@ module.exports = {
         goals: this.related('goals'),
         contractorResources: this.related('contractorResources'),
         expenses: this.related('expenses'),
+        files: this.related('files'),
         schedule: this.related('schedule'),
         statePersonnel: this.related('statePersonnel'),
         costAllocationNarrative: {

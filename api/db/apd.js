@@ -139,11 +139,13 @@ module.exports = () => ({
       withRelated: [
         { activities: query => query.orderBy('id') },
         'activities.contractorResources',
+        'activities.contractorResources.files',
         'activities.contractorResources.years',
         'activities.costAllocation',
         'activities.goals',
         'activities.expenses',
         'activities.expenses.entries',
+        'activities.files',
         'activities.schedule',
         'activities.statePersonnel',
         'activities.statePersonnel.years',
