@@ -67,7 +67,7 @@
         helpText: "Provide a brief, high level summary of the state's program, history, and future vision. Specific activities for the program will be explained in the program activities section of this update."
     hit: 
       title: "HIT Overview"
-      helpText: "Briefly summarize planned HIT funded activities contained within this APD, we'll ask for more specific details later."
+      helpText: "Briefly summarize planned HIT funded activities contained within this APD. Additional details will be provided later."
     hie: 
       title: "HIE Overview"
       helpText: >-
@@ -146,7 +146,7 @@
 
   activities: 
     title: "Program Activities"
-    helpText: "Identify each of the activities referenced from the overview section. We'll collect information for each activity."
+    helpText: "Identify each of the activities referenced from the overview section. The information will be collected for each activity."
     list: 
       title: "Activity List"
       helpText: "Examples of individual activities include: Auditing, Outreach, Environmental Scans, HIE Registry Development, CQM Database Development, Data and Analytics, HIE Onboarding, etc."
@@ -209,6 +209,13 @@
       subheader: "If there are contract resources, outline contracts by contract or vendor name. This section is similar to the existing IAPD template contracts section."
       reminder: "Contracts and projected contracts must be itemized, with estimated costs per contract including FFY costs. If the vendor name is unknown or do not know specific contract (vendor) names, generalize by resource name (e.g. computer resources/TBD)"
       noDataNotice: "There are no contracts assigned to this activity."
+      delete:
+        text: ✗
+        confirm:
+          header: Please Confirm
+          body: Remove this file?
+          _yes: "Yes"
+          _no: "No"
       labels: 
         entryNumber: "#"
         contractorName: "Contractor Name"
@@ -216,12 +223,14 @@
         term: "Term Period"
         start: "Start:"
         end: "End:"
+        cost: Cost
+        attachments: Attachments
         yearCost: "{{year}} Cost"
       srLabels: 
         name: "Contractor name"
         description: "Describe the services each contractor will provide."
-        start: "Contractor term start"
-        end: "Contractor term end"
+        start: Start
+        end: End
         cost: "Contractor cost for {{year}}"
       removeLabel: "Remove resource"
       addContractorButtonText: "Add contractor"
