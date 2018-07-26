@@ -1,5 +1,3 @@
-const logger = require('../logger')('db files model');
-
 module.exports = () => ({
   file: {
     tableName: 'files',
