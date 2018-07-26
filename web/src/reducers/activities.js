@@ -55,6 +55,7 @@ const newContractor = years => ({
   desc: '',
   start: '',
   end: '',
+  files: [],
   years: arrToObj(years, contractorDefaultYear())
 });
 
@@ -106,11 +107,7 @@ const newActivity = ({
     newStatePerson(years),
     newStatePerson(years)
   ],
-  contractorResources: [
-    newContractor(years),
-    newContractor(years),
-    newContractor(years)
-  ],
+  contractorResources: [newContractor(years)],
   expenses: [newExpense(years), newExpense(years), newExpense(years)],
   costAllocation: arrToObj(years, costAllocationEntry()),
   standardsAndConditions: {

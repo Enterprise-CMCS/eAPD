@@ -18,6 +18,7 @@ describe('activities reducer', () => {
     end: '',
     name: '',
     start: '',
+    files: [],
     years: { '2018': 0, '2019': 0 }
   });
 
@@ -47,11 +48,7 @@ describe('activities reducer', () => {
   const newActivity = keyFn => ({
     key: keyFn(),
     altApproach: '',
-    contractorResources: [
-      newContractor(keyFn),
-      newContractor(keyFn),
-      newContractor(keyFn)
-    ],
+    contractorResources: [newContractor(keyFn)],
     costAllocationDesc: '',
     costAllocation: {
       '2018': { ffp: { federal: 90, state: 10 }, other: 0 },
@@ -363,20 +360,6 @@ describe('activities reducer', () => {
                   ...stateWithOne.byKey['1'].contractorResources[0].years,
                   '2020': 0
                 }
-              },
-              {
-                ...stateWithOne.byKey['1'].contractorResources[1],
-                years: {
-                  ...stateWithOne.byKey['1'].contractorResources[1].years,
-                  '2020': 0
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].contractorResources[2],
-                years: {
-                  ...stateWithOne.byKey['1'].contractorResources[2].years,
-                  '2020': 0
-                }
               }
             ],
             costAllocation: {
@@ -471,18 +454,6 @@ describe('activities reducer', () => {
             contractorResources: [
               {
                 ...stateWithOne.byKey['1'].contractorResources[0],
-                years: {
-                  '2018': 0
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].contractorResources[1],
-                years: {
-                  '2018': 0
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].contractorResources[2],
                 years: {
                   '2018': 0
                 }

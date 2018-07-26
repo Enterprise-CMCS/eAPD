@@ -1,7 +1,7 @@
 .input,
 .select,
 .textarea {
-  border-radius: var(--border-radius);
+  border-radius: 0.5rem;
 }
 
 .input:focus,
