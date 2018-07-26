@@ -51,7 +51,7 @@ const StatusEntry = () => (
       <div className="dot" />
     </div>
     <div className="sm-col-2 sm-right-align">
-      <button className="btn btn-primary">Respond</button>
+      <button className="btn btn-primary">View</button>
     </div>
   </div>
 );

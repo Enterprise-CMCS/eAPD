@@ -7,7 +7,9 @@ const defaults = {
   NODE_ENV: 'development',
   LOG_LEVEL: 'info',
   LOG_FILE: 'false',
-  LOG_CONSOLE: 'true'
+  LOG_CONSOLE: 'true',
+  STORE_PATH: '',
+  STORE_TYPE: 'null' // default to using the /dev/null store
 };
 
 // Check if there are any CloudFoundry user-provided services
