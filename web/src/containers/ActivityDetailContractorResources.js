@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 
 import {
@@ -7,13 +8,31 @@ import {
   removeActivityContractor,
   updateActivity as updateActivityAction
 } from '../actions/activities';
-import NoDataMsg from '../components/NoDataMsg';
+import DeleteButton from '../components/DeleteConfirm';
 import { Input, DollarInput, Textarea } from '../components/Inputs';
+import NoDataMsg from '../components/NoDataMsg';
 import { Subsection } from '../components/Section';
+import Select from '../components/Select';
 import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
-class ActivityDetailContractorExpenses extends Component {
+const Label = props => (
+  <h5 className="md-col-2 my-tiny pr1">{props.children}</h5>
+);
+
+Label.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
+
+class ContractorExpenses extends Component {
+  state = { docType: DOC_TYPES[0] };
+
+  updateDocType = e => {
+    this.setState({ docType: e.target.value });
+  };
+
   handleChange = (index, field) => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
@@ -32,8 +51,39 @@ class ActivityDetailContractorExpenses extends Component {
     updateActivity(activity.key, updates, true);
   };
 
+  handleFileUpload = index => files => {
+    if (!files.length) return;
+
+    const { activity, updateActivity } = this.props;
+    const { docType } = this.state;
+
+    // only do one file at a time
+    const { name, preview, size, type } = files[0];
+    const newFile = { name, preview, size, type, category: docType };
+    const existingFiles = activity.contractorResources[index].files || [];
+
+    const updates = { [index]: { files: [...existingFiles, newFile] } };
+    updateActivity(activity.key, { contractorResources: updates });
+
+    // reset document category if necessary
+    if (docType !== DOC_TYPES[0]) this.setState({ docType: DOC_TYPES[0] });
+  };
+
+  handleFileDelete = (cIdx, fIdx) => () => {
+    const { activity, updateActivity } = this.props;
+    const { files } = activity.contractorResources[cIdx];
+    const updatedFiles = files.filter((_, i) => i !== fIdx);
+
+    const updates = { [cIdx]: { files: updatedFiles } };
+    updateActivity(activity.key, { contractorResources: updates });
+  };
+
   render() {
     const { activity, years, addContractor, removeContractor } = this.props;
+    const { docType } = this.state;
+
+    if (!activity) return null;
+
     const { key: activityKey, contractorResources } = activity;
 
     return (
@@ -46,129 +96,143 @@ class ActivityDetailContractorExpenses extends Component {
             {t('activities.contractorResources.noDataNotice')}
           </NoDataMsg>
         ) : (
-          <div className="overflow-auto">
-            <table
-              className="mb2 h5 table table-condensed table-fixed"
-              style={{ minWidth: 800 }}
-            >
-              <thead>
-                <tr>
-                  <th className="col-1">
-                    {t('activities.contractorResources.labels.entryNumber')}
-                  </th>
-                  <th className="col-4">
+          <div className="mt3">
+            {contractorResources.map((contractor, i) => (
+              <div
+                key={contractor.key}
+                className="mb3 pb3 border-bottom border-grey"
+              >
+                <div className="mb3 md-flex">
+                  <Label>
                     {t('activities.contractorResources.labels.contractorName')}
-                  </th>
-                  <th className="col-5">
+                  </Label>
+                  <Input
+                    name={`contractor-${contractor.key}-name`}
+                    label={t('activities.contractorResources.srLabels.name')}
+                    type="text"
+                    value={contractor.name}
+                    onChange={this.handleChange(i, 'name')}
+                    wrapperClass="md-col-5"
+                    hideLabel
+                  />
+                </div>
+                <div className="mb3 md-flex">
+                  <Label>
                     {t('activities.contractorResources.labels.description')}
-                  </th>
-                  <th className="col-4">
+                  </Label>
+                  <Textarea
+                    id={`contractor-${contractor.key}-desc`}
+                    name={`contractor-${contractor.key}-desc`}
+                    label={t(
+                      'activities.contractorResources.srLabels.description'
+                    )}
+                    value={contractor.desc}
+                    onChange={this.handleChange(i, 'desc')}
+                    wrapperClass="md-col-8"
+                    hideLabel
+                  />
+                </div>
+                <div className="mb3 md-flex">
+                  <Label>
                     {t('activities.contractorResources.labels.term')}
-                  </th>
-                  {years.map(year => (
-                    <th key={year} className="col-2">
-                      {t('activities.contractorResources.labels.yearCost', {
-                        year
-                      })}
-                    </th>
-                  ))}
-                  <th className="col-1" />
-                </tr>
-              </thead>
-              <tbody>
-                {contractorResources.map((contractor, i) => (
-                  <tr key={contractor.key}>
-                    <td className="mono">{i + 1}.</td>
-                    <td>
-                      <Input
-                        name={`contractor-${contractor.key}-name`}
-                        label={t(
-                          'activities.contractorResources.srLabels.name'
-                        )}
-                        hideLabel
-                        type="text"
-                        value={contractor.name}
-                        onChange={this.handleChange(i, 'name')}
+                  </Label>
+                  <div className="md-col-6 flex">
+                    <Input
+                      type="date"
+                      name={`contractor-${contractor.key}-start`}
+                      label={t('activities.contractorResources.srLabels.start')}
+                      value={contractor.start}
+                      onChange={this.handleChange(i, 'start')}
+                      wrapperClass="mr2 flex-auto"
+                    />
+                    <Input
+                      type="date"
+                      name={`contractor-${contractor.key}-end`}
+                      label={t('activities.contractorResources.srLabels.end')}
+                      value={contractor.end}
+                      onChange={this.handleChange(i, 'end')}
+                      wrapperClass="mr2 flex-auto"
+                    />
+                  </div>
+                </div>
+                <div className="mb3 md-flex">
+                  <Label>
+                    {t('activities.contractorResources.labels.attachments')}
+                  </Label>
+                  <div className="md-col-9 md-flex items-start">
+                    <div className="md-col-6 flex items-end mr2">
+                      <Select
+                        name={`${contractor.key}-attachment-type`}
+                        options={DOC_TYPES}
+                        label="Document Type"
+                        wrapperClass="col-6 mr2"
+                        value={docType}
+                        onChange={this.updateDocType}
                       />
-                    </td>
-                    <td>
-                      <Textarea
-                        id={`contractor-${contractor.key}-desc`}
-                        name={`contractor-${contractor.key}-desc`}
-                        label={t(
-                          'activities.contractorResources.srLabels.description'
-                        )}
-                        rows="3"
-                        hideLabel
-                        spellCheck="true"
-                        value={contractor.desc}
-                        onChange={this.handleChange(i, 'desc')}
-                      />
-                    </td>
-                    <td>
-                      <div className="mb1 flex items-baseline h6">
-                        <span className="mr-tiny w-3 right-align">
-                          {t('activities.contractorResources.labels.start')}
-                        </span>
-                        <Input
-                          type="date"
-                          name={`contractor-${contractor.key}-start`}
-                          label={t(
-                            'activities.contractorResources.srLabels.start'
-                          )}
-                          hideLabel
-                          wrapperClass="mb1 flex-auto"
-                          value={contractor.start}
-                          onChange={this.handleChange(i, 'start')}
-                        />
-                      </div>
-                      <div className="mb1 flex items-baseline h6">
-                        <span className="mr-tiny w-3 right-align">
-                          {t('activities.contractorResources.labels.end')}
-                        </span>
-                        <Input
-                          type="date"
-                          name={`contractor-${contractor.key}-end`}
-                          label={t(
-                            'activities.contractorResources.srLabels.end'
-                          )}
-                          hideLabel
-                          wrapperClass="mb1 flex-auto"
-                          value={contractor.end}
-                          onChange={this.handleChange(i, 'end')}
-                        />
-                      </div>
-                    </td>
-                    {years.map(year => (
-                      <td key={year}>
-                        <DollarInput
-                          name={`contractor-${contractor.key}-cost-${year}`}
-                          label={t(
-                            'activities.contractorResources.srLabels.cost',
-                            { year }
-                          )}
-                          hideLabel
-                          value={contractor.years[year]}
-                          onChange={this.handleYearChange(i, year)}
-                        />
-                      </td>
-                    ))}
-                    <td className="center">
-                      <button
-                        type="button"
-                        className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                        title={t('activities.contractorResources.removeLabel')}
-                        onClick={() =>
-                          removeContractor(activityKey, contractor.key)
-                        }
+                      <Dropzone
+                        className="btn btn-primary"
+                        onDrop={this.handleFileUpload(i)}
+                        multiple={false}
                       >
-                        ✗
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                        Select file
+                      </Dropzone>
+                    </div>
+                    {(contractor.files || []).length > 0 && (
+                      <div className="md-col-4">
+                        <h5 className="md-mt0 mb-tiny">Attached files</h5>
+                        {contractor.files.map((f, j) => (
+                          <div key={`${f.name}-${j}`} className="mb1">
+                            <div>
+                              <DeleteButton
+                                className="btn btn-outline border-silver px-tiny py0 right"
+                                remove={this.handleFileDelete(i, j)}
+                                resource="activities.contractorResources.delete"
+                              />
+                              <a
+                                className="block bold truncate"
+                                href={f.preview}
+                                target="_blank"
+                              >
+                                {f.name}
+                              </a>
+                            </div>
+                            <div className="h6">({f.category})</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="mb3 md-flex">
+                  <Label>
+                    {t('activities.contractorResources.labels.cost')}
+                  </Label>
+                  <div className="md-col-6 flex">
+                    {years.map(year => (
+                      <DollarInput
+                        key={year}
+                        name={`contractor-${contractor.key}-cost-${year}`}
+                        label={year}
+                        value={contractor.years[year]}
+                        onChange={this.handleYearChange(i, year)}
+                        wrapperClass="mr2 flex-auto"
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className="btn btn-outline border-black px1 py-tiny mt-tiny h5"
+                    onClick={() =>
+                      removeContractor(activityKey, contractor.key)
+                    }
+                  >
+                    {t('activities.contractorResources.removeLabel')}
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         )}
         <button
@@ -183,7 +247,7 @@ class ActivityDetailContractorExpenses extends Component {
   }
 }
 
-ActivityDetailContractorExpenses.propTypes = {
+ContractorExpenses.propTypes = {
   activity: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
   addContractor: PropTypes.func.isRequired,
@@ -202,8 +266,6 @@ export const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ActivityDetailContractorExpenses
-);
+export { ContractorExpenses as raw };
 
-export const raw = ActivityDetailContractorExpenses;
+export default connect(mapStateToProps, mapDispatchToProps)(ContractorExpenses);
