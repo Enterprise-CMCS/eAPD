@@ -3,10 +3,7 @@ import React from 'react';
 
 const Select = ({ name, options, label, hideLabel, wrapperClass, ...rest }) => (
   <div className={wrapperClass || 'mb2'}>
-    <label
-      htmlFor={name}
-      className={hideLabel ? 'sr-only' : 'block mb-tiny bold'}
-    >
+    <label htmlFor={name} className={hideLabel ? 'sr-only' : 'block mb-tiny'}>
       {label}
     </label>
     <select id={name} className="m0 select" {...rest}>
