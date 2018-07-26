@@ -19,7 +19,14 @@ describe('activities reducer', () => {
     name: '',
     start: '',
     files: [],
-    years: { '2018': 0, '2019': 0 }
+    years: { '2018': 0, '2019': 0 },
+    hourly: {
+      useHourly: false,
+      data: {
+        '2018': { hours: '', rate: '' },
+        '2019': { hours: '', rate: '' }
+      }
+    }
   });
 
   const newPerson = keyFn => ({
@@ -328,6 +335,51 @@ describe('activities reducer', () => {
             ...stateWithOne.byKey['1'].standardsAndConditions,
             mita: 'new mita text'
           }
+        }
+      }
+    });
+  });
+
+  it('handles hourly data toggling', () => {
+    const activity = stateWithOne.byKey['1'];
+    const contractor = activity.contractorResources[0];
+    const contractorNew = {
+      ...contractor,
+      years: { '2018': 100, '2019': 200 }
+    };
+
+    const state = {
+      ...stateWithOne,
+      byKey: {
+        '1': {
+          ...activity,
+          contractorResources: [contractorNew]
+        }
+      }
+    };
+
+    expect(
+      activities(state, {
+        type: 'TOGGLE_ACTIVITY_CONTRACTOR_HOURLY',
+        key: '1',
+        contractorKey: contractor.key,
+        useHourly: true
+      })
+    ).toEqual({
+      ...state,
+      byKey: {
+        '1': {
+          ...state.byKey['1'],
+          contractorResources: [
+            {
+              ...contractorNew,
+              years: { '2018': 0, '2019': 0 },
+              hourly: {
+                ...contractorNew.hourly,
+                useHourly: true
+              }
+            }
+          ]
         }
       }
     });

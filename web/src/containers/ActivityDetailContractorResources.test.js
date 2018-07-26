@@ -5,6 +5,7 @@ import React from 'react';
 import {
   addActivityContractor,
   removeActivityContractor,
+  toggleActivityContractorHourly,
   updateActivity
 } from '../actions/activities';
 
@@ -30,6 +31,13 @@ describe('the activities contractors component', () => {
           years: {
             '1066': 100,
             '1067': 200
+          },
+          hourly: {
+            useHourly: false,
+            data: {
+              '1066': { hours: '', rate: '' },
+              '1067': { hours: '', rate: '' }
+            }
           }
         }
       ]
@@ -37,6 +45,7 @@ describe('the activities contractors component', () => {
     years: ['1066', '1067'],
     addContractor: sinon.stub(),
     removeContractor: sinon.stub(),
+    toggleContractorHourly: sinon.stub(),
     updateActivity: sinon.stub()
   };
 
@@ -131,6 +140,7 @@ describe('the activities contractors component', () => {
     expect(mapDispatchToProps).toEqual({
       addContractor: addActivityContractor,
       removeContractor: removeActivityContractor,
+      toggleContractorHourly: toggleActivityContractorHourly,
       updateActivity
     });
   });

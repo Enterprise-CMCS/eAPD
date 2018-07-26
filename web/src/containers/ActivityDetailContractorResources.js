@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {
   addActivityContractor,
   removeActivityContractor,
+  toggleActivityContractorHourly,
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import DeleteButton from '../components/DeleteConfirm';
@@ -14,7 +15,7 @@ import NoDataMsg from '../components/NoDataMsg';
 import { Subsection } from '../components/Section';
 import Select from '../components/Select';
 import { t } from '../i18n';
-import { arrToObj, isProgamAdmin } from '../util';
+import { isProgamAdmin } from '../util';
 
 const Label = props => (
   <h5 className="md-col-2 my-tiny pr1">{props.children}</h5>
@@ -51,30 +52,9 @@ class ContractorExpenses extends Component {
     updateActivity(activity.key, updates, true);
   };
 
-  handleIsHourly = (index, useHourly) => () => {
-    const { activity, updateActivity } = this.props;
-    // const updates = { [index]: { hourly: { useHourly } } };
-
-    // TODO: move this logic into reducer (too complicated here)
-    let toChange;
-    // if using hourly, clear out year totals
-    if (useHourly) {
-      toChange = {
-        years: arrToObj(activity.years, 0),
-        hourly: { useHourly }
-      };
-    } else {
-      // if not using hourly, clear out hourly data
-      toChange = {
-        hourly: {
-          useHourly,
-          data: arrToObj(activity.years, { hours: '', rate: '' })
-        }
-      };
-    }
-
-    const updates = { contractorResources: { [index]: toChange } };
-    updateActivity(activity.key, updates);
+  handleUseHourly = (contractor, useHourly) => () => {
+    const { activity, toggleContractorHourly } = this.props;
+    toggleContractorHourly(activity.key, contractor.key, useHourly);
   };
 
   handleHourlyChange = (index, year, field) => e => {
@@ -279,7 +259,7 @@ class ContractorExpenses extends Component {
                           className={`mr1 btn btn-outline ${
                             contractor.hourly.useHourly ? 'bg-black white' : ''
                           }`}
-                          onClick={this.handleIsHourly(i, true)}
+                          onClick={this.handleUseHourly(contractor, true)}
                           disabled={contractor.hourly.useHourly}
                         >
                           Yes
@@ -289,7 +269,7 @@ class ContractorExpenses extends Component {
                           className={`btn btn-outline ${
                             contractor.hourly.useHourly ? '' : 'bg-black white'
                           }`}
-                          onClick={this.handleIsHourly(i, false)}
+                          onClick={this.handleUseHourly(contractor, false)}
                           disabled={!contractor.hourly.useHourly}
                         >
                           No
@@ -305,12 +285,11 @@ class ContractorExpenses extends Component {
                           >
                             <div className="col-3 bold">FFY {year}</div>
                             <Input
-                              name={`contractor-${
-                                contractor.key
-                              }-${year}-hours`}
+                              name={`c-${contractor.key}-${year}-hrs`}
                               label="Number of hours"
                               wrapperClass="col-4"
                               className="m0 input mono"
+                              type="number"
                               value={contractor.hourly.data[year].hours}
                               onChange={this.handleHourlyChange(
                                 i,
@@ -319,7 +298,7 @@ class ContractorExpenses extends Component {
                               )}
                             />
                             <DollarInput
-                              name={`contractor-${contractor.key}-${year}-rate`}
+                              name={`c-${contractor.key}-${year}-rate`}
                               label="Hourly rate"
                               wrapperClass="col-4"
                               value={contractor.hourly.data[year].rate}
@@ -367,6 +346,7 @@ ContractorExpenses.propTypes = {
   years: PropTypes.array.isRequired,
   addContractor: PropTypes.func.isRequired,
   removeContractor: PropTypes.func.isRequired,
+  toggleContractorHourly: PropTypes.func.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
 
@@ -378,6 +358,7 @@ export const mapStateToProps = ({ activities: { byKey }, apd }, { aKey }) => ({
 export const mapDispatchToProps = {
   addContractor: addActivityContractor,
   removeContractor: removeActivityContractor,
+  toggleContractorHourly: toggleActivityContractorHourly,
   updateActivity: updateActivityAction
 };
 
