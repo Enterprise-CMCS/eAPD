@@ -2,7 +2,7 @@ const tap = require('tap');
 const sinon = require('sinon');
 const { ReadableMock } = require('stream-mock');
 
-const Store = require('./store');
+const store = require('./store');
 
 tap.test('file/blob store', async tests => {
   const sandbox = sinon.createSandbox();
@@ -14,7 +14,7 @@ tap.test('file/blob store', async tests => {
     remove: sandbox.stub()
   };
 
-  const store = new Store(mockStore);
+  store.store = mockStore;
 
   tests.beforeEach(async () => {
     sandbox.resetBehavior();

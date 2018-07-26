@@ -162,14 +162,16 @@ class Store {
   }
 }
 
-const def = new Store(
+// const def = new Store(
+//   getBlobStore(process.env.STORE_TYPE || '', process.env.STORE_PATH || '')
+// );
+//
+// Store.exists = def.exists.bind(def);
+// Store.get = def.get.bind(def);
+// Store.getReadStream = def.getReadStream.bind(def);
+// Store.remove = def.remove.bind(def);
+// Store.write = def.write.bind(def);
+
+module.exports = new Store(
   getBlobStore(process.env.STORE_TYPE || '', process.env.STORE_PATH || '')
 );
-
-Store.exists = def.exists.bind(def);
-Store.get = def.get.bind(def);
-Store.getReadStream = def.getReadStream.bind(def);
-Store.remove = def.remove.bind(def);
-Store.write = def.write.bind(def);
-
-module.exports = Store;
