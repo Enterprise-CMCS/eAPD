@@ -14,7 +14,7 @@ import NoDataMsg from '../components/NoDataMsg';
 import { Subsection } from '../components/Section';
 import Select from '../components/Select';
 import { t } from '../i18n';
-import { isProgamAdmin } from '../util';
+import { arrToObj, isProgamAdmin } from '../util';
 
 const Label = props => (
   <h5 className="md-col-2 my-tiny pr1">{props.children}</h5>
@@ -51,6 +51,32 @@ class ContractorExpenses extends Component {
     updateActivity(activity.key, updates, true);
   };
 
+  handleIsHourly = (index, useHourly) => () => {
+    const { activity, updateActivity } = this.props;
+    // const updates = { [index]: { hourly: { useHourly } } };
+
+    // TODO: move this logic into reducer (too complicated here)
+    let toChange;
+    // if using hourly, clear out year totals
+    if (useHourly) {
+      toChange = {
+        years: arrToObj(activity.years, 0),
+        hourly: { useHourly }
+      };
+    } else {
+      // if not using hourly, clear out hourly data
+      toChange = {
+        hourly: {
+          useHourly,
+          data: arrToObj(activity.years, { hours: '', rate: '' })
+        }
+      };
+    }
+
+    const updates = { contractorResources: { [index]: toChange } };
+    updateActivity(activity.key, updates);
+  };
+
   handleHourlyChange = (index, year, field) => e => {
     const value = +e.target.value;
 
@@ -61,14 +87,13 @@ class ContractorExpenses extends Component {
     const otherVal = hourlyData[year][otherField];
     const totalCost = (value || 0) * (otherVal || 0);
 
-    const updates = {
-      [index]: {
-        years: { [year]: totalCost },
-        hourly: { data: { [year]: { [field]: value } } }
-      }
+    const newData = {
+      years: { [year]: totalCost },
+      hourly: { data: { [year]: { [field]: value } } }
     };
 
-    updateActivity(activity.key, { contractorResources: updates });
+    const updates = { contractorResources: { [index]: newData } };
+    updateActivity(activity.key, updates, true);
   };
 
   handleFileUpload = index => files => {
@@ -235,6 +260,7 @@ class ContractorExpenses extends Component {
                         label={year}
                         value={contractor.years[year]}
                         onChange={this.handleYearChange(i, year)}
+                        disabled={contractor.hourly.useHourly}
                         wrapperClass="mr2 flex-auto"
                       />
                     ))}
@@ -248,41 +274,65 @@ class ContractorExpenses extends Component {
                     <div className="flex items-center">
                       <div className="mr2">This is an hourly resource</div>
                       <div>
-                        <button type="button" className="btn btn-outline mr1">
+                        <button
+                          type="button"
+                          className={`mr1 btn btn-outline ${
+                            contractor.hourly.useHourly ? 'bg-black white' : ''
+                          }`}
+                          onClick={this.handleIsHourly(i, true)}
+                          disabled={contractor.hourly.useHourly}
+                        >
                           Yes
                         </button>
                         <button
                           type="button"
-                          className="btn btn-outline bg-black white"
+                          className={`btn btn-outline ${
+                            contractor.hourly.useHourly ? '' : 'bg-black white'
+                          }`}
+                          onClick={this.handleIsHourly(i, false)}
+                          disabled={!contractor.hourly.useHourly}
                         >
                           No
                         </button>
                       </div>
                     </div>
-                    <div className="mt3">
-                      {years.map(year => (
-                        <div
-                          key={year}
-                          className="mb2 flex items-center justify-between"
-                        >
-                          <div className="col-3 bold">FFY {year}</div>
-                          <Input
-                            name={`contractor-${contractor.key}-${year}-hours`}
-                            label="Number of hours"
-                            wrapperClass="col-4"
-                            value={contractor.hourly.data[year].hours}
-                            onChange={this.handleHourlyChange(i, year, 'hours')}
-                          />
-                          <DollarInput
-                            name={`contractor-${contractor.key}-${year}-rate`}
-                            label="Hourly rate"
-                            wrapperClass="col-4"
-                            value={contractor.hourly.data[year].rate}
-                            onChange={this.handleHourlyChange(i, year, 'rate')}
-                          />
-                        </div>
-                      ))}
-                    </div>
+                    {contractor.hourly.useHourly && (
+                      <div className="mt3">
+                        {years.map(year => (
+                          <div
+                            key={year}
+                            className="mb2 flex items-center justify-between"
+                          >
+                            <div className="col-3 bold">FFY {year}</div>
+                            <Input
+                              name={`contractor-${
+                                contractor.key
+                              }-${year}-hours`}
+                              label="Number of hours"
+                              wrapperClass="col-4"
+                              className="m0 input mono"
+                              value={contractor.hourly.data[year].hours}
+                              onChange={this.handleHourlyChange(
+                                i,
+                                year,
+                                'hours'
+                              )}
+                            />
+                            <DollarInput
+                              name={`contractor-${contractor.key}-${year}-rate`}
+                              label="Hourly rate"
+                              wrapperClass="col-4"
+                              value={contractor.hourly.data[year].rate}
+                              onChange={this.handleHourlyChange(
+                                i,
+                                year,
+                                'rate'
+                              )}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div>
