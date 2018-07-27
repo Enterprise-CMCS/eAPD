@@ -1,16 +1,12 @@
 const logger = require('../../logger')('apds route post');
-const {
-  apd: defaultApdModel,
-  apdPointOfContact: defaultPOCModel,
-  state: defaultStateModel
-} = require('../../db').models;
+const { apd: defaultApdModel } = require('../../db').models;
 const { can } = require('../../middleware');
+
+const defaultGetNewApd = require('./post.data');
 
 module.exports = (
   app,
-  ApdModel = defaultApdModel,
-  POCModel = defaultPOCModel,
-  StateModel = defaultStateModel
+  { getNewApd = defaultGetNewApd, ApdModel = defaultApdModel } = {}
 ) => {
   logger.silly('setting up POST /apds/ route');
   app.post('/apds', can('edit-document'), async (req, res) => {
@@ -21,22 +17,10 @@ module.exports = (
         state_id: req.user.state,
         status: 'draft'
       });
-
-      const state = await StateModel.where({ id: req.user.state }).fetch();
-      if (state.get('medicaid_office')) {
-        newApd.set({ stateProfile: state.get('medicaid_office') });
-      }
-
       await newApd.save();
 
-      if (state.get('state_pocs')) {
-        await Promise.all(
-          state.get('state_pocs').map(async poc => {
-            const newPOC = POCModel.forge({ ...poc, apd_id: newApd.get('id') });
-            await newPOC.save();
-          })
-        );
-      }
+      const apdContent = await getNewApd(req.user.state);
+      await newApd.synchronize(apdContent);
 
       const apd = await ApdModel.where({ id: newApd.get('id') }).fetch({
         withRelated: ApdModel.withRelated
