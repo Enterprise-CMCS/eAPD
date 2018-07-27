@@ -144,6 +144,9 @@ jobs:
           - POSTGRES_USER=postgres
           - POSTGRES_PASSWORD=cms
           - POSTGRES_DB=hitech_apd_test
+          - STORE_TYPE=fs
+          - STORE_PATH=endpoint-tests/files
+
     steps:
       - checkout
       - restore_cache:
