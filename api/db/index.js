@@ -14,6 +14,7 @@ const apdVersion = require('./apdVersion');
 const keyPersonnel = require('./apdKeyPersonnel');
 const previousActivityExpense = require('./apdPreviousActivityExpense');
 const apdActivity = require('./activity');
+const file = require('./file');
 
 const exportedModels = {};
 
@@ -32,7 +33,8 @@ const setup = (
     apdVersion(),
     keyPersonnel(),
     previousActivityExpense(),
-    apdActivity()
+    apdActivity(),
+    file()
   ]
 ) => {
   logger.silly(

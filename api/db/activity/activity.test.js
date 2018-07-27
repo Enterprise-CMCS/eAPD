@@ -15,6 +15,7 @@ tap.test('activity data model', async activityModelTests => {
           goals: Function,
           contractorResources: Function,
           expenses: Function,
+          files: Function,
           schedule: Function,
           statePersonnel: Function,
           costAllocation: Function,
@@ -43,10 +44,12 @@ tap.test('activity data model', async activityModelTests => {
             foreignKey: 'activity_id',
             withRelated: [
               'contractorResources',
+              'contractorResources.files',
               'contractorResources.years',
               'goals',
               'expenses',
               'expenses.entries',
+              'files',
               'schedule',
               'statePersonnel',
               'statePersonnel.years',
@@ -196,6 +199,28 @@ tap.test('activity data model', async activityModelTests => {
         apdTests.equal(output, 'can', 'returns the expected value');
       }
     );
+
+    relationshipTests.test(
+      'activity model sets up files relationship',
+      async test => {
+        const self = {
+          belongsToMany: sinon.stub().returns('boo')
+        };
+
+        const output = activity.apdActivity.files.bind(self)();
+
+        test.ok(
+          self.belongsToMany.calledWith(
+            'file',
+            'activity_files',
+            'activity_id',
+            'file_id'
+          ),
+          'sets up the relationship mapping to files'
+        );
+        test.equal(output, 'boo', 'retuns the expected value');
+      }
+    );
   });
 
   activityModelTests.test(
@@ -343,6 +368,7 @@ tap.test('activity data model', async activityModelTests => {
       self.related
         .withArgs('costAllocation')
         .returns('cost allocation by year');
+      self.related.withArgs('files').returns('file file file');
 
       const output = activity.apdActivity.toJSON.bind(self)();
 
@@ -359,6 +385,7 @@ tap.test('activity data model', async activityModelTests => {
             otherSources: 'panhandling, funny videos online'
           },
           costAllocation: 'cost allocation by year',
+          files: 'file file file',
           goals: 'goooooaaaaals',
           standardsAndConditions: 'nobody reads them',
           fundingSource: 'bitcoin'

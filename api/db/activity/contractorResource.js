@@ -10,6 +10,15 @@ module.exports = {
       return this.belongsTo('apdActivity');
     },
 
+    files() {
+      return this.belongsToMany(
+        'file',
+        'activity_contractor_files',
+        'activity_contractor_resource_id',
+        'file_id'
+      );
+    },
+
     years() {
       return this.hasMany(
         'apdActivityContractorResourceCost',
@@ -39,6 +48,7 @@ module.exports = {
         id: this.get('id'),
         name: this.get('name'),
         description: this.get('description'),
+        files: this.related('files'),
         start: getDate(this.get('start')),
         end: getDate(this.get('end')),
         years: this.related('years')
