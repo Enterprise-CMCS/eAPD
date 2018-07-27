@@ -1,5 +1,4 @@
 const activity = require('./activity');
-const approach = require('./approach');
 const contractorResource = require('./contractorResource');
 const costAllocation = require('./costAllocation');
 const expense = require('./expense');
@@ -13,7 +12,6 @@ const quarterlyFFP = require('./quarterlyFFP');
 // so db/index only has to load this one thing
 module.exports = () => ({
   ...activity,
-  ...approach,
   ...contractorResource,
   ...costAllocation,
   ...expense,

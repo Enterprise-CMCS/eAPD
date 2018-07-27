@@ -6,12 +6,6 @@ module.exports = {
       return this.belongsTo('apdActivity');
     },
 
-    async validate() {
-      if (!this.attributes.description) {
-        throw new Error('invalid-goals');
-      }
-    },
-
     toJSON() {
       return {
         id: this.get('id'),
