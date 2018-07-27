@@ -138,14 +138,14 @@ jobs:
       - image: node:8
         environment:
           - NODE_ENV=test
+          - STORE_TYPE=fs
+          - STORE_PATH=endpoint-tests/files
       - image: postgres:latest
         name: db
         environment:
           - POSTGRES_USER=postgres
           - POSTGRES_PASSWORD=cms
           - POSTGRES_DB=hitech_apd_test
-          - STORE_TYPE=fs
-          - STORE_PATH=endpoint-tests/files
 
     steps:
       - checkout
