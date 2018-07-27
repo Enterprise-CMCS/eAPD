@@ -16,6 +16,7 @@ tap.test(
         {
           tableName: 'activity_contractor_resources',
           activity: Function,
+          files: Function,
           years: Function,
           static: {
             updateableFields: ['name', 'description', 'start', 'end'],
@@ -28,7 +29,7 @@ tap.test(
     });
 
     contractorResourceModelTests.test(
-      'expense model sets up activity relationship',
+      'contractor model sets up activity relationship',
       async relationTest => {
         const self = {
           belongsTo: sinon.stub().returns('baz')
@@ -45,7 +46,29 @@ tap.test(
     );
 
     contractorResourceModelTests.test(
-      'expense model sets up resource cost relationship',
+      'contractor model sets up files relationship',
+      async test => {
+        const self = {
+          belongsToMany: sinon.stub().returns('foo')
+        };
+
+        const output = contractor.files.bind(self)();
+
+        test.ok(
+          self.belongsToMany.calledWith(
+            'file',
+            'activity_contractor_files',
+            'activity_contractor_resource_id',
+            'file_id'
+          ),
+          'sets up the relationship mapping to files'
+        );
+        test.equal(output, 'foo', 'retuns the expected value');
+      }
+    );
+
+    contractorResourceModelTests.test(
+      'contractor model sets up resource cost relationship',
       async relationTest => {
         const self = {
           hasMany: sinon.stub().returns('baz')
@@ -108,6 +131,7 @@ tap.test(
         self.get.withArgs('description').returns('description field');
         self.get.withArgs('start').returns(moment('2001-01-01').toDate());
         self.get.withArgs('end').returns(moment('2002-02-02').toDate());
+        self.related.withArgs('files').returns('on the floppy disk');
         self.related.withArgs('years').returns('some times');
 
         const output = contractor.toJSON.bind(self)();
@@ -116,6 +140,7 @@ tap.test(
           id: 'id field',
           name: 'name field',
           description: 'description field',
+          files: 'on the floppy disk',
           start: '2001-01-01',
           end: '2002-02-02',
           years: 'some times'

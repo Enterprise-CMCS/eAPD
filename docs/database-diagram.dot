@@ -1,5 +1,5 @@
 /*
- * Graphviz of '<open file '<stdin>', mode 'r' at 0x7fb5c1f140c0>', created 2018-07-03 17:22:49.276882
+ * Graphviz of '<open file '<stdin>', mode 'r' at 0x7fb6aff990c0>', created 2018-07-26 13:32:01.968367
  * Generated from https://github.com/rm-hull/sql_graphviz
  */
 digraph g { graph [ rankdir = "LR" ];
@@ -33,6 +33,16 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="alternatives"><font face="Times-bold">alternatives</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="explanation"><font face="Times-bold">explanation</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
+  "activity_contractor_files" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_contractor_files</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="file_id"><font face="Times-bold">file_id</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_contractor_resource_id"><font face="Times-bold">activity_contractor_resource_id</font>  <font color="#535353">integer</font></td></tr>
       </table>
     >];
 
@@ -100,6 +110,16 @@ digraph g { graph [ rankdir = "LR" ];
       </table>
     >];
 
+  "activity_files" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_files</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="file_id"><font face="Times-bold">file_id</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+      </table>
+    >];
+
   "activity_goals" [
     shape=none
     label=<
@@ -109,6 +129,29 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="objective"><font face="Times-bold">objective</font>  <font color="#535353">text</font></td></tr>
+      </table>
+    >];
+
+  "activity_quarterly_ffp" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_quarterly_ffp</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="year"><font face="Times-bold">year</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q1_combined"><font face="Times-bold">q1_combined</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q1_contractors"><font face="Times-bold">q1_contractors</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q1_state"><font face="Times-bold">q1_state</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q2_combined"><font face="Times-bold">q2_combined</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q2_contractors"><font face="Times-bold">q2_contractors</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q2_state"><font face="Times-bold">q2_state</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q3_combined"><font face="Times-bold">q3_combined</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q3_contractors"><font face="Times-bold">q3_contractors</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q3_state"><font face="Times-bold">q3_state</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q4_combined"><font face="Times-bold">q4_combined</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q4_contractors"><font face="Times-bold">q4_contractors</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="q4_state"><font face="Times-bold">q4_state</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
       </table>
     >];
 
@@ -205,6 +248,19 @@ digraph g { graph [ rankdir = "LR" ];
       </table>
     >];
 
+  "apd_points_of_contact" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">apd_points_of_contact</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="apd_id"><font face="Times-bold">apd_id</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="name"><font face="Times-bold">name</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="position"><font face="Times-bold">position</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="email"><font face="Times-bold">email</font>  <font color="#535353">text</font></td></tr>
+      </table>
+    >];
+
   "apd_previous_activity_expenses" [
     shape=none
     label=<
@@ -221,6 +277,18 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="hit_federal_actual"><font face="Times-bold">hit_federal_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="hit_state_approved"><font face="Times-bold">hit_state_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="hit_state_actual"><font face="Times-bold">hit_state_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_federal90_approved"><font face="Times-bold">mmis_federal90_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_federal90_actual"><font face="Times-bold">mmis_federal90_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_federal75_approved"><font face="Times-bold">mmis_federal75_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_federal75_actual"><font face="Times-bold">mmis_federal75_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_federal50_approved"><font face="Times-bold">mmis_federal50_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_federal50_actual"><font face="Times-bold">mmis_federal50_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_state10_approved"><font face="Times-bold">mmis_state10_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_state10_actual"><font face="Times-bold">mmis_state10_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_state25_approved"><font face="Times-bold">mmis_state25_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_state25_actual"><font face="Times-bold">mmis_state25_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_state50_approved"><font face="Times-bold">mmis_state50_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis_state50_actual"><font face="Times-bold">mmis_state50_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
       </table>
     >];
 
@@ -297,6 +365,18 @@ digraph g { graph [ rankdir = "LR" ];
       </table>
     >];
 
+  "files" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">files</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="key"><font face="Times-bold">key</font>  <font color="#535353">text</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="size"><font face="Times-bold">size</font>  <font color="#535353">integer</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="metadata"><font face="Times-bold">metadata</font>  <font color="#535353">json</font></td></tr>
+      </table>
+    >];
+
   "knex_migrations" [
     shape=none
     label=<
@@ -349,18 +429,24 @@ digraph g { graph [ rankdir = "LR" ];
     >];
   "activities":apd_id -> "apds":id
   "activity_approaches":activity_id -> "activities":id
+  "activity_contractor_files":activity_contractor_resource_id -> "activity_contractor_resources":id
+  "activity_contractor_files":file_id -> "files":id
   "activity_contractor_resources":activity_id -> "activities":id
   "activity_contractor_resources_yearly":contractor_resource_id -> "activity_contractor_resources":id
   "activity_cost_allocation":activity_id -> "activities":id
   "activity_expense_entries":expense_id -> "activity_expenses":id
   "activity_expenses":activity_id -> "activities":id
+  "activity_files":activity_id -> "activities":id
+  "activity_files":file_id -> "files":id
   "activity_goals":activity_id -> "activities":id
+  "activity_quarterly_ffp":activity_id -> "activities":id
   "activity_schedule":activity_id -> "activities":id
   "activity_state_peronnel":activity_id -> "activities":id
   "activity_state_personnel_yearly":personnel_id -> "activity_state_peronnel":id
   "apd_incentive_payments":apd_id -> "apds":id
   "apd_key_personnel":apd_id -> "apds":id
   "apd_key_personnel_years":apd_key_personnel_id -> "apd_key_personnel":id
+  "apd_points_of_contact":apd_id -> "apds":id
   "apd_previous_activity_expenses":apd_id -> "apds":id
   "apd_versions":apd_id -> "apds":id
   "apd_versions":user_id -> "users":id
