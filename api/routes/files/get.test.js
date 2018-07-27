@@ -12,7 +12,7 @@ tap.test('files GET endpoint', async endpointTest => {
 
   const req = {
     params: {
-      id: 'file id'
+      id: 3
     },
     user: {
       model: {
@@ -61,6 +61,13 @@ tap.test('files GET endpoint', async endpointTest => {
   endpointTest.test('get files handler', async handlerTest => {
     getEndpoint(app, { FileModel, store });
     const handler = app.get.args.filter(arg => arg[0] === '/files/:id')[0][2];
+
+    handlerTest.test('handles an invalid file id', async test => {
+      await handler({ params: { id: 'bob' } }, res);
+
+      test.ok(res.status.calledWith(400), 'sends an HTTP 400');
+      test.ok(res.end.calledOnce, 'response is terminated');
+    });
 
     handlerTest.test('handles a database error', async test => {
       FileModel.fetch.rejects();

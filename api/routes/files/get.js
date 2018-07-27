@@ -14,7 +14,12 @@ module.exports = (
       const { id } = req.params;
       logger.silly(req, `asked for file with id ${id}`);
 
-      const file = await FileModel.where({ id }).fetch({
+      if (Number.isNaN(+id)) {
+        logger.verbose('invalid id');
+        return res.status(400).end();
+      }
+
+      const file = await FileModel.where({ id: +id }).fetch({
         withRelated: ['activities.apd', 'contractors.activity.apd']
       });
 
