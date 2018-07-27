@@ -18,6 +18,8 @@ services:
       - API_PORT=8000
       - API_HOST=api-for-testing
       - ENDPOINT_COVERAGE_CAPTURE=yes
+      - STORE_TYPE=fs
+      - STORE_PATH=endpoint-tests/files
     command: npm start
     expose:
       - 8000
