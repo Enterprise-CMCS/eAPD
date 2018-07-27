@@ -9,16 +9,23 @@ module.exports = (
   { FileModel = defaultFileModel, store = defaultStore } = {}
 ) => {
   logger.silly('setting up GET endpoint');
-  app.get('/files/:key', loggedIn, async (req, res) => {
+  app.get('/files/:id', loggedIn, async (req, res) => {
     try {
-      const { key } = req.params;
-      logger.silly(req, `asked for file with key ${key}`);
+      const { id } = req.params;
+      logger.silly(req, `asked for file with id ${id}`);
 
-      const file = await FileModel.where({ key }).fetch({
+      const file = await FileModel.where({ id }).fetch({
         withRelated: ['activities.apd', 'contractors.activity.apd']
       });
 
-      if (file && (await store.exists(key))) {
+      if (!file) {
+        logger.info(req, `No file with id ${id}`);
+        return res.status(404).end();
+      }
+
+      const key = file.get('key');
+
+      if (await store.exists(key)) {
         const userApds = await req.user.model.apds();
         logger.silly(req, `user has access to apds: [${userApds}]`);
 
@@ -37,12 +44,9 @@ module.exports = (
           logger.silly(req, `user has access!`);
           return store.getReadStream(key).pipe(res);
         }
-        logger.info(
-          req,
-          `User does not have permission to file with key ${key}`
-        );
+        logger.info(req, `User does not have permission to file ${id}`);
       } else {
-        logger.info(req, `No such file with key ${key}`);
+        logger.info(req, `No file in blob store with key ${key}`);
       }
 
       return res.status(404).end();

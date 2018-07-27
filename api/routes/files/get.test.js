@@ -12,7 +12,7 @@ tap.test('files GET endpoint', async endpointTest => {
 
   const req = {
     params: {
-      key: 'file key'
+      id: 'file id'
     },
     user: {
       model: {
@@ -31,6 +31,7 @@ tap.test('files GET endpoint', async endpointTest => {
     fetch: sandbox.stub(),
     where: sandbox.stub()
   };
+  const get = sinon.stub();
 
   const store = {
     exists: sandbox.stub(),
@@ -52,14 +53,14 @@ tap.test('files GET endpoint', async endpointTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/files/:key', loggedIn, sinon.match.func),
+      app.get.calledWith('/files/:id', loggedIn, sinon.match.func),
       'me GET endpoint is registered'
     );
   });
 
   endpointTest.test('get files handler', async handlerTest => {
     getEndpoint(app, { FileModel, store });
-    const handler = app.get.args.filter(arg => arg[0] === '/files/:key')[0][2];
+    const handler = app.get.args.filter(arg => arg[0] === '/files/:id')[0][2];
 
     handlerTest.test('handles a database error', async test => {
       FileModel.fetch.rejects();
@@ -84,7 +85,7 @@ tap.test('files GET endpoint', async endpointTest => {
     handlerTest.test(
       'handles when the file is not in the store',
       async test => {
-        FileModel.fetch.resolves({});
+        FileModel.fetch.resolves({ get });
         store.exists.resolves(false);
 
         await handler(req, res);
@@ -98,12 +99,15 @@ tap.test('files GET endpoint', async endpointTest => {
       'when the file exists in the database and the store',
       async existTests => {
         const file = {
+          get,
           related: sandbox.stub()
         };
         const pipe = sandbox.spy();
 
         existTests.beforeEach(async () => {
           FileModel.fetch.resolves(file);
+          get.withArgs('key').returns('file key');
+
           store.exists.resolves(true);
 
           store.getReadStream.returns({ pipe });
