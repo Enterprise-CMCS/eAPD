@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {
   addActivityContractor,
   removeActivityContractor,
+  toggleActivityContractorHourly,
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import DeleteButton from '../components/DeleteConfirm';
@@ -48,6 +49,30 @@ class ContractorExpenses extends Component {
     const updates = {
       contractorResources: { [index]: { years: { [year]: value } } }
     };
+    updateActivity(activity.key, updates, true);
+  };
+
+  handleUseHourly = (contractor, useHourly) => () => {
+    const { activity, toggleContractorHourly } = this.props;
+    toggleContractorHourly(activity.key, contractor.key, useHourly);
+  };
+
+  handleHourlyChange = (index, year, field) => e => {
+    const value = +e.target.value;
+
+    const { activity, updateActivity } = this.props;
+    const { data: hourlyData } = activity.contractorResources[index].hourly;
+
+    const otherField = field === 'hours' ? 'rate' : 'hours';
+    const otherVal = hourlyData[year][otherField];
+    const totalCost = (value || 0) * (otherVal || 0);
+
+    const newData = {
+      years: { [year]: totalCost },
+      hourly: { data: { [year]: { [field]: value } } }
+    };
+
+    const updates = { contractorResources: { [index]: newData } };
     updateActivity(activity.key, updates, true);
   };
 
@@ -215,9 +240,78 @@ class ContractorExpenses extends Component {
                         label={year}
                         value={contractor.years[year]}
                         onChange={this.handleYearChange(i, year)}
+                        disabled={contractor.hourly.useHourly}
                         wrapperClass="mr2 flex-auto"
                       />
                     ))}
+                  </div>
+                </div>
+                <div className="mb3 md-flex">
+                  <Label>
+                    {t('activities.contractorResources.labels.hourly')}
+                  </Label>
+                  <div className="md-col-6">
+                    <div className="flex items-center">
+                      <div className="mr2">This is an hourly resource</div>
+                      <div>
+                        <button
+                          type="button"
+                          className={`mr1 btn btn-outline ${
+                            contractor.hourly.useHourly ? 'bg-black white' : ''
+                          }`}
+                          onClick={this.handleUseHourly(contractor, true)}
+                          disabled={contractor.hourly.useHourly}
+                        >
+                          Yes
+                        </button>
+                        <button
+                          type="button"
+                          className={`btn btn-outline ${
+                            contractor.hourly.useHourly ? '' : 'bg-black white'
+                          }`}
+                          onClick={this.handleUseHourly(contractor, false)}
+                          disabled={!contractor.hourly.useHourly}
+                        >
+                          No
+                        </button>
+                      </div>
+                    </div>
+                    {contractor.hourly.useHourly && (
+                      <div className="mt3">
+                        {years.map(year => (
+                          <div
+                            key={year}
+                            className="mb2 flex items-center justify-between"
+                          >
+                            <div className="col-3 bold">FFY {year}</div>
+                            <Input
+                              name={`c-${contractor.key}-${year}-hrs`}
+                              label="Number of hours"
+                              wrapperClass="col-4"
+                              className="m0 input mono"
+                              type="number"
+                              value={contractor.hourly.data[year].hours}
+                              onChange={this.handleHourlyChange(
+                                i,
+                                year,
+                                'hours'
+                              )}
+                            />
+                            <DollarInput
+                              name={`c-${contractor.key}-${year}-rate`}
+                              label="Hourly rate"
+                              wrapperClass="col-4"
+                              value={contractor.hourly.data[year].rate}
+                              onChange={this.handleHourlyChange(
+                                i,
+                                year,
+                                'rate'
+                              )}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -252,6 +346,7 @@ ContractorExpenses.propTypes = {
   years: PropTypes.array.isRequired,
   addContractor: PropTypes.func.isRequired,
   removeContractor: PropTypes.func.isRequired,
+  toggleContractorHourly: PropTypes.func.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
 
@@ -263,6 +358,7 @@ export const mapStateToProps = ({ activities: { byKey }, apd }, { aKey }) => ({
 export const mapDispatchToProps = {
   addContractor: addActivityContractor,
   removeContractor: removeActivityContractor,
+  toggleContractorHourly: toggleActivityContractorHourly,
   updateActivity: updateActivityAction
 };
 
