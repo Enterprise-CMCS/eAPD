@@ -18,7 +18,7 @@ import { t } from '../i18n';
 import { isProgamAdmin } from '../util';
 
 const Label = props => (
-  <h5 className="md-col-2 my-tiny pr1">{props.children}</h5>
+  <h3 className="md-col-2 my-tiny pr1 h5">{props.children}</h3>
 );
 
 Label.propTypes = {
