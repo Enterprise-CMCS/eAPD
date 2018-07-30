@@ -78,6 +78,9 @@ module.exports = {
                 type: 'string',
                 description: 'Description'
               },
+              files: arrayOf({
+                $ref: '#/components/schemas/file'
+              }),
               start: {
                 type: 'string',
                 format: 'date-time',
@@ -144,6 +147,9 @@ module.exports = {
                   'Federal fiscal year this cost allocation applies to'
               }
             }
+          }),
+          files: arrayOf({
+            $ref: '#/components/schemas/file'
           }),
           goals: arrayOf({
             type: 'object',
@@ -364,9 +370,9 @@ module.exports = {
             type: 'number',
             description: 'APD ID'
           },
-          activities: {
+          activities: arrayOf({
             $ref: '#/components/schemas/activity'
-          },
+          }),
           federalCitations: {
             type: 'object',
             description:
@@ -586,6 +592,28 @@ module.exports = {
           years: arrayOf({
             type: 'number'
           })
+        }
+      },
+      file: {
+        type: 'object',
+        description: 'Files associated with the activity',
+        properties: {
+          id: {
+            type: 'number'
+          },
+          key: {
+            type: 'string',
+            description:
+              'File store identifier, used to retrieve the actual file'
+          },
+          size: {
+            type: 'number',
+            description: 'Size of the file, in bytes'
+          },
+          metadata: {
+            type: 'object',
+            description: 'Free-form object containing file metadata'
+          }
         }
       },
       incentivePaymentQuarter: {

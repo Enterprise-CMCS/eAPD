@@ -123,6 +123,7 @@ tap.test(
               },
               costAllocation: [],
               expenses: [],
+              files: [],
               goals: [
                 {
                   id: 4200,
