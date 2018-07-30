@@ -8,6 +8,7 @@ import {
   removeActivityGoal as removeActivityGoalAction,
   updateActivity as updateActivityAction
 } from '../actions/activities';
+import Btn from '../components/Btn';
 import { Chunk, Subsection } from '../components/Section';
 import { RichText } from '../components/Inputs';
 import { isProgamAdmin } from '../util';
@@ -40,13 +41,13 @@ class ActivityDetailGoals extends Component {
               <div className="mb3">
                 <div className="mb-tiny">
                   {activity.goals.length > 1 && (
-                    <button
-                      type="button"
-                      className="px1 py-tiny right btn btn-outline border-silver h6 line-height-1"
+                    <Btn
+                      kind="outline"
+                      extraCss="right px1 py-tiny h6 line-height-1"
                       onClick={this.handleDelete(d.key)}
                     >
                       Remove
-                    </button>
+                    </Btn>
                   )}
                   {t('activities.goals.goal.title', { number: i + 1 })}
                 </div>
@@ -66,14 +67,9 @@ class ActivityDetailGoals extends Component {
             </Chunk>
           </div>
         ))}
-
-        <button
-          type="button"
-          className="btn btn-primary bg-black"
-          onClick={this.handleAdd}
-        >
+        <Btn onClick={this.handleAdd}>
           {t('activities.goals.addGoalButtonText')}
-        </button>
+        </Btn>
       </Subsection>
     );
   }

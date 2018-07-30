@@ -21,25 +21,11 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": Array [
-        "child content",
-        <Connect(DataInspector) />,
-      ],
+      "children": "child content",
       "className": "site",
     },
     "ref": null,
-    "rendered": Array [
-      "child content",
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {},
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-    ],
+    "rendered": "child content",
     "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
@@ -48,25 +34,11 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": Array [
-          "child content",
-          <Connect(DataInspector) />,
-        ],
+        "children": "child content",
         "className": "site",
       },
       "ref": null,
-      "rendered": Array [
-        "child content",
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-      ],
+      "rendered": "child content",
       "type": "div",
     },
   ],
@@ -101,17 +73,11 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": Array [
-        "child content",
-        false,
-      ],
+      "children": "child content",
       "className": "site",
     },
     "ref": null,
-    "rendered": Array [
-      "child content",
-      false,
-    ],
+    "rendered": "child content",
     "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
@@ -120,17 +86,11 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": Array [
-          "child content",
-          false,
-        ],
+        "children": "child content",
         "className": "site",
       },
       "ref": null,
-      "rendered": Array [
-        "child content",
-        false,
-      ],
+      "rendered": "child content",
       "type": "div",
     },
   ],

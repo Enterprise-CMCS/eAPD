@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { login } from '../actions/auth';
+import Btn from '../components/Btn';
 import Container from '../components/Container';
 
 class Login extends Component {
@@ -59,13 +60,9 @@ class Login extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={fetching}
-            >
+            <Btn type="submit" disabled={fetching}>
               {fetching ? 'Submitting' : 'Submit'}
-            </button>
+            </Btn>
           </form>
         </div>
       </Container>

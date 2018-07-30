@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { createApd, selectApd } from '../actions/apd';
+import Btn from '../components/Btn';
 import Container from '../components/Container';
 
 class Landing extends Component {
@@ -25,27 +26,26 @@ class Landing extends Component {
             <div>
               <h3>Manage an existing APD:</h3>
               {apds.map(({ status, years, id }) => (
-                <button
+                <Btn
                   key={id}
-                  type="button"
-                  className="block mb1 btn btn-primary btn-pill bg-black h5"
+                  extraCss="mb1 h5 block pill"
                   onClick={this.pickApd(id)}
                 >
                   {status} APD{years
                     ? ` for ${years.join(', ')}`
                     : ' (years not defined yet)'}
-                </button>
+                </Btn>
               ))}
             </div>
           )}
           <hr />
-          <button
-            type="button"
-            className="btn btn-outline btn-pill bg-white blue"
+          <Btn
+            kind="outline"
+            extraCss="bg-white blue pill"
             onClick={this.createApd}
           >
             Create new APD
-          </button>
+          </Btn>
         </div>
       </Container>
     );

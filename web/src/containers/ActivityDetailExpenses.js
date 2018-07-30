@@ -7,6 +7,7 @@ import {
   removeActivityExpense,
   updateActivity as updateActivityAction
 } from '../actions/activities';
+import Btn from '../components/Btn';
 import NoDataMsg from '../components/NoDataMsg';
 import { DollarInput, Textarea } from '../components/Inputs';
 import { Subsection } from '../components/Section';
@@ -101,14 +102,13 @@ class ActivityDetailExpenses extends Component {
                       </td>
                     ))}
                     <td className="center">
-                      <button
-                        type="button"
-                        className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                        title="Remove Expense"
+                      <Btn
+                        kind="outline"
+                        extraCss="px1 py-tiny mt-tiny"
                         onClick={() => removeExpense(activityKey, expense.key)}
                       >
                         ✗
-                      </button>
+                      </Btn>
                     </td>
                   </tr>
                 ))}
@@ -116,13 +116,7 @@ class ActivityDetailExpenses extends Component {
             </table>
           </div>
         )}
-        <button
-          type="button"
-          className="btn btn-primary bg-black"
-          onClick={() => addExpense(activityKey)}
-        >
-          Add expense
-        </button>
+        <Btn onClick={() => addExpense(activityKey)}>Add expense</Btn>
       </Subsection>
     );
   }

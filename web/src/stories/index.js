@@ -1,10 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'; // eslint-disable-line import/no-extraneous-dependencies
 
+import Btn from '../components/Btn';
 import Collapsible from '../components/Collapsible';
 import { Input, Textarea } from '../components/Inputs';
-import PageNavButtons from '../components/PageNavButtons';
 
 import '../styles/index.css';
 
@@ -26,9 +25,11 @@ storiesOf('Inputs', module)
   .add('text input', () => <Input {...inputProps} />)
   .add('textarea input', () => <Textarea {...inputProps} />);
 
-storiesOf('PageNavButtons', module)
-  .add('next only', () => <PageNavButtons goTo={action('goTo')} next="/foo" />)
-  .add('prev only', () => <PageNavButtons goTo={action('goTo')} prev="/bar" />)
-  .add('prev and next', () => (
-    <PageNavButtons goTo={action('goTo')} prev="/bar" next="/foo" />
-  ));
+storiesOf('Buttons', module).add('various', () => (
+  <div>
+    <Btn /> <Btn>Boom</Btn> <Btn extraCss="p3">More padding</Btn>{' '}
+    <Btn onClick={() => alert('btn clicked!')}>Click me!</Btn>
+    <hr />
+    <Btn kind="outline" /> <Btn kind="outline" size="big" />
+  </div>
+));

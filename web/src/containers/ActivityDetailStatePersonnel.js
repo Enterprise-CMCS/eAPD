@@ -7,6 +7,7 @@ import {
   removeActivityStatePerson,
   updateActivity as updateActivityAction
 } from '../actions/activities';
+import Btn from '../components/Btn';
 import NoDataMsg from '../components/NoDataMsg';
 import {
   Input,
@@ -137,14 +138,13 @@ class ActivityDetailStatePersonnel extends Component {
                       </Fragment>
                     ))}
                     <td className="center">
-                      <button
-                        type="button"
-                        className="btn btn-outline border-silver px1 py-tiny mt-tiny"
-                        title={t('activities.statePersonnel.removeLabel')}
+                      <Btn
+                        kind="outline"
+                        extraCss="px1 py-tiny mt-tiny"
                         onClick={() => removePerson(activityKey, d.key)}
                       >
                         ✗
-                      </button>
+                      </Btn>
                     </td>
                   </tr>
                 ))}
@@ -152,13 +152,9 @@ class ActivityDetailStatePersonnel extends Component {
             </table>
           </div>
         )}
-        <button
-          type="button"
-          className="btn btn-primary bg-black"
-          onClick={() => addPerson(activityKey)}
-        >
+        <Btn onClick={() => addPerson(activityKey)}>
           {t('activities.statePersonnel.addButtonText')}
-        </button>
+        </Btn>
       </Subsection>
     );
   }
