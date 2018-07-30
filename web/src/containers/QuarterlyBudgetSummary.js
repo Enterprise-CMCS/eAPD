@@ -35,7 +35,7 @@ class QuarterlyBudgetSummary extends Component {
           const data = budget[source];
           return (
             <div key={source} className="mb3">
-              <h4 className="mt0">{sourceDisplay}</h4>
+              <h3 className="mt0">{sourceDisplay}</h3>
               <div className="overflow-auto">
                 <table
                   className="table-cms table-fixed"

@@ -357,6 +357,7 @@ ShallowWrapper {
             link text
           </a>
           <button
+            aria-label="Expand"
             className="btn block right white"
             onClick={[Function]}
           >
@@ -409,6 +410,7 @@ ShallowWrapper {
               link text
             </a>,
             <button
+              aria-label="Expand"
               className="btn block right white"
               onClick={[Function]}
             >
@@ -465,6 +467,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
+              "aria-label": "Expand",
               "children": <FontAwesomeIcon$1
                 border={false}
                 className=""
@@ -559,6 +562,7 @@ ShallowWrapper {
               link text
             </a>
             <button
+              aria-label="Expand"
               className="btn block right white"
               onClick={[Function]}
             >
@@ -611,6 +615,7 @@ ShallowWrapper {
                 link text
               </a>,
               <button
+                aria-label="Expand"
                 className="btn block right white"
                 onClick={[Function]}
               >
@@ -667,6 +672,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
+                "aria-label": "Expand",
                 "children": <FontAwesomeIcon$1
                   border={false}
                   className=""
@@ -799,6 +805,7 @@ ShallowWrapper {
             link text
           </a>
           <button
+            aria-label="Collapse"
             className="btn block right white"
             onClick={[Function]}
           >
@@ -862,6 +869,7 @@ ShallowWrapper {
               link text
             </a>,
             <button
+              aria-label="Collapse"
               className="btn block right white"
               onClick={[Function]}
             >
@@ -918,6 +926,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
+              "aria-label": "Collapse",
               "children": <FontAwesomeIcon$1
                 border={false}
                 className=""
@@ -1028,6 +1037,7 @@ ShallowWrapper {
               link text
             </a>
             <button
+              aria-label="Collapse"
               className="btn block right white"
               onClick={[Function]}
             >
@@ -1091,6 +1101,7 @@ ShallowWrapper {
                 link text
               </a>,
               <button
+                aria-label="Collapse"
                 className="btn block right white"
                 onClick={[Function]}
               >
@@ -1147,6 +1158,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
+                "aria-label": "Collapse",
                 "children": <FontAwesomeIcon$1
                   border={false}
                   className=""
