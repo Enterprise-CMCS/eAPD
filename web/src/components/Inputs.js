@@ -113,7 +113,10 @@ const makeInput = InputInner => {
     ...rest
   }) => (
     <div className={wrapperClass || 'mb2'}>
-      <label htmlFor={name} className={hideLabel ? 'sr-only' : 'block mb-tiny'}>
+      <label
+        htmlFor={name}
+        className={hideLabel ? 'sr-only' : 'block mb-tiny truncate'}
+      >
         {label}
       </label>
       <InputInner id={name} type={type} {...rest} />

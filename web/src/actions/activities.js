@@ -13,6 +13,8 @@ export const REMOVE_ACTIVITY_GOAL = 'REMOVE_ACTIVITY_GOAL';
 export const REMOVE_ACTIVITY_EXPENSE = 'REMOVE_ACTIVITY_EXPENSE';
 export const REMOVE_ACTIVITY_MILESTONE = 'REMOVE_ACTIVITY_MILESTONE';
 export const REMOVE_ACTIVITY_STATE_PERSON = 'REMOVE_ACTIVITY_STATE_PERSON';
+export const TOGGLE_ACTIVITY_CONTRACTOR_HOURLY =
+  'TOGGLE_ACTIVITY_CONTRACTOR_HOURLY';
 export const TOGGLE_ACTIVITY_SECTION = 'TOGGLE_ACTIVITY_SECTION';
 export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY';
 
@@ -100,4 +102,18 @@ export const updateActivity = (key, updates, isExpense = false) => dispatch => {
   if (isExpense) {
     dispatch(updateBudget());
   }
+};
+
+export const toggleActivityContractorHourly = (
+  key,
+  contractorKey,
+  useHourly
+) => dispatch => {
+  dispatch({
+    type: TOGGLE_ACTIVITY_CONTRACTOR_HOURLY,
+    key,
+    contractorKey,
+    useHourly
+  });
+  dispatch(updateBudget());
 };

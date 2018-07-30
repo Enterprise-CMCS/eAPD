@@ -14,6 +14,7 @@ import {
   REMOVE_ACTIVITY_EXPENSE,
   REMOVE_ACTIVITY_MILESTONE,
   REMOVE_ACTIVITY_STATE_PERSON,
+  TOGGLE_ACTIVITY_CONTRACTOR_HOURLY,
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
@@ -49,6 +50,7 @@ const newStatePerson = years => ({
 });
 
 const contractorDefaultYear = () => 0;
+const contractorDefaultHourly = () => ({ hours: '', rate: '' });
 const newContractor = years => ({
   key: generateKey(),
   name: '',
@@ -56,7 +58,11 @@ const newContractor = years => ({
   start: '',
   end: '',
   files: [],
-  years: arrToObj(years, contractorDefaultYear())
+  years: arrToObj(years, contractorDefaultYear()),
+  hourly: {
+    useHourly: false,
+    data: arrToObj(years, contractorDefaultHourly())
+  }
 });
 
 const expenseDefaultYear = () => 0;
@@ -281,6 +287,34 @@ const reducer = (state = initialState, action) => {
         { byKey: { [action.key]: { meta: { expanded: true } } } },
         state
       );
+    case TOGGLE_ACTIVITY_CONTRACTOR_HOURLY: {
+      const { key, contractorKey, useHourly } = action;
+      const { contractorResources: contractorsOld, years } = state.byKey[key];
+
+      // if switching to hourly, clear out yearly totals
+      // if switch to yearly, clear out hourly numbers
+      const contractorResources = contractorsOld.map(
+        contractor =>
+          contractor.key !== contractorKey
+            ? contractor
+            : {
+                ...contractor,
+                ...(useHourly && {
+                  years: arrToObj(years, contractorDefaultYear())
+                }),
+                hourly: {
+                  ...contractor.hourly,
+                  useHourly,
+                  ...(!useHourly && {
+                    data: arrToObj(years, contractorDefaultHourly())
+                  })
+                }
+              }
+      );
+
+      const updates = { byKey: { [key]: { contractorResources } } };
+      return u(updates, state);
+    }
     case TOGGLE_ACTIVITY_SECTION:
       return u(
         { byKey: { [action.key]: { meta: { expanded: val => !val } } } },
