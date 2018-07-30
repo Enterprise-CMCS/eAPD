@@ -129,7 +129,7 @@ describe('activities actions', () => {
     });
   });
 
-  it('creates UPDATE_ACTIVITY action, and updates the budget if this is not an expense update', () => {
+  it('creates UPDATE_ACTIVITY action, and updates the budget if this is an expense update', () => {
     const state = { this: 'is', my: 'state' };
     const store = mockStore(state);
     const updates = { this: 'is', my: 'update' };
@@ -140,6 +140,31 @@ describe('activities actions', () => {
     ];
 
     store.dispatch(actions.updateActivity('activity key', updates, true));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('creates TOGGLE_ACTIVITY_CONTRACTOR_HOURLY action, and updates the budget', () => {
+    const state = { this: 'is', my: 'state' };
+    const store = mockStore(state);
+
+    const payload = {
+      key: 'activity key',
+      contractorKey: 'contractor key',
+      useHourly: true
+    };
+
+    const expectedActions = [
+      {
+        type: actions.TOGGLE_ACTIVITY_CONTRACTOR_HOURLY,
+        ...payload
+      },
+      { type: apdActions.UPDATE_BUDGET, state }
+    ];
+
+    store.dispatch(
+      actions.toggleActivityContractorHourly(...Object.values(payload))
+    );
 
     expect(store.getActions()).toEqual(expectedActions);
   });
