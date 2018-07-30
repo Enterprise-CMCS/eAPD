@@ -6,6 +6,7 @@ import { t } from '../i18n';
 import { expandActivitySection } from '../actions/activities';
 import { saveApd } from '../actions/apd';
 import { toggleExpand as toggleExpandAction } from '../actions/sidebar';
+import Btn from '../components/Btn';
 import SidebarLink from '../components/SidebarLink';
 
 const linkGroup1 = [
@@ -178,16 +179,12 @@ const Sidebar = ({
           ))}
         </ul>
         <div className="mt3">
-          <button
-            type="button"
-            className="btn btn-primary mr1"
-            onClick={() => saveApdToAPI()}
-          >
+          <Btn onClick={() => saveApdToAPI()}>
             {t('sidebar.saveApdButtonText')}
-          </button>
-          <button type="button" className="btn btn-outline bg-white blue">
+          </Btn>{' '}
+          <Btn kind="outline" extraCss="bg-white blue">
             {t('sidebar.savePdfButtonText')}
-          </button>
+          </Btn>
         </div>
       </div>
     </div>

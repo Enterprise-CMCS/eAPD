@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Btn from './Btn';
 import Collapsible from './Collapsible';
 import Container from './Container';
 import SectionTitle from './SectionTitle';
@@ -51,7 +52,7 @@ const StatusEntry = () => (
       <div className="dot" />
     </div>
     <div className="sm-col-2 sm-right-align">
-      <button className="btn btn-primary">View</button>
+      <Btn>View</Btn>
     </div>
   </div>
 );
@@ -74,7 +75,9 @@ const TaskTable = () => (
         <td>Awaiting state response</td>
         <td>ASAP</td>
         <td>
-          <button className="btn btn-primary btn-small col-12">Respond</button>
+          <Btn size="small" extraCss="col-12">
+            Respond
+          </Btn>
         </td>
       </tr>
       <tr className="align-middle">
@@ -83,7 +86,9 @@ const TaskTable = () => (
         <td>Awaiting state response</td>
         <td>ASAP</td>
         <td>
-          <button className="btn btn-primary btn-small col-12">Start</button>
+          <Btn size="small" extraCss="col-12">
+            Start
+          </Btn>
         </td>
       </tr>
     </tbody>

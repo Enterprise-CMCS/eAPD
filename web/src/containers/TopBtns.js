@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { t } from '../i18n';
 import { logout } from '../actions/auth';
+import Btn from '../components/Btn';
 
 class TopBtns extends Component {
   handleLogout = e => {
@@ -20,19 +21,13 @@ class TopBtns extends Component {
         <div className="right h5">
           {authenticated ? (
             <Fragment>
-              <button type="button" className="btn btn-primary px1 py-tiny mr1">
-                {t('dashboard')}
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary px1 py-tiny"
-                onClick={this.handleLogout}
-              >
+              <Btn size="small">{t('dashboard')}</Btn>{' '}
+              <Btn size="small" onClick={this.handleLogout}>
                 {t('logout')}
-              </button>
+              </Btn>
             </Fragment>
           ) : (
-            <Link to="/login" className="btn btn-primary px1 py-tiny">
+            <Link to="/login" className="btn btn-primary btn-small">
               {t('login')}
             </Link>
           )}

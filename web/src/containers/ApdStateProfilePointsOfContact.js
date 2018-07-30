@@ -7,6 +7,7 @@ import {
   removePointOfContact,
   updateApd as updateApdAction
 } from '../actions/apd';
+import Btn from '../components/Btn';
 import DeleteButton from '../components/DeleteConfirm';
 import { Input } from '../components/Inputs';
 import { t } from '../i18n';
@@ -51,17 +52,18 @@ class ApdStateProfile extends Component {
               onChange={this.handleChange('email', i)}
             />
             <DeleteButton
-              className="btn btn-small btn-outline bg-white blue h5"
+              kind="outline"
+              extraCss="blue h5"
               remove={() => removePoc(i)}
               resource={`${tRoot}.delete`}
             />
           </div>
         ))}
-        <button type="button" className="btn btn-primary" onClick={addPoc}>
+        <Btn onClick={addPoc}>
           {t('apd.stateProfile.pointsOfContact.labels.addButton', {
             count: poc.length
           })}
-        </button>
+        </Btn>
       </Fragment>
     );
   }
