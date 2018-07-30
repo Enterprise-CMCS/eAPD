@@ -116,14 +116,44 @@ tap.test(
               name: 'updated name',
               description: 'updated description',
               alternatives: null,
-              contractorResources: [],
+              contractorResources: [
+                {
+                  id: 4300,
+                  description: null,
+                  end: null,
+                  files: [
+                    {
+                      id: 5002,
+                      key: 'download.txt',
+                      metadata: null,
+                      size: null
+                    }
+                  ],
+                  name: null,
+                  start: null,
+                  years: []
+                }
+              ],
               costAllocationNarrative: {
                 methodology: null,
                 otherSources: null
               },
               costAllocation: [],
               expenses: [],
-              files: [],
+              files: [
+                {
+                  id: 5000,
+                  key: 'download.txt',
+                  metadata: null,
+                  size: null
+                },
+                {
+                  id: 5004,
+                  key: 'not real',
+                  metadata: null,
+                  size: null
+                }
+              ],
               goals: [
                 {
                   id: 4200,

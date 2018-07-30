@@ -2,7 +2,7 @@ exports.seed = async knex => {
   // 40xx IDs refer to apds
   // 41xx IDs refer to activities
   // 42xx IDs refer to goals
-  // 43xx IDs refer to objectives
+  // 43xx IDs refer to contractors
 
   await knex('apds').insert([
     {
@@ -60,6 +60,17 @@ exports.seed = async knex => {
       description: 'Go on Ellen',
       objective: 'Learn to dance',
       activity_id: 4100
+    }
+  ]);
+
+  await knex('activity_contractor_resources').insert([
+    {
+      id: 4300,
+      activity_id: 4100
+    },
+    {
+      id: 4301,
+      activity_id: 4110
     }
   ]);
 };
