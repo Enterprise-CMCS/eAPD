@@ -124,14 +124,14 @@ const Sidebar = ({
         <img
           src={`/static/img/${place.id}.svg`}
           alt={place.name}
-          className="align-middle mr1"
-          width="50"
-          height="50"
+          className="align-middle mr2"
+          width="40"
+          height="40"
         />
-        <div className="blue h3 light caps line-height-2">
+        <h1 className="m0 blue h3 light caps line-height-2">
           {place.name} <br />
           {t('title', { year: '2018' })}
-        </div>
+        </h1>
       </div>
       <div className="p2 lg-p3">
         <ul className="list-reset">

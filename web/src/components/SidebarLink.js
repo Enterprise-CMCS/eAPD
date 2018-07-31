@@ -7,18 +7,17 @@ import { faChevronDown, faChevronUp } from './Icons';
 const addIf = (condit, yes, no = '') => (condit ? yes : no);
 
 const icon = (expanded, handler) => {
-  if (expanded === true || expanded === false) {
-    return (
-      <button className="btn block right white" onClick={handler}>
-        {expanded ? (
-          <Icon icon={faChevronUp} size="sm" />
-        ) : (
-          <Icon icon={faChevronDown} size="sm" />
-        )}
-      </button>
-    );
-  }
-  return null;
+  if (expanded !== true && expanded !== false) return null;
+
+  return (
+    <button
+      className="btn block right white"
+      aria-label={expanded ? 'Collapse' : 'Expand'}
+      onClick={handler}
+    >
+      <Icon icon={expanded ? faChevronUp : faChevronDown} size="sm" />
+    </button>
+  );
 };
 
 const SidebarLink = ({
