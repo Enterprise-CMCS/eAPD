@@ -26,8 +26,9 @@
   overflow: inherit;
 }
 
-.DraftEditor-root {
-  height: 400px;
+.DraftEditor-root,
+.public-DraftEditor-content {
+  min-height: 240px;
 }
 
 .public-DraftEditor-content {
