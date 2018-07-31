@@ -55,6 +55,12 @@ export const toAPI = activityState => {
       years: Object.keys(c.years).map(year => ({
         cost: +c.years[year],
         year
+      })),
+      useHourly: c.hourly.useHourly,
+      hourlyData: Object.keys(c.hourly.data).map(year => ({
+        year,
+        hours: +c.hourly.data[year].hours,
+        rate: +c.hourly.data[year].rate
       }))
     })),
     expenses: activityState.expenses.map(e => ({
@@ -142,7 +148,17 @@ export const fromAPI = (activityAPI, years, { quarterlyFFP } = {}) => ({
         [y.year]: +y.cost
       }),
       {}
-    )
+    ),
+    hourly: {
+      useHourly: c.useHourly || false,
+      data: (c.hourlyData || []).reduce(
+        (acc, h) => ({
+          ...acc,
+          [h.year]: { hours: +h.hours || '', rate: +h.rate || '' }
+        }),
+        {}
+      )
+    }
   })),
 
   costAllocation: activityAPI.costAllocation.reduce(

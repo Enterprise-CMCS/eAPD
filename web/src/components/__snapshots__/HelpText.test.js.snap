@@ -22,11 +22,11 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         false,
-        <div
-          className="my1 p1 h6 alert alert-info"
-        >
-          [missing {{year}} value] HITECH APD
-        </div>,
+        <Md
+          className="my1 p1 alert alert-help"
+          content="[missing {{year}} value] HITECH APD"
+          wrapper="div"
+        />,
       ],
       "className": "mb2",
     },
@@ -36,14 +36,15 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": "[missing {{year}} value] HITECH APD",
-          "className": "my1 p1 h6 alert alert-info",
+          "className": "my1 p1 alert alert-help",
+          "content": "[missing {{year}} value] HITECH APD",
+          "wrapper": "div",
         },
         "ref": null,
-        "rendered": "[missing {{year}} value] HITECH APD",
-        "type": "div",
+        "rendered": null,
+        "type": [Function],
       },
     ],
     "type": "div",
@@ -56,11 +57,11 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           false,
-          <div
-            className="my1 p1 h6 alert alert-info"
-          >
-            [missing {{year}} value] HITECH APD
-          </div>,
+          <Md
+            className="my1 p1 alert alert-help"
+            content="[missing {{year}} value] HITECH APD"
+            wrapper="div"
+          />,
         ],
         "className": "mb2",
       },
@@ -70,14 +71,15 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": "[missing {{year}} value] HITECH APD",
-            "className": "my1 p1 h6 alert alert-info",
+            "className": "my1 p1 alert alert-help",
+            "content": "[missing {{year}} value] HITECH APD",
+            "wrapper": "div",
           },
           "ref": null,
-          "rendered": "[missing {{year}} value] HITECH APD",
-          "type": "div",
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": "div",
@@ -146,11 +148,11 @@ ShallowWrapper {
         <div>
           [missing {{year}} value] HITECH APD
         </div>,
-        <div
-          className="my1 p1 h6 alert alert-info"
-        >
-          [missing {{year}} value] HITECH APD
-        </div>,
+        <Md
+          className="my1 p1 alert alert-help"
+          content="[missing {{year}} value] HITECH APD"
+          wrapper="div"
+        />,
       ],
       "className": "mb2",
     },
@@ -170,14 +172,15 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": "[missing {{year}} value] HITECH APD",
-          "className": "my1 p1 h6 alert alert-info",
+          "className": "my1 p1 alert alert-help",
+          "content": "[missing {{year}} value] HITECH APD",
+          "wrapper": "div",
         },
         "ref": null,
-        "rendered": "[missing {{year}} value] HITECH APD",
-        "type": "div",
+        "rendered": null,
+        "type": [Function],
       },
     ],
     "type": "div",
@@ -192,11 +195,11 @@ ShallowWrapper {
           <div>
             [missing {{year}} value] HITECH APD
           </div>,
-          <div
-            className="my1 p1 h6 alert alert-info"
-          >
-            [missing {{year}} value] HITECH APD
-          </div>,
+          <Md
+            className="my1 p1 alert alert-help"
+            content="[missing {{year}} value] HITECH APD"
+            wrapper="div"
+          />,
         ],
         "className": "mb2",
       },
@@ -216,14 +219,15 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": "[missing {{year}} value] HITECH APD",
-            "className": "my1 p1 h6 alert alert-info",
+            "className": "my1 p1 alert alert-help",
+            "content": "[missing {{year}} value] HITECH APD",
+            "wrapper": "div",
           },
           "ref": null,
-          "rendered": "[missing {{year}} value] HITECH APD",
-          "type": "div",
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": "div",

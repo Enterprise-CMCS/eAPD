@@ -56,15 +56,10 @@ export const createSuccess = () => ({ type: CREATE_APD_SUCCESS });
 export const createFailure = () => ({ type: CREATE_APD_FAILURE });
 export const createApd = () => dispatch => {
   dispatch(createRequest());
-  return axios
-    .post('/apds')
-    .then(req => {
-      console.log(req.data);
-    })
-    .catch(error => {
-      const reason = error.response ? error.response.data : 'N/A';
-      dispatch(createFailure(reason));
-    });
+  return axios.post('/apds').catch(error => {
+    const reason = error.response ? error.response.data : 'N/A';
+    dispatch(createFailure(reason));
+  });
 };
 
 export const requestSave = () => ({ type: SAVE_APD_REQUEST });
