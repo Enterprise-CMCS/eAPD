@@ -4,4 +4,4 @@ Describe the task here, including any supplemental information.
  - [ ] criteria 1
  - [ ] criteria 2
  
- ** Don't forget to fill out the LABEL and MILESTONE. If the issue is for the _Current Sprint_, add it to the PROJECT. If the issue is a _bug, future enhancement,_ or _outside of the current sprint_, do not add it to the PROJECT (then delete this line) **
+ ** Don't forget to fill out the LABEL and MILESTONE before submitting. If the issue is for the _**Current Sprint**_, add it to the PROJECT. If the issue is a _**bug, future enhancement**_, or _**outside of the current sprint**_, do not add it to the PROJECT (then delete this line) **
