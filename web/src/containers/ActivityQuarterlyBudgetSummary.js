@@ -44,29 +44,45 @@ class ActivityQuarterlyBudgetSummary extends Component {
             <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
               <thead>
                 <tr>
-                  <th style={{ width: 160 }} />
+                  <th
+                    rowSpan="2"
+                    style={{ width: 160 }}
+                    id="act_qbudget_null1"
+                  />
                   {years.map((year, i) => (
-                    <th key={year} className={`center ${color(i)}`} colSpan="5">
+                    <th
+                      key={year}
+                      className={`center ${color(i)}`}
+                      colSpan="5"
+                      id={`act_qbudget_fy${year}`}
+                    >
                       {t('ffy', { year })}
                     </th>
                   ))}
-                  <th className="center">{t('table.total')}</th>
+                  <th rowSpan="2" className="center" id="act_qbudget_total">
+                    {t('table.total')}
+                  </th>
                 </tr>
                 <tr>
-                  <th />
                   {years.map((year, i) => (
                     <Fragment key={year}>
                       {QUARTERS.map(q => (
-                        <th key={q} className="center">
+                        <th
+                          key={q}
+                          className="center"
+                          id={`act_qbudget_fy${year}_q${q}`}
+                        >
                           {t('table.quarter', { q })}
                         </th>
                       ))}
-                      <th className={`right-align ${color(i)}-light`}>
+                      <th
+                        className={`right-align ${color(i)}-light`}
+                        id={`act_qbudget_fy${year}_subtotal`}
+                      >
                         {t('table.subtotal')}
                       </th>
                     </Fragment>
                   ))}
-                  <th className="bg-gray-light" />
                 </tr>
               </thead>
               <tbody>
@@ -76,7 +92,9 @@ class ActivityQuarterlyBudgetSummary extends Component {
                       key={name}
                       className={`${name === 'combined' ? 'bold' : ''}`}
                     >
-                      <td rowSpan="2">{EXPENSE_NAME_DISPLAY[name]}</td>
+                      <td rowSpan="2" headers="act_qbudget_null1">
+                        {EXPENSE_NAME_DISPLAY[name]}
+                      </td>
                       {years.map((year, i) => (
                         <Fragment key={year}>
                           {QUARTERS.map(q => (
@@ -85,6 +103,7 @@ class ActivityQuarterlyBudgetSummary extends Component {
                                 name === 'combined' ? `${color(i)}-light` : ''
                               }`}
                               key={q}
+                              headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                             >
                               <PercentInput
                                 name={`ffp-${aKey}-${year}-${q}-${name}`}
@@ -101,6 +120,7 @@ class ActivityQuarterlyBudgetSummary extends Component {
                             className={`bold mono right-align ${color(
                               i
                             )}-light`}
+                            headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
                           >
                             {formatPerc(
                               quarterlyFFP[year].subtotal[name].percent
@@ -111,6 +131,7 @@ class ActivityQuarterlyBudgetSummary extends Component {
                       <td
                         rowSpan="2"
                         className="bold mono right-align bg-gray-light"
+                        headers="act_qbudget_total"
                       >
                         {formatMoney(quarterlyFFP.total[name])}
                       </td>
@@ -124,6 +145,7 @@ class ActivityQuarterlyBudgetSummary extends Component {
                                 name === 'combined' ? `${color(i)}-light` : ''
                               }`}
                               key={q}
+                              headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                             >
                               {formatMoney(quarterlyFFP[year][q][name].dollars)}
                             </td>
@@ -132,6 +154,7 @@ class ActivityQuarterlyBudgetSummary extends Component {
                             className={`bold mono right-align ${color(
                               i
                             )}-light`}
+                            headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
                           >
                             {formatMoney(
                               quarterlyFFP[year].subtotal[name].dollars
@@ -150,18 +173,25 @@ class ActivityQuarterlyBudgetSummary extends Component {
                         <td
                           className={`mono right-align ${color(i)}-light`}
                           key={q}
+                          headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                         >
                           {formatMoney(quarterlyFFP[year][q].combined.dollars)}
                         </td>
                       ))}
-                      <td className={`bold mono right-align ${color(i)}-light`}>
+                      <td
+                        className={`bold mono right-align ${color(i)}-light`}
+                        headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
+                      >
                         {formatMoney(
                           quarterlyFFP[year].subtotal.combined.dollars
                         )}
                       </td>
                     </Fragment>
                   ))}
-                  <td className="bold mono right-align bg-gray-light">
+                  <td
+                    className="bold mono right-align bg-gray-light"
+                    headers="act_qbudget_total"
+                  >
                     {formatMoney(quarterlyFFP.total.combined)}
                   </td>
                 </tr>

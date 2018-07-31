@@ -43,33 +43,52 @@ class QuarterlyBudgetSummary extends Component {
                 >
                   <thead>
                     <tr>
-                      <th style={{ width: 160 }} />
+                      <th
+                        style={{ width: 160 }}
+                        id={`quarterly-budget-summary-${source}-null1`}
+                      />
                       {years.map((year, i) => (
                         <th
                           key={year}
                           className={`center ${color(i)}`}
                           colSpan="5"
+                          id={`quarterly-budget-summary-${source}-fy-${year}`}
                         >
                           {t('ffy', { year })}
                         </th>
                       ))}
-                      <th className="center">{t('table.total')}</th>
+                      <th
+                        className="center"
+                        id={`quarterly-budget-summary-${source}-total`}
+                      >
+                        {t('table.total')}
+                      </th>
                     </tr>
                     <tr>
-                      <th />
+                      <th id={`quarterly-budget-summary-${source}-null2`} />
                       {years.map((year, i) => (
                         <Fragment key={year}>
                           {QUARTERS.map(q => (
-                            <th key={q} className="center">
+                            <th
+                              key={q}
+                              className="center"
+                              id={`quarterly-budget-summary-${source}-fy-${year}-q${q}`}
+                            >
                               {t('table.quarter', { q })}
                             </th>
                           ))}
-                          <th className={`right-align ${color(i)}-light`}>
+                          <th
+                            className={`right-align ${color(i)}-light`}
+                            id={`quarterly-budget-summary-${source}-fy-${year}-subtotal`}
+                          >
                             {t('table.subtotal')}
                           </th>
                         </Fragment>
                       ))}
-                      <th className="bg-gray-light" />
+                      <th
+                        className="bg-gray-light"
+                        id={`quarterly-budget-summary-${source}-total2`}
+                      />
                     </tr>
                   </thead>
                   <tbody>
@@ -78,7 +97,11 @@ class QuarterlyBudgetSummary extends Component {
                         key={name}
                         className={`${name === 'combined' ? 'bold' : ''}`}
                       >
-                        <td>{EXPENSE_NAME_DISPLAY[name]}</td>
+                        <td
+                          headers={`quarterly-budget-summary-${source}-null1 quarterly-budget-summary-${source}-null2`}
+                        >
+                          {EXPENSE_NAME_DISPLAY[name]}
+                        </td>
                         {years.map((year, i) => (
                           <Fragment key={year}>
                             {QUARTERS.map(q => (
@@ -87,6 +110,7 @@ class QuarterlyBudgetSummary extends Component {
                                   name === 'combined' ? `${color(i)}-light` : ''
                                 }`}
                                 key={q}
+                                headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-q${q}`}
                               >
                                 {formatMoney(data[year][q][name])}
                               </td>
@@ -95,12 +119,16 @@ class QuarterlyBudgetSummary extends Component {
                               className={`bold mono right-align ${color(
                                 i
                               )}-light`}
+                              headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-subtotal`}
                             >
                               {formatMoney(data[year].subtotal[name])}
                             </td>
                           </Fragment>
                         ))}
-                        <td className="bold mono right-align bg-gray-light">
+                        <td
+                          className="bold mono right-align bg-gray-light"
+                          headers={`quarterly-budget-summary-${source}-total2 quarterly-budget-summary-${source}-total`}
+                        >
                           {formatMoney(data.total[name])}
                         </td>
                       </tr>

@@ -11,6 +11,10 @@ import { formatMoney, formatNum } from '../util/formats';
 const QUARTERS = [1, 2, 3, 4];
 const COLORS = ['teal', 'green', 'yellow'];
 
+const thId = (fy, q) => `incentive-payments-table-fy${fy}${q ? `-q${q}` : ''}`;
+const tdHdrs = (fy, q) =>
+  `incentive-payments-table-fy${fy} incentive-payments-table-fy${fy}-q${q}`;
+
 class IncentivePayments extends Component {
   handleChange = (key, year, quarter) => e => {
     const { value } = e.target;
@@ -32,29 +36,39 @@ class IncentivePayments extends Component {
         <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
           <thead>
             <tr>
-              <th style={{ width: 160 }} />
+              <th style={{ width: 160 }} id={thId('null1')} />
               {yearsWithColors.map(({ year, color }) => (
-                <th key={year} className={`center ${color}`} colSpan="5">
+                <th
+                  key={year}
+                  className={`center ${color}`}
+                  colSpan="5"
+                  id={thId(year)}
+                >
                   {t('ffy', { year })}
                 </th>
               ))}
-              <th className="bg-black center">{t('table.total')}</th>
+              <th className="bg-black center" id={thId('total')}>
+                {t('table.total')}
+              </th>
             </tr>
             <tr>
-              <th />
+              <th id={thId('null2')} />
               {yearsWithColors.map(({ year, colorLight }) => (
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
-                    <th key={q} className="right-align">
+                    <th key={q} className="right-align" id={thId(year, q)}>
                       {t('table.quarter', { q })}
                     </th>
                   ))}
-                  <th className={`right-align ${colorLight}`}>
+                  <th
+                    className={`right-align ${colorLight}`}
+                    id={thId(year, 'subtotal')}
+                  >
                     {t('table.subtotal')}
                   </th>
                 </Fragment>
               ))}
-              <th className="bg-gray-light" />
+              <th className="bg-gray-light" id={thId('total', 'grand')} />
             </tr>
           </thead>
           <tbody>
@@ -64,13 +78,16 @@ class IncentivePayments extends Component {
 
               return (
                 <tr key={id}>
-                  <td className={`align-middle ${i % 2 === 0 ? 'bold' : ''}`}>
+                  <td
+                    className={`align-middle ${i % 2 === 0 ? 'bold' : ''}`}
+                    headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+                  >
                     {name}
                   </td>
                   {yearsWithColors.map(({ year, colorLight }) => (
                     <Fragment key={year}>
                       {QUARTERS.map(q => (
-                        <td key={q}>
+                        <td key={q} headers={tdHdrs(year, q)}>
                           <InputComponent
                             name={`${id}-payments-${year}-q${q}`}
                             label={`${id} payments for ${year}, quarter ${q}`}
@@ -84,12 +101,16 @@ class IncentivePayments extends Component {
                       ))}
                       <td
                         className={`bold mono right-align align-middle ${colorLight}`}
+                        headers={tdHdrs(year, 'subtotal')}
                       >
                         {fmt(totals[id].byYear[year])}
                       </td>
                     </Fragment>
                   ))}
-                  <td className="bold mono right-align align-middle bg-gray-light">
+                  <td
+                    className="bold mono right-align align-middle bg-gray-light"
+                    headers={tdHdrs('total', 'grand')}
+                  >
                     {fmt(totals[id].allYears)}
                   </td>
                 </tr>
