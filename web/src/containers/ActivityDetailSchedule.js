@@ -7,6 +7,7 @@ import {
   removeActivityMilestone as removeActivityMilestoneAction,
   updateActivity as updateActivityAction
 } from '../actions/activities';
+import Btn from '../components/Btn';
 import NoDataMsg from '../components/NoDataMsg';
 import { Subsection } from '../components/Section';
 import { Input } from '../components/Inputs';
@@ -89,16 +90,15 @@ class ActivityDetailSchedule extends Component {
                       />
                     </td>
                     <td className="center align-middle">
-                      <button
-                        type="button"
-                        className="btn btn-outline border-silver px1 py-tiny"
-                        title={t('activities.schedule.removeLabel')}
+                      <Btn
+                        kind="outline"
+                        extraCss="px1 py-tiny"
                         onClick={() =>
                           removeActivityMilestone(activity.key, d.key)
                         }
                       >
                         ✗
-                      </button>
+                      </Btn>
                     </td>
                   </tr>
                 ))}
@@ -106,13 +106,9 @@ class ActivityDetailSchedule extends Component {
             </table>
           </div>
         )}
-        <button
-          type="button"
-          className="btn btn-primary bg-black"
-          onClick={() => addActivityMilestone(activity.key)}
-        >
+        <Btn onClick={() => addActivityMilestone(activity.key)}>
           {t('activities.schedule.addMilestoneButtonText')}
-        </button>
+        </Btn>
       </Subsection>
     );
   }

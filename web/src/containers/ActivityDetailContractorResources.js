@@ -9,6 +9,7 @@ import {
   toggleActivityContractorHourly,
   updateActivity as updateActivityAction
 } from '../actions/activities';
+import Btn from '../components/Btn';
 import DeleteButton from '../components/DeleteConfirm';
 import { Input, DollarInput, Textarea } from '../components/Inputs';
 import NoDataMsg from '../components/NoDataMsg';
@@ -209,7 +210,8 @@ class ContractorExpenses extends Component {
                           <div key={`${f.name}-${j}`} className="mb1">
                             <div>
                               <DeleteButton
-                                className="btn btn-outline border-silver px-tiny py0 right"
+                                kind="outline"
+                                extraCss="px-tiny py0 right"
                                 remove={this.handleFileDelete(i, j)}
                                 resource="activities.contractorResources.delete"
                               />
@@ -254,26 +256,26 @@ class ContractorExpenses extends Component {
                     <div className="flex items-center">
                       <div className="mr2">This is an hourly resource</div>
                       <div>
-                        <button
-                          type="button"
-                          className={`mr1 btn btn-outline ${
+                        <Btn
+                          kind="outline"
+                          extraCss={
                             contractor.hourly.useHourly ? 'bg-black white' : ''
-                          }`}
+                          }
                           onClick={this.handleUseHourly(contractor, true)}
                           disabled={contractor.hourly.useHourly}
                         >
                           Yes
-                        </button>
-                        <button
-                          type="button"
-                          className={`btn btn-outline ${
+                        </Btn>{' '}
+                        <Btn
+                          kind="outline"
+                          extraCss={
                             contractor.hourly.useHourly ? '' : 'bg-black white'
-                          }`}
+                          }
                           onClick={this.handleUseHourly(contractor, false)}
                           disabled={!contractor.hourly.useHourly}
                         >
                           No
-                        </button>
+                        </Btn>
                       </div>
                     </div>
                     {contractor.hourly.useHourly && (
@@ -315,27 +317,23 @@ class ContractorExpenses extends Component {
                   </div>
                 </div>
                 <div>
-                  <button
-                    type="button"
-                    className="btn btn-outline border-black px1 py-tiny mt-tiny h5"
+                  <Btn
+                    kind="outline"
+                    extraCss="px1 py-tiny mt-tiny h5"
                     onClick={() =>
                       removeContractor(activityKey, contractor.key)
                     }
                   >
                     {t('activities.contractorResources.removeLabel')}
-                  </button>
+                  </Btn>
                 </div>
               </div>
             ))}
           </div>
         )}
-        <button
-          type="button"
-          className="btn btn-primary bg-black"
-          onClick={() => addContractor(activityKey)}
-        >
+        <Btn onClick={() => addContractor(activityKey)}>
           {t('activities.contractorResources.addContractorButtonText')}
-        </button>
+        </Btn>
       </Subsection>
     );
   }

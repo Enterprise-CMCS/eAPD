@@ -6,6 +6,7 @@ import { t } from '../i18n';
 import ActivityDetailAll from './ActivityDetailAll';
 import ActivityListEntry from './ActivityListEntry';
 import { addActivity as addActivityAction } from '../actions/activities';
+import Btn from '../components/Btn';
 import { Section, Subsection } from '../components/Section';
 
 const Activities = ({ activityKeys, addActivity }) => (
@@ -22,9 +23,7 @@ const Activities = ({ activityKeys, addActivity }) => (
           ))}
         </div>
       )}
-      <button type="button" className="btn btn-primary" onClick={addActivity}>
-        {t('activities.addActivityButtonText')}
-      </button>
+      <Btn onClick={addActivity}>{t('activities.addActivityButtonText')}</Btn>
     </Subsection>
     {activityKeys.map((key, idx) => (
       <ActivityDetailAll key={key} aKey={key} num={idx + 1} />
@@ -45,6 +44,6 @@ export const mapDispatchToProps = {
   addActivity: addActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Activities);
+export { Activities as raw };
 
-export const raw = Activities;
+export default connect(mapStateToProps, mapDispatchToProps)(Activities);

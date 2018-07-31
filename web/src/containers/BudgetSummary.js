@@ -61,7 +61,7 @@ class DataRow extends Component {
             {hasData && (
               <button
                 type="button"
-                className="right btn px-tiny py0"
+                className="btn right px-tiny py0"
                 onClick={this.toggleDetails}
               >
                 {detailsOpen ? '-' : '+'}

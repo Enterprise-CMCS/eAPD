@@ -17,7 +17,7 @@ describe('the Activities list component', () => {
 
   test('adds a new activity', () => {
     const component = shallow(<Activities {...props} />);
-    component.find('button').simulate('click');
+    component.find('Btn').simulate('click');
     expect(props.addActivity.callCount).toBe(1);
   });
 

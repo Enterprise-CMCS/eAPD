@@ -4,7 +4,6 @@
 
 @import 'app/alert';
 @import 'app/border';
-@import 'app/button';
 @import 'app/color';
 @import 'app/confirm';
 @import 'app/form';
@@ -49,6 +48,8 @@
   --border-width: 1px;
   --border-radius: 5px;
 
+  --button-color: #000;
+  --button-background-color: #fdd430;
   --button-font-weight: normal;
 
   --col-1: calc(1/12 * 100%);

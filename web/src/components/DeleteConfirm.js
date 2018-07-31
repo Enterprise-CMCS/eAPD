@@ -1,25 +1,27 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+import Btn from './Btn';
+import { confirmAlert } from './ConfirmAlert';
 import { t } from '../i18n';
-import { confirmAlert } from '../components/ConfirmAlert';
 
 const DeleteConfirm = ({ onClose, onConfirm, resource }) => (
   <div className="p2 sm-p3 bg-white rounded confirm-body">
     <h2 className="mt0">{t(`${resource}.confirm.header`)}</h2>
     <p>{t(`${resource}.confirm.body`)}</p>
-    <button
-      className="btn btn-small btn-primary bg-black h6"
+    <Btn
+      size="small"
+      extraCss="bg-black white h6"
       onClick={() => {
         onConfirm();
         onClose();
       }}
     >
       {t(`${resource}.confirm._yes`)}
-    </button>{' '}
-    <button className="btn btn-small btn-outline h6" onClick={onClose}>
+    </Btn>{' '}
+    <Btn kind="outline" size="small" extraCss="h6" onClick={onClose}>
       {t(`${resource}.confirm._no`)}
-    </button>
+    </Btn>
   </div>
 );
 
@@ -47,30 +49,26 @@ class DeleteButton extends Component {
   };
 
   render() {
-    const { className, resource } = this.props;
+    const { resource, remove, ...rest } = this.props;
 
     return (
       <div>
-        <button
-          type="button"
-          className={className || 'btn btn-small btn-primary bg-black h6'}
+        <Btn
+          size="small"
+          extraCss="bg-black white h6"
           onClick={this.handleClick}
+          {...rest}
         >
           {t(`${resource}.text`)}
-        </button>
+        </Btn>
       </div>
     );
   }
 }
 
 DeleteButton.propTypes = {
-  className: PropTypes.string,
   resource: PropTypes.string.isRequired,
   remove: PropTypes.func.isRequired
-};
-
-DeleteButton.defaultProps = {
-  className: null
 };
 
 export default DeleteButton;
