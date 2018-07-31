@@ -78,6 +78,11 @@ describe('APD activity serializer', () => {
             years: [
               { year: '2018', cost: '1000' },
               { year: '2019', cost: '2000' }
+            ],
+            useHourly: false,
+            hourlyData: [
+              { year: '2018', hours: 10, rate: 100 },
+              { year: '2019', hours: 20, rate: 200 }
             ]
           },
           {
@@ -89,6 +94,11 @@ describe('APD activity serializer', () => {
             years: [
               { year: '2018', cost: '3000' },
               { year: '2019', cost: '4000' }
+            ],
+            useHourly: true,
+            hourlyData: [
+              { year: '2018', hours: 30, rate: 300 },
+              { year: '2019', hours: 40, rate: 400 }
             ]
           }
         ],
@@ -244,7 +254,14 @@ describe('APD activity serializer', () => {
               desc: 'desc 1',
               start: 'start 1',
               end: 'end 1',
-              years: { 2018: 1000, 2019: 2000 }
+              years: { 2018: 1000, 2019: 2000 },
+              hourly: {
+                useHourly: false,
+                data: {
+                  2018: { hours: 10, rate: 100 },
+                  2019: { hours: 20, rate: 200 }
+                }
+              }
             },
             {
               id: 'contractor 2',
@@ -253,7 +270,14 @@ describe('APD activity serializer', () => {
               desc: 'desc 2',
               start: 'start 2',
               end: 'end 2',
-              years: { 2018: 3000, 2019: 4000 }
+              years: { 2018: 3000, 2019: 4000 },
+              hourly: {
+                useHourly: true,
+                data: {
+                  2018: { hours: 30, rate: 300 },
+                  2019: { hours: 40, rate: 400 }
+                }
+              }
             }
           ],
           expenses: [
@@ -449,6 +473,10 @@ describe('APD activity serializer', () => {
             end: 'checkered flag',
             years: {
               '2009': 325
+            },
+            hourly: {
+              useHourly: true,
+              data: { '2009': { hours: 10, rate: 100 } }
             }
           }
         ],
@@ -498,6 +526,14 @@ describe('APD activity serializer', () => {
               {
                 cost: 325,
                 year: '2009'
+              }
+            ],
+            useHourly: true,
+            hourlyData: [
+              {
+                year: '2009',
+                hours: 10,
+                rate: 100
               }
             ]
           }
