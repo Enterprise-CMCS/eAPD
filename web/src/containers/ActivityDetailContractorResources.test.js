@@ -61,13 +61,13 @@ describe('the activities contractors component', () => {
 
   test('adds a new contractor', () => {
     const component = shallow(<ContractorExpenses {...props} />);
-    component.find('button.btn-primary').simulate('click');
+    component.find('Btn[children="Add contractor"]').simulate('click');
     expect(props.addContractor.calledWith('activity key')).toBeTruthy();
   });
 
   test('removes a contractor', () => {
     const component = shallow(<ContractorExpenses {...props} />);
-    component.find('button.border-black').simulate('click');
+    component.find('Btn[children="Remove resource"]').simulate('click');
     expect(
       props.removeContractor.calledWith('activity key', 'contractor key')
     ).toBeTruthy();

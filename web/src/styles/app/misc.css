@@ -5,3 +5,7 @@
 .pre-line {
   white-space: pre-line;
 }
+
+.pill {
+  border-radius: 2rem;
+}

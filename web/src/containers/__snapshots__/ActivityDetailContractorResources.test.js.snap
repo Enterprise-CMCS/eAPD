@@ -222,44 +222,49 @@ ShallowWrapper {
                     This is an hourly resource
                   </div>
                   <div>
-                    <button
-                      className="mr1 btn btn-outline "
+                    <Btn
                       disabled={false}
+                      extraCss=""
+                      kind="outline"
                       onClick={[Function]}
-                      type="button"
+                      size={null}
                     >
                       Yes
-                    </button>
-                    <button
-                      className="btn btn-outline bg-black white"
+                    </Btn>
+                     
+                    <Btn
                       disabled={true}
+                      extraCss="bg-black white"
+                      kind="outline"
                       onClick={[Function]}
-                      type="button"
+                      size={null}
                     >
                       No
-                    </button>
+                    </Btn>
                   </div>
                 </div>
               </div>
             </div>
             <div>
-              <button
-                className="btn btn-outline border-black px1 py-tiny mt-tiny h5"
+              <Btn
+                extraCss="px1 py-tiny mt-tiny h5"
+                kind="outline"
                 onClick={[Function]}
-                type="button"
+                size={null}
               >
                 Remove resource
-              </button>
+              </Btn>
             </div>
           </div>
         </div>,
-        <button
-          className="btn btn-primary bg-black"
+        <Btn
+          extraCss={null}
+          kind="primary"
           onClick={[Function]}
-          type="button"
+          size={null}
         >
           Add contractor
-        </button>,
+        </Btn>,
       ],
       "id": null,
       "isKey": false,
@@ -432,34 +437,38 @@ ShallowWrapper {
                       This is an hourly resource
                     </div>
                     <div>
-                      <button
-                        className="mr1 btn btn-outline "
+                      <Btn
                         disabled={false}
+                        extraCss=""
+                        kind="outline"
                         onClick={[Function]}
-                        type="button"
+                        size={null}
                       >
                         Yes
-                      </button>
-                      <button
-                        className="btn btn-outline bg-black white"
+                      </Btn>
+                       
+                      <Btn
                         disabled={true}
+                        extraCss="bg-black white"
+                        kind="outline"
                         onClick={[Function]}
-                        type="button"
+                        size={null}
                       >
                         No
-                      </button>
+                      </Btn>
                     </div>
                   </div>
                 </div>
               </div>
               <div>
-                <button
-                  className="btn btn-outline border-black px1 py-tiny mt-tiny h5"
+                <Btn
+                  extraCss="px1 py-tiny mt-tiny h5"
+                  kind="outline"
                   onClick={[Function]}
-                  type="button"
+                  size={null}
                 >
                   Remove resource
-                </button>
+                </Btn>
               </div>
             </div>,
           ],
@@ -628,34 +637,38 @@ ShallowWrapper {
                         This is an hourly resource
                       </div>
                       <div>
-                        <button
-                          className="mr1 btn btn-outline "
+                        <Btn
                           disabled={false}
+                          extraCss=""
+                          kind="outline"
                           onClick={[Function]}
-                          type="button"
+                          size={null}
                         >
                           Yes
-                        </button>
-                        <button
-                          className="btn btn-outline bg-black white"
+                        </Btn>
+                         
+                        <Btn
                           disabled={true}
+                          extraCss="bg-black white"
+                          kind="outline"
                           onClick={[Function]}
-                          type="button"
+                          size={null}
                         >
                           No
-                        </button>
+                        </Btn>
                       </div>
                     </div>
                   </div>
                 </div>,
                 <div>
-                  <button
-                    className="btn btn-outline border-black px1 py-tiny mt-tiny h5"
+                  <Btn
+                    extraCss="px1 py-tiny mt-tiny h5"
+                    kind="outline"
                     onClick={[Function]}
-                    type="button"
+                    size={null}
                   >
                     Remove resource
-                  </button>
+                  </Btn>
                 </div>,
               ],
               "className": "mb3 pb3 border-bottom border-grey",
@@ -1230,22 +1243,25 @@ ShallowWrapper {
                           This is an hourly resource
                         </div>
                         <div>
-                          <button
-                            className="mr1 btn btn-outline "
+                          <Btn
                             disabled={false}
+                            extraCss=""
+                            kind="outline"
                             onClick={[Function]}
-                            type="button"
+                            size={null}
                           >
                             Yes
-                          </button>
-                          <button
-                            className="btn btn-outline bg-black white"
+                          </Btn>
+                           
+                          <Btn
                             disabled={true}
+                            extraCss="bg-black white"
+                            kind="outline"
                             onClick={[Function]}
-                            type="button"
+                            size={null}
                           >
                             No
-                          </button>
+                          </Btn>
                         </div>
                       </div>
                     </div>,
@@ -1280,22 +1296,25 @@ ShallowWrapper {
                             This is an hourly resource
                           </div>
                           <div>
-                            <button
-                              className="mr1 btn btn-outline "
+                            <Btn
                               disabled={false}
+                              extraCss=""
+                              kind="outline"
                               onClick={[Function]}
-                              type="button"
+                              size={null}
                             >
                               Yes
-                            </button>
-                            <button
-                              className="btn btn-outline bg-black white"
+                            </Btn>
+                             
+                            <Btn
                               disabled={true}
+                              extraCss="bg-black white"
+                              kind="outline"
                               onClick={[Function]}
-                              type="button"
+                              size={null}
                             >
                               No
-                            </button>
+                            </Btn>
                           </div>
                         </div>,
                         false,
@@ -1316,22 +1335,25 @@ ShallowWrapper {
                               This is an hourly resource
                             </div>,
                             <div>
-                              <button
-                                className="mr1 btn btn-outline "
+                              <Btn
                                 disabled={false}
+                                extraCss=""
+                                kind="outline"
                                 onClick={[Function]}
-                                type="button"
+                                size={null}
                               >
                                 Yes
-                              </button>
-                              <button
-                                className="btn btn-outline bg-black white"
+                              </Btn>
+                               
+                              <Btn
                                 disabled={true}
+                                extraCss="bg-black white"
+                                kind="outline"
                                 onClick={[Function]}
-                                type="button"
+                                size={null}
                               >
                                 No
-                              </button>
+                              </Btn>
                             </div>,
                           ],
                           "className": "flex items-center",
@@ -1356,22 +1378,25 @@ ShallowWrapper {
                             "nodeType": "host",
                             "props": Object {
                               "children": Array [
-                                <button
-                                  className="mr1 btn btn-outline "
+                                <Btn
                                   disabled={false}
+                                  extraCss=""
+                                  kind="outline"
                                   onClick={[Function]}
-                                  type="button"
+                                  size={null}
                                 >
                                   Yes
-                                </button>,
-                                <button
-                                  className="btn btn-outline bg-black white"
+                                </Btn>,
+                                " ",
+                                <Btn
                                   disabled={true}
+                                  extraCss="bg-black white"
+                                  kind="outline"
                                   onClick={[Function]}
-                                  type="button"
+                                  size={null}
                                 >
                                   No
-                                </button>,
+                                </Btn>,
                               ],
                             },
                             "ref": null,
@@ -1379,32 +1404,35 @@ ShallowWrapper {
                               Object {
                                 "instance": null,
                                 "key": undefined,
-                                "nodeType": "host",
+                                "nodeType": "function",
                                 "props": Object {
                                   "children": "Yes",
-                                  "className": "mr1 btn btn-outline ",
                                   "disabled": false,
+                                  "extraCss": "",
+                                  "kind": "outline",
                                   "onClick": [Function],
-                                  "type": "button",
+                                  "size": null,
                                 },
                                 "ref": null,
                                 "rendered": "Yes",
-                                "type": "button",
+                                "type": [Function],
                               },
+                              " ",
                               Object {
                                 "instance": null,
                                 "key": undefined,
-                                "nodeType": "host",
+                                "nodeType": "function",
                                 "props": Object {
                                   "children": "No",
-                                  "className": "btn btn-outline bg-black white",
                                   "disabled": true,
+                                  "extraCss": "bg-black white",
+                                  "kind": "outline",
                                   "onClick": [Function],
-                                  "type": "button",
+                                  "size": null,
                                 },
                                 "ref": null,
                                 "rendered": "No",
-                                "type": "button",
+                                "type": [Function],
                               },
                             ],
                             "type": "div",
@@ -1424,28 +1452,30 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": <button
-                    className="btn btn-outline border-black px1 py-tiny mt-tiny h5"
+                  "children": <Btn
+                    extraCss="px1 py-tiny mt-tiny h5"
+                    kind="outline"
                     onClick={[Function]}
-                    type="button"
+                    size={null}
                   >
                     Remove resource
-                  </button>,
+                  </Btn>,
                 },
                 "ref": null,
                 "rendered": Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "host",
+                  "nodeType": "function",
                   "props": Object {
                     "children": "Remove resource",
-                    "className": "btn btn-outline border-black px1 py-tiny mt-tiny h5",
+                    "extraCss": "px1 py-tiny mt-tiny h5",
+                    "kind": "outline",
                     "onClick": [Function],
-                    "type": "button",
+                    "size": null,
                   },
                   "ref": null,
                   "rendered": "Remove resource",
-                  "type": "button",
+                  "type": [Function],
                 },
                 "type": "div",
               },
@@ -1458,16 +1488,17 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
           "children": "Add contractor",
-          "className": "btn btn-primary bg-black",
+          "extraCss": null,
+          "kind": "primary",
           "onClick": [Function],
-          "type": "button",
+          "size": null,
         },
         "ref": null,
         "rendered": "Add contractor",
-        "type": "button",
+        "type": [Function],
       },
     ],
     "type": [Function],
@@ -1640,44 +1671,49 @@ ShallowWrapper {
                       This is an hourly resource
                     </div>
                     <div>
-                      <button
-                        className="mr1 btn btn-outline "
+                      <Btn
                         disabled={false}
+                        extraCss=""
+                        kind="outline"
                         onClick={[Function]}
-                        type="button"
+                        size={null}
                       >
                         Yes
-                      </button>
-                      <button
-                        className="btn btn-outline bg-black white"
+                      </Btn>
+                       
+                      <Btn
                         disabled={true}
+                        extraCss="bg-black white"
+                        kind="outline"
                         onClick={[Function]}
-                        type="button"
+                        size={null}
                       >
                         No
-                      </button>
+                      </Btn>
                     </div>
                   </div>
                 </div>
               </div>
               <div>
-                <button
-                  className="btn btn-outline border-black px1 py-tiny mt-tiny h5"
+                <Btn
+                  extraCss="px1 py-tiny mt-tiny h5"
+                  kind="outline"
                   onClick={[Function]}
-                  type="button"
+                  size={null}
                 >
                   Remove resource
-                </button>
+                </Btn>
               </div>
             </div>
           </div>,
-          <button
-            className="btn btn-primary bg-black"
+          <Btn
+            extraCss={null}
+            kind="primary"
             onClick={[Function]}
-            type="button"
+            size={null}
           >
             Add contractor
-          </button>,
+          </Btn>,
         ],
         "id": null,
         "isKey": false,
@@ -1850,34 +1886,38 @@ ShallowWrapper {
                         This is an hourly resource
                       </div>
                       <div>
-                        <button
-                          className="mr1 btn btn-outline "
+                        <Btn
                           disabled={false}
+                          extraCss=""
+                          kind="outline"
                           onClick={[Function]}
-                          type="button"
+                          size={null}
                         >
                           Yes
-                        </button>
-                        <button
-                          className="btn btn-outline bg-black white"
+                        </Btn>
+                         
+                        <Btn
                           disabled={true}
+                          extraCss="bg-black white"
+                          kind="outline"
                           onClick={[Function]}
-                          type="button"
+                          size={null}
                         >
                           No
-                        </button>
+                        </Btn>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <button
-                    className="btn btn-outline border-black px1 py-tiny mt-tiny h5"
+                  <Btn
+                    extraCss="px1 py-tiny mt-tiny h5"
+                    kind="outline"
                     onClick={[Function]}
-                    type="button"
+                    size={null}
                   >
                     Remove resource
-                  </button>
+                  </Btn>
                 </div>
               </div>,
             ],
@@ -2046,34 +2086,38 @@ ShallowWrapper {
                           This is an hourly resource
                         </div>
                         <div>
-                          <button
-                            className="mr1 btn btn-outline "
+                          <Btn
                             disabled={false}
+                            extraCss=""
+                            kind="outline"
                             onClick={[Function]}
-                            type="button"
+                            size={null}
                           >
                             Yes
-                          </button>
-                          <button
-                            className="btn btn-outline bg-black white"
+                          </Btn>
+                           
+                          <Btn
                             disabled={true}
+                            extraCss="bg-black white"
+                            kind="outline"
                             onClick={[Function]}
-                            type="button"
+                            size={null}
                           >
                             No
-                          </button>
+                          </Btn>
                         </div>
                       </div>
                     </div>
                   </div>,
                   <div>
-                    <button
-                      className="btn btn-outline border-black px1 py-tiny mt-tiny h5"
+                    <Btn
+                      extraCss="px1 py-tiny mt-tiny h5"
+                      kind="outline"
                       onClick={[Function]}
-                      type="button"
+                      size={null}
                     >
                       Remove resource
-                    </button>
+                    </Btn>
                   </div>,
                 ],
                 "className": "mb3 pb3 border-bottom border-grey",
@@ -2648,22 +2692,25 @@ ShallowWrapper {
                             This is an hourly resource
                           </div>
                           <div>
-                            <button
-                              className="mr1 btn btn-outline "
+                            <Btn
                               disabled={false}
+                              extraCss=""
+                              kind="outline"
                               onClick={[Function]}
-                              type="button"
+                              size={null}
                             >
                               Yes
-                            </button>
-                            <button
-                              className="btn btn-outline bg-black white"
+                            </Btn>
+                             
+                            <Btn
                               disabled={true}
+                              extraCss="bg-black white"
+                              kind="outline"
                               onClick={[Function]}
-                              type="button"
+                              size={null}
                             >
                               No
-                            </button>
+                            </Btn>
                           </div>
                         </div>
                       </div>,
@@ -2698,22 +2745,25 @@ ShallowWrapper {
                               This is an hourly resource
                             </div>
                             <div>
-                              <button
-                                className="mr1 btn btn-outline "
+                              <Btn
                                 disabled={false}
+                                extraCss=""
+                                kind="outline"
                                 onClick={[Function]}
-                                type="button"
+                                size={null}
                               >
                                 Yes
-                              </button>
-                              <button
-                                className="btn btn-outline bg-black white"
+                              </Btn>
+                               
+                              <Btn
                                 disabled={true}
+                                extraCss="bg-black white"
+                                kind="outline"
                                 onClick={[Function]}
-                                type="button"
+                                size={null}
                               >
                                 No
-                              </button>
+                              </Btn>
                             </div>
                           </div>,
                           false,
@@ -2734,22 +2784,25 @@ ShallowWrapper {
                                 This is an hourly resource
                               </div>,
                               <div>
-                                <button
-                                  className="mr1 btn btn-outline "
+                                <Btn
                                   disabled={false}
+                                  extraCss=""
+                                  kind="outline"
                                   onClick={[Function]}
-                                  type="button"
+                                  size={null}
                                 >
                                   Yes
-                                </button>
-                                <button
-                                  className="btn btn-outline bg-black white"
+                                </Btn>
+                                 
+                                <Btn
                                   disabled={true}
+                                  extraCss="bg-black white"
+                                  kind="outline"
                                   onClick={[Function]}
-                                  type="button"
+                                  size={null}
                                 >
                                   No
-                                </button>
+                                </Btn>
                               </div>,
                             ],
                             "className": "flex items-center",
@@ -2774,22 +2827,25 @@ ShallowWrapper {
                               "nodeType": "host",
                               "props": Object {
                                 "children": Array [
-                                  <button
-                                    className="mr1 btn btn-outline "
+                                  <Btn
                                     disabled={false}
+                                    extraCss=""
+                                    kind="outline"
                                     onClick={[Function]}
-                                    type="button"
+                                    size={null}
                                   >
                                     Yes
-                                  </button>,
-                                  <button
-                                    className="btn btn-outline bg-black white"
+                                  </Btn>,
+                                  " ",
+                                  <Btn
                                     disabled={true}
+                                    extraCss="bg-black white"
+                                    kind="outline"
                                     onClick={[Function]}
-                                    type="button"
+                                    size={null}
                                   >
                                     No
-                                  </button>,
+                                  </Btn>,
                                 ],
                               },
                               "ref": null,
@@ -2797,32 +2853,35 @@ ShallowWrapper {
                                 Object {
                                   "instance": null,
                                   "key": undefined,
-                                  "nodeType": "host",
+                                  "nodeType": "function",
                                   "props": Object {
                                     "children": "Yes",
-                                    "className": "mr1 btn btn-outline ",
                                     "disabled": false,
+                                    "extraCss": "",
+                                    "kind": "outline",
                                     "onClick": [Function],
-                                    "type": "button",
+                                    "size": null,
                                   },
                                   "ref": null,
                                   "rendered": "Yes",
-                                  "type": "button",
+                                  "type": [Function],
                                 },
+                                " ",
                                 Object {
                                   "instance": null,
                                   "key": undefined,
-                                  "nodeType": "host",
+                                  "nodeType": "function",
                                   "props": Object {
                                     "children": "No",
-                                    "className": "btn btn-outline bg-black white",
                                     "disabled": true,
+                                    "extraCss": "bg-black white",
+                                    "kind": "outline",
                                     "onClick": [Function],
-                                    "type": "button",
+                                    "size": null,
                                   },
                                   "ref": null,
                                   "rendered": "No",
-                                  "type": "button",
+                                  "type": [Function],
                                 },
                               ],
                               "type": "div",
@@ -2842,28 +2901,30 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": <button
-                      className="btn btn-outline border-black px1 py-tiny mt-tiny h5"
+                    "children": <Btn
+                      extraCss="px1 py-tiny mt-tiny h5"
+                      kind="outline"
                       onClick={[Function]}
-                      type="button"
+                      size={null}
                     >
                       Remove resource
-                    </button>,
+                    </Btn>,
                   },
                   "ref": null,
                   "rendered": Object {
                     "instance": null,
                     "key": undefined,
-                    "nodeType": "host",
+                    "nodeType": "function",
                     "props": Object {
                       "children": "Remove resource",
-                      "className": "btn btn-outline border-black px1 py-tiny mt-tiny h5",
+                      "extraCss": "px1 py-tiny mt-tiny h5",
+                      "kind": "outline",
                       "onClick": [Function],
-                      "type": "button",
+                      "size": null,
                     },
                     "ref": null,
                     "rendered": "Remove resource",
-                    "type": "button",
+                    "type": [Function],
                   },
                   "type": "div",
                 },
@@ -2876,16 +2937,17 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
             "children": "Add contractor",
-            "className": "btn btn-primary bg-black",
+            "extraCss": null,
+            "kind": "primary",
             "onClick": [Function],
-            "type": "button",
+            "size": null,
           },
           "ref": null,
           "rendered": "Add contractor",
-          "type": "button",
+          "type": [Function],
         },
       ],
       "type": [Function],
