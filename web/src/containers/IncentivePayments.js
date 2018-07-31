@@ -76,7 +76,7 @@ class IncentivePayments extends Component {
                             label={`eh-payments-${year}-q1`}
                             wrapperClass="m0"
                             className="m0 input input-condensed mono right-align"
-                            value={data[id][year][q]}
+                            value={data[id][year][q] || ''}
                             onChange={this.handleChange(id, year, q)}
                             hideLabel
                           />
