@@ -42,6 +42,7 @@ class Login extends Component {
             <div className="mb2">
               <label htmlFor="username">Email</label>
               <input
+                id="username"
                 type="text"
                 name="username"
                 className="input"
@@ -52,6 +53,7 @@ class Login extends Component {
             <div className="mb2">
               <label htmlFor="password">Password</label>
               <input
+                id="password"
                 type="password"
                 name="password"
                 className="input"
