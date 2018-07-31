@@ -335,7 +335,11 @@ describe('apd actions', () => {
               {
                 name: 'name 1',
                 desc: 'description 1',
-                years: { '1993': 100, '1994': 200 }
+                years: { '1993': 100, '1994': 200 },
+                hourly: {
+                  useHourly: false,
+                  data: {}
+                }
               }
             ],
             expenses: [
