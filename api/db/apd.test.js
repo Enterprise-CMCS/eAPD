@@ -13,7 +13,6 @@ tap.test('apd data model', async apdModelTests => {
 
           activities: Function,
           incentivePayments: Function,
-          keyPersonnel: Function,
           pointsOfContact: Function,
           previousActivityExpenses: Function,
           state: Function,
@@ -35,7 +34,6 @@ tap.test('apd data model', async apdModelTests => {
             owns: {
               activities: 'apdActivity',
               incentivePayments: 'apdIncentivePayment',
-              keyPersonnel: 'apdKeyPersonnel',
               pointsOfContact: 'apdPointOfContact',
               previousActivityExpenses: 'apdPreviousActivityExpense'
             },
@@ -54,8 +52,6 @@ tap.test('apd data model', async apdModelTests => {
               'activities.statePersonnel.years',
               'activities.quarterlyFFP',
               'incentivePayments',
-              'keyPersonnel',
-              'keyPersonnel.years',
               'pointsOfContact',
               'previousActivityExpenses'
             ]
@@ -110,23 +106,6 @@ tap.test('apd data model', async apdModelTests => {
         'sets up the relationship mapping to incentive payments'
       );
       test.equal(output, 'snop', 'returns the expected value');
-    }
-  );
-
-  apdModelTests.test(
-    'apd model sets up key personnel relationship',
-    async activitiesTests => {
-      const self = {
-        hasMany: sinon.stub().returns('florp')
-      };
-
-      const output = apd.apd.keyPersonnel.bind(self)();
-
-      activitiesTests.ok(
-        self.hasMany.calledWith('apdKeyPersonnel'),
-        'sets up the relationship mapping to key personnel'
-      );
-      activitiesTests.equal(output, 'florp', 'returns the expected value');
     }
   );
 
@@ -243,9 +222,6 @@ tap.test('apd data model', async apdModelTests => {
     self.related
       .withArgs('incentivePayments')
       .returns({ toJSON: sinon.stub().returns('incentive-payments') });
-    self.related
-      .withArgs('keyPersonnel')
-      .returns({ toJSON: sinon.stub().returns('key-personnel') });
     self.get.withArgs('id').returns('apd-id');
     self.get.withArgs('state_id').returns('apd-state');
     self.get.withArgs('status').returns('apd-status');
@@ -287,7 +263,6 @@ tap.test('apd data model', async apdModelTests => {
         activities: 'apd-activities',
         federalCitations: 'assurances and stuff',
         incentivePayments: 'incentive-payments',
-        keyPersonnel: 'key-personnel',
         narrativeHIE: 'apd-hie',
         narrativeHIT: 'apd-hit',
         narrativeMMIS: 'apd-mmis',
