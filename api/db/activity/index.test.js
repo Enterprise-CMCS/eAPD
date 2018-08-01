@@ -11,7 +11,6 @@ tap.test('activity model index', async activityIndexTests => {
     Object.keys(out),
     [
       'apdActivity',
-      'apdActivityApproach',
       'apdActivityContractorResource',
       'apdActivityContractorResourceCost',
       'apdActivityCostAllocation',
