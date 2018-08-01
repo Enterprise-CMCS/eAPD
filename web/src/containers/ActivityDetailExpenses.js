@@ -13,7 +13,6 @@ import { DollarInput, Textarea } from '../components/Inputs';
 import { Subsection } from '../components/Section';
 import Select from '../components/Select';
 import { t } from '../i18n';
-import { isProgamAdmin } from '../util';
 
 class ActivityDetailExpenses extends Component {
   handleChange = (index, field) => e => {
@@ -37,10 +36,7 @@ class ActivityDetailExpenses extends Component {
     const { key: activityKey, expenses } = activity;
 
     return (
-      <Subsection
-        resource="activities.expenses"
-        isKey={isProgamAdmin(activity)}
-      >
+      <Subsection resource="activities.expenses">
         {expenses.length === 0 ? (
           <NoDataMsg>{t('activities.expenses.noDataNotice')}</NoDataMsg>
         ) : (
