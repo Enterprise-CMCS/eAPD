@@ -28,7 +28,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <button
-          aria-controls="default-render-case"
+          aria-controls="collapsible-default-render-case"
           aria-expanded={false}
           className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue"
           onClick={[Function]}
@@ -71,7 +71,7 @@ ShallowWrapper {
         </button>,
         <div
           className="p2 display-none"
-          id="default-render-case"
+          id="collapsible-default-render-case"
         />,
       ],
       "className": "mb3 bg-white rounded shadow",
@@ -84,7 +84,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "aria-controls": "default-render-case",
+          "aria-controls": "collapsible-default-render-case",
           "aria-expanded": false,
           "children": Array [
             <span
@@ -213,7 +213,7 @@ ShallowWrapper {
         "props": Object {
           "children": null,
           "className": "p2 display-none",
-          "id": "default-render-case",
+          "id": "collapsible-default-render-case",
         },
         "ref": null,
         "rendered": null,
@@ -230,7 +230,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <button
-            aria-controls="default-render-case"
+            aria-controls="collapsible-default-render-case"
             aria-expanded={false}
             className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue"
             onClick={[Function]}
@@ -273,7 +273,7 @@ ShallowWrapper {
           </button>,
           <div
             className="p2 display-none"
-            id="default-render-case"
+            id="collapsible-default-render-case"
           />,
         ],
         "className": "mb3 bg-white rounded shadow",
@@ -286,7 +286,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "aria-controls": "default-render-case",
+            "aria-controls": "collapsible-default-render-case",
             "aria-expanded": false,
             "children": Array [
               <span
@@ -415,7 +415,7 @@ ShallowWrapper {
           "props": Object {
             "children": null,
             "className": "p2 display-none",
-            "id": "default-render-case",
+            "id": "collapsible-default-render-case",
           },
           "ref": null,
           "rendered": null,
@@ -463,7 +463,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <button
-          aria-controls="open-render-case"
+          aria-controls="collapsible-open-render-case"
           aria-expanded={true}
           className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue"
           onClick={[Function]}
@@ -506,7 +506,7 @@ ShallowWrapper {
         </button>,
         <div
           className="p2 "
-          id="open-render-case"
+          id="collapsible-open-render-case"
         />,
       ],
       "className": "mb3 bg-white rounded shadow",
@@ -519,7 +519,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "aria-controls": "open-render-case",
+          "aria-controls": "collapsible-open-render-case",
           "aria-expanded": true,
           "children": Array [
             <span
@@ -648,7 +648,7 @@ ShallowWrapper {
         "props": Object {
           "children": null,
           "className": "p2 ",
-          "id": "open-render-case",
+          "id": "collapsible-open-render-case",
         },
         "ref": null,
         "rendered": null,
@@ -665,7 +665,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <button
-            aria-controls="open-render-case"
+            aria-controls="collapsible-open-render-case"
             aria-expanded={true}
             className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue"
             onClick={[Function]}
@@ -708,7 +708,7 @@ ShallowWrapper {
           </button>,
           <div
             className="p2 "
-            id="open-render-case"
+            id="collapsible-open-render-case"
           />,
         ],
         "className": "mb3 bg-white rounded shadow",
@@ -721,7 +721,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "aria-controls": "open-render-case",
+            "aria-controls": "collapsible-open-render-case",
             "aria-expanded": true,
             "children": Array [
               <span
@@ -850,7 +850,7 @@ ShallowWrapper {
           "props": Object {
             "children": null,
             "className": "p2 ",
-            "id": "open-render-case",
+            "id": "collapsible-open-render-case",
           },
           "ref": null,
           "rendered": null,
@@ -898,7 +898,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <button
-          aria-controls="open-render-case"
+          aria-controls="collapsible-open-render-case"
           aria-expanded={false}
           className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-top"
           onClick={[Function]}
@@ -941,7 +941,7 @@ ShallowWrapper {
         </button>,
         <div
           className="p2 display-none"
-          id="open-render-case"
+          id="collapsible-open-render-case"
         />,
       ],
       "className": "mb3 bg-white rounded shadow",
@@ -954,7 +954,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "aria-controls": "open-render-case",
+          "aria-controls": "collapsible-open-render-case",
           "aria-expanded": false,
           "children": Array [
             <span
@@ -1083,7 +1083,7 @@ ShallowWrapper {
         "props": Object {
           "children": null,
           "className": "p2 display-none",
-          "id": "open-render-case",
+          "id": "collapsible-open-render-case",
         },
         "ref": null,
         "rendered": null,
@@ -1100,7 +1100,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <button
-            aria-controls="open-render-case"
+            aria-controls="collapsible-open-render-case"
             aria-expanded={false}
             className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-top"
             onClick={[Function]}
@@ -1143,7 +1143,7 @@ ShallowWrapper {
           </button>,
           <div
             className="p2 display-none"
-            id="open-render-case"
+            id="collapsible-open-render-case"
           />,
         ],
         "className": "mb3 bg-white rounded shadow",
@@ -1156,7 +1156,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "aria-controls": "open-render-case",
+            "aria-controls": "collapsible-open-render-case",
             "aria-expanded": false,
             "children": Array [
               <span
@@ -1285,7 +1285,7 @@ ShallowWrapper {
           "props": Object {
             "children": null,
             "className": "p2 display-none",
-            "id": "open-render-case",
+            "id": "collapsible-open-render-case",
           },
           "ref": null,
           "rendered": null,
@@ -1333,7 +1333,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <button
-          aria-controls="toggle-to-open-case"
+          aria-controls="collapsible-toggle-to-open-case"
           aria-expanded={true}
           className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue"
           onClick={[Function]}
@@ -1376,7 +1376,7 @@ ShallowWrapper {
         </button>,
         <div
           className="p2 "
-          id="toggle-to-open-case"
+          id="collapsible-toggle-to-open-case"
         />,
       ],
       "className": "mb3 bg-white rounded shadow",
@@ -1389,7 +1389,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "aria-controls": "toggle-to-open-case",
+          "aria-controls": "collapsible-toggle-to-open-case",
           "aria-expanded": true,
           "children": Array [
             <span
@@ -1518,7 +1518,7 @@ ShallowWrapper {
         "props": Object {
           "children": null,
           "className": "p2 ",
-          "id": "toggle-to-open-case",
+          "id": "collapsible-toggle-to-open-case",
         },
         "ref": null,
         "rendered": null,
@@ -1535,7 +1535,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <button
-            aria-controls="toggle-to-open-case"
+            aria-controls="collapsible-toggle-to-open-case"
             aria-expanded={true}
             className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue"
             onClick={[Function]}
@@ -1578,7 +1578,7 @@ ShallowWrapper {
           </button>,
           <div
             className="p2 "
-            id="toggle-to-open-case"
+            id="collapsible-toggle-to-open-case"
           />,
         ],
         "className": "mb3 bg-white rounded shadow",
@@ -1591,7 +1591,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "aria-controls": "toggle-to-open-case",
+            "aria-controls": "collapsible-toggle-to-open-case",
             "aria-expanded": true,
             "children": Array [
               <span
@@ -1720,7 +1720,7 @@ ShallowWrapper {
           "props": Object {
             "children": null,
             "className": "p2 ",
-            "id": "toggle-to-open-case",
+            "id": "collapsible-toggle-to-open-case",
           },
           "ref": null,
           "rendered": null,
@@ -1768,7 +1768,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <button
-          aria-controls="toggle-to-closed-case"
+          aria-controls="collapsible-toggle-to-closed-case"
           aria-expanded={false}
           className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue"
           onClick={[Function]}
@@ -1811,7 +1811,7 @@ ShallowWrapper {
         </button>,
         <div
           className="p2 display-none"
-          id="toggle-to-closed-case"
+          id="collapsible-toggle-to-closed-case"
         />,
       ],
       "className": "mb3 bg-white rounded shadow",
@@ -1824,7 +1824,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "aria-controls": "toggle-to-closed-case",
+          "aria-controls": "collapsible-toggle-to-closed-case",
           "aria-expanded": false,
           "children": Array [
             <span
@@ -1953,7 +1953,7 @@ ShallowWrapper {
         "props": Object {
           "children": null,
           "className": "p2 display-none",
-          "id": "toggle-to-closed-case",
+          "id": "collapsible-toggle-to-closed-case",
         },
         "ref": null,
         "rendered": null,
@@ -1970,7 +1970,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <button
-            aria-controls="toggle-to-closed-case"
+            aria-controls="collapsible-toggle-to-closed-case"
             aria-expanded={false}
             className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue"
             onClick={[Function]}
@@ -2013,7 +2013,7 @@ ShallowWrapper {
           </button>,
           <div
             className="p2 display-none"
-            id="toggle-to-closed-case"
+            id="collapsible-toggle-to-closed-case"
           />,
         ],
         "className": "mb3 bg-white rounded shadow",
@@ -2026,7 +2026,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "aria-controls": "toggle-to-closed-case",
+            "aria-controls": "collapsible-toggle-to-closed-case",
             "aria-expanded": false,
             "children": Array [
               <span
@@ -2155,7 +2155,7 @@ ShallowWrapper {
           "props": Object {
             "children": null,
             "className": "p2 display-none",
-            "id": "toggle-to-closed-case",
+            "id": "collapsible-toggle-to-closed-case",
           },
           "ref": null,
           "rendered": null,

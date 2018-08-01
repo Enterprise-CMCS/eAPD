@@ -61,7 +61,7 @@ class ActivityDetailExpenses extends Component {
                     <td className="mono">{i + 1}.</td>
                     <td>
                       <Select
-                        name={`expense-${expense.key}-desc`}
+                        name={`expense-${expense.key}-category`}
                         options={[
                           'Hardware, software, and licensing',
                           'Equipment and supplies',

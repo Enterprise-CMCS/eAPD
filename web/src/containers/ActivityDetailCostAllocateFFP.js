@@ -38,7 +38,7 @@ class ActivityDetailCostAllocateFFP extends Component {
           {byYearData.map(
             ({ year, total, totalNetOther, ffpSelectVal, allocations }) => (
               <div key={year} className="col col-12 sm-col-4 px1">
-                <div className="p2 bg-darken-1">
+                <div className="p2 bg-gray-lightest">
                   <div>{year}</div>
                   <div className="h3 bold mono">{formatMoney(total)}</div>
                   <hr />

@@ -28,7 +28,7 @@ class Collapsible extends Component {
       onChange
     } = this.props;
     const isOpen = onChange ? this.props.open : this.state.open;
-    const contentId = kebabCase(title);
+    const contentId = `collapsible-${kebabCase(title)}`;
 
     const btnClass = deline`
       btn block col-12 py2 h3 sm-h2 line-height-1 left-align

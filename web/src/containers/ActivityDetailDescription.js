@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { Chunk, Subsection } from '../components/Section';
-import { RichText } from '../components/Inputs';
+import { Textarea, RichText } from '../components/Inputs';
 
 const ActivityDetailDescription = props => {
   const { activity, updateActivity } = props;
@@ -18,7 +18,10 @@ const ActivityDetailDescription = props => {
     <Subsection resource="activities.description">
       <Chunk resource="activities.description.summary">
         <div className="mb3">
-          <textarea
+          <Textarea
+            name={`activity-summary-${activity.key}`}
+            label="activity summary"
+            hideLabel
             className="m0 textarea"
             rows="5"
             maxLength="280"

@@ -25,6 +25,10 @@
   padding: 0.5rem 1rem;
 }
 
+.ReactTable.-striped .rt-tr.-odd {
+  background-color: var(--grey-light);
+}
+
 /* additional styles */
 
 .table th,

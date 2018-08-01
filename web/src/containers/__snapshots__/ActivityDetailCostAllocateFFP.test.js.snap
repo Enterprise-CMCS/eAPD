@@ -85,7 +85,7 @@ ShallowWrapper {
             className="col col-12 sm-col-4 px1"
           >
             <div
-              className="p2 bg-darken-1"
+              className="p2 bg-gray-lightest"
             >
               <div>
                 1066
@@ -163,7 +163,7 @@ ShallowWrapper {
             className="col col-12 sm-col-4 px1"
           >
             <div
-              className="p2 bg-darken-1"
+              className="p2 bg-gray-lightest"
             >
               <div>
                 1067
@@ -264,7 +264,7 @@ ShallowWrapper {
               className="col col-12 sm-col-4 px1"
             >
               <div
-                className="p2 bg-darken-1"
+                className="p2 bg-gray-lightest"
               >
                 <div>
                   1066
@@ -342,7 +342,7 @@ ShallowWrapper {
               className="col col-12 sm-col-4 px1"
             >
               <div
-                className="p2 bg-darken-1"
+                className="p2 bg-gray-lightest"
               >
                 <div>
                   1067
@@ -427,7 +427,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": <div
-                className="p2 bg-darken-1"
+                className="p2 bg-gray-lightest"
               >
                 <div>
                   1066
@@ -580,7 +580,7 @@ ShallowWrapper {
                     </div>
                   </div>,
                 ],
-                "className": "p2 bg-darken-1",
+                "className": "p2 bg-gray-lightest",
               },
               "ref": null,
               "rendered": Array [
@@ -825,7 +825,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": <div
-                className="p2 bg-darken-1"
+                className="p2 bg-gray-lightest"
               >
                 <div>
                   1067
@@ -978,7 +978,7 @@ ShallowWrapper {
                     </div>
                   </div>,
                 ],
-                "className": "p2 bg-darken-1",
+                "className": "p2 bg-gray-lightest",
               },
               "ref": null,
               "rendered": Array [
@@ -1240,7 +1240,7 @@ ShallowWrapper {
               className="col col-12 sm-col-4 px1"
             >
               <div
-                className="p2 bg-darken-1"
+                className="p2 bg-gray-lightest"
               >
                 <div>
                   1066
@@ -1318,7 +1318,7 @@ ShallowWrapper {
               className="col col-12 sm-col-4 px1"
             >
               <div
-                className="p2 bg-darken-1"
+                className="p2 bg-gray-lightest"
               >
                 <div>
                   1067
@@ -1419,7 +1419,7 @@ ShallowWrapper {
                 className="col col-12 sm-col-4 px1"
               >
                 <div
-                  className="p2 bg-darken-1"
+                  className="p2 bg-gray-lightest"
                 >
                   <div>
                     1066
@@ -1497,7 +1497,7 @@ ShallowWrapper {
                 className="col col-12 sm-col-4 px1"
               >
                 <div
-                  className="p2 bg-darken-1"
+                  className="p2 bg-gray-lightest"
                 >
                   <div>
                     1067
@@ -1582,7 +1582,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p2 bg-darken-1"
+                  className="p2 bg-gray-lightest"
                 >
                   <div>
                     1066
@@ -1735,7 +1735,7 @@ ShallowWrapper {
                       </div>
                     </div>,
                   ],
-                  "className": "p2 bg-darken-1",
+                  "className": "p2 bg-gray-lightest",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -1980,7 +1980,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <div
-                  className="p2 bg-darken-1"
+                  className="p2 bg-gray-lightest"
                 >
                   <div>
                     1067
@@ -2133,7 +2133,7 @@ ShallowWrapper {
                       </div>
                     </div>,
                   ],
-                  "className": "p2 bg-darken-1",
+                  "className": "p2 bg-gray-lightest",
                 },
                 "ref": null,
                 "rendered": Array [
