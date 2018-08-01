@@ -8,24 +8,8 @@ tap.test('apds POST endpoint', async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = { post: sinon.stub() };
 
-  const ApdModel = {
-    forge: sandbox.stub(),
-    save: sandbox.stub(),
-    where: sandbox.stub()
-  };
-
-  const POCModel = {
-    forge: sandbox.stub(),
-    save: sandbox.stub()
-  };
-
-  const StateModel = {
-    where: sandbox.stub(),
-    fetch: sandbox.stub()
-  };
-
   endpointTest.test('setup', async test => {
-    postEndpoint(app, ApdModel, POCModel, StateModel);
+    postEndpoint(app);
 
     test.ok(
       app.post.calledWith('/apds', can('edit-document'), sinon.match.func),
@@ -44,7 +28,19 @@ tap.test('apds POST endpoint', async endpointTest => {
       end: sandbox.stub()
     };
 
-    const set = sinon.stub();
+    const ApdModel = {
+      fetch: sandbox.stub(),
+      forge: sandbox.stub(),
+      where: sandbox.stub(),
+      withRelated: 'relations!'
+    };
+    const apd = {
+      get: sandbox.stub(),
+      save: sandbox.stub(),
+      synchronize: sandbox.stub()
+    };
+
+    const dataBuilder = sandbox.stub();
 
     tests.beforeEach(async () => {
       sandbox.resetBehavior();
@@ -54,28 +50,24 @@ tap.test('apds POST endpoint', async endpointTest => {
       res.status.returns(res);
       res.end.returns(res);
 
-      ApdModel.forge.returns({
-        get: sandbox
-          .stub()
-          .withArgs('id')
-          .returns('new-apd-id'),
-        set,
-        save: ApdModel.save
-      });
+      ApdModel.forge.returns(apd);
 
       ApdModel.where.returns({
-        fetch: sandbox.stub().resolves('this is the new APD')
+        fetch: sandbox
+          .stub()
+          .withArgs({ withRelated: 'related!' })
+          .resolves('this is the new APD')
       });
 
-      POCModel.forge.returns({
-        save: POCModel.save
-      });
-      POCModel.save.resolves();
+      apd.get.withArgs('id').returns('new apd id');
+      apd.save.resolves();
+      apd.synchronize.resolves();
 
-      StateModel.where.returns(StateModel);
-
-      postEndpoint(app, ApdModel, StateModel);
-      handler = app.post.args[0].slice(-1).pop();
+      postEndpoint(app, { ApdModel, getNewApd: dataBuilder });
+      handler = app.post.args
+        .slice(-1)[0]
+        .slice(-1)
+        .pop();
     });
 
     tests.test('sends a 500 code for database errors', async test => {
@@ -87,27 +79,8 @@ tap.test('apds POST endpoint', async endpointTest => {
     });
 
     tests.test('sends back the new APD if everything works', async test => {
-      const get = sinon.stub();
-      get.withArgs('medicaid_office').returns({
-        medicaidDirector: {
-          name: 'Abraham Lincoln',
-          email: 'honestabe@presidents.gov',
-          phone: '555-ABE-LNCN'
-        },
-        medicaidOffice: {
-          address1: '1600 Pennsylvania Ave',
-          address2: 'c/o 1865',
-          city: 'Washington',
-          state: 'DC',
-          zip: '20500'
-        }
-      });
-      get
-        .withArgs('state_pocs')
-        .returns([{ name: 'bloop' }, { name: 'blorp' }]);
-
-      StateModel.fetch.resolves({ get });
-      POCModel.forge.returns({ save: sinon.stub() });
+      const data = { this: 'is', some: 'apd', data: 'here' };
+      dataBuilder.resolves(data);
 
       await handler(req, res);
 
@@ -119,39 +92,32 @@ tap.test('apds POST endpoint', async endpointTest => {
         'new APD is created'
       );
 
+      test.ok(apd.save.calledOnce, 'new APD is saved');
       test.ok(
-        set.calledWith({
-          stateProfile: {
-            medicaidDirector: {
-              name: 'Abraham Lincoln',
-              email: 'honestabe@presidents.gov',
-              phone: '555-ABE-LNCN'
-            },
-            medicaidOffice: {
-              address1: '1600 Pennsylvania Ave',
-              address2: 'c/o 1865',
-              city: 'Washington',
-              state: 'DC',
-              zip: '20500'
-            }
-          }
-        }),
-        'state profile is populated'
+        apd.save.calledBefore(dataBuilder),
+        'APD is created and saved before data is built'
       );
-
-      test.ok(ApdModel.save.calledOnce, 'apd is saved');
       test.ok(
-        ApdModel.save.calledBefore(POCModel.forge),
-        'APD must be saved before POCs are created because they need the APD ID'
+        dataBuilder.calledBefore(apd.synchronize),
+        'APD is synchronized after data is built'
+      );
+      test.ok(
+        apd.synchronize.calledWith(data),
+        'APD is synchronized with initial data'
       );
 
       test.ok(
-        POCModel.forge.calledWith({ name: 'bloop', apd_id: 'new-apd-id' }),
-        'creates POC model'
+        apd.synchronize.calledBefore(ApdModel.where),
+        'updated APD is fetched after synchronization'
       );
       test.ok(
-        POCModel.forge.calledWith({ name: 'blorp', apd_id: 'new-apd-id' }),
-        'creates POC model'
+        ApdModel.where.calledWith({ id: 'new apd id' }),
+        'only the newly-created APD is fetched'
+      );
+
+      test.ok(
+        ApdModel.where.calledBefore(ApdModel.fetch),
+        'model query filter is set before fetching'
       );
 
       test.ok(

@@ -17,7 +17,7 @@ module.exports = () => ({
             ['epPayment', 'ep_payment'],
             ['epCount', 'ep_count']
           ].forEach(([camel, snake]) => {
-            if (attributes[q][camel]) {
+            if (attributes[q][camel] !== undefined) {
               out[`${q}_${snake}`] = attributes[q][camel];
             }
           });

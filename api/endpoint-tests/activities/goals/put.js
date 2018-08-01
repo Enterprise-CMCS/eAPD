@@ -57,36 +57,6 @@ tap.test(
         );
 
         authenticated.test(
-          'with goals that are not valid',
-          async invalidTest => {
-            const { response, body } = await request.put(url(4100), {
-              jar: cookies,
-              json: [
-                {
-                  description: 'new goal 1',
-                  objective: 'o1'
-                },
-                {
-                  lacksDescription: 'this one should not come back',
-                  objective: 'o3'
-                }
-              ]
-            });
-
-            invalidTest.equal(
-              response.statusCode,
-              400,
-              'gives a 400 status code'
-            );
-            invalidTest.same(
-              body,
-              { action: 'update-activity', error: 'invalid-goals' },
-              'sends back an error token'
-            );
-          }
-        );
-
-        authenticated.test(
           'with an array of goals with objectives',
           async validTest => {
             const { response, body } = await request.put(url(4100), {
