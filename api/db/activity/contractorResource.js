@@ -19,6 +19,13 @@ module.exports = {
       );
     },
 
+    hourlyData() {
+      return this.hasMany(
+        'apdActivityContractorResourceHourly',
+        'contractor_resource_id'
+      );
+    },
+
     years() {
       return this.hasMany(
         'apdActivityContractorResourceCost',
@@ -45,19 +52,24 @@ module.exports = {
 
     toJSON() {
       return {
+        description: this.get('description'),
+        end: getDate(this.get('end')),
+        files: this.related('files'),
+        hourlyData: this.related('hourlyData'),
         id: this.get('id'),
         name: this.get('name'),
-        description: this.get('description'),
-        files: this.related('files'),
         start: getDate(this.get('start')),
-        end: getDate(this.get('end')),
+        useHourly: this.get('useHourly'),
         years: this.related('years')
       };
     },
 
     static: {
-      updateableFields: ['name', 'description', 'start', 'end'],
-      owns: { years: 'apdActivityContractorResourceCost' },
+      updateableFields: ['name', 'description', 'end', 'start', 'useHourly'],
+      owns: {
+        years: 'apdActivityContractorResourceCost',
+        hourlyData: 'apdActivityContractorResourceHourly'
+      },
       foreignKey: 'contractor_resource_id'
     }
   },
@@ -88,6 +100,30 @@ module.exports = {
 
     static: {
       updateableFields: ['year', 'cost']
+    }
+  },
+
+  apdActivityContractorResourceHourly: {
+    tableName: 'activity_contractor_resources_hourly',
+
+    contractorResource() {
+      return this.belongsTo(
+        'apdActivityContractorResource',
+        'contractor_resource_id'
+      );
+    },
+
+    toJSON() {
+      return {
+        id: this.get('id'),
+        year: this.get('year'),
+        hours: +this.get('hours'),
+        rate: +this.get('rate')
+      };
+    },
+
+    static: {
+      updateableFields: ['year', 'hours', 'rate']
     }
   }
 };

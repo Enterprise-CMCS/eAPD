@@ -97,6 +97,7 @@ module.exports = {
       withRelated: [
         'contractorResources',
         'contractorResources.files',
+        'contractorResources.hourlyData',
         'contractorResources.years',
         'goals',
         'expenses',

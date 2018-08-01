@@ -6,6 +6,7 @@ exports.seed = async knex =>
     // These tables don't reference any other tables, so
     // they can be cleared out right off the bat.
     knex('activity_contractor_files').del(),
+    knex('activity_contractor_resources_hourly').del(),
     knex('activity_files').del(),
     knex('activity_contractor_resources_yearly').del(),
     knex('activity_cost_allocation').del(),
