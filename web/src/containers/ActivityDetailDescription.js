@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { updateActivity as updateActivityAction } from '../actions/activities';
 import { Chunk, Subsection } from '../components/Section';
 import { RichText } from '../components/Inputs';
-import { isProgamAdmin } from '../util';
 
 const ActivityDetailDescription = props => {
   const { activity, updateActivity } = props;
@@ -16,10 +15,7 @@ const ActivityDetailDescription = props => {
   };
 
   return (
-    <Subsection
-      resource="activities.description"
-      isKey={isProgamAdmin(activity)}
-    >
+    <Subsection resource="activities.description">
       <Chunk resource="activities.description.summary">
         <div className="mb3">
           <textarea

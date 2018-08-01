@@ -11,7 +11,6 @@ import {
 import Btn from '../components/Btn';
 import { Chunk, Subsection } from '../components/Section';
 import { RichText } from '../components/Inputs';
-import { isProgamAdmin } from '../util';
 
 class ActivityDetailGoals extends Component {
   handleSync = (index, field) => html => {
@@ -34,7 +33,7 @@ class ActivityDetailGoals extends Component {
     const { activity } = this.props;
 
     return (
-      <Subsection resource="activities.goals" isKey={isProgamAdmin(activity)}>
+      <Subsection resource="activities.goals">
         {activity.goals.map((d, i) => (
           <div key={d.key} className="mb3">
             <Chunk resource="activities.goals.goal">
