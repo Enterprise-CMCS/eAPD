@@ -51,16 +51,22 @@ export const updateApd = updates => dispatch => {
   }
 };
 
+export const selectApd = (id, pushRoute = push) => (dispatch, getState) => {
+  dispatch({ type: SELECT_APD, apd: getState().apd.byId[id] });
+  dispatch(updateBudget());
+  dispatch(pushRoute('/apd'));
+};
+
 export const createRequest = () => ({ type: CREATE_APD_REQUEST });
 export const createSuccess = data => ({ type: CREATE_APD_SUCCESS, data });
 export const createFailure = () => ({ type: CREATE_APD_FAILURE });
-export const createApd = () => dispatch => {
+export const createApd = ({ pushRoute = push } = {}) => dispatch => {
   dispatch(createRequest());
   return axios
     .post('/apds')
     .then(req => {
       dispatch(createSuccess(req.data));
-      dispatch(selectApd(req.data.id));
+      dispatch(selectApd(req.data.id, pushRoute));
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
@@ -97,12 +103,6 @@ export const fetchApdDataIfNeeded = () => (dispatch, getState) => {
   }
 
   return null;
-};
-
-export const selectApd = (id, pushRoute = push) => (dispatch, getState) => {
-  dispatch({ type: SELECT_APD, apd: getState().apd.byId[id] });
-  dispatch(updateBudget());
-  dispatch(pushRoute('/apd'));
 };
 
 export const notifyNetError = (action, error) => {
