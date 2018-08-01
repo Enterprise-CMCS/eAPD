@@ -105,10 +105,8 @@ export const toAPI = activityState => {
  * object matching redux state shape.
  * @param {Object} activityAPI - The activity object from the API
  * @param {Array.<string>} years - the years for the associated APD
- * @param {Object} defaults - default values for missing properties
- * @param {Object} defaults.quarterlyFFP - default quarterly FFP for this activity
  */
-export const fromAPI = (activityAPI, years, { quarterlyFFP } = {}) => ({
+export const fromAPI = (activityAPI, years) => ({
   // These properties are just copied over, maybe renamed,
   // but no data massaging necessary
   altApproach: activityAPI.alternatives || '',
@@ -223,35 +221,32 @@ export const fromAPI = (activityAPI, years, { quarterlyFFP } = {}) => ({
     )
   })),
 
-  quarterlyFFP:
-    activityAPI.quarterlyFFP && activityAPI.quarterlyFFP.length
-      ? activityAPI.quarterlyFFP.reduce(
-          (acc, ffy) => ({
-            ...acc,
-            [ffy.year]: {
-              1: {
-                combined: ffy.q1.combined * 100,
-                contractors: ffy.q1.contractors * 100,
-                state: ffy.q1.state * 100
-              },
-              2: {
-                combined: ffy.q2.combined * 100,
-                contractors: ffy.q2.contractors * 100,
-                state: ffy.q2.state * 100
-              },
-              3: {
-                combined: ffy.q3.combined * 100,
-                contractors: ffy.q3.contractors * 100,
-                state: ffy.q3.state * 100
-              },
-              4: {
-                combined: ffy.q4.combined * 100,
-                contractors: ffy.q4.contractors * 100,
-                state: ffy.q4.state * 100
-              }
-            }
-          }),
-          {}
-        )
-      : quarterlyFFP
+  quarterlyFFP: activityAPI.quarterlyFFP.reduce(
+    (acc, ffy) => ({
+      ...acc,
+      [ffy.year]: {
+        1: {
+          combined: ffy.q1.combined * 100,
+          contractors: ffy.q1.contractors * 100,
+          state: ffy.q1.state * 100
+        },
+        2: {
+          combined: ffy.q2.combined * 100,
+          contractors: ffy.q2.contractors * 100,
+          state: ffy.q2.state * 100
+        },
+        3: {
+          combined: ffy.q3.combined * 100,
+          contractors: ffy.q3.contractors * 100,
+          state: ffy.q3.state * 100
+        },
+        4: {
+          combined: ffy.q4.combined * 100,
+          contractors: ffy.q4.contractors * 100,
+          state: ffy.q4.state * 100
+        }
+      }
+    }),
+    {}
+  )
 });
