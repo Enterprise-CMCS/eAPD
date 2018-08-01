@@ -7,7 +7,7 @@ import { updateActivity as updateActivityAction } from '../actions/activities';
 import { Subsection } from '../components/Section';
 import { Textarea } from '../components/Inputs';
 import HelpText from '../components/HelpText';
-import { STANDARDS, isProgamAdmin } from '../util';
+import { STANDARDS } from '../util';
 
 class ActivityDetailStandardsAndConditions extends Component {
   handleChange = field => e => {
@@ -22,10 +22,7 @@ class ActivityDetailStandardsAndConditions extends Component {
     const { activity } = this.props;
 
     return (
-      <Subsection
-        resource="activities.standardsAndConditions"
-        isKey={isProgamAdmin(activity)}
-      >
+      <Subsection resource="activities.standardsAndConditions">
         {STANDARDS.map(std => (
           <div key={std.id}>
             <h3>

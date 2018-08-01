@@ -12,7 +12,6 @@ import NoDataMsg from '../components/NoDataMsg';
 import { Subsection } from '../components/Section';
 import { Input } from '../components/Inputs';
 import { t } from '../i18n';
-import { isProgamAdmin } from '../util';
 
 class ActivityDetailSchedule extends Component {
   handleChange = (index, field) => e => {
@@ -31,10 +30,7 @@ class ActivityDetailSchedule extends Component {
     } = this.props;
 
     return (
-      <Subsection
-        resource="activities.schedule"
-        isKey={isProgamAdmin(activity)}
-      >
+      <Subsection resource="activities.schedule">
         {activity.milestones.length === 0 ? (
           <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (

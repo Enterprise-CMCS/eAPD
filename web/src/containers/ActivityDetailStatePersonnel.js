@@ -17,23 +17,22 @@ import {
 } from '../components/Inputs';
 import { Subsection } from '../components/Section';
 import { t } from '../i18n';
-import { isProgamAdmin } from '../util';
 
 class ActivityDetailStatePersonnel extends Component {
   handleChange = (index, field, year) => e => {
-    const { value } = e.target;
+    const { checked, type, value } = e.target;
+    const valueNorm = type === 'checkbox' ? checked : value;
+
     const { activity, updateActivity } = this.props;
 
     const toUpdate =
       year !== undefined
-        ? { years: { [year]: { [field]: value } } }
-        : { [field]: value };
+        ? { years: { [year]: { [field]: valueNorm } } }
+        : { [field]: valueNorm };
 
     updateActivity(
       activity.key,
-      {
-        statePersonnel: { [index]: toUpdate }
-      },
+      { statePersonnel: { [index]: toUpdate } },
       field === 'amt' || field === 'perc'
     );
   };
@@ -43,10 +42,7 @@ class ActivityDetailStatePersonnel extends Component {
     const { key: activityKey, statePersonnel } = activity;
 
     return (
-      <Subsection
-        resource="activities.statePersonnel"
-        isKey={isProgamAdmin(activity)}
-      >
+      <Subsection resource="activities.statePersonnel">
         {statePersonnel.length === 0 ? (
           <NoDataMsg>{t('activities.statePersonnel.noDataNotice')}</NoDataMsg>
         ) : (
@@ -100,6 +96,15 @@ class ActivityDetailStatePersonnel extends Component {
                         value={d.title}
                         onChange={this.handleChange(i, 'title')}
                       />
+                      <label className="block bold">
+                        <input
+                          type="checkbox"
+                          className="mr1"
+                          checked={d.isKeyPersonnel}
+                          onChange={this.handleChange(i, 'isKeyPersonnel')}
+                        />
+                        {t('activities.statePersonnel.labels.keyPersonnel')}
+                      </label>
                     </td>
                     <td>
                       <Textarea
