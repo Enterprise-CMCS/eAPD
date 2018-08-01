@@ -61,6 +61,17 @@ tap.test('state personnel data model', async statePersonnelModelTests => {
     }
   );
 
+  statePersonnelModelTests.test('snake-cases attributes', async test => {
+    test.same(
+      personnel.format({
+        attr1: 'attribute 1',
+        attrTwo: 'attribute 2'
+      }),
+      { attr1: 'attribute 1', attr_two: 'attribute 2' },
+      'formats camel-case attributes into snake-case attributes'
+    );
+  });
+
   statePersonnelModelTests.test('overrides toJSON method', async jsonTests => {
     const self = { get: sinon.stub(), related: sinon.stub() };
     self.get.returns('--- unknown field ---');
