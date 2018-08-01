@@ -134,6 +134,7 @@ module.exports = () => ({
         { activities: query => query.orderBy('id') },
         'activities.contractorResources',
         'activities.contractorResources.files',
+        'activities.contractorResources.hourlyData',
         'activities.contractorResources.years',
         'activities.costAllocation',
         'activities.goals',

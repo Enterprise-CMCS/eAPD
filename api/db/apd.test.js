@@ -41,6 +41,7 @@ tap.test('apd data model', async apdModelTests => {
               { activities: Function },
               'activities.contractorResources',
               'activities.contractorResources.files',
+              'activities.contractorResources.hourlyData',
               'activities.contractorResources.years',
               'activities.costAllocation',
               'activities.goals',

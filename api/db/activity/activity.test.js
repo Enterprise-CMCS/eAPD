@@ -45,6 +45,7 @@ tap.test('activity data model', async activityModelTests => {
             withRelated: [
               'contractorResources',
               'contractorResources.files',
+              'contractorResources.hourlyData',
               'contractorResources.years',
               'goals',
               'expenses',

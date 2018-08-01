@@ -36,21 +36,19 @@ tap.test('APD data initializer', async test => {
           {
             description: '',
             name: '',
-            hourly: {
-              useHourly: false,
-              data: [
-                {
-                  hours: '',
-                  rate: '',
-                  year: '2018'
-                },
-                {
-                  hours: '',
-                  rate: '',
-                  year: '2019'
-                }
-              ]
-            },
+            hourlyData: [
+              {
+                hours: '',
+                rate: '',
+                year: '2018'
+              },
+              {
+                hours: '',
+                rate: '',
+                year: '2019'
+              }
+            ],
+            useHourly: false,
             years: [
               {
                 cost: 0,
