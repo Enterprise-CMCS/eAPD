@@ -103,6 +103,8 @@ const getStateProfile = () => ({
 const repeat = (number, obj) => [...Array(number)].map(() => obj);
 
 const getNewApd = async (stateID, { StateModel = defaultStateModel } = {}) => {
+  // TODO: Fix these years.  Maybe copy over from how we
+  // compute them on the frontend. 🤷‍♂️
   const yearOptions = ['2018', '2019', '2020'];
   const years = yearOptions.slice(0, 2);
 
