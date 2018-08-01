@@ -15,7 +15,7 @@ tap.test('state personnel data model', async statePersonnelModelTests => {
         activity: Function,
         years: Function,
         static: {
-          updateableFields: ['title', 'description'],
+          updateableFields: ['title', 'description', 'keyPersonnel'],
           owns: { years: 'apdActivityStatePersonnelCost' },
           foreignKey: 'personnel_id'
         }
@@ -67,6 +67,7 @@ tap.test('state personnel data model', async statePersonnelModelTests => {
     self.get.withArgs('id').returns('id field');
     self.get.withArgs('title').returns('title field');
     self.get.withArgs('description').returns('description field');
+    self.get.withArgs('key_personnel').returns('sure');
     self.related.withArgs('years').returns('some times');
 
     const output = personnel.toJSON.bind(self)();
@@ -75,6 +76,7 @@ tap.test('state personnel data model', async statePersonnelModelTests => {
       id: 'id field',
       title: 'title field',
       description: 'description field',
+      keyPersonnel: 'sure',
       years: 'some times'
     });
   });
