@@ -83,6 +83,23 @@ module.exports = {
               files: arrayOf({
                 $ref: '#/components/schemas/file'
               }),
+              hourlyData: arrayOf({
+                type: 'object',
+                properties: {
+                  hours: {
+                    type: 'number',
+                    description: 'Number of hours this contractor works/ed'
+                  },
+                  rates: {
+                    type: 'number',
+                    description: 'Hourly rate for this contractor'
+                  },
+                  year: {
+                    type: 'string',
+                    description: 'Year this hourly rate applies to'
+                  }
+                }
+              }),
               start: {
                 type: 'string',
                 format: 'date-time',
@@ -94,6 +111,10 @@ module.exports = {
                 format: 'date-time',
                 description:
                   'When the contractor resource will end work; date only'
+              },
+              useHourly: {
+                type: 'boolean',
+                description: 'Whether to use hourly rates for this contractor'
               },
               years: arrayOf({
                 type: 'object',
