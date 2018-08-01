@@ -314,12 +314,16 @@
         benefits. Salary amount is the yearly cost of the individual personnel
         listed and personnel only need to be listed once. FTE% is the
         percentage attributable to the activity. Personnel costs are
-        automatically calculated from the %FTE provided. 
+        automatically calculated from the %FTE provided.
+      reminder: >-
+        If the personnel identified is a key member of the project, select
+        the Key Personnel checkbox beneath their name.
       noDataNotice: There are no personnel resources for this activity.
       labels: 
         entryNum: "#"
         title: Title
         desc: Description
+        keyPersonnel: Key Personnel
         yearCost: "{{year}} Cost"
         costAmt: Salary Amount
         costPerc: "% FTE"
