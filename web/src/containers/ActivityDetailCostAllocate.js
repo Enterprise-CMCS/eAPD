@@ -9,7 +9,6 @@ import { Subsection } from '../components/Section';
 import { RichText } from '../components/Inputs';
 import HelpText from '../components/HelpText';
 import { t } from '../i18n';
-import { isProgamAdmin } from '../util';
 
 const ActivityDetailCostAllocate = props => {
   const { activity, updateActivity } = props;
@@ -20,10 +19,7 @@ const ActivityDetailCostAllocate = props => {
   };
 
   return (
-    <Subsection
-      resource="activities.costAllocate"
-      isKey={isProgamAdmin(activity)}
-    >
+    <Subsection resource="activities.costAllocate">
       <div className="mb3">
         <div className="mb-tiny bold">
           {t('activities.costAllocate.methodology.title')}

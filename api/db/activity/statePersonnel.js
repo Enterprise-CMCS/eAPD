@@ -6,6 +6,16 @@ module.exports = {
       return this.belongsTo('apdActivity');
     },
 
+    format(attributes) {
+      return Object.entries(attributes).reduce(
+        (acc, [field, value]) => ({
+          ...acc,
+          [field.replace(/([A-Z])/g, m => `_${m.toLowerCase()}`)]: value
+        }),
+        {}
+      );
+    },
+
     years() {
       return this.hasMany('apdActivityStatePersonnelCost', 'personnel_id');
     },
