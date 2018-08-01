@@ -129,8 +129,10 @@ tap.test(
                       size: null
                     }
                   ],
+                  hourlyData: [],
                   name: null,
                   start: null,
+                  useHourly: false,
                   years: []
                 }
               ],

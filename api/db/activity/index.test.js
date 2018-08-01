@@ -13,6 +13,7 @@ tap.test('activity model index', async activityIndexTests => {
       'apdActivity',
       'apdActivityContractorResource',
       'apdActivityContractorResourceCost',
+      'apdActivityContractorResourceHourly',
       'apdActivityCostAllocation',
       'apdActivityExpense',
       'apdActivityExpenseEntry',

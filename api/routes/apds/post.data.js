@@ -15,11 +15,9 @@ const getActivityCostAllocations = years =>
 
 const getContractor = years => ({
   description: '',
+  hourlyData: yearsToArray(years, { hours: 0, rate: 0 }),
   name: '',
-  hourly: {
-    useHourly: false,
-    data: yearsToArray(years, { hours: '', rate: '' })
-  },
+  useHourly: false,
   years: yearsToArray(years, { cost: 0 })
 });
 
