@@ -16,7 +16,6 @@ import NoDataMsg from '../components/NoDataMsg';
 import { Subsection } from '../components/Section';
 import Select from '../components/Select';
 import { t } from '../i18n';
-import { isProgamAdmin } from '../util';
 
 const Label = props => (
   <h3 className="md-col-2 my-tiny pr1 h5">{props.children}</h3>
@@ -113,10 +112,7 @@ class ContractorExpenses extends Component {
     const { key: activityKey, contractorResources } = activity;
 
     return (
-      <Subsection
-        resource="activities.contractorResources"
-        isKey={isProgamAdmin(activity)}
-      >
+      <Subsection resource="activities.contractorResources">
         {contractorResources.length === 0 ? (
           <NoDataMsg>
             {t('activities.contractorResources.noDataNotice')}

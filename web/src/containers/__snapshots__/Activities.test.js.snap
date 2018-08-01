@@ -29,7 +29,6 @@ ShallowWrapper {
       "children": Array [
         <Subsection
           id="activities-list"
-          isKey={false}
           open={true}
           resource="activities.list"
         >
@@ -110,7 +109,6 @@ ShallowWrapper {
             </Btn>,
           ],
           "id": "activities-list",
-          "isKey": false,
           "open": true,
           "resource": "activities.list",
         },
@@ -244,7 +242,6 @@ ShallowWrapper {
         "children": Array [
           <Subsection
             id="activities-list"
-            isKey={false}
             open={true}
             resource="activities.list"
           >
@@ -325,7 +322,6 @@ ShallowWrapper {
               </Btn>,
             ],
             "id": "activities-list",
-            "isKey": false,
             "open": true,
             "resource": "activities.list",
           },

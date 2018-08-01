@@ -23,7 +23,7 @@ ShallowWrapper {
       "children": Array [
         false,
         <Md
-          className="my1 p1 alert alert-help"
+          className="my1 p1 h5 alert alert-help"
           content="[missing {{year}} value] HITECH APD"
           wrapper="div"
         />,
@@ -38,7 +38,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "className": "my1 p1 alert alert-help",
+          "className": "my1 p1 h5 alert alert-help",
           "content": "[missing {{year}} value] HITECH APD",
           "wrapper": "div",
         },
@@ -58,7 +58,7 @@ ShallowWrapper {
         "children": Array [
           false,
           <Md
-            className="my1 p1 alert alert-help"
+            className="my1 p1 h5 alert alert-help"
             content="[missing {{year}} value] HITECH APD"
             wrapper="div"
           />,
@@ -73,7 +73,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "className": "my1 p1 alert alert-help",
+            "className": "my1 p1 h5 alert alert-help",
             "content": "[missing {{year}} value] HITECH APD",
             "wrapper": "div",
           },
@@ -149,7 +149,7 @@ ShallowWrapper {
           [missing {{year}} value] HITECH APD
         </div>,
         <Md
-          className="my1 p1 alert alert-help"
+          className="my1 p1 h5 alert alert-help"
           content="[missing {{year}} value] HITECH APD"
           wrapper="div"
         />,
@@ -174,7 +174,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "className": "my1 p1 alert alert-help",
+          "className": "my1 p1 h5 alert alert-help",
           "content": "[missing {{year}} value] HITECH APD",
           "wrapper": "div",
         },
@@ -196,7 +196,7 @@ ShallowWrapper {
             [missing {{year}} value] HITECH APD
           </div>,
           <Md
-            className="my1 p1 alert alert-help"
+            className="my1 p1 h5 alert alert-help"
             content="[missing {{year}} value] HITECH APD"
             wrapper="div"
           />,
@@ -221,7 +221,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "className": "my1 p1 alert alert-help",
+            "className": "my1 p1 h5 alert alert-help",
             "content": "[missing {{year}} value] HITECH APD",
             "wrapper": "div",
           },
