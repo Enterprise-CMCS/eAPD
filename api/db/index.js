@@ -11,7 +11,6 @@ const apd = require('./apd');
 const apdIncentivePayment = require('./apdIncentivePayment');
 const apdPOC = require('./apdPointOfContact');
 const apdVersion = require('./apdVersion');
-const keyPersonnel = require('./apdKeyPersonnel');
 const previousActivityExpense = require('./apdPreviousActivityExpense');
 const apdActivity = require('./activity');
 const file = require('./file');
@@ -31,7 +30,6 @@ const setup = (
     apdIncentivePayment(),
     apdPOC(),
     apdVersion(),
-    keyPersonnel(),
     previousActivityExpense(),
     apdActivity(),
     file()

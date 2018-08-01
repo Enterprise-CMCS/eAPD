@@ -247,6 +247,10 @@ module.exports = {
                 type: 'string',
                 description: 'Description of the role'
               },
+              keyPersonnel: {
+                type: 'boolean',
+                description: '"Key Personnel" designation'
+              },
               years: arrayOf({
                 type: 'object',
                 properties: {
