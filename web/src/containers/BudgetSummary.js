@@ -182,7 +182,7 @@ const BudgetSummary = ({ activities, data, years }) => (
         </tr>
         <tr>
           <th id="summary-budget-null2" />
-          {[...years, 'total'].map((y, i) => (
+          {[...years, 'total'].map(y => (
             <Fragment key={y}>
               <th
                 className="col-4 right-align"
