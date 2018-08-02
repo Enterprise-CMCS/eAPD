@@ -57,52 +57,80 @@ const ApdPreviousActivityTable = ({
       <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
         <thead>
           <tr>
-            <th style={{ width: 90 }} />
+            <th style={{ width: 90 }} id="prev_act_hit_header_null1" />
             {Object.values(programs).map((name, i) => (
-              <th key={name} colSpan={4} className={`bg-${colors[i]} center`}>
+              <th
+                key={name}
+                colSpan={4}
+                className={`bg-${colors[i]} center`}
+                id={`prev_act_hit_${name.toLowerCase()}`}
+              >
                 {name}
               </th>
             ))}
-            <th colSpan={6} className={`bg-${colors[2]} center`}>
+            <th
+              colSpan={6}
+              className={`bg-${colors[2]} center`}
+              id="prev_act_hit_combined"
+            >
               {t('program.combined', i18nBase)}
             </th>
           </tr>
           <tr>
-            <th />
+            <th id="prev_act_hit_header_null2" />
             {[...Array(3)].map((_, i) => (
               <Fragment key={i}>
-                <th colSpan="2" className="pre-line">
+                <th
+                  colSpan="2"
+                  className="pre-line"
+                  id={`prev_act_hit_federal_${i}`}
+                >
                   {t('labels.federalShare', i18nBase)}
                 </th>
-                <th colSpan="2" className="pre-line">
+                <th
+                  colSpan="2"
+                  className="pre-line"
+                  id={`prev_act_hit_state_${i}`}
+                >
                   {t('labels.stateShare', i18nBase)}
                 </th>
               </Fragment>
             ))}
-            <th colSpan="2" className="pre-line">
+            <th colSpan="2" className="pre-line" id="prev_act_hit_total">
               {t('labels.grandTotal', i18nBase)}
             </th>
           </tr>
           <tr>
-            <th />
+            <th id="prev_act_hit_header_null3" />
             {[...Array(3)].map((_, i) => (
               <Fragment key={i}>
-                <th className={`bg-${colors[i]}-light`}>
+                <th
+                  className={`bg-${colors[i]}-light`}
+                  id={`prev_activity_header${i * 4 + 0}`}
+                >
                   {t('labels.approved', i18nBase)}
                 </th>
-                <th className={borderClass(-1)}>
+                <th
+                  className={borderClass(-1)}
+                  id={`prev_activity_header${i * 4 + 1}`}
+                >
                   {t('labels.actual', i18nBase)}
                 </th>
-                <th className={`bg-${colors[i]}-light`}>
+                <th
+                  className={`bg-${colors[i]}-light`}
+                  id={`prev_activity_header${i * 4 + 2}`}
+                >
                   {t('labels.approved', i18nBase)}
                 </th>
-                <th>{t('labels.actual', i18nBase)}</th>
+                <th id={`prev_activity_header${i * 4 + 3}`}>
+                  {t('labels.actual', i18nBase)}
+                </th>
               </Fragment>
             ))}
-            <th className={`bg-${colors[2]}-light`}>
+            <th className={`bg-${colors[2]}-light`} id="prev_activity_header12">
               {t('labels.approved', i18nBase)}
             </th>
-            <th>{t('labels.actual', i18nBase)}</th>
+            <th id="prev_activity_header13">{t('labels.actual', i18nBase)}</th>
           </tr>
         </thead>
         <tbody>
@@ -111,10 +139,14 @@ const ApdPreviousActivityTable = ({
 
             return (
               <tr key={year} className="align-middle">
-                <th>{t('ffy', { year })}</th>
-                {Object.keys(programs).map(program => (
+                <th id={`prev_act_hit_row_${year}`}>{t('ffy', { year })}</th>
+                {Object.keys(programs).map((program, i) => (
                   <Fragment key={program}>
-                    <td>
+                    <td
+                      headers={`prev_act_hit_row_${year} prev_act_hit_${program} prev_act_hit_federal_${i} prev_activity_header${i *
+                        4 +
+                        0}`}
+                    >
                       <DollarInput
                         name={`approved-federal-${program}-${year}`}
                         label={`approved federal share for ${program}, FFY ${year}`}
@@ -132,7 +164,11 @@ const ApdPreviousActivityTable = ({
                         )}
                       />
                     </td>
-                    <td>
+                    <td
+                      headers={`prev_act_hit_row_${year} prev_act_hit_${program} prev_act_hit_federal_${i} prev_activity_header${i *
+                        4 +
+                        1}`}
+                    >
                       <DollarInput
                         name={`actual-federal-${program}-${year}`}
                         label={`actual federal share for ${program}, FFY ${year}`}
@@ -145,7 +181,11 @@ const ApdPreviousActivityTable = ({
                         onChange={handleChange(year, program, 'federalActual')}
                       />
                     </td>
-                    <td>
+                    <td
+                      headers={`prev_act_hit_row_${year} prev_act_hit_${program} prev_act_hit_state_${i} prev_activity_header${i *
+                        4 +
+                        2}`}
+                    >
                       <DollarInput
                         name={`approved-state-${program}-${year}`}
                         label={`approved state share for ${program}, FFY ${year}`}
@@ -158,7 +198,11 @@ const ApdPreviousActivityTable = ({
                         onChange={handleChange(year, program, 'stateApproved')}
                       />
                     </td>
-                    <td>
+                    <td
+                      headers={`prev_act_hit_row_${year} prev_act_hit_${program} prev_act_hit_state_${i} prev_activity_header${i *
+                        4 +
+                        3}`}
+                    >
                       <DollarInput
                         name={`actual-state-${program}-${year}`}
                         label={`actual state share for ${program}, FFY ${year}`}
@@ -173,12 +217,36 @@ const ApdPreviousActivityTable = ({
                     </td>
                   </Fragment>
                 ))}
-                <td>{formatMoney(totals.combined.federalApproved)}</td>
-                <td>{formatMoney(totals.combined.federalActual)}</td>
-                <td>{formatMoney(totals.combined.stateApproved)}</td>
-                <td>{formatMoney(totals.combined.stateActual)}</td>
-                <td>{formatMoney(totals.total.approved)}</td>
-                <td>{formatMoney(totals.total.actual)}</td>
+                <td
+                  headers={`prev_act_hit_row_${year} prev_act_hit_combined prev_act_hit_federal_2 prev_activity_header8`}
+                >
+                  {formatMoney(totals.combined.federalApproved)}
+                </td>
+                <td
+                  headers={`prev_act_hit_row_${year} prev_act_hit_combined prev_act_hit_federal_2 prev_activity_header9`}
+                >
+                  {formatMoney(totals.combined.federalActual)}
+                </td>
+                <td
+                  headers={`prev_act_hit_row_${year} prev_act_hit_combined prev_act_hit_state_2 prev_activity_header10`}
+                >
+                  {formatMoney(totals.combined.stateApproved)}
+                </td>
+                <td
+                  headers={`prev_act_hit_row_${year} prev_act_hit_combined prev_act_hit_state_2 prev_activity_header11`}
+                >
+                  {formatMoney(totals.combined.stateActual)}
+                </td>
+                <td
+                  headers={`prev_act_hit_row_${year} prev_act_hit_combined prev_act_hit_total prev_activity_header12`}
+                >
+                  {formatMoney(totals.total.approved)}
+                </td>
+                <td
+                  headers={`prev_act_hit_row_${year} prev_act_hit_combined prev_act_hit_total prev_activity_header13`}
+                >
+                  {formatMoney(totals.total.actual)}
+                </td>
               </tr>
             );
           })}
