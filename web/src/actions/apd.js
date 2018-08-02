@@ -115,9 +115,28 @@ export const notifyNetError = (action, error) => {
 export const saveApd = () => (dispatch, state) => {
   dispatch(requestSave());
 
-  const { apd: { data: updatedApd }, activities } = state();
+  const { apd: { data: updatedApd }, activities, dirty } = state();
 
   const apd = toAPI(updatedApd, activities);
+
+  if (!dirty.dirty) {
+    return dispatch(notify('Save successful!'));
+  }
+
+  [
+    'hieNarrative',
+    'hitNarrative',
+    'mmisNarrative',
+    'programOverview',
+    'previousActivitySummary'
+  ].forEach(field => {
+    if (!dirty.data.apd[field]) {
+      delete apd[field];
+    }
+  });
+
+  console.log(apd);
+  return;
 
   return axios
     .put(`/apds/${updatedApd.id}`, apd)
