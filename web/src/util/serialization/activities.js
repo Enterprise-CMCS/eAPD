@@ -1,55 +1,27 @@
 import { applyToNumbers, generateKey, replaceNulls } from '../index';
 
-const pick = (o, ...fields) =>
-  Object.entries(o).reduce((acc, [field, value]) => {
-    if (fields.indexOf(field) >= 0) {
-      return { ...acc, [field]: value };
-    }
-    return acc;
-  }, {});
-
 /**
  * Serializes an APD object from redux state shape into
  * API format
  * @param {Object} activityState Activity object from redux state
  */
 export const toAPI = activityState => {
-  const activity = {
-    ...pick(
-      activityState,
-      'alternatives',
-      'description',
-      'fundingSource',
-      'goals',
-      'id',
-      'name',
-      'schedule',
-      'summary'
-    ),
-    costAllocationNarrative: {
-      methodology: activityState.costAllocationDesc,
-      otherSources: activityState.otherFundingDesc
-    },
-    costAllocation: Object.entries(activityState.costAllocation).map(
-      ([year, allocation]) => ({
-        federalPercent: +allocation.ffp.federal / 100,
-        statePercent: +allocation.ffp.state / 100,
-        otherAmount: +allocation.other,
-        year
-      })
-    ),
-    statePersonnel: activityState.statePersonnel.map(s => ({
-      id: s.id,
-      title: s.title,
-      description: s.desc,
-      keyPersonnel: s.isKeyPersonnel,
-      years: Object.keys(s.years).map(year => ({
-        cost: +s.years[year].amt,
-        fte: +s.years[year].perc / 100,
-        year
-      }))
-    })),
-    contractorResources: activityState.contractorResources.map(c => ({
+  const {
+    costAllocation,
+    costAllocationDesc,
+    contractorResources,
+    expenses,
+    statePersonnel,
+    otherFundingDesc,
+    quarterlyFFP,
+
+    ...activity
+  } = activityState;
+
+  return {
+    ...activity,
+
+    contractorResources: contractorResources.map(c => ({
       id: c.id,
       name: c.name,
       description: c.desc,
@@ -66,7 +38,19 @@ export const toAPI = activityState => {
         rate: +c.hourly.data[year].rate
       }))
     })),
-    expenses: activityState.expenses.map(e => ({
+    costAllocation: Object.entries(costAllocation).map(
+      ([year, allocation]) => ({
+        federalPercent: +allocation.ffp.federal / 100,
+        statePercent: +allocation.ffp.state / 100,
+        otherAmount: +allocation.other,
+        year
+      })
+    ),
+    costAllocationNarrative: {
+      methodology: costAllocationDesc,
+      otherSources: otherFundingDesc
+    },
+    expenses: expenses.map(e => ({
       id: e.id,
       category: e.category,
       description: e.desc,
@@ -75,19 +59,25 @@ export const toAPI = activityState => {
         year
       }))
     })),
-    standardsAndConditions: activityState.standardsAndConditions,
-    quarterlyFFP: Object.entries(activityState.quarterlyFFP).map(
-      ([year, ffp]) => ({
-        q1: applyToNumbers(ffp[1], v => v / 100),
-        q2: applyToNumbers(ffp[2], v => v / 100),
-        q3: applyToNumbers(ffp[3], v => v / 100),
-        q4: applyToNumbers(ffp[4], v => v / 100),
+    statePersonnel: statePersonnel.map(s => ({
+      id: s.id,
+      title: s.title,
+      description: s.desc,
+      keyPersonnel: s.isKeyPersonnel,
+      years: Object.keys(s.years).map(year => ({
+        cost: +s.years[year].amt,
+        fte: +s.years[year].perc / 100,
         year
-      })
-    )
+      }))
+    })),
+    quarterlyFFP: Object.entries(quarterlyFFP).map(([year, ffp]) => ({
+      q1: applyToNumbers(ffp[1], v => v / 100),
+      q2: applyToNumbers(ffp[2], v => v / 100),
+      q3: applyToNumbers(ffp[3], v => v / 100),
+      q4: applyToNumbers(ffp[4], v => v / 100),
+      year
+    }))
   };
-
-  return activity;
 };
 
 /**
@@ -96,135 +86,141 @@ export const toAPI = activityState => {
  * @param {Object} activityAPI - The activity object from the API
  * @param {Array.<string>} years - the years for the associated APD
  */
-export const fromAPI = (activityAPI, years) => ({
-  // These properties are just copied over, maybe renamed,
-  // but no data massaging necessary
-  ...replaceNulls(
-    pick(
-      activityAPI,
-      'alternatives',
-      'description',
-      'fundingSource',
-      'id',
-      'name',
-      'summary'
-    )
-  ),
-  costAllocationDesc: activityAPI.costAllocationNarrative.methodology || '',
-  key: generateKey(),
-  otherFundingDesc: activityAPI.costAllocationNarrative.otherSources || '',
-  standardsAndConditions: replaceNulls(activityAPI.standardsAndConditions),
-  years,
+export const fromAPI = (activityAPI, years) => {
+  const {
+    // these have to be massaged into reducer state
+    costAllocationNarrative: { methodology: costAllocationDesc },
+    costAllocationNarrative: { otherSources: otherFundingDesc },
+    contractorResources,
+    costAllocation,
+    expenses,
+    goals,
+    schedule,
+    statePersonnel,
+    quarterlyFFP,
 
-  // These properties need some massaging into reducer state
-  contractorResources: activityAPI.contractorResources.map(c => ({
+    // then grab up everything else
+    ...activity
+  } = activityAPI;
+
+  return replaceNulls({
     key: generateKey(),
-    id: c.id,
-    name: c.name || '',
-    desc: c.description || '',
-    start: c.start || '',
-    end: c.end || '',
-    years: c.years.reduce(
-      (acc, y) => ({
+    years,
+
+    ...activity,
+    costAllocationDesc,
+    otherFundingDesc,
+
+    // These properties need some massaging into reducer state
+    contractorResources: contractorResources.map(c => ({
+      key: generateKey(),
+      id: c.id,
+      name: c.name,
+      desc: c.description,
+      start: c.start,
+      end: c.end,
+      years: c.years.reduce(
+        (acc, y) => ({
+          ...acc,
+          [y.year]: +y.cost
+        }),
+        {}
+      ),
+      hourly: {
+        useHourly: c.useHourly || false,
+        data: (c.hourlyData || []).reduce(
+          (acc, h) => ({
+            ...acc,
+            [h.year]: { hours: +h.hours || '', rate: +h.rate || '' }
+          }),
+          {}
+        )
+      }
+    })),
+
+    costAllocation: costAllocation.reduce(
+      (acc, ffp) => ({
         ...acc,
-        [y.year]: +y.cost
+        [ffp.year]: {
+          other: ffp.otherAmount || 0,
+          ffp: {
+            federal: ffp.federalPercent * 100,
+            state: ffp.statePercent * 100
+          }
+        }
       }),
       {}
     ),
-    hourly: {
-      useHourly: c.useHourly || false,
-      data: (c.hourlyData || []).reduce(
-        (acc, h) => ({
+
+    expenses: expenses.map(e => ({
+      key: generateKey(),
+      id: e.id,
+      category: e.category,
+      desc: e.description,
+      years: e.entries.reduce(
+        (acc, y) => ({
           ...acc,
-          [h.year]: { hours: +h.hours || '', rate: +h.rate || '' }
+          [y.year]: +y.amount
         }),
         {}
       )
-    }
-  })),
+    })),
 
-  costAllocation: activityAPI.costAllocation.reduce(
-    (acc, ffp) => ({
-      ...acc,
-      [ffp.year]: {
-        other: ffp.otherAmount || 0,
-        ffp: {
-          federal: ffp.federalPercent * 100,
-          state: ffp.statePercent * 100
-        }
-      }
-    }),
-    {}
-  ),
+    goals: goals.map(g => ({
+      ...replaceNulls(g),
+      key: generateKey()
+    })),
 
-  expenses: activityAPI.expenses.map(e => ({
-    key: generateKey(),
-    id: e.id,
-    category: e.category || '',
-    desc: e.description || '',
-    years: e.entries.reduce(
-      (acc, y) => ({
+    schedule: schedule.map(s => ({
+      ...replaceNulls(s),
+      key: generateKey()
+    })),
+
+    statePersonnel: statePersonnel.map(s => ({
+      key: generateKey(),
+      id: s.id,
+      title: s.title,
+      desc: s.description,
+      isKeyPersonnel: s.keyPersonnel || false,
+      years: s.years.reduce(
+        (acc, y) => ({
+          ...acc,
+          [y.year]: {
+            amt: y.cost,
+            perc: y.fte * 100
+          }
+        }),
+        {}
+      )
+    })),
+
+    quarterlyFFP: quarterlyFFP.reduce(
+      (acc, ffy) => ({
         ...acc,
-        [y.year]: +y.amount
+        [ffy.year]: {
+          1: {
+            combined: ffy.q1.combined * 100,
+            contractors: ffy.q1.contractors * 100,
+            state: ffy.q1.state * 100
+          },
+          2: {
+            combined: ffy.q2.combined * 100,
+            contractors: ffy.q2.contractors * 100,
+            state: ffy.q2.state * 100
+          },
+          3: {
+            combined: ffy.q3.combined * 100,
+            contractors: ffy.q3.contractors * 100,
+            state: ffy.q3.state * 100
+          },
+          4: {
+            combined: ffy.q4.combined * 100,
+            contractors: ffy.q4.contractors * 100,
+            state: ffy.q4.state * 100
+          }
+        }
       }),
       {}
     )
-  })),
-
-  goals: activityAPI.goals.map(g => ({
-    ...replaceNulls(g),
-    key: generateKey()
-  })),
-
-  schedule: activityAPI.schedule.map(s => ({
-    ...replaceNulls(s),
-    key: generateKey()
-  })),
-
-  statePersonnel: activityAPI.statePersonnel.map(s => ({
-    key: generateKey(),
-    id: s.id,
-    title: s.title || '',
-    desc: s.description || '',
-    isKeyPersonnel: s.keyPersonnel || false,
-    years: s.years.reduce(
-      (acc, y) => ({
-        ...acc,
-        [y.year]: {
-          amt: y.cost,
-          perc: y.fte * 100
-        }
-      }),
-      {}
-    )
-  })),
-
-  quarterlyFFP: activityAPI.quarterlyFFP.reduce(
-    (acc, ffy) => ({
-      ...acc,
-      [ffy.year]: {
-        1: {
-          combined: ffy.q1.combined * 100,
-          contractors: ffy.q1.contractors * 100,
-          state: ffy.q1.state * 100
-        },
-        2: {
-          combined: ffy.q2.combined * 100,
-          contractors: ffy.q2.contractors * 100,
-          state: ffy.q2.state * 100
-        },
-        3: {
-          combined: ffy.q3.combined * 100,
-          contractors: ffy.q3.contractors * 100,
-          state: ffy.q3.state * 100
-        },
-        4: {
-          combined: ffy.q4.combined * 100,
-          contractors: ffy.q4.contractors * 100,
-          state: ffy.q4.state * 100
-        }
-      }
-    }),
-    {}
-  )
-});
+  });
+};
