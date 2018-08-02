@@ -101,14 +101,26 @@ export const toAPI = (
     }
   }));
 
+  const {
+    federalCitations,
+    narrativeHIE,
+    narrativeHIT,
+    narrativeMMIS,
+    pointsOfContact,
+    previousActivitySummary,
+    programOverview,
+    stateProfile,
+    years
+  } = apdState;
+
   const apd = {
     activities: Object.values(activityState.byKey).map(serializeActivity),
-    federalCitations: apdState.assurancesAndCompliance,
+    federalCitations,
     incentivePayments,
-    narrativeHIE: apdState.hieNarrative,
-    narrativeHIT: apdState.hitNarrative,
-    narrativeMMIS: apdState.mmisNarrative,
-    pointsOfContact: apdState.pointsOfContact,
+    narrativeHIE,
+    narrativeHIT,
+    narrativeMMIS,
+    pointsOfContact,
     previousActivityExpenses: Object.entries(
       apdState.previousActivityExpenses
     ).map(([year, o]) => ({
@@ -117,10 +129,10 @@ export const toAPI = (
       hit: o.hit,
       mmis: o.mmis
     })),
-    previousActivitySummary: apdState.previousActivitySummary,
-    programOverview: apdState.overview,
-    stateProfile: apdState.stateProfile,
-    years: apdState.years
+    previousActivitySummary,
+    programOverview,
+    stateProfile,
+    years
   };
 
   return apd;
@@ -135,11 +147,11 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => ({
   // These properties are just copied over, maybe renamed,
   // but no data massaging necessary
   id: apdAPI.id,
-  assurancesAndCompliance: apdAPI.federalCitations || initialAssurances,
-  hieNarrative: apdAPI.narrativeHIE || '',
-  hitNarrative: apdAPI.narrativeHIT || '',
-  mmisNarrative: apdAPI.narrativeMMIS || '',
-  overview: apdAPI.programOverview || '',
+  federalCitations: apdAPI.federalCitations || initialAssurances,
+  narrativeHIE: apdAPI.narrativeHIE || '',
+  narrativeHIT: apdAPI.narrativeHIT || '',
+  narrativeMMIS: apdAPI.narrativeMMIS || '',
+  programOverview: apdAPI.programOverview || '',
   pointsOfContact: apdAPI.pointsOfContact,
   previousActivitySummary: apdAPI.previousActivitySummary || '',
   stateProfile: replaceNulls(apdAPI.stateProfile),
