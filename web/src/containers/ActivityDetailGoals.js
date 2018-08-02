@@ -9,7 +9,7 @@ import {
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import Btn from '../components/Btn';
-import { Chunk, Subsection } from '../components/Section';
+import { Subsection, SubsectionChunk } from '../components/Section';
 import { RichText } from '../components/Inputs';
 
 class ActivityDetailGoals extends Component {
@@ -36,7 +36,7 @@ class ActivityDetailGoals extends Component {
       <Subsection resource="activities.goals">
         {activity.goals.map((d, i) => (
           <div key={d.key} className="mb3">
-            <Chunk resource="activities.goals.goal">
+            <SubsectionChunk resource="activities.goals.goal">
               <div className="mb3">
                 <div className="mb-tiny">
                   {activity.goals.length > 1 && (
@@ -55,15 +55,15 @@ class ActivityDetailGoals extends Component {
                   onSync={this.handleSync(i, 'desc')}
                 />
               </div>
-            </Chunk>
-            <Chunk resource="activities.goals.objective">
+            </SubsectionChunk>
+            <SubsectionChunk resource="activities.goals.objective">
               <div className="mb3">
                 <div className="mb-tiny">
                   {t('activities.goals.objective.title')}
                 </div>
                 <RichText content={d.obj} onSync={this.handleSync(i, 'obj')} />
               </div>
-            </Chunk>
+            </SubsectionChunk>
           </div>
         ))}
         <Btn onClick={this.handleAdd}>
