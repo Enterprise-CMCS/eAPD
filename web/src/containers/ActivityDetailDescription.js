@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity as updateActivityAction } from '../actions/activities';
-import { Chunk, Subsection } from '../components/Section';
+import { Subsection, SubsectionChunk } from '../components/Section';
 import { Textarea, RichText } from '../components/Inputs';
 
 const ActivityDetailDescription = props => {
@@ -16,7 +16,7 @@ const ActivityDetailDescription = props => {
 
   return (
     <Subsection resource="activities.description">
-      <Chunk resource="activities.description.summary">
+      <SubsectionChunk resource="activities.description.summary">
         <div className="mb3">
           <Textarea
             name={`activity-summary-${activity.key}`}
@@ -32,9 +32,8 @@ const ActivityDetailDescription = props => {
             }
           />
         </div>
-      </Chunk>
-
-      <Chunk
+      </SubsectionChunk>
+      <SubsectionChunk
         resource={
           activity.fundingSource === 'HIE'
             ? 'activities.description.detail.hie'
@@ -44,13 +43,12 @@ const ActivityDetailDescription = props => {
         <div className="mb3">
           <RichText content={descLong} onSync={sync('descLong')} />
         </div>
-      </Chunk>
-
-      <Chunk resource="activities.description.alternatives">
+      </SubsectionChunk>
+      <SubsectionChunk resource="activities.description.alternatives">
         <div className="mb3">
           <RichText content={altApproach} onSync={sync('altApproach')} />
         </div>
-      </Chunk>
+      </SubsectionChunk>
     </Subsection>
   );
 };
