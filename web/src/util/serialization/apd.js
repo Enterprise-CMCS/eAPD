@@ -3,6 +3,19 @@ import {
   fromAPI as activityFromAPI
 } from './activities';
 import { replaceNulls } from '../index';
+import assurancesList from '../../data/assurancesAndCompliance.yaml';
+
+export const initialAssurances = Object.entries(assurancesList).reduce(
+  (acc, [name, regulations]) => ({
+    ...acc,
+    [name]: Object.keys(regulations).map(reg => ({
+      title: reg,
+      checked: false,
+      explanation: ''
+    }))
+  }),
+  {}
+);
 
 const incentivePaymentsReducer = (obj, paymentByQuarter) => {
   const ip = obj;
@@ -117,76 +130,35 @@ export const toAPI = (
  * Deserialize an APD object from the API into an object
  * matching redux state shape.
  * @param {*} apdAPI - APD object from the API
- * @param {Object} defaults - default values for missing properties
- * @param {Object} defaults.activities - default activities
- * @param {Object} defaults.assurancesAndCompliance - default assurances and compliance
- * @param {Object} defaults.hieNarrative - default HIE narrative
- * @param {Object} defaults.hitNarrative - default HIT narrative
- * @param {Object} defaults.incentivePayments - default value for incentive payments
- * @param {Object} defaults.mmisNarrative - default MMIS narrative
- * @param {Object} defaults.overview - default APD overview
- * @param {Object} defaults.pointsOfContact - default points of contact
- * @param {Object} defaults.previousActivityExpenses - default value for previousActivityExpenses
- * @param {Object} defaults.previousActivitySummary - default activity summary
- * @param {Object} defaults.stateProfile - default state profile
- * @param {Object} defaults.years - default value for years
  */
-export const fromAPI = (
-  apdAPI,
-  {
-    activities,
-    assurancesAndCompliance,
-    hieNarrative,
-    hitNarrative,
-    incentivePayments,
-    mmisNarrative,
-    overview,
-    pointsOfContact,
-    previousActivityExpenses,
-    previousActivitySummary,
-    stateProfile,
-    years
-  } = {},
-  deserializeActivity = activityFromAPI
-) => ({
+export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => ({
   // These properties are just copied over, maybe renamed,
   // but no data massaging necessary
   id: apdAPI.id,
-  assurancesAndCompliance: apdAPI.federalCitations || assurancesAndCompliance,
-  hieNarrative: apdAPI.narrativeHIE || hieNarrative,
-  hitNarrative: apdAPI.narrativeHIT || hitNarrative,
-  mmisNarrative: apdAPI.narrativeMMIS || mmisNarrative,
-  overview: apdAPI.programOverview || overview,
-  pointsOfContact: apdAPI.pointsOfContact || pointsOfContact,
-  previousActivitySummary:
-    apdAPI.previousActivitySummary || previousActivitySummary,
-  stateProfile: replaceNulls(apdAPI.stateProfile || stateProfile),
+  assurancesAndCompliance: apdAPI.federalCitations || initialAssurances,
+  hieNarrative: apdAPI.narrativeHIE || '',
+  hitNarrative: apdAPI.narrativeHIT || '',
+  mmisNarrative: apdAPI.narrativeMMIS || '',
+  overview: apdAPI.programOverview || '',
+  pointsOfContact: apdAPI.pointsOfContact,
+  previousActivitySummary: apdAPI.previousActivitySummary || '',
+  stateProfile: replaceNulls(apdAPI.stateProfile),
+  status: apdAPI.status,
 
   // These properties need some massaging into reducer state
-  activities:
-    apdAPI.activities && apdAPI.activities.length
-      ? apdAPI.activities.map(a =>
-          deserializeActivity(a, apdAPI.years || years)
-        )
-      : activities,
+  activities: apdAPI.activities.map(a => deserializeActivity(a, apdAPI.years)),
 
-  incentivePayments:
-    apdAPI.incentivePayments && apdAPI.incentivePayments.length
-      ? apdAPI.incentivePayments.reduce(incentivePaymentsReducer, {
-          ehAmt: {},
-          ehCt: {},
-          epAmt: {},
-          epCt: {}
-        })
-      : incentivePayments,
+  incentivePayments: apdAPI.incentivePayments.reduce(incentivePaymentsReducer, {
+    ehAmt: {},
+    ehCt: {},
+    epAmt: {},
+    epCt: {}
+  }),
 
-  previousActivityExpenses:
-    apdAPI.previousActivityExpenses && apdAPI.previousActivityExpenses.length
-      ? apdAPI.previousActivityExpenses.reduce(
-          previousActivityExpensesReducer,
-          {}
-        )
-      : previousActivityExpenses,
+  previousActivityExpenses: apdAPI.previousActivityExpenses.reduce(
+    previousActivityExpensesReducer,
+    {}
+  ),
 
-  years: (apdAPI.years || years).map(y => `${y}`)
+  years: apdAPI.years.map(y => `${y}`)
 });

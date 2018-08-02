@@ -362,62 +362,6 @@ describe('APD activity serializer', () => {
         })
       );
     });
-
-    it('uses defaults for missing properties', () => {
-      const defaults = {
-        quarterlyFFP: 'bloop'
-      };
-
-      expect(
-        fromAPI(
-          {
-            contractorResources: [],
-            costAllocation: [],
-            costAllocationNarrative: {},
-            expenses: [],
-            goals: [],
-            schedule: [],
-            statePersonnel: [],
-            standardsAndConditions: {}
-          },
-          ['1000'],
-          defaults
-        )
-      ).toMatchObject(
-        expect.objectContaining({
-          altApproach: '',
-          contractorResources: [],
-          costAllocation: {},
-          costAllocationDesc: '',
-          descLong: '',
-          descShort: '',
-          expenses: [],
-          fundingSource: undefined,
-          goals: [],
-          id: undefined,
-          key: expect.stringMatching(/[a-f0-9]{8}/),
-          milestones: [],
-          name: undefined,
-          otherFundingDesc: '',
-          statePersonnel: [],
-          standardsAndConditions: {
-            bizResults: '',
-            documentation: '',
-            industry: '',
-            interoperability: '',
-            keyPersonnel: '',
-            leverage: '',
-            minimizeCost: '',
-            mita: '',
-            mitigation: '',
-            modularity: '',
-            reporting: ''
-          },
-          quarterlyFFP: 'bloop',
-          years: ['1000']
-        })
-      );
-    });
   });
 
   describe('serializes redux state shape into API format', () => {
