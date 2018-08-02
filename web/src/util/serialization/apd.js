@@ -17,36 +17,62 @@ export const initialAssurances = Object.entries(assurancesList).reduce(
   {}
 );
 
-const incentivePaymentsReducer = (obj, paymentByQuarter) => {
-  const ip = obj;
-  ip.ehAmt[paymentByQuarter.year] = {
-    1: paymentByQuarter.q1.ehPayment,
-    2: paymentByQuarter.q2.ehPayment,
-    3: paymentByQuarter.q3.ehPayment,
-    4: paymentByQuarter.q4.ehPayment
-  };
+const incentivePaymentsSerializer = {
+  fromAPI: incentivePayments =>
+    incentivePayments.reduce(
+      (obj, paymentByQuarter) => {
+        const ip = obj;
 
-  ip.ehCt[paymentByQuarter.year] = {
-    1: paymentByQuarter.q1.ehCount,
-    2: paymentByQuarter.q2.ehCount,
-    3: paymentByQuarter.q3.ehCount,
-    4: paymentByQuarter.q4.ehCount
-  };
+        [
+          ['ehAmt', 'ehPayment'],
+          ['ehCt', 'ehCount'],
+          ['epAmt', 'epPayment'],
+          ['epCt', 'epCount']
+        ].forEach(([stateName, apiName]) => {
+          const payments = {};
+          [...Array(4)].forEach((_, i) => {
+            payments[i + 1] = paymentByQuarter[`q${i + 1}`][apiName];
+          });
+          ip[stateName][paymentByQuarter.year] = payments;
+        });
 
-  ip.epAmt[paymentByQuarter.year] = {
-    1: paymentByQuarter.q1.epPayment,
-    2: paymentByQuarter.q2.epPayment,
-    3: paymentByQuarter.q3.epPayment,
-    4: paymentByQuarter.q4.epPayment
-  };
-
-  ip.epCt[paymentByQuarter.year] = {
-    1: paymentByQuarter.q1.epCount,
-    2: paymentByQuarter.q2.epCount,
-    3: paymentByQuarter.q3.epCount,
-    4: paymentByQuarter.q4.epCount
-  };
-  return obj;
+        return obj;
+      },
+      {
+        ehAmt: {},
+        ehCt: {},
+        epAmt: {},
+        epCt: {}
+      }
+    ),
+  toAPI: incentivePayments =>
+    Object.entries(incentivePayments.ehAmt).map(([year, quarters]) => ({
+      year,
+      q1: {
+        ehPayment: +quarters[1],
+        ehCount: +incentivePayments.ehCt[year][1],
+        epPayment: +incentivePayments.epAmt[year][1],
+        epCount: +incentivePayments.epCt[year][1]
+      },
+      q2: {
+        ehPayment: +quarters[2],
+        ehCount: +incentivePayments.ehCt[year][2],
+        epPayment: +incentivePayments.epAmt[year][2],
+        epCount: +incentivePayments.epCt[year][2]
+      },
+      q3: {
+        ehPayment: +quarters[3],
+        ehCount: +incentivePayments.ehCt[year][3],
+        epPayment: +incentivePayments.epAmt[year][3],
+        epCount: +incentivePayments.epCt[year][3]
+      },
+      q4: {
+        ehPayment: +quarters[4],
+        ehCount: +incentivePayments.ehCt[year][4],
+        epPayment: +incentivePayments.epAmt[year][4],
+        epCount: +incentivePayments.epCt[year][4]
+      }
+    }))
 };
 
 const previousActivityExpensesReducer = (previous, year) => ({
@@ -71,71 +97,28 @@ export const toAPI = (
   activityState,
   serializeActivity = activityToAPI
 ) => {
-  const incentivePayments = Object.entries(
-    apdState.incentivePayments.ehAmt
-  ).map(([year, quarters]) => ({
-    year,
-    q1: {
-      ehPayment: quarters[1],
-      ehCount: apdState.incentivePayments.ehCt[year][1],
-      epPayment: apdState.incentivePayments.epAmt[year][1],
-      epCount: apdState.incentivePayments.epCt[year][1]
-    },
-    q2: {
-      ehPayment: quarters[2],
-      ehCount: apdState.incentivePayments.ehCt[year][2],
-      epPayment: apdState.incentivePayments.epAmt[year][2],
-      epCount: apdState.incentivePayments.epCt[year][2]
-    },
-    q3: {
-      ehPayment: quarters[3],
-      ehCount: apdState.incentivePayments.ehCt[year][3],
-      epPayment: apdState.incentivePayments.epAmt[year][3],
-      epCount: apdState.incentivePayments.epCt[year][3]
-    },
-    q4: {
-      ehPayment: quarters[4],
-      ehCount: apdState.incentivePayments.ehCt[year][4],
-      epPayment: apdState.incentivePayments.epAmt[year][4],
-      epCount: apdState.incentivePayments.epCt[year][4]
-    }
-  }));
-
   const {
-    federalCitations,
-    narrativeHIE,
-    narrativeHIT,
-    narrativeMMIS,
-    pointsOfContact,
-    previousActivitySummary,
-    programOverview,
-    stateProfile,
-    years
+    // these get massaged
+    incentivePayments,
+    previousActivityExpenses,
+
+    // and everything else just gets copied
+    ...apd
   } = apdState;
 
-  const apd = {
+  return {
+    ...apd,
     activities: Object.values(activityState.byKey).map(serializeActivity),
-    federalCitations,
-    incentivePayments,
-    narrativeHIE,
-    narrativeHIT,
-    narrativeMMIS,
-    pointsOfContact,
-    previousActivityExpenses: Object.entries(
-      apdState.previousActivityExpenses
-    ).map(([year, o]) => ({
-      year,
-      hie: o.hie,
-      hit: o.hit,
-      mmis: o.mmis
-    })),
-    previousActivitySummary,
-    programOverview,
-    stateProfile,
-    years
+    incentivePayments: incentivePaymentsSerializer.toAPI(incentivePayments),
+    previousActivityExpenses: Object.entries(previousActivityExpenses).map(
+      ([year, o]) => ({
+        year,
+        hie: o.hie,
+        hit: o.hit,
+        mmis: o.mmis
+      })
+    )
   };
-
-  return apd;
 };
 
 /**
@@ -143,34 +126,26 @@ export const toAPI = (
  * matching redux state shape.
  * @param {*} apdAPI - APD object from the API
  */
-export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => ({
-  // These properties are just copied over, maybe renamed,
-  // but no data massaging necessary
-  id: apdAPI.id,
-  federalCitations: apdAPI.federalCitations || initialAssurances,
-  narrativeHIE: apdAPI.narrativeHIE || '',
-  narrativeHIT: apdAPI.narrativeHIT || '',
-  narrativeMMIS: apdAPI.narrativeMMIS || '',
-  programOverview: apdAPI.programOverview || '',
-  pointsOfContact: apdAPI.pointsOfContact,
-  previousActivitySummary: apdAPI.previousActivitySummary || '',
-  stateProfile: replaceNulls(apdAPI.stateProfile),
-  status: apdAPI.status,
+export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
+  const {
+    // these get massaged
+    activities,
+    incentivePayments,
+    previousActivityExpenses,
+    years,
 
-  // These properties need some massaging into reducer state
-  activities: apdAPI.activities.map(a => deserializeActivity(a, apdAPI.years)),
+    // and everything else just gets copied
+    ...apd
+  } = apdAPI;
 
-  incentivePayments: apdAPI.incentivePayments.reduce(incentivePaymentsReducer, {
-    ehAmt: {},
-    ehCt: {},
-    epAmt: {},
-    epCt: {}
-  }),
-
-  previousActivityExpenses: apdAPI.previousActivityExpenses.reduce(
-    previousActivityExpensesReducer,
-    {}
-  ),
-
-  years: apdAPI.years.map(y => `${y}`)
-});
+  return replaceNulls({
+    ...apd,
+    activities: activities.map(a => deserializeActivity(a, years)),
+    incentivePayments: incentivePaymentsSerializer.fromAPI(incentivePayments),
+    previousActivityExpenses: previousActivityExpenses.reduce(
+      previousActivityExpensesReducer,
+      {}
+    ),
+    years
+  });
+};
