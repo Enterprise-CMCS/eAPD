@@ -1,45 +1,9 @@
-import apd, {
-  initIncentiveData,
-  initialAssurances,
-  getPreviousActivityExpense
-} from './apd';
+import apd from './apd';
 
 describe('APD reducer', () => {
-  const incentivePayments = initIncentiveData();
   const initialState = {
     byId: {},
-    data: {
-      id: '',
-      years: ['2018', '2019'],
-      yearOptions: ['2018', '2019', '2020'],
-      overview: '',
-      hitNarrative: '',
-      hieNarrative: '',
-      mmisNarrative: '',
-      assurancesAndCompliance: initialAssurances,
-      pointsOfContact: [{ email: '', name: '', position: '' }],
-      previousActivitySummary: '',
-      previousActivityExpenses: {
-        2016: getPreviousActivityExpense(),
-        2017: getPreviousActivityExpense(),
-        2018: getPreviousActivityExpense()
-      },
-      incentivePayments,
-      stateProfile: {
-        medicaidDirector: {
-          name: '',
-          email: '',
-          phone: ''
-        },
-        medicaidOffice: {
-          address1: '',
-          address2: '',
-          city: '',
-          state: '',
-          zip: ''
-        }
-      }
-    },
+    data: {},
     fetching: false,
     loaded: false,
     error: ''
@@ -47,37 +11,6 @@ describe('APD reducer', () => {
 
   it('should handle initial state', () => {
     expect(apd(undefined, {})).toEqual(initialState);
-  });
-
-  it('has helper to build previous activities expenses', () => {
-    expect(getPreviousActivityExpense()).toEqual({
-      hie: {
-        federalActual: 0,
-        federalApproved: 0,
-        stateActual: 0,
-        stateApproved: 0
-      },
-      hit: {
-        federalActual: 0,
-        federalApproved: 0,
-        stateActual: 0,
-        stateApproved: 0
-      },
-      mmis: {
-        federal90Actual: 0,
-        federal90Approved: 0,
-        state10Actual: 0,
-        state10Approved: 0,
-        federal75Actual: 0,
-        federal75Approved: 0,
-        state25Actual: 0,
-        state25Approved: 0,
-        federal50Actual: 0,
-        federal50Approved: 0,
-        state50Actual: 0,
-        state50Approved: 0
-      }
-    });
   });
 
   it('should handle adding a POC', () => {
@@ -105,6 +38,7 @@ describe('APD reducer', () => {
     beforeEach(() => {
       data = {
         id: 'apd-id',
+        activities: [],
         federalCitations:
           'The Third Sentence of the Ninth Paragraph of the Three Hundred and Twenty-First Section of the Ninety-Fifth Part of the Forty-Fifth Title of the Federal Code of Regulations',
         programOverview: 'moop moop',
@@ -141,6 +75,26 @@ describe('APD reducer', () => {
             }
           }
         ],
+        previousActivityExpenses: [
+          {
+            hie: '2013 hie',
+            hit: '2013 hit',
+            mmis: '2013 mmis',
+            year: '2013'
+          },
+          {
+            hie: '2012 hie',
+            hit: '2012 hit',
+            mmis: '2012 mmis',
+            year: '2012'
+          },
+          {
+            hie: '2011 hie',
+            hit: '2011 hit',
+            mmis: '2011 mmis',
+            year: '2011'
+          }
+        ],
         stateProfile: 'this is the state profile as a string',
         years: [2013, 2014]
       };
@@ -148,7 +102,7 @@ describe('APD reducer', () => {
       expected = {
         byId: {
           'apd-id': {
-            activities: undefined,
+            activities: [],
             id: 'apd-id',
             assurancesAndCompliance:
               'The Third Sentence of the Ninth Paragraph of the Three Hundred and Twenty-First Section of the Ninety-Fifth Part of the Forty-Fifth Title of the Federal Code of Regulations',
@@ -198,106 +152,18 @@ describe('APD reducer', () => {
             pointsOfContact: 'here be points of contact',
             previousActivitySummary: '',
             previousActivityExpenses: {
-              2016: getPreviousActivityExpense(),
-              2017: getPreviousActivityExpense(),
-              2018: getPreviousActivityExpense()
+              2013: { hie: '2013 hie', hit: '2013 hit', mmis: '2013 mmis' },
+              2012: { hie: '2012 hie', hit: '2012 hit', mmis: '2012 mmis' },
+              2011: { hie: '2011 hie', hit: '2011 hit', mmis: '2011 mmis' }
             },
             stateProfile: 'this is the state profile as a string'
           }
         },
-        data: {
-          id: '',
-          overview: '',
-          hitNarrative: '',
-          hieNarrative: '',
-          mmisNarrative: '',
-          assurancesAndCompliance: initialAssurances,
-          pointsOfContact: [{ email: '', name: '', position: '' }],
-          previousActivitySummary: '',
-          previousActivityExpenses: {
-            2016: getPreviousActivityExpense(),
-            2017: getPreviousActivityExpense(),
-            2018: getPreviousActivityExpense()
-          },
-          incentivePayments,
-          stateProfile: {
-            medicaidDirector: {
-              name: '',
-              email: '',
-              phone: ''
-            },
-            medicaidOffice: {
-              address1: '',
-              address2: '',
-              city: '',
-              state: '',
-              zip: ''
-            }
-          },
-          // TODO: This value is computed based on the current datetime.
-          // Probably ought to mock the time (sinon can do this) so
-          // the test is deterministic.
-          years: ['2018', '2019'],
-          yearOptions: ['2018', '2019', '2020']
-        },
+        data: {},
         fetching: false,
         loaded: true,
         error: ''
       };
-    });
-
-    it('handles the previous activity expenses being an empty array', () => {
-      data.previousActivityExpenses = [];
-      expect(
-        apd(initialState, {
-          type: 'GET_APD_SUCCESS',
-          data: [data]
-        })
-      ).toEqual(expected);
-    });
-
-    it('handles the previous activity expenses being set', () => {
-      data.previousActivityExpenses = [
-        {
-          hie: {
-            federalActual: 10,
-            federalApproved: 20,
-            stateActual: 30,
-            stateApproved: 40
-          },
-          hit: {
-            federalActual: 100,
-            federalApproved: 200,
-            stateActual: 300,
-            stateApproved: 400
-          },
-          year: 1776
-        }
-      ];
-
-      expected.byId['apd-id'].previousActivityExpenses = {
-        1776: {
-          hie: {
-            federalActual: 10,
-            federalApproved: 20,
-            stateActual: 30,
-            stateApproved: 40
-          },
-          hit: {
-            federalActual: 100,
-            federalApproved: 200,
-            stateActual: 300,
-            stateApproved: 400
-          }
-        }
-      };
-
-      expect(
-        apd(initialState, {
-          type: 'GET_APD_SUCCESS',
-          data: [data]
-        })
-      ).toEqual(expected);
     });
 
     it('sets values from the API, and defaults otherwise', () => {

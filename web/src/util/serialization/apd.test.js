@@ -57,7 +57,7 @@ describe('APD serializer', () => {
         years: ['1431']
       };
 
-      expect(fromAPI(apdAPI, undefined, a => a)).toEqual({
+      expect(fromAPI(apdAPI, a => a)).toEqual({
         id: 'apd id',
         activities: ['an activity'],
         assurancesAndCompliance:
@@ -86,39 +86,6 @@ describe('APD serializer', () => {
           other: 'text'
         },
         years: ['1431']
-      });
-    });
-
-    it('uses defaults for missing properties', () => {
-      const defaults = {
-        activities: 'a a a',
-        assurancesAndCompliance: 'b b b',
-        hieNarrative: 'c c c',
-        hitNarrative: 'd d d',
-        incentivePayments: 'e e e',
-        mmisNarrative: 'f f f',
-        overview: 'g g g',
-        pointsOfContact: 'h h h',
-        previousActivityExpenses: 'i i i',
-        previousActivitySummary: 'j j j',
-        stateProfile: 'l l l',
-        years: [987654321]
-      };
-
-      expect(fromAPI({}, defaults, a => a)).toEqual({
-        id: undefined,
-        activities: 'a a a',
-        assurancesAndCompliance: 'b b b',
-        hieNarrative: 'c c c',
-        hitNarrative: 'd d d',
-        incentivePayments: 'e e e',
-        mmisNarrative: 'f f f',
-        overview: 'g g g',
-        pointsOfContact: 'h h h',
-        previousActivityExpenses: 'i i i',
-        previousActivitySummary: 'j j j',
-        stateProfile: 'l l l',
-        years: ['987654321']
       });
     });
   });
