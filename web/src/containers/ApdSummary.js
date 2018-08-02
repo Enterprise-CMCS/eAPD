@@ -29,10 +29,10 @@ class ApdSummary extends Component {
     const {
       years,
       yearOptions,
-      overview,
-      hitNarrative,
-      hieNarrative,
-      mmisNarrative
+      programOverview,
+      narrativeHIT,
+      narrativeHIE,
+      narrativeMMIS
     } = this.props.apd;
 
     return (
@@ -56,32 +56,32 @@ class ApdSummary extends Component {
             <div className="mb-tiny bold">{t('apd.overview.labels.desc')}</div>
             <HelpText text="apd.overview.labels.helpText" />
             <RichText
-              content={overview}
-              onSync={this.syncRichText('overview')}
+              content={programOverview}
+              onSync={this.syncRichText('programOverview')}
             />
           </div>
           <div className="mb3">
             <div className="bold">{t('apd.hit.title')}</div>
             <HelpText text="apd.hit.helpText" />
             <RichText
-              content={hitNarrative}
-              onSync={this.syncRichText('hitNarrative')}
+              content={narrativeHIT}
+              onSync={this.syncRichText('narrativeHIT')}
             />
           </div>
           <div className="mb3">
             <div className="bold">{t('apd.hie.title')}</div>
             <HelpText text="apd.hie.helpText" />
             <RichText
-              content={hieNarrative}
-              onSync={this.syncRichText('hieNarrative')}
+              content={narrativeHIE}
+              onSync={this.syncRichText('narrativeHIE')}
             />
           </div>
           <div>
             <div className="bold">{t('apd.mmis.title')}</div>
             <HelpText text="apd.mmis.helpText" />
             <RichText
-              content={mmisNarrative}
-              onSync={this.syncRichText('mmisNarrative')}
+              content={narrativeMMIS}
+              onSync={this.syncRichText('narrativeMMIS')}
             />
           </div>
         </Subsection>
