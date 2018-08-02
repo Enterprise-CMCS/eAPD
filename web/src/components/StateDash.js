@@ -4,7 +4,7 @@ import React from 'react';
 import Btn from './Btn';
 import Collapsible from './Collapsible';
 import Container from './Container';
-import SectionTitle from './SectionTitle';
+import { SectionTitle } from './Section';
 
 const ActivityEntry = () => (
   <div className="flex items-center mb2">
