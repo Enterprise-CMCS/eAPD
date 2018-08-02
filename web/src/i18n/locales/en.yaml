@@ -447,7 +447,7 @@
           build on and accelerate the modernization of the Medicaid enterprise
           that has thus far been achieved.
         title: Describe how this activity will support the MITA condition
-      industry: 
+      industryStandards: 
         header: Industry Standards
         subheader: >-
           States must ensure alignment with, and incorporation of, industry
@@ -492,7 +492,7 @@
           maintaining multiple systems performing essentially the same
           functions within the same state.
         title: Describe how this activity will support the leverage condition
-      bizResults: 
+      businessResults: 
         header: Business Results
         subheader: >-
           Systems should support accurate and timely processing of claims
@@ -556,7 +556,7 @@
           shared data.
         title: >-
           Describe how this activity will support the Interoperability condition
-      mitigation: 
+      mitigationStrategy: 
         header: Mitigation Strategy
         subheader: >-
           The condition described at § 433.112(b)(18) requires that states
