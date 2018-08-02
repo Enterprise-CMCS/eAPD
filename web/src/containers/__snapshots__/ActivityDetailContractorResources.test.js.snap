@@ -161,7 +161,11 @@ ShallowWrapper {
                     disableClick={false}
                     disablePreview={false}
                     disabled={false}
-                    inputProps={Object {}}
+                    inputProps={
+                      Object {
+                        "title": "select a file to attach for this contractor",
+                      }
+                    }
                     maxSize={Infinity}
                     minSize={0}
                     multiple={false}
@@ -375,7 +379,11 @@ ShallowWrapper {
                       disableClick={false}
                       disablePreview={false}
                       disabled={false}
-                      inputProps={Object {}}
+                      inputProps={
+                        Object {
+                          "title": "select a file to attach for this contractor",
+                        }
+                      }
                       maxSize={Infinity}
                       minSize={0}
                       multiple={false}
@@ -575,7 +583,11 @@ ShallowWrapper {
                         disableClick={false}
                         disablePreview={false}
                         disabled={false}
-                        inputProps={Object {}}
+                        inputProps={
+                          Object {
+                            "title": "select a file to attach for this contractor",
+                          }
+                        }
                         maxSize={Infinity}
                         minSize={0}
                         multiple={false}
@@ -935,7 +947,11 @@ ShallowWrapper {
                           disableClick={false}
                           disablePreview={false}
                           disabled={false}
-                          inputProps={Object {}}
+                          inputProps={
+                            Object {
+                              "title": "select a file to attach for this contractor",
+                            }
+                          }
                           maxSize={Infinity}
                           minSize={0}
                           multiple={false}
@@ -991,7 +1007,11 @@ ShallowWrapper {
                             disableClick={false}
                             disablePreview={false}
                             disabled={false}
-                            inputProps={Object {}}
+                            inputProps={
+                              Object {
+                                "title": "select a file to attach for this contractor",
+                              }
+                            }
                             maxSize={Infinity}
                             minSize={0}
                             multiple={false}
@@ -1033,7 +1053,11 @@ ShallowWrapper {
                               disableClick={false}
                               disablePreview={false}
                               disabled={false}
-                              inputProps={Object {}}
+                              inputProps={
+                                Object {
+                                  "title": "select a file to attach for this contractor",
+                                }
+                              }
                               maxSize={Infinity}
                               minSize={0}
                               multiple={false}
@@ -1078,7 +1102,9 @@ ShallowWrapper {
                               "disableClick": false,
                               "disablePreview": false,
                               "disabled": false,
-                              "inputProps": Object {},
+                              "inputProps": Object {
+                                "title": "select a file to attach for this contractor",
+                              },
                               "maxSize": Infinity,
                               "minSize": 0,
                               "multiple": false,
@@ -1609,7 +1635,11 @@ ShallowWrapper {
                       disableClick={false}
                       disablePreview={false}
                       disabled={false}
-                      inputProps={Object {}}
+                      inputProps={
+                        Object {
+                          "title": "select a file to attach for this contractor",
+                        }
+                      }
                       maxSize={Infinity}
                       minSize={0}
                       multiple={false}
@@ -1823,7 +1853,11 @@ ShallowWrapper {
                         disableClick={false}
                         disablePreview={false}
                         disabled={false}
-                        inputProps={Object {}}
+                        inputProps={
+                          Object {
+                            "title": "select a file to attach for this contractor",
+                          }
+                        }
                         maxSize={Infinity}
                         minSize={0}
                         multiple={false}
@@ -2023,7 +2057,11 @@ ShallowWrapper {
                           disableClick={false}
                           disablePreview={false}
                           disabled={false}
-                          inputProps={Object {}}
+                          inputProps={
+                            Object {
+                              "title": "select a file to attach for this contractor",
+                            }
+                          }
                           maxSize={Infinity}
                           minSize={0}
                           multiple={false}
@@ -2383,7 +2421,11 @@ ShallowWrapper {
                             disableClick={false}
                             disablePreview={false}
                             disabled={false}
-                            inputProps={Object {}}
+                            inputProps={
+                              Object {
+                                "title": "select a file to attach for this contractor",
+                              }
+                            }
                             maxSize={Infinity}
                             minSize={0}
                             multiple={false}
@@ -2439,7 +2481,11 @@ ShallowWrapper {
                               disableClick={false}
                               disablePreview={false}
                               disabled={false}
-                              inputProps={Object {}}
+                              inputProps={
+                                Object {
+                                  "title": "select a file to attach for this contractor",
+                                }
+                              }
                               maxSize={Infinity}
                               minSize={0}
                               multiple={false}
@@ -2481,7 +2527,11 @@ ShallowWrapper {
                                 disableClick={false}
                                 disablePreview={false}
                                 disabled={false}
-                                inputProps={Object {}}
+                                inputProps={
+                                  Object {
+                                    "title": "select a file to attach for this contractor",
+                                  }
+                                }
                                 maxSize={Infinity}
                                 minSize={0}
                                 multiple={false}
@@ -2526,7 +2576,9 @@ ShallowWrapper {
                                 "disableClick": false,
                                 "disablePreview": false,
                                 "disabled": false,
-                                "inputProps": Object {},
+                                "inputProps": Object {
+                                  "title": "select a file to attach for this contractor",
+                                },
                                 "maxSize": Infinity,
                                 "minSize": 0,
                                 "multiple": false,
