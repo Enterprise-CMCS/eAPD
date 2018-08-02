@@ -399,8 +399,10 @@ const reducer = (state = initialState, action) => {
     case SELECT_APD: {
       const byKey = {};
       ((action.apd || {}).activities || []).forEach(a => {
-        byKey[a.key] = a;
-        byKey[a.key].meta = { expanded: a.name === 'Program Administration' };
+        byKey[a.key] = {
+          ...a,
+          meta: { expanded: a.name === 'Program Administration' }
+        };
       });
 
       if (Object.keys(byKey).length === 0) {

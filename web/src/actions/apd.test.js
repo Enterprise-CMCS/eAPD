@@ -90,13 +90,29 @@ describe('apd actions', () => {
 
   describe('create APD', () => {
     // TODO: But for real.
-    it('uh...  does not do anything on success... we should change this', () => {
-      fetchMock.onPost('/apds').reply(200);
-      const store = mockStore();
+    it('adds the new APD to the store and switches to it on success', () => {
+      const newapd = { id: 'bloop' };
+      fetchMock.onPost('/apds').reply(200, newapd);
 
-      const expectedActions = [{ type: actions.CREATE_APD_REQUEST }];
+      const push = route => ({ type: 'FAKE_PUSH', pushRoute: route });
+      const state = {
+        apd: {
+          byId: {
+            bloop: { hello: 'world' }
+          }
+        }
+      };
+      const store = mockStore(state);
 
-      store.dispatch(actions.createApd()).then(() => {
+      const expectedActions = [
+        { type: actions.CREATE_APD_REQUEST },
+        { type: actions.CREATE_APD_SUCCESS, data: newapd },
+        { type: actions.SELECT_APD, apd: { hello: 'world' } },
+        { type: actions.UPDATE_BUDGET, state },
+        { type: 'FAKE_PUSH', pushRoute: '/apd' }
+      ];
+
+      return store.dispatch(actions.createApd({ pushRoute: push })).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
