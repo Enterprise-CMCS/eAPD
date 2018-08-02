@@ -72,8 +72,8 @@ class IncentivePayments extends Component {
                       {QUARTERS.map(q => (
                         <td key={q}>
                           <InputComponent
-                            name={`eh-payments-${year}-q1`}
-                            label={`eh-payments-${year}-q1`}
+                            name={`${id}-payments-${year}-q${q}`}
+                            label={`${id} payments for ${year}, quarter ${q}`}
                             wrapperClass="m0"
                             className="m0 input input-condensed mono right-align"
                             value={data[id][year][q] || ''}

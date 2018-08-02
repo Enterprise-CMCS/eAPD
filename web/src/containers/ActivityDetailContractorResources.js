@@ -195,6 +195,9 @@ class ContractorExpenses extends Component {
                         className="btn btn-primary"
                         onDrop={this.handleFileUpload(i)}
                         multiple={false}
+                        inputProps={{
+                          title: 'select a file to attach for this contractor'
+                        }}
                       >
                         Select file
                       </Dropzone>

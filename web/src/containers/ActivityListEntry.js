@@ -7,6 +7,7 @@ import {
   updateActivity as updateActivityAction
 } from '../actions/activities';
 import DeleteButton from '../components/DeleteConfirm';
+import { Input } from '../components/Inputs';
 import { ACTIVITY_FUNDING_SOURCES } from '../util';
 
 class ActivityListEntry extends Component {
@@ -27,8 +28,10 @@ class ActivityListEntry extends Component {
       <div className="flex items-center mb1">
         <div className="mr1 bold mono">{num}.</div>
         <div className="mr1 col-4">
-          <input
-            type="text"
+          <Input
+            name={`activity-list-entry-${key}`}
+            label="activity name"
+            hideLabel
             className="col-12 input m0"
             value={name}
             onChange={this.handleChange('name')}
