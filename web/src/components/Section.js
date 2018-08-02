@@ -1,10 +1,23 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
+
 import Collapsible from './Collapsible';
 import HelpText from './HelpText';
-import SectionTitle from './SectionTitle';
-import SectionDesc from './SectionDesc';
 import { t } from '../i18n';
+
+const SectionTitle = ({ children }) => (
+  <h2 className="mt1 mb2 h1 sm-h0 teal light">{children}</h2>
+);
+
+SectionTitle.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+const SectionDesc = ({ children }) => <p className="mb4 h3">{children}</p>;
+
+SectionDesc.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 const Section = ({ children, id, resource }) => {
   const title = t([resource, 'title'], { defaultValue: false });
@@ -32,7 +45,7 @@ Section.defaultProps = {
   resource: null
 };
 
-const Chunk = ({ children, resource }) => {
+const SubsectionChunk = ({ children, resource }) => {
   const subheader = t([resource, 'subheader'], { defaultValue: false });
 
   return (
@@ -47,12 +60,12 @@ const Chunk = ({ children, resource }) => {
   );
 };
 
-Chunk.propTypes = {
+SubsectionChunk.propTypes = {
   children: PropTypes.node.isRequired,
   resource: PropTypes.string
 };
 
-Chunk.defaultProps = {
+SubsectionChunk.defaultProps = {
   resource: null
 };
 
@@ -61,7 +74,7 @@ const Subsection = ({ children, id, open, resource }) => {
 
   return (
     <Collapsible id={id} title={title} open={open}>
-      <Chunk resource={resource}>{children}</Chunk>
+      <SubsectionChunk resource={resource}>{children}</SubsectionChunk>
     </Collapsible>
   );
 };
@@ -80,4 +93,4 @@ Subsection.defaultProps = {
 };
 
 export default Section;
-export { Chunk, Section, Subsection };
+export { Section, SectionDesc, SectionTitle, Subsection, SubsectionChunk };
