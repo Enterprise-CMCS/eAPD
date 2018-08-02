@@ -1,4 +1,12 @@
-import { applyToNumbers, generateKey } from '../index';
+import { applyToNumbers, generateKey, replaceNulls } from '../index';
+
+const pick = (o, ...fields) =>
+  Object.entries(o).reduce((acc, [field, value]) => {
+    if (fields.indexOf(field) >= 0) {
+      return { ...acc, [field]: value };
+    }
+    return acc;
+  }, {});
 
 /**
  * Serializes an APD object from redux state shape into
@@ -7,12 +15,17 @@ import { applyToNumbers, generateKey } from '../index';
  */
 export const toAPI = activityState => {
   const activity = {
-    id: activityState.id,
-    name: activityState.name,
-    fundingSource: activityState.fundingSource,
-    summary: activityState.descShort,
-    description: activityState.descLong,
-    alternatives: activityState.altApproach,
+    ...pick(
+      activityState,
+      'alternatives',
+      'description',
+      'fundingSource',
+      'goals',
+      'id',
+      'name',
+      'schedule',
+      'summary'
+    ),
     costAllocationNarrative: {
       methodology: activityState.costAllocationDesc,
       otherSources: activityState.otherFundingDesc
@@ -25,17 +38,6 @@ export const toAPI = activityState => {
         year
       })
     ),
-    goals: activityState.goals.map(g => ({
-      id: g.id,
-      description: g.desc,
-      objective: g.obj
-    })),
-    schedule: activityState.milestones.map(m => ({
-      id: m.id,
-      milestone: m.name,
-      plannedStart: m.start || undefined,
-      plannedEnd: m.end || undefined
-    })),
     statePersonnel: activityState.statePersonnel.map(s => ({
       id: s.id,
       title: s.title,
@@ -73,19 +75,7 @@ export const toAPI = activityState => {
         year
       }))
     })),
-    standardsAndConditions: {
-      businessResults: activityState.standardsAndConditions.bizResults,
-      documentation: activityState.standardsAndConditions.documentation,
-      industryStandards: activityState.standardsAndConditions.industry,
-      interoperability: activityState.standardsAndConditions.interoperability,
-      keyPersonnel: activityState.standardsAndConditions.keyPersonnel,
-      leverage: activityState.standardsAndConditions.leverage,
-      minimizeCost: activityState.standardsAndConditions.minimizeCost,
-      mitigationStrategy: activityState.standardsAndConditions.mitigation,
-      modularity: activityState.standardsAndConditions.modularity,
-      mita: activityState.standardsAndConditions.mita,
-      reporting: activityState.standardsAndConditions.reporting
-    },
+    standardsAndConditions: activityState.standardsAndConditions,
     quarterlyFFP: Object.entries(activityState.quarterlyFFP).map(
       ([year, ffp]) => ({
         q1: applyToNumbers(ffp[1], v => v / 100),
@@ -109,28 +99,21 @@ export const toAPI = activityState => {
 export const fromAPI = (activityAPI, years) => ({
   // These properties are just copied over, maybe renamed,
   // but no data massaging necessary
-  altApproach: activityAPI.alternatives || '',
+  ...replaceNulls(
+    pick(
+      activityAPI,
+      'alternatives',
+      'description',
+      'fundingSource',
+      'id',
+      'name',
+      'summary'
+    )
+  ),
   costAllocationDesc: activityAPI.costAllocationNarrative.methodology || '',
-  descLong: activityAPI.description || '',
-  descShort: activityAPI.summary || '',
-  fundingSource: activityAPI.fundingSource,
-  id: activityAPI.id,
   key: generateKey(),
-  name: activityAPI.name,
   otherFundingDesc: activityAPI.costAllocationNarrative.otherSources || '',
-  standardsAndConditions: {
-    bizResults: activityAPI.standardsAndConditions.businessResults || '',
-    documentation: activityAPI.standardsAndConditions.documentation || '',
-    industry: activityAPI.standardsAndConditions.industryStandards || '',
-    interoperability: activityAPI.standardsAndConditions.interoperability || '',
-    keyPersonnel: activityAPI.standardsAndConditions.keyPersonnel || '',
-    leverage: activityAPI.standardsAndConditions.leverage || '',
-    modularity: activityAPI.standardsAndConditions.modularity || '',
-    minimizeCost: activityAPI.standardsAndConditions.minimizeCost || '',
-    mita: activityAPI.standardsAndConditions.mita || '',
-    mitigation: activityAPI.standardsAndConditions.mitigationStrategy || '',
-    reporting: activityAPI.standardsAndConditions.reporting || ''
-  },
+  standardsAndConditions: replaceNulls(activityAPI.standardsAndConditions),
   years,
 
   // These properties need some massaging into reducer state
@@ -189,18 +172,13 @@ export const fromAPI = (activityAPI, years) => ({
   })),
 
   goals: activityAPI.goals.map(g => ({
-    key: generateKey(),
-    id: g.id,
-    desc: g.description || '',
-    obj: g.objective || ''
+    ...replaceNulls(g),
+    key: generateKey()
   })),
 
-  milestones: activityAPI.schedule.map(s => ({
-    key: generateKey(),
-    id: s.id,
-    name: s.milestone || '',
-    start: s.plannedStart || '',
-    end: s.plannedEnd || ''
+  schedule: activityAPI.schedule.map(s => ({
+    ...replaceNulls(s),
+    key: generateKey()
   })),
 
   statePersonnel: activityAPI.statePersonnel.map(s => ({
