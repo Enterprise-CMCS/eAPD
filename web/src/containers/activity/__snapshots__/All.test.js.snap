@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the Activities list component renders correctly 1`] = `
+exports[`the Activities component renders correctly 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Activities
+  Symbol(enzyme.__unrendered__): <All
     activityKeys={
       Array [
         "1",
@@ -35,15 +35,15 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <Connect(ActivityListEntry)
+            <Connect(EntryBasic)
               aKey="1"
               num={1}
             />
-            <Connect(ActivityListEntry)
+            <Connect(EntryBasic)
               aKey="2"
               num={2}
             />
-            <Connect(ActivityListEntry)
+            <Connect(EntryBasic)
               aKey="3"
               num={3}
             />
@@ -58,15 +58,15 @@ ShallowWrapper {
           </Btn>
         </Subsection>,
         Array [
-          <Connect(ActivityDetailAll)
+          <Connect(EntryDetails)
             aKey="1"
             num={1}
           />,
-          <Connect(ActivityDetailAll)
+          <Connect(EntryDetails)
             aKey="2"
             num={2}
           />,
-          <Connect(ActivityDetailAll)
+          <Connect(EntryDetails)
             aKey="3"
             num={3}
           />,
@@ -86,15 +86,15 @@ ShallowWrapper {
             <div
               className="mb3"
             >
-              <Connect(ActivityListEntry)
+              <Connect(EntryBasic)
                 aKey="1"
                 num={1}
               />
-              <Connect(ActivityListEntry)
+              <Connect(EntryBasic)
                 aKey="2"
                 num={2}
               />
-              <Connect(ActivityListEntry)
+              <Connect(EntryBasic)
                 aKey="3"
                 num={3}
               />
@@ -120,15 +120,15 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <Connect(ActivityListEntry)
+                <Connect(EntryBasic)
                   aKey="1"
                   num={1}
                 />,
-                <Connect(ActivityListEntry)
+                <Connect(EntryBasic)
                   aKey="2"
                   num={2}
                 />,
-                <Connect(ActivityListEntry)
+                <Connect(EntryBasic)
                   aKey="3"
                   num={3}
                 />,
@@ -248,15 +248,15 @@ ShallowWrapper {
             <div
               className="mb3"
             >
-              <Connect(ActivityListEntry)
+              <Connect(EntryBasic)
                 aKey="1"
                 num={1}
               />
-              <Connect(ActivityListEntry)
+              <Connect(EntryBasic)
                 aKey="2"
                 num={2}
               />
-              <Connect(ActivityListEntry)
+              <Connect(EntryBasic)
                 aKey="3"
                 num={3}
               />
@@ -271,15 +271,15 @@ ShallowWrapper {
             </Btn>
           </Subsection>,
           Array [
-            <Connect(ActivityDetailAll)
+            <Connect(EntryDetails)
               aKey="1"
               num={1}
             />,
-            <Connect(ActivityDetailAll)
+            <Connect(EntryDetails)
               aKey="2"
               num={2}
             />,
-            <Connect(ActivityDetailAll)
+            <Connect(EntryDetails)
               aKey="3"
               num={3}
             />,
@@ -299,15 +299,15 @@ ShallowWrapper {
               <div
                 className="mb3"
               >
-                <Connect(ActivityListEntry)
+                <Connect(EntryBasic)
                   aKey="1"
                   num={1}
                 />
-                <Connect(ActivityListEntry)
+                <Connect(EntryBasic)
                   aKey="2"
                   num={2}
                 />
-                <Connect(ActivityListEntry)
+                <Connect(EntryBasic)
                   aKey="3"
                   num={3}
                 />
@@ -333,15 +333,15 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  <Connect(ActivityListEntry)
+                  <Connect(EntryBasic)
                     aKey="1"
                     num={1}
                   />,
-                  <Connect(ActivityListEntry)
+                  <Connect(EntryBasic)
                     aKey="2"
                     num={2}
                   />,
-                  <Connect(ActivityListEntry)
+                  <Connect(EntryBasic)
                     aKey="3"
                     num={3}
                   />,

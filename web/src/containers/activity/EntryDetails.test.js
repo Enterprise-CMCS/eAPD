@@ -2,15 +2,17 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
-import { removeActivity, toggleActivitySection } from '../actions/activities';
-
 import {
-  raw as ActivityDetailAll,
+  EntryDetailsRaw as EntryDetails,
   mapStateToProps,
   mapDispatchToProps
-} from './ActivityDetailAll';
+} from './EntryDetails';
+import {
+  removeActivity,
+  toggleActivitySection
+} from '../../actions/activities';
 
-describe('the Activities details container component', () => {
+describe('the (Activity) EntryDetails component', () => {
   const props = {
     aKey: 'activity-key',
     expanded: false,
@@ -25,12 +27,12 @@ describe('the Activities details container component', () => {
   });
 
   test('renders correctly', () => {
-    const component = shallow(<ActivityDetailAll {...props} />);
+    const component = shallow(<EntryDetails {...props} />);
     expect(component).toMatchSnapshot();
   });
 
   test('toggles its collapse state', () => {
-    const component = shallow(<ActivityDetailAll {...props} />);
+    const component = shallow(<EntryDetails {...props} />);
     component
       .dive()
       .find('button')

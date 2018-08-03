@@ -6,14 +6,14 @@ import {
   addActivityMilestone as addActivityMilestoneAction,
   removeActivityMilestone as removeActivityMilestoneAction,
   updateActivity as updateActivityAction
-} from '../actions/activities';
-import Btn from '../components/Btn';
-import NoDataMsg from '../components/NoDataMsg';
-import { Subsection } from '../components/Section';
-import { Input } from '../components/Inputs';
-import { t } from '../i18n';
+} from '../../actions/activities';
+import Btn from '../../components/Btn';
+import { Input } from '../../components/Inputs';
+import NoDataMsg from '../../components/NoDataMsg';
+import { Subsection } from '../../components/Section';
+import { t } from '../../i18n';
 
-class ActivityDetailSchedule extends Component {
+class Schedule extends Component {
   handleChange = (index, field) => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
@@ -110,7 +110,7 @@ class ActivityDetailSchedule extends Component {
   }
 }
 
-ActivityDetailSchedule.propTypes = {
+Schedule.propTypes = {
   activity: PropTypes.object.isRequired,
   addActivityMilestone: PropTypes.func.isRequired,
   removeActivityMilestone: PropTypes.func.isRequired,
@@ -127,6 +127,4 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ActivityDetailSchedule
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Schedule);

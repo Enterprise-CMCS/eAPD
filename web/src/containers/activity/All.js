@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { t } from '../i18n';
 
-import ActivityDetailAll from './ActivityDetailAll';
-import ActivityListEntry from './ActivityListEntry';
-import { addActivity as addActivityAction } from '../actions/activities';
-import Btn from '../components/Btn';
-import { Section, Subsection } from '../components/Section';
+import EntryBasic from './EntryBasic';
+import EntryDetails from './EntryDetails';
+import { addActivity as addActivityAction } from '../../actions/activities';
+import Btn from '../../components/Btn';
+import { Section, Subsection } from '../../components/Section';
+import { t } from '../../i18n';
 
-const Activities = ({ activityKeys, addActivity }) => (
+const All = ({ activityKeys, addActivity }) => (
   <Section id="activities" resource="activities">
     <Subsection id="activities-list" resource="activities.list" open>
       {activityKeys.length === 0 ? (
@@ -19,19 +19,19 @@ const Activities = ({ activityKeys, addActivity }) => (
       ) : (
         <div className="mb3">
           {activityKeys.map((key, idx) => (
-            <ActivityListEntry key={key} aKey={key} num={idx + 1} />
+            <EntryBasic key={key} aKey={key} num={idx + 1} />
           ))}
         </div>
       )}
       <Btn onClick={addActivity}>{t('activities.addActivityButtonText')}</Btn>
     </Subsection>
     {activityKeys.map((key, idx) => (
-      <ActivityDetailAll key={key} aKey={key} num={idx + 1} />
+      <EntryDetails key={key} aKey={key} num={idx + 1} />
     ))}
   </Section>
 );
 
-Activities.propTypes = {
+All.propTypes = {
   activityKeys: PropTypes.array.isRequired,
   addActivity: PropTypes.func.isRequired
 };
@@ -44,6 +44,5 @@ export const mapDispatchToProps = {
   addActivity: addActivityAction
 };
 
-export { Activities as raw };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Activities);
+export { All as AllRaw };
+export default connect(mapStateToProps, mapDispatchToProps)(All);

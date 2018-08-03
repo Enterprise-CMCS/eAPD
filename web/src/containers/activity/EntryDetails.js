@@ -2,41 +2,41 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ActivityDetailContractorResources from './ActivityDetailContractorResources';
-import ActivityDetailCostAllocate from './ActivityDetailCostAllocate';
-import ActivityDetailDescription from './ActivityDetailDescription';
-import ActivityDetailGoals from './ActivityDetailGoals';
-import ActivityDetailSchedule from './ActivityDetailSchedule';
-import ActivityDetailExpenses from './ActivityDetailExpenses';
-import ActivityDetailStandardsAndConditions from './ActivityDetailStandardsAndConditions';
-import ActivityDetailStatePersonnel from './ActivityDetailStatePersonnel';
+import ContractorResources from './ContractorResources';
+import CostAllocate from './CostAllocate';
+import Description from './Description';
+import Expenses from './Expenses';
+import Goals from './Goals';
+import Schedule from './Schedule';
+import StandardsAndConditions from './StandardsAndConditions';
+import StatePersonnel from './StatePersonnel';
 import {
   removeActivity as removeActivityAction,
   toggleActivitySection
-} from '../actions/activities';
-import Collapsible from '../components/Collapsible';
-import DeleteButton from '../components/DeleteConfirm';
-import { t } from '../i18n';
+} from '../../actions/activities';
+import Collapsible from '../../components/Collapsible';
+import DeleteButton from '../../components/DeleteConfirm';
+import { t } from '../../i18n';
 
-const activityTitle = (a, i) => {
+const makeTitle = (a, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
   if (a.name) title += `: ${a.name}`;
   if (a.fundingSource) title += ` (${a.fundingSource})`;
   return title;
 };
 
-const activityComponents = [
-  ActivityDetailDescription,
-  ActivityDetailGoals,
-  ActivityDetailSchedule,
-  ActivityDetailStatePersonnel,
-  ActivityDetailContractorResources,
-  ActivityDetailExpenses,
-  ActivityDetailCostAllocate,
-  ActivityDetailStandardsAndConditions
+const components = [
+  Description,
+  Goals,
+  Schedule,
+  StatePersonnel,
+  ContractorResources,
+  Expenses,
+  CostAllocate,
+  StandardsAndConditions
 ];
 
-class ActivityDetailAll extends Component {
+class EntryDetails extends Component {
   handleChange = key => () => {
     this.props.toggleSection(key);
   };
@@ -55,9 +55,7 @@ class ActivityDetailAll extends Component {
         onChange={this.handleChange(aKey)}
         sticky
       >
-        {activityComponents.map((ActivityComponent, i) => (
-          <ActivityComponent key={i} aKey={aKey} />
-        ))}
+        {components.map((Comp, i) => <Comp key={i} aKey={aKey} />)}
         {num > 1 && (
           <DeleteButton
             remove={() => removeActivity(aKey)}
@@ -69,7 +67,7 @@ class ActivityDetailAll extends Component {
   }
 }
 
-ActivityDetailAll.propTypes = {
+EntryDetails.propTypes = {
   aKey: PropTypes.string.isRequired,
   expanded: PropTypes.bool.isRequired,
   num: PropTypes.number.isRequired,
@@ -81,7 +79,7 @@ ActivityDetailAll.propTypes = {
 export const mapStateToProps = ({ activities: { byKey } }, { aKey, num }) => {
   const activity = byKey[aKey];
   const { expanded } = activity.meta;
-  const title = `${t('activities.header')} › ${activityTitle(activity, num)}`;
+  const title = `${t('activities.header')} › ${makeTitle(activity, num)}`;
 
   return { expanded, title };
 };
@@ -91,6 +89,5 @@ export const mapDispatchToProps = {
   toggleSection: toggleActivitySection
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActivityDetailAll);
-
-export const raw = ActivityDetailAll;
+export { EntryDetails as EntryDetailsRaw };
+export default connect(mapStateToProps, mapDispatchToProps)(EntryDetails);

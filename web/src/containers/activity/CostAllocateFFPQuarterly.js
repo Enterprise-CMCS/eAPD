@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { updateActivity } from '../actions/activities';
-import { PercentInput } from '../components/Inputs';
-import { t } from '../i18n';
-import { formatMoney, formatPerc } from '../util/formats';
+import { updateActivity } from '../../actions/activities';
+import { PercentInput } from '../../components/Inputs';
+import { t } from '../../i18n';
+import { formatMoney, formatPerc } from '../../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
 const COLORS = ['teal', 'green', 'yellow'];
@@ -17,7 +17,7 @@ const EXPENSE_NAME_DISPLAY = {
 
 const color = idx => `bg-${COLORS[idx] || 'gray'}`;
 
-class ActivityQuarterlyBudgetSummary extends Component {
+class CostAllocateFFPQuarterly extends Component {
   handleChange = (year, q, name) => e => {
     // Keep percent as 0-100 here because the activity state
     // uses Big Percents, and this action updates the
@@ -90,7 +90,9 @@ class ActivityQuarterlyBudgetSummary extends Component {
                   <Fragment key={name}>
                     <tr
                       key={name}
-                      className={`${name === 'combined' ? 'bold' : ''}`}
+                      className={`align-middle ${
+                        name === 'combined' ? 'bold' : ''
+                      }`}
                     >
                       <td rowSpan="2" headers="act_qbudget_null1">
                         {EXPENSE_NAME_DISPLAY[name]}
@@ -99,20 +101,20 @@ class ActivityQuarterlyBudgetSummary extends Component {
                         <Fragment key={year}>
                           {QUARTERS.map(q => (
                             <td
-                              className={`mono right-align ${
-                                name === 'combined' ? `${color(i)}-light` : ''
-                              }`}
                               key={q}
+                              className="mono right-align"
                               headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                             >
                               <PercentInput
                                 name={`ffp-${aKey}-${year}-${q}-${name}`}
-                                hideLabel
                                 label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
+                                wrapperClass="m0"
+                                className="m0 input input-condensed mono right-align"
                                 onChange={this.handleChange(year, q, name)}
                                 value={
                                   quarterlyFFP[year][q][name].percent * 100
                                 }
+                                hideLabel
                               />
                             </td>
                           ))}
@@ -204,7 +206,7 @@ class ActivityQuarterlyBudgetSummary extends Component {
   }
 }
 
-ActivityQuarterlyBudgetSummary.propTypes = {
+CostAllocateFFPQuarterly.propTypes = {
   aKey: PropTypes.string.isRequired,
   quarterlyFFP: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
@@ -219,8 +221,9 @@ const mapStateToProps = ({ apd, budget: { activities } }, { aKey }) => {
     years: apd.data.years
   };
 };
+
 const mapDispatchToProps = { update: updateActivity };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  ActivityQuarterlyBudgetSummary
+  CostAllocateFFPQuarterly
 );
