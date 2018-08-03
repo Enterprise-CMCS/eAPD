@@ -117,23 +117,52 @@ export const saveApd = () => (dispatch, state) => {
 
   const { apd: { data: updatedApd }, activities, dirty } = state();
 
-  const apd = toAPI(updatedApd, activities);
-
   if (!dirty.dirty) {
     return dispatch(notify('Save successful!'));
   }
 
-  [
-    'hieNarrative',
-    'hitNarrative',
-    'mmisNarrative',
+  const apd = toAPI(updatedApd, activities);
+
+  const filterAPDFields = [
+    'narrativeHIE',
+    'narrativeHIT',
+    'narrativeMMIS',
     'programOverview',
     'previousActivitySummary'
-  ].forEach(field => {
+  ];
+
+  const filterActivityFields = [
+    'contractorResources',
+    'costAllocation',
+    'costAllocationNarrative',
+    'expenses',
+    'goals',
+    'schedule',
+    'standardsAndConditions',
+    'statePersonnel',
+    'quarterlyFFP'
+  ];
+
+  filterAPDFields.forEach(field => {
     if (!dirty.data.apd[field]) {
       delete apd[field];
     }
   });
+
+  for (let i = apd.activities.length - 1; i >= 0; i -= 1) {
+    const activity = apd.activities[i];
+    if (!dirty.data.activities.byKey[activity.key]) {
+      apd.activities.splice(i, 1);
+      apd.activities.push({ id: activity.id });
+    } else {
+      const dirtyActivity = dirty.data.activities.byKey[activity.key];
+      filterActivityFields.forEach(field => {
+        if (!dirtyActivity[field]) {
+          delete activity[field];
+        }
+      });
+    }
+  }
 
   console.log(apd);
   return;

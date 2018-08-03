@@ -25,9 +25,9 @@ const dirty = (state = initialState, action) => {
 
     case UPDATE_APD:
       if (
-        action.updates.hieNarrative ||
-        action.updates.hitNarrative ||
-        action.updates.mmisNarrative ||
+        action.updates.narrativeHIE ||
+        action.updates.narrativeHIT ||
+        action.updates.narrativeMMIS ||
         action.updates.programOverview ||
         action.updates.previousActivitySummary
       ) {
