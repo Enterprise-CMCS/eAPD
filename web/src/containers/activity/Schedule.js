@@ -30,7 +30,7 @@ class Schedule extends Component {
     } = this.props;
 
     return (
-      <Subsection resource="activities.schedule">
+      <Subsection resource="activities.schedule" nested>
         {activity.milestones.length === 0 ? (
           <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (

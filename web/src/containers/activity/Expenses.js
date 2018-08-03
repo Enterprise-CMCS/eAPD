@@ -36,7 +36,7 @@ class Expenses extends Component {
     const { key: activityKey, expenses } = activity;
 
     return (
-      <Subsection resource="activities.expenses">
+      <Subsection resource="activities.expenses" nested>
         {expenses.length === 0 ? (
           <NoDataMsg>{t('activities.expenses.noDataNotice')}</NoDataMsg>
         ) : (

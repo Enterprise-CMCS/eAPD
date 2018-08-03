@@ -42,7 +42,7 @@ class StatePersonnel extends Component {
     const { key: activityKey, statePersonnel } = activity;
 
     return (
-      <Subsection resource="activities.statePersonnel">
+      <Subsection resource="activities.statePersonnel" nested>
         {statePersonnel.length === 0 ? (
           <NoDataMsg>{t('activities.statePersonnel.noDataNotice')}</NoDataMsg>
         ) : (
