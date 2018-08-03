@@ -735,12 +735,12 @@
       stateShare: State
       grandTotal: Total
   certifyAndSubmit: 
-    title: Submission
+    title: Certify and Submit
     helpText: Complete your APD submission below.
     certify:
-      title: Certify and Submit
+      title: Certification
       helpText: >-
-        Upon submission, this APD submission will be locked from further
+        Upon submission, this APD will be locked from further
         edits until reviewed by a CMS analyst. If complete, select the
-        submit button below.
+        button below.
       buttonText: Submit APD
