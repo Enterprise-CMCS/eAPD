@@ -39,51 +39,87 @@ const ApdPreviousActivityTableMMIS = ({
       <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
         <thead>
           <tr>
-            <th style={{ width: 90 }} />
-            <th colSpan={14} className="bg-aqua center">
+            <th style={{ width: 90 }} id="prev_act_mmis_null1" />
+            <th
+              colSpan={14}
+              className="bg-aqua center"
+              id="prev_act_mmis_header"
+            >
               {t('program.mmis', i18nBase)}
             </th>
           </tr>
           <tr>
-            <th />
-            <th colSpan="2" className="pre-line">
+            <th id="prev_act_mmis_null2" />
+            <th colSpan="2" className="pre-line" id="prev_act_mmis_federal90">
               {t('labels.federalShare', i18nBase)}
             </th>
-            <th colSpan="2" className="pre-line">
+            <th colSpan="2" className="pre-line" id="prev_act_mmis_state10">
               {t('labels.stateShare', i18nBase)}
             </th>
-            <th colSpan="2" className="pre-line">
+            <th colSpan="2" className="pre-line" id="prev_act_mmis_federal75">
               {t('labels.federalShare75', i18nBase)}
             </th>
-            <th colSpan="2" className="pre-line">
+            <th colSpan="2" className="pre-line" id="prev_act_mmis_state25">
               {t('labels.stateShare25', i18nBase)}
             </th>
-            <th colSpan="2" className="pre-line">
+            <th colSpan="2" className="pre-line" id="prev_act_mmis_federal50">
               {t('labels.federalShare50', i18nBase)}
             </th>
-            <th colSpan="2" className="pre-line">
+            <th colSpan="2" className="pre-line" id="prev_act_mmis_state50">
               {t('labels.stateShare50', i18nBase)}
             </th>
-            <th colSpan="2" className="pre-line">
+            <th colSpan="2" className="pre-line" id="prev_act_mmis_total">
               {t('labels.grandTotal', i18nBase)}
             </th>
           </tr>
           <tr>
-            <th />
-            <th className="bg-aqua-light">{t('labels.approved', i18nBase)}</th>
-            <th className={borderClass(-1)}>{t('labels.actual', i18nBase)}</th>
-            <th className="bg-aqua-light">{t('labels.approved', i18nBase)}</th>
-            <th>{t('labels.actual', i18nBase)}</th>
-            <th className="bg-aqua-light">{t('labels.approved', i18nBase)}</th>
-            <th className={borderClass(-1)}>{t('labels.actual', i18nBase)}</th>
-            <th className="bg-aqua-light">{t('labels.approved', i18nBase)}</th>
-            <th>{t('labels.actual', i18nBase)}</th>
-            <th className="bg-aqua-light">{t('labels.approved', i18nBase)}</th>
-            <th className={borderClass(-1)}>{t('labels.actual', i18nBase)}</th>
-            <th className="bg-aqua-light">{t('labels.approved', i18nBase)}</th>
-            <th>{t('labels.actual', i18nBase)}</th>
-            <th className="bg-aqua-light">{t('labels.approved', i18nBase)}</th>
-            <th>{t('labels.actual', i18nBase)}</th>
+            <th id="prev_act_mmis_null3" />
+
+            <th id="prev_act_mmis_fed90approved" className="bg-aqua-light">
+              {t('labels.approved', i18nBase)}
+            </th>
+            <th id="prev_act_mmis_fed90actual" className={borderClass(-1)}>
+              {t('labels.actual', i18nBase)}
+            </th>
+            <th id="prev_act_mmis_state10approved" className="bg-aqua-light">
+              {t('labels.approved', i18nBase)}
+            </th>
+            <th id="prev_act_mmis_state10actual">
+              {t('labels.actual', i18nBase)}
+            </th>
+
+            <th id="prev_act_mmis_fed75approved" className="bg-aqua-light">
+              {t('labels.approved', i18nBase)}
+            </th>
+            <th id="prev_act_mmis_fed75actual" className={borderClass(-1)}>
+              {t('labels.actual', i18nBase)}
+            </th>
+            <th id="prev_act_mmis_state25approved" className="bg-aqua-light">
+              {t('labels.approved', i18nBase)}
+            </th>
+            <th id="prev_act_mmis_state25actual">
+              {t('labels.actual', i18nBase)}
+            </th>
+
+            <th id="prev_act_mmis_fed50approved" className="bg-aqua-light">
+              {t('labels.approved', i18nBase)}
+            </th>
+            <th id="prev_act_mmis_fed50actual" className={borderClass(-1)}>
+              {t('labels.actual', i18nBase)}
+            </th>
+            <th id="prev_act_mmis_state50approved" className="bg-aqua-light">
+              {t('labels.approved', i18nBase)}
+            </th>
+            <th id="prev_act_mmis_state50actual">
+              {t('labels.actual', i18nBase)}
+            </th>
+
+            <th id="prev_act_mmis_totalApproved" className="bg-aqua-light">
+              {t('labels.approved', i18nBase)}
+            </th>
+            <th id="prev_act_mmis_totalActual">
+              {t('labels.actual', i18nBase)}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -92,11 +128,13 @@ const ApdPreviousActivityTableMMIS = ({
 
             return (
               <tr key={year} className="align-middle">
-                <th>{t('ffy', { year })}</th>
+                <th id={`prev_act_mmis_row_${year}`}>{t('ffy', { year })}</th>
                 {[[90, 10], [75, 25], [50, 50]].map(
                   ([federalShare, stateShare]) => (
                     <Fragment key={`${federalShare}-${stateShare}`}>
-                      <td>
+                      <td
+                        headers={`prev_act_mmis_row_${year} prev_act_mmis_header prev_act_mmis_federal${federalShare} prev_act_mmis_fed${federalShare}approved`}
+                      >
                         <DollarInput
                           name={`approved-federal${federalShare}-mmis-${year}`}
                           label={`approved federal ${federalShare}% share for mmis, FFY ${year}`}
@@ -115,7 +153,9 @@ const ApdPreviousActivityTableMMIS = ({
                           )}
                         />
                       </td>
-                      <td>
+                      <td
+                        headers={`prev_act_mmis_row_${year} prev_act_mmis_header prev_act_mmis_federal${federalShare} prev_act_mmis_fed${federalShare}actual`}
+                      >
                         <DollarInput
                           name={`actual-federal${federalShare}-mmis-${year}`}
                           label={`actual federal ${federalShare}% share for mmis, FFY ${year}`}
@@ -134,7 +174,9 @@ const ApdPreviousActivityTableMMIS = ({
                           )}
                         />
                       </td>
-                      <td>
+                      <td
+                        headers={`prev_act_mmis_row_${year} prev_act_mmis_header prev_act_mmis_state${stateShare} prev_act_mmis_state${stateShare}approved`}
+                      >
                         <DollarInput
                           name={`approved-state${stateShare}-mmis-${year}`}
                           label={`approved state ${stateShare}% share for mmis, FFY ${year}`}
@@ -153,7 +195,9 @@ const ApdPreviousActivityTableMMIS = ({
                           )}
                         />
                       </td>
-                      <td>
+                      <td
+                        headers={`prev_act_mmis_row_${year} prev_act_mmis_header prev_act_mmis_state${stateShare} prev_act_mmis_state${stateShare}actual`}
+                      >
                         <DollarInput
                           name={`actual-state${stateShare}-mmis-${year}`}
                           label={`actual state ${stateShare}% share for mmis, FFY ${year}`}
@@ -175,8 +219,16 @@ const ApdPreviousActivityTableMMIS = ({
                     </Fragment>
                   )
                 )}
-                <td>{formatMoney(total.approved)}</td>
-                <td>{formatMoney(total.actual)}</td>
+                <td
+                  headers={`prev_act_mmis_row_${year} prev_act_mmis_header prev_act_mmis_total prev_act_mmis_totalApproved`}
+                >
+                  {formatMoney(total.approved)}
+                </td>
+                <td
+                  headers={`prev_act_mmis_row_${year} prev_act_mmis_header prev_act_mmis_total prev_act_mmis_totalActual`}
+                >
+                  {formatMoney(total.actual)}
+                </td>
               </tr>
             );
           })}

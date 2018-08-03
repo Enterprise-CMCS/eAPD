@@ -57,7 +57,7 @@ class DataRow extends Component {
     return (
       <Fragment>
         <tr>
-          <td>
+          <td headers="summary-budget-null1 summary-budget-null2">
             {hasData && (
               <button
                 type="button"
@@ -73,9 +73,24 @@ class DataRow extends Component {
             const val = data[yr];
             return (
               <Fragment key={yr}>
-                <td className="mono right-align">{formatMoney(val.total)}</td>
-                <td className="mono right-align">{formatMoney(val.federal)}</td>
-                <td className="mono right-align">{formatMoney(val.state)}</td>
+                <td
+                  className="mono right-align"
+                  headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-total`}
+                >
+                  {formatMoney(val.total)}
+                </td>
+                <td
+                  className="mono right-align"
+                  headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-federal`}
+                >
+                  {formatMoney(val.federal)}
+                </td>
+                <td
+                  className="mono right-align"
+                  headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-state`}
+                >
+                  {formatMoney(val.state)}
+                </td>
               </Fragment>
             );
           })}
@@ -119,20 +134,33 @@ DataRowGroup.propTypes = {
   entries: PropTypes.array.isRequired
 };
 
-const HeaderRow = ({ title, numberCells }) => (
+const HeaderRow = ({ title, years }) => (
   <tr>
-    <td className="bold">{title}</td>
-    {[...Array(numberCells)].map((_, i) => <td key={i} />)}
+    <td className="bold" headers="summary-budget-null1 summary-budget-null2">
+      {title}
+    </td>
+    {[...years, 'total'].map(yr => (
+      <Fragment>
+        <td
+          key={yr}
+          headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-total`}
+        />
+        <td
+          key={yr}
+          headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-federal`}
+        />
+        <td
+          key={yr}
+          headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-state`}
+        />
+      </Fragment>
+    ))}
   </tr>
 );
 
 HeaderRow.propTypes = {
   title: PropTypes.string.isRequired,
-  numberCells: PropTypes.number
-};
-
-HeaderRow.defaultProps = {
-  numberCells: 12
+  years: PropTypes.array.isRequired
 };
 
 const BudgetSummary = ({ activities, data, years }) => (
@@ -140,62 +168,81 @@ const BudgetSummary = ({ activities, data, years }) => (
     <table className="table-cms table-fixed" style={{ minWidth: 1000 }}>
       <thead>
         <tr>
-          <th style={{ width: 180 }} />
-          {years.map(yr => (
-            <th key={yr} className="center" colSpan="3">
+          <th style={{ width: 180 }} id="summary-budget-null1" />
+          {[...years, 'total'].map(yr => (
+            <th
+              key={yr}
+              className="center"
+              colSpan="3"
+              id={`summary-budget-fy-${yr}`}
+            >
               FFY {yr}
             </th>
           ))}
-          <th className="center" colSpan="3">
-            Total
-          </th>
         </tr>
         <tr>
-          <th />
-          {[...Array(years.length + 1)].map((_, i) => (
-            <Fragment key={i}>
-              <th className="col-4 right-align">Total</th>
-              <th className="col-4 right-align">Federal</th>
-              <th className="col-4 right-align">State</th>
+          <th id="summary-budget-null2" />
+          {[...years, 'total'].map(y => (
+            <Fragment key={y}>
+              <th
+                className="col-4 right-align"
+                id={`summary-budget-fy-${y}-total`}
+              >
+                Total
+              </th>
+              <th
+                className="col-4 right-align"
+                id={`summary-budget-fy-${y}-federal`}
+              >
+                Federal
+              </th>
+              <th
+                className="col-4 right-align"
+                id={`summary-budget-fy-${y}-state`}
+              >
+                State
+              </th>
             </Fragment>
           ))}
         </tr>
       </thead>
       <tbody className="bg-blue-light">
-        <HeaderRow
-          title="HIT activities"
-          numberCells={(years.length + 1) * 3}
-        />
+        <HeaderRow title="HIT activities" years={years} />
         <DataRowGroup data={data.hit} entries={activities.hit} />
       </tbody>
       <tbody className="bg-yellow-light">
-        <HeaderRow
-          title="HIE activities"
-          numberCells={(years.length + 1) * 3}
-        />
+        <HeaderRow title="HIE activities" years={years} />
         <DataRowGroup data={data.hie} entries={activities.hie} />
       </tbody>
       <tbody className="bg-green-light">
-        <HeaderRow
-          title="MMIS activities"
-          numberCells={(years.length + 1) * 3}
-        />
+        <HeaderRow title="MMIS activities" years={years} />
         <DataRowGroup data={data.mmis} entries={activities.mmis} />
       </tbody>
       <tbody>
         <tr className="bold">
-          <td>Project total</td>
+          <td headers="summary-budget-null1 summary-budget-null2">
+            Project total
+          </td>
           {Object.keys(data.combined).map(ffy => {
             const combined = data.combined[ffy];
             return (
               <Fragment key={ffy}>
-                <td className="mono right-align">
+                <td
+                  className="mono right-align"
+                  headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-total`}
+                >
                   {formatMoney(combined.total)}
                 </td>
-                <td className="mono right-align">
+                <td
+                  className="mono right-align"
+                  headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-federal`}
+                >
                   {formatMoney(combined.federal)}
                 </td>
-                <td className="mono right-align">
+                <td
+                  className="mono right-align"
+                  headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-state`}
+                >
                   {formatMoney(combined.state)}
                 </td>
               </Fragment>
