@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the activities cost allocation container component renders correctly 1`] = `
+exports[`the CostAllocate component renders correctly 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ActivityDetailCostAllocate
+  Symbol(enzyme.__unrendered__): <CostAllocate
     activity={
       Object {
         "costAllocationDesc": "cost allocation",
@@ -50,7 +50,7 @@ ShallowWrapper {
             onSync={[Function]}
           />
         </div>,
-        <Connect(ActivityDetailCostAllocateFFP)
+        <Connect(CostAllocateFFP)
           aKey="activity key"
         />,
         <div
@@ -65,7 +65,7 @@ ShallowWrapper {
             reminder="activities.costAllocate.quarterly.reminder"
             text="activities.costAllocate.quarterly.helpText"
           />
-          <Connect(ActivityQuarterlyBudgetSummary)
+          <Connect(CostAllocateFFPQuarterly)
             aKey="activity key"
           />
         </div>,
@@ -182,7 +182,7 @@ ShallowWrapper {
               reminder="activities.costAllocate.quarterly.reminder"
               text="activities.costAllocate.quarterly.helpText"
             />,
-            <Connect(ActivityQuarterlyBudgetSummary)
+            <Connect(CostAllocateFFPQuarterly)
               aKey="activity key"
             />,
           ],
@@ -318,7 +318,7 @@ ShallowWrapper {
               onSync={[Function]}
             />
           </div>,
-          <Connect(ActivityDetailCostAllocateFFP)
+          <Connect(CostAllocateFFP)
             aKey="activity key"
           />,
           <div
@@ -333,7 +333,7 @@ ShallowWrapper {
               reminder="activities.costAllocate.quarterly.reminder"
               text="activities.costAllocate.quarterly.helpText"
             />
-            <Connect(ActivityQuarterlyBudgetSummary)
+            <Connect(CostAllocateFFPQuarterly)
               aKey="activity key"
             />
           </div>,
@@ -450,7 +450,7 @@ ShallowWrapper {
                 reminder="activities.costAllocate.quarterly.reminder"
                 text="activities.costAllocate.quarterly.helpText"
               />,
-              <Connect(ActivityQuarterlyBudgetSummary)
+              <Connect(CostAllocateFFPQuarterly)
                 aKey="activity key"
               />,
             ],

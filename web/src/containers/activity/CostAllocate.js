@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ActivityDetailCostAllocateFFP from './ActivityDetailCostAllocateFFP';
-import ActivityQuarterlyBudgetSummary from './ActivityQuarterlyBudgetSummary';
-import { updateActivity as updateActivityAction } from '../actions/activities';
-import { Subsection } from '../components/Section';
-import { RichText } from '../components/Inputs';
-import HelpText from '../components/HelpText';
-import { t } from '../i18n';
+import CostAllocateFFP from './CostAllocateFFP';
+import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
+import { updateActivity as updateActivityAction } from '../../actions/activities';
+import HelpText from '../../components/HelpText';
+import { RichText } from '../../components/Inputs';
+import { Subsection } from '../../components/Section';
+import { t } from '../../i18n';
 
-const ActivityDetailCostAllocate = props => {
+const CostAllocate = props => {
   const { activity, updateActivity } = props;
   const { costAllocationDesc, otherFundingDesc } = activity;
 
@@ -33,8 +33,7 @@ const ActivityDetailCostAllocate = props => {
           onSync={sync('costAllocationDesc')}
         />
       </div>
-      <ActivityDetailCostAllocateFFP aKey={activity.key} />
-
+      <CostAllocateFFP aKey={activity.key} />
       <div className="mb3">
         <div className="mb-tiny bold">
           {t('activities.costAllocate.quarterly.title')}
@@ -43,9 +42,8 @@ const ActivityDetailCostAllocate = props => {
           text="activities.costAllocate.quarterly.helpText"
           reminder="activities.costAllocate.quarterly.reminder"
         />
-        <ActivityQuarterlyBudgetSummary aKey={activity.key} />
+        <CostAllocateFFPQuarterly aKey={activity.key} />
       </div>
-
       <div className="mb3">
         <div className="mb-tiny bold">
           {t('activities.costAllocate.otherFunding.title')}
@@ -63,7 +61,7 @@ const ActivityDetailCostAllocate = props => {
   );
 };
 
-ActivityDetailCostAllocate.propTypes = {
+CostAllocate.propTypes = {
   activity: PropTypes.object.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
@@ -76,8 +74,5 @@ export const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ActivityDetailCostAllocate
-);
-
-export const raw = ActivityDetailCostAllocate;
+export { CostAllocate as CostAllocateRaw };
+export default connect(mapStateToProps, mapDispatchToProps)(CostAllocate);
