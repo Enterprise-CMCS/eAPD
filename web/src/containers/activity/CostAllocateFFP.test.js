@@ -2,15 +2,14 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
-import { updateActivity } from '../actions/activities';
-
 import {
-  raw as ActivityDetailCostAllocateFFP,
+  CostAllocateFFPRaw as CostAllocateFFP,
   mapStateToProps,
   mapDispatchToProps
-} from './ActivityDetailCostAllocateFFP';
+} from './CostAllocateFFP';
+import { updateActivity } from '../../actions/activities';
 
-describe('the activities cost allocation FFP component', () => {
+describe('the CostAllocateFFP component', () => {
   const sandbox = sinon.createSandbox();
 
   const state = {
@@ -97,12 +96,12 @@ describe('the activities cost allocation FFP component', () => {
   });
 
   test('renders correctly', () => {
-    const component = shallow(<ActivityDetailCostAllocateFFP {...props} />);
+    const component = shallow(<CostAllocateFFP {...props} />);
     expect(component).toMatchSnapshot();
   });
 
   test('handles changes to other funding', () => {
-    const component = shallow(<ActivityDetailCostAllocateFFP {...props} />);
+    const component = shallow(<CostAllocateFFP {...props} />);
     component
       .find('InputHolder')
       .filterWhere(n => n.props().value === 10)
@@ -118,7 +117,7 @@ describe('the activities cost allocation FFP component', () => {
   });
 
   test('handles changes to cost allocation dropdown', () => {
-    const component = shallow(<ActivityDetailCostAllocateFFP {...props} />);
+    const component = shallow(<CostAllocateFFP {...props} />);
     component
       .find('Select')
       .filterWhere(n => n.props().value === '90-10')

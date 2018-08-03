@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import Activities from './activity/All';
 import AssurancesAndCompliance from './AssurancesAndCompliance';
-import Activities from './Activities';
 import ApdSummary from './ApdSummary';
 import CertifyAndSubmit from './CertifyAndSubmit';
 import ExecutiveSummary from './ExecutiveSummary';

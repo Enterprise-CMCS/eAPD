@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the Activities details container component renders correctly 1`] = `
+exports[`the (Activity) EntryDetails component renders correctly 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ActivityDetailAll
+  Symbol(enzyme.__unrendered__): <EntryDetails
     aKey="activity-key"
     expanded={false}
     num={3}
@@ -29,28 +29,28 @@ ShallowWrapper {
       "btnColor": "white",
       "children": Array [
         Array [
-          <Connect(ActivityDetailDescription)
+          <Connect(Description)
             aKey="activity-key"
           />,
-          <Connect(ActivityDetailGoals)
+          <Connect(Goals)
             aKey="activity-key"
           />,
-          <Connect(ActivityDetailSchedule)
+          <Connect(Schedule)
             aKey="activity-key"
           />,
-          <Connect(ActivityDetailStatePersonnel)
+          <Connect(StatePersonnel)
             aKey="activity-key"
           />,
-          <Connect(ContractorExpenses)
+          <Connect(ContractorResources)
             aKey="activity-key"
           />,
-          <Connect(ActivityDetailExpenses)
+          <Connect(Expenses)
             aKey="activity-key"
           />,
-          <Connect(ActivityDetailCostAllocate)
+          <Connect(CostAllocate)
             aKey="activity-key"
           />,
-          <Connect(ActivityDetailStandardsAndConditions)
+          <Connect(StandardsAndConditions)
             aKey="activity-key"
           />,
         ],
@@ -181,28 +181,28 @@ ShallowWrapper {
         "btnColor": "white",
         "children": Array [
           Array [
-            <Connect(ActivityDetailDescription)
+            <Connect(Description)
               aKey="activity-key"
             />,
-            <Connect(ActivityDetailGoals)
+            <Connect(Goals)
               aKey="activity-key"
             />,
-            <Connect(ActivityDetailSchedule)
+            <Connect(Schedule)
               aKey="activity-key"
             />,
-            <Connect(ActivityDetailStatePersonnel)
+            <Connect(StatePersonnel)
               aKey="activity-key"
             />,
-            <Connect(ContractorExpenses)
+            <Connect(ContractorResources)
               aKey="activity-key"
             />,
-            <Connect(ActivityDetailExpenses)
+            <Connect(Expenses)
               aKey="activity-key"
             />,
-            <Connect(ActivityDetailCostAllocate)
+            <Connect(CostAllocate)
               aKey="activity-key"
             />,
-            <Connect(ActivityDetailStandardsAndConditions)
+            <Connect(StandardsAndConditions)
               aKey="activity-key"
             />,
           ],

@@ -2,15 +2,14 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
-import { updateActivity } from '../actions/activities';
-
 import {
-  raw as ActivityDetailCostAllocate,
+  CostAllocateRaw as CostAllocate,
   mapStateToProps,
   mapDispatchToProps
-} from './ActivityDetailCostAllocate';
+} from './CostAllocate';
+import { updateActivity } from '../../actions/activities';
 
-describe('the activities cost allocation container component', () => {
+describe('the CostAllocate component', () => {
   const sandbox = sinon.createSandbox();
   const props = {
     activity: {
@@ -28,12 +27,12 @@ describe('the activities cost allocation container component', () => {
   });
 
   test('renders correctly', () => {
-    const component = shallow(<ActivityDetailCostAllocate {...props} />);
+    const component = shallow(<CostAllocate {...props} />);
     expect(component).toMatchSnapshot();
   });
 
   test('updates activity when text is changed', () => {
-    const component = shallow(<ActivityDetailCostAllocate {...props} />);
+    const component = shallow(<CostAllocate {...props} />);
 
     component
       .find('RichText')

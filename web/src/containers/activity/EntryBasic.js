@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import {
   removeActivity as removeActivityAction,
   updateActivity as updateActivityAction
-} from '../actions/activities';
-import DeleteButton from '../components/DeleteConfirm';
-import { Input } from '../components/Inputs';
-import { ACTIVITY_FUNDING_SOURCES } from '../util';
+} from '../../actions/activities';
+import DeleteButton from '../../components/DeleteConfirm';
+import { Input } from '../../components/Inputs';
+import { ACTIVITY_FUNDING_SOURCES } from '../../util';
 
-class ActivityListEntry extends Component {
+class EntryBasic extends Component {
   handleChange = field => e => {
     const { activity, updateActivity } = this.props;
     updateActivity(
@@ -63,7 +63,7 @@ class ActivityListEntry extends Component {
   }
 }
 
-ActivityListEntry.propTypes = {
+EntryBasic.propTypes = {
   activity: PropTypes.object.isRequired,
   num: PropTypes.number.isRequired,
   removeActivity: PropTypes.func.isRequired,
@@ -79,4 +79,4 @@ const mapDispatchToProps = {
   removeActivity: removeActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActivityListEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(EntryBasic);

@@ -6,19 +6,19 @@ import {
   addActivityStatePerson,
   removeActivityStatePerson,
   updateActivity as updateActivityAction
-} from '../actions/activities';
-import Btn from '../components/Btn';
-import NoDataMsg from '../components/NoDataMsg';
+} from '../../actions/activities';
+import Btn from '../../components/Btn';
 import {
   Input,
   DollarInput,
   PercentInput,
   Textarea
-} from '../components/Inputs';
-import { Subsection } from '../components/Section';
-import { t } from '../i18n';
+} from '../../components/Inputs';
+import NoDataMsg from '../../components/NoDataMsg';
+import { Subsection } from '../../components/Section';
+import { t } from '../../i18n';
 
-class ActivityDetailStatePersonnel extends Component {
+class StatePersonnel extends Component {
   handleChange = (index, field, year) => e => {
     const { checked, type, value } = e.target;
     const valueNorm = type === 'checkbox' ? checked : value;
@@ -186,7 +186,7 @@ class ActivityDetailStatePersonnel extends Component {
   }
 }
 
-ActivityDetailStatePersonnel.propTypes = {
+StatePersonnel.propTypes = {
   activity: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
   addPerson: PropTypes.func.isRequired,
@@ -205,6 +205,4 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ActivityDetailStatePersonnel
-);
+export default connect(mapStateToProps, mapDispatchToProps)(StatePersonnel);

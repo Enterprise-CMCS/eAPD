@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../i18n';
-import { updateActivity as updateActivityAction } from '../actions/activities';
-import { Subsection } from '../components/Section';
-import { Textarea } from '../components/Inputs';
-import HelpText from '../components/HelpText';
-import { STANDARDS } from '../util';
+import { updateActivity as updateActivityAction } from '../../actions/activities';
+import HelpText from '../../components/HelpText';
+import { Textarea } from '../../components/Inputs';
+import { Subsection } from '../../components/Section';
+import { t } from '../../i18n';
+import { STANDARDS } from '../../util';
 
-class ActivityDetailStandardsAndConditions extends Component {
+class StandardsAndConditions extends Component {
   handleChange = field => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
@@ -49,7 +49,7 @@ class ActivityDetailStandardsAndConditions extends Component {
   }
 }
 
-ActivityDetailStandardsAndConditions.propTypes = {
+StandardsAndConditions.propTypes = {
   activity: PropTypes.object.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
@@ -63,5 +63,5 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  ActivityDetailStandardsAndConditions
+  StandardsAndConditions
 );

@@ -2,17 +2,17 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../i18n';
 import {
   addActivityGoal as addActivityGoalAction,
   removeActivityGoal as removeActivityGoalAction,
   updateActivity as updateActivityAction
-} from '../actions/activities';
-import Btn from '../components/Btn';
-import { Subsection, SubsectionChunk } from '../components/Section';
-import { RichText } from '../components/Inputs';
+} from '../../actions/activities';
+import Btn from '../../components/Btn';
+import { RichText } from '../../components/Inputs';
+import { Subsection, SubsectionChunk } from '../../components/Section';
+import { t } from '../../i18n';
 
-class ActivityDetailGoals extends Component {
+class Goals extends Component {
   handleSync = (index, field) => html => {
     const { activity, updateActivity } = this.props;
     const updates = { goals: { [index]: { [field]: html } } };
@@ -74,7 +74,7 @@ class ActivityDetailGoals extends Component {
   }
 }
 
-ActivityDetailGoals.propTypes = {
+Goals.propTypes = {
   activity: PropTypes.object.isRequired,
   addActivityGoal: PropTypes.func.isRequired,
   removeActivityGoal: PropTypes.func.isRequired,
@@ -91,6 +91,4 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ActivityDetailGoals
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Goals);

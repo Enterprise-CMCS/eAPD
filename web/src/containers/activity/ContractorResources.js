@@ -8,14 +8,14 @@ import {
   removeActivityContractor,
   toggleActivityContractorHourly,
   updateActivity as updateActivityAction
-} from '../actions/activities';
-import Btn from '../components/Btn';
-import DeleteButton from '../components/DeleteConfirm';
-import { Input, DollarInput, Textarea } from '../components/Inputs';
-import NoDataMsg from '../components/NoDataMsg';
-import { Subsection } from '../components/Section';
-import Select from '../components/Select';
-import { t } from '../i18n';
+} from '../../actions/activities';
+import Btn from '../../components/Btn';
+import DeleteButton from '../../components/DeleteConfirm';
+import { Input, DollarInput, Textarea } from '../../components/Inputs';
+import NoDataMsg from '../../components/NoDataMsg';
+import { Subsection } from '../../components/Section';
+import Select from '../../components/Select';
+import { t } from '../../i18n';
 
 const Label = props => (
   <h3 className="md-col-2 my-tiny pr1 h5">{props.children}</h3>
@@ -27,7 +27,7 @@ Label.propTypes = {
 
 const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
 
-class ContractorExpenses extends Component {
+class ContractorResources extends Component {
   state = { docType: DOC_TYPES[0] };
 
   updateDocType = e => {
@@ -338,7 +338,7 @@ class ContractorExpenses extends Component {
   }
 }
 
-ContractorExpenses.propTypes = {
+ContractorResources.propTypes = {
   activity: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
   addContractor: PropTypes.func.isRequired,
@@ -359,6 +359,7 @@ export const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export { ContractorExpenses as raw };
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContractorExpenses);
+export { ContractorResources as ContractorResourcesRaw };
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ContractorResources
+);
