@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { updateActivity as updateActivityAction } from '../actions/activities';
-import { Subsection, SubsectionChunk } from '../components/Section';
-import { Textarea, RichText } from '../components/Inputs';
+import { updateActivity as updateActivityAction } from '../../actions/activities';
+import { RichText, Textarea } from '../../components/Inputs';
+import { Subsection, SubsectionChunk } from '../../components/Section';
 
-const ActivityDetailDescription = props => {
+const Description = props => {
   const { activity, updateActivity } = props;
   const { descLong, altApproach } = activity;
 
@@ -52,9 +52,8 @@ const ActivityDetailDescription = props => {
     </Subsection>
   );
 };
-// }
 
-ActivityDetailDescription.propTypes = {
+Description.propTypes = {
   activity: PropTypes.object.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
@@ -67,6 +66,4 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ActivityDetailDescription
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Description);

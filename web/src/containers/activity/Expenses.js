@@ -6,15 +6,15 @@ import {
   addActivityExpense,
   removeActivityExpense,
   updateActivity as updateActivityAction
-} from '../actions/activities';
-import Btn from '../components/Btn';
-import NoDataMsg from '../components/NoDataMsg';
-import { DollarInput, Textarea } from '../components/Inputs';
-import { Subsection } from '../components/Section';
-import Select from '../components/Select';
-import { t } from '../i18n';
+} from '../../actions/activities';
+import Btn from '../../components/Btn';
+import NoDataMsg from '../../components/NoDataMsg';
+import { DollarInput, Textarea } from '../../components/Inputs';
+import { Subsection } from '../../components/Section';
+import Select from '../../components/Select';
+import { t } from '../../i18n';
 
-class ActivityDetailExpenses extends Component {
+class Expenses extends Component {
   handleChange = (index, field) => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
@@ -118,7 +118,7 @@ class ActivityDetailExpenses extends Component {
   }
 }
 
-ActivityDetailExpenses.propTypes = {
+Expenses.propTypes = {
   activity: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
   addExpense: PropTypes.func.isRequired,
@@ -137,6 +137,4 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ActivityDetailExpenses
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Expenses);

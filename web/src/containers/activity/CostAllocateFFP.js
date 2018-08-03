@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateActivity as updateActivityAction } from '../actions/activities';
-import { DollarInput } from '../components/Inputs';
-import Select from '../components/Select';
-import { t } from '../i18n';
-import { getActivityTotals } from '../reducers/activities';
-import { titleCase } from '../util';
-import { formatMoney } from '../util/formats';
+import { updateActivity as updateActivityAction } from '../../actions/activities';
+import { DollarInput } from '../../components/Inputs';
+import Select from '../../components/Select';
+import { t } from '../../i18n';
+import { getActivityTotals } from '../../reducers/activities';
+import { titleCase } from '../../util';
+import { formatMoney } from '../../util/formats';
 
-class ActivityDetailCostAllocateFFP extends Component {
+class CostAllocateFFP extends Component {
   handleOther = year => e => {
     const { aKey, updateActivity } = this.props;
     const { value } = e.target;
@@ -82,7 +82,7 @@ class ActivityDetailCostAllocateFFP extends Component {
   }
 }
 
-ActivityDetailCostAllocateFFP.propTypes = {
+CostAllocateFFP.propTypes = {
   aKey: PropTypes.string.isRequired,
   byYearData: PropTypes.array.isRequired,
   costAllocation: PropTypes.object.isRequired,
@@ -115,8 +115,5 @@ export const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ActivityDetailCostAllocateFFP
-);
-
-export const raw = ActivityDetailCostAllocateFFP;
+export { CostAllocateFFP as CostAllocateFFPRaw };
+export default connect(mapStateToProps, mapDispatchToProps)(CostAllocateFFP);

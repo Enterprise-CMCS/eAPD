@@ -2,9 +2,9 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
-import { raw as Activities, mapStateToProps } from './Activities';
+import { AllRaw as Activities, mapStateToProps } from './All';
 
-describe('the Activities list component', () => {
+describe('the Activities component', () => {
   const props = {
     activityKeys: ['1', '2', '3'],
     addActivity: sinon.stub()
