@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
-import { Input } from '../components/Inputs';
+import { Textarea } from '../components/Inputs';
 import { Section, Subsection } from '../components/Section';
 import regLinks from '../data/assurancesAndCompliance.yaml';
 import { t } from '../i18n';
@@ -11,99 +11,111 @@ import { t } from '../i18n';
 const yes = t('assurancesAndCompliance.formLabels._yes');
 const no = t('assurancesAndCompliance.formLabels._no');
 
-const AssurancesAndCompliance = ({ sections: apdSections, updateApd }) => {
-  const handleCheckChange = (section, index, newValue) => () => {
-    updateApd({
+const namify = (name, title) =>
+  `explanation-${name}-${title}`.replace(/\s/g, '_');
+
+const LinkOrText = ({ link, title }) => {
+  if (!link) return title;
+
+  return (
+    <a href={link} target="_blank">
+      {title}
+    </a>
+  );
+};
+
+LinkOrText.propTypes = {
+  link: PropTypes.string,
+  title: PropTypes.string.isRequired
+};
+
+LinkOrText.defaultProps = {
+  link: null
+};
+
+class AssurancesAndCompliance extends Component {
+  handleCheckChange = (section, index, newValue) => () => {
+    this.props.updateApd({
       assurancesAndCompliance: { [section]: { [index]: { checked: newValue } } }
     });
   };
 
-  const handleExplanationChange = (section, index) => e => {
-    updateApd({
+  handleExplanationChange = (section, index) => e => {
+    this.props.updateApd({
       assurancesAndCompliance: {
         [section]: { [index]: { explanation: e.target.value } }
       }
     });
   };
 
-  return (
-    <Section id="assurances-compliance" resource="assurancesAndCompliance">
-      <Subsection
-        id="assurances-compliance-fed-citations"
-        resource="assurancesAndCompliance.citations"
-      >
-        <table>
-          <tbody>
-            {Object.entries(regLinks).map(([name, regulations]) => (
-              <Fragment key={name}>
-                <tr>
-                  <td colSpan="4">
-                    <h3>{t(`assurancesAndCompliance.headers.${name}`)}</h3>
-                  </td>
-                </tr>
+  render() {
+    const { sections: apdSections } = this.props;
 
-                {apdSections[name].map(
-                  ({ title, checked, explanation }, index) => {
-                    const link = regulations[title];
-                    return (
-                      <tr key={title} style={{ height: '4.5em' }}>
-                        <td style={{ width: '40%' }}>
-                          {link ? (
-                            <a href={link} target="_blank">
-                              {title}
-                            </a>
-                          ) : (
-                            title
-                          )}
-                        </td>
-                        <td style={{ width: 1 }}>
-                          <label className="mr1">
-                            <input
-                              type="radio"
-                              value={yes}
-                              checked={checked}
-                              onChange={handleCheckChange(name, index, true)}
-                            />
-                            {yes}
-                          </label>
-                        </td>
-                        <td style={{ width: 1 }}>
-                          <label className="mr1">
-                            <input
-                              type="radio"
-                              value={no}
-                              checked={!checked}
-                              onChange={handleCheckChange(name, index, false)}
-                            />
-                            {no}
-                          </label>
-                        </td>
-                        <td>
-                          {checked || (
-                            <Input
-                              name={`explanation-${name}-${title}`.replace(
-                                /\s/g,
-                                '_'
-                              )}
-                              label={`explanation for why you do not comply with ${title}`}
-                              hideLabel
-                              value={explanation}
-                              onChange={handleExplanationChange(name, index)}
-                            />
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
-              </Fragment>
-            ))}
-          </tbody>
-        </table>
-      </Subsection>
-    </Section>
-  );
-};
+    return (
+      <Section id="assurances-compliance" resource="assurancesAndCompliance">
+        <Subsection
+          id="assurances-compliance-fed-citations"
+          resource="assurancesAndCompliance.citations"
+        >
+          {Object.entries(regLinks).map(([name, regulations]) => (
+            <div key={name} className="mb3">
+              <h3>{t(`assurancesAndCompliance.headers.${name}`)}</h3>
+              {apdSections[name].map(
+                ({ title, checked, explanation }, index) => (
+                  <div key={title} className="mt2">
+                    <div className="mb-tiny flex items-center justify-between">
+                      <div>
+                        <LinkOrText link={regulations[title]} title={title} />
+                      </div>
+                      <div>
+                        <label className="mr1">
+                          <input
+                            type="radio"
+                            value={yes}
+                            checked={checked}
+                            onChange={this.handleCheckChange(name, index, true)}
+                          />
+                          {yes}
+                        </label>
+                        <label>
+                          <input
+                            type="radio"
+                            value={no}
+                            checked={!checked}
+                            onChange={this.handleCheckChange(
+                              name,
+                              index,
+                              false
+                            )}
+                          />
+                          {no}
+                        </label>
+                      </div>
+                    </div>
+                    {checked ? (
+                      <hr className="my2 border-grey" />
+                    ) : (
+                      <div>
+                        <Textarea
+                          name={namify(name, title)}
+                          label={`Explanation for why you do not comply with ${title}`}
+                          placeholder="Please explain..."
+                          hideLabel
+                          value={explanation}
+                          onChange={this.handleExplanationChange(name, index)}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )
+              )}
+            </div>
+          ))}
+        </Subsection>
+      </Section>
+    );
+  }
+}
 
 AssurancesAndCompliance.propTypes = {
   sections: PropTypes.object.isRequired,

@@ -1,0 +1,458 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Activities component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <All
+    activityKeys={
+      Array [
+        "1",
+        "2",
+        "3",
+      ]
+    }
+    addActivity={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <Subsection
+          id="activities-list"
+          open={true}
+          resource="activities.list"
+        >
+          <div
+            className="mb3"
+          >
+            <Connect(EntryBasic)
+              aKey="1"
+              num={1}
+            />
+            <Connect(EntryBasic)
+              aKey="2"
+              num={2}
+            />
+            <Connect(EntryBasic)
+              aKey="3"
+              num={3}
+            />
+          </div>
+          <Btn
+            extraCss={null}
+            kind="primary"
+            onClick={[Function]}
+            size={null}
+          >
+            Add activity
+          </Btn>
+        </Subsection>,
+        Array [
+          <Connect(EntryDetails)
+            aKey="1"
+            num={1}
+          />,
+          <Connect(EntryDetails)
+            aKey="2"
+            num={2}
+          />,
+          <Connect(EntryDetails)
+            aKey="3"
+            num={3}
+          />,
+        ],
+      ],
+      "id": "activities",
+      "resource": "activities",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <div
+              className="mb3"
+            >
+              <Connect(EntryBasic)
+                aKey="1"
+                num={1}
+              />
+              <Connect(EntryBasic)
+                aKey="2"
+                num={2}
+              />
+              <Connect(EntryBasic)
+                aKey="3"
+                num={3}
+              />
+            </div>,
+            <Btn
+              extraCss={null}
+              kind="primary"
+              onClick={[Function]}
+              size={null}
+            >
+              Add activity
+            </Btn>,
+          ],
+          "id": "activities-list",
+          "open": true,
+          "resource": "activities.list",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <Connect(EntryBasic)
+                  aKey="1"
+                  num={1}
+                />,
+                <Connect(EntryBasic)
+                  aKey="2"
+                  num={2}
+                />,
+                <Connect(EntryBasic)
+                  aKey="3"
+                  num={3}
+                />,
+              ],
+              "className": "mb3",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": "1",
+                "nodeType": "class",
+                "props": Object {
+                  "aKey": "1",
+                  "num": 1,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": "2",
+                "nodeType": "class",
+                "props": Object {
+                  "aKey": "2",
+                  "num": 2,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": "3",
+                "nodeType": "class",
+                "props": Object {
+                  "aKey": "3",
+                  "num": 3,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": "Add activity",
+              "extraCss": null,
+              "kind": "primary",
+              "onClick": [Function],
+              "size": null,
+            },
+            "ref": null,
+            "rendered": "Add activity",
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "1",
+        "nodeType": "class",
+        "props": Object {
+          "aKey": "1",
+          "num": 1,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "2",
+        "nodeType": "class",
+        "props": Object {
+          "aKey": "2",
+          "num": 2,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "3",
+        "nodeType": "class",
+        "props": Object {
+          "aKey": "3",
+          "num": 3,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <Subsection
+            id="activities-list"
+            open={true}
+            resource="activities.list"
+          >
+            <div
+              className="mb3"
+            >
+              <Connect(EntryBasic)
+                aKey="1"
+                num={1}
+              />
+              <Connect(EntryBasic)
+                aKey="2"
+                num={2}
+              />
+              <Connect(EntryBasic)
+                aKey="3"
+                num={3}
+              />
+            </div>
+            <Btn
+              extraCss={null}
+              kind="primary"
+              onClick={[Function]}
+              size={null}
+            >
+              Add activity
+            </Btn>
+          </Subsection>,
+          Array [
+            <Connect(EntryDetails)
+              aKey="1"
+              num={1}
+            />,
+            <Connect(EntryDetails)
+              aKey="2"
+              num={2}
+            />,
+            <Connect(EntryDetails)
+              aKey="3"
+              num={3}
+            />,
+          ],
+        ],
+        "id": "activities",
+        "resource": "activities",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <div
+                className="mb3"
+              >
+                <Connect(EntryBasic)
+                  aKey="1"
+                  num={1}
+                />
+                <Connect(EntryBasic)
+                  aKey="2"
+                  num={2}
+                />
+                <Connect(EntryBasic)
+                  aKey="3"
+                  num={3}
+                />
+              </div>,
+              <Btn
+                extraCss={null}
+                kind="primary"
+                onClick={[Function]}
+                size={null}
+              >
+                Add activity
+              </Btn>,
+            ],
+            "id": "activities-list",
+            "open": true,
+            "resource": "activities.list",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <Connect(EntryBasic)
+                    aKey="1"
+                    num={1}
+                  />,
+                  <Connect(EntryBasic)
+                    aKey="2"
+                    num={2}
+                  />,
+                  <Connect(EntryBasic)
+                    aKey="3"
+                    num={3}
+                  />,
+                ],
+                "className": "mb3",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": "1",
+                  "nodeType": "class",
+                  "props": Object {
+                    "aKey": "1",
+                    "num": 1,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": "2",
+                  "nodeType": "class",
+                  "props": Object {
+                    "aKey": "2",
+                    "num": 2,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": "3",
+                  "nodeType": "class",
+                  "props": Object {
+                    "aKey": "3",
+                    "num": 3,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": "Add activity",
+                "extraCss": null,
+                "kind": "primary",
+                "onClick": [Function],
+                "size": null,
+              },
+              "ref": null,
+              "rendered": "Add activity",
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "1",
+          "nodeType": "class",
+          "props": Object {
+            "aKey": "1",
+            "num": 1,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "2",
+          "nodeType": "class",
+          "props": Object {
+            "aKey": "2",
+            "num": 2,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "3",
+          "nodeType": "class",
+          "props": Object {
+            "aKey": "3",
+            "num": 3,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
