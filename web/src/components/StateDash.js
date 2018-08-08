@@ -40,21 +40,53 @@ Events.propTypes = {
 };
 
 const StatusEntry = () => (
-  <div className="sm-flex items-center mb2">
-    <div className="sm-col-2">
-      <div className="bold">2018 IAPD-U</div>
+  <div>
+    <div className="sm-flex items-center mb2">
+      <div className="sm-col-2">
+        <div className="bold">2018 IAPD-U</div>
+      </div>
+      <div className="sm-col-8 progress-bar-basic">
+        <div className="dot complete" />
+        <div className="bar complete" />
+        <div className="dot complete" />
+        <div className="bar" />
+        <div className="dot" />
+      </div>
+      <div className="sm-col-2 sm-right-align">
+        <Btn>View</Btn>
+      </div>
     </div>
-    <div className="sm-col-8 progress-bar-basic">
-      <div className="dot complete" />
-      <div className="bar complete" />
-      <div className="dot complete" />
-      <div className="bar" />
-      <div className="dot" />
+    <div className="sm-flex items-center mb2">
+      <div className="sm-col-2">
+        <div className="bold">Contract</div>
+      </div>
+      <div className="sm-col-8 progress-bar-basic">
+        <div className="dot" />
+        <div className="bar" />
+        <div className="dot" />
+        <div className="bar" />
+        <div className="dot" />
+      </div>
+      <div className="sm-col-2 sm-right-align">
+        <Btn>View</Btn>
+      </div>
     </div>
-    <div className="sm-col-2 sm-right-align">
-      <Btn>View</Btn>
+    <div className="sm-flex items-center mb2">
+      <div className="sm-col-2">
+        <div className="bold">Contract Amendment</div>
+      </div>
+      <div className="sm-col-8 progress-bar-basic">
+        <div className="dot complete" />
+        <div className="bar complete" />
+        <div className="dot complete" />
+        <div className="bar complete" />
+        <div className="dot complete" />
+      </div>
+      <div className="sm-col-2 sm-right-align">
+        <Btn>View</Btn>
+      </div>
     </div>
-  </div>  
+  </div>
 );
 
 const TaskTable = () => (
@@ -103,12 +135,12 @@ const StateDash = () => (
     </Collapsible>
     <Collapsible title="Current statuses" open>
       <StatusEntry />
-      <StatusEntry />
-      <StatusEntry />
     </Collapsible>
     <div className="sm-flex mxn2">
       <div className="sm-col-6 px2">
         <Collapsible title="Recent activity" open>
+          <ActivityEntry />
+          <ActivityEntry />
           <ActivityEntry />
         </Collapsible>
       </div>
