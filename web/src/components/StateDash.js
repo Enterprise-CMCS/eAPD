@@ -54,37 +54,7 @@ const StatusEntry = () => (
     <div className="sm-col-2 sm-right-align">
       <Btn>View</Btn>
     </div>
-  </div>
-  <div className="sm-flex items-center mb2">
-    <div className="sm-col-2">
-      <div className="bold">Contract</div>
-    </div>
-    <div className="sm-col-8 progress-bar-basic">
-      <div className="dot" />
-      <div className="bar" />
-      <div className="dot" />
-      <div className="bar" />
-      <div className="dot" />
-    </div>
-    <div className="sm-col-2 sm-right-align">
-      <Btn>View</Btn>
-    </div>
-  </div>
-  <div className="sm-flex items-center mb2">
-    <div className="sm-col-2">
-      <div className="bold">Contract Amendment</div>
-    </div>
-    <div className="sm-col-8 progress-bar-basic">
-      <div className="dot complete" />
-      <div className="bar complete" />
-      <div className="dot complete" />
-      <div className="bar complete" />
-      <div className="dot complete" />
-    </div>
-    <div className="sm-col-2 sm-right-align">
-      <Btn>View</Btn>
-    </div>
-  </div>
+  </div>  
 );
 
 const TaskTable = () => (
