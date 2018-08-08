@@ -94,7 +94,7 @@ const TaskTable = () => (
     <thead>
       <tr>
         <th className="col-2">Document type</th>
-        <th className="col-2">Priority</th>
+        <th className="col-2">Name</th>
         <th className="col-4">Status</th>
         <th className="col-2">Due date</th>
         <th className="col-2">Action</th>
@@ -103,9 +103,9 @@ const TaskTable = () => (
     <tbody>
       <tr className="align-middle">
         <td>APD</td>
-        <td>High</td>
-        <td>Awaiting state response</td>
-        <td>ASAP</td>
+        <td>Annual Update</td>
+        <td>Awaiting State Response</td>
+        <td>09/10/2018</td>
         <td>
           <Btn size="small" extraCss="col-12">
             Respond
@@ -114,7 +114,7 @@ const TaskTable = () => (
       </tr>
       <tr className="align-middle">
         <td>Contract</td>
-        <td>Medium</td>
+        <td>Vendor Inc.</td>
         <td>Pending Submission to CMS</td>
         <td>ASAP</td>
         <td>
