@@ -55,6 +55,36 @@ const StatusEntry = () => (
       <Btn>View</Btn>
     </div>
   </div>
+  <div className="sm-flex items-center mb2">
+    <div className="sm-col-2">
+      <div className="bold">Contract</div>
+    </div>
+    <div className="sm-col-8 progress-bar-basic">
+      <div className="dot" />
+      <div className="bar" />
+      <div className="dot" />
+      <div className="bar" />
+      <div className="dot" />
+    </div>
+    <div className="sm-col-2 sm-right-align">
+      <Btn>View</Btn>
+    </div>
+  </div>
+  <div className="sm-flex items-center mb2">
+    <div className="sm-col-2">
+      <div className="bold">Contract Amendment</div>
+    </div>
+    <div className="sm-col-8 progress-bar-basic">
+      <div className="dot complete" />
+      <div className="bar complete" />
+      <div className="dot complete" />
+      <div className="bar complete" />
+      <div className="dot complete" />
+    </div>
+    <div className="sm-col-2 sm-right-align">
+      <Btn>View</Btn>
+    </div>
+  </div>
 );
 
 const TaskTable = () => (
@@ -83,7 +113,7 @@ const TaskTable = () => (
       <tr className="align-middle">
         <td>Contract</td>
         <td>Medium</td>
-        <td>Awaiting state response</td>
+        <td>Pending Submission to CMS</td>
         <td>ASAP</td>
         <td>
           <Btn size="small" extraCss="col-12">
@@ -110,8 +140,6 @@ const StateDash = () => (
       <div className="sm-col-6 px2">
         <Collapsible title="Recent activity" open>
           <ActivityEntry />
-          <ActivityEntry />
-          <ActivityEntry />
         </Collapsible>
       </div>
       <div className="sm-col-6 px2">
@@ -120,13 +148,13 @@ const StateDash = () => (
           <Events
             month="June"
             events={[
-              { day: 26, title: 'Something amazing I guess' },
-              { day: 30, title: 'Pretzel Day' }
+              { day: 26, title: 'Quarterly Report Due' },
+              { day: 30, title: 'Performance Progress CoP' }
             ]}
           />
           <Events
             month="July"
-            events={[{ day: 7, title: 'Half price apps' }]}
+            events={[{ day: 7, title: 'Annual APD Due' }]}
           />
         </Collapsible>
       </div>
