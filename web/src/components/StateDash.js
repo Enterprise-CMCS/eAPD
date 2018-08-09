@@ -18,7 +18,7 @@ const ActivityEntry = () => (
         </div>
       </div>
     </div>
-    <div className="flex-auto">Tim Smith created a new document.</div>
+    <div className="flex-auto">Tim Smith commented on 2018 IAPD-U.</div>
   </div>
 );
 
@@ -93,8 +93,8 @@ const TaskTable = () => (
   <table className="table-cms table-fixed">
     <thead>
       <tr>
-        <th className="col-2">Document type</th>
-        <th className="col-2">Name</th>
+        <th className="col-2">Document</th>
+        <th className="col-2">Type/Name</th>
         <th className="col-4">Status</th>
         <th className="col-2">Due date</th>
         <th className="col-2">Action</th>
