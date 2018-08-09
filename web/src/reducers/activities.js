@@ -32,13 +32,13 @@ export const setKeyGenerator = fn => {
   generateKey = fn;
 };
 
-const newGoal = () => ({ key: generateKey(), desc: '', obj: '' });
+const newGoal = () => ({ key: generateKey(), description: '', objective: '' });
 
-const newMilestone = (name = '', start = '', end = '') => ({
+const newMilestone = (milestone = '', plannedStart = '', plannedEnd = '') => ({
   key: generateKey(),
-  name,
-  start,
-  end
+  milestone,
+  plannedStart,
+  plannedEnd
 });
 
 const statePersonDefaultYear = () => ({ amt: '', perc: '' });
@@ -102,13 +102,13 @@ const newActivity = ({
   key: generateKey(),
   name,
   fundingSource,
-  descShort: '',
-  descLong: '',
-  altApproach: '',
+  summary: '',
+  description: '',
+  alternatives: '',
   costAllocationDesc: '',
   otherFundingDesc: '',
   goals: [newGoal()],
-  milestones: [newMilestone()],
+  schedule: [newMilestone()],
   statePersonnel: [
     newStatePerson(years),
     newStatePerson(years),
@@ -120,12 +120,12 @@ const newActivity = ({
   standardsAndConditions: {
     modularity: '',
     mita: '',
-    industry: '',
+    industryStandards: '',
     leverage: '',
-    bizResults: '',
+    businessResults: '',
     reporting: '',
     interoperability: '',
-    mitigation: '',
+    mitigationStrategy: '',
     keyPersonnel: '',
     documentation: '',
     minimizeCost: ''

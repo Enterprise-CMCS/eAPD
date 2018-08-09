@@ -124,11 +124,15 @@ export const saveApd = () => (dispatch, state) => {
   const apd = toAPI(updatedApd, activities);
 
   const filterAPDFields = [
+    'federalCitations',
+    'incentivePayments',
     'narrativeHIE',
     'narrativeHIT',
     'narrativeMMIS',
     'programOverview',
-    'previousActivitySummary'
+    'previousActivityExpenses',
+    'previousActivitySummary',
+    'stateProfile'
   ];
 
   const filterActivityFields = [
@@ -165,7 +169,7 @@ export const saveApd = () => (dispatch, state) => {
   }
 
   console.log(apd);
-  return;
+  // return;
 
   return axios
     .put(`/apds/${updatedApd.id}`, apd)

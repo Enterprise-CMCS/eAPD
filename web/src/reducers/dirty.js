@@ -1,6 +1,6 @@
 import u from 'updeep';
 
-import { UPDATE_ACTIVITY } from '../actions/activities';
+import { ADD_ACTIVITY_DIRTY, UPDATE_ACTIVITY } from '../actions/activities';
 import { UPDATE_APD, SAVE_APD_SUCCESS, SELECT_APD } from '../actions/apd';
 
 const initialState = {
@@ -14,6 +14,18 @@ const dirty = (state = initialState, action) => {
     case SELECT_APD:
       return initialState;
 
+    case ADD_ACTIVITY_DIRTY:
+      // when an activity is added, we need to add the
+      // whole new activity to the dirty state since it
+      // is populated with initial data
+      return u(
+        {
+          dirty: true,
+          data: { activities: { byKey: { [action.data.key]: action.data } } }
+        },
+        state
+      );
+
     case UPDATE_ACTIVITY:
       return u(
         {
@@ -25,11 +37,15 @@ const dirty = (state = initialState, action) => {
 
     case UPDATE_APD:
       if (
+        action.updates.federalCitations ||
+        action.updates.incentivePayments ||
         action.updates.narrativeHIE ||
         action.updates.narrativeHIT ||
         action.updates.narrativeMMIS ||
         action.updates.programOverview ||
-        action.updates.previousActivitySummary
+        action.updates.previousActivityExpenses ||
+        action.updates.previousActivitySummary ||
+        action.updates.stateProfile
       ) {
         return u({ dirty: true, data: { apd: { ...action.updates } } }, state);
       }
