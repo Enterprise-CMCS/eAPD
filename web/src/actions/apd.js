@@ -173,9 +173,6 @@ export const saveApd = () => (dispatch, state) => {
     }
   }
 
-  console.log(apd);
-  // return;
-
   return axios
     .put(`/apds/${updatedApd.id}`, apd)
     .then(res => {
