@@ -9,3 +9,8 @@
 .pill {
   border-radius: 2rem;
 }
+
+.btn-collapse:focus {
+  border-color: #ddd;
+  box-shadow: none;
+}
