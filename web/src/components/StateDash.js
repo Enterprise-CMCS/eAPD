@@ -61,7 +61,7 @@ const StatusEntry = () => (
         <div className="bold">Contract</div>
       </div>
       <div className="sm-col-8 progress-bar-basic">
-        <div className="dot" />
+        <div className="dot complete" />
         <div className="bar" />
         <div className="dot" />
         <div className="bar" />
