@@ -69,11 +69,11 @@ SubsectionChunk.defaultProps = {
   resource: null
 };
 
-const Subsection = ({ children, id, open, resource }) => {
+const Subsection = ({ children, id, nested, open, resource }) => {
   const title = t([resource, 'title'], { defaultValue: '' });
 
   return (
-    <Collapsible id={id} title={title} open={open}>
+    <Collapsible id={id} title={title} open={open} nested={nested}>
       <SubsectionChunk resource={resource}>{children}</SubsectionChunk>
     </Collapsible>
   );
@@ -82,6 +82,7 @@ const Subsection = ({ children, id, open, resource }) => {
 Subsection.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.string,
+  nested: PropTypes.bool,
   open: PropTypes.bool,
   resource: PropTypes.string
 };
@@ -89,6 +90,7 @@ Subsection.propTypes = {
 Subsection.defaultProps = {
   resource: null,
   id: null,
+  nested: false,
   open: false
 };
 

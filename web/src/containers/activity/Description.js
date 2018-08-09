@@ -15,7 +15,7 @@ const Description = props => {
   };
 
   return (
-    <Subsection resource="activities.description">
+    <Subsection resource="activities.description" nested>
       <SubsectionChunk resource="activities.description.summary">
         <div className="mb3">
           <Textarea

@@ -53,7 +53,6 @@ class EntryDetails extends Component {
         btnColor="white"
         open={expanded}
         onChange={this.handleChange(aKey)}
-        sticky
       >
         {components.map((Comp, i) => <Comp key={i} aKey={aKey} />)}
         {num > 1 && (

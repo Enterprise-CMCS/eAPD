@@ -112,7 +112,7 @@ class ContractorResources extends Component {
     const { key: activityKey, contractorResources } = activity;
 
     return (
-      <Subsection resource="activities.contractorResources">
+      <Subsection resource="activities.contractorResources" nested>
         {contractorResources.length === 0 ? (
           <NoDataMsg>
             {t('activities.contractorResources.noDataNotice')}
