@@ -115,7 +115,7 @@ const newActivity = ({
     newStatePerson(years)
   ],
   contractorResources: [newContractor(years)],
-  expenses: [newExpense(years), newExpense(years), newExpense(years)],
+  expenses: [newExpense(years)],
   costAllocation: arrToObj(years, costAllocationEntry()),
   standardsAndConditions: {
     modularity: '',

@@ -14,6 +14,23 @@ import { Subsection } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
 
+const Label = props => (
+  <h3 className="md-col-2 my-tiny pr1 h5">{props.children}</h3>
+);
+
+Label.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+const EXPENSE_CATEGORIES = [
+  'Hardware, software, and licensing',
+  'Equipment and supplies',
+  'Training and outreach',
+  'Travel',
+  'Administrative operations',
+  'Miscellaneous expenses for the project'
+];
+
 class Expenses extends Component {
   handleChange = (index, field) => e => {
     const { value } = e.target;
@@ -40,76 +57,60 @@ class Expenses extends Component {
         {expenses.length === 0 ? (
           <NoDataMsg>{t('activities.expenses.noDataNotice')}</NoDataMsg>
         ) : (
-          <div className="overflow-auto">
-            <table className="mb2 h5 table table-condensed table-fixed">
-              <thead>
-                <tr>
-                  <th className="col-1">#</th>
-                  <th className="col-3">Category</th>
-                  <th className="col-4">Description</th>
-                  {years.map(year => (
-                    <th key={year} className="col-2">
-                      {year} Cost
-                    </th>
-                  ))}
-                  <th className="col-1" />
-                </tr>
-              </thead>
-              <tbody>
-                {expenses.map((expense, i) => (
-                  <tr key={expense.key}>
-                    <td className="mono">{i + 1}.</td>
-                    <td>
-                      <Select
-                        name={`expense-${expense.key}-category`}
-                        options={[
-                          'Hardware, software, and licensing',
-                          'Equipment and supplies',
-                          'Training and outreach',
-                          'Travel',
-                          'Administrative operations',
-                          'Miscellaneous expenses for the project'
-                        ]}
-                        label="Expense category"
-                        hideLabel
-                        value={expense.category}
-                        onChange={this.handleChange(i, 'category')}
-                      />
-                    </td>
-                    <td>
-                      <Textarea
-                        name={`expense-${expense.key}-desc`}
-                        label="Describe the expense"
-                        hideLabel
-                        rows="3"
-                        value={expense.desc}
-                        onChange={this.handleChange(i, 'desc')}
-                      />
-                    </td>
-                    {years.map(year => (
-                      <td key={year}>
-                        <DollarInput
-                          name={`expense-${expense.key}-${year}-cost`}
-                          label={`Cost for ${year}`}
-                          hideLabel
-                          value={expense.years[year]}
-                          onChange={this.handleYearChange(i, year)}
-                        />
-                      </td>
-                    ))}
-                    <td className="center">
-                      <Btn
-                        kind="outline"
-                        extraCss="px1 py-tiny mt-tiny"
-                        onClick={() => removeExpense(activityKey, expense.key)}
-                      >
-                        ✗
-                      </Btn>
-                    </td>
-                  </tr>
+          <div className="mt3 pt3 border-top border-grey">
+            {expenses.map((expense, i) => (
+              <div
+                key={expense.key}
+                className="mb3 pb3 border-bottom border-grey relative"
+              >
+                <div className="mb3 md-flex">
+                  <Label>Category</Label>
+                  <Select
+                    name={`expense-${expense.key}-category`}
+                    options={EXPENSE_CATEGORIES}
+                    label="Expense category"
+                    hideLabel
+                    value={expense.category}
+                    onChange={this.handleChange(i, 'category')}
+                    wrapperClass="md-col-6"
+                  />
+                </div>
+                <div className="mb3 md-flex">
+                  <Label>Description</Label>
+                  <Textarea
+                    name={`expense-${expense.key}-desc`}
+                    label="Describe the expense"
+                    hideLabel
+                    rows="3"
+                    value={expense.desc}
+                    onChange={this.handleChange(i, 'desc')}
+                    wrapperClass="md-col-6"
+                  />
+                </div>
+                {years.map(year => (
+                  <div key={year} className="mb3 md-flex">
+                    <Label>{year} Cost</Label>
+                    <DollarInput
+                      name={`expense-${expense.key}-${year}-cost`}
+                      label={`Cost for ${year}`}
+                      hideLabel
+                      value={expense.years[year]}
+                      onChange={this.handleYearChange(i, year)}
+                      wrapperClass="md-col-3"
+                    />
+                  </div>
                 ))}
-              </tbody>
-            </table>
+                <div>
+                  <Btn
+                    kind="outline"
+                    extraCss="px1 py-tiny h5"
+                    onClick={() => removeExpense(activityKey, expense.key)}
+                  >
+                    Remove expense
+                  </Btn>
+                </div>
+              </div>
+            ))}
           </div>
         )}
         <Btn onClick={() => addExpense(activityKey)}>Add expense</Btn>

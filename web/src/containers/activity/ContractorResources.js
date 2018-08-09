@@ -118,7 +118,7 @@ class ContractorResources extends Component {
             {t('activities.contractorResources.noDataNotice')}
           </NoDataMsg>
         ) : (
-          <div className="mt3">
+          <div className="mt3 pt3 border-top border-grey">
             {contractorResources.map((contractor, i) => (
               <div
                 key={contractor.key}
@@ -318,7 +318,7 @@ class ContractorResources extends Component {
                 <div>
                   <Btn
                     kind="outline"
-                    extraCss="px1 py-tiny mt-tiny h5"
+                    extraCss="px1 py-tiny h5"
                     onClick={() =>
                       removeContractor(activityKey, contractor.key)
                     }
