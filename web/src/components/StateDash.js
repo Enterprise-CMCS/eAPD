@@ -18,7 +18,7 @@ const ActivityEntry = () => (
         </div>
       </div>
     </div>
-    <div className="flex-auto">Tim Smith created a new document.</div>
+    <div className="flex-auto">Tim Smith commented on 2018 IAPD-U.</div>
   </div>
 );
 
@@ -40,19 +40,51 @@ Events.propTypes = {
 };
 
 const StatusEntry = () => (
-  <div className="sm-flex items-center mb2">
-    <div className="sm-col-2">
-      <div className="bold">2018 IAPD-U</div>
+  <div>
+    <div className="sm-flex items-center mb2">
+      <div className="sm-col-2">
+        <div className="bold">2018 IAPD-U</div>
+      </div>
+      <div className="sm-col-8 progress-bar-basic">
+        <div className="dot complete" />
+        <div className="bar complete" />
+        <div className="dot complete" />
+        <div className="bar" />
+        <div className="dot" />
+      </div>
+      <div className="sm-col-2 sm-right-align">
+        <Btn>View</Btn>
+      </div>
     </div>
-    <div className="sm-col-8 progress-bar-basic">
-      <div className="dot complete" />
-      <div className="bar complete" />
-      <div className="dot complete" />
-      <div className="bar" />
-      <div className="dot" />
+    <div className="sm-flex items-center mb2">
+      <div className="sm-col-2">
+        <div className="bold">Contract</div>
+      </div>
+      <div className="sm-col-8 progress-bar-basic">
+        <div className="dot complete" />
+        <div className="bar" />
+        <div className="dot" />
+        <div className="bar" />
+        <div className="dot" />
+      </div>
+      <div className="sm-col-2 sm-right-align">
+        <Btn>View</Btn>
+      </div>
     </div>
-    <div className="sm-col-2 sm-right-align">
-      <Btn>View</Btn>
+    <div className="sm-flex items-center mb2">
+      <div className="sm-col-2">
+        <div className="bold">Contract Amendment</div>
+      </div>
+      <div className="sm-col-8 progress-bar-basic">
+        <div className="dot complete" />
+        <div className="bar complete" />
+        <div className="dot complete" />
+        <div className="bar complete" />
+        <div className="dot complete" />
+      </div>
+      <div className="sm-col-2 sm-right-align">
+        <Btn>View</Btn>
+      </div>
     </div>
   </div>
 );
@@ -61,8 +93,8 @@ const TaskTable = () => (
   <table className="table-cms table-fixed">
     <thead>
       <tr>
-        <th className="col-2">Document type</th>
-        <th className="col-2">Priority</th>
+        <th className="col-2">Document</th>
+        <th className="col-2">Type/Name</th>
         <th className="col-4">Status</th>
         <th className="col-2">Due date</th>
         <th className="col-2">Action</th>
@@ -71,9 +103,9 @@ const TaskTable = () => (
     <tbody>
       <tr className="align-middle">
         <td>APD</td>
-        <td>High</td>
-        <td>Awaiting state response</td>
-        <td>ASAP</td>
+        <td>Annual Update</td>
+        <td>Awaiting State Response</td>
+        <td>09/10/2018</td>
         <td>
           <Btn size="small" extraCss="col-12">
             Respond
@@ -82,8 +114,8 @@ const TaskTable = () => (
       </tr>
       <tr className="align-middle">
         <td>Contract</td>
-        <td>Medium</td>
-        <td>Awaiting state response</td>
+        <td>Vendor Inc.</td>
+        <td>Pending Submission to CMS</td>
         <td>ASAP</td>
         <td>
           <Btn size="small" extraCss="col-12">
@@ -103,8 +135,6 @@ const StateDash = () => (
     </Collapsible>
     <Collapsible title="Current statuses" open>
       <StatusEntry />
-      <StatusEntry />
-      <StatusEntry />
     </Collapsible>
     <div className="sm-flex mxn2">
       <div className="sm-col-6 px2">
@@ -120,13 +150,13 @@ const StateDash = () => (
           <Events
             month="June"
             events={[
-              { day: 26, title: 'Something amazing I guess' },
-              { day: 30, title: 'Pretzel Day' }
+              { day: 26, title: 'Quarterly Report Due' },
+              { day: 30, title: 'Performance Progress CoP' }
             ]}
           />
           <Events
             month="July"
-            events={[{ day: 7, title: 'Half price apps' }]}
+            events={[{ day: 7, title: 'Annual APD Due' }]}
           />
         </Collapsible>
       </div>
