@@ -1,12 +1,47 @@
 import u from 'updeep';
 
-import { ADD_ACTIVITY_DIRTY, UPDATE_ACTIVITY } from '../actions/activities';
+import {
+  ADD_ACTIVITY_CONTRACTOR,
+  ADD_ACTIVITY_DIRTY,
+  ADD_ACTIVITY_GOAL,
+  ADD_ACTIVITY_EXPENSE,
+  ADD_ACTIVITY_MILESTONE,
+  ADD_ACTIVITY_STATE_PERSON,
+  REMOVE_ACTIVITY,
+  REMOVE_ACTIVITY_CONTRACTOR,
+  REMOVE_ACTIVITY_GOAL,
+  REMOVE_ACTIVITY_EXPENSE,
+  REMOVE_ACTIVITY_MILESTONE,
+  REMOVE_ACTIVITY_STATE_PERSON,
+  UPDATE_ACTIVITY
+} from '../actions/activities';
 import { UPDATE_APD, SAVE_APD_SUCCESS, SELECT_APD } from '../actions/apd';
 
 const initialState = {
   data: { apd: {}, activities: { byKey: {} } },
   dirty: false
 };
+
+const mapActivityPropToAPI = prop => {
+  switch (prop) {
+    case 'costAllocationDesc':
+    case 'otherFundingDesc':
+      return 'costAllocationNarrative';
+    default:
+      return prop;
+  }
+};
+
+const up = updates =>
+  typeof updates === 'object'
+    ? Object.entries(updates).reduce(
+        (a, [prop, value]) => ({
+          ...a,
+          [mapActivityPropToAPI(prop)]: up(value)
+        }),
+        {}
+      )
+    : true;
 
 const dirty = (state = initialState, action) => {
   switch (action.type) {
@@ -26,11 +61,84 @@ const dirty = (state = initialState, action) => {
         state
       );
 
+    case ADD_ACTIVITY_CONTRACTOR:
+    case REMOVE_ACTIVITY_CONTRACTOR:
+      return u(
+        {
+          dirty: true,
+          data: {
+            activities: {
+              byKey: { [action.key]: { contractorResources: true } }
+            }
+          }
+        },
+        state
+      );
+
+    case ADD_ACTIVITY_GOAL:
+    case REMOVE_ACTIVITY_GOAL:
+      return u(
+        {
+          dirty: true,
+          data: {
+            activities: {
+              byKey: { [action.key]: { goals: true } }
+            }
+          }
+        },
+        state
+      );
+
+    case ADD_ACTIVITY_EXPENSE:
+    case REMOVE_ACTIVITY_EXPENSE:
+      return u(
+        {
+          dirty: true,
+          data: {
+            activities: {
+              byKey: { [action.key]: { expenses: true } }
+            }
+          }
+        },
+        state
+      );
+
+    case ADD_ACTIVITY_MILESTONE:
+    case REMOVE_ACTIVITY_MILESTONE:
+      return u(
+        {
+          dirty: true,
+          data: {
+            activities: {
+              byKey: { [action.key]: { schedule: true } }
+            }
+          }
+        },
+        state
+      );
+
+    case ADD_ACTIVITY_STATE_PERSON:
+    case REMOVE_ACTIVITY_STATE_PERSON:
+      return u(
+        {
+          dirty: true,
+          data: {
+            activities: {
+              byKey: { [action.key]: { statePersonnel: true } }
+            }
+          }
+        },
+        state
+      );
+
+    case REMOVE_ACTIVITY:
+      return u({ dirty: true }, state);
+
     case UPDATE_ACTIVITY:
       return u(
         {
           dirty: true,
-          data: { activities: { byKey: { [action.key]: action.updates } } }
+          data: { activities: { byKey: { [action.key]: up(action.updates) } } }
         },
         state
       );

@@ -118,11 +118,13 @@ export const saveApd = () => (dispatch, state) => {
   const { apd: { data: updatedApd }, activities, dirty } = state();
 
   if (!dirty.dirty) {
-    return dispatch(notify('Save successful!'));
+    dispatch(notify('Save successful!'));
+    return Promise.resolve();
   }
 
   const apd = toAPI(updatedApd, activities);
 
+  // These are the fields we want to remove if they aren't dirty.
   const filterAPDFields = [
     'federalCitations',
     'incentivePayments',
@@ -134,7 +136,6 @@ export const saveApd = () => (dispatch, state) => {
     'previousActivitySummary',
     'stateProfile'
   ];
-
   const filterActivityFields = [
     'contractorResources',
     'costAllocation',
@@ -156,10 +157,14 @@ export const saveApd = () => (dispatch, state) => {
   for (let i = apd.activities.length - 1; i >= 0; i -= 1) {
     const activity = apd.activities[i];
     if (!dirty.data.activities.byKey[activity.key]) {
+      // If this activity isn't dirty, strip it from the list to save,
+      // but then add just its ID back - this prevents it from being
+      // deleted by the API synchronization.
       apd.activities.splice(i, 1);
       apd.activities.push({ id: activity.id });
     } else {
       const dirtyActivity = dirty.data.activities.byKey[activity.key];
+      // Get rid of any activity fields that aren't dirty.
       filterActivityFields.forEach(field => {
         if (!dirtyActivity[field]) {
           delete activity[field];
