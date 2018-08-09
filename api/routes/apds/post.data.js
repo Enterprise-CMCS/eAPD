@@ -130,7 +130,7 @@ const getNewApd = async (stateID, { StateModel = defaultStateModel } = {}) => {
           otherSources: ''
         },
         description: '',
-        expenses: repeat(3, getExpense(years)),
+        expenses: repeat(1, getExpense(years)),
         fundingSource: 'HIT',
         goals: [getGoal()],
         name: 'Program Administration',

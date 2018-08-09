@@ -64,7 +64,7 @@ describe('activities reducer', () => {
     },
     descLong: '',
     descShort: '',
-    expenses: [newExpense(keyFn), newExpense(keyFn), newExpense(keyFn)],
+    expenses: [newExpense(keyFn)],
     fundingSource: 'HIT',
     goals: [newGoal(keyFn)],
     meta: { expanded: false },
@@ -426,20 +426,6 @@ describe('activities reducer', () => {
                   ...stateWithOne.byKey['1'].expenses[0].years,
                   '2020': 0
                 }
-              },
-              {
-                ...stateWithOne.byKey['1'].expenses[1],
-                years: {
-                  ...stateWithOne.byKey['1'].expenses[1].years,
-                  '2020': 0
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].expenses[2],
-                years: {
-                  ...stateWithOne.byKey['1'].expenses[2].years,
-                  '2020': 0
-                }
               }
             ],
             statePersonnel: [
@@ -518,18 +504,6 @@ describe('activities reducer', () => {
             expenses: [
               {
                 ...stateWithOne.byKey['1'].expenses[0],
-                years: {
-                  '2018': 0
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].expenses[1],
-                years: {
-                  '2018': 0
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].expenses[2],
                 years: {
                   '2018': 0
                 }
