@@ -95,6 +95,7 @@ describe('APD reducer', () => {
             year: '2011'
           }
         ],
+        previousActivitySummary: 'Bob the Builder built a building',
         stateProfile: 'this is the state profile as a string',
         years: [2013, 2014]
       };
@@ -149,7 +150,7 @@ describe('APD reducer', () => {
               }
             },
             pointsOfContact: 'here be points of contact',
-            previousActivitySummary: '',
+            previousActivitySummary: 'Bob the Builder built a building',
             previousActivityExpenses: {
               2013: { hie: '2013 hie', hit: '2013 hit', mmis: '2013 mmis' },
               2012: { hie: '2012 hie', hit: '2012 hit', mmis: '2012 mmis' },

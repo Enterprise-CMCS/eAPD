@@ -148,6 +148,6 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
       previousActivityExpensesReducer,
       {}
     ),
-    years
+    years: years.map(y => `${y}`)
   });
 };
