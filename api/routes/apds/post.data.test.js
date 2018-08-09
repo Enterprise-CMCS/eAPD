@@ -94,34 +94,6 @@ tap.test('APD data initializer', async test => {
                 year: '2019'
               }
             ]
-          },
-          {
-            category: '',
-            description: '',
-            entries: [
-              {
-                amount: 0,
-                year: '2018'
-              },
-              {
-                amount: 0,
-                year: '2019'
-              }
-            ]
-          },
-          {
-            category: '',
-            description: '',
-            entries: [
-              {
-                amount: 0,
-                year: '2018'
-              },
-              {
-                amount: 0,
-                year: '2019'
-              }
-            ]
           }
         ],
         fundingSource: 'HIT',
