@@ -32,7 +32,7 @@ class Collapsible extends Component {
     const contentId = `collapsible-${kebabCase(title)}`;
 
     let btnClass = deline`
-      btn block col-12 py2 h3 sm-h2 line-height-1 left-align
+      btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align
       ${isOpen ? 'border-bottom border-bottom-darken-1 rounded-top' : 'rounded'}
       bg-${btnBgColor} ${btnColor}
     `;
