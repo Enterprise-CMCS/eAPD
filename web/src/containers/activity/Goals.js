@@ -33,7 +33,7 @@ class Goals extends Component {
     const { activity } = this.props;
 
     return (
-      <Subsection resource="activities.goals">
+      <Subsection resource="activities.goals" nested>
         {activity.goals.map((d, i) => (
           <div key={d.key} className="mb3">
             <SubsectionChunk resource="activities.goals.goal">
