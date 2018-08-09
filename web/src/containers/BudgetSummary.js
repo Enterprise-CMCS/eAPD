@@ -140,19 +140,12 @@ const HeaderRow = ({ title, years }) => (
       {title}
     </td>
     {[...years, 'total'].map(yr => (
-      <Fragment>
+      <Fragment key={yr}>
+        <td headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-total`} />
         <td
-          key={yr}
-          headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-total`}
-        />
-        <td
-          key={yr}
           headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-federal`}
         />
-        <td
-          key={yr}
-          headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-state`}
-        />
+        <td headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-state`} />
       </Fragment>
     ))}
   </tr>
