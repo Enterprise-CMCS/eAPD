@@ -31,7 +31,7 @@ ShallowWrapper {
         <button
           aria-controls="collapsible-default-render-case"
           aria-expanded={false}
-          className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+          className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
           onClick={[Function]}
           type="button"
         >
@@ -123,7 +123,7 @@ ShallowWrapper {
             </span>,
             "default render case",
           ],
-          "className": "btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+          "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
           "onClick": [Function],
           "type": "button",
         },
@@ -233,7 +233,7 @@ ShallowWrapper {
           <button
             aria-controls="collapsible-default-render-case"
             aria-expanded={false}
-            className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+            className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
             onClick={[Function]}
             type="button"
           >
@@ -325,7 +325,7 @@ ShallowWrapper {
               </span>,
               "default render case",
             ],
-            "className": "btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+            "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
             "onClick": [Function],
             "type": "button",
           },
@@ -467,7 +467,7 @@ ShallowWrapper {
         <button
           aria-controls="collapsible-open-render-case"
           aria-expanded={true}
-          className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
+          className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
           onClick={[Function]}
           type="button"
         >
@@ -559,7 +559,7 @@ ShallowWrapper {
             </span>,
             "open render case",
           ],
-          "className": "btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
+          "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
           "onClick": [Function],
           "type": "button",
         },
@@ -669,7 +669,7 @@ ShallowWrapper {
           <button
             aria-controls="collapsible-open-render-case"
             aria-expanded={true}
-            className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
+            className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
             onClick={[Function]}
             type="button"
           >
@@ -761,7 +761,7 @@ ShallowWrapper {
               </span>,
               "open render case",
             ],
-            "className": "btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
+            "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
             "onClick": [Function],
             "type": "button",
           },
@@ -903,7 +903,7 @@ ShallowWrapper {
         <button
           aria-controls="collapsible-open-render-case"
           aria-expanded={false}
-          className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+          className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
           onClick={[Function]}
           type="button"
         >
@@ -995,7 +995,7 @@ ShallowWrapper {
             </span>,
             "open render case",
           ],
-          "className": "btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+          "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
           "onClick": [Function],
           "type": "button",
         },
@@ -1105,7 +1105,7 @@ ShallowWrapper {
           <button
             aria-controls="collapsible-open-render-case"
             aria-expanded={false}
-            className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+            className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
             onClick={[Function]}
             type="button"
           >
@@ -1197,7 +1197,7 @@ ShallowWrapper {
               </span>,
               "open render case",
             ],
-            "className": "btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+            "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
             "onClick": [Function],
             "type": "button",
           },
@@ -1339,7 +1339,7 @@ ShallowWrapper {
         <button
           aria-controls="collapsible-toggle-to-open-case"
           aria-expanded={true}
-          className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
+          className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
           onClick={[Function]}
           type="button"
         >
@@ -1431,7 +1431,7 @@ ShallowWrapper {
             </span>,
             "toggle to open case",
           ],
-          "className": "btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
+          "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
           "onClick": [Function],
           "type": "button",
         },
@@ -1541,7 +1541,7 @@ ShallowWrapper {
           <button
             aria-controls="collapsible-toggle-to-open-case"
             aria-expanded={true}
-            className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
+            className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
             onClick={[Function]}
             type="button"
           >
@@ -1633,7 +1633,7 @@ ShallowWrapper {
               </span>,
               "toggle to open case",
             ],
-            "className": "btn block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
+            "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
             "onClick": [Function],
             "type": "button",
           },
@@ -1775,7 +1775,7 @@ ShallowWrapper {
         <button
           aria-controls="collapsible-toggle-to-closed-case"
           aria-expanded={false}
-          className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+          className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
           onClick={[Function]}
           type="button"
         >
@@ -1867,7 +1867,7 @@ ShallowWrapper {
             </span>,
             "toggle to closed case",
           ],
-          "className": "btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+          "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
           "onClick": [Function],
           "type": "button",
         },
@@ -1977,7 +1977,7 @@ ShallowWrapper {
           <button
             aria-controls="collapsible-toggle-to-closed-case"
             aria-expanded={false}
-            className="btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+            className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
             onClick={[Function]}
             type="button"
           >
@@ -2069,7 +2069,7 @@ ShallowWrapper {
               </span>,
               "toggle to closed case",
             ],
-            "className": "btn block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+            "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
             "onClick": [Function],
             "type": "button",
           },
