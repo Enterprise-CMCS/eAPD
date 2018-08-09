@@ -354,6 +354,7 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Subsection
     id={null}
+    nested={false}
     open={false}
     resource={null}
   >
@@ -380,9 +381,10 @@ ShallowWrapper {
         test child
       </SubsectionChunk>,
       "id": null,
+      "nested": false,
       "onChange": null,
       "open": false,
-      "sticky": false,
+      "sticky": true,
       "title": "",
     },
     "ref": null,
@@ -415,9 +417,10 @@ ShallowWrapper {
           test child
         </SubsectionChunk>,
         "id": null,
+        "nested": false,
         "onChange": null,
         "open": false,
-        "sticky": false,
+        "sticky": true,
         "title": "",
       },
       "ref": null,

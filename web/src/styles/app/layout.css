@@ -57,8 +57,14 @@ footer {
   width: 3rem;
 }
 
-.sticky-top {
+.sticky-header {
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 3;
+}
+
+.has-sticky-header .sticky-nested {
+  position: sticky;
+  top: 58px; /* height of sticky parent header */
+  z-index: 2; /* 1 less than parent */
 }

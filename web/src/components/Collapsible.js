@@ -23,6 +23,7 @@ class Collapsible extends Component {
       btnColor,
       children,
       id,
+      nested,
       sticky,
       title,
       onChange
@@ -30,10 +31,17 @@ class Collapsible extends Component {
     const isOpen = onChange ? this.props.open : this.state.open;
     const contentId = `collapsible-${kebabCase(title)}`;
 
-    const btnClass = deline`
+    let btnClass = deline`
       btn block col-12 py2 h3 sm-h2 line-height-1 left-align
       ${isOpen ? 'border-bottom border-bottom-darken-1 rounded-top' : 'rounded'}
-      bg-${btnBgColor} ${btnColor} ${sticky ? 'sticky-top' : ''}
+      bg-${btnBgColor} ${btnColor}
+    `;
+
+    // if nested, don't stick to top of window but right below parent header
+    if (sticky) btnClass += ` ${nested ? 'sticky-nested' : 'sticky-header'}`;
+
+    const bodyClass = deline`
+      p2 ${!isOpen ? 'display-none' : ''} ${sticky ? 'has-sticky-header' : ''}
     `;
 
     return (
@@ -54,7 +62,7 @@ class Collapsible extends Component {
           </span>
           {title}
         </button>
-        <div className={`p2 ${isOpen ? '' : 'display-none'}`} id={contentId}>
+        <div className={bodyClass} id={contentId}>
           {children}
         </div>
       </div>
@@ -68,6 +76,7 @@ Collapsible.propTypes = {
   btnColor: PropTypes.string,
   children: PropTypes.node,
   id: PropTypes.string,
+  nested: PropTypes.bool,
   open: PropTypes.bool,
   sticky: PropTypes.bool,
   title: PropTypes.string.isRequired,
@@ -80,8 +89,9 @@ Collapsible.defaultProps = {
   btnColor: 'blue',
   children: null,
   id: null,
+  nested: false,
   open: false,
-  sticky: false,
+  sticky: true,
   onChange: null
 };
 

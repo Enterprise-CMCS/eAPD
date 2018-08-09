@@ -22,7 +22,7 @@ class StandardsAndConditions extends Component {
     const { activity } = this.props;
 
     return (
-      <Subsection resource="activities.standardsAndConditions">
+      <Subsection resource="activities.standardsAndConditions" nested>
         {STANDARDS.map(std => (
           <div key={std.id}>
             <h3>

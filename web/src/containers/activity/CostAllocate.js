@@ -19,7 +19,7 @@ const CostAllocate = props => {
   };
 
   return (
-    <Subsection resource="activities.costAllocate">
+    <Subsection resource="activities.costAllocate" nested>
       <div className="mb3">
         <div className="mb-tiny bold">
           {t('activities.costAllocate.methodology.title')}
