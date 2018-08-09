@@ -130,6 +130,7 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
   const {
     // these get massaged
     activities,
+    federalCitations,
     incentivePayments,
     previousActivityExpenses,
     years,
@@ -141,6 +142,7 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
   return replaceNulls({
     ...apd,
     activities: activities.map(a => deserializeActivity(a, years)),
+    federalCitations: federalCitations || initialAssurances,
     incentivePayments: incentivePaymentsSerializer.fromAPI(incentivePayments),
     previousActivityExpenses: previousActivityExpenses.reduce(
       previousActivityExpensesReducer,

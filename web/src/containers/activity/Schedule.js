@@ -31,7 +31,7 @@ class Schedule extends Component {
 
     return (
       <Subsection resource="activities.schedule" nested>
-        {activity.schedul.length === 0 ? (
+        {activity.schedule.length === 0 ? (
           <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (
           <div className="mb3 overflow-auto">
