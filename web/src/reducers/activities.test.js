@@ -37,7 +37,7 @@ describe('activities reducer', () => {
     years: { '2018': { amt: '', perc: '' }, '2019': { amt: '', perc: '' } }
   });
 
-  const newGoal = keyFn => ({ key: keyFn(), desc: '', obj: '' });
+  const newGoal = keyFn => ({ key: keyFn(), description: '', objective: '' });
 
   const newExpense = keyFn => ({
     key: keyFn(),
@@ -48,43 +48,43 @@ describe('activities reducer', () => {
 
   const newMilestone = keyFn => ({
     key: keyFn(),
-    end: '',
-    name: '',
-    start: ''
+    milestone: '',
+    plannedEnd: '',
+    plannedStart: ''
   });
 
   const newActivity = keyFn => ({
     key: keyFn(),
-    altApproach: '',
+    alternatives: '',
     contractorResources: [newContractor(keyFn)],
     costAllocationDesc: '',
     costAllocation: {
       '2018': { ffp: { federal: 90, state: 10 }, other: 0 },
       '2019': { ffp: { federal: 90, state: 10 }, other: 0 }
     },
-    descLong: '',
-    descShort: '',
+    description: '',
     expenses: [newExpense(keyFn)],
     fundingSource: 'HIT',
     goals: [newGoal(keyFn)],
     meta: { expanded: false },
-    milestones: [newMilestone(keyFn)],
+    schedule: [newMilestone(keyFn)],
     name: '',
     otherFundingDesc: '',
     standardsAndConditions: {
-      bizResults: '',
+      businessResults: '',
       documentation: '',
-      industry: '',
+      industryStandards: '',
       interoperability: '',
       keyPersonnel: '',
       leverage: '',
       minimizeCost: '',
       mita: '',
-      mitigation: '',
+      mitigationStrategy: '',
       modularity: '',
       reporting: ''
     },
     statePersonnel: [newPerson(keyFn), newPerson(keyFn), newPerson(keyFn)],
+    summary: '',
     quarterlyFFP: {
       '2018': {
         '1': {
@@ -197,9 +197,9 @@ describe('activities reducer', () => {
       newExpense(() => 'new key')
     ],
     [
-      'milestone',
+      'schedule milestone',
       'ADD_ACTIVITY_MILESTONE',
-      'milestones',
+      'schedule',
       newMilestone(() => 'new key')
     ]
   ].forEach(([title, action, property, newObject]) => {
@@ -254,10 +254,10 @@ describe('activities reducer', () => {
       property: 'expenses'
     },
     {
-      title: 'milestone',
+      title: 'schedule milestone',
       action: 'REMOVE_ACTIVITY_MILESTONE',
       actionKey: 'milestoneKey',
-      property: 'milestones'
+      property: 'schedule'
     }
   ].forEach(({ title, action, actionKey, property }) => {
     it(`handles removing ${title}`, () => {

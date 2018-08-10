@@ -431,11 +431,39 @@ describe('apd actions', () => {
             }
           }
         }
+      },
+      dirty: {
+        data: {
+          apd: {},
+          activities: {
+            byKey: {}
+          }
+        },
+        dirty: true
       }
     };
 
     beforeEach(() => {
+      state.dirty.dirty = true;
       fetchMock.reset();
+    });
+
+    it('creates save request but does not actually send save if not dirty', () => {
+      state.dirty.dirty = false;
+      const store = mockStore(state);
+      fetchMock.onPut('/apds/id-to-update').reply(403, [{ foo: 'bar' }]);
+
+      const expectedActions = [
+        { type: actions.SAVE_APD_REQUEST },
+        {
+          type: notificationActions.ADD_NOTIFICATION,
+          message: 'Save successful!'
+        }
+      ];
+
+      return store.dispatch(actions.saveApd()).catch(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
     });
 
     it('creates save request and save failure actions if the save fails', () => {

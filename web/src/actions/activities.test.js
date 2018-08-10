@@ -13,13 +13,19 @@ describe('activities actions', () => {
   });
 
   it('addActivity creates ADD_ACTIVITY action', () => {
-    const store = mockStore({ apd: { data: { years: 'years' } } });
+    const state = {
+      activities: { allKeys: [], byKey: {} },
+      apd: { data: { years: 'years' } }
+    };
+    const store = mockStore(state);
 
     const expectedActions = [
       {
         type: actions.ADD_ACTIVITY,
         years: 'years'
-      }
+      },
+      { type: apdActions.UPDATE_BUDGET, state },
+      { type: actions.ADD_ACTIVITY_DIRTY, data: undefined }
     ];
 
     store.dispatch(actions.addActivity());

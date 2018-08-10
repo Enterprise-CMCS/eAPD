@@ -265,7 +265,7 @@ const reducer = (state = initialState, action) => {
         {
           byKey: {
             [action.key]: {
-              milestones: milestones => [...milestones, newMilestone()]
+              schedule: milestones => [...milestones, newMilestone()]
             }
           }
         },
@@ -276,7 +276,7 @@ const reducer = (state = initialState, action) => {
         {
           byKey: {
             [action.key]: {
-              milestones: milestones =>
+              schedule: milestones =>
                 milestones.filter(m => m.key !== action.milestoneKey)
             }
           }
