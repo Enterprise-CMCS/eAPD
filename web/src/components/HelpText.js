@@ -11,7 +11,7 @@ const HelpText = ({ text: textResource, reminder: reminderResource }) => {
   return (
     (text || reminder) && (
       <div className="mb2">
-        {text && <div>{text}</div>}
+        {text && <Md content={text} wrapper="div" />}
         {reminder && (
           <Md
             content={reminder}
