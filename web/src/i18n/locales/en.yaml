@@ -346,28 +346,28 @@
         As specified in Office of Management and Budget (OMB) Circular A-87, a
         cost allocation plan must be included that identifies all participants
         and their associated cost allocation to depict non-Medicaid activities
-        and non-Medicaid FTEs participating in this project (if any):
+        and non-Medicaid FTEs participating in this project (if any):</br>
 
 
         (1) CMS will work with states on an individual basis to determine the
-        most appropriate cost allocation methodology.
+        most appropriate cost allocation methodology. </br>
         
         (2) HITECH cost allocation formulas should be based on direct benefit
         to the Medicaid EHR incentive program, taking into account state
         projections of eligible Medicaid provider participation in the
-        incentive program.
+        incentive program.</br>
         
         (3) Cost allocation must account for other available federal funding
         sources, division of resources and activities across relevant payers,
         and relative benefit to the state Medicaid program, among other
-        factors.
+        factors.</br>
       
         (4) Cost allocations should be current and ensure financial
         participation of all parties so Medicaid funds are neither the
         sole contributor at the onset, nor primary source of funding. Other
         payers who may benefit must contribute their share from the outset.
         The absence of ancillary payers is not sufficient cause for
-        Medicaid to be primary payer.
+        Medicaid to be primary payer.</br>
       methodology: 
         title: Cost allocation methodology description
         reminder: >-
@@ -414,22 +414,22 @@
           and exposed application programming interfaces (API); the
           separation of business rules from core programming; and the
           availability of business rules in both human and machine-readable
-          formats. The commitment to formal system development methodology
+          formats.</br> The commitment to formal system development methodology
           and open, reusable system architecture is extremely important in
           order to ensure that states can more easily change and maintain
           systems, as well as integrate and interoperate with a clinical and
           administrative ecosystem designed to deliver person-centric services
-          and benefits. Modularity is breaking down systems requirements into
+          and benefits.</br> Modularity is breaking down systems requirements into
           component parts. Extremely complex systems can be developed as
           part of a service-oriented architecture (SOA). Modularity also
           helps address the challenges of customization. Baseline web services
           and capabilities can be developed for and used by anyone, with
           exceptions for specific business processes handled by a separate
-          module that interoperates with the baseline modules. With
+          module that interoperates with the baseline modules.</br> With
           Modularity, changes can be made independently to the baseline
           capabilities without affecting how the extension works. By doing
           so, the design ensures that future iterations of software can be
-          deployed without breaking custom functionality. A critical element
+          deployed without breaking custom functionality.</br> A critical element
           of compliance with this condition is providing CMS with an
           understanding of where services and code will be tightly coupled,
           and where the state will pursue a more aggressive decoupling strategy.
@@ -440,7 +440,7 @@
           This condition requires states to align to and advance increasingly
           in MITA maturity for business, architecture, and data. CMS expects
           the states to complete and continue to make measurable progress
-          in implementing their MITA roadmaps. Already the MITA investments
+          in implementing their MITA roadmaps.</br> Already the MITA investments
           by federal, state, and private partners have allowed us to make
           important incremental improvements to share data and reuse business
           models, applications, and components. CMS strives, however, to
@@ -459,7 +459,7 @@
           civil rights laws; standards adopted by the Secretary under section
           1104 of the Affordable Care Act; and standards and protocols
           adopted by the Secretary under section 1561 of the Affordable
-          Care Act. CMS must ensure that Medicaid infrastructure and
+          Care Act.</br> CMS must ensure that Medicaid infrastructure and
           information system investments are made with the assurance that
           timely and reliable adoption of industry standards and productive
           use of those standards are part of the investments. Industry
@@ -478,7 +478,7 @@
           already developed, consistent with a service-oriented architecture,
           from publicly available or commercially sold components and
           products, and from the use of cloud technologies to share
-          infrastructure and applications. CMS commits to work assertively
+          infrastructure and applications.</br> CMS commits to work assertively
           with the states to identify promising state systems that can be
           leveraged and used by other states. Further, CMS would strongly
           encourage the states to move to regional or multistate solutions
@@ -486,7 +486,7 @@
           solutions. In addition, CMS will expedite APD approvals for states
           that are participating in shared development activities with other
           states, and those developing components and solutions expressly
-          intended for successful reuse by other states. CMS will also review
+          intended for successful reuse by other states.</br> CMS will also review
           carefully any proposed investments in sub-state systems when the
           federal government is asked to share in the costs of updating or
           maintaining multiple systems performing essentially the same
@@ -535,7 +535,7 @@
           technology investments will be a much higher degree of interaction
           and interoperability in order to maximize value and minimize
           burden and costs on providers, beneficiaries, and other
-          stakeholders. CMS is emphasizing in this standard and condition
+          stakeholders.</br> CMS is emphasizing in this standard and condition
           an expectation that Medicaid agencies work in concert with
           exchanges (whether state or federally administered) to share
           business services and technology investments in order to produce
@@ -544,7 +544,7 @@
           messaging and communication protocols in order to preserve the
           ability to efficiently, effectively, and appropriately exchange
           data with other participants in the health and human services
-          enterprise. As stated in MITA Framework 2.0, each state is
+          enterprise.</br> As stated in MITA Framework 2.0, each state is
           “responsible for knowing and understanding its environment
           (data, applications and infrastructure) in order to map its data
           to information sharing requirements. The data-sharing architecture
@@ -565,14 +565,14 @@
           Maintaining a mitigation plan is an industry standard best practice
           for any major IT build; CMS expects that states will identify
           potential risks and develop strategies to address those risks
-          throughout the system lifecycle. Mitigation plans for major
+          throughout the system lifecycle.</br> Mitigation plans for major
           Medicaid E&E system or MMIS projects should address minimum
           expected functionality, critical success factors, and risk factors
           as tied to major milestones identified in the APD. The mitigation
           plans should also reflect key events and dates that would trigger
           the mitigation, and projected timeframe for the mitigation sunset.
           States should consider strategies to address risks for the M&O phase
-          of the project, such as staffing issues and software upgrades. CMS
+          of the project, such as staffing issues and software upgrades.</br> CMS
           expects states to revise and resubmit their plans to CMS as risks
           and mitigations change along the system life cycle. States’ proposed
           mitigations should be commensurate with the nature and scope of the
@@ -616,12 +616,12 @@
           software-as-a-service, or business-solutions-as-a-service. Adequate
           documentation means that other users could operate the software
           with reasonable alterations for a specific hardware or operating
-          system. CMS is neutral as to the specific hardware or operating
+          system.</br> CMS is neutral as to the specific hardware or operating
           system that the software uses. Documentation must follow industry
           standards and best practices, and must include components,
           procedures, layouts, interfaces, inputs, outputs, and other
           necessary information so that the systems could be installed and
-          operated by a variety of contractors or other users. While the APD
+          operated by a variety of contractors or other users.</br> While the APD
           should address how the state plans to maintain documentation, such
           documentation is not required to be submitted along with the APD.
           It is the state’s responsibility to make the documentation
@@ -644,14 +644,14 @@
           and requires that states consider options beyond software that
           will reduce costs or promote reuse. States should describe in the
           APD the strategies that were considered when deciding which solution
-          was the most economical and efficient. States are not required to
+          was the most economical and efficient.</br> States are not required to
           adopt a particular strategy, but CMS must have sufficient
           description to evaluate the extent to which the state looked at
           other solutions. States should consider, at a minimum, the options
           that offer more opportunities for reuse, lower development costs,
           lower long-term operating costs, and shorter development time as
           well as the extent to which the solutions can be readily implemented
-          with alternate hardware and operating systems. States should
+          with alternate hardware and operating systems.</br> States should
           consider this new condition in conjunction with existing APD
           requirements regarding cost benefit analyses required at 45 CFR
           95.605 or § 95.610.
