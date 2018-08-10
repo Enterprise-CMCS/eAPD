@@ -1,17 +1,16 @@
+import deline from 'deline';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import Icon from '@fortawesome/react-fontawesome';
 
 import { faChevronDown, faChevronUp } from './Icons';
 
-const addIf = (condit, yes, no = '') => (condit ? yes : no);
-
 const icon = (expanded, handler) => {
   if (expanded !== true && expanded !== false) return null;
 
   return (
     <button
-      className="btn block right white"
+      className="btn px-tiny py0 white"
       aria-label={expanded ? 'Collapse' : 'Expand'}
       onClick={handler}
     >
@@ -19,6 +18,11 @@ const icon = (expanded, handler) => {
     </button>
   );
 };
+
+const getClasses = (depth, hash, anchor) => deline`
+  mb1 relative flex items-center justify-between sb-item
+  ${depth ? 'pl2' : ''} ${hash === anchor ? 'sb-item-active' : ''}
+`;
 
 const SidebarLink = ({
   anchor,
@@ -31,12 +35,7 @@ const SidebarLink = ({
   ...rest
 }) => (
   <Fragment>
-    <li
-      className={`mb1 relative sb-item ${addIf(depth, 'pl2')} ${addIf(
-        hash === anchor,
-        'sb-item-active'
-      )}`}
-    >
+    <li className={getClasses(depth, hash, anchor)}>
       <a
         href={`#${anchor || '!'}`}
         className="white text-decoration-none truncate"
