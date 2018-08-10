@@ -1,6 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import sinon from 'sinon';
 
 import * as actions from './apd';
 import * as notificationActions from './notification';
@@ -54,10 +55,18 @@ describe('apd actions', () => {
     expect(actions.saveFailure()).toEqual({ type: actions.SAVE_APD_FAILURE });
   });
 
-  it('selectAPD should create SELECT_APD action and redirect to /apd', () => {
+  it('selectApdOnLoad should create SET_SELECT_APD_ON_LOAD action', () => {
+    expect(actions.selectApdOnLoad()).toEqual({
+      type: actions.SET_SELECT_APD_ON_LOAD
+    });
+  });
+
+  it('selectAPD should create SELECT_APD action, redirect to /apd, and saves APD ID to local storage', () => {
     const state = { apd: { byId: { apdID: 'hello there' } } };
     const store = mockStore(state);
-    const push = route => ({ type: 'FAKE_PUSH', pushRoute: route });
+
+    const global = { localStorage: { setItem: sinon.stub() } };
+    const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
     const expectedActions = [
       { type: actions.SELECT_APD, apd: 'hello there' },
@@ -65,9 +74,10 @@ describe('apd actions', () => {
       { type: 'FAKE_PUSH', pushRoute: '/apd' }
     ];
 
-    store.dispatch(actions.selectApd('apdID', push));
+    store.dispatch(actions.selectApd('apdID', { global, pushRoute }));
 
     expect(store.getActions()).toEqual(expectedActions);
+    expect(global.localStorage.setItem.calledWith('last-apd-id', 'apdID'));
   });
 
   it('createRequest should create CREATE_APD_REQUEST action', () => {
@@ -94,7 +104,7 @@ describe('apd actions', () => {
       const newapd = { id: 'bloop' };
       fetchMock.onPost('/apds').reply(200, newapd);
 
-      const push = route => ({ type: 'FAKE_PUSH', pushRoute: route });
+      const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
       const state = {
         apd: {
           byId: {
@@ -112,7 +122,7 @@ describe('apd actions', () => {
         { type: 'FAKE_PUSH', pushRoute: '/apd' }
       ];
 
-      return store.dispatch(actions.createApd({ pushRoute: push })).then(() => {
+      return store.dispatch(actions.createApd({ pushRoute })).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
@@ -191,17 +201,85 @@ describe('apd actions', () => {
       fetchMock.reset();
     });
 
-    it('creates GET_APD_SUCCESS after successful APD fetch', () => {
-      const store = mockStore({});
-      fetchMock.onGet('/apds').reply(200, [{ foo: 'bar' }]);
+    describe('creates GET_APD_SUCCESS after successful APD fetch', () => {
+      it('does not select an APD by default', () => {
+        const store = mockStore({ apd: { selectAPDOnLoad: false } });
+        fetchMock.onGet('/apds').reply(200, [{ foo: 'bar' }]);
 
-      const expectedActions = [
-        { type: actions.GET_APD_REQUEST },
-        { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] }
-      ];
+        const expectedActions = [
+          { type: actions.GET_APD_REQUEST },
+          { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] }
+        ];
 
-      return store.dispatch(actions.fetchApd()).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
+        return store.dispatch(actions.fetchApd()).then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+      });
+
+      it('does not select an APD if there is no local storage', () => {
+        const store = mockStore({ apd: { selectAPDOnLoad: true } });
+        fetchMock.onGet('/apds').reply(200, [{ foo: 'bar' }]);
+
+        const expectedActions = [
+          { type: actions.GET_APD_REQUEST },
+          { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] }
+        ];
+
+        const global = {};
+
+        return store.dispatch(actions.fetchApd({ global })).then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+      });
+
+      it('does not select an APD if local storage does not contain a last APD ID', () => {
+        const store = mockStore({ apd: { selectAPDOnLoad: true } });
+        fetchMock.onGet('/apds').reply(200, [{ foo: 'bar' }]);
+
+        const expectedActions = [
+          { type: actions.GET_APD_REQUEST },
+          { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] }
+        ];
+
+        const global = {
+          localStorage: { getItem: sinon.stub().returns(null) }
+        };
+
+        return store.dispatch(actions.fetchApd({ global })).then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+      });
+
+      it('selects an APD if local storage contains a last APD ID', () => {
+        const apd = {};
+        const state = {
+          apd: { byId: { 7: apd }, selectAPDOnLoad: true }
+        };
+        const store = mockStore(state);
+        fetchMock.onGet('/apds').reply(200, [{ foo: 'bar' }]);
+
+        const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
+
+        const expectedActions = [
+          { type: actions.GET_APD_REQUEST },
+          { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] },
+          { type: actions.SELECT_APD, apd },
+          { type: actions.UPDATE_BUDGET, state },
+          { type: 'FAKE_PUSH', pushRoute: '/apd' }
+        ];
+
+        const global = {
+          localStorage: {
+            getItem: sinon.stub().returns(7),
+            setItem: sinon.spy()
+          }
+        };
+
+        return store
+          .dispatch(actions.fetchApd({ global, pushRoute }))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
       });
     });
 

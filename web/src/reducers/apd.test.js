@@ -6,7 +6,8 @@ describe('APD reducer', () => {
     data: {},
     fetching: false,
     loaded: false,
-    error: ''
+    error: '',
+    selectAPDOnLoad: false
   };
 
   it('should handle initial state', () => {
@@ -27,7 +28,8 @@ describe('APD reducer', () => {
       data: { ...initialState.data },
       fetching: true,
       loaded: false,
-      error: ''
+      error: '',
+      selectAPDOnLoad: false
     });
   });
 
@@ -96,6 +98,7 @@ describe('APD reducer', () => {
           }
         ],
         stateProfile: 'this is the state profile as a string',
+        status: 'draft',
         years: [2013, 2014]
       };
 
@@ -156,13 +159,15 @@ describe('APD reducer', () => {
               2012: { hie: '2012 hie', hit: '2012 hit', mmis: '2012 mmis' },
               2011: { hie: '2011 hie', hit: '2011 hit', mmis: '2011 mmis' }
             },
-            stateProfile: 'this is the state profile as a string'
+            stateProfile: 'this is the state profile as a string',
+            status: 'draft'
           }
         },
         data: {},
         fetching: false,
         loaded: true,
-        error: ''
+        error: '',
+        selectAPDOnLoad: false
       };
     });
 
@@ -184,7 +189,8 @@ describe('APD reducer', () => {
       data: { ...initialState.data },
       fetching: false,
       loaded: false,
-      error: 'some error'
+      error: 'some error',
+      selectAPDOnLoad: false
     });
   });
 
@@ -197,6 +203,13 @@ describe('APD reducer', () => {
     ).toEqual({
       ...initialState,
       data: { value: `hurr hurr i'm a burr` }
+    });
+  });
+
+  it('should handle enabling auto-load for an APD', () => {
+    expect(apd(initialState, { type: 'SET_SELECT_APD_ON_LOAD' })).toEqual({
+      ...initialState,
+      selectAPDOnLoad: true
     });
   });
 
