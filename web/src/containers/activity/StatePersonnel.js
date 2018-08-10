@@ -18,6 +18,14 @@ import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
+const Label = props => (
+  <h3 className="md-col-2 my-tiny pr1 h5">{props.children}</h3>
+);
+
+Label.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
 class StatePersonnel extends Component {
   handleChange = (index, field, year) => e => {
     const { checked, type, value } = e.target;
@@ -46,7 +54,77 @@ class StatePersonnel extends Component {
         {statePersonnel.length === 0 ? (
           <NoDataMsg>{t('activities.statePersonnel.noDataNotice')}</NoDataMsg>
         ) : (
-          <div className="overflow-auto">
+          <div className="mt3">
+            {statePersonnel.map((d, i) => (
+              <div key={d.key} className="mb3 pb3 border-bottom border-grey">
+                <div className="mb3 md-flex">
+                  <Label>{t('activities.statePersonnel.labels.title')}</Label>
+                  <Input
+                    name={`state-person-${d.key}-title`}
+                    label={t('activities.statePersonnel.labels.title')}
+                    value={d.title}
+                    onChange={this.handleChange(i, 'title')}
+                    wrapperClass="md-col-6"
+                    hideLabel
+                  />
+                </div>
+                <div className="mb3 md-flex">
+                  <Label>Key Personnel</Label>
+                  <label className="block">
+                    <input
+                      type="checkbox"
+                      className="mr1"
+                      checked={d.isKeyPersonnel}
+                      onChange={this.handleChange(i, 'isKeyPersonnel')}
+                    />
+                    {t('activities.statePersonnel.labels.keyPersonnel')}
+                  </label>
+                </div>
+                <div className="mb3 md-flex">
+                  <Label>{t('activities.statePersonnel.labels.desc')}</Label>
+                  <Textarea
+                    name={`state-person-${d.key}-desc`}
+                    label={t('activities.statePersonnel.labels.desc')}
+                    rows="3"
+                    value={d.desc}
+                    onChange={this.handleChange(i, 'desc')}
+                    wrapperClass="md-col-6"
+                    hideLabel
+                  />
+                </div>
+                {years.map(year => (
+                  <div key={year} className="mb3 md-flex">
+                    <Label>{year} Cost</Label>
+                    <div className="md-col-7 lg-col-5 flex">
+                      <DollarInput
+                        name={`state-person-${d.key}-${year}-amt`}
+                        label={t('activities.statePersonnel.labels.costAmt')}
+                        value={d.years[year].amt}
+                        onChange={this.handleChange(i, 'amt', year)}
+                        wrapperClass="mr2 flex-auto"
+                      />
+                      <PercentInput
+                        name={`state-person-${d.key}-${year}-perc`}
+                        label={t('activities.statePersonnel.labels.costPerc')}
+                        value={d.years[year].perc}
+                        onChange={this.handleChange(i, 'perc', year)}
+                        wrapperClass="mr2 flex-auto"
+                      />
+                    </div>
+                  </div>
+                ))}
+                <div>
+                  <Btn
+                    kind="outline"
+                    extraCss="px1 py-tiny h5"
+                    onClick={() => removePerson(activityKey, d.key)}
+                  >
+                    Remove person
+                  </Btn>
+                </div>
+              </div>
+            ))}
+
             <table
               className="mb2 h5 table table-condensed table-fixed"
               style={{ minWidth: 800 }}
