@@ -82,7 +82,7 @@ export const STANDARDS = [
     title: 'Medicaid Information Technology Architecture (MITA)'
   },
   {
-    id: 'industry',
+    id: 'industryStandards',
     title: 'Industry Standards'
   },
   {
@@ -90,7 +90,7 @@ export const STANDARDS = [
     title: 'Leverage'
   },
   {
-    id: 'bizResults',
+    id: 'businessResults',
     title: 'Business Results'
   },
   {
@@ -102,7 +102,7 @@ export const STANDARDS = [
     title: 'Interoperability'
   },
   {
-    id: 'mitigation',
+    id: 'mitigationStrategy',
     title: 'Mitigation Strategy'
   },
   {

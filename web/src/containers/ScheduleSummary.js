@@ -38,7 +38,7 @@ const mapStateToProps = ({ activities }) => {
   const data = [];
 
   Object.values(activities.byKey).forEach(activity => {
-    activity.milestones.forEach(milestone => {
+    activity.schedule.forEach(milestone => {
       data.push({ ...milestone, activityName: activity.name });
     });
   });

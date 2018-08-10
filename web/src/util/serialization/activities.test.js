@@ -194,9 +194,9 @@ describe('APD activity serializer', () => {
           name: 'activity 998',
           fundingSource: 'bob',
           years: ['1947', '1949'],
-          descShort: 'summary',
-          descLong: 'description',
-          altApproach: 'different things',
+          summary: 'summary',
+          description: 'description',
+          alternatives: 'different things',
           costAllocationDesc: 'how',
           otherFundingDesc: 'which',
           costAllocation: {
@@ -207,23 +207,23 @@ describe('APD activity serializer', () => {
             {
               id: 'g1',
               key: expect.stringMatching(/[a-f0-9]{8}/),
-              desc: 'goal 1 description',
-              obj: 'goal 1 objective'
+              description: 'goal 1 description',
+              objective: 'goal 1 objective'
             },
             {
               id: 'g2',
               key: expect.stringMatching(/[a-f0-9]{8}/),
-              desc: 'goal 2 description',
-              obj: 'goal 2 objective'
+              description: 'goal 2 description',
+              objective: 'goal 2 objective'
             }
           ],
-          milestones: [
+          schedule: [
             {
               id: 'm1',
               key: expect.stringMatching(/[a-f0-9]{8}/),
-              name: 'milestone name',
-              start: 'start',
-              end: 'end'
+              milestone: 'milestone name',
+              plannedStart: 'start',
+              plannedEnd: 'end'
             }
           ],
           statePersonnel: [
@@ -301,15 +301,15 @@ describe('APD activity serializer', () => {
             }
           ],
           standardsAndConditions: {
-            bizResults: 'biz results',
+            businessResults: 'biz results',
             documentation: 'docs',
-            industry: 'standards',
+            industryStandards: 'standards',
             interoperability: 'interop',
             keyPersonnel: 'locksmiths',
             leverage: 'lever',
             minimizeCost: 'save money',
             mita: 'meeta',
-            mitigation: 'run away',
+            mitigationStrategy: 'run away',
             modularity: 'lego blocks',
             reporting: 'moop moop'
           },
@@ -370,9 +370,9 @@ describe('APD activity serializer', () => {
         id: 'activity id',
         name: 'activity name',
         fundingSource: 'money money',
-        descShort: 'summmmmmary',
-        descLong: 'longer text about the activity',
-        altApproach: 'some text about alternatives',
+        summary: 'summmmmmary',
+        description: 'longer text about the activity',
+        alternatives: 'some text about alternatives',
         costAllocationDesc: 'describing cost allocation',
         otherFundingDesc: 'describing where other money came from',
         costAllocation: {
@@ -387,16 +387,16 @@ describe('APD activity serializer', () => {
         goals: [
           {
             id: 'gooooooooal',
-            desc: 'what is the goal?',
-            obj: 'how do we know?'
+            description: 'what is the goal?',
+            objective: 'how do we know?'
           }
         ],
-        milestones: [
+        schedule: [
           {
             id: 'skip to the lou',
-            name: 'get all the way to the lou',
-            start: 'at the beginning',
-            end: 'when we are finished'
+            milestone: 'get all the way to the lou',
+            plannedStart: 'at the beginning',
+            plannedEnd: 'when we are finished'
           }
         ],
         statePersonnel: [
@@ -440,14 +440,14 @@ describe('APD activity serializer', () => {
           }
         ],
         standardsAndConditions: {
-          bizResults: 'standard 1',
+          businessResults: 'standard 1',
           documentation: 'standard 2',
-          industry: 'standard 3',
+          industryStandards: 'standard 3',
           interoperability: 'standard 4',
           keyPersonnel: 'standard 5',
           leverage: 'standard 6',
           minimizeCost: 'standard 7',
-          mitigation: 'standard 8',
+          mitigationStrategy: 'standard 8',
           modularity: 'standard 9',
           mita: 'standard a',
           reporting: 'standard b'
