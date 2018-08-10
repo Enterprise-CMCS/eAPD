@@ -36,13 +36,13 @@ LinkOrText.defaultProps = {
 class AssurancesAndCompliance extends Component {
   handleCheckChange = (section, index, newValue) => () => {
     this.props.updateApd({
-      assurancesAndCompliance: { [section]: { [index]: { checked: newValue } } }
+      federalCitations: { [section]: { [index]: { checked: newValue } } }
     });
   };
 
   handleExplanationChange = (section, index) => e => {
     this.props.updateApd({
-      assurancesAndCompliance: {
+      federalCitations: {
         [section]: { [index]: { explanation: e.target.value } }
       }
     });
@@ -123,7 +123,7 @@ AssurancesAndCompliance.propTypes = {
 };
 
 const mapStateToProps = ({
-  apd: { data: { assurancesAndCompliance: sections } }
+  apd: { data: { federalCitations: sections } }
 }) => ({ sections });
 
 const mapDispatchToProps = {
