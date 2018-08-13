@@ -28,7 +28,7 @@ class StandardsAndConditions extends Component {
             <h3>
               {t([`activities.standardsAndConditions`, std.id, 'header'])}
             </h3>
-            <p>
+            <p className="preserve-line-breaks">
               {t([`activities.standardsAndConditions`, std.id, 'subheader'])}
             </p>
             <HelpText
