@@ -160,7 +160,8 @@ describe('APD reducer', () => {
               2011: { hie: '2011 hie', hit: '2011 hit', mmis: '2011 mmis' }
             },
             programOverview: 'moop moop',
-            stateProfile: 'this is the state profile as a string'
+            stateProfile: 'this is the state profile as a string',
+            status: 'draft'
           }
         },
         data: {},
