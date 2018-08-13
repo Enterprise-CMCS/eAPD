@@ -35,7 +35,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative sb-item  sb-item-active"
+          className="mb1 relative flex items-center justify-between sb-item sb-item-active"
         >
           <a
             className="white text-decoration-none truncate"
@@ -63,7 +63,7 @@ ShallowWrapper {
             </a>,
             null,
           ],
-          "className": "mb1 relative sb-item  sb-item-active",
+          "className": "mb1 relative flex items-center justify-between sb-item sb-item-active",
         },
         "ref": null,
         "rendered": Array [
@@ -96,7 +96,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative sb-item  sb-item-active"
+            className="mb1 relative flex items-center justify-between sb-item sb-item-active"
           >
             <a
               className="white text-decoration-none truncate"
@@ -124,7 +124,7 @@ ShallowWrapper {
               </a>,
               null,
             ],
-            "className": "mb1 relative sb-item  sb-item-active",
+            "className": "mb1 relative flex items-center justify-between sb-item sb-item-active",
           },
           "ref": null,
           "rendered": Array [
@@ -188,7 +188,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative sb-item  sb-item-active"
+          className="mb1 relative flex items-center justify-between sb-item sb-item-active"
         >
           <a
             className="white text-decoration-none truncate"
@@ -216,7 +216,7 @@ ShallowWrapper {
             </a>,
             null,
           ],
-          "className": "mb1 relative sb-item  sb-item-active",
+          "className": "mb1 relative flex items-center justify-between sb-item sb-item-active",
         },
         "ref": null,
         "rendered": Array [
@@ -249,7 +249,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative sb-item  sb-item-active"
+            className="mb1 relative flex items-center justify-between sb-item sb-item-active"
           >
             <a
               className="white text-decoration-none truncate"
@@ -277,7 +277,7 @@ ShallowWrapper {
               </a>,
               null,
             ],
-            "className": "mb1 relative sb-item  sb-item-active",
+            "className": "mb1 relative flex items-center justify-between sb-item sb-item-active",
           },
           "ref": null,
           "rendered": Array [
@@ -348,7 +348,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative sb-item  sb-item-active"
+          className="mb1 relative flex items-center justify-between sb-item sb-item-active"
         >
           <a
             className="white text-decoration-none truncate"
@@ -358,7 +358,7 @@ ShallowWrapper {
           </a>
           <button
             aria-label="Expand"
-            className="btn block right white"
+            className="btn px-tiny py0 white"
             onClick={[Function]}
           >
             <FontAwesomeIcon$1
@@ -411,7 +411,7 @@ ShallowWrapper {
             </a>,
             <button
               aria-label="Expand"
-              className="btn block right white"
+              className="btn px-tiny py0 white"
               onClick={[Function]}
             >
               <FontAwesomeIcon$1
@@ -445,7 +445,7 @@ ShallowWrapper {
               />
             </button>,
           ],
-          "className": "mb1 relative sb-item  sb-item-active",
+          "className": "mb1 relative flex items-center justify-between sb-item sb-item-active",
         },
         "ref": null,
         "rendered": Array [
@@ -497,7 +497,7 @@ ShallowWrapper {
                 symbol={false}
                 transform={null}
               />,
-              "className": "btn block right white",
+              "className": "btn px-tiny py0 white",
               "onClick": [Function],
             },
             "ref": null,
@@ -553,7 +553,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative sb-item  sb-item-active"
+            className="mb1 relative flex items-center justify-between sb-item sb-item-active"
           >
             <a
               className="white text-decoration-none truncate"
@@ -563,7 +563,7 @@ ShallowWrapper {
             </a>
             <button
               aria-label="Expand"
-              className="btn block right white"
+              className="btn px-tiny py0 white"
               onClick={[Function]}
             >
               <FontAwesomeIcon$1
@@ -616,7 +616,7 @@ ShallowWrapper {
               </a>,
               <button
                 aria-label="Expand"
-                className="btn block right white"
+                className="btn px-tiny py0 white"
                 onClick={[Function]}
               >
                 <FontAwesomeIcon$1
@@ -650,7 +650,7 @@ ShallowWrapper {
                 />
               </button>,
             ],
-            "className": "mb1 relative sb-item  sb-item-active",
+            "className": "mb1 relative flex items-center justify-between sb-item sb-item-active",
           },
           "ref": null,
           "rendered": Array [
@@ -702,7 +702,7 @@ ShallowWrapper {
                   symbol={false}
                   transform={null}
                 />,
-                "className": "btn block right white",
+                "className": "btn px-tiny py0 white",
                 "onClick": [Function],
               },
               "ref": null,
@@ -796,7 +796,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative sb-item  sb-item-active"
+          className="mb1 relative flex items-center justify-between sb-item sb-item-active"
         >
           <a
             className="white text-decoration-none truncate"
@@ -806,7 +806,7 @@ ShallowWrapper {
           </a>
           <button
             aria-label="Collapse"
-            className="btn block right white"
+            className="btn px-tiny py0 white"
             onClick={[Function]}
           >
             <FontAwesomeIcon$1
@@ -870,7 +870,7 @@ ShallowWrapper {
             </a>,
             <button
               aria-label="Collapse"
-              className="btn block right white"
+              className="btn px-tiny py0 white"
               onClick={[Function]}
             >
               <FontAwesomeIcon$1
@@ -904,7 +904,7 @@ ShallowWrapper {
               />
             </button>,
           ],
-          "className": "mb1 relative sb-item  sb-item-active",
+          "className": "mb1 relative flex items-center justify-between sb-item sb-item-active",
         },
         "ref": null,
         "rendered": Array [
@@ -956,7 +956,7 @@ ShallowWrapper {
                 symbol={false}
                 transform={null}
               />,
-              "className": "btn block right white",
+              "className": "btn px-tiny py0 white",
               "onClick": [Function],
             },
             "ref": null,
@@ -1028,7 +1028,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative sb-item  sb-item-active"
+            className="mb1 relative flex items-center justify-between sb-item sb-item-active"
           >
             <a
               className="white text-decoration-none truncate"
@@ -1038,7 +1038,7 @@ ShallowWrapper {
             </a>
             <button
               aria-label="Collapse"
-              className="btn block right white"
+              className="btn px-tiny py0 white"
               onClick={[Function]}
             >
               <FontAwesomeIcon$1
@@ -1102,7 +1102,7 @@ ShallowWrapper {
               </a>,
               <button
                 aria-label="Collapse"
-                className="btn block right white"
+                className="btn px-tiny py0 white"
                 onClick={[Function]}
               >
                 <FontAwesomeIcon$1
@@ -1136,7 +1136,7 @@ ShallowWrapper {
                 />
               </button>,
             ],
-            "className": "mb1 relative sb-item  sb-item-active",
+            "className": "mb1 relative flex items-center justify-between sb-item sb-item-active",
           },
           "ref": null,
           "rendered": Array [
@@ -1188,7 +1188,7 @@ ShallowWrapper {
                   symbol={false}
                   transform={null}
                 />,
-                "className": "btn block right white",
+                "className": "btn px-tiny py0 white",
                 "onClick": [Function],
               },
               "ref": null,
@@ -1291,7 +1291,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative sb-item  sb-item-active"
+          className="mb1 relative flex items-center justify-between sb-item sb-item-active"
         >
           <a
             className="white text-decoration-none truncate"
@@ -1319,7 +1319,7 @@ ShallowWrapper {
             </a>,
             null,
           ],
-          "className": "mb1 relative sb-item  sb-item-active",
+          "className": "mb1 relative flex items-center justify-between sb-item sb-item-active",
         },
         "ref": null,
         "rendered": Array [
@@ -1352,7 +1352,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative sb-item  sb-item-active"
+            className="mb1 relative flex items-center justify-between sb-item sb-item-active"
           >
             <a
               className="white text-decoration-none truncate"
@@ -1380,7 +1380,7 @@ ShallowWrapper {
               </a>,
               null,
             ],
-            "className": "mb1 relative sb-item  sb-item-active",
+            "className": "mb1 relative flex items-center justify-between sb-item sb-item-active",
           },
           "ref": null,
           "rendered": Array [
@@ -1444,7 +1444,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <li
-          className="mb1 relative sb-item  "
+          className="mb1 relative flex items-center justify-between sb-item"
         >
           <a
             className="white text-decoration-none truncate"
@@ -1472,7 +1472,7 @@ ShallowWrapper {
             </a>,
             null,
           ],
-          "className": "mb1 relative sb-item  ",
+          "className": "mb1 relative flex items-center justify-between sb-item",
         },
         "ref": null,
         "rendered": Array [
@@ -1505,7 +1505,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="mb1 relative sb-item  "
+            className="mb1 relative flex items-center justify-between sb-item"
           >
             <a
               className="white text-decoration-none truncate"
@@ -1533,7 +1533,7 @@ ShallowWrapper {
               </a>,
               null,
             ],
-            "className": "mb1 relative sb-item  ",
+            "className": "mb1 relative flex items-center justify-between sb-item",
           },
           "ref": null,
           "rendered": Array [

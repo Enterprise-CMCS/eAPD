@@ -4,6 +4,8 @@ import { notify } from './notification';
 import axios from '../util/api';
 import { toAPI } from '../util/serialization/apd';
 
+const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
+
 export const ADD_APD_KEY_PERSON = 'ADD_APD_KEY_PERSON';
 export const ADD_APD_POC = 'ADD_APD_POC';
 export const CREATE_APD = 'CREATE_APD';
@@ -25,6 +27,9 @@ export const SUBMIT_APD_FAILURE = 'SUBMIT_APD_FAILURE';
 export const UPDATE_APD = 'UPDATE_APD';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
 export const UPDATE_BUDGET_QUARTERLY_SHARE = 'UPDATE_BUDGET_QUARTERLY_SHARE';
+
+export const SET_SELECT_APD_ON_LOAD = 'SET_SELECT_APD_ON_LOAD';
+export const selectApdOnLoad = () => ({ type: SET_SELECT_APD_ON_LOAD });
 
 export const addPointOfContact = () => ({ type: ADD_APD_POC });
 export const removePointOfContact = index => ({ type: REMOVE_APD_POC, index });
@@ -51,10 +56,17 @@ export const updateApd = updates => dispatch => {
   }
 };
 
-export const selectApd = (id, pushRoute = push) => (dispatch, getState) => {
+export const selectApd = (id, { global = {}, pushRoute = push } = {}) => (
+  dispatch,
+  getState
+) => {
   dispatch({ type: SELECT_APD, apd: getState().apd.byId[id] });
   dispatch(updateBudget());
   dispatch(pushRoute('/apd'));
+
+  if (global.localStorage) {
+    global.localStorage.setItem(LAST_APD_ID_STORAGE_KEY, id);
+  }
 };
 
 export const createRequest = () => ({ type: CREATE_APD_REQUEST });
@@ -66,7 +78,7 @@ export const createApd = ({ pushRoute = push } = {}) => dispatch => {
     .post('/apds')
     .then(req => {
       dispatch(createSuccess(req.data));
-      dispatch(selectApd(req.data.id, pushRoute));
+      dispatch(selectApd(req.data.id, { pushRoute }));
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
@@ -78,7 +90,10 @@ export const requestSave = () => ({ type: SAVE_APD_REQUEST });
 export const saveSuccess = data => ({ type: SAVE_APD_SUCCESS, data });
 export const saveFailure = () => ({ type: SAVE_APD_FAILURE });
 
-export const fetchApd = () => dispatch => {
+export const fetchApd = ({ global = window, pushRoute = push } = {}) => (
+  dispatch,
+  getState
+) => {
   dispatch(requestApd());
 
   const url = `/apds`;
@@ -88,6 +103,20 @@ export const fetchApd = () => dispatch => {
     .then(req => {
       const apd = Array.isArray(req.data) ? req.data : null;
       dispatch(receiveApd(apd));
+
+      const { apd: { selectAPDOnLoad } } = getState();
+      if (
+        selectAPDOnLoad &&
+        global.localStorage &&
+        global.localStorage.getItem(LAST_APD_ID_STORAGE_KEY)
+      ) {
+        dispatch(
+          selectApd(global.localStorage.getItem('last-apd-id'), {
+            global,
+            pushRoute
+          })
+        );
+      }
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';

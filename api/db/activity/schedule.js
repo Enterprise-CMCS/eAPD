@@ -39,6 +39,10 @@ module.exports = {
 
           // convert to JS date object
           this.attributes[attribute] = date.toDate();
+        } else {
+          // if the date is some kind of falsey, delete it from the
+          // attributes so we don't save it at all
+          delete this.attributes[attribute];
         }
       });
     },

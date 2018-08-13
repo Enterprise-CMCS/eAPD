@@ -60,18 +60,16 @@ describe('APD serializer', () => {
       expect(fromAPI(apdAPI, a => a)).toEqual({
         id: 'apd id',
         activities: ['an activity'],
-        assurancesAndCompliance:
-          'federal things, like that s with a circle on it',
-        hieNarrative: 'hie hie hie',
-        hitNarrative: 'hit hit hit',
+        federalCitations: 'federal things, like that s with a circle on it',
         incentivePayments: {
           ehAmt: { '1431': { 1: 47, 2: 47, 3: 47, 4: 47 } },
           ehCt: { '1431': { 1: 9, 2: 9, 3: 9, 4: 9 } },
           epAmt: { '1431': { 1: 355, 2: 355, 3: 355, 4: 355 } },
           epCt: { '1431': { 1: 59, 2: 59, 3: 59, 4: 59 } }
         },
-        mmisNarrative: 'mmis mmis mmis',
-        overview: 'doing the moop moop',
+        narrativeHIE: 'hie hie hie',
+        narrativeHIT: 'hit hit hit',
+        narrativeMMIS: 'mmis mmis mmis',
         pointsOfContact: 'people to talk to',
         previousActivityExpenses: {
           '1431': {
@@ -81,6 +79,7 @@ describe('APD serializer', () => {
           }
         },
         previousActivitySummary: 'last time on Batman...',
+        programOverview: 'doing the moop moop',
         stateProfile: {
           thing: '',
           other: 'text'
@@ -93,17 +92,16 @@ describe('APD serializer', () => {
   describe('serializes redux state shape into API format', () => {
     it('does the magical serialization', () => {
       const apdState = {
-        assurancesAndCompliance: '45 CFR something something',
+        federalCitations: '45 CFR something something',
         incentivePayments: {
           ehAmt: { '1431': { 1: 47, 2: 47, 3: 47, 4: 47 } },
           ehCt: { '1431': { 1: 9, 2: 9, 3: 9, 4: 9 } },
           epAmt: { '1431': { 1: 355, 2: 355, 3: 355, 4: 355 } },
           epCt: { '1431': { 1: 59, 2: 59, 3: 59, 4: 59 } }
         },
-        hieNarrative: 'hie hie hie',
-        hitNarrative: 'hit hit hit',
-        mmisNarrative: 'mmis mmis mmis',
-        overview: 'doing the moop moop',
+        narrativeHIE: 'hie hie hie',
+        narrativeHIT: 'hit hit hit',
+        narrativeMMIS: 'mmis mmis mmis',
         pointsOfContact: 'people to talk to',
         previousActivityExpenses: {
           '1431': {
@@ -113,6 +111,7 @@ describe('APD serializer', () => {
           }
         },
         previousActivitySummary: 'last time on Batman...',
+        programOverview: 'doing the moop moop',
         stateProfile: 'big, lots of dirt and trees and stuff',
         years: ['1431']
       };

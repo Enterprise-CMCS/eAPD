@@ -12,11 +12,17 @@ import PreviousActivities from './PreviousActivities';
 import ScheduleSummary from './ScheduleSummary';
 import Sidebar from './Sidebar';
 import TopBtns from './TopBtns';
+import { selectApdOnLoad } from '../actions/apd';
 import StateProfile from '../components/ApdStateProfile';
 import ProposedBudget from '../components/ProposedBudget';
 
-const ApdApplication = ({ apdSelected, place }) => {
+const ApdApplication = ({
+  apdSelected,
+  place,
+  selectApdOnLoad: dispatchSelectApdOnLoad
+}) => {
   if (!apdSelected) {
+    dispatchSelectApdOnLoad('/apd');
     return <Redirect to="/" />;
   }
 
@@ -41,7 +47,8 @@ const ApdApplication = ({ apdSelected, place }) => {
 
 ApdApplication.propTypes = {
   apdSelected: PropTypes.bool.isRequired,
-  place: PropTypes.object.isRequired
+  place: PropTypes.object.isRequired,
+  selectApdOnLoad: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ apd: { data }, user: { data: { state } } }) => ({
@@ -49,4 +56,6 @@ const mapStateToProps = ({ apd: { data }, user: { data: { state } } }) => ({
   place: state
 });
 
-export default connect(mapStateToProps)(ApdApplication);
+const mapDispatchToProps = { selectApdOnLoad };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApdApplication);

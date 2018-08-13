@@ -8,7 +8,7 @@ import { Subsection, SubsectionChunk } from '../../components/Section';
 
 const Description = props => {
   const { activity, updateActivity } = props;
-  const { descLong, altApproach } = activity;
+  const { alternatives, description, summary } = activity;
 
   const sync = name => html => {
     updateActivity(activity.key, { [name]: html });
@@ -26,9 +26,9 @@ const Description = props => {
             rows="5"
             maxLength="280"
             spellCheck="true"
-            value={activity.descShort}
+            value={summary}
             onChange={e =>
-              updateActivity(activity.key, { descShort: e.target.value })
+              updateActivity(activity.key, { summary: e.target.value })
             }
           />
         </div>
@@ -41,12 +41,12 @@ const Description = props => {
         }
       >
         <div className="mb3">
-          <RichText content={descLong} onSync={sync('descLong')} />
+          <RichText content={description} onSync={sync('description')} />
         </div>
       </SubsectionChunk>
       <SubsectionChunk resource="activities.description.alternatives">
         <div className="mb3">
-          <RichText content={altApproach} onSync={sync('altApproach')} />
+          <RichText content={alternatives} onSync={sync('alternatives')} />
         </div>
       </SubsectionChunk>
     </Subsection>
