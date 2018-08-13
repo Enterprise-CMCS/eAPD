@@ -97,6 +97,7 @@ describe('APD reducer', () => {
             year: '2011'
           }
         ],
+        previousActivitySummary: 'Bob the Builder built a building',
         stateProfile: 'this is the state profile as a string',
         status: 'draft',
         years: [2013, 2014]
@@ -107,17 +108,16 @@ describe('APD reducer', () => {
           'apd-id': {
             activities: [],
             id: 'apd-id',
-            assurancesAndCompliance:
+            federalCitations:
               'The Third Sentence of the Ninth Paragraph of the Three Hundred and Twenty-First Section of the Ninety-Fifth Part of the Forty-Fifth Title of the Federal Code of Regulations',
             years: ['2013', '2014'],
             // TODO: This value is computed based on the current datetime.
             // Probably ought to mock the time (sinon can do this) so
             // the test is deterministic.
             yearOptions: ['2018', '2019', '2020'],
-            overview: 'moop moop',
-            hitNarrative: 'HIT, but as a play',
-            hieNarrative: 'HIE, but as a novel',
-            mmisNarrative: 'MMIS, but as a script',
+            narrativeHIT: 'HIT, but as a play',
+            narrativeHIE: 'HIE, but as a novel',
+            narrativeMMIS: 'MMIS, but as a script',
             incentivePayments: {
               ehAmt: {
                 1909: {
@@ -153,14 +153,14 @@ describe('APD reducer', () => {
               }
             },
             pointsOfContact: 'here be points of contact',
-            previousActivitySummary: '',
+            previousActivitySummary: 'Bob the Builder built a building',
             previousActivityExpenses: {
               2013: { hie: '2013 hie', hit: '2013 hit', mmis: '2013 mmis' },
               2012: { hie: '2012 hie', hit: '2012 hit', mmis: '2012 mmis' },
               2011: { hie: '2011 hie', hit: '2011 hit', mmis: '2011 mmis' }
             },
-            stateProfile: 'this is the state profile as a string',
-            status: 'draft'
+            programOverview: 'moop moop',
+            stateProfile: 'this is the state profile as a string'
           }
         },
         data: {},

@@ -18,7 +18,7 @@ class Schedule extends Component {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
 
-    const updates = { milestones: { [index]: { [field]: value } } };
+    const updates = { schedule: { [index]: { [field]: value } } };
     updateActivity(activity.key, updates);
   };
 
@@ -31,7 +31,7 @@ class Schedule extends Component {
 
     return (
       <Subsection resource="activities.schedule" nested>
-        {activity.milestones.length === 0 ? (
+        {activity.schedule.length === 0 ? (
           <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (
           <div className="mb3 overflow-auto">
@@ -51,7 +51,7 @@ class Schedule extends Component {
                 </tr>
               </thead>
               <tbody>
-                {activity.milestones.map((d, i) => (
+                {activity.schedule.map((d, i) => (
                   <tr key={d.key}>
                     <td>
                       <Input
@@ -59,8 +59,8 @@ class Schedule extends Component {
                         label={t('activities.schedule.milestoneLabel')}
                         hideLabel
                         wrapperClass="m0"
-                        value={d.name}
-                        onChange={this.handleChange(i, 'name')}
+                        value={d.milestone}
+                        onChange={this.handleChange(i, 'milestone')}
                       />
                     </td>
                     <td>
@@ -70,8 +70,8 @@ class Schedule extends Component {
                         hideLabel
                         type="date"
                         wrapperClass="m0"
-                        value={d.start}
-                        onChange={this.handleChange(i, 'start')}
+                        value={d.plannedStart}
+                        onChange={this.handleChange(i, 'plannedStart')}
                       />
                     </td>
                     <td>
@@ -81,8 +81,8 @@ class Schedule extends Component {
                         hideLabel
                         type="date"
                         wrapperClass="m0"
-                        value={d.end}
-                        onChange={this.handleChange(i, 'end')}
+                        value={d.plannedEnd}
+                        onChange={this.handleChange(i, 'plannedEnd')}
                       />
                     </td>
                     <td className="center align-middle">

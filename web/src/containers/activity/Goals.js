@@ -51,8 +51,8 @@ class Goals extends Component {
                   {t('activities.goals.goal.title', { number: i + 1 })}
                 </div>
                 <RichText
-                  content={d.desc}
-                  onSync={this.handleSync(i, 'desc')}
+                  content={d.description}
+                  onSync={this.handleSync(i, 'description')}
                 />
               </div>
             </SubsectionChunk>
@@ -61,7 +61,10 @@ class Goals extends Component {
                 <div className="mb-tiny">
                   {t('activities.goals.objective.title')}
                 </div>
-                <RichText content={d.obj} onSync={this.handleSync(i, 'obj')} />
+                <RichText
+                  content={d.objective}
+                  onSync={this.handleSync(i, 'objective')}
+                />
               </div>
             </SubsectionChunk>
           </div>
