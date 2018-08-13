@@ -346,28 +346,28 @@
         As specified in Office of Management and Budget (OMB) Circular A-87, a
         cost allocation plan must be included that identifies all participants
         and their associated cost allocation to depict non-Medicaid activities
-        and non-Medicaid FTEs participating in this project (if any): <br/>
+        and non-Medicaid FTEs participating in this project (if any):   
 
 
         1. CMS will work with states on an individual basis to determine the
-        most appropriate cost allocation methodology. <br/>
+        most appropriate cost allocation methodology.   
         
         2. HITECH cost allocation formulas should be based on direct benefit
         to the Medicaid EHR incentive program, taking into account state
         projections of eligible Medicaid provider participation in the
-        incentive program. <br/> 
+        incentive program.  
         
         3. Cost allocation must account for other available federal funding
         sources, division of resources and activities across relevant payers,
         and relative benefit to the state Medicaid program, among other
-        factors.  </br>
+        factors.  
       
         4. Cost allocations should be current and ensure financial
         participation of all parties so Medicaid funds are neither the
         sole contributor at the onset, nor primary source of funding. Other
         payers who may benefit must contribute their share from the outset.
         The absence of ancillary payers is not sufficient cause for
-        Medicaid to be primary payer.  </br>
+        Medicaid to be primary payer.
       methodology: 
         title: Cost allocation methodology description
         reminder: >-
@@ -444,7 +444,7 @@
           This condition requires states to align to and advance increasingly
           in MITA maturity for business, architecture, and data. CMS expects
           the states to complete and continue to make measurable progress
-          in implementing their MITA roadmaps. <br/>
+          in implementing their MITA roadmaps.  
           
           Already the MITA investments
           by federal, state, and private partners have allowed us to make
@@ -681,7 +681,7 @@
           lower long-term operating costs, and shorter development time as
           well as the extent to which the solutions can be readily implemented
           with alternate hardware and operating systems.  
-          
+
           States should consider this new condition in conjunction with existing APD
           requirements regarding cost benefit analyses required at 45 CFR
           95.605 or § 95.610.
