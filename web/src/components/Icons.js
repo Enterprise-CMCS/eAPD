@@ -7,6 +7,7 @@ import faChevronDown from '@fortawesome/fontawesome-free-solid/faChevronDown';
 import faChevronUp from '@fortawesome/fontawesome-free-solid/faChevronUp';
 import faCode from '@fortawesome/fontawesome-free-solid/faCode';
 import faCog from '@fortawesome/fontawesome-free-solid/faCog';
+import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner';
 import faHelpSolid from '@fortawesome/fontawesome-free-solid/faQuestionCircle';
 import faSignOut from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
 
@@ -18,7 +19,8 @@ export {
   faChevronUp,
   faCode,
   faCog,
-  faSignOut
+  faSignOut,
+  faSpinner
 };
 
 export default Icon;

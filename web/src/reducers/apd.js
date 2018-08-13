@@ -8,6 +8,7 @@ import {
   GET_APD_FAILURE,
   REMOVE_APD_POC,
   SELECT_APD,
+  SET_SELECT_APD_ON_LOAD,
   UPDATE_APD
 } from '../actions/apd';
 import { INCENTIVE_ENTRIES, arrToObj, defaultAPDYearOptions } from '../util';
@@ -26,7 +27,8 @@ const initialState = {
   byId: {},
   fetching: false,
   loaded: false,
-  error: ''
+  error: '',
+  selectAPDOnLoad: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -85,6 +87,8 @@ const reducer = (state = initialState, action) => {
       );
     case SELECT_APD:
       return { ...state, data: { ...action.apd } };
+    case SET_SELECT_APD_ON_LOAD:
+      return { ...state, selectAPDOnLoad: true };
     case UPDATE_APD:
       return u({ data: { ...action.updates } }, state);
     default:
