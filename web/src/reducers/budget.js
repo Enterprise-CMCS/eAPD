@@ -408,10 +408,148 @@ const buildBudget = wholeState => {
   return newState;
 };
 
+const spread = (number, acrossPercents) => {
+  const out = [];
+  let remainder = 0;
+
+  acrossPercents.forEach(percent => {
+    const value = number * percent + remainder;
+    remainder = value - Math.floor(value);
+
+    if (remainder > 0.5) {
+      // if the cumulative remainder to this point is over half, round up
+      out.push(Math.ceil(value));
+      // don't throwaway leftover remainders, or we might accidentally
+      // roll up a few extra times
+      remainder -= 1;
+    } else {
+      // otherwise round down
+      out.push(Math.floor(value));
+    }
+  });
+
+  return out;
+};
+
+const newBuildBudget = bigState => {
+  // Get a shell of our new state object.  This essentially guarantees
+  // that all of the properties and stuff will exist, so we don't have
+  // to have a bunch of code checking for it.
+  const { years } = bigState.apd.data;
+  const newState = initialState(years);
+
+  // Since all of our expenses are tied up in activities, we'll start
+  // by looking at all of them and doing Magic Math™. (It's not magic.)
+  Object.values(bigState.activities.byKey).forEach(activity => {
+    // We need to know the funding source so we know where to apply
+    // this data in the big rollup budget.
+    const fundingSource = activity.fundingSource.toLowerCase();
+
+    // And of course we need to know how the costs are allocated between
+    // the state and federal shares.
+    const allocation = activity.costAllocation;
+
+    const totalsByYear = arrToObj(years, () => ({
+      federal: 0,
+      other: 0,
+      state: 0,
+      total: 0
+    }));
+
+    const n = x => +(x || 0);
+
+    // Sum up the total expense by expense type, per fiscal year
+    activity.contractorResources.forEach(contractor =>
+      Object.entries(contractor.years).forEach(([year, entry]) => {
+        const cost = n(entry);
+        newState[fundingSource].contractors[year].total += cost;
+        totalsByYear[year].total += cost;
+      })
+    );
+
+    activity.expenses.forEach(expense =>
+      Object.entries(expense.years).forEach(([year, entry]) => {
+        const cost = n(entry);
+        newState[fundingSource].expenses[year].total += cost;
+        totalsByYear[year].total += cost;
+      })
+    );
+
+    activity.statePersonnel.forEach(person =>
+      Object.entries(person.years).forEach(([year, entry]) => {
+        const cost = n(entry.amt) * n(entry.perc) / 100;
+        newState[fundingSource].statePersonnel[year].total += cost;
+        totalsByYear[year].total += cost;
+      })
+    );
+
+    // Compute state and federal shares per FY
+    Object.keys(totalsByYear).forEach(year => {
+      const otherFunding = n(allocation[year].other);
+
+      const percents = [
+        allocation[year].ffp.federal / 100,
+        allocation[year].ffp.state / 100
+      ];
+
+      const [tfed, tstate] = spread(
+        totalsByYear[year].total - otherFunding,
+        percents
+      );
+      totalsByYear[year].federal = tfed;
+      totalsByYear[year].state = tstate;
+
+      newState[fundingSource].combined[year].total = totalsByYear[year].total;
+      newState[fundingSource].combined[year].federal = tfed;
+      newState[fundingSource].combined[year].state = tstate;
+
+      const percentFromContractors =
+        newState[fundingSource].contractors[year].total /
+        totalsByYear[year].total;
+      const percentFromExpenses =
+        newState[fundingSource].expenses[year].total / totalsByYear[year].total;
+      const percentFromPersonnel =
+        newState[fundingSource].statePersonnel[year].total /
+        totalsByYear[year].total;
+
+      const [cfed, efed, pfed] = spread(tfed, [
+        percentFromContractors,
+        percentFromExpenses,
+        percentFromPersonnel
+      ]);
+
+      const [cstate, estate, pstate] = spread(tstate, [
+        percentFromContractors,
+        percentFromExpenses,
+        percentFromPersonnel
+      ]);
+
+      newState[fundingSource].contractors[year].federal = cfed;
+      newState[fundingSource].contractors[year].state = cstate;
+
+      newState[fundingSource].expenses[year].federal = efed;
+      newState[fundingSource].expenses[year].state = estate;
+
+      newState[fundingSource].statePersonnel[year].federal = pfed;
+      newState[fundingSource].statePersonnel[year].state = pstate;
+    });
+
+    let fundingSourceTotal = 0;
+    Object.keys(newState[fundingSource].combined).forEach(year => {
+      fundingSourceTotal +=
+        newState[fundingSource].combined.total - n(allocation[year].other);
+    });
+
+    console.log(totalsByYear);
+  });
+
+  return newState;
+};
+
 const reducer = (state = initialState([]), action) => {
   switch (action.type) {
     case UPDATE_BUDGET:
-      return buildBudget(action.state);
+      return newBuildBudget(action.state);
     default:
       return state;
   }
