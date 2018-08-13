@@ -1,0 +1,22 @@
+@import 'react-dates/lib/css/_datepicker.css';
+
+.DateInput {
+  width: 110px;
+}
+
+.DateInput_input {
+  height: 2.5rem;
+  line-height: inherit;
+  font-size: 0.875rem;
+  font-weight: inherit;
+  text-align: center;
+}
+
+.DateRangePickerInput_arrow {
+  line-height: 1;
+}
+
+.DateRangePickerInput_arrow_svg {
+  width: 20px;
+  height: 20px;
+}
