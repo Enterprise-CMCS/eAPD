@@ -1,7 +1,5 @@
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { DateRangePicker } from 'react-dates';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 
@@ -12,6 +10,7 @@ import {
   updateActivity as updateActivityAction
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
+import DatePickerWrapper from '../../components/DatePickerWrapper';
 import DeleteButton from '../../components/DeleteConfirm';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
@@ -37,16 +36,18 @@ class ContractorResources extends Component {
     updateActivity(activity.key, updates);
   };
 
-  handleTermChange = index => ({ startDate, endDate }) => {
+  handleTermChange = index => (startDate, endDate) => {
     const { activity, updateActivity } = this.props;
 
-    const dates = {};
-    const dateFormat = 'YYYY-MM-DD';
-    if (startDate) dates.start = startDate.format(dateFormat);
-    if (endDate) dates.end = endDate.format(dateFormat);
+    console.log(index, startDate, endDate);
 
-    const updates = { contractorResources: { [index]: dates } };
-    updateActivity(activity.key, updates);
+    // const dates = {};
+    // const dateFormat = 'YYYY-MM-DD';
+    // if (startDate) dates.start = startDate.format(dateFormat);
+    // if (endDate) dates.end = endDate.format(dateFormat);
+
+    // const updates = { contractorResources: { [index]: dates } };
+    // updateActivity(activity.key, updates);
   };
 
   handleYearChange = (index, year) => e => {
@@ -166,19 +167,10 @@ class ContractorResources extends Component {
                     {t('activities.contractorResources.labels.term')}
                   </Label>
 
-                  <DateRangePicker
-                    startDate={
-                      contractor.start ? moment(contractor.start) : null
-                    }
+                  <DatePickerWrapper
                     startDateId={`contractor-${contractor.key}-start`}
-                    endDate={contractor.end ? moment(contractor.end) : null}
                     endDateId={`contractor-${contractor.key}-end`}
-                    onDatesChange={this.handleTermChange(i)}
-                    focusedInput={focusedDate}
-                    onFocusChange={focusedDate =>
-                      this.setState({ focusedDate })
-                    }
-                    numberOfMonths={1}
+                    onChange={this.handleTermChange(i)}
                   />
 
                   {false && (
