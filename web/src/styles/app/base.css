@@ -79,6 +79,10 @@ td {
   max-width: 960px;
 }
 
+.preserve-line-breaks {
+  white-space: pre-line;
+}
+
 .sr-only {
   border: 0;
   clip: rect(0 0 0 0);
