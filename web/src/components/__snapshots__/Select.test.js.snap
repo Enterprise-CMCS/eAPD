@@ -31,7 +31,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <label
-          className="block mb-tiny"
+          className="block mb-tiny truncate"
           htmlFor="select name"
         >
           select label
@@ -61,7 +61,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "select label",
-          "className": "block mb-tiny",
+          "className": "block mb-tiny truncate",
           "htmlFor": "select name",
         },
         "ref": null,
@@ -136,7 +136,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <label
-            className="block mb-tiny"
+            className="block mb-tiny truncate"
             htmlFor="select name"
           >
             select label
@@ -166,7 +166,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "select label",
-            "className": "block mb-tiny",
+            "className": "block mb-tiny truncate",
             "htmlFor": "select name",
           },
           "ref": null,
