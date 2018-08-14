@@ -34,11 +34,11 @@ export const setKeyGenerator = fn => {
 
 const newGoal = () => ({ key: generateKey(), desc: '', obj: '' });
 
-const newMilestone = (name = '', start = '', end = '') => ({
+const newMilestone = (milestone = '', plannedStart = '', plannedEnd = '') => ({
   key: generateKey(),
-  name,
-  start,
-  end
+  milestone,
+  plannedStart,
+  plannedEnd
 });
 
 const statePersonDefaultYear = () => ({ amt: '', perc: '' });
@@ -108,7 +108,7 @@ const newActivity = ({
   costAllocationDesc: '',
   otherFundingDesc: '',
   goals: [newGoal()],
-  milestones: [newMilestone()],
+  schedule: [newMilestone()],
   statePersonnel: [newStatePerson(years)],
   contractorResources: [newContractor(years)],
   expenses: [newExpense(years)],
@@ -261,7 +261,7 @@ const reducer = (state = initialState, action) => {
         {
           byKey: {
             [action.key]: {
-              milestones: milestones => [...milestones, newMilestone()]
+              schedule: milestones => [...milestones, newMilestone()]
             }
           }
         },
@@ -272,7 +272,7 @@ const reducer = (state = initialState, action) => {
         {
           byKey: {
             [action.key]: {
-              milestones: milestones =>
+              schedule: milestones =>
                 milestones.filter(m => m.key !== action.milestoneKey)
             }
           }
