@@ -1,8 +1,14 @@
 const logger = require('../../../logger')('apd activites route post');
-const { apdVersion: defaultVersionModel } = require('../../../db').models;
+const {
+  apd: defaultApdModel,
+  apdVersion: defaultVersionModel
+} = require('../../../db').models;
 const { can, userCanEditAPD, loadApd } = require('../../../middleware');
 
-module.exports = (app, VersionModel = defaultVersionModel) => {
+module.exports = (
+  app,
+  { ApdModel = defaultApdModel, VersionModel = defaultVersionModel } = {}
+) => {
   logger.silly('setting up POST /apds/:id/versions route');
   app.post(
     '/apds/:id/versions',
@@ -11,7 +17,9 @@ module.exports = (app, VersionModel = defaultVersionModel) => {
     loadApd(),
     async (req, res) => {
       const tables = req.body.tables || null;
-      const apd = req.meta.apd;
+      const apd = await ApdModel.where({ id: req.meta.apd.get('id') }).fetch({
+        withRelated: ApdModel.withRelated
+      });
 
       const version = VersionModel.forge({
         apd_id: apd.get('id'),
