@@ -48,6 +48,7 @@ class DatePickerWrapper extends Component {
         onDatesChange={this.onDatesChange}
         onFocusChange={this.onFocusChange}
         focusedInput={focusedInput}
+        isOutsideRange={() => false}
         startDate={startDate}
         endDate={endDate}
       />
