@@ -148,7 +148,7 @@ const getNewApd = async (stateID, { StateModel = defaultStateModel } = {}) => {
           mita: '',
           reporting: ''
         },
-        statePersonnel: repeat(3, getStatePersonnel(years)),
+        statePersonnel: repeat(1, getStatePersonnel(years)),
         summary: '',
         quarterlyFFP: yearsToArray(years, { q1: 0, q2: 0, q3: 0, q4: 0 })
       }

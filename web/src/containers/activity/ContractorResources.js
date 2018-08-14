@@ -12,18 +12,11 @@ import {
 import Btn from '../../components/Btn';
 import DeleteButton from '../../components/DeleteConfirm';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
+import Label from '../../components/Label';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
-
-const Label = props => (
-  <h3 className="md-col-2 my-tiny pr1 h5">{props.children}</h3>
-);
-
-Label.propTypes = {
-  children: PropTypes.node.isRequired
-};
 
 const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
 

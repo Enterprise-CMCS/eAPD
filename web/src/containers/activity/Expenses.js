@@ -10,17 +10,10 @@ import {
 import Btn from '../../components/Btn';
 import NoDataMsg from '../../components/NoDataMsg';
 import { DollarInput, Textarea } from '../../components/Inputs';
+import Label from '../../components/Label';
 import { Subsection } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
-
-const Label = props => (
-  <h3 className="md-col-2 my-tiny pr1 h5">{props.children}</h3>
-);
-
-Label.propTypes = {
-  children: PropTypes.node.isRequired
-};
 
 const EXPENSE_CATEGORIES = [
   'Hardware, software, and licensing',
