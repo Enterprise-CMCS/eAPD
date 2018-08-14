@@ -106,28 +106,14 @@ ShallowWrapper {
               <Label>
                 Term Period
               </Label>
-              <div
-                className="md-col-6 flex"
-              >
-                <InputHolder
-                  hideLabel={false}
-                  label="Start"
-                  name="contractor-contractor key-start"
-                  onChange={[Function]}
-                  type="date"
-                  value="start date"
-                  wrapperClass="mr2 flex-auto"
-                />
-                <InputHolder
-                  hideLabel={false}
-                  label="End"
-                  name="contractor-contractor key-end"
-                  onChange={[Function]}
-                  type="date"
-                  value="end date"
-                  wrapperClass="mr2 flex-auto"
-                />
-              </div>
+              <DatePickerWrapper
+                endDateId="contractor-contractor key-end"
+                initialEndDate="end date"
+                initialStartDate="start date"
+                numberOfMonths={1}
+                onChange={[Function]}
+                startDateId="contractor-contractor key-start"
+              />
             </div>
             <div
               className="mb3 md-flex"
@@ -157,7 +143,7 @@ ShallowWrapper {
                     wrapperClass="col-6 mr2"
                   />
                   <t
-                    className="btn btn-primary"
+                    className="btn btn-primary btn-dropzone"
                     disableClick={false}
                     disablePreview={false}
                     disabled={false}
@@ -325,28 +311,14 @@ ShallowWrapper {
                 <Label>
                   Term Period
                 </Label>
-                <div
-                  className="md-col-6 flex"
-                >
-                  <InputHolder
-                    hideLabel={false}
-                    label="Start"
-                    name="contractor-contractor key-start"
-                    onChange={[Function]}
-                    type="date"
-                    value="start date"
-                    wrapperClass="mr2 flex-auto"
-                  />
-                  <InputHolder
-                    hideLabel={false}
-                    label="End"
-                    name="contractor-contractor key-end"
-                    onChange={[Function]}
-                    type="date"
-                    value="end date"
-                    wrapperClass="mr2 flex-auto"
-                  />
-                </div>
+                <DatePickerWrapper
+                  endDateId="contractor-contractor key-end"
+                  initialEndDate="end date"
+                  initialStartDate="start date"
+                  numberOfMonths={1}
+                  onChange={[Function]}
+                  startDateId="contractor-contractor key-start"
+                />
               </div>
               <div
                 className="mb3 md-flex"
@@ -376,7 +348,7 @@ ShallowWrapper {
                       wrapperClass="col-6 mr2"
                     />
                     <t
-                      className="btn btn-primary"
+                      className="btn btn-primary btn-dropzone"
                       disableClick={false}
                       disablePreview={false}
                       disabled={false}
@@ -529,28 +501,14 @@ ShallowWrapper {
                   <Label>
                     Term Period
                   </Label>
-                  <div
-                    className="md-col-6 flex"
-                  >
-                    <InputHolder
-                      hideLabel={false}
-                      label="Start"
-                      name="contractor-contractor key-start"
-                      onChange={[Function]}
-                      type="date"
-                      value="start date"
-                      wrapperClass="mr2 flex-auto"
-                    />
-                    <InputHolder
-                      hideLabel={false}
-                      label="End"
-                      name="contractor-contractor key-end"
-                      onChange={[Function]}
-                      type="date"
-                      value="end date"
-                      wrapperClass="mr2 flex-auto"
-                    />
-                  </div>
+                  <DatePickerWrapper
+                    endDateId="contractor-contractor key-end"
+                    initialEndDate="end date"
+                    initialStartDate="start date"
+                    numberOfMonths={1}
+                    onChange={[Function]}
+                    startDateId="contractor-contractor key-start"
+                  />
                 </div>,
                 <div
                   className="mb3 md-flex"
@@ -580,7 +538,7 @@ ShallowWrapper {
                         wrapperClass="col-6 mr2"
                       />
                       <t
-                        className="btn btn-primary"
+                        className="btn btn-primary btn-dropzone"
                         disableClick={false}
                         disablePreview={false}
                         disabled={false}
@@ -806,28 +764,14 @@ ShallowWrapper {
                     <Label>
                       Term Period
                     </Label>,
-                    <div
-                      className="md-col-6 flex"
-                    >
-                      <InputHolder
-                        hideLabel={false}
-                        label="Start"
-                        name="contractor-contractor key-start"
-                        onChange={[Function]}
-                        type="date"
-                        value="start date"
-                        wrapperClass="mr2 flex-auto"
-                      />
-                      <InputHolder
-                        hideLabel={false}
-                        label="End"
-                        name="contractor-contractor key-end"
-                        onChange={[Function]}
-                        type="date"
-                        value="end date"
-                        wrapperClass="mr2 flex-auto"
-                      />
-                    </div>,
+                    <DatePickerWrapper
+                      endDateId="contractor-contractor key-end"
+                      initialEndDate="end date"
+                      initialStartDate="start date"
+                      numberOfMonths={1}
+                      onChange={[Function]}
+                      startDateId="contractor-contractor key-start"
+                    />,
                   ],
                   "className": "mb3 md-flex",
                 },
@@ -847,68 +791,18 @@ ShallowWrapper {
                   Object {
                     "instance": null,
                     "key": undefined,
-                    "nodeType": "host",
+                    "nodeType": "class",
                     "props": Object {
-                      "children": Array [
-                        <InputHolder
-                          hideLabel={false}
-                          label="Start"
-                          name="contractor-contractor key-start"
-                          onChange={[Function]}
-                          type="date"
-                          value="start date"
-                          wrapperClass="mr2 flex-auto"
-                        />,
-                        <InputHolder
-                          hideLabel={false}
-                          label="End"
-                          name="contractor-contractor key-end"
-                          onChange={[Function]}
-                          type="date"
-                          value="end date"
-                          wrapperClass="mr2 flex-auto"
-                        />,
-                      ],
-                      "className": "md-col-6 flex",
+                      "endDateId": "contractor-contractor key-end",
+                      "initialEndDate": "end date",
+                      "initialStartDate": "start date",
+                      "numberOfMonths": 1,
+                      "onChange": [Function],
+                      "startDateId": "contractor-contractor key-start",
                     },
                     "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "function",
-                        "props": Object {
-                          "hideLabel": false,
-                          "label": "Start",
-                          "name": "contractor-contractor key-start",
-                          "onChange": [Function],
-                          "type": "date",
-                          "value": "start date",
-                          "wrapperClass": "mr2 flex-auto",
-                        },
-                        "ref": null,
-                        "rendered": null,
-                        "type": [Function],
-                      },
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "function",
-                        "props": Object {
-                          "hideLabel": false,
-                          "label": "End",
-                          "name": "contractor-contractor key-end",
-                          "onChange": [Function],
-                          "type": "date",
-                          "value": "end date",
-                          "wrapperClass": "mr2 flex-auto",
-                        },
-                        "ref": null,
-                        "rendered": null,
-                        "type": [Function],
-                      },
-                    ],
-                    "type": "div",
+                    "rendered": null,
+                    "type": [Function],
                   },
                 ],
                 "type": "div",
@@ -944,7 +838,7 @@ ShallowWrapper {
                           wrapperClass="col-6 mr2"
                         />
                         <t
-                          className="btn btn-primary"
+                          className="btn btn-primary btn-dropzone"
                           disableClick={false}
                           disablePreview={false}
                           disabled={false}
@@ -1004,7 +898,7 @@ ShallowWrapper {
                             wrapperClass="col-6 mr2"
                           />
                           <t
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-dropzone"
                             disableClick={false}
                             disablePreview={false}
                             disabled={false}
@@ -1050,7 +944,7 @@ ShallowWrapper {
                               wrapperClass="col-6 mr2"
                             />,
                             <t
-                              className="btn btn-primary"
+                              className="btn btn-primary btn-dropzone"
                               disableClick={false}
                               disablePreview={false}
                               disabled={false}
@@ -1099,7 +993,7 @@ ShallowWrapper {
                             "nodeType": "class",
                             "props": Object {
                               "children": "Select file",
-                              "className": "btn btn-primary",
+                              "className": "btn btn-primary btn-dropzone",
                               "disableClick": false,
                               "disablePreview": false,
                               "disabled": false,
@@ -1581,28 +1475,14 @@ ShallowWrapper {
                 <Label>
                   Term Period
                 </Label>
-                <div
-                  className="md-col-6 flex"
-                >
-                  <InputHolder
-                    hideLabel={false}
-                    label="Start"
-                    name="contractor-contractor key-start"
-                    onChange={[Function]}
-                    type="date"
-                    value="start date"
-                    wrapperClass="mr2 flex-auto"
-                  />
-                  <InputHolder
-                    hideLabel={false}
-                    label="End"
-                    name="contractor-contractor key-end"
-                    onChange={[Function]}
-                    type="date"
-                    value="end date"
-                    wrapperClass="mr2 flex-auto"
-                  />
-                </div>
+                <DatePickerWrapper
+                  endDateId="contractor-contractor key-end"
+                  initialEndDate="end date"
+                  initialStartDate="start date"
+                  numberOfMonths={1}
+                  onChange={[Function]}
+                  startDateId="contractor-contractor key-start"
+                />
               </div>
               <div
                 className="mb3 md-flex"
@@ -1632,7 +1512,7 @@ ShallowWrapper {
                       wrapperClass="col-6 mr2"
                     />
                     <t
-                      className="btn btn-primary"
+                      className="btn btn-primary btn-dropzone"
                       disableClick={false}
                       disablePreview={false}
                       disabled={false}
@@ -1800,28 +1680,14 @@ ShallowWrapper {
                   <Label>
                     Term Period
                   </Label>
-                  <div
-                    className="md-col-6 flex"
-                  >
-                    <InputHolder
-                      hideLabel={false}
-                      label="Start"
-                      name="contractor-contractor key-start"
-                      onChange={[Function]}
-                      type="date"
-                      value="start date"
-                      wrapperClass="mr2 flex-auto"
-                    />
-                    <InputHolder
-                      hideLabel={false}
-                      label="End"
-                      name="contractor-contractor key-end"
-                      onChange={[Function]}
-                      type="date"
-                      value="end date"
-                      wrapperClass="mr2 flex-auto"
-                    />
-                  </div>
+                  <DatePickerWrapper
+                    endDateId="contractor-contractor key-end"
+                    initialEndDate="end date"
+                    initialStartDate="start date"
+                    numberOfMonths={1}
+                    onChange={[Function]}
+                    startDateId="contractor-contractor key-start"
+                  />
                 </div>
                 <div
                   className="mb3 md-flex"
@@ -1851,7 +1717,7 @@ ShallowWrapper {
                         wrapperClass="col-6 mr2"
                       />
                       <t
-                        className="btn btn-primary"
+                        className="btn btn-primary btn-dropzone"
                         disableClick={false}
                         disablePreview={false}
                         disabled={false}
@@ -2004,28 +1870,14 @@ ShallowWrapper {
                     <Label>
                       Term Period
                     </Label>
-                    <div
-                      className="md-col-6 flex"
-                    >
-                      <InputHolder
-                        hideLabel={false}
-                        label="Start"
-                        name="contractor-contractor key-start"
-                        onChange={[Function]}
-                        type="date"
-                        value="start date"
-                        wrapperClass="mr2 flex-auto"
-                      />
-                      <InputHolder
-                        hideLabel={false}
-                        label="End"
-                        name="contractor-contractor key-end"
-                        onChange={[Function]}
-                        type="date"
-                        value="end date"
-                        wrapperClass="mr2 flex-auto"
-                      />
-                    </div>
+                    <DatePickerWrapper
+                      endDateId="contractor-contractor key-end"
+                      initialEndDate="end date"
+                      initialStartDate="start date"
+                      numberOfMonths={1}
+                      onChange={[Function]}
+                      startDateId="contractor-contractor key-start"
+                    />
                   </div>,
                   <div
                     className="mb3 md-flex"
@@ -2055,7 +1907,7 @@ ShallowWrapper {
                           wrapperClass="col-6 mr2"
                         />
                         <t
-                          className="btn btn-primary"
+                          className="btn btn-primary btn-dropzone"
                           disableClick={false}
                           disablePreview={false}
                           disabled={false}
@@ -2281,28 +2133,14 @@ ShallowWrapper {
                       <Label>
                         Term Period
                       </Label>,
-                      <div
-                        className="md-col-6 flex"
-                      >
-                        <InputHolder
-                          hideLabel={false}
-                          label="Start"
-                          name="contractor-contractor key-start"
-                          onChange={[Function]}
-                          type="date"
-                          value="start date"
-                          wrapperClass="mr2 flex-auto"
-                        />
-                        <InputHolder
-                          hideLabel={false}
-                          label="End"
-                          name="contractor-contractor key-end"
-                          onChange={[Function]}
-                          type="date"
-                          value="end date"
-                          wrapperClass="mr2 flex-auto"
-                        />
-                      </div>,
+                      <DatePickerWrapper
+                        endDateId="contractor-contractor key-end"
+                        initialEndDate="end date"
+                        initialStartDate="start date"
+                        numberOfMonths={1}
+                        onChange={[Function]}
+                        startDateId="contractor-contractor key-start"
+                      />,
                     ],
                     "className": "mb3 md-flex",
                   },
@@ -2322,68 +2160,18 @@ ShallowWrapper {
                     Object {
                       "instance": null,
                       "key": undefined,
-                      "nodeType": "host",
+                      "nodeType": "class",
                       "props": Object {
-                        "children": Array [
-                          <InputHolder
-                            hideLabel={false}
-                            label="Start"
-                            name="contractor-contractor key-start"
-                            onChange={[Function]}
-                            type="date"
-                            value="start date"
-                            wrapperClass="mr2 flex-auto"
-                          />,
-                          <InputHolder
-                            hideLabel={false}
-                            label="End"
-                            name="contractor-contractor key-end"
-                            onChange={[Function]}
-                            type="date"
-                            value="end date"
-                            wrapperClass="mr2 flex-auto"
-                          />,
-                        ],
-                        "className": "md-col-6 flex",
+                        "endDateId": "contractor-contractor key-end",
+                        "initialEndDate": "end date",
+                        "initialStartDate": "start date",
+                        "numberOfMonths": 1,
+                        "onChange": [Function],
+                        "startDateId": "contractor-contractor key-start",
                       },
                       "ref": null,
-                      "rendered": Array [
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "function",
-                          "props": Object {
-                            "hideLabel": false,
-                            "label": "Start",
-                            "name": "contractor-contractor key-start",
-                            "onChange": [Function],
-                            "type": "date",
-                            "value": "start date",
-                            "wrapperClass": "mr2 flex-auto",
-                          },
-                          "ref": null,
-                          "rendered": null,
-                          "type": [Function],
-                        },
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "function",
-                          "props": Object {
-                            "hideLabel": false,
-                            "label": "End",
-                            "name": "contractor-contractor key-end",
-                            "onChange": [Function],
-                            "type": "date",
-                            "value": "end date",
-                            "wrapperClass": "mr2 flex-auto",
-                          },
-                          "ref": null,
-                          "rendered": null,
-                          "type": [Function],
-                        },
-                      ],
-                      "type": "div",
+                      "rendered": null,
+                      "type": [Function],
                     },
                   ],
                   "type": "div",
@@ -2419,7 +2207,7 @@ ShallowWrapper {
                             wrapperClass="col-6 mr2"
                           />
                           <t
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-dropzone"
                             disableClick={false}
                             disablePreview={false}
                             disabled={false}
@@ -2479,7 +2267,7 @@ ShallowWrapper {
                               wrapperClass="col-6 mr2"
                             />
                             <t
-                              className="btn btn-primary"
+                              className="btn btn-primary btn-dropzone"
                               disableClick={false}
                               disablePreview={false}
                               disabled={false}
@@ -2525,7 +2313,7 @@ ShallowWrapper {
                                 wrapperClass="col-6 mr2"
                               />,
                               <t
-                                className="btn btn-primary"
+                                className="btn btn-primary btn-dropzone"
                                 disableClick={false}
                                 disablePreview={false}
                                 disabled={false}
@@ -2574,7 +2362,7 @@ ShallowWrapper {
                               "nodeType": "class",
                               "props": Object {
                                 "children": "Select file",
-                                "className": "btn btn-primary",
+                                "className": "btn btn-primary btn-dropzone",
                                 "disableClick": false,
                                 "disablePreview": false,
                                 "disabled": false,

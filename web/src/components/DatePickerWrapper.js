@@ -1,9 +1,11 @@
+import omit from 'lodash.omit';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { DateRangePicker } from 'react-dates';
-import { START_DATE, END_DATE } from 'react-dates/constants';
-import momentPropTypes from 'react-moment-proptypes';
+
+const dateToStr = (date, fmt = 'YYYY-MM-DD') => date.format(fmt);
+const strToDate = str => (str ? moment(str) : null);
 
 class DatePickerWrapper extends Component {
   constructor(props) {
@@ -11,17 +13,20 @@ class DatePickerWrapper extends Component {
 
     this.state = {
       focusedInput: null,
-      startDate: props.initialStartDate,
-      endDate: props.initialEndDate
+      startDate: strToDate(props.initialStartDate),
+      endDate: strToDate(props.initialEndDate)
     };
   }
 
   onDatesChange = ({ startDate, endDate }) => {
-    this.setState({ startDate, endDate }, this.afterDatesChange);
-  };
+    if (this.props.onChange) {
+      this.props.onChange({
+        start: startDate && dateToStr(startDate),
+        end: endDate && dateToStr(endDate)
+      });
+    }
 
-  afterDatesChange = () => {
-    console.log(this.state);
+    this.setState({ startDate, endDate });
   };
 
   onFocusChange = focusedInput => {
@@ -29,18 +34,22 @@ class DatePickerWrapper extends Component {
   };
 
   render() {
-    const { startDateId, endDateId } = this.props;
     const { focusedInput, startDate, endDate } = this.state;
+
+    const props = omit(this.props, [
+      'initialStartDate',
+      'initialEndDate',
+      'onChange'
+    ]);
 
     return (
       <DateRangePicker
+        {...props}
         onDatesChange={this.onDatesChange}
         onFocusChange={this.onFocusChange}
         focusedInput={focusedInput}
         startDate={startDate}
         endDate={endDate}
-        startDateId={startDateId}
-        endDateId={endDateId}
       />
     );
   }
@@ -50,8 +59,8 @@ DatePickerWrapper.propTypes = {
   startDateId: PropTypes.string.isRequired,
   endDateId: PropTypes.string.isRequired,
 
-  initialStartDate: momentPropTypes.momentObj,
-  initialEndDate: momentPropTypes.momentObj,
+  initialStartDate: PropTypes.string,
+  initialEndDate: PropTypes.string,
   onChange: PropTypes.func
 };
 

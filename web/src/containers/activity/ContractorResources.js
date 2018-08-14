@@ -22,7 +22,7 @@ import { t } from '../../i18n';
 const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
 
 class ContractorResources extends Component {
-  state = { docType: DOC_TYPES[0], focusedDate: null };
+  state = { docType: DOC_TYPES[0] };
 
   updateDocType = e => {
     this.setState({ docType: e.target.value });
@@ -36,18 +36,12 @@ class ContractorResources extends Component {
     updateActivity(activity.key, updates);
   };
 
-  handleTermChange = index => (startDate, endDate) => {
+  handleTermChange = index => ({ start, end }) => {
     const { activity, updateActivity } = this.props;
+    const dates = { start, end };
 
-    console.log(index, startDate, endDate);
-
-    // const dates = {};
-    // const dateFormat = 'YYYY-MM-DD';
-    // if (startDate) dates.start = startDate.format(dateFormat);
-    // if (endDate) dates.end = endDate.format(dateFormat);
-
-    // const updates = { contractorResources: { [index]: dates } };
-    // updateActivity(activity.key, updates);
+    const updates = { contractorResources: { [index]: dates } };
+    updateActivity(activity.key, updates);
   };
 
   handleYearChange = (index, year) => e => {
@@ -113,7 +107,7 @@ class ContractorResources extends Component {
 
   render() {
     const { activity, years, addContractor, removeContractor } = this.props;
-    const { docType, focusedDate } = this.state;
+    const { docType } = this.state;
 
     if (!activity) return null;
 
@@ -166,35 +160,14 @@ class ContractorResources extends Component {
                   <Label>
                     {t('activities.contractorResources.labels.term')}
                   </Label>
-
                   <DatePickerWrapper
                     startDateId={`contractor-${contractor.key}-start`}
                     endDateId={`contractor-${contractor.key}-end`}
+                    initialStartDate={contractor.start}
+                    initialEndDate={contractor.end}
                     onChange={this.handleTermChange(i)}
+                    numberOfMonths={1}
                   />
-
-                  {false && (
-                    <div className="md-col-6 flex">
-                      <Input
-                        type="date"
-                        name={`contractor-${contractor.key}-start`}
-                        label={t(
-                          'activities.contractorResources.srLabels.start'
-                        )}
-                        value={contractor.start}
-                        onChange={this.handleChange(i, 'start')}
-                        wrapperClass="mr2 flex-auto"
-                      />
-                      <Input
-                        type="date"
-                        name={`contractor-${contractor.key}-end`}
-                        label={t('activities.contractorResources.srLabels.end')}
-                        value={contractor.end}
-                        onChange={this.handleChange(i, 'end')}
-                        wrapperClass="mr2 flex-auto"
-                      />
-                    </div>
-                  )}
                 </div>
                 <div className="mb3 md-flex">
                   <Label>
