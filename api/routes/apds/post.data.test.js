@@ -129,38 +129,6 @@ tap.test('APD data initializer', async test => {
                 year: '2019'
               }
             ]
-          },
-          {
-            description: '',
-            title: '',
-            years: [
-              {
-                cost: 0,
-                fte: 0,
-                year: '2018'
-              },
-              {
-                cost: 0,
-                fte: 0,
-                year: '2019'
-              }
-            ]
-          },
-          {
-            description: '',
-            title: '',
-            years: [
-              {
-                cost: 0,
-                fte: 0,
-                year: '2018'
-              },
-              {
-                cost: 0,
-                fte: 0,
-                year: '2019'
-              }
-            ]
           }
         ],
         summary: '',

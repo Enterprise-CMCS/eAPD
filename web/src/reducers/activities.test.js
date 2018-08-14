@@ -84,7 +84,7 @@ describe('activities reducer', () => {
       modularity: '',
       reporting: ''
     },
-    statePersonnel: [newPerson(keyFn), newPerson(keyFn), newPerson(keyFn)],
+    statePersonnel: [newPerson(keyFn)],
     quarterlyFFP: {
       '2018': {
         '1': {
@@ -435,20 +435,6 @@ describe('activities reducer', () => {
                   ...stateWithOne.byKey['1'].statePersonnel[0].years,
                   '2020': { amt: '', perc: '' }
                 }
-              },
-              {
-                ...stateWithOne.byKey['1'].statePersonnel[1],
-                years: {
-                  ...stateWithOne.byKey['1'].statePersonnel[1].years,
-                  '2020': { amt: '', perc: '' }
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].statePersonnel[2],
-                years: {
-                  ...stateWithOne.byKey['1'].statePersonnel[2].years,
-                  '2020': { amt: '', perc: '' }
-                }
               }
             ],
             quarterlyFFP: {
@@ -512,18 +498,6 @@ describe('activities reducer', () => {
             statePersonnel: [
               {
                 ...stateWithOne.byKey['1'].statePersonnel[0],
-                years: {
-                  '2018': { amt: '', perc: '' }
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].statePersonnel[1],
-                years: {
-                  '2018': { amt: '', perc: '' }
-                }
-              },
-              {
-                ...stateWithOne.byKey['1'].statePersonnel[2],
                 years: {
                   '2018': { amt: '', perc: '' }
                 }

@@ -109,11 +109,7 @@ const newActivity = ({
   otherFundingDesc: '',
   goals: [newGoal()],
   milestones: [newMilestone()],
-  statePersonnel: [
-    newStatePerson(years),
-    newStatePerson(years),
-    newStatePerson(years)
-  ],
+  statePersonnel: [newStatePerson(years)],
   contractorResources: [newContractor(years)],
   expenses: [newExpense(years)],
   costAllocation: arrToObj(years, costAllocationEntry()),
