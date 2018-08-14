@@ -107,10 +107,11 @@ ShallowWrapper {
                 Term Period
               </Label>
               <DatePickerWrapper
+                daySize={32}
                 endDateId="contractor-contractor key-end"
                 initialEndDate="end date"
                 initialStartDate="start date"
-                numberOfMonths={1}
+                numberOfMonths={2}
                 onChange={[Function]}
                 startDateId="contractor-contractor key-start"
               />
@@ -312,10 +313,11 @@ ShallowWrapper {
                   Term Period
                 </Label>
                 <DatePickerWrapper
+                  daySize={32}
                   endDateId="contractor-contractor key-end"
                   initialEndDate="end date"
                   initialStartDate="start date"
-                  numberOfMonths={1}
+                  numberOfMonths={2}
                   onChange={[Function]}
                   startDateId="contractor-contractor key-start"
                 />
@@ -502,10 +504,11 @@ ShallowWrapper {
                     Term Period
                   </Label>
                   <DatePickerWrapper
+                    daySize={32}
                     endDateId="contractor-contractor key-end"
                     initialEndDate="end date"
                     initialStartDate="start date"
-                    numberOfMonths={1}
+                    numberOfMonths={2}
                     onChange={[Function]}
                     startDateId="contractor-contractor key-start"
                   />
@@ -765,10 +768,11 @@ ShallowWrapper {
                       Term Period
                     </Label>,
                     <DatePickerWrapper
+                      daySize={32}
                       endDateId="contractor-contractor key-end"
                       initialEndDate="end date"
                       initialStartDate="start date"
-                      numberOfMonths={1}
+                      numberOfMonths={2}
                       onChange={[Function]}
                       startDateId="contractor-contractor key-start"
                     />,
@@ -793,10 +797,11 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "class",
                     "props": Object {
+                      "daySize": 32,
                       "endDateId": "contractor-contractor key-end",
                       "initialEndDate": "end date",
                       "initialStartDate": "start date",
-                      "numberOfMonths": 1,
+                      "numberOfMonths": 2,
                       "onChange": [Function],
                       "startDateId": "contractor-contractor key-start",
                     },
@@ -1476,10 +1481,11 @@ ShallowWrapper {
                   Term Period
                 </Label>
                 <DatePickerWrapper
+                  daySize={32}
                   endDateId="contractor-contractor key-end"
                   initialEndDate="end date"
                   initialStartDate="start date"
-                  numberOfMonths={1}
+                  numberOfMonths={2}
                   onChange={[Function]}
                   startDateId="contractor-contractor key-start"
                 />
@@ -1681,10 +1687,11 @@ ShallowWrapper {
                     Term Period
                   </Label>
                   <DatePickerWrapper
+                    daySize={32}
                     endDateId="contractor-contractor key-end"
                     initialEndDate="end date"
                     initialStartDate="start date"
-                    numberOfMonths={1}
+                    numberOfMonths={2}
                     onChange={[Function]}
                     startDateId="contractor-contractor key-start"
                   />
@@ -1871,10 +1878,11 @@ ShallowWrapper {
                       Term Period
                     </Label>
                     <DatePickerWrapper
+                      daySize={32}
                       endDateId="contractor-contractor key-end"
                       initialEndDate="end date"
                       initialStartDate="start date"
-                      numberOfMonths={1}
+                      numberOfMonths={2}
                       onChange={[Function]}
                       startDateId="contractor-contractor key-start"
                     />
@@ -2134,10 +2142,11 @@ ShallowWrapper {
                         Term Period
                       </Label>,
                       <DatePickerWrapper
+                        daySize={32}
                         endDateId="contractor-contractor key-end"
                         initialEndDate="end date"
                         initialStartDate="start date"
-                        numberOfMonths={1}
+                        numberOfMonths={2}
                         onChange={[Function]}
                         startDateId="contractor-contractor key-start"
                       />,
@@ -2162,10 +2171,11 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "class",
                       "props": Object {
+                        "daySize": 32,
                         "endDateId": "contractor-contractor key-end",
                         "initialEndDate": "end date",
                         "initialStartDate": "start date",
-                        "numberOfMonths": 1,
+                        "numberOfMonths": 2,
                         "onChange": [Function],
                         "startDateId": "contractor-contractor key-start",
                       },

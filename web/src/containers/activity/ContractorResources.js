@@ -166,7 +166,8 @@ class ContractorResources extends Component {
                     initialStartDate={contractor.start}
                     initialEndDate={contractor.end}
                     onChange={this.handleTermChange(i)}
-                    numberOfMonths={1}
+                    numberOfMonths={2}
+                    daySize={32}
                   />
                 </div>
                 <div className="mb3 md-flex">
