@@ -37,23 +37,25 @@ class CostAllocateFFP extends Component {
         <div className="clearfix mxn1">
           {byYearData.map(
             ({ year, total, totalNetOther, ffpSelectVal, allocations }) => (
-              <div key={year} className="col col-12 sm-col-4 px1">
+              <div key={year} className="col col-12 sm-col-6 mb2 px1">
                 <div className="p2 bg-gray-lightest">
                   <div>{year}</div>
-                  <div className="h3 bold mono">{formatMoney(total)}</div>
+                  <div className="h3 bold mono truncate">{formatMoney(total)}</div>
                   <hr />
                   <DollarInput
+                    wrapperClass="lg-col-8 mb2"
                     name={`cost-allocate-other-${year}`}
                     label={t('activities.costAllocate.ffp.labels.other')}
                     value={costAllocation[year].other}
                     onChange={this.handleOther(year)}
                   />
                   <div>{t('activities.costAllocate.ffp.totalNetOther')}</div>
-                  <div className="h3 bold mono">
+                  <div className="h4 bold mono truncate">
                     {formatMoney(totalNetOther)}
                   </div>
                   <hr />
                   <Select
+                    wrapperClass="lg-col-8 mb2"
                     name={`ffp-${year}`}
                     label={t(
                       'activities.costAllocate.ffp.labels.fedStateSplit'
@@ -62,11 +64,11 @@ class CostAllocateFFP extends Component {
                     value={ffpSelectVal}
                     onChange={this.handleFFP(year)}
                   />
-                  <div className="flex mxn-tiny">
+                  <div className="lg-flex">
                     {allocations.map(({ id, amount }) => (
-                      <div key={id} className="col-12">
+                      <div key={id} className="lg-col-6 mb1 lg-m0">
                         <div>{titleCase(id)}</div>
-                        <div className="h3 bold mono">
+                        <div className="h4 bold mono truncate">
                           {formatMoney(amount)}
                         </div>
                       </div>
