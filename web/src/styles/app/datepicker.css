@@ -1,0 +1,49 @@
+@import 'react-dates/lib/css/_datepicker.css';
+
+.DateRangePicker_picker {
+  z-index: 3;
+}
+
+.DateRangePickerInput__withBorder,
+.DateInput,
+.DateInput_input {
+  border-radius: var(--border-radius);
+}
+
+.DateInput {
+  width: 110px;
+}
+
+.DateRangePickerInput__withBorder {
+  border-color: #ccc;
+}
+
+.DateInput_input {
+  border: 0;
+  font-size: 0.875rem;
+  font-weight: inherit;
+  height: 2.375rem;
+  line-height: inherit;
+  text-align: center;
+}
+
+.DateInput_input__focused {
+  background-color: #eee;
+  border: 0;
+}
+
+.DateRangePickerInput_arrow {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  line-height: 1;
+}
+
+.DateRangePickerInput_arrow_svg {
+  width: 20px;
+  height: 20px;
+}
+
+.CalendarMonth_table td {
+  padding: 0;
+  vertical-align: middle;
+}

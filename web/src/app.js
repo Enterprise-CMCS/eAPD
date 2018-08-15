@@ -2,6 +2,7 @@ import 'babel-polyfill';
 
 import createHistory from 'history/createBrowserHistory';
 import React from 'react';
+import 'react-dates/initialize';
 import { render } from 'react-dom';
 import { routerMiddleware } from 'react-router-redux';
 import { createStore, applyMiddleware } from 'redux';
