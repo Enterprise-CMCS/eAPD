@@ -259,6 +259,7 @@
       noMilestonesNotice: Add milestones for this activity.
       milestoneHeader: Milestone
       milestoneLabel: Milestone name
+      dateHeader: Planned Start and End
       startHeader: Planned start
       startLabel: planned start date
       endHeader: Planned end

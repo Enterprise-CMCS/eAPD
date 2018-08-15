@@ -14,3 +14,15 @@
   border-color: #ddd;
   box-shadow: none;
 }
+
+/*
+* for some reason, the file upload input nested within
+* our custom 'btn-dropzone' div had a large width by default
+* which was throwing off our mobile layout container. this
+* fixes that.
+*/
+
+.btn-dropzone input {
+  width: 1px;
+  height: 1px;
+}
