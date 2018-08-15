@@ -239,7 +239,7 @@
       helpText: >-
         Include a brief description of how each goal relates to the vision
         identified in the program summary section.
-      reminder: "DON'T FORGET: Each goal should have a matching objective."
+      reminder: "Each goal should have a matching objective."
       goal: 
         title: "Goal #{{number}}"
       objective: 
