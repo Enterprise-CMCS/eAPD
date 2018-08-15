@@ -48,9 +48,9 @@ describe('activities reducer', () => {
 
   const newMilestone = keyFn => ({
     key: keyFn(),
-    end: '',
-    name: '',
-    start: ''
+    plannedEnd: '',
+    milestone: '',
+    plannedStart: ''
   });
 
   const newActivity = keyFn => ({
@@ -68,7 +68,7 @@ describe('activities reducer', () => {
     fundingSource: 'HIT',
     goals: [newGoal(keyFn)],
     meta: { expanded: false },
-    milestones: [newMilestone(keyFn)],
+    schedule: [newMilestone(keyFn)],
     name: '',
     otherFundingDesc: '',
     standardsAndConditions: {
@@ -199,7 +199,7 @@ describe('activities reducer', () => {
     [
       'milestone',
       'ADD_ACTIVITY_MILESTONE',
-      'milestones',
+      'schedule',
       newMilestone(() => 'new key')
     ]
   ].forEach(([title, action, property, newObject]) => {
@@ -257,7 +257,7 @@ describe('activities reducer', () => {
       title: 'milestone',
       action: 'REMOVE_ACTIVITY_MILESTONE',
       actionKey: 'milestoneKey',
-      property: 'milestones'
+      property: 'schedule'
     }
   ].forEach(({ title, action, actionKey, property }) => {
     it(`handles removing ${title}`, () => {
