@@ -30,7 +30,7 @@
       title: State Profile Contact Information
       helpText: >-
         In this section, list relevant state contacts. If the information is
-        on record, it will be listed below. Ensure the director(s) name and
+        on record, it will be listed below. Ensure the director's name and
         office address are listed correctly.
       directorAndAddress:
         title: State Medicaid Director & Medicaid Office Address
@@ -75,7 +75,7 @@
       reminder: >-
         Indicate the federal fiscal years for which this APD is requesting
         funding.
-      yearsCovered: What federal fiscal year(s) does this APD cover?
+      yearsCovered: Choose the federal fiscal year(s) this APD covers?
       labels: 
         desc: Program Introduction
         helpText: >-
