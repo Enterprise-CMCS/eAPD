@@ -31,11 +31,11 @@ class EntryBasic extends Component {
           <Input
             name={`activity-list-entry-${key}`}
             label="activity name"
-            hideLabel
-            className="col-12 input m0"
+            wrapperClass="m0"
             value={name}
             onChange={this.handleChange('name')}
             disabled={num === 1}
+            hideLabel
           />
         </div>
         <div className="mr1">
