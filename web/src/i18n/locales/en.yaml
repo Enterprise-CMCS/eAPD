@@ -75,7 +75,7 @@
       reminder: >-
         Indicate the federal fiscal years for which this APD is requesting
         funding.
-      yearsCovered: Choose the federal fiscal year(s) this APD covers?
+      yearsCovered: Choose the federal fiscal year(s) this APD covers.
       labels: 
         desc: Program Introduction
         helpText: >-
