@@ -122,7 +122,7 @@ const Sidebar = ({
     <div className="xs-hide sm-hide">
       <div className="px2 py3 lg-px3 lg-py4 bg-white flex items-center">
         <img
-          src={`/static/img/${place.id}.svg`}
+          src={`/static/img/states/${place.id}.svg`}
           alt={place.name}
           className="align-middle mr2"
           width="40"
