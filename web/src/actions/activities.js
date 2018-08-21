@@ -23,14 +23,13 @@ const actionWithYears = (type, other) => (dispatch, getState) =>
   dispatch({ type, ...other, years: getState().apd.data.years });
 
 export const addActivity = () => (dispatch, getState) => {
-  const oldActivities = getState().activities.allKeys;
+  const oldActivities = new Set(getState().activities.allKeys);
 
   dispatch(actionWithYears(ADD_ACTIVITY));
   dispatch(updateBudget());
 
-  const newKey = getState().activities.allKeys.filter(
-    k => !oldActivities.includes(k)
-  )[0];
+  const newKey = getState().activities.allKeys.find(k => !oldActivities.has(k));
+
   dispatch({
     type: ADD_ACTIVITY_DIRTY,
     data: getState().activities.byKey[newKey]
