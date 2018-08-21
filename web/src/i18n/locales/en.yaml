@@ -68,13 +68,11 @@
     overview: 
       title: Program Overview
       helpText: >-
-        Provide a high level summary of the state program including history,
-        and future vision. This initial overview is intended to be brief,
-        there will be opportunities to explain in more detail in the activity
-        details section.
+        
       reminder: >-
-        Indicate the federal fiscal years for which this APD is requesting
-        funding.
+        Provide a high level summary of the state program including history,
+        and future vision. Write a high level summary of history and future vision of the state program. Indicate which federal fiscal years this APD covers. This initial overview is intended to be brief, expanded details can be included in the activity details section.
+
       yearsCovered: Choose the federal fiscal year(s) this APD covers.
       labels: 
         desc: Program Introduction
@@ -85,15 +83,15 @@
     hit: 
       title: HIT Overview
       helpText: >-
-        Briefly summarize planned HIT funded activities contained within this
-        APD. Additional details will be provided later.
+        Summarize briefly planned HIT funded activities contained within this
+        APD.
     hie: 
       title: HIE Overview
-      helpText: >-
-        Briefly summarize planned HIE funded activities contained within
-        this APD. If there are no HIE activities, skip this
-        section. This section should include a brief description for each
-        item below:
+      reminder: >-
+        Summarize planned HIE funded activities within this APD. 
+        This section should include a brief description for each
+        item below (If there are no HIE activities, skip this
+        section.):
 
 
         (1) Description of the state's HIE approach (statewide, sub-state
@@ -112,18 +110,18 @@
         more efficient approval process.
     mmis: 
       title: MMIS Overview
-      helpText: >-
+      reminder: >-
         Briefly summarize planned MMIS funded activities contained within this
         APD. If there are no MMIS activities, skip this section.
   previousActivities: 
     title: Results of Previous Activities
-    helpText: >-
+    reminder: >-
       Include a description of the results of previously approved activities.
       This information is similar to the content from the IAPD template
       section: results of previous activities.
     outline: 
       title: Prior Activities Outline
-      helpText: >-
+      reminder: >-
         Include a high level description of the activities approved in the
         previous APD that are completed, in-progress, or on-hold.
       label: Previous Activities Summary
@@ -165,7 +163,7 @@
           actual: Actual
   activities: 
     title: Program Activities
-    helpText: >-
+    reminder: >-
       Identify each of the activities referenced from the overview section.
       The information will be collected for each activity.
     list: 
