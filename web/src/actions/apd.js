@@ -141,7 +141,7 @@ export const notifyNetError = (action, error) => {
   return notify(`${action} failed (${reason})`);
 };
 
-export const saveApd = () => (dispatch, state) => {
+export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
   dispatch(requestSave());
 
   const { apd: { data: updatedApd }, activities, dirty } = state();
@@ -151,7 +151,7 @@ export const saveApd = () => (dispatch, state) => {
     return Promise.resolve();
   }
 
-  const apd = toAPI(updatedApd, activities);
+  const apd = serialize(updatedApd, activities);
 
   // These are the fields we want to remove if they aren't dirty.
   const filterAPDFields = [

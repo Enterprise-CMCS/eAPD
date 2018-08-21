@@ -2,6 +2,7 @@ import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import sinon from 'sinon';
+import u from 'updeep';
 
 import * as actions from './apd';
 import * as notificationActions from './notification';
@@ -327,189 +328,62 @@ describe('apd actions', () => {
   });
 
   describe('save APD to API', () => {
+    const serialize = sinon.mock();
+    const serializedApd = {
+      activities: [
+        {
+          alternatives: 'alternatives approach',
+          contractorResources: 'contractors',
+          costAllocation: 'give us those dollars',
+          costAllocationNarrative: 'cost allocation narrative',
+          description: 'activity description',
+          expenses: 'paper, pens, airplanes, and bouncy castles',
+          fundingSource: 'funding source',
+          goals: 'build the best Medicaid IT system ever seen',
+          id: 'activity 1',
+          key: 'activity 1',
+          name: 'activity name',
+          schedule: 'before the heat death of the universe',
+          standardsAndConditions: 'florp',
+          statePersonnel: 'the people who work here',
+          summary: 'activity summary',
+          quarterlyFFP: 'we want money a little at a time'
+        },
+        {
+          alternatives: 'alternatives approach 2',
+          costAllocationDesc: 'cost allocation methodology 2',
+          description: 'activity description 2',
+          fundingSource: 'funding source 2',
+          id: 'activity 2',
+          key: 'activity 2',
+          name: 'activity 2 name',
+          otherFundingDesc: 'other funding sources 2',
+          summary: 'activity summary 2'
+        }
+      ],
+      federalCitations: 'CFR 395.2362.472462.2352.36 (b) three',
+      id: 'id-to-update',
+      incentivePayments: 'money to do good work',
+      narrativeHIE: 'HIE narrative text',
+      narrativeHIT: 'HIT narrative text',
+      narrativeMMIS: 'MMIS narrative text',
+      programOverview: 'APD overview text',
+      pointsOfContact: 'people to call if stuff goes sour',
+      previousActivityExpenses: 'money we spent last time',
+      previousActivitySummary: 'other activities happened in the past',
+      stateProfile: 'we like long walks on the beach',
+      summary: 'apd summary',
+      years: ['1992', '1993']
+    };
+
     const state = {
       notification: { open: false, queue: [] },
       apd: {
         data: {
-          id: 'id-to-update',
-          incentivePayments: {
-            ehAmt: {
-              1337: {
-                1: 1,
-                2: 2,
-                3: 3,
-                4: 4
-              }
-            },
-            ehCt: {
-              1337: {
-                1: 10,
-                2: 20,
-                3: 30,
-                4: 40
-              }
-            },
-            epAmt: {
-              1337: {
-                1: 100,
-                2: 200,
-                3: 300,
-                4: 400
-              }
-            },
-            epCt: {
-              1337: {
-                1: 1000,
-                2: 2000,
-                3: 3000,
-                4: 4000
-              }
-            }
-          },
-          hieNarrative: 'HIE narrative text',
-          hitNarrative: 'HIT narrative text',
-          mmisNarrative: 'MMIS narrative text',
-          pointsOfContact: 'people to call if stuff goes sour',
-          previousActivityExpenses: {
-            1066: {
-              hie: 'battle of hastings',
-              hit: 'moop moop'
-            }
-          },
-          previousActivitySummary: 'other activities happened in the past',
-          overview: 'APD overview text',
-          years: ['1992', '1993'],
-          stateProfile: {
-            medicaidDirector: 'an object goes here',
-            medicaidOffice: 'an object goes here'
-          }
+          id: 'id-to-update'
         }
       },
-      activities: {
-        byKey: {
-          '1': {
-            name: 'activity name',
-            fundingSource: 'funding source',
-            descShort: 'activity summary',
-            descLong: 'activity description',
-            altApproach: 'alternatives approach',
-            costAllocationDesc: 'cost allocation methodology',
-            previousActivitySummary: 'other activities happened in the past',
-            previousActivityExpenses: [
-              {
-                year: 1066,
-                hie: 'battle of hastings',
-                hit: 'moop moop'
-              }
-            ],
-            otherFundingDesc: 'other funding sources',
-            costAllocation: {
-              '1993': { ffp: { federal: 90, state: 10 }, other: 0 },
-              '1994': { ffp: { federal: 70, state: 20 }, other: 10 }
-            },
-            goals: [
-              { desc: 'goal 1 description', obj: 'objective 1' },
-              { desc: 'goal 2 description', obj: 'objective 2' }
-            ],
-            milestones: [
-              { name: 'milestone 1', start: 'start 1', end: 'end 1' },
-              { name: 'milestone 2', start: 'start 2', end: 'end 2' }
-            ],
-            statePersonnel: [
-              {
-                title: 'title 1',
-                desc: 'description 1',
-                years: {
-                  '1993': { amt: 100, perc: 100 },
-                  '1994': { amt: 200, perc: 40 }
-                }
-              }
-            ],
-            contractorResources: [
-              {
-                name: 'name 1',
-                desc: 'description 1',
-                years: { '1993': 100, '1994': 200 },
-                hourly: {
-                  useHourly: false,
-                  data: {}
-                }
-              }
-            ],
-            expenses: [
-              {
-                category: 'category 1',
-                desc: 'description 1',
-                years: { '1993': 100, '1994': 200 }
-              },
-              {
-                category: 'category 2',
-                desc: 'description 2',
-                years: { '1993': 300, '1994': 400 }
-              }
-            ],
-            standardsAndConditions: {
-              bizResults: 'business results',
-              documentation: 'documentation',
-              industry: 'industry standards',
-              interoperability: 'interoperability',
-              keyPersonnel: 'key personnel',
-              leverage: 'leverage',
-              minimizeCost: 'minimize cost',
-              mitigation: 'mitigation',
-              modularity: 'modularity',
-              mita: 'mita',
-              reporting: 'reporting'
-            },
-            quarterlyFFP: {
-              '1993': {
-                '1': {
-                  combined: 20,
-                  contractors: 30,
-                  state: 40
-                },
-                '2': {
-                  combined: 20,
-                  contractors: 30,
-                  state: 40
-                },
-                '3': {
-                  combined: 20,
-                  contractors: 30,
-                  state: 40
-                },
-                '4': {
-                  combined: 20,
-                  contractors: 30,
-                  state: 40
-                }
-              },
-              '1994': {
-                '1': {
-                  combined: 20,
-                  contractors: 30,
-                  state: 40
-                },
-                '2': {
-                  combined: 20,
-                  contractors: 30,
-                  state: 40
-                },
-                '3': {
-                  combined: 20,
-                  contractors: 30,
-                  state: 40
-                },
-                '4': {
-                  combined: 20,
-                  contractors: 30,
-                  state: 40
-                }
-              }
-            }
-          }
-        }
-      },
+      activities: {},
       dirty: {
         data: {
           apd: {},
@@ -522,6 +396,15 @@ describe('apd actions', () => {
     };
 
     beforeEach(() => {
+      serialize.resetBehavior();
+      serialize.resetHistory();
+
+      // Create a new cloned object for each test because
+      // the APD action mutates the returned value.  If
+      // we don't reset, each test begins with the results
+      // of the previous test's mutations. 😬
+      serialize.returns(JSON.parse(JSON.stringify(serializedApd)));
+
       state.dirty.dirty = true;
       fetchMock.reset();
     });
@@ -539,8 +422,11 @@ describe('apd actions', () => {
         }
       ];
 
-      return store.dispatch(actions.saveApd()).catch(() => {
+      return store.dispatch(actions.saveApd({ serialize })).catch(() => {
         expect(store.getActions()).toEqual(expectedActions);
+        expect(serialize.calledWith(state.apd.data, state.activities)).toEqual(
+          true
+        );
       });
     });
 
@@ -557,28 +443,144 @@ describe('apd actions', () => {
         { type: actions.SAVE_APD_FAILURE }
       ];
 
-      return store.dispatch(actions.saveApd()).catch(() => {
+      return store.dispatch(actions.saveApd({ serialize })).catch(() => {
         expect(store.getActions()).toEqual(expectedActions);
+        expect(serialize.calledWith(state.apd.data, state.activities)).toEqual(
+          true
+        );
       });
     });
 
-    it('creates save request and save success actions if the save succeeds', () => {
-      const store = mockStore(state);
-      fetchMock.onPut('/apds/id-to-update').reply(200, { foo: 'bar' });
+    describe('successful saves when APD props are dirty', () => {
+      const defaultDirtyObject = {
+        // these get reversed in the process of removing the clean ones
+        activities: [{ id: 'activity 2' }, { id: 'activity 1' }],
+        id: 'id-to-update',
+        pointsOfContact: 'people to call if stuff goes sour',
+        summary: 'apd summary',
+        years: ['1992', '1993']
+      };
 
-      // TODO: Need to test what's actually sent to the API to make sure transformations are right
+      Object.entries({
+        'no prop': undefined,
+        federalCitations: 'CFR 395.2362.472462.2352.36 (b) three',
+        incentivePayments: 'money to do good work',
+        narrativeHIE: 'HIE narrative text',
+        narrativeHIT: 'HIT narrative text',
+        narrativeMMIS: 'MMIS narrative text',
+        programOverview: 'APD overview text',
+        previousActivityExpenses: 'money we spent last time',
+        previousActivitySummary: 'other activities happened in the past',
+        stateProfile: 'we like long walks on the beach'
+      }).forEach(([prop, content]) => {
+        it(`saves correctly when ${prop} is dirty`, () => {
+          const store = mockStore(
+            u({ dirty: { data: { apd: { [prop]: true } } } }, state)
+          );
+          fetchMock
+            .onPut(
+              '/apds/id-to-update',
+              content
+                ? {
+                    ...defaultDirtyObject,
+                    [prop]: content
+                  }
+                : defaultDirtyObject
+            )
+            .reply(200, { foo: 'bar' });
 
-      const expectedActions = [
-        { type: actions.SAVE_APD_REQUEST },
-        {
-          type: notificationActions.ADD_NOTIFICATION,
-          message: 'Save successful!'
-        },
-        { type: actions.SAVE_APD_SUCCESS, data: { foo: 'bar' } }
-      ];
+          const expectedActions = [
+            { type: actions.SAVE_APD_REQUEST },
+            {
+              type: notificationActions.ADD_NOTIFICATION,
+              message: 'Save successful!'
+            },
+            { type: actions.SAVE_APD_SUCCESS, data: { foo: 'bar' } }
+          ];
 
-      return store.dispatch(actions.saveApd()).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
+          return store.dispatch(actions.saveApd({ serialize })).then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(
+              serialize.calledWith(state.apd.data, state.activities)
+            ).toEqual(true);
+          });
+        });
+      });
+    });
+
+    describe('successful saves when APD activity props are dirty', () => {
+      const defaultDirtyObject = {
+        activities: [
+          {
+            alternatives: 'alternatives approach',
+            description: 'activity description',
+            fundingSource: 'funding source',
+            id: 'activity 1',
+            key: 'activity 1',
+            name: 'activity name',
+            summary: 'activity summary'
+          },
+          { id: 'activity 2' }
+        ],
+        id: 'id-to-update',
+        pointsOfContact: 'people to call if stuff goes sour',
+        summary: 'apd summary',
+        years: ['1992', '1993']
+      };
+
+      Object.entries({
+        'no prop': undefined,
+        contractorResources: 'contractors',
+        costAllocation: 'give us those dollars',
+        costAllocationNarrative: 'cost allocation narrative',
+        expenses: 'paper, pens, airplanes, and bouncy castles',
+        goals: 'build the best Medicaid IT system ever seen',
+        schedule: 'before the heat death of the universe',
+        standardsAndConditions: 'florp',
+        statePersonnel: 'the people who work here',
+        quarterlyFFP: 'we want money a little at a time'
+      }).forEach(([prop, content]) => {
+        it(`saves correctly when activity ${prop} is dirty`, () => {
+          const store = mockStore(
+            u(
+              {
+                dirty: {
+                  data: {
+                    activities: { byKey: { 'activity 1': { [prop]: true } } }
+                  }
+                }
+              },
+              state
+            )
+          );
+          fetchMock
+            .onPut(
+              '/apds/id-to-update',
+              content
+                ? u(
+                    { activities: { 0: { [prop]: content } } },
+                    defaultDirtyObject
+                  )
+                : defaultDirtyObject
+            )
+            .reply(200, { foo: 'bar' });
+
+          const expectedActions = [
+            { type: actions.SAVE_APD_REQUEST },
+            {
+              type: notificationActions.ADD_NOTIFICATION,
+              message: 'Save successful!'
+            },
+            { type: actions.SAVE_APD_SUCCESS, data: { foo: 'bar' } }
+          ];
+
+          return store.dispatch(actions.saveApd({ serialize })).then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(
+              serialize.calledWith(state.apd.data, state.activities)
+            ).toEqual(true);
+          });
+        });
       });
     });
   });
