@@ -10,20 +10,14 @@ import {
   updateActivity as updateActivityAction
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
+import DatePickerWrapper from '../../components/DatePickerWrapper';
 import DeleteButton from '../../components/DeleteConfirm';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
+import Label from '../../components/Label';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
-
-const Label = props => (
-  <h3 className="md-col-2 my-tiny pr1 h5">{props.children}</h3>
-);
-
-Label.propTypes = {
-  children: PropTypes.node.isRequired
-};
 
 const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
 
@@ -39,6 +33,14 @@ class ContractorResources extends Component {
     const { activity, updateActivity } = this.props;
 
     const updates = { contractorResources: { [index]: { [field]: value } } };
+    updateActivity(activity.key, updates);
+  };
+
+  handleTermChange = index => ({ start, end }) => {
+    const { activity, updateActivity } = this.props;
+    const dates = { start, end };
+
+    const updates = { contractorResources: { [index]: dates } };
     updateActivity(activity.key, updates);
   };
 
@@ -158,24 +160,15 @@ class ContractorResources extends Component {
                   <Label>
                     {t('activities.contractorResources.labels.term')}
                   </Label>
-                  <div className="md-col-6 flex">
-                    <Input
-                      type="date"
-                      name={`contractor-${contractor.key}-start`}
-                      label={t('activities.contractorResources.srLabels.start')}
-                      value={contractor.start}
-                      onChange={this.handleChange(i, 'start')}
-                      wrapperClass="mr2 flex-auto"
-                    />
-                    <Input
-                      type="date"
-                      name={`contractor-${contractor.key}-end`}
-                      label={t('activities.contractorResources.srLabels.end')}
-                      value={contractor.end}
-                      onChange={this.handleChange(i, 'end')}
-                      wrapperClass="mr2 flex-auto"
-                    />
-                  </div>
+                  <DatePickerWrapper
+                    startDateId={`contractor-${contractor.key}-start`}
+                    endDateId={`contractor-${contractor.key}-end`}
+                    initialStartDate={contractor.start}
+                    initialEndDate={contractor.end}
+                    onChange={this.handleTermChange(i)}
+                    numberOfMonths={2}
+                    daySize={32}
+                  />
                 </div>
                 <div className="mb3 md-flex">
                   <Label>
@@ -192,7 +185,7 @@ class ContractorResources extends Component {
                         onChange={this.updateDocType}
                       />
                       <Dropzone
-                        className="btn btn-primary"
+                        className="btn btn-primary btn-dropzone"
                         onDrop={this.handleFileUpload(i)}
                         multiple={false}
                         inputProps={{

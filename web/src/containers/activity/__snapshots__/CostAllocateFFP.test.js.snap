@@ -82,7 +82,7 @@ ShallowWrapper {
           className="clearfix mxn1"
         >
           <div
-            className="col col-12 sm-col-4 px1"
+            className="col col-12 sm-col-6 mb2 px1"
           >
             <div
               className="p2 bg-gray-lightest"
@@ -91,7 +91,7 @@ ShallowWrapper {
                 1066
               </div>
               <div
-                className="h3 bold mono"
+                className="h3 bold mono truncate"
               >
                 $300
               </div>
@@ -103,13 +103,13 @@ ShallowWrapper {
                 onChange={[Function]}
                 type="text"
                 value={10}
-                wrapperClass=""
+                wrapperClass="lg-col-8 mb2"
               />
               <div>
                 Medicaid Share
               </div>
               <div
-                className="h3 bold mono"
+                className="h4 bold mono truncate"
               >
                 $290
               </div>
@@ -127,31 +127,31 @@ ShallowWrapper {
                   ]
                 }
                 value="90-10"
-                wrapperClass=""
+                wrapperClass="lg-col-8 mb2"
               />
               <div
-                className="flex mxn-tiny"
+                className="lg-flex"
               >
                 <div
-                  className="col-12"
+                  className="lg-col-6 mb1 lg-m0"
                 >
                   <div>
                     Federal
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h4 bold mono truncate"
                   >
                     $261
                   </div>
                 </div>
                 <div
-                  className="col-12"
+                  className="lg-col-6 mb1 lg-m0"
                 >
                   <div>
                     State
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h4 bold mono truncate"
                   >
                     $29
                   </div>
@@ -160,7 +160,7 @@ ShallowWrapper {
             </div>
           </div>
           <div
-            className="col col-12 sm-col-4 px1"
+            className="col col-12 sm-col-6 mb2 px1"
           >
             <div
               className="p2 bg-gray-lightest"
@@ -169,7 +169,7 @@ ShallowWrapper {
                 1067
               </div>
               <div
-                className="h3 bold mono"
+                className="h3 bold mono truncate"
               >
                 $3,000
               </div>
@@ -181,13 +181,13 @@ ShallowWrapper {
                 onChange={[Function]}
                 type="text"
                 value={0}
-                wrapperClass=""
+                wrapperClass="lg-col-8 mb2"
               />
               <div>
                 Medicaid Share
               </div>
               <div
-                className="h3 bold mono"
+                className="h4 bold mono truncate"
               >
                 $3,000
               </div>
@@ -205,31 +205,31 @@ ShallowWrapper {
                   ]
                 }
                 value="10-90"
-                wrapperClass=""
+                wrapperClass="lg-col-8 mb2"
               />
               <div
-                className="flex mxn-tiny"
+                className="lg-flex"
               >
                 <div
-                  className="col-12"
+                  className="lg-col-6 mb1 lg-m0"
                 >
                   <div>
                     Federal
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h4 bold mono truncate"
                   >
                     $300
                   </div>
                 </div>
                 <div
-                  className="col-12"
+                  className="lg-col-6 mb1 lg-m0"
                 >
                   <div>
                     State
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h4 bold mono truncate"
                   >
                     $2,700
                   </div>
@@ -261,7 +261,7 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <div
-              className="col col-12 sm-col-4 px1"
+              className="col col-12 sm-col-6 mb2 px1"
             >
               <div
                 className="p2 bg-gray-lightest"
@@ -270,7 +270,7 @@ ShallowWrapper {
                   1066
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h3 bold mono truncate"
                 >
                   $300
                 </div>
@@ -282,13 +282,13 @@ ShallowWrapper {
                   onChange={[Function]}
                   type="text"
                   value={10}
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div>
                   Medicaid Share
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h4 bold mono truncate"
                 >
                   $290
                 </div>
@@ -306,31 +306,31 @@ ShallowWrapper {
                     ]
                   }
                   value="90-10"
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div
-                  className="flex mxn-tiny"
+                  className="lg-flex"
                 >
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       Federal
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $261
                     </div>
                   </div>
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       State
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $29
                     </div>
@@ -339,7 +339,7 @@ ShallowWrapper {
               </div>
             </div>,
             <div
-              className="col col-12 sm-col-4 px1"
+              className="col col-12 sm-col-6 mb2 px1"
             >
               <div
                 className="p2 bg-gray-lightest"
@@ -348,7 +348,7 @@ ShallowWrapper {
                   1067
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h3 bold mono truncate"
                 >
                   $3,000
                 </div>
@@ -360,13 +360,13 @@ ShallowWrapper {
                   onChange={[Function]}
                   type="text"
                   value={0}
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div>
                   Medicaid Share
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h4 bold mono truncate"
                 >
                   $3,000
                 </div>
@@ -384,31 +384,31 @@ ShallowWrapper {
                     ]
                   }
                   value="10-90"
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div
-                  className="flex mxn-tiny"
+                  className="lg-flex"
                 >
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       Federal
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $300
                     </div>
                   </div>
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       State
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $2,700
                     </div>
@@ -433,7 +433,7 @@ ShallowWrapper {
                   1066
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h3 bold mono truncate"
                 >
                   $300
                 </div>
@@ -445,13 +445,13 @@ ShallowWrapper {
                   onChange={[Function]}
                   type="text"
                   value={10}
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div>
                   Medicaid Share
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h4 bold mono truncate"
                 >
                   $290
                 </div>
@@ -469,38 +469,38 @@ ShallowWrapper {
                     ]
                   }
                   value="90-10"
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div
-                  className="flex mxn-tiny"
+                  className="lg-flex"
                 >
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       Federal
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $261
                     </div>
                   </div>
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       State
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $29
                     </div>
                   </div>
                 </div>
               </div>,
-              "className": "col col-12 sm-col-4 px1",
+              "className": "col col-12 sm-col-6 mb2 px1",
             },
             "ref": null,
             "rendered": Object {
@@ -513,7 +513,7 @@ ShallowWrapper {
                     1066
                   </div>,
                   <div
-                    className="h3 bold mono"
+                    className="h3 bold mono truncate"
                   >
                     $300
                   </div>,
@@ -525,13 +525,13 @@ ShallowWrapper {
                     onChange={[Function]}
                     type="text"
                     value={10}
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />,
                   <div>
                     Medicaid Share
                   </div>,
                   <div
-                    className="h3 bold mono"
+                    className="h4 bold mono truncate"
                   >
                     $290
                   </div>,
@@ -549,31 +549,31 @@ ShallowWrapper {
                       ]
                     }
                     value="90-10"
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />,
                   <div
-                    className="flex mxn-tiny"
+                    className="lg-flex"
                   >
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         Federal
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $261
                       </div>
                     </div>
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         State
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $29
                       </div>
@@ -601,7 +601,7 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": "$300",
-                    "className": "h3 bold mono",
+                    "className": "h3 bold mono truncate",
                   },
                   "ref": null,
                   "rendered": "$300",
@@ -627,7 +627,7 @@ ShallowWrapper {
                     "onChange": [Function],
                     "type": "text",
                     "value": 10,
-                    "wrapperClass": "",
+                    "wrapperClass": "lg-col-8 mb2",
                   },
                   "ref": null,
                   "rendered": null,
@@ -650,7 +650,7 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": "$290",
-                    "className": "h3 bold mono",
+                    "className": "h4 bold mono truncate",
                   },
                   "ref": null,
                   "rendered": "$290",
@@ -680,7 +680,7 @@ ShallowWrapper {
                       "50-50",
                     ],
                     "value": "90-10",
-                    "wrapperClass": "",
+                    "wrapperClass": "lg-col-8 mb2",
                   },
                   "ref": null,
                   "rendered": null,
@@ -693,31 +693,31 @@ ShallowWrapper {
                   "props": Object {
                     "children": Array [
                       <div
-                        className="col-12"
+                        className="lg-col-6 mb1 lg-m0"
                       >
                         <div>
                           Federal
                         </div>
                         <div
-                          className="h3 bold mono"
+                          className="h4 bold mono truncate"
                         >
                           $261
                         </div>
                       </div>,
                       <div
-                        className="col-12"
+                        className="lg-col-6 mb1 lg-m0"
                       >
                         <div>
                           State
                         </div>
                         <div
-                          className="h3 bold mono"
+                          className="h4 bold mono truncate"
                         >
                           $29
                         </div>
                       </div>,
                     ],
-                    "className": "flex mxn-tiny",
+                    "className": "lg-flex",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -731,12 +731,12 @@ ShallowWrapper {
                             Federal
                           </div>,
                           <div
-                            className="h3 bold mono"
+                            className="h4 bold mono truncate"
                           >
                             $261
                           </div>,
                         ],
-                        "className": "col-12",
+                        "className": "lg-col-6 mb1 lg-m0",
                       },
                       "ref": null,
                       "rendered": Array [
@@ -757,7 +757,7 @@ ShallowWrapper {
                           "nodeType": "host",
                           "props": Object {
                             "children": "$261",
-                            "className": "h3 bold mono",
+                            "className": "h4 bold mono truncate",
                           },
                           "ref": null,
                           "rendered": "$261",
@@ -776,12 +776,12 @@ ShallowWrapper {
                             State
                           </div>,
                           <div
-                            className="h3 bold mono"
+                            className="h4 bold mono truncate"
                           >
                             $29
                           </div>,
                         ],
-                        "className": "col-12",
+                        "className": "lg-col-6 mb1 lg-m0",
                       },
                       "ref": null,
                       "rendered": Array [
@@ -802,7 +802,7 @@ ShallowWrapper {
                           "nodeType": "host",
                           "props": Object {
                             "children": "$29",
-                            "className": "h3 bold mono",
+                            "className": "h4 bold mono truncate",
                           },
                           "ref": null,
                           "rendered": "$29",
@@ -831,7 +831,7 @@ ShallowWrapper {
                   1067
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h3 bold mono truncate"
                 >
                   $3,000
                 </div>
@@ -843,13 +843,13 @@ ShallowWrapper {
                   onChange={[Function]}
                   type="text"
                   value={0}
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div>
                   Medicaid Share
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h4 bold mono truncate"
                 >
                   $3,000
                 </div>
@@ -867,38 +867,38 @@ ShallowWrapper {
                     ]
                   }
                   value="10-90"
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div
-                  className="flex mxn-tiny"
+                  className="lg-flex"
                 >
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       Federal
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $300
                     </div>
                   </div>
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       State
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $2,700
                     </div>
                   </div>
                 </div>
               </div>,
-              "className": "col col-12 sm-col-4 px1",
+              "className": "col col-12 sm-col-6 mb2 px1",
             },
             "ref": null,
             "rendered": Object {
@@ -911,7 +911,7 @@ ShallowWrapper {
                     1067
                   </div>,
                   <div
-                    className="h3 bold mono"
+                    className="h3 bold mono truncate"
                   >
                     $3,000
                   </div>,
@@ -923,13 +923,13 @@ ShallowWrapper {
                     onChange={[Function]}
                     type="text"
                     value={0}
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />,
                   <div>
                     Medicaid Share
                   </div>,
                   <div
-                    className="h3 bold mono"
+                    className="h4 bold mono truncate"
                   >
                     $3,000
                   </div>,
@@ -947,31 +947,31 @@ ShallowWrapper {
                       ]
                     }
                     value="10-90"
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />,
                   <div
-                    className="flex mxn-tiny"
+                    className="lg-flex"
                   >
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         Federal
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $300
                       </div>
                     </div>
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         State
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $2,700
                       </div>
@@ -999,7 +999,7 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": "$3,000",
-                    "className": "h3 bold mono",
+                    "className": "h3 bold mono truncate",
                   },
                   "ref": null,
                   "rendered": "$3,000",
@@ -1025,7 +1025,7 @@ ShallowWrapper {
                     "onChange": [Function],
                     "type": "text",
                     "value": 0,
-                    "wrapperClass": "",
+                    "wrapperClass": "lg-col-8 mb2",
                   },
                   "ref": null,
                   "rendered": null,
@@ -1048,7 +1048,7 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": "$3,000",
-                    "className": "h3 bold mono",
+                    "className": "h4 bold mono truncate",
                   },
                   "ref": null,
                   "rendered": "$3,000",
@@ -1078,7 +1078,7 @@ ShallowWrapper {
                       "50-50",
                     ],
                     "value": "10-90",
-                    "wrapperClass": "",
+                    "wrapperClass": "lg-col-8 mb2",
                   },
                   "ref": null,
                   "rendered": null,
@@ -1091,31 +1091,31 @@ ShallowWrapper {
                   "props": Object {
                     "children": Array [
                       <div
-                        className="col-12"
+                        className="lg-col-6 mb1 lg-m0"
                       >
                         <div>
                           Federal
                         </div>
                         <div
-                          className="h3 bold mono"
+                          className="h4 bold mono truncate"
                         >
                           $300
                         </div>
                       </div>,
                       <div
-                        className="col-12"
+                        className="lg-col-6 mb1 lg-m0"
                       >
                         <div>
                           State
                         </div>
                         <div
-                          className="h3 bold mono"
+                          className="h4 bold mono truncate"
                         >
                           $2,700
                         </div>
                       </div>,
                     ],
-                    "className": "flex mxn-tiny",
+                    "className": "lg-flex",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -1129,12 +1129,12 @@ ShallowWrapper {
                             Federal
                           </div>,
                           <div
-                            className="h3 bold mono"
+                            className="h4 bold mono truncate"
                           >
                             $300
                           </div>,
                         ],
-                        "className": "col-12",
+                        "className": "lg-col-6 mb1 lg-m0",
                       },
                       "ref": null,
                       "rendered": Array [
@@ -1155,7 +1155,7 @@ ShallowWrapper {
                           "nodeType": "host",
                           "props": Object {
                             "children": "$300",
-                            "className": "h3 bold mono",
+                            "className": "h4 bold mono truncate",
                           },
                           "ref": null,
                           "rendered": "$300",
@@ -1174,12 +1174,12 @@ ShallowWrapper {
                             State
                           </div>,
                           <div
-                            className="h3 bold mono"
+                            className="h4 bold mono truncate"
                           >
                             $2,700
                           </div>,
                         ],
-                        "className": "col-12",
+                        "className": "lg-col-6 mb1 lg-m0",
                       },
                       "ref": null,
                       "rendered": Array [
@@ -1200,7 +1200,7 @@ ShallowWrapper {
                           "nodeType": "host",
                           "props": Object {
                             "children": "$2,700",
-                            "className": "h3 bold mono",
+                            "className": "h4 bold mono truncate",
                           },
                           "ref": null,
                           "rendered": "$2,700",
@@ -1237,7 +1237,7 @@ ShallowWrapper {
             className="clearfix mxn1"
           >
             <div
-              className="col col-12 sm-col-4 px1"
+              className="col col-12 sm-col-6 mb2 px1"
             >
               <div
                 className="p2 bg-gray-lightest"
@@ -1246,7 +1246,7 @@ ShallowWrapper {
                   1066
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h3 bold mono truncate"
                 >
                   $300
                 </div>
@@ -1258,13 +1258,13 @@ ShallowWrapper {
                   onChange={[Function]}
                   type="text"
                   value={10}
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div>
                   Medicaid Share
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h4 bold mono truncate"
                 >
                   $290
                 </div>
@@ -1282,31 +1282,31 @@ ShallowWrapper {
                     ]
                   }
                   value="90-10"
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div
-                  className="flex mxn-tiny"
+                  className="lg-flex"
                 >
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       Federal
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $261
                     </div>
                   </div>
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       State
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $29
                     </div>
@@ -1315,7 +1315,7 @@ ShallowWrapper {
               </div>
             </div>
             <div
-              className="col col-12 sm-col-4 px1"
+              className="col col-12 sm-col-6 mb2 px1"
             >
               <div
                 className="p2 bg-gray-lightest"
@@ -1324,7 +1324,7 @@ ShallowWrapper {
                   1067
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h3 bold mono truncate"
                 >
                   $3,000
                 </div>
@@ -1336,13 +1336,13 @@ ShallowWrapper {
                   onChange={[Function]}
                   type="text"
                   value={0}
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div>
                   Medicaid Share
                 </div>
                 <div
-                  className="h3 bold mono"
+                  className="h4 bold mono truncate"
                 >
                   $3,000
                 </div>
@@ -1360,31 +1360,31 @@ ShallowWrapper {
                     ]
                   }
                   value="10-90"
-                  wrapperClass=""
+                  wrapperClass="lg-col-8 mb2"
                 />
                 <div
-                  className="flex mxn-tiny"
+                  className="lg-flex"
                 >
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       Federal
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $300
                     </div>
                   </div>
                   <div
-                    className="col-12"
+                    className="lg-col-6 mb1 lg-m0"
                   >
                     <div>
                       State
                     </div>
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $2,700
                     </div>
@@ -1416,7 +1416,7 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <div
-                className="col col-12 sm-col-4 px1"
+                className="col col-12 sm-col-6 mb2 px1"
               >
                 <div
                   className="p2 bg-gray-lightest"
@@ -1425,7 +1425,7 @@ ShallowWrapper {
                     1066
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h3 bold mono truncate"
                   >
                     $300
                   </div>
@@ -1437,13 +1437,13 @@ ShallowWrapper {
                     onChange={[Function]}
                     type="text"
                     value={10}
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />
                   <div>
                     Medicaid Share
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h4 bold mono truncate"
                   >
                     $290
                   </div>
@@ -1461,31 +1461,31 @@ ShallowWrapper {
                       ]
                     }
                     value="90-10"
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />
                   <div
-                    className="flex mxn-tiny"
+                    className="lg-flex"
                   >
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         Federal
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $261
                       </div>
                     </div>
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         State
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $29
                       </div>
@@ -1494,7 +1494,7 @@ ShallowWrapper {
                 </div>
               </div>,
               <div
-                className="col col-12 sm-col-4 px1"
+                className="col col-12 sm-col-6 mb2 px1"
               >
                 <div
                   className="p2 bg-gray-lightest"
@@ -1503,7 +1503,7 @@ ShallowWrapper {
                     1067
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h3 bold mono truncate"
                   >
                     $3,000
                   </div>
@@ -1515,13 +1515,13 @@ ShallowWrapper {
                     onChange={[Function]}
                     type="text"
                     value={0}
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />
                   <div>
                     Medicaid Share
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h4 bold mono truncate"
                   >
                     $3,000
                   </div>
@@ -1539,31 +1539,31 @@ ShallowWrapper {
                       ]
                     }
                     value="10-90"
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />
                   <div
-                    className="flex mxn-tiny"
+                    className="lg-flex"
                   >
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         Federal
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $300
                       </div>
                     </div>
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         State
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $2,700
                       </div>
@@ -1588,7 +1588,7 @@ ShallowWrapper {
                     1066
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h3 bold mono truncate"
                   >
                     $300
                   </div>
@@ -1600,13 +1600,13 @@ ShallowWrapper {
                     onChange={[Function]}
                     type="text"
                     value={10}
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />
                   <div>
                     Medicaid Share
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h4 bold mono truncate"
                   >
                     $290
                   </div>
@@ -1624,38 +1624,38 @@ ShallowWrapper {
                       ]
                     }
                     value="90-10"
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />
                   <div
-                    className="flex mxn-tiny"
+                    className="lg-flex"
                   >
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         Federal
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $261
                       </div>
                     </div>
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         State
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $29
                       </div>
                     </div>
                   </div>
                 </div>,
-                "className": "col col-12 sm-col-4 px1",
+                "className": "col col-12 sm-col-6 mb2 px1",
               },
               "ref": null,
               "rendered": Object {
@@ -1668,7 +1668,7 @@ ShallowWrapper {
                       1066
                     </div>,
                     <div
-                      className="h3 bold mono"
+                      className="h3 bold mono truncate"
                     >
                       $300
                     </div>,
@@ -1680,13 +1680,13 @@ ShallowWrapper {
                       onChange={[Function]}
                       type="text"
                       value={10}
-                      wrapperClass=""
+                      wrapperClass="lg-col-8 mb2"
                     />,
                     <div>
                       Medicaid Share
                     </div>,
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $290
                     </div>,
@@ -1704,31 +1704,31 @@ ShallowWrapper {
                         ]
                       }
                       value="90-10"
-                      wrapperClass=""
+                      wrapperClass="lg-col-8 mb2"
                     />,
                     <div
-                      className="flex mxn-tiny"
+                      className="lg-flex"
                     >
                       <div
-                        className="col-12"
+                        className="lg-col-6 mb1 lg-m0"
                       >
                         <div>
                           Federal
                         </div>
                         <div
-                          className="h3 bold mono"
+                          className="h4 bold mono truncate"
                         >
                           $261
                         </div>
                       </div>
                       <div
-                        className="col-12"
+                        className="lg-col-6 mb1 lg-m0"
                       >
                         <div>
                           State
                         </div>
                         <div
-                          className="h3 bold mono"
+                          className="h4 bold mono truncate"
                         >
                           $29
                         </div>
@@ -1756,7 +1756,7 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": "$300",
-                      "className": "h3 bold mono",
+                      "className": "h3 bold mono truncate",
                     },
                     "ref": null,
                     "rendered": "$300",
@@ -1782,7 +1782,7 @@ ShallowWrapper {
                       "onChange": [Function],
                       "type": "text",
                       "value": 10,
-                      "wrapperClass": "",
+                      "wrapperClass": "lg-col-8 mb2",
                     },
                     "ref": null,
                     "rendered": null,
@@ -1805,7 +1805,7 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": "$290",
-                      "className": "h3 bold mono",
+                      "className": "h4 bold mono truncate",
                     },
                     "ref": null,
                     "rendered": "$290",
@@ -1835,7 +1835,7 @@ ShallowWrapper {
                         "50-50",
                       ],
                       "value": "90-10",
-                      "wrapperClass": "",
+                      "wrapperClass": "lg-col-8 mb2",
                     },
                     "ref": null,
                     "rendered": null,
@@ -1848,31 +1848,31 @@ ShallowWrapper {
                     "props": Object {
                       "children": Array [
                         <div
-                          className="col-12"
+                          className="lg-col-6 mb1 lg-m0"
                         >
                           <div>
                             Federal
                           </div>
                           <div
-                            className="h3 bold mono"
+                            className="h4 bold mono truncate"
                           >
                             $261
                           </div>
                         </div>,
                         <div
-                          className="col-12"
+                          className="lg-col-6 mb1 lg-m0"
                         >
                           <div>
                             State
                           </div>
                           <div
-                            className="h3 bold mono"
+                            className="h4 bold mono truncate"
                           >
                             $29
                           </div>
                         </div>,
                       ],
-                      "className": "flex mxn-tiny",
+                      "className": "lg-flex",
                     },
                     "ref": null,
                     "rendered": Array [
@@ -1886,12 +1886,12 @@ ShallowWrapper {
                               Federal
                             </div>,
                             <div
-                              className="h3 bold mono"
+                              className="h4 bold mono truncate"
                             >
                               $261
                             </div>,
                           ],
-                          "className": "col-12",
+                          "className": "lg-col-6 mb1 lg-m0",
                         },
                         "ref": null,
                         "rendered": Array [
@@ -1912,7 +1912,7 @@ ShallowWrapper {
                             "nodeType": "host",
                             "props": Object {
                               "children": "$261",
-                              "className": "h3 bold mono",
+                              "className": "h4 bold mono truncate",
                             },
                             "ref": null,
                             "rendered": "$261",
@@ -1931,12 +1931,12 @@ ShallowWrapper {
                               State
                             </div>,
                             <div
-                              className="h3 bold mono"
+                              className="h4 bold mono truncate"
                             >
                               $29
                             </div>,
                           ],
-                          "className": "col-12",
+                          "className": "lg-col-6 mb1 lg-m0",
                         },
                         "ref": null,
                         "rendered": Array [
@@ -1957,7 +1957,7 @@ ShallowWrapper {
                             "nodeType": "host",
                             "props": Object {
                               "children": "$29",
-                              "className": "h3 bold mono",
+                              "className": "h4 bold mono truncate",
                             },
                             "ref": null,
                             "rendered": "$29",
@@ -1986,7 +1986,7 @@ ShallowWrapper {
                     1067
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h3 bold mono truncate"
                   >
                     $3,000
                   </div>
@@ -1998,13 +1998,13 @@ ShallowWrapper {
                     onChange={[Function]}
                     type="text"
                     value={0}
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />
                   <div>
                     Medicaid Share
                   </div>
                   <div
-                    className="h3 bold mono"
+                    className="h4 bold mono truncate"
                   >
                     $3,000
                   </div>
@@ -2022,38 +2022,38 @@ ShallowWrapper {
                       ]
                     }
                     value="10-90"
-                    wrapperClass=""
+                    wrapperClass="lg-col-8 mb2"
                   />
                   <div
-                    className="flex mxn-tiny"
+                    className="lg-flex"
                   >
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         Federal
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $300
                       </div>
                     </div>
                     <div
-                      className="col-12"
+                      className="lg-col-6 mb1 lg-m0"
                     >
                       <div>
                         State
                       </div>
                       <div
-                        className="h3 bold mono"
+                        className="h4 bold mono truncate"
                       >
                         $2,700
                       </div>
                     </div>
                   </div>
                 </div>,
-                "className": "col col-12 sm-col-4 px1",
+                "className": "col col-12 sm-col-6 mb2 px1",
               },
               "ref": null,
               "rendered": Object {
@@ -2066,7 +2066,7 @@ ShallowWrapper {
                       1067
                     </div>,
                     <div
-                      className="h3 bold mono"
+                      className="h3 bold mono truncate"
                     >
                       $3,000
                     </div>,
@@ -2078,13 +2078,13 @@ ShallowWrapper {
                       onChange={[Function]}
                       type="text"
                       value={0}
-                      wrapperClass=""
+                      wrapperClass="lg-col-8 mb2"
                     />,
                     <div>
                       Medicaid Share
                     </div>,
                     <div
-                      className="h3 bold mono"
+                      className="h4 bold mono truncate"
                     >
                       $3,000
                     </div>,
@@ -2102,31 +2102,31 @@ ShallowWrapper {
                         ]
                       }
                       value="10-90"
-                      wrapperClass=""
+                      wrapperClass="lg-col-8 mb2"
                     />,
                     <div
-                      className="flex mxn-tiny"
+                      className="lg-flex"
                     >
                       <div
-                        className="col-12"
+                        className="lg-col-6 mb1 lg-m0"
                       >
                         <div>
                           Federal
                         </div>
                         <div
-                          className="h3 bold mono"
+                          className="h4 bold mono truncate"
                         >
                           $300
                         </div>
                       </div>
                       <div
-                        className="col-12"
+                        className="lg-col-6 mb1 lg-m0"
                       >
                         <div>
                           State
                         </div>
                         <div
-                          className="h3 bold mono"
+                          className="h4 bold mono truncate"
                         >
                           $2,700
                         </div>
@@ -2154,7 +2154,7 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": "$3,000",
-                      "className": "h3 bold mono",
+                      "className": "h3 bold mono truncate",
                     },
                     "ref": null,
                     "rendered": "$3,000",
@@ -2180,7 +2180,7 @@ ShallowWrapper {
                       "onChange": [Function],
                       "type": "text",
                       "value": 0,
-                      "wrapperClass": "",
+                      "wrapperClass": "lg-col-8 mb2",
                     },
                     "ref": null,
                     "rendered": null,
@@ -2203,7 +2203,7 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": "$3,000",
-                      "className": "h3 bold mono",
+                      "className": "h4 bold mono truncate",
                     },
                     "ref": null,
                     "rendered": "$3,000",
@@ -2233,7 +2233,7 @@ ShallowWrapper {
                         "50-50",
                       ],
                       "value": "10-90",
-                      "wrapperClass": "",
+                      "wrapperClass": "lg-col-8 mb2",
                     },
                     "ref": null,
                     "rendered": null,
@@ -2246,31 +2246,31 @@ ShallowWrapper {
                     "props": Object {
                       "children": Array [
                         <div
-                          className="col-12"
+                          className="lg-col-6 mb1 lg-m0"
                         >
                           <div>
                             Federal
                           </div>
                           <div
-                            className="h3 bold mono"
+                            className="h4 bold mono truncate"
                           >
                             $300
                           </div>
                         </div>,
                         <div
-                          className="col-12"
+                          className="lg-col-6 mb1 lg-m0"
                         >
                           <div>
                             State
                           </div>
                           <div
-                            className="h3 bold mono"
+                            className="h4 bold mono truncate"
                           >
                             $2,700
                           </div>
                         </div>,
                       ],
-                      "className": "flex mxn-tiny",
+                      "className": "lg-flex",
                     },
                     "ref": null,
                     "rendered": Array [
@@ -2284,12 +2284,12 @@ ShallowWrapper {
                               Federal
                             </div>,
                             <div
-                              className="h3 bold mono"
+                              className="h4 bold mono truncate"
                             >
                               $300
                             </div>,
                           ],
-                          "className": "col-12",
+                          "className": "lg-col-6 mb1 lg-m0",
                         },
                         "ref": null,
                         "rendered": Array [
@@ -2310,7 +2310,7 @@ ShallowWrapper {
                             "nodeType": "host",
                             "props": Object {
                               "children": "$300",
-                              "className": "h3 bold mono",
+                              "className": "h4 bold mono truncate",
                             },
                             "ref": null,
                             "rendered": "$300",
@@ -2329,12 +2329,12 @@ ShallowWrapper {
                               State
                             </div>,
                             <div
-                              className="h3 bold mono"
+                              className="h4 bold mono truncate"
                             >
                               $2,700
                             </div>,
                           ],
-                          "className": "col-12",
+                          "className": "lg-col-6 mb1 lg-m0",
                         },
                         "ref": null,
                         "rendered": Array [
@@ -2355,7 +2355,7 @@ ShallowWrapper {
                             "nodeType": "host",
                             "props": Object {
                               "children": "$2,700",
-                              "className": "h3 bold mono",
+                              "className": "h4 bold mono truncate",
                             },
                             "ref": null,
                             "rendered": "$2,700",

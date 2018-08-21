@@ -49,23 +49,23 @@ const mapStateToProps = ({ activities }) => {
       Header: t('scheduleSummary.main.table.activity')
     },
     {
-      accessor: 'name',
+      accessor: 'milestone',
       Header: t('scheduleSummary.main.table.milestone'),
       Cell
     },
     {
-      accessor: 'start',
+      accessor: 'plannedStart',
       Header: t('scheduleSummary.main.table.start'),
       Cell
     },
     {
-      accessor: 'end',
+      accessor: 'plannedEnd',
       Header: t('scheduleSummary.main.table.end'),
       Cell
     }
   ];
 
-  const defaultSorted = [{ id: 'start', desc: false }];
+  const defaultSorted = [{ id: 'plannedStart', desc: false }];
 
   return { tableData: { data, columns, defaultSorted } };
 };

@@ -8,6 +8,7 @@ import {
   updateActivity as updateActivityAction
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
+import DatePickerWrapper from '../../components/DatePickerWrapper';
 import { Input } from '../../components/Inputs';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
@@ -19,6 +20,14 @@ class Schedule extends Component {
     const { activity, updateActivity } = this.props;
 
     const updates = { schedule: { [index]: { [field]: value } } };
+    updateActivity(activity.key, updates);
+  };
+
+  handleDatesChange = index => ({ start, end }) => {
+    const { activity, updateActivity } = this.props;
+    const dates = { plannedStart: start, plannedEnd: end };
+
+    const updates = { schedule: { [index]: dates } };
     updateActivity(activity.key, updates);
   };
 
@@ -35,17 +44,14 @@ class Schedule extends Component {
           <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (
           <div className="mb3 overflow-auto">
-            <table className="h5 table table-fixed" style={{ minWidth: 500 }}>
+            <table className="h5 table table-fixed" style={{ minWidth: 600 }}>
               <thead>
                 <tr>
-                  <th className="col-4 sm-col-5">
+                  <th className="col-5">
                     {t('activities.schedule.milestoneHeader')}
                   </th>
-                  <th className="col-4 sm-col-3">
-                    {t('activities.schedule.startHeader')}
-                  </th>
-                  <th className="col-4 sm-col-3">
-                    {t('activities.schedule.endHeader')}
+                  <th className="col-6">
+                    {t('activities.schedule.dateHeader')}
                   </th>
                   <th className="col-1" />
                 </tr>
@@ -64,25 +70,15 @@ class Schedule extends Component {
                       />
                     </td>
                     <td>
-                      <Input
-                        name={`milestone-${d.key}-start`}
-                        label={t('activities.schedule.startLabel')}
-                        hideLabel
-                        type="date"
-                        wrapperClass="m0"
-                        value={d.plannedStart}
-                        onChange={this.handleChange(i, 'plannedStart')}
-                      />
-                    </td>
-                    <td>
-                      <Input
-                        name={`milestone-${d.key}-end`}
-                        label={t('activities.schedule.endLabel')}
-                        hideLabel
-                        type="date"
-                        wrapperClass="m0"
-                        value={d.plannedEnd}
-                        onChange={this.handleChange(i, 'plannedEnd')}
+                      <DatePickerWrapper
+                        startDateId={`milestone-${d.key}-start`}
+                        endDateId={`milestone-${d.key}-end`}
+                        initialStartDate={d.plannedStart}
+                        initialEndDate={d.plannedEnd}
+                        onChange={this.handleDatesChange(i)}
+                        numberOfMonths={2}
+                        daySize={32}
+                        withPortal
                       />
                     </td>
                     <td className="center align-middle">
