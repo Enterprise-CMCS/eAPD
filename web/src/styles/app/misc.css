@@ -15,6 +15,10 @@
   box-shadow: none;
 }
 
+.btn-no-focus:focus {
+  box-shadow: none;
+}
+
 /*
 * for some reason, the file upload input nested within
 * our custom 'btn-dropzone' div had a large width by default
