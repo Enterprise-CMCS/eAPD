@@ -5,6 +5,7 @@ import activities from './activities';
 import apd from './apd';
 import auth from './auth';
 import budget from './budget';
+import dirty from './dirty';
 import notification from './notification';
 import sidebar from './sidebar';
 import state from './state';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   apd,
   auth,
   budget,
+  dirty,
   notification,
   sidebar,
   state,
