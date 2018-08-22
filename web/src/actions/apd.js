@@ -26,7 +26,6 @@ export const SUBMIT_APD_SUCCESS = 'SUBMIT_APD_SUCCESS';
 export const SUBMIT_APD_FAILURE = 'SUBMIT_APD_FAILURE';
 export const UPDATE_APD = 'UPDATE_APD';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
-export const UPDATE_BUDGET_QUARTERLY_SHARE = 'UPDATE_BUDGET_QUARTERLY_SHARE';
 
 export const SET_SELECT_APD_ON_LOAD = 'SET_SELECT_APD_ON_LOAD';
 export const selectApdOnLoad = () => ({ type: SET_SELECT_APD_ON_LOAD });
@@ -36,11 +35,6 @@ export const removePointOfContact = index => ({ type: REMOVE_APD_POC, index });
 
 export const updateBudget = () => (dispatch, getState) =>
   dispatch({ type: UPDATE_BUDGET, state: getState() });
-
-export const updateBudgetQuarterlyShare = updates => ({
-  type: UPDATE_BUDGET_QUARTERLY_SHARE,
-  updates
-});
 
 export const requestApd = () => ({ type: GET_APD_REQUEST });
 export const receiveApd = data => ({ type: GET_APD_SUCCESS, data });
