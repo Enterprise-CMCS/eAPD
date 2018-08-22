@@ -14,6 +14,7 @@ import Label from '../../components/Label';
 import { Subsection } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
+import { arrToObj } from '../../util';
 import { formatMoney } from '../../util/formats';
 
 const EXPENSE_CATEGORIES = [
@@ -138,7 +139,10 @@ class Expenses extends Component {
 
     if (lastExpense && !(lastExpense in state.showForm)) {
       return {
-        showForm: { ...state.showForm, [lastExpense]: true }
+        showForm: {
+          ...arrToObj(Object.keys(state.showForm), false),
+          [lastExpense]: true
+        }
       };
     }
 
