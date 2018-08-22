@@ -1,5 +1,3 @@
-import u from 'updeep';
-
 import { UPDATE_BUDGET } from '../actions/apd';
 import { arrToObj } from '../util';
 

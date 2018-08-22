@@ -1,4 +1,4 @@
-import budget, { initialState as initialStateFn } from './budget';
+import budget from './budget';
 import { UPDATE_BUDGET } from '../actions/apd';
 
 describe('budget reducer', () => {
