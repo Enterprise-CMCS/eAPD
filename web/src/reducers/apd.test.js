@@ -226,7 +226,7 @@ describe('APD reducer', () => {
     });
   });
 
-  it('should handle an APD year update (which impacts incentive payments)', () => {
+  it('should handle an APD year add update (which impacts incentive payments)', () => {
     const state = {
       ...initialState,
       data: {
@@ -266,6 +266,53 @@ describe('APD reducer', () => {
               2: 0,
               3: 0,
               4: 0
+            }
+          }
+        }
+      }
+    });
+  });
+
+  it('should handle an APD year removal update', () => {
+    const state = {
+      ...initialState,
+      data: {
+        years: [1, 2],
+        incentivePayments: {
+          ehAmt: {
+            1: {
+              1: 1,
+              2: 10,
+              3: 100,
+              4: 1000
+            },
+            2: {
+              1: 1,
+              2: 10,
+              3: 100,
+              4: 1000
+            }
+          }
+        }
+      }
+    };
+
+    expect(
+      apd(state, {
+        type: 'UPDATE_APD',
+        updates: { years: [1] }
+      })
+    ).toEqual({
+      ...state,
+      data: {
+        years: [1],
+        incentivePayments: {
+          ehAmt: {
+            1: {
+              1: 1,
+              2: 10,
+              3: 100,
+              4: 1000
             }
           }
         }

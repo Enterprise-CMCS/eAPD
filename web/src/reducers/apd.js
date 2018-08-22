@@ -115,7 +115,17 @@ const reducer = (state = initialState, action) => {
         else incentivePayments[key][yearDelta] = { 1: 0, 2: 0, 3: 0, 4: 0 };
       });
 
-      return u({ data: { years, incentivePayments } }, state);
+      // using updeep was not deleting year objects (even
+      // though `incentivePayments` was changed), hence using
+      // the traditional way to update state here
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          years,
+          incentivePayments
+        }
+      };
     }
     default:
       return state;
