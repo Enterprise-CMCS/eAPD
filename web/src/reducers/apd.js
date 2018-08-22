@@ -1,3 +1,4 @@
+import diff from 'lodash.difference';
 import u from 'updeep';
 
 import {
@@ -89,8 +90,33 @@ const reducer = (state = initialState, action) => {
       return { ...state, data: { ...action.apd } };
     case SET_SELECT_APD_ON_LOAD:
       return { ...state, selectAPDOnLoad: true };
-    case UPDATE_APD:
-      return u({ data: { ...action.updates } }, state);
+    case UPDATE_APD: {
+      if (!action.updates.years) {
+        return u({ data: { ...action.updates } }, state);
+      }
+
+      const { years } = action.updates;
+      const { years: yearsPrev } = state.data;
+
+      // this should never happen, but being defensive
+      if (years.length === yearsPrev.length) return state;
+
+      const hasNewYear = years.length > yearsPrev.length;
+      const yearDelta = (hasNewYear
+        ? diff(years, yearsPrev)
+        : diff(yearsPrev, years))[0];
+
+      const incentivePayments = JSON.parse(
+        JSON.stringify(state.data.incentivePayments)
+      );
+
+      Object.keys(incentivePayments).forEach(key => {
+        if (!hasNewYear) delete incentivePayments[key][yearDelta];
+        else incentivePayments[key][yearDelta] = { 1: 0, 2: 0, 3: 0, 4: 0 };
+      });
+
+      return u({ data: { years, incentivePayments } }, state);
+    }
     default:
       return state;
   }
