@@ -145,6 +145,30 @@ const newBuildBudget = bigState => {
     // the state and federal shares.
     const allocation = activity.costAllocation;
 
+    // We also compute quarterly FFP per activity, so we go ahead and
+    // create that object here.  We'll fill it in later.
+    newState.activities[activity.key] = {
+      quarterlyFFP: {
+        ...arrToObj(years, () => ({
+          ...arrToObj(['1', '2', '3', '4'], () => ({
+            combined: { dollars: 0, percent: 0 },
+            contractors: { dollars: 0, percent: 0 },
+            state: { dollars: 0, percent: 0 }
+          })),
+          subtotal: {
+            combined: { dollars: 0, percent: 0 },
+            contractors: { dollars: 0, percent: 0 },
+            state: { dollars: 0, percent: 0 }
+          }
+        })),
+        total: {
+          combined: { dollars: 0, percent: 0 },
+          contractors: { dollars: 0, percent: 0 },
+          state: { dollars: 0, percent: 0 }
+        }
+      }
+    };
+
     /**
      * Get the state and federal share of costs for an amount for
      * a given year of the current activity.
@@ -299,13 +323,22 @@ const newBuildBudget = bigState => {
         // this activity.
         const ffp = activity.quarterlyFFP[year];
         const ffpSource = fundingSource === 'mmis' ? 'mmis' : 'hitAndHie';
+        const activityFFP = newState.activities[activity.key].quarterlyFFP;
         const quarterlyFFP = newState.federalShareByFFYQuarter[ffpSource];
         const propCostType = prop === 'contractors' ? 'contractors' : 'state';
 
         // Shortcut to loop over quarters.  :)
         [...Array(4)].forEach((_, q) => {
           // Compute the federal share for this quarter.
+          const federalPct = ffp[q + 1][propCostType] / 100;
           const qFFP = cost.fedShare * ffp[q + 1][propCostType] / 100;
+
+          activityFFP[year][q + 1][propCostType].dollars += qFFP;
+          activityFFP[year][q + 1][propCostType].percent = federalPct;
+          activityFFP[year].subtotal[propCostType].dollars += qFFP;
+          activityFFP[year].subtotal[propCostType].percent += federalPct;
+          activityFFP.total[propCostType].dollars += qFFP;
+          activityFFP.total[propCostType].percent += federalPct;
 
           // For the expense type, add the federal share for the
           // quarter and the fiscal year subtotal.
