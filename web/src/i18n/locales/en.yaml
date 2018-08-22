@@ -76,13 +76,13 @@
       yearsCovered: Choose the federal fiscal year(s) this APD covers.
       labels: 
         desc: Program Introduction
-        helpText: >-
+        reminder: >-
           Provide a brief, high level summary of the state's program, history,
           and future vision. Specific activities for the program will be
           explained in the program activities section of this update.
     hit: 
       title: HIT Overview
-      helpText: >-
+      reminder: >-
         Summarize briefly planned HIT funded activities contained within this
         APD.
     hie: 
@@ -202,11 +202,10 @@
         title: Brief Activity Summary
       detail:
         standard:
-          subheader: Include as much detail necessary to explain the activity.
+          subheader: 
         hie:
           subheader: >-
-            Describe the activity in detail including images, diagrams, or
-            other relevant information.
+           
           helpText: >-
             
             reminder: >-
@@ -234,17 +233,14 @@
         List the goals and objectives the state plans to accomplish as part
         of this activity.
       helpText: >-
-       
-      reminder: Include a brief description of how each goal relates to the vision
+       Include a brief description of how each goal relates to the vision
         identified in the program summary section. (Each goal should have a matching activity.)
       goal: 
         title: "Goal #{{number}}"
       objective: 
         title: Objective (How the the goal will be achieved)
         helpText: >-
-       
-          reminder: >-
-            Include a brief description of how the state will measure progress
+       Include a brief description of how the state will measure progress
           toward each goal identified.
       addGoalButtonText: Add a goal
     schedule: 
@@ -313,7 +309,7 @@
         
       reminder: >-
         Personnel costs for this section includes combined salary and
-        benefits and only need to be listed once. Use the checkbox to identify key project personnel.
+        benefits. Use the checkbox to identify key project personnel.
         Salary amount includes yearly cost of the individual personnel
         listed. 
         FTE% is the percentage attributable to the activity. 
@@ -335,11 +331,7 @@
       helpText: >-
       
       reminder: >-
-       Provide a detailed breakout of any non-personnel and non-contracted
-        costs related to this activity. This should include a brief
-        description of these projected costs. “Miscellaneous expenses” from the drop down, includes materials and
-        supplies, communications‐related expenses, printing costs and
-        facilities expenses.
+       Provide a detailed breakout of any non-personnel and non-contracted costs related to this activity. This should include a brief description of these projected costs. “Miscellaneous expenses” from the drop down, includes materials and supplies, communications‐related expenses, printing costs and facilities expenses.
       noDataNotice: Additional costs for this activity are missing.
     costAllocate: 
       title: Cost Allocation
@@ -385,13 +377,11 @@
       otherFunding: 
         title: Other funding description
         helpText: >-
-          Account for any and all grant funding used to support this activity,
-          and review the state Medicaid director Letter 10‐016 for examples
-          of grants needed to be included.
+          
         reminder: >-
-          High level descriptions are appropriate for grant activities.
-          Ensure any new grants are included and any expired grants are
-          removed.
+          Account for grant funding used to support this activity. (Review Letter 10‐016 for examples
+          of grants needed to be included.) High level descriptions are appropriate for grant activities.
+          Ensure new grants are included, and remove expired grants.
       ffp:
         title: Federal Financial Partipation (FFP) and Cost Allocation
         totalNetOther: Medicaid Share
@@ -430,7 +420,7 @@
           module that interoperates with the baseline modules.    
 
         
-          With Modularity, changes can be made independently to the baseline
+          Changes can be made independently to baseline
           capabilities without affecting how the extension works. By doing
           so, the design ensures that future iterations of software can be
           deployed without breaking custom functionality. A critical element
