@@ -234,8 +234,9 @@ const newBuildBudget = bigState => {
 
       // Also loop over all the cost categories.
       ['contractors', 'expenses', 'statePersonnel'].forEach(prop => {
-        const totalCost = activityTotalByCategory[year][prop] - other[prop];
-        const cost = getAllocation(year, totalCost);
+        const totalCost = activityTotalByCategory[year][prop];
+        const totalGovShare = totalCost - other[prop];
+        const cost = getAllocation(year, totalGovShare);
 
         const addShares = fs => {
           // Add total federal share, and federal share for the year
@@ -255,13 +256,40 @@ const newBuildBudget = bigState => {
 
         addShares(fundingSource);
 
-        // We need to track expenses as combined between HIE and HIT,
-        // so for those funding sources, run again.
         if (fundingSource === 'hie' || fundingSource === 'hit') {
+          // We need to track expenses as combined between HIE and HIT,
+          // so for those funding sources, run again.
           addShares('hitAndHie');
+        } else {
+          // But for MMIS activities, we need to track costs per FFP level
+          // (90/10, 75/25, 50/50)
+          const ffpLevel = `${allocation[year].ffp.federal}-${
+            allocation[year].ffp.state
+          }`;
+
+          // Add state, federal, and total cost for this FFP level
+          // for the current FFY
+          newState.mmisByFFP[ffpLevel][year].federal += cost.fedShare;
+          newState.mmisByFFP[ffpLevel][year].state += cost.stateShare;
+          newState.mmisByFFP[ffpLevel][year].total += totalCost;
+
+          // Then add them to the subtotals for the FFP level
+          newState.mmisByFFP[ffpLevel].total.federal += cost.fedShare;
+          newState.mmisByFFP[ffpLevel].total.state += cost.stateShare;
+          newState.mmisByFFP[ffpLevel].total.total += totalCost;
+
+          // And the subtotals for the FFY
+          newState.mmisByFFP.combined[year].federal += cost.fedShare;
+          newState.mmisByFFP.combined[year].state += cost.stateShare;
+          newState.mmisByFFP.combined[year].total += totalCost;
+
+          // And finally the grand totals
+          newState.mmisByFFP.combined.total.federal += cost.fedShare;
+          newState.mmisByFFP.combined.total.state += cost.stateShare;
+          newState.mmisByFFP.combined.total.total += totalCost;
         }
 
-        // And FINALLY, totally combined, across all funding sources.
+        // And FINALLY, total combined across all funding sources.
         newState.combined[year].federal += cost.fedShare;
         newState.combined.total.federal += cost.fedShare;
         newState.combined[year].state += cost.stateShare;
