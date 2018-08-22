@@ -14,7 +14,6 @@ import Label from '../../components/Label';
 import { Subsection } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
-import { arrToObj } from '../../util';
 import { formatMoney } from '../../util/formats';
 
 const EXPENSE_CATEGORIES = [
@@ -74,6 +73,13 @@ const ExpenseForm = ({
   handleDelete
 }) => (
   <div className="mt2 mb3">
+    <Btn
+      kind="outline"
+      extraCss="right px-tiny py0 h5 xs-hide"
+      onClick={handleDelete}
+    >
+      ✗
+    </Btn>
     <div className="mb3 md-flex">
       <Label>Category</Label>
       <Select
@@ -111,11 +117,6 @@ const ExpenseForm = ({
         />
       </div>
     ))}
-    <div>
-      <Btn kind="outline" extraCss="px1 py-tiny h5" onClick={handleDelete}>
-        Remove expense
-      </Btn>
-    </div>
   </div>
 );
 
@@ -149,9 +150,12 @@ class Expenses extends Component {
 
     const expenseKeys = props.expenses.map(e => e.key);
 
-    this.state = {
-      showForm: arrToObj(expenseKeys, false)
-    };
+    const showForm = expenseKeys.reduce(
+      (obj, key, i) => ({ ...obj, [key]: i === 0 }),
+      {}
+    );
+
+    this.state = { showForm };
   }
 
   handleChange = (index, field) => e => {
