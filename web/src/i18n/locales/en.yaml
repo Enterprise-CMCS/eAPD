@@ -169,15 +169,15 @@
     list: 
       title: Activity List
       helpText: >-
-        Examples of individual activities include: auditing, outreach,
-        environmental scans, HIE registry development, CQM database
-        development, data and analytics, HIE onboarding, etc.
+       
       reminder: >-
-        The first activity in this list is program administration. Program
-        Administration includes information that pertains to implementing
-        the EHR Incentive program. Examples include: state and contractor
+        The first activity is Program 
+        Administration. This includes information that pertains to implementing
+        the EHR Incentive program, as well as state and contractor
         costs associated with operating the EHR incentive program, and SLR
-        enhancements/upgrades.
+        enhancements/upgrades. Examples of individual activities include: auditing, outreach,
+        environmental scans, HIE registry development, CQM database
+        development, data and analytics, HIE onboarding, etc. 
     addActivityButtonText: Add activity
     noActivityMessage: There are no activities. Add one below.
     noNameYet: (No name provided yet)
@@ -194,11 +194,10 @@
     description: 
       title: Activity Overview
       helpText: >-
-        Summarize the needs of the activity for which requested funding will
-        be used (e.g. administrative, outreach, auditing, Public Health
-        Registry Development, etc)
+       
       reminder: >-
-        The activity overview should be a brief summary of the activity needs.
+        Activity overview is a brief summary of needs. Summarize activity needs for how requested funding will be used (e.g. administrative, outreach, auditing, Public Health
+        Registry Development, etc)
       summary: 
         title: Brief Activity Summary
       detail:
@@ -209,24 +208,24 @@
             Describe the activity in detail including images, diagrams, or
             other relevant information.
           helpText: >-
-            The activity details must also include a description of three
-            items: how the activity is linked to meaningful use; value
-            proposition to providers, and sustainability plan describing
+            
+            reminder: >-
+            Activity details includes a description of how activity is linked to meaningful use; value
+            proposition to providers; and sustainability plan describing
             how the activity will be sustained after HIE DDI funding is
-            exhausted. Additionally, include diagrams and descriptions of
-            other HIE linkages as needed if they provide more context for how
-            the state will complete the activity.
+            exhausted.  Diagrams and/or descriptions of other HIE linkages can be included if they provide more context for how the state will complete the proposed activity.
       alternatives: 
         subheader: >-
           Statement of alternative considerations and supporting justification
         helpText: >-
-          If no substantive changes have been made to this activity, include
+          
+        reminder: >-
+          If no substantive changes have been made, include
           a statement referring to the statement of alternative considerations
           contained in previous versions of the IAPD update or in the SMHP.
           If substantive changes have been made (or this is a new activity),
           include a statement describing what alternative considerations were
-          made before selecting the strategy for implementation.
-        reminder: >-
+          made before selecting the strategy for implementation. 
           Remember to update the SMHP as necessary with any substantive
           changes to the approach for implementing EHR incentives.
     goals: 
@@ -235,15 +234,17 @@
         List the goals and objectives the state plans to accomplish as part
         of this activity.
       helpText: >-
-        Include a brief description of how each goal relates to the vision
-        identified in the program summary section.
-      reminder: "Each goal should have a matching objective."
+       
+      reminder: Include a brief description of how each goal relates to the vision
+        identified in the program summary section. (Each goal should have a matching activity.)
       goal: 
         title: "Goal #{{number}}"
       objective: 
         title: Objective (How the the goal will be achieved)
         helpText: >-
-          Include a brief description of how the state will measure progress
+       
+          reminder: >-
+            Include a brief description of how the state will measure progress
           toward each goal identified.
       addGoalButtonText: Add a goal
     schedule: 
@@ -309,14 +310,15 @@
         anyone funded as a part of this activity. This does not include
         personnel listed in the contract section.
       helpText: >-
-        Personnel costs for this section includes combined salary and
-        benefits. Salary amount is the yearly cost of the individual personnel
-        listed and personnel only need to be listed once. FTE% is the
-        percentage attributable to the activity. Personnel costs are
-        automatically calculated from the %FTE provided.
+        
       reminder: >-
-        If the personnel identified is a key member of the project, select
-        the Key Personnel checkbox beneath their name.
+        Personnel costs for this section includes combined salary and
+        benefits and only need to be listed once. Use the checkbox to identify key project personnel.
+        Salary amount includes yearly cost of the individual personnel
+        listed. 
+        FTE% is the percentage attributable to the activity. 
+        Personnel costs are
+        automatically calculated from the %FTE provided.
       noDataNotice: There are no personnel resources for this activity.
       labels: 
         entryNum: "#"
@@ -331,37 +333,33 @@
     expenses: 
       title: Non-Personnel Costs
       helpText: >-
-        Provide a detailed breakout of any non-personnel and non-contracted
-        costs related to this activity. This should include a brief
-        description of these projected costs.
+      
       reminder: >-
-        “Miscellaneous expenses” from the drop down, includes materials and
+       Provide a detailed breakout of any non-personnel and non-contracted
+        costs related to this activity. This should include a brief
+        description of these projected costs. “Miscellaneous expenses” from the drop down, includes materials and
         supplies, communications‐related expenses, printing costs and
         facilities expenses.
       noDataNotice: Additional costs for this activity are missing.
     costAllocate: 
       title: Cost Allocation
-      helpText: >-
-        As specified in Office of Management and Budget (OMB) Circular A-87, a
-        cost allocation plan must be included that identifies all participants
+      reminder: >-
+        A cost allocation plan must include all participants
         and their associated cost allocation to depict non-Medicaid activities
         and non-Medicaid FTEs participating in this project (if any):   
 
-
-        1. CMS will work with states on an individual basis to determine the
+        1. CMS will work with states individually to determine the
         most appropriate cost allocation methodology.   
         
-        2. HITECH cost allocation formulas should be based on direct benefit
-        to the Medicaid EHR incentive program, taking into account state
-        projections of eligible Medicaid provider participation in the
-        incentive program.  
+        2. HITECH cost allocation formulas should be based on direct benefit to
+        Medicaid EHR incentive program, accounting for state
+        projections of eligible Medicaid provider participation.
         
         3. Cost allocation must account for other available federal funding
-        sources, division of resources and activities across relevant payers,
-        and relative benefit to the state Medicaid program, among other
-        factors.  
+        sources including division of resources and activities across relevant payers, and
+        relative benefit to the state Medicaid program.
       
-        4. Cost allocations should be current and ensure financial
+        4. Ensure cost allocations are current. Medicaid funds should be not be sole contributor to Cost allocations should be current and ensure financial
         participation of all parties so Medicaid funds are neither the
         sole contributor at the onset, nor primary source of funding. Other
         payers who may benefit must contribute their share from the outset.
