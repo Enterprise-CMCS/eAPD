@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
 import { Textarea } from '../components/Inputs';
+import Btn from '../components/Btn';
 import { Section, Subsection } from '../components/Section';
 import regLinks from '../data/assurancesAndCompliance.yaml';
 import { t } from '../i18n';
@@ -63,33 +64,25 @@ class AssurancesAndCompliance extends Component {
               {apdSections[name].map(
                 ({ title, checked, explanation }, index) => (
                   <div key={title} className="mt2">
-                    <div className="mb-tiny flex items-center justify-between">
+                    <div className="mb1 flex items-end justify-between">
+                      <LinkOrText link={regulations[title]} title={title} />
                       <div>
-                        <LinkOrText link={regulations[title]} title={title} />
-                      </div>
-                      <div>
-                        <label className="mr1">
-                          <input
-                            type="radio"
-                            value={yes}
-                            checked={checked}
-                            onChange={this.handleCheckChange(name, index, true)}
-                          />
+                        <Btn
+                          kind="outline"
+                          size="small"
+                          extraCss={`h5 ${checked ? 'bg-black white' : ''}`}
+                          onClick={this.handleCheckChange(name, index, true)}
+                        >
                           {yes}
-                        </label>
-                        <label>
-                          <input
-                            type="radio"
-                            value={no}
-                            checked={!checked}
-                            onChange={this.handleCheckChange(
-                              name,
-                              index,
-                              false
-                            )}
-                          />
+                        </Btn>{' '}
+                        <Btn
+                          kind="outline"
+                          size="small"
+                          extraCss={`h5 ${checked ? '' : 'bg-black white'}`}
+                          onClick={this.handleCheckChange(name, index, false)}
+                        >
                           {no}
-                        </label>
+                        </Btn>
                       </div>
                     </div>
                     {checked ? (
