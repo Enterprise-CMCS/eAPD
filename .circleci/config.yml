@@ -292,7 +292,7 @@ workflows:
               ignore:
                 - master
           requires:
-            - web test
+            - web dependency vulnerability scan
       - deploy staging:
           filters:
             branches:
@@ -300,8 +300,10 @@ workflows:
                 - master
           requires:
             - web test
+            - web dependency vulnerability scan
             - api unit test
             - api endpoint test
+            - api dependency vulnerability scan
       - request deploy for UX testing:
           type: approval
           filters:

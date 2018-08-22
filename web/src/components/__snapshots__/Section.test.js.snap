@@ -104,9 +104,7 @@ ShallowWrapper {
         <div>
           List the goals and objectives the state plans to accomplish as part of this activity.
         </div>,
-        <SectionDesc>
-          Include a brief description of how each goal relates to the vision identified in the program summary section.
-        </SectionDesc>,
+        "",
         "test child",
       ],
       "className": "py2 border-bottom border-grey border-width-3",
@@ -136,17 +134,7 @@ ShallowWrapper {
         "rendered": "List the goals and objectives the state plans to accomplish as part of this activity.",
         "type": "div",
       },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "children": "Include a brief description of how each goal relates to the vision identified in the program summary section.",
-        },
-        "ref": null,
-        "rendered": "Include a brief description of how each goal relates to the vision identified in the program summary section.",
-        "type": [Function],
-      },
+      "",
       "test child",
     ],
     "type": "section",
@@ -164,9 +152,7 @@ ShallowWrapper {
           <div>
             List the goals and objectives the state plans to accomplish as part of this activity.
           </div>,
-          <SectionDesc>
-            Include a brief description of how each goal relates to the vision identified in the program summary section.
-          </SectionDesc>,
+          "",
           "test child",
         ],
         "className": "py2 border-bottom border-grey border-width-3",
@@ -196,17 +182,7 @@ ShallowWrapper {
           "rendered": "List the goals and objectives the state plans to accomplish as part of this activity.",
           "type": "div",
         },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "children": "Include a brief description of how each goal relates to the vision identified in the program summary section.",
-          },
-          "ref": null,
-          "rendered": "Include a brief description of how each goal relates to the vision identified in the program summary section.",
-          "type": [Function],
-        },
+        "",
         "test child",
       ],
       "type": "section",
