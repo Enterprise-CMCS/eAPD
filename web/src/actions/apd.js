@@ -141,12 +141,66 @@ export const notifyNetError = (action, error) => {
   return notify(`${action} failed (${reason})`);
 };
 
-export const saveApd = () => (dispatch, state) => {
+export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
   dispatch(requestSave());
 
-  const { apd: { data: updatedApd }, activities } = state();
+  const { apd: { data: updatedApd }, activities, dirty } = state();
 
-  const apd = toAPI(updatedApd, activities);
+  if (!dirty.dirty) {
+    dispatch(notify('Save successful!'));
+    return Promise.resolve();
+  }
+
+  const apd = serialize(updatedApd, activities);
+
+  // These are the fields we want to remove if they aren't dirty.
+  const filterAPDFields = [
+    'federalCitations',
+    'incentivePayments',
+    'narrativeHIE',
+    'narrativeHIT',
+    'narrativeMMIS',
+    'programOverview',
+    'previousActivityExpenses',
+    'previousActivitySummary',
+    'stateProfile'
+  ];
+  const filterActivityFields = [
+    'contractorResources',
+    'costAllocation',
+    'costAllocationNarrative',
+    'expenses',
+    'goals',
+    'schedule',
+    'standardsAndConditions',
+    'statePersonnel',
+    'quarterlyFFP'
+  ];
+
+  filterAPDFields.forEach(field => {
+    if (!dirty.data.apd[field]) {
+      delete apd[field];
+    }
+  });
+
+  for (let i = apd.activities.length - 1; i >= 0; i -= 1) {
+    const activity = apd.activities[i];
+    if (!dirty.data.activities.byKey[activity.key]) {
+      // If this activity isn't dirty, strip it from the list to save,
+      // but then add just its ID back - this prevents it from being
+      // deleted by the API synchronization.
+      apd.activities.splice(i, 1);
+      apd.activities.push({ id: activity.id });
+    } else {
+      const dirtyActivity = dirty.data.activities.byKey[activity.key];
+      // Get rid of any activity fields that aren't dirty.
+      filterActivityFields.forEach(field => {
+        if (!dirtyActivity[field]) {
+          delete activity[field];
+        }
+      });
+    }
+  }
 
   return axios
     .put(`/apds/${updatedApd.id}`, apd)

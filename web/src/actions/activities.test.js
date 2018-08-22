@@ -13,13 +13,30 @@ describe('activities actions', () => {
   });
 
   it('addActivity creates ADD_ACTIVITY action', () => {
-    const store = mockStore({ apd: { data: { years: 'years' } } });
+    const newActivity = { this: 'is', a: 'new', activity: 'abc123' };
+    const state = {
+      activities: { allKeys: [], byKey: {} },
+      apd: { data: { years: 'years' } }
+    };
+
+    let firstStoreCall = true;
+    const store = mockStore(() => {
+      if (!firstStoreCall) {
+        state.activities.allKeys.push('abc123');
+        state.activities.byKey.abc123 = newActivity;
+      }
+
+      firstStoreCall = false;
+      return state;
+    });
 
     const expectedActions = [
       {
         type: actions.ADD_ACTIVITY,
         years: 'years'
-      }
+      },
+      { type: apdActions.UPDATE_BUDGET, state },
+      { type: actions.ADD_ACTIVITY_DIRTY, data: newActivity }
     ];
 
     store.dispatch(actions.addActivity());
