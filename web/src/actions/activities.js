@@ -2,6 +2,7 @@ import { updateBudget } from './apd';
 
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
 export const ADD_ACTIVITY_CONTRACTOR = 'ADD_ACTIVITY_CONTRACTOR';
+export const ADD_ACTIVITY_DIRTY = 'ADD_ACTIVITY_DIRTY';
 export const ADD_ACTIVITY_GOAL = 'ADD_ACTIVITY_GOAL';
 export const ADD_ACTIVITY_EXPENSE = 'ADD_ACTIVITY_EXPENSE';
 export const ADD_ACTIVITY_MILESTONE = 'ADD_ACTIVITY_MILESTONE';
@@ -21,7 +22,19 @@ export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY';
 const actionWithYears = (type, other) => (dispatch, getState) =>
   dispatch({ type, ...other, years: getState().apd.data.years });
 
-export const addActivity = () => actionWithYears(ADD_ACTIVITY);
+export const addActivity = () => (dispatch, getState) => {
+  const oldActivities = new Set(getState().activities.allKeys);
+
+  dispatch(actionWithYears(ADD_ACTIVITY));
+  dispatch(updateBudget());
+
+  const newKey = getState().activities.allKeys.find(k => !oldActivities.has(k));
+
+  dispatch({
+    type: ADD_ACTIVITY_DIRTY,
+    data: getState().activities.byKey[newKey]
+  });
+};
 
 export const addActivityContractor = key =>
   actionWithYears(ADD_ACTIVITY_CONTRACTOR, { key });
