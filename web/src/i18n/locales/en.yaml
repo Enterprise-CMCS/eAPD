@@ -380,7 +380,7 @@
           
         reminder: >-
           Account for grant funding used to support this activity. (Review Letter 10‐016 for examples
-          of grants needed to be included.) High level descriptions are appropriate for grant activities.
+          of grants for inclusion.) High level descriptions are appropriate for grant activities.
           Ensure new grants are included, and remove expired grants.
       ffp:
         title: Federal Financial Partipation (FFP) and Cost Allocation
@@ -404,11 +404,11 @@
           formats.  
 
 
-          The commitment to formal system development methodology
-          and open, reusable system architecture is extremely important in
+          Commitment to formal system development methodology
+          and open reusable system architecture is extremely important in
           order to ensure that states can more easily change and maintain
-          systems, as well as integrate and interoperate with a clinical and
-          administrative ecosystem designed to deliver person-centric services
+          systems. Integration and interoperability with a clinical and
+          administrative ecosystem, is designed to deliver person-centric services
           and benefits. Modularity is breaking down systems requirements into
           component parts. Extremely complex systems can be developed as
           part of a service-oriented architecture (SOA).  
@@ -424,25 +424,14 @@
           capabilities without affecting how the extension works. By doing
           so, the design ensures that future iterations of software can be
           deployed without breaking custom functionality. A critical element
-          of compliance with this condition is providing CMS with an
-          understanding of where services and code will be tightly coupled,
-          and where the state will pursue a more aggressive decoupling strategy.  
+          of compliance with this condition is providing CMS with an understanding where services and code will be integrated, and where the state will pursue a more aggressive decoupling strategy.  
         title: Describe how this activity will support the Modularity condition
       mita: 
         header: Medicaid Information Technology Architecture (MITA)
         subheader: >-
-          This condition requires states to align to and advance increasingly
+          This condition requires states to advance and align increasingly
           in MITA maturity for business, architecture, and data. CMS expects
-          the states to complete and continue to make measurable progress
-          in implementing their MITA roadmaps.  
-
-
-          Already the MITA investments
-          by federal, state, and private partners have allowed us to make
-          important incremental improvements to share data and reuse business
-          models, applications, and components. CMS strives, however, to
-          build on and accelerate the modernization of the Medicaid enterprise
-          that has thus far been achieved.  
+          states to complete and make measurable progress in implementing their MITA roadmaps. CMS strives to accelerate the modernization of Medicaid enterprise that been achieved.  
         title: Describe how this activity will support the MITA condition
       industryStandards: 
         header: Industry Standards
@@ -471,8 +460,8 @@
       leverage: 
         header: Leverage
         subheader: >-
-          State solutions should promote sharing, leverage, and reuse of
-          Medicaid technologies and systems within and among states. States
+          State solutions should promote sharing among, leverage, and reuse of
+          Medicaid technologies and systems among states. States
           can benefit substantially from the experience and investments
           of other states through the reuse of components and technologies
           already developed, consistent with a service-oriented architecture,
@@ -482,19 +471,16 @@
 
 
           CMS commits to work assertively with the states to identify promising state systems 
-          that can be leveraged and used by other states. Further, CMS would strongly
-          encourage the states to move to regional or multistate solutions
-          when cost effective, and will seek to support and facilitate such
-          solutions. In addition, CMS will expedite APD approvals for states
-          that are participating in shared development activities with other
-          states, and those developing components and solutions expressly
-          intended for successful reuse by other states.  
+          that can be leveraged by other states. CMS strongly
+          encourages states to move to regional or multi-state solutions
+          when cost effective. In addition, CMS will expedite APD approvals for states
+          that are participating in shared development activities (including developing components intended for successful reuse) with other
+          states.
 
 
           CMS will also review carefully any proposed investments in sub-state systems 
-          when the federal government is asked to share in the costs of updating or
-          maintaining multiple systems performing essentially the same
-          functions within the same state.  
+          when the federal government is asked to share costs of updating or
+          maintaining multiple systems performing redundant functions within the same state.
         title: Describe how this activity will support the leverage condition
       businessResults: 
         header: Business Results
@@ -504,67 +490,58 @@
           communications with providers, beneficiaries, and the public.  
 
 
-          Ultimately, the test of an effective and efficient system is whether
-          it supports and enables an effective and efficient business
-          process, producing and communicating the intended operational
-          results with a high degree of reliability and accuracy. It would be
-          inappropriate to provide enhanced federal funding for systems that
-          are unable to support desired business outcomes.  
+          An effective system supports and enables an effective business process, 
+          producing and communicating intended operational results with reliability and accuracy. 
+          Federal funding are not provided for systems unable to support desired business outcomes.  
         title: >-
           Describe how this activity will support the Business Results
           condition
       reporting: 
         header: Reporting
         subheader: >-
-          Solutions should produce transaction data, reports, and performance
-          information that would contribute to program evaluation, continuous
-          improvement in business operations, and transparency and
-          accountability. Systems should be able to produce and to expose
+         Systems should be able to produce and to expose
           electronically the accurate data that are necessary for oversight,
-          administration, evaluation, integrity, and transparency.  
+          administration, evaluation, integrity, and transparency. These systems should produce reports that contribute to continuous improvement in business operations, transparency, and accountability.
           
-          These reports should be automatically generated through open interfaces
+          Reports should be automatically generated through open interfaces
           to designated federal repositories or data hubs, with appropriate
           audit trails. MITA 3.0 will provide additional detail about
-          reporting requirements and needs that arise from the Affordable
+          reporting requirements arising from the Affordable
           Care Act. Additional details about data definitions, specifications,
-          timing, and routing of information will be supplied later this year.  
+          timing, and routing of information will be supplied at a later date.
         title: Describe how this activity will support the Reporting condition
       interoperability: 
         header: Interoperability
         subheader: >-
           Systems must ensure seamless coordination and integration with the
-          Exchange (whether run by the state or federal government), and
-          allow interoperability with health information exchanges, public
+          state or federal exchanges, and
+          allow interoperability with HIE, public
           health agencies, human services programs, and community
           organizations providing outreach and enrollment assistance
-          services. CMS expects that a key outcome of the government’s
-          technology investments will be a much higher degree of interaction
-          and interoperability in order to maximize value and minimize
-          burden and costs on providers, beneficiaries, and other
-          stakeholders.  
+          services. CMS expects a key outcome government
+          technology investments will be improved interaction
+          and interoperability to maximize value and minimize costs
+          on providers, beneficiaries, and other stakeholders.  
 
 
-          CMS is emphasizing in this standard and condition
-          an expectation that Medicaid agencies work in concert with
+          CMS expects Medicaid agencies to work in concert with
           exchanges (whether state or federally administered) to share
-          business services and technology investments in order to produce
+          business services and technology investments to produce
           seamless and efficient customer experiences.  
 
           
-          Systems must also be
-          built with the appropriate architecture and using standardized
-          messaging and communication protocols in order to preserve the
-          ability to efficiently, effectively, and appropriately exchange
+          Systems must include appropriate architecture, and standardized
+          communication protocols to preserve the
+          ability to appropriately exchange
           data with other participants in the health and human services
-          enterprise. As stated in MITA Framework 2.0, each state is
+          enterprise. According to MITA Framework 2.0, each state is
           “responsible for knowing and understanding its environment
           (data, applications and infrastructure) in order to map its data
-          to information sharing requirements.  
+          to information sharing requirements."
 
           
-          The data-sharing architecture also addresses the conceptual and 
-          logical mechanisms used for data sharing (i.e., data hubs, repositories, and registries). 
+          The data-sharing architecture also addresses conceptual and 
+          logical mechanisms used (i.e., data hubs, repositories, and registries). 
           The data-sharing architecture will also address data semantics,
           data harmonization strategies, shared-data ownership, security
           and privacy implications of shared data, and the quality of
