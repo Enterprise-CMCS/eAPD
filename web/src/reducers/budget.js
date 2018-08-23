@@ -162,9 +162,9 @@ const newBuildBudget = bigState => {
           }
         })),
         total: {
-          combined: { dollars: 0, percent: 0 },
-          contractors: { dollars: 0, percent: 0 },
-          state: { dollars: 0, percent: 0 }
+          combined: 0,
+          contractors: 0,
+          state: 0
         }
       }
     };
@@ -335,10 +335,14 @@ const newBuildBudget = bigState => {
 
           activityFFP[year][q + 1][propCostType].dollars += qFFP;
           activityFFP[year][q + 1][propCostType].percent = federalPct;
+          activityFFP[year][q + 1].combined.dollars += qFFP;
           activityFFP[year].subtotal[propCostType].dollars += qFFP;
-          activityFFP[year].subtotal[propCostType].percent += federalPct;
-          activityFFP.total[propCostType].dollars += qFFP;
-          activityFFP.total[propCostType].percent += federalPct;
+          if (prop !== 'expenses') {
+            activityFFP[year].subtotal[propCostType].percent += federalPct;
+          }
+          activityFFP[year].subtotal.combined.dollars += qFFP;
+          activityFFP.total[propCostType] += qFFP;
+          activityFFP.total.combined += qFFP;
 
           // For the expense type, add the federal share for the
           // quarter and the fiscal year subtotal.
