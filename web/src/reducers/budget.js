@@ -333,13 +333,29 @@ const newBuildBudget = bigState => {
           const federalPct = ffp[q + 1][propCostType] / 100;
           const qFFP = cost.fedShare * ffp[q + 1][propCostType] / 100;
 
+          // Total cost and percent for this type.  Note that we don't
+          // sum the percent here because there are two categories being
+          // merged into one - if we summed, the "state" percents would
+          // all be doubled.
           activityFFP[year][q + 1][propCostType].dollars += qFFP;
           activityFFP[year][q + 1][propCostType].percent = federalPct;
+
+          // Then the quarterly combined dollars.  We don't bother
+          // with percent for combined because it doesn't make sense.
           activityFFP[year][q + 1].combined.dollars += qFFP;
+
+          // Fiscal year subtotal.  Because "expense" and "statePersonnel"
+          // are combined into the "state" property, we need to be careful
+          // about not adding the percent multiple times.  So, only
+          // add the percent if this is an "expense" type.
           activityFFP[year].subtotal[propCostType].dollars += qFFP;
           if (prop !== 'expenses') {
             activityFFP[year].subtotal[propCostType].percent += federalPct;
           }
+
+          // And finally, fiscal year combined subtotal and activity
+          // grand total.  Note that the grand total props are just
+          // numbers, not objects - we drop the percentage altogether.
           activityFFP[year].subtotal.combined.dollars += qFFP;
           activityFFP.total[propCostType] += qFFP;
           activityFFP.total.combined += qFFP;
