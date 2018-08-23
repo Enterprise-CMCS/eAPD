@@ -85,29 +85,6 @@ const initialState = years => ({
   years
 });
 
-// const spread = (number, acrossPercents) => {
-//   const out = [];
-//   let remainder = 0;
-
-//   acrossPercents.forEach(percent => {
-//     const value = number * percent + remainder;
-//     remainder = value - Math.floor(value);
-
-//     if (remainder > 0.5) {
-//       // if the cumulative remainder to this point is over half, round up
-//       out.push(Math.ceil(value));
-//       // don't throwaway leftover remainders, or we might accidentally
-//       // roll up a few extra times
-//       remainder -= 1;
-//     } else {
-//       // otherwise round down
-//       out.push(Math.floor(value));
-//     }
-//   });
-
-//   return out;
-// };
-
 // Convert things to numbers, or default to zero.
 const n = x => +x || 0;
 
@@ -169,6 +146,19 @@ const newBuildBudget = bigState => {
       }
     };
 
+    const activityTotals = {
+      fundingSource: activity.fundingSource,
+      id: activity.id,
+      name: activity.name,
+      data: {
+        combined: { ...arrToObj(years, 0), total: 0 },
+        contractors: { ...arrToObj(years, 0), total: 0 },
+        expenses: { ...arrToObj(years, 0), total: 0 },
+        statePersonnel: { ...arrToObj(years, 0), total: 0 }
+      }
+    };
+    newState.activityTotals.push(activityTotals);
+
     /**
      * Get the state and federal share of costs for an amount for
      * a given year of the current activity.
@@ -199,6 +189,10 @@ const newBuildBudget = bigState => {
       Object.entries(contractor.years).forEach(([year, cost]) => {
         addCostToTotals(fundingSource, year, 'contractors', cost);
         activityTotalByCategory[year].contractors += cost;
+        activityTotals.data.contractors[year] += cost;
+        activityTotals.data.contractors.total += cost;
+        activityTotals.data.combined[year] += cost;
+        activityTotals.data.combined.total += cost;
       });
     });
 
@@ -206,6 +200,10 @@ const newBuildBudget = bigState => {
       Object.entries(expense.years).forEach(([year, cost]) => {
         addCostToTotals(fundingSource, year, 'expenses', cost);
         activityTotalByCategory[year].expenses += cost;
+        activityTotals.data.expenses[year] += cost;
+        activityTotals.data.expenses.total += cost;
+        activityTotals.data.combined[year] += cost;
+        activityTotals.data.combined.total += cost;
       });
     });
 
@@ -214,6 +212,10 @@ const newBuildBudget = bigState => {
         const cost = amt * perc / 100;
         addCostToTotals(fundingSource, year, 'statePersonnel', cost);
         activityTotalByCategory[year].statePersonnel += cost;
+        activityTotals.data.statePersonnel[year] += cost;
+        activityTotals.data.statePersonnel.total += cost;
+        activityTotals.data.combined[year] += cost;
+        activityTotals.data.combined.total += cost;
       });
     });
 
