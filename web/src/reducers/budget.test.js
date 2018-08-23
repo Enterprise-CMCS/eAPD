@@ -636,7 +636,7 @@ describe('budget reducer', () => {
             '4': { contractors: 450, state: 1812, combined: 2262 },
             subtotal: { contractors: 3420, state: 5430, combined: 8850 }
           },
-          total: { contractors: 10620, state: 19570, combined: 29190 }
+          total: { contractors: 10620, state: 18570, combined: 29190 }
         },
         mmis: {
           '1931': {
