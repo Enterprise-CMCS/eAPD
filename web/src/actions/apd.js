@@ -26,7 +26,6 @@ export const SUBMIT_APD_SUCCESS = 'SUBMIT_APD_SUCCESS';
 export const SUBMIT_APD_FAILURE = 'SUBMIT_APD_FAILURE';
 export const UPDATE_APD = 'UPDATE_APD';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
-export const UPDATE_BUDGET_QUARTERLY_SHARE = 'UPDATE_BUDGET_QUARTERLY_SHARE';
 
 export const SET_SELECT_APD_ON_LOAD = 'SET_SELECT_APD_ON_LOAD';
 export const selectApdOnLoad = () => ({ type: SET_SELECT_APD_ON_LOAD });
@@ -36,11 +35,6 @@ export const removePointOfContact = index => ({ type: REMOVE_APD_POC, index });
 
 export const updateBudget = () => (dispatch, getState) =>
   dispatch({ type: UPDATE_BUDGET, state: getState() });
-
-export const updateBudgetQuarterlyShare = updates => ({
-  type: UPDATE_BUDGET_QUARTERLY_SHARE,
-  updates
-});
 
 export const requestApd = () => ({ type: GET_APD_REQUEST });
 export const receiveApd = data => ({ type: GET_APD_SUCCESS, data });
@@ -141,12 +135,66 @@ export const notifyNetError = (action, error) => {
   return notify(`${action} failed (${reason})`);
 };
 
-export const saveApd = () => (dispatch, state) => {
+export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
   dispatch(requestSave());
 
-  const { apd: { data: updatedApd }, activities } = state();
+  const { apd: { data: updatedApd }, activities, dirty } = state();
 
-  const apd = toAPI(updatedApd, activities);
+  if (!dirty.dirty) {
+    dispatch(notify('Save successful!'));
+    return Promise.resolve();
+  }
+
+  const apd = serialize(updatedApd, activities);
+
+  // These are the fields we want to remove if they aren't dirty.
+  const filterAPDFields = [
+    'federalCitations',
+    'incentivePayments',
+    'narrativeHIE',
+    'narrativeHIT',
+    'narrativeMMIS',
+    'programOverview',
+    'previousActivityExpenses',
+    'previousActivitySummary',
+    'stateProfile'
+  ];
+  const filterActivityFields = [
+    'contractorResources',
+    'costAllocation',
+    'costAllocationNarrative',
+    'expenses',
+    'goals',
+    'schedule',
+    'standardsAndConditions',
+    'statePersonnel',
+    'quarterlyFFP'
+  ];
+
+  filterAPDFields.forEach(field => {
+    if (!dirty.data.apd[field]) {
+      delete apd[field];
+    }
+  });
+
+  for (let i = apd.activities.length - 1; i >= 0; i -= 1) {
+    const activity = apd.activities[i];
+    if (!dirty.data.activities.byKey[activity.key]) {
+      // If this activity isn't dirty, strip it from the list to save,
+      // but then add just its ID back - this prevents it from being
+      // deleted by the API synchronization.
+      apd.activities.splice(i, 1);
+      apd.activities.push({ id: activity.id });
+    } else {
+      const dirtyActivity = dirty.data.activities.byKey[activity.key];
+      // Get rid of any activity fields that aren't dirty.
+      filterActivityFields.forEach(field => {
+        if (!dirtyActivity[field]) {
+          delete activity[field];
+        }
+      });
+    }
+  }
 
   return axios
     .put(`/apds/${updatedApd.id}`, apd)

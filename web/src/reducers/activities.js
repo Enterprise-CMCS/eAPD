@@ -32,7 +32,7 @@ export const setKeyGenerator = fn => {
   generateKey = fn;
 };
 
-const newGoal = () => ({ key: generateKey(), desc: '', obj: '' });
+const newGoal = () => ({ key: generateKey(), description: '', objective: '' });
 
 const newMilestone = (milestone = '', plannedStart = '', plannedEnd = '') => ({
   key: generateKey(),
@@ -102,9 +102,9 @@ const newActivity = ({
   key: generateKey(),
   name,
   fundingSource,
-  descShort: '',
-  descLong: '',
-  altApproach: '',
+  summary: '',
+  description: '',
+  alternatives: '',
   costAllocationDesc: '',
   otherFundingDesc: '',
   goals: [newGoal()],
@@ -116,12 +116,12 @@ const newActivity = ({
   standardsAndConditions: {
     modularity: '',
     mita: '',
-    industry: '',
+    industryStandards: '',
     leverage: '',
-    bizResults: '',
+    businessResults: '',
     reporting: '',
     interoperability: '',
-    mitigation: '',
+    mitigationStrategy: '',
     keyPersonnel: '',
     documentation: '',
     minimizeCost: ''
