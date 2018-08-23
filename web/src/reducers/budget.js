@@ -1,6 +1,11 @@
 import { UPDATE_BUDGET } from '../actions/apd';
 import { arrToObj } from '../util';
 
+const fixNum = (value, digits = 2) => {
+  const mult = 10 ** digits;
+  return Math.round(value * mult) / mult;
+};
+
 const getFundingSourcesByYear = years => ({
   ...years.reduce(
     (o, year) => ({
@@ -380,6 +385,17 @@ const newBuildBudget = bigState => {
       });
     });
   });
+
+  const roundProps = o => {
+    Object.entries(o).forEach(([key, value]) => {
+      if (typeof value === 'number') {
+        o[key] = fixNum(value);
+      } else if (typeof value === 'object') {
+        roundProps(value);
+      }
+    });
+  };
+  roundProps(newState);
 
   return newState;
 };
