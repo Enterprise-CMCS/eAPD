@@ -100,17 +100,29 @@ const buildBudget = bigState => {
   const { years } = bigState.apd.data;
   const newState = initialState(years);
 
+  /**
+   * Adds a given cost to the budget running totals.
+   * @param {String} fundingSource The CMS funding source of the cost
+   * @param {String} year As a four-character year string (e.g., '2018')
+   * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
+   * @param {Number} cost The cost value.
+   */
   const addCostToTotals = (fundingSource, year, prop, cost) => {
+    // Add this value to the running budget totals, as appropriate.
     newState[fundingSource][prop][year].total += cost;
     newState[fundingSource][prop].total.total += cost;
     newState[fundingSource].combined[year].total += cost;
     newState[fundingSource].combined.total.total += cost;
 
+    // Because HIT and HIE sources have already added to the grand
+    // totals, don't also do it for the combined source.
     if (fundingSource !== 'hitAndHie') {
       newState.combined[year].total += cost;
       newState.combined.total.total += cost;
     }
 
+    // HIT and HIE are rolled up into a single combined source for
+    // some of the budget data, so for those, just run again.
     if (fundingSource === 'hie' || fundingSource === 'hit') {
       addCostToTotals('hitAndHie', year, prop, cost);
     }
@@ -151,6 +163,9 @@ const buildBudget = bigState => {
       }
     };
 
+    // We need to sum up the total cost of each cost category per
+    // fiscal year for the activity as well, so let's make an object
+    // for tracking that and go ahead and push it into the budget data.
     const activityTotals = {
       fundingSource: activity.fundingSource,
       id: activity.id,
@@ -179,7 +194,10 @@ const buildBudget = bigState => {
     // For each activity, we need to independently track the
     // total cost for each category, per fiscal year.  This isn't
     // stored in the budget anywhere, so we'll track it as a local
-    // variable.
+    // variable.  This is super similar to the activityTotals above,
+    // but the object structure is different.  Rather than munge
+    // that object into this shape later, we'll just capture both
+    // at the same time.  That's more straightforward.
     const activityTotalByCategory = arrToObj(years, () => ({
       contractors: 0,
       expenses: 0,
@@ -190,10 +208,16 @@ const buildBudget = bigState => {
     // fiscal years and across them, for all cost categories.  We
     // need these completed before we can compute what percentage
     // each cost category contributes to the total cost, further down.
+    // While we're here, also compute the cost category totals
+    // per activity.  The data is structured differently than the
+    // "activityTotalByCategory" and it seems cleaner to just
+    // do them simultaneously than to munge one object into the
+    // other after the fact.
     activity.contractorResources.forEach(contractor => {
       Object.entries(contractor.years).forEach(([year, cost]) => {
         addCostToTotals(fundingSource, year, 'contractors', cost);
         activityTotalByCategory[year].contractors += cost;
+
         activityTotals.data.contractors[year] += cost;
         activityTotals.data.contractors.total += cost;
         activityTotals.data.combined[year] += cost;
@@ -205,6 +229,7 @@ const buildBudget = bigState => {
       Object.entries(expense.years).forEach(([year, cost]) => {
         addCostToTotals(fundingSource, year, 'expenses', cost);
         activityTotalByCategory[year].expenses += cost;
+
         activityTotals.data.expenses[year] += cost;
         activityTotals.data.expenses.total += cost;
         activityTotals.data.combined[year] += cost;
@@ -217,6 +242,7 @@ const buildBudget = bigState => {
         const cost = amt * perc / 100;
         addCostToTotals(fundingSource, year, 'statePersonnel', cost);
         activityTotalByCategory[year].statePersonnel += cost;
+
         activityTotals.data.statePersonnel[year] += cost;
         activityTotals.data.statePersonnel.total += cost;
         activityTotals.data.combined[year] += cost;
@@ -269,6 +295,11 @@ const buildBudget = bigState => {
         const totalGovShare = totalCost - other[prop];
         const cost = getAllocation(year, totalGovShare);
 
+        /**
+         * Adds the state and federal share to the given funding
+         * source for the current property and fiscal year.
+         * @param {String} fs Funding source to apply this to.
+         */
         const addShares = fs => {
           // Add total federal share, and federal share for the year
           newState[fs][prop][year].federal += cost.fedShare;
