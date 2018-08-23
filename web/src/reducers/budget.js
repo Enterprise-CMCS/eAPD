@@ -93,7 +93,7 @@ const initialState = years => ({
 // Convert things to numbers, or default to zero.
 const n = x => +x || 0;
 
-const newBuildBudget = bigState => {
+const buildBudget = bigState => {
   // Get a shell of our new state object.  This essentially guarantees
   // that all of the properties and stuff will exist, so we don't have
   // to have a bunch of code checking for it.
@@ -403,7 +403,7 @@ const newBuildBudget = bigState => {
 const reducer = (state = initialState([]), action) => {
   switch (action.type) {
     case UPDATE_BUDGET:
-      return newBuildBudget(action.state);
+      return buildBudget(action.state);
     default:
       return state;
   }
