@@ -21,6 +21,201 @@ import { t } from '../../i18n';
 
 const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
 
+const ContractorForm = ({
+  idx,
+  contractor,
+  docType,
+  years,
+  handleChange,
+  handleDelete,
+  handleDocChange,
+  handleFileDelete,
+  handleFileUpload,
+  handleHourlyChange,
+  handleTermChange,
+  handleUseHourly,
+  handleYearChange
+}) => (
+  <div className="mt2 mb3">
+    <Btn
+      kind="outline"
+      extraCss="right px-tiny py0 h5 xs-hide"
+      onClick={handleDelete}
+    >
+      ✗
+    </Btn>
+    <div className="mb3 md-flex">
+      <Label>{t('activities.contractorResources.labels.contractorName')}</Label>
+      <Input
+        name={`contractor-${contractor.key}-name`}
+        label={t('activities.contractorResources.srLabels.name')}
+        type="text"
+        value={contractor.name}
+        onChange={handleChange(idx, 'name')}
+        wrapperClass="md-col-5"
+        hideLabel
+      />
+    </div>
+    <div className="mb3 md-flex">
+      <Label>{t('activities.contractorResources.labels.description')}</Label>
+      <Textarea
+        id={`contractor-${contractor.key}-desc`}
+        name={`contractor-${contractor.key}-desc`}
+        label={t('activities.contractorResources.srLabels.description')}
+        value={contractor.desc}
+        onChange={handleChange(idx, 'desc')}
+        wrapperClass="md-col-8"
+        hideLabel
+      />
+    </div>
+    <div className="mb3 md-flex">
+      <Label>{t('activities.contractorResources.labels.term')}</Label>
+      <DatePickerWrapper
+        startDateId={`contractor-${contractor.key}-start`}
+        endDateId={`contractor-${contractor.key}-end`}
+        initialStartDate={contractor.start}
+        initialEndDate={contractor.end}
+        onChange={handleTermChange(idx)}
+        numberOfMonths={2}
+        daySize={32}
+      />
+    </div>
+    <div className="mb3 md-flex">
+      <Label>{t('activities.contractorResources.labels.attachments')}</Label>
+      <div className="md-col-9 md-flex items-start">
+        <div className="md-col-6 flex items-end mr2">
+          <Select
+            name={`${contractor.key}-attachment-type`}
+            options={DOC_TYPES}
+            label="Document Type"
+            wrapperClass="col-6 mr2"
+            value={docType}
+            onChange={handleDocChange}
+          />
+          <Dropzone
+            className="btn btn-primary btn-dropzone"
+            onDrop={handleFileUpload(idx)}
+            multiple={false}
+            inputProps={{
+              title: 'select a file to attach for this contractor'
+            }}
+          >
+            Select file
+          </Dropzone>
+        </div>
+        {(contractor.files || []).length > 0 && (
+          <div className="md-col-4">
+            <h5 className="md-mt0 mb-tiny">Attached files</h5>
+            {contractor.files.map((file, fileIdx) => (
+              <div key={`${file.name}-${fileIdx}`} className="mb1">
+                <div>
+                  <DeleteButton
+                    kind="outline"
+                    extraCss="px-tiny py0 right"
+                    remove={handleFileDelete(idx, fileIdx)}
+                    resource="activities.contractorResources.delete"
+                  />
+                  <a
+                    className="block bold truncate"
+                    href={file.preview}
+                    target="_blank"
+                  >
+                    {file.name}
+                  </a>
+                </div>
+                <div className="h6">({file.category})</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+    <div className="mb3 md-flex">
+      <Label>{t('activities.contractorResources.labels.cost')}</Label>
+      <div className="md-col-6 flex">
+        {years.map(year => (
+          <DollarInput
+            key={year}
+            name={`contractor-${contractor.key}-cost-${year}`}
+            label={year}
+            value={contractor.years[year]}
+            onChange={handleYearChange(idx, year)}
+            disabled={contractor.hourly.useHourly}
+            wrapperClass="mr2 flex-auto"
+          />
+        ))}
+      </div>
+    </div>
+    <div className="mb3 md-flex">
+      <Label>{t('activities.contractorResources.labels.hourly')}</Label>
+      <div className="md-col-6">
+        <div className="flex items-center">
+          <div className="mr2">This is an hourly resource</div>
+          <div>
+            <Btn
+              kind="outline"
+              extraCss={contractor.hourly.useHourly ? 'bg-black white' : ''}
+              onClick={handleUseHourly(contractor, true)}
+              disabled={contractor.hourly.useHourly}
+            >
+              Yes
+            </Btn>{' '}
+            <Btn
+              kind="outline"
+              extraCss={contractor.hourly.useHourly ? '' : 'bg-black white'}
+              onClick={handleUseHourly(contractor, false)}
+              disabled={!contractor.hourly.useHourly}
+            >
+              No
+            </Btn>
+          </div>
+        </div>
+        {contractor.hourly.useHourly && (
+          <div className="mt3">
+            {years.map(year => (
+              <div key={year} className="mb2 flex items-center justify-between">
+                <div className="col-3 bold">FFY {year}</div>
+                <Input
+                  name={`c-${contractor.key}-${year}-hrs`}
+                  label="Number of hours"
+                  wrapperClass="col-4"
+                  className="m0 input mono"
+                  type="number"
+                  value={contractor.hourly.data[year].hours}
+                  onChange={handleHourlyChange(idx, year, 'hours')}
+                />
+                <DollarInput
+                  name={`c-${contractor.key}-${year}-rate`}
+                  label="Hourly rate"
+                  wrapperClass="col-4"
+                  value={contractor.hourly.data[year].rate}
+                  onChange={handleHourlyChange(idx, year, 'rate')}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+);
+
+ContractorForm.propTypes = {
+  idx: PropTypes.number.isRequired,
+  contractor: PropTypes.object.isRequired,
+  docType: PropTypes.string.isRequired,
+  years: PropTypes.array.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  handleDocChange: PropTypes.func.isRequired,
+  handleFileDelete: PropTypes.func.isRequired,
+  handleFileUpload: PropTypes.func.isRequired,
+  handleHourlyChange: PropTypes.func.isRequired,
+  handleTermChange: PropTypes.func.isRequired,
+  handleUseHourly: PropTypes.func.isRequired,
+  handleYearChange: PropTypes.func.isRequired
+};
+
 class ContractorResources extends Component {
   state = { docType: DOC_TYPES[0] };
 
@@ -105,8 +300,13 @@ class ContractorResources extends Component {
     updateActivity(activity.key, { contractorResources: updates });
   };
 
+  handleDelete = entryKey => () => {
+    const { activity, removeContractor } = this.props;
+    removeContractor(activity.key, entryKey);
+  };
+
   render() {
-    const { activity, years, addContractor, removeContractor } = this.props;
+    const { activity, years, addContractor } = this.props;
     const { docType } = this.state;
 
     if (!activity) return null;
@@ -122,204 +322,22 @@ class ContractorResources extends Component {
         ) : (
           <div className="mt3 pt3 border-top border-grey">
             {contractorResources.map((contractor, i) => (
-              <div
+              <ContractorForm
                 key={contractor.key}
-                className="mb3 pb3 border-bottom border-grey"
-              >
-                <div className="mb3 md-flex">
-                  <Label>
-                    {t('activities.contractorResources.labels.contractorName')}
-                  </Label>
-                  <Input
-                    name={`contractor-${contractor.key}-name`}
-                    label={t('activities.contractorResources.srLabels.name')}
-                    type="text"
-                    value={contractor.name}
-                    onChange={this.handleChange(i, 'name')}
-                    wrapperClass="md-col-5"
-                    hideLabel
-                  />
-                </div>
-                <div className="mb3 md-flex">
-                  <Label>
-                    {t('activities.contractorResources.labels.description')}
-                  </Label>
-                  <Textarea
-                    id={`contractor-${contractor.key}-desc`}
-                    name={`contractor-${contractor.key}-desc`}
-                    label={t(
-                      'activities.contractorResources.srLabels.description'
-                    )}
-                    value={contractor.desc}
-                    onChange={this.handleChange(i, 'desc')}
-                    wrapperClass="md-col-8"
-                    hideLabel
-                  />
-                </div>
-                <div className="mb3 md-flex">
-                  <Label>
-                    {t('activities.contractorResources.labels.term')}
-                  </Label>
-                  <DatePickerWrapper
-                    startDateId={`contractor-${contractor.key}-start`}
-                    endDateId={`contractor-${contractor.key}-end`}
-                    initialStartDate={contractor.start}
-                    initialEndDate={contractor.end}
-                    onChange={this.handleTermChange(i)}
-                    numberOfMonths={2}
-                    daySize={32}
-                  />
-                </div>
-                <div className="mb3 md-flex">
-                  <Label>
-                    {t('activities.contractorResources.labels.attachments')}
-                  </Label>
-                  <div className="md-col-9 md-flex items-start">
-                    <div className="md-col-6 flex items-end mr2">
-                      <Select
-                        name={`${contractor.key}-attachment-type`}
-                        options={DOC_TYPES}
-                        label="Document Type"
-                        wrapperClass="col-6 mr2"
-                        value={docType}
-                        onChange={this.updateDocType}
-                      />
-                      <Dropzone
-                        className="btn btn-primary btn-dropzone"
-                        onDrop={this.handleFileUpload(i)}
-                        multiple={false}
-                        inputProps={{
-                          title: 'select a file to attach for this contractor'
-                        }}
-                      >
-                        Select file
-                      </Dropzone>
-                    </div>
-                    {(contractor.files || []).length > 0 && (
-                      <div className="md-col-4">
-                        <h5 className="md-mt0 mb-tiny">Attached files</h5>
-                        {contractor.files.map((f, j) => (
-                          <div key={`${f.name}-${j}`} className="mb1">
-                            <div>
-                              <DeleteButton
-                                kind="outline"
-                                extraCss="px-tiny py0 right"
-                                remove={this.handleFileDelete(i, j)}
-                                resource="activities.contractorResources.delete"
-                              />
-                              <a
-                                className="block bold truncate"
-                                href={f.preview}
-                                target="_blank"
-                              >
-                                {f.name}
-                              </a>
-                            </div>
-                            <div className="h6">({f.category})</div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="mb3 md-flex">
-                  <Label>
-                    {t('activities.contractorResources.labels.cost')}
-                  </Label>
-                  <div className="md-col-6 flex">
-                    {years.map(year => (
-                      <DollarInput
-                        key={year}
-                        name={`contractor-${contractor.key}-cost-${year}`}
-                        label={year}
-                        value={contractor.years[year]}
-                        onChange={this.handleYearChange(i, year)}
-                        disabled={contractor.hourly.useHourly}
-                        wrapperClass="mr2 flex-auto"
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className="mb3 md-flex">
-                  <Label>
-                    {t('activities.contractorResources.labels.hourly')}
-                  </Label>
-                  <div className="md-col-6">
-                    <div className="flex items-center">
-                      <div className="mr2">This is an hourly resource</div>
-                      <div>
-                        <Btn
-                          kind="outline"
-                          extraCss={
-                            contractor.hourly.useHourly ? 'bg-black white' : ''
-                          }
-                          onClick={this.handleUseHourly(contractor, true)}
-                          disabled={contractor.hourly.useHourly}
-                        >
-                          Yes
-                        </Btn>{' '}
-                        <Btn
-                          kind="outline"
-                          extraCss={
-                            contractor.hourly.useHourly ? '' : 'bg-black white'
-                          }
-                          onClick={this.handleUseHourly(contractor, false)}
-                          disabled={!contractor.hourly.useHourly}
-                        >
-                          No
-                        </Btn>
-                      </div>
-                    </div>
-                    {contractor.hourly.useHourly && (
-                      <div className="mt3">
-                        {years.map(year => (
-                          <div
-                            key={year}
-                            className="mb2 flex items-center justify-between"
-                          >
-                            <div className="col-3 bold">FFY {year}</div>
-                            <Input
-                              name={`c-${contractor.key}-${year}-hrs`}
-                              label="Number of hours"
-                              wrapperClass="col-4"
-                              className="m0 input mono"
-                              type="number"
-                              value={contractor.hourly.data[year].hours}
-                              onChange={this.handleHourlyChange(
-                                i,
-                                year,
-                                'hours'
-                              )}
-                            />
-                            <DollarInput
-                              name={`c-${contractor.key}-${year}-rate`}
-                              label="Hourly rate"
-                              wrapperClass="col-4"
-                              value={contractor.hourly.data[year].rate}
-                              onChange={this.handleHourlyChange(
-                                i,
-                                year,
-                                'rate'
-                              )}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div>
-                  <Btn
-                    kind="outline"
-                    extraCss="px1 py-tiny h5"
-                    onClick={() =>
-                      removeContractor(activityKey, contractor.key)
-                    }
-                  >
-                    {t('activities.contractorResources.removeLabel')}
-                  </Btn>
-                </div>
-              </div>
+                idx={i}
+                contractor={contractor}
+                docType={docType}
+                years={years}
+                handleChange={this.handleChange}
+                handleDelete={this.handleDelete}
+                handleDocChange={this.updateDocType}
+                handleFileUpload={this.handleFileUpload}
+                handleFileDelete={this.handleFileDelete}
+                handleHourlyChange={this.handleHourlyChange}
+                handleTermChange={this.handleTermChange}
+                handleUseHourly={this.handleUseHourly}
+                handleYearChange={this.handleYearChange}
+              />
             ))}
           </div>
         )}
