@@ -17,6 +17,7 @@
         }
       }
     ],
+    "no-param-reassign": [2, { "props": false }],
 
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "react/jsx-filename-extension": 0,
