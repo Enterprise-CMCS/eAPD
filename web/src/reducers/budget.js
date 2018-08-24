@@ -397,7 +397,9 @@ const buildBudget = wholeState => {
       Object.entries(yearValue).forEach(([quarterKey, quarterValue]) => {
         Object.entries(quarterValue).forEach(([key, value]) => {
           target[yearKey][quarterKey][key] += value.dollars;
-          target.total[key] += value.dollars;
+          if (quarterKey !== 'subtotal') {
+            target.total[key] += value.dollars;
+          }
         });
       });
     });
