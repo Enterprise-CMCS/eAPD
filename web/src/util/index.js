@@ -161,8 +161,11 @@ export const generateKey = () =>
 
 export const nextSequence = arrOfNums => Math.max(...arrOfNums, 0) + 1;
 
-export const arrToObj = (array = [], initialValue = 0) =>
-  Object.assign({}, ...array.map(a => ({ [a]: initialValue })));
+export const arrToObj = (array = [], initialValue = 0) => {
+  const init =
+    typeof initialValue === 'function' ? initialValue : () => initialValue;
+  return Object.assign({}, ...array.map(a => ({ [a]: init() })));
+};
 
 export const addObjVals = (obj, getVal = a => a) =>
   Object.values(obj).reduce((a, b) => a + getVal(b), 0);

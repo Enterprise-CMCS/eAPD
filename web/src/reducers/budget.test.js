@@ -287,7 +287,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 3060, percent: 1 },
-                contractors: { dollars: 1800, percent: 1.0000000000000002 },
+                contractors: { dollars: 1800, percent: 1 },
                 combined: { dollars: 4860, percent: 0 }
               }
             },
@@ -314,7 +314,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 2880, percent: 1 },
-                contractors: { dollars: 1800, percent: 0.9999999999999999 },
+                contractors: { dollars: 1800, percent: 1 },
                 combined: { dollars: 4680, percent: 0 }
               }
             },
@@ -341,7 +341,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 2430, percent: 1 },
-                contractors: { dollars: 1800, percent: 0.9999999999999999 },
+                contractors: { dollars: 1800, percent: 1 },
                 combined: { dollars: 4230, percent: 0 }
               }
             },
@@ -373,7 +373,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 1800, percent: 1 },
-                contractors: { dollars: 900, percent: 0.9999999999999999 },
+                contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 2700, percent: 0 }
               }
             },
@@ -400,7 +400,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 1800, percent: 1 },
-                contractors: { dollars: 900, percent: 1.0000000000000002 },
+                contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 2700, percent: 0 }
               }
             },
@@ -427,7 +427,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 1800, percent: 1 },
-                contractors: { dollars: 900, percent: 0.9999999999999999 },
+                contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 2700, percent: 0 }
               }
             },
@@ -459,7 +459,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 1800, percent: 1 },
-                contractors: { dollars: 900, percent: 0.9999999999999999 },
+                contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 2700, percent: 0 }
               }
             },
@@ -486,7 +486,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 1800, percent: 1 },
-                contractors: { dollars: 900, percent: 0.9999999999999999 },
+                contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 2700, percent: 0 }
               }
             },
@@ -513,7 +513,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 1200, percent: 1 },
-                contractors: { dollars: 720, percent: 1.2000000000000002 },
+                contractors: { dollars: 720, percent: 1.2 },
                 combined: { dollars: 1920, percent: 0 }
               }
             },
@@ -545,7 +545,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 450, percent: 1 },
-                contractors: { dollars: 300, percent: 0.9999999999999999 },
+                contractors: { dollars: 300, percent: 1 },
                 combined: { dollars: 750, percent: 0 }
               }
             },
@@ -572,7 +572,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 1000, percent: 1 },
-                contractors: { dollars: 600, percent: 1.2000000000000002 },
+                contractors: { dollars: 600, percent: 1.2 },
                 combined: { dollars: 1600, percent: 0 }
               }
             },
@@ -599,7 +599,7 @@ describe('budget reducer', () => {
               },
               subtotal: {
                 state: { dollars: 990, percent: 1 },
-                contractors: { dollars: 900, percent: 0.9999999999999999 },
+                contractors: { dollars: 900, percent: 1 },
                 combined: { dollars: 1890, percent: 0 }
               }
             },
@@ -609,9 +609,9 @@ describe('budget reducer', () => {
       },
       combined: {
         '1931': { federal: 11010, state: 1890, total: 13900 },
-        '1932': { federal: 11580, state: 1620.0100000000002, total: 14200 },
-        '1933': { federal: 10620, state: 1180.0099999999998, total: 12800 },
-        total: { federal: 33210, state: 4690.02, total: 40900 }
+        '1932': { federal: 11580, state: 1620, total: 14200 },
+        '1933': { federal: 10620, state: 1180, total: 12800 },
+        total: { federal: 33210, state: 4690, total: 40900 }
       },
       federalShareByFFYQuarter: {
         hitAndHie: {
@@ -693,8 +693,8 @@ describe('budget reducer', () => {
         combined: {
           '1931': { federal: 2700, state: 300, total: 3000 },
           '1932': { federal: 2700, state: 300, total: 3000 },
-          '1933': { federal: 1800, state: 200.01, total: 3000 },
-          total: { federal: 7200, state: 800.01, total: 9000 }
+          '1933': { federal: 1800, state: 200, total: 3000 },
+          total: { federal: 7200, state: 800, total: 9000 }
         },
         contractors: {
           '1931': { federal: 900, state: 100, total: 1000 },
@@ -719,8 +719,8 @@ describe('budget reducer', () => {
         combined: {
           '1931': { federal: 10260, state: 1140, total: 11400 },
           '1932': { federal: 10080, state: 1120, total: 11200 },
-          '1933': { federal: 8730, state: 970.01, total: 10700 },
-          total: { federal: 29070, state: 3230.01, total: 33300 }
+          '1933': { federal: 8730, state: 970, total: 10700 },
+          total: { federal: 29070, state: 3230, total: 33300 }
         },
         contractors: {
           '1931': { federal: 3600, state: 400, total: 4000 },
@@ -737,16 +737,16 @@ describe('budget reducer', () => {
         statePersonnel: {
           '1931': { federal: 3060, state: 340, total: 3400 },
           '1932': { federal: 2880, state: 320, total: 3200 },
-          '1933': { federal: 2130, state: 236.67000000000002, total: 2700 },
-          total: { federal: 8070, state: 896.6700000000001, total: 9300 }
+          '1933': { federal: 2130, state: 236.67, total: 2700 },
+          total: { federal: 8070, state: 896.67, total: 9300 }
         }
       },
       mmis: {
         combined: {
           '1931': { federal: 750, state: 750, total: 2500 },
-          '1932': { federal: 1500, state: 500.01, total: 3000 },
+          '1932': { federal: 1500, state: 500, total: 3000 },
           '1933': { federal: 1890, state: 210, total: 2100 },
-          total: { federal: 4140, state: 1460.0099999999998, total: 7600 }
+          total: { federal: 4140, state: 1460, total: 7600 }
         },
         contractors: {
           '1931': { federal: 300, state: 300, total: 1000 },
@@ -764,7 +764,7 @@ describe('budget reducer', () => {
           '1931': { federal: 150, state: 150, total: 500 },
           '1932': { federal: 500, state: 166.67, total: 1000 },
           '1933': { federal: 90, state: 10, total: 100 },
-          total: { federal: 740, state: 326.66999999999996, total: 1600 }
+          total: { federal: 740, state: 326.67, total: 1600 }
         }
       },
       mmisByFFP: {
