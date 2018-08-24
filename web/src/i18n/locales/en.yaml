@@ -238,9 +238,8 @@
         title: "Goal #{{number}}"
       objective: 
         title: Goal roadmap
-      helpText: >-
-       Include a brief description of how the state will measure progress
-          toward each goal identified.
+        helpText: >-
+         Include a brief description of how the state will measure progress toward each goal identified.
       addGoalButtonText: Add a goal
     schedule: 
       title: Activity Schedule
