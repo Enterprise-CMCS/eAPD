@@ -228,18 +228,17 @@
           Remember to update the SMHP as necessary with any substantive
           changes to the approach for implementing EHR incentives.
     goals: 
-      title: Needs and Objectives
+      title: Performance Measures and Benchmarks
       subheader: >-
         List the goals and objectives the state plans to accomplish as part
         of this activity.
       helpText: >-
-       Include a brief description of how each goal relates to the vision
-        identified in the program summary section. (Each goal should have a matching activity.)
+       Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.
       goal: 
         title: "Goal #{{number}}"
       objective: 
-        title: Objective (How the the goal will be achieved)
-        helpText: >-
+        title: Goal roadmap
+      helpText: >-
        Include a brief description of how the state will measure progress
           toward each goal identified.
       addGoalButtonText: Add a goal
@@ -644,7 +643,6 @@
           state investments that are involved with major Medicaid IT projects
           and requires that states consider options beyond software that
           will reduce costs or promote reuse.    
-
 
           States should describe strategies considered when 
           deciding which most efficient solution. States are not required to
