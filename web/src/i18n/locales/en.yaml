@@ -699,6 +699,9 @@
       non‐compliance issues prior to approving requests.
     citations:
       title: Federal Citations and Justification
+      helpText: >-
+        Select “yes” or “no” to indicate how you are complying with each of
+        these citations, and provide any additional justifications as applicable.
     headers:
       procurement: Procurement Standards (Competition / Sole Source)
       recordsAccess: Access to Records, Reporting and Agency Attestations

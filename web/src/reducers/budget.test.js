@@ -1,4 +1,4 @@
-import budget, { initialState as initialStateFn } from './budget';
+import budget from './budget';
 import { UPDATE_BUDGET } from '../actions/apd';
 
 describe('budget reducer', () => {
@@ -43,25 +43,12 @@ describe('budget reducer', () => {
       '90-10': { total: { federal: 0, state: 0, total: 0 } },
       combined: { total: { federal: 0, state: 0, total: 0 } }
     },
-    quarterly: { hitAndHie: {}, mmis: {} },
     activityTotals: [],
     years: []
   };
 
   it('should handle initial state', () => {
     expect(budget(undefined, {})).toEqual(initialState);
-  });
-
-  it('handles quarterly share updates', () => {
-    const state = initialStateFn(['2018']);
-    const newState = budget(state, {
-      type: 'UPDATE_BUDGET_QUARTERLY_SHARE',
-      updates: { hitAndHie: { '2018': { 1: 10 } } }
-    });
-
-    expect(newState.quarterly.hitAndHie).toEqual({
-      '2018': { 1: 10, 2: 25, 3: 25, 4: 25 }
-    });
   });
 
   it('computes new budget data from state', () => {
@@ -649,7 +636,7 @@ describe('budget reducer', () => {
             '4': { contractors: 450, state: 1812, combined: 2262 },
             subtotal: { contractors: 3420, state: 5430, combined: 8850 }
           },
-          total: { contractors: 21240, state: 37140, combined: 58380 }
+          total: { contractors: 10620, state: 18570, combined: 29190 }
         },
         mmis: {
           '1931': {
@@ -673,7 +660,7 @@ describe('budget reducer', () => {
             '4': { contractors: 90, state: 247.5, combined: 337.5 },
             subtotal: { contractors: 900, state: 990, combined: 1890 }
           },
-          total: { contractors: 3600, state: 4880, combined: 8480 }
+          total: { contractors: 1800, state: 2440, combined: 4240 }
         }
       },
       hie: {
@@ -804,18 +791,6 @@ describe('budget reducer', () => {
           '1932': { federal: 1500, state: 500, total: 3000 },
           '1933': { federal: 1890, state: 210, total: 2100 },
           total: { federal: 4140, state: 1460, total: 7600 }
-        }
-      },
-      quarterly: {
-        hitAndHie: {
-          '1931': { '1': 25, '2': 25, '3': 25, '4': 25 },
-          '1932': { '1': 25, '2': 25, '3': 25, '4': 25 },
-          '1933': { '1': 25, '2': 25, '3': 25, '4': 25 }
-        },
-        mmis: {
-          '1931': { '1': 25, '2': 25, '3': 25, '4': 25 },
-          '1932': { '1': 25, '2': 25, '3': 25, '4': 25 },
-          '1933': { '1': 25, '2': 25, '3': 25, '4': 25 }
         }
       },
       activityTotals: [

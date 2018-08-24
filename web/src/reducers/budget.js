@@ -1,6 +1,4 @@
-import u from 'updeep';
-
-import { UPDATE_BUDGET, UPDATE_BUDGET_QUARTERLY_SHARE } from '../actions/apd';
+import { UPDATE_BUDGET } from '../actions/apd';
 import { arrToObj } from '../util';
 
 const getFundingSourcesByYear = years => ({
@@ -77,21 +75,6 @@ const defaultFederalShare = years =>
     }
   );
 
-const defaultQuarterlyShares = years => ({
-  ...years.reduce(
-    (o, year) => ({
-      ...o,
-      [year]: { 1: 25, 2: 25, 3: 25, 4: 25 }
-    }),
-    {}
-  )
-});
-
-const initQuarterly = years => ({
-  hitAndHie: defaultQuarterlyShares(years),
-  mmis: defaultQuarterlyShares(years)
-});
-
 const initialState = years => ({
   activities: {},
   combined: getFundingSourcesByYear(years),
@@ -104,7 +87,6 @@ const initialState = years => ({
   mmis: expenseTypes(years),
   hitAndHie: expenseTypes(years),
   mmisByFFP: expenseTypes(years, [...FFPOptions, 'combined']),
-  quarterly: initQuarterly(years),
   activityTotals: [],
   years
 });
@@ -415,7 +397,9 @@ const buildBudget = wholeState => {
       Object.entries(yearValue).forEach(([quarterKey, quarterValue]) => {
         Object.entries(quarterValue).forEach(([key, value]) => {
           target[yearKey][quarterKey][key] += value.dollars;
-          target.total[key] += value.dollars;
+          if (quarterKey !== 'subtotal') {
+            target.total[key] += value.dollars;
+          }
         });
       });
     });
@@ -428,8 +412,6 @@ const reducer = (state = initialState([]), action) => {
   switch (action.type) {
     case UPDATE_BUDGET:
       return buildBudget(action.state);
-    case UPDATE_BUDGET_QUARTERLY_SHARE:
-      return u({ quarterly: { ...action.updates } }, state);
     default:
       return state;
   }
