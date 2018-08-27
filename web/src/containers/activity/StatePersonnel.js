@@ -30,7 +30,7 @@ const PersonnelEntry = ({ person, idx, years, handleDelete, toggleForm }) => (
     >
       <div className="flex items-center justify-between">
         <div className="col-4 truncate">
-          {idx + 1}. <strong>{person.title || 'No title provided'}</strong>
+          {idx + 1}. <strong>{person.title || 'Title'}</strong>
         </div>
         {years.map(year => (
           <div key={year} className="col-3 truncate">
