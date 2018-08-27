@@ -1,8 +1,9 @@
 import { format } from 'd3-format';
 
-const isNumeric = n => !Number.isNaN(parseFloat(n)) && Number.isFinite(n);
-
 const BIG_NUMBER_THRESHOLD = 1000000;
+
+// eslint-disable-next-line no-restricted-globals
+export const isNumeric = n => !isNaN(parseFloat(n)) && isFinite(n);
 
 export const fmt = (val, spec = ',.2f') =>
   isNumeric(val) ? format(spec)(val) : '--';
