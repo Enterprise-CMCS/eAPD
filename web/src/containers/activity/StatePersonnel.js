@@ -157,14 +157,14 @@ PersonnelForm.propTypes = {
 
 class StatePersonnel extends Component {
   static getDerivedStateFromProps(props, state) {
-    const { personnel: p } = props;
-    const lastPerson = p.length ? p[p.length - 1].key : null;
+    const { personnel: data } = props;
+    const lastKey = data.length ? data[data.length - 1].key : null;
 
-    if (lastPerson && !(lastPerson in state.showForm)) {
+    if (lastKey && !(lastKey in state.showForm)) {
       return {
         showForm: {
           ...arrToObj(Object.keys(state.showForm), false),
-          [lastPerson]: true
+          [lastKey]: true
         }
       };
     }

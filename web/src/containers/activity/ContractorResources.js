@@ -18,8 +18,55 @@ import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
+import { arrToObj } from '../../util';
+import { formatMoney } from '../../util/formats';
 
 const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
+
+const ContractorEntry = ({
+  idx,
+  contractor,
+  years,
+  handleDelete,
+  toggleForm
+}) => (
+  <div className="mb1 h5 flex justify-between">
+    <button
+      type="button"
+      onClick={toggleForm}
+      className="btn btn-no-focus p1 col-12 left-align bg-blue-light rounded-left"
+    >
+      <div className="flex items-center justify-between">
+        <div className="col-4 truncate">
+          {idx + 1}. <strong>{contractor.name || 'Name'}</strong>
+        </div>
+        {years.map(year => (
+          <div key={year} className="col-3 truncate">
+            {year}:{' '}
+            <span className="bold mono">
+              {formatMoney(contractor.years[year])}
+            </span>
+          </div>
+        ))}
+      </div>
+    </button>
+    <button
+      type="button"
+      onClick={handleDelete}
+      className="btn btn-no-focus p1 bg-blue-light rounded-right"
+    >
+      ✗
+    </button>
+  </div>
+);
+
+ContractorEntry.propTypes = {
+  idx: PropTypes.number.isRequired,
+  contractor: PropTypes.object.isRequired,
+  years: PropTypes.array.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  toggleForm: PropTypes.func.isRequired
+};
 
 const ContractorForm = ({
   idx,
@@ -217,48 +264,89 @@ ContractorForm.propTypes = {
 };
 
 class ContractorResources extends Component {
-  state = { docType: DOC_TYPES[0] };
+  static getDerivedStateFromProps(props, state) {
+    const { contractors: data } = props;
+    const lastKey = data.length ? data[data.length - 1].key : null;
 
-  updateDocType = e => {
-    this.setState({ docType: e.target.value });
+    if (lastKey && !(lastKey in state.showForm)) {
+      return {
+        showForm: {
+          ...arrToObj(Object.keys(state.showForm), false),
+          [lastKey]: true
+        }
+      };
+    }
+
+    return null;
+  }
+
+  constructor(props) {
+    super(props);
+
+    const showForm = props.contractors
+      .map(c => c.key)
+      .reduce((obj, key, i) => ({ ...obj, [key]: i === 0 }), {});
+
+    this.state = {
+      showForm,
+      docType: DOC_TYPES[0]
+    };
+  }
+
+  handleAdd = () => {
+    const { activityKey, addContractor } = this.props;
+    addContractor(activityKey);
   };
 
   handleChange = (index, field) => e => {
     const { value } = e.target;
-    const { activity, updateActivity } = this.props;
+    const { activityKey, updateActivity } = this.props;
 
     const updates = { contractorResources: { [index]: { [field]: value } } };
-    updateActivity(activity.key, updates);
+    updateActivity(activityKey, updates);
   };
 
-  handleTermChange = index => ({ start, end }) => {
-    const { activity, updateActivity } = this.props;
-    const dates = { start, end };
-
-    const updates = { contractorResources: { [index]: dates } };
-    updateActivity(activity.key, updates);
+  handleDelete = entryKey => () => {
+    const { activityKey, removeContractor } = this.props;
+    removeContractor(activityKey, entryKey);
   };
 
-  handleYearChange = (index, year) => e => {
-    const { value } = e.target;
-    const { activity, updateActivity } = this.props;
-
-    const updates = {
-      contractorResources: { [index]: { years: { [year]: value } } }
-    };
-    updateActivity(activity.key, updates, true);
+  handleDocChange = e => {
+    this.setState({ docType: e.target.value });
   };
 
-  handleUseHourly = (contractor, useHourly) => () => {
-    const { activity, toggleContractorHourly } = this.props;
-    toggleContractorHourly(activity.key, contractor.key, useHourly);
+  handleFileDelete = (cIdx, fIdx) => () => {
+    const { activityKey, contractors, updateActivity } = this.props;
+    const { files } = contractors[cIdx];
+    const updatedFiles = files.filter((_, i) => i !== fIdx);
+
+    const updates = { [cIdx]: { files: updatedFiles } };
+    updateActivity(activityKey, { contractorResources: updates });
+  };
+
+  handleFileUpload = index => files => {
+    if (!files.length) return;
+
+    const { activityKey, contractors, updateActivity } = this.props;
+    const { docType } = this.state;
+
+    // only do one file at a time
+    const { name, preview, size, type } = files[0];
+    const newFile = { name, preview, size, type, category: docType };
+    const existingFiles = contractors[index].files || [];
+
+    const updates = { [index]: { files: [...existingFiles, newFile] } };
+    updateActivity(activityKey, { contractorResources: updates });
+
+    // reset document category if necessary
+    if (docType !== DOC_TYPES[0]) this.setState({ docType: DOC_TYPES[0] });
   };
 
   handleHourlyChange = (index, year, field) => e => {
     const value = +e.target.value;
 
-    const { activity, updateActivity } = this.props;
-    const { data: hourlyData } = activity.contractorResources[index].hourly;
+    const { activityKey, contractors, updateActivity } = this.props;
+    const { data: hourlyData } = contractors[index].hourly;
 
     const otherField = field === 'hours' ? 'rate' : 'hours';
     const otherVal = hourlyData[year][otherField];
@@ -270,78 +358,87 @@ class ContractorResources extends Component {
     };
 
     const updates = { contractorResources: { [index]: newData } };
-    updateActivity(activity.key, updates, true);
+    updateActivity(activityKey, updates, true);
   };
 
-  handleFileUpload = index => files => {
-    if (!files.length) return;
+  handleTermChange = index => ({ start, end }) => {
+    const { activityKey, updateActivity } = this.props;
+    const dates = { start, end };
 
-    const { activity, updateActivity } = this.props;
-    const { docType } = this.state;
-
-    // only do one file at a time
-    const { name, preview, size, type } = files[0];
-    const newFile = { name, preview, size, type, category: docType };
-    const existingFiles = activity.contractorResources[index].files || [];
-
-    const updates = { [index]: { files: [...existingFiles, newFile] } };
-    updateActivity(activity.key, { contractorResources: updates });
-
-    // reset document category if necessary
-    if (docType !== DOC_TYPES[0]) this.setState({ docType: DOC_TYPES[0] });
+    const updates = { contractorResources: { [index]: dates } };
+    updateActivity(activityKey, updates);
   };
 
-  handleFileDelete = (cIdx, fIdx) => () => {
-    const { activity, updateActivity } = this.props;
-    const { files } = activity.contractorResources[cIdx];
-    const updatedFiles = files.filter((_, i) => i !== fIdx);
-
-    const updates = { [cIdx]: { files: updatedFiles } };
-    updateActivity(activity.key, { contractorResources: updates });
+  handleUseHourly = (contractor, useHourly) => () => {
+    const { activityKey, toggleContractorHourly } = this.props;
+    toggleContractorHourly(activityKey, contractor.key, useHourly);
   };
 
-  handleDelete = entryKey => () => {
-    const { activity, removeContractor } = this.props;
-    removeContractor(activity.key, entryKey);
+  handleYearChange = (index, year) => e => {
+    const { value } = e.target;
+    const { activityKey, updateActivity } = this.props;
+
+    const updates = {
+      contractorResources: { [index]: { years: { [year]: value } } }
+    };
+    updateActivity(activityKey, updates, true);
+  };
+
+  toggleForm = entryKey => () => {
+    this.setState(prev => ({
+      showForm: {
+        ...prev.showForm,
+        [entryKey]: !prev.showForm[entryKey]
+      }
+    }));
   };
 
   render() {
-    const { activity, years, addContractor } = this.props;
-    const { docType } = this.state;
+    const { contractors, years } = this.props;
+    const { showForm, docType } = this.state;
 
-    if (!activity) return null;
-
-    const { key: activityKey, contractorResources } = activity;
+    if (!contractors) return null;
 
     return (
       <Subsection resource="activities.contractorResources" nested>
-        {contractorResources.length === 0 ? (
+        {contractors.length === 0 ? (
           <NoDataMsg>
             {t('activities.contractorResources.noDataNotice')}
           </NoDataMsg>
         ) : (
           <div className="mt3 pt3 border-top border-grey">
-            {contractorResources.map((contractor, i) => (
-              <ContractorForm
-                key={contractor.key}
-                idx={i}
-                contractor={contractor}
-                docType={docType}
-                years={years}
-                handleChange={this.handleChange}
-                handleDelete={this.handleDelete}
-                handleDocChange={this.updateDocType}
-                handleFileUpload={this.handleFileUpload}
-                handleFileDelete={this.handleFileDelete}
-                handleHourlyChange={this.handleHourlyChange}
-                handleTermChange={this.handleTermChange}
-                handleUseHourly={this.handleUseHourly}
-                handleYearChange={this.handleYearChange}
-              />
+            {contractors.map((contractor, i) => (
+              <div key={contractor.key}>
+                <ContractorEntry
+                  idx={i}
+                  contractor={contractor}
+                  years={years}
+                  handleDelete={this.handleDelete(contractor.key)}
+                  toggleForm={this.toggleForm(contractor.key)}
+                />
+                {showForm[contractor.key] && (
+                  <ContractorForm
+                    key={contractor.key}
+                    idx={i}
+                    contractor={contractor}
+                    docType={docType}
+                    years={years}
+                    handleChange={this.handleChange}
+                    handleDelete={this.handleDelete(contractor.key)}
+                    handleDocChange={this.handleDocChange}
+                    handleFileDelete={this.handleFileDelete}
+                    handleFileUpload={this.handleFileUpload}
+                    handleHourlyChange={this.handleHourlyChange}
+                    handleTermChange={this.handleTermChange}
+                    handleUseHourly={this.handleUseHourly}
+                    handleYearChange={this.handleYearChange}
+                  />
+                )}
+              </div>
             ))}
           </div>
         )}
-        <Btn onClick={() => addContractor(activityKey)}>
+        <Btn onClick={this.handleAdd}>
           {t('activities.contractorResources.addContractorButtonText')}
         </Btn>
       </Subsection>
@@ -350,7 +447,8 @@ class ContractorResources extends Component {
 }
 
 ContractorResources.propTypes = {
-  activity: PropTypes.object.isRequired,
+  activityKey: PropTypes.string.isRequired,
+  contractors: PropTypes.array.isRequired,
   years: PropTypes.array.isRequired,
   addContractor: PropTypes.func.isRequired,
   removeContractor: PropTypes.func.isRequired,
@@ -359,7 +457,8 @@ ContractorResources.propTypes = {
 };
 
 export const mapStateToProps = ({ activities: { byKey }, apd }, { aKey }) => ({
-  activity: byKey[aKey],
+  activityKey: aKey,
+  contractors: byKey[aKey].contractorResources,
   years: apd.data.years
 });
 

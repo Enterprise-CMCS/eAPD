@@ -5,39 +5,37 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ContractorResources
-    activity={
-      Object {
-        "contractorResources": Array [
-          Object {
-            "desc": "contractor description",
-            "end": "end date",
-            "hourly": Object {
-              "data": Object {
-                "1066": Object {
-                  "hours": "",
-                  "rate": "",
-                },
-                "1067": Object {
-                  "hours": "",
-                  "rate": "",
-                },
-              },
-              "useHourly": false,
-            },
-            "id": "contractor id",
-            "key": "contractor key",
-            "name": "contractor name",
-            "start": "start date",
-            "years": Object {
-              "1066": 100,
-              "1067": 200,
-            },
-          },
-        ],
-        "key": "activity key",
-      }
-    }
+    activityKey="activity key"
     addContractor={[Function]}
+    contractors={
+      Array [
+        Object {
+          "desc": "contractor description",
+          "end": "end date",
+          "hourly": Object {
+            "data": Object {
+              "1066": Object {
+                "hours": "",
+                "rate": "",
+              },
+              "1067": Object {
+                "hours": "",
+                "rate": "",
+              },
+            },
+            "useHourly": false,
+          },
+          "id": "contractor id",
+          "key": "contractor key",
+          "name": "contractor name",
+          "start": "start date",
+          "years": Object {
+            "1066": 100,
+            "1067": 200,
+          },
+        },
+      ]
+    }
     removeContractor={[Function]}
     toggleContractorHourly={[Function]}
     updateActivity={[Function]}
@@ -64,188 +62,91 @@ ShallowWrapper {
         <div
           className="mt3 pt3 border-top border-grey"
         >
-          <div
-            className="mb3 pb3 border-bottom border-grey"
-          >
-            <div
-              className="mb3 md-flex"
-            >
-              <Label>
-                Contractor Name
-              </Label>
-              <InputHolder
-                hideLabel={true}
-                label="Contractor name"
-                name="contractor-contractor key-name"
-                onChange={[Function]}
-                type="text"
-                value="contractor name"
-                wrapperClass="md-col-5"
-              />
-            </div>
-            <div
-              className="mb3 md-flex"
-            >
-              <Label>
-                Description of Services
-              </Label>
-              <InputHolder
-                hideLabel={true}
-                id="contractor-contractor key-desc"
-                label="Describe the services each contractor will provide."
-                name="contractor-contractor key-desc"
-                onChange={[Function]}
-                type="text"
-                value="contractor description"
-                wrapperClass="md-col-8"
-              />
-            </div>
-            <div
-              className="mb3 md-flex"
-            >
-              <Label>
-                Term Period
-              </Label>
-              <DatePickerWrapper
-                daySize={32}
-                endDateId="contractor-contractor key-end"
-                initialEndDate="end date"
-                initialStartDate="start date"
-                numberOfMonths={2}
-                onChange={[Function]}
-                startDateId="contractor-contractor key-start"
-              />
-            </div>
-            <div
-              className="mb3 md-flex"
-            >
-              <Label>
-                Attachments
-              </Label>
-              <div
-                className="md-col-9 md-flex items-start"
-              >
-                <div
-                  className="md-col-6 flex items-end mr2"
-                >
-                  <Select
-                    hideLabel={false}
-                    label="Document Type"
-                    name="contractor key-attachment-type"
-                    onChange={[Function]}
-                    options={
-                      Array [
-                        "Contract",
-                        "Contract Amendment",
-                        "RFP",
-                      ]
-                    }
-                    value="Contract"
-                    wrapperClass="col-6 mr2"
-                  />
-                  <t
-                    className="btn btn-primary btn-dropzone"
-                    disableClick={false}
-                    disablePreview={false}
-                    disabled={false}
-                    inputProps={
-                      Object {
-                        "title": "select a file to attach for this contractor",
-                      }
-                    }
-                    maxSize={Infinity}
-                    minSize={0}
-                    multiple={false}
-                    onDrop={[Function]}
-                    preventDropOnDocument={true}
-                  >
-                    Select file
-                  </t>
-                </div>
-              </div>
-            </div>
-            <div
-              className="mb3 md-flex"
-            >
-              <Label>
-                Cost
-              </Label>
-              <div
-                className="md-col-6 flex"
-              >
-                <InputHolder
-                  disabled={false}
-                  hideLabel={false}
-                  label="1066"
-                  name="contractor-contractor key-cost-1066"
-                  onChange={[Function]}
-                  type="text"
-                  value={100}
-                  wrapperClass="mr2 flex-auto"
-                />
-                <InputHolder
-                  disabled={false}
-                  hideLabel={false}
-                  label="1067"
-                  name="contractor-contractor key-cost-1067"
-                  onChange={[Function]}
-                  type="text"
-                  value={200}
-                  wrapperClass="mr2 flex-auto"
-                />
-              </div>
-            </div>
-            <div
-              className="mb3 md-flex"
-            >
-              <Label>
-                Hourly Resource
-              </Label>
-              <div
-                className="md-col-6"
-              >
-                <div
-                  className="flex items-center"
-                >
-                  <div
-                    className="mr2"
-                  >
-                    This is an hourly resource
-                  </div>
-                  <div>
-                    <Btn
-                      disabled={false}
-                      extraCss=""
-                      kind="outline"
-                      onClick={[Function]}
-                      size={null}
-                    >
-                      Yes
-                    </Btn>
-                     
-                    <Btn
-                      disabled={true}
-                      extraCss="bg-black white"
-                      kind="outline"
-                      onClick={[Function]}
-                      size={null}
-                    >
-                      No
-                    </Btn>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <Btn
-                extraCss="px1 py-tiny h5"
-                kind="outline"
-                onClick={[Function]}
-                size={null}
-              >
-                Remove resource
-              </Btn>
-            </div>
+          <div>
+            <ContractorEntry
+              contractor={
+                Object {
+                  "desc": "contractor description",
+                  "end": "end date",
+                  "hourly": Object {
+                    "data": Object {
+                      "1066": Object {
+                        "hours": "",
+                        "rate": "",
+                      },
+                      "1067": Object {
+                        "hours": "",
+                        "rate": "",
+                      },
+                    },
+                    "useHourly": false,
+                  },
+                  "id": "contractor id",
+                  "key": "contractor key",
+                  "name": "contractor name",
+                  "start": "start date",
+                  "years": Object {
+                    "1066": 100,
+                    "1067": 200,
+                  },
+                }
+              }
+              handleDelete={[Function]}
+              idx={0}
+              toggleForm={[Function]}
+              years={
+                Array [
+                  "1066",
+                  "1067",
+                ]
+              }
+            />
+            <ContractorForm
+              contractor={
+                Object {
+                  "desc": "contractor description",
+                  "end": "end date",
+                  "hourly": Object {
+                    "data": Object {
+                      "1066": Object {
+                        "hours": "",
+                        "rate": "",
+                      },
+                      "1067": Object {
+                        "hours": "",
+                        "rate": "",
+                      },
+                    },
+                    "useHourly": false,
+                  },
+                  "id": "contractor id",
+                  "key": "contractor key",
+                  "name": "contractor name",
+                  "start": "start date",
+                  "years": Object {
+                    "1066": 100,
+                    "1067": 200,
+                  },
+                }
+              }
+              docType="Contract"
+              handleChange={[Function]}
+              handleDelete={[Function]}
+              handleDocChange={[Function]}
+              handleFileDelete={[Function]}
+              handleFileUpload={[Function]}
+              handleHourlyChange={[Function]}
+              handleTermChange={[Function]}
+              handleUseHourly={[Function]}
+              handleYearChange={[Function]}
+              idx={0}
+              years={
+                Array [
+                  "1066",
+                  "1067",
+                ]
+              }
+            />
           </div>
         </div>,
         <Btn
@@ -270,188 +171,91 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <div
-              className="mb3 pb3 border-bottom border-grey"
-            >
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Contractor Name
-                </Label>
-                <InputHolder
-                  hideLabel={true}
-                  label="Contractor name"
-                  name="contractor-contractor key-name"
-                  onChange={[Function]}
-                  type="text"
-                  value="contractor name"
-                  wrapperClass="md-col-5"
-                />
-              </div>
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Description of Services
-                </Label>
-                <InputHolder
-                  hideLabel={true}
-                  id="contractor-contractor key-desc"
-                  label="Describe the services each contractor will provide."
-                  name="contractor-contractor key-desc"
-                  onChange={[Function]}
-                  type="text"
-                  value="contractor description"
-                  wrapperClass="md-col-8"
-                />
-              </div>
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Term Period
-                </Label>
-                <DatePickerWrapper
-                  daySize={32}
-                  endDateId="contractor-contractor key-end"
-                  initialEndDate="end date"
-                  initialStartDate="start date"
-                  numberOfMonths={2}
-                  onChange={[Function]}
-                  startDateId="contractor-contractor key-start"
-                />
-              </div>
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Attachments
-                </Label>
-                <div
-                  className="md-col-9 md-flex items-start"
-                >
-                  <div
-                    className="md-col-6 flex items-end mr2"
-                  >
-                    <Select
-                      hideLabel={false}
-                      label="Document Type"
-                      name="contractor key-attachment-type"
-                      onChange={[Function]}
-                      options={
-                        Array [
-                          "Contract",
-                          "Contract Amendment",
-                          "RFP",
-                        ]
-                      }
-                      value="Contract"
-                      wrapperClass="col-6 mr2"
-                    />
-                    <t
-                      className="btn btn-primary btn-dropzone"
-                      disableClick={false}
-                      disablePreview={false}
-                      disabled={false}
-                      inputProps={
-                        Object {
-                          "title": "select a file to attach for this contractor",
-                        }
-                      }
-                      maxSize={Infinity}
-                      minSize={0}
-                      multiple={false}
-                      onDrop={[Function]}
-                      preventDropOnDocument={true}
-                    >
-                      Select file
-                    </t>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Cost
-                </Label>
-                <div
-                  className="md-col-6 flex"
-                >
-                  <InputHolder
-                    disabled={false}
-                    hideLabel={false}
-                    label="1066"
-                    name="contractor-contractor key-cost-1066"
-                    onChange={[Function]}
-                    type="text"
-                    value={100}
-                    wrapperClass="mr2 flex-auto"
-                  />
-                  <InputHolder
-                    disabled={false}
-                    hideLabel={false}
-                    label="1067"
-                    name="contractor-contractor key-cost-1067"
-                    onChange={[Function]}
-                    type="text"
-                    value={200}
-                    wrapperClass="mr2 flex-auto"
-                  />
-                </div>
-              </div>
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Hourly Resource
-                </Label>
-                <div
-                  className="md-col-6"
-                >
-                  <div
-                    className="flex items-center"
-                  >
-                    <div
-                      className="mr2"
-                    >
-                      This is an hourly resource
-                    </div>
-                    <div>
-                      <Btn
-                        disabled={false}
-                        extraCss=""
-                        kind="outline"
-                        onClick={[Function]}
-                        size={null}
-                      >
-                        Yes
-                      </Btn>
-                       
-                      <Btn
-                        disabled={true}
-                        extraCss="bg-black white"
-                        kind="outline"
-                        onClick={[Function]}
-                        size={null}
-                      >
-                        No
-                      </Btn>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <Btn
-                  extraCss="px1 py-tiny h5"
-                  kind="outline"
-                  onClick={[Function]}
-                  size={null}
-                >
-                  Remove resource
-                </Btn>
-              </div>
+            <div>
+              <ContractorEntry
+                contractor={
+                  Object {
+                    "desc": "contractor description",
+                    "end": "end date",
+                    "hourly": Object {
+                      "data": Object {
+                        "1066": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
+                        "1067": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
+                      },
+                      "useHourly": false,
+                    },
+                    "id": "contractor id",
+                    "key": "contractor key",
+                    "name": "contractor name",
+                    "start": "start date",
+                    "years": Object {
+                      "1066": 100,
+                      "1067": 200,
+                    },
+                  }
+                }
+                handleDelete={[Function]}
+                idx={0}
+                toggleForm={[Function]}
+                years={
+                  Array [
+                    "1066",
+                    "1067",
+                  ]
+                }
+              />
+              <ContractorForm
+                contractor={
+                  Object {
+                    "desc": "contractor description",
+                    "end": "end date",
+                    "hourly": Object {
+                      "data": Object {
+                        "1066": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
+                        "1067": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
+                      },
+                      "useHourly": false,
+                    },
+                    "id": "contractor id",
+                    "key": "contractor key",
+                    "name": "contractor name",
+                    "start": "start date",
+                    "years": Object {
+                      "1066": 100,
+                      "1067": 200,
+                    },
+                  }
+                }
+                docType="Contract"
+                handleChange={[Function]}
+                handleDelete={[Function]}
+                handleDocChange={[Function]}
+                handleFileDelete={[Function]}
+                handleFileUpload={[Function]}
+                handleHourlyChange={[Function]}
+                handleTermChange={[Function]}
+                handleUseHourly={[Function]}
+                handleYearChange={[Function]}
+                idx={0}
+                years={
+                  Array [
+                    "1066",
+                    "1067",
+                  ]
+                }
+              />
             </div>,
           ],
           "className": "mt3 pt3 border-top border-grey",
@@ -464,945 +268,185 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Contractor Name
-                  </Label>
-                  <InputHolder
-                    hideLabel={true}
-                    label="Contractor name"
-                    name="contractor-contractor key-name"
-                    onChange={[Function]}
-                    type="text"
-                    value="contractor name"
-                    wrapperClass="md-col-5"
-                  />
-                </div>,
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Description of Services
-                  </Label>
-                  <InputHolder
-                    hideLabel={true}
-                    id="contractor-contractor key-desc"
-                    label="Describe the services each contractor will provide."
-                    name="contractor-contractor key-desc"
-                    onChange={[Function]}
-                    type="text"
-                    value="contractor description"
-                    wrapperClass="md-col-8"
-                  />
-                </div>,
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Term Period
-                  </Label>
-                  <DatePickerWrapper
-                    daySize={32}
-                    endDateId="contractor-contractor key-end"
-                    initialEndDate="end date"
-                    initialStartDate="start date"
-                    numberOfMonths={2}
-                    onChange={[Function]}
-                    startDateId="contractor-contractor key-start"
-                  />
-                </div>,
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Attachments
-                  </Label>
-                  <div
-                    className="md-col-9 md-flex items-start"
-                  >
-                    <div
-                      className="md-col-6 flex items-end mr2"
-                    >
-                      <Select
-                        hideLabel={false}
-                        label="Document Type"
-                        name="contractor key-attachment-type"
-                        onChange={[Function]}
-                        options={
-                          Array [
-                            "Contract",
-                            "Contract Amendment",
-                            "RFP",
-                          ]
-                        }
-                        value="Contract"
-                        wrapperClass="col-6 mr2"
-                      />
-                      <t
-                        className="btn btn-primary btn-dropzone"
-                        disableClick={false}
-                        disablePreview={false}
-                        disabled={false}
-                        inputProps={
-                          Object {
-                            "title": "select a file to attach for this contractor",
-                          }
-                        }
-                        maxSize={Infinity}
-                        minSize={0}
-                        multiple={false}
-                        onDrop={[Function]}
-                        preventDropOnDocument={true}
-                      >
-                        Select file
-                      </t>
-                    </div>
-                  </div>
-                </div>,
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Cost
-                  </Label>
-                  <div
-                    className="md-col-6 flex"
-                  >
-                    <InputHolder
-                      disabled={false}
-                      hideLabel={false}
-                      label="1066"
-                      name="contractor-contractor key-cost-1066"
-                      onChange={[Function]}
-                      type="text"
-                      value={100}
-                      wrapperClass="mr2 flex-auto"
-                    />
-                    <InputHolder
-                      disabled={false}
-                      hideLabel={false}
-                      label="1067"
-                      name="contractor-contractor key-cost-1067"
-                      onChange={[Function]}
-                      type="text"
-                      value={200}
-                      wrapperClass="mr2 flex-auto"
-                    />
-                  </div>
-                </div>,
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Hourly Resource
-                  </Label>
-                  <div
-                    className="md-col-6"
-                  >
-                    <div
-                      className="flex items-center"
-                    >
-                      <div
-                        className="mr2"
-                      >
-                        This is an hourly resource
-                      </div>
-                      <div>
-                        <Btn
-                          disabled={false}
-                          extraCss=""
-                          kind="outline"
-                          onClick={[Function]}
-                          size={null}
-                        >
-                          Yes
-                        </Btn>
-                         
-                        <Btn
-                          disabled={true}
-                          extraCss="bg-black white"
-                          kind="outline"
-                          onClick={[Function]}
-                          size={null}
-                        >
-                          No
-                        </Btn>
-                      </div>
-                    </div>
-                  </div>
-                </div>,
-                <div>
-                  <Btn
-                    extraCss="px1 py-tiny h5"
-                    kind="outline"
-                    onClick={[Function]}
-                    size={null}
-                  >
-                    Remove resource
-                  </Btn>
-                </div>,
+                <ContractorEntry
+                  contractor={
+                    Object {
+                      "desc": "contractor description",
+                      "end": "end date",
+                      "hourly": Object {
+                        "data": Object {
+                          "1066": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
+                          "1067": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
+                        },
+                        "useHourly": false,
+                      },
+                      "id": "contractor id",
+                      "key": "contractor key",
+                      "name": "contractor name",
+                      "start": "start date",
+                      "years": Object {
+                        "1066": 100,
+                        "1067": 200,
+                      },
+                    }
+                  }
+                  handleDelete={[Function]}
+                  idx={0}
+                  toggleForm={[Function]}
+                  years={
+                    Array [
+                      "1066",
+                      "1067",
+                    ]
+                  }
+                />,
+                <ContractorForm
+                  contractor={
+                    Object {
+                      "desc": "contractor description",
+                      "end": "end date",
+                      "hourly": Object {
+                        "data": Object {
+                          "1066": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
+                          "1067": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
+                        },
+                        "useHourly": false,
+                      },
+                      "id": "contractor id",
+                      "key": "contractor key",
+                      "name": "contractor name",
+                      "start": "start date",
+                      "years": Object {
+                        "1066": 100,
+                        "1067": 200,
+                      },
+                    }
+                  }
+                  docType="Contract"
+                  handleChange={[Function]}
+                  handleDelete={[Function]}
+                  handleDocChange={[Function]}
+                  handleFileDelete={[Function]}
+                  handleFileUpload={[Function]}
+                  handleHourlyChange={[Function]}
+                  handleTermChange={[Function]}
+                  handleUseHourly={[Function]}
+                  handleYearChange={[Function]}
+                  idx={0}
+                  years={
+                    Array [
+                      "1066",
+                      "1067",
+                    ]
+                  }
+                />,
               ],
-              "className": "mb3 pb3 border-bottom border-grey",
             },
             "ref": null,
             "rendered": Array [
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "host",
+                "nodeType": "function",
                 "props": Object {
-                  "children": Array [
-                    <Label>
-                      Contractor Name
-                    </Label>,
-                    <InputHolder
-                      hideLabel={true}
-                      label="Contractor name"
-                      name="contractor-contractor key-name"
-                      onChange={[Function]}
-                      type="text"
-                      value="contractor name"
-                      wrapperClass="md-col-5"
-                    />,
-                  ],
-                  "className": "mb3 md-flex",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "children": "Contractor Name",
-                    },
-                    "ref": null,
-                    "rendered": "Contractor Name",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "hideLabel": true,
-                      "label": "Contractor name",
-                      "name": "contractor-contractor key-name",
-                      "onChange": [Function],
-                      "type": "text",
-                      "value": "contractor name",
-                      "wrapperClass": "md-col-5",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                ],
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <Label>
-                      Description of Services
-                    </Label>,
-                    <InputHolder
-                      hideLabel={true}
-                      id="contractor-contractor key-desc"
-                      label="Describe the services each contractor will provide."
-                      name="contractor-contractor key-desc"
-                      onChange={[Function]}
-                      type="text"
-                      value="contractor description"
-                      wrapperClass="md-col-8"
-                    />,
-                  ],
-                  "className": "mb3 md-flex",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "children": "Description of Services",
-                    },
-                    "ref": null,
-                    "rendered": "Description of Services",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "hideLabel": true,
-                      "id": "contractor-contractor key-desc",
-                      "label": "Describe the services each contractor will provide.",
-                      "name": "contractor-contractor key-desc",
-                      "onChange": [Function],
-                      "type": "text",
-                      "value": "contractor description",
-                      "wrapperClass": "md-col-8",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                ],
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <Label>
-                      Term Period
-                    </Label>,
-                    <DatePickerWrapper
-                      daySize={32}
-                      endDateId="contractor-contractor key-end"
-                      initialEndDate="end date"
-                      initialStartDate="start date"
-                      numberOfMonths={2}
-                      onChange={[Function]}
-                      startDateId="contractor-contractor key-start"
-                    />,
-                  ],
-                  "className": "mb3 md-flex",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "children": "Term Period",
-                    },
-                    "ref": null,
-                    "rendered": "Term Period",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "daySize": 32,
-                      "endDateId": "contractor-contractor key-end",
-                      "initialEndDate": "end date",
-                      "initialStartDate": "start date",
-                      "numberOfMonths": 2,
-                      "onChange": [Function],
-                      "startDateId": "contractor-contractor key-start",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                ],
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <Label>
-                      Attachments
-                    </Label>,
-                    <div
-                      className="md-col-9 md-flex items-start"
-                    >
-                      <div
-                        className="md-col-6 flex items-end mr2"
-                      >
-                        <Select
-                          hideLabel={false}
-                          label="Document Type"
-                          name="contractor key-attachment-type"
-                          onChange={[Function]}
-                          options={
-                            Array [
-                              "Contract",
-                              "Contract Amendment",
-                              "RFP",
-                            ]
-                          }
-                          value="Contract"
-                          wrapperClass="col-6 mr2"
-                        />
-                        <t
-                          className="btn btn-primary btn-dropzone"
-                          disableClick={false}
-                          disablePreview={false}
-                          disabled={false}
-                          inputProps={
-                            Object {
-                              "title": "select a file to attach for this contractor",
-                            }
-                          }
-                          maxSize={Infinity}
-                          minSize={0}
-                          multiple={false}
-                          onDrop={[Function]}
-                          preventDropOnDocument={true}
-                        >
-                          Select file
-                        </t>
-                      </div>
-                    </div>,
-                  ],
-                  "className": "mb3 md-flex",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "children": "Attachments",
-                    },
-                    "ref": null,
-                    "rendered": "Attachments",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        <div
-                          className="md-col-6 flex items-end mr2"
-                        >
-                          <Select
-                            hideLabel={false}
-                            label="Document Type"
-                            name="contractor key-attachment-type"
-                            onChange={[Function]}
-                            options={
-                              Array [
-                                "Contract",
-                                "Contract Amendment",
-                                "RFP",
-                              ]
-                            }
-                            value="Contract"
-                            wrapperClass="col-6 mr2"
-                          />
-                          <t
-                            className="btn btn-primary btn-dropzone"
-                            disableClick={false}
-                            disablePreview={false}
-                            disabled={false}
-                            inputProps={
-                              Object {
-                                "title": "select a file to attach for this contractor",
-                              }
-                            }
-                            maxSize={Infinity}
-                            minSize={0}
-                            multiple={false}
-                            onDrop={[Function]}
-                            preventDropOnDocument={true}
-                          >
-                            Select file
-                          </t>
-                        </div>,
-                        false,
-                      ],
-                      "className": "md-col-9 md-flex items-start",
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": Array [
-                            <Select
-                              hideLabel={false}
-                              label="Document Type"
-                              name="contractor key-attachment-type"
-                              onChange={[Function]}
-                              options={
-                                Array [
-                                  "Contract",
-                                  "Contract Amendment",
-                                  "RFP",
-                                ]
-                              }
-                              value="Contract"
-                              wrapperClass="col-6 mr2"
-                            />,
-                            <t
-                              className="btn btn-primary btn-dropzone"
-                              disableClick={false}
-                              disablePreview={false}
-                              disabled={false}
-                              inputProps={
-                                Object {
-                                  "title": "select a file to attach for this contractor",
-                                }
-                              }
-                              maxSize={Infinity}
-                              minSize={0}
-                              multiple={false}
-                              onDrop={[Function]}
-                              preventDropOnDocument={true}
-                            >
-                              Select file
-                            </t>,
-                          ],
-                          "className": "md-col-6 flex items-end mr2",
+                  "contractor": Object {
+                    "desc": "contractor description",
+                    "end": "end date",
+                    "hourly": Object {
+                      "data": Object {
+                        "1066": Object {
+                          "hours": "",
+                          "rate": "",
                         },
-                        "ref": null,
-                        "rendered": Array [
-                          Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "function",
-                            "props": Object {
-                              "hideLabel": false,
-                              "label": "Document Type",
-                              "name": "contractor key-attachment-type",
-                              "onChange": [Function],
-                              "options": Array [
-                                "Contract",
-                                "Contract Amendment",
-                                "RFP",
-                              ],
-                              "value": "Contract",
-                              "wrapperClass": "col-6 mr2",
-                            },
-                            "ref": null,
-                            "rendered": null,
-                            "type": [Function],
-                          },
-                          Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "class",
-                            "props": Object {
-                              "children": "Select file",
-                              "className": "btn btn-primary btn-dropzone",
-                              "disableClick": false,
-                              "disablePreview": false,
-                              "disabled": false,
-                              "inputProps": Object {
-                                "title": "select a file to attach for this contractor",
-                              },
-                              "maxSize": Infinity,
-                              "minSize": 0,
-                              "multiple": false,
-                              "onDrop": [Function],
-                              "preventDropOnDocument": true,
-                            },
-                            "ref": null,
-                            "rendered": "Select file",
-                            "type": [Function],
-                          },
-                        ],
-                        "type": "div",
+                        "1067": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
                       },
-                      false,
-                    ],
-                    "type": "div",
+                      "useHourly": false,
+                    },
+                    "id": "contractor id",
+                    "key": "contractor key",
+                    "name": "contractor name",
+                    "start": "start date",
+                    "years": Object {
+                      "1066": 100,
+                      "1067": 200,
+                    },
                   },
-                ],
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <Label>
-                      Cost
-                    </Label>,
-                    <div
-                      className="md-col-6 flex"
-                    >
-                      <InputHolder
-                        disabled={false}
-                        hideLabel={false}
-                        label="1066"
-                        name="contractor-contractor key-cost-1066"
-                        onChange={[Function]}
-                        type="text"
-                        value={100}
-                        wrapperClass="mr2 flex-auto"
-                      />
-                      <InputHolder
-                        disabled={false}
-                        hideLabel={false}
-                        label="1067"
-                        name="contractor-contractor key-cost-1067"
-                        onChange={[Function]}
-                        type="text"
-                        value={200}
-                        wrapperClass="mr2 flex-auto"
-                      />
-                    </div>,
+                  "handleDelete": [Function],
+                  "idx": 0,
+                  "toggleForm": [Function],
+                  "years": Array [
+                    "1066",
+                    "1067",
                   ],
-                  "className": "mb3 md-flex",
                 },
                 "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "children": "Cost",
-                    },
-                    "ref": null,
-                    "rendered": "Cost",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        <InputHolder
-                          disabled={false}
-                          hideLabel={false}
-                          label="1066"
-                          name="contractor-contractor key-cost-1066"
-                          onChange={[Function]}
-                          type="text"
-                          value={100}
-                          wrapperClass="mr2 flex-auto"
-                        />,
-                        <InputHolder
-                          disabled={false}
-                          hideLabel={false}
-                          label="1067"
-                          name="contractor-contractor key-cost-1067"
-                          onChange={[Function]}
-                          type="text"
-                          value={200}
-                          wrapperClass="mr2 flex-auto"
-                        />,
-                      ],
-                      "className": "md-col-6 flex",
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": "1066",
-                        "nodeType": "function",
-                        "props": Object {
-                          "disabled": false,
-                          "hideLabel": false,
-                          "label": "1066",
-                          "name": "contractor-contractor key-cost-1066",
-                          "onChange": [Function],
-                          "type": "text",
-                          "value": 100,
-                          "wrapperClass": "mr2 flex-auto",
-                        },
-                        "ref": null,
-                        "rendered": null,
-                        "type": [Function],
-                      },
-                      Object {
-                        "instance": null,
-                        "key": "1067",
-                        "nodeType": "function",
-                        "props": Object {
-                          "disabled": false,
-                          "hideLabel": false,
-                          "label": "1067",
-                          "name": "contractor-contractor key-cost-1067",
-                          "onChange": [Function],
-                          "type": "text",
-                          "value": 200,
-                          "wrapperClass": "mr2 flex-auto",
-                        },
-                        "ref": null,
-                        "rendered": null,
-                        "type": [Function],
-                      },
-                    ],
-                    "type": "div",
-                  },
-                ],
-                "type": "div",
+                "rendered": null,
+                "type": [Function],
               },
               Object {
                 "instance": null,
-                "key": undefined,
-                "nodeType": "host",
+                "key": "contractor key",
+                "nodeType": "function",
                 "props": Object {
-                  "children": Array [
-                    <Label>
-                      Hourly Resource
-                    </Label>,
-                    <div
-                      className="md-col-6"
-                    >
-                      <div
-                        className="flex items-center"
-                      >
-                        <div
-                          className="mr2"
-                        >
-                          This is an hourly resource
-                        </div>
-                        <div>
-                          <Btn
-                            disabled={false}
-                            extraCss=""
-                            kind="outline"
-                            onClick={[Function]}
-                            size={null}
-                          >
-                            Yes
-                          </Btn>
-                           
-                          <Btn
-                            disabled={true}
-                            extraCss="bg-black white"
-                            kind="outline"
-                            onClick={[Function]}
-                            size={null}
-                          >
-                            No
-                          </Btn>
-                        </div>
-                      </div>
-                    </div>,
+                  "contractor": Object {
+                    "desc": "contractor description",
+                    "end": "end date",
+                    "hourly": Object {
+                      "data": Object {
+                        "1066": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
+                        "1067": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
+                      },
+                      "useHourly": false,
+                    },
+                    "id": "contractor id",
+                    "key": "contractor key",
+                    "name": "contractor name",
+                    "start": "start date",
+                    "years": Object {
+                      "1066": 100,
+                      "1067": 200,
+                    },
+                  },
+                  "docType": "Contract",
+                  "handleChange": [Function],
+                  "handleDelete": [Function],
+                  "handleDocChange": [Function],
+                  "handleFileDelete": [Function],
+                  "handleFileUpload": [Function],
+                  "handleHourlyChange": [Function],
+                  "handleTermChange": [Function],
+                  "handleUseHourly": [Function],
+                  "handleYearChange": [Function],
+                  "idx": 0,
+                  "years": Array [
+                    "1066",
+                    "1067",
                   ],
-                  "className": "mb3 md-flex",
                 },
                 "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "children": "Hourly Resource",
-                    },
-                    "ref": null,
-                    "rendered": "Hourly Resource",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        <div
-                          className="flex items-center"
-                        >
-                          <div
-                            className="mr2"
-                          >
-                            This is an hourly resource
-                          </div>
-                          <div>
-                            <Btn
-                              disabled={false}
-                              extraCss=""
-                              kind="outline"
-                              onClick={[Function]}
-                              size={null}
-                            >
-                              Yes
-                            </Btn>
-                             
-                            <Btn
-                              disabled={true}
-                              extraCss="bg-black white"
-                              kind="outline"
-                              onClick={[Function]}
-                              size={null}
-                            >
-                              No
-                            </Btn>
-                          </div>
-                        </div>,
-                        false,
-                      ],
-                      "className": "md-col-6",
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": Array [
-                            <div
-                              className="mr2"
-                            >
-                              This is an hourly resource
-                            </div>,
-                            <div>
-                              <Btn
-                                disabled={false}
-                                extraCss=""
-                                kind="outline"
-                                onClick={[Function]}
-                                size={null}
-                              >
-                                Yes
-                              </Btn>
-                               
-                              <Btn
-                                disabled={true}
-                                extraCss="bg-black white"
-                                kind="outline"
-                                onClick={[Function]}
-                                size={null}
-                              >
-                                No
-                              </Btn>
-                            </div>,
-                          ],
-                          "className": "flex items-center",
-                        },
-                        "ref": null,
-                        "rendered": Array [
-                          Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "host",
-                            "props": Object {
-                              "children": "This is an hourly resource",
-                              "className": "mr2",
-                            },
-                            "ref": null,
-                            "rendered": "This is an hourly resource",
-                            "type": "div",
-                          },
-                          Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "host",
-                            "props": Object {
-                              "children": Array [
-                                <Btn
-                                  disabled={false}
-                                  extraCss=""
-                                  kind="outline"
-                                  onClick={[Function]}
-                                  size={null}
-                                >
-                                  Yes
-                                </Btn>,
-                                " ",
-                                <Btn
-                                  disabled={true}
-                                  extraCss="bg-black white"
-                                  kind="outline"
-                                  onClick={[Function]}
-                                  size={null}
-                                >
-                                  No
-                                </Btn>,
-                              ],
-                            },
-                            "ref": null,
-                            "rendered": Array [
-                              Object {
-                                "instance": null,
-                                "key": undefined,
-                                "nodeType": "function",
-                                "props": Object {
-                                  "children": "Yes",
-                                  "disabled": false,
-                                  "extraCss": "",
-                                  "kind": "outline",
-                                  "onClick": [Function],
-                                  "size": null,
-                                },
-                                "ref": null,
-                                "rendered": "Yes",
-                                "type": [Function],
-                              },
-                              " ",
-                              Object {
-                                "instance": null,
-                                "key": undefined,
-                                "nodeType": "function",
-                                "props": Object {
-                                  "children": "No",
-                                  "disabled": true,
-                                  "extraCss": "bg-black white",
-                                  "kind": "outline",
-                                  "onClick": [Function],
-                                  "size": null,
-                                },
-                                "ref": null,
-                                "rendered": "No",
-                                "type": [Function],
-                              },
-                            ],
-                            "type": "div",
-                          },
-                        ],
-                        "type": "div",
-                      },
-                      false,
-                    ],
-                    "type": "div",
-                  },
-                ],
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": <Btn
-                    extraCss="px1 py-tiny h5"
-                    kind="outline"
-                    onClick={[Function]}
-                    size={null}
-                  >
-                    Remove resource
-                  </Btn>,
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {
-                    "children": "Remove resource",
-                    "extraCss": "px1 py-tiny h5",
-                    "kind": "outline",
-                    "onClick": [Function],
-                    "size": null,
-                  },
-                  "ref": null,
-                  "rendered": "Remove resource",
-                  "type": [Function],
-                },
-                "type": "div",
+                "rendered": null,
+                "type": [Function],
               },
             ],
             "type": "div",
@@ -1438,188 +482,91 @@ ShallowWrapper {
           <div
             className="mt3 pt3 border-top border-grey"
           >
-            <div
-              className="mb3 pb3 border-bottom border-grey"
-            >
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Contractor Name
-                </Label>
-                <InputHolder
-                  hideLabel={true}
-                  label="Contractor name"
-                  name="contractor-contractor key-name"
-                  onChange={[Function]}
-                  type="text"
-                  value="contractor name"
-                  wrapperClass="md-col-5"
-                />
-              </div>
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Description of Services
-                </Label>
-                <InputHolder
-                  hideLabel={true}
-                  id="contractor-contractor key-desc"
-                  label="Describe the services each contractor will provide."
-                  name="contractor-contractor key-desc"
-                  onChange={[Function]}
-                  type="text"
-                  value="contractor description"
-                  wrapperClass="md-col-8"
-                />
-              </div>
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Term Period
-                </Label>
-                <DatePickerWrapper
-                  daySize={32}
-                  endDateId="contractor-contractor key-end"
-                  initialEndDate="end date"
-                  initialStartDate="start date"
-                  numberOfMonths={2}
-                  onChange={[Function]}
-                  startDateId="contractor-contractor key-start"
-                />
-              </div>
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Attachments
-                </Label>
-                <div
-                  className="md-col-9 md-flex items-start"
-                >
-                  <div
-                    className="md-col-6 flex items-end mr2"
-                  >
-                    <Select
-                      hideLabel={false}
-                      label="Document Type"
-                      name="contractor key-attachment-type"
-                      onChange={[Function]}
-                      options={
-                        Array [
-                          "Contract",
-                          "Contract Amendment",
-                          "RFP",
-                        ]
-                      }
-                      value="Contract"
-                      wrapperClass="col-6 mr2"
-                    />
-                    <t
-                      className="btn btn-primary btn-dropzone"
-                      disableClick={false}
-                      disablePreview={false}
-                      disabled={false}
-                      inputProps={
-                        Object {
-                          "title": "select a file to attach for this contractor",
-                        }
-                      }
-                      maxSize={Infinity}
-                      minSize={0}
-                      multiple={false}
-                      onDrop={[Function]}
-                      preventDropOnDocument={true}
-                    >
-                      Select file
-                    </t>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Cost
-                </Label>
-                <div
-                  className="md-col-6 flex"
-                >
-                  <InputHolder
-                    disabled={false}
-                    hideLabel={false}
-                    label="1066"
-                    name="contractor-contractor key-cost-1066"
-                    onChange={[Function]}
-                    type="text"
-                    value={100}
-                    wrapperClass="mr2 flex-auto"
-                  />
-                  <InputHolder
-                    disabled={false}
-                    hideLabel={false}
-                    label="1067"
-                    name="contractor-contractor key-cost-1067"
-                    onChange={[Function]}
-                    type="text"
-                    value={200}
-                    wrapperClass="mr2 flex-auto"
-                  />
-                </div>
-              </div>
-              <div
-                className="mb3 md-flex"
-              >
-                <Label>
-                  Hourly Resource
-                </Label>
-                <div
-                  className="md-col-6"
-                >
-                  <div
-                    className="flex items-center"
-                  >
-                    <div
-                      className="mr2"
-                    >
-                      This is an hourly resource
-                    </div>
-                    <div>
-                      <Btn
-                        disabled={false}
-                        extraCss=""
-                        kind="outline"
-                        onClick={[Function]}
-                        size={null}
-                      >
-                        Yes
-                      </Btn>
-                       
-                      <Btn
-                        disabled={true}
-                        extraCss="bg-black white"
-                        kind="outline"
-                        onClick={[Function]}
-                        size={null}
-                      >
-                        No
-                      </Btn>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <Btn
-                  extraCss="px1 py-tiny h5"
-                  kind="outline"
-                  onClick={[Function]}
-                  size={null}
-                >
-                  Remove resource
-                </Btn>
-              </div>
+            <div>
+              <ContractorEntry
+                contractor={
+                  Object {
+                    "desc": "contractor description",
+                    "end": "end date",
+                    "hourly": Object {
+                      "data": Object {
+                        "1066": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
+                        "1067": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
+                      },
+                      "useHourly": false,
+                    },
+                    "id": "contractor id",
+                    "key": "contractor key",
+                    "name": "contractor name",
+                    "start": "start date",
+                    "years": Object {
+                      "1066": 100,
+                      "1067": 200,
+                    },
+                  }
+                }
+                handleDelete={[Function]}
+                idx={0}
+                toggleForm={[Function]}
+                years={
+                  Array [
+                    "1066",
+                    "1067",
+                  ]
+                }
+              />
+              <ContractorForm
+                contractor={
+                  Object {
+                    "desc": "contractor description",
+                    "end": "end date",
+                    "hourly": Object {
+                      "data": Object {
+                        "1066": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
+                        "1067": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
+                      },
+                      "useHourly": false,
+                    },
+                    "id": "contractor id",
+                    "key": "contractor key",
+                    "name": "contractor name",
+                    "start": "start date",
+                    "years": Object {
+                      "1066": 100,
+                      "1067": 200,
+                    },
+                  }
+                }
+                docType="Contract"
+                handleChange={[Function]}
+                handleDelete={[Function]}
+                handleDocChange={[Function]}
+                handleFileDelete={[Function]}
+                handleFileUpload={[Function]}
+                handleHourlyChange={[Function]}
+                handleTermChange={[Function]}
+                handleUseHourly={[Function]}
+                handleYearChange={[Function]}
+                idx={0}
+                years={
+                  Array [
+                    "1066",
+                    "1067",
+                  ]
+                }
+              />
             </div>
           </div>,
           <Btn
@@ -1644,188 +591,91 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <div
-                className="mb3 pb3 border-bottom border-grey"
-              >
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Contractor Name
-                  </Label>
-                  <InputHolder
-                    hideLabel={true}
-                    label="Contractor name"
-                    name="contractor-contractor key-name"
-                    onChange={[Function]}
-                    type="text"
-                    value="contractor name"
-                    wrapperClass="md-col-5"
-                  />
-                </div>
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Description of Services
-                  </Label>
-                  <InputHolder
-                    hideLabel={true}
-                    id="contractor-contractor key-desc"
-                    label="Describe the services each contractor will provide."
-                    name="contractor-contractor key-desc"
-                    onChange={[Function]}
-                    type="text"
-                    value="contractor description"
-                    wrapperClass="md-col-8"
-                  />
-                </div>
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Term Period
-                  </Label>
-                  <DatePickerWrapper
-                    daySize={32}
-                    endDateId="contractor-contractor key-end"
-                    initialEndDate="end date"
-                    initialStartDate="start date"
-                    numberOfMonths={2}
-                    onChange={[Function]}
-                    startDateId="contractor-contractor key-start"
-                  />
-                </div>
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Attachments
-                  </Label>
-                  <div
-                    className="md-col-9 md-flex items-start"
-                  >
-                    <div
-                      className="md-col-6 flex items-end mr2"
-                    >
-                      <Select
-                        hideLabel={false}
-                        label="Document Type"
-                        name="contractor key-attachment-type"
-                        onChange={[Function]}
-                        options={
-                          Array [
-                            "Contract",
-                            "Contract Amendment",
-                            "RFP",
-                          ]
-                        }
-                        value="Contract"
-                        wrapperClass="col-6 mr2"
-                      />
-                      <t
-                        className="btn btn-primary btn-dropzone"
-                        disableClick={false}
-                        disablePreview={false}
-                        disabled={false}
-                        inputProps={
-                          Object {
-                            "title": "select a file to attach for this contractor",
-                          }
-                        }
-                        maxSize={Infinity}
-                        minSize={0}
-                        multiple={false}
-                        onDrop={[Function]}
-                        preventDropOnDocument={true}
-                      >
-                        Select file
-                      </t>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Cost
-                  </Label>
-                  <div
-                    className="md-col-6 flex"
-                  >
-                    <InputHolder
-                      disabled={false}
-                      hideLabel={false}
-                      label="1066"
-                      name="contractor-contractor key-cost-1066"
-                      onChange={[Function]}
-                      type="text"
-                      value={100}
-                      wrapperClass="mr2 flex-auto"
-                    />
-                    <InputHolder
-                      disabled={false}
-                      hideLabel={false}
-                      label="1067"
-                      name="contractor-contractor key-cost-1067"
-                      onChange={[Function]}
-                      type="text"
-                      value={200}
-                      wrapperClass="mr2 flex-auto"
-                    />
-                  </div>
-                </div>
-                <div
-                  className="mb3 md-flex"
-                >
-                  <Label>
-                    Hourly Resource
-                  </Label>
-                  <div
-                    className="md-col-6"
-                  >
-                    <div
-                      className="flex items-center"
-                    >
-                      <div
-                        className="mr2"
-                      >
-                        This is an hourly resource
-                      </div>
-                      <div>
-                        <Btn
-                          disabled={false}
-                          extraCss=""
-                          kind="outline"
-                          onClick={[Function]}
-                          size={null}
-                        >
-                          Yes
-                        </Btn>
-                         
-                        <Btn
-                          disabled={true}
-                          extraCss="bg-black white"
-                          kind="outline"
-                          onClick={[Function]}
-                          size={null}
-                        >
-                          No
-                        </Btn>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <Btn
-                    extraCss="px1 py-tiny h5"
-                    kind="outline"
-                    onClick={[Function]}
-                    size={null}
-                  >
-                    Remove resource
-                  </Btn>
-                </div>
+              <div>
+                <ContractorEntry
+                  contractor={
+                    Object {
+                      "desc": "contractor description",
+                      "end": "end date",
+                      "hourly": Object {
+                        "data": Object {
+                          "1066": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
+                          "1067": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
+                        },
+                        "useHourly": false,
+                      },
+                      "id": "contractor id",
+                      "key": "contractor key",
+                      "name": "contractor name",
+                      "start": "start date",
+                      "years": Object {
+                        "1066": 100,
+                        "1067": 200,
+                      },
+                    }
+                  }
+                  handleDelete={[Function]}
+                  idx={0}
+                  toggleForm={[Function]}
+                  years={
+                    Array [
+                      "1066",
+                      "1067",
+                    ]
+                  }
+                />
+                <ContractorForm
+                  contractor={
+                    Object {
+                      "desc": "contractor description",
+                      "end": "end date",
+                      "hourly": Object {
+                        "data": Object {
+                          "1066": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
+                          "1067": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
+                        },
+                        "useHourly": false,
+                      },
+                      "id": "contractor id",
+                      "key": "contractor key",
+                      "name": "contractor name",
+                      "start": "start date",
+                      "years": Object {
+                        "1066": 100,
+                        "1067": 200,
+                      },
+                    }
+                  }
+                  docType="Contract"
+                  handleChange={[Function]}
+                  handleDelete={[Function]}
+                  handleDocChange={[Function]}
+                  handleFileDelete={[Function]}
+                  handleFileUpload={[Function]}
+                  handleHourlyChange={[Function]}
+                  handleTermChange={[Function]}
+                  handleUseHourly={[Function]}
+                  handleYearChange={[Function]}
+                  idx={0}
+                  years={
+                    Array [
+                      "1066",
+                      "1067",
+                    ]
+                  }
+                />
               </div>,
             ],
             "className": "mt3 pt3 border-top border-grey",
@@ -1838,945 +688,185 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  <div
-                    className="mb3 md-flex"
-                  >
-                    <Label>
-                      Contractor Name
-                    </Label>
-                    <InputHolder
-                      hideLabel={true}
-                      label="Contractor name"
-                      name="contractor-contractor key-name"
-                      onChange={[Function]}
-                      type="text"
-                      value="contractor name"
-                      wrapperClass="md-col-5"
-                    />
-                  </div>,
-                  <div
-                    className="mb3 md-flex"
-                  >
-                    <Label>
-                      Description of Services
-                    </Label>
-                    <InputHolder
-                      hideLabel={true}
-                      id="contractor-contractor key-desc"
-                      label="Describe the services each contractor will provide."
-                      name="contractor-contractor key-desc"
-                      onChange={[Function]}
-                      type="text"
-                      value="contractor description"
-                      wrapperClass="md-col-8"
-                    />
-                  </div>,
-                  <div
-                    className="mb3 md-flex"
-                  >
-                    <Label>
-                      Term Period
-                    </Label>
-                    <DatePickerWrapper
-                      daySize={32}
-                      endDateId="contractor-contractor key-end"
-                      initialEndDate="end date"
-                      initialStartDate="start date"
-                      numberOfMonths={2}
-                      onChange={[Function]}
-                      startDateId="contractor-contractor key-start"
-                    />
-                  </div>,
-                  <div
-                    className="mb3 md-flex"
-                  >
-                    <Label>
-                      Attachments
-                    </Label>
-                    <div
-                      className="md-col-9 md-flex items-start"
-                    >
-                      <div
-                        className="md-col-6 flex items-end mr2"
-                      >
-                        <Select
-                          hideLabel={false}
-                          label="Document Type"
-                          name="contractor key-attachment-type"
-                          onChange={[Function]}
-                          options={
-                            Array [
-                              "Contract",
-                              "Contract Amendment",
-                              "RFP",
-                            ]
-                          }
-                          value="Contract"
-                          wrapperClass="col-6 mr2"
-                        />
-                        <t
-                          className="btn btn-primary btn-dropzone"
-                          disableClick={false}
-                          disablePreview={false}
-                          disabled={false}
-                          inputProps={
-                            Object {
-                              "title": "select a file to attach for this contractor",
-                            }
-                          }
-                          maxSize={Infinity}
-                          minSize={0}
-                          multiple={false}
-                          onDrop={[Function]}
-                          preventDropOnDocument={true}
-                        >
-                          Select file
-                        </t>
-                      </div>
-                    </div>
-                  </div>,
-                  <div
-                    className="mb3 md-flex"
-                  >
-                    <Label>
-                      Cost
-                    </Label>
-                    <div
-                      className="md-col-6 flex"
-                    >
-                      <InputHolder
-                        disabled={false}
-                        hideLabel={false}
-                        label="1066"
-                        name="contractor-contractor key-cost-1066"
-                        onChange={[Function]}
-                        type="text"
-                        value={100}
-                        wrapperClass="mr2 flex-auto"
-                      />
-                      <InputHolder
-                        disabled={false}
-                        hideLabel={false}
-                        label="1067"
-                        name="contractor-contractor key-cost-1067"
-                        onChange={[Function]}
-                        type="text"
-                        value={200}
-                        wrapperClass="mr2 flex-auto"
-                      />
-                    </div>
-                  </div>,
-                  <div
-                    className="mb3 md-flex"
-                  >
-                    <Label>
-                      Hourly Resource
-                    </Label>
-                    <div
-                      className="md-col-6"
-                    >
-                      <div
-                        className="flex items-center"
-                      >
-                        <div
-                          className="mr2"
-                        >
-                          This is an hourly resource
-                        </div>
-                        <div>
-                          <Btn
-                            disabled={false}
-                            extraCss=""
-                            kind="outline"
-                            onClick={[Function]}
-                            size={null}
-                          >
-                            Yes
-                          </Btn>
-                           
-                          <Btn
-                            disabled={true}
-                            extraCss="bg-black white"
-                            kind="outline"
-                            onClick={[Function]}
-                            size={null}
-                          >
-                            No
-                          </Btn>
-                        </div>
-                      </div>
-                    </div>
-                  </div>,
-                  <div>
-                    <Btn
-                      extraCss="px1 py-tiny h5"
-                      kind="outline"
-                      onClick={[Function]}
-                      size={null}
-                    >
-                      Remove resource
-                    </Btn>
-                  </div>,
+                  <ContractorEntry
+                    contractor={
+                      Object {
+                        "desc": "contractor description",
+                        "end": "end date",
+                        "hourly": Object {
+                          "data": Object {
+                            "1066": Object {
+                              "hours": "",
+                              "rate": "",
+                            },
+                            "1067": Object {
+                              "hours": "",
+                              "rate": "",
+                            },
+                          },
+                          "useHourly": false,
+                        },
+                        "id": "contractor id",
+                        "key": "contractor key",
+                        "name": "contractor name",
+                        "start": "start date",
+                        "years": Object {
+                          "1066": 100,
+                          "1067": 200,
+                        },
+                      }
+                    }
+                    handleDelete={[Function]}
+                    idx={0}
+                    toggleForm={[Function]}
+                    years={
+                      Array [
+                        "1066",
+                        "1067",
+                      ]
+                    }
+                  />,
+                  <ContractorForm
+                    contractor={
+                      Object {
+                        "desc": "contractor description",
+                        "end": "end date",
+                        "hourly": Object {
+                          "data": Object {
+                            "1066": Object {
+                              "hours": "",
+                              "rate": "",
+                            },
+                            "1067": Object {
+                              "hours": "",
+                              "rate": "",
+                            },
+                          },
+                          "useHourly": false,
+                        },
+                        "id": "contractor id",
+                        "key": "contractor key",
+                        "name": "contractor name",
+                        "start": "start date",
+                        "years": Object {
+                          "1066": 100,
+                          "1067": 200,
+                        },
+                      }
+                    }
+                    docType="Contract"
+                    handleChange={[Function]}
+                    handleDelete={[Function]}
+                    handleDocChange={[Function]}
+                    handleFileDelete={[Function]}
+                    handleFileUpload={[Function]}
+                    handleHourlyChange={[Function]}
+                    handleTermChange={[Function]}
+                    handleUseHourly={[Function]}
+                    handleYearChange={[Function]}
+                    idx={0}
+                    years={
+                      Array [
+                        "1066",
+                        "1067",
+                      ]
+                    }
+                  />,
                 ],
-                "className": "mb3 pb3 border-bottom border-grey",
               },
               "ref": null,
               "rendered": Array [
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "host",
+                  "nodeType": "function",
                   "props": Object {
-                    "children": Array [
-                      <Label>
-                        Contractor Name
-                      </Label>,
-                      <InputHolder
-                        hideLabel={true}
-                        label="Contractor name"
-                        name="contractor-contractor key-name"
-                        onChange={[Function]}
-                        type="text"
-                        value="contractor name"
-                        wrapperClass="md-col-5"
-                      />,
-                    ],
-                    "className": "mb3 md-flex",
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "function",
-                      "props": Object {
-                        "children": "Contractor Name",
-                      },
-                      "ref": null,
-                      "rendered": "Contractor Name",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "function",
-                      "props": Object {
-                        "hideLabel": true,
-                        "label": "Contractor name",
-                        "name": "contractor-contractor key-name",
-                        "onChange": [Function],
-                        "type": "text",
-                        "value": "contractor name",
-                        "wrapperClass": "md-col-5",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": [Function],
-                    },
-                  ],
-                  "type": "div",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <Label>
-                        Description of Services
-                      </Label>,
-                      <InputHolder
-                        hideLabel={true}
-                        id="contractor-contractor key-desc"
-                        label="Describe the services each contractor will provide."
-                        name="contractor-contractor key-desc"
-                        onChange={[Function]}
-                        type="text"
-                        value="contractor description"
-                        wrapperClass="md-col-8"
-                      />,
-                    ],
-                    "className": "mb3 md-flex",
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "function",
-                      "props": Object {
-                        "children": "Description of Services",
-                      },
-                      "ref": null,
-                      "rendered": "Description of Services",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "function",
-                      "props": Object {
-                        "hideLabel": true,
-                        "id": "contractor-contractor key-desc",
-                        "label": "Describe the services each contractor will provide.",
-                        "name": "contractor-contractor key-desc",
-                        "onChange": [Function],
-                        "type": "text",
-                        "value": "contractor description",
-                        "wrapperClass": "md-col-8",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": [Function],
-                    },
-                  ],
-                  "type": "div",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <Label>
-                        Term Period
-                      </Label>,
-                      <DatePickerWrapper
-                        daySize={32}
-                        endDateId="contractor-contractor key-end"
-                        initialEndDate="end date"
-                        initialStartDate="start date"
-                        numberOfMonths={2}
-                        onChange={[Function]}
-                        startDateId="contractor-contractor key-start"
-                      />,
-                    ],
-                    "className": "mb3 md-flex",
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "function",
-                      "props": Object {
-                        "children": "Term Period",
-                      },
-                      "ref": null,
-                      "rendered": "Term Period",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "class",
-                      "props": Object {
-                        "daySize": 32,
-                        "endDateId": "contractor-contractor key-end",
-                        "initialEndDate": "end date",
-                        "initialStartDate": "start date",
-                        "numberOfMonths": 2,
-                        "onChange": [Function],
-                        "startDateId": "contractor-contractor key-start",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": [Function],
-                    },
-                  ],
-                  "type": "div",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <Label>
-                        Attachments
-                      </Label>,
-                      <div
-                        className="md-col-9 md-flex items-start"
-                      >
-                        <div
-                          className="md-col-6 flex items-end mr2"
-                        >
-                          <Select
-                            hideLabel={false}
-                            label="Document Type"
-                            name="contractor key-attachment-type"
-                            onChange={[Function]}
-                            options={
-                              Array [
-                                "Contract",
-                                "Contract Amendment",
-                                "RFP",
-                              ]
-                            }
-                            value="Contract"
-                            wrapperClass="col-6 mr2"
-                          />
-                          <t
-                            className="btn btn-primary btn-dropzone"
-                            disableClick={false}
-                            disablePreview={false}
-                            disabled={false}
-                            inputProps={
-                              Object {
-                                "title": "select a file to attach for this contractor",
-                              }
-                            }
-                            maxSize={Infinity}
-                            minSize={0}
-                            multiple={false}
-                            onDrop={[Function]}
-                            preventDropOnDocument={true}
-                          >
-                            Select file
-                          </t>
-                        </div>
-                      </div>,
-                    ],
-                    "className": "mb3 md-flex",
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "function",
-                      "props": Object {
-                        "children": "Attachments",
-                      },
-                      "ref": null,
-                      "rendered": "Attachments",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": Array [
-                          <div
-                            className="md-col-6 flex items-end mr2"
-                          >
-                            <Select
-                              hideLabel={false}
-                              label="Document Type"
-                              name="contractor key-attachment-type"
-                              onChange={[Function]}
-                              options={
-                                Array [
-                                  "Contract",
-                                  "Contract Amendment",
-                                  "RFP",
-                                ]
-                              }
-                              value="Contract"
-                              wrapperClass="col-6 mr2"
-                            />
-                            <t
-                              className="btn btn-primary btn-dropzone"
-                              disableClick={false}
-                              disablePreview={false}
-                              disabled={false}
-                              inputProps={
-                                Object {
-                                  "title": "select a file to attach for this contractor",
-                                }
-                              }
-                              maxSize={Infinity}
-                              minSize={0}
-                              multiple={false}
-                              onDrop={[Function]}
-                              preventDropOnDocument={true}
-                            >
-                              Select file
-                            </t>
-                          </div>,
-                          false,
-                        ],
-                        "className": "md-col-9 md-flex items-start",
-                      },
-                      "ref": null,
-                      "rendered": Array [
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "host",
-                          "props": Object {
-                            "children": Array [
-                              <Select
-                                hideLabel={false}
-                                label="Document Type"
-                                name="contractor key-attachment-type"
-                                onChange={[Function]}
-                                options={
-                                  Array [
-                                    "Contract",
-                                    "Contract Amendment",
-                                    "RFP",
-                                  ]
-                                }
-                                value="Contract"
-                                wrapperClass="col-6 mr2"
-                              />,
-                              <t
-                                className="btn btn-primary btn-dropzone"
-                                disableClick={false}
-                                disablePreview={false}
-                                disabled={false}
-                                inputProps={
-                                  Object {
-                                    "title": "select a file to attach for this contractor",
-                                  }
-                                }
-                                maxSize={Infinity}
-                                minSize={0}
-                                multiple={false}
-                                onDrop={[Function]}
-                                preventDropOnDocument={true}
-                              >
-                                Select file
-                              </t>,
-                            ],
-                            "className": "md-col-6 flex items-end mr2",
+                    "contractor": Object {
+                      "desc": "contractor description",
+                      "end": "end date",
+                      "hourly": Object {
+                        "data": Object {
+                          "1066": Object {
+                            "hours": "",
+                            "rate": "",
                           },
-                          "ref": null,
-                          "rendered": Array [
-                            Object {
-                              "instance": null,
-                              "key": undefined,
-                              "nodeType": "function",
-                              "props": Object {
-                                "hideLabel": false,
-                                "label": "Document Type",
-                                "name": "contractor key-attachment-type",
-                                "onChange": [Function],
-                                "options": Array [
-                                  "Contract",
-                                  "Contract Amendment",
-                                  "RFP",
-                                ],
-                                "value": "Contract",
-                                "wrapperClass": "col-6 mr2",
-                              },
-                              "ref": null,
-                              "rendered": null,
-                              "type": [Function],
-                            },
-                            Object {
-                              "instance": null,
-                              "key": undefined,
-                              "nodeType": "class",
-                              "props": Object {
-                                "children": "Select file",
-                                "className": "btn btn-primary btn-dropzone",
-                                "disableClick": false,
-                                "disablePreview": false,
-                                "disabled": false,
-                                "inputProps": Object {
-                                  "title": "select a file to attach for this contractor",
-                                },
-                                "maxSize": Infinity,
-                                "minSize": 0,
-                                "multiple": false,
-                                "onDrop": [Function],
-                                "preventDropOnDocument": true,
-                              },
-                              "ref": null,
-                              "rendered": "Select file",
-                              "type": [Function],
-                            },
-                          ],
-                          "type": "div",
+                          "1067": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
                         },
-                        false,
-                      ],
-                      "type": "div",
+                        "useHourly": false,
+                      },
+                      "id": "contractor id",
+                      "key": "contractor key",
+                      "name": "contractor name",
+                      "start": "start date",
+                      "years": Object {
+                        "1066": 100,
+                        "1067": 200,
+                      },
                     },
-                  ],
-                  "type": "div",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <Label>
-                        Cost
-                      </Label>,
-                      <div
-                        className="md-col-6 flex"
-                      >
-                        <InputHolder
-                          disabled={false}
-                          hideLabel={false}
-                          label="1066"
-                          name="contractor-contractor key-cost-1066"
-                          onChange={[Function]}
-                          type="text"
-                          value={100}
-                          wrapperClass="mr2 flex-auto"
-                        />
-                        <InputHolder
-                          disabled={false}
-                          hideLabel={false}
-                          label="1067"
-                          name="contractor-contractor key-cost-1067"
-                          onChange={[Function]}
-                          type="text"
-                          value={200}
-                          wrapperClass="mr2 flex-auto"
-                        />
-                      </div>,
+                    "handleDelete": [Function],
+                    "idx": 0,
+                    "toggleForm": [Function],
+                    "years": Array [
+                      "1066",
+                      "1067",
                     ],
-                    "className": "mb3 md-flex",
                   },
                   "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "function",
-                      "props": Object {
-                        "children": "Cost",
-                      },
-                      "ref": null,
-                      "rendered": "Cost",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": Array [
-                          <InputHolder
-                            disabled={false}
-                            hideLabel={false}
-                            label="1066"
-                            name="contractor-contractor key-cost-1066"
-                            onChange={[Function]}
-                            type="text"
-                            value={100}
-                            wrapperClass="mr2 flex-auto"
-                          />,
-                          <InputHolder
-                            disabled={false}
-                            hideLabel={false}
-                            label="1067"
-                            name="contractor-contractor key-cost-1067"
-                            onChange={[Function]}
-                            type="text"
-                            value={200}
-                            wrapperClass="mr2 flex-auto"
-                          />,
-                        ],
-                        "className": "md-col-6 flex",
-                      },
-                      "ref": null,
-                      "rendered": Array [
-                        Object {
-                          "instance": null,
-                          "key": "1066",
-                          "nodeType": "function",
-                          "props": Object {
-                            "disabled": false,
-                            "hideLabel": false,
-                            "label": "1066",
-                            "name": "contractor-contractor key-cost-1066",
-                            "onChange": [Function],
-                            "type": "text",
-                            "value": 100,
-                            "wrapperClass": "mr2 flex-auto",
-                          },
-                          "ref": null,
-                          "rendered": null,
-                          "type": [Function],
-                        },
-                        Object {
-                          "instance": null,
-                          "key": "1067",
-                          "nodeType": "function",
-                          "props": Object {
-                            "disabled": false,
-                            "hideLabel": false,
-                            "label": "1067",
-                            "name": "contractor-contractor key-cost-1067",
-                            "onChange": [Function],
-                            "type": "text",
-                            "value": 200,
-                            "wrapperClass": "mr2 flex-auto",
-                          },
-                          "ref": null,
-                          "rendered": null,
-                          "type": [Function],
-                        },
-                      ],
-                      "type": "div",
-                    },
-                  ],
-                  "type": "div",
+                  "rendered": null,
+                  "type": [Function],
                 },
                 Object {
                   "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
+                  "key": "contractor key",
+                  "nodeType": "function",
                   "props": Object {
-                    "children": Array [
-                      <Label>
-                        Hourly Resource
-                      </Label>,
-                      <div
-                        className="md-col-6"
-                      >
-                        <div
-                          className="flex items-center"
-                        >
-                          <div
-                            className="mr2"
-                          >
-                            This is an hourly resource
-                          </div>
-                          <div>
-                            <Btn
-                              disabled={false}
-                              extraCss=""
-                              kind="outline"
-                              onClick={[Function]}
-                              size={null}
-                            >
-                              Yes
-                            </Btn>
-                             
-                            <Btn
-                              disabled={true}
-                              extraCss="bg-black white"
-                              kind="outline"
-                              onClick={[Function]}
-                              size={null}
-                            >
-                              No
-                            </Btn>
-                          </div>
-                        </div>
-                      </div>,
+                    "contractor": Object {
+                      "desc": "contractor description",
+                      "end": "end date",
+                      "hourly": Object {
+                        "data": Object {
+                          "1066": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
+                          "1067": Object {
+                            "hours": "",
+                            "rate": "",
+                          },
+                        },
+                        "useHourly": false,
+                      },
+                      "id": "contractor id",
+                      "key": "contractor key",
+                      "name": "contractor name",
+                      "start": "start date",
+                      "years": Object {
+                        "1066": 100,
+                        "1067": 200,
+                      },
+                    },
+                    "docType": "Contract",
+                    "handleChange": [Function],
+                    "handleDelete": [Function],
+                    "handleDocChange": [Function],
+                    "handleFileDelete": [Function],
+                    "handleFileUpload": [Function],
+                    "handleHourlyChange": [Function],
+                    "handleTermChange": [Function],
+                    "handleUseHourly": [Function],
+                    "handleYearChange": [Function],
+                    "idx": 0,
+                    "years": Array [
+                      "1066",
+                      "1067",
                     ],
-                    "className": "mb3 md-flex",
                   },
                   "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "function",
-                      "props": Object {
-                        "children": "Hourly Resource",
-                      },
-                      "ref": null,
-                      "rendered": "Hourly Resource",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": Array [
-                          <div
-                            className="flex items-center"
-                          >
-                            <div
-                              className="mr2"
-                            >
-                              This is an hourly resource
-                            </div>
-                            <div>
-                              <Btn
-                                disabled={false}
-                                extraCss=""
-                                kind="outline"
-                                onClick={[Function]}
-                                size={null}
-                              >
-                                Yes
-                              </Btn>
-                               
-                              <Btn
-                                disabled={true}
-                                extraCss="bg-black white"
-                                kind="outline"
-                                onClick={[Function]}
-                                size={null}
-                              >
-                                No
-                              </Btn>
-                            </div>
-                          </div>,
-                          false,
-                        ],
-                        "className": "md-col-6",
-                      },
-                      "ref": null,
-                      "rendered": Array [
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "host",
-                          "props": Object {
-                            "children": Array [
-                              <div
-                                className="mr2"
-                              >
-                                This is an hourly resource
-                              </div>,
-                              <div>
-                                <Btn
-                                  disabled={false}
-                                  extraCss=""
-                                  kind="outline"
-                                  onClick={[Function]}
-                                  size={null}
-                                >
-                                  Yes
-                                </Btn>
-                                 
-                                <Btn
-                                  disabled={true}
-                                  extraCss="bg-black white"
-                                  kind="outline"
-                                  onClick={[Function]}
-                                  size={null}
-                                >
-                                  No
-                                </Btn>
-                              </div>,
-                            ],
-                            "className": "flex items-center",
-                          },
-                          "ref": null,
-                          "rendered": Array [
-                            Object {
-                              "instance": null,
-                              "key": undefined,
-                              "nodeType": "host",
-                              "props": Object {
-                                "children": "This is an hourly resource",
-                                "className": "mr2",
-                              },
-                              "ref": null,
-                              "rendered": "This is an hourly resource",
-                              "type": "div",
-                            },
-                            Object {
-                              "instance": null,
-                              "key": undefined,
-                              "nodeType": "host",
-                              "props": Object {
-                                "children": Array [
-                                  <Btn
-                                    disabled={false}
-                                    extraCss=""
-                                    kind="outline"
-                                    onClick={[Function]}
-                                    size={null}
-                                  >
-                                    Yes
-                                  </Btn>,
-                                  " ",
-                                  <Btn
-                                    disabled={true}
-                                    extraCss="bg-black white"
-                                    kind="outline"
-                                    onClick={[Function]}
-                                    size={null}
-                                  >
-                                    No
-                                  </Btn>,
-                                ],
-                              },
-                              "ref": null,
-                              "rendered": Array [
-                                Object {
-                                  "instance": null,
-                                  "key": undefined,
-                                  "nodeType": "function",
-                                  "props": Object {
-                                    "children": "Yes",
-                                    "disabled": false,
-                                    "extraCss": "",
-                                    "kind": "outline",
-                                    "onClick": [Function],
-                                    "size": null,
-                                  },
-                                  "ref": null,
-                                  "rendered": "Yes",
-                                  "type": [Function],
-                                },
-                                " ",
-                                Object {
-                                  "instance": null,
-                                  "key": undefined,
-                                  "nodeType": "function",
-                                  "props": Object {
-                                    "children": "No",
-                                    "disabled": true,
-                                    "extraCss": "bg-black white",
-                                    "kind": "outline",
-                                    "onClick": [Function],
-                                    "size": null,
-                                  },
-                                  "ref": null,
-                                  "rendered": "No",
-                                  "type": [Function],
-                                },
-                              ],
-                              "type": "div",
-                            },
-                          ],
-                          "type": "div",
-                        },
-                        false,
-                      ],
-                      "type": "div",
-                    },
-                  ],
-                  "type": "div",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": <Btn
-                      extraCss="px1 py-tiny h5"
-                      kind="outline"
-                      onClick={[Function]}
-                      size={null}
-                    >
-                      Remove resource
-                    </Btn>,
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "children": "Remove resource",
-                      "extraCss": "px1 py-tiny h5",
-                      "kind": "outline",
-                      "onClick": [Function],
-                      "size": null,
-                    },
-                    "ref": null,
-                    "rendered": "Remove resource",
-                    "type": [Function],
-                  },
-                  "type": "div",
+                  "rendered": null,
+                  "type": [Function],
                 },
               ],
               "type": "div",

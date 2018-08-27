@@ -130,18 +130,16 @@ ExpenseForm.propTypes = {
   handleDelete: PropTypes.func.isRequired
 };
 
-const getLastExpense = expenses =>
-  expenses.length ? expenses[expenses.length - 1].key : null;
-
 class Expenses extends Component {
   static getDerivedStateFromProps(props, state) {
-    const lastExpense = getLastExpense(props.expenses);
+    const { expenses: data } = props;
+    const lastKey = data.length ? data[data.length - 1].key : null;
 
-    if (lastExpense && !(lastExpense in state.showForm)) {
+    if (lastKey && !(lastKey in state.showForm)) {
       return {
         showForm: {
           ...arrToObj(Object.keys(state.showForm), false),
-          [lastExpense]: true
+          [lastKey]: true
         }
       };
     }
