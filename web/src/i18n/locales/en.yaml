@@ -67,12 +67,13 @@
             _no: "No"
     overview: 
       title: Program Overview
-      helpText: >-
-        
+      helpText:
       reminder: >-
         Provide a high level summary of the state program including history,
-        and future vision. Write a high level summary of history and future vision of the state program. Indicate which federal fiscal years this APD covers. This initial overview is intended to be brief, expanded details can be included in the activity details section.
-
+        and future vision. Write a high level summary of history and future
+        vision of the state program. Indicate which federal fiscal years this
+        APD covers. This initial overview is intended to be brief, expanded
+        details can be included in the activity details section.
       yearsCovered: Choose the federal fiscal year(s) this APD covers.
       labels: 
         desc: Program Introduction
@@ -82,13 +83,13 @@
           explained in the program activities section of this update.
     hit: 
       title: HIT Overview
-      helpText: >-
+      helpText:
       reminder: >-
         Summarize briefly planned HIT funded activities contained within this
         APD.
     hie: 
       title: HIE Overview
-      helpText: >-
+      helpText:
       reminder: >-
         Summarize planned HIE funded activities within this APD. 
         This section should include a brief description for each
@@ -112,20 +113,20 @@
         more efficient approval process.
     mmis: 
       title: MMIS Overview
-      helpText: >-
+      helpText:
       reminder: >-
         Briefly summarize planned MMIS funded activities contained within this
         APD. If there are no MMIS activities, skip this section.
   previousActivities: 
     title: Results of Previous Activities
-    helpText: >-
+    helpText:
     reminder: >-
       Include a description of the results of previously approved activities.
       This information is similar to the content from the IAPD template
       section: results of previous activities.
     outline: 
       title: Prior Activities Outline
-      helpText: >-
+      helpText:
       reminder: >-
         Include a high level description of the activities approved in the
         previous APD that are completed, in-progress, or on-hold.
@@ -173,16 +174,15 @@
       The information will be collected for each activity.
     list: 
       title: Activity List
-      helpText: >-
-       
+      helpText:
       reminder: >-
         The first activity is Program 
         Administration. This includes information that pertains to implementing
         the EHR Incentive program, as well as state and contractor
         costs associated with operating the EHR incentive program, and SLR
-        enhancements/upgrades. Examples of individual activities include: auditing, outreach,
-        environmental scans, HIE registry development, CQM database
-        development, data and analytics, HIE onboarding, etc. 
+        enhancements/upgrades. Examples of individual activities include:
+        auditing, outreach, environmental scans, HIE registry development,
+        CQM database development, data and analytics, HIE onboarding, etc. 
     addActivityButtonText: Add activity
     noActivityMessage: There are no activities. Add one below.
     noNameYet: (No name provided yet)
@@ -198,31 +198,30 @@
     namePrefixAndNum: Core Activity {{number}}
     description: 
       title: Activity Overview
-      helpText: >-
-       
+      helpText:
       reminder: >-
-        Activity overview is a brief summary of needs. Summarize activity needs for how requested funding will be used (e.g. administrative, outreach, auditing, Public Health
-        Registry Development, etc)
+        Activity overview is a brief summary of needs. Summarize activity needs
+        for how requested funding will be used (e.g. administrative, outreach,
+        auditing, Public Health Registry Development, etc)
       summary: 
         title: Brief Activity Summary
       detail:
         standard:
           subheader: 
         hie:
-          subheader: >-
-           
-          helpText: >-
-            
-            reminder: >-
-            Activity details includes a description of how activity is linked to meaningful use; value
-            proposition to providers; and sustainability plan describing
-            how the activity will be sustained after HIE DDI funding is
-            exhausted.  Diagrams and/or descriptions of other HIE linkages can be included if they provide more context for how the state will complete the proposed activity.
+          subheader:
+          helpText:
+          reminder: >-
+            Activity details includes a description of how activity is linked
+            to meaningful use; value proposition to providers; and sustainability
+            plan describing how the activity will be sustained after HIE DDI
+            funding is exhausted.  Diagrams and/or descriptions of other HIE
+            linkages can be included if they provide more context for how the
+            state will complete the proposed activity.
       alternatives: 
         subheader: >-
           Statement of alternative considerations and supporting justification
-        helpText: >-
-          
+        helpText:
         reminder: >-
           If no substantive changes have been made, include
           a statement referring to the statement of alternative considerations
@@ -238,13 +237,15 @@
         List the goals and objectives the state plans to accomplish as part
         of this activity.
       helpText: >-
-       Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.
+        Briefly describe how each goal relates to the vision identified in the
+        program summary. Each goal should have a matching activity.
       goal: 
         title: "Goal #{{number}}"
       objective: 
         title: Goal roadmap
         helpText: >-
-         Include a brief description of how the state will measure progress toward each goal identified.
+         Include a brief description of how the state will measure progress
+         toward each goal identified.
       addGoalButtonText: Add a goal
     schedule: 
       title: Activity Schedule
@@ -308,8 +309,7 @@
         Outline the personnel resources for this section. This includes
         anyone funded as a part of this activity. This does not include
         personnel listed in the contract section.
-      helpText: >-
-        
+      helpText:
       reminder: >-
         Personnel costs for this section includes combined salary and
         benefits. Use the checkbox to identify key project personnel.
@@ -331,14 +331,17 @@
       addButtonText: Add personnel
     expenses: 
       title: Non-Personnel Costs
-      helpText: >-
-      
+      helpText:
       reminder: >-
-       Provide a detailed breakout of any non-personnel and non-contracted costs related to this activity. This should include a brief description of these projected costs. “Miscellaneous expenses” from the drop down, includes materials and supplies, communications‐related expenses, printing costs and facilities expenses.
+        Provide a detailed breakout of any non-personnel and non-contracted
+        costs related to this activity. This should include a brief description
+        of these projected costs. “Miscellaneous expenses” from the drop down,
+        includes materials and supplies, communications‐related expenses,
+        printing costs and facilities expenses.
       noDataNotice: Additional costs for this activity are missing.
     costAllocate: 
       title: Cost Allocation
-      helpText: >-
+      helpText:
       reminder: >-
         A cost allocation plan must include all participants
         and their associated cost allocation to depict non-Medicaid activities
@@ -352,10 +355,11 @@
         projections of eligible Medicaid provider participation.
         
         3. Cost allocation must account for other available federal funding
-        sources including division of resources and activities across relevant payers, and
-        relative benefit to the state Medicaid program.
+        sources including division of resources and activities across relevant
+        payers, and relative benefit to the state Medicaid program.
       
-        4. Ensure cost allocations are current. Medicaid funds should be not be sole contributor to Cost allocations should be current and ensure financial
+        4. Ensure cost allocations are current. Medicaid funds should be not be
+        sole contributor to Cost allocations should be current and ensure financial
         participation of all parties so Medicaid funds are neither the
         sole contributor at the onset, nor primary source of funding. Other
         payers who may benefit must contribute their share from the outset.
@@ -380,11 +384,11 @@
           combined: Total enhanced FFP
       otherFunding: 
         title: Other funding description
-        helpText: >-
-          
+        helpText:
         reminder: >-
-          Account for grant funding used to support this activity. (Review Letter 10‐016 for examples
-          of grants for inclusion.) High level descriptions are appropriate for grant activities.
+          Account for grant funding used to support this activity. (Review
+          Letter 10‐016 for examples of grants for inclusion.) High level
+          descriptions are appropriate for grant activities.
           Ensure new grants are included, and remove expired grants.
       ffp:
         title: Federal Financial Partipation (FFP) and Cost Allocation
@@ -419,23 +423,27 @@
 
 
           Modularity also helps address the challenges of customization. 
-          Baseline web services and capabilities can be developed for and used by anyone, with
-          exceptions for specific business processes handled by a separate
-          module that interoperates with the baseline modules.    
+          Baseline web services and capabilities can be developed for and used
+          by anyone, with exceptions for specific business processes handled
+          by a separate module that interoperates with the baseline modules.    
 
         
           Changes can be made independently to baseline
           capabilities without affecting how the extension works. By doing
           so, the design ensures that future iterations of software can be
           deployed without breaking custom functionality. A critical element
-          of compliance with this condition is providing CMS with an understanding where services and code will be integrated, and where the state will pursue a more aggressive decoupling strategy.  
+          of compliance with this condition is providing CMS with an
+          understanding where services and code will be integrated, and where
+          the state will pursue a more aggressive decoupling strategy.  
         title: Describe how this activity will support the Modularity condition
       mita: 
         header: Medicaid Information Technology Architecture (MITA)
         subheader: >-
           This condition requires states to advance and align increasingly
           in MITA maturity for business, architecture, and data. CMS expects
-          states to complete and make measurable progress in implementing their MITA roadmaps. CMS strives to accelerate the modernization of Medicaid enterprise that been achieved.  
+          states to complete and make measurable progress in implementing their
+          MITA roadmaps. CMS strives to accelerate the modernization of Medicaid
+          enterprise that been achieved.  
         title: Describe how this activity will support the MITA condition
       industryStandards: 
         header: Industry Standards
@@ -474,12 +482,12 @@
           infrastructure and applications.  
 
 
-          CMS commits to work assertively with the states to identify promising state systems 
-          that can be leveraged by other states. CMS strongly
+          CMS commits to work assertively with the states to identify promising
+          state systems  that can be leveraged by other states. CMS strongly
           encourages states to move to regional or multi-state solutions
           when cost effective. In addition, CMS will expedite APD approvals for states
-          that are participating in shared development activities (including developing components intended for successful reuse) with other
-          states.
+          that are participating in shared development activities (including
+          developing components intended for successful reuse) with other states.
 
 
           CMS will also review carefully any proposed investments in sub-state systems 
@@ -495,8 +503,9 @@
 
 
           An effective system supports and enables an effective business process, 
-          producing and communicating intended operational results with reliability and accuracy. 
-          Federal funding are not provided for systems unable to support desired business outcomes.  
+          producing and communicating intended operational results with
+          reliability and accuracy. Federal funding are not provided for systems
+          unable to support desired business outcomes.  
         title: >-
           Describe how this activity will support the Business Results
           condition
@@ -505,7 +514,9 @@
         subheader: >-
          Systems should be able to produce and to expose
           electronically the accurate data that are necessary for oversight,
-          administration, evaluation, integrity, and transparency. These systems should produce reports that contribute to continuous improvement in business operations, transparency, and accountability.
+          administration, evaluation, integrity, and transparency. These
+          systems should produce reports that contribute to continuous
+          improvement in business operations, transparency, and accountability.
           
           Reports should be automatically generated through open interfaces
           to designated federal repositories or data hubs, with appropriate
@@ -547,7 +558,8 @@
           The data-sharing architecture addresses conceptual and 
           logical mechanisms used (i.e., data hubs, repositories, and registries). 
           It also addresses data semantics, data harmonization strategies, 
-          shared-data ownership, security and privacy implications and quality of shared data. 
+          shared-data ownership, security and privacy implications and
+          quality of shared data. 
         title: >-
           Describe how this activity will support the Interoperability condition
       mitigationStrategy: 
@@ -570,10 +582,14 @@
 
           Mitigation plans should also reflect key events and dates that would trigger
           mitigation, and projected timeframe for sunset.
-          States should consider strategies to address risks for the M&O project phase, such as staffing issues and software upgrades. CMS expects states to revise and resubmit their plans to CMS as risks and mitigations change along the system lifecycle. States’ proposed
-          mitigations should be commensurate with nature and scope of identified risks.  
+          States should consider strategies to address risks for the M&O project
+          phase, such as staffing issues and software upgrades. CMS expects states
+          to revise and resubmit their plans to CMS as risks and mitigations
+          change along the system lifecycle. States’ proposed mitigations should
+          be commensurate with nature and scope of identified risks.  
           
-          CMS also expects states will submit mitigation plans with the APDs to demonstrate compliance with this condition.  
+          CMS also expects states will submit mitigation plans with the APDs to
+          demonstrate compliance with this condition.  
         title: >-
           Describe how this activity will support the Mitigation
           Strategy condition
@@ -585,15 +601,15 @@
           by name, role, and time commitment. Before we approve a state to
           launch a major IT initiative, CMS wants to ensure that the state
           team is adequately resourced. States do not need to provide key
-          vendor personnel for this requirement.  
-          
+          vendor personnel for this requirement.
 
 
           As stated in the
           provision, this information must be included in the APD. 
-          For changes to key personnel that occur after an APD is approved, states should
-          notify their CMS points of contact in writing (including by email)
-          and formally reflect the change in the next planned APD update.  
+          For changes to key personnel that occur after an APD is approved,
+          states should notify their CMS points of contact in writing
+          (including by email) and formally reflect the change in the next
+          planned APD update.  
 
 
           This condition refines and strengthens the existing APD

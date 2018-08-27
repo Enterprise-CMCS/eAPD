@@ -99,12 +99,14 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <SectionTitle>
-          Needs and Objectives
+          Performance Measures and Benchmarks
         </SectionTitle>,
         <div>
           List the goals and objectives the state plans to accomplish as part of this activity.
         </div>,
-        "",
+        <SectionDesc>
+          Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.
+        </SectionDesc>,
         "test child",
       ],
       "className": "py2 border-bottom border-grey border-width-3",
@@ -117,10 +119,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "Needs and Objectives",
+          "children": "Performance Measures and Benchmarks",
         },
         "ref": null,
-        "rendered": "Needs and Objectives",
+        "rendered": "Performance Measures and Benchmarks",
         "type": [Function],
       },
       Object {
@@ -134,7 +136,17 @@ ShallowWrapper {
         "rendered": "List the goals and objectives the state plans to accomplish as part of this activity.",
         "type": "div",
       },
-      "",
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
+        },
+        "ref": null,
+        "rendered": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
+        "type": [Function],
+      },
       "test child",
     ],
     "type": "section",
@@ -147,12 +159,14 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <SectionTitle>
-            Needs and Objectives
+            Performance Measures and Benchmarks
           </SectionTitle>,
           <div>
             List the goals and objectives the state plans to accomplish as part of this activity.
           </div>,
-          "",
+          <SectionDesc>
+            Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.
+          </SectionDesc>,
           "test child",
         ],
         "className": "py2 border-bottom border-grey border-width-3",
@@ -165,10 +179,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "Needs and Objectives",
+            "children": "Performance Measures and Benchmarks",
           },
           "ref": null,
-          "rendered": "Needs and Objectives",
+          "rendered": "Performance Measures and Benchmarks",
           "type": [Function],
         },
         Object {
@@ -182,7 +196,17 @@ ShallowWrapper {
           "rendered": "List the goals and objectives the state plans to accomplish as part of this activity.",
           "type": "div",
         },
-        "",
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
+          },
+          "ref": null,
+          "rendered": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
+          "type": [Function],
+        },
         "test child",
       ],
       "type": "section",
