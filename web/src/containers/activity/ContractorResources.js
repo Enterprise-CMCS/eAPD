@@ -86,7 +86,14 @@ class ContractorResources extends Component {
 
     // only do one file at a time
     const { name, preview, size, type } = files[0];
-    const newFile = { name, preview, size, type, category: docType };
+    const newFile = {
+      name,
+      preview,
+      size,
+      type,
+      category: docType,
+      file: files[0]
+    };
     const existingFiles = activity.contractorResources[index].files || [];
 
     const updates = { [index]: { files: [...existingFiles, newFile] } };

@@ -1,4 +1,4 @@
-import { updateBudget } from './apd';
+import { saveApd, updateBudget } from './apd';
 
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
 export const ADD_ACTIVITY_CONTRACTOR = 'ADD_ACTIVITY_CONTRACTOR';
@@ -36,8 +36,36 @@ export const addActivity = () => (dispatch, getState) => {
   });
 };
 
-export const addActivityContractor = key =>
-  actionWithYears(ADD_ACTIVITY_CONTRACTOR, { key });
+export const updateActivity = (key, updates, isExpense = false) => dispatch => {
+  dispatch({
+    type: UPDATE_ACTIVITY,
+    key,
+    updates
+  });
+  if (isExpense) {
+    dispatch(updateBudget());
+  }
+};
+
+export const addActivityContractor = key => async (dispatch, getState) => {
+  const activity = getState().activities.byKey[key];
+  const oldIds = activity.contractorResources.map(c => c.id);
+
+  dispatch(actionWithYears(ADD_ACTIVITY_CONTRACTOR, { key }));
+
+  const newApd = await dispatch(saveApd());
+  const newContractor = newApd.activities
+    .find(a => a.id === activity.id)
+    .contractorResources.find(c => !oldIds.includes(c.id));
+
+  const updates = {
+    contractorResources: {
+      [activity.contractorResources.length]: { id: newContractor.id }
+    }
+  };
+
+  dispatch(updateActivity(key, updates));
+};
 
 export const addActivityGoal = key => ({ type: ADD_ACTIVITY_GOAL, key });
 
@@ -105,17 +133,6 @@ export const toggleActivitySection = key => ({
   type: TOGGLE_ACTIVITY_SECTION,
   key
 });
-
-export const updateActivity = (key, updates, isExpense = false) => dispatch => {
-  dispatch({
-    type: UPDATE_ACTIVITY,
-    key,
-    updates
-  });
-  if (isExpense) {
-    dispatch(updateBudget());
-  }
-};
 
 export const toggleActivityContractorHourly = (
   key,
