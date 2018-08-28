@@ -232,7 +232,7 @@
           Remember to update the SMHP as necessary with any substantive
           changes to the approach for implementing EHR incentives.
     costs:
-      title: Cost Categories
+      title: In-House Cost Categories
       subtitles:
         personnel: Personnel
         nonPersonnel: Non-Personnel
@@ -271,7 +271,7 @@
       removeLabel: Remove milestone
       addMilestoneButtonText: Add milestone
     contractorResources: 
-      title: Contract Resources
+      title: Private Contractor Costs
       subheader: >-
         If there are contract resources, outline contracts by contract or
         vendor name. This section is similar to the existing IAPD template
