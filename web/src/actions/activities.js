@@ -21,6 +21,8 @@ export const TOGGLE_ACTIVITY_CONTRACTOR_HOURLY =
 export const TOGGLE_ACTIVITY_SECTION = 'TOGGLE_ACTIVITY_SECTION';
 export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY';
 
+// todo: this needs to live somewhere else...  maybe util?  Or maybe
+// inside the api file, since that's where the other API_URL ref is
 const getFileURL = id => `${process.env.API_URL}/files/${id}`;
 
 const actionWithYears = (type, other) => (dispatch, getState) =>
@@ -51,13 +53,16 @@ export const updateActivity = (key, updates, isExpense = false) => dispatch => {
   }
 };
 
-export const addActivityContractor = key => async (dispatch, getState) => {
+export const addActivityContractor = (key, { save = saveApd } = {}) => async (
+  dispatch,
+  getState
+) => {
   const activity = getState().activities.byKey[key];
   const oldIds = activity.contractorResources.map(c => c.id);
 
   dispatch(actionWithYears(ADD_ACTIVITY_CONTRACTOR, { key }));
 
-  const newApd = await dispatch(saveApd());
+  const newApd = await dispatch(save());
   const newContractor = newApd.activities
     .find(a => a.id === activity.id)
     .contractorResources.find(c => !oldIds.includes(c.id));
@@ -75,7 +80,8 @@ export const uploadActivityContractorFile = (
   activityKey,
   contractorIdx,
   docType,
-  file
+  file,
+  { FormData = window.FormData, notifyAction = notify } = {}
 ) => async (dispatch, getState) => {
   const { name, size, type } = file;
   const newFile = {
@@ -106,19 +112,20 @@ export const uploadActivityContractorFile = (
     };
 
     dispatch(updateActivity(activityKey, { contractorResources: updates }));
-    dispatch(notify('Upload successful!'));
+    dispatch(notifyAction('Upload successful!'));
   } catch (e) {
     const { response: res } = e;
     const reason = (res && (res.data || {}).error) || 'not-sure-why';
 
-    dispatch(notify(`Upload failed (${reason})`));
+    dispatch(notifyAction(`Upload failed (${reason})`));
   }
 };
 
 export const deleteActivityContractorFile = (
   activityKey,
   contractorIdx,
-  fileIdx
+  fileIdx,
+  { notifyAction = notify } = {}
 ) => async (dispatch, getState) => {
   try {
     const contractor = getState().activities.byKey[activityKey]
@@ -133,12 +140,12 @@ export const deleteActivityContractorFile = (
     const updates = { [contractorIdx]: { files: updatedFiles } };
 
     dispatch(updateActivity(activityKey, { contractorResources: updates }));
-    dispatch(notify('File deleted successfully!'));
+    dispatch(notifyAction('File deleted successfully!'));
   } catch (e) {
     const { response: res } = e;
     const reason = (res && (res.data || {}).error) || 'not-sure-why';
 
-    dispatch(notify(`Deleting file failed (${reason})`));
+    dispatch(notifyAction(`Deleting file failed (${reason})`));
   }
 };
 
