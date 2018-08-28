@@ -231,6 +231,11 @@
           made before selecting the strategy for implementation. 
           Remember to update the SMHP as necessary with any substantive
           changes to the approach for implementing EHR incentives.
+    costs:
+      title: In-House Cost Categories
+      subtitles:
+        personnel: Personnel
+        nonPersonnel: Non-Personnel
     goals: 
       title: Performance Measures and Benchmarks
       subheader: >-
@@ -266,7 +271,7 @@
       removeLabel: Remove milestone
       addMilestoneButtonText: Add milestone
     contractorResources: 
-      title: Contract Resources
+      title: Private Contractor Costs
       subheader: >-
         If there are contract resources, outline contracts by contract or
         vendor name. This section is similar to the existing IAPD template
@@ -326,7 +331,7 @@
         keyPersonnel: Key Personnel
         yearCost: "{{year}} Cost"
         costAmt: Salary Amount
-        costPerc: "% FTE"
+        costPerc: Number of FTEs
       removeLabel: Remove personnel
       addButtonText: Add personnel
     expenses: 

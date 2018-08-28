@@ -11,7 +11,7 @@ import Btn from '../../components/Btn';
 import NoDataMsg from '../../components/NoDataMsg';
 import { DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
-import { Subsection } from '../../components/Section';
+import { SubsectionChunk } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
 import { arrToObj } from '../../util';
@@ -200,7 +200,7 @@ class Expenses extends Component {
     const { showForm } = this.state;
 
     return (
-      <Subsection resource="activities.expenses" nested>
+      <SubsectionChunk resource="activities.expenses">
         {expenses.length === 0 ? (
           <NoDataMsg>{t('activities.expenses.noDataNotice')}</NoDataMsg>
         ) : (
@@ -229,7 +229,7 @@ class Expenses extends Component {
           </div>
         )}
         <Btn onClick={this.handleAdd}>Add expense</Btn>
-      </Subsection>
+      </SubsectionChunk>
     );
   }
 }

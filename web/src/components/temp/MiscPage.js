@@ -9,9 +9,7 @@ const MiscPage = () => (
     <div>{is.chrome() ? 'Chrome' : 'Not Chrome'}</div>
     <div className="p2 bg-white rounded md-col-6">
       <h2 className="mt0">Your computer is using an out-of-date browser.</h2>
-      <p>
-      Upgrade using one of the browser links below to access this site.
-      </p>
+      <p>Upgrade using one of the browser links below to access this site.</p>
     </div>
   </Container>
 );
