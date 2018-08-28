@@ -1,7 +1,7 @@
 const logger = require('../logger')('routes index');
 const auth = require('./auth');
 const apds = require('./apds');
-const files = require('./files/get');
+const files = require('./files');
 const me = require('./me/get');
 const states = require('./states');
 const users = require('./users');
