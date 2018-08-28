@@ -239,7 +239,7 @@ const buildBudget = bigState => {
 
     activity.statePersonnel.forEach(person => {
       Object.entries(person.years).forEach(([year, { amt, perc }]) => {
-        const cost = n(amt) * n(perc) / 100;
+        const cost = n(amt) * n(perc);
         addCostToTotals(fundingSource, year, 'statePersonnel', cost);
         activityTotalByCategory[year].statePersonnel += cost;
 

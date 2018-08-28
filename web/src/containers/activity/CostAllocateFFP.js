@@ -40,7 +40,9 @@ class CostAllocateFFP extends Component {
               <div key={year} className="col col-12 sm-col-6 mb2 px1">
                 <div className="p2 bg-gray-lightest">
                   <div>{year}</div>
-                  <div className="h3 bold mono truncate">{formatMoney(total)}</div>
+                  <div className="h3 bold mono truncate">
+                    {formatMoney(total)}
+                  </div>
                   <hr />
                   <DollarInput
                     wrapperClass="lg-col-8 mb2"

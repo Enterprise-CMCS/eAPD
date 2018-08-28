@@ -8,18 +8,13 @@ import {
   updateActivity as updateActivityAction
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
-import {
-  Input,
-  DollarInput,
-  PercentInput,
-  Textarea
-} from '../../components/Inputs';
+import { Input, DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
 import NoDataMsg from '../../components/NoDataMsg';
-import { Subsection } from '../../components/Section';
+import { SubsectionChunk } from '../../components/Section';
 import { t } from '../../i18n';
 import { arrToObj } from '../../util';
-import { isNumeric, formatMoney } from '../../util/formats';
+import { formatDec, formatMoney } from '../../util/formats';
 
 const PersonnelEntry = ({ person, idx, years, handleDelete, toggleForm }) => (
   <div className="mb1 h5 flex justify-between">
@@ -38,9 +33,7 @@ const PersonnelEntry = ({ person, idx, years, handleDelete, toggleForm }) => (
             <span className="bold mono">
               {formatMoney(person.years[year].amt)}
               {' / '}
-              {isNumeric(person.years[year].perc)
-                ? `${person.years[year].perc}%`
-                : '--'}
+              {formatDec(person.years[year].perc, 1)}
             </span>
           </div>
         ))}
@@ -133,12 +126,15 @@ const PersonnelForm = ({
             onChange={handleChange(idx, 'amt', year)}
             wrapperClass="mr3 flex-auto"
           />
-          <PercentInput
+          <Input
             name={`state-person-${person.key}-${year}-perc`}
             label={t('activities.statePersonnel.labels.costPerc')}
+            wrapperClass="flex-auto"
+            className="m0 input mono"
+            type="number"
+            step="0.5"
             value={person.years[year].perc}
             onChange={handleChange(idx, 'perc', year)}
-            wrapperClass="flex-auto"
           />
         </div>
       </div>
@@ -228,7 +224,7 @@ class StatePersonnel extends Component {
     const { showForm } = this.state;
 
     return (
-      <Subsection resource="activities.statePersonnel" nested>
+      <SubsectionChunk resource="activities.statePersonnel">
         {personnel.length === 0 ? (
           <NoDataMsg>{t('activities.statePersonnel.noDataNotice')}</NoDataMsg>
         ) : (
@@ -260,7 +256,7 @@ class StatePersonnel extends Component {
         <Btn onClick={this.handleAdd}>
           {t('activities.statePersonnel.addButtonText')}
         </Btn>
-      </Subsection>
+      </SubsectionChunk>
     );
   }
 }

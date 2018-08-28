@@ -38,13 +38,10 @@ ShallowWrapper {
           <Connect(Schedule)
             aKey="activity-key"
           />,
-          <Connect(StatePersonnel)
+          <Costs
             aKey="activity-key"
           />,
           <Connect(ContractorResources)
-            aKey="activity-key"
-          />,
-          <Connect(Expenses)
             aKey="activity-key"
           />,
           <Connect(CostAllocate)
@@ -104,7 +101,7 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": "3",
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
           "aKey": "activity-key",
         },
@@ -137,17 +134,6 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": "6",
-        "nodeType": "class",
-        "props": Object {
-          "aKey": "activity-key",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": "7",
         "nodeType": "class",
         "props": Object {
           "aKey": "activity-key",
@@ -191,13 +177,10 @@ ShallowWrapper {
             <Connect(Schedule)
               aKey="activity-key"
             />,
-            <Connect(StatePersonnel)
+            <Costs
               aKey="activity-key"
             />,
             <Connect(ContractorResources)
-              aKey="activity-key"
-            />,
-            <Connect(Expenses)
               aKey="activity-key"
             />,
             <Connect(CostAllocate)
@@ -257,7 +240,7 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": "3",
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
             "aKey": "activity-key",
           },
@@ -290,17 +273,6 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": "6",
-          "nodeType": "class",
-          "props": Object {
-            "aKey": "activity-key",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "7",
           "nodeType": "class",
           "props": Object {
             "aKey": "activity-key",
