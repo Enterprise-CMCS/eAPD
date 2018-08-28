@@ -234,8 +234,8 @@ describe('APD activity serializer', () => {
               desc: 'desc 1',
               isKeyPersonnel: false,
               years: {
-                2018: { amt: 100, perc: 50 },
-                2019: { amt: 200, perc: 80 }
+                2018: { amt: 100, perc: 0.5 },
+                2019: { amt: 200, perc: 0.8 }
               }
             },
             {
@@ -245,8 +245,8 @@ describe('APD activity serializer', () => {
               desc: 'desc 2',
               isKeyPersonnel: false,
               years: {
-                2018: { amt: 300, perc: 30 },
-                2019: { amt: 400, perc: 60 }
+                2018: { amt: 300, perc: 0.3 },
+                2019: { amt: 400, perc: 0.6 }
               }
             }
           ],
@@ -408,7 +408,7 @@ describe('APD activity serializer', () => {
             years: {
               '2009': {
                 amt: 99,
-                perc: 45
+                perc: 0.45
               }
             }
           }
