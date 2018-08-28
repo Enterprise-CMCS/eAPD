@@ -154,10 +154,7 @@ const StateDash = () => (
               { day: 30, title: 'Performance Progress CoP' }
             ]}
           />
-          <Events
-            month="July"
-            events={[{ day: 7, title: 'Annual APD Due' }]}
-          />
+          <Events month="July" events={[{ day: 7, title: 'Annual APD Due' }]} />
         </Collapsible>
       </div>
     </div>

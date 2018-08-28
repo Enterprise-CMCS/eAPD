@@ -231,6 +231,11 @@
           made before selecting the strategy for implementation. 
           Remember to update the SMHP as necessary with any substantive
           changes to the approach for implementing EHR incentives.
+    costs:
+      title: Cost Categories
+      subtitles:
+        personnel: Personnel
+        nonPersonnel: Non-Personnel
     goals: 
       title: Performance Measures and Benchmarks
       subheader: >-

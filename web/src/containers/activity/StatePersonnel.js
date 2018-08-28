@@ -16,7 +16,7 @@ import {
 } from '../../components/Inputs';
 import Label from '../../components/Label';
 import NoDataMsg from '../../components/NoDataMsg';
-import { Subsection } from '../../components/Section';
+import { SubsectionChunk } from '../../components/Section';
 import { t } from '../../i18n';
 import { arrToObj } from '../../util';
 import { isNumeric, formatMoney } from '../../util/formats';
@@ -228,7 +228,7 @@ class StatePersonnel extends Component {
     const { showForm } = this.state;
 
     return (
-      <Subsection resource="activities.statePersonnel" nested>
+      <SubsectionChunk resource="activities.statePersonnel">
         {personnel.length === 0 ? (
           <NoDataMsg>{t('activities.statePersonnel.noDataNotice')}</NoDataMsg>
         ) : (
@@ -260,7 +260,7 @@ class StatePersonnel extends Component {
         <Btn onClick={this.handleAdd}>
           {t('activities.statePersonnel.addButtonText')}
         </Btn>
-      </Subsection>
+      </SubsectionChunk>
     );
   }
 }

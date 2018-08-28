@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 
 import ContractorResources from './ContractorResources';
 import CostAllocate from './CostAllocate';
+import Costs from './Costs';
 import Description from './Description';
-import Expenses from './Expenses';
 import Goals from './Goals';
 import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
-import StatePersonnel from './StatePersonnel';
 import {
   removeActivity as removeActivityAction,
   toggleActivitySection
@@ -29,9 +28,8 @@ const components = [
   Description,
   Goals,
   Schedule,
-  StatePersonnel,
+  Costs,
   ContractorResources,
-  Expenses,
   CostAllocate,
   StandardsAndConditions
 ];
