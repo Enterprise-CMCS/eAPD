@@ -66,7 +66,7 @@ export const toAPI = activityState => {
       keyPersonnel: s.isKeyPersonnel,
       years: Object.keys(s.years).map(year => ({
         cost: +s.years[year].amt,
-        fte: +s.years[year].perc / 100,
+        fte: +s.years[year].perc,
         year
       }))
     })),
@@ -187,7 +187,7 @@ export const fromAPI = (activityAPI, years) => {
           ...acc,
           [y.year]: {
             amt: y.cost,
-            perc: y.fte * 100
+            perc: y.fte
           }
         }),
         {}
