@@ -81,16 +81,16 @@ describe('budget reducer', () => {
                 statePersonnel: [
                   {
                     years: {
-                      '1931': { amt: 1000, perc: 100 },
-                      '1932': { amt: 1000, perc: 70 },
-                      '1933': { amt: 1000, perc: 40 }
+                      '1931': { amt: 1000, perc: 1 },
+                      '1932': { amt: 1000, perc: 0.7 },
+                      '1933': { amt: 1000, perc: 0.4 }
                     }
                   },
                   {
                     years: {
-                      '1931': { amt: 1000, perc: 40 },
-                      '1932': { amt: 1000, perc: 50 },
-                      '1933': { amt: 1000, perc: 30 }
+                      '1931': { amt: 1000, perc: 0.4 },
+                      '1932': { amt: 1000, perc: 0.5 },
+                      '1933': { amt: 1000, perc: 0.3 }
                     }
                   }
                 ],
@@ -135,9 +135,9 @@ describe('budget reducer', () => {
                 statePersonnel: [
                   {
                     years: {
-                      '1931': { amt: 1000, perc: 100 },
-                      '1932': { amt: 1000, perc: 100 },
-                      '1933': { amt: 1000, perc: 100 }
+                      '1931': { amt: 1000, perc: 1 },
+                      '1932': { amt: 1000, perc: 1 },
+                      '1933': { amt: 1000, perc: 1 }
                     }
                   }
                 ],
@@ -182,9 +182,9 @@ describe('budget reducer', () => {
                 statePersonnel: [
                   {
                     years: {
-                      '1931': { amt: 1000, perc: 100 },
-                      '1932': { amt: 1000, perc: 100 },
-                      '1933': { amt: 1000, perc: 100 }
+                      '1931': { amt: 1000, perc: 1 },
+                      '1932': { amt: 1000, perc: 1 },
+                      '1933': { amt: 1000, perc: 1 }
                     }
                   }
                 ],
@@ -229,9 +229,9 @@ describe('budget reducer', () => {
                 statePersonnel: [
                   {
                     years: {
-                      '1931': { amt: 1000, perc: 50 },
-                      '1932': { amt: 1000, perc: 100 },
-                      '1933': { amt: 1000, perc: 10 }
+                      '1931': { amt: 1000, perc: 0.5 },
+                      '1932': { amt: 1000, perc: 1 },
+                      '1933': { amt: 1000, perc: 0.1 }
                     }
                   }
                 ],

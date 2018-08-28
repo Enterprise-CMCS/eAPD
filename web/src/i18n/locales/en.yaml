@@ -331,7 +331,7 @@
         keyPersonnel: Key Personnel
         yearCost: "{{year}} Cost"
         costAmt: Salary Amount
-        costPerc: "% FTE"
+        costPerc: Number of FTEs
       removeLabel: Remove personnel
       addButtonText: Add personnel
     expenses: 
