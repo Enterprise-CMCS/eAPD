@@ -21,8 +21,8 @@ class DatePickerWrapper extends Component {
   onDatesChange = ({ startDate, endDate }) => {
     if (this.props.onChange) {
       this.props.onChange({
-        start: startDate && dateToStr(startDate),
-        end: endDate && dateToStr(endDate)
+        start: startDate ? dateToStr(startDate) : '',
+        end: endDate ? dateToStr(endDate) : ''
       });
     }
 
