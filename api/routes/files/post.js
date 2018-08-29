@@ -9,23 +9,24 @@ const {
 } = require('../../db').models;
 const defaultStore = require('../../store');
 
+const upload = multer({ limits: { fileSize: 10 * 2 ** 20 } });
+
 module.exports = (
   app,
   {
     ContractorModel = defaultContractorResourceModel,
     FileModel = defaultFileModel,
     rawDB = defaultRawDB,
-    store = defaultStore
+    store = defaultStore,
+    uploadMiddleware = upload
   } = {}
 ) => {
   logger.silly('setting up POST endpoint');
 
-  const upload = multer({ limits: { fileSize: 10 * 2 ** 20 } });
-
   app.post(
     '/files/contractor/:id',
     can('create-draft'),
-    upload.single('file'),
+    uploadMiddleware.single('file'),
     async (req, res) => {
       try {
         const userApds = await req.user.model.apds();

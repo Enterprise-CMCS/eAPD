@@ -63,7 +63,6 @@ module.exports = (
             const activityLinks = (await rawDB('activity_files')
               .where(where)
               .count('file_id'))[0].count;
-
             logger.silly(
               `${contractorLinks} remaining file/activity links for file ${
                 req.params.fileID
