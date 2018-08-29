@@ -69,18 +69,16 @@
       title: Program Overview
       helpText:
       reminder: >-
-        Provide a high level summary of the state program including history,
-        and future vision. Write a high level summary of history and future
+        Provide a brief, high level summary of the state program including history,
+        and future vision. Include history and summary of future
         vision of the state program. Indicate which federal fiscal years this
-        APD covers. This initial overview is intended to be brief, expanded
-        details can be included in the activity details section.
+        APD covers.
       yearsCovered: Choose the federal fiscal year(s) this APD covers.
       labels: 
         desc: Program Introduction
         reminder: >-
-          Provide a brief, high level summary of the state's program, history,
-          and future vision. Specific activities for the program will be
-          explained in the program activities section of this update.
+          Provide a brief, high level summary of the state program, history,
+          and future vision.
     hit: 
       title: HIT Overview
       helpText:
@@ -92,8 +90,7 @@
       helpText:
       reminder: >-
         Summarize planned HIE funded activities within this APD. 
-        This section should include a brief description for each
-        item below (If there are no HIE activities, skip this
+        (If there are no HIE activities, skip this
         section.):
 
 
@@ -122,7 +119,6 @@
     helpText:
     reminder: >-
       Include a description of the results of previously approved activities.
-      This information is similar to the content from the IAPD template
       section: results of previous activities.
     outline: 
       title: Prior Activities Outline
@@ -176,10 +172,9 @@
       title: Activity List
       helpText:
       reminder: >-
-        The first activity is Program 
-        Administration. This includes information that pertains to implementing
-        the EHR Incentive program, as well as state and contractor
-        costs associated with operating the EHR incentive program, and SLR
+        Program administration pertains to implementing
+        the EHR Incentive program, state and contractor
+        costs associated with operating EHR incentive program, and SLR
         enhancements/upgrades. Examples of individual activities include:
         auditing, outreach, environmental scans, HIE registry development,
         CQM database development, data and analytics, HIE onboarding, etc. 
@@ -200,7 +195,7 @@
       title: Activity Overview
       helpText:
       reminder: >-
-        Activity overview is a brief summary of needs. Summarize activity needs
+        Briefly summarize activity needs
         for how requested funding will be used (e.g. administrative, outreach,
         auditing, Public Health Registry Development, etc)
       summary: 
@@ -212,25 +207,17 @@
           subheader:
           helpText:
           reminder: >-
-            Activity details includes a description of how activity is linked
-            to meaningful use; value proposition to providers; and sustainability
+           Detail linkage to meaningful use, including 
+           value proposition to providers, and a sustainability
             plan describing how the activity will be sustained after HIE DDI
-            funding is exhausted.  Diagrams and/or descriptions of other HIE
-            linkages can be included if they provide more context for how the
-            state will complete the proposed activity.
+            funding is exhausted. Diagrams and/or descriptions of other HIE
+            linkages can be included, if relevant.
       alternatives: 
         subheader: >-
           Statement of alternative considerations and supporting justification
         helpText:
         reminder: >-
-          If no substantive changes have been made, include
-          a statement referring to the statement of alternative considerations
-          contained in previous versions of the IAPD update or in the SMHP.
-          If substantive changes have been made (or this is a new activity),
-          include a statement describing what alternative considerations were
-          made before selecting the strategy for implementation. 
-          Remember to update the SMHP as necessary with any substantive
-          changes to the approach for implementing EHR incentives.
+          If substantive changes have been made, include statement describing alternative considerations made before selecting implementation strategy. If not, including statement of alternative considerations from previous versions of IAPD or SMHP.
     costs:
       title: In-House Cost Categories
       subtitles:
@@ -249,8 +236,8 @@
       objective: 
         title: Goal roadmap
         helpText: >-
-         Include a brief description of how the state will measure progress
-         toward each goal identified.
+         Briefly describe how state will measure progress
+         toward each identified goal.
       addGoalButtonText: Add a goal
     schedule: 
       title: Activity Schedule
@@ -258,7 +245,7 @@
         List major milestones the state is working towards as part of
         this activity.
       helpText: >-
-        Detail activity milestones, including activities occurring under
+        Detail milestones, including those activities occurring under
         previously approved APDs.
       noMilestonesNotice: Add milestones for this activity.
       milestoneHeader: Milestone
@@ -273,13 +260,11 @@
     contractorResources: 
       title: Private Contractor Costs
       subheader: >-
-        If there are contract resources, outline contracts by contract or
-        vendor name. This section is similar to the existing IAPD template
-        contracts section.
+        Outline contracts by contract or
+        vendor name. 
       reminder: >-
-        Contracts and projected contracts must be itemized, with estimated
-        costs per contract including FFY costs. If the vendor name is
-        unknown or do not know specific contract (vendor) names, generalize
+        Itemize per contracts with federal fiscal year (FFY) costs. If vendor or contract name is
+        unknown, generalize
         by resource name (e.g. computer resources/TBD)
       noDataNotice: There are no contracts assigned to this activity.
       delete:
@@ -311,18 +296,11 @@
     statePersonnel: 
       title: Personnel
       subheader: >-
-        Outline the personnel resources for this section. This includes
-        anyone funded as a part of this activity. This does not include
-        personnel listed in the contract section.
+        Outline personnel resources as part of the activity. Do not include contract personnel.
       helpText:
       reminder: >-
-        Personnel costs for this section includes combined salary and
-        benefits. Use the checkbox to identify key project personnel.
-        Salary amount includes yearly cost of the individual personnel
-        listed. 
+        Use the checkbox to identify key project personnel including yearly salary and benefits.
         FTE% is the percentage attributable to the activity. 
-        Personnel costs are
-        automatically calculated from the %FTE provided.
       noDataNotice: There are no personnel resources for this activity.
       labels: 
         entryNum: "#"
@@ -338,9 +316,8 @@
       title: Non-Personnel Costs
       helpText:
       reminder: >-
-        Provide a detailed breakout of any non-personnel and non-contracted
-        costs related to this activity. This should include a brief description
-        of these projected costs. “Miscellaneous expenses” from the drop down,
+        Provide breakout & brief description of any non-personnel and non-contracted projected
+        costs related to this activity. “Miscellaneous expenses” from the drop down,
         includes materials and supplies, communications‐related expenses,
         printing costs and facilities expenses.
       noDataNotice: Additional costs for this activity are missing.
@@ -391,9 +368,8 @@
         title: Other funding description
         helpText:
         reminder: >-
-          Account for grant funding used to support this activity. (Review
-          Letter 10‐016 for examples of grants for inclusion.) High level
-          descriptions are appropriate for grant activities.
+          Write a high level description to describe funding used to support this activity. (Review
+          Letter 10‐016 for examples of grants for inclusion.)
           Ensure new grants are included, and remove expired grants.
       ffp:
         title: Federal Financial Partipation (FFP) and Cost Allocation
@@ -409,7 +385,7 @@
       modularity: 
         header: Modularity
         subheader: >-
-          This condition requires the use of a modular, flexible approach
+          Modularity requires the use of a modular, flexible approach
           to systems development, including the use of open interfaces
           and exposed application programming interfaces (API); the
           separation of business rules from core programming; and the
@@ -743,10 +719,8 @@
   executiveSummary: 
     title: Executive Summary
     helpText: >-
-      See the executive summary generated based upon the activity details
-      provided above.
-
-      Program Budget tables are automatically included for review.
+      The figures are enerated based on the activity details
+      provided. Program budget tables are automatically included for review.
     total: Total
     summary: 
       title: Executive Summary
