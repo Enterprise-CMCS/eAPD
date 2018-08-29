@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
@@ -16,7 +16,7 @@ import { t } from '../i18n';
 import { STATES } from '../util';
 
 const AlreadySubmitted = ({ dashboard, state, year }) => (
-  <div className="pl3 relative">
+  <Fragment>
     <Icon icon={faCheckCircle} color="green" className="absolute left-0" />
     <p className="bold">
       {t('certifyAndSubmit.certify.submitted.thanks.header')}
@@ -41,7 +41,7 @@ const AlreadySubmitted = ({ dashboard, state, year }) => (
     <Btn onClick={() => dashboard()}>
       {t('certifyAndSubmit.certify.submitted.buttonText')}
     </Btn>
-  </div>
+  </Fragment>
 );
 AlreadySubmitted.propTypes = {
   dashboard: PropTypes.func.isRequired,
@@ -63,7 +63,7 @@ class Submit extends Component {
     const { submitter } = this.state;
 
     return (
-      <div className="pl3 relative">
+      <Fragment>
         <Icon
           icon={faExclamationTriangle}
           color="orange"
@@ -84,7 +84,7 @@ class Submit extends Component {
         <Btn onClick={() => submitAPD()} disabled={submitter.length === 0}>
           {t('certifyAndSubmit.certify.buttonText')}
         </Btn>
-      </div>
+      </Fragment>
     );
   }
 }
