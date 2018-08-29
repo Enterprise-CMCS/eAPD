@@ -19,30 +19,28 @@ import {
 describe('the ContractorResources component', () => {
   const sandbox = sinon.createSandbox();
   const props = {
-    activity: {
-      key: 'activity key',
-      contractorResources: [
-        {
-          id: 'contractor id',
-          key: 'contractor key',
-          name: 'contractor name',
-          desc: 'contractor description',
-          start: 'start date',
-          end: 'end date',
-          years: {
-            '1066': 100,
-            '1067': 200
-          },
-          hourly: {
-            useHourly: false,
-            data: {
-              '1066': { hours: '', rate: '' },
-              '1067': { hours: '', rate: '' }
-            }
+    activityKey: 'activity key',
+    contractors: [
+      {
+        id: 'contractor id',
+        key: 'contractor key',
+        name: 'contractor name',
+        desc: 'contractor description',
+        start: 'start date',
+        end: 'end date',
+        years: {
+          '1066': 100,
+          '1067': 200
+        },
+        hourly: {
+          useHourly: false,
+          data: {
+            '1066': { hours: '', rate: '' },
+            '1067': { hours: '', rate: '' }
           }
         }
-      ]
-    },
+      }
+    ],
     years: ['1066', '1067'],
     addContractor: sinon.stub(),
     deleteFile: sinon.stub(),
@@ -70,14 +68,22 @@ describe('the ContractorResources component', () => {
 
   test('removes a contractor', () => {
     const component = shallow(<ContractorResources {...props} />);
-    component.find('Btn[children="Remove resource"]').simulate('click');
+
+    component
+      .find('ContractorForm')
+      .dive()
+      .find('Btn[children="✗"]')
+      .simulate('click');
+
     expect(
       props.removeContractor.calledWith('activity key', 'contractor key')
     ).toBeTruthy();
   });
 
   test('handles changing contractor info', () => {
-    const component = shallow(<ContractorResources {...props} />);
+    const component = shallow(<ContractorResources {...props} />)
+      .find('ContractorForm')
+      .dive();
 
     const nameInput = component
       .find('InputHolder')
@@ -101,7 +107,9 @@ describe('the ContractorResources component', () => {
   });
 
   test('handles changing contractor expense info', () => {
-    const component = shallow(<ContractorResources {...props} />);
+    const component = shallow(<ContractorResources {...props} />)
+      .find('ContractorForm')
+      .dive();
     const yearInput = component
       .find('InputHolder')
       .filterWhere(n => n.props().value === 100);
@@ -122,7 +130,7 @@ describe('the ContractorResources component', () => {
         {
           activities: {
             byKey: {
-              key: 'this is the activity'
+              key: { contractorResources: 'contractorz' }
             }
           },
           apd: {
@@ -134,7 +142,8 @@ describe('the ContractorResources component', () => {
         { aKey: 'key' }
       )
     ).toEqual({
-      activity: 'this is the activity',
+      activityKey: 'key',
+      contractors: 'contractorz',
       years: 'seven'
     });
   });

@@ -99,13 +99,13 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <SectionTitle>
-          Needs and Objectives
+          Performance Measures and Benchmarks
         </SectionTitle>,
         <div>
           List the goals and objectives the state plans to accomplish as part of this activity.
         </div>,
         <SectionDesc>
-          Include a brief description of how each goal relates to the vision identified in the program summary section.
+          Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.
         </SectionDesc>,
         "test child",
       ],
@@ -119,10 +119,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "Needs and Objectives",
+          "children": "Performance Measures and Benchmarks",
         },
         "ref": null,
-        "rendered": "Needs and Objectives",
+        "rendered": "Performance Measures and Benchmarks",
         "type": [Function],
       },
       Object {
@@ -141,10 +141,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "Include a brief description of how each goal relates to the vision identified in the program summary section.",
+          "children": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
         },
         "ref": null,
-        "rendered": "Include a brief description of how each goal relates to the vision identified in the program summary section.",
+        "rendered": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
         "type": [Function],
       },
       "test child",
@@ -159,13 +159,13 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <SectionTitle>
-            Needs and Objectives
+            Performance Measures and Benchmarks
           </SectionTitle>,
           <div>
             List the goals and objectives the state plans to accomplish as part of this activity.
           </div>,
           <SectionDesc>
-            Include a brief description of how each goal relates to the vision identified in the program summary section.
+            Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.
           </SectionDesc>,
           "test child",
         ],
@@ -179,10 +179,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "Needs and Objectives",
+            "children": "Performance Measures and Benchmarks",
           },
           "ref": null,
-          "rendered": "Needs and Objectives",
+          "rendered": "Performance Measures and Benchmarks",
           "type": [Function],
         },
         Object {
@@ -201,10 +201,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "Include a brief description of how each goal relates to the vision identified in the program summary section.",
+            "children": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
           },
           "ref": null,
-          "rendered": "Include a brief description of how each goal relates to the vision identified in the program summary section.",
+          "rendered": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
           "type": [Function],
         },
         "test child",
