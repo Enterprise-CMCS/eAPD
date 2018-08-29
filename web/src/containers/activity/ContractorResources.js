@@ -321,13 +321,6 @@ class ContractorResources extends Component {
     const { activityKey, deleteFile } = this.props;
 
     deleteFile(activityKey, cIdx, fIdx);
-
-    // const { activityKey, contractors, updateActivity } = this.props;
-    // const { files } = contractors[cIdx];
-    // const updatedFiles = files.filter((_, i) => i !== fIdx);
-
-    // const updates = { [cIdx]: { files: updatedFiles } };
-    // updateActivity(activityKey, { contractorResources: updates });
   };
 
   handleFileUpload = index => files => {
@@ -336,20 +329,6 @@ class ContractorResources extends Component {
     const { activityKey, uploadFile } = this.props;
     const { docType } = this.state;
     uploadFile(activityKey, index, docType, files[0]);
-
-    // const { activityKey, contractors, updateActivity } = this.props;
-    // const { docType } = this.state;
-
-    // // only do one file at a time
-    // const { name, preview, size, type } = files[0];
-    // const newFile = { name, preview, size, type, category: docType };
-    // const existingFiles = contractors[index].files || [];
-
-    // const updates = { [index]: { files: [...existingFiles, newFile] } };
-    // updateActivity(activityKey, { contractorResources: updates });
-
-    // // reset document category if necessary
-    // if (docType !== DOC_TYPES[0]) this.setState({ docType: DOC_TYPES[0] });
   };
 
   handleHourlyChange = (index, year, field) => e => {
