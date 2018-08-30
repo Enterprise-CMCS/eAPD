@@ -771,8 +771,38 @@
     helpText: Complete your APD submission below.
     certify:
       title: Certification
-      helpText: >-
+      draft:
+        header: >-
+          Before you submit your APD, double-check that you have
+          entered everything correctly because once you submit,
+          your APD document will be locked from further edits
+          until reviewed by a CMS analyst.
+        helpText: >-
+          To submit your APD for reviews, sign your name in the
+          box below then select the Submit APD button
+        buttonText: Submit APD
+      submitted:
+        buttonText: My Dashboard
+        thanks:
+          header: Submitted!
+          helpText: >-
+            Thank you for your {{state}} {{year}} HITECH APD
+            submission.
+        next:
+          header: What to expect next
+          helpText: >-
+            Your CMS analyst has been notified of your submission
+            and will begin the review process.  If they have any
+            questions for you, you will receive a notification
+            through the app with a link to respond.
+
+
+            If you would like to check the status of your request
+            or start a new document, please go to your state's
+            dashboard.
+      helpTextx: >-
         Upon submission, this APD will be locked from further
         edits until reviewed by a CMS analyst. If complete, select the
         button below.
+      
       buttonText: Submit APD

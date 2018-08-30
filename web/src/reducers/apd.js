@@ -10,6 +10,7 @@ import {
   REMOVE_APD_POC,
   SELECT_APD,
   SET_SELECT_APD_ON_LOAD,
+  SUBMIT_APD_SUCCESS,
   UPDATE_APD
 } from '../actions/apd';
 import { INCENTIVE_ENTRIES, arrToObj, defaultAPDYearOptions } from '../util';
@@ -90,6 +91,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, data: { ...action.apd } };
     case SET_SELECT_APD_ON_LOAD:
       return { ...state, selectAPDOnLoad: true };
+    case SUBMIT_APD_SUCCESS:
+      return u({ data: { status: 'submitted' } }, state);
     case UPDATE_APD: {
       if (!action.updates.years) {
         return u({ data: { ...action.updates } }, state);
