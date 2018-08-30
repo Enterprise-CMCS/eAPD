@@ -1,5 +1,7 @@
 import { applyToNumbers, generateKey, replaceNulls } from '../index';
 
+const getFileURL = id => `${process.env.API_URL}/files/${id}`;
+
 /**
  * Serializes an APD object from redux state shape into
  * API format
@@ -119,6 +121,10 @@ export const fromAPI = (activityAPI, years) => {
       desc: c.description,
       start: c.start,
       end: c.end,
+      files: c.files.map(f => ({
+        ...f,
+        url: getFileURL(f.id)
+      })),
       years: c.years.reduce(
         (acc, y) => ({
           ...acc,

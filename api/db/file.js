@@ -1,3 +1,5 @@
+const o = v => (typeof v === 'object' ? v : JSON.parse(v));
+
 module.exports = () => ({
   file: {
     tableName: 'files',
@@ -22,10 +24,9 @@ module.exports = () => ({
 
     toJSON() {
       return {
+        ...o(this.get('metadata')),
         id: this.get('id'),
-        key: this.get('key'),
-        size: this.get('size'),
-        metadata: this.get('metadata')
+        size: this.get('size')
       };
     }
   }

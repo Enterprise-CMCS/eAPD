@@ -36,9 +36,11 @@ ShallowWrapper {
         },
       ]
     }
+    deleteFile={[Function]}
     removeContractor={[Function]}
     toggleContractorHourly={[Function]}
     updateActivity={[Function]}
+    uploadFile={[Function]}
     years={
       Array [
         "1066",

@@ -77,6 +77,7 @@ describe('APD activity serializer', () => {
             description: 'desc 1',
             start: 'start 1',
             end: 'end 1',
+            files: [{ id: 'contractor 1 file' }],
             years: [
               { year: '2018', cost: '1000' },
               { year: '2019', cost: '2000' }
@@ -93,6 +94,7 @@ describe('APD activity serializer', () => {
             description: 'desc 2',
             start: 'start 2',
             end: 'end 2',
+            files: [{ id: 'contractor 2 file' }],
             years: [
               { year: '2018', cost: '3000' },
               { year: '2019', cost: '4000' }
@@ -258,6 +260,12 @@ describe('APD activity serializer', () => {
               desc: 'desc 1',
               start: 'start 1',
               end: 'end 1',
+              files: [
+                {
+                  id: 'contractor 1 file',
+                  url: expect.stringMatching(/.*\/files\/contractor 1 file$/)
+                }
+              ],
               years: { 2018: 1000, 2019: 2000 },
               hourly: {
                 useHourly: false,
@@ -274,6 +282,13 @@ describe('APD activity serializer', () => {
               desc: 'desc 2',
               start: 'start 2',
               end: 'end 2',
+              files: [
+                {
+                  id: 'contractor 2 file',
+                  url: expect.stringMatching(/.*\/files\/contractor 2 file$/)
+                }
+              ],
+
               years: { 2018: 3000, 2019: 4000 },
               hourly: {
                 useHourly: true,

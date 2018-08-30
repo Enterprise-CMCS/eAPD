@@ -27,7 +27,7 @@ module.exports = (
         content: { ...tables, ...apd.toJSON() }
       });
 
-      apd.set({ status: 'in review' });
+      apd.set({ status: 'submitted' });
       await apd.save();
 
       await version.save();
