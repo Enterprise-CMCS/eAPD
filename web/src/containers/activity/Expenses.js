@@ -173,6 +173,7 @@ class Expenses extends Component {
                   handleDelete={this.handleDelete(expense.key)}
                   number={i + 1}
                   title={expense.category}
+                  titleColumns={5}
                   toggleForm={this.toggleForm(expense.key)}
                   content={years.map(year => (
                     <div key={year} className="col-2 truncate">

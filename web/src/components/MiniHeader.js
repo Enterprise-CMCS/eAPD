@@ -1,15 +1,22 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const MiniHeader = ({ content, handleDelete, number, title, toggleForm }) => (
+const MiniHeader = ({
+  content,
+  handleDelete,
+  number,
+  title,
+  titleColumns,
+  toggleForm
+}) => (
   <div className="mb1 h5 flex justify-between">
     <button
       type="button"
       onClick={toggleForm}
-      className="btn btn-no-focus p1 col-12 left-align bg-blue-light rounded-left"
+      className="btn btn-no-focus p1 flex-auto left-align bg-blue-light rounded-left"
     >
       <div className="flex items-center justify-between">
-        <div className="col-4 truncate">
+        <div className={`col-${titleColumns} truncate`}>
           {number}. <strong>{title}</strong>
         </div>
         {content}
@@ -29,7 +36,11 @@ MiniHeader.propTypes = {
   handleDelete: PropTypes.func.isRequired,
   number: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  titleColumns: PropTypes.number,
   toggleForm: PropTypes.func.isRequired
+};
+MiniHeader.defaultProps = {
+  titleColumns: 4
 };
 
 export default MiniHeader;
