@@ -41,12 +41,11 @@ class Collapsible extends Component {
     if (sticky) btnClass += ` ${nested ? 'sticky-nested' : 'sticky-header'}`;
 
     const bodyClass = deline`
-      p2 sm-p3 ${!isOpen ? 'display-none' : ''}
-      ${sticky ? 'has-sticky-header' : ''}
+      p2 sm-p3 ${!isOpen ? 'd-none' : ''} ${sticky ? 'has-sticky-header' : ''}
     `;
 
     return (
-      <div id={id} className={`mb3 bg-${bgColor} rounded shadow`}>
+      <div id={id} className={`mb3 bg-${bgColor} rounded shadow accordian`}>
         <button
           type="button"
           className={btnClass}

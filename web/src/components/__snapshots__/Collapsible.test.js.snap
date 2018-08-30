@@ -71,11 +71,11 @@ ShallowWrapper {
           default render case
         </button>,
         <div
-          className="p2 sm-p3 display-none has-sticky-header"
+          className="p2 sm-p3 d-none has-sticky-header"
           id="collapsible-default-render-case"
         />,
       ],
-      "className": "mb3 bg-white rounded shadow",
+      "className": "mb3 bg-white rounded shadow accordian",
       "id": null,
     },
     "ref": null,
@@ -213,7 +213,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "p2 sm-p3 display-none has-sticky-header",
+          "className": "p2 sm-p3 d-none has-sticky-header",
           "id": "collapsible-default-render-case",
         },
         "ref": null,
@@ -273,11 +273,11 @@ ShallowWrapper {
             default render case
           </button>,
           <div
-            className="p2 sm-p3 display-none has-sticky-header"
+            className="p2 sm-p3 d-none has-sticky-header"
             id="collapsible-default-render-case"
           />,
         ],
-        "className": "mb3 bg-white rounded shadow",
+        "className": "mb3 bg-white rounded shadow accordian",
         "id": null,
       },
       "ref": null,
@@ -415,7 +415,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "p2 sm-p3 display-none has-sticky-header",
+            "className": "p2 sm-p3 d-none has-sticky-header",
             "id": "collapsible-default-render-case",
           },
           "ref": null,
@@ -507,11 +507,11 @@ ShallowWrapper {
           open render case
         </button>,
         <div
-          className="p2 sm-p3 has-sticky-header"
+          className="p2 sm-p3  has-sticky-header"
           id="collapsible-open-render-case"
         />,
       ],
-      "className": "mb3 bg-white rounded shadow",
+      "className": "mb3 bg-white rounded shadow accordian",
       "id": null,
     },
     "ref": null,
@@ -649,7 +649,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "p2 sm-p3 has-sticky-header",
+          "className": "p2 sm-p3  has-sticky-header",
           "id": "collapsible-open-render-case",
         },
         "ref": null,
@@ -709,11 +709,11 @@ ShallowWrapper {
             open render case
           </button>,
           <div
-            className="p2 sm-p3 has-sticky-header"
+            className="p2 sm-p3  has-sticky-header"
             id="collapsible-open-render-case"
           />,
         ],
-        "className": "mb3 bg-white rounded shadow",
+        "className": "mb3 bg-white rounded shadow accordian",
         "id": null,
       },
       "ref": null,
@@ -851,7 +851,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "p2 sm-p3 has-sticky-header",
+            "className": "p2 sm-p3  has-sticky-header",
             "id": "collapsible-open-render-case",
           },
           "ref": null,
@@ -943,11 +943,11 @@ ShallowWrapper {
           open render case
         </button>,
         <div
-          className="p2 sm-p3 display-none has-sticky-header"
+          className="p2 sm-p3 d-none has-sticky-header"
           id="collapsible-open-render-case"
         />,
       ],
-      "className": "mb3 bg-white rounded shadow",
+      "className": "mb3 bg-white rounded shadow accordian",
       "id": null,
     },
     "ref": null,
@@ -1085,7 +1085,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "p2 sm-p3 display-none has-sticky-header",
+          "className": "p2 sm-p3 d-none has-sticky-header",
           "id": "collapsible-open-render-case",
         },
         "ref": null,
@@ -1145,11 +1145,11 @@ ShallowWrapper {
             open render case
           </button>,
           <div
-            className="p2 sm-p3 display-none has-sticky-header"
+            className="p2 sm-p3 d-none has-sticky-header"
             id="collapsible-open-render-case"
           />,
         ],
-        "className": "mb3 bg-white rounded shadow",
+        "className": "mb3 bg-white rounded shadow accordian",
         "id": null,
       },
       "ref": null,
@@ -1287,7 +1287,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "p2 sm-p3 display-none has-sticky-header",
+            "className": "p2 sm-p3 d-none has-sticky-header",
             "id": "collapsible-open-render-case",
           },
           "ref": null,
@@ -1379,11 +1379,11 @@ ShallowWrapper {
           toggle to open case
         </button>,
         <div
-          className="p2 sm-p3 has-sticky-header"
+          className="p2 sm-p3  has-sticky-header"
           id="collapsible-toggle-to-open-case"
         />,
       ],
-      "className": "mb3 bg-white rounded shadow",
+      "className": "mb3 bg-white rounded shadow accordian",
       "id": null,
     },
     "ref": null,
@@ -1521,7 +1521,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "p2 sm-p3 has-sticky-header",
+          "className": "p2 sm-p3  has-sticky-header",
           "id": "collapsible-toggle-to-open-case",
         },
         "ref": null,
@@ -1581,11 +1581,11 @@ ShallowWrapper {
             toggle to open case
           </button>,
           <div
-            className="p2 sm-p3 has-sticky-header"
+            className="p2 sm-p3  has-sticky-header"
             id="collapsible-toggle-to-open-case"
           />,
         ],
-        "className": "mb3 bg-white rounded shadow",
+        "className": "mb3 bg-white rounded shadow accordian",
         "id": null,
       },
       "ref": null,
@@ -1723,7 +1723,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "p2 sm-p3 has-sticky-header",
+            "className": "p2 sm-p3  has-sticky-header",
             "id": "collapsible-toggle-to-open-case",
           },
           "ref": null,
@@ -1815,11 +1815,11 @@ ShallowWrapper {
           toggle to closed case
         </button>,
         <div
-          className="p2 sm-p3 display-none has-sticky-header"
+          className="p2 sm-p3 d-none has-sticky-header"
           id="collapsible-toggle-to-closed-case"
         />,
       ],
-      "className": "mb3 bg-white rounded shadow",
+      "className": "mb3 bg-white rounded shadow accordian",
       "id": null,
     },
     "ref": null,
@@ -1957,7 +1957,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "p2 sm-p3 display-none has-sticky-header",
+          "className": "p2 sm-p3 d-none has-sticky-header",
           "id": "collapsible-toggle-to-closed-case",
         },
         "ref": null,
@@ -2017,11 +2017,11 @@ ShallowWrapper {
             toggle to closed case
           </button>,
           <div
-            className="p2 sm-p3 display-none has-sticky-header"
+            className="p2 sm-p3 d-none has-sticky-header"
             id="collapsible-toggle-to-closed-case"
           />,
         ],
-        "className": "mb3 bg-white rounded shadow",
+        "className": "mb3 bg-white rounded shadow accordian",
         "id": null,
       },
       "ref": null,
@@ -2159,7 +2159,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "p2 sm-p3 display-none has-sticky-header",
+            "className": "p2 sm-p3 d-none has-sticky-header",
             "id": "collapsible-toggle-to-closed-case",
           },
           "ref": null,
