@@ -97,6 +97,7 @@ ShallowWrapper {
               handleDelete={[Function]}
               number={1}
               title="contractor name"
+              titleColumns={4}
               toggleForm={[Function]}
             />
             <ContractorForm
@@ -202,6 +203,7 @@ ShallowWrapper {
                 handleDelete={[Function]}
                 number={1}
                 title="contractor name"
+                titleColumns={4}
                 toggleForm={[Function]}
               />
               <ContractorForm
@@ -294,6 +296,7 @@ ShallowWrapper {
                   handleDelete={[Function]}
                   number={1}
                   title="contractor name"
+                  titleColumns={4}
                   toggleForm={[Function]}
                 />,
                 <ContractorForm
@@ -380,6 +383,7 @@ ShallowWrapper {
                   "handleDelete": [Function],
                   "number": 1,
                   "title": "contractor name",
+                  "titleColumns": 4,
                   "toggleForm": [Function],
                 },
                 "ref": null,
@@ -503,6 +507,7 @@ ShallowWrapper {
                 handleDelete={[Function]}
                 number={1}
                 title="contractor name"
+                titleColumns={4}
                 toggleForm={[Function]}
               />
               <ContractorForm
@@ -608,6 +613,7 @@ ShallowWrapper {
                   handleDelete={[Function]}
                   number={1}
                   title="contractor name"
+                  titleColumns={4}
                   toggleForm={[Function]}
                 />
                 <ContractorForm
@@ -700,6 +706,7 @@ ShallowWrapper {
                     handleDelete={[Function]}
                     number={1}
                     title="contractor name"
+                    titleColumns={4}
                     toggleForm={[Function]}
                   />,
                   <ContractorForm
@@ -786,6 +793,7 @@ ShallowWrapper {
                     "handleDelete": [Function],
                     "number": 1,
                     "title": "contractor name",
+                    "titleColumns": 4,
                     "toggleForm": [Function],
                   },
                   "ref": null,

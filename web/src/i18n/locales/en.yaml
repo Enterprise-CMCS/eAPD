@@ -231,6 +231,7 @@
       helpText: >-
         Briefly describe how each goal relates to the vision identified in the
         program summary. Each goal should have a matching activity.
+      noDataNotice: There are no goals set for this activity.
       goal: 
         title: "Goal #{{number}}"
       objective: 
