@@ -114,8 +114,8 @@ tap.test('apds version POST endpoint', async tests => {
       'creates a version'
     );
     test.ok(
-      apd.set.calledWith({ status: 'in review' }),
-      'sets APD status to "in review"'
+      apd.set.calledWith({ status: 'submitted' }),
+      'sets APD status to "submitted"'
     );
     test.ok(apd.save.calledAfter(apd.set), 'APD is saved after status is set');
     test.ok(version.save.calledOnce, 'version is saved');
