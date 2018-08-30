@@ -65,43 +65,39 @@ ShallowWrapper {
           className="mt3 pt3 border-top border-grey"
         >
           <div>
-            <ContractorEntry
-              contractor={
-                Object {
-                  "desc": "contractor description",
-                  "end": "end date",
-                  "hourly": Object {
-                    "data": Object {
-                      "1066": Object {
-                        "hours": "",
-                        "rate": "",
-                      },
-                      "1067": Object {
-                        "hours": "",
-                        "rate": "",
-                      },
-                    },
-                    "useHourly": false,
-                  },
-                  "id": "contractor id",
-                  "key": "contractor key",
-                  "name": "contractor name",
-                  "start": "start date",
-                  "years": Object {
-                    "1066": 100,
-                    "1067": 200,
-                  },
-                }
-              }
-              handleDelete={[Function]}
-              idx={0}
-              toggleForm={[Function]}
-              years={
+            <MiniHeader
+              content={
                 Array [
-                  "1066",
-                  "1067",
+                  <div
+                    className="col-3 truncate"
+                  >
+                    1066
+                    :
+                     
+                    <span
+                      className="bold mono"
+                    >
+                      $100
+                    </span>
+                  </div>,
+                  <div
+                    className="col-3 truncate"
+                  >
+                    1067
+                    :
+                     
+                    <span
+                      className="bold mono"
+                    >
+                      $200
+                    </span>
+                  </div>,
                 ]
               }
+              handleDelete={[Function]}
+              number={1}
+              title="contractor name"
+              toggleForm={[Function]}
             />
             <ContractorForm
               contractor={
@@ -174,43 +170,39 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <div>
-              <ContractorEntry
-                contractor={
-                  Object {
-                    "desc": "contractor description",
-                    "end": "end date",
-                    "hourly": Object {
-                      "data": Object {
-                        "1066": Object {
-                          "hours": "",
-                          "rate": "",
-                        },
-                        "1067": Object {
-                          "hours": "",
-                          "rate": "",
-                        },
-                      },
-                      "useHourly": false,
-                    },
-                    "id": "contractor id",
-                    "key": "contractor key",
-                    "name": "contractor name",
-                    "start": "start date",
-                    "years": Object {
-                      "1066": 100,
-                      "1067": 200,
-                    },
-                  }
-                }
-                handleDelete={[Function]}
-                idx={0}
-                toggleForm={[Function]}
-                years={
+              <MiniHeader
+                content={
                   Array [
-                    "1066",
-                    "1067",
+                    <div
+                      className="col-3 truncate"
+                    >
+                      1066
+                      :
+                       
+                      <span
+                        className="bold mono"
+                      >
+                        $100
+                      </span>
+                    </div>,
+                    <div
+                      className="col-3 truncate"
+                    >
+                      1067
+                      :
+                       
+                      <span
+                        className="bold mono"
+                      >
+                        $200
+                      </span>
+                    </div>,
                   ]
                 }
+                handleDelete={[Function]}
+                number={1}
+                title="contractor name"
+                toggleForm={[Function]}
               />
               <ContractorForm
                 contractor={
@@ -270,43 +262,39 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <ContractorEntry
-                  contractor={
-                    Object {
-                      "desc": "contractor description",
-                      "end": "end date",
-                      "hourly": Object {
-                        "data": Object {
-                          "1066": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                          "1067": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                        },
-                        "useHourly": false,
-                      },
-                      "id": "contractor id",
-                      "key": "contractor key",
-                      "name": "contractor name",
-                      "start": "start date",
-                      "years": Object {
-                        "1066": 100,
-                        "1067": 200,
-                      },
-                    }
-                  }
-                  handleDelete={[Function]}
-                  idx={0}
-                  toggleForm={[Function]}
-                  years={
+                <MiniHeader
+                  content={
                     Array [
-                      "1066",
-                      "1067",
+                      <div
+                        className="col-3 truncate"
+                      >
+                        1066
+                        :
+                         
+                        <span
+                          className="bold mono"
+                        >
+                          $100
+                        </span>
+                      </div>,
+                      <div
+                        className="col-3 truncate"
+                      >
+                        1067
+                        :
+                         
+                        <span
+                          className="bold mono"
+                        >
+                          $200
+                        </span>
+                      </div>,
                     ]
                   }
+                  handleDelete={[Function]}
+                  number={1}
+                  title="contractor name"
+                  toggleForm={[Function]}
                 />,
                 <ContractorForm
                   contractor={
@@ -363,38 +351,36 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "function",
                 "props": Object {
-                  "contractor": Object {
-                    "desc": "contractor description",
-                    "end": "end date",
-                    "hourly": Object {
-                      "data": Object {
-                        "1066": Object {
-                          "hours": "",
-                          "rate": "",
-                        },
-                        "1067": Object {
-                          "hours": "",
-                          "rate": "",
-                        },
-                      },
-                      "useHourly": false,
-                    },
-                    "id": "contractor id",
-                    "key": "contractor key",
-                    "name": "contractor name",
-                    "start": "start date",
-                    "years": Object {
-                      "1066": 100,
-                      "1067": 200,
-                    },
-                  },
-                  "handleDelete": [Function],
-                  "idx": 0,
-                  "toggleForm": [Function],
-                  "years": Array [
-                    "1066",
-                    "1067",
+                  "content": Array [
+                    <div
+                      className="col-3 truncate"
+                    >
+                      1066
+                      :
+                       
+                      <span
+                        className="bold mono"
+                      >
+                        $100
+                      </span>
+                    </div>,
+                    <div
+                      className="col-3 truncate"
+                    >
+                      1067
+                      :
+                       
+                      <span
+                        className="bold mono"
+                      >
+                        $200
+                      </span>
+                    </div>,
                   ],
+                  "handleDelete": [Function],
+                  "number": 1,
+                  "title": "contractor name",
+                  "toggleForm": [Function],
                 },
                 "ref": null,
                 "rendered": null,
@@ -485,43 +471,39 @@ ShallowWrapper {
             className="mt3 pt3 border-top border-grey"
           >
             <div>
-              <ContractorEntry
-                contractor={
-                  Object {
-                    "desc": "contractor description",
-                    "end": "end date",
-                    "hourly": Object {
-                      "data": Object {
-                        "1066": Object {
-                          "hours": "",
-                          "rate": "",
-                        },
-                        "1067": Object {
-                          "hours": "",
-                          "rate": "",
-                        },
-                      },
-                      "useHourly": false,
-                    },
-                    "id": "contractor id",
-                    "key": "contractor key",
-                    "name": "contractor name",
-                    "start": "start date",
-                    "years": Object {
-                      "1066": 100,
-                      "1067": 200,
-                    },
-                  }
-                }
-                handleDelete={[Function]}
-                idx={0}
-                toggleForm={[Function]}
-                years={
+              <MiniHeader
+                content={
                   Array [
-                    "1066",
-                    "1067",
+                    <div
+                      className="col-3 truncate"
+                    >
+                      1066
+                      :
+                       
+                      <span
+                        className="bold mono"
+                      >
+                        $100
+                      </span>
+                    </div>,
+                    <div
+                      className="col-3 truncate"
+                    >
+                      1067
+                      :
+                       
+                      <span
+                        className="bold mono"
+                      >
+                        $200
+                      </span>
+                    </div>,
                   ]
                 }
+                handleDelete={[Function]}
+                number={1}
+                title="contractor name"
+                toggleForm={[Function]}
               />
               <ContractorForm
                 contractor={
@@ -594,43 +576,39 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <div>
-                <ContractorEntry
-                  contractor={
-                    Object {
-                      "desc": "contractor description",
-                      "end": "end date",
-                      "hourly": Object {
-                        "data": Object {
-                          "1066": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                          "1067": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                        },
-                        "useHourly": false,
-                      },
-                      "id": "contractor id",
-                      "key": "contractor key",
-                      "name": "contractor name",
-                      "start": "start date",
-                      "years": Object {
-                        "1066": 100,
-                        "1067": 200,
-                      },
-                    }
-                  }
-                  handleDelete={[Function]}
-                  idx={0}
-                  toggleForm={[Function]}
-                  years={
+                <MiniHeader
+                  content={
                     Array [
-                      "1066",
-                      "1067",
+                      <div
+                        className="col-3 truncate"
+                      >
+                        1066
+                        :
+                         
+                        <span
+                          className="bold mono"
+                        >
+                          $100
+                        </span>
+                      </div>,
+                      <div
+                        className="col-3 truncate"
+                      >
+                        1067
+                        :
+                         
+                        <span
+                          className="bold mono"
+                        >
+                          $200
+                        </span>
+                      </div>,
                     ]
                   }
+                  handleDelete={[Function]}
+                  number={1}
+                  title="contractor name"
+                  toggleForm={[Function]}
                 />
                 <ContractorForm
                   contractor={
@@ -690,43 +668,39 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  <ContractorEntry
-                    contractor={
-                      Object {
-                        "desc": "contractor description",
-                        "end": "end date",
-                        "hourly": Object {
-                          "data": Object {
-                            "1066": Object {
-                              "hours": "",
-                              "rate": "",
-                            },
-                            "1067": Object {
-                              "hours": "",
-                              "rate": "",
-                            },
-                          },
-                          "useHourly": false,
-                        },
-                        "id": "contractor id",
-                        "key": "contractor key",
-                        "name": "contractor name",
-                        "start": "start date",
-                        "years": Object {
-                          "1066": 100,
-                          "1067": 200,
-                        },
-                      }
-                    }
-                    handleDelete={[Function]}
-                    idx={0}
-                    toggleForm={[Function]}
-                    years={
+                  <MiniHeader
+                    content={
                       Array [
-                        "1066",
-                        "1067",
+                        <div
+                          className="col-3 truncate"
+                        >
+                          1066
+                          :
+                           
+                          <span
+                            className="bold mono"
+                          >
+                            $100
+                          </span>
+                        </div>,
+                        <div
+                          className="col-3 truncate"
+                        >
+                          1067
+                          :
+                           
+                          <span
+                            className="bold mono"
+                          >
+                            $200
+                          </span>
+                        </div>,
                       ]
                     }
+                    handleDelete={[Function]}
+                    number={1}
+                    title="contractor name"
+                    toggleForm={[Function]}
                   />,
                   <ContractorForm
                     contractor={
@@ -783,38 +757,36 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "function",
                   "props": Object {
-                    "contractor": Object {
-                      "desc": "contractor description",
-                      "end": "end date",
-                      "hourly": Object {
-                        "data": Object {
-                          "1066": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                          "1067": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                        },
-                        "useHourly": false,
-                      },
-                      "id": "contractor id",
-                      "key": "contractor key",
-                      "name": "contractor name",
-                      "start": "start date",
-                      "years": Object {
-                        "1066": 100,
-                        "1067": 200,
-                      },
-                    },
-                    "handleDelete": [Function],
-                    "idx": 0,
-                    "toggleForm": [Function],
-                    "years": Array [
-                      "1066",
-                      "1067",
+                    "content": Array [
+                      <div
+                        className="col-3 truncate"
+                      >
+                        1066
+                        :
+                         
+                        <span
+                          className="bold mono"
+                        >
+                          $100
+                        </span>
+                      </div>,
+                      <div
+                        className="col-3 truncate"
+                      >
+                        1067
+                        :
+                         
+                        <span
+                          className="bold mono"
+                        >
+                          $200
+                        </span>
+                      </div>,
                     ],
+                    "handleDelete": [Function],
+                    "number": 1,
+                    "title": "contractor name",
+                    "toggleForm": [Function],
                   },
                   "ref": null,
                   "rendered": null,
