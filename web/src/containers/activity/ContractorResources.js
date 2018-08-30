@@ -5,9 +5,11 @@ import { connect } from 'react-redux';
 
 import {
   addActivityContractor,
+  deleteActivityContractorFile,
   removeActivityContractor,
   toggleActivityContractorHourly,
-  updateActivity as updateActivityAction
+  updateActivity as updateActivityAction,
+  uploadActivityContractorFile
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
 import DatePickerWrapper from '../../components/DatePickerWrapper';
@@ -316,30 +318,17 @@ class ContractorResources extends Component {
   };
 
   handleFileDelete = (cIdx, fIdx) => () => {
-    const { activityKey, contractors, updateActivity } = this.props;
-    const { files } = contractors[cIdx];
-    const updatedFiles = files.filter((_, i) => i !== fIdx);
+    const { activityKey, deleteFile } = this.props;
 
-    const updates = { [cIdx]: { files: updatedFiles } };
-    updateActivity(activityKey, { contractorResources: updates });
+    deleteFile(activityKey, cIdx, fIdx);
   };
 
   handleFileUpload = index => files => {
     if (!files.length) return;
 
-    const { activityKey, contractors, updateActivity } = this.props;
+    const { activityKey, uploadFile } = this.props;
     const { docType } = this.state;
-
-    // only do one file at a time
-    const { name, preview, size, type } = files[0];
-    const newFile = { name, preview, size, type, category: docType };
-    const existingFiles = contractors[index].files || [];
-
-    const updates = { [index]: { files: [...existingFiles, newFile] } };
-    updateActivity(activityKey, { contractorResources: updates });
-
-    // reset document category if necessary
-    if (docType !== DOC_TYPES[0]) this.setState({ docType: DOC_TYPES[0] });
+    uploadFile(activityKey, index, docType, files[0]);
   };
 
   handleHourlyChange = (index, year, field) => e => {
@@ -451,9 +440,11 @@ ContractorResources.propTypes = {
   contractors: PropTypes.array.isRequired,
   years: PropTypes.array.isRequired,
   addContractor: PropTypes.func.isRequired,
+  deleteFile: PropTypes.func.isRequired,
   removeContractor: PropTypes.func.isRequired,
   toggleContractorHourly: PropTypes.func.isRequired,
-  updateActivity: PropTypes.func.isRequired
+  updateActivity: PropTypes.func.isRequired,
+  uploadFile: PropTypes.func.isRequired
 };
 
 export const mapStateToProps = ({ activities: { byKey }, apd }, { aKey }) => ({
@@ -464,9 +455,11 @@ export const mapStateToProps = ({ activities: { byKey }, apd }, { aKey }) => ({
 
 export const mapDispatchToProps = {
   addContractor: addActivityContractor,
+  deleteFile: deleteActivityContractorFile,
   removeContractor: removeActivityContractor,
   toggleContractorHourly: toggleActivityContractorHourly,
-  updateActivity: updateActivityAction
+  updateActivity: updateActivityAction,
+  uploadFile: uploadActivityContractorFile
 };
 
 export { ContractorResources as ContractorResourcesRaw };

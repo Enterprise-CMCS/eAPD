@@ -124,8 +124,6 @@ tap.test(
                   files: [
                     {
                       id: 5002,
-                      key: 'download.txt',
-                      metadata: null,
                       size: null
                     }
                   ],
@@ -145,14 +143,12 @@ tap.test(
               files: [
                 {
                   id: 5000,
-                  key: 'download.txt',
-                  metadata: null,
-                  size: null
+                  size: null,
+                  some: 'metadata',
+                  in: 'here'
                 },
                 {
                   id: 5004,
-                  key: 'not real',
-                  metadata: null,
                   size: null
                 }
               ],
