@@ -60,15 +60,15 @@ tap.test('file data model', async tests => {
     self.get.withArgs('id').returns('Big Ol File');
     self.get.withArgs('key').returns('opens locks');
     self.get.withArgs('size').returns('big ol');
-    self.get.withArgs('metadata').returns('data about the data');
+    self.get.withArgs('metadata').returns('{"a":"json","string":"here"}');
 
     const output = file.toJSON.bind(self)();
 
     test.match(output, {
       id: 'Big Ol File',
-      key: 'opens locks',
       size: 'big ol',
-      metadata: 'data about the data'
+      a: 'json',
+      string: 'here'
     });
   });
 });

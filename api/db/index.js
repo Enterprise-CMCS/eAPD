@@ -17,6 +17,8 @@ const file = require('./file');
 
 const exportedModels = {};
 
+let knexObject;
+
 const setup = (
   knex = defaultKnex,
   bookshelf = defaultBookshelf,
@@ -38,13 +40,13 @@ const setup = (
   logger.silly(
     `setting up models using [${process.env.NODE_ENV}] configuration`
   );
-  const db = knex(config[process.env.NODE_ENV]);
+  knexObject = knex(config[process.env.NODE_ENV]);
 
   // Get bookshelf instance with our knex config, then
   // load the "registry" plugin - lets us map model
   // names to actual models to get rid of ciruclar
   // dependency graphs
-  const orm = bookshelf(db);
+  const orm = bookshelf(knexObject);
   orm.plugin('registry');
 
   const BaseModel = baseModel(orm, exportedModels);
@@ -75,6 +77,7 @@ const setup = (
 };
 
 module.exports = {
-  setup,
-  models: exportedModels
+  models: exportedModels,
+  raw: (...args) => (knexObject ? knexObject(...args) : null),
+  setup
 };

@@ -9,9 +9,11 @@ import {
 } from './ContractorResources';
 import {
   addActivityContractor,
+  deleteActivityContractorFile,
   removeActivityContractor,
   toggleActivityContractorHourly,
-  updateActivity
+  updateActivity,
+  uploadActivityContractorFile
 } from '../../actions/activities';
 
 describe('the ContractorResources component', () => {
@@ -41,9 +43,11 @@ describe('the ContractorResources component', () => {
     ],
     years: ['1066', '1067'],
     addContractor: sinon.stub(),
+    deleteFile: sinon.stub(),
     removeContractor: sinon.stub(),
     toggleContractorHourly: sinon.stub(),
-    updateActivity: sinon.stub()
+    updateActivity: sinon.stub(),
+    uploadFile: sinon.stub()
   };
 
   beforeEach(() => {
@@ -147,9 +151,11 @@ describe('the ContractorResources component', () => {
   test('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
       addContractor: addActivityContractor,
+      deleteFile: deleteActivityContractorFile,
       removeContractor: removeActivityContractor,
       toggleContractorHourly: toggleActivityContractorHourly,
-      updateActivity
+      updateActivity,
+      uploadFile: uploadActivityContractorFile
     });
   });
 });

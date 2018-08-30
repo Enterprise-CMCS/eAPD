@@ -54,7 +54,7 @@ tap.test('files GET endpoint', async endpointTest => {
 
     setupTest.ok(
       app.get.calledWith('/files/:id', loggedIn, sinon.match.func),
-      'me GET endpoint is registered'
+      'files GET endpoint is registered'
     );
   });
 
