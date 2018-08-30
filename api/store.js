@@ -117,7 +117,7 @@ class Store {
    * Write data into a blob with a specified key.  The blob
    * will be created if it does not already exist.
    * @param {String} key - Blob identifier
-   * @param {(ReadableStream|*)} - The data to write.  If a ReadableStream is
+   * @param {(ReadableStream|*)} data - The data to write.  If a ReadableStream is
    *    provided, its contents will be piped into the blob.  For everything
    *    else, it will be written directly to the blob.
    * @param {*} opts - Returned value when the write is finished.
@@ -146,6 +146,11 @@ class Store {
         data.pipe(writeStream);
 
         data.on('close', () => {
+          writeStream.end();
+          done();
+        });
+
+        data.on('end', () => {
           writeStream.end();
           done();
         });

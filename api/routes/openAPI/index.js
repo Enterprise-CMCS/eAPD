@@ -628,18 +628,14 @@ module.exports = {
           id: {
             type: 'number'
           },
-          key: {
-            type: 'string',
-            description:
-              'File store identifier, used to retrieve the actual file'
-          },
           size: {
             type: 'number',
             description: 'Size of the file, in bytes'
           },
           metadata: {
             type: 'object',
-            description: 'Free-form object containing file metadata'
+            description:
+              'The properties from any metadata supplied when the file was uploaded will be added to the file object'
           }
         }
       },

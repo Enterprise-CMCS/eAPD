@@ -201,6 +201,7 @@ export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
     .then(res => {
       dispatch(notify('Save successful!'));
       dispatch(saveSuccess(res.data));
+      return res.data;
     })
     .catch(error => {
       dispatch(notifyNetError('Save', error));
