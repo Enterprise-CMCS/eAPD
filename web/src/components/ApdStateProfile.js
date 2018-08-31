@@ -13,7 +13,7 @@ const ApdStateProfile = () => (
       <MedicaidOffice />
     </Subsection>
     <Subsection
-      id="apd-state-profile-contacts"
+      id="apd-state-profile-key-personnel"
       resource="apd.stateProfile.keyPersonnel"
     >
       <KeyPersonnel />
