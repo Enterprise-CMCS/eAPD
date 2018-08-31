@@ -25,10 +25,6 @@
 
   & .site-main {
     max-width: 900px;
-
-    & button {
-      display: none;
-    }
   }
 
   & .accordian {
