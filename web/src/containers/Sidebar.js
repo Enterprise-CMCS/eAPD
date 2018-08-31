@@ -10,7 +10,20 @@ import Btn from '../components/Btn';
 import SidebarLink from '../components/SidebarLink';
 
 const linkGroup1 = [
-  { id: 'apd-state-profile', name: t('apd.stateProfile.title') },
+  {
+    id: 'apd-state-profile',
+    name: t('apd.stateProfile.title'),
+    sub: [
+      {
+        id: 'apd-state-profile-office',
+        name: t('apd.stateProfile.directorAndAddress.title')
+      },
+      {
+        id: 'apd-state-profile-contacts',
+        name: t('apd.stateProfile.pointsOfContact.title')
+      }
+    ]
+  },
   {
     id: 'apd-summary',
     name: t('apd.title'),
@@ -221,4 +234,7 @@ const mapDispatchToProps = {
   toggleExpand: toggleExpandAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Sidebar);

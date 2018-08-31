@@ -25,7 +25,7 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "bgColor": "blue-light",
-      "btnBgColor": "blue-bright",
+      "btnBgColor": "blue",
       "btnColor": "white",
       "children": Array [
         Array [
@@ -164,7 +164,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "bgColor": "blue-light",
-        "btnBgColor": "blue-bright",
+        "btnBgColor": "blue",
         "btnColor": "white",
         "children": Array [
           Array [
