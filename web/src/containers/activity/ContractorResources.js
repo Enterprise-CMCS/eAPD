@@ -16,6 +16,7 @@ import DatePickerWrapper from '../../components/DatePickerWrapper';
 import DeleteButton from '../../components/DeleteConfirm';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
+import MiniHeader from '../../components/MiniHeader';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import Select from '../../components/Select';
@@ -24,51 +25,6 @@ import { arrToObj } from '../../util';
 import { formatMoney } from '../../util/formats';
 
 const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
-
-const ContractorEntry = ({
-  idx,
-  contractor,
-  years,
-  handleDelete,
-  toggleForm
-}) => (
-  <div className="mb1 h5 flex justify-between">
-    <button
-      type="button"
-      onClick={toggleForm}
-      className="btn btn-no-focus p1 col-12 left-align bg-blue-light rounded-left"
-    >
-      <div className="flex items-center justify-between">
-        <div className="col-4 truncate">
-          {idx + 1}. <strong>{contractor.name || 'Name'}</strong>
-        </div>
-        {years.map(year => (
-          <div key={year} className="col-3 truncate">
-            {year}:{' '}
-            <span className="bold mono">
-              {formatMoney(contractor.years[year])}
-            </span>
-          </div>
-        ))}
-      </div>
-    </button>
-    <button
-      type="button"
-      onClick={handleDelete}
-      className="btn btn-no-focus p1 bg-blue-light rounded-right"
-    >
-      ✗
-    </button>
-  </div>
-);
-
-ContractorEntry.propTypes = {
-  idx: PropTypes.number.isRequired,
-  contractor: PropTypes.object.isRequired,
-  years: PropTypes.array.isRequired,
-  handleDelete: PropTypes.func.isRequired,
-  toggleForm: PropTypes.func.isRequired
-};
 
 const ContractorForm = ({
   idx,
@@ -398,12 +354,19 @@ class ContractorResources extends Component {
           <div className="mt3 pt3 border-top border-grey">
             {contractors.map((contractor, i) => (
               <div key={contractor.key}>
-                <ContractorEntry
-                  idx={i}
-                  contractor={contractor}
-                  years={years}
+                <MiniHeader
                   handleDelete={this.handleDelete(contractor.key)}
+                  number={i + 1}
+                  title={contractor.name || 'Name'}
                   toggleForm={this.toggleForm(contractor.key)}
+                  content={years.map(year => (
+                    <div key={year} className="col-3 truncate">
+                      {year}:{' '}
+                      <span className="bold mono">
+                        {formatMoney(contractor.years[year])}
+                      </span>
+                    </div>
+                  ))}
                 />
                 {showForm[contractor.key] && (
                   <ContractorForm

@@ -11,6 +11,7 @@ import Btn from '../../components/Btn';
 import NoDataMsg from '../../components/NoDataMsg';
 import { DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
+import MiniHeader from '../../components/MiniHeader';
 import { SubsectionChunk } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
@@ -25,45 +26,6 @@ const EXPENSE_CATEGORIES = [
   'Administrative operations',
   'Miscellaneous expenses for the project'
 ];
-
-const ExpenseEntry = ({ expense, idx, years, handleDelete, toggleForm }) => (
-  <div className="mb1 h5 flex justify-between">
-    <button
-      type="button"
-      onClick={toggleForm}
-      className="btn btn-no-focus p1 col-12 left-align bg-blue-light rounded-left"
-    >
-      <div className="flex items-center justify-between">
-        <div className="col-5 truncate">
-          {idx + 1}. <strong>{expense.category}</strong>
-        </div>
-        {years.map(year => (
-          <div key={year} className="col-2 truncate">
-            {year}:{' '}
-            <span className="bold mono">
-              {formatMoney(expense.years[year])}
-            </span>
-          </div>
-        ))}
-      </div>
-    </button>
-    <button
-      type="button"
-      onClick={handleDelete}
-      className="btn btn-no-focus p1 bg-blue-light rounded-right"
-    >
-      ✗
-    </button>
-  </div>
-);
-
-ExpenseEntry.propTypes = {
-  expense: PropTypes.object.isRequired,
-  idx: PropTypes.number.isRequired,
-  years: PropTypes.array.isRequired,
-  handleDelete: PropTypes.func.isRequired,
-  toggleForm: PropTypes.func.isRequired
-};
 
 const ExpenseForm = ({
   expense,
@@ -207,12 +169,20 @@ class Expenses extends Component {
           <div className="mt3 pt3 border-top border-grey">
             {expenses.map((expense, i) => (
               <div key={expense.key}>
-                <ExpenseEntry
-                  expense={expense}
-                  idx={i}
-                  years={years}
+                <MiniHeader
                   handleDelete={this.handleDelete(expense.key)}
+                  number={i + 1}
+                  title={expense.category}
+                  titleColumns={5}
                   toggleForm={this.toggleForm(expense.key)}
+                  content={years.map(year => (
+                    <div key={year} className="col-2 truncate">
+                      {year}:{' '}
+                      <span className="bold mono">
+                        {formatMoney(expense.years[year])}
+                      </span>
+                    </div>
+                  ))}
                 />
                 {showForm[expense.key] && (
                   <ExpenseForm
