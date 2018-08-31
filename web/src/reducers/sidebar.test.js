@@ -4,6 +4,7 @@ import { SIDEBAR_TOGGLE_EXPAND } from '../actions/sidebar';
 describe('sidebar reducer', () => {
   const initialState = {
     expanded: {
+      'apd-state-profile': false,
       'apd-summary': false,
       'prev-activities': false,
       activities: false,
@@ -26,6 +27,7 @@ describe('sidebar reducer', () => {
     });
     expect(toggle).toEqual({
       expanded: {
+        'apd-state-profile': false,
         'apd-summary': false,
         'prev-activities': false,
         activities: false,
@@ -41,6 +43,7 @@ describe('sidebar reducer', () => {
       sidebar(toggle, { type: SIDEBAR_TOGGLE_EXPAND, id: 'budget' })
     ).toEqual({
       expanded: {
+        'apd-state-profile': false,
         'apd-summary': false,
         'prev-activities': false,
         activities: false,

@@ -2,6 +2,7 @@ import { SIDEBAR_TOGGLE_EXPAND } from '../actions/sidebar';
 
 const initialState = {
   expanded: {
+    'apd-state-profile': false,
     'apd-summary': false,
     'prev-activities': false,
     activities: false,
