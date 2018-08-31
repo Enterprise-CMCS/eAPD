@@ -10,52 +10,12 @@ import {
 import Btn from '../../components/Btn';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
+import MiniHeader from '../../components/MiniHeader';
 import NoDataMsg from '../../components/NoDataMsg';
 import { SubsectionChunk } from '../../components/Section';
 import { t } from '../../i18n';
 import { arrToObj } from '../../util';
 import { formatDec, formatMoney } from '../../util/formats';
-
-const PersonnelEntry = ({ person, idx, years, handleDelete, toggleForm }) => (
-  <div className="mb1 h5 flex justify-between">
-    <button
-      type="button"
-      onClick={toggleForm}
-      className="btn btn-no-focus p1 col-12 left-align bg-blue-light rounded-left"
-    >
-      <div className="flex items-center justify-between">
-        <div className="col-4 truncate">
-          {idx + 1}. <strong>{person.title || 'Title'}</strong>
-        </div>
-        {years.map(year => (
-          <div key={year} className="col-3 truncate">
-            {year}:{' '}
-            <span className="bold mono">
-              {formatMoney(person.years[year].amt)}
-              {' / '}
-              {formatDec(person.years[year].perc, 1)}
-            </span>
-          </div>
-        ))}
-      </div>
-    </button>
-    <button
-      type="button"
-      onClick={handleDelete}
-      className="btn btn-no-focus p1 bg-blue-light rounded-right"
-    >
-      ✗
-    </button>
-  </div>
-);
-
-PersonnelEntry.propTypes = {
-  person: PropTypes.object.isRequired,
-  idx: PropTypes.number.isRequired,
-  years: PropTypes.array.isRequired,
-  handleDelete: PropTypes.func.isRequired,
-  toggleForm: PropTypes.func.isRequired
-};
 
 const PersonnelForm = ({
   person,
@@ -231,12 +191,21 @@ class StatePersonnel extends Component {
           <div className="mt3 pt3 border-top border-grey">
             {personnel.map((person, i) => (
               <div key={person.key}>
-                <PersonnelEntry
-                  person={person}
-                  idx={i}
-                  years={years}
+                <MiniHeader
                   handleDelete={this.handleDelete(person.key)}
+                  number={i + 1}
+                  title={person.title || 'Title'}
                   toggleForm={this.toggleForm(person.key)}
+                  content={years.map(year => (
+                    <div key={year} className="col-3 truncate">
+                      {year}:{' '}
+                      <span className="bold mono">
+                        {formatMoney(person.years[year].amt)}
+                        {' / '}
+                        {formatDec(person.years[year].perc, 1)}
+                      </span>
+                    </div>
+                  ))}
                 />
                 {showForm[person.key] && (
                   <PersonnelForm
