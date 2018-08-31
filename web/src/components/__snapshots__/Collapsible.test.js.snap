@@ -31,7 +31,7 @@ ShallowWrapper {
         <button
           aria-controls="collapsible-default-render-case"
           aria-expanded={false}
-          className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+          className="btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
           onClick={[Function]}
           type="button"
         >
@@ -71,7 +71,7 @@ ShallowWrapper {
           default render case
         </button>,
         <div
-          className="p2 display-none has-sticky-header"
+          className="p2 sm-p3 display-none has-sticky-header"
           id="collapsible-default-render-case"
         />,
       ],
@@ -123,7 +123,7 @@ ShallowWrapper {
             </span>,
             "default render case",
           ],
-          "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+          "className": "btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
           "onClick": [Function],
           "type": "button",
         },
@@ -213,7 +213,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "p2 display-none has-sticky-header",
+          "className": "p2 sm-p3 display-none has-sticky-header",
           "id": "collapsible-default-render-case",
         },
         "ref": null,
@@ -233,7 +233,7 @@ ShallowWrapper {
           <button
             aria-controls="collapsible-default-render-case"
             aria-expanded={false}
-            className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+            className="btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
             onClick={[Function]}
             type="button"
           >
@@ -273,7 +273,7 @@ ShallowWrapper {
             default render case
           </button>,
           <div
-            className="p2 display-none has-sticky-header"
+            className="p2 sm-p3 display-none has-sticky-header"
             id="collapsible-default-render-case"
           />,
         ],
@@ -325,7 +325,7 @@ ShallowWrapper {
               </span>,
               "default render case",
             ],
-            "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+            "className": "btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
             "onClick": [Function],
             "type": "button",
           },
@@ -415,7 +415,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "p2 display-none has-sticky-header",
+            "className": "p2 sm-p3 display-none has-sticky-header",
             "id": "collapsible-default-render-case",
           },
           "ref": null,
@@ -467,7 +467,7 @@ ShallowWrapper {
         <button
           aria-controls="collapsible-open-render-case"
           aria-expanded={true}
-          className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
+          className="btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
           onClick={[Function]}
           type="button"
         >
@@ -507,7 +507,7 @@ ShallowWrapper {
           open render case
         </button>,
         <div
-          className="p2  has-sticky-header"
+          className="p2 sm-p3 has-sticky-header"
           id="collapsible-open-render-case"
         />,
       ],
@@ -559,7 +559,7 @@ ShallowWrapper {
             </span>,
             "open render case",
           ],
-          "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
+          "className": "btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
           "onClick": [Function],
           "type": "button",
         },
@@ -649,7 +649,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "p2  has-sticky-header",
+          "className": "p2 sm-p3 has-sticky-header",
           "id": "collapsible-open-render-case",
         },
         "ref": null,
@@ -669,7 +669,7 @@ ShallowWrapper {
           <button
             aria-controls="collapsible-open-render-case"
             aria-expanded={true}
-            className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
+            className="btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
             onClick={[Function]}
             type="button"
           >
@@ -709,7 +709,7 @@ ShallowWrapper {
             open render case
           </button>,
           <div
-            className="p2  has-sticky-header"
+            className="p2 sm-p3 has-sticky-header"
             id="collapsible-open-render-case"
           />,
         ],
@@ -761,7 +761,7 @@ ShallowWrapper {
               </span>,
               "open render case",
             ],
-            "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
+            "className": "btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
             "onClick": [Function],
             "type": "button",
           },
@@ -851,7 +851,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "p2  has-sticky-header",
+            "className": "p2 sm-p3 has-sticky-header",
             "id": "collapsible-open-render-case",
           },
           "ref": null,
@@ -903,7 +903,7 @@ ShallowWrapper {
         <button
           aria-controls="collapsible-open-render-case"
           aria-expanded={false}
-          className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+          className="btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
           onClick={[Function]}
           type="button"
         >
@@ -943,7 +943,7 @@ ShallowWrapper {
           open render case
         </button>,
         <div
-          className="p2 display-none has-sticky-header"
+          className="p2 sm-p3 display-none has-sticky-header"
           id="collapsible-open-render-case"
         />,
       ],
@@ -995,7 +995,7 @@ ShallowWrapper {
             </span>,
             "open render case",
           ],
-          "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+          "className": "btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
           "onClick": [Function],
           "type": "button",
         },
@@ -1085,7 +1085,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "p2 display-none has-sticky-header",
+          "className": "p2 sm-p3 display-none has-sticky-header",
           "id": "collapsible-open-render-case",
         },
         "ref": null,
@@ -1105,7 +1105,7 @@ ShallowWrapper {
           <button
             aria-controls="collapsible-open-render-case"
             aria-expanded={false}
-            className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+            className="btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
             onClick={[Function]}
             type="button"
           >
@@ -1145,7 +1145,7 @@ ShallowWrapper {
             open render case
           </button>,
           <div
-            className="p2 display-none has-sticky-header"
+            className="p2 sm-p3 display-none has-sticky-header"
             id="collapsible-open-render-case"
           />,
         ],
@@ -1197,7 +1197,7 @@ ShallowWrapper {
               </span>,
               "open render case",
             ],
-            "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+            "className": "btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
             "onClick": [Function],
             "type": "button",
           },
@@ -1287,7 +1287,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "p2 display-none has-sticky-header",
+            "className": "p2 sm-p3 display-none has-sticky-header",
             "id": "collapsible-open-render-case",
           },
           "ref": null,
@@ -1339,7 +1339,7 @@ ShallowWrapper {
         <button
           aria-controls="collapsible-toggle-to-open-case"
           aria-expanded={true}
-          className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
+          className="btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
           onClick={[Function]}
           type="button"
         >
@@ -1379,7 +1379,7 @@ ShallowWrapper {
           toggle to open case
         </button>,
         <div
-          className="p2  has-sticky-header"
+          className="p2 sm-p3 has-sticky-header"
           id="collapsible-toggle-to-open-case"
         />,
       ],
@@ -1431,7 +1431,7 @@ ShallowWrapper {
             </span>,
             "toggle to open case",
           ],
-          "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
+          "className": "btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
           "onClick": [Function],
           "type": "button",
         },
@@ -1521,7 +1521,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "p2  has-sticky-header",
+          "className": "p2 sm-p3 has-sticky-header",
           "id": "collapsible-toggle-to-open-case",
         },
         "ref": null,
@@ -1541,7 +1541,7 @@ ShallowWrapper {
           <button
             aria-controls="collapsible-toggle-to-open-case"
             aria-expanded={true}
-            className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
+            className="btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header"
             onClick={[Function]}
             type="button"
           >
@@ -1581,7 +1581,7 @@ ShallowWrapper {
             toggle to open case
           </button>,
           <div
-            className="p2  has-sticky-header"
+            className="p2 sm-p3 has-sticky-header"
             id="collapsible-toggle-to-open-case"
           />,
         ],
@@ -1633,7 +1633,7 @@ ShallowWrapper {
               </span>,
               "toggle to open case",
             ],
-            "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
+            "className": "btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align border-bottom border-bottom-darken-1 rounded-top bg-white blue sticky-header",
             "onClick": [Function],
             "type": "button",
           },
@@ -1723,7 +1723,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "p2  has-sticky-header",
+            "className": "p2 sm-p3 has-sticky-header",
             "id": "collapsible-toggle-to-open-case",
           },
           "ref": null,
@@ -1775,7 +1775,7 @@ ShallowWrapper {
         <button
           aria-controls="collapsible-toggle-to-closed-case"
           aria-expanded={false}
-          className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+          className="btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
           onClick={[Function]}
           type="button"
         >
@@ -1815,7 +1815,7 @@ ShallowWrapper {
           toggle to closed case
         </button>,
         <div
-          className="p2 display-none has-sticky-header"
+          className="p2 sm-p3 display-none has-sticky-header"
           id="collapsible-toggle-to-closed-case"
         />,
       ],
@@ -1867,7 +1867,7 @@ ShallowWrapper {
             </span>,
             "toggle to closed case",
           ],
-          "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+          "className": "btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
           "onClick": [Function],
           "type": "button",
         },
@@ -1957,7 +1957,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "p2 display-none has-sticky-header",
+          "className": "p2 sm-p3 display-none has-sticky-header",
           "id": "collapsible-toggle-to-closed-case",
         },
         "ref": null,
@@ -1977,7 +1977,7 @@ ShallowWrapper {
           <button
             aria-controls="collapsible-toggle-to-closed-case"
             aria-expanded={false}
-            className="btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
+            className="btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header"
             onClick={[Function]}
             type="button"
           >
@@ -2017,7 +2017,7 @@ ShallowWrapper {
             toggle to closed case
           </button>,
           <div
-            className="p2 display-none has-sticky-header"
+            className="p2 sm-p3 display-none has-sticky-header"
             id="collapsible-toggle-to-closed-case"
           />,
         ],
@@ -2069,7 +2069,7 @@ ShallowWrapper {
               </span>,
               "toggle to closed case",
             ],
-            "className": "btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
+            "className": "btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align rounded bg-white blue sticky-header",
             "onClick": [Function],
             "type": "button",
           },
@@ -2159,7 +2159,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "p2 display-none has-sticky-header",
+            "className": "p2 sm-p3 display-none has-sticky-header",
             "id": "collapsible-toggle-to-closed-case",
           },
           "ref": null,

@@ -47,12 +47,14 @@ class EntryDetails extends Component {
         id={`activity-${aKey}`}
         title={title}
         bgColor="blue-light"
-        btnBgColor="blue-bright"
+        btnBgColor="blue"
         btnColor="white"
         open={expanded}
         onChange={this.handleChange(aKey)}
       >
-        {components.map((Comp, i) => <Comp key={i} aKey={aKey} />)}
+        {components.map((Comp, i) => (
+          <Comp key={i} aKey={aKey} />
+        ))}
         {num > 1 && (
           <DeleteButton
             remove={() => removeActivity(aKey)}
@@ -87,4 +89,7 @@ export const mapDispatchToProps = {
 };
 
 export { EntryDetails as EntryDetailsRaw };
-export default connect(mapStateToProps, mapDispatchToProps)(EntryDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EntryDetails);
