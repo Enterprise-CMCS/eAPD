@@ -39,6 +39,7 @@ const SidebarLink = ({
       <a
         href={`#${anchor || '!'}`}
         className="white text-decoration-none truncate"
+        onClick={depth === 0 ? toggleExpand : undefined}
         {...rest}
       >
         {children}
