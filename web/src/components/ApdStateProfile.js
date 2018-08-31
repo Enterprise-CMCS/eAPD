@@ -6,10 +6,16 @@ import PointsOfContact from '../containers/ApdStateProfilePointsOfContact';
 
 const ApdStateProfile = () => (
   <Section id="apd-state-profile" resource="apd.stateProfile">
-    <Subsection resource="apd.stateProfile.directorAndAddress">
+    <Subsection
+      id="apd-state-profile-office"
+      resource="apd.stateProfile.directorAndAddress"
+    >
       <MedicaidOffice />
     </Subsection>
-    <Subsection resource="apd.stateProfile.pointsOfContact">
+    <Subsection
+      id="apd-state-profile-contacts"
+      resource="apd.stateProfile.pointsOfContact"
+    >
       <PointsOfContact />
     </Subsection>
   </Section>

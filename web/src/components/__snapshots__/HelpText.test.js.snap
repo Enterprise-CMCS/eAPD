@@ -18,17 +18,16 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
       "children": Array [
         false,
         <Md
-          className="my1 p1 h5 alert alert-help"
+          className="mb2 p1 h5 alert alert-help"
           content="[missing {{year}} value] HITECH APD"
           wrapper="div"
         />,
       ],
-      "className": "mb2",
     },
     "ref": null,
     "rendered": Array [
@@ -38,7 +37,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "className": "my1 p1 h5 alert alert-help",
+          "className": "mb2 p1 h5 alert alert-help",
           "content": "[missing {{year}} value] HITECH APD",
           "wrapper": "div",
         },
@@ -47,23 +46,22 @@ ShallowWrapper {
         "type": [Function],
       },
     ],
-    "type": "div",
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
         "children": Array [
           false,
           <Md
-            className="my1 p1 h5 alert alert-help"
+            className="mb2 p1 h5 alert alert-help"
             content="[missing {{year}} value] HITECH APD"
             wrapper="div"
           />,
         ],
-        "className": "mb2",
       },
       "ref": null,
       "rendered": Array [
@@ -73,7 +71,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "className": "my1 p1 h5 alert alert-help",
+            "className": "mb2 p1 h5 alert alert-help",
             "content": "[missing {{year}} value] HITECH APD",
             "wrapper": "div",
           },
@@ -82,7 +80,7 @@ ShallowWrapper {
           "type": [Function],
         },
       ],
-      "type": "div",
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -142,20 +140,20 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
       "children": Array [
         <Md
+          className="mb2"
           content="[missing {{year}} value] HITECH APD"
           wrapper="div"
         />,
         <Md
-          className="my1 p1 h5 alert alert-help"
+          className="mb2 p1 h5 alert alert-help"
           content="[missing {{year}} value] HITECH APD"
           wrapper="div"
         />,
       ],
-      "className": "mb2",
     },
     "ref": null,
     "rendered": Array [
@@ -164,6 +162,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
+          "className": "mb2",
           "content": "[missing {{year}} value] HITECH APD",
           "wrapper": "div",
         },
@@ -176,7 +175,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "className": "my1 p1 h5 alert alert-help",
+          "className": "mb2 p1 h5 alert alert-help",
           "content": "[missing {{year}} value] HITECH APD",
           "wrapper": "div",
         },
@@ -185,26 +184,26 @@ ShallowWrapper {
         "type": [Function],
       },
     ],
-    "type": "div",
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
         "children": Array [
           <Md
+            className="mb2"
             content="[missing {{year}} value] HITECH APD"
             wrapper="div"
           />,
           <Md
-            className="my1 p1 h5 alert alert-help"
+            className="mb2 p1 h5 alert alert-help"
             content="[missing {{year}} value] HITECH APD"
             wrapper="div"
           />,
         ],
-        "className": "mb2",
       },
       "ref": null,
       "rendered": Array [
@@ -213,6 +212,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
+            "className": "mb2",
             "content": "[missing {{year}} value] HITECH APD",
             "wrapper": "div",
           },
@@ -225,7 +225,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "className": "my1 p1 h5 alert alert-help",
+            "className": "mb2 p1 h5 alert alert-help",
             "content": "[missing {{year}} value] HITECH APD",
             "wrapper": "div",
           },
@@ -234,7 +234,7 @@ ShallowWrapper {
           "type": [Function],
         },
       ],
-      "type": "div",
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -265,16 +265,16 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
       "children": Array [
         <Md
+          className="mb2"
           content="[missing {{year}} value] HITECH APD"
           wrapper="div"
         />,
         false,
       ],
-      "className": "mb2",
     },
     "ref": null,
     "rendered": Array [
@@ -283,6 +283,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
+          "className": "mb2",
           "content": "[missing {{year}} value] HITECH APD",
           "wrapper": "div",
         },
@@ -292,22 +293,22 @@ ShallowWrapper {
       },
       false,
     ],
-    "type": "div",
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
         "children": Array [
           <Md
+            className="mb2"
             content="[missing {{year}} value] HITECH APD"
             wrapper="div"
           />,
           false,
         ],
-        "className": "mb2",
       },
       "ref": null,
       "rendered": Array [
@@ -316,6 +317,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
+            "className": "mb2",
             "content": "[missing {{year}} value] HITECH APD",
             "wrapper": "div",
           },
@@ -325,7 +327,7 @@ ShallowWrapper {
         },
         false,
       ],
-      "type": "div",
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {

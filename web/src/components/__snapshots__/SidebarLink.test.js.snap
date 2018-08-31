@@ -40,6 +40,7 @@ ShallowWrapper {
           <a
             className="white text-decoration-none truncate"
             href="#!"
+            onClick={[Function]}
           >
             link text
           </a>
@@ -58,6 +59,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#!"
+              onClick={[Function]}
             >
               link text
             </a>,
@@ -75,6 +77,7 @@ ShallowWrapper {
               "children": "link text",
               "className": "white text-decoration-none truncate",
               "href": "#!",
+              "onClick": [Function],
             },
             "ref": null,
             "rendered": "link text",
@@ -101,6 +104,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#!"
+              onClick={[Function]}
             >
               link text
             </a>
@@ -119,6 +123,7 @@ ShallowWrapper {
               <a
                 className="white text-decoration-none truncate"
                 href="#!"
+                onClick={[Function]}
               >
                 link text
               </a>,
@@ -136,6 +141,7 @@ ShallowWrapper {
                 "children": "link text",
                 "className": "white text-decoration-none truncate",
                 "href": "#!",
+                "onClick": [Function],
               },
               "ref": null,
               "rendered": "link text",
@@ -193,6 +199,7 @@ ShallowWrapper {
           <a
             className="white text-decoration-none truncate"
             href="#moop"
+            onClick={[Function]}
           >
             link text
           </a>
@@ -211,6 +218,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#moop"
+              onClick={[Function]}
             >
               link text
             </a>,
@@ -228,6 +236,7 @@ ShallowWrapper {
               "children": "link text",
               "className": "white text-decoration-none truncate",
               "href": "#moop",
+              "onClick": [Function],
             },
             "ref": null,
             "rendered": "link text",
@@ -254,6 +263,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#moop"
+              onClick={[Function]}
             >
               link text
             </a>
@@ -272,6 +282,7 @@ ShallowWrapper {
               <a
                 className="white text-decoration-none truncate"
                 href="#moop"
+                onClick={[Function]}
               >
                 link text
               </a>,
@@ -289,6 +300,7 @@ ShallowWrapper {
                 "children": "link text",
                 "className": "white text-decoration-none truncate",
                 "href": "#moop",
+                "onClick": [Function],
               },
               "ref": null,
               "rendered": "link text",
@@ -353,6 +365,7 @@ ShallowWrapper {
           <a
             className="white text-decoration-none truncate"
             href="#!"
+            onClick={[Function]}
           >
             link text
           </a>
@@ -406,6 +419,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#!"
+              onClick={[Function]}
             >
               link text
             </a>,
@@ -457,6 +471,7 @@ ShallowWrapper {
               "children": "link text",
               "className": "white text-decoration-none truncate",
               "href": "#!",
+              "onClick": [Function],
             },
             "ref": null,
             "rendered": "link text",
@@ -558,6 +573,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#!"
+              onClick={[Function]}
             >
               link text
             </a>
@@ -611,6 +627,7 @@ ShallowWrapper {
               <a
                 className="white text-decoration-none truncate"
                 href="#!"
+                onClick={[Function]}
               >
                 link text
               </a>,
@@ -662,6 +679,7 @@ ShallowWrapper {
                 "children": "link text",
                 "className": "white text-decoration-none truncate",
                 "href": "#!",
+                "onClick": [Function],
               },
               "ref": null,
               "rendered": "link text",
@@ -801,6 +819,7 @@ ShallowWrapper {
           <a
             className="white text-decoration-none truncate"
             href="#!"
+            onClick={[Function]}
           >
             link text
           </a>
@@ -865,6 +884,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#!"
+              onClick={[Function]}
             >
               link text
             </a>,
@@ -916,6 +936,7 @@ ShallowWrapper {
               "children": "link text",
               "className": "white text-decoration-none truncate",
               "href": "#!",
+              "onClick": [Function],
             },
             "ref": null,
             "rendered": "link text",
@@ -1033,6 +1054,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#!"
+              onClick={[Function]}
             >
               link text
             </a>
@@ -1097,6 +1119,7 @@ ShallowWrapper {
               <a
                 className="white text-decoration-none truncate"
                 href="#!"
+                onClick={[Function]}
               >
                 link text
               </a>,
@@ -1148,6 +1171,7 @@ ShallowWrapper {
                 "children": "link text",
                 "className": "white text-decoration-none truncate",
                 "href": "#!",
+                "onClick": [Function],
               },
               "ref": null,
               "rendered": "link text",
@@ -1296,6 +1320,7 @@ ShallowWrapper {
           <a
             className="white text-decoration-none truncate"
             href="#!"
+            onClick={[Function]}
           >
             link text
           </a>
@@ -1314,6 +1339,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#!"
+              onClick={[Function]}
             >
               link text
             </a>,
@@ -1331,6 +1357,7 @@ ShallowWrapper {
               "children": "link text",
               "className": "white text-decoration-none truncate",
               "href": "#!",
+              "onClick": [Function],
             },
             "ref": null,
             "rendered": "link text",
@@ -1357,6 +1384,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#!"
+              onClick={[Function]}
             >
               link text
             </a>
@@ -1375,6 +1403,7 @@ ShallowWrapper {
               <a
                 className="white text-decoration-none truncate"
                 href="#!"
+                onClick={[Function]}
               >
                 link text
               </a>,
@@ -1392,6 +1421,7 @@ ShallowWrapper {
                 "children": "link text",
                 "className": "white text-decoration-none truncate",
                 "href": "#!",
+                "onClick": [Function],
               },
               "ref": null,
               "rendered": "link text",
@@ -1449,6 +1479,7 @@ ShallowWrapper {
           <a
             className="white text-decoration-none truncate"
             href="#moop"
+            onClick={[Function]}
           >
             link text
           </a>
@@ -1467,6 +1498,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#moop"
+              onClick={[Function]}
             >
               link text
             </a>,
@@ -1484,6 +1516,7 @@ ShallowWrapper {
               "children": "link text",
               "className": "white text-decoration-none truncate",
               "href": "#moop",
+              "onClick": [Function],
             },
             "ref": null,
             "rendered": "link text",
@@ -1510,6 +1543,7 @@ ShallowWrapper {
             <a
               className="white text-decoration-none truncate"
               href="#moop"
+              onClick={[Function]}
             >
               link text
             </a>
@@ -1528,6 +1562,7 @@ ShallowWrapper {
               <a
                 className="white text-decoration-none truncate"
                 href="#moop"
+                onClick={[Function]}
               >
                 link text
               </a>,
@@ -1545,6 +1580,7 @@ ShallowWrapper {
                 "children": "link text",
                 "className": "white text-decoration-none truncate",
                 "href": "#moop",
+                "onClick": [Function],
               },
               "ref": null,
               "rendered": "link text",
