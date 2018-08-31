@@ -10,8 +10,8 @@ module.exports = () => ({
       return this.hasMany('apdIncentivePayment');
     },
 
-    pointsOfContact() {
-      return this.hasMany('apdPointOfContact');
+    keyPersonnel() {
+      return this.hasMany('apdKeyPersonnel');
     },
 
     previousActivityExpenses() {
@@ -82,11 +82,11 @@ module.exports = () => ({
         activities: this.related('activities').toJSON(),
         federalCitations: this.get('federal_citations'),
         incentivePayments: this.related('incentivePayments').toJSON(),
+        keyPersonnel: this.related('keyPersonnel').toJSON(),
         narrativeHIE: this.get('narrative_hie'),
         narrativeHIT: this.get('narrative_hit'),
         narrativeMMIS: this.get('narrative_mmis'),
         period: this.get('period'),
-        pointsOfContact: this.related('pointsOfContact').toJSON(),
         previousActivityExpenses: this.related(
           'previousActivityExpenses'
         ).toJSON(),
@@ -127,7 +127,7 @@ module.exports = () => ({
       owns: {
         activities: 'apdActivity',
         incentivePayments: 'apdIncentivePayment',
-        pointsOfContact: 'apdPointOfContact',
+        keyPersonnel: 'apdKeyPersonnel',
         previousActivityExpenses: 'apdPreviousActivityExpense'
       },
       withRelated: [
@@ -146,7 +146,7 @@ module.exports = () => ({
         'activities.statePersonnel.years',
         'activities.quarterlyFFP',
         'incentivePayments',
-        'pointsOfContact',
+        'keyPersonnel.years',
         'previousActivityExpenses'
       ]
     }

@@ -1,19 +1,19 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const poc = require('./apdPointOfContact')().apdPointOfContact;
+const keyPersonnel = require('./apdKeyPersonnel')().apdKeyPersonnel;
 
-tap.test('apd points of contact data model', async tests => {
+tap.test('apd key personnel data model', async tests => {
   tests.test('setup', async test => {
     test.match(
-      poc,
+      keyPersonnel,
       {
         apd: Function,
         toJSON: Function,
         static: {
           updateableFields: ['name', 'position', 'email']
         },
-        tableName: 'apd_points_of_contact'
+        tableName: 'apd_key_personnel'
       },
       'get the expected model definitions'
     );
@@ -24,7 +24,7 @@ tap.test('apd points of contact data model', async tests => {
       belongsTo: sinon.stub().returns('baz')
     };
 
-    const output = poc.apd.bind(self)();
+    const output = keyPersonnel.apd.bind(self)();
 
     test.ok(
       self.belongsTo.calledWith('apd'),
@@ -40,7 +40,7 @@ tap.test('apd points of contact data model', async tests => {
     self.get.withArgs('position').returns('Leaders');
     self.get.withArgs('email').returns('trombones@bigparade.com');
 
-    const output = poc.toJSON.bind(self)();
+    const output = keyPersonnel.toJSON.bind(self)();
 
     test.match(output, {
       id: '76',
