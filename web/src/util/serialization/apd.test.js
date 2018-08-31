@@ -36,6 +36,26 @@ describe('APD serializer', () => {
             year: '1431'
           }
         ],
+        keyPersonnel: [
+          {
+            email: 'bob@thebuilder.net',
+            hasCosts: true,
+            isPrimary: false,
+            name: 'Bob the Builder',
+            percentTime: 0.37,
+            position: 'Builder',
+            costs: [
+              {
+                cost: 50,
+                year: 1903
+              },
+              {
+                cost: 73293,
+                year: 2018
+              }
+            ]
+          }
+        ],
         narrativeHIE: 'hie hie hie',
         narrativeHIT: 'hit hit hit',
         narrativeMMIS: 'mmis mmis mmis',
@@ -67,6 +87,21 @@ describe('APD serializer', () => {
           epAmt: { '1431': { 1: 355, 2: 355, 3: 355, 4: 355 } },
           epCt: { '1431': { 1: 59, 2: 59, 3: 59, 4: 59 } }
         },
+        keyPersonnel: [
+          {
+            email: 'bob@thebuilder.net',
+            hasCosts: true,
+            isPrimary: false,
+            key: expect.stringMatching(/[0-9a-f]{6}/),
+            name: 'Bob the Builder',
+            percentTime: 37,
+            position: 'Builder',
+            costs: {
+              1903: 50,
+              2018: 73293
+            }
+          }
+        ],
         narrativeHIE: 'hie hie hie',
         narrativeHIT: 'hit hit hit',
         narrativeMMIS: 'mmis mmis mmis',
@@ -99,6 +134,20 @@ describe('APD serializer', () => {
           epAmt: { '1431': { 1: 355, 2: 355, 3: 355, 4: 355 } },
           epCt: { '1431': { 1: 59, 2: 59, 3: 59, 4: 59 } }
         },
+        keyPersonnel: [
+          {
+            email: 'bob@thebuilder.net',
+            hasCosts: true,
+            isPrimary: false,
+            name: 'Bob the Builder',
+            percentTime: 37,
+            position: 'Builder',
+            costs: {
+              1903: 50,
+              2018: 73293
+            }
+          }
+        ],
         narrativeHIE: 'hie hie hie',
         narrativeHIT: 'hit hit hit',
         narrativeMMIS: 'mmis mmis mmis',
@@ -153,6 +202,17 @@ describe('APD serializer', () => {
               epCount: 59
             },
             year: '1431'
+          }
+        ],
+        keyPersonnel: [
+          {
+            email: 'bob@thebuilder.net',
+            hasCosts: true,
+            isPrimary: false,
+            name: 'Bob the Builder',
+            percentTime: 0.37,
+            position: 'Builder',
+            costs: [{ cost: 50, year: '1903' }, { cost: 73293, year: '2018' }]
           }
         ],
         narrativeHIE: 'hie hie hie',

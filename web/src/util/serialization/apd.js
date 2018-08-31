@@ -2,7 +2,7 @@ import {
   toAPI as activityToAPI,
   fromAPI as activityFromAPI
 } from './activities';
-import { replaceNulls } from '../index';
+import { generateKey, replaceNulls } from '../index';
 import assurancesList from '../../data/assurancesAndCompliance.yaml';
 
 export const initialAssurances = Object.entries(assurancesList).reduce(
@@ -100,6 +100,7 @@ export const toAPI = (
   const {
     // these get massaged
     incentivePayments,
+    keyPersonnel,
     previousActivityExpenses,
 
     // and everything else just gets copied
@@ -110,6 +111,13 @@ export const toAPI = (
     ...apd,
     activities: Object.values(activityState.byKey).map(serializeActivity),
     incentivePayments: incentivePaymentsSerializer.toAPI(incentivePayments),
+    keyPersonnel: keyPersonnel.map(kp => ({
+      ...kp,
+      percentTime: kp.percentTime / 100,
+      costs: kp.hasCosts
+        ? Object.entries(kp.costs).map(([year, cost]) => ({ year, cost }))
+        : []
+    })),
     previousActivityExpenses: Object.entries(previousActivityExpenses).map(
       ([year, o]) => ({
         year,
@@ -132,6 +140,7 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
     activities,
     federalCitations,
     incentivePayments,
+    keyPersonnel,
     previousActivityExpenses,
     years,
 
@@ -144,6 +153,15 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
     activities: activities.map(a => deserializeActivity(a, years)),
     federalCitations: federalCitations || initialAssurances,
     incentivePayments: incentivePaymentsSerializer.fromAPI(incentivePayments),
+    keyPersonnel: keyPersonnel.map(p => ({
+      ...p,
+      percentTime: p.percentTime * 100,
+      costs: p.costs.reduce(
+        (costs, { year, cost }) => ({ ...costs, [year]: cost }),
+        {}
+      ),
+      key: generateKey()
+    })),
     previousActivityExpenses: previousActivityExpenses.reduce(
       previousActivityExpensesReducer,
       {}
