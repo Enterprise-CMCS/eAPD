@@ -10,6 +10,7 @@ import faClock from '@fortawesome/fontawesome-free-regular/faClock';
 import faCode from '@fortawesome/fontawesome-free-solid/faCode';
 import faCog from '@fortawesome/fontawesome-free-solid/faCog';
 import faExclamationTriangle from '@fortawesome/fontawesome-free-solid/faExclamationTriangle';
+import faPrint from '@fortawesome/fontawesome-free-solid/faPrint';
 import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner';
 import faHelpSolid from '@fortawesome/fontawesome-free-solid/faQuestionCircle';
 import faSignOut from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
@@ -25,6 +26,7 @@ export {
   faCode,
   faCog,
   faExclamationTriangle,
+  faPrint,
   faSignOut,
   faSpinner
 };
