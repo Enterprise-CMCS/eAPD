@@ -19,8 +19,8 @@ const linkGroup1 = [
         name: t('apd.stateProfile.directorAndAddress.title')
       },
       {
-        id: 'apd-state-profile-contacts',
-        name: t('apd.stateProfile.pointsOfContact.title')
+        id: 'apd-state-profile-key-personnel',
+        name: t('apd.stateProfile.keyPersonnel.title')
       }
     ]
   },
@@ -234,7 +234,4 @@ const mapDispatchToProps = {
   toggleExpand: toggleExpandAction
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
