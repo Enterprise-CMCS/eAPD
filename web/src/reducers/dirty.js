@@ -15,7 +15,14 @@ import {
   REMOVE_ACTIVITY_STATE_PERSON,
   UPDATE_ACTIVITY
 } from '../actions/activities';
-import { UPDATE_APD, SAVE_APD_SUCCESS, SELECT_APD } from '../actions/apd';
+import {
+  ADD_APD_KEY_PERSON,
+  REMOVE_APD_KEY_PERSON,
+  SAVE_APD_SUCCESS,
+  SET_KEY_PERSON_PRIMARY,
+  SELECT_APD,
+  UPDATE_APD
+} from '../actions/apd';
 
 const initialState = {
   data: { apd: {}, activities: { byKey: {} } },
@@ -131,7 +138,10 @@ const dirty = (state = initialState, action) => {
         state
       );
 
+    case ADD_APD_KEY_PERSON:
     case REMOVE_ACTIVITY:
+    case REMOVE_APD_KEY_PERSON:
+    case SET_KEY_PERSON_PRIMARY:
       return u({ dirty: true }, state);
 
     case UPDATE_ACTIVITY:
