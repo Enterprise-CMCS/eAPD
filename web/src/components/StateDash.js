@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Btn from './Btn';
-import Collapsible from './Collapsible';
 import Container from './Container';
 import { SectionTitle } from './Section';
+import Icon, { faArrowRight, faPlusCircle } from './Icons';
 
 const ActivityEntry = () => (
   <div className="flex items-center mb2">
@@ -90,36 +90,65 @@ const StatusEntry = () => (
 );
 
 const TaskTable = () => (
-  <table className="table-cms table-fixed">
+  <table className="table-fixed">
     <thead>
-      <tr>
-        <th className="col-2">Document</th>
-        <th className="col-2">Type/Name</th>
-        <th className="col-4">Status</th>
-        <th className="col-2">Due date</th>
-        <th className="col-2">Action</th>
+      <tr className="bg-blue-bright white">
+        <th className="col-2 regular">Document type</th>
+        <th className="col-4 regular">Status</th>
+        <th className="col-2 regular">Due date</th>
+        <th className="col-2 regular">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr className="align-middle">
+      <tr
+        className="align-middle bg-grey-light border-top border-bottom border-white"
+        style={{ borderWidth: '0.5rem' }}
+      >
         <td>APD</td>
-        <td>Annual Update</td>
-        <td>Awaiting State Response</td>
+        <td>Awaiting state response</td>
         <td>09/10/2018</td>
         <td>
-          <Btn size="small" extraCss="col-12">
-            Respond
+          <Btn size="small" extraCss="col-12 p1 bg-blue white">
+            Respond <Icon icon={faArrowRight} />
           </Btn>
         </td>
       </tr>
-      <tr className="align-middle">
+      <tr
+        className="align-middle bg-grey-light border-top border-bottom border-white"
+        style={{ borderWidth: '0.5rem' }}
+      >
         <td>Contract</td>
-        <td>Vendor Inc.</td>
-        <td>Pending Submission to CMS</td>
+        <td>Awaiting state response</td>
         <td>ASAP</td>
         <td>
-          <Btn size="small" extraCss="col-12">
-            Start
+          <Btn size="small" extraCss="col-12 p1 bg-blue white">
+            Response <Icon icon={faArrowRight} />
+          </Btn>
+        </td>
+      </tr>
+      <tr
+        className="align-middle bg-grey-light border-top border-bottom border-white"
+        style={{ borderWidth: '0.5rem' }}
+      >
+        <td>APD</td>
+        <td>Submission in progress</td>
+        <td>08/01/2018</td>
+        <td>
+          <Btn size="small" extraCss="col-12 p1 bg-blue white">
+            Open <Icon icon={faPlusCircle} />
+          </Btn>
+        </td>
+      </tr>
+      <tr
+        className="align-middle bg-grey-light border-top border-bottom border-white"
+        style={{ borderWidth: '0.5rem' }}
+      >
+        <td>Contract</td>
+        <td>Submission not started</td>
+        <td>12/01/2018</td>
+        <td>
+          <Btn size="small" extraCss="col-12 p1 bg-blue white">
+            Start <Icon icon={faPlusCircle} />
           </Btn>
         </td>
       </tr>
@@ -127,25 +156,41 @@ const TaskTable = () => (
   </table>
 );
 
+const DashboardSection = ({ title, children }) => (
+  <div id="dashboard-tasks" className="mb3 bg-white rounded shadow accordian">
+    <h1 className="col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align regular blue">
+      {title}
+    </h1>
+    <div className="p2 sm-p3 has-sticky-header">{children}</div>
+  </div>
+);
+DashboardSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired
+};
+
 const StateDash = () => (
   <Container>
     <SectionTitle>My Dashboard</SectionTitle>
-    <Collapsible title="My tasks" open>
+
+    <DashboardSection title="My Tasks">
       <TaskTable />
-    </Collapsible>
-    <Collapsible title="Current statuses" open>
+    </DashboardSection>
+
+    <DashboardSection title="Current Statuses">
       <StatusEntry />
-    </Collapsible>
+    </DashboardSection>
+
     <div className="sm-flex mxn2">
       <div className="sm-col-6 px2">
-        <Collapsible title="Recent activity" open>
+        <DashboardSection title="Recent Activity">
           <ActivityEntry />
           <ActivityEntry />
           <ActivityEntry />
-        </Collapsible>
+        </DashboardSection>
       </div>
       <div className="sm-col-6 px2">
-        <Collapsible title="Upcoming events" open>
+        <DashboardSection title="Upcoming events">
           <h3 className="mt0 pb1 light border-bottom">2018</h3>
           <Events
             month="June"
@@ -155,7 +200,7 @@ const StateDash = () => (
             ]}
           />
           <Events month="July" events={[{ day: 7, title: 'Annual APD Due' }]} />
-        </Collapsible>
+        </DashboardSection>
       </div>
     </div>
   </Container>
