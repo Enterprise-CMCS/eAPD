@@ -9,7 +9,7 @@ const authorization = require('./authorization');
 const state = require('./state');
 const apd = require('./apd');
 const apdIncentivePayment = require('./apdIncentivePayment');
-const apdPOC = require('./apdPointOfContact');
+const apdKeyPersonnel = require('./apdKeyPersonnel');
 const apdVersion = require('./apdVersion');
 const previousActivityExpense = require('./apdPreviousActivityExpense');
 const apdActivity = require('./activity');
@@ -30,7 +30,7 @@ const setup = (
     state(),
     apd(),
     apdIncentivePayment(),
-    apdPOC(),
+    apdKeyPersonnel(),
     apdVersion(),
     previousActivityExpense(),
     apdActivity(),
