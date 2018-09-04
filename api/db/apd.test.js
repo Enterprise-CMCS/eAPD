@@ -13,7 +13,7 @@ tap.test('apd data model', async apdModelTests => {
 
           activities: Function,
           incentivePayments: Function,
-          pointsOfContact: Function,
+          keyPersonnel: Function,
           previousActivityExpenses: Function,
           state: Function,
           versions: Function,
@@ -34,7 +34,7 @@ tap.test('apd data model', async apdModelTests => {
             owns: {
               activities: 'apdActivity',
               incentivePayments: 'apdIncentivePayment',
-              pointsOfContact: 'apdPointOfContact',
+              keyPersonnel: 'apdKeyPersonnel',
               previousActivityExpenses: 'apdPreviousActivityExpense'
             },
             withRelated: [
@@ -53,7 +53,7 @@ tap.test('apd data model', async apdModelTests => {
               'activities.statePersonnel.years',
               'activities.quarterlyFFP',
               'incentivePayments',
-              'pointsOfContact',
+              'keyPersonnel.years',
               'previousActivityExpenses'
             ]
           }
@@ -229,8 +229,8 @@ tap.test('apd data model', async apdModelTests => {
     self.get.withArgs('federal_citations').returns('assurances and stuff');
     self.get.withArgs('period').returns('apd-period');
     self.related
-      .withArgs('pointsOfContact')
-      .returns({ toJSON: () => 'points-of-contact' });
+      .withArgs('keyPersonnel')
+      .returns({ toJSON: () => 'key-personnel' });
     self.get
       .withArgs('previous_activity_summary')
       .returns('apd-previous-activity-summary');
@@ -268,7 +268,7 @@ tap.test('apd data model', async apdModelTests => {
         narrativeHIT: 'apd-hit',
         narrativeMMIS: 'apd-mmis',
         period: 'apd-period',
-        pointsOfContact: 'points-of-contact',
+        keyPersonnel: 'key-personnel',
         previousActivitySummary: 'apd-previous-activity-summary',
         previousActivityExpenses: 'apd-previous-activity-expenses',
         programOverview: 'apd-overview',

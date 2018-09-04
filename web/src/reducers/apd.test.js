@@ -14,14 +14,6 @@ describe('APD reducer', () => {
     expect(apd(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle adding a POC', () => {
-    expect(
-      apd({ data: { pointsOfContact: [] } }, { type: 'ADD_APD_POC' })
-    ).toEqual({
-      data: { pointsOfContact: [{ email: '', name: '', position: '' }] }
-    });
-  });
-
   it('should handle a request to get an APD', () => {
     expect(apd(initialState, { type: 'GET_APD_REQUEST' })).toEqual({
       byId: {},
@@ -44,10 +36,29 @@ describe('APD reducer', () => {
         federalCitations:
           'The Third Sentence of the Ninth Paragraph of the Three Hundred and Twenty-First Section of the Ninety-Fifth Part of the Forty-Fifth Title of the Federal Code of Regulations',
         programOverview: 'moop moop',
-        pointsOfContact: 'here be points of contact',
         narrativeHIT: 'HIT, but as a play',
         narrativeHIE: 'HIE, but as a novel',
         narrativeMMIS: 'MMIS, but as a script',
+        keyPersonnel: [
+          {
+            name: 'Key Person 1',
+            position: 'Keymaster',
+            email: 'em@il.com',
+            isPrimary: false,
+            hasCosts: true,
+            percentTime: 0.32,
+            costs: [
+              {
+                year: '2018',
+                cost: 100
+              },
+              {
+                year: '2019',
+                cost: 200
+              }
+            ]
+          }
+        ],
         incentivePayments: [
           {
             year: 1909, // Taft becomes President; good year
@@ -118,6 +129,21 @@ describe('APD reducer', () => {
             narrativeHIT: 'HIT, but as a play',
             narrativeHIE: 'HIE, but as a novel',
             narrativeMMIS: 'MMIS, but as a script',
+            keyPersonnel: [
+              {
+                name: 'Key Person 1',
+                position: 'Keymaster',
+                email: 'em@il.com',
+                isPrimary: false,
+                hasCosts: true,
+                percentTime: 32,
+                costs: {
+                  '2018': 100,
+                  '2019': 200
+                },
+                key: expect.stringMatching(/[0-9a-f]{6}/)
+              }
+            ],
             incentivePayments: {
               ehAmt: {
                 1909: {
@@ -152,7 +178,6 @@ describe('APD reducer', () => {
                 }
               }
             },
-            pointsOfContact: 'here be points of contact',
             previousActivitySummary: 'Bob the Builder built a building',
             previousActivityExpenses: {
               2013: { hie: '2013 hie', hit: '2013 hit', mmis: '2013 mmis' },
@@ -226,7 +251,79 @@ describe('APD reducer', () => {
     });
   });
 
-  it('should handle an APD year add update (which impacts incentive payments)', () => {
+  it('should handle adding an APD key personnel', () => {
+    expect(
+      apd(
+        { ...initialState, data: { keyPersonnel: [] } },
+        { type: 'ADD_APD_KEY_PERSON' }
+      )
+    ).toEqual({
+      ...initialState,
+      data: {
+        keyPersonnel: [
+          {
+            costs: {},
+            email: '',
+            hasCosts: false,
+            isPrimary: false,
+            name: '',
+            position: '',
+            key: expect.stringMatching(/[0-9a-f]{6}/)
+          }
+        ]
+      }
+    });
+  });
+
+  it('should handle removing an APD key personnel', () => {
+    expect(
+      apd(
+        {
+          ...initialState,
+          data: { keyPersonnel: [{ key: 'person', goes: 'here' }] }
+        },
+        { type: 'REMOVE_APD_KEY_PERSON', index: 0 }
+      )
+    ).toEqual({
+      ...initialState,
+      data: {
+        keyPersonnel: []
+      }
+    });
+  });
+
+  it('should handle setting an APD key personnel', () => {
+    expect(
+      apd(
+        {
+          ...initialState,
+          data: {
+            ...initialState.data,
+            keyPersonnel: [
+              {
+                isPrimary: true
+              },
+              { isPrimary: false }
+            ]
+          }
+        },
+        { type: 'SET_KEY_PERSON_PRIMARY', index: 1 }
+      )
+    ).toEqual({
+      ...initialState,
+      data: {
+        ...initialState.data,
+        keyPersonnel: [
+          {
+            isPrimary: false
+          },
+          { isPrimary: true }
+        ]
+      }
+    });
+  });
+
+  it('should handle an APD year add update (which impacts incentive payments and key personnel costs)', () => {
     const state = {
       ...initialState,
       data: {
@@ -240,7 +337,13 @@ describe('APD reducer', () => {
               4: 1000
             }
           }
-        }
+        },
+        keyPersonnel: [
+          {
+            name: 'bob',
+            costs: { 1: 100 }
+          }
+        ]
       }
     };
 
@@ -268,7 +371,13 @@ describe('APD reducer', () => {
               4: 0
             }
           }
-        }
+        },
+        keyPersonnel: [
+          {
+            name: 'bob',
+            costs: { 1: 100, 2: 0 }
+          }
+        ]
       }
     });
   });
@@ -293,7 +402,13 @@ describe('APD reducer', () => {
               4: 1000
             }
           }
-        }
+        },
+        keyPersonnel: [
+          {
+            name: 'bob',
+            costs: { 1: 100, 2: 200 }
+          }
+        ]
       }
     };
 
@@ -315,7 +430,13 @@ describe('APD reducer', () => {
               4: 1000
             }
           }
-        }
+        },
+        keyPersonnel: [
+          {
+            name: 'bob',
+            costs: { 1: 100 }
+          }
+        ]
       }
     });
   });

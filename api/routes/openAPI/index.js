@@ -415,6 +415,45 @@ module.exports = {
               q4: { $ref: '#/components/schemas/incentivePaymentQuarter' }
             }
           }),
+          keyPersonnel: arrayOf({
+            type: 'object',
+            properties: {
+              id: { type: 'number' },
+              costs: arrayOf({
+                type: 'object',
+                properties: {
+                  cost: {
+                    type: 'number',
+                    description: `Person's cost for the given year`
+                  },
+                  year: {
+                    type: 'string',
+                    description:
+                      'Federal fiscal year this cost is attributable to'
+                  }
+                }
+              }),
+              email: { type: 'string', description: `Person's email address` },
+              hasCosts: {
+                type: 'boolean',
+                description:
+                  'Whether the person has costs attributable to the project'
+              },
+              isPrimary: {
+                type: 'boolean',
+                description:
+                  'Whether the person is the primary point of contact for the APD'
+              },
+              name: { type: 'string', description: `Person's name` },
+              percentTime: {
+                type: 'number',
+                description: `Percent of this person's time dedicated to the project, as a faction between 0 and 1.`,
+                minimum: 0,
+                maximum: 1
+              },
+              position: { type: 'string', description: `Person's position` }
+            }
+          }),
           narrativeHIE: {
             type: 'string',
             description:
@@ -430,14 +469,6 @@ module.exports = {
             description:
               'Brief description of MMIS-funded activities contained in this APD'
           },
-          pointsOfContact: arrayOf({
-            type: 'object',
-            properties: {
-              name: { type: 'string', description: `Contact's name` },
-              position: { type: 'string', description: `Contact's position` },
-              email: { type: 'string', description: `Contact's email address` }
-            }
-          }),
           previousActivityExpenses: arrayOf({
             type: 'object',
             properties: {

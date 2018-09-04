@@ -32,15 +32,15 @@ describe('apd actions', () => {
   });
 
   it('addApdKeyPerson should create ADD_APD_KEY_PERSON action', () => {
-    expect(actions.addApdKeyPerson()).toEqual({
+    expect(actions.addKeyPerson()).toEqual({
       type: actions.ADD_APD_KEY_PERSON
     });
   });
 
   it('removeApdKeyPerson should create REMOVE_APD_KEY_PERSON action', () => {
-    expect(actions.removeApdKeyPerson('id')).toEqual({
+    expect(actions.removeKeyPerson('id')).toEqual({
       type: actions.REMOVE_APD_KEY_PERSON,
-      id: 'id'
+      index: 'id'
     });
   });
 
