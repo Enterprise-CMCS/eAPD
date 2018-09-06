@@ -20,14 +20,29 @@ const ProgressDot = ({ done, started, text }) => {
     color = '#124f81';
   }
 
+  let labelColor = '';
+  if (!done && !started) {
+    labelColor = ' light gray';
+  }
+
   return (
     <div className="center">
       <Icon icon={done ? faCheckCircle : faCircle} color={color} size="2x" />
-      <div className={`absolute pl1 ${!done && !started && 'light gray'}`}>
-        {text}
-      </div>
+      <div className={`absolute pl1 ${labelColor}`}>{text}</div>
     </div>
   );
+};
+
+ProgressDot.propTypes = {
+  done: PropTypes.bool,
+  started: PropTypes.bool,
+  text: PropTypes.bool
+};
+
+ProgressDot.defaultProps = {
+  done: false,
+  started: false,
+  text: null
 };
 
 const ProgressLine = ({ done }) => (
@@ -37,7 +52,15 @@ const ProgressLine = ({ done }) => (
   />
 );
 
-const Document = ({ name, status, buttonClick }) => {
+ProgressLine.propTypes = {
+  done: PropTypes.bool
+};
+
+ProgressLine.defaultProps = {
+  done: false
+};
+
+const DocumentItem = ({ name, status, buttonClick }) => {
   const states = {
     one: {
       done: false,
@@ -125,6 +148,16 @@ const Document = ({ name, status, buttonClick }) => {
   );
 };
 
+DocumentItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  buttonClick: PropTypes.func
+};
+
+DocumentItem.defaultProps = {
+  buttonClick: () => {}
+};
+
 class CurrentDocuments extends Component {
   open = id => () => this.props.selectApd(id);
 
@@ -142,16 +175,16 @@ class CurrentDocuments extends Component {
     return (
       <div>
         {apds.map(apd => (
-          <Document
+          <DocumentItem
             key={apd.id}
             name={`APD for ${apd.years.join(', ')}`}
             status={apd.status}
             buttonClick={this.open(apd.id)}
           />
         ))}
-        <Document name="Example one" status="reviewed" />
-        <Document name="Example two" status="in review" />
-        <Document name="Example three" status="approved" />
+        <DocumentItem name="Example one" status="reviewed" />
+        <DocumentItem name="Example two" status="in review" />
+        <DocumentItem name="Example three" status="approved" />
       </div>
     );
   }
