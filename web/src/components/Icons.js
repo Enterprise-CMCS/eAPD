@@ -7,9 +7,11 @@ import faBell from '@fortawesome/fontawesome-free-solid/faBell';
 import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle';
 import faChevronDown from '@fortawesome/fontawesome-free-solid/faChevronDown';
 import faChevronUp from '@fortawesome/fontawesome-free-solid/faChevronUp';
+import faCircle from '@fortawesome/fontawesome-free-regular/faCircle';
 import faClock from '@fortawesome/fontawesome-free-regular/faClock';
 import faCode from '@fortawesome/fontawesome-free-solid/faCode';
 import faCog from '@fortawesome/fontawesome-free-solid/faCog';
+import faEdit from '@fortawesome/fontawesome-free-solid/faEdit';
 import faExclamationTriangle from '@fortawesome/fontawesome-free-solid/faExclamationTriangle';
 import faPlusCircle from '@fortawesome/fontawesome-free-solid/faPlusCircle';
 import faPrint from '@fortawesome/fontawesome-free-solid/faPrint';
@@ -25,9 +27,11 @@ export {
   faCheckCircle,
   faChevronDown,
   faChevronUp,
+  faCircle,
   faClock,
   faCode,
   faCog,
+  faEdit,
   faExclamationTriangle,
   faPlusCircle,
   faPrint,
