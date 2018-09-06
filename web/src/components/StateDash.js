@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Btn from './Btn';
-import Container from './Container';
-import { SectionTitle } from './Section';
 import Icon, { faArrowRight, faEdit, faPlusCircle } from './Icons';
+import Sidebar from '../containers/StateDashboardSidebar';
+import { SectionTitle } from './Section';
+import TopBtns from '../containers/TopBtns';
 import CurrentDocuments from '../containers/StateDashboardCurrentDocuments';
 
 const ActivityEntry = () => (
@@ -123,40 +124,48 @@ DashboardSection.propTypes = {
 };
 
 const StateDash = () => (
-  <Container>
-    <SectionTitle>My Dashboard</SectionTitle>
+  <div className="site-body">
+    <Sidebar />
+    <div className="site-main p2 sm-p4 md-px0">
+      <TopBtns />
 
-    <DashboardSection title="My Tasks">
-      <TaskTable />
-    </DashboardSection>
+      <SectionTitle>My Dashboard</SectionTitle>
 
-    <DashboardSection title="Current Statuses">
-      <CurrentDocuments />
-    </DashboardSection>
+      <DashboardSection title="My Tasks">
+        <TaskTable />
+      </DashboardSection>
 
-    <div className="sm-flex mxn2">
-      <div className="sm-col-6 px2">
-        <DashboardSection title="Recent Activity">
-          <ActivityEntry />
-          <ActivityEntry />
-          <ActivityEntry />
-        </DashboardSection>
-      </div>
-      <div className="sm-col-6 px2">
-        <DashboardSection title="Upcoming events">
-          <h3 className="mt0 pb1 light border-bottom">2018</h3>
-          <Events
-            month="June"
-            events={[
-              { day: 26, title: 'Quarterly Report Due' },
-              { day: 30, title: 'Performance Progress CoP' }
-            ]}
-          />
-          <Events month="July" events={[{ day: 7, title: 'Annual APD Due' }]} />
-        </DashboardSection>
+      <DashboardSection title="Current Statuses">
+        <CurrentDocuments />
+      </DashboardSection>
+
+      <div className="sm-flex mxn2">
+        <div className="sm-col-6 px2">
+          <DashboardSection title="Recent Activity">
+            <ActivityEntry />
+            <ActivityEntry />
+            <ActivityEntry />
+          </DashboardSection>
+        </div>
+        <div className="sm-col-6 px2">
+          <DashboardSection title="Upcoming events">
+            <h3 className="mt0 pb1 light border-bottom">2018</h3>
+            <Events
+              month="June"
+              events={[
+                { day: 26, title: 'Quarterly Report Due' },
+                { day: 30, title: 'Performance Progress CoP' }
+              ]}
+            />
+            <Events
+              month="July"
+              events={[{ day: 7, title: 'Annual APD Due' }]}
+            />
+          </DashboardSection>
+        </div>
       </div>
     </div>
-  </Container>
+  </div>
 );
 
 export default StateDash;

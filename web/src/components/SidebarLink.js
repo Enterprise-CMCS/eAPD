@@ -24,12 +24,24 @@ const getClasses = (depth, hash, anchor) => deline`
   ${depth ? 'pl2' : ''} ${hash === anchor ? 'sb-item-active' : ''}
 `;
 
+const clickHandler = (depth, toggleExpand, propsOnClick) => e => {
+  if (depth === 0) {
+    toggleExpand();
+  }
+  if (propsOnClick) {
+    propsOnClick();
+    e.preventDefault();
+    e.stopPropagation();
+  }
+};
+
 const SidebarLink = ({
   anchor,
   children,
   depth,
   expanded,
   hash,
+  onClick,
   sub,
   toggleExpand,
   ...rest
@@ -39,7 +51,7 @@ const SidebarLink = ({
       <a
         href={`#${anchor || '!'}`}
         className="white text-decoration-none truncate"
-        onClick={depth === 0 ? toggleExpand : undefined}
+        onClick={clickHandler(depth, toggleExpand, onClick)}
         {...rest}
       >
         {children}
@@ -61,6 +73,7 @@ SidebarLink.propTypes = {
   depth: PropTypes.number,
   expanded: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   hash: PropTypes.string,
+  onClick: PropTypes.func,
   sub: PropTypes.array,
   toggleExpand: PropTypes.func
 };
@@ -70,6 +83,7 @@ SidebarLink.defaultProps = {
   depth: 0,
   expanded: null,
   hash: null,
+  onClick: null,
   sub: [],
   toggleExpand: () => {}
 };

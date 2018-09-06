@@ -8,14 +8,23 @@ import Icon, {
   faArrowRight,
   faCheckCircle,
   faCircle,
-  faEdit
+  faEdit,
+  faSpinner
 } from '../components/Icons';
 
 class CurrentDocuments extends Component {
   open = id => () => this.props.selectApd(id);
 
   render() {
-    const { apds } = this.props;
+    const { apds, fetching } = this.props;
+
+    if (fetching) {
+      return (
+        <div className="h2 center">
+          <Icon icon={faSpinner} spin size="sm" className="mr1" /> Loading APDs
+        </div>
+      );
+    }
 
     return (
       <div>
@@ -124,10 +133,14 @@ class CurrentDocuments extends Component {
 
 CurrentDocuments.propTypes = {
   apds: PropTypes.array.isRequired,
+  fetching: PropTypes.bool.isRequired,
   selectApd: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ apd: { byId } }) => ({ apds: Object.values(byId) });
+const mapStateToProps = ({ apd: { byId, fetching } }) => ({
+  apds: Object.values(byId),
+  fetching
+});
 const mapDispatchToProps = { selectApd };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentDocuments);
