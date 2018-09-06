@@ -2,7 +2,7 @@ import NoMatch from './components/NoMatch';
 import ApdApplication from './containers/ApdApplication';
 import Login from './containers/Login';
 
-import StateDash from './components/StateDash';
+import StateDash from './components/StateDashboard';
 
 // temp pages for more targeted development & iteration
 import MiscPage from './components/temp/MiscPage';

@@ -50,7 +50,7 @@ class Sidebar extends Component {
                 extraCss="bg-white blue"
                 onClick={this.createApd}
               >
-                Create new APD
+                Create new
               </Btn>
             </div>
           </div>

@@ -9,10 +9,10 @@ import TopBtns from '../containers/TopBtns';
 import CurrentDocuments from '../containers/StateDashboardCurrentDocuments';
 
 const ActivityEntry = () => (
-  <div className="flex items-center mb2">
+  <div className="flex items-center mb3">
     <div className="flex-none mr1">
       <div
-        className="flex items-center h6 center white bg-blue-bright rounded"
+        className="flex items-center h4 center white bg-blue-bright rounded"
         style={{ width: 40, height: 40 }}
       >
         <div className="mx-auto center line-height-1">
@@ -47,10 +47,10 @@ const TaskTable = () => (
   <table className="table-fixed">
     <thead>
       <tr className="bg-blue-bright white">
-        <th className="col-2 regular">Document type</th>
-        <th className="col-4 regular">Status</th>
-        <th className="col-2 regular">Due date</th>
-        <th className="col-2 regular">Action</th>
+        <th className="col-2 light">Document type</th>
+        <th className="col-4 light">Status</th>
+        <th className="col-2 light">Due date</th>
+        <th className="col-2 light">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -123,11 +123,11 @@ DashboardSection.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const StateDash = () => (
+const StateDashboard = () => (
   <div className="site-body">
     <Sidebar />
     <div className="site-main p2 sm-p4 md-px0">
-      <TopBtns />
+      <TopBtns hideDashboard />
 
       <SectionTitle>My Dashboard</SectionTitle>
 
@@ -168,4 +168,4 @@ const StateDash = () => (
   </div>
 );
 
-export default StateDash;
+export default StateDashboard;

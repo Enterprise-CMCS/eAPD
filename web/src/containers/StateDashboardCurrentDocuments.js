@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { selectApd } from '../actions/apd';
@@ -11,6 +11,119 @@ import Icon, {
   faEdit,
   faSpinner
 } from '../components/Icons';
+
+const ProgressDot = ({ done, started, text }) => {
+  let color = '#aaaaaa';
+  if (done) {
+    color = '#9dd887';
+  } else if (started) {
+    color = '#124f81';
+  }
+
+  return (
+    <div className="center">
+      <Icon icon={done ? faCheckCircle : faCircle} color={color} size="2x" />
+      <div className={`absolute pl1 ${!done && !started && 'light gray'}`}>
+        {text}
+      </div>
+    </div>
+  );
+};
+
+const ProgressLine = ({ done }) => (
+  <div
+    className={`flex-auto bg-${done ? 'blue' : 'gray'}`}
+    style={{ height: '3px' }}
+  />
+);
+
+const Document = ({ name, status, buttonClick }) => {
+  const states = {
+    one: {
+      done: false,
+      started: true,
+      title: 'Submitted'
+    },
+    two: {
+      done: false,
+      started: false,
+      title: 'Reviewed'
+    },
+    three: {
+      done: false,
+      started: false,
+      title: 'Approved'
+    }
+  };
+
+  let actionButtonText = 'View';
+  let actionButtonIcon = faArrowRight;
+
+  switch (status) {
+    case 'draft':
+      states.one.title = 'Drafting';
+      actionButtonText = 'Open';
+      actionButtonIcon = faEdit;
+      break;
+
+    case 'in review':
+      states.one.done = true;
+      states.two.started = true;
+      states.two.title = 'Reviewing';
+      break;
+
+    case 'reviewed':
+      states.one.done = true;
+      states.two.done = true;
+      break;
+
+    case 'approved':
+      states.one.done = true;
+      states.two.done = true;
+      states.three.done = true;
+      actionButtonText = 'Approval letter';
+      break;
+
+    default:
+      break;
+  }
+
+  return (
+    <Fragment>
+      <div className="sm-flex items-center justify-between mb4 pb4">
+        <div className="bold sm-col-2">{name}</div>
+        <div className="sm-col-7 flex items-center">
+          <ProgressDot
+            started={states.one.started}
+            done={states.one.done}
+            text={states.one.title}
+          />
+          <ProgressLine done={states.one.done} />
+          <ProgressDot
+            started={states.two.started}
+            done={states.two.done}
+            text={states.two.title}
+          />
+          <ProgressLine done={states.two.done} />
+          <ProgressDot
+            started={states.three.started}
+            done={states.three.done}
+            text={states.three.title}
+          />
+        </div>
+        <div className="sm-col-2 sm-right-align">
+          <Btn
+            size="small"
+            extraCss="col-8 p1 bg-blue white"
+            onClick={buttonClick}
+          >
+            {actionButtonText} <Icon icon={actionButtonIcon} className="ml1" />
+          </Btn>
+        </div>
+      </div>
+    </Fragment>
+  );
+};
 
 class CurrentDocuments extends Component {
   open = id => () => this.props.selectApd(id);
@@ -29,103 +142,16 @@ class CurrentDocuments extends Component {
     return (
       <div>
         {apds.map(apd => (
-          <div key={apd.id} className="sm-flex items-center mb2">
-            <div className="sm-col-2">
-              <div className="bold">{`APD for ${apd.years.join(', ')}`}</div>
-            </div>
-            <div className="sm-col-8 progress-bar-basic">
-              <div>
-                <Icon icon={faCircle} color="#124f81" size="2x" />
-              </div>
-              <div className="bar" />
-              <div>
-                <Icon icon={faCircle} color="#aaaaaa" size="2x" />
-              </div>
-              <div className="bar" />
-              <div>
-                <Icon icon={faCircle} color="#aaaaaa" size="2x" />
-              </div>
-            </div>
-            <div className="sm-col-2 sm-right-align">
-              <Btn
-                size="small"
-                extraCss="col-12 m2 p1 bg-blue white"
-                onClick={this.open(apd.id)}
-              >
-                Open <Icon icon={faEdit} className="ml1" />
-              </Btn>
-            </div>
-          </div>
+          <Document
+            key={apd.id}
+            name={`APD for ${apd.years.join(', ')}`}
+            status={apd.status}
+            buttonClick={this.open(apd.id)}
+          />
         ))}
-        <div className="sm-flex items-center mb2">
-          <div className="sm-col-2">
-            <div className="bold">Example one</div>
-          </div>
-          <div className="sm-col-8 progress-bar-basic">
-            <div>
-              <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-            </div>
-            <div className="bar complete" />
-            <div>
-              <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-            </div>
-            <div className="bar" />
-            <div>
-              <Icon icon={faCircle} color="#aaaaaa" size="2x" />
-            </div>
-          </div>
-          <div className="sm-col-2 sm-right-align">
-            <Btn size="small" extraCss="col-12 m2 p1 bg-blue white">
-              View <Icon icon={faArrowRight} className="ml1" />
-            </Btn>
-          </div>
-        </div>
-        <div className="sm-flex items-center mb2">
-          <div className="sm-col-2">
-            <div className="bold">Example two</div>
-          </div>
-          <div className="sm-col-8 progress-bar-basic">
-            <div>
-              <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-            </div>
-            <div className="bar complete" />
-            <div>
-              <Icon icon={faCircle} color="#124f81" size="2x" />
-            </div>
-            <div className="bar" />
-            <div>
-              <Icon icon={faCircle} color="#aaaaaa" size="2x" />
-            </div>
-          </div>
-          <div className="sm-col-2 sm-right-align">
-            <Btn size="small" extraCss="col-12 m2 p1 bg-blue white">
-              View <Icon icon={faArrowRight} className="ml1" />
-            </Btn>
-          </div>
-        </div>
-        <div className="sm-flex items-center mb2">
-          <div className="sm-col-2">
-            <div className="bold">Example 3</div>
-          </div>
-          <div className="sm-col-8 progress-bar-basic">
-            <div>
-              <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-            </div>
-            <div className="bar complete" />
-            <div>
-              <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-            </div>
-            <div className="bar complete" />
-            <div>
-              <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-            </div>
-          </div>
-          <div className="sm-col-2 sm-right-align">
-            <Btn size="small" extraCss="col-12 m2 p1 bg-blue white">
-              View <Icon icon={faArrowRight} className="ml1" />
-            </Btn>
-          </div>
-        </div>
+        <Document name="Example one" status="reviewed" />
+        <Document name="Example two" status="in review" />
+        <Document name="Example three" status="approved" />
       </div>
     );
   }
