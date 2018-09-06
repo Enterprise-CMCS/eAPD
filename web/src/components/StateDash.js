@@ -4,13 +4,8 @@ import React from 'react';
 import Btn from './Btn';
 import Container from './Container';
 import { SectionTitle } from './Section';
-import Icon, {
-  faArrowRight,
-  faCheckCircle,
-  faCircle,
-  faEdit,
-  faPlusCircle
-} from './Icons';
+import Icon, { faArrowRight, faEdit, faPlusCircle } from './Icons';
+import CurrentDocuments from '../containers/StateDashboardCurrentDocuments';
 
 const ActivityEntry = () => (
   <div className="flex items-center mb2">
@@ -24,7 +19,7 @@ const ActivityEntry = () => (
         </div>
       </div>
     </div>
-    <div className="flex-auto">Tim Smith commented on 2018 IAPD-U.</div>
+    <div className="flex-auto">(ex.) Tim Smith commented on 2018 IAPD-U.</div>
   </div>
 );
 
@@ -34,7 +29,9 @@ const Events = ({ month, events }) => (
     {events.map((e, i) => (
       <div key={i} className="mb1 flex items-center">
         <div>{e.day}</div>
-        <div className="ml2 flex-auto p1 bg-teal-light rounded">{e.title}</div>
+        <div className="ml2 flex-auto p1 bg-teal-light rounded">
+          (ex.) {e.title}
+        </div>
       </div>
     ))}
   </div>
@@ -44,80 +41,6 @@ Events.propTypes = {
   month: PropTypes.string.isRequired,
   events: PropTypes.array.isRequired
 };
-
-const StatusEntry = () => (
-  <div>
-    <div className="sm-flex items-center mb2">
-      <div className="sm-col-2">
-        <div className="bold">Example one</div>
-      </div>
-      <div className="sm-col-8 progress-bar-basic">
-        <div>
-          <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-        </div>
-        <div className="bar complete" />
-        <div>
-          <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-        </div>
-        <div className="bar" />
-        <div>
-          <Icon icon={faCircle} color="#aaaaaa" size="2x" />
-        </div>
-      </div>
-      <div className="sm-col-2 sm-right-align">
-        <Btn size="small" extraCss="col-12 m2 p1 bg-blue white">
-          View <Icon icon={faArrowRight} className="ml1" />
-        </Btn>
-      </div>
-    </div>
-    <div className="sm-flex items-center mb2">
-      <div className="sm-col-2">
-        <div className="bold">Example two</div>
-      </div>
-      <div className="sm-col-8 progress-bar-basic">
-        <div>
-          <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-        </div>
-        <div className="bar complete" />
-        <div>
-          <Icon icon={faCircle} color="#124f81" size="2x" />
-        </div>
-        <div className="bar" />
-        <div>
-          <Icon icon={faCircle} color="#aaaaaa" size="2x" />
-        </div>
-      </div>
-      <div className="sm-col-2 sm-right-align">
-        <Btn size="small" extraCss="col-12 m2 p1 bg-blue white">
-          View <Icon icon={faArrowRight} className="ml1" />
-        </Btn>
-      </div>
-    </div>
-    <div className="sm-flex items-center mb2">
-      <div className="sm-col-2">
-        <div className="bold">Example 3</div>
-      </div>
-      <div className="sm-col-8 progress-bar-basic">
-        <div>
-          <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-        </div>
-        <div className="bar complete" />
-        <div>
-          <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-        </div>
-        <div className="bar complete" />
-        <div>
-          <Icon icon={faCheckCircle} color="#9dd887" size="2x" />
-        </div>
-      </div>
-      <div className="sm-col-2 sm-right-align">
-        <Btn size="small" extraCss="col-12 m2 p1 bg-blue white">
-          View <Icon icon={faArrowRight} className="ml1" />
-        </Btn>
-      </div>
-    </div>
-  </div>
-);
 
 const TaskTable = () => (
   <table className="table-fixed">
@@ -134,7 +57,7 @@ const TaskTable = () => (
         className="align-middle bg-grey-light border-top border-bottom border-white"
         style={{ borderWidth: '0.5rem' }}
       >
-        <td>APD</td>
+        <td>(ex.) APD</td>
         <td>Awaiting state response</td>
         <td>09/10/2018</td>
         <td>
@@ -147,7 +70,7 @@ const TaskTable = () => (
         className="align-middle bg-grey-light border-top border-bottom border-white"
         style={{ borderWidth: '0.5rem' }}
       >
-        <td>Contract</td>
+        <td>(ex.) Contract</td>
         <td>Awaiting state response</td>
         <td>ASAP</td>
         <td>
@@ -160,7 +83,7 @@ const TaskTable = () => (
         className="align-middle bg-grey-light border-top border-bottom border-white"
         style={{ borderWidth: '0.5rem' }}
       >
-        <td>APD</td>
+        <td>(ex.) APD</td>
         <td>Submission in progress</td>
         <td>08/01/2018</td>
         <td>
@@ -173,7 +96,7 @@ const TaskTable = () => (
         className="align-middle bg-grey-light border-top border-bottom border-white"
         style={{ borderWidth: '0.5rem' }}
       >
-        <td>Contract</td>
+        <td>(ex.) Contract</td>
         <td>Submission not started</td>
         <td>12/01/2018</td>
         <td>
@@ -208,7 +131,7 @@ const StateDash = () => (
     </DashboardSection>
 
     <DashboardSection title="Current Statuses">
-      <StatusEntry />
+      <CurrentDocuments />
     </DashboardSection>
 
     <div className="sm-flex mxn2">
