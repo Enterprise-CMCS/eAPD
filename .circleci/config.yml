@@ -201,8 +201,6 @@ jobs:
       - image: node:8
     steps:
       - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
       - run:
           name: update npm
           command: npm install -g npm@6
@@ -252,7 +250,7 @@ workflows:
   cleanup:
     triggers:
       - schedule:
-          cron: "0 0,2,4,6,8,10,12,14,16,18,20,22 * * *"
+          cron: '0 0,2,4,6,8,10,12,14,16,18,20,22 * * *'
           filters:
             branches:
               only:
@@ -279,13 +277,13 @@ workflows:
             - prepare dependencies cache
       - api lint:
           requires:
-             - prepare dependencies cache
+            - prepare dependencies cache
       - api unit test:
           requires:
-             - prepare dependencies cache
+            - prepare dependencies cache
       - api endpoint test:
           requires:
-             - prepare dependencies cache
+            - prepare dependencies cache
       - deploy pr:
           filters:
             branches:
