@@ -32,7 +32,7 @@ class Collapsible extends Component {
     const contentId = `collapsible-${kebabCase(title)}`;
 
     let btnClass = deline`
-      btn btn-collapse block col-12 py2 h3 sm-h2 line-height-1 left-align
+      btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align
       ${isOpen ? 'border-bottom border-bottom-darken-1 rounded-top' : 'rounded'}
       bg-${btnBgColor} ${btnColor}
     `;
@@ -41,11 +41,11 @@ class Collapsible extends Component {
     if (sticky) btnClass += ` ${nested ? 'sticky-nested' : 'sticky-header'}`;
 
     const bodyClass = deline`
-      p2 ${!isOpen ? 'display-none' : ''} ${sticky ? 'has-sticky-header' : ''}
+      p2 sm-p3 ${!isOpen ? 'd-none' : ''} ${sticky ? 'has-sticky-header' : ''}
     `;
 
     return (
-      <div id={id} className={`mb3 bg-${bgColor} rounded shadow`}>
+      <div id={id} className={`mb3 bg-${bgColor} rounded shadow accordian`}>
         <button
           type="button"
           className={btnClass}

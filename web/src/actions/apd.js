@@ -7,7 +7,6 @@ import { toAPI } from '../util/serialization/apd';
 const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
 export const ADD_APD_KEY_PERSON = 'ADD_APD_KEY_PERSON';
-export const ADD_APD_POC = 'ADD_APD_POC';
 export const CREATE_APD = 'CREATE_APD';
 export const CREATE_APD_REQUEST = 'CREATE_APD_REQUEST';
 export const CREATE_APD_SUCCESS = 'CREATE_APD_SUCCESS';
@@ -16,11 +15,11 @@ export const GET_APD_REQUEST = 'GET_APD_REQUEST';
 export const GET_APD_SUCCESS = 'GET_APD_SUCCESS';
 export const GET_APD_FAILURE = 'GET_APD_FAILURE';
 export const REMOVE_APD_KEY_PERSON = 'REMOVE_APD_KEY_PERSON';
-export const REMOVE_APD_POC = 'REMOVE_APD_POC';
 export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
 export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
 export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
 export const SELECT_APD = 'SELECT_APD';
+export const SET_KEY_PERSON_PRIMARY = 'SET_KEY_PERSON_PRIMARY';
 export const SUBMIT_APD_REQUEST = 'SUBMIT_APD_REQUEST';
 export const SUBMIT_APD_SUCCESS = 'SUBMIT_APD_SUCCESS';
 export const SUBMIT_APD_FAILURE = 'SUBMIT_APD_FAILURE';
@@ -30,8 +29,15 @@ export const UPDATE_BUDGET = 'UPDATE_BUDGET';
 export const SET_SELECT_APD_ON_LOAD = 'SET_SELECT_APD_ON_LOAD';
 export const selectApdOnLoad = () => ({ type: SET_SELECT_APD_ON_LOAD });
 
-export const addPointOfContact = () => ({ type: ADD_APD_POC });
-export const removePointOfContact = index => ({ type: REMOVE_APD_POC, index });
+export const addKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
+export const removeKeyPerson = index => ({
+  type: REMOVE_APD_KEY_PERSON,
+  index
+});
+export const setPrimaryKeyPerson = index => ({
+  type: SET_KEY_PERSON_PRIMARY,
+  index
+});
 
 export const updateBudget = () => (dispatch, getState) =>
   dispatch({ type: UPDATE_BUDGET, state: getState() });
@@ -39,9 +45,6 @@ export const updateBudget = () => (dispatch, getState) =>
 export const requestApd = () => ({ type: GET_APD_REQUEST });
 export const receiveApd = data => ({ type: GET_APD_SUCCESS, data });
 export const failApd = error => ({ type: GET_APD_FAILURE, error });
-
-export const addApdKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
-export const removeApdKeyPerson = id => ({ type: REMOVE_APD_KEY_PERSON, id });
 
 export const updateApd = updates => dispatch => {
   dispatch({ type: UPDATE_APD, updates });
@@ -201,6 +204,7 @@ export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
     .then(res => {
       dispatch(notify('Save successful!'));
       dispatch(saveSuccess(res.data));
+      return res.data;
     })
     .catch(error => {
       dispatch(notifyNetError('Save', error));

@@ -48,16 +48,35 @@
             city: City
             state: State
             zip: ZIP
-      pointsOfContact:
-        title: Main Contact
+      keyPersonnel:
+        title: Key Personnel & Project Management Planning
+        helpText: >-
+          Key personnel are individuals involved in governance, coordination,
+          stakeholder decision-making, and/or single state agency
+          responsibility for Medicaid oversight and project performance
+          monitoring.
+
+
+          Identify key state staff who will be involved in all activities
+          listed in this APD.  CMS seeks to ensure state teams are
+          adequately resourced, but does not require states to provide
+          key vendor personnel to satisfy this requirement.
+
+
+          Personnel listed in this section must be assigned to APD by name,
+          role, time commitment, and cost where applicable.
+        contact: "Contact #{{number}}"
         labels:
           name: Name
-          position: Position
-          email: Email address
+          position: Role
+          email: Email
+          percentTime: Percent commitment to project
+          primary: "This person is the primary APD point of contact:"
+          hasCosts: "This person has costs directly attributable to the project:"
           addButton: 
-            zero: Add point-of-contact
-            one: Add another contact
-            other: Add another contact
+            zero: Add key personnel
+            one: Add another person
+            other: Add another person
         delete:
           text: Remove contact
           confirm:
@@ -231,6 +250,7 @@
       helpText: >-
         Briefly describe how each goal relates to the vision identified in the
         program summary. Each goal should have a matching activity.
+      noDataNotice: There are no goals set for this activity.
       goal: 
         title: "Goal #{{number}}"
       objective: 
@@ -748,8 +768,38 @@
     helpText: Complete your APD submission below.
     certify:
       title: Certification
-      helpText: >-
+      draft:
+        header: >-
+          Before you submit your APD, double-check that you have
+          entered everything correctly because once you submit,
+          your APD document will be locked from further edits
+          until reviewed by a CMS analyst.
+        helpText: >-
+          To submit your APD for reviews, sign your name in the
+          box below then select the Submit APD button
+        buttonText: Submit APD
+      submitted:
+        buttonText: My Dashboard
+        thanks:
+          header: Submitted!
+          helpText: >-
+            Thank you for your {{state}} {{year}} HITECH APD
+            submission.
+        next:
+          header: What to expect next
+          helpText: >-
+            Your CMS analyst has been notified of your submission
+            and will begin the review process.  If they have any
+            questions for you, you will receive a notification
+            through the app with a link to respond.
+
+
+            If you would like to check the status of your request
+            or start a new document, please go to your state's
+            dashboard.
+      helpTextx: >-
         Upon submission, this APD will be locked from further
         edits until reviewed by a CMS analyst. If complete, select the
         button below.
+      
       buttonText: Submit APD

@@ -1,0 +1,60 @@
+.print-preview {
+  background-color: #fff;
+
+  & section {
+    border: 0;
+
+    & > h2 {
+      page-break-before: always;
+    }
+  }
+
+  & table,
+  & figure,
+  & textarea {
+    page-break-inside: avoid;
+  }
+
+  & header,
+  & .site-sidebar,
+  & .btn-collapse svg,
+  & .alert,
+  & .rdw-editor-toolbar {
+    display: none;
+  }
+
+  & .site-main {
+    max-width: 900px;
+  }
+
+  & .accordian {
+    border: 1px solid #eee;
+    border-radius: 0;
+    box-shadow: none;
+
+    & .btn-collapse {
+      border-bottom: 1px solid #eee;
+      border-radius: 0;
+      display: block !important;
+    }
+
+    & .d-none {
+      display: block !important;
+    }
+  }
+
+  & .sticky-header,
+  & .has-sticky-header .sticky-nested {
+    position: inherit;
+  }
+}
+
+/* centers content on large screens */
+@media (min-width: 52rem) {
+  .print-preview {
+    & .site-main {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

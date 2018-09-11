@@ -14,7 +14,14 @@ import {
   REMOVE_ACTIVITY_STATE_PERSON,
   UPDATE_ACTIVITY
 } from '../actions/activities';
-import { UPDATE_APD, SAVE_APD_SUCCESS, SELECT_APD } from '../actions/apd';
+import {
+  ADD_APD_KEY_PERSON,
+  REMOVE_APD_KEY_PERSON,
+  SAVE_APD_SUCCESS,
+  SELECT_APD,
+  SET_KEY_PERSON_PRIMARY,
+  UPDATE_APD
+} from '../actions/apd';
 
 describe('dirty state reducer', () => {
   const initialState = {
@@ -104,10 +111,17 @@ describe('dirty state reducer', () => {
     });
   });
 
-  it('should handle removing an activity', () => {
-    expect(dirty(initialState, { type: REMOVE_ACTIVITY })).toEqual({
-      data: { apd: {}, activities: { byKey: {} } },
-      dirty: true
+  [
+    ['adding a key person', ADD_APD_KEY_PERSON],
+    ['removing an activity', REMOVE_ACTIVITY],
+    ['should handl removing a key person', REMOVE_APD_KEY_PERSON],
+    ['setting a primary key person', SET_KEY_PERSON_PRIMARY]
+  ].forEach(([desc, action]) => {
+    it(`should handle ${desc}`, () => {
+      expect(dirty(initialState, { type: action })).toEqual({
+        data: { apd: {}, activities: { byKey: {} } },
+        dirty: true
+      });
     });
   });
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Md from './Md';
@@ -10,16 +10,16 @@ const HelpText = ({ text: textResource, reminder: reminderResource }) => {
 
   return (
     (text || reminder) && (
-      <div className="mb2">
-        {text && <Md content={text} wrapper="div" />}
+      <Fragment>
+        {text && <Md content={text} wrapper="div" className="mb2" />}
         {reminder && (
           <Md
             content={reminder}
             wrapper="div"
-            className="my1 p1 h5 alert alert-help"
+            className="mb2 p1 h5 alert alert-help"
           />
         )}
-      </div>
+      </Fragment>
     )
   );
 };

@@ -2,15 +2,21 @@ import React from 'react';
 
 import { Section, Subsection } from './Section';
 import MedicaidOffice from '../containers/ApdStateProfileMedicaidOffice';
-import PointsOfContact from '../containers/ApdStateProfilePointsOfContact';
+import KeyPersonnel from '../containers/ApdStateKeyPersonnel';
 
 const ApdStateProfile = () => (
   <Section id="apd-state-profile" resource="apd.stateProfile">
-    <Subsection resource="apd.stateProfile.directorAndAddress">
+    <Subsection
+      id="apd-state-profile-office"
+      resource="apd.stateProfile.directorAndAddress"
+    >
       <MedicaidOffice />
     </Subsection>
-    <Subsection resource="apd.stateProfile.pointsOfContact">
-      <PointsOfContact />
+    <Subsection
+      id="apd-state-profile-key-personnel"
+      resource="apd.stateProfile.keyPersonnel"
+    >
+      <KeyPersonnel />
     </Subsection>
   </Section>
 );

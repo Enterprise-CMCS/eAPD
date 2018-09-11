@@ -10,7 +10,20 @@ import Btn from '../components/Btn';
 import SidebarLink from '../components/SidebarLink';
 
 const linkGroup1 = [
-  { id: 'apd-state-profile', name: t('apd.stateProfile.title') },
+  {
+    id: 'apd-state-profile',
+    name: t('apd.stateProfile.title'),
+    sub: [
+      {
+        id: 'apd-state-profile-office',
+        name: t('apd.stateProfile.directorAndAddress.title')
+      },
+      {
+        id: 'apd-state-profile-key-personnel',
+        name: t('apd.stateProfile.keyPersonnel.title')
+      }
+    ]
+  },
   {
     id: 'apd-summary',
     name: t('apd.title'),
