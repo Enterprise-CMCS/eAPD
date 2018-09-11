@@ -384,9 +384,9 @@
           resources in current FFY by quarter.
         reminder:
         expenseNames:
-          state: State personnel + non-personnel expenses
-          contractor: Contractor resources
-          combined: Total enhanced FFP
+          state: In-House Costs
+          contractor: Private Contractor Costs
+          combined: Total Enhanced FFP
       otherFunding: 
         title: Other funding description
         helpText: >-
@@ -710,9 +710,9 @@
       title: Federal share by FFY Quarter
       helpText: 
       expenseNames:
-        state: State personnel + non-personnel expenses
-        contractor: Contractor resources
-        combined: Total enhanced FFP
+        state: In-House Costs
+        contractor: Private Contractor Costs
+        combined: Total Enhanced FFP
     paymentsByFFYQuarter: 
       title: Incentive Payments by FFY Quarter
   assurancesAndCompliance: 
