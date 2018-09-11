@@ -49,7 +49,6 @@ const TaskTable = () => (
       <tr className="bg-blue-bright white">
         <th className="col-2 light">Document type</th>
         <th className="col-4 light">Status</th>
-        <th className="col-2 light">Due date</th>
         <th className="col-2 light">Action</th>
       </tr>
     </thead>
@@ -60,7 +59,6 @@ const TaskTable = () => (
       >
         <td>(ex.) APD</td>
         <td>Awaiting state response</td>
-        <td>09/10/2018</td>
         <td>
           <Btn size="small" extraCss="col-12 p1 bg-blue white">
             Respond <Icon icon={faArrowRight} className="ml1" />
@@ -73,7 +71,6 @@ const TaskTable = () => (
       >
         <td>(ex.) Contract</td>
         <td>Awaiting state response</td>
-        <td>ASAP</td>
         <td>
           <Btn size="small" extraCss="col-12 p1 bg-blue white">
             Response <Icon icon={faArrowRight} className="ml1" />
@@ -86,7 +83,6 @@ const TaskTable = () => (
       >
         <td>(ex.) APD</td>
         <td>Submission in progress</td>
-        <td>08/01/2018</td>
         <td>
           <Btn size="small" extraCss="col-12 p1 bg-blue white">
             Open <Icon icon={faEdit} className="ml1" />
@@ -99,7 +95,6 @@ const TaskTable = () => (
       >
         <td>(ex.) Contract</td>
         <td>Submission not started</td>
-        <td>12/01/2018</td>
         <td>
           <Btn size="small" extraCss="col-12 p1 bg-blue white">
             Start <Icon icon={faPlusCircle} className="ml1" />
@@ -131,12 +126,12 @@ const StateDashboard = () => (
 
       <SectionTitle>My Dashboard</SectionTitle>
 
-      <DashboardSection title="My Tasks">
-        <TaskTable />
-      </DashboardSection>
-
       <DashboardSection title="Current Statuses">
         <CurrentDocuments />
+      </DashboardSection>
+
+      <DashboardSection title="My Tasks">
+        <TaskTable />
       </DashboardSection>
 
       <div className="sm-flex mxn2">
