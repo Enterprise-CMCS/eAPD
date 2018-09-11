@@ -28,7 +28,10 @@ const ProgressDot = ({ done, started, text }) => {
   return (
     <div className="center">
       <Icon icon={done ? faCheckCircle : faCircle} color={color} size="2x" />
-      <div className={`absolute pl1 ${labelColor}`}>{text}</div>
+      <div className={`absolute left-align h5 ${labelColor}`.trim()}>
+        <div className="bold">{text}</div>
+        {done && <div>10/1/1904</div>}
+      </div>
     </div>
   );
 };
@@ -70,9 +73,19 @@ const DocumentItem = ({ name, status, buttonClick }) => {
     two: {
       done: false,
       started: false,
-      title: 'Reviewed'
+      title: 'Received'
     },
     three: {
+      done: false,
+      started: false,
+      title: 'Under Review'
+    },
+    four: {
+      done: false,
+      started: false,
+      title: 'In Clearance'
+    },
+    five: {
       done: false,
       started: false,
       title: 'Approved'
@@ -91,20 +104,40 @@ const DocumentItem = ({ name, status, buttonClick }) => {
 
     case 'in review':
       states.one.done = true;
-      states.two.started = true;
-      states.two.title = 'Reviewing';
+      states.two.done = true;
+      states.three.started = true;
       break;
 
-    case 'reviewed':
+    case 'awaiting state response':
       states.one.done = true;
       states.two.done = true;
+      states.three.started = true;
+      states.three.title = 'Pending State Response to CMS Comments';
       break;
 
     case 'approved':
       states.one.done = true;
       states.two.done = true;
       states.three.done = true;
+      states.four.done = true;
+      states.five.done = true;
       actionButtonText = 'Approval letter';
+      break;
+
+    case 'disapproved':
+      states.one.done = true;
+      states.two.done = true;
+      states.three.done = true;
+      states.four.done = true;
+      states.five.done = true;
+      states.five.title = 'Disapproved';
+      actionButtonText = 'Disapproval letter?';
+      break;
+
+    case 'withdrawn':
+      states.one.title = 'Drafting';
+      states.five.done = true;
+      states.five.title = 'Withdrawn';
       break;
 
     default:
@@ -132,6 +165,18 @@ const DocumentItem = ({ name, status, buttonClick }) => {
             started={states.three.started}
             done={states.three.done}
             text={states.three.title}
+          />
+          <ProgressLine done={states.four.done} />
+          <ProgressDot
+            started={states.four.started}
+            done={states.four.done}
+            text={states.four.title}
+          />
+          <ProgressLine done={states.five.done} />
+          <ProgressDot
+            started={states.five.started}
+            done={states.five.done}
+            text={states.five.title}
           />
         </div>
         <div className="sm-col-2 sm-right-align">
@@ -182,9 +227,11 @@ class CurrentDocuments extends Component {
             buttonClick={this.open(apd.id)}
           />
         ))}
-        <DocumentItem name="Example one" status="reviewed" />
-        <DocumentItem name="Example two" status="in review" />
+        <DocumentItem name="Example one" status="in review" />
+        <DocumentItem name="Example two" status="awaiting state response" />
         <DocumentItem name="Example three" status="approved" />
+        <DocumentItem name="Example three" status="disapproved" />
+        <DocumentItem name="Example three" status="withdrawn" />
       </div>
     );
   }
