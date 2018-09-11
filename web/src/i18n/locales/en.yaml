@@ -86,12 +86,12 @@
             _no: "No"
     overview: 
       title: Program Overview
-      helpText:
-      reminder: >-
-        Provide a brief, high level summary of the state program including history,
+      helpText: >-
+       Provide a brief, high level summary of the state program including history,
         and future vision. Include history and summary of future
-        vision of the state program. Indicate which federal fiscal years this
-        APD covers.
+        vision of the state program.
+      reminder: >-
+       
       yearsCovered: Choose the federal fiscal year(s) this APD covers.
       labels: 
         desc: Program Introduction
@@ -100,19 +100,16 @@
           and future vision.
     hit: 
       title: HIT Overview
-      helpText:
-      reminder: >-
-        Summarize briefly planned HIT funded activities contained within this
+      helpText: >-
+       Summarize briefly planned HIT funded activities contained within this
         APD.
+      reminder: >-
+       
     hie: 
       title: HIE Overview
-      helpText:
-      reminder: >-
+      helpText: >-
         Summarize planned HIE funded activities within this APD. 
-        (If there are no HIE activities, skip this
-        section.):
-
-
+        
         (1) Description of the state's HIE approach (statewide, sub-state
         health information office (HIOs), etc.);
         
@@ -122,17 +119,20 @@
         
         (4) The role of state government in governance and policy-setting.
 
+      reminder: >-
+        (If there are no HIE activities, skip this
+        section.):
 
-        CMS recommends states reach out to their regional CMS HITECH
-        contacts prior to developing an HIE funding request. HIE funding
-        requests are complex, and early consultation with CMS facilitates a
+        CMS recommends states connect to regional CMS HITECH
+        contacts prior to developing HIE funding request. HIE funding
+        requests are complex. Early consultation with CMS facilitates a
         more efficient approval process.
     mmis: 
       title: MMIS Overview
-      helpText:
+      helpText: >-
+        Briefly summarize planned MMIS funded activities contained within this APD.
       reminder: >-
-        Briefly summarize planned MMIS funded activities contained within this
-        APD. If there are no MMIS activities, skip this section.
+        If there are no MMIS activities, skip this section.
   previousActivities: 
     title: Results of Previous Activities
     helpText:
@@ -141,10 +141,10 @@
       section: results of previous activities.
     outline: 
       title: Prior Activities Outline
-      helpText:
-      reminder: >-
+      helpText: >-
         Include a high level description of the activities approved in the
         previous APD that are completed, in-progress, or on-hold.
+      reminder: >-
       label: Previous Activities Summary
     approvedExpenses: 
       title: Approved Costs
@@ -186,15 +186,16 @@
     title: Program Activities
     reminder: >-
       Identify each of the activities referenced from the overview section.
-      The information will be collected for each activity.
+      Information will be collected for each activity.
     list: 
       title: Activity List
-      helpText:
-      reminder: >-
-        Program administration pertains to implementing
+      helpText: >-
+       Program administration pertains to implementing
         the EHR Incentive program, state and contractor
         costs associated with operating EHR incentive program, and SLR
-        enhancements/upgrades. Examples of individual activities include:
+        enhancements/upgrades. 
+      reminder: >-
+        Examples of individual activities include:
         auditing, outreach, environmental scans, HIE registry development,
         CQM database development, data and analytics, HIE onboarding, etc. 
     addActivityButtonText: Add activity
@@ -212,11 +213,12 @@
     namePrefixAndNum: Core Activity {{number}}
     description: 
       title: Activity Overview
-      helpText:
-      reminder: >-
+      helpText: >-
         Briefly summarize activity needs
         for how requested funding will be used (e.g. administrative, outreach,
         auditing, Public Health Registry Development, etc)
+      reminder: >-
+        
       summary: 
         title: Brief Activity Summary
       detail:
@@ -224,19 +226,17 @@
           subheader: 
         hie:
           subheader:
-          helpText:
+          helpText: >-
+           Detail linkage to meaningful use, including value proposition to providers, and a sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted. 
           reminder: >-
-           Detail linkage to meaningful use, including 
-           value proposition to providers, and a sustainability
-            plan describing how the activity will be sustained after HIE DDI
-            funding is exhausted. Diagrams and/or descriptions of other HIE
-            linkages can be included, if relevant.
+           Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
       alternatives: 
         subheader: >-
           Statement of alternative considerations and supporting justification
-        helpText:
+        helpText: >-
+         If substantive changes have been made, include statement describing alternative considerations made before selecting implementation strategy. 
         reminder: >-
-          If substantive changes have been made, include statement describing alternative considerations made before selecting implementation strategy. If not, including statement of alternative considerations from previous versions of IAPD or SMHP.
+         If not, including statement of alternative considerations from previous versions of IAPD or SMHP.
     costs:
       title: In-House Cost Categories
       subtitles:
@@ -317,9 +317,9 @@
       title: Personnel
       subheader: >-
         Outline personnel resources as part of the activity. Do not include contract personnel.
-      helpText:
+      helpText: >-
+       Use the checkbox to identify key project personnel including yearly salary and benefits.
       reminder: >-
-        Use the checkbox to identify key project personnel including yearly salary and benefits.
         FTE% is the percentage attributable to the activity. 
       noDataNotice: There are no personnel resources for this activity.
       labels: 
@@ -334,20 +334,19 @@
       addButtonText: Add personnel
     expenses: 
       title: Non-Personnel Costs
-      helpText:
-      reminder: >-
+      helpText: >-
         Provide breakout & brief description of any non-personnel and non-contracted projected
-        costs related to this activity. “Miscellaneous expenses” from the drop down,
+        costs related to this activity. 
+      reminder: >-
+        “Miscellaneous expenses” from the drop down,
         includes materials and supplies, communications‐related expenses,
         printing costs and facilities expenses.
       noDataNotice: Additional costs for this activity are missing.
     costAllocate: 
       title: Cost Allocation
-      helpText:
-      reminder: >-
-        A cost allocation plan must include all participants
-        and their associated cost allocation to depict non-Medicaid activities
-        and non-Medicaid FTEs participating in this project (if any):   
+      helpText: >-
+        Cost allocation plan must include all participants
+        and their associated costs to depict non-Medicaid activities.:   
 
         1. CMS will work with states individually to determine the
         most appropriate cost allocation methodology.   
@@ -367,13 +366,17 @@
         payers who may benefit must contribute their share from the outset.
         The absence of ancillary payers is not sufficient cause for
         Medicaid to be primary payer.
+
+      reminder: >-
+      Include any participating non-Medicaid FTEs.
       methodology: 
         title: Cost allocation methodology description
+        helpText: >-
+        Do not assume absence of other payers is sufficient cause for
+        Medicaid to be primary payer. Limit ambiguity about other
+        potential federal funding sources. 
         reminder: >-
-          Do not assume absence of other payers is sufficient cause for
-          Medicaid to be primary payer. Limit ambiguity about other
-          potential federal funding sources. For example, if no CHIP
-          funds are being requested, include a statement in this section.
+        For example, if no CHIP funds are being requested, include a statement in this section.
       quarterly:
         title: Breakout of federal share by quarter
         helpText: >-
@@ -386,10 +389,10 @@
           combined: Total Enhanced FFP
       otherFunding: 
         title: Other funding description
-        helpText:
+        helpText: >-
+         Write a high level description to describe funding used to support this activity. (Review
+        Letter 10‐016 for examples of grants for inclusion.)
         reminder: >-
-          Write a high level description to describe funding used to support this activity. (Review
-          Letter 10‐016 for examples of grants for inclusion.)
           Ensure new grants are included, and remove expired grants.
       ffp:
         title: Federal Financial Partipation (FFP) and Cost Allocation
