@@ -179,14 +179,14 @@
           approved: Approved
           actual: Actual
   activities: 
-     title: Program Activities
+    title: Program Activities
     reminder: >-
       Identify each of the activities referenced from the overview section.
       Information will be collected for each activity.
     list: 
       title: Activity List
       helpText: >-
-       Program administration pertains to implementing
+        Program administration pertains to implementing
         the EHR Incentive program, state and contractor
         costs associated with operating EHR incentive program, and SLR
         enhancements/upgrades. 
@@ -223,16 +223,16 @@
         hie:
           subheader:
           helpText: >-
-           Detail linkage to meaningful use, including value proposition to providers, and a sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted. 
+            Detail linkage to meaningful use, including value proposition to providers, and a sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted. 
           reminder: >-
-           Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
+            Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
       alternatives: 
         subheader: >-
           Statement of alternative considerations and supporting justification
         helpText: >-
-         If substantive changes have been made, include statement describing alternative considerations made before selecting implementation strategy. 
+          If substantive changes have been made, include statement describing alternative considerations made before selecting implementation strategy. 
         reminder: >-
-         If not, including statement of alternative considerations from previous versions of IAPD or SMHP.
+          If not, including statement of alternative considerations from previous versions of IAPD or SMHP.
     costs:
       title: In-House Cost Categories
       subtitles:
@@ -314,9 +314,9 @@
       subheader: >-
         Outline personnel resources as part of the activity. Do not include contract personnel.
       helpText: >-
-       Use the checkbox to identify key project personnel including yearly salary and benefits.
+        Use the checkbox to identify key project personnel including yearly salary and benefits.
       reminder: >-
-        FTE% is the percentage attributable to the activity. 
+         FTE% is the percentage attributable to the activity. 
       noDataNotice: There are no personnel resources for this activity.
       labels: 
         entryNum: "#"
@@ -339,7 +339,7 @@
         printing costs and facilities expenses.
       noDataNotice: Additional costs for this activity are missing.
     costAllocate: 
-       title: Cost Allocation
+      title: Cost Allocation
       helpText: >-
         Cost allocation plan must include all participants
         and their associated costs to depict non-Medicaid activities.:   
@@ -362,15 +362,15 @@
         The absence of ancillary payers is not sufficient cause for
         Medicaid to be primary payer.
       reminder: >-
-       Include any participating non-Medicaid FTEs.
+        Include any participating non-Medicaid FTEs.
       methodology: 
-         title: Cost allocation methodology description
+        title: Cost allocation methodology description
         helpText: >-
           Do not assume absence of other payers is sufficient cause for
-         Medicaid to be primary payer. Limit ambiguity about other
-        potential federal funding sources. 
+          Medicaid to be primary payer. Limit ambiguity about other
+          potential federal funding sources. 
         reminder: >-
-        For example, if no CHIP funds are being requested, include a statement in this section.
+          For example, if no CHIP funds are being requested, include a statement in this section.
       quarterly:
         title: Breakout of federal share by quarter
         helpText: >-
@@ -384,8 +384,8 @@
       otherFunding: 
         title: Other funding description
         helpText: >-
-         Write a high level description to describe funding used to support this activity. (Review
-        Letter 10‐016 for examples of grants for inclusion.)
+          Write a high level description to describe funding used to support this activity. (Review
+          Letter 10‐016 for examples of grants for inclusion.)
         reminder: >-
           Ensure new grants are included, and remove expired grants.
       ffp:
