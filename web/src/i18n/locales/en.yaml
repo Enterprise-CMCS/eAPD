@@ -8,7 +8,7 @@
   help: Help
   wip: "**Stay tuned!** This section is a work in progress."
   ffy: FFY {{year}}
-    table:
+  table:
     total: Total
     subtotal: Subtotal
     quarter: Q{{q}}
