@@ -12,7 +12,8 @@ import {
   SET_KEY_PERSON_PRIMARY,
   SET_SELECT_APD_ON_LOAD,
   SUBMIT_APD_SUCCESS,
-  UPDATE_APD
+  UPDATE_APD,
+  WITHDRAW_APD_SUCCESS
 } from '../actions/apd';
 import {
   INCENTIVE_ENTRIES,
@@ -165,6 +166,10 @@ const reducer = (state = initialState, action) => {
         }
       };
     }
+
+    case WITHDRAW_APD_SUCCESS:
+      return u({ data: { status: 'draft' } }, state);
+
     default:
       return state;
   }
