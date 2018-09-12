@@ -61,7 +61,7 @@
           key vendor personnel to satisfy this requirement.
           Personnel listed in this section must be assigned to APD by name,
           role, time commitment, and cost where applicable.
-          reminder: >-
+        reminder: >-
           Key personnel are stakeholders involved globally with activities contained with this APD. Individuals with specific responsibilities on an activity basis only, should be listed individually in Program Activities section of the eAPD.
         contact: "Contact #{{number}}"
         labels:
