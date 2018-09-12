@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import HelpText from '../HelpText';
 import Btn from '../Btn';
 import { t } from '../../i18n';
 
@@ -35,29 +36,24 @@ class Withdraw extends Component {
     if (status !== 'draft') {
       return (
         <div className="ml3 border-top mt3 pt3">
-          <p className="bold">Withdraw submission</p>
-          <p>
-            Withdrawing an APD submission resets the review process by CMS. APD
-            submissions can be withdrawn to make changes.
-          </p>
-          <p className="italic">
-            Note: Withdrawing this submission will reset the APD review process.
-          </p>
+          <p className="bold">{t('certifyAndSubmit.withdraw.prompt.header')}</p>
+          <HelpText text="certifyAndSubmit.withdraw.prompt.helpText" />
           <Btn extraCss="bg-gray" onClick={this.withdraw}>
-            Withdraw Submission
+            {t('certifyAndSubmit.withdraw.prompt.buttonText')}
           </Btn>
         </div>
       );
     } else if (this.state.showWithdrawlConfirmation) {
       return (
         <div className="ml3 border-top mt3 pt3">
-          <p className="bold">Your APD submission has been withdrawn</p>
-          <p>
-            The document is now editable. It will need to be resubmitted before
-            it can be reviewed by CMS.
+          <p className="bold">
+            {t('certifyAndSubmit.withdraw.confirmation.header')}
           </p>
+          <HelpText text="certifyAndSubmit.withdraw.confirmation.helpText" />
           <p className="right-align">
-            <Btn onClick={scrollToTop}>Back to top</Btn>
+            <Btn onClick={scrollToTop}>
+              {t('certifyAndSubmit.withdraw.confirmation.buttonText')}
+            </Btn>
           </p>
         </div>
       );
