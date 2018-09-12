@@ -3,7 +3,7 @@ const get = require('./get');
 const post = require('./post');
 const put = require('./put');
 const activities = require('./activities');
-const versions = require('./versions/post');
+const versions = require('./versions');
 
 module.exports = (
   app,
