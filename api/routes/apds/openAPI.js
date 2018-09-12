@@ -65,6 +65,31 @@ const openAPI = {
   },
 
   '/apds/{id}/versions': {
+    delete: {
+      tags: ['APDs'],
+      summary: 'Withdraw a submitted APD',
+      description:
+        'Withdraws a previous submitted APD and makes it editable again',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the APD to update',
+          required: true,
+          schema: { type: 'number' }
+        }
+      ],
+      responses: {
+        204: {
+          description: 'The withdrawal was successful'
+        },
+        400: {
+          description:
+            'The APD is not currently in draft status, so it cannot be saved. Error is { error: "apd-not-editable" }',
+          content: errorToken
+        }
+      }
+    },
     post: {
       tags: ['APDs'],
       summary: 'Save a submitted version of a specific APD',

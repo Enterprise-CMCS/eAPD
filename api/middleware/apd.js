@@ -80,14 +80,14 @@ module.exports.loadApd = (model = defaultApdModel, idParam = 'id') =>
   });
 
 /**
- * @description Middleware to determine if the current user can
- *    edit the APD they would load.  Also calls loadApd middleware
+ * @description Middleware to determine if the current user has access
+ *    to the APD they would load.  Also calls loadApd middleware
  * @param {object} model The APD model class to use; defaults to Apd model
  * @param {string} idParam The request parameter to use as the model ID
  */
-module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') =>
-  cache(['userCanEditAPD', modelIndex(model), idParam], () => {
-    const userCanEditAPD = async (req, res, next) => {
+module.exports.userCanAccessAPD = (model = defaultApdModel, idParam = 'id') =>
+  cache(['userCanAccessAPD', modelIndex(model), idParam], () => {
+    const userCanAccessAPD = async (req, res, next) => {
       logger.silly(req, 'verifying the user can access this APD');
 
       // Load the APD first...
@@ -97,23 +97,41 @@ module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') =>
 
         // Make sure there's overlap
         if (userApds.includes(req.meta.apd.get('id'))) {
-          if (req.meta.apd.get('status') === 'draft') {
-            next();
-          } else {
-            logger.verbose(
-              req,
-              `apd status is [${req.meta.apd.get('status')}], not editable`
-            );
-            res
-              .status(400)
-              .send({
-                error: 'apd-not-editable'
-              })
-              .end();
-          }
+          next();
         } else {
           logger.verbose(req, 'user does not have access to the APD');
           res.status(404).end();
+        }
+      });
+    };
+    return userCanAccessAPD;
+  });
+
+/**
+ * @description Middleware to determine if the current user can edit
+ *    the APD they would load.  Also calls userCanAccessAPD middleware
+ * @param {object} model The APD model class to use; defaults to Apd model
+ * @param {string} idParam The request parameter to use as the model ID
+ */
+module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') =>
+  cache(['userCanEditAPD', modelIndex(model), idParam], () => {
+    const userCanEditAPD = async (req, res, next) => {
+      logger.silly(req, 'verifying the user can edit this APD');
+
+      await module.exports.userCanAccessAPD(model, idParam)(req, res, () => {
+        if (req.meta.apd.get('status') === 'draft') {
+          next();
+        } else {
+          logger.verbose(
+            req,
+            `apd status is [${req.meta.apd.get('status')}], not editable`
+          );
+          res
+            .status(400)
+            .send({
+              error: 'apd-not-editable'
+            })
+            .end();
         }
       });
     };
