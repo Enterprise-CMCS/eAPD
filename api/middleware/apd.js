@@ -90,7 +90,10 @@ module.exports.userCanAccessAPD = (model = defaultApdModel, idParam = 'id') =>
     const userCanAccessAPD = async (req, res, next) => {
       logger.silly(req, 'verifying the user can access this APD');
 
-      // Load the APD first...
+      // Load the APD first...  Technically we don't have to await this
+      // since we rely on the next() callback from loadApd.  However,
+      // if we don't await this, the function will return immediately
+      // and that causes problems in testing.  So we await.  :)
       await module.exports.loadApd(model, idParam)(req, res, async () => {
         // ...then get a list of APDs this user is associated with
         const userApds = await req.user.model.apds();
@@ -118,7 +121,10 @@ module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') =>
     const userCanEditAPD = async (req, res, next) => {
       logger.silly(req, 'verifying the user can edit this APD');
 
+      // First make sure they can access the APD.  Same story here
+      // as above with respect to await.
       await module.exports.userCanAccessAPD(model, idParam)(req, res, () => {
+        // Then make sure it's in draft
         if (req.meta.apd.get('status') === 'draft') {
           next();
         } else {
