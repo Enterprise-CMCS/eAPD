@@ -11,6 +11,7 @@ import Icon, {
   faEdit,
   faSpinner
 } from '../components/Icons';
+import { APD_STATUS, DASHBOARD_TASK_BUTTON_TEXT } from '../constants';
 
 const ProgressDot = ({ done, started, text }) => {
   let color = '#aaaaaa';
@@ -67,99 +68,63 @@ ProgressLine.defaultProps = {
 };
 
 const DocumentItem = ({ name, status, buttonClick }) => {
-  // const states = {
-  //   one: {
-  //     done: false,
-  //     started: true,
-  //     title: 'Submitted'
-  //   },
-  //   two: {
-  //     done: false,
-  //     started: false,
-  //     title: 'Received'
-  //   },
-  //   three: {
-  //     done: false,
-  //     started: false,
-  //     title: 'Under Review'
-  //   },
-  //   four: {
-  //     done: false,
-  //     started: false,
-  //     title: 'In Clearance'
-  //   },
-  //   five: {
-  //     done: false,
-  //     started: false,
-  //     title: 'Approved'
-  //   }
-  // };
-
-  let actionButtonText = 'View';
-  let actionButtonIcon = faArrowRight;
-
-  switch (status) {
-    case 'draft':
-      actionButtonText = 'Open';
-      actionButtonIcon = faEdit;
-      break;
-
-    case 'approved':
-      actionButtonText = 'Approval letter';
-      break;
-
-    case 'disapproved':
-      actionButtonText = 'Disapproval letter?';
-      break;
-
-    default:
-      break;
-  }
+  const actionButtonText = DASHBOARD_TASK_BUTTON_TEXT[status];
+  const actionButtonIcon = status === APD_STATUS.DRAFT ? faEdit : faArrowRight;
 
   const apdPipelineSteps = [
     {
-      text: status === 'draft' ? 'Draft' : 'Submitted',
+      text: status === APD_STATUS.DRAFT ? 'Draft' : 'Submitted',
       started: true,
       done: [
-        'in review',
-        'awaiting state response',
-        'in clearance',
-        'approved',
-        'disapproved'
+        APD_STATUS.IN_REVIEW,
+        APD_STATUS.STATE_RESPONSE,
+        APD_STATUS.IN_CLEARANCE,
+        APD_STATUS.APPROVED,
+        APD_STATUS.DISAPPROVED
       ].includes(status)
     }
   ];
 
-  if (status !== 'withdrawn') {
+  if (status !== APD_STATUS.WITHDRAWN) {
     apdPipelineSteps.push(JSON.parse(JSON.stringify(apdPipelineSteps[0])));
     apdPipelineSteps[1].text = 'Received';
     apdPipelineSteps[1].started = false;
 
     apdPipelineSteps.push({
       text:
-        status === 'awaiting state response' ? 'Pending Comments' : 'Review',
-      started: ['in review', 'awaiting state response'].includes(status),
-      done: ['in clearance', 'approved', 'disapproved'].includes(status)
+        status === APD_STATUS.STATE_RESPONSE ? 'Pending Comments' : 'Review',
+      started: [APD_STATUS.IN_REVIEW, APD_STATUS.STATE_RESPONSE].includes(
+        status
+      ),
+      done: [
+        APD_STATUS.IN_CLEARANCE,
+        APD_STATUS.APPROVED,
+        APD_STATUS.DISAPPROVED
+      ].includes(status)
     });
     apdPipelineSteps.push({
       text: 'Clearance',
-      started: status === 'in clearance',
-      done: ['approved', 'disapproved'].includes(status)
+      started: status === APD_STATUS.IN_CLEARANCE,
+      done: [APD_STATUS.APPROVED, APD_STATUS.DISAPPROVED].includes(status)
     });
   }
 
   const decisionTexts = {
-    approved: 'Approved',
-    disapproved: 'Disapproved',
-    withdrawn: 'Withdrawn'
+    [APD_STATUS.APPROVED]: 'Approved',
+    [APD_STATUS.DISAPPROVED]: 'Disapproved',
+    [APD_STATUS.WITHDRAWN]: 'Withdrawn'
   };
 
+  const doneStatuses = [
+    APD_STATUS.WITHDRAWN,
+    APD_STATUS.APPROVED,
+    APD_STATUS.DISAPPROVED
+  ];
+
   apdPipelineSteps.push({
-    text: ['withdrawn', 'approved', 'disapproved'].includes(status)
-      ? decisionTexts[status]
-      : 'Decision',
+    text: doneStatuses.includes(status) ? decisionTexts[status] : 'Decision',
     started: false,
-    done: ['withdrawn', 'approved', 'disapproved'].includes(status)
+    done: doneStatuses.includes(status)
   });
 
   return (
@@ -218,20 +183,23 @@ class CurrentDocuments extends Component {
           <DocumentItem
             key={apd.id}
             name={`APD for ${apd.years.join(', ')}`}
-            status={apd.status}
+            status={APD_STATUS.DRAFT}
             buttonClick={this.open(apd.id)}
           />
         ))}
-        <DocumentItem name="Ex: APD in draft" status="draft" />
-        <DocumentItem name="Ex: APD in review" status="in review" />
+        <DocumentItem name="Ex: APD in draft" status={APD_STATUS.DRAFT} />
+        <DocumentItem name="Ex: APD in review" status={APD_STATUS.IN_REVIEW} />
         <DocumentItem
           name="Ex: Reviewed, with comments"
-          status="awaiting state response"
+          status={APD_STATUS.STATE_RESPONSE}
         />
-        <DocumentItem name="Ex: In clearance" status="in clearance" />
-        <DocumentItem name="Ex: Approved" status="approved" />
-        <DocumentItem name="Ex: Disapproved" status="disapproved" />
-        <DocumentItem name="Ex: Withdrawn" status="withdrawn" />
+        <DocumentItem
+          name="Ex: In clearance"
+          status={APD_STATUS.IN_CLEARANCE}
+        />
+        <DocumentItem name="Ex: Approved" status={APD_STATUS.APPROVED} />
+        <DocumentItem name="Ex: Disapproved" status={APD_STATUS.DISAPPROVED} />
+        <DocumentItem name="Ex: Withdrawn" status={APD_STATUS.WITHDRAWN} />
       </div>
     );
   }

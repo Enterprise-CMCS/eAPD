@@ -16,7 +16,7 @@ class Sidebar extends Component {
     const { apds, place } = this.props;
 
     return (
-      <div className="site-sidebar bg-teal relative">
+      <aside className="site-sidebar bg-teal relative">
         <div className="xs-hide sm-hide">
           <div className="px2 py3 lg-px3 lg-py4 bg-white flex items-center">
             <img
@@ -55,7 +55,7 @@ class Sidebar extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </aside>
     );
   }
 }
