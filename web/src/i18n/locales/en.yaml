@@ -55,16 +55,14 @@
           stakeholder decision-making, and/or single state agency
           responsibility for Medicaid oversight and project performance
           monitoring.
-
-
           Identify key state staff who will be involved in all activities
           listed in this APD.  CMS seeks to ensure state teams are
           adequately resourced, but does not require states to provide
           key vendor personnel to satisfy this requirement.
-
-
           Personnel listed in this section must be assigned to APD by name,
           role, time commitment, and cost where applicable.
+        reminder: >-
+          Key personnel are stakeholders involved globally with activities contained with this APD. Individuals with specific responsibilities on an activity basis only, should be listed individually in Program Activities section of the eAPD.
         contact: "Contact #{{number}}"
         labels:
           name: Name
@@ -86,12 +84,12 @@
             _no: "No"
     overview: 
       title: Program Overview
-      helpText:
-      reminder: >-
-        Provide a brief, high level summary of the state program including history,
+      helpText: >-
+       Provide a brief, high level summary of the state program including history,
         and future vision. Include history and summary of future
-        vision of the state program. Indicate which federal fiscal years this
-        APD covers.
+        vision of the state program.
+      reminder: >-
+       
       yearsCovered: Choose the federal fiscal year(s) this APD covers.
       labels: 
         desc: Program Introduction
@@ -100,19 +98,16 @@
           and future vision.
     hit: 
       title: HIT Overview
-      helpText:
-      reminder: >-
-        Summarize briefly planned HIT funded activities contained within this
+      helpText: >-
+       Summarize briefly planned HIT funded activities contained within this
         APD.
+      reminder: >-
+       
     hie: 
       title: HIE Overview
-      helpText:
-      reminder: >-
+      helpText: >-
         Summarize planned HIE funded activities within this APD. 
-        (If there are no HIE activities, skip this
-        section.):
-
-
+        
         (1) Description of the state's HIE approach (statewide, sub-state
         health information office (HIOs), etc.);
         
@@ -121,18 +116,19 @@
         (3) The short and long term value proposition to providers;
         
         (4) The role of state government in governance and policy-setting.
-
-
-        CMS recommends states reach out to their regional CMS HITECH
-        contacts prior to developing an HIE funding request. HIE funding
-        requests are complex, and early consultation with CMS facilitates a
+      reminder: >-
+        (If there are no HIE activities, skip this
+        section.):
+        CMS recommends states connect to regional CMS HITECH
+        contacts prior to developing HIE funding request. HIE funding
+        requests are complex. Early consultation with CMS facilitates a
         more efficient approval process.
     mmis: 
       title: MMIS Overview
-      helpText:
+      helpText: >-
+        Briefly summarize planned MMIS funded activities contained within this APD.
       reminder: >-
-        Briefly summarize planned MMIS funded activities contained within this
-        APD. If there are no MMIS activities, skip this section.
+        If there are no MMIS activities, skip this section.
   previousActivities: 
     title: Results of Previous Activities
     helpText:
@@ -141,16 +137,16 @@
       section: results of previous activities.
     outline: 
       title: Prior Activities Outline
-      helpText:
-      reminder: >-
+      helpText: >-
         Include a high level description of the activities approved in the
         previous APD that are completed, in-progress, or on-hold.
+      reminder: >-
       label: Previous Activities Summary
     approvedExpenses: 
       title: Approved Costs
       helpText: Input the most recent approved costs.
     actualExpenses: 
-      title: Actual Expenses
+      title: Actual Expenses 
       helpText: Input the most recent actual expenses.
       table:
         program:
@@ -186,15 +182,16 @@
     title: Program Activities
     reminder: >-
       Identify each of the activities referenced from the overview section.
-      The information will be collected for each activity.
+      Information will be collected for each activity.
     list: 
       title: Activity List
-      helpText:
-      reminder: >-
+      helpText: >-
         Program administration pertains to implementing
         the EHR Incentive program, state and contractor
         costs associated with operating EHR incentive program, and SLR
-        enhancements/upgrades. Examples of individual activities include:
+        enhancements/upgrades. 
+      reminder: >-
+        Examples of individual activities include:
         auditing, outreach, environmental scans, HIE registry development,
         CQM database development, data and analytics, HIE onboarding, etc. 
     addActivityButtonText: Add activity
@@ -212,11 +209,12 @@
     namePrefixAndNum: Core Activity {{number}}
     description: 
       title: Activity Overview
-      helpText:
-      reminder: >-
+      helpText: >-
         Briefly summarize activity needs
         for how requested funding will be used (e.g. administrative, outreach,
         auditing, Public Health Registry Development, etc)
+      reminder: >-
+        
       summary: 
         title: Brief Activity Summary
       detail:
@@ -224,19 +222,17 @@
           subheader: 
         hie:
           subheader:
-          helpText:
+          helpText: >-
+            Detail linkage to meaningful use, including value proposition to providers, and a sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted. 
           reminder: >-
-           Detail linkage to meaningful use, including 
-           value proposition to providers, and a sustainability
-            plan describing how the activity will be sustained after HIE DDI
-            funding is exhausted. Diagrams and/or descriptions of other HIE
-            linkages can be included, if relevant.
+            Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
       alternatives: 
         subheader: >-
           Statement of alternative considerations and supporting justification
-        helpText:
+        helpText: >-
+          If substantive changes have been made, include statement describing alternative considerations made before selecting implementation strategy. 
         reminder: >-
-          If substantive changes have been made, include statement describing alternative considerations made before selecting implementation strategy. If not, including statement of alternative considerations from previous versions of IAPD or SMHP.
+          If not, including statement of alternative considerations from previous versions of IAPD or SMHP.
     costs:
       title: In-House Cost Categories
       subtitles:
@@ -317,10 +313,10 @@
       title: Personnel
       subheader: >-
         Outline personnel resources as part of the activity. Do not include contract personnel.
-      helpText:
-      reminder: >-
+      helpText: >-
         Use the checkbox to identify key project personnel including yearly salary and benefits.
-        FTE% is the percentage attributable to the activity. 
+      reminder: >-
+         FTE% is the percentage attributable to the activity. 
       noDataNotice: There are no personnel resources for this activity.
       labels: 
         entryNum: "#"
@@ -334,21 +330,19 @@
       addButtonText: Add personnel
     expenses: 
       title: Non-Personnel Costs
-      helpText:
-      reminder: >-
+      helpText: >-
         Provide breakout & brief description of any non-personnel and non-contracted projected
-        costs related to this activity. “Miscellaneous expenses” from the drop down,
+        costs related to this activity. 
+      reminder: >-
+        “Miscellaneous expenses” from the drop down,
         includes materials and supplies, communications‐related expenses,
         printing costs and facilities expenses.
       noDataNotice: Additional costs for this activity are missing.
     costAllocate: 
       title: Cost Allocation
-      helpText:
-      reminder: >-
-        A cost allocation plan must include all participants
-        and their associated cost allocation to depict non-Medicaid activities
-        and non-Medicaid FTEs participating in this project (if any):   
-
+      helpText: >-
+        Cost allocation plan must include all participants
+        and their associated costs to depict non-Medicaid activities.:   
         1. CMS will work with states individually to determine the
         most appropriate cost allocation methodology.   
         
@@ -367,13 +361,16 @@
         payers who may benefit must contribute their share from the outset.
         The absence of ancillary payers is not sufficient cause for
         Medicaid to be primary payer.
+      reminder: >-
+        Include any participating non-Medicaid FTEs.
       methodology: 
         title: Cost allocation methodology description
-        reminder: >-
+        helpText: >-
           Do not assume absence of other payers is sufficient cause for
           Medicaid to be primary payer. Limit ambiguity about other
-          potential federal funding sources. For example, if no CHIP
-          funds are being requested, include a statement in this section.
+          potential federal funding sources. 
+        reminder: >-
+          For example, if no CHIP funds are being requested, include a statement in this section.
       quarterly:
         title: Breakout of federal share by quarter
         helpText: >-
@@ -386,10 +383,10 @@
           combined: Total Enhanced FFP
       otherFunding: 
         title: Other funding description
-        helpText:
-        reminder: >-
+        helpText: >-
           Write a high level description to describe funding used to support this activity. (Review
           Letter 10‐016 for examples of grants for inclusion.)
+        reminder: >-
           Ensure new grants are included, and remove expired grants.
       ffp:
         title: Federal Financial Partipation (FFP) and Cost Allocation
@@ -411,8 +408,6 @@
           separation of business rules from core programming; and the
           availability of business rules in both human and machine-readable
           formats.  
-
-
           Commitment to formal system development methodology
           and open reusable system architecture is extremely important in
           order to ensure that states can more easily change and maintain
@@ -421,13 +416,10 @@
           and benefits. Modularity is breaking down systems requirements into
           component parts. Extremely complex systems can be developed as
           part of a service-oriented architecture (SOA).  
-
-
           Modularity also helps address the challenges of customization. 
           Baseline web services and capabilities can be developed for and used
           by anyone, with exceptions for specific business processes handled
           by a separate module that interoperates with the baseline modules.    
-
         
           Changes can be made independently to baseline
           capabilities without affecting how the extension works. By doing
@@ -459,8 +451,6 @@
           1104 of the Affordable Care Act; and standards and protocols
           adopted by the Secretary under section 1561 of the Affordable
           Care Act.  
-
-
           CMS must ensure that Medicaid infrastructure and
           information system investments are made with the assurance that
           timely and reliable adoption of industry standards and productive
@@ -481,16 +471,12 @@
           from publicly available or commercially sold components and
           products, and from the use of cloud technologies to share
           infrastructure and applications.  
-
-
           CMS commits to work assertively with the states to identify promising
           state systems  that can be leveraged by other states. CMS strongly
           encourages states to move to regional or multi-state solutions
           when cost effective. In addition, CMS will expedite APD approvals for states
           that are participating in shared development activities (including
           developing components intended for successful reuse) with other states.
-
-
           CMS will also review carefully any proposed investments in sub-state systems 
           when the federal government is asked to share costs of updating or
           maintaining multiple systems performing redundant functions within the same state.
@@ -501,8 +487,6 @@
           Systems should support accurate and timely processing of claims
           (including claims of eligibility), adjudications, and effective
           communications with providers, beneficiaries, and the public.  
-
-
           An effective system supports and enables an effective business process, 
           producing and communicating intended operational results with
           reliability and accuracy. Federal funding are not provided for systems
@@ -538,13 +522,10 @@
           technology investments will be improved interaction
           and interoperability to maximize value and minimize costs
           on providers, beneficiaries, and other stakeholders.  
-
-
           CMS expects Medicaid agencies to work in concert with
           exchanges (whether state or federally administered) to share
           business services and technology investments to produce
           seamless and efficient customer experiences.  
-
           
           Systems must include appropriate architecture, and standardized
           communication protocols to preserve the
@@ -554,7 +535,6 @@
           “responsible for knowing and understanding its environment
           (data, applications and infrastructure) in order to map its data
           to information sharing requirements."
-
           
           The data-sharing architecture addresses conceptual and 
           logical mechanisms used (i.e., data hubs, repositories, and registries). 
@@ -573,14 +553,10 @@
           for any major IT build; CMS expects that states will identify
           potential risks and develop strategies to address those risks
           throughout the system lifecycle.  
-
-
           Mitigation plans for major
           Medicaid E&E system or MMIS projects should address minimum
           expected functionality, critical success factors, and risk factors
           tied to major milestones identified in the APD.  
-
-
           Mitigation plans should also reflect key events and dates that would trigger
           mitigation, and projected timeframe for sunset.
           States should consider strategies to address risks for the M&O project
@@ -603,16 +579,12 @@
           launch a major IT initiative, CMS wants to ensure that the state
           team is adequately resourced. States do not need to provide key
           vendor personnel for this requirement.
-
-
           As stated in the
           provision, this information must be included in the APD. 
           For changes to key personnel that occur after an APD is approved,
           states should notify their CMS points of contact in writing
           (including by email) and formally reflect the change in the next
           planned APD update.  
-
-
           This condition refines and strengthens the existing APD
           requirements regarding personnel resource statements as required
           under 45 CFR 95.610. For Medicaid E&E APDs, states should include
@@ -632,8 +604,6 @@
           limited to software that is developed using federal funds; it does
           not apply to commercial off-the-shelf (COTS) software,
           software-as-a-service, or business-solutions-as-a-service.  
-
-
           Adequate documentation means other users could operate software
           with reasonable alterations for specific hardware or operating
           system. CMS is neutral with regrard to hardware or operating
@@ -642,8 +612,6 @@
           procedures, layouts, interfaces, inputs, outputs, and other
           necessary information to ensure systems could be installed and
           operated by a variety of contractors or other users.  
-
-
           While the APD should address how the state plans to maintain documentation,
           documentation is not required with the APD.
           States are responsible for making documentation
@@ -665,7 +633,6 @@
           state investments that are involved with major Medicaid IT projects
           and requires that states consider options beyond software that
           will reduce costs or promote reuse.    
-
           States should describe strategies considered when 
           deciding which most efficient solution. States are not required to
           adopt a particular strategy, but CMS must have sufficient
@@ -675,8 +642,6 @@
           lower long-term operating costs, and shorter development time as
           well as the extent to which the solutions can be readily implemented
           with alternate hardware and operating systems.  
-
-
           States should consider this new condition in conjunction with existing APD
           requirements regarding cost benefit analyses required at 45 CFR
           95.605 or § 95.610.
@@ -789,8 +754,6 @@
             and will begin the review process.  If they have any
             questions for you, you will receive a notification
             through the app with a link to respond.
-
-
             If you would like to check the status of your request
             or start a new document, please go to your state's
             dashboard.
@@ -798,5 +761,3 @@
         Upon submission, this APD will be locked from further
         edits until reviewed by a CMS analyst. If complete, select the
         button below.
-      
-      buttonText: Submit APD
