@@ -720,4 +720,57 @@ describe('apd actions', () => {
       });
     });
   });
+
+  describe('withdraw an APD submission', () => {
+    beforeEach(() => {
+      fetchMock.reset();
+    });
+
+    it('sets a notification if the withdrawal fails', () => {
+      const store = mockStore({
+        apd: { data: { id: 'id-to-update' } },
+        notification: { open: false, queue: [] }
+      });
+      const spy = jest.spyOn(axios, 'delete');
+
+      fetchMock.onDelete('/apds/id-to-update/versions').reply(403);
+
+      const expectedActions = [
+        { type: actions.WITHDRAW_APD_REQUEST },
+        {
+          type: notificationActions.ADD_NOTIFICATION,
+          message: 'Withdraw failed (not-sure-why)'
+        },
+        { type: actions.WITHDRAW_APD_FAILURE }
+      ];
+
+      return store.dispatch(actions.withdrawApd()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(spy).toHaveBeenCalled();
+      });
+    });
+
+    it('dispatches an action if the submission succeeds', () => {
+      const store = mockStore({
+        apd: { data: { id: 'id-to-update' } }
+      });
+      const spy = jest.spyOn(axios, 'delete');
+
+      fetchMock.onDelete('/apds/id-to-update/versions').reply(204);
+
+      const expectedActions = [
+        { type: actions.WITHDRAW_APD_REQUEST },
+        { type: actions.WITHDRAW_APD_SUCCESS }
+      ];
+
+      beforeEach(() => {
+        fetchMock.reset();
+      });
+
+      return store.dispatch(actions.withdrawApd()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(spy).toHaveBeenCalled();
+      });
+    });
+  });
 });

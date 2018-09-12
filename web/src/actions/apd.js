@@ -25,6 +25,9 @@ export const SUBMIT_APD_SUCCESS = 'SUBMIT_APD_SUCCESS';
 export const SUBMIT_APD_FAILURE = 'SUBMIT_APD_FAILURE';
 export const UPDATE_APD = 'UPDATE_APD';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
+export const WITHDRAW_APD_REQUEST = Symbol('withdraw apd request');
+export const WITHDRAW_APD_SUCCESS = Symbol('withdraw apd success');
+export const WITHDRAW_APD_FAILURE = Symbol('withdraw apd failure');
 
 export const SET_SELECT_APD_ON_LOAD = 'SET_SELECT_APD_ON_LOAD';
 export const selectApdOnLoad = () => ({ type: SET_SELECT_APD_ON_LOAD });
@@ -263,3 +266,19 @@ export const submitAPD = (save = saveApd) => (dispatch, getState) =>
     .catch(error => {
       dispatch(notifyNetError('Submit', error));
     });
+
+export const withdrawApd = () => (dispatch, getState) => {
+  dispatch({ type: WITHDRAW_APD_REQUEST });
+
+  const { apd: { data: { id: apdID } } } = getState();
+
+  return axios
+    .delete(`/apds/${apdID}/versions`)
+    .then(() => {
+      dispatch({ type: WITHDRAW_APD_SUCCESS });
+    })
+    .catch(error => {
+      dispatch(notifyNetError('Withdraw', error));
+      dispatch({ type: WITHDRAW_APD_FAILURE });
+    });
+};
