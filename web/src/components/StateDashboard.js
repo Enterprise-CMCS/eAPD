@@ -43,6 +43,27 @@ Events.propTypes = {
   events: PropTypes.array.isRequired
 };
 
+const TaskRow = ({ btnIcon, btnText, status, type }) => (
+  <tr
+    className="align-middle bg-grey-light border-top border-bottom border-white"
+    style={{ borderWidth: '0.5rem' }}
+  >
+    <td>{type}</td>
+    <td>{status}</td>
+    <td>
+      <Btn size="small" extraCss="col-12 p1 bg-blue white">
+        {btnText} <Icon icon={btnIcon} className="ml1" />
+      </Btn>
+    </td>
+  </tr>
+);
+TaskRow.propTypes = {
+  btnIcon: PropTypes.object.isRequired,
+  btnText: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
+};
+
 const TaskTable = () => (
   <table className="table-fixed">
     <thead>
@@ -53,65 +74,44 @@ const TaskTable = () => (
       </tr>
     </thead>
     <tbody>
-      <tr
-        className="align-middle bg-grey-light border-top border-bottom border-white"
-        style={{ borderWidth: '0.5rem' }}
-      >
-        <td>(ex.) APD</td>
-        <td>Awaiting state response</td>
-        <td>
-          <Btn size="small" extraCss="col-12 p1 bg-blue white">
-            Respond <Icon icon={faArrowRight} className="ml1" />
-          </Btn>
-        </td>
-      </tr>
-      <tr
-        className="align-middle bg-grey-light border-top border-bottom border-white"
-        style={{ borderWidth: '0.5rem' }}
-      >
-        <td>(ex.) Contract</td>
-        <td>Awaiting state response</td>
-        <td>
-          <Btn size="small" extraCss="col-12 p1 bg-blue white">
-            Response <Icon icon={faArrowRight} className="ml1" />
-          </Btn>
-        </td>
-      </tr>
-      <tr
-        className="align-middle bg-grey-light border-top border-bottom border-white"
-        style={{ borderWidth: '0.5rem' }}
-      >
-        <td>(ex.) APD</td>
-        <td>Submission in progress</td>
-        <td>
-          <Btn size="small" extraCss="col-12 p1 bg-blue white">
-            Open <Icon icon={faEdit} className="ml1" />
-          </Btn>
-        </td>
-      </tr>
-      <tr
-        className="align-middle bg-grey-light border-top border-bottom border-white"
-        style={{ borderWidth: '0.5rem' }}
-      >
-        <td>(ex.) Contract</td>
-        <td>Submission not started</td>
-        <td>
-          <Btn size="small" extraCss="col-12 p1 bg-blue white">
-            Start <Icon icon={faPlusCircle} className="ml1" />
-          </Btn>
-        </td>
-      </tr>
+      <TaskRow
+        type="(ex. APD)"
+        status="Awaiting state response"
+        btnText="Respond"
+        btnIcon={faArrowRight}
+      />
+      <TaskRow
+        type="(ex. Contract)"
+        status="Awaiting state response"
+        btnText="Response"
+        btnIcon={faArrowRight}
+      />
+      <TaskRow
+        type="(ex. APD)"
+        status="Submission in progress"
+        btnText="Open"
+        btnIcon={faEdit}
+      />
+      <TaskRow
+        type="(ex. Contract)"
+        status="Submission not started"
+        btnText="Start"
+        btnIcon={faPlusCircle}
+      />
     </tbody>
   </table>
 );
 
 const DashboardSection = ({ title, children }) => (
-  <div id="dashboard-tasks" className="mb3 bg-white rounded shadow accordian">
+  <section
+    id="dashboard-tasks"
+    className="mb3 bg-white rounded shadow accordian"
+  >
     <h1 className="col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align regular blue">
       {title}
     </h1>
     <div className="p2 sm-p3 has-sticky-header">{children}</div>
-  </div>
+  </section>
 );
 DashboardSection.propTypes = {
   title: PropTypes.string.isRequired,
@@ -144,7 +144,7 @@ const StateDashboard = () => (
         </div>
         <div className="sm-col-6 px2">
           <DashboardSection title="Upcoming events">
-            <h3 className="mt0 pb1 light border-bottom">2018</h3>
+            <h2 className="mt0 h3 pb1 light border-bottom">2018</h2>
             <Events
               month="June"
               events={[
