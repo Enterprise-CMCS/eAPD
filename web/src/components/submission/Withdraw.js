@@ -31,7 +31,7 @@ class Withdraw extends Component {
   }
 
   render() {
-    const { status } = this.props;
+    const { dirty, status } = this.props;
 
     if (status !== 'draft') {
       return (
@@ -43,9 +43,9 @@ class Withdraw extends Component {
           </Btn>
         </div>
       );
-    } else if (this.state.showWithdrawlConfirmation) {
+    } else if (this.state.showWithdrawlConfirmation && !dirty) {
       return (
-        <div className="ml3 border-top mt3 pt3">
+        <div className="ml3">
           <p className="bold">
             {t('certifyAndSubmit.withdraw.confirmation.header')}
           </p>
@@ -63,6 +63,7 @@ class Withdraw extends Component {
 }
 
 Withdraw.propTypes = {
+  dirty: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
   withdrawApd: PropTypes.func.isRequired
 };
