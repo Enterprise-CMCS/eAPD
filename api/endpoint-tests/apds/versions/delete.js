@@ -22,6 +22,8 @@ tap.test(
     const json = true;
 
     tests.test('when attempting to withdraw an APD', async test => {
+      // Change the APD's status before attempting to withdraw
+      // so we can make sure it is changed back.
       await db()('apds')
         .where({ id: 4000 })
         .update({ status: 'not draft' });
