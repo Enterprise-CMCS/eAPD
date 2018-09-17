@@ -210,13 +210,15 @@
     description: 
       title: Activity Overview
       helpText: >-
-        Briefly summarize activity needs
+        Summarize activity needs
         for how requested funding will be used (e.g. administrative, outreach,
         auditing, Public Health Registry Development, etc)
       reminder: >-
-        
       summary: 
-        title: Brief Activity Summary
+        title: Activity Summary
+        helpText: >-
+          Detail plans for requested funds in this section.
+        reminder: >-
       detail:
         standard:
           subheader: 
