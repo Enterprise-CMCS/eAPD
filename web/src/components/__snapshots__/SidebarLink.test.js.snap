@@ -9,6 +9,7 @@ ShallowWrapper {
     depth={0}
     expanded={null}
     hash={null}
+    onClick={null}
     sub={
       Array [
         Object {
@@ -175,6 +176,7 @@ ShallowWrapper {
     depth={0}
     expanded={null}
     hash="moop"
+    onClick={null}
     sub={Array []}
     toggleExpand={[Function]}
   >
@@ -334,6 +336,7 @@ ShallowWrapper {
     depth={0}
     expanded={false}
     hash={null}
+    onClick={null}
     sub={
       Array [
         Object {
@@ -788,6 +791,7 @@ ShallowWrapper {
     depth={0}
     expanded={true}
     hash={null}
+    onClick={null}
     sub={
       Array [
         Object {
@@ -865,6 +869,7 @@ ShallowWrapper {
             depth={1}
             expanded={null}
             hash={null}
+            onClick={null}
             sub={Array []}
             toggleExpand={[Function]}
           >
@@ -1031,6 +1036,7 @@ ShallowWrapper {
           "depth": 1,
           "expanded": null,
           "hash": null,
+          "onClick": null,
           "sub": Array [],
           "toggleExpand": [Function],
         },
@@ -1100,6 +1106,7 @@ ShallowWrapper {
               depth={1}
               expanded={null}
               hash={null}
+              onClick={null}
               sub={Array []}
               toggleExpand={[Function]}
             >
@@ -1266,6 +1273,7 @@ ShallowWrapper {
             "depth": 1,
             "expanded": null,
             "hash": null,
+            "onClick": null,
             "sub": Array [],
             "toggleExpand": [Function],
           },
@@ -1296,6 +1304,7 @@ ShallowWrapper {
     depth={0}
     expanded={null}
     hash={null}
+    onClick={null}
     sub={Array []}
     toggleExpand={[Function]}
   >
@@ -1455,6 +1464,7 @@ ShallowWrapper {
     depth={0}
     expanded={null}
     hash={null}
+    onClick={null}
     sub={Array []}
     toggleExpand={[Function]}
   >
