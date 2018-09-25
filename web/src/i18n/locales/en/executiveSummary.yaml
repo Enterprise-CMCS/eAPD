@@ -1,0 +1,23 @@
+title: Executive Summary
+helpText: >-
+  The figures are enerated based on the activity details
+  provided. Program budget tables are automatically included for review.
+total: Total
+summary:
+  title: Executive Summary
+  helpText: >-
+    If approved, APD program budget tables listed below will be referenced
+    on the CMS approval letter.
+budgetTable:
+  title: Program Budget Table
+  helpText: ''
+  hit: HIT (90/10)
+  hie: HIE (90/10)
+  hitHie: HIT + HIE (90/10)
+  mmis90: MMIS (90/10)
+  mmis75: MMIS (75/25)
+  mmis50: MMIS (50/50)
+  mmisTotal: MMIS (Total)
+  fedShare: Federal
+  stateShare: State
+  grandTotal: Total

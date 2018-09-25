@@ -1,0 +1,33 @@
+title: Program Activities
+reminder: >-
+  Identify each of the activities referenced from the overview section.
+  Information will be collected for each activity.
+list:
+  title: Activity List
+  helpText: >-
+    Program administration pertains to implementing
+    the EHR Incentive program, state and contractor
+    costs associated with operating EHR incentive program, and SLR
+    enhancements/upgrades.
+  reminder: >-
+    Examples of individual activities include:
+    auditing, outreach, environmental scans, HIE registry development,
+    CQM database development, data and analytics, HIE onboarding, etc.
+addActivityButtonText: Add activity
+noActivityMessage: There are no activities. Add one below.
+noNameYet: (No name provided yet)
+delete:
+  text: Remove Activity
+  confirm:
+    header: Confirm
+    body: Remove this activity?
+    _yes: 'Yes'
+    _no: 'No'
+header: Program Activities
+namePrefix: Activity
+namePrefixAndNum: Core Activity {{number}}
+costs:
+  title: In-House Cost Categories
+  subtitles:
+    personnel: Personnel
+    nonPersonnel: Non-Personnel

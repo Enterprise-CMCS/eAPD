@@ -1,0 +1,18 @@
+title: Personnel
+subheader: >-
+  Outline personnel resources as part of the activity. Do not include contract personnel.
+helpText: >-
+  Use the checkbox to identify key project personnel including yearly salary and benefits.
+reminder: >-
+  FTE% is the percentage attributable to the activity.
+noDataNotice: There are no personnel resources for this activity.
+labels:
+  entryNum: '#'
+  title: Title
+  desc: Description
+  keyPersonnel: Key Personnel
+  yearCost: '{{year}} Cost'
+  costAmt: Salary Amount
+  costPerc: Number of FTEs
+removeLabel: Remove personnel
+addButtonText: Add personnel
