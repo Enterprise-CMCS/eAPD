@@ -1,0 +1,55 @@
+title: Cost Allocation
+helpText: >-
+  Cost allocation plan must include all participants
+  and their associated costs to depict non-Medicaid activities.:   
+  1. CMS will work with states individually to determine the
+  most appropriate cost allocation methodology.   
+
+  2. HITECH cost allocation formulas should be based on direct benefit to
+  Medicaid EHR incentive program, accounting for state
+  projections of eligible Medicaid provider participation.
+
+  3. Cost allocation must account for other available federal funding
+  sources including division of resources and activities across relevant
+  payers, and relative benefit to the state Medicaid program.
+
+  4. Ensure cost allocations are current. Medicaid funds should be not be
+  sole contributor to Cost allocations should be current and ensure financial
+  participation of all parties so Medicaid funds are neither the
+  sole contributor at the onset, nor primary source of funding. Other
+  payers who may benefit must contribute their share from the outset.
+  The absence of ancillary payers is not sufficient cause for
+  Medicaid to be primary payer.
+reminder: >-
+  Include any participating non-Medicaid FTEs.
+methodology:
+  title: Cost allocation methodology description
+  helpText: >-
+    Do not assume absence of other payers is sufficient cause for
+    Medicaid to be primary payer. Limit ambiguity about other
+    potential federal funding sources.
+  reminder: >-
+    For example, if no CHIP funds are being requested, include a statement in this section.
+quarterly:
+  title: Breakout of federal share by quarter
+  helpText: >-
+    In this section, indicate allocations of state personnel & contract
+    resources in current FFY by quarter.
+  ? reminder
+  expenseNames:
+    state: In-House Costs
+    contractor: Private Contractor Costs
+    combined: Total Enhanced FFP
+otherFunding:
+  title: Other funding description
+  helpText: >-
+    Write a high level description to describe funding used to support this activity. (Review
+    Letter 10‐016 for examples of grants for inclusion.)
+  reminder: >-
+    Ensure new grants are included, and remove expired grants.
+ffp:
+  title: Federal Financial Partipation (FFP) and Cost Allocation
+  totalNetOther: Medicaid Share
+  labels:
+    other: Other Funding Amount
+    fedStateSplit: Federal-State Split
