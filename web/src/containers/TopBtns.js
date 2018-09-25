@@ -14,15 +14,15 @@ class TopBtns extends Component {
   };
 
   render() {
-    const { authenticated } = this.props;
+    const { authenticated, hideDashboard } = this.props;
 
     return (
       <header className="clearfix mb2">
         <div className="right h5">
           {authenticated ? (
             <Fragment>
-              <Btn size="small">{t('dashboard')}</Btn>{' '}
-              <Btn size="small" onClick={this.handleLogout}>
+              {!hideDashboard && <Btn size="small">{t('dashboard')}</Btn>}
+              <Btn size="small" onClick={this.handleLogout} extraCss="ml1">
                 {t('logout')}
               </Btn>
             </Fragment>
@@ -39,7 +39,12 @@ class TopBtns extends Component {
 
 TopBtns.propTypes = {
   authenticated: PropTypes.bool.isRequired,
+  hideDashboard: PropTypes.bool,
   logout: PropTypes.func.isRequired
+};
+
+TopBtns.defaultProps = {
+  hideDashboard: false
 };
 
 const mapStateToProps = ({ auth: { authenticated } }) => ({ authenticated });
