@@ -178,12 +178,12 @@ tap.test('APD-related middleware', async middlewareTests => {
     });
   });
 
-  middlewareTests.test('user can edit apd', async editApdTests => {
+  middlewareTests.test('user can access apd', async accessApdTests => {
     const apdFromDb = {
       get: sandbox.stub()
     };
 
-    editApdTests.beforeEach(async () => {
+    accessApdTests.beforeEach(async () => {
       OtherModel.where.returns(OtherModel);
       OtherModel.fetch.resolves({
         related: sandbox.stub().returns(apdFromDb)
@@ -191,7 +191,54 @@ tap.test('APD-related middleware', async middlewareTests => {
       apdFromDb.get.withArgs('id').returns('florp');
     });
 
-    editApdTests.test(
+    accessApdTests.test(
+      'sends a 404 if the user does not have access to the APD',
+      async invalidTest => {
+        const req = {
+          user: { model: { apds: sandbox.stub().resolves([1, 2, 3]) } },
+          meta: {},
+          params: { 'apd-id': 'florp' }
+        };
+        await middleware.userCanAccessAPD(OtherModel, 'apd-id')(req, res, next);
+
+        invalidTest.ok(res.status.calledWith(404), 'HTTP status is set to 404');
+        invalidTest.ok(res.end.calledOnce, 'response is closed');
+        invalidTest.ok(next.notCalled, 'next is not called');
+      }
+    );
+
+    accessApdTests.test(
+      'passes if the user has access to the APD',
+      async validTest => {
+        apdFromDb.get.withArgs('status').returns('draft');
+        const req = {
+          user: { model: { apds: sandbox.stub().resolves(['florp', 2, 3]) } },
+          meta: {},
+          params: { 'apd-id': 'florp' }
+        };
+        await middleware.userCanAccessAPD(OtherModel, 'apd-id')(req, res, next);
+
+        validTest.ok(res.status.notCalled, 'HTTP status is not set');
+        validTest.ok(res.end.notCalled, 'response is not closed');
+        validTest.ok(next.calledOnce, 'next is called');
+      }
+    );
+  });
+
+  middlewareTests.test('user can edit apd', async tests => {
+    const apdFromDb = {
+      get: sandbox.stub()
+    };
+
+    tests.beforeEach(async () => {
+      OtherModel.where.returns(OtherModel);
+      OtherModel.fetch.resolves({
+        related: sandbox.stub().returns(apdFromDb)
+      });
+      apdFromDb.get.withArgs('id').returns('florp');
+    });
+
+    tests.test(
       'sends a 404 if the user does not have access to the APD',
       async invalidTest => {
         const req = {
@@ -207,7 +254,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       }
     );
 
-    editApdTests.test('sends a 400 if the APD is not editable', async test => {
+    tests.test('sends a 400 if the APD is not editable', async test => {
       const req = {
         user: { model: { apds: sandbox.stub().resolves(['florp', 2, 3]) } },
         meta: {},
@@ -225,22 +272,19 @@ tap.test('APD-related middleware', async middlewareTests => {
       test.ok(next.notCalled, 'next is not called');
     });
 
-    editApdTests.test(
-      'passes if the user has access to the APD',
-      async validTest => {
-        apdFromDb.get.withArgs('status').returns('draft');
-        const req = {
-          user: { model: { apds: sandbox.stub().resolves(['florp', 2, 3]) } },
-          meta: {},
-          params: { 'apd-id': 'florp' }
-        };
-        await middleware.userCanEditAPD(OtherModel, 'apd-id')(req, res, next);
+    tests.test('passes if the user has access to the APD', async validTest => {
+      apdFromDb.get.withArgs('status').returns('draft');
+      const req = {
+        user: { model: { apds: sandbox.stub().resolves(['florp', 2, 3]) } },
+        meta: {},
+        params: { 'apd-id': 'florp' }
+      };
+      await middleware.userCanEditAPD(OtherModel, 'apd-id')(req, res, next);
 
-        validTest.ok(res.status.notCalled, 'HTTP status is not set');
-        validTest.ok(res.end.notCalled, 'response is not closed');
-        validTest.ok(next.calledOnce, 'next is called');
-      }
-    );
+      validTest.ok(res.status.notCalled, 'HTTP status is not set');
+      validTest.ok(res.end.notCalled, 'response is not closed');
+      validTest.ok(next.calledOnce, 'next is called');
+    });
   });
 
   middlewareTests.test('load activity', async loadActivityTests => {
@@ -258,8 +302,8 @@ tap.test('APD-related middleware', async middlewareTests => {
         );
 
         invalidTest.ok(res.status.calledWith(500), 'HTTP status is set to 500');
-        invalidTest.ok(res.end.calledOnce, 'response is not closed');
-        invalidTest.ok(next.notCalled, 'next is called');
+        invalidTest.ok(res.end.calledOnce, 'response is closed');
+        invalidTest.ok(next.notCalled, 'next is not called');
       }
     );
 
