@@ -775,3 +775,21 @@
         Upon submission, this APD will be locked from further
         edits until reviewed by a CMS analyst. If complete, select the
         button below.
+      buttonText: Submit APD
+    withdraw:
+      prompt:
+        header: Withdraw submission
+        helpText: >-
+          Withdrawing an APD submission resets the review process by
+          CMS.  APD submissions can be withdrawn to make changes.
+
+
+          _Note: Withdrawing this submission will reset the APD
+          review process._
+        buttonText: Withdraw Submission
+      confirmation:
+        header: Your APD submissions has been withdrawn
+        helpText: >-
+          The document is now editable.  It will need to be resubmitted
+          before it can be reviewed by CMS.
+        buttonText: Back to top

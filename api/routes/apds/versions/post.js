@@ -1,4 +1,4 @@
-const logger = require('../../../logger')('apd activites route post');
+const logger = require('../../../logger')('apd versions route post');
 const {
   apd: defaultApdModel,
   apdVersion: defaultVersionModel

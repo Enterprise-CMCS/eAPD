@@ -8,12 +8,9 @@ WEBCHANGES=$?
 if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
   PRNUM=`basename $CI_PULL_REQUESTS`
 
-  # CF_USER, CF_PASSWORD are defined as private Environment Variables
-  # in CircleCI web UI: https://circleci.com/gh/18F/cms-hitech-apd/edit#env-vars
-
   set -e
   apt-get update
-  apt-get install jq
+  apt-get -y -qq install jq awscli
 
   # check PR title and if it contains "[skip deploy]" then obey its wishes
   TITLE=$(curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM | jq -r '.title')
@@ -24,22 +21,33 @@ if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
 
   export API_URL=$STAGING_API_URL
 
-  # Install `cf` cli
-  curl -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-  dpkg -i cf-cli_amd64.deb
-  rm cf-cli_amd64.deb
-
   # Build the front-end
   cd web
   npm ci
   npm run build
   cd ..
 
-  # Log into CF
-  cf login -a $STAGING_CF_API -u $STAGING_CF_USER -p $STAGING_CF_PASSWORD -o $STAGING_CF_ORG -s $STAGING_CF_SPACE
+  BUCKET="pr$PRNUM.hitech.eapd.cms.gov"
+  BUCKET_URI="s3://pr$PRNUM.hitech.eapd.cms.gov"
+  BUCKET_POLICY='{"Version":"2012-10-17","Statement":[{"Sid":"PublicReadGetObject","Effect":"Allow","Principal":"*","Action":"s3:GetObject","Resource":"arn:aws:s3:::'"$BUCKET"'/*"}]}'
+  aws s3 mb $BUCKET_URI
+  
+  cd web/dist
+  for filename in *.*; do
+    aws s3 cp "$filename" $BUCKET_URI/$filename
+  done
 
-  # Push
-  cf push "hitech-apd-frontend-pr$PRNUM" -n "hitech-apd-pr$PRNUM" -b https://github.com/cloudfoundry/staticfile-buildpack.git -m 64M --no-manifest -p web/dist
+  for filename in static/img/browsers/*.*; do
+    aws s3 cp "$filename" $BUCKET_URI/$filename
+  done
+
+  for filename in static/img/states/*.*; do
+    aws s3 cp "$filename" $BUCKET_URI/$filename
+  done
+
+  aws s3 website $BUCKET_URI --index-document index.html
+  aws s3api put-bucket-policy --bucket $BUCKET --policy "$BUCKET_POLICY"
+  cd ../..
 
   # Delete comment on Github, if there's one already
   COMMENTS=$(curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
@@ -49,7 +57,7 @@ if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
   fi
 
   # Post again.  This way we'll know the bot updated the thing.
-  URL="https://hitech-apd-pr$PRNUM.app.cloud.gov/"
+  URL="http://$BUCKET.s3-website-us-east-1.amazonaws.com/"
   curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" -d '{"body":"See this pull request in action: '"$URL"'"}' -H "Content-Type: application/json" -X POST "https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments"
 
 
