@@ -1,4 +1,5 @@
 import apd from './apd';
+import { SUBMIT_APD_SUCCESS, WITHDRAW_APD_SUCCESS } from '../actions/apd';
 
 describe('APD reducer', () => {
   const initialState = {
@@ -439,5 +440,17 @@ describe('APD reducer', () => {
         ]
       }
     });
+  });
+
+  it('should handle APD submission success', () => {
+    expect(
+      apd({ data: { status: 'draft' } }, { type: SUBMIT_APD_SUCCESS })
+    ).toEqual({ data: { status: 'submitted' } });
+  });
+
+  it('should handle APD withdrawal success', () => {
+    expect(
+      apd({ data: { status: 'not draft' } }, { type: WITHDRAW_APD_SUCCESS })
+    ).toEqual({ data: { status: 'draft' } });
   });
 });
