@@ -1,0 +1,16 @@
+title: Performance Measures and Benchmarks
+subheader: >-
+  List the goals and objectives the state plans to accomplish as part
+  of this activity.
+helpText: >-
+  Briefly describe how each goal relates to the vision identified in the
+  program summary. Each goal should have a matching activity.
+noDataNotice: There are no goals set for this activity.
+goal:
+  title: 'Goal #{{number}}'
+objective:
+  title: Goal roadmap
+  helpText: >-
+    Briefly describe how state will measure progress
+    toward each identified goal.
+addGoalButtonText: Add a goal
