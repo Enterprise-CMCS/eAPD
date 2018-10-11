@@ -19,12 +19,12 @@ describe('activities reducer', () => {
     name: '',
     start: '',
     files: [],
-    years: { '2018': 0, '2019': 0 },
+    years: { '2019': 0, '2020': 0 },
     hourly: {
       useHourly: false,
       data: {
-        '2018': { hours: '', rate: '' },
-        '2019': { hours: '', rate: '' }
+        '2019': { hours: '', rate: '' },
+        '2020': { hours: '', rate: '' }
       }
     }
   });
@@ -34,7 +34,7 @@ describe('activities reducer', () => {
     desc: '',
     title: '',
     isKeyPersonnel: false,
-    years: { '2018': { amt: '', perc: '' }, '2019': { amt: '', perc: '' } }
+    years: { '2019': { amt: '', perc: '' }, '2020': { amt: '', perc: '' } }
   });
 
   const newGoal = keyFn => ({ key: keyFn(), description: '', objective: '' });
@@ -43,7 +43,7 @@ describe('activities reducer', () => {
     key: keyFn(),
     category: 'Hardware, software, and licensing',
     desc: '',
-    years: { '2018': 0, '2019': 0 }
+    years: { '2019': 0, '2020': 0 }
   });
 
   const newMilestone = keyFn => ({
@@ -59,8 +59,8 @@ describe('activities reducer', () => {
     contractorResources: [newContractor(keyFn)],
     costAllocationDesc: '',
     costAllocation: {
-      '2018': { ffp: { federal: 90, state: 10 }, other: 0 },
-      '2019': { ffp: { federal: 90, state: 10 }, other: 0 }
+      '2019': { ffp: { federal: 90, state: 10 }, other: 0 },
+      '2020': { ffp: { federal: 90, state: 10 }, other: 0 }
     },
     description: '',
     expenses: [newExpense(keyFn)],
@@ -86,7 +86,7 @@ describe('activities reducer', () => {
     statePersonnel: [newPerson(keyFn)],
     summary: '',
     quarterlyFFP: {
-      '2018': {
+      '2019': {
         '1': {
           combined: 25,
           contractors: 25,
@@ -108,7 +108,7 @@ describe('activities reducer', () => {
           state: 25
         }
       },
-      '2019': {
+      '2020': {
         '1': {
           combined: 25,
           contractors: 25,
@@ -131,7 +131,7 @@ describe('activities reducer', () => {
         }
       }
     },
-    years: ['2018', '2019']
+    years: ['2019', '2020']
   });
 
   const uniqueKey = () => {
@@ -157,7 +157,7 @@ describe('activities reducer', () => {
     expect(
       activities(initialState, {
         type: 'ADD_ACTIVITY',
-        years: ['2018', '2019']
+        years: ['2019', '2020']
       })
     ).toEqual({
       byKey: {
@@ -208,7 +208,7 @@ describe('activities reducer', () => {
         activities(stateWithOne, {
           type: action,
           key: 1,
-          years: ['2018', '2019']
+          years: ['2019', '2020']
         })
       ).toEqual({
         ...stateWithOne,
@@ -346,7 +346,7 @@ describe('activities reducer', () => {
     const contractor = activity.contractorResources[0];
     const contractorNew = {
       ...contractor,
-      years: { '2018': 100, '2019': 200 }
+      years: { '2019': 100, '2020': 200 }
     };
 
     const state = {
@@ -374,7 +374,7 @@ describe('activities reducer', () => {
           contractorResources: [
             {
               ...contractorNew,
-              years: { '2018': 0, '2019': 0 },
+              years: { '2019': 0, '2020': 0 },
               hourly: {
                 ...contractorNew.hourly,
                 useHourly: true
@@ -399,7 +399,7 @@ describe('activities reducer', () => {
       expect(
         activities(stateWithOne, {
           type,
-          updates: { years: ['2018', '2019', '2020'] }
+          updates: { years: ['2019', '2020', '2021'] }
         })
       ).toEqual({
         ...stateWithOne,
@@ -411,20 +411,20 @@ describe('activities reducer', () => {
                 ...stateWithOne.byKey['1'].contractorResources[0],
                 years: {
                   ...stateWithOne.byKey['1'].contractorResources[0].years,
-                  '2020': 0
+                  '2021': 0
                 }
               }
             ],
             costAllocation: {
               ...stateWithOne.byKey['1'].costAllocation,
-              '2020': { ffp: { federal: 90, state: 10 }, other: 0 }
+              '2021': { ffp: { federal: 90, state: 10 }, other: 0 }
             },
             expenses: [
               {
                 ...stateWithOne.byKey['1'].expenses[0],
                 years: {
                   ...stateWithOne.byKey['1'].expenses[0].years,
-                  '2020': 0
+                  '2021': 0
                 }
               }
             ],
@@ -433,13 +433,13 @@ describe('activities reducer', () => {
                 ...stateWithOne.byKey['1'].statePersonnel[0],
                 years: {
                   ...stateWithOne.byKey['1'].statePersonnel[0].years,
-                  '2020': { amt: '', perc: '' }
+                  '2021': { amt: '', perc: '' }
                 }
               }
             ],
             quarterlyFFP: {
               ...stateWithOne.byKey['1'].quarterlyFFP,
-              '2020': {
+              '2021': {
                 '1': {
                   combined: 25,
                   contractors: 25,
@@ -462,7 +462,7 @@ describe('activities reducer', () => {
                 }
               }
             },
-            years: ['2018', '2019', '2020']
+            years: ['2019', '2020', '2021']
           }
         }
       });
@@ -470,7 +470,7 @@ describe('activities reducer', () => {
 
     it('removes year-based pieces if a year was removed', () => {
       expect(
-        activities(stateWithOne, { type, updates: { years: ['2018'] } })
+        activities(stateWithOne, { type, updates: { years: ['2019'] } })
       ).toEqual({
         ...stateWithOne,
         byKey: {
@@ -480,18 +480,18 @@ describe('activities reducer', () => {
               {
                 ...stateWithOne.byKey['1'].contractorResources[0],
                 years: {
-                  '2018': 0
+                  '2019': 0
                 }
               }
             ],
             costAllocation: {
-              '2018': { ffp: { federal: 90, state: 10 }, other: 0 }
+              '2019': { ffp: { federal: 90, state: 10 }, other: 0 }
             },
             expenses: [
               {
                 ...stateWithOne.byKey['1'].expenses[0],
                 years: {
-                  '2018': 0
+                  '2019': 0
                 }
               }
             ],
@@ -499,15 +499,15 @@ describe('activities reducer', () => {
               {
                 ...stateWithOne.byKey['1'].statePersonnel[0],
                 years: {
-                  '2018': { amt: '', perc: '' }
+                  '2019': { amt: '', perc: '' }
                 }
               }
             ],
             quarterlyFFP: {
-              '2018': stateWithOne.byKey['1'].quarterlyFFP['2018'],
+              '2019': stateWithOne.byKey['1'].quarterlyFFP['2019'],
               total: stateWithOne.byKey['1'].quarterlyFFP.total
             },
-            years: ['2018']
+            years: ['2019']
           }
         }
       });
@@ -539,7 +539,7 @@ describe('activities reducer', () => {
             ...newActivity(key),
             name: 'Program Administration',
             fundingSource: 'HIT',
-            years: ['2018', '2019'],
+            years: ['2019', '2020'],
             meta: { ...newActivity.meta, expanded: true }
           }
         },

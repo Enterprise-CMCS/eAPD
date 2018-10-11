@@ -126,7 +126,7 @@ describe('APD reducer', () => {
             // TODO: This value is computed based on the current datetime.
             // Probably ought to mock the time (sinon can do this) so
             // the test is deterministic.
-            yearOptions: ['2018', '2019', '2020'],
+            yearOptions: ['2019', '2020', '2021'],
             narrativeHIT: 'HIT, but as a play',
             narrativeHIE: 'HIE, but as a novel',
             narrativeMMIS: 'MMIS, but as a script',
@@ -142,7 +142,7 @@ describe('APD reducer', () => {
                   '2018': 100,
                   '2019': 200
                 },
-                key: expect.stringMatching(/[0-9a-f]{6}/)
+                key: expect.stringMatching(/[0-9a-f]{8}/)
               }
             ],
             incentivePayments: {
