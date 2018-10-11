@@ -1,0 +1,17 @@
+title: Activity Schedule
+subheader: >-
+  List major milestones the state is working towards as part of
+  this activity.
+helpText: >-
+  Detail milestones, including those activities occurring under
+  previously approved APDs.
+noMilestonesNotice: Add milestones for this activity.
+milestoneHeader: Milestone
+milestoneLabel: Milestone name
+dateHeader: Planned Start and End
+startHeader: Planned start
+startLabel: planned start date
+endHeader: Planned end
+endLabel: Planned end date
+removeLabel: Remove milestone
+addMilestoneButtonText: Add milestone

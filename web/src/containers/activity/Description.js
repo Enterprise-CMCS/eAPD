@@ -15,8 +15,8 @@ const Description = props => {
   };
 
   return (
-    <Subsection resource="activities.description" nested>
-      <SubsectionChunk resource="activities.description.summary">
+    <Subsection resource="activities.overview" nested>
+      <SubsectionChunk resource="activities.overview.summary">
         <div className="mb3">
           <Textarea
             name={`activity-summary-${activity.key}`}
@@ -36,15 +36,15 @@ const Description = props => {
       <SubsectionChunk
         resource={
           activity.fundingSource === 'HIE'
-            ? 'activities.description.detail.hie'
-            : 'activities.description.detail.standard'
+            ? 'activities.overview.detail.hie'
+            : 'activities.overview.detail.standard'
         }
       >
         <div className="mb3">
           <RichText content={description} onSync={sync('description')} />
         </div>
       </SubsectionChunk>
-      <SubsectionChunk resource="activities.description.alternatives">
+      <SubsectionChunk resource="activities.overview.alternatives">
         <div className="mb3">
           <RichText content={alternatives} onSync={sync('alternatives')} />
         </div>

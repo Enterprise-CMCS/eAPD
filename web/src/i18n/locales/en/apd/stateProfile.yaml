@@ -1,0 +1,55 @@
+title: State Profile Contact Information
+helpText: >-
+  In this section, list relevant state contacts. If the information is
+  on record, it will be listed below. Ensure the director's name and
+  office address are listed correctly.
+directorAndAddress:
+  title: State Medicaid Director & Medicaid Office Address
+  director:
+    title: Medicaid Director
+    labels:
+      name: Name
+      email: Email address
+      phone: Phone number
+  address:
+    title: Medicaid office
+    labels:
+      address1: Address
+      address2: Address (continued)
+      city: City
+      state: State
+      zip: ZIP
+keyPersonnel:
+  title: Key Personnel & Project Management Planning
+  helpText: >-
+    Key personnel are individuals involved in governance, coordination,
+    stakeholder decision-making, and/or single state agency
+    responsibility for Medicaid oversight and project performance
+    monitoring.
+    Identify key state staff who will be involved in all activities
+    listed in this APD.  CMS seeks to ensure state teams are
+    adequately resourced, but does not require states to provide
+    key vendor personnel to satisfy this requirement.
+    Personnel listed in this section must be assigned to APD by name,
+    role, time commitment, and cost where applicable.
+  reminder: >-
+    Key personnel are stakeholders involved globally with activities contained with this APD. Individuals with specific responsibilities on an activity basis only, should be listed individually in Program Activities section of the eAPD.
+  contact: 'Contact #{{number}}'
+  labels:
+    name: Name
+    position: Role
+    email: Email
+    percentTime: Percent commitment to project
+    primary: 'This person is the primary APD point of contact:'
+    hasCosts: 'This person has costs directly attributable to the project:'
+    addButton:
+      zero: Add key personnel
+      one: Add another person
+      other: Add another person
+  delete:
+    text: Remove contact
+    confirm:
+      header: Confirm
+      body: Remove this contact?
+      _yes: 'Yes'
+      _no: 'No'

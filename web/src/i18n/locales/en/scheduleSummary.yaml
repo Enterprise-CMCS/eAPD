@@ -1,0 +1,9 @@
+title: Activity Schedule Summary
+noDataMessage: There are no milestones scheduled.
+main:
+  title: Summary Schedule Table
+  table:
+    activity: Activity
+    milestone: Milestone
+    start: Planned start
+    end: Planned end
