@@ -1,5 +1,6 @@
 import { UPDATE_BUDGET } from '../actions/apd';
 import { arrToObj } from '../util';
+import roundedPercents from '../util/roundedPercents';
 
 const fixNum = (value, digits = 2) => {
   const mult = 10 ** digits;
@@ -186,10 +187,17 @@ const buildBudget = bigState => {
      * @param {Number} amount The amount to allocate over state and federal shares
      * @returns {{fedShare:Number, stateShare:Number other stuff}} The state and federal share
      */
-    const getAllocation = (year, amount) => ({
-      fedShare: n(amount) * activity.costAllocation[year].ffp.federal / 100,
-      stateShare: n(amount) * activity.costAllocation[year].ffp.state / 100
-    });
+    const getAllocation = (year, amount) => {
+      const [fedShare, stateShare] = roundedPercents(n(amount), [
+        activity.costAllocation[year].ffp.federal / 100,
+        activity.costAllocation[year].ffp.state / 100
+      ]);
+      return { fedShare, stateShare };
+    };
+    // const getAllocation = (year, amount) => ({
+    //   fedShare: n(amount) * activity.costAllocation[year].ffp.federal / 100,
+    //   stateShare: n(amount) * activity.costAllocation[year].ffp.state / 100
+    // });
 
     // For each activity, we need to independently track the
     // total cost for each category, per fiscal year.  This isn't
@@ -276,12 +284,22 @@ const buildBudget = bigState => {
       const costs = newState[fundingSource];
       const yearTotal = costs.combined[year].total;
 
-      return {
-        contractors: otherTotal * costs.contractors[year].total / yearTotal,
-        expenses: otherTotal * costs.expenses[year].total / yearTotal,
-        statePersonnel:
-          otherTotal * costs.statePersonnel[year].total / yearTotal
-      };
+      const [contractors, expenses, statePersonnel] = roundedPercents(
+        otherTotal,
+        [
+          costs.contractors[year].total / yearTotal,
+          costs.expenses[year].total / yearTotal,
+          costs.statePersonnel[year].total / yearTotal
+        ]
+      );
+      return { contractors, expenses, statePersonnel };
+
+      // return {
+      //   contractors: otherTotal * costs.contractors[year].total / yearTotal,
+      //   expenses: otherTotal * costs.expenses[year].total / yearTotal,
+      //   statePersonnel:
+      //     otherTotal * costs.statePersonnel[year].total / yearTotal
+      // };
     };
 
     // Now loop back over the years and compute state and federal shares
@@ -352,11 +370,31 @@ const buildBudget = bigState => {
         const quarterlyFFP = newState.federalShareByFFYQuarter[ffpSource];
         const propCostType = prop === 'contractors' ? 'contractors' : 'state';
 
+        // This is the percentage of the total federal share that the state
+        // is requesting, per quarter.  Go ahead and covert it to a 0-1
+        // value so we can precompute the federal dollar share per quarter
+        // using the nice rounding function.
+        const quarterlyInfo = {
+          federalPcts: [
+            ffp[1][propCostType] / 100,
+            ffp[2][propCostType] / 100,
+            ffp[3][propCostType] / 100,
+            ffp[4][propCostType] / 100
+          ],
+          qFFPs: []
+        };
+
+        // Compute the federal dollar payment across the quarters.
+        quarterlyInfo.qFFPs = roundedPercents(
+          cost.fedShare,
+          quarterlyInfo.federalPcts
+        );
+
         // Shortcut to loop over quarters.  :)
         [...Array(4)].forEach((_, q) => {
           // Compute the federal share for this quarter.
-          const federalPct = ffp[q + 1][propCostType] / 100;
-          const qFFP = cost.fedShare * ffp[q + 1][propCostType] / 100;
+          const federalPct = quarterlyInfo.federalPcts[q];
+          const qFFP = quarterlyInfo.qFFPs[q];
 
           // Total cost and percent for this type.  Note that we don't
           // sum the percent here because there are two categories being
