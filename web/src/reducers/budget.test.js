@@ -705,8 +705,8 @@ describe('budget reducer', () => {
         expenses: {
           '1931': { federal: 900, state: 100, total: 1000 },
           '1932': { federal: 900, state: 100, total: 1000 },
-          '1933': { federal: 600, state: 66, total: 1000 },
-          total: { federal: 2400, state: 266, total: 3000 }
+          '1933': { federal: 600, state: 67, total: 1000 },
+          total: { federal: 2400, state: 267, total: 3000 }
         },
         statePersonnel: {
           '1931': { federal: 900, state: 100, total: 1000 },
@@ -731,8 +731,8 @@ describe('budget reducer', () => {
         expenses: {
           '1931': { federal: 3600, state: 400, total: 4000 },
           '1932': { federal: 3600, state: 400, total: 4000 },
-          '1933': { federal: 3300, state: 366, total: 4000 },
-          total: { federal: 10500, state: 1166, total: 12000 }
+          '1933': { federal: 3300, state: 367, total: 4000 },
+          total: { federal: 10500, state: 1167, total: 12000 }
         },
         statePersonnel: {
           '1931': { federal: 3060, state: 340, total: 3400 },
