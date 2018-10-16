@@ -9,10 +9,6 @@ describe('rounding percentages util', () => {
       81
     ]);
 
-    expect(roundedPercents(100, [0.3333, 0.3333, 0.33333])).toEqual([
-      33,
-      33,
-      34
-    ]);
+    expect(roundedPercents(100, [1 / 3, 1 / 3, 1 / 3])).toEqual([33, 33, 34]);
   });
 });
