@@ -12,10 +12,10 @@
 const roundedPercents = (number = 0, percents = [1]) => {
   // Take the floor of the original number, to guarantee that we're starting
   // with a whole number.  First step is to compute the real percentage
-  // values and their sum.  Get the floor of this sum to account for any
-  // weird rounding issues (e.g., 23.000000000003).
+  // values and their sum.  Round off this sum to account for any weird
+  // rounding issues (e.g., 23.000000000003).
   const realNumbers = percents.map(p => Math.floor(number) * p);
-  const realSum = Math.floor(realNumbers.reduce((sum, n) => sum + n, 0));
+  const realSum = Math.round(realNumbers.reduce((sum, n) => sum + n, 0));
 
   // Then get just the decimal part of the real numbers.  We'll use these
   // for sorting purposes in a minute.
