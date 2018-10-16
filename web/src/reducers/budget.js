@@ -326,22 +326,26 @@ const buildBudget = bigState => {
               Non-personnel:     $8 - 10% of state share
       */
 
+      /**
+       * Update the running totals for the various cost categories, subtotals,
+       * and totals for a given funding source (hie, hit, or hitAndHie).
+       * @param {String} fs The funding source to update
+       */
       const updateCosts = fs => {
-        newState[fs].contractors[year].federal += fedShare.contractors;
-        newState[fs].contractors.total.federal += fedShare.contractors;
-        newState[fs].expenses[year].federal += fedShare.expenses;
-        newState[fs].expenses.total.federal += fedShare.expenses;
-        newState[fs].statePersonnel[year].federal += fedShare.statePersonnel;
-        newState[fs].statePersonnel.total.federal += fedShare.statePersonnel;
+        // Update the three cost categories...
+        ['contractors', 'expenses', 'statePersonnel'].forEach(prop => {
+          newState[fs][prop][year].federal += fedShare[prop];
+          newState[fs][prop].total.federal += fedShare[prop];
+
+          newState[fs][prop][year].state += stateShare[prop];
+          newState[fs][prop].total.state += stateShare[prop];
+        });
+
+        // Plus the subtotals for the cost categories (i.e., the
+        // Medicaid share)
         newState[fs].combined[year].federal += costShares.fedShare;
         newState[fs].combined.total.federal += costShares.fedShare;
 
-        newState[fs].contractors[year].state += stateShare.contractors;
-        newState[fs].contractors.total.state += stateShare.contractors;
-        newState[fs].expenses[year].state += stateShare.expenses;
-        newState[fs].expenses.total.state += stateShare.expenses;
-        newState[fs].statePersonnel[year].state += stateShare.statePersonnel;
-        newState[fs].statePersonnel.total.state += stateShare.statePersonnel;
         newState[fs].combined[year].state += costShares.stateShare;
         newState[fs].combined.total.state += costShares.stateShare;
       };
@@ -354,26 +358,31 @@ const buildBudget = bigState => {
       newState.combined.total.state += costShares.stateShare;
 
       if (fundingSource === 'hie' || fundingSource === 'hit') {
+        // We need to track HIE and HIT combined, so we have a funding source
+        // called hitAndHie.  If this is HIE or HIT, roll it into that one too.
         updateCosts('hitAndHie');
       } else {
+        // For MMIS, we need to track costs by "FFP type", too - that is,
+        // the cost allocation.  So we need to know total costs for MMIS
+        // at the 90/10 level, at the 75/25 level, and at the 50/50 level.
+
+        // Compute a string that represents the MMIS level for this activity
         const ffpLevel = `${allocation[year].ffp.federal}-${
           allocation[year].ffp.state
         }`;
 
-        newState.mmisByFFP[ffpLevel][year].federal += costShares.fedShare;
-        newState.mmisByFFP[ffpLevel].total.federal += costShares.fedShare;
-        newState.mmisByFFP.combined[year].federal += costShares.fedShare;
-        newState.mmisByFFP.combined.total.federal += costShares.fedShare;
+        // Then do basically the same as updateCosts() above, but we only
+        // need to track subtotals, not individual cost categories
+        [ffpLevel, 'combined'].forEach(prop => {
+          newState.mmisByFFP[prop][year].federal += costShares.fedShare;
+          newState.mmisByFFP[prop].total.federal += costShares.fedShare;
 
-        newState.mmisByFFP[ffpLevel][year].state += costShares.stateShare;
-        newState.mmisByFFP[ffpLevel].total.state += costShares.stateShare;
-        newState.mmisByFFP.combined[year].state += costShares.stateShare;
-        newState.mmisByFFP.combined.total.state += costShares.stateShare;
+          newState.mmisByFFP[prop][year].state += costShares.stateShare;
+          newState.mmisByFFP[prop].total.state += costShares.stateShare;
 
-        newState.mmisByFFP[ffpLevel][year].total += totalCost;
-        newState.mmisByFFP[ffpLevel].total.total += totalCost;
-        newState.mmisByFFP.combined[year].total += totalCost;
-        newState.mmisByFFP.combined.total.total += totalCost;
+          newState.mmisByFFP[prop][year].total += totalCost;
+          newState.mmisByFFP[prop].total.total += totalCost;
+        });
       }
 
       // Now we compute the federal share per fiscal quarter for
