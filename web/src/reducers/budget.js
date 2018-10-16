@@ -314,16 +314,16 @@ const buildBudget = bigState => {
             Cost allocation:  90/10
           
           Computed:
-            Absolute total:   $1000
-            Medicaid share:    $800 - Absolute total - other funding
-            Federal share:     $720 - 90% of Medicaid share
-              State personnel: $288 - 40% of federal share
-              Contractors:     $360 - 50% of federal share
-              Non-personnel:    $72 - 10% of federal share
-            State share:        $80 - 10% of Medicaid share
-              State personnel:  $32 - 40% of state share
-              Contractors:      $40 - 50% of state share
-              Non-personnel:     $8 - 10% of state share
+            Absolute total:   $1000:  sum of all costs
+            Medicaid share:    $800:  Absolute total - other funding
+            Federal share:     $720:  90% of Medicaid share
+              State personnel: $288:  40% of federal share
+              Contractors:     $360:  50% of federal share
+              Non-personnel:    $72:  10% of federal share
+            State share:        $80:  10% of Medicaid share
+              State personnel:  $32:  40% of state share
+              Contractors:      $40:  50% of state share
+              Non-personnel:     $8:  10% of state share
       */
 
       /**
