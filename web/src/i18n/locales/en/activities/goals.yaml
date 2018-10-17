@@ -1,16 +1,19 @@
-title: Performance Measures and Benchmarks
+title: Performance Goals and Benchmarks
 subheader: >-
-  List the goals and objectives the state plans to accomplish as part
-  of this activity.
+  Explain the state’s goals for this activity.
 helpText: >-
-  Briefly describe how each goal relates to the vision identified in the
-  program summary. Each goal should have a matching activity.
+  Goals are outcomes the state is pursuing through the activity. In addition
+  to listing the goal, briefly describe how each goal relates to the vision
+  identified in the program summary.
+reminder: >-
+  Examples of goals include:
+  improved health outcomes for benficiaries, transformation of public health services,
+  enabling implementation of other initiatives, etc.
 noDataNotice: There are no goals set for this activity.
 goal:
   title: 'Goal #{{number}}'
 objective:
-  title: Goal roadmap
+  title: Benchmarks
   helpText: >-
-    Briefly describe how state will measure progress
-    toward each identified goal.
+    Briefly describe how state will measure progress toward the identified goal.
 addGoalButtonText: Add a goal

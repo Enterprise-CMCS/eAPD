@@ -5,10 +5,12 @@ reminder: >-
 list:
   title: Activity List
   helpText: >-
-    Program administration pertains to implementing
-    the EHR Incentive program, state and contractor
-    costs associated with operating EHR incentive program, and SLR
-    enhancements/upgrades.
+    List any activities referenced in the Program Overview section.
+
+    Program administration pertains to implementing the EHR Incentive program,
+    state and contractor costs associated with operating EHR incentive program,
+    and SLR enhancements/upgrades. All APDs must describe planned program
+    administration.
   reminder: >-
     Examples of individual activities include:
     auditing, outreach, environmental scans, HIE registry development,
