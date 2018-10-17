@@ -18,7 +18,7 @@ labels:
   entryNumber: '#'
   contractorName: Contractor Name
   description: Description of Services
-  term: Term Period
+  term: Contract Term
   start: 'Start:'
   end: 'End:'
   cost: Cost
