@@ -1,5 +1,6 @@
 const tap = require('tap');
 const sinon = require('sinon');
+const diff = require('deep-object-diff').updatedDiff;
 
 const getNewApd = require('./post.data');
 
@@ -40,23 +41,23 @@ tap.test('APD data initializer', async test => {
               {
                 hours: '',
                 rate: '',
-                year: '2018'
+                year: '2019'
               },
               {
                 hours: '',
                 rate: '',
-                year: '2019'
+                year: '2020'
               }
             ],
             useHourly: false,
             years: [
               {
                 cost: 0,
-                year: '2018'
+                year: '2019'
               },
               {
                 cost: 0,
-                year: '2019'
+                year: '2020'
               }
             ]
           }
@@ -66,13 +67,13 @@ tap.test('APD data initializer', async test => {
             federalPercent: 0.9,
             statePercent: 0.1,
             otherAmount: 0,
-            year: '2018'
+            year: '2019'
           },
           {
             federalPercent: 0.9,
             statePercent: 0.1,
             otherAmount: 0,
-            year: '2019'
+            year: '2020'
           }
         ],
         costAllocationNarrative: {
@@ -87,11 +88,11 @@ tap.test('APD data initializer', async test => {
             entries: [
               {
                 amount: 0,
-                year: '2018'
+                year: '2019'
               },
               {
                 amount: 0,
-                year: '2019'
+                year: '2020'
               }
             ]
           }
@@ -121,20 +122,20 @@ tap.test('APD data initializer', async test => {
               {
                 cost: 0,
                 fte: 0,
-                year: '2018'
+                year: '2019'
               },
               {
                 cost: 0,
                 fte: 0,
-                year: '2019'
+                year: '2020'
               }
             ]
           }
         ],
         summary: '',
         quarterlyFFP: [
-          { q1: 0, q2: 0, q3: 0, q4: 0, year: '2018' },
-          { q1: 0, q2: 0, q3: 0, q4: 0, year: '2019' }
+          { q1: 0, q2: 0, q3: 0, q4: 0, year: '2019' },
+          { q1: 0, q2: 0, q3: 0, q4: 0, year: '2020' }
         ]
       }
     ],
@@ -144,14 +145,14 @@ tap.test('APD data initializer', async test => {
         q2: { ehPayment: 0, epPayment: 0 },
         q3: { ehPayment: 0, epPayment: 0 },
         q4: { ehPayment: 0, epPayment: 0 },
-        year: '2018'
+        year: '2019'
       },
       {
         q1: { ehPayment: 0, epPayment: 0 },
         q2: { ehPayment: 0, epPayment: 0 },
         q3: { ehPayment: 0, epPayment: 0 },
         q4: { ehPayment: 0, epPayment: 0 },
-        year: '2019'
+        year: '2020'
       }
     ],
     narrativeHIE: '',
@@ -159,6 +160,35 @@ tap.test('APD data initializer', async test => {
     narrativeMMIS: '',
     pointsOfContact: ['State Person 1', 'State Person 2'],
     previousActivityExpenses: [
+      {
+        hie: {
+          federalActual: 0,
+          federalApproved: 0,
+          stateActual: 0,
+          stateApproved: 0
+        },
+        hit: {
+          federalActual: 0,
+          federalApproved: 0,
+          stateActual: 0,
+          stateApproved: 0
+        },
+        mmis: {
+          federal90Actual: 0,
+          federal90Approved: 0,
+          federal75Actual: 0,
+          federal75Approved: 0,
+          federal50Actual: 0,
+          federal50Approved: 0,
+          state10Actual: 0,
+          state10Approved: 0,
+          state25Actual: 0,
+          state25Approved: 0,
+          state50Actual: 0,
+          state50Approved: 0
+        },
+        year: '2019'
+      },
       {
         hie: {
           federalActual: 0,
@@ -216,35 +246,6 @@ tap.test('APD data initializer', async test => {
           state50Approved: 0
         },
         year: '2017'
-      },
-      {
-        hie: {
-          federalActual: 0,
-          federalApproved: 0,
-          stateActual: 0,
-          stateApproved: 0
-        },
-        hit: {
-          federalActual: 0,
-          federalApproved: 0,
-          stateActual: 0,
-          stateApproved: 0
-        },
-        mmis: {
-          federal90Actual: 0,
-          federal90Approved: 0,
-          federal75Actual: 0,
-          federal75Approved: 0,
-          federal50Actual: 0,
-          federal50Approved: 0,
-          state10Actual: 0,
-          state10Approved: 0,
-          state25Actual: 0,
-          state25Approved: 0,
-          state50Actual: 0,
-          state50Approved: 0
-        },
-        year: '2016'
       }
     ],
     previousActivitySummary: '',
@@ -253,6 +254,6 @@ tap.test('APD data initializer', async test => {
       medicaidDirector: 'Director of Medicaid Operations',
       medicaidOffice: 'Office Where the Director Sites'
     },
-    years: ['2018', '2019']
+    years: ['2019', '2020']
   });
 });
