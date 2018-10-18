@@ -1,7 +1,18 @@
-import apd from './apd';
-import { SUBMIT_APD_SUCCESS, WITHDRAW_APD_SUCCESS } from '../actions/apd';
+import sinon from 'sinon';
+
+// The Hubble Space Telescope was launched on the space shuttle Discovery on
+// April 24, 1990.  FFY 1990.  Set this clock before we import code under test,
+// so that the stuff we import will use our faked-out clock.
+const mockClock = sinon.useFakeTimers(new Date(1990, 3, 24).getTime());
+
+const apd = require('./apd').default;
+const { SUBMIT_APD_SUCCESS, WITHDRAW_APD_SUCCESS } = require('../actions/apd');
 
 describe('APD reducer', () => {
+  afterAll(() => {
+    mockClock.restore();
+  });
+
   const initialState = {
     byId: {},
     data: {},
@@ -123,10 +134,9 @@ describe('APD reducer', () => {
             federalCitations:
               'The Third Sentence of the Ninth Paragraph of the Three Hundred and Twenty-First Section of the Ninety-Fifth Part of the Forty-Fifth Title of the Federal Code of Regulations',
             years: ['2013', '2014'],
-            // TODO: This value is computed based on the current datetime.
-            // Probably ought to mock the time (sinon can do this) so
-            // the test is deterministic.
-            yearOptions: ['2019', '2020', '2021'],
+            // This value is computed based on the current datetime, mocked
+            // at the beginning of these tests.
+            yearOptions: ['1990', '1991', '1992'],
             narrativeHIT: 'HIT, but as a play',
             narrativeHIE: 'HIE, but as a novel',
             narrativeMMIS: 'MMIS, but as a script',
