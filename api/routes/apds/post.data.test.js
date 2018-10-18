@@ -1,6 +1,5 @@
 const tap = require('tap');
 const sinon = require('sinon');
-const diff = require('deep-object-diff').updatedDiff;
 
 const getNewApd = require('./post.data');
 
