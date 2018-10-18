@@ -6,6 +6,11 @@ import sinon from 'sinon';
 // our faked-out clock.
 const mockClock = sinon.useFakeTimers(new Date(1972, 11, 13).getTime());
 
+// Need to use require() here instead of import, because apparently Babel will
+// reorder code and put imports before everything else.  The upshot is that
+// the code under test would get loaded before the clock is faked, and the util
+// library computes years as soon as it's loaded, so...  require() is left
+// alone, so it will come after the clock fakery.  :pixar-joy:
 const imported = require('./activities');
 
 const activities = imported.default;
