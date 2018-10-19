@@ -16,7 +16,7 @@ const HelpText = ({ text: textResource, reminder: reminderResource }) => {
           <Md
             content={reminder}
             wrapper="div"
-            className="mb2 p1 h5 alert alert-help"
+            className="mb2 p1 h5 alert alert-info"
           />
         )}
       </Fragment>

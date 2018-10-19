@@ -1,25 +1,37 @@
 .alert {
   background-color: #eee;
-  border-left: 0.5rem solid #ccc;
   border-radius: 3px;
+  padding-top: 0.9rem;
+  padding-left: 1.95rem;
+}
+
+.alert::before {
+  width: 0;
+  height: 0;
+  content: "";
+  display: block;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  transform: translate(-2.4rem, -.95rem) rotate(-45deg);
 }
 
 .alert-error {
   background-color: #f9dede;
-  border-color: #e31c3d;
 }
 
 .alert-info {
-  background-color: #e1f3f8;
-  border-color: #02bfe7;
+  background-color: var(--blue-light);
+}
+
+.alert-info::before {
+  border-bottom: 12px solid var(--blue);
+
 }
 
 .alert-help {
-  background-color: #fdfaef;
-  border-color: #fdb81e;
+  background-color: var(--yellow-light);
 }
 
 .alert-success {
   background-color: #e7f4e4;
-  border-color: #2e8540;
 }
