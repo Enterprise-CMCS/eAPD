@@ -15,10 +15,23 @@ After you clone the repo, you can use [Docker](https://www.docker.com/) to get
 your local environment up and running quickly, or you can install the
 [Node.js](https://nodejs.org) dependencies directly.
 
+If you follow the instructions here, you'll end up with a functioning app and
+an initialized database. A default dev user is created as well, with username
+`em@il.com` and password `password`.
+
+See the [testing documentation](docs/testing.md) for information about running tests.
+
 ### docker
 
-Run `docker-compose up`, wait until it's done, and then open
-http://localhost:8080/ in your browser.
+Run `docker-compose up`, wait until it's done, and then run the following
+command to create and seed your database:
+
+```
+docker-compose exec api bash -c "npm run migrate && npm run seed"
+```
+
+Once that finishes, you should be good to go. Open http://localhost:8080/
+in your browser.
 
 ### direct
 
@@ -44,8 +57,6 @@ npm start
 ```
 
 The server should now be running at http://localhost:8000/
-
-See the [testing documentation](docs/testing.md) for information about running tests.
 
 ### Documentation
 
