@@ -1,25 +1,39 @@
 title: Activity Overview
 helpText: >-
-  Briefly summarize activity needs
-  for how requested funding will be used (e.g. administrative, outreach,
-  auditing, Public Health Registry Development, etc)
 reminder: >-
 
 summary:
-  title: Brief Activity Summary
+  title: Activity Summary
+  helpText: >-
+
+  reminder: >-
 
 # This is for the detailed rich textbox
 detail:
   # Standard is for HIT and MMIS
   standard:
-    ? subheader
+    subheader:
 
   hie:
-    ? subheader
+    subheader:
     helpText: >-
       Detail linkage to meaningful use, including value proposition to providers, and a sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.
     reminder: >-
       Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
+  hit:
+    subheader:
+    helpText: >-
+      Summarize activity needs for how requested funding will be used (e.g. administrative, outreach,
+      auditing, Public Health Registry Development, etc)
+    reminder: >-
+      Detail plans for requested funds in this section.
+  mmis:
+    subheader:
+    helpText: >-
+      Summarize activity needs for how requested funding will be used (e.g. administrative, outreach,
+      auditing, Public Health Registry Development, etc)
+    reminder: >-
+      Detail plans for requested funds in this section.
 
 # Statement of alternatives
 alternatives:
