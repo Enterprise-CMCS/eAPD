@@ -23,6 +23,7 @@ cd web
 npm ci
 npm run build
 zip -r /tmp/webapp.zip dist/*
+aws s3 sync ./dist s3://$STAGING_S3_BUCKET
 cd ..
 
 # Don't deliver seed files that might be dangerous.
@@ -37,7 +38,6 @@ cd ..
 
 cf login -a $STAGING_CF_API -u $STAGING_CF_USER -p $STAGING_CF_PASSWORD -o $STAGING_CF_ORG -s $STAGING_CF_SPACE
 
-cf zero-downtime-push hitech-apd-frontend -f manifest.yml
 cf zero-downtime-push hitech-apd-api -f manifest.yml
 
 # Migrate and seed the database
