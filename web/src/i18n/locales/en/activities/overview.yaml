@@ -13,7 +13,8 @@ detail:
   # Standard is for HIT and MMIS
   standard:
     subheader:
-
+    helpText: >-
+      Include as much detail as is necessary to explain the activity.
   hie:
     subheader:
     helpText: >-
