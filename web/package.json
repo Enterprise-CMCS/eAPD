@@ -80,10 +80,8 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-table": "^6.8.6",
-    "react-text-mask": "^5.4.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "text-mask-addons": "^3.7.2",
     "tippy.js": "^2.5.0",
     "updeep": "^1.0.0",
     "yup": "^0.25.1"
