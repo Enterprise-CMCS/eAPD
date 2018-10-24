@@ -34,11 +34,10 @@ export const setKeyGenerator = fn => {
 
 const newGoal = () => ({ key: generateKey(), description: '', objective: '' });
 
-const newMilestone = (milestone = '', plannedStart = '', plannedEnd = '') => ({
+const newMilestone = (milestone = '', endDate = '') => ({
   key: generateKey(),
   milestone,
-  plannedStart,
-  plannedEnd
+  endDate
 });
 
 const statePersonDefaultYear = () => ({ amt: '', perc: '' });
@@ -99,20 +98,22 @@ const newActivity = ({
   years = [],
   ...rest
 } = {}) => ({
+  alternatives: '',
+  contractorResources: [newContractor(years)],
+  costAllocation: arrToObj(years, costAllocationEntry()),
+  costAllocationDesc: '',
+  description: '',
+  expenses: [newExpense(years)],
+  fundingSource,
+  goals: [newGoal()],
   key: generateKey(),
   name,
-  fundingSource,
-  summary: '',
-  description: '',
-  alternatives: '',
-  costAllocationDesc: '',
+  plannedEndDate: '',
+  plannedStartDate: '',
   otherFundingDesc: '',
-  goals: [newGoal()],
   schedule: [newMilestone()],
   statePersonnel: [newStatePerson(years)],
-  contractorResources: [newContractor(years)],
-  expenses: [newExpense(years)],
-  costAllocation: arrToObj(years, costAllocationEntry()),
+  summary: '',
   standardsAndConditions: {
     modularity: '',
     mita: '',

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -8,13 +9,22 @@ import {
   updateActivity as updateActivityAction
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
-import DatePickerWrapper from '../../components/DatePickerWrapper';
+import DatePicker from '../../components/DatePicker';
+import DateRangePicker from '../../components/DateRangePicker';
 import { Input } from '../../components/Inputs';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
 class Schedule extends Component {
+  handleActivityDateChange = ({ start, end }) => {
+    const { activity, updateActivity } = this.props;
+    updateActivity(activity.key, {
+      plannedStartDate: start,
+      plannedEndDate: end
+    });
+  };
+
   handleChange = (index, field) => e => {
     const { value } = e.target;
     const { activity, updateActivity } = this.props;
@@ -23,11 +33,10 @@ class Schedule extends Component {
     updateActivity(activity.key, updates);
   };
 
-  handleDatesChange = index => ({ start, end }) => {
+  handleMilestoneDateChange = index => endDate => {
     const { activity, updateActivity } = this.props;
-    const dates = { plannedStart: start, plannedEnd: end };
 
-    const updates = { schedule: { [index]: dates } };
+    const updates = { schedule: { [index]: { endDate } } };
     updateActivity(activity.key, updates);
   };
 
@@ -44,6 +53,16 @@ class Schedule extends Component {
           <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (
           <div className="mb3 overflow-auto">
+            <DateRangePicker
+              initialStartDate={activity.plannedStartDate}
+              startDateId={`activity-${activity.key}-start-date`}
+              initialEndDate={activity.plannedEndDate}
+              endDateId={`activity-${activity.key}-end-date`}
+              onChange={this.handleActivityDateChange}
+              numberOfMonths={2}
+              daySize={32}
+              withPortal
+            />
             <table className="h5 table table-fixed" style={{ minWidth: 600 }}>
               <thead>
                 <tr>
@@ -51,7 +70,7 @@ class Schedule extends Component {
                     {t('activities.schedule.milestoneHeader')}
                   </th>
                   <th className="col-6">
-                    {t('activities.schedule.dateHeader')}
+                    {t('activities.schedule.endHeader')}
                   </th>
                   <th className="col-1" />
                 </tr>
@@ -70,12 +89,15 @@ class Schedule extends Component {
                       />
                     </td>
                     <td>
-                      <DatePickerWrapper
-                        startDateId={`milestone-${d.key}-start`}
-                        endDateId={`milestone-${d.key}-end`}
-                        initialStartDate={d.plannedStart}
-                        initialEndDate={d.plannedEnd}
-                        onChange={this.handleDatesChange(i)}
+                      <DatePicker
+                        id={`milestone-${d.key}-end-date`}
+                        initialDate={d.endDate}
+                        initialVisibleMonth={() =>
+                          activity.plannedStartDate
+                            ? moment(activity.plannedStartDate)
+                            : moment()
+                        }
+                        onChange={this.handleMilestoneDateChange(i)}
                         numberOfMonths={2}
                         daySize={32}
                         withPortal

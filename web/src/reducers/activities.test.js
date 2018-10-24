@@ -69,8 +69,7 @@ describe('activities reducer', () => {
   const newMilestone = keyFn => ({
     key: keyFn(),
     milestone: '',
-    plannedEnd: '',
-    plannedStart: ''
+    endDate: ''
   });
 
   const newActivity = keyFn => ({
@@ -87,6 +86,8 @@ describe('activities reducer', () => {
     fundingSource: 'HIT',
     goals: [newGoal(keyFn)],
     meta: { expanded: false },
+    plannedStartDate: '',
+    plannedEndDate: '',
     schedule: [newMilestone(keyFn)],
     name: '',
     otherFundingDesc: '',
