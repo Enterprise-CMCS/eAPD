@@ -13,7 +13,8 @@ detail:
   # Standard is for HIT and MMIS
   standard:
     subheader:
-
+    helpText: >-
+      Include as much detail as is necessary to explain the activity.
   hie:
     subheader:
     helpText: >-
@@ -26,14 +27,14 @@ detail:
     subheader:
     helpText: >-
       Summarize activity needs for how requested funding will be used (e.g. administrative, outreach,
-      auditing, Public Health Registry Development, etc)
+      auditing, Public Health Registry Development, etc).
     reminder: >-
       Detail plans for requested funds in this section.
   mmis:
     subheader:
     helpText: >-
-      Summarize activity needs for how requested funding will be used (e.g. administrative, outreach,
-      auditing, Public Health Registry Development, etc)
+      Summarize activity needs for how requested funding will be used (e.g. administrative,
+      outreach, auditing, Public Health Registry Development, etc).
     reminder: >-
       Detail plans for requested funds in this section.
 
