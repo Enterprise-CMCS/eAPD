@@ -59,7 +59,6 @@ class DatePickerWrapper extends Component {
 DatePickerWrapper.propTypes = {
   startDateId: PropTypes.string.isRequired,
   endDateId: PropTypes.string.isRequired,
-
   initialStartDate: PropTypes.string,
   initialEndDate: PropTypes.string,
   onChange: PropTypes.func

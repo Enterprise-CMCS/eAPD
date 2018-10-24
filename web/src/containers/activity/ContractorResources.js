@@ -12,7 +12,7 @@ import {
   uploadActivityContractorFile
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
-import DatePickerWrapper from '../../components/DatePickerWrapper';
+import DateRangePicker from '../../components/DateRangePicker';
 import DeleteButton from '../../components/DeleteConfirm';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
@@ -75,7 +75,7 @@ const ContractorForm = ({
     </div>
     <div className="mb3 md-flex">
       <Label>{t('activities.contractorResources.labels.term')}</Label>
-      <DatePickerWrapper
+      <DateRangePicker
         startDateId={`contractor-${contractor.key}-start`}
         endDateId={`contractor-${contractor.key}-end`}
         initialStartDate={contractor.start}
