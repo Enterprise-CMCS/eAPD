@@ -40,8 +40,12 @@ const makeNumberInput = formatProps => {
 };
 
 export const DollarInput = makeNumberInput({
-  decimalScale: 2,
+  decimalScale: 0,
   fixedDecimalScale: true,
   prefix: '$'
 });
-export const PercentInput = makeNumberInput({ suffix: '%' });
+export const PercentInput = makeNumberInput({
+  decimalScale: 0,
+  fixedDecimalScale: true,
+  suffix: '%'
+});
