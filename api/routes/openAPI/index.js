@@ -68,6 +68,16 @@ module.exports = {
             type: 'string',
             description: 'Alternative considerations for the activity'
           },
+          plannedEndDate: {
+            type: 'string',
+            format: 'date-time',
+            description: 'The date this activity is planned to begin'
+          },
+          plannedStartDate: {
+            type: 'string',
+            format: 'date-time',
+            description: 'The date this activity is planned to be completed'
+          },
           contractorResources: arrayOf({
             type: 'object',
             description: 'Activity contractor resource',
@@ -221,32 +231,15 @@ module.exports = {
             type: 'object',
             description: 'Activity schedule item',
             properties: {
-              actualEnd: {
+              endDate: {
                 type: 'string',
                 format: 'date-time',
-                description:
-                  'The actual date the milestone was completed, if known'
-              },
-              actualStart: {
-                type: 'string',
-                format: 'date-time',
-                description:
-                  'The actual date the milestone was started, if known'
+                description: 'The date this milestone is planned to be met'
               },
               milestone: {
                 type: 'string',
                 description:
                   'The name of the milestone this schedule entry refers to'
-              },
-              plannedEnd: {
-                type: 'string',
-                format: 'date-time',
-                description: 'The planned milestone completion date'
-              },
-              plannedStart: {
-                type: 'string',
-                format: 'date-time',
-                description: 'The planned milestone start date'
               },
               status: {
                 type: 'string',
