@@ -26,6 +26,7 @@ certify:
         and will begin the review process.  If they have any
         questions for you, you will receive a notification
         through the app with a link to respond.
+
         If you would like to check the status of your request
         or start a new document, please go to your state's
         dashboard.
@@ -46,6 +47,6 @@ withdraw:
   confirmation:
     header: Your APD submissions has been withdrawn
     helpText: >-
-      The document is now editable.  It will need to be resubmitted
+      The document is now editable. It will need to be resubmitted
       before it can be reviewed by CMS.
     buttonText: Back to top
