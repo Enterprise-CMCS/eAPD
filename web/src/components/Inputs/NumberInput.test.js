@@ -26,7 +26,7 @@ describe('DollarInput component', () => {
     component.find('input').simulate('change', event('12523.32'));
 
     expect(
-      onChange.calledWith({ target: { value: 12523.32, masked: '$12523.32' } })
+      onChange.calledWith({ target: { value: 12523, masked: '$12523' } })
     ).toEqual(true);
   });
 });
@@ -42,10 +42,10 @@ describe('PercentInput component', () => {
     const component = mount(
       <PercentInput name="name" label="label" onChange={onChange} />
     );
-    component.find('input').simulate('change', event('12.32'));
+    component.find('input').simulate('change', event('12'));
 
     expect(
-      onChange.calledWith({ target: { value: 12.32, masked: '12.32%' } })
+      onChange.calledWith({ target: { value: 12, masked: '12%' } })
     ).toEqual(true);
   });
 });
