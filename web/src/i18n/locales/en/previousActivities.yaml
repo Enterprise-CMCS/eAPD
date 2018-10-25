@@ -1,9 +1,11 @@
 title: Results of Previous Activities
 helpText: >-
   Provide a description of the results of previously approved activities.
+outline:
   title: Prior Activities Outline
   helpText: >-
-    Include a high level description of the activities approved in the previous APD that are completed, in-progress, or on-hold.
+    Include a high level description of the activities approved in the
+    previous APD that are completed, in-progress, or on-hold.
   reminder: >-
   label: Previous Activities Summary
 actualExpenses:
