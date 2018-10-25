@@ -5,11 +5,12 @@ helpText: >-
   displays total share, federal share, and state share.
 summaryBudget:
   title: Summary Budget Table
-  helpText: Totals are calculated automatically.
+  helpText: >-
+    Totals are calculated automatically.
 quarterlyBudget:
   title: Federal share by FFY Quarter
   helpText: >-
-  These tables include a summary proposed breakout of the budget by FFY quarter.
+    These tables include a summary proposed breakout of the budget by FFY quarter.
   expenseNames:
     state: In-House Costs
     contractor: Private Contractor Costs
