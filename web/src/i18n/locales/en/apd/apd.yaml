@@ -8,7 +8,7 @@ helpText: >-
 overview:
   title: Program Overview
   helpText: >-
-    Provide a brief, high level summary of the state program including history,
+    Provide a high level summary of the state program including history,
     and future vision. Include history and summary of future vision of the
     state program.
   reminder: >-
@@ -18,14 +18,12 @@ overview:
 introduction:
   title: Program Introduction
   helpText: >-
-    Provide a brief, high level summary of the state program, history, and
-    future vision.
+    Provide an introduction for the program including context, history, and the state's future vision.
 
 hit:
   title: HIT Overview
   helpText: >-
-    Summarize briefly planned HIT funded activities contained within this
-    APD.
+    Briefly summarize planned HIT funded activities contained within this APD.
   reminder: >-
 
 hie:
