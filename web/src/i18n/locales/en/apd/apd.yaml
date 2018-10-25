@@ -9,8 +9,8 @@ overview:
   title: Program Overview
   helpText: >-
     Provide a brief, high level summary of the state program including history,
-     and future vision. Include history and summary of future
-     vision of the state program.
+    and future vision. Include history and summary of future
+    vision of the state program.
   reminder: >-
 
   yearsCovered: Choose the federal fiscal year(s) this APD covers.
@@ -23,13 +23,13 @@ hit:
   title: HIT Overview
   helpText: >-
     Summarize briefly planned HIT funded activities contained within this
-     APD.
+    APD.
   reminder: >-
 
 hie:
   title: HIE Overview
   helpText: >-
-    Summarize planned HIE funded activities within this APD. 
+    Summarize planned HIE funded activities within this APD.
 
     (1) Description of the state's HIE approach (statewide, sub-state
     health information office (HIOs), etc.);
