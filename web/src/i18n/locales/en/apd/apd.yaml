@@ -1,10 +1,16 @@
 title: Program Summary
 helpText: >-
-  Provide an introduction for the state program. Include context for this funding request by providing information such as current size of program, future vision, and how the program is positioned within the state. This information is similar to the content from the IAPD executive summary template section.
+  Provide an introduction for the state program. Include context for this
+  funding request by providing information such as current size of program,
+  future vision, and how the program is positioned within the state. This
+  information is similar to the content from the IAPD executive summary
+  template section.
 overview:
   title: Program Overview
   helpText: >-
-    Provide a brief, high level summary of the state program including history, and future vision. Include history and summary of future vision of the state program.
+    Provide a brief, high level summary of the state program including history,
+    and future vision. Include history and summary of future vision of the
+    state program.
   reminder: >-
 
   yearsCovered: Choose the federal fiscal year(s) this APD covers.
@@ -12,7 +18,8 @@ overview:
 introduction:
   title: Program Introduction
   helpText: >-
-    Provide a brief, high level summary of the state program, history, and future vision.
+    Provide a brief, high level summary of the state program, history, and
+    future vision.
 
 hit:
   title: HIT Overview
@@ -35,8 +42,10 @@ hie:
 
     (4) The role of state government in governance and policy-setting.
   reminder: >-
-    CMS recommends states connect to regional CMS HITECH contacts prior to developing HIE funding request. HIE funding requests are complex. Early consultation with CMS facilitates a more efficient approval process.
-    (If there are no HIE activities, skip this section.)
+    CMS recommends states connect to regional CMS HITECH contacts prior to
+    developing HIE funding request. HIE funding requests are complex. Early
+    consultation with CMS facilitates a more efficient approval process. (If
+    there are no HIE activities, skip this section.)
 
 mmis:
   title: MMIS Overview

@@ -22,13 +22,19 @@ directorAndAddress:
 keyPersonnel:
   title: Key Personnel & Project Management Planning
   helpText: >-  
-    Identify key state staff who will be involved in all activities listed in this APD. CMS seeks to ensure state teams are adequately resourced, but does not require states to provide key vendor personnel to satisfy this requirement.
+    Identify key state staff who will be involved in all activities listed in
+    this APD. CMS seeks to ensure state teams are adequately resourced, but
+    does not require states to provide key vendor personnel to satisfy this
+    requirement.
     
-    Personnel listed in this section must be assigned to APD by name, role, time commitment, and cost, where applicable.
+    Personnel listed in this section must be assigned to APD by name, role,
+    time commitment, and cost, where applicable.
   reminder: >-
-    Key personnel are individuals involved with all activities within this APD, or are invloved with governance, coordination,
-    stakeholder decision-making, oversight, and/or project performance. Individuals with specific responsibilities for an activity basis
-    only, should be listed individually in Program Activities section of the eAPD.
+    Key personnel are individuals involved with all activities within this
+    APD, or are invloved with governance, coordination, stakeholder
+    decision-making, oversight, and/or project performance. Individuals with
+    specific responsibilities for an activity basis only, should be listed
+    individually in Program Activities section of the eAPD.
   contact: 'Contact #{{number}}'
   labels:
     name: Name
