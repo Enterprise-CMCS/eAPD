@@ -1,6 +1,6 @@
 title: Executive Summary
 helpText: >-
-  The figures are enumerated based on the activity details
+  The executivey summary is enumerated based on the activity details
   provided. Program budget tables are automatically included for review.
 total: Total
 summary:
@@ -10,7 +10,7 @@ summary:
 budgetTable:
   title: Program Budget Table
   helpText: >-
-    If approved, APD program budget tables listed below will be referenced
+    APD program budget tables are automatically computed for this APD. The table below will be referenced
     on the CMS approval letter.
   hit: HIT (90/10)
   hie: HIE (90/10)
