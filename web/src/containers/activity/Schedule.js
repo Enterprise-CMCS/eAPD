@@ -53,32 +53,34 @@ class Schedule extends Component {
           <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (
           <div className="mb3 overflow-auto">
-            <DateRangePicker
-              initialStartDate={activity.plannedStartDate}
-              startDateId={`activity-${activity.key}-start-date`}
-              initialEndDate={activity.plannedEndDate}
-              endDateId={`activity-${activity.key}-end-date`}
-              onChange={this.handleActivityDateChange}
-              numberOfMonths={2}
-              daySize={32}
-              withPortal
-            />
+            <div className="my2 pt3 border-top border-gray-lighter">
+              <DateRangePicker
+                initialStartDate={activity.plannedStartDate}
+                startDateId={`activity-${activity.key}-start-date`}
+                initialEndDate={activity.plannedEndDate}
+                endDateId={`activity-${activity.key}-end-date`}
+                onChange={this.handleActivityDateChange}
+                numberOfMonths={2}
+                daySize={32}
+                withPortal
+              />
+            </div>
             <table className="h5 table table-fixed" style={{ minWidth: 600 }}>
               <thead>
                 <tr>
-                  <th className="col-5">
+                  <th className="col-5 border-none">
                     {t('activities.schedule.milestoneHeader')}
                   </th>
-                  <th className="col-6">
+                  <th className="col-6 border-none">
                     {t('activities.schedule.endHeader')}
                   </th>
-                  <th className="col-1" />
+                  <th className="col-1 border-none" />
                 </tr>
               </thead>
               <tbody>
                 {activity.schedule.map((d, i) => (
                   <tr key={d.key}>
-                    <td>
+                    <td className="border-bottom">
                       <Input
                         name={`milestone-${d.key}-name`}
                         label={t('activities.schedule.milestoneLabel')}
@@ -88,7 +90,7 @@ class Schedule extends Component {
                         onChange={this.handleChange(i, 'milestone')}
                       />
                     </td>
-                    <td>
+                    <td className="border-bottom">
                       <DatePicker
                         id={`milestone-${d.key}-end-date`}
                         initialDate={d.endDate}
@@ -103,7 +105,7 @@ class Schedule extends Component {
                         withPortal
                       />
                     </td>
-                    <td className="center align-middle">
+                    <td className="center align-middle border-bottom">
                       <Btn
                         kind="outline"
                         extraCss="px1 py-tiny"
