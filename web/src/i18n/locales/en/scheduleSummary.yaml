@@ -2,6 +2,8 @@ title: Activity Schedule Summary
 noDataMessage: There are no milestones scheduled.
 main:
   title: Summary Schedule Table
+  helpText: >-
+    This table shows a summary of all activity milestones input from the activities described within this APD.
   table:
     activity: Activity
     milestone: Milestone
