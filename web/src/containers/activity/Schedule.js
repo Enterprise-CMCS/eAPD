@@ -11,6 +11,7 @@ import {
 import Btn from '../../components/Btn';
 import DatePicker from '../../components/DatePicker';
 import DateRangePicker from '../../components/DateRangePicker';
+import HelpText from '../../components/HelpText';
 import { Input } from '../../components/Inputs';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
@@ -53,7 +54,7 @@ class Schedule extends Component {
           <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (
           <div className="mb3 overflow-auto">
-            <div className="my2 pt3 border-top border-gray-lighter">
+            <div className="mt1 mb3">
               <DateRangePicker
                 initialStartDate={activity.plannedStartDate}
                 startDateId={`activity-${activity.key}-start-date`}
@@ -65,6 +66,11 @@ class Schedule extends Component {
                 withPortal
               />
             </div>
+            <HelpText
+              text="activities.schedule.milestoneHelpText"
+              reminder="activities.schedule.milestoneReminder"
+            />
+
             <table className="h5 table table-fixed" style={{ minWidth: 600 }}>
               <thead>
                 <tr>
