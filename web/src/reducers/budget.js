@@ -265,8 +265,10 @@ const buildBudget = bigState => {
     // of all the costs.
     years.forEach(year => {
       const totalCost = activityTotals.data.combined[year];
-      const totalGovShare = totalCost - n(allocation[year].other);
-      const costShares = getAllocation(year, totalGovShare);
+      const totalMedicaidShare = totalCost - n(allocation[year].other);
+
+      // This is the Medicaid total share broken into state and federal shares
+      const costShares = getAllocation(year, totalMedicaidShare);
 
       // This represents the percentage each cost category contributes to the
       // total activity cost.  This is useful for distributing the total
@@ -277,8 +279,8 @@ const buildBudget = bigState => {
         activityTotals.data.statePersonnel[year] / totalCost
       ];
 
-      // Compute the actual cost of each cost category, based on the federal
-      // and state shares and the percentages calculated above.
+      // Compute the state and federal share for each cost category, based on
+      // the federal and state shares and the percentages calculated above.
       const fedShare = roundedPercents(
         costShares.fedShare,
         costCategoryPercentages
