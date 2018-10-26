@@ -101,9 +101,19 @@ const getStateProfile = () => ({
 const repeat = (number, obj) => [...Array(number)].map(() => obj);
 
 const getNewApd = async (stateID, { StateModel = defaultStateModel } = {}) => {
-  // TODO: Fix these years.  Maybe copy over from how we
-  // compute them on the frontend. 🤷‍♂️
-  const yearOptions = ['2018', '2019', '2020'];
+  const thisFFY = (() => {
+    const year = new Date().getFullYear();
+
+    // Federal fiscal year starts October 1,
+    // but Javascript months start with 0 for
+    // some reason, so October is month 9.
+    if (new Date().getMonth() > 8) {
+      return year + 1;
+    }
+    return year;
+  })();
+
+  const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
   const years = yearOptions.slice(0, 2);
 
   const stateProfile = getStateProfile();
