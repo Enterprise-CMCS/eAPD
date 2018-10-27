@@ -578,24 +578,24 @@ describe('budget reducer', () => {
             },
             '1933': {
               '1': {
-                state: { dollars: 247.5, percent: 0.25 },
+                state: { dollars: 247, percent: 0.25 },
                 contractors: { dollars: 450, percent: 0.5 },
-                combined: { dollars: 697.5, percent: 0 }
+                combined: { dollars: 697, percent: 0 }
               },
               '2': {
-                state: { dollars: 247.5, percent: 0.25 },
+                state: { dollars: 247, percent: 0.25 },
                 contractors: { dollars: 180, percent: 0.2 },
-                combined: { dollars: 427.5, percent: 0 }
+                combined: { dollars: 427, percent: 0 }
               },
               '3': {
-                state: { dollars: 247.5, percent: 0.25 },
+                state: { dollars: 248, percent: 0.25 },
                 contractors: { dollars: 180, percent: 0.2 },
-                combined: { dollars: 427.5, percent: 0 }
+                combined: { dollars: 428, percent: 0 }
               },
               '4': {
-                state: { dollars: 247.5, percent: 0.25 },
+                state: { dollars: 248, percent: 0.25 },
                 contractors: { dollars: 90, percent: 0.1 },
-                combined: { dollars: 337.5, percent: 0 }
+                combined: { dollars: 338, percent: 0 }
               },
               subtotal: {
                 state: { dollars: 990, percent: 1 },
@@ -654,10 +654,10 @@ describe('budget reducer', () => {
             subtotal: { contractors: 600, state: 1000, combined: 1600 }
           },
           '1933': {
-            '1': { contractors: 450, state: 247.5, combined: 697.5 },
-            '2': { contractors: 180, state: 247.5, combined: 427.5 },
-            '3': { contractors: 180, state: 247.5, combined: 427.5 },
-            '4': { contractors: 90, state: 247.5, combined: 337.5 },
+            '1': { contractors: 450, state: 247, combined: 697 },
+            '2': { contractors: 180, state: 247, combined: 427 },
+            '3': { contractors: 180, state: 248, combined: 428 },
+            '4': { contractors: 90, state: 248, combined: 338 },
             subtotal: { contractors: 900, state: 990, combined: 1890 }
           },
           total: { contractors: 1800, state: 2440, combined: 4240 }
@@ -699,20 +699,20 @@ describe('budget reducer', () => {
         contractors: {
           '1931': { federal: 900, state: 100, total: 1000 },
           '1932': { federal: 900, state: 100, total: 1000 },
-          '1933': { federal: 600, state: 66.67, total: 1000 },
-          total: { federal: 2400, state: 266.67, total: 3000 }
+          '1933': { federal: 600, state: 66, total: 1000 },
+          total: { federal: 2400, state: 266, total: 3000 }
         },
         expenses: {
           '1931': { federal: 900, state: 100, total: 1000 },
           '1932': { federal: 900, state: 100, total: 1000 },
-          '1933': { federal: 600, state: 66.67, total: 1000 },
-          total: { federal: 2400, state: 266.67, total: 3000 }
+          '1933': { federal: 600, state: 67, total: 1000 },
+          total: { federal: 2400, state: 267, total: 3000 }
         },
         statePersonnel: {
           '1931': { federal: 900, state: 100, total: 1000 },
           '1932': { federal: 900, state: 100, total: 1000 },
-          '1933': { federal: 600, state: 66.67, total: 1000 },
-          total: { federal: 2400, state: 266.67, total: 3000 }
+          '1933': { federal: 600, state: 67, total: 1000 },
+          total: { federal: 2400, state: 267, total: 3000 }
         }
       },
       hitAndHie: {
@@ -725,20 +725,20 @@ describe('budget reducer', () => {
         contractors: {
           '1931': { federal: 3600, state: 400, total: 4000 },
           '1932': { federal: 3600, state: 400, total: 4000 },
-          '1933': { federal: 3300, state: 366.67, total: 4000 },
-          total: { federal: 10500, state: 1166.67, total: 12000 }
+          '1933': { federal: 3300, state: 366, total: 4000 },
+          total: { federal: 10500, state: 1166, total: 12000 }
         },
         expenses: {
           '1931': { federal: 3600, state: 400, total: 4000 },
           '1932': { federal: 3600, state: 400, total: 4000 },
-          '1933': { federal: 3300, state: 366.67, total: 4000 },
-          total: { federal: 10500, state: 1166.67, total: 12000 }
+          '1933': { federal: 3300, state: 367, total: 4000 },
+          total: { federal: 10500, state: 1167, total: 12000 }
         },
         statePersonnel: {
           '1931': { federal: 3060, state: 340, total: 3400 },
           '1932': { federal: 2880, state: 320, total: 3200 },
-          '1933': { federal: 2130, state: 236.67, total: 2700 },
-          total: { federal: 8070, state: 896.67, total: 9300 }
+          '1933': { federal: 2130, state: 237, total: 2700 },
+          total: { federal: 8070, state: 897, total: 9300 }
         }
       },
       mmis: {
@@ -750,21 +750,21 @@ describe('budget reducer', () => {
         },
         contractors: {
           '1931': { federal: 300, state: 300, total: 1000 },
-          '1932': { federal: 500, state: 166.67, total: 1000 },
+          '1932': { federal: 500, state: 166, total: 1000 },
           '1933': { federal: 900, state: 100, total: 1000 },
-          total: { federal: 1700, state: 566.67, total: 3000 }
+          total: { federal: 1700, state: 566, total: 3000 }
         },
         expenses: {
           '1931': { federal: 300, state: 300, total: 1000 },
-          '1932': { federal: 500, state: 166.67, total: 1000 },
+          '1932': { federal: 500, state: 167, total: 1000 },
           '1933': { federal: 900, state: 100, total: 1000 },
-          total: { federal: 1700, state: 566.67, total: 3000 }
+          total: { federal: 1700, state: 567, total: 3000 }
         },
         statePersonnel: {
           '1931': { federal: 150, state: 150, total: 500 },
-          '1932': { federal: 500, state: 166.67, total: 1000 },
+          '1932': { federal: 500, state: 167, total: 1000 },
           '1933': { federal: 90, state: 10, total: 100 },
-          total: { federal: 740, state: 326.67, total: 1600 }
+          total: { federal: 740, state: 327, total: 1600 }
         }
       },
       mmisByFFP: {
