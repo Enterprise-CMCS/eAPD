@@ -57,6 +57,10 @@
   background-color: #ddd;
 }
 
+.border-gray-lighter {
+  border-color: #e7e7e7;
+}
+
 .bg-gray-lightest {
   background-color: #f5f5f5;
 }

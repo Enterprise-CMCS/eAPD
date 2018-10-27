@@ -1,6 +1,7 @@
 @import 'react-dates/lib/css/_datepicker.css';
 
-.DateRangePicker_picker {
+.DateRangePicker_picker,
+.SingleDatePicker_picker {
   z-index: 3;
 }
 
