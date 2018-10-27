@@ -31,6 +31,17 @@ jobs:
           paths:
             - api/node_modules
 
+  yaml test:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - run: npm install glob
+      - run: npm install js-yaml
+      - run: 
+          working_directory: ~/project/web
+          command: node yaml-tests.js
+
   web dependency vulnerability scan:
     docker:
       - image: node:8
@@ -266,9 +277,11 @@ workflows:
       - web lint:
           requires:
             - prepare dependencies cache
+      - yaml test
       - web test:
           requires:
             - prepare dependencies cache
+            - yaml test
       - validate openapi:
           requires:
             - prepare dependencies cache
@@ -291,6 +304,7 @@ workflows:
                 - master
           requires:
             - web dependency vulnerability scan
+            - yaml test
       - deploy staging:
           filters:
             branches:

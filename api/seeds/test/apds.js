@@ -27,7 +27,9 @@ exports.seed = async knex => {
       id: 4100,
       name: 'Find Success',
       description: 'Some text goes here',
-      apd_id: 4000
+      apd_id: 4000,
+      planned_end_date: new Date(1963, 5, 16), // Valentina Tereshkova becomes the first woman in space
+      planned_start_date: new Date(1970, 3, 11) // Apollo 13 oxygen tank explodes
     },
     {
       id: 4101,
