@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+const labelClasses = {
+  hidden: 'sr-only',
+  visible: 'block mb-tiny truncate'
+};
+
 // a HOC for Text / Textarea input that includes
 // div wrapper and accompanying label
 const InputWrapper = InputInner => {
@@ -15,7 +20,7 @@ const InputWrapper = InputInner => {
     <div className={wrapperClass || 'mb2'}>
       <label
         htmlFor={name}
-        className={hideLabel ? 'sr-only' : 'block mb-tiny truncate'}
+        className={hideLabel ? labelClasses.hidden : labelClasses.visible}
       >
         {label}
       </label>
