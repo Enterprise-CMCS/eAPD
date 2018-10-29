@@ -3,10 +3,9 @@ helpText: >-
   Activities are narrowly scoped bodies of work that comprise the APD as described within the Program Overview section. Information will be collected for each activity.
 list:
   title: Activity List
-  helpText: >-
+  subheader: >-
     List as many activities as necessary to cover all scope related to this APD.
-    
-    
+  helpText: >-
     Examples of individual activities include:
     auditing, environmental scans, HIE registry development,
     CQM database development, data and analytics, HIE onboarding, etc.
