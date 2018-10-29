@@ -9,7 +9,7 @@ import {
 } from './StateDashboardSidebar';
 import { createApd, selectApd } from '../actions/apd';
 
-describe('Routes component', () => {
+describe('State dashboard sidebar component', () => {
   const sandbox = sinon.createSandbox();
 
   const props = {
