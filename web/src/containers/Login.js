@@ -97,3 +97,5 @@ const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
 const mapDispatchToProps = { login };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export { Login as raw, mapStateToProps, mapDispatchToProps };
