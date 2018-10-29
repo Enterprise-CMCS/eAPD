@@ -150,11 +150,12 @@ class ApdStateKeyPersonnel extends Component {
     updateApd(updates);
   };
 
+  removePerson = (_, i) => this.props.removeKeyPerson(i);
+
   render() {
     const {
       addKeyPerson: addPerson,
       poc,
-      removeKeyPerson: removePerson,
       setPrimaryKeyPerson: setPrimary,
       years
     } = this.props;
@@ -164,7 +165,7 @@ class ApdStateKeyPersonnel extends Component {
         <List
           items={poc}
           getKey={person => person.key}
-          deleteItem={(_, i) => removePerson(i)}
+          deleteItem={this.removePerson}
           header={(person, i) => (
             <Fragment>
               <div className="col-6 truncate">
