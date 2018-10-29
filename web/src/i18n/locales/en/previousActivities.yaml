@@ -9,8 +9,8 @@ outline:
   reminder: >-
   label: Previous Activities Summary
 actualExpenses:
-  title: Actual Expenses
-  helpText: Input the most recent actual expenses.
+  title: Actual Costs
+  helpText: Input the most recent actual costs.
   table:
     program:
       hie: HIE

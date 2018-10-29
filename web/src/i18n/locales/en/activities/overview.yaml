@@ -19,7 +19,9 @@ detail:
   hie:
     subheader:
     helpText: >-
-      Detail linkage to meaningful use, including value proposition to providers, and a sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.
+      Detail linkage to meaningful use, including value proposition to providers,
+      and a sustainability plan describing how the activity will be sustained after
+      HIE DDI funding is exhausted.
     reminder: >-
       Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
   hit:
