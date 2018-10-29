@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 
@@ -12,16 +12,15 @@ import {
   uploadActivityContractorFile
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
+import CollapsibleList from '../../components/CollapsibleList';
 import DateRangePicker from '../../components/DateRangePicker';
 import DeleteButton from '../../components/DeleteConfirm';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
-import MiniHeader from '../../components/MiniHeader';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
-import { arrToObj } from '../../util';
 import { formatMoney } from '../../util/formats';
 
 const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
@@ -222,31 +221,10 @@ ContractorForm.propTypes = {
 };
 
 class ContractorResources extends Component {
-  static getDerivedStateFromProps(props, state) {
-    const { contractors: data } = props;
-    const lastKey = data.length ? data[data.length - 1].key : null;
-
-    if (lastKey && !(lastKey in state.showForm)) {
-      return {
-        showForm: {
-          ...arrToObj(Object.keys(state.showForm), false),
-          [lastKey]: true
-        }
-      };
-    }
-
-    return null;
-  }
-
   constructor(props) {
     super(props);
 
-    const showForm = props.contractors
-      .map(c => c.key)
-      .reduce((obj, key, i) => ({ ...obj, [key]: i === 0 }), {});
-
     this.state = {
-      showForm,
       docType: DOC_TYPES[0]
     };
   }
@@ -329,18 +307,9 @@ class ContractorResources extends Component {
     updateActivity(activityKey, updates, true);
   };
 
-  toggleForm = entryKey => () => {
-    this.setState(prev => ({
-      showForm: {
-        ...prev.showForm,
-        [entryKey]: !prev.showForm[entryKey]
-      }
-    }));
-  };
-
   render() {
     const { contractors, years } = this.props;
-    const { showForm, docType } = this.state;
+    const { docType } = this.state;
 
     if (!contractors) return null;
 
@@ -352,14 +321,16 @@ class ContractorResources extends Component {
           </NoDataMsg>
         ) : (
           <div className="mt3 pt3 border-top border-grey">
-            {contractors.map((contractor, i) => (
-              <div key={contractor.key}>
-                <MiniHeader
-                  handleDelete={this.handleDelete(contractor.key)}
-                  number={i + 1}
-                  title={contractor.name || 'Name'}
-                  toggleForm={this.toggleForm(contractor.key)}
-                  content={years.map(year => (
+            <CollapsibleList
+              items={contractors}
+              getKey={contractor => contractor.key}
+              deleteItem={contractor => this.handleDelete(contractor.key)()}
+              header={(contractor, i) => (
+                <Fragment>
+                  <div className="col-3 truncate">
+                    {i + 1}. <strong>{contractor.name || 'Name'}</strong>
+                  </div>
+                  {years.map(year => (
                     <div key={year} className="col-3 truncate">
                       {year}:{' '}
                       <span className="bold mono">
@@ -367,27 +338,27 @@ class ContractorResources extends Component {
                       </span>
                     </div>
                   ))}
+                </Fragment>
+              )}
+              content={(contractor, i) => (
+                <ContractorForm
+                  key={contractor.key}
+                  idx={i}
+                  contractor={contractor}
+                  docType={docType}
+                  years={years}
+                  handleChange={this.handleChange}
+                  handleDelete={this.handleDelete(contractor.key)}
+                  handleDocChange={this.handleDocChange}
+                  handleFileDelete={this.handleFileDelete}
+                  handleFileUpload={this.handleFileUpload}
+                  handleHourlyChange={this.handleHourlyChange}
+                  handleTermChange={this.handleTermChange}
+                  handleUseHourly={this.handleUseHourly}
+                  handleYearChange={this.handleYearChange}
                 />
-                {showForm[contractor.key] && (
-                  <ContractorForm
-                    key={contractor.key}
-                    idx={i}
-                    contractor={contractor}
-                    docType={docType}
-                    years={years}
-                    handleChange={this.handleChange}
-                    handleDelete={this.handleDelete(contractor.key)}
-                    handleDocChange={this.handleDocChange}
-                    handleFileDelete={this.handleFileDelete}
-                    handleFileUpload={this.handleFileUpload}
-                    handleHourlyChange={this.handleHourlyChange}
-                    handleTermChange={this.handleTermChange}
-                    handleUseHourly={this.handleUseHourly}
-                    handleYearChange={this.handleYearChange}
-                  />
-                )}
-              </div>
-            ))}
+              )}
+            />
           </div>
         )}
         <Btn onClick={this.handleAdd}>
