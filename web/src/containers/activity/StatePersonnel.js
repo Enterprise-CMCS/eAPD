@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -8,13 +8,12 @@ import {
   updateActivity as updateActivityAction
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
+import List from '../../components/CollapsibleList';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
-import MiniHeader from '../../components/MiniHeader';
 import NoDataMsg from '../../components/NoDataMsg';
 import { SubsectionChunk } from '../../components/Section';
 import { t } from '../../i18n';
-import { arrToObj } from '../../util';
 import { formatDec, formatMoney } from '../../util/formats';
 
 const PersonnelForm = ({
@@ -112,32 +111,6 @@ PersonnelForm.propTypes = {
 };
 
 class StatePersonnel extends Component {
-  static getDerivedStateFromProps(props, state) {
-    const { personnel: data } = props;
-    const lastKey = data.length ? data[data.length - 1].key : null;
-
-    if (lastKey && !(lastKey in state.showForm)) {
-      return {
-        showForm: {
-          ...arrToObj(Object.keys(state.showForm), false),
-          [lastKey]: true
-        }
-      };
-    }
-
-    return null;
-  }
-
-  constructor(props) {
-    super(props);
-
-    const showForm = props.personnel
-      .map(p => p.key)
-      .reduce((obj, key, i) => ({ ...obj, [key]: i === 0 }), {});
-
-    this.state = { showForm };
-  }
-
   handleChange = (index, field, year) => e => {
     const { value } = e.target;
     const { activityKey, updateActivity } = this.props;
@@ -170,18 +143,8 @@ class StatePersonnel extends Component {
     removePerson(activityKey, entryKey);
   };
 
-  toggleForm = entryKey => () => {
-    this.setState(prev => ({
-      showForm: {
-        ...prev.showForm,
-        [entryKey]: !prev.showForm[entryKey]
-      }
-    }));
-  };
-
   render() {
     const { personnel, years } = this.props;
-    const { showForm } = this.state;
 
     return (
       <SubsectionChunk resource="activities.statePersonnel">
@@ -189,14 +152,16 @@ class StatePersonnel extends Component {
           <NoDataMsg>{t('activities.statePersonnel.noDataNotice')}</NoDataMsg>
         ) : (
           <div className="mt3 pt3 border-top border-grey">
-            {personnel.map((person, i) => (
-              <div key={person.key}>
-                <MiniHeader
-                  handleDelete={this.handleDelete(person.key)}
-                  number={i + 1}
-                  title={person.title || 'Title'}
-                  toggleForm={this.toggleForm(person.key)}
-                  content={years.map(year => (
+            <List
+              items={personnel}
+              getKey={person => person.key}
+              deleteItem={person => this.handleDelete(person.key)()}
+              header={(person, i) => (
+                <Fragment>
+                  <div className="col-3 truncate">
+                    {i + 1}. <strong>{person.title || 'Title'}</strong>
+                  </div>
+                  {years.map(year => (
                     <div key={year} className="col-3 truncate">
                       {year}:{' '}
                       <span className="bold mono">
@@ -206,20 +171,20 @@ class StatePersonnel extends Component {
                       </span>
                     </div>
                   ))}
+                </Fragment>
+              )}
+              content={(person, i) => (
+                <PersonnelForm
+                  key={person.key}
+                  person={person}
+                  idx={i}
+                  years={years}
+                  handleChange={this.handleChange}
+                  handleKeyPersonnel={this.handleKeyPersonnel}
+                  handleDelete={this.handleDelete(person.key)}
                 />
-                {showForm[person.key] && (
-                  <PersonnelForm
-                    key={person.key}
-                    person={person}
-                    idx={i}
-                    years={years}
-                    handleChange={this.handleChange}
-                    handleKeyPersonnel={this.handleKeyPersonnel}
-                    handleDelete={this.handleDelete(person.key)}
-                  />
-                )}
-              </div>
-            ))}
+              )}
+            />
           </div>
         )}
         <Btn onClick={this.handleAdd}>
