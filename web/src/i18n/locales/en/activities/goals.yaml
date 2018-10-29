@@ -15,5 +15,5 @@ goal:
 objective:
   title: Benchmarks
   helpText: >-
-    Briefly describe how state will measure progress toward the identified goal.
+    Briefly describe how the state will measure progress toward the identified goal.
 addGoalButtonText: Add a goal
