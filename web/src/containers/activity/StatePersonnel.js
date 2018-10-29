@@ -111,6 +111,11 @@ PersonnelForm.propTypes = {
 };
 
 class StatePersonnel extends Component {
+  getDeleter = entryKey => () => {
+    const { activityKey, removePerson } = this.props;
+    removePerson(activityKey, entryKey);
+  };
+
   handleChange = (index, field, year) => e => {
     const { value } = e.target;
     const { activityKey, updateActivity } = this.props;
@@ -138,10 +143,7 @@ class StatePersonnel extends Component {
     addPerson(activityKey);
   };
 
-  handleDelete = entryKey => () => {
-    const { activityKey, removePerson } = this.props;
-    removePerson(activityKey, entryKey);
-  };
+  handleDelete = person => this.getDeleter(person.key)();
 
   render() {
     const { personnel, years } = this.props;
@@ -155,7 +157,7 @@ class StatePersonnel extends Component {
             <List
               items={personnel}
               getKey={person => person.key}
-              deleteItem={person => this.handleDelete(person.key)()}
+              deleteItem={this.handleDelete}
               header={(person, i) => (
                 <Fragment>
                   <div className="col-3 truncate">
@@ -181,7 +183,7 @@ class StatePersonnel extends Component {
                   years={years}
                   handleChange={this.handleChange}
                   handleKeyPersonnel={this.handleKeyPersonnel}
-                  handleDelete={this.handleDelete(person.key)}
+                  handleDelete={this.getDeleter(person.key)}
                 />
               )}
             />

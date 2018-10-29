@@ -60,13 +60,7 @@ GoalForm.propTypes = {
 };
 
 class Goals extends Component {
-  handleSync = (index, field) => html => {
-    const { activityKey, updateActivity } = this.props;
-    const updates = { goals: { [index]: { [field]: html } } };
-    updateActivity(activityKey, updates);
-  };
-
-  handleDelete = key => () => {
+  getDeleter = key => () => {
     const { activityKey, removeActivityGoal } = this.props;
     removeActivityGoal(activityKey, key);
   };
@@ -74,6 +68,14 @@ class Goals extends Component {
   handleAdd = () => {
     const { activityKey, addActivityGoal } = this.props;
     addActivityGoal(activityKey);
+  };
+
+  handleDelete = goal => this.getDeleter(goal.key)();
+
+  handleSync = (index, field) => html => {
+    const { activityKey, updateActivity } = this.props;
+    const updates = { goals: { [index]: { [field]: html } } };
+    updateActivity(activityKey, updates);
   };
 
   render() {
@@ -88,7 +90,7 @@ class Goals extends Component {
             <CollapsibleList
               items={goals}
               getKey={goal => goal.key}
-              deleteItem={goal => this.handleDelete(goal.key)()}
+              deleteItem={this.handleDelete}
               header={(goal, i) => (
                 <Fragment>
                   <div className="col-1 truncate">
@@ -104,7 +106,7 @@ class Goals extends Component {
                   goal={goal}
                   idx={i}
                   handleChange={this.handleSync}
-                  handleDelete={this.handleDelete(goal.key)}
+                  handleDelete={this.getDeleter(goal.key)}
                 />
               )}
             />

@@ -229,6 +229,11 @@ class ContractorResources extends Component {
     };
   }
 
+  getDeleter = entryKey => () => {
+    const { activityKey, removeContractor } = this.props;
+    removeContractor(activityKey, entryKey);
+  };
+
   handleAdd = () => {
     const { activityKey, addContractor } = this.props;
     addContractor(activityKey);
@@ -242,10 +247,7 @@ class ContractorResources extends Component {
     updateActivity(activityKey, updates);
   };
 
-  handleDelete = entryKey => () => {
-    const { activityKey, removeContractor } = this.props;
-    removeContractor(activityKey, entryKey);
-  };
+  handleDelete = contractor => this.getDeleter(contractor.key)();
 
   handleDocChange = e => {
     this.setState({ docType: e.target.value });
@@ -324,7 +326,7 @@ class ContractorResources extends Component {
             <CollapsibleList
               items={contractors}
               getKey={contractor => contractor.key}
-              deleteItem={contractor => this.handleDelete(contractor.key)()}
+              deleteItem={this.handleDelete}
               header={(contractor, i) => (
                 <Fragment>
                   <div className="col-3 truncate">
@@ -348,7 +350,7 @@ class ContractorResources extends Component {
                   docType={docType}
                   years={years}
                   handleChange={this.handleChange}
-                  handleDelete={this.handleDelete(contractor.key)}
+                  handleDelete={this.getDeleter(contractor.key)}
                   handleDocChange={this.handleDocChange}
                   handleFileDelete={this.handleFileDelete}
                   handleFileUpload={this.handleFileUpload}

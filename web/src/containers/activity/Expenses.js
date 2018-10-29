@@ -92,6 +92,11 @@ ExpenseForm.propTypes = {
 };
 
 class Expenses extends Component {
+  getDeleter = expenseKey => () => {
+    const { activityKey, removeExpense } = this.props;
+    removeExpense(activityKey, expenseKey);
+  };
+
   handleChange = (index, field) => e => {
     const { value } = e.target;
     const { activityKey, updateActivity } = this.props;
@@ -113,10 +118,7 @@ class Expenses extends Component {
     addExpense(activityKey);
   };
 
-  handleDelete = expenseKey => () => {
-    const { activityKey, removeExpense } = this.props;
-    removeExpense(activityKey, expenseKey);
-  };
+  handleDelete = expense => this.getDeleter(expense.key)();
 
   render() {
     const { expenses, years } = this.props;
@@ -130,7 +132,7 @@ class Expenses extends Component {
             <CollapsibleList
               items={expenses}
               getKey={expense => expense.key}
-              deleteItem={expense => this.handleDelete(expense.key)()}
+              deleteItem={this.handleDelete}
               header={(expense, i) => (
                 <Fragment>
                   <div className="col-3 truncate">
@@ -153,7 +155,7 @@ class Expenses extends Component {
                   years={years}
                   handleChange={this.handleChange}
                   handleYearChange={this.handleYearChange}
-                  handleDelete={this.handleDelete(expense.key)}
+                  handleDelete={this.getDeleter(expense.key)}
                 />
               )}
             />
