@@ -172,9 +172,6 @@ export const addObjVals = (obj, getVal = a => a) =>
 
 export const titleCase = str => str.replace(/\b\S/g, t => t.toUpperCase());
 
-export const isProgamAdmin = activity =>
-  activity.name === 'Program Administration' || activity.id === 1;
-
 export const applyToNumbers = (obj, fn) => {
   const o = { ...obj };
   Object.keys(o).forEach(k => {
