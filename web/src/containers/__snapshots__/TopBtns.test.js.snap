@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Routes component renders correctly if logged in 1`] = `
+exports[`Top buttons component renders correctly if logged in 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -258,7 +258,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`Routes component renders correctly if logged out 1`] = `
+exports[`Top buttons component renders correctly if logged out 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -390,7 +390,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`Routes component renders correctly with dashboard hidden 1`] = `
+exports[`Top buttons component renders correctly with dashboard hidden 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],

@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { raw as TopBtns, mapStateToProps, mapDispatchToProps } from './TopBtns';
 import { logout } from '../actions/auth';
 
-describe('Routes component', () => {
+describe('Top buttons component', () => {
   test('renders correctly if logged out', () => {
     const component = shallow(
       <TopBtns authenticated={false} logout={() => {}} />
