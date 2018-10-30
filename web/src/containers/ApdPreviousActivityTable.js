@@ -270,3 +270,9 @@ const mapDispatchToProps = { updateApd };
 export default connect(mapStateToProps, mapDispatchToProps)(
   ApdPreviousActivityTable
 );
+
+export {
+  ApdPreviousActivityTable as plain,
+  mapStateToProps,
+  mapDispatchToProps
+};
