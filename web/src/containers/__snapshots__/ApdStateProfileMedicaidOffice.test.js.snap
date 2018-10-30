@@ -21,6 +21,7 @@ ShallowWrapper {
         },
       }
     }
+    updateApd={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -1242,6 +1243,7 @@ ShallowWrapper {
         },
       }
     }
+    updateApd={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],

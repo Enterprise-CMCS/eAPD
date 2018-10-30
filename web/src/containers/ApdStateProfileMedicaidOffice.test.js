@@ -36,11 +36,15 @@ describe('apd state profile, Medicaid office component', () => {
     const localProps = JSON.parse(JSON.stringify(props));
 
     // all good
-    expect(shallow(<StateProfile {...localProps} />)).toMatchSnapshot();
+    expect(
+      shallow(<StateProfile {...localProps} updateApd={props.updateApd} />)
+    ).toMatchSnapshot();
 
     // name length validation
     localProps.stateProfile.medicaidDirector.name = 'a';
-    expect(shallow(<StateProfile {...localProps} />)).toMatchSnapshot();
+    expect(
+      shallow(<StateProfile {...localProps} updateApd={props.updateApd} />)
+    ).toMatchSnapshot();
   });
 
   test('dispatches on text change', () => {
