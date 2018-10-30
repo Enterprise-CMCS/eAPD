@@ -223,3 +223,5 @@ ExecutiveSummaryBudget.propTypes = {
 const mapStateToProps = ({ budget }) => ({ budget });
 
 export default connect(mapStateToProps)(ExecutiveSummaryBudget);
+
+export { ExecutiveSummaryBudget as plain, mapStateToProps, DollarCell };
