@@ -52,5 +52,4 @@ const mapDispatchToProps = { logout };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopBtns);
 
-export const raw = TopBtns;
-export { mapStateToProps, mapDispatchToProps };
+export { TopBtns as plain, mapStateToProps, mapDispatchToProps };

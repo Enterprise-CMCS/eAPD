@@ -2,7 +2,11 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
-import { raw as Sidebar, mapStateToProps, mapDispatchToProps } from './Sidebar';
+import {
+  plain as Sidebar,
+  mapStateToProps,
+  mapDispatchToProps
+} from './Sidebar';
 import { expandActivitySection } from '../actions/activities';
 import { saveApd } from '../actions/apd';
 import { toggleExpand } from '../actions/sidebar';

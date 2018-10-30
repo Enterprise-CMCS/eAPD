@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { raw as PrivateRoute, mapStateToProps } from './PrivateRoute';
+import { plain as PrivateRoute, mapStateToProps } from './PrivateRoute';
 
 describe('private route component', () => {
   const props = {

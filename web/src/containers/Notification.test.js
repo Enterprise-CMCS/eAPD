@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { processQueue, closeNotification } from '../actions/notification';
 
 import {
-  raw as Notification,
+  plain as Notification,
   mapStateToProps,
   mapDispatchToProps
 } from './Notification';

@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  raw as QuarterlyBudgetSummary,
+  plain as QuarterlyBudgetSummary,
   mapStateToProps
 } from './QuarterlyBudgetSummary';
 

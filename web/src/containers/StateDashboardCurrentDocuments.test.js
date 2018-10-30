@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { APD_STATUS } from '../constants';
 
 import {
-  raw as CurrentDocuments,
+  plain as CurrentDocuments,
   DocumentItem,
   ProgressDot,
   ProgressLine,

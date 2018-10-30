@@ -220,7 +220,7 @@ const mapDispatchToProps = { selectApd };
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentDocuments);
 
 export {
-  CurrentDocuments as raw,
+  CurrentDocuments as plain,
   DocumentItem,
   ProgressDot,
   ProgressLine,
