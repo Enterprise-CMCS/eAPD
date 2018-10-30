@@ -155,3 +155,5 @@ const mapStateToProps = ({ apd }) => {
 const mapDispatchToProps = { updateApd: updateApdAction };
 
 export default connect(mapStateToProps, mapDispatchToProps)(IncentivePayments);
+
+export { IncentivePayments as plain, mapStateToProps, mapDispatchToProps };
