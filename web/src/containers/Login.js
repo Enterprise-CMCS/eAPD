@@ -98,4 +98,4 @@ const mapDispatchToProps = { login };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
-export { Login as raw, mapStateToProps, mapDispatchToProps };
+export { Login as plain, mapStateToProps, mapDispatchToProps };

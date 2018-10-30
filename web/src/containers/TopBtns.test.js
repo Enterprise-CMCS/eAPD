@@ -2,7 +2,11 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
-import { raw as TopBtns, mapStateToProps, mapDispatchToProps } from './TopBtns';
+import {
+  plain as TopBtns,
+  mapStateToProps,
+  mapDispatchToProps
+} from './TopBtns';
 import { logout } from '../actions/auth';
 
 describe('Top buttons component', () => {

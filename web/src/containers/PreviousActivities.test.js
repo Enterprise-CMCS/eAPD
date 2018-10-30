@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { updateApd } from '../actions/apd';
 
 import {
-  raw as PreviousActivities,
+  plain as PreviousActivities,
   mapStateToProps,
   mapDispatchToProps
 } from './PreviousActivities';

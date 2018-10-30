@@ -64,4 +64,4 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Notification);
 
-export { Notification as raw, mapStateToProps, mapDispatchToProps };
+export { Notification as plain, mapStateToProps, mapDispatchToProps };

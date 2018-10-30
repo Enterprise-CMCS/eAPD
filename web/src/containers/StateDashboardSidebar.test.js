@@ -3,7 +3,7 @@ import React from 'react';
 import sinon from 'sinon';
 
 import {
-  raw as Sidebar,
+  plain as Sidebar,
   mapStateToProps,
   mapDispatchToProps
 } from './StateDashboardSidebar';

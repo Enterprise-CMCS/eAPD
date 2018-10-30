@@ -236,4 +236,4 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
 
-export { Sidebar as raw, mapStateToProps, mapDispatchToProps };
+export { Sidebar as plain, mapStateToProps, mapDispatchToProps };

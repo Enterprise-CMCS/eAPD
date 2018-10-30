@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { raw as ScheduleSummary, mapStateToProps } from './ScheduleSummary';
+import { plain as ScheduleSummary, mapStateToProps } from './ScheduleSummary';
 
 describe('schedule summary component', () => {
   const tableData = {

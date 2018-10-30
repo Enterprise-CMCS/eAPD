@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
-import { raw as Login, mapStateToProps, mapDispatchToProps } from './Login';
+import { plain as Login, mapStateToProps, mapDispatchToProps } from './Login';
 import { login } from '../actions/auth';
 
 describe('Routes component', () => {
