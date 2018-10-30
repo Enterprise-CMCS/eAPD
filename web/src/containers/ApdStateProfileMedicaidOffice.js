@@ -102,3 +102,5 @@ const mapStateToProps = ({ apd: { data: { stateProfile } } }) => ({
 const mapDispatchToProps = { updateApd: updateApdAction };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdStateProfile);
+
+export { ApdStateProfile as plain, mapStateToProps, mapDispatchToProps };
