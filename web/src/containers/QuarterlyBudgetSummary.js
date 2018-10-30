@@ -145,3 +145,5 @@ const mapStateToProps = ({ budget, apd }) => ({
 });
 
 export default connect(mapStateToProps)(QuarterlyBudgetSummary);
+
+export { QuarterlyBudgetSummary as raw, mapStateToProps };
