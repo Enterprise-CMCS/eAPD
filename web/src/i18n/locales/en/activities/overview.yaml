@@ -1,5 +1,6 @@
 title: Activity Overview
 helpText: >-
+  Provide a short overview of the activity. Details for the activity go in the section below.
 reminder: >-
 
 summary:
@@ -46,5 +47,5 @@ alternatives:
     If substantive changes have been made, include statement describing alternative
     considerations made before selecting implementation strategy.
   reminder: >-
-    If not, including statement of alternative considerations from previous versions
-    of IAPD or SMHP.
+    If substantive changes have not been made, include a statement of alternative considerations from the previous version
+    of IAPD.
