@@ -9,7 +9,7 @@ import {
 } from './ExecutiveSummary';
 import { expandActivitySection } from '../actions/activities';
 
-describe('private route component', () => {
+describe('executive summary component', () => {
   const props = {
     data: [
       {

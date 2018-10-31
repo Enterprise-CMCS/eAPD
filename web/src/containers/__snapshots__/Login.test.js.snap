@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Routes component renders correctly if logged in 1`] = `
+exports[`login component renders correctly if logged in 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -60,7 +60,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`Routes component renders correctly if logged in, but no previous location 1`] = `
+exports[`login component renders correctly if logged in, but no previous location 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -118,7 +118,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`Routes component renders correctly if not logged in 1`] = `
+exports[`login component renders correctly if not logged in 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -954,7 +954,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`Routes component renders correctly if not logged in 2`] = `
+exports[`login component renders correctly if not logged in 2`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -1790,7 +1790,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`Routes component renders correctly if not logged in 3`] = `
+exports[`login component renders correctly if not logged in 3`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -2626,7 +2626,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`Routes component renders correctly if not logged in and fetching data 1`] = `
+exports[`login component renders correctly if not logged in and fetching data 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -3462,7 +3462,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`Routes component renders correctly if not logged in and there is an error 1`] = `
+exports[`login component renders correctly if not logged in and there is an error 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
