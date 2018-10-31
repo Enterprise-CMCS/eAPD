@@ -9,7 +9,7 @@ import {
 } from './IncentivePayments';
 import { updateApd } from '../actions/apd';
 
-describe('Routes component', () => {
+describe('incentive payments component', () => {
   const props = {
     data: {
       ehAmt: { '1': [1, 2, 3, 4], '2': [5, 6, 7, 8] },

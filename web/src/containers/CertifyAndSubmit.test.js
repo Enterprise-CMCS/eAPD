@@ -36,6 +36,8 @@ describe('certify and submit component', () => {
       <CertifyAndSubmit {...props} status="submitted" />
     );
     component.find('Withdraw').prop('withdrawApd')();
+    expect(component).toMatchSnapshot();
+
     component.setProps({ ...props, dirty: true });
 
     expect(component).toMatchSnapshot();

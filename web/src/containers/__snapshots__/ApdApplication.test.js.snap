@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Routes component renders correctly 1`] = `
+exports[`apd (application) component renders correctly 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -340,7 +340,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`Routes component renders correctly 2`] = `
+exports[`apd (application) component renders correctly 2`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],

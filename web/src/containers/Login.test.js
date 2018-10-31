@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { plain as Login, mapStateToProps, mapDispatchToProps } from './Login';
 import { login } from '../actions/auth';
 
-describe('Routes component', () => {
+describe('login component', () => {
   test('renders correctly if logged in', () => {
     const component = shallow(
       <Login

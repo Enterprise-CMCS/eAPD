@@ -9,7 +9,7 @@ import {
 } from './ApdApplication';
 import { selectApdOnLoad } from '../actions/apd';
 
-describe('Routes component', () => {
+describe('apd (application) component', () => {
   test('renders correctly', () => {
     expect(
       shallow(
