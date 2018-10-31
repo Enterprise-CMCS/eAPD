@@ -5,9 +5,9 @@
 
 # CMS eAPD app
 
-This project aims to create a user-friendly, modern product to allow states to
-submit their Medicaid APD information to CMS easily and help CMS analysts
-review requests more efficiently. It is currently limited to HITECH but may
+This project aims to create a user-friendly, modern product to streamline the
+creation, submission, review, and approval of Medicaid APDs and their
+associated contract documents. It is currently limited to HITECH but may
 potentially be expanded to other Medicaid programs in the future.
 
 ## Developing
