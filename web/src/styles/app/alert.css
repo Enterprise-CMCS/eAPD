@@ -1,8 +1,7 @@
 .alert {
   background-color: #eee;
   border-radius: 3px;
-  padding-top: 0.9rem;
-  padding-left: 1.95rem;
+  padding: 0.9rem 1.95rem 1.5rem;
 }
 
 .alert::before {
