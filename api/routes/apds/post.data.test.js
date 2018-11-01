@@ -1,9 +1,21 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
+// The Mars Pathfinder mission landed on Mars on July 4, 1997.  The Sojourner
+// rover wandered around the surface for 83 solar days before communications
+// failed.  It was designed for a 7-day mission.  Our Martian robots have a
+// really good track record of exceeding their design lifes.  FFY 1997.  Set
+// this clock before we import anything, so that the stuff we import will use
+// our faked-out clock.
+const mockClock = sinon.useFakeTimers(new Date(1997, 6, 4).getTime());
+
 const getNewApd = require('./post.data');
 
 tap.test('APD data initializer', async test => {
+  tap.tearDown(() => {
+    mockClock.restore();
+  });
+
   const state = {
     get: sinon.stub()
   };
@@ -40,23 +52,23 @@ tap.test('APD data initializer', async test => {
               {
                 hours: '',
                 rate: '',
-                year: '2018'
+                year: '1997'
               },
               {
                 hours: '',
                 rate: '',
-                year: '2019'
+                year: '1998'
               }
             ],
             useHourly: false,
             years: [
               {
                 cost: 0,
-                year: '2018'
+                year: '1997'
               },
               {
                 cost: 0,
-                year: '2019'
+                year: '1998'
               }
             ]
           }
@@ -66,13 +78,13 @@ tap.test('APD data initializer', async test => {
             federalPercent: 0.9,
             statePercent: 0.1,
             otherAmount: 0,
-            year: '2018'
+            year: '1997'
           },
           {
             federalPercent: 0.9,
             statePercent: 0.1,
             otherAmount: 0,
-            year: '2019'
+            year: '1998'
           }
         ],
         costAllocationNarrative: {
@@ -87,11 +99,11 @@ tap.test('APD data initializer', async test => {
             entries: [
               {
                 amount: 0,
-                year: '2018'
+                year: '1997'
               },
               {
                 amount: 0,
-                year: '2019'
+                year: '1998'
               }
             ]
           }
@@ -121,20 +133,20 @@ tap.test('APD data initializer', async test => {
               {
                 cost: 0,
                 fte: 0,
-                year: '2018'
+                year: '1997'
               },
               {
                 cost: 0,
                 fte: 0,
-                year: '2019'
+                year: '1998'
               }
             ]
           }
         ],
         summary: '',
         quarterlyFFP: [
-          { q1: 0, q2: 0, q3: 0, q4: 0, year: '2018' },
-          { q1: 0, q2: 0, q3: 0, q4: 0, year: '2019' }
+          { q1: 0, q2: 0, q3: 0, q4: 0, year: '1997' },
+          { q1: 0, q2: 0, q3: 0, q4: 0, year: '1998' }
         ]
       }
     ],
@@ -144,14 +156,14 @@ tap.test('APD data initializer', async test => {
         q2: { ehPayment: 0, epPayment: 0 },
         q3: { ehPayment: 0, epPayment: 0 },
         q4: { ehPayment: 0, epPayment: 0 },
-        year: '2018'
+        year: '1997'
       },
       {
         q1: { ehPayment: 0, epPayment: 0 },
         q2: { ehPayment: 0, epPayment: 0 },
         q3: { ehPayment: 0, epPayment: 0 },
         q4: { ehPayment: 0, epPayment: 0 },
-        year: '2019'
+        year: '1998'
       }
     ],
     narrativeHIE: '',
@@ -186,7 +198,7 @@ tap.test('APD data initializer', async test => {
           state50Actual: 0,
           state50Approved: 0
         },
-        year: '2018'
+        year: '1997'
       },
       {
         hie: {
@@ -215,7 +227,7 @@ tap.test('APD data initializer', async test => {
           state50Actual: 0,
           state50Approved: 0
         },
-        year: '2017'
+        year: '1996'
       },
       {
         hie: {
@@ -244,7 +256,7 @@ tap.test('APD data initializer', async test => {
           state50Actual: 0,
           state50Approved: 0
         },
-        year: '2016'
+        year: '1995'
       }
     ],
     previousActivitySummary: '',
@@ -253,6 +265,6 @@ tap.test('APD data initializer', async test => {
       medicaidDirector: 'Director of Medicaid Operations',
       medicaidOffice: 'Office Where the Director Sites'
     },
-    years: ['2018', '2019']
+    years: ['1997', '1998']
   });
 });
