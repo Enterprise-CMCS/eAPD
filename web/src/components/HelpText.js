@@ -15,7 +15,7 @@ const HelpText = ({ text: textResource, reminder: reminderResource }) => {
         {reminder && (
           <Md
             content={reminder}
-            wrapper="div"
+            wrapper="p"
             className="mb2 text-s alert alert-info"
           />
         )}
