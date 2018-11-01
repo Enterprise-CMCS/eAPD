@@ -10,8 +10,9 @@
     "seed": "knex seed:run",
     "start": "node main.js",
     "start-dev": "nodemon ./main.js",
+    "jest": "NODE_ENV=test jest",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-browser --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
-    "test-endpoints": "tap --reporter=spec 'endpoint-tests/*/**/*.js'",
+    "test-endpoints": "jest '.+\\.endpoint\\.js'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec",
     "prettier": "prettier --single-quote --trailing-comma none --write \"**/*.js\""
   },
@@ -47,6 +48,7 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.4",
     "fs-blob-store": "^5.2.1",
+    "jest": "^23.6.0",
     "joi": "^13.7.0",
     "knex": "^0.14.6",
     "lodash.isequal": "^4.5.0",
@@ -74,5 +76,14 @@
     "sinon": "^4.5.0",
     "stream-mock": "^1.2.0",
     "tap": "^12.0.1"
+  },
+  "jest": {
+    "testMatch": [
+      "**/__tests__/**/*.js?(x)",
+      "**/?(*.)+(spec|test|endpoint).js?(x)"
+    ],
+    "testPathIgnorePatterns": [
+      "utils.endpoint.js"
+    ]
   }
 }

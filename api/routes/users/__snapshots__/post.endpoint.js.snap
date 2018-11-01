@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`users endpoint | POST /users when authenticated with a password but no email 1`] = `
+Object {
+  "error": "add-user-invalid",
+}
+`;
+
+exports[`users endpoint | POST /users when authenticated with a valid new user 1`] = `undefined`;
+
+exports[`users endpoint | POST /users when authenticated with a weak password 1`] = `
+Object {
+  "error": "add-user-weak-password",
+}
+`;
+
+exports[`users endpoint | POST /users when authenticated with an email but no password 1`] = `
+Object {
+  "error": "add-user-invalid",
+}
+`;
+
+exports[`users endpoint | POST /users when authenticated with an invalid body 1`] = `
+Object {
+  "error": "add-user-invalid",
+}
+`;
+
+exports[`users endpoint | POST /users when authenticated with existing email address 1`] = `
+Object {
+  "error": "add-user-email-exists",
+}
+`;
+
+exports[`users endpoint | POST /users when authenticated with no body 1`] = `
+Object {
+  "error": "add-user-invalid",
+}
+`;

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`users endpoint | DELETE /users/:userID when authenticated when attempting to delete self 1`] = `undefined`;
+
+exports[`users endpoint | DELETE /users/:userID when authenticated when deleting a non-existant user ID 1`] = `undefined`;
+
+exports[`users endpoint | DELETE /users/:userID when authenticated when deleting a valid user ID 1`] = `undefined`;
+
+exports[`users endpoint | DELETE /users/:userID when authenticated when sending a non-numeric ID 1`] = `undefined`;
