@@ -1,12 +1,32 @@
-import activities, {
+import sinon from 'sinon';
+
+// The last person on the moon re-boards the Lunar Excursion Module on December
+// 13, 1972.  (As everyone knows, December is the 11th month.)  FFY 1973.  Set
+// this clock before we import anything, so that the stuff we import will use
+// our faked-out clock.
+const mockClock = sinon.useFakeTimers(new Date(1972, 11, 13).getTime());
+
+// Need to use require() here instead of import, because apparently Babel will
+// reorder code and put imports before everything else.  The upshot is that
+// the code under test would get loaded before the clock is faked, and the util
+// library computes years as soon as it's loaded, so...  require() is left
+// alone, so it will come after the clock fakery.  :pixar-joy:
+const imported = require('./activities');
+
+const activities = imported.default;
+const {
   aggregateByYear,
   getCategoryTotals,
   getActivityCategoryTotals,
   getActivityTotals,
   setKeyGenerator
-} from './activities';
+} = imported;
 
 describe('activities reducer', () => {
+  afterAll(() => {
+    mockClock.restore();
+  });
+
   const initialState = {
     byKey: {},
     allKeys: []
@@ -19,12 +39,12 @@ describe('activities reducer', () => {
     name: '',
     start: '',
     files: [],
-    years: { '2018': 0, '2019': 0 },
+    years: { '1973': 0, '1974': 0 },
     hourly: {
       useHourly: false,
       data: {
-        '2018': { hours: '', rate: '' },
-        '2019': { hours: '', rate: '' }
+        '1973': { hours: '', rate: '' },
+        '1974': { hours: '', rate: '' }
       }
     }
   });
@@ -34,7 +54,7 @@ describe('activities reducer', () => {
     desc: '',
     title: '',
     isKeyPersonnel: false,
-    years: { '2018': { amt: '', perc: '' }, '2019': { amt: '', perc: '' } }
+    years: { '1973': { amt: '', perc: '' }, '1974': { amt: '', perc: '' } }
   });
 
   const newGoal = keyFn => ({ key: keyFn(), description: '', objective: '' });
@@ -43,14 +63,13 @@ describe('activities reducer', () => {
     key: keyFn(),
     category: 'Hardware, software, and licensing',
     desc: '',
-    years: { '2018': 0, '2019': 0 }
+    years: { '1973': 0, '1974': 0 }
   });
 
   const newMilestone = keyFn => ({
     key: keyFn(),
     milestone: '',
-    plannedEnd: '',
-    plannedStart: ''
+    endDate: ''
   });
 
   const newActivity = keyFn => ({
@@ -59,14 +78,16 @@ describe('activities reducer', () => {
     contractorResources: [newContractor(keyFn)],
     costAllocationDesc: '',
     costAllocation: {
-      '2018': { ffp: { federal: 90, state: 10 }, other: 0 },
-      '2019': { ffp: { federal: 90, state: 10 }, other: 0 }
+      '1973': { ffp: { federal: 90, state: 10 }, other: 0 },
+      '1974': { ffp: { federal: 90, state: 10 }, other: 0 }
     },
     description: '',
     expenses: [newExpense(keyFn)],
     fundingSource: 'HIT',
     goals: [newGoal(keyFn)],
     meta: { expanded: false },
+    plannedStartDate: '',
+    plannedEndDate: '',
     schedule: [newMilestone(keyFn)],
     name: '',
     otherFundingDesc: '',
@@ -86,7 +107,7 @@ describe('activities reducer', () => {
     statePersonnel: [newPerson(keyFn)],
     summary: '',
     quarterlyFFP: {
-      '2018': {
+      '1973': {
         '1': {
           combined: 25,
           contractors: 25,
@@ -108,7 +129,7 @@ describe('activities reducer', () => {
           state: 25
         }
       },
-      '2019': {
+      '1974': {
         '1': {
           combined: 25,
           contractors: 25,
@@ -131,7 +152,7 @@ describe('activities reducer', () => {
         }
       }
     },
-    years: ['2018', '2019']
+    years: ['1973', '1974']
   });
 
   const uniqueKey = () => {
@@ -157,7 +178,7 @@ describe('activities reducer', () => {
     expect(
       activities(initialState, {
         type: 'ADD_ACTIVITY',
-        years: ['2018', '2019']
+        years: ['1973', '1974']
       })
     ).toEqual({
       byKey: {
@@ -208,7 +229,7 @@ describe('activities reducer', () => {
         activities(stateWithOne, {
           type: action,
           key: 1,
-          years: ['2018', '2019']
+          years: ['1973', '1974']
         })
       ).toEqual({
         ...stateWithOne,
@@ -300,7 +321,7 @@ describe('activities reducer', () => {
     });
   });
 
-  describe('it toggles the activity expanded flag', () => {
+  it('it toggles the activity expanded flag', () => {
     expect(
       activities(
         { byKey: { '1': { meta: { expanded: false } } } },
@@ -346,7 +367,7 @@ describe('activities reducer', () => {
     const contractor = activity.contractorResources[0];
     const contractorNew = {
       ...contractor,
-      years: { '2018': 100, '2019': 200 }
+      years: { '1973': 100, '1974': 200 }
     };
 
     const state = {
@@ -374,7 +395,7 @@ describe('activities reducer', () => {
           contractorResources: [
             {
               ...contractorNew,
-              years: { '2018': 0, '2019': 0 },
+              years: { '1973': 0, '1974': 0 },
               hourly: {
                 ...contractorNew.hourly,
                 useHourly: true
@@ -399,7 +420,7 @@ describe('activities reducer', () => {
       expect(
         activities(stateWithOne, {
           type,
-          updates: { years: ['2018', '2019', '2020'] }
+          updates: { years: ['1973', '1974', '1975'] }
         })
       ).toEqual({
         ...stateWithOne,
@@ -411,20 +432,20 @@ describe('activities reducer', () => {
                 ...stateWithOne.byKey['1'].contractorResources[0],
                 years: {
                   ...stateWithOne.byKey['1'].contractorResources[0].years,
-                  '2020': 0
+                  '1975': 0
                 }
               }
             ],
             costAllocation: {
               ...stateWithOne.byKey['1'].costAllocation,
-              '2020': { ffp: { federal: 90, state: 10 }, other: 0 }
+              '1975': { ffp: { federal: 90, state: 10 }, other: 0 }
             },
             expenses: [
               {
                 ...stateWithOne.byKey['1'].expenses[0],
                 years: {
                   ...stateWithOne.byKey['1'].expenses[0].years,
-                  '2020': 0
+                  '1975': 0
                 }
               }
             ],
@@ -433,13 +454,13 @@ describe('activities reducer', () => {
                 ...stateWithOne.byKey['1'].statePersonnel[0],
                 years: {
                   ...stateWithOne.byKey['1'].statePersonnel[0].years,
-                  '2020': { amt: '', perc: '' }
+                  '1975': { amt: '', perc: '' }
                 }
               }
             ],
             quarterlyFFP: {
               ...stateWithOne.byKey['1'].quarterlyFFP,
-              '2020': {
+              '1975': {
                 '1': {
                   combined: 25,
                   contractors: 25,
@@ -462,7 +483,7 @@ describe('activities reducer', () => {
                 }
               }
             },
-            years: ['2018', '2019', '2020']
+            years: ['1973', '1974', '1975']
           }
         }
       });
@@ -470,7 +491,7 @@ describe('activities reducer', () => {
 
     it('removes year-based pieces if a year was removed', () => {
       expect(
-        activities(stateWithOne, { type, updates: { years: ['2018'] } })
+        activities(stateWithOne, { type, updates: { years: ['1973'] } })
       ).toEqual({
         ...stateWithOne,
         byKey: {
@@ -480,18 +501,18 @@ describe('activities reducer', () => {
               {
                 ...stateWithOne.byKey['1'].contractorResources[0],
                 years: {
-                  '2018': 0
+                  '1973': 0
                 }
               }
             ],
             costAllocation: {
-              '2018': { ffp: { federal: 90, state: 10 }, other: 0 }
+              '1973': { ffp: { federal: 90, state: 10 }, other: 0 }
             },
             expenses: [
               {
                 ...stateWithOne.byKey['1'].expenses[0],
                 years: {
-                  '2018': 0
+                  '1973': 0
                 }
               }
             ],
@@ -499,15 +520,15 @@ describe('activities reducer', () => {
               {
                 ...stateWithOne.byKey['1'].statePersonnel[0],
                 years: {
-                  '2018': { amt: '', perc: '' }
+                  '1973': { amt: '', perc: '' }
                 }
               }
             ],
             quarterlyFFP: {
-              '2018': stateWithOne.byKey['1'].quarterlyFFP['2018'],
+              '1973': stateWithOne.byKey['1'].quarterlyFFP['1973'],
               total: stateWithOne.byKey['1'].quarterlyFFP.total
             },
-            years: ['2018']
+            years: ['1973']
           }
         }
       });
@@ -539,7 +560,7 @@ describe('activities reducer', () => {
             ...newActivity(key),
             name: 'Program Administration',
             fundingSource: 'HIT',
-            years: ['2018', '2019'],
+            years: ['1973', '1974'],
             meta: { ...newActivity.meta, expanded: true }
           }
         },
@@ -634,59 +655,59 @@ describe('activities reducer', () => {
   it('aggregates data by year', () => {
     expect(
       aggregateByYear(
-        [{ '2018': 10, '2019': 7 }, { '2018': 46, '2019': 8 }],
-        ['2018', '2019']
+        [{ '1972': 10, '1973': 7 }, { '1972': 46, '1973': 8 }],
+        ['1972', '1973']
       )
-    ).toEqual({ '2018': 56, '2019': 15 });
+    ).toEqual({ '1972': 56, '1973': 15 });
   });
 
   it('gets yearly totals for a category', () => {
     expect(
       getCategoryTotals([
-        { years: { '2018': 10, '2019': 7 } },
-        { years: { '2018': 46, '2019': 8 } }
+        { years: { '1972': 10, '1973': 7 } },
+        { years: { '1972': 46, '1973': 8 } }
       ])
-    ).toEqual({ '2018': 56, '2019': 15 });
+    ).toEqual({ '1972': 56, '1973': 15 });
   });
 
   it('get cost totals per category per year for an activity', () => {
     expect(
       getActivityCategoryTotals({
         contractorResources: [
-          { years: { '2018': 1, '2019': 10 } },
-          { years: { '2018': 2, '2019': 20 } },
-          { years: { '2018': 3, '2019': 30 } }
+          { years: { '1972': 1, '1973': 10 } },
+          { years: { '1972': 2, '1973': 20 } },
+          { years: { '1972': 3, '1973': 30 } }
         ],
         expenses: [
-          { years: { '2018': 2, '2019': 20 } },
-          { years: { '2018': 4, '2019': 40 } },
-          { years: { '2018': 6, '2019': 60 } }
+          { years: { '1972': 2, '1973': 20 } },
+          { years: { '1972': 4, '1973': 40 } },
+          { years: { '1972': 6, '1973': 60 } }
         ],
         statePersonnel: [
           {
             years: {
-              '2018': { amt: 3, perc: 40 },
-              '2019': { amt: 30, perc: 100 }
+              '1972': { amt: 3, perc: 40 },
+              '1973': { amt: 30, perc: 100 }
             }
           },
           {
             years: {
-              '2018': { amt: 6, perc: 55 },
-              '2019': { amt: 60, perc: 90 }
+              '1972': { amt: 6, perc: 55 },
+              '1973': { amt: 60, perc: 90 }
             }
           },
           {
             years: {
-              '2018': { amt: 9, perc: 99 },
-              '2019': { amt: 90, perc: 30 }
+              '1972': { amt: 9, perc: 99 },
+              '1973': { amt: 90, perc: 30 }
             }
           }
         ]
       })
     ).toEqual({
-      contractors: { '2018': 6, '2019': 60 },
-      expenses: { '2018': 12, '2019': 120 },
-      statePersonnel: { '2018': 13.41, '2019': 111 }
+      contractors: { '1972': 6, '1973': 60 },
+      expenses: { '1972': 12, '1973': 120 },
+      statePersonnel: { '1972': 13.41, '1973': 111 }
     });
   });
 
@@ -694,37 +715,37 @@ describe('activities reducer', () => {
     expect(
       getActivityTotals({
         contractorResources: [
-          { years: { '2018': 1, '2019': 10 } },
-          { years: { '2018': 2, '2019': 20 } },
-          { years: { '2018': 3, '2019': 30 } }
+          { years: { '1972': 1, '1973': 10 } },
+          { years: { '1972': 2, '1973': 20 } },
+          { years: { '1972': 3, '1973': 30 } }
         ],
         expenses: [
-          { years: { '2018': 2, '2019': 20 } },
-          { years: { '2018': 4, '2019': 40 } },
-          { years: { '2018': 6, '2019': 60 } }
+          { years: { '1972': 2, '1973': 20 } },
+          { years: { '1972': 4, '1973': 40 } },
+          { years: { '1972': 6, '1973': 60 } }
         ],
         statePersonnel: [
           {
             years: {
-              '2018': { amt: 3, perc: 100 },
-              '2019': { amt: 30, perc: 80 }
+              '1972': { amt: 3, perc: 100 },
+              '1973': { amt: 30, perc: 80 }
             }
           },
           {
             years: {
-              '2018': { amt: 6, perc: 90 },
-              '2019': { amt: 60, perc: 100 }
+              '1972': { amt: 6, perc: 90 },
+              '1973': { amt: 60, perc: 100 }
             }
           },
           {
             years: {
-              '2018': { amt: 9, perc: 40 },
-              '2019': { amt: 90, perc: 10 }
+              '1972': { amt: 9, perc: 40 },
+              '1973': { amt: 90, perc: 10 }
             }
           }
         ],
-        years: ['2018', '2019']
+        years: ['1972', '1973']
       })
-    ).toEqual({ '2018': 30, '2019': 273 });
+    ).toEqual({ '1972': 30, '1973': 273 });
   });
 });
