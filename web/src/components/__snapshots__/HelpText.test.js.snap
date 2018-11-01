@@ -23,9 +23,9 @@ ShallowWrapper {
       "children": Array [
         false,
         <Md
-          className="mb2 p1 h5 alert alert-help"
+          className="mb2 text-s alert alert-info"
           content="[missing {{year}} value] HITECH APD"
-          wrapper="div"
+          wrapper="p"
         />,
       ],
     },
@@ -37,9 +37,9 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "className": "mb2 p1 h5 alert alert-help",
+          "className": "mb2 text-s alert alert-info",
           "content": "[missing {{year}} value] HITECH APD",
-          "wrapper": "div",
+          "wrapper": "p",
         },
         "ref": null,
         "rendered": null,
@@ -57,9 +57,9 @@ ShallowWrapper {
         "children": Array [
           false,
           <Md
-            className="mb2 p1 h5 alert alert-help"
+            className="mb2 text-s alert alert-info"
             content="[missing {{year}} value] HITECH APD"
-            wrapper="div"
+            wrapper="p"
           />,
         ],
       },
@@ -71,9 +71,9 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "className": "mb2 p1 h5 alert alert-help",
+            "className": "mb2 text-s alert alert-info",
             "content": "[missing {{year}} value] HITECH APD",
-            "wrapper": "div",
+            "wrapper": "p",
           },
           "ref": null,
           "rendered": null,
@@ -144,14 +144,14 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Md
-          className="mb2"
+          className="mb2 text-med"
           content="[missing {{year}} value] HITECH APD"
-          wrapper="div"
+          wrapper="p"
         />,
         <Md
-          className="mb2 p1 h5 alert alert-help"
+          className="mb2 text-s alert alert-info"
           content="[missing {{year}} value] HITECH APD"
-          wrapper="div"
+          wrapper="p"
         />,
       ],
     },
@@ -162,9 +162,9 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "className": "mb2",
+          "className": "mb2 text-med",
           "content": "[missing {{year}} value] HITECH APD",
-          "wrapper": "div",
+          "wrapper": "p",
         },
         "ref": null,
         "rendered": null,
@@ -175,9 +175,9 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "className": "mb2 p1 h5 alert alert-help",
+          "className": "mb2 text-s alert alert-info",
           "content": "[missing {{year}} value] HITECH APD",
-          "wrapper": "div",
+          "wrapper": "p",
         },
         "ref": null,
         "rendered": null,
@@ -194,14 +194,14 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Md
-            className="mb2"
+            className="mb2 text-med"
             content="[missing {{year}} value] HITECH APD"
-            wrapper="div"
+            wrapper="p"
           />,
           <Md
-            className="mb2 p1 h5 alert alert-help"
+            className="mb2 text-s alert alert-info"
             content="[missing {{year}} value] HITECH APD"
-            wrapper="div"
+            wrapper="p"
           />,
         ],
       },
@@ -212,9 +212,9 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "className": "mb2",
+            "className": "mb2 text-med",
             "content": "[missing {{year}} value] HITECH APD",
-            "wrapper": "div",
+            "wrapper": "p",
           },
           "ref": null,
           "rendered": null,
@@ -225,9 +225,9 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "className": "mb2 p1 h5 alert alert-help",
+            "className": "mb2 text-s alert alert-info",
             "content": "[missing {{year}} value] HITECH APD",
-            "wrapper": "div",
+            "wrapper": "p",
           },
           "ref": null,
           "rendered": null,
@@ -269,9 +269,9 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Md
-          className="mb2"
+          className="mb2 text-med"
           content="[missing {{year}} value] HITECH APD"
-          wrapper="div"
+          wrapper="p"
         />,
         false,
       ],
@@ -283,9 +283,9 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "className": "mb2",
+          "className": "mb2 text-med",
           "content": "[missing {{year}} value] HITECH APD",
-          "wrapper": "div",
+          "wrapper": "p",
         },
         "ref": null,
         "rendered": null,
@@ -303,9 +303,9 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Md
-            className="mb2"
+            className="mb2 text-med"
             content="[missing {{year}} value] HITECH APD"
-            wrapper="div"
+            wrapper="p"
           />,
           false,
         ],
@@ -317,9 +317,9 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "className": "mb2",
+            "className": "mb2 text-med",
             "content": "[missing {{year}} value] HITECH APD",
-            "wrapper": "div",
+            "wrapper": "p",
           },
           "ref": null,
           "rendered": null,
