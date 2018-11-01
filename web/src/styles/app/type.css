@@ -18,3 +18,19 @@
 .fw-600 {
   font-weight: 600;
 }
+
+.text-s {
+  font-size: .875rem; /* 14px */
+  line-height: 1.3125rem; /* 21px */
+}
+
+/* this is the base font size for body copy */
+.text-med {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+}
+
+.text-xl {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.875rem; /* 30px */
+}

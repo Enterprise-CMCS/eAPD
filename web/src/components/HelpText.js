@@ -11,12 +11,12 @@ const HelpText = ({ text: textResource, reminder: reminderResource }) => {
   return (
     (text || reminder) && (
       <Fragment>
-        {text && <Md content={text} wrapper="div" className="mb2" />}
+        {text && <Md content={text} wrapper="p" className="mb2 text-med" />}
         {reminder && (
           <Md
             content={reminder}
             wrapper="div"
-            className="mb2 p1 h5 alert alert-info"
+            className="mb2 text-s alert alert-info"
           />
         )}
       </Fragment>
