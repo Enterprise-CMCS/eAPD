@@ -1,7 +1,7 @@
 .alert {
   background-color: #eee;
   border-radius: 3px;
-  padding: 0.9rem 1.95rem 1.5rem;
+  padding: 0.2rem 1.95rem 1rem;
 }
 
 .alert::before {
@@ -11,7 +11,7 @@
   display: block;
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
-  transform: translate(-2.4rem, -.95rem) rotate(-45deg);
+  transform: translate(-2.49rem, -.3rem) rotate(-45deg);
 }
 
 .alert-error {
