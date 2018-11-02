@@ -1,49 +1,43 @@
-const tap = require('tap'); // eslint-disable-line import/no-extraneous-dependencies
-const { request, getFullPath } = require('../utils');
+const { request, getFullPath } = require('../../utils.endpoint');
 
-tap.test('logout endpoint | /auth/logout', async logoutTest => {
+describe('logout endpoint | /auth/logout', async () => {
   const url = getFullPath('/auth/logout');
 
-  logoutTest.test('not already logged in', async test => {
+  it('not already logged in', async () => {
     const cookies = request.jar();
 
     const { response } = await request.get(url, { jar: cookies });
 
-    test.equal(response.statusCode, 200, 'gives a 200 status code');
+    expect(response.statusCode).toEqual(200);
 
     // It might be valid for the API to set some header other than
     // the session cookie, but it might also be valid for it to set
     // no headers at all.
     if (response.headers['set-cookie']) {
-      test.ok(
+      expect(
         response.headers['set-cookie'].every(
           cookie => !cookie.startsWith('session=')
-        ),
-        'does not set a session cookie'
-      );
-    } else {
-      test.pass('does not set a session cookie');
+        )
+      ).toBeTruthy();
     }
   });
 
-  logoutTest.test('already logged in', async test => {
+  describe('already logged in', async () => {
     const cookies = request.jar();
     cookies.setCookie('session=this-is-my-session', url);
 
     const { response } = await request.get(url, { jar: cookies });
 
-    test.equal(response.statusCode, 200, 'gives a 200 status code');
-    test.ok(
+    expect(response.statusCode).toEqual(200);
+    expect(
       response.headers['set-cookie'].some(
         cookie => cookie.startsWith('session=') && cookie.endsWith('; httponly')
-      ),
-      'sends a new http-only session cookie'
-    );
-    test.ok(
+      )
+    ).toBeTruthy();
+    expect(
       response.headers['set-cookie'].every(
         cookie => !cookie.startsWith('session=this-is-my-session')
-      ),
-      'does not just send back the same session cookie'
-    );
+      )
+    ).toBeTruthy();
   });
 });
