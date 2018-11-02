@@ -20,17 +20,17 @@
 }
 
 .text-s {
-  font-size: .875rem; /* 14px */
-  line-height: 1.3125rem; /* 21px */
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
 }
 
 /* this is the base font size for body copy */
 .text-med {
-  font-size: 1rem; /* 16px */
-  line-height: 1.5rem; /* 24px */
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
 }
 
 .text-xl {
-  font-size: 1.25rem; /* 20px */
-  line-height: 1.875rem; /* 30px */
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
 }
