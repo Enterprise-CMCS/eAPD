@@ -38,6 +38,7 @@ cd ..
 
 cf login -a $STAGING_CF_API -u $STAGING_CF_USER -p $STAGING_CF_PASSWORD -o $STAGING_CF_ORG -s $STAGING_CF_SPACE
 
+cf zero-downtime-push hitech-apd-frontend -f manifest.yml
 cf zero-downtime-push hitech-apd-api -f manifest.yml
 
 # Migrate and seed the database
