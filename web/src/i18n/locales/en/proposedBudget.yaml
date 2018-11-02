@@ -2,17 +2,22 @@ title: Proposed Budget
 helpText: >-
   This itemized budget table has combined the costs for each activity
   into a single itemized table by federal fiscal year (FFY). The table
-  displays total share, federal share, and state share. The second table
-  also includes a proposed breakout of the budget by FFY quarter.
+  displays total share, federal share, and state share.
 summaryBudget:
   title: Summary Budget Table
-  helpText: Totals are calculated automatically.
+  helpText: >-
+    Totals are calculated automatically.
 quarterlyBudget:
   title: Federal share by FFY Quarter
-  ? helpText
+  helpText: >-
+    These tables include a summary proposed breakout of the budget by FFY quarter.
   expenseNames:
     state: In-House Costs
     contractor: Private Contractor Costs
     combined: Total Enhanced FFP
 paymentsByFFYQuarter:
   title: Incentive Payments by FFY Quarter
+  helpText: >-
+    This table is for capturing incentive payments for eligible professionals (EPs) and eligible hosptials (EHs).
+  reminder: >-
+    Please include EH and EP payments and counts. This then calculates totals automatically.  
