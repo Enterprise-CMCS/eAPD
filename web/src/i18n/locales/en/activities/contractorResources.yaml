@@ -3,9 +3,8 @@ subheader: >-
   Outline contracts by contract or
   vendor name.
 reminder: >-
-  Itemize per contracts with federal fiscal year (FFY) costs. If vendor or contract name is
-  unknown, generalize
-  by resource name (e.g. computer resources/TBD)
+  Itemize per contract with federal fiscal year (FFY) costs. If vendor or contract
+  name is unknown, generalize by resource name (e.g. computer resources/TBD)
 noDataNotice: There are no contracts assigned to this activity.
 delete:
   text: ✗
@@ -18,7 +17,7 @@ labels:
   entryNumber: '#'
   contractorName: Contractor Name
   description: Description of Services
-  term: Term Period
+  term: Contract Term
   start: 'Start:'
   end: 'End:'
   cost: Cost

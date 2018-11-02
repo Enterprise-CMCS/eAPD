@@ -1,14 +1,14 @@
 title: Assurances and Compliance
 helpText: >-
-  Ensure state complies with all applicable Code of Federal Regulations
+  Insure state complies with all applicable Code of Federal Regulations
   (CFR) and State Medicaid Manual (SMM) citations. Any “no” responses
   must be explained; CMS will communicate with state regarding
   non‐compliance issues prior to approving requests.
 citations:
   title: Federal Citations and Justification
   helpText: >-
-    Select “yes” or “no” to indicate how you are complying with each of
-    these citations, and provide any additional justifications as applicable.
+    Select “yes” to indicate if you are complying with each of
+    these citations. If you select "no", provide additional justifications for each item.
 headers:
   procurement: Procurement Standards (Competition / Sole Source)
   recordsAccess: Access to Records, Reporting and Agency Attestations

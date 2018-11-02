@@ -10,11 +10,11 @@ detail.
 ## Front end
 
 The front end is built in [React](https://reactjs.org/), and uses the following
-libraries:
+major libraries:
 
-* [react-router](https://www.npmjs.com/package/react-router) for page routing
-* [Redux](https://redux.js.org/) for internal state management
-* [Webpack](https://webpack.js.org/) for bundling the app into a deliverable
+- [react-router](https://www.npmjs.com/package/react-router) for page routing
+- [Redux](https://redux.js.org/) for internal state management
+- [Webpack](https://webpack.js.org/) for bundling the app into a deliverable
 
 (We have more detailed
 [documentation about how our frontend build is configured](frontend-build.md),
@@ -33,12 +33,12 @@ and [Enzyme](http://airbnb.io/enzyme/) as a React renderer.
 The API is built on [Express](https://expressjs.com/) using a
 [PostgreSQL](https://www.postgresql.org/) database, and a handful of libraries:
 
-* [bcryptjs](https://www.npmjs.com/package/bcryptjs) for secure hashing
-* [client-session](https://www.npmjs.com/package/client-sessions) for secure
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs) for secure hashing
+- [client-session](https://www.npmjs.com/package/client-sessions) for secure
   cookie-based sessions
-* [Passport](http://www.passportjs.org/) for authentication
-* [Knex](http://knexjs.org/) for interacting with the database
-* [Bookshelf.js](http://bookshelfjs.org) for managing database relationships
+- [Passport](http://www.passportjs.org/) for authentication
+- [Knex](http://knexjs.org/) for interacting with the database
+- [Bookshelf.js](http://bookshelfjs.org) for managing database relationships
 
 For testing, we use [node-tap](http://www.node-tap.org/) as the runner and
 assertions, and [Sinon.JS](sinonjs.org) for mocking.
@@ -46,9 +46,9 @@ assertions, and [Sinon.JS](sinonjs.org) for mocking.
 If you want to get a little deeper into how the API works, we have documentation
 about:
 
-* [configuring the back end app (environment variables and stuff like that)](api-configuration.md)
-* [our authorization model](api-authorization.md)
-* [how we handle authentication](api-authentication.md)
+- [configuring the back end app (environment variables and stuff like that)](api-configuration.md)
+- [our authorization model](api-authorization.md)
+- [how we handle authentication](api-authentication.md)
 
 The API is also documented with [OpenAPI](https://www.openapis.org/). To see the
 spec document, once the API is running, you can browse to its `/open-api`
@@ -57,7 +57,7 @@ endpoint. You can also use a hosted version of
 
 ## Database
 
-The current database model is presented here.  The `knex_*` tables are used to manage migration versions by our database interaction library.
+The current database model is presented here. The `knex_*` tables are used to manage migration versions by our database interaction library.
 
 ![database model diagram](./database-diagram.png)
 

@@ -39,7 +39,11 @@ const mapStateToProps = ({ activities }) => {
 
   Object.values(activities.byKey).forEach(activity => {
     activity.schedule.forEach(milestone => {
-      data.push({ ...milestone, activityName: activity.name });
+      data.push({
+        ...milestone,
+        activityName: activity.name,
+        startDate: activity.plannedStartDate
+      });
     });
   });
 
@@ -54,12 +58,12 @@ const mapStateToProps = ({ activities }) => {
       Cell
     },
     {
-      accessor: 'plannedStart',
+      accessor: 'startDate',
       Header: t('scheduleSummary.main.table.start'),
       Cell
     },
     {
-      accessor: 'plannedEnd',
+      accessor: 'endDate',
       Header: t('scheduleSummary.main.table.end'),
       Cell
     }

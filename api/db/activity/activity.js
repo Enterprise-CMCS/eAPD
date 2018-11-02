@@ -1,4 +1,7 @@
+const moment = require('moment');
 const logger = require('../../logger')('db activity model');
+
+const getDate = date => (date ? moment(date).format('YYYY-MM-DD') : null);
 
 module.exports = {
   apdActivity: {
@@ -76,13 +79,15 @@ module.exports = {
 
     static: {
       updateableFields: [
-        'name',
-        'summary',
-        'description',
         'alternatives',
         'costAllocationNarrative',
+        'description',
+        'fundingSource',
+        'name',
+        'plannedEndDate',
+        'plannedStartDate',
         'standardsAndConditions',
-        'fundingSource'
+        'summary'
       ],
       owns: {
         goals: 'apdActivityGoal',
@@ -131,28 +136,50 @@ module.exports = {
           throw new Error('activity-name-exists');
         }
       }
+
+      [
+        ['plannedEndDate', 'planned-end-date'],
+        ['plannedStartDate', 'planned-start-date']
+      ].forEach(([prop, errName]) => {
+        if (this.attributes[prop]) {
+          // true to enforce strict parsing
+          const date = moment(this.attributes[prop], 'YYYY-MM-DD', true);
+          if (!date.isValid()) {
+            throw new Error(`activity-${errName}`);
+          }
+
+          // convert to JS date object
+          this.attributes[prop] = date.toDate();
+        } else {
+          // if the date is some kind of falsey, delete it from the
+          // attributes so we don't save it at all
+          delete this.attributes[prop];
+        }
+      });
     },
 
     toJSON() {
       return {
         id: this.get('id'),
-        name: this.get('name'),
-        summary: this.get('summary'),
-        description: this.get('description'),
         alternatives: this.get('alternatives'),
-        goals: this.related('goals'),
         contractorResources: this.related('contractorResources'),
-        expenses: this.related('expenses'),
-        files: this.related('files'),
-        schedule: this.related('schedule'),
-        statePersonnel: this.related('statePersonnel'),
+        costAllocation: this.related('costAllocation'),
         costAllocationNarrative: {
           methodology: this.get('cost_allocation_methodology'),
           otherSources: this.get('other_funding_sources_description')
         },
-        costAllocation: this.related('costAllocation'),
-        standardsAndConditions: this.get('standards_and_conditions'),
+        description: this.get('description'),
+        expenses: this.related('expenses'),
+        files: this.related('files'),
         fundingSource: this.get('funding_source'),
+        goals: this.related('goals'),
+        name: this.get('name'),
+        plannedEndDate: getDate(this.get('planned_end_date')),
+        plannedStartDate: getDate(this.get('planned_start_date')),
+        schedule: this.related('schedule'),
+        standardsAndConditions: this.get('standards_and_conditions'),
+        statePersonnel: this.related('statePersonnel'),
+        summary: this.get('summary'),
         quarterlyFFP: this.related('quarterlyFFP')
       };
     }
