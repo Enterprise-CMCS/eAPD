@@ -1,10 +1,9 @@
 title: Personnel
 subheader: >-
-  Outline personnel resources as part of the activity. Do not include contract personnel.
-helpText: >-
-  Use the checkbox to identify key project personnel including yearly salary and benefits.
+  Identify personnel resources as part of the activity. Do not include contract
+  personnel.
 reminder: >-
-  FTE% is the percentage attributable to the activity.
+  Number of FTEs represent the number of staff of staff (1, 2.5, 4, etc.)
 noDataNotice: There are no personnel resources for this activity.
 labels:
   entryNum: '#'

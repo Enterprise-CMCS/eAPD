@@ -1,5 +1,5 @@
 /*
- * Graphviz of '<open file '<stdin>', mode 'r' at 0x7f953ed540c0>', created 2018-08-31 18:52:25.298023
+ * Graphviz of '<open file '<stdin>', mode 'r' at 0x7f1a8d35c0c0>', created 2018-10-24 15:48:36.571565
  * Generated from https://github.com/rm-hull/sql_graphviz
  */
 digraph g { graph [ rankdir = "LR" ];
@@ -20,6 +20,8 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="alternatives"><font face="Times-bold">alternatives</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="standards_and_conditions"><font face="Times-bold">standards_and_conditions</font>  <font color="#535353">json</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="funding_source"><font face="Times-bold">funding_source</font>  <font color="#535353">character varying ( 32 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="planned_end_date"><font face="Times-bold">planned_end_date</font>  <font color="#535353">date</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="planned_start_date"><font face="Times-bold">planned_start_date</font>  <font color="#535353">date</font></td></tr>
       </table>
     >];
 
@@ -162,11 +164,8 @@ digraph g { graph [ rankdir = "LR" ];
       <table border="0" cellspacing="0" cellborder="1">
         <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">activity_schedule</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="actual_end"><font face="Times-bold">actual_end</font>  <font color="#535353">date</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="actual_start"><font face="Times-bold">actual_start</font>  <font color="#535353">date</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="milestone"><font face="Times-bold">milestone</font>  <font color="#535353">text</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="planned_end"><font face="Times-bold">planned_end</font>  <font color="#535353">date</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="planned_start"><font face="Times-bold">planned_start</font>  <font color="#535353">date</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="end_date"><font face="Times-bold">end_date</font>  <font color="#535353">date</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="status"><font face="Times-bold">status</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
       </table>

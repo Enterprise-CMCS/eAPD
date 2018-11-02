@@ -10,7 +10,7 @@ modularity:
     and exposed application programming interfaces (API); the
     separation of business rules from core programming; and the
     availability of business rules in both human and machine-readable
-    formats.  
+    formats.
     Commitment to formal system development methodology
     and open reusable system architecture is extremely important in
     order to ensure that states can more easily change and maintain
@@ -18,11 +18,11 @@ modularity:
     administrative ecosystem, is designed to deliver person-centric services
     and benefits. Modularity is breaking down systems requirements into
     component parts. Extremely complex systems can be developed as
-    part of a service-oriented architecture (SOA).  
-    Modularity also helps address the challenges of customization. 
+    part of a service-oriented architecture (SOA).
+    Modularity also helps address the challenges of customization.
     Baseline web services and capabilities can be developed for and used
     by anyone, with exceptions for specific business processes handled
-    by a separate module that interoperates with the baseline modules.    
+    by a separate module that interoperates with the baseline modules.
 
     Changes can be made independently to baseline
     capabilities without affecting how the extension works. By doing
@@ -53,7 +53,7 @@ industryStandards:
     civil rights laws; standards adopted by the Secretary under section
     1104 of the Affordable Care Act; and standards and protocols
     adopted by the Secretary under section 1561 of the Affordable
-    Care Act.  
+    Care Act.
     CMS must ensure that Medicaid infrastructure and
     information system investments are made with the assurance that
     timely and reliable adoption of industry standards and productive
@@ -73,14 +73,14 @@ leverage:
     already developed, consistent with a service-oriented architecture,
     from publicly available or commercially sold components and
     products, and from the use of cloud technologies to share
-    infrastructure and applications.  
+    infrastructure and applications.
     CMS commits to work assertively with the states to identify promising
     state systems  that can be leveraged by other states. CMS strongly
     encourages states to move to regional or multi-state solutions
     when cost effective. In addition, CMS will expedite APD approvals for states
     that are participating in shared development activities (including
     developing components intended for successful reuse) with other states.
-    CMS will also review carefully any proposed investments in sub-state systems 
+    CMS will also review carefully any proposed investments in sub-state systems
     when the federal government is asked to share costs of updating or
     maintaining multiple systems performing redundant functions within the same state.
   title: Describe how this activity will support the leverage condition
@@ -89,8 +89,8 @@ businessResults:
   subheader: >-
     Systems should support accurate and timely processing of claims
     (including claims of eligibility), adjudications, and effective
-    communications with providers, beneficiaries, and the public.  
-    An effective system supports and enables an effective business process, 
+    communications with providers, beneficiaries, and the public.
+    An effective system supports and enables an effective business process,
     producing and communicating intended operational results with
     reliability and accuracy. Federal funding are not provided for systems
     unable to support desired business outcomes.
@@ -101,17 +101,17 @@ reporting:
   header: Reporting
   subheader: >-
     Systems should be able to produce and to expose
-     electronically the accurate data that are necessary for oversight,
-     administration, evaluation, integrity, and transparency. These
-     systems should produce reports that contribute to continuous
-     improvement in business operations, transparency, and accountability.
-     
-     Reports should be automatically generated through open interfaces
-     to designated federal repositories or data hubs, with appropriate
-     audit trails. MITA 3.0 will provide additional detail about
-     reporting requirements arising from the Affordable
-     Care Act. Additional details about data definitions, specifications,
-     timing, and routing of information will be supplied at a later date.
+    electronically the accurate data that are necessary for oversight,
+    administration, evaluation, integrity, and transparency. These
+    systems should produce reports that contribute to continuous
+    improvement in business operations, transparency, and accountability.
+
+    Reports should be automatically generated through open interfaces
+    to designated federal repositories or data hubs, with appropriate 
+    audit trails. MITA 3.0 will provide additional detail about
+    reporting requirements arising from the Affordable
+    Care Act. Additional details about data definitions, specifications,
+    timing, and routing of information will be supplied at a later date.
   title: Describe how this activity will support the Reporting condition
 interoperability:
   header: Interoperability
@@ -124,11 +124,11 @@ interoperability:
     services. CMS expects a key outcome government
     technology investments will be improved interaction
     and interoperability to maximize value and minimize costs
-    on providers, beneficiaries, and other stakeholders.  
+    on providers, beneficiaries, and other stakeholders.
     CMS expects Medicaid agencies to work in concert with
     exchanges (whether state or federally administered) to share
     business services and technology investments to produce
-    seamless and efficient customer experiences.  
+    seamless and efficient customer experiences.
 
     Systems must include appropriate architecture, and standardized
     communication protocols to preserve the
@@ -139,9 +139,9 @@ interoperability:
     (data, applications and infrastructure) in order to map its data
     to information sharing requirements."
 
-    The data-sharing architecture addresses conceptual and 
-    logical mechanisms used (i.e., data hubs, repositories, and registries). 
-    It also addresses data semantics, data harmonization strategies, 
+    The data-sharing architecture addresses conceptual and
+    logical mechanisms used (i.e., data hubs, repositories, and registries).
+    It also addresses data semantics, data harmonization strategies,
     shared-data ownership, security and privacy implications and
     quality of shared data.
   title: >-
@@ -155,18 +155,18 @@ mitigationStrategy:
     Maintaining a mitigation plan is an industry standard best practice
     for any major IT build; CMS expects that states will identify
     potential risks and develop strategies to address those risks
-    throughout the system lifecycle.  
+    throughout the system lifecycle.
     Mitigation plans for major
     Medicaid E&E system or MMIS projects should address minimum
     expected functionality, critical success factors, and risk factors
-    tied to major milestones identified in the APD.  
+    tied to major milestones identified in the APD.
     Mitigation plans should also reflect key events and dates that would trigger
     mitigation, and projected timeframe for sunset.
     States should consider strategies to address risks for the M&O project
     phase, such as staffing issues and software upgrades. CMS expects states
     to revise and resubmit their plans to CMS as risks and mitigations
     change along the system lifecycle. States’ proposed mitigations should
-    be commensurate with nature and scope of identified risks.  
+    be commensurate with nature and scope of identified risks.
 
     CMS also expects states will submit mitigation plans with the APDs to
     demonstrate compliance with this condition.
@@ -183,11 +183,11 @@ keyPersonnel:
     team is adequately resourced. States do not need to provide key
     vendor personnel for this requirement.
     As stated in the
-    provision, this information must be included in the APD. 
+    provision, this information must be included in the APD.
     For changes to key personnel that occur after an APD is approved,
     states should notify their CMS points of contact in writing
     (including by email) and formally reflect the change in the next
-    planned APD update.  
+    planned APD update.
     This condition refines and strengthens the existing APD
     requirements regarding personnel resource statements as required
     under 45 CFR 95.610. For Medicaid E&E APDs, states should include
@@ -206,7 +206,7 @@ documentation:
     could be operated by contractors and other users. This condition is
     limited to software that is developed using federal funds; it does
     not apply to commercial off-the-shelf (COTS) software,
-    software-as-a-service, or business-solutions-as-a-service.  
+    software-as-a-service, or business-solutions-as-a-service.
     Adequate documentation means other users could operate software
     with reasonable alterations for specific hardware or operating
     system. CMS is neutral with regrard to hardware or operating
@@ -214,7 +214,7 @@ documentation:
     standards and include components,
     procedures, layouts, interfaces, inputs, outputs, and other
     necessary information to ensure systems could be installed and
-    operated by a variety of contractors or other users.  
+    operated by a variety of contractors or other users.
     While the APD should address how the state plans to maintain documentation,
     documentation is not required with the APD.
     States are responsible for making documentation
@@ -235,8 +235,8 @@ minimizeCost:
     systems. This condition recognizes the significant federal and
     state investments that are involved with major Medicaid IT projects
     and requires that states consider options beyond software that
-    will reduce costs or promote reuse.    
-    States should describe strategies considered when 
+    will reduce costs or promote reuse.
+    States should describe strategies considered when
     deciding which most efficient solution. States are not required to
     adopt a particular strategy, but CMS must have sufficient
     description to evaluate extent the state conisdered
@@ -244,7 +244,7 @@ minimizeCost:
     that offer more opportunities for reuse, lower development costs,
     lower long-term operating costs, and shorter development time as
     well as the extent to which the solutions can be readily implemented
-    with alternate hardware and operating systems.  
+    with alternate hardware and operating systems.
     States should consider this new condition in conjunction with existing APD
     requirements regarding cost benefit analyses required at 45 CFR
     95.605 or § 95.610.
