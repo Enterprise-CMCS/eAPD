@@ -32,15 +32,24 @@
     'avenir next', avenir, 'helvetica neue', helvetica, roboto, noto, 'segoe ui',
     arial, sans-serif;
 
+  --font-size-xl: 1.25rem; /* 20px */
+  --line-height-xl: 1.875rem; /* 30px */
+
+  --font-size-md: 1rem; /* 16px -- this is the base font size for body copy */
+  --line-height-md: 1.5rem; /* 24px */
+
+  --font-size-s: .875rem; /* 14px */
+  --line-height-s: 1.3125rem; /* 21px */
+
   --h0: 2.5rem;
   --h1: 2rem;
   --h2: 1.5rem;
-  --h3: 1.25rem;
-  --h4: 1rem;
-  --h5: 0.875rem;
+  --h3: var(--font-size-xl);
+  --h4: var(--font-size-md);
+  --h5: var(--font-size-s);
   --h6: 0.75rem;
 
-  --bold-font-weight: bold;
+  --bold-font-weight: 700;
 
   --space-tiny: 4px;
   --space-1: 0.5rem;

@@ -53,8 +53,11 @@ class ApdSummary extends Component {
             ))}
           </div>
           <div className="mb3">
-            <div className="mb-tiny bold">{t('apd.overview.labels.desc')}</div>
-            <HelpText text="apd.overview.labels.helpText" />
+            <div className="bold">{t('apd.introduction.title')}</div>
+            <HelpText
+              text="apd.introduction.helpText"
+              reminder="apd.introduction.reminder"
+            />
             <RichText
               content={programOverview}
               onSync={this.syncRichText('programOverview')}
@@ -62,7 +65,7 @@ class ApdSummary extends Component {
           </div>
           <div className="mb3">
             <div className="bold">{t('apd.hit.title')}</div>
-            <HelpText text="apd.hit.helpText" />
+            <HelpText text="apd.hit.helpText" reminder="apd.hit.reminder" />
             <RichText
               content={narrativeHIT}
               onSync={this.syncRichText('narrativeHIT')}
@@ -70,7 +73,7 @@ class ApdSummary extends Component {
           </div>
           <div className="mb3">
             <div className="bold">{t('apd.hie.title')}</div>
-            <HelpText text="apd.hie.helpText" />
+            <HelpText text="apd.hie.helpText" reminder="apd.hie.reminder" />
             <RichText
               content={narrativeHIE}
               onSync={this.syncRichText('narrativeHIE')}
@@ -78,7 +81,7 @@ class ApdSummary extends Component {
           </div>
           <div>
             <div className="bold">{t('apd.mmis.title')}</div>
-            <HelpText text="apd.mmis.helpText" />
+            <HelpText text="apd.mmis.helpText" reminder="apd.mmis.reminder" />
             <RichText
               content={narrativeMMIS}
               onSync={this.syncRichText('narrativeMMIS')}

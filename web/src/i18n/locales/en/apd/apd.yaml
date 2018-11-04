@@ -8,22 +8,22 @@ helpText: >-
 overview:
   title: Program Overview
   helpText: >-
-    Provide a brief, high level summary of the state program including history,
-    and future vision. Include history and summary of future
-    vision of the state program.
+    Provide a high level summary of the state program including history,
+    and future vision. Include history and summary of future vision of the
+    state program.
   reminder: >-
 
   yearsCovered: Choose the federal fiscal year(s) this APD covers.
-  labels:
-    desc: Program Introduction
-    reminder: >-
-      Provide a brief, high level summary of the state program, history,
-      and future vision.
+
+introduction:
+  title: Program Introduction
+  helpText: >-
+    Provide an introduction for the program including context, history, and the state's future vision.
+
 hit:
   title: HIT Overview
   helpText: >-
-    Summarize briefly planned HIT funded activities contained within this
-    APD.
+    Briefly summarize planned HIT funded activities contained within this APD.
   reminder: >-
 
 hie:
@@ -40,12 +40,11 @@ hie:
 
     (4) The role of state government in governance and policy-setting.
   reminder: >-
-    (If there are no HIE activities, skip this
-    section.):
-    CMS recommends states connect to regional CMS HITECH
-    contacts prior to developing HIE funding request. HIE funding
-    requests are complex. Early consultation with CMS facilitates a
-    more efficient approval process.
+    CMS recommends states connect to regional CMS HITECH contacts prior to
+    developing HIE funding request. HIE funding requests are complex. Early
+    consultation with CMS facilitates a more efficient approval process. (If
+    there are no HIE activities, skip this section.)
+
 mmis:
   title: MMIS Overview
   helpText: >-

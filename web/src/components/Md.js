@@ -16,7 +16,7 @@ Md.propTypes = {
 };
 
 Md.defaultProps = {
-  wrapper: 'span'
+  wrapper: 'p'
 };
 
 export default Md;

@@ -70,6 +70,10 @@ describe('the ContractorResources component', () => {
     const component = shallow(<ContractorResources {...props} />);
 
     component
+      .find('CollapsibleList')
+      .dive()
+      .find('ListItem')
+      .dive()
       .find('ContractorForm')
       .dive()
       .find('Btn[children="✗"]')
@@ -82,6 +86,10 @@ describe('the ContractorResources component', () => {
 
   test('handles changing contractor info', () => {
     const component = shallow(<ContractorResources {...props} />)
+      .find('CollapsibleList')
+      .dive()
+      .find('ListItem')
+      .dive()
       .find('ContractorForm')
       .dive();
 
@@ -108,6 +116,10 @@ describe('the ContractorResources component', () => {
 
   test('handles changing contractor expense info', () => {
     const component = shallow(<ContractorResources {...props} />)
+      .find('CollapsibleList')
+      .dive()
+      .find('ListItem')
+      .dive()
       .find('ContractorForm')
       .dive();
     const yearInput = component
