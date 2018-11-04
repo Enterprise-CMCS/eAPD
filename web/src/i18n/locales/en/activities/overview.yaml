@@ -1,5 +1,6 @@
 title: Activity Overview
 helpText: >-
+  Provide a short overview of the activity. Details for the activity go in the section below.
 reminder: >-
 
 summary:
@@ -13,25 +14,28 @@ detail:
   # Standard is for HIT and MMIS
   standard:
     subheader:
-
+    helpText: >-
+      Include as much detail as is necessary to explain the activity.
   hie:
     subheader:
     helpText: >-
-      Detail linkage to meaningful use, including value proposition to providers, and a sustainability plan describing how the activity will be sustained after HIE DDI funding is exhausted.
+      Detail linkage to meaningful use, including value proposition to providers,
+      and a sustainability plan describing how the activity will be sustained after
+      HIE DDI funding is exhausted.
     reminder: >-
       Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
   hit:
     subheader:
     helpText: >-
       Summarize activity needs for how requested funding will be used (e.g. administrative, outreach,
-      auditing, Public Health Registry Development, etc)
+      auditing, Public Health Registry Development, etc).
     reminder: >-
       Detail plans for requested funds in this section.
   mmis:
     subheader:
     helpText: >-
-      Summarize activity needs for how requested funding will be used (e.g. administrative, outreach,
-      auditing, Public Health Registry Development, etc)
+      Summarize activity needs for how requested funding will be used (e.g. administrative,
+      outreach, auditing, Public Health Registry Development, etc).
     reminder: >-
       Detail plans for requested funds in this section.
 
@@ -40,6 +44,8 @@ alternatives:
   subheader: >-
     Statement of alternative considerations and supporting justification
   helpText: >-
-    If substantive changes have been made, include statement describing alternative considerations made before selecting implementation strategy.
+    If substantive changes have been made, include statement describing alternative
+    considerations made before selecting implementation strategy.
   reminder: >-
-    If not, including statement of alternative considerations from previous versions of IAPD or SMHP.
+    If substantive changes have not been made, include a statement of alternative considerations from the previous version
+    of IAPD.

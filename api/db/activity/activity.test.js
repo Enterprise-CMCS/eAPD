@@ -1,3 +1,4 @@
+const moment = require('moment');
 const tap = require('tap');
 const sinon = require('sinon');
 
@@ -24,13 +25,15 @@ tap.test('activity data model', async activityModelTests => {
 
           static: {
             updateableFields: [
-              'name',
-              'summary',
-              'description',
               'alternatives',
               'costAllocationNarrative',
+              'description',
+              'fundingSource',
+              'name',
+              'plannedEndDate',
+              'plannedStartDate',
               'standardsAndConditions',
-              'fundingSource'
+              'summary'
             ],
             owns: {
               goals: 'apdActivityGoal',
@@ -263,7 +266,7 @@ tap.test('activity data model', async activityModelTests => {
           self.fetchAll.resolves([]);
 
           await validate();
-          test.ok('validate resolves');
+          test.ok(true, 'validate resolves');
           test.ok(
             self.where.calledWith({ apd_id: 'apd id', name: 'valid name' })
           );
@@ -277,7 +280,7 @@ tap.test('activity data model', async activityModelTests => {
         try {
           await validate();
         } catch (e) {
-          test.ok('rejects on an empty name');
+          test.ok(true, 'rejects on an empty name');
           test.equal(
             e.message,
             'activity-name-invalid',
@@ -293,7 +296,7 @@ tap.test('activity data model', async activityModelTests => {
         try {
           await validate();
         } catch (e) {
-          test.ok('rejects on an numeric name');
+          test.ok(true, 'rejects on an numeric name');
           test.equal(
             e.message,
             'activity-name-invalid',
@@ -311,7 +314,7 @@ tap.test('activity data model', async activityModelTests => {
           try {
             await validate();
           } catch (e) {
-            test.ok('rejects on an empty name');
+            test.ok(true, 'rejects on an empty name');
             test.equal(
               e.message,
               'activity-name-invalid',
@@ -330,7 +333,7 @@ tap.test('activity data model', async activityModelTests => {
         try {
           await validate();
         } catch (e) {
-          test.ok('rejects if the name already exists');
+          test.ok(true, 'rejects if the name already exists');
           test.ok(
             self.where.calledWith({ apd_id: 'apd id', name: 'valid name' })
           );
@@ -340,6 +343,57 @@ tap.test('activity data model', async activityModelTests => {
             'rejects with the expected message'
           );
         }
+      });
+
+      validationTests.test('deletes falsey date attributes', async test => {
+        self.attributes.plannedEndDate = false;
+        self.attributes.plannedStartDate = 0;
+
+        await validate();
+        test.type(
+          self.attributes.plannedEndDate,
+          'undefined',
+          'end date is deleted'
+        );
+        test.type(
+          self.attributes.plannedStartDate,
+          'undefined',
+          'start date is deleted'
+        );
+      });
+
+      validationTests.test('rejects if dates are invalid', async test => {
+        self.attributes.plannedEndDate = 'invalid gunk';
+        try {
+          await validate();
+        } catch (e) {
+          test.ok(true, 'rejects invalid end date');
+          test.equal(
+            e.message,
+            'activity-planned-end-date',
+            'rejects with the expected message'
+          );
+        }
+
+        delete self.attributes.plannedEndDate;
+        self.attributes.plannedStartDate = 'invalid gunk';
+        try {
+          await validate();
+        } catch (e) {
+          test.ok(true, 'rejects invalid start date');
+          test.equal(
+            e.message,
+            'activity-planned-start-date',
+            'rejects with the expected message'
+          );
+        }
+      });
+
+      validationTests.test('passes if dates are valid', async test => {
+        self.attributes.plannedEndDate = '1977-09-05'; // Voyager 1 launched
+        self.attributes.plannedStartDate = '2004-06-30'; // Cassini reaches Saturn system
+        await validate();
+        test.ok(true, 'resolves');
       });
     }
   );
@@ -371,6 +425,13 @@ tap.test('activity data model', async activityModelTests => {
         .returns('cost allocation by year');
       self.related.withArgs('files').returns('file file file');
 
+      self.get
+        .withArgs('planned_end_date')
+        .returns(moment('1957-10-04').toDate()); // Sputnik 1 launched
+      self.get
+        .withArgs('planned_start_date')
+        .returns(moment('1974-02-08').toDate()); // Final Skylab crew returns to Earth
+
       const output = activity.apdActivity.toJSON.bind(self)();
 
       apdTests.match(
@@ -389,7 +450,9 @@ tap.test('activity data model', async activityModelTests => {
           files: 'file file file',
           goals: 'goooooaaaaals',
           standardsAndConditions: 'nobody reads them',
-          fundingSource: 'bitcoin'
+          fundingSource: 'bitcoin',
+          plannedEndDate: '1957-10-04',
+          plannedStartDate: '1974-02-08'
         },
         'gives us back the right JSON-ified object'
       );

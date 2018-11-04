@@ -99,13 +99,13 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <SectionTitle>
-          Performance Measures and Benchmarks
+          Performance Goals and Benchmarks
         </SectionTitle>,
         <div>
-          List the goals and objectives the state plans to accomplish as part of this activity.
+          Explain the state’s goals for this activity.
         </div>,
         <SectionDesc>
-          Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.
+          Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.
         </SectionDesc>,
         "test child",
       ],
@@ -119,10 +119,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "Performance Measures and Benchmarks",
+          "children": "Performance Goals and Benchmarks",
         },
         "ref": null,
-        "rendered": "Performance Measures and Benchmarks",
+        "rendered": "Performance Goals and Benchmarks",
         "type": [Function],
       },
       Object {
@@ -130,10 +130,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "List the goals and objectives the state plans to accomplish as part of this activity.",
+          "children": "Explain the state’s goals for this activity.",
         },
         "ref": null,
-        "rendered": "List the goals and objectives the state plans to accomplish as part of this activity.",
+        "rendered": "Explain the state’s goals for this activity.",
         "type": "div",
       },
       Object {
@@ -141,10 +141,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
+          "children": "Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.",
         },
         "ref": null,
-        "rendered": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
+        "rendered": "Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.",
         "type": [Function],
       },
       "test child",
@@ -159,13 +159,13 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <SectionTitle>
-            Performance Measures and Benchmarks
+            Performance Goals and Benchmarks
           </SectionTitle>,
           <div>
-            List the goals and objectives the state plans to accomplish as part of this activity.
+            Explain the state’s goals for this activity.
           </div>,
           <SectionDesc>
-            Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.
+            Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.
           </SectionDesc>,
           "test child",
         ],
@@ -179,10 +179,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "Performance Measures and Benchmarks",
+            "children": "Performance Goals and Benchmarks",
           },
           "ref": null,
-          "rendered": "Performance Measures and Benchmarks",
+          "rendered": "Performance Goals and Benchmarks",
           "type": [Function],
         },
         Object {
@@ -190,10 +190,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "List the goals and objectives the state plans to accomplish as part of this activity.",
+            "children": "Explain the state’s goals for this activity.",
           },
           "ref": null,
-          "rendered": "List the goals and objectives the state plans to accomplish as part of this activity.",
+          "rendered": "Explain the state’s goals for this activity.",
           "type": "div",
         },
         Object {
@@ -201,10 +201,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
+            "children": "Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.",
           },
           "ref": null,
-          "rendered": "Briefly describe how each goal relates to the vision identified in the program summary. Each goal should have a matching activity.",
+          "rendered": "Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.",
           "type": [Function],
         },
         "test child",
@@ -242,7 +242,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": "test child",
-      "className": "mb4 h3",
+      "className": "mb4 text-xl",
     },
     "ref": null,
     "rendered": "test child",
@@ -255,7 +255,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": "test child",
-        "className": "mb4 h3",
+        "className": "mb4 text-xl",
       },
       "ref": null,
       "rendered": "test child",
@@ -474,7 +474,7 @@ ShallowWrapper {
         <div
           className="mb-tiny bold"
         >
-          List the goals and objectives the state plans to accomplish as part of this activity.
+          Explain the state’s goals for this activity.
         </div>,
         <HelpText
           reminder="activities.goals.reminder"
@@ -490,11 +490,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "List the goals and objectives the state plans to accomplish as part of this activity.",
+          "children": "Explain the state’s goals for this activity.",
           "className": "mb-tiny bold",
         },
         "ref": null,
-        "rendered": "List the goals and objectives the state plans to accomplish as part of this activity.",
+        "rendered": "Explain the state’s goals for this activity.",
         "type": "div",
       },
       Object {
@@ -523,7 +523,7 @@ ShallowWrapper {
           <div
             className="mb-tiny bold"
           >
-            List the goals and objectives the state plans to accomplish as part of this activity.
+            Explain the state’s goals for this activity.
           </div>,
           <HelpText
             reminder="activities.goals.reminder"
@@ -539,11 +539,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "List the goals and objectives the state plans to accomplish as part of this activity.",
+            "children": "Explain the state’s goals for this activity.",
             "className": "mb-tiny bold",
           },
           "ref": null,
-          "rendered": "List the goals and objectives the state plans to accomplish as part of this activity.",
+          "rendered": "Explain the state’s goals for this activity.",
           "type": "div",
         },
         Object {
