@@ -1,8 +1,6 @@
 title: Results of Previous Activities
-? helpText
-reminder: >-
-  Include a description of the results of previously approved activities.
-  section: results of previous activities.
+helpText: >-
+  Provide a description of the results of previously approved activities.
 outline:
   title: Prior Activities Outline
   helpText: >-
@@ -10,9 +8,6 @@ outline:
     previous APD that are completed, in-progress, or on-hold.
   reminder: >-
   label: Previous Activities Summary
-approvedExpenses:
-  title: Approved Costs
-  helpText: Input the most recent approved costs.
 actualExpenses:
   title: Actual Costs
   helpText: Input the most recent actual costs.

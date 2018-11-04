@@ -64,44 +64,13 @@ ShallowWrapper {
         <div
           className="mt3 pt3 border-top border-grey"
         >
-          <div>
-            <MiniHeader
-              content={
-                Array [
-                  <div
-                    className="col-3 truncate"
-                  >
-                    1066
-                    :
-                     
-                    <span
-                      className="bold mono"
-                    >
-                      $100
-                    </span>
-                  </div>,
-                  <div
-                    className="col-3 truncate"
-                  >
-                    1067
-                    :
-                     
-                    <span
-                      className="bold mono"
-                    >
-                      $200
-                    </span>
-                  </div>,
-                ]
-              }
-              handleDelete={[Function]}
-              number={1}
-              title="contractor name"
-              titleColumns={4}
-              toggleForm={[Function]}
-            />
-            <ContractorForm
-              contractor={
+          <CollapsibleList
+            content={[Function]}
+            deleteItem={[Function]}
+            getKey={[Function]}
+            header={[Function]}
+            items={
+              Array [
                 Object {
                   "desc": "contractor description",
                   "end": "end date",
@@ -126,27 +95,10 @@ ShallowWrapper {
                     "1066": 100,
                     "1067": 200,
                   },
-                }
-              }
-              docType="Contract"
-              handleChange={[Function]}
-              handleDelete={[Function]}
-              handleDocChange={[Function]}
-              handleFileDelete={[Function]}
-              handleFileUpload={[Function]}
-              handleHourlyChange={[Function]}
-              handleTermChange={[Function]}
-              handleUseHourly={[Function]}
-              handleYearChange={[Function]}
-              idx={0}
-              years={
-                Array [
-                  "1066",
-                  "1067",
-                ]
-              }
-            />
-          </div>
+                },
+              ]
+            }
+          />
         </div>,
         <Btn
           extraCss={null}
@@ -169,281 +121,85 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": Array [
-            <div>
-              <MiniHeader
-                content={
-                  Array [
-                    <div
-                      className="col-3 truncate"
-                    >
-                      1066
-                      :
-                       
-                      <span
-                        className="bold mono"
-                      >
-                        $100
-                      </span>
-                    </div>,
-                    <div
-                      className="col-3 truncate"
-                    >
-                      1067
-                      :
-                       
-                      <span
-                        className="bold mono"
-                      >
-                        $200
-                      </span>
-                    </div>,
-                  ]
-                }
-                handleDelete={[Function]}
-                number={1}
-                title="contractor name"
-                titleColumns={4}
-                toggleForm={[Function]}
-              />
-              <ContractorForm
-                contractor={
-                  Object {
-                    "desc": "contractor description",
-                    "end": "end date",
-                    "hourly": Object {
-                      "data": Object {
-                        "1066": Object {
-                          "hours": "",
-                          "rate": "",
-                        },
-                        "1067": Object {
-                          "hours": "",
-                          "rate": "",
-                        },
+          "children": <CollapsibleList
+            content={[Function]}
+            deleteItem={[Function]}
+            getKey={[Function]}
+            header={[Function]}
+            items={
+              Array [
+                Object {
+                  "desc": "contractor description",
+                  "end": "end date",
+                  "hourly": Object {
+                    "data": Object {
+                      "1066": Object {
+                        "hours": "",
+                        "rate": "",
                       },
-                      "useHourly": false,
+                      "1067": Object {
+                        "hours": "",
+                        "rate": "",
+                      },
                     },
-                    "id": "contractor id",
-                    "key": "contractor key",
-                    "name": "contractor name",
-                    "start": "start date",
-                    "years": Object {
-                      "1066": 100,
-                      "1067": 200,
-                    },
-                  }
-                }
-                docType="Contract"
-                handleChange={[Function]}
-                handleDelete={[Function]}
-                handleDocChange={[Function]}
-                handleFileDelete={[Function]}
-                handleFileUpload={[Function]}
-                handleHourlyChange={[Function]}
-                handleTermChange={[Function]}
-                handleUseHourly={[Function]}
-                handleYearChange={[Function]}
-                idx={0}
-                years={
-                  Array [
-                    "1066",
-                    "1067",
-                  ]
-                }
-              />
-            </div>,
-          ],
+                    "useHourly": false,
+                  },
+                  "id": "contractor id",
+                  "key": "contractor key",
+                  "name": "contractor name",
+                  "start": "start date",
+                  "years": Object {
+                    "1066": 100,
+                    "1067": 200,
+                  },
+                },
+              ]
+            }
+          />,
           "className": "mt3 pt3 border-top border-grey",
         },
         "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": "contractor key",
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <MiniHeader
-                  content={
-                    Array [
-                      <div
-                        className="col-3 truncate"
-                      >
-                        1066
-                        :
-                         
-                        <span
-                          className="bold mono"
-                        >
-                          $100
-                        </span>
-                      </div>,
-                      <div
-                        className="col-3 truncate"
-                      >
-                        1067
-                        :
-                         
-                        <span
-                          className="bold mono"
-                        >
-                          $200
-                        </span>
-                      </div>,
-                    ]
-                  }
-                  handleDelete={[Function]}
-                  number={1}
-                  title="contractor name"
-                  titleColumns={4}
-                  toggleForm={[Function]}
-                />,
-                <ContractorForm
-                  contractor={
-                    Object {
-                      "desc": "contractor description",
-                      "end": "end date",
-                      "hourly": Object {
-                        "data": Object {
-                          "1066": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                          "1067": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                        },
-                        "useHourly": false,
-                      },
-                      "id": "contractor id",
-                      "key": "contractor key",
-                      "name": "contractor name",
-                      "start": "start date",
-                      "years": Object {
-                        "1066": 100,
-                        "1067": 200,
-                      },
-                    }
-                  }
-                  docType="Contract"
-                  handleChange={[Function]}
-                  handleDelete={[Function]}
-                  handleDocChange={[Function]}
-                  handleFileDelete={[Function]}
-                  handleFileUpload={[Function]}
-                  handleHourlyChange={[Function]}
-                  handleTermChange={[Function]}
-                  handleUseHourly={[Function]}
-                  handleYearChange={[Function]}
-                  idx={0}
-                  years={
-                    Array [
-                      "1066",
-                      "1067",
-                    ]
-                  }
-                />,
-              ],
-            },
-            "ref": null,
-            "rendered": Array [
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "content": [Function],
+            "deleteItem": [Function],
+            "getKey": [Function],
+            "header": [Function],
+            "items": Array [
               Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "content": Array [
-                    <div
-                      className="col-3 truncate"
-                    >
-                      1066
-                      :
-                       
-                      <span
-                        className="bold mono"
-                      >
-                        $100
-                      </span>
-                    </div>,
-                    <div
-                      className="col-3 truncate"
-                    >
-                      1067
-                      :
-                       
-                      <span
-                        className="bold mono"
-                      >
-                        $200
-                      </span>
-                    </div>,
-                  ],
-                  "handleDelete": [Function],
-                  "number": 1,
-                  "title": "contractor name",
-                  "titleColumns": 4,
-                  "toggleForm": [Function],
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": "contractor key",
-                "nodeType": "function",
-                "props": Object {
-                  "contractor": Object {
-                    "desc": "contractor description",
-                    "end": "end date",
-                    "hourly": Object {
-                      "data": Object {
-                        "1066": Object {
-                          "hours": "",
-                          "rate": "",
-                        },
-                        "1067": Object {
-                          "hours": "",
-                          "rate": "",
-                        },
-                      },
-                      "useHourly": false,
+                "desc": "contractor description",
+                "end": "end date",
+                "hourly": Object {
+                  "data": Object {
+                    "1066": Object {
+                      "hours": "",
+                      "rate": "",
                     },
-                    "id": "contractor id",
-                    "key": "contractor key",
-                    "name": "contractor name",
-                    "start": "start date",
-                    "years": Object {
-                      "1066": 100,
-                      "1067": 200,
+                    "1067": Object {
+                      "hours": "",
+                      "rate": "",
                     },
                   },
-                  "docType": "Contract",
-                  "handleChange": [Function],
-                  "handleDelete": [Function],
-                  "handleDocChange": [Function],
-                  "handleFileDelete": [Function],
-                  "handleFileUpload": [Function],
-                  "handleHourlyChange": [Function],
-                  "handleTermChange": [Function],
-                  "handleUseHourly": [Function],
-                  "handleYearChange": [Function],
-                  "idx": 0,
-                  "years": Array [
-                    "1066",
-                    "1067",
-                  ],
+                  "useHourly": false,
                 },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
+                "id": "contractor id",
+                "key": "contractor key",
+                "name": "contractor name",
+                "start": "start date",
+                "years": Object {
+                  "1066": 100,
+                  "1067": 200,
+                },
               },
             ],
-            "type": "div",
           },
-        ],
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
         "type": "div",
       },
       Object {
@@ -474,44 +230,13 @@ ShallowWrapper {
           <div
             className="mt3 pt3 border-top border-grey"
           >
-            <div>
-              <MiniHeader
-                content={
-                  Array [
-                    <div
-                      className="col-3 truncate"
-                    >
-                      1066
-                      :
-                       
-                      <span
-                        className="bold mono"
-                      >
-                        $100
-                      </span>
-                    </div>,
-                    <div
-                      className="col-3 truncate"
-                    >
-                      1067
-                      :
-                       
-                      <span
-                        className="bold mono"
-                      >
-                        $200
-                      </span>
-                    </div>,
-                  ]
-                }
-                handleDelete={[Function]}
-                number={1}
-                title="contractor name"
-                titleColumns={4}
-                toggleForm={[Function]}
-              />
-              <ContractorForm
-                contractor={
+            <CollapsibleList
+              content={[Function]}
+              deleteItem={[Function]}
+              getKey={[Function]}
+              header={[Function]}
+              items={
+                Array [
                   Object {
                     "desc": "contractor description",
                     "end": "end date",
@@ -536,27 +261,10 @@ ShallowWrapper {
                       "1066": 100,
                       "1067": 200,
                     },
-                  }
-                }
-                docType="Contract"
-                handleChange={[Function]}
-                handleDelete={[Function]}
-                handleDocChange={[Function]}
-                handleFileDelete={[Function]}
-                handleFileUpload={[Function]}
-                handleHourlyChange={[Function]}
-                handleTermChange={[Function]}
-                handleUseHourly={[Function]}
-                handleYearChange={[Function]}
-                idx={0}
-                years={
-                  Array [
-                    "1066",
-                    "1067",
-                  ]
-                }
-              />
-            </div>
+                  },
+                ]
+              }
+            />
           </div>,
           <Btn
             extraCss={null}
@@ -579,281 +287,85 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": Array [
-              <div>
-                <MiniHeader
-                  content={
-                    Array [
-                      <div
-                        className="col-3 truncate"
-                      >
-                        1066
-                        :
-                         
-                        <span
-                          className="bold mono"
-                        >
-                          $100
-                        </span>
-                      </div>,
-                      <div
-                        className="col-3 truncate"
-                      >
-                        1067
-                        :
-                         
-                        <span
-                          className="bold mono"
-                        >
-                          $200
-                        </span>
-                      </div>,
-                    ]
-                  }
-                  handleDelete={[Function]}
-                  number={1}
-                  title="contractor name"
-                  titleColumns={4}
-                  toggleForm={[Function]}
-                />
-                <ContractorForm
-                  contractor={
-                    Object {
-                      "desc": "contractor description",
-                      "end": "end date",
-                      "hourly": Object {
-                        "data": Object {
-                          "1066": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                          "1067": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
+            "children": <CollapsibleList
+              content={[Function]}
+              deleteItem={[Function]}
+              getKey={[Function]}
+              header={[Function]}
+              items={
+                Array [
+                  Object {
+                    "desc": "contractor description",
+                    "end": "end date",
+                    "hourly": Object {
+                      "data": Object {
+                        "1066": Object {
+                          "hours": "",
+                          "rate": "",
                         },
-                        "useHourly": false,
+                        "1067": Object {
+                          "hours": "",
+                          "rate": "",
+                        },
                       },
-                      "id": "contractor id",
-                      "key": "contractor key",
-                      "name": "contractor name",
-                      "start": "start date",
-                      "years": Object {
-                        "1066": 100,
-                        "1067": 200,
-                      },
-                    }
-                  }
-                  docType="Contract"
-                  handleChange={[Function]}
-                  handleDelete={[Function]}
-                  handleDocChange={[Function]}
-                  handleFileDelete={[Function]}
-                  handleFileUpload={[Function]}
-                  handleHourlyChange={[Function]}
-                  handleTermChange={[Function]}
-                  handleUseHourly={[Function]}
-                  handleYearChange={[Function]}
-                  idx={0}
-                  years={
-                    Array [
-                      "1066",
-                      "1067",
-                    ]
-                  }
-                />
-              </div>,
-            ],
+                      "useHourly": false,
+                    },
+                    "id": "contractor id",
+                    "key": "contractor key",
+                    "name": "contractor name",
+                    "start": "start date",
+                    "years": Object {
+                      "1066": 100,
+                      "1067": 200,
+                    },
+                  },
+                ]
+              }
+            />,
             "className": "mt3 pt3 border-top border-grey",
           },
           "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": "contractor key",
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <MiniHeader
-                    content={
-                      Array [
-                        <div
-                          className="col-3 truncate"
-                        >
-                          1066
-                          :
-                           
-                          <span
-                            className="bold mono"
-                          >
-                            $100
-                          </span>
-                        </div>,
-                        <div
-                          className="col-3 truncate"
-                        >
-                          1067
-                          :
-                           
-                          <span
-                            className="bold mono"
-                          >
-                            $200
-                          </span>
-                        </div>,
-                      ]
-                    }
-                    handleDelete={[Function]}
-                    number={1}
-                    title="contractor name"
-                    titleColumns={4}
-                    toggleForm={[Function]}
-                  />,
-                  <ContractorForm
-                    contractor={
-                      Object {
-                        "desc": "contractor description",
-                        "end": "end date",
-                        "hourly": Object {
-                          "data": Object {
-                            "1066": Object {
-                              "hours": "",
-                              "rate": "",
-                            },
-                            "1067": Object {
-                              "hours": "",
-                              "rate": "",
-                            },
-                          },
-                          "useHourly": false,
-                        },
-                        "id": "contractor id",
-                        "key": "contractor key",
-                        "name": "contractor name",
-                        "start": "start date",
-                        "years": Object {
-                          "1066": 100,
-                          "1067": 200,
-                        },
-                      }
-                    }
-                    docType="Contract"
-                    handleChange={[Function]}
-                    handleDelete={[Function]}
-                    handleDocChange={[Function]}
-                    handleFileDelete={[Function]}
-                    handleFileUpload={[Function]}
-                    handleHourlyChange={[Function]}
-                    handleTermChange={[Function]}
-                    handleUseHourly={[Function]}
-                    handleYearChange={[Function]}
-                    idx={0}
-                    years={
-                      Array [
-                        "1066",
-                        "1067",
-                      ]
-                    }
-                  />,
-                ],
-              },
-              "ref": null,
-              "rendered": Array [
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "content": [Function],
+              "deleteItem": [Function],
+              "getKey": [Function],
+              "header": [Function],
+              "items": Array [
                 Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {
-                    "content": Array [
-                      <div
-                        className="col-3 truncate"
-                      >
-                        1066
-                        :
-                         
-                        <span
-                          className="bold mono"
-                        >
-                          $100
-                        </span>
-                      </div>,
-                      <div
-                        className="col-3 truncate"
-                      >
-                        1067
-                        :
-                         
-                        <span
-                          className="bold mono"
-                        >
-                          $200
-                        </span>
-                      </div>,
-                    ],
-                    "handleDelete": [Function],
-                    "number": 1,
-                    "title": "contractor name",
-                    "titleColumns": 4,
-                    "toggleForm": [Function],
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": "contractor key",
-                  "nodeType": "function",
-                  "props": Object {
-                    "contractor": Object {
-                      "desc": "contractor description",
-                      "end": "end date",
-                      "hourly": Object {
-                        "data": Object {
-                          "1066": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                          "1067": Object {
-                            "hours": "",
-                            "rate": "",
-                          },
-                        },
-                        "useHourly": false,
+                  "desc": "contractor description",
+                  "end": "end date",
+                  "hourly": Object {
+                    "data": Object {
+                      "1066": Object {
+                        "hours": "",
+                        "rate": "",
                       },
-                      "id": "contractor id",
-                      "key": "contractor key",
-                      "name": "contractor name",
-                      "start": "start date",
-                      "years": Object {
-                        "1066": 100,
-                        "1067": 200,
+                      "1067": Object {
+                        "hours": "",
+                        "rate": "",
                       },
                     },
-                    "docType": "Contract",
-                    "handleChange": [Function],
-                    "handleDelete": [Function],
-                    "handleDocChange": [Function],
-                    "handleFileDelete": [Function],
-                    "handleFileUpload": [Function],
-                    "handleHourlyChange": [Function],
-                    "handleTermChange": [Function],
-                    "handleUseHourly": [Function],
-                    "handleYearChange": [Function],
-                    "idx": 0,
-                    "years": Array [
-                      "1066",
-                      "1067",
-                    ],
+                    "useHourly": false,
                   },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
+                  "id": "contractor id",
+                  "key": "contractor key",
+                  "name": "contractor name",
+                  "start": "start date",
+                  "years": Object {
+                    "1066": 100,
+                    "1067": 200,
+                  },
                 },
               ],
-              "type": "div",
             },
-          ],
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
           "type": "div",
         },
         Object {

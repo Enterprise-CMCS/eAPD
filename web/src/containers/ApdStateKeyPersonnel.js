@@ -10,9 +10,8 @@ import {
 } from '../actions/apd';
 import Btn from '../components/Btn';
 import { DollarInput, Input, PercentInput } from '../components/Inputs';
-import MiniHeader from '../components/MiniHeader';
+import List from '../components/CollapsibleList';
 import { t } from '../i18n';
-import { arrToObj } from '../util';
 import { formatMoney } from '../util/formats';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
@@ -134,35 +133,6 @@ PersonForm.propTypes = {
 };
 
 class ApdStateKeyPersonnel extends Component {
-  static getDerivedStateFromProps(props, state) {
-    const { poc: data } = props;
-    const lastKey = data.length ? data[data.length - 1].key : null;
-
-    if (lastKey && !(lastKey in state.showForm)) {
-      return {
-        showForm: {
-          ...arrToObj(Object.keys(state.showForm), false),
-          [lastKey]: true
-        }
-      };
-    }
-
-    return null;
-  }
-
-  constructor(props) {
-    super(props);
-
-    const peopleKeys = props.poc.map(p => p.key);
-
-    const showForm = peopleKeys.reduce(
-      (obj, key, i) => ({ ...obj, [key]: i === 0 }),
-      {}
-    );
-
-    this.state = { showForm };
-  }
-
   handleChange = (field, index) => e => {
     const { updateApd } = this.props;
     updateApd({
@@ -180,62 +150,49 @@ class ApdStateKeyPersonnel extends Component {
     updateApd(updates);
   };
 
-  toggleForm = personKey => () => {
-    this.setState(prev => ({
-      showForm: {
-        ...prev.showForm,
-        [personKey]: !prev.showForm[personKey]
-      }
-    }));
-  };
+  removePerson = (_, i) => this.props.removeKeyPerson(i);
 
   render() {
     const {
       addKeyPerson: addPerson,
       poc,
-      removeKeyPerson: removePerson,
       setPrimaryKeyPerson: setPrimary,
       years
     } = this.props;
-    const { showForm } = this.state;
 
     return (
       <Fragment>
-        {poc.map((person, i) => (
-          <Fragment key={person.key}>
-            <MiniHeader
-              handleDelete={() => removePerson(i)}
-              number={i + 1}
-              title={person.name || 'Name'}
-              toggleForm={this.toggleForm(person.key)}
-              content={
-                <Fragment>
-                  <div className="col4 truncate">
-                    Role: <strong>{person.position}</strong>
-                  </div>
-                  <div className="col4 truncate">
-                    Total cost:{' '}
-                    <strong>
-                      {formatMoney(
-                        person.hasCosts ? personTotalCost(person) : 0
-                      )}
-                    </strong>
-                  </div>
-                </Fragment>
-              }
+        <List
+          items={poc}
+          getKey={person => person.key}
+          deleteItem={this.removePerson}
+          header={(person, i) => (
+            <Fragment>
+              <div className="col-6 truncate">
+                {i + 1}. <strong>{person.name || 'Name'}</strong>
+              </div>
+              <div className="col-3 truncate">
+                Role: <strong>{person.position}</strong>
+              </div>
+              <div className="col-3 truncate">
+                Total cost:{' '}
+                <strong>
+                  {formatMoney(person.hasCosts ? personTotalCost(person) : 0)}
+                </strong>
+              </div>
+            </Fragment>
+          )}
+          content={(person, i) => (
+            <PersonForm
+              idx={i}
+              person={person}
+              years={years}
+              handleChange={this.handleChange}
+              handleYearChange={this.handleYearChange}
+              setPrimary={setPrimary}
             />
-            {showForm[person.key] && (
-              <PersonForm
-                idx={i}
-                person={person}
-                years={years}
-                handleChange={this.handleChange}
-                handleYearChange={this.handleYearChange}
-                setPrimary={setPrimary}
-              />
-            )}
-          </Fragment>
-        ))}
+          )}
+        />
 
         <Btn onClick={addPerson}>
           {t('apd.stateProfile.keyPersonnel.labels.addButton', {
