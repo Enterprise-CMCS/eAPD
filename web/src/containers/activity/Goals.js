@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -8,11 +8,10 @@ import {
   updateActivity as updateActivityAction
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
+import CollapsibleList from '../../components/CollapsibleList';
 import { RichText } from '../../components/Inputs';
-import MiniHeader from '../../components/MiniHeader';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection, SubsectionChunk } from '../../components/Section';
-import { arrToObj } from '../../util';
 import { t } from '../../i18n';
 
 const plaintext = txt => {
@@ -61,42 +60,7 @@ GoalForm.propTypes = {
 };
 
 class Goals extends Component {
-  static getDerivedStateFromProps(props, state) {
-    const { goals: data } = props;
-    const lastKey = data.length ? data[data.length - 1].key : null;
-
-    if (lastKey && !(lastKey in state.showForm)) {
-      return {
-        showForm: {
-          ...arrToObj(Object.keys(state.showForm), false),
-          [lastKey]: true
-        }
-      };
-    }
-
-    return null;
-  }
-
-  constructor(props) {
-    super(props);
-
-    const goalKeys = props.goals.map(e => e.key);
-
-    const showForm = goalKeys.reduce(
-      (obj, key, i) => ({ ...obj, [key]: i === 0 }),
-      {}
-    );
-
-    this.state = { showForm };
-  }
-
-  handleSync = (index, field) => html => {
-    const { activityKey, updateActivity } = this.props;
-    const updates = { goals: { [index]: { [field]: html } } };
-    updateActivity(activityKey, updates);
-  };
-
-  handleDelete = key => () => {
+  getDeleter = key => () => {
     const { activityKey, removeActivityGoal } = this.props;
     removeActivityGoal(activityKey, key);
   };
@@ -106,18 +70,16 @@ class Goals extends Component {
     addActivityGoal(activityKey);
   };
 
-  toggleForm = expenseKey => () => {
-    this.setState(prev => ({
-      showForm: {
-        ...prev.showForm,
-        [expenseKey]: !prev.showForm[expenseKey]
-      }
-    }));
+  handleDelete = goal => this.getDeleter(goal.key)();
+
+  handleSync = (index, field) => html => {
+    const { activityKey, updateActivity } = this.props;
+    const updates = { goals: { [index]: { [field]: html } } };
+    updateActivity(activityKey, updates);
   };
 
   render() {
     const { goals } = this.props;
-    const { showForm } = this.state;
 
     return (
       <Subsection resource="activities.goals" nested>
@@ -125,30 +87,29 @@ class Goals extends Component {
           <NoDataMsg>{t('activities.expenses.noDataNotice')}</NoDataMsg>
         ) : (
           <div className="mt3 pt3 border-top border-grey">
-            {goals.map((goal, i) => (
-              <div key={goal.key}>
-                <MiniHeader
-                  content={
-                    <div className="col-11 truncate">
-                      {plaintext(goal.description)}
-                    </div>
-                  }
-                  handleDelete={this.handleDelete(goal.key)}
-                  number={i + 1}
-                  title="Goal:"
-                  titleColumns={1}
-                  toggleForm={this.toggleForm(goal.key)}
+            <CollapsibleList
+              items={goals}
+              getKey={goal => goal.key}
+              deleteItem={this.handleDelete}
+              header={(goal, i) => (
+                <Fragment>
+                  <div className="col-1 truncate">
+                    {i + 1}. <strong>Goal:</strong>
+                  </div>
+                  <div className="col-11 truncate">
+                    {plaintext(goal.description)}
+                  </div>
+                </Fragment>
+              )}
+              content={(goal, i) => (
+                <GoalForm
+                  goal={goal}
+                  idx={i}
+                  handleChange={this.handleSync}
+                  handleDelete={this.getDeleter(goal.key)}
                 />
-                {showForm[goal.key] && (
-                  <GoalForm
-                    goal={goal}
-                    idx={i}
-                    handleChange={this.handleSync}
-                    handleDelete={this.handleDelete(goal.key)}
-                  />
-                )}
-              </div>
-            ))}
+              )}
+            />
           </div>
         )}
 

@@ -14,7 +14,6 @@ const config = {
     path: path.join(__dirname, 'dist'),
     filename: 'app.js'
   },
-  // devtool: 'cheap-module-eval-source-map',
   module: {
     rules: [
       {
@@ -26,7 +25,13 @@ const config = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader']
+          use: [
+            { loader: 'css-loader', options: { sourceMap: !isProd } },
+            {
+              loader: 'postcss-loader',
+              options: { sourceMap: !isProd && 'inline' }
+            }
+          ]
         })
       },
       {
@@ -37,8 +42,7 @@ const config = {
   },
   plugins: [
     new webpack.EnvironmentPlugin({
-      API_URL: null,
-      LOG_FORM_INTERACTIONS: false
+      API_URL: null
     }),
     new ExtractTextPlugin('app.css')
   ]
@@ -46,6 +50,8 @@ const config = {
 
 if (isProd) {
   config.plugins.push(new UglifyJSPlugin());
+} else {
+  config.devtool = 'cheap-module-eval-source-map';
 }
 
 module.exports = config;

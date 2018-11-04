@@ -116,6 +116,8 @@ tap.test(
               name: 'updated name',
               description: 'updated description',
               alternatives: null,
+              plannedEndDate: '1963-06-16',
+              plannedStartDate: '1970-04-11',
               contractorResources: [
                 {
                   id: 4300,
