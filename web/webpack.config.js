@@ -42,8 +42,7 @@ const config = {
   },
   plugins: [
     new webpack.EnvironmentPlugin({
-      API_URL: null,
-      LOG_FORM_INTERACTIONS: false
+      API_URL: null
     }),
     new ExtractTextPlugin('app.css')
   ]
