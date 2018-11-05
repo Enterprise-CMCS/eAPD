@@ -60,17 +60,19 @@ describe('apd state profile, Medicaid office component', () => {
 
     test('dispatches removing a person', () => {
       shallow(<KeyPersonnel {...props} />)
-        .find('MiniHeader')
-        .at(0)
-        .prop('handleDelete')();
+        .find('CollapsibleList')
+        .prop('deleteItem')('person object', 'index');
 
-      expect(props.removeKeyPerson.calledWith(0)).toBeTruthy();
+      expect(props.removeKeyPerson.calledWith('index')).toBeTruthy();
     });
 
     test('dispatches setting a person primary', () => {
       shallow(<KeyPersonnel {...props} />)
-        .find('PersonForm')
+        .find('CollapsibleList')
+        .dive()
+        .find('ListItem')
         .at(0)
+        .find('PersonForm')
         .prop('setPrimary')('args');
 
       expect(props.setPrimaryKeyPerson.calledWith('args')).toBeTruthy();
@@ -78,8 +80,11 @@ describe('apd state profile, Medicaid office component', () => {
 
     test('dispatches when a person changes', () => {
       shallow(<KeyPersonnel {...props} />)
-        .find('PersonForm')
+        .find('CollapsibleList')
+        .dive()
+        .find('ListItem')
         .at(0)
+        .find('PersonForm')
         .prop('handleChange')('field', 0)({ target: { value: 'new value' } });
 
       expect(
@@ -91,8 +96,11 @@ describe('apd state profile, Medicaid office component', () => {
 
     test('dispatches when person years change', () => {
       shallow(<KeyPersonnel {...props} />)
-        .find('PersonForm')
+        .find('CollapsibleList')
+        .dive()
+        .find('ListItem')
         .at(0)
+        .find('PersonForm')
         .prop('handleYearChange')(0, '1908')({
         target: { value: 'new value' }
       });

@@ -88,13 +88,13 @@ ShallowWrapper {
           className="mb3"
         >
           <div
-            className="mb-tiny bold"
+            className="bold"
           >
             Program Introduction
           </div>
           <HelpText
-            reminder={null}
-            text="apd.overview.labels.helpText"
+            reminder="apd.introduction.reminder"
+            text="apd.introduction.helpText"
           />
           <RichText
             content="about the program"
@@ -110,7 +110,7 @@ ShallowWrapper {
             HIT Overview
           </div>
           <HelpText
-            reminder={null}
+            reminder="apd.hit.reminder"
             text="apd.hit.helpText"
           />
           <RichText
@@ -127,7 +127,7 @@ ShallowWrapper {
             HIE Overview
           </div>
           <HelpText
-            reminder={null}
+            reminder="apd.hie.reminder"
             text="apd.hie.helpText"
           />
           <RichText
@@ -142,7 +142,7 @@ ShallowWrapper {
             MMIS Overview
           </div>
           <HelpText
-            reminder={null}
+            reminder="apd.mmis.reminder"
             text="apd.mmis.helpText"
           />
           <RichText
@@ -207,13 +207,13 @@ ShallowWrapper {
             className="mb3"
           >
             <div
-              className="mb-tiny bold"
+              className="bold"
             >
               Program Introduction
             </div>
             <HelpText
-              reminder={null}
-              text="apd.overview.labels.helpText"
+              reminder="apd.introduction.reminder"
+              text="apd.introduction.helpText"
             />
             <RichText
               content="about the program"
@@ -229,7 +229,7 @@ ShallowWrapper {
               HIT Overview
             </div>
             <HelpText
-              reminder={null}
+              reminder="apd.hit.reminder"
               text="apd.hit.helpText"
             />
             <RichText
@@ -246,7 +246,7 @@ ShallowWrapper {
               HIE Overview
             </div>
             <HelpText
-              reminder={null}
+              reminder="apd.hie.reminder"
               text="apd.hie.helpText"
             />
             <RichText
@@ -261,7 +261,7 @@ ShallowWrapper {
               MMIS Overview
             </div>
             <HelpText
-              reminder={null}
+              reminder="apd.mmis.reminder"
               text="apd.mmis.helpText"
             />
             <RichText
@@ -458,13 +458,13 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <div
-                className="mb-tiny bold"
+                className="bold"
               >
                 Program Introduction
               </div>,
               <HelpText
-                reminder={null}
-                text="apd.overview.labels.helpText"
+                reminder="apd.introduction.reminder"
+                text="apd.introduction.helpText"
               />,
               <RichText
                 content="about the program"
@@ -481,7 +481,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": "Program Introduction",
-                "className": "mb-tiny bold",
+                "className": "bold",
               },
               "ref": null,
               "rendered": "Program Introduction",
@@ -492,8 +492,8 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "reminder": null,
-                "text": "apd.overview.labels.helpText",
+                "reminder": "apd.introduction.reminder",
+                "text": "apd.introduction.helpText",
               },
               "ref": null,
               "rendered": null,
@@ -526,7 +526,7 @@ ShallowWrapper {
                 HIT Overview
               </div>,
               <HelpText
-                reminder={null}
+                reminder="apd.hit.reminder"
                 text="apd.hit.helpText"
               />,
               <RichText
@@ -555,7 +555,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "reminder": null,
+                "reminder": "apd.hit.reminder",
                 "text": "apd.hit.helpText",
               },
               "ref": null,
@@ -589,7 +589,7 @@ ShallowWrapper {
                 HIE Overview
               </div>,
               <HelpText
-                reminder={null}
+                reminder="apd.hie.reminder"
                 text="apd.hie.helpText"
               />,
               <RichText
@@ -618,7 +618,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "reminder": null,
+                "reminder": "apd.hie.reminder",
                 "text": "apd.hie.helpText",
               },
               "ref": null,
@@ -652,7 +652,7 @@ ShallowWrapper {
                 MMIS Overview
               </div>,
               <HelpText
-                reminder={null}
+                reminder="apd.mmis.reminder"
                 text="apd.mmis.helpText"
               />,
               <RichText
@@ -680,7 +680,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "reminder": null,
+                "reminder": "apd.mmis.reminder",
                 "text": "apd.mmis.helpText",
               },
               "ref": null,
@@ -765,13 +765,13 @@ ShallowWrapper {
             className="mb3"
           >
             <div
-              className="mb-tiny bold"
+              className="bold"
             >
               Program Introduction
             </div>
             <HelpText
-              reminder={null}
-              text="apd.overview.labels.helpText"
+              reminder="apd.introduction.reminder"
+              text="apd.introduction.helpText"
             />
             <RichText
               content="about the program"
@@ -787,7 +787,7 @@ ShallowWrapper {
               HIT Overview
             </div>
             <HelpText
-              reminder={null}
+              reminder="apd.hit.reminder"
               text="apd.hit.helpText"
             />
             <RichText
@@ -804,7 +804,7 @@ ShallowWrapper {
               HIE Overview
             </div>
             <HelpText
-              reminder={null}
+              reminder="apd.hie.reminder"
               text="apd.hie.helpText"
             />
             <RichText
@@ -819,7 +819,7 @@ ShallowWrapper {
               MMIS Overview
             </div>
             <HelpText
-              reminder={null}
+              reminder="apd.mmis.reminder"
               text="apd.mmis.helpText"
             />
             <RichText
@@ -884,13 +884,13 @@ ShallowWrapper {
               className="mb3"
             >
               <div
-                className="mb-tiny bold"
+                className="bold"
               >
                 Program Introduction
               </div>
               <HelpText
-                reminder={null}
-                text="apd.overview.labels.helpText"
+                reminder="apd.introduction.reminder"
+                text="apd.introduction.helpText"
               />
               <RichText
                 content="about the program"
@@ -906,7 +906,7 @@ ShallowWrapper {
                 HIT Overview
               </div>
               <HelpText
-                reminder={null}
+                reminder="apd.hit.reminder"
                 text="apd.hit.helpText"
               />
               <RichText
@@ -923,7 +923,7 @@ ShallowWrapper {
                 HIE Overview
               </div>
               <HelpText
-                reminder={null}
+                reminder="apd.hie.reminder"
                 text="apd.hie.helpText"
               />
               <RichText
@@ -938,7 +938,7 @@ ShallowWrapper {
                 MMIS Overview
               </div>
               <HelpText
-                reminder={null}
+                reminder="apd.mmis.reminder"
                 text="apd.mmis.helpText"
               />
               <RichText
@@ -1135,13 +1135,13 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <div
-                  className="mb-tiny bold"
+                  className="bold"
                 >
                   Program Introduction
                 </div>,
                 <HelpText
-                  reminder={null}
-                  text="apd.overview.labels.helpText"
+                  reminder="apd.introduction.reminder"
+                  text="apd.introduction.helpText"
                 />,
                 <RichText
                   content="about the program"
@@ -1158,7 +1158,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": "Program Introduction",
-                  "className": "mb-tiny bold",
+                  "className": "bold",
                 },
                 "ref": null,
                 "rendered": "Program Introduction",
@@ -1169,8 +1169,8 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "function",
                 "props": Object {
-                  "reminder": null,
-                  "text": "apd.overview.labels.helpText",
+                  "reminder": "apd.introduction.reminder",
+                  "text": "apd.introduction.helpText",
                 },
                 "ref": null,
                 "rendered": null,
@@ -1203,7 +1203,7 @@ ShallowWrapper {
                   HIT Overview
                 </div>,
                 <HelpText
-                  reminder={null}
+                  reminder="apd.hit.reminder"
                   text="apd.hit.helpText"
                 />,
                 <RichText
@@ -1232,7 +1232,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "function",
                 "props": Object {
-                  "reminder": null,
+                  "reminder": "apd.hit.reminder",
                   "text": "apd.hit.helpText",
                 },
                 "ref": null,
@@ -1266,7 +1266,7 @@ ShallowWrapper {
                   HIE Overview
                 </div>,
                 <HelpText
-                  reminder={null}
+                  reminder="apd.hie.reminder"
                   text="apd.hie.helpText"
                 />,
                 <RichText
@@ -1295,7 +1295,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "function",
                 "props": Object {
-                  "reminder": null,
+                  "reminder": "apd.hie.reminder",
                   "text": "apd.hie.helpText",
                 },
                 "ref": null,
@@ -1329,7 +1329,7 @@ ShallowWrapper {
                   MMIS Overview
                 </div>,
                 <HelpText
-                  reminder={null}
+                  reminder="apd.mmis.reminder"
                   text="apd.mmis.helpText"
                 />,
                 <RichText
@@ -1357,7 +1357,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "function",
                 "props": Object {
-                  "reminder": null,
+                  "reminder": "apd.mmis.reminder",
                   "text": "apd.mmis.helpText",
                 },
                 "ref": null,
