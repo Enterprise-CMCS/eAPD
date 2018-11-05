@@ -59,3 +59,5 @@ const mapStateToProps = ({ apd: { data }, user: { data: { state } } }) => ({
 const mapDispatchToProps = { selectApdOnLoad };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdApplication);
+
+export { ApdApplication as plain, mapStateToProps, mapDispatchToProps };

@@ -126,3 +126,10 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
   AssurancesAndCompliance
 );
+
+export {
+  AssurancesAndCompliance as plain,
+  mapStateToProps,
+  mapDispatchToProps,
+  LinkOrText
+};

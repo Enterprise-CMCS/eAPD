@@ -227,3 +227,10 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
   ApdStateKeyPersonnel
 );
+
+export {
+  ApdStateKeyPersonnel as plain,
+  mapStateToProps,
+  mapDispatchToProps,
+  PersonForm
+};

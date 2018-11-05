@@ -75,3 +75,5 @@ const mapStateToProps = ({ activities }) => {
 };
 
 export default connect(mapStateToProps)(ScheduleSummary);
+
+export { ScheduleSummary as plain, mapStateToProps };

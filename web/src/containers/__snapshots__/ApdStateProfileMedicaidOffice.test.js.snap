@@ -1,0 +1,2445 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apd state profile, Medicaid office component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ApdStateProfile
+    stateProfile={
+      Object {
+        "medicaidDirector": Object {
+          "email": "email",
+          "name": "name",
+          "phone": "phone",
+        },
+        "medicaidOffice": Object {
+          "address1": "address 1",
+          "address2": "address 2",
+          "city": "city",
+          "state": "state",
+          "zip": "zip",
+        },
+      }
+    }
+    updateApd={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <h3
+          className="mt0"
+        >
+          Medicaid Director
+        </h3>,
+        <div
+          className="mb3"
+        >
+          <Wrapper
+            label="Name"
+            name="apd-state-profile-mdname"
+            onChange={[Function]}
+            validation={
+              StringSchema {
+                "_blacklist": RefSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "_conditions": Array [],
+                "_deps": Array [],
+                "_exclusive": Object {
+                  "min": true,
+                  "required": false,
+                },
+                "_mutate": false,
+                "_options": Object {
+                  "abortEarly": true,
+                  "recursive": true,
+                },
+                "_type": "string",
+                "_typeError": [Function],
+                "_whitelist": RefSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "tests": Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ],
+                "transforms": Array [
+                  [Function],
+                ],
+              }
+            }
+            value="name"
+          />
+          <InputHolder
+            hideLabel={false}
+            label="Email address"
+            name="apd-state-profile-mdemail"
+            onChange={[Function]}
+            type="text"
+            value="email"
+            wrapperClass=""
+          />
+          <InputHolder
+            hideLabel={false}
+            label="Phone number"
+            name="apd-state-profile-mdphone"
+            onChange={[Function]}
+            type="text"
+            value="phone"
+            wrapperClass=""
+          />
+        </div>,
+        <h3
+          className="mt0"
+        >
+          Medicaid office
+        </h3>,
+        <div>
+          <InputHolder
+            hideLabel={false}
+            label="Address"
+            name="apd-state-profile-addr1"
+            onChange={[Function]}
+            type="text"
+            value="address 1"
+            wrapperClass=""
+          />
+          <InputHolder
+            hideLabel={false}
+            label="Address (continued)"
+            name="apd-state-profile-addr2"
+            onChange={[Function]}
+            type="text"
+            value="address 2"
+            wrapperClass=""
+          />
+          <div
+            className="clearfix mxn1"
+          >
+            <div
+              className="col col-12 sm-col-6 px1"
+            >
+              <InputHolder
+                hideLabel={false}
+                label="City"
+                name="apd-state-profile-city"
+                onChange={[Function]}
+                type="text"
+                value="city"
+                wrapperClass=""
+              />
+            </div>
+            <div
+              className="col col-6 sm-col-3 px1"
+            >
+              <InputHolder
+                hideLabel={false}
+                label="State"
+                name="apd-state-profile-state"
+                onChange={[Function]}
+                type="text"
+                value="state"
+                wrapperClass=""
+              />
+            </div>
+            <div
+              className="col col-6 sm-col-3 px1"
+            >
+              <InputHolder
+                hideLabel={false}
+                label="ZIP"
+                name="apd-state-profile-zip"
+                onChange={[Function]}
+                type="text"
+                value="zip"
+                wrapperClass=""
+              />
+            </div>
+          </div>
+        </div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Medicaid Director",
+          "className": "mt0",
+        },
+        "ref": null,
+        "rendered": "Medicaid Director",
+        "type": "h3",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <Wrapper
+              label="Name"
+              name="apd-state-profile-mdname"
+              onChange={[Function]}
+              validation={
+                StringSchema {
+                  "_blacklist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "_conditions": Array [],
+                  "_deps": Array [],
+                  "_exclusive": Object {
+                    "min": true,
+                    "required": false,
+                  },
+                  "_mutate": false,
+                  "_options": Object {
+                    "abortEarly": true,
+                    "recursive": true,
+                  },
+                  "_type": "string",
+                  "_typeError": [Function],
+                  "_whitelist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "tests": Array [
+                    [Function],
+                    [Function],
+                    [Function],
+                  ],
+                  "transforms": Array [
+                    [Function],
+                  ],
+                }
+              }
+              value="name"
+            />,
+            <InputHolder
+              hideLabel={false}
+              label="Email address"
+              name="apd-state-profile-mdemail"
+              onChange={[Function]}
+              type="text"
+              value="email"
+              wrapperClass=""
+            />,
+            <InputHolder
+              hideLabel={false}
+              label="Phone number"
+              name="apd-state-profile-mdphone"
+              onChange={[Function]}
+              type="text"
+              value="phone"
+              wrapperClass=""
+            />,
+          ],
+          "className": "mb3",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "label": "Name",
+              "name": "apd-state-profile-mdname",
+              "onChange": [Function],
+              "validation": StringSchema {
+                "_blacklist": RefSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "_conditions": Array [],
+                "_deps": Array [],
+                "_exclusive": Object {
+                  "min": true,
+                  "required": false,
+                },
+                "_mutate": false,
+                "_options": Object {
+                  "abortEarly": true,
+                  "recursive": true,
+                },
+                "_type": "string",
+                "_typeError": [Function],
+                "_whitelist": RefSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "tests": Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ],
+                "transforms": Array [
+                  [Function],
+                ],
+              },
+              "value": "name",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "hideLabel": false,
+              "label": "Email address",
+              "name": "apd-state-profile-mdemail",
+              "onChange": [Function],
+              "type": "text",
+              "value": "email",
+              "wrapperClass": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "hideLabel": false,
+              "label": "Phone number",
+              "name": "apd-state-profile-mdphone",
+              "onChange": [Function],
+              "type": "text",
+              "value": "phone",
+              "wrapperClass": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Medicaid office",
+          "className": "mt0",
+        },
+        "ref": null,
+        "rendered": "Medicaid office",
+        "type": "h3",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <InputHolder
+              hideLabel={false}
+              label="Address"
+              name="apd-state-profile-addr1"
+              onChange={[Function]}
+              type="text"
+              value="address 1"
+              wrapperClass=""
+            />,
+            <InputHolder
+              hideLabel={false}
+              label="Address (continued)"
+              name="apd-state-profile-addr2"
+              onChange={[Function]}
+              type="text"
+              value="address 2"
+              wrapperClass=""
+            />,
+            <div
+              className="clearfix mxn1"
+            >
+              <div
+                className="col col-12 sm-col-6 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="City"
+                  name="apd-state-profile-city"
+                  onChange={[Function]}
+                  type="text"
+                  value="city"
+                  wrapperClass=""
+                />
+              </div>
+              <div
+                className="col col-6 sm-col-3 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="State"
+                  name="apd-state-profile-state"
+                  onChange={[Function]}
+                  type="text"
+                  value="state"
+                  wrapperClass=""
+                />
+              </div>
+              <div
+                className="col col-6 sm-col-3 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="ZIP"
+                  name="apd-state-profile-zip"
+                  onChange={[Function]}
+                  type="text"
+                  value="zip"
+                  wrapperClass=""
+                />
+              </div>
+            </div>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "hideLabel": false,
+              "label": "Address",
+              "name": "apd-state-profile-addr1",
+              "onChange": [Function],
+              "type": "text",
+              "value": "address 1",
+              "wrapperClass": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "hideLabel": false,
+              "label": "Address (continued)",
+              "name": "apd-state-profile-addr2",
+              "onChange": [Function],
+              "type": "text",
+              "value": "address 2",
+              "wrapperClass": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="col col-12 sm-col-6 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="City"
+                    name="apd-state-profile-city"
+                    onChange={[Function]}
+                    type="text"
+                    value="city"
+                    wrapperClass=""
+                  />
+                </div>,
+                <div
+                  className="col col-6 sm-col-3 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="State"
+                    name="apd-state-profile-state"
+                    onChange={[Function]}
+                    type="text"
+                    value="state"
+                    wrapperClass=""
+                  />
+                </div>,
+                <div
+                  className="col col-6 sm-col-3 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="ZIP"
+                    name="apd-state-profile-zip"
+                    onChange={[Function]}
+                    type="text"
+                    value="zip"
+                    wrapperClass=""
+                  />
+                </div>,
+              ],
+              "className": "clearfix mxn1",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <InputHolder
+                    hideLabel={false}
+                    label="City"
+                    name="apd-state-profile-city"
+                    onChange={[Function]}
+                    type="text"
+                    value="city"
+                    wrapperClass=""
+                  />,
+                  "className": "col col-12 sm-col-6 px1",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hideLabel": false,
+                    "label": "City",
+                    "name": "apd-state-profile-city",
+                    "onChange": [Function],
+                    "type": "text",
+                    "value": "city",
+                    "wrapperClass": "",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <InputHolder
+                    hideLabel={false}
+                    label="State"
+                    name="apd-state-profile-state"
+                    onChange={[Function]}
+                    type="text"
+                    value="state"
+                    wrapperClass=""
+                  />,
+                  "className": "col col-6 sm-col-3 px1",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hideLabel": false,
+                    "label": "State",
+                    "name": "apd-state-profile-state",
+                    "onChange": [Function],
+                    "type": "text",
+                    "value": "state",
+                    "wrapperClass": "",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <InputHolder
+                    hideLabel={false}
+                    label="ZIP"
+                    name="apd-state-profile-zip"
+                    onChange={[Function]}
+                    type="text"
+                    value="zip"
+                    wrapperClass=""
+                  />,
+                  "className": "col col-6 sm-col-3 px1",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hideLabel": false,
+                    "label": "ZIP",
+                    "name": "apd-state-profile-zip",
+                    "onChange": [Function],
+                    "type": "text",
+                    "value": "zip",
+                    "wrapperClass": "",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": "div",
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <h3
+            className="mt0"
+          >
+            Medicaid Director
+          </h3>,
+          <div
+            className="mb3"
+          >
+            <Wrapper
+              label="Name"
+              name="apd-state-profile-mdname"
+              onChange={[Function]}
+              validation={
+                StringSchema {
+                  "_blacklist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "_conditions": Array [],
+                  "_deps": Array [],
+                  "_exclusive": Object {
+                    "min": true,
+                    "required": false,
+                  },
+                  "_mutate": false,
+                  "_options": Object {
+                    "abortEarly": true,
+                    "recursive": true,
+                  },
+                  "_type": "string",
+                  "_typeError": [Function],
+                  "_whitelist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "tests": Array [
+                    [Function],
+                    [Function],
+                    [Function],
+                  ],
+                  "transforms": Array [
+                    [Function],
+                  ],
+                }
+              }
+              value="name"
+            />
+            <InputHolder
+              hideLabel={false}
+              label="Email address"
+              name="apd-state-profile-mdemail"
+              onChange={[Function]}
+              type="text"
+              value="email"
+              wrapperClass=""
+            />
+            <InputHolder
+              hideLabel={false}
+              label="Phone number"
+              name="apd-state-profile-mdphone"
+              onChange={[Function]}
+              type="text"
+              value="phone"
+              wrapperClass=""
+            />
+          </div>,
+          <h3
+            className="mt0"
+          >
+            Medicaid office
+          </h3>,
+          <div>
+            <InputHolder
+              hideLabel={false}
+              label="Address"
+              name="apd-state-profile-addr1"
+              onChange={[Function]}
+              type="text"
+              value="address 1"
+              wrapperClass=""
+            />
+            <InputHolder
+              hideLabel={false}
+              label="Address (continued)"
+              name="apd-state-profile-addr2"
+              onChange={[Function]}
+              type="text"
+              value="address 2"
+              wrapperClass=""
+            />
+            <div
+              className="clearfix mxn1"
+            >
+              <div
+                className="col col-12 sm-col-6 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="City"
+                  name="apd-state-profile-city"
+                  onChange={[Function]}
+                  type="text"
+                  value="city"
+                  wrapperClass=""
+                />
+              </div>
+              <div
+                className="col col-6 sm-col-3 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="State"
+                  name="apd-state-profile-state"
+                  onChange={[Function]}
+                  type="text"
+                  value="state"
+                  wrapperClass=""
+                />
+              </div>
+              <div
+                className="col col-6 sm-col-3 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="ZIP"
+                  name="apd-state-profile-zip"
+                  onChange={[Function]}
+                  type="text"
+                  value="zip"
+                  wrapperClass=""
+                />
+              </div>
+            </div>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Medicaid Director",
+            "className": "mt0",
+          },
+          "ref": null,
+          "rendered": "Medicaid Director",
+          "type": "h3",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <Wrapper
+                label="Name"
+                name="apd-state-profile-mdname"
+                onChange={[Function]}
+                validation={
+                  StringSchema {
+                    "_blacklist": RefSet {
+                      "list": Set {},
+                      "refs": Map {},
+                    },
+                    "_conditions": Array [],
+                    "_deps": Array [],
+                    "_exclusive": Object {
+                      "min": true,
+                      "required": false,
+                    },
+                    "_mutate": false,
+                    "_options": Object {
+                      "abortEarly": true,
+                      "recursive": true,
+                    },
+                    "_type": "string",
+                    "_typeError": [Function],
+                    "_whitelist": RefSet {
+                      "list": Set {},
+                      "refs": Map {},
+                    },
+                    "tests": Array [
+                      [Function],
+                      [Function],
+                      [Function],
+                    ],
+                    "transforms": Array [
+                      [Function],
+                    ],
+                  }
+                }
+                value="name"
+              />,
+              <InputHolder
+                hideLabel={false}
+                label="Email address"
+                name="apd-state-profile-mdemail"
+                onChange={[Function]}
+                type="text"
+                value="email"
+                wrapperClass=""
+              />,
+              <InputHolder
+                hideLabel={false}
+                label="Phone number"
+                name="apd-state-profile-mdphone"
+                onChange={[Function]}
+                type="text"
+                value="phone"
+                wrapperClass=""
+              />,
+            ],
+            "className": "mb3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "label": "Name",
+                "name": "apd-state-profile-mdname",
+                "onChange": [Function],
+                "validation": StringSchema {
+                  "_blacklist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "_conditions": Array [],
+                  "_deps": Array [],
+                  "_exclusive": Object {
+                    "min": true,
+                    "required": false,
+                  },
+                  "_mutate": false,
+                  "_options": Object {
+                    "abortEarly": true,
+                    "recursive": true,
+                  },
+                  "_type": "string",
+                  "_typeError": [Function],
+                  "_whitelist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "tests": Array [
+                    [Function],
+                    [Function],
+                    [Function],
+                  ],
+                  "transforms": Array [
+                    [Function],
+                  ],
+                },
+                "value": "name",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "hideLabel": false,
+                "label": "Email address",
+                "name": "apd-state-profile-mdemail",
+                "onChange": [Function],
+                "type": "text",
+                "value": "email",
+                "wrapperClass": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "hideLabel": false,
+                "label": "Phone number",
+                "name": "apd-state-profile-mdphone",
+                "onChange": [Function],
+                "type": "text",
+                "value": "phone",
+                "wrapperClass": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Medicaid office",
+            "className": "mt0",
+          },
+          "ref": null,
+          "rendered": "Medicaid office",
+          "type": "h3",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <InputHolder
+                hideLabel={false}
+                label="Address"
+                name="apd-state-profile-addr1"
+                onChange={[Function]}
+                type="text"
+                value="address 1"
+                wrapperClass=""
+              />,
+              <InputHolder
+                hideLabel={false}
+                label="Address (continued)"
+                name="apd-state-profile-addr2"
+                onChange={[Function]}
+                type="text"
+                value="address 2"
+                wrapperClass=""
+              />,
+              <div
+                className="clearfix mxn1"
+              >
+                <div
+                  className="col col-12 sm-col-6 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="City"
+                    name="apd-state-profile-city"
+                    onChange={[Function]}
+                    type="text"
+                    value="city"
+                    wrapperClass=""
+                  />
+                </div>
+                <div
+                  className="col col-6 sm-col-3 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="State"
+                    name="apd-state-profile-state"
+                    onChange={[Function]}
+                    type="text"
+                    value="state"
+                    wrapperClass=""
+                  />
+                </div>
+                <div
+                  className="col col-6 sm-col-3 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="ZIP"
+                    name="apd-state-profile-zip"
+                    onChange={[Function]}
+                    type="text"
+                    value="zip"
+                    wrapperClass=""
+                  />
+                </div>
+              </div>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "hideLabel": false,
+                "label": "Address",
+                "name": "apd-state-profile-addr1",
+                "onChange": [Function],
+                "type": "text",
+                "value": "address 1",
+                "wrapperClass": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "hideLabel": false,
+                "label": "Address (continued)",
+                "name": "apd-state-profile-addr2",
+                "onChange": [Function],
+                "type": "text",
+                "value": "address 2",
+                "wrapperClass": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="col col-12 sm-col-6 px1"
+                  >
+                    <InputHolder
+                      hideLabel={false}
+                      label="City"
+                      name="apd-state-profile-city"
+                      onChange={[Function]}
+                      type="text"
+                      value="city"
+                      wrapperClass=""
+                    />
+                  </div>,
+                  <div
+                    className="col col-6 sm-col-3 px1"
+                  >
+                    <InputHolder
+                      hideLabel={false}
+                      label="State"
+                      name="apd-state-profile-state"
+                      onChange={[Function]}
+                      type="text"
+                      value="state"
+                      wrapperClass=""
+                    />
+                  </div>,
+                  <div
+                    className="col col-6 sm-col-3 px1"
+                  >
+                    <InputHolder
+                      hideLabel={false}
+                      label="ZIP"
+                      name="apd-state-profile-zip"
+                      onChange={[Function]}
+                      type="text"
+                      value="zip"
+                      wrapperClass=""
+                    />
+                  </div>,
+                ],
+                "className": "clearfix mxn1",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <InputHolder
+                      hideLabel={false}
+                      label="City"
+                      name="apd-state-profile-city"
+                      onChange={[Function]}
+                      type="text"
+                      value="city"
+                      wrapperClass=""
+                    />,
+                    "className": "col col-12 sm-col-6 px1",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "hideLabel": false,
+                      "label": "City",
+                      "name": "apd-state-profile-city",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "city",
+                      "wrapperClass": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <InputHolder
+                      hideLabel={false}
+                      label="State"
+                      name="apd-state-profile-state"
+                      onChange={[Function]}
+                      type="text"
+                      value="state"
+                      wrapperClass=""
+                    />,
+                    "className": "col col-6 sm-col-3 px1",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "hideLabel": false,
+                      "label": "State",
+                      "name": "apd-state-profile-state",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "state",
+                      "wrapperClass": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <InputHolder
+                      hideLabel={false}
+                      label="ZIP"
+                      name="apd-state-profile-zip"
+                      onChange={[Function]}
+                      type="text"
+                      value="zip"
+                      wrapperClass=""
+                    />,
+                    "className": "col col-6 sm-col-3 px1",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "hideLabel": false,
+                      "label": "ZIP",
+                      "name": "apd-state-profile-zip",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "zip",
+                      "wrapperClass": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": "div",
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`apd state profile, Medicaid office component renders correctly 2`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ApdStateProfile
+    stateProfile={
+      Object {
+        "medicaidDirector": Object {
+          "email": "email",
+          "name": "a",
+          "phone": "phone",
+        },
+        "medicaidOffice": Object {
+          "address1": "address 1",
+          "address2": "address 2",
+          "city": "city",
+          "state": "state",
+          "zip": "zip",
+        },
+      }
+    }
+    updateApd={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <h3
+          className="mt0"
+        >
+          Medicaid Director
+        </h3>,
+        <div
+          className="mb3"
+        >
+          <Wrapper
+            label="Name"
+            name="apd-state-profile-mdname"
+            onChange={[Function]}
+            validation={
+              StringSchema {
+                "_blacklist": RefSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "_conditions": Array [],
+                "_deps": Array [],
+                "_exclusive": Object {
+                  "min": true,
+                  "required": false,
+                },
+                "_mutate": false,
+                "_options": Object {
+                  "abortEarly": true,
+                  "recursive": true,
+                },
+                "_type": "string",
+                "_typeError": [Function],
+                "_whitelist": RefSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "tests": Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ],
+                "transforms": Array [
+                  [Function],
+                ],
+              }
+            }
+            value="a"
+          />
+          <InputHolder
+            hideLabel={false}
+            label="Email address"
+            name="apd-state-profile-mdemail"
+            onChange={[Function]}
+            type="text"
+            value="email"
+            wrapperClass=""
+          />
+          <InputHolder
+            hideLabel={false}
+            label="Phone number"
+            name="apd-state-profile-mdphone"
+            onChange={[Function]}
+            type="text"
+            value="phone"
+            wrapperClass=""
+          />
+        </div>,
+        <h3
+          className="mt0"
+        >
+          Medicaid office
+        </h3>,
+        <div>
+          <InputHolder
+            hideLabel={false}
+            label="Address"
+            name="apd-state-profile-addr1"
+            onChange={[Function]}
+            type="text"
+            value="address 1"
+            wrapperClass=""
+          />
+          <InputHolder
+            hideLabel={false}
+            label="Address (continued)"
+            name="apd-state-profile-addr2"
+            onChange={[Function]}
+            type="text"
+            value="address 2"
+            wrapperClass=""
+          />
+          <div
+            className="clearfix mxn1"
+          >
+            <div
+              className="col col-12 sm-col-6 px1"
+            >
+              <InputHolder
+                hideLabel={false}
+                label="City"
+                name="apd-state-profile-city"
+                onChange={[Function]}
+                type="text"
+                value="city"
+                wrapperClass=""
+              />
+            </div>
+            <div
+              className="col col-6 sm-col-3 px1"
+            >
+              <InputHolder
+                hideLabel={false}
+                label="State"
+                name="apd-state-profile-state"
+                onChange={[Function]}
+                type="text"
+                value="state"
+                wrapperClass=""
+              />
+            </div>
+            <div
+              className="col col-6 sm-col-3 px1"
+            >
+              <InputHolder
+                hideLabel={false}
+                label="ZIP"
+                name="apd-state-profile-zip"
+                onChange={[Function]}
+                type="text"
+                value="zip"
+                wrapperClass=""
+              />
+            </div>
+          </div>
+        </div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Medicaid Director",
+          "className": "mt0",
+        },
+        "ref": null,
+        "rendered": "Medicaid Director",
+        "type": "h3",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <Wrapper
+              label="Name"
+              name="apd-state-profile-mdname"
+              onChange={[Function]}
+              validation={
+                StringSchema {
+                  "_blacklist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "_conditions": Array [],
+                  "_deps": Array [],
+                  "_exclusive": Object {
+                    "min": true,
+                    "required": false,
+                  },
+                  "_mutate": false,
+                  "_options": Object {
+                    "abortEarly": true,
+                    "recursive": true,
+                  },
+                  "_type": "string",
+                  "_typeError": [Function],
+                  "_whitelist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "tests": Array [
+                    [Function],
+                    [Function],
+                    [Function],
+                  ],
+                  "transforms": Array [
+                    [Function],
+                  ],
+                }
+              }
+              value="a"
+            />,
+            <InputHolder
+              hideLabel={false}
+              label="Email address"
+              name="apd-state-profile-mdemail"
+              onChange={[Function]}
+              type="text"
+              value="email"
+              wrapperClass=""
+            />,
+            <InputHolder
+              hideLabel={false}
+              label="Phone number"
+              name="apd-state-profile-mdphone"
+              onChange={[Function]}
+              type="text"
+              value="phone"
+              wrapperClass=""
+            />,
+          ],
+          "className": "mb3",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "label": "Name",
+              "name": "apd-state-profile-mdname",
+              "onChange": [Function],
+              "validation": StringSchema {
+                "_blacklist": RefSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "_conditions": Array [],
+                "_deps": Array [],
+                "_exclusive": Object {
+                  "min": true,
+                  "required": false,
+                },
+                "_mutate": false,
+                "_options": Object {
+                  "abortEarly": true,
+                  "recursive": true,
+                },
+                "_type": "string",
+                "_typeError": [Function],
+                "_whitelist": RefSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "tests": Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ],
+                "transforms": Array [
+                  [Function],
+                ],
+              },
+              "value": "a",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "hideLabel": false,
+              "label": "Email address",
+              "name": "apd-state-profile-mdemail",
+              "onChange": [Function],
+              "type": "text",
+              "value": "email",
+              "wrapperClass": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "hideLabel": false,
+              "label": "Phone number",
+              "name": "apd-state-profile-mdphone",
+              "onChange": [Function],
+              "type": "text",
+              "value": "phone",
+              "wrapperClass": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Medicaid office",
+          "className": "mt0",
+        },
+        "ref": null,
+        "rendered": "Medicaid office",
+        "type": "h3",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <InputHolder
+              hideLabel={false}
+              label="Address"
+              name="apd-state-profile-addr1"
+              onChange={[Function]}
+              type="text"
+              value="address 1"
+              wrapperClass=""
+            />,
+            <InputHolder
+              hideLabel={false}
+              label="Address (continued)"
+              name="apd-state-profile-addr2"
+              onChange={[Function]}
+              type="text"
+              value="address 2"
+              wrapperClass=""
+            />,
+            <div
+              className="clearfix mxn1"
+            >
+              <div
+                className="col col-12 sm-col-6 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="City"
+                  name="apd-state-profile-city"
+                  onChange={[Function]}
+                  type="text"
+                  value="city"
+                  wrapperClass=""
+                />
+              </div>
+              <div
+                className="col col-6 sm-col-3 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="State"
+                  name="apd-state-profile-state"
+                  onChange={[Function]}
+                  type="text"
+                  value="state"
+                  wrapperClass=""
+                />
+              </div>
+              <div
+                className="col col-6 sm-col-3 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="ZIP"
+                  name="apd-state-profile-zip"
+                  onChange={[Function]}
+                  type="text"
+                  value="zip"
+                  wrapperClass=""
+                />
+              </div>
+            </div>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "hideLabel": false,
+              "label": "Address",
+              "name": "apd-state-profile-addr1",
+              "onChange": [Function],
+              "type": "text",
+              "value": "address 1",
+              "wrapperClass": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "hideLabel": false,
+              "label": "Address (continued)",
+              "name": "apd-state-profile-addr2",
+              "onChange": [Function],
+              "type": "text",
+              "value": "address 2",
+              "wrapperClass": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="col col-12 sm-col-6 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="City"
+                    name="apd-state-profile-city"
+                    onChange={[Function]}
+                    type="text"
+                    value="city"
+                    wrapperClass=""
+                  />
+                </div>,
+                <div
+                  className="col col-6 sm-col-3 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="State"
+                    name="apd-state-profile-state"
+                    onChange={[Function]}
+                    type="text"
+                    value="state"
+                    wrapperClass=""
+                  />
+                </div>,
+                <div
+                  className="col col-6 sm-col-3 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="ZIP"
+                    name="apd-state-profile-zip"
+                    onChange={[Function]}
+                    type="text"
+                    value="zip"
+                    wrapperClass=""
+                  />
+                </div>,
+              ],
+              "className": "clearfix mxn1",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <InputHolder
+                    hideLabel={false}
+                    label="City"
+                    name="apd-state-profile-city"
+                    onChange={[Function]}
+                    type="text"
+                    value="city"
+                    wrapperClass=""
+                  />,
+                  "className": "col col-12 sm-col-6 px1",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hideLabel": false,
+                    "label": "City",
+                    "name": "apd-state-profile-city",
+                    "onChange": [Function],
+                    "type": "text",
+                    "value": "city",
+                    "wrapperClass": "",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <InputHolder
+                    hideLabel={false}
+                    label="State"
+                    name="apd-state-profile-state"
+                    onChange={[Function]}
+                    type="text"
+                    value="state"
+                    wrapperClass=""
+                  />,
+                  "className": "col col-6 sm-col-3 px1",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hideLabel": false,
+                    "label": "State",
+                    "name": "apd-state-profile-state",
+                    "onChange": [Function],
+                    "type": "text",
+                    "value": "state",
+                    "wrapperClass": "",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <InputHolder
+                    hideLabel={false}
+                    label="ZIP"
+                    name="apd-state-profile-zip"
+                    onChange={[Function]}
+                    type="text"
+                    value="zip"
+                    wrapperClass=""
+                  />,
+                  "className": "col col-6 sm-col-3 px1",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hideLabel": false,
+                    "label": "ZIP",
+                    "name": "apd-state-profile-zip",
+                    "onChange": [Function],
+                    "type": "text",
+                    "value": "zip",
+                    "wrapperClass": "",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": "div",
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <h3
+            className="mt0"
+          >
+            Medicaid Director
+          </h3>,
+          <div
+            className="mb3"
+          >
+            <Wrapper
+              label="Name"
+              name="apd-state-profile-mdname"
+              onChange={[Function]}
+              validation={
+                StringSchema {
+                  "_blacklist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "_conditions": Array [],
+                  "_deps": Array [],
+                  "_exclusive": Object {
+                    "min": true,
+                    "required": false,
+                  },
+                  "_mutate": false,
+                  "_options": Object {
+                    "abortEarly": true,
+                    "recursive": true,
+                  },
+                  "_type": "string",
+                  "_typeError": [Function],
+                  "_whitelist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "tests": Array [
+                    [Function],
+                    [Function],
+                    [Function],
+                  ],
+                  "transforms": Array [
+                    [Function],
+                  ],
+                }
+              }
+              value="a"
+            />
+            <InputHolder
+              hideLabel={false}
+              label="Email address"
+              name="apd-state-profile-mdemail"
+              onChange={[Function]}
+              type="text"
+              value="email"
+              wrapperClass=""
+            />
+            <InputHolder
+              hideLabel={false}
+              label="Phone number"
+              name="apd-state-profile-mdphone"
+              onChange={[Function]}
+              type="text"
+              value="phone"
+              wrapperClass=""
+            />
+          </div>,
+          <h3
+            className="mt0"
+          >
+            Medicaid office
+          </h3>,
+          <div>
+            <InputHolder
+              hideLabel={false}
+              label="Address"
+              name="apd-state-profile-addr1"
+              onChange={[Function]}
+              type="text"
+              value="address 1"
+              wrapperClass=""
+            />
+            <InputHolder
+              hideLabel={false}
+              label="Address (continued)"
+              name="apd-state-profile-addr2"
+              onChange={[Function]}
+              type="text"
+              value="address 2"
+              wrapperClass=""
+            />
+            <div
+              className="clearfix mxn1"
+            >
+              <div
+                className="col col-12 sm-col-6 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="City"
+                  name="apd-state-profile-city"
+                  onChange={[Function]}
+                  type="text"
+                  value="city"
+                  wrapperClass=""
+                />
+              </div>
+              <div
+                className="col col-6 sm-col-3 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="State"
+                  name="apd-state-profile-state"
+                  onChange={[Function]}
+                  type="text"
+                  value="state"
+                  wrapperClass=""
+                />
+              </div>
+              <div
+                className="col col-6 sm-col-3 px1"
+              >
+                <InputHolder
+                  hideLabel={false}
+                  label="ZIP"
+                  name="apd-state-profile-zip"
+                  onChange={[Function]}
+                  type="text"
+                  value="zip"
+                  wrapperClass=""
+                />
+              </div>
+            </div>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Medicaid Director",
+            "className": "mt0",
+          },
+          "ref": null,
+          "rendered": "Medicaid Director",
+          "type": "h3",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <Wrapper
+                label="Name"
+                name="apd-state-profile-mdname"
+                onChange={[Function]}
+                validation={
+                  StringSchema {
+                    "_blacklist": RefSet {
+                      "list": Set {},
+                      "refs": Map {},
+                    },
+                    "_conditions": Array [],
+                    "_deps": Array [],
+                    "_exclusive": Object {
+                      "min": true,
+                      "required": false,
+                    },
+                    "_mutate": false,
+                    "_options": Object {
+                      "abortEarly": true,
+                      "recursive": true,
+                    },
+                    "_type": "string",
+                    "_typeError": [Function],
+                    "_whitelist": RefSet {
+                      "list": Set {},
+                      "refs": Map {},
+                    },
+                    "tests": Array [
+                      [Function],
+                      [Function],
+                      [Function],
+                    ],
+                    "transforms": Array [
+                      [Function],
+                    ],
+                  }
+                }
+                value="a"
+              />,
+              <InputHolder
+                hideLabel={false}
+                label="Email address"
+                name="apd-state-profile-mdemail"
+                onChange={[Function]}
+                type="text"
+                value="email"
+                wrapperClass=""
+              />,
+              <InputHolder
+                hideLabel={false}
+                label="Phone number"
+                name="apd-state-profile-mdphone"
+                onChange={[Function]}
+                type="text"
+                value="phone"
+                wrapperClass=""
+              />,
+            ],
+            "className": "mb3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "label": "Name",
+                "name": "apd-state-profile-mdname",
+                "onChange": [Function],
+                "validation": StringSchema {
+                  "_blacklist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "_conditions": Array [],
+                  "_deps": Array [],
+                  "_exclusive": Object {
+                    "min": true,
+                    "required": false,
+                  },
+                  "_mutate": false,
+                  "_options": Object {
+                    "abortEarly": true,
+                    "recursive": true,
+                  },
+                  "_type": "string",
+                  "_typeError": [Function],
+                  "_whitelist": RefSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "tests": Array [
+                    [Function],
+                    [Function],
+                    [Function],
+                  ],
+                  "transforms": Array [
+                    [Function],
+                  ],
+                },
+                "value": "a",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "hideLabel": false,
+                "label": "Email address",
+                "name": "apd-state-profile-mdemail",
+                "onChange": [Function],
+                "type": "text",
+                "value": "email",
+                "wrapperClass": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "hideLabel": false,
+                "label": "Phone number",
+                "name": "apd-state-profile-mdphone",
+                "onChange": [Function],
+                "type": "text",
+                "value": "phone",
+                "wrapperClass": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Medicaid office",
+            "className": "mt0",
+          },
+          "ref": null,
+          "rendered": "Medicaid office",
+          "type": "h3",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <InputHolder
+                hideLabel={false}
+                label="Address"
+                name="apd-state-profile-addr1"
+                onChange={[Function]}
+                type="text"
+                value="address 1"
+                wrapperClass=""
+              />,
+              <InputHolder
+                hideLabel={false}
+                label="Address (continued)"
+                name="apd-state-profile-addr2"
+                onChange={[Function]}
+                type="text"
+                value="address 2"
+                wrapperClass=""
+              />,
+              <div
+                className="clearfix mxn1"
+              >
+                <div
+                  className="col col-12 sm-col-6 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="City"
+                    name="apd-state-profile-city"
+                    onChange={[Function]}
+                    type="text"
+                    value="city"
+                    wrapperClass=""
+                  />
+                </div>
+                <div
+                  className="col col-6 sm-col-3 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="State"
+                    name="apd-state-profile-state"
+                    onChange={[Function]}
+                    type="text"
+                    value="state"
+                    wrapperClass=""
+                  />
+                </div>
+                <div
+                  className="col col-6 sm-col-3 px1"
+                >
+                  <InputHolder
+                    hideLabel={false}
+                    label="ZIP"
+                    name="apd-state-profile-zip"
+                    onChange={[Function]}
+                    type="text"
+                    value="zip"
+                    wrapperClass=""
+                  />
+                </div>
+              </div>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "hideLabel": false,
+                "label": "Address",
+                "name": "apd-state-profile-addr1",
+                "onChange": [Function],
+                "type": "text",
+                "value": "address 1",
+                "wrapperClass": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "hideLabel": false,
+                "label": "Address (continued)",
+                "name": "apd-state-profile-addr2",
+                "onChange": [Function],
+                "type": "text",
+                "value": "address 2",
+                "wrapperClass": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="col col-12 sm-col-6 px1"
+                  >
+                    <InputHolder
+                      hideLabel={false}
+                      label="City"
+                      name="apd-state-profile-city"
+                      onChange={[Function]}
+                      type="text"
+                      value="city"
+                      wrapperClass=""
+                    />
+                  </div>,
+                  <div
+                    className="col col-6 sm-col-3 px1"
+                  >
+                    <InputHolder
+                      hideLabel={false}
+                      label="State"
+                      name="apd-state-profile-state"
+                      onChange={[Function]}
+                      type="text"
+                      value="state"
+                      wrapperClass=""
+                    />
+                  </div>,
+                  <div
+                    className="col col-6 sm-col-3 px1"
+                  >
+                    <InputHolder
+                      hideLabel={false}
+                      label="ZIP"
+                      name="apd-state-profile-zip"
+                      onChange={[Function]}
+                      type="text"
+                      value="zip"
+                      wrapperClass=""
+                    />
+                  </div>,
+                ],
+                "className": "clearfix mxn1",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <InputHolder
+                      hideLabel={false}
+                      label="City"
+                      name="apd-state-profile-city"
+                      onChange={[Function]}
+                      type="text"
+                      value="city"
+                      wrapperClass=""
+                    />,
+                    "className": "col col-12 sm-col-6 px1",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "hideLabel": false,
+                      "label": "City",
+                      "name": "apd-state-profile-city",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "city",
+                      "wrapperClass": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <InputHolder
+                      hideLabel={false}
+                      label="State"
+                      name="apd-state-profile-state"
+                      onChange={[Function]}
+                      type="text"
+                      value="state"
+                      wrapperClass=""
+                    />,
+                    "className": "col col-6 sm-col-3 px1",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "hideLabel": false,
+                      "label": "State",
+                      "name": "apd-state-profile-state",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "state",
+                      "wrapperClass": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <InputHolder
+                      hideLabel={false}
+                      label="ZIP"
+                      name="apd-state-profile-zip"
+                      onChange={[Function]}
+                      type="text"
+                      value="zip"
+                      wrapperClass=""
+                    />,
+                    "className": "col col-6 sm-col-3 px1",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "hideLabel": false,
+                      "label": "ZIP",
+                      "name": "apd-state-profile-zip",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "zip",
+                      "wrapperClass": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": "div",
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

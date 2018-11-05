@@ -458,21 +458,19 @@ export const aggregateByYear = (dataArray, years, iteratee = x => x) =>
     return totals;
   }, arrToObj(years, 0));
 
-export const getCategoryTotals = (entries, iteratee = x => x) => {
-  let years = [];
-  if (entries.length) {
-    years = Object.keys(entries[0].years);
-  }
-  return aggregateByYear(entries.map(e => e.years), years, iteratee);
+export const getCategoryTotals = (entries, years, iteratee = x => x) => {
+  const x = aggregateByYear(entries.map(e => e.years), years, iteratee);
+  return x;
 };
 
 export const getActivityCategoryTotals = activity => ({
   statePersonnel: getCategoryTotals(
     activity.statePersonnel,
+    activity.years,
     d => d.amt * d.perc / 100
   ),
-  contractors: getCategoryTotals(activity.contractorResources),
-  expenses: getCategoryTotals(activity.expenses)
+  contractors: getCategoryTotals(activity.contractorResources, activity.years),
+  expenses: getCategoryTotals(activity.expenses, activity.years)
 });
 
 export const getActivityTotals = activity =>

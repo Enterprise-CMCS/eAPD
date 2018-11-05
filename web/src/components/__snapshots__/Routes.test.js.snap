@@ -34,10 +34,6 @@ ShallowWrapper {
         />,
         <Route
           component={[Function]}
-          path="/temp/misc"
-        />,
-        <Route
-          component={[Function]}
         />,
       ],
     },
@@ -83,18 +79,6 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": "/temp/misc",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "path": "/temp/misc",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
         "key": "no-match",
         "nodeType": "class",
         "props": Object {
@@ -127,10 +111,6 @@ ShallowWrapper {
           <Route
             component={[Function]}
             path="/login"
-          />,
-          <Route
-            component={[Function]}
-            path="/temp/misc"
           />,
           <Route
             component={[Function]}
@@ -172,18 +152,6 @@ ShallowWrapper {
           "props": Object {
             "component": [Function],
             "path": "/login",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "/temp/misc",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "path": "/temp/misc",
           },
           "ref": null,
           "rendered": null,

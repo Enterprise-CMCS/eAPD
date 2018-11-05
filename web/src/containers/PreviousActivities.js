@@ -49,3 +49,5 @@ const mapStateToProps = ({ apd }) => ({
 const mapDispatchToProps = { updateApd: updateApdAction };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PreviousActivities);
+
+export { PreviousActivities as plain, mapStateToProps, mapDispatchToProps };

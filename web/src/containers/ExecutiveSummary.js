@@ -109,3 +109,5 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExecutiveSummary);
+
+export { ExecutiveSummary as plain, mapStateToProps, mapDispatchToProps };
