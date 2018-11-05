@@ -53,92 +53,36 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        Array [
-          <UNDEFINED>
-            <MiniHeader
-              content={
-                <UNDEFINED>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Role: 
-                    <strong>
-                      unobservable
-                    </strong>
-                  </div>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Total cost:
-                     
-                    <strong>
-                      $300
-                    </strong>
-                  </div>
-                </UNDEFINED>
-              }
-              handleDelete={[Function]}
-              number={1}
-              title="person name"
-              titleColumns={4}
-              toggleForm={[Function]}
-            />
-            <PersonForm
-              handleChange={[Function]}
-              handleYearChange={[Function]}
-              idx={0}
-              person={
-                Object {
-                  "costs": Object {
-                    "1": 100,
-                    "2": 200,
-                  },
-                  "hasCosts": true,
-                  "key": "person1",
-                  "name": "person name",
-                  "position": "unobservable",
-                }
-              }
-              setPrimary={[Function]}
-              years={
-                Array [
-                  "1",
-                  "2",
-                ]
-              }
-            />
-          </UNDEFINED>,
-          <UNDEFINED>
-            <MiniHeader
-              content={
-                <UNDEFINED>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Role: 
-                    <strong>
-                      
-                    </strong>
-                  </div>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Total cost:
-                     
-                    <strong>
-                      $0
-                    </strong>
-                  </div>
-                </UNDEFINED>
-              }
-              handleDelete={[Function]}
-              number={2}
-              title="Name"
-              titleColumns={4}
-              toggleForm={[Function]}
-            />
-          </UNDEFINED>,
-        ],
+        <CollapsibleList
+          content={[Function]}
+          deleteItem={[Function]}
+          getKey={[Function]}
+          header={[Function]}
+          items={
+            Array [
+              Object {
+                "costs": Object {
+                  "1": 100,
+                  "2": 200,
+                },
+                "hasCosts": true,
+                "key": "person1",
+                "name": "person name",
+                "position": "unobservable",
+              },
+              Object {
+                "costs": Object {
+                  "1": 0,
+                  "2": 0,
+                },
+                "hasCosts": false,
+                "key": "person2",
+                "name": "",
+                "position": "",
+              },
+            ]
+          }
+        />,
         <Btn
           extraCss={null}
           kind="primary"
@@ -153,207 +97,39 @@ ShallowWrapper {
     "rendered": Array [
       Object {
         "instance": null,
-        "key": "person1",
+        "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": Array [
-            <MiniHeader
-              content={
-                <UNDEFINED>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Role: 
-                    <strong>
-                      unobservable
-                    </strong>
-                  </div>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Total cost:
-                     
-                    <strong>
-                      $300
-                    </strong>
-                  </div>
-                </UNDEFINED>
-              }
-              handleDelete={[Function]}
-              number={1}
-              title="person name"
-              titleColumns={4}
-              toggleForm={[Function]}
-            />,
-            <PersonForm
-              handleChange={[Function]}
-              handleYearChange={[Function]}
-              idx={0}
-              person={
-                Object {
-                  "costs": Object {
-                    "1": 100,
-                    "2": 200,
-                  },
-                  "hasCosts": true,
-                  "key": "person1",
-                  "name": "person name",
-                  "position": "unobservable",
-                }
-              }
-              setPrimary={[Function]}
-              years={
-                Array [
-                  "1",
-                  "2",
-                ]
-              }
-            />,
-          ],
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "content": <UNDEFINED>
-                <div
-                  className="col4 truncate"
-                >
-                  Role: 
-                  <strong>
-                    unobservable
-                  </strong>
-                </div>
-                <div
-                  className="col4 truncate"
-                >
-                  Total cost:
-                   
-                  <strong>
-                    $300
-                  </strong>
-                </div>
-              </UNDEFINED>,
-              "handleDelete": [Function],
-              "number": 1,
-              "title": "person name",
-              "titleColumns": 4,
-              "toggleForm": [Function],
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "handleChange": [Function],
-              "handleYearChange": [Function],
-              "idx": 0,
-              "person": Object {
-                "costs": Object {
-                  "1": 100,
-                  "2": 200,
-                },
-                "hasCosts": true,
-                "key": "person1",
-                "name": "person name",
-                "position": "unobservable",
+          "content": [Function],
+          "deleteItem": [Function],
+          "getKey": [Function],
+          "header": [Function],
+          "items": Array [
+            Object {
+              "costs": Object {
+                "1": 100,
+                "2": 200,
               },
-              "setPrimary": [Function],
-              "years": Array [
-                "1",
-                "2",
-              ],
+              "hasCosts": true,
+              "key": "person1",
+              "name": "person name",
+              "position": "unobservable",
             },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-        ],
-        "type": Symbol(react.fragment),
-      },
-      Object {
-        "instance": null,
-        "key": "person2",
-        "nodeType": "function",
-        "props": Object {
-          "children": Array [
-            <MiniHeader
-              content={
-                <UNDEFINED>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Role: 
-                    <strong>
-                      
-                    </strong>
-                  </div>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Total cost:
-                     
-                    <strong>
-                      $0
-                    </strong>
-                  </div>
-                </UNDEFINED>
-              }
-              handleDelete={[Function]}
-              number={2}
-              title="Name"
-              titleColumns={4}
-              toggleForm={[Function]}
-            />,
-            false,
+            Object {
+              "costs": Object {
+                "1": 0,
+                "2": 0,
+              },
+              "hasCosts": false,
+              "key": "person2",
+              "name": "",
+              "position": "",
+            },
           ],
         },
         "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "content": <UNDEFINED>
-                <div
-                  className="col4 truncate"
-                >
-                  Role: 
-                  <strong>
-                    
-                  </strong>
-                </div>
-                <div
-                  className="col4 truncate"
-                >
-                  Total cost:
-                   
-                  <strong>
-                    $0
-                  </strong>
-                </div>
-              </UNDEFINED>,
-              "handleDelete": [Function],
-              "number": 2,
-              "title": "Name",
-              "titleColumns": 4,
-              "toggleForm": [Function],
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          false,
-        ],
-        "type": Symbol(react.fragment),
+        "rendered": null,
+        "type": [Function],
       },
       Object {
         "instance": null,
@@ -380,92 +156,36 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          Array [
-            <UNDEFINED>
-              <MiniHeader
-                content={
-                  <UNDEFINED>
-                    <div
-                      className="col4 truncate"
-                    >
-                      Role: 
-                      <strong>
-                        unobservable
-                      </strong>
-                    </div>
-                    <div
-                      className="col4 truncate"
-                    >
-                      Total cost:
-                       
-                      <strong>
-                        $300
-                      </strong>
-                    </div>
-                  </UNDEFINED>
-                }
-                handleDelete={[Function]}
-                number={1}
-                title="person name"
-                titleColumns={4}
-                toggleForm={[Function]}
-              />
-              <PersonForm
-                handleChange={[Function]}
-                handleYearChange={[Function]}
-                idx={0}
-                person={
-                  Object {
-                    "costs": Object {
-                      "1": 100,
-                      "2": 200,
-                    },
-                    "hasCosts": true,
-                    "key": "person1",
-                    "name": "person name",
-                    "position": "unobservable",
-                  }
-                }
-                setPrimary={[Function]}
-                years={
-                  Array [
-                    "1",
-                    "2",
-                  ]
-                }
-              />
-            </UNDEFINED>,
-            <UNDEFINED>
-              <MiniHeader
-                content={
-                  <UNDEFINED>
-                    <div
-                      className="col4 truncate"
-                    >
-                      Role: 
-                      <strong>
-                        
-                      </strong>
-                    </div>
-                    <div
-                      className="col4 truncate"
-                    >
-                      Total cost:
-                       
-                      <strong>
-                        $0
-                      </strong>
-                    </div>
-                  </UNDEFINED>
-                }
-                handleDelete={[Function]}
-                number={2}
-                title="Name"
-                titleColumns={4}
-                toggleForm={[Function]}
-              />
-            </UNDEFINED>,
-          ],
+          <CollapsibleList
+            content={[Function]}
+            deleteItem={[Function]}
+            getKey={[Function]}
+            header={[Function]}
+            items={
+              Array [
+                Object {
+                  "costs": Object {
+                    "1": 100,
+                    "2": 200,
+                  },
+                  "hasCosts": true,
+                  "key": "person1",
+                  "name": "person name",
+                  "position": "unobservable",
+                },
+                Object {
+                  "costs": Object {
+                    "1": 0,
+                    "2": 0,
+                  },
+                  "hasCosts": false,
+                  "key": "person2",
+                  "name": "",
+                  "position": "",
+                },
+              ]
+            }
+          />,
           <Btn
             extraCss={null}
             kind="primary"
@@ -480,207 +200,39 @@ ShallowWrapper {
       "rendered": Array [
         Object {
           "instance": null,
-          "key": "person1",
+          "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": Array [
-              <MiniHeader
-                content={
-                  <UNDEFINED>
-                    <div
-                      className="col4 truncate"
-                    >
-                      Role: 
-                      <strong>
-                        unobservable
-                      </strong>
-                    </div>
-                    <div
-                      className="col4 truncate"
-                    >
-                      Total cost:
-                       
-                      <strong>
-                        $300
-                      </strong>
-                    </div>
-                  </UNDEFINED>
-                }
-                handleDelete={[Function]}
-                number={1}
-                title="person name"
-                titleColumns={4}
-                toggleForm={[Function]}
-              />,
-              <PersonForm
-                handleChange={[Function]}
-                handleYearChange={[Function]}
-                idx={0}
-                person={
-                  Object {
-                    "costs": Object {
-                      "1": 100,
-                      "2": 200,
-                    },
-                    "hasCosts": true,
-                    "key": "person1",
-                    "name": "person name",
-                    "position": "unobservable",
-                  }
-                }
-                setPrimary={[Function]}
-                years={
-                  Array [
-                    "1",
-                    "2",
-                  ]
-                }
-              />,
-            ],
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "content": <UNDEFINED>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Role: 
-                    <strong>
-                      unobservable
-                    </strong>
-                  </div>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Total cost:
-                     
-                    <strong>
-                      $300
-                    </strong>
-                  </div>
-                </UNDEFINED>,
-                "handleDelete": [Function],
-                "number": 1,
-                "title": "person name",
-                "titleColumns": 4,
-                "toggleForm": [Function],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "handleChange": [Function],
-                "handleYearChange": [Function],
-                "idx": 0,
-                "person": Object {
-                  "costs": Object {
-                    "1": 100,
-                    "2": 200,
-                  },
-                  "hasCosts": true,
-                  "key": "person1",
-                  "name": "person name",
-                  "position": "unobservable",
+            "content": [Function],
+            "deleteItem": [Function],
+            "getKey": [Function],
+            "header": [Function],
+            "items": Array [
+              Object {
+                "costs": Object {
+                  "1": 100,
+                  "2": 200,
                 },
-                "setPrimary": [Function],
-                "years": Array [
-                  "1",
-                  "2",
-                ],
+                "hasCosts": true,
+                "key": "person1",
+                "name": "person name",
+                "position": "unobservable",
               },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
-          "type": Symbol(react.fragment),
-        },
-        Object {
-          "instance": null,
-          "key": "person2",
-          "nodeType": "function",
-          "props": Object {
-            "children": Array [
-              <MiniHeader
-                content={
-                  <UNDEFINED>
-                    <div
-                      className="col4 truncate"
-                    >
-                      Role: 
-                      <strong>
-                        
-                      </strong>
-                    </div>
-                    <div
-                      className="col4 truncate"
-                    >
-                      Total cost:
-                       
-                      <strong>
-                        $0
-                      </strong>
-                    </div>
-                  </UNDEFINED>
-                }
-                handleDelete={[Function]}
-                number={2}
-                title="Name"
-                titleColumns={4}
-                toggleForm={[Function]}
-              />,
-              false,
+              Object {
+                "costs": Object {
+                  "1": 0,
+                  "2": 0,
+                },
+                "hasCosts": false,
+                "key": "person2",
+                "name": "",
+                "position": "",
+              },
             ],
           },
           "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "content": <UNDEFINED>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Role: 
-                    <strong>
-                      
-                    </strong>
-                  </div>
-                  <div
-                    className="col4 truncate"
-                  >
-                    Total cost:
-                     
-                    <strong>
-                      $0
-                    </strong>
-                  </div>
-                </UNDEFINED>,
-                "handleDelete": [Function],
-                "number": 2,
-                "title": "Name",
-                "titleColumns": 4,
-                "toggleForm": [Function],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            false,
-          ],
-          "type": Symbol(react.fragment),
+          "rendered": null,
+          "type": [Function],
         },
         Object {
           "instance": null,

@@ -284,7 +284,7 @@ describe('activities actions', () => {
                 {
                   id: 'new file id',
                   metadata: 'bloop bloop',
-                  url: 'undefined/files/new file id'
+                  url: `this-is-the-api-hi/files/new file id`
                 }
               ]
             }
@@ -293,6 +293,10 @@ describe('activities actions', () => {
       },
       { type: 'notification stub' }
     ];
+
+    // This action builds up a URL to the file using the API_URL env var, so
+    // let's set it to something we know so we can test against it.
+    process.env.API_URL = 'this-is-the-api-hi';
 
     await store.dispatch(
       actions.uploadActivityContractorFile(
