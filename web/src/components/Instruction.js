@@ -14,6 +14,8 @@ const Instruction = ({ reverse, source }) => {
   const detail = t([source, 'detail'], { defaultValue: false });
   const helpText = t([source, 'helpText'], { defaultValue: false });
 
+  console.log(t('storybook.instruction.heading'));
+
   return (
     <div>
       {heading && <h3>{heading}</h3>}
