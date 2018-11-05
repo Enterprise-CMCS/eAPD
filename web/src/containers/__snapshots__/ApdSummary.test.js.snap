@@ -1,0 +1,1396 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apd summary component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ApdSummary
+    apd={
+      Object {
+        "narrativeHIE": "about hie",
+        "narrativeHIT": "about hit",
+        "narrativeMMIS": "about mmis",
+        "programOverview": "about the program",
+        "yearOptions": Array [
+          "1",
+          "2",
+          "3",
+        ],
+        "years": Array [
+          "1",
+          "2",
+        ],
+      }
+    }
+    updateApd={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": <Subsection
+        id="apd-summary-overview"
+        nested={false}
+        open={false}
+        resource="apd.overview"
+      >
+        <div
+          className="mb3"
+        >
+          <div
+            className="mb-tiny bold"
+          >
+            Choose the federal fiscal year(s) this APD covers.
+          </div>
+          <label
+            className="mr1"
+          >
+            <input
+              checked={true}
+              onChange={[Function]}
+              type="checkbox"
+              value="1"
+            />
+            1
+          </label>
+          <label
+            className="mr1"
+          >
+            <input
+              checked={true}
+              onChange={[Function]}
+              type="checkbox"
+              value="2"
+            />
+            2
+          </label>
+          <label
+            className="mr1"
+          >
+            <input
+              checked={false}
+              onChange={[Function]}
+              type="checkbox"
+              value="3"
+            />
+            3
+          </label>
+        </div>
+        <div
+          className="mb3"
+        >
+          <div
+            className="bold"
+          >
+            Program Introduction
+          </div>
+          <HelpText
+            reminder="apd.introduction.reminder"
+            text="apd.introduction.helpText"
+          />
+          <RichText
+            content="about the program"
+            onSync={[Function]}
+          />
+        </div>
+        <div
+          className="mb3"
+        >
+          <div
+            className="bold"
+          >
+            HIT Overview
+          </div>
+          <HelpText
+            reminder="apd.hit.reminder"
+            text="apd.hit.helpText"
+          />
+          <RichText
+            content="about hit"
+            onSync={[Function]}
+          />
+        </div>
+        <div
+          className="mb3"
+        >
+          <div
+            className="bold"
+          >
+            HIE Overview
+          </div>
+          <HelpText
+            reminder="apd.hie.reminder"
+            text="apd.hie.helpText"
+          />
+          <RichText
+            content="about hie"
+            onSync={[Function]}
+          />
+        </div>
+        <div>
+          <div
+            className="bold"
+          >
+            MMIS Overview
+          </div>
+          <HelpText
+            reminder="apd.mmis.reminder"
+            text="apd.mmis.helpText"
+          />
+          <RichText
+            content="about mmis"
+            onSync={[Function]}
+          />
+        </div>
+      </Subsection>,
+      "id": "apd-summary",
+      "resource": "apd",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <div
+            className="mb3"
+          >
+            <div
+              className="mb-tiny bold"
+            >
+              Choose the federal fiscal year(s) this APD covers.
+            </div>
+            <label
+              className="mr1"
+            >
+              <input
+                checked={true}
+                onChange={[Function]}
+                type="checkbox"
+                value="1"
+              />
+              1
+            </label>
+            <label
+              className="mr1"
+            >
+              <input
+                checked={true}
+                onChange={[Function]}
+                type="checkbox"
+                value="2"
+              />
+              2
+            </label>
+            <label
+              className="mr1"
+            >
+              <input
+                checked={false}
+                onChange={[Function]}
+                type="checkbox"
+                value="3"
+              />
+              3
+            </label>
+          </div>,
+          <div
+            className="mb3"
+          >
+            <div
+              className="bold"
+            >
+              Program Introduction
+            </div>
+            <HelpText
+              reminder="apd.introduction.reminder"
+              text="apd.introduction.helpText"
+            />
+            <RichText
+              content="about the program"
+              onSync={[Function]}
+            />
+          </div>,
+          <div
+            className="mb3"
+          >
+            <div
+              className="bold"
+            >
+              HIT Overview
+            </div>
+            <HelpText
+              reminder="apd.hit.reminder"
+              text="apd.hit.helpText"
+            />
+            <RichText
+              content="about hit"
+              onSync={[Function]}
+            />
+          </div>,
+          <div
+            className="mb3"
+          >
+            <div
+              className="bold"
+            >
+              HIE Overview
+            </div>
+            <HelpText
+              reminder="apd.hie.reminder"
+              text="apd.hie.helpText"
+            />
+            <RichText
+              content="about hie"
+              onSync={[Function]}
+            />
+          </div>,
+          <div>
+            <div
+              className="bold"
+            >
+              MMIS Overview
+            </div>
+            <HelpText
+              reminder="apd.mmis.reminder"
+              text="apd.mmis.helpText"
+            />
+            <RichText
+              content="about mmis"
+              onSync={[Function]}
+            />
+          </div>,
+        ],
+        "id": "apd-summary-overview",
+        "nested": false,
+        "open": false,
+        "resource": "apd.overview",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="mb-tiny bold"
+              >
+                Choose the federal fiscal year(s) this APD covers.
+              </div>,
+              Array [
+                <label
+                  className="mr1"
+                >
+                  <input
+                    checked={true}
+                    onChange={[Function]}
+                    type="checkbox"
+                    value="1"
+                  />
+                  1
+                </label>,
+                <label
+                  className="mr1"
+                >
+                  <input
+                    checked={true}
+                    onChange={[Function]}
+                    type="checkbox"
+                    value="2"
+                  />
+                  2
+                </label>,
+                <label
+                  className="mr1"
+                >
+                  <input
+                    checked={false}
+                    onChange={[Function]}
+                    type="checkbox"
+                    value="3"
+                  />
+                  3
+                </label>,
+              ],
+            ],
+            "className": "mb3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Choose the federal fiscal year(s) this APD covers.",
+                "className": "mb-tiny bold",
+              },
+              "ref": null,
+              "rendered": "Choose the federal fiscal year(s) this APD covers.",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": "1",
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <input
+                    checked={true}
+                    onChange={[Function]}
+                    type="checkbox"
+                    value="1"
+                  />,
+                  "1",
+                ],
+                "className": "mr1",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "checked": true,
+                    "onChange": [Function],
+                    "type": "checkbox",
+                    "value": "1",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "input",
+                },
+                "1",
+              ],
+              "type": "label",
+            },
+            Object {
+              "instance": null,
+              "key": "2",
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <input
+                    checked={true}
+                    onChange={[Function]}
+                    type="checkbox"
+                    value="2"
+                  />,
+                  "2",
+                ],
+                "className": "mr1",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "checked": true,
+                    "onChange": [Function],
+                    "type": "checkbox",
+                    "value": "2",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "input",
+                },
+                "2",
+              ],
+              "type": "label",
+            },
+            Object {
+              "instance": null,
+              "key": "3",
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <input
+                    checked={false}
+                    onChange={[Function]}
+                    type="checkbox"
+                    value="3"
+                  />,
+                  "3",
+                ],
+                "className": "mr1",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "checked": false,
+                    "onChange": [Function],
+                    "type": "checkbox",
+                    "value": "3",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "input",
+                },
+                "3",
+              ],
+              "type": "label",
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="bold"
+              >
+                Program Introduction
+              </div>,
+              <HelpText
+                reminder="apd.introduction.reminder"
+                text="apd.introduction.helpText"
+              />,
+              <RichText
+                content="about the program"
+                onSync={[Function]}
+              />,
+            ],
+            "className": "mb3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Program Introduction",
+                "className": "bold",
+              },
+              "ref": null,
+              "rendered": "Program Introduction",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "reminder": "apd.introduction.reminder",
+                "text": "apd.introduction.helpText",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "content": "about the program",
+                "onSync": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="bold"
+              >
+                HIT Overview
+              </div>,
+              <HelpText
+                reminder="apd.hit.reminder"
+                text="apd.hit.helpText"
+              />,
+              <RichText
+                content="about hit"
+                onSync={[Function]}
+              />,
+            ],
+            "className": "mb3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "HIT Overview",
+                "className": "bold",
+              },
+              "ref": null,
+              "rendered": "HIT Overview",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "reminder": "apd.hit.reminder",
+                "text": "apd.hit.helpText",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "content": "about hit",
+                "onSync": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="bold"
+              >
+                HIE Overview
+              </div>,
+              <HelpText
+                reminder="apd.hie.reminder"
+                text="apd.hie.helpText"
+              />,
+              <RichText
+                content="about hie"
+                onSync={[Function]}
+              />,
+            ],
+            "className": "mb3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "HIE Overview",
+                "className": "bold",
+              },
+              "ref": null,
+              "rendered": "HIE Overview",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "reminder": "apd.hie.reminder",
+                "text": "apd.hie.helpText",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "content": "about hie",
+                "onSync": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="bold"
+              >
+                MMIS Overview
+              </div>,
+              <HelpText
+                reminder="apd.mmis.reminder"
+                text="apd.mmis.helpText"
+              />,
+              <RichText
+                content="about mmis"
+                onSync={[Function]}
+              />,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "MMIS Overview",
+                "className": "bold",
+              },
+              "ref": null,
+              "rendered": "MMIS Overview",
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "reminder": "apd.mmis.reminder",
+                "text": "apd.mmis.helpText",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "content": "about mmis",
+                "onSync": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": [Function],
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": <Subsection
+          id="apd-summary-overview"
+          nested={false}
+          open={false}
+          resource="apd.overview"
+        >
+          <div
+            className="mb3"
+          >
+            <div
+              className="mb-tiny bold"
+            >
+              Choose the federal fiscal year(s) this APD covers.
+            </div>
+            <label
+              className="mr1"
+            >
+              <input
+                checked={true}
+                onChange={[Function]}
+                type="checkbox"
+                value="1"
+              />
+              1
+            </label>
+            <label
+              className="mr1"
+            >
+              <input
+                checked={true}
+                onChange={[Function]}
+                type="checkbox"
+                value="2"
+              />
+              2
+            </label>
+            <label
+              className="mr1"
+            >
+              <input
+                checked={false}
+                onChange={[Function]}
+                type="checkbox"
+                value="3"
+              />
+              3
+            </label>
+          </div>
+          <div
+            className="mb3"
+          >
+            <div
+              className="bold"
+            >
+              Program Introduction
+            </div>
+            <HelpText
+              reminder="apd.introduction.reminder"
+              text="apd.introduction.helpText"
+            />
+            <RichText
+              content="about the program"
+              onSync={[Function]}
+            />
+          </div>
+          <div
+            className="mb3"
+          >
+            <div
+              className="bold"
+            >
+              HIT Overview
+            </div>
+            <HelpText
+              reminder="apd.hit.reminder"
+              text="apd.hit.helpText"
+            />
+            <RichText
+              content="about hit"
+              onSync={[Function]}
+            />
+          </div>
+          <div
+            className="mb3"
+          >
+            <div
+              className="bold"
+            >
+              HIE Overview
+            </div>
+            <HelpText
+              reminder="apd.hie.reminder"
+              text="apd.hie.helpText"
+            />
+            <RichText
+              content="about hie"
+              onSync={[Function]}
+            />
+          </div>
+          <div>
+            <div
+              className="bold"
+            >
+              MMIS Overview
+            </div>
+            <HelpText
+              reminder="apd.mmis.reminder"
+              text="apd.mmis.helpText"
+            />
+            <RichText
+              content="about mmis"
+              onSync={[Function]}
+            />
+          </div>
+        </Subsection>,
+        "id": "apd-summary",
+        "resource": "apd",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <div
+              className="mb3"
+            >
+              <div
+                className="mb-tiny bold"
+              >
+                Choose the federal fiscal year(s) this APD covers.
+              </div>
+              <label
+                className="mr1"
+              >
+                <input
+                  checked={true}
+                  onChange={[Function]}
+                  type="checkbox"
+                  value="1"
+                />
+                1
+              </label>
+              <label
+                className="mr1"
+              >
+                <input
+                  checked={true}
+                  onChange={[Function]}
+                  type="checkbox"
+                  value="2"
+                />
+                2
+              </label>
+              <label
+                className="mr1"
+              >
+                <input
+                  checked={false}
+                  onChange={[Function]}
+                  type="checkbox"
+                  value="3"
+                />
+                3
+              </label>
+            </div>,
+            <div
+              className="mb3"
+            >
+              <div
+                className="bold"
+              >
+                Program Introduction
+              </div>
+              <HelpText
+                reminder="apd.introduction.reminder"
+                text="apd.introduction.helpText"
+              />
+              <RichText
+                content="about the program"
+                onSync={[Function]}
+              />
+            </div>,
+            <div
+              className="mb3"
+            >
+              <div
+                className="bold"
+              >
+                HIT Overview
+              </div>
+              <HelpText
+                reminder="apd.hit.reminder"
+                text="apd.hit.helpText"
+              />
+              <RichText
+                content="about hit"
+                onSync={[Function]}
+              />
+            </div>,
+            <div
+              className="mb3"
+            >
+              <div
+                className="bold"
+              >
+                HIE Overview
+              </div>
+              <HelpText
+                reminder="apd.hie.reminder"
+                text="apd.hie.helpText"
+              />
+              <RichText
+                content="about hie"
+                onSync={[Function]}
+              />
+            </div>,
+            <div>
+              <div
+                className="bold"
+              >
+                MMIS Overview
+              </div>
+              <HelpText
+                reminder="apd.mmis.reminder"
+                text="apd.mmis.helpText"
+              />
+              <RichText
+                content="about mmis"
+                onSync={[Function]}
+              />
+            </div>,
+          ],
+          "id": "apd-summary-overview",
+          "nested": false,
+          "open": false,
+          "resource": "apd.overview",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="mb-tiny bold"
+                >
+                  Choose the federal fiscal year(s) this APD covers.
+                </div>,
+                Array [
+                  <label
+                    className="mr1"
+                  >
+                    <input
+                      checked={true}
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="1"
+                    />
+                    1
+                  </label>,
+                  <label
+                    className="mr1"
+                  >
+                    <input
+                      checked={true}
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="2"
+                    />
+                    2
+                  </label>,
+                  <label
+                    className="mr1"
+                  >
+                    <input
+                      checked={false}
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="3"
+                    />
+                    3
+                  </label>,
+                ],
+              ],
+              "className": "mb3",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Choose the federal fiscal year(s) this APD covers.",
+                  "className": "mb-tiny bold",
+                },
+                "ref": null,
+                "rendered": "Choose the federal fiscal year(s) this APD covers.",
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": "1",
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <input
+                      checked={true}
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="1"
+                    />,
+                    "1",
+                  ],
+                  "className": "mr1",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "checked": true,
+                      "onChange": [Function],
+                      "type": "checkbox",
+                      "value": "1",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                  "1",
+                ],
+                "type": "label",
+              },
+              Object {
+                "instance": null,
+                "key": "2",
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <input
+                      checked={true}
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="2"
+                    />,
+                    "2",
+                  ],
+                  "className": "mr1",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "checked": true,
+                      "onChange": [Function],
+                      "type": "checkbox",
+                      "value": "2",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                  "2",
+                ],
+                "type": "label",
+              },
+              Object {
+                "instance": null,
+                "key": "3",
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <input
+                      checked={false}
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="3"
+                    />,
+                    "3",
+                  ],
+                  "className": "mr1",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "checked": false,
+                      "onChange": [Function],
+                      "type": "checkbox",
+                      "value": "3",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                  "3",
+                ],
+                "type": "label",
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="bold"
+                >
+                  Program Introduction
+                </div>,
+                <HelpText
+                  reminder="apd.introduction.reminder"
+                  text="apd.introduction.helpText"
+                />,
+                <RichText
+                  content="about the program"
+                  onSync={[Function]}
+                />,
+              ],
+              "className": "mb3",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Program Introduction",
+                  "className": "bold",
+                },
+                "ref": null,
+                "rendered": "Program Introduction",
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "reminder": "apd.introduction.reminder",
+                  "text": "apd.introduction.helpText",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "content": "about the program",
+                  "onSync": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="bold"
+                >
+                  HIT Overview
+                </div>,
+                <HelpText
+                  reminder="apd.hit.reminder"
+                  text="apd.hit.helpText"
+                />,
+                <RichText
+                  content="about hit"
+                  onSync={[Function]}
+                />,
+              ],
+              "className": "mb3",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "HIT Overview",
+                  "className": "bold",
+                },
+                "ref": null,
+                "rendered": "HIT Overview",
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "reminder": "apd.hit.reminder",
+                  "text": "apd.hit.helpText",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "content": "about hit",
+                  "onSync": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="bold"
+                >
+                  HIE Overview
+                </div>,
+                <HelpText
+                  reminder="apd.hie.reminder"
+                  text="apd.hie.helpText"
+                />,
+                <RichText
+                  content="about hie"
+                  onSync={[Function]}
+                />,
+              ],
+              "className": "mb3",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "HIE Overview",
+                  "className": "bold",
+                },
+                "ref": null,
+                "rendered": "HIE Overview",
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "reminder": "apd.hie.reminder",
+                  "text": "apd.hie.helpText",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "content": "about hie",
+                  "onSync": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="bold"
+                >
+                  MMIS Overview
+                </div>,
+                <HelpText
+                  reminder="apd.mmis.reminder"
+                  text="apd.mmis.helpText"
+                />,
+                <RichText
+                  content="about mmis"
+                  onSync={[Function]}
+                />,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "MMIS Overview",
+                  "className": "bold",
+                },
+                "ref": null,
+                "rendered": "MMIS Overview",
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "reminder": "apd.mmis.reminder",
+                  "text": "apd.mmis.helpText",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "content": "about mmis",
+                  "onSync": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": [Function],
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

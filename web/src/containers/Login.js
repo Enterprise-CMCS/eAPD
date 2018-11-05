@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { login } from '../actions/auth';
 import Btn from '../components/Btn';
-import Container from '../components/Container';
+import { t } from '../i18n';
 
 class Login extends Component {
   state = { username: '', password: '' };
@@ -31,7 +31,15 @@ class Login extends Component {
     }
 
     return (
-      <Container>
+      <Fragment>
+        <header className="clearfix px2 py1 bg-white">
+          <div className="left">
+            <Link to="/" className="btn px0 bold caps">
+              {t('titleBasic')}
+            </Link>
+          </div>
+        </header>
+
         <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded">
           <h1 className="mt0 h2">Please log in.</h1>
           {error && (
@@ -67,7 +75,7 @@ class Login extends Component {
             </Btn>
           </form>
         </div>
-      </Container>
+      </Fragment>
     );
   }
 }
@@ -89,3 +97,5 @@ const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
 const mapDispatchToProps = { login };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export { Login as plain, mapStateToProps, mapDispatchToProps };

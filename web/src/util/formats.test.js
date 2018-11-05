@@ -23,6 +23,7 @@ describe('formatting util', () => {
     expect(formatMoney(999999)).toEqual('$999,999');
     expect(formatMoney(1234567)).toEqual('$1.23M');
     expect(formatMoney(1200000)).toEqual('$1.2M');
+    expect(formatMoney('hello')).toEqual('--');
   });
 
   test('formats percents', () => {

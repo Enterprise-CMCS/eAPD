@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`notification component renders correctly if there is message 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Notification
+    closeNotification={[Function]}
+    duration={3000}
+    messageInfo={
+      Object {
+        "key": "",
+        "message": "hello",
+      }
+    }
+    open={true}
+    processQueue={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "ContentProps": Object {
+        "aria-describedby": "notify-msg",
+      },
+      "anchorOrigin": Object {
+        "horizontal": "right",
+        "vertical": "bottom",
+      },
+      "autoHideDuration": 3000,
+      "message": <span
+        className="sans"
+        id="notify-msg"
+      >
+        hello
+      </span>,
+      "onClose": [Function],
+      "onExited": [Function],
+      "open": true,
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "ContentProps": Object {
+          "aria-describedby": "notify-msg",
+        },
+        "anchorOrigin": Object {
+          "horizontal": "right",
+          "vertical": "bottom",
+        },
+        "autoHideDuration": 3000,
+        "message": <span
+          className="sans"
+          id="notify-msg"
+        >
+          hello
+        </span>,
+        "onClose": [Function],
+        "onExited": [Function],
+        "open": true,
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`notification component renders correctly if there is no message 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Notification
+    closeNotification={[Function]}
+    duration={3000}
+    messageInfo={Object {}}
+    open={true}
+    processQueue={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): null,
+  Symbol(enzyme.__nodes__): Array [
+    null,
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

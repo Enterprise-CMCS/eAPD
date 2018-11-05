@@ -663,10 +663,13 @@ describe('activities reducer', () => {
 
   it('gets yearly totals for a category', () => {
     expect(
-      getCategoryTotals([
-        { years: { '1972': 10, '1973': 7 } },
-        { years: { '1972': 46, '1973': 8 } }
-      ])
+      getCategoryTotals(
+        [
+          { years: { '1972': 10, '1973': 7 } },
+          { years: { '1972': 46, '1973': 8 } }
+        ],
+        ['1972', '1973']
+      )
     ).toEqual({ '1972': 56, '1973': 15 });
   });
 
@@ -702,7 +705,8 @@ describe('activities reducer', () => {
               '1973': { amt: 90, perc: 30 }
             }
           }
-        ]
+        ],
+        years: ['1972', '1973']
       })
     ).toEqual({
       contractors: { '1972': 6, '1973': 60 },

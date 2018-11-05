@@ -106,3 +106,5 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CertifyAndSubmit);
+
+export { CertifyAndSubmit as plain, mapStateToProps, mapDispatchToProps };

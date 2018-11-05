@@ -43,7 +43,7 @@ const ProgressDot = ({ done, started, text }) => {
 ProgressDot.propTypes = {
   done: PropTypes.bool,
   started: PropTypes.bool,
-  text: PropTypes.bool
+  text: PropTypes.string
 };
 
 ProgressDot.defaultProps = {
@@ -133,7 +133,7 @@ const DocumentItem = ({ name, status, buttonClick }) => {
         <div className="bold sm-col-2">{name}</div>
         <div className="sm-col-7 flex items-center">
           {apdPipelineSteps.map((step, i) => (
-            <Fragment key={step.name}>
+            <Fragment key={step.text}>
               {i > 0 && <ProgressLine done={step.started || step.done} />}
               <ProgressDot {...step} />
             </Fragment>
@@ -155,7 +155,7 @@ const DocumentItem = ({ name, status, buttonClick }) => {
 
 DocumentItem.propTypes = {
   name: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
+  status: PropTypes.symbol.isRequired,
   buttonClick: PropTypes.func
 };
 
@@ -218,3 +218,12 @@ const mapStateToProps = ({ apd: { byId, fetching } }) => ({
 const mapDispatchToProps = { selectApd };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentDocuments);
+
+export {
+  CurrentDocuments as plain,
+  DocumentItem,
+  ProgressDot,
+  ProgressLine,
+  mapStateToProps,
+  mapDispatchToProps
+};

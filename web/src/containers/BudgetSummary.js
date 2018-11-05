@@ -272,3 +272,12 @@ const mapStateToProps = ({ apd, budget }) => {
 };
 
 export default connect(mapStateToProps)(BudgetSummary);
+
+export {
+  BudgetSummary as plain,
+  mapStateToProps,
+  DataRow,
+  DataRowDetails,
+  DataRowGroup,
+  HeaderRow
+};

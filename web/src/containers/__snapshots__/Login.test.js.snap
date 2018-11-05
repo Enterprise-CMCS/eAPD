@@ -1,0 +1,4385 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login component renders correctly if logged in 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Login
+    authenticated={true}
+    error=""
+    fetching={true}
+    location={
+      Object {
+        "state": Object {
+          "from": "origin",
+        },
+      }
+    }
+    login={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "push": false,
+      "to": "origin",
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "push": false,
+        "to": "origin",
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`login component renders correctly if logged in, but no previous location 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Login
+    authenticated={true}
+    error=""
+    fetching={true}
+    location={Object {}}
+    login={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "push": false,
+      "to": Object {
+        "pathname": "/",
+      },
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "push": false,
+        "to": Object {
+          "pathname": "/",
+        },
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`login component renders correctly if not logged in 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Login
+    authenticated={false}
+    error=""
+    fetching={false}
+    location={
+      Object {
+        "state": Object {
+          "from": "origin",
+        },
+      }
+    }
+    login={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <header
+          className="clearfix px2 py1 bg-white"
+        >
+          <div
+            className="left"
+          >
+            <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>
+          </div>
+        </header>,
+        <div
+          className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+        >
+          <h1
+            className="mt0 h2"
+          >
+            Please log in.
+          </h1>
+          
+          <form
+            onSubmit={[Function]}
+          >
+            <div
+              className="mb2"
+            >
+              <label
+                htmlFor="username"
+              >
+                Email
+              </label>
+              <input
+                className="input"
+                id="username"
+                name="username"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="mb2"
+            >
+              <label
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="input"
+                id="password"
+                name="password"
+                onChange={[Function]}
+                type="password"
+                value=""
+              />
+            </div>
+            <Btn
+              disabled={false}
+              extraCss={null}
+              kind="primary"
+              size={null}
+              type="submit"
+            >
+              Submit
+            </Btn>
+          </form>
+        </div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="left"
+          >
+            <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>
+          </div>,
+          "className": "clearfix px2 py1 bg-white",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>,
+            "className": "left",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "CMS HITECH APD",
+              "className": "btn px0 bold caps",
+              "replace": false,
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "CMS HITECH APD",
+            "type": [Function],
+          },
+          "type": "div",
+        },
+        "type": "header",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h1
+              className="mt0 h2"
+            >
+              Please log in.
+            </h1>,
+            "",
+            <form
+              onSubmit={[Function]}
+            >
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="username"
+                >
+                  Email
+                </label>
+                <input
+                  className="input"
+                  id="username"
+                  name="username"
+                  onChange={[Function]}
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="input"
+                  id="password"
+                  name="password"
+                  onChange={[Function]}
+                  type="password"
+                  value=""
+                />
+              </div>
+              <Btn
+                disabled={false}
+                extraCss={null}
+                kind="primary"
+                size={null}
+                type="submit"
+              >
+                Submit
+              </Btn>
+            </form>,
+          ],
+          "className": "mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Please log in.",
+              "className": "mt0 h2",
+            },
+            "ref": null,
+            "rendered": "Please log in.",
+            "type": "h1",
+          },
+          "",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="username"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="input"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>,
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="input"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    type="password"
+                    value=""
+                  />
+                </div>,
+                <Btn
+                  disabled={false}
+                  extraCss={null}
+                  kind="primary"
+                  size={null}
+                  type="submit"
+                >
+                  Submit
+                </Btn>,
+              ],
+              "onSubmit": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <label
+                      htmlFor="username"
+                    >
+                      Email
+                    </label>,
+                    <input
+                      className="input"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />,
+                  ],
+                  "className": "mb2",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Email",
+                      "htmlFor": "username",
+                    },
+                    "ref": null,
+                    "rendered": "Email",
+                    "type": "label",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "input",
+                      "id": "username",
+                      "name": "username",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>,
+                    <input
+                      className="input"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />,
+                  ],
+                  "className": "mb2",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Password",
+                      "htmlFor": "password",
+                    },
+                    "ref": null,
+                    "rendered": "Password",
+                    "type": "label",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "input",
+                      "id": "password",
+                      "name": "password",
+                      "onChange": [Function],
+                      "type": "password",
+                      "value": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": "Submit",
+                  "disabled": false,
+                  "extraCss": null,
+                  "kind": "primary",
+                  "size": null,
+                  "type": "submit",
+                },
+                "ref": null,
+                "rendered": "Submit",
+                "type": [Function],
+              },
+            ],
+            "type": "form",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <header
+            className="clearfix px2 py1 bg-white"
+          >
+            <div
+              className="left"
+            >
+              <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>
+            </div>
+          </header>,
+          <div
+            className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+          >
+            <h1
+              className="mt0 h2"
+            >
+              Please log in.
+            </h1>
+            
+            <form
+              onSubmit={[Function]}
+            >
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="username"
+                >
+                  Email
+                </label>
+                <input
+                  className="input"
+                  id="username"
+                  name="username"
+                  onChange={[Function]}
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="input"
+                  id="password"
+                  name="password"
+                  onChange={[Function]}
+                  type="password"
+                  value=""
+                />
+              </div>
+              <Btn
+                disabled={false}
+                extraCss={null}
+                kind="primary"
+                size={null}
+                type="submit"
+              >
+                Submit
+              </Btn>
+            </form>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="left"
+            >
+              <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>
+            </div>,
+            "className": "clearfix px2 py1 bg-white",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>,
+              "className": "left",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "CMS HITECH APD",
+                "className": "btn px0 bold caps",
+                "replace": false,
+                "to": "/",
+              },
+              "ref": null,
+              "rendered": "CMS HITECH APD",
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          "type": "header",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h1
+                className="mt0 h2"
+              >
+                Please log in.
+              </h1>,
+              "",
+              <form
+                onSubmit={[Function]}
+              >
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="username"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="input"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="input"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <Btn
+                  disabled={false}
+                  extraCss={null}
+                  kind="primary"
+                  size={null}
+                  type="submit"
+                >
+                  Submit
+                </Btn>
+              </form>,
+            ],
+            "className": "mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Please log in.",
+                "className": "mt0 h2",
+              },
+              "ref": null,
+              "rendered": "Please log in.",
+              "type": "h1",
+            },
+            "",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="mb2"
+                  >
+                    <label
+                      htmlFor="username"
+                    >
+                      Email
+                    </label>
+                    <input
+                      className="input"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />
+                  </div>,
+                  <div
+                    className="mb2"
+                  >
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>
+                    <input
+                      className="input"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>,
+                  <Btn
+                    disabled={false}
+                    extraCss={null}
+                    kind="primary"
+                    size={null}
+                    type="submit"
+                  >
+                    Submit
+                  </Btn>,
+                ],
+                "onSubmit": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <label
+                        htmlFor="username"
+                      >
+                        Email
+                      </label>,
+                      <input
+                        className="input"
+                        id="username"
+                        name="username"
+                        onChange={[Function]}
+                        type="text"
+                        value=""
+                      />,
+                    ],
+                    "className": "mb2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Email",
+                        "htmlFor": "username",
+                      },
+                      "ref": null,
+                      "rendered": "Email",
+                      "type": "label",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "className": "input",
+                        "id": "username",
+                        "name": "username",
+                        "onChange": [Function],
+                        "type": "text",
+                        "value": "",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "input",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <label
+                        htmlFor="password"
+                      >
+                        Password
+                      </label>,
+                      <input
+                        className="input"
+                        id="password"
+                        name="password"
+                        onChange={[Function]}
+                        type="password"
+                        value=""
+                      />,
+                    ],
+                    "className": "mb2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Password",
+                        "htmlFor": "password",
+                      },
+                      "ref": null,
+                      "rendered": "Password",
+                      "type": "label",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "className": "input",
+                        "id": "password",
+                        "name": "password",
+                        "onChange": [Function],
+                        "type": "password",
+                        "value": "",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "input",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "children": "Submit",
+                    "disabled": false,
+                    "extraCss": null,
+                    "kind": "primary",
+                    "size": null,
+                    "type": "submit",
+                  },
+                  "ref": null,
+                  "rendered": "Submit",
+                  "type": [Function],
+                },
+              ],
+              "type": "form",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`login component renders correctly if not logged in 2`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Login
+    authenticated={false}
+    error=""
+    fetching={false}
+    location={
+      Object {
+        "state": Object {
+          "from": "origin",
+        },
+      }
+    }
+    login={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <header
+          className="clearfix px2 py1 bg-white"
+        >
+          <div
+            className="left"
+          >
+            <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>
+          </div>
+        </header>,
+        <div
+          className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+        >
+          <h1
+            className="mt0 h2"
+          >
+            Please log in.
+          </h1>
+          
+          <form
+            onSubmit={[Function]}
+          >
+            <div
+              className="mb2"
+            >
+              <label
+                htmlFor="username"
+              >
+                Email
+              </label>
+              <input
+                className="input"
+                id="username"
+                name="username"
+                onChange={[Function]}
+                type="text"
+                value="bob"
+              />
+            </div>
+            <div
+              className="mb2"
+            >
+              <label
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="input"
+                id="password"
+                name="password"
+                onChange={[Function]}
+                type="password"
+                value=""
+              />
+            </div>
+            <Btn
+              disabled={false}
+              extraCss={null}
+              kind="primary"
+              size={null}
+              type="submit"
+            >
+              Submit
+            </Btn>
+          </form>
+        </div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="left"
+          >
+            <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>
+          </div>,
+          "className": "clearfix px2 py1 bg-white",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>,
+            "className": "left",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "CMS HITECH APD",
+              "className": "btn px0 bold caps",
+              "replace": false,
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "CMS HITECH APD",
+            "type": [Function],
+          },
+          "type": "div",
+        },
+        "type": "header",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h1
+              className="mt0 h2"
+            >
+              Please log in.
+            </h1>,
+            "",
+            <form
+              onSubmit={[Function]}
+            >
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="username"
+                >
+                  Email
+                </label>
+                <input
+                  className="input"
+                  id="username"
+                  name="username"
+                  onChange={[Function]}
+                  type="text"
+                  value="bob"
+                />
+              </div>
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="input"
+                  id="password"
+                  name="password"
+                  onChange={[Function]}
+                  type="password"
+                  value=""
+                />
+              </div>
+              <Btn
+                disabled={false}
+                extraCss={null}
+                kind="primary"
+                size={null}
+                type="submit"
+              >
+                Submit
+              </Btn>
+            </form>,
+          ],
+          "className": "mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Please log in.",
+              "className": "mt0 h2",
+            },
+            "ref": null,
+            "rendered": "Please log in.",
+            "type": "h1",
+          },
+          "",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="username"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="input"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    type="text"
+                    value="bob"
+                  />
+                </div>,
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="input"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    type="password"
+                    value=""
+                  />
+                </div>,
+                <Btn
+                  disabled={false}
+                  extraCss={null}
+                  kind="primary"
+                  size={null}
+                  type="submit"
+                >
+                  Submit
+                </Btn>,
+              ],
+              "onSubmit": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <label
+                      htmlFor="username"
+                    >
+                      Email
+                    </label>,
+                    <input
+                      className="input"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value="bob"
+                    />,
+                  ],
+                  "className": "mb2",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Email",
+                      "htmlFor": "username",
+                    },
+                    "ref": null,
+                    "rendered": "Email",
+                    "type": "label",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "input",
+                      "id": "username",
+                      "name": "username",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "bob",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>,
+                    <input
+                      className="input"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />,
+                  ],
+                  "className": "mb2",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Password",
+                      "htmlFor": "password",
+                    },
+                    "ref": null,
+                    "rendered": "Password",
+                    "type": "label",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "input",
+                      "id": "password",
+                      "name": "password",
+                      "onChange": [Function],
+                      "type": "password",
+                      "value": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": "Submit",
+                  "disabled": false,
+                  "extraCss": null,
+                  "kind": "primary",
+                  "size": null,
+                  "type": "submit",
+                },
+                "ref": null,
+                "rendered": "Submit",
+                "type": [Function],
+              },
+            ],
+            "type": "form",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <header
+            className="clearfix px2 py1 bg-white"
+          >
+            <div
+              className="left"
+            >
+              <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>
+            </div>
+          </header>,
+          <div
+            className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+          >
+            <h1
+              className="mt0 h2"
+            >
+              Please log in.
+            </h1>
+            
+            <form
+              onSubmit={[Function]}
+            >
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="username"
+                >
+                  Email
+                </label>
+                <input
+                  className="input"
+                  id="username"
+                  name="username"
+                  onChange={[Function]}
+                  type="text"
+                  value="bob"
+                />
+              </div>
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="input"
+                  id="password"
+                  name="password"
+                  onChange={[Function]}
+                  type="password"
+                  value=""
+                />
+              </div>
+              <Btn
+                disabled={false}
+                extraCss={null}
+                kind="primary"
+                size={null}
+                type="submit"
+              >
+                Submit
+              </Btn>
+            </form>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="left"
+            >
+              <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>
+            </div>,
+            "className": "clearfix px2 py1 bg-white",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>,
+              "className": "left",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "CMS HITECH APD",
+                "className": "btn px0 bold caps",
+                "replace": false,
+                "to": "/",
+              },
+              "ref": null,
+              "rendered": "CMS HITECH APD",
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          "type": "header",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h1
+                className="mt0 h2"
+              >
+                Please log in.
+              </h1>,
+              "",
+              <form
+                onSubmit={[Function]}
+              >
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="username"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="input"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    type="text"
+                    value="bob"
+                  />
+                </div>
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="input"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <Btn
+                  disabled={false}
+                  extraCss={null}
+                  kind="primary"
+                  size={null}
+                  type="submit"
+                >
+                  Submit
+                </Btn>
+              </form>,
+            ],
+            "className": "mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Please log in.",
+                "className": "mt0 h2",
+              },
+              "ref": null,
+              "rendered": "Please log in.",
+              "type": "h1",
+            },
+            "",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="mb2"
+                  >
+                    <label
+                      htmlFor="username"
+                    >
+                      Email
+                    </label>
+                    <input
+                      className="input"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value="bob"
+                    />
+                  </div>,
+                  <div
+                    className="mb2"
+                  >
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>
+                    <input
+                      className="input"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>,
+                  <Btn
+                    disabled={false}
+                    extraCss={null}
+                    kind="primary"
+                    size={null}
+                    type="submit"
+                  >
+                    Submit
+                  </Btn>,
+                ],
+                "onSubmit": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <label
+                        htmlFor="username"
+                      >
+                        Email
+                      </label>,
+                      <input
+                        className="input"
+                        id="username"
+                        name="username"
+                        onChange={[Function]}
+                        type="text"
+                        value="bob"
+                      />,
+                    ],
+                    "className": "mb2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Email",
+                        "htmlFor": "username",
+                      },
+                      "ref": null,
+                      "rendered": "Email",
+                      "type": "label",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "className": "input",
+                        "id": "username",
+                        "name": "username",
+                        "onChange": [Function],
+                        "type": "text",
+                        "value": "bob",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "input",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <label
+                        htmlFor="password"
+                      >
+                        Password
+                      </label>,
+                      <input
+                        className="input"
+                        id="password"
+                        name="password"
+                        onChange={[Function]}
+                        type="password"
+                        value=""
+                      />,
+                    ],
+                    "className": "mb2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Password",
+                        "htmlFor": "password",
+                      },
+                      "ref": null,
+                      "rendered": "Password",
+                      "type": "label",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "className": "input",
+                        "id": "password",
+                        "name": "password",
+                        "onChange": [Function],
+                        "type": "password",
+                        "value": "",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "input",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "children": "Submit",
+                    "disabled": false,
+                    "extraCss": null,
+                    "kind": "primary",
+                    "size": null,
+                    "type": "submit",
+                  },
+                  "ref": null,
+                  "rendered": "Submit",
+                  "type": [Function],
+                },
+              ],
+              "type": "form",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`login component renders correctly if not logged in 3`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Login
+    authenticated={false}
+    error=""
+    fetching={false}
+    location={
+      Object {
+        "state": Object {
+          "from": "origin",
+        },
+      }
+    }
+    login={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <header
+          className="clearfix px2 py1 bg-white"
+        >
+          <div
+            className="left"
+          >
+            <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>
+          </div>
+        </header>,
+        <div
+          className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+        >
+          <h1
+            className="mt0 h2"
+          >
+            Please log in.
+          </h1>
+          
+          <form
+            onSubmit={[Function]}
+          >
+            <div
+              className="mb2"
+            >
+              <label
+                htmlFor="username"
+              >
+                Email
+              </label>
+              <input
+                className="input"
+                id="username"
+                name="username"
+                onChange={[Function]}
+                type="text"
+                value="bob"
+              />
+            </div>
+            <div
+              className="mb2"
+            >
+              <label
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="input"
+                id="password"
+                name="password"
+                onChange={[Function]}
+                type="password"
+                value="secret"
+              />
+            </div>
+            <Btn
+              disabled={false}
+              extraCss={null}
+              kind="primary"
+              size={null}
+              type="submit"
+            >
+              Submit
+            </Btn>
+          </form>
+        </div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="left"
+          >
+            <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>
+          </div>,
+          "className": "clearfix px2 py1 bg-white",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>,
+            "className": "left",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "CMS HITECH APD",
+              "className": "btn px0 bold caps",
+              "replace": false,
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "CMS HITECH APD",
+            "type": [Function],
+          },
+          "type": "div",
+        },
+        "type": "header",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h1
+              className="mt0 h2"
+            >
+              Please log in.
+            </h1>,
+            "",
+            <form
+              onSubmit={[Function]}
+            >
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="username"
+                >
+                  Email
+                </label>
+                <input
+                  className="input"
+                  id="username"
+                  name="username"
+                  onChange={[Function]}
+                  type="text"
+                  value="bob"
+                />
+              </div>
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="input"
+                  id="password"
+                  name="password"
+                  onChange={[Function]}
+                  type="password"
+                  value="secret"
+                />
+              </div>
+              <Btn
+                disabled={false}
+                extraCss={null}
+                kind="primary"
+                size={null}
+                type="submit"
+              >
+                Submit
+              </Btn>
+            </form>,
+          ],
+          "className": "mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Please log in.",
+              "className": "mt0 h2",
+            },
+            "ref": null,
+            "rendered": "Please log in.",
+            "type": "h1",
+          },
+          "",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="username"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="input"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    type="text"
+                    value="bob"
+                  />
+                </div>,
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="input"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    type="password"
+                    value="secret"
+                  />
+                </div>,
+                <Btn
+                  disabled={false}
+                  extraCss={null}
+                  kind="primary"
+                  size={null}
+                  type="submit"
+                >
+                  Submit
+                </Btn>,
+              ],
+              "onSubmit": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <label
+                      htmlFor="username"
+                    >
+                      Email
+                    </label>,
+                    <input
+                      className="input"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value="bob"
+                    />,
+                  ],
+                  "className": "mb2",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Email",
+                      "htmlFor": "username",
+                    },
+                    "ref": null,
+                    "rendered": "Email",
+                    "type": "label",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "input",
+                      "id": "username",
+                      "name": "username",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "bob",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>,
+                    <input
+                      className="input"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value="secret"
+                    />,
+                  ],
+                  "className": "mb2",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Password",
+                      "htmlFor": "password",
+                    },
+                    "ref": null,
+                    "rendered": "Password",
+                    "type": "label",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "input",
+                      "id": "password",
+                      "name": "password",
+                      "onChange": [Function],
+                      "type": "password",
+                      "value": "secret",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": "Submit",
+                  "disabled": false,
+                  "extraCss": null,
+                  "kind": "primary",
+                  "size": null,
+                  "type": "submit",
+                },
+                "ref": null,
+                "rendered": "Submit",
+                "type": [Function],
+              },
+            ],
+            "type": "form",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <header
+            className="clearfix px2 py1 bg-white"
+          >
+            <div
+              className="left"
+            >
+              <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>
+            </div>
+          </header>,
+          <div
+            className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+          >
+            <h1
+              className="mt0 h2"
+            >
+              Please log in.
+            </h1>
+            
+            <form
+              onSubmit={[Function]}
+            >
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="username"
+                >
+                  Email
+                </label>
+                <input
+                  className="input"
+                  id="username"
+                  name="username"
+                  onChange={[Function]}
+                  type="text"
+                  value="bob"
+                />
+              </div>
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="input"
+                  id="password"
+                  name="password"
+                  onChange={[Function]}
+                  type="password"
+                  value="secret"
+                />
+              </div>
+              <Btn
+                disabled={false}
+                extraCss={null}
+                kind="primary"
+                size={null}
+                type="submit"
+              >
+                Submit
+              </Btn>
+            </form>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="left"
+            >
+              <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>
+            </div>,
+            "className": "clearfix px2 py1 bg-white",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>,
+              "className": "left",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "CMS HITECH APD",
+                "className": "btn px0 bold caps",
+                "replace": false,
+                "to": "/",
+              },
+              "ref": null,
+              "rendered": "CMS HITECH APD",
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          "type": "header",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h1
+                className="mt0 h2"
+              >
+                Please log in.
+              </h1>,
+              "",
+              <form
+                onSubmit={[Function]}
+              >
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="username"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="input"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    type="text"
+                    value="bob"
+                  />
+                </div>
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="input"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    type="password"
+                    value="secret"
+                  />
+                </div>
+                <Btn
+                  disabled={false}
+                  extraCss={null}
+                  kind="primary"
+                  size={null}
+                  type="submit"
+                >
+                  Submit
+                </Btn>
+              </form>,
+            ],
+            "className": "mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Please log in.",
+                "className": "mt0 h2",
+              },
+              "ref": null,
+              "rendered": "Please log in.",
+              "type": "h1",
+            },
+            "",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="mb2"
+                  >
+                    <label
+                      htmlFor="username"
+                    >
+                      Email
+                    </label>
+                    <input
+                      className="input"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value="bob"
+                    />
+                  </div>,
+                  <div
+                    className="mb2"
+                  >
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>
+                    <input
+                      className="input"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value="secret"
+                    />
+                  </div>,
+                  <Btn
+                    disabled={false}
+                    extraCss={null}
+                    kind="primary"
+                    size={null}
+                    type="submit"
+                  >
+                    Submit
+                  </Btn>,
+                ],
+                "onSubmit": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <label
+                        htmlFor="username"
+                      >
+                        Email
+                      </label>,
+                      <input
+                        className="input"
+                        id="username"
+                        name="username"
+                        onChange={[Function]}
+                        type="text"
+                        value="bob"
+                      />,
+                    ],
+                    "className": "mb2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Email",
+                        "htmlFor": "username",
+                      },
+                      "ref": null,
+                      "rendered": "Email",
+                      "type": "label",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "className": "input",
+                        "id": "username",
+                        "name": "username",
+                        "onChange": [Function],
+                        "type": "text",
+                        "value": "bob",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "input",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <label
+                        htmlFor="password"
+                      >
+                        Password
+                      </label>,
+                      <input
+                        className="input"
+                        id="password"
+                        name="password"
+                        onChange={[Function]}
+                        type="password"
+                        value="secret"
+                      />,
+                    ],
+                    "className": "mb2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Password",
+                        "htmlFor": "password",
+                      },
+                      "ref": null,
+                      "rendered": "Password",
+                      "type": "label",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "className": "input",
+                        "id": "password",
+                        "name": "password",
+                        "onChange": [Function],
+                        "type": "password",
+                        "value": "secret",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "input",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "children": "Submit",
+                    "disabled": false,
+                    "extraCss": null,
+                    "kind": "primary",
+                    "size": null,
+                    "type": "submit",
+                  },
+                  "ref": null,
+                  "rendered": "Submit",
+                  "type": [Function],
+                },
+              ],
+              "type": "form",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`login component renders correctly if not logged in and fetching data 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Login
+    authenticated={false}
+    error=""
+    fetching={true}
+    location={
+      Object {
+        "state": Object {
+          "from": "origin",
+        },
+      }
+    }
+    login={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <header
+          className="clearfix px2 py1 bg-white"
+        >
+          <div
+            className="left"
+          >
+            <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>
+          </div>
+        </header>,
+        <div
+          className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+        >
+          <h1
+            className="mt0 h2"
+          >
+            Please log in.
+          </h1>
+          
+          <form
+            onSubmit={[Function]}
+          >
+            <div
+              className="mb2"
+            >
+              <label
+                htmlFor="username"
+              >
+                Email
+              </label>
+              <input
+                className="input"
+                id="username"
+                name="username"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="mb2"
+            >
+              <label
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="input"
+                id="password"
+                name="password"
+                onChange={[Function]}
+                type="password"
+                value=""
+              />
+            </div>
+            <Btn
+              disabled={true}
+              extraCss={null}
+              kind="primary"
+              size={null}
+              type="submit"
+            >
+              Submitting
+            </Btn>
+          </form>
+        </div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="left"
+          >
+            <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>
+          </div>,
+          "className": "clearfix px2 py1 bg-white",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>,
+            "className": "left",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "CMS HITECH APD",
+              "className": "btn px0 bold caps",
+              "replace": false,
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "CMS HITECH APD",
+            "type": [Function],
+          },
+          "type": "div",
+        },
+        "type": "header",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h1
+              className="mt0 h2"
+            >
+              Please log in.
+            </h1>,
+            "",
+            <form
+              onSubmit={[Function]}
+            >
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="username"
+                >
+                  Email
+                </label>
+                <input
+                  className="input"
+                  id="username"
+                  name="username"
+                  onChange={[Function]}
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="input"
+                  id="password"
+                  name="password"
+                  onChange={[Function]}
+                  type="password"
+                  value=""
+                />
+              </div>
+              <Btn
+                disabled={true}
+                extraCss={null}
+                kind="primary"
+                size={null}
+                type="submit"
+              >
+                Submitting
+              </Btn>
+            </form>,
+          ],
+          "className": "mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Please log in.",
+              "className": "mt0 h2",
+            },
+            "ref": null,
+            "rendered": "Please log in.",
+            "type": "h1",
+          },
+          "",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="username"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="input"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>,
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="input"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    type="password"
+                    value=""
+                  />
+                </div>,
+                <Btn
+                  disabled={true}
+                  extraCss={null}
+                  kind="primary"
+                  size={null}
+                  type="submit"
+                >
+                  Submitting
+                </Btn>,
+              ],
+              "onSubmit": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <label
+                      htmlFor="username"
+                    >
+                      Email
+                    </label>,
+                    <input
+                      className="input"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />,
+                  ],
+                  "className": "mb2",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Email",
+                      "htmlFor": "username",
+                    },
+                    "ref": null,
+                    "rendered": "Email",
+                    "type": "label",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "input",
+                      "id": "username",
+                      "name": "username",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>,
+                    <input
+                      className="input"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />,
+                  ],
+                  "className": "mb2",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Password",
+                      "htmlFor": "password",
+                    },
+                    "ref": null,
+                    "rendered": "Password",
+                    "type": "label",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "input",
+                      "id": "password",
+                      "name": "password",
+                      "onChange": [Function],
+                      "type": "password",
+                      "value": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": "Submitting",
+                  "disabled": true,
+                  "extraCss": null,
+                  "kind": "primary",
+                  "size": null,
+                  "type": "submit",
+                },
+                "ref": null,
+                "rendered": "Submitting",
+                "type": [Function],
+              },
+            ],
+            "type": "form",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <header
+            className="clearfix px2 py1 bg-white"
+          >
+            <div
+              className="left"
+            >
+              <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>
+            </div>
+          </header>,
+          <div
+            className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+          >
+            <h1
+              className="mt0 h2"
+            >
+              Please log in.
+            </h1>
+            
+            <form
+              onSubmit={[Function]}
+            >
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="username"
+                >
+                  Email
+                </label>
+                <input
+                  className="input"
+                  id="username"
+                  name="username"
+                  onChange={[Function]}
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="input"
+                  id="password"
+                  name="password"
+                  onChange={[Function]}
+                  type="password"
+                  value=""
+                />
+              </div>
+              <Btn
+                disabled={true}
+                extraCss={null}
+                kind="primary"
+                size={null}
+                type="submit"
+              >
+                Submitting
+              </Btn>
+            </form>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="left"
+            >
+              <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>
+            </div>,
+            "className": "clearfix px2 py1 bg-white",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>,
+              "className": "left",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "CMS HITECH APD",
+                "className": "btn px0 bold caps",
+                "replace": false,
+                "to": "/",
+              },
+              "ref": null,
+              "rendered": "CMS HITECH APD",
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          "type": "header",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h1
+                className="mt0 h2"
+              >
+                Please log in.
+              </h1>,
+              "",
+              <form
+                onSubmit={[Function]}
+              >
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="username"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="input"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="input"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <Btn
+                  disabled={true}
+                  extraCss={null}
+                  kind="primary"
+                  size={null}
+                  type="submit"
+                >
+                  Submitting
+                </Btn>
+              </form>,
+            ],
+            "className": "mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Please log in.",
+                "className": "mt0 h2",
+              },
+              "ref": null,
+              "rendered": "Please log in.",
+              "type": "h1",
+            },
+            "",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="mb2"
+                  >
+                    <label
+                      htmlFor="username"
+                    >
+                      Email
+                    </label>
+                    <input
+                      className="input"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />
+                  </div>,
+                  <div
+                    className="mb2"
+                  >
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>
+                    <input
+                      className="input"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>,
+                  <Btn
+                    disabled={true}
+                    extraCss={null}
+                    kind="primary"
+                    size={null}
+                    type="submit"
+                  >
+                    Submitting
+                  </Btn>,
+                ],
+                "onSubmit": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <label
+                        htmlFor="username"
+                      >
+                        Email
+                      </label>,
+                      <input
+                        className="input"
+                        id="username"
+                        name="username"
+                        onChange={[Function]}
+                        type="text"
+                        value=""
+                      />,
+                    ],
+                    "className": "mb2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Email",
+                        "htmlFor": "username",
+                      },
+                      "ref": null,
+                      "rendered": "Email",
+                      "type": "label",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "className": "input",
+                        "id": "username",
+                        "name": "username",
+                        "onChange": [Function],
+                        "type": "text",
+                        "value": "",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "input",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <label
+                        htmlFor="password"
+                      >
+                        Password
+                      </label>,
+                      <input
+                        className="input"
+                        id="password"
+                        name="password"
+                        onChange={[Function]}
+                        type="password"
+                        value=""
+                      />,
+                    ],
+                    "className": "mb2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Password",
+                        "htmlFor": "password",
+                      },
+                      "ref": null,
+                      "rendered": "Password",
+                      "type": "label",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "className": "input",
+                        "id": "password",
+                        "name": "password",
+                        "onChange": [Function],
+                        "type": "password",
+                        "value": "",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "input",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "children": "Submitting",
+                    "disabled": true,
+                    "extraCss": null,
+                    "kind": "primary",
+                    "size": null,
+                    "type": "submit",
+                  },
+                  "ref": null,
+                  "rendered": "Submitting",
+                  "type": [Function],
+                },
+              ],
+              "type": "form",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`login component renders correctly if not logged in and there is an error 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Login
+    authenticated={false}
+    error="something here"
+    fetching={false}
+    location={
+      Object {
+        "state": Object {
+          "from": "origin",
+        },
+      }
+    }
+    login={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <header
+          className="clearfix px2 py1 bg-white"
+        >
+          <div
+            className="left"
+          >
+            <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>
+          </div>
+        </header>,
+        <div
+          className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+        >
+          <h1
+            className="mt0 h2"
+          >
+            Please log in.
+          </h1>
+          <div
+            className="mb2 p1 h6 alert alert-error"
+          >
+            <strong>
+              Sorry!
+            </strong>
+             Something went wrong. Please try again.
+          </div>
+          <form
+            onSubmit={[Function]}
+          >
+            <div
+              className="mb2"
+            >
+              <label
+                htmlFor="username"
+              >
+                Email
+              </label>
+              <input
+                className="input"
+                id="username"
+                name="username"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="mb2"
+            >
+              <label
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="input"
+                id="password"
+                name="password"
+                onChange={[Function]}
+                type="password"
+                value=""
+              />
+            </div>
+            <Btn
+              disabled={false}
+              extraCss={null}
+              kind="primary"
+              size={null}
+              type="submit"
+            >
+              Submit
+            </Btn>
+          </form>
+        </div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="left"
+          >
+            <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>
+          </div>,
+          "className": "clearfix px2 py1 bg-white",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <Link
+              className="btn px0 bold caps"
+              replace={false}
+              to="/"
+            >
+              CMS HITECH APD
+            </Link>,
+            "className": "left",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "CMS HITECH APD",
+              "className": "btn px0 bold caps",
+              "replace": false,
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "CMS HITECH APD",
+            "type": [Function],
+          },
+          "type": "div",
+        },
+        "type": "header",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h1
+              className="mt0 h2"
+            >
+              Please log in.
+            </h1>,
+            <div
+              className="mb2 p1 h6 alert alert-error"
+            >
+              <strong>
+                Sorry!
+              </strong>
+               Something went wrong. Please try again.
+            </div>,
+            <form
+              onSubmit={[Function]}
+            >
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="username"
+                >
+                  Email
+                </label>
+                <input
+                  className="input"
+                  id="username"
+                  name="username"
+                  onChange={[Function]}
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="input"
+                  id="password"
+                  name="password"
+                  onChange={[Function]}
+                  type="password"
+                  value=""
+                />
+              </div>
+              <Btn
+                disabled={false}
+                extraCss={null}
+                kind="primary"
+                size={null}
+                type="submit"
+              >
+                Submit
+              </Btn>
+            </form>,
+          ],
+          "className": "mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Please log in.",
+              "className": "mt0 h2",
+            },
+            "ref": null,
+            "rendered": "Please log in.",
+            "type": "h1",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <strong>
+                  Sorry!
+                </strong>,
+                " Something went wrong. Please try again.",
+              ],
+              "className": "mb2 p1 h6 alert alert-error",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Sorry!",
+                },
+                "ref": null,
+                "rendered": "Sorry!",
+                "type": "strong",
+              },
+              " Something went wrong. Please try again.",
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="username"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="input"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>,
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="input"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    type="password"
+                    value=""
+                  />
+                </div>,
+                <Btn
+                  disabled={false}
+                  extraCss={null}
+                  kind="primary"
+                  size={null}
+                  type="submit"
+                >
+                  Submit
+                </Btn>,
+              ],
+              "onSubmit": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <label
+                      htmlFor="username"
+                    >
+                      Email
+                    </label>,
+                    <input
+                      className="input"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />,
+                  ],
+                  "className": "mb2",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Email",
+                      "htmlFor": "username",
+                    },
+                    "ref": null,
+                    "rendered": "Email",
+                    "type": "label",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "input",
+                      "id": "username",
+                      "name": "username",
+                      "onChange": [Function],
+                      "type": "text",
+                      "value": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>,
+                    <input
+                      className="input"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />,
+                  ],
+                  "className": "mb2",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Password",
+                      "htmlFor": "password",
+                    },
+                    "ref": null,
+                    "rendered": "Password",
+                    "type": "label",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "input",
+                      "id": "password",
+                      "name": "password",
+                      "onChange": [Function],
+                      "type": "password",
+                      "value": "",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "input",
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": "Submit",
+                  "disabled": false,
+                  "extraCss": null,
+                  "kind": "primary",
+                  "size": null,
+                  "type": "submit",
+                },
+                "ref": null,
+                "rendered": "Submit",
+                "type": [Function],
+              },
+            ],
+            "type": "form",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <header
+            className="clearfix px2 py1 bg-white"
+          >
+            <div
+              className="left"
+            >
+              <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>
+            </div>
+          </header>,
+          <div
+            className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+          >
+            <h1
+              className="mt0 h2"
+            >
+              Please log in.
+            </h1>
+            <div
+              className="mb2 p1 h6 alert alert-error"
+            >
+              <strong>
+                Sorry!
+              </strong>
+               Something went wrong. Please try again.
+            </div>
+            <form
+              onSubmit={[Function]}
+            >
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="username"
+                >
+                  Email
+                </label>
+                <input
+                  className="input"
+                  id="username"
+                  name="username"
+                  onChange={[Function]}
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="mb2"
+              >
+                <label
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="input"
+                  id="password"
+                  name="password"
+                  onChange={[Function]}
+                  type="password"
+                  value=""
+                />
+              </div>
+              <Btn
+                disabled={false}
+                extraCss={null}
+                kind="primary"
+                size={null}
+                type="submit"
+              >
+                Submit
+              </Btn>
+            </form>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="left"
+            >
+              <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>
+            </div>,
+            "className": "clearfix px2 py1 bg-white",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Link
+                className="btn px0 bold caps"
+                replace={false}
+                to="/"
+              >
+                CMS HITECH APD
+              </Link>,
+              "className": "left",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "CMS HITECH APD",
+                "className": "btn px0 bold caps",
+                "replace": false,
+                "to": "/",
+              },
+              "ref": null,
+              "rendered": "CMS HITECH APD",
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          "type": "header",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h1
+                className="mt0 h2"
+              >
+                Please log in.
+              </h1>,
+              <div
+                className="mb2 p1 h6 alert alert-error"
+              >
+                <strong>
+                  Sorry!
+                </strong>
+                 Something went wrong. Please try again.
+              </div>,
+              <form
+                onSubmit={[Function]}
+              >
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="username"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="input"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="mb2"
+                >
+                  <label
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="input"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <Btn
+                  disabled={false}
+                  extraCss={null}
+                  kind="primary"
+                  size={null}
+                  type="submit"
+                >
+                  Submit
+                </Btn>
+              </form>,
+            ],
+            "className": "mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Please log in.",
+                "className": "mt0 h2",
+              },
+              "ref": null,
+              "rendered": "Please log in.",
+              "type": "h1",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <strong>
+                    Sorry!
+                  </strong>,
+                  " Something went wrong. Please try again.",
+                ],
+                "className": "mb2 p1 h6 alert alert-error",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Sorry!",
+                  },
+                  "ref": null,
+                  "rendered": "Sorry!",
+                  "type": "strong",
+                },
+                " Something went wrong. Please try again.",
+              ],
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="mb2"
+                  >
+                    <label
+                      htmlFor="username"
+                    >
+                      Email
+                    </label>
+                    <input
+                      className="input"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />
+                  </div>,
+                  <div
+                    className="mb2"
+                  >
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>
+                    <input
+                      className="input"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>,
+                  <Btn
+                    disabled={false}
+                    extraCss={null}
+                    kind="primary"
+                    size={null}
+                    type="submit"
+                  >
+                    Submit
+                  </Btn>,
+                ],
+                "onSubmit": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <label
+                        htmlFor="username"
+                      >
+                        Email
+                      </label>,
+                      <input
+                        className="input"
+                        id="username"
+                        name="username"
+                        onChange={[Function]}
+                        type="text"
+                        value=""
+                      />,
+                    ],
+                    "className": "mb2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Email",
+                        "htmlFor": "username",
+                      },
+                      "ref": null,
+                      "rendered": "Email",
+                      "type": "label",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "className": "input",
+                        "id": "username",
+                        "name": "username",
+                        "onChange": [Function],
+                        "type": "text",
+                        "value": "",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "input",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <label
+                        htmlFor="password"
+                      >
+                        Password
+                      </label>,
+                      <input
+                        className="input"
+                        id="password"
+                        name="password"
+                        onChange={[Function]}
+                        type="password"
+                        value=""
+                      />,
+                    ],
+                    "className": "mb2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Password",
+                        "htmlFor": "password",
+                      },
+                      "ref": null,
+                      "rendered": "Password",
+                      "type": "label",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "className": "input",
+                        "id": "password",
+                        "name": "password",
+                        "onChange": [Function],
+                        "type": "password",
+                        "value": "",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": "input",
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "children": "Submit",
+                    "disabled": false,
+                    "extraCss": null,
+                    "kind": "primary",
+                    "size": null,
+                    "type": "submit",
+                  },
+                  "ref": null,
+                  "rendered": "Submit",
+                  "type": [Function],
+                },
+              ],
+              "type": "form",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
