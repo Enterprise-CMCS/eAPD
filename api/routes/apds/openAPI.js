@@ -64,6 +64,20 @@ const openAPI = {
     }
   },
 
+  '/apds/submitted': {
+    get: {
+      tags: ['APDs'],
+      summary: 'Get all of the submitted APDs (i.e., not draft)',
+      description: 'Get a list of all submitted APDs known to the system',
+      responses: {
+        200: {
+          description: 'The list of submitted APDs',
+          content: jsonResponse(arrayOf({ $ref: '#/components/schemas/apd' }))
+        }
+      }
+    }
+  },
+
   '/apds/{id}/versions': {
     delete: {
       tags: ['APDs'],
