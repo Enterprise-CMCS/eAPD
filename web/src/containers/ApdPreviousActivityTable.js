@@ -53,7 +53,7 @@ const ApdPreviousActivityTable = ({
   };
 
   return (
-    <div className="overflow-auto">
+    <div className="overflow-x">
       <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
         <thead>
           <tr>

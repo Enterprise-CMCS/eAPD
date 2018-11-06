@@ -27,7 +27,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
         return (
           <div key={source} className="mb3">
             <h3 className="mt0">{sourceDisplay}</h3>
-            <div className="overflow-auto">
+            <div className="overflow-x">
               <table
                 className="table-cms table-fixed"
                 style={{ minWidth: 1200 }}

@@ -157,7 +157,7 @@ HeaderRow.propTypes = {
 };
 
 const BudgetSummary = ({ activities, data, years }) => (
-  <div className="overflow-auto">
+  <div className="overflow-x">
     <table className="table-cms table-fixed" style={{ minWidth: 1000 }}>
       <thead>
         <tr>
