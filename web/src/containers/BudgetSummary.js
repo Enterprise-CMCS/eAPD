@@ -158,10 +158,10 @@ HeaderRow.propTypes = {
 
 const BudgetSummary = ({ activities, data, years }) => (
   <div className="overflow-x">
-    <table className="table-cms table-fixed" style={{ minWidth: 1000 }}>
+    <table className="table-cms">
       <thead>
         <tr>
-          <th style={{ width: 180 }} id="summary-budget-null1" />
+          <th id="summary-budget-null1" />
           {[...years, 'total'].map(yr => (
             <th
               key={yr}
@@ -178,19 +178,19 @@ const BudgetSummary = ({ activities, data, years }) => (
           {[...years, 'total'].map(y => (
             <Fragment key={y}>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id={`summary-budget-fy-${y}-total`}
               >
                 Total
               </th>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id={`summary-budget-fy-${y}-federal`}
               >
                 Federal
               </th>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id={`summary-budget-fy-${y}-state`}
               >
                 State
