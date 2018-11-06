@@ -64,6 +64,51 @@ const openAPI = {
     }
   },
 
+  '/apds/{id}/status': {
+    put: {
+      tags: ['APD'],
+      summary: 'Set an APD status',
+      description:
+        'An endpoint for CMS analysts to change an APD status after it has been submitted.  The APD cannot currently be in draft status, or else this method will fail with an HTTP 400 error.',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the APD to update',
+          required: true,
+          schema: { type: 'number' }
+        }
+      ],
+      requestBody: {
+        description: 'The status value to set',
+        required: true,
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  description: 'New status to set'
+                }
+              }
+            }
+          }
+        }
+      },
+      responses: {
+        204: {
+          description: 'The APD status was successfully set'
+        },
+        400: {
+          description:
+            'The APD is currently in draft, or the selected status is invalid',
+          content: errorToken
+        }
+      }
+    }
+  },
+
   '/apds/{id}/versions': {
     delete: {
       tags: ['APDs'],
