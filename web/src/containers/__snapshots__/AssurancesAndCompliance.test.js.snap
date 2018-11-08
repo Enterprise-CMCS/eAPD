@@ -61,6 +61,7 @@ ShallowWrapper {
     "props": Object {
       "children": "hello",
       "href": "url",
+      "rel": "noopener noreferrer",
       "target": "_blank",
     },
     "ref": null,
@@ -75,6 +76,7 @@ ShallowWrapper {
       "props": Object {
         "children": "hello",
         "href": "url",
+        "rel": "noopener noreferrer",
         "target": "_blank",
       },
       "ref": null,
