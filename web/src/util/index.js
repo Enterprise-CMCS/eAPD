@@ -170,8 +170,6 @@ export const arrToObj = (array = [], initialValue = 0) => {
 export const addObjVals = (obj, getVal = a => a) =>
   Object.values(obj).reduce((a, b) => a + getVal(b), 0);
 
-export const titleCase = str => str.replace(/\b\S/g, t => t.toUpperCase());
-
 export const applyToNumbers = (obj, fn) => {
   const o = { ...obj };
   Object.keys(o).forEach(k => {

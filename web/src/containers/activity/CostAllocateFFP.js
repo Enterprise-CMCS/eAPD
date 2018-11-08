@@ -6,8 +6,6 @@ import { updateActivity as updateActivityAction } from '../../actions/activities
 import { DollarInput } from '../../components/Inputs';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
-import { getActivityTotals } from '../../reducers/activities';
-import { titleCase } from '../../util';
 import { formatMoney } from '../../util/formats';
 
 class CostAllocateFFP extends Component {
@@ -36,7 +34,7 @@ class CostAllocateFFP extends Component {
         <h4>{t('activities.costAllocate.ffp.title')}</h4>
         <div className="clearfix mxn1">
           {byYearData.map(
-            ({ year, total, totalNetOther, ffpSelectVal, allocations }) => (
+            ({ year, total, medicaidShare, ffpSelectVal, allocations }) => (
               <div key={year} className="col col-12 sm-col-6 mb2 px1">
                 <div className="p2 bg-gray-lightest">
                   <div>{year}</div>
@@ -51,9 +49,9 @@ class CostAllocateFFP extends Component {
                     value={costAllocation[year].other}
                     onChange={this.handleOther(year)}
                   />
-                  <div>{t('activities.costAllocate.ffp.totalNetOther')}</div>
+                  <div>{t('activities.costAllocate.ffp.medicaidShare')}</div>
                   <div className="h4 bold mono truncate">
-                    {formatMoney(totalNetOther)}
+                    {formatMoney(medicaidShare)}
                   </div>
                   <hr />
                   <Select
@@ -67,14 +65,18 @@ class CostAllocateFFP extends Component {
                     onChange={this.handleFFP(year)}
                   />
                   <div className="lg-flex">
-                    {allocations.map(({ id, amount }) => (
-                      <div key={id} className="lg-col-6 mb1 lg-m0">
-                        <div>{titleCase(id)}</div>
-                        <div className="h4 bold mono truncate">
-                          {formatMoney(amount)}
-                        </div>
+                    <div className="lg-col-6 mb1 lg-m0">
+                      <div>Federal</div>
+                      <div className="h4 bold mono truncate">
+                        {formatMoney(allocations.federal)}
                       </div>
-                    ))}
+                    </div>
+                    <div className="lg-col-6 mb1 lg-m0">
+                      <div>State</div>
+                      <div className="h4 bold mono truncate">
+                        {formatMoney(allocations.state)}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -93,23 +95,25 @@ CostAllocateFFP.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-// TODO [bren]: tidy up this data munging
-export const mapStateToProps = ({ activities: { byKey } }, { aKey }) => {
+export const mapStateToProps = (
+  { activities: { byKey }, budget },
+  { aKey }
+) => {
   const activity = byKey[aKey];
   const { costAllocation } = activity;
-  const totals = getActivityTotals(activity);
+  const { costsByFFY } = budget.activities[aKey];
 
-  const byYearData = Object.keys(totals).map(year => {
-    const total = totals[year];
-    const { ffp, other } = costAllocation[year];
-    const totalNetOther = total - other;
+  const byYearData = Object.entries(costsByFFY).map(([year, costs]) => {
+    const { ffp } = costAllocation[year];
     const ffpSelectVal = `${ffp.federal}-${ffp.state}`;
-    const allocations = Object.keys(ffp).map(id => ({
-      id,
-      amount: totalNetOther * ffp[id] / 100
-    }));
 
-    return { year, total, totalNetOther, ffpSelectVal, allocations };
+    return {
+      year,
+      total: costs.total,
+      medicaidShare: costs.medicaidShare,
+      ffpSelectVal,
+      allocations: { federal: costs.federal, state: costs.state }
+    };
   });
 
   return { byYearData, costAllocation };
