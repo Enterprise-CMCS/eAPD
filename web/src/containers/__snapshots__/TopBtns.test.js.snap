@@ -8,6 +8,7 @@ ShallowWrapper {
     authenticated={true}
     hideDashboard={false}
     logout={[Function]}
+    pushRoute={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -28,6 +29,7 @@ ShallowWrapper {
           <Btn
             extraCss={null}
             kind="primary"
+            onClick={[Function]}
             size="small"
           >
             State dashboard
@@ -54,6 +56,7 @@ ShallowWrapper {
           <Btn
             extraCss={null}
             kind="primary"
+            onClick={[Function]}
             size="small"
           >
             State dashboard
@@ -79,6 +82,7 @@ ShallowWrapper {
             <Btn
               extraCss={null}
               kind="primary"
+              onClick={[Function]}
               size="small"
             >
               State dashboard
@@ -103,6 +107,7 @@ ShallowWrapper {
               "children": "State dashboard",
               "extraCss": null,
               "kind": "primary",
+              "onClick": [Function],
               "size": "small",
             },
             "ref": null,
@@ -144,6 +149,7 @@ ShallowWrapper {
             <Btn
               extraCss={null}
               kind="primary"
+              onClick={[Function]}
               size="small"
             >
               State dashboard
@@ -170,6 +176,7 @@ ShallowWrapper {
             <Btn
               extraCss={null}
               kind="primary"
+              onClick={[Function]}
               size="small"
             >
               State dashboard
@@ -195,6 +202,7 @@ ShallowWrapper {
               <Btn
                 extraCss={null}
                 kind="primary"
+                onClick={[Function]}
                 size="small"
               >
                 State dashboard
@@ -219,6 +227,7 @@ ShallowWrapper {
                 "children": "State dashboard",
                 "extraCss": null,
                 "kind": "primary",
+                "onClick": [Function],
                 "size": "small",
               },
               "ref": null,
@@ -266,6 +275,7 @@ ShallowWrapper {
     authenticated={false}
     hideDashboard={false}
     logout={[Function]}
+    pushRoute={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -398,6 +408,7 @@ ShallowWrapper {
     authenticated={true}
     hideDashboard={true}
     logout={[Function]}
+    pushRoute={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
