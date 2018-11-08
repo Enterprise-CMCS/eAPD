@@ -7,14 +7,15 @@ import { t } from '../i18n';
 const HelpText = ({ children }) => (
   <Md content={children} wrapper="p" className="mb2 text-s alert alert-info" />
 );
+HelpText.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 const Instruction = ({ reverse, source }) => {
   const heading = t([source, 'heading'], { defaultValue: false });
   const short = t([source, 'short'], { defaultValue: false });
   const detail = t([source, 'detail'], { defaultValue: false });
   const helpText = t([source, 'helpText'], { defaultValue: false });
-
-  console.log(t('storybook.instruction.heading'));
 
   return (
     <div>
