@@ -20,16 +20,19 @@ class InstructionStory extends Component {
       </RenderViewbox>
       <h2>The YAML looks like this:</h2>
       <pre>
-        <code>{`instruction:
+        <code>
+          {`instruction:
   heading: Instruction heading
   short: Short instruction
   detail: Instruction detail here
-  helpText: this is help text!`}</code>
+  helpText: this is help text!`}
+        </code>
       </pre>
       <hr />
       <p>
-        <code
-        >{`<Instruction source="demo.instruction" reverse={false}/>`}</code>
+        <code>
+          {`<Instruction source="demo.instruction" reverse={false}/>`}
+        </code>
       </p>
       <p>
         The <code>source</code> prop is the path in the YAML to the instruction
