@@ -22,6 +22,15 @@ services:
       - /app/node_modules
     ports:
       - 8080:8001
+  
+  storybook:
+    build: ./web
+    volumes:
+      - ./web:/app
+      - /app/node_modules
+    command: npm run storybook
+    ports:
+      - 8082:9001
 
   api:
     build: ./api
