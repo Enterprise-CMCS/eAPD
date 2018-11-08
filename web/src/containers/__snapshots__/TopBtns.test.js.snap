@@ -28,6 +28,7 @@ ShallowWrapper {
           <Btn
             extraCss={null}
             kind="primary"
+            onClick={[Function]}
             size="small"
           >
             State dashboard
@@ -54,6 +55,7 @@ ShallowWrapper {
           <Btn
             extraCss={null}
             kind="primary"
+            onClick={[Function]}
             size="small"
           >
             State dashboard
@@ -79,6 +81,7 @@ ShallowWrapper {
             <Btn
               extraCss={null}
               kind="primary"
+              onClick={[Function]}
               size="small"
             >
               State dashboard
@@ -103,6 +106,7 @@ ShallowWrapper {
               "children": "State dashboard",
               "extraCss": null,
               "kind": "primary",
+              "onClick": [Function],
               "size": "small",
             },
             "ref": null,
@@ -144,6 +148,7 @@ ShallowWrapper {
             <Btn
               extraCss={null}
               kind="primary"
+              onClick={[Function]}
               size="small"
             >
               State dashboard
@@ -170,6 +175,7 @@ ShallowWrapper {
             <Btn
               extraCss={null}
               kind="primary"
+              onClick={[Function]}
               size="small"
             >
               State dashboard
@@ -195,6 +201,7 @@ ShallowWrapper {
               <Btn
                 extraCss={null}
                 kind="primary"
+                onClick={[Function]}
                 size="small"
               >
                 State dashboard
@@ -219,6 +226,7 @@ ShallowWrapper {
                 "children": "State dashboard",
                 "extraCss": null,
                 "kind": "primary",
+                "onClick": [Function],
                 "size": "small",
               },
               "ref": null,
