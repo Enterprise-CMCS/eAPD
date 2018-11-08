@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import { push } from 'react-router-redux';
 import sinon from 'sinon';
 
 import {
@@ -53,6 +54,6 @@ describe('Top buttons component', () => {
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ logout });
+    expect(mapDispatchToProps).toEqual({ logout, pushRoute: push });
   });
 });
