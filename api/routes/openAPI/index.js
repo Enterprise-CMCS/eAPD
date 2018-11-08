@@ -7,7 +7,6 @@ const authRoles = require('../auth/roles/openAPI');
 const files = require('../files/openAPI');
 const me = require('../me/openAPI');
 const users = require('../users/openAPI');
-const states = require('../states/openAPI');
 const { arrayOf } = require('./helpers').schema;
 
 module.exports = {
@@ -25,7 +24,6 @@ module.exports = {
     ...files,
     ...me,
     ...users,
-    ...states,
     '/open-api': {
       get: {
         tags: ['Metadata'],
