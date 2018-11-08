@@ -12,7 +12,7 @@ class DashboardStory extends Component {
 
   render = () => (
     <Fragment>
-      <h1>Instruction</h1>
+      <h1>Document progress dot</h1>
       <h2>It renders like this:</h2>
       <RenderViewbox>
         <ProgressDot

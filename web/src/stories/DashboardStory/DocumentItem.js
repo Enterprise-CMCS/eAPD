@@ -20,7 +20,7 @@ class DashboardStory extends Component {
 
   render = () => (
     <Fragment>
-      <h1>Instruction</h1>
+      <h1>Dashboard document item</h1>
       <h2>It renders like this:</h2>
       <RenderViewbox>
         <DocumentItem name={this.state.name} status={this.state.status} />
@@ -47,6 +47,11 @@ class DashboardStory extends Component {
       </p>
 
       <hr />
+      <p>
+        This represents a document on the dashboard, showing its name, a visual
+        representation of its current state, and a link/button to the next
+        action.
+      </p>
       <p>
         <code>
           {`<DocumentItem name={${
