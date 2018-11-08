@@ -8,7 +8,6 @@ tap.test('apds endpoint setup', async endpointTest => {
   const getEndpoint = sinon.spy();
   const postEndpoint = sinon.spy();
   const putEndpoint = sinon.spy();
-  const activitiesEndpoint = sinon.spy();
   const statusEndpoint = sinon.spy();
   const submittedEndpoint = sinon.spy();
   const versionsEndpoint = sinon.spy();
@@ -18,7 +17,6 @@ tap.test('apds endpoint setup', async endpointTest => {
     getEndpoint,
     postEndpoint,
     putEndpoint,
-    activitiesEndpoint,
     statusEndpoint,
     submittedEndpoint,
     versionsEndpoint
@@ -35,11 +33,6 @@ tap.test('apds endpoint setup', async endpointTest => {
   endpointTest.ok(
     putEndpoint.calledWith(app),
     'apds PUT endpoint is setup with the app'
-  );
-
-  endpointTest.ok(
-    activitiesEndpoint.calledWith(app),
-    'apds activities endpoints are setup with the app'
   );
 
   endpointTest.ok(
