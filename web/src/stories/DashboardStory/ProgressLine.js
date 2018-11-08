@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 import { ProgressLine } from '../../containers/StateDashboardCurrentDocuments';
 
-class DashboardStory extends Component {
+class ProgressLineStory extends Component {
   state = { done: false };
 
   toggleDone = () => this.setState({ done: !this.state.done });
@@ -39,4 +39,4 @@ class DashboardStory extends Component {
   );
 }
 
-export default DashboardStory;
+export default ProgressLineStory;

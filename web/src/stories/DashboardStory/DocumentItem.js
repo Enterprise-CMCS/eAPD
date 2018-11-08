@@ -4,7 +4,7 @@ import RenderViewbox from '../RenderViewbox';
 import { DocumentItem } from '../../containers/StateDashboardCurrentDocuments';
 import { APD_STATUS } from '../../constants';
 
-class DashboardStory extends Component {
+class DocumentItemStory extends Component {
   state = {
     name: 'Document Name',
     status: APD_STATUS.DRAFT,
@@ -63,4 +63,4 @@ class DashboardStory extends Component {
   );
 }
 
-export default DashboardStory;
+export default DocumentItemStory;

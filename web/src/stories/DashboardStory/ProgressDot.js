@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 import RenderViewbox from '../RenderViewbox';
 import { ProgressDot } from '../../containers/StateDashboardCurrentDocuments';
 
-class DashboardStory extends Component {
+class ProgressDotStory extends Component {
   state = { done: false, started: false, text: null };
 
   setText = e => this.setState({ text: e.target.value });
@@ -73,4 +73,4 @@ class DashboardStory extends Component {
   );
 }
 
-export default DashboardStory;
+export default ProgressDotStory;
