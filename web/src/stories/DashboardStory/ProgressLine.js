@@ -9,7 +9,7 @@ class DashboardStory extends Component {
 
   render = () => (
     <Fragment>
-      <h1>Instruction</h1>
+      <h1>Document progress line</h1>
       <h2>It renders like this:</h2>
 
       <ProgressLine done={this.state.done} />
@@ -24,6 +24,10 @@ class DashboardStory extends Component {
         </label>
       </p>
       <hr />
+      <p>
+        This is the thing that connects progress dots together and indicates
+        movement between states.
+      </p>
       <p>
         <code>{`<ProgressLine done={${this.state.done}} />`}</code>
       </p>
