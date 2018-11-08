@@ -752,516 +752,6 @@ Object {
   },
   "openapi": "3.0.0",
   "paths": Object {
-    "/activities/{id}": Object {
-      "put": Object {
-        "description": "Update an APD activity in the system",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the APD activity to update",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "$ref": "#/components/schemas/activity",
-              },
-            },
-          },
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/activity",
-                },
-              },
-            },
-            "description": "The update was successful",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "The activity name is invalid or another activity in the APD already has that name",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The activity ID does not match any known activities for APDs accessible to the user",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Update a specific activity",
-        "tags": Array [
-          "APD activities",
-        ],
-      },
-    },
-    "/activities/{id}/contractorResources": Object {
-      "put": Object {
-        "description": "Set the contractorResources for a specific activity",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the activity to set the contractorResources for",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "$ref": "#/components/schemas/activity/properties/contractorResources",
-              },
-            },
-          },
-          "description": "The new contractorResources",
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/activity",
-                },
-              },
-            },
-            "description": "The updated activity",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "Invalid contractorResources",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The specified activity was not found, or the user does not have access to it",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Set the contractorResources for a specific activity",
-        "tags": Array [
-          "APD activities",
-        ],
-      },
-    },
-    "/activities/{id}/costAllocation": Object {
-      "put": Object {
-        "description": "Set the costAllocation for a specific activity",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the activity to set the costAllocation for",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "$ref": "#/components/schemas/activity/properties/costAllocation",
-              },
-            },
-          },
-          "description": "The new costAllocation",
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/activity",
-                },
-              },
-            },
-            "description": "The updated activity",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "Invalid costAllocation",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The specified activity was not found, or the user does not have access to it",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Set the costAllocation for a specific activity",
-        "tags": Array [
-          "APD activities",
-        ],
-      },
-    },
-    "/activities/{id}/expenses": Object {
-      "put": Object {
-        "description": "Set the expenses for a specific activity",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the activity to set the expenses for",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "$ref": "#/components/schemas/activity/properties/expenses",
-              },
-            },
-          },
-          "description": "The new expenses",
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/activity",
-                },
-              },
-            },
-            "description": "The updated activity",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "Invalid expenses",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The specified activity was not found, or the user does not have access to it",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Set the expenses for a specific activity",
-        "tags": Array [
-          "APD activities",
-        ],
-      },
-    },
-    "/activities/{id}/goals": Object {
-      "put": Object {
-        "description": "Set the goals for a specific activity",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the activity to set the goals for",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "$ref": "#/components/schemas/activity/properties/goals",
-              },
-            },
-          },
-          "description": "The new goals",
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/activity",
-                },
-              },
-            },
-            "description": "The updated activity",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "Invalid goals",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The specified activity was not found, or the user does not have access to it",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Set the goals for a specific activity",
-        "tags": Array [
-          "APD activities",
-        ],
-      },
-    },
-    "/activities/{id}/schedule": Object {
-      "put": Object {
-        "description": "Set the schedule for a specific activity",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the activity to set the schedule for",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "$ref": "#/components/schemas/activity/properties/schedule",
-              },
-            },
-          },
-          "description": "The new schedule",
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/activity",
-                },
-              },
-            },
-            "description": "The updated activity",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "Invalid schedule",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The specified activity was not found, or the user does not have access to it",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Set the schedule for a specific activity",
-        "tags": Array [
-          "APD activities",
-        ],
-      },
-    },
-    "/activities/{id}/statePersonnel": Object {
-      "put": Object {
-        "description": "Set the statePersonnel for a specific activity",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the activity to set the statePersonnel for",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "$ref": "#/components/schemas/activity/properties/statePersonnel",
-              },
-            },
-          },
-          "description": "The new statePersonnel",
-          "required": true,
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/activity",
-                },
-              },
-            },
-            "description": "The updated activity",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "Invalid statePersonnel",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The specified activity was not found, or the user does not have access to it",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Set the statePersonnel for a specific activity",
-        "tags": Array [
-          "APD activities",
-        ],
-      },
-    },
     "/apds": Object {
       "get": Object {
         "description": "Get a list of all apds associated with requesting user",
@@ -1327,6 +817,41 @@ Object {
         ],
       },
     },
+    "/apds/submitted": Object {
+      "get": Object {
+        "description": "Get a list of all submitted APDs known to the system",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "$ref": "#/components/schemas/apd",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "The list of submitted APDs",
+          },
+          "401": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "403": Object {
+            "description": "Not logged in",
+          },
+        },
+        "security": Array [
+          Object {
+            "sessionCookie": Array [],
+          },
+        ],
+        "summary": "Get all of the submitted APDs (i.e., not draft)",
+        "tags": Array [
+          "APDs",
+        ],
+      },
+    },
     "/apds/{id}": Object {
       "put": Object {
         "description": "Update an APD in the system.  If state profile information is included, the profile information is also updated for the user's state.",
@@ -1384,17 +909,17 @@ Object {
         ],
       },
     },
-    "/apds/{id}/activities": Object {
-      "post": Object {
-        "description": "Add a new activity to the specified APD",
+    "/apds/{id}/status": Object {
+      "put": Object {
+        "description": "An endpoint for CMS analysts to change an APD status after it has been submitted.  The APD cannot currently be in draft status, or else this method will fail with an HTTP 400 error.",
         "parameters": Array [
           Object {
-            "description": "The ID of the APD to add this activity to",
+            "description": "The ID of the APD to update",
             "in": "path",
             "name": "id",
             "required": true,
             "schema": Object {
-              "type": "integer",
+              "type": "number",
             },
           },
         ],
@@ -1402,22 +927,22 @@ Object {
           "content": Object {
             "application/json": Object {
               "schema": Object {
-                "$ref": "#/components/schemas/activity",
+                "properties": Object {
+                  "status": Object {
+                    "description": "New status to set",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
               },
             },
           },
+          "description": "The status value to set",
           "required": true,
         },
         "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/activity",
-                },
-              },
-            },
-            "description": "The newly-created activity",
+          "204": Object {
+            "description": "The APD status was successfully set",
           },
           "400": Object {
             "content": Object {
@@ -1433,7 +958,7 @@ Object {
                 },
               },
             },
-            "description": "The activity name is invalid or already exists within the APD",
+            "description": "The APD is currently in draft, or the selected status is invalid",
           },
           "401": Object {
             "description": "Does not have permission to this activity",
@@ -1441,18 +966,15 @@ Object {
           "403": Object {
             "description": "Not logged in",
           },
-          "404": Object {
-            "description": "The specified APD was not found, or the user does not have access to it",
-          },
         },
         "security": Array [
           Object {
             "sessionCookie": Array [],
           },
         ],
-        "summary": "Add a new activity to an APD",
+        "summary": "Set an APD status",
         "tags": Array [
-          "APD activities",
+          "APDs",
         ],
       },
     },
@@ -2161,163 +1683,6 @@ Object {
         "summary": "Gets this document",
         "tags": Array [
           "Metadata",
-        ],
-      },
-    },
-    "/states": Object {
-      "get": Object {
-        "description": "Get information about the users's state, territory, or district",
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/state",
-                },
-              },
-            },
-            "description": "Information about the state, territory, or district",
-          },
-          "401": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "User does not have access to any state",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Gets information about the current user's state/territory/district",
-        "tags": Array [
-          "States, territories, and districts",
-        ],
-      },
-      "put": Object {
-        "description": "Update information about the users's state, territory, or district",
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "$ref": "#/components/schemas/state",
-              },
-            },
-          },
-          "description": "The new state information.  Any extraneous fields will be discarded.",
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/state",
-                },
-              },
-            },
-            "description": "Information about the state, territory, or district was successfully updated. Returns the full, updated state object",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "The request was invalid",
-          },
-          "401": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "User does not have access to any state",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Sets information about the current user's state/territory/district",
-        "tags": Array [
-          "States, territories, and districts",
-        ],
-      },
-    },
-    "/states/{id}": Object {
-      "get": Object {
-        "description": "Get information about a specific state, territory, or district",
-        "parameters": Array [
-          Object {
-            "description": "The ID (2-letter abbreviation, lowercase) of the state, territory, or district to fetch",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/state",
-                },
-              },
-            },
-            "description": "Information about the state, territory, or district",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The requested ID does not match any known states, territories, or districts",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Gets information about a specific state/territory/district",
-        "tags": Array [
-          "States, territories, and districts",
         ],
       },
     },
