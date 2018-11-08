@@ -134,6 +134,23 @@ DataRowGroup.propTypes = {
   entries: PropTypes.array.isRequired
 };
 
+const FrozenDataCol = ({ data }) => (
+  <Fragment>
+    {Object.keys(data).map(key => (
+      <tr>
+        <td key={key}>
+          {categoryLookup[key]}
+        </td>
+      </tr>
+    ))}
+  </Fragment>
+);
+
+FrozenDataCol.propTypes = {
+  data: PropTypes.object.isRequired
+};
+
+
 const HeaderRow = ({ title, years }) => (
   <tr>
     <td className="bold" headers="summary-budget-null1 summary-budget-null2">
@@ -156,9 +173,55 @@ HeaderRow.propTypes = {
   years: PropTypes.array.isRequired
 };
 
+const FrozenHeaderCol = ({title}) => (
+  <tr>
+      <td className="bold">
+        {title}
+      </td>
+  </tr>
+);
+
+FrozenHeaderCol.propTypes = {
+  title: PropTypes.string.isRequired
+};
+
 const BudgetSummary = ({ activities, data, years }) => (
-  <div className="overflow-x">
-    <table className="table-cms">
+  <div className="table-frozen-col-wrapper">
+    <div className="table-frozen-col-scroll-window">
+      <table className="table-cms table-frozen-col-pane" aria-hidden="true">
+        <thead>
+          <tr>
+            <th className="table-frozen-null-cell">
+              " "
+            </th>
+          </tr>
+          <tr>
+            <th className="table-frozen-null-cell">
+              " "
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <FrozenHeaderCol title="HIT activities" />
+          <FrozenDataCol data={data.hit} />
+        </tbody>
+        <tbody>
+          <FrozenHeaderCol title="HIE activities" />
+          <FrozenDataCol data={data.hie} />
+        </tbody>
+        <tbody>
+          <FrozenHeaderCol title="MMIS activities" />
+          <FrozenDataCol data={data.mmis} />
+        </tbody>
+        <tbody>
+          <tr className="bold">
+            <td>
+              Project total
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <table className="table-cms table-frozen-col">
       <thead>
         <tr>
           <th id="summary-budget-null1" />
@@ -244,6 +307,7 @@ const BudgetSummary = ({ activities, data, years }) => (
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 );
 

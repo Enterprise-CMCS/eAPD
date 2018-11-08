@@ -79,3 +79,33 @@
 .align-middle > td {
   vertical-align: middle;
 }
+
+.table-frozen-col-wrapper {
+  position: relative;
+}
+
+.table-frozen-col-scroll-window {
+  /*margin-left: 100px;*/
+  overflow-x: scroll;
+  overflow-y: visible;
+}
+
+/* spacer only */
+.table-frozen-null-cell {
+  color: #dae9f7; /* a character is necessary in these cells to match spacing */
+}
+
+.table-frozen-col-pane {
+  width: 140px; /* arbitrary; must be the same as the first-child width */
+  position: absolute;
+}
+
+.table-frozen-col-pane td,
+.table-frozen-col-pane th {
+  border-right: 2px solid #fff; /* only half of normal .table-cms spacing applied otherwise */
+}
+
+.table-frozen-col tr > th:first-child,
+.table-frozen-col tr > td:first-child {
+  min-width: 140px; /* same as table-frozen-col-pane; for some reason just width doesn't work */
+}
