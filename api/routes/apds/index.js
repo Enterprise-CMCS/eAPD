@@ -3,6 +3,7 @@ const get = require('./get');
 const post = require('./post');
 const put = require('./put');
 const activities = require('./activities');
+const status = require('./status/put.js');
 const submitted = require('./submitted/get');
 const versions = require('./versions');
 
@@ -12,6 +13,7 @@ module.exports = (
   postEndpoint = post,
   putEndpoint = put,
   activitiesEndpoints = activities,
+  statusEndpoints = status,
   submittedEndpoints = submitted,
   versionsEndpoints = versions
 ) => {
@@ -24,6 +26,9 @@ module.exports = (
 
   logger.silly('setting up APD activities endpoints');
   activitiesEndpoints(app);
+
+  logger.silly('setting up APD status endpoints');
+  statusEndpoints(app);
 
   logger.silly('setting up submitted APD endpoints');
   submittedEndpoints(app);
