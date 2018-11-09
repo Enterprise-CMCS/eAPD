@@ -3,8 +3,6 @@ const {
   schema: { arrayOf, errorToken, jsonResponse }
 } = require('../openAPI/helpers');
 
-const activities = require('./activities/openAPI');
-
 const openAPI = {
   '/apds': {
     get: {
@@ -66,7 +64,7 @@ const openAPI = {
 
   '/apds/{id}/status': {
     put: {
-      tags: ['APD'],
+      tags: ['APDs'],
       summary: 'Set an APD status',
       description:
         'An endpoint for CMS analysts to change an APD status after it has been submitted.  The APD cannot currently be in draft status, or else this method will fail with an HTTP 400 error.',
@@ -192,9 +190,7 @@ const openAPI = {
         }
       }
     }
-  },
-
-  ...activities
+  }
 };
 
 module.exports = requiresAuth(openAPI);
