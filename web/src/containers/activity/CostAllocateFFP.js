@@ -103,18 +103,20 @@ export const mapStateToProps = (
   const { costAllocation } = activity;
   const { costsByFFY } = budget.activities[aKey];
 
-  const byYearData = Object.entries(costsByFFY).map(([year, costs]) => {
-    const { ffp } = costAllocation[year];
-    const ffpSelectVal = `${ffp.federal}-${ffp.state}`;
+  const byYearData = Object.entries(costsByFFY)
+    .filter(([year]) => year !== 'total')
+    .map(([year, costs]) => {
+      const { ffp } = costAllocation[year];
+      const ffpSelectVal = `${ffp.federal}-${ffp.state}`;
 
-    return {
-      year,
-      total: costs.total,
-      medicaidShare: costs.medicaidShare,
-      ffpSelectVal,
-      allocations: { federal: costs.federal, state: costs.state }
-    };
-  });
+      return {
+        year,
+        total: costs.total,
+        medicaidShare: costs.medicaidShare,
+        ffpSelectVal,
+        allocations: { federal: costs.federal, state: costs.state }
+      };
+    });
 
   return { byYearData, costAllocation };
 };

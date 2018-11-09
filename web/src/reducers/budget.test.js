@@ -281,6 +281,12 @@ describe('budget reducer', () => {
               state: 470,
               medicaidShare: 4700,
               total: 4700
+            },
+            total: {
+              federal: 13770,
+              medicaidShare: 15300,
+              state: 1530,
+              total: 15300
             }
           },
           quarterlyFFP: {
@@ -387,6 +393,12 @@ describe('budget reducer', () => {
               state: 300,
               medicaidShare: 3000,
               total: 3000
+            },
+            total: {
+              federal: 8100,
+              state: 900,
+              medicaidShare: 9000,
+              total: 9000
             }
           },
           quarterlyFFP: {
@@ -493,6 +505,12 @@ describe('budget reducer', () => {
               state: 200,
               medicaidShare: 2000,
               total: 3000
+            },
+            total: {
+              federal: 7200,
+              state: 800,
+              medicaidShare: 8000,
+              total: 9000
             }
           },
           quarterlyFFP: {
@@ -599,6 +617,12 @@ describe('budget reducer', () => {
               state: 210,
               medicaidShare: 2100,
               total: 2100
+            },
+            total: {
+              federal: 4140,
+              state: 1460,
+              medicaidShare: 5600,
+              total: 7600
             }
           },
           quarterlyFFP: {

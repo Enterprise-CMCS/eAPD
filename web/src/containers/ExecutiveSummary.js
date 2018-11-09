@@ -6,8 +6,6 @@ import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import { expandActivitySection } from '../actions/activities';
 import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
-import { aggregateByYear, getActivityTotals } from '../reducers/activities';
-import { addObjVals } from '../util';
 import { formatMoney } from '../util/formats';
 
 const ExecutiveSummary = ({ data, years, expandSection }) => (
@@ -72,35 +70,40 @@ ExecutiveSummary.propTypes = {
   expandSection: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities, apd }) => {
-  const activitiesArray = Object.values(activities.byKey);
-
-  const data = activitiesArray.map(a => {
-    const { key, name, descShort } = a;
-    const totals = getActivityTotals(a);
+const mapStateToProps = ({
+  activities: { byKey },
+  apd: { data: { years } },
+  budget
+}) => {
+  const data = Object.entries(byKey).map(([key, { name, descShort }]) => {
+    const activityCosts = budget.activities[key].costsByFFY;
 
     return {
       key,
       name,
       descShort,
-      totals,
-      combined: addObjVals(totals)
+      totals: years.reduce(
+        (acc, year) => ({ ...acc, [year]: activityCosts[year].total }),
+        {}
+      ),
+      combined: activityCosts.total.total
     };
   });
-
-  const allTotals = aggregateByYear(data.map(d => d.totals), apd.data.years);
 
   data.push({
     key: 'all',
     name: 'Total Cost',
     descShort: null,
-    totals: allTotals,
-    combined: addObjVals(allTotals)
+    totals: years.reduce(
+      (acc, year) => ({ ...acc, [year]: budget.combined[year].total }),
+      {}
+    ),
+    combined: budget.combined.total.total
   });
 
   return {
     data,
-    years: apd.data.years
+    years
   };
 };
 
