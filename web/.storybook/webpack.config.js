@@ -6,6 +6,10 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader', 'postcss-loader']
+      },
+      {
+        test: /\.yaml$/,
+        use: ['json-loader', 'yaml-loader']
       }
     ]
   }
