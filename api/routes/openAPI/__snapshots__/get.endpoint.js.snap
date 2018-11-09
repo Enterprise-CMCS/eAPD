@@ -966,6 +966,9 @@ Object {
           "403": Object {
             "description": "Not logged in",
           },
+          "404": Object {
+            "description": "The apd ID does not match any known apds",
+          },
         },
         "security": Array [
           Object {
@@ -995,22 +998,6 @@ Object {
         "responses": Object {
           "204": Object {
             "description": "The withdrawal was successful",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "The APD is not currently in draft status, so it cannot be saved. Error is { error: \\"apd-not-editable\\" }",
           },
           "401": Object {
             "description": "Does not have permission to this activity",
@@ -1423,7 +1410,18 @@ Object {
           "required": true,
         },
         "responses": Object {
-          "204": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "description": "The activities now associated with the role",
+                    "type": "number",
+                  },
+                  "type": "array",
+                },
+              },
+            },
             "description": "The update was successful",
           },
           "400": Object {
@@ -1551,6 +1549,9 @@ Object {
           },
           "403": Object {
             "description": "Not logged in",
+          },
+          "404": Object {
+            "description": "The contractor ID is not found",
           },
         },
         "security": Array [

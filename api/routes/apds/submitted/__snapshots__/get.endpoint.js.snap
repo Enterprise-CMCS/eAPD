@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`APD endpoint | GET /apds/submitted when authenticated as a user with permission 1`] = `
+Array [
+  Object {
+    "activities": Array [],
+    "federalCitations": null,
+    "id": 4002,
+    "incentivePayments": Array [],
+    "keyPersonnel": Array [],
+    "narrativeHIE": null,
+    "narrativeHIT": null,
+    "narrativeMMIS": null,
+    "period": null,
+    "previousActivityExpenses": Array [],
+    "previousActivitySummary": null,
+    "programOverview": null,
+    "state": "mn",
+    "stateProfile": Object {
+      "medicaidDirector": Object {
+        "email": null,
+        "name": null,
+        "phone": null,
+      },
+      "medicaidOffice": Object {
+        "address1": null,
+        "address2": null,
+        "city": null,
+        "state": null,
+        "zip": null,
+      },
+    },
+    "status": "not draft",
+    "years": null,
+  },
+]
+`;

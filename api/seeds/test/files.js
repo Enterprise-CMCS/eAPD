@@ -37,6 +37,10 @@ exports.seed = async knex => {
       activity_contractor_resource_id: 4300
     },
     {
+      file_id: 5002,
+      activity_contractor_resource_id: 4301
+    },
+    {
       file_id: 5003,
       activity_contractor_resource_id: 4301
     }

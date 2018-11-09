@@ -1,0 +1,365 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`APD endpoint | POST /apds when authenticated as a user with permission 1`] = `
+Object {
+  "activities": Array [
+    Object {
+      "alternatives": "",
+      "contractorResources": Array [
+        Object {
+          "description": "",
+          "end": null,
+          "files": Array [],
+          "hourlyData": Array [
+            Object {
+              "hours": 0,
+              "id": 1,
+              "rate": 0,
+              "year": 2019,
+            },
+            Object {
+              "hours": 0,
+              "id": 2,
+              "rate": 0,
+              "year": 2020,
+            },
+          ],
+          "id": 1,
+          "name": "",
+          "start": null,
+          "useHourly": false,
+          "years": Array [
+            Object {
+              "cost": "0.00",
+              "id": 1,
+              "year": 2019,
+            },
+            Object {
+              "cost": "0.00",
+              "id": 2,
+              "year": 2020,
+            },
+          ],
+        },
+      ],
+      "costAllocation": Array [
+        Object {
+          "federalPercent": "0.90",
+          "otherAmount": "0.00",
+          "statePercent": "0.10",
+          "year": 2019,
+        },
+        Object {
+          "federalPercent": "0.90",
+          "otherAmount": "0.00",
+          "statePercent": "0.10",
+          "year": 2020,
+        },
+      ],
+      "costAllocationNarrative": Object {
+        "methodology": null,
+        "otherSources": null,
+      },
+      "description": "",
+      "expenses": Array [
+        Object {
+          "category": "",
+          "description": "",
+          "entries": Array [
+            Object {
+              "amount": "0.00",
+              "id": 1,
+              "year": "2019",
+            },
+            Object {
+              "amount": "0.00",
+              "id": 2,
+              "year": "2020",
+            },
+          ],
+          "id": 1,
+        },
+      ],
+      "files": Array [],
+      "fundingSource": "HIT",
+      "goals": Array [
+        Object {
+          "description": "",
+          "id": 1,
+          "objective": "",
+        },
+      ],
+      "id": 1,
+      "name": "Program Administration",
+      "plannedEndDate": null,
+      "plannedStartDate": null,
+      "quarterlyFFP": Array [
+        Object {
+          "q1": Object {
+            "combined": 0,
+            "contractors": 0,
+            "state": 0,
+          },
+          "q2": Object {
+            "combined": 0,
+            "contractors": 0,
+            "state": 0,
+          },
+          "q3": Object {
+            "combined": 0,
+            "contractors": 0,
+            "state": 0,
+          },
+          "q4": Object {
+            "combined": 0,
+            "contractors": 0,
+            "state": 0,
+          },
+          "year": 2019,
+        },
+        Object {
+          "q1": Object {
+            "combined": 0,
+            "contractors": 0,
+            "state": 0,
+          },
+          "q2": Object {
+            "combined": 0,
+            "contractors": 0,
+            "state": 0,
+          },
+          "q3": Object {
+            "combined": 0,
+            "contractors": 0,
+            "state": 0,
+          },
+          "q4": Object {
+            "combined": 0,
+            "contractors": 0,
+            "state": 0,
+          },
+          "year": 2020,
+        },
+      ],
+      "schedule": Array [
+        Object {
+          "endDate": null,
+          "id": 1,
+          "milestone": "",
+          "status": null,
+        },
+      ],
+      "standardsAndConditions": Object {
+        "businessResults": "",
+        "documentation": "",
+        "industryStandards": "",
+        "interoperability": "",
+        "keyPersonnel": "",
+        "leverage": "",
+        "minimizeCost": "",
+        "mita": "",
+        "mitigationStrategy": "",
+        "modularity": "",
+        "reporting": "",
+      },
+      "statePersonnel": Array [
+        Object {
+          "description": "",
+          "id": 1,
+          "keyPersonnel": null,
+          "title": "",
+          "years": Array [
+            Object {
+              "cost": "0.00",
+              "fte": "0.00",
+              "id": 1,
+              "year": 2019,
+            },
+            Object {
+              "cost": "0.00",
+              "fte": "0.00",
+              "id": 2,
+              "year": 2020,
+            },
+          ],
+        },
+      ],
+      "summary": "",
+    },
+  ],
+  "federalCitations": null,
+  "id": 1,
+  "incentivePayments": Array [
+    Object {
+      "q1": Object {
+        "ehCount": null,
+        "ehPayment": 0,
+        "epCount": null,
+        "epPayment": 0,
+      },
+      "q2": Object {
+        "ehCount": null,
+        "ehPayment": 0,
+        "epCount": null,
+        "epPayment": 0,
+      },
+      "q3": Object {
+        "ehCount": null,
+        "ehPayment": 0,
+        "epCount": null,
+        "epPayment": 0,
+      },
+      "q4": Object {
+        "ehCount": null,
+        "ehPayment": 0,
+        "epCount": null,
+        "epPayment": 0,
+      },
+      "year": "2019",
+    },
+    Object {
+      "q1": Object {
+        "ehCount": null,
+        "ehPayment": 0,
+        "epCount": null,
+        "epPayment": 0,
+      },
+      "q2": Object {
+        "ehCount": null,
+        "ehPayment": 0,
+        "epCount": null,
+        "epPayment": 0,
+      },
+      "q3": Object {
+        "ehCount": null,
+        "ehPayment": 0,
+        "epCount": null,
+        "epPayment": 0,
+      },
+      "q4": Object {
+        "ehCount": null,
+        "ehPayment": 0,
+        "epCount": null,
+        "epPayment": 0,
+      },
+      "year": "2020",
+    },
+  ],
+  "keyPersonnel": Array [],
+  "narrativeHIE": "",
+  "narrativeHIT": "",
+  "narrativeMMIS": "",
+  "period": null,
+  "previousActivityExpenses": Array [
+    Object {
+      "hie": Object {
+        "federalActual": 0,
+        "federalApproved": 0,
+        "stateActual": 0,
+        "stateApproved": 0,
+      },
+      "hit": Object {
+        "federalActual": 0,
+        "federalApproved": 0,
+        "stateActual": 0,
+        "stateApproved": 0,
+      },
+      "mmis": Object {
+        "federal50Actual": 0,
+        "federal50Approved": 0,
+        "federal75Actual": 0,
+        "federal75Approved": 0,
+        "federal90Actual": 0,
+        "federal90Approved": 0,
+        "state10Actual": 0,
+        "state10Approved": 0,
+        "state25Actual": 0,
+        "state25Approved": 0,
+        "state50Actual": 0,
+        "state50Approved": 0,
+      },
+      "year": "2019",
+    },
+    Object {
+      "hie": Object {
+        "federalActual": 0,
+        "federalApproved": 0,
+        "stateActual": 0,
+        "stateApproved": 0,
+      },
+      "hit": Object {
+        "federalActual": 0,
+        "federalApproved": 0,
+        "stateActual": 0,
+        "stateApproved": 0,
+      },
+      "mmis": Object {
+        "federal50Actual": 0,
+        "federal50Approved": 0,
+        "federal75Actual": 0,
+        "federal75Approved": 0,
+        "federal90Actual": 0,
+        "federal90Approved": 0,
+        "state10Actual": 0,
+        "state10Approved": 0,
+        "state25Actual": 0,
+        "state25Approved": 0,
+        "state50Actual": 0,
+        "state50Approved": 0,
+      },
+      "year": "2018",
+    },
+    Object {
+      "hie": Object {
+        "federalActual": 0,
+        "federalApproved": 0,
+        "stateActual": 0,
+        "stateApproved": 0,
+      },
+      "hit": Object {
+        "federalActual": 0,
+        "federalApproved": 0,
+        "stateActual": 0,
+        "stateApproved": 0,
+      },
+      "mmis": Object {
+        "federal50Actual": 0,
+        "federal50Approved": 0,
+        "federal75Actual": 0,
+        "federal75Approved": 0,
+        "federal90Actual": 0,
+        "federal90Approved": 0,
+        "state10Actual": 0,
+        "state10Approved": 0,
+        "state25Actual": 0,
+        "state25Approved": 0,
+        "state50Actual": 0,
+        "state50Approved": 0,
+      },
+      "year": "2017",
+    },
+  ],
+  "previousActivitySummary": "",
+  "programOverview": "",
+  "state": "mn",
+  "stateProfile": Object {
+    "medicaidDirector": Object {
+      "email": null,
+      "name": null,
+      "phone": null,
+    },
+    "medicaidOffice": Object {
+      "address1": null,
+      "address2": null,
+      "city": null,
+      "state": null,
+      "zip": null,
+    },
+  },
+  "status": "draft",
+  "years": Array [
+    "2019",
+    "2020",
+  ],
+}
+`;
