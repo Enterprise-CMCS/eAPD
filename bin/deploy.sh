@@ -8,7 +8,7 @@ set -e
 export API_URL=$STAGING_API_URL
 
 apt-get update
-apt-get install zip -y
+apt-get install zip awscli -y
 
 # Install `cf` cli
 curl -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
