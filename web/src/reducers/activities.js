@@ -446,35 +446,3 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
-
-// data munging / aggregation functions
-
-export const aggregateByYear = (dataArray, years, iteratee = x => x) =>
-  dataArray.reduce((accum, datum) => {
-    const totals = accum;
-    years.forEach(yr => {
-      totals[yr] += +iteratee(datum[yr]);
-    });
-    return totals;
-  }, arrToObj(years, 0));
-
-export const getCategoryTotals = (entries, years, iteratee = x => x) => {
-  const x = aggregateByYear(entries.map(e => e.years), years, iteratee);
-  return x;
-};
-
-export const getActivityCategoryTotals = activity => ({
-  statePersonnel: getCategoryTotals(
-    activity.statePersonnel,
-    activity.years,
-    d => d.amt * d.perc / 100
-  ),
-  contractors: getCategoryTotals(activity.contractorResources, activity.years),
-  expenses: getCategoryTotals(activity.expenses, activity.years)
-});
-
-export const getActivityTotals = activity =>
-  aggregateByYear(
-    Object.values(getActivityCategoryTotals(activity)),
-    activity.years
-  );
