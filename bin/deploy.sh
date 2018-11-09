@@ -8,7 +8,7 @@ set -e
 export API_URL=$STAGING_API_URL
 
 apt-get update
-apt-get install zip awscli -y
+apt-get install zip -y
 
 # Install `cf` cli
 curl -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
@@ -23,7 +23,7 @@ cd web
 npm ci
 npm run build
 zip -r /tmp/webapp.zip dist/*
-aws s3 sync ./dist s3://$STAGING_S3_BUCKET
+# aws s3 sync ./dist s3://$STAGING_S3_BUCKET
 cd ..
 
 # Don't deliver seed files that might be dangerous.
