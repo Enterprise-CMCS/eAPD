@@ -1,0 +1,5 @@
+instruction:
+  heading: Instruction heading
+  short: Short instruction
+  detail: Instruction detail here
+  helpText: this is help text!

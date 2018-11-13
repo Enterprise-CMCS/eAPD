@@ -3,7 +3,7 @@
 set -e
 
 apt-get update
-apt-get install jq awscli
+apt-get install jq awscli -y
 
 BUCKETS=$(aws s3api list-buckets | jq -c -r '.Buckets[] | { name: .Name }')
 

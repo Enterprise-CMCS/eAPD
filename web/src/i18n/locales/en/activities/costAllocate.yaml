@@ -50,7 +50,7 @@ otherFunding:
     Ensure new grants are included, and remove expired grants.
 ffp:
   title: Federal Financial Partipation (FFP) and Cost Allocation
-  totalNetOther: Medicaid Share
+  medicaidShare: Medicaid Share
   labels:
     other: Other Funding Amount
     fedStateSplit: Federal-State Split

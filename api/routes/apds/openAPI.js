@@ -3,8 +3,6 @@ const {
   schema: { arrayOf, errorToken, jsonResponse }
 } = require('../openAPI/helpers');
 
-const activities = require('./activities/openAPI');
-
 const openAPI = {
   '/apds': {
     get: {
@@ -59,6 +57,65 @@ const openAPI = {
         },
         404: {
           description: 'The apd ID does not match any known apds for the user'
+        }
+      }
+    }
+  },
+
+  '/apds/{id}/status': {
+    put: {
+      tags: ['APDs'],
+      summary: 'Set an APD status',
+      description:
+        'An endpoint for CMS analysts to change an APD status after it has been submitted.  The APD cannot currently be in draft status, or else this method will fail with an HTTP 400 error.',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the APD to update',
+          required: true,
+          schema: { type: 'number' }
+        }
+      ],
+      requestBody: {
+        description: 'The status value to set',
+        required: true,
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  description: 'New status to set'
+                }
+              }
+            }
+          }
+        }
+      },
+      responses: {
+        204: {
+          description: 'The APD status was successfully set'
+        },
+        400: {
+          description:
+            'The APD is currently in draft, or the selected status is invalid',
+          content: errorToken
+        }
+      }
+    }
+  },
+
+  '/apds/submitted': {
+    get: {
+      tags: ['APDs'],
+      summary: 'Get all of the submitted APDs (i.e., not draft)',
+      description: 'Get a list of all submitted APDs known to the system',
+      responses: {
+        200: {
+          description: 'The list of submitted APDs',
+          content: jsonResponse(arrayOf({ $ref: '#/components/schemas/apd' }))
         }
       }
     }
@@ -133,9 +190,7 @@ const openAPI = {
         }
       }
     }
-  },
-
-  ...activities
+  }
 };
 
 module.exports = requiresAuth(openAPI);
