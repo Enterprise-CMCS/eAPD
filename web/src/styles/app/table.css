@@ -120,8 +120,3 @@
 .table-frozen-data tr > td:first-child {
   min-width: 140px; /* same as table-frozen-col-pane; for some reason just width doesn't work */
 }
-
-/* TODO: Make this less fragile. */
-.table-frozen-input-header {
-  height: 48px; /* this is the height of an input */
-}
