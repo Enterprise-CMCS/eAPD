@@ -58,7 +58,7 @@ class IncentivePayments extends Component {
                       <DollarInput
                         hideLabel
                         wrapperClass="m0"
-                        className="m0 input input-condensed mono right-align"
+                        className="fake-spacer-input m0 input input-condensed mono right-align"
                         label="null"
                       />
                     </td>

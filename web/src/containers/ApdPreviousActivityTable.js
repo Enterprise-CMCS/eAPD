@@ -83,6 +83,15 @@ const ApdPreviousActivityTable = ({
                 <th className="table-frozen-input-header" key={year}>
                   {t('ffy', { year })}
                 </th>
+                <td>
+                  <DollarInput
+                    hideLabel
+                    wrapperClass="m0"
+                    className="fake-spacer-input m0 input input-condensed mono right-align"
+                    label="null"
+                  />
+                </td>
+
               </tr>
             )})}
           </tbody>
