@@ -35,7 +35,7 @@ const ApdPreviousActivityTableMMIS = ({
   };
 
   return (
-    <div className="table-frozen-wrapper">
+    <div className="table-frozen-wrapper table-frozen-narrow-header">
       <div className="table-frozen-scroller">
         <table className="table-cms table-fixed table-frozen-left-pane" aria-hidden="true">
           <thead>
@@ -80,7 +80,7 @@ const ApdPreviousActivityTableMMIS = ({
         <table className="table-cms table-frozen-data" style={{ minWidth: 1200 }}>
           <thead>
             <tr>
-              <th style={{ width: 140 }} id="prev_act_mmis_null1" />
+              <th style={{ width: 90 }} id="prev_act_mmis_null1" />
               <th
                 colSpan={14}
                 className="bg-aqua center"

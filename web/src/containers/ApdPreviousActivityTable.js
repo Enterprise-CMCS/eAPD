@@ -53,7 +53,7 @@ const ApdPreviousActivityTable = ({
   };
 
   return (
-    <div className="table-frozen-wrapper">
+    <div className="table-frozen-wrapper table-frozen-narrow-header">
       <div className="table-frozen-scroller">
         <table className="table-cms table-fixed table-frozen-left-pane" aria-hidden="true">
           <thead>
@@ -99,7 +99,7 @@ const ApdPreviousActivityTable = ({
         <table className="table-cms table-fixed table-frozen-data" style={{ minWidth: 1200 }}>
           <thead>
             <tr>
-              <th style={{ width: 140 }} id="prev_act_hit_header_null1" />
+              <th style={{ width: 90 }} id="prev_act_hit_header_null1" />
               {Object.values(programs).map((name, i) => (
                 <th
                   key={name}
