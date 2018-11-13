@@ -111,7 +111,8 @@
 }
 
 /* Include a single row of data to ensure size of visible elements is correct */
-.table-frozen-left-pane td:nth-child(2) {
+.table-frozen-left-pane td:nth-child(2),
+.table-frozen-left-pane .table-frozen-spacer-cell {
   visibility: hidden;
   width: 0;
 }
