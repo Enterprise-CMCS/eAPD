@@ -59,7 +59,8 @@ class IncentivePayments extends Component {
                         hideLabel
                         wrapperClass="m0"
                         className="fake-spacer-input m0 input input-condensed mono right-align"
-                        label="null"
+                        label="fake-spacer-input"
+                        name="fake-spacer-input"
                       />
                     </td>
                   </tr>

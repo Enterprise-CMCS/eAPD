@@ -78,10 +78,11 @@ class CostAllocateFFPQuarterly extends Component {
                           className="mono right-align"
                         >
                         <PercentInput
-                          label="fake-input"
-                          wrapperClass="m0"
-                          className="m0 input input-condensed mono right-align"
                           hideLabel
+                          wrapperClass="m0"
+                          className="fake-spacer-input m0 input input-condensed mono right-align"
+                          label="fake-spacer-input"
+                          name="fake-spacer-input"
                         />
                       </td>
                     </tr>

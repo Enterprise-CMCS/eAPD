@@ -61,8 +61,8 @@ const ApdPreviousActivityTableMMIS = ({
             {years.map(year => {
             const totals = rollup(previousActivityExpenses[year]);
             return (
-              <tr>
-                <th key={`${year}-mmis`}>
+              <tr key={`${year}-mmis-fake-row`}>
+                <th key={`${year}-mmis-fake-header`}>
                   {t('ffy', { year })}
                 </th>
                 <td>
@@ -70,7 +70,8 @@ const ApdPreviousActivityTableMMIS = ({
                     hideLabel
                     wrapperClass="m0"
                     className="fake-spacer-input m0 input input-condensed mono right-align"
-                    label="null"
+                    label="fake-spacer-input"
+                    name="fake-spacer-input"
                   />
                 </td>
               </tr>
