@@ -49,21 +49,17 @@ class IncentivePayments extends Component {
             </thead>
             <tbody>
               {INCENTIVE_ENTRIES.map(({ id, name, type }, i) => {
-                const InputComponent = type === 'amount' ? DollarInput : Input;
-                const fmt = type === 'amount' ? formatMoney : formatNum;
-
                 return (
                   <tr key={id}>
-                    <td
-                      className={`align-middle ${i % 2 === 0 ? 'bold' : ''}`}
-                      headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
-                    >
+                    <td>
                       {name}
                     </td>
                     <td>
                       <DollarInput
                         hideLabel
+                        wrapperClass="m0"
                         className="m0 input input-condensed mono right-align"
+                        label="null"
                       />
                     </td>
                   </tr>
@@ -73,7 +69,7 @@ class IncentivePayments extends Component {
           <table className="table-cms table-fixed table-frozen-data" style={{ minWidth: 1200 }}>
             <thead>
               <tr>
-                <th style={{ width: 160 }} id={thId('null1')} />
+                <th style={{ width: 140 }} id={thId('null1')} />
                 {yearsWithColors.map(({ year, color }) => (
                   <th
                     key={year}
