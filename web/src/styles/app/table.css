@@ -101,7 +101,7 @@
 
 .table-frozen-left-pane td,
 .table-frozen-left-pane th {
-  border-right: 2px solid #fff; /* only half of normal .table-cms spacing applied otherwise */
+  border-right: 4px solid #fff;
   vertical-align: inherit;
 }
 
@@ -119,4 +119,30 @@
 .table-frozen-data tr > th:first-child,
 .table-frozen-data tr > td:first-child {
   min-width: 140px; /* same as table-frozen-col-pane; for some reason just width doesn't work */
+}
+
+/* overrides for tables with long or short header text
+ * should be applied to .table-frozen-wrapper element */
+.table-frozen-wide-header .table-frozen-left-pane {
+  max-width: 160px;
+}
+.table-frozen-wide-header .table-frozen-left-pane th,
+.table-frozen-wide-header .table-frozen-left-pane td:first-child {
+  width: 160px;
+}
+.table-frozen-wide-header .table-frozen-data tr > th:first-child,
+.table-frozen-wide-header .table-frozen-data tr > td:first-child {
+  min-width: 160px;
+}
+
+.table-frozen-narrow-header .table-frozen-left-pane {
+  max-width: 90px;
+}
+.table-frozen-narrow-header .table-frozen-left-pane th,
+.table-frozen-narrow-header .table-frozen-left-pane td:first-child {
+  width: 90px;
+}
+.table-frozen-narrow-header .table-frozen-data tr > th:first-child,
+.table-frozen-narrow-header .table-frozen-data tr > td:first-child {
+  min-width: 90px;
 }
