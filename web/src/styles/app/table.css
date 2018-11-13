@@ -80,11 +80,11 @@
   vertical-align: middle;
 }
 
-.table-frozen-col-wrapper {
+.table-frozen-wrapper {
   position: relative;
 }
 
-.table-frozen-col-scroll-window {
+.table-frozen-scroller {
   /*margin-left: 100px;*/
   overflow-x: scroll;
   overflow-y: visible;
@@ -95,17 +95,23 @@
   color: #dae9f7; /* a character is necessary in these cells to match spacing */
 }
 
-.table-frozen-col-pane {
+.table-frozen-left-pane {
   width: 140px; /* arbitrary; must be the same as the first-child width */
   position: absolute;
 }
 
-.table-frozen-col-pane td,
-.table-frozen-col-pane th {
+.table-frozen-left-pane td,
+.table-frozen-left-pane th {
   border-right: 2px solid #fff; /* only half of normal .table-cms spacing applied otherwise */
+  vertical-align: inherit;
 }
 
-.table-frozen-col tr > th:first-child,
-.table-frozen-col tr > td:first-child {
+.table-frozen-data tr > th:first-child,
+.table-frozen-data tr > td:first-child {
   min-width: 140px; /* same as table-frozen-col-pane; for some reason just width doesn't work */
+}
+
+/* TODO: Make this less fragile. */
+.table-frozen-input-header {
+  height: 48px; /* this is the height of an input */
 }
