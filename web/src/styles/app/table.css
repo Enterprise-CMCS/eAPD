@@ -85,7 +85,6 @@
 }
 
 .table-frozen-scroller {
-  /*margin-left: 100px;*/
   overflow-x: scroll;
   overflow-y: visible;
 }
@@ -96,14 +95,25 @@
 }
 
 .table-frozen-left-pane {
-  width: 140px; /* arbitrary; must be the same as the first-child width */
   position: absolute;
+  max-width: 140px; /* no larger than visible element */
 }
 
 .table-frozen-left-pane td,
 .table-frozen-left-pane th {
   border-right: 2px solid #fff; /* only half of normal .table-cms spacing applied otherwise */
   vertical-align: inherit;
+}
+
+.table-frozen-left-pane th,
+.table-frozen-left-pane td:first-child {
+  width: 140px; /* arbitrary; must be the same as the first-child width */
+}
+
+/* Include a single row of data to ensure size of visible elements is correct */
+.table-frozen-left-pane td:nth-child(2) {
+  visibility: hidden;
+  width: 0;
 }
 
 .table-frozen-data tr > th:first-child,
