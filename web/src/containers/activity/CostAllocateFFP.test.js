@@ -31,32 +31,27 @@ describe('the CostAllocateFFP component', () => {
                 state: 90
               }
             }
-          },
-          contractorResources: [
-            {
-              years: {
-                '1066': 100,
-                '1067': 1000
-              }
+          }
+        }
+      }
+    },
+    budget: {
+      activities: {
+        key: {
+          costsByFFY: {
+            '1066': {
+              medicaidShare: 1550,
+              federal: 1430,
+              state: 120,
+              total: 1970
+            },
+            '1067': {
+              medicaidShare: 8870,
+              federal: 8770,
+              state: 100,
+              total: 9889
             }
-          ],
-          expenses: [
-            {
-              years: {
-                '1066': 100,
-                '1067': 1000
-              }
-            }
-          ],
-          statePersonnel: [
-            {
-              years: {
-                '1066': { amt: 100, perc: 41 },
-                '1067': { amt: 1000, perc: 63 }
-              }
-            }
-          ],
-          years: ['1066', '1067']
+          }
         }
       }
     }
@@ -66,23 +61,23 @@ describe('the CostAllocateFFP component', () => {
     aKey: 'activity key',
     byYearData: [
       {
-        allocations: [
-          { amount: 261, id: 'federal' },
-          { amount: 29, id: 'state' }
-        ],
+        allocations: {
+          federal: 261,
+          state: 29
+        },
         ffpSelectVal: '90-10',
         total: 300,
-        totalNetOther: 290,
+        medicaidShare: 290,
         year: '1066'
       },
       {
-        allocations: [
-          { amount: 300, id: 'federal' },
-          { amount: 2700, id: 'state' }
-        ],
+        allocations: {
+          federal: 300,
+          state: 2700
+        },
         ffpSelectVal: '10-90',
         total: 3000,
-        totalNetOther: 3000,
+        medicaidShare: 3000,
         year: '1067'
       }
     ],
@@ -136,23 +131,23 @@ describe('the CostAllocateFFP component', () => {
     expect(mapStateToProps(state, { aKey: 'key' })).toEqual({
       byYearData: [
         {
-          allocations: [
-            { amount: 207.9, id: 'federal' },
-            { amount: 23.1, id: 'state' }
-          ],
+          allocations: {
+            federal: 1430,
+            state: 120
+          },
           ffpSelectVal: '90-10',
-          total: 241,
-          totalNetOther: 231,
+          total: 1970,
+          medicaidShare: 1550,
           year: '1066'
         },
         {
-          allocations: [
-            { amount: 263, id: 'federal' },
-            { amount: 2367, id: 'state' }
-          ],
+          allocations: {
+            federal: 8770,
+            state: 100
+          },
           ffpSelectVal: '10-90',
-          total: 2630,
-          totalNetOther: 2630,
+          total: 9889,
+          medicaidShare: 8870,
           year: '1067'
         }
       ],

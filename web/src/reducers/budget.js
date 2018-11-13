@@ -143,6 +143,14 @@ const buildBudget = bigState => {
     // We also compute quarterly FFP per activity, so we go ahead and
     // create that object here.  We'll fill it in later.
     newState.activities[activity.key] = {
+      costsByFFY: {
+        ...arrToObj(years, () => ({
+          federal: 0,
+          medicaidShare: 0,
+          state: 0,
+          total: 0
+        }))
+      },
       quarterlyFFP: {
         ...arrToObj(years, () => ({
           ...arrToObj(['1', '2', '3', '4'], () => ({
@@ -264,6 +272,7 @@ const buildBudget = bigState => {
     // Now loop back over the years and compute state and federal shares
     // of all the costs.
     years.forEach(year => {
+      const activityCostByFFY = newState.activities[activity.key].costsByFFY;
       const totalCost = activityTotals.data.combined[year];
       const totalMedicaidShare = totalCost - n(allocation[year].other);
 
@@ -327,6 +336,14 @@ const buildBudget = bigState => {
               Contractors:      $40:  50% of state share
               Non-personnel:     $8:  10% of state share
       */
+
+      // Record these costs for each FFY of the activity. These are used in
+      // the cost allocation display, so the user can see at an activity
+      // level their total costs and cost distributions.
+      activityCostByFFY[year].total = totalCost;
+      activityCostByFFY[year].federal = costShares.fedShare;
+      activityCostByFFY[year].state = costShares.stateShare;
+      activityCostByFFY[year].medicaidShare = totalMedicaidShare;
 
       /**
        * Update the running totals for the various cost categories, subtotals,
