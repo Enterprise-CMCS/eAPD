@@ -79,8 +79,8 @@ const ApdPreviousActivityTable = ({
             {years.map(year => {
             const totals = rollup(previousActivityExpenses[year]);
             return (
-              <tr>
-                <th className="table-frozen-input-header" key={year}>
+              <tr key={`${year}-fake-row`}>
+                <th key={`${year}-fake-header`}>
                   {t('ffy', { year })}
                 </th>
                 <td>
@@ -88,7 +88,8 @@ const ApdPreviousActivityTable = ({
                     hideLabel
                     wrapperClass="m0"
                     className="fake-spacer-input m0 input input-condensed mono right-align"
-                    label="null"
+                    label="fake-spacer-input"
+                    name="fake-spacer-input"
                   />
                 </td>
 
