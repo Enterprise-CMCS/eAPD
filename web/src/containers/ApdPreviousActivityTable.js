@@ -80,7 +80,7 @@ const ApdPreviousActivityTable = ({
             const totals = rollup(previousActivityExpenses[year]);
             return (
               <tr>
-                <th className="table-frozen-input-header">
+                <th className="table-frozen-input-header" key={year}>
                   {t('ffy', { year })}
                 </th>
               </tr>
