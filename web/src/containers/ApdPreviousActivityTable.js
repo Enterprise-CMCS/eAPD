@@ -59,26 +59,24 @@ const ApdPreviousActivityTable = ({
           <thead>
             <tr>
               <th className="table-frozen-null-cell">
-                " "
+                --
               </th>
             </tr>
             <tr>
               <th className="table-frozen-null-cell">
-                " "
+                --
                 <br />
-                " "
+                --
               </th>
             </tr>
             <tr>
               <th className="table-frozen-null-cell">
-                " "
+                --
               </th>
             </tr>
           </thead>
           <tbody>
-            {years.map(year => {
-            const totals = rollup(previousActivityExpenses[year]);
-            return (
+            {years.map(year => (
               <tr key={`${year}-fake-row`}>
                 <th key={`${year}-fake-header`}>
                   {t('ffy', { year })}
@@ -94,7 +92,7 @@ const ApdPreviousActivityTable = ({
                 </td>
 
               </tr>
-            )})}
+            ))}
           </tbody>
         </table>
         <table className="table-cms table-fixed table-frozen-data" style={{ minWidth: 1200 }}>

@@ -38,33 +38,32 @@ class IncentivePayments extends Component {
             <thead>
               <tr>
                 <th className="table-frozen-null-cell">
-                  " "
+                  --
                 </th>
               </tr>
               <tr>
                 <th className="table-frozen-null-cell">
-                  " "
+                  --
                 </th>
               </tr>
             </thead>
             <tbody>
-              {INCENTIVE_ENTRIES.map(({ id, name, type }, i) => {
-                return (
-                  <tr key={id}>
-                    <td>
-                      {name}
-                    </td>
-                    <td>
-                      <DollarInput
-                        hideLabel
-                        wrapperClass="m0"
-                        className="fake-spacer-input m0 input input-condensed mono right-align"
-                        label="fake-spacer-input"
-                        name="fake-spacer-input"
-                      />
-                    </td>
-                  </tr>
-                )})}
+              {INCENTIVE_ENTRIES.map(({ id, name }) => (
+                <tr key={id}>
+                  <td>
+                    {name}
+                  </td>
+                  <td>
+                    <DollarInput
+                      hideLabel
+                      wrapperClass="m0"
+                      className="fake-spacer-input m0 input input-condensed mono right-align"
+                      label="fake-spacer-input"
+                      name="fake-spacer-input"
+                    />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
           <table className="table-cms table-fixed table-frozen-data" style={{ minWidth: 1200 }}>

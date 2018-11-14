@@ -41,26 +41,24 @@ const ApdPreviousActivityTableMMIS = ({
           <thead>
             <tr>
               <th className="table-frozen-null-cell">
-                " "
+                --
               </th>
             </tr>
             <tr>
               <th className="table-frozen-null-cell">
-                " "
+                --
                 <br />
-                " "
+                --
               </th>
             </tr>
             <tr>
               <th className="table-frozen-null-cell">
-                " "
+                --
               </th>
             </tr>
           </thead>
           <tbody>
-            {years.map(year => {
-            const totals = rollup(previousActivityExpenses[year]);
-            return (
+            {years.map(year => (
               <tr key={`${year}-mmis-fake-row`}>
                 <th key={`${year}-mmis-fake-header`}>
                   {t('ffy', { year })}
@@ -75,7 +73,7 @@ const ApdPreviousActivityTableMMIS = ({
                   />
                 </td>
               </tr>
-            )})}
+            ))}
           </tbody>
         </table>
         <table className="table-cms table-frozen-data" style={{ minWidth: 1200 }}>
