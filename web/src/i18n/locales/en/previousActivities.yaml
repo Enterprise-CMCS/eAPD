@@ -36,8 +36,6 @@ actualExpenses:
       stateShare50: >-
         State share
         50% FFP
-      grandTotal: >-
-        Federal + State
-        Grand total computable
+      grandTotal: Total computable
       approved: Approved
       actual: Actual

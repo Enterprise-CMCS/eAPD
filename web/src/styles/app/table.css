@@ -146,4 +146,5 @@
 .table-frozen-narrow-header .table-frozen-data tr > th:first-child,
 .table-frozen-narrow-header .table-frozen-data tr > td:first-child {
   min-width: 90px;
+  width: 90px;
 }
