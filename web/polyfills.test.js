@@ -3,6 +3,10 @@
 // we'll just polyfill in a dummy for ourselves
 // until enzyme supports it.  This is the precise
 // polyfill implementaiton that React suggests.
-global.requestAnimationFrame = (callback) => {
+global.requestAnimationFrame = callback => {
+  setTimeout(callback, 0);
+};
+
+global.cancelAnimationFrame = callback => {
   setTimeout(callback, 0);
 };

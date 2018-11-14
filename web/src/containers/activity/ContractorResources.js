@@ -123,6 +123,7 @@ const ContractorForm = ({
                     className="block bold truncate"
                     href={file.preview}
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {file.name}
                   </a>

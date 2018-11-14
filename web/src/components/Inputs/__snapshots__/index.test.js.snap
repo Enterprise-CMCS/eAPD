@@ -2,7 +2,6 @@
 
 exports[`Input component renders correctly 1`] = `
 ReactWrapper {
-  "length": 1,
   Symbol(enzyme.__unrendered__): <InputHolder
     hideLabel={false}
     label="label"
@@ -14,6 +13,7 @@ ReactWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -228,6 +228,16 @@ ReactWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
   },
@@ -236,7 +246,6 @@ ReactWrapper {
 
 exports[`Textarea component renders correctly 1`] = `
 ReactWrapper {
-  "length": 1,
   Symbol(enzyme.__unrendered__): <InputHolder
     hideLabel={false}
     label="label"
@@ -248,6 +257,7 @@ ReactWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -468,6 +478,16 @@ ReactWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
   },
