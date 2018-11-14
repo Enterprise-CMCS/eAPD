@@ -28,6 +28,12 @@ add vendor prefixes), and minify our CSS.
 For testing, we use [Jest](https://facebook.github.io/jest/) as the test runner
 and [Enzyme](http://airbnb.io/enzyme/) as a React renderer.
 
+We have a [Storybook](https://github.com/storybooks/storybook) of some of our
+components. That makes it easier to look at them, see how they work, and
+understand where they should be used. The stories are located in the
+[web/src/stories](https://github.com/18F/cms-hitech-apd/tree/master/web/src/stories)
+directory.
+
 ## API
 
 The API is built on [Express](https://expressjs.com/) using a

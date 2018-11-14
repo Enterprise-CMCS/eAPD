@@ -8,35 +8,23 @@ ShallowWrapper {
     byYearData={
       Array [
         Object {
-          "allocations": Array [
-            Object {
-              "amount": 261,
-              "id": "federal",
-            },
-            Object {
-              "amount": 29,
-              "id": "state",
-            },
-          ],
+          "allocations": Object {
+            "federal": 261,
+            "state": 29,
+          },
           "ffpSelectVal": "90-10",
+          "medicaidShare": 290,
           "total": 300,
-          "totalNetOther": 290,
           "year": "1066",
         },
         Object {
-          "allocations": Array [
-            Object {
-              "amount": 300,
-              "id": "federal",
-            },
-            Object {
-              "amount": 2700,
-              "id": "state",
-            },
-          ],
+          "allocations": Object {
+            "federal": 300,
+            "state": 2700,
+          },
           "ffpSelectVal": "10-90",
+          "medicaidShare": 3000,
           "total": 3000,
-          "totalNetOther": 3000,
           "year": "1067",
         },
       ]
@@ -723,7 +711,7 @@ ShallowWrapper {
                   "rendered": Array [
                     Object {
                       "instance": null,
-                      "key": "federal",
+                      "key": undefined,
                       "nodeType": "host",
                       "props": Object {
                         "children": Array [
@@ -768,7 +756,7 @@ ShallowWrapper {
                     },
                     Object {
                       "instance": null,
-                      "key": "state",
+                      "key": undefined,
                       "nodeType": "host",
                       "props": Object {
                         "children": Array [
@@ -1121,7 +1109,7 @@ ShallowWrapper {
                   "rendered": Array [
                     Object {
                       "instance": null,
-                      "key": "federal",
+                      "key": undefined,
                       "nodeType": "host",
                       "props": Object {
                         "children": Array [
@@ -1166,7 +1154,7 @@ ShallowWrapper {
                     },
                     Object {
                       "instance": null,
-                      "key": "state",
+                      "key": undefined,
                       "nodeType": "host",
                       "props": Object {
                         "children": Array [
@@ -1878,7 +1866,7 @@ ShallowWrapper {
                     "rendered": Array [
                       Object {
                         "instance": null,
-                        "key": "federal",
+                        "key": undefined,
                         "nodeType": "host",
                         "props": Object {
                           "children": Array [
@@ -1923,7 +1911,7 @@ ShallowWrapper {
                       },
                       Object {
                         "instance": null,
-                        "key": "state",
+                        "key": undefined,
                         "nodeType": "host",
                         "props": Object {
                           "children": Array [
@@ -2276,7 +2264,7 @@ ShallowWrapper {
                     "rendered": Array [
                       Object {
                         "instance": null,
-                        "key": "federal",
+                        "key": undefined,
                         "nodeType": "host",
                         "props": Object {
                           "children": Array [
@@ -2321,7 +2309,7 @@ ShallowWrapper {
                       },
                       Object {
                         "instance": null,
-                        "key": "state",
+                        "key": undefined,
                         "nodeType": "host",
                         "props": Object {
                           "children": Array [
