@@ -43,7 +43,6 @@ describe('provides default years based on now', () => {
 
 describe('utility functions', () => {
   const {
-    addObjVals,
     applyToNumbers,
     arrToObj,
     getParams,
@@ -103,10 +102,5 @@ describe('utility functions', () => {
       b: 'boop',
       c: 'boop'
     });
-  });
-
-  test('sums up the object values for a given object', () => {
-    expect(addObjVals({ foo: 1, bar: 2 })).toEqual(3);
-    expect(addObjVals({ a: 1, b: 2, c: -3 })).toEqual(0);
   });
 });

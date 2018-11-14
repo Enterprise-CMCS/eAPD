@@ -63,48 +63,42 @@ describe('executive summary component', () => {
     const state = {
       activities: {
         byKey: {
-          key1: {
+          a1: {
             key: 'a1',
             name: 'activity 1',
-            descShort: 'first activity',
-            contractorResources: [
-              {
-                years: {
-                  '1': 200,
-                  '2': 500
-                }
-              }
-            ],
-            expenses: [],
-            statePersonnel: [
-              {
-                years: {
-                  '1': { amt: 100, perc: 50 },
-                  '2': { amt: 1000, perc: 20 }
-                }
-              }
-            ],
-            years: ['1', '2']
+            descShort: 'first activity'
           },
-          key2: {
+          a2: {
             key: 'a2',
             name: 'activity 2',
-            descShort: 'second activity',
-            contractorResources: [],
-            expenses: [
-              {
-                years: {
-                  '1': 300,
-                  '2': 10
-                }
-              }
-            ],
-            statePersonnel: [],
-            years: ['1', '2']
+            descShort: 'second activity'
           }
         }
       },
-      apd: { data: { years: ['1', '2'] } }
+      apd: { data: { years: ['1', '2'] } },
+      budget: {
+        activities: {
+          a1: {
+            costsByFFY: {
+              '1': { total: 250 },
+              '2': { total: 700 },
+              total: { total: 950 }
+            }
+          },
+          a2: {
+            costsByFFY: {
+              '1': { total: 300 },
+              '2': { total: 10 },
+              total: { total: 310 }
+            }
+          }
+        },
+        combined: {
+          '1': { total: 550 },
+          '2': { total: 710 },
+          total: { total: 1260 }
+        }
+      }
     };
 
     expect(mapStateToProps(state)).toEqual({
