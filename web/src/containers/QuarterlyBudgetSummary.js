@@ -32,12 +32,12 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                 <thead>
                   <tr>
                     <th className="table-frozen-null-cell">
-                      " "
+                      --
                     </th>
                   </tr>
                   <tr>
                     <th className="table-frozen-null-cell">
-                      " "
+                      --
                     </th>
                   </tr>
                 </thead>

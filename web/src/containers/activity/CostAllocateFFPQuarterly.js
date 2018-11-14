@@ -47,14 +47,14 @@ class CostAllocateFFPQuarterly extends Component {
                   <th
                     className="table-frozen-null-cell"
                   >
-                    " "
+                    --
                   </th>
                 </tr>
                 <tr>
                   <th
                     className="table-frozen-null-cell"
                   >
-                    " "
+                    --
                   </th>
                 </tr>
               </thead>
@@ -74,9 +74,9 @@ class CostAllocateFFPQuarterly extends Component {
                         {EXPENSE_NAME_DISPLAY[name]}
                       </td>
                       <td
-                          key={`{name}-null-input-cell`}
-                          className="mono right-align"
-                        >
+                        key={`{name}-null-input-cell`}
+                        className="mono right-align"
+                      >
                         <PercentInput
                           hideLabel
                           wrapperClass="m0"

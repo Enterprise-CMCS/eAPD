@@ -171,14 +171,14 @@ ShallowWrapper {
                   <th
                     className="table-frozen-null-cell"
                   >
-                    " "
+                    --
                   </th>
                 </tr>
                 <tr>
                   <th
                     className="table-frozen-null-cell"
                   >
-                    " "
+                    --
                   </th>
                 </tr>
               </thead>
@@ -571,14 +571,14 @@ ShallowWrapper {
                   <th
                     className="table-frozen-null-cell"
                   >
-                    " "
+                    --
                   </th>
                 </tr>
                 <tr>
                   <th
                     className="table-frozen-null-cell"
                   >
-                    " "
+                    --
                   </th>
                 </tr>
               </thead>
@@ -978,14 +978,14 @@ ShallowWrapper {
                     <th
                       className="table-frozen-null-cell"
                     >
-                      " "
+                      --
                     </th>
                   </tr>
                   <tr>
                     <th
                       className="table-frozen-null-cell"
                     >
-                      " "
+                      --
                     </th>
                   </tr>
                 </thead>
@@ -1389,14 +1389,14 @@ ShallowWrapper {
                       <th
                         className="table-frozen-null-cell"
                       >
-                        " "
+                        --
                       </th>
                     </tr>
                     <tr>
                       <th
                         className="table-frozen-null-cell"
                       >
-                        " "
+                        --
                       </th>
                     </tr>
                   </thead>
@@ -1784,14 +1784,14 @@ ShallowWrapper {
                         <th
                           className="table-frozen-null-cell"
                         >
-                          " "
+                          --
                         </th>
                       </tr>
                       <tr>
                         <th
                           className="table-frozen-null-cell"
                         >
-                          " "
+                          --
                         </th>
                       </tr>
                     </thead>,
@@ -1833,14 +1833,14 @@ ShallowWrapper {
                           <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>
                         </tr>,
                         <tr>
                           <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>
                         </tr>,
                       ],
@@ -1855,7 +1855,7 @@ ShallowWrapper {
                           "children": <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>,
                         },
                         "ref": null,
@@ -1864,11 +1864,11 @@ ShallowWrapper {
                           "key": undefined,
                           "nodeType": "host",
                           "props": Object {
-                            "children": "\\" \\"",
+                            "children": "--",
                             "className": "table-frozen-null-cell",
                           },
                           "ref": null,
-                          "rendered": "\\" \\"",
+                          "rendered": "--",
                           "type": "th",
                         },
                         "type": "tr",
@@ -1881,7 +1881,7 @@ ShallowWrapper {
                           "children": <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>,
                         },
                         "ref": null,
@@ -1890,11 +1890,11 @@ ShallowWrapper {
                           "key": undefined,
                           "nodeType": "host",
                           "props": Object {
-                            "children": "\\" \\"",
+                            "children": "--",
                             "className": "table-frozen-null-cell",
                           },
                           "ref": null,
-                          "rendered": "\\" \\"",
+                          "rendered": "--",
                           "type": "th",
                         },
                         "type": "tr",
@@ -4181,14 +4181,14 @@ ShallowWrapper {
                     <th
                       className="table-frozen-null-cell"
                     >
-                      " "
+                      --
                     </th>
                   </tr>
                   <tr>
                     <th
                       className="table-frozen-null-cell"
                     >
-                      " "
+                      --
                     </th>
                   </tr>
                 </thead>
@@ -4592,14 +4592,14 @@ ShallowWrapper {
                       <th
                         className="table-frozen-null-cell"
                       >
-                        " "
+                        --
                       </th>
                     </tr>
                     <tr>
                       <th
                         className="table-frozen-null-cell"
                       >
-                        " "
+                        --
                       </th>
                     </tr>
                   </thead>
@@ -4987,14 +4987,14 @@ ShallowWrapper {
                         <th
                           className="table-frozen-null-cell"
                         >
-                          " "
+                          --
                         </th>
                       </tr>
                       <tr>
                         <th
                           className="table-frozen-null-cell"
                         >
-                          " "
+                          --
                         </th>
                       </tr>
                     </thead>,
@@ -5036,14 +5036,14 @@ ShallowWrapper {
                           <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>
                         </tr>,
                         <tr>
                           <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>
                         </tr>,
                       ],
@@ -5058,7 +5058,7 @@ ShallowWrapper {
                           "children": <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>,
                         },
                         "ref": null,
@@ -5067,11 +5067,11 @@ ShallowWrapper {
                           "key": undefined,
                           "nodeType": "host",
                           "props": Object {
-                            "children": "\\" \\"",
+                            "children": "--",
                             "className": "table-frozen-null-cell",
                           },
                           "ref": null,
-                          "rendered": "\\" \\"",
+                          "rendered": "--",
                           "type": "th",
                         },
                         "type": "tr",
@@ -5084,7 +5084,7 @@ ShallowWrapper {
                           "children": <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>,
                         },
                         "ref": null,
@@ -5093,11 +5093,11 @@ ShallowWrapper {
                           "key": undefined,
                           "nodeType": "host",
                           "props": Object {
-                            "children": "\\" \\"",
+                            "children": "--",
                             "className": "table-frozen-null-cell",
                           },
                           "ref": null,
-                          "rendered": "\\" \\"",
+                          "rendered": "--",
                           "type": "th",
                         },
                         "type": "tr",
@@ -7391,14 +7391,14 @@ ShallowWrapper {
                     <th
                       className="table-frozen-null-cell"
                     >
-                      " "
+                      --
                     </th>
                   </tr>
                   <tr>
                     <th
                       className="table-frozen-null-cell"
                     >
-                      " "
+                      --
                     </th>
                   </tr>
                 </thead>
@@ -7791,14 +7791,14 @@ ShallowWrapper {
                     <th
                       className="table-frozen-null-cell"
                     >
-                      " "
+                      --
                     </th>
                   </tr>
                   <tr>
                     <th
                       className="table-frozen-null-cell"
                     >
-                      " "
+                      --
                     </th>
                   </tr>
                 </thead>
@@ -8198,14 +8198,14 @@ ShallowWrapper {
                       <th
                         className="table-frozen-null-cell"
                       >
-                        " "
+                        --
                       </th>
                     </tr>
                     <tr>
                       <th
                         className="table-frozen-null-cell"
                       >
-                        " "
+                        --
                       </th>
                     </tr>
                   </thead>
@@ -8609,14 +8609,14 @@ ShallowWrapper {
                         <th
                           className="table-frozen-null-cell"
                         >
-                          " "
+                          --
                         </th>
                       </tr>
                       <tr>
                         <th
                           className="table-frozen-null-cell"
                         >
-                          " "
+                          --
                         </th>
                       </tr>
                     </thead>
@@ -9004,14 +9004,14 @@ ShallowWrapper {
                           <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>
                         </tr>
                         <tr>
                           <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>
                         </tr>
                       </thead>,
@@ -9053,14 +9053,14 @@ ShallowWrapper {
                             <th
                               className="table-frozen-null-cell"
                             >
-                              " "
+                              --
                             </th>
                           </tr>,
                           <tr>
                             <th
                               className="table-frozen-null-cell"
                             >
-                              " "
+                              --
                             </th>
                           </tr>,
                         ],
@@ -9075,7 +9075,7 @@ ShallowWrapper {
                             "children": <th
                               className="table-frozen-null-cell"
                             >
-                              " "
+                              --
                             </th>,
                           },
                           "ref": null,
@@ -9084,11 +9084,11 @@ ShallowWrapper {
                             "key": undefined,
                             "nodeType": "host",
                             "props": Object {
-                              "children": "\\" \\"",
+                              "children": "--",
                               "className": "table-frozen-null-cell",
                             },
                             "ref": null,
-                            "rendered": "\\" \\"",
+                            "rendered": "--",
                             "type": "th",
                           },
                           "type": "tr",
@@ -9101,7 +9101,7 @@ ShallowWrapper {
                             "children": <th
                               className="table-frozen-null-cell"
                             >
-                              " "
+                              --
                             </th>,
                           },
                           "ref": null,
@@ -9110,11 +9110,11 @@ ShallowWrapper {
                             "key": undefined,
                             "nodeType": "host",
                             "props": Object {
-                              "children": "\\" \\"",
+                              "children": "--",
                               "className": "table-frozen-null-cell",
                             },
                             "ref": null,
-                            "rendered": "\\" \\"",
+                            "rendered": "--",
                             "type": "th",
                           },
                           "type": "tr",
@@ -11401,14 +11401,14 @@ ShallowWrapper {
                       <th
                         className="table-frozen-null-cell"
                       >
-                        " "
+                        --
                       </th>
                     </tr>
                     <tr>
                       <th
                         className="table-frozen-null-cell"
                       >
-                        " "
+                        --
                       </th>
                     </tr>
                   </thead>
@@ -11812,14 +11812,14 @@ ShallowWrapper {
                         <th
                           className="table-frozen-null-cell"
                         >
-                          " "
+                          --
                         </th>
                       </tr>
                       <tr>
                         <th
                           className="table-frozen-null-cell"
                         >
-                          " "
+                          --
                         </th>
                       </tr>
                     </thead>
@@ -12207,14 +12207,14 @@ ShallowWrapper {
                           <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>
                         </tr>
                         <tr>
                           <th
                             className="table-frozen-null-cell"
                           >
-                            " "
+                            --
                           </th>
                         </tr>
                       </thead>,
@@ -12256,14 +12256,14 @@ ShallowWrapper {
                             <th
                               className="table-frozen-null-cell"
                             >
-                              " "
+                              --
                             </th>
                           </tr>,
                           <tr>
                             <th
                               className="table-frozen-null-cell"
                             >
-                              " "
+                              --
                             </th>
                           </tr>,
                         ],
@@ -12278,7 +12278,7 @@ ShallowWrapper {
                             "children": <th
                               className="table-frozen-null-cell"
                             >
-                              " "
+                              --
                             </th>,
                           },
                           "ref": null,
@@ -12287,11 +12287,11 @@ ShallowWrapper {
                             "key": undefined,
                             "nodeType": "host",
                             "props": Object {
-                              "children": "\\" \\"",
+                              "children": "--",
                               "className": "table-frozen-null-cell",
                             },
                             "ref": null,
-                            "rendered": "\\" \\"",
+                            "rendered": "--",
                             "type": "th",
                           },
                           "type": "tr",
@@ -12304,7 +12304,7 @@ ShallowWrapper {
                             "children": <th
                               className="table-frozen-null-cell"
                             >
-                              " "
+                              --
                             </th>,
                           },
                           "ref": null,
@@ -12313,11 +12313,11 @@ ShallowWrapper {
                             "key": undefined,
                             "nodeType": "host",
                             "props": Object {
-                              "children": "\\" \\"",
+                              "children": "--",
                               "className": "table-frozen-null-cell",
                             },
                             "ref": null,
-                            "rendered": "\\" \\"",
+                            "rendered": "--",
                             "type": "th",
                           },
                           "type": "tr",
