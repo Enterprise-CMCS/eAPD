@@ -23,7 +23,7 @@ cd web
 npm ci
 npm run build
 zip -r /tmp/webapp.zip dist/*
-aws s3 sync ./dist s3://$STAGING_S3_BUCKET
+# aws s3 sync ./dist s3://$STAGING_S3_BUCKET
 cd ..
 
 # Don't deliver seed files that might be dangerous.
