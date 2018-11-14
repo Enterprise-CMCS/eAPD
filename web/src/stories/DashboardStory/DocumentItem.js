@@ -27,16 +27,25 @@ class DocumentItemStory extends Component {
       </RenderViewbox>
 
       <p>
-        <label>
+        <label htmlFor="story_document_item_inputx">
           Name:{' '}
-          <input type="text" value={this.state.name} onChange={this.setName} />
+          <input
+            type="text"
+            value={this.state.name}
+            onChange={this.setName}
+            id="story_document_item_input"
+          />
         </label>
       </p>
 
       <p>
-        <label>
+        <label htmlFor="story_document_item_select">
           Status:{' '}
-          <select value={this.state.statusKey} onChange={this.setStatus}>
+          <select
+            value={this.state.statusKey}
+            onChange={this.setStatus}
+            id="story_document_item_select"
+          >
             {Object.entries(APD_STATUS).map(([key, symbol]) => (
               <option value={key}>
                 {symbol.toString().replace(/Symbol\((.+)\)/, '$1')}
