@@ -54,7 +54,7 @@ describe('incentive payments component', () => {
     const types = ['ehAmt', 'ehCt', 'epAmt', 'epCt'];
     const years = ['1', '2'];
 
-    component.find('InputHolder').forEach((c, i) => {
+    component.find('InputHolder').not('.fake-spacer-input').forEach((c, i) => {
       c.simulate('change', { target: { value: 99 } });
 
       const q = i % 4 + 1;
