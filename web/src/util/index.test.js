@@ -49,8 +49,7 @@ describe('utility functions', () => {
     getParams,
     nextSequence,
     replaceNulls,
-    stateLookup,
-    titleCase
+    stateLookup
   } = load();
 
   test('replace nulls with empty strings in an object', () => {
@@ -109,10 +108,5 @@ describe('utility functions', () => {
   test('sums up the object values for a given object', () => {
     expect(addObjVals({ foo: 1, bar: 2 })).toEqual(3);
     expect(addObjVals({ a: 1, b: 2, c: -3 })).toEqual(0);
-  });
-
-  test('title cases a given string', () => {
-    expect(titleCase('foo')).toEqual('Foo');
-    expect(titleCase('foo bar')).toEqual('Foo Bar');
   });
 });

@@ -263,6 +263,26 @@ describe('budget reducer', () => {
     ).toEqual({
       activities: {
         '1': {
+          costsByFFY: {
+            '1931': {
+              federal: 4860,
+              state: 540,
+              medicaidShare: 5400,
+              total: 5400
+            },
+            '1932': {
+              federal: 4680,
+              state: 520,
+              medicaidShare: 5200,
+              total: 5200
+            },
+            '1933': {
+              federal: 4230,
+              state: 470,
+              medicaidShare: 4700,
+              total: 4700
+            }
+          },
           quarterlyFFP: {
             '1931': {
               '1': {
@@ -349,6 +369,26 @@ describe('budget reducer', () => {
           }
         },
         '2': {
+          costsByFFY: {
+            '1931': {
+              federal: 2700,
+              state: 300,
+              medicaidShare: 3000,
+              total: 3000
+            },
+            '1932': {
+              federal: 2700,
+              state: 300,
+              medicaidShare: 3000,
+              total: 3000
+            },
+            '1933': {
+              federal: 2700,
+              state: 300,
+              medicaidShare: 3000,
+              total: 3000
+            }
+          },
           quarterlyFFP: {
             '1931': {
               '1': {
@@ -435,6 +475,26 @@ describe('budget reducer', () => {
           }
         },
         '3': {
+          costsByFFY: {
+            '1931': {
+              federal: 2700,
+              state: 300,
+              medicaidShare: 3000,
+              total: 3000
+            },
+            '1932': {
+              federal: 2700,
+              state: 300,
+              medicaidShare: 3000,
+              total: 3000
+            },
+            '1933': {
+              federal: 1800,
+              state: 200,
+              medicaidShare: 2000,
+              total: 3000
+            }
+          },
           quarterlyFFP: {
             '1931': {
               '1': {
@@ -521,6 +581,26 @@ describe('budget reducer', () => {
           }
         },
         '4': {
+          costsByFFY: {
+            '1931': {
+              federal: 750,
+              state: 750,
+              medicaidShare: 1500,
+              total: 2500
+            },
+            '1932': {
+              federal: 1500,
+              state: 500,
+              medicaidShare: 2000,
+              total: 3000
+            },
+            '1933': {
+              federal: 1890,
+              state: 210,
+              medicaidShare: 2100,
+              total: 2100
+            }
+          },
           quarterlyFFP: {
             '1931': {
               '1': {

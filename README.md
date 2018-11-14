@@ -55,6 +55,8 @@ then run `docker-compose up`. This will do several things:
    hook it up to the database
 3. create a container for the web application, download all of its
    dependencies, and build it
+4. create a container for the component
+   [Storybook](https://github.com/storybooks/storybook)
 
 This could take a few minutes. Once it's finished, everything is installed,
 configured, and running. However, the database will still be empty, so that
@@ -72,6 +74,11 @@ log into the app.
 You should now be able to open the app at
 [http://localhost:8080](http://localhost:8080). You can log in with username
 `em@il.com` and password `password`.
+
+You can also view the component Storybook at
+[http://localhost:8082](http://localhost:8082)
+
+See the [testing documentation](docs/testing.md) for information about running tests.
 
 ### manually
 
@@ -150,6 +157,18 @@ You should now be able to open the app at
 `em@il.com` and password `password`.
 
 The server should now be running at http://localhost:8000/
+
+The component Storybook also runs in its own process, so if you want to run it
+along with the web app and API, you'll need another terminal window. However,
+the Storybook is optional - it can be useful for seeing what the various
+components in the app look like and understanding how to use them.
+
+```shell
+cd web
+npm run storybook
+```
+
+The Storybook is now running at http://localhost:9001
 
 See the [testing documentation](docs/testing.md) for information about running tests.
 
