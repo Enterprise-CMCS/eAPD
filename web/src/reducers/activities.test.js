@@ -14,13 +14,7 @@ const mockClock = sinon.useFakeTimers(new Date(1972, 11, 13).getTime());
 const imported = require('./activities');
 
 const activities = imported.default;
-const {
-  aggregateByYear,
-  getCategoryTotals,
-  getActivityCategoryTotals,
-  getActivityTotals,
-  setKeyGenerator
-} = imported;
+const { setKeyGenerator } = imported;
 
 describe('activities reducer', () => {
   afterAll(() => {
@@ -650,106 +644,5 @@ describe('activities reducer', () => {
         }
       });
     });
-  });
-
-  it('aggregates data by year', () => {
-    expect(
-      aggregateByYear(
-        [{ '1972': 10, '1973': 7 }, { '1972': 46, '1973': 8 }],
-        ['1972', '1973']
-      )
-    ).toEqual({ '1972': 56, '1973': 15 });
-  });
-
-  it('gets yearly totals for a category', () => {
-    expect(
-      getCategoryTotals(
-        [
-          { years: { '1972': 10, '1973': 7 } },
-          { years: { '1972': 46, '1973': 8 } }
-        ],
-        ['1972', '1973']
-      )
-    ).toEqual({ '1972': 56, '1973': 15 });
-  });
-
-  it('get cost totals per category per year for an activity', () => {
-    expect(
-      getActivityCategoryTotals({
-        contractorResources: [
-          { years: { '1972': 1, '1973': 10 } },
-          { years: { '1972': 2, '1973': 20 } },
-          { years: { '1972': 3, '1973': 30 } }
-        ],
-        expenses: [
-          { years: { '1972': 2, '1973': 20 } },
-          { years: { '1972': 4, '1973': 40 } },
-          { years: { '1972': 6, '1973': 60 } }
-        ],
-        statePersonnel: [
-          {
-            years: {
-              '1972': { amt: 3, perc: 40 },
-              '1973': { amt: 30, perc: 100 }
-            }
-          },
-          {
-            years: {
-              '1972': { amt: 6, perc: 55 },
-              '1973': { amt: 60, perc: 90 }
-            }
-          },
-          {
-            years: {
-              '1972': { amt: 9, perc: 99 },
-              '1973': { amt: 90, perc: 30 }
-            }
-          }
-        ],
-        years: ['1972', '1973']
-      })
-    ).toEqual({
-      contractors: { '1972': 6, '1973': 60 },
-      expenses: { '1972': 12, '1973': 120 },
-      statePersonnel: { '1972': 13.41, '1973': 111 }
-    });
-  });
-
-  it('get cost totals per year for an activity', () => {
-    expect(
-      getActivityTotals({
-        contractorResources: [
-          { years: { '1972': 1, '1973': 10 } },
-          { years: { '1972': 2, '1973': 20 } },
-          { years: { '1972': 3, '1973': 30 } }
-        ],
-        expenses: [
-          { years: { '1972': 2, '1973': 20 } },
-          { years: { '1972': 4, '1973': 40 } },
-          { years: { '1972': 6, '1973': 60 } }
-        ],
-        statePersonnel: [
-          {
-            years: {
-              '1972': { amt: 3, perc: 100 },
-              '1973': { amt: 30, perc: 80 }
-            }
-          },
-          {
-            years: {
-              '1972': { amt: 6, perc: 90 },
-              '1973': { amt: 60, perc: 100 }
-            }
-          },
-          {
-            years: {
-              '1972': { amt: 9, perc: 40 },
-              '1973': { amt: 90, perc: 10 }
-            }
-          }
-        ],
-        years: ['1972', '1973']
-      })
-    ).toEqual({ '1972': 30, '1973': 273 });
   });
 });

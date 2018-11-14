@@ -167,9 +167,6 @@ export const arrToObj = (array = [], initialValue = 0) => {
   return Object.assign({}, ...array.map(a => ({ [a]: init() })));
 };
 
-export const addObjVals = (obj, getVal = a => a) =>
-  Object.values(obj).reduce((a, b) => a + getVal(b), 0);
-
 export const applyToNumbers = (obj, fn) => {
   const o = { ...obj };
   Object.keys(o).forEach(k => {
