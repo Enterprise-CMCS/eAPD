@@ -32,92 +32,126 @@ class IncentivePayments extends Component {
     });
 
     return (
-      <div className="overflow-auto">
-        <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
-          <thead>
-            <tr>
-              <th style={{ width: 160 }} id={thId('null1')} />
-              {yearsWithColors.map(({ year, color }) => (
-                <th
-                  key={year}
-                  className={`center ${color}`}
-                  colSpan="5"
-                  id={thId(year)}
-                >
-                  {t('ffy', { year })}
+      <div className="table-frozen-wrapper">
+        <div className="table-frozen-scroller">
+          <table className="table-cms table-fixed table-frozen-left-pane" aria-hidden="true">
+            <thead>
+              <tr>
+                <th className="table-frozen-null-cell">
+                  --
                 </th>
-              ))}
-              <th className="bg-black center" id={thId('total')}>
-                {t('table.total')}
-              </th>
-            </tr>
-            <tr>
-              <th id={thId('null2')} />
-              {yearsWithColors.map(({ year, colorLight }) => (
-                <Fragment key={year}>
-                  {QUARTERS.map(q => (
-                    <th key={q} className="right-align" id={thId(year, q)}>
-                      {t('table.quarter', { q })}
-                    </th>
-                  ))}
-                  <th
-                    className={`right-align ${colorLight}`}
-                    id={thId(year, 'subtotal')}
-                  >
-                    {t('table.subtotal')}
-                  </th>
-                </Fragment>
-              ))}
-              <th className="bg-gray-light" id={thId('total', 'grand')} />
-            </tr>
-          </thead>
-          <tbody>
-            {INCENTIVE_ENTRIES.map(({ id, name, type }, i) => {
-              const InputComponent = type === 'amount' ? DollarInput : Input;
-              const fmt = type === 'amount' ? formatMoney : formatNum;
-
-              return (
+              </tr>
+              <tr>
+                <th className="table-frozen-null-cell">
+                  --
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {INCENTIVE_ENTRIES.map(({ id, name }) => (
                 <tr key={id}>
-                  <td
-                    className={`align-middle ${i % 2 === 0 ? 'bold' : ''}`}
-                    headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
-                  >
+                  <td>
                     {name}
                   </td>
-                  {yearsWithColors.map(({ year, colorLight }) => (
-                    <Fragment key={year}>
-                      {QUARTERS.map(q => (
-                        <td key={q} headers={tdHdrs(year, q)}>
-                          <InputComponent
-                            name={`${id}-payments-${year}-q${q}`}
-                            label={`${id} payments for ${year}, quarter ${q}`}
-                            wrapperClass="m0"
-                            className="m0 input input-condensed mono right-align"
-                            value={data[id][year][q] || ''}
-                            onChange={this.handleChange(id, year, q)}
-                            hideLabel
-                          />
-                        </td>
-                      ))}
-                      <td
-                        className={`bold mono right-align align-middle ${colorLight}`}
-                        headers={tdHdrs(year, 'subtotal')}
-                      >
-                        {fmt(totals[id].byYear[year])}
-                      </td>
-                    </Fragment>
-                  ))}
-                  <td
-                    className="bold mono right-align align-middle bg-gray-light"
-                    headers={tdHdrs('total', 'grand')}
-                  >
-                    {fmt(totals[id].allYears)}
+                  <td>
+                    <DollarInput
+                      hideLabel
+                      wrapperClass="m0"
+                      className="fake-spacer-input m0 input input-condensed mono right-align"
+                      label="fake-spacer-input"
+                      name="fake-spacer-input"
+                    />
                   </td>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+          <table className="table-cms table-fixed table-frozen-data" style={{ minWidth: 1200 }}>
+            <thead>
+              <tr>
+                <th style={{ width: 140 }} id={thId('null1')} />
+                {yearsWithColors.map(({ year, color }) => (
+                  <th
+                    key={year}
+                    className={`center ${color}`}
+                    colSpan="5"
+                    id={thId(year)}
+                  >
+                    {t('ffy', { year })}
+                  </th>
+                ))}
+                <th className="bg-black center" id={thId('total')}>
+                  {t('table.total')}
+                </th>
+              </tr>
+              <tr>
+                <th id={thId('null2')} />
+                {yearsWithColors.map(({ year, colorLight }) => (
+                  <Fragment key={year}>
+                    {QUARTERS.map(q => (
+                      <th key={q} className="right-align" id={thId(year, q)}>
+                        {t('table.quarter', { q })}
+                      </th>
+                    ))}
+                    <th
+                      className={`right-align ${colorLight}`}
+                      id={thId(year, 'subtotal')}
+                    >
+                      {t('table.subtotal')}
+                    </th>
+                  </Fragment>
+                ))}
+                <th className="bg-gray-light" id={thId('total', 'grand')} />
+              </tr>
+            </thead>
+            <tbody>
+              {INCENTIVE_ENTRIES.map(({ id, name, type }, i) => {
+                const InputComponent = type === 'amount' ? DollarInput : Input;
+                const fmt = type === 'amount' ? formatMoney : formatNum;
+
+                return (
+                  <tr key={id}>
+                    <td
+                      className={`align-middle ${i % 2 === 0 ? 'bold' : ''}`}
+                      headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+                    >
+                      {name}
+                    </td>
+                    {yearsWithColors.map(({ year, colorLight }) => (
+                      <Fragment key={year}>
+                        {QUARTERS.map(q => (
+                          <td key={q} headers={tdHdrs(year, q)}>
+                            <InputComponent
+                              name={`${id}-payments-${year}-q${q}`}
+                              label={`${id} payments for ${year}, quarter ${q}`}
+                              wrapperClass="m0"
+                              className="m0 input input-condensed mono right-align"
+                              value={data[id][year][q] || ''}
+                              onChange={this.handleChange(id, year, q)}
+                              hideLabel
+                            />
+                          </td>
+                        ))}
+                        <td
+                          className={`bold mono right-align align-middle ${colorLight}`}
+                          headers={tdHdrs(year, 'subtotal')}
+                        >
+                          {fmt(totals[id].byYear[year])}
+                        </td>
+                      </Fragment>
+                    ))}
+                    <td
+                      className="bold mono right-align align-middle bg-gray-light"
+                      headers={tdHdrs('total', 'grand')}
+                    >
+                      {fmt(totals[id].allYears)}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }

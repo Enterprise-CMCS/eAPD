@@ -39,14 +39,76 @@ class CostAllocateFFPQuarterly extends Component {
 
     return (
       <div>
-        <div className="mb3">
-          <div className="overflow-auto">
+        <div className="mb3 table-frozen-wrapper">
+          <div className="table-frozen-scroller">
+            <table className="table-cms table-fixed table-frozen-left-pane" aria-hidden="true">
+              <thead>
+                <tr>
+                  <th
+                    className="table-frozen-null-cell"
+                  >
+                    --
+                  </th>
+                </tr>
+                <tr>
+                  <th
+                    className="table-frozen-null-cell"
+                  >
+                    --
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {['state', 'contractors'].map(name => (
+                  <Fragment key={name}>
+                    <tr
+                      key={name}
+                      className={`align-middle ${
+                        name === 'combined' ? 'bold' : ''
+                      }`}
+                    >
+                      <td
+                        rowSpan="2"
+                        headers="act_qbudget_null1"
+                      >
+                        {EXPENSE_NAME_DISPLAY[name]}
+                      </td>
+                      <td
+                        key={`{name}-null-input-cell`}
+                        className="mono right-align"
+                      >
+                        <PercentInput
+                          hideLabel
+                          wrapperClass="m0"
+                          className="fake-spacer-input m0 input input-condensed mono right-align"
+                          label="fake-spacer-input"
+                          name="fake-spacer-input"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        key={`{name}-null-computed-cell`}
+                        className="nowrap table-frozen-spacer-cell"
+                      >
+                        --
+                      </td>
+                    </tr>
+                  </Fragment>
+                ))}
+                <tr className="bold">
+                  <td>
+                    {EXPENSE_NAME_DISPLAY.combined}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
             <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
               <thead>
                 <tr>
                   <th
                     rowSpan="2"
-                    style={{ width: 160 }}
+                    style={{ width: 140 }}
                     id="act_qbudget_null1"
                   />
                   {years.map((year, i) => (
