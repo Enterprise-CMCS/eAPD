@@ -5,37 +5,7 @@ import { connect } from 'react-redux';
 import { formatMoney } from '../util/formats';
 import { DollarInput } from '../components/Inputs';
 import { updateApd } from '../actions/apd';
-import { t } from '../i18n';
-
-const i18nBase = { scope: 'previousActivities.actualExpenses.table' };
-
-const programs = {
-  hit: t('program.hit', i18nBase),
-  hie: t('program.hie', i18nBase)
-};
-const colors = ['aqua', 'blue', 'navy'];
-const borderClass = i => `border-left border-${i < 0 ? 'gray' : colors[i]}`;
-
-const rollup = previous => {
-  const totals = {
-    combined: {
-      federalActual: previous.hie.federalActual + previous.hit.federalActual,
-      federalApproved:
-        previous.hie.federalApproved + previous.hit.federalApproved,
-      stateActual: previous.hie.stateActual + previous.hit.stateActual,
-      stateApproved: previous.hie.stateApproved + previous.hit.stateApproved
-    },
-    total: {
-      actual: 0,
-      approved: 0
-    }
-  };
-  totals.total.actual =
-    totals.combined.federalActual + totals.combined.stateActual;
-  totals.total.approved =
-    totals.combined.federalApproved + totals.combined.stateApproved;
-  return totals;
-};
+import { TABLE_HEADERS } from '../constants';
 
 const ApdPreviousActivityTable = ({
   previousActivityExpenses,
@@ -54,7 +24,7 @@ const ApdPreviousActivityTable = ({
 
   return (
     <Fragment>
-      <h3>{t('program.combined', i18nBase)}</h3>
+      <h3>HIT + HIE</h3>
       <div className="table-frozen-wrapper table-frozen-narrow-header">
         <div className="table-frozen-scroller">
           <table
@@ -72,7 +42,7 @@ const ApdPreviousActivityTable = ({
             <tbody>
               {years.map(year => (
                 <tr key={`${year}-fake-row`}>
-                  <th key={`${year}-fake-header`}>{t('ffy', { year })}</th>
+                  <th key={`${year}-fake-header`}>{TABLE_HEADERS.ffy(year)}</th>
                   <td>
                     <DollarInput
                       hideLabel
@@ -86,75 +56,81 @@ const ApdPreviousActivityTable = ({
               ))}
             </tbody>
           </table>
-          <table className="table-cms table-fixed table-frozen-data">
+          <table className="table-cms centered-headers table-fixed table-frozen-data">
             <thead>
               <tr>
                 <th id="prev_act_hit_header_null2" />
+                <th className="pre-line" id="prev_act_hithie_total">
+                  {TABLE_HEADERS.total}
+                </th>
                 <th
                   colSpan="2"
                   className="pre-line"
                   id="prev_act_hithie_federal"
                 >
-                  {t('labels.federalShare', i18nBase)}
-                </th>
-                <th className="pre-line" id="prev_act_hithie_total">
-                  {t('labels.grandTotal', i18nBase)}
+                  {TABLE_HEADERS.federal()}
                 </th>
               </tr>
               <tr>
                 <th id="prev_act_hit_header_null3" />
-                <th id="prev_act_hithie_fed_approved">
-                  {t('labels.approved', i18nBase)}
-                </th>
-                <th className={borderClass(-1)} id="prev_act_hithie_fed_actual">
-                  {t('labels.actual', i18nBase)}
-                </th>
                 <th id="prev_act_hithie_total_approved">
-                  {t('labels.approved', i18nBase)}
+                  {TABLE_HEADERS.approved}
+                </th>
+                <th id="prev_act_hithie_federal_approved">
+                  {TABLE_HEADERS.approved}
+                </th>
+                <th id="prev_act_hithie_federal_actual">
+                  {TABLE_HEADERS.actual}
                 </th>
               </tr>
             </thead>
             <tbody>
               {years.map(year => {
-                const totals = rollup(previousActivityExpenses[year]);
+                const federalApproved =
+                  previousActivityExpenses[year].hithie.totalApproved * 0.9;
 
                 return (
                   <tr key={year} className="align-middle">
-                    <th id={`prev_act_hit_row_${year}`}>
-                      {t('ffy', { year })}
+                    <th id={`prev_act_hithie_row_${year}`}>
+                      {TABLE_HEADERS.ffy(year)}
                     </th>
 
                     <td
-                      headers={`prev_act_hit_row_${year} prev_act_hithie_federal prev_act_hithie_fed_approved`}
+                      headers={`prev_act_hithie_row_${year} prev_act_hithie_total prev_act_hithie_total_approved`}
                     >
                       <DollarInput
-                        name={`hithie-approved-federal-${year}`}
-                        label={`approved federal share for HIT and HIE for FFY ${year}`}
+                        name={`hithie-approved-total-${year}`}
+                        label={`total approved funding for HIT and HIE for FFY ${year}, state plus federal`}
                         hideLabel
                         wrapperClass="m0"
                         className="m0 input input-condensed mono right-align"
-                        value={0}
-                        onChange={() => {}}
+                        value={
+                          previousActivityExpenses[year].hithie.totalApproved
+                        }
+                        onChange={handleChange(year, 'hithie', 'totalApproved')}
                       />
                     </td>
+
                     <td
-                      headers={`prev_act_hit_row_${year} prev_act_hithie_federal prev_act_hithie_fed_actual`}
+                      headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_total_approved`}
+                    >
+                      {formatMoney(federalApproved)}
+                    </td>
+
+                    <td
+                      headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_federal_actual`}
                     >
                       <DollarInput
-                        name={`hithie-approved-federal-${year}`}
+                        name={`hithie-actual-federal-${year}`}
                         label={`actual federal share for HIT and HIE for FFY ${year}`}
                         hideLabel
                         wrapperClass="m0"
                         className="m0 input input-condensed mono right-align"
-                        value={0}
-                        onChange={() => {}}
+                        value={
+                          previousActivityExpenses[year].hithie.federalActual
+                        }
+                        onChange={handleChange(year, 'hithie', 'federalActual')}
                       />
-                    </td>
-
-                    <td
-                      headers={`prev_act_hit_row_${year} prev_act_hithie_total prev_act_hithie_total_approved`}
-                    >
-                      {formatMoney(totals.total.approved)}
                     </td>
                   </tr>
                 );
