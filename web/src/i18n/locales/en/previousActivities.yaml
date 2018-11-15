@@ -20,7 +20,7 @@ actualExpenses:
     labels:
       federalShare: >-
         Federal share
-        90% FFP
+        *90% FFP*
       stateShare: >-
         State share
         10% FFP
@@ -36,6 +36,6 @@ actualExpenses:
       stateShare50: >-
         State share
         50% FFP
-      grandTotal: Total computable
+      grandTotal: Total computable (Federal + state)
       approved: Approved
       actual: Actual

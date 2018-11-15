@@ -5,19 +5,7 @@ import { connect } from 'react-redux';
 import { formatMoney } from '../util/formats';
 import { DollarInput } from '../components/Inputs';
 import { updateApd } from '../actions/apd';
-import { t } from '../i18n';
-
-const i18nBase = { scope: 'previousActivities.actualExpenses.table' };
-
-const borderClass = i => `border-left border-${i < 0 ? 'gray' : 'aqua'}`;
-
-const rollup = previous => {
-  const total = {
-    actual: previous.mmis.federalActual + previous.mmis.stateActual,
-    approved: previous.mmis.federalApproved + previous.mmis.stateApproved
-  };
-  return total;
-};
+import { TABLE_HEADERS } from '../constants';
 
 const ApdPreviousActivityTableMMIS = ({
   previousActivityExpenses,
@@ -25,10 +13,10 @@ const ApdPreviousActivityTableMMIS = ({
 }) => {
   const years = Object.keys(previousActivityExpenses);
 
-  const handleChange = (year, program, type) => e => {
+  const handleChange = (year, level, type) => e => {
     const update = {
       previousActivityExpenses: {
-        [year]: { [program]: { [type]: e.target.value } }
+        [year]: { mmis: { [level]: { [type]: e.target.value } } }
       }
     };
     dispatchUpdateApd(update);
@@ -36,8 +24,130 @@ const ApdPreviousActivityTableMMIS = ({
 
   return (
     <Fragment>
-      <h3>{t('program.mmis', i18nBase)}</h3>
-      <div className="table-frozen-wrapper table-frozen-narrow-header">
+      <h3>MMIS</h3>
+      {[90, 75, 50].map((level, i) => (
+        <div
+          key={level}
+          className={`table-frozen-wrapper table-frozen-narrow-header ${
+            i > 0 ? 'mt3' : ''
+          }`}
+        >
+          <div className="table-frozen-scroller">
+            <table
+              className="table-cms table-fixed table-frozen-left-pane"
+              aria-hidden="true"
+            >
+              <thead>
+                <tr>
+                  <th className="table-frozen-null-cell">--</th>
+                </tr>
+                <tr>
+                  <th className="table-frozen-null-cell">--</th>
+                </tr>
+              </thead>
+              <tbody>
+                {years.map(year => (
+                  <tr key={`${year}-mmis-fake-row`}>
+                    <th key={`${year}-mmis-fake-header`}>
+                      {TABLE_HEADERS.ffy(year)}
+                    </th>
+                    <td>
+                      <DollarInput
+                        hideLabel
+                        wrapperClass="m0"
+                        className="fake-spacer-input m0 input input-condensed mono right-align"
+                        label="fake-spacer-input"
+                        name="fake-spacer-input"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <table className="table-cms centered-headers table-frozen-data">
+              <thead>
+                <tr>
+                  <th id="prev_act_mmis_null2" />
+                  <th className="pre-line" id={`prev_act_mmis${level}_total`}>
+                    {TABLE_HEADERS.total}
+                  </th>
+                  <th
+                    colSpan="2"
+                    className="pre-line"
+                    id={`prev_act_mmis${level}_federal`}
+                  >
+                    {TABLE_HEADERS.federal(level)}
+                  </th>
+                </tr>
+                <tr>
+                  <th id="prev_act_mmis_null3" />
+                  <th id={`prev_act_mmis${level}_total_approved`}>
+                    {TABLE_HEADERS.approved}
+                  </th>
+
+                  <th id={`prev_act_mmis${level}_federal_approved`}>
+                    {TABLE_HEADERS.approved}
+                  </th>
+                  <th id={`prev_act_mmis${level}_federal_actual`}>
+                    {TABLE_HEADERS.actual}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {years.map(year => {
+                  const expenses = previousActivityExpenses[year].mmis[level];
+                  const federalApproved =
+                    (expenses.totalApproved * level) / 100;
+
+                  return (
+                    <tr key={year} className="align-middle">
+                      <th id={`prev_act_mmis_row_${year}`}>
+                        {TABLE_HEADERS.ffy(year)}
+                      </th>
+                      <td
+                        headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_total prev_act_mmis${level}_total_approved`}
+                      >
+                        <DollarInput
+                          name={`approved-total-mmis${level}-${year}`}
+                          label={`total approved funding for MMIS at the ${level}/${100 -
+                            level} level for FFY ${year}, state plus federal`}
+                          hideLabel
+                          wrapperClass="m0"
+                          className="m0 input input-condensed mono right-align"
+                          value={expenses.totalApproved}
+                          onChange={handleChange(year, level, 'totalApproved')}
+                        />
+                      </td>
+
+                      <td
+                        headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_approved`}
+                      >
+                        {formatMoney(federalApproved)}
+                      </td>
+
+                      <td
+                        headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_actual`}
+                      >
+                        <DollarInput
+                          name={`actual-federal-mmis${level}-${year}`}
+                          label={`actual federal share for MMIS at the ${level}/${100 -
+                            level} level for FFY ${year}`}
+                          hideLabel
+                          wrapperClass="m0"
+                          className="m0 input input-condensed mono right-align"
+                          value={expenses.federalActual}
+                          onChange={handleChange(year, level, 'federalActual')}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
+      <div className="table-frozen-wrapper table-frozen-narrow-header mt3">
         <div className="table-frozen-scroller">
           <table
             className="table-cms table-fixed table-frozen-left-pane"
@@ -45,11 +155,7 @@ const ApdPreviousActivityTableMMIS = ({
           >
             <thead>
               <tr>
-                <th className="table-frozen-null-cell">
-                  --
-                  <br />
-                  --
-                </th>
+                <th className="table-frozen-null-cell">--</th>
               </tr>
               <tr>
                 <th className="table-frozen-null-cell">--</th>
@@ -58,162 +164,57 @@ const ApdPreviousActivityTableMMIS = ({
             <tbody>
               {years.map(year => (
                 <tr key={`${year}-mmis-fake-row`}>
-                  <th key={`${year}-mmis-fake-header`}>{t('ffy', { year })}</th>
-                  <td>
-                    <DollarInput
-                      hideLabel
-                      wrapperClass="m0"
-                      className="fake-spacer-input m0 input input-condensed mono right-align"
-                      label="fake-spacer-input"
-                      name="fake-spacer-input"
-                    />
-                  </td>
+                  <th key={`${year}-mmis-fake-header`}>
+                    {TABLE_HEADERS.ffy(year)}
+                  </th>
+                  <td>--</td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <table
-            className="table-cms table-frozen-data"
-            style={{ minWidth: 1200 }}
-          >
+          <table className="table-cms centered-headers table-frozen-data">
             <thead>
               <tr>
                 <th id="prev_act_mmis_null2" />
-                <th className="pre-line" id="prev_act_mmis_total_approved">
-                  {t('labels.grandTotal', i18nBase)}
-                </th>
-                <th
-                  colSpan="2"
-                  className="pre-line"
-                  id="prev_act_mmis_federal90"
-                >
-                  {t('labels.federalShare', i18nBase)}
-                </th>
-                <th
-                  colSpan="2"
-                  className="pre-line"
-                  id="prev_act_mmis_federal75"
-                >
-                  {t('labels.federalShare75', i18nBase)}
-                </th>
-                <th
-                  colSpan="2"
-                  className="pre-line"
-                  id="prev_act_mmis_federal50"
-                >
-                  {t('labels.federalShare50', i18nBase)}
-                </th>
-                <th className="pre-line" id="prev_act_mmis_total">
-                  {t('labels.grandTotal', i18nBase)}
+                <th colSpan="2" className="pre-line" id="prev_act_mmisTotal">
+                  Federal totals
                 </th>
               </tr>
               <tr>
                 <th id="prev_act_mmis_null3" />
-                <th id="prev_act_mmis_totalApproved">
-                  {t('labels.approved', i18nBase)}
-                </th>
+                <th id="prev_act_mmisTotal_approved">FFP Approved</th>
 
-                <th id="prev_act_mmis_fed90approved" className="bg-aqua-light">
-                  {t('labels.approved', i18nBase)}
-                </th>
-                <th id="prev_act_mmis_fed90actual" className={borderClass(-1)}>
-                  {t('labels.actual', i18nBase)}
-                </th>
-
-                <th id="prev_act_mmis_fed75approved" className="bg-aqua-light">
-                  {t('labels.approved', i18nBase)}
-                </th>
-                <th id="prev_act_mmis_fed75actual" className={borderClass(-1)}>
-                  {t('labels.actual', i18nBase)}
-                </th>
-
-                <th id="prev_act_mmis_fed50approved" className="bg-aqua-light">
-                  {t('labels.approved', i18nBase)}
-                </th>
-                <th id="prev_act_mmis_fed50actual" className={borderClass(-1)}>
-                  {t('labels.actual', i18nBase)}
-                </th>
-
-                <th id="prev_act_mmis_totalActual">
-                  {t('labels.actual', i18nBase)}
-                </th>
+                <th id="prev_act_mmisTotal_actual">FFP Actual</th>
               </tr>
             </thead>
             <tbody>
               {years.map(year => {
-                const total = rollup(previousActivityExpenses[year]);
+                const expenses = previousActivityExpenses[year].mmis;
+                const approved = [90, 75, 50].reduce(
+                  (total, ffp) =>
+                    total + (expenses[ffp].totalApproved * ffp) / 100,
+                  0
+                );
+                const actual = [90, 75, 50].reduce(
+                  (total, ffp) => total + expenses[ffp].federalActual,
+                  0
+                );
 
                 return (
                   <tr key={year} className="align-middle">
                     <th id={`prev_act_mmis_row_${year}`}>
-                      {t('ffy', { year })}
+                      {TABLE_HEADERS.ffy(year)}
                     </th>
                     <td
-                      headers={`prev_act_mmis_row_${year} prev_act_mmis_header prev_act_mmis_total_approved prev_act_mmis_totalApproved`}
+                      headers={`prev_act_mmis_row_${year} prev_act_mmisTotal prev_act_mmisTotal_approved`}
                     >
-                      <DollarInput
-                        name={`approved-total-mmis-${year}`}
-                        label={`total approved for mmis for FFY ${year}`}
-                        hideLabel
-                        wrapperClass="m0"
-                        className="m0 input input-condensed mono right-align"
-                        value={0}
-                        onChange={() => {}}
-                      />
+                      {formatMoney(approved)}
                     </td>
 
-                    {[[90, 10], [75, 25], [50, 50]].map(
-                      ([federalShare, stateShare]) => (
-                        <Fragment key={`${federalShare}-${stateShare}`}>
-                          <td
-                            headers={`prev_act_mmis_row_${year} prev_act_mmis_header prev_act_mmis_federal${federalShare} prev_act_mmis_fed${federalShare}approved`}
-                          >
-                            <DollarInput
-                              name={`approved-federal${federalShare}-mmis-${year}`}
-                              label={`approved federal ${federalShare}% share for mmis, FFY ${year}`}
-                              hideLabel
-                              wrapperClass="m0"
-                              className="m0 input input-condensed mono right-align"
-                              value={
-                                previousActivityExpenses[year].mmis[
-                                  `federalApproved${federalShare}`
-                                ]
-                              }
-                              onChange={handleChange(
-                                year,
-                                'mmis',
-                                `federalApproved${federalShare}`
-                              )}
-                            />
-                          </td>
-                          <td
-                            headers={`prev_act_mmis_row_${year} prev_act_mmis_header prev_act_mmis_federal${federalShare} prev_act_mmis_fed${federalShare}actual`}
-                          >
-                            <DollarInput
-                              name={`actual-federal${federalShare}-mmis-${year}`}
-                              label={`actual federal ${federalShare}% share for mmis, FFY ${year}`}
-                              hideLabel
-                              wrapperClass="m0"
-                              className="m0 input input-condensed mono right-align"
-                              value={
-                                previousActivityExpenses[year].mmis[
-                                  `federalActual${federalShare}`
-                                ]
-                              }
-                              onChange={handleChange(
-                                year,
-                                'mmis',
-                                `federalActual${federalShare}`
-                              )}
-                            />
-                          </td>
-                        </Fragment>
-                      )
-                    )}
                     <td
-                      headers={`prev_act_mmis_row_${year} prev_act_mmis_header prev_act_mmis_total prev_act_mmis_totalActual`}
+                      headers={`prev_act_mmis_row_${year} prev_act_mmisTotal prev_act_mmisTotal_actual`}
                     >
-                      {formatMoney(total.actual)}
+                      {formatMoney(actual)}
                     </td>
                   </tr>
                 );
@@ -221,7 +222,7 @@ const ApdPreviousActivityTableMMIS = ({
             </tbody>
           </table>
         </div>
-      </div>{' '}
+      </div>
     </Fragment>
   );
 };

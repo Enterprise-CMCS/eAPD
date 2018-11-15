@@ -102,20 +102,17 @@ describe('APD reducer', () => {
         ],
         previousActivityExpenses: [
           {
-            hie: '2013 hie',
-            hit: '2013 hit',
+            hithie: '2013 hithie',
             mmis: '2013 mmis',
             year: '2013'
           },
           {
-            hie: '2012 hie',
-            hit: '2012 hit',
+            hithie: '2012 hithie',
             mmis: '2012 mmis',
             year: '2012'
           },
           {
-            hie: '2011 hie',
-            hit: '2011 hit',
+            hithie: '2011 hithie',
             mmis: '2011 mmis',
             year: '2011'
           }
@@ -191,9 +188,9 @@ describe('APD reducer', () => {
             },
             previousActivitySummary: 'Bob the Builder built a building',
             previousActivityExpenses: {
-              2013: { hie: '2013 hie', hit: '2013 hit', mmis: '2013 mmis' },
-              2012: { hie: '2012 hie', hit: '2012 hit', mmis: '2012 mmis' },
-              2011: { hie: '2011 hie', hit: '2011 hit', mmis: '2011 mmis' }
+              2013: { hithie: '2013 hithie', mmis: '2013 mmis' },
+              2012: { hithie: '2012 hithie', mmis: '2012 mmis' },
+              2011: { hithie: '2011 hithie', mmis: '2011 mmis' }
             },
             programOverview: 'moop moop',
             stateProfile: 'this is the state profile as a string',
