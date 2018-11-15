@@ -11,31 +11,3 @@ outline:
 actualExpenses:
   title: Actual Costs
   helpText: Input the most recent actual costs.
-  table:
-    program:
-      hie: HIE
-      hit: HIT
-      combined: HIT + HIE
-      mmis: MMIS
-    labels:
-      federalShare: >-
-        Federal share
-        *90% FFP*
-      stateShare: >-
-        State share
-        10% FFP
-      federalShare75: >-
-        Federal share
-        75% FFP
-      stateShare25: >-
-        State share
-        25% FFP
-      federalShare50: >-
-        Federal share
-        50% FFP
-      stateShare50: >-
-        State share
-        50% FFP
-      grandTotal: Total computable (Federal + state)
-      approved: Approved
-      actual: Actual
