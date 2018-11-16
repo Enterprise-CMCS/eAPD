@@ -187,19 +187,6 @@ class CurrentDocuments extends Component {
             buttonClick={this.open(apd.id)}
           />
         ))}
-        <DocumentItem name="Ex: APD in draft" status={APD_STATUS.DRAFT} />
-        <DocumentItem name="Ex: APD in review" status={APD_STATUS.IN_REVIEW} />
-        <DocumentItem
-          name="Ex: Reviewed, with comments"
-          status={APD_STATUS.STATE_RESPONSE}
-        />
-        <DocumentItem
-          name="Ex: In clearance"
-          status={APD_STATUS.IN_CLEARANCE}
-        />
-        <DocumentItem name="Ex: Approved" status={APD_STATUS.APPROVED} />
-        <DocumentItem name="Ex: Disapproved" status={APD_STATUS.DISAPPROVED} />
-        <DocumentItem name="Ex: Withdrawn" status={APD_STATUS.WITHDRAWN} />
       </div>
     );
   }
@@ -217,7 +204,10 @@ const mapStateToProps = ({ apd: { byId, fetching } }) => ({
 });
 const mapDispatchToProps = { selectApd };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentDocuments);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CurrentDocuments);
 
 export {
   CurrentDocuments as plain,
