@@ -54,7 +54,9 @@ ShallowWrapper {
                   <th
                     className="table-frozen-null-cell"
                   >
-                    --
+                    -
+                    <br />
+                    -
                   </th>
                 </tr>
                 <tr>
@@ -110,7 +112,11 @@ ShallowWrapper {
                     className="pre-line"
                     id="prev_act_hithie_total"
                   >
-                    Total computable (Federal + state)
+                    <span>
+                      Total computable
+                      <br />
+                      (Federal + state)
+                    </span>
                   </th>
                   <th
                     className="pre-line"
@@ -269,7 +275,9 @@ ShallowWrapper {
                   <th
                     className="table-frozen-null-cell"
                   >
-                    --
+                    -
+                    <br />
+                    -
                   </th>
                 </tr>
                 <tr>
@@ -325,7 +333,11 @@ ShallowWrapper {
                     className="pre-line"
                     id="prev_act_hithie_total"
                   >
-                    Total computable (Federal + state)
+                    <span>
+                      Total computable
+                      <br />
+                      (Federal + state)
+                    </span>
                   </th>
                   <th
                     className="pre-line"
@@ -469,7 +481,9 @@ ShallowWrapper {
                     <th
                       className="table-frozen-null-cell"
                     >
-                      --
+                      -
+                      <br />
+                      -
                     </th>
                   </tr>
                   <tr>
@@ -525,7 +539,11 @@ ShallowWrapper {
                       className="pre-line"
                       id="prev_act_hithie_total"
                     >
-                      Total computable (Federal + state)
+                      <span>
+                        Total computable
+                        <br />
+                        (Federal + state)
+                      </span>
                     </th>
                     <th
                       className="pre-line"
@@ -667,7 +685,9 @@ ShallowWrapper {
                       <th
                         className="table-frozen-null-cell"
                       >
-                        --
+                        -
+                        <br />
+                        -
                       </th>
                     </tr>
                     <tr>
@@ -725,7 +745,9 @@ ShallowWrapper {
                         <th
                           className="table-frozen-null-cell"
                         >
-                          --
+                          -
+                          <br />
+                          -
                         </th>
                       </tr>,
                       <tr>
@@ -747,7 +769,9 @@ ShallowWrapper {
                         "children": <th
                           className="table-frozen-null-cell"
                         >
-                          --
+                          -
+                          <br />
+                          -
                         </th>,
                       },
                       "ref": null,
@@ -756,11 +780,27 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "host",
                         "props": Object {
-                          "children": "--",
+                          "children": Array [
+                            "-",
+                            <br />,
+                            "-",
+                          ],
                           "className": "table-frozen-null-cell",
                         },
                         "ref": null,
-                        "rendered": "--",
+                        "rendered": Array [
+                          "-",
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {},
+                            "ref": null,
+                            "rendered": null,
+                            "type": "br",
+                          },
+                          "-",
+                        ],
                         "type": "th",
                       },
                       "type": "tr",
@@ -995,7 +1035,11 @@ ShallowWrapper {
                         className="pre-line"
                         id="prev_act_hithie_total"
                       >
-                        Total computable (Federal + state)
+                        <span>
+                          Total computable
+                          <br />
+                          (Federal + state)
+                        </span>
                       </th>
                       <th
                         className="pre-line"
@@ -1138,7 +1182,11 @@ ShallowWrapper {
                           className="pre-line"
                           id="prev_act_hithie_total"
                         >
-                          Total computable (Federal + state)
+                          <span>
+                            Total computable
+                            <br />
+                            (Federal + state)
+                          </span>
                         </th>
                         <th
                           className="pre-line"
@@ -1192,7 +1240,11 @@ ShallowWrapper {
                             className="pre-line"
                             id="prev_act_hithie_total"
                           >
-                            Total computable (Federal + state)
+                            <span>
+                              Total computable
+                              <br />
+                              (Federal + state)
+                            </span>
                           </th>,
                           <th
                             className="pre-line"
@@ -1228,12 +1280,42 @@ ShallowWrapper {
                           "key": undefined,
                           "nodeType": "host",
                           "props": Object {
-                            "children": "Total computable (Federal + state)",
+                            "children": <span>
+                              Total computable
+                              <br />
+                              (Federal + state)
+                            </span>,
                             "className": "pre-line",
                             "id": "prev_act_hithie_total",
                           },
                           "ref": null,
-                          "rendered": "Total computable (Federal + state)",
+                          "rendered": Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": Array [
+                                "Total computable",
+                                <br />,
+                                "(Federal + state)",
+                              ],
+                            },
+                            "ref": null,
+                            "rendered": Array [
+                              "Total computable",
+                              Object {
+                                "instance": null,
+                                "key": undefined,
+                                "nodeType": "host",
+                                "props": Object {},
+                                "ref": null,
+                                "rendered": null,
+                                "type": "br",
+                              },
+                              "(Federal + state)",
+                            ],
+                            "type": "span",
+                          },
                           "type": "th",
                         },
                         Object {
@@ -1815,7 +1897,9 @@ ShallowWrapper {
                     <th
                       className="table-frozen-null-cell"
                     >
-                      --
+                      -
+                      <br />
+                      -
                     </th>
                   </tr>
                   <tr>
@@ -1871,7 +1955,11 @@ ShallowWrapper {
                       className="pre-line"
                       id="prev_act_hithie_total"
                     >
-                      Total computable (Federal + state)
+                      <span>
+                        Total computable
+                        <br />
+                        (Federal + state)
+                      </span>
                     </th>
                     <th
                       className="pre-line"
@@ -2030,7 +2118,9 @@ ShallowWrapper {
                     <th
                       className="table-frozen-null-cell"
                     >
-                      --
+                      -
+                      <br />
+                      -
                     </th>
                   </tr>
                   <tr>
@@ -2086,7 +2176,11 @@ ShallowWrapper {
                       className="pre-line"
                       id="prev_act_hithie_total"
                     >
-                      Total computable (Federal + state)
+                      <span>
+                        Total computable
+                        <br />
+                        (Federal + state)
+                      </span>
                     </th>
                     <th
                       className="pre-line"
@@ -2230,7 +2324,9 @@ ShallowWrapper {
                       <th
                         className="table-frozen-null-cell"
                       >
-                        --
+                        -
+                        <br />
+                        -
                       </th>
                     </tr>
                     <tr>
@@ -2286,7 +2382,11 @@ ShallowWrapper {
                         className="pre-line"
                         id="prev_act_hithie_total"
                       >
-                        Total computable (Federal + state)
+                        <span>
+                          Total computable
+                          <br />
+                          (Federal + state)
+                        </span>
                       </th>
                       <th
                         className="pre-line"
@@ -2428,7 +2528,9 @@ ShallowWrapper {
                         <th
                           className="table-frozen-null-cell"
                         >
-                          --
+                          -
+                          <br />
+                          -
                         </th>
                       </tr>
                       <tr>
@@ -2486,7 +2588,9 @@ ShallowWrapper {
                           <th
                             className="table-frozen-null-cell"
                           >
-                            --
+                            -
+                            <br />
+                            -
                           </th>
                         </tr>,
                         <tr>
@@ -2508,7 +2612,9 @@ ShallowWrapper {
                           "children": <th
                             className="table-frozen-null-cell"
                           >
-                            --
+                            -
+                            <br />
+                            -
                           </th>,
                         },
                         "ref": null,
@@ -2517,11 +2623,27 @@ ShallowWrapper {
                           "key": undefined,
                           "nodeType": "host",
                           "props": Object {
-                            "children": "--",
+                            "children": Array [
+                              "-",
+                              <br />,
+                              "-",
+                            ],
                             "className": "table-frozen-null-cell",
                           },
                           "ref": null,
-                          "rendered": "--",
+                          "rendered": Array [
+                            "-",
+                            Object {
+                              "instance": null,
+                              "key": undefined,
+                              "nodeType": "host",
+                              "props": Object {},
+                              "ref": null,
+                              "rendered": null,
+                              "type": "br",
+                            },
+                            "-",
+                          ],
                           "type": "th",
                         },
                         "type": "tr",
@@ -2756,7 +2878,11 @@ ShallowWrapper {
                           className="pre-line"
                           id="prev_act_hithie_total"
                         >
-                          Total computable (Federal + state)
+                          <span>
+                            Total computable
+                            <br />
+                            (Federal + state)
+                          </span>
                         </th>
                         <th
                           className="pre-line"
@@ -2899,7 +3025,11 @@ ShallowWrapper {
                             className="pre-line"
                             id="prev_act_hithie_total"
                           >
-                            Total computable (Federal + state)
+                            <span>
+                              Total computable
+                              <br />
+                              (Federal + state)
+                            </span>
                           </th>
                           <th
                             className="pre-line"
@@ -2953,7 +3083,11 @@ ShallowWrapper {
                               className="pre-line"
                               id="prev_act_hithie_total"
                             >
-                              Total computable (Federal + state)
+                              <span>
+                                Total computable
+                                <br />
+                                (Federal + state)
+                              </span>
                             </th>,
                             <th
                               className="pre-line"
@@ -2989,12 +3123,42 @@ ShallowWrapper {
                             "key": undefined,
                             "nodeType": "host",
                             "props": Object {
-                              "children": "Total computable (Federal + state)",
+                              "children": <span>
+                                Total computable
+                                <br />
+                                (Federal + state)
+                              </span>,
                               "className": "pre-line",
                               "id": "prev_act_hithie_total",
                             },
                             "ref": null,
-                            "rendered": "Total computable (Federal + state)",
+                            "rendered": Object {
+                              "instance": null,
+                              "key": undefined,
+                              "nodeType": "host",
+                              "props": Object {
+                                "children": Array [
+                                  "Total computable",
+                                  <br />,
+                                  "(Federal + state)",
+                                ],
+                              },
+                              "ref": null,
+                              "rendered": Array [
+                                "Total computable",
+                                Object {
+                                  "instance": null,
+                                  "key": undefined,
+                                  "nodeType": "host",
+                                  "props": Object {},
+                                  "ref": null,
+                                  "rendered": null,
+                                  "type": "br",
+                                },
+                                "(Federal + state)",
+                              ],
+                              "type": "span",
+                            },
                             "type": "th",
                           },
                           Object {

@@ -31,5 +31,11 @@ export const TABLE_HEADERS = {
     </span>
   ),
   ffy: y => `FFY ${y}`,
-  total: 'Total computable (Federal + state)'
+  total: (
+    <span>
+      Total computable
+      <br />
+      (Federal + state)
+    </span>
+  )
 };
