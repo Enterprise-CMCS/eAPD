@@ -120,7 +120,7 @@ ShallowWrapper {
                 </tbody>
               </table>
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -318,7 +318,7 @@ ShallowWrapper {
                 </tbody>
               </table>
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -516,7 +516,7 @@ ShallowWrapper {
                 </tbody>
               </table>
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -695,7 +695,7 @@ ShallowWrapper {
               </tbody>
             </table>
             <table
-              className="table-cms centered-headers table-frozen-data"
+              className="table-cms centered-headers table-fixed table-frozen-data"
             >
               <thead>
                 <tr>
@@ -846,7 +846,7 @@ ShallowWrapper {
               </tbody>
             </table>
             <table
-              className="table-cms centered-headers table-frozen-data"
+              className="table-cms centered-headers table-fixed table-frozen-data"
             >
               <thead>
                 <tr>
@@ -1046,7 +1046,7 @@ ShallowWrapper {
                 </tbody>
               </table>,
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -1652,7 +1652,7 @@ ShallowWrapper {
                     </tr>
                   </tbody>,
                 ],
-                "className": "table-cms centered-headers table-frozen-data",
+                "className": "table-cms centered-headers table-fixed table-frozen-data",
               },
               "ref": null,
               "rendered": Array [
@@ -2381,7 +2381,7 @@ ShallowWrapper {
               </tbody>
             </table>
             <table
-              className="table-cms centered-headers table-frozen-data"
+              className="table-cms centered-headers table-fixed table-frozen-data"
             >
               <thead>
                 <tr>
@@ -2581,7 +2581,7 @@ ShallowWrapper {
                 </tbody>
               </table>,
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -3187,7 +3187,7 @@ ShallowWrapper {
                     </tr>
                   </tbody>,
                 ],
-                "className": "table-cms centered-headers table-frozen-data",
+                "className": "table-cms centered-headers table-fixed table-frozen-data",
               },
               "ref": null,
               "rendered": Array [
@@ -3916,7 +3916,7 @@ ShallowWrapper {
               </tbody>
             </table>
             <table
-              className="table-cms centered-headers table-frozen-data"
+              className="table-cms centered-headers table-fixed table-frozen-data"
             >
               <thead>
                 <tr>
@@ -4116,7 +4116,7 @@ ShallowWrapper {
                 </tbody>
               </table>,
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -4722,7 +4722,7 @@ ShallowWrapper {
                     </tr>
                   </tbody>,
                 ],
-                "className": "table-cms centered-headers table-frozen-data",
+                "className": "table-cms centered-headers table-fixed table-frozen-data",
               },
               "ref": null,
               "rendered": Array [
@@ -5431,7 +5431,7 @@ ShallowWrapper {
               </tbody>
             </table>
             <table
-              className="table-cms centered-headers table-frozen-data"
+              className="table-cms centered-headers table-fixed table-frozen-data"
             >
               <thead>
                 <tr>
@@ -5547,7 +5547,7 @@ ShallowWrapper {
                 </tbody>
               </table>,
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -5891,7 +5891,7 @@ ShallowWrapper {
                     </tr>
                   </tbody>,
                 ],
-                "className": "table-cms centered-headers table-frozen-data",
+                "className": "table-cms centered-headers table-fixed table-frozen-data",
               },
               "ref": null,
               "rendered": Array [
@@ -6307,7 +6307,7 @@ ShallowWrapper {
                   </tbody>
                 </table>
                 <table
-                  className="table-cms centered-headers table-frozen-data"
+                  className="table-cms centered-headers table-fixed table-frozen-data"
                 >
                   <thead>
                     <tr>
@@ -6505,7 +6505,7 @@ ShallowWrapper {
                   </tbody>
                 </table>
                 <table
-                  className="table-cms centered-headers table-frozen-data"
+                  className="table-cms centered-headers table-fixed table-frozen-data"
                 >
                   <thead>
                     <tr>
@@ -6703,7 +6703,7 @@ ShallowWrapper {
                   </tbody>
                 </table>
                 <table
-                  className="table-cms centered-headers table-frozen-data"
+                  className="table-cms centered-headers table-fixed table-frozen-data"
                 >
                   <thead>
                     <tr>
@@ -6882,7 +6882,7 @@ ShallowWrapper {
                 </tbody>
               </table>
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -7033,7 +7033,7 @@ ShallowWrapper {
                 </tbody>
               </table>
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -7233,7 +7233,7 @@ ShallowWrapper {
                   </tbody>
                 </table>,
                 <table
-                  className="table-cms centered-headers table-frozen-data"
+                  className="table-cms centered-headers table-fixed table-frozen-data"
                 >
                   <thead>
                     <tr>
@@ -7839,7 +7839,7 @@ ShallowWrapper {
                       </tr>
                     </tbody>,
                   ],
-                  "className": "table-cms centered-headers table-frozen-data",
+                  "className": "table-cms centered-headers table-fixed table-frozen-data",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -8568,7 +8568,7 @@ ShallowWrapper {
                 </tbody>
               </table>
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -8768,7 +8768,7 @@ ShallowWrapper {
                   </tbody>
                 </table>,
                 <table
-                  className="table-cms centered-headers table-frozen-data"
+                  className="table-cms centered-headers table-fixed table-frozen-data"
                 >
                   <thead>
                     <tr>
@@ -9374,7 +9374,7 @@ ShallowWrapper {
                       </tr>
                     </tbody>,
                   ],
-                  "className": "table-cms centered-headers table-frozen-data",
+                  "className": "table-cms centered-headers table-fixed table-frozen-data",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -10103,7 +10103,7 @@ ShallowWrapper {
                 </tbody>
               </table>
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -10303,7 +10303,7 @@ ShallowWrapper {
                   </tbody>
                 </table>,
                 <table
-                  className="table-cms centered-headers table-frozen-data"
+                  className="table-cms centered-headers table-fixed table-frozen-data"
                 >
                   <thead>
                     <tr>
@@ -10909,7 +10909,7 @@ ShallowWrapper {
                       </tr>
                     </tbody>,
                   ],
-                  "className": "table-cms centered-headers table-frozen-data",
+                  "className": "table-cms centered-headers table-fixed table-frozen-data",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -11618,7 +11618,7 @@ ShallowWrapper {
                 </tbody>
               </table>
               <table
-                className="table-cms centered-headers table-frozen-data"
+                className="table-cms centered-headers table-fixed table-frozen-data"
               >
                 <thead>
                   <tr>
@@ -11734,7 +11734,7 @@ ShallowWrapper {
                   </tbody>
                 </table>,
                 <table
-                  className="table-cms centered-headers table-frozen-data"
+                  className="table-cms centered-headers table-fixed table-frozen-data"
                 >
                   <thead>
                     <tr>
@@ -12078,7 +12078,7 @@ ShallowWrapper {
                       </tr>
                     </tbody>,
                   ],
-                  "className": "table-cms centered-headers table-frozen-data",
+                  "className": "table-cms centered-headers table-fixed table-frozen-data",
                 },
                 "ref": null,
                 "rendered": Array [
