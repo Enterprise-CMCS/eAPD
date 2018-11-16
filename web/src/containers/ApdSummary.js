@@ -70,6 +70,7 @@ class ApdSummary extends Component {
             <RichText
               content={narrativeHIT}
               onSync={this.syncRichText('narrativeHIT')}
+              editorClassName="rte-textarea-l"
             />
           </div>
           <div className="mb3">
@@ -78,6 +79,7 @@ class ApdSummary extends Component {
             <RichText
               content={narrativeHIE}
               onSync={this.syncRichText('narrativeHIE')}
+              editorClassName="rte-textarea-l"
             />
           </div>
           <div>
@@ -86,6 +88,7 @@ class ApdSummary extends Component {
             <RichText
               content={narrativeMMIS}
               onSync={this.syncRichText('narrativeMMIS')}
+              editorClassName="rte-textarea-l"
             />
           </div>
         </Subsection>
