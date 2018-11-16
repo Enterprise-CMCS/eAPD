@@ -33,3 +33,26 @@
 .select-condensed {
   height: 2rem;
 }
+
+/* add resizing capability to divs of react-wysiwyg-draft plugin */
+.public-DraftEditor-content {
+  resize: vertical;
+}
+
+/* rte-* classes are for react-wysiwyg-draft plugin */
+.textarea-xl,
+.rte-textarea-xl .public-DraftEditor-content {
+  min-height: 37.5rem; /* 600px; this feels too big */
+}
+
+.textarea-l {
+  min-height: 25rem; /* 400px */
+}
+
+.textarea-m {
+  min-height: 12.5rem; /* 200px */
+}
+
+.textarea-sm {
+  min-height: 6.25rem; /* 100px */
+}
