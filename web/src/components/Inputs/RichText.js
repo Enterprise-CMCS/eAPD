@@ -40,6 +40,7 @@ class RichText extends Component {
         editorState={this.state.content}
         onEditorStateChange={this.onEditorChange}
         onBlur={this.onBlur}
+        editorClassName={this.props.editorClassName || 'rte-textarea-m'}
       />
     );
   }
