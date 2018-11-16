@@ -14375,47 +14375,10 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        Array [
-          <DocumentItem
-            buttonClick={[Function]}
-            name="APD for 1, 2, 3"
-            status={Symbol(draft)}
-          />,
-        ],
         <DocumentItem
           buttonClick={[Function]}
-          name="Ex: APD in draft"
+          name="APD for 1, 2, 3"
           status={Symbol(draft)}
-        />,
-        <DocumentItem
-          buttonClick={[Function]}
-          name="Ex: APD in review"
-          status={Symbol(in review)}
-        />,
-        <DocumentItem
-          buttonClick={[Function]}
-          name="Ex: Reviewed, with comments"
-          status={Symbol(awaiting state response)}
-        />,
-        <DocumentItem
-          buttonClick={[Function]}
-          name="Ex: In clearance"
-          status={Symbol(in clearance)}
-        />,
-        <DocumentItem
-          buttonClick={[Function]}
-          name="Ex: Approved"
-          status={Symbol(approved)}
-        />,
-        <DocumentItem
-          buttonClick={[Function]}
-          name="Ex: Disapproved"
-          status={Symbol(disapproved)}
-        />,
-        <DocumentItem
-          buttonClick={[Function]}
-          name="Ex: Withdrawn"
-          status={Symbol(withdrawn)}
         />,
       ],
     },
@@ -14434,97 +14397,6 @@ ShallowWrapper {
         "rendered": null,
         "type": [Function],
       },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "buttonClick": [Function],
-          "name": "Ex: APD in draft",
-          "status": Symbol(draft),
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "buttonClick": [Function],
-          "name": "Ex: APD in review",
-          "status": Symbol(in review),
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "buttonClick": [Function],
-          "name": "Ex: Reviewed, with comments",
-          "status": Symbol(awaiting state response),
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "buttonClick": [Function],
-          "name": "Ex: In clearance",
-          "status": Symbol(in clearance),
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "buttonClick": [Function],
-          "name": "Ex: Approved",
-          "status": Symbol(approved),
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "buttonClick": [Function],
-          "name": "Ex: Disapproved",
-          "status": Symbol(disapproved),
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "buttonClick": [Function],
-          "name": "Ex: Withdrawn",
-          "status": Symbol(withdrawn),
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
     ],
     "type": "div",
   },
@@ -14535,47 +14407,10 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          Array [
-            <DocumentItem
-              buttonClick={[Function]}
-              name="APD for 1, 2, 3"
-              status={Symbol(draft)}
-            />,
-          ],
           <DocumentItem
             buttonClick={[Function]}
-            name="Ex: APD in draft"
+            name="APD for 1, 2, 3"
             status={Symbol(draft)}
-          />,
-          <DocumentItem
-            buttonClick={[Function]}
-            name="Ex: APD in review"
-            status={Symbol(in review)}
-          />,
-          <DocumentItem
-            buttonClick={[Function]}
-            name="Ex: Reviewed, with comments"
-            status={Symbol(awaiting state response)}
-          />,
-          <DocumentItem
-            buttonClick={[Function]}
-            name="Ex: In clearance"
-            status={Symbol(in clearance)}
-          />,
-          <DocumentItem
-            buttonClick={[Function]}
-            name="Ex: Approved"
-            status={Symbol(approved)}
-          />,
-          <DocumentItem
-            buttonClick={[Function]}
-            name="Ex: Disapproved"
-            status={Symbol(disapproved)}
-          />,
-          <DocumentItem
-            buttonClick={[Function]}
-            name="Ex: Withdrawn"
-            status={Symbol(withdrawn)}
           />,
         ],
       },
@@ -14589,97 +14424,6 @@ ShallowWrapper {
             "buttonClick": [Function],
             "name": "APD for 1, 2, 3",
             "status": Symbol(draft),
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "buttonClick": [Function],
-            "name": "Ex: APD in draft",
-            "status": Symbol(draft),
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "buttonClick": [Function],
-            "name": "Ex: APD in review",
-            "status": Symbol(in review),
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "buttonClick": [Function],
-            "name": "Ex: Reviewed, with comments",
-            "status": Symbol(awaiting state response),
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "buttonClick": [Function],
-            "name": "Ex: In clearance",
-            "status": Symbol(in clearance),
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "buttonClick": [Function],
-            "name": "Ex: Approved",
-            "status": Symbol(approved),
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "buttonClick": [Function],
-            "name": "Ex: Disapproved",
-            "status": Symbol(disapproved),
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "buttonClick": [Function],
-            "name": "Ex: Withdrawn",
-            "status": Symbol(withdrawn),
           },
           "ref": null,
           "rendered": null,
