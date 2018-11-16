@@ -64,7 +64,7 @@ const ApdPreviousActivityTableMMIS = ({
                 ))}
               </tbody>
             </table>
-            <table className="table-cms centered-headers table-frozen-data">
+            <table className="table-cms centered-headers table-fixed table-frozen-data">
               <thead>
                 <tr>
                   <th id="prev_act_mmis_null2" />
@@ -171,7 +171,7 @@ const ApdPreviousActivityTableMMIS = ({
               ))}
             </tbody>
           </table>
-          <table className="table-cms centered-headers table-frozen-data">
+          <table className="table-cms centered-headers table-fixed table-frozen-data">
             <thead>
               <tr>
                 <th id="prev_act_mmis_null2" />
