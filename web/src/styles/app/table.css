@@ -119,6 +119,7 @@
 .table-frozen-left-pane .table-frozen-spacer-cell {
   visibility: hidden;
   width: 0;
+  border-right: 0px; /* ie fix */
 }
 
 .table-frozen-data tr > th:first-child,
