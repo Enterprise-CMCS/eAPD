@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 
 import Collapsible from './Collapsible';
 import HelpText from './HelpText';
+import Instruction from './Instruction';
 import { t } from '../i18n';
 
 const SectionTitle = ({ children }) => (
@@ -47,6 +48,17 @@ Section.defaultProps = {
 
 const SubsectionChunk = ({ children, resource }) => {
   const subheader = t([resource, 'subheader'], { defaultValue: false });
+
+  if (t([resource, 'instruction'], { defaultValue: false })) {
+    // If this subsection has been converted to use instructions, return that.
+
+    return (
+      <Fragment>
+        <Instruction source={`${resource}.instruction`} />
+        {children}
+      </Fragment>
+    );
+  }
 
   return (
     <Fragment>

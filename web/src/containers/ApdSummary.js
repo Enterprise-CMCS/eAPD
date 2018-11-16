@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
 import { RichText } from '../components/Inputs';
+import Instruction from '../components/Instruction';
 import { Section, Subsection } from '../components/Section';
 import HelpText from '../components/HelpText';
 import { t } from '../i18n';
@@ -53,35 +54,28 @@ class ApdSummary extends Component {
             ))}
           </div>
           <div className="mb3">
-            <div className="bold">{t('apd.introduction.title')}</div>
-            <HelpText
-              text="apd.introduction.helpText"
-              reminder="apd.introduction.reminder"
-            />
+            <Instruction source="apd.introduction.instruction" />
             <RichText
               content={programOverview}
               onSync={this.syncRichText('programOverview')}
             />
           </div>
           <div className="mb3">
-            <div className="bold">{t('apd.hit.title')}</div>
-            <HelpText text="apd.hit.helpText" reminder="apd.hit.reminder" />
+            <Instruction source="apd.hit.instruction" />
             <RichText
               content={narrativeHIT}
               onSync={this.syncRichText('narrativeHIT')}
             />
           </div>
           <div className="mb3">
-            <div className="bold">{t('apd.hie.title')}</div>
-            <HelpText text="apd.hie.helpText" reminder="apd.hie.reminder" />
+            <Instruction source="apd.hie.instruction" />
             <RichText
               content={narrativeHIE}
               onSync={this.syncRichText('narrativeHIE')}
             />
           </div>
           <div>
-            <div className="bold">{t('apd.mmis.title')}</div>
-            <HelpText text="apd.mmis.helpText" reminder="apd.mmis.reminder" />
+            <Instruction source="apd.mmis.instruction" />
             <RichText
               content={narrativeMMIS}
               onSync={this.syncRichText('narrativeMMIS')}
@@ -101,6 +95,9 @@ ApdSummary.propTypes = {
 const mapStateToProps = ({ apd: { data } }) => ({ apd: data });
 const mapDispatchToProps = { updateApd: updateApdAction };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ApdSummary);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApdSummary);
 
 export { ApdSummary as plain, mapStateToProps, mapDispatchToProps };

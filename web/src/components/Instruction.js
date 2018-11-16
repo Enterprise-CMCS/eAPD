@@ -4,12 +4,7 @@ import React from 'react';
 import Md from '../components/Md';
 import { t } from '../i18n';
 
-const HelpText = ({ children }) => (
-  <Md content={children} wrapper="p" className="mb2 text-s alert alert-info" />
-);
-HelpText.propTypes = {
-  children: PropTypes.node.isRequired
-};
+const md = (content, props) => <Md content={content} wrapper="p" {...props} />;
 
 const Instruction = ({ reverse, source }) => {
   const heading = t([source, 'heading'], { defaultValue: false });
@@ -20,10 +15,10 @@ const Instruction = ({ reverse, source }) => {
   return (
     <div>
       {heading && <h3>{heading}</h3>}
-      {reverse && detail && <p>{detail}</p>}
+      {reverse && detail && md(detail)}
       {short && <p className="strong">{short}</p>}
-      {!reverse && detail && <p>{detail}</p>}
-      {helpText && <HelpText>{helpText}</HelpText>}
+      {!reverse && detail && md(detail)}
+      {helpText && md(helpText, { className: 'mb2 text-s alert alert-info' })}
     </div>
   );
 };

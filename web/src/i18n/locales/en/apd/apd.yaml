@@ -5,49 +5,54 @@ helpText: >-
   future vision, and how the program is positioned within the state. This
   information is similar to the content from the IAPD executive summary
   template section.
+
 overview:
   title: Program Overview
-  helpText: >-
-    Provide a high level summary of the state program including history,
-    and future vision. Include history and summary of future vision of the
-    state program.
-  reminder: >-
-
+  instruction:
+    detail: >-
+      Provide a high level summary of the state program including history,
+      and future vision. Include history and summary of future vision of the
+      state program.
   yearsCovered: Choose the federal fiscal year(s) this APD covers.
 
 introduction:
-  title: Program Introduction
-  helpText: >-
-    Provide an introduction for the program including context, history, and the state's future vision.
+  instruction:
+    heading: Program Introduction
+    detail: >-
+      Provide an introduction for the program including context, history, and
+      the state's future vision.
 
 hit:
-  title: HIT Overview
-  helpText: >-
-    Briefly summarize planned HIT funded activities contained within this APD.
-  reminder: >-
+  instruction:
+    heading: HIT Overview
+    detail: >-
+      Briefly summarize planned HIT funded activities contained within this
+      APD.
 
 hie:
-  title: HIE Overview
-  helpText: >-
-    Summarize planned HIE funded activities within this APD.
+  instruction:
+    heading: HIE Overview
+    detail: >-
+      Summarize planned HIE funded activities within this APD.
 
-    (1) Description of the state's HIE approach (statewide, sub-state
-    health information office (HIOs), etc.);
+      (1) Description of the state's HIE approach (statewide, sub-state
+      health information office (HIOs), etc.);
 
-    (2) Anticipated risks and mitigation strategies;
+      (2) Anticipated risks and mitigation strategies;
 
-    (3) The short and long term value proposition to providers;
+      (3) The short and long term value proposition to providers;
 
-    (4) The role of state government in governance and policy-setting.
-  reminder: >-
-    CMS recommends states connect to regional CMS HITECH contacts prior to
-    developing HIE funding request. HIE funding requests are complex. Early
-    consultation with CMS facilitates a more efficient approval process. (If
-    there are no HIE activities, skip this section.)
+      (4) The role of state government in governance and policy-setting.
+    helpText: >-
+      CMS recommends states connect to regional CMS HITECH contacts prior to
+      developing HIE funding request. HIE funding requests are complex. Early
+      consultation with CMS facilitates a more efficient approval process. (If
+      there are no HIE activities, skip this section.)
 
 mmis:
-  title: MMIS Overview
-  helpText: >-
-    Briefly summarize planned MMIS funded activities contained within this APD.
-  reminder: >-
-    If there are no MMIS activities, skip this section.
+  instruction:
+    heading: MMIS Overview
+    detail: >-
+      Briefly summarize planned MMIS funded activities contained within this APD.
+    helpText: >-
+      If there are no MMIS activities, skip this section.
