@@ -39,7 +39,9 @@ const ApdPreviousActivityTableMMIS = ({
             >
               <thead>
                 <tr>
-                  <th className="table-frozen-null-cell">--</th>
+                  <th className="table-frozen-null-cell">
+                    -<br />-
+                  </th>
                 </tr>
                 <tr>
                   <th className="table-frozen-null-cell">--</th>
