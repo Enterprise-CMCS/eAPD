@@ -167,7 +167,6 @@ const ApdPreviousActivityTableMMIS = ({
                   <th key={`${year}-mmis-fake-header`}>
                     {TABLE_HEADERS.ffy(year)}
                   </th>
-                  <td>--</td>
                 </tr>
               ))}
             </tbody>
