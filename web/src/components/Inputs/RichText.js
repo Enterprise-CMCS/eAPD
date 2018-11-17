@@ -40,7 +40,7 @@ class RichText extends Component {
         editorState={this.state.content}
         onEditorStateChange={this.onEditorChange}
         onBlur={this.onBlur}
-        editorClassName={this.props.editorClassName || 'rte-textarea-m'}
+        editorClassName={this.props.editorClassName}
       />
     );
   }
@@ -48,12 +48,14 @@ class RichText extends Component {
 
 RichText.propTypes = {
   content: PropTypes.string,
-  onSync: PropTypes.func
+  onSync: PropTypes.func,
+  editorClassName: PropTypes.string
 };
 
 RichText.defaultProps = {
   content: '',
-  onSync: () => {}
+  onSync: () => {},
+  editorClassName: 'rte-textarea-m'
 };
 
 export default RichText;
