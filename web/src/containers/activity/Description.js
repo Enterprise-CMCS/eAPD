@@ -22,8 +22,8 @@ const Description = props => {
             name={`activity-summary-${activity.key}`}
             label="activity summary"
             hideLabel
-            className="m0 textarea"
-            rows="5"
+            className="m0 textarea textarea-sm"
+            rows="3"
             maxLength="280"
             spellCheck="true"
             value={summary}
@@ -41,12 +41,20 @@ const Description = props => {
         }
       >
         <div className="mb3">
-          <RichText content={description} onSync={sync('description')} />
+          <RichText
+            content={description}
+            onSync={sync('description')}
+            editorClassName="rte-textarea-xl"
+          />
         </div>
       </SubsectionChunk>
       <SubsectionChunk resource="activities.overview.alternatives">
         <div className="mb3">
-          <RichText content={alternatives} onSync={sync('alternatives')} />
+          <RichText
+            content={alternatives}
+            onSync={sync('alternatives')}
+            editorClassName="rte-textarea-l"
+          />
         </div>
       </SubsectionChunk>
     </Subsection>
