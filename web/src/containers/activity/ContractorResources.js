@@ -69,6 +69,8 @@ const ContractorForm = ({
         value={contractor.desc}
         onChange={handleChange(idx, 'desc')}
         wrapperClass="md-col-8"
+        className="m0 textarea textarea-l"
+        rows="14"
         hideLabel
       />
     </div>
