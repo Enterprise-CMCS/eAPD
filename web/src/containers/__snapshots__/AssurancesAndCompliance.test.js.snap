@@ -254,11 +254,13 @@ ShallowWrapper {
             </div>
             <div>
               <InputHolder
+                className="m0 textarea textarea-sm"
                 hideLabel={true}
                 label="Explanation for why you do not comply with 42 CFR Part 495.348"
                 name="explanation-procurement-42_CFR_Part_495.348"
                 onChange={[Function]}
                 placeholder="Please explain..."
+                rows="3"
                 type="text"
                 value=""
                 wrapperClass=""
@@ -406,11 +408,13 @@ ShallowWrapper {
             </div>
             <div>
               <InputHolder
+                className="m0 textarea textarea-sm"
                 hideLabel={true}
                 label="Explanation for why you do not comply with 42 CFR Part 495.350"
                 name="explanation-recordsAccess-42_CFR_Part_495.350"
                 onChange={[Function]}
                 placeholder="Please explain..."
+                rows="3"
                 type="text"
                 value="some words"
                 wrapperClass=""
@@ -551,11 +555,13 @@ ShallowWrapper {
             </div>
             <div>
               <InputHolder
+                className="m0 textarea textarea-sm"
                 hideLabel={true}
                 label="Explanation for why you do not comply with 45 CFR Part 95.615"
                 name="explanation-recordsAccess-45_CFR_Part_95.615"
                 onChange={[Function]}
                 placeholder="Please explain..."
+                rows="3"
                 type="text"
                 value="other words"
                 wrapperClass=""
@@ -830,11 +836,13 @@ ShallowWrapper {
               </div>
               <div>
                 <InputHolder
+                  className="m0 textarea textarea-sm"
                   hideLabel={true}
                   label="Explanation for why you do not comply with 42 CFR Part 495.348"
                   name="explanation-procurement-42_CFR_Part_495.348"
                   onChange={[Function]}
                   placeholder="Please explain..."
+                  rows="3"
                   type="text"
                   value=""
                   wrapperClass=""
@@ -982,11 +990,13 @@ ShallowWrapper {
               </div>
               <div>
                 <InputHolder
+                  className="m0 textarea textarea-sm"
                   hideLabel={true}
                   label="Explanation for why you do not comply with 42 CFR Part 495.350"
                   name="explanation-recordsAccess-42_CFR_Part_495.350"
                   onChange={[Function]}
                   placeholder="Please explain..."
+                  rows="3"
                   type="text"
                   value="some words"
                   wrapperClass=""
@@ -1127,11 +1137,13 @@ ShallowWrapper {
               </div>
               <div>
                 <InputHolder
+                  className="m0 textarea textarea-sm"
                   hideLabel={true}
                   label="Explanation for why you do not comply with 45 CFR Part 95.615"
                   name="explanation-recordsAccess-45_CFR_Part_95.615"
                   onChange={[Function]}
                   placeholder="Please explain..."
+                  rows="3"
                   type="text"
                   value="other words"
                   wrapperClass=""
@@ -1407,11 +1419,13 @@ ShallowWrapper {
                   </div>
                   <div>
                     <InputHolder
+                      className="m0 textarea textarea-sm"
                       hideLabel={true}
                       label="Explanation for why you do not comply with 42 CFR Part 495.348"
                       name="explanation-procurement-42_CFR_Part_495.348"
                       onChange={[Function]}
                       placeholder="Please explain..."
+                      rows="3"
                       type="text"
                       value=""
                       wrapperClass=""
@@ -1572,11 +1586,13 @@ ShallowWrapper {
                   </div>,
                   <div>
                     <InputHolder
+                      className="m0 textarea textarea-sm"
                       hideLabel={true}
                       label="Explanation for why you do not comply with 42 CFR Part 495.348"
                       name="explanation-procurement-42_CFR_Part_495.348"
                       onChange={[Function]}
                       placeholder="Please explain..."
+                      rows="3"
                       type="text"
                       value=""
                       wrapperClass=""
@@ -1703,11 +1719,13 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": <InputHolder
+                      className="m0 textarea textarea-sm"
                       hideLabel={true}
                       label="Explanation for why you do not comply with 42 CFR Part 495.348"
                       name="explanation-procurement-42_CFR_Part_495.348"
                       onChange={[Function]}
                       placeholder="Please explain..."
+                      rows="3"
                       type="text"
                       value=""
                       wrapperClass=""
@@ -1719,11 +1737,13 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "function",
                     "props": Object {
+                      "className": "m0 textarea textarea-sm",
                       "hideLabel": true,
                       "label": "Explanation for why you do not comply with 42 CFR Part 495.348",
                       "name": "explanation-procurement-42_CFR_Part_495.348",
                       "onChange": [Function],
                       "placeholder": "Please explain...",
+                      "rows": "3",
                       "type": "text",
                       "value": "",
                       "wrapperClass": "",
@@ -2277,11 +2297,13 @@ ShallowWrapper {
                   </div>
                   <div>
                     <InputHolder
+                      className="m0 textarea textarea-sm"
                       hideLabel={true}
                       label="Explanation for why you do not comply with 42 CFR Part 495.350"
                       name="explanation-recordsAccess-42_CFR_Part_495.350"
                       onChange={[Function]}
                       placeholder="Please explain..."
+                      rows="3"
                       type="text"
                       value="some words"
                       wrapperClass=""
@@ -2422,11 +2444,13 @@ ShallowWrapper {
                   </div>
                   <div>
                     <InputHolder
+                      className="m0 textarea textarea-sm"
                       hideLabel={true}
                       label="Explanation for why you do not comply with 45 CFR Part 95.615"
                       name="explanation-recordsAccess-45_CFR_Part_95.615"
                       onChange={[Function]}
                       placeholder="Please explain..."
+                      rows="3"
                       type="text"
                       value="other words"
                       wrapperClass=""
@@ -2519,11 +2543,13 @@ ShallowWrapper {
                   </div>,
                   <div>
                     <InputHolder
+                      className="m0 textarea textarea-sm"
                       hideLabel={true}
                       label="Explanation for why you do not comply with 42 CFR Part 495.350"
                       name="explanation-recordsAccess-42_CFR_Part_495.350"
                       onChange={[Function]}
                       placeholder="Please explain..."
+                      rows="3"
                       type="text"
                       value="some words"
                       wrapperClass=""
@@ -2650,11 +2676,13 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": <InputHolder
+                      className="m0 textarea textarea-sm"
                       hideLabel={true}
                       label="Explanation for why you do not comply with 42 CFR Part 495.350"
                       name="explanation-recordsAccess-42_CFR_Part_495.350"
                       onChange={[Function]}
                       placeholder="Please explain..."
+                      rows="3"
                       type="text"
                       value="some words"
                       wrapperClass=""
@@ -2666,11 +2694,13 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "function",
                     "props": Object {
+                      "className": "m0 textarea textarea-sm",
                       "hideLabel": true,
                       "label": "Explanation for why you do not comply with 42 CFR Part 495.350",
                       "name": "explanation-recordsAccess-42_CFR_Part_495.350",
                       "onChange": [Function],
                       "placeholder": "Please explain...",
+                      "rows": "3",
                       "type": "text",
                       "value": "some words",
                       "wrapperClass": "",
@@ -3214,11 +3244,13 @@ ShallowWrapper {
                   </div>,
                   <div>
                     <InputHolder
+                      className="m0 textarea textarea-sm"
                       hideLabel={true}
                       label="Explanation for why you do not comply with 45 CFR Part 95.615"
                       name="explanation-recordsAccess-45_CFR_Part_95.615"
                       onChange={[Function]}
                       placeholder="Please explain..."
+                      rows="3"
                       type="text"
                       value="other words"
                       wrapperClass=""
@@ -3345,11 +3377,13 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": <InputHolder
+                      className="m0 textarea textarea-sm"
                       hideLabel={true}
                       label="Explanation for why you do not comply with 45 CFR Part 95.615"
                       name="explanation-recordsAccess-45_CFR_Part_95.615"
                       onChange={[Function]}
                       placeholder="Please explain..."
+                      rows="3"
                       type="text"
                       value="other words"
                       wrapperClass=""
@@ -3361,11 +3395,13 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "function",
                     "props": Object {
+                      "className": "m0 textarea textarea-sm",
                       "hideLabel": true,
                       "label": "Explanation for why you do not comply with 45 CFR Part 95.615",
                       "name": "explanation-recordsAccess-45_CFR_Part_95.615",
                       "onChange": [Function],
                       "placeholder": "Please explain...",
+                      "rows": "3",
                       "type": "text",
                       "value": "other words",
                       "wrapperClass": "",
@@ -4657,11 +4693,13 @@ ShallowWrapper {
               </div>
               <div>
                 <InputHolder
+                  className="m0 textarea textarea-sm"
                   hideLabel={true}
                   label="Explanation for why you do not comply with 42 CFR Part 495.348"
                   name="explanation-procurement-42_CFR_Part_495.348"
                   onChange={[Function]}
                   placeholder="Please explain..."
+                  rows="3"
                   type="text"
                   value=""
                   wrapperClass=""
@@ -4809,11 +4847,13 @@ ShallowWrapper {
               </div>
               <div>
                 <InputHolder
+                  className="m0 textarea textarea-sm"
                   hideLabel={true}
                   label="Explanation for why you do not comply with 42 CFR Part 495.350"
                   name="explanation-recordsAccess-42_CFR_Part_495.350"
                   onChange={[Function]}
                   placeholder="Please explain..."
+                  rows="3"
                   type="text"
                   value="some words"
                   wrapperClass=""
@@ -4954,11 +4994,13 @@ ShallowWrapper {
               </div>
               <div>
                 <InputHolder
+                  className="m0 textarea textarea-sm"
                   hideLabel={true}
                   label="Explanation for why you do not comply with 45 CFR Part 95.615"
                   name="explanation-recordsAccess-45_CFR_Part_95.615"
                   onChange={[Function]}
                   placeholder="Please explain..."
+                  rows="3"
                   type="text"
                   value="other words"
                   wrapperClass=""
@@ -5233,11 +5275,13 @@ ShallowWrapper {
                 </div>
                 <div>
                   <InputHolder
+                    className="m0 textarea textarea-sm"
                     hideLabel={true}
                     label="Explanation for why you do not comply with 42 CFR Part 495.348"
                     name="explanation-procurement-42_CFR_Part_495.348"
                     onChange={[Function]}
                     placeholder="Please explain..."
+                    rows="3"
                     type="text"
                     value=""
                     wrapperClass=""
@@ -5385,11 +5429,13 @@ ShallowWrapper {
                 </div>
                 <div>
                   <InputHolder
+                    className="m0 textarea textarea-sm"
                     hideLabel={true}
                     label="Explanation for why you do not comply with 42 CFR Part 495.350"
                     name="explanation-recordsAccess-42_CFR_Part_495.350"
                     onChange={[Function]}
                     placeholder="Please explain..."
+                    rows="3"
                     type="text"
                     value="some words"
                     wrapperClass=""
@@ -5530,11 +5576,13 @@ ShallowWrapper {
                 </div>
                 <div>
                   <InputHolder
+                    className="m0 textarea textarea-sm"
                     hideLabel={true}
                     label="Explanation for why you do not comply with 45 CFR Part 95.615"
                     name="explanation-recordsAccess-45_CFR_Part_95.615"
                     onChange={[Function]}
                     placeholder="Please explain..."
+                    rows="3"
                     type="text"
                     value="other words"
                     wrapperClass=""
@@ -5810,11 +5858,13 @@ ShallowWrapper {
                     </div>
                     <div>
                       <InputHolder
+                        className="m0 textarea textarea-sm"
                         hideLabel={true}
                         label="Explanation for why you do not comply with 42 CFR Part 495.348"
                         name="explanation-procurement-42_CFR_Part_495.348"
                         onChange={[Function]}
                         placeholder="Please explain..."
+                        rows="3"
                         type="text"
                         value=""
                         wrapperClass=""
@@ -5975,11 +6025,13 @@ ShallowWrapper {
                     </div>,
                     <div>
                       <InputHolder
+                        className="m0 textarea textarea-sm"
                         hideLabel={true}
                         label="Explanation for why you do not comply with 42 CFR Part 495.348"
                         name="explanation-procurement-42_CFR_Part_495.348"
                         onChange={[Function]}
                         placeholder="Please explain..."
+                        rows="3"
                         type="text"
                         value=""
                         wrapperClass=""
@@ -6106,11 +6158,13 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": <InputHolder
+                        className="m0 textarea textarea-sm"
                         hideLabel={true}
                         label="Explanation for why you do not comply with 42 CFR Part 495.348"
                         name="explanation-procurement-42_CFR_Part_495.348"
                         onChange={[Function]}
                         placeholder="Please explain..."
+                        rows="3"
                         type="text"
                         value=""
                         wrapperClass=""
@@ -6122,11 +6176,13 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "function",
                       "props": Object {
+                        "className": "m0 textarea textarea-sm",
                         "hideLabel": true,
                         "label": "Explanation for why you do not comply with 42 CFR Part 495.348",
                         "name": "explanation-procurement-42_CFR_Part_495.348",
                         "onChange": [Function],
                         "placeholder": "Please explain...",
+                        "rows": "3",
                         "type": "text",
                         "value": "",
                         "wrapperClass": "",
@@ -6680,11 +6736,13 @@ ShallowWrapper {
                     </div>
                     <div>
                       <InputHolder
+                        className="m0 textarea textarea-sm"
                         hideLabel={true}
                         label="Explanation for why you do not comply with 42 CFR Part 495.350"
                         name="explanation-recordsAccess-42_CFR_Part_495.350"
                         onChange={[Function]}
                         placeholder="Please explain..."
+                        rows="3"
                         type="text"
                         value="some words"
                         wrapperClass=""
@@ -6825,11 +6883,13 @@ ShallowWrapper {
                     </div>
                     <div>
                       <InputHolder
+                        className="m0 textarea textarea-sm"
                         hideLabel={true}
                         label="Explanation for why you do not comply with 45 CFR Part 95.615"
                         name="explanation-recordsAccess-45_CFR_Part_95.615"
                         onChange={[Function]}
                         placeholder="Please explain..."
+                        rows="3"
                         type="text"
                         value="other words"
                         wrapperClass=""
@@ -6922,11 +6982,13 @@ ShallowWrapper {
                     </div>,
                     <div>
                       <InputHolder
+                        className="m0 textarea textarea-sm"
                         hideLabel={true}
                         label="Explanation for why you do not comply with 42 CFR Part 495.350"
                         name="explanation-recordsAccess-42_CFR_Part_495.350"
                         onChange={[Function]}
                         placeholder="Please explain..."
+                        rows="3"
                         type="text"
                         value="some words"
                         wrapperClass=""
@@ -7053,11 +7115,13 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": <InputHolder
+                        className="m0 textarea textarea-sm"
                         hideLabel={true}
                         label="Explanation for why you do not comply with 42 CFR Part 495.350"
                         name="explanation-recordsAccess-42_CFR_Part_495.350"
                         onChange={[Function]}
                         placeholder="Please explain..."
+                        rows="3"
                         type="text"
                         value="some words"
                         wrapperClass=""
@@ -7069,11 +7133,13 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "function",
                       "props": Object {
+                        "className": "m0 textarea textarea-sm",
                         "hideLabel": true,
                         "label": "Explanation for why you do not comply with 42 CFR Part 495.350",
                         "name": "explanation-recordsAccess-42_CFR_Part_495.350",
                         "onChange": [Function],
                         "placeholder": "Please explain...",
+                        "rows": "3",
                         "type": "text",
                         "value": "some words",
                         "wrapperClass": "",
@@ -7617,11 +7683,13 @@ ShallowWrapper {
                     </div>,
                     <div>
                       <InputHolder
+                        className="m0 textarea textarea-sm"
                         hideLabel={true}
                         label="Explanation for why you do not comply with 45 CFR Part 95.615"
                         name="explanation-recordsAccess-45_CFR_Part_95.615"
                         onChange={[Function]}
                         placeholder="Please explain..."
+                        rows="3"
                         type="text"
                         value="other words"
                         wrapperClass=""
@@ -7748,11 +7816,13 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": <InputHolder
+                        className="m0 textarea textarea-sm"
                         hideLabel={true}
                         label="Explanation for why you do not comply with 45 CFR Part 95.615"
                         name="explanation-recordsAccess-45_CFR_Part_95.615"
                         onChange={[Function]}
                         placeholder="Please explain..."
+                        rows="3"
                         type="text"
                         value="other words"
                         wrapperClass=""
@@ -7764,11 +7834,13 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "function",
                       "props": Object {
+                        "className": "m0 textarea textarea-sm",
                         "hideLabel": true,
                         "label": "Explanation for why you do not comply with 45 CFR Part 95.615",
                         "name": "explanation-recordsAccess-45_CFR_Part_95.615",
                         "onChange": [Function],
                         "placeholder": "Please explain...",
+                        "rows": "3",
                         "type": "text",
                         "value": "other words",
                         "wrapperClass": "",

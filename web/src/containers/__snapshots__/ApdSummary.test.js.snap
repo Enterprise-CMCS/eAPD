@@ -98,6 +98,7 @@ ShallowWrapper {
           />
           <RichText
             content="about the program"
+            editorClassName="rte-textarea-xl"
             onSync={[Function]}
           />
         </div>
@@ -115,6 +116,7 @@ ShallowWrapper {
           />
           <RichText
             content="about hit"
+            editorClassName="rte-textarea-l"
             onSync={[Function]}
           />
         </div>
@@ -132,6 +134,7 @@ ShallowWrapper {
           />
           <RichText
             content="about hie"
+            editorClassName="rte-textarea-l"
             onSync={[Function]}
           />
         </div>
@@ -147,6 +150,7 @@ ShallowWrapper {
           />
           <RichText
             content="about mmis"
+            editorClassName="rte-textarea-l"
             onSync={[Function]}
           />
         </div>
@@ -217,6 +221,7 @@ ShallowWrapper {
             />
             <RichText
               content="about the program"
+              editorClassName="rte-textarea-xl"
               onSync={[Function]}
             />
           </div>,
@@ -234,6 +239,7 @@ ShallowWrapper {
             />
             <RichText
               content="about hit"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />
           </div>,
@@ -251,6 +257,7 @@ ShallowWrapper {
             />
             <RichText
               content="about hie"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />
           </div>,
@@ -266,6 +273,7 @@ ShallowWrapper {
             />
             <RichText
               content="about mmis"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />
           </div>,
@@ -468,6 +476,7 @@ ShallowWrapper {
               />,
               <RichText
                 content="about the program"
+                editorClassName="rte-textarea-xl"
                 onSync={[Function]}
               />,
             ],
@@ -505,6 +514,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "content": "about the program",
+                "editorClassName": "rte-textarea-xl",
                 "onSync": [Function],
               },
               "ref": null,
@@ -531,6 +541,7 @@ ShallowWrapper {
               />,
               <RichText
                 content="about hit"
+                editorClassName="rte-textarea-l"
                 onSync={[Function]}
               />,
             ],
@@ -568,6 +579,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "content": "about hit",
+                "editorClassName": "rte-textarea-l",
                 "onSync": [Function],
               },
               "ref": null,
@@ -594,6 +606,7 @@ ShallowWrapper {
               />,
               <RichText
                 content="about hie"
+                editorClassName="rte-textarea-l"
                 onSync={[Function]}
               />,
             ],
@@ -631,6 +644,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "content": "about hie",
+                "editorClassName": "rte-textarea-l",
                 "onSync": [Function],
               },
               "ref": null,
@@ -657,6 +671,7 @@ ShallowWrapper {
               />,
               <RichText
                 content="about mmis"
+                editorClassName="rte-textarea-l"
                 onSync={[Function]}
               />,
             ],
@@ -693,6 +708,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "content": "about mmis",
+                "editorClassName": "rte-textarea-l",
                 "onSync": [Function],
               },
               "ref": null,
@@ -775,6 +791,7 @@ ShallowWrapper {
             />
             <RichText
               content="about the program"
+              editorClassName="rte-textarea-xl"
               onSync={[Function]}
             />
           </div>
@@ -792,6 +809,7 @@ ShallowWrapper {
             />
             <RichText
               content="about hit"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />
           </div>
@@ -809,6 +827,7 @@ ShallowWrapper {
             />
             <RichText
               content="about hie"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />
           </div>
@@ -824,6 +843,7 @@ ShallowWrapper {
             />
             <RichText
               content="about mmis"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />
           </div>
@@ -894,6 +914,7 @@ ShallowWrapper {
               />
               <RichText
                 content="about the program"
+                editorClassName="rte-textarea-xl"
                 onSync={[Function]}
               />
             </div>,
@@ -911,6 +932,7 @@ ShallowWrapper {
               />
               <RichText
                 content="about hit"
+                editorClassName="rte-textarea-l"
                 onSync={[Function]}
               />
             </div>,
@@ -928,6 +950,7 @@ ShallowWrapper {
               />
               <RichText
                 content="about hie"
+                editorClassName="rte-textarea-l"
                 onSync={[Function]}
               />
             </div>,
@@ -943,6 +966,7 @@ ShallowWrapper {
               />
               <RichText
                 content="about mmis"
+                editorClassName="rte-textarea-l"
                 onSync={[Function]}
               />
             </div>,
@@ -1145,6 +1169,7 @@ ShallowWrapper {
                 />,
                 <RichText
                   content="about the program"
+                  editorClassName="rte-textarea-xl"
                   onSync={[Function]}
                 />,
               ],
@@ -1182,6 +1207,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "content": "about the program",
+                  "editorClassName": "rte-textarea-xl",
                   "onSync": [Function],
                 },
                 "ref": null,
@@ -1208,6 +1234,7 @@ ShallowWrapper {
                 />,
                 <RichText
                   content="about hit"
+                  editorClassName="rte-textarea-l"
                   onSync={[Function]}
                 />,
               ],
@@ -1245,6 +1272,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "content": "about hit",
+                  "editorClassName": "rte-textarea-l",
                   "onSync": [Function],
                 },
                 "ref": null,
@@ -1271,6 +1299,7 @@ ShallowWrapper {
                 />,
                 <RichText
                   content="about hie"
+                  editorClassName="rte-textarea-l"
                   onSync={[Function]}
                 />,
               ],
@@ -1308,6 +1337,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "content": "about hie",
+                  "editorClassName": "rte-textarea-l",
                   "onSync": [Function],
                 },
                 "ref": null,
@@ -1334,6 +1364,7 @@ ShallowWrapper {
                 />,
                 <RichText
                   content="about mmis"
+                  editorClassName="rte-textarea-l"
                   onSync={[Function]}
                 />,
               ],
@@ -1370,6 +1401,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "content": "about mmis",
+                  "editorClassName": "rte-textarea-l",
                   "onSync": [Function],
                 },
                 "ref": null,
