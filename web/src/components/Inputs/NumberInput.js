@@ -46,7 +46,7 @@ export const DollarInput = makeNumberInput({
   thousandSeparator: ','
 });
 export const PercentInput = makeNumberInput({
-  decimalScale: 2,
+  decimalScale: 0,
   fixedDecimalScale: true,
   suffix: '%'
 });

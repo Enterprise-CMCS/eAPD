@@ -2,7 +2,7 @@ import { UPDATE_BUDGET } from '../actions/apd';
 import { arrToObj } from '../util';
 import roundedPercents from '../util/roundedPercents';
 
-const fixNum = (value, digits = 4) => {
+const fixNum = (value, digits = 2) => {
   const mult = 10 ** digits;
   return Math.round(value * mult) / mult;
 };
