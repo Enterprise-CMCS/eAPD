@@ -14,34 +14,34 @@ describe('apd previous activity table, mmis component', () => {
     previousActivityExpenses: {
       '1': {
         mmis: {
-          federalActual90: 10,
-          federalActual75: 20,
-          federalActual50: 30,
-          federalApproved90: 1,
-          federalApproved75: 2,
-          federalApproved50: 3,
-          stateActual90: 1000,
-          stateActual75: 2000,
-          stateActual50: 3000,
-          stateApproved90: 100,
-          stateApproved75: 200,
-          stateApproved50: 300
+          90: {
+            federalActual: 10,
+            totalApproved: 20
+          },
+          75: {
+            federalActual: 30,
+            totalApproved: 40
+          },
+          50: {
+            federalActual: 50,
+            totalApproved: 60
+          }
         }
       },
       '2': {
         mmis: {
-          federalActual90: 70,
-          federalActual75: 80,
-          federalActual50: 90,
-          federalApproved90: 7,
-          federalApproved75: 8,
-          federalApproved50: 9,
-          stateActual90: 7000,
-          stateActual75: 8000,
-          stateActual50: 9000,
-          stateApproved90: 700,
-          stateApproved75: 800,
-          stateApproved50: 900
+          90: {
+            federalActual: 100,
+            totalApproved: 200
+          },
+          75: {
+            federalActual: 300,
+            totalApproved: 400
+          },
+          50: {
+            federalActual: 500,
+            totalApproved: 600
+          }
         }
       }
     },
@@ -60,13 +60,13 @@ describe('apd previous activity table, mmis component', () => {
 
   test('dispatches on a change', () => {
     shallow(<ApdPreviousActivityTableMMIS {...props} />)
-      .find('InputHolder[name="approved-federal90-mmis-1"]')
+      .find('InputHolder[name="approved-total-mmis90-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
     expect(
       props.updateApd.calledWith({
         previousActivityExpenses: {
-          '1': { mmis: { federalApproved90: 'new value' } }
+          '1': { mmis: { '90': { approvedTotal: 'new value' } } }
         }
       })
     );

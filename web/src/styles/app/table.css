@@ -60,6 +60,10 @@
   font-weight: 300;
 }
 
+.table-cms.centered-headers th {
+  text-align: center;
+}
+
 .table-cms td {
   background-color: #f3f8fc;
 }
@@ -147,4 +151,5 @@
 .table-frozen-narrow-header .table-frozen-data tr > th:first-child,
 .table-frozen-narrow-header .table-frozen-data tr > td:first-child {
   min-width: 90px;
+  width: 90px;
 }
