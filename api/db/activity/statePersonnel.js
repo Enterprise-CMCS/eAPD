@@ -25,13 +25,12 @@ module.exports = {
         id: this.get('id'),
         title: this.get('title'),
         description: this.get('description'),
-        keyPersonnel: this.get('key_personnel'),
         years: this.related('years')
       };
     },
 
     static: {
-      updateableFields: ['title', 'description', 'keyPersonnel'],
+      updateableFields: ['title', 'description'],
       owns: { years: 'apdActivityStatePersonnelCost' },
       foreignKey: 'personnel_id'
     }
