@@ -96,8 +96,8 @@ describe('budget reducer', () => {
                 ],
                 quarterlyFFP: {
                   '1931': {
-                    '1': { state: 30, contractors: 40 },
-                    '2': { state: 20, contractors: 20 },
+                    '1': { state: 30.55, contractors: 40 },
+                    '2': { state: 19.45, contractors: 20 },
                     '3': { state: 40, contractors: 30 },
                     '4': { state: 10, contractors: 10 }
                   },
@@ -292,14 +292,14 @@ describe('budget reducer', () => {
           quarterlyFFP: {
             '1931': {
               '1': {
-                state: { dollars: 918, percent: 0.3 },
+                state: { dollars: 935, percent: 0.3055 },
                 contractors: { dollars: 720, percent: 0.4 },
-                combined: { dollars: 1638, percent: 0 }
+                combined: { dollars: 1655, percent: 0 }
               },
               '2': {
-                state: { dollars: 612, percent: 0.2 },
+                state: { dollars: 595, percent: 0.1945 },
                 contractors: { dollars: 360, percent: 0.2 },
-                combined: { dollars: 972, percent: 0 }
+                combined: { dollars: 955, percent: 0 }
               },
               '3': {
                 state: { dollars: 1224, percent: 0.4 },
@@ -720,8 +720,8 @@ describe('budget reducer', () => {
       federalShareByFFYQuarter: {
         hitAndHie: {
           '1931': {
-            '1': { contractors: 1530, state: 1548, combined: 3078 },
-            '2': { contractors: 810, state: 1422, combined: 2232 },
+            '1': { contractors: 1530, state: 1565, combined: 3095 },
+            '2': { contractors: 810, state: 1405, combined: 2215 },
             '3': { contractors: 900, state: 2214, combined: 3114 },
             '4': { contractors: 360, state: 1476, combined: 1836 },
             subtotal: { contractors: 3600, state: 6660, combined: 10260 }
