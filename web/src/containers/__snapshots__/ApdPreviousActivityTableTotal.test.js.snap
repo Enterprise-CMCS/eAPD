@@ -35,7 +35,7 @@ ShallowWrapper {
           Grand totals: Federal HIT, HIE, MMIS
         </h3>,
         <div
-          className="table-frozen-wrapper table-frozen-narrow-header mt3"
+          className="table-frozen-wrapper table-frozen-narrow-header"
         >
           <div
             className="table-frozen-scroller"
@@ -240,7 +240,7 @@ ShallowWrapper {
               </tbody>
             </table>
           </div>,
-          "className": "table-frozen-wrapper table-frozen-narrow-header mt3",
+          "className": "table-frozen-wrapper table-frozen-narrow-header",
         },
         "ref": null,
         "rendered": Object {
@@ -844,7 +844,7 @@ ShallowWrapper {
             Grand totals: Federal HIT, HIE, MMIS
           </h3>,
           <div
-            className="table-frozen-wrapper table-frozen-narrow-header mt3"
+            className="table-frozen-wrapper table-frozen-narrow-header"
           >
             <div
               className="table-frozen-scroller"
@@ -1049,7 +1049,7 @@ ShallowWrapper {
                 </tbody>
               </table>
             </div>,
-            "className": "table-frozen-wrapper table-frozen-narrow-header mt3",
+            "className": "table-frozen-wrapper table-frozen-narrow-header",
           },
           "ref": null,
           "rendered": Object {
