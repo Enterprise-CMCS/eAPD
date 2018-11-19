@@ -1,0 +1,1664 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apd previous activity table, grand total component renders correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ApdPreviousActivityTableMMIS
+    totals={
+      Object {
+        "1": Object {
+          "actual": 1090,
+          "approved": 1878,
+        },
+        "2": Object {
+          "actual": 3900,
+          "approved": 4380,
+        },
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <h3>
+          Grand totals: Federal HIT, HIE, MMIS
+        </h3>,
+        <div
+          className="table-frozen-wrapper table-frozen-narrow-header mt3"
+        >
+          <div
+            className="table-frozen-scroller"
+          >
+            <table
+              aria-hidden="true"
+              className="table-cms table-fixed table-frozen-left-pane"
+            >
+              <thead>
+                <tr>
+                  <th
+                    className="table-frozen-null-cell"
+                  >
+                    --
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>
+                    FFY 1
+                  </th>
+                </tr>
+                <tr>
+                  <th>
+                    FFY 2
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+            <table
+              className="table-cms centered-headers table-fixed table-frozen-data"
+            >
+              <thead>
+                <tr>
+                  <th
+                    id="prev_act_totals_null3"
+                  />
+                  <th
+                    id="prev_act_total_approved"
+                  >
+                    FFP Approved
+                  </th>
+                  <th
+                    id="prev_act_total_actual"
+                  >
+                    FFP Actual
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  className="align-middle"
+                >
+                  <th
+                    id="prev_act_total_row_1"
+                  >
+                    FFY 1
+                  </th>
+                  <td
+                    headers="prev_act_total_row_1 prev_act_total_approved"
+                  >
+                    $1,878
+                  </td>
+                  <td
+                    headers="prev_act_total_row_1 prev_act_total_actual"
+                  >
+                    $1,090
+                  </td>
+                </tr>
+                <tr
+                  className="align-middle"
+                >
+                  <th
+                    id="prev_act_total_row_2"
+                  >
+                    FFY 2
+                  </th>
+                  <td
+                    headers="prev_act_total_row_2 prev_act_total_approved"
+                  >
+                    $4,380
+                  </td>
+                  <td
+                    headers="prev_act_total_row_2 prev_act_total_actual"
+                  >
+                    $3,900
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Grand totals: Federal HIT, HIE, MMIS",
+        },
+        "ref": null,
+        "rendered": "Grand totals: Federal HIT, HIE, MMIS",
+        "type": "h3",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="table-frozen-scroller"
+          >
+            <table
+              aria-hidden="true"
+              className="table-cms table-fixed table-frozen-left-pane"
+            >
+              <thead>
+                <tr>
+                  <th
+                    className="table-frozen-null-cell"
+                  >
+                    --
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>
+                    FFY 1
+                  </th>
+                </tr>
+                <tr>
+                  <th>
+                    FFY 2
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+            <table
+              className="table-cms centered-headers table-fixed table-frozen-data"
+            >
+              <thead>
+                <tr>
+                  <th
+                    id="prev_act_totals_null3"
+                  />
+                  <th
+                    id="prev_act_total_approved"
+                  >
+                    FFP Approved
+                  </th>
+                  <th
+                    id="prev_act_total_actual"
+                  >
+                    FFP Actual
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  className="align-middle"
+                >
+                  <th
+                    id="prev_act_total_row_1"
+                  >
+                    FFY 1
+                  </th>
+                  <td
+                    headers="prev_act_total_row_1 prev_act_total_approved"
+                  >
+                    $1,878
+                  </td>
+                  <td
+                    headers="prev_act_total_row_1 prev_act_total_actual"
+                  >
+                    $1,090
+                  </td>
+                </tr>
+                <tr
+                  className="align-middle"
+                >
+                  <th
+                    id="prev_act_total_row_2"
+                  >
+                    FFY 2
+                  </th>
+                  <td
+                    headers="prev_act_total_row_2 prev_act_total_approved"
+                  >
+                    $4,380
+                  </td>
+                  <td
+                    headers="prev_act_total_row_2 prev_act_total_actual"
+                  >
+                    $3,900
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>,
+          "className": "table-frozen-wrapper table-frozen-narrow-header mt3",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <table
+                aria-hidden="true"
+                className="table-cms table-fixed table-frozen-left-pane"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      className="table-frozen-null-cell"
+                    >
+                      --
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>
+                      FFY 1
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>
+                      FFY 2
+                    </th>
+                  </tr>
+                </tbody>
+              </table>,
+              <table
+                className="table-cms centered-headers table-fixed table-frozen-data"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      id="prev_act_totals_null3"
+                    />
+                    <th
+                      id="prev_act_total_approved"
+                    >
+                      FFP Approved
+                    </th>
+                    <th
+                      id="prev_act_total_actual"
+                    >
+                      FFP Actual
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    className="align-middle"
+                  >
+                    <th
+                      id="prev_act_total_row_1"
+                    >
+                      FFY 1
+                    </th>
+                    <td
+                      headers="prev_act_total_row_1 prev_act_total_approved"
+                    >
+                      $1,878
+                    </td>
+                    <td
+                      headers="prev_act_total_row_1 prev_act_total_actual"
+                    >
+                      $1,090
+                    </td>
+                  </tr>
+                  <tr
+                    className="align-middle"
+                  >
+                    <th
+                      id="prev_act_total_row_2"
+                    >
+                      FFY 2
+                    </th>
+                    <td
+                      headers="prev_act_total_row_2 prev_act_total_approved"
+                    >
+                      $4,380
+                    </td>
+                    <td
+                      headers="prev_act_total_row_2 prev_act_total_actual"
+                    >
+                      $3,900
+                    </td>
+                  </tr>
+                </tbody>
+              </table>,
+            ],
+            "className": "table-frozen-scroller",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "aria-hidden": "true",
+                "children": Array [
+                  <thead>
+                    <tr>
+                      <th
+                        className="table-frozen-null-cell"
+                      >
+                        --
+                      </th>
+                    </tr>
+                  </thead>,
+                  <tbody>
+                    <tr>
+                      <th>
+                        FFY 1
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>
+                        FFY 2
+                      </th>
+                    </tr>
+                  </tbody>,
+                ],
+                "className": "table-cms table-fixed table-frozen-left-pane",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <tr>
+                      <th
+                        className="table-frozen-null-cell"
+                      >
+                        --
+                      </th>
+                    </tr>,
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": <th
+                        className="table-frozen-null-cell"
+                      >
+                        --
+                      </th>,
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "--",
+                        "className": "table-frozen-null-cell",
+                      },
+                      "ref": null,
+                      "rendered": "--",
+                      "type": "th",
+                    },
+                    "type": "tr",
+                  },
+                  "type": "thead",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <tr>
+                        <th>
+                          FFY 1
+                        </th>
+                      </tr>,
+                      <tr>
+                        <th>
+                          FFY 2
+                        </th>
+                      </tr>,
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": "1-mmis-fake-row",
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <th>
+                          FFY 1
+                        </th>,
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": "1-mmis-fake-header",
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "FFY 1",
+                        },
+                        "ref": null,
+                        "rendered": "FFY 1",
+                        "type": "th",
+                      },
+                      "type": "tr",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": "2-mmis-fake-row",
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <th>
+                          FFY 2
+                        </th>,
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": "2-mmis-fake-header",
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "FFY 2",
+                        },
+                        "ref": null,
+                        "rendered": "FFY 2",
+                        "type": "th",
+                      },
+                      "type": "tr",
+                    },
+                  ],
+                  "type": "tbody",
+                },
+              ],
+              "type": "table",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <thead>
+                    <tr>
+                      <th
+                        id="prev_act_totals_null3"
+                      />
+                      <th
+                        id="prev_act_total_approved"
+                      >
+                        FFP Approved
+                      </th>
+                      <th
+                        id="prev_act_total_actual"
+                      >
+                        FFP Actual
+                      </th>
+                    </tr>
+                  </thead>,
+                  <tbody>
+                    <tr
+                      className="align-middle"
+                    >
+                      <th
+                        id="prev_act_total_row_1"
+                      >
+                        FFY 1
+                      </th>
+                      <td
+                        headers="prev_act_total_row_1 prev_act_total_approved"
+                      >
+                        $1,878
+                      </td>
+                      <td
+                        headers="prev_act_total_row_1 prev_act_total_actual"
+                      >
+                        $1,090
+                      </td>
+                    </tr>
+                    <tr
+                      className="align-middle"
+                    >
+                      <th
+                        id="prev_act_total_row_2"
+                      >
+                        FFY 2
+                      </th>
+                      <td
+                        headers="prev_act_total_row_2 prev_act_total_approved"
+                      >
+                        $4,380
+                      </td>
+                      <td
+                        headers="prev_act_total_row_2 prev_act_total_actual"
+                      >
+                        $3,900
+                      </td>
+                    </tr>
+                  </tbody>,
+                ],
+                "className": "table-cms centered-headers table-fixed table-frozen-data",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <tr>
+                      <th
+                        id="prev_act_totals_null3"
+                      />
+                      <th
+                        id="prev_act_total_approved"
+                      >
+                        FFP Approved
+                      </th>
+                      <th
+                        id="prev_act_total_actual"
+                      >
+                        FFP Actual
+                      </th>
+                    </tr>,
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        <th
+                          id="prev_act_totals_null3"
+                        />,
+                        <th
+                          id="prev_act_total_approved"
+                        >
+                          FFP Approved
+                        </th>,
+                        <th
+                          id="prev_act_total_actual"
+                        >
+                          FFP Actual
+                        </th>,
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "id": "prev_act_totals_null3",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": "th",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "FFP Approved",
+                          "id": "prev_act_total_approved",
+                        },
+                        "ref": null,
+                        "rendered": "FFP Approved",
+                        "type": "th",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "FFP Actual",
+                          "id": "prev_act_total_actual",
+                        },
+                        "ref": null,
+                        "rendered": "FFP Actual",
+                        "type": "th",
+                      },
+                    ],
+                    "type": "tr",
+                  },
+                  "type": "thead",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <tr
+                        className="align-middle"
+                      >
+                        <th
+                          id="prev_act_total_row_1"
+                        >
+                          FFY 1
+                        </th>
+                        <td
+                          headers="prev_act_total_row_1 prev_act_total_approved"
+                        >
+                          $1,878
+                        </td>
+                        <td
+                          headers="prev_act_total_row_1 prev_act_total_actual"
+                        >
+                          $1,090
+                        </td>
+                      </tr>,
+                      <tr
+                        className="align-middle"
+                      >
+                        <th
+                          id="prev_act_total_row_2"
+                        >
+                          FFY 2
+                        </th>
+                        <td
+                          headers="prev_act_total_row_2 prev_act_total_approved"
+                        >
+                          $4,380
+                        </td>
+                        <td
+                          headers="prev_act_total_row_2 prev_act_total_actual"
+                        >
+                          $3,900
+                        </td>
+                      </tr>,
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": "1",
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": Array [
+                          <th
+                            id="prev_act_total_row_1"
+                          >
+                            FFY 1
+                          </th>,
+                          <td
+                            headers="prev_act_total_row_1 prev_act_total_approved"
+                          >
+                            $1,878
+                          </td>,
+                          <td
+                            headers="prev_act_total_row_1 prev_act_total_actual"
+                          >
+                            $1,090
+                          </td>,
+                        ],
+                        "className": "align-middle",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "FFY 1",
+                            "id": "prev_act_total_row_1",
+                          },
+                          "ref": null,
+                          "rendered": "FFY 1",
+                          "type": "th",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "$1,878",
+                            "headers": "prev_act_total_row_1 prev_act_total_approved",
+                          },
+                          "ref": null,
+                          "rendered": "$1,878",
+                          "type": "td",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "$1,090",
+                            "headers": "prev_act_total_row_1 prev_act_total_actual",
+                          },
+                          "ref": null,
+                          "rendered": "$1,090",
+                          "type": "td",
+                        },
+                      ],
+                      "type": "tr",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": "2",
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": Array [
+                          <th
+                            id="prev_act_total_row_2"
+                          >
+                            FFY 2
+                          </th>,
+                          <td
+                            headers="prev_act_total_row_2 prev_act_total_approved"
+                          >
+                            $4,380
+                          </td>,
+                          <td
+                            headers="prev_act_total_row_2 prev_act_total_actual"
+                          >
+                            $3,900
+                          </td>,
+                        ],
+                        "className": "align-middle",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "FFY 2",
+                            "id": "prev_act_total_row_2",
+                          },
+                          "ref": null,
+                          "rendered": "FFY 2",
+                          "type": "th",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "$4,380",
+                            "headers": "prev_act_total_row_2 prev_act_total_approved",
+                          },
+                          "ref": null,
+                          "rendered": "$4,380",
+                          "type": "td",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "$3,900",
+                            "headers": "prev_act_total_row_2 prev_act_total_actual",
+                          },
+                          "ref": null,
+                          "rendered": "$3,900",
+                          "type": "td",
+                        },
+                      ],
+                      "type": "tr",
+                    },
+                  ],
+                  "type": "tbody",
+                },
+              ],
+              "type": "table",
+            },
+          ],
+          "type": "div",
+        },
+        "type": "div",
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <h3>
+            Grand totals: Federal HIT, HIE, MMIS
+          </h3>,
+          <div
+            className="table-frozen-wrapper table-frozen-narrow-header mt3"
+          >
+            <div
+              className="table-frozen-scroller"
+            >
+              <table
+                aria-hidden="true"
+                className="table-cms table-fixed table-frozen-left-pane"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      className="table-frozen-null-cell"
+                    >
+                      --
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>
+                      FFY 1
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>
+                      FFY 2
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+              <table
+                className="table-cms centered-headers table-fixed table-frozen-data"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      id="prev_act_totals_null3"
+                    />
+                    <th
+                      id="prev_act_total_approved"
+                    >
+                      FFP Approved
+                    </th>
+                    <th
+                      id="prev_act_total_actual"
+                    >
+                      FFP Actual
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    className="align-middle"
+                  >
+                    <th
+                      id="prev_act_total_row_1"
+                    >
+                      FFY 1
+                    </th>
+                    <td
+                      headers="prev_act_total_row_1 prev_act_total_approved"
+                    >
+                      $1,878
+                    </td>
+                    <td
+                      headers="prev_act_total_row_1 prev_act_total_actual"
+                    >
+                      $1,090
+                    </td>
+                  </tr>
+                  <tr
+                    className="align-middle"
+                  >
+                    <th
+                      id="prev_act_total_row_2"
+                    >
+                      FFY 2
+                    </th>
+                    <td
+                      headers="prev_act_total_row_2 prev_act_total_approved"
+                    >
+                      $4,380
+                    </td>
+                    <td
+                      headers="prev_act_total_row_2 prev_act_total_actual"
+                    >
+                      $3,900
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Grand totals: Federal HIT, HIE, MMIS",
+          },
+          "ref": null,
+          "rendered": "Grand totals: Federal HIT, HIE, MMIS",
+          "type": "h3",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="table-frozen-scroller"
+            >
+              <table
+                aria-hidden="true"
+                className="table-cms table-fixed table-frozen-left-pane"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      className="table-frozen-null-cell"
+                    >
+                      --
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>
+                      FFY 1
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>
+                      FFY 2
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+              <table
+                className="table-cms centered-headers table-fixed table-frozen-data"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      id="prev_act_totals_null3"
+                    />
+                    <th
+                      id="prev_act_total_approved"
+                    >
+                      FFP Approved
+                    </th>
+                    <th
+                      id="prev_act_total_actual"
+                    >
+                      FFP Actual
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    className="align-middle"
+                  >
+                    <th
+                      id="prev_act_total_row_1"
+                    >
+                      FFY 1
+                    </th>
+                    <td
+                      headers="prev_act_total_row_1 prev_act_total_approved"
+                    >
+                      $1,878
+                    </td>
+                    <td
+                      headers="prev_act_total_row_1 prev_act_total_actual"
+                    >
+                      $1,090
+                    </td>
+                  </tr>
+                  <tr
+                    className="align-middle"
+                  >
+                    <th
+                      id="prev_act_total_row_2"
+                    >
+                      FFY 2
+                    </th>
+                    <td
+                      headers="prev_act_total_row_2 prev_act_total_approved"
+                    >
+                      $4,380
+                    </td>
+                    <td
+                      headers="prev_act_total_row_2 prev_act_total_actual"
+                    >
+                      $3,900
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>,
+            "className": "table-frozen-wrapper table-frozen-narrow-header mt3",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <table
+                  aria-hidden="true"
+                  className="table-cms table-fixed table-frozen-left-pane"
+                >
+                  <thead>
+                    <tr>
+                      <th
+                        className="table-frozen-null-cell"
+                      >
+                        --
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>
+                        FFY 1
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>
+                        FFY 2
+                      </th>
+                    </tr>
+                  </tbody>
+                </table>,
+                <table
+                  className="table-cms centered-headers table-fixed table-frozen-data"
+                >
+                  <thead>
+                    <tr>
+                      <th
+                        id="prev_act_totals_null3"
+                      />
+                      <th
+                        id="prev_act_total_approved"
+                      >
+                        FFP Approved
+                      </th>
+                      <th
+                        id="prev_act_total_actual"
+                      >
+                        FFP Actual
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      className="align-middle"
+                    >
+                      <th
+                        id="prev_act_total_row_1"
+                      >
+                        FFY 1
+                      </th>
+                      <td
+                        headers="prev_act_total_row_1 prev_act_total_approved"
+                      >
+                        $1,878
+                      </td>
+                      <td
+                        headers="prev_act_total_row_1 prev_act_total_actual"
+                      >
+                        $1,090
+                      </td>
+                    </tr>
+                    <tr
+                      className="align-middle"
+                    >
+                      <th
+                        id="prev_act_total_row_2"
+                      >
+                        FFY 2
+                      </th>
+                      <td
+                        headers="prev_act_total_row_2 prev_act_total_approved"
+                      >
+                        $4,380
+                      </td>
+                      <td
+                        headers="prev_act_total_row_2 prev_act_total_actual"
+                      >
+                        $3,900
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>,
+              ],
+              "className": "table-frozen-scroller",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "aria-hidden": "true",
+                  "children": Array [
+                    <thead>
+                      <tr>
+                        <th
+                          className="table-frozen-null-cell"
+                        >
+                          --
+                        </th>
+                      </tr>
+                    </thead>,
+                    <tbody>
+                      <tr>
+                        <th>
+                          FFY 1
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          FFY 2
+                        </th>
+                      </tr>
+                    </tbody>,
+                  ],
+                  "className": "table-cms table-fixed table-frozen-left-pane",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": <tr>
+                        <th
+                          className="table-frozen-null-cell"
+                        >
+                          --
+                        </th>
+                      </tr>,
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <th
+                          className="table-frozen-null-cell"
+                        >
+                          --
+                        </th>,
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "--",
+                          "className": "table-frozen-null-cell",
+                        },
+                        "ref": null,
+                        "rendered": "--",
+                        "type": "th",
+                      },
+                      "type": "tr",
+                    },
+                    "type": "thead",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        <tr>
+                          <th>
+                            FFY 1
+                          </th>
+                        </tr>,
+                        <tr>
+                          <th>
+                            FFY 2
+                          </th>
+                        </tr>,
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": "1-mmis-fake-row",
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": <th>
+                            FFY 1
+                          </th>,
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": "1-mmis-fake-header",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "FFY 1",
+                          },
+                          "ref": null,
+                          "rendered": "FFY 1",
+                          "type": "th",
+                        },
+                        "type": "tr",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": "2-mmis-fake-row",
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": <th>
+                            FFY 2
+                          </th>,
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": "2-mmis-fake-header",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "FFY 2",
+                          },
+                          "ref": null,
+                          "rendered": "FFY 2",
+                          "type": "th",
+                        },
+                        "type": "tr",
+                      },
+                    ],
+                    "type": "tbody",
+                  },
+                ],
+                "type": "table",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <thead>
+                      <tr>
+                        <th
+                          id="prev_act_totals_null3"
+                        />
+                        <th
+                          id="prev_act_total_approved"
+                        >
+                          FFP Approved
+                        </th>
+                        <th
+                          id="prev_act_total_actual"
+                        >
+                          FFP Actual
+                        </th>
+                      </tr>
+                    </thead>,
+                    <tbody>
+                      <tr
+                        className="align-middle"
+                      >
+                        <th
+                          id="prev_act_total_row_1"
+                        >
+                          FFY 1
+                        </th>
+                        <td
+                          headers="prev_act_total_row_1 prev_act_total_approved"
+                        >
+                          $1,878
+                        </td>
+                        <td
+                          headers="prev_act_total_row_1 prev_act_total_actual"
+                        >
+                          $1,090
+                        </td>
+                      </tr>
+                      <tr
+                        className="align-middle"
+                      >
+                        <th
+                          id="prev_act_total_row_2"
+                        >
+                          FFY 2
+                        </th>
+                        <td
+                          headers="prev_act_total_row_2 prev_act_total_approved"
+                        >
+                          $4,380
+                        </td>
+                        <td
+                          headers="prev_act_total_row_2 prev_act_total_actual"
+                        >
+                          $3,900
+                        </td>
+                      </tr>
+                    </tbody>,
+                  ],
+                  "className": "table-cms centered-headers table-fixed table-frozen-data",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": <tr>
+                        <th
+                          id="prev_act_totals_null3"
+                        />
+                        <th
+                          id="prev_act_total_approved"
+                        >
+                          FFP Approved
+                        </th>
+                        <th
+                          id="prev_act_total_actual"
+                        >
+                          FFP Actual
+                        </th>
+                      </tr>,
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": Array [
+                          <th
+                            id="prev_act_totals_null3"
+                          />,
+                          <th
+                            id="prev_act_total_approved"
+                          >
+                            FFP Approved
+                          </th>,
+                          <th
+                            id="prev_act_total_actual"
+                          >
+                            FFP Actual
+                          </th>,
+                        ],
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "id": "prev_act_totals_null3",
+                          },
+                          "ref": null,
+                          "rendered": null,
+                          "type": "th",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "FFP Approved",
+                            "id": "prev_act_total_approved",
+                          },
+                          "ref": null,
+                          "rendered": "FFP Approved",
+                          "type": "th",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "FFP Actual",
+                            "id": "prev_act_total_actual",
+                          },
+                          "ref": null,
+                          "rendered": "FFP Actual",
+                          "type": "th",
+                        },
+                      ],
+                      "type": "tr",
+                    },
+                    "type": "thead",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        <tr
+                          className="align-middle"
+                        >
+                          <th
+                            id="prev_act_total_row_1"
+                          >
+                            FFY 1
+                          </th>
+                          <td
+                            headers="prev_act_total_row_1 prev_act_total_approved"
+                          >
+                            $1,878
+                          </td>
+                          <td
+                            headers="prev_act_total_row_1 prev_act_total_actual"
+                          >
+                            $1,090
+                          </td>
+                        </tr>,
+                        <tr
+                          className="align-middle"
+                        >
+                          <th
+                            id="prev_act_total_row_2"
+                          >
+                            FFY 2
+                          </th>
+                          <td
+                            headers="prev_act_total_row_2 prev_act_total_approved"
+                          >
+                            $4,380
+                          </td>
+                          <td
+                            headers="prev_act_total_row_2 prev_act_total_actual"
+                          >
+                            $3,900
+                          </td>
+                        </tr>,
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": "1",
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": Array [
+                            <th
+                              id="prev_act_total_row_1"
+                            >
+                              FFY 1
+                            </th>,
+                            <td
+                              headers="prev_act_total_row_1 prev_act_total_approved"
+                            >
+                              $1,878
+                            </td>,
+                            <td
+                              headers="prev_act_total_row_1 prev_act_total_actual"
+                            >
+                              $1,090
+                            </td>,
+                          ],
+                          "className": "align-middle",
+                        },
+                        "ref": null,
+                        "rendered": Array [
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "FFY 1",
+                              "id": "prev_act_total_row_1",
+                            },
+                            "ref": null,
+                            "rendered": "FFY 1",
+                            "type": "th",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "$1,878",
+                              "headers": "prev_act_total_row_1 prev_act_total_approved",
+                            },
+                            "ref": null,
+                            "rendered": "$1,878",
+                            "type": "td",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "$1,090",
+                              "headers": "prev_act_total_row_1 prev_act_total_actual",
+                            },
+                            "ref": null,
+                            "rendered": "$1,090",
+                            "type": "td",
+                          },
+                        ],
+                        "type": "tr",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": "2",
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": Array [
+                            <th
+                              id="prev_act_total_row_2"
+                            >
+                              FFY 2
+                            </th>,
+                            <td
+                              headers="prev_act_total_row_2 prev_act_total_approved"
+                            >
+                              $4,380
+                            </td>,
+                            <td
+                              headers="prev_act_total_row_2 prev_act_total_actual"
+                            >
+                              $3,900
+                            </td>,
+                          ],
+                          "className": "align-middle",
+                        },
+                        "ref": null,
+                        "rendered": Array [
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "FFY 2",
+                              "id": "prev_act_total_row_2",
+                            },
+                            "ref": null,
+                            "rendered": "FFY 2",
+                            "type": "th",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "$4,380",
+                              "headers": "prev_act_total_row_2 prev_act_total_approved",
+                            },
+                            "ref": null,
+                            "rendered": "$4,380",
+                            "type": "td",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "$3,900",
+                              "headers": "prev_act_total_row_2 prev_act_total_actual",
+                            },
+                            "ref": null,
+                            "rendered": "$3,900",
+                            "type": "td",
+                          },
+                        ],
+                        "type": "tr",
+                      },
+                    ],
+                    "type": "tbody",
+                  },
+                ],
+                "type": "table",
+              },
+            ],
+            "type": "div",
+          },
+          "type": "div",
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
