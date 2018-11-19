@@ -45,7 +45,7 @@ describe('PercentInput component', () => {
     component.find('input').simulate('change', event('12'));
 
     expect(
-      onChange.calledWith({ target: { value: 12, masked: '12.00%' } })
+      onChange.calledWith({ target: { value: 12, masked: '12%' } })
     ).toEqual(true);
   });
 });
