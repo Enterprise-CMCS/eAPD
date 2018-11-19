@@ -53,7 +53,7 @@ class Schedule extends Component {
         {activity.schedule.length === 0 ? (
           <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (
-          <div className="mb3 overflow-auto">
+          <div className="mb3">
             <div className="mt1 mb3">
               <DateRangePicker
                 initialStartDate={activity.plannedStartDate}
