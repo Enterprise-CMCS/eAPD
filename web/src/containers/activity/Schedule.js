@@ -61,8 +61,6 @@ class Schedule extends Component {
                 initialEndDate={activity.plannedEndDate}
                 endDateId={`activity-${activity.key}-end-date`}
                 onChange={this.handleActivityDateChange}
-                numberOfMonths={2}
-                daySize={32}
               />
             </div>
             <HelpText
@@ -105,9 +103,6 @@ class Schedule extends Component {
                             : moment()
                         }
                         onChange={this.handleMilestoneDateChange(i)}
-                        numberOfMonths={2}
-                        daySize={32}
-                        withPortal
                       />
                     </td>
                     <td className="center align-middle border-bottom">
