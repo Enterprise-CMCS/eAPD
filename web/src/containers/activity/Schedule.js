@@ -63,7 +63,6 @@ class Schedule extends Component {
                 onChange={this.handleActivityDateChange}
                 numberOfMonths={2}
                 daySize={32}
-                withPortal
               />
             </div>
             <HelpText
@@ -153,4 +152,7 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Schedule);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Schedule);
