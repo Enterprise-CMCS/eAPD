@@ -35,7 +35,7 @@
 }
 
 .rdw-editor-main .DraftEditor-root {
-  min-height: unset; /* override of plugin */
+  min-height: initial; /* override of plugin */
 }
 
 /* add resizing capability to divs of react-draft-wysiwyg plugin */
