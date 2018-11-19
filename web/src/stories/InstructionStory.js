@@ -24,10 +24,19 @@ class InstructionStory extends Component {
           {`instruction:
   heading: Instruction heading
   short: Short instruction
-  detail: Instruction detail here
-  helpText: this is help text!`}
+  detail: Instruction ***detail*** here
+  helpText: >-
+    this is help text!
+    
+    it covers several lines`}
         </code>
       </pre>
+      <p>
+        The <code>detail</code> and <code>helpText</code> properties are treated
+        as Markdown, so they will maintain multiple lines and also support
+        simple formatting such as <em>*italics*</em> and{' '}
+        <strong>**bold**</strong>
+      </p>
       <hr />
       <p>
         <code>
