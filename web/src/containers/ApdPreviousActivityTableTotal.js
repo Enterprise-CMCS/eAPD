@@ -11,7 +11,7 @@ const ApdPreviousActivityTableMMIS = ({ totals }) => {
   return (
     <Fragment>
       <h3>Grand totals: Federal HIT, HIE, MMIS</h3>
-      <div className="table-frozen-wrapper table-frozen-narrow-header mt3">
+      <div className="table-frozen-wrapper table-frozen-narrow-header">
         <div className="table-frozen-scroller">
           <table
             className="table-cms table-fixed table-frozen-left-pane"
