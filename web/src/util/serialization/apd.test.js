@@ -63,8 +63,7 @@ describe('APD serializer', () => {
         pointsOfContact: 'people to talk to',
         previousActivityExpenses: [
           {
-            hie: 'pa hie',
-            hit: 'pa hit',
+            hithie: 'pa hithie',
             mmis: 'pa mmis',
             year: '1431'
           }
@@ -108,8 +107,7 @@ describe('APD serializer', () => {
         pointsOfContact: 'people to talk to',
         previousActivityExpenses: {
           '1431': {
-            hie: 'pa hie',
-            hit: 'pa hit',
+            hithie: 'pa hithie',
             mmis: 'pa mmis'
           }
         },
@@ -154,8 +152,7 @@ describe('APD serializer', () => {
         pointsOfContact: 'people to talk to',
         previousActivityExpenses: {
           '1431': {
-            hie: 'pa hie',
-            hit: 'pa hit',
+            hithie: 'pa hithie',
             mmis: 'pa mmis'
           }
         },
@@ -221,8 +218,7 @@ describe('APD serializer', () => {
         pointsOfContact: 'people to talk to',
         previousActivityExpenses: [
           {
-            hie: 'pa hie',
-            hit: 'pa hit',
+            hithie: 'pa hithie',
             mmis: 'pa mmis',
             year: '1431'
           }
