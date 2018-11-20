@@ -56,7 +56,21 @@ describe('budget reducer', () => {
       budget(null, {
         type: UPDATE_BUDGET,
         state: {
-          apd: { data: { years: ['1931', '1932', '1933'] } },
+          apd: {
+            data: {
+              keyPersonnel: [
+                {
+                  costs: { '1931': 150, '1932': 151, '1933': 152 },
+                  hasCosts: false
+                },
+                {
+                  costs: { '1931': 150, '1932': 1500, '1933': 15000 },
+                  hasCosts: true
+                }
+              ],
+              years: ['1931', '1932', '1933']
+            }
+          },
           activities: {
             byKey: {
               '1': {
@@ -165,7 +179,7 @@ describe('budget reducer', () => {
               '3': {
                 id: 3,
                 key: '3',
-                name: 'hitOne',
+                name: 'Program Administration',
                 fundingSource: 'HIT',
                 years: ['1931', '1932', '1933'],
                 costAllocation: {
@@ -712,35 +726,35 @@ describe('budget reducer', () => {
         }
       },
       combined: {
-        '1931': { federal: 11010, state: 1890, total: 13900 },
-        '1932': { federal: 11580, state: 1620, total: 14200 },
-        '1933': { federal: 10620, state: 1180, total: 12800 },
-        total: { federal: 33210, state: 4690, total: 40900 }
+        '1931': { federal: 11145, state: 1905, total: 14050 },
+        '1932': { federal: 12930, state: 1770, total: 15700 },
+        '1933': { federal: 24120, state: 2680, total: 27800 },
+        total: { federal: 48195, state: 6355, total: 57550 }
       },
       federalShareByFFYQuarter: {
         hitAndHie: {
           '1931': {
-            '1': { contractors: 1530, state: 1548, combined: 3078 },
-            '2': { contractors: 810, state: 1422, combined: 2232 },
-            '3': { contractors: 900, state: 2214, combined: 3114 },
-            '4': { contractors: 360, state: 1476, combined: 1836 },
-            subtotal: { contractors: 3600, state: 6660, combined: 10260 }
+            '1': { contractors: 1530, state: 1561, combined: 3091 },
+            '2': { contractors: 810, state: 1449, combined: 2259 },
+            '3': { contractors: 900, state: 2255, combined: 3155 },
+            '4': { contractors: 360, state: 1530, combined: 1890 },
+            subtotal: { contractors: 3600, state: 6795, combined: 10395 }
           },
           '1932': {
-            '1': { contractors: 1710, state: 1710, combined: 3420 },
-            '2': { contractors: 720, state: 1530, combined: 2250 },
-            '3': { contractors: 810, state: 1890, combined: 2700 },
-            '4': { contractors: 360, state: 1350, combined: 1710 },
-            subtotal: { contractors: 3600, state: 6480, combined: 10080 }
+            '1': { contractors: 1710, state: 2047, combined: 3757 },
+            '2': { contractors: 720, state: 1867, combined: 2587 },
+            '3': { contractors: 810, state: 2228, combined: 3038 },
+            '4': { contractors: 360, state: 1688, combined: 2048 },
+            subtotal: { contractors: 3600, state: 7830, combined: 11430 }
           },
           '1933': {
-            '1': { contractors: 1320, state: 783, combined: 2103 },
-            '2': { contractors: 930, state: 1086, combined: 2016 },
-            '3': { contractors: 720, state: 1749, combined: 2469 },
-            '4': { contractors: 450, state: 1812, combined: 2262 },
-            subtotal: { contractors: 3420, state: 5430, combined: 8850 }
+            '1': { contractors: 1320, state: 4833, combined: 6153 },
+            '2': { contractors: 930, state: 3786, combined: 4716 },
+            '3': { contractors: 720, state: 7149, combined: 7869 },
+            '4': { contractors: 450, state: 3162, combined: 3612 },
+            subtotal: { contractors: 3420, state: 18930, combined: 22350 }
           },
-          total: { contractors: 10620, state: 18570, combined: 29190 }
+          total: { contractors: 10620, state: 33555, combined: 44175 }
         },
         mmis: {
           '1931': {
@@ -795,10 +809,10 @@ describe('budget reducer', () => {
       },
       hit: {
         combined: {
-          '1931': { federal: 2700, state: 300, total: 3000 },
-          '1932': { federal: 2700, state: 300, total: 3000 },
-          '1933': { federal: 1800, state: 200, total: 3000 },
-          total: { federal: 7200, state: 800, total: 9000 }
+          '1931': { federal: 2835, state: 315, total: 3150 },
+          '1932': { federal: 4050, state: 450, total: 4500 },
+          '1933': { federal: 15300, state: 1700, total: 18000 },
+          total: { federal: 22185, state: 2465, total: 25650 }
         },
         contractors: {
           '1931': { federal: 900, state: 100, total: 1000 },
@@ -813,18 +827,18 @@ describe('budget reducer', () => {
           total: { federal: 2400, state: 267, total: 3000 }
         },
         statePersonnel: {
-          '1931': { federal: 900, state: 100, total: 1000 },
-          '1932': { federal: 900, state: 100, total: 1000 },
-          '1933': { federal: 600, state: 67, total: 1000 },
-          total: { federal: 2400, state: 267, total: 3000 }
+          '1931': { federal: 1035, state: 115, total: 1150 },
+          '1932': { federal: 2250, state: 250, total: 2500 },
+          '1933': { federal: 14100, state: 1567, total: 16000 },
+          total: { federal: 17385, state: 1932, total: 19650 }
         }
       },
       hitAndHie: {
         combined: {
-          '1931': { federal: 10260, state: 1140, total: 11400 },
-          '1932': { federal: 10080, state: 1120, total: 11200 },
-          '1933': { federal: 8730, state: 970, total: 10700 },
-          total: { federal: 29070, state: 3230, total: 33300 }
+          '1931': { federal: 10395, state: 1155, total: 11550 },
+          '1932': { federal: 11430, state: 1270, total: 12700 },
+          '1933': { federal: 22230, state: 2470, total: 25700 },
+          total: { federal: 44055, state: 4895, total: 49950 }
         },
         contractors: {
           '1931': { federal: 3600, state: 400, total: 4000 },
@@ -839,10 +853,10 @@ describe('budget reducer', () => {
           total: { federal: 10500, state: 1167, total: 12000 }
         },
         statePersonnel: {
-          '1931': { federal: 3060, state: 340, total: 3400 },
-          '1932': { federal: 2880, state: 320, total: 3200 },
-          '1933': { federal: 2130, state: 237, total: 2700 },
-          total: { federal: 8070, state: 897, total: 9300 }
+          '1931': { federal: 3195, state: 355, total: 3550 },
+          '1932': { federal: 4230, state: 470, total: 4700 },
+          '1933': { federal: 15630, state: 1737, total: 17700 },
+          total: { federal: 23055, state: 2562, total: 25950 }
         }
       },
       mmis: {
@@ -942,7 +956,7 @@ describe('budget reducer', () => {
         },
         {
           id: 3,
-          name: 'hitOne',
+          name: 'Program Administration',
           fundingSource: 'HIT',
           data: {
             statePersonnel: {
