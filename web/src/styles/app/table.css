@@ -124,7 +124,8 @@
 
 .table-frozen-data tr > th:first-child,
 .table-frozen-data tr > td:first-child {
-  width: 140px; /* same as table-frozen-col-pane; for some reason just width doesn't work */
+  width: 140px; /* same as table-frozen-col-pane; only works on fixed tables */
+  min-width: 140px; /* all other tables */
 }
 
 /* overrides for tables with long or short header text
@@ -138,7 +139,8 @@
 }
 .table-frozen-wide-header .table-frozen-data tr > th:first-child,
 .table-frozen-wide-header .table-frozen-data tr > td:first-child {
-  width: 160px;
+  width: 160px; /* for fixed tables */
+  min-width: 160px; /* all other tables */
 }
 
 .table-frozen-narrow-header .table-frozen-left-pane {
@@ -150,5 +152,6 @@
 }
 .table-frozen-narrow-header .table-frozen-data tr > th:first-child,
 .table-frozen-narrow-header .table-frozen-data tr > td:first-child {
-  width: 90px;
+  width: 90px; /* for fixed tables */
+  min-width: 90px; /* all other tables */
 }
