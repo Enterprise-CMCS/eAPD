@@ -120,6 +120,8 @@
   visibility: hidden;
   width: 0;
   border-right: 0px; /* ie fix */
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .table-frozen-data tr > th:first-child,
