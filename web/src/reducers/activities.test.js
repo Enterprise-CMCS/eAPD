@@ -33,6 +33,7 @@ describe('activities reducer', () => {
     name: '',
     start: '',
     files: [],
+    totalCost: 0,
     years: { '1973': 0, '1974': 0 },
     hourly: {
       useHourly: false,

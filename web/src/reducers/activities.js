@@ -58,6 +58,7 @@ const newContractor = years => ({
   start: '',
   end: '',
   files: [],
+  totalCost: 0,
   years: arrToObj(years, contractorDefaultYear()),
   hourly: {
     useHourly: false,
@@ -291,23 +292,22 @@ const reducer = (state = initialState, action) => {
 
       // if switching to hourly, clear out yearly totals
       // if switch to yearly, clear out hourly numbers
-      const contractorResources = contractorsOld.map(
-        contractor =>
-          contractor.key !== contractorKey
-            ? contractor
-            : {
-                ...contractor,
-                ...(useHourly && {
-                  years: arrToObj(years, contractorDefaultYear())
-                }),
-                hourly: {
-                  ...contractor.hourly,
-                  useHourly,
-                  ...(!useHourly && {
-                    data: arrToObj(years, contractorDefaultHourly())
-                  })
-                }
+      const contractorResources = contractorsOld.map(contractor =>
+        contractor.key !== contractorKey
+          ? contractor
+          : {
+              ...contractor,
+              ...(useHourly && {
+                years: arrToObj(years, contractorDefaultYear())
+              }),
+              hourly: {
+                ...contractor.hourly,
+                useHourly,
+                ...(!useHourly && {
+                  data: arrToObj(years, contractorDefaultHourly())
+                })
               }
+            }
       );
 
       const updates = { byKey: { [key]: { contractorResources } } };

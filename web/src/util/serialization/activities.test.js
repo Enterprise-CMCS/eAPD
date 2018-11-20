@@ -77,6 +77,7 @@ describe('APD activity serializer', () => {
             description: 'desc 1',
             start: 'start 1',
             end: 'end 1',
+            totalCost: '123',
             files: [{ id: 'contractor 1 file' }],
             years: [
               { year: '2018', cost: '1000' },
@@ -94,6 +95,7 @@ describe('APD activity serializer', () => {
             description: 'desc 2',
             start: 'start 2',
             end: 'end 2',
+            totalCost: '321',
             files: [{ id: 'contractor 2 file' }],
             years: [
               { year: '2018', cost: '3000' },
@@ -260,6 +262,7 @@ describe('APD activity serializer', () => {
               desc: 'desc 1',
               start: 'start 1',
               end: 'end 1',
+              totalCost: 123,
               files: [
                 {
                   id: 'contractor 1 file',
@@ -282,6 +285,7 @@ describe('APD activity serializer', () => {
               desc: 'desc 2',
               start: 'start 2',
               end: 'end 2',
+              totalCost: 321,
               files: [
                 {
                   id: 'contractor 2 file',
@@ -435,6 +439,7 @@ describe('APD activity serializer', () => {
             desc: 'Writing code',
             start: 'green flag',
             end: 'checkered flag',
+            totalCost: 123,
             years: {
               '2009': 325
             },
@@ -486,6 +491,7 @@ describe('APD activity serializer', () => {
             description: 'Writing code',
             start: 'green flag',
             end: 'checkered flag',
+            totalCost: 123,
             years: [
               {
                 cost: 325,
