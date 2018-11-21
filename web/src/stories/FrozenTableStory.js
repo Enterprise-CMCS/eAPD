@@ -108,7 +108,7 @@ class FrozenTableStory extends Component {
       <h2>The basic structure to create this is as follows:</h2>
       <pre>
         <code>
-          <div className="table-frozen-wrapper">
+          {`<div className="table-frozen-wrapper">
             <div className="table-frozen-scroller">
               <table className="table-cms table-frozen-left-pane" aria-hidden="true">
                 <thead>
