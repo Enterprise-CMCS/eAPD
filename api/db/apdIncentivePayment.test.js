@@ -92,21 +92,21 @@ tap.test('apd incentive payments data model', async tests => {
   tests.test('overrides toJSON method', async test => {
     const self = { get: sinon.stub(), related: sinon.stub() };
     self.get.returns('--- unknown field ---');
-    self.get.withArgs('q1_eh_payment').returns('1');
+    self.get.withArgs('q1_eh_payment').returns(1);
     self.get.withArgs('q1_eh_count').returns(2);
-    self.get.withArgs('q1_ep_payment').returns('3');
+    self.get.withArgs('q1_ep_payment').returns(3);
     self.get.withArgs('q1_ep_count').returns(4);
-    self.get.withArgs('q2_eh_payment').returns('10');
+    self.get.withArgs('q2_eh_payment').returns(10);
     self.get.withArgs('q2_eh_count').returns(20);
-    self.get.withArgs('q2_ep_payment').returns('30');
+    self.get.withArgs('q2_ep_payment').returns(30);
     self.get.withArgs('q2_ep_count').returns(40);
-    self.get.withArgs('q3_eh_payment').returns('100');
+    self.get.withArgs('q3_eh_payment').returns(100);
     self.get.withArgs('q3_eh_count').returns(200);
-    self.get.withArgs('q3_ep_payment').returns('300');
+    self.get.withArgs('q3_ep_payment').returns(300);
     self.get.withArgs('q3_ep_count').returns(400);
-    self.get.withArgs('q4_eh_payment').returns('1000');
+    self.get.withArgs('q4_eh_payment').returns(1000);
     self.get.withArgs('q4_eh_count').returns(2000);
-    self.get.withArgs('q4_ep_payment').returns('3000');
+    self.get.withArgs('q4_ep_payment').returns(3000);
     self.get.withArgs('q4_ep_count').returns(4000);
     self.get.withArgs('year').returns('year');
 
