@@ -1,35 +1,30 @@
 title: Program Summary
 helpText: >-
-  Provide an introduction for the state program. Include context for this
-  funding request by providing information such as current size of program,
+  Provide an introduction to the state program. Include context for this
+  funding request by providing information such as current size,
   future vision, and how the program is positioned within the state. This
   information is similar to the content from the IAPD executive summary
   template section.
 overview:
   title: Program Overview
-  helpText: >-
-    Provide a high level summary of the state program including history,
-    and future vision. Include history and summary of future vision of the
-    state program.
-  reminder: >-
-
   yearsCovered: Choose the federal fiscal year(s) this APD covers.
 
 introduction:
   title: Program Introduction
   helpText: >-
-    Provide an introduction for the program including context, history, and the state's future vision.
+    Provide a high-level introduction to the state program. Include the history and context of
+    the program and the state’s future vision for it.
 
 hit:
   title: HIT Overview
   helpText: >-
     Briefly summarize planned HIT funded activities contained within this APD.
-  reminder: >-
 
 hie:
   title: HIE Overview
   helpText: >-
-    Summarize planned HIE funded activities within this APD.
+    Summarize planned HIE-funded activities within this APD. If
+    there are no HIE activities, skip this section. Please include:
 
     (1) Description of the state's HIE approach (statewide, sub-state
     health information office (HIOs), etc.);
@@ -40,14 +35,12 @@ hie:
 
     (4) The role of state government in governance and policy-setting.
   reminder: >-
-    CMS recommends states connect to regional CMS HITECH contacts prior to
+    CMS recommends that states connect with regional CMS HITECH contacts prior to
     developing HIE funding request. HIE funding requests are complex. Early
-    consultation with CMS facilitates a more efficient approval process. (If
-    there are no HIE activities, skip this section.)
+    consultation with CMS facilitates a more efficient approval process.
 
 mmis:
   title: MMIS Overview
   helpText: >-
     Briefly summarize planned MMIS funded activities contained within this APD.
-  reminder: >-
     If there are no MMIS activities, skip this section.
