@@ -67,10 +67,11 @@ const PersonnelForm = ({
       <Textarea
         name={`state-person-${person.key}-desc`}
         label={t('activities.statePersonnel.labels.desc')}
-        rows="3"
+        rows="7"
         value={person.desc}
         onChange={handleChange(idx, 'desc')}
         wrapperClass="md-col-7 lg-col-6"
+        className="m0 textarea textarea-m"
         hideLabel
       />
     </div>
