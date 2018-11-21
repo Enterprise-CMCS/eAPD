@@ -127,7 +127,7 @@ export const fromAPI = (activityAPI, years) => {
       years: c.years.reduce(
         (acc, y) => ({
           ...acc,
-          [y.year]: +y.cost
+          [y.year]: y.cost
         }),
         {}
       ),
@@ -165,7 +165,7 @@ export const fromAPI = (activityAPI, years) => {
       years: e.entries.reduce(
         (acc, y) => ({
           ...acc,
-          [y.year]: +y.amount
+          [y.year]: y.amount
         }),
         {}
       )

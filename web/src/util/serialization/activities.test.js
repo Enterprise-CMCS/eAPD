@@ -76,10 +76,7 @@ describe('APD activity serializer', () => {
             start: 'start 1',
             end: 'end 1',
             files: [{ id: 'contractor 1 file' }],
-            years: [
-              { year: '2018', cost: '1000' },
-              { year: '2019', cost: '2000' }
-            ],
+            years: [{ year: '2018', cost: 1000 }, { year: '2019', cost: 2000 }],
             useHourly: false,
             hourlyData: [
               { year: '2018', hours: 10, rate: 100 },
@@ -93,10 +90,7 @@ describe('APD activity serializer', () => {
             start: 'start 2',
             end: 'end 2',
             files: [{ id: 'contractor 2 file' }],
-            years: [
-              { year: '2018', cost: '3000' },
-              { year: '2019', cost: '4000' }
-            ],
+            years: [{ year: '2018', cost: 3000 }, { year: '2019', cost: 4000 }],
             useHourly: true,
             hourlyData: [
               { year: '2018', hours: 30, rate: 300 },
