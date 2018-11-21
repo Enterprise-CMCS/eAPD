@@ -78,8 +78,7 @@ const incentivePaymentsSerializer = {
 const previousActivityExpensesReducer = (previous, year) => ({
   ...previous,
   [year.year]: {
-    hie: year.hie,
-    hit: year.hit,
+    hithie: year.hithie,
     mmis: year.mmis
   }
 });
@@ -121,8 +120,7 @@ export const toAPI = (
     previousActivityExpenses: Object.entries(previousActivityExpenses).map(
       ([year, o]) => ({
         year,
-        hie: o.hie,
-        hit: o.hit,
+        hithie: o.hithie,
         mmis: o.mmis
       })
     )
