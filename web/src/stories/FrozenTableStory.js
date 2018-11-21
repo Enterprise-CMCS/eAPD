@@ -138,7 +138,7 @@ class FrozenTableStory extends Component {
                 [your table header and body go here]
               </table>
             </div>
-          </div>
+          </div>`}
         </code>
       </pre>
       <p>
