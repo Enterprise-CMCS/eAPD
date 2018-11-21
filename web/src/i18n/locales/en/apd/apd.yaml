@@ -18,7 +18,7 @@ introduction:
 hit:
   title: HIT Overview
   helpText: >-
-    Briefly summarize planned HIT funded activities contained within this APD.
+    Briefly summarize planned HIT-funded activities contained within this APD.
 
 hie:
   title: HIE Overview
@@ -42,5 +42,5 @@ hie:
 mmis:
   title: MMIS Overview
   helpText: >-
-    Briefly summarize planned MMIS funded activities contained within this APD.
+    Briefly summarize planned MMIS-funded activities contained within this APD.
     If there are no MMIS activities, skip this section.
