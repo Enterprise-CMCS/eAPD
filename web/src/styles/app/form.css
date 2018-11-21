@@ -33,3 +33,28 @@
 .select-condensed {
   height: 2rem;
 }
+
+.rdw-editor-main .DraftEditor-root {
+  min-height: initial; /* override of plugin */
+}
+
+/* add resizing capability to divs of react-draft-wysiwyg plugin */
+.public-DraftEditor-content {
+  resize: vertical;
+}
+
+/* rte-* classes are for react-draft-wysiwyg plugin */
+.textarea-l,
+.rte-textarea-l .public-DraftEditor-content {
+  min-height: 25rem; /* 400px; roughly equal to 14 rows */
+}
+
+.textarea-m,
+.rte-textarea-m .public-DraftEditor-content {
+  min-height: 12.5rem; /* 200px; roughly equal to 7 rows */
+}
+
+.textarea-sm,
+.rte-textarea-sm .public-DraftEditor-content {
+  min-height: 6.25rem; /* 100px; roughly equal to 3 rows */
+}
