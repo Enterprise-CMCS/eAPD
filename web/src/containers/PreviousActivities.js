@@ -22,6 +22,7 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
       <RichText
         content={previousActivitySummary}
         onSync={html => updateApd({ previousActivitySummary: html })}
+        editorClassName="rte-textarea-l"
       />
     </Subsection>
     <Subsection
