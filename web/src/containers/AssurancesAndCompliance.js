@@ -96,6 +96,8 @@ class AssurancesAndCompliance extends Component {
                           hideLabel
                           value={explanation}
                           onChange={this.handleExplanationChange(name, index)}
+                          className="m0 textarea textarea-sm"
+                          rows="3"
                         />
                       </div>
                     )}
