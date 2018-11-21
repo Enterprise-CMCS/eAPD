@@ -142,7 +142,7 @@ class FrozenTableStory extends Component {
         </code>
       </pre>
       <p>
-        Essentially, this renders a second table on top of the first one. The second table is what creates the scrollable sticky pane. In order to get the height of the columns in the second table right, we render the first column of content, also (this is especially helpful when the table contains input elements).
+        Essentially, this renders a table of just headers on top of the full table.  The first table is what creates the scrollable sticky pane.  In order to get the height of the columns in the header table right, we render the first column of real content, also (this is especially helpful when the table contains input elements).
       </p>
       <p>
         If you have a table with a very wordy or terse set of headers in the left pane, you can use `table-frozen-wide-header` or `table-frozen-narrow-header` on the `table-frozen-wrapper` class to change the constraints.
