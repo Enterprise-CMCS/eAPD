@@ -1,5 +1,8 @@
 instruction:
   heading: Instruction heading
   short: Short instruction
-  detail: Instruction detail here
-  helpText: this is help text!
+  detail: Instruction ***detail*** here
+  helpText: >-
+    this is help text!
+
+    it covers several lines
