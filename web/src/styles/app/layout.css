@@ -68,3 +68,11 @@ footer {
   top: 58px; /* height of sticky parent header */
   z-index: 2; /* 1 less than parent */
 }
+
+.overflow-x {
+  overflow-x: scroll;
+}
+
+.overflow-y {
+  overflow-y: scroll;
+}

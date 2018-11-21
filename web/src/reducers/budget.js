@@ -149,7 +149,13 @@ const buildBudget = bigState => {
           medicaidShare: 0,
           state: 0,
           total: 0
-        }))
+        })),
+        total: {
+          federal: 0,
+          medicaidShare: 0,
+          state: 0,
+          total: 0
+        }
       },
       quarterlyFFP: {
         ...arrToObj(years, () => ({
@@ -344,6 +350,11 @@ const buildBudget = bigState => {
       activityCostByFFY[year].federal = costShares.fedShare;
       activityCostByFFY[year].state = costShares.stateShare;
       activityCostByFFY[year].medicaidShare = totalMedicaidShare;
+
+      activityCostByFFY.total.total += totalCost;
+      activityCostByFFY.total.federal += costShares.fedShare;
+      activityCostByFFY.total.state += costShares.stateShare;
+      activityCostByFFY.total.medicaidShare += totalMedicaidShare;
 
       /**
        * Update the running totals for the various cost categories, subtotals,

@@ -266,15 +266,10 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <div
-          className="mb3 overflow-auto"
+          className="mb3 overflow-x"
         >
           <table
-            className="table-cms table-fixed"
-            style={
-              Object {
-                "minWidth": 700,
-              }
-            }
+            className="table-cms"
           >
             <thead>
               <tr>
@@ -466,15 +461,10 @@ ShallowWrapper {
           </table>
         </div>,
         <div
-          className="overflow-auto"
+          className="overflow-x"
         >
           <table
-            className="table-cms table-fixed"
-            style={
-              Object {
-                "minWidth": 700,
-              }
-            }
+            className="table-cms"
           >
             <thead>
               <tr>
@@ -718,12 +708,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": <table
-            className="table-cms table-fixed"
-            style={
-              Object {
-                "minWidth": 700,
-              }
-            }
+            className="table-cms"
           >
             <thead>
               <tr>
@@ -913,7 +898,7 @@ ShallowWrapper {
               </tr>
             </tbody>
           </table>,
-          "className": "mb3 overflow-auto",
+          "className": "mb3 overflow-x",
         },
         "ref": null,
         "rendered": Object {
@@ -1110,10 +1095,7 @@ ShallowWrapper {
                 </tr>
               </tbody>,
             ],
-            "className": "table-cms table-fixed",
-            "style": Object {
-              "minWidth": 700,
-            },
+            "className": "table-cms",
           },
           "ref": null,
           "rendered": Array [
@@ -2021,12 +2003,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": <table
-            className="table-cms table-fixed"
-            style={
-              Object {
-                "minWidth": 700,
-              }
-            }
+            className="table-cms"
           >
             <thead>
               <tr>
@@ -2259,7 +2236,7 @@ ShallowWrapper {
               </tr>
             </tbody>
           </table>,
-          "className": "overflow-auto",
+          "className": "overflow-x",
         },
         "ref": null,
         "rendered": Object {
@@ -2499,10 +2476,7 @@ ShallowWrapper {
                 </tr>
               </tbody>,
             ],
-            "className": "table-cms table-fixed",
-            "style": Object {
-              "minWidth": 700,
-            },
+            "className": "table-cms",
           },
           "ref": null,
           "rendered": Array [
@@ -3613,15 +3587,10 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <div
-            className="mb3 overflow-auto"
+            className="mb3 overflow-x"
           >
             <table
-              className="table-cms table-fixed"
-              style={
-                Object {
-                  "minWidth": 700,
-                }
-              }
+              className="table-cms"
             >
               <thead>
                 <tr>
@@ -3813,15 +3782,10 @@ ShallowWrapper {
             </table>
           </div>,
           <div
-            className="overflow-auto"
+            className="overflow-x"
           >
             <table
-              className="table-cms table-fixed"
-              style={
-                Object {
-                  "minWidth": 700,
-                }
-              }
+              className="table-cms"
             >
               <thead>
                 <tr>
@@ -4065,12 +4029,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": <table
-              className="table-cms table-fixed"
-              style={
-                Object {
-                  "minWidth": 700,
-                }
-              }
+              className="table-cms"
             >
               <thead>
                 <tr>
@@ -4260,7 +4219,7 @@ ShallowWrapper {
                 </tr>
               </tbody>
             </table>,
-            "className": "mb3 overflow-auto",
+            "className": "mb3 overflow-x",
           },
           "ref": null,
           "rendered": Object {
@@ -4457,10 +4416,7 @@ ShallowWrapper {
                   </tr>
                 </tbody>,
               ],
-              "className": "table-cms table-fixed",
-              "style": Object {
-                "minWidth": 700,
-              },
+              "className": "table-cms",
             },
             "ref": null,
             "rendered": Array [
@@ -5368,12 +5324,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": <table
-              className="table-cms table-fixed"
-              style={
-                Object {
-                  "minWidth": 700,
-                }
-              }
+              className="table-cms"
             >
               <thead>
                 <tr>
@@ -5606,7 +5557,7 @@ ShallowWrapper {
                 </tr>
               </tbody>
             </table>,
-            "className": "overflow-auto",
+            "className": "overflow-x",
           },
           "ref": null,
           "rendered": Object {
@@ -5846,10 +5797,7 @@ ShallowWrapper {
                   </tr>
                 </tbody>,
               ],
-              "className": "table-cms table-fixed",
-              "style": Object {
-                "minWidth": 700,
-              },
+              "className": "table-cms",
             },
             "ref": null,
             "rendered": Array [
