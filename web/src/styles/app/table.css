@@ -60,6 +60,10 @@
   font-weight: 300;
 }
 
+.table-cms.centered-headers th {
+  text-align: center;
+}
+
 .table-cms td {
   background-color: #f3f8fc;
 }
@@ -78,4 +82,78 @@
 .align-middle > th,
 .align-middle > td {
   vertical-align: middle;
+}
+
+.table-frozen-wrapper {
+  position: relative;
+}
+
+.table-frozen-scroller {
+  overflow-x: scroll;
+  overflow-y: visible;
+}
+
+/* spacer only */
+.table-frozen-null-cell {
+  color: #dae9f7; /* a character is necessary in these cells to match spacing */
+}
+
+.table-frozen-left-pane {
+  position: absolute;
+  max-width: 140px; /* no larger than visible element */
+}
+
+.table-frozen-left-pane td,
+.table-frozen-left-pane th {
+  border-right: 4px solid #fff;
+  vertical-align: inherit;
+}
+
+.table-frozen-left-pane th,
+.table-frozen-left-pane td:first-child {
+  width: 140px; /* arbitrary; must be the same as the first-child width */
+}
+
+/* Include a single row of data to ensure size of visible elements is correct */
+.table-frozen-left-pane td:nth-child(2),
+.table-frozen-left-pane .table-frozen-spacer-cell {
+  visibility: hidden;
+  width: 0;
+  border-right: 0px; /* ie fix */
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.table-frozen-data tr > th:first-child,
+.table-frozen-data tr > td:first-child {
+  width: 140px; /* same as table-frozen-col-pane; only works on fixed tables */
+  min-width: 140px; /* all other tables */
+}
+
+/* overrides for tables with long or short header text
+ * should be applied to .table-frozen-wrapper element */
+.table-frozen-wide-header .table-frozen-left-pane {
+  max-width: 160px;
+}
+.table-frozen-wide-header .table-frozen-left-pane th,
+.table-frozen-wide-header .table-frozen-left-pane td:first-child {
+  width: 160px;
+}
+.table-frozen-wide-header .table-frozen-data tr > th:first-child,
+.table-frozen-wide-header .table-frozen-data tr > td:first-child {
+  width: 160px; /* for fixed tables */
+  min-width: 160px; /* all other tables */
+}
+
+.table-frozen-narrow-header .table-frozen-left-pane {
+  max-width: 90px;
+}
+.table-frozen-narrow-header .table-frozen-left-pane th,
+.table-frozen-narrow-header .table-frozen-left-pane td:first-child {
+  width: 90px;
+}
+.table-frozen-narrow-header .table-frozen-data tr > th:first-child,
+.table-frozen-narrow-header .table-frozen-data tr > td:first-child {
+  width: 90px; /* for fixed tables */
+  min-width: 90px; /* all other tables */
 }

@@ -4156,22 +4156,12 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <table
-        className="table-cms table-fixed"
-        style={
-          Object {
-            "minWidth": 1000,
-          }
-        }
+        className="table-cms"
       >
         <thead>
           <tr>
             <th
               id="summary-budget-null1"
-              style={
-                Object {
-                  "width": 180,
-                }
-              }
             />
             <th
               className="center"
@@ -4204,19 +4194,19 @@ ShallowWrapper {
             />
             <UNDEFINED>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id="summary-budget-fy-1-total"
               >
                 Total
               </th>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id="summary-budget-fy-1-federal"
               >
                 Federal
               </th>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id="summary-budget-fy-1-state"
               >
                 State
@@ -4224,19 +4214,19 @@ ShallowWrapper {
             </UNDEFINED>
             <UNDEFINED>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id="summary-budget-fy-2-total"
               >
                 Total
               </th>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id="summary-budget-fy-2-federal"
               >
                 Federal
               </th>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id="summary-budget-fy-2-state"
               >
                 State
@@ -4244,19 +4234,19 @@ ShallowWrapper {
             </UNDEFINED>
             <UNDEFINED>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id="summary-budget-fy-total-total"
               >
                 Total
               </th>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id="summary-budget-fy-total-federal"
               >
                 Federal
               </th>
               <th
-                className="col-4 right-align"
+                className="right-align"
                 id="summary-budget-fy-total-state"
               >
                 State
@@ -4379,7 +4369,7 @@ ShallowWrapper {
           </tr>
         </tbody>
       </table>,
-      "className": "overflow-auto",
+      "className": "overflow-x",
     },
     "ref": null,
     "rendered": Object {
@@ -4392,11 +4382,6 @@ ShallowWrapper {
             <tr>
               <th
                 id="summary-budget-null1"
-                style={
-                  Object {
-                    "width": 180,
-                  }
-                }
               />
               <th
                 className="center"
@@ -4429,19 +4414,19 @@ ShallowWrapper {
               />
               <UNDEFINED>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-1-total"
                 >
                   Total
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-1-federal"
                 >
                   Federal
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-1-state"
                 >
                   State
@@ -4449,19 +4434,19 @@ ShallowWrapper {
               </UNDEFINED>
               <UNDEFINED>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-2-total"
                 >
                   Total
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-2-federal"
                 >
                   Federal
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-2-state"
                 >
                   State
@@ -4469,19 +4454,19 @@ ShallowWrapper {
               </UNDEFINED>
               <UNDEFINED>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-total-total"
                 >
                   Total
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-total-federal"
                 >
                   Federal
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-total-state"
                 >
                   State
@@ -4604,10 +4589,7 @@ ShallowWrapper {
             </tr>
           </tbody>,
         ],
-        "className": "table-cms table-fixed",
-        "style": Object {
-          "minWidth": 1000,
-        },
+        "className": "table-cms",
       },
       "ref": null,
       "rendered": Array [
@@ -4620,11 +4602,6 @@ ShallowWrapper {
               <tr>
                 <th
                   id="summary-budget-null1"
-                  style={
-                    Object {
-                      "width": 180,
-                    }
-                  }
                 />
                 <th
                   className="center"
@@ -4657,19 +4634,19 @@ ShallowWrapper {
                 />
                 <UNDEFINED>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-1-total"
                   >
                     Total
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-1-federal"
                   >
                     Federal
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-1-state"
                   >
                     State
@@ -4677,19 +4654,19 @@ ShallowWrapper {
                 </UNDEFINED>
                 <UNDEFINED>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-2-total"
                   >
                     Total
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-2-federal"
                   >
                     Federal
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-2-state"
                   >
                     State
@@ -4697,19 +4674,19 @@ ShallowWrapper {
                 </UNDEFINED>
                 <UNDEFINED>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-total-total"
                   >
                     Total
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-total-federal"
                   >
                     Federal
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-total-state"
                   >
                     State
@@ -4728,11 +4705,6 @@ ShallowWrapper {
                 "children": Array [
                   <th
                     id="summary-budget-null1"
-                    style={
-                      Object {
-                        "width": 180,
-                      }
-                    }
                   />,
                   Array [
                     <th
@@ -4770,9 +4742,6 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "id": "summary-budget-null1",
-                    "style": Object {
-                      "width": 180,
-                    },
                   },
                   "ref": null,
                   "rendered": null,
@@ -4853,19 +4822,19 @@ ShallowWrapper {
                   Array [
                     <UNDEFINED>
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-1-total"
                       >
                         Total
                       </th>
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-1-federal"
                       >
                         Federal
                       </th>
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-1-state"
                       >
                         State
@@ -4873,19 +4842,19 @@ ShallowWrapper {
                     </UNDEFINED>,
                     <UNDEFINED>
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-2-total"
                       >
                         Total
                       </th>
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-2-federal"
                       >
                         Federal
                       </th>
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-2-state"
                       >
                         State
@@ -4893,19 +4862,19 @@ ShallowWrapper {
                     </UNDEFINED>,
                     <UNDEFINED>
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-total-total"
                       >
                         Total
                       </th>
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-total-federal"
                       >
                         Federal
                       </th>
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-total-state"
                       >
                         State
@@ -4934,19 +4903,19 @@ ShallowWrapper {
                   "props": Object {
                     "children": Array [
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-1-total"
                       >
                         Total
                       </th>,
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-1-federal"
                       >
                         Federal
                       </th>,
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-1-state"
                       >
                         State
@@ -4961,7 +4930,7 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": "Total",
-                        "className": "col-4 right-align",
+                        "className": "right-align",
                         "id": "summary-budget-fy-1-total",
                       },
                       "ref": null,
@@ -4974,7 +4943,7 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": "Federal",
-                        "className": "col-4 right-align",
+                        "className": "right-align",
                         "id": "summary-budget-fy-1-federal",
                       },
                       "ref": null,
@@ -4987,7 +4956,7 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": "State",
-                        "className": "col-4 right-align",
+                        "className": "right-align",
                         "id": "summary-budget-fy-1-state",
                       },
                       "ref": null,
@@ -5004,19 +4973,19 @@ ShallowWrapper {
                   "props": Object {
                     "children": Array [
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-2-total"
                       >
                         Total
                       </th>,
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-2-federal"
                       >
                         Federal
                       </th>,
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-2-state"
                       >
                         State
@@ -5031,7 +5000,7 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": "Total",
-                        "className": "col-4 right-align",
+                        "className": "right-align",
                         "id": "summary-budget-fy-2-total",
                       },
                       "ref": null,
@@ -5044,7 +5013,7 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": "Federal",
-                        "className": "col-4 right-align",
+                        "className": "right-align",
                         "id": "summary-budget-fy-2-federal",
                       },
                       "ref": null,
@@ -5057,7 +5026,7 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": "State",
-                        "className": "col-4 right-align",
+                        "className": "right-align",
                         "id": "summary-budget-fy-2-state",
                       },
                       "ref": null,
@@ -5074,19 +5043,19 @@ ShallowWrapper {
                   "props": Object {
                     "children": Array [
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-total-total"
                       >
                         Total
                       </th>,
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-total-federal"
                       >
                         Federal
                       </th>,
                       <th
-                        className="col-4 right-align"
+                        className="right-align"
                         id="summary-budget-fy-total-state"
                       >
                         State
@@ -5101,7 +5070,7 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": "Total",
-                        "className": "col-4 right-align",
+                        "className": "right-align",
                         "id": "summary-budget-fy-total-total",
                       },
                       "ref": null,
@@ -5114,7 +5083,7 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": "Federal",
-                        "className": "col-4 right-align",
+                        "className": "right-align",
                         "id": "summary-budget-fy-total-federal",
                       },
                       "ref": null,
@@ -5127,7 +5096,7 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": "State",
-                        "className": "col-4 right-align",
+                        "className": "right-align",
                         "id": "summary-budget-fy-total-state",
                       },
                       "ref": null,
@@ -5606,22 +5575,12 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <table
-          className="table-cms table-fixed"
-          style={
-            Object {
-              "minWidth": 1000,
-            }
-          }
+          className="table-cms"
         >
           <thead>
             <tr>
               <th
                 id="summary-budget-null1"
-                style={
-                  Object {
-                    "width": 180,
-                  }
-                }
               />
               <th
                 className="center"
@@ -5654,19 +5613,19 @@ ShallowWrapper {
               />
               <UNDEFINED>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-1-total"
                 >
                   Total
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-1-federal"
                 >
                   Federal
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-1-state"
                 >
                   State
@@ -5674,19 +5633,19 @@ ShallowWrapper {
               </UNDEFINED>
               <UNDEFINED>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-2-total"
                 >
                   Total
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-2-federal"
                 >
                   Federal
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-2-state"
                 >
                   State
@@ -5694,19 +5653,19 @@ ShallowWrapper {
               </UNDEFINED>
               <UNDEFINED>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-total-total"
                 >
                   Total
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-total-federal"
                 >
                   Federal
                 </th>
                 <th
-                  className="col-4 right-align"
+                  className="right-align"
                   id="summary-budget-fy-total-state"
                 >
                   State
@@ -5829,7 +5788,7 @@ ShallowWrapper {
             </tr>
           </tbody>
         </table>,
-        "className": "overflow-auto",
+        "className": "overflow-x",
       },
       "ref": null,
       "rendered": Object {
@@ -5842,11 +5801,6 @@ ShallowWrapper {
               <tr>
                 <th
                   id="summary-budget-null1"
-                  style={
-                    Object {
-                      "width": 180,
-                    }
-                  }
                 />
                 <th
                   className="center"
@@ -5879,19 +5833,19 @@ ShallowWrapper {
                 />
                 <UNDEFINED>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-1-total"
                   >
                     Total
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-1-federal"
                   >
                     Federal
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-1-state"
                   >
                     State
@@ -5899,19 +5853,19 @@ ShallowWrapper {
                 </UNDEFINED>
                 <UNDEFINED>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-2-total"
                   >
                     Total
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-2-federal"
                   >
                     Federal
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-2-state"
                   >
                     State
@@ -5919,19 +5873,19 @@ ShallowWrapper {
                 </UNDEFINED>
                 <UNDEFINED>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-total-total"
                   >
                     Total
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-total-federal"
                   >
                     Federal
                   </th>
                   <th
-                    className="col-4 right-align"
+                    className="right-align"
                     id="summary-budget-fy-total-state"
                   >
                     State
@@ -6054,10 +6008,7 @@ ShallowWrapper {
               </tr>
             </tbody>,
           ],
-          "className": "table-cms table-fixed",
-          "style": Object {
-            "minWidth": 1000,
-          },
+          "className": "table-cms",
         },
         "ref": null,
         "rendered": Array [
@@ -6070,11 +6021,6 @@ ShallowWrapper {
                 <tr>
                   <th
                     id="summary-budget-null1"
-                    style={
-                      Object {
-                        "width": 180,
-                      }
-                    }
                   />
                   <th
                     className="center"
@@ -6107,19 +6053,19 @@ ShallowWrapper {
                   />
                   <UNDEFINED>
                     <th
-                      className="col-4 right-align"
+                      className="right-align"
                       id="summary-budget-fy-1-total"
                     >
                       Total
                     </th>
                     <th
-                      className="col-4 right-align"
+                      className="right-align"
                       id="summary-budget-fy-1-federal"
                     >
                       Federal
                     </th>
                     <th
-                      className="col-4 right-align"
+                      className="right-align"
                       id="summary-budget-fy-1-state"
                     >
                       State
@@ -6127,19 +6073,19 @@ ShallowWrapper {
                   </UNDEFINED>
                   <UNDEFINED>
                     <th
-                      className="col-4 right-align"
+                      className="right-align"
                       id="summary-budget-fy-2-total"
                     >
                       Total
                     </th>
                     <th
-                      className="col-4 right-align"
+                      className="right-align"
                       id="summary-budget-fy-2-federal"
                     >
                       Federal
                     </th>
                     <th
-                      className="col-4 right-align"
+                      className="right-align"
                       id="summary-budget-fy-2-state"
                     >
                       State
@@ -6147,19 +6093,19 @@ ShallowWrapper {
                   </UNDEFINED>
                   <UNDEFINED>
                     <th
-                      className="col-4 right-align"
+                      className="right-align"
                       id="summary-budget-fy-total-total"
                     >
                       Total
                     </th>
                     <th
-                      className="col-4 right-align"
+                      className="right-align"
                       id="summary-budget-fy-total-federal"
                     >
                       Federal
                     </th>
                     <th
-                      className="col-4 right-align"
+                      className="right-align"
                       id="summary-budget-fy-total-state"
                     >
                       State
@@ -6178,11 +6124,6 @@ ShallowWrapper {
                   "children": Array [
                     <th
                       id="summary-budget-null1"
-                      style={
-                        Object {
-                          "width": 180,
-                        }
-                      }
                     />,
                     Array [
                       <th
@@ -6220,9 +6161,6 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "id": "summary-budget-null1",
-                      "style": Object {
-                        "width": 180,
-                      },
                     },
                     "ref": null,
                     "rendered": null,
@@ -6303,19 +6241,19 @@ ShallowWrapper {
                     Array [
                       <UNDEFINED>
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-1-total"
                         >
                           Total
                         </th>
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-1-federal"
                         >
                           Federal
                         </th>
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-1-state"
                         >
                           State
@@ -6323,19 +6261,19 @@ ShallowWrapper {
                       </UNDEFINED>,
                       <UNDEFINED>
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-2-total"
                         >
                           Total
                         </th>
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-2-federal"
                         >
                           Federal
                         </th>
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-2-state"
                         >
                           State
@@ -6343,19 +6281,19 @@ ShallowWrapper {
                       </UNDEFINED>,
                       <UNDEFINED>
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-total-total"
                         >
                           Total
                         </th>
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-total-federal"
                         >
                           Federal
                         </th>
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-total-state"
                         >
                           State
@@ -6384,19 +6322,19 @@ ShallowWrapper {
                     "props": Object {
                       "children": Array [
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-1-total"
                         >
                           Total
                         </th>,
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-1-federal"
                         >
                           Federal
                         </th>,
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-1-state"
                         >
                           State
@@ -6411,7 +6349,7 @@ ShallowWrapper {
                         "nodeType": "host",
                         "props": Object {
                           "children": "Total",
-                          "className": "col-4 right-align",
+                          "className": "right-align",
                           "id": "summary-budget-fy-1-total",
                         },
                         "ref": null,
@@ -6424,7 +6362,7 @@ ShallowWrapper {
                         "nodeType": "host",
                         "props": Object {
                           "children": "Federal",
-                          "className": "col-4 right-align",
+                          "className": "right-align",
                           "id": "summary-budget-fy-1-federal",
                         },
                         "ref": null,
@@ -6437,7 +6375,7 @@ ShallowWrapper {
                         "nodeType": "host",
                         "props": Object {
                           "children": "State",
-                          "className": "col-4 right-align",
+                          "className": "right-align",
                           "id": "summary-budget-fy-1-state",
                         },
                         "ref": null,
@@ -6454,19 +6392,19 @@ ShallowWrapper {
                     "props": Object {
                       "children": Array [
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-2-total"
                         >
                           Total
                         </th>,
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-2-federal"
                         >
                           Federal
                         </th>,
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-2-state"
                         >
                           State
@@ -6481,7 +6419,7 @@ ShallowWrapper {
                         "nodeType": "host",
                         "props": Object {
                           "children": "Total",
-                          "className": "col-4 right-align",
+                          "className": "right-align",
                           "id": "summary-budget-fy-2-total",
                         },
                         "ref": null,
@@ -6494,7 +6432,7 @@ ShallowWrapper {
                         "nodeType": "host",
                         "props": Object {
                           "children": "Federal",
-                          "className": "col-4 right-align",
+                          "className": "right-align",
                           "id": "summary-budget-fy-2-federal",
                         },
                         "ref": null,
@@ -6507,7 +6445,7 @@ ShallowWrapper {
                         "nodeType": "host",
                         "props": Object {
                           "children": "State",
-                          "className": "col-4 right-align",
+                          "className": "right-align",
                           "id": "summary-budget-fy-2-state",
                         },
                         "ref": null,
@@ -6524,19 +6462,19 @@ ShallowWrapper {
                     "props": Object {
                       "children": Array [
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-total-total"
                         >
                           Total
                         </th>,
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-total-federal"
                         >
                           Federal
                         </th>,
                         <th
-                          className="col-4 right-align"
+                          className="right-align"
                           id="summary-budget-fy-total-state"
                         >
                           State
@@ -6551,7 +6489,7 @@ ShallowWrapper {
                         "nodeType": "host",
                         "props": Object {
                           "children": "Total",
-                          "className": "col-4 right-align",
+                          "className": "right-align",
                           "id": "summary-budget-fy-total-total",
                         },
                         "ref": null,
@@ -6564,7 +6502,7 @@ ShallowWrapper {
                         "nodeType": "host",
                         "props": Object {
                           "children": "Federal",
-                          "className": "col-4 right-align",
+                          "className": "right-align",
                           "id": "summary-budget-fy-total-federal",
                         },
                         "ref": null,
@@ -6577,7 +6515,7 @@ ShallowWrapper {
                         "nodeType": "host",
                         "props": Object {
                           "children": "State",
-                          "className": "col-4 right-align",
+                          "className": "right-align",
                           "id": "summary-budget-fy-total-state",
                         },
                         "ref": null,
