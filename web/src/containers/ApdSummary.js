@@ -61,7 +61,7 @@ class ApdSummary extends Component {
             <RichText
               content={programOverview}
               onSync={this.syncRichText('programOverview')}
-              editorClassName="rte-textarea-xl"
+              editorClassName="rte-textarea-l"
             />
           </div>
           <div className="mb3">

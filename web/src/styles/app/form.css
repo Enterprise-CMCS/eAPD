@@ -44,11 +44,6 @@
 }
 
 /* rte-* classes are for react-draft-wysiwyg plugin */
-.textarea-xl,
-.rte-textarea-xl .public-DraftEditor-content {
-  min-height: 37.5rem; /* 600px; this feels too big */
-}
-
 .textarea-l,
 .rte-textarea-l .public-DraftEditor-content {
   min-height: 25rem; /* 400px; roughly equal to 14 rows */
