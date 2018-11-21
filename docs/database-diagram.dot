@@ -1,5 +1,5 @@
 /*
- * Graphviz of '<open file '<stdin>', mode 'r' at 0x7f1a8d35c0c0>', created 2018-10-24 15:48:36.571565
+ * Graphviz of '<open file '<stdin>', mode 'r' at 0x7f65403ed0c0>', created 2018-11-15 19:35:57.617540
  * Generated from https://github.com/rm-hull/sql_graphviz
  */
 digraph g { graph [ rankdir = "LR" ];
@@ -259,26 +259,14 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="id"><font face="Times-bold">id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="apd_id"><font face="Times-bold">apd_id</font>  <font color="#535353">integer</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="year"><font face="Times-bold">year</font>  <font color="#535353">integer</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="hie_federal_approved"><font face="Times-bold">hie_federal_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="hie_federal_actual"><font face="Times-bold">hie_federal_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="hie_state_approved"><font face="Times-bold">hie_state_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="hie_state_actual"><font face="Times-bold">hie_state_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="hit_federal_approved"><font face="Times-bold">hit_federal_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="hit_federal_actual"><font face="Times-bold">hit_federal_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="hit_state_approved"><font face="Times-bold">hit_state_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="hit_state_actual"><font face="Times-bold">hit_state_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_federal90_approved"><font face="Times-bold">mmis_federal90_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_federal90_actual"><font face="Times-bold">mmis_federal90_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_federal75_approved"><font face="Times-bold">mmis_federal75_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_federal75_actual"><font face="Times-bold">mmis_federal75_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_federal50_approved"><font face="Times-bold">mmis_federal50_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_federal50_actual"><font face="Times-bold">mmis_federal50_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_state10_approved"><font face="Times-bold">mmis_state10_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_state10_actual"><font face="Times-bold">mmis_state10_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_state25_approved"><font face="Times-bold">mmis_state25_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_state25_actual"><font face="Times-bold">mmis_state25_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_state50_approved"><font face="Times-bold">mmis_state50_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="mmis_state50_actual"><font face="Times-bold">mmis_state50_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="hithie_total_approved"><font face="Times-bold">hithie_total_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="hithie_federal_actual"><font face="Times-bold">hithie_federal_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis90_total_approved"><font face="Times-bold">mmis90_total_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis90_federal_actual"><font face="Times-bold">mmis90_federal_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis75_total_approved"><font face="Times-bold">mmis75_total_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis75_federal_actual"><font face="Times-bold">mmis75_federal_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis50_total_approved"><font face="Times-bold">mmis50_total_approved</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="mmis50_federal_actual"><font face="Times-bold">mmis50_federal_actual</font>  <font color="#535353">numeric ( 12,2 )</font></td></tr>
       </table>
     >];
 

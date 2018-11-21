@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { DocumentItem, ProgressDot, ProgressLine } from './DashboardStory';
 import InstructionStory from './InstructionStory';
+import FrozenTableStory from './FrozenTableStory';
 import Btn from '../components/Btn';
-import { Input, Textarea } from '../components/Inputs';
+import { DollarInput, Input, Textarea } from '../components/Inputs';
 
 import '../styles/index.css';
 
 storiesOf('Texty components', module).add('Instruction', () => (
   <InstructionStory />
+));
+
+storiesOf('Frozen-pane tables', module).add('example', () => (
+  <FrozenTableStory />
 ));
 
 storiesOf('Dashboard components', module)
@@ -32,3 +37,30 @@ storiesOf('Buttons', module).add('various', () => (
     <Btn kind="outline" /> <Btn kind="outline" size="big" />
   </div>
 ));
+
+storiesOf('Numeric inputs', module).add('Dollars', () => {
+  class Dollar extends Component {
+    state = { value: 0 };
+
+    change = e => {
+      console.log(e.target.value);
+      this.setState({ value: e.target.value });
+    };
+
+    render() {
+      return (
+        <DollarInput
+          hideLabel
+          wrapperClass="m0"
+          className="fake-spacer-input m0 input input-condensed mono right-align"
+          label="fake-spacer-input"
+          name="fake-spacer-input"
+          value={this.state.value}
+          onChange={this.change}
+        />
+      );
+    }
+  }
+
+  return <Dollar />;
+});

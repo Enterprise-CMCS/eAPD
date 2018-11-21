@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const APD_STATUS = {
   DRAFT: Symbol('draft'),
   SUBMITTED: Symbol('submitted'),
@@ -18,4 +20,22 @@ export const DASHBOARD_TASK_BUTTON_TEXT = {
   [APD_STATUS.APPROVED]: 'Approval Letter',
   [APD_STATUS.DISAPPROVED]: 'Disapproval Letter',
   [APD_STATUS.WITHDRAWN]: 'View'
+};
+
+export const TABLE_HEADERS = {
+  actual: 'Actual',
+  approved: 'Approved',
+  federal: (p = 90) => (
+    <span>
+      Federal share <strong>{p}%</strong> FFP
+    </span>
+  ),
+  ffy: y => `FFY ${y}`,
+  total: (
+    <span>
+      Total computable
+      <br />
+      (Federal + state)
+    </span>
+  )
 };
