@@ -1,12 +1,11 @@
 title: State Profile Contact Information
 helpText: >-
-  In this section, list relevant state contacts. If the information is
-  on record, it will be listed below. Ensure the director's name and
-  office address are listed correctly.
+  In this section, list relevant state contacts. If this is updating a previously submitted APD,
+  the information will be prepopulated. Review to ensure that it is correct.
 directorAndAddress:
-  title: State Medicaid Director & Medicaid Office Address
+  title: State Medicaid Director and Medicaid Office Address
   director:
-    title: Medicaid Director
+    title: Medicaid director
     labels:
       name: Name
       email: Email address
@@ -15,27 +14,24 @@ directorAndAddress:
     title: Medicaid office
     labels:
       address1: Address
-      address2: Address (continued)
+      address2: Address continued (optional)
       city: City
       state: State
       zip: ZIP
 keyPersonnel:
   title: Key Personnel & Project Management Planning
-  helpText: >-  
+  helpText: >-
     Identify key state staff who will be involved in all activities listed in
-    this APD. CMS seeks to ensure state teams are adequately resourced, but
-    does not require states to provide key vendor personnel to satisfy this
-    requirement.
-    
-    
-    Personnel listed in this section must be assigned to APD by name, role,
+    this APD.  Personnel listed in this section must be assigned to APD by name, role,
     time commitment, and cost, where applicable.
   reminder: >-
     Key personnel are individuals involved with all activities within this
-    APD, or are invloved with governance, coordination, stakeholder
-    decision-making, oversight, and/or project performance. Individuals with
-    specific responsibilities for an activity basis only, should be listed
-    individually in Program Activities section of the eAPD.
+    APD, or are involved with governance, coordination, stakeholder
+    decision-making, oversight, and/or project performance. Individuals whose responsibilities
+    apply only to specific activities should be listed individually under Program
+    Activities instead. CMS seeks to ensure  state teams are adequately resourced,
+    but does not require states to provide key vendor personnel to satisfy this
+    requirement.
   contact: 'Contact #{{number}}'
   labels:
     name: Name
