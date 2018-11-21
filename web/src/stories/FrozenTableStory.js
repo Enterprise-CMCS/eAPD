@@ -24,28 +24,28 @@ class FrozenTableStory extends Component {
               <tbody>
                 <tr>
                   <td>In-House Costs</td>
-                  <td className="mono right-align nowrap table-frozen-spacer-cell"></td>
+                  <td className="mono right-align nowrap table-frozen-spacer-cell"/>
                 </tr>
                 <tr>
                   <td>Private Contractor Costs</td>
-                  <td className="mono right-align nowrap table-frozen-spacer-cell"></td>
+                  <td className="mono right-align nowrap table-frozen-spacer-cell"/>
                 </tr>
                 <tr className="bold">
                   <td>Total Enhanced FFP</td>
-                  <td className="mono right-align nowrap table-frozen-spacer-cell"></td>
+                  <td className="mono right-align nowrap table-frozen-spacer-cell"/>
                 </tr>
               </tbody>
             </table>
             <table className="table-cms table-frozen-data">
               <thead>
                 <tr>
-                  <th id="quarterly-budget-summary-hitAndHie-null1"></th>
-                  <th className="center" colspan="5" id="quarterly-budget-summary-hitAndHie-fy-2019">FFY 2019</th>
-                  <th className="center" colspan="5" id="quarterly-budget-summary-hitAndHie-fy-2020">FFY 2020</th>
+                  <th id="quarterly-budget-summary-hitAndHie-null1"/>
+                  <th className="center" colSpan="5" id="quarterly-budget-summary-hitAndHie-fy-2019">FFY 2019</th>
+                  <th className="center" colSpan="5" id="quarterly-budget-summary-hitAndHie-fy-2020">FFY 2020</th>
                   <th className="center" id="quarterly-budget-summary-hitAndHie-total">Total</th>
                 </tr>
                 <tr>
-                  <th id="quarterly-budget-summary-hitAndHie-null2"></th>
+                  <th id="quarterly-budget-summary-hitAndHie-null2"/>
                   <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2019-q1">Q1</th>
                   <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2019-q2">Q2</th>
                   <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2019-q3">Q3</th>
@@ -56,7 +56,7 @@ class FrozenTableStory extends Component {
                   <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2020-q3">Q3</th>
                   <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2020-q4">Q4</th>
                   <th className="right-align" id="quarterly-budget-summary-hitAndHie-fy-2020-subtotal">Subtotal</th>
-                  <th className="bg-gray-light" id="quarterly-budget-summary-hitAndHie-total2"></th>
+                  <th id="quarterly-budget-summary-hitAndHie-total2"/>
                 </tr>
               </thead>
               <tbody>
