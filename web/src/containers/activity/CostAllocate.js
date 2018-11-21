@@ -31,6 +31,7 @@ const CostAllocate = props => {
         <RichText
           content={costAllocationDesc}
           onSync={sync('costAllocationDesc')}
+          editorClassName="rte-textarea-l"
         />
       </div>
       <CostAllocateFFP aKey={activity.key} />
@@ -55,6 +56,7 @@ const CostAllocate = props => {
         <RichText
           content={otherFundingDesc}
           onSync={sync('otherFundingDesc')}
+          editorClassName="rte-textarea-l"
         />
       </div>
     </Subsection>
