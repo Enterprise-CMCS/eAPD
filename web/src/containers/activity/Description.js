@@ -44,7 +44,7 @@ const Description = props => {
           <RichText
             content={description}
             onSync={sync('description')}
-            editorClassName="rte-textarea-xl"
+            editorClassName="rte-textarea-l"
           />
         </div>
       </SubsectionChunk>
