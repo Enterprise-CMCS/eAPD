@@ -155,7 +155,7 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
       ...p,
       percentTime: p.percentTime * 100,
       costs: p.costs.reduce(
-        (costs, { year, cost }) => ({ ...costs, [year]: cost }),
+        (costs, { year, cost }) => ({ ...costs, [year]: +cost }),
         {}
       ),
       key: generateKey()
