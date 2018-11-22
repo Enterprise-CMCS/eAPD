@@ -1,16 +1,18 @@
 title: Proposed Budget
 helpText: >-
-  This itemized budget table has combined the costs for each activity
-  into a single itemized table by federal fiscal year (FFY). The table
-  displays total share, federal share, and state share.
+  Review topline budget data associated with this APD. Totals are based on the information entered by
+  the state. Capture incentive payments if applicable.
 summaryBudget:
   title: Summary Budget Table
   helpText: >-
-    Totals are calculated automatically.
+    This table itemizes the costs for each activity by federal fiscal year (FFY).
+    The table breaks out the total share, federal share, and state share. Amounts
+    are calculated automatically.
 quarterlyBudget:
   title: Federal share by FFY Quarter
   helpText: >-
-    These tables include a summary proposed breakout of the budget by FFY quarter.
+    These tables summarize the proposed budget for federal financial participation
+    (FFP) broken out by FFY quarter.
   expenseNames:
     state: In-House Costs
     contractor: Private Contractor Costs
@@ -18,6 +20,6 @@ quarterlyBudget:
 paymentsByFFYQuarter:
   title: Incentive Payments by FFY Quarter
   helpText: >-
-    This table is for capturing incentive payments for eligible professionals (EPs) and eligible hosptials (EHs).
-  reminder: >-
-    Please include EH and EP payments and counts. This then calculates totals automatically.  
+    Use this table to capture incentive payments for eligible hospitals (EHs) and
+    eligible professionals (EPs). Provide payments and counts, and the table will
+    calculate totals automatically.
