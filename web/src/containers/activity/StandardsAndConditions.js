@@ -38,7 +38,8 @@ class StandardsAndConditions extends Component {
             <Textarea
               name={`activity-${activity.id}-condition-${std.id}`}
               label={t([`activities.standardsAndConditions`, std.id, 'title'])}
-              rows="3"
+              rows="7"
+              className="m0 textarea textarea-m"
               value={activity.standardsAndConditions[std.id]}
               onChange={this.handleChange(std.id)}
             />
