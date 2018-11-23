@@ -21,6 +21,9 @@ labels:
   start: 'Start:'
   end: 'End:'
   cost: Cost
+  costInput: FFY {{year}} cost
+  totalCost: Total Cost
+  totalCostInput: Total contract cost
   hourly: Hourly Resource
   attachments: Attachments
   yearCost: '{{year}} Cost'
