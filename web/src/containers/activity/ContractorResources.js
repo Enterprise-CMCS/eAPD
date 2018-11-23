@@ -82,8 +82,6 @@ const ContractorForm = ({
         initialStartDate={contractor.start}
         initialEndDate={contractor.end}
         onChange={handleTermChange(idx)}
-        numberOfMonths={2}
-        daySize={32}
       />
     </div>
     <div className="mb3 md-flex">
@@ -402,6 +400,7 @@ export const mapDispatchToProps = {
 };
 
 export { ContractorResources as ContractorResourcesRaw };
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ContractorResources
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContractorResources);
