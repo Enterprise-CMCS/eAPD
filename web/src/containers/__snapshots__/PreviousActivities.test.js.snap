@@ -54,6 +54,11 @@ ShallowWrapper {
           >
             <Connect(ApdPreviousActivityTableMMIS) />
           </div>
+          <div
+            className="mb3"
+          >
+            <Connect(ApdPreviousActivityTableMMIS) />
+          </div>
         </Subsection>,
       ],
       "id": "prev-activities",
@@ -129,6 +134,11 @@ ShallowWrapper {
             >
               <Connect(ApdPreviousActivityTableMMIS) />
             </div>,
+            <div
+              className="mb3"
+            >
+              <Connect(ApdPreviousActivityTableMMIS) />
+            </div>,
           ],
           "id": "prev-activities-table",
           "nested": false,
@@ -143,6 +153,26 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": <Connect(ApdPreviousActivityTable) />,
+              "className": "mb3",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Connect(ApdPreviousActivityTableMMIS) />,
               "className": "mb3",
             },
             "ref": null,
@@ -217,6 +247,11 @@ ShallowWrapper {
               className="mb3"
             >
               <Connect(ApdPreviousActivityTable) />
+            </div>
+            <div
+              className="mb3"
+            >
+              <Connect(ApdPreviousActivityTableMMIS) />
             </div>
             <div
               className="mb3"
@@ -298,6 +333,11 @@ ShallowWrapper {
               >
                 <Connect(ApdPreviousActivityTableMMIS) />
               </div>,
+              <div
+                className="mb3"
+              >
+                <Connect(ApdPreviousActivityTableMMIS) />
+              </div>,
             ],
             "id": "prev-activities-table",
             "nested": false,
@@ -312,6 +352,26 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": <Connect(ApdPreviousActivityTable) />,
+                "className": "mb3",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <Connect(ApdPreviousActivityTableMMIS) />,
                 "className": "mb3",
               },
               "ref": null,
