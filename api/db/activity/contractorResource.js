@@ -59,13 +59,21 @@ module.exports = {
         id: this.get('id'),
         name: this.get('name'),
         start: getDate(this.get('start')),
+        totalCost: this.get('totalCost'),
         useHourly: this.get('useHourly'),
         years: this.related('years')
       };
     },
 
     static: {
-      updateableFields: ['name', 'description', 'end', 'start', 'useHourly'],
+      updateableFields: [
+        'name',
+        'description',
+        'end',
+        'start',
+        'totalCost',
+        'useHourly'
+      ],
       owns: {
         years: 'apdActivityContractorResourceCost',
         hourlyData: 'apdActivityContractorResourceHourly'
