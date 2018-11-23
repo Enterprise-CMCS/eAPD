@@ -47,6 +47,7 @@ ShallowWrapper {
           />
           <RichText
             content="cost allocation"
+            editorClassName="rte-textarea-l"
             onSync={[Function]}
           />
         </div>,
@@ -83,6 +84,7 @@ ShallowWrapper {
           />
           <RichText
             content="other funding"
+            editorClassName="rte-textarea-l"
             onSync={[Function]}
           />
         </div>,
@@ -111,6 +113,7 @@ ShallowWrapper {
             />,
             <RichText
               content="cost allocation"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />,
           ],
@@ -148,6 +151,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "content": "cost allocation",
+              "editorClassName": "rte-textarea-l",
               "onSync": [Function],
             },
             "ref": null,
@@ -246,6 +250,7 @@ ShallowWrapper {
             />,
             <RichText
               content="other funding"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />,
           ],
@@ -283,6 +288,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "content": "other funding",
+              "editorClassName": "rte-textarea-l",
               "onSync": [Function],
             },
             "ref": null,
@@ -316,6 +322,7 @@ ShallowWrapper {
             />
             <RichText
               content="cost allocation"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />
           </div>,
@@ -352,6 +359,7 @@ ShallowWrapper {
             />
             <RichText
               content="other funding"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />
           </div>,
@@ -380,6 +388,7 @@ ShallowWrapper {
               />,
               <RichText
                 content="cost allocation"
+                editorClassName="rte-textarea-l"
                 onSync={[Function]}
               />,
             ],
@@ -417,6 +426,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "content": "cost allocation",
+                "editorClassName": "rte-textarea-l",
                 "onSync": [Function],
               },
               "ref": null,
@@ -515,6 +525,7 @@ ShallowWrapper {
               />,
               <RichText
                 content="other funding"
+                editorClassName="rte-textarea-l"
                 onSync={[Function]}
               />,
             ],
@@ -552,6 +563,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "content": "other funding",
+                "editorClassName": "rte-textarea-l",
                 "onSync": [Function],
               },
               "ref": null,

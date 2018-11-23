@@ -45,7 +45,6 @@ const newStatePerson = years => ({
   key: generateKey(),
   title: '',
   desc: '',
-  isKeyPersonnel: false,
   years: arrToObj(years, statePersonDefaultYear())
 });
 

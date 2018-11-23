@@ -48,7 +48,6 @@ describe('activities reducer', () => {
     key: keyFn(),
     desc: '',
     title: '',
-    isKeyPersonnel: false,
     years: { '1973': { amt: '', perc: '' }, '1974': { amt: '', perc: '' } }
   });
 
