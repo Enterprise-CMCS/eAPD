@@ -7,6 +7,7 @@ import { RichText } from '../components/Inputs';
 import { Section, Subsection } from '../components/Section';
 import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
 import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
+import ApdPreviousActivityTableTotal from './ApdPreviousActivityTableTotal';
 import { t } from '../i18n';
 
 const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
@@ -34,6 +35,9 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
       <div className="mb3">
         <ApdPreviousActivityTableMMIS />
       </div>
+      <div className="mb3">
+        <ApdPreviousActivityTableTotal />
+      </div>
     </Subsection>
   </Section>
 );
@@ -49,6 +53,9 @@ const mapStateToProps = ({ apd }) => ({
 
 const mapDispatchToProps = { updateApd: updateApdAction };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PreviousActivities);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PreviousActivities);
 
 export { PreviousActivities as plain, mapStateToProps, mapDispatchToProps };
