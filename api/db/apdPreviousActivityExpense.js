@@ -31,21 +31,21 @@ module.exports = () => ({
     toJSON() {
       return {
         hithie: {
-          federalActual: +this.get('hithie_federal_actual'),
-          totalApproved: +this.get('hithie_total_approved')
+          federalActual: this.get('hithie_federal_actual'),
+          totalApproved: this.get('hithie_total_approved')
         },
         mmis: {
           '90': {
-            federalActual: +this.get('mmis90_federal_actual'),
-            totalApproved: +this.get('mmis90_total_approved')
+            federalActual: this.get('mmis90_federal_actual'),
+            totalApproved: this.get('mmis90_total_approved')
           },
           '75': {
-            federalActual: +this.get('mmis75_federal_actual'),
-            totalApproved: +this.get('mmis75_total_approved')
+            federalActual: this.get('mmis75_federal_actual'),
+            totalApproved: this.get('mmis75_total_approved')
           },
           '50': {
-            federalActual: +this.get('mmis50_federal_actual'),
-            totalApproved: +this.get('mmis50_total_approved')
+            federalActual: this.get('mmis50_federal_actual'),
+            totalApproved: this.get('mmis50_total_approved')
           }
         },
         year: `${this.get('year')}`

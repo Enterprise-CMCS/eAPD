@@ -17,6 +17,7 @@ const getContractor = years => ({
   description: '',
   hourlyData: yearsToArray(years, { hours: 0, rate: 0 }),
   name: '',
+  totalCost: 0,
   useHourly: false,
   years: yearsToArray(years, { cost: 0 })
 });
