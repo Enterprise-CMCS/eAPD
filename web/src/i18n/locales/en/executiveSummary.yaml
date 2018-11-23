@@ -4,14 +4,14 @@ helpText: >-
   provided. Program budget tables are automatically included for review.
 total: Total
 summary:
-  title: Executive Summary
+  title: Executive Summary of Activities
   helpText: >-
-    Each activity is summarized below, including total and FFY costs.
+    Each activity is listed with its total cost and cost per FFY.
 budgetTable:
-  title: Program Budget Table
+  title: Program Budget Tables
   helpText: >-
-    APD program budget tables are automatically computed for this APD. The table below will be referenced
-    on the CMS approval letter.
+    Program budget tables are automatically computed for this APD. These tables will be referenced
+    in the CMS approval letter.
   hit: HIT (90/10)
   hie: HIE (90/10)
   hitHie: HIT + HIE (90/10)
