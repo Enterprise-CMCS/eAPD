@@ -26,6 +26,7 @@ tap.test(
               'description',
               'end',
               'start',
+              'totalCost',
               'useHourly'
             ],
             owns: {
@@ -162,6 +163,7 @@ tap.test(
         self.get.withArgs('end').returns(moment('2002-02-02').toDate());
         self.get.withArgs('name').returns('name field');
         self.get.withArgs('start').returns(moment('2001-01-01').toDate());
+        self.get.withArgs('totalCost').returns('total cost');
         self.get.withArgs('useHourly').returns('hooooouuuuurly');
         self.related.withArgs('files').returns('on the floppy disk');
         self.related
@@ -179,6 +181,7 @@ tap.test(
           id: 'id field',
           name: 'name field',
           start: '2001-01-01',
+          totalCost: 'total cost',
           useHourly: 'hooooouuuuurly',
           years: 'some times'
         });
