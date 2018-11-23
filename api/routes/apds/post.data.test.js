@@ -48,6 +48,7 @@ tap.test('APD data initializer', async test => {
           {
             description: '',
             name: '',
+            totalCost: 0,
             hourlyData: [
               {
                 hours: '',
