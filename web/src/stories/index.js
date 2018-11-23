@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react'; // eslint-disable-line import/no-e
 
 import { DocumentItem, ProgressDot, ProgressLine } from './DashboardStory';
 import InstructionStory from './InstructionStory';
+import FrozenTableStory from './FrozenTableStory';
 import Btn from '../components/Btn';
 import { DollarInput, Input, Textarea } from '../components/Inputs';
 
@@ -10,6 +11,10 @@ import '../styles/index.css';
 
 storiesOf('Texty components', module).add('Instruction', () => (
   <InstructionStory />
+));
+
+storiesOf('Frozen-pane tables', module).add('example', () => (
+  <FrozenTableStory />
 ));
 
 storiesOf('Dashboard components', module)
