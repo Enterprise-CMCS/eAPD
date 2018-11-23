@@ -16,7 +16,6 @@ ShallowWrapper {
         },
       ]
     }
-    createApd={[Function]}
     place={
       Object {
         "id": "so",
@@ -75,7 +74,8 @@ ShallowWrapper {
               sub={Array []}
               toggleExpand={[Function]}
             >
-              My Documents
+              Solid
+               APDs
             </SidebarLink>
             <SidebarLink
               anchor={null}
@@ -89,18 +89,6 @@ ShallowWrapper {
               1, 2, 3 SO APD
             </SidebarLink>
           </ul>
-          <div
-            className="mt3"
-          >
-            <Btn
-              extraCss="bg-white blue"
-              kind="outline"
-              onClick={[Function]}
-              size={null}
-            >
-              Create new
-            </Btn>
-          </div>
         </div>
       </div>,
       "className": "site-sidebar bg-teal relative",
@@ -146,7 +134,8 @@ ShallowWrapper {
                 sub={Array []}
                 toggleExpand={[Function]}
               >
-                My Documents
+                Solid
+                 APDs
               </SidebarLink>
               <SidebarLink
                 anchor={null}
@@ -160,18 +149,6 @@ ShallowWrapper {
                 1, 2, 3 SO APD
               </SidebarLink>
             </ul>
-            <div
-              className="mt3"
-            >
-              <Btn
-                extraCss="bg-white blue"
-                kind="outline"
-                onClick={[Function]}
-                size={null}
-              >
-                Create new
-              </Btn>
-            </div>
           </div>,
         ],
         "className": "xs-hide sm-hide",
@@ -257,10 +234,42 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": Array [
-              <ul
-                className="list-reset"
+            "children": <ul
+              className="list-reset"
+            >
+              <SidebarLink
+                anchor={null}
+                depth={0}
+                expanded={null}
+                hash={null}
+                onClick={null}
+                sub={Array []}
+                toggleExpand={[Function]}
               >
+                Solid
+                 APDs
+              </SidebarLink>
+              <SidebarLink
+                anchor={null}
+                depth={0}
+                expanded={null}
+                hash="1"
+                onClick={[Function]}
+                sub={Array []}
+                toggleExpand={[Function]}
+              >
+                1, 2, 3 SO APD
+              </SidebarLink>
+            </ul>,
+            "className": "p2 lg-p3",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
                 <SidebarLink
                   anchor={null}
                   depth={0}
@@ -270,145 +279,72 @@ ShallowWrapper {
                   sub={Array []}
                   toggleExpand={[Function]}
                 >
-                  My Documents
-                </SidebarLink>
-                <SidebarLink
-                  anchor={null}
-                  depth={0}
-                  expanded={null}
-                  hash="1"
-                  onClick={[Function]}
-                  sub={Array []}
-                  toggleExpand={[Function]}
-                >
-                  1, 2, 3 SO APD
-                </SidebarLink>
-              </ul>,
-              <div
-                className="mt3"
-              >
-                <Btn
-                  extraCss="bg-white blue"
-                  kind="outline"
-                  onClick={[Function]}
-                  size={null}
-                >
-                  Create new
-                </Btn>
-              </div>,
-            ],
-            "className": "p2 lg-p3",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
+                  Solid
+                   APDs
+                </SidebarLink>,
+                Array [
                   <SidebarLink
                     anchor={null}
                     depth={0}
                     expanded={null}
-                    hash={null}
-                    onClick={null}
+                    hash="1"
+                    onClick={[Function]}
                     sub={Array []}
                     toggleExpand={[Function]}
                   >
-                    My Documents
+                    1, 2, 3 SO APD
                   </SidebarLink>,
-                  Array [
-                    <SidebarLink
-                      anchor={null}
-                      depth={0}
-                      expanded={null}
-                      hash="1"
-                      onClick={[Function]}
-                      sub={Array []}
-                      toggleExpand={[Function]}
-                    >
-                      1, 2, 3 SO APD
-                    </SidebarLink>,
-                  ],
                 ],
-                "className": "list-reset",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {
-                    "anchor": null,
-                    "children": "My Documents",
-                    "depth": 0,
-                    "expanded": null,
-                    "hash": null,
-                    "onClick": null,
-                    "sub": Array [],
-                    "toggleExpand": [Function],
-                  },
-                  "ref": null,
-                  "rendered": "My Documents",
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": "1",
-                  "nodeType": "function",
-                  "props": Object {
-                    "anchor": null,
-                    "children": "1, 2, 3 SO APD",
-                    "depth": 0,
-                    "expanded": null,
-                    "hash": "1",
-                    "onClick": [Function],
-                    "sub": Array [],
-                    "toggleExpand": [Function],
-                  },
-                  "ref": null,
-                  "rendered": "1, 2, 3 SO APD",
-                  "type": [Function],
-                },
               ],
-              "type": "ul",
+              "className": "list-reset",
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": <Btn
-                  extraCss="bg-white blue"
-                  kind="outline"
-                  onClick={[Function]}
-                  size={null}
-                >
-                  Create new
-                </Btn>,
-                "className": "mt3",
-              },
-              "ref": null,
-              "rendered": Object {
+            "ref": null,
+            "rendered": Array [
+              Object {
                 "instance": null,
                 "key": undefined,
                 "nodeType": "function",
                 "props": Object {
-                  "children": "Create new",
-                  "extraCss": "bg-white blue",
-                  "kind": "outline",
-                  "onClick": [Function],
-                  "size": null,
+                  "anchor": null,
+                  "children": Array [
+                    "Solid",
+                    " APDs",
+                  ],
+                  "depth": 0,
+                  "expanded": null,
+                  "hash": null,
+                  "onClick": null,
+                  "sub": Array [],
+                  "toggleExpand": [Function],
                 },
                 "ref": null,
-                "rendered": "Create new",
+                "rendered": Array [
+                  "Solid",
+                  " APDs",
+                ],
                 "type": [Function],
               },
-              "type": "div",
-            },
-          ],
+              Object {
+                "instance": null,
+                "key": "1",
+                "nodeType": "function",
+                "props": Object {
+                  "anchor": null,
+                  "children": "1, 2, 3 SO APD",
+                  "depth": 0,
+                  "expanded": null,
+                  "hash": "1",
+                  "onClick": [Function],
+                  "sub": Array [],
+                  "toggleExpand": [Function],
+                },
+                "ref": null,
+                "rendered": "1, 2, 3 SO APD",
+                "type": [Function],
+              },
+            ],
+            "type": "ul",
+          },
           "type": "div",
         },
       ],
@@ -459,7 +395,8 @@ ShallowWrapper {
                 sub={Array []}
                 toggleExpand={[Function]}
               >
-                My Documents
+                Solid
+                 APDs
               </SidebarLink>
               <SidebarLink
                 anchor={null}
@@ -473,18 +410,6 @@ ShallowWrapper {
                 1, 2, 3 SO APD
               </SidebarLink>
             </ul>
-            <div
-              className="mt3"
-            >
-              <Btn
-                extraCss="bg-white blue"
-                kind="outline"
-                onClick={[Function]}
-                size={null}
-              >
-                Create new
-              </Btn>
-            </div>
           </div>
         </div>,
         "className": "site-sidebar bg-teal relative",
@@ -530,7 +455,8 @@ ShallowWrapper {
                   sub={Array []}
                   toggleExpand={[Function]}
                 >
-                  My Documents
+                  Solid
+                   APDs
                 </SidebarLink>
                 <SidebarLink
                   anchor={null}
@@ -544,18 +470,6 @@ ShallowWrapper {
                   1, 2, 3 SO APD
                 </SidebarLink>
               </ul>
-              <div
-                className="mt3"
-              >
-                <Btn
-                  extraCss="bg-white blue"
-                  kind="outline"
-                  onClick={[Function]}
-                  size={null}
-                >
-                  Create new
-                </Btn>
-              </div>
             </div>,
           ],
           "className": "xs-hide sm-hide",
@@ -641,10 +555,42 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": Array [
-                <ul
-                  className="list-reset"
+              "children": <ul
+                className="list-reset"
+              >
+                <SidebarLink
+                  anchor={null}
+                  depth={0}
+                  expanded={null}
+                  hash={null}
+                  onClick={null}
+                  sub={Array []}
+                  toggleExpand={[Function]}
                 >
+                  Solid
+                   APDs
+                </SidebarLink>
+                <SidebarLink
+                  anchor={null}
+                  depth={0}
+                  expanded={null}
+                  hash="1"
+                  onClick={[Function]}
+                  sub={Array []}
+                  toggleExpand={[Function]}
+                >
+                  1, 2, 3 SO APD
+                </SidebarLink>
+              </ul>,
+              "className": "p2 lg-p3",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
                   <SidebarLink
                     anchor={null}
                     depth={0}
@@ -654,145 +600,72 @@ ShallowWrapper {
                     sub={Array []}
                     toggleExpand={[Function]}
                   >
-                    My Documents
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor={null}
-                    depth={0}
-                    expanded={null}
-                    hash="1"
-                    onClick={[Function]}
-                    sub={Array []}
-                    toggleExpand={[Function]}
-                  >
-                    1, 2, 3 SO APD
-                  </SidebarLink>
-                </ul>,
-                <div
-                  className="mt3"
-                >
-                  <Btn
-                    extraCss="bg-white blue"
-                    kind="outline"
-                    onClick={[Function]}
-                    size={null}
-                  >
-                    Create new
-                  </Btn>
-                </div>,
-              ],
-              "className": "p2 lg-p3",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
+                    Solid
+                     APDs
+                  </SidebarLink>,
+                  Array [
                     <SidebarLink
                       anchor={null}
                       depth={0}
                       expanded={null}
-                      hash={null}
-                      onClick={null}
+                      hash="1"
+                      onClick={[Function]}
                       sub={Array []}
                       toggleExpand={[Function]}
                     >
-                      My Documents
+                      1, 2, 3 SO APD
                     </SidebarLink>,
-                    Array [
-                      <SidebarLink
-                        anchor={null}
-                        depth={0}
-                        expanded={null}
-                        hash="1"
-                        onClick={[Function]}
-                        sub={Array []}
-                        toggleExpand={[Function]}
-                      >
-                        1, 2, 3 SO APD
-                      </SidebarLink>,
-                    ],
                   ],
-                  "className": "list-reset",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": null,
-                      "children": "My Documents",
-                      "depth": 0,
-                      "expanded": null,
-                      "hash": null,
-                      "onClick": null,
-                      "sub": Array [],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "My Documents",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "1",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": null,
-                      "children": "1, 2, 3 SO APD",
-                      "depth": 0,
-                      "expanded": null,
-                      "hash": "1",
-                      "onClick": [Function],
-                      "sub": Array [],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "1, 2, 3 SO APD",
-                    "type": [Function],
-                  },
                 ],
-                "type": "ul",
+                "className": "list-reset",
               },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": <Btn
-                    extraCss="bg-white blue"
-                    kind="outline"
-                    onClick={[Function]}
-                    size={null}
-                  >
-                    Create new
-                  </Btn>,
-                  "className": "mt3",
-                },
-                "ref": null,
-                "rendered": Object {
+              "ref": null,
+              "rendered": Array [
+                Object {
                   "instance": null,
                   "key": undefined,
                   "nodeType": "function",
                   "props": Object {
-                    "children": "Create new",
-                    "extraCss": "bg-white blue",
-                    "kind": "outline",
-                    "onClick": [Function],
-                    "size": null,
+                    "anchor": null,
+                    "children": Array [
+                      "Solid",
+                      " APDs",
+                    ],
+                    "depth": 0,
+                    "expanded": null,
+                    "hash": null,
+                    "onClick": null,
+                    "sub": Array [],
+                    "toggleExpand": [Function],
                   },
                   "ref": null,
-                  "rendered": "Create new",
+                  "rendered": Array [
+                    "Solid",
+                    " APDs",
+                  ],
                   "type": [Function],
                 },
-                "type": "div",
-              },
-            ],
+                Object {
+                  "instance": null,
+                  "key": "1",
+                  "nodeType": "function",
+                  "props": Object {
+                    "anchor": null,
+                    "children": "1, 2, 3 SO APD",
+                    "depth": 0,
+                    "expanded": null,
+                    "hash": "1",
+                    "onClick": [Function],
+                    "sub": Array [],
+                    "toggleExpand": [Function],
+                  },
+                  "ref": null,
+                  "rendered": "1, 2, 3 SO APD",
+                  "type": [Function],
+                },
+              ],
+              "type": "ul",
+            },
             "type": "div",
           },
         ],
