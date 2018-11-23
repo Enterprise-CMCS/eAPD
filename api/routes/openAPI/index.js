@@ -121,7 +121,7 @@ module.exports = {
                   'When the contractor resource will end work; date only'
               },
               totalCost: {
-                type: 'string',
+                type: 'number',
                 description: 'Contractor resource total cost'
               },
               useHourly: {
@@ -138,7 +138,7 @@ module.exports = {
                     description: 'Year this detail applies to'
                   },
                   cost: {
-                    type: 'string',
+                    type: 'number',
                     description: 'Contractor resource cost of the year'
                   }
                 }
