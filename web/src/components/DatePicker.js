@@ -42,6 +42,9 @@ class DatePickerWrapper extends Component {
         focused={focused}
         onFocusChange={this.onFocusChange}
         isOutsideRange={() => false}
+        daySize={32}
+        displayFormat="M/D/YYYY"
+        numberOfMonths={2}
       />
     );
   }
