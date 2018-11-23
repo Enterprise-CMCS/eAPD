@@ -7,15 +7,20 @@ module.exports = () => ({
     },
 
     format(attributes) {
+      const {
+        hithie = {},
+        mmis: { '90': mmis90 = {}, '75': mmis75 = {}, '50': mmis50 = {} }
+      } = attributes;
+
       const out = {
-        hithie_federal_actual: attributes.hithie.federalActual || 0,
-        hithie_total_approved: attributes.hithie.totalApproved || 0,
-        mmis90_federal_actual: attributes.mmis[90].federalActual || 0,
-        mmis90_total_approved: attributes.mmis[90].totalApproved || 0,
-        mmis75_federal_actual: attributes.mmis[75].federalActual || 0,
-        mmis75_total_approved: attributes.mmis[75].totalApproved || 0,
-        mmis50_federal_actual: attributes.mmis[50].federalActual || 0,
-        mmis50_total_approved: attributes.mmis[50].totalApproved || 0,
+        hithie_federal_actual: hithie.federalActual || 0,
+        hithie_total_approved: hithie.totalApproved || 0,
+        mmis90_federal_actual: mmis90.federalActual || 0,
+        mmis90_total_approved: mmis90.totalApproved || 0,
+        mmis75_federal_actual: mmis75.federalActual || 0,
+        mmis75_total_approved: mmis75.totalApproved || 0,
+        mmis50_federal_actual: mmis50.federalActual || 0,
+        mmis50_total_approved: mmis50.totalApproved || 0,
         year: attributes.year,
         apd_id: attributes.apd_id
       };
