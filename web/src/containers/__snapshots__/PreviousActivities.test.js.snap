@@ -34,6 +34,7 @@ ShallowWrapper {
           </div>
           <RichText
             content="previous"
+            editorClassName="rte-textarea-l"
             onSync={[Function]}
           />
         </Subsection>,
@@ -73,6 +74,7 @@ ShallowWrapper {
             </div>,
             <RichText
               content="previous"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />,
           ],
@@ -101,6 +103,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "content": "previous",
+              "editorClassName": "rte-textarea-l",
               "onSync": [Function],
             },
             "ref": null,
@@ -200,6 +203,7 @@ ShallowWrapper {
             </div>
             <RichText
               content="previous"
+              editorClassName="rte-textarea-l"
               onSync={[Function]}
             />
           </Subsection>,
@@ -239,6 +243,7 @@ ShallowWrapper {
               </div>,
               <RichText
                 content="previous"
+                editorClassName="rte-textarea-l"
                 onSync={[Function]}
               />,
             ],
@@ -267,6 +272,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "content": "previous",
+                "editorClassName": "rte-textarea-l",
                 "onSync": [Function],
               },
               "ref": null,
