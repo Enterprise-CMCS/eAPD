@@ -26,7 +26,7 @@ describe('DollarInput component', () => {
     component.find('input').simulate('change', event('12523.32'));
 
     expect(
-      onChange.calledWith({ target: { value: 12523, masked: '$12523' } })
+      onChange.calledWith({ target: { value: 12523, masked: '$12,523' } })
     ).toEqual(true);
   });
 });
@@ -37,7 +37,7 @@ describe('PercentInput component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('sends unmasked data in onChange event', () => {
+  test('sends masked and unmasked data in onChange event', () => {
     const onChange = sinon.spy();
     const component = mount(
       <PercentInput name="name" label="label" onChange={onChange} />
