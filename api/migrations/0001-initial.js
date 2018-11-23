@@ -543,7 +543,7 @@ exports.up = async knex => {
     table.foreign('personnel_id').references('activity_state_personnel.id');
   });
 
-  knex.schema.createTable('activity_quarterly_ffp', table => {
+  await knex.schema.createTable('activity_quarterly_ffp', table => {
     table.comment(
       'percent of the federal share of the activity cost, broken down by quarter per federal fiscal year'
     );
@@ -601,27 +601,4 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async knex => {
-  await knex.schema.dropTable('activity_contractor_resources_yearly');
-  await knex.schema.dropTable('activity_expense_entries');
-  await knex.schema.dropTable('activity_goal_objectives');
-  await knex.schema.dropTable('activity_state_personnel_yearly');
-
-  await knex.schema.dropTable('activity_approaches');
-  await knex.schema.dropTable('activity_contractor_resources');
-  await knex.schema.dropTable('activity_expenses');
-  await knex.schema.dropTable('activity_goals');
-  await knex.schema.dropTable('activity_state_peronnel');
-  await knex.schema.dropTable('activity_schedule');
-
-  await knex.schema.dropTable('activities');
-
-  await knex.schema.dropTable('apds');
-  await knex.schema.dropTable('users');
-
-  await knex.schema.dropTable('auth_role_activity_mapping');
-  await knex.schema.dropTable('auth_activities');
-  await knex.schema.dropTable('auth_roles');
-
-  await knex.schema.dropTable('states');
-};
+exports.down = async () => {};

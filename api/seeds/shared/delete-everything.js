@@ -17,7 +17,7 @@ exports.seed = async knex =>
     knex('activity_state_personnel_yearly').del(),
     knex('activity_quarterly_ffp').del(),
     knex('apd_incentive_payments').del(),
-    knex('apd_key_personnel').del(),
+    knex('apd_key_personnel_yearly').del(),
     knex('apd_previous_activity_expenses').del(),
     knex('apd_versions').del(),
     knex('auth_role_activity_mapping').del()
@@ -29,7 +29,8 @@ exports.seed = async knex =>
         // emptied as well.
         knex('activity_contractor_resources').del(),
         knex('activity_expenses').del(),
-        knex('activity_state_peronnel').del(),
+        knex('activity_state_personnel').del(),
+        knex('apd_key_personnel').del(),
         knex('auth_activities').del(),
         knex('files').del(),
         knex('users').del()
