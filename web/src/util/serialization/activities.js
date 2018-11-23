@@ -33,6 +33,7 @@ export const toAPI = activityState => {
         cost: +c.years[year],
         year
       })),
+      totalCost: c.totalCost,
       useHourly: c.hourly.useHourly,
       hourlyData: Object.keys(c.hourly.data).map(year => ({
         year,
@@ -65,7 +66,6 @@ export const toAPI = activityState => {
       id: s.id,
       title: s.title,
       description: s.desc,
-      keyPersonnel: s.isKeyPersonnel,
       years: Object.keys(s.years).map(year => ({
         cost: +s.years[year].amt,
         fte: +s.years[year].perc,
@@ -121,6 +121,7 @@ export const fromAPI = (activityAPI, years) => {
       desc: c.description,
       start: c.start,
       end: c.end,
+      totalCost: +c.totalCost,
       files: c.files.map(f => ({
         ...f,
         url: getFileURL(f.id)
@@ -187,7 +188,6 @@ export const fromAPI = (activityAPI, years) => {
       id: s.id,
       title: s.title,
       desc: s.description,
-      isKeyPersonnel: s.keyPersonnel || false,
       years: s.years.reduce(
         (acc, y) => ({
           ...acc,

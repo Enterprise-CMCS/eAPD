@@ -28,6 +28,7 @@ ShallowWrapper {
           "key": "contractor key",
           "name": "contractor name",
           "start": "start date",
+          "totalCost": 123,
           "years": Object {
             "1066": 100,
             "1067": 200,
@@ -91,6 +92,7 @@ ShallowWrapper {
                   "key": "contractor key",
                   "name": "contractor name",
                   "start": "start date",
+                  "totalCost": 123,
                   "years": Object {
                     "1066": 100,
                     "1067": 200,
@@ -148,6 +150,7 @@ ShallowWrapper {
                   "key": "contractor key",
                   "name": "contractor name",
                   "start": "start date",
+                  "totalCost": 123,
                   "years": Object {
                     "1066": 100,
                     "1067": 200,
@@ -189,6 +192,7 @@ ShallowWrapper {
                 "key": "contractor key",
                 "name": "contractor name",
                 "start": "start date",
+                "totalCost": 123,
                 "years": Object {
                   "1066": 100,
                   "1067": 200,
@@ -257,6 +261,7 @@ ShallowWrapper {
                     "key": "contractor key",
                     "name": "contractor name",
                     "start": "start date",
+                    "totalCost": 123,
                     "years": Object {
                       "1066": 100,
                       "1067": 200,
@@ -314,6 +319,7 @@ ShallowWrapper {
                     "key": "contractor key",
                     "name": "contractor name",
                     "start": "start date",
+                    "totalCost": 123,
                     "years": Object {
                       "1066": 100,
                       "1067": 200,
@@ -355,6 +361,7 @@ ShallowWrapper {
                   "key": "contractor key",
                   "name": "contractor name",
                   "start": "start date",
+                  "totalCost": 123,
                   "years": Object {
                     "1066": 100,
                     "1067": 200,

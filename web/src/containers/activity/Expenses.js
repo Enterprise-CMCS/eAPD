@@ -60,10 +60,11 @@ const ExpenseForm = ({
         name={`expense-${expense.key}-desc`}
         label="Describe the expense"
         hideLabel
-        rows="3"
+        rows="7"
         value={expense.desc}
         onChange={handleChange(idx, 'desc')}
         wrapperClass="md-col-6"
+        className="m0 textarea textarea-m"
       />
     </div>
     {years.map(year => (

@@ -1,5 +1,5 @@
 /*
- * Graphviz of '<open file '<stdin>', mode 'r' at 0x7f65403ed0c0>', created 2018-11-15 19:35:57.617540
+ * Graphviz of '<open file '<stdin>', mode 'r' at 0x7f6cbd93a0c0>', created 2018-11-23 18:26:17.697974
  * Generated from https://github.com/rm-hull/sql_graphviz
  */
 digraph g { graph [ rankdir = "LR" ];
@@ -47,6 +47,7 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="end"><font face="Times-bold">end</font>  <font color="#535353">date</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="useHourly"><font face="Times-bold">useHourly</font>  <font color="#535353">boolean DEFAULT false</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="totalCost"><font face="Times-bold">totalCost</font>  <font color="#535353">numeric ( 15,2 )</font></td></tr>
       </table>
     >];
 
@@ -180,7 +181,6 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="title"><font face="Times-bold">title</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="description"><font face="Times-bold">description</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="activity_id"><font face="Times-bold">activity_id</font>  <font color="#535353">integer</font></td></tr>
-        <tr><td bgcolor="grey96" align="left" port="key_personnel"><font face="Times-bold">key_personnel</font>  <font color="#535353">boolean</font></td></tr>
       </table>
     >];
 

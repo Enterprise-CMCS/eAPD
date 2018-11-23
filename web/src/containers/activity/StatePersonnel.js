@@ -16,14 +16,7 @@ import { SubsectionChunk } from '../../components/Section';
 import { t } from '../../i18n';
 import { formatDec, formatMoney } from '../../util/formats';
 
-const PersonnelForm = ({
-  person,
-  idx,
-  years,
-  handleChange,
-  handleKeyPersonnel,
-  handleDelete
-}) => (
+const PersonnelForm = ({ person, idx, years, handleChange, handleDelete }) => (
   <div className="mt2 mb3">
     <Btn
       kind="outline"
@@ -44,33 +37,15 @@ const PersonnelForm = ({
       />
     </div>
     <div className="mb3 md-flex">
-      <Label>Key Personnel</Label>
-      <div>
-        <Btn
-          kind="outline"
-          extraCss={person.isKeyPersonnel ? 'bg-black white' : ''}
-          onClick={handleKeyPersonnel(idx, true)}
-        >
-          Yes
-        </Btn>{' '}
-        <Btn
-          kind="outline"
-          extraCss={person.isKeyPersonnel ? '' : 'bg-black white'}
-          onClick={handleKeyPersonnel(idx, false)}
-        >
-          No
-        </Btn>
-      </div>
-    </div>
-    <div className="mb3 md-flex">
       <Label>{t('activities.statePersonnel.labels.desc')}</Label>
       <Textarea
         name={`state-person-${person.key}-desc`}
         label={t('activities.statePersonnel.labels.desc')}
-        rows="3"
+        rows="7"
         value={person.desc}
         onChange={handleChange(idx, 'desc')}
         wrapperClass="md-col-7 lg-col-6"
+        className="m0 textarea textarea-m"
         hideLabel
       />
     </div>
@@ -106,7 +81,6 @@ PersonnelForm.propTypes = {
   idx: PropTypes.number.isRequired,
   years: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
-  handleKeyPersonnel: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired
 };
 
@@ -130,12 +104,6 @@ class StatePersonnel extends Component {
       { statePersonnel: { [index]: toUpdate } },
       field === 'amt' || field === 'perc'
     );
-  };
-
-  handleKeyPersonnel = (index, bool) => () => {
-    const { activityKey, updateActivity } = this.props;
-    const updates = { statePersonnel: { [index]: { isKeyPersonnel: bool } } };
-    updateActivity(activityKey, updates);
   };
 
   handleAdd = () => {
@@ -182,7 +150,6 @@ class StatePersonnel extends Component {
                   idx={i}
                   years={years}
                   handleChange={this.handleChange}
-                  handleKeyPersonnel={this.handleKeyPersonnel}
                   handleDelete={this.getDeleter(person.key)}
                 />
               )}
@@ -218,4 +185,7 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StatePersonnel);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StatePersonnel);
