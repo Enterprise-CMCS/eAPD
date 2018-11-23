@@ -53,7 +53,6 @@ describe('APD activity serializer', () => {
             id: 'person 1',
             title: 'job title 1',
             description: 'desc 1',
-            keyPersonnel: false,
             years: [
               { year: '2018', cost: 100, fte: 0.5 },
               { year: '2019', cost: 200, fte: 0.8 }
@@ -63,7 +62,6 @@ describe('APD activity serializer', () => {
             id: 'person 2',
             title: 'job title 2',
             description: 'desc 2',
-            keyPersonnel: false,
             years: [
               { year: '2018', cost: 300, fte: 0.3 },
               { year: '2019', cost: 400, fte: 0.6 }
@@ -236,7 +234,6 @@ describe('APD activity serializer', () => {
               key: expect.stringMatching(/[a-f0-9]{8}/),
               title: 'job title 1',
               desc: 'desc 1',
-              isKeyPersonnel: false,
               years: {
                 2018: { amt: 100, perc: 0.5 },
                 2019: { amt: 200, perc: 0.8 }
@@ -247,7 +244,6 @@ describe('APD activity serializer', () => {
               key: expect.stringMatching(/[a-f0-9]{8}/),
               title: 'job title 2',
               desc: 'desc 2',
-              isKeyPersonnel: false,
               years: {
                 2018: { amt: 300, perc: 0.3 },
                 2019: { amt: 400, perc: 0.6 }
@@ -423,7 +419,7 @@ describe('APD activity serializer', () => {
             id: 'eugene',
             title: 'Boss',
             desc: 'friend of the show',
-            isKeyPersonnel: false,
+
             years: {
               '2009': {
                 amt: 99,
@@ -570,7 +566,6 @@ describe('APD activity serializer', () => {
             id: 'eugene',
             title: 'Boss',
             description: 'friend of the show',
-            keyPersonnel: false,
             years: [
               {
                 cost: 99,

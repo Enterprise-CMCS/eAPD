@@ -69,6 +69,8 @@ const ContractorForm = ({
         value={contractor.desc}
         onChange={handleChange(idx, 'desc')}
         wrapperClass="md-col-8"
+        className="m0 textarea textarea-l"
+        rows="14"
         hideLabel
       />
     </div>
@@ -80,8 +82,6 @@ const ContractorForm = ({
         initialStartDate={contractor.start}
         initialEndDate={contractor.end}
         onChange={handleTermChange(idx)}
-        numberOfMonths={2}
-        daySize={32}
       />
     </div>
     <div className="mb3 md-flex">
