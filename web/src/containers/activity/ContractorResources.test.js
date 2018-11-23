@@ -28,6 +28,7 @@ describe('the ContractorResources component', () => {
         desc: 'contractor description',
         start: 'start date',
         end: 'end date',
+        totalCost: 123,
         years: {
           '1066': 100,
           '1067': 200
