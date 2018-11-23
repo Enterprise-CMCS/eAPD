@@ -57,6 +57,7 @@ const newContractor = years => ({
   start: '',
   end: '',
   files: [],
+  totalCost: 0,
   years: arrToObj(years, contractorDefaultYear()),
   hourly: {
     useHourly: false,
