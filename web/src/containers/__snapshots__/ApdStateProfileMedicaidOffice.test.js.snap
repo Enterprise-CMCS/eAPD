@@ -39,7 +39,7 @@ ShallowWrapper {
         <h3
           className="mt0"
         >
-          Medicaid Director
+          Medicaid director
         </h3>,
         <div
           className="mb3"
@@ -119,7 +119,7 @@ ShallowWrapper {
           />
           <InputHolder
             hideLabel={false}
-            label="Address (continued)"
+            label="Address continued (optional)"
             name="apd-state-profile-addr2"
             onChange={[Function]}
             type="text"
@@ -179,11 +179,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "Medicaid Director",
+          "children": "Medicaid director",
           "className": "mt0",
         },
         "ref": null,
-        "rendered": "Medicaid Director",
+        "rendered": "Medicaid director",
         "type": "h3",
       },
       Object {
@@ -365,7 +365,7 @@ ShallowWrapper {
             />,
             <InputHolder
               hideLabel={false}
-              label="Address (continued)"
+              label="Address continued (optional)"
               name="apd-state-profile-addr2"
               onChange={[Function]}
               type="text"
@@ -442,7 +442,7 @@ ShallowWrapper {
             "nodeType": "function",
             "props": Object {
               "hideLabel": false,
-              "label": "Address (continued)",
+              "label": "Address continued (optional)",
               "name": "apd-state-profile-addr2",
               "onChange": [Function],
               "type": "text",
@@ -630,7 +630,7 @@ ShallowWrapper {
           <h3
             className="mt0"
           >
-            Medicaid Director
+            Medicaid director
           </h3>,
           <div
             className="mb3"
@@ -710,7 +710,7 @@ ShallowWrapper {
             />
             <InputHolder
               hideLabel={false}
-              label="Address (continued)"
+              label="Address continued (optional)"
               name="apd-state-profile-addr2"
               onChange={[Function]}
               type="text"
@@ -770,11 +770,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Medicaid Director",
+            "children": "Medicaid director",
             "className": "mt0",
           },
           "ref": null,
-          "rendered": "Medicaid Director",
+          "rendered": "Medicaid director",
           "type": "h3",
         },
         Object {
@@ -956,7 +956,7 @@ ShallowWrapper {
               />,
               <InputHolder
                 hideLabel={false}
-                label="Address (continued)"
+                label="Address continued (optional)"
                 name="apd-state-profile-addr2"
                 onChange={[Function]}
                 type="text"
@@ -1033,7 +1033,7 @@ ShallowWrapper {
               "nodeType": "function",
               "props": Object {
                 "hideLabel": false,
-                "label": "Address (continued)",
+                "label": "Address continued (optional)",
                 "name": "apd-state-profile-addr2",
                 "onChange": [Function],
                 "type": "text",
@@ -1271,7 +1271,7 @@ ShallowWrapper {
         <h3
           className="mt0"
         >
-          Medicaid Director
+          Medicaid director
         </h3>,
         <div
           className="mb3"
@@ -1351,7 +1351,7 @@ ShallowWrapper {
           />
           <InputHolder
             hideLabel={false}
-            label="Address (continued)"
+            label="Address continued (optional)"
             name="apd-state-profile-addr2"
             onChange={[Function]}
             type="text"
@@ -1411,11 +1411,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "Medicaid Director",
+          "children": "Medicaid director",
           "className": "mt0",
         },
         "ref": null,
-        "rendered": "Medicaid Director",
+        "rendered": "Medicaid director",
         "type": "h3",
       },
       Object {
@@ -1597,7 +1597,7 @@ ShallowWrapper {
             />,
             <InputHolder
               hideLabel={false}
-              label="Address (continued)"
+              label="Address continued (optional)"
               name="apd-state-profile-addr2"
               onChange={[Function]}
               type="text"
@@ -1674,7 +1674,7 @@ ShallowWrapper {
             "nodeType": "function",
             "props": Object {
               "hideLabel": false,
-              "label": "Address (continued)",
+              "label": "Address continued (optional)",
               "name": "apd-state-profile-addr2",
               "onChange": [Function],
               "type": "text",
@@ -1862,7 +1862,7 @@ ShallowWrapper {
           <h3
             className="mt0"
           >
-            Medicaid Director
+            Medicaid director
           </h3>,
           <div
             className="mb3"
@@ -1942,7 +1942,7 @@ ShallowWrapper {
             />
             <InputHolder
               hideLabel={false}
-              label="Address (continued)"
+              label="Address continued (optional)"
               name="apd-state-profile-addr2"
               onChange={[Function]}
               type="text"
@@ -2002,11 +2002,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Medicaid Director",
+            "children": "Medicaid director",
             "className": "mt0",
           },
           "ref": null,
-          "rendered": "Medicaid Director",
+          "rendered": "Medicaid director",
           "type": "h3",
         },
         Object {
@@ -2188,7 +2188,7 @@ ShallowWrapper {
               />,
               <InputHolder
                 hideLabel={false}
-                label="Address (continued)"
+                label="Address continued (optional)"
                 name="apd-state-profile-addr2"
                 onChange={[Function]}
                 type="text"
@@ -2265,7 +2265,7 @@ ShallowWrapper {
               "nodeType": "function",
               "props": Object {
                 "hideLabel": false,
-                "label": "Address (continued)",
+                "label": "Address continued (optional)",
                 "name": "apd-state-profile-addr2",
                 "onChange": [Function],
                 "type": "text",
