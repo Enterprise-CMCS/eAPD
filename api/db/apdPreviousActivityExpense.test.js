@@ -82,14 +82,14 @@ tap.test('apd previous activity expense data model', async tests => {
   tests.test('overrides toJSON method', async test => {
     const self = { get: sinon.stub(), related: sinon.stub() };
     self.get.returns('--- unknown field ---');
-    self.get.withArgs('hithie_federal_actual').returns('100');
-    self.get.withArgs('hithie_total_approved').returns('200');
-    self.get.withArgs('mmis90_federal_actual').returns('300');
-    self.get.withArgs('mmis90_total_approved').returns('400');
-    self.get.withArgs('mmis75_federal_actual').returns('1000');
-    self.get.withArgs('mmis75_total_approved').returns('2000');
-    self.get.withArgs('mmis50_federal_actual').returns('3000');
-    self.get.withArgs('mmis50_total_approved').returns('4000');
+    self.get.withArgs('hithie_federal_actual').returns(100);
+    self.get.withArgs('hithie_total_approved').returns(200);
+    self.get.withArgs('mmis90_federal_actual').returns(300);
+    self.get.withArgs('mmis90_total_approved').returns(400);
+    self.get.withArgs('mmis75_federal_actual').returns(1000);
+    self.get.withArgs('mmis75_total_approved').returns(2000);
+    self.get.withArgs('mmis50_federal_actual').returns(3000);
+    self.get.withArgs('mmis50_total_approved').returns(4000);
     self.get.withArgs('year').returns('year');
 
     const output = expense.toJSON.bind(self)();
