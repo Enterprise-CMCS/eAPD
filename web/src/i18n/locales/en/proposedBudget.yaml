@@ -20,6 +20,6 @@ quarterlyBudget:
 paymentsByFFYQuarter:
   title: Incentive Payments by FFY Quarter
   helpText: >-
-    Use this table to capture incentive payments for eligible hospitals (EHs) and
-    eligible professionals (EPs). Provide payments and counts, and the table will
+    Use this table to capture incentive payments for Eligible Hospitals (EHs) and
+    Eligible Professionals (EPs). Provide payments and counts, and the table will
     calculate totals automatically.
