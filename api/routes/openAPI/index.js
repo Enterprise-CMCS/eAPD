@@ -120,6 +120,10 @@ module.exports = {
                 description:
                   'When the contractor resource will end work; date only'
               },
+              totalCost: {
+                type: 'number',
+                description: 'Contractor resource total cost'
+              },
               useHourly: {
                 type: 'boolean',
                 description: 'Whether to use hourly rates for this contractor'
@@ -134,7 +138,7 @@ module.exports = {
                     description: 'Year this detail applies to'
                   },
                   cost: {
-                    type: 'string',
+                    type: 'number',
                     description: 'Contractor resource cost of the year'
                   }
                 }
