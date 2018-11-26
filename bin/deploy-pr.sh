@@ -38,6 +38,10 @@ if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
     aws s3 cp "$filename" $BUCKET_URI/$filename
   done
 
+  for filename in static/img/*.*; do
+    aws s3 cp "$filename" $BUCKET_URI/$filename
+  done
+
   for filename in static/img/browsers/*.*; do
     aws s3 cp "$filename" $BUCKET_URI/$filename
   done

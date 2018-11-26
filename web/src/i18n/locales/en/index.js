@@ -8,6 +8,7 @@ import previousActivities from './previousActivities.yaml';
 import proposedBudget from './proposedBudget.yaml';
 import scheduleSummary from './scheduleSummary.yaml';
 import sidebar from './sidebar.yaml';
+import stateDashboard from './stateDashboard.yaml';
 import storybook from './storybook.yaml';
 import table from './table.yaml';
 
@@ -22,6 +23,7 @@ export default {
   proposedBudget,
   scheduleSummary,
   sidebar,
+  stateDashboard,
   storybook,
   table
 };

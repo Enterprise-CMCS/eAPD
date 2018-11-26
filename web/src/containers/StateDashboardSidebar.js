@@ -3,13 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { t } from '../i18n';
-import { createApd, selectApd } from '../actions/apd';
-import Btn from '../components/Btn';
+import { selectApd } from '../actions/apd';
 import SidebarLink from '../components/SidebarLink';
 
 class Sidebar extends Component {
-  createApd = () => this.props.createApd();
-
   pickApd = id => () => this.props.selectApd(id);
 
   render() {
@@ -33,7 +30,7 @@ class Sidebar extends Component {
           </div>
           <div className="p2 lg-p3">
             <ul className="list-reset">
-              <SidebarLink>My Documents</SidebarLink>
+              <SidebarLink>{place.name} APDs</SidebarLink>
               {apds.map(apd => (
                 <SidebarLink
                   key={apd.id}
@@ -44,15 +41,6 @@ class Sidebar extends Component {
                 </SidebarLink>
               ))}
             </ul>
-            <div className="mt3">
-              <Btn
-                kind="outline"
-                extraCss="bg-white blue"
-                onClick={this.createApd}
-              >
-                Create new
-              </Btn>
-            </div>
           </div>
         </div>
       </aside>
@@ -63,20 +51,26 @@ class Sidebar extends Component {
 Sidebar.propTypes = {
   apds: PropTypes.array.isRequired,
   place: PropTypes.object.isRequired,
-  createApd: PropTypes.func.isRequired,
   selectApd: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ apd: { byId }, user: { data: { state } } }) => ({
+const mapStateToProps = ({
+  apd: { byId },
+  user: {
+    data: { state }
+  }
+}) => ({
   apds: Object.values(byId),
   place: state
 });
 
 const mapDispatchToProps = {
-  createApd,
   selectApd
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Sidebar);
 
 export { Sidebar as plain, mapStateToProps, mapDispatchToProps };
