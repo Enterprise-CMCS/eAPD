@@ -6,7 +6,8 @@ import {
   addKeyPerson,
   removeKeyPerson,
   setPrimaryKeyPerson,
-  updateApd as updateApdAction
+  updateApd as updateApdAction,
+  updateBudget
 } from '../actions/apd';
 import Btn from '../components/Btn';
 import { DollarInput, Input, PercentInput } from '../components/Inputs';
@@ -28,7 +29,7 @@ const PersonForm = ({
   years
 }) => {
   const changePrimary = handleChange('isPrimary', idx);
-  const changeHasCosts = handleChange('hasCosts', idx);
+  const changeHasCosts = handleChange('hasCosts', idx, true);
 
   const togglePrimary = value => changePrimary({ target: { value } });
   const toggleHasCosts = value => changeHasCosts({ target: { value } });
@@ -133,21 +134,25 @@ PersonForm.propTypes = {
 };
 
 class ApdStateKeyPersonnel extends Component {
-  handleChange = (field, index) => e => {
-    const { updateApd } = this.props;
+  handleChange = (field, index, isExpense = false) => e => {
+    const { updateBudget: dispatchBudget, updateApd } = this.props;
     updateApd({
       keyPersonnel: { [index]: { [field]: e.target.value } }
     });
+    if (isExpense) {
+      dispatchBudget();
+    }
   };
 
   handleYearChange = (index, year) => e => {
     const { value } = e.target;
-    const { updateApd } = this.props;
+    const { updateBudget: dispatchBudget, updateApd } = this.props;
 
     const updates = {
-      keyPersonnel: { [index]: { costs: { [year]: value } } }
+      keyPersonnel: { [index]: { costs: { [year]: +value } } }
     };
     updateApd(updates);
+    dispatchBudget();
   };
 
   removePerson = (_, i) => this.props.removeKeyPerson(i);
@@ -210,10 +215,15 @@ ApdStateKeyPersonnel.propTypes = {
   removeKeyPerson: PropTypes.func.isRequired,
   setPrimaryKeyPerson: PropTypes.func.isRequired,
   updateApd: PropTypes.func.isRequired,
+  updateBudget: PropTypes.func.isRequired,
   years: PropTypes.array.isRequired
 };
 
-const mapStateToProps = ({ apd: { data: { keyPersonnel, years } } }) => ({
+const mapStateToProps = ({
+  apd: {
+    data: { keyPersonnel, years }
+  }
+}) => ({
   poc: keyPersonnel,
   years
 });
@@ -221,12 +231,14 @@ const mapDispatchToProps = {
   addKeyPerson,
   setPrimaryKeyPerson,
   removeKeyPerson,
-  updateApd: updateApdAction
+  updateApd: updateApdAction,
+  updateBudget
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ApdStateKeyPersonnel
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApdStateKeyPersonnel);
 
 export {
   ApdStateKeyPersonnel as plain,
