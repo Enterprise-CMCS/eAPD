@@ -12,7 +12,8 @@ import {
   addKeyPerson,
   removeKeyPerson,
   setPrimaryKeyPerson,
-  updateApd
+  updateApd,
+  updateBudget
 } from '../actions/apd';
 
 describe('apd state profile, Medicaid office component', () => {
@@ -43,6 +44,7 @@ describe('apd state profile, Medicaid office component', () => {
       removeKeyPerson: sandbox.spy(),
       setPrimaryKeyPerson: sandbox.spy(),
       updateApd: sandbox.spy(),
+      updateBudget: sandbox.spy(),
       years: ['1', '2']
     };
 
@@ -102,14 +104,15 @@ describe('apd state profile, Medicaid office component', () => {
         .at(0)
         .find('PersonForm')
         .prop('handleYearChange')(0, '1908')({
-        target: { value: 'new value' }
+        target: { value: '235235' }
       });
 
       expect(
         props.updateApd.calledWith({
-          keyPersonnel: { 0: { costs: { '1908': 'new value' } } }
+          keyPersonnel: { 0: { costs: { '1908': 235235 } } }
         })
       ).toBeTruthy();
+      expect(props.updateBudget.called).toBeTruthy();
     });
 
     test('maps state to props', () => {
@@ -133,7 +136,8 @@ describe('apd state profile, Medicaid office component', () => {
         addKeyPerson,
         removeKeyPerson,
         setPrimaryKeyPerson,
-        updateApd
+        updateApd,
+        updateBudget
       });
     });
   });
