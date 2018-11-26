@@ -45,8 +45,8 @@ describe('utility functions', () => {
   const {
     applyToNumbers,
     arrToObj,
+    generateKey,
     getParams,
-    nextSequence,
     replaceNulls,
     stateLookup
   } = load();
@@ -91,8 +91,15 @@ describe('utility functions', () => {
     );
   });
 
-  test('gets the next number in a sequence', () => {
-    expect(nextSequence([1, 2, 6, 38, 3, 19])).toEqual(39);
+  test('generates a key', () => {
+    // Letters are only 37.5% of hex digits, so running this test a lot makes
+    // it statistically very unlikely that we'd just happen to only generate
+    // keys that start with a letter
+    for (let i = 0; i < 50000; i += 1) {
+      const key = generateKey();
+      expect(key).toEqual(expect.stringMatching(/^[a-f0-9]{8}$/));
+      expect(key).toEqual(expect.stringMatching(/[a-f]/));
+    }
   });
 
   test('converts an array into an object with array values as object keys', () => {
