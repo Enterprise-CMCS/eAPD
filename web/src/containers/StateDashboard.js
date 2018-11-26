@@ -50,12 +50,13 @@ const StateDashboard = ({
               {fetching ? <Loading /> : null}
               {!fetching && apds.length === 0 ? t('stateDashboard.none') : null}
               {apds.map(apd => (
-                <div key={apd.id} className="p2 mb2 bg-gray-lightest">
-                  <div className="inline-block p2 mr2 bg-white blue">
+                <div key={apd.id} className="p2 mb2 bg-gray-lightest flex">
+                  <div className="inline-block p2 mr2 bg-white blue rounded left">
                     <img
                       src="/static/img/icon-document.svg"
                       alt=""
                       className="align-middle"
+                      style={{ minWidth: '33px' }}
                     />
                   </div>
                   <h3 className="inline-block">
