@@ -36,15 +36,15 @@ const StateDashboard = ({
         <Section resource="stateDashboard">
           <div className="mb3 bg-white rounded shadow accordian">
             <div className="px3 py2 border-bottom border-bottom-darken-1 blue">
+              <span className="h2">{state.name} APDs</span>
               <button
-                className="btn bg-blue white rounded p1 right"
+                className="btn bg-blue white rounded p1 right inline-block"
                 size="small"
                 onClick={create}
               >
                 Create new&nbsp;&nbsp;
                 <Icon icon={faPlusCircle} />
               </button>
-              <span className="h2">{state.name} APDs</span>
             </div>
             <div className="p3">
               {fetching ? <Loading /> : null}
@@ -58,9 +58,11 @@ const StateDashboard = ({
                       className="align-middle"
                     />
                   </div>
-                  <a href="#!" className="h3 bold" onClick={open(apd.id)}>
-                    HITECH APD for FFY {apd.years.join(', ')}
-                  </a>
+                  <h3 className="inline-block">
+                    <a href="#!" onClick={open(apd.id)}>
+                      HITECH APD for FFY {apd.years.join(', ')}
+                    </a>
+                  </h3>
                 </div>
               ))}
             </div>
