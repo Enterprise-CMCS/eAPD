@@ -7,7 +7,7 @@ citations:
   title: Federal Citations and Justification
   helpText: >-
     For each citation, select “Yes” if the state is complying. Select “No” if
-    the state is not complying. For every “no,” you must also provide a justification.
+    the state is not complying. For every “No,” you must also provide a justification.
 headers:
   procurement: Procurement Standards (Competition / Sole Source)
   recordsAccess: Access to Records, Reporting and Agency Attestations
