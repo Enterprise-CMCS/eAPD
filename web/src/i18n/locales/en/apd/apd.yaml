@@ -24,7 +24,7 @@ hie:
   title: HIE Overview
   helpText: >-
     Summarize planned HIE-funded activities within this APD. If
-    there are no HIE activities, skip this section. Please include:
+    there are no HIE activities, enter “No HIE activities.”
 
     (1) Description of the state's HIE approach (statewide, sub-state
     health information office (HIOs), etc.);
@@ -43,4 +43,4 @@ mmis:
   title: MMIS Overview
   helpText: >-
     Briefly summarize planned MMIS-funded activities contained within this APD.
-    If there are no MMIS activities, skip this section.
+    If there are no MMIS activities, enter “No MMIS activities.”
