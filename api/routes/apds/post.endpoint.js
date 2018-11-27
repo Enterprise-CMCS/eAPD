@@ -20,7 +20,10 @@ describe('APD endpoint | POST /apds', async () => {
   it('when authenticated as a user with permission', async () => {
     const cookies = await login();
 
-    const { response: { statusCode }, body } = await request.post(url, {
+    const {
+      response: { statusCode },
+      body
+    } = await request.post(url, {
       jar: cookies,
       json: true
     });

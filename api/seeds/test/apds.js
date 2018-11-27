@@ -24,7 +24,7 @@ exports.seed = async knex => {
   await knex('apd_incentive_payments').insert([
     {
       apd_id: 4000,
-      id: 0,
+      id: 9000,
       year: '2018',
       q1_eh_count: 0,
       q2_eh_count: 0,
@@ -45,7 +45,7 @@ exports.seed = async knex => {
     },
     {
       apd_id: 4000,
-      id: 1,
+      id: 9001,
       year: '2019',
       q1_eh_count: 0,
       q2_eh_count: 0,
@@ -66,7 +66,7 @@ exports.seed = async knex => {
     },
     {
       apd_id: 4000,
-      id: 2,
+      id: 9002,
       year: '2020',
       q1_eh_count: 0,
       q2_eh_count: 0,
@@ -109,13 +109,13 @@ exports.seed = async knex => {
   await knex('apd_key_personnel_yearly').insert([
     {
       apd_key_personnel_id: 21000,
-      id: 0,
+      id: 9000,
       cost: 100000,
       year: 2019
     },
     {
       apd_key_personnel_id: 21000,
-      id: 1,
+      id: 9001,
       cost: 100000,
       year: 2020
     }
@@ -123,78 +123,42 @@ exports.seed = async knex => {
   await knex('apd_previous_activity_expenses').insert([
     {
       apd_id: 4000,
-      id: 0,
+      id: 9000,
       year: '2016',
-      hie_federal_actual: 0,
-      hie_federal_approved: 540000,
-      hie_state_actual: 0,
-      hie_state_approved: 1000000,
-      hit_federal_actual: 850000,
-      hit_federal_approved: 900000,
-      hit_state_actual: 0,
-      hit_state_approved: 100000,
-      mmis_federal90_actual: 0,
-      mmis_federal90_approved: 0,
-      mmis_federal75_actual: 0,
-      mmis_federal75_approved: 0,
-      mmis_federal50_actual: 0,
-      mmis_federal50_approved: 0,
-      mmis_state10_actual: 0,
-      mmis_state10_approved: 0,
-      mmis_state25_actual: 0,
-      mmis_state25_approved: 0,
-      mmis_state50_actual: 0,
-      mmis_state50_approved: 0
+      hithie_total_approved: 540000,
+      hithie_federal_actual: 320000,
+      mmis90_total_approved: 0,
+      mmis90_federal_actual: 0,
+      mmis75_total_approved: 0,
+      mmis75_federal_actual: 0,
+      mmis50_total_approved: 0,
+      mmis50_federal_actual: 0
     },
     {
       apd_id: 4000,
-      id: 1,
+      id: 9001,
       year: '2017',
-      hie_federal_actual: 0,
-      hie_federal_approved: 540000,
-      hie_state_actual: 0,
-      hie_state_approved: 60000,
-      hit_federal_actual: 0,
-      hit_federal_approved: 1080000,
-      hit_state_actual: 0,
-      hit_state_approved: 120000,
-      mmis_federal90_actual: 0,
-      mmis_federal90_approved: 0,
-      mmis_federal75_actual: 0,
-      mmis_federal75_approved: 0,
-      mmis_federal50_actual: 0,
-      mmis_federal50_approved: 0,
-      mmis_state10_actual: 0,
-      mmis_state10_approved: 0,
-      mmis_state25_actual: 0,
-      mmis_state25_approved: 0,
-      mmis_state50_actual: 0,
-      mmis_state50_approved: 0
+      hithie_total_approved: 280000,
+      hithie_federal_actual: 140000,
+      mmis90_total_approved: 262460,
+      mmis90_federal_actual: 235720,
+      mmis75_total_approved: 75340,
+      mmis75_federal_actual: 23440,
+      mmis50_total_approved: 82545,
+      mmis50_federal_actual: 23445
     },
     {
       apd_id: 4000,
-      id: 2,
+      id: 9002,
       year: '2018',
-      hie_federal_actual: 0,
-      hie_federal_approved: 720000,
-      hie_state_actual: 0,
-      hie_state_approved: 80000,
-      hit_federal_actual: 0,
-      hit_federal_approved: 1080000,
-      hit_state_actual: 0,
-      hit_state_approved: 120000,
-      mmis_federal90_actual: 0,
-      mmis_federal90_approved: 0,
-      mmis_federal75_actual: 0,
-      mmis_federal75_approved: 0,
-      mmis_federal50_actual: 0,
-      mmis_federal50_approved: 0,
-      mmis_state10_actual: 0,
-      mmis_state10_approved: 0,
-      mmis_state25_actual: 0,
-      mmis_state25_approved: 0,
-      mmis_state50_actual: 0,
-      mmis_state50_approved: 0
+      hithie_total_approved: 234526,
+      hithie_federal_actual: 146346,
+      mmis90_total_approved: 863455,
+      mmis90_federal_actual: 614544,
+      mmis75_total_approved: 654455,
+      mmis75_federal_actual: 413246,
+      mmis50_total_approved: 375445,
+      mmis50_federal_actual: 129387
     }
   ]);
   await knex('activities').insert([
@@ -309,6 +273,7 @@ exports.seed = async knex => {
       end: null,
       name: 'Super SLR Incorporated',
       start: null,
+      totalCost: 32423,
       useHourly: false
     },
     {
@@ -318,6 +283,7 @@ exports.seed = async knex => {
       end: null,
       name: 'Tech Consulting Inc.',
       start: null,
+      totalCost: 473573,
       useHourly: false
     },
     {
@@ -327,6 +293,7 @@ exports.seed = async knex => {
       end: null,
       name: 'Interface Vendor Inc.',
       start: null,
+      totalCost: 26453574,
       useHourly: false
     },
     {
@@ -336,6 +303,7 @@ exports.seed = async knex => {
       end: null,
       name: 'TBD',
       start: null,
+      totalCost: 7398,
       useHourly: false
     },
     {
@@ -345,6 +313,7 @@ exports.seed = async knex => {
       end: null,
       name: '',
       start: null,
+      totalCost: 3496874,
       useHourly: false
     },
     {
@@ -354,6 +323,7 @@ exports.seed = async knex => {
       end: null,
       name: 'RFP Planning Vendor Inc.',
       start: null,
+      totalCost: 4368734,
       useHourly: false
     },
     {
@@ -363,6 +333,7 @@ exports.seed = async knex => {
       end: null,
       name: 'Blue Button Builder Inc.',
       start: null,
+      totalCost: 35246,
       useHourly: false
     },
     {
@@ -372,6 +343,7 @@ exports.seed = async knex => {
       end: null,
       name: 'TBD',
       start: null,
+      totalCost: 246477,
       useHourly: false
     },
     {
@@ -381,6 +353,7 @@ exports.seed = async knex => {
       end: null,
       name: 'Gateway Vendor Inc.',
       start: null,
+      totalCost: 7473747,
       useHourly: false
     },
     {
@@ -390,6 +363,7 @@ exports.seed = async knex => {
       end: null,
       name: 'Tech Consulting Inc.',
       start: null,
+      totalCost: 264574,
       useHourly: false
     },
     {
@@ -399,139 +373,140 @@ exports.seed = async knex => {
       end: null,
       name: 'TBD',
       start: null,
+      totalCost: 64574,
       useHourly: false
     }
   ]);
   await knex('activity_contractor_resources_yearly').insert([
     {
       contractor_resource_id: 4300,
-      id: 0,
+      id: 9000,
       cost: 999756,
       year: 2019
     },
     {
       contractor_resource_id: 4300,
-      id: 1,
+      id: 9001,
       cost: 342444,
       year: 2020
     },
     {
       contractor_resource_id: 4301,
-      id: 100,
+      id: 9100,
       cost: 333000,
       year: 2019
     },
     {
       contractor_resource_id: 4301,
-      id: 101,
+      id: 9101,
       cost: 200000,
       year: 2020
     },
     {
       contractor_resource_id: 4310,
-      id: 1000,
+      id: 9200,
       cost: 650000,
       year: 2019
     },
     {
       contractor_resource_id: 4310,
-      id: 1001,
+      id: 9201,
       cost: 750000,
       year: 2020
     },
     {
       contractor_resource_id: 4311,
-      id: 1100,
+      id: 9300,
       cost: 0,
       year: 2019
     },
     {
       contractor_resource_id: 4311,
-      id: 1101,
+      id: 9301,
       cost: 1000000,
       year: 2020
     },
     {
       contractor_resource_id: 4320,
-      id: 2000,
+      id: 9400,
       cost: 0,
       year: 2019
     },
     {
       contractor_resource_id: 4320,
-      id: 2001,
+      id: 9401,
       cost: 0,
       year: 2020
     },
     {
       contractor_resource_id: 4330,
-      id: 3000,
+      id: 9500,
       cost: 500000,
       year: 2019
     },
     {
       contractor_resource_id: 4330,
-      id: 3001,
+      id: 9501,
       cost: 0,
       year: 2020
     },
     {
       contractor_resource_id: 4331,
-      id: 3100,
+      id: 9600,
       cost: 0,
       year: 2019
     },
     {
       contractor_resource_id: 4331,
-      id: 3101,
+      id: 9601,
       cost: 2000000,
       year: 2020
     },
     {
       contractor_resource_id: 4340,
-      id: 4000,
+      id: 9700,
       cost: 0,
       year: 2019
     },
     {
       contractor_resource_id: 4340,
-      id: 4001,
+      id: 9701,
       cost: 1500000,
       year: 2020
     },
     {
       contractor_resource_id: 4341,
-      id: 4100,
+      id: 9800,
       cost: 500000,
       year: 2019
     },
     {
       contractor_resource_id: 4341,
-      id: 4101,
+      id: 9801,
       cost: 0,
       year: 2020
     },
     {
       contractor_resource_id: 4350,
-      id: 5000,
+      id: 9900,
       cost: 450000,
       year: 2019
     },
     {
       contractor_resource_id: 4350,
-      id: 5001,
+      id: 9901,
       cost: 150000,
       year: 2020
     },
     {
       contractor_resource_id: 4351,
-      id: 5100,
+      id: 9010,
       cost: 200000,
       year: 2019
     },
     {
       contractor_resource_id: 4351,
-      id: 5101,
+      id: 9011,
       cost: 500000,
       year: 2020
     }
@@ -539,7 +514,7 @@ exports.seed = async knex => {
   await knex('activity_cost_allocation').insert([
     {
       activity_id: 4100,
-      id: 0,
+      id: 9000,
       federal_percent: 0.9,
       state_percent: 0.1,
       other_amount: 0,
@@ -547,7 +522,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4100,
-      id: 1,
+      id: 9001,
       federal_percent: 0.9,
       state_percent: 0.1,
       other_amount: 0,
@@ -555,7 +530,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4101,
-      id: 100,
+      id: 9100,
       federal_percent: 0.9,
       state_percent: 0.1,
       other_amount: 0,
@@ -563,7 +538,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4101,
-      id: 101,
+      id: 9101,
       federal_percent: 0.75,
       state_percent: 0.25,
       other_amount: 0,
@@ -571,7 +546,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4102,
-      id: 200,
+      id: 9200,
       federal_percent: 0.9,
       state_percent: 0.1,
       other_amount: 0,
@@ -579,7 +554,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4102,
-      id: 201,
+      id: 9201,
       federal_percent: 0.9,
       state_percent: 0.1,
       other_amount: 0,
@@ -587,7 +562,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4103,
-      id: 300,
+      id: 9300,
       federal_percent: 0.9,
       state_percent: 0.1,
       other_amount: 0,
@@ -595,7 +570,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4103,
-      id: 301,
+      id: 9301,
       federal_percent: 0.9,
       state_percent: 0.1,
       other_amount: 0,
@@ -603,7 +578,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4104,
-      id: 400,
+      id: 9400,
       federal_percent: 0.9,
       state_percent: 0.1,
       other_amount: 0,
@@ -611,7 +586,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4104,
-      id: 401,
+      id: 9401,
       federal_percent: 0.9,
       state_percent: 0.1,
       other_amount: 0,
@@ -619,7 +594,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4105,
-      id: 500,
+      id: 9500,
       federal_percent: 0.5,
       state_percent: 0.5,
       other_amount: 125000,
@@ -627,7 +602,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4105,
-      id: 501,
+      id: 9501,
       federal_percent: 0.9,
       state_percent: 0.1,
       other_amount: 125000,
@@ -687,97 +662,97 @@ exports.seed = async knex => {
   await knex('activity_expense_entries').insert([
     {
       expense_id: 4400,
-      id: 0,
+      id: 9000,
       amount: 40000,
       year: '2019'
     },
     {
       expense_id: 4400,
-      id: 1,
+      id: 9001,
       amount: 40000,
       year: '2020'
     },
     {
       expense_id: 4401,
-      id: 100,
+      id: 9100,
       amount: 35000,
       year: '2019'
     },
     {
       expense_id: 4401,
-      id: 101,
+      id: 9101,
       amount: 35000,
       year: '2020'
     },
     {
       expense_id: 4402,
-      id: 200,
+      id: 9200,
       amount: 700000,
       year: '2019'
     },
     {
       expense_id: 4402,
-      id: 201,
+      id: 9201,
       amount: 0,
       year: '2020'
     },
     {
       expense_id: 4410,
-      id: 1000,
+      id: 9300,
       amount: 0,
       year: '2019'
     },
     {
       expense_id: 4410,
-      id: 1001,
+      id: 9301,
       amount: 0,
       year: '2020'
     },
     {
       expense_id: 4420,
-      id: 2000,
+      id: 9400,
       amount: 0,
       year: '2019'
     },
     {
       expense_id: 4420,
-      id: 2001,
+      id: 9401,
       amount: 0,
       year: '2020'
     },
     {
       expense_id: 4430,
-      id: 3000,
+      id: 9500,
       amount: 0,
       year: '2019'
     },
     {
       expense_id: 4430,
-      id: 3001,
+      id: 9501,
       amount: 0,
       year: '2020'
     },
     {
       expense_id: 4440,
-      id: 4000,
+      id: 9600,
       amount: 0,
       year: '2019'
     },
     {
       expense_id: 4440,
-      id: 4001,
+      id: 9601,
       amount: 0,
       year: '2020'
     },
     {
       expense_id: 4450,
-      id: 5000,
+      id: 9700,
       amount: 25000,
       year: '2019'
     },
     {
       expense_id: 4450,
-      id: 5001,
+      id: 9701,
       amount: 25000,
       year: '2020'
     }
@@ -785,7 +760,7 @@ exports.seed = async knex => {
   await knex('activity_goals').insert([
     {
       activity_id: 4100,
-      id: 0,
+      id: 9000,
       description:
         '<p>Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.</p>\n<p></p>\n',
       objective:
@@ -793,7 +768,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4100,
-      id: 1,
+      id: 9001,
       description:
         '<p>Provide support to EPs and EHs through attestation process.</p>\n',
       objective:
@@ -801,7 +776,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4101,
-      id: 100,
+      id: 9100,
       description:
         '<p>Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.&nbsp;</p>\n',
       objective:
@@ -809,37 +784,37 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4102,
-      id: 200,
+      id: 9200,
       description: '<p>Plan to do a thing.</p>\n',
       objective: '<p>Do a thing.</p>\n'
     },
     {
       activity_id: 4102,
-      id: 201,
+      id: 9201,
       description: '<p>Onboard 100 providers.</p>\n',
       objective: '<p>100 providers onboarded.</p>\n'
     },
     {
       activity_id: 4103,
-      id: 300,
+      id: 9300,
       description: '<p>Build blue button.</p>\n',
       objective: '<p>Test blue button with 10 providers.</p>\n'
     },
     {
       activity_id: 4104,
-      id: 400,
+      id: 9400,
       description: '<p>Identifiy PH needs</p>\n',
       objective: '<p>Complete a build/implementation plan by Summery 2019</p>\n'
     },
     {
       activity_id: 4104,
-      id: 401,
+      id: 9401,
       description: '<p>Connect PH systems to HIE</p>\n',
       objective: '<p>Connect all 3 PH systems to HIE by Fall 2019</p>\n'
     },
     {
       activity_id: 4105,
-      id: 500,
+      id: 9500,
       description: '<p>Complete MITA 3.0 HITECH portion.</p>\n',
       objective: '<p>&nbsp;Complete MITA 3.0 HITECH portion by July 2019</p>\n'
     }
@@ -847,7 +822,7 @@ exports.seed = async knex => {
   await knex('activity_quarterly_ffp').insert([
     {
       activity_id: 4100,
-      id: 0,
+      id: 9000,
       year: 2019,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -864,7 +839,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4100,
-      id: 1,
+      id: 9001,
       year: 2020,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -881,7 +856,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4101,
-      id: 100,
+      id: 9100,
       year: 2019,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -898,7 +873,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4101,
-      id: 101,
+      id: 9101,
       year: 2020,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -915,7 +890,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4102,
-      id: 200,
+      id: 9200,
       year: 2019,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -932,7 +907,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4102,
-      id: 201,
+      id: 9201,
       year: 2020,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -949,7 +924,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4103,
-      id: 300,
+      id: 9300,
       year: 2019,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -966,7 +941,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4103,
-      id: 301,
+      id: 9301,
       year: 2020,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -983,7 +958,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4104,
-      id: 400,
+      id: 9400,
       year: 2019,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -1000,7 +975,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4104,
-      id: 401,
+      id: 9401,
       year: 2020,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -1017,7 +992,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4105,
-      id: 500,
+      id: 9500,
       year: 2019,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -1034,7 +1009,7 @@ exports.seed = async knex => {
     },
     {
       activity_id: 4105,
-      id: 501,
+      id: 9501,
       year: 2020,
       q1_combined: 0.25,
       q1_contractors: 0.25,
@@ -1053,147 +1028,147 @@ exports.seed = async knex => {
   await knex('activity_schedule').insert([
     {
       activity_id: 4100,
-      id: 0,
+      id: 9000,
       end_date: '2018-09-07',
       milestone: 'Implementation of Final Rule and Stage 3 System Developments'
     },
     {
       activity_id: 4100,
-      id: 1,
+      id: 9001,
       end_date: '2017-12-31',
       milestone: 'Environmental Scan Completion'
     },
     {
       activity_id: 4100,
-      id: 2,
+      id: 9002,
       end_date: '2018-05-30',
       milestone: 'HIT Roadmap Development'
     },
     {
       activity_id: 4101,
-      id: 100,
+      id: 9100,
       end_date: '2018-12-31',
       milestone: 'Implement MMIS-HIE Interface'
     },
     {
       activity_id: 4101,
-      id: 101,
+      id: 9101,
       end_date: '2018-12-31',
       milestone: 'Develop MMIS-HIE Interface Requirements'
     },
     {
       activity_id: 4102,
-      id: 200,
+      id: 9200,
       end_date: '2020-09-30',
       milestone: 'Onboard providers to assistance program'
     },
     {
       activity_id: 4102,
-      id: 201,
+      id: 9201,
       end_date: '2019-12-31',
       milestone: 'Development of Roadmap'
     },
     {
       activity_id: 4102,
-      id: 202,
+      id: 9202,
       end_date: '2019-01-01',
       milestone: 'HIE Staff Augmentation'
     },
     {
       activity_id: 4102,
-      id: 203,
+      id: 9203,
       end_date: '2019-01-01',
       milestone: 'Modules for Care Coordination'
     },
     {
       activity_id: 4102,
-      id: 204,
+      id: 9204,
       end_date: '2020-09-30',
       milestone: 'Provider Onboarding'
     },
     {
       activity_id: 4102,
-      id: 205,
+      id: 9205,
       end_date: '2019-01-01',
       milestone: 'EDIE System Implementation'
     },
     {
       activity_id: 4102,
-      id: 206,
+      id: 9206,
       end_date: '2019-12-31',
       milestone: 'Develop myAlaska HIE Authentication Requirements'
     },
     {
       activity_id: 4102,
-      id: 207,
+      id: 9207,
       end_date: '2019-03-31',
       milestone:
         'Completion of requirements gathering to prepare to receive ELR'
     },
     {
       activity_id: 4102,
-      id: 208,
+      id: 9208,
       end_date: '2019-12-31',
       milestone:
         'Configuration of internal BizTalk HL7 processes to translate the HL7 messages to PRISM'
     },
     {
       activity_id: 4102,
-      id: 209,
+      id: 9209,
       end_date: '2019-09-30',
       milestone: 'Onboard Lab Providers'
     },
     {
       activity_id: 4102,
-      id: 210,
+      id: 9210,
       end_date: '2018-12-31',
       milestone: 'Establishment of program requirements and outreach strategy'
     },
     {
       activity_id: 4103,
-      id: 300,
+      id: 9300,
       end_date: '2019-04-01',
       milestone: 'PHR/Blue Button HIE Build'
     },
     {
       activity_id: 4103,
-      id: 301,
+      id: 9301,
       end_date: '2018-12-31',
       milestone: 'Blue Button Implementation'
     },
     {
       activity_id: 4103,
-      id: 302,
+      id: 9302,
       end_date: '2018-12-31',
       milestone: 'On-Boarding of PHR/Blue Button Participants'
     },
     {
       activity_id: 4104,
-      id: 400,
+      id: 9400,
       end_date: '2017-03-31',
       milestone: 'PH Completion of requirements gathering'
     },
     {
       activity_id: 4104,
-      id: 401,
+      id: 9401,
       end_date: '2020-09-30',
       milestone: 'PH Development and implementation of CRM Tool'
     },
     {
       activity_id: 4104,
-      id: 402,
+      id: 9402,
       end_date: '2020-09-30',
       milestone: 'PH Connection of Public Health systems to HIE'
     },
     {
       activity_id: 4105,
-      id: 500,
+      id: 9500,
       end_date: '2019-02-28',
       milestone: 'MITA 3.0 SS-A Project'
     },
     {
       activity_id: 4105,
-      id: 501,
+      id: 9501,
       end_date: '2019-12-31',
       milestone: 'HITECH SS-A Assessment'
     }
@@ -1204,7 +1179,6 @@ exports.seed = async knex => {
       id: 4500,
       description:
         'Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.',
-      key_personnel: false,
       title: 'Project Assistant'
     },
     {
@@ -1212,7 +1186,6 @@ exports.seed = async knex => {
       id: 4501,
       description:
         'Develop and monitor reports, assist data users in developing and managing queries.',
-      key_personnel: false,
       title:
         'EHR Incentive Program Meaningful Use Coordinator (Research Analyst III)'
     },
@@ -1221,7 +1194,6 @@ exports.seed = async knex => {
       id: 4502,
       description:
         'Provide analysis and coordination activities between the HIT Program Office and the IT section, to ensure that adequate resources and priority are established to complete the technology projects as identified.',
-      key_personnel: true,
       title: 'IT Liaison'
     },
     {
@@ -1229,7 +1201,6 @@ exports.seed = async knex => {
       id: 4503,
       description:
         'Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.',
-      key_personnel: false,
       title: 'Accountant III'
     },
     {
@@ -1237,7 +1208,6 @@ exports.seed = async knex => {
       id: 4504,
       description:
         'Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program',
-      key_personnel: false,
       title: 'Public Information Officer'
     },
     {
@@ -1245,7 +1215,6 @@ exports.seed = async knex => {
       id: 4505,
       description:
         'Coordinate office resources, manage staff, budget, and resource assignments, and report program status.',
-      key_personnel: true,
       title: 'Systems Chief'
     },
     {
@@ -1253,7 +1222,6 @@ exports.seed = async knex => {
       id: 4506,
       description:
         'Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.',
-      key_personnel: false,
       title:
         'Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)'
     },
@@ -1262,14 +1230,12 @@ exports.seed = async knex => {
       id: 4507,
       description:
         'Supports design, development and implementation of information technology infrastructure for the projects/programs under the IT Planning office supported by this Implementation Advanced Planning Document.',
-      key_personnel: false,
       title: 'System Analyst (Analyst Programmer IV)'
     },
     {
       activity_id: 4101,
       id: 4510,
       description: 'Assist with stuff',
-      key_personnel: false,
       title: 'Project Assistant'
     },
     {
@@ -1277,7 +1243,6 @@ exports.seed = async knex => {
       id: 4511,
       description:
         'This position is responsible for the program development, planning, coordination, evaluation, independent management and oversight of the Tycho Automated Info',
-      key_personnel: false,
       title: 'MMIS Project Manager'
     },
     {
@@ -1285,7 +1250,6 @@ exports.seed = async knex => {
       id: 4512,
       description:
         'Under the direct supervision of the Project Manager, this position is responsible for the development of a comprehensive training and support program for the Tycho Automated Information Management System',
-      key_personnel: false,
       title: 'MMIS Trainer'
     },
     {
@@ -1293,21 +1257,18 @@ exports.seed = async knex => {
       id: 4513,
       description:
         'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
-      key_personnel: false,
       title: 'Programmer IV'
     },
     {
       activity_id: 4101,
       id: 4514,
       description: 'Make sure its secure.',
-      key_personnel: false,
       title: 'Security IT'
     },
     {
       activity_id: 4101,
       id: 4515,
       description: 'Run the day to day.',
-      key_personnel: false,
       title: 'Operations Specialist'
     },
     {
@@ -1315,7 +1276,6 @@ exports.seed = async knex => {
       id: 4516,
       description:
         'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
-      key_personnel: false,
       title: 'Programmer V'
     },
     {
@@ -1323,7 +1283,6 @@ exports.seed = async knex => {
       id: 4517,
       description:
         'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
-      key_personnel: false,
       title: 'Programmer III'
     },
     {
@@ -1331,308 +1290,304 @@ exports.seed = async knex => {
       id: 4520,
       description:
         'Lead technical architecture design and development efforts for designing, implementing and maintaining services integrations leveraging resources such as the MCI, MPI and state HIE along with other DHSS Business Systems.',
-      key_personnel: false,
       title: 'Services Integration Architect/ Programmer (Analyst Programmer V)'
     },
     {
       activity_id: 4103,
       id: 4530,
       description: '',
-      key_personnel: false,
       title: ''
     },
     {
       activity_id: 4104,
       id: 4540,
       description: '',
-      key_personnel: false,
       title: ''
     },
     {
       activity_id: 4105,
       id: 4550,
       description: '1',
-      key_personnel: false,
       title: 'State MITA Person'
     }
   ]);
   await knex('activity_state_personnel_yearly').insert([
     {
       personnel_id: 4500,
-      id: 0,
+      id: 9000,
       cost: 86000,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4500,
-      id: 1,
+      id: 9001,
       cost: 88000,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4501,
-      id: 100,
+      id: 9100,
       cost: 101115,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4501,
-      id: 101,
+      id: 9101,
       cost: 102111,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4502,
-      id: 200,
+      id: 9200,
       cost: 101000,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4502,
-      id: 201,
+      id: 9201,
       cost: 104000,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4503,
-      id: 300,
+      id: 9300,
       cost: 101000,
       fte: 3,
       year: 2019
     },
     {
       personnel_id: 4503,
-      id: 301,
+      id: 9301,
       cost: 109000,
       fte: 3,
       year: 2020
     },
     {
       personnel_id: 4504,
-      id: 400,
+      id: 9400,
       cost: 165000,
       fte: 0.5,
       year: 2019
     },
     {
       personnel_id: 4504,
-      id: 401,
+      id: 9401,
       cost: 170000,
       fte: 0.5,
       year: 2020
     },
     {
       personnel_id: 4505,
-      id: 500,
+      id: 9500,
       cost: 135000,
       fte: 0.5,
       year: 2019
     },
     {
       personnel_id: 4505,
-      id: 501,
+      id: 9501,
       cost: 140000,
       fte: 0.5,
       year: 2020
     },
     {
       personnel_id: 4506,
-      id: 600,
+      id: 9600,
       cost: 110012,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4506,
-      id: 601,
+      id: 9601,
       cost: 111102,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4507,
-      id: 700,
+      id: 9700,
       cost: 98987,
       fte: 4,
       year: 2019
     },
     {
       personnel_id: 4507,
-      id: 701,
+      id: 9701,
       cost: 99897,
       fte: 4,
       year: 2020
     },
     {
       personnel_id: 4510,
-      id: 1000,
+      id: 9800,
       cost: 98000,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4510,
-      id: 1001,
+      id: 9801,
       cost: 99000,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4511,
-      id: 1100,
+      id: 9900,
       cost: 140000,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4511,
-      id: 1101,
+      id: 9901,
       cost: 144000,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4512,
-      id: 1200,
+      id: 9010,
       cost: 115000,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4512,
-      id: 1201,
+      id: 9011,
       cost: 115000,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4513,
-      id: 1300,
+      id: 9110,
       cost: 140000,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4513,
-      id: 1301,
+      id: 9111,
       cost: 145000,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4514,
-      id: 1400,
+      id: 9210,
       cost: 115000,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4514,
-      id: 1401,
+      id: 9211,
       cost: 120000,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4515,
-      id: 1500,
+      id: 9310,
       cost: 125000,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4515,
-      id: 1501,
+      id: 9311,
       cost: 130000,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4516,
-      id: 1600,
+      id: 9410,
       cost: 150000,
       fte: 2,
       year: 2019
     },
     {
       personnel_id: 4516,
-      id: 1601,
+      id: 9411,
       cost: 155000,
       fte: 3,
       year: 2020
     },
     {
       personnel_id: 4517,
-      id: 1700,
+      id: 9510,
       cost: 120000,
       fte: 1,
       year: 2019
     },
     {
       personnel_id: 4517,
-      id: 1701,
+      id: 9511,
       cost: 125000,
       fte: 1,
       year: 2020
     },
     {
       personnel_id: 4520,
-      id: 2000,
+      id: 9610,
       cost: 115000,
       fte: 4,
       year: 2019
     },
     {
       personnel_id: 4520,
-      id: 2001,
+      id: 9611,
       cost: 119000,
       fte: 4,
       year: 2020
     },
     {
       personnel_id: 4530,
-      id: 3000,
+      id: 9710,
       cost: 0,
       fte: 0,
       year: 2019
     },
     {
       personnel_id: 4530,
-      id: 3001,
+      id: 9711,
       cost: 0,
       fte: 0,
       year: 2020
     },
     {
       personnel_id: 4540,
-      id: 4000,
+      id: 9810,
       cost: 0,
       fte: 0,
       year: 2019
     },
     {
       personnel_id: 4540,
-      id: 4001,
+      id: 9811,
       cost: 0,
       fte: 0,
       year: 2020
     },
     {
       personnel_id: 4550,
-      id: 5000,
+      id: 9910,
       cost: 100000,
       fte: 0.5,
       year: 2019
     },
     {
       personnel_id: 4550,
-      id: 5001,
+      id: 9911,
       cost: 100000,
       fte: 1,
       year: 2020

@@ -27,15 +27,16 @@ Object {
           "id": 1,
           "name": "",
           "start": null,
+          "totalCost": 0,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "0.00",
+              "cost": 0,
               "id": 1,
               "year": 2019,
             },
             Object {
-              "cost": "0.00",
+              "cost": 0,
               "id": 2,
               "year": 2020,
             },
@@ -45,13 +46,13 @@ Object {
       "costAllocation": Array [
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2019,
         },
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2020,
         },
@@ -67,12 +68,12 @@ Object {
           "description": "",
           "entries": Array [
             Object {
-              "amount": "0.00",
+              "amount": 0,
               "id": 1,
               "year": "2019",
             },
             Object {
-              "amount": "0.00",
+              "amount": 0,
               "id": 2,
               "year": "2020",
             },
@@ -166,17 +167,16 @@ Object {
         Object {
           "description": "",
           "id": 1,
-          "keyPersonnel": null,
           "title": "",
           "years": Array [
             Object {
-              "cost": "0.00",
+              "cost": 0,
               "fte": "0.00",
               "id": 1,
               "year": 2019,
             },
             Object {
-              "cost": "0.00",
+              "cost": 0,
               "fte": "0.00",
               "id": 2,
               "year": 2020,
@@ -252,89 +252,65 @@ Object {
   "period": null,
   "previousActivityExpenses": Array [
     Object {
-      "hie": Object {
+      "hithie": Object {
         "federalActual": 0,
-        "federalApproved": 0,
-        "stateActual": 0,
-        "stateApproved": 0,
-      },
-      "hit": Object {
-        "federalActual": 0,
-        "federalApproved": 0,
-        "stateActual": 0,
-        "stateApproved": 0,
+        "totalApproved": 0,
       },
       "mmis": Object {
-        "federal50Actual": 0,
-        "federal50Approved": 0,
-        "federal75Actual": 0,
-        "federal75Approved": 0,
-        "federal90Actual": 0,
-        "federal90Approved": 0,
-        "state10Actual": 0,
-        "state10Approved": 0,
-        "state25Actual": 0,
-        "state25Approved": 0,
-        "state50Actual": 0,
-        "state50Approved": 0,
+        "50": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "75": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "90": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
       },
       "year": "2019",
     },
     Object {
-      "hie": Object {
+      "hithie": Object {
         "federalActual": 0,
-        "federalApproved": 0,
-        "stateActual": 0,
-        "stateApproved": 0,
-      },
-      "hit": Object {
-        "federalActual": 0,
-        "federalApproved": 0,
-        "stateActual": 0,
-        "stateApproved": 0,
+        "totalApproved": 0,
       },
       "mmis": Object {
-        "federal50Actual": 0,
-        "federal50Approved": 0,
-        "federal75Actual": 0,
-        "federal75Approved": 0,
-        "federal90Actual": 0,
-        "federal90Approved": 0,
-        "state10Actual": 0,
-        "state10Approved": 0,
-        "state25Actual": 0,
-        "state25Approved": 0,
-        "state50Actual": 0,
-        "state50Approved": 0,
+        "50": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "75": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "90": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
       },
       "year": "2018",
     },
     Object {
-      "hie": Object {
+      "hithie": Object {
         "federalActual": 0,
-        "federalApproved": 0,
-        "stateActual": 0,
-        "stateApproved": 0,
-      },
-      "hit": Object {
-        "federalActual": 0,
-        "federalApproved": 0,
-        "stateActual": 0,
-        "stateApproved": 0,
+        "totalApproved": 0,
       },
       "mmis": Object {
-        "federal50Actual": 0,
-        "federal50Approved": 0,
-        "federal75Actual": 0,
-        "federal75Approved": 0,
-        "federal90Actual": 0,
-        "federal90Approved": 0,
-        "state10Actual": 0,
-        "state10Approved": 0,
-        "state25Actual": 0,
-        "state25Approved": 0,
-        "state50Actual": 0,
-        "state50Approved": 0,
+        "50": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "75": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "90": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
       },
       "year": "2017",
     },
