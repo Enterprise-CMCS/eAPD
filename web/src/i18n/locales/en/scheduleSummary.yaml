@@ -1,11 +1,12 @@
 title: Activity Schedule Summary
 helpText: >-
-  The Activity Schedule Summary shows all activities and milestones for the APD in a singular view.
+  See all activities and milestones for the APD together in one table.
 noDataMessage: There are no milestones scheduled.
 main:
   title: Summary Schedule Table
   helpText: >-
-    This table aggregates the activities, milestones, and dates based on the individual milestones described for each activity.
+    This table aggregates the activities, milestones, and dates based on the individual
+    milestones described for each activity.
   table:
     activity: Activity
     milestone: Milestone
