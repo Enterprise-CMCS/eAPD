@@ -37,16 +37,17 @@ Object {
           "id": 4300,
           "name": "Super SLR Incorporated",
           "start": null,
+          "totalCost": 32423,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "999756.00",
-              "id": 0,
+              "cost": 999756,
+              "id": 9000,
               "year": 2019,
             },
             Object {
-              "cost": "342444.00",
-              "id": 1,
+              "cost": 342444,
+              "id": 9001,
               "year": 2020,
             },
           ],
@@ -68,16 +69,17 @@ Object {
           "id": 4301,
           "name": "Tech Consulting Inc.",
           "start": null,
+          "totalCost": 473573,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "333000.00",
-              "id": 100,
+              "cost": 333000,
+              "id": 9100,
               "year": 2019,
             },
             Object {
-              "cost": "200000.00",
-              "id": 101,
+              "cost": 200000,
+              "id": 9101,
               "year": 2020,
             },
           ],
@@ -86,13 +88,13 @@ Object {
       "costAllocation": Array [
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2019,
         },
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2020,
         },
@@ -117,13 +119,13 @@ Object {
           "description": "",
           "entries": Array [
             Object {
-              "amount": "40000.00",
-              "id": 0,
+              "amount": 40000,
+              "id": 9000,
               "year": "2019",
             },
             Object {
-              "amount": "40000.00",
-              "id": 1,
+              "amount": 40000,
+              "id": 9001,
               "year": "2020",
             },
           ],
@@ -134,13 +136,13 @@ Object {
           "description": "",
           "entries": Array [
             Object {
-              "amount": "35000.00",
-              "id": 100,
+              "amount": 35000,
+              "id": 9100,
               "year": "2019",
             },
             Object {
-              "amount": "35000.00",
-              "id": 101,
+              "amount": 35000,
+              "id": 9101,
               "year": "2020",
             },
           ],
@@ -151,13 +153,13 @@ Object {
           "description": "",
           "entries": Array [
             Object {
-              "amount": "700000.00",
-              "id": 200,
+              "amount": 700000,
+              "id": 9200,
               "year": "2019",
             },
             Object {
-              "amount": "0.00",
-              "id": 201,
+              "amount": 0,
+              "id": 9201,
               "year": "2020",
             },
           ],
@@ -182,7 +184,7 @@ Object {
           "description": "<p>Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.</p>
 <p></p>
 ",
-          "id": 0,
+          "id": 9000,
           "objective": "<ol>
 <li>Complete SLR modifications by 11/1/18</li>
 <li>Accept attestations through 4/30/19.</li>
@@ -192,7 +194,7 @@ Object {
         Object {
           "description": "<p>Provide support to EPs and EHs through attestation process.</p>
 ",
-          "id": 1,
+          "id": 9001,
           "objective": "<ol>
 <li>Guidance available on Tycho's websites</li>
 <li>Office hours availble for EPs and EHs</li>
@@ -256,19 +258,19 @@ Object {
       "schedule": Array [
         Object {
           "endDate": "2018-09-07",
-          "id": 0,
+          "id": 9000,
           "milestone": "Implementation of Final Rule and Stage 3 System Developments",
           "status": null,
         },
         Object {
           "endDate": "2017-12-31",
-          "id": 1,
+          "id": 9001,
           "milestone": "Environmental Scan Completion",
           "status": null,
         },
         Object {
           "endDate": "2018-05-30",
-          "id": 2,
+          "id": 9002,
           "milestone": "HIT Roadmap Development",
           "status": null,
         },
@@ -290,19 +292,18 @@ Object {
         Object {
           "description": "Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.",
           "id": 4500,
-          "keyPersonnel": false,
           "title": "Project Assistant",
           "years": Array [
             Object {
-              "cost": "86000.00",
+              "cost": 86000,
               "fte": "1.00",
-              "id": 0,
+              "id": 9000,
               "year": 2019,
             },
             Object {
-              "cost": "88000.00",
+              "cost": 88000,
               "fte": "1.00",
-              "id": 1,
+              "id": 9001,
               "year": 2020,
             },
           ],
@@ -310,19 +311,18 @@ Object {
         Object {
           "description": "Develop and monitor reports, assist data users in developing and managing queries.",
           "id": 4501,
-          "keyPersonnel": false,
           "title": "EHR Incentive Program Meaningful Use Coordinator (Research Analyst III)",
           "years": Array [
             Object {
-              "cost": "101115.00",
+              "cost": 101115,
               "fte": "1.00",
-              "id": 100,
+              "id": 9100,
               "year": 2019,
             },
             Object {
-              "cost": "102111.00",
+              "cost": 102111,
               "fte": "1.00",
-              "id": 101,
+              "id": 9101,
               "year": 2020,
             },
           ],
@@ -330,19 +330,18 @@ Object {
         Object {
           "description": "Provide analysis and coordination activities between the HIT Program Office and the IT section, to ensure that adequate resources and priority are established to complete the technology projects as identified.",
           "id": 4502,
-          "keyPersonnel": true,
           "title": "IT Liaison",
           "years": Array [
             Object {
-              "cost": "101000.00",
+              "cost": 101000,
               "fte": "1.00",
-              "id": 200,
+              "id": 9200,
               "year": 2019,
             },
             Object {
-              "cost": "104000.00",
+              "cost": 104000,
               "fte": "1.00",
-              "id": 201,
+              "id": 9201,
               "year": 2020,
             },
           ],
@@ -350,19 +349,18 @@ Object {
         Object {
           "description": "Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.",
           "id": 4503,
-          "keyPersonnel": false,
           "title": "Accountant III",
           "years": Array [
             Object {
-              "cost": "101000.00",
+              "cost": 101000,
               "fte": "3.00",
-              "id": 300,
+              "id": 9300,
               "year": 2019,
             },
             Object {
-              "cost": "109000.00",
+              "cost": 109000,
               "fte": "3.00",
-              "id": 301,
+              "id": 9301,
               "year": 2020,
             },
           ],
@@ -370,19 +368,18 @@ Object {
         Object {
           "description": "Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program",
           "id": 4504,
-          "keyPersonnel": false,
           "title": "Public Information Officer",
           "years": Array [
             Object {
-              "cost": "165000.00",
+              "cost": 165000,
               "fte": "0.50",
-              "id": 400,
+              "id": 9400,
               "year": 2019,
             },
             Object {
-              "cost": "170000.00",
+              "cost": 170000,
               "fte": "0.50",
-              "id": 401,
+              "id": 9401,
               "year": 2020,
             },
           ],
@@ -390,19 +387,18 @@ Object {
         Object {
           "description": "Coordinate office resources, manage staff, budget, and resource assignments, and report program status.",
           "id": 4505,
-          "keyPersonnel": true,
           "title": "Systems Chief",
           "years": Array [
             Object {
-              "cost": "135000.00",
+              "cost": 135000,
               "fte": "0.50",
-              "id": 500,
+              "id": 9500,
               "year": 2019,
             },
             Object {
-              "cost": "140000.00",
+              "cost": 140000,
               "fte": "0.50",
-              "id": 501,
+              "id": 9501,
               "year": 2020,
             },
           ],
@@ -410,19 +406,18 @@ Object {
         Object {
           "description": "Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.",
           "id": 4506,
-          "keyPersonnel": false,
           "title": "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)",
           "years": Array [
             Object {
-              "cost": "110012.00",
+              "cost": 110012,
               "fte": "1.00",
-              "id": 600,
+              "id": 9600,
               "year": 2019,
             },
             Object {
-              "cost": "111102.00",
+              "cost": 111102,
               "fte": "1.00",
-              "id": 601,
+              "id": 9601,
               "year": 2020,
             },
           ],
@@ -430,19 +425,18 @@ Object {
         Object {
           "description": "Supports design, development and implementation of information technology infrastructure for the projects/programs under the IT Planning office supported by this Implementation Advanced Planning Document.",
           "id": 4507,
-          "keyPersonnel": false,
           "title": "System Analyst (Analyst Programmer IV)",
           "years": Array [
             Object {
-              "cost": "98987.00",
+              "cost": 98987,
               "fte": "4.00",
-              "id": 700,
+              "id": 9700,
               "year": 2019,
             },
             Object {
-              "cost": "99897.00",
+              "cost": 99897,
               "fte": "4.00",
-              "id": 701,
+              "id": 9701,
               "year": 2020,
             },
           ],
@@ -473,16 +467,17 @@ Object {
           "id": 4310,
           "name": "Interface Vendor Inc.",
           "start": null,
+          "totalCost": 26453574,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "650000.00",
-              "id": 1000,
+              "cost": 650000,
+              "id": 9200,
               "year": 2019,
             },
             Object {
-              "cost": "750000.00",
-              "id": 1001,
+              "cost": 750000,
+              "id": 9201,
               "year": 2020,
             },
           ],
@@ -495,16 +490,17 @@ Object {
           "id": 4311,
           "name": "TBD",
           "start": null,
+          "totalCost": 7398,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "0.00",
-              "id": 1100,
+              "cost": 0,
+              "id": 9300,
               "year": 2019,
             },
             Object {
-              "cost": "1000000.00",
-              "id": 1101,
+              "cost": 1000000,
+              "id": 9301,
               "year": 2020,
             },
           ],
@@ -513,13 +509,13 @@ Object {
       "costAllocation": Array [
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2019,
         },
         Object {
           "federalPercent": "0.75",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.25",
           "year": 2020,
         },
@@ -551,13 +547,13 @@ Object {
           "description": "",
           "entries": Array [
             Object {
-              "amount": "0.00",
-              "id": 1000,
+              "amount": 0,
+              "id": 9300,
               "year": "2019",
             },
             Object {
-              "amount": "0.00",
-              "id": 1001,
+              "amount": 0,
+              "id": 9301,
               "year": "2020",
             },
           ],
@@ -570,7 +566,7 @@ Object {
         Object {
           "description": "<p>Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.&nbsp;</p>
 ",
-          "id": 100,
+          "id": 9100,
           "objective": "<ol>
 <li>Hire contracted support to build an open API for the DW that the HIE and PHR can consume.</li>
 <li>Provide support for using open API for DW</li>
@@ -633,13 +629,13 @@ Object {
       "schedule": Array [
         Object {
           "endDate": "2018-12-31",
-          "id": 100,
+          "id": 9100,
           "milestone": "Implement MMIS-HIE Interface",
           "status": null,
         },
         Object {
           "endDate": "2018-12-31",
-          "id": 101,
+          "id": 9101,
           "milestone": "Develop MMIS-HIE Interface Requirements",
           "status": null,
         },
@@ -661,19 +657,18 @@ Object {
         Object {
           "description": "Assist with stuff",
           "id": 4510,
-          "keyPersonnel": false,
           "title": "Project Assistant",
           "years": Array [
             Object {
-              "cost": "98000.00",
+              "cost": 98000,
               "fte": "1.00",
-              "id": 1000,
+              "id": 9800,
               "year": 2019,
             },
             Object {
-              "cost": "99000.00",
+              "cost": 99000,
               "fte": "1.00",
-              "id": 1001,
+              "id": 9801,
               "year": 2020,
             },
           ],
@@ -681,19 +676,18 @@ Object {
         Object {
           "description": "This position is responsible for the program development, planning, coordination, evaluation, independent management and oversight of the Tycho Automated Info",
           "id": 4511,
-          "keyPersonnel": false,
           "title": "MMIS Project Manager",
           "years": Array [
             Object {
-              "cost": "140000.00",
+              "cost": 140000,
               "fte": "1.00",
-              "id": 1100,
+              "id": 9900,
               "year": 2019,
             },
             Object {
-              "cost": "144000.00",
+              "cost": 144000,
               "fte": "1.00",
-              "id": 1101,
+              "id": 9901,
               "year": 2020,
             },
           ],
@@ -701,19 +695,18 @@ Object {
         Object {
           "description": "Under the direct supervision of the Project Manager, this position is responsible for the development of a comprehensive training and support program for the Tycho Automated Information Management System",
           "id": 4512,
-          "keyPersonnel": false,
           "title": "MMIS Trainer",
           "years": Array [
             Object {
-              "cost": "115000.00",
+              "cost": 115000,
               "fte": "1.00",
-              "id": 1200,
+              "id": 9010,
               "year": 2019,
             },
             Object {
-              "cost": "115000.00",
+              "cost": 115000,
               "fte": "1.00",
-              "id": 1201,
+              "id": 9011,
               "year": 2020,
             },
           ],
@@ -721,19 +714,18 @@ Object {
         Object {
           "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
           "id": 4513,
-          "keyPersonnel": false,
           "title": "Programmer IV",
           "years": Array [
             Object {
-              "cost": "140000.00",
+              "cost": 140000,
               "fte": "1.00",
-              "id": 1300,
+              "id": 9110,
               "year": 2019,
             },
             Object {
-              "cost": "145000.00",
+              "cost": 145000,
               "fte": "1.00",
-              "id": 1301,
+              "id": 9111,
               "year": 2020,
             },
           ],
@@ -741,19 +733,18 @@ Object {
         Object {
           "description": "Make sure its secure.",
           "id": 4514,
-          "keyPersonnel": false,
           "title": "Security IT",
           "years": Array [
             Object {
-              "cost": "115000.00",
+              "cost": 115000,
               "fte": "1.00",
-              "id": 1400,
+              "id": 9210,
               "year": 2019,
             },
             Object {
-              "cost": "120000.00",
+              "cost": 120000,
               "fte": "1.00",
-              "id": 1401,
+              "id": 9211,
               "year": 2020,
             },
           ],
@@ -761,19 +752,18 @@ Object {
         Object {
           "description": "Run the day to day.",
           "id": 4515,
-          "keyPersonnel": false,
           "title": "Operations Specialist",
           "years": Array [
             Object {
-              "cost": "125000.00",
+              "cost": 125000,
               "fte": "1.00",
-              "id": 1500,
+              "id": 9310,
               "year": 2019,
             },
             Object {
-              "cost": "130000.00",
+              "cost": 130000,
               "fte": "1.00",
-              "id": 1501,
+              "id": 9311,
               "year": 2020,
             },
           ],
@@ -781,19 +771,18 @@ Object {
         Object {
           "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
           "id": 4516,
-          "keyPersonnel": false,
           "title": "Programmer V",
           "years": Array [
             Object {
-              "cost": "150000.00",
+              "cost": 150000,
               "fte": "2.00",
-              "id": 1600,
+              "id": 9410,
               "year": 2019,
             },
             Object {
-              "cost": "155000.00",
+              "cost": 155000,
               "fte": "3.00",
-              "id": 1601,
+              "id": 9411,
               "year": 2020,
             },
           ],
@@ -801,19 +790,18 @@ Object {
         Object {
           "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
           "id": 4517,
-          "keyPersonnel": false,
           "title": "Programmer III",
           "years": Array [
             Object {
-              "cost": "120000.00",
+              "cost": 120000,
               "fte": "1.00",
-              "id": 1700,
+              "id": 9510,
               "year": 2019,
             },
             Object {
-              "cost": "125000.00",
+              "cost": 125000,
               "fte": "1.00",
-              "id": 1701,
+              "id": 9511,
               "year": 2020,
             },
           ],
@@ -904,16 +892,17 @@ Object {
           "id": 4320,
           "name": "",
           "start": null,
+          "totalCost": 3496874,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "0.00",
-              "id": 2000,
+              "cost": 0,
+              "id": 9400,
               "year": 2019,
             },
             Object {
-              "cost": "0.00",
-              "id": 2001,
+              "cost": 0,
+              "id": 9401,
               "year": 2020,
             },
           ],
@@ -922,13 +911,13 @@ Object {
       "costAllocation": Array [
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2019,
         },
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2020,
         },
@@ -1005,13 +994,13 @@ Object {
           "description": "",
           "entries": Array [
             Object {
-              "amount": "0.00",
-              "id": 2000,
+              "amount": 0,
+              "id": 9400,
               "year": "2019",
             },
             Object {
-              "amount": "0.00",
-              "id": 2001,
+              "amount": 0,
+              "id": 9401,
               "year": "2020",
             },
           ],
@@ -1024,14 +1013,14 @@ Object {
         Object {
           "description": "<p>Plan to do a thing.</p>
 ",
-          "id": 200,
+          "id": 9200,
           "objective": "<p>Do a thing.</p>
 ",
         },
         Object {
           "description": "<p>Onboard 100 providers.</p>
 ",
-          "id": 201,
+          "id": 9201,
           "objective": "<p>100 providers onboarded.</p>
 ",
         },
@@ -1091,67 +1080,67 @@ Object {
       "schedule": Array [
         Object {
           "endDate": "2020-09-30",
-          "id": 200,
+          "id": 9200,
           "milestone": "Onboard providers to assistance program",
           "status": null,
         },
         Object {
           "endDate": "2019-12-31",
-          "id": 201,
+          "id": 9201,
           "milestone": "Development of Roadmap",
           "status": null,
         },
         Object {
           "endDate": "2019-01-01",
-          "id": 202,
+          "id": 9202,
           "milestone": "HIE Staff Augmentation",
           "status": null,
         },
         Object {
           "endDate": "2019-01-01",
-          "id": 203,
+          "id": 9203,
           "milestone": "Modules for Care Coordination",
           "status": null,
         },
         Object {
           "endDate": "2020-09-30",
-          "id": 204,
+          "id": 9204,
           "milestone": "Provider Onboarding",
           "status": null,
         },
         Object {
           "endDate": "2019-01-01",
-          "id": 205,
+          "id": 9205,
           "milestone": "EDIE System Implementation",
           "status": null,
         },
         Object {
           "endDate": "2019-12-31",
-          "id": 206,
+          "id": 9206,
           "milestone": "Develop myAlaska HIE Authentication Requirements",
           "status": null,
         },
         Object {
           "endDate": "2019-03-31",
-          "id": 207,
+          "id": 9207,
           "milestone": "Completion of requirements gathering to prepare to receive ELR",
           "status": null,
         },
         Object {
           "endDate": "2019-12-31",
-          "id": 208,
+          "id": 9208,
           "milestone": "Configuration of internal BizTalk HL7 processes to translate the HL7 messages to PRISM",
           "status": null,
         },
         Object {
           "endDate": "2019-09-30",
-          "id": 209,
+          "id": 9209,
           "milestone": "Onboard Lab Providers",
           "status": null,
         },
         Object {
           "endDate": "2018-12-31",
-          "id": 210,
+          "id": 9210,
           "milestone": "Establishment of program requirements and outreach strategy",
           "status": null,
         },
@@ -1173,19 +1162,18 @@ Object {
         Object {
           "description": "Lead technical architecture design and development efforts for designing, implementing and maintaining services integrations leveraging resources such as the MCI, MPI and state HIE along with other DHSS Business Systems.",
           "id": 4520,
-          "keyPersonnel": false,
           "title": "Services Integration Architect/ Programmer (Analyst Programmer V)",
           "years": Array [
             Object {
-              "cost": "115000.00",
+              "cost": 115000,
               "fte": "4.00",
-              "id": 2000,
+              "id": 9610,
               "year": 2019,
             },
             Object {
-              "cost": "119000.00",
+              "cost": 119000,
               "fte": "4.00",
-              "id": 2001,
+              "id": 9611,
               "year": 2020,
             },
           ],
@@ -1213,16 +1201,17 @@ Object {
           "id": 4330,
           "name": "RFP Planning Vendor Inc.",
           "start": null,
+          "totalCost": 4368734,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "500000.00",
-              "id": 3000,
+              "cost": 500000,
+              "id": 9500,
               "year": 2019,
             },
             Object {
-              "cost": "0.00",
-              "id": 3001,
+              "cost": 0,
+              "id": 9501,
               "year": 2020,
             },
           ],
@@ -1235,16 +1224,17 @@ Object {
           "id": 4331,
           "name": "Blue Button Builder Inc.",
           "start": null,
+          "totalCost": 35246,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "0.00",
-              "id": 3100,
+              "cost": 0,
+              "id": 9600,
               "year": 2019,
             },
             Object {
-              "cost": "2000000.00",
-              "id": 3101,
+              "cost": 2000000,
+              "id": 9601,
               "year": 2020,
             },
           ],
@@ -1253,13 +1243,13 @@ Object {
       "costAllocation": Array [
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2019,
         },
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2020,
         },
@@ -1282,13 +1272,13 @@ Object {
           "description": "",
           "entries": Array [
             Object {
-              "amount": "0.00",
-              "id": 3000,
+              "amount": 0,
+              "id": 9500,
               "year": "2019",
             },
             Object {
-              "amount": "0.00",
-              "id": 3001,
+              "amount": 0,
+              "id": 9501,
               "year": "2020",
             },
           ],
@@ -1301,7 +1291,7 @@ Object {
         Object {
           "description": "<p>Build blue button.</p>
 ",
-          "id": 300,
+          "id": 9300,
           "objective": "<p>Test blue button with 10 providers.</p>
 ",
         },
@@ -1361,19 +1351,19 @@ Object {
       "schedule": Array [
         Object {
           "endDate": "2019-04-01",
-          "id": 300,
+          "id": 9300,
           "milestone": "PHR/Blue Button HIE Build",
           "status": null,
         },
         Object {
           "endDate": "2018-12-31",
-          "id": 301,
+          "id": 9301,
           "milestone": "Blue Button Implementation",
           "status": null,
         },
         Object {
           "endDate": "2018-12-31",
-          "id": 302,
+          "id": 9302,
           "milestone": "On-Boarding of PHR/Blue Button Participants",
           "status": null,
         },
@@ -1395,19 +1385,18 @@ Object {
         Object {
           "description": "",
           "id": 4530,
-          "keyPersonnel": false,
           "title": "",
           "years": Array [
             Object {
-              "cost": "0.00",
+              "cost": 0,
               "fte": "0.00",
-              "id": 3000,
+              "id": 9710,
               "year": 2019,
             },
             Object {
-              "cost": "0.00",
+              "cost": 0,
               "fte": "0.00",
-              "id": 3001,
+              "id": 9711,
               "year": 2020,
             },
           ],
@@ -1432,16 +1421,17 @@ Object {
           "id": 4340,
           "name": "TBD",
           "start": null,
+          "totalCost": 246477,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "0.00",
-              "id": 4000,
+              "cost": 0,
+              "id": 9700,
               "year": 2019,
             },
             Object {
-              "cost": "1500000.00",
-              "id": 4001,
+              "cost": 1500000,
+              "id": 9701,
               "year": 2020,
             },
           ],
@@ -1454,16 +1444,17 @@ Object {
           "id": 4341,
           "name": "Gateway Vendor Inc.",
           "start": null,
+          "totalCost": 7473747,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "500000.00",
-              "id": 4100,
+              "cost": 500000,
+              "id": 9800,
               "year": 2019,
             },
             Object {
-              "cost": "0.00",
-              "id": 4101,
+              "cost": 0,
+              "id": 9801,
               "year": 2020,
             },
           ],
@@ -1472,13 +1463,13 @@ Object {
       "costAllocation": Array [
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2019,
         },
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "0.00",
+          "otherAmount": 0,
           "statePercent": "0.10",
           "year": 2020,
         },
@@ -1531,13 +1522,13 @@ Object {
           "description": "",
           "entries": Array [
             Object {
-              "amount": "0.00",
-              "id": 4000,
+              "amount": 0,
+              "id": 9600,
               "year": "2019",
             },
             Object {
-              "amount": "0.00",
-              "id": 4001,
+              "amount": 0,
+              "id": 9601,
               "year": "2020",
             },
           ],
@@ -1550,14 +1541,14 @@ Object {
         Object {
           "description": "<p>Identifiy PH needs</p>
 ",
-          "id": 400,
+          "id": 9400,
           "objective": "<p>Complete a build/implementation plan by Summery 2019</p>
 ",
         },
         Object {
           "description": "<p>Connect PH systems to HIE</p>
 ",
-          "id": 401,
+          "id": 9401,
           "objective": "<p>Connect all 3 PH systems to HIE by Fall 2019</p>
 ",
         },
@@ -1617,19 +1608,19 @@ Object {
       "schedule": Array [
         Object {
           "endDate": "2017-03-31",
-          "id": 400,
+          "id": 9400,
           "milestone": "PH Completion of requirements gathering",
           "status": null,
         },
         Object {
           "endDate": "2020-09-30",
-          "id": 401,
+          "id": 9401,
           "milestone": "PH Development and implementation of CRM Tool",
           "status": null,
         },
         Object {
           "endDate": "2020-09-30",
-          "id": 402,
+          "id": 9402,
           "milestone": "PH Connection of Public Health systems to HIE",
           "status": null,
         },
@@ -1651,19 +1642,18 @@ Object {
         Object {
           "description": "",
           "id": 4540,
-          "keyPersonnel": false,
           "title": "",
           "years": Array [
             Object {
-              "cost": "0.00",
+              "cost": 0,
               "fte": "0.00",
-              "id": 4000,
+              "id": 9810,
               "year": 2019,
             },
             Object {
-              "cost": "0.00",
+              "cost": 0,
               "fte": "0.00",
-              "id": 4001,
+              "id": 9811,
               "year": 2020,
             },
           ],
@@ -1683,16 +1673,17 @@ Object {
           "id": 4350,
           "name": "Tech Consulting Inc.",
           "start": null,
+          "totalCost": 264574,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "450000.00",
-              "id": 5000,
+              "cost": 450000,
+              "id": 9900,
               "year": 2019,
             },
             Object {
-              "cost": "150000.00",
-              "id": 5001,
+              "cost": 150000,
+              "id": 9901,
               "year": 2020,
             },
           ],
@@ -1705,16 +1696,17 @@ Object {
           "id": 4351,
           "name": "TBD",
           "start": null,
+          "totalCost": 64574,
           "useHourly": false,
           "years": Array [
             Object {
-              "cost": "200000.00",
-              "id": 5100,
+              "cost": 200000,
+              "id": 9010,
               "year": 2019,
             },
             Object {
-              "cost": "500000.00",
-              "id": 5101,
+              "cost": 500000,
+              "id": 9011,
               "year": 2020,
             },
           ],
@@ -1723,13 +1715,13 @@ Object {
       "costAllocation": Array [
         Object {
           "federalPercent": "0.50",
-          "otherAmount": "125000.00",
+          "otherAmount": 125000,
           "statePercent": "0.50",
           "year": 2019,
         },
         Object {
           "federalPercent": "0.90",
-          "otherAmount": "125000.00",
+          "otherAmount": 125000,
           "statePercent": "0.10",
           "year": 2020,
         },
@@ -1747,13 +1739,13 @@ Object {
           "description": "",
           "entries": Array [
             Object {
-              "amount": "25000.00",
-              "id": 5000,
+              "amount": 25000,
+              "id": 9700,
               "year": "2019",
             },
             Object {
-              "amount": "25000.00",
-              "id": 5001,
+              "amount": 25000,
+              "id": 9701,
               "year": "2020",
             },
           ],
@@ -1766,7 +1758,7 @@ Object {
         Object {
           "description": "<p>Complete MITA 3.0 HITECH portion.</p>
 ",
-          "id": 500,
+          "id": 9500,
           "objective": "<p>&nbsp;Complete MITA 3.0 HITECH portion by July 2019</p>
 ",
         },
@@ -1826,13 +1818,13 @@ Object {
       "schedule": Array [
         Object {
           "endDate": "2019-02-28",
-          "id": 500,
+          "id": 9500,
           "milestone": "MITA 3.0 SS-A Project",
           "status": null,
         },
         Object {
           "endDate": "2019-12-31",
-          "id": 501,
+          "id": 9501,
           "milestone": "HITECH SS-A Assessment",
           "status": null,
         },
@@ -1854,19 +1846,18 @@ Object {
         Object {
           "description": "1",
           "id": 4550,
-          "keyPersonnel": false,
           "title": "State MITA Person",
           "years": Array [
             Object {
-              "cost": "100000.00",
+              "cost": 100000,
               "fte": "0.50",
-              "id": 5000,
+              "id": 9910,
               "year": 2019,
             },
             Object {
-              "cost": "100000.00",
+              "cost": 100000,
               "fte": "1.00",
-              "id": 5001,
+              "id": 9911,
               "year": 2020,
             },
           ],
@@ -1964,11 +1955,11 @@ Object {
     Object {
       "costs": Array [
         Object {
-          "cost": "100000.00",
+          "cost": 100000,
           "year": 2019,
         },
         Object {
-          "cost": "100000.00",
+          "cost": 100000,
           "year": 2020,
         },
       ],
@@ -1997,89 +1988,65 @@ Object {
   "period": null,
   "previousActivityExpenses": Array [
     Object {
-      "hie": Object {
-        "federalActual": 0,
-        "federalApproved": 540000,
-        "stateActual": 0,
-        "stateApproved": 1000000,
-      },
-      "hit": Object {
-        "federalActual": 850000,
-        "federalApproved": 900000,
-        "stateActual": 0,
-        "stateApproved": 100000,
+      "hithie": Object {
+        "federalActual": 320000,
+        "totalApproved": 540000,
       },
       "mmis": Object {
-        "federal50Actual": 0,
-        "federal50Approved": 0,
-        "federal75Actual": 0,
-        "federal75Approved": 0,
-        "federal90Actual": 0,
-        "federal90Approved": 0,
-        "state10Actual": 0,
-        "state10Approved": 0,
-        "state25Actual": 0,
-        "state25Approved": 0,
-        "state50Actual": 0,
-        "state50Approved": 0,
+        "50": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "75": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "90": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
       },
       "year": "2016",
     },
     Object {
-      "hie": Object {
-        "federalActual": 0,
-        "federalApproved": 540000,
-        "stateActual": 0,
-        "stateApproved": 60000,
-      },
-      "hit": Object {
-        "federalActual": 0,
-        "federalApproved": 1080000,
-        "stateActual": 0,
-        "stateApproved": 120000,
+      "hithie": Object {
+        "federalActual": 140000,
+        "totalApproved": 280000,
       },
       "mmis": Object {
-        "federal50Actual": 0,
-        "federal50Approved": 0,
-        "federal75Actual": 0,
-        "federal75Approved": 0,
-        "federal90Actual": 0,
-        "federal90Approved": 0,
-        "state10Actual": 0,
-        "state10Approved": 0,
-        "state25Actual": 0,
-        "state25Approved": 0,
-        "state50Actual": 0,
-        "state50Approved": 0,
+        "50": Object {
+          "federalActual": 23445,
+          "totalApproved": 82545,
+        },
+        "75": Object {
+          "federalActual": 23440,
+          "totalApproved": 75340,
+        },
+        "90": Object {
+          "federalActual": 235720,
+          "totalApproved": 262460,
+        },
       },
       "year": "2017",
     },
     Object {
-      "hie": Object {
-        "federalActual": 0,
-        "federalApproved": 720000,
-        "stateActual": 0,
-        "stateApproved": 80000,
-      },
-      "hit": Object {
-        "federalActual": 0,
-        "federalApproved": 1080000,
-        "stateActual": 0,
-        "stateApproved": 120000,
+      "hithie": Object {
+        "federalActual": 146346,
+        "totalApproved": 234526,
       },
       "mmis": Object {
-        "federal50Actual": 0,
-        "federal50Approved": 0,
-        "federal75Actual": 0,
-        "federal75Approved": 0,
-        "federal90Actual": 0,
-        "federal90Approved": 0,
-        "state10Actual": 0,
-        "state10Approved": 0,
-        "state25Actual": 0,
-        "state25Approved": 0,
-        "state50Actual": 0,
-        "state50Approved": 0,
+        "50": Object {
+          "federalActual": 129387,
+          "totalApproved": 375445,
+        },
+        "75": Object {
+          "federalActual": 413246,
+          "totalApproved": 654455,
+        },
+        "90": Object {
+          "federalActual": 614544,
+          "totalApproved": 863455,
+        },
       },
       "year": "2018",
     },

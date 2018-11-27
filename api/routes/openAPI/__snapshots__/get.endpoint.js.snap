@@ -58,6 +58,10 @@ Object {
                   "format": "date-time",
                   "type": "string",
                 },
+                "totalCost": Object {
+                  "description": "Contractor resource total cost",
+                  "type": "number",
+                },
                 "useHourly": Object {
                   "description": "Whether to use hourly rates for this contractor",
                   "type": "boolean",
@@ -68,7 +72,7 @@ Object {
                     "properties": Object {
                       "cost": Object {
                         "description": "Contractor resource cost of the year",
-                        "type": "string",
+                        "type": "number",
                       },
                       "year": Object {
                         "description": "Year this detail applies to",
