@@ -4,7 +4,7 @@ import createHistory from 'history/createBrowserHistory';
 import React from 'react';
 import 'react-dates/initialize';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
 import { routerMiddleware } from 'react-router-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
@@ -37,7 +37,7 @@ const render = (Component, props) => {
 };
 
 module.hot.accept('./components/Root.js', () => {
-  const HotRoot = require('./components/Root').default;
+  const HotRoot = require('./components/Root').default; // eslint-disable-line global-require
   render(HotRoot, { history, store });
 });
 
