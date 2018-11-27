@@ -28,7 +28,7 @@ module.exports = (
       res.send(apd);
     } catch (e) {
       logger.error(req, e);
-      res.status(500).send(e);
+      res.status(500).end();
     }
   });
 };
