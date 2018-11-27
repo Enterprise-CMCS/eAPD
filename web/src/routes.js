@@ -2,7 +2,7 @@ import NoMatch from './components/NoMatch';
 import ApdApplication from './containers/ApdApplication';
 import Login from './containers/Login';
 
-import StateDash from './components/StateDashboard';
+import StateDash from './containers/StateDashboard';
 
 const routes = [
   { path: '/', component: StateDash, exact: true, nonPrivate: false },

@@ -69,6 +69,8 @@ const ContractorForm = ({
         value={contractor.desc}
         onChange={handleChange(idx, 'desc')}
         wrapperClass="md-col-8"
+        className="m0 textarea textarea-l"
+        rows="14"
         hideLabel
       />
     </div>
@@ -80,8 +82,6 @@ const ContractorForm = ({
         initialStartDate={contractor.start}
         initialEndDate={contractor.end}
         onChange={handleTermChange(idx)}
-        numberOfMonths={2}
-        daySize={32}
       />
     </div>
     <div className="mb3 md-flex">
@@ -136,13 +136,27 @@ const ContractorForm = ({
       </div>
     </div>
     <div className="mb3 md-flex">
+      <Label>{t('activities.contractorResources.labels.totalCost')}</Label>
+      <div className="md-col-6 flex">
+        <DollarInput
+          name={`contractor-${contractor.key}-totalCost`}
+          label={t('activities.contractorResources.labels.totalCostInput')}
+          value={contractor.totalCost}
+          onChange={handleChange(idx, 'totalCost')}
+          wrapperClass="mr2 flex-auto"
+        />
+      </div>
+    </div>
+    <div className="mb3 md-flex">
       <Label>{t('activities.contractorResources.labels.cost')}</Label>
       <div className="md-col-6 flex">
         {years.map(year => (
           <DollarInput
             key={year}
             name={`contractor-${contractor.key}-cost-${year}`}
-            label={year}
+            label={t('activities.contractorResources.labels.costInput', {
+              year
+            })}
             value={contractor.years[year]}
             onChange={handleYearChange(idx, year)}
             disabled={contractor.hourly.useHourly}
@@ -400,6 +414,7 @@ export const mapDispatchToProps = {
 };
 
 export { ContractorResources as ContractorResourcesRaw };
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ContractorResources
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContractorResources);

@@ -53,7 +53,7 @@ class Schedule extends Component {
         {activity.schedule.length === 0 ? (
           <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
         ) : (
-          <div className="mb3 overflow-auto">
+          <div className="mb3">
             <div className="mt1 mb3">
               <DateRangePicker
                 initialStartDate={activity.plannedStartDate}
@@ -61,9 +61,6 @@ class Schedule extends Component {
                 initialEndDate={activity.plannedEndDate}
                 endDateId={`activity-${activity.key}-end-date`}
                 onChange={this.handleActivityDateChange}
-                numberOfMonths={2}
-                daySize={32}
-                withPortal
               />
             </div>
             <HelpText
@@ -106,9 +103,6 @@ class Schedule extends Component {
                             : moment()
                         }
                         onChange={this.handleMilestoneDateChange(i)}
-                        numberOfMonths={2}
-                        daySize={32}
-                        withPortal
                       />
                     </td>
                     <td className="center align-middle border-bottom">
@@ -153,4 +147,7 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Schedule);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Schedule);

@@ -7,7 +7,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './StateDashboardSidebar';
-import { createApd, selectApd } from '../actions/apd';
+import { selectApd } from '../actions/apd';
 
 describe('State dashboard sidebar component', () => {
   const sandbox = sinon.createSandbox();
@@ -20,7 +20,6 @@ describe('State dashboard sidebar component', () => {
       }
     ],
     place: { id: 'so', name: 'Solid' },
-    createApd: sandbox.spy(),
     selectApd: sandbox.spy()
   };
 
@@ -33,13 +32,7 @@ describe('State dashboard sidebar component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('creates a new apd', () => {
-    const component = shallow(<Sidebar {...props} />);
-    component.find('Btn').simulate('click');
-    expect(props.createApd.called).toBeTruthy();
-  });
-
-  test('selects a new apd', () => {
+  test('selects an apd', () => {
     const component = shallow(<Sidebar {...props} />);
     component.find('SidebarLink[hash="1"]').simulate('click');
     expect(props.selectApd.calledWith(1)).toBeTruthy();
@@ -67,6 +60,6 @@ describe('State dashboard sidebar component', () => {
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ createApd, selectApd });
+    expect(mapDispatchToProps).toEqual({ selectApd });
   });
 });
