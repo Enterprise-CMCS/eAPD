@@ -30,7 +30,7 @@ describe('files endpoint | DELETE /files/contractor/:contractorID/:fileID', asyn
     });
 
     it('with a contractor ID in an APD the user cannot access', async () => {
-      const { response, body } = await del(4301, 'whatever');
+      const { response, body } = await del(9900, 'whatever');
 
       expect(response.statusCode).toEqual(404);
       expect(body).toMatchSnapshot();

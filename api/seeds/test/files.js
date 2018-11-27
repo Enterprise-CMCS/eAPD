@@ -42,7 +42,7 @@ exports.seed = async knex => {
     },
     {
       file_id: 5003,
-      activity_contractor_resource_id: 4301
+      activity_contractor_resource_id: 9900
     }
   ]);
 };
