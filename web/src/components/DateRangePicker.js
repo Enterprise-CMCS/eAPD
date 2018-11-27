@@ -51,6 +51,9 @@ class DatePickerWrapper extends Component {
         isOutsideRange={() => false}
         startDate={startDate}
         endDate={endDate}
+        daySize={32}
+        displayFormat="M/D/YYYY"
+        numberOfMonths={2}
       />
     );
   }

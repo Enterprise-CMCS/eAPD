@@ -98,7 +98,7 @@ const buildBudget = bigState => {
   // Get a shell of our new state object.  This essentially guarantees
   // that all of the properties and stuff will exist, so we don't have
   // to have a bunch of code checking for it.
-  const { years } = bigState.apd.data;
+  const { keyPersonnel, years } = bigState.apd.data;
   const newState = initialState(years);
 
   /**
@@ -496,6 +496,89 @@ const buildBudget = bigState => {
       });
     });
   });
+
+  // Get the first activity called "Program Administration" and use it as the
+  // basis for computing quarterly federal share.  Then reudce that to an
+  // object whose keys are FFYs and whose values are an array of percentages
+  // for fiscal quarters.
+  const percentPerQuarter = Object.entries(
+    Object.values(bigState.activities.byKey).filter(
+      a => a.name === 'Program Administration'
+    )[0].quarterlyFFP
+  ).reduce(
+    (percentYear, [ffy, quarters]) => ({
+      ...percentYear,
+      [ffy]: Object.entries(quarters)
+        .sort(([q1], [q2]) => +q1 - +q2)
+        .map(([, q]) => q.state / 100)
+    }),
+    {}
+  );
+
+  /**
+   * Update a budget section with key personnel cost numbers
+   * @param {Object} section The section to be updated; should include
+   *                 top-level properties corresponding to fiscal years along
+   *                 with a total.  Those objects have federal, state, and
+   *                 total properties.
+   * @param {Number} year The federal fiscal year to update
+   * @param {Number} federal Federal share of the cost to add
+   * @param {Number} state State share of the cost to add
+   * @param {Number} total Total cost to add
+   */
+  const updateSectionWithKP = (section, year, federal, state, total) => {
+    section[year].federal += federal;
+    section[year].state += state;
+    section[year].total += total;
+    section.total.federal += federal;
+    section.total.state += state;
+    section.total.total += total;
+  };
+
+  // We also have to account for the cost attributable to key personnel.  This
+  // isn't added to any activity, but instead gets rolled up into the totals.
+  // It is always a 90% federal/10% state split.  We're just going to make sure
+  // we only look at key personnel for whom the "has costs" flag is set, just
+  // to be safe.
+  keyPersonnel
+    .filter(kp => kp.hasCosts)
+    .forEach(kp => {
+      Object.entries(kp.costs).forEach(([year, cost]) => {
+        // Get the state and federal share.  Always 90/10 (for now).
+        const [federalShare, stateShare] = roundedPercents(cost, [0.9, 0.1]);
+        const costInfo = [year, federalShare, stateShare, cost];
+
+        // Update the various budget sections that should include key personnel
+        // costs.  :all-the-things:
+        updateSectionWithKP(newState.combined, ...costInfo);
+        updateSectionWithKP(newState.hit.statePersonnel, ...costInfo);
+        updateSectionWithKP(newState.hit.combined, ...costInfo);
+        updateSectionWithKP(newState.hitAndHie.statePersonnel, ...costInfo);
+        updateSectionWithKP(newState.hitAndHie.combined, ...costInfo);
+
+        // Compute how much of the key personnel cost is attributable to each
+        // quarter of this FFY
+        const quarterlyCosts = roundedPercents(
+          federalShare,
+          percentPerQuarter[year]
+        );
+
+        const ffyQuarterly = newState.federalShareByFFYQuarter.hitAndHie[year];
+        const ffyTotal = newState.federalShareByFFYQuarter.hitAndHie.total;
+
+        // Then update the federal share by quarter accordingly
+        quarterlyCosts.forEach((quarterlyCost, i) => {
+          ffyQuarterly[i + 1].state += quarterlyCost;
+          ffyQuarterly[i + 1].combined += quarterlyCost;
+        });
+
+        // And also subtotals and totals and stuff.
+        ffyQuarterly.subtotal.state += federalShare;
+        ffyQuarterly.subtotal.combined += federalShare;
+        ffyTotal.state += federalShare;
+        ffyTotal.combined += federalShare;
+      });
+    });
 
   const roundProps = o => {
     Object.entries(o).forEach(([key, value]) => {

@@ -33,6 +33,7 @@ describe('activities reducer', () => {
     name: '',
     start: '',
     files: [],
+    totalCost: 0,
     years: { '1973': 0, '1974': 0 },
     hourly: {
       useHourly: false,
@@ -47,7 +48,6 @@ describe('activities reducer', () => {
     key: keyFn(),
     desc: '',
     title: '',
-    isKeyPersonnel: false,
     years: { '1973': { amt: '', perc: '' }, '1974': { amt: '', perc: '' } }
   });
 

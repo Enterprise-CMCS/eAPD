@@ -46,11 +46,11 @@ describe('APD serializer', () => {
             position: 'Builder',
             costs: [
               {
-                cost: 50,
+                cost: '50',
                 year: 1903
               },
               {
-                cost: 73293,
+                cost: '73293',
                 year: 2018
               }
             ]
