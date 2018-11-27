@@ -375,6 +375,10 @@ exports.seed = async knex => {
       start: null,
       totalCost: 64574,
       useHourly: false
+    },
+    {
+      activity_id: 4110,
+      id: 9900
     }
   ]);
   await knex('activity_contractor_resources_yearly').insert([
