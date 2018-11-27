@@ -1,16 +1,16 @@
 title: Certify and Submit
-helpText: Complete your APD submission below.
+helpText: Complete your APD submission.
 certify:
   title: Certification
   draft:
     header: >-
       Before you submit your APD, double-check that you have
-      entered everything correctly because once you submit,
-      your APD document will be locked from further edits
+      entered everything correctly. Once you submit,
+      your APD will be locked from further edits
       until reviewed by a CMS analyst.
     helpText: >-
       To submit your APD for reviews, sign your name in the
-      box below then select the Submit APD button
+      box below then select the Submit APD button.
     buttonText: Submit APD
   submitted:
     buttonText: My Dashboard
