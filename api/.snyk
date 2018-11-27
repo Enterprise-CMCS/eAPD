@@ -1,0 +1,215 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'npm:braces:20180219':
+    - jest > jest-cli > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.967Z'
+    - jest > jest-cli > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.967Z'
+    - jest > jest-cli > jest-runtime > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.967Z'
+    - jest > jest-cli > jest-config > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.967Z'
+    - jest > jest-cli > jest-haste-map > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.967Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.967Z'
+    - jest > jest-cli > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.967Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.968Z'
+    - jest > jest-cli > jest-runtime > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.968Z'
+    - jest > jest-cli > jest-runner > jest-runtime > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.968Z'
+    - jest > jest-cli > jest-runner > jest-config > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.968Z'
+    - jest > jest-cli > jest-runtime > jest-config > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.968Z'
+    - jest > jest-cli > jest-runner > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.968Z'
+    - jest > jest-cli > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.968Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.968Z'
+    - jest > jest-cli > jest-config > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.968Z'
+    - jest > jest-cli > jest-runner > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-environment-jsdom > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-resolve-dependencies > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-runtime > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-runtime > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > expect > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-config > jest-environment-jsdom > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.969Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > expect > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-config > jest-environment-node > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > expect > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > expect > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-environment-jsdom > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.970Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-environment-jsdom > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-environment-node > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-environment-node > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-environment-node > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > expect > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-environment-jsdom > jest-util > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+  'npm:chownr:20180731':
+    - jest > jest-cli > jest-haste-map > sane > fsevents > node-pre-gyp > tar > chownr:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > fsevents > node-pre-gyp > tar > chownr:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > fsevents > node-pre-gyp > tar > chownr:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > fsevents > node-pre-gyp > tar > chownr:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+  'npm:mem:20180117':
+    - jest > jest-cli > yargs > os-locale > mem:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runtime > yargs > os-locale > mem:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+    - jest > jest-cli > jest-runner > jest-runtime > yargs > os-locale > mem:
+        reason: vulnerable through test library; no data impact
+        expires: '2018-12-27T18:16:49.971Z'
+patch: {}
