@@ -2,14 +2,11 @@ version: 2
 jobs:
   prepare dependencies cache:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
       - run:
           name: install web dependencies
           working_directory: ~/project/web
@@ -33,7 +30,7 @@ jobs:
 
   yaml test:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - run: npm install glob
@@ -44,7 +41,7 @@ jobs:
 
   web dependency vulnerability scan:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
@@ -58,7 +55,7 @@ jobs:
 
   web lint:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
@@ -70,7 +67,7 @@ jobs:
 
   web test:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
@@ -87,7 +84,7 @@ jobs:
 
   validate openapi:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10
     steps:
       - checkout
       - setup_remote_docker
@@ -103,7 +100,7 @@ jobs:
 
   api dependency vulnerability scan:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
@@ -117,7 +114,7 @@ jobs:
 
   api lint:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
@@ -129,7 +126,7 @@ jobs:
 
   api unit test:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
@@ -146,7 +143,7 @@ jobs:
 
   api endpoint test:
     docker:
-      - image: node:8
+      - image: node:10
         environment:
           - NODE_ENV=test
           - STORE_TYPE=fs
@@ -192,14 +189,11 @@ jobs:
 
   deploy staging:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
       - run:
           name: deploy to prod
           command: ./bin/deploy.sh
@@ -209,47 +203,38 @@ jobs:
 
   deploy pr:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
-      - run:
-          name: update npm
-          command: npm install -g npm@6
       - run:
           name: deploy for pull request
           command: ./bin/deploy-pr.sh
 
   deploy ux testing:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
       - run:
           name: deploy to UX testing
           command: ./bin/deploy-ux-testing.sh
 
   deploy storybook:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - restore_cache:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
       - run:
           name: deploy storybook
           command: ./bin/deploy-storybook.sh
 
   cleanup PR-specific deploys:
     docker:
-      - image: node:8
+      - image: node:10
     steps:
       - checkout
       - run:
