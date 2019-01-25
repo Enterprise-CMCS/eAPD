@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth roles endpoint | GET /auth/roles when authenticated 1`] = `
+Array [
+  Object {
+    "activities": Array [
+      "view-users",
+      "add-users",
+      "view-roles",
+      "create-roles",
+      "edit-roles",
+      "submit-federal-response",
+      "submit-clearance",
+      "edit-comments",
+      "submit-document",
+      "submit-state-response",
+      "create-draft",
+      "edit-document",
+      "edit-response",
+      "delete-users",
+      "view-document",
+    ],
+    "id": 1101,
+    "name": "admin",
+  },
+  Object {
+    "activities": Array [
+      "edit-roles",
+    ],
+    "id": 1102,
+    "name": "federal analyst",
+  },
+  Object {
+    "activities": Array [],
+    "id": 1103,
+    "name": "federal leadership",
+  },
+  Object {
+    "activities": Array [],
+    "id": 1104,
+    "name": "federal SME",
+  },
+  Object {
+    "activities": Array [],
+    "id": 1105,
+    "name": "state coordinator",
+  },
+  Object {
+    "activities": Array [],
+    "id": 1106,
+    "name": "state SME",
+  },
+]
+`;

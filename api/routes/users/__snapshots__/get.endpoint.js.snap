@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`users endpoint | GET /users when authenticated 1`] = `
+Array [
+  Object {
+    "email": "all-permissions-and-state",
+    "id": 2000,
+    "state_id": "mn",
+  },
+  Object {
+    "email": "all-permissions-no-state",
+    "id": 2001,
+    "state_id": null,
+  },
+  Object {
+    "email": "no-permissions",
+    "id": 2010,
+    "state_id": null,
+  },
+]
+`;
+
+exports[`users endpoint | GET /users/:userID when authenticated when requesting a non-existant user ID 1`] = `undefined`;
+
+exports[`users endpoint | GET /users/:userID when authenticated when requesting a valid user ID 1`] = `
+Object {
+  "email": "all-permissions-and-state",
+  "id": 2000,
+  "name": null,
+  "phone": null,
+  "position": null,
+  "state_id": "mn",
+}
+`;

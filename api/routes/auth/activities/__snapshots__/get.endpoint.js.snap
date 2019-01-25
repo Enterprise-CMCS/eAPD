@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth activities endpoint | GET /auth/activities when authenticated 1`] = `
+Array [
+  Object {
+    "id": 1001,
+    "name": "view-users",
+  },
+  Object {
+    "id": 1002,
+    "name": "add-users",
+  },
+  Object {
+    "id": 1003,
+    "name": "view-roles",
+  },
+  Object {
+    "id": 1004,
+    "name": "create-roles",
+  },
+  Object {
+    "id": 1005,
+    "name": "edit-roles",
+  },
+  Object {
+    "id": 1006,
+    "name": "submit-federal-response",
+  },
+  Object {
+    "id": 1007,
+    "name": "submit-clearance",
+  },
+  Object {
+    "id": 1008,
+    "name": "edit-comments",
+  },
+  Object {
+    "id": 1009,
+    "name": "submit-document",
+  },
+  Object {
+    "id": 1010,
+    "name": "submit-state-response",
+  },
+  Object {
+    "id": 1011,
+    "name": "create-draft",
+  },
+  Object {
+    "id": 1012,
+    "name": "edit-document",
+  },
+  Object {
+    "id": 1013,
+    "name": "edit-response",
+  },
+  Object {
+    "id": 1014,
+    "name": "delete-users",
+  },
+  Object {
+    "id": 1015,
+    "name": "view-document",
+  },
+]
+`;
