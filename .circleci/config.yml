@@ -150,7 +150,7 @@ jobs:
         environment:
           - NODE_ENV=test
           - STORE_TYPE=fs
-          - STORE_PATH=endpoint-tests/files
+          - STORE_PATH=test-data/files
       - image: postgres:latest
         name: db
         environment:

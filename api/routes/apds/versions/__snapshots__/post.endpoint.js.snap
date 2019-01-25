@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apd version create endpoint | POST /apds/:id/versions when attempting to save a draft APD 1`] = `undefined`;
+
+exports[`apd version create endpoint | POST /apds/:id/versions when attempting to save non-draft APD 1`] = `
+Object {
+  "error": "apd-not-editable",
+}
+`;
