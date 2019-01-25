@@ -219,7 +219,7 @@ exports.up = async knex => {
       .notNullable()
       .comment('the federal fiscal year this cost applies to');
     table
-      .decimal('cost')
+      .integer('cost')
       .defaultTo(0)
       .comment(
         'the total cost of the specified key personnel for the associated federal fiscal year'
