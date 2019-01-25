@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`APD endpoint | PUT /apds/:id/status when authenticated as a user with permission with a non-existant apd ID 1`] = `undefined`;
+
+exports[`APD endpoint | PUT /apds/:id/status when authenticated as a user with permission with a valid status 1`] = `undefined`;
+
+exports[`APD endpoint | PUT /apds/:id/status when authenticated as a user with permission with an apd that is in draft 1`] = `
+Object {
+  "error": "apd-in-draft",
+}
+`;
+
+exports[`APD endpoint | PUT /apds/:id/status when authenticated as a user with permission with an invalid status 1`] = `
+Object {
+  "error": "apd-invalid-status",
+}
+`;

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`files endpoint | GET /files/:fileID when authenticated with a non-existant file ID 1`] = `""`;
+
+exports[`files endpoint | GET /files/:fileID when authenticated with an existant file ID, and with access file is attached to accessible activity 1`] = `"hello, this is downloaded"`;
+
+exports[`files endpoint | GET /files/:fileID when authenticated with an existant file ID, and with access file is attached to accessible contractor 1`] = `"hello, this is downloaded"`;
+
+exports[`files endpoint | GET /files/:fileID when authenticated with an existant file ID, but file does not exist in the store 1`] = `""`;
+
+exports[`files endpoint | GET /files/:fileID when authenticated with an existant file ID, but without access file is attached to inaccessible activity 1`] = `""`;
+
+exports[`files endpoint | GET /files/:fileID when authenticated with an existant file ID, but without access file is attached to inaccessible contractor 1`] = `""`;
+
+exports[`files endpoint | GET /files/:fileID when authenticated with an invalid ID 1`] = `""`;

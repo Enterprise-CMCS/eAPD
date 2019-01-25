@@ -107,8 +107,14 @@ const openAPI = {
         })
       },
       responses: {
-        204: {
-          description: 'The update was successful'
+        200: {
+          description: 'The update was successful',
+          content: jsonResponse({
+            ...arrayOf({
+              type: 'number',
+              description: 'The activities now associated with the role'
+            })
+          })
         },
         400: {
           description:
