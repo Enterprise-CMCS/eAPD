@@ -1,13 +1,15 @@
 title: Results of Previous Activities
 helpText: >-
-  Provide a description of the results of previously approved activities.
+  Describe the results of the program’s activities approved in the previous APD.
+  This includes both the current status of those activities and the costs associated
+  with them.
 outline:
-  title: Prior Activities Outline
+  title: Prior Activities Overview
   helpText: >-
-    Include a high level description of the activities approved in the
-    previous APD that are completed, in-progress, or on-hold.
+    Provide a high level description of the activities that are completed, in-progress,
+    or on-hold.
   reminder: >-
   label: Previous Activities Summary
 actualExpenses:
   title: Actual Costs
-  helpText: Input the most recent actual costs.
+  helpText: Input the most recent approved and actual costs.
