@@ -219,34 +219,6 @@ jobs:
           name: deploy for pull request
           command: ./bin/deploy-pr.sh
 
-  deploy ux testing:
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
-      - run:
-          name: deploy to UX testing
-          command: ./bin/deploy-ux-testing.sh
-
-  deploy storybook:
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: update npm
-          command: npm install -g npm@6
-      - run:
-          name: deploy storybook
-          command: ./bin/deploy-storybook.sh
-
   cleanup PR-specific deploys:
     docker:
       - image: node:8
@@ -316,33 +288,3 @@ workflows:
             - api unit test
             - api endpoint test
             - api dependency vulnerability scan
-      - request deploy for UX testing:
-          type: approval
-          filters:
-            branches:
-              only:
-                - master
-      - deploy ux testing:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - request deploy for UX testing
-            - web test
-            - api unit test
-            - api endpoint test
-      - request deploy for storybook:
-          type: approval
-          filters:
-            branches:
-              only:
-                - master
-      - deploy storybook:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - request deploy for storybook
-            - web test
