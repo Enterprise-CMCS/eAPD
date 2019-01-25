@@ -81,10 +81,7 @@ const reducer = (state = initialState, action) => {
         byId: action.data.reduce(
           (acc, apd) => ({
             ...acc,
-            [apd.id]: {
-              ...fromAPI(apd),
-              yearOptions: defaultAPDYearOptions
-            }
+            [apd.id]: apd
           }),
           {}
         ),
@@ -103,7 +100,10 @@ const reducer = (state = initialState, action) => {
         state
       );
     case SELECT_APD:
-      return { ...state, data: { ...action.apd } };
+      return {
+        ...state,
+        data: { ...action.apd, yearOptions: defaultAPDYearOptions }
+      };
     case SET_KEY_PERSON_PRIMARY:
       return {
         ...state,

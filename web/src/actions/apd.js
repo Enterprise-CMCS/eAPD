@@ -2,7 +2,7 @@ import { push } from 'react-router-redux';
 
 import { notify } from './notification';
 import axios from '../util/api';
-import { toAPI } from '../util/serialization/apd';
+import { fromAPI, toAPI } from '../util/serialization/apd';
 
 const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
@@ -56,18 +56,19 @@ export const updateApd = updates => dispatch => {
   }
 };
 
-export const selectApd = (id, { global = {}, pushRoute = push } = {}) => (
-  dispatch,
-  getState
-) => {
-  dispatch({ type: SELECT_APD, apd: getState().apd.byId[id] });
-  dispatch(updateBudget());
-  dispatch(pushRoute('/apd'));
+export const selectApd = (
+  id,
+  { global = {}, pushRoute = push } = {}
+) => dispatch =>
+  axios.get(`/apds/${id}`).then(req => {
+    dispatch({ type: SELECT_APD, apd: fromAPI(req.data) });
+    dispatch(updateBudget());
+    dispatch(pushRoute('/apd'));
 
-  if (global.localStorage) {
-    global.localStorage.setItem(LAST_APD_ID_STORAGE_KEY, id);
-  }
-};
+    if (global.localStorage) {
+      global.localStorage.setItem(LAST_APD_ID_STORAGE_KEY, id);
+    }
+  });
 
 export const createRequest = () => ({ type: CREATE_APD_REQUEST });
 export const createSuccess = data => ({ type: CREATE_APD_SUCCESS, data });
@@ -104,7 +105,9 @@ export const fetchApd = ({ global = window, pushRoute = push } = {}) => (
       const apd = Array.isArray(req.data) ? req.data : null;
       dispatch(receiveApd(apd));
 
-      const { apd: { selectAPDOnLoad } } = getState();
+      const {
+        apd: { selectAPDOnLoad }
+      } = getState();
       if (
         selectAPDOnLoad &&
         global.localStorage &&
@@ -144,7 +147,11 @@ export const notifyNetError = (action, error) => {
 export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
   dispatch(requestSave());
 
-  const { apd: { data: updatedApd }, activities, dirty } = state();
+  const {
+    apd: { data: updatedApd },
+    activities,
+    dirty
+  } = state();
 
   if (!dirty.dirty) {
     dispatch(notify('Save successful!'));
@@ -223,7 +230,9 @@ export const submitAPD = (save = saveApd) => (dispatch, getState) =>
 
       const {
         activities: { byKey: activities },
-        apd: { data: { id: apdID } },
+        apd: {
+          data: { id: apdID }
+        },
         budget
       } = getState();
 
@@ -270,7 +279,11 @@ export const submitAPD = (save = saveApd) => (dispatch, getState) =>
 export const withdrawApd = () => (dispatch, getState) => {
   dispatch({ type: WITHDRAW_APD_REQUEST });
 
-  const { apd: { data: { id: apdID } } } = getState();
+  const {
+    apd: {
+      data: { id: apdID }
+    }
+  } = getState();
 
   return axios
     .delete(`/apds/${apdID}/versions`)

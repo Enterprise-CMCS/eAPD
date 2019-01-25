@@ -88,7 +88,7 @@ const mapStateToProps = ({
     data: { state }
   }
 }) => ({
-  apds: Object.values(byId),
+  apds: Object.values(byId).map(({ id, years }) => ({ id, years })),
   fetching,
   state
 });
