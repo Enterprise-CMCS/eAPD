@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth roles endpoint | DELETE /auth/roles/:roleID when authenticated deleting a role that the user does not belong to 1`] = `""`;
+
+exports[`auth roles endpoint | DELETE /auth/roles/:roleID when authenticated deleting a role that the user does not belong to 2`] = `Array []`;
+
+exports[`auth roles endpoint | DELETE /auth/roles/:roleID when authenticated deleting the role that the user belongs to 1`] = `""`;
+
+exports[`auth roles endpoint | DELETE /auth/roles/:roleID when authenticated with an invalid role ID 1`] = `""`;
