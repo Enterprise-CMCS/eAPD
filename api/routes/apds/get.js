@@ -30,7 +30,7 @@ module.exports = (app, ApdModel = defaultApdModel) => {
     }
   });
 
-  app.get('/apds/:id', can('view-document'), async (req, res) => {
+  app.get('/apds/:id(\\d+)', can('view-document'), async (req, res) => {
     logger.silly(req, 'handling GET /apds/:id');
 
     try {
