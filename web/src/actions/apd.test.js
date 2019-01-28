@@ -113,6 +113,11 @@ describe('apd actions', () => {
       const newapd = { id: 'bloop' };
       fetchMock.onPost('/apds').reply(200, newapd);
 
+      const apd = { id: 'apd-id' };
+      const deserialize = sinon.stub().returns(apd);
+
+      fetchMock.onGet('/apds/apd-id').reply(200, apd);
+
       const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
       const state = {
         apd: {
@@ -125,15 +130,17 @@ describe('apd actions', () => {
 
       const expectedActions = [
         { type: actions.CREATE_APD_REQUEST },
-        { type: actions.CREATE_APD_SUCCESS, data: newapd },
-        { type: actions.SELECT_APD, apd: { hello: 'world' } },
+        { type: actions.CREATE_APD_SUCCESS, data: apd },
+        { type: actions.SELECT_APD, apd: { id: 'apd-id' } },
         { type: actions.UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: '/apd' }
       ];
 
-      return store.dispatch(actions.createApd({ pushRoute })).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+      return store
+        .dispatch(actions.createApd({ deserialize, pushRoute }))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
     });
 
     it('does not do very much if it fails, either', () => {
