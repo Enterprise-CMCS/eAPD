@@ -80,10 +80,10 @@ export const createApd = ({
   dispatch(createRequest());
   return axios
     .post('/apds')
-    .then(req => {
+    .then(async req => {
       const apd = deserialize(req.data);
       dispatch(createSuccess(apd));
-      dispatch(selectApd(apd.id, { pushRoute }));
+      await dispatch(selectApd(apd.id, { deserialize, pushRoute }));
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
