@@ -75,19 +75,23 @@ tap.test('apds GET endpoint', async endpointTest => {
     handlerTest.test('sends apds', async validTest => {
       ApdModel.fetchAll.resolves({ toJSON });
       ApdModel.withRelated = 'this is related stuff';
-      toJSON.returns(['a', 'b', 'c']);
+      toJSON.returns([
+        { id: 'a', years: 'years a', other: 'stuff' },
+        { id: 'b', years: 'years b', gets: 'removed' },
+        { id: 'c', years: 'years c', from: 'results' }
+      ]);
 
       await handler({ params: {}, user: { state: 'va' } }, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status not explicitly set');
       validTest.ok(ApdModel.where.calledWith({ state_id: 'va' }));
       validTest.ok(
-        ApdModel.fetchAll.calledWith({ withRelated: 'this is related stuff' }),
-        'fetches related activities, goals, and objectives'
-      );
-      validTest.ok(
-        res.send.calledWith(['a', 'b', 'c']),
-        'program info is sent back'
+        res.send.calledWith([
+          { id: 'a', years: 'years a' },
+          { id: 'b', years: 'years b' },
+          { id: 'c', years: 'years c' }
+        ]),
+        'APD info is sent back'
       );
     });
   });
