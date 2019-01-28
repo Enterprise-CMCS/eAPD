@@ -73,13 +73,17 @@ export const selectApd = (
 export const createRequest = () => ({ type: CREATE_APD_REQUEST });
 export const createSuccess = data => ({ type: CREATE_APD_SUCCESS, data });
 export const createFailure = () => ({ type: CREATE_APD_FAILURE });
-export const createApd = ({ pushRoute = push } = {}) => dispatch => {
+export const createApd = ({
+  deserialize = fromAPI,
+  pushRoute = push
+} = {}) => dispatch => {
   dispatch(createRequest());
   return axios
     .post('/apds')
     .then(req => {
-      dispatch(createSuccess(req.data));
-      dispatch(selectApd(req.data.id, { pushRoute }));
+      const apd = deserialize(req.data);
+      dispatch(createSuccess(apd));
+      dispatch(selectApd(apd.id, { pushRoute }));
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
