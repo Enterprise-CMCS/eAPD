@@ -62,7 +62,12 @@ describe('apd actions', () => {
     });
   });
 
-  it('selectAPD should create SELECT_APD action, redirect to /apd, and saves APD ID to local storage', () => {
+  it('selectAPD should create SELECT_APD action, redirect to /apd, and saves APD ID to local storage', async () => {
+    const apd = { id: 'apd-id', selected: 'apd goes here' };
+    fetchMock.onGet('/apds/apd-id').reply(200, apd);
+
+    const deserialize = sinon.stub().returns('deserialized apd');
+
     const state = { apd: { byId: { apdID: 'hello there' } } };
     const store = mockStore(state);
 
@@ -70,15 +75,18 @@ describe('apd actions', () => {
     const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
     const expectedActions = [
-      { type: actions.SELECT_APD, apd: 'hello there' },
+      { type: actions.SELECT_APD, apd: 'deserialized apd' },
       { type: actions.UPDATE_BUDGET, state },
       { type: 'FAKE_PUSH', pushRoute: '/apd' }
     ];
 
-    store.dispatch(actions.selectApd('apdID', { global, pushRoute }));
+    await store.dispatch(
+      actions.selectApd('apd-id', { deserialize, global, pushRoute })
+    );
 
     expect(store.getActions()).toEqual(expectedActions);
     expect(global.localStorage.setItem.calledWith('last-apd-id', 'apdID'));
+    expect(deserialize.calledWith(apd)).toEqual(true);
   });
 
   it('createRequest should create CREATE_APD_REQUEST action', () => {

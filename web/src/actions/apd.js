@@ -58,10 +58,10 @@ export const updateApd = updates => dispatch => {
 
 export const selectApd = (
   id,
-  { global = {}, pushRoute = push } = {}
+  { deserialize = fromAPI, global = {}, pushRoute = push } = {}
 ) => dispatch =>
   axios.get(`/apds/${id}`).then(req => {
-    dispatch({ type: SELECT_APD, apd: fromAPI(req.data) });
+    dispatch({ type: SELECT_APD, apd: deserialize(req.data) });
     dispatch(updateBudget());
     dispatch(pushRoute('/apd'));
 
