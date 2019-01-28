@@ -12,6 +12,10 @@ const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios);
 
 describe('apd actions', () => {
+  beforeEach(() => {
+    fetchMock.reset();
+  });
+
   it('requestApd should create GET_APD_REQUEST action', () => {
     expect(actions.requestApd()).toEqual({ type: actions.GET_APD_REQUEST });
   });
@@ -259,36 +263,34 @@ describe('apd actions', () => {
         });
       });
 
-      it('selects an APD if local storage contains a last APD ID', () => {
-        const apd = {};
+      it('selects an APD if local storage contains a last APD ID', async () => {
         const state = {
-          apd: { byId: { 7: apd }, selectAPDOnLoad: true }
+          apd: { selectAPDOnLoad: true }
         };
         const store = mockStore(state);
         fetchMock.onGet('/apds').reply(200, [{ foo: 'bar' }]);
 
         const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
+        const select = sinon.stub().returns({ type: 'SELECT_MOCK' });
+
         const expectedActions = [
           { type: actions.GET_APD_REQUEST },
           { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] },
-          { type: actions.SELECT_APD, apd },
-          { type: actions.UPDATE_BUDGET, state },
-          { type: 'FAKE_PUSH', pushRoute: '/apd' }
+          { type: 'SELECT_MOCK' }
         ];
 
         const global = {
           localStorage: {
-            getItem: sinon.stub().returns(7),
+            getItem: sinon.stub().returns('7'),
             setItem: sinon.spy()
           }
         };
 
-        return store
-          .dispatch(actions.fetchApd({ global, pushRoute }))
-          .then(() => {
-            expect(store.getActions()).toEqual(expectedActions);
-          });
+        await store.dispatch(actions.fetchApd({ global, pushRoute, select }));
+
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(select.calledWith('7', { global, pushRoute })).toEqual(true);
       });
     });
 

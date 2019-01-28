@@ -95,17 +95,18 @@ export const requestSave = () => ({ type: SAVE_APD_REQUEST });
 export const saveSuccess = data => ({ type: SAVE_APD_SUCCESS, data });
 export const saveFailure = () => ({ type: SAVE_APD_FAILURE });
 
-export const fetchApd = ({ global = window, pushRoute = push } = {}) => (
-  dispatch,
-  getState
-) => {
+export const fetchApd = ({
+  global = window,
+  pushRoute = push,
+  select = selectApd
+} = {}) => (dispatch, getState) => {
   dispatch(requestApd());
 
   const url = `/apds`;
 
   return axios
     .get(url)
-    .then(req => {
+    .then(async req => {
       const apd = Array.isArray(req.data) ? req.data : null;
       dispatch(receiveApd(apd));
 
@@ -117,8 +118,8 @@ export const fetchApd = ({ global = window, pushRoute = push } = {}) => (
         global.localStorage &&
         global.localStorage.getItem(LAST_APD_ID_STORAGE_KEY)
       ) {
-        dispatch(
-          selectApd(global.localStorage.getItem('last-apd-id'), {
+        await dispatch(
+          select(global.localStorage.getItem('last-apd-id'), {
             global,
             pushRoute
           })
