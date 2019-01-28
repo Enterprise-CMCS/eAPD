@@ -765,7 +765,19 @@ Object {
               "application/json": Object {
                 "schema": Object {
                   "items": Object {
-                    "$ref": "#/components/schemas/apd",
+                    "properties": Object {
+                      "id": Object {
+                        "description": "APD ID",
+                        "type": "number",
+                      },
+                      "years": Object {
+                        "items": Object {
+                          "type": "number",
+                        },
+                        "type": "array",
+                      },
+                    },
+                    "type": "object",
                   },
                   "type": "array",
                 },
@@ -857,6 +869,39 @@ Object {
       },
     },
     "/apds/{id}": Object {
+      "get": Object {
+        "description": "Where the /apds GET method only returns a small portion of all APDs, this method returns all of one",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "$ref": "#/components/schema/apd",
+                },
+              },
+            },
+            "description": "The APD",
+          },
+          "401": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "403": Object {
+            "description": "Not logged in",
+          },
+          "404": Object {
+            "description": "The apd ID does not match any known apds for the user",
+          },
+        },
+        "security": Array [
+          Object {
+            "sessionCookie": Array [],
+          },
+        ],
+        "summary": "Get a single, complete APD",
+        "tags": Array [
+          "APDs",
+        ],
+      },
       "put": Object {
         "description": "Update an APD in the system.  If state profile information is included, the profile information is also updated for the user's state.",
         "parameters": Array [
