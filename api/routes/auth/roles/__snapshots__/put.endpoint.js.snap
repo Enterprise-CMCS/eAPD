@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth roles endpoint | PUT /auth/roles/:roleID when authenticated when updating the role that the user belongs to 1`] = `undefined`;
+
+exports[`auth roles endpoint | PUT /auth/roles/:roleID when authenticated with a valid updated role 1`] = `
+Object {
+  "activities": Array [
+    "view-users",
+  ],
+  "id": 1102,
+  "name": "new name",
+}
+`;
+
+exports[`auth roles endpoint | PUT /auth/roles/:roleID when authenticated with a valid updated role 2`] = `
+Array [
+  1001,
+]
+`;
+
+exports[`auth roles endpoint | PUT /auth/roles/:roleID when authenticated with activities not an array 1`] = `
+Object {
+  "error": "edit-role-invalid-activities",
+}
+`;
+
+exports[`auth roles endpoint | PUT /auth/roles/:roleID when authenticated with activities that are not valid 1`] = `
+Object {
+  "error": "edit-role-invalid-activities",
+}
+`;
+
+exports[`auth roles endpoint | PUT /auth/roles/:roleID when authenticated with activities where some are not numbers 1`] = `
+Object {
+  "error": "edit-role-invalid-activities",
+}
+`;
+
+exports[`auth roles endpoint | PUT /auth/roles/:roleID when authenticated with an invalid ID 1`] = `undefined`;

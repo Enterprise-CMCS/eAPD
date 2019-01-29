@@ -34,7 +34,7 @@ methodology:
 quarterly:
   title: Breakout of federal share by quarter
   helpText: >-
-    In this section, indicate allocations of state personnel & contract
+    Indicate allocations of state personnel & contract
     resources in current FFY by quarter.
   ? reminder
   expenseNames:
