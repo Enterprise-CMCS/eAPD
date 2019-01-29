@@ -102,6 +102,9 @@ const openAPI = {
           description:
             'The APD is currently in draft, or the selected status is invalid',
           content: errorToken
+        },
+        404: {
+          description: 'The apd ID does not match any known apds'
         }
       }
     }
@@ -139,11 +142,6 @@ const openAPI = {
       responses: {
         204: {
           description: 'The withdrawal was successful'
-        },
-        400: {
-          description:
-            'The APD is not currently in draft status, so it cannot be saved. Error is { error: "apd-not-editable" }',
-          content: errorToken
         }
       }
     },
