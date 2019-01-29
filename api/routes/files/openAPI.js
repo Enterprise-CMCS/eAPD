@@ -116,6 +116,9 @@ const openAPI = {
       responses: {
         204: {
           description: 'The file is deleted successfully'
+        },
+        404: {
+          description: 'The contractor ID is not found'
         }
       }
     }

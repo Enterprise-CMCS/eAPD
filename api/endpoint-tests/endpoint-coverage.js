@@ -9,6 +9,17 @@ const readline = require('readline');
 // strip out the undefineds, since those don't survive stringing
 const openAPI = JSON.parse(JSON.stringify(require('../routes/openAPI')));
 
+const getOpenApiUrl = url => {
+  let last = url.replace(/\/:(.+?)(\/|$)/g, '/{$1}$2');
+  let out = last.replace(/\/:(.+?)(\/|$)/g, '/{$1}$2');
+
+  while (out !== last) {
+    last = out;
+    out = last.replace(/\/:(.+?)(\/|$)/g, '/{$1}$2');
+  }
+  return out;
+};
+
 const allEndpoints = JSON.parse(
   fs.readFileSync(`${__dirname}/endpoints-all.txt`)
 ).reduce((acc, { path, method }) => {
@@ -24,7 +35,7 @@ const allEndpoints = JSON.parse(
     };
   }
 
-  const openAPIpath = path.replace(/\/:(.+?)(\/|$)/, '/{$1}$2');
+  const openAPIpath = getOpenApiUrl(path);
   const oa = openAPI.paths[openAPIpath];
   if (oa && oa[method] && oa[method].responses) {
     acc[path][method].documented = Object.keys(oa[method].responses)

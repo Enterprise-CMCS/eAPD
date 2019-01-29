@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login endpoint | /auth/login Form body: with valid username and valid password 1`] = `
+Object {
+  "activities": Array [
+    "view-users",
+    "add-users",
+    "view-roles",
+    "create-roles",
+    "edit-roles",
+    "submit-federal-response",
+    "submit-clearance",
+    "edit-comments",
+    "submit-document",
+    "submit-state-response",
+    "create-draft",
+    "edit-document",
+    "edit-response",
+    "delete-users",
+    "view-document",
+  ],
+  "id": 2000,
+  "role": "admin",
+  "state": Object {
+    "id": "mn",
+    "name": "Minnesota",
+  },
+  "username": "all-permissions-and-state",
+}
+`;
+
+exports[`login endpoint | /auth/login JSON body: with valid (UPPERCASED) username and valid password 1`] = `
+Object {
+  "activities": Array [
+    "view-users",
+    "add-users",
+    "view-roles",
+    "create-roles",
+    "edit-roles",
+    "submit-federal-response",
+    "submit-clearance",
+    "edit-comments",
+    "submit-document",
+    "submit-state-response",
+    "create-draft",
+    "edit-document",
+    "edit-response",
+    "delete-users",
+    "view-document",
+  ],
+  "id": 2000,
+  "role": "admin",
+  "state": Object {
+    "id": "mn",
+    "name": "Minnesota",
+  },
+  "username": "all-permissions-and-state",
+}
+`;
+
+exports[`login endpoint | /auth/login JSON body: with valid username and valid password 1`] = `
+Object {
+  "activities": Array [
+    "view-users",
+    "add-users",
+    "view-roles",
+    "create-roles",
+    "edit-roles",
+    "submit-federal-response",
+    "submit-clearance",
+    "edit-comments",
+    "submit-document",
+    "submit-state-response",
+    "create-draft",
+    "edit-document",
+    "edit-response",
+    "delete-users",
+    "view-document",
+  ],
+  "id": 2000,
+  "role": "admin",
+  "state": Object {
+    "id": "mn",
+    "name": "Minnesota",
+  },
+  "username": "all-permissions-and-state",
+}
+`;

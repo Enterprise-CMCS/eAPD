@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth roles endpoint | POST /auth/roles when authenticated with a valid new role 1`] = `
+Object {
+  "activities": Array [
+    "view-users",
+    "add-users",
+  ],
+  "id": 1,
+  "name": "new-role",
+}
+`;
+
+exports[`auth roles endpoint | POST /auth/roles when authenticated with a valid new role 2`] = `
+Array [
+  1001,
+  1002,
+]
+`;
+
+exports[`auth roles endpoint | POST /auth/roles when authenticated with activities not an array 1`] = `
+Object {
+  "error": "add-role-invalid-activities",
+}
+`;
+
+exports[`auth roles endpoint | POST /auth/roles when authenticated with activities that are not valid 1`] = `
+Object {
+  "error": "add-role-invalid-activities",
+}
+`;
+
+exports[`auth roles endpoint | POST /auth/roles when authenticated with activities where some are not numbers 1`] = `
+Object {
+  "error": "add-role-invalid-activities",
+}
+`;
+
+exports[`auth roles endpoint | POST /auth/roles when authenticated with an existing name 1`] = `
+Object {
+  "error": "add-role-duplicate-name",
+}
+`;
+
+exports[`auth roles endpoint | POST /auth/roles when authenticated with no body 1`] = `
+Object {
+  "error": "add-role-missing-name",
+}
+`;
+
+exports[`auth roles endpoint | POST /auth/roles when authenticated with no name 1`] = `
+Object {
+  "error": "add-role-missing-name",
+}
+`;

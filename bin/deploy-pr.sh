@@ -33,26 +33,9 @@ if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
   aws s3 mb $BUCKET_URI
   DEPLOYED_URL="http://$BUCKET.s3-website-us-east-1.amazonaws.com/"
   
-  cd web/dist
-  for filename in *.*; do
-    aws s3 cp "$filename" $BUCKET_URI/$filename
-  done
-
-  for filename in static/img/*.*; do
-    aws s3 cp "$filename" $BUCKET_URI/$filename
-  done
-
-  for filename in static/img/browsers/*.*; do
-    aws s3 cp "$filename" $BUCKET_URI/$filename
-  done
-
-  for filename in static/img/states/*.*; do
-    aws s3 cp "$filename" $BUCKET_URI/$filename
-  done
-
+  aws s3 sync web/dist $BUCKET_RUI
   aws s3 website $BUCKET_URI --index-document index.html
   aws s3api put-bucket-policy --bucket $BUCKET --policy "$BUCKET_POLICY"
-  cd ../..
 
   # Update the comment on Github, if there's one already.  This way we'll know the bot updated the thing.
   COMMENTS=$(curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
