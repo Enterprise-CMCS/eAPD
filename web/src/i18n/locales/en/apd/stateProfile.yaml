@@ -1,6 +1,6 @@
 title: State Profile Contact Information
 helpText: >-
-  In this section, list relevant state contacts. If this is updating a previously submitted APD,
+  List relevant state contacts. If this is updating a previously submitted APD,
   the information will be prepopulated. Review to ensure that it is correct.
 directorAndAddress:
   title: State Medicaid Director and Medicaid Office Address
@@ -19,7 +19,7 @@ directorAndAddress:
       state: State
       zip: ZIP
 keyPersonnel:
-  title: Key Personnel & Project Management Planning
+  title: Key Personnel and Project Management Planning
   helpText: >-
     Identify key state staff who will be involved in all activities listed in
     this APD.  Personnel listed in this section must be assigned to APD by name, role,
