@@ -1,12 +1,11 @@
 const path = require('path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 const config = {
   entry: {
-    js: path.join(__dirname, 'src/app.js')
+    js: path.join(__dirname, 'src/app.dev.js')
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -17,13 +16,19 @@ const config = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: { loader: 'babel-loader' }
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: [{ loader: 'css-loader' }, { loader: 'postcss-loader' }]
+          use: [
+            { loader: 'css-loader', options: { sourceMap: true } },
+            {
+              loader: 'postcss-loader',
+              options: { sourceMap: 'inline' }
+            }
+          ]
         })
       },
       {
@@ -37,8 +42,16 @@ const config = {
       API_URL: null
     }),
     new ExtractTextPlugin('app.css'),
-    new UglifyJSPlugin()
-  ]
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    contentBase: './src',
+    historyApiFallback: true,
+    host: '0.0.0.0',
+    hot: true,
+    port: '8001'
+  }
 };
 
 module.exports = config;
