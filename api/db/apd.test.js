@@ -67,13 +67,18 @@ tap.test('apd data model', async apdModelTests => {
     const query = { orderBy: sinon.stub() };
     const withRelated = apd.apd.static.withRelated;
 
-    withRelated.filter(w => typeof w === 'object').forEach(related => {
-      Object.keys(related).forEach(relation => {
-        related[relation](query);
-        test.ok(query.orderBy.calledWith('id'), `${relation} is ordered by ID`);
-        query.orderBy.resetHistory();
+    withRelated
+      .filter(w => typeof w === 'object')
+      .forEach(related => {
+        Object.keys(related).forEach(relation => {
+          related[relation](query);
+          test.ok(
+            query.orderBy.calledWith('id'),
+            `${relation} is ordered by ID`
+          );
+          query.orderBy.resetHistory();
+        });
       });
-    });
   });
 
   apdModelTests.test(
@@ -227,7 +232,6 @@ tap.test('apd data model', async apdModelTests => {
     self.get.withArgs('state_id').returns('apd-state');
     self.get.withArgs('status').returns('apd-status');
     self.get.withArgs('federal_citations').returns('assurances and stuff');
-    self.get.withArgs('period').returns('apd-period');
     self.related
       .withArgs('keyPersonnel')
       .returns({ toJSON: () => 'key-personnel' });
@@ -267,7 +271,6 @@ tap.test('apd data model', async apdModelTests => {
         narrativeHIE: 'apd-hie',
         narrativeHIT: 'apd-hit',
         narrativeMMIS: 'apd-mmis',
-        period: 'apd-period',
         keyPersonnel: 'key-personnel',
         previousActivitySummary: 'apd-previous-activity-summary',
         previousActivityExpenses: 'apd-previous-activity-expenses',

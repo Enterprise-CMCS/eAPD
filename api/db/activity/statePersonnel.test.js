@@ -11,7 +11,7 @@ tap.test('state personnel data model', async statePersonnelModelTests => {
     setupTests.match(
       personnel,
       {
-        tableName: 'activity_state_peronnel',
+        tableName: 'activity_state_personnel',
         activity: Function,
         years: Function,
         static: {
