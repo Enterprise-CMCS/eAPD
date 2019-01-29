@@ -147,7 +147,7 @@ jobs:
         environment:
           - NODE_ENV=test
           - STORE_TYPE=fs
-          - STORE_PATH=endpoint-tests/files
+          - STORE_PATH=test-data/files
       - image: postgres:latest
         name: db
         environment:
@@ -209,28 +209,6 @@ jobs:
       - run:
           name: deploy for pull request
           command: ./bin/deploy-pr.sh
-
-  deploy ux testing:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: deploy to UX testing
-          command: ./bin/deploy-ux-testing.sh
-
-  deploy storybook:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: deploy storybook
-          command: ./bin/deploy-storybook.sh
 
   cleanup PR-specific deploys:
     docker:
@@ -301,33 +279,3 @@ workflows:
             - api unit test
             - api endpoint test
             - api dependency vulnerability scan
-      - request deploy for UX testing:
-          type: approval
-          filters:
-            branches:
-              only:
-                - master
-      - deploy ux testing:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - request deploy for UX testing
-            - web test
-            - api unit test
-            - api endpoint test
-      - request deploy for storybook:
-          type: approval
-          filters:
-            branches:
-              only:
-                - master
-      - deploy storybook:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - request deploy for storybook
-            - web test
