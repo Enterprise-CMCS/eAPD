@@ -871,12 +871,23 @@ Object {
     "/apds/{id}": Object {
       "get": Object {
         "description": "Where the /apds GET method only returns a small portion of all APDs, this method returns all of one",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd to get",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
         "responses": Object {
           "200": Object {
             "content": Object {
               "application/json": Object {
                 "schema": Object {
-                  "$ref": "#/components/schema/apd",
+                  "$ref": "#/components/schemas/apd",
                 },
               },
             },
