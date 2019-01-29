@@ -48,10 +48,21 @@ const openAPI = {
       summary: 'Get a single, complete APD',
       description:
         'Where the /apds GET method only returns a small portion of all APDs, this method returns all of one',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the apd to get',
+          required: true,
+          schema: {
+            type: 'number'
+          }
+        }
+      ],
       responses: {
         200: {
           description: 'The APD',
-          content: jsonResponse({ $ref: '#/components/schema/apd' })
+          content: jsonResponse({ $ref: '#/components/schemas/apd' })
         },
         404: {
           description: 'The apd ID does not match any known apds for the user'
