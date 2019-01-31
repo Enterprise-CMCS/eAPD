@@ -56,7 +56,7 @@ export const updateApd = updates => dispatch => {
   }
 };
 
-export const selectApd = (id, { global = {}, pushRoute = push } = {}) => (
+export const selectApd = (id, { global = window, pushRoute = push } = {}) => (
   dispatch,
   getState
 ) => {
@@ -104,7 +104,9 @@ export const fetchApd = ({ global = window, pushRoute = push } = {}) => (
       const apd = Array.isArray(req.data) ? req.data : null;
       dispatch(receiveApd(apd));
 
-      const { apd: { selectAPDOnLoad } } = getState();
+      const {
+        apd: { selectAPDOnLoad }
+      } = getState();
       if (
         selectAPDOnLoad &&
         global.localStorage &&
@@ -144,7 +146,11 @@ export const notifyNetError = (action, error) => {
 export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
   dispatch(requestSave());
 
-  const { apd: { data: updatedApd }, activities, dirty } = state();
+  const {
+    apd: { data: updatedApd },
+    activities,
+    dirty
+  } = state();
 
   if (!dirty.dirty) {
     dispatch(notify('Save successful!'));
@@ -223,7 +229,9 @@ export const submitAPD = (save = saveApd) => (dispatch, getState) =>
 
       const {
         activities: { byKey: activities },
-        apd: { data: { id: apdID } },
+        apd: {
+          data: { id: apdID }
+        },
         budget
       } = getState();
 
@@ -270,7 +278,11 @@ export const submitAPD = (save = saveApd) => (dispatch, getState) =>
 export const withdrawApd = () => (dispatch, getState) => {
   dispatch({ type: WITHDRAW_APD_REQUEST });
 
-  const { apd: { data: { id: apdID } } } = getState();
+  const {
+    apd: {
+      data: { id: apdID }
+    }
+  } = getState();
 
   return axios
     .delete(`/apds/${apdID}/versions`)
