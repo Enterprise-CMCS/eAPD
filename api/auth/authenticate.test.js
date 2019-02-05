@@ -1,5 +1,7 @@
+const jwt = require('jsonwebtoken');
 const tap = require('tap');
 const sinon = require('sinon');
+const lib = require('./authenticate.js');
 
 const sandbox = sinon.createSandbox();
 
@@ -13,7 +15,7 @@ const bcrypt = {
   compare: sandbox.stub()
 };
 
-const auth = require('./authenticate.js')(userModel, bcrypt);
+const auth = lib(userModel, bcrypt);
 
 tap.test('local authentication', async authTest => {
   const doneCallback = sandbox.spy();
@@ -24,10 +26,80 @@ tap.test('local authentication', async authTest => {
     done();
   });
 
+  authTest.test('gets a nonce', async test => {
+    const nonce = lib.getNonce('Alf');
+
+    test.ok(
+      /[^.]+\.[^.]+\.[^.]+/i.test(nonce),
+      'nonce has header, payload, and signature'
+    );
+
+    const decoded = jwt.decode(nonce, { complete: true });
+    test.same(
+      decoded.header,
+      { alg: 'HS256', typ: 'JWT' },
+      'decoded token header is correct'
+    );
+
+    test.equal(decoded.payload.username, 'Alf', 'payload is the username');
+    test.equal(
+      typeof decoded.payload.iat,
+      'number',
+      'creation time is a number'
+    );
+    // JWT times are in seconds, not milliseconds.  Because reasons. 🤷🏼‍♂️
+    test.equal(
+      decoded.payload.exp,
+      decoded.payload.iat + 3,
+      'expiration is 3 seconds after the creation time'
+    );
+
+    test.equal(typeof decoded.signature, 'string', 'signature is a string');
+  });
+
+  authTest.test('with an invalid nonce', async nonceTests => {
+    nonceTests.test('invalid jwt', async test => {
+      await auth('', '', doneCallback);
+
+      test.ok(
+        userModel.fetch.notCalled,
+        'never get as far as querying the database'
+      );
+      test.ok(doneCallback.calledWith(null, false), 'got a false user');
+    });
+
+    nonceTests.test('invalid signature', async test => {
+      const nonce = lib.getNonce('username');
+      await auth(nonce.substr(1), '', doneCallback);
+
+      test.ok(
+        userModel.fetch.notCalled,
+        'never get as far as querying the database'
+      );
+      test.ok(doneCallback.calledWith(null, false), 'got a false user');
+    });
+
+    nonceTests.test('expired nonce', async test => {
+      const clock = sinon.useFakeTimers();
+      const nonce = lib.getNonce('username');
+      clock.tick(3001);
+
+      await auth(nonce, '', doneCallback);
+
+      test.ok(
+        userModel.fetch.notCalled,
+        'never get as far as querying the database'
+      );
+      test.ok(doneCallback.calledWith(null, false), 'got a false user');
+
+      clock.restore();
+    });
+  });
+
   authTest.test('with a database error', async errorTest => {
     userModel.fetch.rejects();
 
-    await auth('user', 'password', doneCallback);
+    await auth(lib.getNonce('user'), 'password', doneCallback);
 
     errorTest.ok(
       userModel.query.calledOnce,
@@ -51,7 +123,7 @@ tap.test('local authentication', async authTest => {
   authTest.test('with no valid user', async noUserTest => {
     userModel.fetch.resolves();
 
-    await auth('user', 'password', doneCallback);
+    await auth(lib.getNonce('user'), 'password', doneCallback);
 
     noUserTest.ok(
       userModel.query.calledOnce,
@@ -76,7 +148,7 @@ tap.test('local authentication', async authTest => {
     userModel.fetch.resolves({ get });
     bcrypt.compare.resolves(false);
 
-    await auth('user', 'password', doneCallback);
+    await auth(lib.getNonce('user'), 'password', doneCallback);
 
     invalidTest.ok(
       userModel.query.calledOnce,
@@ -115,7 +187,7 @@ tap.test('local authentication', async authTest => {
     userModel.fetch.resolves(model);
     bcrypt.compare.resolves(true);
 
-    await auth('user', 'password', doneCallback);
+    await auth(lib.getNonce('user'), 'password', doneCallback);
 
     validTest.ok(
       userModel.query.calledOnce,
