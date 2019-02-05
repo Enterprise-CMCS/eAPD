@@ -15,6 +15,10 @@ tap.test('authentication setup', async authTest => {
     del: sandbox.spy()
   };
 
+  const auth = {
+    getNonce: sandbox.stub().returns('auth nonce')
+  };
+
   const passport = {
     use: sandbox.spy(),
     serializeUser: sandbox.spy(),
@@ -24,7 +28,18 @@ tap.test('authentication setup', async authTest => {
     authenticate: sandbox.stub().returns('passport-authenticate')
   };
 
+  const session = sandbox.stub();
+  session.destroy = sandbox.stub();
+
   const strategies = ['strategy1', 'strategy2'];
+
+  const res = {
+    send: sandbox.stub(),
+    status: sandbox.stub(),
+    end: sandbox.spy()
+  };
+  res.send.returns(res);
+  res.status.returns(res);
 
   authTest.beforeEach(done => {
     sandbox.resetHistory();
@@ -32,7 +47,7 @@ tap.test('authentication setup', async authTest => {
   });
 
   authTest.test('setup calls everything we expect it to', async setupTest => {
-    authSetup(app, passport, strategies);
+    authSetup(app, { passport, strategies, session });
 
     setupTest.equal(
       app.use.callCount,
@@ -40,7 +55,7 @@ tap.test('authentication setup', async authTest => {
       'three middleware functions added to app'
     );
     setupTest.ok(
-      app.use.calledWith(sinon.match.func),
+      app.use.calledWith(session),
       'adds session function to middleware'
     );
     setupTest.ok(
@@ -99,8 +114,12 @@ tap.test('authentication setup', async authTest => {
     );
 
     setupTest.ok(
-      app.post.calledOnce,
-      'a single POST endpoint is added to the app'
+      app.post.calledTwice,
+      'two POST endpoints are added to the app'
+    );
+    setupTest.ok(
+      app.post.calledWith('/auth/login/nonce', sinon.match.func),
+      'adds a function handler to POST /auth/login/nonce'
     );
     setupTest.ok(
       app.post.calledWith(
@@ -132,8 +151,12 @@ tap.test('authentication setup', async authTest => {
       'GET logout endpoint is setup'
     );
     setupTest.ok(
-      app.post.calledOnce,
-      'a single POST endpoint is added to the app'
+      app.post.calledTwice,
+      'two POST endpoints are added to the app'
+    );
+    setupTest.ok(
+      app.post.calledWith('/auth/login/nonce', sinon.match.func),
+      'POST login endpoint is setup'
     );
     setupTest.ok(
       app.post.calledWith('/auth/login', sinon.match.func, sinon.match.func),
@@ -145,41 +168,56 @@ tap.test('authentication setup', async authTest => {
   });
 
   authTest.test('GET logout endpoint behaves as expected', async getTest => {
-    authSetup(app, passport, strategies);
+    authSetup(app, { session });
     const get = app.get.args[0][1];
 
     const req = {
       logout: sinon.spy()
     };
 
-    const res = {
-      send: sinon.stub(),
-      status: sinon.stub(),
-      end: sinon.spy()
-    };
-    res.send.returns(res);
-    res.status.returns(res);
-
     get(req, res);
 
     getTest.ok(req.logout.calledOnce, 'user is logged out');
+    getTest.ok(session.destroy.calledOnce, 'session is destroyed');
     getTest.ok(res.status.calledOnce, 'an HTTP status is set once');
     getTest.ok(res.status.calledWith(200), 'sets a 200 HTTP status');
     getTest.ok(res.send.notCalled, 'HTTP body is not sent');
     getTest.ok(res.end.calledOnce, 'response is ended one time');
   });
 
-  authTest.test('POST login endpoint behaves as expected', async postTest => {
-    authSetup(app, passport, strategies);
-    const post = app.post.args[0][2];
+  authTest.test('POST nonce endpoint behaves as expected', async nonceTests => {
+    nonceTests.test('sends a 400 error if there is no body', async test => {
+      authSetup(app, { auth, passport, session, strategies });
+      const post = app.post.args.find(a => a[0] === '/auth/login/nonce')[1];
 
-    const res = {
-      send: sinon.stub(),
-      status: sinon.stub(),
-      end: sinon.spy()
-    };
-    res.send.returns(res);
-    res.status.returns(res);
+      post({}, res);
+
+      test.ok(res.status.calledOnce, 'an HTTP status is set once');
+      test.ok(res.status.calledWith(400), 'sets a 200 HTTP status');
+      test.ok(res.send.notCalled, 'HTTP body is not sent');
+      test.ok(res.end.calledOnce, 'response is ended one time');
+    });
+
+    nonceTests.test('returns a nonce if there is a body', async test => {
+      authSetup(app, { auth, passport, session, strategies });
+      const post = app.post.args.find(a => a[0] === '/auth/login/nonce')[1];
+
+      post({ body: { username: 'user name here' } }, res);
+
+      test.ok(
+        auth.getNonce.calledWith('user name here'),
+        'gets a nonce based on the username from the body'
+      );
+      test.ok(
+        res.send.calledWith({ nonce: 'auth nonce' }),
+        'get a nonce if there is a POST body'
+      );
+    });
+  });
+
+  authTest.test('POST login endpoint behaves as expected', async postTest => {
+    authSetup(app);
+    const post = app.post.args.find(a => a[0] === '/auth/login')[2];
 
     const state = sinon.stub();
     state.withArgs('id').returns('state id');

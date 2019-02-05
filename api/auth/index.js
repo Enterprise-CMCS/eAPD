@@ -20,9 +20,10 @@ const defaultStrategies = [new LocalStrategy(authenticate())];
 
 module.exports.setup = function setup(
   app,
-  passport = Passport,
+  {auth = authenticate, passport = Passport,
+    session = sessionFunction,
   strategies = defaultStrategies,
-  session = sessionFunction
+  }={}
 ) {
   // Handle all of the authentication strategies that we support
   logger.silly('setting up strategies with Passport');
@@ -51,10 +52,10 @@ module.exports.setup = function setup(
   app.post('/auth/login/nonce', (req, res) => {
     if (req.body) {
       res.send({
-        nonce: authenticate.getNonce(req.body.username)
+        nonce: auth.getNonce(req.body.username)
       });
     }
-    return res.status(500).end();
+    return res.status(400).end();
   });
 
   // Add a local authentication endpoint
