@@ -4,7 +4,7 @@ const LocalStrategy = require('passport-local');
 
 const authenticate = require('./authenticate');
 const serialization = require('./serialization');
-const sessionFunction = require('./session').getSessionFunction();
+const sessionFunction = require('./session')();
 
 const defaultStrategies = [new LocalStrategy(authenticate())];
 
@@ -46,6 +46,7 @@ module.exports.setup = function setup(
   logger.silly('setting up a logout handler');
   app.get('/auth/logout', (req, res) => {
     req.logout();
+    session.destroy();
     res.status(200).end();
   });
 

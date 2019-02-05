@@ -29,6 +29,7 @@ tap.test('authentication setup', async authTest => {
   };
 
   const session = sandbox.stub();
+  session.destroy = sandbox.stub();
 
   const strategies = ['strategy1', 'strategy2'];
 
@@ -167,7 +168,7 @@ tap.test('authentication setup', async authTest => {
   });
 
   authTest.test('GET logout endpoint behaves as expected', async getTest => {
-    authSetup(app);
+    authSetup(app, { session });
     const get = app.get.args[0][1];
 
     const req = {
@@ -177,6 +178,7 @@ tap.test('authentication setup', async authTest => {
     get(req, res);
 
     getTest.ok(req.logout.calledOnce, 'user is logged out');
+    getTest.ok(session.destroy.calledOnce, 'session is destroyed');
     getTest.ok(res.status.calledOnce, 'an HTTP status is set once');
     getTest.ok(res.status.calledWith(200), 'sets a 200 HTTP status');
     getTest.ok(res.send.notCalled, 'HTTP body is not sent');
