@@ -44,13 +44,12 @@ module.exports.setup = function setup(
   logger.silly('setting up a logout handler');
   app.get('/auth/logout', (req, res) => {
     req.logout();
-    session.destroy();
     res.status(200).end();
   });
 
   logger.silly('setting up local login nonce-fetcher');
   app.post('/auth/login/nonce', (req, res) => {
-    if (req.body) {
+    if (req.body.username) {
       res.send({
         nonce: auth.getNonce(req.body.username)
       });
