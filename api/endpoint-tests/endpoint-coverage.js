@@ -10,13 +10,31 @@ const readline = require('readline');
 const openAPI = JSON.parse(JSON.stringify(require('../routes/openAPI')));
 
 const getOpenApiUrl = url => {
-  let last = url.replace(/\/:(.+?)(\/|$)/g, '/{$1}$2');
+  // Express paths can have regexs in them to make matches more
+  // precise - they appear in parentheses immediately following
+  // the parameter name.  Strip them out here, so they match
+  // the OpenAPI paths.
+  // Regex:
+  //   matches:  /:something(stuff)
+  //   replaces: /:something
+  let last = url.replace(/(\/:.+?)\(.+?\)/g, '$1');
+
+  // Convert the Express :param format to the {param} OpenAPI format
+  // Regex:
+  //   matches:  /:something
+  //             /:something/
+  //             (parameter is terminated by end-of-line or a slash)
+  //   replaces: /{something}
+  //             /{something}/
+  //             (end-of-line or slash is preserved)
+  last = last.replace(/\/:(.+?)(\/|$)/g, '/{$1}$2');
   let out = last.replace(/\/:(.+?)(\/|$)/g, '/{$1}$2');
 
   while (out !== last) {
     last = out;
     out = last.replace(/\/:(.+?)(\/|$)/g, '/{$1}$2');
   }
+
   return out;
 };
 

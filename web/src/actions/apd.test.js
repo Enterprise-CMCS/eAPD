@@ -12,6 +12,10 @@ const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios);
 
 describe('apd actions', () => {
+  beforeEach(() => {
+    fetchMock.reset();
+  });
+
   it('requestApd should create GET_APD_REQUEST action', () => {
     expect(actions.requestApd()).toEqual({ type: actions.GET_APD_REQUEST });
   });
@@ -62,7 +66,12 @@ describe('apd actions', () => {
     });
   });
 
-  it('selectAPD should create SELECT_APD action, redirect to /apd, and saves APD ID to local storage', () => {
+  it('selectAPD should create SELECT_APD action, redirect to /apd, and saves APD ID to local storage', async () => {
+    const apd = { id: 'apd-id', selected: 'apd goes here' };
+    fetchMock.onGet('/apds/apd-id').reply(200, apd);
+
+    const deserialize = sinon.stub().returns('deserialized apd');
+
     const state = { apd: { byId: { apdID: 'hello there' } } };
     const store = mockStore(state);
 
@@ -70,15 +79,18 @@ describe('apd actions', () => {
     const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
     const expectedActions = [
-      { type: actions.SELECT_APD, apd: 'hello there' },
+      { type: actions.SELECT_APD, apd: 'deserialized apd' },
       { type: actions.UPDATE_BUDGET, state },
       { type: 'FAKE_PUSH', pushRoute: '/apd' }
     ];
 
-    store.dispatch(actions.selectApd('apdID', { global, pushRoute }));
+    await store.dispatch(
+      actions.selectApd('apd-id', { deserialize, global, pushRoute })
+    );
 
     expect(store.getActions()).toEqual(expectedActions);
     expect(global.localStorage.setItem.calledWith('last-apd-id', 'apdID'));
+    expect(deserialize.calledWith(apd)).toEqual(true);
   });
 
   it('createRequest should create CREATE_APD_REQUEST action', () => {
@@ -105,6 +117,11 @@ describe('apd actions', () => {
       const newapd = { id: 'bloop' };
       fetchMock.onPost('/apds').reply(200, newapd);
 
+      const apd = { id: 'apd-id' };
+      const deserialize = sinon.stub().returns(apd);
+
+      fetchMock.onGet('/apds/apd-id').reply(200, apd);
+
       const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
       const state = {
         apd: {
@@ -117,15 +134,17 @@ describe('apd actions', () => {
 
       const expectedActions = [
         { type: actions.CREATE_APD_REQUEST },
-        { type: actions.CREATE_APD_SUCCESS, data: newapd },
-        { type: actions.SELECT_APD, apd: { hello: 'world' } },
+        { type: actions.CREATE_APD_SUCCESS, data: apd },
+        { type: actions.SELECT_APD, apd: { id: 'apd-id' } },
         { type: actions.UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: '/apd' }
       ];
 
-      return store.dispatch(actions.createApd({ pushRoute })).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+      return store
+        .dispatch(actions.createApd({ deserialize, pushRoute }))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
     });
 
     it('does not do very much if it fails, either', () => {
@@ -244,36 +263,34 @@ describe('apd actions', () => {
         });
       });
 
-      it('selects an APD if local storage contains a last APD ID', () => {
-        const apd = {};
+      it('selects an APD if local storage contains a last APD ID', async () => {
         const state = {
-          apd: { byId: { 7: apd }, selectAPDOnLoad: true }
+          apd: { selectAPDOnLoad: true }
         };
         const store = mockStore(state);
         fetchMock.onGet('/apds').reply(200, [{ foo: 'bar' }]);
 
         const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
 
+        const select = sinon.stub().returns({ type: 'SELECT_MOCK' });
+
         const expectedActions = [
           { type: actions.GET_APD_REQUEST },
           { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] },
-          { type: actions.SELECT_APD, apd },
-          { type: actions.UPDATE_BUDGET, state },
-          { type: 'FAKE_PUSH', pushRoute: '/apd' }
+          { type: 'SELECT_MOCK' }
         ];
 
         const global = {
           localStorage: {
-            getItem: sinon.stub().returns(7),
+            getItem: sinon.stub().returns('7'),
             setItem: sinon.spy()
           }
         };
 
-        return store
-          .dispatch(actions.fetchApd({ global, pushRoute }))
-          .then(() => {
-            expect(store.getActions()).toEqual(expectedActions);
-          });
+        await store.dispatch(actions.fetchApd({ global, pushRoute, select }));
+
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(select.calledWith('7', { global, pushRoute })).toEqual(true);
       });
     });
 
