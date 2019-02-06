@@ -18,7 +18,9 @@ module.exports = (
     logger.verbose(`got authentication request. decoding jwt...`);
     let verified = false;
     try {
-      verified = jwt.verify(nonce, NONCE_SECRET, { algoithms: ['HS256'] });
+      // Supplying a secret to the verify call mitigates the "none" algorithm
+      // vulnerability, but let's specify our algorithms anayway.
+      verified = jwt.verify(nonce, NONCE_SECRET, { algorithms: ['HS256'] });
     } catch (e) {
       logger.error(`error decoding token: ${e.message}`);
       return done(null, false);
