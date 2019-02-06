@@ -17,13 +17,43 @@ module.exports = (app, ApdModel = defaultApdModel) => {
       }
 
       const whereCondits = { state_id: stateId };
-      const apds = (await ApdModel.where(whereCondits).fetchAll({
-        withRelated: ApdModel.withRelated
-      })).toJSON();
+      const apds = (await ApdModel.where(whereCondits).fetchAll())
+        .toJSON()
+        .map(({ id, years }) => ({ id, years }));
 
       logger.silly(req, `got apds:`);
       logger.silly(req, apds);
       return res.send(apds);
+    } catch (e) {
+      logger.error(req, e);
+      return res.status(500).end();
+    }
+  });
+
+  app.get('/apds/:id(\\d+)', can('view-document'), async (req, res) => {
+    logger.silly(req, 'handling GET /apds/:id');
+
+    try {
+      const stateId = req.user.state;
+
+      if (!stateId) {
+        logger.verbose('user does not have an associated state');
+        return res.status(401).end();
+      }
+
+      const whereCondits = { id: req.params.id, state_id: stateId };
+      const apds = (await ApdModel.where(whereCondits).fetchAll({
+        withRelated: ApdModel.withRelated
+      })).toJSON();
+
+      if (apds.length) {
+        logger.silly(req, `got apds:`);
+        logger.silly(req, apds[0]);
+        return res.send(apds[0]);
+      }
+
+      logger.verbose('apd does not exist');
+      return res.status(404).end();
     } catch (e) {
       logger.error(req, e);
       return res.status(500).end();
