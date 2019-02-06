@@ -31,7 +31,13 @@ export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
 
   return axios
-    .post(`${API_URL}/auth/login`, { username, password })
+    .post('/auth/login/nonce', { username })
+    .then(req =>
+      axios.post('/auth/login', {
+        username: req.data.nonce,
+        password
+      })
+    )
     .then(req => {
       dispatch(completeLogin(req.data));
       dispatch(fetchApd());
@@ -43,13 +49,13 @@ export const login = (username, password) => dispatch => {
 };
 
 export const logout = () => dispatch =>
-  axios.get(`${API_URL}/auth/logout`).then(() => dispatch(completeLogout()));
+  axios.get('/auth/logout').then(() => dispatch(completeLogout()));
 
 export const checkAuth = () => dispatch => {
   dispatch(requestAuthCheck());
 
   return axios
-    .get(`${API_URL}/me`)
+    .get('/me')
     .then(req => {
       dispatch(completeAuthCheck(req.data));
       dispatch(fetchApd());
