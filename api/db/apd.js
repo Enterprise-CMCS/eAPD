@@ -86,7 +86,6 @@ module.exports = () => ({
         narrativeHIE: this.get('narrative_hie'),
         narrativeHIT: this.get('narrative_hit'),
         narrativeMMIS: this.get('narrative_mmis'),
-        period: this.get('period'),
         previousActivityExpenses: this.related(
           'previousActivityExpenses'
         ).toJSON(),

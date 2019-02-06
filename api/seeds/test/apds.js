@@ -1177,7 +1177,7 @@ exports.seed = async knex => {
       milestone: 'HITECH SS-A Assessment'
     }
   ]);
-  await knex('activity_state_peronnel').insert([
+  await knex('activity_state_personnel').insert([
     {
       activity_id: 4100,
       id: 4500,

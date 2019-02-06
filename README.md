@@ -2,6 +2,7 @@
 [![Test coverage](https://img.shields.io/codecov/c/github/18F/cms-hitech-apd.svg)](https://codecov.io/gh/18F/cms-hitech-apd)
 [![Known Vulnerabilities](https://snyk.io/test/github/18f/cms-hitech-apd/badge.svg?targetFile=web%2Fpackage.json)](https://snyk.io/test/github/18f/cms-hitech-apd?targetFile=web%2Fpackage.json)
 [![Known Vulnerabilities](https://snyk.io/test/github/18f/cms-hitech-apd/badge.svg?targetFile=api%2Fpackage.json)](https://snyk.io/test/github/18f/cms-hitech-apd?targetFile=api%2Fpackage.json)
+![Node.js >= 10.14](https://img.shields.io/badge/node-%3E%3D%2010.14-brightgreen.svg)
 
 # CMS eAPD app
 
