@@ -24,8 +24,8 @@ describe('budget summary component', () => {
           hit: {},
           mmis: {},
           combined: {
-            '1': { federal: 1, state: 2, total: 3 },
-            '2': { federal: 10, state: 20, total: 30 }
+            '1': { federal: 1, state: 2, medicaid: 1000, total: 3 },
+            '2': { federal: 10, state: 20, medicaid: 2000, total: 30 }
           }
         }}
         years={['1', '2']}
@@ -54,9 +54,9 @@ describe('budget summary component', () => {
       <DataRow
         category="category text"
         data={{
-          '1': { federal: 1, state: 2, total: 3 },
-          '2': { federal: 10, state: 20, total: 30 },
-          total: { federal: 100, state: 200, total: 300 }
+          '1': { federal: 1, state: 2, medicaid: 1000, total: 3 },
+          '2': { federal: 10, state: 20, medicaid: 2000, total: 30 },
+          total: { federal: 100, state: 200, medicaid: 10000, total: 300 }
         }}
         entries={[]}
         title="title text"
