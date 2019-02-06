@@ -2,8 +2,6 @@ import axios from '../util/api';
 
 import { fetchApd } from './apd';
 
-const API_URL = process.env.API_URL || 'http://localhost:8000';
-
 export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const AUTH_CHECK_SUCCESS = 'AUTH_CHECK_SUCCESS';
 export const AUTH_CHECK_FAILURE = 'AUTH_CHECK_FAILURE';
