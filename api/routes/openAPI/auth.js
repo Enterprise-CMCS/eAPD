@@ -68,7 +68,7 @@ module.exports = {
               schema: {
                 type: 'string',
                 example:
-                  'session=session-data; path=/; expires=Sat, 1 Jan 2035 12:00:00 GMT; httponly'
+                  'token=auth-token-jwt; path=/; expires=Sat, 1 Jan 2035 12:00:00 GMT; httponly'
               }
             }
           }
