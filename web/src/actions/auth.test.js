@@ -36,7 +36,12 @@ describe('auth actions', () => {
 
     it('creates LOGIN_SUCCESS after successful auth', () => {
       const store = mockStore({});
-      fetchMock.onPost().reply(200, { moop: 'moop' });
+      fetchMock
+        .onPost('/auth/login/nonce', { username: 'name' })
+        .reply(200, { nonce: '123abc' });
+      fetchMock
+        .onPost('/auth/login', { username: '123abc', password: 'secret' })
+        .reply(200, { moop: 'moop' });
 
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
@@ -44,7 +49,7 @@ describe('auth actions', () => {
         { type: apdActions.GET_APD_REQUEST }
       ];
 
-      return store.dispatch(actions.login()).then(() => {
+      return store.dispatch(actions.login('name', 'secret')).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
