@@ -156,7 +156,7 @@ describe('login endpoint | /auth/login', async () => {
     expect(response.statusCode).toEqual(200);
     expect(
       response.headers['set-cookie'].some(
-        cookie => cookie.startsWith('session=') && cookie.endsWith('; httponly')
+        cookie => cookie.startsWith('token=') && cookie.endsWith('; httponly')
       )
     ).toBeTruthy();
     expect(body).toMatchSnapshot();
@@ -176,7 +176,7 @@ describe('login endpoint | /auth/login', async () => {
     expect(response.statusCode).toEqual(200);
     expect(
       response.headers['set-cookie'].some(
-        cookie => cookie.startsWith('session=') && cookie.endsWith('; httponly')
+        cookie => cookie.startsWith('token=') && cookie.endsWith('; httponly')
       )
     ).toBeTruthy();
     expect(body).toMatchSnapshot();
@@ -196,7 +196,7 @@ describe('login endpoint | /auth/login', async () => {
     expect(response.statusCode).toEqual(200);
     expect(
       response.headers['set-cookie'].some(
-        cookie => cookie.startsWith('session=') && cookie.endsWith('; httponly')
+        cookie => cookie.startsWith('token=') && cookie.endsWith('; httponly')
       )
     ).toBeTruthy();
     expect(body).toMatchSnapshot();
