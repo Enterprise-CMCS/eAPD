@@ -136,14 +136,17 @@ ShallowWrapper {
           "combined": Object {
             "1": Object {
               "federal": 10,
+              "medicaid": 30,
               "state": 20,
             },
             "2": Object {
               "federal": 30,
+              "medicaid": 70,
               "state": 40,
             },
             "total": Object {
               "federal": 50,
+              "medicaid": 110,
               "state": 60,
             },
           },
@@ -152,14 +155,17 @@ ShallowWrapper {
           "combined": Object {
             "1": Object {
               "federal": 1,
+              "medicaid": 3,
               "state": 2,
             },
             "2": Object {
               "federal": 3,
+              "medicaid": 7,
               "state": 4,
             },
             "total": Object {
               "federal": 5,
+              "medicaid": 11,
               "state": 6,
             },
           },
@@ -168,16 +174,19 @@ ShallowWrapper {
           "combined": Object {
             "1": Object {
               "federal": 100,
+              "medicaid": 300,
               "state": 200,
               "total": 300,
             },
             "2": Object {
               "federal": 400,
+              "medicaid": 700,
               "state": 500,
               "total": 600,
             },
             "total": Object {
               "federal": 700,
+              "medicaid": 1500,
               "state": 800,
               "total": 900,
             },
@@ -187,58 +196,70 @@ ShallowWrapper {
           "50-50": Object {
             "1": Object {
               "federal": 100,
+              "medicaid": 300,
               "state": 200,
             },
             "2": Object {
               "federal": 300,
+              "medicaid": 700,
               "state": 400,
             },
             "total": Object {
               "federal": 500,
+              "medicaid": 1100,
               "state": 600,
             },
           },
           "75-25": Object {
             "1": Object {
               "federal": 10,
+              "medicaid": 30,
               "state": 20,
             },
             "2": Object {
               "federal": 30,
+              "medicaid": 70,
               "state": 40,
             },
             "total": Object {
               "federal": 50,
+              "medicaid": 110,
               "state": 60,
             },
           },
           "90-10": Object {
             "1": Object {
               "federal": 1,
+              "medicaid": 3,
               "state": 2,
             },
             "2": Object {
               "federal": 3,
+              "medicaid": 7,
               "state": 4,
             },
             "total": Object {
               "federal": 5,
+              "medicaid": 11,
               "state": 6,
             },
           },
           "combined": Object {
             "1": Object {
               "federal": 1000,
+              "medicaid": 3000,
               "state": 2000,
               "total": 3000,
             },
             "2": Object {
               "federal": 4000,
+              "medicaid": 9000,
               "state": 5000,
               "total": 6000,
             },
             "total": Object {
               "federal": 7000,
+              "medicaid": 15000,
               "state": 8000,
               "total": 9000,
             },
@@ -347,7 +368,7 @@ ShallowWrapper {
                   className="right-align"
                   id="program-budget-table-combined-total"
                 >
-                  Total
+                  Medicaid total
                 </th>
               </tr>
             </thead>
@@ -419,7 +440,7 @@ ShallowWrapper {
                 />
                 <DollarCell
                   headers="program-budget-table-combined program-budget-table-combined-total"
-                  value={600}
+                  value={700}
                 />
               </tr>
               <tr>
@@ -454,7 +475,7 @@ ShallowWrapper {
                 />
                 <DollarCell
                   headers="program-budget-table-combined program-budget-table-combined-total"
-                  value={900}
+                  value={1500}
                 />
               </tr>
             </tbody>
@@ -561,7 +582,7 @@ ShallowWrapper {
                   className="right-align"
                   id="program-budget-table-mmisTotal-total"
                 >
-                  Total
+                  Medicaid total
                 </th>
               </tr>
             </thead>
@@ -649,7 +670,7 @@ ShallowWrapper {
                 />
                 <DollarCell
                   headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                  value={6000}
+                  value={9000}
                 />
               </tr>
               <tr>
@@ -692,7 +713,7 @@ ShallowWrapper {
                 />
                 <DollarCell
                   headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                  value={9000}
+                  value={15000}
                 />
               </tr>
             </tbody>
@@ -786,7 +807,7 @@ ShallowWrapper {
                   className="right-align"
                   id="program-budget-table-combined-total"
                 >
-                  Total
+                  Medicaid total
                 </th>
               </tr>
             </thead>
@@ -858,7 +879,7 @@ ShallowWrapper {
                 />
                 <DollarCell
                   headers="program-budget-table-combined program-budget-table-combined-total"
-                  value={600}
+                  value={700}
                 />
               </tr>
               <tr>
@@ -893,7 +914,7 @@ ShallowWrapper {
                 />
                 <DollarCell
                   headers="program-budget-table-combined program-budget-table-combined-total"
-                  value={900}
+                  value={1500}
                 />
               </tr>
             </tbody>
@@ -983,7 +1004,7 @@ ShallowWrapper {
                     className="right-align"
                     id="program-budget-table-combined-total"
                   >
-                    Total
+                    Medicaid total
                   </th>
                 </tr>
               </thead>,
@@ -1055,7 +1076,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-combined program-budget-table-combined-total"
-                    value={600}
+                    value={700}
                   />
                 </tr>
                 <tr>
@@ -1090,7 +1111,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-combined program-budget-table-combined-total"
-                    value={900}
+                    value={1500}
                   />
                 </tr>
               </tbody>,
@@ -1180,7 +1201,7 @@ ShallowWrapper {
                       className="right-align"
                       id="program-budget-table-combined-total"
                     >
-                      Total
+                      Medicaid total
                     </th>
                   </tr>,
                 ],
@@ -1334,7 +1355,7 @@ ShallowWrapper {
                         className="right-align"
                         id="program-budget-table-combined-total"
                       >
-                        Total
+                        Medicaid total
                       </th>,
                     ],
                   },
@@ -1434,12 +1455,12 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "host",
                       "props": Object {
-                        "children": "Total",
+                        "children": "Medicaid total",
                         "className": "right-align",
                         "id": "program-budget-table-combined-total",
                       },
                       "ref": null,
-                      "rendered": "Total",
+                      "rendered": "Medicaid total",
                       "type": "th",
                     },
                   ],
@@ -1521,7 +1542,7 @@ ShallowWrapper {
                     />
                     <DollarCell
                       headers="program-budget-table-combined program-budget-table-combined-total"
-                      value={600}
+                      value={700}
                     />
                   </tr>,
                   <tr>
@@ -1556,7 +1577,7 @@ ShallowWrapper {
                     />
                     <DollarCell
                       headers="program-budget-table-combined program-budget-table-combined-total"
-                      value={900}
+                      value={1500}
                     />
                   </tr>,
                 ],
@@ -1742,7 +1763,7 @@ ShallowWrapper {
                       />,
                       <DollarCell
                         headers="program-budget-table-combined program-budget-table-combined-total"
-                        value={600}
+                        value={700}
                       />,
                     ],
                   },
@@ -1838,7 +1859,7 @@ ShallowWrapper {
                       "nodeType": "function",
                       "props": Object {
                         "headers": "program-budget-table-combined program-budget-table-combined-total",
-                        "value": 600,
+                        "value": 700,
                       },
                       "ref": null,
                       "rendered": null,
@@ -1884,7 +1905,7 @@ ShallowWrapper {
                       />,
                       <DollarCell
                         headers="program-budget-table-combined program-budget-table-combined-total"
-                        value={900}
+                        value={1500}
                       />,
                     ],
                   },
@@ -1980,7 +2001,7 @@ ShallowWrapper {
                       "nodeType": "function",
                       "props": Object {
                         "headers": "program-budget-table-combined program-budget-table-combined-total",
-                        "value": 900,
+                        "value": 1500,
                       },
                       "ref": null,
                       "rendered": null,
@@ -2100,7 +2121,7 @@ ShallowWrapper {
                   className="right-align"
                   id="program-budget-table-mmisTotal-total"
                 >
-                  Total
+                  Medicaid total
                 </th>
               </tr>
             </thead>
@@ -2188,7 +2209,7 @@ ShallowWrapper {
                 />
                 <DollarCell
                   headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                  value={6000}
+                  value={9000}
                 />
               </tr>
               <tr>
@@ -2231,7 +2252,7 @@ ShallowWrapper {
                 />
                 <DollarCell
                   headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                  value={9000}
+                  value={15000}
                 />
               </tr>
             </tbody>
@@ -2340,7 +2361,7 @@ ShallowWrapper {
                     className="right-align"
                     id="program-budget-table-mmisTotal-total"
                   >
-                    Total
+                    Medicaid total
                   </th>
                 </tr>
               </thead>,
@@ -2428,7 +2449,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                    value={6000}
+                    value={9000}
                   />
                 </tr>
                 <tr>
@@ -2471,7 +2492,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                    value={9000}
+                    value={15000}
                   />
                 </tr>
               </tbody>,
@@ -2580,7 +2601,7 @@ ShallowWrapper {
                       className="right-align"
                       id="program-budget-table-mmisTotal-total"
                     >
-                      Total
+                      Medicaid total
                     </th>
                   </tr>,
                 ],
@@ -2767,7 +2788,7 @@ ShallowWrapper {
                         className="right-align"
                         id="program-budget-table-mmisTotal-total"
                       >
-                        Total
+                        Medicaid total
                       </th>,
                     ],
                   },
@@ -2893,12 +2914,12 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "host",
                       "props": Object {
-                        "children": "Total",
+                        "children": "Medicaid total",
                         "className": "right-align",
                         "id": "program-budget-table-mmisTotal-total",
                       },
                       "ref": null,
-                      "rendered": "Total",
+                      "rendered": "Medicaid total",
                       "type": "th",
                     },
                   ],
@@ -2996,7 +3017,7 @@ ShallowWrapper {
                     />
                     <DollarCell
                       headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                      value={6000}
+                      value={9000}
                     />
                   </tr>,
                   <tr>
@@ -3039,7 +3060,7 @@ ShallowWrapper {
                     />
                     <DollarCell
                       headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                      value={9000}
+                      value={15000}
                     />
                   </tr>,
                 ],
@@ -3265,7 +3286,7 @@ ShallowWrapper {
                       />,
                       <DollarCell
                         headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                        value={6000}
+                        value={9000}
                       />,
                     ],
                   },
@@ -3385,7 +3406,7 @@ ShallowWrapper {
                       "nodeType": "function",
                       "props": Object {
                         "headers": "program-budget-table-mmisTotal program-budget-table-mmisTotal-total",
-                        "value": 6000,
+                        "value": 9000,
                       },
                       "ref": null,
                       "rendered": null,
@@ -3439,7 +3460,7 @@ ShallowWrapper {
                       />,
                       <DollarCell
                         headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                        value={9000}
+                        value={15000}
                       />,
                     ],
                   },
@@ -3559,7 +3580,7 @@ ShallowWrapper {
                       "nodeType": "function",
                       "props": Object {
                         "headers": "program-budget-table-mmisTotal program-budget-table-mmisTotal-total",
-                        "value": 9000,
+                        "value": 15000,
                       },
                       "ref": null,
                       "rendered": null,
@@ -3668,7 +3689,7 @@ ShallowWrapper {
                     className="right-align"
                     id="program-budget-table-combined-total"
                   >
-                    Total
+                    Medicaid total
                   </th>
                 </tr>
               </thead>
@@ -3740,7 +3761,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-combined program-budget-table-combined-total"
-                    value={600}
+                    value={700}
                   />
                 </tr>
                 <tr>
@@ -3775,7 +3796,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-combined program-budget-table-combined-total"
-                    value={900}
+                    value={1500}
                   />
                 </tr>
               </tbody>
@@ -3882,7 +3903,7 @@ ShallowWrapper {
                     className="right-align"
                     id="program-budget-table-mmisTotal-total"
                   >
-                    Total
+                    Medicaid total
                   </th>
                 </tr>
               </thead>
@@ -3970,7 +3991,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                    value={6000}
+                    value={9000}
                   />
                 </tr>
                 <tr>
@@ -4013,7 +4034,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                    value={9000}
+                    value={15000}
                   />
                 </tr>
               </tbody>
@@ -4107,7 +4128,7 @@ ShallowWrapper {
                     className="right-align"
                     id="program-budget-table-combined-total"
                   >
-                    Total
+                    Medicaid total
                   </th>
                 </tr>
               </thead>
@@ -4179,7 +4200,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-combined program-budget-table-combined-total"
-                    value={600}
+                    value={700}
                   />
                 </tr>
                 <tr>
@@ -4214,7 +4235,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-combined program-budget-table-combined-total"
-                    value={900}
+                    value={1500}
                   />
                 </tr>
               </tbody>
@@ -4304,7 +4325,7 @@ ShallowWrapper {
                       className="right-align"
                       id="program-budget-table-combined-total"
                     >
-                      Total
+                      Medicaid total
                     </th>
                   </tr>
                 </thead>,
@@ -4376,7 +4397,7 @@ ShallowWrapper {
                     />
                     <DollarCell
                       headers="program-budget-table-combined program-budget-table-combined-total"
-                      value={600}
+                      value={700}
                     />
                   </tr>
                   <tr>
@@ -4411,7 +4432,7 @@ ShallowWrapper {
                     />
                     <DollarCell
                       headers="program-budget-table-combined program-budget-table-combined-total"
-                      value={900}
+                      value={1500}
                     />
                   </tr>
                 </tbody>,
@@ -4501,7 +4522,7 @@ ShallowWrapper {
                         className="right-align"
                         id="program-budget-table-combined-total"
                       >
-                        Total
+                        Medicaid total
                       </th>
                     </tr>,
                   ],
@@ -4655,7 +4676,7 @@ ShallowWrapper {
                           className="right-align"
                           id="program-budget-table-combined-total"
                         >
-                          Total
+                          Medicaid total
                         </th>,
                       ],
                     },
@@ -4755,12 +4776,12 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "host",
                         "props": Object {
-                          "children": "Total",
+                          "children": "Medicaid total",
                           "className": "right-align",
                           "id": "program-budget-table-combined-total",
                         },
                         "ref": null,
-                        "rendered": "Total",
+                        "rendered": "Medicaid total",
                         "type": "th",
                       },
                     ],
@@ -4842,7 +4863,7 @@ ShallowWrapper {
                       />
                       <DollarCell
                         headers="program-budget-table-combined program-budget-table-combined-total"
-                        value={600}
+                        value={700}
                       />
                     </tr>,
                     <tr>
@@ -4877,7 +4898,7 @@ ShallowWrapper {
                       />
                       <DollarCell
                         headers="program-budget-table-combined program-budget-table-combined-total"
-                        value={900}
+                        value={1500}
                       />
                     </tr>,
                   ],
@@ -5063,7 +5084,7 @@ ShallowWrapper {
                         />,
                         <DollarCell
                           headers="program-budget-table-combined program-budget-table-combined-total"
-                          value={600}
+                          value={700}
                         />,
                       ],
                     },
@@ -5159,7 +5180,7 @@ ShallowWrapper {
                         "nodeType": "function",
                         "props": Object {
                           "headers": "program-budget-table-combined program-budget-table-combined-total",
-                          "value": 600,
+                          "value": 700,
                         },
                         "ref": null,
                         "rendered": null,
@@ -5205,7 +5226,7 @@ ShallowWrapper {
                         />,
                         <DollarCell
                           headers="program-budget-table-combined program-budget-table-combined-total"
-                          value={900}
+                          value={1500}
                         />,
                       ],
                     },
@@ -5301,7 +5322,7 @@ ShallowWrapper {
                         "nodeType": "function",
                         "props": Object {
                           "headers": "program-budget-table-combined program-budget-table-combined-total",
-                          "value": 900,
+                          "value": 1500,
                         },
                         "ref": null,
                         "rendered": null,
@@ -5421,7 +5442,7 @@ ShallowWrapper {
                     className="right-align"
                     id="program-budget-table-mmisTotal-total"
                   >
-                    Total
+                    Medicaid total
                   </th>
                 </tr>
               </thead>
@@ -5509,7 +5530,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                    value={6000}
+                    value={9000}
                   />
                 </tr>
                 <tr>
@@ -5552,7 +5573,7 @@ ShallowWrapper {
                   />
                   <DollarCell
                     headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                    value={9000}
+                    value={15000}
                   />
                 </tr>
               </tbody>
@@ -5661,7 +5682,7 @@ ShallowWrapper {
                       className="right-align"
                       id="program-budget-table-mmisTotal-total"
                     >
-                      Total
+                      Medicaid total
                     </th>
                   </tr>
                 </thead>,
@@ -5749,7 +5770,7 @@ ShallowWrapper {
                     />
                     <DollarCell
                       headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                      value={6000}
+                      value={9000}
                     />
                   </tr>
                   <tr>
@@ -5792,7 +5813,7 @@ ShallowWrapper {
                     />
                     <DollarCell
                       headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                      value={9000}
+                      value={15000}
                     />
                   </tr>
                 </tbody>,
@@ -5901,7 +5922,7 @@ ShallowWrapper {
                         className="right-align"
                         id="program-budget-table-mmisTotal-total"
                       >
-                        Total
+                        Medicaid total
                       </th>
                     </tr>,
                   ],
@@ -6088,7 +6109,7 @@ ShallowWrapper {
                           className="right-align"
                           id="program-budget-table-mmisTotal-total"
                         >
-                          Total
+                          Medicaid total
                         </th>,
                       ],
                     },
@@ -6214,12 +6235,12 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "host",
                         "props": Object {
-                          "children": "Total",
+                          "children": "Medicaid total",
                           "className": "right-align",
                           "id": "program-budget-table-mmisTotal-total",
                         },
                         "ref": null,
-                        "rendered": "Total",
+                        "rendered": "Medicaid total",
                         "type": "th",
                       },
                     ],
@@ -6317,7 +6338,7 @@ ShallowWrapper {
                       />
                       <DollarCell
                         headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                        value={6000}
+                        value={9000}
                       />
                     </tr>,
                     <tr>
@@ -6360,7 +6381,7 @@ ShallowWrapper {
                       />
                       <DollarCell
                         headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                        value={9000}
+                        value={15000}
                       />
                     </tr>,
                   ],
@@ -6586,7 +6607,7 @@ ShallowWrapper {
                         />,
                         <DollarCell
                           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                          value={6000}
+                          value={9000}
                         />,
                       ],
                     },
@@ -6706,7 +6727,7 @@ ShallowWrapper {
                         "nodeType": "function",
                         "props": Object {
                           "headers": "program-budget-table-mmisTotal program-budget-table-mmisTotal-total",
-                          "value": 6000,
+                          "value": 9000,
                         },
                         "ref": null,
                         "rendered": null,
@@ -6760,7 +6781,7 @@ ShallowWrapper {
                         />,
                         <DollarCell
                           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
-                          value={9000}
+                          value={15000}
                         />,
                       ],
                     },
@@ -6880,7 +6901,7 @@ ShallowWrapper {
                         "nodeType": "function",
                         "props": Object {
                           "headers": "program-budget-table-mmisTotal program-budget-table-mmisTotal-total",
-                          "value": 9000,
+                          "value": 15000,
                         },
                         "ref": null,
                         "rendered": null,
