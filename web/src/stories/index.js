@@ -7,7 +7,8 @@ import FrozenTableStory from './FrozenTableStory';
 import Btn from '../components/Btn';
 import { DollarInput, Input, Textarea } from '../components/Inputs';
 
-import '../styles/index.css';
+import '../styles/legacy.css';
+import '../styles/index.scss';
 
 storiesOf('Texty components', module).add('Instruction', () => (
   <InstructionStory />
