@@ -51,7 +51,7 @@ module.exports.setup = function setup(
 
   logger.silly('setting up local login nonce-fetcher');
   app.post('/auth/login/nonce', (req, res) => {
-    if (req.body.username) {
+    if (req.body && req.body.username) {
       res.send({
         nonce: auth.getNonce(req.body.username)
       });
