@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import * as Yup from 'yup';
 
 import { updateApd as updateApdAction } from '../actions/apd';
 import { Input } from '../components/Inputs';
-import { Input as InputValidate } from '../components/InputsWithValidation';
 import { t } from '../i18n';
 
 class ApdStateProfile extends Component {
@@ -23,14 +21,11 @@ class ApdStateProfile extends Component {
       <Fragment>
         <h3 className="mt0">{t(`${dirTRoot}.title`)}</h3>
         <div className="mb3">
-          <InputValidate
+          <Input
             name="apd-state-profile-mdname"
             label={t(`${dirTRoot}.labels.name`)}
             value={medicaidDirector.name}
             onChange={this.handleChange('medicaidDirector', 'name')}
-            validation={Yup.string()
-              .min(2, 'C’mon, your name is longer than that')
-              .required('Name is required.')}
           />
           <Input
             name="apd-state-profile-mdemail"
@@ -96,11 +91,18 @@ ApdStateProfile.propTypes = {
   updateApd: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ apd: { data: { stateProfile } } }) => ({
+const mapStateToProps = ({
+  apd: {
+    data: { stateProfile }
+  }
+}) => ({
   stateProfile
 });
 const mapDispatchToProps = { updateApd: updateApdAction };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ApdStateProfile);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApdStateProfile);
 
 export { ApdStateProfile as plain, mapStateToProps, mapDispatchToProps };
