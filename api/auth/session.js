@@ -12,20 +12,15 @@ const TOKEN_ISSUER = 'CMS eAPD API';
  * @param {Object} options.Cookies - Injected cookie library; defaults to
  *                                   cookies; primary for unit testing
  */
-const loadSession = (req, { Cookies = defaultCookies } = {}) => {
-  const cookies = new Cookies(req, null);
+const loadSession = (req, cookie) => {
   try {
     logger.silly(req, 'verifying JWT auth token');
-    const valid = jwt.verify(
-      cookies.get(COOKIE_NAME),
-      process.env.SESSION_SECRET,
-      {
-        // Explicitly set the algorithm we expect; otherwise, an attacker could
-        // rewrite the token and set the algorithm to 'none', bypassing our
-        // signature checks
-        algorithms: ['HS256']
-      }
-    );
+    const valid = jwt.verify(cookie, process.env.SESSION_SECRET, {
+      // Explicitly set the algorithm we expect; otherwise, an attacker could
+      // rewrite the token and set the algorithm to 'none', bypassing our
+      // signature checks
+      algorithms: ['HS256']
+    });
 
     // Make sure we issued the token.
     if (valid.iss !== TOKEN_ISSUER) {
@@ -59,7 +54,7 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
   const middleware = (req, res, next) => {
     const cookies = new Cookies(req, res);
 
-    session.content = loadSession(req);
+    session.content = loadSession(req, cookies.get(COOKIE_NAME));
 
     // Add a session object to the request and configure it to modify
     // session.content rather than the actual session object, so we
