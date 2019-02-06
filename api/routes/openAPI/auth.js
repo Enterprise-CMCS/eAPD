@@ -1,11 +1,14 @@
-const { schema: { jsonResponse } } = require('./helpers');
+const {
+  schema: { jsonResponse }
+} = require('./helpers');
 
 module.exports = {
   '/auth/login/nonce': {
     post: {
       tags: ['Authentication and authorization'],
       summary: 'Gets a login nonce',
-      description: 'To help mitigate replay attacks, the server authentication requires a server-signed nonce. The nonce contains the authenticating username, is cryptographically signed by the server, and is only valid for 3 seconds. This nonce is passed to requests to /auth/login',
+      description:
+        'To help mitigate replay attacks, the server authentication requires a server-signed nonce. The nonce contains the authenticating username, is cryptographically signed by the server, and is only valid for 3 seconds. This nonce is passed to requests to /auth/login',
       requestBody: {
         required: true,
         content: jsonResponse({
@@ -25,7 +28,8 @@ module.exports = {
             properties: {
               nonce: {
                 type: 'string',
-                description: 'JWT-encoded string that acts as the nonce for this authentication.  This nonce is required for API requests to /auth/login.  Any username value will generate a nonce; receiving a nonce is not a guarantee that the username is valid.'
+                description:
+                  'JWT-encoded string that acts as the nonce for this authentication.  This nonce is required for API requests to /auth/login.  Any username value will generate a nonce; receiving a nonce is not a guarantee that the username is valid.'
               }
             }
           })

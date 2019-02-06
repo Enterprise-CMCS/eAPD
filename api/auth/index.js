@@ -20,10 +20,12 @@ const defaultStrategies = [new LocalStrategy(authenticate())];
 
 module.exports.setup = function setup(
   app,
-  {auth = authenticate, passport = Passport,
+  {
+    auth = authenticate,
+    passport = Passport,
     session = sessionFunction,
-  strategies = defaultStrategies,
-  }={}
+    strategies = defaultStrategies
+  } = {}
 ) {
   // Handle all of the authentication strategies that we support
   logger.silly('setting up strategies with Passport');
