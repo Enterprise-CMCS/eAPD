@@ -10,6 +10,7 @@ tap.test('environment setup', async envTest => {
   const knownEnvironmentVariables = [
     { name: 'PORT', type: 'number' },
     { name: 'SESSION_SECRET', type: 'string' },
+    { name: 'SESSION_LIFETIME_MINUTES', type: 'number' },
     { name: 'NODE_ENV', type: 'string' },
     { name: 'LOG_LEVEL', type: 'string' },
     { name: 'LOG_FILE', type: 'string' },
