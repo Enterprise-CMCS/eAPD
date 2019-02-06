@@ -1,6 +1,6 @@
 module.exports = {
   apdActivityStatePersonnel: {
-    tableName: 'activity_state_peronnel',
+    tableName: 'activity_state_personnel',
 
     activity() {
       return this.belongsTo('apdActivity');
