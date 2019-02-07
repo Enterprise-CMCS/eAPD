@@ -23,6 +23,12 @@ describe('formatting util', () => {
     expect(formatMoney(999999)).toEqual('$999,999');
     expect(formatMoney(1234567)).toEqual('$1.23M');
     expect(formatMoney(1200000)).toEqual('$1.2M');
+
+    // Make sure we convert from SI prefixes to currency initialisms
+    expect(formatMoney(1230000000)).toEqual('$1.23B');
+    expect(formatMoney(1230000000000)).toEqual('$1.23T');
+    expect(formatMoney(1230000000000000)).toEqual('$1.23Q');
+
     expect(formatMoney('hello')).toEqual('--');
   });
 
