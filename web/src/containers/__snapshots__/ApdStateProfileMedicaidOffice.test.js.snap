@@ -24,6 +24,7 @@ ShallowWrapper {
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
     "simulateError": [Function],
@@ -44,44 +45,14 @@ ShallowWrapper {
         <div
           className="mb3"
         >
-          <Wrapper
+          <InputHolder
+            hideLabel={false}
             label="Name"
             name="apd-state-profile-mdname"
             onChange={[Function]}
-            validation={
-              StringSchema {
-                "_blacklist": RefSet {
-                  "list": Set {},
-                  "refs": Map {},
-                },
-                "_conditions": Array [],
-                "_deps": Array [],
-                "_exclusive": Object {
-                  "min": true,
-                  "required": false,
-                },
-                "_mutate": false,
-                "_options": Object {
-                  "abortEarly": true,
-                  "recursive": true,
-                },
-                "_type": "string",
-                "_typeError": [Function],
-                "_whitelist": RefSet {
-                  "list": Set {},
-                  "refs": Map {},
-                },
-                "tests": Array [
-                  [Function],
-                  [Function],
-                  [Function],
-                ],
-                "transforms": Array [
-                  [Function],
-                ],
-              }
-            }
+            type="text"
             value="name"
+            wrapperClass=""
           />
           <InputHolder
             hideLabel={false}
@@ -192,44 +163,14 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <Wrapper
+            <InputHolder
+              hideLabel={false}
               label="Name"
               name="apd-state-profile-mdname"
               onChange={[Function]}
-              validation={
-                StringSchema {
-                  "_blacklist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "_conditions": Array [],
-                  "_deps": Array [],
-                  "_exclusive": Object {
-                    "min": true,
-                    "required": false,
-                  },
-                  "_mutate": false,
-                  "_options": Object {
-                    "abortEarly": true,
-                    "recursive": true,
-                  },
-                  "_type": "string",
-                  "_typeError": [Function],
-                  "_whitelist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "tests": Array [
-                    [Function],
-                    [Function],
-                    [Function],
-                  ],
-                  "transforms": Array [
-                    [Function],
-                  ],
-                }
-              }
+              type="text"
               value="name"
+              wrapperClass=""
             />,
             <InputHolder
               hideLabel={false}
@@ -259,41 +200,13 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "hideLabel": false,
               "label": "Name",
               "name": "apd-state-profile-mdname",
               "onChange": [Function],
-              "validation": StringSchema {
-                "_blacklist": RefSet {
-                  "list": Set {},
-                  "refs": Map {},
-                },
-                "_conditions": Array [],
-                "_deps": Array [],
-                "_exclusive": Object {
-                  "min": true,
-                  "required": false,
-                },
-                "_mutate": false,
-                "_options": Object {
-                  "abortEarly": true,
-                  "recursive": true,
-                },
-                "_type": "string",
-                "_typeError": [Function],
-                "_whitelist": RefSet {
-                  "list": Set {},
-                  "refs": Map {},
-                },
-                "tests": Array [
-                  [Function],
-                  [Function],
-                  [Function],
-                ],
-                "transforms": Array [
-                  [Function],
-                ],
-              },
+              "type": "text",
               "value": "name",
+              "wrapperClass": "",
             },
             "ref": null,
             "rendered": null,
@@ -635,44 +548,14 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <Wrapper
+            <InputHolder
+              hideLabel={false}
               label="Name"
               name="apd-state-profile-mdname"
               onChange={[Function]}
-              validation={
-                StringSchema {
-                  "_blacklist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "_conditions": Array [],
-                  "_deps": Array [],
-                  "_exclusive": Object {
-                    "min": true,
-                    "required": false,
-                  },
-                  "_mutate": false,
-                  "_options": Object {
-                    "abortEarly": true,
-                    "recursive": true,
-                  },
-                  "_type": "string",
-                  "_typeError": [Function],
-                  "_whitelist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "tests": Array [
-                    [Function],
-                    [Function],
-                    [Function],
-                  ],
-                  "transforms": Array [
-                    [Function],
-                  ],
-                }
-              }
+              type="text"
               value="name"
+              wrapperClass=""
             />
             <InputHolder
               hideLabel={false}
@@ -783,44 +666,14 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <Wrapper
+              <InputHolder
+                hideLabel={false}
                 label="Name"
                 name="apd-state-profile-mdname"
                 onChange={[Function]}
-                validation={
-                  StringSchema {
-                    "_blacklist": RefSet {
-                      "list": Set {},
-                      "refs": Map {},
-                    },
-                    "_conditions": Array [],
-                    "_deps": Array [],
-                    "_exclusive": Object {
-                      "min": true,
-                      "required": false,
-                    },
-                    "_mutate": false,
-                    "_options": Object {
-                      "abortEarly": true,
-                      "recursive": true,
-                    },
-                    "_type": "string",
-                    "_typeError": [Function],
-                    "_whitelist": RefSet {
-                      "list": Set {},
-                      "refs": Map {},
-                    },
-                    "tests": Array [
-                      [Function],
-                      [Function],
-                      [Function],
-                    ],
-                    "transforms": Array [
-                      [Function],
-                    ],
-                  }
-                }
+                type="text"
                 value="name"
+                wrapperClass=""
               />,
               <InputHolder
                 hideLabel={false}
@@ -850,41 +703,13 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "hideLabel": false,
                 "label": "Name",
                 "name": "apd-state-profile-mdname",
                 "onChange": [Function],
-                "validation": StringSchema {
-                  "_blacklist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "_conditions": Array [],
-                  "_deps": Array [],
-                  "_exclusive": Object {
-                    "min": true,
-                    "required": false,
-                  },
-                  "_mutate": false,
-                  "_options": Object {
-                    "abortEarly": true,
-                    "recursive": true,
-                  },
-                  "_type": "string",
-                  "_typeError": [Function],
-                  "_whitelist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "tests": Array [
-                    [Function],
-                    [Function],
-                    [Function],
-                  ],
-                  "transforms": Array [
-                    [Function],
-                  ],
-                },
+                "type": "text",
                 "value": "name",
+                "wrapperClass": "",
               },
               "ref": null,
               "rendered": null,
@@ -1216,9 +1041,13 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
         "lifecycles": Object {
           "componentDidUpdate": Object {
             "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
           },
           "getDerivedStateFromProps": true,
           "getSnapshotBeforeUpdate": true,
@@ -1256,6 +1085,7 @@ ShallowWrapper {
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
     "simulateError": [Function],
@@ -1276,44 +1106,14 @@ ShallowWrapper {
         <div
           className="mb3"
         >
-          <Wrapper
+          <InputHolder
+            hideLabel={false}
             label="Name"
             name="apd-state-profile-mdname"
             onChange={[Function]}
-            validation={
-              StringSchema {
-                "_blacklist": RefSet {
-                  "list": Set {},
-                  "refs": Map {},
-                },
-                "_conditions": Array [],
-                "_deps": Array [],
-                "_exclusive": Object {
-                  "min": true,
-                  "required": false,
-                },
-                "_mutate": false,
-                "_options": Object {
-                  "abortEarly": true,
-                  "recursive": true,
-                },
-                "_type": "string",
-                "_typeError": [Function],
-                "_whitelist": RefSet {
-                  "list": Set {},
-                  "refs": Map {},
-                },
-                "tests": Array [
-                  [Function],
-                  [Function],
-                  [Function],
-                ],
-                "transforms": Array [
-                  [Function],
-                ],
-              }
-            }
+            type="text"
             value="a"
+            wrapperClass=""
           />
           <InputHolder
             hideLabel={false}
@@ -1424,44 +1224,14 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <Wrapper
+            <InputHolder
+              hideLabel={false}
               label="Name"
               name="apd-state-profile-mdname"
               onChange={[Function]}
-              validation={
-                StringSchema {
-                  "_blacklist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "_conditions": Array [],
-                  "_deps": Array [],
-                  "_exclusive": Object {
-                    "min": true,
-                    "required": false,
-                  },
-                  "_mutate": false,
-                  "_options": Object {
-                    "abortEarly": true,
-                    "recursive": true,
-                  },
-                  "_type": "string",
-                  "_typeError": [Function],
-                  "_whitelist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "tests": Array [
-                    [Function],
-                    [Function],
-                    [Function],
-                  ],
-                  "transforms": Array [
-                    [Function],
-                  ],
-                }
-              }
+              type="text"
               value="a"
+              wrapperClass=""
             />,
             <InputHolder
               hideLabel={false}
@@ -1491,41 +1261,13 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "hideLabel": false,
               "label": "Name",
               "name": "apd-state-profile-mdname",
               "onChange": [Function],
-              "validation": StringSchema {
-                "_blacklist": RefSet {
-                  "list": Set {},
-                  "refs": Map {},
-                },
-                "_conditions": Array [],
-                "_deps": Array [],
-                "_exclusive": Object {
-                  "min": true,
-                  "required": false,
-                },
-                "_mutate": false,
-                "_options": Object {
-                  "abortEarly": true,
-                  "recursive": true,
-                },
-                "_type": "string",
-                "_typeError": [Function],
-                "_whitelist": RefSet {
-                  "list": Set {},
-                  "refs": Map {},
-                },
-                "tests": Array [
-                  [Function],
-                  [Function],
-                  [Function],
-                ],
-                "transforms": Array [
-                  [Function],
-                ],
-              },
+              "type": "text",
               "value": "a",
+              "wrapperClass": "",
             },
             "ref": null,
             "rendered": null,
@@ -1867,44 +1609,14 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <Wrapper
+            <InputHolder
+              hideLabel={false}
               label="Name"
               name="apd-state-profile-mdname"
               onChange={[Function]}
-              validation={
-                StringSchema {
-                  "_blacklist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "_conditions": Array [],
-                  "_deps": Array [],
-                  "_exclusive": Object {
-                    "min": true,
-                    "required": false,
-                  },
-                  "_mutate": false,
-                  "_options": Object {
-                    "abortEarly": true,
-                    "recursive": true,
-                  },
-                  "_type": "string",
-                  "_typeError": [Function],
-                  "_whitelist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "tests": Array [
-                    [Function],
-                    [Function],
-                    [Function],
-                  ],
-                  "transforms": Array [
-                    [Function],
-                  ],
-                }
-              }
+              type="text"
               value="a"
+              wrapperClass=""
             />
             <InputHolder
               hideLabel={false}
@@ -2015,44 +1727,14 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <Wrapper
+              <InputHolder
+                hideLabel={false}
                 label="Name"
                 name="apd-state-profile-mdname"
                 onChange={[Function]}
-                validation={
-                  StringSchema {
-                    "_blacklist": RefSet {
-                      "list": Set {},
-                      "refs": Map {},
-                    },
-                    "_conditions": Array [],
-                    "_deps": Array [],
-                    "_exclusive": Object {
-                      "min": true,
-                      "required": false,
-                    },
-                    "_mutate": false,
-                    "_options": Object {
-                      "abortEarly": true,
-                      "recursive": true,
-                    },
-                    "_type": "string",
-                    "_typeError": [Function],
-                    "_whitelist": RefSet {
-                      "list": Set {},
-                      "refs": Map {},
-                    },
-                    "tests": Array [
-                      [Function],
-                      [Function],
-                      [Function],
-                    ],
-                    "transforms": Array [
-                      [Function],
-                    ],
-                  }
-                }
+                type="text"
                 value="a"
+                wrapperClass=""
               />,
               <InputHolder
                 hideLabel={false}
@@ -2082,41 +1764,13 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "hideLabel": false,
                 "label": "Name",
                 "name": "apd-state-profile-mdname",
                 "onChange": [Function],
-                "validation": StringSchema {
-                  "_blacklist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "_conditions": Array [],
-                  "_deps": Array [],
-                  "_exclusive": Object {
-                    "min": true,
-                    "required": false,
-                  },
-                  "_mutate": false,
-                  "_options": Object {
-                    "abortEarly": true,
-                    "recursive": true,
-                  },
-                  "_type": "string",
-                  "_typeError": [Function],
-                  "_whitelist": RefSet {
-                    "list": Set {},
-                    "refs": Map {},
-                  },
-                  "tests": Array [
-                    [Function],
-                    [Function],
-                    [Function],
-                  ],
-                  "transforms": Array [
-                    [Function],
-                  ],
-                },
+                "type": "text",
                 "value": "a",
+                "wrapperClass": "",
               },
               "ref": null,
               "rendered": null,
@@ -2448,9 +2102,13 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
         "lifecycles": Object {
           "componentDidUpdate": Object {
             "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
           },
           "getDerivedStateFromProps": true,
           "getSnapshotBeforeUpdate": true,

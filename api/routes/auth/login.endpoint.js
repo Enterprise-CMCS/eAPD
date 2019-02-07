@@ -1,6 +1,40 @@
+const jwt = require('jsonwebtoken');
 const { request, getFullPath } = require('../../utils.endpoint');
 
+describe('login nonce endpoint | /auth/login/nonce', async () => {
+  const url = getFullPath('/auth/login/nonce');
+
+  it('with no username', async () => {
+    const {
+      response: { statusCode }
+    } = await request.post(url);
+    expect(statusCode).toEqual(400);
+  });
+
+  it('with a username', async () => {
+    const {
+      response: { statusCode },
+      body
+    } = await request.post(url, { json: { username: 'test user' } });
+    expect(statusCode).toEqual(200);
+
+    const token = jwt.decode(body.nonce);
+
+    expect(body.nonce).toMatch(/[^.]+\.[^.]+\.[^.]+/i);
+    expect(token).toMatchObject({ username: 'test user' });
+    expect(token.exp).toEqual(token.iat + 3);
+  });
+});
+
 describe('login endpoint | /auth/login', async () => {
+  const nonceUrl = getFullPath('/auth/login/nonce');
+  const nonceForUsername = async username => {
+    const {
+      body: { nonce }
+    } = await request.post(nonceUrl, { json: { username } });
+    return nonce;
+  };
+
   const url = getFullPath('/auth/login');
 
   it('with no post body at all', async () => {
@@ -45,39 +79,63 @@ describe('login endpoint | /auth/login', async () => {
 
   const badCredentialsCases = [
     {
-      title: 'with invalid username, invalid password',
-      data: {
-        username: 'nobody',
+      title: 'with malformatted nonce',
+      data: () => ({
+        username: 'something or other',
         password: 'nothing'
+      })
+    },
+    {
+      title: 'with invalid nonce signature',
+      data: async () => {
+        const nonce = await nonceForUsername('username');
+        return {
+          username: nonce.substr(0, nonce.length - 1),
+          password: 'anything'
+        };
       }
     },
     {
-      title: 'with invalid username, valid password',
-      data: {
-        username: 'nobody',
+      title: 'with expired nonce',
+      data: async () => {
+        const nonce = await nonceForUsername('username');
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve({
+              username: nonce.substr(0, nonce.length - 1),
+              password: 'anything'
+            });
+          }, 3010);
+        });
+      }
+    },
+    {
+      title: 'with nonce for invalid username, valid password',
+      data: async () => ({
+        username: await nonceForUsername('nobody'),
         password: 'password'
-      }
+      })
     },
     {
-      title: 'with valid username, invalid password',
-      data: {
-        username: 'all-permissions-and-state',
+      title: 'with nonce for valid username, invalid password',
+      data: async () => ({
+        username: await nonceForUsername('all-permissions-and-state'),
         password: 'nothing'
-      }
+      })
     }
   ];
 
   badCredentialsCases.forEach(badCredentialsCase => {
     it(`Form body: ${badCredentialsCase.title}`, async () => {
       const { response } = await request.post(url, {
-        form: badCredentialsCase.data
+        form: await badCredentialsCase.data()
       });
       expect(response.statusCode).toEqual(401);
     });
 
     it(`JSON body: ${badCredentialsCase.title}`, async () => {
       const { response } = await request.post(url, {
-        json: badCredentialsCase.data
+        json: await badCredentialsCase.data()
       });
       expect(response.statusCode).toEqual(401);
     });
@@ -88,7 +146,10 @@ describe('login endpoint | /auth/login', async () => {
     const cookies = request.jar();
     const { response, body } = await request.post(url, {
       jar: cookies,
-      form: { username: 'all-permissions-and-state', password: 'password' },
+      form: {
+        username: await nonceForUsername('all-permissions-and-state'),
+        password: 'password'
+      },
       json: true
     });
 
@@ -106,7 +167,10 @@ describe('login endpoint | /auth/login', async () => {
     const cookies = request.jar();
     const { response, body } = await request.post(url, {
       jar: cookies,
-      json: { username: 'all-permissions-and-state', password: 'password' }
+      json: {
+        username: await nonceForUsername('all-permissions-and-state'),
+        password: 'password'
+      }
     });
 
     expect(response.statusCode).toEqual(200);
@@ -123,7 +187,10 @@ describe('login endpoint | /auth/login', async () => {
     const cookies = request.jar();
     const { response, body } = await request.post(url, {
       jar: cookies,
-      json: { username: 'ALL-PERMISSIONS-AND-STATE', password: 'password' }
+      json: {
+        username: await nonceForUsername('ALL-PERMISSIONS-AND-STATE'),
+        password: 'password'
+      }
     });
 
     expect(response.statusCode).toEqual(200);
