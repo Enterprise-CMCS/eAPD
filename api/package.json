@@ -49,6 +49,7 @@
     "express": "^4.16.4",
     "fs-blob-store": "^5.2.1",
     "joi": "^13.7.0",
+    "jsonwebtoken": "^8.4.0",
     "knex": "^0.14.6",
     "lodash.isequal": "^4.5.0",
     "lodash.pick": "^4.4.0",
