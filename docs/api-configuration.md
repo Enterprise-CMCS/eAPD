@@ -19,12 +19,24 @@ Currently, the API is configured entirely with environment variables:
 
 * ### `SESSION_SECRET`
 
-  * This is the secret used to encrypt client session cookies. It should be
+  * This is the secret used to sign client authentication cookies. It should be
     cryptographically strong. This secret should be protected.
   * If the secret is changed and the API process restarted, all users will be
     effectively logged out. If the secret is not set and the default value is
     used, users will be logged out every time the process restarts.
-  * **default**: cryptographically-strong 64-character random hex string
+  * This value should be at least 256 bits, preferably as a hex string.  If the
+    value is a hex string, it will be converted to a byte buffer.  A final secret
+    that is below 256 bits will log a warning.
+  * **default**: cryptographically-strong random hex string representing a
+    512-byte secret
+
+* ### `SESSION_LIFETIME_MINUTES`
+  * How long a user may be logged in without logging in again. Currently, any
+    user activity involving the API will reset the session expiration to this
+    lifetime.  E.g., a user logs in and gets a 2-day session.  If they do
+    nothing, they will be logged out in 2 days.  However, if after 1 day they
+    load an APD, their session is extended to 2 more days.
+  * **default**: 2880 minutes, or 2 days
 
 * ### `PORT`
 
