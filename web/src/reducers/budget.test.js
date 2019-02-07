@@ -4,7 +4,7 @@ import { UPDATE_BUDGET } from '../actions/apd';
 describe('budget reducer', () => {
   const initialState = {
     activities: {},
-    combined: { total: { total: 0, federal: 0, state: 0 } },
+    combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
     federalShareByFFYQuarter: {
       hitAndHie: {
         total: { contractors: 0, state: 0, combined: 0 }
@@ -14,34 +14,34 @@ describe('budget reducer', () => {
       }
     },
     hie: {
-      combined: { total: { total: 0, federal: 0, state: 0 } },
-      contractors: { total: { total: 0, federal: 0, state: 0 } },
-      expenses: { total: { total: 0, federal: 0, state: 0 } },
-      statePersonnel: { total: { total: 0, federal: 0, state: 0 } }
+      combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+      contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+      expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+      statePersonnel: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } }
     },
     hit: {
-      combined: { total: { total: 0, federal: 0, state: 0 } },
-      contractors: { total: { total: 0, federal: 0, state: 0 } },
-      expenses: { total: { total: 0, federal: 0, state: 0 } },
-      statePersonnel: { total: { total: 0, federal: 0, state: 0 } }
+      combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+      contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+      expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+      statePersonnel: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } }
     },
     mmis: {
-      combined: { total: { total: 0, federal: 0, state: 0 } },
-      contractors: { total: { total: 0, federal: 0, state: 0 } },
-      expenses: { total: { total: 0, federal: 0, state: 0 } },
-      statePersonnel: { total: { total: 0, federal: 0, state: 0 } }
+      combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+      contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+      expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+      statePersonnel: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } }
     },
     hitAndHie: {
-      combined: { total: { federal: 0, state: 0, total: 0 } },
-      contractors: { total: { federal: 0, state: 0, total: 0 } },
-      expenses: { total: { federal: 0, state: 0, total: 0 } },
-      statePersonnel: { total: { federal: 0, state: 0, total: 0 } }
+      combined: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+      contractors: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+      expenses: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+      statePersonnel: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } }
     },
     mmisByFFP: {
-      '50-50': { total: { federal: 0, state: 0, total: 0 } },
-      '75-25': { total: { federal: 0, state: 0, total: 0 } },
-      '90-10': { total: { federal: 0, state: 0, total: 0 } },
-      combined: { total: { federal: 0, state: 0, total: 0 } }
+      '50-50': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+      '75-25': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+      '90-10': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+      combined: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } }
     },
     activityTotals: [],
     years: []
@@ -726,10 +726,10 @@ describe('budget reducer', () => {
         }
       },
       combined: {
-        '1931': { federal: 11145, state: 1905, total: 14050 },
-        '1932': { federal: 12930, state: 1770, total: 15700 },
-        '1933': { federal: 24120, state: 2680, total: 27800 },
-        total: { federal: 48195, state: 6355, total: 57550 }
+        '1931': { federal: 11145, state: 1905, medicaid: 13050, total: 14050 },
+        '1932': { federal: 12930, state: 1770, medicaid: 14700, total: 15700 },
+        '1933': { federal: 24120, state: 2680, medicaid: 26800, total: 27800 },
+        total: { federal: 48195, state: 6355, medicaid: 54550, total: 57550 }
       },
       federalShareByFFYQuarter: {
         hitAndHie: {
@@ -783,132 +783,162 @@ describe('budget reducer', () => {
       },
       hie: {
         combined: {
-          '1931': { federal: 7560, state: 840, total: 8400 },
-          '1932': { federal: 7380, state: 820, total: 8200 },
-          '1933': { federal: 6930, state: 770, total: 7700 },
-          total: { federal: 21870, state: 2430, total: 24300 }
+          '1931': { federal: 7560, state: 840, medicaid: 8400, total: 8400 },
+          '1932': { federal: 7380, state: 820, medicaid: 8200, total: 8200 },
+          '1933': { federal: 6930, state: 770, medicaid: 7700, total: 7700 },
+          total: { federal: 21870, state: 2430, medicaid: 24300, total: 24300 }
         },
         contractors: {
-          '1931': { federal: 2700, state: 300, total: 3000 },
-          '1932': { federal: 2700, state: 300, total: 3000 },
-          '1933': { federal: 2700, state: 300, total: 3000 },
-          total: { federal: 8100, state: 900, total: 9000 }
+          '1931': { federal: 2700, state: 300, medicaid: 3000, total: 3000 },
+          '1932': { federal: 2700, state: 300, medicaid: 3000, total: 3000 },
+          '1933': { federal: 2700, state: 300, medicaid: 3000, total: 3000 },
+          total: { federal: 8100, state: 900, medicaid: 9000, total: 9000 }
         },
         expenses: {
-          '1931': { federal: 2700, state: 300, total: 3000 },
-          '1932': { federal: 2700, state: 300, total: 3000 },
-          '1933': { federal: 2700, state: 300, total: 3000 },
-          total: { federal: 8100, state: 900, total: 9000 }
+          '1931': { federal: 2700, state: 300, medicaid: 3000, total: 3000 },
+          '1932': { federal: 2700, state: 300, medicaid: 3000, total: 3000 },
+          '1933': { federal: 2700, state: 300, medicaid: 3000, total: 3000 },
+          total: { federal: 8100, state: 900, medicaid: 9000, total: 9000 }
         },
         statePersonnel: {
-          '1931': { federal: 2160, state: 240, total: 2400 },
-          '1932': { federal: 1980, state: 220, total: 2200 },
-          '1933': { federal: 1530, state: 170, total: 1700 },
-          total: { federal: 5670, state: 630, total: 6300 }
+          '1931': { federal: 2160, state: 240, medicaid: 2400, total: 2400 },
+          '1932': { federal: 1980, state: 220, medicaid: 2200, total: 2200 },
+          '1933': { federal: 1530, state: 170, medicaid: 1700, total: 1700 },
+          total: { federal: 5670, state: 630, medicaid: 6300, total: 6300 }
         }
       },
       hit: {
         combined: {
-          '1931': { federal: 2835, state: 315, total: 3150 },
-          '1932': { federal: 4050, state: 450, total: 4500 },
-          '1933': { federal: 15300, state: 1700, total: 18000 },
-          total: { federal: 22185, state: 2465, total: 25650 }
+          '1931': { federal: 2835, state: 315, medicaid: 3150, total: 3150 },
+          '1932': { federal: 4050, state: 450, medicaid: 4500, total: 4500 },
+          '1933': {
+            federal: 15300,
+            state: 1700,
+            medicaid: 17000,
+            total: 18000
+          },
+          total: { federal: 22185, state: 2465, medicaid: 24650, total: 25650 }
         },
         contractors: {
-          '1931': { federal: 900, state: 100, total: 1000 },
-          '1932': { federal: 900, state: 100, total: 1000 },
-          '1933': { federal: 600, state: 66, total: 1000 },
-          total: { federal: 2400, state: 266, total: 3000 }
+          '1931': { federal: 900, state: 100, medicaid: 1000, total: 1000 },
+          '1932': { federal: 900, state: 100, medicaid: 1000, total: 1000 },
+          '1933': { federal: 600, state: 66, medicaid: 666, total: 1000 },
+          total: { federal: 2400, state: 266, medicaid: 2666, total: 3000 }
         },
         expenses: {
-          '1931': { federal: 900, state: 100, total: 1000 },
-          '1932': { federal: 900, state: 100, total: 1000 },
-          '1933': { federal: 600, state: 67, total: 1000 },
-          total: { federal: 2400, state: 267, total: 3000 }
+          '1931': { federal: 900, state: 100, medicaid: 1000, total: 1000 },
+          '1932': { federal: 900, state: 100, medicaid: 1000, total: 1000 },
+          '1933': { federal: 600, state: 67, medicaid: 667, total: 1000 },
+          total: { federal: 2400, state: 267, medicaid: 2667, total: 3000 }
         },
         statePersonnel: {
-          '1931': { federal: 1035, state: 115, total: 1150 },
-          '1932': { federal: 2250, state: 250, total: 2500 },
-          '1933': { federal: 14100, state: 1567, total: 16000 },
-          total: { federal: 17385, state: 1932, total: 19650 }
+          '1931': { federal: 1035, state: 115, medicaid: 1150, total: 1150 },
+          '1932': { federal: 2250, state: 250, medicaid: 2500, total: 2500 },
+          '1933': {
+            federal: 14100,
+            state: 1567,
+            medicaid: 15667,
+            total: 16000
+          },
+          total: { federal: 17385, state: 1932, medicaid: 19317, total: 19650 }
         }
       },
       hitAndHie: {
         combined: {
-          '1931': { federal: 10395, state: 1155, total: 11550 },
-          '1932': { federal: 11430, state: 1270, total: 12700 },
-          '1933': { federal: 22230, state: 2470, total: 25700 },
-          total: { federal: 44055, state: 4895, total: 49950 }
+          '1931': {
+            federal: 10395,
+            state: 1155,
+            medicaid: 11550,
+            total: 11550
+          },
+          '1932': {
+            federal: 11430,
+            state: 1270,
+            medicaid: 12700,
+            total: 12700
+          },
+          '1933': {
+            federal: 22230,
+            state: 2470,
+            medicaid: 24700,
+            total: 25700
+          },
+          total: { federal: 44055, state: 4895, medicaid: 48950, total: 49950 }
         },
         contractors: {
-          '1931': { federal: 3600, state: 400, total: 4000 },
-          '1932': { federal: 3600, state: 400, total: 4000 },
-          '1933': { federal: 3300, state: 366, total: 4000 },
-          total: { federal: 10500, state: 1166, total: 12000 }
+          '1931': { federal: 3600, state: 400, medicaid: 4000, total: 4000 },
+          '1932': { federal: 3600, state: 400, medicaid: 4000, total: 4000 },
+          '1933': { federal: 3300, state: 366, medicaid: 3666, total: 4000 },
+          total: { federal: 10500, state: 1166, medicaid: 11666, total: 12000 }
         },
         expenses: {
-          '1931': { federal: 3600, state: 400, total: 4000 },
-          '1932': { federal: 3600, state: 400, total: 4000 },
-          '1933': { federal: 3300, state: 367, total: 4000 },
-          total: { federal: 10500, state: 1167, total: 12000 }
+          '1931': { federal: 3600, state: 400, medicaid: 4000, total: 4000 },
+          '1932': { federal: 3600, state: 400, medicaid: 4000, total: 4000 },
+          '1933': { federal: 3300, state: 367, medicaid: 3667, total: 4000 },
+          total: { federal: 10500, state: 1167, medicaid: 11667, total: 12000 }
         },
         statePersonnel: {
-          '1931': { federal: 3195, state: 355, total: 3550 },
-          '1932': { federal: 4230, state: 470, total: 4700 },
-          '1933': { federal: 15630, state: 1737, total: 17700 },
-          total: { federal: 23055, state: 2562, total: 25950 }
+          '1931': { federal: 3195, state: 355, medicaid: 3550, total: 3550 },
+          '1932': { federal: 4230, state: 470, medicaid: 4700, total: 4700 },
+          '1933': {
+            federal: 15630,
+            state: 1737,
+            medicaid: 17367,
+            total: 17700
+          },
+          total: { federal: 23055, state: 2562, medicaid: 25617, total: 25950 }
         }
       },
       mmis: {
         combined: {
-          '1931': { federal: 750, state: 750, total: 2500 },
-          '1932': { federal: 1500, state: 500, total: 3000 },
-          '1933': { federal: 1890, state: 210, total: 2100 },
-          total: { federal: 4140, state: 1460, total: 7600 }
+          '1931': { federal: 750, state: 750, medicaid: 1500, total: 2500 },
+          '1932': { federal: 1500, state: 500, medicaid: 2000, total: 3000 },
+          '1933': { federal: 1890, state: 210, medicaid: 2100, total: 2100 },
+          total: { federal: 4140, state: 1460, medicaid: 5600, total: 7600 }
         },
         contractors: {
-          '1931': { federal: 300, state: 300, total: 1000 },
-          '1932': { federal: 500, state: 166, total: 1000 },
-          '1933': { federal: 900, state: 100, total: 1000 },
-          total: { federal: 1700, state: 566, total: 3000 }
+          '1931': { federal: 300, state: 300, medicaid: 600, total: 1000 },
+          '1932': { federal: 500, state: 166, medicaid: 666, total: 1000 },
+          '1933': { federal: 900, state: 100, medicaid: 1000, total: 1000 },
+          total: { federal: 1700, state: 566, medicaid: 2266, total: 3000 }
         },
         expenses: {
-          '1931': { federal: 300, state: 300, total: 1000 },
-          '1932': { federal: 500, state: 167, total: 1000 },
-          '1933': { federal: 900, state: 100, total: 1000 },
-          total: { federal: 1700, state: 567, total: 3000 }
+          '1931': { federal: 300, state: 300, medicaid: 600, total: 1000 },
+          '1932': { federal: 500, state: 167, medicaid: 667, total: 1000 },
+          '1933': { federal: 900, state: 100, medicaid: 1000, total: 1000 },
+          total: { federal: 1700, state: 567, medicaid: 2267, total: 3000 }
         },
         statePersonnel: {
-          '1931': { federal: 150, state: 150, total: 500 },
-          '1932': { federal: 500, state: 167, total: 1000 },
-          '1933': { federal: 90, state: 10, total: 100 },
-          total: { federal: 740, state: 327, total: 1600 }
+          '1931': { federal: 150, state: 150, medicaid: 300, total: 500 },
+          '1932': { federal: 500, state: 167, medicaid: 667, total: 1000 },
+          '1933': { federal: 90, state: 10, medicaid: 100, total: 100 },
+          total: { federal: 740, state: 327, medicaid: 1067, total: 1600 }
         }
       },
       mmisByFFP: {
         '50-50': {
-          '1931': { federal: 750, state: 750, total: 2500 },
-          '1932': { federal: 0, state: 0, total: 0 },
-          '1933': { federal: 0, state: 0, total: 0 },
-          total: { federal: 750, state: 750, total: 2500 }
+          '1931': { federal: 750, state: 750, medicaid: 1500, total: 2500 },
+          '1932': { federal: 0, state: 0, medicaid: 0, total: 0 },
+          '1933': { federal: 0, state: 0, medicaid: 0, total: 0 },
+          total: { federal: 750, state: 750, medicaid: 1500, total: 2500 }
         },
         '75-25': {
-          '1931': { federal: 0, state: 0, total: 0 },
-          '1932': { federal: 1500, state: 500, total: 3000 },
-          '1933': { federal: 0, state: 0, total: 0 },
-          total: { federal: 1500, state: 500, total: 3000 }
+          '1931': { federal: 0, state: 0, medicaid: 0, total: 0 },
+          '1932': { federal: 1500, state: 500, medicaid: 2000, total: 3000 },
+          '1933': { federal: 0, state: 0, medicaid: 0, total: 0 },
+          total: { federal: 1500, state: 500, medicaid: 2000, total: 3000 }
         },
         '90-10': {
-          '1931': { federal: 0, state: 0, total: 0 },
-          '1932': { federal: 0, state: 0, total: 0 },
-          '1933': { federal: 1890, state: 210, total: 2100 },
-          total: { federal: 1890, state: 210, total: 2100 }
+          '1931': { federal: 0, state: 0, medicaid: 0, total: 0 },
+          '1932': { federal: 0, state: 0, medicaid: 0, total: 0 },
+          '1933': { federal: 1890, state: 210, medicaid: 2100, total: 2100 },
+          total: { federal: 1890, state: 210, medicaid: 2100, total: 2100 }
         },
         combined: {
-          '1931': { federal: 750, state: 750, total: 2500 },
-          '1932': { federal: 1500, state: 500, total: 3000 },
-          '1933': { federal: 1890, state: 210, total: 2100 },
-          total: { federal: 4140, state: 1460, total: 7600 }
+          '1931': { federal: 750, state: 750, medicaid: 1500, total: 2500 },
+          '1932': { federal: 1500, state: 500, medicaid: 2000, total: 3000 },
+          '1933': { federal: 1890, state: 210, medicaid: 2100, total: 2100 },
+          total: { federal: 4140, state: 1460, medicaid: 5600, total: 7600 }
         }
       },
       activityTotals: [

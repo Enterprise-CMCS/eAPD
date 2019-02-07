@@ -2,11 +2,11 @@ const logger = require('../logger')('auth index');
 const Passport = require('passport');
 const LocalStrategy = require('passport-local');
 
-const authenticate = require('./authenticate')();
+const authenticate = require('./authenticate');
 const serialization = require('./serialization');
-const sessionFunction = require('./session').getSessionFunction();
+const sessionFunction = require('./session')();
 
-const defaultStrategies = [new LocalStrategy(authenticate)];
+const defaultStrategies = [new LocalStrategy(authenticate())];
 
 // This setup method configures passport and inserts it into
 // the express middleware. After a successful authentication,
@@ -20,9 +20,12 @@ const defaultStrategies = [new LocalStrategy(authenticate)];
 
 module.exports.setup = function setup(
   app,
-  passport = Passport,
-  strategies = defaultStrategies,
-  session = sessionFunction
+  {
+    auth = authenticate,
+    passport = Passport,
+    session = sessionFunction,
+    strategies = defaultStrategies
+  } = {}
 ) {
   // Handle all of the authentication strategies that we support
   logger.silly('setting up strategies with Passport');
@@ -43,7 +46,18 @@ module.exports.setup = function setup(
   logger.silly('setting up a logout handler');
   app.get('/auth/logout', (req, res) => {
     req.logout();
+    session.destroy();
     res.status(200).end();
+  });
+
+  logger.silly('setting up local login nonce-fetcher');
+  app.post('/auth/login/nonce', (req, res) => {
+    if (req.body && req.body.username) {
+      res.send({
+        nonce: auth.getNonce(req.body.username)
+      });
+    }
+    return res.status(400).end();
   });
 
   // Add a local authentication endpoint

@@ -33,7 +33,7 @@ if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
   aws s3 mb $BUCKET_URI
   DEPLOYED_URL="http://$BUCKET.s3-website-us-east-1.amazonaws.com/"
   
-  aws s3 sync web/dist $BUCKET_RUI
+  aws s3 sync web/dist $BUCKET_URI
   aws s3 website $BUCKET_URI --index-document index.html
   aws s3api put-bucket-policy --bucket $BUCKET --policy "$BUCKET_POLICY"
 

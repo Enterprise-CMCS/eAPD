@@ -6,7 +6,7 @@ summaryBudget:
   title: Summary Budget Table
   helpText: >-
     This table itemizes the costs for each activity by federal fiscal year (FFY).
-    The table breaks out the total share, federal share, and state share. Amounts
+    The table breaks out the Medicaid share, federal share, and state share. Amounts
     are calculated automatically.
 quarterlyBudget:
   title: Federal share by FFY Quarter
