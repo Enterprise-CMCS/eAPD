@@ -68,9 +68,26 @@ tap.test('local authentication', async authTest => {
       test.ok(doneCallback.calledWith(null, false), 'got a false user');
     });
 
+    nonceTests.test('invalid algorithm', async test => {
+      const nonce = lib.getNonce('username');
+      const token = jwt.decode(nonce, { complete: true })
+
+      const badNonce = jwt.sign(token.payload, 'secret', { algorithm: 'none' });
+
+      await auth(badNonce, '', doneCallback);
+
+      test.ok(
+        userModel.fetch.notCalled,
+        'never get as far as querying the database'
+      );
+      test.ok(doneCallback.calledWith(null, false), 'got a false user');
+    })
+
     nonceTests.test('invalid signature', async test => {
       const nonce = lib.getNonce('username');
-      await auth(nonce.substr(1), '', doneCallback);
+      const last = nonce[nonce.length - 1];
+
+      await auth(`${nonce.substr(0, nonce.length - 1)}${last === 'x' ? 'y' : 'x'}`, '', doneCallback);
 
       test.ok(
         userModel.fetch.notCalled,

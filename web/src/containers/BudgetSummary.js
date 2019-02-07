@@ -77,7 +77,7 @@ class DataRow extends Component {
                   className="mono right-align"
                   headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-total`}
                 >
-                  {formatMoney(val.total)}
+                  {formatMoney(val.medicaid)}
                 </td>
                 <td
                   className="mono right-align"
@@ -95,14 +95,9 @@ class DataRow extends Component {
             );
           })}
         </tr>
-        {hasData &&
-          detailsOpen && (
-            <DataRowDetails
-              category={category}
-              entries={entries}
-              years={years}
-            />
-          )}
+        {hasData && detailsOpen && (
+          <DataRowDetails category={category} entries={entries} years={years} />
+        )}
       </Fragment>
     );
   }
@@ -177,22 +172,13 @@ const BudgetSummary = ({ activities, data, years }) => (
           <th id="summary-budget-null2" />
           {[...years, 'total'].map(y => (
             <Fragment key={y}>
-              <th
-                className="right-align"
-                id={`summary-budget-fy-${y}-total`}
-              >
-                Total
+              <th className="right-align" id={`summary-budget-fy-${y}-total`}>
+                Medicaid total
               </th>
-              <th
-                className="right-align"
-                id={`summary-budget-fy-${y}-federal`}
-              >
+              <th className="right-align" id={`summary-budget-fy-${y}-federal`}>
                 Federal
               </th>
-              <th
-                className="right-align"
-                id={`summary-budget-fy-${y}-state`}
-              >
+              <th className="right-align" id={`summary-budget-fy-${y}-state`}>
                 State
               </th>
             </Fragment>
@@ -224,7 +210,7 @@ const BudgetSummary = ({ activities, data, years }) => (
                   className="mono right-align"
                   headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-total`}
                 >
-                  {formatMoney(combined.total)}
+                  {formatMoney(combined.medicaid)}
                 </td>
                 <td
                   className="mono right-align"
