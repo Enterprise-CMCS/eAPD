@@ -11,18 +11,19 @@ describe('logout endpoint | /auth/logout', async () => {
     expect(response.statusCode).toEqual(200);
 
     // It might be valid for the API to set some header other than
-    // the session cookie, but it might also be valid for it to set
-    // no headers at all.
-    if (response.headers['set-cookie']) {
-      expect(
-        response.headers['set-cookie'].every(
-          cookie => !cookie.startsWith('session=')
+    // the session cookie
+    expect(
+      response.headers['set-cookie']
+        .filter(cookie => cookie.startsWith('token='))
+        .every(
+          cookie =>
+            cookie ===
+            'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly'
         )
-      ).toBeTruthy();
-    }
+    ).toBeTruthy();
   });
 
-  describe('already logged in', async () => {
+  it('already logged in', async () => {
     const cookies = request.jar();
     cookies.setCookie('session=this-is-my-session', url);
 
@@ -30,14 +31,13 @@ describe('logout endpoint | /auth/logout', async () => {
 
     expect(response.statusCode).toEqual(200);
     expect(
-      response.headers['set-cookie'].some(
-        cookie => cookie.startsWith('session=') && cookie.endsWith('; httponly')
-      )
-    ).toBeTruthy();
-    expect(
-      response.headers['set-cookie'].every(
-        cookie => !cookie.startsWith('session=this-is-my-session')
-      )
+      response.headers['set-cookie']
+        .filter(cookie => cookie.startsWith('token='))
+        .every(
+          cookie =>
+            cookie ===
+            'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly'
+        )
     ).toBeTruthy();
   });
 });

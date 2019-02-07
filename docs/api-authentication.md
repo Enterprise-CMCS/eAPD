@@ -24,11 +24,9 @@ a successful login, 400 for invalid request, 401 for invalid login, or 500 for
 a server error. There is no response body for successful logins or server
 errors.
 
-On a successful login, a session is generated and stored in its entirety in an
-encrypted cookie using
-[client-sessions](https://www.npmjs.com/package/client-sessions). The cookie is
-encrypted with the contents of the `SESSION_SECRET` environment variable (see
+On a successful login, an authenticatino token is generated and stored in its
+entirety in a cryptographically-signed JWT cookie. The cookie is signed with
+the contents of the `SESSION_SECRET` environment variable (see
 the [API configuration documentation](api-configuration.md) for more info on
-environment variables). At the moment, the session only contains a user's unique
-database ID. On subsequent calls to the API, the session is decrypted and a full
-user object is reconstructed by calling the database.
+environment variables). On subsequent calls to the API, the token is verified
+and used to create a full user object from the database.
