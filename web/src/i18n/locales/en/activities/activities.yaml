@@ -28,7 +28,7 @@ delete:
     _no: 'No'
 header: Program Activities
 namePrefix: Activity
-namePrefixAndNum: Core Activity {{number}}
+namePrefixAndNum: Activity {{number}}
 costs:
   title: In-House Cost Categories
   subtitles:
