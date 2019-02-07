@@ -107,7 +107,7 @@ const ExecutiveSummaryBudget = ({ budget }) => {
                   headers={tdHdrs('combined', 'state')}
                 />
                 <DollarCell
-                  value={hitAndHie.combined[year].total}
+                  value={hitAndHie.combined[year].medicaid}
                   headers={tdHdrs('combined', 'total')}
                 />
               </tr>
@@ -204,7 +204,7 @@ const ExecutiveSummaryBudget = ({ budget }) => {
                   headers={tdHdrs('mmisTotal', 'state')}
                 />
                 <DollarCell
-                  value={mmisByFFP.combined[year].total}
+                  value={mmisByFFP.combined[year].medicaid}
                   headers={tdHdrs('mmisTotal', 'total')}
                 />
               </tr>
