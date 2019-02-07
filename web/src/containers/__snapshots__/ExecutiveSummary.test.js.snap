@@ -48,6 +48,7 @@ ShallowWrapper {
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
     "simulateError": [Function],
@@ -76,7 +77,7 @@ ShallowWrapper {
                 <div
                   className="h5"
                 >
-                  Core Activity 1
+                  Activity 1
                 </div>
                 <a
                   className="h3 bold black"
@@ -147,7 +148,7 @@ ShallowWrapper {
                 <div
                   className="h5"
                 >
-                  Core Activity 2
+                  Activity 2
                 </div>
                 <a
                   className="h3 bold black"
@@ -298,7 +299,7 @@ ShallowWrapper {
                   <div
                     className="h5"
                   >
-                    Core Activity 1
+                    Activity 1
                   </div>
                   <a
                     className="h3 bold black"
@@ -369,7 +370,7 @@ ShallowWrapper {
                   <div
                     className="h5"
                   >
-                    Core Activity 2
+                    Activity 2
                   </div>
                   <a
                     className="h3 bold black"
@@ -510,7 +511,7 @@ ShallowWrapper {
                     <div
                       className="h5"
                     >
-                      Core Activity 1
+                      Activity 1
                     </div>
                     <a
                       className="h3 bold black"
@@ -585,7 +586,7 @@ ShallowWrapper {
                       <div
                         className="h5"
                       >
-                        Core Activity 1
+                        Activity 1
                       </div>
                       <a
                         className="h3 bold black"
@@ -612,7 +613,7 @@ ShallowWrapper {
                         <div
                           className="h5"
                         >
-                          Core Activity 1
+                          Activity 1
                         </div>,
                         <a
                           className="h3 bold black"
@@ -630,11 +631,11 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "host",
                         "props": Object {
-                          "children": "Core Activity 1",
+                          "children": "Activity 1",
                           "className": "h5",
                         },
                         "ref": null,
-                        "rendered": "Core Activity 1",
+                        "rendered": "Activity 1",
                         "type": "div",
                       },
                       Object {
@@ -886,7 +887,7 @@ ShallowWrapper {
                     <div
                       className="h5"
                     >
-                      Core Activity 2
+                      Activity 2
                     </div>
                     <a
                       className="h3 bold black"
@@ -961,7 +962,7 @@ ShallowWrapper {
                       <div
                         className="h5"
                       >
-                        Core Activity 2
+                        Activity 2
                       </div>
                       <a
                         className="h3 bold black"
@@ -988,7 +989,7 @@ ShallowWrapper {
                         <div
                           className="h5"
                         >
-                          Core Activity 2
+                          Activity 2
                         </div>,
                         <a
                           className="h3 bold black"
@@ -1006,11 +1007,11 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "host",
                         "props": Object {
-                          "children": "Core Activity 2",
+                          "children": "Activity 2",
                           "className": "h5",
                         },
                         "ref": null,
-                        "rendered": "Core Activity 2",
+                        "rendered": "Activity 2",
                         "type": "div",
                       },
                       Object {
@@ -1605,7 +1606,7 @@ ShallowWrapper {
                   <div
                     className="h5"
                   >
-                    Core Activity 1
+                    Activity 1
                   </div>
                   <a
                     className="h3 bold black"
@@ -1676,7 +1677,7 @@ ShallowWrapper {
                   <div
                     className="h5"
                   >
-                    Core Activity 2
+                    Activity 2
                   </div>
                   <a
                     className="h3 bold black"
@@ -1827,7 +1828,7 @@ ShallowWrapper {
                     <div
                       className="h5"
                     >
-                      Core Activity 1
+                      Activity 1
                     </div>
                     <a
                       className="h3 bold black"
@@ -1898,7 +1899,7 @@ ShallowWrapper {
                     <div
                       className="h5"
                     >
-                      Core Activity 2
+                      Activity 2
                     </div>
                     <a
                       className="h3 bold black"
@@ -2039,7 +2040,7 @@ ShallowWrapper {
                       <div
                         className="h5"
                       >
-                        Core Activity 1
+                        Activity 1
                       </div>
                       <a
                         className="h3 bold black"
@@ -2114,7 +2115,7 @@ ShallowWrapper {
                         <div
                           className="h5"
                         >
-                          Core Activity 1
+                          Activity 1
                         </div>
                         <a
                           className="h3 bold black"
@@ -2141,7 +2142,7 @@ ShallowWrapper {
                           <div
                             className="h5"
                           >
-                            Core Activity 1
+                            Activity 1
                           </div>,
                           <a
                             className="h3 bold black"
@@ -2159,11 +2160,11 @@ ShallowWrapper {
                           "key": undefined,
                           "nodeType": "host",
                           "props": Object {
-                            "children": "Core Activity 1",
+                            "children": "Activity 1",
                             "className": "h5",
                           },
                           "ref": null,
-                          "rendered": "Core Activity 1",
+                          "rendered": "Activity 1",
                           "type": "div",
                         },
                         Object {
@@ -2415,7 +2416,7 @@ ShallowWrapper {
                       <div
                         className="h5"
                       >
-                        Core Activity 2
+                        Activity 2
                       </div>
                       <a
                         className="h3 bold black"
@@ -2490,7 +2491,7 @@ ShallowWrapper {
                         <div
                           className="h5"
                         >
-                          Core Activity 2
+                          Activity 2
                         </div>
                         <a
                           className="h3 bold black"
@@ -2517,7 +2518,7 @@ ShallowWrapper {
                           <div
                             className="h5"
                           >
-                            Core Activity 2
+                            Activity 2
                           </div>,
                           <a
                             className="h3 bold black"
@@ -2535,11 +2536,11 @@ ShallowWrapper {
                           "key": undefined,
                           "nodeType": "host",
                           "props": Object {
-                            "children": "Core Activity 2",
+                            "children": "Activity 2",
                             "className": "h5",
                           },
                           "ref": null,
-                          "rendered": "Core Activity 2",
+                          "rendered": "Activity 2",
                           "type": "div",
                         },
                         Object {
@@ -3116,9 +3117,13 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
         "lifecycles": Object {
           "componentDidUpdate": Object {
             "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
           },
           "getDerivedStateFromProps": true,
           "getSnapshotBeforeUpdate": true,

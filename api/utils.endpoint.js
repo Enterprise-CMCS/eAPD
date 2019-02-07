@@ -21,9 +21,15 @@ const login = async (
 ) => {
   const cookies = request.jar();
 
+  const {
+    body: { nonce }
+  } = await execRequest('post', getFullPath('/auth/login/nonce'), {
+    json: { username }
+  });
+
   const { response } = await execRequest('post', getFullPath('/auth/login'), {
     jar: cookies,
-    json: { username, password }
+    json: { username: nonce, password }
   });
 
   if (response.statusCode === 200) {
@@ -34,7 +40,10 @@ const login = async (
 
 const unauthenticatedTest = (method, url) =>
   it('when unauthenticated', async () => {
-    const { response: { statusCode }, body } = await requestFor(method)(url);
+    const {
+      response: { statusCode },
+      body
+    } = await requestFor(method)(url);
 
     expect(statusCode).toEqual(403);
     expect(body).toBeFalsy();
@@ -43,7 +52,10 @@ const unauthenticatedTest = (method, url) =>
 const unauthorizedTest = (method, url) => {
   it('with unauthorized', async () => {
     const jar = await login('no-permissions', 'password'); // this user has no permissions
-    const { response: { statusCode }, body } = await requestFor(method)(url, {
+    const {
+      response: { statusCode },
+      body
+    } = await requestFor(method)(url, {
       jar
     });
 

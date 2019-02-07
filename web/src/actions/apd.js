@@ -2,7 +2,7 @@ import { push } from 'react-router-redux';
 
 import { notify } from './notification';
 import axios from '../util/api';
-import { toAPI } from '../util/serialization/apd';
+import { fromAPI, toAPI } from '../util/serialization/apd';
 
 const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
@@ -56,29 +56,34 @@ export const updateApd = updates => dispatch => {
   }
 };
 
-export const selectApd = (id, { global = window, pushRoute = push } = {}) => (
-  dispatch,
-  getState
-) => {
-  dispatch({ type: SELECT_APD, apd: getState().apd.byId[id] });
-  dispatch(updateBudget());
-  dispatch(pushRoute('/apd'));
+export const selectApd = (
+  id,
+  { deserialize = fromAPI, global = window, pushRoute = push } = {}
+) => dispatch =>
+  axios.get(`/apds/${id}`).then(req => {
+    dispatch({ type: SELECT_APD, apd: deserialize(req.data) });
+    dispatch(updateBudget());
+    dispatch(pushRoute('/apd'));
 
-  if (global.localStorage) {
-    global.localStorage.setItem(LAST_APD_ID_STORAGE_KEY, id);
-  }
-};
+    if (global.localStorage) {
+      global.localStorage.setItem(LAST_APD_ID_STORAGE_KEY, id);
+    }
+  });
 
 export const createRequest = () => ({ type: CREATE_APD_REQUEST });
 export const createSuccess = data => ({ type: CREATE_APD_SUCCESS, data });
 export const createFailure = () => ({ type: CREATE_APD_FAILURE });
-export const createApd = ({ pushRoute = push } = {}) => dispatch => {
+export const createApd = ({
+  deserialize = fromAPI,
+  pushRoute = push
+} = {}) => dispatch => {
   dispatch(createRequest());
   return axios
     .post('/apds')
-    .then(req => {
-      dispatch(createSuccess(req.data));
-      dispatch(selectApd(req.data.id, { pushRoute }));
+    .then(async req => {
+      const apd = deserialize(req.data);
+      dispatch(createSuccess(apd));
+      await dispatch(selectApd(apd.id, { deserialize, pushRoute }));
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
@@ -90,17 +95,18 @@ export const requestSave = () => ({ type: SAVE_APD_REQUEST });
 export const saveSuccess = data => ({ type: SAVE_APD_SUCCESS, data });
 export const saveFailure = () => ({ type: SAVE_APD_FAILURE });
 
-export const fetchApd = ({ global = window, pushRoute = push } = {}) => (
-  dispatch,
-  getState
-) => {
+export const fetchApd = ({
+  global = window,
+  pushRoute = push,
+  select = selectApd
+} = {}) => (dispatch, getState) => {
   dispatch(requestApd());
 
   const url = `/apds`;
 
   return axios
     .get(url)
-    .then(req => {
+    .then(async req => {
       const apd = Array.isArray(req.data) ? req.data : null;
       dispatch(receiveApd(apd));
 
@@ -112,8 +118,8 @@ export const fetchApd = ({ global = window, pushRoute = push } = {}) => (
         global.localStorage &&
         global.localStorage.getItem(LAST_APD_ID_STORAGE_KEY)
       ) {
-        dispatch(
-          selectApd(global.localStorage.getItem('last-apd-id'), {
+        await dispatch(
+          select(global.localStorage.getItem('last-apd-id'), {
             global,
             pushRoute
           })
