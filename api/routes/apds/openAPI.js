@@ -12,7 +12,20 @@ const openAPI = {
       responses: {
         200: {
           description: 'The list of a user’s apds',
-          content: jsonResponse(arrayOf({ $ref: '#/components/schemas/apd' }))
+          content: jsonResponse(
+            arrayOf({
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'number',
+                  description: 'APD ID'
+                },
+                years: arrayOf({
+                  type: 'number'
+                })
+              }
+            })
+          )
         }
       }
     },
@@ -30,6 +43,32 @@ const openAPI = {
   },
 
   '/apds/{id}': {
+    get: {
+      tags: ['APDs'],
+      summary: 'Get a single, complete APD',
+      description:
+        'Where the /apds GET method only returns a small portion of all APDs, this method returns all of one',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the apd to get',
+          required: true,
+          schema: {
+            type: 'number'
+          }
+        }
+      ],
+      responses: {
+        200: {
+          description: 'The APD',
+          content: jsonResponse({ $ref: '#/components/schemas/apd' })
+        },
+        404: {
+          description: 'The apd ID does not match any known apds for the user'
+        }
+      }
+    },
     put: {
       tags: ['APDs'],
       summary: 'Update a specific APD',

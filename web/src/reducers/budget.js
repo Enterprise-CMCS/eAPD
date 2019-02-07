@@ -14,6 +14,7 @@ const getFundingSourcesByYear = years => ({
       [year]: {
         total: 0,
         federal: 0,
+        medicaid: 0,
         state: 0
       }
     }),
@@ -22,6 +23,7 @@ const getFundingSourcesByYear = years => ({
   total: {
     total: 0,
     federal: 0,
+    medicaid: 0,
     state: 0
   }
 });
@@ -304,6 +306,10 @@ const buildBudget = bigState => {
         costShares.stateShare,
         costCategoryPercentages
       ).reduce(costShareReducer, {});
+      const medicaidShare = roundedPercents(
+        totalMedicaidShare,
+        costCategoryPercentages
+      ).reduce(costShareReducer, {});
 
       /* ☝  What is that all about?
          We need to display the "Medicaid share" of all of these costs, broken
@@ -369,6 +375,9 @@ const buildBudget = bigState => {
 
           newState[fs][prop][year].state += stateShare[prop];
           newState[fs][prop].total.state += stateShare[prop];
+
+          newState[fs][prop][year].medicaid += medicaidShare[prop];
+          newState[fs][prop].total.medicaid += medicaidShare[prop];
         });
 
         // Plus the subtotals for the cost categories (i.e., the
@@ -378,6 +387,9 @@ const buildBudget = bigState => {
 
         newState[fs].combined[year].state += costShares.stateShare;
         newState[fs].combined.total.state += costShares.stateShare;
+
+        newState[fs].combined[year].medicaid += totalMedicaidShare;
+        newState[fs].combined.total.medicaid += totalMedicaidShare;
       };
 
       updateCosts(fundingSource);
@@ -386,6 +398,8 @@ const buildBudget = bigState => {
       newState.combined.total.federal += costShares.fedShare;
       newState.combined[year].state += costShares.stateShare;
       newState.combined.total.state += costShares.stateShare;
+      newState.combined[year].medicaid += totalMedicaidShare;
+      newState.combined.total.medicaid += totalMedicaidShare;
 
       if (fundingSource === 'hie' || fundingSource === 'hit') {
         // We need to track HIE and HIT combined, so we have a funding source
@@ -409,6 +423,9 @@ const buildBudget = bigState => {
 
           newState.mmisByFFP[prop][year].state += costShares.stateShare;
           newState.mmisByFFP[prop].total.state += costShares.stateShare;
+
+          newState.mmisByFFP[prop][year].medicaid += totalMedicaidShare;
+          newState.mmisByFFP[prop].total.medicaid += totalMedicaidShare;
 
           newState.mmisByFFP[prop][year].total += totalCost;
           newState.mmisByFFP[prop].total.total += totalCost;
@@ -529,9 +546,11 @@ const buildBudget = bigState => {
   const updateSectionWithKP = (section, year, federal, state, total) => {
     section[year].federal += federal;
     section[year].state += state;
+    section[year].medicaid += federal + state;
     section[year].total += total;
     section.total.federal += federal;
     section.total.state += state;
+    section.total.medicaid += federal + state;
     section.total.total += total;
   };
 

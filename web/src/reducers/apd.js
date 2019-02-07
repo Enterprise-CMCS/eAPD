@@ -15,19 +15,7 @@ import {
   UPDATE_APD,
   WITHDRAW_APD_SUCCESS
 } from '../actions/apd';
-import {
-  INCENTIVE_ENTRIES,
-  arrToObj,
-  defaultAPDYearOptions,
-  generateKey
-} from '../util';
-import { fromAPI } from '../util/serialization/apd';
-
-export const initIncentiveData = () =>
-  arrToObj(
-    INCENTIVE_ENTRIES.map(e => e.id),
-    arrToObj(defaultAPDYearOptions, { 1: 0, 2: 0, 3: 0, 4: 0 })
-  );
+import { defaultAPDYearOptions, generateKey } from '../util';
 
 export const getKeyPersonnel = () => ({
   costs: {},
@@ -64,7 +52,7 @@ const reducer = (state = initialState, action) => {
         {
           byId: {
             [action.data.id]: {
-              ...fromAPI(action.data),
+              ...action.data,
               yearOptions: defaultAPDYearOptions
             }
           }
@@ -81,10 +69,7 @@ const reducer = (state = initialState, action) => {
         byId: action.data.reduce(
           (acc, apd) => ({
             ...acc,
-            [apd.id]: {
-              ...fromAPI(apd),
-              yearOptions: defaultAPDYearOptions
-            }
+            [apd.id]: apd
           }),
           {}
         ),
@@ -103,7 +88,10 @@ const reducer = (state = initialState, action) => {
         state
       );
     case SELECT_APD:
-      return { ...state, data: { ...action.apd } };
+      return {
+        ...state,
+        data: { ...action.apd, yearOptions: defaultAPDYearOptions }
+      };
     case SET_KEY_PERSON_PRIMARY:
       return {
         ...state,
