@@ -193,7 +193,7 @@ tap.test('authentication setup', async authTest => {
       post({}, res);
 
       test.ok(res.status.calledOnce, 'an HTTP status is set once');
-      test.ok(res.status.calledWith(400), 'sets a 200 HTTP status');
+      test.ok(res.status.calledWith(400), 'sets a 400 HTTP status');
       test.ok(res.send.notCalled, 'HTTP body is not sent');
       test.ok(res.end.calledOnce, 'response is ended one time');
     });
@@ -207,7 +207,7 @@ tap.test('authentication setup', async authTest => {
         post({ body: {} }, res);
 
         test.ok(res.status.calledOnce, 'an HTTP status is set once');
-        test.ok(res.status.calledWith(400), 'sets a 200 HTTP status');
+        test.ok(res.status.calledWith(400), 'sets a 400 HTTP status');
         test.ok(res.send.notCalled, 'HTTP body is not sent');
         test.ok(res.end.calledOnce, 'response is ended one time');
       }
