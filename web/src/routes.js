@@ -10,7 +10,7 @@ const routes = [
   { path: '/apd', component: ApdApplication, exact: true, nonPrivate: false },
   { path: '/login', component: Login, nonPrivate: true },
 
-  { path: '/admin/create-user', component: CreateUser, nonPrivate: false },
+  { path: '/admin/create-account', component: CreateUser, nonPrivate: false },
 
   { component: NoMatch, nonPrivate: true }
 ];
