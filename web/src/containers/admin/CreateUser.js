@@ -33,6 +33,15 @@ class CreateUser extends Component {
     if (name === 'password') {
       const score = zxcvbn(value, [this.state.email, this.state.name]);
 
+      // guesses_log10 is the log10 of the number of guesses zxcvbn estimates
+      // would be necessary to find the password.  10^8 is considered a score
+      // of 3, which is what we're using.  But guesses_log10 is a decimal
+      // number, which means it can have weird junk in it due to rounding
+      // issues.  The math here is basically rounding to 4 decimal places and
+      // then dividing by 8.5 to get a percentage of how "acceptable" the
+      // password is.  Since a log10 of 8.5 would meet our criteria, that
+      // corresponds with 100%.  I then cap it with Math.min to make sure we
+      // don't end up with more than 100%.
       change.passwordScore = Math.min(
         1,
         Math.floor(score.guesses_log10 * 10000) / 85000
@@ -91,7 +100,12 @@ class CreateUser extends Component {
       state
     } = this.state;
 
+    // The password percent bar thing is 88% width, so scale
+    // the password score thing accordingly.  That's all.
     const passwordPercent = 88 * passwordScore;
+
+    // Really the whole password meter should be replaced.
+
     let passwordColor = 'bg-red';
     if (passwordScore > 0.5) {
       passwordColor = 'bg-yellow';
