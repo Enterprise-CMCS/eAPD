@@ -8,6 +8,18 @@ module.exports = {
         loaders: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
+        test: /\.scss$/,
+        loaders: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: { includePaths: [path.resolve(__dirname, 'node_modules')] }
+          }
+        ]
+      },
+      {
         test: /\.yaml$/,
         use: ['json-loader', 'yaml-loader']
       }
