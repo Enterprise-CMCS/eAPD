@@ -14,8 +14,6 @@ import { initI18n } from './i18n';
 import reducer from './reducers';
 import Root from './components/Root';
 
-import './styles/index.css';
-
 // Set locale based on browser language
 // if it matches one of our SUPPORTED_LOCALES
 // otherwise, set to DEFAULT_LOCALE ("en")
