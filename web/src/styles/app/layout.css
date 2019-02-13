@@ -14,9 +14,14 @@ footer {
   flex: none;
 }
 
+.site {
+  height: 100%;
+  min-height: 100vh;
+}
+
 @media (--breakpoint-md) {
   .site-sidebar {
-    height: 100%;
+    min-height: 100vh;
   }
 }
 
