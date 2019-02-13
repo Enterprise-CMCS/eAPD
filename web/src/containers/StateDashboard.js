@@ -28,9 +28,9 @@ const StateDashboard = ({
   };
 
   return (
-    <div className="site-body">
+    <div className="site-body ds-l-row">
       <Sidebar />
-      <div className="site-main p2 sm-p4 md-px0">
+      <div className="site-main p2 sm-p4 md-px0 ds-l-col--7">
         <TopBtns hideDashboard />
 
         <Section resource="stateDashboard">
