@@ -1,6 +1,7 @@
 title: Activity Schedule
-subheader: >-
-  Indicate this activity's start and end dates.
+instructions: >-
+  short: >-
+    Indicate this activity’s start and end dates.
 milestoneHelpText: >-
   **List major milestones the state is working toward as part of this activity.**
 
