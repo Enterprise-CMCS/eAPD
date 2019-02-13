@@ -14,6 +14,27 @@ const userObjectSchema = {
       type: 'string',
       format: 'email',
       description: "User's email address"
+    },
+    name: {
+      type: 'string',
+      description: "User's name"
+    },
+    phone: {
+      type: 'string',
+      description: "User's phone number; up to 10 digits"
+    },
+    position: {
+      type: 'string',
+      description: "User's position in the state's Medicaid program"
+    },
+    state: {
+      type: 'string',
+      description:
+        'Two-letter ID of the state this user is associated with, if any'
+    },
+    role: {
+      type: 'string',
+      description: "The user's role name, if any. Can be null."
     }
   }
 };
