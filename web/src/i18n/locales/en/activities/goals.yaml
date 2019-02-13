@@ -1,5 +1,5 @@
 title: Performance Goals and Benchmarks
-instructions: >-
+instruction: >-
   short: >-
     Explain the state’s goals for this activity.
   detail: >-
@@ -15,7 +15,7 @@ goal:
   title: 'Goal #{{number}}'
 objective:
   title: Benchmarks
-  instructions:
+  instruction:
     short: >-
       Briefly describe how the state will measure progress toward the identified goal.
 addGoalButtonText: Add a goal
