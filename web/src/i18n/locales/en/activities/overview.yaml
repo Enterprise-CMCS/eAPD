@@ -4,7 +4,6 @@ instruction:
     Provide a short overview of the activity.
   detail: >-
     Details for the activity go in the following sections.
-reminder: >-
 
 summary:
   title: Activity Summary

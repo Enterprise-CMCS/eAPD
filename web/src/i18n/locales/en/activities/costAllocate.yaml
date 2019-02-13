@@ -46,7 +46,6 @@ quarterly:
     detail: >-
       Indicate allocations of state personnel & contract resources in current FFY
       by quarter.
-  ? reminder
   expenseNames:
     state: In-House Costs
     contractor: Private Contractor Costs
