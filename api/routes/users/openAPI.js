@@ -163,8 +163,7 @@ const openAPI = {
               type: 'string',
               description: `The user's new state. Must match the two-letter ID of a state known to the system.`
             }
-          },
-          required: []
+          }
         })
       },
       responses: {
