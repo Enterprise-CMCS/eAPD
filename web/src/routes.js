@@ -10,7 +10,7 @@ const routes = [
   { path: '/apd', component: ApdApplication, exact: true, nonPrivate: false },
   { path: '/login', component: Login, nonPrivate: true },
 
-  { path: '/admin/edit-account', component: EditAccount, nonPrivate: true },
+  { path: '/admin/edit-account', component: EditAccount, nonPrivate: false },
 
   { component: NoMatch, nonPrivate: true }
 ];
