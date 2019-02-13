@@ -1812,6 +1812,26 @@ Object {
                         "description": "User's unique ID",
                         "type": "number",
                       },
+                      "name": Object {
+                        "description": "User's name",
+                        "type": "string",
+                      },
+                      "phone": Object {
+                        "description": "User's phone number; up to 10 digits",
+                        "type": "string",
+                      },
+                      "position": Object {
+                        "description": "User's position in the state's Medicaid program",
+                        "type": "string",
+                      },
+                      "role": Object {
+                        "description": "The user's role name, if any. Can be null.",
+                        "type": "string",
+                      },
+                      "state": Object {
+                        "description": "Two-letter ID of the state this user is associated with, if any",
+                        "type": "string",
+                      },
                     },
                     "type": "object",
                   },
@@ -1970,6 +1990,26 @@ Object {
                     "id": Object {
                       "description": "User's unique ID",
                       "type": "number",
+                    },
+                    "name": Object {
+                      "description": "User's name",
+                      "type": "string",
+                    },
+                    "phone": Object {
+                      "description": "User's phone number; up to 10 digits",
+                      "type": "string",
+                    },
+                    "position": Object {
+                      "description": "User's position in the state's Medicaid program",
+                      "type": "string",
+                    },
+                    "role": Object {
+                      "description": "The user's role name, if any. Can be null.",
+                      "type": "string",
+                    },
+                    "state": Object {
+                      "description": "Two-letter ID of the state this user is associated with, if any",
+                      "type": "string",
                     },
                   },
                   "type": "object",

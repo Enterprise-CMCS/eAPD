@@ -5,9 +5,7 @@ const can = require('../../middleware').can;
 const allUsersHandler = async (req, res, UserModel) => {
   logger.silly(req, 'handling GET /users route');
   try {
-    const users = await UserModel.fetchAll({
-      columns: ['id', 'email', 'state_id']
-    });
+    const users = await UserModel.fetchAll();
     logger.silly(req, 'sending users', users.toJSON());
     res.send(users.toJSON());
   } catch (e) {
