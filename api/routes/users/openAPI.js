@@ -117,6 +117,67 @@ const openAPI = {
           content: errorToken
         }
       }
+    },
+    put: {
+      tags: ['Users'],
+      summary: 'Updates a user',
+      description:
+        'Update a user in the system. Users may not use this method to update themselves.',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: 'The ID of the user to update',
+          required: true,
+          schema: {
+            type: 'integer'
+          }
+        }
+      ],
+      requestBody: {
+        content: jsonResponse({
+          type: 'object',
+          properties: {
+            email: {
+              type: 'string',
+              format: 'email',
+              description: `The user's new email address`
+            },
+            name: {
+              type: 'string',
+              description: `The user's new name`
+            },
+            phone: {
+              type: 'string',
+              description: `The user's new phone number`
+            },
+            position: {
+              type: 'string',
+              description: `The user's new position`
+            },
+            role: {
+              type: 'string',
+              description: `The user's new authorization role. If provided, this must match a valid role name in the system or be an empty string to remove the role entirely.`
+            },
+            state: {
+              type: 'string',
+              description: `The user's new state. Must match the two-letter ID of a state known to the system.`
+            }
+          },
+          required: []
+        })
+      },
+      responses: {
+        204: {
+          description: 'The user was successfully updated'
+        },
+        400: {
+          description: 'The request was invalid'
+        },
+        404: {
+          description: 'The user ID does not match any known users'
+        }
+      }
     }
   }
 };
