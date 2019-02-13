@@ -744,7 +744,7 @@ Object {
     "securitySchemes": Object {
       "sessionCookie": Object {
         "in": "cookie",
-        "name": "session",
+        "name": "token",
         "type": "apiKey",
       },
     },
@@ -2007,6 +2007,83 @@ Object {
           },
         ],
         "summary": "Gets the information for a specific user",
+        "tags": Array [
+          "Users",
+        ],
+      },
+      "put": Object {
+        "description": "Update a user in the system. Users may not use this method to update themselves.",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the user to update",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "integer",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "email": Object {
+                    "description": "The user's new email address",
+                    "format": "email",
+                    "type": "string",
+                  },
+                  "name": Object {
+                    "description": "The user's new name",
+                    "type": "string",
+                  },
+                  "phone": Object {
+                    "description": "The user's new phone number",
+                    "type": "string",
+                  },
+                  "position": Object {
+                    "description": "The user's new position",
+                    "type": "string",
+                  },
+                  "role": Object {
+                    "description": "The user's new authorization role. If provided, this must match a valid role name in the system or be an empty string to remove the role entirely.",
+                    "type": "string",
+                  },
+                  "state": Object {
+                    "description": "The user's new state. Must match the two-letter ID of a state known to the system.",
+                    "type": "string",
+                  },
+                },
+                "required": Array [],
+                "type": "object",
+              },
+            },
+          },
+        },
+        "responses": Object {
+          "204": Object {
+            "description": "The user was successfully updated",
+          },
+          "400": Object {
+            "description": "The request was invalid",
+          },
+          "401": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "403": Object {
+            "description": "Not logged in",
+          },
+          "404": Object {
+            "description": "The user ID does not match any known users",
+          },
+        },
+        "security": Array [
+          Object {
+            "sessionCookie": Array [],
+          },
+        ],
+        "summary": "Updates a user",
         "tags": Array [
           "Users",
         ],
