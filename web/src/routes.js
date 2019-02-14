@@ -1,5 +1,5 @@
 import NoMatch from './components/NoMatch';
-import CreateUser from './containers/admin/CreateUser';
+import CreateAccount from './containers/admin/CreateAccount';
 import ApdApplication from './containers/ApdApplication';
 import Login from './containers/Login';
 
@@ -10,7 +10,11 @@ const routes = [
   { path: '/apd', component: ApdApplication, exact: true, nonPrivate: false },
   { path: '/login', component: Login, nonPrivate: true },
 
-  { path: '/admin/create-account', component: CreateUser, nonPrivate: false },
+  {
+    path: '/admin/create-account',
+    component: CreateAccount,
+    nonPrivate: false
+  },
 
   { component: NoMatch, nonPrivate: true }
 ];

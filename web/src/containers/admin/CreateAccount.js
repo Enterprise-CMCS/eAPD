@@ -174,11 +174,11 @@ class CreateUser extends Component {
                 className={`inline-block ${passwordColor} p1 rounded`}
                 style={{ width: `${passwordPercent}%` }}
               />
-              <div className="alert-info p2">
+              <p className="alert-info p2">
                 A strong password is at least 9 characters, not a commonly-used
                 word or phrase, and not too similar to the person’s name or
                 email address.
-              </div>
+              </p>
             </div>
             <div className="mb2">
               <label htmlFor="create_user_state">State</label>
