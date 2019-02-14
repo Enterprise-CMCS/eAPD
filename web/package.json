@@ -87,7 +87,8 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.3.0",
     "tippy.js": "^2.6.0",
-    "updeep": "^1.0.0"
+    "updeep": "^1.0.0",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@storybook/react": "^3.4.11",
