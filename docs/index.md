@@ -20,10 +20,10 @@ major libraries:
 [documentation about how our frontend build is configured](frontend-build.md),
 too).
 
-We use [Basscss](http://basscss.com/), an atomic CSS library, as the foundation
-for styling, and add additional stylesheets where appropriate. We use
-[PostCSS](https://github.com/postcss/postcss) to consolidate, transform (i.e.,
-add vendor prefixes), and minify our CSS.
+We use [Sass](https://sass-lang.com/) to build our styles. We also have a
+legacy styling system based on [Basscss](http://basscss.com/), an atomic CSS
+library. In both cases, we use [PostCSS](https://github.com/postcss/postcss) to
+consolidate, transform (i.e., add vendor prefixes), and minify our CSS.
 
 For testing, we use [Jest](https://facebook.github.io/jest/) as the test runner
 and [Enzyme](http://airbnb.io/enzyme/) as a React renderer.
