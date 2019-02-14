@@ -27,7 +27,7 @@ ShallowWrapper {
           place={Object {}}
         />,
         <div
-          className="site-main p2 sm-p4 md-px0 ds-l-col--7"
+          className="site-main p2 sm-p4 md-px0 ds-l-col--9"
         >
           <Connect(TopBtns) />
           <ApdStateProfile />
@@ -73,7 +73,7 @@ ShallowWrapper {
             <Connect(ExecutiveSummary) />,
             <Connect(CertifyAndSubmit) />,
           ],
-          "className": "site-main p2 sm-p4 md-px0 ds-l-col--7",
+          "className": "site-main p2 sm-p4 md-px0 ds-l-col--9",
         },
         "ref": null,
         "rendered": Array [
@@ -184,7 +184,7 @@ ShallowWrapper {
             place={Object {}}
           />,
           <div
-            className="site-main p2 sm-p4 md-px0 ds-l-col--7"
+            className="site-main p2 sm-p4 md-px0 ds-l-col--9"
           >
             <Connect(TopBtns) />
             <ApdStateProfile />
@@ -230,7 +230,7 @@ ShallowWrapper {
               <Connect(ExecutiveSummary) />,
               <Connect(CertifyAndSubmit) />,
             ],
-            "className": "site-main p2 sm-p4 md-px0 ds-l-col--7",
+            "className": "site-main p2 sm-p4 md-px0 ds-l-col--9",
           },
           "ref": null,
           "rendered": Array [
