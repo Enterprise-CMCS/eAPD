@@ -27,9 +27,9 @@ const ApdApplication = ({
   }
 
   return (
-    <div className="site-body">
+    <div className="site-body ds-l-row">
       <Sidebar place={place} />
-      <div className="site-main p2 sm-p4 md-px0">
+      <div className="site-main p2 sm-p4 md-px0 ds-l-col--7">
         <TopBtns />
         <StateProfile />
         <ApdSummary />
