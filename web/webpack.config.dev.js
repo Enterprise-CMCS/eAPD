@@ -1,11 +1,14 @@
 const path = require('path');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 
 const config = {
   entry: {
-    js: path.join(__dirname, 'src/app.dev.js')
+    js: [
+      path.join(__dirname, 'src/app.dev.js'),
+      path.join(__dirname, 'src/styles/legacy.css'),
+      path.join(__dirname, 'src/styles/index.scss')
+    ]
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -18,18 +21,32 @@ const config = {
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
+
+      // In dev, load our styles directly into the generated JS. That way
+      // we got hot reloading on our CSS and Sass as well.
+
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader', options: { sourceMap: true } },
-            {
-              loader: 'postcss-loader',
-              options: { sourceMap: 'inline' }
-            }
-          ]
-        })
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { sourceMap: true } },
+          {
+            loader: 'postcss-loader',
+            options: { sourceMap: 'inline' }
+          }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: { includePaths: [path.resolve(__dirname, 'node_modules')] }
+          }
+        ]
       },
       {
         test: /\.yaml$/,
@@ -41,7 +58,6 @@ const config = {
     new webpack.EnvironmentPlugin({
       API_URL: null
     }),
-    new ExtractTextPlugin('app.css'),
     new webpack.HotModuleReplacementPlugin()
   ],
   devtool: 'cheap-module-eval-source-map',
