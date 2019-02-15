@@ -28,47 +28,49 @@ const StateDashboard = ({
   };
 
   return (
-    <div className="site-body ds-l-row">
-      <Sidebar />
-      <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
-        <TopBtns hideDashboard />
+    <div className="site-body ds-l-container">
+      <div className="ds-l-row">
+          <Sidebar />
+        <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
+          <TopBtns hideDashboard />
 
-        <Section resource="stateDashboard">
-          <div className="mb3 bg-white rounded shadow accordian">
-            <div className="px3 py2 border-bottom border-bottom-darken-1 blue">
-              <span className="h2">{state.name} APDs</span>
-              <button
-                className="btn bg-blue white rounded p1 right inline-block"
-                size="small"
-                onClick={create}
-              >
-                Create new&nbsp;&nbsp;
-                <Icon icon={faPlusCircle} />
-              </button>
-            </div>
-            <div className="p3">
-              {fetching ? <Loading /> : null}
-              {!fetching && apds.length === 0 ? t('stateDashboard.none') : null}
-              {apds.map(apd => (
-                <div key={apd.id} className="p2 mb2 bg-gray-lightest flex">
-                  <div className="inline-block p2 mr2 bg-white blue rounded left">
-                    <img
-                      src="/static/img/icon-document.svg"
-                      alt=""
-                      className="align-middle"
-                      style={{ minWidth: '33px' }}
-                    />
+          <Section resource="stateDashboard">
+            <div className="mb3 bg-white rounded shadow accordian">
+              <div className="px3 py2 border-bottom border-bottom-darken-1 blue">
+                <span className="h2">{state.name} APDs</span>
+                <button
+                  className="btn bg-blue white rounded p1 right inline-block"
+                  size="small"
+                  onClick={create}
+                >
+                  Create new&nbsp;&nbsp;
+                  <Icon icon={faPlusCircle} />
+                </button>
+              </div>
+              <div className="p3">
+                {fetching ? <Loading /> : null}
+                {!fetching && apds.length === 0 ? t('stateDashboard.none') : null}
+                {apds.map(apd => (
+                  <div key={apd.id} className="p2 mb2 bg-gray-lightest flex">
+                    <div className="inline-block p2 mr2 bg-white blue rounded left">
+                      <img
+                        src="/static/img/icon-document.svg"
+                        alt=""
+                        className="align-middle"
+                        style={{ minWidth: '33px' }}
+                      />
+                    </div>
+                    <h3 className="inline-block">
+                      <a href="#!" onClick={open(apd.id)}>
+                        HITECH APD for FFY {apd.years.join(', ')}
+                      </a>
+                    </h3>
                   </div>
-                  <h3 className="inline-block">
-                    <a href="#!" onClick={open(apd.id)}>
-                      HITECH APD for FFY {apd.years.join(', ')}
-                    </a>
-                  </h3>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        </Section>
+          </Section>
+        </div>
       </div>
     </div>
   );

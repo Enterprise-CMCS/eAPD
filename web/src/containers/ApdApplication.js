@@ -27,19 +27,21 @@ const ApdApplication = ({
   }
 
   return (
-    <div className="site-body ds-l-row">
-      <Sidebar place={place} />
-      <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
-        <TopBtns />
-        <StateProfile />
-        <ApdSummary />
-        <PreviousActivities />
-        <Activities />
-        <ScheduleSummary />
-        <ProposedBudget />
-        <AssurancesAndCompliance />
-        <ExecutiveSummary />
-        <CertifyAndSubmit />
+    <div className="site-body ds-l-container">
+      <div className="ds-l-row">
+        <Sidebar place={place} />
+        <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
+          <TopBtns />
+          <StateProfile />
+          <ApdSummary />
+          <PreviousActivities />
+          <Activities />
+          <ScheduleSummary />
+          <ProposedBudget />
+          <AssurancesAndCompliance />
+          <ExecutiveSummary />
+          <CertifyAndSubmit />
+        </div>
       </div>
     </div>
   );
