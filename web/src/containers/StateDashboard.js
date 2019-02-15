@@ -30,7 +30,7 @@ const StateDashboard = ({
   return (
     <div className="site-body ds-l-container">
       <div className="ds-l-row">
-          <Sidebar />
+        <Sidebar />
         <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
           <TopBtns hideDashboard />
 
