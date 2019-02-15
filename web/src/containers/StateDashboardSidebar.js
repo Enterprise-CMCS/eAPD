@@ -13,37 +13,39 @@ class Sidebar extends Component {
     const { apds, place } = this.props;
 
     return (
-      <aside className="site-sidebar bg-teal relative">
-        <div className="xs-hide sm-hide">
-          <div className="px2 py3 lg-px3 lg-py4 bg-white flex items-center">
-            <img
-              src={`/static/img/states/${place.id}.svg`}
-              alt={place.name}
-              className="align-middle mr2"
-              width="40"
-              height="40"
-            />
-            <h1 className="m0 blue h3 light caps line-height-2">
-              {place.name} <br />
-              {t('title', { year: '' })}
-            </h1>
+      <div className="ds-l-col--3">
+        <aside className="site-sidebar bg-teal">
+          <div className="xs-hide sm-hide">
+            <div className="px2 py3 lg-px3 lg-py4 bg-white flex items-center">
+              <img
+                src={`/static/img/states/${place.id}.svg`}
+                alt={place.name}
+                className="align-middle mr2"
+                width="40"
+                height="40"
+              />
+              <h1 className="m0 blue h3 light caps line-height-2">
+                {place.name} <br />
+                {t('title', { year: '' })}
+              </h1>
+            </div>
+            <div className="p2 lg-p3">
+              <ul className="list-reset">
+                <SidebarLink>{place.name} APDs</SidebarLink>
+                {apds.map(apd => (
+                  <SidebarLink
+                    key={apd.id}
+                    hash={`${apd.id}`}
+                    onClick={this.pickApd(apd.id)}
+                  >
+                    {`${apd.years.join(', ')} ${place.id.toUpperCase()} APD`}
+                  </SidebarLink>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="p2 lg-p3">
-            <ul className="list-reset">
-              <SidebarLink>{place.name} APDs</SidebarLink>
-              {apds.map(apd => (
-                <SidebarLink
-                  key={apd.id}
-                  hash={`${apd.id}`}
-                  onClick={this.pickApd(apd.id)}
-                >
-                  {`${apd.years.join(', ')} ${place.id.toUpperCase()} APD`}
-                </SidebarLink>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </aside>
+        </aside>
+      </div>
     );
   }
 }

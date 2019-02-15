@@ -15,37 +15,14 @@ footer {
 }
 
 .site {
-  display: flex;
-  flex-direction: column;
   height: 100%;
   min-height: 100vh;
 }
 
-.site-body {
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
-}
-
 @media (--breakpoint-md) {
-  .site-body {
-    flex-direction: row;
-  }
-
   .site-sidebar {
-    bottom: 0;
-    flex: 0 0 auto;
-    max-height: 100vh;
-    overflow-y: auto;
-    position: fixed;
-    top: 0;
-    width: var(--col-3);
-  }
-
-  .site-main {
-    margin-left: var(--col-4);
-    margin-right: var(--col-1);
-    width: var(--col-7);
+    height: 100%;
+    min-height: 100vh;
   }
 }
 
