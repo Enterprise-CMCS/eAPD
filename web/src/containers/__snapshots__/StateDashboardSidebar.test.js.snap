@@ -38,69 +38,12 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": <div
-        className="xs-hide sm-hide"
+      "children": <aside
+        className="site-sidebar bg-teal"
       >
         <div
-          className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
+          className="xs-hide sm-hide"
         >
-          <img
-            alt="Solid"
-            className="align-middle mr2"
-            height="40"
-            src="/static/img/states/so.svg"
-            width="40"
-          />
-          <h1
-            className="m0 blue h3 light caps line-height-2"
-          >
-            Solid
-             
-            <br />
-             HITECH APD
-          </h1>
-        </div>
-        <div
-          className="p2 lg-p3"
-        >
-          <ul
-            className="list-reset"
-          >
-            <SidebarLink
-              anchor={null}
-              depth={0}
-              expanded={null}
-              hash={null}
-              onClick={null}
-              sub={Array []}
-              toggleExpand={[Function]}
-            >
-              Solid
-               APDs
-            </SidebarLink>
-            <SidebarLink
-              anchor={null}
-              depth={0}
-              expanded={null}
-              hash="1"
-              onClick={[Function]}
-              sub={Array []}
-              toggleExpand={[Function]}
-            >
-              1, 2, 3 SO APD
-            </SidebarLink>
-          </ul>
-        </div>
-      </div>,
-      "className": "site-sidebar bg-teal relative",
-    },
-    "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
           <div
             className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
           >
@@ -119,7 +62,7 @@ ShallowWrapper {
               <br />
                HITECH APD
             </h1>
-          </div>,
+          </div>
           <div
             className="p2 lg-p3"
           >
@@ -150,211 +93,13 @@ ShallowWrapper {
                 1, 2, 3 SO APD
               </SidebarLink>
             </ul>
-          </div>,
-        ],
-        "className": "xs-hide sm-hide",
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <img
-                alt="Solid"
-                className="align-middle mr2"
-                height="40"
-                src="/static/img/states/so.svg"
-                width="40"
-              />,
-              <h1
-                className="m0 blue h3 light caps line-height-2"
-              >
-                Solid
-                 
-                <br />
-                 HITECH APD
-              </h1>,
-            ],
-            "className": "px2 py3 lg-px3 lg-py4 bg-white flex items-center",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "alt": "Solid",
-                "className": "align-middle mr2",
-                "height": "40",
-                "src": "/static/img/states/so.svg",
-                "width": "40",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": "img",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  "Solid",
-                  " ",
-                  <br />,
-                  " HITECH APD",
-                ],
-                "className": "m0 blue h3 light caps line-height-2",
-              },
-              "ref": null,
-              "rendered": Array [
-                "Solid",
-                " ",
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": "br",
-                },
-                " HITECH APD",
-              ],
-              "type": "h1",
-            },
-          ],
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": <ul
-              className="list-reset"
-            >
-              <SidebarLink
-                anchor={null}
-                depth={0}
-                expanded={null}
-                hash={null}
-                onClick={null}
-                sub={Array []}
-                toggleExpand={[Function]}
-              >
-                Solid
-                 APDs
-              </SidebarLink>
-              <SidebarLink
-                anchor={null}
-                depth={0}
-                expanded={null}
-                hash="1"
-                onClick={[Function]}
-                sub={Array []}
-                toggleExpand={[Function]}
-              >
-                1, 2, 3 SO APD
-              </SidebarLink>
-            </ul>,
-            "className": "p2 lg-p3",
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <SidebarLink
-                  anchor={null}
-                  depth={0}
-                  expanded={null}
-                  hash={null}
-                  onClick={null}
-                  sub={Array []}
-                  toggleExpand={[Function]}
-                >
-                  Solid
-                   APDs
-                </SidebarLink>,
-                Array [
-                  <SidebarLink
-                    anchor={null}
-                    depth={0}
-                    expanded={null}
-                    hash="1"
-                    onClick={[Function]}
-                    sub={Array []}
-                    toggleExpand={[Function]}
-                  >
-                    1, 2, 3 SO APD
-                  </SidebarLink>,
-                ],
-              ],
-              "className": "list-reset",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "anchor": null,
-                  "children": Array [
-                    "Solid",
-                    " APDs",
-                  ],
-                  "depth": 0,
-                  "expanded": null,
-                  "hash": null,
-                  "onClick": null,
-                  "sub": Array [],
-                  "toggleExpand": [Function],
-                },
-                "ref": null,
-                "rendered": Array [
-                  "Solid",
-                  " APDs",
-                ],
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": "1",
-                "nodeType": "function",
-                "props": Object {
-                  "anchor": null,
-                  "children": "1, 2, 3 SO APD",
-                  "depth": 0,
-                  "expanded": null,
-                  "hash": "1",
-                  "onClick": [Function],
-                  "sub": Array [],
-                  "toggleExpand": [Function],
-                },
-                "ref": null,
-                "rendered": "1, 2, 3 SO APD",
-                "type": [Function],
-              },
-            ],
-            "type": "ul",
-          },
-          "type": "div",
-        },
-      ],
-      "type": "div",
+          </div>
+        </div>
+      </aside>,
+      "className": "ds-l-col--3",
     },
-    "type": "aside",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
+    "ref": null,
+    "rendered": Object {
       "instance": null,
       "key": undefined,
       "nodeType": "host",
@@ -413,7 +158,7 @@ ShallowWrapper {
             </ul>
           </div>
         </div>,
-        "className": "site-sidebar bg-teal relative",
+        "className": "site-sidebar bg-teal",
       },
       "ref": null,
       "rendered": Object {
@@ -673,6 +418,397 @@ ShallowWrapper {
         "type": "div",
       },
       "type": "aside",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <aside
+          className="site-sidebar bg-teal"
+        >
+          <div
+            className="xs-hide sm-hide"
+          >
+            <div
+              className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
+            >
+              <img
+                alt="Solid"
+                className="align-middle mr2"
+                height="40"
+                src="/static/img/states/so.svg"
+                width="40"
+              />
+              <h1
+                className="m0 blue h3 light caps line-height-2"
+              >
+                Solid
+                 
+                <br />
+                 HITECH APD
+              </h1>
+            </div>
+            <div
+              className="p2 lg-p3"
+            >
+              <ul
+                className="list-reset"
+              >
+                <SidebarLink
+                  anchor={null}
+                  depth={0}
+                  expanded={null}
+                  hash={null}
+                  onClick={null}
+                  sub={Array []}
+                  toggleExpand={[Function]}
+                >
+                  Solid
+                   APDs
+                </SidebarLink>
+                <SidebarLink
+                  anchor={null}
+                  depth={0}
+                  expanded={null}
+                  hash="1"
+                  onClick={[Function]}
+                  sub={Array []}
+                  toggleExpand={[Function]}
+                >
+                  1, 2, 3 SO APD
+                </SidebarLink>
+              </ul>
+            </div>
+          </div>
+        </aside>,
+        "className": "ds-l-col--3",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="xs-hide sm-hide"
+          >
+            <div
+              className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
+            >
+              <img
+                alt="Solid"
+                className="align-middle mr2"
+                height="40"
+                src="/static/img/states/so.svg"
+                width="40"
+              />
+              <h1
+                className="m0 blue h3 light caps line-height-2"
+              >
+                Solid
+                 
+                <br />
+                 HITECH APD
+              </h1>
+            </div>
+            <div
+              className="p2 lg-p3"
+            >
+              <ul
+                className="list-reset"
+              >
+                <SidebarLink
+                  anchor={null}
+                  depth={0}
+                  expanded={null}
+                  hash={null}
+                  onClick={null}
+                  sub={Array []}
+                  toggleExpand={[Function]}
+                >
+                  Solid
+                   APDs
+                </SidebarLink>
+                <SidebarLink
+                  anchor={null}
+                  depth={0}
+                  expanded={null}
+                  hash="1"
+                  onClick={[Function]}
+                  sub={Array []}
+                  toggleExpand={[Function]}
+                >
+                  1, 2, 3 SO APD
+                </SidebarLink>
+              </ul>
+            </div>
+          </div>,
+          "className": "site-sidebar bg-teal",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
+              >
+                <img
+                  alt="Solid"
+                  className="align-middle mr2"
+                  height="40"
+                  src="/static/img/states/so.svg"
+                  width="40"
+                />
+                <h1
+                  className="m0 blue h3 light caps line-height-2"
+                >
+                  Solid
+                   
+                  <br />
+                   HITECH APD
+                </h1>
+              </div>,
+              <div
+                className="p2 lg-p3"
+              >
+                <ul
+                  className="list-reset"
+                >
+                  <SidebarLink
+                    anchor={null}
+                    depth={0}
+                    expanded={null}
+                    hash={null}
+                    onClick={null}
+                    sub={Array []}
+                    toggleExpand={[Function]}
+                  >
+                    Solid
+                     APDs
+                  </SidebarLink>
+                  <SidebarLink
+                    anchor={null}
+                    depth={0}
+                    expanded={null}
+                    hash="1"
+                    onClick={[Function]}
+                    sub={Array []}
+                    toggleExpand={[Function]}
+                  >
+                    1, 2, 3 SO APD
+                  </SidebarLink>
+                </ul>
+              </div>,
+            ],
+            "className": "xs-hide sm-hide",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <img
+                    alt="Solid"
+                    className="align-middle mr2"
+                    height="40"
+                    src="/static/img/states/so.svg"
+                    width="40"
+                  />,
+                  <h1
+                    className="m0 blue h3 light caps line-height-2"
+                  >
+                    Solid
+                     
+                    <br />
+                     HITECH APD
+                  </h1>,
+                ],
+                "className": "px2 py3 lg-px3 lg-py4 bg-white flex items-center",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "alt": "Solid",
+                    "className": "align-middle mr2",
+                    "height": "40",
+                    "src": "/static/img/states/so.svg",
+                    "width": "40",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "img",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      "Solid",
+                      " ",
+                      <br />,
+                      " HITECH APD",
+                    ],
+                    "className": "m0 blue h3 light caps line-height-2",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    "Solid",
+                    " ",
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {},
+                      "ref": null,
+                      "rendered": null,
+                      "type": "br",
+                    },
+                    " HITECH APD",
+                  ],
+                  "type": "h1",
+                },
+              ],
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <ul
+                  className="list-reset"
+                >
+                  <SidebarLink
+                    anchor={null}
+                    depth={0}
+                    expanded={null}
+                    hash={null}
+                    onClick={null}
+                    sub={Array []}
+                    toggleExpand={[Function]}
+                  >
+                    Solid
+                     APDs
+                  </SidebarLink>
+                  <SidebarLink
+                    anchor={null}
+                    depth={0}
+                    expanded={null}
+                    hash="1"
+                    onClick={[Function]}
+                    sub={Array []}
+                    toggleExpand={[Function]}
+                  >
+                    1, 2, 3 SO APD
+                  </SidebarLink>
+                </ul>,
+                "className": "p2 lg-p3",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <SidebarLink
+                      anchor={null}
+                      depth={0}
+                      expanded={null}
+                      hash={null}
+                      onClick={null}
+                      sub={Array []}
+                      toggleExpand={[Function]}
+                    >
+                      Solid
+                       APDs
+                    </SidebarLink>,
+                    Array [
+                      <SidebarLink
+                        anchor={null}
+                        depth={0}
+                        expanded={null}
+                        hash="1"
+                        onClick={[Function]}
+                        sub={Array []}
+                        toggleExpand={[Function]}
+                      >
+                        1, 2, 3 SO APD
+                      </SidebarLink>,
+                    ],
+                  ],
+                  "className": "list-reset",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "anchor": null,
+                      "children": Array [
+                        "Solid",
+                        " APDs",
+                      ],
+                      "depth": 0,
+                      "expanded": null,
+                      "hash": null,
+                      "onClick": null,
+                      "sub": Array [],
+                      "toggleExpand": [Function],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      "Solid",
+                      " APDs",
+                    ],
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": "1",
+                    "nodeType": "function",
+                    "props": Object {
+                      "anchor": null,
+                      "children": "1, 2, 3 SO APD",
+                      "depth": 0,
+                      "expanded": null,
+                      "hash": "1",
+                      "onClick": [Function],
+                      "sub": Array [],
+                      "toggleExpand": [Function],
+                    },
+                    "ref": null,
+                    "rendered": "1, 2, 3 SO APD",
+                    "type": [Function],
+                  },
+                ],
+                "type": "ul",
+              },
+              "type": "div",
+            },
+          ],
+          "type": "div",
+        },
+        "type": "aside",
+      },
+      "type": "div",
     },
   ],
   Symbol(enzyme.__options__): Object {
