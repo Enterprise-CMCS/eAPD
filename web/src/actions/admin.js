@@ -114,6 +114,9 @@ export const editAccount = user => dispatch => {
     (acc, [key, value]) => (value ? { ...acc, [key]: value } : acc),
     {}
   );
+  if (!user.state) {
+    putData.state = '';
+  }
   if (!user.role) {
     putData.role = '';
   }
