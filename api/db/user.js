@@ -96,7 +96,8 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
         name: this.get('name'),
         position: this.get('position'),
         phone: this.get('phone'),
-        state_id: this.get('state_id')
+        state: this.get('state_id'),
+        role: this.get('auth_role')
       };
     }
   }
