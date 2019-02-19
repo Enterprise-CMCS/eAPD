@@ -15,7 +15,7 @@ class EditAccount extends Component {
   };
 
   getForm = () => {
-    const { roles } = this.props;
+    const { currentUser, roles } = this.props;
     const { user } = this.state;
 
     if (user) {
@@ -33,7 +33,7 @@ class EditAccount extends Component {
                 type="text"
                 name="name"
                 className="input"
-                value={name}
+                value={name || ''}
                 onChange={this.handleEditAccount}
               />
             </div>
@@ -55,7 +55,7 @@ class EditAccount extends Component {
                 type="text"
                 name="phone"
                 className="input"
-                value={phone}
+                value={phone || ''}
                 onChange={this.handleEditAccount}
               />
             </div>
@@ -66,7 +66,7 @@ class EditAccount extends Component {
                 type="text"
                 name="position"
                 className="input"
-                value={position}
+                value={position || ''}
                 onChange={this.handleEditAccount}
               />
             </div>
@@ -76,10 +76,10 @@ class EditAccount extends Component {
                 id="edit_account_state"
                 name="state"
                 className="input"
-                value={state}
+                value={state || ''}
                 onChange={this.handleEditAccount}
               >
-                <option value="">Select...</option>
+                <option value="">None</option>
                 {STATES.map(s => (
                   <option key={s.id} value={s.id}>
                     {s.name}
@@ -93,7 +93,8 @@ class EditAccount extends Component {
                 id="edit_account_role"
                 name="role"
                 className="input"
-                value={role}
+                value={role || ''}
+                disabled={currentUser.id === user.id}
                 onChange={this.handleEditAccount}
               >
                 <option value="">None</option>
@@ -161,7 +162,7 @@ class EditAccount extends Component {
               <option value="">Select...</option>
               {users.map(u => (
                 <option key={u.id} value={u.id}>
-                  {`${u.name} - ${u.email}`}
+                  {`${u.name ? `${u.name} - ` : ''}${u.email}`}
                 </option>
               ))}
             </select>
@@ -175,12 +176,17 @@ class EditAccount extends Component {
 }
 
 EditAccount.propTypes = {
+  currentUser: PropTypes.object.isRequired,
   editAccount: PropTypes.func.isRequired,
   roles: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired
 };
 
-const mapStateToProps = ({ admin: { roles, users } }) => ({
+const mapStateToProps = ({
+  admin: { roles, users },
+  auth: { user: currentUser }
+}) => ({
+  currentUser,
   roles,
   users
 });
