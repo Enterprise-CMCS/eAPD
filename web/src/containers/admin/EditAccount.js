@@ -198,4 +198,4 @@ export default connect(
   mapDispatchToProps
 )(EditAccount);
 
-export { EditAccount as plain };
+export { EditAccount as plain, mapStateToProps, mapDispatchToProps };
