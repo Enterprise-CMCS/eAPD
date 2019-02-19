@@ -1,0 +1,8 @@
+/* A file for CMS Design System overrides. This file may not make sense as
+ * our Sass evolves, but right now it seems useful to segment our overrides
+ * from any bespoke styling work. */
+
+.ds-l-container {
+  margin: 0;
+  padding-left: 0;
+}
