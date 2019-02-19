@@ -13,7 +13,8 @@ describe('auth reducer', () => {
     initialCheck: false,
     authenticated: false,
     error: '',
-    fetching: false
+    fetching: false,
+    user: null
   };
 
   it('should handle initial state', () => {
@@ -21,11 +22,14 @@ describe('auth reducer', () => {
   });
 
   it('should handle AUTH_CHECK_SUCCESS', () => {
-    expect(auth(initialState, { type: AUTH_CHECK_SUCCESS })).toEqual({
+    expect(
+      auth(initialState, { type: AUTH_CHECK_SUCCESS, data: 'user info' })
+    ).toEqual({
       initialCheck: true,
       authenticated: true,
       error: '',
-      fetching: false
+      fetching: false,
+      user: 'user info'
     });
   });
 
@@ -34,7 +38,8 @@ describe('auth reducer', () => {
       initialCheck: true,
       authenticated: false,
       error: '',
-      fetching: false
+      fetching: false,
+      user: null
     });
   });
 
@@ -43,7 +48,8 @@ describe('auth reducer', () => {
       initialCheck: false,
       authenticated: false,
       error: '',
-      fetching: true
+      fetching: true,
+      user: null
     });
   });
 
@@ -52,7 +58,8 @@ describe('auth reducer', () => {
       initialCheck: false,
       authenticated: true,
       error: '',
-      fetching: false
+      fetching: false,
+      user: null
     });
   });
 
@@ -61,7 +68,8 @@ describe('auth reducer', () => {
       initialCheck: false,
       authenticated: false,
       error: 'foo',
-      fetching: false
+      fetching: false,
+      user: null
     });
   });
 
@@ -70,7 +78,8 @@ describe('auth reducer', () => {
       initialCheck: false,
       authenticated: false,
       error: '',
-      fetching: false
+      fetching: false,
+      user: null
     });
   });
 
@@ -82,7 +91,8 @@ describe('auth reducer', () => {
         initialCheck: true,
         authenticated: false,
         error: '',
-        fetching: false
+        fetching: false,
+        user: null
       });
     });
   });
