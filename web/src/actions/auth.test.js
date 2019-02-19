@@ -91,14 +91,16 @@ describe('auth actions', () => {
       fetchMock.reset();
     });
 
-    it('creates AUTH_CHEK_SUCCESS after successful auth and loads APDs', () => {
+    it('creates AUTH_CHEK_SUCCESS after successful auth', () => {
       const store = mockStore({});
-      fetchMock.onGet().reply(200, { name: 'bloop' });
+      fetchMock.onGet().reply(200, { name: 'bloop', activities: [] });
 
       const expectedActions = [
         { type: actions.AUTH_CHECK_REQUEST },
-        { type: actions.AUTH_CHECK_SUCCESS, data: { name: 'bloop' } },
-        { type: apdActions.GET_APD_REQUEST }
+        {
+          type: actions.AUTH_CHECK_SUCCESS,
+          data: { name: 'bloop', activities: [] }
+        }
       ];
 
       return store.dispatch(actions.checkAuth()).then(() => {
