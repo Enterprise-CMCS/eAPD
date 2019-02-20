@@ -42,7 +42,7 @@ class InstructionStory extends Component {
         <code>
           {`<Instruction source="storybook.instruction" reverse={${
             this.state.reverse ? 'true' : 'false'
-          }}/>`}
+          }} args={{}}/>`}
         </code>
       </p>
       <table className="props">
@@ -73,6 +73,26 @@ class InstructionStory extends Component {
             <button className="btn btn-primary" onClick={this.toggle}>
               toggle to {this.state.reverse ? 'false' : 'true'}
             </button>
+          </td>
+        </tr>
+        <tr>
+          <td>args</td>
+          <td>object</td>
+          <td>
+            An object to pass into the internationalization library,
+            representing variable names and values to be used for replacements.
+            For example, if the localization string is:
+            <pre>
+              Hello {'{{ name }}'} from the year {'{{ year }}'}
+            </pre>
+            The args object might look like this:
+            <pre>
+              {`{
+  name: 'George',
+  year: 1787
+}`}
+            </pre>
+            This prop is optional.
           </td>
         </tr>
       </table>
