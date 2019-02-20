@@ -117,12 +117,8 @@ ShallowWrapper {
         <SectionTitle>
           Performance Goals and Benchmarks
         </SectionTitle>,
-        <div>
-          Explain the state’s goals for this activity.
-        </div>,
-        <SectionDesc>
-          Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.
-        </SectionDesc>,
+        false,
+        false,
         "test child",
       ],
       "className": "py2 border-bottom border-grey border-width-3",
@@ -141,28 +137,8 @@ ShallowWrapper {
         "rendered": "Performance Goals and Benchmarks",
         "type": [Function],
       },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "Explain the state’s goals for this activity.",
-        },
-        "ref": null,
-        "rendered": "Explain the state’s goals for this activity.",
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "children": "Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.",
-        },
-        "ref": null,
-        "rendered": "Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.",
-        "type": [Function],
-      },
+      false,
+      false,
       "test child",
     ],
     "type": "section",
@@ -177,12 +153,8 @@ ShallowWrapper {
           <SectionTitle>
             Performance Goals and Benchmarks
           </SectionTitle>,
-          <div>
-            Explain the state’s goals for this activity.
-          </div>,
-          <SectionDesc>
-            Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.
-          </SectionDesc>,
+          false,
+          false,
           "test child",
         ],
         "className": "py2 border-bottom border-grey border-width-3",
@@ -201,28 +173,8 @@ ShallowWrapper {
           "rendered": "Performance Goals and Benchmarks",
           "type": [Function],
         },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Explain the state’s goals for this activity.",
-          },
-          "ref": null,
-          "rendered": "Explain the state’s goals for this activity.",
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "children": "Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.",
-          },
-          "ref": null,
-          "rendered": "Goals are outcomes the state is pursuing through the activity. In addition to listing the goal, briefly describe how each goal relates to the vision identified in the program summary.",
-          "type": [Function],
-        },
+        false,
+        false,
         "test child",
       ],
       "type": "section",
@@ -415,7 +367,7 @@ ShallowWrapper {
     id={null}
     nested={false}
     open={false}
-    resource={null}
+    resource="activities.goals"
   >
     test child
   </Subsection>,
@@ -436,31 +388,38 @@ ShallowWrapper {
       "bgColor": "white",
       "btnBgColor": "white",
       "btnColor": "blue",
-      "children": <SubsectionChunk
-        resource={null}
-      >
-        test child
-      </SubsectionChunk>,
+      "children": Array [
+        <Instruction
+          args={null}
+          reverse={false}
+          source="activities.goals.instruction"
+        />,
+        "test child",
+      ],
       "id": null,
       "nested": false,
       "onChange": null,
       "open": false,
       "sticky": true,
-      "title": "",
+      "title": "Performance Goals and Benchmarks",
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "children": "test child",
-        "resource": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "args": null,
+          "reverse": false,
+          "source": "activities.goals.instruction",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
       },
-      "ref": null,
-      "rendered": "test child",
-      "type": [Function],
-    },
+      "test child",
+    ],
     "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
@@ -472,280 +431,39 @@ ShallowWrapper {
         "bgColor": "white",
         "btnBgColor": "white",
         "btnColor": "blue",
-        "children": <SubsectionChunk
-          resource={null}
-        >
-          test child
-        </SubsectionChunk>,
+        "children": Array [
+          <Instruction
+            args={null}
+            reverse={false}
+            source="activities.goals.instruction"
+          />,
+          "test child",
+        ],
         "id": null,
         "nested": false,
         "onChange": null,
         "open": false,
         "sticky": true,
-        "title": "",
+        "title": "Performance Goals and Benchmarks",
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "children": "test child",
-          "resource": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "args": null,
+            "reverse": false,
+            "source": "activities.goals.instruction",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
         },
-        "ref": null,
-        "rendered": "test child",
-        "type": [Function],
-      },
+        "test child",
+      ],
       "type": [Function],
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-        "legacyContextMode": "parent",
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getChildContext": Object {
-            "calledByRenderer": false,
-          },
-          "getDerivedStateFromProps": true,
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
-      },
-    },
-  },
-}
-`;
-
-exports[`SubsectionChunk component renders correctly with a resource with a subheader 1`] = `
-ShallowWrapper {
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <SubsectionChunk
-    resource="activities.goals"
-  >
-    test child
-  </SubsectionChunk>,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "checkPropTypes": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateError": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "function",
-    "props": Object {
-      "children": Array [
-        <div
-          className="mb-tiny bold"
-        >
-          Explain the state’s goals for this activity.
-        </div>,
-        <HelpText
-          reminder="activities.goals.reminder"
-          text="activities.goals.helpText"
-        />,
-        "test child",
-      ],
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "Explain the state’s goals for this activity.",
-          "className": "mb-tiny bold",
-        },
-        "ref": null,
-        "rendered": "Explain the state’s goals for this activity.",
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "reminder": "activities.goals.reminder",
-          "text": "activities.goals.helpText",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      "test child",
-    ],
-    "type": Symbol(react.fragment),
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "children": Array [
-          <div
-            className="mb-tiny bold"
-          >
-            Explain the state’s goals for this activity.
-          </div>,
-          <HelpText
-            reminder="activities.goals.reminder"
-            text="activities.goals.helpText"
-          />,
-          "test child",
-        ],
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Explain the state’s goals for this activity.",
-            "className": "mb-tiny bold",
-          },
-          "ref": null,
-          "rendered": "Explain the state’s goals for this activity.",
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "reminder": "activities.goals.reminder",
-            "text": "activities.goals.helpText",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        "test child",
-      ],
-      "type": Symbol(react.fragment),
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-        "legacyContextMode": "parent",
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getChildContext": Object {
-            "calledByRenderer": false,
-          },
-          "getDerivedStateFromProps": true,
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
-      },
-    },
-  },
-}
-`;
-
-exports[`SubsectionChunk component renders correctly with no resource 1`] = `
-ShallowWrapper {
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <SubsectionChunk
-    resource={null}
-  >
-    test child
-  </SubsectionChunk>,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "checkPropTypes": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateError": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "function",
-    "props": Object {
-      "children": Array [
-        false,
-        <HelpText
-          reminder="null.reminder"
-          text="null.helpText"
-        />,
-        "test child",
-      ],
-    },
-    "ref": null,
-    "rendered": Array [
-      false,
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "reminder": "null.reminder",
-          "text": "null.helpText",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      "test child",
-    ],
-    "type": Symbol(react.fragment),
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "children": Array [
-          false,
-          <HelpText
-            reminder="null.reminder"
-            text="null.helpText"
-          />,
-          "test child",
-        ],
-      },
-      "ref": null,
-      "rendered": Array [
-        false,
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "reminder": "null.reminder",
-            "text": "null.helpText",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        "test child",
-      ],
-      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {
