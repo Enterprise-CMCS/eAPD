@@ -3,7 +3,6 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import * as actions from './auth';
-import * as apdActions from './apd';
 import axios from '../util/api';
 
 const mockStore = configureStore([thunk]);
