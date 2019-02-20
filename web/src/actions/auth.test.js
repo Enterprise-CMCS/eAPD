@@ -41,12 +41,11 @@ describe('auth actions', () => {
         .reply(200, { nonce: '123abc' });
       fetchMock
         .onPost('/auth/login', { username: '123abc', password: 'secret' })
-        .reply(200, { moop: 'moop' });
+        .reply(200, { moop: 'moop', activities: [] });
 
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_SUCCESS, data: { moop: 'moop' } },
-        { type: apdActions.GET_APD_REQUEST }
+        { type: actions.LOGIN_SUCCESS, data: { moop: 'moop', activities: [] } }
       ];
 
       return store.dispatch(actions.login('name', 'secret')).then(() => {

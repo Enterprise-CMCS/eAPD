@@ -54,12 +54,14 @@ describe('auth reducer', () => {
   });
 
   it('should handle LOGIN_SUCCESS', () => {
-    expect(auth(initialState, { type: LOGIN_SUCCESS })).toEqual({
+    expect(
+      auth(initialState, { type: LOGIN_SUCCESS, data: 'user goes here' })
+    ).toEqual({
       initialCheck: false,
       authenticated: true,
       error: '',
       fetching: false,
-      user: null
+      user: 'user goes here'
     });
   });
 

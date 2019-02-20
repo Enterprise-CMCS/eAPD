@@ -51,7 +51,7 @@ export const login = (username, password) => dispatch => {
     )
     .then(req => {
       dispatch(completeLogin(req.data));
-      dispatch(fetchApd());
+      dispatch(loadData(req.data.activities));
     })
     .catch(error => {
       const reason = error.response ? error.response.data : 'N/A';
