@@ -29,7 +29,7 @@ module.exports = (app, UserModel = defaultUserModel) => {
       }
       logger.verbose(
         req,
-        `request to delete role [${targetUser.get('email')}]`
+        `request to delete user [${targetUser.get('email')}]`
       );
 
       logger.silly(req, 'destroying user');
