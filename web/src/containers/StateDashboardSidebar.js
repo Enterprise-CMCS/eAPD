@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { t } from '../i18n';
 import { selectApd } from '../actions/apd';
+import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
 import SidebarLink from '../components/SidebarLink';
 
 class Sidebar extends Component {
@@ -14,7 +15,7 @@ class Sidebar extends Component {
 
     return (
       <div className="ds-l-col--3">
-        <aside className="site-sidebar bg-teal">
+        <aside className="site-sidebar">
           <div className="xs-hide sm-hide">
             <div className="px2 py3 lg-px3 lg-py4 bg-white flex items-center">
               <img
@@ -29,6 +30,18 @@ class Sidebar extends Component {
                 {t('title', { year: '' })}
               </h1>
             </div>
+            <VerticalNav
+              items={
+                apds.map(apd => (
+                  {
+                    id: `${apd.id}`,
+                    label: `${apd.years.join(', ')} ${place.id.toUpperCase()} APD`,
+                    url: 'javascript:void(0);',
+                  }
+                ))
+              }
+            />
+
             <div className="p2 lg-p3">
               <ul className="list-reset">
                 <SidebarLink>{place.name} APDs</SidebarLink>
@@ -43,6 +56,7 @@ class Sidebar extends Component {
                 ))}
               </ul>
             </div>
+
           </div>
         </aside>
       </div>
