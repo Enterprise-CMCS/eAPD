@@ -29,7 +29,12 @@ const auth = (state = initialState, action) => {
     case LOGIN_REQUEST:
       return { ...state, fetching: true, authenticated: false, error: '' };
     case LOGIN_SUCCESS:
-      return { ...state, fetching: false, authenticated: true };
+      return {
+        ...state,
+        fetching: false,
+        authenticated: true,
+        user: action.data
+      };
     case LOGIN_FAILURE:
       return { ...state, fetching: false, error: action.error };
     case LOGOUT_SUCCESS:
