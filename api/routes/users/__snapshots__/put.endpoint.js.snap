@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`users endpoint | PUT /users/:userID when authenticated when attempting to update self 1`] = `""`;
+
+exports[`users endpoint | PUT /users/:userID when authenticated when sending a non-numeric ID 1`] = `""`;
+
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a non-existant user ID 1`] = `""`;
+
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with all new content, plus some junk 1`] = `undefined`;
+
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with an existing email address 1`] = `"update-user-email-exists"`;
+
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with an invalid role name 1`] = `"update-user-invalid-role"`;
+
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with an invalid state ID 1`] = `"update-user-invalid-state"`;
+
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with no content 1`] = `""`;
