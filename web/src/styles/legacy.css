@@ -15,8 +15,6 @@
 @import 'app/table';
 @import 'app/type';
 
-@import 'app/print';
-
 /* third-party things */
 @import 'app/datepicker';
 @import 'app/editor';
