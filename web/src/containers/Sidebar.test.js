@@ -9,6 +9,7 @@ import {
 } from './Sidebar';
 import { expandActivitySection } from '../actions/activities';
 import { saveApd } from '../actions/apd';
+import { printApd } from '../actions/print';
 import { toggleExpand } from '../actions/sidebar';
 
 describe('Sidebar component', () => {
@@ -33,6 +34,7 @@ describe('Sidebar component', () => {
     hash: '',
     expanded,
     expandSection: sinon.spy(),
+    printApd: sinon.spy(),
     saveApdToAPI: sinon.spy(),
     toggleExpand: sinon.spy()
   };
@@ -95,9 +97,19 @@ describe('Sidebar component', () => {
     const component = shallow(
       <Sidebar {...props} saveApdToAPI={saveApdToApiProp} />
     );
-    component.find('Btn[onClick]').simulate('click');
+
+    component.find('Btn[onClick][kind="primary"]').simulate('click');
 
     expect(saveApdToApiProp.called).toBeTruthy();
+  });
+
+  test('triggers a print event', () => {
+    const printApdProp = sinon.spy();
+    const component = shallow(<Sidebar {...props} printApd={printApdProp} />);
+
+    component.find('Btn[onClick][kind="outline"]').simulate('click');
+
+    expect(printApdProp.called).toBeTruthy();
   });
 
   test('maps state to props', () => {
@@ -131,6 +143,7 @@ describe('Sidebar component', () => {
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
       expandSection: expandActivitySection,
+      printApd,
       saveApdToAPI: saveApd,
       toggleExpand
     });

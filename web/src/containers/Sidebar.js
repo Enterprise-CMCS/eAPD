@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { t } from '../i18n';
 import { expandActivitySection } from '../actions/activities';
 import { saveApd } from '../actions/apd';
+import { printApd } from '../actions/print';
 import { toggleExpand as toggleExpandAction } from '../actions/sidebar';
 import Btn from '../components/Btn';
 import SidebarLink from '../components/SidebarLink';
@@ -128,6 +129,7 @@ const Sidebar = ({
   hash,
   expanded,
   expandSection,
+  printApd: print,
   saveApdToAPI,
   toggleExpand
 }) => (
@@ -196,7 +198,11 @@ const Sidebar = ({
             <Btn onClick={() => saveApdToAPI()}>
               {t('sidebar.saveApdButtonText')}
             </Btn>{' '}
-            <Btn kind="outline" extraCss="bg-white blue">
+            <Btn
+              kind="outline"
+              extraCss="bg-white blue"
+              onClick={() => print()}
+            >
               {t('sidebar.savePdfButtonText')}
             </Btn>
           </div>
@@ -212,6 +218,7 @@ Sidebar.propTypes = {
   hash: PropTypes.string.isRequired,
   expanded: PropTypes.object.isRequired,
   expandSection: PropTypes.func.isRequired,
+  printApd: PropTypes.func.isRequired,
   saveApdToAPI: PropTypes.func.isRequired,
   toggleExpand: PropTypes.func.isRequired
 };
@@ -232,10 +239,14 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = {
   expandSection: expandActivitySection,
+  printApd,
   saveApdToAPI: saveApd,
   toggleExpand: toggleExpandAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Sidebar);
 
 export { Sidebar as plain, mapStateToProps, mapDispatchToProps };
