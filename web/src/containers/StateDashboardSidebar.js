@@ -41,26 +41,12 @@ class Sidebar extends Component {
                       id: `${apd.id}`,
                       label: `${apd.years.join(', ')} ${place.id.toUpperCase()} APD`,
                       url: 'javascript:void(0);',
+                      onClick: this.pickApd(apd.id)
                     }
                   )),
                 }
               ]}
             />
-            <div className="p2 lg-p3">
-              <ul className="list-reset">
-                <SidebarLink>{place.name} APDs</SidebarLink>
-                {apds.map(apd => (
-                  <SidebarLink
-                    key={apd.id}
-                    hash={`${apd.id}`}
-                    onClick={this.pickApd(apd.id)}
-                  >
-                    {`${apd.years.join(', ')} ${place.id.toUpperCase()} APD`}
-                  </SidebarLink>
-                ))}
-              </ul>
-            </div>
-
           </div>
         </aside>
       </div>
