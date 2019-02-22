@@ -31,17 +31,21 @@ class Sidebar extends Component {
               </h1>
             </div>
             <VerticalNav
-              items={
-                apds.map(apd => (
-                  {
-                    id: `${apd.id}`,
-                    label: `${apd.years.join(', ')} ${place.id.toUpperCase()} APD`,
-                    url: 'javascript:void(0);',
-                  }
-                ))
-              }
+              selectedId="state-apds"
+              items={[
+                {
+                  label: `${place.name} APDs`,
+                  id: "state-apds",
+                  items: apds.map(apd => (
+                    {
+                      id: `${apd.id}`,
+                      label: `${apd.years.join(', ')} ${place.id.toUpperCase()} APD`,
+                      url: 'javascript:void(0);',
+                    }
+                  )),
+                }
+              ]}
             />
-
             <div className="p2 lg-p3">
               <ul className="list-reset">
                 <SidebarLink>{place.name} APDs</SidebarLink>
