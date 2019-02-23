@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { t } from '../i18n';
 import { selectApd } from '../actions/apd';
 import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
-import SidebarLink from '../components/SidebarLink';
 
 class Sidebar extends Component {
   pickApd = id => () => this.props.selectApd(id);
