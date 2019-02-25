@@ -75,51 +75,55 @@ tap.test('apds version POST endpoint', async tests => {
     res.send.returns(res);
     res.status.returns(res);
 
-    const apd = {
-      get: sandbox
-        .stub()
-        .withArgs('id')
-        .returns('db apd id'),
-      toJSON: sandbox.stub().returns({ apd: 'as JSON' }),
-      save: sandbox.stub().resolves(),
-      set: sandbox.stub()
-    };
-    ApdModel.fetch.resolves(apd);
+    // const apd = {
+    //   get: sandbox
+    //     .stub()
+    //     .withArgs('id')
+    //     .returns('db apd id'),
+    //   toJSON: sandbox.stub().returns({ apd: 'as JSON' }),
+    //   save: sandbox.stub().resolves(),
+    //   set: sandbox.stub()
+    // };
+    // ApdModel.fetch.resolves(apd);
 
-    const version = {
-      save: sandbox.stub().resolves()
-    };
-    VersionModel.forge.returns(version);
+    // const version = {
+    //   save: sandbox.stub().resolves()
+    // };
+    // VersionModel.forge.returns(version);
 
     await handler(req, res);
 
-    test.ok(
-      ApdModel.where.calledWith({ id: 'meta apd id' }),
-      'queries the database for the full APD'
-    );
-    test.ok(
-      ApdModel.fetch.calledWith({ withRelated: 'with related' }),
-      'fetches APD related data'
-    );
-    test.ok(
-      VersionModel.forge.calledWith({
-        apd_id: 'db apd id',
-        user_id: 'user id',
-        content: {
-          this: 'is',
-          a: 'table',
-          apd: 'as JSON'
-        }
-      }),
-      'creates a version'
-    );
-    test.ok(
-      apd.set.calledWith({ status: 'submitted' }),
-      'sets APD status to "submitted"'
-    );
-    test.ok(apd.save.calledAfter(apd.set), 'APD is saved after status is set');
-    test.ok(version.save.calledOnce, 'version is saved');
-    test.ok(res.status.calledWith(204), 'HTTP status 204 is set');
+    test.ok(res.send.notCalled, 'response body is not sent');
+    test.ok(res.status.calledWith(501), 'HTTP status 501 is set');
     test.ok(res.end.calledOnce, 'response is terminated');
+
+    // test.ok(
+    //   ApdModel.where.calledWith({ id: 'meta apd id' }),
+    //   'queries the database for the full APD'
+    // );
+    // test.ok(
+    //   ApdModel.fetch.calledWith({ withRelated: 'with related' }),
+    //   'fetches APD related data'
+    // );
+    // test.ok(
+    //   VersionModel.forge.calledWith({
+    //     apd_id: 'db apd id',
+    //     user_id: 'user id',
+    //     content: {
+    //       this: 'is',
+    //       a: 'table',
+    //       apd: 'as JSON'
+    //     }
+    //   }),
+    //   'creates a version'
+    // );
+    // test.ok(
+    //   apd.set.calledWith({ status: 'submitted' }),
+    //   'sets APD status to "submitted"'
+    // );
+    // test.ok(apd.save.calledAfter(apd.set), 'APD is saved after status is set');
+    // test.ok(version.save.calledOnce, 'version is saved');
+    // test.ok(res.status.calledWith(204), 'HTTP status 204 is set');
+    // test.ok(res.end.calledOnce, 'response is terminated');
   });
 });

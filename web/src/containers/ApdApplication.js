@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import Activities from './activity/All';
 import AssurancesAndCompliance from './AssurancesAndCompliance';
 import ApdSummary from './ApdSummary';
-import CertifyAndSubmit from './CertifyAndSubmit';
+// import CertifyAndSubmit from './CertifyAndSubmit';
 import ExecutiveSummary from './ExecutiveSummary';
 import PreviousActivities from './PreviousActivities';
 import ScheduleSummary from './ScheduleSummary';
@@ -40,7 +40,7 @@ const ApdApplication = ({
           <ProposedBudget />
           <AssurancesAndCompliance />
           <ExecutiveSummary />
-          <CertifyAndSubmit />
+          {/* <CertifyAndSubmit /> */}
         </div>
       </div>
     </div>
@@ -53,13 +53,21 @@ ApdApplication.propTypes = {
   selectApdOnLoad: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ apd: { data }, user: { data: { state } } }) => ({
+const mapStateToProps = ({
+  apd: { data },
+  user: {
+    data: { state }
+  }
+}) => ({
   apdSelected: !!data.id,
   place: state
 });
 
 const mapDispatchToProps = { selectApdOnLoad };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ApdApplication);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApdApplication);
 
 export { ApdApplication as plain, mapStateToProps, mapDispatchToProps };

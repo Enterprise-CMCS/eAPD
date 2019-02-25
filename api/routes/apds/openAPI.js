@@ -134,14 +134,17 @@ const openAPI = {
         }
       },
       responses: {
-        204: {
-          description: 'The APD status was successfully set'
+        501: {
+          description: 'This method is currently not implemented'
         },
-        400: {
-          description:
-            'The APD is currently in draft, or the selected status is invalid',
-          content: errorToken
-        },
+        // 204: {
+        //   description: 'The APD status was successfully set'
+        // },
+        // 400: {
+        //   description:
+        //     'The APD is currently in draft, or the selected status is invalid',
+        //   content: errorToken
+        // },
         404: {
           description: 'The apd ID does not match any known apds'
         }
@@ -179,9 +182,12 @@ const openAPI = {
         }
       ],
       responses: {
-        204: {
-          description: 'The withdrawal was successful'
+        501: {
+          description: 'This method is currently not implemented'
         }
+        // 204: {
+        //   description: 'The withdrawal was successful'
+        // }
       }
     },
     post: {
@@ -217,9 +223,12 @@ const openAPI = {
         }
       },
       responses: {
-        204: {
-          description: 'The save was successful'
+        501: {
+          description: 'This method is currently not implemented'
         },
+        // 204: {
+        //   description: 'The save was successful'
+        // },
         400: {
           description:
             'The APD is not currently in draft status, so it cannot be saved. Error is { error: "apd-not-editable" }',

@@ -51,27 +51,30 @@ tap.test('apds version DELETE endpoint', async tests => {
     );
   });
 
-  tests.test('handles a database error', async test => {
-    req.meta.apd.set.throws();
-    await handler(req, res);
+  // tests.test('handles a database error', async test => {
+  //   req.meta.apd.set.throws();
+  //   await handler(req, res);
 
-    test.ok(res.status.calledWith(500), 'HTTP status 500 is set');
-    test.ok(res.end.calledOnce, 'response is terminated');
-  });
+  //   test.ok(res.status.calledWith(500), 'HTTP status 500 is set');
+  //   test.ok(res.end.calledOnce, 'response is terminated');
+  // });
 
   tests.test('withdraws an APD', async test => {
     await handler(req, res);
 
-    test.ok(
-      req.meta.apd.set.calledWith({ status: 'draft' }),
-      'APD status is set to draft'
-    );
-    test.ok(
-      req.meta.apd.set.calledBefore(req.meta.apd.save),
-      'status is set before saving'
-    );
-    test.ok(req.meta.apd.save.calledOnce, 'APD is saved');
-    test.ok(res.status.calledWith(204), 'HTTP status 204 is set');
+    test.ok(res.status.calledWith(501), 'HTTP status 501 is set');
     test.ok(res.end.calledOnce, 'response is terminated');
+
+    // test.ok(
+    //   req.meta.apd.set.calledWith({ status: 'draft' }),
+    //   'APD status is set to draft'
+    // );
+    // test.ok(
+    //   req.meta.apd.set.calledBefore(req.meta.apd.save),
+    //   'status is set before saving'
+    // );
+    // test.ok(req.meta.apd.save.calledOnce, 'APD is saved');
+    // test.ok(res.status.calledWith(204), 'HTTP status 204 is set');
+    // test.ok(res.end.calledOnce, 'response is terminated');
   });
 });

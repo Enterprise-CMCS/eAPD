@@ -32,8 +32,9 @@ describe('apd version withdraw endpoint | DELETE /apds/:id/versions', async () =
       .where({ id: 4000 })
       .select();
 
-    expect(response.statusCode).toEqual(204);
+    expect(response.statusCode).toEqual(501);
     expect(body).toMatchSnapshot();
-    expect(apd[0].status).toEqual('draft');
+    // this should be changed to "draft" when the method is implemented
+    expect(apd[0].status).toEqual('not draft');
   });
 });

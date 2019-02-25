@@ -1,13 +1,13 @@
 const logger = require('../../../logger')('apd versions route post');
-const {
-  apd: defaultApdModel,
-  apdVersion: defaultVersionModel
-} = require('../../../db').models;
+// const {
+//   apd: defaultApdModel,
+//   apdVersion: defaultVersionModel
+// } = require('../../../db').models;
 const { can, userCanEditAPD, loadApd } = require('../../../middleware');
 
 module.exports = (
-  app,
-  { ApdModel = defaultApdModel, VersionModel = defaultVersionModel } = {}
+  app
+  // { ApdModel = defaultApdModel, VersionModel = defaultVersionModel } = {}
 ) => {
   logger.silly('setting up POST /apds/:id/versions route');
   app.post(
@@ -15,24 +15,27 @@ module.exports = (
     can('submit-document'),
     userCanEditAPD(),
     loadApd(),
-    async (req, res) => {
-      const tables = req.body.tables || null;
-      const apd = await ApdModel.where({ id: req.meta.apd.get('id') }).fetch({
-        withRelated: ApdModel.withRelated
-      });
+    async (_, res) => {
+      // APDs currently cannot be submitted in eAPD
+      res.status(501).end();
 
-      const version = VersionModel.forge({
-        apd_id: apd.get('id'),
-        user_id: req.user.id,
-        content: { ...tables, ...apd.toJSON() }
-      });
+      // const tables = req.body.tables || null;
+      // const apd = await ApdModel.where({ id: req.meta.apd.get('id') }).fetch({
+      //   withRelated: ApdModel.withRelated
+      // });
 
-      apd.set({ status: 'submitted' });
-      await apd.save();
+      // const version = VersionModel.forge({
+      //   apd_id: apd.get('id'),
+      //   user_id: req.user.id,
+      //   content: { ...tables, ...apd.toJSON() }
+      // });
 
-      await version.save();
+      // apd.set({ status: 'submitted' });
+      // await apd.save();
 
-      res.status(204).end();
+      // await version.save();
+
+      // res.status(204).end();
     }
   );
 };

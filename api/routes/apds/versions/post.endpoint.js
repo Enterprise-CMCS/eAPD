@@ -36,8 +36,10 @@ describe('apd version create endpoint | POST /apds/:id/versions', async () => {
     const { response, body } = await request.post(url(4000), { jar, json });
     const versions = await db('apd_versions').select();
 
-    expect(response.statusCode).toEqual(204);
+    expect(response.statusCode).toEqual(501);
     expect(body).toMatchSnapshot();
-    expect(versions.length).toEqual(1);
+
+    // this should be 1 when this method is implemented again
+    expect(versions.length).toEqual(0);
   });
 });
