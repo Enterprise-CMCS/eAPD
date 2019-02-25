@@ -1001,25 +1001,6 @@ Object {
           "required": true,
         },
         "responses": Object {
-          "204": Object {
-            "description": "The APD status was successfully set",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "The APD is currently in draft, or the selected status is invalid",
-          },
           "401": Object {
             "description": "Does not have permission to this activity",
           },
@@ -1028,6 +1009,9 @@ Object {
           },
           "404": Object {
             "description": "The apd ID does not match any known apds",
+          },
+          "501": Object {
+            "description": "This method is currently not implemented",
           },
         },
         "security": Array [
@@ -1056,14 +1040,14 @@ Object {
           },
         ],
         "responses": Object {
-          "204": Object {
-            "description": "The withdrawal was successful",
-          },
           "401": Object {
             "description": "Does not have permission to this activity",
           },
           "403": Object {
             "description": "Not logged in",
+          },
+          "501": Object {
+            "description": "This method is currently not implemented",
           },
         },
         "security": Array [
@@ -1107,9 +1091,6 @@ Object {
           "required": false,
         },
         "responses": Object {
-          "204": Object {
-            "description": "The save was successful",
-          },
           "400": Object {
             "content": Object {
               "application/json": Object {
@@ -1131,6 +1112,9 @@ Object {
           },
           "403": Object {
             "description": "Not logged in",
+          },
+          "501": Object {
+            "description": "This method is currently not implemented",
           },
         },
         "security": Array [

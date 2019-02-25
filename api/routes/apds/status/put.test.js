@@ -58,41 +58,48 @@ tap.test('apds status PUT endpoint', async tests => {
     );
   });
 
-  tests.test('rejects if the current status is draft', async test => {
-    req.meta.apd.get.withArgs('status').returns('draft');
-
+  tests.test('sends 501 status', async test => {
     await handler()(req, res);
 
-    test.ok(res.status.calledWith(400), 'sets HTTP status 400');
-    test.ok(
-      res.send.calledWith({ error: 'apd-in-draft' }),
-      'sends an error message'
-    );
+    test.ok(res.status.calledWith(501), 'sets HTTP status 501');
     test.ok(res.end.calledOnce, 'response is closed');
   });
 
-  tests.test('rejects if target status is invalid', async test => {
-    req.meta.apd.get.withArgs('status').returns('not draft');
-    req.body = { status: 'something or other' };
+  // tests.test('rejects if the current status is draft', async test => {
+  //   req.meta.apd.get.withArgs('status').returns('draft');
 
-    await handler()(req, res);
+  //   await handler()(req, res);
 
-    test.ok(res.status.calledWith(400), 'sets HTTP status 400');
-    test.ok(
-      res.send.calledWith({ error: 'apd-invalid-status' }),
-      'sends an error message'
-    );
-    test.ok(res.end.calledOnce, 'response is closed');
-  });
+  //   test.ok(res.status.calledWith(400), 'sets HTTP status 400');
+  //   test.ok(
+  //     res.send.calledWith({ error: 'apd-in-draft' }),
+  //     'sends an error message'
+  //   );
+  //   test.ok(res.end.calledOnce, 'response is closed');
+  // });
 
-  tests.test('updates status if everything is good', async test => {
-    req.meta.apd.get.withArgs('status').returns('not draft');
-    req.body = { status: 'in clearance' };
+  // tests.test('rejects if target status is invalid', async test => {
+  //   req.meta.apd.get.withArgs('status').returns('not draft');
+  //   req.body = { status: 'something or other' };
 
-    await handler()(req, res);
+  //   await handler()(req, res);
 
-    test.ok(res.status.calledWith(204), 'sets HTTP status 400');
-    test.ok(res.send.notCalled, 'does not send a body');
-    test.ok(res.end.calledOnce, 'response is closed');
-  });
+  //   test.ok(res.status.calledWith(400), 'sets HTTP status 400');
+  //   test.ok(
+  //     res.send.calledWith({ error: 'apd-invalid-status' }),
+  //     'sends an error message'
+  //   );
+  //   test.ok(res.end.calledOnce, 'response is closed');
+  // });
+
+  // tests.test('updates status if everything is good', async test => {
+  //   req.meta.apd.get.withArgs('status').returns('not draft');
+  //   req.body = { status: 'in clearance' };
+
+  //   await handler()(req, res);
+
+  //   test.ok(res.status.calledWith(204), 'sets HTTP status 400');
+  //   test.ok(res.send.notCalled, 'does not send a body');
+  //   test.ok(res.end.calledOnce, 'response is closed');
+  // });
 });

@@ -8,17 +8,18 @@ module.exports = app => {
     can('submit-document'),
     userCanAccessAPD(),
     loadApd(),
-    async (req, res) => {
-      try {
-        logger.silly(req, 'withdrawing APD');
-        req.meta.apd.set({ status: 'draft' });
-        await req.meta.apd.save();
+    async (_, res) => {
+      res.status(501).end();
+      // try {
+      //   logger.silly(req, 'withdrawing APD');
+      //   req.meta.apd.set({ status: 'draft' });
+      //   await req.meta.apd.save();
 
-        res.status(204).end();
-      } catch (e) {
-        logger.error(req, e);
-        res.status(500).end();
-      }
+      //   res.status(204).end();
+      // } catch (e) {
+      //   logger.error(req, e);
+      //   res.status(500).end();
+      // }
     }
   );
 };
