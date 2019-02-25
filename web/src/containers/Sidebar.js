@@ -112,14 +112,14 @@ const linkGroup2 = [
         name: t('executiveSummary.budgetTable.title')
       }
     ]
-  },
-  {
-    id: 'certify-submit',
-    name: t('certifyAndSubmit.title'),
-    sub: [
-      { id: 'certify-submit-submit', name: t('certifyAndSubmit.certify.title') }
-    ]
   }
+  // {
+  //   id: 'certify-submit',
+  //   name: t('certifyAndSubmit.title'),
+  //   sub: [
+  //     { id: 'certify-submit-submit', name: t('certifyAndSubmit.certify.title') }
+  //   ]
+  // }
 ];
 
 const Sidebar = ({
@@ -236,6 +236,9 @@ const mapDispatchToProps = {
   toggleExpand: toggleExpandAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Sidebar);
 
 export { Sidebar as plain, mapStateToProps, mapDispatchToProps };
