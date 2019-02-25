@@ -162,10 +162,10 @@ class Sidebar extends Component {
     ];
 
     return (
-      <div className="ds-l-col--3">
+      <div className="ds-l-col--3 bg-white">
         <aside className="site-sidebar">
           <div className="xs-hide sm-hide">
-            <div className="px2 py3 lg-px3 lg-py4 bg-white flex items-center">
+            <div className="flex items-center">
               <img
                 src={`/static/img/states/${place.id}.svg`}
                 alt={place.name}
@@ -173,12 +173,13 @@ class Sidebar extends Component {
                 width="40"
                 height="40"
               />
-              <h1 className="m0 blue h3 light caps line-height-2">
+              <h1 className="text-xl">
                 {place.name} <br />
                 {t('title', { year: '2018' })}
               </h1>
             </div>
             <VerticalNav
+              selectedId={this.props.selectedId}
               items={links}
             />
             <div className="p2 lg-p3">
@@ -204,6 +205,11 @@ Sidebar.propTypes = {
   hash: PropTypes.string.isRequired,
   expandSection: PropTypes.func.isRequired,
   saveApdToAPI: PropTypes.func.isRequired,
+  selected: PropTypes.string,
+};
+
+Sidebar.defaultProps = {
+  selected: 'apd-state-profile',
 };
 
 const mapStateToProps = ({
