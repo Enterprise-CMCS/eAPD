@@ -275,24 +275,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -543,24 +525,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -807,24 +771,6 @@ ShallowWrapper {
                   toggleExpand={[Function]}
                 >
                   Executive Summary
-                </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
                 </SidebarLink>
               </ul>
               <div
@@ -1126,24 +1072,6 @@ ShallowWrapper {
                   >
                     Executive Summary
                   </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
-                  </SidebarLink>
                 </ul>,
                 <div
                   className="mt3"
@@ -1368,24 +1296,6 @@ ShallowWrapper {
                         toggleExpand={[Function]}
                       >
                         Executive Summary
-                      </SidebarLink>,
-                      <SidebarLink
-                        anchor="certify-submit"
-                        depth={0}
-                        expanded={true}
-                        hash=""
-                        onClick={null}
-                        sub={
-                          Array [
-                            Object {
-                              "id": "certify-submit-submit",
-                              "name": "Certification",
-                            },
-                          ]
-                        }
-                        toggleExpand={[Function]}
-                      >
-                        Certify and Submit
                       </SidebarLink>,
                     ],
                   ],
@@ -1667,29 +1577,6 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Executive Summary",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "certify-submit",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": "certify-submit",
-                      "children": "Certify and Submit",
-                      "depth": 0,
-                      "expanded": true,
-                      "hash": "",
-                      "onClick": null,
-                      "sub": Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "Certify and Submit",
                     "type": [Function],
                   },
                 ],
@@ -1992,24 +1879,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -2260,24 +2129,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -2524,24 +2375,6 @@ ShallowWrapper {
                     toggleExpand={[Function]}
                   >
                     Executive Summary
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
                   </SidebarLink>
                 </ul>
                 <div
@@ -2843,24 +2676,6 @@ ShallowWrapper {
                     >
                       Executive Summary
                     </SidebarLink>
-                    <SidebarLink
-                      anchor="certify-submit"
-                      depth={0}
-                      expanded={true}
-                      hash=""
-                      onClick={null}
-                      sub={
-                        Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ]
-                      }
-                      toggleExpand={[Function]}
-                    >
-                      Certify and Submit
-                    </SidebarLink>
                   </ul>,
                   <div
                     className="mt3"
@@ -3085,24 +2900,6 @@ ShallowWrapper {
                           toggleExpand={[Function]}
                         >
                           Executive Summary
-                        </SidebarLink>,
-                        <SidebarLink
-                          anchor="certify-submit"
-                          depth={0}
-                          expanded={true}
-                          hash=""
-                          onClick={null}
-                          sub={
-                            Array [
-                              Object {
-                                "id": "certify-submit-submit",
-                                "name": "Certification",
-                              },
-                            ]
-                          }
-                          toggleExpand={[Function]}
-                        >
-                          Certify and Submit
                         </SidebarLink>,
                       ],
                     ],
@@ -3384,29 +3181,6 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Executive Summary",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "certify-submit",
-                      "nodeType": "function",
-                      "props": Object {
-                        "anchor": "certify-submit",
-                        "children": "Certify and Submit",
-                        "depth": 0,
-                        "expanded": true,
-                        "hash": "",
-                        "onClick": null,
-                        "sub": Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ],
-                        "toggleExpand": [Function],
-                      },
-                      "ref": null,
-                      "rendered": "Certify and Submit",
                       "type": [Function],
                     },
                   ],
@@ -3782,24 +3556,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -4050,24 +3806,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -4314,24 +4052,6 @@ ShallowWrapper {
                   toggleExpand={[Function]}
                 >
                   Executive Summary
-                </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
                 </SidebarLink>
               </ul>
               <div
@@ -4633,24 +4353,6 @@ ShallowWrapper {
                   >
                     Executive Summary
                   </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
-                  </SidebarLink>
                 </ul>,
                 <div
                   className="mt3"
@@ -4875,24 +4577,6 @@ ShallowWrapper {
                         toggleExpand={[Function]}
                       >
                         Executive Summary
-                      </SidebarLink>,
-                      <SidebarLink
-                        anchor="certify-submit"
-                        depth={0}
-                        expanded={true}
-                        hash=""
-                        onClick={null}
-                        sub={
-                          Array [
-                            Object {
-                              "id": "certify-submit-submit",
-                              "name": "Certification",
-                            },
-                          ]
-                        }
-                        toggleExpand={[Function]}
-                      >
-                        Certify and Submit
                       </SidebarLink>,
                     ],
                   ],
@@ -5174,29 +4858,6 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Executive Summary",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "certify-submit",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": "certify-submit",
-                      "children": "Certify and Submit",
-                      "depth": 0,
-                      "expanded": true,
-                      "hash": "",
-                      "onClick": null,
-                      "sub": Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "Certify and Submit",
                     "type": [Function],
                   },
                 ],
@@ -5499,24 +5160,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -5767,24 +5410,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -6031,24 +5656,6 @@ ShallowWrapper {
                     toggleExpand={[Function]}
                   >
                     Executive Summary
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
                   </SidebarLink>
                 </ul>
                 <div
@@ -6350,24 +5957,6 @@ ShallowWrapper {
                     >
                       Executive Summary
                     </SidebarLink>
-                    <SidebarLink
-                      anchor="certify-submit"
-                      depth={0}
-                      expanded={true}
-                      hash=""
-                      onClick={null}
-                      sub={
-                        Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ]
-                      }
-                      toggleExpand={[Function]}
-                    >
-                      Certify and Submit
-                    </SidebarLink>
                   </ul>,
                   <div
                     className="mt3"
@@ -6592,24 +6181,6 @@ ShallowWrapper {
                           toggleExpand={[Function]}
                         >
                           Executive Summary
-                        </SidebarLink>,
-                        <SidebarLink
-                          anchor="certify-submit"
-                          depth={0}
-                          expanded={true}
-                          hash=""
-                          onClick={null}
-                          sub={
-                            Array [
-                              Object {
-                                "id": "certify-submit-submit",
-                                "name": "Certification",
-                              },
-                            ]
-                          }
-                          toggleExpand={[Function]}
-                        >
-                          Certify and Submit
                         </SidebarLink>,
                       ],
                     ],
@@ -6891,29 +6462,6 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Executive Summary",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "certify-submit",
-                      "nodeType": "function",
-                      "props": Object {
-                        "anchor": "certify-submit",
-                        "children": "Certify and Submit",
-                        "depth": 0,
-                        "expanded": true,
-                        "hash": "",
-                        "onClick": null,
-                        "sub": Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ],
-                        "toggleExpand": [Function],
-                      },
-                      "ref": null,
-                      "rendered": "Certify and Submit",
                       "type": [Function],
                     },
                   ],
@@ -7289,24 +6837,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -7557,24 +7087,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -7821,24 +7333,6 @@ ShallowWrapper {
                   toggleExpand={[Function]}
                 >
                   Executive Summary
-                </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
                 </SidebarLink>
               </ul>
               <div
@@ -8140,24 +7634,6 @@ ShallowWrapper {
                   >
                     Executive Summary
                   </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
-                  </SidebarLink>
                 </ul>,
                 <div
                   className="mt3"
@@ -8382,24 +7858,6 @@ ShallowWrapper {
                         toggleExpand={[Function]}
                       >
                         Executive Summary
-                      </SidebarLink>,
-                      <SidebarLink
-                        anchor="certify-submit"
-                        depth={0}
-                        expanded={true}
-                        hash=""
-                        onClick={null}
-                        sub={
-                          Array [
-                            Object {
-                              "id": "certify-submit-submit",
-                              "name": "Certification",
-                            },
-                          ]
-                        }
-                        toggleExpand={[Function]}
-                      >
-                        Certify and Submit
                       </SidebarLink>,
                     ],
                   ],
@@ -8681,29 +8139,6 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Executive Summary",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "certify-submit",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": "certify-submit",
-                      "children": "Certify and Submit",
-                      "depth": 0,
-                      "expanded": true,
-                      "hash": "",
-                      "onClick": null,
-                      "sub": Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "Certify and Submit",
                     "type": [Function],
                   },
                 ],
@@ -9006,24 +8441,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -9274,24 +8691,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -9538,24 +8937,6 @@ ShallowWrapper {
                     toggleExpand={[Function]}
                   >
                     Executive Summary
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
                   </SidebarLink>
                 </ul>
                 <div
@@ -9857,24 +9238,6 @@ ShallowWrapper {
                     >
                       Executive Summary
                     </SidebarLink>
-                    <SidebarLink
-                      anchor="certify-submit"
-                      depth={0}
-                      expanded={true}
-                      hash=""
-                      onClick={null}
-                      sub={
-                        Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ]
-                      }
-                      toggleExpand={[Function]}
-                    >
-                      Certify and Submit
-                    </SidebarLink>
                   </ul>,
                   <div
                     className="mt3"
@@ -10099,24 +9462,6 @@ ShallowWrapper {
                           toggleExpand={[Function]}
                         >
                           Executive Summary
-                        </SidebarLink>,
-                        <SidebarLink
-                          anchor="certify-submit"
-                          depth={0}
-                          expanded={true}
-                          hash=""
-                          onClick={null}
-                          sub={
-                            Array [
-                              Object {
-                                "id": "certify-submit-submit",
-                                "name": "Certification",
-                              },
-                            ]
-                          }
-                          toggleExpand={[Function]}
-                        >
-                          Certify and Submit
                         </SidebarLink>,
                       ],
                     ],
@@ -10398,29 +9743,6 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Executive Summary",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "certify-submit",
-                      "nodeType": "function",
-                      "props": Object {
-                        "anchor": "certify-submit",
-                        "children": "Certify and Submit",
-                        "depth": 0,
-                        "expanded": true,
-                        "hash": "",
-                        "onClick": null,
-                        "sub": Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ],
-                        "toggleExpand": [Function],
-                      },
-                      "ref": null,
-                      "rendered": "Certify and Submit",
                       "type": [Function],
                     },
                   ],
@@ -10796,24 +10118,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -11064,24 +10368,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -11328,24 +10614,6 @@ ShallowWrapper {
                   toggleExpand={[Function]}
                 >
                   Executive Summary
-                </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
                 </SidebarLink>
               </ul>
               <div
@@ -11647,24 +10915,6 @@ ShallowWrapper {
                   >
                     Executive Summary
                   </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
-                  </SidebarLink>
                 </ul>,
                 <div
                   className="mt3"
@@ -11889,24 +11139,6 @@ ShallowWrapper {
                         toggleExpand={[Function]}
                       >
                         Executive Summary
-                      </SidebarLink>,
-                      <SidebarLink
-                        anchor="certify-submit"
-                        depth={0}
-                        expanded={true}
-                        hash=""
-                        onClick={null}
-                        sub={
-                          Array [
-                            Object {
-                              "id": "certify-submit-submit",
-                              "name": "Certification",
-                            },
-                          ]
-                        }
-                        toggleExpand={[Function]}
-                      >
-                        Certify and Submit
                       </SidebarLink>,
                     ],
                   ],
@@ -12188,29 +11420,6 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Executive Summary",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "certify-submit",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": "certify-submit",
-                      "children": "Certify and Submit",
-                      "depth": 0,
-                      "expanded": true,
-                      "hash": "",
-                      "onClick": null,
-                      "sub": Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "Certify and Submit",
                     "type": [Function],
                   },
                 ],
@@ -12513,24 +11722,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -12781,24 +11972,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -13045,24 +12218,6 @@ ShallowWrapper {
                     toggleExpand={[Function]}
                   >
                     Executive Summary
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
                   </SidebarLink>
                 </ul>
                 <div
@@ -13364,24 +12519,6 @@ ShallowWrapper {
                     >
                       Executive Summary
                     </SidebarLink>
-                    <SidebarLink
-                      anchor="certify-submit"
-                      depth={0}
-                      expanded={true}
-                      hash=""
-                      onClick={null}
-                      sub={
-                        Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ]
-                      }
-                      toggleExpand={[Function]}
-                    >
-                      Certify and Submit
-                    </SidebarLink>
                   </ul>,
                   <div
                     className="mt3"
@@ -13606,24 +12743,6 @@ ShallowWrapper {
                           toggleExpand={[Function]}
                         >
                           Executive Summary
-                        </SidebarLink>,
-                        <SidebarLink
-                          anchor="certify-submit"
-                          depth={0}
-                          expanded={true}
-                          hash=""
-                          onClick={null}
-                          sub={
-                            Array [
-                              Object {
-                                "id": "certify-submit-submit",
-                                "name": "Certification",
-                              },
-                            ]
-                          }
-                          toggleExpand={[Function]}
-                        >
-                          Certify and Submit
                         </SidebarLink>,
                       ],
                     ],
@@ -13905,29 +13024,6 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Executive Summary",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "certify-submit",
-                      "nodeType": "function",
-                      "props": Object {
-                        "anchor": "certify-submit",
-                        "children": "Certify and Submit",
-                        "depth": 0,
-                        "expanded": true,
-                        "hash": "",
-                        "onClick": null,
-                        "sub": Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ],
-                        "toggleExpand": [Function],
-                      },
-                      "ref": null,
-                      "rendered": "Certify and Submit",
                       "type": [Function],
                     },
                   ],
@@ -14277,24 +13373,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -14519,24 +13597,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -14757,24 +13817,6 @@ ShallowWrapper {
                   toggleExpand={[Function]}
                 >
                   Executive Summary
-                </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
                 </SidebarLink>
               </ul>
               <div
@@ -15050,24 +14092,6 @@ ShallowWrapper {
                   >
                     Executive Summary
                   </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
-                  </SidebarLink>
                 </ul>,
                 <div
                   className="mt3"
@@ -15267,24 +14291,6 @@ ShallowWrapper {
                         toggleExpand={[Function]}
                       >
                         Executive Summary
-                      </SidebarLink>,
-                      <SidebarLink
-                        anchor="certify-submit"
-                        depth={0}
-                        expanded={true}
-                        hash=""
-                        onClick={null}
-                        sub={
-                          Array [
-                            Object {
-                              "id": "certify-submit-submit",
-                              "name": "Certification",
-                            },
-                          ]
-                        }
-                        toggleExpand={[Function]}
-                      >
-                        Certify and Submit
                       </SidebarLink>,
                     ],
                   ],
@@ -15495,29 +14501,6 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Executive Summary",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "certify-submit",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": "certify-submit",
-                      "children": "Certify and Submit",
-                      "depth": 0,
-                      "expanded": true,
-                      "hash": "",
-                      "onClick": null,
-                      "sub": Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "Certify and Submit",
                     "type": [Function],
                   },
                 ],
@@ -15794,24 +14777,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -16036,24 +15001,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -16274,24 +15221,6 @@ ShallowWrapper {
                     toggleExpand={[Function]}
                   >
                     Executive Summary
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
                   </SidebarLink>
                 </ul>
                 <div
@@ -16567,24 +15496,6 @@ ShallowWrapper {
                     >
                       Executive Summary
                     </SidebarLink>
-                    <SidebarLink
-                      anchor="certify-submit"
-                      depth={0}
-                      expanded={true}
-                      hash=""
-                      onClick={null}
-                      sub={
-                        Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ]
-                      }
-                      toggleExpand={[Function]}
-                    >
-                      Certify and Submit
-                    </SidebarLink>
                   </ul>,
                   <div
                     className="mt3"
@@ -16784,24 +15695,6 @@ ShallowWrapper {
                           toggleExpand={[Function]}
                         >
                           Executive Summary
-                        </SidebarLink>,
-                        <SidebarLink
-                          anchor="certify-submit"
-                          depth={0}
-                          expanded={true}
-                          hash=""
-                          onClick={null}
-                          sub={
-                            Array [
-                              Object {
-                                "id": "certify-submit-submit",
-                                "name": "Certification",
-                              },
-                            ]
-                          }
-                          toggleExpand={[Function]}
-                        >
-                          Certify and Submit
                         </SidebarLink>,
                       ],
                     ],
@@ -17012,29 +15905,6 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Executive Summary",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "certify-submit",
-                      "nodeType": "function",
-                      "props": Object {
-                        "anchor": "certify-submit",
-                        "children": "Certify and Submit",
-                        "depth": 0,
-                        "expanded": true,
-                        "hash": "",
-                        "onClick": null,
-                        "sub": Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ],
-                        "toggleExpand": [Function],
-                      },
-                      "ref": null,
-                      "rendered": "Certify and Submit",
                       "type": [Function],
                     },
                   ],
@@ -17410,24 +16280,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -17678,24 +16530,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -17942,24 +16776,6 @@ ShallowWrapper {
                   toggleExpand={[Function]}
                 >
                   Executive Summary
-                </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
                 </SidebarLink>
               </ul>
               <div
@@ -18261,24 +17077,6 @@ ShallowWrapper {
                   >
                     Executive Summary
                   </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
-                  </SidebarLink>
                 </ul>,
                 <div
                   className="mt3"
@@ -18503,24 +17301,6 @@ ShallowWrapper {
                         toggleExpand={[Function]}
                       >
                         Executive Summary
-                      </SidebarLink>,
-                      <SidebarLink
-                        anchor="certify-submit"
-                        depth={0}
-                        expanded={true}
-                        hash=""
-                        onClick={null}
-                        sub={
-                          Array [
-                            Object {
-                              "id": "certify-submit-submit",
-                              "name": "Certification",
-                            },
-                          ]
-                        }
-                        toggleExpand={[Function]}
-                      >
-                        Certify and Submit
                       </SidebarLink>,
                     ],
                   ],
@@ -18802,29 +17582,6 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Executive Summary",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "certify-submit",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": "certify-submit",
-                      "children": "Certify and Submit",
-                      "depth": 0,
-                      "expanded": true,
-                      "hash": "",
-                      "onClick": null,
-                      "sub": Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "Certify and Submit",
                     "type": [Function],
                   },
                 ],
@@ -19127,24 +17884,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -19395,24 +18134,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -19659,24 +18380,6 @@ ShallowWrapper {
                     toggleExpand={[Function]}
                   >
                     Executive Summary
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
                   </SidebarLink>
                 </ul>
                 <div
@@ -19978,24 +18681,6 @@ ShallowWrapper {
                     >
                       Executive Summary
                     </SidebarLink>
-                    <SidebarLink
-                      anchor="certify-submit"
-                      depth={0}
-                      expanded={true}
-                      hash=""
-                      onClick={null}
-                      sub={
-                        Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ]
-                      }
-                      toggleExpand={[Function]}
-                    >
-                      Certify and Submit
-                    </SidebarLink>
                   </ul>,
                   <div
                     className="mt3"
@@ -20220,24 +18905,6 @@ ShallowWrapper {
                           toggleExpand={[Function]}
                         >
                           Executive Summary
-                        </SidebarLink>,
-                        <SidebarLink
-                          anchor="certify-submit"
-                          depth={0}
-                          expanded={true}
-                          hash=""
-                          onClick={null}
-                          sub={
-                            Array [
-                              Object {
-                                "id": "certify-submit-submit",
-                                "name": "Certification",
-                              },
-                            ]
-                          }
-                          toggleExpand={[Function]}
-                        >
-                          Certify and Submit
                         </SidebarLink>,
                       ],
                     ],
@@ -20519,29 +19186,6 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Executive Summary",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "certify-submit",
-                      "nodeType": "function",
-                      "props": Object {
-                        "anchor": "certify-submit",
-                        "children": "Certify and Submit",
-                        "depth": 0,
-                        "expanded": true,
-                        "hash": "",
-                        "onClick": null,
-                        "sub": Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ],
-                        "toggleExpand": [Function],
-                      },
-                      "ref": null,
-                      "rendered": "Certify and Submit",
                       "type": [Function],
                     },
                   ],
@@ -20917,24 +19561,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -21185,24 +19811,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -21449,24 +20057,6 @@ ShallowWrapper {
                   toggleExpand={[Function]}
                 >
                   Executive Summary
-                </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
                 </SidebarLink>
               </ul>
               <div
@@ -21768,24 +20358,6 @@ ShallowWrapper {
                   >
                     Executive Summary
                   </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
-                  </SidebarLink>
                 </ul>,
                 <div
                   className="mt3"
@@ -22010,24 +20582,6 @@ ShallowWrapper {
                         toggleExpand={[Function]}
                       >
                         Executive Summary
-                      </SidebarLink>,
-                      <SidebarLink
-                        anchor="certify-submit"
-                        depth={0}
-                        expanded={true}
-                        hash=""
-                        onClick={null}
-                        sub={
-                          Array [
-                            Object {
-                              "id": "certify-submit-submit",
-                              "name": "Certification",
-                            },
-                          ]
-                        }
-                        toggleExpand={[Function]}
-                      >
-                        Certify and Submit
                       </SidebarLink>,
                     ],
                   ],
@@ -22309,29 +20863,6 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Executive Summary",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "certify-submit",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": "certify-submit",
-                      "children": "Certify and Submit",
-                      "depth": 0,
-                      "expanded": true,
-                      "hash": "",
-                      "onClick": null,
-                      "sub": Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "Certify and Submit",
                     "type": [Function],
                   },
                 ],
@@ -22634,24 +21165,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -22902,24 +21415,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -23166,24 +21661,6 @@ ShallowWrapper {
                     toggleExpand={[Function]}
                   >
                     Executive Summary
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
                   </SidebarLink>
                 </ul>
                 <div
@@ -23485,24 +21962,6 @@ ShallowWrapper {
                     >
                       Executive Summary
                     </SidebarLink>
-                    <SidebarLink
-                      anchor="certify-submit"
-                      depth={0}
-                      expanded={true}
-                      hash=""
-                      onClick={null}
-                      sub={
-                        Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ]
-                      }
-                      toggleExpand={[Function]}
-                    >
-                      Certify and Submit
-                    </SidebarLink>
                   </ul>,
                   <div
                     className="mt3"
@@ -23727,24 +22186,6 @@ ShallowWrapper {
                           toggleExpand={[Function]}
                         >
                           Executive Summary
-                        </SidebarLink>,
-                        <SidebarLink
-                          anchor="certify-submit"
-                          depth={0}
-                          expanded={true}
-                          hash=""
-                          onClick={null}
-                          sub={
-                            Array [
-                              Object {
-                                "id": "certify-submit-submit",
-                                "name": "Certification",
-                              },
-                            ]
-                          }
-                          toggleExpand={[Function]}
-                        >
-                          Certify and Submit
                         </SidebarLink>,
                       ],
                     ],
@@ -24026,29 +22467,6 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Executive Summary",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "certify-submit",
-                      "nodeType": "function",
-                      "props": Object {
-                        "anchor": "certify-submit",
-                        "children": "Certify and Submit",
-                        "depth": 0,
-                        "expanded": true,
-                        "hash": "",
-                        "onClick": null,
-                        "sub": Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ],
-                        "toggleExpand": [Function],
-                      },
-                      "ref": null,
-                      "rendered": "Certify and Submit",
                       "type": [Function],
                     },
                   ],
@@ -24424,24 +22842,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -24692,24 +23092,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -24956,24 +23338,6 @@ ShallowWrapper {
                   toggleExpand={[Function]}
                 >
                   Executive Summary
-                </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
                 </SidebarLink>
               </ul>
               <div
@@ -25275,24 +23639,6 @@ ShallowWrapper {
                   >
                     Executive Summary
                   </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
-                  </SidebarLink>
                 </ul>,
                 <div
                   className="mt3"
@@ -25517,24 +23863,6 @@ ShallowWrapper {
                         toggleExpand={[Function]}
                       >
                         Executive Summary
-                      </SidebarLink>,
-                      <SidebarLink
-                        anchor="certify-submit"
-                        depth={0}
-                        expanded={true}
-                        hash=""
-                        onClick={null}
-                        sub={
-                          Array [
-                            Object {
-                              "id": "certify-submit-submit",
-                              "name": "Certification",
-                            },
-                          ]
-                        }
-                        toggleExpand={[Function]}
-                      >
-                        Certify and Submit
                       </SidebarLink>,
                     ],
                   ],
@@ -25816,29 +24144,6 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Executive Summary",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "certify-submit",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": "certify-submit",
-                      "children": "Certify and Submit",
-                      "depth": 0,
-                      "expanded": true,
-                      "hash": "",
-                      "onClick": null,
-                      "sub": Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "Certify and Submit",
                     "type": [Function],
                   },
                 ],
@@ -26141,24 +24446,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -26409,24 +24696,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -26673,24 +24942,6 @@ ShallowWrapper {
                     toggleExpand={[Function]}
                   >
                     Executive Summary
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
                   </SidebarLink>
                 </ul>
                 <div
@@ -26992,24 +25243,6 @@ ShallowWrapper {
                     >
                       Executive Summary
                     </SidebarLink>
-                    <SidebarLink
-                      anchor="certify-submit"
-                      depth={0}
-                      expanded={true}
-                      hash=""
-                      onClick={null}
-                      sub={
-                        Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ]
-                      }
-                      toggleExpand={[Function]}
-                    >
-                      Certify and Submit
-                    </SidebarLink>
                   </ul>,
                   <div
                     className="mt3"
@@ -27234,24 +25467,6 @@ ShallowWrapper {
                           toggleExpand={[Function]}
                         >
                           Executive Summary
-                        </SidebarLink>,
-                        <SidebarLink
-                          anchor="certify-submit"
-                          depth={0}
-                          expanded={true}
-                          hash=""
-                          onClick={null}
-                          sub={
-                            Array [
-                              Object {
-                                "id": "certify-submit-submit",
-                                "name": "Certification",
-                              },
-                            ]
-                          }
-                          toggleExpand={[Function]}
-                        >
-                          Certify and Submit
                         </SidebarLink>,
                       ],
                     ],
@@ -27533,29 +25748,6 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Executive Summary",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "certify-submit",
-                      "nodeType": "function",
-                      "props": Object {
-                        "anchor": "certify-submit",
-                        "children": "Certify and Submit",
-                        "depth": 0,
-                        "expanded": true,
-                        "hash": "",
-                        "onClick": null,
-                        "sub": Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ],
-                        "toggleExpand": [Function],
-                      },
-                      "ref": null,
-                      "rendered": "Certify and Submit",
                       "type": [Function],
                     },
                   ],
@@ -27931,24 +26123,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -28199,24 +26373,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={true}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -28463,24 +26619,6 @@ ShallowWrapper {
                   toggleExpand={[Function]}
                 >
                   Executive Summary
-                </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
                 </SidebarLink>
               </ul>
               <div
@@ -28782,24 +26920,6 @@ ShallowWrapper {
                   >
                     Executive Summary
                   </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
-                  </SidebarLink>
                 </ul>,
                 <div
                   className="mt3"
@@ -29024,24 +27144,6 @@ ShallowWrapper {
                         toggleExpand={[Function]}
                       >
                         Executive Summary
-                      </SidebarLink>,
-                      <SidebarLink
-                        anchor="certify-submit"
-                        depth={0}
-                        expanded={true}
-                        hash=""
-                        onClick={null}
-                        sub={
-                          Array [
-                            Object {
-                              "id": "certify-submit-submit",
-                              "name": "Certification",
-                            },
-                          ]
-                        }
-                        toggleExpand={[Function]}
-                      >
-                        Certify and Submit
                       </SidebarLink>,
                     ],
                   ],
@@ -29323,29 +27425,6 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Executive Summary",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "certify-submit",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": "certify-submit",
-                      "children": "Certify and Submit",
-                      "depth": 0,
-                      "expanded": true,
-                      "hash": "",
-                      "onClick": null,
-                      "sub": Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "Certify and Submit",
                     "type": [Function],
                   },
                 ],
@@ -29648,24 +27727,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -29916,24 +27977,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={true}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -30180,24 +28223,6 @@ ShallowWrapper {
                     toggleExpand={[Function]}
                   >
                     Executive Summary
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={true}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
                   </SidebarLink>
                 </ul>
                 <div
@@ -30499,24 +28524,6 @@ ShallowWrapper {
                     >
                       Executive Summary
                     </SidebarLink>
-                    <SidebarLink
-                      anchor="certify-submit"
-                      depth={0}
-                      expanded={true}
-                      hash=""
-                      onClick={null}
-                      sub={
-                        Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ]
-                      }
-                      toggleExpand={[Function]}
-                    >
-                      Certify and Submit
-                    </SidebarLink>
                   </ul>,
                   <div
                     className="mt3"
@@ -30741,24 +28748,6 @@ ShallowWrapper {
                           toggleExpand={[Function]}
                         >
                           Executive Summary
-                        </SidebarLink>,
-                        <SidebarLink
-                          anchor="certify-submit"
-                          depth={0}
-                          expanded={true}
-                          hash=""
-                          onClick={null}
-                          sub={
-                            Array [
-                              Object {
-                                "id": "certify-submit-submit",
-                                "name": "Certification",
-                              },
-                            ]
-                          }
-                          toggleExpand={[Function]}
-                        >
-                          Certify and Submit
                         </SidebarLink>,
                       ],
                     ],
@@ -31040,29 +29029,6 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Executive Summary",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "certify-submit",
-                      "nodeType": "function",
-                      "props": Object {
-                        "anchor": "certify-submit",
-                        "children": "Certify and Submit",
-                        "depth": 0,
-                        "expanded": true,
-                        "hash": "",
-                        "onClick": null,
-                        "sub": Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ],
-                        "toggleExpand": [Function],
-                      },
-                      "ref": null,
-                      "rendered": "Certify and Submit",
                       "type": [Function],
                     },
                   ],
@@ -31438,24 +29404,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={false}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -31706,24 +29654,6 @@ ShallowWrapper {
               >
                 Executive Summary
               </SidebarLink>
-              <SidebarLink
-                anchor="certify-submit"
-                depth={0}
-                expanded={false}
-                hash=""
-                onClick={null}
-                sub={
-                  Array [
-                    Object {
-                      "id": "certify-submit-submit",
-                      "name": "Certification",
-                    },
-                  ]
-                }
-                toggleExpand={[Function]}
-              >
-                Certify and Submit
-              </SidebarLink>
             </ul>
             <div
               className="mt3"
@@ -31970,24 +29900,6 @@ ShallowWrapper {
                   toggleExpand={[Function]}
                 >
                   Executive Summary
-                </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={false}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
                 </SidebarLink>
               </ul>
               <div
@@ -32289,24 +30201,6 @@ ShallowWrapper {
                   >
                     Executive Summary
                   </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={false}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
-                  </SidebarLink>
                 </ul>,
                 <div
                   className="mt3"
@@ -32531,24 +30425,6 @@ ShallowWrapper {
                         toggleExpand={[Function]}
                       >
                         Executive Summary
-                      </SidebarLink>,
-                      <SidebarLink
-                        anchor="certify-submit"
-                        depth={0}
-                        expanded={false}
-                        hash=""
-                        onClick={null}
-                        sub={
-                          Array [
-                            Object {
-                              "id": "certify-submit-submit",
-                              "name": "Certification",
-                            },
-                          ]
-                        }
-                        toggleExpand={[Function]}
-                      >
-                        Certify and Submit
                       </SidebarLink>,
                     ],
                   ],
@@ -32830,29 +30706,6 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Executive Summary",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "certify-submit",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": "certify-submit",
-                      "children": "Certify and Submit",
-                      "depth": 0,
-                      "expanded": false,
-                      "hash": "",
-                      "onClick": null,
-                      "sub": Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "Certify and Submit",
                     "type": [Function],
                   },
                 ],
@@ -33155,24 +31008,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={false}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -33423,24 +31258,6 @@ ShallowWrapper {
                 >
                   Executive Summary
                 </SidebarLink>
-                <SidebarLink
-                  anchor="certify-submit"
-                  depth={0}
-                  expanded={false}
-                  hash=""
-                  onClick={null}
-                  sub={
-                    Array [
-                      Object {
-                        "id": "certify-submit-submit",
-                        "name": "Certification",
-                      },
-                    ]
-                  }
-                  toggleExpand={[Function]}
-                >
-                  Certify and Submit
-                </SidebarLink>
               </ul>
               <div
                 className="mt3"
@@ -33687,24 +31504,6 @@ ShallowWrapper {
                     toggleExpand={[Function]}
                   >
                     Executive Summary
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor="certify-submit"
-                    depth={0}
-                    expanded={false}
-                    hash=""
-                    onClick={null}
-                    sub={
-                      Array [
-                        Object {
-                          "id": "certify-submit-submit",
-                          "name": "Certification",
-                        },
-                      ]
-                    }
-                    toggleExpand={[Function]}
-                  >
-                    Certify and Submit
                   </SidebarLink>
                 </ul>
                 <div
@@ -34006,24 +31805,6 @@ ShallowWrapper {
                     >
                       Executive Summary
                     </SidebarLink>
-                    <SidebarLink
-                      anchor="certify-submit"
-                      depth={0}
-                      expanded={false}
-                      hash=""
-                      onClick={null}
-                      sub={
-                        Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ]
-                      }
-                      toggleExpand={[Function]}
-                    >
-                      Certify and Submit
-                    </SidebarLink>
                   </ul>,
                   <div
                     className="mt3"
@@ -34248,24 +32029,6 @@ ShallowWrapper {
                           toggleExpand={[Function]}
                         >
                           Executive Summary
-                        </SidebarLink>,
-                        <SidebarLink
-                          anchor="certify-submit"
-                          depth={0}
-                          expanded={false}
-                          hash=""
-                          onClick={null}
-                          sub={
-                            Array [
-                              Object {
-                                "id": "certify-submit-submit",
-                                "name": "Certification",
-                              },
-                            ]
-                          }
-                          toggleExpand={[Function]}
-                        >
-                          Certify and Submit
                         </SidebarLink>,
                       ],
                     ],
@@ -34547,29 +32310,6 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Executive Summary",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "certify-submit",
-                      "nodeType": "function",
-                      "props": Object {
-                        "anchor": "certify-submit",
-                        "children": "Certify and Submit",
-                        "depth": 0,
-                        "expanded": false,
-                        "hash": "",
-                        "onClick": null,
-                        "sub": Array [
-                          Object {
-                            "id": "certify-submit-submit",
-                            "name": "Certification",
-                          },
-                        ],
-                        "toggleExpand": [Function],
-                      },
-                      "ref": null,
-                      "rendered": "Certify and Submit",
                       "type": [Function],
                     },
                   ],
