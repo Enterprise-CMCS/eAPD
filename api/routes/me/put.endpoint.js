@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const {
   getDB,
   getFullPath,
@@ -116,6 +117,7 @@ describe('/me endpoint | PUT', () => {
         position: 'cook',
         phone: '5554567890'
       });
+      expect(bcrypt.compareSync(password, afterUser.password)).toBe(true);
       expect(statusCode).toEqual(200);
       expect(body).toMatchSnapshot();
     });
