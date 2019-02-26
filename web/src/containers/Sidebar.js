@@ -9,6 +9,10 @@ import Btn from '../components/Btn';
 import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
 
 class Sidebar extends Component {
+  state = { selectedId: 'apd-state-profile-office' };
+
+  handleSelectClick = (id) => this.setState({ selectedId: id.id });
+
   render() {
     const {
       activities,
@@ -23,13 +27,19 @@ class Sidebar extends Component {
         number: i + 1,
         name: a.name
       }),
+      onClick: (evt, id) => this.handleSelectClick({id})
     }));
 
     activityItems.splice(0, {
       id: 'activities-list',
       url: '#activities-list',
-      label: t('activities.list.title')
+      label: t('activities.list.title'),
+      onClick: (evt, id) => this.handleSelectClick({id})
     });
+
+    const isSelected = (id) => {
+      return id === this.state.selectedId;
+    };
 
     const links = [
       {
@@ -40,12 +50,15 @@ class Sidebar extends Component {
           {
             id: 'apd-state-profile-office',
             url: '#apd-state-profile-office',
-            label: t('apd.stateProfile.directorAndAddress.title')
+            label: t('apd.stateProfile.directorAndAddress.title'),
+            selected: isSelected('apd-state-profile-office'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           },
           {
             id: 'apd-state-profile-key-personnel',
             url: '#apd-state-profile-key-personnel',
-            label: t('apd.stateProfile.keyPersonnel.title')
+            label: t('apd.stateProfile.keyPersonnel.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           }
         ]
       },
@@ -57,7 +70,8 @@ class Sidebar extends Component {
           {
             id: 'apd-summary-overview',
             url: '#apd-summary-overview',
-            label: t('apd.overview.title')
+            label: t('apd.overview.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           }
         ]
       },
@@ -69,12 +83,14 @@ class Sidebar extends Component {
           {
             id: 'prev-activities-outline',
             url: '#prev-activities-outline',
-            label: t('previousActivities.outline.title')
+            label: t('previousActivities.outline.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           },
           {
             id: 'prev-activities-table',
-            url: 'prev-activities-table',
-            label: t('previousActivities.actualExpenses.title')
+            url: '#prev-activities-table',
+            label: t('previousActivities.actualExpenses.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           }
         ]
       },
@@ -92,7 +108,8 @@ class Sidebar extends Component {
           {
             id: 'schedule-summary-table',
             url: '#schedule-summary-table',
-            label: t('scheduleSummary.main.title')
+            label: t('scheduleSummary.main.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           }
         ]
       },
@@ -104,17 +121,20 @@ class Sidebar extends Component {
           {
             id: 'budget-summary-table',
             url: '#budget-summary-table',
-            label: t('proposedBudget.summaryBudget.title')
+            label: t('proposedBudget.summaryBudget.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           },
           {
             id: 'budget-federal-by-quarter',
             url: '#budget-federal-by-quarter',
-            label: t('proposedBudget.quarterlyBudget.title')
+            label: t('proposedBudget.quarterlyBudget.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           },
           {
             id: 'budget-incentive-by-quarter',
             url: '#budget-incentive-by-quarter',
-            label: t('proposedBudget.paymentsByFFYQuarter.title')
+            label: t('proposedBudget.paymentsByFFYQuarter.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           }
         ]
       },
@@ -126,7 +146,8 @@ class Sidebar extends Component {
           {
             id: 'assurances-compliance-fed-citations',
             url: '#assurances-compliance-fed-citations',
-            label: t('assurancesAndCompliance.citations.title')
+            label: t('assurancesAndCompliance.citations.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           }
         ]
       },
@@ -138,26 +159,21 @@ class Sidebar extends Component {
           {
             id: 'executive-summary-overview',
             url: '#executive-summary-overview',
-            label: t('executiveSummary.summary.title')
+            label: t('executiveSummary.summary.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           },
           {
             id: 'executive-summary-budget-table',
             url: '#executive-summary-budget-table',
-            label: t('executiveSummary.budgetTable.title')
+            label: t('executiveSummary.budgetTable.title'),
+            onClick: (evt, id) => this.handleSelectClick({id})
           }
         ]
       },
       {
         id: 'certify-submit',
         label: t('certifyAndSubmit.title'),
-        defaultCollapsed: true,
-        items: [
-          {
-            id: 'certify-submit-submit',
-            url: '#certify-submit-submit',
-            label: t('certifyAndSubmit.certify.title')
-          }
-        ]
+        url: '#certify-submit'
       }
     ];
 
@@ -179,8 +195,9 @@ class Sidebar extends Component {
               </h1>
             </div>
             <VerticalNav
-              selectedId={this.props.selectedId}
+              selectedId={this.state.selectedId}
               items={links}
+              onLinkClick={this.handleSelectClick}
             />
             <div className="p2 lg-p3">
               <div className="mt3">
@@ -205,11 +222,6 @@ Sidebar.propTypes = {
   hash: PropTypes.string.isRequired,
   expandSection: PropTypes.func.isRequired,
   saveApdToAPI: PropTypes.func.isRequired,
-  selected: PropTypes.string,
-};
-
-Sidebar.defaultProps = {
-  selected: 'apd-state-profile',
 };
 
 const mapStateToProps = ({
