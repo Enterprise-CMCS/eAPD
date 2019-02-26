@@ -5,6 +5,8 @@ const deserializeUser = require('../../auth/serialization').deserializeUser;
 const editableFields = ['email', 'name', 'password', 'phone', 'position'];
 
 const getUserJSON = user => ({
+  // Send back state info and get rid of the model object
+  // before sending it back to the client.
   ...user,
   state: {
     id: user.model.related('state').get('id'),
@@ -17,9 +19,9 @@ module.exports = (app, { deserialize = deserializeUser } = {}) => {
   logger.silly('setting up PUT endpoint');
   app.put('/me', loggedIn, async (req, res) => {
     try {
+      // If the body doesn't include any editable fields, we
+      // can bail out now.  Hooray!
       if (!editableFields.some(f => req.body[f])) {
-        // Send back state info and get rid of the model object
-        // before sending it back to the client.
         res.send(getUserJSON(req.user));
         return;
       }
@@ -44,13 +46,13 @@ module.exports = (app, { deserialize = deserializeUser } = {}) => {
 
       await dbUser.save();
 
+      // The GET /me method relies on the data from the deserializer. Rather
+      // than duplicate that logic, just call it.  Hooray x 2!
       deserialize(req.user.id, (err, user) => {
         if (err) {
           return res.status(500).end();
         }
 
-        // Send back state info and get rid of the model object
-        // before sending it back to the client.
         return res.send(getUserJSON(user));
       });
     } catch (e) {
