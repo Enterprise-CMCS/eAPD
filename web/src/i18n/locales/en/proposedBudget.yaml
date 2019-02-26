@@ -21,16 +21,9 @@ quarterlyBudget:
     combined: Total Enhanced FFP
 paymentsByFFYQuarter:
   title: Incentive Payments by FFY Quarter
-<<<<<<< HEAD
   instruction:
     detail: >-
       Use this table to capture incentive payments for Eligible Hospitals (EHs) and
-      Eligible Professionals (EPs). Provide payments and counts, and the table will
-      calculate totals automatically.
-=======
-  helpText: >-
-    Use this table to capture incentive payments for Eligible Hospitals (EHs) and
-    Eligible Professionals (EPs). Provide the total amount paid (Payments) and the
-    number of providers who received payments (Count) for each quarter. The table will
-    calculate yearly totals automatically.
->>>>>>> master
+      Eligible Professionals (EPs). Provide the total amount paid (Payments) and the
+      number of providers who receive payments (Count) for each quarter. The table will
+      calculate yearly totals automatically.
