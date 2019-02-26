@@ -32,7 +32,7 @@
     'avenir next', avenir, 'helvetica neue', helvetica, roboto, noto, 'segoe ui',
     arial, sans-serif;
 
-  --font-size-xl: 1.5rem; /* these need to be properly assigned by Viz Dee */
+  --font-size-xl: 1.3125rem; 
   --line-height-xl: 2rem;
 
   --font-size-l: 1.25rem; /* 20px */
