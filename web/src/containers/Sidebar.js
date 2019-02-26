@@ -13,13 +13,7 @@ class Sidebar extends Component {
 
   handleSelectClick = (id) => this.setState({ selectedId: id.id });
 
-  render() {
-    const {
-      activities,
-      place,
-      saveApdToAPI
-    } = this.props;
-
+  createActivityItems = (activities) => {
     let activityItems = activities.map((a, i) => ({
       id: a.key,
       url: `#${a.anchor}`,
@@ -30,12 +24,25 @@ class Sidebar extends Component {
       onClick: (evt, id) => this.handleSelectClick({id})
     }));
 
-    activityItems.splice(0, {
+    activityItems.splice(0, 0, {
       id: 'activities-list',
       url: '#activities-list',
       label: t('activities.list.title'),
       onClick: (evt, id) => this.handleSelectClick({id})
     });
+
+    return activityItems;
+  }
+
+  render() {
+    const {
+      activities,
+      place,
+      saveApdToAPI
+    } = this.props;
+
+    const activityItems = this.createActivityItems(activities);
+
 
     const isSelected = (id) => {
       return id === this.state.selectedId;
