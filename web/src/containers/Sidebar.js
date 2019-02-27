@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { t } from '../i18n';
-import { expandActivitySection } from '../actions/activities';
 import { saveApd } from '../actions/apd';
 import Btn from '../components/Btn';
 import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
@@ -229,7 +228,6 @@ Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
   place: PropTypes.object.isRequired,
   hash: PropTypes.string.isRequired,
-  expandSection: PropTypes.func.isRequired,
   saveApdToAPI: PropTypes.func.isRequired,
 };
 
@@ -247,7 +245,6 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = {
-  expandSection: expandActivitySection,
   saveApdToAPI: saveApd,
 };
 
