@@ -192,7 +192,7 @@ class Sidebar extends Component {
       <div className="ds-l-col--3 bg-white">
         <aside className="site-sidebar">
           <div className="xs-hide sm-hide">
-            <div className="flex items-center">
+            <div className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4">
               <img
                 src={`/static/img/states/${place.id}.svg`}
                 alt={place.name}
