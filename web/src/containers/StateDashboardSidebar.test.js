@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
@@ -33,8 +33,8 @@ describe('State dashboard sidebar component', () => {
   });
 
   test('selects an apd', () => {
-    const component = shallow(<Sidebar {...props} />);
-    component.find('SidebarLink[hash="1"]').simulate('click');
+    const component = mount(<Sidebar {...props} />);
+    component.find('VerticalNavItem[id="1"]').simulate('click');
     expect(props.selectApd.calledWith(1)).toBeTruthy();
   });
 

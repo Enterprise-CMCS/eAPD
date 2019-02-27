@@ -39,13 +39,13 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <aside
-        className="site-sidebar bg-teal"
+        className="site-sidebar"
       >
         <div
           className="xs-hide sm-hide"
         >
           <div
-            className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
+            className="flex items-center"
           >
             <img
               alt="Solid"
@@ -55,7 +55,7 @@ ShallowWrapper {
               width="40"
             />
             <h1
-              className="m0 blue h3 light caps line-height-2"
+              className="text-xl"
             >
               Solid
                
@@ -63,40 +63,29 @@ ShallowWrapper {
                HITECH APD
             </h1>
           </div>
-          <div
-            className="p2 lg-p3"
-          >
-            <ul
-              className="list-reset"
-            >
-              <SidebarLink
-                anchor={null}
-                depth={0}
-                expanded={null}
-                hash={null}
-                onClick={null}
-                sub={Array []}
-                toggleExpand={[Function]}
-              >
-                Solid
-                 APDs
-              </SidebarLink>
-              <SidebarLink
-                anchor={null}
-                depth={0}
-                expanded={null}
-                hash="1"
-                onClick={[Function]}
-                sub={Array []}
-                toggleExpand={[Function]}
-              >
-                1, 2, 3 SO APD
-              </SidebarLink>
-            </ul>
-          </div>
+          <VerticalNav
+            collapsed={false}
+            items={
+              Array [
+                Object {
+                  "id": "state-apds",
+                  "items": Array [
+                    Object {
+                      "id": "1",
+                      "label": "1, 2, 3 SO APD",
+                      "onClick": [Function],
+                      "url": "javascript:void(0);",
+                    },
+                  ],
+                  "label": "Solid APDs",
+                },
+              ]
+            }
+            selectedId="state-apds"
+          />
         </div>
       </aside>,
-      "className": "ds-l-col--3",
+      "className": "ds-l-col--3 bg-white",
     },
     "ref": null,
     "rendered": Object {
@@ -108,7 +97,7 @@ ShallowWrapper {
           className="xs-hide sm-hide"
         >
           <div
-            className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
+            className="flex items-center"
           >
             <img
               alt="Solid"
@@ -118,7 +107,7 @@ ShallowWrapper {
               width="40"
             />
             <h1
-              className="m0 blue h3 light caps line-height-2"
+              className="text-xl"
             >
               Solid
                
@@ -126,39 +115,28 @@ ShallowWrapper {
                HITECH APD
             </h1>
           </div>
-          <div
-            className="p2 lg-p3"
-          >
-            <ul
-              className="list-reset"
-            >
-              <SidebarLink
-                anchor={null}
-                depth={0}
-                expanded={null}
-                hash={null}
-                onClick={null}
-                sub={Array []}
-                toggleExpand={[Function]}
-              >
-                Solid
-                 APDs
-              </SidebarLink>
-              <SidebarLink
-                anchor={null}
-                depth={0}
-                expanded={null}
-                hash="1"
-                onClick={[Function]}
-                sub={Array []}
-                toggleExpand={[Function]}
-              >
-                1, 2, 3 SO APD
-              </SidebarLink>
-            </ul>
-          </div>
+          <VerticalNav
+            collapsed={false}
+            items={
+              Array [
+                Object {
+                  "id": "state-apds",
+                  "items": Array [
+                    Object {
+                      "id": "1",
+                      "label": "1, 2, 3 SO APD",
+                      "onClick": [Function],
+                      "url": "javascript:void(0);",
+                    },
+                  ],
+                  "label": "Solid APDs",
+                },
+              ]
+            }
+            selectedId="state-apds"
+          />
         </div>,
-        "className": "site-sidebar bg-teal",
+        "className": "site-sidebar",
       },
       "ref": null,
       "rendered": Object {
@@ -168,7 +146,7 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <div
-              className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
+              className="flex items-center"
             >
               <img
                 alt="Solid"
@@ -178,7 +156,7 @@ ShallowWrapper {
                 width="40"
               />
               <h1
-                className="m0 blue h3 light caps line-height-2"
+                className="text-xl"
               >
                 Solid
                  
@@ -186,37 +164,26 @@ ShallowWrapper {
                  HITECH APD
               </h1>
             </div>,
-            <div
-              className="p2 lg-p3"
-            >
-              <ul
-                className="list-reset"
-              >
-                <SidebarLink
-                  anchor={null}
-                  depth={0}
-                  expanded={null}
-                  hash={null}
-                  onClick={null}
-                  sub={Array []}
-                  toggleExpand={[Function]}
-                >
-                  Solid
-                   APDs
-                </SidebarLink>
-                <SidebarLink
-                  anchor={null}
-                  depth={0}
-                  expanded={null}
-                  hash="1"
-                  onClick={[Function]}
-                  sub={Array []}
-                  toggleExpand={[Function]}
-                >
-                  1, 2, 3 SO APD
-                </SidebarLink>
-              </ul>
-            </div>,
+            <VerticalNav
+              collapsed={false}
+              items={
+                Array [
+                  Object {
+                    "id": "state-apds",
+                    "items": Array [
+                      Object {
+                        "id": "1",
+                        "label": "1, 2, 3 SO APD",
+                        "onClick": [Function],
+                        "url": "javascript:void(0);",
+                      },
+                    ],
+                    "label": "Solid APDs",
+                  },
+                ]
+              }
+              selectedId="state-apds"
+            />,
           ],
           "className": "xs-hide sm-hide",
         },
@@ -236,7 +203,7 @@ ShallowWrapper {
                   width="40"
                 />,
                 <h1
-                  className="m0 blue h3 light caps line-height-2"
+                  className="text-xl"
                 >
                   Solid
                    
@@ -244,7 +211,7 @@ ShallowWrapper {
                    HITECH APD
                 </h1>,
               ],
-              "className": "px2 py3 lg-px3 lg-py4 bg-white flex items-center",
+              "className": "flex items-center",
             },
             "ref": null,
             "rendered": Array [
@@ -274,7 +241,7 @@ ShallowWrapper {
                     <br />,
                     " HITECH APD",
                   ],
-                  "className": "m0 blue h3 light caps line-height-2",
+                  "className": "text-xl",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -299,120 +266,28 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "host",
+            "nodeType": "class",
             "props": Object {
-              "children": <ul
-                className="list-reset"
-              >
-                <SidebarLink
-                  anchor={null}
-                  depth={0}
-                  expanded={null}
-                  hash={null}
-                  onClick={null}
-                  sub={Array []}
-                  toggleExpand={[Function]}
-                >
-                  Solid
-                   APDs
-                </SidebarLink>
-                <SidebarLink
-                  anchor={null}
-                  depth={0}
-                  expanded={null}
-                  hash="1"
-                  onClick={[Function]}
-                  sub={Array []}
-                  toggleExpand={[Function]}
-                >
-                  1, 2, 3 SO APD
-                </SidebarLink>
-              </ul>,
-              "className": "p2 lg-p3",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <SidebarLink
-                    anchor={null}
-                    depth={0}
-                    expanded={null}
-                    hash={null}
-                    onClick={null}
-                    sub={Array []}
-                    toggleExpand={[Function]}
-                  >
-                    Solid
-                     APDs
-                  </SidebarLink>,
-                  Array [
-                    <SidebarLink
-                      anchor={null}
-                      depth={0}
-                      expanded={null}
-                      hash="1"
-                      onClick={[Function]}
-                      sub={Array []}
-                      toggleExpand={[Function]}
-                    >
-                      1, 2, 3 SO APD
-                    </SidebarLink>,
-                  ],
-                ],
-                "className": "list-reset",
-              },
-              "ref": null,
-              "rendered": Array [
+              "collapsed": false,
+              "items": Array [
                 Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {
-                    "anchor": null,
-                    "children": Array [
-                      "Solid",
-                      " APDs",
-                    ],
-                    "depth": 0,
-                    "expanded": null,
-                    "hash": null,
-                    "onClick": null,
-                    "sub": Array [],
-                    "toggleExpand": [Function],
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    "Solid",
-                    " APDs",
+                  "id": "state-apds",
+                  "items": Array [
+                    Object {
+                      "id": "1",
+                      "label": "1, 2, 3 SO APD",
+                      "onClick": [Function],
+                      "url": "javascript:void(0);",
+                    },
                   ],
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": "1",
-                  "nodeType": "function",
-                  "props": Object {
-                    "anchor": null,
-                    "children": "1, 2, 3 SO APD",
-                    "depth": 0,
-                    "expanded": null,
-                    "hash": "1",
-                    "onClick": [Function],
-                    "sub": Array [],
-                    "toggleExpand": [Function],
-                  },
-                  "ref": null,
-                  "rendered": "1, 2, 3 SO APD",
-                  "type": [Function],
+                  "label": "Solid APDs",
                 },
               ],
-              "type": "ul",
+              "selectedId": "state-apds",
             },
-            "type": "div",
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
           },
         ],
         "type": "div",
@@ -428,13 +303,13 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <aside
-          className="site-sidebar bg-teal"
+          className="site-sidebar"
         >
           <div
             className="xs-hide sm-hide"
           >
             <div
-              className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
+              className="flex items-center"
             >
               <img
                 alt="Solid"
@@ -444,7 +319,7 @@ ShallowWrapper {
                 width="40"
               />
               <h1
-                className="m0 blue h3 light caps line-height-2"
+                className="text-xl"
               >
                 Solid
                  
@@ -452,40 +327,29 @@ ShallowWrapper {
                  HITECH APD
               </h1>
             </div>
-            <div
-              className="p2 lg-p3"
-            >
-              <ul
-                className="list-reset"
-              >
-                <SidebarLink
-                  anchor={null}
-                  depth={0}
-                  expanded={null}
-                  hash={null}
-                  onClick={null}
-                  sub={Array []}
-                  toggleExpand={[Function]}
-                >
-                  Solid
-                   APDs
-                </SidebarLink>
-                <SidebarLink
-                  anchor={null}
-                  depth={0}
-                  expanded={null}
-                  hash="1"
-                  onClick={[Function]}
-                  sub={Array []}
-                  toggleExpand={[Function]}
-                >
-                  1, 2, 3 SO APD
-                </SidebarLink>
-              </ul>
-            </div>
+            <VerticalNav
+              collapsed={false}
+              items={
+                Array [
+                  Object {
+                    "id": "state-apds",
+                    "items": Array [
+                      Object {
+                        "id": "1",
+                        "label": "1, 2, 3 SO APD",
+                        "onClick": [Function],
+                        "url": "javascript:void(0);",
+                      },
+                    ],
+                    "label": "Solid APDs",
+                  },
+                ]
+              }
+              selectedId="state-apds"
+            />
           </div>
         </aside>,
-        "className": "ds-l-col--3",
+        "className": "ds-l-col--3 bg-white",
       },
       "ref": null,
       "rendered": Object {
@@ -497,7 +361,7 @@ ShallowWrapper {
             className="xs-hide sm-hide"
           >
             <div
-              className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
+              className="flex items-center"
             >
               <img
                 alt="Solid"
@@ -507,7 +371,7 @@ ShallowWrapper {
                 width="40"
               />
               <h1
-                className="m0 blue h3 light caps line-height-2"
+                className="text-xl"
               >
                 Solid
                  
@@ -515,39 +379,28 @@ ShallowWrapper {
                  HITECH APD
               </h1>
             </div>
-            <div
-              className="p2 lg-p3"
-            >
-              <ul
-                className="list-reset"
-              >
-                <SidebarLink
-                  anchor={null}
-                  depth={0}
-                  expanded={null}
-                  hash={null}
-                  onClick={null}
-                  sub={Array []}
-                  toggleExpand={[Function]}
-                >
-                  Solid
-                   APDs
-                </SidebarLink>
-                <SidebarLink
-                  anchor={null}
-                  depth={0}
-                  expanded={null}
-                  hash="1"
-                  onClick={[Function]}
-                  sub={Array []}
-                  toggleExpand={[Function]}
-                >
-                  1, 2, 3 SO APD
-                </SidebarLink>
-              </ul>
-            </div>
+            <VerticalNav
+              collapsed={false}
+              items={
+                Array [
+                  Object {
+                    "id": "state-apds",
+                    "items": Array [
+                      Object {
+                        "id": "1",
+                        "label": "1, 2, 3 SO APD",
+                        "onClick": [Function],
+                        "url": "javascript:void(0);",
+                      },
+                    ],
+                    "label": "Solid APDs",
+                  },
+                ]
+              }
+              selectedId="state-apds"
+            />
           </div>,
-          "className": "site-sidebar bg-teal",
+          "className": "site-sidebar",
         },
         "ref": null,
         "rendered": Object {
@@ -557,7 +410,7 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <div
-                className="px2 py3 lg-px3 lg-py4 bg-white flex items-center"
+                className="flex items-center"
               >
                 <img
                   alt="Solid"
@@ -567,7 +420,7 @@ ShallowWrapper {
                   width="40"
                 />
                 <h1
-                  className="m0 blue h3 light caps line-height-2"
+                  className="text-xl"
                 >
                   Solid
                    
@@ -575,37 +428,26 @@ ShallowWrapper {
                    HITECH APD
                 </h1>
               </div>,
-              <div
-                className="p2 lg-p3"
-              >
-                <ul
-                  className="list-reset"
-                >
-                  <SidebarLink
-                    anchor={null}
-                    depth={0}
-                    expanded={null}
-                    hash={null}
-                    onClick={null}
-                    sub={Array []}
-                    toggleExpand={[Function]}
-                  >
-                    Solid
-                     APDs
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor={null}
-                    depth={0}
-                    expanded={null}
-                    hash="1"
-                    onClick={[Function]}
-                    sub={Array []}
-                    toggleExpand={[Function]}
-                  >
-                    1, 2, 3 SO APD
-                  </SidebarLink>
-                </ul>
-              </div>,
+              <VerticalNav
+                collapsed={false}
+                items={
+                  Array [
+                    Object {
+                      "id": "state-apds",
+                      "items": Array [
+                        Object {
+                          "id": "1",
+                          "label": "1, 2, 3 SO APD",
+                          "onClick": [Function],
+                          "url": "javascript:void(0);",
+                        },
+                      ],
+                      "label": "Solid APDs",
+                    },
+                  ]
+                }
+                selectedId="state-apds"
+              />,
             ],
             "className": "xs-hide sm-hide",
           },
@@ -625,7 +467,7 @@ ShallowWrapper {
                     width="40"
                   />,
                   <h1
-                    className="m0 blue h3 light caps line-height-2"
+                    className="text-xl"
                   >
                     Solid
                      
@@ -633,7 +475,7 @@ ShallowWrapper {
                      HITECH APD
                   </h1>,
                 ],
-                "className": "px2 py3 lg-px3 lg-py4 bg-white flex items-center",
+                "className": "flex items-center",
               },
               "ref": null,
               "rendered": Array [
@@ -663,7 +505,7 @@ ShallowWrapper {
                       <br />,
                       " HITECH APD",
                     ],
-                    "className": "m0 blue h3 light caps line-height-2",
+                    "className": "text-xl",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -688,120 +530,28 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
+              "nodeType": "class",
               "props": Object {
-                "children": <ul
-                  className="list-reset"
-                >
-                  <SidebarLink
-                    anchor={null}
-                    depth={0}
-                    expanded={null}
-                    hash={null}
-                    onClick={null}
-                    sub={Array []}
-                    toggleExpand={[Function]}
-                  >
-                    Solid
-                     APDs
-                  </SidebarLink>
-                  <SidebarLink
-                    anchor={null}
-                    depth={0}
-                    expanded={null}
-                    hash="1"
-                    onClick={[Function]}
-                    sub={Array []}
-                    toggleExpand={[Function]}
-                  >
-                    1, 2, 3 SO APD
-                  </SidebarLink>
-                </ul>,
-                "className": "p2 lg-p3",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <SidebarLink
-                      anchor={null}
-                      depth={0}
-                      expanded={null}
-                      hash={null}
-                      onClick={null}
-                      sub={Array []}
-                      toggleExpand={[Function]}
-                    >
-                      Solid
-                       APDs
-                    </SidebarLink>,
-                    Array [
-                      <SidebarLink
-                        anchor={null}
-                        depth={0}
-                        expanded={null}
-                        hash="1"
-                        onClick={[Function]}
-                        sub={Array []}
-                        toggleExpand={[Function]}
-                      >
-                        1, 2, 3 SO APD
-                      </SidebarLink>,
-                    ],
-                  ],
-                  "className": "list-reset",
-                },
-                "ref": null,
-                "rendered": Array [
+                "collapsed": false,
+                "items": Array [
                   Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": null,
-                      "children": Array [
-                        "Solid",
-                        " APDs",
-                      ],
-                      "depth": 0,
-                      "expanded": null,
-                      "hash": null,
-                      "onClick": null,
-                      "sub": Array [],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      "Solid",
-                      " APDs",
+                    "id": "state-apds",
+                    "items": Array [
+                      Object {
+                        "id": "1",
+                        "label": "1, 2, 3 SO APD",
+                        "onClick": [Function],
+                        "url": "javascript:void(0);",
+                      },
                     ],
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "1",
-                    "nodeType": "function",
-                    "props": Object {
-                      "anchor": null,
-                      "children": "1, 2, 3 SO APD",
-                      "depth": 0,
-                      "expanded": null,
-                      "hash": "1",
-                      "onClick": [Function],
-                      "sub": Array [],
-                      "toggleExpand": [Function],
-                    },
-                    "ref": null,
-                    "rendered": "1, 2, 3 SO APD",
-                    "type": [Function],
+                    "label": "Solid APDs",
                   },
                 ],
-                "type": "ul",
+                "selectedId": "state-apds",
               },
-              "type": "div",
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
             },
           ],
           "type": "div",
