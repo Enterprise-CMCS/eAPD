@@ -273,7 +273,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": "test child",
-      "className": "mb4 text-xl",
+      "className": "mb4 text-l",
     },
     "ref": null,
     "rendered": "test child",
@@ -286,7 +286,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": "test child",
-        "className": "mb4 text-xl",
+        "className": "mb4 text-l",
       },
       "ref": null,
       "rendered": "test child",
