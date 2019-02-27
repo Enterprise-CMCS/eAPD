@@ -21,7 +21,7 @@ const Instruction = ({ args, reverse, source }) => {
     <div>
       {heading && <h3>{heading}</h3>}
       {reverse && detail && <Md content={detail} wrapper="p" />}
-      {short && <p className="strong">{short}</p>}
+      {short && <p className="bold">{short}</p>}
       {!reverse && detail && <Md content={detail} wrapper="p" />}
       {helpText && <HelpText>{helpText}</HelpText>}
     </div>
