@@ -9,7 +9,7 @@ import Btn from '../components/Btn';
 import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
 
 class Sidebar extends Component {
-  state = { selectedId: 'apd-state-profile-office' };
+  state = { selectedId: 'apd-state-profile-overview' };
 
   handleSelectClick = (id) => this.setState({ selectedId: id.id });
 
@@ -25,11 +25,18 @@ class Sidebar extends Component {
     }));
 
     activityItems.splice(0, 0, {
-      id: 'activities-list',
-      url: '#activities-list',
-      label: t('activities.list.title'),
-      onClick: (evt, id) => this.handleSelectClick({id})
-    });
+        id: 'activities-overview',
+        url: '#activities',
+        label: 'Overview',
+        onClick: (evt, id) => this.handleSelectClick({id})
+      },
+      {
+        id: 'activities-list',
+        url: '#activities-list',
+        label: t('activities.list.title'),
+        onClick: (evt, id) => this.handleSelectClick({id})
+      }
+    );
 
     return activityItems;
   }
@@ -55,6 +62,12 @@ class Sidebar extends Component {
         defaultCollapsed: true,
         items: [
           {
+            id: 'apd-state-profile-overview',
+            url: '#apd-state-profile',
+            label: 'Overview',
+            onClick: (evt, id) => this.handleSelectClick({id})
+          },
+          {
             id: 'apd-state-profile-office',
             url: '#apd-state-profile-office',
             label: t('apd.stateProfile.directorAndAddress.title'),
@@ -71,22 +84,21 @@ class Sidebar extends Component {
       },
       {
         id: 'apd-summary',
+        url: '#apd-summary',
         label: t('apd.title'),
-        defaultCollapsed: true,
-        items: [
-          {
-            id: 'apd-summary-overview',
-            url: '#apd-summary-overview',
-            label: t('apd.overview.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
-          }
-        ]
+        onClick: (evt, id) => this.handleSelectClick({id})
       },
       {
         id: 'prev-activities',
         label: t('previousActivities.title'),
         defaultCollapsed: true,
         items: [
+          {
+            id: 'prev-activities-overview',
+            url: '#prev-activities',
+            label: 'Overview',
+            onClick: (evt, id) => this.handleSelectClick({id})
+          },
           {
             id: 'prev-activities-outline',
             url: '#prev-activities-outline',
@@ -109,22 +121,21 @@ class Sidebar extends Component {
       },
       {
         id: 'schedule-summary',
+        url: '#schedule-summary',
         label: t('scheduleSummary.title'),
-        defaultCollapsed: true,
-        items: [
-          {
-            id: 'schedule-summary-table',
-            url: '#schedule-summary-table',
-            label: t('scheduleSummary.main.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
-          }
-        ]
+        onClick: (evt, id) => this.handleSelectClick({id})
       },
       {
         id: 'budget',
         label: t('proposedBudget.title'),
         defaultCollapsed: true,
         items: [
+          {
+            id: 'budget-overview',
+            url: '#budget',
+            label: 'Overview',
+            onClick: (evt, id) => this.handleSelectClick({id})
+          },
           {
             id: 'budget-summary-table',
             url: '#budget-summary-table',
@@ -147,22 +158,21 @@ class Sidebar extends Component {
       },
       {
         id: 'assurances-compliance',
+        url: '#assurances-compliance',
         label: t('assurancesAndCompliance.title'),
-        defaultCollapsed: true,
-        items: [
-          {
-            id: 'assurances-compliance-fed-citations',
-            url: '#assurances-compliance-fed-citations',
-            label: t('assurancesAndCompliance.citations.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
-          }
-        ]
+        onClick: (evt, id) => this.handleSelectClick({id})
       },
       {
         id: 'executive-summary',
         label: t('executiveSummary.title'),
         defaultCollapsed: true,
         items: [
+          {
+            id: 'exec-summary-overview',
+            url: '#executive-summary',
+            label: 'Overview',
+            onClick: (evt, id) => this.handleSelectClick({id})
+          },
           {
             id: 'executive-summary-overview',
             url: '#executive-summary-overview',
@@ -176,11 +186,6 @@ class Sidebar extends Component {
             onClick: (evt, id) => this.handleSelectClick({id})
           }
         ]
-      },
-      {
-        id: 'certify-submit',
-        label: t('certifyAndSubmit.title'),
-        url: '#certify-submit'
       }
     ];
 
@@ -204,7 +209,6 @@ class Sidebar extends Component {
             <VerticalNav
               selectedId={this.state.selectedId}
               items={links}
-              onLinkClick={this.handleSelectClick}
             />
             <div className="p2 lg-p3">
               <div className="mt3">
