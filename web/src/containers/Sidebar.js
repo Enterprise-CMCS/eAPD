@@ -210,15 +210,13 @@ class Sidebar extends Component {
               selectedId={this.state.selectedId}
               items={links}
             />
-            <div className="p2 lg-p3">
-              <div className="mt3">
-                <Btn onClick={() => saveApdToAPI()}>
-                  {t('sidebar.saveApdButtonText')}
-                </Btn>{' '}
-                <Btn kind="outline" extraCss="bg-white blue">
-                  {t('sidebar.savePdfButtonText')}
-                </Btn>
-              </div>
+            <div className="ds-u-margin-top--2">
+              <Btn onClick={() => saveApdToAPI()}>
+                {t('sidebar.saveApdButtonText')}
+              </Btn>{' '}
+              <Btn kind="outline" extraCss="bg-white blue">
+                {t('sidebar.savePdfButtonText')}
+              </Btn>
             </div>
           </div>
         </aside>
