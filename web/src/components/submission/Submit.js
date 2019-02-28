@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Btn from '../Btn';
 import Icon, { faExclamationTriangle } from '../Icons';
 import { Input } from '../Inputs';
+import Instruction from '../Instruction';
 import { t } from '../../i18n';
 
 class Submit extends Component {
@@ -23,8 +24,7 @@ class Submit extends Component {
       <div className="flex">
         <Icon icon={faExclamationTriangle} color="orange" className="mt-tiny" />
         <div className="ml1">
-          <p className="bold">{t('certifyAndSubmit.certify.draft.header')}</p>
-          <p>{t('certifyAndSubmit.certify.draft.helpText')}</p>
+          <Instruction source="certifyAndSubmit.certify.draft.instruction" />
           <Input
             name="submit_submitter_name"
             label="First and last name"

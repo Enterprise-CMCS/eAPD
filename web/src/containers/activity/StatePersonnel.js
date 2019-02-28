@@ -10,9 +10,9 @@ import {
 import Btn from '../../components/Btn';
 import List from '../../components/CollapsibleList';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
+import Instruction from '../../components/Instruction';
 import Label from '../../components/Label';
 import NoDataMsg from '../../components/NoDataMsg';
-import { SubsectionChunk } from '../../components/Section';
 import { t } from '../../i18n';
 import { formatDec, formatMoney } from '../../util/formats';
 
@@ -117,7 +117,8 @@ class StatePersonnel extends Component {
     const { personnel, years } = this.props;
 
     return (
-      <SubsectionChunk resource="activities.statePersonnel">
+      <Fragment>
+        <Instruction source="activities.statePersonnel.instruction" />
         {personnel.length === 0 ? (
           <NoDataMsg>{t('activities.statePersonnel.noDataNotice')}</NoDataMsg>
         ) : (
@@ -159,7 +160,7 @@ class StatePersonnel extends Component {
         <Btn onClick={this.handleAdd}>
           {t('activities.statePersonnel.addButtonText')}
         </Btn>
-      </SubsectionChunk>
+      </Fragment>
     );
   }
 }

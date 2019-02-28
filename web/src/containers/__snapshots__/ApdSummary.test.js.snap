@@ -46,11 +46,6 @@ ShallowWrapper {
         <div
           className="mb3"
         >
-          <div
-            className="mb-tiny bold"
-          >
-            Choose the federal fiscal year(s) this APD covers.
-          </div>
           <label
             className="mr1"
           >
@@ -88,14 +83,10 @@ ShallowWrapper {
         <div
           className="mb3"
         >
-          <div
-            className="bold"
-          >
-            Program Introduction
-          </div>
-          <HelpText
-            reminder="apd.introduction.reminder"
-            text="apd.introduction.helpText"
+          <Instruction
+            args={null}
+            reverse={false}
+            source="apd.introduction.instruction"
           />
           <RichText
             content="about the program"
@@ -106,14 +97,10 @@ ShallowWrapper {
         <div
           className="mb3"
         >
-          <div
-            className="bold"
-          >
-            HIT Overview
-          </div>
-          <HelpText
-            reminder="apd.hit.reminder"
-            text="apd.hit.helpText"
+          <Instruction
+            args={null}
+            reverse={false}
+            source="apd.hit.instruction"
           />
           <RichText
             content="about hit"
@@ -124,14 +111,10 @@ ShallowWrapper {
         <div
           className="mb3"
         >
-          <div
-            className="bold"
-          >
-            HIE Overview
-          </div>
-          <HelpText
-            reminder="apd.hie.reminder"
-            text="apd.hie.helpText"
+          <Instruction
+            args={null}
+            reverse={false}
+            source="apd.hie.instruction"
           />
           <RichText
             content="about hie"
@@ -140,14 +123,10 @@ ShallowWrapper {
           />
         </div>
         <div>
-          <div
-            className="bold"
-          >
-            MMIS Overview
-          </div>
-          <HelpText
-            reminder="apd.mmis.reminder"
-            text="apd.mmis.helpText"
+          <Instruction
+            args={null}
+            reverse={false}
+            source="apd.mmis.instruction"
           />
           <RichText
             content="about mmis"
@@ -169,11 +148,6 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <div
-              className="mb-tiny bold"
-            >
-              Choose the federal fiscal year(s) this APD covers.
-            </div>
             <label
               className="mr1"
             >
@@ -211,14 +185,10 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <div
-              className="bold"
-            >
-              Program Introduction
-            </div>
-            <HelpText
-              reminder="apd.introduction.reminder"
-              text="apd.introduction.helpText"
+            <Instruction
+              args={null}
+              reverse={false}
+              source="apd.introduction.instruction"
             />
             <RichText
               content="about the program"
@@ -229,14 +199,10 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <div
-              className="bold"
-            >
-              HIT Overview
-            </div>
-            <HelpText
-              reminder="apd.hit.reminder"
-              text="apd.hit.helpText"
+            <Instruction
+              args={null}
+              reverse={false}
+              source="apd.hit.instruction"
             />
             <RichText
               content="about hit"
@@ -247,14 +213,10 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <div
-              className="bold"
-            >
-              HIE Overview
-            </div>
-            <HelpText
-              reminder="apd.hie.reminder"
-              text="apd.hie.helpText"
+            <Instruction
+              args={null}
+              reverse={false}
+              source="apd.hie.instruction"
             />
             <RichText
               content="about hie"
@@ -263,14 +225,10 @@ ShallowWrapper {
             />
           </div>,
           <div>
-            <div
-              className="bold"
-            >
-              MMIS Overview
-            </div>
-            <HelpText
-              reminder="apd.mmis.reminder"
-              text="apd.mmis.helpText"
+            <Instruction
+              args={null}
+              reverse={false}
+              source="apd.mmis.instruction"
             />
             <RichText
               content="about mmis"
@@ -292,63 +250,44 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <div
-                className="mb-tiny bold"
+              <label
+                className="mr1"
               >
-                Choose the federal fiscal year(s) this APD covers.
-              </div>,
-              Array [
-                <label
-                  className="mr1"
-                >
-                  <input
-                    checked={true}
-                    onChange={[Function]}
-                    type="checkbox"
-                    value="1"
-                  />
-                  1
-                </label>,
-                <label
-                  className="mr1"
-                >
-                  <input
-                    checked={true}
-                    onChange={[Function]}
-                    type="checkbox"
-                    value="2"
-                  />
-                  2
-                </label>,
-                <label
-                  className="mr1"
-                >
-                  <input
-                    checked={false}
-                    onChange={[Function]}
-                    type="checkbox"
-                    value="3"
-                  />
-                  3
-                </label>,
-              ],
+                <input
+                  checked={true}
+                  onChange={[Function]}
+                  type="checkbox"
+                  value="1"
+                />
+                1
+              </label>,
+              <label
+                className="mr1"
+              >
+                <input
+                  checked={true}
+                  onChange={[Function]}
+                  type="checkbox"
+                  value="2"
+                />
+                2
+              </label>,
+              <label
+                className="mr1"
+              >
+                <input
+                  checked={false}
+                  onChange={[Function]}
+                  type="checkbox"
+                  value="3"
+                />
+                3
+              </label>,
             ],
             "className": "mb3",
           },
           "ref": null,
           "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Choose the federal fiscal year(s) this APD covers.",
-                "className": "mb-tiny bold",
-              },
-              "ref": null,
-              "rendered": "Choose the federal fiscal year(s) this APD covers.",
-              "type": "div",
-            },
             Object {
               "instance": null,
               "key": "1",
@@ -466,14 +405,10 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <div
-                className="bold"
-              >
-                Program Introduction
-              </div>,
-              <HelpText
-                reminder="apd.introduction.reminder"
-                text="apd.introduction.helpText"
+              <Instruction
+                args={null}
+                reverse={false}
+                source="apd.introduction.instruction"
               />,
               <RichText
                 content="about the program"
@@ -488,22 +423,11 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Program Introduction",
-                "className": "bold",
-              },
-              "ref": null,
-              "rendered": "Program Introduction",
-              "type": "div",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "reminder": "apd.introduction.reminder",
-                "text": "apd.introduction.helpText",
+                "args": null,
+                "reverse": false,
+                "source": "apd.introduction.instruction",
               },
               "ref": null,
               "rendered": null,
@@ -531,14 +455,10 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <div
-                className="bold"
-              >
-                HIT Overview
-              </div>,
-              <HelpText
-                reminder="apd.hit.reminder"
-                text="apd.hit.helpText"
+              <Instruction
+                args={null}
+                reverse={false}
+                source="apd.hit.instruction"
               />,
               <RichText
                 content="about hit"
@@ -553,22 +473,11 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "HIT Overview",
-                "className": "bold",
-              },
-              "ref": null,
-              "rendered": "HIT Overview",
-              "type": "div",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "reminder": "apd.hit.reminder",
-                "text": "apd.hit.helpText",
+                "args": null,
+                "reverse": false,
+                "source": "apd.hit.instruction",
               },
               "ref": null,
               "rendered": null,
@@ -596,14 +505,10 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <div
-                className="bold"
-              >
-                HIE Overview
-              </div>,
-              <HelpText
-                reminder="apd.hie.reminder"
-                text="apd.hie.helpText"
+              <Instruction
+                args={null}
+                reverse={false}
+                source="apd.hie.instruction"
               />,
               <RichText
                 content="about hie"
@@ -618,22 +523,11 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "HIE Overview",
-                "className": "bold",
-              },
-              "ref": null,
-              "rendered": "HIE Overview",
-              "type": "div",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "reminder": "apd.hie.reminder",
-                "text": "apd.hie.helpText",
+                "args": null,
+                "reverse": false,
+                "source": "apd.hie.instruction",
               },
               "ref": null,
               "rendered": null,
@@ -661,14 +555,10 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <div
-                className="bold"
-              >
-                MMIS Overview
-              </div>,
-              <HelpText
-                reminder="apd.mmis.reminder"
-                text="apd.mmis.helpText"
+              <Instruction
+                args={null}
+                reverse={false}
+                source="apd.mmis.instruction"
               />,
               <RichText
                 content="about mmis"
@@ -682,22 +572,11 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "MMIS Overview",
-                "className": "bold",
-              },
-              "ref": null,
-              "rendered": "MMIS Overview",
-              "type": "div",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "reminder": "apd.mmis.reminder",
-                "text": "apd.mmis.helpText",
+                "args": null,
+                "reverse": false,
+                "source": "apd.mmis.instruction",
               },
               "ref": null,
               "rendered": null,
@@ -739,11 +618,6 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <div
-              className="mb-tiny bold"
-            >
-              Choose the federal fiscal year(s) this APD covers.
-            </div>
             <label
               className="mr1"
             >
@@ -781,14 +655,10 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <div
-              className="bold"
-            >
-              Program Introduction
-            </div>
-            <HelpText
-              reminder="apd.introduction.reminder"
-              text="apd.introduction.helpText"
+            <Instruction
+              args={null}
+              reverse={false}
+              source="apd.introduction.instruction"
             />
             <RichText
               content="about the program"
@@ -799,14 +669,10 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <div
-              className="bold"
-            >
-              HIT Overview
-            </div>
-            <HelpText
-              reminder="apd.hit.reminder"
-              text="apd.hit.helpText"
+            <Instruction
+              args={null}
+              reverse={false}
+              source="apd.hit.instruction"
             />
             <RichText
               content="about hit"
@@ -817,14 +683,10 @@ ShallowWrapper {
           <div
             className="mb3"
           >
-            <div
-              className="bold"
-            >
-              HIE Overview
-            </div>
-            <HelpText
-              reminder="apd.hie.reminder"
-              text="apd.hie.helpText"
+            <Instruction
+              args={null}
+              reverse={false}
+              source="apd.hie.instruction"
             />
             <RichText
               content="about hie"
@@ -833,14 +695,10 @@ ShallowWrapper {
             />
           </div>
           <div>
-            <div
-              className="bold"
-            >
-              MMIS Overview
-            </div>
-            <HelpText
-              reminder="apd.mmis.reminder"
-              text="apd.mmis.helpText"
+            <Instruction
+              args={null}
+              reverse={false}
+              source="apd.mmis.instruction"
             />
             <RichText
               content="about mmis"
@@ -862,11 +720,6 @@ ShallowWrapper {
             <div
               className="mb3"
             >
-              <div
-                className="mb-tiny bold"
-              >
-                Choose the federal fiscal year(s) this APD covers.
-              </div>
               <label
                 className="mr1"
               >
@@ -904,14 +757,10 @@ ShallowWrapper {
             <div
               className="mb3"
             >
-              <div
-                className="bold"
-              >
-                Program Introduction
-              </div>
-              <HelpText
-                reminder="apd.introduction.reminder"
-                text="apd.introduction.helpText"
+              <Instruction
+                args={null}
+                reverse={false}
+                source="apd.introduction.instruction"
               />
               <RichText
                 content="about the program"
@@ -922,14 +771,10 @@ ShallowWrapper {
             <div
               className="mb3"
             >
-              <div
-                className="bold"
-              >
-                HIT Overview
-              </div>
-              <HelpText
-                reminder="apd.hit.reminder"
-                text="apd.hit.helpText"
+              <Instruction
+                args={null}
+                reverse={false}
+                source="apd.hit.instruction"
               />
               <RichText
                 content="about hit"
@@ -940,14 +785,10 @@ ShallowWrapper {
             <div
               className="mb3"
             >
-              <div
-                className="bold"
-              >
-                HIE Overview
-              </div>
-              <HelpText
-                reminder="apd.hie.reminder"
-                text="apd.hie.helpText"
+              <Instruction
+                args={null}
+                reverse={false}
+                source="apd.hie.instruction"
               />
               <RichText
                 content="about hie"
@@ -956,14 +797,10 @@ ShallowWrapper {
               />
             </div>,
             <div>
-              <div
-                className="bold"
-              >
-                MMIS Overview
-              </div>
-              <HelpText
-                reminder="apd.mmis.reminder"
-                text="apd.mmis.helpText"
+              <Instruction
+                args={null}
+                reverse={false}
+                source="apd.mmis.instruction"
               />
               <RichText
                 content="about mmis"
@@ -985,63 +822,44 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <div
-                  className="mb-tiny bold"
+                <label
+                  className="mr1"
                 >
-                  Choose the federal fiscal year(s) this APD covers.
-                </div>,
-                Array [
-                  <label
-                    className="mr1"
-                  >
-                    <input
-                      checked={true}
-                      onChange={[Function]}
-                      type="checkbox"
-                      value="1"
-                    />
-                    1
-                  </label>,
-                  <label
-                    className="mr1"
-                  >
-                    <input
-                      checked={true}
-                      onChange={[Function]}
-                      type="checkbox"
-                      value="2"
-                    />
-                    2
-                  </label>,
-                  <label
-                    className="mr1"
-                  >
-                    <input
-                      checked={false}
-                      onChange={[Function]}
-                      type="checkbox"
-                      value="3"
-                    />
-                    3
-                  </label>,
-                ],
+                  <input
+                    checked={true}
+                    onChange={[Function]}
+                    type="checkbox"
+                    value="1"
+                  />
+                  1
+                </label>,
+                <label
+                  className="mr1"
+                >
+                  <input
+                    checked={true}
+                    onChange={[Function]}
+                    type="checkbox"
+                    value="2"
+                  />
+                  2
+                </label>,
+                <label
+                  className="mr1"
+                >
+                  <input
+                    checked={false}
+                    onChange={[Function]}
+                    type="checkbox"
+                    value="3"
+                  />
+                  3
+                </label>,
               ],
               "className": "mb3",
             },
             "ref": null,
             "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Choose the federal fiscal year(s) this APD covers.",
-                  "className": "mb-tiny bold",
-                },
-                "ref": null,
-                "rendered": "Choose the federal fiscal year(s) this APD covers.",
-                "type": "div",
-              },
               Object {
                 "instance": null,
                 "key": "1",
@@ -1159,14 +977,10 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <div
-                  className="bold"
-                >
-                  Program Introduction
-                </div>,
-                <HelpText
-                  reminder="apd.introduction.reminder"
-                  text="apd.introduction.helpText"
+                <Instruction
+                  args={null}
+                  reverse={false}
+                  source="apd.introduction.instruction"
                 />,
                 <RichText
                   content="about the program"
@@ -1181,22 +995,11 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Program Introduction",
-                  "className": "bold",
-                },
-                "ref": null,
-                "rendered": "Program Introduction",
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
                 "nodeType": "function",
                 "props": Object {
-                  "reminder": "apd.introduction.reminder",
-                  "text": "apd.introduction.helpText",
+                  "args": null,
+                  "reverse": false,
+                  "source": "apd.introduction.instruction",
                 },
                 "ref": null,
                 "rendered": null,
@@ -1224,14 +1027,10 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <div
-                  className="bold"
-                >
-                  HIT Overview
-                </div>,
-                <HelpText
-                  reminder="apd.hit.reminder"
-                  text="apd.hit.helpText"
+                <Instruction
+                  args={null}
+                  reverse={false}
+                  source="apd.hit.instruction"
                 />,
                 <RichText
                   content="about hit"
@@ -1246,22 +1045,11 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "HIT Overview",
-                  "className": "bold",
-                },
-                "ref": null,
-                "rendered": "HIT Overview",
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
                 "nodeType": "function",
                 "props": Object {
-                  "reminder": "apd.hit.reminder",
-                  "text": "apd.hit.helpText",
+                  "args": null,
+                  "reverse": false,
+                  "source": "apd.hit.instruction",
                 },
                 "ref": null,
                 "rendered": null,
@@ -1289,14 +1077,10 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <div
-                  className="bold"
-                >
-                  HIE Overview
-                </div>,
-                <HelpText
-                  reminder="apd.hie.reminder"
-                  text="apd.hie.helpText"
+                <Instruction
+                  args={null}
+                  reverse={false}
+                  source="apd.hie.instruction"
                 />,
                 <RichText
                   content="about hie"
@@ -1311,22 +1095,11 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "HIE Overview",
-                  "className": "bold",
-                },
-                "ref": null,
-                "rendered": "HIE Overview",
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
                 "nodeType": "function",
                 "props": Object {
-                  "reminder": "apd.hie.reminder",
-                  "text": "apd.hie.helpText",
+                  "args": null,
+                  "reverse": false,
+                  "source": "apd.hie.instruction",
                 },
                 "ref": null,
                 "rendered": null,
@@ -1354,14 +1127,10 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <div
-                  className="bold"
-                >
-                  MMIS Overview
-                </div>,
-                <HelpText
-                  reminder="apd.mmis.reminder"
-                  text="apd.mmis.helpText"
+                <Instruction
+                  args={null}
+                  reverse={false}
+                  source="apd.mmis.instruction"
                 />,
                 <RichText
                   content="about mmis"
@@ -1375,22 +1144,11 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "MMIS Overview",
-                  "className": "bold",
-                },
-                "ref": null,
-                "rendered": "MMIS Overview",
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
                 "nodeType": "function",
                 "props": Object {
-                  "reminder": "apd.mmis.reminder",
-                  "text": "apd.mmis.helpText",
+                  "args": null,
+                  "reverse": false,
+                  "source": "apd.mmis.instruction",
                 },
                 "ref": null,
                 "rendered": null,

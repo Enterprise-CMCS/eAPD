@@ -5,17 +5,29 @@ Array [
   Object {
     "email": "all-permissions-and-state",
     "id": 2000,
-    "state_id": "mn",
+    "name": null,
+    "phone": null,
+    "position": null,
+    "role": "admin",
+    "state": "mn",
   },
   Object {
     "email": "all-permissions-no-state",
     "id": 2001,
-    "state_id": null,
+    "name": null,
+    "phone": null,
+    "position": null,
+    "role": "admin",
+    "state": null,
   },
   Object {
     "email": "no-permissions",
     "id": 2010,
-    "state_id": null,
+    "name": null,
+    "phone": null,
+    "position": null,
+    "role": null,
+    "state": null,
   },
 ]
 `;
@@ -29,6 +41,7 @@ Object {
   "name": null,
   "phone": null,
   "position": null,
-  "state_id": "mn",
+  "role": "admin",
+  "state": "mn",
 }
 `;
