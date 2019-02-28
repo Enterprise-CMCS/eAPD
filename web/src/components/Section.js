@@ -13,7 +13,7 @@ SectionTitle.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const SectionDesc = ({ children }) => <p className="mb4 text-xl">{children}</p>;
+const SectionDesc = ({ children }) => <p className="mb4 text-l">{children}</p>;
 
 SectionDesc.propTypes = {
   children: PropTypes.node.isRequired
