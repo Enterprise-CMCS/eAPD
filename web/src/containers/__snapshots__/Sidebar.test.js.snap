@@ -16,7 +16,6 @@ ShallowWrapper {
         },
       ]
     }
-    hash=""
     place={
       Object {
         "id": "place id",
@@ -82,7 +81,6 @@ ShallowWrapper {
                       "id": "apd-state-profile-office",
                       "label": "State Medicaid Director and Medicaid Office Address",
                       "onClick": [Function],
-                      "selected": false,
                       "url": "#apd-state-profile-office",
                     },
                     Object {
@@ -298,7 +296,6 @@ ShallowWrapper {
                       "id": "apd-state-profile-office",
                       "label": "State Medicaid Director and Medicaid Office Address",
                       "onClick": [Function],
-                      "selected": false,
                       "url": "#apd-state-profile-office",
                     },
                     Object {
@@ -511,7 +508,6 @@ ShallowWrapper {
                         "id": "apd-state-profile-office",
                         "label": "State Medicaid Director and Medicaid Office Address",
                         "onClick": [Function],
-                        "selected": false,
                         "url": "#apd-state-profile-office",
                       },
                       Object {
@@ -777,7 +773,6 @@ ShallowWrapper {
                       "id": "apd-state-profile-office",
                       "label": "State Medicaid Director and Medicaid Office Address",
                       "onClick": [Function],
-                      "selected": false,
                       "url": "#apd-state-profile-office",
                     },
                     Object {
@@ -1042,7 +1037,6 @@ ShallowWrapper {
                         "id": "apd-state-profile-office",
                         "label": "State Medicaid Director and Medicaid Office Address",
                         "onClick": [Function],
-                        "selected": false,
                         "url": "#apd-state-profile-office",
                       },
                       Object {
@@ -1258,7 +1252,6 @@ ShallowWrapper {
                         "id": "apd-state-profile-office",
                         "label": "State Medicaid Director and Medicaid Office Address",
                         "onClick": [Function],
-                        "selected": false,
                         "url": "#apd-state-profile-office",
                       },
                       Object {
@@ -1471,7 +1464,6 @@ ShallowWrapper {
                           "id": "apd-state-profile-office",
                           "label": "State Medicaid Director and Medicaid Office Address",
                           "onClick": [Function],
-                          "selected": false,
                           "url": "#apd-state-profile-office",
                         },
                         Object {
@@ -1737,7 +1729,6 @@ ShallowWrapper {
                         "id": "apd-state-profile-office",
                         "label": "State Medicaid Director and Medicaid Office Address",
                         "onClick": [Function],
-                        "selected": false,
                         "url": "#apd-state-profile-office",
                       },
                       Object {
