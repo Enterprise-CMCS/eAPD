@@ -108,7 +108,7 @@ export const fetchApd = ({
     .get(url)
     .then(async req => {
       const apd = Array.isArray(req.data) ? req.data : null;
-      dispatch(receiveApd(apd));
+      dispatch(receiveApd(apd.filter(({ status }) => status !== 'archived')));
 
       const {
         apd: { selectAPDOnLoad }
