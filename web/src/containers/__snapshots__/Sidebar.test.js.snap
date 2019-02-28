@@ -46,7 +46,7 @@ ShallowWrapper {
           className="xs-hide sm-hide"
         >
           <div
-            className="flex items-center"
+            className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
           >
             <img
               alt="place name"
@@ -262,7 +262,7 @@ ShallowWrapper {
           className="xs-hide sm-hide"
         >
           <div
-            className="flex items-center"
+            className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
           >
             <img
               alt="place name"
@@ -475,7 +475,7 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <div
-              className="flex items-center"
+              className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
             >
               <img
                 alt="place name"
@@ -704,7 +704,7 @@ ShallowWrapper {
                   2018 HITECH APD
                 </h1>,
               ],
-              "className": "flex items-center",
+              "className": "flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4",
             },
             "ref": null,
             "rendered": Array [
@@ -1006,7 +1006,7 @@ ShallowWrapper {
             className="xs-hide sm-hide"
           >
             <div
-              className="flex items-center"
+              className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
             >
               <img
                 alt="place name"
@@ -1222,7 +1222,7 @@ ShallowWrapper {
             className="xs-hide sm-hide"
           >
             <div
-              className="flex items-center"
+              className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
             >
               <img
                 alt="place name"
@@ -1435,7 +1435,7 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <div
-                className="flex items-center"
+                className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
               >
                 <img
                   alt="place name"
@@ -1664,7 +1664,7 @@ ShallowWrapper {
                     2018 HITECH APD
                   </h1>,
                 ],
-                "className": "flex items-center",
+                "className": "flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4",
               },
               "ref": null,
               "rendered": Array [
