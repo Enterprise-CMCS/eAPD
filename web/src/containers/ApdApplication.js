@@ -17,7 +17,7 @@ import StateProfile from '../components/ApdStateProfile';
 import ProposedBudget from '../components/ProposedBudget';
 
 const unsavedPrompt =
-  'You have unsaved changes to your APD. Are you sure you want to change pages?';
+  'You have unsaved changes to your APD. Do you want to leave this page without saving?';
 
 class ApdApplication extends Component {
   componentDidMount() {
