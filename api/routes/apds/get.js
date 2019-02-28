@@ -19,7 +19,7 @@ module.exports = (app, ApdModel = defaultApdModel) => {
       const whereCondits = { state_id: stateId };
       const apds = (await ApdModel.where(whereCondits).fetchAll())
         .toJSON()
-        .map(({ id, years }) => ({ id, years }));
+        .map(({ id, status, years }) => ({ id, status, years }));
 
       logger.silly(req, `got apds:`);
       logger.silly(req, apds);
