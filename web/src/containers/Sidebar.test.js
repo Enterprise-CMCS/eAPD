@@ -16,7 +16,6 @@ describe('Sidebar component', () => {
       { anchor: '#key2', key: 'key 2' }
     ],
     place: { id: 'place id', name: 'place name' },
-    hash: '',
     saveApdToAPI: sinon.spy(),
   };
 
@@ -40,7 +39,6 @@ describe('Sidebar component', () => {
         byKey: { key1: { name: 'activity 1' }, key2: { name: 'activity 2' } },
         allKeys: ['key1', 'key2']
       },
-      router: { location: { hash: '#moop moop' } },
     };
 
     expect(mapStateToProps(state)).toEqual({
@@ -55,8 +53,7 @@ describe('Sidebar component', () => {
           anchor: 'activity-key2',
           name: 'activity 2'
         }
-      ],
-      hash: 'moop moop'
+      ]
     });
   });
 
