@@ -618,7 +618,7 @@ ShallowWrapper {
           className="mb3"
         >
           <h3>
-            Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports.
+            Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports
           </h3>
           <div
             className="mt2"
@@ -761,7 +761,7 @@ ShallowWrapper {
           className="mb3"
         >
           <h3>
-            Security and interface requirements to be employed for all state HIT systems.
+            Security and interface requirements to be employed for all state HIT systems
           </h3>
           <div
             className="mt2"
@@ -1200,7 +1200,7 @@ ShallowWrapper {
             className="mb3"
           >
             <h3>
-              Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports.
+              Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports
             </h3>
             <div
               className="mt2"
@@ -1343,7 +1343,7 @@ ShallowWrapper {
             className="mb3"
           >
             <h3>
-              Security and interface requirements to be employed for all state HIT systems.
+              Security and interface requirements to be employed for all state HIT systems
             </h3>
             <div
               className="mt2"
@@ -3601,7 +3601,7 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <h3>
-                Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports.
+                Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports
               </h3>,
               Array [
                 <div
@@ -3751,10 +3751,10 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports.",
+                "children": "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports",
               },
               "ref": null,
-              "rendered": "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports.",
+              "rendered": "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports",
               "type": "h3",
             },
             Object {
@@ -4427,7 +4427,7 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <h3>
-                Security and interface requirements to be employed for all state HIT systems.
+                Security and interface requirements to be employed for all state HIT systems
               </h3>,
               Array [
                 <div
@@ -4475,10 +4475,10 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Security and interface requirements to be employed for all state HIT systems.",
+                "children": "Security and interface requirements to be employed for all state HIT systems",
               },
               "ref": null,
-              "rendered": "Security and interface requirements to be employed for all state HIT systems.",
+              "rendered": "Security and interface requirements to be employed for all state HIT systems",
               "type": "h3",
             },
             Object {
@@ -5057,7 +5057,7 @@ ShallowWrapper {
             className="mb3"
           >
             <h3>
-              Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports.
+              Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports
             </h3>
             <div
               className="mt2"
@@ -5200,7 +5200,7 @@ ShallowWrapper {
             className="mb3"
           >
             <h3>
-              Security and interface requirements to be employed for all state HIT systems.
+              Security and interface requirements to be employed for all state HIT systems
             </h3>
             <div
               className="mt2"
@@ -5639,7 +5639,7 @@ ShallowWrapper {
               className="mb3"
             >
               <h3>
-                Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports.
+                Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports
               </h3>
               <div
                 className="mt2"
@@ -5782,7 +5782,7 @@ ShallowWrapper {
               className="mb3"
             >
               <h3>
-                Security and interface requirements to be employed for all state HIT systems.
+                Security and interface requirements to be employed for all state HIT systems
               </h3>
               <div
                 className="mt2"
@@ -8040,7 +8040,7 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <h3>
-                  Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports.
+                  Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports
                 </h3>,
                 Array [
                   <div
@@ -8190,10 +8190,10 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports.",
+                  "children": "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports",
                 },
                 "ref": null,
-                "rendered": "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports.",
+                "rendered": "Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports",
                 "type": "h3",
               },
               Object {
@@ -8866,7 +8866,7 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <h3>
-                  Security and interface requirements to be employed for all state HIT systems.
+                  Security and interface requirements to be employed for all state HIT systems
                 </h3>,
                 Array [
                   <div
@@ -8914,10 +8914,10 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": "Security and interface requirements to be employed for all state HIT systems.",
+                  "children": "Security and interface requirements to be employed for all state HIT systems",
                 },
                 "ref": null,
-                "rendered": "Security and interface requirements to be employed for all state HIT systems.",
+                "rendered": "Security and interface requirements to be employed for all state HIT systems",
                 "type": "h3",
               },
               Object {

@@ -11,7 +11,6 @@ describe('root reducer', () => {
       'budget',
       'dirty',
       'notification',
-      'sidebar',
       'user',
       'router'
     ]);
