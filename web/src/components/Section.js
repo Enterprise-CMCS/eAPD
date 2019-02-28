@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import Collapsible from './Collapsible';
-import HelpText from './HelpText';
+import Instruction from './Instruction';
 import { t } from '../i18n';
 
 const SectionTitle = ({ children }) => (
@@ -45,36 +45,13 @@ Section.defaultProps = {
   resource: null
 };
 
-const SubsectionChunk = ({ children, resource }) => {
-  const subheader = t([resource, 'subheader'], { defaultValue: false });
-
-  return (
-    <Fragment>
-      {subheader && <div className="mb-tiny bold">{subheader}</div>}
-      <HelpText
-        text={`${resource}.helpText`}
-        reminder={`${resource}.reminder`}
-      />
-      {children}
-    </Fragment>
-  );
-};
-
-SubsectionChunk.propTypes = {
-  children: PropTypes.node.isRequired,
-  resource: PropTypes.string
-};
-
-SubsectionChunk.defaultProps = {
-  resource: null
-};
-
 const Subsection = ({ children, id, nested, open, resource }) => {
   const title = t([resource, 'title'], { defaultValue: '' });
 
   return (
     <Collapsible id={id} title={title} open={open} nested={nested}>
-      <SubsectionChunk resource={resource}>{children}</SubsectionChunk>
+      <Instruction source={`${resource}.instruction`} />
+      {children}
     </Collapsible>
   );
 };
@@ -95,4 +72,4 @@ Subsection.defaultProps = {
 };
 
 export default Section;
-export { Section, SectionDesc, SectionTitle, Subsection, SubsectionChunk };
+export { Section, SectionDesc, SectionTitle, Subsection };

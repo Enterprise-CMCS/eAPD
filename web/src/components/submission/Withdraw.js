@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import HelpText from '../HelpText';
 import Btn from '../Btn';
+import Instruction from '../Instruction';
 import { t } from '../../i18n';
 
 const scrollToTop = () => {
@@ -36,8 +36,7 @@ class Withdraw extends Component {
     if (status !== 'draft') {
       return (
         <div className="ml3 border-top mt3 pt3">
-          <p className="bold">{t('certifyAndSubmit.withdraw.prompt.header')}</p>
-          <HelpText text="certifyAndSubmit.withdraw.prompt.helpText" />
+          <Instruction source="certifyAndSubmit.withdraw.prompt.instruction" />
           <Btn extraCss="bg-gray" onClick={this.withdraw}>
             {t('certifyAndSubmit.withdraw.prompt.buttonText')}
           </Btn>
@@ -46,10 +45,7 @@ class Withdraw extends Component {
     } else if (this.state.showWithdrawlConfirmation && !dirty) {
       return (
         <div className="ml3">
-          <p className="bold">
-            {t('certifyAndSubmit.withdraw.confirmation.header')}
-          </p>
-          <HelpText text="certifyAndSubmit.withdraw.confirmation.helpText" />
+          <Instruction source="certifyAndSubmit.withdraw.confirmation.instruction" />
           <p className="right-align">
             <Btn onClick={scrollToTop}>
               {t('certifyAndSubmit.withdraw.confirmation.buttonText')}

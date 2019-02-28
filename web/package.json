@@ -7,7 +7,7 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "build-storybook -c .storybook -o .storybook-dist/public",
     "make-state-icons": "babel-node scripts/stateIcons.js",
-    "scaffold": "mkdir -p dist && cp src/index.html dist/ && cp ../Staticfile dist/ && cp -r src/static dist/",
+    "scaffold": "mkdir -p dist && cp src/index.html dist/ && cp -r src/static dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --config webpack.config.dev.js",
@@ -49,7 +49,7 @@
   },
   "homepage": "https://github.com/18F/cms-hitech-apd#readme",
   "dependencies": {
-    "@cmsgov/design-system-core": "^1.30.3",
+    "@cmsgov/design-system-core": "^1.31.1",
     "@cmsgov/design-system-layout": "^1.30.3",
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-regular": "^5.0.13",

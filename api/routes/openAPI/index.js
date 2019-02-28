@@ -736,7 +736,7 @@ module.exports = {
       sessionCookie: {
         type: 'apiKey',
         in: 'cookie',
-        name: 'session'
+        name: 'token'
       }
     }
   }

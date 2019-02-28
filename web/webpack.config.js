@@ -59,7 +59,7 @@ const config = {
       },
       {
         test: /\.(woff2?|ttf|otf|eot|svg)$/,
-        loader: 'file-loader',
+        loader: 'file-loader'
       },
       {
         test: /\.yaml$/,

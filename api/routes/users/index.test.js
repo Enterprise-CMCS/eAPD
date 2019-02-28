@@ -5,14 +5,15 @@ const usersIndex = require('./index');
 
 tap.test('users endpoint setup', async endpointTest => {
   const app = {};
-  const delEndpoint = sinon.spy();
+  const deleteEndpoint = sinon.spy();
   const getEndpoint = sinon.spy();
   const postEndpoint = sinon.spy();
+  const putEndpoint = sinon.spy();
 
-  usersIndex(app, delEndpoint, getEndpoint, postEndpoint);
+  usersIndex(app, { deleteEndpoint, getEndpoint, postEndpoint, putEndpoint });
 
   endpointTest.ok(
-    delEndpoint.calledWith(app),
+    deleteEndpoint.calledWith(app),
     'users DELETE endpoint is setup with the app'
   );
   endpointTest.ok(
@@ -22,5 +23,9 @@ tap.test('users endpoint setup', async endpointTest => {
   endpointTest.ok(
     postEndpoint.calledWith(app),
     'users POST endpoint is setup with the app'
+  );
+  endpointTest.ok(
+    putEndpoint.calledWith(app),
+    'users PUT endpoint is setup with the app'
   );
 });
