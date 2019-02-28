@@ -1,10 +1,10 @@
 title: Private Contractor Costs
-subheader: >-
-  Outline contracts by contract or
-  vendor name.
-reminder: >-
-  Itemize per contract with federal fiscal year (FFY) costs. If vendor or contract
-  name is unknown, generalize by resource name (e.g. computer resources/TBD)
+instruction:
+  short: >-
+    Outline contracts by contract or vendor name.
+  helpText: >-
+    Itemize federal fiscal year (FFY) costs per contract. If the vendor or contractor
+    name is unknown, generalize by resource name. (For example, computer resources/TBD)
 noDataNotice: There are no contracts assigned to this activity.
 delete:
   text: ✗

@@ -10,8 +10,9 @@ import {
 import Btn from '../../components/Btn';
 import CollapsibleList from '../../components/CollapsibleList';
 import { RichText } from '../../components/Inputs';
+import Instruction from '../../components/Instruction';
 import NoDataMsg from '../../components/NoDataMsg';
-import { Subsection, SubsectionChunk } from '../../components/Section';
+import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
 const plaintext = txt => {
@@ -30,25 +31,23 @@ const GoalForm = ({ goal, idx, handleChange, handleDelete }) => (
       ✗
     </Btn>
 
-    <SubsectionChunk resource="activities.goals.goal">
-      <div className="mb3">
-        {t('activities.goals.goal.title', { number: idx + 1 })}
-        <RichText
-          content={goal.description}
-          onSync={handleChange(idx, 'description')}
-        />
-      </div>
-    </SubsectionChunk>
+    <Instruction source="activities.goals.goal.instruction" />
+    <div className="mb3">
+      {t('activities.goals.goal.title', { number: idx + 1 })}
+      <RichText
+        content={goal.description}
+        onSync={handleChange(idx, 'description')}
+      />
+    </div>
 
-    <SubsectionChunk resource="activities.goals.objective">
-      <div className="mb3">
-        {t('activities.goals.objective.title')}
-        <RichText
-          content={goal.objective}
-          onSync={handleChange(idx, 'objective')}
-        />
-      </div>
-    </SubsectionChunk>
+    <Instruction source="activities.goals.objective.instruction" />
+    <div className="mb3">
+      {t('activities.goals.objective.title')}
+      <RichText
+        content={goal.objective}
+        onSync={handleChange(idx, 'objective')}
+      />
+    </div>
   </div>
 );
 
@@ -140,4 +139,7 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Goals);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Goals);
