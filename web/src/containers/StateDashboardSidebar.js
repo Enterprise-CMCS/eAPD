@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
+
 import { t } from '../i18n';
 import { selectApd } from '../actions/apd';
-import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
 
 class Sidebar extends Component {
   pickApd = id => () => this.props.selectApd(id);

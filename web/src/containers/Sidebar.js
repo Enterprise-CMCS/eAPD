@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
+
 import { t } from '../i18n';
 import { saveApd } from '../actions/apd';
 import Btn from '../components/Btn';
-import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
 
 class Sidebar extends Component {
   state = { selectedId: 'apd-state-profile-overview' };
@@ -13,7 +14,7 @@ class Sidebar extends Component {
   handleSelectClick = (id) => this.setState({ selectedId: id });
 
   createActivityItems = (activities) => {
-    let activityItems = activities.map((a, i) => ({
+    const activityItems = activities.map((a, i) => ({
       id: a.key,
       url: `#${a.anchor}`,
       label: t(`sidebar.titles.activity-${a.name ? 'set' : 'unset'}`, {
@@ -49,11 +50,6 @@ class Sidebar extends Component {
 
     const activityItems = this.createActivityItems(activities);
 
-
-    const isSelected = (id) => {
-      return id === this.state.selectedId;
-    };
-
     const links = [
       {
         id: 'apd-state-profile',
@@ -70,7 +66,6 @@ class Sidebar extends Component {
             id: 'apd-state-profile-office',
             url: '#apd-state-profile-office',
             label: t('apd.stateProfile.directorAndAddress.title'),
-            selected: isSelected('apd-state-profile-office'),
             onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
@@ -227,21 +222,17 @@ class Sidebar extends Component {
 Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
   place: PropTypes.object.isRequired,
-  hash: PropTypes.string.isRequired,
   saveApdToAPI: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({
   activities: { byKey, allKeys },
-  sidebar,
-  router
 }) => ({
   activities: allKeys.map(key => ({
     key,
     anchor: `activity-${key}`,
     name: byKey[key].name
   })),
-  hash: router.location.hash.slice(1) || ''
 });
 
 const mapDispatchToProps = {
