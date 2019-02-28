@@ -8,7 +8,6 @@ import auth from './auth';
 import budget from './budget';
 import dirty from './dirty';
 import notification from './notification';
-import sidebar from './sidebar';
 import user from './user';
 
 const rootReducer = combineReducers({
@@ -19,7 +18,6 @@ const rootReducer = combineReducers({
   budget,
   dirty,
   notification,
-  sidebar,
   user,
   router: routerReducer
 });
