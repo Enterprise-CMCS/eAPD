@@ -10,7 +10,7 @@ import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/
 class Sidebar extends Component {
   state = { selectedId: 'apd-state-profile-overview' };
 
-  handleSelectClick = (id) => this.setState({ selectedId: id.id });
+  handleSelectClick = (id) => this.setState({ selectedId: id });
 
   createActivityItems = (activities) => {
     let activityItems = activities.map((a, i) => ({
@@ -20,20 +20,20 @@ class Sidebar extends Component {
         number: i + 1,
         name: a.name
       }),
-      onClick: (evt, id) => this.handleSelectClick({id})
+      onClick: (evt, id) => this.handleSelectClick(id)
     }));
 
     activityItems.splice(0, 0, {
         id: 'activities-overview',
         url: '#activities',
         label: 'Overview',
-        onClick: (evt, id) => this.handleSelectClick({id})
+        onClick: (evt, id) => this.handleSelectClick(id)
       },
       {
         id: 'activities-list',
         url: '#activities-list',
         label: t('activities.list.title'),
-        onClick: (evt, id) => this.handleSelectClick({id})
+        onClick: (evt, id) => this.handleSelectClick(id)
       }
     );
 
@@ -64,20 +64,20 @@ class Sidebar extends Component {
             id: 'apd-state-profile-overview',
             url: '#apd-state-profile',
             label: 'Overview',
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
             id: 'apd-state-profile-office',
             url: '#apd-state-profile-office',
             label: t('apd.stateProfile.directorAndAddress.title'),
             selected: isSelected('apd-state-profile-office'),
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
             id: 'apd-state-profile-key-personnel',
             url: '#apd-state-profile-key-personnel',
             label: t('apd.stateProfile.keyPersonnel.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           }
         ]
       },
@@ -85,7 +85,7 @@ class Sidebar extends Component {
         id: 'apd-summary',
         url: '#apd-summary',
         label: t('apd.title'),
-        onClick: (evt, id) => this.handleSelectClick({id})
+        onClick: (evt, id) => this.handleSelectClick(id)
       },
       {
         id: 'prev-activities',
@@ -96,19 +96,19 @@ class Sidebar extends Component {
             id: 'prev-activities-overview',
             url: '#prev-activities',
             label: 'Overview',
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
             id: 'prev-activities-outline',
             url: '#prev-activities-outline',
             label: t('previousActivities.outline.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
             id: 'prev-activities-table',
             url: '#prev-activities-table',
             label: t('previousActivities.actualExpenses.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           }
         ]
       },
@@ -122,7 +122,7 @@ class Sidebar extends Component {
         id: 'schedule-summary',
         url: '#schedule-summary',
         label: t('scheduleSummary.title'),
-        onClick: (evt, id) => this.handleSelectClick({id})
+        onClick: (evt, id) => this.handleSelectClick(id)
       },
       {
         id: 'budget',
@@ -133,25 +133,25 @@ class Sidebar extends Component {
             id: 'budget-overview',
             url: '#budget',
             label: 'Overview',
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
             id: 'budget-summary-table',
             url: '#budget-summary-table',
             label: t('proposedBudget.summaryBudget.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
             id: 'budget-federal-by-quarter',
             url: '#budget-federal-by-quarter',
             label: t('proposedBudget.quarterlyBudget.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
             id: 'budget-incentive-by-quarter',
             url: '#budget-incentive-by-quarter',
             label: t('proposedBudget.paymentsByFFYQuarter.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           }
         ]
       },
@@ -159,7 +159,7 @@ class Sidebar extends Component {
         id: 'assurances-compliance',
         url: '#assurances-compliance',
         label: t('assurancesAndCompliance.title'),
-        onClick: (evt, id) => this.handleSelectClick({id})
+        onClick: (evt, id) => this.handleSelectClick(id)
       },
       {
         id: 'executive-summary',
@@ -170,19 +170,19 @@ class Sidebar extends Component {
             id: 'exec-summary-overview',
             url: '#executive-summary',
             label: 'Overview',
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
             id: 'executive-summary-overview',
             url: '#executive-summary-overview',
             label: t('executiveSummary.summary.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
             id: 'executive-summary-budget-table',
             url: '#executive-summary-budget-table',
             label: t('executiveSummary.budgetTable.title'),
-            onClick: (evt, id) => this.handleSelectClick({id})
+            onClick: (evt, id) => this.handleSelectClick(id)
           }
         ]
       }
