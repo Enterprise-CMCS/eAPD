@@ -40,7 +40,7 @@ class Sidebar extends Component {
                     {
                       id: `${apd.id}`,
                       label: `${apd.years.join(', ')} ${place.id.toUpperCase()} APD`,
-                      url: 'javascript:void(0);',
+                      url: 'javascript:void(0);', // eslint-disable-line no-script-url
                       onClick: this.pickApd(apd.id)
                     }
                   )),
