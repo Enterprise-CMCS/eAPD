@@ -2,11 +2,11 @@
 // variables if not defined
 require('./env');
 
-const logger = require('./logger')('main');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const uuid = require('uuid/v1');
+const logger = require('./logger')('main');
 require('./db').setup();
 const auth = require('./auth');
 const routes = require('./routes');
