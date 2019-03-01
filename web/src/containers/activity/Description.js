@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import { updateActivity as updateActivityAction } from '../../actions/activities';
 import { RichText, Textarea } from '../../components/Inputs';
-import { Subsection, SubsectionChunk } from '../../components/Section';
+import Instruction from '../../components/Instruction';
+import { Subsection } from '../../components/Section';
 
 const Description = props => {
   const { activity, updateActivity } = props;
@@ -16,47 +17,43 @@ const Description = props => {
 
   return (
     <Subsection resource="activities.overview" nested>
-      <SubsectionChunk resource="activities.overview.summary">
-        <div className="mb3">
-          <Textarea
-            name={`activity-summary-${activity.key}`}
-            label="activity summary"
-            hideLabel
-            className="m0 textarea textarea-sm"
-            rows="3"
-            maxLength="280"
-            spellCheck="true"
-            value={summary}
-            onChange={e =>
-              updateActivity(activity.key, { summary: e.target.value })
-            }
-          />
-        </div>
-      </SubsectionChunk>
-      <SubsectionChunk
-        resource={
-          activity.fundingSource === 'HIE'
-            ? 'activities.overview.detail.hie'
-            : 'activities.overview.detail.standard'
-        }
-      >
-        <div className="mb3">
-          <RichText
-            content={description}
-            onSync={sync('description')}
-            editorClassName="rte-textarea-l"
-          />
-        </div>
-      </SubsectionChunk>
-      <SubsectionChunk resource="activities.overview.alternatives">
-        <div className="mb3">
-          <RichText
-            content={alternatives}
-            onSync={sync('alternatives')}
-            editorClassName="rte-textarea-l"
-          />
-        </div>
-      </SubsectionChunk>
+      <div className="mb3">
+        <Textarea
+          name={`activity-summary-${activity.key}`}
+          label="activity summary"
+          hideLabel
+          className="m0 textarea textarea-sm"
+          rows="3"
+          maxLength="280"
+          spellCheck="true"
+          value={summary}
+          onChange={e =>
+            updateActivity(activity.key, { summary: e.target.value })
+          }
+        />
+      </div>
+
+      <Instruction
+        source={`activities.overview.detail.${
+          activity.fundingSource === 'HIE' ? 'hie' : 'standard'
+        }.instruction`}
+      />
+      <div className="mb3">
+        <RichText
+          content={description}
+          onSync={sync('description')}
+          editorClassName="rte-textarea-l"
+        />
+      </div>
+
+      <Instruction source="activities.overview.alternatives.instruction" />
+      <div className="mb3">
+        <RichText
+          content={alternatives}
+          onSync={sync('alternatives')}
+          editorClassName="rte-textarea-l"
+        />
+      </div>
     </Subsection>
   );
 };
@@ -74,4 +71,7 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Description);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Description);
