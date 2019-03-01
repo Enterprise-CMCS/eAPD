@@ -35,6 +35,10 @@ ShallowWrapper {
         />,
         <Connect(PrivateRoute)
           component={[Function]}
+          path="/logout"
+        />,
+        <Connect(PrivateRoute)
+          component={[Function]}
           path="/admin/create-account"
         />,
         <Connect(PrivateRoute)
@@ -81,6 +85,18 @@ ShallowWrapper {
         "props": Object {
           "component": [Function],
           "path": "/login",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "/logout",
+        "nodeType": "class",
+        "props": Object {
+          "component": [Function],
+          "path": "/logout",
         },
         "ref": null,
         "rendered": null,
@@ -147,6 +163,10 @@ ShallowWrapper {
           />,
           <Connect(PrivateRoute)
             component={[Function]}
+            path="/logout"
+          />,
+          <Connect(PrivateRoute)
+            component={[Function]}
             path="/admin/create-account"
           />,
           <Connect(PrivateRoute)
@@ -193,6 +213,18 @@ ShallowWrapper {
           "props": Object {
             "component": [Function],
             "path": "/login",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "/logout",
+          "nodeType": "class",
+          "props": Object {
+            "component": [Function],
+            "path": "/logout",
           },
           "ref": null,
           "rendered": null,
