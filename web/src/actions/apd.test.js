@@ -162,6 +162,34 @@ describe('apd actions', () => {
     });
   });
 
+  describe('delete an APD', () => {
+    it('should handle an API error', () => {
+      const store = mockStore();
+      fetchMock.onDelete('/apds/apd-id').reply(400);
+
+      store.dispatch(actions.deleteApd('apd-id')).then(() => {
+        expect(store.getActions()).toEqual([
+          { type: actions.DELETE_APD_REQUEST },
+          { type: actions.DELETE_APD_FAILURE }
+        ]);
+      });
+    });
+
+    it('should handle an API success', () => {
+      const store = mockStore();
+      const fetch = sinon.stub().returns({ type: 'apd fetch' });
+      fetchMock.onDelete('/apds/apd-id').reply(200);
+
+      store.dispatch(actions.deleteApd('apd-id'), { fetch }).then(() => {
+        expect(store.getActions()).toEqual([
+          { type: actions.DELETE_APD_REQUEST },
+          { type: actions.DELETE_APD_SUCCESS },
+          { type: 'apd fetch' }
+        ]);
+      });
+    });
+  });
+
   it('updateBudget should create UPDATE_BUDGET action', () => {
     const state = { this: 'is', my: 'state ' };
     const store = mockStore(state);

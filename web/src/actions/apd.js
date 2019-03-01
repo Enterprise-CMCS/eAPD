@@ -11,6 +11,9 @@ export const CREATE_APD = 'CREATE_APD';
 export const CREATE_APD_REQUEST = 'CREATE_APD_REQUEST';
 export const CREATE_APD_SUCCESS = 'CREATE_APD_SUCCESS';
 export const CREATE_APD_FAILURE = 'CREATE_APD_FAILURE';
+export const DELETE_APD_REQUEST = Symbol('delete apd : request');
+export const DELETE_APD_SUCCESS = Symbol('delete apd : success');
+export const DELETE_APD_FAILURE = Symbol('delete apd : failure');
 export const GET_APD_REQUEST = 'GET_APD_REQUEST';
 export const GET_APD_SUCCESS = 'GET_APD_SUCCESS';
 export const GET_APD_FAILURE = 'GET_APD_FAILURE';
@@ -298,5 +301,19 @@ export const withdrawApd = () => (dispatch, getState) => {
     .catch(error => {
       dispatch(notifyNetError('Withdraw', error));
       dispatch({ type: WITHDRAW_APD_FAILURE });
+    });
+};
+
+export const deleteApd = (id, { fetch = fetchApd } = {}) => dispatch => {
+  dispatch({ type: DELETE_APD_REQUEST });
+
+  return axios
+    .delete(`/apds/${id}`)
+    .then(() => {
+      dispatch({ type: DELETE_APD_SUCCESS });
+      dispatch(fetch());
+    })
+    .catch(() => {
+      dispatch({ type: DELETE_APD_FAILURE });
     });
 };
