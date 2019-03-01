@@ -20,6 +20,11 @@ const openAPI = {
                   type: 'number',
                   description: 'APD ID'
                 },
+                status: {
+                  type: 'string',
+                  description:
+                    'Current status of the APD; e.g., "draft", "archived", etc.'
+                },
                 years: arrayOf({
                   type: 'number'
                 })
