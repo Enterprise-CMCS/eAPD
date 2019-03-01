@@ -5,12 +5,12 @@ describe('root reducer', () => {
     const stateKeys = Object.keys(rootReducer(undefined, {}));
     expect(stateKeys).toEqual([
       'activities',
+      'admin',
       'apd',
       'auth',
       'budget',
       'dirty',
       'notification',
-      'sidebar',
       'user',
       'router'
     ]);

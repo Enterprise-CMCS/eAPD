@@ -4,22 +4,26 @@ helpText: >-
   the state. Capture incentive payments if applicable.
 summaryBudget:
   title: Summary Budget Table
-  helpText: >-
-    This table itemizes the costs for each activity by federal fiscal year (FFY).
-    The table breaks out the Medicaid share, federal share, and state share. Amounts
-    are calculated automatically.
+  instruction:
+    detail: >-
+      This table itemizes the costs for each activity by federal fiscal year (FFY).
+      The table breaks out the Medicaid share, federal share, and state share. Amounts
+      are calculated automatically.
 quarterlyBudget:
   title: Federal share by FFY Quarter
-  helpText: >-
-    These tables summarize the proposed budget for federal financial participation
-    (FFP) broken out by FFY quarter.
+  instruction:
+    detail: >-
+      These tables summarize the proposed budget for federal financial participation
+      (FFP) broken out by FFY quarter.
   expenseNames:
     state: In-House Costs
     contractor: Private Contractor Costs
     combined: Total Enhanced FFP
 paymentsByFFYQuarter:
   title: Incentive Payments by FFY Quarter
-  helpText: >-
-    Use this table to capture incentive payments for Eligible Hospitals (EHs) and
-    Eligible Professionals (EPs). Provide payments and counts, and the table will
-    calculate totals automatically.
+  instruction:
+    detail: >-
+      Use this table to capture incentive payments for Eligible Hospitals (EHs) and
+      Eligible Professionals (EPs). Provide the total amount paid (Payments) and the
+      number of providers who receive payments (Count) for each quarter. The table will
+      calculate yearly totals automatically.
