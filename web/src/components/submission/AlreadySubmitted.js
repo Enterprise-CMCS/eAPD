@@ -3,33 +3,24 @@ import PropTypes from 'prop-types';
 
 import Btn from '../Btn';
 import Icon, { faCheckCircle, faClock } from '../Icons';
+import Instruction from '../Instruction';
 import { t } from '../../i18n';
 
 const AlreadySubmitted = ({ dashboard, state, year }) => (
   <Fragment>
     <div className="flex">
-      <Icon icon={faCheckCircle} color="green" className="mt-tiny" />
+      <Icon icon={faCheckCircle} color="green" className="mt3" />
       <div className="ml1">
-        <p className="bold">
-          {t('certifyAndSubmit.certify.submitted.thanks.header')}
-        </p>
-        <p>
-          {t('certifyAndSubmit.certify.submitted.thanks.helpText', {
-            state,
-            year,
-            date: 'ddd',
-            time: 'time'
-          })}
-        </p>
+        <Instruction
+          source="certifyAndSubmit.certify.submitted.thanks.instruction"
+          args={{ state, year, date: 'ddd', time: 'time' }}
+        />
       </div>
     </div>
     <div className="flex">
-      <Icon icon={faClock} color="blue" className="mt-tiny" />
+      <Icon icon={faClock} color="blue" className="mt3" />
       <div className="ml1">
-        <p className="bold">
-          {t('certifyAndSubmit.certify.submitted.next.header')}
-        </p>
-        <p>{t('certifyAndSubmit.certify.submitted.next.helpText')}</p>
+        <Instruction source="certifyAndSubmit.certify.submitted.next.instruction" />
         <Btn onClick={() => dashboard()}>
           {t('certifyAndSubmit.certify.submitted.buttonText')}
         </Btn>

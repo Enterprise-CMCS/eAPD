@@ -1877,7 +1877,7 @@ Object {
         ],
       },
       "put": Object {
-        "description": "Update a user in the system. Users may not use this method to update themselves.",
+        "description": "Update a user in the system.",
         "parameters": Array [
           Object {
             "description": "The ID of the user to update",
@@ -1912,7 +1912,7 @@ Object {
                     "type": "string",
                   },
                   "role": Object {
-                    "description": "The user's new authorization role. If provided, this must match a valid role name in the system or be an empty string to remove the role entirely.",
+                    "description": "The user's new authorization role. If provided, this must match a valid role name in the system or be an empty string to remove the role entirely. Ignored if the user is updating their own account.",
                     "type": "string",
                   },
                   "state": Object {
@@ -1947,7 +1947,7 @@ Object {
             "sessionCookie": Array [],
           },
         ],
-        "summary": "Updates a user",
+        "summary": "Updates a user account",
         "tags": Array [
           "Users",
         ],
