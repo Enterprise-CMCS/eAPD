@@ -27,7 +27,10 @@ class Login extends Component {
     const { username, password } = this.state;
 
     if (authenticated) {
-      return <Redirect to={from} />;
+      if (from.pathname !== '/logout') {
+        return <Redirect to={from} />;
+      }
+      return <Redirect to="/" />;
     }
 
     return (
@@ -96,6 +99,9 @@ const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
 
 const mapDispatchToProps = { login };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
 
 export { Login as plain, mapStateToProps, mapDispatchToProps };

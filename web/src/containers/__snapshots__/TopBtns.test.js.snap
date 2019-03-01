@@ -6,7 +6,6 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <TopBtns
     authenticated={true}
     hideDashboard={false}
-    logout={[Function]}
     pushRoute={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -288,7 +287,6 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <TopBtns
     authenticated={false}
     hideDashboard={false}
-    logout={[Function]}
     pushRoute={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -436,7 +434,6 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <TopBtns
     authenticated={true}
     hideDashboard={true}
-    logout={[Function]}
     pushRoute={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
