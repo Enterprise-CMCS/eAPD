@@ -6,14 +6,15 @@ import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/
 
 import { t } from '../i18n';
 import { saveApd } from '../actions/apd';
+import { printApd } from '../actions/print';
 import Btn from '../components/Btn';
 
 class Sidebar extends Component {
   state = { selectedId: 'apd-state-profile-overview' };
 
-  handleSelectClick = (id) => this.setState({ selectedId: id });
+  handleSelectClick = id => this.setState({ selectedId: id });
 
-  createActivityItems = (activities) => {
+  createActivityItems = activities => {
     const activityItems = activities.map((a, i) => ({
       id: a.key,
       url: `#${a.anchor}`,
@@ -24,7 +25,10 @@ class Sidebar extends Component {
       onClick: (evt, id) => this.handleSelectClick(id)
     }));
 
-    activityItems.splice(0, 0, {
+    activityItems.splice(
+      0,
+      0,
+      {
         id: 'activities-overview',
         url: '#activities',
         label: 'Overview',
@@ -39,14 +43,10 @@ class Sidebar extends Component {
     );
 
     return activityItems;
-  }
+  };
 
   render() {
-    const {
-      activities,
-      place,
-      saveApdToAPI
-    } = this.props;
+    const { activities, place, printApd: print, saveApdToAPI } = this.props;
 
     const activityItems = this.createActivityItems(activities);
 
@@ -111,7 +111,7 @@ class Sidebar extends Component {
         id: 'activities',
         label: t('activities.title'),
         defaultCollapsed: true,
-        items: activityItems,
+        items: activityItems
       },
       {
         id: 'schedule-summary',
@@ -200,45 +200,49 @@ class Sidebar extends Component {
                 {t('title', { year: '2018' })}
               </h1>
             </div>
-            <VerticalNav
-              selectedId={this.state.selectedId}
-              items={links}
-            />
+            <VerticalNav selectedId={this.state.selectedId} items={links} />
             <div className="ds-u-margin-top--2">
               <Btn onClick={() => saveApdToAPI()}>
                 {t('sidebar.saveApdButtonText')}
               </Btn>{' '}
-              <Btn kind="outline" extraCss="bg-white blue">
+              <Btn
+                kind="outline"
+                onClick={() => print()}
+                extraCss="bg-white blue"
+              >
                 {t('sidebar.savePdfButtonText')}
               </Btn>
             </div>
           </div>
         </aside>
       </div>
-    )
-  };
-};
+    );
+  }
+}
 
 Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
   place: PropTypes.object.isRequired,
-  saveApdToAPI: PropTypes.func.isRequired,
+  printApd: PropTypes.func.isRequired,
+  saveApdToAPI: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({
-  activities: { byKey, allKeys },
-}) => ({
+const mapStateToProps = ({ activities: { byKey, allKeys } }) => ({
   activities: allKeys.map(key => ({
     key,
     anchor: `activity-${key}`,
     name: byKey[key].name
-  })),
+  }))
 });
 
 const mapDispatchToProps = {
-  saveApdToAPI: saveApd,
+  printApd,
+  saveApdToAPI: saveApd
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Sidebar);
 
 export { Sidebar as plain, mapStateToProps, mapDispatchToProps };
