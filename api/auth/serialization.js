@@ -25,6 +25,9 @@ module.exports.deserializeUser = async (
       done(null, {
         username: user.get('email'),
         id: user.get('id'),
+        name: user.get('name'),
+        phone: user.get('phone'),
+        position: user.get('position'),
         role: user.get('auth_role'),
         state: user.get('state_id'),
         activities: await user.activities(),
