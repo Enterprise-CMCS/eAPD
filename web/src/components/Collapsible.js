@@ -2,9 +2,8 @@ import deline from 'deline';
 import kebabCase from 'lodash.kebabcase';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Icon from '@fortawesome/react-fontawesome';
 
-import { faChevronDown, faChevronUp } from './Icons';
+import Icon, { faChevronDown, faChevronUp } from './Icons';
 
 class Collapsible extends Component {
   constructor(props) {
