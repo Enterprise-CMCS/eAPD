@@ -97,19 +97,6 @@ tap.test('user PUT endpoint', async endpointTest => {
     );
 
     tests.test(
-      'sends an unauthorized error if the user attempts to modify themselves',
-      async test => {
-        await handler({ user: { id: 1 }, params: { id: 1 } }, res);
-
-        test.ok(UserModel.where.notCalled, 'database is not queried');
-        test.ok(UserModel.fetch.notCalled, 'database is not queried');
-        test.ok(res.status.calledWith(403), 'HTTP status set to 403');
-        test.ok(res.send.notCalled, 'no body is sent');
-        test.ok(res.end.called, 'response is terminated');
-      }
-    );
-
-    tests.test(
       'sends a not-found error if the requested user does not exist',
       async test => {
         UserModel.fetch.resolves();
@@ -135,7 +122,7 @@ tap.test('user PUT endpoint', async endpointTest => {
           await handler(
             {
               body: { [prop]: 'value' },
-              user: { id: '2' },
+              user: { id: 2 },
               params: { id: '1' }
             },
             res
@@ -160,7 +147,7 @@ tap.test('user PUT endpoint', async endpointTest => {
               position: 'position-value',
               phone: 'phone-value'
             },
-            user: { id: '2' },
+            user: { id: 2 },
             params: { id: '1' }
           },
           res
@@ -195,7 +182,7 @@ tap.test('user PUT endpoint', async endpointTest => {
               should: 'be',
               thrown: 'out'
             },
-            user: { id: '2' },
+            user: { id: 2 },
             params: { id: '1' }
           },
           res
@@ -222,7 +209,7 @@ tap.test('user PUT endpoint', async endpointTest => {
         await handler(
           {
             body: { state: 'st' },
-            user: { id: '2' },
+            user: { id: 2 },
             params: { id: '1' }
           },
           res
@@ -257,7 +244,7 @@ tap.test('user PUT endpoint', async endpointTest => {
           await handler(
             {
               body: { state: 'st' },
-              user: { id: '2' },
+              user: { id: 2 },
               params: { id: '1' }
             },
             res
@@ -288,7 +275,7 @@ tap.test('user PUT endpoint', async endpointTest => {
         await handler(
           {
             body: { role: 'bad' },
-            user: { id: '2' },
+            user: { id: 2 },
             params: { id: '1' }
           },
           res
@@ -312,6 +299,31 @@ tap.test('user PUT endpoint', async endpointTest => {
       });
 
       roleTests.test(
+        'does not set the role on the database model if the user is updating their own account',
+        async test => {
+          const role1 = model();
+          role1.get.withArgs('name').returns('good');
+          const role2 = model();
+          role2.get.withArgs('name').returns('better');
+          RoleModel.fetchAll.resolves([role1, role2]);
+
+          await handler(
+            {
+              body: { role: 'good' },
+              user: { id: 1 },
+              params: { id: '1' }
+            },
+            res
+          );
+
+          test.notOk(
+            user.set.calledWith('auth_role'),
+            'user model is not updated with new role'
+          );
+        }
+      );
+
+      roleTests.test(
         'sets the role on the database model if valid',
         async test => {
           const role1 = model();
@@ -323,7 +335,7 @@ tap.test('user PUT endpoint', async endpointTest => {
           await handler(
             {
               body: { role: 'good' },
-              user: { id: '2' },
+              user: { id: 2 },
               params: { id: '1' }
             },
             res
@@ -342,7 +354,7 @@ tap.test('user PUT endpoint', async endpointTest => {
           await handler(
             {
               body: { role: '' },
-              user: { id: '2' },
+              user: { id: 2 },
               params: { id: '1' }
             },
             res
