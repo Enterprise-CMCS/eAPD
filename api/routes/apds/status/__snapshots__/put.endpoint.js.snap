@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`APD endpoint | PUT /apds/:id/status when authenticated as a user with permission with a non-existant apd ID 1`] = `undefined`;
-
-exports[`APD endpoint | PUT /apds/:id/status when authenticated as a user with permission with a valid apd ID 1`] = `undefined`;
