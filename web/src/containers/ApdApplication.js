@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 import Activities from './activity/All';
 import AssurancesAndCompliance from './AssurancesAndCompliance';
 import ApdSummary from './ApdSummary';
-// import CertifyAndSubmit from './CertifyAndSubmit';
 import ExecutiveSummary from './ExecutiveSummary';
 import PreviousActivities from './PreviousActivities';
 import ScheduleSummary from './ScheduleSummary';
@@ -40,7 +39,6 @@ const ApdApplication = ({
           <ProposedBudget />
           <AssurancesAndCompliance />
           <ExecutiveSummary />
-          {/* <CertifyAndSubmit /> */}
         </div>
       </div>
     </div>
