@@ -1,6 +1,7 @@
 import NoMatch from './components/NoMatch';
 import CreateAccount from './containers/admin/CreateAccount';
 import ApdApplication from './containers/ApdApplication';
+import EditAccount from './containers/admin/EditAccount';
 import Login from './containers/Login';
 import Logout from './containers/Logout';
 
@@ -17,6 +18,7 @@ const routes = [
     component: CreateAccount,
     nonPrivate: false
   },
+  { path: '/admin/edit-account', component: EditAccount, nonPrivate: false },
 
   { component: NoMatch, nonPrivate: true }
 ];

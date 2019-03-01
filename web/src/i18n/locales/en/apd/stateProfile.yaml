@@ -20,18 +20,21 @@ directorAndAddress:
       zip: ZIP
 keyPersonnel:
   title: Key Personnel and Project Management Planning
-  helpText: >-
-    Identify key state staff who will be involved in all activities listed in
-    this APD.  Personnel listed in this section must be assigned to APD by name, role,
-    time commitment, and cost, where applicable.
-  reminder: >-
-    Key personnel are individuals involved with all activities within this
-    APD, or are involved with governance, coordination, stakeholder
-    decision-making, oversight, and/or project performance. Individuals whose responsibilities
-    apply only to specific activities should be listed individually under Program
-    Activities instead. CMS seeks to ensure  state teams are adequately resourced,
-    but does not require states to provide key vendor personnel to satisfy this
-    requirement.
+  instruction:
+    short: >-
+      Identify key state staff who will be involved in all activities listed in
+      this APD.
+    detail: >-
+      Personnel listed in this section must be assigned to APD by name, role,
+      time commitment, and cost, where applicable.
+    helpText: >-
+      Key personnel are individuals involved with all activities within this
+      APD, or are involved with governance, coordination, stakeholder
+      decision-making, oversight, and/or project performance. Individuals whose responsibilities
+      apply only to specific activities should be listed individually under Program
+      Activities instead. CMS seeks to ensure  state teams are adequately resourced,
+      but does not require states to provide key vendor personnel to satisfy this
+      requirement.
   contact: 'Contact #{{number}}'
   labels:
     name: Name

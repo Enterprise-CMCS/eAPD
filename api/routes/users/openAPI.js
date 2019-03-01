@@ -141,9 +141,8 @@ const openAPI = {
     },
     put: {
       tags: ['Users'],
-      summary: 'Updates a user',
-      description:
-        'Update a user in the system. Users may not use this method to update themselves.',
+      summary: 'Updates a user account',
+      description: 'Update a user in the system.',
       parameters: [
         {
           name: 'id',
@@ -178,7 +177,7 @@ const openAPI = {
             },
             role: {
               type: 'string',
-              description: `The user's new authorization role. If provided, this must match a valid role name in the system or be an empty string to remove the role entirely.`
+              description: `The user's new authorization role. If provided, this must match a valid role name in the system or be an empty string to remove the role entirely. Ignored if the user is updating their own account.`
             },
             state: {
               type: 'string',

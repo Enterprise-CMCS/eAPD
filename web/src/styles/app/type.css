@@ -30,6 +30,11 @@
   line-height: var(--line-height-md);
 }
 
+.text-l {
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-l);
+}
+
 .text-xl {
   font-size: var(--font-size-xl);
   line-height: var(--line-height-xl);

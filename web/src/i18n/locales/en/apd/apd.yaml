@@ -7,40 +7,49 @@ helpText: >-
   template section.
 overview:
   title: Program Overview
-  yearsCovered: Choose the federal fiscal year(s) this APD covers.
+  instruction:
+    short: >-
+      Choose the federal fiscal year(s) this APD covers.
 
 introduction:
-  title: Program Introduction
-  helpText: >-
-    Provide a high-level introduction to the state program. Include the history and context of
-    the program and the state’s future vision for it.
+  instruction:
+    heading: Program Introduction
+    short: >-
+      Provide a high-level introduction to the state program.
+    detail: >-
+      Include the history and context of the program and the state’s future vision for it.
 
 hit:
-  title: HIT Overview
-  helpText: >-
-    Briefly summarize planned HIT-funded activities contained within this APD.
+  instruction:
+    heading: HIT Overview
+    short: >-
+      Briefly summarize planned HIT-funded activities contained within this APD.
 
 hie:
-  title: HIE Overview
-  helpText: >-
-    Summarize planned HIE-funded activities within this APD. If
-    there are no HIE activities, enter “No HIE activities.”
+  instruction:
+    heading: HIE Overview
+    short: >-
+      Summarize planned HIE-funded activities within this APD.
+    detail: >-
+      If there are no HIE activities, enter “No HIE activities.”
 
-    (1) Description of the state's HIE approach (statewide, sub-state
-    health information office (HIOs), etc.);
+      (1) Description of the state's HIE approach (statewide, sub-state
+      health information office (HIOs), etc.);
 
-    (2) Anticipated risks and mitigation strategies;
+      (2) Anticipated risks and mitigation strategies;
 
-    (3) The short and long term value proposition to providers;
+      (3) The short and long term value proposition to providers;
 
-    (4) The role of state government in governance and policy-setting.
-  reminder: >-
-    CMS recommends that states connect with regional CMS HITECH contacts prior to
-    developing HIE funding request. HIE funding requests are complex. Early
-    consultation with CMS facilitates a more efficient approval process.
+      (4) The role of state government in governance and policy-setting.
+    helpText: >-
+      CMS recommends that states connect with regional CMS HITECH contacts prior to
+      developing HIE funding request. HIE funding requests are complex. Early
+      consultation with CMS facilitates a more efficient approval process.
 
 mmis:
-  title: MMIS Overview
-  helpText: >-
-    Briefly summarize planned MMIS-funded activities contained within this APD.
-    If there are no MMIS activities, enter “No MMIS activities.”
+  instruction:
+    heading: MMIS Overview
+    short: >-
+      Briefly summarize planned MMIS-funded activities contained within this APD.
+    detail: >-
+      If there are no MMIS activities, enter “No MMIS activities.”
