@@ -1,5 +1,5 @@
-const logger = require('../logger')('db base model');
 const pick = require('lodash.pick');
+const logger = require('../logger')('db base model');
 
 class ValidationError extends Error {
   constructor(message) {

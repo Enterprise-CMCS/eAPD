@@ -1,7 +1,7 @@
-const logger = require('../logger')('authentication');
 const defaultBcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+const logger = require('../logger')('authentication');
 const defaultUserModel = require('../db').models.user;
 
 // This value doesn't need to be persisted between process instances of the
