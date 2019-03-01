@@ -50,7 +50,6 @@
     "fs-blob-store": "^5.2.1",
     "jsonwebtoken": "^8.5.0",
     "knex": "^0.14.6",
-    "lodash.pick": "^4.4.0",
     "moment": "^2.24.0",
     "multer": "^1.4.1",
     "passport": "^0.4.0",
