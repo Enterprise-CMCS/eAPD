@@ -3,7 +3,6 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import * as actions from './auth';
-import * as apdActions from './apd';
 import axios from '../util/api';
 
 const mockStore = configureStore([thunk]);
@@ -41,12 +40,11 @@ describe('auth actions', () => {
         .reply(200, { nonce: '123abc' });
       fetchMock
         .onPost('/auth/login', { username: '123abc', password: 'secret' })
-        .reply(200, { moop: 'moop' });
+        .reply(200, { moop: 'moop', activities: [] });
 
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_SUCCESS, data: { moop: 'moop' } },
-        { type: apdActions.GET_APD_REQUEST }
+        { type: actions.LOGIN_SUCCESS, data: { moop: 'moop', activities: [] } }
       ];
 
       return store.dispatch(actions.login('name', 'secret')).then(() => {
@@ -91,14 +89,16 @@ describe('auth actions', () => {
       fetchMock.reset();
     });
 
-    it('creates AUTH_CHEK_SUCCESS after successful auth and loads APDs', () => {
+    it('creates AUTH_CHEK_SUCCESS after successful auth', () => {
       const store = mockStore({});
-      fetchMock.onGet().reply(200, { name: 'bloop' });
+      fetchMock.onGet().reply(200, { name: 'bloop', activities: [] });
 
       const expectedActions = [
         { type: actions.AUTH_CHECK_REQUEST },
-        { type: actions.AUTH_CHECK_SUCCESS, data: { name: 'bloop' } },
-        { type: apdActions.GET_APD_REQUEST }
+        {
+          type: actions.AUTH_CHECK_SUCCESS,
+          data: { name: 'bloop', activities: [] }
+        }
       ];
 
       return store.dispatch(actions.checkAuth()).then(() => {
