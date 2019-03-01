@@ -41,6 +41,10 @@ ShallowWrapper {
           component={[Function]}
           path="/admin/create-account"
         />,
+        <Connect(PrivateRoute)
+          component={[Function]}
+          path="/admin/edit-account"
+        />,
         <Route
           component={[Function]}
         />,
@@ -112,6 +116,18 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
+        "key": "/admin/edit-account",
+        "nodeType": "class",
+        "props": Object {
+          "component": [Function],
+          "path": "/admin/edit-account",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
         "key": "no-match",
         "nodeType": "class",
         "props": Object {
@@ -152,6 +168,10 @@ ShallowWrapper {
           <Connect(PrivateRoute)
             component={[Function]}
             path="/admin/create-account"
+          />,
+          <Connect(PrivateRoute)
+            component={[Function]}
+            path="/admin/edit-account"
           />,
           <Route
             component={[Function]}
@@ -217,6 +237,18 @@ ShallowWrapper {
           "props": Object {
             "component": [Function],
             "path": "/admin/create-account",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "/admin/edit-account",
+          "nodeType": "class",
+          "props": Object {
+            "component": [Function],
+            "path": "/admin/edit-account",
           },
           "ref": null,
           "rendered": null,

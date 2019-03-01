@@ -29,7 +29,7 @@ ShallowWrapper {
           when={true}
         />,
         <div
-          className="ds-l-row"
+          className="ds-l-row ds-u-margin--0"
         >
           <Connect(Sidebar)
             place={Object {}}
@@ -90,7 +90,7 @@ ShallowWrapper {
               <Connect(CertifyAndSubmit) />
             </div>,
           ],
-          "className": "ds-l-row",
+          "className": "ds-l-row ds-u-margin--0",
         },
         "ref": null,
         "rendered": Array [
@@ -237,7 +237,7 @@ ShallowWrapper {
             when={true}
           />,
           <div
-            className="ds-l-row"
+            className="ds-l-row ds-u-margin--0"
           >
             <Connect(Sidebar)
               place={Object {}}
@@ -298,7 +298,7 @@ ShallowWrapper {
                 <Connect(CertifyAndSubmit) />
               </div>,
             ],
-            "className": "ds-l-row",
+            "className": "ds-l-row ds-u-margin--0",
           },
           "ref": null,
           "rendered": Array [
