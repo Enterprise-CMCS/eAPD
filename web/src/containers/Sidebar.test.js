@@ -8,6 +8,7 @@ import {
   mapDispatchToProps
 } from './Sidebar';
 import { saveApd } from '../actions/apd';
+import { printApd } from '../actions/print';
 
 describe('Sidebar component', () => {
   const props = {
@@ -16,21 +17,32 @@ describe('Sidebar component', () => {
       { anchor: '#key2', key: 'key 2' }
     ],
     place: { id: 'place id', name: 'place name' },
-    saveApdToAPI: sinon.spy(),
+    printApd: sinon.spy(),
+    saveApdToAPI: sinon.spy()
   };
 
   test('renders correctly', () => {
     expect(shallow(<Sidebar {...props} />)).toMatchSnapshot();
-    });
+  });
 
   test('saves apd to api', () => {
     const saveApdToApiProp = sinon.spy();
     const component = shallow(
       <Sidebar {...props} saveApdToAPI={saveApdToApiProp} />
     );
-    component.find('Btn[onClick]').simulate('click');
+
+    component.find('Btn[onClick][kind="primary"]').simulate('click');
 
     expect(saveApdToApiProp.called).toBeTruthy();
+  });
+
+  test('triggers a print event', () => {
+    const printApdProp = sinon.spy();
+    const component = shallow(<Sidebar {...props} printApd={printApdProp} />);
+
+    component.find('Btn[onClick][kind="outline"]').simulate('click');
+
+    expect(printApdProp.called).toBeTruthy();
   });
 
   test('maps state to props', () => {
@@ -38,7 +50,7 @@ describe('Sidebar component', () => {
       activities: {
         byKey: { key1: { name: 'activity 1' }, key2: { name: 'activity 2' } },
         allKeys: ['key1', 'key2']
-      },
+      }
     };
 
     expect(mapStateToProps(state)).toEqual({
@@ -59,7 +71,8 @@ describe('Sidebar component', () => {
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      saveApdToAPI: saveApd,
+      printApd,
+      saveApdToAPI: saveApd
     });
   });
 });

@@ -22,6 +22,7 @@ ShallowWrapper {
         "name": "place name",
       }
     }
+    printApd={[Function]}
     saveApdToAPI={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -241,6 +242,7 @@ ShallowWrapper {
             <Btn
               extraCss="bg-white blue"
               kind="outline"
+              onClick={[Function]}
               size={null}
             >
               Save as PDF
@@ -456,6 +458,7 @@ ShallowWrapper {
             <Btn
               extraCss="bg-white blue"
               kind="outline"
+              onClick={[Function]}
               size={null}
             >
               Save as PDF
@@ -668,6 +671,7 @@ ShallowWrapper {
               <Btn
                 extraCss="bg-white blue"
                 kind="outline"
+                onClick={[Function]}
                 size={null}
               >
                 Save as PDF
@@ -939,6 +943,7 @@ ShallowWrapper {
                 <Btn
                   extraCss="bg-white blue"
                   kind="outline"
+                  onClick={[Function]}
                   size={null}
                 >
                   Save as PDF
@@ -972,6 +977,7 @@ ShallowWrapper {
                   "children": "Save as PDF",
                   "extraCss": "bg-white blue",
                   "kind": "outline",
+                  "onClick": [Function],
                   "size": null,
                 },
                 "ref": null,
@@ -1197,6 +1203,7 @@ ShallowWrapper {
               <Btn
                 extraCss="bg-white blue"
                 kind="outline"
+                onClick={[Function]}
                 size={null}
               >
                 Save as PDF
@@ -1412,6 +1419,7 @@ ShallowWrapper {
               <Btn
                 extraCss="bg-white blue"
                 kind="outline"
+                onClick={[Function]}
                 size={null}
               >
                 Save as PDF
@@ -1624,6 +1632,7 @@ ShallowWrapper {
                 <Btn
                   extraCss="bg-white blue"
                   kind="outline"
+                  onClick={[Function]}
                   size={null}
                 >
                   Save as PDF
@@ -1895,6 +1904,7 @@ ShallowWrapper {
                   <Btn
                     extraCss="bg-white blue"
                     kind="outline"
+                    onClick={[Function]}
                     size={null}
                   >
                     Save as PDF
@@ -1928,6 +1938,7 @@ ShallowWrapper {
                     "children": "Save as PDF",
                     "extraCss": "bg-white blue",
                     "kind": "outline",
+                    "onClick": [Function],
                     "size": null,
                   },
                   "ref": null,
