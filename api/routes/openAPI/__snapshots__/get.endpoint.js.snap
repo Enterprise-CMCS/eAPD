@@ -770,6 +770,10 @@ Object {
                         "description": "APD ID",
                         "type": "number",
                       },
+                      "status": Object {
+                        "description": "Current status of the APD; e.g., \\"draft\\", \\"archived\\", etc.",
+                        "type": "string",
+                      },
                       "years": Object {
                         "items": Object {
                           "type": "number",
