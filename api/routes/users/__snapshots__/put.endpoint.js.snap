@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`users endpoint | PUT /users/:userID when authenticated when attempting to update self 1`] = `""`;
-
 exports[`users endpoint | PUT /users/:userID when authenticated when sending a non-numeric ID 1`] = `""`;
 
 exports[`users endpoint | PUT /users/:userID when authenticated when updating a non-existant user ID 1`] = `""`;
+
+exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...when updating self with all new content, role is ignored 1`] = `undefined`;
 
 exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with all new content, plus some junk 1`] = `undefined`;
 

@@ -17,7 +17,7 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
       resource="previousActivities.outline"
     >
       <div className="mb-tiny bold">
-        {t('previousActivities.outline.label')}
+        {t('previousActivities.outline.instruction.label')}
       </div>
       <RichText
         content={previousActivitySummary}
