@@ -1,4 +1,3 @@
-const pick = require('lodash.pick');
 const logger = require('../logger')('db base model');
 
 class ValidationError extends Error {
@@ -62,7 +61,9 @@ const defaultSyncChildren = async (
 // These properties are added to model instances.
 const instanceExtension = (orm, models) => ({
   pickUpdateable(raw) {
-    return pick(raw, this.static.updateableFields);
+    return Object.entries(raw)
+      .filter(([key]) => this.static.updateableFields.includes(key))
+      .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
   },
 
   models,
@@ -151,7 +152,9 @@ const instanceExtension = (orm, models) => ({
 // These proeprties are added to model classes.
 const classExtension = (orm, models) => ({
   pickUpdateable(raw) {
-    return pick(raw, this.updateableFields);
+    return Object.entries(raw)
+      .filter(([key]) => this.updateableFields.includes(key))
+      .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
   },
 
   models,
