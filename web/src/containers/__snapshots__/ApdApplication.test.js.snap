@@ -23,7 +23,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <div
-        className="ds-l-row"
+        className="ds-l-row ds-u-margin--0"
       >
         <Connect(Sidebar)
           place={Object {}}
@@ -70,7 +70,7 @@ ShallowWrapper {
             <Connect(CertifyAndSubmit) />
           </div>,
         ],
-        "className": "ds-l-row",
+        "className": "ds-l-row ds-u-margin--0",
       },
       "ref": null,
       "rendered": Array [
@@ -211,7 +211,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <div
-          className="ds-l-row"
+          className="ds-l-row ds-u-margin--0"
         >
           <Connect(Sidebar)
             place={Object {}}
@@ -258,7 +258,7 @@ ShallowWrapper {
               <Connect(CertifyAndSubmit) />
             </div>,
           ],
-          "className": "ds-l-row",
+          "className": "ds-l-row ds-u-margin--0",
         },
         "ref": null,
         "rendered": Array [

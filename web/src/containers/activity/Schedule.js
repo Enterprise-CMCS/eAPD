@@ -11,8 +11,8 @@ import {
 import Btn from '../../components/Btn';
 import DatePicker from '../../components/DatePicker';
 import DateRangePicker from '../../components/DateRangePicker';
-import HelpText from '../../components/HelpText';
 import { Input } from '../../components/Inputs';
+import Instruction from '../../components/Instruction';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
@@ -63,19 +63,16 @@ class Schedule extends Component {
                 onChange={this.handleActivityDateChange}
               />
             </div>
-            <HelpText
-              text="activities.schedule.milestoneHelpText"
-              reminder="activities.schedule.milestoneReminder"
-            />
+            <Instruction source="activities.schedule.milestone.instruction" />
 
             <table className="h5 table table-fixed" style={{ minWidth: 600 }}>
               <thead>
                 <tr>
                   <th className="col-5 border-none">
-                    {t('activities.schedule.milestoneHeader')}
+                    {t('activities.schedule.milestone.milestoneHeader')}
                   </th>
                   <th className="col-6 border-none">
-                    {t('activities.schedule.endHeader')}
+                    {t('activities.schedule.milestone.endHeader')}
                   </th>
                   <th className="col-1 border-none" />
                 </tr>
@@ -86,7 +83,9 @@ class Schedule extends Component {
                     <td className="border-bottom">
                       <Input
                         name={`milestone-${d.key}-name`}
-                        label={t('activities.schedule.milestoneLabel')}
+                        label={t(
+                          'activities.schedule.milestone.milestoneLabel'
+                        )}
                         hideLabel
                         wrapperClass="m0"
                         value={d.milestone}
@@ -123,7 +122,7 @@ class Schedule extends Component {
           </div>
         )}
         <Btn onClick={() => addActivityMilestone(activity.key)}>
-          {t('activities.schedule.addMilestoneButtonText')}
+          {t('activities.schedule.milestone.addMilestoneButtonText')}
         </Btn>
       </Subsection>
     );
