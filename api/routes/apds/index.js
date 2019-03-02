@@ -3,9 +3,7 @@ const del = require('./delete');
 const get = require('./get');
 const post = require('./post');
 const put = require('./put');
-const status = require('./status/put.js');
 const submitted = require('./submitted/get');
-const versions = require('./versions');
 
 module.exports = (
   app,
@@ -14,9 +12,7 @@ module.exports = (
     getEndpoint = get,
     postEndpoint = post,
     putEndpoint = put,
-    statusEndpoints = status,
-    submittedEndpoints = submitted,
-    versionsEndpoints = versions
+    submittedEndpoints = submitted
   } = {}
 ) => {
   logger.silly('setting up DELETE endpoint');
@@ -28,12 +24,6 @@ module.exports = (
   logger.silly('setting up PUT endpoint');
   putEndpoint(app);
 
-  logger.silly('setting up APD status endpoints');
-  statusEndpoints(app);
-
   logger.silly('setting up submitted APD endpoints');
   submittedEndpoints(app);
-
-  logger.silly('setting up APD versions endpoints');
-  versionsEndpoints(app);
 };

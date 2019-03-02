@@ -46,7 +46,6 @@ ShallowWrapper {
             <ProposedBudget />
             <Connect(AssurancesAndCompliance) />
             <Connect(ExecutiveSummary) />
-            <Connect(CertifyAndSubmit) />
           </div>
         </div>,
       ],
@@ -87,7 +86,6 @@ ShallowWrapper {
               <ProposedBudget />
               <Connect(AssurancesAndCompliance) />
               <Connect(ExecutiveSummary) />
-              <Connect(CertifyAndSubmit) />
             </div>,
           ],
           "className": "ds-l-row ds-u-margin--0",
@@ -120,7 +118,6 @@ ShallowWrapper {
                 <ProposedBudget />,
                 <Connect(AssurancesAndCompliance) />,
                 <Connect(ExecutiveSummary) />,
-                <Connect(CertifyAndSubmit) />,
               ],
               "className": "site-main p2 sm-p4 md-px0 ds-l-col--9",
             },
@@ -207,15 +204,6 @@ ShallowWrapper {
                 "rendered": null,
                 "type": [Function],
               },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
             ],
             "type": "div",
           },
@@ -254,7 +242,6 @@ ShallowWrapper {
               <ProposedBudget />
               <Connect(AssurancesAndCompliance) />
               <Connect(ExecutiveSummary) />
-              <Connect(CertifyAndSubmit) />
             </div>
           </div>,
         ],
@@ -295,7 +282,6 @@ ShallowWrapper {
                 <ProposedBudget />
                 <Connect(AssurancesAndCompliance) />
                 <Connect(ExecutiveSummary) />
-                <Connect(CertifyAndSubmit) />
               </div>,
             ],
             "className": "ds-l-row ds-u-margin--0",
@@ -328,7 +314,6 @@ ShallowWrapper {
                   <ProposedBudget />,
                   <Connect(AssurancesAndCompliance) />,
                   <Connect(ExecutiveSummary) />,
-                  <Connect(CertifyAndSubmit) />,
                 ],
                 "className": "site-main p2 sm-p4 md-px0 ds-l-col--9",
               },
@@ -392,15 +377,6 @@ ShallowWrapper {
                   "instance": null,
                   "key": undefined,
                   "nodeType": "function",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
                   "props": Object {},
                   "ref": null,
                   "rendered": null,
