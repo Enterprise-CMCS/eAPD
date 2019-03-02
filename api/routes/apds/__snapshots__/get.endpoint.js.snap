@@ -12,10 +12,12 @@ exports[`APD endpoint List APDs endpoint | GET /apds when authenticated as a use
 Array [
   Object {
     "id": 4000,
+    "status": "draft",
     "years": null,
   },
   Object {
     "id": 4002,
+    "status": "not draft",
     "years": null,
   },
 ]

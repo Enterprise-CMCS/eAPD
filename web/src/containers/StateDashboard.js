@@ -1,3 +1,4 @@
+import { Button } from '@cmsgov/design-system-core';
 import PropType from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -5,7 +6,7 @@ import { connect } from 'react-redux';
 import Icon, { faPlusCircle, faSpinner } from '../components/Icons';
 import Sidebar from './StateDashboardSidebar';
 import TopBtns from './TopBtns';
-import { createApd, selectApd } from '../actions/apd';
+import { createApd, deleteApd, selectApd } from '../actions/apd';
 import { Section } from '../components/Section';
 import { t } from '../i18n';
 
@@ -15,16 +16,26 @@ const Loading = () => (
   </div>
 );
 
-const StateDashboard = ({
-  apds,
-  createApd: create,
-  fetching,
-  selectApd: select,
-  state
-}) => {
+const StateDashboard = (
+  {
+    apds,
+    createApd: create,
+    deleteApd: del,
+    fetching,
+    selectApd: select,
+    state
+  },
+  { global = window } = {}
+) => {
   const open = id => e => {
     e.preventDefault();
     select(id);
+  };
+
+  const delApd = apd => () => {
+    if (global.confirm(`Delete HITECH APD for FFY ${apd.years.join(', ')}?`)) {
+      del(apd.id);
+    }
   };
 
   return (
@@ -38,20 +49,23 @@ const StateDashboard = ({
             <div className="mb3 bg-white rounded shadow accordian">
               <div className="px3 py2 border-bottom border-bottom-darken-1 blue">
                 <span className="h2">{state.name} APDs</span>
-                <button
-                  className="btn bg-blue white rounded p1 right inline-block"
+                <Button
+                  variation="primary"
                   size="small"
+                  className="right inline-block"
                   onClick={create}
                 >
                   Create new&nbsp;&nbsp;
                   <Icon icon={faPlusCircle} />
-                </button>
+                </Button>
               </div>
               <div className="p3">
                 {fetching ? <Loading /> : null}
-                {!fetching && apds.length === 0 ? t('stateDashboard.none') : null}
+                {!fetching && apds.length === 0
+                  ? t('stateDashboard.none')
+                  : null}
                 {apds.map(apd => (
-                  <div key={apd.id} className="p2 mb2 bg-gray-lightest flex">
+                  <div key={apd.id} className="p2 mb2 bg-gray-lightest">
                     <div className="inline-block p2 mr2 bg-white blue rounded left">
                       <img
                         src="/static/img/icon-document.svg"
@@ -65,6 +79,14 @@ const StateDashboard = ({
                         HITECH APD for FFY {apd.years.join(', ')}
                       </a>
                     </h3>
+                    <Button
+                      variation="danger"
+                      size="small"
+                      className="right"
+                      onClick={delApd(apd)}
+                    >
+                      Delete
+                    </Button>
                   </div>
                 ))}
               </div>
@@ -81,6 +103,7 @@ StateDashboard.propTypes = {
   fetching: PropType.bool.isRequired,
   state: PropType.object.isRequired,
   createApd: PropType.func.isRequired,
+  deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired
 };
 
@@ -98,6 +121,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = {
   createApd,
+  deleteApd,
   selectApd
 };
 
