@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`certify and submit component changes rendering when an APD is withdrawn and then modified 1`] = `ShallowWrapper {}`;
-
-exports[`certify and submit component changes rendering when an APD is withdrawn and then modified 2`] = `ShallowWrapper {}`;
-
-exports[`certify and submit component renders correctly 1`] = `ShallowWrapper {}`;
-
-exports[`certify and submit component renders correctly 2`] = `ShallowWrapper {}`;

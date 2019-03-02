@@ -2,6 +2,8 @@
 
 exports[`login component renders correctly if logged in 1`] = `ShallowWrapper {}`;
 
+exports[`login component renders correctly if logged in and previous location is logout 1`] = `ShallowWrapper {}`;
+
 exports[`login component renders correctly if logged in, but no previous location 1`] = `ShallowWrapper {}`;
 
 exports[`login component renders correctly if not logged in 1`] = `ShallowWrapper {}`;

@@ -1,6 +1,6 @@
 const {
   requiresAuth,
-  schema: { arrayOf, errorToken, jsonResponse }
+  schema: { arrayOf, jsonResponse }
 } = require('../openAPI/helpers');
 
 const openAPI = {
@@ -19,6 +19,11 @@ const openAPI = {
                 id: {
                   type: 'number',
                   description: 'APD ID'
+                },
+                status: {
+                  type: 'string',
+                  description:
+                    'Current status of the APD; e.g., "draft", "archived", etc.'
                 },
                 years: arrayOf({
                   type: 'number'
@@ -98,52 +103,32 @@ const openAPI = {
           description: 'The apd ID does not match any known apds for the user'
         }
       }
-    }
-  },
-
-  '/apds/{id}/status': {
-    put: {
+    },
+    delete: {
       tags: ['APDs'],
-      summary: 'Set an APD status',
-      description:
-        'An endpoint for CMS analysts to change an APD status after it has been submitted.  The APD cannot currently be in draft status, or else this method will fail with an HTTP 400 error.',
+      summary: 'Archive an APD',
+      description: `Updates an APD's status to "archive" and prevents it from being edited`,
       parameters: [
         {
           name: 'id',
           in: 'path',
-          description: 'The ID of the APD to update',
+          description: 'The ID of the apd to archive',
           required: true,
-          schema: { type: 'number' }
-        }
-      ],
-      requestBody: {
-        description: 'The status value to set',
-        required: true,
-        content: {
-          'application/json': {
-            schema: {
-              type: 'object',
-              properties: {
-                status: {
-                  type: 'string',
-                  description: 'New status to set'
-                }
-              }
-            }
+          schema: {
+            type: 'number'
           }
         }
-      },
+      ],
       responses: {
         204: {
-          description: 'The APD status was successfully set'
+          description: 'The APD was archived'
         },
         400: {
           description:
-            'The APD is currently in draft, or the selected status is invalid',
-          content: errorToken
+            'Invalid request, such as requesting to archive an APD that is not editable'
         },
         404: {
-          description: 'The apd ID does not match any known apds'
+          description: 'The apd ID does not match any known apds for the user'
         }
       }
     }
@@ -158,72 +143,6 @@ const openAPI = {
         200: {
           description: 'The list of submitted APDs',
           content: jsonResponse(arrayOf({ $ref: '#/components/schemas/apd' }))
-        }
-      }
-    }
-  },
-
-  '/apds/{id}/versions': {
-    delete: {
-      tags: ['APDs'],
-      summary: 'Withdraw a submitted APD',
-      description:
-        'Withdraws a previous submitted APD and makes it editable again',
-      parameters: [
-        {
-          name: 'id',
-          in: 'path',
-          description: 'The ID of the APD to update',
-          required: true,
-          schema: { type: 'number' }
-        }
-      ],
-      responses: {
-        204: {
-          description: 'The withdrawal was successful'
-        }
-      }
-    },
-    post: {
-      tags: ['APDs'],
-      summary: 'Save a submitted version of a specific APD',
-      description:
-        'Create a new saved version of an APD and makes the APD non-draft so it cannot be edited',
-      parameters: [
-        {
-          name: 'id',
-          in: 'path',
-          description: 'The ID of the APD to update',
-          required: true,
-          schema: { type: 'number' }
-        }
-      ],
-      requestBody: {
-        description:
-          'Additional data to save with the APD.  For example, computed values that the state has certified.',
-        required: false,
-        content: {
-          'application/json': {
-            schema: {
-              type: 'object',
-              properties: {
-                tables: {
-                  type: 'object',
-                  description: 'Computed data tables'
-                }
-              }
-            }
-          }
-        }
-      },
-      responses: {
-        204: {
-          description: 'The save was successful'
-        },
-        400: {
-          description:
-            'The APD is not currently in draft status, so it cannot be saved. Error is { error: "apd-not-editable" }',
-          content: errorToken
         }
       }
     }
