@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import CostAllocateFFP from './CostAllocateFFP';
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 import { updateActivity as updateActivityAction } from '../../actions/activities';
-import HelpText from '../../components/HelpText';
+import Instruction from '../../components/Instruction';
 import { RichText } from '../../components/Inputs';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
@@ -24,10 +24,7 @@ const CostAllocate = props => {
         <div className="mb-tiny bold">
           {t('activities.costAllocate.methodology.title')}
         </div>
-        <HelpText
-          text="activities.costAllocate.methodology.helpText"
-          reminder="activities.costAllocate.methodology.reminder"
-        />
+        <Instruction source="activities.costAllocate.methodology.instruction" />
         <RichText
           content={costAllocationDesc}
           onSync={sync('costAllocationDesc')}
@@ -39,20 +36,14 @@ const CostAllocate = props => {
         <div className="mb-tiny bold">
           {t('activities.costAllocate.quarterly.title')}
         </div>
-        <HelpText
-          text="activities.costAllocate.quarterly.helpText"
-          reminder="activities.costAllocate.quarterly.reminder"
-        />
+        <Instruction source="activities.costAllocate.quarterly.instruction" />
         <CostAllocateFFPQuarterly aKey={activity.key} />
       </div>
       <div className="mb3">
         <div className="mb-tiny bold">
           {t('activities.costAllocate.otherFunding.title')}
         </div>
-        <HelpText
-          text="activities.costAllocate.otherFunding.helpText"
-          reminder="activities.costAllocate.otherFunding.reminder"
-        />
+        <Instruction source="activities.costAllocate.otherFunding.instruction" />
         <RichText
           content={otherFundingDesc}
           onSync={sync('otherFundingDesc')}
@@ -77,4 +68,7 @@ export const mapDispatchToProps = {
 };
 
 export { CostAllocate as CostAllocateRaw };
-export default connect(mapStateToProps, mapDispatchToProps)(CostAllocate);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CostAllocate);

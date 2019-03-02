@@ -60,6 +60,9 @@ tap.test('passport serialization', async serializationTest => {
       validTest.test('with no role', async noRoleTest => {
         get.withArgs('email').returns('test-email');
         get.withArgs('id').returns('test-id');
+        get.withArgs('name').returns('test-name');
+        get.withArgs('phone').returns('test-phone');
+        get.withArgs('position').returns('test-position');
         activities.resolves([]);
         const user = { get, activities };
         userModel.fetch.resolves(user);
@@ -70,6 +73,9 @@ tap.test('passport serialization', async serializationTest => {
           doneCallback.calledWith(null, {
             username: 'test-email',
             id: 'test-id',
+            name: 'test-name',
+            phone: 'test-phone',
+            position: 'test-position',
             role: undefined,
             state: undefined,
             activities: sinon.match.array.deepEquals([]),
@@ -82,6 +88,9 @@ tap.test('passport serialization', async serializationTest => {
       validTest.test('with a role', async adminRoleTest => {
         get.withArgs('email').returns('test-email');
         get.withArgs('id').returns('test-id');
+        get.withArgs('name').returns('test-name');
+        get.withArgs('phone').returns('test-phone');
+        get.withArgs('position').returns('test-position');
         get.withArgs('auth_role').returns('test-role');
         activities.resolves(['activity 1', 'activity 2']);
         const user = { get, activities };
@@ -93,6 +102,9 @@ tap.test('passport serialization', async serializationTest => {
           doneCallback.calledWith(null, {
             username: 'test-email',
             id: 'test-id',
+            name: 'test-name',
+            phone: 'test-phone',
+            position: 'test-position',
             role: 'test-role',
             state: undefined,
             activities: sinon.match.array.deepEquals([
@@ -108,6 +120,9 @@ tap.test('passport serialization', async serializationTest => {
       validTest.test('with a role & state', async adminStateTest => {
         get.withArgs('email').returns('test-email');
         get.withArgs('id').returns('test-id');
+        get.withArgs('name').returns('test-name');
+        get.withArgs('phone').returns('test-phone');
+        get.withArgs('position').returns('test-position');
         get.withArgs('auth_role').returns('test-role');
         get.withArgs('state_id').returns('test-state');
         activities.resolves(['activity 1', 'activity 2']);
@@ -120,6 +135,9 @@ tap.test('passport serialization', async serializationTest => {
           doneCallback.calledWith(null, {
             username: 'test-email',
             id: 'test-id',
+            name: 'test-name',
+            phone: 'test-phone',
+            position: 'test-position',
             role: 'test-role',
             state: 'test-state',
             activities: sinon.match.array.deepEquals([
