@@ -57,8 +57,8 @@ class CreateUser extends Component {
     e.preventDefault();
 
     const { email, name, password, state } = this.state;
-    if (!email || !password || !state) {
-      alert('Email, password, and state are all required');
+    if (!email || !password) {
+      alert('Email and password are required');
       return;
     }
 
@@ -189,7 +189,7 @@ class CreateUser extends Component {
                 value={state}
                 onChange={this.handleChange}
               >
-                <option value="">Select...</option>
+                <option value="">None</option>
                 {STATES.map(s => (
                   <option key={s.id} value={s.id}>
                     {s.name}
