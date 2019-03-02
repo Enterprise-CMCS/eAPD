@@ -1,4 +1,5 @@
 const logger = require('../../logger')('apds route index');
+const del = require('./delete');
 const get = require('./get');
 const post = require('./post');
 const put = require('./put');
@@ -6,10 +7,12 @@ const submitted = require('./submitted/get');
 
 module.exports = (
   app,
-  getEndpoint = get,
-  postEndpoint = post,
-  putEndpoint = put,
-  submittedEndpoints = submitted
+  {
+    getEndpoint = get,
+    postEndpoint = post,
+    putEndpoint = put,
+    submittedEndpoints = submitted,
+  } = {}
 ) => {
   logger.silly('setting up GET endpoint');
   getEndpoint(app);

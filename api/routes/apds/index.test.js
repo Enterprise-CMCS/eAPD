@@ -10,7 +10,12 @@ tap.test('apds endpoint setup', async endpointTest => {
   const putEndpoint = sinon.spy();
   const submittedEndpoint = sinon.spy();
 
-  apdsIndex(app, getEndpoint, postEndpoint, putEndpoint, submittedEndpoint);
+  apdsIndex(app, {
+    getEndpoint,
+    postEndpoint,
+    putEndpoint,
+    submittedEndpoints
+  });
 
   endpointTest.ok(
     getEndpoint.calledWith(app),
