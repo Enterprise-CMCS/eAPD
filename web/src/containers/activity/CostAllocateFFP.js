@@ -126,4 +126,7 @@ export const mapDispatchToProps = {
 };
 
 export { CostAllocateFFP as CostAllocateFFPRaw };
-export default connect(mapStateToProps, mapDispatchToProps)(CostAllocateFFP);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CostAllocateFFP);

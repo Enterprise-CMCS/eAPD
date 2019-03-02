@@ -32,12 +32,6 @@ describe('State dashboard sidebar component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('selects an apd', () => {
-    const component = shallow(<Sidebar {...props} />);
-    component.find('SidebarLink[hash="1"]').simulate('click');
-    expect(props.selectApd.calledWith(1)).toBeTruthy();
-  });
-
   test('maps state to props', () => {
     const state = {
       apd: {
