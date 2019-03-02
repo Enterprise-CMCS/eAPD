@@ -81,6 +81,36 @@ tap.test('user data model', async userModelTests => {
     }
   );
 
+  userModelTests.test('format', async formatTests => {
+    const self = {
+      hasChanged: sandbox.stub()
+    };
+
+    const format = user.user.format.bind(self);
+
+    formatTests.test('when password has not changed', async test => {
+      self.hasChanged.withArgs('password').returns(false);
+
+      const out = format({ attr1: 'value 1', attr2: 'value 2' });
+
+      test.same(
+        out,
+        { attr1: 'value 1', attr2: 'value 2' },
+        'gets back the expected, unchanged attributes'
+      );
+    });
+
+    formatTests.test('when the password has changed', async test => {
+      self.hasChanged.withArgs('password').returns(true);
+      bcrypt.hashSync.returns('hashed password');
+
+      const out = format({ password: 'new password here' });
+
+      test.same(out, { password: 'hashed password' });
+      test.ok(bcrypt.hashSync.calledWith('new password here'));
+    });
+  });
+
   userModelTests.test('validation', async validationTests => {
     const self = {
       where: sandbox.stub(),
@@ -166,10 +196,6 @@ tap.test('user data model', async userModelTests => {
         validTest.ok(
           passwordChecker.calledWith('password', ['email', 'Bob']),
           'password checker called with extra data'
-        );
-        validTest.ok(
-          self.set.calledWith({ password: 'hashed-password' }),
-          'updates the model with a hashed password'
         );
       });
     });

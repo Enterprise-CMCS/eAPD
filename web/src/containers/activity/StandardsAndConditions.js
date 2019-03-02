@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity as updateActivityAction } from '../../actions/activities';
-import HelpText from '../../components/HelpText';
 import { Textarea } from '../../components/Inputs';
+import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 import { STANDARDS } from '../../util';
@@ -25,19 +25,16 @@ class StandardsAndConditions extends Component {
       <Subsection resource="activities.standardsAndConditions" nested>
         {STANDARDS.map(std => (
           <div key={std.id}>
-            <h3>
-              {t([`activities.standardsAndConditions`, std.id, 'header'])}
-            </h3>
-            <p className="preserve-line-breaks">
-              {t([`activities.standardsAndConditions`, std.id, 'subheader'])}
-            </p>
-            <HelpText
-              text={`activities.standardsAndConditions.${std.id}.helpText`}
-              reminder={`activities.standardsAndConditions.${std.id}.reminder`}
+            <Instruction
+              source={`activities.standardsAndConditions.${std.id}.instruction`}
             />
+
             <Textarea
               name={`activity-${activity.id}-condition-${std.id}`}
-              label={t([`activities.standardsAndConditions`, std.id, 'title'])}
+              label={t(
+                `activities.standardsAndConditions.${std.id}.instruction.short`
+              )}
+              hideLabel
               rows="7"
               className="m0 textarea textarea-m"
               value={activity.standardsAndConditions[std.id]}
@@ -63,6 +60,7 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  StandardsAndConditions
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StandardsAndConditions);
