@@ -8,12 +8,15 @@ const submitted = require('./submitted/get');
 module.exports = (
   app,
   {
+    deleteEndpoint = del,
     getEndpoint = get,
     postEndpoint = post,
     putEndpoint = put,
-    submittedEndpoints = submitted,
+    submittedEndpoints = submitted
   } = {}
 ) => {
+  logger.silly('setting up DELETE endpoint');
+  deleteEndpoint(app);
   logger.silly('setting up GET endpoint');
   getEndpoint(app);
   logger.silly('setting up POST endpoint');
