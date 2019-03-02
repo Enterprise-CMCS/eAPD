@@ -42,13 +42,6 @@ describe('users endpoint | PUT /users/:userID', async () => {
       expect(body).toMatchSnapshot();
     });
 
-    it('when attempting to update self', async () => {
-      const { response, body } = await put(2000);
-
-      expect(response.statusCode).toEqual(403);
-      expect(body).toMatchSnapshot();
-    });
-
     describe('when updating a valid user ID', async () => {
       it('...with an invalid state ID', async () => {
         const { response, body } = await put(2001, { state: 'xx' });
@@ -103,6 +96,37 @@ describe('users endpoint | PUT /users/:userID', async () => {
         expect(user).toMatchObject({
           auth_role: 'state SME',
           email: 'test email',
+          name: 'test name',
+          password: expect.stringMatching(/.+/),
+          phone: '123',
+          position: 'test position',
+          state_id: 'hi'
+        });
+      });
+
+      it('...when updating self with all new content, role is ignored', async () => {
+        const {
+          response: { statusCode },
+          body
+        } = await put(2000, {
+          email: 'own email',
+          name: 'test name',
+          phone: '123',
+          position: 'test position',
+          state: 'hi',
+          role: 'state SME'
+        });
+
+        expect(statusCode).toEqual(204);
+        expect(body).toMatchSnapshot();
+
+        const user = await db('users')
+          .where({ id: 2000 })
+          .first();
+
+        expect(user).toMatchObject({
+          auth_role: 'admin',
+          email: 'own email',
           name: 'test name',
           password: expect.stringMatching(/.+/),
           phone: '123',

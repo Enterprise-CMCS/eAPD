@@ -14,6 +14,14 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
       return this.hasOne('state', 'id', 'state_id');
     },
 
+    format(attr) {
+      if (this.hasChanged('password')) {
+        // eslint-disable-next-line no-param-reassign
+        attr.password = bcrypt.hashSync(attr.password);
+      }
+      return attr;
+    },
+
     async activities() {
       logger.silly('getting user activities');
       if (!this.relations.role || !this.relations.role.activities) {
@@ -70,7 +78,6 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
         }
 
         logger.silly('password is sufficiently complex; hashing it');
-        this.set({ password: bcrypt.hashSync(this.attributes.password) });
       }
 
       if (this.hasChanged('phone')) {
