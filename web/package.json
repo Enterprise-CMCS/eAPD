@@ -7,7 +7,7 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "build-storybook -c .storybook -o .storybook-dist/public",
     "make-state-icons": "babel-node scripts/stateIcons.js",
-    "scaffold": "mkdir -p dist && cp src/index.html dist/ && cp -r src/static dist/",
+    "scaffold": "mkdir -p dist && cp src/index.html dist/ && cp ../Staticfile dist/ && cp -r src/static dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --config webpack.config.dev.js",
