@@ -1563,7 +1563,22 @@ Object {
                       "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
                       "type": "number",
                     },
-                    "role": Object {},
+                    "name": Object {
+                      "description": "The user's name, if defined",
+                      "type": "string",
+                    },
+                    "phone": Object {
+                      "description": "The user's phone number, if defined",
+                      "type": "string",
+                    },
+                    "position": Object {
+                      "description": "The user's position, if defined",
+                      "type": "string",
+                    },
+                    "role": Object {
+                      "description": "Names of system authorization role this user belongs to",
+                      "type": "string",
+                    },
                     "state": Object {
                       "description": "The state/territory/district that this user is assigned to",
                       "properties": Object {
@@ -1599,6 +1614,96 @@ Object {
           },
         ],
         "summary": "Gets the current user's information",
+        "tags": Array [
+          "Users",
+        ],
+      },
+      "put": Object {
+        "description": "Update information about the current user.  Only the email, name, password, phone, and position fields can be updated.",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "activities": Object {
+                      "items": Object {
+                        "description": "Names of system activities this user can perform",
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "id": Object {
+                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
+                      "type": "number",
+                    },
+                    "name": Object {
+                      "description": "The user's name, if defined",
+                      "type": "string",
+                    },
+                    "phone": Object {
+                      "description": "The user's phone number, if defined",
+                      "type": "string",
+                    },
+                    "position": Object {
+                      "description": "The user's position, if defined",
+                      "type": "string",
+                    },
+                    "role": Object {
+                      "description": "Names of system authorization role this user belongs to",
+                      "type": "string",
+                    },
+                    "state": Object {
+                      "description": "The state/territory/district that this user is assigned to",
+                      "properties": Object {
+                        "id": Object {
+                          "description": "Lowercase 2-letter code",
+                          "type": "string",
+                        },
+                        "name": Object {
+                          "description": "State/territory/district full name",
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "username": Object {
+                      "description": "User's unique username (email address)",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "The current user",
+          },
+          "400": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "error": Object {
+                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "Updated information is invalid",
+          },
+          "403": Object {
+            "description": "Not logged in",
+          },
+        },
+        "security": Array [
+          Object {
+            "sessionCookie": Array [],
+          },
+        ],
+        "summary": "Updates the current user's information",
         "tags": Array [
           "Users",
         ],

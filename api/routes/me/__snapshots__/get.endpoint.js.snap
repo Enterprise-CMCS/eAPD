@@ -20,6 +20,9 @@ Object {
     "view-document",
   ],
   "id": 2000,
+  "name": null,
+  "phone": null,
+  "position": null,
   "role": "admin",
   "state": Object {
     "id": "mn",
