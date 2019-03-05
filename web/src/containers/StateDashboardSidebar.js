@@ -9,10 +9,8 @@ import { selectApd } from '../actions/apd';
 
 class Sidebar extends Component {
   pickApd = id => () => {
-    const {
-      selectApd: { selectApdProp }
-    } = this.props;
-    selectApdProp(id);
+    const { selectApd: action } = this.props;
+    action(id);
   };
 
   render() {
