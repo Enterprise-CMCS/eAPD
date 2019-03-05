@@ -167,7 +167,7 @@ describe('apd actions', () => {
       const store = mockStore();
       fetchMock.onDelete('/apds/apd-id').reply(400);
 
-      store.dispatch(actions.deleteApd('apd-id')).then(() => {
+      return store.dispatch(actions.deleteApd('apd-id')).then(() => {
         expect(store.getActions()).toEqual([
           { type: actions.DELETE_APD_REQUEST },
           { type: actions.DELETE_APD_FAILURE }
@@ -180,7 +180,7 @@ describe('apd actions', () => {
       const fetch = sinon.stub().returns({ type: 'apd fetch' });
       fetchMock.onDelete('/apds/apd-id').reply(200);
 
-      store.dispatch(actions.deleteApd('apd-id'), { fetch }).then(() => {
+      return store.dispatch(actions.deleteApd('apd-id', { fetch })).then(() => {
         expect(store.getActions()).toEqual([
           { type: actions.DELETE_APD_REQUEST },
           { type: actions.DELETE_APD_SUCCESS },
