@@ -1,6 +1,6 @@
-const logger = require('../logger')('auth session');
 const defaultCookies = require('cookies');
 const jwt = require('jsonwebtoken');
+const logger = require('../logger')('auth session');
 
 const COOKIE_NAME = 'token';
 const TOKEN_ISSUER = 'CMS eAPD API';
