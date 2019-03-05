@@ -18,6 +18,7 @@
   }
 
   header,
+  .ds-l-col--3,
   .site-sidebar,
   .btn-collapse svg,
   .alert,
@@ -25,12 +26,15 @@
     display: none;
   }
 
-  .site-main {
-    max-width: 900px;
+
+  .ds-l-container,
+  .ds-l-col--9 {
+    width: 100%!important;
+    min-width: 100%!important;
   }
 
   .accordian {
-    border: 1px solid #eee;
+    border: none;
     border-radius: 0;
     box-shadow: none;
 
@@ -50,5 +54,13 @@
   .has-sticky-header .sticky-nested {
     // unsticky headers
     position: inherit;
+  }
+
+  .site-main,
+  .ds-l-container,
+  .accordian > .btn.sm-px3,
+  .has-sticky-header {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
