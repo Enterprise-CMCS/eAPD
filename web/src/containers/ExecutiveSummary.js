@@ -72,7 +72,9 @@ ExecutiveSummary.propTypes = {
 
 const mapStateToProps = ({
   activities: { byKey },
-  apd: { data: { years } },
+  apd: {
+    data: { years }
+  },
   budget
 }) => {
   const data = Object.entries(byKey).map(([key, { name, descShort }]) => {
@@ -111,6 +113,9 @@ const mapDispatchToProps = {
   expandSection: expandActivitySection
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExecutiveSummary);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExecutiveSummary);
 
 export { ExecutiveSummary as plain, mapStateToProps, mapDispatchToProps };

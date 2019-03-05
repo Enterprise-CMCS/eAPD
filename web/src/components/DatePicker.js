@@ -18,8 +18,9 @@ class DatePickerWrapper extends Component {
   }
 
   onDateChange = date => {
-    if (this.props.onChange) {
-      this.props.onChange(date ? dateToStr(date) : '');
+    const { onChange } = this.props;
+    if (onChange) {
+      onChange(date ? dateToStr(date) : '');
     }
 
     this.setState({ date });
