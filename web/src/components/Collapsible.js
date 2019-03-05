@@ -23,11 +23,14 @@ class Collapsible extends Component {
       children,
       id,
       nested,
+      open: openProp,
       sticky,
       title,
       onChange
     } = this.props;
-    const isOpen = onChange ? this.props.open : this.state.open;
+    const { open: openState } = this.state;
+
+    const isOpen = onChange ? openProp : openState;
     const contentId = `collapsible-${kebabCase(title)}`;
 
     let btnClass = deline`

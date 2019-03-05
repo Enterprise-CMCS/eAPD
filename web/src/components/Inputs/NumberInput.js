@@ -13,13 +13,16 @@ const makeNumberInput = formatProps => {
     };
 
     handleChange = e => {
-      if (!this.props.onChange) return;
+      const { onChange } = this.props;
+      if (!onChange) {
+        return;
+      }
 
       const newEvent = {
         target: { value: e.floatValue || 0, masked: e.formattedValue }
       };
 
-      this.props.onChange(newEvent);
+      onChange(newEvent);
     };
 
     render() {
