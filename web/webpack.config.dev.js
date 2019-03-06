@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const config = {
+  mode: 'development',
   entry: {
     js: [
       path.join(__dirname, 'src/app.dev.js'),

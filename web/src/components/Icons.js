@@ -11,14 +11,18 @@ import {
   faCog,
   faEdit,
   faExclamationTriangle,
-  faHelpSolid,
+  faQuestionCircle as faHelpSolid,
   faPlusCircle,
   faPrint,
   faSpinner,
-  faSignOut
+  faSignOutAlt as faSignOut
 } from '@fortawesome/free-solid-svg-icons';
 
-import { faHelp, faCircle, faClock } from '@fortawesome/free-regular-svg-icons';
+import {
+  faQuestionCircle as faHelp,
+  faCircle,
+  faClock
+} from '@fortawesome/free-regular-svg-icons';
 
 export {
   faArrowRight,
