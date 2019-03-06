@@ -291,7 +291,9 @@ exports[`incentive payments component renders correctly 1`] = `
             className="bold mono right-align align-middle bg-teal-light"
             headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
           >
-            $10
+            <Dollars>
+              10
+            </Dollars>
           </td>
           <td
             headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
@@ -357,13 +359,17 @@ exports[`incentive payments component renders correctly 1`] = `
             className="bold mono right-align align-middle bg-green-light"
             headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
           >
-            $26
+            <Dollars>
+              26
+            </Dollars>
           </td>
           <td
             className="bold mono right-align align-middle bg-gray-light"
             headers="incentive-payments-table-fytotal incentive-payments-table-fytotal-qgrand"
           >
-            $36
+            <Dollars>
+              36
+            </Dollars>
           </td>
         </tr>
         <tr
@@ -587,7 +593,9 @@ exports[`incentive payments component renders correctly 1`] = `
             className="bold mono right-align align-middle bg-teal-light"
             headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
           >
-            $74
+            <Dollars>
+              74
+            </Dollars>
           </td>
           <td
             headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
@@ -653,13 +661,17 @@ exports[`incentive payments component renders correctly 1`] = `
             className="bold mono right-align align-middle bg-green-light"
             headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
           >
-            $90
+            <Dollars>
+              90
+            </Dollars>
           </td>
           <td
             className="bold mono right-align align-middle bg-gray-light"
             headers="incentive-payments-table-fytotal incentive-payments-table-fytotal-qgrand"
           >
-            $164
+            <Dollars>
+              164
+            </Dollars>
           </td>
         </tr>
         <tr

@@ -3,13 +3,17 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
+import Dollars from '../components/Dollars';
 import { Input, DollarInput } from '../components/Inputs';
 import { t } from '../i18n';
 import { INCENTIVE_ENTRIES } from '../util';
-import { formatMoney, formatNum } from '../util/formats';
+import { formatNum } from '../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
 const COLORS = ['teal', 'green', 'yellow'];
+
+const formatNumber = (type, number) =>
+  type === 'amount' ? <Dollars>{number}</Dollars> : formatNum(number);
 
 const thId = (fy, q) => `incentive-payments-table-fy${fy}${q ? `-q${q}` : ''}`;
 const tdHdrs = (fy, q) =>
@@ -34,25 +38,22 @@ class IncentivePayments extends Component {
     return (
       <div className="table-frozen-wrapper">
         <div className="table-frozen-scroller">
-          <table className="table-cms table-fixed table-frozen-left-pane" aria-hidden="true">
+          <table
+            className="table-cms table-fixed table-frozen-left-pane"
+            aria-hidden="true"
+          >
             <thead>
               <tr>
-                <th className="table-frozen-null-cell">
-                  --
-                </th>
+                <th className="table-frozen-null-cell">--</th>
               </tr>
               <tr>
-                <th className="table-frozen-null-cell">
-                  --
-                </th>
+                <th className="table-frozen-null-cell">--</th>
               </tr>
             </thead>
             <tbody>
               {INCENTIVE_ENTRIES.map(({ id, name }) => (
                 <tr key={id}>
-                  <td>
-                    {name}
-                  </td>
+                  <td>{name}</td>
                   <td>
                     <DollarInput
                       hideLabel
@@ -66,7 +67,10 @@ class IncentivePayments extends Component {
               ))}
             </tbody>
           </table>
-          <table className="table-cms table-fixed table-frozen-data" style={{ minWidth: 1200 }}>
+          <table
+            className="table-cms table-fixed table-frozen-data"
+            style={{ minWidth: 1200 }}
+          >
             <thead>
               <tr>
                 <th style={{ width: 140 }} id={thId('null1')} />
@@ -107,7 +111,6 @@ class IncentivePayments extends Component {
             <tbody>
               {INCENTIVE_ENTRIES.map(({ id, name, type }, i) => {
                 const InputComponent = type === 'amount' ? DollarInput : Input;
-                const fmt = type === 'amount' ? formatMoney : formatNum;
 
                 return (
                   <tr key={id}>
@@ -136,7 +139,7 @@ class IncentivePayments extends Component {
                           className={`bold mono right-align align-middle ${colorLight}`}
                           headers={tdHdrs(year, 'subtotal')}
                         >
-                          {fmt(totals[id].byYear[year])}
+                          {formatNumber(type, totals[id].byYear[year])}
                         </td>
                       </Fragment>
                     ))}
@@ -144,7 +147,7 @@ class IncentivePayments extends Component {
                       className="bold mono right-align align-middle bg-gray-light"
                       headers={tdHdrs('total', 'grand')}
                     >
-                      {fmt(totals[id].allYears)}
+                      {formatNumber(type, totals[id].allYears)}
                     </td>
                   </tr>
                 );
@@ -188,6 +191,9 @@ const mapStateToProps = ({ apd }) => {
 
 const mapDispatchToProps = { updateApd: updateApdAction };
 
-export default connect(mapStateToProps, mapDispatchToProps)(IncentivePayments);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(IncentivePayments);
 
 export { IncentivePayments as plain, mapStateToProps, mapDispatchToProps };
