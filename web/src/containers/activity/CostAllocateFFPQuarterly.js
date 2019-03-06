@@ -103,7 +103,7 @@ class CostAllocateFFPQuarterly extends Component {
                 </tr>
               </tbody>
             </table>
-            <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
+            <table className="table-cms table-fixed table-fullscreen">
               <thead>
                 <tr>
                   <th

@@ -22,7 +22,8 @@
   .site-sidebar,
   .btn-collapse svg,
   .alert,
-  .rdw-editor-toolbar {
+  .rdw-editor-toolbar,
+  .table-frozen-left-pane {
     display: none;
   }
 
@@ -62,5 +63,10 @@
   .has-sticky-header {
     padding-left: 0;
     padding-right: 0;
+  }
+
+  table input {
+    padding: 0 !important;
+    border: none !important;
   }
 }

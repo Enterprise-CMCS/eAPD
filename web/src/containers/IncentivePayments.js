@@ -66,7 +66,7 @@ class IncentivePayments extends Component {
               ))}
             </tbody>
           </table>
-          <table className="table-cms table-fixed table-frozen-data" style={{ minWidth: 1200 }}>
+          <table className="table-cms table-fixed table-frozen-data table-fullscreen">
             <thead>
               <tr>
                 <th style={{ width: 140 }} id={thId('null1')} />
