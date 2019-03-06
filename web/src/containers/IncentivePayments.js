@@ -19,7 +19,8 @@ class IncentivePayments extends Component {
   handleChange = (key, year, quarter) => e => {
     const { value } = e.target;
     const incentivePayments = { [key]: { [year]: { [quarter]: value } } };
-    this.props.updateApd({ incentivePayments });
+    const { updateApd: action } = this.props;
+    action({ incentivePayments });
   };
 
   render() {
@@ -34,25 +35,22 @@ class IncentivePayments extends Component {
     return (
       <div className="table-frozen-wrapper">
         <div className="table-frozen-scroller">
-          <table className="table-cms table-fixed table-frozen-left-pane" aria-hidden="true">
+          <table
+            className="table-cms table-fixed table-frozen-left-pane"
+            aria-hidden="true"
+          >
             <thead>
               <tr>
-                <th className="table-frozen-null-cell">
-                  --
-                </th>
+                <th className="table-frozen-null-cell">--</th>
               </tr>
               <tr>
-                <th className="table-frozen-null-cell">
-                  --
-                </th>
+                <th className="table-frozen-null-cell">--</th>
               </tr>
             </thead>
             <tbody>
               {INCENTIVE_ENTRIES.map(({ id, name }) => (
                 <tr key={id}>
-                  <td>
-                    {name}
-                  </td>
+                  <td>{name}</td>
                   <td>
                     <DollarInput
                       hideLabel
@@ -66,7 +64,10 @@ class IncentivePayments extends Component {
               ))}
             </tbody>
           </table>
-          <table className="table-cms table-fixed table-frozen-data" style={{ minWidth: 1200 }}>
+          <table
+            className="table-cms table-fixed table-frozen-data"
+            style={{ minWidth: 1200 }}
+          >
             <thead>
               <tr>
                 <th style={{ width: 140 }} id={thId('null1')} />
@@ -188,6 +189,9 @@ const mapStateToProps = ({ apd }) => {
 
 const mapDispatchToProps = { updateApd: updateApdAction };
 
-export default connect(mapStateToProps, mapDispatchToProps)(IncentivePayments);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(IncentivePayments);
 
 export { IncentivePayments as plain, mapStateToProps, mapDispatchToProps };

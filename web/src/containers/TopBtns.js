@@ -10,12 +10,14 @@ import Btn from '../components/Btn';
 class TopBtns extends Component {
   handleLogout = e => {
     e.preventDefault();
-    this.props.pushRoute('/logout');
+    const { pushRoute } = this.props;
+    pushRoute('/logout');
   };
 
   goToDashboard = e => {
     e.preventDefault();
-    this.props.pushRoute('/');
+    const { pushRoute } = this.props;
+    pushRoute('/');
   };
 
   render() {

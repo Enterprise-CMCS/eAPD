@@ -23,7 +23,8 @@ class ApdApplication extends Component {
     // Hook the browser's beforeunload event to catch page reloads or manual
     // changes to the URL bar while the APD is loaded.
     this.unloadListener = window.addEventListener('beforeunload', e => {
-      if (this.props.dirty) {
+      const { dirty } = this.props;
+      if (dirty) {
         e.preventDefault();
         e.returnValue = unsavedPrompt;
       }

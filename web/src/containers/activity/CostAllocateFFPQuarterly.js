@@ -28,7 +28,8 @@ class CostAllocateFFPQuarterly extends Component {
         [year]: { [q]: { [name]: +e.target.value } }
       }
     };
-    this.props.update(this.props.aKey, change, true);
+    const { aKey, update } = this.props;
+    update(aKey, change, true);
   };
 
   render() {
@@ -41,21 +42,16 @@ class CostAllocateFFPQuarterly extends Component {
       <div>
         <div className="mb3 table-frozen-wrapper">
           <div className="table-frozen-scroller">
-            <table className="table-cms table-fixed table-frozen-left-pane" aria-hidden="true">
+            <table
+              className="table-cms table-fixed table-frozen-left-pane"
+              aria-hidden="true"
+            >
               <thead>
                 <tr>
-                  <th
-                    className="table-frozen-null-cell"
-                  >
-                    --
-                  </th>
+                  <th className="table-frozen-null-cell">--</th>
                 </tr>
                 <tr>
-                  <th
-                    className="table-frozen-null-cell"
-                  >
-                    --
-                  </th>
+                  <th className="table-frozen-null-cell">--</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,10 +63,7 @@ class CostAllocateFFPQuarterly extends Component {
                         name === 'combined' ? 'bold' : ''
                       }`}
                     >
-                      <td
-                        rowSpan="2"
-                        headers="act_qbudget_null1"
-                      >
+                      <td rowSpan="2" headers="act_qbudget_null1">
                         {EXPENSE_NAME_DISPLAY[name]}
                       </td>
                       <td
@@ -97,9 +90,7 @@ class CostAllocateFFPQuarterly extends Component {
                   </Fragment>
                 ))}
                 <tr className="bold">
-                  <td>
-                    {EXPENSE_NAME_DISPLAY.combined}
-                  </td>
+                  <td>{EXPENSE_NAME_DISPLAY.combined}</td>
                 </tr>
               </tbody>
             </table>
@@ -286,6 +277,7 @@ const mapStateToProps = ({ apd, budget: { activities } }, { aKey }) => {
 
 const mapDispatchToProps = { update: updateActivity };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  CostAllocateFFPQuarterly
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CostAllocateFFPQuarterly);

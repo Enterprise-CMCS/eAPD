@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Md from '../components/Md';
+import Md from './Md';
 import { t } from '../i18n';
 
 const HelpText = ({ children }) => (

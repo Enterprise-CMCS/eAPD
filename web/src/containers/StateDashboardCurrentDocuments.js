@@ -164,7 +164,10 @@ DocumentItem.defaultProps = {
 };
 
 class CurrentDocuments extends Component {
-  open = id => () => this.props.selectApd(id);
+  open = id => () => {
+    const { selectApd: selectApdProp } = this.props;
+    selectApdProp(id);
+  };
 
   render() {
     const { apds, fetching } = this.props;

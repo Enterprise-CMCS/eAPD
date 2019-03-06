@@ -54,20 +54,23 @@ describe('incentive payments component', () => {
     const types = ['ehAmt', 'ehCt', 'epAmt', 'epCt'];
     const years = ['1', '2'];
 
-    component.find('InputHolder').not('.fake-spacer-input').forEach((c, i) => {
-      c.simulate('change', { target: { value: 99 } });
+    component
+      .find('InputHolder')
+      .not('.fake-spacer-input')
+      .forEach((c, i) => {
+        c.simulate('change', { target: { value: 99 } });
 
-      const q = i % 4 + 1;
-      const year = years[Math.floor(i / 4) % years.length];
-      const type =
-        types[Math.floor(Math.floor(i / 4) / years.length) % types.length];
+        const q = (i % 4) + 1;
+        const year = years[Math.floor(i / 4) % years.length];
+        const type =
+          types[Math.floor(Math.floor(i / 4) / years.length) % types.length];
 
-      expect(
-        updateApdProp.calledWith({
-          incentivePayments: { [type]: { [year]: { [q]: 99 } } }
-        })
-      ).toBeTruthy();
-    });
+        expect(
+          updateApdProp.calledWith({
+            incentivePayments: { [type]: { [year]: { [q]: 99 } } }
+          })
+        ).toBeTruthy();
+      });
   });
 
   test('maps state to props', () => {
