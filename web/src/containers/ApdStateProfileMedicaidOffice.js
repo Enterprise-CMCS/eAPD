@@ -13,7 +13,9 @@ class ApdStateProfile extends Component {
   };
 
   render() {
-    const { medicaidDirector, medicaidOffice } = this.props.stateProfile;
+    const {
+      stateProfile: { medicaidDirector, medicaidOffice }
+    } = this.props;
     const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
     const offTRoot = 'apd.stateProfile.directorAndAddress.address';
 

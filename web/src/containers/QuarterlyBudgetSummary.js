@@ -25,20 +25,22 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
       {FUNDING_SOURCES.map(([source, sourceDisplay]) => {
         const data = budget[source];
         return (
-          <div key={source} className="mb3 table-frozen-wrapper table-frozen-wide-header">
+          <div
+            key={source}
+            className="mb3 table-frozen-wrapper table-frozen-wide-header"
+          >
             <h3 className="mt0">{sourceDisplay}</h3>
             <div className="overflow-x table-frozen-scroller">
-              <table className="table-cms table-frozen-left-pane" aria-hidden="true">
+              <table
+                className="table-cms table-frozen-left-pane"
+                aria-hidden="true"
+              >
                 <thead>
                   <tr>
-                    <th className="table-frozen-null-cell">
-                      --
-                    </th>
+                    <th className="table-frozen-null-cell">--</th>
                   </tr>
                   <tr>
-                    <th className="table-frozen-null-cell">
-                      --
-                    </th>
+                    <th className="table-frozen-null-cell">--</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -47,9 +49,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                       key={name}
                       className={`${name === 'combined' ? 'bold' : ''}`}
                     >
-                      <td>
-                        {EXPENSE_NAME_DISPLAY[name]}
-                      </td>
+                      <td>{EXPENSE_NAME_DISPLAY[name]}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -57,9 +57,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
               <table className="table-cms table-frozen-data">
                 <thead>
                   <tr>
-                    <th
-                      id={`quarterly-budget-summary-${source}-null1`}
-                    />
+                    <th id={`quarterly-budget-summary-${source}-null1`} />
                     {years.map((year, i) => (
                       <th
                         key={year}

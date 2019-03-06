@@ -36,13 +36,15 @@ LinkOrText.defaultProps = {
 
 class AssurancesAndCompliance extends Component {
   handleCheckChange = (section, index, newValue) => () => {
-    this.props.updateApd({
+    const { updateApd } = this.props;
+    updateApd({
       federalCitations: { [section]: { [index]: { checked: newValue } } }
     });
   };
 
   handleExplanationChange = (section, index) => e => {
-    this.props.updateApd({
+    const { updateApd } = this.props;
+    updateApd({
       federalCitations: {
         [section]: { [index]: { explanation: e.target.value } }
       }

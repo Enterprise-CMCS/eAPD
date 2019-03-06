@@ -7,12 +7,16 @@ import { processQueue, closeNotification } from '../actions/notification';
 
 class Notification extends Component {
   handleClose = (_, reason) => {
-    if (reason === 'clickaway') return;
-    this.props.closeNotification();
+    if (reason === 'clickaway') {
+      return;
+    }
+    const { closeNotification: action } = this.props;
+    action();
   };
 
   handleExited = () => {
-    this.props.processQueue();
+    const { processQueue: action } = this.props;
+    action();
   };
 
   render() {
@@ -62,6 +66,9 @@ const mapDispatchToProps = {
   closeNotification
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Notification);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Notification);
 
 export { Notification as plain, mapStateToProps, mapDispatchToProps };

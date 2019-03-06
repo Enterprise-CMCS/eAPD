@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 class Wrapper extends Component {
   componentDidMount() {
-    if (this.props.isDev) {
+    const { isDev } = this.props;
+    if (isDev) {
       this.addTota11y();
     }
   }

@@ -21,18 +21,21 @@ class ApdSummary extends Component {
   };
 
   syncRichText = name => html => {
-    this.props.updateApd({ [name]: html });
+    const { updateApd } = this.props;
+    updateApd({ [name]: html });
   };
 
   render() {
     const {
-      years,
-      yearOptions,
-      programOverview,
-      narrativeHIT,
-      narrativeHIE,
-      narrativeMMIS
-    } = this.props.apd;
+      apd: {
+        years,
+        yearOptions,
+        programOverview,
+        narrativeHIT,
+        narrativeHIE,
+        narrativeMMIS
+      }
+    } = this.props;
 
     return (
       <Section id="apd-summary" resource="apd">

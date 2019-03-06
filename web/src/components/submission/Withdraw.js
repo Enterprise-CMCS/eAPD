@@ -26,12 +26,14 @@ class Withdraw extends Component {
   }
 
   withdraw() {
+    const { withdrawApd } = this.props;
     this.setState({ showWithdrawlConfirmation: true });
-    this.props.withdrawApd();
+    withdrawApd();
   }
 
   render() {
     const { dirty, status } = this.props;
+    const { showWithdrawlConfirmation } = this.state;
 
     if (status !== 'draft') {
       return (
@@ -42,7 +44,9 @@ class Withdraw extends Component {
           </Btn>
         </div>
       );
-    } else if (this.state.showWithdrawlConfirmation && !dirty) {
+    }
+
+    if (showWithdrawlConfirmation && !dirty) {
       return (
         <div className="ml3">
           <Instruction source="certifyAndSubmit.withdraw.confirmation.instruction" />

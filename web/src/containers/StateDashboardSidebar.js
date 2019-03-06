@@ -8,7 +8,10 @@ import { t } from '../i18n';
 import { selectApd } from '../actions/apd';
 
 class Sidebar extends Component {
-  pickApd = id => () => this.props.selectApd(id);
+  pickApd = id => () => {
+    const { selectApd: action } = this.props;
+    action(id);
+  };
 
   render() {
     const { apds, place } = this.props;
@@ -35,15 +38,15 @@ class Sidebar extends Component {
               items={[
                 {
                   label: `${place.name} APDs`,
-                  id: "state-apds",
-                  items: apds.map(apd => (
-                    {
-                      id: `${apd.id}`,
-                      label: `${apd.years.join(', ')} ${place.id.toUpperCase()} APD`,
-                      url: 'javascript:void(0);', // eslint-disable-line no-script-url
-                      onClick: this.pickApd(apd.id)
-                    }
-                  )),
+                  id: 'state-apds',
+                  items: apds.map(apd => ({
+                    id: `${apd.id}`,
+                    label: `${apd.years.join(
+                      ', '
+                    )} ${place.id.toUpperCase()} APD`,
+                    url: 'javascript:void(0);', // eslint-disable-line no-script-url
+                    onClick: this.pickApd(apd.id)
+                  }))
                 }
               ]}
             />

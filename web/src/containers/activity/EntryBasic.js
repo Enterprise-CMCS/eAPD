@@ -79,4 +79,7 @@ const mapDispatchToProps = {
   removeActivity: removeActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EntryBasic);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EntryBasic);

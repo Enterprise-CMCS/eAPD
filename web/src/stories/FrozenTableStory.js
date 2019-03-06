@@ -5,12 +5,19 @@ import RenderViewbox from './RenderViewbox';
 const FrozenTableStory = () => (
   <Fragment>
     <h1> Frozen-pane scrollable table</h1>
-    <h2> It renders like this (artificially constrained here to show scroll capability):</h2>
+    <h2>
+      {' '}
+      It renders like this (artificially constrained here to show scroll
+      capability):
+    </h2>
     <RenderViewbox>
       <div className="table-frozen-wrapper" style={{ width: 500 }}>
         <h3>HIT and HIE</h3>
         <div className="table-frozen-scroller">
-          <table className="table-cms table-frozen-left-pane" aria-hidden="true">
+          <table
+            className="table-cms table-frozen-left-pane"
+            aria-hidden="true"
+          >
             <thead>
               <tr>
                 <th className="table-frozen-null-cell">--</th>
@@ -38,65 +45,305 @@ const FrozenTableStory = () => (
             <thead>
               <tr>
                 <th id="quarterly-budget-summary-hitAndHie-null1" />
-                <th className="center" colSpan="5" id="quarterly-budget-summary-hitAndHie-fy-2019">FFY 2019</th>
-                <th className="center" colSpan="5" id="quarterly-budget-summary-hitAndHie-fy-2020">FFY 2020</th>
-                <th className="center" id="quarterly-budget-summary-hitAndHie-total">Total</th>
+                <th
+                  className="center"
+                  colSpan="5"
+                  id="quarterly-budget-summary-hitAndHie-fy-2019"
+                >
+                  FFY 2019
+                </th>
+                <th
+                  className="center"
+                  colSpan="5"
+                  id="quarterly-budget-summary-hitAndHie-fy-2020"
+                >
+                  FFY 2020
+                </th>
+                <th
+                  className="center"
+                  id="quarterly-budget-summary-hitAndHie-total"
+                >
+                  Total
+                </th>
               </tr>
               <tr>
                 <th id="quarterly-budget-summary-hitAndHie-null2" />
-                <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2019-q1">Q1</th>
-                <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2019-q2">Q2</th>
-                <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2019-q3">Q3</th>
-                <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2019-q4">Q4</th>
-                <th className="right-align" id="quarterly-budget-summary-hitAndHie-fy-2019-subtotal">Subtotal</th>
-                <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2020-q1">Q1</th>
-                <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2020-q2">Q2</th>
-                <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2020-q3">Q3</th>
-                <th className="center" id="quarterly-budget-summary-hitAndHie-fy-2020-q4">Q4</th>
-                <th className="right-align" id="quarterly-budget-summary-hitAndHie-fy-2020-subtotal">Subtotal</th>
+                <th
+                  className="center"
+                  id="quarterly-budget-summary-hitAndHie-fy-2019-q1"
+                >
+                  Q1
+                </th>
+                <th
+                  className="center"
+                  id="quarterly-budget-summary-hitAndHie-fy-2019-q2"
+                >
+                  Q2
+                </th>
+                <th
+                  className="center"
+                  id="quarterly-budget-summary-hitAndHie-fy-2019-q3"
+                >
+                  Q3
+                </th>
+                <th
+                  className="center"
+                  id="quarterly-budget-summary-hitAndHie-fy-2019-q4"
+                >
+                  Q4
+                </th>
+                <th
+                  className="right-align"
+                  id="quarterly-budget-summary-hitAndHie-fy-2019-subtotal"
+                >
+                  Subtotal
+                </th>
+                <th
+                  className="center"
+                  id="quarterly-budget-summary-hitAndHie-fy-2020-q1"
+                >
+                  Q1
+                </th>
+                <th
+                  className="center"
+                  id="quarterly-budget-summary-hitAndHie-fy-2020-q2"
+                >
+                  Q2
+                </th>
+                <th
+                  className="center"
+                  id="quarterly-budget-summary-hitAndHie-fy-2020-q3"
+                >
+                  Q3
+                </th>
+                <th
+                  className="center"
+                  id="quarterly-budget-summary-hitAndHie-fy-2020-q4"
+                >
+                  Q4
+                </th>
+                <th
+                  className="right-align"
+                  id="quarterly-budget-summary-hitAndHie-fy-2020-subtotal"
+                >
+                  Subtotal
+                </th>
                 <th id="quarterly-budget-summary-hitAndHie-total2" />
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2">In-House Costs</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q1">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q2">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q3">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q4">--</td>
-                <td className="bold mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-subtotal">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q1">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q2">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q3">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q4">--</td>
-                <td className="bold mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-subtotal">--</td>
-                <td className="bold mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-total2 quarterly-budget-summary-hitAndHie-total">--</td>
+                <td headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2">
+                  In-House Costs
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q1"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q2"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q3"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q4"
+                >
+                  --
+                </td>
+                <td
+                  className="bold mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-subtotal"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q1"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q2"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q3"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q4"
+                >
+                  --
+                </td>
+                <td
+                  className="bold mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-subtotal"
+                >
+                  --
+                </td>
+                <td
+                  className="bold mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-total2 quarterly-budget-summary-hitAndHie-total"
+                >
+                  --
+                </td>
               </tr>
               <tr>
-                <td headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2">Private Contractor Costs</td><td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q1">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q2">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q3">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q4">--</td>
-                <td className="bold mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-subtotal">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q1">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q2">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q3">--</td>
-                <td className="mono right-align nowrap " headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q4">--</td>
-                <td className="bold mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-subtotal">--</td>
-                <td className="bold mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-total2 quarterly-budget-summary-hitAndHie-total">--</td>
+                <td headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2">
+                  Private Contractor Costs
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q1"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q2"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q3"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q4"
+                >
+                  --
+                </td>
+                <td
+                  className="bold mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-subtotal"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q1"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q2"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q3"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap "
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q4"
+                >
+                  --
+                </td>
+                <td
+                  className="bold mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-subtotal"
+                >
+                  --
+                </td>
+                <td
+                  className="bold mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-total2 quarterly-budget-summary-hitAndHie-total"
+                >
+                  --
+                </td>
               </tr>
-              <tr className="bold"><td headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2">Total Enhanced FFP</td>
-                <td className="mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q1">--</td>
-                <td className="mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q2">--</td>
-                <td className="mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q3">--</td>
-                <td className="mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q4">--</td>
-                <td className="bold mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-subtotal">--</td>
-                <td className="mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q1">--</td>
-                <td className="mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q2">--</td>
-                <td className="mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q3">--</td>
-                <td className="mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q4">--</td>
-                <td className="bold mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-subtotal">--</td>
-                <td className="bold mono right-align nowrap" headers="quarterly-budget-summary-hitAndHie-total2 quarterly-budget-summary-hitAndHie-total">--</td>
+              <tr className="bold">
+                <td headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2">
+                  Total Enhanced FFP
+                </td>
+                <td
+                  className="mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q1"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q2"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q3"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-q4"
+                >
+                  --
+                </td>
+                <td
+                  className="bold mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2019 quarterly-budget-summary-hitAndHie-fy-2019-subtotal"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q1"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q2"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q3"
+                >
+                  --
+                </td>
+                <td
+                  className="mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-q4"
+                >
+                  --
+                </td>
+                <td
+                  className="bold mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-fy-2020 quarterly-budget-summary-hitAndHie-fy-2020-subtotal"
+                >
+                  --
+                </td>
+                <td
+                  className="bold mono right-align nowrap"
+                  headers="quarterly-budget-summary-hitAndHie-total2 quarterly-budget-summary-hitAndHie-total"
+                >
+                  --
+                </td>
               </tr>
             </tbody>
           </table>
@@ -140,15 +387,24 @@ const FrozenTableStory = () => (
       </code>
     </pre>
     <p>
-      Essentially, this renders a table of just headers on top of the full table.  The first table is what creates the scrollable sticky pane.  In order to get the height of the columns in the header table right, we render the first column of real content, also (this is especially helpful when the table contains input elements).
+      Essentially, this renders a table of just headers on top of the full
+      table. The first table is what creates the scrollable sticky pane. In
+      order to get the height of the columns in the header table right, we
+      render the first column of real content, also (this is especially helpful
+      when the table contains input elements).
     </p>
     <p>
-      If you have a table with a very wordy or terse set of headers in the left pane, you can use `table-frozen-wide-header` or `table-frozen-narrow-header` on the `table-frozen-wrapper` class to change the constraints.
+      If you have a table with a very wordy or terse set of headers in the left
+      pane, you can use `table-frozen-wide-header` or
+      `table-frozen-narrow-header` on the `table-frozen-wrapper` class to change
+      the constraints.
     </p>
     <p>
-      When you have a table with inputs, you should give the inputs in the frozen pane a `name` of `fake-spacer-input` (otherwise some tests may fail).
+      When you have a table with inputs, you should give the inputs in the
+      frozen pane a `name` of `fake-spacer-input` (otherwise some tests may
+      fail).
     </p>
   </Fragment>
-)
+);
 
 export default FrozenTableStory;

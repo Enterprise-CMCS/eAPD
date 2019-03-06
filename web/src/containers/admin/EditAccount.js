@@ -131,7 +131,9 @@ class EditAccount extends Component {
 
   editAccount = e => {
     e.preventDefault();
-    this.props.editAccount(this.state.user);
+    const { editAccount } = this.props;
+    const { user } = this.state;
+    editAccount(user);
   };
 
   render() {
