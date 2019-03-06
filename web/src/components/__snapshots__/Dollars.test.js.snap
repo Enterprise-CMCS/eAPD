@@ -3,12 +3,12 @@
 exports[`Dollars formatting container prints full numbers below $100,000 1`] = `
 <Fragment>
   <span
-    className="only-screen"
+    className="visibility--screen"
   >
     $50,000
   </span>
   <span
-    className="only-print"
+    className="visibility--print"
   >
     $50,000
   </span>
@@ -18,12 +18,12 @@ exports[`Dollars formatting container prints full numbers below $100,000 1`] = `
 exports[`Dollars formatting container prints truncated numbers above $100,000 1`] = `
 <Fragment>
   <span
-    className="only-screen"
+    className="visibility--screen"
   >
     $500k
   </span>
   <span
-    className="only-print"
+    className="visibility--print"
   >
     $500,000
   </span>
@@ -33,12 +33,12 @@ exports[`Dollars formatting container prints truncated numbers above $100,000 1`
 exports[`Dollars formatting container shows B for billions instead of G for giga 1`] = `
 <Fragment>
   <span
-    className="only-screen"
+    className="visibility--screen"
   >
     $50B
   </span>
   <span
-    className="only-print"
+    className="visibility--print"
   >
     $50,000,000,000
   </span>
