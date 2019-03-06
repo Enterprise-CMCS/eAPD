@@ -1,5 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`auth checker component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`auth checker component renders correctly 1`] = `""`;
 
-exports[`auth checker component renders correctly 2`] = `ShallowWrapper {}`;
+exports[`auth checker component renders correctly 2`] = `
+<Fragment>
+  <div />
+</Fragment>
+`;

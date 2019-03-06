@@ -3,9 +3,10 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity } from '../../actions/activities';
+import Dollars from '../../components/Dollars';
 import { PercentInput } from '../../components/Inputs';
 import { t } from '../../i18n';
-import { formatMoney, formatPerc } from '../../util/formats';
+import { formatPerc } from '../../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
 const COLORS = ['teal', 'green', 'yellow'];
@@ -41,21 +42,16 @@ class CostAllocateFFPQuarterly extends Component {
       <div>
         <div className="mb3 table-frozen-wrapper">
           <div className="table-frozen-scroller">
-            <table className="table-cms table-fixed table-frozen-left-pane" aria-hidden="true">
+            <table
+              className="table-cms table-fixed table-frozen-left-pane"
+              aria-hidden="true"
+            >
               <thead>
                 <tr>
-                  <th
-                    className="table-frozen-null-cell"
-                  >
-                    --
-                  </th>
+                  <th className="table-frozen-null-cell">--</th>
                 </tr>
                 <tr>
-                  <th
-                    className="table-frozen-null-cell"
-                  >
-                    --
-                  </th>
+                  <th className="table-frozen-null-cell">--</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,10 +63,7 @@ class CostAllocateFFPQuarterly extends Component {
                         name === 'combined' ? 'bold' : ''
                       }`}
                     >
-                      <td
-                        rowSpan="2"
-                        headers="act_qbudget_null1"
-                      >
+                      <td rowSpan="2" headers="act_qbudget_null1">
                         {EXPENSE_NAME_DISPLAY[name]}
                       </td>
                       <td
@@ -97,9 +90,7 @@ class CostAllocateFFPQuarterly extends Component {
                   </Fragment>
                 ))}
                 <tr className="bold">
-                  <td>
-                    {EXPENSE_NAME_DISPLAY.combined}
-                  </td>
+                  <td>{EXPENSE_NAME_DISPLAY.combined}</td>
                 </tr>
               </tbody>
             </table>
@@ -197,7 +188,7 @@ class CostAllocateFFPQuarterly extends Component {
                         className="bold mono right-align bg-gray-light"
                         headers="act_qbudget_total"
                       >
-                        {formatMoney(quarterlyFFP.total[name])}
+                        <Dollars>{quarterlyFFP.total[name]}</Dollars>
                       </td>
                     </tr>
                     <tr>
@@ -211,7 +202,9 @@ class CostAllocateFFPQuarterly extends Component {
                               key={q}
                               headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                             >
-                              {formatMoney(quarterlyFFP[year][q][name].dollars)}
+                              <Dollars>
+                                {quarterlyFFP[year][q][name].dollars}
+                              </Dollars>
                             </td>
                           ))}
                           <td
@@ -220,9 +213,9 @@ class CostAllocateFFPQuarterly extends Component {
                             )}-light`}
                             headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
                           >
-                            {formatMoney(
-                              quarterlyFFP[year].subtotal[name].dollars
-                            )}
+                            <Dollars>
+                              {quarterlyFFP[year].subtotal[name].dollars}
+                            </Dollars>
                           </td>
                         </Fragment>
                       ))}
@@ -239,16 +232,18 @@ class CostAllocateFFPQuarterly extends Component {
                           key={q}
                           headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                         >
-                          {formatMoney(quarterlyFFP[year][q].combined.dollars)}
+                          <Dollars>
+                            {quarterlyFFP[year][q].combined.dollars}
+                          </Dollars>
                         </td>
                       ))}
                       <td
                         className={`bold mono right-align ${color(i)}-light`}
                         headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
                       >
-                        {formatMoney(
-                          quarterlyFFP[year].subtotal.combined.dollars
-                        )}
+                        <Dollars>
+                          {quarterlyFFP[year].subtotal.combined.dollars}
+                        </Dollars>
                       </td>
                     </Fragment>
                   ))}
@@ -256,7 +251,7 @@ class CostAllocateFFPQuarterly extends Component {
                     className="bold mono right-align bg-gray-light"
                     headers="act_qbudget_total"
                   >
-                    {formatMoney(quarterlyFFP.total.combined)}
+                    <Dollars>{quarterlyFFP.total.combined}</Dollars>
                   </td>
                 </tr>
               </tbody>
@@ -286,6 +281,7 @@ const mapStateToProps = ({ apd, budget: { activities } }, { aKey }) => {
 
 const mapDispatchToProps = { update: updateActivity };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  CostAllocateFFPQuarterly
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CostAllocateFFPQuarterly);

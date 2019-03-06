@@ -110,6 +110,7 @@
     "d3-geo": "^1.11.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
+    "enzyme-to-json": "^3.3.5",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.10.0",
@@ -166,6 +167,9 @@
     "setupFiles": [
       "../polyfills.test.js",
       "../setup.test.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
     ],
     "transform": {
       "\\.js?$": "babel-jest",
