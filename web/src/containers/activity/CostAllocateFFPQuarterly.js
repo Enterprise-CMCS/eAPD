@@ -29,7 +29,8 @@ class CostAllocateFFPQuarterly extends Component {
         [year]: { [q]: { [name]: +e.target.value } }
       }
     };
-    this.props.update(this.props.aKey, change, true);
+    const { aKey, update } = this.props;
+    update(aKey, change, true);
   };
 
   render() {

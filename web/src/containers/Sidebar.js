@@ -183,6 +183,8 @@ class Sidebar extends Component {
       }
     ];
 
+    const { selectedId } = this.state;
+
     return (
       <div className="ds-l-col--3 bg-white">
         <aside className="site-sidebar">
@@ -200,7 +202,7 @@ class Sidebar extends Component {
                 {t('title', { year: '2018' })}
               </h1>
             </div>
-            <VerticalNav selectedId={this.state.selectedId} items={links} />
+            <VerticalNav selectedId={selectedId} items={links} />
             <div className="ds-u-margin-top--2">
               <Btn onClick={() => saveApdToAPI()}>
                 {t('sidebar.saveApdButtonText')}

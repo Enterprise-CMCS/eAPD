@@ -23,7 +23,8 @@ class IncentivePayments extends Component {
   handleChange = (key, year, quarter) => e => {
     const { value } = e.target;
     const incentivePayments = { [key]: { [year]: { [quarter]: value } } };
-    this.props.updateApd({ incentivePayments });
+    const { updateApd: action } = this.props;
+    action({ incentivePayments });
   };
 
   render() {

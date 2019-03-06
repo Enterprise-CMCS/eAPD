@@ -157,7 +157,10 @@ class ApdStateKeyPersonnel extends Component {
     dispatchBudget();
   };
 
-  removePerson = (_, i) => this.props.removeKeyPerson(i);
+  removePerson = (_, i) => {
+    const { removeKeyPerson: action } = this.props;
+    action(i);
+  };
 
   render() {
     const {

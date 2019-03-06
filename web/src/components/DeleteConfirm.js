@@ -33,19 +33,21 @@ DeleteConfirm.propTypes = {
 
 class DeleteButton extends Component {
   handleClick = () => {
+    const { resource } = this.props;
     confirmAlert({
       customUI: ({ onClose }) => (
         <DeleteConfirm
           onClose={onClose}
           onConfirm={this.handleConfirm}
-          resource={this.props.resource}
+          resource={resource}
         />
       )
     });
   };
 
   handleConfirm = () => {
-    this.props.remove();
+    const { remove } = this.props;
+    remove();
   };
 
   render() {
