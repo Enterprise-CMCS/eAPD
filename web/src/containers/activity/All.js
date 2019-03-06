@@ -45,4 +45,7 @@ export const mapDispatchToProps = {
 };
 
 export { All as AllRaw };
-export default connect(mapStateToProps, mapDispatchToProps)(All);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(All);

@@ -93,7 +93,8 @@ class ConfirmAlert extends Component {
   };
 
   componentWillUnmount = () => {
-    this.props.willUnmount();
+    const { willUnmount } = this.props;
+    willUnmount();
   };
 
   handleClickButton = button => {
