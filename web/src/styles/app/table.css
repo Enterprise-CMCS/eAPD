@@ -84,6 +84,12 @@
   vertical-align: middle;
 }
 
+@media screen {
+  .table-fullscreen {
+    min-width: 1200px;
+  }
+}
+
 .table-frozen-wrapper {
   position: relative;
 }
