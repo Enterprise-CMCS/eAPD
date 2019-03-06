@@ -1,3 +1,110 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`apd summary component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`apd summary component renders correctly 1`] = `
+<Section
+  id="apd-summary"
+  resource="apd"
+>
+  <Subsection
+    id="apd-summary-overview"
+    nested={false}
+    open={false}
+    resource="apd.overview"
+  >
+    <div
+      className="mb3"
+    >
+      <label
+        className="mr1"
+        key="1"
+      >
+        <input
+          checked={true}
+          onChange={[Function]}
+          type="checkbox"
+          value="1"
+        />
+        1
+      </label>
+      <label
+        className="mr1"
+        key="2"
+      >
+        <input
+          checked={true}
+          onChange={[Function]}
+          type="checkbox"
+          value="2"
+        />
+        2
+      </label>
+      <label
+        className="mr1"
+        key="3"
+      >
+        <input
+          checked={false}
+          onChange={[Function]}
+          type="checkbox"
+          value="3"
+        />
+        3
+      </label>
+    </div>
+    <div
+      className="mb3"
+    >
+      <Instruction
+        args={null}
+        reverse={false}
+        source="apd.introduction.instruction"
+      />
+      <RichText
+        content="about the program"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div
+      className="mb3"
+    >
+      <Instruction
+        args={null}
+        reverse={false}
+        source="apd.hit.instruction"
+      />
+      <RichText
+        content="about hit"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div
+      className="mb3"
+    >
+      <Instruction
+        args={null}
+        reverse={false}
+        source="apd.hie.instruction"
+      />
+      <RichText
+        content="about hie"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div>
+      <Instruction
+        args={null}
+        reverse={false}
+        source="apd.mmis.instruction"
+      />
+      <RichText
+        content="about mmis"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+  </Subsection>
+</Section>
+`;

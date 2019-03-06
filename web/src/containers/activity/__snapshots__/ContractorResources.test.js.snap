@@ -1,3 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the ContractorResources component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`the ContractorResources component renders correctly 1`] = `
+<Subsection
+  id={null}
+  nested={true}
+  open={false}
+  resource="activities.contractorResources"
+>
+  <div
+    className="mt3 pt3 border-top border-grey"
+  >
+    <CollapsibleList
+      content={[Function]}
+      deleteItem={[Function]}
+      getKey={[Function]}
+      header={[Function]}
+      items={
+        Array [
+          Object {
+            "desc": "contractor description",
+            "end": "end date",
+            "hourly": Object {
+              "data": Object {
+                "1066": Object {
+                  "hours": "",
+                  "rate": "",
+                },
+                "1067": Object {
+                  "hours": "",
+                  "rate": "",
+                },
+              },
+              "useHourly": false,
+            },
+            "id": "contractor id",
+            "key": "contractor key",
+            "name": "contractor name",
+            "start": "start date",
+            "totalCost": 123,
+            "years": Object {
+              "1066": 100,
+              "1067": 200,
+            },
+          },
+        ]
+      }
+    />
+  </div>
+  <Btn
+    extraCss={null}
+    kind="primary"
+    onClick={[Function]}
+    size={null}
+  >
+    Add contractor
+  </Btn>
+</Subsection>
+`;

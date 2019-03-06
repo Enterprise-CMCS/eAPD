@@ -9,13 +9,13 @@ import {
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
 import CollapsibleList from '../../components/CollapsibleList';
+import Dollars from '../../components/Dollars';
 import NoDataMsg from '../../components/NoDataMsg';
 import { DollarInput, Textarea } from '../../components/Inputs';
 import Instruction from '../../components/Instruction';
 import Label from '../../components/Label';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
-import { formatMoney } from '../../util/formats';
 
 const EXPENSE_CATEGORIES = [
   'Hardware, software, and licensing',
@@ -144,7 +144,7 @@ class Expenses extends Component {
                     <div key={year} className="col-2 truncate">
                       {year}:{' '}
                       <span className="bold mono">
-                        {formatMoney(expense.years[year])}
+                        <Dollars>{expense.years[year]}</Dollars>
                       </span>
                     </div>
                   ))}

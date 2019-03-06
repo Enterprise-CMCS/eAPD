@@ -1,3 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Md component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`Md component renders correctly 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "# This is markdown",
+    }
+  }
+/>
+`;

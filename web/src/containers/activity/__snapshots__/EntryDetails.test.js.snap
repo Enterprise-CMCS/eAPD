@@ -1,3 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the (Activity) EntryDetails component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`the (Activity) EntryDetails component renders correctly 1`] = `
+<Collapsible
+  bgColor="blue-light"
+  btnBgColor="blue"
+  btnColor="white"
+  id="activity-activity-key"
+  nested={false}
+  onChange={[Function]}
+  open={false}
+  sticky={true}
+  title="Activity title"
+>
+  <Connect(Description)
+    aKey="activity-key"
+    key="0"
+  />
+  <Connect(Goals)
+    aKey="activity-key"
+    key="1"
+  />
+  <Connect(Schedule)
+    aKey="activity-key"
+    key="2"
+  />
+  <Costs
+    aKey="activity-key"
+    key="3"
+  />
+  <Connect(ContractorResources)
+    aKey="activity-key"
+    key="4"
+  />
+  <Connect(CostAllocate)
+    aKey="activity-key"
+    key="5"
+  />
+  <Connect(StandardsAndConditions)
+    aKey="activity-key"
+    key="6"
+  />
+  <DeleteButton
+    remove={[Function]}
+    resource="activities.delete"
+  />
+</Collapsible>
+`;
