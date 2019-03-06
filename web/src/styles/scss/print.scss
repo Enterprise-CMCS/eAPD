@@ -3,7 +3,7 @@
     background-color: white;
   }
 
-  .only-screen {
+  .visibility--screen {
     display: none;
   }
 
@@ -58,7 +58,7 @@
 }
 
 @media screen {
-  .only-print {
+  .visibility--print {
     display: none;
   }
 }

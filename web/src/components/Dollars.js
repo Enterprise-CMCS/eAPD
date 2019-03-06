@@ -54,8 +54,8 @@ const Dollars = ({ children }) => {
 
   return (
     <Fragment>
-      <span className="only-screen">{formatShort(num)}</span>
-      <span className="only-print">{formatLong(num)}</span>
+      <span className="visibility--screen">{formatShort(num)}</span>
+      <span className="visibility--print">{formatLong(num)}</span>
     </Fragment>
   );
 };
