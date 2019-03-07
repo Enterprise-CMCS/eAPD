@@ -1,0 +1,386 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`my account page renders 1`] = `
+<Fragment>
+  <header
+    className="clearfix px2 py1 bg-white"
+  >
+    <div
+      className="left"
+    >
+      <Link
+        className="btn px0 bold caps"
+        replace={false}
+        to="/"
+      >
+        CMS HITECH APD
+      </Link>
+    </div>
+  </header>
+  <div
+    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+  >
+    <h1
+      className="mt0 h2"
+    >
+      My account
+    </h1>
+  </div>
+  <div
+    className="mx-auto mb3 p2 sm-col-6 md-col-4 bg-white rounded"
+  >
+     
+    <form
+      onSubmit={[Function]}
+    >
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_name"
+        >
+          Name
+        </label>
+        <input
+          className="input"
+          id="edit_account_name"
+          name="name"
+          onChange={[Function]}
+          type="text"
+          value="Tina Belcher"
+        />
+      </div>
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_email"
+        >
+          Email
+        </label>
+        <input
+          className="input"
+          id="edit_account_email"
+          name="email"
+          onChange={[Function]}
+          type="text"
+          value="tina@burgers.com"
+        />
+      </div>
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_phone"
+        >
+          Phone number
+        </label>
+        <input
+          className="input"
+          id="edit_account_phone"
+          name="phone"
+          onChange={[Function]}
+          type="text"
+          value="1-800-BURGERS"
+        />
+      </div>
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_position"
+        >
+          Position
+        </label>
+        <input
+          className="input"
+          id="edit_account_position"
+          name="position"
+          onChange={[Function]}
+          type="text"
+          value="Table Cleaner"
+        />
+      </div>
+      <Password
+        className="mb2"
+        compareTo={Array []}
+        onChange={[Function]}
+        title="Change password"
+        value=""
+      />
+      <Button
+        disabled={false}
+        type="submit"
+        variation="primary"
+      >
+        Edit account
+      </Button>
+      <Button
+        className="right"
+        onClick={[Function]}
+        type="button"
+      >
+        Back
+      </Button>
+    </form>
+  </div>
+</Fragment>
+`;
+
+exports[`my account page renders 2`] = `
+<Fragment>
+  <header
+    className="clearfix px2 py1 bg-white"
+  >
+    <div
+      className="left"
+    >
+      <Link
+        className="btn px0 bold caps"
+        replace={false}
+        to="/"
+      >
+        CMS HITECH APD
+      </Link>
+    </div>
+  </header>
+  <div
+    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+  >
+    <h1
+      className="mt0 h2"
+    >
+      My account
+    </h1>
+  </div>
+  <div
+    className="mx-auto mb3 p2 sm-col-6 md-col-4 bg-white rounded"
+  >
+     
+    <form
+      onSubmit={[Function]}
+    >
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_name"
+        >
+          Name
+        </label>
+        <input
+          className="input"
+          id="edit_account_name"
+          name="name"
+          onChange={[Function]}
+          type="text"
+          value="Tina Belcher"
+        />
+      </div>
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_email"
+        >
+          Email
+        </label>
+        <input
+          className="input"
+          id="edit_account_email"
+          name="email"
+          onChange={[Function]}
+          type="text"
+          value="tina@burgers.com"
+        />
+      </div>
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_phone"
+        >
+          Phone number
+        </label>
+        <input
+          className="input"
+          id="edit_account_phone"
+          name="phone"
+          onChange={[Function]}
+          type="text"
+          value="1-800-BURGERS"
+        />
+      </div>
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_position"
+        >
+          Position
+        </label>
+        <input
+          className="input"
+          id="edit_account_position"
+          name="position"
+          onChange={[Function]}
+          type="text"
+          value="Window Washer"
+        />
+      </div>
+      <Password
+        className="mb2"
+        compareTo={Array []}
+        onChange={[Function]}
+        title="Change password"
+        value=""
+      />
+      <Button
+        disabled={false}
+        type="submit"
+        variation="primary"
+      >
+        Edit account
+      </Button>
+      <Button
+        className="right"
+        onClick={[Function]}
+        type="button"
+      >
+        Back
+      </Button>
+    </form>
+  </div>
+</Fragment>
+`;
+
+exports[`my account page renders 3`] = `
+<Fragment>
+  <header
+    className="clearfix px2 py1 bg-white"
+  >
+    <div
+      className="left"
+    >
+      <Link
+        className="btn px0 bold caps"
+        replace={false}
+        to="/"
+      >
+        CMS HITECH APD
+      </Link>
+    </div>
+  </header>
+  <div
+    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+  >
+    <h1
+      className="mt0 h2"
+    >
+      My account
+    </h1>
+  </div>
+  <div
+    className="mx-auto mb3 p2 sm-col-6 md-col-4 bg-white rounded"
+  >
+     
+    <form
+      onSubmit={[Function]}
+    >
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_name"
+        >
+          Name
+        </label>
+        <input
+          className="input"
+          id="edit_account_name"
+          name="name"
+          onChange={[Function]}
+          type="text"
+          value="Tina Belcher"
+        />
+      </div>
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_email"
+        >
+          Email
+        </label>
+        <input
+          className="input"
+          id="edit_account_email"
+          name="email"
+          onChange={[Function]}
+          type="text"
+          value="tina@burgers.com"
+        />
+      </div>
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_phone"
+        >
+          Phone number
+        </label>
+        <input
+          className="input"
+          id="edit_account_phone"
+          name="phone"
+          onChange={[Function]}
+          type="text"
+          value="1-800-BURGERS"
+        />
+      </div>
+      <div
+        className="mb2"
+      >
+        <label
+          htmlFor="edit_account_position"
+        >
+          Position
+        </label>
+        <input
+          className="input"
+          id="edit_account_position"
+          name="position"
+          onChange={[Function]}
+          type="text"
+          value="Table Cleaner"
+        />
+      </div>
+      <Password
+        className="mb2"
+        compareTo={Array []}
+        onChange={[Function]}
+        title="Change password"
+        value=""
+      />
+      <Button
+        disabled={true}
+        type="submit"
+        variation="primary"
+      >
+        <Spinner
+          aria-valuetext="Loading"
+          role="progressbar"
+        />
+         Working
+      </Button>
+      <Button
+        className="right"
+        onClick={[Function]}
+        type="button"
+      >
+        Back
+      </Button>
+    </form>
+  </div>
+</Fragment>
+`;

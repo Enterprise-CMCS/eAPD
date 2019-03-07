@@ -1,3 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Routes component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`Routes component renders correctly 1`] = `
+<Switch>
+  <Connect(PrivateRoute)
+    component={[Function]}
+    exact={true}
+    key="/"
+    path="/"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    exact={true}
+    key="/apd"
+    path="/apd"
+  />
+  <Route
+    component={[Function]}
+    key="/login"
+    path="/login"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    key="/logout"
+    path="/logout"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    key="/admin/create-account"
+    path="/admin/create-account"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    key="/admin/edit-account"
+    path="/admin/edit-account"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    key="/me"
+    path="/me"
+  />
+  <Route
+    component={[Function]}
+    key="no-match"
+  />
+</Switch>
+`;

@@ -1,3 +1,4 @@
+import { Alert } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import zxcvbn from 'zxcvbn';
@@ -26,7 +27,7 @@ class Password extends Component {
   };
 
   render() {
-    const { value, ...rest } = this.props;
+    const { title, value, ...rest } = this.props;
     const { showPassword, strength } = this.state;
 
     let passwordQuality = 'Password is great';
@@ -60,11 +61,11 @@ class Password extends Component {
             onChange={this.toggleShowPassword}
           />
         </div>
-        <label htmlFor="password">Password</label>
-        <p className="alert-info p2">
+        <label htmlFor="password">{title || 'Password'}</label>
+        <Alert className="my2">
           A strong password is at least 9 characters, not a commonly-used word
           or phrase, and not too similar to the person’s name or email address.
-        </p>
+        </Alert>
         <input
           id="password"
           type={showPassword ? 'text' : 'password'}
@@ -85,12 +86,14 @@ class Password extends Component {
 Password.propTypes = {
   compareTo: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func,
+  title: PropTypes.string,
   value: PropTypes.string
 };
 
 Password.defaultProps = {
   compareTo: [],
   onChange: () => {},
+  title: 'Password',
   value: ''
 };
 

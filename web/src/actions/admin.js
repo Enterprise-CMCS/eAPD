@@ -163,3 +163,48 @@ export const editAccount = user => dispatch => {
       return Promise.reject();
     });
 };
+
+export const ADMIN_EDIT_ME_REQUEST = Symbol('admin : edit self : request');
+export const ADMIN_EDIT_ME_SUCCESS = Symbol('admin : edit self : success');
+export const ADMIN_EDIT_ME_ERROR = Symbol('admin : edit self : error');
+
+export const editSelf = user => dispatch => {
+  dispatch({ type: ADMIN_EDIT_ME_REQUEST });
+
+  const putData = Object.entries(user).reduce(
+    (acc, [key, value]) => (value ? { ...acc, [key]: value } : acc),
+    {}
+  );
+
+  return axios
+    .put(`/me`, putData)
+    .then(res => {
+      dispatch({ type: ADMIN_EDIT_ME_SUCCESS, data: res.data });
+      dispatch(notify('Account edited'));
+    })
+    .catch(e => {
+      dispatch({ type: ADMIN_EDIT_ME_ERROR });
+
+      switch (e.response.data.error) {
+        case 'update-self-email-exists':
+          dispatch(
+            notify(
+              'Error: another account already exists with that email address'
+            )
+          );
+          break;
+        case 'update-self-invalid-phone':
+          dispatch(
+            notify('Error: phone number may not be more than 10 digits')
+          );
+          break;
+        case 'update-self-weak-password':
+          dispatch(notify('Error: The provided password is too weak'));
+          break;
+        default:
+          dispatch(notify('Unknown error editing account'));
+          break;
+      }
+      return Promise.reject();
+    });
+};
