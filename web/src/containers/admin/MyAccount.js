@@ -79,7 +79,7 @@ class MyAccount extends Component {
         <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded">
           {!!success && <Alert variation="success">Changes saved</Alert>}
 
-          <h1>Manage account</h1>
+          <h1 className="ds-h1">Manage account</h1>
 
           <form onSubmit={this.editAccount}>
             <TextField
@@ -134,7 +134,6 @@ class MyAccount extends Component {
 
 MyAccount.propTypes = {
   editAccount: PropTypes.func.isRequired,
-  error: PropTypes.bool.isRequired,
   fetching: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   user: PropTypes.shape({

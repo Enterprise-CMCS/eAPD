@@ -60,7 +60,7 @@ describe('my account page', () => {
     expect(component).toMatchSnapshot();
 
     // updated after changing a text field
-    component.find('input[name="position"]').simulate('change', {
+    component.find('TextField[name="position"]').simulate('change', {
       target: { name: 'position', value: 'Window Washer' }
     });
     expect(component).toMatchSnapshot();
