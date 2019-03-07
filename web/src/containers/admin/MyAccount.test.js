@@ -118,7 +118,7 @@ describe('my account page', () => {
       />
     );
 
-    component.find('Button:not([variation])').simulate('click');
+    component.find('Button[variation="transparent"]').simulate('click');
 
     expect(goBack.calledOnce).toEqual(true);
   });

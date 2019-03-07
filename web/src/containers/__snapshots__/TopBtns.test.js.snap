@@ -20,7 +20,7 @@ exports[`Top buttons component renders correctly if logged in 1`] = `
       replace={false}
       to="/me"
     >
-      My account
+      Manage account
     </Link>
     <Btn
       extraCss="ml1"
@@ -64,7 +64,7 @@ exports[`Top buttons component renders correctly with dashboard hidden 1`] = `
       replace={false}
       to="/me"
     >
-      My account
+      Manage account
     </Link>
     <Btn
       extraCss="ml1"

@@ -1,4 +1,4 @@
-import { Button, Spinner } from '@cmsgov/design-system-core';
+import { Alert, Button, Spinner, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -10,11 +10,14 @@ import { t } from '../../i18n';
 
 class MyAccount extends Component {
   state = {
-    email: '',
-    name: '',
-    password: '',
-    phone: '',
-    position: ''
+    success: false,
+    user: {
+      email: '',
+      name: '',
+      password: '',
+      phone: '',
+      position: ''
+    }
   };
 
   constructor(props) {
@@ -24,18 +27,29 @@ class MyAccount extends Component {
       user: { email, name, phone, position }
     } = props;
 
-    this.state = { email, name, phone, position };
+    this.state.user = { email, name, phone, position };
+  }
+
+  static getDerivedStateFromProps(newProps, prevState) {
+    if (newProps.fetching) {
+      return { success: 0 };
+    }
+    if (prevState.success === 0) {
+      return { success: !newProps.error };
+    }
+    return null;
   }
 
   handleEditAccount = e => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    this.setState(prev => ({ user: { ...prev.user, [name]: value } }));
   };
 
   editAccount = e => {
     e.preventDefault();
     const { editAccount } = this.props;
-    editAccount(this.state);
+    const { user } = this.state;
+    editAccount(user);
   };
 
   goBack = () => {
@@ -47,7 +61,10 @@ class MyAccount extends Component {
 
   render() {
     const { fetching } = this.props;
-    const { email, name, password, phone, position } = this.state;
+    const {
+      success,
+      user: { email, name, password, phone, position }
+    } = this.state;
 
     return (
       <Fragment>
@@ -60,56 +77,36 @@ class MyAccount extends Component {
         </header>
 
         <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded">
-          <h1 className="mt0 h2">My account</h1>
-        </div>
+          {!!success && <Alert variation="success">Changes saved</Alert>}
 
-        <div className="mx-auto mb3 p2 sm-col-6 md-col-4 bg-white rounded">
-          {' '}
+          <h1>Manage account</h1>
+
           <form onSubmit={this.editAccount}>
-            <div className="mb2">
-              <label htmlFor="edit_account_name">Name</label>
-              <input
-                id="edit_account_name"
-                type="text"
-                name="name"
-                className="input"
-                value={name || ''}
-                onChange={this.handleEditAccount}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="edit_account_email">Email</label>
-              <input
-                id="edit_account_email"
-                type="text"
-                name="email"
-                className="input"
-                value={email}
-                onChange={this.handleEditAccount}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="edit_account_phone">Phone number</label>
-              <input
-                id="edit_account_phone"
-                type="text"
-                name="phone"
-                className="input"
-                value={phone || ''}
-                onChange={this.handleEditAccount}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="edit_account_position">Position</label>
-              <input
-                id="edit_account_position"
-                type="text"
-                name="position"
-                className="input"
-                value={position || ''}
-                onChange={this.handleEditAccount}
-              />
-            </div>
+            <TextField
+              label="Name"
+              name="name"
+              value={name || ''}
+              onChange={this.handleEditAccount}
+            />
+            <TextField
+              label="Email"
+              name="email"
+              value={email || ''}
+              onChange={this.handleEditAccount}
+            />
+            <TextField
+              label="Phone number"
+              mask="phone"
+              name="phone"
+              value={phone || ''}
+              onChange={this.handleEditAccount}
+            />
+            <TextField
+              label="Position"
+              name="position"
+              value={position || ''}
+              onChange={this.handleEditAccount}
+            />
             <Password
               className="mb2"
               title="Change password"
@@ -122,11 +119,11 @@ class MyAccount extends Component {
                   <Spinner /> Working
                 </Fragment>
               ) : (
-                'Edit account'
+                'Save changes'
               )}
             </Button>
-            <Button className="right" onClick={this.goBack}>
-              Back
+            <Button variation="transparent" onClick={this.goBack}>
+              Cancel
             </Button>
           </form>
         </div>
@@ -137,6 +134,7 @@ class MyAccount extends Component {
 
 MyAccount.propTypes = {
   editAccount: PropTypes.func.isRequired,
+  error: PropTypes.bool.isRequired,
   fetching: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   user: PropTypes.shape({
@@ -149,10 +147,12 @@ MyAccount.propTypes = {
 
 const mapStateToProps = ({
   user: {
+    error,
     fetching,
     data: { name, phone, position, username }
   }
 }) => ({
+  error,
   fetching,
   user: {
     email: username,

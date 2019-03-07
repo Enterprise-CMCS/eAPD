@@ -580,14 +580,10 @@ describe('admin actions', () => {
       expect(store.getActions()).toEqual(
         expect.arrayContaining([
           { type: actions.ADMIN_EDIT_ME_REQUEST },
-          { type: actions.ADMIN_EDIT_ME_SUCCESS, data },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Account edited'
-          }
+          { type: actions.ADMIN_EDIT_ME_SUCCESS, data }
         ])
       );
-      expect(store.getActions().length).toEqual(3);
+      expect(store.getActions().length).toEqual(2);
     });
 
     it('removes empty properties', async () => {

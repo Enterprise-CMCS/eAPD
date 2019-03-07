@@ -180,7 +180,6 @@ export const editSelf = user => dispatch => {
     .put(`/me`, putData)
     .then(res => {
       dispatch({ type: ADMIN_EDIT_ME_SUCCESS, data: res.data });
-      dispatch(notify('Account edited'));
     })
     .catch(e => {
       dispatch({ type: ADMIN_EDIT_ME_ERROR });

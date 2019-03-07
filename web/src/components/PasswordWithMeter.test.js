@@ -31,7 +31,7 @@ describe('PasswordWithmeter component', () => {
     const event = { target: { value: 'change event' } };
 
     const component = shallow(<Password value="" onChange={onChange} />);
-    component.find('input[type="password"]').simulate('change', event);
+    component.find('TextField').simulate('change', event);
 
     expect(onChange.calledWith(event)).toEqual(true);
   });
