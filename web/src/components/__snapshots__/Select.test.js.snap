@@ -1,5 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Select component renders with a label 1`] = `ShallowWrapper {}`;
+exports[`Select component renders with a label 1`] = `
+<div
+  className="mb2"
+>
+  <label
+    className="block mb-tiny truncate"
+    htmlFor="select name"
+  >
+    select label
+  </label>
+  <select
+    className="m0 select"
+    id="select name"
+  >
+    <option
+      key="1"
+    >
+      1
+    </option>
+    <option
+      key="2"
+    >
+      2
+    </option>
+    <option
+      key="3"
+    >
+      3
+    </option>
+  </select>
+</div>
+`;
 
-exports[`Select component renders without a label 1`] = `ShallowWrapper {}`;
+exports[`Select component renders without a label 1`] = `
+<div
+  className="mb2"
+>
+  <label
+    className="sr-only"
+    htmlFor="select name"
+  >
+    select label
+  </label>
+  <select
+    className="m0 select"
+    id="select name"
+  >
+    <option
+      key="1"
+    >
+      1
+    </option>
+    <option
+      key="2"
+    >
+      2
+    </option>
+    <option
+      key="3"
+    >
+      3
+    </option>
+  </select>
+</div>
+`;

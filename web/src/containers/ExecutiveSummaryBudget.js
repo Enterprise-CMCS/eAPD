@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Dollars from '../components/Dollars';
 import { t } from '../i18n';
-import { formatMoney } from '../util/formats';
 
 const thId = (program, share) =>
   `program-budget-table-${program}${share ? `-${share}` : ''}`;
@@ -12,7 +12,7 @@ const tdHdrs = (program, share) =>
 
 const DollarCell = ({ headers, value }) => (
   <td className="mono right-align" headers={headers}>
-    {formatMoney(value)}
+    <Dollars>{value}</Dollars>
   </td>
 );
 

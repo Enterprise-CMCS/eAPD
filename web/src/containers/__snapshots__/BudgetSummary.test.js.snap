@@ -1,15 +1,642 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`budget summary component data row details renders correctly 1`] = `ShallowWrapper {}`;
+exports[`budget summary component data row details renders correctly 1`] = `
+<tr>
+  <td
+    colSpan={10}
+  >
+    <div
+      className="py2"
+    >
+      <div
+        className="mono h6"
+        key="1"
+      >
+        <span
+          className="bold"
+        >
+          Activity activity 1
+          :
+        </span>
+         
+        <span
+          className="mr2"
+          key="1"
+        >
+          1 Total
+          : 
+          <Dollars>
+            1
+          </Dollars>
+        </span>
+        <span
+          className="mr2"
+          key="2"
+        >
+          2 Total
+          : 
+          <Dollars>
+            2
+          </Dollars>
+        </span>
+        <span
+          className="mr2"
+          key="total"
+        >
+          All Years
+          : 
+          <Dollars>
+            3
+          </Dollars>
+        </span>
+      </div>
+      <div
+        className="mono h6"
+        key="2"
+      >
+        <span
+          className="bold"
+        >
+          Activity #2
+          :
+        </span>
+         
+        <span
+          className="mr2"
+          key="1"
+        >
+          1 Total
+          : 
+          <Dollars>
+            10
+          </Dollars>
+        </span>
+        <span
+          className="mr2"
+          key="2"
+        >
+          2 Total
+          : 
+          <Dollars>
+            20
+          </Dollars>
+        </span>
+        <span
+          className="mr2"
+          key="total"
+        >
+          All Years
+          : 
+          <Dollars>
+            30
+          </Dollars>
+        </span>
+      </div>
+    </div>
+  </td>
+</tr>
+`;
 
-exports[`budget summary component data row group renders 1`] = `ShallowWrapper {}`;
+exports[`budget summary component data row group renders 1`] = `
+<Fragment>
+  <DataRow
+    category="combined"
+    data={Object {}}
+    entries={
+      Array [
+        10,
+        20,
+        30,
+      ]
+    }
+    key="combined"
+    title="Subtotal"
+  />
+  <DataRow
+    category="contractors"
+    data={Object {}}
+    entries={
+      Array [
+        10,
+        20,
+        30,
+      ]
+    }
+    key="contractors"
+    title="Contracted resources"
+  />
+  <DataRow
+    category="expenses"
+    data={Object {}}
+    entries={
+      Array [
+        10,
+        20,
+        30,
+      ]
+    }
+    key="expenses"
+    title="Non-personnel"
+  />
+  <DataRow
+    category="statePersonnel"
+    data={Object {}}
+    entries={
+      Array [
+        10,
+        20,
+        30,
+      ]
+    }
+    key="statePersonnel"
+    title="Project state staff"
+  />
+</Fragment>
+`;
 
-exports[`budget summary component data row renders with data 1`] = `ShallowWrapper {}`;
+exports[`budget summary component data row renders with data 1`] = `
+<Fragment>
+  <tr>
+    <td
+      headers="summary-budget-null1 summary-budget-null2"
+    >
+      <button
+        className="btn right px-tiny py0"
+        onClick={[Function]}
+        type="button"
+      >
+        +
+      </button>
+      title text
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-1 summary-budget-fy-1-total"
+    >
+      <Dollars>
+        1000
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-1 summary-budget-fy-1-federal"
+    >
+      <Dollars>
+        1
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-1 summary-budget-fy-1-state"
+    >
+      <Dollars>
+        2
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-2 summary-budget-fy-2-total"
+    >
+      <Dollars>
+        2000
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-2 summary-budget-fy-2-federal"
+    >
+      <Dollars>
+        10
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-2 summary-budget-fy-2-state"
+    >
+      <Dollars>
+        20
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-total summary-budget-fy-total-total"
+    >
+      <Dollars>
+        10000
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-total summary-budget-fy-total-federal"
+    >
+      <Dollars>
+        100
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-total summary-budget-fy-total-state"
+    >
+      <Dollars>
+        200
+      </Dollars>
+    </td>
+  </tr>
+</Fragment>
+`;
 
-exports[`budget summary component data row renders with data 2`] = `ShallowWrapper {}`;
+exports[`budget summary component data row renders with data 2`] = `
+<Fragment>
+  <tr>
+    <td
+      headers="summary-budget-null1 summary-budget-null2"
+    >
+      <button
+        className="btn right px-tiny py0"
+        onClick={[Function]}
+        type="button"
+      >
+        -
+      </button>
+      title text
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-1 summary-budget-fy-1-total"
+    >
+      <Dollars>
+        1000
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-1 summary-budget-fy-1-federal"
+    >
+      <Dollars>
+        1
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-1 summary-budget-fy-1-state"
+    >
+      <Dollars>
+        2
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-2 summary-budget-fy-2-total"
+    >
+      <Dollars>
+        2000
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-2 summary-budget-fy-2-federal"
+    >
+      <Dollars>
+        10
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-2 summary-budget-fy-2-state"
+    >
+      <Dollars>
+        20
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-total summary-budget-fy-total-total"
+    >
+      <Dollars>
+        10000
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-total summary-budget-fy-total-federal"
+    >
+      <Dollars>
+        100
+      </Dollars>
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-total summary-budget-fy-total-state"
+    >
+      <Dollars>
+        200
+      </Dollars>
+    </td>
+  </tr>
+  <DataRowDetails
+    category="category text"
+    entries={Array []}
+    years={
+      Array [
+        "1",
+        "2",
+        "total",
+      ]
+    }
+  />
+</Fragment>
+`;
 
-exports[`budget summary component data row renders with no data 1`] = `ShallowWrapper {}`;
+exports[`budget summary component data row renders with no data 1`] = `
+<Fragment>
+  <tr>
+    <td
+      headers="summary-budget-null1 summary-budget-null2"
+    >
+      title text
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-total summary-budget-fy-total-total"
+    >
+      <Dollars />
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-total summary-budget-fy-total-federal"
+    >
+      <Dollars />
+    </td>
+    <td
+      className="mono right-align"
+      headers="summary-budget-fy-total summary-budget-fy-total-state"
+    >
+      <Dollars />
+    </td>
+  </tr>
+</Fragment>
+`;
 
-exports[`budget summary component header row renders 1`] = `ShallowWrapper {}`;
+exports[`budget summary component header row renders 1`] = `
+<tr>
+  <td
+    className="bold"
+    headers="summary-budget-null1 summary-budget-null2"
+  >
+    row title
+  </td>
+  <td
+    headers="summary-budget-fy-1 summary-budget-fy-1-total"
+  />
+  <td
+    headers="summary-budget-fy-1 summary-budget-fy-1-federal"
+  />
+  <td
+    headers="summary-budget-fy-1 summary-budget-fy-1-state"
+  />
+  <td
+    headers="summary-budget-fy-2 summary-budget-fy-2-total"
+  />
+  <td
+    headers="summary-budget-fy-2 summary-budget-fy-2-federal"
+  />
+  <td
+    headers="summary-budget-fy-2 summary-budget-fy-2-state"
+  />
+  <td
+    headers="summary-budget-fy-total summary-budget-fy-total-total"
+  />
+  <td
+    headers="summary-budget-fy-total summary-budget-fy-total-federal"
+  />
+  <td
+    headers="summary-budget-fy-total summary-budget-fy-total-state"
+  />
+</tr>
+`;
 
-exports[`budget summary component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`budget summary component renders correctly 1`] = `
+<div
+  className="overflow-x"
+>
+  <table
+    className="table-cms"
+  >
+    <thead>
+      <tr>
+        <th
+          id="summary-budget-null1"
+        />
+        <th
+          className="center"
+          colSpan="3"
+          id="summary-budget-fy-1"
+          key="1"
+        >
+          FFY 
+          1
+        </th>
+        <th
+          className="center"
+          colSpan="3"
+          id="summary-budget-fy-2"
+          key="2"
+        >
+          FFY 
+          2
+        </th>
+        <th
+          className="center"
+          colSpan="3"
+          id="summary-budget-fy-total"
+          key="total"
+        >
+          FFY 
+          total
+        </th>
+      </tr>
+      <tr>
+        <th
+          id="summary-budget-null2"
+        />
+        <th
+          className="right-align"
+          id="summary-budget-fy-1-total"
+        >
+          Medicaid total
+        </th>
+        <th
+          className="right-align"
+          id="summary-budget-fy-1-federal"
+        >
+          Federal
+        </th>
+        <th
+          className="right-align"
+          id="summary-budget-fy-1-state"
+        >
+          State
+        </th>
+        <th
+          className="right-align"
+          id="summary-budget-fy-2-total"
+        >
+          Medicaid total
+        </th>
+        <th
+          className="right-align"
+          id="summary-budget-fy-2-federal"
+        >
+          Federal
+        </th>
+        <th
+          className="right-align"
+          id="summary-budget-fy-2-state"
+        >
+          State
+        </th>
+        <th
+          className="right-align"
+          id="summary-budget-fy-total-total"
+        >
+          Medicaid total
+        </th>
+        <th
+          className="right-align"
+          id="summary-budget-fy-total-federal"
+        >
+          Federal
+        </th>
+        <th
+          className="right-align"
+          id="summary-budget-fy-total-state"
+        >
+          State
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      className="bg-blue-light"
+    >
+      <HeaderRow
+        title="HIT activities"
+        years={
+          Array [
+            "1",
+            "2",
+          ]
+        }
+      />
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "hit data",
+          ]
+        }
+      />
+    </tbody>
+    <tbody
+      className="bg-yellow-light"
+    >
+      <HeaderRow
+        title="HIE activities"
+        years={
+          Array [
+            "1",
+            "2",
+          ]
+        }
+      />
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "hie data",
+          ]
+        }
+      />
+    </tbody>
+    <tbody
+      className="bg-green-light"
+    >
+      <HeaderRow
+        title="MMIS activities"
+        years={
+          Array [
+            "1",
+            "2",
+          ]
+        }
+      />
+      <DataRowGroup
+        data={Object {}}
+        entries={
+          Array [
+            "mmis data",
+          ]
+        }
+      />
+    </tbody>
+    <tbody>
+      <tr
+        className="bold"
+      >
+        <td
+          headers="summary-budget-null1 summary-budget-null2"
+        >
+          Project total
+        </td>
+        <td
+          className="mono right-align"
+          headers="summary-budget-fy-1 summary-budget-fy-1-total"
+        >
+          <Dollars>
+            1000
+          </Dollars>
+        </td>
+        <td
+          className="mono right-align"
+          headers="summary-budget-fy-1 summary-budget-fy-1-federal"
+        >
+          <Dollars>
+            1
+          </Dollars>
+        </td>
+        <td
+          className="mono right-align"
+          headers="summary-budget-fy-1 summary-budget-fy-1-state"
+        >
+          <Dollars>
+            2
+          </Dollars>
+        </td>
+        <td
+          className="mono right-align"
+          headers="summary-budget-fy-2 summary-budget-fy-2-total"
+        >
+          <Dollars>
+            2000
+          </Dollars>
+        </td>
+        <td
+          className="mono right-align"
+          headers="summary-budget-fy-2 summary-budget-fy-2-federal"
+        >
+          <Dollars>
+            10
+          </Dollars>
+        </td>
+        <td
+          className="mono right-align"
+          headers="summary-budget-fy-2 summary-budget-fy-2-state"
+        >
+          <Dollars>
+            20
+          </Dollars>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

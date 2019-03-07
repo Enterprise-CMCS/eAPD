@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { formatMoney } from '../util/formats';
+import Dollars from '../components/Dollars';
 import { TABLE_HEADERS } from '../constants';
 
 const ApdPreviousActivityTableMMIS = ({ totals }) => {
@@ -53,13 +53,13 @@ const ApdPreviousActivityTableMMIS = ({ totals }) => {
                     <td
                       headers={`prev_act_total_row_${year} prev_act_total_approved`}
                     >
-                      {formatMoney(expenses.approved)}
+                      <Dollars>{expenses.approved}</Dollars>
                     </td>
 
                     <td
                       headers={`prev_act_total_row_${year} prev_act_total_actual`}
                     >
-                      {formatMoney(expenses.actual)}
+                      <Dollars>{expenses.actual}</Dollars>
                     </td>
                   </tr>
                 );
