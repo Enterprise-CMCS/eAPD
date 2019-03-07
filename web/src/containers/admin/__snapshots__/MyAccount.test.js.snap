@@ -20,7 +20,9 @@ exports[`my account page renders 1`] = `
   <div
     className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
   >
-    <h1>
+    <h1
+      className="ds-h1"
+    >
       Manage account
     </h1>
     <form
@@ -102,86 +104,42 @@ exports[`my account page renders 2`] = `
     className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
   >
     <h1
-      className="mt0 h2"
+      className="ds-h1"
     >
-      My account
+      Manage account
     </h1>
-  </div>
-  <div
-    className="mx-auto mb3 p2 sm-col-6 md-col-4 bg-white rounded"
-  >
-     
     <form
       onSubmit={[Function]}
     >
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="edit_account_name"
-        >
-          Name
-        </label>
-        <input
-          className="input"
-          id="edit_account_name"
-          name="name"
-          onChange={[Function]}
-          type="text"
-          value="Tina Belcher"
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="edit_account_email"
-        >
-          Email
-        </label>
-        <input
-          className="input"
-          id="edit_account_email"
-          name="email"
-          onChange={[Function]}
-          type="text"
-          value="tina@burgers.com"
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="edit_account_phone"
-        >
-          Phone number
-        </label>
-        <input
-          className="input"
-          id="edit_account_phone"
-          name="phone"
-          onChange={[Function]}
-          type="text"
-          value="1-800-BURGERS"
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="edit_account_position"
-        >
-          Position
-        </label>
-        <input
-          className="input"
-          id="edit_account_position"
-          name="position"
-          onChange={[Function]}
-          type="text"
-          value="Window Washer"
-        />
-      </div>
+      <TextField
+        label="Name"
+        name="name"
+        onChange={[Function]}
+        type="text"
+        value="Tina Belcher"
+      />
+      <TextField
+        label="Email"
+        name="email"
+        onChange={[Function]}
+        type="text"
+        value="tina@burgers.com"
+      />
+      <TextField
+        label="Phone number"
+        mask="phone"
+        name="phone"
+        onChange={[Function]}
+        type="text"
+        value="1-800-BURGERS"
+      />
+      <TextField
+        label="Position"
+        name="position"
+        onChange={[Function]}
+        type="text"
+        value="Window Washer"
+      />
       <Password
         className="mb2"
         compareTo={Array []}
@@ -194,14 +152,14 @@ exports[`my account page renders 2`] = `
         type="submit"
         variation="primary"
       >
-        Edit account
+        Save changes
       </Button>
       <Button
-        className="right"
         onClick={[Function]}
         type="button"
+        variation="transparent"
       >
-        Back
+        Cancel
       </Button>
     </form>
   </div>
@@ -229,86 +187,42 @@ exports[`my account page renders 3`] = `
     className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
   >
     <h1
-      className="mt0 h2"
+      className="ds-h1"
     >
-      My account
+      Manage account
     </h1>
-  </div>
-  <div
-    className="mx-auto mb3 p2 sm-col-6 md-col-4 bg-white rounded"
-  >
-     
     <form
       onSubmit={[Function]}
     >
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="edit_account_name"
-        >
-          Name
-        </label>
-        <input
-          className="input"
-          id="edit_account_name"
-          name="name"
-          onChange={[Function]}
-          type="text"
-          value="Tina Belcher"
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="edit_account_email"
-        >
-          Email
-        </label>
-        <input
-          className="input"
-          id="edit_account_email"
-          name="email"
-          onChange={[Function]}
-          type="text"
-          value="tina@burgers.com"
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="edit_account_phone"
-        >
-          Phone number
-        </label>
-        <input
-          className="input"
-          id="edit_account_phone"
-          name="phone"
-          onChange={[Function]}
-          type="text"
-          value="1-800-BURGERS"
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="edit_account_position"
-        >
-          Position
-        </label>
-        <input
-          className="input"
-          id="edit_account_position"
-          name="position"
-          onChange={[Function]}
-          type="text"
-          value="Table Cleaner"
-        />
-      </div>
+      <TextField
+        label="Name"
+        name="name"
+        onChange={[Function]}
+        type="text"
+        value="Tina Belcher"
+      />
+      <TextField
+        label="Email"
+        name="email"
+        onChange={[Function]}
+        type="text"
+        value="tina@burgers.com"
+      />
+      <TextField
+        label="Phone number"
+        mask="phone"
+        name="phone"
+        onChange={[Function]}
+        type="text"
+        value="1-800-BURGERS"
+      />
+      <TextField
+        label="Position"
+        name="position"
+        onChange={[Function]}
+        type="text"
+        value="Table Cleaner"
+      />
       <Password
         className="mb2"
         compareTo={Array []}
@@ -328,11 +242,11 @@ exports[`my account page renders 3`] = `
          Working
       </Button>
       <Button
-        className="right"
         onClick={[Function]}
         type="button"
+        variation="transparent"
       >
-        Back
+        Cancel
       </Button>
     </form>
   </div>
