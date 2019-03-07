@@ -474,4 +474,139 @@ describe('admin actions', () => {
       });
     });
   });
+
+  describe('edit own account', () => {
+    const user = { id: 7 };
+
+    it('handles a conflicting email address', async () => {
+      const store = mockStore({ notification: { open: false, queue: [] } });
+
+      fetchMock.onPut('/me').reply(400, { error: 'update-self-email-exists' });
+
+      try {
+        await store.dispatch(actions.editSelf(user));
+      } catch (_) {} // eslint-disable-line no-empty
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          { type: actions.ADMIN_EDIT_ME_REQUEST },
+          { type: actions.ADMIN_EDIT_ME_ERROR },
+          {
+            type: ADD_NOTIFICATION,
+            message:
+              'Error: another account already exists with that email address'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(3);
+    });
+
+    it('handles an invalid phone number', async () => {
+      const store = mockStore({ notification: { open: false, queue: [] } });
+
+      fetchMock.onPut('/me').reply(400, { error: 'update-self-invalid-phone' });
+
+      try {
+        await store.dispatch(actions.editSelf(user));
+      } catch (_) {} // eslint-disable-line no-empty
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          { type: actions.ADMIN_EDIT_ME_REQUEST },
+          { type: actions.ADMIN_EDIT_ME_ERROR },
+          {
+            type: ADD_NOTIFICATION,
+            message: 'Error: phone number may not be more than 10 digits'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(3);
+    });
+
+    it('handles a weak password', async () => {
+      const store = mockStore({ notification: { open: false, queue: [] } });
+
+      fetchMock.onPut('/me').reply(400, { error: 'update-self-weak-password' });
+
+      try {
+        await store.dispatch(actions.editSelf(user));
+      } catch (_) {} // eslint-disable-line no-empty
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          { type: actions.ADMIN_EDIT_ME_REQUEST },
+          { type: actions.ADMIN_EDIT_ME_ERROR },
+          {
+            type: ADD_NOTIFICATION,
+            message: 'Error: The provided password is too weak'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(3);
+    });
+
+    it('handles other errors', async () => {
+      const store = mockStore({ notification: { open: false, queue: [] } });
+
+      fetchMock
+        .onPut('/me')
+        .reply(400, { error: 'shrugging person made of symbols' });
+
+      try {
+        await store.dispatch(actions.editSelf(user));
+      } catch (_) {} // eslint-disable-line no-empty
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          { type: actions.ADMIN_EDIT_ME_REQUEST },
+          { type: actions.ADMIN_EDIT_ME_ERROR },
+          {
+            type: ADD_NOTIFICATION,
+            message: 'Unknown error editing account'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(3);
+    });
+
+    it('handles success', async () => {
+      const data = {};
+      const store = mockStore({ notification: { open: false, queue: [] } });
+
+      fetchMock.onPut('/me').reply(200, data);
+
+      await store.dispatch(actions.editSelf(user));
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          { type: actions.ADMIN_EDIT_ME_REQUEST },
+          { type: actions.ADMIN_EDIT_ME_SUCCESS, data },
+          {
+            type: ADD_NOTIFICATION,
+            message: 'Account edited'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(3);
+    });
+
+    it('removes empty properties', async () => {
+      const store = mockStore({ notification: { open: false, queue: [] } });
+
+      fetchMock.onPut('/me').reply(200);
+
+      await store.dispatch(
+        actions.editSelf({
+          id: 7,
+          key: 'unchanged',
+          removed: ''
+        })
+      );
+
+      expect(JSON.parse(fetchMock.history.put[0].data)).toEqual({
+        id: 7,
+        key: 'unchanged'
+      });
+    });
+  });
 });
