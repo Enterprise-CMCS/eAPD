@@ -1,3 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`previous activities component renders correctly if data is not loaded 1`] = `ShallowWrapper {}`;
+exports[`previous activities component renders correctly if data is not loaded 1`] = `
+<Section
+  id="prev-activities"
+  resource="previousActivities"
+>
+  <Subsection
+    id="prev-activities-outline"
+    nested={false}
+    open={false}
+    resource="previousActivities.outline"
+  >
+    <div
+      className="mb-tiny bold"
+    >
+      Previous Activities Summary
+    </div>
+    <RichText
+      content="previous"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </Subsection>
+  <Subsection
+    id="prev-activities-table"
+    nested={false}
+    open={false}
+    resource="previousActivities.actualExpenses"
+  >
+    <div
+      className="mb3"
+    >
+      <Connect(ApdPreviousActivityTable) />
+    </div>
+    <div
+      className="mb3"
+    >
+      <Connect(ApdPreviousActivityTableMMIS) />
+    </div>
+    <div
+      className="mb3"
+    >
+      <Connect(ApdPreviousActivityTableMMIS) />
+    </div>
+  </Subsection>
+</Section>
+`;

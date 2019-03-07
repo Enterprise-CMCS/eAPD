@@ -1,6 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`private route component renders correctly if logged in 1`] = `ShallowWrapper {}`;
+exports[`private route component renders correctly if logged in 1`] = `
+<Route
+  location={
+    Object {
+      "from": "over there",
+    }
+  }
+  render={[Function]}
+/>
+`;
 
 exports[`private route component renders correctly if logged in 2`] = `
 <component
@@ -14,7 +23,16 @@ exports[`private route component renders correctly if logged in 2`] = `
 />
 `;
 
-exports[`private route component renders correctly if logged out 1`] = `ShallowWrapper {}`;
+exports[`private route component renders correctly if logged out 1`] = `
+<Route
+  location={
+    Object {
+      "from": "over there",
+    }
+  }
+  render={[Function]}
+/>
+`;
 
 exports[`private route component renders correctly if logged out 2`] = `
 <Redirect

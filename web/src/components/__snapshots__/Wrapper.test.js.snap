@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Wrapper component renders correctly in dev mode 1`] = `ShallowWrapper {}`;
+exports[`Wrapper component renders correctly in dev mode 1`] = `
+<div
+  className="site"
+>
+  child content
+</div>
+`;
 
-exports[`Wrapper component renders correctly in non-dev mode 1`] = `ShallowWrapper {}`;
+exports[`Wrapper component renders correctly in non-dev mode 1`] = `
+<div
+  className="site"
+>
+  child content
+</div>
+`;

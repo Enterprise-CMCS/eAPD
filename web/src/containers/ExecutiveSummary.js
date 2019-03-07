@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import { expandActivitySection } from '../actions/activities';
+import Dollars from '../components/Dollars';
 import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
-import { formatMoney } from '../util/formats';
 
 const ExecutiveSummary = ({ data, years, expandSection }) => (
   <Section id="executive-summary" resource="executiveSummary">
@@ -43,13 +43,15 @@ const ExecutiveSummary = ({ data, years, expandSection }) => (
               <div key={year} className="px2 py3 flex-auto">
                 <div className="h5">{t('ffy', { year })}</div>
                 <div className="h3 mono bold">
-                  {formatMoney(d.totals[year])}
+                  <Dollars>{d.totals[year]}</Dollars>
                 </div>
               </div>
             ))}
             <div className="px2 py3 flex-auto">
               <div className="h5">{t('executiveSummary.total')}</div>
-              <div className="h3 mono bold">{formatMoney(d.combined)}</div>
+              <div className="h3 mono bold">
+                <Dollars>{d.combined}</Dollars>
+              </div>
             </div>
           </div>
         </div>

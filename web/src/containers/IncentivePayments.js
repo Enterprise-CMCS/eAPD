@@ -3,13 +3,17 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
+import Dollars from '../components/Dollars';
 import { Input, DollarInput } from '../components/Inputs';
 import { t } from '../i18n';
 import { INCENTIVE_ENTRIES } from '../util';
-import { formatMoney, formatNum } from '../util/formats';
+import { formatNum } from '../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
 const COLORS = ['teal', 'green', 'yellow'];
+
+const formatNumber = (type, number) =>
+  type === 'amount' ? <Dollars>{number}</Dollars> : formatNum(number);
 
 const thId = (fy, q) => `incentive-payments-table-fy${fy}${q ? `-q${q}` : ''}`;
 const tdHdrs = (fy, q) =>
@@ -108,7 +112,6 @@ class IncentivePayments extends Component {
             <tbody>
               {INCENTIVE_ENTRIES.map(({ id, name, type }, i) => {
                 const InputComponent = type === 'amount' ? DollarInput : Input;
-                const fmt = type === 'amount' ? formatMoney : formatNum;
 
                 return (
                   <tr key={id}>
@@ -137,7 +140,7 @@ class IncentivePayments extends Component {
                           className={`bold mono right-align align-middle ${colorLight}`}
                           headers={tdHdrs(year, 'subtotal')}
                         >
-                          {fmt(totals[id].byYear[year])}
+                          {formatNumber(type, totals[id].byYear[year])}
                         </td>
                       </Fragment>
                     ))}
@@ -145,7 +148,7 @@ class IncentivePayments extends Component {
                       className="bold mono right-align align-middle bg-gray-light"
                       headers={tdHdrs('total', 'grand')}
                     >
-                      {fmt(totals[id].allYears)}
+                      {formatNumber(type, totals[id].allYears)}
                     </td>
                   </tr>
                 );
