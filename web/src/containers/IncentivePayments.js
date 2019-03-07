@@ -9,7 +9,6 @@ import { INCENTIVE_ENTRIES } from '../util';
 import { formatMoney, formatNum } from '../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
-const COLORS = ['teal', 'green', 'yellow'];
 
 const thId = (fy, q) => `incentive-payments-table-fy${fy}${q ? `-q${q}` : ''}`;
 const tdHdrs = (fy, q) =>
@@ -25,14 +24,8 @@ class IncentivePayments extends Component {
   render() {
     const { data, totals, years } = this.props;
 
-    const yearsWithColors = years.map((year, i) => {
-      const color = `bg-${COLORS[i] || 'gray'}`;
-      const colorLight = `${color}-light`;
-      return { year, color, colorLight };
-    });
-
     return (
-      yearsWithColors.map(({ year, color, colorLight }) => (
+      years.map(( year ) => (
         <div>
           <h3 id={thId(year)}>
             {t('ffy', { year })}
@@ -48,7 +41,7 @@ class IncentivePayments extends Component {
                     </th>
                   ))}
                   <th
-                    className={`right-align ${colorLight}`}
+                    className={`right-align`}
                     id={thId(year, 'subtotal')}
                   >
                     {t('table.subtotal')}
@@ -84,7 +77,7 @@ class IncentivePayments extends Component {
                         </td>
                       ))}
                       <td
-                        className={`bold mono right-align align-middle ${colorLight}`}
+                        className={`bold mono right-align align-middle`}
                         headers={tdHdrs(year, 'subtotal')}
                       >
                         {fmt(totals[id].byYear[year])}
