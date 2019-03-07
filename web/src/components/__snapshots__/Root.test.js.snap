@@ -1,3 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the Root component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`the Root component renders correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <ConnectedRouter
+    history={Object {}}
+  >
+    <App />
+  </ConnectedRouter>
+</Provider>
+`;

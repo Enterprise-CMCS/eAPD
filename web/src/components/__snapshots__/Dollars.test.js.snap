@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dollars formatting container prints full numbers below $100,000 1`] = `
+<Fragment>
+  <span
+    className="visibility--screen"
+  >
+    $50,000
+  </span>
+  <span
+    className="visibility--print"
+  >
+    $50,000
+  </span>
+</Fragment>
+`;
+
+exports[`Dollars formatting container prints truncated numbers above $100,000 1`] = `
+<Fragment>
+  <span
+    className="visibility--screen"
+  >
+    $500k
+  </span>
+  <span
+    className="visibility--print"
+  >
+    $500,000
+  </span>
+</Fragment>
+`;
+
+exports[`Dollars formatting container shows B for billions instead of G for giga 1`] = `
+<Fragment>
+  <span
+    className="visibility--screen"
+  >
+    $50B
+  </span>
+  <span
+    className="visibility--print"
+  >
+    $50,000,000,000
+  </span>
+</Fragment>
+`;
+
+exports[`Dollars formatting container with not-numbers handles NaN 1`] = `
+<Fragment>
+  --
+</Fragment>
+`;
+
+exports[`Dollars formatting container with not-numbers handles infinity 1`] = `
+<Fragment>
+  --
+</Fragment>
+`;
+
+exports[`Dollars formatting container with not-numbers handles non-numeric children 1`] = `
+<Fragment>
+  --
+</Fragment>
+`;
+
+exports[`Dollars formatting container with not-numbers handles non-numeric children 2`] = `
+<Fragment>
+  --
+</Fragment>
+`;
+
+exports[`Dollars formatting container with not-numbers handles non-numeric children 3`] = `
+<Fragment>
+  --
+</Fragment>
+`;

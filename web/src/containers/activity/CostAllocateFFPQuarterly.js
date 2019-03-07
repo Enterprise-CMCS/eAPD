@@ -3,9 +3,10 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity } from '../../actions/activities';
+import Dollars from '../../components/Dollars';
 import { PercentInput } from '../../components/Inputs';
 import { t } from '../../i18n';
-import { formatMoney, formatPerc } from '../../util/formats';
+import { formatPerc } from '../../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
 const COLORS = ['teal', 'green', 'yellow'];
@@ -188,7 +189,7 @@ class CostAllocateFFPQuarterly extends Component {
                         className="bold mono right-align bg-gray-light"
                         headers="act_qbudget_total"
                       >
-                        {formatMoney(quarterlyFFP.total[name])}
+                        <Dollars>{quarterlyFFP.total[name]}</Dollars>
                       </td>
                     </tr>
                     <tr>
@@ -202,7 +203,9 @@ class CostAllocateFFPQuarterly extends Component {
                               key={q}
                               headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                             >
-                              {formatMoney(quarterlyFFP[year][q][name].dollars)}
+                              <Dollars>
+                                {quarterlyFFP[year][q][name].dollars}
+                              </Dollars>
                             </td>
                           ))}
                           <td
@@ -211,9 +214,9 @@ class CostAllocateFFPQuarterly extends Component {
                             )}-light`}
                             headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
                           >
-                            {formatMoney(
-                              quarterlyFFP[year].subtotal[name].dollars
-                            )}
+                            <Dollars>
+                              {quarterlyFFP[year].subtotal[name].dollars}
+                            </Dollars>
                           </td>
                         </Fragment>
                       ))}
@@ -230,16 +233,18 @@ class CostAllocateFFPQuarterly extends Component {
                           key={q}
                           headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                         >
-                          {formatMoney(quarterlyFFP[year][q].combined.dollars)}
+                          <Dollars>
+                            {quarterlyFFP[year][q].combined.dollars}
+                          </Dollars>
                         </td>
                       ))}
                       <td
                         className={`bold mono right-align ${color(i)}-light`}
                         headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
                       >
-                        {formatMoney(
-                          quarterlyFFP[year].subtotal.combined.dollars
-                        )}
+                        <Dollars>
+                          {quarterlyFFP[year].subtotal.combined.dollars}
+                        </Dollars>
                       </td>
                     </Fragment>
                   ))}
@@ -247,7 +252,7 @@ class CostAllocateFFPQuarterly extends Component {
                     className="bold mono right-align bg-gray-light"
                     headers="act_qbudget_total"
                   >
-                    {formatMoney(quarterlyFFP.total.combined)}
+                    <Dollars>{quarterlyFFP.total.combined}</Dollars>
                   </td>
                 </tr>
               </tbody>

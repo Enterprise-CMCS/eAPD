@@ -1,3 +1,189 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the CostAllocateFFP component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`the CostAllocateFFP component renders correctly 1`] = `
+<div
+  className="mb3"
+>
+  <h4>
+    Federal Financial Partipation (FFP) and Cost Allocation
+  </h4>
+  <div
+    className="clearfix mxn1"
+  >
+    <div
+      className="col col-12 sm-col-6 mb2 px1"
+      key="1066"
+    >
+      <div
+        className="p2 bg-gray-lightest"
+      >
+        <div>
+          1066
+        </div>
+        <div
+          className="h3 bold mono truncate"
+        >
+          <Dollars>
+            300
+          </Dollars>
+        </div>
+        <hr />
+        <InputHolder
+          hideLabel={false}
+          label="Other Funding Amount"
+          name="cost-allocate-other-1066"
+          onChange={[Function]}
+          type="text"
+          value={10}
+          wrapperClass="lg-col-8 mb2"
+        />
+        <div>
+          Medicaid Share
+        </div>
+        <div
+          className="h4 bold mono truncate"
+        >
+          <Dollars>
+            290
+          </Dollars>
+        </div>
+        <hr />
+        <Select
+          hideLabel={false}
+          label="Federal-State Split"
+          name="ffp-1066"
+          onChange={[Function]}
+          options={
+            Array [
+              "90-10",
+              "75-25",
+              "50-50",
+            ]
+          }
+          value="90-10"
+          wrapperClass="lg-col-8 mb2"
+        />
+        <div
+          className="lg-flex"
+        >
+          <div
+            className="lg-col-6 mb1 lg-m0"
+          >
+            <div>
+              Federal
+            </div>
+            <div
+              className="h4 bold mono truncate"
+            >
+              <Dollars>
+                261
+              </Dollars>
+            </div>
+          </div>
+          <div
+            className="lg-col-6 mb1 lg-m0"
+          >
+            <div>
+              State
+            </div>
+            <div
+              className="h4 bold mono truncate"
+            >
+              <Dollars>
+                29
+              </Dollars>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="col col-12 sm-col-6 mb2 px1"
+      key="1067"
+    >
+      <div
+        className="p2 bg-gray-lightest"
+      >
+        <div>
+          1067
+        </div>
+        <div
+          className="h3 bold mono truncate"
+        >
+          <Dollars>
+            3000
+          </Dollars>
+        </div>
+        <hr />
+        <InputHolder
+          hideLabel={false}
+          label="Other Funding Amount"
+          name="cost-allocate-other-1067"
+          onChange={[Function]}
+          type="text"
+          value={0}
+          wrapperClass="lg-col-8 mb2"
+        />
+        <div>
+          Medicaid Share
+        </div>
+        <div
+          className="h4 bold mono truncate"
+        >
+          <Dollars>
+            3000
+          </Dollars>
+        </div>
+        <hr />
+        <Select
+          hideLabel={false}
+          label="Federal-State Split"
+          name="ffp-1067"
+          onChange={[Function]}
+          options={
+            Array [
+              "90-10",
+              "75-25",
+              "50-50",
+            ]
+          }
+          value="10-90"
+          wrapperClass="lg-col-8 mb2"
+        />
+        <div
+          className="lg-flex"
+        >
+          <div
+            className="lg-col-6 mb1 lg-m0"
+          >
+            <div>
+              Federal
+            </div>
+            <div
+              className="h4 bold mono truncate"
+            >
+              <Dollars>
+                300
+              </Dollars>
+            </div>
+          </div>
+          <div
+            className="lg-col-6 mb1 lg-m0"
+          >
+            <div>
+              State
+            </div>
+            <div
+              className="h4 bold mono truncate"
+            >
+              <Dollars>
+                2700
+              </Dollars>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
