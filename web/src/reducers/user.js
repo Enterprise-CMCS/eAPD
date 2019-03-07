@@ -16,24 +16,25 @@ const initialState = {
   data: { ...fieldsObj },
   fetching: false,
   loaded: false,
-  error: ''
+  error: false
 };
 
 const user = (state = initialState, action) => {
   switch (action.type) {
     case ADMIN_EDIT_ME_REQUEST:
-      return { ...state, fetching: true };
+      return { ...state, error: false, fetching: true };
     case AUTH_CHECK_SUCCESS:
     case LOGIN_SUCCESS:
     case ADMIN_EDIT_ME_SUCCESS:
       return {
         ...state,
+        error: false,
         fetching: false,
         loaded: true,
         data: { ...action.data }
       };
     case ADMIN_EDIT_ME_ERROR:
-      return { ...state, fetching: false };
+      return { ...state, error: true, fetching: false };
     case LOGOUT_SUCCESS:
       return initialState;
     default:

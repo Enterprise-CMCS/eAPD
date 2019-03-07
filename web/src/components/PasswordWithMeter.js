@@ -1,4 +1,4 @@
-import { Alert } from '@cmsgov/design-system-core';
+import { Choice, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import zxcvbn from 'zxcvbn';
@@ -31,7 +31,9 @@ class Password extends Component {
     const { showPassword, strength } = this.state;
 
     let passwordQuality = 'Password is great';
-    if (strength < 3) {
+    if (value.length === 0) {
+      passwordQuality = <span>&nbsp;</span>;
+    } else if (strength < 3) {
       passwordQuality = 'Password is weak';
     } else if (strength === 3) {
       passwordQuality = 'Password is good';
@@ -53,29 +55,30 @@ class Password extends Component {
 
     return (
       <div {...rest}>
-        <div className="right">
-          <label htmlFor="showPassword">Show password</label>
-          <input
-            type="checkbox"
-            checked={showPassword}
-            onChange={this.toggleShowPassword}
-          />
-        </div>
-        <label htmlFor="password">{title || 'Password'}</label>
-        <Alert className="my2">
-          A strong password is at least 9 characters, not a commonly-used word
-          or phrase, and not too similar to the person’s name or email address.
-        </Alert>
-        <input
-          id="password"
-          type={showPassword ? 'text' : 'password'}
+        <Choice
+          className="ds-u-float--right"
+          checked={showPassword}
+          name="show password"
+          value="Show password"
+          onChange={this.toggleShowPassword}
+          size="small"
+        >
+          Show password
+        </Choice>
+
+        <TextField
+          hint="A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address."
+          label={title || 'Password'}
           name="password"
-          className="input"
+          type={showPassword ? 'text' : 'password'}
           value={value}
           onChange={this.changePassword}
         />
         <div className={strengthClass}>
-          <div className="strength-meter-fill" data-strength={strength} />
+          <div
+            className="strength-meter-fill"
+            data-strength={value.length ? strength : 'empty'}
+          />
         </div>
         <div className={qualityClass}>{passwordQuality}</div>
       </div>

@@ -13,7 +13,7 @@ import user from './user';
 
 describe('user reducer', () => {
   const initialState = {
-    error: '',
+    error: false,
     fetching: false,
     loaded: false,
     data: { email: '', id: '', name: '', phone: '', position: '', state: '' }
@@ -43,7 +43,7 @@ describe('user reducer', () => {
         ).toEqual({
           ...initialState,
           fetching: false,
-          error: '',
+          error: false,
           loaded: true,
           data: { this: 'is', my: 'user' }
         });
@@ -55,6 +55,7 @@ describe('user reducer', () => {
     [ADMIN_EDIT_ME_ERROR].forEach(action => {
       expect(user(initialState, { type: action })).toEqual({
         ...initialState,
+        error: true,
         fetching: false
       });
     });
