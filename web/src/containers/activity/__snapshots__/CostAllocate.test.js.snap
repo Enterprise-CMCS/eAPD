@@ -1,3 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the CostAllocate component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`the CostAllocate component renders correctly 1`] = `
+<Subsection
+  id={null}
+  nested={true}
+  open={false}
+  resource="activities.costAllocate"
+>
+  <div
+    className="mb3"
+  >
+    <div
+      className="mb-tiny bold"
+    >
+      Description of cost allocation methodology
+    </div>
+    <Instruction
+      args={null}
+      reverse={false}
+      source="activities.costAllocate.methodology.instruction"
+    />
+    <RichText
+      content="cost allocation"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <Connect(CostAllocateFFP)
+    aKey="activity key"
+  />
+  <div
+    className="mb3"
+  >
+    <div
+      className="mb-tiny bold"
+    >
+      Breakout of federal share by quarter
+    </div>
+    <Instruction
+      args={null}
+      reverse={false}
+      source="activities.costAllocate.quarterly.instruction"
+    />
+    <Connect(CostAllocateFFPQuarterly)
+      aKey="activity key"
+    />
+  </div>
+  <div
+    className="mb3"
+  >
+    <div
+      className="mb-tiny bold"
+    >
+      Other funding description
+    </div>
+    <Instruction
+      args={null}
+      reverse={false}
+      source="activities.costAllocate.otherFunding.instruction"
+    />
+    <RichText
+      content="other funding"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+</Subsection>
+`;

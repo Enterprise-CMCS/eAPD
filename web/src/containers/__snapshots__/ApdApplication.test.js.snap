@@ -1,5 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`apd (application) component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`apd (application) component renders correctly 1`] = `
+<div
+  className="site-body ds-l-container"
+>
+  <Prompt
+    message={[Function]}
+    when={true}
+  />
+  <div
+    className="ds-l-row ds-u-margin--0"
+  >
+    <Connect(Sidebar)
+      place={Object {}}
+    />
+    <div
+      className="site-main p2 sm-p4 md-px0 ds-l-col--9"
+    >
+      <Connect(TopBtns) />
+      <ApdStateProfile />
+      <Connect(ApdSummary) />
+      <Connect(PreviousActivities) />
+      <Connect(All) />
+      <Connect(ScheduleSummary) />
+      <ProposedBudget />
+      <Connect(AssurancesAndCompliance) />
+      <Connect(ExecutiveSummary) />
+    </div>
+  </div>
+</div>
+`;
 
-exports[`apd (application) component renders correctly 2`] = `ShallowWrapper {}`;
+exports[`apd (application) component renders correctly 2`] = `
+<Redirect
+  push={false}
+  to="/"
+/>
+`;

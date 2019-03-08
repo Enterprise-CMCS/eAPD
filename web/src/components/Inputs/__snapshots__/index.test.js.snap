@@ -1,5 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input component renders correctly 1`] = `ReactWrapper {}`;
+exports[`Input component renders correctly 1`] = `
+<InputHolder
+  hideLabel={false}
+  label="label"
+  name="name"
+  type="text"
+  wrapperClass=""
+>
+  <div
+    className="mb2"
+  >
+    <label
+      className="block mb-tiny truncate"
+      htmlFor="name"
+    >
+      label
+    </label>
+    <Input
+      id="name"
+      type="text"
+    >
+      <input
+        className="m0 input"
+        id="name"
+        type="text"
+      />
+    </Input>
+  </div>
+</InputHolder>
+`;
 
-exports[`Textarea component renders correctly 1`] = `ReactWrapper {}`;
+exports[`Textarea component renders correctly 1`] = `
+<InputHolder
+  hideLabel={false}
+  label="label"
+  name="name"
+  type="text"
+  wrapperClass=""
+>
+  <div
+    className="mb2"
+  >
+    <label
+      className="block mb-tiny truncate"
+      htmlFor="name"
+    >
+      label
+    </label>
+    <Textarea
+      id="name"
+      type="text"
+    >
+      <textarea
+        className="m0 textarea"
+        id="name"
+        spellCheck="true"
+        type="text"
+      />
+    </Textarea>
+  </div>
+</InputHolder>
+`;

@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity as updateActivityAction } from '../../actions/activities';
+import Dollars from '../../components/Dollars';
 import { DollarInput } from '../../components/Inputs';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
-import { formatMoney } from '../../util/formats';
 
 class CostAllocateFFP extends Component {
   handleOther = year => e => {
@@ -39,7 +39,7 @@ class CostAllocateFFP extends Component {
                 <div className="p2 bg-gray-lightest">
                   <div>{year}</div>
                   <div className="h3 bold mono truncate">
-                    {formatMoney(total)}
+                    <Dollars>{total}</Dollars>
                   </div>
                   <hr />
                   <DollarInput
@@ -51,7 +51,7 @@ class CostAllocateFFP extends Component {
                   />
                   <div>{t('activities.costAllocate.ffp.medicaidShare')}</div>
                   <div className="h4 bold mono truncate">
-                    {formatMoney(medicaidShare)}
+                    <Dollars>{medicaidShare}</Dollars>
                   </div>
                   <hr />
                   <Select
@@ -68,13 +68,13 @@ class CostAllocateFFP extends Component {
                     <div className="lg-col-6 mb1 lg-m0">
                       <div>Federal</div>
                       <div className="h4 bold mono truncate">
-                        {formatMoney(allocations.federal)}
+                        <Dollars>{allocations.federal}</Dollars>
                       </div>
                     </div>
                     <div className="lg-col-6 mb1 lg-m0">
                       <div>State</div>
                       <div className="h4 bold mono truncate">
-                        {formatMoney(allocations.state)}
+                        <Dollars>{allocations.state}</Dollars>
                       </div>
                     </div>
                   </div>

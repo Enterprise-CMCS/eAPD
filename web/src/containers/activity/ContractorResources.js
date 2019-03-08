@@ -15,13 +15,13 @@ import Btn from '../../components/Btn';
 import CollapsibleList from '../../components/CollapsibleList';
 import DateRangePicker from '../../components/DateRangePicker';
 import DeleteButton from '../../components/DeleteConfirm';
+import Dollars from '../../components/Dollars';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
-import { formatMoney } from '../../util/formats';
 
 const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
 
@@ -351,7 +351,7 @@ class ContractorResources extends Component {
                     <div key={year} className="col-3 truncate">
                       {year}:{' '}
                       <span className="bold mono">
-                        {formatMoney(contractor.years[year])}
+                        <Dollars>{contractor.years[year]}</Dollars>
                       </span>
                     </div>
                   ))}

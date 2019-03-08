@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import Dollars from '../components/Dollars';
 import { t } from '../i18n';
-import { formatMoney } from '../util/formats';
 
 const FUNDING_SOURCES = [['hitAndHie', 'HIT and HIE'], ['mmis', 'MMIS']];
 const QUARTERS = [1, 2, 3, 4];
@@ -123,7 +123,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                               key={q}
                               headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-q${q}`}
                             >
-                              {formatMoney(data[year][q][name])}
+                              <Dollars>{data[year][q][name]}</Dollars>
                             </td>
                           ))}
                           <td
@@ -132,7 +132,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                             )}-light`}
                             headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-subtotal`}
                           >
-                            {formatMoney(data[year].subtotal[name])}
+                            <Dollars>{data[year].subtotal[name]}</Dollars>
                           </td>
                         </Fragment>
                       ))}
@@ -140,7 +140,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                         className="bold mono right-align nowrap bg-gray-light"
                         headers={`quarterly-budget-summary-${source}-total2 quarterly-budget-summary-${source}-total`}
                       >
-                        {formatMoney(data.total[name])}
+                        <Dollars>{data.total[name]}</Dollars>
                       </td>
                     </tr>
                   ))}

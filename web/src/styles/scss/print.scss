@@ -3,6 +3,10 @@
     background-color: white;
   }
 
+  .visibility--screen {
+    display: none;
+  }
+
   section {
     border: 0;
 
@@ -50,5 +54,11 @@
   .has-sticky-header .sticky-nested {
     // unsticky headers
     position: inherit;
+  }
+}
+
+@media screen {
+  .visibility--print {
+    display: none;
   }
 }
