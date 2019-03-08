@@ -21,6 +21,7 @@ describe('my account page', () => {
         user: {
           data: {
             username: 'tina@burgers.com',
+            ignores: 'unnecessary state',
             name: 'Tina Belcher',
             phone: '1-800-BURGERS',
             position: 'Table Cleaner'
@@ -31,7 +32,6 @@ describe('my account page', () => {
     ).toEqual({
       fetching: 'aw thank you',
       user: {
-        email: 'tina@burgers.com',
         name: 'Tina Belcher',
         phone: '1-800-BURGERS',
         position: 'Table Cleaner'
@@ -41,7 +41,6 @@ describe('my account page', () => {
 
   test('renders', () => {
     const user = {
-      email: 'tina@burgers.com',
       name: 'Tina Belcher',
       phone: '1-800-BURGERS',
       position: 'Table Cleaner'
@@ -75,7 +74,6 @@ describe('my account page', () => {
 
   test('handles submitting the form', () => {
     const user = {
-      email: 'tina@burgers.com',
       name: 'Tina Belcher',
       phone: '1-800-BURGERS',
       position: 'Table Cleaner'
@@ -101,7 +99,6 @@ describe('my account page', () => {
 
   test('handles going back', () => {
     const user = {
-      email: 'tina@burgers.com',
       name: 'Tina Belcher',
       phone: '1-800-BURGERS',
       position: 'Table Cleaner'

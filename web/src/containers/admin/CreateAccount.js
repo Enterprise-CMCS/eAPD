@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import zxcvbn from 'zxcvbn';
 import { STATES } from '../../util';
 import Password from '../../components/PasswordWithMeter';
 
@@ -33,12 +32,6 @@ class CreateUser extends Component {
     const { email, name, password, state } = this.state;
     if (!email || !password) {
       alert('Email and password are required');
-      return;
-    }
-
-    const score = zxcvbn(password, [email, name]);
-    if (score.score < 3) {
-      alert('Password is too weak');
       return;
     }
 
