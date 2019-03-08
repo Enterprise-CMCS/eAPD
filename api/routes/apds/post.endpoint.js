@@ -29,6 +29,11 @@ describe('APD endpoint | POST /apds', async () => {
     });
 
     expect(statusCode).toEqual(200);
+
+    const name = body.name;
+    delete body.name;
+
+    expect(name).toMatch(/MN-\d{4}-\d{2}-\d{2}-HITECH-APD/);
     expect(body).toMatchSnapshot();
   });
 });
