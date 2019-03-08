@@ -6,6 +6,7 @@ import { updateActivity } from '../../actions/activities';
 import { PercentInput } from '../../components/Inputs';
 import { t } from '../../i18n';
 import { formatMoney, formatPerc } from '../../util/formats';
+import Dollars from '../../components/Dollars';
 
 const QUARTERS = [1, 2, 3, 4];
 const COLORS = ['teal', 'green', 'yellow'];
@@ -38,7 +39,8 @@ class CostAllocateFFPQuarterly extends Component {
     if (!quarterlyFFP) return null;
 
     return (
-      years.map((year, i) => (
+      <div>
+        {years.map((year, i) => (
         <div>
             <h3>
               {t('ffy', { year })}
@@ -46,7 +48,9 @@ class CostAllocateFFPQuarterly extends Component {
             <table className="table-cms table-fixed">
               <thead>
                 <tr>
-                  <th></th>
+                  <th
+                    id="act_qbudget_null1"
+                  />
                   <Fragment key={year}>
                     {QUARTERS.map(q => (
                       <th
@@ -162,7 +166,32 @@ class CostAllocateFFPQuarterly extends Component {
               </tbody>
             </table>
           </div>
-      ))
+        ))}
+        <table>
+          <tr>
+            {['state', 'contractors'].map(name => (
+              <Fragment key={name}>
+                <tr
+                  key={name}
+                  className={`align-middle ${
+                    name === 'combined' ? 'bold' : ''
+                  }`}
+                >
+                  <td headers="act_qbudget_null1">
+                    {EXPENSE_NAME_DISPLAY[name]}
+                  </td>
+                  <td
+                    className="bold mono right-align bg-gray-light"
+                    headers="act_qbudget_total"
+                  >
+                    <Dollars>{quarterlyFFP.total[name]}</Dollars>
+                  </td>
+                </tr>
+              </Fragment>
+            ))}
+          </tr>
+        </table>
+      </div>
     );
   }
 }
