@@ -4,7 +4,7 @@ import createHistory from 'history/createBrowserHistory';
 import React from 'react';
 import 'react-dates/initialize';
 import { render } from 'react-dom';
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'connected-react-router';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
 import thunk from 'redux-thunk';
@@ -25,7 +25,7 @@ if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());
 }
 
-const store = createStore(reducer, applyMiddleware(...middleware));
+const store = createStore(reducer(history), applyMiddleware(...middleware));
 
 render(
   <Root history={history} store={store} />,
