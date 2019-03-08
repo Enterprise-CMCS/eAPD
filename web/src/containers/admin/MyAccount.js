@@ -12,7 +12,6 @@ class MyAccount extends Component {
   state = {
     success: false,
     user: {
-      email: '',
       name: '',
       password: '',
       phone: '',
@@ -24,10 +23,10 @@ class MyAccount extends Component {
     super(props);
 
     const {
-      user: { email, name, phone, position }
+      user: { name, phone, position }
     } = props;
 
-    this.state.user = { email, name, phone, position };
+    this.state.user = { name, phone, position };
   }
 
   static getDerivedStateFromProps(newProps, prevState) {
@@ -63,7 +62,7 @@ class MyAccount extends Component {
     const { fetching } = this.props;
     const {
       success,
-      user: { email, name, password, phone, position }
+      user: { name, password, phone, position }
     } = this.state;
 
     return (
@@ -86,12 +85,6 @@ class MyAccount extends Component {
               label="Name"
               name="name"
               value={name || ''}
-              onChange={this.handleEditAccount}
-            />
-            <TextField
-              label="Email"
-              name="email"
-              value={email || ''}
               onChange={this.handleEditAccount}
             />
             <TextField
@@ -137,7 +130,6 @@ MyAccount.propTypes = {
   fetching: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   user: PropTypes.shape({
-    email: PropTypes.string,
     name: PropTypes.string,
     phone: PropTypes.string,
     position: PropTypes.string
@@ -148,13 +140,12 @@ const mapStateToProps = ({
   user: {
     error,
     fetching,
-    data: { name, phone, position, username }
+    data: { name, phone, position }
   }
 }) => ({
   error,
   fetching,
   user: {
-    email: username,
     name,
     phone,
     position

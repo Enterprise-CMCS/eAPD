@@ -36,13 +36,6 @@ exports[`my account page renders 1`] = `
         value="Tina Belcher"
       />
       <TextField
-        label="Email"
-        name="email"
-        onChange={[Function]}
-        type="text"
-        value="tina@burgers.com"
-      />
-      <TextField
         label="Phone number"
         mask="phone"
         name="phone"
@@ -119,13 +112,6 @@ exports[`my account page renders 2`] = `
         value="Tina Belcher"
       />
       <TextField
-        label="Email"
-        name="email"
-        onChange={[Function]}
-        type="text"
-        value="tina@burgers.com"
-      />
-      <TextField
         label="Phone number"
         mask="phone"
         name="phone"
@@ -200,13 +186,6 @@ exports[`my account page renders 3`] = `
         onChange={[Function]}
         type="text"
         value="Tina Belcher"
-      />
-      <TextField
-        label="Email"
-        name="email"
-        onChange={[Function]}
-        type="text"
-        value="tina@burgers.com"
       />
       <TextField
         label="Phone number"
