@@ -30,7 +30,11 @@ describe('APD endpoint | POST /apds', async () => {
 
     expect(statusCode).toEqual(200);
 
-    const name = body.name;
+    // The name is derived from the creation date, so it'll change with every
+    // run of this test.  Rather than figure out something fancy with the
+    // snapshots, just pull out the name and test it with a regex.
+
+    const { name } = body;
     delete body.name;
 
     expect(name).toMatch(/MN-\d{4}-\d{2}-\d{2}-HITECH-APD/);
