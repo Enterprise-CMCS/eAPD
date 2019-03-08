@@ -107,9 +107,9 @@ tap.test('me PUT endpoint', async endpointTest => {
       });
 
       const fieldsAreUpdated = test => {
-        test.ok(
-          req.user.model.set.calledWith('email', 'new email'),
-          'email is updated'
+        test.notOk(
+          req.user.model.set.calledWith('email'),
+          'email is NOT updated'
         );
         test.ok(
           req.user.model.set.calledWith('name', 'new name'),
