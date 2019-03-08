@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { formatMoney } from '../util/formats';
+import Dollars from '../components/Dollars';
 import { DollarInput } from '../components/Inputs';
 import { updateApd } from '../actions/apd';
 import { TABLE_HEADERS } from '../constants';
@@ -124,7 +124,7 @@ const ApdPreviousActivityTableMMIS = ({
                       <td
                         headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_approved`}
                       >
-                        {formatMoney(federalApproved)}
+                        <Dollars>{federalApproved}</Dollars>
                       </td>
 
                       <td
