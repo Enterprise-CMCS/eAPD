@@ -1,722 +1,718 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`incentive payments component renders correctly 1`] = `
-Array [
-  <div>
-    <h3
-      id="incentive-payments-table-fy1"
-    >
-      FFY 1
-    </h3>
-    <table
-      className="table-cms table-fixed"
-    >
-      <thead>
-        <tr>
-          <th
-            id="incentive-payments-table-fynull2"
+<div>
+  <h3
+    id="incentive-payments-table-fy1"
+  >
+    FFY 1
+  </h3>
+  <table
+    className="table-cms table-fixed"
+  >
+    <thead>
+      <tr>
+        <th
+          id="incentive-payments-table-fynull2"
+        />
+        <th
+          className="right-align"
+          id="incentive-payments-table-fy1-q1"
+          key="1"
+        >
+          Q1
+        </th>
+        <th
+          className="right-align"
+          id="incentive-payments-table-fy1-q2"
+          key="2"
+        >
+          Q2
+        </th>
+        <th
+          className="right-align"
+          id="incentive-payments-table-fy1-q3"
+          key="3"
+        >
+          Q3
+        </th>
+        <th
+          className="right-align"
+          id="incentive-payments-table-fy1-q4"
+          key="4"
+        >
+          Q4
+        </th>
+        <th
+          className="right-align"
+          id="incentive-payments-table-fy1-qsubtotal"
+        >
+          Subtotal
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        key="ehAmt"
+      >
+        <td
+          className="align-middle bold"
+          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        >
+          EH Payments
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
+          key="1"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehAmt payments for 1, quarter 1"
+            name="ehAmt-payments-1-q1"
+            onChange={[Function]}
+            type="text"
+            value={2}
+            wrapperClass="m0"
           />
-          <th
-            className="right-align"
-            id="incentive-payments-table-fy1-q1"
-            key="1"
-          >
-            Q1
-          </th>
-          <th
-            className="right-align"
-            id="incentive-payments-table-fy1-q2"
-            key="2"
-          >
-            Q2
-          </th>
-          <th
-            className="right-align"
-            id="incentive-payments-table-fy1-q3"
-            key="3"
-          >
-            Q3
-          </th>
-          <th
-            className="right-align"
-            id="incentive-payments-table-fy1-q4"
-            key="4"
-          >
-            Q4
-          </th>
-          <th
-            className="right-align"
-            id="incentive-payments-table-fy1-qsubtotal"
-          >
-            Subtotal
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          key="ehAmt"
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
+          key="2"
         >
-          <td
-            className="align-middle bold"
-            headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
-          >
-            EH Payments
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
-            key="1"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehAmt payments for 1, quarter 1"
-              name="ehAmt-payments-1-q1"
-              onChange={[Function]}
-              type="text"
-              value={2}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
-            key="2"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehAmt payments for 1, quarter 2"
-              name="ehAmt-payments-1-q2"
-              onChange={[Function]}
-              type="text"
-              value={3}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
-            key="3"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehAmt payments for 1, quarter 3"
-              name="ehAmt-payments-1-q3"
-              onChange={[Function]}
-              type="text"
-              value={4}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
-            key="4"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehAmt payments for 1, quarter 4"
-              name="ehAmt-payments-1-q4"
-              onChange={[Function]}
-              type="text"
-              value=""
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            className="bold mono right-align align-middle"
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
-          >
-            --
-          </td>
-        </tr>
-        <tr
-          key="ehCt"
-        >
-          <td
-            className="align-middle "
-            headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
-          >
-            EH Count (optional)
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
-            key="1"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehCt payments for 1, quarter 1"
-              name="ehCt-payments-1-q1"
-              onChange={[Function]}
-              type="text"
-              value={10}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
-            key="2"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehCt payments for 1, quarter 2"
-              name="ehCt-payments-1-q2"
-              onChange={[Function]}
-              type="text"
-              value={11}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
-            key="3"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehCt payments for 1, quarter 3"
-              name="ehCt-payments-1-q3"
-              onChange={[Function]}
-              type="text"
-              value={12}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
-            key="4"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehCt payments for 1, quarter 4"
-              name="ehCt-payments-1-q4"
-              onChange={[Function]}
-              type="text"
-              value=""
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            className="bold mono right-align align-middle"
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
-          >
-            --
-          </td>
-        </tr>
-        <tr
-          key="epAmt"
-        >
-          <td
-            className="align-middle bold"
-            headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
-          >
-            EP Payments
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
-            key="1"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epAmt payments for 1, quarter 1"
-              name="epAmt-payments-1-q1"
-              onChange={[Function]}
-              type="text"
-              value={18}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
-            key="2"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epAmt payments for 1, quarter 2"
-              name="epAmt-payments-1-q2"
-              onChange={[Function]}
-              type="text"
-              value={19}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
-            key="3"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epAmt payments for 1, quarter 3"
-              name="epAmt-payments-1-q3"
-              onChange={[Function]}
-              type="text"
-              value={20}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
-            key="4"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epAmt payments for 1, quarter 4"
-              name="epAmt-payments-1-q4"
-              onChange={[Function]}
-              type="text"
-              value=""
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            className="bold mono right-align align-middle"
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
-          >
-            --
-          </td>
-        </tr>
-        <tr
-          key="epCt"
-        >
-          <td
-            className="align-middle "
-            headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
-          >
-            EP Count (optional)
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
-            key="1"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epCt payments for 1, quarter 1"
-              name="epCt-payments-1-q1"
-              onChange={[Function]}
-              type="text"
-              value={26}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
-            key="2"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epCt payments for 1, quarter 2"
-              name="epCt-payments-1-q2"
-              onChange={[Function]}
-              type="text"
-              value={27}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
-            key="3"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epCt payments for 1, quarter 3"
-              name="epCt-payments-1-q3"
-              onChange={[Function]}
-              type="text"
-              value={28}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
-            key="4"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epCt payments for 1, quarter 4"
-              name="epCt-payments-1-q4"
-              onChange={[Function]}
-              type="text"
-              value=""
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            className="bold mono right-align align-middle"
-            headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
-          >
-            --
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  <div>
-    <h3
-      id="incentive-payments-table-fy2"
-    >
-      FFY 2
-    </h3>
-    <table
-      className="table-cms table-fixed"
-    >
-      <thead>
-        <tr>
-          <th
-            id="incentive-payments-table-fynull2"
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehAmt payments for 1, quarter 2"
+            name="ehAmt-payments-1-q2"
+            onChange={[Function]}
+            type="text"
+            value={3}
+            wrapperClass="m0"
           />
-          <th
-            className="right-align"
-            id="incentive-payments-table-fy2-q1"
-            key="1"
-          >
-            Q1
-          </th>
-          <th
-            className="right-align"
-            id="incentive-payments-table-fy2-q2"
-            key="2"
-          >
-            Q2
-          </th>
-          <th
-            className="right-align"
-            id="incentive-payments-table-fy2-q3"
-            key="3"
-          >
-            Q3
-          </th>
-          <th
-            className="right-align"
-            id="incentive-payments-table-fy2-q4"
-            key="4"
-          >
-            Q4
-          </th>
-          <th
-            className="right-align"
-            id="incentive-payments-table-fy2-qsubtotal"
-          >
-            Subtotal
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          key="ehAmt"
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
+          key="3"
         >
-          <td
-            className="align-middle bold"
-            headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
-          >
-            EH Payments
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
-            key="1"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehAmt payments for 2, quarter 1"
-              name="ehAmt-payments-2-q1"
-              onChange={[Function]}
-              type="text"
-              value={6}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
-            key="2"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehAmt payments for 2, quarter 2"
-              name="ehAmt-payments-2-q2"
-              onChange={[Function]}
-              type="text"
-              value={7}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
-            key="3"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehAmt payments for 2, quarter 3"
-              name="ehAmt-payments-2-q3"
-              onChange={[Function]}
-              type="text"
-              value={8}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
-            key="4"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehAmt payments for 2, quarter 4"
-              name="ehAmt-payments-2-q4"
-              onChange={[Function]}
-              type="text"
-              value=""
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            className="bold mono right-align align-middle"
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
-          >
-            --
-          </td>
-        </tr>
-        <tr
-          key="ehCt"
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehAmt payments for 1, quarter 3"
+            name="ehAmt-payments-1-q3"
+            onChange={[Function]}
+            type="text"
+            value={4}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
+          key="4"
         >
-          <td
-            className="align-middle "
-            headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
-          >
-            EH Count (optional)
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
-            key="1"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehCt payments for 2, quarter 1"
-              name="ehCt-payments-2-q1"
-              onChange={[Function]}
-              type="text"
-              value={14}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
-            key="2"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehCt payments for 2, quarter 2"
-              name="ehCt-payments-2-q2"
-              onChange={[Function]}
-              type="text"
-              value={15}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
-            key="3"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehCt payments for 2, quarter 3"
-              name="ehCt-payments-2-q3"
-              onChange={[Function]}
-              type="text"
-              value={16}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
-            key="4"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="ehCt payments for 2, quarter 4"
-              name="ehCt-payments-2-q4"
-              onChange={[Function]}
-              type="text"
-              value=""
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            className="bold mono right-align align-middle"
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
-          >
-            --
-          </td>
-        </tr>
-        <tr
-          key="epAmt"
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehAmt payments for 1, quarter 4"
+            name="ehAmt-payments-1-q4"
+            onChange={[Function]}
+            type="text"
+            value=""
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          className="bold mono right-align align-middle"
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
         >
-          <td
-            className="align-middle bold"
-            headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
-          >
-            EP Payments
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
-            key="1"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epAmt payments for 2, quarter 1"
-              name="epAmt-payments-2-q1"
-              onChange={[Function]}
-              type="text"
-              value={22}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
-            key="2"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epAmt payments for 2, quarter 2"
-              name="epAmt-payments-2-q2"
-              onChange={[Function]}
-              type="text"
-              value={23}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
-            key="3"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epAmt payments for 2, quarter 3"
-              name="epAmt-payments-2-q3"
-              onChange={[Function]}
-              type="text"
-              value={24}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
-            key="4"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epAmt payments for 2, quarter 4"
-              name="epAmt-payments-2-q4"
-              onChange={[Function]}
-              type="text"
-              value=""
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            className="bold mono right-align align-middle"
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
-          >
-            --
-          </td>
-        </tr>
-        <tr
-          key="epCt"
+          --
+        </td>
+      </tr>
+      <tr
+        key="ehCt"
+      >
+        <td
+          className="align-middle "
+          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
         >
-          <td
-            className="align-middle "
-            headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
-          >
-            EP Count (optional)
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
-            key="1"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epCt payments for 2, quarter 1"
-              name="epCt-payments-2-q1"
-              onChange={[Function]}
-              type="text"
-              value={30}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
-            key="2"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epCt payments for 2, quarter 2"
-              name="epCt-payments-2-q2"
-              onChange={[Function]}
-              type="text"
-              value={31}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
-            key="3"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epCt payments for 2, quarter 3"
-              name="epCt-payments-2-q3"
-              onChange={[Function]}
-              type="text"
-              value={32}
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
-            key="4"
-          >
-            <InputHolder
-              className="m0 input input-condensed mono right-align"
-              hideLabel={true}
-              label="epCt payments for 2, quarter 4"
-              name="epCt-payments-2-q4"
-              onChange={[Function]}
-              type="text"
-              value=""
-              wrapperClass="m0"
-            />
-          </td>
-          <td
-            className="bold mono right-align align-middle"
-            headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
-          >
-            --
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-]
+          EH Count (optional)
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
+          key="1"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehCt payments for 1, quarter 1"
+            name="ehCt-payments-1-q1"
+            onChange={[Function]}
+            type="text"
+            value={10}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
+          key="2"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehCt payments for 1, quarter 2"
+            name="ehCt-payments-1-q2"
+            onChange={[Function]}
+            type="text"
+            value={11}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
+          key="3"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehCt payments for 1, quarter 3"
+            name="ehCt-payments-1-q3"
+            onChange={[Function]}
+            type="text"
+            value={12}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
+          key="4"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehCt payments for 1, quarter 4"
+            name="ehCt-payments-1-q4"
+            onChange={[Function]}
+            type="text"
+            value=""
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          className="bold mono right-align align-middle"
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
+        >
+          --
+        </td>
+      </tr>
+      <tr
+        key="epAmt"
+      >
+        <td
+          className="align-middle bold"
+          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        >
+          EP Payments
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
+          key="1"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epAmt payments for 1, quarter 1"
+            name="epAmt-payments-1-q1"
+            onChange={[Function]}
+            type="text"
+            value={18}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
+          key="2"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epAmt payments for 1, quarter 2"
+            name="epAmt-payments-1-q2"
+            onChange={[Function]}
+            type="text"
+            value={19}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
+          key="3"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epAmt payments for 1, quarter 3"
+            name="epAmt-payments-1-q3"
+            onChange={[Function]}
+            type="text"
+            value={20}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
+          key="4"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epAmt payments for 1, quarter 4"
+            name="epAmt-payments-1-q4"
+            onChange={[Function]}
+            type="text"
+            value=""
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          className="bold mono right-align align-middle"
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
+        >
+          --
+        </td>
+      </tr>
+      <tr
+        key="epCt"
+      >
+        <td
+          className="align-middle "
+          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        >
+          EP Count (optional)
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
+          key="1"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epCt payments for 1, quarter 1"
+            name="epCt-payments-1-q1"
+            onChange={[Function]}
+            type="text"
+            value={26}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
+          key="2"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epCt payments for 1, quarter 2"
+            name="epCt-payments-1-q2"
+            onChange={[Function]}
+            type="text"
+            value={27}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
+          key="3"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epCt payments for 1, quarter 3"
+            name="epCt-payments-1-q3"
+            onChange={[Function]}
+            type="text"
+            value={28}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
+          key="4"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epCt payments for 1, quarter 4"
+            name="epCt-payments-1-q4"
+            onChange={[Function]}
+            type="text"
+            value=""
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          className="bold mono right-align align-middle"
+          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
+        >
+          --
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3
+    id="incentive-payments-table-fy2"
+  >
+    FFY 2
+  </h3>
+  <table
+    className="table-cms table-fixed"
+  >
+    <thead>
+      <tr>
+        <th
+          id="incentive-payments-table-fynull2"
+        />
+        <th
+          className="right-align"
+          id="incentive-payments-table-fy2-q1"
+          key="1"
+        >
+          Q1
+        </th>
+        <th
+          className="right-align"
+          id="incentive-payments-table-fy2-q2"
+          key="2"
+        >
+          Q2
+        </th>
+        <th
+          className="right-align"
+          id="incentive-payments-table-fy2-q3"
+          key="3"
+        >
+          Q3
+        </th>
+        <th
+          className="right-align"
+          id="incentive-payments-table-fy2-q4"
+          key="4"
+        >
+          Q4
+        </th>
+        <th
+          className="right-align"
+          id="incentive-payments-table-fy2-qsubtotal"
+        >
+          Subtotal
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        key="ehAmt"
+      >
+        <td
+          className="align-middle bold"
+          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        >
+          EH Payments
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
+          key="1"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehAmt payments for 2, quarter 1"
+            name="ehAmt-payments-2-q1"
+            onChange={[Function]}
+            type="text"
+            value={6}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
+          key="2"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehAmt payments for 2, quarter 2"
+            name="ehAmt-payments-2-q2"
+            onChange={[Function]}
+            type="text"
+            value={7}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
+          key="3"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehAmt payments for 2, quarter 3"
+            name="ehAmt-payments-2-q3"
+            onChange={[Function]}
+            type="text"
+            value={8}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
+          key="4"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehAmt payments for 2, quarter 4"
+            name="ehAmt-payments-2-q4"
+            onChange={[Function]}
+            type="text"
+            value=""
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          className="bold mono right-align align-middle"
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
+        >
+          --
+        </td>
+      </tr>
+      <tr
+        key="ehCt"
+      >
+        <td
+          className="align-middle "
+          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        >
+          EH Count (optional)
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
+          key="1"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehCt payments for 2, quarter 1"
+            name="ehCt-payments-2-q1"
+            onChange={[Function]}
+            type="text"
+            value={14}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
+          key="2"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehCt payments for 2, quarter 2"
+            name="ehCt-payments-2-q2"
+            onChange={[Function]}
+            type="text"
+            value={15}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
+          key="3"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehCt payments for 2, quarter 3"
+            name="ehCt-payments-2-q3"
+            onChange={[Function]}
+            type="text"
+            value={16}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
+          key="4"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="ehCt payments for 2, quarter 4"
+            name="ehCt-payments-2-q4"
+            onChange={[Function]}
+            type="text"
+            value=""
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          className="bold mono right-align align-middle"
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
+        >
+          --
+        </td>
+      </tr>
+      <tr
+        key="epAmt"
+      >
+        <td
+          className="align-middle bold"
+          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        >
+          EP Payments
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
+          key="1"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epAmt payments for 2, quarter 1"
+            name="epAmt-payments-2-q1"
+            onChange={[Function]}
+            type="text"
+            value={22}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
+          key="2"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epAmt payments for 2, quarter 2"
+            name="epAmt-payments-2-q2"
+            onChange={[Function]}
+            type="text"
+            value={23}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
+          key="3"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epAmt payments for 2, quarter 3"
+            name="epAmt-payments-2-q3"
+            onChange={[Function]}
+            type="text"
+            value={24}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
+          key="4"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epAmt payments for 2, quarter 4"
+            name="epAmt-payments-2-q4"
+            onChange={[Function]}
+            type="text"
+            value=""
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          className="bold mono right-align align-middle"
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
+        >
+          --
+        </td>
+      </tr>
+      <tr
+        key="epCt"
+      >
+        <td
+          className="align-middle "
+          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        >
+          EP Count (optional)
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
+          key="1"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epCt payments for 2, quarter 1"
+            name="epCt-payments-2-q1"
+            onChange={[Function]}
+            type="text"
+            value={30}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
+          key="2"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epCt payments for 2, quarter 2"
+            name="epCt-payments-2-q2"
+            onChange={[Function]}
+            type="text"
+            value={31}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
+          key="3"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epCt payments for 2, quarter 3"
+            name="epCt-payments-2-q3"
+            onChange={[Function]}
+            type="text"
+            value={32}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
+          key="4"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="epCt payments for 2, quarter 4"
+            name="epCt-payments-2-q4"
+            onChange={[Function]}
+            type="text"
+            value=""
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          className="bold mono right-align align-middle"
+          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
+        >
+          --
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;

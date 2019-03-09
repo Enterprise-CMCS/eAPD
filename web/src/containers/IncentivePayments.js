@@ -47,7 +47,7 @@ class IncentivePayments extends Component {
                     </th>
                   ))}
                   <th
-                    className={`right-align`}
+                    className="right-align"
                     id={thId(year, 'subtotal')}
                   >
                     {t('table.subtotal')}
@@ -82,7 +82,7 @@ class IncentivePayments extends Component {
                         </td>
                       ))}
                       <td
-                        className={`bold mono right-align align-middle`}
+                        className="bold mono right-align align-middle"
                         headers={tdHdrs(year, 'subtotal')}
                       >
                         {formatNumber(totals[id].byYear[year])}

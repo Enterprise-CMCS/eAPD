@@ -38,7 +38,7 @@ class CostAllocateFFPQuarterly extends Component {
 
     return (
       <div>
-        {years.map((year, i) => (
+        {years.map((year) => (
         <div>
             <h3>
               {t('ffy', { year })}
@@ -60,7 +60,7 @@ class CostAllocateFFPQuarterly extends Component {
                       </th>
                     ))}
                     <th
-                      className={`right-align`}
+                      className="right-align"
                       id={`act_qbudget_fy${year}_subtotal`}
                     >
                       {t('table.subtotal')}
