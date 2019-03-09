@@ -1,9 +1,9 @@
 const path = require('path');
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 const config = {
+  mode: 'production',
   entry: {
     js: [
       path.join(__dirname, 'src/app.js'),
@@ -70,8 +70,7 @@ const config = {
   plugins: [
     new webpack.EnvironmentPlugin({
       API_URL: null
-    }),
-    new UglifyJSPlugin()
+    })
   ]
 };
 

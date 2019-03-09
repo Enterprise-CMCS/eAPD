@@ -3,6 +3,10 @@
     background-color: white;
   }
 
+  .visibility--screen {
+    display: none;
+  }
+
   section {
     border: 0;
 
@@ -68,5 +72,11 @@
   table input {
     padding: 0 !important;
     border: none !important;
+  }
+}
+
+@media screen {
+  .visibility--print {
+    display: none;
   }
 }

@@ -1,6 +1,6 @@
-const logger = require('../logger')('db index');
 const defaultKnex = require('knex');
 const defaultBookshelf = require('bookshelf');
+const logger = require('../logger')('db index');
 const defaultConfig = require('../knexfile');
 
 const defaultBase = require('./base');

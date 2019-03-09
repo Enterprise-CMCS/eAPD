@@ -3,12 +3,16 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
+import Dollars from '../components/Dollars';
 import { Input, DollarInput } from '../components/Inputs';
 import { t } from '../i18n';
 import { INCENTIVE_ENTRIES } from '../util';
-import { formatMoney, formatNum } from '../util/formats';
+import { formatNum } from '../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
+
+const formatNumber = (type, number) =>
+  type === 'amount' ? <Dollars>{number}</Dollars> : formatNum(number);
 
 const thId = (fy, q) => `incentive-payments-table-fy${fy}${q ? `-q${q}` : ''}`;
 const tdHdrs = (fy, q) =>
@@ -18,7 +22,8 @@ class IncentivePayments extends Component {
   handleChange = (key, year, quarter) => e => {
     const { value } = e.target;
     const incentivePayments = { [key]: { [year]: { [quarter]: value } } };
-    this.props.updateApd({ incentivePayments });
+    const { updateApd: action } = this.props;
+    action({ incentivePayments });
   };
 
   render() {
@@ -52,7 +57,6 @@ class IncentivePayments extends Component {
             <tbody>
               {INCENTIVE_ENTRIES.map(({ id, name, type }, i) => {
                 const InputComponent = type === 'amount' ? DollarInput : Input;
-                const fmt = type === 'amount' ? formatMoney : formatNum;
 
                 return (
                   <tr key={id}>
@@ -80,7 +84,7 @@ class IncentivePayments extends Component {
                         className={`bold mono right-align align-middle`}
                         headers={tdHdrs(year, 'subtotal')}
                       >
-                        {fmt(totals[id].byYear[year])}
+                        {formatNumber(totals[id].byYear[year])}
                       </td>
                     </Fragment>
                   </tr>
@@ -125,6 +129,9 @@ const mapStateToProps = ({ apd }) => {
 
 const mapDispatchToProps = { updateApd: updateApdAction };
 
-export default connect(mapStateToProps, mapDispatchToProps)(IncentivePayments);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(IncentivePayments);
 
 export { IncentivePayments as plain, mapStateToProps, mapDispatchToProps };
