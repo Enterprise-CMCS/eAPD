@@ -170,10 +170,12 @@ class CostAllocateFFPQuarterly extends Component {
         </h3>
         <table className="table-cms table-fixed table-fit-contents">
           <thead>
-            <th/>
-            <th>
-              Total
-            </th>
+            <tr>
+              <th/>
+              <th>
+                Total
+              </th>
+            </tr>
           </thead>
           <tbody>
             {['state', 'contractors'].map(name => (

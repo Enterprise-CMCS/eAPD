@@ -30,8 +30,9 @@ class IncentivePayments extends Component {
     const { data, totals, years } = this.props;
 
     return (
-      years.map(( year ) => (
-        <div>
+      <Fragment>
+        {years.map(( year ) => (
+        <Fragment>
           <h3 id={thId(year)}>
             {t('ffy', { year })}
           </h3>
@@ -92,8 +93,9 @@ class IncentivePayments extends Component {
               })}
             </tbody>
           </table>
-        </div>
-      ))
+        </Fragment>
+        ))}
+      </Fragment>
     );
   }
 }
