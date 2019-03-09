@@ -33,6 +33,8 @@ storiesOf('Numeric inputs', module).add('Dollars', () => {
     };
 
     render() {
+      const { value } = this.state;
+
       return (
         <DollarInput
           hideLabel
@@ -40,7 +42,7 @@ storiesOf('Numeric inputs', module).add('Dollars', () => {
           className="fake-spacer-input m0 input input-condensed mono right-align"
           label="fake-spacer-input"
           name="fake-spacer-input"
-          value={this.state.value}
+          value={value}
           onChange={this.change}
         />
       );

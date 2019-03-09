@@ -1,7 +1,7 @@
-const logger = require('../logger')('auth index');
 const Passport = require('passport');
 const LocalStrategy = require('passport-local');
 
+const logger = require('../logger')('auth index');
 const authenticate = require('./authenticate');
 const serialization = require('./serialization');
 const sessionFunction = require('./session')();

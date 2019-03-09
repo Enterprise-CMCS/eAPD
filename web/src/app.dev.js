@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 import createHistory from 'history/createBrowserHistory';
 import React from 'react';

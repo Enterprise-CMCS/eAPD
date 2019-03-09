@@ -1,7 +1,7 @@
-const logger = require('./logger')('blob store');
 const fs = require('fs');
 const stream = require('stream');
 const fsBlobStore = require('fs-blob-store');
+const logger = require('./logger')('blob store');
 
 const isReadableStream = obj => obj instanceof stream.Readable;
 

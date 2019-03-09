@@ -1,294 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Routes component renders correctly 1`] = `
-ShallowWrapper {
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Routes />,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "checkPropTypes": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateError": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "class",
-    "props": Object {
-      "children": Array [
-        <Connect(PrivateRoute)
-          component={[Function]}
-          exact={true}
-          path="/"
-        />,
-        <Connect(PrivateRoute)
-          component={[Function]}
-          exact={true}
-          path="/apd"
-        />,
-        <Route
-          component={[Function]}
-          path="/login"
-        />,
-        <Connect(PrivateRoute)
-          component={[Function]}
-          path="/logout"
-        />,
-        <Connect(PrivateRoute)
-          component={[Function]}
-          path="/admin/create-account"
-        />,
-        <Connect(PrivateRoute)
-          component={[Function]}
-          path="/admin/edit-account"
-        />,
-        <Route
-          component={[Function]}
-        />,
-      ],
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": "/",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "exact": true,
-          "path": "/",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": "/apd",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "exact": true,
-          "path": "/apd",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": "/login",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "path": "/login",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": "/logout",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "path": "/logout",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": "/admin/create-account",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "path": "/admin/create-account",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": "/admin/edit-account",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-          "path": "/admin/edit-account",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": "no-match",
-        "nodeType": "class",
-        "props": Object {
-          "component": [Function],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-    ],
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "class",
-      "props": Object {
-        "children": Array [
-          <Connect(PrivateRoute)
-            component={[Function]}
-            exact={true}
-            path="/"
-          />,
-          <Connect(PrivateRoute)
-            component={[Function]}
-            exact={true}
-            path="/apd"
-          />,
-          <Route
-            component={[Function]}
-            path="/login"
-          />,
-          <Connect(PrivateRoute)
-            component={[Function]}
-            path="/logout"
-          />,
-          <Connect(PrivateRoute)
-            component={[Function]}
-            path="/admin/create-account"
-          />,
-          <Connect(PrivateRoute)
-            component={[Function]}
-            path="/admin/edit-account"
-          />,
-          <Route
-            component={[Function]}
-          />,
-        ],
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": "/",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "/apd",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/apd",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "/login",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "path": "/login",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "/logout",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "path": "/logout",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "/admin/create-account",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "path": "/admin/create-account",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "/admin/edit-account",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "path": "/admin/edit-account",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "no-match",
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-      ],
-      "type": [Function],
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-        "legacyContextMode": "parent",
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getChildContext": Object {
-            "calledByRenderer": false,
-          },
-          "getDerivedStateFromProps": true,
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
-      },
-    },
-  },
-}
+<Switch>
+  <Connect(PrivateRoute)
+    component={[Function]}
+    exact={true}
+    key="/"
+    path="/"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    exact={true}
+    key="/apd"
+    path="/apd"
+  />
+  <Route
+    component={[Function]}
+    key="/login"
+    path="/login"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    key="/logout"
+    path="/logout"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    key="/admin/create-account"
+    path="/admin/create-account"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    key="/admin/edit-account"
+    path="/admin/edit-account"
+  />
+  <Route
+    component={[Function]}
+    key="no-match"
+  />
+</Switch>
 `;
