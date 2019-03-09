@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`incentive payments component renders correctly 1`] = `
-<div>
+<Fragment>
   <h3
     id="incentive-payments-table-fy1"
   >
@@ -714,5 +714,5 @@ exports[`incentive payments component renders correctly 1`] = `
       </tr>
     </tbody>
   </table>
-</div>
+</Fragment>
 `;
