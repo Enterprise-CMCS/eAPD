@@ -56,7 +56,6 @@ describe('incentive payments component', () => {
 
     component
       .find('InputHolder')
-      .not('.fake-spacer-input')
       .forEach((c, i) => {
         c.simulate('change', { target: { value: 99 } });
 
