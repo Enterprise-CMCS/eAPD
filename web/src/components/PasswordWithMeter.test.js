@@ -26,6 +26,13 @@ describe('PasswordWithmeter component', () => {
     expect(shallow(<Password value="abCD321!,@_" />)).toMatchSnapshot();
   });
 
+  it('shows the password', () => {
+    const component = shallow(<Password value="abcd1234" />);
+    component.find('Choice').simulate('change');
+
+    expect(component).toMatchSnapshot();
+  });
+
   it('calls out on change', () => {
     const onChange = sinon.spy();
     const event = { target: { value: 'change event' } };
