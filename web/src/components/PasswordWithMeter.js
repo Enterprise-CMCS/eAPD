@@ -30,13 +30,13 @@ class Password extends Component {
     const { title, value, ...rest } = this.props;
     const { showPassword, strength } = this.state;
 
-    let passwordQuality = 'Password is great';
+    let passwordQuality = 'Password strength: Weak';
     if (value.length === 0) {
       passwordQuality = <span>&nbsp;</span>;
-    } else if (strength < 3) {
-      passwordQuality = 'Password is weak';
     } else if (strength === 3) {
-      passwordQuality = 'Password is good';
+      passwordQuality = 'Password strength: Good';
+    } else if (strength > 3) {
+      passwordQuality = 'Password strength: Great';
     }
 
     const strengthClass = [
