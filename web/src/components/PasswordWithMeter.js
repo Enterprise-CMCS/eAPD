@@ -55,32 +55,34 @@ class Password extends Component {
 
     return (
       <div {...rest}>
-        <Choice
-          className="ds-u-float--right"
-          checked={showPassword}
-          name="show password"
-          value="Show password"
-          onChange={this.toggleShowPassword}
-          size="small"
-        >
-          Show password
-        </Choice>
+        <div className="password-with-meter">
+          <Choice
+            className="password-with-meter--show-password ds-u-float--right"
+            checked={showPassword}
+            name="show password"
+            value="Show password"
+            onChange={this.toggleShowPassword}
+            size="small"
+          >
+            Show password
+          </Choice>
 
-        <TextField
-          hint="A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address."
-          label={title || 'Password'}
-          name="password"
-          type={showPassword ? 'text' : 'password'}
-          value={value}
-          onChange={this.changePassword}
-        />
-        <div className={strengthClass}>
-          <div
-            className="strength-meter-fill"
-            data-strength={value.length ? strength : 'empty'}
+          <TextField
+            hint="A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address."
+            label={title || 'Password'}
+            name="password"
+            type={showPassword ? 'text' : 'password'}
+            value={value}
+            onChange={this.changePassword}
           />
+          <div className={strengthClass}>
+            <div
+              className="strength-meter-fill"
+              data-strength={value.length ? strength : 'empty'}
+            />
+          </div>
+          <div className={qualityClass}>{passwordQuality}</div>
         </div>
-        <div className={qualityClass}>{passwordQuality}</div>
       </div>
     );
   }
