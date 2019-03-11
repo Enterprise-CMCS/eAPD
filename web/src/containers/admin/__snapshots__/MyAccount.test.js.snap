@@ -3,7 +3,7 @@
 exports[`my account page renders 1`] = `
 <Fragment>
   <header
-    className="clearfix px2 py1 bg-white"
+    className="clearfix mb2 px2 py1 bg-white"
   >
     <div
       className="left"
@@ -18,61 +18,70 @@ exports[`my account page renders 1`] = `
     </div>
   </header>
   <div
-    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+    className="ds-l-col--5 ds-u-fill--white ds-u-margin-x--auto ds-u-margin-y--3 ds-u-padding--6 ds-u-radius"
   >
-    <h1
-      className="ds-h1"
+    <div
+      className="ds-u-margin-x--auto"
+      style={
+        Object {
+          "maxWidth": "460px",
+        }
+      }
     >
-      Manage account
-    </h1>
-    <form
-      onSubmit={[Function]}
-    >
-      <TextField
-        label="Name"
-        name="name"
-        onChange={[Function]}
-        type="text"
-        value="Tina Belcher"
-      />
-      <TextField
-        className="ds-c-field--medium"
-        label="Phone number"
-        mask="phone"
-        name="phone"
-        onChange={[Function]}
-        type="text"
-        value="1-800-BURGERS"
-      />
-      <TextField
-        label="Position"
-        name="position"
-        onChange={[Function]}
-        type="text"
-        value="Table Cleaner"
-      />
-      <Password
-        className="mb2"
-        compareTo={Array []}
-        onChange={[Function]}
-        title="Change password"
-        value=""
-      />
-      <Button
-        disabled={false}
-        type="submit"
-        variation="primary"
+      <h1
+        className="ds-h1"
       >
-        Save changes
-      </Button>
-      <Button
-        onClick={[Function]}
-        type="button"
-        variation="transparent"
+        Manage account
+      </h1>
+      <form
+        onSubmit={[Function]}
       >
-        Cancel
-      </Button>
-    </form>
+        <TextField
+          label="Name"
+          name="name"
+          onChange={[Function]}
+          type="text"
+          value="Tina Belcher"
+        />
+        <TextField
+          label="Phone number"
+          mask="phone"
+          name="phone"
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value="1-800-BURGERS"
+        />
+        <TextField
+          label="Position"
+          name="position"
+          onChange={[Function]}
+          type="text"
+          value="Table Cleaner"
+        />
+        <Password
+          className="mb2"
+          compareTo={Array []}
+          onChange={[Function]}
+          title="Change password"
+          value=""
+        />
+        <Button
+          disabled={false}
+          type="submit"
+          variation="primary"
+        >
+          Save changes
+        </Button>
+        <Button
+          onClick={[Function]}
+          type="button"
+          variation="transparent"
+        >
+          Cancel
+        </Button>
+      </form>
+    </div>
   </div>
 </Fragment>
 `;
@@ -80,7 +89,7 @@ exports[`my account page renders 1`] = `
 exports[`my account page renders 2`] = `
 <Fragment>
   <header
-    className="clearfix px2 py1 bg-white"
+    className="clearfix mb2 px2 py1 bg-white"
   >
     <div
       className="left"
@@ -95,61 +104,70 @@ exports[`my account page renders 2`] = `
     </div>
   </header>
   <div
-    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+    className="ds-l-col--5 ds-u-fill--white ds-u-margin-x--auto ds-u-margin-y--3 ds-u-padding--6 ds-u-radius"
   >
-    <h1
-      className="ds-h1"
+    <div
+      className="ds-u-margin-x--auto"
+      style={
+        Object {
+          "maxWidth": "460px",
+        }
+      }
     >
-      Manage account
-    </h1>
-    <form
-      onSubmit={[Function]}
-    >
-      <TextField
-        label="Name"
-        name="name"
-        onChange={[Function]}
-        type="text"
-        value="Tina Belcher"
-      />
-      <TextField
-        className="ds-c-field--medium"
-        label="Phone number"
-        mask="phone"
-        name="phone"
-        onChange={[Function]}
-        type="text"
-        value="1-800-BURGERS"
-      />
-      <TextField
-        label="Position"
-        name="position"
-        onChange={[Function]}
-        type="text"
-        value="Window Washer"
-      />
-      <Password
-        className="mb2"
-        compareTo={Array []}
-        onChange={[Function]}
-        title="Change password"
-        value=""
-      />
-      <Button
-        disabled={false}
-        type="submit"
-        variation="primary"
+      <h1
+        className="ds-h1"
       >
-        Save changes
-      </Button>
-      <Button
-        onClick={[Function]}
-        type="button"
-        variation="transparent"
+        Manage account
+      </h1>
+      <form
+        onSubmit={[Function]}
       >
-        Cancel
-      </Button>
-    </form>
+        <TextField
+          label="Name"
+          name="name"
+          onChange={[Function]}
+          type="text"
+          value="Tina Belcher"
+        />
+        <TextField
+          label="Phone number"
+          mask="phone"
+          name="phone"
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value="1-800-BURGERS"
+        />
+        <TextField
+          label="Position"
+          name="position"
+          onChange={[Function]}
+          type="text"
+          value="Window Washer"
+        />
+        <Password
+          className="mb2"
+          compareTo={Array []}
+          onChange={[Function]}
+          title="Change password"
+          value=""
+        />
+        <Button
+          disabled={false}
+          type="submit"
+          variation="primary"
+        >
+          Save changes
+        </Button>
+        <Button
+          onClick={[Function]}
+          type="button"
+          variation="transparent"
+        >
+          Cancel
+        </Button>
+      </form>
+    </div>
   </div>
 </Fragment>
 `;
@@ -157,7 +175,7 @@ exports[`my account page renders 2`] = `
 exports[`my account page renders 3`] = `
 <Fragment>
   <header
-    className="clearfix px2 py1 bg-white"
+    className="clearfix mb2 px2 py1 bg-white"
   >
     <div
       className="left"
@@ -172,65 +190,74 @@ exports[`my account page renders 3`] = `
     </div>
   </header>
   <div
-    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+    className="ds-l-col--5 ds-u-fill--white ds-u-margin-x--auto ds-u-margin-y--3 ds-u-padding--6 ds-u-radius"
   >
-    <h1
-      className="ds-h1"
+    <div
+      className="ds-u-margin-x--auto"
+      style={
+        Object {
+          "maxWidth": "460px",
+        }
+      }
     >
-      Manage account
-    </h1>
-    <form
-      onSubmit={[Function]}
-    >
-      <TextField
-        label="Name"
-        name="name"
-        onChange={[Function]}
-        type="text"
-        value="Tina Belcher"
-      />
-      <TextField
-        className="ds-c-field--medium"
-        label="Phone number"
-        mask="phone"
-        name="phone"
-        onChange={[Function]}
-        type="text"
-        value="1-800-BURGERS"
-      />
-      <TextField
-        label="Position"
-        name="position"
-        onChange={[Function]}
-        type="text"
-        value="Table Cleaner"
-      />
-      <Password
-        className="mb2"
-        compareTo={Array []}
-        onChange={[Function]}
-        title="Change password"
-        value=""
-      />
-      <Button
-        disabled={true}
-        type="submit"
-        variation="primary"
+      <h1
+        className="ds-h1"
       >
-        <Spinner
-          aria-valuetext="Loading"
-          role="progressbar"
+        Manage account
+      </h1>
+      <form
+        onSubmit={[Function]}
+      >
+        <TextField
+          label="Name"
+          name="name"
+          onChange={[Function]}
+          type="text"
+          value="Tina Belcher"
         />
-         Working
-      </Button>
-      <Button
-        onClick={[Function]}
-        type="button"
-        variation="transparent"
-      >
-        Cancel
-      </Button>
-    </form>
+        <TextField
+          label="Phone number"
+          mask="phone"
+          name="phone"
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value="1-800-BURGERS"
+        />
+        <TextField
+          label="Position"
+          name="position"
+          onChange={[Function]}
+          type="text"
+          value="Table Cleaner"
+        />
+        <Password
+          className="mb2"
+          compareTo={Array []}
+          onChange={[Function]}
+          title="Change password"
+          value=""
+        />
+        <Button
+          disabled={true}
+          type="submit"
+          variation="primary"
+        >
+          <Spinner
+            aria-valuetext="Loading"
+            role="progressbar"
+          />
+           Working
+        </Button>
+        <Button
+          onClick={[Function]}
+          type="button"
+          variation="transparent"
+        >
+          Cancel
+        </Button>
+      </form>
+    </div>
   </div>
 </Fragment>
 `;
