@@ -36,6 +36,7 @@ exports[`my account page renders 1`] = `
         value="Tina Belcher"
       />
       <TextField
+        className="ds-c-field--medium"
         label="Phone number"
         mask="phone"
         name="phone"
@@ -112,6 +113,7 @@ exports[`my account page renders 2`] = `
         value="Tina Belcher"
       />
       <TextField
+        className="ds-c-field--medium"
         label="Phone number"
         mask="phone"
         name="phone"
@@ -188,6 +190,7 @@ exports[`my account page renders 3`] = `
         value="Tina Belcher"
       />
       <TextField
+        className="ds-c-field--medium"
         label="Phone number"
         mask="phone"
         name="phone"

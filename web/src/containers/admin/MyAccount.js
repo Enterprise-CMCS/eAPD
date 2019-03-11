@@ -88,6 +88,7 @@ class MyAccount extends Component {
               onChange={this.handleEditAccount}
             />
             <TextField
+              className="ds-c-field--medium"
               label="Phone number"
               mask="phone"
               name="phone"
