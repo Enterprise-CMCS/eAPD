@@ -10,7 +10,7 @@ import { Section, Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
 const All = ({ activityKeys, addActivity }) => (
-  <Section id="activities" resource="activities">
+  <Section id="activities" number="4" resource="activities">
     <Subsection id="activities-list" resource="activities.list" open>
       {activityKeys.length === 0 ? (
         <div className="mb2 p1 h6 alert">

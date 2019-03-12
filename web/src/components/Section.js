@@ -1,3 +1,4 @@
+import { Badge } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -19,29 +20,48 @@ SectionDesc.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const Section = ({ children, id, resource }) => {
+const Section = ({ children, id, number = 0, resource }) => {
   const title = t([resource, 'title'], { defaultValue: false });
   const subheader = t([resource, 'subheader'], { defaultValue: false });
   const helptext = t([resource, 'helpText'], { defaultValue: false });
 
   return (
-    <section id={id} className="py2 border-bottom border-grey border-width-3">
-      {title && <SectionTitle>{title}</SectionTitle>}
-      {subheader && <div>{subheader}</div>}
-      {helptext && <SectionDesc>{helptext}</SectionDesc>}
+    <section
+      id={id}
+      className="component-section ds-u-margin-top--2 ds-u-padding-top--2"
+    >
+      <div className="ds-u-margin-bottom--2 ds-u-padding-bottom--2">
+        {!!number && (
+          <div className="component-section--number ds-u-fill--primary ds-u-radius--circle">
+            <h2 className="ds-u-font-weight--normal ds-u-color--base-inverse">
+              {number}
+            </h2>
+          </div>
+        )}
+        <h2 className="ds-h2">{title}</h2>
+        <span className="ds-text--lead">{helptext}</span>
+      </div>
       {children}
     </section>
+    // <section id={id} className="py2 border-bottom border-grey border-width-3">
+    //   {title && <SectionTitle>{title}</SectionTitle>}
+    //   {subheader && <div>{subheader}</div>}
+    //   {helptext && <SectionDesc>{helptext}</SectionDesc>}
+    //   {children}
+    // </section>
   );
 };
 
 Section.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.string,
+  number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   resource: PropTypes.string
 };
 
 Section.defaultProps = {
   id: null,
+  number: 0,
   resource: null
 };
 
@@ -49,6 +69,14 @@ const Subsection = ({ children, id, nested, open, resource }) => {
   const title = t([resource, 'title'], { defaultValue: '' });
 
   return (
+    // <section
+    //   id={id}
+    //   className="ds-u-border-top--1 ds-u-margin-y--2 ds-u-padding-top--2"
+    // >
+    //   <h3 className="ds-h3">{title}</h3>
+    //   <Instruction source={`${resource}.instruction`} />
+    //   {children}
+    // </section>
     <Collapsible id={id} title={title} open={open} nested={nested}>
       <Instruction source={`${resource}.instruction`} />
       {children}

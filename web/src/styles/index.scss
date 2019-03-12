@@ -1,4 +1,37 @@
 @import '@cmsgov/design-system-layout/dist/index.css';
 @import '@cmsgov/design-system-core/dist/index.css';
+
+@import '@cmsgov/design-system-support/src/settings/index';
+
 @import '/scss/ds-overrides';
 @import '/scss/print';
+
+.component-section {
+  $number-size: $h2-font-size * 1.5;
+  $padding-size: $number-size * 2;
+
+  padding-left: $padding-size;
+  border-top: 1px solid black;
+
+  &:first-of-type {
+    border-top: 0;
+  }
+
+  .component-section--number {
+    height: $number-size;
+    width: $number-size;
+    margin-left: -$padding-size;
+    text-align: center;
+    float: left;
+
+    > * {
+      line-height: $number-size;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  > div > h2 {
+    margin-top: 0;
+  }
+}

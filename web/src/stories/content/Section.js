@@ -8,7 +8,11 @@ const SectionStory = () => (
     <h1>Section</h1>
     <h2>It renders like this:</h2>
     <RenderViewbox>
-      <Section id="storybook_section_id" resource="storybook.section">
+      <Section
+        id="storybook_section_id"
+        number="3"
+        resource="storybook.section"
+      >
         ...child content here...
       </Section>
     </RenderViewbox>
@@ -17,14 +21,13 @@ const SectionStory = () => (
       <code>
         {`section:
   title: Section title
-  subheader: Section subheader
   helpText: Section helptext`}
       </code>
     </pre>
     <hr />
     <p>
       <pre>
-        {`<Section id="storybook_section_id" resource="storybook.section">
+        {`<Section id="storybook_section_id" number="3" resource="storybook.section">
   ...child content here...
 </Section>`}
       </pre>
@@ -32,9 +35,8 @@ const SectionStory = () => (
     <p>
       The <code>resource</code> prop is the path in the YAML to the section
       block. It should refer to the property in the YAML that contains the
-      <code>title</code>, <code>subtitle</code>, and <code>helpText</code>
-      properties. All of these sub-properties are optional and will not be
-      rendered if they‘re missing.
+      <code>title</code> and <code>helpText</code> properties. These
+      sub-properties are optional and will not be rendered if they‘re missing.
     </p>
     <table className="props">
       <tr>
@@ -48,6 +50,11 @@ const SectionStory = () => (
         <td>
           <code>id</code> prop applied to the DOM element
         </td>
+      </tr>
+      <tr>
+        <td>number</td>
+        <td>string|number</td>
+        <td>The value to display in the number bubble</td>
       </tr>
       <tr>
         <td>resource</td>

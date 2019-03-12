@@ -5,7 +5,7 @@ import MedicaidOffice from '../containers/ApdStateProfileMedicaidOffice';
 import KeyPersonnel from '../containers/ApdStateKeyPersonnel';
 
 const ApdStateProfile = () => (
-  <Section id="apd-state-profile" resource="apd.stateProfile">
+  <Section id="apd-state-profile" number="1" resource="apd.stateProfile">
     <Subsection
       id="apd-state-profile-office"
       resource="apd.stateProfile.directorAndAddress"
