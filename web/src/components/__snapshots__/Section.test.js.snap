@@ -2,21 +2,40 @@
 
 exports[`Section component renders correctly with no resource 1`] = `
 <section
-  className="py2 border-bottom border-grey border-width-3"
+  className="component-section ds-u-margin-top--2 ds-u-padding-top--2"
   id={null}
 >
+  <div
+    className="ds-u-margin-bottom--2 ds-u-padding-bottom--2"
+  >
+    <h2
+      className="ds-h2"
+    />
+    <span
+      className="ds-text--lead"
+    />
+  </div>
   test child
 </section>
 `;
 
 exports[`Section component renders correctly with resource containing title, subheader, and helptext 1`] = `
 <section
-  className="py2 border-bottom border-grey border-width-3"
+  className="component-section ds-u-margin-top--2 ds-u-padding-top--2"
   id={null}
 >
-  <SectionTitle>
-    Performance Goals and Benchmarks
-  </SectionTitle>
+  <div
+    className="ds-u-margin-bottom--2 ds-u-padding-bottom--2"
+  >
+    <h2
+      className="ds-h2"
+    >
+      Performance Goals and Benchmarks
+    </h2>
+    <span
+      className="ds-text--lead"
+    />
+  </div>
   test child
 </section>
 `;

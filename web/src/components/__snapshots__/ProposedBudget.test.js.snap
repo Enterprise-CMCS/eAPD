@@ -3,6 +3,7 @@
 exports[`ProposedBudget component renders correctly 1`] = `
 <Section
   id="budget"
+  number="6"
   resource="proposedBudget"
 >
   <Subsection
