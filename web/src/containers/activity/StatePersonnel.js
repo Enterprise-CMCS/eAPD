@@ -21,7 +21,7 @@ const PersonnelForm = ({ person, idx, years, handleChange, handleDelete }) => (
   <div className="mt2 mb3">
     <Btn
       kind="outline"
-      extraCss="right px-tiny py0 h5 xs-hide"
+      extraCss="right px-tiny py0 h5 xs-hide visibility--screen"
       onClick={handleDelete}
     >
       ✗
@@ -158,7 +158,7 @@ class StatePersonnel extends Component {
             />
           </div>
         )}
-        <Btn onClick={this.handleAdd}>
+        <Btn extraCss="visibility--screen" onClick={this.handleAdd}>
           {t('activities.statePersonnel.addButtonText')}
         </Btn>
       </Fragment>
