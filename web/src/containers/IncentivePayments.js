@@ -85,7 +85,7 @@ class IncentivePayments extends Component {
                         className="bold mono right-align align-middle"
                         headers={tdHdrs(year, 'subtotal')}
                       >
-                        {formatNumber(totals[id].byYear[year])}
+                        {formatNumber(type, totals[id].byYear[year])}
                       </td>
                     </Fragment>
                   </tr>
