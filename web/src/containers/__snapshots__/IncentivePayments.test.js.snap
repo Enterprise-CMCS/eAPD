@@ -125,7 +125,9 @@ exports[`incentive payments component renders correctly 1`] = `
           className="bold mono right-align align-middle"
           headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
         >
-          --
+          <Dollars>
+            10
+          </Dollars>
         </td>
       </tr>
       <tr
@@ -201,7 +203,7 @@ exports[`incentive payments component renders correctly 1`] = `
           className="bold mono right-align align-middle"
           headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
         >
-          --
+          42
         </td>
       </tr>
       <tr
@@ -277,7 +279,9 @@ exports[`incentive payments component renders correctly 1`] = `
           className="bold mono right-align align-middle"
           headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
         >
-          --
+          <Dollars>
+            74
+          </Dollars>
         </td>
       </tr>
       <tr
@@ -353,7 +357,7 @@ exports[`incentive payments component renders correctly 1`] = `
           className="bold mono right-align align-middle"
           headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
         >
-          --
+          106
         </td>
       </tr>
     </tbody>
@@ -481,7 +485,9 @@ exports[`incentive payments component renders correctly 1`] = `
           className="bold mono right-align align-middle"
           headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
         >
-          --
+          <Dollars>
+            26
+          </Dollars>
         </td>
       </tr>
       <tr
@@ -557,7 +563,7 @@ exports[`incentive payments component renders correctly 1`] = `
           className="bold mono right-align align-middle"
           headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
         >
-          --
+          58
         </td>
       </tr>
       <tr
@@ -633,7 +639,9 @@ exports[`incentive payments component renders correctly 1`] = `
           className="bold mono right-align align-middle"
           headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
         >
-          --
+          <Dollars>
+            90
+          </Dollars>
         </td>
       </tr>
       <tr
@@ -709,7 +717,7 @@ exports[`incentive payments component renders correctly 1`] = `
           className="bold mono right-align align-middle"
           headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
         >
-          --
+          122
         </td>
       </tr>
     </tbody>
