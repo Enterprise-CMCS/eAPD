@@ -32,7 +32,7 @@ class IncentivePayments extends Component {
     return (
       <Fragment>
         {years.map(( year ) => (
-        <Fragment>
+        <Fragment key={year}>
           <h3 id={thId(year)}>
             {t('ffy', { year })}
           </h3>
