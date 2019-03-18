@@ -24,10 +24,6 @@ describe('/me endpoint | PUT', () => {
   describe('when authenticated', () => {
     [
       [
-        'rejects when changing email address to something held by another account',
-        { email: 'no-permissions' }
-      ],
-      [
         'rejects when changing password to something insufficiently complex',
         { password: 'abc123' }
       ],
@@ -65,7 +61,7 @@ describe('/me endpoint | PUT', () => {
       const {
         response: { statusCode },
         body
-      } = await put({ email: 'bob@burgers.com', position: 'cook' });
+      } = await put({ position: 'cook' });
 
       const afterUser = await db('users')
         .where({ id: 2000 })
@@ -73,7 +69,6 @@ describe('/me endpoint | PUT', () => {
 
       expect(afterUser).toMatchObject({
         ...beforeUser,
-        email: 'bob@burgers.com',
         position: 'cook'
       });
       expect(statusCode).toEqual(200);
@@ -111,7 +106,6 @@ describe('/me endpoint | PUT', () => {
       // validate that the state_id and auth_role weren't changed
       expect(afterUser).toMatchObject({
         ...beforeUser,
-        email: 'bob@burgers.com',
         name: 'Bob Belcher',
         password: expect.stringMatching(/.+/),
         position: 'cook',
