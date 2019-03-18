@@ -36,13 +36,15 @@ LinkOrText.defaultProps = {
 
 class AssurancesAndCompliance extends Component {
   handleCheckChange = (section, index, newValue) => () => {
-    this.props.updateApd({
+    const { updateApd } = this.props;
+    updateApd({
       federalCitations: { [section]: { [index]: { checked: newValue } } }
     });
   };
 
   handleExplanationChange = (section, index) => e => {
-    this.props.updateApd({
+    const { updateApd } = this.props;
+    updateApd({
       federalCitations: {
         [section]: { [index]: { explanation: e.target.value } }
       }
@@ -60,7 +62,7 @@ class AssurancesAndCompliance extends Component {
         >
           {Object.entries(regLinks).map(([name, regulations]) => (
             <div key={name} className="mb3">
-              <h3>{t(`assurancesAndCompliance.headers.${name}`)}</h3>
+              <h3>{t(`assurancesAndCompliance.headings.${name}`)}</h3>
               {apdSections[name].map(
                 ({ title, checked, explanation }, index) => (
                   <div key={title} className="mt2">
@@ -118,16 +120,19 @@ AssurancesAndCompliance.propTypes = {
 };
 
 const mapStateToProps = ({
-  apd: { data: { federalCitations: sections } }
+  apd: {
+    data: { federalCitations: sections }
+  }
 }) => ({ sections });
 
 const mapDispatchToProps = {
   updateApd: updateApdAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  AssurancesAndCompliance
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AssurancesAndCompliance);
 
 export {
   AssurancesAndCompliance as plain,

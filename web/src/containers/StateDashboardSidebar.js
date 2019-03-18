@@ -2,21 +2,25 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
+
 import { t } from '../i18n';
 import { selectApd } from '../actions/apd';
-import SidebarLink from '../components/SidebarLink';
 
 class Sidebar extends Component {
-  pickApd = id => () => this.props.selectApd(id);
+  pickApd = id => () => {
+    const { selectApd: action } = this.props;
+    action(id);
+  };
 
   render() {
     const { apds, place } = this.props;
 
     return (
-      <div className="ds-l-col--3">
-        <aside className="site-sidebar bg-teal">
+      <div className="ds-l-col--3 bg-white">
+        <aside className="site-sidebar">
           <div className="xs-hide sm-hide">
-            <div className="px2 py3 lg-px3 lg-py4 bg-white flex items-center">
+            <div className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4">
               <img
                 src={`/static/img/states/${place.id}.svg`}
                 alt={place.name}
@@ -24,25 +28,28 @@ class Sidebar extends Component {
                 width="40"
                 height="40"
               />
-              <h1 className="m0 blue h3 light caps line-height-2">
+              <h1 className="text-xl">
                 {place.name} <br />
                 {t('title', { year: '' })}
               </h1>
             </div>
-            <div className="p2 lg-p3">
-              <ul className="list-reset">
-                <SidebarLink>{place.name} APDs</SidebarLink>
-                {apds.map(apd => (
-                  <SidebarLink
-                    key={apd.id}
-                    hash={`${apd.id}`}
-                    onClick={this.pickApd(apd.id)}
-                  >
-                    {`${apd.years.join(', ')} ${place.id.toUpperCase()} APD`}
-                  </SidebarLink>
-                ))}
-              </ul>
-            </div>
+            <VerticalNav
+              selectedId="state-apds"
+              items={[
+                {
+                  label: `${place.name} APDs`,
+                  id: 'state-apds',
+                  items: apds.map(apd => ({
+                    id: `${apd.id}`,
+                    label: `${apd.years.join(
+                      ', '
+                    )} ${place.id.toUpperCase()} APD`,
+                    url: 'javascript:void(0);', // eslint-disable-line no-script-url
+                    onClick: this.pickApd(apd.id)
+                  }))
+                }
+              ]}
+            />
           </div>
         </aside>
       </div>

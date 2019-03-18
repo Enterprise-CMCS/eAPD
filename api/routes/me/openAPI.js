@@ -1,7 +1,55 @@
 const {
   requiresAuth,
-  schema: { arrayOf, jsonResponse }
+  schema: { arrayOf, jsonResponse, errorToken }
 } = require('../openAPI/helpers');
+
+const userObj = jsonResponse({
+  type: 'object',
+  properties: {
+    activities: arrayOf({
+      type: 'string',
+      description: 'Names of system activities this user can perform'
+    }),
+    id: {
+      type: 'number',
+      description: `User's unique ID, used internally and for identifying the user when interacting with the API`
+    },
+    name: {
+      type: 'string',
+      description: `The user's name, if defined`
+    },
+    phone: {
+      type: 'string',
+      description: `The user's phone number, if defined`
+    },
+    position: {
+      type: 'string',
+      description: `The user's position, if defined`
+    },
+    role: {
+      type: 'string',
+      description: 'Names of system authorization role this user belongs to'
+    },
+    state: {
+      type: 'object',
+      description: 'The state/territory/district that this user is assigned to',
+      properties: {
+        id: {
+          type: 'string',
+          description: 'Lowercase 2-letter code'
+        },
+        name: {
+          type: 'string',
+          description: 'State/territory/district full name'
+        }
+      }
+    },
+    username: {
+      type: 'string',
+      description: `User's unique username (email address)`
+    }
+  }
+});
 
 const openAPI = {
   '/me': {
@@ -12,39 +60,47 @@ const openAPI = {
       responses: {
         200: {
           description: 'The current user',
-          content: jsonResponse({
-            type: 'object',
-            properties: {
-              activities: arrayOf({
-                type: 'string',
-                description: 'Names of system activities this user can perform'
-              }),
-              id: {
-                type: 'number',
-                description: `User's unique ID, used internally and for identifying the user when interacting with the API`
-              },
-              role: {},
-              state: {
-                type: 'object',
-                description:
-                  'The state/territory/district that this user is assigned to',
-                properties: {
-                  id: {
-                    type: 'string',
-                    description: 'Lowercase 2-letter code'
-                  },
-                  name: {
-                    type: 'string',
-                    description: 'State/territory/district full name'
-                  }
-                }
-              },
-              username: {
-                type: 'string',
-                description: `User's unique username (email address)`
-              }
+          content: userObj
+        }
+      }
+    },
+    put: {
+      tags: ['Users'],
+      summary: `Updates the current user's information`,
+      description: `Update information about the current user.  Only the name, password, phone, and position fields can be updated.`,
+      requestBody: {
+        description: 'The new values for the apd.  All fields are optional.',
+        required: true,
+        content: jsonResponse({
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              description: `The user's updated name. Omit to leave unchanged.`
+            },
+            password: {
+              type: 'string',
+              description: `The user's updated password. Omit to leave unchanged.`
+            },
+            phone: {
+              type: 'string',
+              description: `The user's updated phone number. Omit to leave unchanged.`
+            },
+            position: {
+              type: 'string',
+              description: `The user's updated position. Omit to leave unchanged.`
             }
-          })
+          }
+        })
+      },
+      responses: {
+        200: {
+          description: 'The current user',
+          content: userObj
+        },
+        400: {
+          description: 'Updated information is invalid',
+          content: errorToken
         }
       }
     }

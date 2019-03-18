@@ -17,6 +17,10 @@ describe('State dashboard sidebar component', () => {
       {
         id: 1,
         years: [1, 2, 3]
+      },
+      {
+        id: 2,
+        years: [4, 5, 6]
       }
     ],
     place: { id: 'so', name: 'Solid' },
@@ -32,10 +36,18 @@ describe('State dashboard sidebar component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('selects an apd', () => {
+  test('selects apds', () => {
     const component = shallow(<Sidebar {...props} />);
-    component.find('SidebarLink[hash="1"]').simulate('click');
-    expect(props.selectApd.calledWith(1)).toBeTruthy();
+    const topItems = component.find('VerticalNav').prop('items');
+
+    expect(Array.isArray(topItems));
+
+    const { items } = topItems[0];
+    items.forEach(item => {
+      item.onClick();
+      // item IDs are stringified versions of APD IDs
+      expect(props.selectApd.calledWith(+item.id)).toEqual(true);
+    });
   });
 
   test('maps state to props', () => {

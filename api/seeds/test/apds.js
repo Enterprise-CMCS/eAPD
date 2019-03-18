@@ -7,16 +7,24 @@ exports.seed = async knex => {
   await knex('apds').insert([
     {
       id: 4000,
+      // William Howard Taft becomes the only person to serve as both
+      // President and Chief Justice of the Supreme Court
+      created_at: '1921-07-11T07:00:00Z',
       state_id: 'mn',
       status: 'draft'
     },
     {
       id: 4001,
+      // The 13th Amendment to the US Constitution is officially ratified,
+      // formally outlawing slavery
+      created_at: '1865-12-6T00:00:00Z',
       state_id: 'az',
       status: 'draft'
     },
     {
       id: 4002,
+      // Jesse Owens wins his first gold medal of the Berlin Olympics
+      created_at: '1936-08-03T00:00:00Z',
       state_id: 'mn',
       status: 'not draft'
     }

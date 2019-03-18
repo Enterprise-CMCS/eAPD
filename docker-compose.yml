@@ -1,4 +1,4 @@
-version: "3"
+version: "3.2"
 services:
   db:
     image: postgres:10
@@ -7,7 +7,10 @@ services:
       - POSTGRES_PASSWORD=cms
       - PGDATA=/pgdata
     volumes:
-      - ./pgdata:/pgdata
+      - type: bind
+        source: ./pgdata
+        target: /pgdata
+        consistency: delegated
     expose:
       - 5432
     ports:
@@ -18,7 +21,10 @@ services:
     environment:
       - API_URL=http://localhost:8081
     volumes:
-      - ./web:/app
+      - type: bind
+        source: ./web
+        target: /app
+        consistency: delegated
       - /app/node_modules
     ports:
       - 8080:8001
@@ -42,7 +48,10 @@ services:
       - NODE_ENV=development
       - SESSION_SECRET=dadccbf1e3bcb63a4d533c3f184eecfc79fd07e76d0584f808078125a83bc40b6413829e5c690d391dd3f6cbca44406cef07b8193cd4db2f03bab355eea9cb2e
     volumes:
-      - ./api:/app
+      - type: bind
+        source: ./api
+        target: /app
+        consistency: delegated
       - /app/node_modules
     ports:
       - 8081:8000

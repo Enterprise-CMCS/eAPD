@@ -23,15 +23,13 @@ module.exports = (
         return res.status(400).end();
       }
 
-      if (req.user.id === targetID) {
-        // Because this endpoint allows modifying permissions, users cannot
-        // modify themselves this way.  Self-editable properties can be
-        // changed with the PUT /me endpoint.
+      if (+req.user.id === targetID) {
+        // Don't allow users to modify their own permissions via this route.
         logger.verbose(
           req,
-          'User attempting to edit self, which is not allowed'
+          'User attempting to edit self; stripping out any auth role changes'
         );
-        return res.status(403).end();
+        delete req.body.role;
       }
 
       const targetUser = await UserModel.where({ id: targetID }).fetch();
@@ -93,7 +91,10 @@ module.exports = (
         }
       }
 
-      // And provide a way to unset the user's role.
+      // And provide a way to unset the user's state or role.
+      if (req.body.state === '') {
+        targetUser.set('state_id', null);
+      }
       if (req.body.role === '') {
         targetUser.set('auth_role', null);
       }

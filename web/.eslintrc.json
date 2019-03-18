@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "rules": {
     "jsx-a11y/anchor-is-valid": [
       2,
@@ -17,6 +17,8 @@
         }
       }
     ],
+    "jsx-a11y/label-has-associated-control": ["error", { "assert": "either" }],
+
     "no-param-reassign": [2, { "props": false }],
 
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],

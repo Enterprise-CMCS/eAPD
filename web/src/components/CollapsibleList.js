@@ -16,8 +16,9 @@ class ListItem extends Component {
 
   render() {
     const { children, deleteItem, header } = this.props;
+    const { expanded } = this.state;
 
-    const childClass = this.state.expanded ? '' : 'd-none';
+    const childClass = expanded ? '' : 'd-none';
 
     return (
       <Fragment>

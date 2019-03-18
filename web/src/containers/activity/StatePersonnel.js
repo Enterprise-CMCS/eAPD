@@ -9,12 +9,13 @@ import {
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
 import List from '../../components/CollapsibleList';
+import Dollars from '../../components/Dollars';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
+import Instruction from '../../components/Instruction';
 import Label from '../../components/Label';
 import NoDataMsg from '../../components/NoDataMsg';
-import { SubsectionChunk } from '../../components/Section';
 import { t } from '../../i18n';
-import { formatDec, formatMoney } from '../../util/formats';
+import { formatDec } from '../../util/formats';
 
 const PersonnelForm = ({ person, idx, years, handleChange, handleDelete }) => (
   <div className="mt2 mb3">
@@ -117,7 +118,8 @@ class StatePersonnel extends Component {
     const { personnel, years } = this.props;
 
     return (
-      <SubsectionChunk resource="activities.statePersonnel">
+      <Fragment>
+        <Instruction source="activities.statePersonnel.instruction" />
         {personnel.length === 0 ? (
           <NoDataMsg>{t('activities.statePersonnel.noDataNotice')}</NoDataMsg>
         ) : (
@@ -135,7 +137,7 @@ class StatePersonnel extends Component {
                     <div key={year} className="col-3 truncate">
                       {year}:{' '}
                       <span className="bold mono">
-                        {formatMoney(person.years[year].amt)}
+                        <Dollars>{person.years[year].amt}</Dollars>
                         {' / '}
                         {formatDec(person.years[year].perc, 1)}
                       </span>
@@ -159,7 +161,7 @@ class StatePersonnel extends Component {
         <Btn onClick={this.handleAdd}>
           {t('activities.statePersonnel.addButtonText')}
         </Btn>
-      </SubsectionChunk>
+      </Fragment>
     );
   }
 }

@@ -23,15 +23,16 @@ class CreateUser extends Component {
   };
 
   toggleShowPassword = () => {
-    this.setState({ showPassword: !this.state.showPassword });
+    this.setState(prev => ({ showPassword: !prev.showPassword }));
   };
 
   handleChange = e => {
-    const { name, value } = e.target;
-    const change = { [name]: value };
+    const { name: key, value } = e.target;
+    const change = { [key]: value };
+    const { email, name } = this.state;
 
-    if (name === 'password') {
-      const score = zxcvbn(value, [this.state.email, this.state.name]);
+    if (key === 'password') {
+      const score = zxcvbn(value, [email, name]);
 
       // guesses_log10 is the log10 of the number of guesses zxcvbn estimates
       // would be necessary to find the password.  10^8 is considered a score
@@ -57,8 +58,8 @@ class CreateUser extends Component {
     e.preventDefault();
 
     const { email, name, password, state } = this.state;
-    if (!email || !password || !state) {
-      alert('Email, password, and state are all required');
+    if (!email || !password) {
+      alert('Email and password are required');
       return;
     }
 
@@ -189,7 +190,7 @@ class CreateUser extends Component {
                 value={state}
                 onChange={this.handleChange}
               >
-                <option value="">Select...</option>
+                <option value="">None</option>
                 {STATES.map(s => (
                   <option key={s.id} value={s.id}>
                     {s.name}

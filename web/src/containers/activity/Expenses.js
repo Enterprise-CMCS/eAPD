@@ -9,13 +9,13 @@ import {
 } from '../../actions/activities';
 import Btn from '../../components/Btn';
 import CollapsibleList from '../../components/CollapsibleList';
+import Dollars from '../../components/Dollars';
 import NoDataMsg from '../../components/NoDataMsg';
 import { DollarInput, Textarea } from '../../components/Inputs';
+import Instruction from '../../components/Instruction';
 import Label from '../../components/Label';
-import { SubsectionChunk } from '../../components/Section';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
-import { formatMoney } from '../../util/formats';
 
 const EXPENSE_CATEGORIES = [
   'Hardware, software, and licensing',
@@ -125,7 +125,8 @@ class Expenses extends Component {
     const { expenses, years } = this.props;
 
     return (
-      <SubsectionChunk resource="activities.expenses">
+      <Fragment>
+        <Instruction source="activities.expenses.instruction" />
         {expenses.length === 0 ? (
           <NoDataMsg>{t('activities.expenses.noDataNotice')}</NoDataMsg>
         ) : (
@@ -143,7 +144,7 @@ class Expenses extends Component {
                     <div key={year} className="col-2 truncate">
                       {year}:{' '}
                       <span className="bold mono">
-                        {formatMoney(expense.years[year])}
+                        <Dollars>{expense.years[year]}</Dollars>
                       </span>
                     </div>
                   ))}
@@ -163,7 +164,7 @@ class Expenses extends Component {
           </div>
         )}
         <Btn onClick={this.handleAdd}>Add expense</Btn>
-      </SubsectionChunk>
+      </Fragment>
     );
   }
 }
@@ -189,4 +190,7 @@ const mapDispatchToProps = {
   updateActivity: updateActivityAction
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Expenses);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Expenses);

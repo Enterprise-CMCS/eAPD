@@ -75,7 +75,7 @@ jobs:
       - run:
           name: run tests
           working_directory: ~/project/web
-          command: npm test
+          command: npm test -- --runInBand
       - run:
           name: report coverage
           when: always

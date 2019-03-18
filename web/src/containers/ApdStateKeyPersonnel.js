@@ -10,10 +10,10 @@ import {
   updateBudget
 } from '../actions/apd';
 import Btn from '../components/Btn';
+import Dollars from '../components/Dollars';
 import { DollarInput, Input, PercentInput } from '../components/Inputs';
 import List from '../components/CollapsibleList';
 import { t } from '../i18n';
-import { formatMoney } from '../util/formats';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
@@ -117,7 +117,9 @@ const PersonForm = ({
           ))}
           <div className="col-3">
             Total
-            <div>{formatMoney(personTotalCost(person))}</div>
+            <div>
+              <Dollars>{personTotalCost(person)}</Dollars>
+            </div>
           </div>
         </div>
       )}
@@ -155,7 +157,10 @@ class ApdStateKeyPersonnel extends Component {
     dispatchBudget();
   };
 
-  removePerson = (_, i) => this.props.removeKeyPerson(i);
+  removePerson = (_, i) => {
+    const { removeKeyPerson: action } = this.props;
+    action(i);
+  };
 
   render() {
     const {
@@ -182,7 +187,9 @@ class ApdStateKeyPersonnel extends Component {
               <div className="col-3 truncate">
                 Total cost:{' '}
                 <strong>
-                  {formatMoney(person.hasCosts ? personTotalCost(person) : 0)}
+                  <Dollars>
+                    {person.hasCosts ? personTotalCost(person) : 0}
+                  </Dollars>
                 </strong>
               </div>
             </Fragment>

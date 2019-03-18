@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import sinon from 'sinon';
 
 import {
@@ -8,42 +8,33 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './TopBtns';
-import { logout } from '../actions/auth';
 
 describe('Top buttons component', () => {
   test('renders correctly if logged out', () => {
     const component = shallow(
-      <TopBtns authenticated={false} logout={() => {}} pushRoute={() => {}} />
+      <TopBtns authenticated={false} pushRoute={() => {}} />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders correctly if logged in', () => {
-    const component = shallow(
-      <TopBtns authenticated logout={() => {}} pushRoute={() => {}} />
-    );
+    const component = shallow(<TopBtns authenticated pushRoute={() => {}} />);
     expect(component).toMatchSnapshot();
   });
 
   test('renders correctly with dashboard hidden', () => {
     const component = shallow(
-      <TopBtns
-        authenticated
-        hideDashboard
-        logout={() => {}}
-        pushRoute={() => {}}
-      />
+      <TopBtns authenticated hideDashboard pushRoute={() => {}} />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('goes to the dashboard', () => {
     const event = { preventDefault: sinon.spy() };
-    const logoutProp = sinon.spy();
     const pushRouteProp = sinon.spy();
 
     const component = shallow(
-      <TopBtns authenticated logout={logoutProp} pushRoute={pushRouteProp} />
+      <TopBtns authenticated pushRoute={pushRouteProp} />
     );
 
     component
@@ -55,23 +46,17 @@ describe('Top buttons component', () => {
     expect(event.preventDefault.called).toBeTruthy();
   });
 
-  test('calls logout prop', () => {
+  test('goes to the logout route', () => {
     const event = { preventDefault: sinon.spy() };
-    const logoutProp = sinon.spy();
     const pushRouteProp = sinon.spy();
 
     const component = shallow(
-      <TopBtns
-        authenticated
-        hideDashboard
-        logout={logoutProp}
-        pushRoute={pushRouteProp}
-      />
+      <TopBtns authenticated hideDashboard pushRoute={pushRouteProp} />
     );
 
     component.find('Btn').simulate('click', event);
 
-    expect(logoutProp.calledWith()).toBeTruthy();
+    expect(pushRouteProp.calledWith('/logout')).toBeTruthy();
     expect(event.preventDefault.called).toBeTruthy();
   });
 
@@ -86,6 +71,6 @@ describe('Top buttons component', () => {
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ logout, pushRoute: push });
+    expect(mapDispatchToProps).toEqual({ pushRoute: push });
   });
 });
