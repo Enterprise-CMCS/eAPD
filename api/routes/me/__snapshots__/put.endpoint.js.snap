@@ -28,7 +28,7 @@ Object {
     "id": "mn",
     "name": "Minnesota",
   },
-  "username": "bob@burgers.com",
+  "username": "all-permissions-and-state",
 }
 `;
 
@@ -60,13 +60,7 @@ Object {
     "id": "mn",
     "name": "Minnesota",
   },
-  "username": "bob@burgers.com",
-}
-`;
-
-exports[`/me endpoint | PUT when authenticated rejects when changing email address to something held by another account 1`] = `
-Object {
-  "error": "update-self-email-exists",
+  "username": "all-permissions-and-state",
 }
 `;
 
