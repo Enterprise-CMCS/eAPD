@@ -392,6 +392,11 @@ module.exports = {
             type: 'number',
             description: 'APD ID'
           },
+          name: {
+            type: 'string',
+            description:
+              'The APD document name, following SEA naming conventions'
+          },
           activities: arrayOf({
             $ref: '#/components/schemas/activity'
           }),
