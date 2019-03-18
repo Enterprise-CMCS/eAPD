@@ -67,7 +67,9 @@ class Password extends Component {
               data-strength={value.length ? strength : 'empty'}
             />
           </div>
-          <div className="strength-meter-quality">{passwordQuality}</div>
+          <p role="alert" aria-live="polite" className="strength-meter-quality">
+            {passwordQuality}
+          </p>
         </div>
       </div>
     );

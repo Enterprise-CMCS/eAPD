@@ -75,52 +75,56 @@ class MyAccount extends Component {
           </div>
         </header>
 
-        <div className="ds-l-col--5 ds-u-fill--white ds-u-margin-x--auto ds-u-margin-y--3 ds-u-padding--6 ds-u-radius">
-          <div className="ds-u-margin-x--auto" style={{ maxWidth: '460px' }}>
-            {!!success && <Alert variation="success">Changes saved</Alert>}
+        <div className="ds-l-container card">
+          <div className="ds-l-row ds-u-radius ds-u-padding-y--5">
+            <div className="ds-l-col--1 ds-u-fill--white ds-u-margin-left--auto" />
+            <div className="ds-l-col--6 ds-u-fill--white ds-u-padding-y--5">
+              {!!success && <Alert variation="success">Changes saved</Alert>}
 
-            <h1 className="ds-h1">Manage account</h1>
+              <h1 className="ds-h1">Manage account</h1>
 
-            <form onSubmit={this.editAccount}>
-              <TextField
-                label="Name"
-                name="name"
-                value={name || ''}
-                onChange={this.handleEditAccount}
-              />
-              <TextField
-                label="Phone number"
-                mask="phone"
-                name="phone"
-                size="medium"
-                value={phone || ''}
-                onChange={this.handleEditAccount}
-              />
-              <TextField
-                label="Position"
-                name="position"
-                value={position || ''}
-                onChange={this.handleEditAccount}
-              />
-              <Password
-                className="mb2"
-                title="Change password"
-                value={password}
-                onChange={this.handleEditAccount}
-              />
-              <Button variation="primary" type="submit" disabled={fetching}>
-                {fetching ? (
-                  <Fragment>
-                    <Spinner /> Working
-                  </Fragment>
-                ) : (
-                  'Save changes'
-                )}
-              </Button>
-              <Button variation="transparent" onClick={this.goBack}>
-                Cancel
-              </Button>
-            </form>
+              <form onSubmit={this.editAccount}>
+                <TextField
+                  label="Name"
+                  name="name"
+                  value={name || ''}
+                  onChange={this.handleEditAccount}
+                />
+                <TextField
+                  label="Phone number"
+                  mask="phone"
+                  name="phone"
+                  size="medium"
+                  value={phone || ''}
+                  onChange={this.handleEditAccount}
+                />
+                <TextField
+                  label="Position"
+                  name="position"
+                  value={position || ''}
+                  onChange={this.handleEditAccount}
+                />
+                <Password
+                  className="mb2"
+                  title="Change password"
+                  value={password}
+                  onChange={this.handleEditAccount}
+                />
+                <Button variation="primary" type="submit" disabled={fetching}>
+                  {fetching ? (
+                    <Fragment>
+                      <Spinner /> Working
+                    </Fragment>
+                  ) : (
+                    'Save changes'
+                  )}
+                </Button>
+                <Button variation="transparent" onClick={this.goBack}>
+                  Cancel
+                </Button>
+              </form>
+            </div>
+            <div className="ds-l-col--1 ds-u-fill--white ds-u-margin-right--auto" />
           </div>
         </div>
       </Fragment>
