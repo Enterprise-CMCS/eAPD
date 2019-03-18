@@ -455,6 +455,10 @@ Object {
             },
             "type": "array",
           },
+          "name": Object {
+            "description": "The APD document name, following SEA naming conventions",
+            "type": "string",
+          },
           "narrativeHIE": Object {
             "description": "Brief description of HIE-funded activities contained in this APD",
             "type": "string",
@@ -1663,7 +1667,36 @@ Object {
         ],
       },
       "put": Object {
-        "description": "Update information about the current user.  Only the email, name, password, phone, and position fields can be updated.",
+        "description": "Update information about the current user.  Only the name, password, phone, and position fields can be updated.",
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "name": Object {
+                    "description": "The user's updated name. Omit to leave unchanged.",
+                    "type": "string",
+                  },
+                  "password": Object {
+                    "description": "The user's updated password. Omit to leave unchanged.",
+                    "type": "string",
+                  },
+                  "phone": Object {
+                    "description": "The user's updated phone number. Omit to leave unchanged.",
+                    "type": "string",
+                  },
+                  "position": Object {
+                    "description": "The user's updated position. Omit to leave unchanged.",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "description": "The new values for the apd.  All fields are optional.",
+          "required": true,
+        },
         "responses": Object {
           "200": Object {
             "content": Object {
