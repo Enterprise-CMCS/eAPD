@@ -39,20 +39,6 @@ class Password extends Component {
       passwordQuality = 'Password strength: Great';
     }
 
-    const strengthClass = [
-      'strength-meter',
-      value.length > 0 ? 'visible' : 'hidden'
-    ]
-      .join(' ')
-      .trim();
-
-    const qualityClass = [
-      'strength-meter-quality',
-      value.length > 0 ? 'visible' : 'hidden'
-    ]
-      .join(' ')
-      .trim();
-
     return (
       <div {...rest}>
         <div className="password-with-meter">
@@ -75,13 +61,13 @@ class Password extends Component {
             value={value}
             onChange={this.changePassword}
           />
-          <div className={strengthClass}>
+          <div className="strength-meter">
             <div
               className="strength-meter-fill"
               data-strength={value.length ? strength : 'empty'}
             />
           </div>
-          <div className={qualityClass}>{passwordQuality}</div>
+          <div className="strength-meter-quality">{passwordQuality}</div>
         </div>
       </div>
     );
