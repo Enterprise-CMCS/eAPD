@@ -84,44 +84,50 @@ class MyAccount extends Component {
               <h1 className="ds-h1">Manage account</h1>
 
               <form onSubmit={this.editAccount}>
-                <TextField
-                  label="Name"
-                  name="name"
-                  value={name || ''}
-                  onChange={this.handleEditAccount}
-                />
-                <TextField
-                  label="Phone number"
-                  mask="phone"
-                  name="phone"
-                  size="medium"
-                  value={phone || ''}
-                  onChange={this.handleEditAccount}
-                />
-                <TextField
-                  label="Position"
-                  name="position"
-                  value={position || ''}
-                  onChange={this.handleEditAccount}
-                />
-                <Password
-                  className="mb2"
-                  title="Change password"
-                  value={password}
-                  onChange={this.handleEditAccount}
-                />
-                <Button variation="primary" type="submit" disabled={fetching}>
-                  {fetching ? (
-                    <Fragment>
-                      <Spinner /> Working
-                    </Fragment>
-                  ) : (
-                    'Save changes'
-                  )}
-                </Button>
-                <Button variation="transparent" onClick={this.goBack}>
-                  Cancel
-                </Button>
+                <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
+                  <legend className="sr-only">manage account details</legend>
+                  <TextField
+                    label="Name"
+                    name="name"
+                    ariaLabel="please enter your full name"
+                    value={name || ''}
+                    onChange={this.handleEditAccount}
+                  />
+                  <TextField
+                    label="Phone number"
+                    ariaLabel="please enter your 10-digit phone number"
+                    mask="phone"
+                    name="phone"
+                    size="medium"
+                    value={phone || ''}
+                    onChange={this.handleEditAccount}
+                  />
+                  <TextField
+                    label="Role"
+                    name="position"
+                    ariaLabel="please enter your position or role ???"
+                    value={position || ''}
+                    onChange={this.handleEditAccount}
+                  />
+                  <Password
+                    className="mb2"
+                    title="Change password"
+                    value={password}
+                    onChange={this.handleEditAccount}
+                  />
+                  <Button variation="primary" type="submit" disabled={fetching}>
+                    {fetching ? (
+                      <Fragment>
+                        <Spinner /> Working
+                      </Fragment>
+                    ) : (
+                      'Save changes'
+                    )}
+                  </Button>
+                  <Button variation="transparent" onClick={this.goBack}>
+                    Cancel
+                  </Button>
+                </fieldset>
               </form>
             </div>
             <div className="ds-l-col--1 ds-u-fill--white ds-u-margin-right--auto" />

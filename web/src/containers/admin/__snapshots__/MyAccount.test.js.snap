@@ -37,50 +37,62 @@ exports[`my account page renders 1`] = `
         <form
           onSubmit={[Function]}
         >
-          <TextField
-            label="Name"
-            name="name"
-            onChange={[Function]}
-            type="text"
-            value="Tina Belcher"
-          />
-          <TextField
-            label="Phone number"
-            mask="phone"
-            name="phone"
-            onChange={[Function]}
-            size="medium"
-            type="text"
-            value="1-800-BURGERS"
-          />
-          <TextField
-            label="Position"
-            name="position"
-            onChange={[Function]}
-            type="text"
-            value="Table Cleaner"
-          />
-          <Password
-            className="mb2"
-            compareTo={Array []}
-            onChange={[Function]}
-            title="Change password"
-            value=""
-          />
-          <Button
-            disabled={false}
-            type="submit"
-            variation="primary"
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
           >
-            Save changes
-          </Button>
-          <Button
-            onClick={[Function]}
-            type="button"
-            variation="transparent"
-          >
-            Cancel
-          </Button>
+            <legend
+              className="sr-only"
+            >
+              manage account details
+            </legend>
+            <TextField
+              ariaLabel="please enter your full name"
+              label="Name"
+              name="name"
+              onChange={[Function]}
+              type="text"
+              value="Tina Belcher"
+            />
+            <TextField
+              ariaLabel="please enter your 10-digit phone number"
+              label="Phone number"
+              mask="phone"
+              name="phone"
+              onChange={[Function]}
+              size="medium"
+              type="text"
+              value="1-800-BURGERS"
+            />
+            <TextField
+              ariaLabel="please enter your position or role ???"
+              label="Role"
+              name="position"
+              onChange={[Function]}
+              type="text"
+              value="Table Cleaner"
+            />
+            <Password
+              className="mb2"
+              compareTo={Array []}
+              onChange={[Function]}
+              title="Change password"
+              value=""
+            />
+            <Button
+              disabled={false}
+              type="submit"
+              variation="primary"
+            >
+              Save changes
+            </Button>
+            <Button
+              onClick={[Function]}
+              type="button"
+              variation="transparent"
+            >
+              Cancel
+            </Button>
+          </fieldset>
         </form>
       </div>
       <div
@@ -128,50 +140,62 @@ exports[`my account page renders 2`] = `
         <form
           onSubmit={[Function]}
         >
-          <TextField
-            label="Name"
-            name="name"
-            onChange={[Function]}
-            type="text"
-            value="Tina Belcher"
-          />
-          <TextField
-            label="Phone number"
-            mask="phone"
-            name="phone"
-            onChange={[Function]}
-            size="medium"
-            type="text"
-            value="1-800-BURGERS"
-          />
-          <TextField
-            label="Position"
-            name="position"
-            onChange={[Function]}
-            type="text"
-            value="Window Washer"
-          />
-          <Password
-            className="mb2"
-            compareTo={Array []}
-            onChange={[Function]}
-            title="Change password"
-            value=""
-          />
-          <Button
-            disabled={false}
-            type="submit"
-            variation="primary"
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
           >
-            Save changes
-          </Button>
-          <Button
-            onClick={[Function]}
-            type="button"
-            variation="transparent"
-          >
-            Cancel
-          </Button>
+            <legend
+              className="sr-only"
+            >
+              manage account details
+            </legend>
+            <TextField
+              ariaLabel="please enter your full name"
+              label="Name"
+              name="name"
+              onChange={[Function]}
+              type="text"
+              value="Tina Belcher"
+            />
+            <TextField
+              ariaLabel="please enter your 10-digit phone number"
+              label="Phone number"
+              mask="phone"
+              name="phone"
+              onChange={[Function]}
+              size="medium"
+              type="text"
+              value="1-800-BURGERS"
+            />
+            <TextField
+              ariaLabel="please enter your position or role ???"
+              label="Role"
+              name="position"
+              onChange={[Function]}
+              type="text"
+              value="Window Washer"
+            />
+            <Password
+              className="mb2"
+              compareTo={Array []}
+              onChange={[Function]}
+              title="Change password"
+              value=""
+            />
+            <Button
+              disabled={false}
+              type="submit"
+              variation="primary"
+            >
+              Save changes
+            </Button>
+            <Button
+              onClick={[Function]}
+              type="button"
+              variation="transparent"
+            >
+              Cancel
+            </Button>
+          </fieldset>
         </form>
       </div>
       <div
@@ -219,54 +243,66 @@ exports[`my account page renders 3`] = `
         <form
           onSubmit={[Function]}
         >
-          <TextField
-            label="Name"
-            name="name"
-            onChange={[Function]}
-            type="text"
-            value="Tina Belcher"
-          />
-          <TextField
-            label="Phone number"
-            mask="phone"
-            name="phone"
-            onChange={[Function]}
-            size="medium"
-            type="text"
-            value="1-800-BURGERS"
-          />
-          <TextField
-            label="Position"
-            name="position"
-            onChange={[Function]}
-            type="text"
-            value="Table Cleaner"
-          />
-          <Password
-            className="mb2"
-            compareTo={Array []}
-            onChange={[Function]}
-            title="Change password"
-            value=""
-          />
-          <Button
-            disabled={true}
-            type="submit"
-            variation="primary"
+          <fieldset
+            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
           >
-            <Spinner
-              aria-valuetext="Loading"
-              role="progressbar"
+            <legend
+              className="sr-only"
+            >
+              manage account details
+            </legend>
+            <TextField
+              ariaLabel="please enter your full name"
+              label="Name"
+              name="name"
+              onChange={[Function]}
+              type="text"
+              value="Tina Belcher"
             />
-             Working
-          </Button>
-          <Button
-            onClick={[Function]}
-            type="button"
-            variation="transparent"
-          >
-            Cancel
-          </Button>
+            <TextField
+              ariaLabel="please enter your 10-digit phone number"
+              label="Phone number"
+              mask="phone"
+              name="phone"
+              onChange={[Function]}
+              size="medium"
+              type="text"
+              value="1-800-BURGERS"
+            />
+            <TextField
+              ariaLabel="please enter your position or role ???"
+              label="Role"
+              name="position"
+              onChange={[Function]}
+              type="text"
+              value="Table Cleaner"
+            />
+            <Password
+              className="mb2"
+              compareTo={Array []}
+              onChange={[Function]}
+              title="Change password"
+              value=""
+            />
+            <Button
+              disabled={true}
+              type="submit"
+              variation="primary"
+            >
+              <Spinner
+                aria-valuetext="Loading"
+                role="progressbar"
+              />
+               Working
+            </Button>
+            <Button
+              onClick={[Function]}
+              type="button"
+              variation="transparent"
+            >
+              Cancel
+            </Button>
+          </fieldset>
         </form>
       </div>
       <div
