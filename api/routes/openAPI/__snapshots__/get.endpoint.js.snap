@@ -455,6 +455,10 @@ Object {
             },
             "type": "array",
           },
+          "name": Object {
+            "description": "The APD document name, following SEA naming conventions",
+            "type": "string",
+          },
           "narrativeHIE": Object {
             "description": "Brief description of HIE-funded activities contained in this APD",
             "type": "string",
@@ -770,6 +774,10 @@ Object {
                         "description": "APD ID",
                         "type": "number",
                       },
+                      "status": Object {
+                        "description": "Current status of the APD; e.g., \\"draft\\", \\"archived\\", etc.",
+                        "type": "string",
+                      },
                       "years": Object {
                         "items": Object {
                           "type": "number",
@@ -869,6 +877,46 @@ Object {
       },
     },
     "/apds/{id}": Object {
+      "delete": Object {
+        "description": "Updates an APD's status to \\"archive\\" and prevents it from being edited",
+        "parameters": Array [
+          Object {
+            "description": "The ID of the apd to archive",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+          },
+        ],
+        "responses": Object {
+          "204": Object {
+            "description": "The APD was archived",
+          },
+          "400": Object {
+            "description": "Invalid request, such as requesting to archive an APD that is not editable",
+          },
+          "401": Object {
+            "description": "Does not have permission to this activity",
+          },
+          "403": Object {
+            "description": "Not logged in",
+          },
+          "404": Object {
+            "description": "The apd ID does not match any known apds for the user",
+          },
+        },
+        "security": Array [
+          Object {
+            "sessionCookie": Array [],
+          },
+        ],
+        "summary": "Archive an APD",
+        "tags": Array [
+          "APDs",
+        ],
+      },
       "get": Object {
         "description": "Where the /apds GET method only returns a small portion of all APDs, this method returns all of one",
         "parameters": Array [
@@ -964,181 +1012,6 @@ Object {
           },
         ],
         "summary": "Update a specific APD",
-        "tags": Array [
-          "APDs",
-        ],
-      },
-    },
-    "/apds/{id}/status": Object {
-      "put": Object {
-        "description": "An endpoint for CMS analysts to change an APD status after it has been submitted.  The APD cannot currently be in draft status, or else this method will fail with an HTTP 400 error.",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the APD to update",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "number",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "properties": Object {
-                  "status": Object {
-                    "description": "New status to set",
-                    "type": "string",
-                  },
-                },
-                "type": "object",
-              },
-            },
-          },
-          "description": "The status value to set",
-          "required": true,
-        },
-        "responses": Object {
-          "204": Object {
-            "description": "The APD status was successfully set",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "The APD is currently in draft, or the selected status is invalid",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The apd ID does not match any known apds",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Set an APD status",
-        "tags": Array [
-          "APDs",
-        ],
-      },
-    },
-    "/apds/{id}/versions": Object {
-      "delete": Object {
-        "description": "Withdraws a previous submitted APD and makes it editable again",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the APD to update",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "number",
-            },
-          },
-        ],
-        "responses": Object {
-          "204": Object {
-            "description": "The withdrawal was successful",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Withdraw a submitted APD",
-        "tags": Array [
-          "APDs",
-        ],
-      },
-      "post": Object {
-        "description": "Create a new saved version of an APD and makes the APD non-draft so it cannot be edited",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the APD to update",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "number",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "properties": Object {
-                  "tables": Object {
-                    "description": "Computed data tables",
-                    "type": "object",
-                  },
-                },
-                "type": "object",
-              },
-            },
-          },
-          "description": "Additional data to save with the APD.  For example, computed values that the state has certified.",
-          "required": false,
-        },
-        "responses": Object {
-          "204": Object {
-            "description": "The save was successful",
-          },
-          "400": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "properties": Object {
-                    "error": Object {
-                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
-                      "type": "string",
-                    },
-                  },
-                  "type": "object",
-                },
-              },
-            },
-            "description": "The APD is not currently in draft status, so it cannot be saved. Error is { error: \\"apd-not-editable\\" }",
-          },
-          "401": Object {
-            "description": "Does not have permission to this activity",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Save a submitted version of a specific APD",
         "tags": Array [
           "APDs",
         ],
@@ -1738,7 +1611,22 @@ Object {
                       "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
                       "type": "number",
                     },
-                    "role": Object {},
+                    "name": Object {
+                      "description": "The user's name, if defined",
+                      "type": "string",
+                    },
+                    "phone": Object {
+                      "description": "The user's phone number, if defined",
+                      "type": "string",
+                    },
+                    "position": Object {
+                      "description": "The user's position, if defined",
+                      "type": "string",
+                    },
+                    "role": Object {
+                      "description": "Names of system authorization role this user belongs to",
+                      "type": "string",
+                    },
                     "state": Object {
                       "description": "The state/territory/district that this user is assigned to",
                       "properties": Object {
@@ -1774,6 +1662,125 @@ Object {
           },
         ],
         "summary": "Gets the current user's information",
+        "tags": Array [
+          "Users",
+        ],
+      },
+      "put": Object {
+        "description": "Update information about the current user.  Only the name, password, phone, and position fields can be updated.",
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "properties": Object {
+                  "name": Object {
+                    "description": "The user's updated name. Omit to leave unchanged.",
+                    "type": "string",
+                  },
+                  "password": Object {
+                    "description": "The user's updated password. Omit to leave unchanged.",
+                    "type": "string",
+                  },
+                  "phone": Object {
+                    "description": "The user's updated phone number. Omit to leave unchanged.",
+                    "type": "string",
+                  },
+                  "position": Object {
+                    "description": "The user's updated position. Omit to leave unchanged.",
+                    "type": "string",
+                  },
+                },
+                "type": "object",
+              },
+            },
+          },
+          "description": "The new values for the apd.  All fields are optional.",
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "activities": Object {
+                      "items": Object {
+                        "description": "Names of system activities this user can perform",
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "id": Object {
+                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
+                      "type": "number",
+                    },
+                    "name": Object {
+                      "description": "The user's name, if defined",
+                      "type": "string",
+                    },
+                    "phone": Object {
+                      "description": "The user's phone number, if defined",
+                      "type": "string",
+                    },
+                    "position": Object {
+                      "description": "The user's position, if defined",
+                      "type": "string",
+                    },
+                    "role": Object {
+                      "description": "Names of system authorization role this user belongs to",
+                      "type": "string",
+                    },
+                    "state": Object {
+                      "description": "The state/territory/district that this user is assigned to",
+                      "properties": Object {
+                        "id": Object {
+                          "description": "Lowercase 2-letter code",
+                          "type": "string",
+                        },
+                        "name": Object {
+                          "description": "State/territory/district full name",
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "username": Object {
+                      "description": "User's unique username (email address)",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "The current user",
+          },
+          "400": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "properties": Object {
+                    "error": Object {
+                      "description": "An string token indicating the error, which could be translated into a user-readable string for display by the client",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+              },
+            },
+            "description": "Updated information is invalid",
+          },
+          "403": Object {
+            "description": "Not logged in",
+          },
+        },
+        "security": Array [
+          Object {
+            "sessionCookie": Array [],
+          },
+        ],
+        "summary": "Updates the current user's information",
         "tags": Array [
           "Users",
         ],
@@ -2052,7 +2059,7 @@ Object {
         ],
       },
       "put": Object {
-        "description": "Update a user in the system. Users may not use this method to update themselves.",
+        "description": "Update a user in the system.",
         "parameters": Array [
           Object {
             "description": "The ID of the user to update",
@@ -2087,7 +2094,7 @@ Object {
                     "type": "string",
                   },
                   "role": Object {
-                    "description": "The user's new authorization role. If provided, this must match a valid role name in the system or be an empty string to remove the role entirely.",
+                    "description": "The user's new authorization role. If provided, this must match a valid role name in the system or be an empty string to remove the role entirely. Ignored if the user is updating their own account.",
                     "type": "string",
                   },
                   "state": Object {
@@ -2122,7 +2129,7 @@ Object {
             "sessionCookie": Array [],
           },
         ],
-        "summary": "Updates a user",
+        "summary": "Updates a user account",
         "tags": Array [
           "Users",
         ],

@@ -15,13 +15,14 @@ class RichText extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.content !== this.state.lastContent) {
+    const { content, lastContent } = this.state;
+    if (nextProps.content !== lastContent) {
       this.setState({
         content: htmlToEditor(nextProps.content),
         lastContent: nextProps.content
       });
     }
-    return nextState.content !== this.state.content;
+    return nextState.content !== content;
   }
 
   onEditorChange = newContent => {
@@ -29,18 +30,24 @@ class RichText extends Component {
   };
 
   onBlur = () => {
-    const html = editorToHtml(this.state.content);
-    this.props.onSync(html);
+    const { onSync } = this.props;
+    const { content } = this.state;
+
+    const html = editorToHtml(content);
+    onSync(html);
   };
 
   render() {
+    const { editorClassName } = this.props;
+    const { content } = this.state;
+
     return (
       <Editor
         toolbar={EDITOR_CONFIG}
-        editorState={this.state.content}
+        editorState={content}
         onEditorStateChange={this.onEditorChange}
         onBlur={this.onBlur}
-        editorClassName={this.props.editorClassName}
+        editorClassName={editorClassName}
       />
     );
   }

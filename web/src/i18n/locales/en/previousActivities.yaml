@@ -5,11 +5,15 @@ helpText: >-
   with them.
 outline:
   title: Prior Activities Overview
-  helpText: >-
-    Provide a high level description of the activities that are completed, in-progress,
-    or on-hold.
-  reminder: >-
-  label: Previous Activities Summary
+  instruction:
+    short: >-
+      Summarize previous activities.
+    detail: >-
+      Provide a high level description of the activities that are completed, in-progress,
+      or on-hold.
+    label: Previous Activities Summary
 actualExpenses:
   title: Actual Costs
-  helpText: Input the most recent approved and actual costs.
+  instruction:
+    detail: >-
+      Input the most recent approved and actual costs.

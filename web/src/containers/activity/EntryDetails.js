@@ -36,7 +36,8 @@ const components = [
 
 class EntryDetails extends Component {
   handleChange = key => () => {
-    this.props.toggleSection(key);
+    const { toggleSection } = this.props;
+    toggleSection(key);
   };
 
   render() {

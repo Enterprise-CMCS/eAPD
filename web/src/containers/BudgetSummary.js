@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import Dollars from '../components/Dollars';
 import { ACTIVITY_FUNDING_SOURCES } from '../util';
-import { formatMoney } from '../util/formats';
 
 const categoryLookup = {
   statePersonnel: 'Project state staff',
@@ -24,7 +24,7 @@ const DataRowDetails = ({ category, entries, years }) => (
             <span className="bold">{formatActivityName(e)}:</span>{' '}
             {years.map(yr => (
               <span key={yr} className="mr2">
-                {formatYear(yr)}: {formatMoney(e.data[category][yr])}
+                {formatYear(yr)}: <Dollars>{e.data[category][yr]}</Dollars>
               </span>
             ))}
           </div>
@@ -77,19 +77,19 @@ class DataRow extends Component {
                   className="mono right-align"
                   headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-total`}
                 >
-                  {formatMoney(val.medicaid)}
+                  <Dollars>{val.medicaid}</Dollars>
                 </td>
                 <td
                   className="mono right-align"
                   headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-federal`}
                 >
-                  {formatMoney(val.federal)}
+                  <Dollars>{val.federal}</Dollars>
                 </td>
                 <td
                   className="mono right-align"
                   headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-state`}
                 >
-                  {formatMoney(val.state)}
+                  <Dollars>{val.state}</Dollars>
                 </td>
               </Fragment>
             );
@@ -210,19 +210,19 @@ const BudgetSummary = ({ activities, data, years }) => (
                   className="mono right-align"
                   headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-total`}
                 >
-                  {formatMoney(combined.medicaid)}
+                  <Dollars>{combined.medicaid}</Dollars>
                 </td>
                 <td
                   className="mono right-align"
                   headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-federal`}
                 >
-                  {formatMoney(combined.federal)}
+                  <Dollars>{combined.federal}</Dollars>
                 </td>
                 <td
                   className="mono right-align"
                   headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-state`}
                 >
-                  {formatMoney(combined.state)}
+                  <Dollars>{combined.state}</Dollars>
                 </td>
               </Fragment>
             );

@@ -162,6 +162,34 @@ describe('apd actions', () => {
     });
   });
 
+  describe('delete an APD', () => {
+    it('should handle an API error', () => {
+      const store = mockStore();
+      fetchMock.onDelete('/apds/apd-id').reply(400);
+
+      return store.dispatch(actions.deleteApd('apd-id')).then(() => {
+        expect(store.getActions()).toEqual([
+          { type: actions.DELETE_APD_REQUEST },
+          { type: actions.DELETE_APD_FAILURE }
+        ]);
+      });
+    });
+
+    it('should handle an API success', () => {
+      const store = mockStore();
+      const fetch = sinon.stub().returns({ type: 'apd fetch' });
+      fetchMock.onDelete('/apds/apd-id').reply(200);
+
+      return store.dispatch(actions.deleteApd('apd-id', { fetch })).then(() => {
+        expect(store.getActions()).toEqual([
+          { type: actions.DELETE_APD_REQUEST },
+          { type: actions.DELETE_APD_SUCCESS },
+          { type: 'apd fetch' }
+        ]);
+      });
+    });
+  });
+
   it('updateBudget should create UPDATE_BUDGET action', () => {
     const state = { this: 'is', my: 'state ' };
     const store = mockStore(state);
@@ -217,11 +245,20 @@ describe('apd actions', () => {
     describe('creates GET_APD_SUCCESS after successful APD fetch', () => {
       it('does not select an APD by default', () => {
         const store = mockStore({ apd: { selectAPDOnLoad: false } });
-        fetchMock.onGet('/apds').reply(200, [{ foo: 'bar' }]);
+        fetchMock
+          .onGet('/apds')
+          .reply(200, [
+            { foo: 'bar', status: 'draft' },
+            { foo: 'bar', status: 'archived' }
+          ]);
 
         const expectedActions = [
           { type: actions.GET_APD_REQUEST },
-          { type: actions.GET_APD_SUCCESS, data: [{ foo: 'bar' }] }
+          {
+            type: actions.GET_APD_SUCCESS,
+            // expected the archived APD to have been removed
+            data: [{ foo: 'bar', status: 'draft' }]
+          }
         ];
 
         return store.dispatch(actions.fetchApd()).then(() => {

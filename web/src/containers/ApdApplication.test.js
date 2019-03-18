@@ -13,7 +13,12 @@ describe('apd (application) component', () => {
   test('renders correctly', () => {
     expect(
       shallow(
-        <ApdApplication apdSelected place={{}} selectApdOnLoad={() => {}} />
+        <ApdApplication
+          apdSelected
+          dirty
+          place={{}}
+          selectApdOnLoad={() => {}}
+        />
       )
     ).toMatchSnapshot();
 
@@ -22,6 +27,7 @@ describe('apd (application) component', () => {
       shallow(
         <ApdApplication
           apdSelected={false}
+          dirty={false}
           place={{}}
           selectApdOnLoad={selectApdOnLoadProp}
         />
@@ -37,6 +43,9 @@ describe('apd (application) component', () => {
           id: 'bloop'
         }
       },
+      dirty: {
+        dirty: 'moop moop'
+      },
       user: {
         data: {
           state: 'place'
@@ -46,6 +55,7 @@ describe('apd (application) component', () => {
 
     expect(mapStateToProps(state)).toEqual({
       apdSelected: true,
+      dirty: 'moop moop',
       place: 'place'
     });
 
@@ -53,6 +63,7 @@ describe('apd (application) component', () => {
 
     expect(mapStateToProps(state)).toEqual({
       apdSelected: false,
+      dirty: 'moop moop',
       place: 'place'
     });
   });

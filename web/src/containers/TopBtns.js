@@ -2,21 +2,22 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 
 import { t } from '../i18n';
-import { logout } from '../actions/auth';
 import Btn from '../components/Btn';
 
 class TopBtns extends Component {
   handleLogout = e => {
     e.preventDefault();
-    this.props.logout();
+    const { pushRoute } = this.props;
+    pushRoute('/logout');
   };
 
   goToDashboard = e => {
     e.preventDefault();
-    this.props.pushRoute('/');
+    const { pushRoute } = this.props;
+    pushRoute('/');
   };
 
   render() {
@@ -50,7 +51,6 @@ class TopBtns extends Component {
 TopBtns.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   hideDashboard: PropTypes.bool,
-  logout: PropTypes.func.isRequired,
   pushRoute: PropTypes.func.isRequired
 };
 
@@ -59,8 +59,11 @@ TopBtns.defaultProps = {
 };
 
 const mapStateToProps = ({ auth: { authenticated } }) => ({ authenticated });
-const mapDispatchToProps = { logout, pushRoute: push };
+const mapDispatchToProps = { pushRoute: push };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopBtns);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TopBtns);
 
 export { TopBtns as plain, mapStateToProps, mapDispatchToProps };

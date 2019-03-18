@@ -1,9 +1,9 @@
 const path = require('path');
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 const config = {
+  mode: 'production',
   entry: {
     js: [
       path.join(__dirname, 'src/app.js'),
@@ -49,12 +49,17 @@ const config = {
           },
           'extract-loader',
           'css-loader',
+          'resolve-url-loader',
           'postcss-loader',
           {
             loader: 'sass-loader',
             options: { includePaths: [path.resolve(__dirname, 'node_modules')] }
           }
         ]
+      },
+      {
+        test: /\.(woff2?|ttf|otf|eot|svg)$/,
+        loader: 'file-loader'
       },
       {
         test: /\.yaml$/,
@@ -65,8 +70,7 @@ const config = {
   plugins: [
     new webpack.EnvironmentPlugin({
       API_URL: null
-    }),
-    new UglifyJSPlugin()
+    })
   ]
 };
 

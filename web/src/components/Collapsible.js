@@ -2,9 +2,8 @@ import deline from 'deline';
 import kebabCase from 'lodash.kebabcase';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Icon from '@fortawesome/react-fontawesome';
 
-import { faChevronDown, faChevronUp } from './Icons';
+import Icon, { faChevronDown, faChevronUp } from './Icons';
 
 class Collapsible extends Component {
   constructor(props) {
@@ -24,11 +23,14 @@ class Collapsible extends Component {
       children,
       id,
       nested,
+      open: openProp,
       sticky,
       title,
       onChange
     } = this.props;
-    const isOpen = onChange ? this.props.open : this.state.open;
+    const { open: openState } = this.state;
+
+    const isOpen = onChange ? openProp : openState;
     const contentId = `collapsible-${kebabCase(title)}`;
 
     let btnClass = deline`

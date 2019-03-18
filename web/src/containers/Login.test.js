@@ -19,6 +19,19 @@ describe('login component', () => {
     expect(component).toMatchSnapshot();
   });
 
+  test('renders correctly if logged in and previous location is logout', () => {
+    const component = shallow(
+      <Login
+        authenticated
+        error=""
+        fetching
+        location={{ state: { from: '/logout' } }}
+        login={() => {}}
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+
   test('renders correctly if logged in, but no previous location', () => {
     const component = shallow(
       <Login authenticated error="" fetching location={{}} login={() => {}} />
