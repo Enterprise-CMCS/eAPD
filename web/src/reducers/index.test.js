@@ -2,7 +2,7 @@ import rootReducer from './index';
 
 describe('root reducer', () => {
   test('should have proper state slices', () => {
-    const stateKeys = Object.keys(rootReducer(undefined, {}));
+    const stateKeys = Object.keys(rootReducer({ location: {} })(undefined, {}));
     expect(stateKeys).toEqual([
       'activities',
       'admin',
