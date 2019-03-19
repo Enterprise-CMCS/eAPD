@@ -206,7 +206,7 @@ class ApdStateKeyPersonnel extends Component {
           )}
         />
 
-        <Btn onClick={addPerson}>
+        <Btn onClick={addPerson} extraCss="visibility--screen">
           {t('apd.stateProfile.keyPersonnel.labels.addButton', {
             count: poc.length
           })}

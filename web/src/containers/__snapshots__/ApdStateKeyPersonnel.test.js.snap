@@ -33,7 +33,7 @@ exports[`apd state profile, Medicaid office component main component renders cor
     }
   />
   <Btn
-    extraCss={null}
+    extraCss="visibility--screen"
     kind="primary"
     onClick={[Function]}
     size={null}
