@@ -2,40 +2,32 @@
 
 exports[`Section component renders correctly with no resource 1`] = `
 <section
-  className="component-section ds-u-margin-top--2 ds-u-padding-top--2"
+  className=""
   id={null}
 >
-  <div
-    className="ds-u-margin-bottom--2 ds-u-padding-bottom--2"
-  >
-    <h2
-      className="ds-h2"
-    />
-    <span
-      className="ds-text--lead"
-    />
-  </div>
+  <h2
+    className="ds-h2"
+  />
+  <span
+    className="ds-text--lead"
+  />
   test child
 </section>
 `;
 
 exports[`Section component renders correctly with resource containing title, subheader, and helptext 1`] = `
 <section
-  className="component-section ds-u-margin-top--2 ds-u-padding-top--2"
+  className=""
   id={null}
 >
-  <div
-    className="ds-u-margin-bottom--2 ds-u-padding-bottom--2"
+  <h2
+    className="ds-h2"
   >
-    <h2
-      className="ds-h2"
-    >
-      Performance Goals and Benchmarks
-    </h2>
-    <span
-      className="ds-text--lead"
-    />
-  </div>
+    Performance Goals and Benchmarks
+  </h2>
+  <span
+    className="ds-text--lead"
+  />
   test child
 </section>
 `;
@@ -49,9 +41,7 @@ exports[`SectionDesc component renders correctly 1`] = `
 `;
 
 exports[`SectionTitle component renders correctly 1`] = `
-<h2
-  className="mt1 mb2 h1 sm-h0 teal light"
->
+<h2>
   <div
     className="test child"
   />

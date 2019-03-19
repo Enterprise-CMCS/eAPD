@@ -3,8 +3,8 @@
 exports[`previous activities component renders correctly if data is not loaded 1`] = `
 <Section
   id="prev-activities"
-  number="3"
   resource="previousActivities"
+  sectionClass="component-section"
 >
   <Subsection
     id="prev-activities-outline"

@@ -3,8 +3,8 @@
 exports[`executive summary component renders correctly 1`] = `
 <Section
   id="executive-summary"
-  number="8"
   resource="executiveSummary"
+  sectionClass="component-section"
 >
   <Subsection
     id="executive-summary-overview"

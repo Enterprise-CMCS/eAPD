@@ -15,8 +15,8 @@ exports[`assurances and compliance component LinkOrText component renders correc
 exports[`assurances and compliance component main component renders correctly 1`] = `
 <Section
   id="assurances-compliance"
-  number="7"
   resource="assurancesAndCompliance"
+  sectionClass="component-section"
 >
   <Subsection
     id="assurances-compliance-fed-citations"
