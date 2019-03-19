@@ -51,7 +51,7 @@ exports[`Sidebar component renders correctly 1`] = `
                 },
                 Object {
                   "id": "apd-state-profile-key-personnel",
-                  "label": "Key Personnel and Project Management Planning",
+                  "label": "Key Personnel and Program Management Planning",
                   "onClick": [Function],
                   "url": "#apd-state-profile-key-personnel",
                 },
