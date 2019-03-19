@@ -19,14 +19,14 @@ SectionDesc.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const Section = ({ children, id, number = 0, resource }) => {
+const Section = ({ children, id, sectionClass, resource }) => {
   const title = t([resource, 'title'], { defaultValue: false });
   const helptext = t([resource, 'helpText'], { defaultValue: false });
 
   return (
     <section
       id={id}
-      className="component-section"
+      className={sectionClass}
     >
       <h2 className="ds-h2">{title}</h2>
       <span className="ds-text--lead">{helptext}</span>
@@ -38,14 +38,13 @@ const Section = ({ children, id, number = 0, resource }) => {
 Section.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.string,
-  number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   resource: PropTypes.string
 };
 
 Section.defaultProps = {
   id: null,
-  number: 0,
-  resource: null
+  resource: null,
+  sectionClass: ''
 };
 
 const Subsection = ({ children, id, nested, open, resource }) => {

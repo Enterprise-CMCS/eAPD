@@ -11,7 +11,11 @@ import ApdPreviousActivityTableTotal from './ApdPreviousActivityTableTotal';
 import { t } from '../i18n';
 
 const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
-  <Section id="prev-activities" number="3" resource="previousActivities">
+  <Section
+    id="prev-activities"
+    resource="previousActivities"
+    sectionClass="component-section"
+  >
     <Subsection
       id="prev-activities-outline"
       resource="previousActivities.outline"
