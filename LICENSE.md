@@ -35,6 +35,16 @@ citing the work, you should not imply endorsement by the author or the affirmer.
 ### Files licensed under the Creative Commons by 4.0 License
 
 The icons in this project are from [Font Awesome Free](https://fontawesome.com/icons), and licensed under the [CC BY 4.0 License](https://fontawesome.com/license/free). Icons used include:
+
+- [arrow-right](https://fontawesome.com/icons/arrow-right?style=solid)
+- [check-circle](https://fontawesome.com/icons/check-circle?style=solid)
+- [chevron-down](https://fontawesome.com/icons/chevron-down?style=solid)
+- [circle](https://fontawesome.com/icons/circle?style=regular)
+- [clock](https://fontawesome.com/icons/clock?style=regular)
+- [edit](https://fontawesome.com/icons/edit?style=solid)
+- [exclamation-triangle](https://fontawesome.com/icons/exclamation-triangle?style=solid)
 - [file-alt](https://fontawesome.com/icons/file-alt?style=solid)
+- [plus-circle](https://fontawesome.com/icons/plus-circle?style=solid)
+- [spinner](https://fontawesome.com/icons/spinner?style=solid)
 - [user-plus](https://fontawesome.com/icons/user-plus?style=solid)
 - [user-cog](https://fontawesome.com/icons/user-cog?style=solid)
