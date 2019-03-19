@@ -31,7 +31,7 @@ exports[`the Activities component renders correctly 1`] = `
       />
     </div>
     <Btn
-      extraCss={null}
+      extraCss="visibility--screen"
       kind="primary"
       onClick={[Function]}
       size={null}

@@ -48,7 +48,7 @@ exports[`the ContractorResources component renders correctly 1`] = `
     />
   </div>
   <Btn
-    extraCss={null}
+    extraCss="visibility--screen"
     kind="primary"
     onClick={[Function]}
     size={null}
