@@ -3,8 +3,8 @@
 exports[`schedule summary component renders correctly 1`] = `
 <Section
   id="schedule-summary"
-  number="5"
   resource="scheduleSummary"
+  sectionClass="component-section"
 >
   <Subsection
     id="schedule-summary-table"
@@ -196,8 +196,8 @@ exports[`schedule summary component renders correctly 1`] = `
 exports[`schedule summary component renders correctly with no data 1`] = `
 <Section
   id="schedule-summary"
-  number="5"
   resource="scheduleSummary"
+  sectionClass="component-section"
 >
   <Subsection
     id="schedule-summary-table"
