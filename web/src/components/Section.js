@@ -26,19 +26,10 @@ const Section = ({ children, id, number = 0, resource }) => {
   return (
     <section
       id={id}
-      className="component-section ds-u-margin-top--2 ds-u-padding-top--2"
+      className="component-section"
     >
-      <div className="ds-u-margin-bottom--2 ds-u-padding-bottom--2">
-        {!!number && (
-          <div className="component-section--number ds-u-fill--primary ds-u-radius--circle">
-            <h2 className="ds-u-font-weight--normal ds-u-color--base-inverse">
-              {number}
-            </h2>
-          </div>
-        )}
-        <h2 className="ds-h2">{title}</h2>
-        <span className="ds-text--lead">{helptext}</span>
-      </div>
+      <h2 className="ds-h2">{title}</h2>
+      <span className="ds-text--lead">{helptext}</span>
       {children}
     </section>
   );
