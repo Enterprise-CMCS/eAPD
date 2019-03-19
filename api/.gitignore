@@ -3,5 +3,4 @@
 coverage
 hitech_api*.log*
 
-endpoint-tests/endpoints-all.txt
-endpoint-tests/endpoints-hit.txt
+endpoint-tests/endpoint-data.json

@@ -40,5 +40,4 @@ routes(server);
 logger.silly('starting the server');
 server.listen(process.env.PORT, () => {
   logger.verbose(`server listening on :${process.env.PORT}`);
-  endpointCoverage.getCoverageEndpoints(server);
 });
