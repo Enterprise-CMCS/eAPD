@@ -10,6 +10,7 @@ body {
 
   h2 {
     line-height: $line-height;
+    margin-bottom: 0;
     &::before {
       counter-increment: section;
       content: counter(section);
