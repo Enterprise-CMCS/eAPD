@@ -1,4 +1,4 @@
-import { routerReducer } from 'react-router-redux';
+import { connectRouter } from 'connected-react-router';
 import { combineReducers } from 'redux';
 
 import activities from './activities';
@@ -10,7 +10,7 @@ import dirty from './dirty';
 import notification from './notification';
 import user from './user';
 
-const rootReducer = combineReducers({
+const rootReducer = history => combineReducers({
   activities,
   admin,
   apd,
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   dirty,
   notification,
   user,
-  router: routerReducer
+  router: connectRouter(history)
 });
 
 export default rootReducer;
