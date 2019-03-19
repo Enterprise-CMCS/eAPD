@@ -76,9 +76,27 @@ tap.test('apds GET endpoint', async endpointTest => {
       ApdModel.fetchAll.resolves({ toJSON });
       ApdModel.withRelated = 'this is related stuff';
       toJSON.returns([
-        { id: 'a', status: 'status a', years: 'years a', other: 'stuff' },
-        { id: 'b', status: 'status b', years: 'years b', gets: 'removed' },
-        { id: 'c', status: 'status c', years: 'years c', from: 'results' }
+        {
+          id: 'a',
+          name: 'apd a',
+          status: 'status a',
+          years: 'years a',
+          other: 'stuff'
+        },
+        {
+          id: 'b',
+          name: 'apd b',
+          status: 'status b',
+          years: 'years b',
+          gets: 'removed'
+        },
+        {
+          id: 'c',
+          name: 'apd c',
+          status: 'status c',
+          years: 'years c',
+          from: 'results'
+        }
       ]);
 
       await handler({ params: {}, user: { state: 'va' } }, res);
@@ -87,9 +105,9 @@ tap.test('apds GET endpoint', async endpointTest => {
       validTest.ok(ApdModel.where.calledWith({ state_id: 'va' }));
       validTest.ok(
         res.send.calledWith([
-          { id: 'a', status: 'status a', years: 'years a' },
-          { id: 'b', status: 'status b', years: 'years b' },
-          { id: 'c', status: 'status c', years: 'years c' }
+          { id: 'a', name: 'apd a', status: 'status a', years: 'years a' },
+          { id: 'b', name: 'apd b', status: 'status b', years: 'years b' },
+          { id: 'c', name: 'apd c', status: 'status c', years: 'years c' }
         ]),
         'APD info is sent back'
       );

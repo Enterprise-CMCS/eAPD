@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = () => ({
   apd: {
     tableName: 'apds',
@@ -79,6 +81,9 @@ module.exports = () => ({
     toJSON() {
       return {
         id: this.get('id'),
+        name: `${this.get('state_id').toUpperCase()}-${moment(
+          this.get('created_at')
+        ).format('YYYY-MM-DD')}-HITECH-APD`,
         activities: this.related('activities').toJSON(),
         federalCitations: this.get('federal_citations'),
         incentivePayments: this.related('incentivePayments').toJSON(),
