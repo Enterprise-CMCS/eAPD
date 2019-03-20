@@ -8,7 +8,7 @@ body {
   $number-padding-size: $number-size * 2;
   $line-height: 1.5em;
 
-  h2 {
+  > h2 {
     line-height: $line-height;
     margin-bottom: 0;
     &::before {
