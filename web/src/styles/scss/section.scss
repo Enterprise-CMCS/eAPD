@@ -3,7 +3,7 @@ body {
   counter-reset: section;
 }
 
-.component-section {
+.numbered-section {
   $number-size: $h2-font-size * 1.5;
   $number-padding-size: $number-size * 2;
   $line-height: 1.5em;

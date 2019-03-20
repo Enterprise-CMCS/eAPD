@@ -6,9 +6,9 @@ import KeyPersonnel from '../containers/ApdStateKeyPersonnel';
 
 const ApdStateProfile = () => (
   <Section
+    isNumbered
     id="apd-state-profile"
     resource="apd.stateProfile"
-    sectionClass="component-section"
   >
     <Subsection
       id="apd-state-profile-office"

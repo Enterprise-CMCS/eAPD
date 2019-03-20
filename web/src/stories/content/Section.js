@@ -9,9 +9,9 @@ const SectionStory = () => (
     <h2>It renders like this:</h2>
     <RenderViewbox>
       <Section
+        isNumbered
         id="storybook_section_id"
         resource="storybook.section"
-        sectionClass="component-section"
       >
         ...child content here...
       </Section>
@@ -27,7 +27,7 @@ const SectionStory = () => (
     <hr />
     <p>
       <pre>
-        {`<Section id="storybook_section_id" resource="storybook.section" sectionClass="component-section">
+        {`<Section isNumbered id="storybook_section_id" resource="storybook.section">
   ...child content here...
 </Section>`}
       </pre>
@@ -52,9 +52,9 @@ const SectionStory = () => (
         </td>
       </tr>
       <tr>
-        <td>sectionClass</td>
-        <td>string</td>
-        <td>defaults to null; adding a class of <code>component-section</code> will render a bubble with a CSS counter in it to the left.</td>
+        <td>isNumbered</td>
+        <td>bool</td>
+        <td>defaults to false; adding a class of <code>numbered-section</code> will render a bubble with a CSS counter in it to the left.</td>
       </tr>
       <tr>
         <td>resource</td>

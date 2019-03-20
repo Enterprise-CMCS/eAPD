@@ -12,9 +12,9 @@ import { t } from '../i18n';
 
 const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
   <Section
+    isNumbered
     id="prev-activities"
     resource="previousActivities"
-    sectionClass="component-section"
   >
     <Subsection
       id="prev-activities-outline"

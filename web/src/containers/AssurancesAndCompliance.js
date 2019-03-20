@@ -56,9 +56,9 @@ class AssurancesAndCompliance extends Component {
 
     return (
       <Section
+        isNumbered
         id="assurances-compliance"
         resource="assurancesAndCompliance"
-        sectionClass="component-section"
       >
         <Subsection
           id="assurances-compliance-fed-citations"
