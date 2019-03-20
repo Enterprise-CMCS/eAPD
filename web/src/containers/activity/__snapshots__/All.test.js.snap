@@ -3,6 +3,7 @@
 exports[`the Activities component renders correctly 1`] = `
 <Section
   id="activities"
+  isNumbered={true}
   resource="activities"
 >
   <Subsection

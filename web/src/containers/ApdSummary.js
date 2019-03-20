@@ -38,7 +38,11 @@ class ApdSummary extends Component {
     } = this.props;
 
     return (
-      <Section id="apd-summary" resource="apd">
+      <Section
+        isNumbered
+        id="apd-summary"
+        resource="apd"
+      >
         <Subsection id="apd-summary-overview" resource="apd.overview">
           <div className="mb3">
             {yearOptions.map(option => (

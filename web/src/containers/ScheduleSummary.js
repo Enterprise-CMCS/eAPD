@@ -7,7 +7,11 @@ import { t } from '../i18n';
 import { Section, Subsection } from '../components/Section';
 
 const ScheduleSummary = ({ tableData }) => (
-  <Section id="schedule-summary" resource="scheduleSummary">
+  <Section
+    isNumbered
+    id="schedule-summary"
+    resource="scheduleSummary"
+  >
     <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
       {tableData.data.length === 0 ? (
         <div className="p1 h6 alert">{t('scheduleSummary.noDataMessage')}</div>
