@@ -11,9 +11,9 @@ import { t } from '../../i18n';
 
 const All = ({ activityKeys, addActivity }) => (
   <Section
+    isNumbered
     id="activities"
     resource="activities"
-    sectionClass="component-section"
   >
     <Subsection id="activities-list" resource="activities.list" open>
       {activityKeys.length === 0 ? (

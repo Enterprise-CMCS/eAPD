@@ -10,9 +10,9 @@ import { t } from '../i18n';
 
 const ExecutiveSummary = ({ data, years, expandSection }) => (
   <Section
+    isNumbered
     id="executive-summary"
     resource="executiveSummary"
-    sectionClass="component-section"
   >
     <Subsection
       id="executive-summary-overview"

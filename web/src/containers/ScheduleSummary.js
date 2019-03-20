@@ -8,9 +8,9 @@ import { Section, Subsection } from '../components/Section';
 
 const ScheduleSummary = ({ tableData }) => (
   <Section
+    isNumbered
     id="schedule-summary"
     resource="scheduleSummary"
-    sectionClass="component-section"
   >
     <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
       {tableData.data.length === 0 ? (

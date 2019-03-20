@@ -2,7 +2,7 @@
 
 exports[`Section component renders correctly with no resource 1`] = `
 <section
-  className=""
+  className={false}
   id={null}
 >
   <h2
@@ -17,7 +17,7 @@ exports[`Section component renders correctly with no resource 1`] = `
 
 exports[`Section component renders correctly with resource containing title, subheader, and helptext 1`] = `
 <section
-  className=""
+  className={false}
   id={null}
 >
   <h2

@@ -7,9 +7,9 @@ import QuarterlyBudgetSummary from '../containers/QuarterlyBudgetSummary';
 
 const ProposedBudget = () => (
   <Section
+    isNumbered
     id="budget"
     resource="proposedBudget"
-    sectionClass="component-section"
   >
     <Subsection
       id="budget-summary-table"

@@ -39,9 +39,9 @@ class ApdSummary extends Component {
 
     return (
       <Section
+        isNumbered
         id="apd-summary"
         resource="apd"
-        sectionClass="component-section"
       >
         <Subsection id="apd-summary-overview" resource="apd.overview">
           <div className="mb3">
