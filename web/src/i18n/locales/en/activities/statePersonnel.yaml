@@ -3,13 +3,14 @@ instruction:
   short: >-
     Identify personnel resources that are part of the activity.
   detail: >-
-    Do not include contract personnel in this section. Account for them under
-    Private Contractor Costs.
+    Cost with Benefits is per FTE. Number of FTEs represents the combined amount
+    of staff time for the duration of the activity. Combine multiple individuals’
+    commitments only when their costs and roles are the same. Do not include contract
+    personnel in this section. Account for them under Private Contractor Costs.
   helpText: >-
-    Number of FTEs represents the combined amount of staff time for the duration
-    of the activity. Add up partial personnel commitments to get the number of FTEs.
-    (For example 1, 2.5, 4, etc. If two people work half time, record that as 1
-    FTE.)
+    For example: If two people work as Analyst Class 1 on this activity 75 
+    percent of the time, record one entry of 1.5 FTE. If they are in different roles,
+    record two separate entries of 0.75 FTE.
 noDataNotice: There are no personnel resources for this activity.
 labels:
   entryNum: '#'
@@ -17,7 +18,7 @@ labels:
   desc: Description
   keyPersonnel: Key Personnel
   yearCost: '{{year}} Cost'
-  costAmt: Salary Amount
+  costAmt: Cost with Benefits
   costPerc: Number of FTEs
 removeLabel: Remove personnel
 addButtonText: Add personnel

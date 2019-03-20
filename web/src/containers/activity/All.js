@@ -27,7 +27,9 @@ const All = ({ activityKeys, addActivity }) => (
           ))}
         </div>
       )}
-      <Btn onClick={addActivity}>{t('activities.addActivityButtonText')}</Btn>
+      <Btn extraCss="visibility--screen" onClick={addActivity}>
+        {t('activities.addActivityButtonText')}
+      </Btn>
     </Subsection>
     {activityKeys.map((key, idx) => (
       <EntryDetails key={key} aKey={key} num={idx + 1} />
