@@ -9,7 +9,11 @@ import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
 
 const ExecutiveSummary = ({ data, years, expandSection }) => (
-  <Section id="executive-summary" resource="executiveSummary">
+  <Section
+    isNumbered
+    id="executive-summary"
+    resource="executiveSummary"
+  >
     <Subsection
       id="executive-summary-overview"
       resource="executiveSummary.summary"

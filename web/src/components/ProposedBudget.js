@@ -6,7 +6,11 @@ import IncentivePayments from '../containers/IncentivePayments';
 import QuarterlyBudgetSummary from '../containers/QuarterlyBudgetSummary';
 
 const ProposedBudget = () => (
-  <Section id="budget" resource="proposedBudget">
+  <Section
+    isNumbered
+    id="budget"
+    resource="proposedBudget"
+  >
     <Subsection
       id="budget-summary-table"
       resource="proposedBudget.summaryBudget"
