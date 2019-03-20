@@ -33,7 +33,7 @@ exports[`apd state profile, Medicaid office component main component renders cor
     }
   />
   <Btn
-    extraCss={null}
+    extraCss="visibility--screen"
     kind="primary"
     onClick={[Function]}
     size={null}
@@ -79,7 +79,7 @@ exports[`apd state profile, Medicaid office component person form component rend
   />
   <InputHolder
     hideLabel={false}
-    label="Percent commitment to project"
+    label="Percent commitment to program"
     name="apd-state-profile-pocpercent12"
     onChange={[Function]}
     type="text"
@@ -115,7 +115,7 @@ exports[`apd state profile, Medicaid office component person form component rend
   <div
     className="mt2"
   >
-    This person has costs directly attributable to the project:
+    This person has costs directly attributable to the program:
     <div
       className="mt1 ml2"
     >
@@ -219,7 +219,7 @@ exports[`apd state profile, Medicaid office component person form component rend
   />
   <InputHolder
     hideLabel={false}
-    label="Percent commitment to project"
+    label="Percent commitment to program"
     name="apd-state-profile-pocpercent12"
     onChange={[Function]}
     type="text"
@@ -255,7 +255,7 @@ exports[`apd state profile, Medicaid office component person form component rend
   <div
     className="mt2"
   >
-    This person has costs directly attributable to the project:
+    This person has costs directly attributable to the program:
     <div
       className="mt1 ml2"
     >
@@ -359,7 +359,7 @@ exports[`apd state profile, Medicaid office component person form component rend
   />
   <InputHolder
     hideLabel={false}
-    label="Percent commitment to project"
+    label="Percent commitment to program"
     name="apd-state-profile-pocpercent12"
     onChange={[Function]}
     type="text"
@@ -395,7 +395,7 @@ exports[`apd state profile, Medicaid office component person form component rend
   <div
     className="mt2"
   >
-    This person has costs directly attributable to the project:
+    This person has costs directly attributable to the program:
     <div
       className="mt1 ml2"
     >

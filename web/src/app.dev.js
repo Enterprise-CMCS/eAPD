@@ -5,7 +5,7 @@ import React from 'react';
 import 'react-dates/initialize';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'connected-react-router';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
 import thunk from 'redux-thunk';
@@ -23,7 +23,7 @@ const history = createHistory();
 
 const middleware = [thunk, routerMiddleware(history), createLogger()];
 
-const store = createStore(reducer, applyMiddleware(...middleware));
+const store = createStore(reducer(history), applyMiddleware(...middleware));
 
 const render = (Component, props) => {
   ReactDOM.render(

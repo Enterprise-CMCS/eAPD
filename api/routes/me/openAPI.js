@@ -67,7 +67,32 @@ const openAPI = {
     put: {
       tags: ['Users'],
       summary: `Updates the current user's information`,
-      description: `Update information about the current user.  Only the email, name, password, phone, and position fields can be updated.`,
+      description: `Update information about the current user.  Only the name, password, phone, and position fields can be updated.`,
+      requestBody: {
+        description: 'The new values for the apd.  All fields are optional.',
+        required: true,
+        content: jsonResponse({
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              description: `The user's updated name. Omit to leave unchanged.`
+            },
+            password: {
+              type: 'string',
+              description: `The user's updated password. Omit to leave unchanged.`
+            },
+            phone: {
+              type: 'string',
+              description: `The user's updated phone number. Omit to leave unchanged.`
+            },
+            position: {
+              type: 'string',
+              description: `The user's updated position. Omit to leave unchanged.`
+            }
+          }
+        })
+      },
       responses: {
         200: {
           description: 'The current user',

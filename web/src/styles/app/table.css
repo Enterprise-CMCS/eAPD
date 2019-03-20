@@ -84,6 +84,17 @@
   vertical-align: middle;
 }
 
+@media screen {
+  .table-fullscreen {
+    min-width: 1200px;
+  }
+}
+
+/* override our default rule that causes tables to be 100% of parent container */
+.table-fit-contents {
+  width: auto;
+}
+
 .table-frozen-wrapper {
   position: relative;
 }
