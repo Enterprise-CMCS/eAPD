@@ -65,7 +65,7 @@ class Schedule extends Component {
             </div>
             <Instruction source="activities.schedule.milestone.instruction" />
 
-            <table className="h5 table table-fixed" style={{ minWidth: 600 }}>
+            <table className="h5 table table-fixed">
               <thead>
                 <tr>
                   <th className="col-5 border-none">
