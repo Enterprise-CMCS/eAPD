@@ -4,7 +4,6 @@ exports[`the CostAllocate component renders correctly 1`] = `
 <Subsection
   id={null}
   nested={true}
-  open={false}
   resource="activities.costAllocate"
 >
   <div
