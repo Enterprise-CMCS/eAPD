@@ -47,17 +47,27 @@ Section.defaultProps = {
   isNumbered: false
 };
 
-const Subsection = ({ children, id, nested, open, resource }) => {
+const Subsection = ({ children, id, nested, resource }) => {
   const title = t([resource, 'title'], { defaultValue: '' });
 
   return (
     <Fragment>
-      <h3
-        id={id}
-        className='subsection--title ds-h3'
-      >
-        {title}
-      </h3>
+      {!nested &&
+        <h3
+          id={id}
+          className='subsection--title ds-h3'
+        >
+          {title}
+        </h3>
+      }
+      {nested &&
+        <h4
+          id={id}
+          className='ds-h3'
+        >
+          {title}
+        </h4>
+      }
       <Instruction source={`${resource}.instruction`} />
       {children}
     </Fragment>
@@ -68,7 +78,6 @@ Subsection.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.string,
   nested: PropTypes.bool,
-  open: PropTypes.bool,
   resource: PropTypes.string
 };
 
@@ -76,7 +85,6 @@ Subsection.defaultProps = {
   resource: null,
   id: null,
   nested: false,
-  open: false
 };
 
 export default Section;
