@@ -28,7 +28,7 @@ body {
     }
   }
 
-  margin-top: $spacer-2;
+  margin-top: $spacer-6;
   padding-top: $spacer-2;
   padding-left: $number-padding-size;
   border-top: 1px solid $color-gray-dark;
@@ -36,6 +36,5 @@ body {
 
 .subsection--title {
   border-top: 1px solid $color-gray-dark;
-  padding-top: $spacer-3;
-  margin-top: $spacer-5;
+  padding-top: $spacer-2;
 }

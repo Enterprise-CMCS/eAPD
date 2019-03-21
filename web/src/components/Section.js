@@ -54,7 +54,7 @@ const Subsection = ({ children, id, nested, open, resource }) => {
     <Fragment>
       <h3
         id={id}
-        className='subsection--title'
+        className='subsection--title ds-h3'
       >
         {title}
       </h3>
