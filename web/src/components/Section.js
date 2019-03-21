@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 
-import Collapsible from './Collapsible';
 import Instruction from './Instruction';
 import { t } from '../i18n';
 
@@ -52,10 +51,16 @@ const Subsection = ({ children, id, nested, open, resource }) => {
   const title = t([resource, 'title'], { defaultValue: '' });
 
   return (
-    <Collapsible id={id} title={title} open={open} nested={nested}>
+    <Fragment>
+      <h3
+        id={id}
+        className='subsection--title'
+      >
+        {title}
+      </h3>
       <Instruction source={`${resource}.instruction`} />
       {children}
-    </Collapsible>
+    </Fragment>
   );
 };
 
