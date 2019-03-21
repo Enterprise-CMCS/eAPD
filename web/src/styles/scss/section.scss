@@ -33,3 +33,9 @@ body {
   padding-left: $number-padding-size;
   border-top: 1px solid $color-gray-dark;
 }
+
+.subsection--title {
+  border-top: 1px solid $color-gray-dark;
+  padding-top: $spacer-3;
+  margin-top: $spacer-5;
+}
