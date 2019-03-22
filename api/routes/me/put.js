@@ -2,7 +2,7 @@ const logger = require('../../logger')('me route put');
 const loggedIn = require('../../middleware').loggedIn;
 const deserializeUser = require('../../auth/serialization').deserializeUser;
 
-const editableFields = ['email', 'name', 'password', 'phone', 'position'];
+const editableFields = ['name', 'password', 'phone', 'position'];
 
 const getUserJSON = user => ({
   // Send back state info and get rid of the model object

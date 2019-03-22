@@ -65,7 +65,7 @@ class Schedule extends Component {
             </div>
             <Instruction source="activities.schedule.milestone.instruction" />
 
-            <table className="h5 table table-fixed" style={{ minWidth: 600 }}>
+            <table className="h5 table table-fixed">
               <thead>
                 <tr>
                   <th className="col-5 border-none">
@@ -107,7 +107,7 @@ class Schedule extends Component {
                     <td className="center align-middle border-bottom">
                       <Btn
                         kind="outline"
-                        extraCss="px1 py-tiny"
+                        extraCss="px1 py-tiny visibility--screen"
                         onClick={() =>
                           removeActivityMilestone(activity.key, d.key)
                         }
@@ -121,7 +121,10 @@ class Schedule extends Component {
             </table>
           </div>
         )}
-        <Btn onClick={() => addActivityMilestone(activity.key)}>
+        <Btn
+          extraCss="visibility--screen"
+          onClick={() => addActivityMilestone(activity.key)}
+        >
           {t('activities.schedule.milestone.addMilestoneButtonText')}
         </Btn>
       </Subsection>

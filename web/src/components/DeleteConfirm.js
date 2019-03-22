@@ -57,7 +57,7 @@ class DeleteButton extends Component {
       <div>
         <Btn
           size="small"
-          extraCss="bg-black white h6"
+          extraCss="bg-black white h6 visibility--screen"
           onClick={this.handleClick}
           {...rest}
         >

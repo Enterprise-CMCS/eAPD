@@ -229,6 +229,7 @@ tap.test('apd data model', async apdModelTests => {
       .withArgs('incentivePayments')
       .returns({ toJSON: sinon.stub().returns('incentive-payments') });
     self.get.withArgs('id').returns('apd-id');
+    self.get.withArgs('created_at').returns('2100-01-02T12:00:00.000Z');
     self.get.withArgs('state_id').returns('apd-state');
     self.get.withArgs('status').returns('apd-status');
     self.get.withArgs('federal_citations').returns('assurances and stuff');
@@ -265,6 +266,7 @@ tap.test('apd data model', async apdModelTests => {
       output,
       {
         id: 'apd-id',
+        name: 'APD-STATE-2100-01-02-HITECH-APD',
         activities: 'apd-activities',
         federalCitations: 'assurances and stuff',
         incentivePayments: 'incentive-payments',

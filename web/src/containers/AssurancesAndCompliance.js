@@ -55,7 +55,11 @@ class AssurancesAndCompliance extends Component {
     const { sections: apdSections } = this.props;
 
     return (
-      <Section id="assurances-compliance" resource="assurancesAndCompliance">
+      <Section
+        isNumbered
+        id="assurances-compliance"
+        resource="assurancesAndCompliance"
+      >
         <Subsection
           id="assurances-compliance-fed-citations"
           resource="assurancesAndCompliance.citations"

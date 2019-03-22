@@ -3,6 +3,7 @@
 exports[`previous activities component renders correctly if data is not loaded 1`] = `
 <Section
   id="prev-activities"
+  isNumbered={true}
   resource="previousActivities"
 >
   <Subsection
