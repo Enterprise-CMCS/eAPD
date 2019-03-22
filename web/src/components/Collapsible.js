@@ -50,7 +50,7 @@ class Collapsible extends Component {
     `;
 
     return (
-      <div id={id} className={`mb3 bg-${bgColor} rounded shadow accordian`}>
+      <div id={id} className={`mt3 mb3 bg-${bgColor} rounded shadow accordian`}>
         <button
           type="button"
           className={btnClass}
