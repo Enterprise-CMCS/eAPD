@@ -13,10 +13,10 @@ exports[`the Root component renders correctly 1`] = `
     }
   }
 >
-  <ConnectedRouter
+  <Connect(ConnectedRouterWithContext)
     history={Object {}}
   >
     <App />
-  </ConnectedRouter>
+  </Connect(ConnectedRouterWithContext)>
 </Provider>
 `;

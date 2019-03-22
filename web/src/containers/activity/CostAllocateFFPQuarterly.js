@@ -9,14 +9,11 @@ import { t } from '../../i18n';
 import { formatPerc } from '../../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
-const COLORS = ['teal', 'green', 'yellow'];
 const EXPENSE_NAME_DISPLAY = {
   state: t('activities.costAllocate.quarterly.expenseNames.state'),
   contractors: t('activities.costAllocate.quarterly.expenseNames.contractor'),
   combined: t('activities.costAllocate.quarterly.expenseNames.combined')
 };
-
-const color = idx => `bg-${COLORS[idx] || 'gray'}`;
 
 class CostAllocateFFPQuarterly extends Component {
   handleChange = (year, q, name) => e => {
@@ -41,102 +38,34 @@ class CostAllocateFFPQuarterly extends Component {
 
     return (
       <div>
-        <div className="mb3 table-frozen-wrapper">
-          <div className="table-frozen-scroller">
-            <table
-              className="table-cms table-fixed table-frozen-left-pane"
-              aria-hidden="true"
-            >
-              <thead>
-                <tr>
-                  <th className="table-frozen-null-cell">--</th>
-                </tr>
-                <tr>
-                  <th className="table-frozen-null-cell">--</th>
-                </tr>
-              </thead>
-              <tbody>
-                {['state', 'contractors'].map(name => (
-                  <Fragment key={name}>
-                    <tr
-                      key={name}
-                      className={`align-middle ${
-                        name === 'combined' ? 'bold' : ''
-                      }`}
-                    >
-                      <td rowSpan="2" headers="act_qbudget_null1">
-                        {EXPENSE_NAME_DISPLAY[name]}
-                      </td>
-                      <td
-                        key={`{name}-null-input-cell`}
-                        className="mono right-align"
-                      >
-                        <PercentInput
-                          hideLabel
-                          wrapperClass="m0"
-                          className="fake-spacer-input m0 input input-condensed mono right-align"
-                          label="fake-spacer-input"
-                          name="fake-spacer-input"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        key={`{name}-null-computed-cell`}
-                        className="nowrap table-frozen-spacer-cell"
-                      >
-                        --
-                      </td>
-                    </tr>
-                  </Fragment>
-                ))}
-                <tr className="bold">
-                  <td>{EXPENSE_NAME_DISPLAY.combined}</td>
-                </tr>
-              </tbody>
-            </table>
-            <table className="table-cms table-fixed" style={{ minWidth: 1200 }}>
+        {years.map((year) => (
+        <div>
+            <h3>
+              {t('ffy', { year })}
+            </h3>
+            <table className="table-cms table-fixed">
               <thead>
                 <tr>
                   <th
-                    rowSpan="2"
-                    style={{ width: 140 }}
                     id="act_qbudget_null1"
                   />
-                  {years.map((year, i) => (
-                    <th
-                      key={year}
-                      className={`center ${color(i)}`}
-                      colSpan="5"
-                      id={`act_qbudget_fy${year}`}
-                    >
-                      {t('ffy', { year })}
-                    </th>
-                  ))}
-                  <th rowSpan="2" className="center" id="act_qbudget_total">
-                    {t('table.total')}
-                  </th>
-                </tr>
-                <tr>
-                  {years.map((year, i) => (
-                    <Fragment key={year}>
-                      {QUARTERS.map(q => (
-                        <th
-                          key={q}
-                          className="center"
-                          id={`act_qbudget_fy${year}_q${q}`}
-                        >
-                          {t('table.quarter', { q })}
-                        </th>
-                      ))}
+                  <Fragment key={year}>
+                    {QUARTERS.map(q => (
                       <th
-                        className={`right-align ${color(i)}-light`}
-                        id={`act_qbudget_fy${year}_subtotal`}
+                        key={q}
+                        className="center"
+                        id={`act_qbudget_fy${year}_q${q}`}
                       >
-                        {t('table.subtotal')}
+                        {t('table.quarter', { q })}
                       </th>
-                    </Fragment>
-                  ))}
+                    ))}
+                    <th
+                      className="right-align"
+                      id={`act_qbudget_fy${year}_subtotal`}
+                    >
+                      {t('table.subtotal')}
+                    </th>
+                  </Fragment>
                 </tr>
               </thead>
               <tbody>
@@ -151,114 +80,135 @@ class CostAllocateFFPQuarterly extends Component {
                       <td rowSpan="2" headers="act_qbudget_null1">
                         {EXPENSE_NAME_DISPLAY[name]}
                       </td>
-                      {years.map((year, i) => (
-                        <Fragment key={year}>
-                          {QUARTERS.map(q => (
-                            <td
-                              key={q}
-                              className="mono right-align"
-                              headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
-                            >
-                              <PercentInput
-                                name={`ffp-${aKey}-${year}-${q}-${name}`}
-                                label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
-                                wrapperClass="m0"
-                                className="m0 input input-condensed mono right-align"
-                                onChange={this.handleChange(year, q, name)}
-                                value={
-                                  quarterlyFFP[year][q][name].percent * 100
-                                }
-                                hideLabel
-                              />
-                            </td>
-                          ))}
+                      <Fragment key={year}>
+                        {QUARTERS.map(q => (
                           <td
-                            className={`bold mono right-align ${color(
-                              i
-                            )}-light`}
-                            headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
+                            key={q}
+                            className="mono right-align"
+                            headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                           >
-                            {formatPerc(
-                              quarterlyFFP[year].subtotal[name].percent
-                            )}
+                            <PercentInput
+                              name={`ffp-${aKey}-${year}-${q}-${name}`}
+                              label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
+                              wrapperClass="m0"
+                              className="m0 input input-condensed mono right-align"
+                              onChange={this.handleChange(year, q, name)}
+                              value={
+                                quarterlyFFP[year][q][name].percent * 100
+                              }
+                              hideLabel
+                            />
                           </td>
-                        </Fragment>
-                      ))}
-                      <td
-                        rowSpan="2"
-                        className="bold mono right-align bg-gray-light"
-                        headers="act_qbudget_total"
-                      >
-                        <Dollars>{quarterlyFFP.total[name]}</Dollars>
-                      </td>
+                        ))}
+                        <td
+                          className="bold mono right-align"
+                          headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
+                        >
+                          {formatPerc(
+                            quarterlyFFP[year].subtotal[name].percent
+                          )}
+                        </td>
+                      </Fragment>
                     </tr>
                     <tr>
-                      {years.map((year, i) => (
-                        <Fragment key={year}>
-                          {QUARTERS.map(q => (
-                            <td
-                              className={`mono right-align ${
-                                name === 'combined' ? `${color(i)}-light` : ''
-                              }`}
-                              key={q}
-                              headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
-                            >
-                              <Dollars>
-                                {quarterlyFFP[year][q][name].dollars}
-                              </Dollars>
-                            </td>
-                          ))}
+                      <Fragment key={year}>
+                        {QUARTERS.map(q => (
                           <td
-                            className={`bold mono right-align ${color(
-                              i
-                            )}-light`}
-                            headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
+                            className={`mono right-align ${
+                              name === 'combined' ? '' : ''
+                            }`}
+                            key={q}
+                            headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                           >
                             <Dollars>
                               {quarterlyFFP[year].subtotal[name].dollars}
                             </Dollars>
                           </td>
-                        </Fragment>
-                      ))}
+                        ))}
+                        <td
+                          className="bold mono right-align"
+                          headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
+                        >
+                          <Dollars>
+                            {quarterlyFFP[year].subtotal[name].dollars}
+                          </Dollars>
+                        </td>
+                      </Fragment>
                     </tr>
                   </Fragment>
                 ))}
                 <tr className="bold">
                   <td>{EXPENSE_NAME_DISPLAY.combined}</td>
-                  {years.map((year, i) => (
-                    <Fragment key={year}>
-                      {QUARTERS.map(q => (
-                        <td
-                          className={`mono right-align ${color(i)}-light`}
-                          key={q}
-                          headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
-                        >
-                          <Dollars>
-                            {quarterlyFFP[year][q].combined.dollars}
-                          </Dollars>
-                        </td>
-                      ))}
+                  <Fragment key={year}>
+                    {QUARTERS.map(q => (
                       <td
-                        className={`bold mono right-align ${color(i)}-light`}
-                        headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
+                        className="mono right-align"
+                        key={q}
+                        headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                       >
                         <Dollars>
                           {quarterlyFFP[year].subtotal.combined.dollars}
                         </Dollars>
                       </td>
-                    </Fragment>
-                  ))}
-                  <td
-                    className="bold mono right-align bg-gray-light"
-                    headers="act_qbudget_total"
-                  >
-                    <Dollars>{quarterlyFFP.total.combined}</Dollars>
-                  </td>
+                    ))}
+                    <td
+                      className="bold mono right-align"
+                      headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
+                    >
+                      <Dollars>
+                        {quarterlyFFP[year].subtotal.combined.dollars}
+                      </Dollars>
+                    </td>
+                  </Fragment>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
+        ))}
+        <h3>
+          {`Total FFY ${years[0]} - ${years[years.length-1]}`}
+        </h3>
+        <table className="table-cms table-fixed table-fit-contents">
+          <thead>
+            <tr>
+              <th/>
+              <th>
+                Total
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {['state', 'contractors'].map(name => (
+              <Fragment key={name}>
+                <tr
+                  key={name}
+                  className={`align-middle ${
+                    name === 'combined' ? 'bold' : ''
+                  }`}
+                >
+                  <th>
+                    {EXPENSE_NAME_DISPLAY[name]}
+                  </th>
+                  <td
+                    className="bold mono right-align"
+                  >
+                    <Dollars>{quarterlyFFP.total[name]}</Dollars>
+                  </td>
+                </tr>
+              </Fragment>
+            ))}
+            <tr>
+              <th>
+                {EXPENSE_NAME_DISPLAY.combined}
+              </th>
+              <td
+                className="bold mono right-align"
+              >
+                <Dollars>{quarterlyFFP.total.combined}</Dollars>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   }
