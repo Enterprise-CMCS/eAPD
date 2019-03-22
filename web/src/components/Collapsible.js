@@ -33,7 +33,7 @@ class Collapsible extends Component {
     const replaceSpaces = / /g;
     const removeColon = /:/g;
     const removeCarat = /›/g;
-    const slug = `${title.replace(replaceSpaces, '-').replace(removeColon, '').replace(removeCarat, '').toLowerCase()}`;
+    const slug = title.replace(replaceSpaces, '-').replace(removeColon, '').replace(removeCarat, '').toLowerCase();
     const contentId = `collapsible-${slug}`;
 
     let btnClass = deline`
