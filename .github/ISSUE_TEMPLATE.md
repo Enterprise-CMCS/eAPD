@@ -1,11 +1,9 @@
-Describe the task here...
+Describe the task here and link or add dependencies to any applicable issues...
 
 ### This task is done when...
  - [ ] criteria 1
  - [ ] criteria 2
  
-*Don't forget to add the LABEL and MILESTONE before submitting.
+*Add a LABEL (design, dev, compliance, BUG, etc) before submitting.
 
-*If the issue is for the CURRENT SPRINT, add it to the PROJECT.
-
-*If the issue is a BUG, or FUTURE ENHANCEMENT, do not add it to the PROJECT
+*After submitting, the issue will go into the _unprioritized pipeline_ for PRODUCT to prioritize.
