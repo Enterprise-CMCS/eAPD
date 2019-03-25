@@ -6,4 +6,4 @@ Describe the task here and link or add dependencies to any applicable issues...
  
 *Add a LABEL (design, dev, compliance, BUG, etc) before submitting.
 
-*After submitting, the issue will go into the _unprioritized pipeline_ for PRODUCT to prioritize.
+*If the issue is needed to complete prioritized work for the CURRENT SPRINT, add it to the "This Sprint" pipeline. Otherwise, all other issues will be automatically added to the _unprioritized pipeline_ for PRODUCT to prioritize.
