@@ -3,6 +3,7 @@
 exports[`executive summary component renders correctly 1`] = `
 <Section
   id="executive-summary"
+  isNumbered={true}
   resource="executiveSummary"
 >
   <Subsection

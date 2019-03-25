@@ -22,7 +22,7 @@ class ListItem extends Component {
 
     return (
       <Fragment>
-        <div className="mb1 h5 flex justify-between">
+        <div className="mb1 h5 flex justify-between visibility--screen">
           <button
             type="button"
             className={`btn btn-no-focus p1 flex-auto left-align bg-blue-light ${
@@ -43,6 +43,17 @@ class ListItem extends Component {
               ✗
             </button>
           )}
+        </div>
+        <div className="mb1 h5 flex justify-between visibility--print">
+          <button
+            type="button"
+            className="btn btn-no-focus p1 flex-auto left-align bg-blue-light rounded"
+            onClick={this.toggle}
+          >
+            <header className="flex items-center justify-between">
+              {header}
+            </header>
+          </button>
         </div>
         <div className={childClass}>{children}</div>
       </Fragment>
