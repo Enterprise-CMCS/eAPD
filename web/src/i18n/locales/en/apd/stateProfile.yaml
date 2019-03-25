@@ -19,7 +19,7 @@ directorAndAddress:
       state: State
       zip: ZIP
 keyPersonnel:
-  title: Key Personnel and Project Management Planning
+  title: Key Personnel and Program Management Planning
   instruction:
     short: >-
       Identify key state staff who will be involved in all activities listed in
@@ -29,8 +29,9 @@ keyPersonnel:
       time commitment, and cost, where applicable.
     helpText: >-
       Key personnel are individuals involved with all activities within this
-      APD, or are involved with governance, coordination, stakeholder
-      decision-making, oversight, and/or project performance. Individuals whose responsibilities
+      APD, or are directly involved with governance, coordination, stakeholder
+      decision-making, oversight, and/or performance of the activities as they affect
+      the state’s Medicaid program. Individuals whose responsibilities
       apply only to specific activities should be listed individually under Program
       Activities instead. CMS seeks to ensure  state teams are adequately resourced,
       but does not require states to provide key vendor personnel to satisfy this
@@ -40,9 +41,9 @@ keyPersonnel:
     name: Name
     position: Role
     email: Email
-    percentTime: Percent commitment to project
+    percentTime: Percent commitment to program
     primary: 'This person is the primary APD point of contact:'
-    hasCosts: 'This person has costs directly attributable to the project:'
+    hasCosts: 'This person has costs directly attributable to the program:'
     addButton:
       zero: Add key personnel
       one: Add another person

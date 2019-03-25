@@ -6,7 +6,7 @@ import Instruction from './Instruction';
 import { t } from '../i18n';
 
 const SectionTitle = ({ children }) => (
-  <h2 className="mt1 mb2 h1 sm-h0 teal light">{children}</h2>
+  <h2>{children}</h2>
 );
 
 SectionTitle.propTypes = {
@@ -19,16 +19,17 @@ SectionDesc.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const Section = ({ children, id, resource }) => {
+const Section = ({ children, id, isNumbered, resource }) => {
   const title = t([resource, 'title'], { defaultValue: false });
-  const subheader = t([resource, 'subheader'], { defaultValue: false });
   const helptext = t([resource, 'helpText'], { defaultValue: false });
 
   return (
-    <section id={id} className="py2 border-bottom border-grey border-width-3">
-      {title && <SectionTitle>{title}</SectionTitle>}
-      {subheader && <div>{subheader}</div>}
-      {helptext && <SectionDesc>{helptext}</SectionDesc>}
+    <section
+      id={id}
+      className={isNumbered && 'numbered-section'}
+    >
+      <h2 className="ds-h2">{title}</h2>
+      <span className="ds-text--lead">{helptext}</span>
       {children}
     </section>
   );
@@ -37,12 +38,14 @@ const Section = ({ children, id, resource }) => {
 Section.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.string,
-  resource: PropTypes.string
+  resource: PropTypes.string,
+  isNumbered: PropTypes.bool
 };
 
 Section.defaultProps = {
   id: null,
-  resource: null
+  resource: null,
+  isNumbered: false
 };
 
 const Subsection = ({ children, id, nested, open, resource }) => {

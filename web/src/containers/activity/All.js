@@ -10,7 +10,11 @@ import { Section, Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
 const All = ({ activityKeys, addActivity }) => (
-  <Section id="activities" resource="activities">
+  <Section
+    isNumbered
+    id="activities"
+    resource="activities"
+  >
     <Subsection id="activities-list" resource="activities.list" open>
       {activityKeys.length === 0 ? (
         <div className="mb2 p1 h6 alert">
@@ -23,7 +27,9 @@ const All = ({ activityKeys, addActivity }) => (
           ))}
         </div>
       )}
-      <Btn onClick={addActivity}>{t('activities.addActivityButtonText')}</Btn>
+      <Btn extraCss="visibility--screen" onClick={addActivity}>
+        {t('activities.addActivityButtonText')}
+      </Btn>
     </Subsection>
     {activityKeys.map((key, idx) => (
       <EntryDetails key={key} aKey={key} num={idx + 1} />
