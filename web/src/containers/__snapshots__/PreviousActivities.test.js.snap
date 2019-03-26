@@ -1,47 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`previous activities component renders correctly if data is not loaded 1`] = `
-<Section
-  id="prev-activities"
-  isNumbered={true}
-  resource="previousActivities"
+<Connect(ConnectedWaypoint)
+  id="prev-activities-overview"
 >
-  <Subsection
-    id="prev-activities-outline"
-    nested={false}
-    resource="previousActivities.outline"
+  <Section
+    id="prev-activities"
+    isNumbered={true}
+    resource="previousActivities"
   >
-    <div
-      className="mb-tiny bold"
-    >
-      Previous Activities Summary
-    </div>
-    <RichText
-      content="previous"
-      editorClassName="rte-textarea-l"
-      onSync={[Function]}
+    <Connect(ConnectedWaypoint)
+      id="prev-activities-outline"
     />
-  </Subsection>
-  <Subsection
-    id="prev-activities-table"
-    nested={false}
-    resource="previousActivities.actualExpenses"
-  >
-    <div
-      className="mb3"
+    <Subsection
+      id="prev-activities-outline"
+      nested={false}
+      resource="previousActivities.outline"
     >
-      <Connect(ApdPreviousActivityTable) />
-    </div>
-    <div
-      className="mb3"
+      <div
+        className="mb-tiny bold"
+      >
+        Previous Activities Summary
+      </div>
+      <RichText
+        content="previous"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="prev-activities-table"
+    />
+    <Subsection
+      id="prev-activities-table"
+      nested={false}
+      resource="previousActivities.actualExpenses"
     >
-      <Connect(ApdPreviousActivityTableMMIS) />
-    </div>
-    <div
-      className="mb3"
-    >
-      <Connect(ApdPreviousActivityTableMMIS) />
-    </div>
-  </Subsection>
-</Section>
+      <div
+        className="mb3"
+      >
+        <Connect(ApdPreviousActivityTable) />
+      </div>
+      <div
+        className="mb3"
+      >
+        <Connect(ApdPreviousActivityTableMMIS) />
+      </div>
+      <div
+        className="mb3"
+      >
+        <Connect(ApdPreviousActivityTableMMIS) />
+      </div>
+    </Subsection>
+  </Section>
+</Connect(ConnectedWaypoint)>
 `;
