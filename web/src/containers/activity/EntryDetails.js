@@ -47,7 +47,6 @@ class EntryDetails extends Component {
       <Collapsible
         id={`activity-${aKey}`}
         title={title}
-        bgColor="blue-light"
         btnBgColor="blue"
         btnColor="white"
         open={expanded}
