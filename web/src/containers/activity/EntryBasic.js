@@ -8,6 +8,7 @@ import {
 } from '../../actions/activities';
 import DeleteButton from '../../components/DeleteConfirm';
 import { Input } from '../../components/Inputs';
+import { selectActivityByKey } from '../../reducers/activities.selectors';
 import { ACTIVITY_FUNDING_SOURCES } from '../../util';
 
 class EntryBasic extends Component {
@@ -70,8 +71,8 @@ EntryBasic.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byKey } }, props) => ({
-  activity: byKey[props.aKey]
+const mapStateToProps = (state, props) => ({
+  activity: selectActivityByKey(state, props)
 });
 
 const mapDispatchToProps = {

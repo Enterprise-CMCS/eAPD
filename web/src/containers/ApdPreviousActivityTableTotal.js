@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Dollars from '../components/Dollars';
 import { TABLE_HEADERS } from '../constants';
+import { selectPreviousActivityExpensesTotals } from '../reducers/apd.selectors';
 
 const ApdPreviousActivityTableMMIS = ({ totals }) => {
   const years = Object.keys(totals);
@@ -76,36 +77,9 @@ ApdPreviousActivityTableMMIS.propTypes = {
   totals: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({
-  apd: {
-    data: { previousActivityExpenses }
-  }
-}) => {
-  const totals = Object.entries(previousActivityExpenses).reduce(
-    (acc, [ffy, expenses]) => ({
-      ...acc,
-      [ffy]: {
-        actual:
-          expenses.hithie.federalActual +
-          [90, 75, 50].reduce(
-            (sum, ffp) => sum + expenses.mmis[ffp].federalActual,
-            0
-          ),
-        approved:
-          expenses.hithie.totalApproved * 0.9 +
-          [90, 75, 50].reduce(
-            (sum, ffp) => sum + (expenses.mmis[ffp].totalApproved * ffp) / 100,
-            0
-          )
-      }
-    }),
-    {}
-  );
-
-  return {
-    totals
-  };
-};
+const mapStateToProps = state => ({
+  totals: selectPreviousActivityExpensesTotals(state)
+});
 
 export default connect(
   mapStateToProps,
