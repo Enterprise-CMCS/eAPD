@@ -9,7 +9,6 @@ exports[`executive summary component renders correctly 1`] = `
   <Subsection
     id="executive-summary-overview"
     nested={false}
-    open={false}
     resource="executiveSummary.summary"
   >
     <div
@@ -240,7 +239,6 @@ exports[`executive summary component renders correctly 1`] = `
   <Subsection
     id="executive-summary-budget-table"
     nested={false}
-    open={false}
     resource="executiveSummary.budgetTable"
   >
     <Connect(ExecutiveSummaryBudget) />
