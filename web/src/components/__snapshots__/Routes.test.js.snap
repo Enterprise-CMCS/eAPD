@@ -34,6 +34,11 @@ exports[`Routes component renders correctly 1`] = `
     key="/admin/edit-account"
     path="/admin/edit-account"
   />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    key="/me"
+    path="/me"
+  />
   <Route
     component={[Function]}
     key="no-match"
