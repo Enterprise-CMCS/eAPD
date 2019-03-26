@@ -252,6 +252,7 @@ workflows:
   web:
     jobs:
       - prepare dependencies cache
+      - check docker-compose image tags
       - web dependency vulnerability scan:
           requires:
             - prepare dependencies cache
