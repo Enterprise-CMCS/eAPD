@@ -6,11 +6,15 @@ import { t } from '../i18n';
 
 const Header = ({props}) => {
   return (
-    <header className="clearfix px2 py1 bg-white">
-      <div className="left">
-        <Link to="/" className="btn px0 bold caps">
-          {t('titleBasic')}
-        </Link>
+    <header className="header__slim">
+      <div className="ds-l-container">
+        <div className="ds-l-row">
+          <div className="ds-l-col">
+            <Link to="/" className="site-title">
+              {t('titleBasic')}
+            </Link>
+          </div>
+        </div>
       </div>
     </header>
   );
