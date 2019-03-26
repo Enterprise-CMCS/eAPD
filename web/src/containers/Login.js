@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { login } from '../actions/auth';
 import Btn from '../components/Btn';
@@ -35,7 +35,7 @@ class Login extends Component {
     }
 
     return (
-      <Fragment>
+      <div className="card--container">
         <Header />
         <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded">
           <h1 className="mt0 h2">Please log in.</h1>
@@ -72,7 +72,7 @@ class Login extends Component {
             </Btn>
           </form>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }

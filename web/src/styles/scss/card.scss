@@ -1,5 +1,11 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
+.card--container {
+  background-color: $color-gray-lightest;
+  height: 100%;
+  min-height: 100vh;
+}
+
 .card {
   .ds-l-col--1:first-child {
     border-top-left-radius: $border-radius;
