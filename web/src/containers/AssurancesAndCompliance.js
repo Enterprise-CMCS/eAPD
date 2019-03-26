@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Waypoint from './ConnectedWaypoint';
 import { updateApd as updateApdAction } from '../actions/apd';
 import { Textarea } from '../components/Inputs';
 import Btn from '../components/Btn';
@@ -55,67 +56,67 @@ class AssurancesAndCompliance extends Component {
     const { sections: apdSections } = this.props;
 
     return (
-      <Section
-        isNumbered
-        id="assurances-compliance"
-        resource="assurancesAndCompliance"
-        hasOverview={false}
-      >
-        <Subsection
-          hasWaypoint={false}
-          id="assurances-compliance-fed-citations"
-          resource="assurancesAndCompliance.citations"
+      <Waypoint id="assurances-compliance">
+        <Section
+          isNumbered
+          id="assurances-compliance"
+          resource="assurancesAndCompliance"
         >
-          {Object.entries(regLinks).map(([name, regulations]) => (
-            <div key={name} className="mb3">
-              <h3>{t(`assurancesAndCompliance.headings.${name}`)}</h3>
-              {apdSections[name].map(
-                ({ title, checked, explanation }, index) => (
-                  <div key={title} className="mt2">
-                    <div className="mb1 flex items-end justify-between">
-                      <LinkOrText link={regulations[title]} title={title} />
-                      <div>
-                        <Btn
-                          kind="outline"
-                          size="small"
-                          extraCss={`h5 ${checked ? 'bg-black white' : ''}`}
-                          onClick={this.handleCheckChange(name, index, true)}
-                        >
-                          {yes}
-                        </Btn>{' '}
-                        <Btn
-                          kind="outline"
-                          size="small"
-                          extraCss={`h5 ${checked ? '' : 'bg-black white'}`}
-                          onClick={this.handleCheckChange(name, index, false)}
-                        >
-                          {no}
-                        </Btn>
+          <Subsection
+            id="assurances-compliance-fed-citations"
+            resource="assurancesAndCompliance.citations"
+          >
+            {Object.entries(regLinks).map(([name, regulations]) => (
+              <div key={name} className="mb3">
+                <h3>{t(`assurancesAndCompliance.headings.${name}`)}</h3>
+                {apdSections[name].map(
+                  ({ title, checked, explanation }, index) => (
+                    <div key={title} className="mt2">
+                      <div className="mb1 flex items-end justify-between">
+                        <LinkOrText link={regulations[title]} title={title} />
+                        <div>
+                          <Btn
+                            kind="outline"
+                            size="small"
+                            extraCss={`h5 ${checked ? 'bg-black white' : ''}`}
+                            onClick={this.handleCheckChange(name, index, true)}
+                          >
+                            {yes}
+                          </Btn>{' '}
+                          <Btn
+                            kind="outline"
+                            size="small"
+                            extraCss={`h5 ${checked ? '' : 'bg-black white'}`}
+                            onClick={this.handleCheckChange(name, index, false)}
+                          >
+                            {no}
+                          </Btn>
+                        </div>
                       </div>
+                      {checked ? (
+                        <hr className="my2 border-grey" />
+                      ) : (
+                        <div>
+                          <Textarea
+                            name={namify(name, title)}
+                            label={`Explanation for why you do not comply with ${title}`}
+                            placeholder="Please explain..."
+                            hideLabel
+                            value={explanation}
+                            onChange={this.handleExplanationChange(name, index)}
+                            className="m0 textarea textarea-sm"
+                            rows="3"
+                          />
+                        </div>
+                      )}
                     </div>
-                    {checked ? (
-                      <hr className="my2 border-grey" />
-                    ) : (
-                      <div>
-                        <Textarea
-                          name={namify(name, title)}
-                          label={`Explanation for why you do not comply with ${title}`}
-                          placeholder="Please explain..."
-                          hideLabel
-                          value={explanation}
-                          onChange={this.handleExplanationChange(name, index)}
-                          className="m0 textarea textarea-sm"
-                          rows="3"
-                        />
-                      </div>
-                    )}
-                  </div>
-                )
-              )}
-            </div>
-          ))}
-        </Subsection>
-      </Section>
+                  )
+                )}
+              </div>
+            ))}
+          </Subsection>
+        </Section>
+      </Waypoint>
     );
   }
 }

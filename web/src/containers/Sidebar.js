@@ -13,9 +13,6 @@ import { selectActivitiesSidebar } from '../reducers/activities.selectors';
 import { selectActiveSection } from '../reducers/navigation';
 
 class Sidebar extends Component {
-  state = { selectedId: 'apd-state-profile-overview' };
-
-  // handleSelectClick = id => this.setState({ selectedId: id });
   handleSelectClick = id => {
     const { jumpTo: action } = this.props;
     action(id);
@@ -232,6 +229,7 @@ class Sidebar extends Component {
 Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
   activeSection: PropTypes.string.isRequired,
+  jumpTo: PropTypes.func.isRequired,
   place: PropTypes.object.isRequired,
   printApd: PropTypes.func.isRequired,
   saveApdToAPI: PropTypes.func.isRequired

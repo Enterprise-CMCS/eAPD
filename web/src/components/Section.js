@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { Waypoint } from 'react-waypoint';
+import React, { Fragment } from 'react';
 
 import Instruction from './Instruction';
-import { scrollTo } from '../actions/navigation';
 import { t } from '../i18n';
 
 const SectionTitle = ({ children }) => <h2>{children}</h2>;
@@ -19,107 +16,65 @@ SectionDesc.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-class SectionPlain extends Component {
-  hitWaypoint = id => () => {
-    const { hasOverview, scrollTo: action } = this.props;
-    action(hasOverview ? `${id}-overview` : id);
-  };
+const Section = ({ children, id, isNumbered, resource }) => {
+  const title = t([resource, 'title'], { defaultValue: false });
+  const helptext = t([resource, 'helpText'], { defaultValue: false });
 
-  render() {
-    const { children, id, isNumbered, resource } = this.props;
-    const title = t([resource, 'title'], { defaultValue: false });
-    const helptext = t([resource, 'helpText'], { defaultValue: false });
-
-    return (
-      <section id={id} className={isNumbered && 'numbered-section'}>
-        <Waypoint onEnter={this.hitWaypoint(id)} bottomOffset="90%" />
-        <h2 className="ds-h2">{title}</h2>
-        <span className="ds-text--lead">{helptext}</span>
-        {children}
-      </section>
-    );
-  }
-}
-
-SectionPlain.propTypes = {
-  children: PropTypes.node.isRequired,
-  hasOverview: PropTypes.bool,
-  id: PropTypes.string,
-  resource: PropTypes.string,
-  isNumbered: PropTypes.bool,
-  scrollTo: PropTypes.func.isRequired
+  return (
+    <section id={id} className={isNumbered && 'numbered-section'}>
+      <h2 className="ds-h2">{title}</h2>
+      <span className="ds-text--lead">{helptext}</span>
+      {children}
+    </section>
+  );
 };
 
-SectionPlain.defaultProps = {
-  hasOverview: true,
+Section.propTypes = {
+  children: PropTypes.node.isRequired,
+  id: PropTypes.string,
+  resource: PropTypes.string,
+  isNumbered: PropTypes.bool
+};
+
+Section.defaultProps = {
   id: null,
   resource: null,
   isNumbered: false
 };
 
-class SubsectionPlain extends Component {
-  hitWaypoint = id => () => {
-    const { hasWaypoint, scrollTo: action } = this.props;
-    if (hasWaypoint) {
-      action(id);
-    }
-  };
+const Subsection = ({ children, id, nested, resource }) => {
+  const title = t([resource, 'title'], { defaultValue: '' });
 
-  render() {
-    const { children, id, nested, resource } = this.props;
-    const title = t([resource, 'title'], { defaultValue: '' });
+  return (
+    <Fragment>
+      {!nested && (
+        <h3 id={id} className="subsection--title ds-h3">
+          {title}
+        </h3>
+      )}
+      {nested && (
+        <h4 id={id} className="ds-h3">
+          {title}
+        </h4>
+      )}
+      <Instruction source={`${resource}.instruction`} />
+      {children}
+    </Fragment>
+  );
+};
 
-    return (
-      <Fragment>
-        <Waypoint onEnter={this.hitWaypoint(id)} bottomOffset="90%" />
-        {!nested &&
-          <h3
-            id={id}
-            className='subsection--title ds-h3'
-          >
-            {title}
-          </h3>
-        }
-        {nested &&
-          <h4
-            id={id}
-            className='ds-h3'
-          >
-            {title}
-          </h4>
-        }
-        <Instruction source={`${resource}.instruction`} />
-        {children}
-      </Fragment>
-    );
-  }
-}
-
-SubsectionPlain.propTypes = {
+Subsection.propTypes = {
   children: PropTypes.node.isRequired,
-  hasWaypoint: PropTypes.bool,
   id: PropTypes.string,
   nested: PropTypes.bool,
-  resource: PropTypes.string,
-  scrollTo: PropTypes.func.isRequired
+  resource: PropTypes.string
 };
 
-SubsectionPlain.defaultProps = {
+Subsection.defaultProps = {
   resource: null,
-  hasWaypoint: true,
   id: null,
-  nested: false,
+  nested: false
 };
-
-const Section = connect(
-  null,
-  { scrollTo }
-)(SectionPlain);
-
-const Subsection = connect(
-  null,
-  { scrollTo }
-)(SubsectionPlain);
 
 export default Section;
 

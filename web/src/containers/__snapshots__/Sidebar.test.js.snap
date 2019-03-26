@@ -168,16 +168,16 @@ exports[`Sidebar component renders correctly 1`] = `
               "id": "executive-summary",
               "items": Array [
                 Object {
-                  "id": "exec-summary-overview",
+                  "id": "executive-summary-overview",
                   "label": "Overview",
                   "onClick": [Function],
                   "url": "#executive-summary",
                 },
                 Object {
-                  "id": "executive-summary-overview",
+                  "id": "executive-summary-summary",
                   "label": "Executive Summary of Activities",
                   "onClick": [Function],
-                  "url": "#executive-summary-overview",
+                  "url": "#executive-summary-summary",
                 },
                 Object {
                   "id": "executive-summary-budget-table",
@@ -190,7 +190,7 @@ exports[`Sidebar component renders correctly 1`] = `
             },
           ]
         }
-        selectedId="apd-state-profile-overview"
+        selectedId="some section"
       />
       <div
         className="ds-u-margin-top--2"
