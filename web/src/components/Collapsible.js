@@ -1,5 +1,4 @@
 import deline from 'deline';
-import kebabCase from 'lodash.kebabcase';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -31,7 +30,11 @@ class Collapsible extends Component {
     const { open: openState } = this.state;
 
     const isOpen = onChange ? openProp : openState;
-    const contentId = `collapsible-${kebabCase(title)}`;
+    const replaceSpaces = / /g;
+    const removeColon = /:/g;
+    const removeCarat = /›/g;
+    const slug = title.replace(replaceSpaces, '-').replace(removeColon, '').replace(removeCarat, '').toLowerCase();
+    const contentId = `collapsible-${slug}`;
 
     let btnClass = deline`
       btn btn-collapse block col-12 py2 sm-px3 h3 sm-h2 line-height-1 left-align
@@ -47,7 +50,7 @@ class Collapsible extends Component {
     `;
 
     return (
-      <div id={id} className={`mb3 bg-${bgColor} rounded shadow accordian`}>
+      <div id={id} className={`mt3 mb3 bg-${bgColor} rounded shadow accordian`}>
         <button
           type="button"
           className={btnClass}

@@ -9,7 +9,6 @@ exports[`ProposedBudget component renders correctly 1`] = `
   <Subsection
     id="budget-summary-table"
     nested={false}
-    open={false}
     resource="proposedBudget.summaryBudget"
   >
     <Connect(BudgetSummary) />
@@ -17,7 +16,6 @@ exports[`ProposedBudget component renders correctly 1`] = `
   <Subsection
     id="budget-federal-by-quarter"
     nested={false}
-    open={false}
     resource="proposedBudget.quarterlyBudget"
   >
     <Connect(QuarterlyBudgetSummary) />
@@ -25,7 +23,6 @@ exports[`ProposedBudget component renders correctly 1`] = `
   <Subsection
     id="budget-incentive-by-quarter"
     nested={false}
-    open={false}
     resource="proposedBudget.paymentsByFFYQuarter"
   >
     <Connect(IncentivePayments) />
