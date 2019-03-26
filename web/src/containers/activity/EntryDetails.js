@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Waypoint } from 'react-waypoint';
 
 import ContractorResources from './ContractorResources';
 import CostAllocate from './CostAllocate';
@@ -13,6 +14,7 @@ import {
   removeActivity as removeActivityAction,
   toggleActivitySection
 } from '../../actions/activities';
+import { scrollTo } from '../../actions/navigation';
 import Collapsible from '../../components/Collapsible';
 import DeleteButton from '../../components/DeleteConfirm';
 import { t } from '../../i18n';
@@ -40,52 +42,62 @@ class EntryDetails extends Component {
     toggleSection(key);
   };
 
+  hitWaypoint = id => () => {
+    const { scrollTo: action } = this.props;
+    action(id);
+  };
+
   render() {
-    const { aKey, expanded, num, removeActivity, title } = this.props;
+    const { activity, aKey, expanded, num, removeActivity } = this.props;
+    const title = makeTitle(activity, num);
 
     return (
-      <Collapsible
-        id={`activity-${aKey}`}
-        title={title}
-        bgColor="blue-light"
-        btnBgColor="blue"
-        btnColor="white"
-        open={expanded}
-        onChange={this.handleChange(aKey)}
-      >
-        {components.map((Comp, i) => (
-          <Comp key={i} aKey={aKey} />
-        ))}
-        {num > 1 && (
-          <DeleteButton
-            remove={() => removeActivity(aKey)}
-            resource="activities.delete"
-          />
-        )}
-      </Collapsible>
+      <Fragment>
+        <Waypoint onEnter={this.hitWaypoint(aKey)} bottomOffset="90%" />
+        <Collapsible
+          id={`activity-${aKey}`}
+          title={title}
+          bgColor="blue-light"
+          btnBgColor="blue"
+          btnColor="white"
+          open={expanded}
+          onChange={this.handleChange(aKey)}
+        >
+          {components.map((Comp, i) => (
+            <Comp key={i} aKey={aKey} />
+          ))}
+          {num > 1 && (
+            <DeleteButton
+              remove={() => removeActivity(aKey)}
+              resource="activities.delete"
+            />
+          )}
+        </Collapsible>
+      </Fragment>
     );
   }
 }
 
 EntryDetails.propTypes = {
+  activity: PropTypes.object.isRequired,
   aKey: PropTypes.string.isRequired,
   expanded: PropTypes.bool.isRequired,
   num: PropTypes.number.isRequired,
   removeActivity: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  scrollTo: PropTypes.func.isRequired,
   toggleSection: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = ({ activities: { byKey } }, { aKey, num }) => {
+export const mapStateToProps = ({ activities: { byKey } }, { aKey }) => {
   const activity = byKey[aKey];
   const { expanded } = activity.meta;
-  const title = `${t('activities.header')} › ${makeTitle(activity, num)}`;
 
-  return { expanded, title };
+  return { activity, expanded };
 };
 
 export const mapDispatchToProps = {
   removeActivity: removeActivityAction,
+  scrollTo,
   toggleSection: toggleActivitySection
 };
 

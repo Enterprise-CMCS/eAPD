@@ -59,8 +59,10 @@ class AssurancesAndCompliance extends Component {
         isNumbered
         id="assurances-compliance"
         resource="assurancesAndCompliance"
+        hasOverview={false}
       >
         <Subsection
+          hasWaypoint={false}
           id="assurances-compliance-fed-citations"
           resource="assurancesAndCompliance.citations"
         >

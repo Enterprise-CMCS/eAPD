@@ -5,14 +5,20 @@ import ReactTable from 'react-table';
 
 import { t } from '../i18n';
 import { Section, Subsection } from '../components/Section';
+import { selectActivitySchedule } from '../reducers/activities.selectors';
 
 const ScheduleSummary = ({ tableData }) => (
   <Section
+    hasOverview={false}
     isNumbered
     id="schedule-summary"
     resource="scheduleSummary"
   >
-    <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
+    <Subsection
+      hasWaypoint={false}
+      id="schedule-summary-table"
+      resource="scheduleSummary.main"
+    >
       {tableData.data.length === 0 ? (
         <div className="p1 h6 alert">{t('scheduleSummary.noDataMessage')}</div>
       ) : (
@@ -38,18 +44,8 @@ ScheduleSummary.propTypes = {
 
 const Cell = row => row.value || 'N/A';
 
-const mapStateToProps = ({ activities }) => {
-  const data = [];
-
-  Object.values(activities.byKey).forEach(activity => {
-    activity.schedule.forEach(milestone => {
-      data.push({
-        ...milestone,
-        activityName: activity.name,
-        startDate: activity.plannedStartDate
-      });
-    });
-  });
+const mapStateToProps = state => {
+  const data = selectActivitySchedule(state);
 
   const columns = [
     {

@@ -6,13 +6,20 @@ import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/
 
 import { t } from '../i18n';
 import { saveApd } from '../actions/apd';
+import { jumpTo } from '../actions/navigation';
 import { printApd } from '../actions/print';
 import Btn from '../components/Btn';
+import { selectActivitiesSidebar } from '../reducers/activities.selectors';
+import { selectActiveSection } from '../reducers/navigation';
 
 class Sidebar extends Component {
   state = { selectedId: 'apd-state-profile-overview' };
 
-  handleSelectClick = id => this.setState({ selectedId: id });
+  // handleSelectClick = id => this.setState({ selectedId: id });
+  handleSelectClick = id => {
+    const { jumpTo: action } = this.props;
+    action(id);
+  };
 
   createActivityItems = activities => {
     const activityItems = activities.map((a, i) => ({
@@ -162,14 +169,14 @@ class Sidebar extends Component {
         defaultCollapsed: true,
         items: [
           {
-            id: 'exec-summary-overview',
+            id: 'executive-summary-overview',
             url: '#executive-summary',
             label: 'Overview',
             onClick: (evt, id) => this.handleSelectClick(id)
           },
           {
-            id: 'executive-summary-overview',
-            url: '#executive-summary-overview',
+            id: 'executive-summary-summary',
+            url: '#executive-summary-summary',
             label: t('executiveSummary.summary.title'),
             onClick: (evt, id) => this.handleSelectClick(id)
           },
@@ -183,7 +190,7 @@ class Sidebar extends Component {
       }
     ];
 
-    const { selectedId } = this.state;
+    const { activeSection } = this.props;
 
     return (
       <div className="ds-l-col--3 bg-white">
@@ -202,7 +209,7 @@ class Sidebar extends Component {
                 {t('title', { year: '2018' })}
               </h1>
             </div>
-            <VerticalNav selectedId={selectedId} items={links} />
+            <VerticalNav selectedId={activeSection} items={links} />
             <div className="ds-u-margin-top--2">
               <Btn onClick={() => saveApdToAPI()}>
                 {t('sidebar.saveApdButtonText')}
@@ -224,20 +231,19 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
+  activeSection: PropTypes.string.isRequired,
   place: PropTypes.object.isRequired,
   printApd: PropTypes.func.isRequired,
   saveApdToAPI: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byKey, allKeys } }) => ({
-  activities: allKeys.map(key => ({
-    key,
-    anchor: `activity-${key}`,
-    name: byKey[key].name
-  }))
+const mapStateToProps = state => ({
+  activities: selectActivitiesSidebar(state),
+  activeSection: selectActiveSection(state)
 });
 
 const mapDispatchToProps = {
+  jumpTo,
   printApd,
   saveApdToAPI: saveApd
 };

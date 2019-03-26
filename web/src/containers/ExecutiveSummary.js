@@ -7,15 +7,13 @@ import { expandActivitySection } from '../actions/activities';
 import Dollars from '../components/Dollars';
 import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
+import { selectApdYears } from '../reducers/apd.selectors';
+import { selectBudgetExecutiveSummary } from '../reducers/budget.selectors';
 
 const ExecutiveSummary = ({ data, years, expandSection }) => (
-  <Section
-    isNumbered
-    id="executive-summary"
-    resource="executiveSummary"
-  >
+  <Section isNumbered id="executive-summary" resource="executiveSummary">
     <Subsection
-      id="executive-summary-overview"
+      id="executive-summary-summary"
       resource="executiveSummary.summary"
     >
       {data.map((d, i) => (
@@ -76,44 +74,10 @@ ExecutiveSummary.propTypes = {
   expandSection: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({
-  activities: { byKey },
-  apd: {
-    data: { years }
-  },
-  budget
-}) => {
-  const data = Object.entries(byKey).map(([key, { name, descShort }]) => {
-    const activityCosts = budget.activities[key].costsByFFY;
-
-    return {
-      key,
-      name,
-      descShort,
-      totals: years.reduce(
-        (acc, year) => ({ ...acc, [year]: activityCosts[year].total }),
-        {}
-      ),
-      combined: activityCosts.total.total
-    };
-  });
-
-  data.push({
-    key: 'all',
-    name: 'Total Cost',
-    descShort: null,
-    totals: years.reduce(
-      (acc, year) => ({ ...acc, [year]: budget.combined[year].total }),
-      {}
-    ),
-    combined: budget.combined.total.total
-  });
-
-  return {
-    data,
-    years
-  };
-};
+const mapStateToProps = state => ({
+  data: selectBudgetExecutiveSummary(state),
+  years: selectApdYears(state)
+});
 
 const mapDispatchToProps = {
   expandSection: expandActivitySection
