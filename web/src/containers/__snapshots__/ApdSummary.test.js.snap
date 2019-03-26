@@ -9,7 +9,6 @@ exports[`apd summary component renders correctly 1`] = `
   <Subsection
     id="apd-summary-overview"
     nested={false}
-    open={false}
     resource="apd.overview"
   >
     <div

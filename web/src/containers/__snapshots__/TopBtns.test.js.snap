@@ -15,6 +15,13 @@ exports[`Top buttons component renders correctly if logged in 1`] = `
     >
       State dashboard
     </Btn>
+    <Link
+      className="btn btn-primary btn-small ml1"
+      replace={false}
+      to="/me"
+    >
+      Manage account
+    </Link>
     <Btn
       extraCss="ml1"
       kind="primary"
@@ -52,6 +59,13 @@ exports[`Top buttons component renders correctly with dashboard hidden 1`] = `
   <div
     className="right h5"
   >
+    <Link
+      className="btn btn-primary btn-small ml1"
+      replace={false}
+      to="/me"
+    >
+      Manage account
+    </Link>
     <Btn
       extraCss="ml1"
       kind="primary"

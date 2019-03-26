@@ -9,7 +9,6 @@ exports[`previous activities component renders correctly if data is not loaded 1
   <Subsection
     id="prev-activities-outline"
     nested={false}
-    open={false}
     resource="previousActivities.outline"
   >
     <div
@@ -26,7 +25,6 @@ exports[`previous activities component renders correctly if data is not loaded 1
   <Subsection
     id="prev-activities-table"
     nested={false}
-    open={false}
     resource="previousActivities.actualExpenses"
   >
     <div

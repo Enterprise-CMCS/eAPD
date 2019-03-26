@@ -33,6 +33,9 @@ class TopBtns extends Component {
                   {t('dashboard')}
                 </Btn>
               )}
+              <Link to="/me" className="btn btn-primary btn-small ml1">
+                Manage account
+              </Link>
               <Btn size="small" onClick={this.handleLogout} extraCss="ml1">
                 {t('logout')}
               </Btn>
