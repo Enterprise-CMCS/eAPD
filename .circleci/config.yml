@@ -39,6 +39,19 @@ jobs:
           working_directory: ~/project/web
           command: node yaml-tests.js
 
+  check docker-compose image tags:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - run:
+          name: check docker-compose image tags
+          working_directory: ~/project
+          command: |
+            echo "`cat docker-compose.yml | grep -m1 cms-eapd/api: | sed 's/.*image: cms-eapd\/api://'` api/package-lock.json" > hashes.md5
+            echo "`cat docker-compose.yml | grep -m1 cms-eapd/web: | sed 's/.*image: cms-eapd\/web://'` web/package-lock.json" >> hashes.md5
+            md5sum -c hashes.md5
+
   web dependency vulnerability scan:
     docker:
       - image: node:10
@@ -239,6 +252,7 @@ workflows:
   web:
     jobs:
       - prepare dependencies cache
+      - check docker-compose image tags
       - web dependency vulnerability scan:
           requires:
             - prepare dependencies cache

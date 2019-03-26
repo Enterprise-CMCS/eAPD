@@ -49,22 +49,18 @@ exports[`SectionTitle component renders correctly 1`] = `
 `;
 
 exports[`Subsection component renders correctly 1`] = `
-<Collapsible
-  bgColor="white"
-  btnBgColor="white"
-  btnColor="blue"
-  id={null}
-  nested={false}
-  onChange={null}
-  open={false}
-  sticky={true}
-  title="Performance Goals and Benchmarks"
->
+<Fragment>
+  <h3
+    className="subsection--title ds-h3"
+    id={null}
+  >
+    Performance Goals and Benchmarks
+  </h3>
   <Instruction
     args={null}
     reverse={false}
     source="activities.goals.instruction"
   />
   test child
-</Collapsible>
+</Fragment>
 `;
