@@ -9,7 +9,6 @@ exports[`schedule summary component renders correctly 1`] = `
   <Subsection
     id="schedule-summary-table"
     nested={false}
-    open={false}
     resource="scheduleSummary.main"
   >
     <ReactTable
@@ -202,7 +201,6 @@ exports[`schedule summary component renders correctly with no data 1`] = `
   <Subsection
     id="schedule-summary-table"
     nested={false}
-    open={false}
     resource="scheduleSummary.main"
   >
     <div

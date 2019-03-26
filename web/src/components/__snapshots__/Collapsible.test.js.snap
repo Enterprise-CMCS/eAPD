@@ -2,7 +2,7 @@
 
 exports[`Collapsible component renders correctly in the default case 1`] = `
 <div
-  className="mb3 bg-white rounded shadow accordian"
+  className="mt3 mb3 bg-white rounded shadow accordian"
   id={null}
 >
   <button
@@ -57,7 +57,7 @@ exports[`Collapsible component renders correctly in the default case 1`] = `
 
 exports[`Collapsible component renders correctly when open 1`] = `
 <div
-  className="mb3 bg-white rounded shadow accordian"
+  className="mt3 mb3 bg-white rounded shadow accordian"
   id={null}
 >
   <button
@@ -112,7 +112,7 @@ exports[`Collapsible component renders correctly when open 1`] = `
 
 exports[`Collapsible component sets sticky class if enabled 1`] = `
 <div
-  className="mb3 bg-white rounded shadow accordian"
+  className="mt3 mb3 bg-white rounded shadow accordian"
   id={null}
 >
   <button
@@ -167,7 +167,7 @@ exports[`Collapsible component sets sticky class if enabled 1`] = `
 
 exports[`Collapsible component toggles from closed to open 1`] = `
 <div
-  className="mb3 bg-white rounded shadow accordian"
+  className="mt3 mb3 bg-white rounded shadow accordian"
   id={null}
 >
   <button
@@ -222,7 +222,7 @@ exports[`Collapsible component toggles from closed to open 1`] = `
 
 exports[`Collapsible component toggles from open to closed 1`] = `
 <div
-  className="mb3 bg-white rounded shadow accordian"
+  className="mt3 mb3 bg-white rounded shadow accordian"
   id={null}
 >
   <button

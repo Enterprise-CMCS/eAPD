@@ -3,7 +3,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Waypoint } from 'react-waypoint';
 
-import Collapsible from './Collapsible';
 import Instruction from './Instruction';
 import { scrollTo } from '../actions/navigation';
 import { t } from '../i18n';
@@ -67,16 +66,30 @@ class SubsectionPlain extends Component {
   };
 
   render() {
-    const { children, id, nested, open, resource } = this.props;
+    const { children, id, nested, resource } = this.props;
     const title = t([resource, 'title'], { defaultValue: '' });
 
     return (
       <Fragment>
         <Waypoint onEnter={this.hitWaypoint(id)} bottomOffset="90%" />
-        <Collapsible id={id} title={title} open={open} nested={nested}>
-          <Instruction source={`${resource}.instruction`} />
-          {children}
-        </Collapsible>
+        {!nested &&
+          <h3
+            id={id}
+            className='subsection--title ds-h3'
+          >
+            {title}
+          </h3>
+        }
+        {nested &&
+          <h4
+            id={id}
+            className='ds-h3'
+          >
+            {title}
+          </h4>
+        }
+        <Instruction source={`${resource}.instruction`} />
+        {children}
       </Fragment>
     );
   }
@@ -87,7 +100,6 @@ SubsectionPlain.propTypes = {
   hasWaypoint: PropTypes.bool,
   id: PropTypes.string,
   nested: PropTypes.bool,
-  open: PropTypes.bool,
   resource: PropTypes.string,
   scrollTo: PropTypes.func.isRequired
 };
@@ -97,7 +109,6 @@ SubsectionPlain.defaultProps = {
   hasWaypoint: true,
   id: null,
   nested: false,
-  open: false
 };
 
 const Section = connect(

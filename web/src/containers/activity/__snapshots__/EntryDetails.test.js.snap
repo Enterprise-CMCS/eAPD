@@ -2,7 +2,7 @@
 
 exports[`the (Activity) EntryDetails component renders correctly 1`] = `
 <Collapsible
-  bgColor="blue-light"
+  bgColor="white"
   btnBgColor="blue"
   btnColor="white"
   id="activity-activity-key"
