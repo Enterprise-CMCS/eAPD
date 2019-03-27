@@ -1,22 +1,24 @@
+import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import AdminForm from './AdminForm';
 import { STATES } from '../../util';
 import Password from '../../components/PasswordWithMeter';
-
 import { createUser as createUserDispatch } from '../../actions/admin';
-
-import Btn from '../../components/Btn';
 import { t } from '../../i18n';
 
 class CreateUser extends Component {
   state = {
+    error: false,
     fetching: false,
     name: '',
     email: '',
     password: '',
-    state: ''
+    role: '',
+    state: '',
+    success: false
   };
 
   handleChange = e => {
@@ -29,32 +31,41 @@ class CreateUser extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const { email, name, password, state } = this.state;
-    if (!email || !password) {
-      alert('Email and password are required');
-      return;
-    }
+    const { email, name, password, role, state } = this.state;
 
     const { createUser } = this.props;
 
     this.setState({ fetching: true });
-    createUser({ email, name, password, state })
+    createUser({ email, name, password, role, state })
       .then(() => {
         this.setState({
+          error: false,
           fetching: false,
           name: '',
           email: '',
           password: '',
-          state: ''
+          role: '',
+          state: '',
+          success: true
         });
       })
-      .catch(() => {
-        this.setState({ fetching: false });
+      .catch(error => {
+        this.setState({ error, fetching: false, success: false });
       });
   };
 
   render() {
-    const { fetching, name, email, password, state } = this.state;
+    const { roles } = this.props;
+    const {
+      error,
+      fetching,
+      name,
+      email,
+      password,
+      role,
+      state,
+      success
+    } = this.state;
 
     return (
       <Fragment>
@@ -66,74 +77,91 @@ class CreateUser extends Component {
           </div>
         </header>
 
-        <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded">
-          <h1 className="mt0 h2">Create account</h1>
-          <form onSubmit={this.handleSubmit}>
-            <div className="mb2">
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                type="text"
-                name="name"
-                className="input"
-                value={name}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="text"
-                name="email"
-                className="input"
-                value={email}
-                onChange={this.handleChange}
-              />
-            </div>
-            <Password
-              value={password}
-              compareTo={[email, name]}
-              onChange={this.handleChange}
-              className="mb2"
-            />
-            <div className="mb2">
-              <label htmlFor="create_user_state">State</label>
-              <select
-                id="create_user_state"
-                name="state"
-                className="input"
-                value={state}
-                onChange={this.handleChange}
-              >
-                <option value="">None</option>
-                {STATES.map(s => (
-                  <option key={s.id} value={s.id}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <Btn type="submit" disabled={fetching}>
-              {fetching ? 'Working' : 'Create account'}
-            </Btn>
-          </form>
-        </div>
+        <AdminForm
+          title="Create account"
+          error={error}
+          success={success && 'Account created'}
+          working={fetching}
+          onSave={this.handleSubmit}
+        >
+          <TextField
+            label="Name"
+            name="name"
+            ariaLabel="please enter the user's full name"
+            value={name || ''}
+            onChange={this.handleChange}
+          />
+
+          <TextField
+            label="Email"
+            name="email"
+            value={email}
+            onChange={this.handleChange}
+          />
+
+          <FormLabel component="label" fieldId="create_account_state">
+            State
+          </FormLabel>
+          <Select
+            id="create_account_state"
+            name="state"
+            size="medium"
+            value={state}
+            onChange={this.handleChange}
+          >
+            <option value="">None</option>
+            {STATES.map(s => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
+            ))}
+          </Select>
+
+          <FormLabel component="label" fieldId="create_account_role">
+            Authorization role
+          </FormLabel>
+          <Select
+            id="create_account_role"
+            name="role"
+            size="medium"
+            value={role || ''}
+            onChange={this.handleChange}
+          >
+            <option value="">None</option>
+            {roles.map(r => (
+              <option key={r.name} value={r.name}>
+                {r.name}
+              </option>
+            ))}
+          </Select>
+
+          <Password
+            value={password}
+            compareTo={[email, name]}
+            onChange={this.handleChange}
+            className="mb2"
+          />
+        </AdminForm>
       </Fragment>
     );
   }
 }
 
 CreateUser.propTypes = {
-  createUser: PropTypes.func.isRequired
+  createUser: PropTypes.func.isRequired,
+  roles: PropTypes.arrayOf(PropTypes.object).isRequired
 };
+
+const mapStateToProps = ({ admin: { roles } }) => ({
+  roles
+});
 
 const mapDispatchToProps = {
   createUser: createUserDispatch
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CreateUser);
 

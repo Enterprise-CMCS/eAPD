@@ -1,17 +1,21 @@
+import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { STATES } from '../../util';
 
+import AdminForm from './AdminForm';
 import { editAccount as editAccountDispatch } from '../../actions/admin';
-import Btn from '../../components/Btn';
 import { t } from '../../i18n';
 
 class EditAccount extends Component {
   state = {
+    error: false,
+    success: false,
     userID: '',
-    user: null
+    user: null,
+    working: false
   };
 
   getForm = () => {
@@ -20,96 +24,79 @@ class EditAccount extends Component {
 
     if (user) {
       const { email, name, phone, position, state, role } = user;
-      const fetching = false;
 
       return (
-        <div className="mx-auto mb3 p2 sm-col-6 md-col-4 bg-white rounded">
-          {' '}
-          <form onSubmit={this.editAccount}>
-            <div className="mb2">
-              <label htmlFor="edit_account_name">Name</label>
-              <input
-                id="edit_account_name"
-                type="text"
-                name="name"
-                className="input"
-                value={name || ''}
-                onChange={this.handleEditAccount}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="edit_account_email">Email</label>
-              <input
-                id="edit_account_email"
-                type="text"
-                name="email"
-                className="input"
-                value={email}
-                onChange={this.handleEditAccount}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="edit_account_phone">Phone number</label>
-              <input
-                id="edit_account_phone"
-                type="text"
-                name="phone"
-                className="input"
-                value={phone || ''}
-                onChange={this.handleEditAccount}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="edit_account_position">Position</label>
-              <input
-                id="edit_account_position"
-                type="text"
-                name="position"
-                className="input"
-                value={position || ''}
-                onChange={this.handleEditAccount}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="edit_account_state">State</label>
-              <select
-                id="edit_account_state"
-                name="state"
-                className="input"
-                value={state || ''}
-                onChange={this.handleEditAccount}
-              >
-                <option value="">None</option>
-                {STATES.map(s => (
-                  <option key={s.id} value={s.id}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb2">
-              <label htmlFor="edit_account_role">Authorization role</label>
-              <select
-                id="edit_account_role"
-                name="role"
-                className="input"
-                value={role || ''}
-                disabled={currentUser.id === user.id}
-                onChange={this.handleEditAccount}
-              >
-                <option value="">None</option>
-                {roles.map(r => (
-                  <option key={r.name} value={r.name}>
-                    {r.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <Btn type="submit" disabled={fetching}>
-              {fetching ? 'Working' : 'Edit account'}
-            </Btn>
-          </form>
-        </div>
+        <Fragment>
+          <hr />
+
+          <TextField
+            ariaLabel="please enter the user's full name"
+            label="Name"
+            name="name"
+            value={name || ''}
+            onChange={this.handleEditAccount}
+          />
+
+          <TextField
+            label="Email"
+            name="email"
+            value={email}
+            onChange={this.handleEditAccount}
+          />
+
+          <TextField
+            label="Phone number"
+            name="phone"
+            size="medium"
+            mask="phone"
+            value={phone || ''}
+            onChange={this.handleEditAccount}
+          />
+
+          <TextField
+            label="Position"
+            name="position"
+            value={position || ''}
+            onChange={this.handleEditAccount}
+          />
+
+          <FormLabel component="label" fieldId="modify_account_state">
+            State
+          </FormLabel>
+          <Select
+            id="modify_account_state"
+            name="state"
+            size="medium"
+            value={state}
+            onChange={this.handleEditAccount}
+          >
+            <option value="">None</option>
+            {STATES.map(s => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
+            ))}
+          </Select>
+
+          <FormLabel component="label" fieldId="modify_account_role">
+            Authorization role
+          </FormLabel>
+          <Select
+            id="modify_account_role"
+            name="role"
+            size="medium"
+            value={role || ''}
+            onChange={this.handleEditAccount}
+            disabled={currentUser.id === user.id}
+          >
+            <option value="">None</option>
+            {roles.map(r => (
+              <option key={r.name} value={r.name}>
+                {r.name}
+              </option>
+            ))}
+          </Select>
+        </Fragment>
       );
     }
     return null;
@@ -133,12 +120,22 @@ class EditAccount extends Component {
     e.preventDefault();
     const { editAccount } = this.props;
     const { user } = this.state;
-    editAccount(user);
+
+    this.setState({ working: true });
+    editAccount(user)
+      .then(() => {
+        this.setState({ error: false, success: true, working: false });
+      })
+      .catch(error => {
+        this.setState({ error, success: false, working: false });
+      });
   };
 
   render() {
     const { users } = this.props;
-    const { userID } = this.state;
+    const { error, success, userID, working } = this.state;
+
+    const onSave = !!userID && this.editAccount;
 
     return (
       <Fragment>
@@ -150,28 +147,32 @@ class EditAccount extends Component {
           </div>
         </header>
 
-        <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded">
-          <h1 className="mt0 h2">Edit accounts</h1>
-          <div className="mb2">
-            <label htmlFor="edit_user_selected">Pick an account to edit</label>
-            <select
-              id="edit_user_selected"
-              name="userID"
-              className="input"
-              value={userID}
-              onChange={this.handlePickAccount}
-            >
-              <option value="">Select...</option>
-              {users.map(u => (
-                <option key={u.id} value={u.id}>
-                  {`${u.name ? `${u.name} - ` : ''}${u.email}`}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
+        <AdminForm
+          title="Manage accounts"
+          error={error}
+          success={success && 'Account saved'}
+          working={working}
+          onSave={onSave}
+        >
+          <FormLabel component="label" fieldId="modify_account_user">
+            Account to edit
+          </FormLabel>
+          <Select
+            id="modify_account_user"
+            name="userID"
+            value={`${userID}`}
+            onChange={this.handlePickAccount}
+          >
+            <option value="">Select...</option>
+            {users.map(u => (
+              <option key={u.id} value={`${u.id}`}>
+                {`${u.name ? `${u.name} - ` : ''}${u.email}`}
+              </option>
+            ))}
+          </Select>
 
-        {this.getForm()}
+          {this.getForm()}
+        </AdminForm>
       </Fragment>
     );
   }

@@ -30,7 +30,6 @@ describe('my account page', () => {
         }
       })
     ).toEqual({
-      fetching: 'aw thank you',
       user: {
         name: 'Tina Belcher',
         phone: '1-800-BURGERS',
@@ -47,12 +46,7 @@ describe('my account page', () => {
     };
 
     const component = shallow(
-      <MyAccount
-        editAccount={() => {}}
-        fetching={false}
-        history={{}}
-        user={user}
-      />
+      <MyAccount editAccount={() => {}} history={{}} user={user} />
     );
 
     // basic rendering
@@ -63,41 +57,64 @@ describe('my account page', () => {
       target: { name: 'position', value: 'Window Washer' }
     });
     expect(component).toMatchSnapshot();
-
-    // while fetching
-    expect(
-      shallow(
-        <MyAccount editAccount={() => {}} fetching history={{}} user={user} />
-      )
-    ).toMatchSnapshot();
   });
 
-  test('handles submitting the form', () => {
-    const user = {
-      name: 'Tina Belcher',
-      phone: '1-800-BURGERS',
-      position: 'Table Cleaner'
-    };
+  describe('handles submitting the form', () => {
+    test('with no error', async () => {
+      const user = {
+        name: 'Tina Belcher',
+        phone: '1-800-BURGERS',
+        position: 'Table Cleaner'
+      };
 
-    const editAccount = sinon.spy();
-    const preventDefault = sinon.spy();
+      const editAccount = sinon.stub().resolves();
+      const preventDefault = sinon.spy();
 
-    const component = shallow(
-      <MyAccount
-        editAccount={editAccount}
-        fetching={false}
-        history={{}}
-        user={user}
-      />
-    );
+      const component = shallow(
+        <MyAccount editAccount={editAccount} history={{}} user={user} />
+      );
 
-    component.find('form').simulate('submit', { preventDefault });
+      await component
+        .find('AdminForm')
+        .props()
+        .onSave({ preventDefault });
 
-    expect(preventDefault.calledOnce).toEqual(true);
-    expect(editAccount.calledWith(user)).toEqual(true);
+      expect(preventDefault.calledOnce).toEqual(true);
+      expect(editAccount.calledWith(user)).toEqual(true);
+
+      expect(component).toMatchSnapshot();
+    });
+
+    test('with an error', async () => {
+      const user = {
+        name: 'Tina Belcher',
+        phone: '1-800-BURGERS',
+        position: 'Table Cleaner'
+      };
+
+      // sinon.stub().rejects() wraps strings in Error objects, but the edit
+      // account action rejects a plain string, so return a rejected promise
+      // eslint-disable-next-line prefer-promise-reject-errors
+      const editAccount = sinon.stub().returns(Promise.reject('error message'));
+      const preventDefault = sinon.spy();
+
+      const component = shallow(
+        <MyAccount editAccount={editAccount} history={{}} user={user} />
+      );
+
+      await component
+        .find('AdminForm')
+        .props()
+        .onSave({ preventDefault });
+
+      expect(preventDefault.calledOnce).toEqual(true);
+      expect(editAccount.calledWith(user)).toEqual(true);
+
+      expect(component).toMatchSnapshot();
+    });
   });
 
-  test('handles going back', () => {
+  test('handles canceling', () => {
     const user = {
       name: 'Tina Belcher',
       phone: '1-800-BURGERS',
@@ -107,15 +124,13 @@ describe('my account page', () => {
     const goBack = sinon.spy();
 
     const component = shallow(
-      <MyAccount
-        editAccount={() => {}}
-        fetching={false}
-        history={{ goBack }}
-        user={user}
-      />
+      <MyAccount editAccount={() => {}} history={{ goBack }} user={user} />
     );
 
-    component.find('Button[variation="transparent"]').simulate('click');
+    component
+      .find('AdminForm')
+      .props()
+      .onCancel();
 
     expect(goBack.calledOnce).toEqual(true);
   });
