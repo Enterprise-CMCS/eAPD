@@ -1,15 +1,17 @@
-import { Alert, Button, Spinner, TextField } from '@cmsgov/design-system-core';
+import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import AdminForm from './AdminForm';
 import { editSelf } from '../../actions/admin';
 import Password from '../../components/PasswordWithMeter';
 import { t } from '../../i18n';
 
 class MyAccount extends Component {
   state = {
+    error: false,
     success: false,
     user: {
       name: '',
@@ -29,16 +31,6 @@ class MyAccount extends Component {
     this.state.user = { name, phone, position };
   }
 
-  static getDerivedStateFromProps(newProps, prevState) {
-    if (newProps.fetching) {
-      return { success: 0 };
-    }
-    if (prevState.success === 0) {
-      return { success: !newProps.error };
-    }
-    return null;
-  }
-
   handleEditAccount = e => {
     const { name, value } = e.target;
     this.setState(prev => ({ user: { ...prev.user, [name]: value } }));
@@ -48,7 +40,15 @@ class MyAccount extends Component {
     e.preventDefault();
     const { editAccount } = this.props;
     const { user } = this.state;
-    editAccount(user);
+
+    this.setState({ fetching: true });
+    return editAccount(user)
+      .then(() => {
+        this.setState({ error: false, fetching: false, success: true });
+      })
+      .catch(error => {
+        this.setState({ error, fetching: false, success: false });
+      });
   };
 
   goBack = () => {
@@ -59,8 +59,9 @@ class MyAccount extends Component {
   };
 
   render() {
-    const { fetching } = this.props;
     const {
+      error,
+      fetching,
       success,
       user: { name, password, phone, position }
     } = this.state;
@@ -75,64 +76,45 @@ class MyAccount extends Component {
           </div>
         </header>
 
-        <div className="ds-l-container card">
-          <div className="ds-l-row ds-u-radius ds-u-padding-y--5">
-            <div className="ds-l-col--1 ds-u-fill--white ds-u-margin-left--auto" />
-            <div className="ds-l-col--6 ds-u-fill--white ds-u-padding-y--5">
-              {!!success && <Alert variation="success">Changes saved</Alert>}
-
-              <h1 className="ds-h1">Manage account</h1>
-
-              <form onSubmit={this.editAccount}>
-                <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
-                  <legend className="sr-only">manage account details</legend>
-                  <TextField
-                    label="Name"
-                    name="name"
-                    ariaLabel="please enter your full name"
-                    value={name || ''}
-                    onChange={this.handleEditAccount}
-                  />
-                  <TextField
-                    label="Phone number"
-                    ariaLabel="please enter your 10-digit phone number"
-                    mask="phone"
-                    name="phone"
-                    size="medium"
-                    value={phone || ''}
-                    onChange={this.handleEditAccount}
-                  />
-                  <TextField
-                    label="Role"
-                    name="position"
-                    ariaLabel="please enter your position or role ???"
-                    value={position || ''}
-                    onChange={this.handleEditAccount}
-                  />
-                  <Password
-                    className="mb2"
-                    title="Change password"
-                    value={password}
-                    onChange={this.handleEditAccount}
-                  />
-                  <Button variation="primary" type="submit" disabled={fetching}>
-                    {fetching ? (
-                      <Fragment>
-                        <Spinner /> Working
-                      </Fragment>
-                    ) : (
-                      'Save changes'
-                    )}
-                  </Button>
-                  <Button variation="transparent" onClick={this.goBack}>
-                    Cancel
-                  </Button>
-                </fieldset>
-              </form>
-            </div>
-            <div className="ds-l-col--1 ds-u-fill--white ds-u-margin-right--auto" />
-          </div>
-        </div>
+        <AdminForm
+          title="Manage account"
+          legend="manage account details"
+          error={error}
+          success={success && 'Changes saved'}
+          working={fetching}
+          onCancel={this.goBack}
+          onSave={this.editAccount}
+        >
+          <TextField
+            label="Name"
+            name="name"
+            ariaLabel="please enter your full name"
+            value={name || ''}
+            onChange={this.handleEditAccount}
+          />
+          <TextField
+            label="Phone number"
+            ariaLabel="please enter your 10-digit phone number"
+            mask="phone"
+            name="phone"
+            size="medium"
+            value={phone || ''}
+            onChange={this.handleEditAccount}
+          />
+          <TextField
+            label="Role"
+            name="position"
+            ariaLabel="please enter your position or role ???"
+            value={position || ''}
+            onChange={this.handleEditAccount}
+          />
+          <Password
+            className="mb2"
+            title="Change password"
+            value={password}
+            onChange={this.handleEditAccount}
+          />
+        </AdminForm>
       </Fragment>
     );
   }
@@ -140,7 +122,6 @@ class MyAccount extends Component {
 
 MyAccount.propTypes = {
   editAccount: PropTypes.func.isRequired,
-  fetching: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   user: PropTypes.shape({
     name: PropTypes.string,
@@ -151,13 +132,9 @@ MyAccount.propTypes = {
 
 const mapStateToProps = ({
   user: {
-    error,
-    fetching,
     data: { name, phone, position }
   }
 }) => ({
-  error,
-  fetching,
   user: {
     name,
     phone,
