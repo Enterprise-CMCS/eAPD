@@ -21,7 +21,6 @@ exports[`assurances and compliance component main component renders correctly 1`
   <Subsection
     id="assurances-compliance-fed-citations"
     nested={false}
-    open={false}
     resource="assurancesAndCompliance.citations"
   >
     <div

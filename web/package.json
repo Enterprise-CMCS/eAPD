@@ -13,7 +13,8 @@
     "start": "webpack-dev-server --config webpack.config.dev.js",
     "test": "jest --collectCoverage",
     "test-watch": "jest --watch",
-    "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\""
+    "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\"",
+    "postinstall": "sed -i'.backup' -e 's/\\(image: cms-eapd\\/web:\\).*/\\1'`md5 -q package-lock.json`'/g' ../docker-compose.yml && rm ../docker-compose.yml.backup"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "Ronald Bronson",
     "Nicole Fenton",
     "Eghosa Guobadia",
+    "Austin Hernandez",
     "James Hupp",
     "Meghana Khandekar",
     "Jerome Lee",

@@ -1,0 +1,13 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+.card {
+  .ds-l-col--1:first-child {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
+
+  .ds-l-col--1:last-child {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+}
