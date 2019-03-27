@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`connected waypoint higher-order component renders correctly with children 1`] = `
+<Fragment>
+  <Waypoint
+    bottomOffset="90%"
+    debug={false}
+    fireOnRapidScroll={true}
+    horizontal={false}
+    onEnter={[Function]}
+    onLeave={[Function]}
+    onPositionChange={[Function]}
+    topOffset="0px"
+  />
+  <div>
+    Hello, I am child
+  </div>
+</Fragment>
+`;
+
+exports[`connected waypoint higher-order component renders correctly without children 1`] = `
+<Fragment>
+  <Waypoint
+    bottomOffset="90%"
+    debug={false}
+    fireOnRapidScroll={true}
+    horizontal={false}
+    onEnter={[Function]}
+    onLeave={[Function]}
+    onPositionChange={[Function]}
+    topOffset="0px"
+  />
+</Fragment>
+`;
