@@ -35,44 +35,52 @@ class Login extends Component {
     }
 
     return (
-      <div className="card--container">
+      <Fragment>
         <Header />
-        <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded">
-          <h1 className="mt0 h2">Please log in.</h1>
-          {error && (
-            <div className="mb2 p1 h6 alert alert-error">
-              <strong>Sorry!</strong> Something went wrong. Please try again.
+        <div className="card--container">
+          <div className="ds-l-container card">
+            <div className="ds-l-row">
+              <div className="ds-l-col--1 ds-u-margin-left--auto" />
+              <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
+                <h1 className="mt0 h2">Please log in.</h1>
+                {error && (
+                  <div className="mb2 p1 h6 alert alert-error">
+                    <strong>Sorry!</strong> Something went wrong. Please try again.
+                  </div>
+                )}
+                <form onSubmit={this.handleSubmit}>
+                  <div className="mb2">
+                    <label htmlFor="username">Email</label>
+                    <input
+                      id="username"
+                      type="text"
+                      name="username"
+                      className="input"
+                      value={username}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                <div className="mb2">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    className="input"
+                    value={password}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <Btn type="submit" disabled={fetching}>
+                  {fetching ? 'Submitting' : 'Submit'}
+                </Btn>
+              </form>
             </div>
-          )}
-          <form onSubmit={this.handleSubmit}>
-            <div className="mb2">
-              <label htmlFor="username">Email</label>
-              <input
-                id="username"
-                type="text"
-                name="username"
-                className="input"
-                value={username}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                className="input"
-                value={password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <Btn type="submit" disabled={fetching}>
-              {fetching ? 'Submitting' : 'Submit'}
-            </Btn>
-          </form>
+            <div className="ds-l-col--1 ds-u-margin-right--auto" />
+          </div>
         </div>
       </div>
+    </Fragment>
     );
   }
 }

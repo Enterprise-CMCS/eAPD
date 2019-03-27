@@ -74,11 +74,11 @@ class MyAccount extends Component {
             </Link>
           </div>
         </header>
-
-        <div className="ds-l-container card">
-          <div className="ds-l-row ds-u-radius ds-u-padding-y--5">
-            <div className="ds-l-col--1 ds-u-fill--white ds-u-margin-left--auto" />
-            <div className="ds-l-col--6 ds-u-fill--white ds-u-padding-y--5">
+        <div className="card--container">
+        <div className="ds-l-container">
+          <div className="ds-l-row card">
+            <div className="ds-l-col--1 ds-u-margin-left--auto" />
+            <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
               {!!success && <Alert variation="success">Changes saved</Alert>}
 
               <h1 className="ds-h1">Manage account</h1>
@@ -130,9 +130,10 @@ class MyAccount extends Component {
                 </fieldset>
               </form>
             </div>
-            <div className="ds-l-col--1 ds-u-fill--white ds-u-margin-right--auto" />
+            <div className="ds-l-col--1 ds-u-margin-right--auto" />
           </div>
         </div>
+      </div>
       </Fragment>
     );
   }
