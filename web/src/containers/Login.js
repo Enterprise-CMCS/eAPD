@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { Alert, Button, TextField } from '@cmsgov/design-system-core';
 
 import { login } from '../actions/auth';
-import Btn from '../components/Btn';
 import Header from '../components/Header';
 
 class Login extends Component {
@@ -49,31 +49,29 @@ class Login extends Component {
                   </div>
                 )}
                 <form onSubmit={this.handleSubmit}>
-                  <div className="mb2">
-                    <label htmlFor="username">Email</label>
-                    <input
-                      id="username"
-                      type="text"
-                      name="username"
-                      className="input"
-                      value={username}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                <div className="mb2">
-                  <label htmlFor="password">Password</label>
-                  <input
+                  <TextField
+                    id="username"
+                    label="Email"
+                    name="username"
+                    ariaLabel="please enter the email associated with this account"
+                    value={username}
+                    onChange={this.handleChange}
+                  />
+                  <TextField
                     id="password"
-                    type="password"
+                    label="Password"
                     name="password"
-                    className="input"
+                    ariaLabel="please enter the password associated with this account"
                     value={password}
                     onChange={this.handleChange}
                   />
-                </div>
-                <Btn type="submit" disabled={fetching}>
+                  <Button
+                    type="submit"
+                    disabled={fetching}
+                    className="ds-c-button--primary"
+                  >
                   {fetching ? 'Submitting' : 'Submit'}
-                </Btn>
+                </Button>
               </form>
             </div>
             <div className="ds-l-col--1 ds-u-margin-right--auto" />
