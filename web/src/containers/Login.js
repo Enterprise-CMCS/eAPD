@@ -42,7 +42,7 @@ class Login extends Component {
             <div className="ds-l-row">
               <div className="ds-l-col--1 ds-u-margin-left--auto" />
               <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
-                <h1 className="mt0 h2">Please log in.</h1>
+                <h1 className="ds-h1">Log in</h1>
                 {error && (
                   <div className="mb2 p1 h6 alert alert-error">
                     <strong>Sorry!</strong> Something went wrong. Please try again.
