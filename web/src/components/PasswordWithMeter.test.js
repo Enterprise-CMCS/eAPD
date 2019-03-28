@@ -42,4 +42,14 @@ describe('PasswordWithmeter component', () => {
 
     expect(onChange.calledWith(event)).toEqual(true);
   });
+
+  it('shows the strength meter when parameter is true', () => {
+    const component = shallow(<Password value="test" showMeter />);
+    expect(component.exists('.strength-meter')).toEqual(true);
+  });
+
+  it('does not show the strength meter when paramter is false', () => {
+    const component = shallow(<Password value="" />);
+    expect(component.exists('.strength-meter')).toEqual(false);
+  });
 });
