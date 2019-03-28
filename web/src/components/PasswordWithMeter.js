@@ -1,6 +1,6 @@
 import { Choice, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import zxcvbn from 'zxcvbn';
 
 class Password extends Component {
