@@ -45,16 +45,16 @@ class Login extends Component {
               <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
                 <h1 className="ds-h1">Log in</h1>
                 {error && (
-                  <div className="mb2 p1 h6 alert alert-error">
+                  <Alert variation='error' role='alert'>
                     <strong>Sorry!</strong> Something went wrong. Please try again.
-                  </div>
+                  </Alert>
                 )}
                 <form onSubmit={this.handleSubmit}>
                   <TextField
                     id="username"
                     label="Email"
                     name="username"
-                    ariaLabel="please enter the email associated with this account"
+                    ariaLabel="Enter the email associated with this account."
                     value={username}
                     onChange={this.handleChange}
                   />
@@ -62,14 +62,14 @@ class Login extends Component {
                     title="Password"
                     value={password}
                     onChange={this.handleChange}
-                    ariaLabel="please enter the password associated with this account"
                   />
                   <Button
                     type="submit"
                     disabled={fetching}
                     variation="primary"
+                    className="ds-u-margin-y--4"
                   >
-                  {fetching ? 'Submitting' : 'Submit'}
+                  {fetching ? 'Logging in' : 'Log in'}
                 </Button>
               </form>
             </div>

@@ -54,7 +54,7 @@ class Password extends Component {
           </Choice>
 
           <TextField
-            hint={showMeter && 'paste whatever was supposed to be here back'}
+            hint={showMeter && 'A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address.'}
             label={title || 'Password'}
             name="password"
             className="no-clearfix"
