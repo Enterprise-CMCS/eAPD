@@ -18,86 +18,91 @@ exports[`my account page renders 1`] = `
     </div>
   </header>
   <div
-    className="ds-l-container card"
+    className="card--container"
   >
     <div
-      className="ds-l-row ds-u-radius ds-u-padding-y--5"
+      className="ds-l-container"
     >
       <div
-        className="ds-l-col--1 ds-u-fill--white ds-u-margin-left--auto"
-      />
-      <div
-        className="ds-l-col--6 ds-u-fill--white ds-u-padding-y--5"
+        className="ds-l-row card"
       >
-        <h1
-          className="ds-h1"
+        <div
+          className="ds-l-col--1 ds-u-margin-left--auto"
+        />
+        <div
+          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
         >
-          Manage account
-        </h1>
-        <form
-          onSubmit={[Function]}
-        >
-          <fieldset
-            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
+          <h1
+            className="ds-h1"
           >
-            <legend
-              className="sr-only"
+            Manage account
+          </h1>
+          <form
+            onSubmit={[Function]}
+          >
+            <fieldset
+              className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
             >
-              manage account details
-            </legend>
-            <TextField
-              ariaLabel="please enter your full name"
-              label="Name"
-              name="name"
-              onChange={[Function]}
-              type="text"
-              value="Tina Belcher"
-            />
-            <TextField
-              ariaLabel="please enter your 10-digit phone number"
-              label="Phone number"
-              mask="phone"
-              name="phone"
-              onChange={[Function]}
-              size="medium"
-              type="text"
-              value="1-800-BURGERS"
-            />
-            <TextField
-              ariaLabel="please enter your position or role ???"
-              label="Role"
-              name="position"
-              onChange={[Function]}
-              type="text"
-              value="Table Cleaner"
-            />
-            <Password
-              className="mb2"
-              compareTo={Array []}
-              onChange={[Function]}
-              title="Change password"
-              value=""
-            />
-            <Button
-              disabled={false}
-              type="submit"
-              variation="primary"
-            >
-              Save changes
-            </Button>
-            <Button
-              onClick={[Function]}
-              type="button"
-              variation="transparent"
-            >
-              Cancel
-            </Button>
-          </fieldset>
-        </form>
+              <legend
+                className="sr-only"
+              >
+                manage account details
+              </legend>
+              <TextField
+                ariaLabel="please enter your full name"
+                label="Name"
+                name="name"
+                onChange={[Function]}
+                type="text"
+                value="Tina Belcher"
+              />
+              <TextField
+                ariaLabel="please enter your 10-digit phone number"
+                label="Phone number"
+                mask="phone"
+                name="phone"
+                onChange={[Function]}
+                size="medium"
+                type="text"
+                value="1-800-BURGERS"
+              />
+              <TextField
+                ariaLabel="please enter your position or role ???"
+                label="Role"
+                name="position"
+                onChange={[Function]}
+                type="text"
+                value="Table Cleaner"
+              />
+              <Password
+                className="mb2"
+                compareTo={Array []}
+                onChange={[Function]}
+                showMeter={true}
+                title="Change password"
+                value=""
+              />
+              <Button
+                disabled={false}
+                type="submit"
+                variation="primary"
+              >
+                Save changes
+              </Button>
+              <Button
+                onClick={[Function]}
+                type="button"
+                variation="transparent"
+              >
+                Cancel
+              </Button>
+            </fieldset>
+          </form>
+        </div>
+        <div
+          className="ds-l-col--1 ds-u-margin-right--auto"
+        />
       </div>
-      <div
-        className="ds-l-col--1 ds-u-fill--white ds-u-margin-right--auto"
-      />
     </div>
   </div>
 </Fragment>
@@ -121,86 +126,91 @@ exports[`my account page renders 2`] = `
     </div>
   </header>
   <div
-    className="ds-l-container card"
+    className="card--container"
   >
     <div
-      className="ds-l-row ds-u-radius ds-u-padding-y--5"
+      className="ds-l-container"
     >
       <div
-        className="ds-l-col--1 ds-u-fill--white ds-u-margin-left--auto"
-      />
-      <div
-        className="ds-l-col--6 ds-u-fill--white ds-u-padding-y--5"
+        className="ds-l-row card"
       >
-        <h1
-          className="ds-h1"
+        <div
+          className="ds-l-col--1 ds-u-margin-left--auto"
+        />
+        <div
+          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
         >
-          Manage account
-        </h1>
-        <form
-          onSubmit={[Function]}
-        >
-          <fieldset
-            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
+          <h1
+            className="ds-h1"
           >
-            <legend
-              className="sr-only"
+            Manage account
+          </h1>
+          <form
+            onSubmit={[Function]}
+          >
+            <fieldset
+              className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
             >
-              manage account details
-            </legend>
-            <TextField
-              ariaLabel="please enter your full name"
-              label="Name"
-              name="name"
-              onChange={[Function]}
-              type="text"
-              value="Tina Belcher"
-            />
-            <TextField
-              ariaLabel="please enter your 10-digit phone number"
-              label="Phone number"
-              mask="phone"
-              name="phone"
-              onChange={[Function]}
-              size="medium"
-              type="text"
-              value="1-800-BURGERS"
-            />
-            <TextField
-              ariaLabel="please enter your position or role ???"
-              label="Role"
-              name="position"
-              onChange={[Function]}
-              type="text"
-              value="Window Washer"
-            />
-            <Password
-              className="mb2"
-              compareTo={Array []}
-              onChange={[Function]}
-              title="Change password"
-              value=""
-            />
-            <Button
-              disabled={false}
-              type="submit"
-              variation="primary"
-            >
-              Save changes
-            </Button>
-            <Button
-              onClick={[Function]}
-              type="button"
-              variation="transparent"
-            >
-              Cancel
-            </Button>
-          </fieldset>
-        </form>
+              <legend
+                className="sr-only"
+              >
+                manage account details
+              </legend>
+              <TextField
+                ariaLabel="please enter your full name"
+                label="Name"
+                name="name"
+                onChange={[Function]}
+                type="text"
+                value="Tina Belcher"
+              />
+              <TextField
+                ariaLabel="please enter your 10-digit phone number"
+                label="Phone number"
+                mask="phone"
+                name="phone"
+                onChange={[Function]}
+                size="medium"
+                type="text"
+                value="1-800-BURGERS"
+              />
+              <TextField
+                ariaLabel="please enter your position or role ???"
+                label="Role"
+                name="position"
+                onChange={[Function]}
+                type="text"
+                value="Window Washer"
+              />
+              <Password
+                className="mb2"
+                compareTo={Array []}
+                onChange={[Function]}
+                showMeter={true}
+                title="Change password"
+                value=""
+              />
+              <Button
+                disabled={false}
+                type="submit"
+                variation="primary"
+              >
+                Save changes
+              </Button>
+              <Button
+                onClick={[Function]}
+                type="button"
+                variation="transparent"
+              >
+                Cancel
+              </Button>
+            </fieldset>
+          </form>
+        </div>
+        <div
+          className="ds-l-col--1 ds-u-margin-right--auto"
+        />
       </div>
-      <div
-        className="ds-l-col--1 ds-u-fill--white ds-u-margin-right--auto"
-      />
     </div>
   </div>
 </Fragment>
@@ -224,90 +234,95 @@ exports[`my account page renders 3`] = `
     </div>
   </header>
   <div
-    className="ds-l-container card"
+    className="card--container"
   >
     <div
-      className="ds-l-row ds-u-radius ds-u-padding-y--5"
+      className="ds-l-container"
     >
       <div
-        className="ds-l-col--1 ds-u-fill--white ds-u-margin-left--auto"
-      />
-      <div
-        className="ds-l-col--6 ds-u-fill--white ds-u-padding-y--5"
+        className="ds-l-row card"
       >
-        <h1
-          className="ds-h1"
+        <div
+          className="ds-l-col--1 ds-u-margin-left--auto"
+        />
+        <div
+          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
         >
-          Manage account
-        </h1>
-        <form
-          onSubmit={[Function]}
-        >
-          <fieldset
-            className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
+          <h1
+            className="ds-h1"
           >
-            <legend
-              className="sr-only"
+            Manage account
+          </h1>
+          <form
+            onSubmit={[Function]}
+          >
+            <fieldset
+              className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
             >
-              manage account details
-            </legend>
-            <TextField
-              ariaLabel="please enter your full name"
-              label="Name"
-              name="name"
-              onChange={[Function]}
-              type="text"
-              value="Tina Belcher"
-            />
-            <TextField
-              ariaLabel="please enter your 10-digit phone number"
-              label="Phone number"
-              mask="phone"
-              name="phone"
-              onChange={[Function]}
-              size="medium"
-              type="text"
-              value="1-800-BURGERS"
-            />
-            <TextField
-              ariaLabel="please enter your position or role ???"
-              label="Role"
-              name="position"
-              onChange={[Function]}
-              type="text"
-              value="Table Cleaner"
-            />
-            <Password
-              className="mb2"
-              compareTo={Array []}
-              onChange={[Function]}
-              title="Change password"
-              value=""
-            />
-            <Button
-              disabled={true}
-              type="submit"
-              variation="primary"
-            >
-              <Spinner
-                aria-valuetext="Loading"
-                role="progressbar"
+              <legend
+                className="sr-only"
+              >
+                manage account details
+              </legend>
+              <TextField
+                ariaLabel="please enter your full name"
+                label="Name"
+                name="name"
+                onChange={[Function]}
+                type="text"
+                value="Tina Belcher"
               />
-               Working
-            </Button>
-            <Button
-              onClick={[Function]}
-              type="button"
-              variation="transparent"
-            >
-              Cancel
-            </Button>
-          </fieldset>
-        </form>
+              <TextField
+                ariaLabel="please enter your 10-digit phone number"
+                label="Phone number"
+                mask="phone"
+                name="phone"
+                onChange={[Function]}
+                size="medium"
+                type="text"
+                value="1-800-BURGERS"
+              />
+              <TextField
+                ariaLabel="please enter your position or role ???"
+                label="Role"
+                name="position"
+                onChange={[Function]}
+                type="text"
+                value="Table Cleaner"
+              />
+              <Password
+                className="mb2"
+                compareTo={Array []}
+                onChange={[Function]}
+                showMeter={true}
+                title="Change password"
+                value=""
+              />
+              <Button
+                disabled={true}
+                type="submit"
+                variation="primary"
+              >
+                <Spinner
+                  aria-valuetext="Loading"
+                  role="progressbar"
+                />
+                 Working
+              </Button>
+              <Button
+                onClick={[Function]}
+                type="button"
+                variation="transparent"
+              >
+                Cancel
+              </Button>
+            </fieldset>
+          </form>
+        </div>
+        <div
+          className="ds-l-col--1 ds-u-margin-right--auto"
+        />
       </div>
-      <div
-        className="ds-l-col--1 ds-u-fill--white ds-u-margin-right--auto"
-      />
     </div>
   </div>
 </Fragment>
