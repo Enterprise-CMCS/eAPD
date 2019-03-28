@@ -65,7 +65,7 @@ class Login extends Component {
                   />
                   <Button
                     type="submit"
-                    disabled={fetching}
+                    disabled={fetching || username.length == 0 || password.length == 0}
                     variation="primary"
                     className="ds-u-margin-y--4"
                   >
