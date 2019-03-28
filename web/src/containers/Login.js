@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { Alert, Button, TextField } from '@cmsgov/design-system-core';
 
 import { login } from '../actions/auth';
+import Password from '../components/PasswordWithMeter';
 import Header from '../components/Header';
 
 class Login extends Component {
@@ -57,18 +58,16 @@ class Login extends Component {
                     value={username}
                     onChange={this.handleChange}
                   />
-                  <TextField
-                    id="password"
-                    label="Password"
-                    name="password"
-                    ariaLabel="please enter the password associated with this account"
+                  <Password
+                    title="Password"
                     value={password}
                     onChange={this.handleChange}
+                    ariaLabel="please enter the password associated with this account"
                   />
                   <Button
                     type="submit"
                     disabled={fetching}
-                    className="ds-c-button--primary"
+                    variation="primary"
                   >
                   {fetching ? 'Submitting' : 'Submit'}
                 </Button>
