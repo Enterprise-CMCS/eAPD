@@ -110,6 +110,7 @@ class MyAccount extends Component {
                     onChange={this.handleEditAccount}
                   />
                   <Password
+                    showMeter
                     className="mb2"
                     title="Change password"
                     value={password}
