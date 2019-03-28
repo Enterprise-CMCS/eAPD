@@ -1,10 +1,9 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { t } from '../i18n';
 
-const Header = ({props}) => {
+const Header = () => {
   return (
     <header className="header__slim">
       <div className="ds-l-container">
