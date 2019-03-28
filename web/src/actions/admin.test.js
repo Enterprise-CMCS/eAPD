@@ -3,7 +3,6 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import sinon from 'sinon';
 
-import { ADD_NOTIFICATION } from './notification';
 import * as actions from './admin';
 
 import axios from '../util/api';
