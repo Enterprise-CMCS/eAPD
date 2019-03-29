@@ -1,0 +1,17 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  legend {
+    margin-top: $spacer-3;
+    font-size: $h4-font-size;
+    font-weight: bold;
+  }
+
+  div:first-child label.ds-c-label {
+    margin-top: 0;
+  }
+}
