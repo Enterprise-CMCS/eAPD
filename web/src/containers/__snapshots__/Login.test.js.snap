@@ -27,388 +27,314 @@ exports[`login component renders correctly if logged in, but no previous locatio
 
 exports[`login component renders correctly if not logged in 1`] = `
 <Fragment>
-  <header
-    className="clearfix px2 py1 bg-white"
+  <Header />
+  <div
+    className="card--container"
   >
     <div
-      className="left"
+      className="ds-l-container card"
     >
-      <Link
-        className="btn px0 bold caps"
-        replace={false}
-        to="/"
+      <div
+        className="ds-l-row"
       >
-        CMS HITECH APD
-      </Link>
+        <div
+          className="ds-l-col--1 ds-u-margin-left--auto"
+        />
+        <div
+          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+        >
+          <h1
+            className="ds-h1"
+          >
+            Log in
+          </h1>
+          <form
+            onSubmit={[Function]}
+          >
+            <TextField
+              ariaLabel="Enter the email associated with this account."
+              id="username"
+              label="Email"
+              name="username"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+            <Password
+              compareTo={Array []}
+              onChange={[Function]}
+              showMeter={false}
+              title="Password"
+              value=""
+            />
+            <Button
+              className="ds-u-margin-y--4"
+              disabled={true}
+              type="submit"
+              variation="primary"
+            >
+              Log in
+            </Button>
+          </form>
+        </div>
+        <div
+          className="ds-l-col--1 ds-u-margin-right--auto"
+        />
+      </div>
     </div>
-  </header>
-  <div
-    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
-  >
-    <h1
-      className="mt0 h2"
-    >
-      Please log in.
-    </h1>
-    <form
-      onSubmit={[Function]}
-    >
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="username"
-        >
-          Email
-        </label>
-        <input
-          className="input"
-          id="username"
-          name="username"
-          onChange={[Function]}
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="password"
-        >
-          Password
-        </label>
-        <input
-          className="input"
-          id="password"
-          name="password"
-          onChange={[Function]}
-          type="password"
-          value=""
-        />
-      </div>
-      <Btn
-        disabled={false}
-        extraCss={null}
-        kind="primary"
-        size={null}
-        type="submit"
-      >
-        Submit
-      </Btn>
-    </form>
   </div>
 </Fragment>
 `;
 
 exports[`login component renders correctly if not logged in 2`] = `
 <Fragment>
-  <header
-    className="clearfix px2 py1 bg-white"
+  <Header />
+  <div
+    className="card--container"
   >
     <div
-      className="left"
+      className="ds-l-container card"
     >
-      <Link
-        className="btn px0 bold caps"
-        replace={false}
-        to="/"
+      <div
+        className="ds-l-row"
       >
-        CMS HITECH APD
-      </Link>
+        <div
+          className="ds-l-col--1 ds-u-margin-left--auto"
+        />
+        <div
+          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+        >
+          <h1
+            className="ds-h1"
+          >
+            Log in
+          </h1>
+          <form
+            onSubmit={[Function]}
+          >
+            <TextField
+              ariaLabel="Enter the email associated with this account."
+              id="username"
+              label="Email"
+              name="username"
+              onChange={[Function]}
+              type="text"
+              value="bob"
+            />
+            <Password
+              compareTo={Array []}
+              onChange={[Function]}
+              showMeter={false}
+              title="Password"
+              value=""
+            />
+            <Button
+              className="ds-u-margin-y--4"
+              disabled={true}
+              type="submit"
+              variation="primary"
+            >
+              Log in
+            </Button>
+          </form>
+        </div>
+        <div
+          className="ds-l-col--1 ds-u-margin-right--auto"
+        />
+      </div>
     </div>
-  </header>
-  <div
-    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
-  >
-    <h1
-      className="mt0 h2"
-    >
-      Please log in.
-    </h1>
-    <form
-      onSubmit={[Function]}
-    >
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="username"
-        >
-          Email
-        </label>
-        <input
-          className="input"
-          id="username"
-          name="username"
-          onChange={[Function]}
-          type="text"
-          value="bob"
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="password"
-        >
-          Password
-        </label>
-        <input
-          className="input"
-          id="password"
-          name="password"
-          onChange={[Function]}
-          type="password"
-          value=""
-        />
-      </div>
-      <Btn
-        disabled={false}
-        extraCss={null}
-        kind="primary"
-        size={null}
-        type="submit"
-      >
-        Submit
-      </Btn>
-    </form>
   </div>
 </Fragment>
 `;
 
 exports[`login component renders correctly if not logged in 3`] = `
 <Fragment>
-  <header
-    className="clearfix px2 py1 bg-white"
+  <Header />
+  <div
+    className="card--container"
   >
     <div
-      className="left"
+      className="ds-l-container card"
     >
-      <Link
-        className="btn px0 bold caps"
-        replace={false}
-        to="/"
+      <div
+        className="ds-l-row"
       >
-        CMS HITECH APD
-      </Link>
+        <div
+          className="ds-l-col--1 ds-u-margin-left--auto"
+        />
+        <div
+          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+        >
+          <h1
+            className="ds-h1"
+          >
+            Log in
+          </h1>
+          <form
+            onSubmit={[Function]}
+          >
+            <TextField
+              ariaLabel="Enter the email associated with this account."
+              id="username"
+              label="Email"
+              name="username"
+              onChange={[Function]}
+              type="text"
+              value="bob"
+            />
+            <Password
+              compareTo={Array []}
+              onChange={[Function]}
+              showMeter={false}
+              title="Password"
+              value="secret"
+            />
+            <Button
+              className="ds-u-margin-y--4"
+              disabled={false}
+              type="submit"
+              variation="primary"
+            >
+              Log in
+            </Button>
+          </form>
+        </div>
+        <div
+          className="ds-l-col--1 ds-u-margin-right--auto"
+        />
+      </div>
     </div>
-  </header>
-  <div
-    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
-  >
-    <h1
-      className="mt0 h2"
-    >
-      Please log in.
-    </h1>
-    <form
-      onSubmit={[Function]}
-    >
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="username"
-        >
-          Email
-        </label>
-        <input
-          className="input"
-          id="username"
-          name="username"
-          onChange={[Function]}
-          type="text"
-          value="bob"
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="password"
-        >
-          Password
-        </label>
-        <input
-          className="input"
-          id="password"
-          name="password"
-          onChange={[Function]}
-          type="password"
-          value="secret"
-        />
-      </div>
-      <Btn
-        disabled={false}
-        extraCss={null}
-        kind="primary"
-        size={null}
-        type="submit"
-      >
-        Submit
-      </Btn>
-    </form>
   </div>
 </Fragment>
 `;
 
 exports[`login component renders correctly if not logged in and fetching data 1`] = `
 <Fragment>
-  <header
-    className="clearfix px2 py1 bg-white"
+  <Header />
+  <div
+    className="card--container"
   >
     <div
-      className="left"
+      className="ds-l-container card"
     >
-      <Link
-        className="btn px0 bold caps"
-        replace={false}
-        to="/"
+      <div
+        className="ds-l-row"
       >
-        CMS HITECH APD
-      </Link>
+        <div
+          className="ds-l-col--1 ds-u-margin-left--auto"
+        />
+        <div
+          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+        >
+          <h1
+            className="ds-h1"
+          >
+            Log in
+          </h1>
+          <form
+            onSubmit={[Function]}
+          >
+            <TextField
+              ariaLabel="Enter the email associated with this account."
+              id="username"
+              label="Email"
+              name="username"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+            <Password
+              compareTo={Array []}
+              onChange={[Function]}
+              showMeter={false}
+              title="Password"
+              value=""
+            />
+            <Button
+              className="ds-u-margin-y--4"
+              disabled={true}
+              type="submit"
+              variation="primary"
+            >
+              Logging in
+            </Button>
+          </form>
+        </div>
+        <div
+          className="ds-l-col--1 ds-u-margin-right--auto"
+        />
+      </div>
     </div>
-  </header>
-  <div
-    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
-  >
-    <h1
-      className="mt0 h2"
-    >
-      Please log in.
-    </h1>
-    <form
-      onSubmit={[Function]}
-    >
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="username"
-        >
-          Email
-        </label>
-        <input
-          className="input"
-          id="username"
-          name="username"
-          onChange={[Function]}
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="password"
-        >
-          Password
-        </label>
-        <input
-          className="input"
-          id="password"
-          name="password"
-          onChange={[Function]}
-          type="password"
-          value=""
-        />
-      </div>
-      <Btn
-        disabled={true}
-        extraCss={null}
-        kind="primary"
-        size={null}
-        type="submit"
-      >
-        Submitting
-      </Btn>
-    </form>
   </div>
 </Fragment>
 `;
 
 exports[`login component renders correctly if not logged in and there is an error 1`] = `
 <Fragment>
-  <header
-    className="clearfix px2 py1 bg-white"
-  >
-    <div
-      className="left"
-    >
-      <Link
-        className="btn px0 bold caps"
-        replace={false}
-        to="/"
-      >
-        CMS HITECH APD
-      </Link>
-    </div>
-  </header>
+  <Header />
   <div
-    className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded"
+    className="card--container"
   >
-    <h1
-      className="mt0 h2"
-    >
-      Please log in.
-    </h1>
     <div
-      className="mb2 p1 h6 alert alert-error"
+      className="ds-l-container card"
     >
-      <strong>
-        Sorry!
-      </strong>
-       Something went wrong. Please try again.
+      <div
+        className="ds-l-row"
+      >
+        <div
+          className="ds-l-col--1 ds-u-margin-left--auto"
+        />
+        <div
+          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+        >
+          <h1
+            className="ds-h1"
+          >
+            Log in
+          </h1>
+          <Alert
+            role="alert"
+            variation="error"
+          >
+            <strong>
+              Sorry!
+            </strong>
+             Something went wrong. Please try again.
+          </Alert>
+          <form
+            onSubmit={[Function]}
+          >
+            <TextField
+              ariaLabel="Enter the email associated with this account."
+              id="username"
+              label="Email"
+              name="username"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+            <Password
+              compareTo={Array []}
+              onChange={[Function]}
+              showMeter={false}
+              title="Password"
+              value=""
+            />
+            <Button
+              className="ds-u-margin-y--4"
+              disabled={true}
+              type="submit"
+              variation="primary"
+            >
+              Log in
+            </Button>
+          </form>
+        </div>
+        <div
+          className="ds-l-col--1 ds-u-margin-right--auto"
+        />
+      </div>
     </div>
-    <form
-      onSubmit={[Function]}
-    >
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="username"
-        >
-          Email
-        </label>
-        <input
-          className="input"
-          id="username"
-          name="username"
-          onChange={[Function]}
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="mb2"
-      >
-        <label
-          htmlFor="password"
-        >
-          Password
-        </label>
-        <input
-          className="input"
-          id="password"
-          name="password"
-          onChange={[Function]}
-          type="password"
-          value=""
-        />
-      </div>
-      <Btn
-        disabled={false}
-        extraCss={null}
-        kind="primary"
-        size={null}
-        type="submit"
-      >
-        Submit
-      </Btn>
-    </form>
   </div>
 </Fragment>
 `;
