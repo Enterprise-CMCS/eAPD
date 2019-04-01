@@ -39,7 +39,7 @@ module.exports = (app, { deserialize = deserializeUser } = {}) => {
       } catch (e) {
         res
           .status(400)
-          .send({ error: `update-self-${e.message}` })
+          .send({ error: `edit-self.${e.message}` })
           .end();
         return;
       }

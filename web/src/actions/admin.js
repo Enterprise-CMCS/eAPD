@@ -77,27 +77,12 @@ export const createUser = (
       dispatch(dispatchGetUsers());
     })
     .catch(e => {
-      let message = 'Unknown error creating user';
-      switch (e.response.data.error) {
-        case 'add-user-invalid':
-          message = 'Email and password are required';
-          break;
-        case 'add-user-email-exists':
-          message = 'A user with this email already exists';
-          break;
-        case 'add-user-weak-password':
-          message = 'The provided password is too weak';
-          break;
-        case 'add-user-invalid-phone':
-          message = 'The provided phone number is invalid';
-          break;
-        default:
-          break;
+      let error = null;
+      if (e.response.data) {
+        ({ error } = e.response.data);
       }
 
-      dispatch({ type: ADMIN_CREATE_USER_ERROR, data: message });
-
-      return Promise.reject(message);
+      dispatch({ type: ADMIN_CREATE_USER_ERROR, data: error });
     });
 };
 
@@ -130,29 +115,12 @@ export const editAccount = user => dispatch => {
       dispatch(getUsers());
     })
     .catch(e => {
-      let message = 'Unknown error editing account';
-
-      switch (e.response.data.error) {
-        case 'update-user-invalid-state':
-          message = 'The state selected for the account is invalid';
-          break;
-        case 'update-user-invalid-role':
-          message =
-            'The authorization role selected for the account is invalid';
-          break;
-        case 'update-user-email-exists':
-          message = 'Another account already exists with that email address';
-          break;
-        case 'update-user-invalid-phone':
-          message = 'Phone number may not be more than 10 digits';
-          break;
-        default:
-          message = 'Unknown error editing account';
-          break;
+      let error = null;
+      if (e.response.data) {
+        ({ error } = e.response.data);
       }
-      dispatch({ type: ADMIN_EDIT_ACCOUNT_ERROR, data: message });
 
-      return Promise.reject(message);
+      dispatch({ type: ADMIN_EDIT_ACCOUNT_ERROR, data: error });
     });
 };
 
@@ -174,24 +142,11 @@ export const editSelf = user => dispatch => {
       dispatch({ type: ADMIN_EDIT_ME_SUCCESS, data: res.data });
     })
     .catch(e => {
-      let message = 'Unknown error editing account';
-
-      switch (e.response.data.error) {
-        case 'update-self-email-exists':
-          message = 'Another account already exists with that email address';
-          break;
-        case 'update-self-invalid-phone':
-          message = 'Phone number may not be more than 10 digits';
-          break;
-        case 'update-self-weak-password':
-          message = 'The provided password is too weak';
-          break;
-        default:
-          message = 'Unknown error editing account';
-          break;
+      let error = null;
+      if (e.response.data) {
+        ({ error } = e.response.data);
       }
 
-      dispatch({ type: ADMIN_EDIT_ME_ERROR, data: message });
-      return Promise.reject(message);
+      dispatch({ type: ADMIN_EDIT_ME_ERROR, data: error });
     });
 };

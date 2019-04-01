@@ -6,16 +6,27 @@ import { connect } from 'react-redux';
 import { editAccount as editAccountDispatch } from '../../actions/admin';
 import CardForm from '../../components/CardForm';
 import Header from '../../components/Header';
+import { getEditAccountError } from '../../reducers/errors';
+import { getEditAccountWorking } from '../../reducers/working';
 import { STATES } from '../../util';
 
 class EditAccount extends Component {
   state = {
-    error: false,
+    hasFetched: false,
     success: false,
     userID: '',
-    user: null,
-    working: false
+    user: null
   };
+
+  static getDerivedStateFromProps({ error, working }, { hasFetched }) {
+    if (!hasFetched) {
+      return { hasFetched: working };
+    }
+
+    return {
+      success: !working && !error
+    };
+  }
 
   getForm = () => {
     const { currentUser, roles } = this.props;
@@ -120,19 +131,12 @@ class EditAccount extends Component {
     const { editAccount } = this.props;
     const { user } = this.state;
 
-    this.setState({ working: true });
-    editAccount(user)
-      .then(() => {
-        this.setState({ error: false, success: true, working: false });
-      })
-      .catch(error => {
-        this.setState({ error, success: false, working: false });
-      });
+    editAccount(user);
   };
 
   render() {
-    const { users } = this.props;
-    const { error, success, userID, working } = this.state;
+    const { error, users, working } = this.props;
+    const { hasFetched, success, userID } = this.state;
 
     const onSave = !!userID && this.editAccount;
 
@@ -143,7 +147,7 @@ class EditAccount extends Component {
         <CardForm
           title="Manage accounts"
           sectionName="administrator"
-          error={error}
+          error={hasFetched && error}
           success={success && 'Account saved'}
           working={working}
           onSave={onSave}
@@ -175,17 +179,18 @@ class EditAccount extends Component {
 EditAccount.propTypes = {
   currentUser: PropTypes.object.isRequired,
   editAccount: PropTypes.func.isRequired,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
   roles: PropTypes.array.isRequired,
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
+  working: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({
-  admin: { roles, users },
-  auth: { user: currentUser }
-}) => ({
-  currentUser,
-  roles,
-  users
+const mapStateToProps = state => ({
+  currentUser: state.auth.user,
+  error: getEditAccountError(state),
+  roles: state.admin.roles,
+  users: state.admin.users,
+  working: getEditAccountWorking(state)
 });
 
 const mapDispatchToProps = { editAccount: editAccountDispatch };

@@ -10,8 +10,10 @@ describe('root reducer', () => {
       'auth',
       'budget',
       'dirty',
+      'errors',
       'notification',
       'user',
+      'working',
       'router'
     ]);
   });

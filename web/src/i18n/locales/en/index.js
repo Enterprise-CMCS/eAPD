@@ -3,6 +3,7 @@ import apd from './apd';
 import assurancesAndCompliance from './assurancesAndCompliance.yaml';
 import base from './app.yaml';
 import certifyAndSubmit from './certifyAndSubmit.yaml';
+import errors from './errors.yaml';
 import executiveSummary from './executiveSummary.yaml';
 import previousActivities from './previousActivities.yaml';
 import proposedBudget from './proposedBudget.yaml';
@@ -18,6 +19,7 @@ export default {
   apd,
   assurancesAndCompliance,
   certifyAndSubmit,
+  errors,
   executiveSummary,
   previousActivities,
   proposedBudget,

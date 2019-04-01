@@ -23,12 +23,16 @@ describe('admin page > edit account', () => {
         },
         auth: {
           user: 'the current user'
-        }
+        },
+        errors: { editAccount: 'that error' },
+        working: { editAccount: 'hard, playing likewise' }
       })
     ).toEqual({
       currentUser: 'the current user',
+      error: 'that error',
       roles: 'a list of roles',
-      users: 'and a list of users'
+      users: 'and a list of users',
+      working: 'hard, playing likewise'
     });
   });
 
@@ -37,6 +41,8 @@ describe('admin page > edit account', () => {
       shallow(
         <EditAccount
           currentUser={{ id: 1 }}
+          error={false}
+          working={false}
           roles={[{ name: 'one' }, { name: 'two' }, { name: 'three' }]}
           users={[
             {
@@ -61,6 +67,8 @@ describe('admin page > edit account', () => {
   test('disables the role when currently-logged-in user is selected', () => {
     const component = shallow(
       <EditAccount
+        error={false}
+        working={false}
         currentUser={{ id: 1 }}
         roles={[{ name: 'one' }, { name: 'two' }, { name: 'three' }]}
         users={[
@@ -95,6 +103,8 @@ describe('admin page > edit account', () => {
   test('enables the roles when someone else is selected', () => {
     const component = shallow(
       <EditAccount
+        error={false}
+        working={false}
         currentUser={{ id: 1 }}
         roles={[{ name: 'one' }, { name: 'two' }, { name: 'three' }]}
         users={[
@@ -144,6 +154,8 @@ describe('admin page > edit account', () => {
 
     const component = shallow(
       <EditAccount
+        error={false}
+        working={false}
         currentUser={{ id: 1 }}
         roles={[{ name: 'one' }, { name: 'two' }, { name: 'three' }]}
         users={[

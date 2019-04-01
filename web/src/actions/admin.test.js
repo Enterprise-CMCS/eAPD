@@ -151,55 +151,23 @@ describe('admin actions', () => {
       state: 'mo'
     };
 
-    [
-      [
-        'handles an invalid user',
-        'add-user-invalid',
-        'Email and password are required'
-      ],
-      [
-        'handles a conflicting email address',
-        'add-user-email-exists',
-        'A user with this email already exists'
-      ],
-      [
-        'handles a weak password',
-        'add-user-weak-password',
-        'The provided password is too weak'
-      ],
-      [
-        'handles an invalid phone number',
-        'add-user-invalid-phone',
-        'The provided phone number is invalid'
-      ],
-      [
-        'handles other errors',
-        'shrugging person made of symbols',
-        'Unknown error creating user'
-      ]
-    ].forEach(([testName, apiError, userError]) => {
-      it(testName, async () => {
-        const store = mockStore({ notification: { open: false, queue: [] } });
+    it('handles an error', async () => {
+      const store = mockStore({ notification: { open: false, queue: [] } });
 
-        fetchMock.onPost('/users').reply(400, { error: apiError });
+      fetchMock.onPost('/users').reply(400, { error: 'this-is-the-error' });
 
-        try {
-          await store.dispatch(actions.createUser(user));
-        } catch (e) {
-          expect(e).toEqual(userError);
-        }
+      await store.dispatch(actions.createUser(user));
 
-        expect(store.getActions()).toEqual(
-          expect.arrayContaining([
-            { type: actions.ADMIN_CREATE_USER_REQUEST },
-            {
-              type: actions.ADMIN_CREATE_USER_ERROR,
-              data: userError
-            }
-          ])
-        );
-        expect(store.getActions().length).toEqual(2);
-      });
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          { type: actions.ADMIN_CREATE_USER_REQUEST },
+          {
+            type: actions.ADMIN_CREATE_USER_ERROR,
+            data: 'this-is-the-error'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(2);
     });
 
     it('handles success', async () => {
@@ -224,52 +192,23 @@ describe('admin actions', () => {
   describe('edit a user account', () => {
     const user = { id: 7 };
 
-    [
-      [
-        'handles an invalid state (the political kind, not the logical kind)',
-        'update-user-invalid-state',
-        'The state selected for the account is invalid'
-      ],
-      [
-        'handles an invalid auth role',
-        'update-user-invalid-role',
-        'The authorization role selected for the account is invalid'
-      ],
-      [
-        'handles a conflicting email address',
-        'update-user-email-exists',
-        'Another account already exists with that email address'
-      ],
-      [
-        'handles an invalid phone number',
-        'update-user-invalid-phone',
-        'Phone number may not be more than 10 digits'
-      ],
-      [
-        'handles other errors',
-        'shrugging person made of symbols',
-        'Unknown error editing account'
-      ]
-    ].forEach(([testName, apiError, userError]) => {
-      it(testName, async () => {
-        const store = mockStore({ notification: { open: false, queue: [] } });
+    it('handles an error', async () => {
+      const store = mockStore({ notification: { open: false, queue: [] } });
 
-        fetchMock.onPut('/users/7').reply(400, { error: apiError });
+      fetchMock.onPut('/users/7').reply(400, { error: 'this-is-the-error' });
 
-        try {
-          await store.dispatch(actions.editAccount(user));
-        } catch (e) {
-          expect(e).toEqual(userError);
-        }
+      await store.dispatch(actions.editAccount(user));
 
-        expect(store.getActions()).toEqual(
-          expect.arrayContaining([
-            { type: actions.ADMIN_EDIT_ACCOUNT_REQUEST },
-            { type: actions.ADMIN_EDIT_ACCOUNT_ERROR, data: userError }
-          ])
-        );
-        expect(store.getActions().length).toEqual(2);
-      });
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          { type: actions.ADMIN_EDIT_ACCOUNT_REQUEST },
+          {
+            type: actions.ADMIN_EDIT_ACCOUNT_ERROR,
+            data: 'this-is-the-error'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(2);
     });
 
     it('handles success', async () => {
@@ -339,47 +278,23 @@ describe('admin actions', () => {
   describe('edit own account', () => {
     const user = { id: 7 };
 
-    [
-      [
-        'handles a conflicting email address',
-        'update-self-email-exists',
-        'Another account already exists with that email address'
-      ],
-      [
-        'handles an invalid phone number',
-        'update-self-invalid-phone',
-        'Phone number may not be more than 10 digits'
-      ],
-      [
-        'handles a weak password',
-        'update-self-weak-password',
-        'The provided password is too weak'
-      ],
-      [
-        'handles other errors',
-        'shrugging person made of symbols',
-        'Unknown error editing account'
-      ]
-    ].forEach(([testName, apiError, userError]) => {
-      it(testName, async () => {
-        const store = mockStore({ notification: { open: false, queue: [] } });
+    it('handles an error', async () => {
+      const store = mockStore({ notification: { open: false, queue: [] } });
 
-        fetchMock.onPut('/me').reply(400, { error: apiError });
+      fetchMock.onPut('/me').reply(400, { error: 'this-is-the-error' });
 
-        try {
-          await store.dispatch(actions.editSelf(user));
-        } catch (e) {
-          expect(e).toEqual(userError);
-        }
+      await store.dispatch(actions.editSelf(user));
 
-        expect(store.getActions()).toEqual(
-          expect.arrayContaining([
-            { type: actions.ADMIN_EDIT_ME_REQUEST },
-            { type: actions.ADMIN_EDIT_ME_ERROR, data: userError }
-          ])
-        );
-        expect(store.getActions().length).toEqual(2);
-      });
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          { type: actions.ADMIN_EDIT_ME_REQUEST },
+          {
+            type: actions.ADMIN_EDIT_ME_ERROR,
+            data: 'this-is-the-error'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(2);
     });
 
     it('handles success', async () => {

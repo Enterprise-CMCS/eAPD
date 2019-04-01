@@ -68,7 +68,7 @@ module.exports = (
           logger.verbose(`state [${req.body.state}] is invalid`);
           return res
             .status(400)
-            .send({ error: 'update-user-invalid-state' })
+            .send({ error: 'edit-account.invalid-state' })
             .end();
         }
       }
@@ -86,7 +86,7 @@ module.exports = (
           logger.verbose(`role [${req.body.role}] is invalid`);
           return res
             .status(400)
-            .send({ error: 'update-user-invalid-role' })
+            .send({ error: 'edit-account.invalid-role' })
             .end();
         }
       }
@@ -104,7 +104,7 @@ module.exports = (
       } catch (e) {
         return res
           .status(400)
-          .send({ error: `update-user-${e.message}` })
+          .send({ error: `edit-account.${e.message}` })
           .end();
       }
 

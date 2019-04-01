@@ -34,7 +34,7 @@ module.exports = (app, UserModel = defaultUserModel) => {
           logger.verbose('validation fail');
           return res
             .status(400)
-            .send({ error: `add-user-${e.message}` })
+            .send({ error: `add-account.${e.message}` })
             .end();
         }
 
@@ -52,7 +52,7 @@ module.exports = (app, UserModel = defaultUserModel) => {
       );
       return res
         .status(400)
-        .send({ error: 'add-user-invalid' })
+        .send({ error: 'add-account.invalid' })
         .end();
     }
   });
