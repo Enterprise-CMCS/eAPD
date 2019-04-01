@@ -2,18 +2,9 @@
 
 exports[`apd state profile, Medicaid office component renders correctly 1`] = `
 <Fragment>
-  <h4
-    className="ds-h4 ds-u-margin-bottom--0"
-  >
-    Medicaid director
-  </h4>
-  <fieldset
-    className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
-  >
-    <legend
-      className="sr-only"
-    >
-      medicaid director details
+  <fieldset>
+    <legend>
+      Medicaid director
     </legend>
     <TextField
       label="Name"
@@ -37,18 +28,9 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       value="phone"
     />
   </fieldset>
-  <h4
-    className="ds-h4 ds-u-margin-bottom--0 ds-u-margin-top--5"
-  >
-    Medicaid office
-  </h4>
-  <fieldset
-    className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
-  >
-    <legend
-      className="sr-only"
-    >
-      medicaid office details
+  <fieldset>
+    <legend>
+      Medicaid office
     </legend>
     <TextField
       label="Address"
@@ -443,18 +425,9 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
 
 exports[`apd state profile, Medicaid office component renders correctly 2`] = `
 <Fragment>
-  <h4
-    className="ds-h4 ds-u-margin-bottom--0"
-  >
-    Medicaid director
-  </h4>
-  <fieldset
-    className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
-  >
-    <legend
-      className="sr-only"
-    >
-      medicaid director details
+  <fieldset>
+    <legend>
+      Medicaid director
     </legend>
     <TextField
       label="Name"
@@ -478,18 +451,9 @@ exports[`apd state profile, Medicaid office component renders correctly 2`] = `
       value="phone"
     />
   </fieldset>
-  <h4
-    className="ds-h4 ds-u-margin-bottom--0 ds-u-margin-top--5"
-  >
-    Medicaid office
-  </h4>
-  <fieldset
-    className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
-  >
-    <legend
-      className="sr-only"
-    >
-      medicaid office details
+  <fieldset>
+    <legend>
+      Medicaid office
     </legend>
     <TextField
       label="Address"
