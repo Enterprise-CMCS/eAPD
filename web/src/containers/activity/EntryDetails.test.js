@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import React from 'react';
 
 import {
-  EntryDetailsRaw as EntryDetails,
+  plain as EntryDetails,
   mapStateToProps,
   mapDispatchToProps
 } from './EntryDetails';
@@ -14,11 +14,13 @@ import {
 
 describe('the (Activity) EntryDetails component', () => {
   const props = {
+    activity: {
+      name: 'activity name'
+    },
     aKey: 'activity-key',
     expanded: false,
     num: 3,
     removeActivity: sinon.stub(),
-    title: 'Activity title',
     toggleSection: sinon.stub()
   };
 
@@ -42,24 +44,26 @@ describe('the (Activity) EntryDetails component', () => {
   });
 
   test('maps redux state to component props', () => {
+    const activity = {
+      fundingSource: 'FUNDING!',
+      meta: { expanded: 'bloop' },
+      name: 'activity name'
+    };
+
     expect(
       mapStateToProps(
         {
           activities: {
             byKey: {
-              key: {
-                fundingSource: 'FUNDING!',
-                meta: { expanded: 'bloop' },
-                name: 'activity name'
-              }
+              key: activity
             }
           }
         },
         { aKey: 'key', num: 3 }
       )
     ).toEqual({
-      expanded: 'bloop',
-      title: 'Program Activities › Activity 3: activity name (FUNDING!)'
+      activity,
+      expanded: 'bloop'
     });
   });
 

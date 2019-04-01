@@ -8,6 +8,7 @@ import {
   mapDispatchToProps
 } from './Sidebar';
 import { saveApd } from '../actions/apd';
+import { jumpTo } from '../actions/navigation';
 import { printApd } from '../actions/print';
 
 describe('Sidebar component', () => {
@@ -16,6 +17,8 @@ describe('Sidebar component', () => {
       { anchor: '#key1', key: 'key 1' },
       { anchor: '#key2', key: 'key 2' }
     ],
+    activeSection: 'some section',
+    jumpTo: sinon.spy(),
     place: { id: 'place id', name: 'place name' },
     printApd: sinon.spy(),
     saveApdToAPI: sinon.spy()
@@ -50,6 +53,9 @@ describe('Sidebar component', () => {
       activities: {
         byKey: { key1: { name: 'activity 1' }, key2: { name: 'activity 2' } },
         allKeys: ['key1', 'key2']
+      },
+      navigation: {
+        activeSection: 'where the runners are'
       }
     };
 
@@ -65,12 +71,14 @@ describe('Sidebar component', () => {
           anchor: 'activity-key2',
           name: 'activity 2'
         }
-      ]
+      ],
+      activeSection: 'where the runners are'
     });
   });
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
+      jumpTo,
       printApd,
       saveApdToAPI: saveApd
     });

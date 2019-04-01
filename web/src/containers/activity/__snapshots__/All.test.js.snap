@@ -1,59 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the Activities component renders correctly 1`] = `
-<Section
-  id="activities"
-  isNumbered={true}
-  resource="activities"
+<Connect(ConnectedWaypoint)
+  id="activities-overview"
 >
-  <Subsection
-    id="activities-list"
-    nested={false}
-    open={true}
-    resource="activities.list"
+  <Section
+    id="activities"
+    isNumbered={true}
+    resource="activities"
   >
-    <div
-      className="mb3"
+    <Connect(ConnectedWaypoint)
+      id="activities-list"
+    />
+    <Subsection
+      id="activities-list"
+      nested={false}
+      open={true}
+      resource="activities.list"
     >
-      <Connect(EntryBasic)
+      <div
+        className="mb3"
+      >
+        <Connect(EntryBasic)
+          aKey="1"
+          key="1"
+          num={1}
+        />
+        <Connect(EntryBasic)
+          aKey="2"
+          key="2"
+          num={2}
+        />
+        <Connect(EntryBasic)
+          aKey="3"
+          key="3"
+          num={3}
+        />
+      </div>
+      <Btn
+        extraCss="visibility--screen"
+        kind="primary"
+        onClick={[Function]}
+        size={null}
+      >
+        Add activity
+      </Btn>
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="1"
+    >
+      <Connect(EntryDetails)
         aKey="1"
         key="1"
         num={1}
       />
-      <Connect(EntryBasic)
+    </Connect(ConnectedWaypoint)>
+    <Connect(ConnectedWaypoint)
+      id="2"
+    >
+      <Connect(EntryDetails)
         aKey="2"
         key="2"
         num={2}
       />
-      <Connect(EntryBasic)
+    </Connect(ConnectedWaypoint)>
+    <Connect(ConnectedWaypoint)
+      id="3"
+    >
+      <Connect(EntryDetails)
         aKey="3"
         key="3"
         num={3}
       />
-    </div>
-    <Btn
-      extraCss="visibility--screen"
-      kind="primary"
-      onClick={[Function]}
-      size={null}
-    >
-      Add activity
-    </Btn>
-  </Subsection>
-  <Connect(EntryDetails)
-    aKey="1"
-    key="1"
-    num={1}
-  />
-  <Connect(EntryDetails)
-    aKey="2"
-    key="2"
-    num={2}
-  />
-  <Connect(EntryDetails)
-    aKey="3"
-    key="3"
-    num={3}
-  />
-</Section>
+    </Connect(ConnectedWaypoint)>
+  </Section>
+</Connect(ConnectedWaypoint)>
 `;

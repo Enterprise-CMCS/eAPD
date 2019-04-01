@@ -346,7 +346,7 @@ describe('apd actions', () => {
     });
   });
 
-  describe('fetch APD data if needed (async)', async () => {
+  describe('fetch APD data if needed (async)', () => {
     it('fetches data if it is not already loaded', async () => {
       const store = mockStore({
         apd: {
