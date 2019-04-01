@@ -4,28 +4,30 @@ import { connect } from 'react-redux';
 import ReactTable from 'react-table';
 
 import { t } from '../i18n';
+import Waypoint from './ConnectedWaypoint';
 import { Section, Subsection } from '../components/Section';
+import { selectActivitySchedule } from '../reducers/activities.selectors';
 
 const ScheduleSummary = ({ tableData }) => (
-  <Section
-    isNumbered
-    id="schedule-summary"
-    resource="scheduleSummary"
-  >
-    <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
-      {tableData.data.length === 0 ? (
-        <div className="p1 h6 alert">{t('scheduleSummary.noDataMessage')}</div>
-      ) : (
-        <ReactTable
-          showPagination={false}
-          resizable={false}
-          minRows={0}
-          className="h6 -striped"
-          {...tableData}
-        />
-      )}
-    </Subsection>
-  </Section>
+  <Waypoint id="schedule-summary">
+    <Section isNumbered id="schedule-summary" resource="scheduleSummary">
+      <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
+        {tableData.data.length === 0 ? (
+          <div className="p1 h6 alert">
+            {t('scheduleSummary.noDataMessage')}
+          </div>
+        ) : (
+          <ReactTable
+            showPagination={false}
+            resizable={false}
+            minRows={0}
+            className="h6 -striped"
+            {...tableData}
+          />
+        )}
+      </Subsection>
+    </Section>
+  </Waypoint>
 );
 
 ScheduleSummary.propTypes = {
@@ -38,18 +40,8 @@ ScheduleSummary.propTypes = {
 
 const Cell = row => row.value || 'N/A';
 
-const mapStateToProps = ({ activities }) => {
-  const data = [];
-
-  Object.values(activities.byKey).forEach(activity => {
-    activity.schedule.forEach(milestone => {
-      data.push({
-        ...milestone,
-        activityName: activity.name,
-        startDate: activity.plannedStartDate
-      });
-    });
-  });
+const mapStateToProps = state => {
+  const data = selectActivitySchedule(state);
 
   const columns = [
     {

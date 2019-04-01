@@ -7,6 +7,7 @@ import { Textarea } from '../../components/Inputs';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
+import { selectActivityByKey } from '../../reducers/activities.selectors';
 import { STANDARDS } from '../../util';
 
 class StandardsAndConditions extends Component {
@@ -52,8 +53,8 @@ StandardsAndConditions.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
-  activity: byKey[aKey]
+const mapStateToProps = (state, props) => ({
+  activity: selectActivityByKey(state, props)
 });
 
 const mapDispatchToProps = {
