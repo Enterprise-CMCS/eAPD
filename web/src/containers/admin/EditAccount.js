@@ -2,12 +2,11 @@ import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { STATES } from '../../util';
 
-import AdminForm from './AdminForm';
 import { editAccount as editAccountDispatch } from '../../actions/admin';
-import { t } from '../../i18n';
+import CardForm from '../../components/CardForm';
+import Header from '../../components/Header';
+import { STATES } from '../../util';
 
 class EditAccount extends Component {
   state = {
@@ -139,16 +138,11 @@ class EditAccount extends Component {
 
     return (
       <Fragment>
-        <header className="clearfix px2 py1 bg-white">
-          <div className="left">
-            <Link to="/" className="btn px0 bold caps">
-              {t('titleBasic')}
-            </Link>
-          </div>
-        </header>
+        <Header />
 
-        <AdminForm
+        <CardForm
           title="Manage accounts"
+          sectionName="administrator"
           error={error}
           success={success && 'Account saved'}
           working={working}
@@ -172,7 +166,7 @@ class EditAccount extends Component {
           </Select>
 
           {this.getForm()}
-        </AdminForm>
+        </CardForm>
       </Fragment>
     );
   }

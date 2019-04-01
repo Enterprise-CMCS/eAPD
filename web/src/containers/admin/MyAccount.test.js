@@ -75,7 +75,7 @@ describe('my account page', () => {
       );
 
       await component
-        .find('AdminForm')
+        .find('CardForm')
         .props()
         .onSave({ preventDefault });
 
@@ -103,7 +103,7 @@ describe('my account page', () => {
       );
 
       await component
-        .find('AdminForm')
+        .find('CardForm')
         .props()
         .onSave({ preventDefault });
 
@@ -128,7 +128,7 @@ describe('my account page', () => {
     );
 
     component
-      .find('AdminForm')
+      .find('CardForm')
       .props()
       .onCancel();
 

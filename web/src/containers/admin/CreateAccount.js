@@ -2,12 +2,11 @@ import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import AdminForm from './AdminForm';
-import { STATES } from '../../util';
+import CardForm from '../../components/CardForm';
+import Header from '../../components/Header';
 import Password from '../../components/PasswordWithMeter';
+import { STATES } from '../../util';
 import { createUser as createUserDispatch } from '../../actions/admin';
-import { t } from '../../i18n';
 
 class CreateUser extends Component {
   state = {
@@ -69,16 +68,11 @@ class CreateUser extends Component {
 
     return (
       <Fragment>
-        <header className="clearfix px2 py1 bg-white">
-          <div className="left">
-            <Link to="/" className="btn px0 bold caps">
-              {t('titleBasic')}
-            </Link>
-          </div>
-        </header>
+        <Header />
 
-        <AdminForm
+        <CardForm
           title="Create account"
+          sectionName="administrator"
           error={error}
           success={success && 'Account created'}
           working={fetching}
@@ -141,7 +135,7 @@ class CreateUser extends Component {
             onChange={this.handleChange}
             className="mb2"
           />
-        </AdminForm>
+        </CardForm>
       </Fragment>
     );
   }

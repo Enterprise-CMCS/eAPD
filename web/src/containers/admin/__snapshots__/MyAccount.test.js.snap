@@ -2,26 +2,19 @@
 
 exports[`my account page handles submitting the form with an error 1`] = `
 <Fragment>
-  <header
-    className="clearfix mb2 px2 py1 bg-white"
-  >
-    <div
-      className="left"
-    >
-      <Link
-        className="btn px0 bold caps"
-        replace={false}
-        to="/"
-      >
-        CMS HITECH APD
-      </Link>
-    </div>
-  </header>
-  <AdminForm
+  <Header />
+  <CardForm
     error="error message"
     legend="manage account details"
     onCancel={[Function]}
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
+    sectionName="administrator"
     success={false}
     title="Manage account"
     working={false}
@@ -60,32 +53,25 @@ exports[`my account page handles submitting the form with an error 1`] = `
       title="Change password"
       value=""
     />
-  </AdminForm>
+  </CardForm>
 </Fragment>
 `;
 
 exports[`my account page handles submitting the form with no error 1`] = `
 <Fragment>
-  <header
-    className="clearfix mb2 px2 py1 bg-white"
-  >
-    <div
-      className="left"
-    >
-      <Link
-        className="btn px0 bold caps"
-        replace={false}
-        to="/"
-      >
-        CMS HITECH APD
-      </Link>
-    </div>
-  </header>
-  <AdminForm
+  <Header />
+  <CardForm
     error={false}
     legend="manage account details"
     onCancel={[Function]}
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
+    sectionName="administrator"
     success="Changes saved"
     title="Manage account"
     working={false}
@@ -124,32 +110,25 @@ exports[`my account page handles submitting the form with no error 1`] = `
       title="Change password"
       value=""
     />
-  </AdminForm>
+  </CardForm>
 </Fragment>
 `;
 
 exports[`my account page renders 1`] = `
 <Fragment>
-  <header
-    className="clearfix mb2 px2 py1 bg-white"
-  >
-    <div
-      className="left"
-    >
-      <Link
-        className="btn px0 bold caps"
-        replace={false}
-        to="/"
-      >
-        CMS HITECH APD
-      </Link>
-    </div>
-  </header>
-  <AdminForm
+  <Header />
+  <CardForm
     error={false}
     legend="manage account details"
     onCancel={[Function]}
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
+    sectionName="administrator"
     success={false}
     title="Manage account"
     working={false}
@@ -188,32 +167,25 @@ exports[`my account page renders 1`] = `
       title="Change password"
       value=""
     />
-  </AdminForm>
+  </CardForm>
 </Fragment>
 `;
 
 exports[`my account page renders 2`] = `
 <Fragment>
-  <header
-    className="clearfix mb2 px2 py1 bg-white"
-  >
-    <div
-      className="left"
-    >
-      <Link
-        className="btn px0 bold caps"
-        replace={false}
-        to="/"
-      >
-        CMS HITECH APD
-      </Link>
-    </div>
-  </header>
-  <AdminForm
+  <Header />
+  <CardForm
     error={false}
     legend="manage account details"
     onCancel={[Function]}
     onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
+    sectionName="administrator"
     success={false}
     title="Manage account"
     working={false}
@@ -252,6 +224,6 @@ exports[`my account page renders 2`] = `
       title="Change password"
       value=""
     />
-  </AdminForm>
+  </CardForm>
 </Fragment>
 `;
