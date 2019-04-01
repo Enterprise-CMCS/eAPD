@@ -4,7 +4,7 @@ import React from 'react';
 
 import {
   CostAllocateFFPRaw as CostAllocateFFP,
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 } from './CostAllocateFFP';
 import { updateActivity } from '../../actions/activities';
@@ -128,6 +128,8 @@ describe('the CostAllocateFFP component', () => {
   });
 
   test('maps redux state to component props', () => {
+    const mapStateToProps = makeMapStateToProps();
+
     expect(mapStateToProps(state, { aKey: 'key' })).toEqual({
       byYearData: [
         {
