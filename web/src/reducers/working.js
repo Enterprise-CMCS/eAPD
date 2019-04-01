@@ -16,12 +16,18 @@ const initialState = {
   editOwnAccount: false
 };
 
+// Maps action symbols to state properties.  When these actions happen, the
+// state properties will be set to true.  If you add anything to this Map,
+// you'll also need to add that symbol to the switch below.
 const yesActions = new Map([
   [ADMIN_CREATE_USER_REQUEST, 'addAccount'],
   [ADMIN_EDIT_ACCOUNT_REQUEST, 'editAccount'],
   [ADMIN_EDIT_ME_REQUEST, 'editOwnAccount']
 ]);
 
+// When these actions happen, the state properties will be set to false.  If
+// you add anything to this Map, you'll also need to add that symbol to the
+// switch below.
 const noActions = new Map([
   [ADMIN_CREATE_USER_ERROR, 'addAccount'],
   [ADMIN_CREATE_USER_SUCCESS, 'addAccount'],
