@@ -4,7 +4,7 @@ exports[`my account page handles submitting the form with an error 1`] = `
 <Fragment>
   <Header />
   <CardForm
-    error="error message"
+    error={false}
     legend="manage account details"
     onCancel={[Function]}
     onSave={[Function]}
@@ -72,7 +72,7 @@ exports[`my account page handles submitting the form with no error 1`] = `
       ]
     }
     sectionName="administrator"
-    success="Changes saved"
+    success={false}
     title="Manage account"
     working={false}
   >

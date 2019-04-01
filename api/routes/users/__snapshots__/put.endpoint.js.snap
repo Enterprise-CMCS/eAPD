@@ -10,19 +10,19 @@ exports[`users endpoint | PUT /users/:userID when authenticated when updating a 
 
 exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with an existing email address 1`] = `
 Object {
-  "error": "update-user-email-exists",
+  "error": "edit-account.email-exists",
 }
 `;
 
 exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with an invalid role name 1`] = `
 Object {
-  "error": "update-user-invalid-role",
+  "error": "edit-account.invalid-role",
 }
 `;
 
 exports[`users endpoint | PUT /users/:userID when authenticated when updating a valid user ID ...with an invalid state ID 1`] = `
 Object {
-  "error": "update-user-invalid-state",
+  "error": "edit-account.invalid-state",
 }
 `;
 

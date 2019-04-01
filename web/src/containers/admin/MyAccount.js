@@ -7,10 +7,12 @@ import { editSelf } from '../../actions/admin';
 import CardForm from '../../components/CardForm';
 import Header from '../../components/Header';
 import Password from '../../components/PasswordWithMeter';
+import { getEditOwnAccountError } from '../../reducers/errors';
+import { getEditOwnAccountWorking } from '../../reducers/working';
 
 class MyAccount extends Component {
   state = {
-    error: false,
+    hasFetched: false,
     success: false,
     user: {
       name: '',
@@ -30,6 +32,16 @@ class MyAccount extends Component {
     this.state.user = { name, phone, position };
   }
 
+  static getDerivedStateFromProps({ error, working }, { hasFetched }) {
+    if (!hasFetched) {
+      return { hasFetched: working };
+    }
+
+    return {
+      success: !working && !error
+    };
+  }
+
   handleEditAccount = e => {
     const { name, value } = e.target;
     this.setState(prev => ({ user: { ...prev.user, [name]: value } }));
@@ -40,14 +52,7 @@ class MyAccount extends Component {
     const { editAccount } = this.props;
     const { user } = this.state;
 
-    this.setState({ fetching: true });
-    return editAccount(user)
-      .then(() => {
-        this.setState({ error: false, fetching: false, success: true });
-      })
-      .catch(error => {
-        this.setState({ error, fetching: false, success: false });
-      });
+    editAccount(user);
   };
 
   goBack = () => {
@@ -58,9 +63,9 @@ class MyAccount extends Component {
   };
 
   render() {
+    const { error, working } = this.props;
     const {
-      error,
-      fetching,
+      hasFetched,
       success,
       user: { name, password, phone, position }
     } = this.state;
@@ -73,9 +78,9 @@ class MyAccount extends Component {
           title="Manage account"
           legend="manage account details"
           sectionName="administrator"
-          error={error}
+          error={hasFetched && error}
           success={success && 'Changes saved'}
-          working={fetching}
+          working={working}
           onCancel={this.goBack}
           onSave={this.editAccount}
         >
@@ -116,24 +121,24 @@ class MyAccount extends Component {
 
 MyAccount.propTypes = {
   editAccount: PropTypes.func.isRequired,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
   history: PropTypes.object.isRequired,
   user: PropTypes.shape({
     name: PropTypes.string,
     phone: PropTypes.string,
     position: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  working: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({
+const mapStateToProps = state => ({
+  error: getEditOwnAccountError(state),
   user: {
-    data: { name, phone, position }
-  }
-}) => ({
-  user: {
-    name,
-    phone,
-    position
-  }
+    name: state.user.data.name,
+    phone: state.user.data.phone,
+    position: state.user.data.position
+  },
+  working: getEditOwnAccountWorking(state)
 });
 
 const mapDispatchToProps = { editAccount: editSelf };

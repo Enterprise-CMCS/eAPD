@@ -18,6 +18,9 @@ describe('my account page', () => {
   test('maps state to props', () => {
     expect(
       mapStateToProps({
+        errors: {
+          editOwnAccount: 'no error'
+        },
         user: {
           data: {
             username: 'tina@burgers.com',
@@ -27,14 +30,19 @@ describe('my account page', () => {
             position: 'Table Cleaner'
           },
           fetching: 'aw thank you'
+        },
+        working: {
+          editOwnAccount: 'for the weekend'
         }
       })
     ).toEqual({
+      error: 'no error',
       user: {
         name: 'Tina Belcher',
         phone: '1-800-BURGERS',
         position: 'Table Cleaner'
-      }
+      },
+      working: 'for the weekend'
     });
   });
 
@@ -46,7 +54,13 @@ describe('my account page', () => {
     };
 
     const component = shallow(
-      <MyAccount editAccount={() => {}} history={{}} user={user} />
+      <MyAccount
+        error={false}
+        working={false}
+        editAccount={() => {}}
+        history={{}}
+        user={user}
+      />
     );
 
     // basic rendering
@@ -71,7 +85,13 @@ describe('my account page', () => {
       const preventDefault = sinon.spy();
 
       const component = shallow(
-        <MyAccount editAccount={editAccount} history={{}} user={user} />
+        <MyAccount
+          error={false}
+          working={false}
+          editAccount={editAccount}
+          history={{}}
+          user={user}
+        />
       );
 
       await component
@@ -99,7 +119,13 @@ describe('my account page', () => {
       const preventDefault = sinon.spy();
 
       const component = shallow(
-        <MyAccount editAccount={editAccount} history={{}} user={user} />
+        <MyAccount
+          error={false}
+          working={false}
+          editAccount={editAccount}
+          history={{}}
+          user={user}
+        />
       );
 
       await component
@@ -124,7 +150,13 @@ describe('my account page', () => {
     const goBack = sinon.spy();
 
     const component = shallow(
-      <MyAccount editAccount={() => {}} history={{ goBack }} user={user} />
+      <MyAccount
+        error={false}
+        working={false}
+        editAccount={() => {}}
+        history={{ goBack }}
+        user={user}
+      />
     );
 
     component

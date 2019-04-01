@@ -7,11 +7,12 @@ import Header from '../../components/Header';
 import Password from '../../components/PasswordWithMeter';
 import { STATES } from '../../util';
 import { createUser as createUserDispatch } from '../../actions/admin';
+import { getAddAccountError } from '../../reducers/errors';
+import { getAddAccountWorking } from '../../reducers/working';
 
 class CreateUser extends Component {
   state = {
-    error: false,
-    fetching: false,
+    hasFetched: false,
     name: '',
     email: '',
     password: '',
@@ -19,6 +20,26 @@ class CreateUser extends Component {
     state: '',
     success: false
   };
+
+  static getDerivedStateFromProps({ error, working }, { hasFetched }) {
+    if (!hasFetched) {
+      return { hasFetched: working };
+    }
+
+    if (!working && !error) {
+      return {
+        hasFetched: false,
+        name: '',
+        email: '',
+        password: '',
+        role: '',
+        state: '',
+        success: true
+      };
+    }
+
+    return { success: false };
+  }
 
   handleChange = e => {
     const { name: key, value } = e.target;
@@ -34,30 +55,13 @@ class CreateUser extends Component {
 
     const { createUser } = this.props;
 
-    this.setState({ fetching: true });
-    createUser({ email, name, password, role, state })
-      .then(() => {
-        this.setState({
-          error: false,
-          fetching: false,
-          name: '',
-          email: '',
-          password: '',
-          role: '',
-          state: '',
-          success: true
-        });
-      })
-      .catch(error => {
-        this.setState({ error, fetching: false, success: false });
-      });
+    createUser({ email, name, password, role, state });
   };
 
   render() {
-    const { roles } = this.props;
+    const { error, roles, working } = this.props;
     const {
-      error,
-      fetching,
+      hasFetched,
       name,
       email,
       password,
@@ -73,9 +77,9 @@ class CreateUser extends Component {
         <CardForm
           title="Create account"
           sectionName="administrator"
-          error={error}
+          error={hasFetched && error}
           success={success && 'Account created'}
-          working={fetching}
+          working={working}
           onSave={this.handleSubmit}
         >
           <TextField
@@ -133,6 +137,7 @@ class CreateUser extends Component {
             value={password}
             compareTo={[email, name]}
             onChange={this.handleChange}
+            showMeter
             className="mb2"
           />
         </CardForm>
@@ -143,11 +148,15 @@ class CreateUser extends Component {
 
 CreateUser.propTypes = {
   createUser: PropTypes.func.isRequired,
-  roles: PropTypes.arrayOf(PropTypes.object).isRequired
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
+  roles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  working: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({ admin: { roles } }) => ({
-  roles
+const mapStateToProps = state => ({
+  error: getAddAccountError(state),
+  roles: state.admin.roles,
+  working: getAddAccountWorking(state)
 });
 
 const mapDispatchToProps = {
