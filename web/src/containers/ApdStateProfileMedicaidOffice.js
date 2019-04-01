@@ -22,11 +22,10 @@ class ApdStateProfile extends Component {
 
     return (
       <Fragment>
-        <h4 className="ds-h4 ds-u-margin-bottom--0">
-          {t(`${dirTRoot}.title`)}
-        </h4>
-        <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
-          <legend className="sr-only">medicaid director details</legend>
+        <fieldset>
+          <legend>
+            {t(`${dirTRoot}.title`)}
+          </legend>
           <TextField
             name="apd-state-profile-mdname"
             label={t(`${dirTRoot}.labels.name`)}
@@ -47,11 +46,10 @@ class ApdStateProfile extends Component {
           />
         </fieldset>
 
-        <h4 className="ds-h4 ds-u-margin-bottom--0 ds-u-margin-top--5">
-          {t(`${offTRoot}.title`)}
-        </h4>
-        <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
-          <legend className="sr-only">medicaid office details</legend>
+        <fieldset>
+          <legend>
+            {t(`${offTRoot}.title`)}
+          </legend>
           <TextField
             name="apd-state-profile-addr1"
             label={t(`${offTRoot}.labels.address1`)}
