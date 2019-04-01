@@ -2,12 +2,11 @@ import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import AdminForm from './AdminForm';
 import { editSelf } from '../../actions/admin';
+import CardForm from '../../components/CardForm';
+import Header from '../../components/Header';
 import Password from '../../components/PasswordWithMeter';
-import { t } from '../../i18n';
 
 class MyAccount extends Component {
   state = {
@@ -68,17 +67,12 @@ class MyAccount extends Component {
 
     return (
       <Fragment>
-        <header className="clearfix mb2 px2 py1 bg-white">
-          <div className="left">
-            <Link to="/" className="btn px0 bold caps">
-              {t('titleBasic')}
-            </Link>
-          </div>
-        </header>
+        <Header />
 
-        <AdminForm
+        <CardForm
           title="Manage account"
           legend="manage account details"
+          sectionName="administrator"
           error={error}
           success={success && 'Changes saved'}
           working={fetching}
@@ -114,7 +108,7 @@ class MyAccount extends Component {
             value={password}
             onChange={this.handleEditAccount}
           />
-        </AdminForm>
+        </CardForm>
       </Fragment>
     );
   }

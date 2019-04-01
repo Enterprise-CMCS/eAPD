@@ -2,21 +2,21 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
-import AdminForm from './AdminForm';
+import CardForm from '../../components/CardForm';
 
-describe('admin page > form wrapper', () => {
+describe('card form wrapper', () => {
   test('renders without a save button if onSave prop is missing', () => {
     expect(
-      shallow(<AdminForm title="test">hello world</AdminForm>)
+      shallow(<CardForm title="test">hello world</CardForm>)
     ).toMatchSnapshot();
   });
 
   test('renders with a save button if onSave prop is provided', () => {
     expect(
       shallow(
-        <AdminForm title="test" onSave={sinon.spy()}>
+        <CardForm title="test" onSave={sinon.spy()}>
           hello world
-        </AdminForm>
+        </CardForm>
       )
     ).toMatchSnapshot();
   });
@@ -24,9 +24,9 @@ describe('admin page > form wrapper', () => {
   test('renders a legend if provided', () => {
     expect(
       shallow(
-        <AdminForm title="test" legend="of zelda">
+        <CardForm title="test" legend="of zelda">
           hello world
-        </AdminForm>
+        </CardForm>
       )
     ).toMatchSnapshot();
   });
@@ -34,9 +34,9 @@ describe('admin page > form wrapper', () => {
   test('renders an error alert if message provided', () => {
     expect(
       shallow(
-        <AdminForm title="test" error="oh noes!">
+        <CardForm title="test" error="oh noes!">
           hello world
-        </AdminForm>
+        </CardForm>
       )
     ).toMatchSnapshot();
   });
@@ -44,9 +44,9 @@ describe('admin page > form wrapper', () => {
   test('renders a success alert if message provided', () => {
     expect(
       shallow(
-        <AdminForm title="test" success="oh yeah!">
+        <CardForm title="test" success="oh yeah!">
           hello world
-        </AdminForm>
+        </CardForm>
       )
     ).toMatchSnapshot();
   });
@@ -54,9 +54,9 @@ describe('admin page > form wrapper', () => {
   test('renders a spinny-wheel on the save button and disables it if the form is busy', () => {
     expect(
       shallow(
-        <AdminForm title="test" onSave={sinon.spy()} working>
+        <CardForm title="test" onSave={sinon.spy()} working>
           hello world
-        </AdminForm>
+        </CardForm>
       )
     ).toMatchSnapshot();
   });
@@ -64,9 +64,9 @@ describe('admin page > form wrapper', () => {
   test('calls the onSave prop when the form is submitted', () => {
     const onSave = sinon.spy();
     const component = shallow(
-      <AdminForm title="test" onSave={onSave}>
+      <CardForm title="test" onSave={onSave}>
         hello world
-      </AdminForm>
+      </CardForm>
     );
 
     component.find('form').simulate('submit');
@@ -77,9 +77,9 @@ describe('admin page > form wrapper', () => {
   test('calls the onCancel prop when the form is canceled', () => {
     const onCancel = sinon.spy();
     const component = shallow(
-      <AdminForm title="test" onCancel={onCancel}>
+      <CardForm title="test" onCancel={onCancel}>
         hello world
-      </AdminForm>
+      </CardForm>
     );
 
     component
