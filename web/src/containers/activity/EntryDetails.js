@@ -41,7 +41,14 @@ class EntryDetails extends Component {
   };
 
   render() {
-    const { aKey, expanded, num, removeActivity, title } = this.props;
+    const {
+      activity: { name },
+      aKey,
+      expanded,
+      num,
+      removeActivity
+    } = this.props;
+    const title = makeTitle(name, num);
 
     return (
       <Collapsible
@@ -67,20 +74,19 @@ class EntryDetails extends Component {
 }
 
 EntryDetails.propTypes = {
+  activity: PropTypes.object.isRequired,
   aKey: PropTypes.string.isRequired,
   expanded: PropTypes.bool.isRequired,
   num: PropTypes.number.isRequired,
   removeActivity: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
   toggleSection: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = ({ activities: { byKey } }, { aKey, num }) => {
+export const mapStateToProps = ({ activities: { byKey } }, { aKey }) => {
   const activity = byKey[aKey];
   const { expanded } = activity.meta;
-  const title = `${t('activities.header')} › ${makeTitle(activity, num)}`;
 
-  return { expanded, title };
+  return { activity, expanded };
 };
 
 export const mapDispatchToProps = {
@@ -88,7 +94,7 @@ export const mapDispatchToProps = {
   toggleSection: toggleActivitySection
 };
 
-export { EntryDetails as EntryDetailsRaw };
+export { EntryDetails as plain };
 export default connect(
   mapStateToProps,
   mapDispatchToProps

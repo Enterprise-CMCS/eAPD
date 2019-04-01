@@ -1,31 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProposedBudget component renders correctly 1`] = `
-<Section
-  id="budget"
-  isNumbered={true}
-  resource="proposedBudget"
+<Connect(ConnectedWaypoint)
+  id="budget-overview"
 >
-  <Subsection
-    id="budget-summary-table"
-    nested={false}
-    resource="proposedBudget.summaryBudget"
+  <Section
+    id="budget"
+    isNumbered={true}
+    resource="proposedBudget"
   >
-    <Connect(BudgetSummary) />
-  </Subsection>
-  <Subsection
-    id="budget-federal-by-quarter"
-    nested={false}
-    resource="proposedBudget.quarterlyBudget"
-  >
-    <Connect(QuarterlyBudgetSummary) />
-  </Subsection>
-  <Subsection
-    id="budget-incentive-by-quarter"
-    nested={false}
-    resource="proposedBudget.paymentsByFFYQuarter"
-  >
-    <Connect(IncentivePayments) />
-  </Subsection>
-</Section>
+    <Connect(ConnectedWaypoint)
+      id="budget-summary-table"
+    />
+    <Subsection
+      id="budget-summary-table"
+      nested={false}
+      resource="proposedBudget.summaryBudget"
+    >
+      <Connect(BudgetSummary) />
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="budget-federal-by-quarter"
+    />
+    <Subsection
+      id="budget-federal-by-quarter"
+      nested={false}
+      resource="proposedBudget.quarterlyBudget"
+    >
+      <Connect(QuarterlyBudgetSummary) />
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="budget-incentive-by-quarter"
+    />
+    <Subsection
+      id="budget-incentive-by-quarter"
+      nested={false}
+      resource="proposedBudget.paymentsByFFYQuarter"
+    >
+      <Connect(IncentivePayments) />
+    </Subsection>
+  </Section>
+</Connect(ConnectedWaypoint)>
 `;

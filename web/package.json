@@ -88,8 +88,10 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-table": "^6.8.6",
+    "react-waypoint": "^9.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "updeep": "^1.0.0",
     "zxcvbn": "^4.4.2"
   },

@@ -7,6 +7,7 @@ import Dollars from '../../components/Dollars';
 import { DollarInput } from '../../components/Inputs';
 import Select from '../../components/Select';
 import { t } from '../../i18n';
+import { makeSelectCostAllocateFFP } from '../../reducers/activities.selectors';
 
 class CostAllocateFFP extends Component {
   handleOther = year => e => {
@@ -95,30 +96,10 @@ CostAllocateFFP.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = (
-  { activities: { byKey }, budget },
-  { aKey }
-) => {
-  const activity = byKey[aKey];
-  const { costAllocation } = activity;
-  const { costsByFFY } = budget.activities[aKey];
-
-  const byYearData = Object.entries(costsByFFY)
-    .filter(([year]) => year !== 'total')
-    .map(([year, costs]) => {
-      const { ffp } = costAllocation[year];
-      const ffpSelectVal = `${ffp.federal}-${ffp.state}`;
-
-      return {
-        year,
-        total: costs.total,
-        medicaidShare: costs.medicaidShare,
-        ffpSelectVal,
-        allocations: { federal: costs.federal, state: costs.state }
-      };
-    });
-
-  return { byYearData, costAllocation };
+export const makeMapStateToProps = () => {
+  const selectCostAllocateFFP = makeSelectCostAllocateFFP();
+  const mapStateToProps = (state, props) => selectCostAllocateFFP(state, props);
+  return mapStateToProps;
 };
 
 export const mapDispatchToProps = {
@@ -127,6 +108,6 @@ export const mapDispatchToProps = {
 
 export { CostAllocateFFP as CostAllocateFFPRaw };
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(CostAllocateFFP);
