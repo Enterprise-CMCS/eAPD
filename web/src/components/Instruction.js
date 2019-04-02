@@ -13,15 +13,19 @@ const Instruction = ({ args, reverse, source }) => {
   return (
     <div>
       {heading && <h3>{heading}</h3>}
-      {reverse && detail && <Md content={detail} wrapper="p" />}
-      {short && <p className="ds-u-font-weight--bold">{short}</p>}
-      {!reverse && detail && <Md content={detail} wrapper="p" />}
-      {helpText && (
-        <Md
-          content={helpText}
-          wrapper="p"
-          className="visibility--screen mb2 text-s alert alert-info"
-        />
+      {(short || detail || helpText) && (
+        <div className="visibility--screen">
+          {reverse && detail && <Md content={detail} wrapper="p" />}
+          {short && <p className="ds-u-font-weight--bold">{short}</p>}
+          {!reverse && detail && <Md content={detail} wrapper="p" />}
+          {helpText && (
+            <Md
+              content={helpText}
+              wrapper="p"
+              className="mb2 text-s alert alert-info"
+            />
+          )}
+        </div>
       )}
     </div>
   );
