@@ -74,15 +74,44 @@ exports[`my account page renders 1`] = `
                 type="text"
                 value="Table Cleaner"
               />
-              <Password
-                className="mb2"
-                compareTo={Array []}
-                onChange={[Function]}
-                showMeter={true}
-                title="Change password"
-                value=""
-              />
+              <div
+                className="ds-l-row ds-u-padding-x--2"
+              >
+                <TextField
+                  ariaLabel="Current password"
+                  disabled={true}
+                  label="Password"
+                  size="medium"
+                  type="text"
+                  value="********"
+                />
+                <div
+                  className="ds-u-clearfix"
+                >
+                  <div
+                    className="ds-c-label"
+                  >
+                     
+                  </div>
+                  <div
+                    className="ds-c-field ds-u-border--0"
+                  >
+                    <Button
+                      className="ds-u-padding-y--0"
+                      onClick={[Function]}
+                      purpose="change password"
+                      type="button"
+                      variation="transparent"
+                    >
+                      <LockIcon />
+                       
+                      Change password
+                    </Button>
+                  </div>
+                </div>
+              </div>
               <Button
+                className="ds-u-margin-top--4"
                 disabled={false}
                 type="submit"
                 variation="primary"
@@ -91,6 +120,7 @@ exports[`my account page renders 1`] = `
               </Button>
               <Button
                 onClick={[Function]}
+                purpose="cancel"
                 type="button"
                 variation="transparent"
               >
@@ -182,15 +212,44 @@ exports[`my account page renders 2`] = `
                 type="text"
                 value="Window Washer"
               />
-              <Password
-                className="mb2"
-                compareTo={Array []}
-                onChange={[Function]}
-                showMeter={true}
-                title="Change password"
-                value=""
-              />
+              <div
+                className="ds-l-row ds-u-padding-x--2"
+              >
+                <TextField
+                  ariaLabel="Current password"
+                  disabled={true}
+                  label="Password"
+                  size="medium"
+                  type="text"
+                  value="********"
+                />
+                <div
+                  className="ds-u-clearfix"
+                >
+                  <div
+                    className="ds-c-label"
+                  >
+                     
+                  </div>
+                  <div
+                    className="ds-c-field ds-u-border--0"
+                  >
+                    <Button
+                      className="ds-u-padding-y--0"
+                      onClick={[Function]}
+                      purpose="change password"
+                      type="button"
+                      variation="transparent"
+                    >
+                      <LockIcon />
+                       
+                      Change password
+                    </Button>
+                  </div>
+                </div>
+              </div>
               <Button
+                className="ds-u-margin-top--4"
                 disabled={false}
                 type="submit"
                 variation="primary"
@@ -199,6 +258,7 @@ exports[`my account page renders 2`] = `
               </Button>
               <Button
                 onClick={[Function]}
+                purpose="cancel"
                 type="button"
                 variation="transparent"
               >
@@ -288,17 +348,191 @@ exports[`my account page renders 3`] = `
                 name="position"
                 onChange={[Function]}
                 type="text"
-                value="Table Cleaner"
+                value="Window Washer"
               />
+              <div
+                className="ds-l-row ds-u-padding-x--2"
+              >
+                <TextField
+                  ariaLabel="Current password"
+                  disabled={true}
+                  label="Password"
+                  size="medium"
+                  type="text"
+                  value="********"
+                />
+                <div
+                  className="ds-u-clearfix"
+                >
+                  <div
+                    className="ds-c-label"
+                  >
+                     
+                  </div>
+                  <div
+                    className="ds-c-field ds-u-border--0"
+                  >
+                    <Button
+                      className="ds-u-padding-y--0"
+                      onClick={[Function]}
+                      purpose="change password"
+                      type="button"
+                      variation="transparent"
+                    >
+                      <UnlockIcon />
+                       
+                      Change password
+                    </Button>
+                  </div>
+                </div>
+              </div>
               <Password
-                className="mb2"
                 compareTo={Array []}
                 onChange={[Function]}
                 showMeter={true}
-                title="Change password"
+                title="New password"
                 value=""
               />
               <Button
+                className=""
+                disabled={false}
+                type="submit"
+                variation="primary"
+              >
+                Save changes
+              </Button>
+              <Button
+                onClick={[Function]}
+                purpose="cancel"
+                type="button"
+                variation="transparent"
+              >
+                Cancel
+              </Button>
+            </fieldset>
+          </form>
+        </div>
+        <div
+          className="ds-l-col--1 ds-u-margin-right--auto"
+        />
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;
+
+exports[`my account page renders 4`] = `
+<Fragment>
+  <header
+    className="clearfix mb2 px2 py1 bg-white"
+  >
+    <div
+      className="left"
+    >
+      <Link
+        className="btn px0 bold caps"
+        replace={false}
+        to="/"
+      >
+        CMS HITECH APD
+      </Link>
+    </div>
+  </header>
+  <div
+    className="card--container"
+  >
+    <div
+      className="ds-l-container"
+    >
+      <div
+        className="ds-l-row card"
+      >
+        <div
+          className="ds-l-col--1 ds-u-margin-left--auto"
+        />
+        <div
+          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+        >
+          <h1
+            className="ds-h1"
+          >
+            Manage account
+          </h1>
+          <form
+            onSubmit={[Function]}
+          >
+            <fieldset
+              className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0"
+            >
+              <legend
+                className="sr-only"
+              >
+                manage account details
+              </legend>
+              <TextField
+                ariaLabel="please enter your full name"
+                label="Name"
+                name="name"
+                onChange={[Function]}
+                type="text"
+                value="Tina Belcher"
+              />
+              <TextField
+                ariaLabel="please enter your 10-digit phone number"
+                label="Phone number"
+                mask="phone"
+                name="phone"
+                onChange={[Function]}
+                size="medium"
+                type="text"
+                value="1-800-BURGERS"
+              />
+              <TextField
+                ariaLabel="please enter your position or role ???"
+                label="Role"
+                name="position"
+                onChange={[Function]}
+                type="text"
+                value="Table Cleaner"
+              />
+              <div
+                className="ds-l-row ds-u-padding-x--2"
+              >
+                <TextField
+                  ariaLabel="Current password"
+                  disabled={true}
+                  label="Password"
+                  size="medium"
+                  type="text"
+                  value="********"
+                />
+                <div
+                  className="ds-u-clearfix"
+                >
+                  <div
+                    className="ds-c-label"
+                  >
+                     
+                  </div>
+                  <div
+                    className="ds-c-field ds-u-border--0"
+                  >
+                    <Button
+                      className="ds-u-padding-y--0"
+                      onClick={[Function]}
+                      purpose="change password"
+                      type="button"
+                      variation="transparent"
+                    >
+                      <LockIcon />
+                       
+                      Change password
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              <Button
+                className="ds-u-margin-top--4"
                 disabled={true}
                 type="submit"
                 variation="primary"
@@ -311,6 +545,7 @@ exports[`my account page renders 3`] = `
               </Button>
               <Button
                 onClick={[Function]}
+                purpose="cancel"
                 type="button"
                 variation="transparent"
               >

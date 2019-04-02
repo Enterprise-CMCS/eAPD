@@ -1,3 +1,4 @@
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // to optimize bundle, explicitly importing only the icons used
@@ -8,11 +9,16 @@ import {
   faChevronUp,
   faEdit,
   faExclamationTriangle,
+  faLock,
   faPlusCircle,
-  faSpinner
+  faSpinner,
+  faUnlock
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faCircle, faClock } from '@fortawesome/free-regular-svg-icons';
+
+const LockIcon = () => <FontAwesomeIcon icon={faLock} />;
+const UnlockIcon = () => <FontAwesomeIcon icon={faUnlock} />;
 
 export {
   faArrowRight,
@@ -23,8 +29,12 @@ export {
   faClock,
   faEdit,
   faExclamationTriangle,
+  faLock,
   faPlusCircle,
-  faSpinner
+  faSpinner,
+  faUnlock,
+  LockIcon,
+  UnlockIcon
 };
 
 export default FontAwesomeIcon;
