@@ -1,6 +1,6 @@
 import { Choice, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import zxcvbn from 'zxcvbn';
 
 class Password extends Component {
@@ -27,7 +27,7 @@ class Password extends Component {
   };
 
   render() {
-    const { title, value, ...rest } = this.props;
+    const { title, value, showMeter, ...rest } = this.props;
     const { showPassword, strength } = this.state;
 
     let passwordQuality = 'Password strength: Weak';
@@ -41,9 +41,9 @@ class Password extends Component {
 
     return (
       <div {...rest}>
-        <div className="password-with-meter">
+        <div className="password-input">
           <Choice
-            className="password-with-meter--show-password ds-u-float--right"
+            className="password-input--show-password ds-u-float--right"
             checked={showPassword}
             name="show password"
             value="Show password"
@@ -54,7 +54,7 @@ class Password extends Component {
           </Choice>
 
           <TextField
-            hint="A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address."
+            hint={showMeter && 'A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address.'}
             label={title || 'Password'}
             name="password"
             className="no-clearfix"
@@ -62,15 +62,19 @@ class Password extends Component {
             value={value}
             onChange={this.changePassword}
           />
-          <div className="strength-meter">
-            <div
-              className="strength-meter-fill"
-              data-strength={value.length ? strength : 'empty'}
-            />
-          </div>
-          <p role="alert" aria-live="polite" className="strength-meter-quality">
-            {passwordQuality}
-          </p>
+          {showMeter &&
+            <Fragment>
+              <div className="strength-meter">
+                <div
+                  className="strength-meter-fill"
+                  data-strength={value.length ? strength : 'empty'}
+                />
+              </div>
+              <p role="alert" aria-live="polite" className="strength-meter-quality">
+                {passwordQuality}
+              </p>
+            </Fragment>
+          }
         </div>
       </div>
     );
@@ -81,14 +85,16 @@ Password.propTypes = {
   compareTo: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func,
   title: PropTypes.string,
-  value: PropTypes.string
+  value: PropTypes.string,
+  showMeter: PropTypes.bool
 };
 
 Password.defaultProps = {
   compareTo: [],
   onChange: () => {},
   title: 'Password',
-  value: ''
+  value: '',
+  showMeter: false
 };
 
 export default Password;

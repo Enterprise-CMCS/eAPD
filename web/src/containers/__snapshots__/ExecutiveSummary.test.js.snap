@@ -1,247 +1,257 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`executive summary component renders correctly 1`] = `
-<Section
-  id="executive-summary"
-  isNumbered={true}
-  resource="executiveSummary"
+<Connect(ConnectedWaypoint)
+  id="executive-summary-overview"
 >
-  <Subsection
-    id="executive-summary-overview"
-    nested={false}
-    resource="executiveSummary.summary"
+  <Section
+    id="executive-summary"
+    isNumbered={true}
+    resource="executiveSummary"
   >
-    <div
-      className="mb2 md-flex items-center alert alert-success"
-      key="a1"
+    <Connect(ConnectedWaypoint)
+      id="executive-summary-summary"
+    />
+    <Subsection
+      id="executive-summary-summary"
+      nested={false}
+      resource="executiveSummary.summary"
     >
       <div
-        className="p2 sm-m0 flex-auto"
+        className="mb2 md-flex items-center alert alert-success"
+        key="a1"
       >
         <div
-          className="h5"
+          className="p2 sm-m0 flex-auto"
         >
-          Activity 1
+          <div
+            className="h5"
+          >
+            Activity 1
+          </div>
+          <a
+            className="h3 bold black"
+            href="#activity-a1"
+            onClick={[Function]}
+          >
+            activity 1
+          </a>
+          <div>
+            first activity
+          </div>
         </div>
-        <a
-          className="h3 bold black"
-          href="#activity-a1"
-          onClick={[Function]}
+        <div
+          className="md-flex md-col-7"
         >
-          activity 1
-        </a>
-        <div>
-          first activity
+          <div
+            className="px2 py3 flex-auto"
+            key="1"
+          >
+            <div
+              className="h5"
+            >
+              FFY 1
+            </div>
+            <div
+              className="h3 mono bold"
+            >
+              <Dollars>
+                250
+              </Dollars>
+            </div>
+          </div>
+          <div
+            className="px2 py3 flex-auto"
+            key="2"
+          >
+            <div
+              className="h5"
+            >
+              FFY 2
+            </div>
+            <div
+              className="h3 mono bold"
+            >
+              <Dollars>
+                700
+              </Dollars>
+            </div>
+          </div>
+          <div
+            className="px2 py3 flex-auto"
+          >
+            <div
+              className="h5"
+            >
+              Total
+            </div>
+            <div
+              className="h3 mono bold"
+            >
+              <Dollars>
+                950
+              </Dollars>
+            </div>
+          </div>
         </div>
       </div>
       <div
-        className="md-flex md-col-7"
+        className="mb2 md-flex items-center alert alert-success"
+        key="a2"
       >
         <div
-          className="px2 py3 flex-auto"
-          key="1"
+          className="p2 sm-m0 flex-auto"
         >
           <div
             className="h5"
           >
-            FFY 1
+            Activity 2
           </div>
-          <div
-            className="h3 mono bold"
+          <a
+            className="h3 bold black"
+            href="#activity-a2"
+            onClick={[Function]}
           >
-            <Dollars>
-              250
-            </Dollars>
+            activity 2
+          </a>
+          <div>
+            second activity
           </div>
         </div>
         <div
-          className="px2 py3 flex-auto"
-          key="2"
+          className="md-flex md-col-7"
         >
           <div
-            className="h5"
+            className="px2 py3 flex-auto"
+            key="1"
           >
-            FFY 2
+            <div
+              className="h5"
+            >
+              FFY 1
+            </div>
+            <div
+              className="h3 mono bold"
+            >
+              <Dollars>
+                300
+              </Dollars>
+            </div>
           </div>
           <div
-            className="h3 mono bold"
+            className="px2 py3 flex-auto"
+            key="2"
           >
-            <Dollars>
-              700
-            </Dollars>
+            <div
+              className="h5"
+            >
+              FFY 2
+            </div>
+            <div
+              className="h3 mono bold"
+            >
+              <Dollars>
+                10
+              </Dollars>
+            </div>
           </div>
-        </div>
-        <div
-          className="px2 py3 flex-auto"
-        >
           <div
-            className="h5"
+            className="px2 py3 flex-auto"
           >
-            Total
-          </div>
-          <div
-            className="h3 mono bold"
-          >
-            <Dollars>
-              950
-            </Dollars>
+            <div
+              className="h5"
+            >
+              Total
+            </div>
+            <div
+              className="h3 mono bold"
+            >
+              <Dollars>
+                310
+              </Dollars>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      className="mb2 md-flex items-center alert alert-success"
-      key="a2"
+      <div
+        className="mb2 md-flex items-center alert alert-success"
+        key="all"
+      >
+        <div
+          className="p2 sm-m0 flex-auto"
+        >
+          <div
+            className="h3 bold"
+          >
+            Total Cost
+          </div>
+        </div>
+        <div
+          className="md-flex md-col-7"
+        >
+          <div
+            className="px2 py3 flex-auto"
+            key="1"
+          >
+            <div
+              className="h5"
+            >
+              FFY 1
+            </div>
+            <div
+              className="h3 mono bold"
+            >
+              <Dollars>
+                550
+              </Dollars>
+            </div>
+          </div>
+          <div
+            className="px2 py3 flex-auto"
+            key="2"
+          >
+            <div
+              className="h5"
+            >
+              FFY 2
+            </div>
+            <div
+              className="h3 mono bold"
+            >
+              <Dollars>
+                710
+              </Dollars>
+            </div>
+          </div>
+          <div
+            className="px2 py3 flex-auto"
+          >
+            <div
+              className="h5"
+            >
+              Total
+            </div>
+            <div
+              className="h3 mono bold"
+            >
+              <Dollars>
+                1260
+              </Dollars>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="executive-summary-budget-table"
+    />
+    <Subsection
+      id="executive-summary-budget-table"
+      nested={false}
+      resource="executiveSummary.budgetTable"
     >
-      <div
-        className="p2 sm-m0 flex-auto"
-      >
-        <div
-          className="h5"
-        >
-          Activity 2
-        </div>
-        <a
-          className="h3 bold black"
-          href="#activity-a2"
-          onClick={[Function]}
-        >
-          activity 2
-        </a>
-        <div>
-          second activity
-        </div>
-      </div>
-      <div
-        className="md-flex md-col-7"
-      >
-        <div
-          className="px2 py3 flex-auto"
-          key="1"
-        >
-          <div
-            className="h5"
-          >
-            FFY 1
-          </div>
-          <div
-            className="h3 mono bold"
-          >
-            <Dollars>
-              300
-            </Dollars>
-          </div>
-        </div>
-        <div
-          className="px2 py3 flex-auto"
-          key="2"
-        >
-          <div
-            className="h5"
-          >
-            FFY 2
-          </div>
-          <div
-            className="h3 mono bold"
-          >
-            <Dollars>
-              10
-            </Dollars>
-          </div>
-        </div>
-        <div
-          className="px2 py3 flex-auto"
-        >
-          <div
-            className="h5"
-          >
-            Total
-          </div>
-          <div
-            className="h3 mono bold"
-          >
-            <Dollars>
-              310
-            </Dollars>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="mb2 md-flex items-center alert alert-success"
-      key="all"
-    >
-      <div
-        className="p2 sm-m0 flex-auto"
-      >
-        <div
-          className="h3 bold"
-        >
-          Total Cost
-        </div>
-      </div>
-      <div
-        className="md-flex md-col-7"
-      >
-        <div
-          className="px2 py3 flex-auto"
-          key="1"
-        >
-          <div
-            className="h5"
-          >
-            FFY 1
-          </div>
-          <div
-            className="h3 mono bold"
-          >
-            <Dollars>
-              550
-            </Dollars>
-          </div>
-        </div>
-        <div
-          className="px2 py3 flex-auto"
-          key="2"
-        >
-          <div
-            className="h5"
-          >
-            FFY 2
-          </div>
-          <div
-            className="h3 mono bold"
-          >
-            <Dollars>
-              710
-            </Dollars>
-          </div>
-        </div>
-        <div
-          className="px2 py3 flex-auto"
-        >
-          <div
-            className="h5"
-          >
-            Total
-          </div>
-          <div
-            className="h3 mono bold"
-          >
-            <Dollars>
-              1260
-            </Dollars>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Subsection>
-  <Subsection
-    id="executive-summary-budget-table"
-    nested={false}
-    resource="executiveSummary.budgetTable"
-  >
-    <Connect(ExecutiveSummaryBudget) />
-  </Subsection>
-</Section>
+      <Connect(ExecutiveSummaryBudget) />
+    </Subsection>
+  </Section>
+</Connect(ConnectedWaypoint)>
 `;

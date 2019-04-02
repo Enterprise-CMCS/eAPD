@@ -52,11 +52,11 @@ describe('login component', () => {
     expect(component).toMatchSnapshot();
 
     component
-      .find('input#username')
+      .find('TextField')
       .simulate('change', { target: { name: 'username', value: 'bob' } });
     expect(component).toMatchSnapshot();
     component
-      .find('input#password')
+      .find('Password')
       .simulate('change', { target: { name: 'password', value: 'secret' } });
     expect(component).toMatchSnapshot();
   });
@@ -102,10 +102,10 @@ describe('login component', () => {
     );
 
     component
-      .find('input#username')
+      .find('TextField')
       .simulate('change', { target: { name: 'username', value: 'bob' } });
     component
-      .find('input#password')
+      .find('Password')
       .simulate('change', { target: { name: 'password', value: 'secret' } });
     component.find('form').simulate('submit', event);
 
