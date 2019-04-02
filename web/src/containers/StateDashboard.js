@@ -9,6 +9,7 @@ import TopBtns from './TopBtns';
 import { createApd, deleteApd, selectApd } from '../actions/apd';
 import { Section } from '../components/Section';
 import { t } from '../i18n';
+import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 
 const Loading = () => (
   <div className="h2 p0 pb3 center">
@@ -107,16 +108,10 @@ StateDashboard.propTypes = {
   selectApd: PropType.func.isRequired
 };
 
-const mapStateToProps = ({
-  apd: { byId, fetching },
-  user: {
-    data: { state }
-  }
-}) => ({
-  // Be explicit about which APD properties we need
-  apds: Object.values(byId).map(({ id, years }) => ({ id, years })),
-  fetching,
-  state
+const mapStateToProps = state => ({
+  apds: selectApdDashboard(state),
+  fetching: selectApds(state).fetching,
+  state: state.user.data.state
 });
 
 const mapDispatchToProps = {

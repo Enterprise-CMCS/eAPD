@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Dollars from '../components/Dollars';
-import { ACTIVITY_FUNDING_SOURCES } from '../util';
+import { selectBudgetActivitiesByFundingSource } from '../reducers/budget.selectors';
 
 const categoryLookup = {
   statePersonnel: 'Project state staff',
@@ -239,23 +239,11 @@ BudgetSummary.propTypes = {
   years: PropTypes.array.isRequired
 };
 
-const mapStateToProps = ({ apd, budget }) => {
-  const activities = ACTIVITY_FUNDING_SOURCES.reduce(
-    (obj, source) => ({
-      ...obj,
-      [source.toLowerCase()]: budget.activityTotals.filter(
-        a => a.fundingSource === source
-      )
-    }),
-    {}
-  );
-
-  return {
-    activities,
-    data: budget,
-    years: apd.data.years
-  };
-};
+const mapStateToProps = state => ({
+  activities: selectBudgetActivitiesByFundingSource(state),
+  data: state.budget,
+  years: state.apd.data.years
+});
 
 export default connect(mapStateToProps)(BudgetSummary);
 

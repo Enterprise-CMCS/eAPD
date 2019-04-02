@@ -4,9 +4,7 @@ import React, { Fragment } from 'react';
 import Instruction from './Instruction';
 import { t } from '../i18n';
 
-const SectionTitle = ({ children }) => (
-  <h2>{children}</h2>
-);
+const SectionTitle = ({ children }) => <h2>{children}</h2>;
 
 SectionTitle.propTypes = {
   children: PropTypes.node.isRequired
@@ -23,10 +21,7 @@ const Section = ({ children, id, isNumbered, resource }) => {
   const helptext = t([resource, 'helpText'], { defaultValue: false });
 
   return (
-    <section
-      id={id}
-      className={isNumbered && 'numbered-section'}
-    >
+    <section id={id} className={isNumbered && 'numbered-section'}>
       <h2 className="ds-h2">{title}</h2>
       <span className="ds-text--lead">{helptext}</span>
       {children}
@@ -52,22 +47,16 @@ const Subsection = ({ children, id, nested, resource }) => {
 
   return (
     <Fragment>
-      {!nested &&
-        <h3
-          id={id}
-          className='subsection--title ds-h3'
-        >
+      {!nested && (
+        <h3 id={id} className="subsection--title ds-h3">
           {title}
         </h3>
-      }
-      {nested &&
-        <h4
-          id={id}
-          className='ds-h3'
-        >
+      )}
+      {nested && (
+        <h4 id={id} className="ds-h3">
           {title}
         </h4>
-      }
+      )}
       <Instruction source={`${resource}.instruction`} />
       {children}
     </Fragment>
@@ -84,8 +73,9 @@ Subsection.propTypes = {
 Subsection.defaultProps = {
   resource: null,
   id: null,
-  nested: false,
+  nested: false
 };
 
 export default Section;
+
 export { Section, SectionDesc, SectionTitle, Subsection };
