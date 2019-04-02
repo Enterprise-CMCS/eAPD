@@ -20,8 +20,8 @@ const routes = [
     component: CreateAccount,
     nonPrivate: false
   },
-  { path: '/admin', component: AdminDashboard, nonPrivate: false },
   { path: '/admin/edit-account', component: EditAccount, nonPrivate: false },
+  { path: '/admin', component: AdminDashboard, nonPrivate: false },
   { path: '/me', component: MyAccount, nonPrivate: false },
 
   { component: NoMatch, nonPrivate: true }
