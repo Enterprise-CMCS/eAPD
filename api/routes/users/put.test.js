@@ -114,7 +114,7 @@ tap.test('user PUT endpoint', async endpointTest => {
     );
 
     tests.test('updates simple properties, if set', async propertyTests => {
-      ['email', 'name', 'position', 'phone'].forEach(prop =>
+      ['email', 'name', 'password', 'position', 'phone'].forEach(prop =>
         propertyTests.test(`for ${prop} property`, async test => {
           const user = model();
           UserModel.fetch.resolves(user);
@@ -144,6 +144,7 @@ tap.test('user PUT endpoint', async endpointTest => {
             body: {
               email: 'email-value',
               name: 'name-value',
+              password: 'password-value',
               position: 'position-value',
               phone: 'phone-value'
             },
@@ -160,6 +161,10 @@ tap.test('user PUT endpoint', async endpointTest => {
         test.ok(
           user.set.calledWith('name', 'name-value'),
           'name is set on data model'
+        );
+        test.ok(
+          user.set.calledWith('password', 'password-value'),
+          'position is set on data model'
         );
         test.ok(
           user.set.calledWith('position', 'position-value'),

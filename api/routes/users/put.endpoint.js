@@ -64,6 +64,13 @@ describe('users endpoint | PUT /users/:userID', async () => {
         expect(body).toMatchSnapshot();
       });
 
+      it('...with a simple password', async () => {
+        const { response, body } = await put(2001, { password: 'simple' });
+
+        expect(response.statusCode).toEqual(400);
+        expect(body).toMatchSnapshot();
+      });
+
       it('...with no content', async () => {
         const { response, body } = await put(2001);
 
@@ -72,6 +79,10 @@ describe('users endpoint | PUT /users/:userID', async () => {
       });
 
       it('...with all new content, plus some junk', async () => {
+        const { oldPasswordHash } = await db('users')
+          .where({ id: 2001 })
+          .first();
+
         const {
           response: { statusCode },
           body
@@ -79,6 +90,7 @@ describe('users endpoint | PUT /users/:userID', async () => {
           email: 'test email',
           junk: 'gets ignored',
           name: 'test name',
+          password: '$Q^ki$^jw^KW%Kw46rtJSFGJ',
           phone: '123',
           position: 'test position',
           state: 'hi',
@@ -102,6 +114,7 @@ describe('users endpoint | PUT /users/:userID', async () => {
           position: 'test position',
           state_id: 'hi'
         });
+        expect(user.password).not.toEqual(oldPasswordHash);
       });
 
       it('...when updating self with all new content, role is ignored', async () => {
