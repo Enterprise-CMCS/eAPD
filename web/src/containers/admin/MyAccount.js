@@ -7,9 +7,11 @@ import { Link } from 'react-router-dom';
 import { editSelf } from '../../actions/admin';
 import Password from '../../components/PasswordWithMeter';
 import { t } from '../../i18n';
+import { LockIcon, UnlockIcon } from '../../components/Icons';
 
 class MyAccount extends Component {
   state = {
+    changePassword: false,
     success: false,
     user: {
       name: '',
@@ -51,6 +53,10 @@ class MyAccount extends Component {
     editAccount(user);
   };
 
+  enableChangePassword = () => {
+    this.setState({ changePassword: true });
+  };
+
   goBack = () => {
     const {
       history: { goBack }
@@ -61,6 +67,7 @@ class MyAccount extends Component {
   render() {
     const { fetching } = this.props;
     const {
+      changePassword,
       success,
       user: { name, password, phone, position }
     } = this.state;
@@ -75,66 +82,99 @@ class MyAccount extends Component {
           </div>
         </header>
         <div className="card--container">
-        <div className="ds-l-container">
-          <div className="ds-l-row card">
-            <div className="ds-l-col--1 ds-u-margin-left--auto" />
-            <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
-              {!!success && <Alert variation="success">Changes saved</Alert>}
+          <div className="ds-l-container">
+            <div className="ds-l-row card">
+              <div className="ds-l-col--1 ds-u-margin-left--auto" />
+              <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
+                {!!success && <Alert variation="success">Changes saved</Alert>}
 
-              <h1 className="ds-h1">Manage account</h1>
+                <h1 className="ds-h1">Manage account</h1>
 
-              <form onSubmit={this.editAccount}>
-                <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
-                  <legend className="sr-only">manage account details</legend>
-                  <TextField
-                    label="Name"
-                    name="name"
-                    ariaLabel="please enter your full name"
-                    value={name || ''}
-                    onChange={this.handleEditAccount}
-                  />
-                  <TextField
-                    label="Phone number"
-                    ariaLabel="please enter your 10-digit phone number"
-                    mask="phone"
-                    name="phone"
-                    size="medium"
-                    value={phone || ''}
-                    onChange={this.handleEditAccount}
-                  />
-                  <TextField
-                    label="Role"
-                    name="position"
-                    ariaLabel="please enter your position or role ???"
-                    value={position || ''}
-                    onChange={this.handleEditAccount}
-                  />
-                  <Password
-                    showMeter
-                    className="mb2"
-                    title="Change password"
-                    value={password}
-                    onChange={this.handleEditAccount}
-                  />
-                  <Button variation="primary" type="submit" disabled={fetching}>
-                    {fetching ? (
-                      <Fragment>
-                        <Spinner /> Working
-                      </Fragment>
-                    ) : (
-                      'Save changes'
+                <form onSubmit={this.editAccount}>
+                  <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
+                    <legend className="sr-only">manage account details</legend>
+                    <TextField
+                      label="Name"
+                      name="name"
+                      ariaLabel="please enter your full name"
+                      value={name || ''}
+                      onChange={this.handleEditAccount}
+                    />
+                    <TextField
+                      label="Phone number"
+                      ariaLabel="please enter your 10-digit phone number"
+                      mask="phone"
+                      name="phone"
+                      size="medium"
+                      value={phone || ''}
+                      onChange={this.handleEditAccount}
+                    />
+                    <TextField
+                      label="Role"
+                      name="position"
+                      ariaLabel="please enter your position or role ???"
+                      value={position || ''}
+                      onChange={this.handleEditAccount}
+                    />
+                    <div className="ds-l-row ds-u-padding-x--2">
+                      <TextField
+                        label="Password"
+                        ariaLabel="Current password"
+                        value="********"
+                        disabled
+                        size="medium"
+                      />
+                      <div className="ds-u-clearfix">
+                        <div className="ds-c-label">&nbsp;</div>
+                        <div className="ds-c-field ds-u-border--0">
+                          <Button
+                            variation="transparent"
+                            className="ds-u-padding-y--0"
+                            onClick={this.enableChangePassword}
+                            purpose="change password"
+                          >
+                            {changePassword ? <UnlockIcon /> : <LockIcon />}{' '}
+                            Change password
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                    {changePassword && (
+                      <Password
+                        showMeter
+                        title="New password"
+                        value={password}
+                        onChange={this.handleEditAccount}
+                      />
                     )}
-                  </Button>
-                  <Button variation="transparent" onClick={this.goBack}>
-                    Cancel
-                  </Button>
-                </fieldset>
-              </form>
+                    <Button
+                      className={changePassword ? '' : 'ds-u-margin-top--4'}
+                      variation="primary"
+                      type="submit"
+                      disabled={fetching}
+                    >
+                      {fetching ? (
+                        <Fragment>
+                          <Spinner /> Working
+                        </Fragment>
+                      ) : (
+                        'Save changes'
+                      )}
+                    </Button>
+                    <Button
+                      variation="transparent"
+                      onClick={this.goBack}
+                      purpose="cancel"
+                    >
+                      Cancel
+                    </Button>
+                  </fieldset>
+                </form>
+              </div>
+              <div className="ds-l-col--1 ds-u-margin-right--auto" />
             </div>
-            <div className="ds-l-col--1 ds-u-margin-right--auto" />
           </div>
         </div>
-      </div>
       </Fragment>
     );
   }

@@ -64,6 +64,10 @@ describe('my account page', () => {
     });
     expect(component).toMatchSnapshot();
 
+    // updated after enabling password change
+    component.find('Button[purpose="change password"]').simulate('click');
+    expect(component).toMatchSnapshot();
+
     // while fetching
     expect(
       shallow(
@@ -115,7 +119,7 @@ describe('my account page', () => {
       />
     );
 
-    component.find('Button[variation="transparent"]').simulate('click');
+    component.find('Button[purpose="cancel"]').simulate('click');
 
     expect(goBack.calledOnce).toEqual(true);
   });
