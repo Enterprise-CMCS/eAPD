@@ -6,6 +6,7 @@ import { updateActivity } from '../../actions/activities';
 import Dollars from '../../components/Dollars';
 import { PercentInput } from '../../components/Inputs';
 import { t } from '../../i18n';
+import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
 import { formatPerc } from '../../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
@@ -38,17 +39,13 @@ class CostAllocateFFPQuarterly extends Component {
 
     return (
       <div>
-        {years.map((year) => (
-        <div>
-            <h3>
-              {t('ffy', { year })}
-            </h3>
+        {years.map(year => (
+          <div>
+            <h3>{t('ffy', { year })}</h3>
             <table className="table-cms table-fixed">
               <thead>
                 <tr>
-                  <th
-                    id="act_qbudget_null1"
-                  />
+                  <th id="act_qbudget_null1" />
                   <Fragment key={year}>
                     {QUARTERS.map(q => (
                       <th
@@ -93,9 +90,7 @@ class CostAllocateFFPQuarterly extends Component {
                               wrapperClass="m0"
                               className="m0 input input-condensed mono right-align"
                               onChange={this.handleChange(year, q, name)}
-                              value={
-                                quarterlyFFP[year][q][name].percent * 100
-                              }
+                              value={quarterlyFFP[year][q][name].percent * 100}
                               hideLabel
                             />
                           </td>
@@ -121,7 +116,7 @@ class CostAllocateFFPQuarterly extends Component {
                             headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                           >
                             <Dollars>
-                              {quarterlyFFP[year].subtotal[name].dollars}
+                              {quarterlyFFP[year][q][name].dollars}
                             </Dollars>
                           </td>
                         ))}
@@ -147,7 +142,7 @@ class CostAllocateFFPQuarterly extends Component {
                         headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                       >
                         <Dollars>
-                          {quarterlyFFP[year].subtotal.combined.dollars}
+                          {quarterlyFFP[year][q].combined.dollars}
                         </Dollars>
                       </td>
                     ))}
@@ -165,16 +160,12 @@ class CostAllocateFFPQuarterly extends Component {
             </table>
           </div>
         ))}
-        <h3>
-          {`Total FFY ${years[0]} - ${years[years.length-1]}`}
-        </h3>
+        <h3>{`Total FFY ${years[0]} - ${years[years.length - 1]}`}</h3>
         <table className="table-cms table-fixed table-fit-contents">
           <thead>
             <tr>
-              <th/>
-              <th>
-                Total
-              </th>
+              <th />
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
@@ -186,24 +177,16 @@ class CostAllocateFFPQuarterly extends Component {
                     name === 'combined' ? 'bold' : ''
                   }`}
                 >
-                  <th>
-                    {EXPENSE_NAME_DISPLAY[name]}
-                  </th>
-                  <td
-                    className="bold mono right-align"
-                  >
+                  <th>{EXPENSE_NAME_DISPLAY[name]}</th>
+                  <td className="bold mono right-align">
                     <Dollars>{quarterlyFFP.total[name]}</Dollars>
                   </td>
                 </tr>
               </Fragment>
             ))}
             <tr>
-              <th>
-                {EXPENSE_NAME_DISPLAY.combined}
-              </th>
-              <td
-                className="bold mono right-align"
-              >
+              <th>{EXPENSE_NAME_DISPLAY.combined}</th>
+              <td className="bold mono right-align">
                 <Dollars>{quarterlyFFP.total.combined}</Dollars>
               </td>
             </tr>
@@ -221,18 +204,16 @@ CostAllocateFFPQuarterly.propTypes = {
   update: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ apd, budget: { activities } }, { aKey }) => {
-  const budget = activities[aKey];
-
-  return {
-    quarterlyFFP: budget ? budget.quarterlyFFP : null,
-    years: apd.data.years
-  };
+const makeMapStateToProps = () => {
+  const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
+  const mapStateToProps = (state, props) =>
+    selectCostAllocateFFPBudget(state, props);
+  return mapStateToProps;
 };
 
 const mapDispatchToProps = { update: updateActivity };
 
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(CostAllocateFFPQuarterly);

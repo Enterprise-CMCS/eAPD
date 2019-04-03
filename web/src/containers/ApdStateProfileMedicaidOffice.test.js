@@ -49,7 +49,7 @@ describe('apd state profile, Medicaid office component', () => {
 
   test('dispatches on text change', () => {
     shallow(<StateProfile {...props} />)
-      .find('InputHolder')
+      .find('TextField')
       .at(0)
       .simulate('change', { target: { value: 'new text' } });
 
