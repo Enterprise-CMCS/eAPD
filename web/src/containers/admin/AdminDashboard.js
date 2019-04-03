@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from '../../components/Header.js';
+import Footer from '../../components/Footer.js';
 
 const AdminDashboard = () => {
   return (
@@ -23,7 +24,7 @@ const AdminDashboard = () => {
                     </Link>
                 </h2>
                 <p>
-                  Make new accounts for federal  analysts and state filers
+                  Make new accounts for federal analysts and state filers
                 </p>
               </li>
               <li className="ds-l-col--12 ds-l-md-col--6 ds-u-padding-right--0">
@@ -42,6 +43,7 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </Fragment>
   )
 };
