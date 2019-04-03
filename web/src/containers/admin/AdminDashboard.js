@@ -11,7 +11,7 @@ const AdminDashboard = () => {
       <Header />
       <div className="site-body ds-l-container">
         <div className="ds-l-row">
-          <div className="ds-l-col--8 ds-u-margin-x--auto">
+          <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-y--6">
             <h1 className="ds-h1">
               Administrator actions
             </h1>
