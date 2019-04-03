@@ -1,0 +1,19 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+footer {
+  background-color: $color-primary-alt-lightest;
+  padding-top: $spacer-6*2;
+  padding-bottom: $spacer-6*2;
+  margin-top: $spacer-6;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .hhs-logo {
+    float: left;
+    height: 100px;
+    margin-right: $spacer-4;
+  }
+}
