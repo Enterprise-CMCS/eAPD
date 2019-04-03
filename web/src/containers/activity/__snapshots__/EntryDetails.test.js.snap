@@ -10,7 +10,7 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
   onChange={[Function]}
   open={false}
   sticky={true}
-  title="Activity title"
+  title="Activity 3"
 >
   <Connect(Description)
     aKey="activity-key"

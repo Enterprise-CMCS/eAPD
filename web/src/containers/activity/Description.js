@@ -6,6 +6,7 @@ import { updateActivity as updateActivityAction } from '../../actions/activities
 import { RichText, Textarea } from '../../components/Inputs';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
+import { selectActivityByKey } from '../../reducers/activities.selectors';
 
 const Description = props => {
   const { activity, updateActivity } = props;
@@ -63,8 +64,8 @@ Description.propTypes = {
   updateActivity: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
-  activity: byKey[aKey]
+const mapStateToProps = (state, props) => ({
+  activity: selectActivityByKey(state, props)
 });
 
 const mapDispatchToProps = {
