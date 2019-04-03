@@ -14,10 +14,10 @@ directorAndAddress:
     title: Medicaid office
     labels:
       address1: Address
-      address2: Address continued (optional)
+      address2: Address continued
       city: City
       state: State
-      zip: ZIP
+      zip: ZIP Code
 keyPersonnel:
   title: Key Personnel and Program Management Planning
   instruction:
