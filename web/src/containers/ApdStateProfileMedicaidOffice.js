@@ -23,9 +23,7 @@ class ApdStateProfile extends Component {
     return (
       <Fragment>
         <fieldset>
-          <legend>
-            {t(`${dirTRoot}.title`)}
-          </legend>
+          <legend>{t(`${dirTRoot}.title`)}</legend>
           <TextField
             name="apd-state-profile-mdname"
             label={t(`${dirTRoot}.labels.name`)}
@@ -47,9 +45,7 @@ class ApdStateProfile extends Component {
         </fieldset>
 
         <fieldset>
-          <legend>
-            {t(`${offTRoot}.title`)}
-          </legend>
+          <legend>{t(`${offTRoot}.title`)}</legend>
           <TextField
             name="apd-state-profile-addr1"
             label={t(`${offTRoot}.labels.address1`)}
@@ -71,7 +67,7 @@ class ApdStateProfile extends Component {
               className="ds-l-col--6"
               onChange={this.handleChange('medicaidOffice', 'city')}
             />
-            <div className="ds-u-clearfix ds-l-col--3">
+            <div className="ds-u-clearfix ds-l-col--6">
               <FormLabel component="label">
                 {t(`${offTRoot}.labels.state`)}
               </FormLabel>
@@ -83,7 +79,7 @@ class ApdStateProfile extends Component {
               >
                 {STATES.map(({ id, name }) => (
                   <option key={name} value={id.toUpperCase()}>
-                    {`${id.toUpperCase()} - ${name}`}
+                    {name}
                   </option>
                 ))}
               </Select>
