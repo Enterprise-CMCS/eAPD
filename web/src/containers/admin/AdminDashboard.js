@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import Icon, { faUserCog, faUserPlus } from '../../components/Icons';
-import Footer from '../../components/Footer.js';
-import Header from '../../components/Header.js';
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 
 const AdminDashboard = () => {
   return (
