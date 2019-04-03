@@ -59,7 +59,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
         value="city"
       />
       <div
-        className="ds-u-clearfix ds-l-col--3"
+        className="ds-u-clearfix ds-l-col--6"
       >
         <FormLabel
           component="label"
@@ -76,337 +76,337 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
             key="Alabama"
             value="AL"
           >
-            AL - Alabama
+            Alabama
           </option>
           <option
             key="Alaska"
             value="AK"
           >
-            AK - Alaska
+            Alaska
           </option>
           <option
             key="Arizona"
             value="AZ"
           >
-            AZ - Arizona
+            Arizona
           </option>
           <option
             key="Arkansas"
             value="AR"
           >
-            AR - Arkansas
+            Arkansas
           </option>
           <option
             key="California"
             value="CA"
           >
-            CA - California
+            California
           </option>
           <option
             key="Colorado"
             value="CO"
           >
-            CO - Colorado
+            Colorado
           </option>
           <option
             key="Connecticut"
             value="CT"
           >
-            CT - Connecticut
+            Connecticut
           </option>
           <option
             key="Delaware"
             value="DE"
           >
-            DE - Delaware
+            Delaware
           </option>
           <option
             key="Florida"
             value="FL"
           >
-            FL - Florida
+            Florida
           </option>
           <option
             key="Georgia"
             value="GA"
           >
-            GA - Georgia
+            Georgia
           </option>
           <option
             key="Hawaii"
             value="HI"
           >
-            HI - Hawaii
+            Hawaii
           </option>
           <option
             key="Idaho"
             value="ID"
           >
-            ID - Idaho
+            Idaho
           </option>
           <option
             key="Iowa"
             value="IA"
           >
-            IA - Iowa
+            Iowa
           </option>
           <option
             key="Illinois"
             value="IL"
           >
-            IL - Illinois
+            Illinois
           </option>
           <option
             key="Indiana"
             value="IN"
           >
-            IN - Indiana
+            Indiana
           </option>
           <option
             key="Kansas"
             value="KS"
           >
-            KS - Kansas
+            Kansas
           </option>
           <option
             key="Kentucky"
             value="KY"
           >
-            KY - Kentucky
+            Kentucky
           </option>
           <option
             key="Louisiana"
             value="LA"
           >
-            LA - Louisiana
+            Louisiana
           </option>
           <option
             key="Maine"
             value="ME"
           >
-            ME - Maine
+            Maine
           </option>
           <option
             key="Maryland"
             value="MD"
           >
-            MD - Maryland
+            Maryland
           </option>
           <option
             key="Massachusetts"
             value="MA"
           >
-            MA - Massachusetts
+            Massachusetts
           </option>
           <option
             key="Michigan"
             value="MI"
           >
-            MI - Michigan
+            Michigan
           </option>
           <option
             key="Minnesota"
             value="MN"
           >
-            MN - Minnesota
+            Minnesota
           </option>
           <option
             key="Mississippi"
             value="MS"
           >
-            MS - Mississippi
+            Mississippi
           </option>
           <option
             key="Missouri"
             value="MO"
           >
-            MO - Missouri
+            Missouri
           </option>
           <option
             key="Montana"
             value="MT"
           >
-            MT - Montana
+            Montana
           </option>
           <option
             key="Nebraska"
             value="NE"
           >
-            NE - Nebraska
+            Nebraska
           </option>
           <option
             key="North Carolina"
             value="NC"
           >
-            NC - North Carolina
+            North Carolina
           </option>
           <option
             key="North Dakota"
             value="ND"
           >
-            ND - North Dakota
+            North Dakota
           </option>
           <option
             key="New Hampshire"
             value="NH"
           >
-            NH - New Hampshire
+            New Hampshire
           </option>
           <option
             key="New Jersey"
             value="NJ"
           >
-            NJ - New Jersey
+            New Jersey
           </option>
           <option
             key="New Mexico"
             value="NM"
           >
-            NM - New Mexico
+            New Mexico
           </option>
           <option
             key="Nevada"
             value="NV"
           >
-            NV - Nevada
+            Nevada
           </option>
           <option
             key="New York"
             value="NY"
           >
-            NY - New York
+            New York
           </option>
           <option
             key="Ohio"
             value="OH"
           >
-            OH - Ohio
+            Ohio
           </option>
           <option
             key="Oklahoma"
             value="OK"
           >
-            OK - Oklahoma
+            Oklahoma
           </option>
           <option
             key="Oregon"
             value="OR"
           >
-            OR - Oregon
+            Oregon
           </option>
           <option
             key="Pennsylvania"
             value="PA"
           >
-            PA - Pennsylvania
+            Pennsylvania
           </option>
           <option
             key="Rhode Island"
             value="RI"
           >
-            RI - Rhode Island
+            Rhode Island
           </option>
           <option
             key="South Carolina"
             value="SC"
           >
-            SC - South Carolina
+            South Carolina
           </option>
           <option
             key="South Dakota"
             value="SD"
           >
-            SD - South Dakota
+            South Dakota
           </option>
           <option
             key="Tennessee"
             value="TN"
           >
-            TN - Tennessee
+            Tennessee
           </option>
           <option
             key="Texas"
             value="TX"
           >
-            TX - Texas
+            Texas
           </option>
           <option
             key="Utah"
             value="UT"
           >
-            UT - Utah
+            Utah
           </option>
           <option
             key="Vermont"
             value="VT"
           >
-            VT - Vermont
+            Vermont
           </option>
           <option
             key="Virginia"
             value="VA"
           >
-            VA - Virginia
+            Virginia
           </option>
           <option
             key="Washington"
             value="WA"
           >
-            WA - Washington
+            Washington
           </option>
           <option
             key="West Virginia"
             value="WV"
           >
-            WV - West Virginia
+            West Virginia
           </option>
           <option
             key="Wisconsin"
             value="WI"
           >
-            WI - Wisconsin
+            Wisconsin
           </option>
           <option
             key="Wyoming"
             value="WY"
           >
-            WY - Wyoming
+            Wyoming
           </option>
           <option
             key="District of Columbia"
             value="DC"
           >
-            DC - District of Columbia
+            District of Columbia
           </option>
           <option
             key="American Samoa"
             value="AS"
           >
-            AS - American Samoa
+            American Samoa
           </option>
           <option
             key="Guam"
             value="GU"
           >
-            GU - Guam
+            Guam
           </option>
           <option
             key="Northern Mariana Islands"
             value="MP"
           >
-            MP - Northern Mariana Islands
+            Northern Mariana Islands
           </option>
           <option
             key="Puerto Rico"
             value="PR"
           >
-            PR - Puerto Rico
+            Puerto Rico
           </option>
           <option
             key="U.S. Virgin Islands"
             value="VI"
           >
-            VI - U.S. Virgin Islands
+            U.S. Virgin Islands
           </option>
         </Select>
       </div>
@@ -482,7 +482,7 @@ exports[`apd state profile, Medicaid office component renders correctly 2`] = `
         value="city"
       />
       <div
-        className="ds-u-clearfix ds-l-col--3"
+        className="ds-u-clearfix ds-l-col--6"
       >
         <FormLabel
           component="label"
@@ -499,337 +499,337 @@ exports[`apd state profile, Medicaid office component renders correctly 2`] = `
             key="Alabama"
             value="AL"
           >
-            AL - Alabama
+            Alabama
           </option>
           <option
             key="Alaska"
             value="AK"
           >
-            AK - Alaska
+            Alaska
           </option>
           <option
             key="Arizona"
             value="AZ"
           >
-            AZ - Arizona
+            Arizona
           </option>
           <option
             key="Arkansas"
             value="AR"
           >
-            AR - Arkansas
+            Arkansas
           </option>
           <option
             key="California"
             value="CA"
           >
-            CA - California
+            California
           </option>
           <option
             key="Colorado"
             value="CO"
           >
-            CO - Colorado
+            Colorado
           </option>
           <option
             key="Connecticut"
             value="CT"
           >
-            CT - Connecticut
+            Connecticut
           </option>
           <option
             key="Delaware"
             value="DE"
           >
-            DE - Delaware
+            Delaware
           </option>
           <option
             key="Florida"
             value="FL"
           >
-            FL - Florida
+            Florida
           </option>
           <option
             key="Georgia"
             value="GA"
           >
-            GA - Georgia
+            Georgia
           </option>
           <option
             key="Hawaii"
             value="HI"
           >
-            HI - Hawaii
+            Hawaii
           </option>
           <option
             key="Idaho"
             value="ID"
           >
-            ID - Idaho
+            Idaho
           </option>
           <option
             key="Iowa"
             value="IA"
           >
-            IA - Iowa
+            Iowa
           </option>
           <option
             key="Illinois"
             value="IL"
           >
-            IL - Illinois
+            Illinois
           </option>
           <option
             key="Indiana"
             value="IN"
           >
-            IN - Indiana
+            Indiana
           </option>
           <option
             key="Kansas"
             value="KS"
           >
-            KS - Kansas
+            Kansas
           </option>
           <option
             key="Kentucky"
             value="KY"
           >
-            KY - Kentucky
+            Kentucky
           </option>
           <option
             key="Louisiana"
             value="LA"
           >
-            LA - Louisiana
+            Louisiana
           </option>
           <option
             key="Maine"
             value="ME"
           >
-            ME - Maine
+            Maine
           </option>
           <option
             key="Maryland"
             value="MD"
           >
-            MD - Maryland
+            Maryland
           </option>
           <option
             key="Massachusetts"
             value="MA"
           >
-            MA - Massachusetts
+            Massachusetts
           </option>
           <option
             key="Michigan"
             value="MI"
           >
-            MI - Michigan
+            Michigan
           </option>
           <option
             key="Minnesota"
             value="MN"
           >
-            MN - Minnesota
+            Minnesota
           </option>
           <option
             key="Mississippi"
             value="MS"
           >
-            MS - Mississippi
+            Mississippi
           </option>
           <option
             key="Missouri"
             value="MO"
           >
-            MO - Missouri
+            Missouri
           </option>
           <option
             key="Montana"
             value="MT"
           >
-            MT - Montana
+            Montana
           </option>
           <option
             key="Nebraska"
             value="NE"
           >
-            NE - Nebraska
+            Nebraska
           </option>
           <option
             key="North Carolina"
             value="NC"
           >
-            NC - North Carolina
+            North Carolina
           </option>
           <option
             key="North Dakota"
             value="ND"
           >
-            ND - North Dakota
+            North Dakota
           </option>
           <option
             key="New Hampshire"
             value="NH"
           >
-            NH - New Hampshire
+            New Hampshire
           </option>
           <option
             key="New Jersey"
             value="NJ"
           >
-            NJ - New Jersey
+            New Jersey
           </option>
           <option
             key="New Mexico"
             value="NM"
           >
-            NM - New Mexico
+            New Mexico
           </option>
           <option
             key="Nevada"
             value="NV"
           >
-            NV - Nevada
+            Nevada
           </option>
           <option
             key="New York"
             value="NY"
           >
-            NY - New York
+            New York
           </option>
           <option
             key="Ohio"
             value="OH"
           >
-            OH - Ohio
+            Ohio
           </option>
           <option
             key="Oklahoma"
             value="OK"
           >
-            OK - Oklahoma
+            Oklahoma
           </option>
           <option
             key="Oregon"
             value="OR"
           >
-            OR - Oregon
+            Oregon
           </option>
           <option
             key="Pennsylvania"
             value="PA"
           >
-            PA - Pennsylvania
+            Pennsylvania
           </option>
           <option
             key="Rhode Island"
             value="RI"
           >
-            RI - Rhode Island
+            Rhode Island
           </option>
           <option
             key="South Carolina"
             value="SC"
           >
-            SC - South Carolina
+            South Carolina
           </option>
           <option
             key="South Dakota"
             value="SD"
           >
-            SD - South Dakota
+            South Dakota
           </option>
           <option
             key="Tennessee"
             value="TN"
           >
-            TN - Tennessee
+            Tennessee
           </option>
           <option
             key="Texas"
             value="TX"
           >
-            TX - Texas
+            Texas
           </option>
           <option
             key="Utah"
             value="UT"
           >
-            UT - Utah
+            Utah
           </option>
           <option
             key="Vermont"
             value="VT"
           >
-            VT - Vermont
+            Vermont
           </option>
           <option
             key="Virginia"
             value="VA"
           >
-            VA - Virginia
+            Virginia
           </option>
           <option
             key="Washington"
             value="WA"
           >
-            WA - Washington
+            Washington
           </option>
           <option
             key="West Virginia"
             value="WV"
           >
-            WV - West Virginia
+            West Virginia
           </option>
           <option
             key="Wisconsin"
             value="WI"
           >
-            WI - Wisconsin
+            Wisconsin
           </option>
           <option
             key="Wyoming"
             value="WY"
           >
-            WY - Wyoming
+            Wyoming
           </option>
           <option
             key="District of Columbia"
             value="DC"
           >
-            DC - District of Columbia
+            District of Columbia
           </option>
           <option
             key="American Samoa"
             value="AS"
           >
-            AS - American Samoa
+            American Samoa
           </option>
           <option
             key="Guam"
             value="GU"
           >
-            GU - Guam
+            Guam
           </option>
           <option
             key="Northern Mariana Islands"
             value="MP"
           >
-            MP - Northern Mariana Islands
+            Northern Mariana Islands
           </option>
           <option
             key="Puerto Rico"
             value="PR"
           >
-            PR - Puerto Rico
+            Puerto Rico
           </option>
           <option
             key="U.S. Virgin Islands"
             value="VI"
           >
-            VI - U.S. Virgin Islands
+            U.S. Virgin Islands
           </option>
         </Select>
       </div>
