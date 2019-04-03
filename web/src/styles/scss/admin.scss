@@ -1,6 +1,7 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
 .user-icon {
+  color: $color-primary;
   background-color: $color-primary-alt-lightest;
   display: inline-block;
   padding: $spacer-2;
