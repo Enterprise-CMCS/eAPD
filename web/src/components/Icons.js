@@ -9,7 +9,9 @@ import {
   faEdit,
   faExclamationTriangle,
   faPlusCircle,
-  faSpinner
+  faSpinner,
+  faUserCog,
+  faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faCircle, faClock } from '@fortawesome/free-regular-svg-icons';
@@ -24,7 +26,9 @@ export {
   faEdit,
   faExclamationTriangle,
   faPlusCircle,
-  faSpinner
+  faSpinner,
+  faUserCog,
+  faUserPlus
 };
 
 export default FontAwesomeIcon;

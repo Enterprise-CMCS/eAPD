@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-import Header from '../../components/Header.js';
+import Icon, { faUserCog, faUserPlus } from '../../components/Icons';
 import Footer from '../../components/Footer.js';
+import Header from '../../components/Header.js';
 
 const AdminDashboard = () => {
   return (
@@ -17,8 +18,12 @@ const AdminDashboard = () => {
             <ul className="ds-c-list--bare ds-l-row">
               <li className="ds-l-col--12 ds-l-md-col--6 ds-u-padding-left--0">
                 <h2 className="ds-h2">
+                  <div className="user-icon">
+                    <Icon icon={faUserCog} />
+                  </div>
                   <Link
                     to={{ pathname: '/admin/create-account' }}
+                    className="ds-u-display--block"
                   >
                       Create new user account
                     </Link>
@@ -29,8 +34,12 @@ const AdminDashboard = () => {
               </li>
               <li className="ds-l-col--12 ds-l-md-col--6 ds-u-padding-right--0">
                 <h2 className="ds-h2">
+                  <div className="user-icon">
+                    <Icon icon={faUserPlus} />
+                  </div>
                   <Link
                     to={{ pathname: '/admin/edit-account' }}
+                    className="ds-u-display--block"
                   >
                     Manage user accounts
                   </Link>
