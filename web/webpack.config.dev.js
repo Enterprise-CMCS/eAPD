@@ -1,6 +1,8 @@
 const path = require('path');
 
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 
 const config = {
   mode: 'development',
@@ -64,7 +66,16 @@ const config = {
     new webpack.EnvironmentPlugin({
       API_URL: null
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    // Inject our app scripts into our HTML kickstarter
+    new HtmlWebpackPlugin({
+      minify: { removeComments: true },
+      template: 'src/index.html'
+    }),
+    new HtmlWebpackIncludeAssetsPlugin({
+      assets: ['legacy.css', 'app.css'],
+      append: true
+    })
   ],
   devtool: 'cheap-module-eval-source-map',
   devServer: {
