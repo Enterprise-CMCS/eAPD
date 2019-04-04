@@ -27,7 +27,7 @@ exports[`login component renders correctly if logged in, but no previous locatio
 
 exports[`login component renders correctly if not logged in 1`] = `
 <Fragment>
-  <Header />
+  <Connect(Header) />
   <div
     className="card--container"
   >
@@ -88,7 +88,7 @@ exports[`login component renders correctly if not logged in 1`] = `
 
 exports[`login component renders correctly if not logged in 2`] = `
 <Fragment>
-  <Header />
+  <Connect(Header) />
   <div
     className="card--container"
   >
@@ -149,7 +149,7 @@ exports[`login component renders correctly if not logged in 2`] = `
 
 exports[`login component renders correctly if not logged in 3`] = `
 <Fragment>
-  <Header />
+  <Connect(Header) />
   <div
     className="card--container"
   >
@@ -210,7 +210,7 @@ exports[`login component renders correctly if not logged in 3`] = `
 
 exports[`login component renders correctly if not logged in and fetching data 1`] = `
 <Fragment>
-  <Header />
+  <Connect(Header) />
   <div
     className="card--container"
   >
@@ -271,7 +271,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
 
 exports[`login component renders correctly if not logged in and there is an error 1`] = `
 <Fragment>
-  <Header />
+  <Connect(Header) />
   <div
     className="card--container"
   >
