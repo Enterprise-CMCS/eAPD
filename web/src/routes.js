@@ -21,7 +21,7 @@ const routes = [
     nonPrivate: false
   },
   { path: '/admin/edit-account', component: EditAccount, nonPrivate: false },
-  { path: '/admin', component: AdminDashboard, nonPrivate: false },
+  { path: '/admin', component: AdminDashboard, nonPrivate: false, exact: true },
   { path: '/me', component: MyAccount, nonPrivate: false },
 
   { component: NoMatch, nonPrivate: true }
