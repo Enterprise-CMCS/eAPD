@@ -1,0 +1,9 @@
+// needed for sticky footer
+.site {
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto; // will push the footer as far down as it can
+}

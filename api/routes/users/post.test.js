@@ -67,7 +67,7 @@ tap.test('user POST endpoint', async endpointTest => {
               'HTTP status set to 400'
             );
             invalidTest.ok(
-              res.send.calledWith({ error: 'add-user-invalid' }),
+              res.send.calledWith({ error: 'add-account.invalid' }),
               'error token is set'
             );
             invalidTest.ok(res.end.called, 'response is terminated');
@@ -82,13 +82,15 @@ tap.test('user POST endpoint', async endpointTest => {
         User.validate.rejects(new Error('invalidate-test'));
 
         await handler(
-          { body: { email: 'all-permissions-and-state', password: 'password' } },
+          {
+            body: { email: 'all-permissions-and-state', password: 'password' }
+          },
           res
         );
 
         invalidTest.ok(res.status.calledWith(400), 'HTTP status set to 400');
         invalidTest.ok(
-          res.send.calledWith({ error: 'add-user-invalidate-test' }),
+          res.send.calledWith({ error: 'add-account.invalidate-test' }),
           'error token is set'
         );
         invalidTest.ok(res.end.called, 'response is terminated');
@@ -102,7 +104,9 @@ tap.test('user POST endpoint', async endpointTest => {
         User.save.rejects();
 
         await handler(
-          { body: { email: 'all-permissions-and-state', password: 'password' } },
+          {
+            body: { email: 'all-permissions-and-state', password: 'password' }
+          },
           res
         );
 
@@ -119,11 +123,23 @@ tap.test('user POST endpoint', async endpointTest => {
         User.save.resolves();
 
         await handler(
-          { body: { email: 'all-permissions-and-state', password: 'password', junk: 'thrown away' } },
+          {
+            body: {
+              email: 'all-permissions-and-state',
+              password: 'password',
+              junk: 'thrown away'
+            }
+          },
           res
         );
 
-        validTest.ok(UserModel.forge.calledWith({email: 'all-permissions-and-state', password: 'password'}), 'correct model is forged');
+        validTest.ok(
+          UserModel.forge.calledWith({
+            email: 'all-permissions-and-state',
+            password: 'password'
+          }),
+          'correct model is forged'
+        );
         validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
         validTest.ok(res.send.notCalled, 'does not send a message');
         validTest.ok(res.end.called, 'response is terminated');
@@ -137,11 +153,27 @@ tap.test('user POST endpoint', async endpointTest => {
         User.save.resolves();
 
         await handler(
-          { body: { email: 'all-permissions-and-state', password: 'password', name: 'bob', state: 'mo', junk: 'thrown away' } },
+          {
+            body: {
+              email: 'all-permissions-and-state',
+              password: 'password',
+              name: 'bob',
+              state: 'mo',
+              junk: 'thrown away'
+            }
+          },
           res
         );
 
-        validTest.ok(UserModel.forge.calledWith({email: 'all-permissions-and-state', password: 'password', name: 'bob', state_id: 'mo'}), 'correct model is forged');
+        validTest.ok(
+          UserModel.forge.calledWith({
+            email: 'all-permissions-and-state',
+            password: 'password',
+            name: 'bob',
+            state_id: 'mo'
+          }),
+          'correct model is forged'
+        );
         validTest.ok(res.status.calledWith(200), 'HTTP status set to 200');
         validTest.ok(res.send.notCalled, 'does not send a message');
         validTest.ok(res.end.called, 'response is terminated');
