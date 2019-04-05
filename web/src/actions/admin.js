@@ -94,7 +94,7 @@ export const ADMIN_EDIT_ACCOUNT_SUCCESS = Symbol(
 );
 export const ADMIN_EDIT_ACCOUNT_ERROR = Symbol('admin : edit account : error');
 
-export const editAccount = user => dispatch => {
+export const editAccount = (user, changingPassword) => dispatch => {
   dispatch({ type: ADMIN_EDIT_ACCOUNT_REQUEST });
 
   const putData = Object.entries(user).reduce(
@@ -106,6 +106,18 @@ export const editAccount = user => dispatch => {
   }
   if (!user.role) {
     putData.role = '';
+  }
+
+  if (changingPassword) {
+    if (!putData.password || putData.password.length === 0) {
+      dispatch({
+        type: ADMIN_EDIT_ACCOUNT_ERROR,
+        data: 'edit-account.no-password'
+      });
+      return null;
+    }
+  } else {
+    delete putData.password;
   }
 
   return axios
