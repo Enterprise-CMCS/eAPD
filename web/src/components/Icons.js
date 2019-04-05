@@ -12,7 +12,9 @@ import {
   faLock,
   faPlusCircle,
   faSpinner,
-  faUnlock
+  faUnlock,
+  faUserCog,
+  faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faCircle, faClock } from '@fortawesome/free-regular-svg-icons';
@@ -34,7 +36,9 @@ export {
   faSpinner,
   faUnlock,
   LockIcon,
-  UnlockIcon
+  UnlockIcon,
+  faUserCog,
+  faUserPlus
 };
 
 export default FontAwesomeIcon;

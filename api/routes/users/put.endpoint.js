@@ -9,7 +9,7 @@ const {
 
 const url = userID => getFullPath(`/users/${userID}`);
 
-describe('users endpoint | PUT /users/:userID', async () => {
+describe('users endpoint | PUT /users/:userID', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
@@ -17,7 +17,7 @@ describe('users endpoint | PUT /users/:userID', async () => {
   unauthenticatedTest('put', url(0));
   unauthorizedTest('put', url(0));
 
-  describe('when authenticated', async () => {
+  describe('when authenticated', () => {
     let cookies;
     beforeAll(async () => {
       cookies = await login();
@@ -42,7 +42,7 @@ describe('users endpoint | PUT /users/:userID', async () => {
       expect(body).toMatchSnapshot();
     });
 
-    describe('when updating a valid user ID', async () => {
+    describe('when updating a valid user ID', () => {
       it('...with an invalid state ID', async () => {
         const { response, body } = await put(2001, { state: 'xx' });
 

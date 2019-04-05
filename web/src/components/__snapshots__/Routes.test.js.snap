@@ -36,6 +36,12 @@ exports[`Routes component renders correctly 1`] = `
   />
   <Connect(PrivateRoute)
     component={[Function]}
+    exact={true}
+    key="/admin"
+    path="/admin"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
     key="/me"
     path="/me"
   />

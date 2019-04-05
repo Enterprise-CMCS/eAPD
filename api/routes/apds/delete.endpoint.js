@@ -8,7 +8,7 @@ const {
 } = require('../../utils.endpoint');
 
 describe('APD endpoint', () => {
-  describe('Delete/archive APD endpoint | DELETE /apds/:id', async () => {
+  describe('Delete/archive APD endpoint | DELETE /apds/:id', () => {
     const db = getDB();
     beforeAll(() => db.seed.run());
     afterAll(() => db.destroy());
@@ -18,7 +18,7 @@ describe('APD endpoint', () => {
     unauthenticatedTest('delete', url(0));
     unauthorizedTest('delete', url(0));
 
-    describe('when authenticated as a user with permission', async () => {
+    describe('when authenticated as a user with permission', () => {
       let cookies;
       beforeAll(async () => {
         cookies = await login();
