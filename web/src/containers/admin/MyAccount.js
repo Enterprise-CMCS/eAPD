@@ -33,6 +33,9 @@ class MyAccount extends Component {
   }
 
   static getDerivedStateFromProps({ error, working }, { hasFetched }) {
+    // Success has to be derived.  It can't be stored in the app state because
+    // if it was, then the next time this form was loaded, it would show the
+    // success state even though it wouldn't be accurate anymore.
     if (!hasFetched) {
       return { hasFetched: working };
     }

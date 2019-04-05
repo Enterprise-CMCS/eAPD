@@ -22,10 +22,16 @@ class CreateUser extends Component {
   };
 
   static getDerivedStateFromProps({ error, working }, { hasFetched }) {
+    // Success has to be derived.  It can't be stored in the app state because
+    // if it was, then the next time this form was loaded, it would show the
+    // success state even though it wouldn't be accurate anymore.
     if (!hasFetched) {
       return { hasFetched: working };
     }
 
+    // And because this component is creating a new user, that user is stored
+    // in component state too - so in a success condition, where the user was
+    // saved, blank out the state so another new user can be created.
     if (!working && !error) {
       return {
         hasFetched: false,
