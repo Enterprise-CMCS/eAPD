@@ -136,9 +136,13 @@ export const editSelf = (user, changingPassword) => dispatch => {
     {}
   );
 
-  if (changingPassword && (!putData.password || putData.password.length < 0)) {
-    dispatch({ type: ADMIN_EDIT_ME_ERROR, data: 'edit-self.no-password' });
-    return null;
+  if (changingPassword) {
+    if (!putData.password || putData.password.length === 0) {
+      dispatch({ type: ADMIN_EDIT_ME_ERROR, data: 'edit-self.no-password' });
+      return null;
+    }
+  } else {
+    delete putData.password;
   }
 
   return axios
