@@ -2,7 +2,7 @@
 
 exports[`my account page handles submitting the form with an error 1`] = `
 <Fragment>
-  <Header />
+  <Connect(Header) />
   <CardForm
     error={false}
     legend="manage account details"
@@ -59,7 +59,7 @@ exports[`my account page handles submitting the form with an error 1`] = `
 
 exports[`my account page handles submitting the form with no error 1`] = `
 <Fragment>
-  <Header />
+  <Connect(Header) />
   <CardForm
     error={false}
     legend="manage account details"
@@ -116,7 +116,7 @@ exports[`my account page handles submitting the form with no error 1`] = `
 
 exports[`my account page renders 1`] = `
 <Fragment>
-  <Header />
+  <Connect(Header) />
   <CardForm
     error={false}
     legend="manage account details"
@@ -173,7 +173,7 @@ exports[`my account page renders 1`] = `
 
 exports[`my account page renders 2`] = `
 <Fragment>
-  <Header />
+  <Connect(Header) />
   <CardForm
     error={false}
     legend="manage account details"
