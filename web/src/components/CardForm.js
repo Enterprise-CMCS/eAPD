@@ -24,7 +24,7 @@ const CardForm = ({
 
           <h1 className="ds-h1">
             {sectionName.length > 0 && (
-              <h6 className="ds-h6">{sectionName.toUpperCase()}</h6>
+              <span className="ds-h6 ds-u-display--block">{sectionName.toUpperCase()}</span>
             )}
             {title}
           </h1>
