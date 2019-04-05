@@ -72,7 +72,11 @@ describe('my account page', () => {
     });
     expect(component).toMatchSnapshot();
 
-    // updated after enabling password change
+    // updated after toggling password change
+    component.find('Button[purpose="change password"]').simulate('click');
+    expect(component).toMatchSnapshot();
+
+    // updated after toggling password change back
     component.find('Button[purpose="change password"]').simulate('click');
     expect(component).toMatchSnapshot();
 
