@@ -107,7 +107,7 @@ describe('login component', () => {
     component
       .find('Password')
       .simulate('change', { target: { name: 'password', value: 'secret' } });
-    component.find('form').simulate('submit', event);
+    component.find('CardForm').prop('onSave')(event);
 
     expect(loginProp.calledWith('bob', 'secret')).toBeTruthy();
     expect(event.preventDefault.called).toBeTruthy();

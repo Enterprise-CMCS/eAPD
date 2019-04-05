@@ -19,7 +19,7 @@ const newUsersInTheDatabase = async () => {
   return users.length ? users : false;
 };
 
-describe('users endpoint | POST /users', async () => {
+describe('users endpoint | POST /users', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
@@ -47,7 +47,7 @@ describe('users endpoint | POST /users', async () => {
     }
   ];
 
-  describe('when authenticated', async () => {
+  describe('when authenticated', () => {
     let cookies;
     beforeAll(async () => {
       cookies = await login();

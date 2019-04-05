@@ -28,313 +28,194 @@ exports[`login component renders correctly if logged in, but no previous locatio
 exports[`login component renders correctly if not logged in 1`] = `
 <Fragment>
   <Connect(Header) />
-  <div
-    className="card--container"
+  <CardForm
+    error={false}
+    legend=""
+    onCancel={[Function]}
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    sectionName=""
+    success={false}
+    title="Log in"
+    working={false}
   >
-    <div
-      className="ds-l-container card"
-    >
-      <div
-        className="ds-l-row"
-      >
-        <div
-          className="ds-l-col--1 ds-u-margin-left--auto"
-        />
-        <div
-          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
-        >
-          <h1
-            className="ds-h1"
-          >
-            Log in
-          </h1>
-          <form
-            onSubmit={[Function]}
-          >
-            <TextField
-              ariaLabel="Enter the email associated with this account."
-              id="username"
-              label="Email"
-              name="username"
-              onChange={[Function]}
-              type="text"
-              value=""
-            />
-            <Password
-              compareTo={Array []}
-              onChange={[Function]}
-              showMeter={false}
-              title="Password"
-              value=""
-            />
-            <Button
-              className="ds-u-margin-y--4"
-              disabled={true}
-              type="submit"
-              variation="primary"
-            >
-              Log in
-            </Button>
-          </form>
-        </div>
-        <div
-          className="ds-l-col--1 ds-u-margin-right--auto"
-        />
-      </div>
-    </div>
-  </div>
+    <TextField
+      ariaLabel="Enter the email associated with this account."
+      id="username"
+      label="Email"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <Password
+      compareTo={Array []}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value=""
+    />
+  </CardForm>
 </Fragment>
 `;
 
 exports[`login component renders correctly if not logged in 2`] = `
 <Fragment>
   <Connect(Header) />
-  <div
-    className="card--container"
+  <CardForm
+    error={false}
+    legend=""
+    onCancel={[Function]}
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    sectionName=""
+    success={false}
+    title="Log in"
+    working={false}
   >
-    <div
-      className="ds-l-container card"
-    >
-      <div
-        className="ds-l-row"
-      >
-        <div
-          className="ds-l-col--1 ds-u-margin-left--auto"
-        />
-        <div
-          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
-        >
-          <h1
-            className="ds-h1"
-          >
-            Log in
-          </h1>
-          <form
-            onSubmit={[Function]}
-          >
-            <TextField
-              ariaLabel="Enter the email associated with this account."
-              id="username"
-              label="Email"
-              name="username"
-              onChange={[Function]}
-              type="text"
-              value="bob"
-            />
-            <Password
-              compareTo={Array []}
-              onChange={[Function]}
-              showMeter={false}
-              title="Password"
-              value=""
-            />
-            <Button
-              className="ds-u-margin-y--4"
-              disabled={true}
-              type="submit"
-              variation="primary"
-            >
-              Log in
-            </Button>
-          </form>
-        </div>
-        <div
-          className="ds-l-col--1 ds-u-margin-right--auto"
-        />
-      </div>
-    </div>
-  </div>
+    <TextField
+      ariaLabel="Enter the email associated with this account."
+      id="username"
+      label="Email"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value="bob"
+    />
+    <Password
+      compareTo={Array []}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value=""
+    />
+  </CardForm>
 </Fragment>
 `;
 
 exports[`login component renders correctly if not logged in 3`] = `
 <Fragment>
   <Connect(Header) />
-  <div
-    className="card--container"
+  <CardForm
+    error={false}
+    legend=""
+    onCancel={[Function]}
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    sectionName=""
+    success={false}
+    title="Log in"
+    working={false}
   >
-    <div
-      className="ds-l-container card"
-    >
-      <div
-        className="ds-l-row"
-      >
-        <div
-          className="ds-l-col--1 ds-u-margin-left--auto"
-        />
-        <div
-          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
-        >
-          <h1
-            className="ds-h1"
-          >
-            Log in
-          </h1>
-          <form
-            onSubmit={[Function]}
-          >
-            <TextField
-              ariaLabel="Enter the email associated with this account."
-              id="username"
-              label="Email"
-              name="username"
-              onChange={[Function]}
-              type="text"
-              value="bob"
-            />
-            <Password
-              compareTo={Array []}
-              onChange={[Function]}
-              showMeter={false}
-              title="Password"
-              value="secret"
-            />
-            <Button
-              className="ds-u-margin-y--4"
-              disabled={false}
-              type="submit"
-              variation="primary"
-            >
-              Log in
-            </Button>
-          </form>
-        </div>
-        <div
-          className="ds-l-col--1 ds-u-margin-right--auto"
-        />
-      </div>
-    </div>
-  </div>
+    <TextField
+      ariaLabel="Enter the email associated with this account."
+      id="username"
+      label="Email"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value="bob"
+    />
+    <Password
+      compareTo={Array []}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value="secret"
+    />
+  </CardForm>
 </Fragment>
 `;
 
 exports[`login component renders correctly if not logged in and fetching data 1`] = `
 <Fragment>
   <Connect(Header) />
-  <div
-    className="card--container"
+  <CardForm
+    error={false}
+    legend=""
+    onCancel={[Function]}
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    sectionName=""
+    success={false}
+    title="Log in"
+    working={true}
   >
-    <div
-      className="ds-l-container card"
-    >
-      <div
-        className="ds-l-row"
-      >
-        <div
-          className="ds-l-col--1 ds-u-margin-left--auto"
-        />
-        <div
-          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
-        >
-          <h1
-            className="ds-h1"
-          >
-            Log in
-          </h1>
-          <form
-            onSubmit={[Function]}
-          >
-            <TextField
-              ariaLabel="Enter the email associated with this account."
-              id="username"
-              label="Email"
-              name="username"
-              onChange={[Function]}
-              type="text"
-              value=""
-            />
-            <Password
-              compareTo={Array []}
-              onChange={[Function]}
-              showMeter={false}
-              title="Password"
-              value=""
-            />
-            <Button
-              className="ds-u-margin-y--4"
-              disabled={true}
-              type="submit"
-              variation="primary"
-            >
-              Logging in
-            </Button>
-          </form>
-        </div>
-        <div
-          className="ds-l-col--1 ds-u-margin-right--auto"
-        />
-      </div>
-    </div>
-  </div>
+    <TextField
+      ariaLabel="Enter the email associated with this account."
+      id="username"
+      label="Email"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <Password
+      compareTo={Array []}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value=""
+    />
+  </CardForm>
 </Fragment>
 `;
 
 exports[`login component renders correctly if not logged in and there is an error 1`] = `
 <Fragment>
   <Connect(Header) />
-  <div
-    className="card--container"
+  <CardForm
+    error={false}
+    legend=""
+    onCancel={[Function]}
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    sectionName=""
+    success={false}
+    title="Log in"
+    working={false}
   >
-    <div
-      className="ds-l-container card"
-    >
-      <div
-        className="ds-l-row"
-      >
-        <div
-          className="ds-l-col--1 ds-u-margin-left--auto"
-        />
-        <div
-          className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
-        >
-          <h1
-            className="ds-h1"
-          >
-            Log in
-          </h1>
-          <Alert
-            role="alert"
-            variation="error"
-          >
-            <strong>
-              Sorry!
-            </strong>
-             Something went wrong. Please try again.
-          </Alert>
-          <form
-            onSubmit={[Function]}
-          >
-            <TextField
-              ariaLabel="Enter the email associated with this account."
-              id="username"
-              label="Email"
-              name="username"
-              onChange={[Function]}
-              type="text"
-              value=""
-            />
-            <Password
-              compareTo={Array []}
-              onChange={[Function]}
-              showMeter={false}
-              title="Password"
-              value=""
-            />
-            <Button
-              className="ds-u-margin-y--4"
-              disabled={true}
-              type="submit"
-              variation="primary"
-            >
-              Log in
-            </Button>
-          </form>
-        </div>
-        <div
-          className="ds-l-col--1 ds-u-margin-right--auto"
-        />
-      </div>
-    </div>
-  </div>
+    <TextField
+      ariaLabel="Enter the email associated with this account."
+      id="username"
+      label="Email"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <Password
+      compareTo={Array []}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value=""
+    />
+  </CardForm>
 </Fragment>
 `;
