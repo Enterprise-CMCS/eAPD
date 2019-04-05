@@ -1575,7 +1575,7 @@ Object {
             "contractors": 0.25,
             "state": 0.25,
           },
-          "year": 2019,
+          "year": 2020,
         },
         Object {
           "q1": Object {
@@ -1598,7 +1598,7 @@ Object {
             "contractors": 0.25,
             "state": 0.25,
           },
-          "year": 2020,
+          "year": 2019,
         },
       ],
       "schedule": Array [

@@ -9,21 +9,23 @@ module.exports = (app, UserModel = defaultUserModel) => {
     logger.silly(req, `attempting to create new user [${req.body.email}]`);
     if (req.body.email && req.body.password) {
       try {
-
         const posted = {
           email: req.body.email,
           password: req.body.password
         };
-          
+
         // If these values are not passed in, don't set them at all, even
         // to undefined.  Undefined will make the data model explode.
         if (req.body.name) {
           posted.name = req.body.name;
         }
-        if(req.body.state) {
+        if (req.body.role) {
+          posted.auth_role = req.body.role;
+        }
+        if (req.body.state) {
           posted.state_id = req.body.state;
         }
-        
+
         const user = UserModel.forge(posted);
 
         try {
@@ -32,7 +34,7 @@ module.exports = (app, UserModel = defaultUserModel) => {
           logger.verbose('validation fail');
           return res
             .status(400)
-            .send({ error: `add-user-${e.message}` })
+            .send({ error: `add-account.${e.message}` })
             .end();
         }
 
@@ -50,7 +52,7 @@ module.exports = (app, UserModel = defaultUserModel) => {
       );
       return res
         .status(400)
-        .send({ error: 'add-user-invalid' })
+        .send({ error: 'add-account.invalid' })
         .end();
     }
   });

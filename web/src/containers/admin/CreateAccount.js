@@ -1,23 +1,51 @@
+import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { STATES } from '../../util';
+import CardForm from '../../components/CardForm';
+import Header from '../../components/Header';
 import Password from '../../components/PasswordWithMeter';
-
+import { STATES } from '../../util';
 import { createUser as createUserDispatch } from '../../actions/admin';
-
-import Btn from '../../components/Btn';
-import { t } from '../../i18n';
+import { getAddAccountError } from '../../reducers/errors';
+import { getAddAccountWorking } from '../../reducers/working';
 
 class CreateUser extends Component {
   state = {
-    fetching: false,
+    hasFetched: false,
     name: '',
     email: '',
     password: '',
-    state: ''
+    role: '',
+    state: '',
+    success: false
   };
+
+  static getDerivedStateFromProps({ error, working }, { hasFetched }) {
+    // Success has to be derived.  It can't be stored in the app state because
+    // if it was, then the next time this form was loaded, it would show the
+    // success state even though it wouldn't be accurate anymore.
+    if (!hasFetched) {
+      return { hasFetched: working };
+    }
+
+    // And because this component is creating a new user, that user is stored
+    // in component state too - so in a success condition, where the user was
+    // saved, blank out the state so another new user can be created.
+    if (!working && !error) {
+      return {
+        hasFetched: false,
+        name: '',
+        email: '',
+        password: '',
+        role: '',
+        state: '',
+        success: true
+      };
+    }
+
+    return { success: false };
+  }
 
   handleChange = e => {
     const { name: key, value } = e.target;
@@ -29,111 +57,120 @@ class CreateUser extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const { email, name, password, state } = this.state;
-    if (!email || !password) {
-      alert('Email and password are required');
-      return;
-    }
+    const { email, name, password, role, state } = this.state;
 
     const { createUser } = this.props;
 
-    this.setState({ fetching: true });
-    createUser({ email, name, password, state })
-      .then(() => {
-        this.setState({
-          fetching: false,
-          name: '',
-          email: '',
-          password: '',
-          state: ''
-        });
-      })
-      .catch(() => {
-        this.setState({ fetching: false });
-      });
+    createUser({ email, name, password, role, state });
   };
 
   render() {
-    const { fetching, name, email, password, state } = this.state;
+    const { error, roles, working } = this.props;
+    const {
+      hasFetched,
+      name,
+      email,
+      password,
+      role,
+      state,
+      success
+    } = this.state;
 
     return (
       <Fragment>
-        <header className="clearfix px2 py1 bg-white">
-          <div className="left">
-            <Link to="/" className="btn px0 bold caps">
-              {t('titleBasic')}
-            </Link>
-          </div>
-        </header>
+        <Header />
 
-        <div className="mx-auto my3 p2 sm-col-6 md-col-4 bg-white rounded">
-          <h1 className="mt0 h2">Create account</h1>
-          <form onSubmit={this.handleSubmit}>
-            <div className="mb2">
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                type="text"
-                name="name"
-                className="input"
-                value={name}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="mb2">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="text"
-                name="email"
-                className="input"
-                value={email}
-                onChange={this.handleChange}
-              />
-            </div>
-            <Password
-              value={password}
-              compareTo={[email, name]}
-              onChange={this.handleChange}
-              className="mb2"
-            />
-            <div className="mb2">
-              <label htmlFor="create_user_state">State</label>
-              <select
-                id="create_user_state"
-                name="state"
-                className="input"
-                value={state}
-                onChange={this.handleChange}
-              >
-                <option value="">None</option>
-                {STATES.map(s => (
-                  <option key={s.id} value={s.id}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <Btn type="submit" disabled={fetching}>
-              {fetching ? 'Working' : 'Create account'}
-            </Btn>
-          </form>
-        </div>
+        <CardForm
+          title="Create account"
+          sectionName="administrator"
+          error={hasFetched && error}
+          success={success && 'Account created'}
+          working={working}
+          onSave={this.handleSubmit}
+        >
+          <TextField
+            label="Name"
+            name="name"
+            ariaLabel="please enter the user's full name"
+            value={name || ''}
+            onChange={this.handleChange}
+          />
+
+          <TextField
+            label="Email"
+            name="email"
+            value={email}
+            onChange={this.handleChange}
+          />
+
+          <FormLabel component="label" fieldId="create_account_state">
+            State
+          </FormLabel>
+          <Select
+            id="create_account_state"
+            name="state"
+            size="medium"
+            value={state}
+            onChange={this.handleChange}
+          >
+            <option value="">None</option>
+            {STATES.map(s => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
+            ))}
+          </Select>
+
+          <FormLabel component="label" fieldId="create_account_role">
+            Authorization role
+          </FormLabel>
+          <Select
+            id="create_account_role"
+            name="role"
+            size="medium"
+            value={role || ''}
+            onChange={this.handleChange}
+          >
+            <option value="">None</option>
+            {roles.map(r => (
+              <option key={r.name} value={r.name}>
+                {r.name}
+              </option>
+            ))}
+          </Select>
+
+          <Password
+            value={password}
+            compareTo={[email, name]}
+            onChange={this.handleChange}
+            showMeter
+            className="mb2"
+          />
+        </CardForm>
       </Fragment>
     );
   }
 }
 
 CreateUser.propTypes = {
-  createUser: PropTypes.func.isRequired
+  createUser: PropTypes.func.isRequired,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
+  roles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  working: PropTypes.bool.isRequired
 };
+
+const mapStateToProps = state => ({
+  error: getAddAccountError(state),
+  roles: state.admin.roles,
+  working: getAddAccountWorking(state)
+});
 
 const mapDispatchToProps = {
   createUser: createUserDispatch
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CreateUser);
 
