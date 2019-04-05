@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { request, getFullPath } = require('../../utils.endpoint');
 
-describe('login nonce endpoint | /auth/login/nonce', async () => {
+describe('login nonce endpoint | /auth/login/nonce', () => {
   const url = getFullPath('/auth/login/nonce');
 
   it('with no username', async () => {
@@ -26,7 +26,7 @@ describe('login nonce endpoint | /auth/login/nonce', async () => {
   });
 });
 
-describe('login endpoint | /auth/login', async () => {
+describe('login endpoint | /auth/login', () => {
   const nonceUrl = getFullPath('/auth/login/nonce');
   const nonceForUsername = async username => {
     const {

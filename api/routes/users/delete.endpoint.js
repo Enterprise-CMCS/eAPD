@@ -9,7 +9,7 @@ const {
 
 const url = userID => getFullPath(`/users/${userID}`);
 
-describe('users endpoint | DELETE /users/:userID', async () => {
+describe('users endpoint | DELETE /users/:userID', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
@@ -17,7 +17,7 @@ describe('users endpoint | DELETE /users/:userID', async () => {
   unauthenticatedTest('delete', url(0));
   unauthorizedTest('delete', url(0));
 
-  describe('when authenticated', async () => {
+  describe('when authenticated', () => {
     let cookies;
     beforeAll(async () => {
       cookies = await login();
