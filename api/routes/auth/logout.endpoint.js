@@ -1,6 +1,6 @@
 const { request, getFullPath } = require('../../utils.endpoint');
 
-describe('logout endpoint | /auth/logout', async () => {
+describe('logout endpoint | /auth/logout', () => {
   const url = getFullPath('/auth/logout');
 
   it('not already logged in', async () => {

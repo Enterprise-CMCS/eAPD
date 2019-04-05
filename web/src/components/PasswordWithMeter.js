@@ -27,7 +27,7 @@ class Password extends Component {
   };
 
   render() {
-    const { title, value, showMeter, ...rest } = this.props;
+    const { compareTo, title, value, showMeter, ...rest } = this.props;
     const { showPassword, strength } = this.state;
 
     let passwordQuality = 'Password strength: Weak';
@@ -54,7 +54,10 @@ class Password extends Component {
           </Choice>
 
           <TextField
-            hint={showMeter && 'A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address.'}
+            hint={
+              showMeter &&
+              'A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address.'
+            }
             label={title || 'Password'}
             name="password"
             className="no-clearfix"
@@ -62,7 +65,7 @@ class Password extends Component {
             value={value}
             onChange={this.changePassword}
           />
-          {showMeter &&
+          {showMeter && (
             <Fragment>
               <div className="strength-meter">
                 <div
@@ -70,11 +73,15 @@ class Password extends Component {
                   data-strength={value.length ? strength : 'empty'}
                 />
               </div>
-              <p role="alert" aria-live="polite" className="strength-meter-quality">
+              <p
+                role="alert"
+                aria-live="polite"
+                className="strength-meter-quality"
+              >
                 {passwordQuality}
               </p>
             </Fragment>
-          }
+          )}
         </div>
       </div>
     );

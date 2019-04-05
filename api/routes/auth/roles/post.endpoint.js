@@ -7,7 +7,7 @@ const {
   unauthorizedTest
 } = require('../../../utils.endpoint');
 
-describe('auth roles endpoint | POST /auth/roles', async () => {
+describe('auth roles endpoint | POST /auth/roles', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
@@ -43,7 +43,7 @@ describe('auth roles endpoint | POST /auth/roles', async () => {
     }
   ];
 
-  describe('when authenticated', async () => {
+  describe('when authenticated', () => {
     let cookies;
     beforeAll(async () => {
       cookies = await login();
