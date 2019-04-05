@@ -470,6 +470,90 @@ exports[`my account page renders 4`] = `
       name="position"
       onChange={[Function]}
       type="text"
+      value="Window Washer"
+    />
+    <div
+      className="ds-l-row ds-u-padding-x--2"
+    >
+      <TextField
+        ariaLabel="Current password"
+        disabled={true}
+        label="Password"
+        size="medium"
+        type="text"
+        value="********"
+      />
+      <div
+        className="ds-u-clearfix"
+      >
+        <div
+          className="ds-c-label"
+        >
+           
+        </div>
+        <div
+          className="ds-c-field ds-u-border--0"
+        >
+          <Button
+            className="ds-u-padding-y--0"
+            onClick={[Function]}
+            purpose="change password"
+            type="button"
+            variation="transparent"
+          >
+            <LockIcon />
+             Change password
+          </Button>
+        </div>
+      </div>
+    </div>
+  </CardForm>
+</Fragment>
+`;
+
+exports[`my account page renders 5`] = `
+<Fragment>
+  <Connect(Header) />
+  <CardForm
+    error={false}
+    legend="manage account details"
+    onCancel={[Function]}
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Save changes",
+        "Working",
+      ]
+    }
+    sectionName="administrator"
+    success={false}
+    title="Manage account"
+    working={false}
+  >
+    <TextField
+      ariaLabel="please enter your full name"
+      label="Name"
+      name="name"
+      onChange={[Function]}
+      type="text"
+      value="Tina Belcher"
+    />
+    <TextField
+      ariaLabel="please enter your 10-digit phone number"
+      label="Phone number"
+      mask="phone"
+      name="phone"
+      onChange={[Function]}
+      size="medium"
+      type="text"
+      value="1-800-BURGERS"
+    />
+    <TextField
+      ariaLabel="please enter your position or role ???"
+      label="Role"
+      name="position"
+      onChange={[Function]}
+      type="text"
       value="Table Cleaner"
     />
     <div

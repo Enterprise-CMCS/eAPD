@@ -55,13 +55,13 @@ class MyAccount extends Component {
   editAccount = e => {
     e.preventDefault();
     const { editAccount } = this.props;
-    const { user } = this.state;
+    const { changePassword, user } = this.state;
 
-    editAccount(user);
+    editAccount(user, changePassword);
   };
 
-  enableChangePassword = () => {
-    this.setState({ changePassword: true });
+  toggleChangePassword = () => {
+    this.setState(prev => ({ changePassword: !prev.changePassword }));
   };
 
   goBack = () => {
@@ -131,7 +131,7 @@ class MyAccount extends Component {
                 <Button
                   variation="transparent"
                   className="ds-u-padding-y--0"
-                  onClick={this.enableChangePassword}
+                  onClick={this.toggleChangePassword}
                   purpose="change password"
                 >
                   {changePassword ? <UnlockIcon /> : <LockIcon />} Change
