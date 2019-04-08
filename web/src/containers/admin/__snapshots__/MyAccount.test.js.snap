@@ -38,7 +38,7 @@ exports[`my account page handles submitting the form with an error 1`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -68,6 +68,7 @@ exports[`my account page handles submitting the form with an error 1`] = `
           className="ds-c-field ds-u-border--0"
         >
           <Button
+            aria-label="change password"
             className="ds-u-padding-y--0"
             onClick={[Function]}
             purpose="change password"
@@ -122,7 +123,7 @@ exports[`my account page handles submitting the form with no error 1`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -152,6 +153,7 @@ exports[`my account page handles submitting the form with no error 1`] = `
           className="ds-c-field ds-u-border--0"
         >
           <Button
+            aria-label="change password"
             className="ds-u-padding-y--0"
             onClick={[Function]}
             purpose="change password"
@@ -206,7 +208,7 @@ exports[`my account page renders 1`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -236,6 +238,7 @@ exports[`my account page renders 1`] = `
           className="ds-c-field ds-u-border--0"
         >
           <Button
+            aria-label="change password"
             className="ds-u-padding-y--0"
             onClick={[Function]}
             purpose="change password"
@@ -290,7 +293,7 @@ exports[`my account page renders 2`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -320,6 +323,7 @@ exports[`my account page renders 2`] = `
           className="ds-c-field ds-u-border--0"
         >
           <Button
+            aria-label="change password"
             className="ds-u-padding-y--0"
             onClick={[Function]}
             purpose="change password"
@@ -374,7 +378,7 @@ exports[`my account page renders 3`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -404,6 +408,7 @@ exports[`my account page renders 3`] = `
           className="ds-c-field ds-u-border--0"
         >
           <Button
+            aria-label="keep previous password"
             className="ds-u-padding-y--0"
             onClick={[Function]}
             purpose="change password"
@@ -465,7 +470,7 @@ exports[`my account page renders 4`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -495,6 +500,7 @@ exports[`my account page renders 4`] = `
           className="ds-c-field ds-u-border--0"
         >
           <Button
+            aria-label="change password"
             className="ds-u-padding-y--0"
             onClick={[Function]}
             purpose="change password"
@@ -549,7 +555,7 @@ exports[`my account page renders 5`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
@@ -579,6 +585,7 @@ exports[`my account page renders 5`] = `
           className="ds-c-field ds-u-border--0"
         >
           <Button
+            aria-label="change password"
             className="ds-u-padding-y--0"
             onClick={[Function]}
             purpose="change password"
