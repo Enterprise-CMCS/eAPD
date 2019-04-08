@@ -192,7 +192,7 @@ class Sidebar extends Component {
     return (
       <div className="ds-l-col--3 bg-white">
         <aside className="site-sidebar">
-          <div className="xs-hide sm-hide">
+          <div className="xs-hide sm-hide site-sidebar__sticky">
             <div className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4">
               <img
                 src={`/static/img/states/${place.id}.svg`}
