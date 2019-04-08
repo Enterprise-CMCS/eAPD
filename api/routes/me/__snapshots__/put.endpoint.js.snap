@@ -66,12 +66,12 @@ Object {
 
 exports[`/me endpoint | PUT when authenticated rejects when changing password to something insufficiently complex 1`] = `
 Object {
-  "error": "update-self-weak-password",
+  "error": "edit-self.weak-password",
 }
 `;
 
 exports[`/me endpoint | PUT when authenticated rejects when changing phone number to something over 10 digits 1`] = `
 Object {
-  "error": "update-self-invalid-phone",
+  "error": "edit-self.invalid-phone",
 }
 `;
