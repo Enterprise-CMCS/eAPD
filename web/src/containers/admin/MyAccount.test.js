@@ -18,6 +18,9 @@ describe('my account page', () => {
   test('maps state to props', () => {
     expect(
       mapStateToProps({
+        errors: {
+          editOwnAccount: 'no error'
+        },
         user: {
           data: {
             username: 'tina@burgers.com',
@@ -27,15 +30,19 @@ describe('my account page', () => {
             position: 'Table Cleaner'
           },
           fetching: 'aw thank you'
+        },
+        working: {
+          editOwnAccount: 'for the weekend'
         }
       })
     ).toEqual({
-      fetching: 'aw thank you',
+      error: 'no error',
       user: {
         name: 'Tina Belcher',
         phone: '1-800-BURGERS',
         position: 'Table Cleaner'
-      }
+      },
+      working: 'for the weekend'
     });
   });
 
@@ -48,8 +55,9 @@ describe('my account page', () => {
 
     const component = shallow(
       <MyAccount
+        error={false}
+        working={false}
         editAccount={() => {}}
-        fetching={false}
         history={{}}
         user={user}
       />
@@ -63,41 +71,76 @@ describe('my account page', () => {
       target: { name: 'position', value: 'Window Washer' }
     });
     expect(component).toMatchSnapshot();
-
-    // while fetching
-    expect(
-      shallow(
-        <MyAccount editAccount={() => {}} fetching history={{}} user={user} />
-      )
-    ).toMatchSnapshot();
   });
 
-  test('handles submitting the form', () => {
-    const user = {
-      name: 'Tina Belcher',
-      phone: '1-800-BURGERS',
-      position: 'Table Cleaner'
-    };
+  describe('handles submitting the form', () => {
+    test('with no error', async () => {
+      const user = {
+        name: 'Tina Belcher',
+        phone: '1-800-BURGERS',
+        position: 'Table Cleaner'
+      };
 
-    const editAccount = sinon.spy();
-    const preventDefault = sinon.spy();
+      const editAccount = sinon.stub().resolves();
+      const preventDefault = sinon.spy();
 
-    const component = shallow(
-      <MyAccount
-        editAccount={editAccount}
-        fetching={false}
-        history={{}}
-        user={user}
-      />
-    );
+      const component = shallow(
+        <MyAccount
+          error={false}
+          working={false}
+          editAccount={editAccount}
+          history={{}}
+          user={user}
+        />
+      );
 
-    component.find('form').simulate('submit', { preventDefault });
+      await component
+        .find('CardForm')
+        .props()
+        .onSave({ preventDefault });
 
-    expect(preventDefault.calledOnce).toEqual(true);
-    expect(editAccount.calledWith(user)).toEqual(true);
+      expect(preventDefault.calledOnce).toEqual(true);
+      expect(editAccount.calledWith(user)).toEqual(true);
+
+      expect(component).toMatchSnapshot();
+    });
+
+    test('with an error', async () => {
+      const user = {
+        name: 'Tina Belcher',
+        phone: '1-800-BURGERS',
+        position: 'Table Cleaner'
+      };
+
+      // sinon.stub().rejects() wraps strings in Error objects, but the edit
+      // account action rejects a plain string, so return a rejected promise
+      // eslint-disable-next-line prefer-promise-reject-errors
+      const editAccount = sinon.stub().returns(Promise.reject('error message'));
+      const preventDefault = sinon.spy();
+
+      const component = shallow(
+        <MyAccount
+          error={false}
+          working={false}
+          editAccount={editAccount}
+          history={{}}
+          user={user}
+        />
+      );
+
+      await component
+        .find('CardForm')
+        .props()
+        .onSave({ preventDefault });
+
+      expect(preventDefault.calledOnce).toEqual(true);
+      expect(editAccount.calledWith(user)).toEqual(true);
+
+      expect(component).toMatchSnapshot();
+    });
   });
 
-  test('handles going back', () => {
+  test('handles canceling', () => {
     const user = {
       name: 'Tina Belcher',
       phone: '1-800-BURGERS',
@@ -108,14 +151,18 @@ describe('my account page', () => {
 
     const component = shallow(
       <MyAccount
+        error={false}
+        working={false}
         editAccount={() => {}}
-        fetching={false}
         history={{ goBack }}
         user={user}
       />
     );
 
-    component.find('Button[variation="transparent"]').simulate('click');
+    component
+      .find('CardForm')
+      .props()
+      .onCancel();
 
     expect(goBack.calledOnce).toEqual(true);
   });

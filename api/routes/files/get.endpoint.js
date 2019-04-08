@@ -13,14 +13,14 @@ const get = async id => {
   return request.get(url(id), { jar });
 };
 
-describe('files endpoint | GET /files/:fileID', async () => {
+describe('files endpoint | GET /files/:fileID', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
 
   unauthenticatedTest('get', url(3));
 
-  describe('when authenticated', async () => {
+  describe('when authenticated', () => {
     it('with an invalid ID', async () => {
       const { response, body } = await get('hello');
 
@@ -41,7 +41,7 @@ describe('files endpoint | GET /files/:fileID', async () => {
       expect(body).toMatchSnapshot();
     });
 
-    describe('with an existant file ID, but without access', async () => {
+    describe('with an existant file ID, but without access', () => {
       it('file is attached to inaccessible activity', async () => {
         const { response, body } = await get(5001);
 
@@ -57,7 +57,7 @@ describe('files endpoint | GET /files/:fileID', async () => {
       });
     });
 
-    describe('with an existant file ID, and with access', async () => {
+    describe('with an existant file ID, and with access', () => {
       it('file is attached to accessible activity', async () => {
         const { response, body } = await get(5000);
 

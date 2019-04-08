@@ -14,14 +14,14 @@ const del = async (contractorID, fileID) => {
   return request.delete(url(contractorID, fileID), { jar });
 };
 
-describe('files endpoint | DELETE /files/contractor/:contractorID/:fileID', async () => {
+describe('files endpoint | DELETE /files/contractor/:contractorID/:fileID', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
 
   unauthenticatedTest('delete', url(3, 3));
 
-  describe('when authenticated', async () => {
+  describe('when authenticated', () => {
     it('with an invalid contractor ID', async () => {
       const { response, body } = await del(9000, 'whatever');
 
