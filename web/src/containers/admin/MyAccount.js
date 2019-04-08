@@ -38,13 +38,13 @@ class MyAccount extends Component {
     // Success has to be derived.  It can't be stored in the app state because
     // if it was, then the next time this form was loaded, it would show the
     // success state even though it wouldn't be accurate anymore.
-    if (!hasFetched) {
-      return { hasFetched: working };
-    }
 
-    return {
-      success: !working && !error
-    };
+    if (hasFetched) {
+      return {
+        success: !working && !error
+      };
+    }
+    return null;
   }
 
   handleEditAccount = e => {
@@ -57,6 +57,12 @@ class MyAccount extends Component {
     const { editAccount } = this.props;
     const { changePassword, user } = this.state;
 
+    // Once we've attempted to save these changes, it's valid to show success
+    // or error messages.  Since error messages are persisted in app state,
+    // it's possible there's an error sitting there from a previous instance
+    // of this form.  This flag makes sure we don't show any error messages
+    // until this instance of the form has tried to save.
+    this.setState({ hasFetched: true });
     editAccount(user, changePassword);
   };
 
@@ -121,6 +127,7 @@ class MyAccount extends Component {
             <TextField
               label="Password"
               ariaLabel="Current password"
+              name="current password"
               value="********"
               disabled
               size="medium"
