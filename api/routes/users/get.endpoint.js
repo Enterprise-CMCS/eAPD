@@ -9,7 +9,7 @@ const {
 
 const url = getFullPath('/users');
 
-describe('users endpoint | GET /users', async () => {
+describe('users endpoint | GET /users', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
@@ -29,7 +29,7 @@ describe('users endpoint | GET /users', async () => {
   });
 });
 
-describe('users endpoint | GET /users/:userID', async () => {
+describe('users endpoint | GET /users/:userID', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
@@ -37,7 +37,7 @@ describe('users endpoint | GET /users/:userID', async () => {
   unauthenticatedTest('get', `${url}/some-id`);
   unauthorizedTest('get', `${url}/some-id`);
 
-  describe('when authenticated', async () => {
+  describe('when authenticated', () => {
     it('when requesting a non-existant user ID', async () => {
       const cookies = await login();
       const { response, body } = await request.get(`${url}/0`, {

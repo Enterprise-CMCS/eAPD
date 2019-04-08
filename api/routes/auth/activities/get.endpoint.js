@@ -6,7 +6,7 @@ const {
   unauthorizedTest
 } = require('../../../utils.endpoint');
 
-describe('auth activities endpoint | GET /auth/activities', async () => {
+describe('auth activities endpoint | GET /auth/activities', () => {
   const url = getFullPath('/auth/activities');
 
   unauthenticatedTest('get', url);
