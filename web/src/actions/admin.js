@@ -1,45 +1,19 @@
-import { notify } from './notification';
 import axios from '../util/api';
 
-export const ADMIN_CREATE_USER_REQUEST = Symbol(
-  'admin : create user : request'
-);
-export const ADMIN_CREATE_USER_SUCCESS = Symbol(
-  'admin : create user : success'
-);
-export const ADMIN_CREATE_USER_ERROR = Symbol('admin : create user : error');
+export const ADMIN_GET_USERS_REQUEST = Symbol('admin : get users : request');
+export const ADMIN_GET_USERS_SUCCESS = Symbol('admin : get users : success');
+export const ADMIN_GET_USERS_ERROR = Symbol('admin : get users : error');
 
-export const createUser = ({ email, name, password, state }) => dispatch => {
-  dispatch({ type: ADMIN_CREATE_USER_REQUEST });
+export const getUsers = () => dispatch => {
+  dispatch({ type: ADMIN_GET_USERS_REQUEST });
 
   return axios
-    .post('/users', { email, name, password, state })
-    .then(() => {
-      dispatch({ type: ADMIN_CREATE_USER_SUCCESS });
-      dispatch(notify('User created!'));
+    .get('/users')
+    .then(res => {
+      dispatch({ type: ADMIN_GET_USERS_SUCCESS, data: res.data });
     })
-    .catch(e => {
-      dispatch({ type: ADMIN_CREATE_USER_ERROR });
-
-      switch (e.response.data.error) {
-        case 'add-user-invalid':
-          dispatch(notify('Error: Email and password are required'));
-          break;
-        case 'add-user-email-exists':
-          dispatch(notify('Error: A user with this email already exists'));
-          break;
-        case 'add-user-weak-password':
-          dispatch(notify('Error: The provided password is too weak'));
-          break;
-        case 'add-user-invalid-phone':
-          dispatch(notify('Error: The provided phone number is invalid'));
-          break;
-        default:
-          dispatch(notify('Unknown error creating user'));
-          break;
-      }
-
-      return Promise.reject();
+    .catch(() => {
+      dispatch({ type: ADMIN_GET_USERS_ERROR });
     });
 };
 
@@ -82,20 +56,33 @@ export const getRoles = () => dispatch => {
   return Promise.all([rolesPromise, activitiesPromise]);
 };
 
-export const ADMIN_GET_USERS_REQUEST = Symbol('admin : get users : request');
-export const ADMIN_GET_USERS_SUCCESS = Symbol('admin : get users : success');
-export const ADMIN_GET_USERS_ERROR = Symbol('admin : get users : error');
+export const ADMIN_CREATE_USER_REQUEST = Symbol(
+  'admin : create user : request'
+);
+export const ADMIN_CREATE_USER_SUCCESS = Symbol(
+  'admin : create user : success'
+);
+export const ADMIN_CREATE_USER_ERROR = Symbol('admin : create user : error');
 
-export const getUsers = () => dispatch => {
-  dispatch({ type: ADMIN_GET_USERS_REQUEST });
+export const createUser = (
+  { email, name, password, role, state },
+  { dispatchGetUsers = getUsers } = {}
+) => dispatch => {
+  dispatch({ type: ADMIN_CREATE_USER_REQUEST });
 
   return axios
-    .get('/users')
-    .then(res => {
-      dispatch({ type: ADMIN_GET_USERS_SUCCESS, data: res.data });
+    .post('/users', { email, name, password, role, state })
+    .then(() => {
+      dispatch({ type: ADMIN_CREATE_USER_SUCCESS });
+      dispatch(dispatchGetUsers());
     })
-    .catch(() => {
-      dispatch({ type: ADMIN_GET_USERS_ERROR });
+    .catch(e => {
+      let error = null;
+      if (e.response.data) {
+        ({ error } = e.response.data);
+      }
+
+      dispatch({ type: ADMIN_CREATE_USER_ERROR, data: error });
     });
 };
 
@@ -126,41 +113,14 @@ export const editAccount = user => dispatch => {
     .then(() => {
       dispatch({ type: ADMIN_EDIT_ACCOUNT_SUCCESS });
       dispatch(getUsers());
-      dispatch(notify('Account edited'));
     })
     .catch(e => {
-      dispatch({ type: ADMIN_EDIT_ACCOUNT_ERROR });
-
-      switch (e.response.data.error) {
-        case 'update-user-invalid-state':
-          dispatch(
-            notify('Error: the state selected for the account is invalid')
-          );
-          break;
-        case 'update-user-invalid-role':
-          dispatch(
-            notify(
-              'Error: the authorization role selected for the account is invalid'
-            )
-          );
-          break;
-        case 'update-user-email-exists':
-          dispatch(
-            notify(
-              'Error: another account already exists with that email address'
-            )
-          );
-          break;
-        case 'update-user-invalid-phone':
-          dispatch(
-            notify('Error: phone number may not be more than 10 digits')
-          );
-          break;
-        default:
-          dispatch(notify('Unknown error editing account'));
-          break;
+      let error = null;
+      if (e.response.data) {
+        ({ error } = e.response.data);
       }
-      return Promise.reject();
+
+      dispatch({ type: ADMIN_EDIT_ACCOUNT_ERROR, data: error });
     });
 };
 
@@ -182,28 +142,11 @@ export const editSelf = user => dispatch => {
       dispatch({ type: ADMIN_EDIT_ME_SUCCESS, data: res.data });
     })
     .catch(e => {
-      dispatch({ type: ADMIN_EDIT_ME_ERROR });
-
-      switch (e.response.data.error) {
-        case 'update-self-email-exists':
-          dispatch(
-            notify(
-              'Error: another account already exists with that email address'
-            )
-          );
-          break;
-        case 'update-self-invalid-phone':
-          dispatch(
-            notify('Error: phone number may not be more than 10 digits')
-          );
-          break;
-        case 'update-self-weak-password':
-          dispatch(notify('Error: The provided password is too weak'));
-          break;
-        default:
-          dispatch(notify('Unknown error editing account'));
-          break;
+      let error = null;
+      if (e.response.data) {
+        ({ error } = e.response.data);
       }
-      return Promise.reject();
+
+      dispatch({ type: ADMIN_EDIT_ME_ERROR, data: error });
     });
 };

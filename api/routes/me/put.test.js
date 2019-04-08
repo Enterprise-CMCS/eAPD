@@ -137,7 +137,7 @@ tap.test('me PUT endpoint', async endpointTest => {
 
         test.ok(res.status.calledWith(400), 'HTTP status 400 set');
         test.ok(
-          res.send.calledWith({ error: 'update-self-validation' }),
+          res.send.calledWith({ error: 'edit-self.validation' }),
           'sends expected error token'
         );
         test.ok(res.end.calledOnce, 'response is terminated');
