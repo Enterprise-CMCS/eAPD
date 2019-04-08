@@ -7,7 +7,7 @@ const {
   unauthorizedTest
 } = require('../../utils.endpoint');
 
-describe('APD endpoint | PUT /apds/:id', async () => {
+describe('APD endpoint | PUT /apds/:id', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
@@ -17,7 +17,7 @@ describe('APD endpoint | PUT /apds/:id', async () => {
   unauthenticatedTest('put', url(1));
   unauthorizedTest('put', url(1));
 
-  describe('when authenticated as a user with permission', async () => {
+  describe('when authenticated as a user with permission', () => {
     let cookies;
     beforeAll(async () => {
       cookies = await login();

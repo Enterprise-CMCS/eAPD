@@ -1,8 +1,8 @@
 import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import sinon from 'sinon';
 
-import { ADD_NOTIFICATION } from './notification';
 import * as actions from './admin';
 
 import axios from '../util/api';
@@ -151,131 +151,38 @@ describe('admin actions', () => {
       state: 'mo'
     };
 
-    it('handles an invalid user', async () => {
+    it('handles an error', async () => {
       const store = mockStore({ notification: { open: false, queue: [] } });
 
-      fetchMock.onPost('/users').reply(400, { error: 'add-user-invalid' });
-
-      try {
-        await store.dispatch(actions.createUser(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_CREATE_USER_REQUEST },
-          { type: actions.ADMIN_CREATE_USER_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Error: Email and password are required'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles a conflicting email address', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock.onPost('/users').reply(400, { error: 'add-user-email-exists' });
-
-      try {
-        await store.dispatch(actions.createUser(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_CREATE_USER_REQUEST },
-          { type: actions.ADMIN_CREATE_USER_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Error: A user with this email already exists'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles a weak password', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock
-        .onPost('/users')
-        .reply(400, { error: 'add-user-weak-password' });
-
-      try {
-        await store.dispatch(actions.createUser(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_CREATE_USER_REQUEST },
-          { type: actions.ADMIN_CREATE_USER_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Error: The provided password is too weak'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles an invalid phone number', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock
-        .onPost('/users')
-        .reply(400, { error: 'add-user-invalid-phone' });
-
-      try {
-        await store.dispatch(actions.createUser(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_CREATE_USER_REQUEST },
-          { type: actions.ADMIN_CREATE_USER_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Error: The provided phone number is invalid'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles other errors', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock
-        .onPost('/users')
-        .reply(400, { error: 'shrugging person made of symbols' });
-
-      try {
-        await store.dispatch(actions.createUser(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_CREATE_USER_REQUEST },
-          { type: actions.ADMIN_CREATE_USER_ERROR },
-          { type: ADD_NOTIFICATION, message: 'Unknown error creating user' }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles success', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock.onPost('/users').reply(200);
+      fetchMock.onPost('/users').reply(400, { error: 'this-is-the-error' });
 
       await store.dispatch(actions.createUser(user));
 
       expect(store.getActions()).toEqual(
         expect.arrayContaining([
           { type: actions.ADMIN_CREATE_USER_REQUEST },
+          {
+            type: actions.ADMIN_CREATE_USER_ERROR,
+            data: 'this-is-the-error'
+          }
+        ])
+      );
+      expect(store.getActions().length).toEqual(2);
+    });
+
+    it('handles success', async () => {
+      const store = mockStore({ notification: { open: false, queue: [] } });
+      const dispatchGetUsers = sinon.stub().returns({ type: 'get users' });
+
+      fetchMock.onPost('/users').reply(200);
+
+      await store.dispatch(actions.createUser(user, { dispatchGetUsers }));
+
+      expect(store.getActions()).toEqual(
+        expect.arrayContaining([
+          { type: actions.ADMIN_CREATE_USER_REQUEST },
           { type: actions.ADMIN_CREATE_USER_SUCCESS },
-          { type: ADD_NOTIFICATION, message: 'User created!' }
+          { type: 'get users' }
         ])
       );
       expect(store.getActions().length).toEqual(3);
@@ -285,126 +192,23 @@ describe('admin actions', () => {
   describe('edit a user account', () => {
     const user = { id: 7 };
 
-    it('handles an invalid state (the political kind, not the logical kind', async () => {
+    it('handles an error', async () => {
       const store = mockStore({ notification: { open: false, queue: [] } });
 
-      fetchMock
-        .onPut('/users/7')
-        .reply(400, { error: 'update-user-invalid-state' });
+      fetchMock.onPut('/users/7').reply(400, { error: 'this-is-the-error' });
 
-      try {
-        await store.dispatch(actions.editAccount(user));
-      } catch (_) {} // eslint-disable-line no-empty
+      await store.dispatch(actions.editAccount(user));
 
       expect(store.getActions()).toEqual(
         expect.arrayContaining([
           { type: actions.ADMIN_EDIT_ACCOUNT_REQUEST },
-          { type: actions.ADMIN_EDIT_ACCOUNT_ERROR },
           {
-            type: ADD_NOTIFICATION,
-            message: 'Error: the state selected for the account is invalid'
+            type: actions.ADMIN_EDIT_ACCOUNT_ERROR,
+            data: 'this-is-the-error'
           }
         ])
       );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles an invalid auth role', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock
-        .onPut('/users/7')
-        .reply(400, { error: 'update-user-invalid-role' });
-
-      try {
-        await store.dispatch(actions.editAccount(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_EDIT_ACCOUNT_REQUEST },
-          { type: actions.ADMIN_EDIT_ACCOUNT_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message:
-              'Error: the authorization role selected for the account is invalid'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles a conflicting email address', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock
-        .onPut('/users/7')
-        .reply(400, { error: 'update-user-email-exists' });
-
-      try {
-        await store.dispatch(actions.editAccount(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_EDIT_ACCOUNT_REQUEST },
-          { type: actions.ADMIN_EDIT_ACCOUNT_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message:
-              'Error: another account already exists with that email address'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles an invalid phone number', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock
-        .onPut('/users/7')
-        .reply(400, { error: 'update-user-invalid-phone' });
-
-      try {
-        await store.dispatch(actions.editAccount(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_EDIT_ACCOUNT_REQUEST },
-          { type: actions.ADMIN_EDIT_ACCOUNT_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Error: phone number may not be more than 10 digits'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles other errors', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock
-        .onPut('/users/7')
-        .reply(400, { error: 'shrugging person made of symbols' });
-
-      try {
-        await store.dispatch(actions.editAccount(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_EDIT_ACCOUNT_REQUEST },
-          { type: actions.ADMIN_EDIT_ACCOUNT_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Unknown error editing account'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
+      expect(store.getActions().length).toEqual(2);
     });
 
     it('handles success', async () => {
@@ -418,14 +222,10 @@ describe('admin actions', () => {
         expect.arrayContaining([
           { type: actions.ADMIN_EDIT_ACCOUNT_REQUEST },
           { type: actions.ADMIN_EDIT_ACCOUNT_SUCCESS },
-          { type: actions.ADMIN_GET_USERS_REQUEST },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Account edited'
-          }
+          { type: actions.ADMIN_GET_USERS_REQUEST }
         ])
       );
-      expect(store.getActions().length).toEqual(4);
+      expect(store.getActions().length).toEqual(3);
     });
 
     describe('cleans up incoming data', () => {
@@ -478,95 +278,23 @@ describe('admin actions', () => {
   describe('edit own account', () => {
     const user = { id: 7 };
 
-    it('handles a conflicting email address', async () => {
+    it('handles an error', async () => {
       const store = mockStore({ notification: { open: false, queue: [] } });
 
-      fetchMock.onPut('/me').reply(400, { error: 'update-self-email-exists' });
+      fetchMock.onPut('/me').reply(400, { error: 'this-is-the-error' });
 
-      try {
-        await store.dispatch(actions.editSelf(user));
-      } catch (_) {} // eslint-disable-line no-empty
+      await store.dispatch(actions.editSelf(user));
 
       expect(store.getActions()).toEqual(
         expect.arrayContaining([
           { type: actions.ADMIN_EDIT_ME_REQUEST },
-          { type: actions.ADMIN_EDIT_ME_ERROR },
           {
-            type: ADD_NOTIFICATION,
-            message:
-              'Error: another account already exists with that email address'
+            type: actions.ADMIN_EDIT_ME_ERROR,
+            data: 'this-is-the-error'
           }
         ])
       );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles an invalid phone number', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock.onPut('/me').reply(400, { error: 'update-self-invalid-phone' });
-
-      try {
-        await store.dispatch(actions.editSelf(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_EDIT_ME_REQUEST },
-          { type: actions.ADMIN_EDIT_ME_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Error: phone number may not be more than 10 digits'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles a weak password', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock.onPut('/me').reply(400, { error: 'update-self-weak-password' });
-
-      try {
-        await store.dispatch(actions.editSelf(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_EDIT_ME_REQUEST },
-          { type: actions.ADMIN_EDIT_ME_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Error: The provided password is too weak'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
-    });
-
-    it('handles other errors', async () => {
-      const store = mockStore({ notification: { open: false, queue: [] } });
-
-      fetchMock
-        .onPut('/me')
-        .reply(400, { error: 'shrugging person made of symbols' });
-
-      try {
-        await store.dispatch(actions.editSelf(user));
-      } catch (_) {} // eslint-disable-line no-empty
-
-      expect(store.getActions()).toEqual(
-        expect.arrayContaining([
-          { type: actions.ADMIN_EDIT_ME_REQUEST },
-          { type: actions.ADMIN_EDIT_ME_ERROR },
-          {
-            type: ADD_NOTIFICATION,
-            message: 'Unknown error editing account'
-          }
-        ])
-      );
-      expect(store.getActions().length).toEqual(3);
+      expect(store.getActions().length).toEqual(2);
     });
 
     it('handles success', async () => {

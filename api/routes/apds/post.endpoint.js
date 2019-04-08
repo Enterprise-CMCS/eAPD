@@ -7,7 +7,7 @@ const {
   unauthorizedTest
 } = require('../../utils.endpoint');
 
-describe('APD endpoint | POST /apds', async () => {
+describe('APD endpoint | POST /apds', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());

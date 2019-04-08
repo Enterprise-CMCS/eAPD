@@ -7,7 +7,7 @@ const {
   unauthorizedTest
 } = require('../../../utils.endpoint');
 
-describe('auth roles endpoint | GET /auth/roles', async () => {
+describe('auth roles endpoint | GET /auth/roles', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
