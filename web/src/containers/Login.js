@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Alert, Button, TextField } from '@cmsgov/design-system-core';
+import { TextField } from '@cmsgov/design-system-core';
 
 import { login } from '../actions/auth';
-import Password from '../components/PasswordWithMeter';
+import CardForm from '../components/CardForm';
 import Header from '../components/Header';
+import Password from '../components/PasswordWithMeter';
 
 class Login extends Component {
   state = { username: '', password: '' };
@@ -35,54 +36,39 @@ class Login extends Component {
       return <Redirect to="/" />;
     }
 
+    let errorMessage = false;
+    if (error === 'Unauthorized') {
+      errorMessage = 'The email or password you&apos;ve entered is incorrect.';
+    } else if (error === 'Unauthorized') {
+      errorMessage = 'Sorry! Something went wrong. Please try again.';
+    }
+
     return (
       <Fragment>
         <Header />
-        <div className="card--container">
-          <div className="ds-l-container card">
-            <div className="ds-l-row">
-              <div className="ds-l-col--1 ds-u-margin-left--auto" />
-              <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
-                <h1 className="ds-h1">Log in</h1>
-                {error && error==="Unauthorized" && (
-                  <Alert variation='error' role='alert'>
-                    The email or password you&apos;ve entered is incorrect.
-                  </Alert>
-                )}
-                {error && error!=="Unauthorized" && (
-                  <Alert variation='error' role='alert'>
-                    <strong>Sorry!</strong> Something went wrong. Please try again.
-                  </Alert>
-                )}
-                <form onSubmit={this.handleSubmit}>
-                  <TextField
-                    id="username"
-                    label="Email"
-                    name="username"
-                    ariaLabel="Enter the email associated with this account."
-                    value={username}
-                    onChange={this.handleChange}
-                  />
-                  <Password
-                    title="Password"
-                    value={password}
-                    onChange={this.handleChange}
-                  />
-                  <Button
-                    type="submit"
-                    disabled={fetching || username.length === 0 || password.length === 0}
-                    variation="primary"
-                    className="ds-u-margin-y--4"
-                  >
-                  {fetching ? 'Logging in' : 'Log in'}
-                </Button>
-              </form>
-            </div>
-            <div className="ds-l-col--1 ds-u-margin-right--auto" />
-          </div>
-        </div>
-      </div>
-    </Fragment>
+
+        <CardForm
+          title="Log in"
+          error={errorMessage}
+          working={fetching}
+          primaryButtonText={['Log in', 'Logging in']}
+          onSave={this.handleSubmit}
+        >
+          <TextField
+            id="username"
+            label="Email"
+            name="username"
+            ariaLabel="Enter the email associated with this account."
+            value={username}
+            onChange={this.handleChange}
+          />
+          <Password
+            title="Password"
+            value={password}
+            onChange={this.handleChange}
+          />
+        </CardForm>
+      </Fragment>
     );
   }
 }
