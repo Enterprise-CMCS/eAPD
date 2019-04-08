@@ -1,12 +1,13 @@
 import { Alert, Button, Spinner } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
+import { withRouter } from 'react-router';
 
 const CardForm = ({
   children,
   error,
+  history,
   legend,
-  onCancel,
   onSave,
   primaryButtonText: [primaryButtonNormal, primaryButtonWorking],
   sectionName,
@@ -24,7 +25,9 @@ const CardForm = ({
 
           <h1 className="ds-h1">
             {sectionName.length > 0 && (
-              <span className="ds-h6 ds-u-display--block">{sectionName.toUpperCase()}</span>
+              <span className="ds-h6 ds-u-display--block">
+                {sectionName.toUpperCase()}
+              </span>
             )}
             {title}
           </h1>
@@ -46,7 +49,7 @@ const CardForm = ({
                     )}
                   </Button>
                 )}
-                <Button variation="transparent" onClick={onCancel}>
+                <Button variation="transparent" onClick={history.goBack}>
                   Cancel
                 </Button>
               </div>
@@ -62,8 +65,8 @@ const CardForm = ({
 CardForm.propTypes = {
   children: PropTypes.node.isRequired,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  history: PropTypes.object.isRequired,
   legend: PropTypes.string,
-  onCancel: PropTypes.func,
   onSave: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   primaryButtonText: PropTypes.arrayOf(PropTypes.string),
   sectionName: PropTypes.string,
@@ -75,7 +78,6 @@ CardForm.propTypes = {
 CardForm.defaultProps = {
   error: false,
   legend: '',
-  onCancel: () => {},
   onSave: false,
   primaryButtonText: ['Save changes', 'Working'],
   sectionName: '',
@@ -83,4 +85,6 @@ CardForm.defaultProps = {
   working: false
 };
 
-export default CardForm;
+export default withRouter(CardForm);
+
+export { CardForm as plain };
