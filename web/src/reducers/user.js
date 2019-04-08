@@ -43,3 +43,13 @@ const user = (state = initialState, action) => {
 };
 
 export default user;
+
+const getIsAdmin = ({
+  user: {
+    data: { role }
+  }
+}) => {
+  return role === 'admin';
+};
+
+export { getIsAdmin };
