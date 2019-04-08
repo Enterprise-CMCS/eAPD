@@ -1,7 +1,7 @@
 import { Choice, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
-import zxcvbn from 'zxcvbn';
+import zxcvbn from '../lazy/zxcvbn';
 
 class Password extends Component {
   state = { showPassword: false, strength: 0 };
