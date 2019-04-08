@@ -58,7 +58,6 @@ describe('my account page', () => {
         error={false}
         working={false}
         editAccount={() => {}}
-        history={{}}
         user={user}
       />
     );
@@ -89,13 +88,12 @@ describe('my account page', () => {
           error={false}
           working={false}
           editAccount={editAccount}
-          history={{}}
           user={user}
         />
       );
 
       await component
-        .find('CardForm')
+        .find('withRouter(CardForm)')
         .props()
         .onSave({ preventDefault });
 
@@ -123,13 +121,12 @@ describe('my account page', () => {
           error={false}
           working={false}
           editAccount={editAccount}
-          history={{}}
           user={user}
         />
       );
 
       await component
-        .find('CardForm')
+        .find('withRouter(CardForm)')
         .props()
         .onSave({ preventDefault });
 
@@ -138,32 +135,5 @@ describe('my account page', () => {
 
       expect(component).toMatchSnapshot();
     });
-  });
-
-  test('handles canceling', () => {
-    const user = {
-      name: 'Tina Belcher',
-      phone: '1-800-BURGERS',
-      position: 'Table Cleaner'
-    };
-
-    const goBack = sinon.spy();
-
-    const component = shallow(
-      <MyAccount
-        error={false}
-        working={false}
-        editAccount={() => {}}
-        history={{ goBack }}
-        user={user}
-      />
-    );
-
-    component
-      .find('CardForm')
-      .props()
-      .onCancel();
-
-    expect(goBack.calledOnce).toEqual(true);
   });
 });

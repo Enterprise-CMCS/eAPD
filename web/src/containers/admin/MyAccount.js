@@ -58,13 +58,6 @@ class MyAccount extends Component {
     editAccount(user);
   };
 
-  goBack = () => {
-    const {
-      history: { goBack }
-    } = this.props;
-    goBack();
-  };
-
   render() {
     const { error, working } = this.props;
     const {
@@ -84,7 +77,6 @@ class MyAccount extends Component {
           error={hasFetched && error}
           success={success && 'Changes saved'}
           working={working}
-          onCancel={this.goBack}
           onSave={this.editAccount}
         >
           <TextField
@@ -125,7 +117,6 @@ class MyAccount extends Component {
 MyAccount.propTypes = {
   editAccount: PropTypes.func.isRequired,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
-  history: PropTypes.object.isRequired,
   user: PropTypes.shape({
     name: PropTypes.string,
     phone: PropTypes.string,
