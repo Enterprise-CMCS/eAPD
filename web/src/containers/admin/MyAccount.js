@@ -113,7 +113,7 @@ class MyAccount extends Component {
           <TextField
             label="Role"
             name="position"
-            ariaLabel="please enter your position or role ???"
+            ariaLabel="please enter your position or role"
             value={position || ''}
             onChange={this.handleEditAccount}
           />
@@ -129,6 +129,11 @@ class MyAccount extends Component {
               <div className="ds-c-label">&nbsp;</div>
               <div className="ds-c-field ds-u-border--0">
                 <Button
+                  aria-label={
+                    changePassword
+                      ? 'keep previous password'
+                      : 'change password'
+                  }
                   variation="transparent"
                   className="ds-u-padding-y--0"
                   onClick={this.toggleChangePassword}
