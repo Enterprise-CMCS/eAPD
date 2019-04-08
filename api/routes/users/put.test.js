@@ -218,7 +218,7 @@ tap.test('user PUT endpoint', async endpointTest => {
         test.ok(user.set.notCalled, 'user database model is not update');
         test.ok(res.status.calledWith(400), 'HTTP status set to 400');
         test.ok(
-          res.send.calledWith('update-user-invalid-state'),
+          res.send.calledWith({ error: 'edit-account.invalid-state' }),
           'error message is sent'
         );
         test.ok(
@@ -284,7 +284,7 @@ tap.test('user PUT endpoint', async endpointTest => {
         test.ok(user.set.notCalled, 'user database model is not update');
         test.ok(res.status.calledWith(400), 'HTTP status set to 400');
         test.ok(
-          res.send.calledWith('update-user-invalid-role'),
+          res.send.calledWith({ error: 'edit-account.invalid-role' }),
           'error message is sent'
         );
         test.ok(
@@ -385,7 +385,7 @@ tap.test('user PUT endpoint', async endpointTest => {
 
           test.ok(res.status.calledWith(400), 'HTTP status set to 400');
           test.ok(
-            res.send.calledWith('update-user-error message'),
+            res.send.calledWith({ error: 'edit-account.error message' }),
             'error message is sent'
           );
           test.ok(

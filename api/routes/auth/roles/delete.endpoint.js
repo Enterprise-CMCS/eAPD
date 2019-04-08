@@ -7,7 +7,7 @@ const {
   unauthorizedTest
 } = require('../../../utils.endpoint');
 
-describe('auth roles endpoint | DELETE /auth/roles/:roleID', async () => {
+describe('auth roles endpoint | DELETE /auth/roles/:roleID', () => {
   const db = getDB();
   beforeAll(() => db.seed.run());
   afterAll(() => db.destroy());
@@ -17,7 +17,7 @@ describe('auth roles endpoint | DELETE /auth/roles/:roleID', async () => {
   unauthenticatedTest('delete', url(1001));
   unauthorizedTest('delete', url(1001));
 
-  describe('when authenticated', async () => {
+  describe('when authenticated', () => {
     let cookies;
     beforeAll(async () => {
       cookies = await login();

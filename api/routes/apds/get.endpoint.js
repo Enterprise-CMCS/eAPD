@@ -8,7 +8,7 @@ const {
 } = require('../../utils.endpoint');
 
 describe('APD endpoint', () => {
-  describe('List APDs endpoint | GET /apds', async () => {
+  describe('List APDs endpoint | GET /apds', () => {
     const db = getDB();
     beforeAll(() => db.seed.run());
     afterAll(() => db.destroy());
@@ -40,7 +40,7 @@ describe('APD endpoint', () => {
     });
   });
 
-  describe('Get specific APD | GET /apds/:id', async () => {
+  describe('Get specific APD | GET /apds/:id', () => {
     const db = getDB();
 
     beforeAll(() => db.seed.run());
@@ -60,7 +60,7 @@ describe('APD endpoint', () => {
       expect(body).toMatchSnapshot();
     });
 
-    describe('with authenticated as a user without a state', async () => {
+    describe('with authenticated as a user without a state', () => {
       it('when requesting an APD that does not exist', async () => {
         const cookies = await login();
 
