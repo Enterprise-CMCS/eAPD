@@ -23,13 +23,12 @@ class EditAccount extends Component {
     // if it was, then the next time this form was loaded, it would show the
     // success state even though it wouldn't be accurate anymore.
 
-    if (!hasFetched) {
-      return { hasFetched: working };
+    if (hasFetched) {
+      return {
+        success: !working && !error
+      };
     }
-
-    return {
-      success: !working && !error
-    };
+    return null;
   }
 
   getForm = () => {
@@ -135,6 +134,12 @@ class EditAccount extends Component {
     const { editAccount } = this.props;
     const { user } = this.state;
 
+    // Once we've attempted to save these changes, it's valid to show success
+    // or error messages.  Since error messages are persisted in app state,
+    // it's possible there's an error sitting there from a previous instance
+    // of this form.  This flag makes sure we don't show any error messages
+    // until this instance of the form has tried to save.
+    this.setState({ hasFetched: true });
     editAccount(user);
   };
 

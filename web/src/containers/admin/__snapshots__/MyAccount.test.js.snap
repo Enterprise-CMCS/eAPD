@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`my account page handles submitting the form with an error 1`] = `
+exports[`my account page handles submitting the form 1`] = `
 <Fragment>
   <Connect(Header) />
   <CardForm
@@ -15,7 +15,7 @@ exports[`my account page handles submitting the form with an error 1`] = `
       ]
     }
     sectionName="administrator"
-    success={false}
+    success="Changes saved"
     title="Manage account"
     working={false}
   >
@@ -52,6 +52,7 @@ exports[`my account page handles submitting the form with an error 1`] = `
         ariaLabel="Current password"
         disabled={true}
         label="Password"
+        name="current password"
         size="medium"
         type="text"
         value="********"
@@ -85,11 +86,11 @@ exports[`my account page handles submitting the form with an error 1`] = `
 </Fragment>
 `;
 
-exports[`my account page handles submitting the form with no error 1`] = `
+exports[`my account page handles submitting the form 2`] = `
 <Fragment>
   <Connect(Header) />
   <CardForm
-    error={false}
+    error="It went wrong"
     legend="manage account details"
     onCancel={[Function]}
     onSave={[Function]}
@@ -137,6 +138,7 @@ exports[`my account page handles submitting the form with no error 1`] = `
         ariaLabel="Current password"
         disabled={true}
         label="Password"
+        name="current password"
         size="medium"
         type="text"
         value="********"
@@ -222,6 +224,7 @@ exports[`my account page renders 1`] = `
         ariaLabel="Current password"
         disabled={true}
         label="Password"
+        name="current password"
         size="medium"
         type="text"
         value="********"
@@ -307,6 +310,7 @@ exports[`my account page renders 2`] = `
         ariaLabel="Current password"
         disabled={true}
         label="Password"
+        name="current password"
         size="medium"
         type="text"
         value="********"
@@ -392,6 +396,7 @@ exports[`my account page renders 3`] = `
         ariaLabel="Current password"
         disabled={true}
         label="Password"
+        name="current password"
         size="medium"
         type="text"
         value="********"
@@ -484,6 +489,7 @@ exports[`my account page renders 4`] = `
         ariaLabel="Current password"
         disabled={true}
         label="Password"
+        name="current password"
         size="medium"
         type="text"
         value="********"
@@ -534,7 +540,7 @@ exports[`my account page renders 5`] = `
     sectionName="administrator"
     success={false}
     title="Manage account"
-    working={false}
+    working={true}
   >
     <TextField
       ariaLabel="please enter your full name"
@@ -569,6 +575,7 @@ exports[`my account page renders 5`] = `
         ariaLabel="Current password"
         disabled={true}
         label="Password"
+        name="current password"
         size="medium"
         type="text"
         value="********"
