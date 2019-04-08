@@ -3,17 +3,10 @@
 exports[`my account page handles submitting the form with an error 1`] = `
 <Fragment>
   <Connect(Header) />
-  <CardForm
+  <withRouter(CardForm)
     error={false}
     legend="manage account details"
-    onCancel={[Function]}
     onSave={[Function]}
-    primaryButtonText={
-      Array [
-        "Save changes",
-        "Working",
-      ]
-    }
     sectionName="administrator"
     success={false}
     title="Manage account"
@@ -53,24 +46,17 @@ exports[`my account page handles submitting the form with an error 1`] = `
       title="Change password"
       value=""
     />
-  </CardForm>
+  </withRouter(CardForm)>
 </Fragment>
 `;
 
 exports[`my account page handles submitting the form with no error 1`] = `
 <Fragment>
   <Connect(Header) />
-  <CardForm
+  <withRouter(CardForm)
     error={false}
     legend="manage account details"
-    onCancel={[Function]}
     onSave={[Function]}
-    primaryButtonText={
-      Array [
-        "Save changes",
-        "Working",
-      ]
-    }
     sectionName="administrator"
     success={false}
     title="Manage account"
@@ -110,24 +96,17 @@ exports[`my account page handles submitting the form with no error 1`] = `
       title="Change password"
       value=""
     />
-  </CardForm>
+  </withRouter(CardForm)>
 </Fragment>
 `;
 
 exports[`my account page renders 1`] = `
 <Fragment>
   <Connect(Header) />
-  <CardForm
+  <withRouter(CardForm)
     error={false}
     legend="manage account details"
-    onCancel={[Function]}
     onSave={[Function]}
-    primaryButtonText={
-      Array [
-        "Save changes",
-        "Working",
-      ]
-    }
     sectionName="administrator"
     success={false}
     title="Manage account"
@@ -167,24 +146,17 @@ exports[`my account page renders 1`] = `
       title="Change password"
       value=""
     />
-  </CardForm>
+  </withRouter(CardForm)>
 </Fragment>
 `;
 
 exports[`my account page renders 2`] = `
 <Fragment>
   <Connect(Header) />
-  <CardForm
+  <withRouter(CardForm)
     error={false}
     legend="manage account details"
-    onCancel={[Function]}
     onSave={[Function]}
-    primaryButtonText={
-      Array [
-        "Save changes",
-        "Working",
-      ]
-    }
     sectionName="administrator"
     success={false}
     title="Manage account"
@@ -224,6 +196,6 @@ exports[`my account page renders 2`] = `
       title="Change password"
       value=""
     />
-  </CardForm>
+  </withRouter(CardForm)>
 </Fragment>
 `;

@@ -14,6 +14,21 @@ exports[`Routes component renders correctly 1`] = `
     key="/apd"
     path="/apd"
   />
+  <Connect(AdminRoute)
+    component={[Function]}
+    key="/create-account"
+    path="/create-account"
+  />
+  <Connect(AdminRoute)
+    component={[Function]}
+    key="/edit-account"
+    path="/edit-account"
+  />
+  <Connect(PrivateRoute)
+    component={[Function]}
+    key="/me"
+    path="/me"
+  />
   <Route
     component={[Function]}
     key="/login"
@@ -23,27 +38,6 @@ exports[`Routes component renders correctly 1`] = `
     component={[Function]}
     key="/logout"
     path="/logout"
-  />
-  <Connect(PrivateRoute)
-    component={[Function]}
-    key="/admin/create-account"
-    path="/admin/create-account"
-  />
-  <Connect(PrivateRoute)
-    component={[Function]}
-    key="/admin/edit-account"
-    path="/admin/edit-account"
-  />
-  <Connect(PrivateRoute)
-    component={[Function]}
-    exact={true}
-    key="/admin"
-    path="/admin"
-  />
-  <Connect(PrivateRoute)
-    component={[Function]}
-    key="/me"
-    path="/me"
   />
   <Route
     component={[Function]}
