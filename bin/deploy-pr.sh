@@ -21,12 +21,6 @@ if [ -n "$CI_PULL_REQUESTS" ] && [ "$WEBCHANGES" -ne 0 ]; then
 
   export API_URL=$STAGING_API_URL
 
-  # Build the front-end
-  cd web
-  npm ci
-  npm run build
-  cd ..
-
   BUCKET="pr$PRNUM.hitech.eapd.cms.gov"
   BUCKET_URI="s3://pr$PRNUM.hitech.eapd.cms.gov"
   BUCKET_POLICY='{"Version":"2012-10-17","Statement":[{"Sid":"PublicReadGetObject","Effect":"Allow","Principal":"*","Action":"s3:GetObject","Resource":"arn:aws:s3:::'"$BUCKET"'/*"}]}'
