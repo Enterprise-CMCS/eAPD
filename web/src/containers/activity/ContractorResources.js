@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
-import Dropzone from 'react-dropzone';
+// import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 
 import {
@@ -14,13 +14,13 @@ import {
 import Btn from '../../components/Btn';
 import CollapsibleList from '../../components/CollapsibleList';
 import DateRangePicker from '../../components/DateRangePicker';
-import DeleteButton from '../../components/DeleteConfirm';
+// import DeleteButton from '../../components/DeleteConfirm';
 import Dollars from '../../components/Dollars';
 import { Input, DollarInput, Textarea } from '../../components/Inputs';
 import Label from '../../components/Label';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
-import Select from '../../components/Select';
+// import Select from '../../components/Select';
 import { t } from '../../i18n';
 
 const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
@@ -28,13 +28,13 @@ const DOC_TYPES = ['Contract', 'Contract Amendment', 'RFP'];
 const ContractorForm = ({
   idx,
   contractor,
-  docType,
+  // docType,
   years,
   handleChange,
   handleDelete,
-  handleDocChange,
-  handleFileDelete,
-  handleFileUpload,
+  // handleDocChange,
+  // handleFileDelete,
+  // handleFileUpload,
   handleHourlyChange,
   handleTermChange,
   handleUseHourly,
@@ -84,6 +84,7 @@ const ContractorForm = ({
         onChange={handleTermChange(idx)}
       />
     </div>
+    {/*
     <div className="mb3 md-flex">
       <Label>{t('activities.contractorResources.labels.attachments')}</Label>
       <div className="md-col-9 md-flex items-start">
@@ -135,6 +136,7 @@ const ContractorForm = ({
         )}
       </div>
     </div>
+    */}
     <div className="mb3 md-flex">
       <Label>{t('activities.contractorResources.labels.totalCost')}</Label>
       <div className="md-col-6 flex">
@@ -222,13 +224,13 @@ const ContractorForm = ({
 ContractorForm.propTypes = {
   idx: PropTypes.number.isRequired,
   contractor: PropTypes.object.isRequired,
-  docType: PropTypes.string.isRequired,
+  // docType: PropTypes.string.isRequired,
   years: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
-  handleDocChange: PropTypes.func.isRequired,
-  handleFileDelete: PropTypes.func.isRequired,
-  handleFileUpload: PropTypes.func.isRequired,
+  // handleDocChange: PropTypes.func.isRequired,
+  // handleFileDelete: PropTypes.func.isRequired,
+  // handleFileUpload: PropTypes.func.isRequired,
   handleHourlyChange: PropTypes.func.isRequired,
   handleTermChange: PropTypes.func.isRequired,
   handleUseHourly: PropTypes.func.isRequired,
