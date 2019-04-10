@@ -18,10 +18,6 @@ class Sidebar extends Component {
     stickybits('site-sidebar__sticky');
   }
 
-  componentWillUnmount() {
-    stickybits.destroy();
-  }
-
   handleSelectClick = id => {
     const { jumpTo: action } = this.props;
     action(id);
@@ -199,7 +195,7 @@ class Sidebar extends Component {
     const { activeSection } = this.props;
 
     return (
-      <div className="ds-l-col--3 bg-white">
+      <div className="ds-l-col--3">
         <aside className="site-sidebar">
           <div className="xs-hide sm-hide site-sidebar__sticky">
             <div className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4">
@@ -215,7 +211,7 @@ class Sidebar extends Component {
                 {t('title', { year: '2018' })}
               </h1>
             </div>
-            <VerticalNav selectedId={activeSection} items={links} />
+            <VerticalNav selectedId={activeSection || "apd-state-profile-overview"} items={links} />
             <div className="ds-u-margin-top--2">
               <Btn onClick={() => saveApdToAPI()}>
                 {t('sidebar.saveApdButtonText')}
