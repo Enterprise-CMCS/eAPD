@@ -89,6 +89,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "stickybits": "^3.6.5",
     "updeep": "^1.0.0",
     "zxcvbn": "^4.4.2"
   },
