@@ -25,26 +25,25 @@ class CreateUser extends Component {
     // Success has to be derived.  It can't be stored in the app state because
     // if it was, then the next time this form was loaded, it would show the
     // success state even though it wouldn't be accurate anymore.
-    if (!hasFetched) {
-      return { hasFetched: working };
-    }
+    if (hasFetched) {
+      const update = { success: !working && !error };
 
-    // And because this component is creating a new user, that user is stored
-    // in component state too - so in a success condition, where the user was
-    // saved, blank out the state so another new user can be created.
-    if (!working && !error) {
-      return {
-        hasFetched: false,
-        name: '',
-        email: '',
-        password: '',
-        role: '',
-        state: '',
-        success: true
-      };
+      // And because this component is creating a new user, that user is stored
+      // in component state too - so in a success condition, where the user was
+      // saved, blank out the state so another new user can be created.  We
+      // also need to reset hasFetched or else every prop change would reset
+      // the user stored in component state.
+      if (update.success) {
+        update.hasFetched = false;
+        update.name = '';
+        update.email = '';
+        update.password = '';
+        update.role = '';
+        update.state = '';
+      }
+      return update;
     }
-
-    return { success: false };
+    return null;
   }
 
   handleChange = e => {
@@ -61,6 +60,12 @@ class CreateUser extends Component {
 
     const { createUser } = this.props;
 
+    // Once we've attempted to save these changes, it's valid to show success
+    // or error messages.  Since error messages are persisted in app state,
+    // it's possible there's an error sitting there from a previous instance
+    // of this form.  This flag makes sure we don't show any error messages
+    // until this instance of the form has tried to save.
+    this.setState({ hasFetched: true });
     createUser({ email, name, password, role, state });
   };
 
