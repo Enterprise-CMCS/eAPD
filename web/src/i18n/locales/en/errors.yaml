@@ -2,6 +2,7 @@
 # if a "family" doesn't define a message, it will fallback to these up here.
 email-exists: Another account already exists with that email address
 invalid-phone: Phone number may not be more than 10 digits
+no-password: Password is required
 weak-password: The provided password is too weak
 
 # Errors specific to adding a new account
