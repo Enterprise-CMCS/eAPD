@@ -2,13 +2,13 @@
 
 exports[`Sidebar component renders correctly 1`] = `
 <div
-  className="ds-l-col--3 bg-white"
+  className="ds-l-col--3"
 >
   <aside
     className="site-sidebar"
   >
     <div
-      className="xs-hide sm-hide"
+      className="xs-hide sm-hide site-sidebar__sticky"
     >
       <div
         className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
@@ -45,18 +45,18 @@ exports[`Sidebar component renders correctly 1`] = `
                 },
                 Object {
                   "id": "apd-state-profile-office",
-                  "label": "State Medicaid Director and Medicaid Office Address",
+                  "label": "State Director and Office Address",
                   "onClick": [Function],
                   "url": "#apd-state-profile-office",
                 },
                 Object {
                   "id": "apd-state-profile-key-personnel",
-                  "label": "Key Personnel and Program Management Planning",
+                  "label": "Key Personnel and Program Management",
                   "onClick": [Function],
                   "url": "#apd-state-profile-key-personnel",
                 },
               ],
-              "label": "State Profile Contact Information",
+              "label": "Key State Personnel",
             },
             Object {
               "id": "apd-summary",
@@ -144,13 +144,13 @@ exports[`Sidebar component renders correctly 1`] = `
                 },
                 Object {
                   "id": "budget-federal-by-quarter",
-                  "label": "Federal share by FFY Quarter",
+                  "label": "Quarterly Federal Share",
                   "onClick": [Function],
                   "url": "#budget-federal-by-quarter",
                 },
                 Object {
                   "id": "budget-incentive-by-quarter",
-                  "label": "Incentive Payments by FFY Quarter",
+                  "label": "Estimated Quarterly Incentive Payments",
                   "onClick": [Function],
                   "url": "#budget-incentive-by-quarter",
                 },
@@ -175,7 +175,7 @@ exports[`Sidebar component renders correctly 1`] = `
                 },
                 Object {
                   "id": "executive-summary-summary",
-                  "label": "Executive Summary of Activities",
+                  "label": "Activities Summary",
                   "onClick": [Function],
                   "url": "#executive-summary-summary",
                 },
