@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
+import stickybits from 'stickybits';
 
 import { t } from '../i18n';
 import { saveApd } from '../actions/apd';
@@ -13,6 +14,10 @@ import { selectActivitiesSidebar } from '../reducers/activities.selectors';
 import { selectActiveSection } from '../reducers/navigation';
 
 class Sidebar extends Component {
+  componentDidMount() {
+    stickybits('.site-sidebar__sticky');
+  }
+
   handleSelectClick = id => {
     const { jumpTo: action } = this.props;
     action(id);
@@ -190,9 +195,9 @@ class Sidebar extends Component {
     const { activeSection } = this.props;
 
     return (
-      <div className="ds-l-col--3 bg-white">
+      <div className="ds-l-col--3">
         <aside className="site-sidebar">
-          <div className="xs-hide sm-hide">
+          <div className="xs-hide sm-hide site-sidebar__sticky">
             <div className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4">
               <img
                 src={`/static/img/states/${place.id}.svg`}
@@ -206,7 +211,7 @@ class Sidebar extends Component {
                 {t('title', { year: '2018' })}
               </h1>
             </div>
-            <VerticalNav selectedId={activeSection} items={links} />
+            <VerticalNav selectedId={activeSection || "apd-state-profile-overview"} items={links} />
             <div className="ds-u-margin-top--2">
               <Btn onClick={() => saveApdToAPI()}>
                 {t('sidebar.saveApdButtonText')}
