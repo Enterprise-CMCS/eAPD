@@ -15,7 +15,7 @@ import { selectActiveSection } from '../reducers/navigation';
 
 class Sidebar extends Component {
   componentDidMount() {
-    stickybits('site-sidebar__sticky');
+    stickybits('.site-sidebar__sticky');
   }
 
   handleSelectClick = id => {
