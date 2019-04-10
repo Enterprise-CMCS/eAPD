@@ -4,7 +4,7 @@ helpText: >-
   provided. Program budget tables are automatically included for review.
 total: Total
 summary:
-  title: Executive Summary of Activities
+  title: Activities Summary
   instruction:
     detail: >-
       Each activity is listed with its total cost and cost per FFY.

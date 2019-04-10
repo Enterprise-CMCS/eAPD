@@ -70,70 +70,51 @@ describe('my account page', () => {
       target: { name: 'position', value: 'Window Washer' }
     });
     expect(component).toMatchSnapshot();
+
+    // updated after toggling password change
+    component.find('Button[purpose="change password"]').simulate('click');
+    expect(component).toMatchSnapshot();
+
+    // updated after toggling password change back
+    component.find('Button[purpose="change password"]').simulate('click');
+    expect(component).toMatchSnapshot();
   });
 
-  describe('handles submitting the form', () => {
-    test('with no error', async () => {
-      const user = {
-        name: 'Tina Belcher',
-        phone: '1-800-BURGERS',
-        position: 'Table Cleaner'
-      };
+  it('handles submitting the form', async () => {
+    const user = {
+      name: 'Tina Belcher',
+      phone: '1-800-BURGERS',
+      position: 'Table Cleaner'
+    };
 
-      const editAccount = sinon.stub().resolves();
-      const preventDefault = sinon.spy();
+    // sinon.stub().rejects() wraps strings in Error objects, but the edit
+    // account action rejects a plain string, so return a rejected promise
+    // eslint-disable-next-line prefer-promise-reject-errors
+    const editAccount = sinon.stub().returns(Promise.reject('error message'));
+    const preventDefault = sinon.spy();
 
-      const component = shallow(
-        <MyAccount
-          error={false}
-          working={false}
-          editAccount={editAccount}
-          user={user}
-        />
-      );
+    const component = shallow(
+      <MyAccount
+        error={false}
+        working={false}
+        editAccount={editAccount}
+        user={user}
+      />
+    );
 
-      await component
-        .find('withRouter(CardForm)')
-        .props()
-        .onSave({ preventDefault });
+    await component
+      .find('withRouter(CardForm)')
+      .props()
+      .onSave({ preventDefault });
 
-      expect(preventDefault.calledOnce).toEqual(true);
-      expect(editAccount.calledWith(user)).toEqual(true);
+    expect(preventDefault.calledOnce).toEqual(true);
+    expect(editAccount.calledWith(user)).toEqual(true);
 
-      expect(component).toMatchSnapshot();
-    });
+    // When there is no error (thus, success)
+    expect(component).toMatchSnapshot();
 
-    test('with an error', async () => {
-      const user = {
-        name: 'Tina Belcher',
-        phone: '1-800-BURGERS',
-        position: 'Table Cleaner'
-      };
-
-      // sinon.stub().rejects() wraps strings in Error objects, but the edit
-      // account action rejects a plain string, so return a rejected promise
-      // eslint-disable-next-line prefer-promise-reject-errors
-      const editAccount = sinon.stub().returns(Promise.reject('error message'));
-      const preventDefault = sinon.spy();
-
-      const component = shallow(
-        <MyAccount
-          error={false}
-          working={false}
-          editAccount={editAccount}
-          user={user}
-        />
-      );
-
-      await component
-        .find('withRouter(CardForm)')
-        .props()
-        .onSave({ preventDefault });
-
-      expect(preventDefault.calledOnce).toEqual(true);
-      expect(editAccount.calledWith(user)).toEqual(true);
-
-      expect(component).toMatchSnapshot();
-    });
+    // When there is an error
+    component.setProps({ error: 'It went wrong' });
+    expect(component).toMatchSnapshot();
   });
 });

@@ -1,4 +1,4 @@
-import { TextField } from '@cmsgov/design-system-core';
+import { Button, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -7,11 +7,13 @@ import { editSelf } from '../../actions/admin';
 import CardForm from '../../components/CardForm';
 import Header from '../../components/Header';
 import Password from '../../components/PasswordWithMeter';
+import { LockIcon, UnlockIcon } from '../../components/Icons';
 import { getEditOwnAccountError } from '../../reducers/errors';
 import { getEditOwnAccountWorking } from '../../reducers/working';
 
 class MyAccount extends Component {
   state = {
+    changePassword: false,
     hasFetched: false,
     success: false,
     user: {
@@ -36,13 +38,13 @@ class MyAccount extends Component {
     // Success has to be derived.  It can't be stored in the app state because
     // if it was, then the next time this form was loaded, it would show the
     // success state even though it wouldn't be accurate anymore.
-    if (!hasFetched) {
-      return { hasFetched: working };
-    }
 
-    return {
-      success: !working && !error
-    };
+    if (hasFetched) {
+      return {
+        success: !working && !error
+      };
+    }
+    return null;
   }
 
   handleEditAccount = e => {
@@ -53,14 +55,25 @@ class MyAccount extends Component {
   editAccount = e => {
     e.preventDefault();
     const { editAccount } = this.props;
-    const { user } = this.state;
+    const { changePassword, user } = this.state;
 
-    editAccount(user);
+    // Once we've attempted to save these changes, it's valid to show success
+    // or error messages.  Since error messages are persisted in app state,
+    // it's possible there's an error sitting there from a previous instance
+    // of this form.  This flag makes sure we don't show any error messages
+    // until this instance of the form has tried to save.
+    this.setState({ hasFetched: true });
+    editAccount(user, changePassword);
+  };
+
+  toggleChangePassword = () => {
+    this.setState(prev => ({ changePassword: !prev.changePassword }));
   };
 
   render() {
     const { error, working } = this.props;
     const {
+      changePassword,
       hasFetched,
       success,
       user: { name, password, phone, position }
@@ -98,16 +111,47 @@ class MyAccount extends Component {
           <TextField
             label="Role"
             name="position"
-            ariaLabel="please enter your position or role ???"
+            ariaLabel="please enter your position or role"
             value={position || ''}
             onChange={this.handleEditAccount}
           />
-          <Password
-            className="mb2"
-            title="Change password"
-            value={password}
-            onChange={this.handleEditAccount}
-          />
+          <div className="ds-l-row ds-u-padding-x--2">
+            <TextField
+              label="Password"
+              ariaLabel="Current password"
+              name="current password"
+              value="********"
+              disabled
+              size="medium"
+            />
+            <div className="ds-u-clearfix">
+              <div className="ds-c-label">&nbsp;</div>
+              <div className="ds-c-field ds-u-border--0">
+                <Button
+                  aria-label={
+                    changePassword
+                      ? 'keep previous password'
+                      : 'change password'
+                  }
+                  variation="transparent"
+                  className="ds-u-padding-y--0"
+                  onClick={this.toggleChangePassword}
+                  purpose="change password"
+                >
+                  {changePassword ? <UnlockIcon /> : <LockIcon />} Change
+                  password
+                </Button>
+              </div>
+            </div>
+          </div>
+          {changePassword && (
+            <Password
+              showMeter
+              title="New password"
+              value={password}
+              onChange={this.handleEditAccount}
+            />
+          )}
         </CardForm>
       </Fragment>
     );

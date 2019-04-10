@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`my account page handles submitting the form with an error 1`] = `
+exports[`my account page handles submitting the form 1`] = `
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
@@ -8,7 +8,7 @@ exports[`my account page handles submitting the form with an error 1`] = `
     legend="manage account details"
     onSave={[Function]}
     sectionName="administrator"
-    success={false}
+    success="Changes saved"
     title="Manage account"
     working={false}
   >
@@ -31,30 +31,59 @@ exports[`my account page handles submitting the form with an error 1`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
       type="text"
       value="Table Cleaner"
     />
-    <Password
-      className="mb2"
-      compareTo={Array []}
-      onChange={[Function]}
-      showMeter={false}
-      title="Change password"
-      value=""
-    />
+    <div
+      className="ds-l-row ds-u-padding-x--2"
+    >
+      <TextField
+        ariaLabel="Current password"
+        disabled={true}
+        label="Password"
+        name="current password"
+        size="medium"
+        type="text"
+        value="********"
+      />
+      <div
+        className="ds-u-clearfix"
+      >
+        <div
+          className="ds-c-label"
+        >
+           
+        </div>
+        <div
+          className="ds-c-field ds-u-border--0"
+        >
+          <Button
+            aria-label="change password"
+            className="ds-u-padding-y--0"
+            onClick={[Function]}
+            purpose="change password"
+            type="button"
+            variation="transparent"
+          >
+            <LockIcon />
+             Change password
+          </Button>
+        </div>
+      </div>
+    </div>
   </withRouter(CardForm)>
 </Fragment>
 `;
 
-exports[`my account page handles submitting the form with no error 1`] = `
+exports[`my account page handles submitting the form 2`] = `
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
-    error={false}
+    error="It went wrong"
     legend="manage account details"
     onSave={[Function]}
     sectionName="administrator"
@@ -81,21 +110,50 @@ exports[`my account page handles submitting the form with no error 1`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
       type="text"
       value="Table Cleaner"
     />
-    <Password
-      className="mb2"
-      compareTo={Array []}
-      onChange={[Function]}
-      showMeter={false}
-      title="Change password"
-      value=""
-    />
+    <div
+      className="ds-l-row ds-u-padding-x--2"
+    >
+      <TextField
+        ariaLabel="Current password"
+        disabled={true}
+        label="Password"
+        name="current password"
+        size="medium"
+        type="text"
+        value="********"
+      />
+      <div
+        className="ds-u-clearfix"
+      >
+        <div
+          className="ds-c-label"
+        >
+           
+        </div>
+        <div
+          className="ds-c-field ds-u-border--0"
+        >
+          <Button
+            aria-label="change password"
+            className="ds-u-padding-y--0"
+            onClick={[Function]}
+            purpose="change password"
+            type="button"
+            variation="transparent"
+          >
+            <LockIcon />
+             Change password
+          </Button>
+        </div>
+      </div>
+    </div>
   </withRouter(CardForm)>
 </Fragment>
 `;
@@ -131,21 +189,50 @@ exports[`my account page renders 1`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
       type="text"
       value="Table Cleaner"
     />
-    <Password
-      className="mb2"
-      compareTo={Array []}
-      onChange={[Function]}
-      showMeter={false}
-      title="Change password"
-      value=""
-    />
+    <div
+      className="ds-l-row ds-u-padding-x--2"
+    >
+      <TextField
+        ariaLabel="Current password"
+        disabled={true}
+        label="Password"
+        name="current password"
+        size="medium"
+        type="text"
+        value="********"
+      />
+      <div
+        className="ds-u-clearfix"
+      >
+        <div
+          className="ds-c-label"
+        >
+           
+        </div>
+        <div
+          className="ds-c-field ds-u-border--0"
+        >
+          <Button
+            aria-label="change password"
+            className="ds-u-padding-y--0"
+            onClick={[Function]}
+            purpose="change password"
+            type="button"
+            variation="transparent"
+          >
+            <LockIcon />
+             Change password
+          </Button>
+        </div>
+      </div>
+    </div>
   </withRouter(CardForm)>
 </Fragment>
 `;
@@ -181,21 +268,215 @@ exports[`my account page renders 2`] = `
       value="1-800-BURGERS"
     />
     <TextField
-      ariaLabel="please enter your position or role ???"
+      ariaLabel="please enter your position or role"
       label="Role"
       name="position"
       onChange={[Function]}
       type="text"
       value="Window Washer"
     />
+    <div
+      className="ds-l-row ds-u-padding-x--2"
+    >
+      <TextField
+        ariaLabel="Current password"
+        disabled={true}
+        label="Password"
+        name="current password"
+        size="medium"
+        type="text"
+        value="********"
+      />
+      <div
+        className="ds-u-clearfix"
+      >
+        <div
+          className="ds-c-label"
+        >
+           
+        </div>
+        <div
+          className="ds-c-field ds-u-border--0"
+        >
+          <Button
+            aria-label="change password"
+            className="ds-u-padding-y--0"
+            onClick={[Function]}
+            purpose="change password"
+            type="button"
+            variation="transparent"
+          >
+            <LockIcon />
+             Change password
+          </Button>
+        </div>
+      </div>
+    </div>
+  </withRouter(CardForm)>
+</Fragment>
+`;
+
+exports[`my account page renders 3`] = `
+<Fragment>
+  <Connect(Header) />
+  <withRouter(CardForm)
+    error={false}
+    legend="manage account details"
+    onSave={[Function]}
+    sectionName="administrator"
+    success={false}
+    title="Manage account"
+    working={false}
+  >
+    <TextField
+      ariaLabel="please enter your full name"
+      label="Name"
+      name="name"
+      onChange={[Function]}
+      type="text"
+      value="Tina Belcher"
+    />
+    <TextField
+      ariaLabel="please enter your 10-digit phone number"
+      label="Phone number"
+      mask="phone"
+      name="phone"
+      onChange={[Function]}
+      size="medium"
+      type="text"
+      value="1-800-BURGERS"
+    />
+    <TextField
+      ariaLabel="please enter your position or role"
+      label="Role"
+      name="position"
+      onChange={[Function]}
+      type="text"
+      value="Window Washer"
+    />
+    <div
+      className="ds-l-row ds-u-padding-x--2"
+    >
+      <TextField
+        ariaLabel="Current password"
+        disabled={true}
+        label="Password"
+        name="current password"
+        size="medium"
+        type="text"
+        value="********"
+      />
+      <div
+        className="ds-u-clearfix"
+      >
+        <div
+          className="ds-c-label"
+        >
+           
+        </div>
+        <div
+          className="ds-c-field ds-u-border--0"
+        >
+          <Button
+            aria-label="keep previous password"
+            className="ds-u-padding-y--0"
+            onClick={[Function]}
+            purpose="change password"
+            type="button"
+            variation="transparent"
+          >
+            <UnlockIcon />
+             Change password
+          </Button>
+        </div>
+      </div>
+    </div>
     <Password
-      className="mb2"
       compareTo={Array []}
       onChange={[Function]}
-      showMeter={false}
-      title="Change password"
+      showMeter={true}
+      title="New password"
       value=""
     />
+  </withRouter(CardForm)>
+</Fragment>
+`;
+
+exports[`my account page renders 4`] = `
+<Fragment>
+  <Connect(Header) />
+  <withRouter(CardForm)
+    error={false}
+    legend="manage account details"
+    onSave={[Function]}
+    sectionName="administrator"
+    success={false}
+    title="Manage account"
+    working={false}
+  >
+    <TextField
+      ariaLabel="please enter your full name"
+      label="Name"
+      name="name"
+      onChange={[Function]}
+      type="text"
+      value="Tina Belcher"
+    />
+    <TextField
+      ariaLabel="please enter your 10-digit phone number"
+      label="Phone number"
+      mask="phone"
+      name="phone"
+      onChange={[Function]}
+      size="medium"
+      type="text"
+      value="1-800-BURGERS"
+    />
+    <TextField
+      ariaLabel="please enter your position or role"
+      label="Role"
+      name="position"
+      onChange={[Function]}
+      type="text"
+      value="Window Washer"
+    />
+    <div
+      className="ds-l-row ds-u-padding-x--2"
+    >
+      <TextField
+        ariaLabel="Current password"
+        disabled={true}
+        label="Password"
+        name="current password"
+        size="medium"
+        type="text"
+        value="********"
+      />
+      <div
+        className="ds-u-clearfix"
+      >
+        <div
+          className="ds-c-label"
+        >
+           
+        </div>
+        <div
+          className="ds-c-field ds-u-border--0"
+        >
+          <Button
+            aria-label="change password"
+            className="ds-u-padding-y--0"
+            onClick={[Function]}
+            purpose="change password"
+            type="button"
+            variation="transparent"
+          >
+            <LockIcon />
+             Change password
+          </Button>
+        </div>
+      </div>
+    </div>
   </withRouter(CardForm)>
 </Fragment>
 `;
