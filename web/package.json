@@ -7,7 +7,7 @@
     "storybook": "start-storybook --ci -p 9001 -c .storybook",
     "build-storybook": "build-storybook -c .storybook -o .storybook-dist/public",
     "make-state-icons": "babel-node scripts/stateIcons.js",
-    "scaffold": "mkdir -p dist && cp src/index.html dist/ && cp ../Staticfile dist/ && cp -r src/static dist/",
+    "scaffold": "rm -rf dist && mkdir dist && cp ../Staticfile dist/ && cp -r src/static dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --config webpack.config.dev.js",
@@ -66,17 +66,14 @@
     "deline": "^1.0.4",
     "draft-js": "0.10.5",
     "draftjs-to-html": "0.8.4",
-    "formik": "^1.5.1",
     "history": "^4.7.2",
     "html-to-draftjs": "1.4.0",
     "i18n-js": "^3.1.0",
     "is_js": "^0.9.0",
     "lodash.difference": "^4.5.0",
-    "lodash.kebabcase": "^4.1.1",
     "lodash.omit": "^4.5.0",
     "markdown-it": "^8.4.2",
     "moment": "^2.22.2",
-    "numeral": "^2.0.6",
     "prop-types": "^15.6.2",
     "react": "^16.8.3",
     "react-dates": "^20.0.0",
@@ -100,6 +97,7 @@
     "@babel/core": "^7.0.0",
     "@babel/node": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
@@ -122,6 +120,8 @@
     "eslint-plugin-react": "^7.11.1",
     "extract-loader": "^3.1.0",
     "file-loader": "^3.0.1",
+    "html-webpack-include-assets-plugin": "^1.0.7",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^24.1.0",
     "js-yaml": "^3.12.2",
     "json-loader": "^0.5.7",
@@ -152,7 +152,8 @@
   "babel": {
     "plugins": [
       "react-hot-loader/babel",
-      "@babel/plugin-proposal-class-properties"
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-syntax-dynamic-import"
     ],
     "presets": [
       "@babel/preset-env",

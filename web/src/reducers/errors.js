@@ -4,7 +4,10 @@ import {
   ADMIN_EDIT_ACCOUNT_SUCCESS,
   ADMIN_EDIT_ACCOUNT_ERROR,
   ADMIN_EDIT_ME_SUCCESS,
-  ADMIN_EDIT_ME_ERROR
+  ADMIN_EDIT_ME_ERROR,
+  ADMIN_CREATE_USER_REQUEST,
+  ADMIN_EDIT_ACCOUNT_REQUEST,
+  ADMIN_EDIT_ME_REQUEST
 } from '../actions/admin';
 
 import { t } from '../i18n';
@@ -36,32 +39,38 @@ const initialState = {
 // Maps action symbols to state properties.  When these actions happen, the
 // state properties will be set to false.  If you add anything to this Map,
 // you'll also need to add that symbol to the switch below.
-const successActions = new Map([
-  [ADMIN_CREATE_USER_SUCCESS, 'addAccount'],
-  [ADMIN_EDIT_ACCOUNT_SUCCESS, 'editAccount'],
-  [ADMIN_EDIT_ME_SUCCESS, 'editOwnAccount']
-]);
+const successActions = {
+  [ADMIN_CREATE_USER_REQUEST]: 'addAccount',
+  [ADMIN_CREATE_USER_SUCCESS]: 'addAccount',
+  [ADMIN_EDIT_ACCOUNT_REQUEST]: 'editAccount',
+  [ADMIN_EDIT_ACCOUNT_SUCCESS]: 'editAccount',
+  [ADMIN_EDIT_ME_REQUEST]: 'editOwnAccount',
+  [ADMIN_EDIT_ME_SUCCESS]: 'editOwnAccount'
+};
 
 // When these actions happen, the state properties will be set to appropiate
 // error messages or the fallback listed here.  If you add anything to this
 // Map, you'll also need to add that symbol to the switch below.
-const errorActions = new Map([
-  [ADMIN_CREATE_USER_ERROR, ['addAccount', 'Unknown error creating account']],
-  [ADMIN_EDIT_ACCOUNT_ERROR, ['editAccount', 'Unknown error editing account']],
-  [ADMIN_EDIT_ME_ERROR, ['editOwnAccount', 'Unknown error editing account']]
-]);
+const errorActions = {
+  [ADMIN_CREATE_USER_ERROR]: ['addAccount', 'Unknown error creating account'],
+  [ADMIN_EDIT_ACCOUNT_ERROR]: ['editAccount', 'Unknown error editing account'],
+  [ADMIN_EDIT_ME_ERROR]: ['editOwnAccount', 'Unknown error editing account']
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADMIN_CREATE_USER_REQUEST:
     case ADMIN_CREATE_USER_SUCCESS:
+    case ADMIN_EDIT_ACCOUNT_REQUEST:
     case ADMIN_EDIT_ACCOUNT_SUCCESS:
+    case ADMIN_EDIT_ME_REQUEST:
     case ADMIN_EDIT_ME_SUCCESS:
-      return { ...state, [successActions.get(action.type)]: false };
+      return { ...state, [successActions[action.type]]: false };
 
     case ADMIN_CREATE_USER_ERROR:
     case ADMIN_EDIT_ACCOUNT_ERROR:
     case ADMIN_EDIT_ME_ERROR: {
-      const [prop, fallback] = errorActions.get(action.type);
+      const [prop, fallback] = errorActions[action.type];
       return {
         ...state,
         [prop]: getError(action.data, fallback)
