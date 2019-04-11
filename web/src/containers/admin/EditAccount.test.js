@@ -193,7 +193,7 @@ describe('admin page > edit account', () => {
     change('state', 'fl');
     change('role', 'one');
 
-    component.find('CardForm').prop('onSave')({ preventDefault });
+    component.find('withRouter(CardForm)').prop('onSave')({ preventDefault });
 
     // don't use the browser submit, since we expect to send it via AJAX
     expect(preventDefault.calledOnce).toEqual(true);

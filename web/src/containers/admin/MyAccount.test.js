@@ -58,7 +58,6 @@ describe('my account page', () => {
         error={false}
         working={false}
         editAccount={() => {}}
-        history={{}}
         user={user}
       />
     );
@@ -79,46 +78,37 @@ describe('my account page', () => {
     // updated after toggling password change back
     component.find('Button[purpose="change password"]').simulate('click');
     expect(component).toMatchSnapshot();
-
-    // while fetching
-    expect(
-      shallow(
-        <MyAccount
-          editAccount={() => {}}
-          error={false}
-          working
-          history={{}}
-          user={user}
-        />
-      )
-    ).toMatchSnapshot();
   });
 
   it('handles submitting the form', async () => {
-    const props = {
-      editAccount: sinon.spy(),
-      error: false,
-      history: {},
-      working: false,
-      user: {
-        name: 'Tina Belcher',
-        phone: '1-800-BURGERS',
-        position: 'Table Cleaner'
-      }
+    const user = {
+      name: 'Tina Belcher',
+      phone: '1-800-BURGERS',
+      position: 'Table Cleaner'
     };
 
+    // sinon.stub().rejects() wraps strings in Error objects, but the edit
+    // account action rejects a plain string, so return a rejected promise
+    // eslint-disable-next-line prefer-promise-reject-errors
+    const editAccount = sinon.stub().returns(Promise.reject('error message'));
     const preventDefault = sinon.spy();
 
-    const component = shallow(<MyAccount {...props} />);
+    const component = shallow(
+      <MyAccount
+        error={false}
+        working={false}
+        editAccount={editAccount}
+        user={user}
+      />
+    );
 
-    // Calling onSave will put the component into a "show errors" mode
     await component
-      .find('CardForm')
+      .find('withRouter(CardForm)')
       .props()
       .onSave({ preventDefault });
 
     expect(preventDefault.calledOnce).toEqual(true);
-    expect(props.editAccount.calledWith(props.user)).toEqual(true);
+    expect(editAccount.calledWith(user)).toEqual(true);
 
     // When there is no error (thus, success)
     expect(component).toMatchSnapshot();
@@ -126,32 +116,5 @@ describe('my account page', () => {
     // When there is an error
     component.setProps({ error: 'It went wrong' });
     expect(component).toMatchSnapshot();
-  });
-
-  test('handles canceling', () => {
-    const user = {
-      name: 'Tina Belcher',
-      phone: '1-800-BURGERS',
-      position: 'Table Cleaner'
-    };
-
-    const goBack = sinon.spy();
-
-    const component = shallow(
-      <MyAccount
-        error={false}
-        working={false}
-        editAccount={() => {}}
-        history={{ goBack }}
-        user={user}
-      />
-    );
-
-    component
-      .find('CardForm')
-      .props()
-      .onCancel();
-
-    expect(goBack.calledOnce).toEqual(true);
   });
 });
