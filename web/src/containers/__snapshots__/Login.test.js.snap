@@ -29,7 +29,19 @@ exports[`login component renders correctly if not logged in 1`] = `
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
+    cancelable={false}
     error={false}
+    footer={
+      <React.Fragment>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </React.Fragment>
+    }
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -64,7 +76,19 @@ exports[`login component renders correctly if not logged in 2`] = `
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
+    cancelable={false}
     error={false}
+    footer={
+      <React.Fragment>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </React.Fragment>
+    }
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -99,7 +123,19 @@ exports[`login component renders correctly if not logged in 3`] = `
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
+    cancelable={false}
     error={false}
+    footer={
+      <React.Fragment>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </React.Fragment>
+    }
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -134,7 +170,19 @@ exports[`login component renders correctly if not logged in and fetching data 1`
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
+    cancelable={false}
     error={false}
+    footer={
+      <React.Fragment>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </React.Fragment>
+    }
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -169,7 +217,19 @@ exports[`login component renders correctly if not logged in and there is an erro
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
+    cancelable={false}
     error={false}
+    footer={
+      <React.Fragment>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </React.Fragment>
+    }
     onSave={[Function]}
     primaryButtonText={
       Array [

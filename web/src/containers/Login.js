@@ -38,7 +38,7 @@ class Login extends Component {
 
     let errorMessage = false;
     if (error === 'Unauthorized') {
-      errorMessage = 'The email or password you&apos;ve entered is incorrect.';
+      errorMessage = 'The email or password you’ve entered is incorrect.';
     } else if (error === 'Unauthorized') {
       errorMessage = 'Sorry! Something went wrong. Please try again.';
     }
@@ -46,13 +46,19 @@ class Login extends Component {
     return (
       <Fragment>
         <Header />
-
         <CardForm
           title="Log in"
+          cancelable={false}
           error={errorMessage}
           working={fetching}
           primaryButtonText={['Log in', 'Logging in']}
           onSave={this.handleSubmit}
+          footer={
+            <Fragment>
+              Forgot your password? Contact{' '}
+              <a href="mailto:CMS-EAPD@cms.hhs.gov">CMS-EAPD@cms.hhs.gov</a>
+            </Fragment>
+          }
         >
           <TextField
             id="username"
