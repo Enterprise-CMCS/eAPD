@@ -79,7 +79,7 @@ describe('users endpoint | PUT /users/:userID', () => {
       });
 
       it('...with all new content, plus some junk', async () => {
-        const { oldPasswordHash } = await db('users')
+        const { password: oldPasswordHash } = await db('users')
           .where({ id: 2001 })
           .first();
 
@@ -118,6 +118,10 @@ describe('users endpoint | PUT /users/:userID', () => {
       });
 
       it('...when updating self with all new content, role is ignored', async () => {
+        const { password: oldPasswordHash } = await db('users')
+          .where({ id: 2000 })
+          .first();
+
         const {
           response: { statusCode },
           body
@@ -146,6 +150,7 @@ describe('users endpoint | PUT /users/:userID', () => {
           position: 'test position',
           state_id: 'hi'
         });
+        expect(user.password).toEqual(oldPasswordHash);
       });
     });
   });
