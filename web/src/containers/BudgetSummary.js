@@ -18,9 +18,8 @@ const formatYear = yr => (yr === 'total' ? 'All Years' : `${yr} Total`);
 class DataRow extends Component {
 
   render() {
-    const { category, data, entries, title } = this.props;
-    const years = Object.keys(data);
-    const hasData = data.total.total > 0;
+    const { category, data, entries, title, year } = this.props;
+    const val = data[year];
 
     return (
       <Fragment>
@@ -28,31 +27,26 @@ class DataRow extends Component {
           <td headers="summary-budget-null1 summary-budget-null2">
             {title}
           </td>
-          {years.map(yr => {
-            const val = data[yr];
-            return (
-              <Fragment key={yr}>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-total`}
-                >
-                  <Dollars>{val.medicaid}</Dollars>
-                </td>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-federal`}
-                >
-                  <Dollars>{val.federal}</Dollars>
-                </td>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-state`}
-                >
-                  <Dollars>{val.state}</Dollars>
-                </td>
-              </Fragment>
-            );
-          })}
+            <Fragment key={year}>
+              <td
+                className="mono right-align"
+                headers={`summary-budget-fy-${year} summary-budget-fy-${year}-total`}
+              >
+                <Dollars>{val.medicaid}</Dollars>
+              </td>
+              <td
+                className="mono right-align"
+                headers={`summary-budget-fy-${year} summary-budget-fy-${year}-federal`}
+              >
+                <Dollars>{val.federal}</Dollars>
+              </td>
+              <td
+                className="mono right-align"
+                headers={`summary-budget-fy-${year} summary-budget-fy-${year}-state`}
+              >
+                <Dollars>{val.state}</Dollars>
+              </td>
+            </Fragment>
         </tr>
       </Fragment>
     );
@@ -66,7 +60,7 @@ DataRow.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-const DataRowGroup = ({ data, entries }) => (
+const DataRowGroup = ({ data, entries, year }) => (
   <Fragment>
     {Object.keys(data).map(key => (
       <DataRow
@@ -75,6 +69,7 @@ const DataRowGroup = ({ data, entries }) => (
         data={data[key]}
         entries={entries}
         title={categoryLookup[key]}
+        year={year}
       />
     ))}
   </Fragment>
@@ -88,11 +83,11 @@ DataRowGroup.propTypes = {
 const BudgetSummary = ({ activities, data, years }) => (
   <div className="overflow-x">
     <h3 className="ds-h3">HIT activities</h3>
+    {[...years, 'total'].map(yr => (
     <table className="table-cms">
       <thead>
         <tr>
-          <th id="summary-budget-null1" />
-          {[...years, 'total'].map(yr => (
+          <Fragment key={yr}>
             <th
               key={yr}
               className="center"
@@ -101,29 +96,24 @@ const BudgetSummary = ({ activities, data, years }) => (
             >
               FFY {yr}
             </th>
-          ))}
-        </tr>
-        <tr>
-          <th id="summary-budget-null2" />
-          {[...years, 'total'].map(y => (
-            <Fragment key={y}>
-              <th className="right-align" id={`summary-budget-fy-${y}-total`}>
-                Medicaid total
-              </th>
-              <th className="right-align" id={`summary-budget-fy-${y}-federal`}>
-                Federal
-              </th>
-              <th className="right-align" id={`summary-budget-fy-${y}-state`}>
-                State
-              </th>
-            </Fragment>
-          ))}
+
+            <th className="right-align" id={`summary-budget-fy-${yr}-total`}>
+              Medicaid total
+            </th>
+            <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
+              Federal
+            </th>
+            <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
+              State
+            </th>
+          </Fragment>
         </tr>
       </thead>
       <tbody>
-        <DataRowGroup data={data.hit} entries={activities.hit} />
+        <DataRowGroup data={data.hit} entries={activities.hit} year={yr} />
       </tbody>
     </table>
+    ))}
 
     <h3 className="ds-h3">HIE activities</h3>
     <table className="table-cms">
@@ -235,7 +225,6 @@ const BudgetSummary = ({ activities, data, years }) => (
           })}
         </tr>
       </tbody>
-
     </table>
   </div>
 );
