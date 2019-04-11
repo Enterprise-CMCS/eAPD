@@ -4,8 +4,10 @@ import React, { Fragment } from 'react';
 import { withRouter } from 'react-router';
 
 const CardForm = ({
+  cancelable,
   children,
   error,
+  footer,
   history,
   legend,
   onSave,
@@ -49,12 +51,19 @@ const CardForm = ({
                     )}
                   </Button>
                 )}
-                <Button variation="transparent" onClick={history.goBack}>
-                  Cancel
-                </Button>
+                {cancelable && (
+                  <Button variation="transparent" onClick={history.goBack}>
+                    Cancel
+                  </Button>
+                )}
               </div>
             </fieldset>
           </form>
+          {footer && (
+            <div className="ds-u-margin-top--4 ds-u-border-top--1 ds-u-color--muted">
+              {footer}
+            </div>
+          )}
         </div>
         <div className="ds-l-col--1 ds-u-margin-right--auto" />
       </div>
@@ -63,8 +72,10 @@ const CardForm = ({
 );
 
 CardForm.propTypes = {
+  cancelable: PropTypes.bool,
   children: PropTypes.node.isRequired,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   history: PropTypes.object.isRequired,
   legend: PropTypes.string,
   onSave: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
@@ -76,7 +87,9 @@ CardForm.propTypes = {
 };
 
 CardForm.defaultProps = {
+  cancelable: true,
   error: false,
+  footer: false,
   legend: '',
   onSave: false,
   primaryButtonText: ['Save changes', 'Working'],

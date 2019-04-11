@@ -61,6 +61,26 @@ describe('card form wrapper', () => {
     ).toMatchSnapshot();
   });
 
+  test('does not render a cancel button if form is not cancelable', () => {
+    expect(
+      shallow(
+        <CardForm title="test" history={history} cancelable={false}>
+          hello world
+        </CardForm>
+      )
+    ).toMatchSnapshot();
+  });
+
+  test('renders a footer if provided', () => {
+    expect(
+      shallow(
+        <CardForm title="test" history={history} footer={<div>Hello</div>}>
+          hello world
+        </CardForm>
+      )
+    ).toMatchSnapshot();
+  });
+
   test('renders a spinny-wheel on the save button and disables it if the form is busy', () => {
     expect(
       shallow(
