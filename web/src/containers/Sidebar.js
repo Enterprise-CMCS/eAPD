@@ -206,12 +206,12 @@ class Sidebar extends Component {
                 width="40"
                 height="40"
               />
-              <h1 className="text-xl">
-                {place.name} <br />
-                {t('title', { year: '2018' })}
-              </h1>
+              <h1 className="text-xl">{place.name}</h1>
             </div>
-            <VerticalNav selectedId={activeSection || "apd-state-profile-overview"} items={links} />
+            <VerticalNav
+              selectedId={activeSection || 'apd-state-profile-overview'}
+              items={links}
+            />
             <div className="ds-u-margin-top--2">
               <Btn onClick={() => saveApdToAPI()}>
                 {t('sidebar.saveApdButtonText')}
