@@ -57,7 +57,9 @@ class Login extends Component {
           footer={
             <Fragment>
               Forgot your password? Contact{' '}
-              <a href="mailto:CMS-EAPD@cms.hhs.gov">CMS-EAPD@cms.hhs.gov</a>
+              <a href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD">
+                CMS-EAPD@cms.hhs.gov
+              </a>
             </Fragment>
           }
         >
