@@ -15,42 +15,10 @@ const categoryLookup = {
 const formatActivityName = a => `Activity ${a.name ? a.name : `#${a.id}`}`;
 const formatYear = yr => (yr === 'total' ? 'All Years' : `${yr} Total`);
 
-const DataRowDetails = ({ category, entries, years }) => (
-  <tr>
-    <td colSpan={years.length * 3 + 1}>
-      <div className="py2">
-        {entries.map(e => (
-          <div key={e.id} className="mono h6">
-            <span className="bold">{formatActivityName(e)}:</span>{' '}
-            {years.map(yr => (
-              <span key={yr} className="mr2">
-                {formatYear(yr)}: <Dollars>{e.data[category][yr]}</Dollars>
-              </span>
-            ))}
-          </div>
-        ))}
-      </div>
-    </td>
-  </tr>
-);
-
-DataRowDetails.propTypes = {
-  category: PropTypes.string.isRequired,
-  entries: PropTypes.array.isRequired,
-  years: PropTypes.array.isRequired
-};
-
 class DataRow extends Component {
-  state = { detailsOpen: false };
-
-  toggleDetails = () => {
-    this.setState(prev => ({ detailsOpen: !prev.detailsOpen }));
-  };
 
   render() {
     const { category, data, entries, title } = this.props;
-    const { detailsOpen } = this.state;
-
     const years = Object.keys(data);
     const hasData = data.total.total > 0;
 
@@ -58,15 +26,6 @@ class DataRow extends Component {
       <Fragment>
         <tr>
           <td headers="summary-budget-null1 summary-budget-null2">
-            {hasData && (
-              <button
-                type="button"
-                className="btn right px-tiny py0"
-                onClick={this.toggleDetails}
-              >
-                {detailsOpen ? '-' : '+'}
-              </button>
-            )}
             {title}
           </td>
           {years.map(yr => {
@@ -95,9 +54,6 @@ class DataRow extends Component {
             );
           })}
         </tr>
-        {hasData && detailsOpen && (
-          <DataRowDetails category={category} entries={entries} years={years} />
-        )}
       </Fragment>
     );
   }
@@ -302,6 +258,5 @@ export {
   BudgetSummary as plain,
   mapStateToProps,
   DataRow,
-  DataRowDetails,
   DataRowGroup
 };
