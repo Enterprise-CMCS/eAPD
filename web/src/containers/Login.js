@@ -49,6 +49,7 @@ class Login extends Component {
         <CardForm
           title="Log in"
           cancelable={false}
+          canSubmit={username.length && password.length}
           error={errorMessage}
           working={fetching}
           primaryButtonText={['Log in', 'Logging in']}

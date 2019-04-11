@@ -31,6 +31,21 @@ describe('card form wrapper', () => {
     ).toMatchSnapshot();
   });
 
+  test('disables the save button if canSubmit is false', () => {
+    expect(
+      shallow(
+        <CardForm
+          title="test"
+          history={history}
+          onSave={sinon.spy()}
+          canSubmit={false}
+        >
+          hello world
+        </CardForm>
+      )
+    ).toMatchSnapshot();
+  });
+
   test('renders a legend if provided', () => {
     expect(
       shallow(

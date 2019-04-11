@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { withRouter } from 'react-router';
 
+const formSubmitNoop = e => e.preventDefault();
+
 const CardForm = ({
   cancelable,
+  canSubmit,
   children,
   error,
   footer,
@@ -33,7 +36,7 @@ const CardForm = ({
             )}
             {title}
           </h1>
-          <form onSubmit={onSave || (() => {})}>
+          <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
             <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
               {!!legend && <legend className="sr-only">{legend}</legend>}
 
@@ -41,7 +44,11 @@ const CardForm = ({
 
               <div className="ds-u-margin-top--5">
                 {onSave && (
-                  <Button variation="primary" type="submit" disabled={working}>
+                  <Button
+                    variation="primary"
+                    type="submit"
+                    disabled={!canSubmit || working}
+                  >
                     {working ? (
                       <Fragment>
                         <Spinner /> {primaryButtonWorking}
@@ -73,6 +80,7 @@ const CardForm = ({
 
 CardForm.propTypes = {
   cancelable: PropTypes.bool,
+  canSubmit: PropTypes.bool,
   children: PropTypes.node.isRequired,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
@@ -88,6 +96,7 @@ CardForm.propTypes = {
 
 CardForm.defaultProps = {
   cancelable: true,
+  canSubmit: true,
   error: false,
   footer: false,
   legend: '',
