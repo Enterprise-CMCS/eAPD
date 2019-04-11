@@ -129,30 +129,9 @@ DataRowGroup.propTypes = {
   entries: PropTypes.array.isRequired
 };
 
-const HeaderRow = ({ title, years }) => (
-  <tr>
-    <td className="bold" headers="summary-budget-null1 summary-budget-null2">
-      {title}
-    </td>
-    {[...years, 'total'].map(yr => (
-      <Fragment key={yr}>
-        <td headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-total`} />
-        <td
-          headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-federal`}
-        />
-        <td headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-state`} />
-      </Fragment>
-    ))}
-  </tr>
-);
-
-HeaderRow.propTypes = {
-  title: PropTypes.string.isRequired,
-  years: PropTypes.array.isRequired
-};
-
 const BudgetSummary = ({ activities, data, years }) => (
   <div className="overflow-x">
+    <h3 className="ds-h3">HIT activities</h3>
     <table className="table-cms">
       <thead>
         <tr>
@@ -185,18 +164,89 @@ const BudgetSummary = ({ activities, data, years }) => (
           ))}
         </tr>
       </thead>
-      <tbody className="bg-blue-light">
-        <HeaderRow title="HIT activities" years={years} />
+      <tbody>
         <DataRowGroup data={data.hit} entries={activities.hit} />
       </tbody>
-      <tbody className="bg-yellow-light">
-        <HeaderRow title="HIE activities" years={years} />
+    </table>
+
+    <h3 className="ds-h3">HIE activities</h3>
+    <table className="table-cms">
+      <thead>
+        <tr>
+          <th id="summary-budget-null1" />
+          {[...years, 'total'].map(yr => (
+            <th
+              key={yr}
+              className="center"
+              colSpan="3"
+              id={`summary-budget-fy-${yr}`}
+            >
+              FFY {yr}
+            </th>
+          ))}
+        </tr>
+        <tr>
+          <th id="summary-budget-null2" />
+          {[...years, 'total'].map(y => (
+            <Fragment key={y}>
+              <th className="right-align" id={`summary-budget-fy-${y}-total`}>
+                Medicaid total
+              </th>
+              <th className="right-align" id={`summary-budget-fy-${y}-federal`}>
+                Federal
+              </th>
+              <th className="right-align" id={`summary-budget-fy-${y}-state`}>
+                State
+              </th>
+            </Fragment>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
         <DataRowGroup data={data.hie} entries={activities.hie} />
       </tbody>
-      <tbody className="bg-green-light">
-        <HeaderRow title="MMIS activities" years={years} />
+    </table>
+
+    <h3 className="ds-h3">MMIS activities</h3>
+    <table className="table-cms">
+      <thead>
+        <tr>
+          <th id="summary-budget-null1" />
+          {[...years, 'total'].map(yr => (
+            <th
+              key={yr}
+              className="center"
+              colSpan="3"
+              id={`summary-budget-fy-${yr}`}
+            >
+              FFY {yr}
+            </th>
+          ))}
+        </tr>
+        <tr>
+          <th id="summary-budget-null2" />
+          {[...years, 'total'].map(y => (
+            <Fragment key={y}>
+              <th className="right-align" id={`summary-budget-fy-${y}-total`}>
+                Medicaid total
+              </th>
+              <th className="right-align" id={`summary-budget-fy-${y}-federal`}>
+                Federal
+              </th>
+              <th className="right-align" id={`summary-budget-fy-${y}-state`}>
+                State
+              </th>
+            </Fragment>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
         <DataRowGroup data={data.mmis} entries={activities.mmis} />
       </tbody>
+    </table>
+
+    <h3 className="ds-h3">Project totals</h3>
+    <table className="table-cms">
       <tbody>
         <tr className="bold">
           <td headers="summary-budget-null1 summary-budget-null2">
@@ -229,6 +279,7 @@ const BudgetSummary = ({ activities, data, years }) => (
           })}
         </tr>
       </tbody>
+
     </table>
   </div>
 );
@@ -252,6 +303,5 @@ export {
   mapStateToProps,
   DataRow,
   DataRowDetails,
-  DataRowGroup,
-  HeaderRow
+  DataRowGroup
 };
