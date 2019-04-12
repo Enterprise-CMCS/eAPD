@@ -59,7 +59,7 @@ exports[`apd state profile, Medicaid office component main component renders cor
     }
   />
   <Button
-    className="ds-u-margin-top--2"
+    className="ds-u-margin-top--2 visibility--screen"
     onClick={[Function]}
     type="button"
   >
