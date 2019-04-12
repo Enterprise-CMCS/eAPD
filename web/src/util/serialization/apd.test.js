@@ -38,6 +38,15 @@ describe('APD serializer', () => {
         ],
         keyPersonnel: [
           {
+            email: 'alice@thebuilder.net',
+            hasCosts: false,
+            isPrimary: true,
+            name: 'Alice the Architect',
+            percentTime: 0.21,
+            position: 'Architect',
+            costs: []
+          },
+          {
             email: 'bob@thebuilder.net',
             hasCosts: true,
             isPrimary: false,
@@ -88,10 +97,22 @@ describe('APD serializer', () => {
         },
         keyPersonnel: [
           {
+            email: 'alice@thebuilder.net',
+            expanded: true,
+            hasCosts: false,
+            isPrimary: true,
+            key: expect.stringMatching(/^[a-f0-9]{8}$/),
+            name: 'Alice the Architect',
+            percentTime: 21,
+            position: 'Architect',
+            costs: {}
+          },
+          {
             email: 'bob@thebuilder.net',
+            expanded: false,
             hasCosts: true,
             isPrimary: false,
-            key: expect.stringMatching(/[0-9a-f]{6}/),
+            key: expect.stringMatching(/^[a-f0-9]{8}$/),
             name: 'Bob the Builder',
             percentTime: 37,
             position: 'Builder',
@@ -135,6 +156,7 @@ describe('APD serializer', () => {
         keyPersonnel: [
           {
             email: 'bob@thebuilder.net',
+            expanded: false,
             hasCosts: true,
             isPrimary: false,
             name: 'Bob the Builder',
@@ -204,6 +226,7 @@ describe('APD serializer', () => {
         keyPersonnel: [
           {
             email: 'bob@thebuilder.net',
+            expanded: false,
             hasCosts: true,
             isPrimary: false,
             name: 'Bob the Builder',

@@ -153,6 +153,7 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
     incentivePayments: incentivePaymentsSerializer.fromAPI(incentivePayments),
     keyPersonnel: keyPersonnel.map(p => ({
       ...p,
+      expanded: p.isPrimary,
       percentTime: p.percentTime * 100,
       costs: p.costs.reduce(
         (costs, { year, cost }) => ({ ...costs, [year]: +cost }),
