@@ -88,19 +88,19 @@ const BudgetSummary = ({ activities, data, years }) => (
         <tr>
           <th
             key={yr}
-            className="center"
+            className="ds-u-font-weight--bold"
             id={`summary-budget-fy-${yr}`}
           >
             FFY {yr}
           </th>
 
-          <th className="right-align" id={`summary-budget-fy-${yr}-total`}>
+          <th className="ds-u-text-align--center" id={`summary-budget-fy-${yr}-total`}>
             Medicaid total
           </th>
-          <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
+          <th className="ds-u-text-align--center" id={`summary-budget-fy-${yr}-federal`}>
             Federal total
           </th>
-          <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
+          <th className="ds-u-text-align--center" id={`summary-budget-fy-${yr}-state`}>
             State total
           </th>
         </tr>
@@ -119,18 +119,18 @@ const BudgetSummary = ({ activities, data, years }) => (
         <tr>
           <th
             key={yr}
-            className="center"
+            className="ds-u-font-weight--bold"
             id={`summary-budget-fy-${yr}`}
           >
             FFY {yr}
           </th>
-          <th className="right-align" id={`summary-budget-fy-${yr}-total`}>
+          <th className="ds-u-text-align--center" id={`summary-budget-fy-${yr}-total`}>
             Medicaid total
           </th>
-          <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
+          <th className="ds-u-text-align--center" id={`summary-budget-fy-${yr}-federal`}>
             Federal total
           </th>
-          <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
+          <th className="ds-u-text-align--center" id={`summary-budget-fy-${yr}-state`}>
             State total
           </th>
         </tr>
@@ -148,18 +148,18 @@ const BudgetSummary = ({ activities, data, years }) => (
         <tr>
           <th
             key={yr}
-            className="center"
+            className="ds-u-font-weight--bold"
             id={`summary-budget-fy-${yr}`}
           >
             FFY {yr}
           </th>
-          <th className="right-align" id={`summary-budget-fy-${yr}-total`}>
+          <th className="ds-u-text-align--center" id={`summary-budget-fy-${yr}-total`}>
             Medicaid total
           </th>
-          <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
+          <th className="ds-u-text-align--center" id={`summary-budget-fy-${yr}-federal`}>
             Federal total
           </th>
-          <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
+          <th className="ds-u-text-align--center" id={`summary-budget-fy-${yr}-state`}>
             State total
           </th>
         </tr>
@@ -175,13 +175,13 @@ const BudgetSummary = ({ activities, data, years }) => (
       <thead>
         <tr>
           <th id="summary-budget-null1" />
-          <th className="right-align" id="summary-budget-total-medicaid">
+          <th className="ds-u-text-align--center" id="summary-budget-total-medicaid">
             Medicaid total
           </th>
-          <th className="right-align" id="summary-budget-total-federal">
+          <th className="ds-u-text-align--center" id="summary-budget-total-federal">
             Federal total
           </th>
-          <th className="right-align" id="summary-budget-total-state">
+          <th className="ds-u-text-align--center" id="summary-budget-total-state">
             State total
           </th>
         </tr>
