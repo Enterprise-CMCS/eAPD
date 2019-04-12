@@ -43,7 +43,7 @@ keyPersonnel:
     email: Email
     percentTime: Percent commitment to program
     primary: 'This person is the primary APD point of contact:'
-    hasCosts: 'This person has costs directly attributable to the program:'
+    hasCosts: Does this person have costs directly attributable to this project?
     addButton:
       zero: Add key personnel
       one: Add another person
