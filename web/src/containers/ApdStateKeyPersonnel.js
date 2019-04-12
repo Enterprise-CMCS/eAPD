@@ -57,7 +57,10 @@ class ApdStateKeyPersonnel extends Component {
             years={years}
           />
         ))}
-        <Button className="ds-u-margin-top--2" onClick={addPerson}>
+        <Button
+          className="ds-u-margin-top--2 visibility--screen"
+          onClick={addPerson}
+        >
           Add another person
         </Button>
       </div>
