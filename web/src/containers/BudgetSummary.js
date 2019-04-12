@@ -98,10 +98,10 @@ const BudgetSummary = ({ activities, data, years }) => (
             Medicaid total
           </th>
           <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
-            Federal
+            Federal total
           </th>
           <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
-            State
+            State total
           </th>
         </tr>
       </thead>
@@ -128,10 +128,10 @@ const BudgetSummary = ({ activities, data, years }) => (
             Medicaid total
           </th>
           <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
-            Federal
+            Federal total
           </th>
           <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
-            State
+            State total
           </th>
         </tr>
       </thead>
@@ -157,10 +157,10 @@ const BudgetSummary = ({ activities, data, years }) => (
             Medicaid total
           </th>
           <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
-            Federal
+            Federal total
           </th>
           <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
-            State
+            State total
           </th>
         </tr>
       </thead>
@@ -170,40 +170,56 @@ const BudgetSummary = ({ activities, data, years }) => (
     </table>
     ))}
 
-    <h3 className="ds-h3">Project totals</h3>
+    <h3 className="ds-h3">Project activities totals</h3>
     <table className="table-cms">
-      <tbody>
-        <tr className="bold">
-          <td headers="summary-budget-null1 summary-budget-null2">
-            Project total
-          </td>
-          {Object.keys(data.combined).map(ffy => {
-            const combined = data.combined[ffy];
-            return (
-              <Fragment key={ffy}>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-total`}
-                >
-                  <Dollars>{combined.medicaid}</Dollars>
-                </td>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-federal`}
-                >
-                  <Dollars>{combined.federal}</Dollars>
-                </td>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-state`}
-                >
-                  <Dollars>{combined.state}</Dollars>
-                </td>
-              </Fragment>
-            );
-          })}
+    <Fragment>
+      <thead>
+        <tr>
+          <th id="summary-budget-null1" />
+          <th className="right-align" id="summary-budget-total-medicaid">
+            Medicaid total
+          </th>
+          <th className="right-align" id="summary-budget-total-federal">
+            Federal total
+          </th>
+          <th className="right-align" id="summary-budget-total-state">
+            State total
+          </th>
         </tr>
+      </thead>
+      <tbody>
+      {Object.keys(data.combined).map(ffy => {
+        const combined = data.combined[ffy];
+        return (
+          <tr>
+            <td
+              headers="summary-budget-null1"
+            >
+              FFY {ffy}
+            </td>
+            <td
+              className="mono right-align"
+              headers="summary-budget-total-medicaid"
+            >
+              <Dollars>{combined.medicaid}</Dollars>
+            </td>
+            <td
+              className="mono right-align"
+              headers="summary-budget-total-federal"
+            >
+              <Dollars>{combined.federal}</Dollars>
+            </td>
+            <td
+              className="mono right-align"
+              headers="summary-budget-total-state"
+            >
+              <Dollars>{combined.state}</Dollars>
+            </td>
+          </tr>
+        );
+      })}
       </tbody>
+    </Fragment>
     </table>
   </div>
 );
