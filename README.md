@@ -74,7 +74,9 @@ log into the app.
 
 You should now be able to open the app at
 [http://localhost:8080](http://localhost:8080). You can log in with username
-`em@il.com` and password `password`.
+`em@il.com` and password `password` to view a state account, complete with
+a filled-in APD. There is also an admin account with username `admin` and
+password `password`.
 
 You can also view the component Storybook at
 [http://localhost:8082](http://localhost:8082)
@@ -159,7 +161,9 @@ That starts up a special server that will build and serve the web application.
 
 You should now be able to open the app at
 [http://localhost:8080](http://localhost:8080). You can log in with username
-`em@il.com` and password `password`.
+`em@il.com` and password `password` to view a state account, complete with
+a filled-in APD. There is also an admin account with username `admin` and
+password `password`.
 
 The server should now be running at http://localhost:8000/
 
