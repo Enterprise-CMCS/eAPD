@@ -23,9 +23,9 @@ class DataRow extends Component {
     return (
       <Fragment>
         <tr>
-          <td headers="summary-budget-null1 summary-budget-null2">
+          <th headers="summary-budget-null1 summary-budget-null2">
             {title}
-          </td>
+          </th>
             <Fragment key={year}>
               <td
                 className="mono right-align"
@@ -172,7 +172,6 @@ const BudgetSummary = ({ activities, data, years }) => (
 
     <h3 className="ds-h3">Project activities totals</h3>
     <table className="table-cms">
-    <Fragment>
       <thead>
         <tr>
           <th id="summary-budget-null1" />
@@ -192,11 +191,11 @@ const BudgetSummary = ({ activities, data, years }) => (
         const combined = data.combined[ffy];
         return (
           <tr>
-            <td
+            <th
               headers="summary-budget-null1"
             >
               FFY {ffy}
-            </td>
+            </th>
             <td
               className="mono right-align"
               headers="summary-budget-total-medicaid"
@@ -219,7 +218,6 @@ const BudgetSummary = ({ activities, data, years }) => (
         );
       })}
       </tbody>
-    </Fragment>
     </table>
   </div>
 );
