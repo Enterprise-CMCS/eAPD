@@ -2,9 +2,9 @@
 
 .table-cms {
   font-size: 12px;
-  th,
-  .col-header {
+  th {
     background-color: $color-primary-alt-light;
+    font-weight: normal;
   }
   td {
     background-color: $color-primary-alt-lightest;
