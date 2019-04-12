@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Dollars from '../components/Dollars';
@@ -12,51 +12,44 @@ const categoryLookup = {
   combined: 'Subtotal'
 };
 
-const formatActivityName = a => `Activity ${a.name ? a.name : `#${a.id}`}`;
-const formatYear = yr => (yr === 'total' ? 'All Years' : `${yr} Total`);
+function DataRow(props) {
+  const {  data, title, year } = props;
 
-class DataRow extends Component {
-
-  render() {
-    const { category, data, entries, title, year } = this.props;
-
-    return (
-      <Fragment>
-        <tr>
-          <th headers="summary-budget-null1 summary-budget-null2">
-            {title}
-          </th>
-            <Fragment key={year}>
-              <td
-                className="font-family--mono right-align"
-                headers={`summary-budget-fy-${year} summary-budget-fy-${year}-total`}
-              >
-                <Dollars>{data.medicaid}</Dollars>
-              </td>
-              <td
-                className="font-family--mono right-align"
-                headers={`summary-budget-fy-${year} summary-budget-fy-${year}-federal`}
-              >
-                <Dollars>{data.federal}</Dollars>
-              </td>
-              <td
-                className="font-family--mono right-align"
-                headers={`summary-budget-fy-${year} summary-budget-fy-${year}-state`}
-              >
-                <Dollars>{data.state}</Dollars>
-              </td>
-            </Fragment>
-        </tr>
-      </Fragment>
-    );
-  }
+  return (
+    <Fragment>
+      <tr>
+        <th headers="summary-budget-null1 summary-budget-null2">
+          {title}
+        </th>
+          <Fragment key={year}>
+            <td
+              className="font-family--mono right-align"
+              headers={`summary-budget-fy-${year} summary-budget-fy-${year}-total`}
+            >
+              <Dollars>{data.medicaid}</Dollars>
+            </td>
+            <td
+              className="font-family--mono right-align"
+              headers={`summary-budget-fy-${year} summary-budget-fy-${year}-federal`}
+            >
+              <Dollars>{data.federal}</Dollars>
+            </td>
+            <td
+              className="font-family--mono right-align"
+              headers={`summary-budget-fy-${year} summary-budget-fy-${year}-state`}
+            >
+              <Dollars>{data.state}</Dollars>
+            </td>
+          </Fragment>
+      </tr>
+    </Fragment>
+  );
 }
 
 DataRow.propTypes = {
-  category: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
-  entries: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  year: PropTypes.string.isRequired
 };
 
 const DataRowGroup = ({ data, entries, year }) => (
@@ -76,7 +69,8 @@ const DataRowGroup = ({ data, entries, year }) => (
 
 DataRowGroup.propTypes = {
   data: PropTypes.object.isRequired,
-  entries: PropTypes.array.isRequired
+  entries: PropTypes.array.isRequired,
+  year: PropTypes.string.isRequired
 };
 
 const BudgetSummary = ({ activities, data, years }) => (
