@@ -28,19 +28,19 @@ class DataRow extends Component {
           </th>
             <Fragment key={year}>
               <td
-                className="mono right-align"
+                className="font-family--mono right-align"
                 headers={`summary-budget-fy-${year} summary-budget-fy-${year}-total`}
               >
                 <Dollars>{data.medicaid}</Dollars>
               </td>
               <td
-                className="mono right-align"
+                className="font-family--mono right-align"
                 headers={`summary-budget-fy-${year} summary-budget-fy-${year}-federal`}
               >
                 <Dollars>{data.federal}</Dollars>
               </td>
               <td
-                className="mono right-align"
+                className="font-family--mono right-align"
                 headers={`summary-budget-fy-${year} summary-budget-fy-${year}-state`}
               >
                 <Dollars>{data.state}</Dollars>
@@ -197,19 +197,19 @@ const BudgetSummary = ({ activities, data, years }) => (
               FFY {ffy}
             </th>
             <td
-              className="mono right-align"
+              className="font-family--mono right-align"
               headers="summary-budget-total-medicaid"
             >
               <Dollars>{combined.medicaid}</Dollars>
             </td>
             <td
-              className="mono right-align"
+              className="font-family--mono right-align"
               headers="summary-budget-total-federal"
             >
               <Dollars>{combined.federal}</Dollars>
             </td>
             <td
-              className="mono right-align"
+              className="font-family--mono right-align"
               headers="summary-budget-total-state"
             >
               <Dollars>{combined.state}</Dollars>
