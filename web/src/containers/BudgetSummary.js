@@ -19,7 +19,6 @@ class DataRow extends Component {
 
   render() {
     const { category, data, entries, title, year } = this.props;
-    const val = data[year];
 
     return (
       <Fragment>
@@ -32,19 +31,19 @@ class DataRow extends Component {
                 className="mono right-align"
                 headers={`summary-budget-fy-${year} summary-budget-fy-${year}-total`}
               >
-                <Dollars>{val.medicaid}</Dollars>
+                <Dollars>{data.medicaid}</Dollars>
               </td>
               <td
                 className="mono right-align"
                 headers={`summary-budget-fy-${year} summary-budget-fy-${year}-federal`}
               >
-                <Dollars>{val.federal}</Dollars>
+                <Dollars>{data.federal}</Dollars>
               </td>
               <td
                 className="mono right-align"
                 headers={`summary-budget-fy-${year} summary-budget-fy-${year}-state`}
               >
-                <Dollars>{val.state}</Dollars>
+                <Dollars>{data.state}</Dollars>
               </td>
             </Fragment>
         </tr>
@@ -66,7 +65,7 @@ const DataRowGroup = ({ data, entries, year }) => (
       <DataRow
         key={key}
         category={key}
-        data={data[key]}
+        data={data[key][year]}
         entries={entries}
         title={categoryLookup[key]}
         year={year}
@@ -87,26 +86,23 @@ const BudgetSummary = ({ activities, data, years }) => (
     <table className="table-cms">
       <thead>
         <tr>
-          <Fragment key={yr}>
-            <th
-              key={yr}
-              className="center"
-              colSpan="3"
-              id={`summary-budget-fy-${yr}`}
-            >
-              FFY {yr}
-            </th>
+          <th
+            key={yr}
+            className="center"
+            id={`summary-budget-fy-${yr}`}
+          >
+            FFY {yr}
+          </th>
 
-            <th className="right-align" id={`summary-budget-fy-${yr}-total`}>
-              Medicaid total
-            </th>
-            <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
-              Federal
-            </th>
-            <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
-              State
-            </th>
-          </Fragment>
+          <th className="right-align" id={`summary-budget-fy-${yr}-total`}>
+            Medicaid total
+          </th>
+          <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
+            Federal
+          </th>
+          <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
+            State
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -115,81 +111,64 @@ const BudgetSummary = ({ activities, data, years }) => (
     </table>
     ))}
 
+
     <h3 className="ds-h3">HIE activities</h3>
+    {[...years, 'total'].map(yr => (
     <table className="table-cms">
       <thead>
         <tr>
-          <th id="summary-budget-null1" />
-          {[...years, 'total'].map(yr => (
-            <th
-              key={yr}
-              className="center"
-              colSpan="3"
-              id={`summary-budget-fy-${yr}`}
-            >
-              FFY {yr}
-            </th>
-          ))}
-        </tr>
-        <tr>
-          <th id="summary-budget-null2" />
-          {[...years, 'total'].map(y => (
-            <Fragment key={y}>
-              <th className="right-align" id={`summary-budget-fy-${y}-total`}>
-                Medicaid total
-              </th>
-              <th className="right-align" id={`summary-budget-fy-${y}-federal`}>
-                Federal
-              </th>
-              <th className="right-align" id={`summary-budget-fy-${y}-state`}>
-                State
-              </th>
-            </Fragment>
-          ))}
+          <th
+            key={yr}
+            className="center"
+            id={`summary-budget-fy-${yr}`}
+          >
+            FFY {yr}
+          </th>
+          <th className="right-align" id={`summary-budget-fy-${yr}-total`}>
+            Medicaid total
+          </th>
+          <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
+            Federal
+          </th>
+          <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
+            State
+          </th>
         </tr>
       </thead>
       <tbody>
-        <DataRowGroup data={data.hie} entries={activities.hie} />
+        <DataRowGroup data={data.hie} entries={activities.hie} year={yr} />
       </tbody>
     </table>
+    ))}
 
     <h3 className="ds-h3">MMIS activities</h3>
+    {[...years, 'total'].map(yr => (
     <table className="table-cms">
       <thead>
         <tr>
-          <th id="summary-budget-null1" />
-          {[...years, 'total'].map(yr => (
-            <th
-              key={yr}
-              className="center"
-              colSpan="3"
-              id={`summary-budget-fy-${yr}`}
-            >
-              FFY {yr}
-            </th>
-          ))}
-        </tr>
-        <tr>
-          <th id="summary-budget-null2" />
-          {[...years, 'total'].map(y => (
-            <Fragment key={y}>
-              <th className="right-align" id={`summary-budget-fy-${y}-total`}>
-                Medicaid total
-              </th>
-              <th className="right-align" id={`summary-budget-fy-${y}-federal`}>
-                Federal
-              </th>
-              <th className="right-align" id={`summary-budget-fy-${y}-state`}>
-                State
-              </th>
-            </Fragment>
-          ))}
+          <th
+            key={yr}
+            className="center"
+            id={`summary-budget-fy-${yr}`}
+          >
+            FFY {yr}
+          </th>
+          <th className="right-align" id={`summary-budget-fy-${yr}-total`}>
+            Medicaid total
+          </th>
+          <th className="right-align" id={`summary-budget-fy-${yr}-federal`}>
+            Federal
+          </th>
+          <th className="right-align" id={`summary-budget-fy-${yr}-state`}>
+            State
+          </th>
         </tr>
       </thead>
       <tbody>
-        <DataRowGroup data={data.mmis} entries={activities.mmis} />
+        <DataRowGroup data={data.mmis} entries={activities.mmis} year={yr} />
       </tbody>
     </table>
+    ))}
 
     <h3 className="ds-h3">Project totals</h3>
     <table className="table-cms">
