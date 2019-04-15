@@ -15,6 +15,10 @@ import { selectApdOnLoad } from '../actions/apd';
 import StateProfile from '../components/ApdStateProfile';
 import ProposedBudget from '../components/ProposedBudget';
 
+import { getIsAnAPDSelected } from '../reducers/apd';
+import { getIsDirty } from '../reducers/dirty';
+import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user';
+
 const unsavedPrompt =
   'You have unsaved changes to your APD. Do you want to leave this page without saving?';
 
@@ -44,9 +48,14 @@ class ApdApplication extends Component {
     const {
       apdSelected,
       dirty,
+      isAdmin,
       place,
       selectApdOnLoad: dispatchSelectApdOnLoad
     } = this.props;
+
+    if (isAdmin) {
+      return <Redirect to="/" />;
+    }
 
     if (!apdSelected) {
       dispatchSelectApdOnLoad('/apd');
@@ -89,20 +98,16 @@ class ApdApplication extends Component {
 ApdApplication.propTypes = {
   apdSelected: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
   selectApdOnLoad: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({
-  apd: { data },
-  dirty: { dirty },
-  user: {
-    data: { state }
-  }
-}) => ({
-  apdSelected: !!data.id,
-  dirty,
-  place: state
+const mapStateToProps = state => ({
+  apdSelected: getIsAnAPDSelected(state),
+  dirty: getIsDirty(state),
+  isAdmin: getIsAdmin(state),
+  place: getUserStateOrTerritory(state)
 });
 
 const mapDispatchToProps = { selectApdOnLoad };

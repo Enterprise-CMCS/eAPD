@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 
 import { notify } from './notification';
+import { getIsAdmin } from '../reducers/user';
 import axios from '../util/api';
 import { fromAPI, toAPI } from '../util/serialization/apd';
 
@@ -33,7 +34,12 @@ export const WITHDRAW_APD_SUCCESS = Symbol('withdraw apd success');
 export const WITHDRAW_APD_FAILURE = Symbol('withdraw apd failure');
 
 export const SET_SELECT_APD_ON_LOAD = 'SET_SELECT_APD_ON_LOAD';
-export const selectApdOnLoad = () => ({ type: SET_SELECT_APD_ON_LOAD });
+export const selectApdOnLoad = () => (dispatch, getState) => {
+  const isAdmin = getIsAdmin(getState());
+  if (!isAdmin) {
+    dispatch({ type: SET_SELECT_APD_ON_LOAD });
+  }
+};
 
 export const addKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
 export const removeKeyPerson = index => ({

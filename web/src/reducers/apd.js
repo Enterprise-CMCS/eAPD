@@ -27,6 +27,12 @@ export const getKeyPersonnel = () => ({
   key: generateKey()
 });
 
+export const getIsAnAPDSelected = ({
+  apd: {
+    data: { id }
+  }
+}) => !!id;
+
 const initialState = {
   data: {},
   byId: {},
