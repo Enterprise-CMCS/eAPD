@@ -60,10 +60,24 @@ describe('apd actions', () => {
     expect(actions.saveFailure()).toEqual({ type: actions.SAVE_APD_FAILURE });
   });
 
-  it('selectApdOnLoad should create SET_SELECT_APD_ON_LOAD action', () => {
-    expect(actions.selectApdOnLoad()).toEqual({
-      type: actions.SET_SELECT_APD_ON_LOAD
-    });
+  it('selectApdOnLoad should create SET_SELECT_APD_ON_LOAD action if user is not an admin', async () => {
+    const store = mockStore({ user: { data: { role: 'not an admin' } } });
+
+    await store.dispatch(actions.selectApdOnLoad());
+
+    expect(store.getActions()).toEqual([
+      {
+        type: actions.SET_SELECT_APD_ON_LOAD
+      }
+    ]);
+  });
+
+  it('selectApdOnLoad should do nothing if user is an admin', async () => {
+    const store = mockStore({ user: { data: { role: 'admin' } } });
+
+    await store.dispatch(actions.selectApdOnLoad());
+
+    expect(store.getActions()).toEqual([]);
   });
 
   it('selectAPD should create SELECT_APD action, redirect to /apd, and saves APD ID to local storage', async () => {

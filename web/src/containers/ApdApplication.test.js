@@ -16,6 +16,7 @@ describe('apd (application) component', () => {
         <ApdApplication
           apdSelected
           dirty
+          isAdmin={false}
           place={{}}
           selectApdOnLoad={() => {}}
         />
@@ -28,12 +29,27 @@ describe('apd (application) component', () => {
         <ApdApplication
           apdSelected={false}
           dirty={false}
+          isAdmin={false}
           place={{}}
           selectApdOnLoad={selectApdOnLoadProp}
         />
       )
     ).toMatchSnapshot();
     expect(selectApdOnLoadProp.calledWith('/apd')).toBeTruthy();
+
+    selectApdOnLoadProp.resetHistory();
+    expect(
+      shallow(
+        <ApdApplication
+          apdSelected={false}
+          dirty={false}
+          isAdmin
+          place={{}}
+          selectApdOnLoad={selectApdOnLoadProp}
+        />
+      )
+    ).toMatchSnapshot();
+    expect(selectApdOnLoadProp.notCalled).toBeTruthy();
   });
 
   test('maps state to props', () => {
@@ -56,6 +72,7 @@ describe('apd (application) component', () => {
     expect(mapStateToProps(state)).toEqual({
       apdSelected: true,
       dirty: 'moop moop',
+      isAdmin: false,
       place: 'place'
     });
 
@@ -64,6 +81,7 @@ describe('apd (application) component', () => {
     expect(mapStateToProps(state)).toEqual({
       apdSelected: false,
       dirty: 'moop moop',
+      isAdmin: false,
       place: 'place'
     });
   });
