@@ -96,7 +96,9 @@ const PersonForm = ({
             ))}
             <div className="ds-l-col--auto">
               <FormLabel>Total</FormLabel>
-              <Dollars>{personTotalCost(person)}</Dollars>
+              <div className="form-value-input-aligned">
+                <Dollars>{personTotalCost(person)}</Dollars>
+              </div>
             </div>
           </div>
         }

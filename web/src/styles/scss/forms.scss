@@ -20,3 +20,7 @@ section > fieldset {
     margin-top: 0;
   }
 }
+
+div.form-value-input-aligned {
+  margin: ($spacer-half + $input-padding) 0;
+}
