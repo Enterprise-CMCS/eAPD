@@ -7,14 +7,11 @@ import { t } from '../i18n';
 
 const FUNDING_SOURCES = [['hitAndHie', 'HIT and HIE'], ['mmis', 'MMIS']];
 const QUARTERS = [1, 2, 3, 4];
-const COLORS = ['teal', 'green', 'yellow'];
 const EXPENSE_NAME_DISPLAY = {
   state: t('proposedBudget.quarterlyBudget.expenseNames.state'),
   contractors: t('proposedBudget.quarterlyBudget.expenseNames.contractor'),
   combined: t('proposedBudget.quarterlyBudget.expenseNames.combined')
 };
-
-const color = idx => `bg-${COLORS[idx] || 'gray'}`;
 
 const QuarterlyBudgetSummary = ({ budget, years }) => {
   // wait until budget is loaded
@@ -30,44 +27,20 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
             className="mb3 table-frozen-wrapper table-frozen-wide-header"
           >
             <h3 className="mt0">{sourceDisplay}</h3>
-            <div className="overflow-x table-frozen-scroller">
-              <table
-                className="table-cms table-frozen-left-pane"
-                aria-hidden="true"
-              >
-                <thead>
-                  <tr>
-                    <th className="table-frozen-null-cell">--</th>
-                  </tr>
-                  <tr>
-                    <th className="table-frozen-null-cell">--</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
-                    <tr
-                      key={name}
-                      className={`${name === 'combined' ? 'bold' : ''}`}
-                    >
-                      <td>{EXPENSE_NAME_DISPLAY[name]}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <table className="table-cms table-frozen-data">
+            <div className="overflow-x">
+              {years.map((year, i) => (
+              <table className="table-cms">
                 <thead>
                   <tr>
                     <th id={`quarterly-budget-summary-${source}-null1`} />
-                    {years.map((year, i) => (
                       <th
                         key={year}
-                        className={`center ${color(i)}`}
+                        className="center"
                         colSpan="5"
                         id={`quarterly-budget-summary-${source}-fy-${year}`}
                       >
                         {t('ffy', { year })}
                       </th>
-                    ))}
                     <th
                       className="center"
                       id={`quarterly-budget-summary-${source}-total`}
@@ -77,8 +50,6 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                   </tr>
                   <tr>
                     <th id={`quarterly-budget-summary-${source}-null2`} />
-                    {years.map((year, i) => (
-                      <Fragment key={year}>
                         {QUARTERS.map(q => (
                           <th
                             key={q}
@@ -89,15 +60,12 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                           </th>
                         ))}
                         <th
-                          className={`right-align ${color(i)}-light`}
+                          className="right-align"
                           id={`quarterly-budget-summary-${source}-fy-${year}-subtotal`}
                         >
                           {t('table.subtotal')}
                         </th>
-                      </Fragment>
-                    ))}
                     <th
-                      className="bg-gray-light"
                       id={`quarterly-budget-summary-${source}-total2`}
                     />
                   </tr>
@@ -113,12 +81,10 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                       >
                         {EXPENSE_NAME_DISPLAY[name]}
                       </td>
-                      {years.map((year, i) => (
-                        <Fragment key={year}>
                           {QUARTERS.map(q => (
                             <td
                               className={`mono right-align nowrap ${
-                                name === 'combined' ? `${color(i)}-light` : ''
+                                name === 'combined'
                               }`}
                               key={q}
                               headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-q${q}`}
@@ -127,17 +93,13 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                             </td>
                           ))}
                           <td
-                            className={`bold mono right-align nowrap ${color(
-                              i
-                            )}-light`}
+                            className="bold mono right-align nowrap"
                             headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-subtotal`}
                           >
                             <Dollars>{data[year].subtotal[name]}</Dollars>
                           </td>
-                        </Fragment>
-                      ))}
                       <td
-                        className="bold mono right-align nowrap bg-gray-light"
+                        className="bold mono right-align nowrap"
                         headers={`quarterly-budget-summary-${source}-total2 quarterly-budget-summary-${source}-total`}
                       >
                         <Dollars>{data.total[name]}</Dollars>
@@ -146,6 +108,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                   ))}
                 </tbody>
               </table>
+              ))}
             </div>
           </div>
         );
