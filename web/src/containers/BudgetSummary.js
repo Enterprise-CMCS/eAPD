@@ -203,5 +203,6 @@ export {
   BudgetSummary as plain,
   mapStateToProps,
   DataRow,
-  DataRowGroup
+  DataRowGroup,
+  HeaderRow
 };
