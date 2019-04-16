@@ -54,69 +54,63 @@ exports[`budget summary component data row group renders 1`] = `
 `;
 
 exports[`budget summary component data row renders with data 1`] = `
-<Fragment>
-  <tr>
-    <th
-      headers="summary-budget-null1 summary-budget-null2"
-    >
-      title text
-    </th>
-    <td
-      className="font-family--mono right-align"
-      headers="summary-budget-fy-undefined summary-budget-fy-undefined-total"
-    >
-      <Dollars />
-    </td>
-    <td
-      className="font-family--mono right-align"
-      headers="summary-budget-fy-undefined summary-budget-fy-undefined-federal"
-    >
-      <Dollars />
-    </td>
-    <td
-      className="font-family--mono right-align"
-      headers="summary-budget-fy-undefined summary-budget-fy-undefined-state"
-    >
-      <Dollars />
-    </td>
-  </tr>
-</Fragment>
+<tr>
+  <th
+    headers="summary-budget-null1 summary-budget-null2"
+  >
+    title text
+  </th>
+  <td
+    className="font-family--mono right-align"
+    headers="summary-budget-fy-undefined summary-budget-fy-undefined-total"
+  >
+    <Dollars />
+  </td>
+  <td
+    className="font-family--mono right-align"
+    headers="summary-budget-fy-undefined summary-budget-fy-undefined-federal"
+  >
+    <Dollars />
+  </td>
+  <td
+    className="font-family--mono right-align"
+    headers="summary-budget-fy-undefined summary-budget-fy-undefined-state"
+  >
+    <Dollars />
+  </td>
+</tr>
 `;
 
 exports[`budget summary component data row renders with no data 1`] = `
-<Fragment>
-  <tr>
-    <th
-      headers="summary-budget-null1 summary-budget-null2"
-    >
-      title text
-    </th>
-    <td
-      className="font-family--mono right-align"
-      headers="summary-budget-fy-undefined summary-budget-fy-undefined-total"
-    >
-      <Dollars />
-    </td>
-    <td
-      className="font-family--mono right-align"
-      headers="summary-budget-fy-undefined summary-budget-fy-undefined-federal"
-    >
-      <Dollars />
-    </td>
-    <td
-      className="font-family--mono right-align"
-      headers="summary-budget-fy-undefined summary-budget-fy-undefined-state"
-    >
-      <Dollars />
-    </td>
-  </tr>
-</Fragment>
+<tr>
+  <th
+    headers="summary-budget-null1 summary-budget-null2"
+  >
+    title text
+  </th>
+  <td
+    className="font-family--mono right-align"
+    headers="summary-budget-fy-undefined summary-budget-fy-undefined-total"
+  >
+    <Dollars />
+  </td>
+  <td
+    className="font-family--mono right-align"
+    headers="summary-budget-fy-undefined summary-budget-fy-undefined-federal"
+  >
+    <Dollars />
+  </td>
+  <td
+    className="font-family--mono right-align"
+    headers="summary-budget-fy-undefined summary-budget-fy-undefined-state"
+  >
+    <Dollars />
+  </td>
+</tr>
 `;
 
 exports[`budget summary component renders correctly 1`] = `
-<div
-  className="overflow-x"
->
+<Fragment>
   <h3
     className="ds-h3"
   >
@@ -126,34 +120,9 @@ exports[`budget summary component renders correctly 1`] = `
     className="table-cms"
   >
     <thead>
-      <tr>
-        <th
-          className="ds-u-font-weight--bold"
-          id="summary-budget-fy-1"
-          key="1"
-        >
-          FFY 
-          1
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-1-total"
-        >
-          Medicaid total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-1-federal"
-        >
-          Federal total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-1-state"
-        >
-          State total
-        </th>
-      </tr>
+      <HeaderRow
+        yr="1"
+      />
     </thead>
     <tbody>
       <DataRowGroup
@@ -171,34 +140,9 @@ exports[`budget summary component renders correctly 1`] = `
     className="table-cms"
   >
     <thead>
-      <tr>
-        <th
-          className="ds-u-font-weight--bold"
-          id="summary-budget-fy-2"
-          key="2"
-        >
-          FFY 
-          2
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-2-total"
-        >
-          Medicaid total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-2-federal"
-        >
-          Federal total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-2-state"
-        >
-          State total
-        </th>
-      </tr>
+      <HeaderRow
+        yr="2"
+      />
     </thead>
     <tbody>
       <DataRowGroup
@@ -216,34 +160,9 @@ exports[`budget summary component renders correctly 1`] = `
     className="table-cms"
   >
     <thead>
-      <tr>
-        <th
-          className="ds-u-font-weight--bold"
-          id="summary-budget-fy-total"
-          key="total"
-        >
-          FFY 
-          total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-total-total"
-        >
-          Medicaid total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-total-federal"
-        >
-          Federal total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-total-state"
-        >
-          State total
-        </th>
-      </tr>
+      <HeaderRow
+        yr="total"
+      />
     </thead>
     <tbody>
       <DataRowGroup
@@ -266,34 +185,9 @@ exports[`budget summary component renders correctly 1`] = `
     className="table-cms"
   >
     <thead>
-      <tr>
-        <th
-          className="ds-u-font-weight--bold"
-          id="summary-budget-fy-1"
-          key="1"
-        >
-          FFY 
-          1
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-1-total"
-        >
-          Medicaid total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-1-federal"
-        >
-          Federal total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-1-state"
-        >
-          State total
-        </th>
-      </tr>
+      <HeaderRow
+        yr="1"
+      />
     </thead>
     <tbody>
       <DataRowGroup
@@ -311,34 +205,9 @@ exports[`budget summary component renders correctly 1`] = `
     className="table-cms"
   >
     <thead>
-      <tr>
-        <th
-          className="ds-u-font-weight--bold"
-          id="summary-budget-fy-2"
-          key="2"
-        >
-          FFY 
-          2
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-2-total"
-        >
-          Medicaid total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-2-federal"
-        >
-          Federal total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-2-state"
-        >
-          State total
-        </th>
-      </tr>
+      <HeaderRow
+        yr="2"
+      />
     </thead>
     <tbody>
       <DataRowGroup
@@ -356,34 +225,9 @@ exports[`budget summary component renders correctly 1`] = `
     className="table-cms"
   >
     <thead>
-      <tr>
-        <th
-          className="ds-u-font-weight--bold"
-          id="summary-budget-fy-total"
-          key="total"
-        >
-          FFY 
-          total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-total-total"
-        >
-          Medicaid total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-total-federal"
-        >
-          Federal total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-total-state"
-        >
-          State total
-        </th>
-      </tr>
+      <HeaderRow
+        yr="total"
+      />
     </thead>
     <tbody>
       <DataRowGroup
@@ -406,34 +250,9 @@ exports[`budget summary component renders correctly 1`] = `
     className="table-cms"
   >
     <thead>
-      <tr>
-        <th
-          className="ds-u-font-weight--bold"
-          id="summary-budget-fy-1"
-          key="1"
-        >
-          FFY 
-          1
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-1-total"
-        >
-          Medicaid total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-1-federal"
-        >
-          Federal total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-1-state"
-        >
-          State total
-        </th>
-      </tr>
+      <HeaderRow
+        yr="1"
+      />
     </thead>
     <tbody>
       <DataRowGroup
@@ -451,34 +270,9 @@ exports[`budget summary component renders correctly 1`] = `
     className="table-cms"
   >
     <thead>
-      <tr>
-        <th
-          className="ds-u-font-weight--bold"
-          id="summary-budget-fy-2"
-          key="2"
-        >
-          FFY 
-          2
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-2-total"
-        >
-          Medicaid total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-2-federal"
-        >
-          Federal total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-2-state"
-        >
-          State total
-        </th>
-      </tr>
+      <HeaderRow
+        yr="2"
+      />
     </thead>
     <tbody>
       <DataRowGroup
@@ -496,34 +290,9 @@ exports[`budget summary component renders correctly 1`] = `
     className="table-cms"
   >
     <thead>
-      <tr>
-        <th
-          className="ds-u-font-weight--bold"
-          id="summary-budget-fy-total"
-          key="total"
-        >
-          FFY 
-          total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-total-total"
-        >
-          Medicaid total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-total-federal"
-        >
-          Federal total
-        </th>
-        <th
-          className="ds-u-text-align--center"
-          id="summary-budget-fy-total-state"
-        >
-          State total
-        </th>
-      </tr>
+      <HeaderRow
+        yr="total"
+      />
     </thead>
     <tbody>
       <DataRowGroup
@@ -637,5 +406,5 @@ exports[`budget summary component renders correctly 1`] = `
       </tr>
     </tbody>
   </table>
-</div>
+</Fragment>
 `;
