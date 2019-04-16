@@ -19,7 +19,6 @@ import {
   REMOVE_APD_KEY_PERSON,
   SAVE_APD_SUCCESS,
   SELECT_APD,
-  SET_KEY_PERSON_PRIMARY,
   UPDATE_APD
 } from '../actions/apd';
 
@@ -114,8 +113,7 @@ describe('dirty state reducer', () => {
   [
     ['adding a key person', ADD_APD_KEY_PERSON],
     ['removing an activity', REMOVE_ACTIVITY],
-    ['should handl removing a key person', REMOVE_APD_KEY_PERSON],
-    ['setting a primary key person', SET_KEY_PERSON_PRIMARY]
+    ['should handl removing a key person', REMOVE_APD_KEY_PERSON]
   ].forEach(([desc, action]) => {
     it(`should handle ${desc}`, () => {
       expect(dirty(initialState, { type: action })).toEqual({
