@@ -5,7 +5,8 @@ import {
   plain as BudgetSummary,
   mapStateToProps,
   DataRow,
-  DataRowGroup
+  DataRowGroup,
+  HeaderRow
 } from './BudgetSummary';
 
 describe('budget summary component', () => {
@@ -76,6 +77,12 @@ describe('budget summary component', () => {
           entries={[10, 20, 30]}
         />
       )
+    ).toMatchSnapshot();
+  });
+
+  test('header row renders', () => {
+    expect(
+      shallow(<HeaderRow yr={'1'} />)
     ).toMatchSnapshot();
   });
 

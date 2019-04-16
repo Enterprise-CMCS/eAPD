@@ -109,6 +109,37 @@ exports[`budget summary component data row renders with no data 1`] = `
 </tr>
 `;
 
+exports[`budget summary component header row renders 1`] = `
+<tr>
+  <th
+    className="ds-u-font-weight--bold"
+    id="summary-budget-fy-1"
+    key="1"
+  >
+    FFY 
+    1
+  </th>
+  <th
+    className="ds-u-text-align--center"
+    id="summary-budget-fy-1-total"
+  >
+    Medicaid total
+  </th>
+  <th
+    className="ds-u-text-align--center"
+    id="summary-budget-fy-1-federal"
+  >
+    Federal total
+  </th>
+  <th
+    className="ds-u-text-align--center"
+    id="summary-budget-fy-1-state"
+  >
+    State total
+  </th>
+</tr>
+`;
+
 exports[`budget summary component renders correctly 1`] = `
 <Fragment>
   <h3
