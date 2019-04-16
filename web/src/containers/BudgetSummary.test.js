@@ -40,7 +40,7 @@ describe('budget summary component', () => {
         <DataRow
           category="category text"
           data={{
-            total: { total: 0 }
+            total: { medicaid: 0, federal: 0, state: 0, total: 0 }
           }}
           entries={[]}
           title="title text"

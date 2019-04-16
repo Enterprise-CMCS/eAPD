@@ -359,19 +359,25 @@ exports[`budget summary component data row renders with no data 1`] = `
       className="mono right-align"
       headers="summary-budget-fy-total summary-budget-fy-total-total"
     >
-      <Dollars />
+      <Dollars>
+        0
+      </Dollars>
     </td>
     <td
       className="mono right-align"
       headers="summary-budget-fy-total summary-budget-fy-total-federal"
     >
-      <Dollars />
+      <Dollars>
+        0
+      </Dollars>
     </td>
     <td
       className="mono right-align"
       headers="summary-budget-fy-total summary-budget-fy-total-state"
     >
-      <Dollars />
+      <Dollars>
+        0
+      </Dollars>
     </td>
   </tr>
 </Fragment>
