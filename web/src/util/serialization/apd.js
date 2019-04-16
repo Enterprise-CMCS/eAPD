@@ -153,7 +153,14 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
     incentivePayments: incentivePaymentsSerializer.fromAPI(incentivePayments),
     keyPersonnel: keyPersonnel.map(p => ({
       ...p,
-      expanded: p.isPrimary,
+      // expand by default if the person is primary and their content is empty
+      expanded:
+        p.isPrimary &&
+        (!p.email &&
+          !p.hasCosts &&
+          !p.name &&
+          +p.percentTime === 0 &&
+          !p.position),
       percentTime: p.percentTime * 100,
       costs: p.costs.reduce(
         (costs, { year, cost }) => ({ ...costs, [year]: +cost }),
