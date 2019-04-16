@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`login component renders consent banner initially 1`] = `
+<ConsentBanner
+  onAgree={[Function]}
+/>
+`;
+
 exports[`login component renders correctly if logged in 1`] = `
 <Redirect
   push={false}
