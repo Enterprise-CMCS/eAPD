@@ -165,6 +165,7 @@ const getNewApd = async (stateID, { StateModel = defaultStateModel } = {}) => {
       }
     ],
     incentivePayments: getIncentivePayments(years),
+    keyPersonnel: [{ isPrimary: true }],
     narrativeHIE: '',
     narrativeHIT: '',
     narrativeMMIS: '',

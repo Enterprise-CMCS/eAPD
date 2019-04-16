@@ -1,464 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`apd state profile, Medicaid office component main component renders correctly 1`] = `
-<Fragment>
-  <CollapsibleList
-    content={[Function]}
-    deleteItem={[Function]}
-    getKey={[Function]}
-    header={[Function]}
-    items={
+<div
+  className="ds-u-border-top--2"
+>
+  <ApdStateKeyPerson
+    handleChange={[Function]}
+    handleYearChange={[Function]}
+    initialExpanded={false}
+    key="person1"
+    number={1}
+    person={
+      Object {
+        "costs": Object {
+          "1": 100,
+          "2": 200,
+        },
+        "hasCosts": true,
+        "key": "person1",
+        "name": "person name",
+        "position": "unobservable",
+      }
+    }
+    primary={true}
+    remove={[Function]}
+    years={
       Array [
-        Object {
-          "costs": Object {
-            "1": 100,
-            "2": 200,
-          },
-          "hasCosts": true,
-          "key": "person1",
-          "name": "person name",
-          "position": "unobservable",
-        },
-        Object {
-          "costs": Object {
-            "1": 0,
-            "2": 0,
-          },
-          "hasCosts": false,
-          "key": "person2",
-          "name": "",
-          "position": "",
-        },
+        "1",
+        "2",
       ]
     }
   />
-  <Btn
-    extraCss="visibility--screen"
-    kind="primary"
+  <ApdStateKeyPerson
+    handleChange={[Function]}
+    handleYearChange={[Function]}
+    initialExpanded={false}
+    key="person2"
+    number={2}
+    person={
+      Object {
+        "costs": Object {
+          "1": 0,
+          "2": 0,
+        },
+        "hasCosts": false,
+        "key": "person2",
+        "name": "",
+        "position": "",
+      }
+    }
+    primary={false}
+    remove={[Function]}
+    years={
+      Array [
+        "1",
+        "2",
+      ]
+    }
+  />
+  <Button
+    className="ds-u-margin-top--2 visibility--screen"
     onClick={[Function]}
-    size={null}
+    type="button"
   >
     Add another person
-  </Btn>
-</Fragment>
-`;
-
-exports[`apd state profile, Medicaid office component person form component renders properly 1`] = `
-<div
-  className="mt2 mb3"
->
-  <h3>
-    Contact #13
-  </h3>
-  <InputHolder
-    hideLabel={false}
-    label="Name"
-    name="apd-state-profile-pocname12"
-    onChange={[Function]}
-    type="text"
-    value="name"
-    wrapperClass=""
-  />
-  <InputHolder
-    hideLabel={false}
-    label="Email"
-    name="apd-state-profile-pocemail12"
-    onChange={[Function]}
-    type="text"
-    value="email"
-    wrapperClass=""
-  />
-  <InputHolder
-    hideLabel={false}
-    label="Role"
-    name="apd-state-profile-pocposition12"
-    onChange={[Function]}
-    type="text"
-    value="position"
-    wrapperClass=""
-  />
-  <InputHolder
-    hideLabel={false}
-    label="Percent commitment to program"
-    name="apd-state-profile-pocpercent12"
-    onChange={[Function]}
-    type="text"
-    value="30"
-    wrapperClass="inline-block"
-  />
-  <div
-    className="mt2"
-  >
-    This person is the primary APD point of contact:
-    <div
-      className="mt1 ml2"
-    >
-      <Btn
-        extraCss=""
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        Yes
-      </Btn>
-       
-      <Btn
-        extraCss="bg-black white"
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        No
-      </Btn>
-    </div>
-  </div>
-  <div
-    className="mt2"
-  >
-    This person has costs directly attributable to the program:
-    <div
-      className="mt1 ml2"
-    >
-      <Btn
-        extraCss="bg-black white"
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        Yes
-      </Btn>
-       
-      <Btn
-        extraCss=""
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        No
-      </Btn>
-    </div>
-  </div>
-  <div
-    className="mt2 flex col-8"
-  >
-    <div
-      className="col-3"
-      key="1"
-    >
-      <InputHolder
-        hideLabel={false}
-        label="1 Cost"
-        name="apd-state-profile-poc-cost-1"
-        onChange={[Function]}
-        type="text"
-        value={99}
-        wrapperClass="mr1"
-      />
-    </div>
-    <div
-      className="col-3"
-      key="2"
-    >
-      <InputHolder
-        hideLabel={false}
-        label="2 Cost"
-        name="apd-state-profile-poc-cost-2"
-        onChange={[Function]}
-        type="text"
-        value={100}
-        wrapperClass="mr1"
-      />
-    </div>
-    <div
-      className="col-3"
-    >
-      Total
-      <div>
-        <Dollars>
-          199
-        </Dollars>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`apd state profile, Medicaid office component person form component renders properly 2`] = `
-<div
-  className="mt2 mb3"
->
-  <h3>
-    Contact #13
-  </h3>
-  <InputHolder
-    hideLabel={false}
-    label="Name"
-    name="apd-state-profile-pocname12"
-    onChange={[Function]}
-    type="text"
-    value="name"
-    wrapperClass=""
-  />
-  <InputHolder
-    hideLabel={false}
-    label="Email"
-    name="apd-state-profile-pocemail12"
-    onChange={[Function]}
-    type="text"
-    value="email"
-    wrapperClass=""
-  />
-  <InputHolder
-    hideLabel={false}
-    label="Role"
-    name="apd-state-profile-pocposition12"
-    onChange={[Function]}
-    type="text"
-    value="position"
-    wrapperClass=""
-  />
-  <InputHolder
-    hideLabel={false}
-    label="Percent commitment to program"
-    name="apd-state-profile-pocpercent12"
-    onChange={[Function]}
-    type="text"
-    value="30"
-    wrapperClass="inline-block"
-  />
-  <div
-    className="mt2"
-  >
-    This person is the primary APD point of contact:
-    <div
-      className="mt1 ml2"
-    >
-      <Btn
-        extraCss=""
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        Yes
-      </Btn>
-       
-      <Btn
-        extraCss="bg-black white"
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        No
-      </Btn>
-    </div>
-  </div>
-  <div
-    className="mt2"
-  >
-    This person has costs directly attributable to the program:
-    <div
-      className="mt1 ml2"
-    >
-      <Btn
-        extraCss="bg-black white"
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        Yes
-      </Btn>
-       
-      <Btn
-        extraCss=""
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        No
-      </Btn>
-    </div>
-  </div>
-  <div
-    className="mt2 flex col-8"
-  >
-    <div
-      className="col-3"
-      key="1"
-    >
-      <InputHolder
-        hideLabel={false}
-        label="1 Cost"
-        name="apd-state-profile-poc-cost-1"
-        onChange={[Function]}
-        type="text"
-        value={99}
-        wrapperClass="mr1"
-      />
-    </div>
-    <div
-      className="col-3"
-      key="2"
-    >
-      <InputHolder
-        hideLabel={false}
-        label="2 Cost"
-        name="apd-state-profile-poc-cost-2"
-        onChange={[Function]}
-        type="text"
-        value={100}
-        wrapperClass="mr1"
-      />
-    </div>
-    <div
-      className="col-3"
-    >
-      Total
-      <div>
-        <Dollars>
-          199
-        </Dollars>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`apd state profile, Medicaid office component person form component renders properly 3`] = `
-<div
-  className="mt2 mb3"
->
-  <h3>
-    Contact #13
-  </h3>
-  <InputHolder
-    hideLabel={false}
-    label="Name"
-    name="apd-state-profile-pocname12"
-    onChange={[Function]}
-    type="text"
-    value="name"
-    wrapperClass=""
-  />
-  <InputHolder
-    hideLabel={false}
-    label="Email"
-    name="apd-state-profile-pocemail12"
-    onChange={[Function]}
-    type="text"
-    value="email"
-    wrapperClass=""
-  />
-  <InputHolder
-    hideLabel={false}
-    label="Role"
-    name="apd-state-profile-pocposition12"
-    onChange={[Function]}
-    type="text"
-    value="position"
-    wrapperClass=""
-  />
-  <InputHolder
-    hideLabel={false}
-    label="Percent commitment to program"
-    name="apd-state-profile-pocpercent12"
-    onChange={[Function]}
-    type="text"
-    value="30"
-    wrapperClass="inline-block"
-  />
-  <div
-    className="mt2"
-  >
-    This person is the primary APD point of contact:
-    <div
-      className="mt1 ml2"
-    >
-      <Btn
-        extraCss=""
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        Yes
-      </Btn>
-       
-      <Btn
-        extraCss="bg-black white"
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        No
-      </Btn>
-    </div>
-  </div>
-  <div
-    className="mt2"
-  >
-    This person has costs directly attributable to the program:
-    <div
-      className="mt1 ml2"
-    >
-      <Btn
-        extraCss="bg-black white"
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        Yes
-      </Btn>
-       
-      <Btn
-        extraCss=""
-        kind="outline"
-        onClick={[Function]}
-        size={null}
-      >
-        No
-      </Btn>
-    </div>
-  </div>
-  <div
-    className="mt2 flex col-8"
-  >
-    <div
-      className="col-3"
-      key="1"
-    >
-      <InputHolder
-        hideLabel={false}
-        label="1 Cost"
-        name="apd-state-profile-poc-cost-1"
-        onChange={[Function]}
-        type="text"
-        value={99}
-        wrapperClass="mr1"
-      />
-    </div>
-    <div
-      className="col-3"
-      key="2"
-    >
-      <InputHolder
-        hideLabel={false}
-        label="2 Cost"
-        name="apd-state-profile-poc-cost-2"
-        onChange={[Function]}
-        type="text"
-        value={100}
-        wrapperClass="mr1"
-      />
-    </div>
-    <div
-      className="col-3"
-    >
-      Total
-      <div>
-        <Dollars>
-          199
-        </Dollars>
-      </div>
-    </div>
-  </div>
+  </Button>
 </div>
 `;
