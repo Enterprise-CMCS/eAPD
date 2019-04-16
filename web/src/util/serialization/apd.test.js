@@ -98,7 +98,7 @@ describe('APD serializer', () => {
         keyPersonnel: [
           {
             email: 'alice@thebuilder.net',
-            expanded: true,
+            expanded: false,
             hasCosts: false,
             isPrimary: true,
             key: expect.stringMatching(/^[a-f0-9]{8}$/),
