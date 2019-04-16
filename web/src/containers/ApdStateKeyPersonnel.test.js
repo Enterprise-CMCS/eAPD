@@ -73,7 +73,6 @@ describe('apd state profile, Medicaid office component', () => {
         .first()
         .prop('handleChange')('field')({ target: { value: 'new value' } });
 
-      console.log(props.updateApd.args);
       expect(
         props.updateApd.calledWith({
           keyPersonnel: { 0: { field: 'new value' } }

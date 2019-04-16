@@ -29,7 +29,7 @@ const PersonForm = ({
   const toggleHasCosts = value => () => changeHasCosts({ target: { value } });
 
   return (
-    <div className="ds-u-border-bottom--2 ds-u-margin-y--2 ds-u-padding-bottom--2">
+    <div className="form--with-reviews">
       <h3 className="ds-h3">
         {primary ? 'Primary' : 'Additional'} APD Point of Contact
       </h3>
@@ -59,52 +59,49 @@ const PersonForm = ({
         onChange={handleChange('percentTime')}
       />
 
-      <FormLabel
-        label={t(`${tRoot}.labels.hasCosts`)}
-        id={`apd-state-profile-hascosts-label${number}`}
-      >
-        {t(`${tRoot}.labels.hasCosts`)}
-      </FormLabel>
-      <Choice
-        type="radio"
-        name={`apd-state-profile-hascosts-no${number}`}
-        value="no"
-        checked={!person.hasCosts}
-        onChange={toggleHasCosts(false)}
-      >
-        No
-      </Choice>
-      <Choice
-        type="radio"
-        name={`apd-state-profile-hascosts-yes${number}`}
-        value="yes"
-        checked={person.hasCosts}
-        onChange={toggleHasCosts(true)}
-        checkedChildren={
-          <div className="ds-c-choice__checkedChild ds-l-form-row">
-            {years.map(ffy => (
-              <div key={ffy} className="ds-l-col--auto">
-                <TextField
-                  name={`apd-state-profile-costs${number}-fy${ffy}`}
-                  label={`FFY ${ffy}`}
-                  size="small"
-                  mask="currency"
-                  value={person.costs[ffy]}
-                  onChange={handleYearChange(ffy)}
-                />
-              </div>
-            ))}
-            <div className="ds-l-col--auto">
-              <FormLabel>Total</FormLabel>
-              <div className="form-value-input-aligned">
-                <Dollars>{personTotalCost(person)}</Dollars>
+      <fieldset className="ds-c-fieldset">
+        <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
+        <Choice
+          type="radio"
+          name={`apd-state-profile-hascosts-no${number}`}
+          value="no"
+          checked={!person.hasCosts}
+          onChange={toggleHasCosts(false)}
+        >
+          No
+        </Choice>
+        <Choice
+          type="radio"
+          name={`apd-state-profile-hascosts-yes${number}`}
+          value="yes"
+          checked={person.hasCosts}
+          onChange={toggleHasCosts(true)}
+          checkedChildren={
+            <div className="ds-c-choice__checkedChild ds-l-form-row">
+              {years.map(ffy => (
+                <div key={ffy} className="ds-l-col--auto">
+                  <TextField
+                    name={`apd-state-profile-costs${number}-fy${ffy}`}
+                    label={`FFY ${ffy}`}
+                    size="small"
+                    mask="currency"
+                    value={person.costs[ffy]}
+                    onChange={handleYearChange(ffy)}
+                  />
+                </div>
+              ))}
+              <div className="ds-l-col--auto">
+                <FormLabel>Total</FormLabel>
+                <div className="form--computed-value__input-aligned">
+                  <Dollars>{personTotalCost(person)}</Dollars>
+                </div>
               </div>
             </div>
-          </div>
-        }
-      >
-        Yes
-      </Choice>
+          }
+        >
+          Yes
+        </Choice>
+      </fieldset>
       <Button
         variation="primary"
         className="ds-u-margin-top--4"
@@ -190,35 +187,33 @@ class ApdStateKeyPerson extends Component {
                 </div>
               }
             >
-              {person.position}
-              <br />
-              Total cost:{' '}
-              <Dollars>{person.hasCosts ? personTotalCost(person) : 0}</Dollars>
-              {primary ? (
-                <Fragment>
-                  <br />
-                  Primary APD Point of Contact
-                </Fragment>
-              ) : null}
+              <ul className="ds-c-list--bare">
+                <li>{person.position}</li>
+                <li>
+                  Total cost:{' '}
+                  <Dollars>
+                    {person.hasCosts ? personTotalCost(person) : 0}
+                  </Dollars>
+                </li>
+                {primary ? <li>Primary APD Point of Contact</li> : null}
+              </ul>
             </Review>
           )}
         </div>
         <div className="visibility--print">
           <Review heading={`${number}. ${person.name}`}>
-            {person.email}
-            <br />
-            {person.position}
-            <br />
-            Time commitment to project: {person.percentTime}%
-            <br />
-            Total cost:{' '}
-            <Dollars>{person.hasCosts ? personTotalCost(person) : 0}</Dollars>
-            {primary ? (
-              <Fragment>
-                <br />
-                Primary APD Point of Contact
-              </Fragment>
-            ) : null}
+            <ul className="ds-c-list--bare">
+              <li>{person.email}</li>
+              <li>{person.position}</li>
+              <li>Time commitment to project: {person.percentTime}%</li>
+              <li>
+                Total cost:{' '}
+                <Dollars>
+                  {person.hasCosts ? personTotalCost(person) : 0}
+                </Dollars>
+              </li>
+              {primary ? <li>Primary APD Point of Contact</li> : null}
+            </ul>
           </Review>
         </div>
       </Fragment>

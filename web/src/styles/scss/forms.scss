@@ -21,6 +21,15 @@ section > fieldset {
   }
 }
 
-div.form-value-input-aligned {
+div.form--with-reviews {
+  border-bottom: 2px solid $border-color;
+  margin-bottom: nth($spacers, 3);
+  margin-top: nth($spacers, 3);
+  padding-bottom: nth($spacers, 3);
+}
+
+/* for forms that display computed values, but those computed values should
+be aligned vertically with their input field comrades */
+div.form--computed-value__input-aligned {
   margin: ($spacer-half + $input-padding) 0;
 }
