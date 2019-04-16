@@ -82,7 +82,7 @@ describe('budget summary component', () => {
 
   test('header row renders', () => {
     expect(
-      shallow(<HeaderRow yr={'1'} />)
+      shallow(<HeaderRow yr='1' />)
     ).toMatchSnapshot();
   });
 
