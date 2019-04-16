@@ -18,102 +18,106 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
   if (!years.length) return null;
 
   return (
-    <div>
+    <Fragment>
       {FUNDING_SOURCES.map(([source, sourceDisplay]) => {
         const data = budget[source];
         return (
           <div
             key={source}
-            className="mb3 table-frozen-wrapper table-frozen-wide-header"
+            className="mb3"
           >
-            <h3 className="mt0">{sourceDisplay}</h3>
-            <div className="overflow-x">
-              {years.map((year, i) => (
-              <table className="table-cms">
-                <thead>
-                  <tr>
-                    <th id={`quarterly-budget-summary-${source}-null1`} />
-                      <th
-                        key={year}
-                        className="center"
-                        colSpan="5"
-                        id={`quarterly-budget-summary-${source}-fy-${year}`}
-                      >
-                        {t('ffy', { year })}
-                      </th>
+            <h3 className="ds-h3">{sourceDisplay}</h3>
+            {years.map((year, i) => (
+            <table className="table-cms">
+              <thead>
+                <tr>
+                  <th
+                    key={year}
+                    className="center"
+                    id={`quarterly-budget-summary-${source}-fy-${year}`}
+                  >
+                    {t('ffy', { year })}
+                  </th>
+                  {QUARTERS.map(q => (
                     <th
+                      key={q}
                       className="center"
-                      id={`quarterly-budget-summary-${source}-total`}
+                      id={`quarterly-budget-summary-${source}-fy-${year}-q${q}`}
                     >
-                      {t('table.total')}
+                      {t('table.quarter', { q })}
                     </th>
-                  </tr>
-                  <tr>
-                    <th id={`quarterly-budget-summary-${source}-null2`} />
-                        {QUARTERS.map(q => (
-                          <th
-                            key={q}
-                            className="center"
-                            id={`quarterly-budget-summary-${source}-fy-${year}-q${q}`}
-                          >
-                            {t('table.quarter', { q })}
-                          </th>
-                        ))}
-                        <th
-                          className="right-align"
-                          id={`quarterly-budget-summary-${source}-fy-${year}-subtotal`}
-                        >
-                          {t('table.subtotal')}
-                        </th>
-                    <th
-                      id={`quarterly-budget-summary-${source}-total2`}
-                    />
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
-                    <tr
-                      key={name}
-                      className={`${name === 'combined' ? 'bold' : ''}`}
-                    >
-                      <td
-                        headers={`quarterly-budget-summary-${source}-null1 quarterly-budget-summary-${source}-null2`}
-                      >
-                        {EXPENSE_NAME_DISPLAY[name]}
-                      </td>
-                          {QUARTERS.map(q => (
-                            <td
-                              className={`mono right-align nowrap ${
-                                name === 'combined'
-                              }`}
-                              key={q}
-                              headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-q${q}`}
-                            >
-                              <Dollars>{data[year][q][name]}</Dollars>
-                            </td>
-                          ))}
-                          <td
-                            className="bold mono right-align nowrap"
-                            headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-subtotal`}
-                          >
-                            <Dollars>{data[year].subtotal[name]}</Dollars>
-                          </td>
-                      <td
-                        className="bold mono right-align nowrap"
-                        headers={`quarterly-budget-summary-${source}-total2 quarterly-budget-summary-${source}-total`}
-                      >
-                        <Dollars>{data.total[name]}</Dollars>
-                      </td>
-                    </tr>
                   ))}
-                </tbody>
-              </table>
+                  <th
+                    className="right-align"
+                    id={`quarterly-budget-summary-${source}-fy-${year}-subtotal`}
+                  >
+                    {t('table.subtotal')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
+                  <tr
+                    key={name}
+                    className={`${name === 'combined' ? 'bold' : ''}`}
+                  >
+                    <td
+                      headers={`quarterly-budget-summary-${source}-null1 quarterly-budget-summary-${source}-null2`}
+                    >
+                      {EXPENSE_NAME_DISPLAY[name]}
+                    </td>
+                    {QUARTERS.map(q => (
+                      <td
+                        className={`mono right-align nowrap ${
+                          name === 'combined'
+                        }`}
+                        key={q}
+                        headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-q${q}`}
+                      >
+                        <Dollars>{data[year][q][name]}</Dollars>
+                      </td>
+                    ))}
+                    <td
+                      className="bold mono right-align nowrap"
+                      headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-subtotal`}
+                    >
+                      <Dollars>{data[year].subtotal[name]}</Dollars>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            ))}
+            <table className="table-cms">
+              <thead>
+                <tr>
+                  <th id={`quarterly-budget-summary-${source}-total`}>Total {sourceDisplay}</th>
+                  <th id={`quarterly-budget-summary-${source}-null1`}/>
+                </tr>
+              </thead>
+              <tbody>
+              {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
+                <tr>
+                  <td
+                    headers={`quarterly-budget-summary-${source}-total`}
+                  >
+                    {EXPENSE_NAME_DISPLAY[name]}
+                  </td>
+                  <td
+                    className="bold mono right-align nowrap"
+                    headers={`quarterly-budget-summary-${source}-total2 quarterly-budget-summary-${source}-total`}
+                  >
+                    <Dollars>{data.total[name]}</Dollars>
+                  </td>
+                </tr>
               ))}
-            </div>
+              </tbody>
+            </table>
           </div>
         );
+
       })}
-    </div>
+    </Fragment>
   );
 };
 
