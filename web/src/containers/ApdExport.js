@@ -21,7 +21,6 @@ Italic.propTypes = { children: PropTypes.node.isRequired };
 const ExportAndSubmit = ({ printApd: print }) => (
   <Waypoint id="export-and-submit">
     <Section isNumbered id="export-and-submit" resource="exportAndSubmit">
-      {/* <Instruction source="exportAndSubmit.instruction" /> */}
       <p>
         To submit your APD for analyst review, export the document as a PDF,
         then send it to CMS just like you’ve done before.
