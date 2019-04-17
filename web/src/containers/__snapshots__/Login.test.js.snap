@@ -1,9 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`login component renders consent banner initially 1`] = `
-<ConsentBanner
-  onAgree={[Function]}
-/>
+<Fragment>
+  <Connect(Header) />
+  <ConsentBanner
+    onAgree={[Function]}
+  />
+</Fragment>
 `;
 
 exports[`login component renders correctly if logged in 1`] = `

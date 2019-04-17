@@ -42,7 +42,12 @@ class Login extends Component {
     }
 
     if (showConsent) {
-      return <ConsentBanner onAgree={this.hideConsent} />;
+      return (
+        <Fragment>
+          <Header />
+          <ConsentBanner onAgree={this.hideConsent} />
+        </Fragment>
+      );
     }
 
     let errorMessage = false;
