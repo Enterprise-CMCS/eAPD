@@ -2,6 +2,12 @@
 
 .table-cms {
   font-size: 12px;
+  &.table-cms__totals {
+    width: 40%; // roughly equal to full tables' cells?
+  }
+  &.centered-headers th {
+    text-align: center;
+  }
   th {
     background-color: $color-primary-alt-light;
     font-weight: normal;
@@ -16,11 +22,12 @@
     &:first-child {
       border-left: none;
     }
-  }
-  &.centered-headers th {
-    text-align: center;
+
   }
   + .table-cms:not(.table-frozen-data){
     margin-top: $spacer-2;
+  }
+  .table-cms--col-header__fixed-width {
+    width: 175px; // set these so that the totals tables in each section will have the same col width as other tables
   }
 }
