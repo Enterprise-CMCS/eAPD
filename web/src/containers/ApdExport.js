@@ -48,7 +48,7 @@ const ExportAndSubmit = ({ printApd: print }) => (
         <li>
           Email the completed APD to{' '}
           <Bold>
-            <a href="mailto:">[CMS APD email addres]</a>
+            <a href="mailto:CMS-EAPD@cms.hhs.gov">CMS-EAPD@cms.hhs.gov</a>
           </Bold>
           .
         </li>
