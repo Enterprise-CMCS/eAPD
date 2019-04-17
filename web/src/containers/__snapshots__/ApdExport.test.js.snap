@@ -51,9 +51,9 @@ exports[`apd export component renders correctly 1`] = `
          
         <Bold>
           <a
-            href="mailto:"
+            href="mailto:CMS-EAPD@cms.hhs.gov"
           >
-            [CMS APD email addres]
+            CMS-EAPD@cms.hhs.gov
           </a>
         </Bold>
         .
