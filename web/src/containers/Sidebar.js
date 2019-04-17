@@ -189,6 +189,12 @@ class Sidebar extends Component {
             onClick: (evt, id) => this.handleSelectClick(id)
           }
         ]
+      },
+      {
+        id: 'export-and-submit',
+        url: '#export-and-submit',
+        label: t('exportAndSubmit.title'),
+        onClick: (evt, id) => this.handleSelectClick(id)
       }
     ];
 
@@ -211,17 +217,13 @@ class Sidebar extends Component {
                 {t('title', { year: '2018' })}
               </h1>
             </div>
-            <VerticalNav selectedId={activeSection || "apd-state-profile-overview"} items={links} />
+            <VerticalNav
+              selectedId={activeSection || 'apd-state-profile-overview'}
+              items={links}
+            />
             <div className="ds-u-margin-top--2">
               <Btn onClick={() => saveApdToAPI()}>
                 {t('sidebar.saveApdButtonText')}
-              </Btn>{' '}
-              <Btn
-                kind="outline"
-                onClick={() => print()}
-                extraCss="bg-white blue"
-              >
-                {t('sidebar.savePdfButtonText')}
               </Btn>
             </div>
           </div>

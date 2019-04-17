@@ -5,6 +5,7 @@ import base from './app.yaml';
 import certifyAndSubmit from './certifyAndSubmit.yaml';
 import errors from './errors.yaml';
 import executiveSummary from './executiveSummary.yaml';
+import exportAndSubmit from './exportAndSubmit.yaml';
 import previousActivities from './previousActivities.yaml';
 import proposedBudget from './proposedBudget.yaml';
 import scheduleSummary from './scheduleSummary.yaml';
@@ -21,6 +22,7 @@ export default {
   certifyAndSubmit,
   errors,
   executiveSummary,
+  exportAndSubmit,
   previousActivities,
   proposedBudget,
   scheduleSummary,

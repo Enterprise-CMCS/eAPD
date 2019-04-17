@@ -9,6 +9,7 @@ import {
   faChevronUp,
   faEdit,
   faExclamationTriangle,
+  faFileDownload,
   faLock,
   faPlusCircle,
   faSpinner,
@@ -19,6 +20,7 @@ import {
 
 import { faCircle, faClock } from '@fortawesome/free-regular-svg-icons';
 
+const FileDownload = () => <FontAwesomeIcon icon={faFileDownload} />;
 const LockIcon = () => <FontAwesomeIcon icon={faLock} />;
 const UnlockIcon = () => <FontAwesomeIcon icon={faUnlock} />;
 
@@ -35,6 +37,7 @@ export {
   faPlusCircle,
   faSpinner,
   faUnlock,
+  FileDownload,
   LockIcon,
   UnlockIcon,
   faUserCog,
