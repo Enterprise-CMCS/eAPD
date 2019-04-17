@@ -114,7 +114,7 @@ class ConsentBanner extends PureComponent {
                   </p>
                   <div className="ds-u-text-align--center">
                     <Button variation="primary" onClick={this.agreeAndContinue}>
-                      Agree and Continue
+                      Agree and continue
                     </Button>
                   </div>
                 </Fragment>
