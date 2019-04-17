@@ -38,7 +38,7 @@ exports[`Consent banner component when there is no cookie renders the banner 1`]
             type="button"
             variation="primary"
           >
-            Agree and Continue
+            Agree and continue
           </Button>
         </div>
       </div>
@@ -86,7 +86,7 @@ exports[`Consent banner component when there is no cookie toggles consent detail
             type="button"
             variation="primary"
           >
-            Agree and Continue
+            Agree and continue
           </Button>
         </div>
       </div>
@@ -193,7 +193,7 @@ exports[`Consent banner component when there is no cookie toggles consent detail
             type="button"
             variation="primary"
           >
-            Agree and Continue
+            Agree and continue
           </Button>
         </div>
       </div>
