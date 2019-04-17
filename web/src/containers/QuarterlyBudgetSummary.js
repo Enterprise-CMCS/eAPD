@@ -29,6 +29,13 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
             <h3 className="ds-h3">{sourceDisplay}</h3>
             {years.map((year, i) => (
             <table className="table-cms">
+              <colgroup>
+                <col className="table-cms--col-header__fixed-width" />
+                <col />
+                <col />
+                <col />
+                <col />
+              </colgroup>
               <thead>
                 <tr>
                   <th
@@ -59,7 +66,6 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                 {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
                   <tr
                     key={name}
-                    className={`${name === 'combined' ? 'bold' : ''}`}
                   >
                     <td
                       headers={`quarterly-budget-summary-${source}-null1 quarterly-budget-summary-${source}-null2`}
@@ -78,7 +84,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                       </td>
                     ))}
                     <td
-                      className="bold mono right-align nowrap"
+                      className="mono right-align nowrap"
                       headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-subtotal`}
                     >
                       <Dollars>{data[year].subtotal[name]}</Dollars>
@@ -88,7 +94,14 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
               </tbody>
             </table>
             ))}
-            <table className="table-cms">
+            <table className="table-cms table-cms__totals">
+              <colgroup>
+                <col className="table-cms--col-header__fixed-width" />
+                <col />
+                <col />
+                <col />
+                <col />
+              </colgroup>
               <thead>
                 <tr>
                   <th id={`quarterly-budget-summary-${source}-total`}>Total {sourceDisplay}</th>
