@@ -8,7 +8,6 @@ import stickybits from 'stickybits';
 import { t } from '../i18n';
 import { saveApd } from '../actions/apd';
 import { jumpTo } from '../actions/navigation';
-import { printApd } from '../actions/print';
 import Btn from '../components/Btn';
 import { selectActivitiesSidebar } from '../reducers/activities.selectors';
 import { selectActiveSection } from '../reducers/navigation';
@@ -55,7 +54,7 @@ class Sidebar extends Component {
   };
 
   render() {
-    const { activities, place, printApd: print, saveApdToAPI } = this.props;
+    const { activities, place, saveApdToAPI } = this.props;
 
     const activityItems = this.createActivityItems(activities);
 
@@ -238,7 +237,6 @@ Sidebar.propTypes = {
   activeSection: PropTypes.string.isRequired,
   jumpTo: PropTypes.func.isRequired,
   place: PropTypes.object.isRequired,
-  printApd: PropTypes.func.isRequired,
   saveApdToAPI: PropTypes.func.isRequired
 };
 
@@ -249,7 +247,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   jumpTo,
-  printApd,
   saveApdToAPI: saveApd
 };
 
