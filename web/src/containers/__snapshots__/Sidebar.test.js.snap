@@ -24,9 +24,6 @@ exports[`Sidebar component renders correctly 1`] = `
           className="text-xl"
         >
           place name
-           
-          <br />
-          2018 HITECH APD
         </h1>
       </div>
       <VerticalNav
