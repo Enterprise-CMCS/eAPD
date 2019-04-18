@@ -167,6 +167,7 @@ tap.test('APD data initializer', async test => {
         year: '1998'
       }
     ],
+    keyPersonnel: [{ isPrimary: true }],
     narrativeHIE: '',
     narrativeHIT: '',
     narrativeMMIS: '',

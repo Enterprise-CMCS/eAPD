@@ -18,7 +18,7 @@ class ListItem extends Component {
     const { children, deleteItem, header } = this.props;
     const { expanded } = this.state;
 
-    const childClass = expanded ? '' : 'd-none';
+    const childClass = expanded ? '' : 'visibility--print';
 
     return (
       <Fragment>
