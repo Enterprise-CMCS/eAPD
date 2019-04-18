@@ -27,7 +27,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
             className="mb3"
           >
             <h3 className="ds-h3">{sourceDisplay}</h3>
-            {years.map((year, i) => (
+            {years.map((year) => (
             <table className="table-cms">
               <colgroup>
                 <col className="table-cms--col-header__fixed-width" />
@@ -67,11 +67,11 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                   <tr
                     key={name}
                   >
-                    <td
+                    <th
                       headers={`quarterly-budget-summary-${source}-null1 quarterly-budget-summary-${source}-null2`}
                     >
                       {EXPENSE_NAME_DISPLAY[name]}
-                    </td>
+                    </th>
                     {QUARTERS.map(q => (
                       <td
                         className={`mono right-align nowrap ${
@@ -111,11 +111,11 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
               <tbody>
               {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
                 <tr>
-                  <td
+                  <th
                     headers={`quarterly-budget-summary-${source}-total`}
                   >
                     {EXPENSE_NAME_DISPLAY[name]}
-                  </td>
+                  </th>
                   <td
                     className="bold mono right-align nowrap"
                     headers={`quarterly-budget-summary-${source}-total2 quarterly-budget-summary-${source}-total`}
