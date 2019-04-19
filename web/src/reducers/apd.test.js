@@ -159,11 +159,12 @@ describe('APD reducer', () => {
           {
             costs: {},
             email: '',
+            expanded: true,
             hasCosts: false,
             isPrimary: false,
             name: '',
             position: '',
-            key: expect.stringMatching(/[0-9a-f]{6}/)
+            key: expect.stringMatching(/^[a-f0-9]{8}$/)
           }
         ]
       }
@@ -183,37 +184,6 @@ describe('APD reducer', () => {
       ...initialState,
       data: {
         keyPersonnel: []
-      }
-    });
-  });
-
-  it('should handle setting an APD key personnel', () => {
-    expect(
-      apd(
-        {
-          ...initialState,
-          data: {
-            ...initialState.data,
-            keyPersonnel: [
-              {
-                isPrimary: true
-              },
-              { isPrimary: false }
-            ]
-          }
-        },
-        { type: 'SET_KEY_PERSON_PRIMARY', index: 1 }
-      )
-    ).toEqual({
-      ...initialState,
-      data: {
-        ...initialState.data,
-        keyPersonnel: [
-          {
-            isPrimary: false
-          },
-          { isPrimary: true }
-        ]
       }
     });
   });
