@@ -5,6 +5,7 @@ import { Prompt, Redirect } from 'react-router-dom';
 
 import Activities from './activity/All';
 import AssurancesAndCompliance from './AssurancesAndCompliance';
+import Export from './ApdExport';
 import ApdSummary from './ApdSummary';
 import ExecutiveSummary from './ExecutiveSummary';
 import PreviousActivities from './PreviousActivities';
@@ -85,6 +86,7 @@ class ApdApplication extends Component {
             <ProposedBudget />
             <AssurancesAndCompliance />
             <ExecutiveSummary />
+            <Export />
           </div>
         </div>
       </div>
