@@ -66,11 +66,7 @@ const CardForm = ({
               </div>
             </fieldset>
           </form>
-          {footer && (
-            <div className="ds-u-margin-top--4 ds-u-border-top--1 ds-u-color--muted">
-              {footer}
-            </div>
-          )}
+          {footer && <div className="card--foter">{footer}</div>}
         </div>
         <div className="ds-l-col--1 ds-u-margin-right--auto" />
       </div>
