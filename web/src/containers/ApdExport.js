@@ -8,16 +8,6 @@ import { printApd } from '../actions/print';
 import { Section } from '../components/Section';
 import { FileDownload } from '../components/Icons';
 
-const Bold = ({ children }) => (
-  <span className="ds-u-font-weight--bold">{children}</span>
-);
-Bold.propTypes = { children: PropTypes.node.isRequired };
-
-const Italic = ({ children }) => (
-  <span className="ds-u-font-style--italic">{children}</span>
-);
-Italic.propTypes = { children: PropTypes.node.isRequired };
-
 const ExportAndSubmit = ({ printApd: print }) => (
   <Waypoint id="export-and-submit">
     <Section isNumbered id="export-and-submit" resource="exportAndSubmit">
@@ -27,17 +17,18 @@ const ExportAndSubmit = ({ printApd: print }) => (
       </p>
       <ol>
         <li>
-          Select <Bold>Export</Bold> to open up your browser’s print options.
+          Select <strong>Export</strong> to open up your browser’s print
+          options.
         </li>
         <li>
-          In the print window, select <Bold>Save as PDF</Bold>. In Chrome, this
-          option is listed under <Italic>Destination</Italic>. In other
-          browsers, this option is part of a dropdown menu labeled{' '}
-          <Italic>PDF</Italic>.
+          In the print window, select <strong>Save as PDF</strong>. In Chrome,
+          this option is listed under <em>Destination</em>. In other browsers,
+          this option is part of a dropdown menu labeled <em>PDF</em>.
         </li>
 
         <li>
-          Select <Bold>Save</Bold>. This will download a PDF to your computer.
+          Select <strong>Save</strong>. This will download a PDF to your
+          computer.
         </li>
 
         <li>
@@ -47,9 +38,9 @@ const ExportAndSubmit = ({ printApd: print }) => (
 
         <li>
           Email the completed APD to{' '}
-          <Bold>
+          <strong>
             <a href="mailto:CMS-EAPD@cms.hhs.gov">CMS-EAPD@cms.hhs.gov</a>
-          </Bold>
+          </strong>
           .
         </li>
       </ol>

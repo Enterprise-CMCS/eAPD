@@ -1,7 +1,17 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+em {
+  font-style: italic !important;
+}
+
 .font-family--mono {
-  font-family: Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+  font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }
 
 h1.apd--title {
   margin-left: 72px;
+}
+
+strong {
+  font-weight: $font-bold !important;
 }
