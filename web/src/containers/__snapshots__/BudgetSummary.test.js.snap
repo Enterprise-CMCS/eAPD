@@ -4,6 +4,7 @@ exports[`budget summary component data row group renders 1`] = `
 <Fragment>
   <DataRow
     category="combined"
+    data={Object {}}
     entries={
       Array [
         10,
@@ -13,9 +14,11 @@ exports[`budget summary component data row group renders 1`] = `
     }
     key="combined"
     title="Subtotal"
+    year="1448"
   />
   <DataRow
     category="contractors"
+    data={Object {}}
     entries={
       Array [
         10,
@@ -25,9 +28,11 @@ exports[`budget summary component data row group renders 1`] = `
     }
     key="contractors"
     title="Contracted resources"
+    year="1448"
   />
   <DataRow
     category="expenses"
+    data={Object {}}
     entries={
       Array [
         10,
@@ -37,9 +42,11 @@ exports[`budget summary component data row group renders 1`] = `
     }
     key="expenses"
     title="Non-personnel"
+    year="1448"
   />
   <DataRow
     category="statePersonnel"
+    data={Object {}}
     entries={
       Array [
         10,
@@ -49,6 +56,7 @@ exports[`budget summary component data row group renders 1`] = `
     }
     key="statePersonnel"
     title="Project state staff"
+    year="1448"
   />
 </Fragment>
 `;
@@ -62,21 +70,27 @@ exports[`budget summary component data row renders with data 1`] = `
   </th>
   <td
     className="font-family--mono right-align"
-    headers="summary-budget-fy-undefined summary-budget-fy-undefined-total"
+    headers="summary-budget-fy-year summary-budget-fy-year-total"
   >
-    <Dollars />
+    <Dollars>
+      1000
+    </Dollars>
   </td>
   <td
     className="font-family--mono right-align"
-    headers="summary-budget-fy-undefined summary-budget-fy-undefined-federal"
+    headers="summary-budget-fy-year summary-budget-fy-year-federal"
   >
-    <Dollars />
+    <Dollars>
+      1
+    </Dollars>
   </td>
   <td
     className="font-family--mono right-align"
-    headers="summary-budget-fy-undefined summary-budget-fy-undefined-state"
+    headers="summary-budget-fy-year summary-budget-fy-year-state"
   >
-    <Dollars />
+    <Dollars>
+      2
+    </Dollars>
   </td>
 </tr>
 `;
@@ -90,21 +104,27 @@ exports[`budget summary component data row renders with no data 1`] = `
   </th>
   <td
     className="font-family--mono right-align"
-    headers="summary-budget-fy-undefined summary-budget-fy-undefined-total"
+    headers="summary-budget-fy-year summary-budget-fy-year-total"
   >
-    <Dollars />
+    <Dollars>
+      0
+    </Dollars>
   </td>
   <td
     className="font-family--mono right-align"
-    headers="summary-budget-fy-undefined summary-budget-fy-undefined-federal"
+    headers="summary-budget-fy-year summary-budget-fy-year-federal"
   >
-    <Dollars />
+    <Dollars>
+      0
+    </Dollars>
   </td>
   <td
     className="font-family--mono right-align"
-    headers="summary-budget-fy-undefined summary-budget-fy-undefined-state"
+    headers="summary-budget-fy-year summary-budget-fy-year-state"
   >
-    <Dollars />
+    <Dollars>
+      0
+    </Dollars>
   </td>
 </tr>
 `;
@@ -149,6 +169,7 @@ exports[`budget summary component renders correctly 1`] = `
   </h3>
   <table
     className="table-cms"
+    key="1"
   >
     <thead>
       <HeaderRow
@@ -169,6 +190,7 @@ exports[`budget summary component renders correctly 1`] = `
   </table>
   <table
     className="table-cms"
+    key="2"
   >
     <thead>
       <HeaderRow
@@ -189,6 +211,7 @@ exports[`budget summary component renders correctly 1`] = `
   </table>
   <table
     className="table-cms"
+    key="total"
   >
     <thead>
       <HeaderRow
@@ -214,6 +237,7 @@ exports[`budget summary component renders correctly 1`] = `
   </h3>
   <table
     className="table-cms"
+    key="1"
   >
     <thead>
       <HeaderRow
@@ -234,6 +258,7 @@ exports[`budget summary component renders correctly 1`] = `
   </table>
   <table
     className="table-cms"
+    key="2"
   >
     <thead>
       <HeaderRow
@@ -254,6 +279,7 @@ exports[`budget summary component renders correctly 1`] = `
   </table>
   <table
     className="table-cms"
+    key="total"
   >
     <thead>
       <HeaderRow
@@ -279,6 +305,7 @@ exports[`budget summary component renders correctly 1`] = `
   </h3>
   <table
     className="table-cms"
+    key="1"
   >
     <thead>
       <HeaderRow
@@ -299,6 +326,7 @@ exports[`budget summary component renders correctly 1`] = `
   </table>
   <table
     className="table-cms"
+    key="2"
   >
     <thead>
       <HeaderRow
@@ -319,6 +347,7 @@ exports[`budget summary component renders correctly 1`] = `
   </table>
   <table
     className="table-cms"
+    key="total"
   >
     <thead>
       <HeaderRow
@@ -371,7 +400,9 @@ exports[`budget summary component renders correctly 1`] = `
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr
+        key="1"
+      >
         <th
           headers="summary-budget-null1"
         >
@@ -403,7 +434,9 @@ exports[`budget summary component renders correctly 1`] = `
           </Dollars>
         </td>
       </tr>
-      <tr>
+      <tr
+        key="2"
+      >
         <th
           headers="summary-budget-null1"
         >

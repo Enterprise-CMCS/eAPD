@@ -121,6 +121,7 @@ class EditAccount extends Component {
           <div className="ds-l-row ds-u-padding-x--2">
             <TextField
               label="Password"
+              name="current password"
               ariaLabel="Current password"
               value="********"
               disabled

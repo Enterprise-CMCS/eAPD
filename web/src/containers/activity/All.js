@@ -31,8 +31,8 @@ const All = ({ activityKeys, addActivity }) => (
         </Btn>
       </Subsection>
       {activityKeys.map((key, idx) => (
-        <Waypoint id={key}>
-          <EntryDetails key={key} aKey={key} num={idx + 1} />
+        <Waypoint id={key} key={key}>
+          <EntryDetails aKey={key} num={idx + 1} />
         </Waypoint>
       ))}
     </Section>
