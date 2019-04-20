@@ -141,7 +141,7 @@ exports[`card form wrapper renders a footer if provided 1`] = `
           </fieldset>
         </form>
         <div
-          className="ds-u-margin-top--4 ds-u-border-top--1 ds-u-color--muted"
+          className="card--foter"
         >
           <div>
             Hello

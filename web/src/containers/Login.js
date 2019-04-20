@@ -69,12 +69,12 @@ class Login extends Component {
           primaryButtonText={['Log in', 'Logging in']}
           onSave={this.handleSubmit}
           footer={
-            <Fragment>
+            <p>
               Forgot your password? Contact{' '}
               <a href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD">
                 CMS-EAPD@cms.hhs.gov
               </a>
-            </Fragment>
+            </p>
           }
         >
           <TextField
