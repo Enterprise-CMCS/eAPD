@@ -21,6 +21,9 @@ describe('rich text editor utils', () => {
       const out = callback();
       expect(typeof out.then).toBe('function');
       expect(typeof out.catch).toBe('function');
+
+      // handle promise rejections so Node doesn't crash
+      out.catch(() => {});
     });
   });
 });
