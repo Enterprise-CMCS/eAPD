@@ -9,7 +9,6 @@ import {
   GET_APD_FAILURE,
   REMOVE_APD_KEY_PERSON,
   SELECT_APD,
-  SET_KEY_PERSON_PRIMARY,
   SET_SELECT_APD_ON_LOAD,
   SUBMIT_APD_SUCCESS,
   UPDATE_APD,
@@ -20,6 +19,7 @@ import { defaultAPDYearOptions, generateKey } from '../util';
 export const getKeyPersonnel = () => ({
   costs: {},
   email: '',
+  expanded: true,
   hasCosts: false,
   isPrimary: false,
   name: '',
@@ -91,17 +91,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         data: { ...action.apd, yearOptions: defaultAPDYearOptions }
-      };
-    case SET_KEY_PERSON_PRIMARY:
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          keyPersonnel: state.data.keyPersonnel.map((person, i) => ({
-            ...person,
-            isPrimary: i === action.index
-          }))
-        }
       };
     case SET_SELECT_APD_ON_LOAD:
       return { ...state, selectAPDOnLoad: true };

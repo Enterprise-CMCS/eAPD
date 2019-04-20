@@ -17,10 +17,14 @@ import Collapsible from '../../components/Collapsible';
 import DeleteButton from '../../components/DeleteConfirm';
 import { t } from '../../i18n';
 
-const makeTitle = (a, i) => {
+const makeTitle = ({ name, fundingSource }, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
-  if (a.name) title += `: ${a.name}`;
-  if (a.fundingSource) title += ` (${a.fundingSource})`;
+  if (name) {
+    title += `: ${name}`;
+  }
+  if (fundingSource) {
+    title += ` (${fundingSource})`;
+  }
   return title;
 };
 
@@ -41,14 +45,8 @@ class EntryDetails extends Component {
   };
 
   render() {
-    const {
-      activity: { name },
-      aKey,
-      expanded,
-      num,
-      removeActivity
-    } = this.props;
-    const title = makeTitle(name, num);
+    const { activity, aKey, expanded, num, removeActivity } = this.props;
+    const title = makeTitle(activity, num);
 
     return (
       <Collapsible
