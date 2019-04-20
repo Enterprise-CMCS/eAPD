@@ -3,7 +3,9 @@ import reducer, { selectActiveSection } from './navigation';
 
 describe('navigation reducer', () => {
   it('has an initial state', () => {
-    expect(reducer(undefined, {})).toEqual({ activeSection: null });
+    expect(reducer(undefined, {})).toEqual({
+      activeSection: 'apd-state-profile-overview'
+    });
   });
 
   it('handles waypoint updates', () => {

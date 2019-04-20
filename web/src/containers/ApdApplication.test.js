@@ -14,10 +14,12 @@ describe('apd (application) component', () => {
     expect(
       shallow(
         <ApdApplication
+          apdName="test name"
           apdSelected
           dirty
           place={{}}
           selectApdOnLoad={() => {}}
+          year="the year"
         />
       )
     ).toMatchSnapshot();
@@ -26,10 +28,12 @@ describe('apd (application) component', () => {
     expect(
       shallow(
         <ApdApplication
+          apdName="another apd"
           apdSelected={false}
           dirty={false}
           place={{}}
           selectApdOnLoad={selectApdOnLoadProp}
+          year="the past"
         />
       )
     ).toMatchSnapshot();
