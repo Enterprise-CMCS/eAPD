@@ -15,32 +15,31 @@ exports[`apd export component renders correctly 1`] = `
     <ol>
       <li>
         Select 
-        <Bold>
+        <strong>
           Export
-        </Bold>
+        </strong>
          to open up your browser’s print options.
       </li>
       <li>
         In the print window, select 
-        <Bold>
+        <strong>
           Save as PDF
-        </Bold>
+        </strong>
         . In Chrome, this option is listed under 
-        <Italic>
+        <em>
           Destination
-        </Italic>
-        . In other browsers, this option is part of a dropdown menu labeled
-         
-        <Italic>
+        </em>
+        . In other browsers, this option is part of a dropdown menu labeled 
+        <em>
           PDF
-        </Italic>
+        </em>
         .
       </li>
       <li>
         Select 
-        <Bold>
+        <strong>
           Save
-        </Bold>
+        </strong>
         . This will download a PDF to your computer.
       </li>
       <li>
@@ -49,13 +48,13 @@ exports[`apd export component renders correctly 1`] = `
       <li>
         Email the completed APD to
          
-        <Bold>
+        <strong>
           <a
             href="mailto:CMS-EAPD@cms.hhs.gov"
           >
             CMS-EAPD@cms.hhs.gov
           </a>
-        </Bold>
+        </strong>
         .
       </li>
     </ol>
