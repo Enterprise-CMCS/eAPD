@@ -9,7 +9,6 @@ import {
 } from './Sidebar';
 import { saveApd } from '../actions/apd';
 import { jumpTo } from '../actions/navigation';
-import { printApd } from '../actions/print';
 
 describe('Sidebar component', () => {
   const props = {
@@ -37,15 +36,6 @@ describe('Sidebar component', () => {
     component.find('Btn[onClick][kind="primary"]').simulate('click');
 
     expect(saveApdToApiProp.called).toBeTruthy();
-  });
-
-  test('triggers a print event', () => {
-    const printApdProp = sinon.spy();
-    const component = shallow(<Sidebar {...props} printApd={printApdProp} />);
-
-    component.find('Btn[onClick][kind="outline"]').simulate('click');
-
-    expect(printApdProp.called).toBeTruthy();
   });
 
   test('maps state to props', () => {
@@ -79,7 +69,6 @@ describe('Sidebar component', () => {
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
       jumpTo,
-      printApd,
       saveApdToAPI: saveApd
     });
   });
