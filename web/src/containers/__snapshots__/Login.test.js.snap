@@ -38,7 +38,20 @@ exports[`login component renders correctly if not logged in 1`] = `
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
+    canSubmit={0}
+    cancelable={false}
     error={false}
+    footer={
+      <p>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -73,7 +86,20 @@ exports[`login component renders correctly if not logged in 2`] = `
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
+    canSubmit={0}
+    cancelable={false}
     error={false}
+    footer={
+      <p>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -108,7 +134,20 @@ exports[`login component renders correctly if not logged in 3`] = `
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
+    canSubmit={6}
+    cancelable={false}
     error={false}
+    footer={
+      <p>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -143,7 +182,20 @@ exports[`login component renders correctly if not logged in and fetching data 1`
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
+    canSubmit={0}
+    cancelable={false}
     error={false}
+    footer={
+      <p>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -178,7 +230,20 @@ exports[`login component renders correctly if not logged in and there is an erro
 <Fragment>
   <Connect(Header) />
   <withRouter(CardForm)
+    canSubmit={0}
+    cancelable={false}
     error={false}
+    footer={
+      <p>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
     onSave={[Function]}
     primaryButtonText={
       Array [

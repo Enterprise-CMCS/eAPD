@@ -5,7 +5,7 @@
   height: 100%;
   min-height: 100vh;
   padding-top: $spacer-7;
-  padding-bottom: $spacer-7
+  padding-bottom: $spacer-7;
 }
 
 .card {
@@ -28,4 +28,10 @@
     padding-top: $spacer-5;
     padding-bottom: $spacer-5;
   }
+}
+
+.card--foter {
+  border-top: 1px solid $border-color !important;
+  color: $color-muted !important;
+  margin-top: nth($spacers, 5);
 }
