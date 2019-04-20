@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Dollars from '../components/Dollars';
@@ -12,113 +12,48 @@ const categoryLookup = {
   combined: 'Subtotal'
 };
 
-const formatActivityName = a => `Activity ${a.name ? a.name : `#${a.id}`}`;
-const formatYear = yr => (yr === 'total' ? 'All Years' : `${yr} Total`);
-
-const DataRowDetails = ({ category, entries, years }) => (
-  <tr>
-    <td colSpan={years.length * 3 + 1}>
-      <div className="py2">
-        {entries.map(e => (
-          <div key={e.id} className="mono h6">
-            <span className="bold">{formatActivityName(e)}:</span>{' '}
-            {years.map(yr => (
-              <span key={yr} className="mr2">
-                {formatYear(yr)}: <Dollars>{e.data[category][yr]}</Dollars>
-              </span>
-            ))}
-          </div>
-        ))}
-      </div>
-    </td>
-  </tr>
-);
-
-DataRowDetails.propTypes = {
-  category: PropTypes.string.isRequired,
-  entries: PropTypes.array.isRequired,
-  years: PropTypes.array.isRequired
-};
-
-class DataRow extends Component {
-  state = { detailsOpen: false };
-
-  toggleDetails = () => {
-    this.setState(prev => ({ detailsOpen: !prev.detailsOpen }));
-  };
-
-  render() {
-    const { category, data, entries, title } = this.props;
-    const { detailsOpen } = this.state;
-
-    const years = Object.keys(data);
-    const hasData = data.total.total > 0;
-
-    return (
-      <Fragment>
-        <tr>
-          <td headers="summary-budget-null1 summary-budget-null2">
-            {hasData && (
-              <button
-                type="button"
-                className="btn right px-tiny py0"
-                onClick={this.toggleDetails}
-              >
-                {detailsOpen ? '-' : '+'}
-              </button>
-            )}
-            {title}
-          </td>
-          {years.map(yr => {
-            const val = data[yr];
-            return (
-              <Fragment key={yr}>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-total`}
-                >
-                  <Dollars>{val.medicaid}</Dollars>
-                </td>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-federal`}
-                >
-                  <Dollars>{val.federal}</Dollars>
-                </td>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-state`}
-                >
-                  <Dollars>{val.state}</Dollars>
-                </td>
-              </Fragment>
-            );
-          })}
-        </tr>
-        {hasData && detailsOpen && (
-          <DataRowDetails category={category} entries={entries} years={years} />
-        )}
-      </Fragment>
-    );
-  }
+function DataRow({ data, title, year }) {
+  return (
+    <tr>
+      <th headers="summary-budget-null1 summary-budget-null2">{title}</th>
+      <td
+        className="font-family--mono right-align"
+        headers={`summary-budget-fy-${year} summary-budget-fy-${year}-total`}
+      >
+        <Dollars>{data.medicaid}</Dollars>
+      </td>
+      <td
+        className="font-family--mono right-align"
+        headers={`summary-budget-fy-${year} summary-budget-fy-${year}-federal`}
+      >
+        <Dollars>{data.federal}</Dollars>
+      </td>
+      <td
+        className="font-family--mono right-align"
+        headers={`summary-budget-fy-${year} summary-budget-fy-${year}-state`}
+      >
+        <Dollars>{data.state}</Dollars>
+      </td>
+    </tr>
+  );
 }
 
 DataRow.propTypes = {
-  category: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
-  entries: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  year: PropTypes.string.isRequired
 };
 
-const DataRowGroup = ({ data, entries }) => (
+const DataRowGroup = ({ data, entries, year }) => (
   <Fragment>
     {Object.keys(data).map(key => (
       <DataRow
         key={key}
         category={key}
-        data={data[key]}
+        data={data[key][year]}
         entries={entries}
         title={categoryLookup[key]}
+        year={year}
       />
     ))}
   </Fragment>
@@ -126,111 +61,139 @@ const DataRowGroup = ({ data, entries }) => (
 
 DataRowGroup.propTypes = {
   data: PropTypes.object.isRequired,
-  entries: PropTypes.array.isRequired
+  entries: PropTypes.array.isRequired,
+  year: PropTypes.string.isRequired
 };
 
-const HeaderRow = ({ title, years }) => (
-  <tr>
-    <td className="bold" headers="summary-budget-null1 summary-budget-null2">
-      {title}
-    </td>
-    {[...years, 'total'].map(yr => (
-      <Fragment key={yr}>
-        <td headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-total`} />
-        <td
-          headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-federal`}
-        />
-        <td headers={`summary-budget-fy-${yr} summary-budget-fy-${yr}-state`} />
-      </Fragment>
-    ))}
-  </tr>
-);
+const HeaderRow = ({ yr }) => {
+  return (
+    <tr>
+      <th
+        key={yr}
+        className="ds-u-font-weight--bold"
+        id={`summary-budget-fy-${yr}`}
+      >
+        FFY {yr}
+      </th>
+      <th
+        className="ds-u-text-align--center"
+        id={`summary-budget-fy-${yr}-total`}
+      >
+        Medicaid total
+      </th>
+      <th
+        className="ds-u-text-align--center"
+        id={`summary-budget-fy-${yr}-federal`}
+      >
+        Federal total
+      </th>
+      <th
+        className="ds-u-text-align--center"
+        id={`summary-budget-fy-${yr}-state`}
+      >
+        State total
+      </th>
+    </tr>
+  );
+};
 
 HeaderRow.propTypes = {
-  title: PropTypes.string.isRequired,
-  years: PropTypes.array.isRequired
+  yr: PropTypes.string.isRequired
 };
 
 const BudgetSummary = ({ activities, data, years }) => (
-  <div className="overflow-x">
+  <Fragment>
+    <h3 className="ds-h3">HIT activities</h3>
+    {[...years, 'total'].map(yr => (
+      <table className="table-cms" key={yr}>
+        <thead>
+          <HeaderRow yr={yr} />
+        </thead>
+        <tbody>
+          <DataRowGroup data={data.hit} entries={activities.hit} year={yr} />
+        </tbody>
+      </table>
+    ))}
+
+    <h3 className="ds-h3">HIE activities</h3>
+    {[...years, 'total'].map(yr => (
+      <table className="table-cms" key={yr}>
+        <thead>
+          <HeaderRow yr={yr} />
+        </thead>
+        <tbody>
+          <DataRowGroup data={data.hie} entries={activities.hie} year={yr} />
+        </tbody>
+      </table>
+    ))}
+
+    <h3 className="ds-h3">MMIS activities</h3>
+    {[...years, 'total'].map(yr => (
+      <table className="table-cms" key={yr}>
+        <thead>
+          <HeaderRow yr={yr} />
+        </thead>
+        <tbody>
+          <DataRowGroup data={data.mmis} entries={activities.mmis} year={yr} />
+        </tbody>
+      </table>
+    ))}
+
+    <h3 className="ds-h3">Project activities totals</h3>
     <table className="table-cms">
       <thead>
         <tr>
           <th id="summary-budget-null1" />
-          {[...years, 'total'].map(yr => (
-            <th
-              key={yr}
-              className="center"
-              colSpan="3"
-              id={`summary-budget-fy-${yr}`}
-            >
-              FFY {yr}
-            </th>
-          ))}
-        </tr>
-        <tr>
-          <th id="summary-budget-null2" />
-          {[...years, 'total'].map(y => (
-            <Fragment key={y}>
-              <th className="right-align" id={`summary-budget-fy-${y}-total`}>
-                Medicaid total
-              </th>
-              <th className="right-align" id={`summary-budget-fy-${y}-federal`}>
-                Federal
-              </th>
-              <th className="right-align" id={`summary-budget-fy-${y}-state`}>
-                State
-              </th>
-            </Fragment>
-          ))}
+          <th
+            className="ds-u-text-align--center"
+            id="summary-budget-total-medicaid"
+          >
+            Medicaid total
+          </th>
+          <th
+            className="ds-u-text-align--center"
+            id="summary-budget-total-federal"
+          >
+            Federal total
+          </th>
+          <th
+            className="ds-u-text-align--center"
+            id="summary-budget-total-state"
+          >
+            State total
+          </th>
         </tr>
       </thead>
-      <tbody className="bg-blue-light">
-        <HeaderRow title="HIT activities" years={years} />
-        <DataRowGroup data={data.hit} entries={activities.hit} />
-      </tbody>
-      <tbody className="bg-yellow-light">
-        <HeaderRow title="HIE activities" years={years} />
-        <DataRowGroup data={data.hie} entries={activities.hie} />
-      </tbody>
-      <tbody className="bg-green-light">
-        <HeaderRow title="MMIS activities" years={years} />
-        <DataRowGroup data={data.mmis} entries={activities.mmis} />
-      </tbody>
       <tbody>
-        <tr className="bold">
-          <td headers="summary-budget-null1 summary-budget-null2">
-            Project total
-          </td>
-          {Object.keys(data.combined).map(ffy => {
-            const combined = data.combined[ffy];
-            return (
-              <Fragment key={ffy}>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-total`}
-                >
-                  <Dollars>{combined.medicaid}</Dollars>
-                </td>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-federal`}
-                >
-                  <Dollars>{combined.federal}</Dollars>
-                </td>
-                <td
-                  className="mono right-align"
-                  headers={`summary-budget-fy-${ffy} summary-budget-fy-${ffy}-state`}
-                >
-                  <Dollars>{combined.state}</Dollars>
-                </td>
-              </Fragment>
-            );
-          })}
-        </tr>
+        {Object.keys(data.combined).map(ffy => {
+          const combined = data.combined[ffy];
+          return (
+            <tr key={ffy}>
+              <th headers="summary-budget-null1">FFY {ffy}</th>
+              <td
+                className="font-family--mono right-align"
+                headers="summary-budget-total-medicaid"
+              >
+                <Dollars>{combined.medicaid}</Dollars>
+              </td>
+              <td
+                className="font-family--mono right-align"
+                headers="summary-budget-total-federal"
+              >
+                <Dollars>{combined.federal}</Dollars>
+              </td>
+              <td
+                className="font-family--mono right-align"
+                headers="summary-budget-total-state"
+              >
+                <Dollars>{combined.state}</Dollars>
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
-  </div>
+  </Fragment>
 );
 
 BudgetSummary.propTypes = {
@@ -251,7 +214,6 @@ export {
   BudgetSummary as plain,
   mapStateToProps,
   DataRow,
-  DataRowDetails,
   DataRowGroup,
   HeaderRow
 };

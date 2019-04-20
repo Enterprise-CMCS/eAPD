@@ -2085,6 +2085,10 @@ Object {
                     "description": "The user's new name",
                     "type": "string",
                   },
+                  "password": Object {
+                    "description": "The user's new password",
+                    "type": "string",
+                  },
                   "phone": Object {
                     "description": "The user's new phone number",
                     "type": "string",
