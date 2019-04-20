@@ -42,10 +42,12 @@ class ApdApplication extends Component {
 
   render() {
     const {
+      apdName,
       apdSelected,
       dirty,
       place,
-      selectApdOnLoad: dispatchSelectApdOnLoad
+      selectApdOnLoad: dispatchSelectApdOnLoad,
+      year
     } = this.props;
 
     if (!apdSelected) {
@@ -71,6 +73,10 @@ class ApdApplication extends Component {
           <Sidebar place={place} />
           <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
             <TopBtns />
+            <h1 className="ds-h1 apd--title">
+              <span className="ds-h6 ds-u-display--block">{apdName}</span>
+              {place.name} {year} APD
+            </h1>
             <StateProfile />
             <ApdSummary />
             <PreviousActivities />
@@ -87,10 +93,12 @@ class ApdApplication extends Component {
 }
 
 ApdApplication.propTypes = {
+  apdName: PropTypes.string.isRequired,
   apdSelected: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
-  selectApdOnLoad: PropTypes.func.isRequired
+  selectApdOnLoad: PropTypes.func.isRequired,
+  year: PropTypes.string.isRequired
 };
 
 const mapStateToProps = ({
@@ -100,9 +108,11 @@ const mapStateToProps = ({
     data: { state }
   }
 }) => ({
+  apdName: data.name,
   apdSelected: !!data.id,
   dirty,
-  place: state
+  place: state,
+  year: data.years && data.years.length ? data.years[0] : ''
 });
 
 const mapDispatchToProps = { selectApdOnLoad };
