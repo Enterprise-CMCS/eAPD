@@ -40,7 +40,9 @@ describe('apd (application) component', () => {
     const state = {
       apd: {
         data: {
-          id: 'bloop'
+          id: 'bloop',
+          name: 'florp',
+          years: ['dinkus', 'dorkus']
         }
       },
       dirty: {
@@ -54,17 +56,22 @@ describe('apd (application) component', () => {
     };
 
     expect(mapStateToProps(state)).toEqual({
+      apdName: 'florp',
       apdSelected: true,
       dirty: 'moop moop',
-      place: 'place'
+      place: 'place',
+      year: 'dinkus'
     });
 
     state.apd.data.id = false;
+    delete state.apd.data.years;
 
     expect(mapStateToProps(state)).toEqual({
+      apdName: 'florp',
       apdSelected: false,
       dirty: 'moop moop',
-      place: 'place'
+      place: 'place',
+      year: ''
     });
   });
 

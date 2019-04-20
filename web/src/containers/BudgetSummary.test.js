@@ -5,7 +5,6 @@ import {
   plain as BudgetSummary,
   mapStateToProps,
   DataRow,
-  DataRowDetails,
   DataRowGroup,
   HeaderRow
 } from './BudgetSummary';
@@ -63,32 +62,6 @@ describe('budget summary component', () => {
       />
     );
     expect(component).toMatchSnapshot();
-
-    // Toggle details
-    component.find('button').simulate('click');
-    expect(component).toMatchSnapshot();
-  });
-
-  test('data row details renders correctly', () => {
-    expect(
-      shallow(
-        <DataRowDetails
-          category="category"
-          entries={[
-            {
-              name: 'activity 1',
-              id: 1,
-              data: { category: { '1': 1, '2': 2, total: 3 } }
-            },
-            {
-              id: 2,
-              data: { category: { '1': 10, '2': 20, total: 30 } }
-            }
-          ]}
-          years={['1', '2', 'total']}
-        />
-      )
-    ).toMatchSnapshot();
   });
 
   test('data row group renders', () => {
@@ -109,7 +82,7 @@ describe('budget summary component', () => {
 
   test('header row renders', () => {
     expect(
-      shallow(<HeaderRow title="row title" years={['1', '2']} />)
+      shallow(<HeaderRow yr='1' />)
     ).toMatchSnapshot();
   });
 

@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { TextField } from '@cmsgov/design-system-core';
 
+import ConsentBanner from '../components/ConsentBanner';
 import { login } from '../actions/auth';
 import CardForm from '../components/CardForm';
 import Header from '../components/Header';
 import Password from '../components/PasswordWithMeter';
 
 class Login extends Component {
-  state = { username: '', password: '' };
+  state = { showConsent: true, username: '', password: '' };
 
   handleChange = e => {
     const { name, value } = e.target;
@@ -24,16 +25,29 @@ class Login extends Component {
     action(username, password);
   };
 
+  hideConsent = () => {
+    this.setState({ showConsent: false });
+  };
+
   render() {
     const { authenticated, error, fetching, location } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
-    const { username, password } = this.state;
+    const { showConsent, username, password } = this.state;
 
     if (authenticated) {
       if (from.pathname !== '/logout') {
         return <Redirect to={from} />;
       }
       return <Redirect to="/" />;
+    }
+
+    if (showConsent) {
+      return (
+        <Fragment>
+          <Header />
+          <ConsentBanner onAgree={this.hideConsent} />
+        </Fragment>
+      );
     }
 
     let errorMessage = false;
