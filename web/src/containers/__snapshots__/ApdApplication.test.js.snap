@@ -50,3 +50,10 @@ exports[`apd (application) component renders correctly 2`] = `
   to="/"
 />
 `;
+
+exports[`apd (application) component renders correctly 3`] = `
+<Redirect
+  push={false}
+  to="/"
+/>
+`;

@@ -173,3 +173,5 @@ const dirty = (state = initialState, action) => {
 };
 
 export default dirty;
+
+export const getIsDirty = state => state.dirty.dirty;
