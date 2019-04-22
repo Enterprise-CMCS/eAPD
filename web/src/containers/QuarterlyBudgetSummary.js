@@ -51,7 +51,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                     </th>
                   ))}
                   <th
-                    className="right-align"
+                    className="center"
                     scope="col"
                   >
                     {t('table.subtotal')}
