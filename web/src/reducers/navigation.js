@@ -1,7 +1,7 @@
 import { NAVIGATION_SCROLL_TO_WAYPOINT } from '../actions/navigation';
 
 const initialState = {
-  activeSection: null
+  activeSection: 'apd-state-profile-overview'
 };
 
 export default (state = initialState, action) => {

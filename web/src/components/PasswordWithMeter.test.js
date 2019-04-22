@@ -2,7 +2,13 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
+// Import the lazy-loading zxcvbn so we can use jest's mocking functionality
+// eslint-disable-next-line no-unused-vars
+import zxcvbn from '../lazy/zxcvbn';
+
 import Password from './PasswordWithMeter';
+
+jest.mock('../lazy/zxcvbn');
 
 describe('PasswordWithmeter component', () => {
   it('renders with no props', () => {
@@ -11,19 +17,21 @@ describe('PasswordWithmeter component', () => {
 
   it('renders with various passwords', () => {
     // weak, strength = 0
-    expect(shallow(<Password value="a" />)).toMatchSnapshot();
+    expect(shallow(<Password value="a" showMeter />)).toMatchSnapshot();
 
     // weak, strength = 1
-    expect(shallow(<Password value="abCD" />)).toMatchSnapshot();
+    expect(shallow(<Password value="abCD" showMeter />)).toMatchSnapshot();
 
     // weak, strength = 2
-    expect(shallow(<Password value="abCD321" />)).toMatchSnapshot();
+    expect(shallow(<Password value="abCD321" showMeter />)).toMatchSnapshot();
 
     // good, strength = 3
-    expect(shallow(<Password value="abCD321!," />)).toMatchSnapshot();
+    expect(shallow(<Password value="abCD321!," showMeter />)).toMatchSnapshot();
 
     // great, strength = 4
-    expect(shallow(<Password value="abCD321!,@_" />)).toMatchSnapshot();
+    expect(
+      shallow(<Password value="abCD321!,@_" showMeter />)
+    ).toMatchSnapshot();
   });
 
   it('shows the password', () => {

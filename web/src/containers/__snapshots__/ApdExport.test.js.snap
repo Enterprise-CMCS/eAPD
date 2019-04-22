@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apd export component renders correctly 1`] = `
+<Connect(ConnectedWaypoint)
+  id="export-and-submit"
+>
+  <Section
+    id="export-and-submit"
+    isNumbered={true}
+    resource="exportAndSubmit"
+  >
+    <p>
+      To submit your APD for analyst review, export the document as a PDF, then send it to CMS just like you’ve done before.
+    </p>
+    <ol>
+      <li>
+        Select 
+        <strong>
+          Export
+        </strong>
+         to open up your browser’s print options.
+      </li>
+      <li>
+        In the print window, select 
+        <strong>
+          Save as PDF
+        </strong>
+        . In Chrome, this option is listed under 
+        <em>
+          Destination
+        </em>
+        . In other browsers, this option is part of a dropdown menu labeled 
+        <em>
+          PDF
+        </em>
+        .
+      </li>
+      <li>
+        Select 
+        <strong>
+          Save
+        </strong>
+        . This will download a PDF to your computer.
+      </li>
+      <li>
+        If you decide to make changes before you submit, follow those three steps again to download a new PDF.
+      </li>
+      <li>
+        Email the completed APD to
+         
+        <strong>
+          <a
+            href="mailto:CMS-EAPD@cms.hhs.gov"
+          >
+            CMS-EAPD@cms.hhs.gov
+          </a>
+        </strong>
+        .
+      </li>
+    </ol>
+    <Button
+      className="ds-u-margin-top--2"
+      onClick={[Function]}
+      size="big"
+      type="button"
+      variation="primary"
+    >
+      Export
+      <span
+        className="ds-u-margin-left--2"
+      >
+        <FileDownload />
+      </span>
+    </Button>
+  </Section>
+</Connect(ConnectedWaypoint)>
+`;

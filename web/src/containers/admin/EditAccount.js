@@ -1,4 +1,9 @@
-import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
+import {
+  Button,
+  FormLabel,
+  Select,
+  TextField
+} from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -6,12 +11,15 @@ import { connect } from 'react-redux';
 import { editAccount as editAccountDispatch } from '../../actions/admin';
 import CardForm from '../../components/CardForm';
 import Header from '../../components/Header';
+import Password from '../../components/PasswordWithMeter';
+import { LockIcon, UnlockIcon } from '../../components/Icons';
 import { getEditAccountError } from '../../reducers/errors';
 import { getEditAccountWorking } from '../../reducers/working';
 import { STATES } from '../../util';
 
 class EditAccount extends Component {
   state = {
+    changePassword: false,
     hasFetched: false,
     success: false,
     userID: '',
@@ -33,10 +41,10 @@ class EditAccount extends Component {
 
   getForm = () => {
     const { currentUser, roles } = this.props;
-    const { user } = this.state;
+    const { changePassword, user } = this.state;
 
     if (user) {
-      const { email, name, phone, position, state, role } = user;
+      const { email, name, password, phone, position, state, role } = user;
 
       return (
         <Fragment>
@@ -109,6 +117,44 @@ class EditAccount extends Component {
               </option>
             ))}
           </Select>
+
+          <div className="ds-l-row ds-u-padding-x--2">
+            <TextField
+              label="Password"
+              name="current password"
+              ariaLabel="Current password"
+              value="********"
+              disabled
+              size="medium"
+            />
+            <div className="ds-u-clearfix">
+              <div className="ds-c-label">&nbsp;</div>
+              <div className="ds-c-field ds-u-border--0">
+                <Button
+                  aria-label={
+                    changePassword
+                      ? 'keep previous password'
+                      : 'change password'
+                  }
+                  variation="transparent"
+                  className="ds-u-padding-y--0"
+                  onClick={this.toggleChangePassword}
+                  purpose="change password"
+                >
+                  {changePassword ? <UnlockIcon /> : <LockIcon />} Change
+                  password
+                </Button>
+              </div>
+            </div>
+          </div>
+          {changePassword && (
+            <Password
+              showMeter
+              title="New password"
+              value={password}
+              onChange={this.handleEditAccount}
+            />
+          )}
         </Fragment>
       );
     }
@@ -132,7 +178,7 @@ class EditAccount extends Component {
   editAccount = e => {
     e.preventDefault();
     const { editAccount } = this.props;
-    const { user } = this.state;
+    const { changePassword, user } = this.state;
 
     // Once we've attempted to save these changes, it's valid to show success
     // or error messages.  Since error messages are persisted in app state,
@@ -140,7 +186,12 @@ class EditAccount extends Component {
     // of this form.  This flag makes sure we don't show any error messages
     // until this instance of the form has tried to save.
     this.setState({ hasFetched: true });
-    editAccount(user);
+    editAccount(user, changePassword);
+  };
+
+  toggleChangePassword = e => {
+    e.preventDefault();
+    this.setState(prev => ({ changePassword: !prev.changePassword }));
   };
 
   render() {

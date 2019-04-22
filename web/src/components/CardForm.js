@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { withRouter } from 'react-router';
 
+const formSubmitNoop = e => e.preventDefault();
+
 const CardForm = ({
+  cancelable,
+  canSubmit,
   children,
   error,
+  footer,
   history,
   legend,
   onSave,
@@ -31,7 +36,7 @@ const CardForm = ({
             )}
             {title}
           </h1>
-          <form onSubmit={onSave || (() => {})}>
+          <form onSubmit={(canSubmit && onSave) || formSubmitNoop}>
             <fieldset className="ds-u-margin--0 ds-u-padding--0 ds-u-border--0">
               {!!legend && <legend className="sr-only">{legend}</legend>}
 
@@ -39,7 +44,11 @@ const CardForm = ({
 
               <div className="ds-u-margin-top--5">
                 {onSave && (
-                  <Button variation="primary" type="submit" disabled={working}>
+                  <Button
+                    variation="primary"
+                    type="submit"
+                    disabled={!canSubmit || working}
+                  >
                     {working ? (
                       <Fragment>
                         <Spinner /> {primaryButtonWorking}
@@ -49,12 +58,15 @@ const CardForm = ({
                     )}
                   </Button>
                 )}
-                <Button variation="transparent" onClick={history.goBack}>
-                  Cancel
-                </Button>
+                {cancelable && (
+                  <Button variation="transparent" onClick={history.goBack}>
+                    Cancel
+                  </Button>
+                )}
               </div>
             </fieldset>
           </form>
+          {footer && <div className="card--foter">{footer}</div>}
         </div>
         <div className="ds-l-col--1 ds-u-margin-right--auto" />
       </div>
@@ -63,8 +75,11 @@ const CardForm = ({
 );
 
 CardForm.propTypes = {
+  cancelable: PropTypes.bool,
+  canSubmit: PropTypes.bool,
   children: PropTypes.node.isRequired,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   history: PropTypes.object.isRequired,
   legend: PropTypes.string,
   onSave: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
@@ -76,7 +91,10 @@ CardForm.propTypes = {
 };
 
 CardForm.defaultProps = {
+  cancelable: true,
+  canSubmit: true,
   error: false,
+  footer: false,
   legend: '',
   onSave: false,
   primaryButtonText: ['Save changes', 'Working'],

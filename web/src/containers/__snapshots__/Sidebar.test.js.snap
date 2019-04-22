@@ -24,9 +24,6 @@ exports[`Sidebar component renders correctly 1`] = `
           className="text-xl"
         >
           place name
-           
-          <br />
-          2018 HITECH APD
         </h1>
       </div>
       <VerticalNav
@@ -188,6 +185,12 @@ exports[`Sidebar component renders correctly 1`] = `
               ],
               "label": "Executive Summary",
             },
+            Object {
+              "id": "export-and-submit",
+              "label": "Export and Submit",
+              "onClick": [Function],
+              "url": "#export-and-submit",
+            },
           ]
         }
         selectedId="some section"
@@ -202,15 +205,6 @@ exports[`Sidebar component renders correctly 1`] = `
           size={null}
         >
           Save APD
-        </Btn>
-         
-        <Btn
-          extraCss="bg-white blue"
-          kind="outline"
-          onClick={[Function]}
-          size={null}
-        >
-          Save as PDF
         </Btn>
       </div>
     </div>
