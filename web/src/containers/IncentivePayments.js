@@ -43,11 +43,11 @@ class IncentivePayments extends Component {
                   <th />
                   <Fragment key={year}>
                     {QUARTERS.map(q => (
-                      <th key={q} className="right-align" scope="col">
+                      <th key={q} className="center" scope="col">
                         {t('table.quarter', { q })}
                       </th>
                     ))}
-                    <th className="right-align" scope="col">
+                    <th className="center" scope="col">
                       {t('table.subtotal')}
                     </th>
                   </Fragment>
