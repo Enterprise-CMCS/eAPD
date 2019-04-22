@@ -31,13 +31,15 @@ describe('APD endpoint | POST /apds', () => {
     expect(statusCode).toEqual(200);
 
     // The name is derived from the creation date, so it'll change with every
-    // run of this test.  Rather than figure out something fancy with the
-    // snapshots, just pull out the name and test it with a regex.
-
-    const { name } = body;
+    // run of this test.  Likewise the updated date is based on when the APD
+    // is saved.  Rather than figure out something fancy with the snapshots,
+    // just pull out the name and test it with a regex.
+    const { name, updated } = body;
     delete body.name;
+    delete body.updated;
 
-    expect(name).toMatch(/MN-\d{4}-\d{2}-\d{2}-HITECH-APD/);
+    expect(name).toMatch(/^MN-\d{4}-\d{2}-\d{2}-HITECH-APD$/);
+    expect(updated).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
     expect(body).toMatchSnapshot();
   });
 });

@@ -647,6 +647,11 @@ module.exports = {
             type: 'string',
             description: 'Status'
           },
+          updated: {
+            type: 'string',
+            format: 'date-time',
+            description: 'Timestamp of the last save to this APD'
+          },
           years: arrayOf({
             type: 'number'
           })

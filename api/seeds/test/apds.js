@@ -11,7 +11,10 @@ exports.seed = async knex => {
       // President and Chief Justice of the Supreme Court
       created_at: '1921-07-11T07:00:00Z',
       state_id: 'mn',
-      status: 'draft'
+      status: 'draft',
+      // Teddy Roosevelt returns to New York after travels through Europe
+      // and Africa
+      updated_at: '1910-06-18T09:00:00Z'
     },
     {
       id: 4001,
@@ -19,14 +22,19 @@ exports.seed = async knex => {
       // formally outlawing slavery
       created_at: '1865-12-6T00:00:00Z',
       state_id: 'az',
-      status: 'draft'
+      status: 'draft',
+      // The 19th Amendment to the US Constitution is officially ratified,
+      // extending the right to vote to women
+      updated_at: '1919-06-04T16:30:00Z'
     },
     {
       id: 4002,
       // Jesse Owens wins his first gold medal of the Berlin Olympics
       created_at: '1936-08-03T00:00:00Z',
       state_id: 'mn',
-      status: 'not draft'
+      status: 'not draft',
+      // Jackie Robinson joins the Brooklyn Dodgers
+      updated_at: '1947-04-10T00:00:00Z'
     }
   ]);
   await knex('apd_incentive_payments').insert([
