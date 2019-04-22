@@ -13,56 +13,54 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </h3>
     <table
       className="table-cms"
+      key="1"
     >
       <colgroup>
         <col
           className="table-cms--col-header__fixed-width"
         />
-        <col />
-        <col />
-        <col />
-        <col />
+        <col
+          span="5"
+        />
       </colgroup>
       <thead>
         <tr>
           <th
             className="center"
-            id="quarterly-budget-summary-hitAndHie-fy-1"
-            key="1"
           >
             FFY 1
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-hitAndHie-fy-1-q1"
             key="1"
+            scope="col"
           >
             Q1
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-hitAndHie-fy-1-q2"
             key="2"
+            scope="col"
           >
             Q2
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-hitAndHie-fy-1-q3"
             key="3"
+            scope="col"
           >
             Q3
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-hitAndHie-fy-1-q4"
             key="4"
+            scope="col"
           >
             Q4
           </th>
           <th
-            className="right-align"
-            id="quarterly-budget-summary-hitAndHie-fy-1-subtotal"
+            className="center"
+            scope="col"
           >
             Subtotal
           </th>
@@ -73,13 +71,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="state"
         >
           <th
-            headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2"
+            scope="row"
           >
             In-House Costs
           </th>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -87,8 +84,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -96,8 +92,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -105,8 +100,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -115,7 +109,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-subtotal"
           >
             <Dollars>
               15
@@ -126,13 +119,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="contractors"
         >
           <th
-            headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2"
+            scope="row"
           >
             Private Contractor Costs
           </th>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -140,8 +132,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -149,8 +140,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -158,8 +148,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -168,7 +157,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-subtotal"
           >
             <Dollars>
               14
@@ -179,13 +167,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="combined"
         >
           <th
-            headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2"
+            scope="row"
           >
             Total Enhanced FFP
           </th>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -193,8 +180,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -202,8 +188,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -211,8 +196,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -221,7 +205,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-hitAndHie-fy-1 quarterly-budget-summary-hitAndHie-fy-1-subtotal"
           >
             <Dollars>
               13
@@ -232,56 +215,54 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </table>
     <table
       className="table-cms"
+      key="2"
     >
       <colgroup>
         <col
           className="table-cms--col-header__fixed-width"
         />
-        <col />
-        <col />
-        <col />
-        <col />
+        <col
+          span="5"
+        />
       </colgroup>
       <thead>
         <tr>
           <th
             className="center"
-            id="quarterly-budget-summary-hitAndHie-fy-2"
-            key="2"
           >
             FFY 2
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-hitAndHie-fy-2-q1"
             key="1"
+            scope="col"
           >
             Q1
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-hitAndHie-fy-2-q2"
             key="2"
+            scope="col"
           >
             Q2
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-hitAndHie-fy-2-q3"
             key="3"
+            scope="col"
           >
             Q3
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-hitAndHie-fy-2-q4"
             key="4"
+            scope="col"
           >
             Q4
           </th>
           <th
-            className="right-align"
-            id="quarterly-budget-summary-hitAndHie-fy-2-subtotal"
+            className="center"
+            scope="col"
           >
             Subtotal
           </th>
@@ -292,13 +273,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="state"
         >
           <th
-            headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2"
+            scope="row"
           >
             In-House Costs
           </th>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -306,8 +286,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -315,8 +294,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -324,8 +302,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -334,7 +311,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-subtotal"
           >
             <Dollars>
               115
@@ -345,13 +321,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="contractors"
         >
           <th
-            headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2"
+            scope="row"
           >
             Private Contractor Costs
           </th>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -359,8 +334,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -368,8 +342,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -377,8 +350,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -387,7 +359,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-subtotal"
           >
             <Dollars>
               114
@@ -398,13 +369,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="combined"
         >
           <th
-            headers="quarterly-budget-summary-hitAndHie-null1 quarterly-budget-summary-hitAndHie-null2"
+            scope="row"
           >
             Total Enhanced FFP
           </th>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -412,8 +382,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -421,8 +390,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -430,8 +398,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -440,7 +407,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-hitAndHie-fy-2 quarterly-budget-summary-hitAndHie-fy-2-subtotal"
           >
             <Dollars>
               113
@@ -457,33 +423,25 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="table-cms--col-header__fixed-width"
         />
         <col />
-        <col />
-        <col />
-        <col />
       </colgroup>
       <thead>
         <tr>
-          <th
-            id="quarterly-budget-summary-hitAndHie-total"
-          >
+          <th>
             Total 
             HIT and HIE
           </th>
-          <th
-            id="quarterly-budget-summary-hitAndHie-null1"
-          />
+          <th />
         </tr>
       </thead>
       <tbody>
         <tr>
           <th
-            headers="quarterly-budget-summary-hitAndHie-total"
+            scope="row"
           >
             In-House Costs
           </th>
           <td
             className="bold mono right-align nowrap"
-            headers="quarterly-budget-summary-hitAndHie-total2 quarterly-budget-summary-hitAndHie-total"
           >
             <Dollars>
               3002
@@ -492,13 +450,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </tr>
         <tr>
           <th
-            headers="quarterly-budget-summary-hitAndHie-total"
+            scope="row"
           >
             Private Contractor Costs
           </th>
           <td
             className="bold mono right-align nowrap"
-            headers="quarterly-budget-summary-hitAndHie-total2 quarterly-budget-summary-hitAndHie-total"
           >
             <Dollars>
               3001
@@ -507,13 +464,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </tr>
         <tr>
           <th
-            headers="quarterly-budget-summary-hitAndHie-total"
+            scope="row"
           >
             Total Enhanced FFP
           </th>
           <td
             className="bold mono right-align nowrap"
-            headers="quarterly-budget-summary-hitAndHie-total2 quarterly-budget-summary-hitAndHie-total"
           >
             <Dollars>
               3000
@@ -534,56 +490,54 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </h3>
     <table
       className="table-cms"
+      key="1"
     >
       <colgroup>
         <col
           className="table-cms--col-header__fixed-width"
         />
-        <col />
-        <col />
-        <col />
-        <col />
+        <col
+          span="5"
+        />
       </colgroup>
       <thead>
         <tr>
           <th
             className="center"
-            id="quarterly-budget-summary-mmis-fy-1"
-            key="1"
           >
             FFY 1
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-mmis-fy-1-q1"
             key="1"
+            scope="col"
           >
             Q1
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-mmis-fy-1-q2"
             key="2"
+            scope="col"
           >
             Q2
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-mmis-fy-1-q3"
             key="3"
+            scope="col"
           >
             Q3
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-mmis-fy-1-q4"
             key="4"
+            scope="col"
           >
             Q4
           </th>
           <th
-            className="right-align"
-            id="quarterly-budget-summary-mmis-fy-1-subtotal"
+            className="center"
+            scope="col"
           >
             Subtotal
           </th>
@@ -594,13 +548,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="state"
         >
           <th
-            headers="quarterly-budget-summary-mmis-null1 quarterly-budget-summary-mmis-null2"
+            scope="row"
           >
             In-House Costs
           </th>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -608,8 +561,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -617,8 +569,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -626,8 +577,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -636,7 +586,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-subtotal"
           >
             <Dollars>
               215
@@ -647,13 +596,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="contractors"
         >
           <th
-            headers="quarterly-budget-summary-mmis-null1 quarterly-budget-summary-mmis-null2"
+            scope="row"
           >
             Private Contractor Costs
           </th>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -661,8 +609,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -670,8 +617,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -679,8 +625,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -689,7 +634,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-subtotal"
           >
             <Dollars>
               214
@@ -700,13 +644,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="combined"
         >
           <th
-            headers="quarterly-budget-summary-mmis-null1 quarterly-budget-summary-mmis-null2"
+            scope="row"
           >
             Total Enhanced FFP
           </th>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -714,8 +657,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -723,8 +665,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -732,8 +673,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -742,7 +682,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-mmis-fy-1 quarterly-budget-summary-mmis-fy-1-subtotal"
           >
             <Dollars>
               213
@@ -753,56 +692,54 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </table>
     <table
       className="table-cms"
+      key="2"
     >
       <colgroup>
         <col
           className="table-cms--col-header__fixed-width"
         />
-        <col />
-        <col />
-        <col />
-        <col />
+        <col
+          span="5"
+        />
       </colgroup>
       <thead>
         <tr>
           <th
             className="center"
-            id="quarterly-budget-summary-mmis-fy-2"
-            key="2"
           >
             FFY 2
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-mmis-fy-2-q1"
             key="1"
+            scope="col"
           >
             Q1
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-mmis-fy-2-q2"
             key="2"
+            scope="col"
           >
             Q2
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-mmis-fy-2-q3"
             key="3"
+            scope="col"
           >
             Q3
           </th>
           <th
             className="center"
-            id="quarterly-budget-summary-mmis-fy-2-q4"
             key="4"
+            scope="col"
           >
             Q4
           </th>
           <th
-            className="right-align"
-            id="quarterly-budget-summary-mmis-fy-2-subtotal"
+            className="center"
+            scope="col"
           >
             Subtotal
           </th>
@@ -813,13 +750,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="state"
         >
           <th
-            headers="quarterly-budget-summary-mmis-null1 quarterly-budget-summary-mmis-null2"
+            scope="row"
           >
             In-House Costs
           </th>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -827,8 +763,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -836,8 +771,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -845,8 +779,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -855,7 +788,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-subtotal"
           >
             <Dollars>
               1115
@@ -866,13 +798,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="contractors"
         >
           <th
-            headers="quarterly-budget-summary-mmis-null1 quarterly-budget-summary-mmis-null2"
+            scope="row"
           >
             Private Contractor Costs
           </th>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -880,8 +811,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -889,8 +819,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -898,8 +827,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap false"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -908,7 +836,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-subtotal"
           >
             <Dollars>
               1114
@@ -919,13 +846,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           key="combined"
         >
           <th
-            headers="quarterly-budget-summary-mmis-null1 quarterly-budget-summary-mmis-null2"
+            scope="row"
           >
             Total Enhanced FFP
           </th>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q1"
+            className="mono right-align nowrap"
             key="1"
           >
             <Dollars>
@@ -933,8 +859,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q2"
+            className="mono right-align nowrap"
             key="2"
           >
             <Dollars>
@@ -942,8 +867,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q3"
+            className="mono right-align nowrap"
             key="3"
           >
             <Dollars>
@@ -951,8 +875,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             </Dollars>
           </td>
           <td
-            className="mono right-align nowrap true"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-q4"
+            className="mono right-align nowrap"
             key="4"
           >
             <Dollars>
@@ -961,7 +884,6 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </td>
           <td
             className="mono right-align nowrap"
-            headers="quarterly-budget-summary-mmis-fy-2 quarterly-budget-summary-mmis-fy-2-subtotal"
           >
             <Dollars>
               1113
@@ -978,33 +900,25 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           className="table-cms--col-header__fixed-width"
         />
         <col />
-        <col />
-        <col />
-        <col />
       </colgroup>
       <thead>
         <tr>
-          <th
-            id="quarterly-budget-summary-mmis-total"
-          >
+          <th>
             Total 
             MMIS
           </th>
-          <th
-            id="quarterly-budget-summary-mmis-null1"
-          />
+          <th />
         </tr>
       </thead>
       <tbody>
         <tr>
           <th
-            headers="quarterly-budget-summary-mmis-total"
+            scope="row"
           >
             In-House Costs
           </th>
           <td
             className="bold mono right-align nowrap"
-            headers="quarterly-budget-summary-mmis-total2 quarterly-budget-summary-mmis-total"
           >
             <Dollars>
               4002
@@ -1013,13 +927,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </tr>
         <tr>
           <th
-            headers="quarterly-budget-summary-mmis-total"
+            scope="row"
           >
             Private Contractor Costs
           </th>
           <td
             className="bold mono right-align nowrap"
-            headers="quarterly-budget-summary-mmis-total2 quarterly-budget-summary-mmis-total"
           >
             <Dollars>
               4001
@@ -1028,13 +941,12 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </tr>
         <tr>
           <th
-            headers="quarterly-budget-summary-mmis-total"
+            scope="row"
           >
             Total Enhanced FFP
           </th>
           <td
             className="bold mono right-align nowrap"
-            headers="quarterly-budget-summary-mmis-total2 quarterly-budget-summary-mmis-total"
           >
             <Dollars>
               4000
