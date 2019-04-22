@@ -11,12 +11,14 @@ import { selectApdOnLoad } from '../actions/apd';
 
 describe('apd (application) component', () => {
   test('renders correctly', () => {
+    // non-admin, dirty
     expect(
       shallow(
         <ApdApplication
           apdName="test name"
           apdSelected
           dirty
+          isAdmin={false}
           place={{}}
           selectApdOnLoad={() => {}}
           year="the year"
@@ -24,6 +26,7 @@ describe('apd (application) component', () => {
       )
     ).toMatchSnapshot();
 
+    // non-admin, clean
     const selectApdOnLoadProp = sinon.spy();
     expect(
       shallow(
@@ -31,6 +34,7 @@ describe('apd (application) component', () => {
           apdName="another apd"
           apdSelected={false}
           dirty={false}
+          isAdmin={false}
           place={{}}
           selectApdOnLoad={selectApdOnLoadProp}
           year="the past"
@@ -38,6 +42,23 @@ describe('apd (application) component', () => {
       )
     ).toMatchSnapshot();
     expect(selectApdOnLoadProp.calledWith('/apd')).toBeTruthy();
+
+    // admin
+    selectApdOnLoadProp.resetHistory();
+    expect(
+      shallow(
+        <ApdApplication
+          apdName="third"
+          apdSelected={false}
+          dirty={false}
+          isAdmin
+          place={{}}
+          selectApdOnLoad={selectApdOnLoadProp}
+          year="the future"
+        />
+      )
+    ).toMatchSnapshot();
+    expect(selectApdOnLoadProp.notCalled).toBeTruthy();
   });
 
   test('maps state to props', () => {
@@ -63,6 +84,7 @@ describe('apd (application) component', () => {
       apdName: 'florp',
       apdSelected: true,
       dirty: 'moop moop',
+      isAdmin: false,
       place: 'place',
       year: 'dinkus'
     });
@@ -74,6 +96,7 @@ describe('apd (application) component', () => {
       apdName: 'florp',
       apdSelected: false,
       dirty: 'moop moop',
+      isAdmin: false,
       place: 'place',
       year: ''
     });
