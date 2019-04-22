@@ -80,6 +80,7 @@ tap.test('apds GET endpoint', async endpointTest => {
           id: 'a',
           name: 'apd a',
           status: 'status a',
+          updated: 'updated a',
           years: 'years a',
           other: 'stuff'
         },
@@ -87,6 +88,7 @@ tap.test('apds GET endpoint', async endpointTest => {
           id: 'b',
           name: 'apd b',
           status: 'status b',
+          updated: 'updated b',
           years: 'years b',
           gets: 'removed'
         },
@@ -94,6 +96,7 @@ tap.test('apds GET endpoint', async endpointTest => {
           id: 'c',
           name: 'apd c',
           status: 'status c',
+          updated: 'updated c',
           years: 'years c',
           from: 'results'
         }
@@ -105,9 +108,27 @@ tap.test('apds GET endpoint', async endpointTest => {
       validTest.ok(ApdModel.where.calledWith({ state_id: 'va' }));
       validTest.ok(
         res.send.calledWith([
-          { id: 'a', name: 'apd a', status: 'status a', years: 'years a' },
-          { id: 'b', name: 'apd b', status: 'status b', years: 'years b' },
-          { id: 'c', name: 'apd c', status: 'status c', years: 'years c' }
+          {
+            id: 'a',
+            name: 'apd a',
+            status: 'status a',
+            updated: 'updated a',
+            years: 'years a'
+          },
+          {
+            id: 'b',
+            name: 'apd b',
+            status: 'status b',
+            updated: 'updated b',
+            years: 'years b'
+          },
+          {
+            id: 'c',
+            name: 'apd c',
+            status: 'status c',
+            updated: 'updated c',
+            years: 'years c'
+          }
         ]),
         'APD info is sent back'
       );
@@ -206,14 +227,21 @@ tap.test('apds/:id GET endpoint', async tests => {
     handlerTest.test('sends apd', async test => {
       ApdModel.fetchAll.resolves({ toJSON });
       ApdModel.withRelated = 'this is related stuff';
-      toJSON.returns([{ id: 'a', years: 'years a', other: 'stuff' }]);
+      toJSON.returns([
+        { id: 'a', updated: 'updated a', years: 'years a', other: 'stuff' }
+      ]);
 
       await handler({ params: { id: '1' }, user: { state: 'va' } }, res);
 
       test.ok(res.status.notCalled, 'HTTP status not explicitly set');
       test.ok(ApdModel.where.calledWith({ id: '1', state_id: 'va' }));
       test.ok(
-        res.send.calledWith({ id: 'a', years: 'years a', other: 'stuff' }),
+        res.send.calledWith({
+          id: 'a',
+          updated: 'updated a',
+          years: 'years a',
+          other: 'stuff'
+        }),
         'APD info is sent back'
       );
     });

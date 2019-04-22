@@ -75,6 +75,8 @@ module.exports = () => ({
         delete out.stateProfile;
       }
 
+      out.updated_at = new Date();
+
       return out;
     },
 
@@ -112,6 +114,7 @@ module.exports = () => ({
           }
         },
         status: this.get('status'),
+        updated: this.get('updated_at'),
         years: this.get('years')
       };
     },
