@@ -1,13 +1,14 @@
 import { Button } from '@cmsgov/design-system-core';
 import PropType from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import Icon, { faPlusCircle, faSpinner } from '../components/Icons';
-import Sidebar from './StateDashboardSidebar';
-import TopBtns from './TopBtns';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
+import Instruction from '../components/Instruction';
+import Md from '../components/Md';
 import { createApd, deleteApd, selectApd } from '../actions/apd';
-import { Section } from '../components/Section';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 
@@ -34,68 +35,91 @@ const StateDashboard = (
   };
 
   const delApd = apd => () => {
-    if (global.confirm(`Delete HITECH APD for FFY ${apd.years.join(', ')}?`)) {
+    if (global.confirm(`Delete ${apd.name}?`)) {
       del(apd.id);
     }
   };
 
-  return (
-    <div className="site-body ds-l-container">
-      <div className="ds-l-row ds-u-margin--0">
-        <Sidebar />
-        <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
-          <TopBtns hideDashboard />
+  const submitSteps = t('stateDashboard.submitSteps');
 
-          <Section resource="stateDashboard">
-            <div className="mb3 bg-white rounded shadow accordian">
-              <div className="px3 py2 border-bottom border-bottom-darken-1 blue">
-                <span className="h2">{state.name} APDs</span>
-                <Button
-                  variation="primary"
-                  size="small"
-                  className="right inline-block"
-                  onClick={create}
+  return (
+    <Fragment>
+      <Header />
+      <div className="site-body ds-l-container">
+        <div className="ds-l-row ds-u-margin--0">
+          <div className="site-main p2 sm-p4 md-px0 ds-l-col--8 ds-u-margin-x--auto ">
+            <h1 className="ds-h1">
+              {t('stateDashboard.title', { state: state.name })}
+            </h1>
+            <Instruction source="stateDashboard.instruction" />
+
+            <h6 className="ds-h6">To submit an APD</h6>
+            <ol>
+              {submitSteps.map(step => (
+                <Md key={step} wrapper="li" content={step} />
+              ))}
+            </ol>
+
+            <div className="ds-u-border-bottom--2 ds-u-margin-bottom--1 ds-u-margin-top--6 ds-u-padding-bottom--1">
+              <Button
+                variation="primary"
+                className="ds-u-float--right"
+                onClick={create}
+              >
+                Create new&nbsp;&nbsp;
+                <Icon icon={faPlusCircle} />
+              </Button>
+              <h2 className="h2">{state.name} APDs</h2>
+            </div>
+
+            {fetching ? <Loading /> : null}
+            {!fetching && apds.length === 0 ? t('stateDashboard.none') : null}
+            <div className="ds-l-container">
+              {apds.map(apd => (
+                <div
+                  key={apd.id}
+                  className="ds-l-row ds-u-border-bottom--2 ds-u-margin-bottom--2 ds-u-padding-bottom--2"
                 >
-                  Create new&nbsp;&nbsp;
-                  <Icon icon={faPlusCircle} />
-                </Button>
-              </div>
-              <div className="p3">
-                {fetching ? <Loading /> : null}
-                {!fetching && apds.length === 0
-                  ? t('stateDashboard.none')
-                  : null}
-                {apds.map(apd => (
-                  <div key={apd.id} className="p2 mb2 bg-gray-lightest">
-                    <div className="inline-block p2 mr2 bg-white blue rounded left">
-                      <img
-                        src="/static/img/icon-document.svg"
-                        alt=""
-                        className="align-middle"
-                        style={{ minWidth: '33px' }}
-                      />
-                    </div>
-                    <h3 className="inline-block">
+                  <div
+                    className="ds-l-col--1 ds-u-valign--middle ds-u-text-align--center"
+                    style={{ alignSelf: 'center' }}
+                  >
+                    <span
+                      className="ds-u-fill--primary-alt-lightest ds-u-padding--2"
+                      style={{ marginLeft: '-16px' }}
+                    >
+                      <File size="lg" color="#046b99" />
+                    </span>
+                  </div>
+                  <div className="ds-l-col--9">
+                    <h3 className="ds-u-margin-top--0">
                       <a href="#!" onClick={open(apd.id)}>
-                        HITECH APD for FFY {apd.years.join(', ')}
+                        {apd.name}
                       </a>
                     </h3>
+                    <ul className="ds-c-list--bare">
+                      <li>
+                        <strong>Last edited:</strong> {apd.updated}
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="ds-l-col--2 ds-u-text-align--right">
                     <Button
-                      variation="danger"
+                      variation="transparent"
                       size="small"
-                      className="right"
                       onClick={delApd(apd)}
                     >
                       Delete
                     </Button>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          </Section>
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </Fragment>
   );
 };
 
