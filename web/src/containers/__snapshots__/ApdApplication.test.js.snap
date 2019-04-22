@@ -23,8 +23,11 @@ exports[`apd (application) component renders correctly 1`] = `
       >
         <span
           className="ds-h6 ds-u-display--block"
-        />
+        >
+          test name
+        </span>
          
+        the year
          APD
       </h1>
       <ApdStateProfile />
@@ -35,6 +38,7 @@ exports[`apd (application) component renders correctly 1`] = `
       <ProposedBudget />
       <Connect(AssurancesAndCompliance) />
       <Connect(ExecutiveSummary) />
+      <Connect(ExportAndSubmit) />
     </div>
   </div>
 </div>

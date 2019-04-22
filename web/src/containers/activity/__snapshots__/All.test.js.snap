@@ -48,28 +48,28 @@ exports[`the Activities component renders correctly 1`] = `
     </Subsection>
     <Connect(ConnectedWaypoint)
       id="1"
+      key="1"
     >
       <Connect(EntryDetails)
         aKey="1"
-        key="1"
         num={1}
       />
     </Connect(ConnectedWaypoint)>
     <Connect(ConnectedWaypoint)
       id="2"
+      key="2"
     >
       <Connect(EntryDetails)
         aKey="2"
-        key="2"
         num={2}
       />
     </Connect(ConnectedWaypoint)>
     <Connect(ConnectedWaypoint)
       id="3"
+      key="3"
     >
       <Connect(EntryDetails)
         aKey="3"
-        key="3"
         num={3}
       />
     </Connect(ConnectedWaypoint)>
