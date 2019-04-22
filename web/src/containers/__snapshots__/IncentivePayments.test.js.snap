@@ -12,44 +12,37 @@ exports[`incentive payments component renders correctly 1`] = `
   >
     <thead>
       <tr>
+        <th />
         <th
-          id="incentive-payments-table-fynull2"
-        />
-        <th
-          className="right-align"
-          id="incentive-payments-table-fy1-q1"
+          className="center"
           key="1"
           scope="col"
         >
           Q1
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy1-q2"
+          className="center"
           key="2"
           scope="col"
         >
           Q2
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy1-q3"
+          className="center"
           key="3"
           scope="col"
         >
           Q3
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy1-q4"
+          className="center"
           key="4"
           scope="col"
         >
           Q4
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy1-qsubtotal"
+          className="center"
           scope="col"
         >
           Subtotal
@@ -357,44 +350,37 @@ exports[`incentive payments component renders correctly 1`] = `
   >
     <thead>
       <tr>
+        <th />
         <th
-          id="incentive-payments-table-fynull2"
-        />
-        <th
-          className="right-align"
-          id="incentive-payments-table-fy2-q1"
+          className="center"
           key="1"
           scope="col"
         >
           Q1
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy2-q2"
+          className="center"
           key="2"
           scope="col"
         >
           Q2
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy2-q3"
+          className="center"
           key="3"
           scope="col"
         >
           Q3
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy2-q4"
+          className="center"
           key="4"
           scope="col"
         >
           Q4
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy2-qsubtotal"
+          className="center"
           scope="col"
         >
           Subtotal
