@@ -27,6 +27,24 @@ export const getKeyPersonnel = () => ({
   key: generateKey()
 });
 
+export const getAPDName = ({
+  apd: {
+    data: { name }
+  }
+}) => name;
+
+export const getAPDFirstYear = ({
+  apd: {
+    data: { years }
+  }
+}) => (years && years.length ? years[0] : '');
+
+export const getIsAnAPDSelected = ({
+  apd: {
+    data: { id }
+  }
+}) => !!id;
+
 const initialState = {
   data: {},
   byId: {},
