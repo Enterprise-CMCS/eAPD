@@ -28,35 +28,31 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
           >
             <h3 className="ds-h3">{sourceDisplay}</h3>
             {years.map((year) => (
-            <table className="table-cms">
+              <table
+                className="table-cms"
+                key={year}
+              >
               <colgroup>
                 <col className="table-cms--col-header__fixed-width" />
-                <col />
-                <col />
-                <col />
-                <col />
+                <col span="5"/>
               </colgroup>
               <thead>
                 <tr>
-                  <th
-                    key={year}
-                    className="center"
-                    id={`quarterly-budget-summary-${source}-fy-${year}`}
-                  >
+                  <th className="center">
                     {t('ffy', { year })}
                   </th>
                   {QUARTERS.map(q => (
                     <th
                       key={q}
                       className="center"
-                      id={`quarterly-budget-summary-${source}-fy-${year}-q${q}`}
+                      scope="col"
                     >
                       {t('table.quarter', { q })}
                     </th>
                   ))}
                   <th
                     className="right-align"
-                    id={`quarterly-budget-summary-${source}-fy-${year}-subtotal`}
+                    scope="col"
                   >
                     {t('table.subtotal')}
                   </th>
@@ -67,25 +63,19 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                   <tr
                     key={name}
                   >
-                    <th
-                      headers={`quarterly-budget-summary-${source}-null1 quarterly-budget-summary-${source}-null2`}
-                    >
+                    <th scope="row">
                       {EXPENSE_NAME_DISPLAY[name]}
                     </th>
                     {QUARTERS.map(q => (
                       <td
-                        className={`mono right-align nowrap ${
-                          name === 'combined'
-                        }`}
+                        className="mono right-align nowrap"
                         key={q}
-                        headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-q${q}`}
                       >
                         <Dollars>{data[year][q][name]}</Dollars>
                       </td>
                     ))}
                     <td
                       className="mono right-align nowrap"
-                      headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-subtotal`}
                     >
                       <Dollars>{data[year].subtotal[name]}</Dollars>
                     </td>
@@ -98,28 +88,20 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
               <colgroup>
                 <col className="table-cms--col-header__fixed-width" />
                 <col />
-                <col />
-                <col />
-                <col />
               </colgroup>
               <thead>
                 <tr>
-                  <th id={`quarterly-budget-summary-${source}-total`}>Total {sourceDisplay}</th>
-                  <th id={`quarterly-budget-summary-${source}-null1`}/>
+                  <th>Total {sourceDisplay}</th>
+                  <th />
                 </tr>
               </thead>
               <tbody>
               {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
                 <tr>
-                  <th
-                    headers={`quarterly-budget-summary-${source}-total`}
-                  >
+                  <th scope="row">
                     {EXPENSE_NAME_DISPLAY[name]}
                   </th>
-                  <td
-                    className="bold mono right-align nowrap"
-                    headers={`quarterly-budget-summary-${source}-total2 quarterly-budget-summary-${source}-total`}
-                  >
+                  <td className="bold mono right-align nowrap">
                     <Dollars>{data.total[name]}</Dollars>
                   </td>
                 </tr>
