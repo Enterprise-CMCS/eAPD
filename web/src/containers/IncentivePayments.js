@@ -40,14 +40,14 @@ class IncentivePayments extends Component {
             <table className="table-cms table-fixed">
               <thead>
                 <tr>
-                  <th id={thId('null2')} />
+                  <th />
                   <Fragment key={year}>
                     {QUARTERS.map(q => (
-                      <th key={q} className="right-align" id={thId(year, q)} scope="col">
+                      <th key={q} className="right-align" scope="col">
                         {t('table.quarter', { q })}
                       </th>
                     ))}
-                    <th className="right-align" id={thId(year, 'subtotal')} scope="col">
+                    <th className="right-align" scope="col">
                       {t('table.subtotal')}
                     </th>
                   </Fragment>
