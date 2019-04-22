@@ -39,10 +39,14 @@ describe('budget summary component', () => {
         <DataRow
           category="category text"
           data={{
-            total: { total: 0 }
+            medicaid: 0,
+            federal: 0,
+            state: 0,
+            total: 0
           }}
           entries={[]}
           title="title text"
+          year="year"
         />
       )
     ).toMatchSnapshot();
@@ -52,13 +56,10 @@ describe('budget summary component', () => {
     const component = shallow(
       <DataRow
         category="category text"
-        data={{
-          '1': { federal: 1, state: 2, medicaid: 1000, total: 3 },
-          '2': { federal: 10, state: 20, medicaid: 2000, total: 30 },
-          total: { federal: 100, state: 200, medicaid: 10000, total: 300 }
-        }}
+        data={{ federal: 1, state: 2, medicaid: 1000, total: 3 }}
         entries={[]}
         title="title text"
+        year="year"
       />
     );
     expect(component).toMatchSnapshot();
@@ -69,21 +70,20 @@ describe('budget summary component', () => {
       shallow(
         <DataRowGroup
           data={{
-            combined: {},
-            contractors: {},
-            expenses: {},
-            statePersonnel: {}
+            combined: { '1448': {} },
+            contractors: { '1448': {} },
+            expenses: { '1448': {} },
+            statePersonnel: { '1448': {} }
           }}
           entries={[10, 20, 30]}
+          year="1448"
         />
       )
     ).toMatchSnapshot();
   });
 
   test('header row renders', () => {
-    expect(
-      shallow(<HeaderRow yr='1' />)
-    ).toMatchSnapshot();
+    expect(shallow(<HeaderRow yr="1" />)).toMatchSnapshot();
   });
 
   test('maps state to props', () => {

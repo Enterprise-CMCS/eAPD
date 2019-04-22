@@ -87,10 +87,7 @@ describe('my account page', () => {
       position: 'Table Cleaner'
     };
 
-    // sinon.stub().rejects() wraps strings in Error objects, but the edit
-    // account action rejects a plain string, so return a rejected promise
-    // eslint-disable-next-line prefer-promise-reject-errors
-    const editAccount = sinon.stub().returns(Promise.reject('error message'));
+    const editAccount = sinon.spy();
     const preventDefault = sinon.spy();
 
     const component = shallow(
