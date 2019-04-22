@@ -31,6 +31,21 @@ describe('card form wrapper', () => {
     ).toMatchSnapshot();
   });
 
+  test('disables the save button if canSubmit is false', () => {
+    expect(
+      shallow(
+        <CardForm
+          title="test"
+          history={history}
+          onSave={sinon.spy()}
+          canSubmit={false}
+        >
+          hello world
+        </CardForm>
+      )
+    ).toMatchSnapshot();
+  });
+
   test('renders a legend if provided', () => {
     expect(
       shallow(
@@ -55,6 +70,26 @@ describe('card form wrapper', () => {
     expect(
       shallow(
         <CardForm title="test" history={history} success="oh yeah!">
+          hello world
+        </CardForm>
+      )
+    ).toMatchSnapshot();
+  });
+
+  test('does not render a cancel button if form is not cancelable', () => {
+    expect(
+      shallow(
+        <CardForm title="test" history={history} cancelable={false}>
+          hello world
+        </CardForm>
+      )
+    ).toMatchSnapshot();
+  });
+
+  test('renders a footer if provided', () => {
+    expect(
+      shallow(
+        <CardForm title="test" history={history} footer={<div>Hello</div>}>
           hello world
         </CardForm>
       )

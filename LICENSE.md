@@ -44,6 +44,7 @@ The icons in this project are from [Font Awesome Free](https://fontawesome.com/i
 - [edit](https://fontawesome.com/icons/edit?style=solid)
 - [exclamation-triangle](https://fontawesome.com/icons/exclamation-triangle?style=solid)
 - [file-alt](https://fontawesome.com/icons/file-alt?style=solid)
+- [file-download](https://fontawesome.com/icons/file-download?style=solid)
 - [lock](https://fontawesome.com/icons/lock?style=solid)
 - [plus-circle](https://fontawesome.com/icons/plus-circle?style=solid)
 - [spinner](https://fontawesome.com/icons/spinner?style=solid)

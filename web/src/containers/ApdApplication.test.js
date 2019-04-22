@@ -11,41 +11,50 @@ import { selectApdOnLoad } from '../actions/apd';
 
 describe('apd (application) component', () => {
   test('renders correctly', () => {
+    // non-admin, dirty
     expect(
       shallow(
         <ApdApplication
+          apdName="test name"
           apdSelected
           dirty
           isAdmin={false}
           place={{}}
           selectApdOnLoad={() => {}}
+          year="the year"
         />
       )
     ).toMatchSnapshot();
 
+    // non-admin, clean
     const selectApdOnLoadProp = sinon.spy();
     expect(
       shallow(
         <ApdApplication
+          apdName="another apd"
           apdSelected={false}
           dirty={false}
           isAdmin={false}
           place={{}}
           selectApdOnLoad={selectApdOnLoadProp}
+          year="the past"
         />
       )
     ).toMatchSnapshot();
     expect(selectApdOnLoadProp.calledWith('/apd')).toBeTruthy();
 
+    // admin
     selectApdOnLoadProp.resetHistory();
     expect(
       shallow(
         <ApdApplication
+          apdName="third"
           apdSelected={false}
           dirty={false}
           isAdmin
           place={{}}
           selectApdOnLoad={selectApdOnLoadProp}
+          year="the future"
         />
       )
     ).toMatchSnapshot();
@@ -56,7 +65,9 @@ describe('apd (application) component', () => {
     const state = {
       apd: {
         data: {
-          id: 'bloop'
+          id: 'bloop',
+          name: 'florp',
+          years: ['dinkus', 'dorkus']
         }
       },
       dirty: {
@@ -70,19 +81,24 @@ describe('apd (application) component', () => {
     };
 
     expect(mapStateToProps(state)).toEqual({
+      apdName: 'florp',
       apdSelected: true,
       dirty: 'moop moop',
       isAdmin: false,
-      place: 'place'
+      place: 'place',
+      year: 'dinkus'
     });
 
     state.apd.data.id = false;
+    delete state.apd.data.years;
 
     expect(mapStateToProps(state)).toEqual({
+      apdName: 'florp',
       apdSelected: false,
       dirty: 'moop moop',
       isAdmin: false,
-      place: 'place'
+      place: 'place',
+      year: ''
     });
   });
 
