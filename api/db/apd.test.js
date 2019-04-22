@@ -164,7 +164,7 @@ tap.test('apd data model', async apdModelTests => {
   });
 
   apdModelTests.test(
-    'converts from camel case to snake case and stringifies',
+    'converts from camel case to snake case, stringifies props, and sets update timestamp',
     async test => {
       const attributes = {
         fine: 'no change',
@@ -209,10 +209,12 @@ tap.test('apd data model', async apdModelTests => {
           medicaid_office_zip: 'hello',
           narrative_hit: null,
           narrative_mmis: 'also changed',
+          updated_at: {},
           years: '{"key":"value"}'
         },
         'converts to snake case, if defined'
       );
+      test.ok(out.updated_at instanceof Date, 'updated_at is a date');
     }
   );
 
@@ -259,6 +261,7 @@ tap.test('apd data model', async apdModelTests => {
     self.get
       .withArgs('medicaid_office_zip')
       .returns('a code to help the USPS get stuff there');
+    self.get.withArgs('updated_at').returns('a date in the past hopefully');
 
     const output = apd.apd.toJSON.bind(self)();
 
@@ -293,6 +296,7 @@ tap.test('apd data model', async apdModelTests => {
           }
         },
         status: 'apd-status',
+        updated: 'a date in the past hopefully',
         years: 'apd-years'
       },
       'gives the expected JSON'
