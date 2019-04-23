@@ -96,14 +96,14 @@ function waitForInstanceToBeReady() {
   INSTANCE_CHECK1=$(echo $INSTANCE_STATUS | jq -r -c '.InstanceStatuses[0].SystemStatus.Details[0].Status')
   INSTANCE_CHECK2=$(echo $INSTANCE_STATUS | jq -r -c '.InstanceStatuses[0].InstanceStatus.Details[0].Status')
   while [[ "$INSTANCE_CHECK1" != "passed" || "$INSTANCE_CHECK2" -ne "passed" ]]; do
-    echo "  ...status check #$INSTANCE_CHECK_COUNT: not ready"
+    print "  ...status check #$INSTANCE_CHECK_COUNT: not ready"
     sleep 30s
     INSTANCE_STATUS=$(aws ec2 describe-instance-status --instance-ids $1)
     INSTANCE_CHECK1=$(echo $INSTANCE_STATUS | jq -r -c '.InstanceStatuses[0].SystemStatus.Details[0].Status')
     INSTANCE_CHECK2=$(echo $INSTANCE_STATUS | jq -r -c '.InstanceStatuses[0].InstanceStatus.Details[0].Status')
     INSTANCE_CHECK_COUNT=$((INSTANCE_CHECK_COUNT+1))
   done
-  echo "  ...status check #$INSTANCE_CHECK_COUNT: READY"
+  print "  ...status check #$INSTANCE_CHECK_COUNT: READY"
 }
 
 # $1 - pull request number

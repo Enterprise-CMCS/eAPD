@@ -424,7 +424,7 @@ jobs:
               pip install --quiet awscli
               PRNUM=$(basename $CI_PULL_REQUESTS)
               URL=$(./aws.sh "$PRNUM")
-              ./github-comment.sh "$PRNUM" "$URL" "$CIRCLE_SHA1"
+              ./github-comment.sh "$PRNUM" "http://$URL" "$CIRCLE_SHA1"
             else
               echo "Not a pull request"
             fi
