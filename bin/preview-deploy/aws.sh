@@ -3,10 +3,15 @@
 set -e
 
 # Deploys a preview instance to EC2 with a fully self-contained environment.
+#
+# $1 - the pull request number
 function deployPreviewtoEC2() {
+  echo "PR NUMBER $1"
+  exit 0;
+
   # Create new EC2 instance
   echo "• Creating EC2 instance"
-  INSTANCE_ID=$(createNewInstance)
+  INSTANCE_ID=$(createNewInstance $1)
   echo "• Created instance $INSTANCE_ID"
 
   # Wait for the instance to become ready.  This will happen once the VM is
@@ -41,6 +46,8 @@ function addZipsToUserData() {
 
 # Create a new EC2 instance. Echos the new instance ID.
 #
+# $1 - the pull request number
+#
 # Expects global environment variables:
 #   AWS_PROD_API_REGION - The AWS region the instance should be created in
 #   AWS_PROD_API_AMI - Image ID of the AMI to use for this instance
@@ -53,7 +60,7 @@ function createNewInstance() {
     --image-id ami-0de53d8956e8dcf80 \
     --security-group-ids sg-0d0314e8cf261d9f6 \
     --subnet-id subnet-6c76f642 \
-    --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eapd-preview}]" \
+    --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eapd-pr-$1}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
 }
@@ -86,4 +93,4 @@ function waitForInstanceToBeReady() {
   echo "  ...status check #$INSTANCE_CHECK_COUNT: READY"
 }
 
-deployPreviewtoEC2
+deployPreviewtoEC2 $1

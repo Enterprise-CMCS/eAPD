@@ -64,15 +64,6 @@ workflows:
       - frontend build:
           requires:
             - frontend dependency vulnerability scan
-      # - frontend deploy preview:
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - master
-      #     requires:
-      #       - frontend build
-      #       - frontend dependency vulnerability scan
-      #       - yaml test
       - frontend deploy prod:
           filters:
             branches:
@@ -85,6 +76,17 @@ workflows:
             - frontend test
 
       # joint jobs
+      - preview deploy:
+          filters:
+            branches:
+              ignore:
+                - master
+          requires:
+            - backend dependency vulnerability scan
+            - frontend build
+            - frontend dependency vulnerability scan
+            - yaml test
+
       - store artifacts:
           filters:
             branches:
@@ -392,18 +394,6 @@ jobs:
           name: run nightly script
           command: ./bin/cleanup-pr-deploys.sh
 
-  # Frontend preview deployment, used to put up preview links in pull requests.
-  frontend deploy preview:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: deploy for pull request
-          command: ./bin/deploy-pr.sh
-
   # Frontend production deployment.
   frontend deploy prod:
     docker:
@@ -418,6 +408,25 @@ jobs:
             apt-get install awscli -y
             aws s3 sync web/dist $AWS_PROD_S3_BUCKET --region $AWS_PROD_S3_REGION --delete
   
+  # Preview deployment, used to put up preview links in pull requests
+  preview deploy:
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - run:
+          name: deploy to preview
+          working_directory: ~/project/bin/preview-deploy
+          command: |
+            if [ -n "$CI_PULL_REQUESTS" ]; then
+              apt-get -qq update
+              apt-get -qq install jq -y
+              pip install --quiet awscli
+              ./aws.sh `basename $CI_PULL_REQUESTS`
+            else
+              echo "Not a pull request"
+            fi
+
   # Zips up artifacts created in build steps and makes them available as
   # CircleCI artifact downloads.
   store artifacts:
