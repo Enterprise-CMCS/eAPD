@@ -13,6 +13,10 @@ function deployPreviewtoEC2() {
   # Configure AWS CLI with defaults
   configureAWS
 
+  # Find any existing preview deploys
+  print "• Finding existing preview instances"
+  EXISTING_INSTANCES=$(findExistingInstances $1)
+
   # Create new EC2 instance
   print "• Creating EC2 instance"
   INSTANCE_ID=$(createNewInstance $1)
@@ -27,6 +31,12 @@ function deployPreviewtoEC2() {
   print "• Getting public DNS name of new instance"
   PUBLIC_DNS=$(getPublicDNS $INSTANCE_ID)
   print "• Public address: $PUBLIC_DNS"
+
+  print "• Cleaning up previous instances"
+  while read -r INSTANCE_ID; do
+    terminateInstance "$INSTANCE_ID"
+  done <<< "$EXISTING_INSTANCES"
+
   echo "$PUBLIC_DNS"
 }
 
@@ -77,6 +87,16 @@ function createNewInstance() {
     | jq -r -c '.Instances[0].InstanceId'
 }
 
+# Finds any existing instances for previewing this PR
+#
+# $1 - the pull request number
+function findExistingInstances() {
+  aws ec2 describe-instances \
+    --filter Name=tag:Name,Values=eapd-pr-$1 \
+    --query "Reservations[*].Instances[*].InstanceId" \
+    | jq -c -r '.[] | join("")'
+}
+
 # Get the public DNS name for an instance.
 #
 # $1 - ID of the EC2 instance to get the public DNS name for
@@ -84,6 +104,15 @@ function getPublicDNS() {
   aws ec2 describe-instances \
     --instance-ids $1 \
     | jq -r -c '.Reservations[0].Instances[0].PublicDnsName'
+}
+
+# Terminates a list of instances
+#
+# $1 - list of instance ID to delete
+function terminateInstance() {
+  print "  ...terminating existing instance: $1"
+  aws ec2 terminate-instances \
+    --instance-ids "$1"
 }
 
 # Wait for EC2 instance status checks to be "passed"
