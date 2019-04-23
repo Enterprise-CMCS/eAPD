@@ -141,7 +141,7 @@ function createNewInstance() {
     --security-group-ids $AWS_PROD_API_SECURITY_GROUP \
     --subnet-id $AWS_PROD_API_SUBNET \
     --ebs-optimized \
-    --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eapd-staging-auto}]" \
+    --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eapd-prod-auto}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
 }

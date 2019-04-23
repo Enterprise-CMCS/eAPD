@@ -9,9 +9,13 @@ function print() {
 # Deploys a preview instance to EC2 with a fully self-contained environment.
 #
 # $1 - the pull request number
+# $2 - git branch name
 function deployPreviewtoEC2() {
   # Configure AWS CLI with defaults
   configureAWS
+
+  # Inject branch name into user data
+  configureUserData $2
 
   # Find any existing preview deploys
   print "• Finding existing preview instances"
@@ -65,6 +69,17 @@ function addZipsToUserData() {
 #   AWS_PROD_API_REGION - The AWS region to use
 function configureAWS() {
   aws configure set default.region $AWS_PROD_API_REGION
+}
+
+# Updates the EC2 user data script with values from the environment.
+#
+# $1 - the git branch that should be checked out/built
+function configureUserData() {
+  # Use vertical pipes as sed delimiters instead of slashes, since git branch
+  # names can contain slashes
+  sed -i'.backup' -e "s|__GIT_BRANCH__|\"`echo $1`\"|g" aws.user-data.sh
+
+  rm aws.user-data.sh.backup
 }
 
 # Create a new EC2 instance. Echos the new instance ID.
@@ -136,4 +151,5 @@ function waitForInstanceToBeReady() {
 }
 
 # $1 - pull request number
-echo $(deployPreviewtoEC2 $1)
+# $2 - git branch name
+echo $(deployPreviewtoEC2 $1 $2)

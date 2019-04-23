@@ -99,8 +99,7 @@ nvm alias default 10
 npm i -g pm2
 
 # Clone from Github
-git clone --depth 1 https://github.com/18F/cms-hitech-apd.git
-# git clone --single-branch -b [branch] https://github.com/18F/cms-hitech-apd.git
+git clone --single-branch -b __GIT_BRANCH__ https://github.com/18F/cms-hitech-apd.git
 
 # Build the web app and move it into place
 cd cms-hitech-apd/web
