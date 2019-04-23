@@ -90,6 +90,7 @@ function getPublicDNS() {
 #
 # $1 - ID of the EC2 instance to wait for
 function waitForInstanceToBeReady() {
+  sleep 10s
   INSTANCE_CHECK_COUNT=1
   INSTANCE_STATUS=$(aws ec2 describe-instance-status --instance-ids $1)
   INSTANCE_CHECK1=$(echo $INSTANCE_STATUS | jq -r -c '.InstanceStatuses[0].SystemStatus.Details[0].Status')
