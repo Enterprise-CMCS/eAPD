@@ -2,27 +2,29 @@
 # Exit when any command fails
 set -e
 
+function print() {
+  echo "$1" >&2
+}
+
 # Deploys a preview instance to EC2 with a fully self-contained environment.
 #
 # $1 - the pull request number
 function deployPreviewtoEC2() {
-  echo "PR NUMBER $1"
-  exit 0;
-
   # Create new EC2 instance
-  echo "• Creating EC2 instance"
+  print "• Creating EC2 instance"
   INSTANCE_ID=$(createNewInstance $1)
-  echo "• Created instance $INSTANCE_ID"
+  print "• Created instance $INSTANCE_ID"
 
   # Wait for the instance to become ready.  This will happen once the VM is
   # networkically available, which isn't strictly useful to us, but it's as
   # good an indication as we'll get that the machine is ready to do stuff.
-  echo "• Waiting for instance to be ready"
+  print "• Waiting for instance to be ready"
   waitForInstanceToBeReady $INSTANCE_ID
 
-  echo "• Getting public DNS name of new instance"
+  print "• Getting public DNS name of new instance"
   PUBLIC_DNS=$(getPublicDNS $INSTANCE_ID)
-  echo "• Public address: $PUBLIC_DNS"
+  print "• Public address: $PUBLIC_DNS"
+  echo "$PUBLIC_DNS"
 }
 
 # Creates zip files of the API and web app, base64 encodes them, and adds
@@ -93,4 +95,5 @@ function waitForInstanceToBeReady() {
   echo "  ...status check #$INSTANCE_CHECK_COUNT: READY"
 }
 
-deployPreviewtoEC2 $1
+# $1 - pull request number
+echo $(deployPreviewtoEC2 $1)
