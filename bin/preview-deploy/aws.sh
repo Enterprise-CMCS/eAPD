@@ -10,6 +10,9 @@ function print() {
 #
 # $1 - the pull request number
 function deployPreviewtoEC2() {
+  # Configure AWS CLI with defaults
+  configureAWS
+
   # Create new EC2 instance
   print "• Creating EC2 instance"
   INSTANCE_ID=$(createNewInstance $1)
@@ -46,6 +49,14 @@ function addZipsToUserData() {
   echo '#!'"/bin/bash\n\necho '$(base64 webapp.zip)' | base64 --decode > webapp.zip\necho '$(base64 api.zip)' | base64 --decode > api.zip\n\n$(cat aws.user-data.sh)" > aws.user-data.sh
 }
 
+# Sets up AWS global configuration for all subsequent commands.
+#
+# Expects global environment variables:
+#   AWS_PROD_API_REGION - The AWS region to use
+function configureAWS() {
+  aws configure set default.region $AWS_PROD_API_REGION
+}
+
 # Create a new EC2 instance. Echos the new instance ID.
 #
 # $1 - the pull request number
@@ -57,7 +68,6 @@ function addZipsToUserData() {
 #   AWS_PROD_API_SUBNET - ID of the subnet this instance should be attached to
 function createNewInstance() {
   aws ec2 run-instances \
-    --region us-east-1 \
     --instance-type t2.medium \
     --image-id ami-0de53d8956e8dcf80 \
     --security-group-ids sg-0d0314e8cf261d9f6 \
