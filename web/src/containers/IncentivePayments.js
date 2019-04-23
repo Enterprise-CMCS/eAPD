@@ -20,8 +20,6 @@ const formatNumber = (type, number) =>
   type === 'amount' ? <Dollars>{number}</Dollars> : formatNum(number);
 
 const thId = (fy, q) => `incentive-payments-table-fy${fy}${q ? `-q${q}` : ''}`;
-const tdHdrs = (fy, q) =>
-  `incentive-payments-table-fy${fy} incentive-payments-table-fy${fy}-q${q}`;
 
 class IncentivePayments extends Component {
   handleChange = (key, year, quarter) => e => {
@@ -42,35 +40,35 @@ class IncentivePayments extends Component {
             <table className="table-cms table-fixed">
               <thead>
                 <tr>
-                  <th id={thId('null2')} />
+                  <th />
                   <Fragment key={year}>
                     {QUARTERS.map(q => (
-                      <th key={q} className="right-align" id={thId(year, q)}>
+                      <th key={q} className="center" scope="col">
                         {t('table.quarter', { q })}
                       </th>
                     ))}
-                    <th className="right-align" id={thId(year, 'subtotal')}>
+                    <th className="center" scope="col">
                       {t('table.subtotal')}
                     </th>
                   </Fragment>
                 </tr>
               </thead>
               <tbody>
-                {INCENTIVE_ENTRIES.map(({ id, name, type }, i) => {
+                {INCENTIVE_ENTRIES.map(({ id, name, type }) => {
                   const InputComponent =
                     type === 'amount' ? DollarInput : Input;
 
                   return (
                     <tr key={id}>
-                      <td
-                        className={`align-middle ${i % 2 === 0 ? 'bold' : ''}`}
-                        headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+                      <th
+                        className="align-middle"
+                        scope="row"
                       >
                         {name}
-                      </td>
+                      </th>
                       <Fragment key={year}>
                         {QUARTERS.map(q => (
-                          <td key={q} headers={tdHdrs(year, q)}>
+                          <td key={q}>
                             <InputComponent
                               name={`${id}-payments-${year}-q${q}`}
                               label={`${id} payments for ${year}, quarter ${q}`}
@@ -83,8 +81,7 @@ class IncentivePayments extends Component {
                           </td>
                         ))}
                         <td
-                          className="bold mono right-align align-middle"
-                          headers={tdHdrs(year, 'subtotal')}
+                          className="mono right-align align-middle"
                         >
                           {formatNumber(type, totals[id].byYear[year])}
                         </td>
