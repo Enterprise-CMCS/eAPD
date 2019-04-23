@@ -7,150 +7,112 @@ import { t } from '../i18n';
 
 const FUNDING_SOURCES = [['hitAndHie', 'HIT and HIE'], ['mmis', 'MMIS']];
 const QUARTERS = [1, 2, 3, 4];
-const COLORS = ['teal', 'green', 'yellow'];
 const EXPENSE_NAME_DISPLAY = {
   state: t('proposedBudget.quarterlyBudget.expenseNames.state'),
   contractors: t('proposedBudget.quarterlyBudget.expenseNames.contractor'),
   combined: t('proposedBudget.quarterlyBudget.expenseNames.combined')
 };
 
-const color = idx => `bg-${COLORS[idx] || 'gray'}`;
-
 const QuarterlyBudgetSummary = ({ budget, years }) => {
   // wait until budget is loaded
   if (!years.length) return null;
 
   return (
-    <div>
+    <Fragment>
       {FUNDING_SOURCES.map(([source, sourceDisplay]) => {
         const data = budget[source];
         return (
           <div
             key={source}
-            className="mb3 table-frozen-wrapper table-frozen-wide-header"
+            className="mb3"
           >
-            <h3 className="mt0">{sourceDisplay}</h3>
-            <div className="overflow-x table-frozen-scroller">
+            <h3 className="ds-h3">{sourceDisplay}</h3>
+            {years.map((year) => (
               <table
-                className="table-cms table-frozen-left-pane"
-                aria-hidden="true"
+                className="table-cms"
+                key={year}
               >
-                <thead>
-                  <tr>
-                    <th className="table-frozen-null-cell">--</th>
-                  </tr>
-                  <tr>
-                    <th className="table-frozen-null-cell">--</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
-                    <tr
-                      key={name}
-                      className={`${name === 'combined' ? 'bold' : ''}`}
-                    >
-                      <td>{EXPENSE_NAME_DISPLAY[name]}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <table className="table-cms table-frozen-data">
-                <thead>
-                  <tr>
-                    <th id={`quarterly-budget-summary-${source}-null1`} />
-                    {years.map((year, i) => (
-                      <th
-                        key={year}
-                        className={`center ${color(i)}`}
-                        colSpan="5"
-                        id={`quarterly-budget-summary-${source}-fy-${year}`}
-                      >
-                        {t('ffy', { year })}
-                      </th>
-                    ))}
+              <colgroup>
+                <col className="table-cms--col-header__fixed-width" />
+                <col span="5"/>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th className="center">
+                    {t('ffy', { year })}
+                  </th>
+                  {QUARTERS.map(q => (
                     <th
+                      key={q}
                       className="center"
-                      id={`quarterly-budget-summary-${source}-total`}
+                      scope="col"
                     >
-                      {t('table.total')}
+                      {t('table.quarter', { q })}
                     </th>
-                  </tr>
-                  <tr>
-                    <th id={`quarterly-budget-summary-${source}-null2`} />
-                    {years.map((year, i) => (
-                      <Fragment key={year}>
-                        {QUARTERS.map(q => (
-                          <th
-                            key={q}
-                            className="center"
-                            id={`quarterly-budget-summary-${source}-fy-${year}-q${q}`}
-                          >
-                            {t('table.quarter', { q })}
-                          </th>
-                        ))}
-                        <th
-                          className={`right-align ${color(i)}-light`}
-                          id={`quarterly-budget-summary-${source}-fy-${year}-subtotal`}
-                        >
-                          {t('table.subtotal')}
-                        </th>
-                      </Fragment>
-                    ))}
-                    <th
-                      className="bg-gray-light"
-                      id={`quarterly-budget-summary-${source}-total2`}
-                    />
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
-                    <tr
-                      key={name}
-                      className={`${name === 'combined' ? 'bold' : ''}`}
-                    >
-                      <td
-                        headers={`quarterly-budget-summary-${source}-null1 quarterly-budget-summary-${source}-null2`}
-                      >
-                        {EXPENSE_NAME_DISPLAY[name]}
-                      </td>
-                      {years.map((year, i) => (
-                        <Fragment key={year}>
-                          {QUARTERS.map(q => (
-                            <td
-                              className={`mono right-align nowrap ${
-                                name === 'combined' ? `${color(i)}-light` : ''
-                              }`}
-                              key={q}
-                              headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-q${q}`}
-                            >
-                              <Dollars>{data[year][q][name]}</Dollars>
-                            </td>
-                          ))}
-                          <td
-                            className={`bold mono right-align nowrap ${color(
-                              i
-                            )}-light`}
-                            headers={`quarterly-budget-summary-${source}-fy-${year} quarterly-budget-summary-${source}-fy-${year}-subtotal`}
-                          >
-                            <Dollars>{data[year].subtotal[name]}</Dollars>
-                          </td>
-                        </Fragment>
-                      ))}
-                      <td
-                        className="bold mono right-align nowrap bg-gray-light"
-                        headers={`quarterly-budget-summary-${source}-total2 quarterly-budget-summary-${source}-total`}
-                      >
-                        <Dollars>{data.total[name]}</Dollars>
-                      </td>
-                    </tr>
                   ))}
-                </tbody>
-              </table>
-            </div>
+                  <th
+                    className="center"
+                    scope="col"
+                  >
+                    {t('table.subtotal')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
+                  <tr
+                    key={name}
+                  >
+                    <th scope="row">
+                      {EXPENSE_NAME_DISPLAY[name]}
+                    </th>
+                    {QUARTERS.map(q => (
+                      <td
+                        className="mono right-align nowrap"
+                        key={q}
+                      >
+                        <Dollars>{data[year][q][name]}</Dollars>
+                      </td>
+                    ))}
+                    <td
+                      className="mono right-align nowrap"
+                    >
+                      <Dollars>{data[year].subtotal[name]}</Dollars>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            ))}
+            <table className="table-cms table-cms__totals">
+              <colgroup>
+                <col className="table-cms--col-header__fixed-width" />
+                <col />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Total {sourceDisplay}</th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>
+              {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
+                <tr>
+                  <th scope="row">
+                    {EXPENSE_NAME_DISPLAY[name]}
+                  </th>
+                  <td className="bold mono right-align nowrap">
+                    <Dollars>{data.total[name]}</Dollars>
+                  </td>
+                </tr>
+              ))}
+              </tbody>
+            </table>
           </div>
         );
+
       })}
-    </div>
+    </Fragment>
   );
 };
 

@@ -2,6 +2,12 @@
 
 .table-cms {
   font-size: 12px;
+  &.table-cms__totals {
+    width: 42%; // roughly equal to full tables' cells; temp fix before switching font to courier
+  }
+  &.centered-headers th {
+    text-align: center;
+  }
   th {
     background-color: #DAE9F7;
     font-weight: normal;
@@ -16,11 +22,12 @@
     &:first-child {
       border-left: none;
     }
-  }
-  &.centered-headers th {
-    text-align: center;
+
   }
   + .table-cms:not(.table-frozen-data){
     margin-top: $spacer-2;
+  }
+  .table-cms--col-header__fixed-width {
+    width: 175px; // so totals tables have the same col width as other tables
   }
 }
