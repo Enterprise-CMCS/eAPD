@@ -423,7 +423,7 @@ jobs:
               apt-get -qq install jq -y
               pip install --quiet awscli
               PRNUM=$(basename $CI_PULL_REQUESTS)
-              URL=$(./aws.sh "$PRNUM")
+              URL=$(./aws.sh "$PRNUM" "$CIRCLE_BRANCH")
               ./github-comment.sh "$PRNUM" "http://$URL" "$CIRCLE_SHA1"
             else
               echo "Not a pull request"
