@@ -1,8 +1,7 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
-/* we may be able to just target the header element without a class in future iterations. */
-.header__slim {
-  background-color: $color-primary-alt-darkest;
+header {
+  background-color: $color-primary-darkest;
   padding: $spacer-1 0;
   .site-title {
     display: block;
@@ -10,12 +9,18 @@
     text-decoration: none;
     font-weight: bold;
     color: $color-white;
-    letter-spacing: 1.6px;
   }
+}
 
-  .action--logout {
+.nav--dropdown {
+  list-style: none;
+
+  .nav--dropdown__trigger {
     float: right;
     margin-top: $spacer-1;
+  }
+
+  button {
     color: $color-white;
   }
 }
