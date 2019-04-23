@@ -641,6 +641,11 @@ Object {
             "description": "Status",
             "type": "string",
           },
+          "updated": Object {
+            "description": "Timestamp of the last save to this APD",
+            "format": "date-time",
+            "type": "string",
+          },
           "years": Object {
             "items": Object {
               "type": "number",
@@ -776,6 +781,11 @@ Object {
                       },
                       "status": Object {
                         "description": "Current status of the APD; e.g., \\"draft\\", \\"archived\\", etc.",
+                        "type": "string",
+                      },
+                      "updated": Object {
+                        "description": "Timestamp of the last save to this APD",
+                        "format": "date-time",
                         "type": "string",
                       },
                       "years": Object {

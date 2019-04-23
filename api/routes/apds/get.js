@@ -19,10 +19,11 @@ module.exports = (app, ApdModel = defaultApdModel) => {
       const whereCondits = { state_id: stateId };
       const apds = (await ApdModel.where(whereCondits).fetchAll())
         .toJSON()
-        .map(({ id, name, status, years }) => ({
+        .map(({ id, name, status, updated, years }) => ({
           id,
           name,
           status,
+          updated,
           years
         }));
 

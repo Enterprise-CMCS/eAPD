@@ -52,4 +52,10 @@ const getIsAdmin = ({
   return role === 'admin';
 };
 
+export const getUserStateOrTerritory = ({
+  user: {
+    data: { state }
+  }
+}) => state;
+
 export { getIsAdmin };
