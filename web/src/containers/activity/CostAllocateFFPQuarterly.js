@@ -40,7 +40,7 @@ class CostAllocateFFPQuarterly extends Component {
     return (
       <div>
         {years.map(year => (
-          <div>
+          <div key={year}>
             <h3>{t('ffy', { year })}</h3>
             <table className="table-cms table-fixed">
               <thead>

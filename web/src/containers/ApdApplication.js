@@ -5,6 +5,7 @@ import { Prompt, Redirect } from 'react-router-dom';
 
 import Activities from './activity/All';
 import AssurancesAndCompliance from './AssurancesAndCompliance';
+import Export from './ApdExport';
 import ApdSummary from './ApdSummary';
 import ExecutiveSummary from './ExecutiveSummary';
 import PreviousActivities from './PreviousActivities';
@@ -14,6 +15,14 @@ import TopBtns from './TopBtns';
 import { selectApdOnLoad } from '../actions/apd';
 import StateProfile from '../components/ApdStateProfile';
 import ProposedBudget from '../components/ProposedBudget';
+
+import {
+  getAPDName,
+  getAPDFirstYear,
+  getIsAnAPDSelected
+} from '../reducers/apd';
+import { getIsDirty } from '../reducers/dirty';
+import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user';
 
 const unsavedPrompt =
   'You have unsaved changes to your APD. Do you want to leave this page without saving?';
@@ -42,11 +51,18 @@ class ApdApplication extends Component {
 
   render() {
     const {
+      apdName,
       apdSelected,
       dirty,
+      isAdmin,
       place,
-      selectApdOnLoad: dispatchSelectApdOnLoad
+      selectApdOnLoad: dispatchSelectApdOnLoad,
+      year
     } = this.props;
+
+    if (isAdmin) {
+      return <Redirect to="/" />;
+    }
 
     if (!apdSelected) {
       dispatchSelectApdOnLoad('/apd');
@@ -71,6 +87,10 @@ class ApdApplication extends Component {
           <Sidebar place={place} />
           <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
             <TopBtns />
+            <h1 className="ds-h1 apd--title">
+              <span className="ds-h6 ds-u-display--block">{apdName}</span>
+              {place.name} {year} APD
+            </h1>
             <StateProfile />
             <ApdSummary />
             <PreviousActivities />
@@ -79,6 +99,7 @@ class ApdApplication extends Component {
             <ProposedBudget />
             <AssurancesAndCompliance />
             <ExecutiveSummary />
+            <Export />
           </div>
         </div>
       </div>
@@ -87,22 +108,22 @@ class ApdApplication extends Component {
 }
 
 ApdApplication.propTypes = {
+  apdName: PropTypes.string.isRequired,
   apdSelected: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
-  selectApdOnLoad: PropTypes.func.isRequired
+  selectApdOnLoad: PropTypes.func.isRequired,
+  year: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({
-  apd: { data },
-  dirty: { dirty },
-  user: {
-    data: { state }
-  }
-}) => ({
-  apdSelected: !!data.id,
-  dirty,
-  place: state
+const mapStateToProps = state => ({
+  apdName: getAPDName(state),
+  apdSelected: getIsAnAPDSelected(state),
+  dirty: getIsDirty(state),
+  isAdmin: getIsAdmin(state),
+  place: getUserStateOrTerritory(state),
+  year: getAPDFirstYear(state)
 });
 
 const mapDispatchToProps = { selectApdOnLoad };

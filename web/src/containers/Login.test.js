@@ -39,6 +39,19 @@ describe('login component', () => {
     expect(component).toMatchSnapshot();
   });
 
+  test('renders consent banner initially', () => {
+    const component = shallow(
+      <Login
+        authenticated={false}
+        error=""
+        fetching={false}
+        location={{ state: { from: 'origin' } }}
+        login={() => {}}
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+
   test('renders correctly if not logged in', () => {
     const component = shallow(
       <Login
@@ -49,6 +62,9 @@ describe('login component', () => {
         login={() => {}}
       />
     );
+    // clicky the consent banner to get through to the login screen
+    component.find('ConsentBanner').prop('onAgree')();
+
     expect(component).toMatchSnapshot();
 
     component
@@ -71,6 +87,9 @@ describe('login component', () => {
         login={() => {}}
       />
     );
+    // clicky the consent banner to get through to the login screen
+    component.find('ConsentBanner').prop('onAgree')();
+
     expect(component).toMatchSnapshot();
   });
 
@@ -84,6 +103,9 @@ describe('login component', () => {
         login={() => {}}
       />
     );
+    // clicky the consent banner to get through to the login screen
+    component.find('ConsentBanner').prop('onAgree')();
+
     expect(component).toMatchSnapshot();
   });
 
@@ -100,6 +122,8 @@ describe('login component', () => {
         login={loginProp}
       />
     );
+    // clicky the consent banner to get through to the login screen
+    component.find('ConsentBanner').prop('onAgree')();
 
     component
       .find('TextField')
@@ -107,7 +131,7 @@ describe('login component', () => {
     component
       .find('Password')
       .simulate('change', { target: { name: 'password', value: 'secret' } });
-    component.find('CardForm').prop('onSave')(event);
+    component.find('withRouter(CardForm)').prop('onSave')(event);
 
     expect(loginProp.calledWith('bob', 'secret')).toBeTruthy();
     expect(event.preventDefault.called).toBeTruthy();

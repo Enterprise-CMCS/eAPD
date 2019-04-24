@@ -186,7 +186,7 @@ describe('APD activity serializer', () => {
       expect(fromAPI(activityAPI, ['1947', '1949'])).toMatchObject(
         expect.objectContaining({
           id: 998,
-          key: expect.stringMatching(/[a-f0-9]{8}/),
+          key: expect.stringMatching(/^[a-f0-9]{8}$/),
           name: 'activity 998',
           fundingSource: 'bob',
           years: ['1947', '1949'],
@@ -202,13 +202,13 @@ describe('APD activity serializer', () => {
           goals: [
             {
               id: 'g1',
-              key: expect.stringMatching(/[a-f0-9]{8}/),
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
               description: 'goal 1 description',
               objective: 'goal 1 objective'
             },
             {
               id: 'g2',
-              key: expect.stringMatching(/[a-f0-9]{8}/),
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
               description: 'goal 2 description',
               objective: 'goal 2 objective'
             }
@@ -216,7 +216,7 @@ describe('APD activity serializer', () => {
           schedule: [
             {
               id: 'm1',
-              key: expect.stringMatching(/[a-f0-9]{8}/),
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
               milestone: 'milestone name',
               plannedStart: 'start',
               plannedEnd: 'end'
@@ -225,7 +225,7 @@ describe('APD activity serializer', () => {
           statePersonnel: [
             {
               id: 'person 1',
-              key: expect.stringMatching(/[a-f0-9]{8}/),
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
               title: 'job title 1',
               desc: 'desc 1',
               years: {
@@ -235,7 +235,7 @@ describe('APD activity serializer', () => {
             },
             {
               id: 'person 2',
-              key: expect.stringMatching(/[a-f0-9]{8}/),
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
               title: 'job title 2',
               desc: 'desc 2',
               years: {
@@ -247,7 +247,7 @@ describe('APD activity serializer', () => {
           contractorResources: [
             {
               id: 'contractor 1',
-              key: expect.stringMatching(/[a-f0-9]{8}/),
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
               name: 'contractor 1',
               desc: 'desc 1',
               start: 'start 1',
@@ -270,7 +270,7 @@ describe('APD activity serializer', () => {
             },
             {
               id: 'contractor 2',
-              key: expect.stringMatching(/[a-f0-9]{8}/),
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
               name: 'contractor 2',
               desc: 'desc 2',
               start: 'start 2',
@@ -296,14 +296,14 @@ describe('APD activity serializer', () => {
           expenses: [
             {
               id: 'e1',
-              key: expect.stringMatching(/[a-f0-9]{8}/),
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
               category: 'category 1',
               desc: 'desc 1',
               years: { 2018: 10, 2019: 20 }
             },
             {
               id: 'e2',
-              key: expect.stringMatching(/[a-f0-9]{8}/),
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
               category: 'category 2',
               desc: 'desc 2',
               years: { 2018: 30, 2019: 40 }
