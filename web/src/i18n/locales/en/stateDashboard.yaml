@@ -1,10 +1,13 @@
-title: My Dashboard
-subheader: 
+title: My State Dashboard
+subheader:
 helpText: >-
-  Use the eAPD to build and manage your state’s Advanced Planning Documents.
-  Follow the instructions to enter relevant information. Save your work in
-  progress and come back to a draft at any time. Each APD your state creates
-  in the eAPD will be listed here for you to review or edit. To submit an APD,
-  open it and select Save as PDF, then send the document to CMS just like
-  you've done before.
+  The CMS HITECH APD app is the new way to create and manage your state’s HITECH
+  Advanced Planning Documents (APDs). Follow the steps to fill in the required information,
+  and the app will generate a completed APD you can submit to a CMS State Officer
+  for review.
+
+
+  All your state’s APDs are listed here. Save your work in progress
+  and come back to a draft at any time. When you’re ready to submit an APD, download a
+  PDF and email it to CMS just like you’ve done before.
 none: You have not created any APDs.
