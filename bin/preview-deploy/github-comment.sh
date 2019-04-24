@@ -13,6 +13,7 @@ function postOrUpdateComment() {
   local PREVIEW_URL=$2
   local GIT_SHA=$3
 
+  echo <<GITHUBMESSAGE
   # Update the comment on Github, if there's one already.  This way we'll know the bot updated the thing.
   COMMENTS=$(curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
   if [ "$COMMENTS" ]; then
@@ -24,6 +25,7 @@ function postOrUpdateComment() {
     # Post a new message if one doesn't already exist.
     curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" -d '{"body":"See this pull request in action: '"$PREVIEW_URL"'"}' -H "Content-Type: application/json" -X POST "https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments"
   fi
+GITHUBMESSAGE
 }
 
 # $1 - pull request number
