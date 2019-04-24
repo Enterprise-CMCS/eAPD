@@ -9,9 +9,9 @@
 #   GH_BOT_USER - The username of the Github user to post as
 #   GH_BOT_PASSWORD - The password for the Github user
 function postOrUpdateComment() {
-  local PRNUM="$1"
-  local PREVIEW_URL="$2"
-  local GIT_SHA="$3"
+  local PRNUM=$1
+  local PREVIEW_URL=$2
+  local GIT_SHA=$3
 
   # Update the comment on Github, if there's one already.  This way we'll know the bot updated the thing.
   COMMENTS=$(curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" https://api.github.com/repos/18f/cms-hitech-apd/issues/$PRNUM/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
