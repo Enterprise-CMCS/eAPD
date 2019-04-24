@@ -11,6 +11,8 @@ mkdir /app/web
 chown -R :eapd /app
 chmod -R g+w /app
 
+mkdir /app/tls
+
 # Install nginx and postgres
 amazon-linux-extras install nginx1.12
 yum -y install git postgresql-server
@@ -26,6 +28,15 @@ host      all         all     ::1/128         password
 service postgresql start
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
+
+# Create self-signed certificates
+openssl genrsa -des3 -passout pass:x -out /app/tls/server.pass.key 2048
+openssl rsa -passin pass:x -in /app/tls/server.pass.key -out /app/tls/server.key
+rm -f /app/tls/server.pass.key
+# Use the instance metadata service to get public hostname
+openssl req -new -key /app/tls/server.key -out /app/tls/server.csr -subj "/CN=$(curl http://169.254.169.254/latest/meta-data/public-hostname)"
+openssl x509 -req -sha256 -days 365 -in /app/tls/server.csr -signkey /app/tls/server.key -out /app/tls/server.crt
+rm -f /app/tls/server.csr
 
 # Create nginx config
 cat <<NGINXCONFIG > /etc/nginx/nginx.conf
@@ -58,10 +69,14 @@ http {
     default_type        application/octet-stream;
 
     server {
-        listen       80 default_server;
-        listen       [::]:80 default_server;
+        listen       443 default_server;
+        listen       [::]:443 default_server;
         server_name  _;
         root         /app/web;
+
+        ssl                 on;
+        ssl_certificate     /app/tls/server.crt;
+        ssl_certificate_key /app/tls/server.key;
 
         location /api/ {
           proxy_pass http://localhost:8000/;
