@@ -94,7 +94,7 @@ export const ADMIN_EDIT_ACCOUNT_SUCCESS = Symbol(
 );
 export const ADMIN_EDIT_ACCOUNT_ERROR = Symbol('admin : edit account : error');
 
-export const editAccount = user => dispatch => {
+export const editAccount = (user, changingPassword) => dispatch => {
   dispatch({ type: ADMIN_EDIT_ACCOUNT_REQUEST });
 
   const putData = Object.entries(user).reduce(
@@ -106,6 +106,18 @@ export const editAccount = user => dispatch => {
   }
   if (!user.role) {
     putData.role = '';
+  }
+
+  if (changingPassword) {
+    if (!putData.password || putData.password.length === 0) {
+      dispatch({
+        type: ADMIN_EDIT_ACCOUNT_ERROR,
+        data: 'edit-account.no-password'
+      });
+      return null;
+    }
+  } else {
+    delete putData.password;
   }
 
   return axios
@@ -128,13 +140,22 @@ export const ADMIN_EDIT_ME_REQUEST = Symbol('admin : edit self : request');
 export const ADMIN_EDIT_ME_SUCCESS = Symbol('admin : edit self : success');
 export const ADMIN_EDIT_ME_ERROR = Symbol('admin : edit self : error');
 
-export const editSelf = user => dispatch => {
+export const editSelf = (user, changingPassword) => dispatch => {
   dispatch({ type: ADMIN_EDIT_ME_REQUEST });
 
   const putData = Object.entries(user).reduce(
     (acc, [key, value]) => (value ? { ...acc, [key]: value } : acc),
     {}
   );
+
+  if (changingPassword) {
+    if (!putData.password || putData.password.length === 0) {
+      dispatch({ type: ADMIN_EDIT_ME_ERROR, data: 'edit-self.no-password' });
+      return null;
+    }
+  } else {
+    delete putData.password;
+  }
 
   return axios
     .put(`/me`, putData)

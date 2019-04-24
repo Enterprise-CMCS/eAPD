@@ -19,7 +19,6 @@ import {
   ADD_APD_KEY_PERSON,
   REMOVE_APD_KEY_PERSON,
   SAVE_APD_SUCCESS,
-  SET_KEY_PERSON_PRIMARY,
   SELECT_APD,
   UPDATE_APD
 } from '../actions/apd';
@@ -141,7 +140,6 @@ const dirty = (state = initialState, action) => {
     case ADD_APD_KEY_PERSON:
     case REMOVE_ACTIVITY:
     case REMOVE_APD_KEY_PERSON:
-    case SET_KEY_PERSON_PRIMARY:
       return u({ dirty: true }, state);
 
     case UPDATE_ACTIVITY:
@@ -175,3 +173,5 @@ const dirty = (state = initialState, action) => {
 };
 
 export default dirty;
+
+export const getIsDirty = state => state.dirty.dirty;

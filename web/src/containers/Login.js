@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { TextField } from '@cmsgov/design-system-core';
 
+import ConsentBanner from '../components/ConsentBanner';
 import { login } from '../actions/auth';
 import CardForm from '../components/CardForm';
 import Header from '../components/Header';
 import Password from '../components/PasswordWithMeter';
 
 class Login extends Component {
-  state = { username: '', password: '' };
+  state = { showConsent: true, username: '', password: '' };
 
   handleChange = e => {
     const { name, value } = e.target;
@@ -24,10 +25,14 @@ class Login extends Component {
     action(username, password);
   };
 
+  hideConsent = () => {
+    this.setState({ showConsent: false });
+  };
+
   render() {
     const { authenticated, error, fetching, location } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
-    const { username, password } = this.state;
+    const { showConsent, username, password } = this.state;
 
     if (authenticated) {
       if (from.pathname !== '/logout') {
@@ -36,9 +41,18 @@ class Login extends Component {
       return <Redirect to="/" />;
     }
 
+    if (showConsent) {
+      return (
+        <Fragment>
+          <Header />
+          <ConsentBanner onAgree={this.hideConsent} />
+        </Fragment>
+      );
+    }
+
     let errorMessage = false;
     if (error === 'Unauthorized') {
-      errorMessage = 'The email or password you&apos;ve entered is incorrect.';
+      errorMessage = 'The email or password you’ve entered is incorrect.';
     } else if (error === 'Unauthorized') {
       errorMessage = 'Sorry! Something went wrong. Please try again.';
     }
@@ -46,13 +60,22 @@ class Login extends Component {
     return (
       <Fragment>
         <Header />
-
         <CardForm
           title="Log in"
+          cancelable={false}
+          canSubmit={username.length && password.length}
           error={errorMessage}
           working={fetching}
           primaryButtonText={['Log in', 'Logging in']}
           onSave={this.handleSubmit}
+          footer={
+            <p>
+              Forgot your password? Contact{' '}
+              <a href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD">
+                CMS-EAPD@cms.hhs.gov
+              </a>
+            </p>
+          }
         >
           <TextField
             id="username"

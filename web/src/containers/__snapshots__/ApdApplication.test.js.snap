@@ -18,6 +18,18 @@ exports[`apd (application) component renders correctly 1`] = `
       className="site-main p2 sm-p4 md-px0 ds-l-col--9"
     >
       <Connect(TopBtns) />
+      <h1
+        className="ds-h1 apd--title"
+      >
+        <span
+          className="ds-h6 ds-u-display--block"
+        >
+          test name
+        </span>
+         
+        the year
+         APD
+      </h1>
       <ApdStateProfile />
       <Connect(ApdSummary) />
       <Connect(PreviousActivities) />
@@ -26,12 +38,20 @@ exports[`apd (application) component renders correctly 1`] = `
       <ProposedBudget />
       <Connect(AssurancesAndCompliance) />
       <Connect(ExecutiveSummary) />
+      <Connect(ExportAndSubmit) />
     </div>
   </div>
 </div>
 `;
 
 exports[`apd (application) component renders correctly 2`] = `
+<Redirect
+  push={false}
+  to="/"
+/>
+`;
+
+exports[`apd (application) component renders correctly 3`] = `
 <Redirect
   push={false}
   to="/"

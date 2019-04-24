@@ -1,30 +1,23 @@
 import NoMatch from './components/NoMatch';
 import CreateAccount from './containers/admin/CreateAccount';
+import Dashboard from './containers/Dashboard';
 import ApdApplication from './containers/ApdApplication';
-import AdminDashboard from './containers/admin/AdminDashboard';
 import EditAccount from './containers/admin/EditAccount';
 import MyAccount from './containers/admin/MyAccount';
 import Login from './containers/Login';
 import Logout from './containers/Logout';
 
-import StateDash from './containers/StateDashboard';
-
 const routes = [
-  { path: '/', component: StateDash, exact: true, nonPrivate: false },
-  { path: '/apd', component: ApdApplication, exact: true, nonPrivate: false },
-  { path: '/login', component: Login, nonPrivate: true },
-  { path: '/logout', component: Logout, nonPrivate: false },
+  { path: '/', component: Dashboard, exact: true, isPublic: false },
+  { path: '/apd', component: ApdApplication, exact: true, isPublic: false },
 
-  {
-    path: '/admin/create-account',
-    component: CreateAccount,
-    nonPrivate: false
-  },
-  { path: '/admin/edit-account', component: EditAccount, nonPrivate: false },
-  { path: '/admin', component: AdminDashboard, nonPrivate: false, exact: true },
-  { path: '/me', component: MyAccount, nonPrivate: false },
+  { path: '/create-account', component: CreateAccount, isAdmin: true },
+  { path: '/edit-account', component: EditAccount, isAdmin: true },
 
-  { component: NoMatch, nonPrivate: true }
+  { path: '/me', component: MyAccount, isPublic: false },
+  { path: '/login', component: Login, isPublic: true },
+  { path: '/logout', component: Logout, isPublic: false },
+  { component: NoMatch, isPublic: true }
 ];
 
 export default routes;
