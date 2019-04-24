@@ -127,7 +127,8 @@ function getPublicDNS() {
 function terminateInstance() {
   print "  ...terminating existing instance: $1"
   aws ec2 terminate-instances \
-    --instance-ids "$1"
+    --instance-ids "$1" \
+    > /dev/null
 }
 
 # Wait for EC2 instance status checks to be "passed"
