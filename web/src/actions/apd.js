@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 
 import { notify } from './notification';
+import { getIsAdmin } from '../reducers/user';
 import axios from '../util/api';
 import { fromAPI, toAPI } from '../util/serialization/apd';
 
@@ -22,7 +23,6 @@ export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
 export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
 export const SAVE_APD_FAILURE = 'SAVE_APD_FAILURE';
 export const SELECT_APD = 'SELECT_APD';
-export const SET_KEY_PERSON_PRIMARY = 'SET_KEY_PERSON_PRIMARY';
 export const SUBMIT_APD_REQUEST = 'SUBMIT_APD_REQUEST';
 export const SUBMIT_APD_SUCCESS = 'SUBMIT_APD_SUCCESS';
 export const SUBMIT_APD_FAILURE = 'SUBMIT_APD_FAILURE';
@@ -33,15 +33,16 @@ export const WITHDRAW_APD_SUCCESS = Symbol('withdraw apd success');
 export const WITHDRAW_APD_FAILURE = Symbol('withdraw apd failure');
 
 export const SET_SELECT_APD_ON_LOAD = 'SET_SELECT_APD_ON_LOAD';
-export const selectApdOnLoad = () => ({ type: SET_SELECT_APD_ON_LOAD });
+export const selectApdOnLoad = () => (dispatch, getState) => {
+  const isAdmin = getIsAdmin(getState());
+  if (!isAdmin) {
+    dispatch({ type: SET_SELECT_APD_ON_LOAD });
+  }
+};
 
 export const addKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
 export const removeKeyPerson = index => ({
   type: REMOVE_APD_KEY_PERSON,
-  index
-});
-export const setPrimaryKeyPerson = index => ({
-  type: SET_KEY_PERSON_PRIMARY,
   index
 });
 

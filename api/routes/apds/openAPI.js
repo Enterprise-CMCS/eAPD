@@ -25,6 +25,11 @@ const openAPI = {
                   description:
                     'Current status of the APD; e.g., "draft", "archived", etc.'
                 },
+                updated: {
+                  type: 'string',
+                  format: 'date-time',
+                  description: 'Timestamp of the last save to this APD'
+                },
                 years: arrayOf({
                   type: 'number'
                 })

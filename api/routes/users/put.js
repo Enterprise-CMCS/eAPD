@@ -47,7 +47,7 @@ module.exports = (
 
       // These fields aren't related to other tables, so we can update them
       // all willy-nilly.
-      ['email', 'name', 'position', 'phone'].forEach(field => {
+      ['email', 'name', 'password', 'position', 'phone'].forEach(field => {
         if (req.body[field]) {
           targetUser.set(field, req.body[field]);
         }

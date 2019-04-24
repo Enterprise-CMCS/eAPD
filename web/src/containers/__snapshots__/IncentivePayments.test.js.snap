@@ -12,40 +12,38 @@ exports[`incentive payments component renders correctly 1`] = `
   >
     <thead>
       <tr>
+        <th />
         <th
-          id="incentive-payments-table-fynull2"
-        />
-        <th
-          className="right-align"
-          id="incentive-payments-table-fy1-q1"
+          className="center"
           key="1"
+          scope="col"
         >
           Q1
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy1-q2"
+          className="center"
           key="2"
+          scope="col"
         >
           Q2
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy1-q3"
+          className="center"
           key="3"
+          scope="col"
         >
           Q3
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy1-q4"
+          className="center"
           key="4"
+          scope="col"
         >
           Q4
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy1-qsubtotal"
+          className="center"
+          scope="col"
         >
           Subtotal
         </th>
@@ -55,14 +53,13 @@ exports[`incentive payments component renders correctly 1`] = `
       <tr
         key="ehAmt"
       >
-        <td
-          className="align-middle bold"
-          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        <th
+          className="align-middle"
+          scope="row"
         >
           EH Payments
-        </td>
+        </th>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
           key="1"
         >
           <InputHolder
@@ -77,7 +74,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
           key="2"
         >
           <InputHolder
@@ -92,7 +88,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
           key="3"
         >
           <InputHolder
@@ -107,7 +102,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
           key="4"
         >
           <InputHolder
@@ -122,8 +116,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          className="bold mono right-align align-middle"
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
+          className="mono right-align align-middle"
         >
           <Dollars>
             10
@@ -133,14 +126,13 @@ exports[`incentive payments component renders correctly 1`] = `
       <tr
         key="ehCt"
       >
-        <td
-          className="align-middle "
-          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        <th
+          className="align-middle"
+          scope="row"
         >
           EH Count (optional)
-        </td>
+        </th>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
           key="1"
         >
           <InputHolder
@@ -155,7 +147,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
           key="2"
         >
           <InputHolder
@@ -170,7 +161,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
           key="3"
         >
           <InputHolder
@@ -185,7 +175,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
           key="4"
         >
           <InputHolder
@@ -200,8 +189,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          className="bold mono right-align align-middle"
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
+          className="mono right-align align-middle"
         >
           42
         </td>
@@ -209,14 +197,13 @@ exports[`incentive payments component renders correctly 1`] = `
       <tr
         key="epAmt"
       >
-        <td
-          className="align-middle bold"
-          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        <th
+          className="align-middle"
+          scope="row"
         >
           EP Payments
-        </td>
+        </th>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
           key="1"
         >
           <InputHolder
@@ -231,7 +218,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
           key="2"
         >
           <InputHolder
@@ -246,7 +232,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
           key="3"
         >
           <InputHolder
@@ -261,7 +246,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
           key="4"
         >
           <InputHolder
@@ -276,8 +260,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          className="bold mono right-align align-middle"
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
+          className="mono right-align align-middle"
         >
           <Dollars>
             74
@@ -287,14 +270,13 @@ exports[`incentive payments component renders correctly 1`] = `
       <tr
         key="epCt"
       >
-        <td
-          className="align-middle "
-          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        <th
+          className="align-middle"
+          scope="row"
         >
           EP Count (optional)
-        </td>
+        </th>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q1"
           key="1"
         >
           <InputHolder
@@ -309,7 +291,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q2"
           key="2"
         >
           <InputHolder
@@ -324,7 +305,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q3"
           key="3"
         >
           <InputHolder
@@ -339,7 +319,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-q4"
           key="4"
         >
           <InputHolder
@@ -354,8 +333,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          className="bold mono right-align align-middle"
-          headers="incentive-payments-table-fy1 incentive-payments-table-fy1-qsubtotal"
+          className="mono right-align align-middle"
         >
           106
         </td>
@@ -372,40 +350,38 @@ exports[`incentive payments component renders correctly 1`] = `
   >
     <thead>
       <tr>
+        <th />
         <th
-          id="incentive-payments-table-fynull2"
-        />
-        <th
-          className="right-align"
-          id="incentive-payments-table-fy2-q1"
+          className="center"
           key="1"
+          scope="col"
         >
           Q1
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy2-q2"
+          className="center"
           key="2"
+          scope="col"
         >
           Q2
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy2-q3"
+          className="center"
           key="3"
+          scope="col"
         >
           Q3
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy2-q4"
+          className="center"
           key="4"
+          scope="col"
         >
           Q4
         </th>
         <th
-          className="right-align"
-          id="incentive-payments-table-fy2-qsubtotal"
+          className="center"
+          scope="col"
         >
           Subtotal
         </th>
@@ -415,14 +391,13 @@ exports[`incentive payments component renders correctly 1`] = `
       <tr
         key="ehAmt"
       >
-        <td
-          className="align-middle bold"
-          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        <th
+          className="align-middle"
+          scope="row"
         >
           EH Payments
-        </td>
+        </th>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
           key="1"
         >
           <InputHolder
@@ -437,7 +412,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
           key="2"
         >
           <InputHolder
@@ -452,7 +426,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
           key="3"
         >
           <InputHolder
@@ -467,7 +440,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
           key="4"
         >
           <InputHolder
@@ -482,8 +454,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          className="bold mono right-align align-middle"
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
+          className="mono right-align align-middle"
         >
           <Dollars>
             26
@@ -493,14 +464,13 @@ exports[`incentive payments component renders correctly 1`] = `
       <tr
         key="ehCt"
       >
-        <td
-          className="align-middle "
-          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        <th
+          className="align-middle"
+          scope="row"
         >
           EH Count (optional)
-        </td>
+        </th>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
           key="1"
         >
           <InputHolder
@@ -515,7 +485,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
           key="2"
         >
           <InputHolder
@@ -530,7 +499,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
           key="3"
         >
           <InputHolder
@@ -545,7 +513,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
           key="4"
         >
           <InputHolder
@@ -560,8 +527,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          className="bold mono right-align align-middle"
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
+          className="mono right-align align-middle"
         >
           58
         </td>
@@ -569,14 +535,13 @@ exports[`incentive payments component renders correctly 1`] = `
       <tr
         key="epAmt"
       >
-        <td
-          className="align-middle bold"
-          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        <th
+          className="align-middle"
+          scope="row"
         >
           EP Payments
-        </td>
+        </th>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
           key="1"
         >
           <InputHolder
@@ -591,7 +556,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
           key="2"
         >
           <InputHolder
@@ -606,7 +570,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
           key="3"
         >
           <InputHolder
@@ -621,7 +584,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
           key="4"
         >
           <InputHolder
@@ -636,8 +598,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          className="bold mono right-align align-middle"
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
+          className="mono right-align align-middle"
         >
           <Dollars>
             90
@@ -647,14 +608,13 @@ exports[`incentive payments component renders correctly 1`] = `
       <tr
         key="epCt"
       >
-        <td
-          className="align-middle "
-          headers="incentive-payments-table-fynull1 incentive-payments-table-fynull2"
+        <th
+          className="align-middle"
+          scope="row"
         >
           EP Count (optional)
-        </td>
+        </th>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q1"
           key="1"
         >
           <InputHolder
@@ -669,7 +629,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q2"
           key="2"
         >
           <InputHolder
@@ -684,7 +643,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q3"
           key="3"
         >
           <InputHolder
@@ -699,7 +657,6 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-q4"
           key="4"
         >
           <InputHolder
@@ -714,8 +671,7 @@ exports[`incentive payments component renders correctly 1`] = `
           />
         </td>
         <td
-          className="bold mono right-align align-middle"
-          headers="incentive-payments-table-fy2 incentive-payments-table-fy2-qsubtotal"
+          className="mono right-align align-middle"
         >
           122
         </td>

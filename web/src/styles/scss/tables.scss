@@ -1,0 +1,33 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+.table-cms {
+  font-size: 12px;
+  &.table-cms__totals {
+    width: 42%; // roughly equal to full tables' cells; temp fix before switching font to courier
+  }
+  &.centered-headers th {
+    text-align: center;
+  }
+  th {
+    background-color: #DAE9F7;
+    font-weight: normal;
+  }
+  td {
+    background-color: #F3F8FC;
+  }
+  th,
+  td {
+    border-left: 4px solid $color-white;
+    border-top: 4px solid $color-white;
+    &:first-child {
+      border-left: none;
+    }
+
+  }
+  + .table-cms:not(.table-frozen-data){
+    margin-top: $spacer-2;
+  }
+  .table-cms--col-header__fixed-width {
+    width: 175px; // so totals tables have the same col width as other tables
+  }
+}
