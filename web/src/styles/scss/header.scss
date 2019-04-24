@@ -14,13 +14,26 @@ header {
 
 .nav--dropdown {
   list-style: none;
+  padding-left: 0;
 
   .nav--dropdown__trigger {
-    float: right;
     margin-top: $spacer-1;
   }
 
   button {
     color: $color-white;
+  }
+
+  ul {
+    padding-left: 0;
+  }
+}
+
+.nav--submenu {
+  display: block;
+  position: absolute;
+  background-color: $color-primary-darkest;
+  &[aria-hidden="true"] {
+    display: none;
   }
 }

@@ -10,6 +10,11 @@ import { getIsAdmin } from '../reducers/user';
 import { t } from '../i18n';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { ariaExpanded: props.ariaExpanded };
+  }
+
   handleLogout = e => {
     e.preventDefault();
     const { pushRoute } = this.props;
@@ -18,10 +23,12 @@ class Header extends Component {
 
   toggleDropdown = e => {
     e.preventDefault();
+    this.setState(prev => ({ ariaExpanded: !prev.ariaExpanded }));
   };
 
   render() {
     const { authenticated, isAdmin, currentUser } = this.props;
+    const { ariaExpanded } = this.state;
     const userGreeting = currentUser ? currentUser.username : 'Your account';
     return (
       <header>
@@ -34,7 +41,7 @@ class Header extends Component {
             </div>
             {authenticated &&
               <div className="ds-l-col--12 ds-l-md-col--4 ds-u-margin-left--auto">
-                <ul className="nav--dropdown">
+                <ul className="nav--dropdown" aria-expanded={ariaExpanded}>
                   <li>
                     <Button
                       size="small"
@@ -44,7 +51,7 @@ class Header extends Component {
                     >
                       {userGreeting}
                     </Button>
-                    <ul>
+                    <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
                       <li>
                         <Button
                           size="small"
@@ -79,11 +86,13 @@ Header.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
-  pushRoute: PropTypes.func.isRequired
+  pushRoute: PropTypes.func.isRequired,
+  ariaExpanded: PropTypes.string.isRequired
 };
 
 Header.defaultProps = {
-  currentUser: null
+  currentUser: null,
+  ariaExpanded: 'false'
 };
 
 export default connect(
