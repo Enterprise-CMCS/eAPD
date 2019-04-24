@@ -44,25 +44,6 @@ function deployPreviewtoEC2() {
   echo "$PUBLIC_DNS"
 }
 
-# Creates zip files of the API and web app, base64 encodes them, and adds
-# script at the top of the user data file to decode them back into files on
-# the server.
-function addZipsToUserData() {
-  # Change directories to get rid of paths.  zip stores paths relative to the
-  # directory where the zip command is run, which is maybe obnoxious?
-  cd ../../web/dist
-  zip -rq ../../bin/preview-deploy/webapp.zip *
-
-  # Same with the API
-  cd ../../api
-  zip -rq ../bin/preview-deploy/api.zip *
-
-  # Now come back where we started
-  cd ../bin/preview-deploy
-  
-  echo '#!'"/bin/bash\n\necho '$(base64 webapp.zip)' | base64 --decode > webapp.zip\necho '$(base64 api.zip)' | base64 --decode > api.zip\n\n$(cat aws.user-data.sh)" > aws.user-data.sh
-}
-
 # Sets up AWS global configuration for all subsequent commands.
 #
 # Expects global environment variables:
