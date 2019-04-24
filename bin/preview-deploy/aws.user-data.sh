@@ -78,11 +78,20 @@ http {
         ssl_certificate     /app/tls/server.crt;
         ssl_certificate_key /app/tls/server.key;
 
-        location /api/ {
-          proxy_pass http://localhost:8000/;
+        location / {
+          # For requests without a file extension, send the requested path if
+          # it exists, otherwise send index.html to achieve push state routing
+          try_files $uri /index.html;
         }
 
-        location / {
+        location ~ ^.+\..+$ {
+          # For requests with file extensions, send them if the file exists,
+          # otherwise send a 404.
+          try_files $uri =404;
+        }
+
+        location /api/ {
+          proxy_pass http://localhost:8000/;
         }
     }
 }
