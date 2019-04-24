@@ -5,13 +5,11 @@ import sinon from 'sinon';
 import {
   plain as KeyPersonnel,
   mapStateToProps,
-  mapDispatchToProps,
-  PersonForm
+  mapDispatchToProps
 } from './ApdStateKeyPersonnel';
 import {
   addKeyPerson,
   removeKeyPerson,
-  setPrimaryKeyPerson,
   updateApd,
   updateBudget
 } from '../actions/apd';
@@ -54,7 +52,7 @@ describe('apd state profile, Medicaid office component', () => {
 
     test('dispatches adding a new person', () => {
       shallow(<KeyPersonnel {...props} />)
-        .find('Btn')
+        .find('Button')
         .simulate('click');
 
       expect(props.addKeyPerson.called).toBeTruthy();
@@ -62,32 +60,18 @@ describe('apd state profile, Medicaid office component', () => {
 
     test('dispatches removing a person', () => {
       shallow(<KeyPersonnel {...props} />)
-        .find('CollapsibleList')
-        .prop('deleteItem')('person object', 'index');
+        .find('ApdStateKeyPerson')
+        .first()
+        .prop('remove')('person object');
 
-      expect(props.removeKeyPerson.calledWith('index')).toBeTruthy();
-    });
-
-    test('dispatches setting a person primary', () => {
-      shallow(<KeyPersonnel {...props} />)
-        .find('CollapsibleList')
-        .dive()
-        .find('ListItem')
-        .at(0)
-        .find('PersonForm')
-        .prop('setPrimary')('args');
-
-      expect(props.setPrimaryKeyPerson.calledWith('args')).toBeTruthy();
+      expect(props.removeKeyPerson.calledWith(0)).toBeTruthy();
     });
 
     test('dispatches when a person changes', () => {
       shallow(<KeyPersonnel {...props} />)
-        .find('CollapsibleList')
-        .dive()
-        .find('ListItem')
-        .at(0)
-        .find('PersonForm')
-        .prop('handleChange')('field', 0)({ target: { value: 'new value' } });
+        .find('ApdStateKeyPerson')
+        .first()
+        .prop('handleChange')('field')({ target: { value: 'new value' } });
 
       expect(
         props.updateApd.calledWith({
@@ -98,12 +82,9 @@ describe('apd state profile, Medicaid office component', () => {
 
     test('dispatches when person years change', () => {
       shallow(<KeyPersonnel {...props} />)
-        .find('CollapsibleList')
-        .dive()
-        .find('ListItem')
-        .at(0)
-        .find('PersonForm')
-        .prop('handleYearChange')(0, '1908')({
+        .find('ApdStateKeyPerson')
+        .first()
+        .prop('handleYearChange')('1908')({
         target: { value: '235235' }
       });
 
@@ -135,107 +116,9 @@ describe('apd state profile, Medicaid office component', () => {
       expect(mapDispatchToProps).toEqual({
         addKeyPerson,
         removeKeyPerson,
-        setPrimaryKeyPerson,
         updateApd,
         updateBudget
       });
-    });
-  });
-
-  describe('person form component', () => {
-    const fns = {
-      handleChange: sandbox.stub(),
-      handleYearChange: sandbox.stub(),
-      setPrimary: sandbox.spy()
-    };
-
-    const handleChangeImpl = sandbox.spy();
-    fns.handleChange.returns(handleChangeImpl);
-
-    const handleYearChangeImpl = sandbox.spy();
-    fns.handleYearChange.returns(handleYearChangeImpl);
-
-    const props = {
-      idx: 12,
-      person: {
-        name: 'name',
-        email: 'email',
-        position: 'position',
-        percentTime: '30',
-        isPrimary: false,
-        hasCosts: true,
-        costs: { '1': 99, '2': 100 }
-      },
-      years: ['1', '2'],
-      ...fns
-    };
-
-    test('renders properly', () => {
-      const localProps = JSON.parse(JSON.stringify(props));
-      expect(
-        shallow(<PersonForm {...localProps} {...fns} />)
-      ).toMatchSnapshot();
-
-      localProps.isPrimary = true;
-      expect(
-        shallow(<PersonForm {...localProps} {...fns} />)
-      ).toMatchSnapshot();
-
-      localProps.hasCosts = false;
-      expect(
-        shallow(<PersonForm {...localProps} {...fns} />)
-      ).toMatchSnapshot();
-    });
-
-    test('raises event when text is changed', () => {
-      shallow(<PersonForm {...props} />)
-        .find('InputHolder')
-        .at(0)
-        .simulate('change', 'event value');
-
-      expect(handleChangeImpl.calledWith('event value')).toBeTruthy();
-    });
-
-    test('raises event when primary is toggled on', () => {
-      shallow(<PersonForm {...props} />)
-        .find('Btn[children="Yes"]')
-        .at(0)
-        .simulate('click');
-
-      expect(fns.setPrimary.calledWith(12)).toBeTruthy();
-    });
-
-    test('raises event when primary is toggled off', () => {
-      shallow(<PersonForm {...props} />)
-        .find('Btn[children="No"]')
-        .at(0)
-        .simulate('click');
-
-      expect(
-        handleChangeImpl.calledWith({ target: { value: false } })
-      ).toBeTruthy();
-    });
-
-    test('raises event when has-costs is toggled on', () => {
-      shallow(<PersonForm {...props} />)
-        .find('Btn[children="Yes"]')
-        .at(1)
-        .simulate('click');
-
-      expect(
-        handleChangeImpl.calledWith({ target: { value: true } })
-      ).toBeTruthy();
-    });
-
-    test('raises event when has-costs is toggled off', () => {
-      shallow(<PersonForm {...props} />)
-        .find('Btn[children="No"]')
-        .at(1)
-        .simulate('click');
-
-      expect(
-        handleChangeImpl.calledWith({ target: { value: false } })
-      ).toBeTruthy();
     });
   });
 });

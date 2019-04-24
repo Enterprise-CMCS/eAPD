@@ -32,16 +32,7 @@ const roleToActivityMappings = {
     'view-roles',
     'create-roles',
     'edit-roles',
-    'submit-federal-response',
-    'submit-clearance',
-    'edit-comments',
-    'submit-document',
-    'submit-state-response',
-    'create-draft',
-    'edit-document',
-    'edit-response',
-    'delete-users',
-    'view-document'
+    'delete-users'
   ],
   'federal analyst': [
     'view-users',

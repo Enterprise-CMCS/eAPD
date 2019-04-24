@@ -167,6 +167,10 @@ const openAPI = {
               type: 'string',
               description: `The user's new name`
             },
+            password: {
+              type: 'string',
+              description: `The user's new password`
+            },
             phone: {
               type: 'string',
               description: `The user's new phone number`
