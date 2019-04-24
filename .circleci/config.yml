@@ -95,21 +95,6 @@ workflows:
           requires:
             - frontend build
 
-      - TEMPORARY deploy staging TEMPORARY:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - frontend build
-            - frontend dependency vulnerability scan
-            - frontend lint
-            - frontend test
-            - backend api endpoint test
-            - backend dependency vulnerability scan
-            - backend lint
-            - backend unit test
-
 jobs:
   # ===== Independent jobs =====
   # These jobs don't rely on anything else having happened first, and cut
@@ -443,21 +428,6 @@ jobs:
             apt-get update
             apt-get install zip -y
             zip -r /tmp/webapp.zip web/dist/*
-      - store_artifacts:
-          path: /tmp/webapp.zip
-          destination: build
-
-  # Soon to be deprecated
-  TEMPORARY deploy staging TEMPORARY:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: deploy to prod
-          command: ./bin/deploy.sh
       - store_artifacts:
           path: /tmp/webapp.zip
           destination: build
