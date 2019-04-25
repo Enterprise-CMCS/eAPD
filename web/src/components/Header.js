@@ -87,12 +87,12 @@ Header.propTypes = {
   currentUser: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
   pushRoute: PropTypes.func.isRequired,
-  ariaExpanded: PropTypes.string.isRequired
+  ariaExpanded: PropTypes.bool.isRequired
 };
 
 Header.defaultProps = {
   currentUser: null,
-  ariaExpanded: 'false'
+  ariaExpanded: false
 };
 
 export default connect(
