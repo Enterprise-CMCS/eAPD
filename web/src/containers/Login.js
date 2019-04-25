@@ -7,7 +7,6 @@ import { TextField } from '@cmsgov/design-system-core';
 import ConsentBanner from '../components/ConsentBanner';
 import { login } from '../actions/auth';
 import CardForm from '../components/CardForm';
-import Header from '../components/Header';
 import Password from '../components/PasswordWithMeter';
 
 class Login extends Component {
@@ -59,7 +58,6 @@ class Login extends Component {
 
     return (
       <Fragment>
-        <Header />
         <CardForm
           title="Log in"
           cancelable={false}
