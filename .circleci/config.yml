@@ -4,7 +4,7 @@ workflows:
   version: 2
 
   # Workflow to cleanup preview deploys.  Runs every two hours.
-  cleanup preview deploys:
+  cleanup preview deploys - legacy:
     triggers:
       - schedule:
           # Run every 2 hours, every day. Specified this way because the more
@@ -16,6 +16,20 @@ workflows:
                 - master
     jobs:
       - frontend cleanup preview deploys
+
+  # Workflow to cleanup preview deploys from AWS.  Runs every two hours.
+  cleanup preview deploys:
+    triggers:
+      - schedule:
+          # Run every 2 hours, every day. Specified this way because the more
+          # compact cron syntax wasn't working.
+          cron: '0 0,2,4,6,8,10,12,14,16,18,20,22 * * *'
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cleanup preview deploys
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
@@ -378,6 +392,22 @@ jobs:
       - run:
           name: run nightly script
           command: ./bin/cleanup-pr-deploys.sh
+
+  # Cleans up preview deploys that are no longer associated with open pull
+  # requests.
+  cleanup preview deploys:
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - run:
+          name: cleanup deploys with no open PR
+          working_directory: ~/project/bin/preview-deploy
+          command: |
+            apt-get -qq update
+            apt-get -qq install jq -y
+            pip install --quiet awscli
+            ./aws.cleanup.sh
 
   # Frontend production deployment.
   frontend deploy prod:
