@@ -40,8 +40,6 @@ const StateDashboard = (
     }
   };
 
-  const submitSteps = t('stateDashboard.submitSteps');
-
   return (
     <Fragment>
       <Header />
@@ -52,13 +50,6 @@ const StateDashboard = (
               {t('stateDashboard.title', { state: state.name })}
             </h1>
             <Instruction source="stateDashboard.instruction" />
-
-            <h6 className="ds-h6">To submit an APD</h6>
-            <ol>
-              {submitSteps.map(step => (
-                <Md key={step} wrapper="li" content={step} />
-              ))}
-            </ol>
 
             <div className="ds-u-border-bottom--2 ds-u-margin-bottom--1 ds-u-margin-top--6 ds-u-padding-bottom--1">
               <Button
