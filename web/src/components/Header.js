@@ -55,7 +55,7 @@ class Header extends Component {
               }
             </div>
             {authenticated &&
-              <div className="ds-l-col--12 ds-l-md-col--4 ds-u-margin-left--auto">
+              <div className="ds-l-col--12 ds-l-md-col--8">
                 <ul className="nav--dropdown" aria-expanded={ariaExpanded}>
                   <li>
                     <Button
@@ -65,23 +65,26 @@ class Header extends Component {
                       onClick={this.toggleDropdown}
                     >
                       {username}
-                      <Icon icon={faChevronDown} />
+                      <Icon icon={faChevronDown} style={{ width: '8px'}} />
                     </Button>
                     <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
                       <li>
-                        <Link to="/me">
-                          <Icon icon={faEdit} />
+                        <Link
+                          to="/me"
+                          className="nav--dropdown__action"
+                        >
+                          <Icon icon={faEdit} style={{ width: '14px'}}/>
                           Manage account
                         </Link>
                       </li>
                       <li>
                         <Button
                           size="small"
-                          className="nav--action__logout"
+                          className="nav--dropdown__action"
                           variation="transparent"
                           onClick={this.handleLogout}
                         >
-                          <Icon icon={faSignOutAlt} />
+                          <Icon icon={faSignOutAlt} style={{ width: '14px'}} />
                           {t('logout')}
                         </Button>
                       </li>
