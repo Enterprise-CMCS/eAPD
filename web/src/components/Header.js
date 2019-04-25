@@ -10,6 +10,8 @@ import { push } from 'connected-react-router';
 import { getIsAdmin } from '../reducers/user';
 import { t } from '../i18n';
 
+import Icon, { faChevronDown, faChevronUp, faEdit, faSignOutAlt } from './Icons';
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -35,16 +37,22 @@ class Header extends Component {
       <header>
         <div className="ds-l-container">
           <div className="ds-l-row">
-            <div className="ds-l-col--12 ds-l-md-col--4">
-              {isTopLevel ? (
+            <div className="ds-l-col--12 ds-l-md-col--4 site-title">
+              {isTopLevel &&
                 <Link to="/">
                   {t('titleBasic')}
                 </Link>
-              ) : (
-                 <Link to="/">
-                  {t('dashboard')}
+              }
+              {!isTopLevel && !authenticated &&
+                <Link to="/">
+                  {t('titleBasic')}
                 </Link>
-              )}
+              }
+              {!isTopLevel && authenticated &&
+                <Link to="/">
+                  Back to dashboard
+                </Link>
+              }
             </div>
             {authenticated &&
               <div className="ds-l-col--12 ds-l-md-col--4 ds-u-margin-left--auto">
@@ -57,10 +65,12 @@ class Header extends Component {
                       onClick={this.toggleDropdown}
                     >
                       {username}
+                      <Icon icon={faChevronDown} />
                     </Button>
                     <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
                       <li>
                         <Link to="/me">
+                          <Icon icon={faEdit} />
                           Manage account
                         </Link>
                       </li>
@@ -71,6 +81,7 @@ class Header extends Component {
                           variation="transparent"
                           onClick={this.handleLogout}
                         >
+                          <Icon icon={faSignOutAlt} />
                           {t('logout')}
                         </Button>
                       </li>

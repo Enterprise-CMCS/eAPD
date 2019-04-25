@@ -43,7 +43,6 @@ class Login extends Component {
     if (showConsent) {
       return (
         <Fragment>
-          <Header />
           <ConsentBanner onAgree={this.hideConsent} />
         </Fragment>
       );
