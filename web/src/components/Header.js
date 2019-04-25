@@ -10,12 +10,12 @@ import { push } from 'connected-react-router';
 import { getIsAdmin } from '../reducers/user';
 import { t } from '../i18n';
 
-import Icon, { faChevronDown, faChevronUp, faEdit, faSignOutAlt } from './Icons';
+import Icon, { faChevronDown, faChevronLeft, faChevronUp, faEdit, faSignOutAlt } from './Icons';
 
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = { ariaExpanded: props.ariaExpanded };
+    this.state = { ariaExpanded: false };
   }
 
   handleLogout = e => {
@@ -48,11 +48,12 @@ class Header extends Component {
                   {t('titleBasic')}
                 </Link>
               }
-              {!isTopLevel && authenticated &&
+              {!isTopLevel && authenticated && (
                 <Link to="/">
-                  Back to dashboard
+                  <Icon icon={faChevronLeft} size="sm" />
+                  { isAdmin ? "Admin dashboard" : `${currentUser.state.id.toUpperCase()} APD home` }
                 </Link>
-              }
+              )}
             </div>
             {authenticated &&
               <div className="ds-l-col--12 ds-l-md-col--8">

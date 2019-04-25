@@ -23,6 +23,12 @@ header {
   }
 }
 
+.site-title {
+  svg {
+    margin-right: $spacer-1;
+  }
+}
+
 .nav--dropdown {
   padding-left: 0;
   margin-bottom: 0;
