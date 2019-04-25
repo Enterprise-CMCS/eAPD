@@ -1,25 +1,14 @@
-title: '{{state}} APD builder'
+title: 'My {{state}} Dashboard'
 subheader: 
 instruction:
   detail: >-
-    Follow the instructions to enter relevant information. Save your work in
-    progress and come back to a draft at any time. Each APD your state creates
-    in the eAPD will be listed here for you to review or edit.
+    The CMS HITECH APD app is the new way to create and manage your state’s
+    HITECH Advanced Planning Documents (APDs). Follow the steps to fill in the
+    required information, and the app will generate a completed APD you can
+    submit to a CMS State Officer for review.
 
-# These get turned into numbered list items. Markdown is supported.
-submitSteps:
-  - Open it
-  - Select **Export** to open up your browser’s print options.
-  - >-
-    In the print window, select **Save as PDF**. In Chrome, this option is
-    listed under _Destination_. In other browsers, this option is part of a
-    dropdown menu labeled _PDF_.
-  - Select **Save**. This will download a PDF to your computer.
-  - >-
-    If you decide to make changes befor eyou submit, follow those three three
-    steps again to download a new PDF.
-  - >-
-    Email the completed APD to
-    [CMS-EAPD@cms.hhs.gov](mailto:CMS-EAPD@cms.hhs.gov)
 
+    All your state’s APDs are listed here. Save your work in progress and come
+    back to a draft at any time. When you’re ready to submit an APD, download a
+    PDF and email it to CMS just like you’ve done before.
 none: You have not created any APDs.
