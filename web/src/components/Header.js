@@ -15,7 +15,7 @@ import Icon, { faChevronDown, faChevronLeft, faChevronUp, faEdit, faSignOutAlt }
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = { ariaExpanded: false };
+    this.state = { ariaExpanded: props.ariaExpanded };
   }
 
   handleLogout = e => {
