@@ -175,6 +175,109 @@ jobs:
           working_directory: ~/project/web
           command: node yaml-tests.js
 
+  # ===== Backend jobs =====
+  # These all depend on "install dependencies" running first.
+
+  # Runs backend API integration/end-to-end tests.
+  backend api endpoint test:
+    docker:
+      - image: node:10
+        environment:
+          - NODE_ENV=test
+          - STORE_TYPE=fs
+          - STORE_PATH=test-data/files
+          - ENDPOINT_COVERAGE_CAPTURE=yes
+      - image: postgres:latest
+        name: db
+        environment:
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=cms
+          - POSTGRES_DB=hitech_apd_test
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: get wait-on
+          command: |
+            npm i -g wait-on
+      - run:
+          name: wait for database
+          command: wait-on tcp:db:5432 -t 300000
+      - run:
+          name: database migration
+          working_directory: ~/project/api
+          command: npm run migrate
+      - run:
+          name: database seed
+          working_directory: ~/project/api
+          command: npm run seed
+      - run:
+          name: start the API
+          working_directory: ~/project/api
+          command: echo "[]" > endpoint-data.json && npm start
+          background: true
+      - run:
+          name: wait for API
+          command: wait-on tcp:localhost:8000 -t 300000
+      - run:
+          name: run tests
+          working_directory: ~/project/api
+          command: npm run test-endpoints
+      - run:
+          name: print coverage info
+          working_directory: ~/project/api
+          command: mv endpoint-data.json endpoint-tests && node endpoint-tests/endpoint-coverage.js
+
+  # Uses snyk to scan the installed backend dependencies for known
+  # vulnerabilities. Using the CLI instead of the web app means it scans
+  # actually-installed dependencies instead of "potentially-installed"
+  # dependencies, as inferred from the package.json file.
+  backend dependency vulnerability scan:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: vulnerability scan
+          working_directory: ~/project/api
+          command: |
+            npx snyk auth $SNYK_TOKEN
+            npx snyk test
+
+  # Lints the backend code.
+  backend lint:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: run linter
+          working_directory: ~/project/api
+          command: npm run lint
+
+  # Runs backend unit tests and reports coverage to codecov.io.
+  backend unit test:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: run tests
+          working_directory: ~/project/api
+          command: npm test
+      - run:
+          name: report coverage
+          when: always
+          working_directory: ~/project/api
+          command: bash <(curl -s https://codecov.io/bash)
+
   # ===== Frontend jobs =====
   # These all depend on "install dependencies" running first.
 
@@ -244,110 +347,6 @@ jobs:
           when: always
           working_directory: ~/project/web
           command: bash <(curl -s https://codecov.io/bash)
-
-  # ===== Backend jobs =====
-  # These all depend on "install dependencies" running first.
-
-  # Uses snyk to scan the installed backend dependencies for known
-  # vulnerabilities. Using the CLI instead of the web app means it scans
-  # actually-installed dependencies instead of "potentially-installed"
-  # dependencies, as inferred from the package.json file.
-  backend dependency vulnerability scan:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: vulnerability scan
-          working_directory: ~/project/api
-          command: |
-            npx snyk auth $SNYK_TOKEN
-            npx snyk test
-
-  # Lints the backend code.
-  backend lint:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: run linter
-          working_directory: ~/project/api
-          command: npm run lint
-
-  # Runs backend unit tests and reports coverage to codecov.io.
-  backend unit test:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: run tests
-          working_directory: ~/project/api
-          command: npm test
-      - run:
-          name: report coverage
-          when: always
-          working_directory: ~/project/api
-          command: bash <(curl -s https://codecov.io/bash)
-
-  # Runs backend API integration/end-to-end tests.
-  backend api endpoint test:
-    docker:
-      - image: node:10
-        environment:
-          - NODE_ENV=test
-          - STORE_TYPE=fs
-          - STORE_PATH=test-data/files
-          - ENDPOINT_COVERAGE_CAPTURE=yes
-      - image: postgres:latest
-        name: db
-        environment:
-          - POSTGRES_USER=postgres
-          - POSTGRES_PASSWORD=cms
-          - POSTGRES_DB=hitech_apd_test
-
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: get wait-on
-          command: |
-            npm i -g wait-on
-      - run:
-          name: wait for database
-          command: wait-on tcp:db:5432 -t 300000
-      - run:
-          name: database migration
-          working_directory: ~/project/api
-          command: npm run migrate
-      - run:
-          name: database seed
-          working_directory: ~/project/api
-          command: npm run seed
-      - run:
-          name: start the API
-          working_directory: ~/project/api
-          command: echo "[]" > endpoint-data.json && npm start
-          background: true
-      - run:
-          name: wait for API
-          command: wait-on tcp:localhost:8000 -t 300000
-      - run:
-          name: run tests
-          working_directory: ~/project/api
-          command: npm run test-endpoints
-      - run:
-          name: print coverage info
-          working_directory: ~/project/api
-          command: mv endpoint-data.json endpoint-tests && node endpoint-tests/endpoint-coverage.js
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
