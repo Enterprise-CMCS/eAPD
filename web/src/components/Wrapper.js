@@ -20,7 +20,7 @@ class Wrapper extends Component {
     const { children } = this.props;
     return (
       <div className="site">
-        <Header />
+        <Header key={location.pathname}/>
         {children}
       </div>)
     ;
