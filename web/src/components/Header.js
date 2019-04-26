@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { push } from 'connected-react-router';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 import { getIsAdmin } from '../reducers/user';
 import { t } from '../i18n';
@@ -34,6 +35,11 @@ class Header extends Component {
     const username = currentUser ? currentUser.username : 'Your account';
     const isTopLevel = location.pathname == '/';
     return (
+      <OutsideClickHandler
+        onOutsideClick={() => {
+          this.setState({ ariaExpanded: false });
+        }}
+      >
       <header>
         <div className="ds-l-container">
           <div className="ds-l-row">
@@ -97,6 +103,7 @@ class Header extends Component {
           </div>
         </div>
       </header>
+    </OutsideClickHandler>
     );
   }
 }
