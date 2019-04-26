@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { push } from 'connected-react-router';
-import OutsideClickHandler from 'react-outside-click-handler';
 
 import { getIsAdmin } from '../reducers/user';
 import { t } from '../i18n';
@@ -17,7 +16,19 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = { ariaExpanded: props.ariaExpanded };
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleOutsideClick);
+  }
+
+  handleOutsideClick = e => {
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    this.setState({ ariaExpanded: false })
+  };
 
   handleLogout = e => {
     e.preventDefault();
@@ -34,12 +45,7 @@ class Header extends Component {
     const { ariaExpanded } = this.state;
     const isTopLevel = location.pathname == '/';
     return (
-      <OutsideClickHandler
-        onOutsideClick={() => {
-          this.setState({ ariaExpanded: false });
-        }}
-      >
-      <header>
+      <header ref={node => this.node = node}>
         <div className="ds-l-container">
           <div className="ds-l-row">
             <div className="ds-l-col--12 ds-l-md-col--4 site-title">
@@ -102,7 +108,6 @@ class Header extends Component {
           </div>
         </div>
       </header>
-    </OutsideClickHandler>
     );
   }
 }
