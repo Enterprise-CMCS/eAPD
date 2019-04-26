@@ -81,7 +81,6 @@
     "react-draft-wysiwyg": "1.10.7",
     "react-dropzone": "^4.3.0",
     "react-number-format": "^4.0.6",
-    "react-outside-click-handler": "^1.2.3",
     "react-redux": "^6.0.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
