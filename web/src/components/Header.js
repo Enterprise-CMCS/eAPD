@@ -32,7 +32,6 @@ class Header extends Component {
   render() {
     const { authenticated, currentUser, isAdmin, location } = this.props;
     const { ariaExpanded } = this.state;
-    const username = currentUser ? currentUser.username : 'Your account';
     const isTopLevel = location.pathname == '/';
     return (
       <OutsideClickHandler
@@ -71,7 +70,7 @@ class Header extends Component {
                       className="nav--dropdown__trigger"
                       onClick={this.toggleDropdown}
                     >
-                      {username}
+                      { currentUser ? currentUser.username : 'Your account' }
                       <Icon icon={faChevronDown} style={{ width: '8px'}} />
                     </Button>
                     <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
