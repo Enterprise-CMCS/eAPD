@@ -17,7 +17,7 @@ class Wrapper extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, location } = this.props;
     return (
       <div className="site">
         <Header key={location.pathname}/>
@@ -29,7 +29,8 @@ class Wrapper extends Component {
 
 Wrapper.propTypes = {
   children: PropTypes.node.isRequired,
-  isDev: PropTypes.bool.isRequired
+  isDev: PropTypes.bool.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 export default Wrapper;
