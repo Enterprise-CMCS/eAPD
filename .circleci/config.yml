@@ -74,6 +74,7 @@ workflows:
             - frontend dependency vulnerability scan
             - frontend lint
             - frontend test
+            - yaml test
 
       # joint jobs
       - preview deploy:
