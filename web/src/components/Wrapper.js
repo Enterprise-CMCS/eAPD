@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-globals */
+
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Header from './Header';

@@ -1,3 +1,5 @@
+/* eslint-disable no-return-assign */
+
 import Button from '@cmsgov/design-system-core/dist/components/Button/Button';
 
 import PropTypes from 'prop-types';
@@ -10,7 +12,7 @@ import { push } from 'connected-react-router';
 import { getIsAdmin } from '../reducers/user';
 import { t } from '../i18n';
 
-import Icon, { faChevronDown, faChevronLeft, faChevronUp, faEdit, faSignOutAlt } from './Icons';
+import Icon, { faChevronDown, faChevronLeft, faEdit, faSignOutAlt } from './Icons';
 
 class Header extends Component {
   constructor(props) {
@@ -43,7 +45,7 @@ class Header extends Component {
   render() {
     const { authenticated, currentUser, isAdmin, location } = this.props;
     const { ariaExpanded } = this.state;
-    const isTopLevel = location.pathname == '/';
+    const isTopLevel = location.pathname === '/';
     return (
       <header ref={node => this.node = node}>
         <div className="ds-l-container">
@@ -125,12 +127,12 @@ Header.propTypes = {
   currentUser: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
   pushRoute: PropTypes.func.isRequired,
-  ariaExpanded: PropTypes.bool.isRequired
+  ariaExpanded: PropTypes.bool.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 Header.defaultProps = {
-  currentUser: null,
-  ariaExpanded: false
+  currentUser: null
 };
 
 export default withRouter(
