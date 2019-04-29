@@ -1,0 +1,17 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+.save-button--container .ds-l-col--3 {
+  margin-left: 601px;
+  text-align: right;
+}
+
+.save-button--container .ds-l-col--3 > div {
+  bottom: 0;
+  position: fixed;
+  width: 375px;
+  z-index: 10;
+}
+
+.save-button--alert {
+  text-align: left;
+}
