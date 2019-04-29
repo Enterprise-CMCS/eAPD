@@ -7,7 +7,6 @@ import stickybits from 'stickybits';
 
 import { t } from '../i18n';
 import { jumpTo } from '../actions/navigation';
-import Btn from '../components/Btn';
 import { selectActivitiesSidebar } from '../reducers/activities.selectors';
 import { selectActiveSection } from '../reducers/navigation';
 
