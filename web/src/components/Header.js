@@ -5,7 +5,6 @@ import Button from '@cmsgov/design-system-core/dist/components/Button/Button';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { push } from 'connected-react-router';
 
@@ -43,25 +42,24 @@ class Header extends Component {
   };
 
   render() {
-    const { authenticated, currentUser, isAdmin, location } = this.props;
+    const { authenticated, currentUser, isAdmin, showSiteTitle } = this.props;
     const { ariaExpanded } = this.state;
-    const isTopLevel = location.pathname === '/';
     return (
       <header ref={node => this.node = node}>
         <div className="ds-l-container">
           <div className="ds-l-row">
             <div className="ds-l-col--12 ds-l-md-col--4 site-title">
-              {isTopLevel &&
+              {showSiteTitle &&
                 <Link to="/">
                   {t('titleBasic')}
                 </Link>
               }
-              {!isTopLevel && !authenticated &&
+              {!showSiteTitle && !authenticated &&
                 <Link to="/">
                   {t('titleBasic')}
                 </Link>
               }
-              {!isTopLevel && authenticated && (
+              {!showSiteTitle && authenticated && (
                 <Link to="/">
                   <Icon icon={faChevronLeft} size="sm" />
                   { isAdmin ? "Admin dashboard" : `${currentUser.state.id.toUpperCase()} APD home` }
@@ -128,15 +126,14 @@ Header.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
   pushRoute: PropTypes.func.isRequired,
   ariaExpanded: PropTypes.bool.isRequired,
-  location: PropTypes.object.isRequired
+  showSiteTitle: PropTypes.bool.isRequired
 };
 
 Header.defaultProps = {
   currentUser: null
 };
 
-export default withRouter(
-  connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Header));
+)(Header);

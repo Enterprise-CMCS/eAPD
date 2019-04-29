@@ -20,9 +20,10 @@ class Wrapper extends Component {
 
   render() {
     const { children } = this.props;
+    let showSiteTitle = location.pathname === '/'
     return (
       <div className="site">
-        <Header key={location.pathname}/>
+        <Header key={location.pathname} showSiteTitle={showSiteTitle} />
         {children}
       </div>)
     ;
