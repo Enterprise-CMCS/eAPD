@@ -1,5 +1,3 @@
-/* eslint-disable no-return-assign */
-
 import Button from '@cmsgov/design-system-core/dist/components/Button/Button';
 
 import PropTypes from 'prop-types';
@@ -20,7 +18,6 @@ class Header extends Component {
       ariaExpanded: props.ariaExpanded,
     };
     this.node = React.createRef();
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   handleOutsideClick = e => {
