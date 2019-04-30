@@ -22,15 +22,13 @@ class Header extends Component {
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
-  componentDidMount() {
-    document.addEventListener('mousedown', this.handleOutsideClick);
-  }
-
   handleOutsideClick = e => {
     if (this.node.contains(e.target)) {
       return;
     }
     this.setState({ ariaExpanded: false })
+    // remove the global click handler when the dropdown is collapsed
+    document.removeEventListener('click', this.handleOutsideClick);
   };
 
   handleLogout = e => {
@@ -40,7 +38,13 @@ class Header extends Component {
   };
 
   toggleDropdown = () => {
-    this.setState(prev => ({ ariaExpanded: !prev.ariaExpanded }));
+    this.setState(prev => {
+      if (!prev.ariaExpanded) {
+        // add global click handler when the dropdown is expanded
+        document.addEventListener('click', this.handleOutsideClick);
+      }
+      return { ariaExpanded: !prev.ariaExpanded };
+    });
   };
 
   render() {
