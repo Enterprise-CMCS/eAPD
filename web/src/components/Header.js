@@ -19,11 +19,12 @@ class Header extends Component {
     this.state = {
       ariaExpanded: props.ariaExpanded,
     };
+    this.node = React.createRef();
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   handleOutsideClick = e => {
-    if (this.node.contains(e.target)) {
+    if (this.node.current.contains(e.target)) {
       return;
     }
     this.setState({ ariaExpanded: false })
@@ -51,7 +52,7 @@ class Header extends Component {
     const { authenticated, currentUser, isAdmin, showSiteTitle } = this.props;
     const { ariaExpanded } = this.state;
     return (
-      <header ref={node => this.node = node}>
+      <header ref={this.node}>
         <div className="ds-l-container">
           <div className="ds-l-row">
             <div className="ds-l-col--12 ds-l-md-col--4 site-title">
