@@ -19,18 +19,17 @@ class Header extends Component {
     this.state = {
       ariaExpanded: props.ariaExpanded,
     };
+    this.node = React.createRef();
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
-  componentDidMount() {
-    document.addEventListener('mousedown', this.handleOutsideClick);
-  }
-
   handleOutsideClick = e => {
-    if (this.node.contains(e.target)) {
+    if (this.node.current.contains(e.target)) {
       return;
     }
     this.setState({ ariaExpanded: false })
+    // remove the global click handler when the dropdown is collapsed
+    document.removeEventListener('click', this.handleOutsideClick);
   };
 
   handleLogout = e => {
@@ -40,14 +39,20 @@ class Header extends Component {
   };
 
   toggleDropdown = () => {
-    this.setState(prev => ({ ariaExpanded: !prev.ariaExpanded }));
+    this.setState(prev => {
+      if (!prev.ariaExpanded) {
+        // add global click handler when the dropdown is expanded
+        document.addEventListener('click', this.handleOutsideClick);
+      }
+      return { ariaExpanded: !prev.ariaExpanded };
+    });
   };
 
   render() {
     const { authenticated, currentUser, isAdmin, showSiteTitle } = this.props;
     const { ariaExpanded } = this.state;
     return (
-      <header ref={node => this.node = node}>
+      <header ref={this.node}>
         <div className="ds-l-container">
           <div className="ds-l-row">
             <div className="ds-l-col--12 ds-l-md-col--4 site-title">
