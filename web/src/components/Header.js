@@ -16,7 +16,10 @@ import Icon, { faChevronDown, faChevronLeft, faEdit, faSignOutAlt } from './Icon
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = { ariaExpanded: props.ariaExpanded };
+    this.state = {
+      ariaExpanded: props.ariaExpanded,
+
+    };
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
@@ -70,15 +73,14 @@ class Header extends Component {
               <div className="ds-l-col--12 ds-l-md-col--8">
                 <ul className="nav--dropdown" aria-expanded={ariaExpanded}>
                   <li>
-                    <Button
-                      size="small"
-                      variation="transparent"
-                      className="nav--dropdown__trigger"
+                    <button
+                      type="button"
+                      className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
                       onClick={this.toggleDropdown}
                     >
                       { currentUser ? currentUser.username : 'Your account' }
                       <Icon icon={faChevronDown} style={{ width: '8px'}} />
-                    </Button>
+                    </button>
                     <ul className="nav--submenu" aria-hidden={!ariaExpanded}>
                       <li>
                         <Link
@@ -137,3 +139,5 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(Header);
+
+export { Header as plain, mapStateToProps, mapDispatchToProps };
