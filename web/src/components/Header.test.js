@@ -41,35 +41,31 @@ describe('Header component', () => {
   });
 
   it('renders the admin home title when an admin user is at a secondary page', () => {
-    const component = mount(
-      <MemoryRouter>
-        <Header
-          authenticated
-          currentUser={{ role: "admin", state: { id: "wa", name: "Washington" }, username: "frasiercrane@kacl.com"}}
-          isAdmin
-          pushRoute={() => {}}
-          ariaExpanded={false}
-          showSiteTitle={false}
-        />
-      </MemoryRouter>
+    const component = shallow(
+      <Header
+        authenticated
+        currentUser={{ role: "admin", state: { id: "wa", name: "Washington" }, username: "frasiercrane@kacl.com"}}
+        isAdmin
+        pushRoute={() => {}}
+        ariaExpanded={false}
+        showSiteTitle={false}
+      />
     );
-    expect(component.find('.site-title').text()).toBe('Admin dashboard');
+    expect(component).toMatchSnapshot();
   });
 
   it('renders the state user home title when a state user is at a secondary page', () => {
-    const component = mount(
-      <MemoryRouter>
-        <Header
-          authenticated
-          currentUser={{ role: "admin", state: { id: "wa", name: "Washington" }, username: "frasiercrane@kacl.com"}}
-          isAdmin={false}
-          pushRoute={() => {}}
-          ariaExpanded={false}
-          showSiteTitle={false}
-        />
-      </MemoryRouter>
+    const component = shallow(
+      <Header
+        authenticated
+        currentUser={{ role: "admin", state: { id: "wa", name: "Washington" }, username: "frasiercrane@kacl.com"}}
+        isAdmin={false}
+        pushRoute={() => {}}
+        ariaExpanded={false}
+        showSiteTitle={false}
+      />
     );
-    expect(component.find('.site-title').text()).toBe('WA APD home');
+    expect(component).toMatchSnapshot();
   });
 
   it('goes to the logout route', () => {
@@ -91,12 +87,6 @@ describe('Header component', () => {
 
     expect(pushRouteProp.calledWith('/logout')).toBeTruthy();
     expect(event.preventDefault.called).toBeTruthy();
-  });
-
-  it('registers clicks outside the dropdown', () => {
-    const handleOutsideClick = sinon.spy();
-    const eventListener = sinon.stub(document, 'addEventListener');
-    eventListener.withArgs('mousedown').returns(handleOutsideClick);
   });
 
   it('maps state to props', () => {
