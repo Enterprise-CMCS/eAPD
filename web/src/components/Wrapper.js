@@ -20,7 +20,7 @@ class Wrapper extends Component {
 
   render() {
     const { children } = this.props;
-    let showSiteTitle = location.pathname === '/'
+    let showSiteTitle = location.pathname === '/'; // eslint-disable-line prefer-const
     return (
       <div className="site">
         <Header key={location.pathname} showSiteTitle={showSiteTitle} />

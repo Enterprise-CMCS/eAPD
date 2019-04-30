@@ -1,8 +1,8 @@
-import { shallow, mount, debug } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 import { push } from 'connected-react-router';
-import { Link, MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import { plain as Header, mapStateToProps, mapDispatchToProps } from './Header';
 
@@ -91,6 +91,12 @@ describe('Header component', () => {
 
     expect(pushRouteProp.calledWith('/logout')).toBeTruthy();
     expect(event.preventDefault.called).toBeTruthy();
+  });
+
+  it('registers clicks outside the dropdown', () => {
+    const handleOutsideClick = sinon.spy();
+    const eventListener = sinon.stub(document, 'addEventListener');
+    eventListener.withArgs('mousedown').returns(handleOutsideClick);
   });
 
   it('maps state to props', () => {
