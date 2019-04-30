@@ -18,7 +18,6 @@ class Header extends Component {
     super(props);
     this.state = {
       ariaExpanded: props.ariaExpanded,
-
     };
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
