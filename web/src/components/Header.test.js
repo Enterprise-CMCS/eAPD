@@ -114,7 +114,7 @@ describe('Header component', () => {
       }
     };
 
-    expect(mapStateToProps(state)).toEqual({ authenticated: 'some value', currentUser: { user: { role: 'admin' }}, isAdmin: true});
+    expect(mapStateToProps(state)).toEqual({ authenticated: 'some value', currentUser: { role: 'admin' }, isAdmin: true});
   });
 
   it('maps dispatch to props', () => {
