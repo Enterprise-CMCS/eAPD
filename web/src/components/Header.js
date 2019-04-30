@@ -20,7 +20,6 @@ class Header extends Component {
       ariaExpanded: props.ariaExpanded,
     };
     this.node = React.createRef();
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   handleOutsideClick = e => {
