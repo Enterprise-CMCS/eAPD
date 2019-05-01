@@ -9,106 +9,103 @@ exports[`apd summary component renders correctly 1`] = `
     isNumbered={true}
     resource="apd"
   >
-    <Subsection
-      id="apd-summary-overview"
-      nested={false}
-      resource="apd.overview"
+    <h3
+      className="ds-h3 subsection--title"
     >
-      <div
-        className="mb3"
-      >
-        <label
-          className="mr1"
-          key="1"
-        >
-          <input
-            checked={true}
-            onChange={[Function]}
-            type="checkbox"
-            value="1"
-          />
-          1
-        </label>
-        <label
-          className="mr1"
-          key="2"
-        >
-          <input
-            checked={true}
-            onChange={[Function]}
-            type="checkbox"
-            value="2"
-          />
-          2
-        </label>
-        <label
-          className="mr1"
-          key="3"
-        >
-          <input
-            checked={false}
-            onChange={[Function]}
-            type="checkbox"
-            value="3"
-          />
-          3
-        </label>
-      </div>
-      <div
-        className="mb3"
-      >
-        <Instruction
-          args={null}
-          reverse={false}
-          source="apd.introduction.instruction"
-        />
-        <RichText
-          content="about the program"
-          editorClassName="rte-textarea-l"
-          onSync={[Function]}
-        />
-      </div>
-      <div
-        className="mb3"
-      >
-        <Instruction
-          args={null}
-          reverse={false}
-          source="apd.hit.instruction"
-        />
-        <RichText
-          content="about hit"
-          editorClassName="rte-textarea-l"
-          onSync={[Function]}
-        />
-      </div>
-      <div
-        className="mb3"
-      >
-        <Instruction
-          args={null}
-          reverse={false}
-          source="apd.hie.instruction"
-        />
-        <RichText
-          content="about hie"
-          editorClassName="rte-textarea-l"
-          onSync={[Function]}
-        />
-      </div>
-      <div>
-        <Instruction
-          args={null}
-          reverse={false}
-          source="apd.mmis.instruction"
-        />
-        <RichText
-          content="about mmis"
-          editorClassName="rte-textarea-l"
-          onSync={[Function]}
-        />
-      </div>
-    </Subsection>
+      Program Overview
+    </h3>
+    <Instruction
+      args={null}
+      reverse={false}
+      source="apd.overview.instruction"
+    />
+    <Choice
+      checked={true}
+      inputPlacement="left"
+      key="1"
+      name="apd year 1"
+      onChange={[Function]}
+      type="checkbox"
+      value="1"
+    >
+      1
+    </Choice>
+    <Choice
+      checked={true}
+      inputPlacement="left"
+      key="2"
+      name="apd year 2"
+      onChange={[Function]}
+      type="checkbox"
+      value="2"
+    >
+      2
+    </Choice>
+    <Choice
+      checked={false}
+      inputPlacement="left"
+      key="3"
+      name="apd year 3"
+      onChange={[Function]}
+      type="checkbox"
+      value="3"
+    >
+      3
+    </Choice>
+    <div
+      className="ds-u-margin-y--3"
+    >
+      <Instruction
+        args={null}
+        reverse={false}
+        source="apd.introduction.instruction"
+      />
+      <RichText
+        content="about the program"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div
+      className="ds-u-margin-bottom--3"
+    >
+      <Instruction
+        args={null}
+        reverse={false}
+        source="apd.hit.instruction"
+      />
+      <RichText
+        content="about hit"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div
+      className="ds-u-margin-bottom--3"
+    >
+      <Instruction
+        args={null}
+        reverse={false}
+        source="apd.hie.instruction"
+      />
+      <RichText
+        content="about hie"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
+    <div>
+      <Instruction
+        args={null}
+        reverse={false}
+        source="apd.mmis.instruction"
+      />
+      <RichText
+        content="about mmis"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </div>
   </Section>
 </Connect(ConnectedWaypoint)>
 `;
