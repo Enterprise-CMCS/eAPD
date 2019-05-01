@@ -1,8 +1,7 @@
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 import { push } from 'connected-react-router';
-import { MemoryRouter } from 'react-router-dom';
 
 import { plain as Header, mapStateToProps, mapDispatchToProps } from './Header';
 

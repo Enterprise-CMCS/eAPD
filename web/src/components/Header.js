@@ -40,7 +40,9 @@ class Header extends Component {
       if (!prev.ariaExpanded) {
         // add global click handler when the dropdown is expanded
         document.addEventListener('click', this.handleOutsideClick);
-      }
+       } else {
+        // remove the global click handler when the dropdown is collapsed
+        document.removeEventListener('click', this.handleOutsideClick);}
       return { ariaExpanded: !prev.ariaExpanded };
     });
   };
