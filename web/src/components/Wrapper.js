@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-globals */
-
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Header from './Header';
@@ -20,10 +18,10 @@ class Wrapper extends Component {
 
   render() {
     const { children } = this.props;
-    let showSiteTitle = location.pathname === '/'; // eslint-disable-line prefer-const
+    const showSiteTitle = document.location.pathname === '/';
     return (
       <div className="site">
-        <Header key={location.pathname} showSiteTitle={showSiteTitle} />
+        <Header showSiteTitle={showSiteTitle} />
         {children}
       </div>)
     ;
