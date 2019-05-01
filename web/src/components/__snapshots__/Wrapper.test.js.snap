@@ -5,7 +5,6 @@ exports[`Wrapper component renders correctly in dev mode 1`] = `
   className="site"
 >
   <Connect(Header)
-    key="/"
     showSiteTitle={true}
   />
   child content
@@ -17,7 +16,6 @@ exports[`Wrapper component renders correctly in non-dev mode 1`] = `
   className="site"
 >
   <Connect(Header)
-    key="/"
     showSiteTitle={true}
   />
   child content

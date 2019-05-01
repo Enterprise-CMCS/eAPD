@@ -75,6 +75,7 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
               <li>
                 <Link
                   className="nav--dropdown__action"
+                  onClick={[Function]}
                   replace={false}
                   to="/me"
                 >
@@ -246,6 +247,7 @@ exports[`Header component renders correctly when the dropdown is closed and the 
               <li>
                 <Link
                   className="nav--dropdown__action"
+                  onClick={[Function]}
                   replace={false}
                   to="/me"
                 >
@@ -447,6 +449,7 @@ exports[`Header component renders the admin home title when an admin user is at 
               <li>
                 <Link
                   className="nav--dropdown__action"
+                  onClick={[Function]}
                   replace={false}
                   to="/me"
                 >
@@ -648,6 +651,7 @@ exports[`Header component renders the state user home title when a state user is
               <li>
                 <Link
                   className="nav--dropdown__action"
+                  onClick={[Function]}
                   replace={false}
                   to="/me"
                 >
