@@ -32,6 +32,7 @@ class Header extends Component {
   handleLogout = e => {
     e.preventDefault();
     const { pushRoute } = this.props;
+    this.toggleDropdown();
     pushRoute('/logout');
   };
 
@@ -42,7 +43,8 @@ class Header extends Component {
         document.addEventListener('click', this.handleOutsideClick);
        } else {
         // remove the global click handler when the dropdown is collapsed
-        document.removeEventListener('click', this.handleOutsideClick);}
+        document.removeEventListener('click', this.handleOutsideClick);
+      }
       return { ariaExpanded: !prev.ariaExpanded };
     });
   };
@@ -88,6 +90,7 @@ class Header extends Component {
                       <li>
                         <Link
                           to="/me"
+                          onClick={this.toggleDropdown}
                           className="nav--dropdown__action"
                         >
                           <Icon icon={faEdit} style={{ width: '14px'}}/>
