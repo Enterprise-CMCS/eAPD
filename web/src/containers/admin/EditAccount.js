@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 
 import { editAccount as editAccountDispatch } from '../../actions/admin';
 import CardForm from '../../components/CardForm';
-import Header from '../../components/Header';
 import Password from '../../components/PasswordWithMeter';
 import { LockIcon, UnlockIcon } from '../../components/Icons';
 import { getEditAccountError } from '../../reducers/errors';
@@ -202,8 +201,6 @@ class EditAccount extends Component {
 
     return (
       <Fragment>
-        <Header />
-
         <CardForm
           title="Manage accounts"
           sectionName="administrator"
