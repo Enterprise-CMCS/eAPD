@@ -389,7 +389,7 @@ exports[`Header component renders the admin home title when an admin user is at 
             title=""
             transform={null}
           />
-          Admin dashboard
+          Admin Dashboard
         </Link>
       </div>
       <div
@@ -591,7 +591,7 @@ exports[`Header component renders the state user home title when a state user is
             title=""
             transform={null}
           />
-          WA APD home
+          WA APD Home
         </Link>
       </div>
       <div
