@@ -70,7 +70,7 @@ class Header extends Component {
               {!showSiteTitle && authenticated && (
                 <Link to="/">
                   <Icon icon={faChevronLeft} size="sm" />
-                  { isAdmin ? "Admin dashboard" : `${currentUser.state.id.toUpperCase()} APD Home` }
+                  { isAdmin ? "Admin Dashboard" : `${currentUser.state.id.toUpperCase()} APD Home` }
                 </Link>
               )}
             </div>
