@@ -89,16 +89,12 @@ class SaveButton extends PureComponent {
     const buttonVariant = dirty ? 'primary' : 'success';
 
     return (
-      <div className="ds-l-row save-button--container">
-        <div className="ds-l-col--3">
-          <div className="ds-u-margin-bottom--3">
-            <div className="save-button--alert">{alert}</div>
-            <Button variation={buttonVariant} onClick={this.save}>
-              {getButtonContent(dirty, working)}
-            </Button>
-          </div>
+        <div className="save-button--container ds-u-margin-bottom--3">
+          <div className="save-button--alert">{alert}</div>
+          <Button variation={buttonVariant} onClick={this.save}>
+            {getButtonContent(dirty, working)}
+          </Button>
         </div>
-      </div>
     );
   }
 }
