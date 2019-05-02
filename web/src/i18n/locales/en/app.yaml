@@ -2,8 +2,8 @@
 
 # This is the title displayed in the sidebar.  First is when logged in, second
 # is when logged out.
-title: '{{year}} HITECH APD'
-titleBasic: CMS HITECH APD
+title: '{{year}} APD Portfolio'
+titleBasic: CMS HITECH eAPD
 
 # Top navbar button text
 login: Log in
