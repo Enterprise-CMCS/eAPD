@@ -18,11 +18,7 @@ services:
 
   web:
     build: ./web
-<<<<<<< HEAD
     image: cms-eapd/web:68660de6bd4a20fbc9efe15e12cfe164
-=======
-    image: cms-eapd/web:68660de6bd4a20fbc9efe15e12cfe164
->>>>>>> master
     environment:
       - API_URL=http://localhost:8081
     volumes:
@@ -35,11 +31,7 @@ services:
       - 8080:8001
   
   storybook:
-<<<<<<< HEAD
     image: cms-eapd/web:68660de6bd4a20fbc9efe15e12cfe164
-=======
-    image: cms-eapd/web:68660de6bd4a20fbc9efe15e12cfe164
->>>>>>> master
     volumes:
       - ./web:/app
       - /app/node_modules
