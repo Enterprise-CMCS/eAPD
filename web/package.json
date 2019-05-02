@@ -78,7 +78,7 @@
     "react": "^16.8.3",
     "react-dates": "^20.0.0",
     "react-dom": "^16.8.3",
-    "react-draft-wysiwyg": "1.10.7",
+    "react-draft-wysiwyg": "github:18f/react-draft-wysiwyg#2d89041dc5503bd02f73f1b438949175c552a044",
     "react-dropzone": "^4.3.0",
     "react-number-format": "^4.0.6",
     "react-redux": "^6.0.1",
