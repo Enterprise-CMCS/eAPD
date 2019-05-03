@@ -38,7 +38,7 @@ const getPbkdf2Args = (password, salt, iterations) => [
 // Helper to combine the components of the hash into a single formatted
 // string, so we can store the salt, iteration count, and hash as a single
 // value instead of storing them each separately.
-const hashString = (salt, iterations, hash) => {
+const getHashString = (salt, iterations, hash) => {
   const iterationsHex = Math.min(+iterations, MAX_ITERATIONS).toString(16);
 
   // If the hex representation isn't 6 characters, prepend some zeroes.
@@ -52,14 +52,21 @@ const hashString = (salt, iterations, hash) => {
   return `${salt}~${iterationsPad}~${hash.toString('base64')}`;
 };
 
+const getHashComponents = str => {
+  const [salt, iterationsHex, hash] = str.split('~');
+  const iterations = parseInt(iterationsHex, 16);
+
+  return { salt, iterations, hash };
+};
+
 /**
  * Asynchronously hash a password.
  *
  * @param {*} password               The password to hash
  * @param {Object} config
  * @param {number} config.iterations The number of iterations to hash; defaults
- *                                   to PASSWORD_HASH_ITERATIONS env variable
- *                                   or DEFAULT_ITERATIONS local variable
+ *                                   to PBKDF2_ITERATIONS env variable or
+ *                                   DEFAULT_ITERATIONS local variable
  *
  * @returns {Promise<string>} A string that is the hashed password, salted,
  *                            and iterated. Hash is 60 characters using the
@@ -68,9 +75,7 @@ const hashString = (salt, iterations, hash) => {
  */
 const hash = async (
   password,
-  {
-    iterations = process.env.PASSWORD_HASH_ITERATIONS || DEFAULT_ITERATIONS
-  } = {}
+  { iterations = process.env.PBKDF2_ITERATIONS || DEFAULT_ITERATIONS } = {}
 ) =>
   new Promise((resolve, reject) => {
     const salt = module.exports.generateRandomSalt();
@@ -80,7 +85,7 @@ const hash = async (
         if (err) {
           return reject(new Error(err));
         }
-        return resolve(hashString(salt, iterations, hashed));
+        return resolve(getHashString(salt, iterations, hashed));
       }
     );
   });
@@ -91,8 +96,8 @@ const hash = async (
  * @param {*} password               The password to hash
  * @param {Object} config
  * @param {number} config.iterations The number of iterations to hash; defaults
- *                                   to PASSWORD_HASH_ITERATIONS env variable
- *                                   or DEFAULT_ITERATIONS local variable
+ *                                   to PBKDF2_ITERATIONS env variable or
+ *                                   DEFAULT_ITERATIONS local variable
  *
  * @returns {string} A string that is the hashed password, salted, and iterated
  *                   or throws if there is an error. Hash is 60 characters
@@ -100,15 +105,13 @@ const hash = async (
  */
 const hashSync = (
   password,
-  {
-    iterations = process.env.PASSWORD_HASH_ITERATIONS || DEFAULT_ITERATIONS
-  } = {}
+  { iterations = process.env.PBKDF2_ITERATIONS || DEFAULT_ITERATIONS } = {}
 ) => {
   const salt = module.exports.generateRandomSalt();
   const hashed = crypto.pbkdf2Sync(
     ...getPbkdf2Args(password, salt, iterations)
   );
-  return hashString(salt, iterations, hashed);
+  return getHashString(salt, iterations, hashed);
 };
 
 /**
@@ -121,9 +124,10 @@ const hashSync = (
  */
 const compare = async (password, hashed) =>
   new Promise((resolve, reject) => {
-    const [salt, iterations, oldHash] = hashed.split('~');
+    const { salt, iterations, hash: oldHash } = getHashComponents(hashed);
+
     crypto.pbkdf2(
-      ...getPbkdf2Args(password, salt, parseInt(iterations, 16)),
+      ...getPbkdf2Args(password, salt, iterations),
       (err, newHash) => {
         if (err) {
           return reject(new Error(err));
@@ -143,9 +147,9 @@ const compare = async (password, hashed) =>
  *                    there was an error.
  */
 const compareSync = (password, hashed) => {
-  const [salt, iterations, oldHash] = hashed.split('~');
+  const { salt, iterations, hash: oldHash } = getHashComponents(hashed);
   const newHash = crypto.pbkdf2Sync(
-    ...getPbkdf2Args(password, salt, parseInt(iterations, 16))
+    ...getPbkdf2Args(password, salt, iterations)
   );
   return newHash.toString('base64') === oldHash;
 };
