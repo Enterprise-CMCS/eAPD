@@ -2,7 +2,6 @@
 
 exports[`my account page handles submitting the form 1`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     error={false}
     legend="manage account details"
@@ -81,7 +80,6 @@ exports[`my account page handles submitting the form 1`] = `
 
 exports[`my account page handles submitting the form 2`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     error="It went wrong"
     legend="manage account details"
@@ -160,7 +158,6 @@ exports[`my account page handles submitting the form 2`] = `
 
 exports[`my account page renders 1`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     error={false}
     legend="manage account details"
@@ -239,7 +236,6 @@ exports[`my account page renders 1`] = `
 
 exports[`my account page renders 2`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     error={false}
     legend="manage account details"
@@ -318,7 +314,6 @@ exports[`my account page renders 2`] = `
 
 exports[`my account page renders 3`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     error={false}
     legend="manage account details"
@@ -404,7 +399,6 @@ exports[`my account page renders 3`] = `
 
 exports[`my account page renders 4`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     error={false}
     legend="manage account details"

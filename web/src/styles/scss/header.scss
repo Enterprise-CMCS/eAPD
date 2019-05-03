@@ -1,21 +1,115 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
-/* we may be able to just target the header element without a class in future iterations. */
-.header__slim {
-  background-color: $color-primary-alt-darkest;
-  padding: $spacer-1 0;
-  .site-title {
-    display: block;
-    margin: $spacer-1 0;
-    text-decoration: none;
-    font-weight: bold;
+header {
+  background-color: $color-primary-darkest;
+  padding: $spacer-2 0;
+  letter-spacing: 0.6px;
+
+  a,
+  button,
+  .ds-c-button {
     color: $color-white;
-    letter-spacing: 1.6px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0;
+    text-align: left;
+    border-radius: 0;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $color-white;
+    }
+  }
+}
+
+.site-title {
+  svg {
+    margin-right: $spacer-1;
+  }
+}
+
+.nav--dropdown {
+  padding-left: 0;
+  margin-bottom: 0;
+  float: right;
+  text-align: right;
+  position: relative; /* needed for submenu absolute positioning */
+  min-width: 200px; /* don't render submenu oddly if email is very short */
+  &[aria-expanded='true'] {
+    .nav--dropdown__trigger {
+      border-bottom: 2px solid $color-primary;
+    }
+    .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+  }
+  .fa-chevron-down {
+    transition-timing-function: ease-in;
+    transition: 0.2s;
   }
 
-  .action--logout {
-    float: right;
-    margin-top: $spacer-1;
-    color: $color-white;
+
+  li {
+    list-style: none;
+  }
+
+  ul {
+    padding-left: 0;
+    a,
+    button {
+      font-weight: normal;
+    }
+  }
+}
+
+.site-title,
+.nav--dropdown > li {
+  > a,
+  > button {
+    padding-bottom: $spacer-1;
+    border-bottom: 2px solid $color-primary-darkest; /* block elements jump when hovered otherwise */
+    &:hover {
+      border-bottom: 2px solid $color-primary;
+    }
+  }
+}
+
+.nav--dropdown__action {
+  svg {
+    margin-right: 4px; /* half of $spacer-1 */
+  }
+}
+
+.nav--dropdown__trigger {
+  svg {
+    margin-left: $spacer-2;
+  }
+}
+
+.nav--submenu {
+  display: block;
+  position: absolute;
+  right: 0;
+  margin-top: $spacer-1;
+  padding-top: $spacer-1;
+  padding-bottom: $spacer-1;
+  background-color: $color-primary-darkest;
+
+  &[aria-hidden="true"] {
+    display: none;
+  }
+
+  li {
+    a,
+    button {
+      display: block;
+      width: 100%;
+      padding: $spacer-1 $spacer-2;
+
+      &:hover {
+        background-color: $color-primary;
+      }
+    }
   }
 }
