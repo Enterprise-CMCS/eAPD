@@ -15,7 +15,7 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
           replace={false}
           to="/"
         >
-          CMS HITECH APD
+          CMS HITECH eAPD
         </Link>
       </div>
       <div
@@ -187,7 +187,7 @@ exports[`Header component renders correctly when the dropdown is closed and the 
           replace={false}
           to="/"
         >
-          CMS HITECH APD
+          CMS HITECH eAPD
         </Link>
       </div>
       <div

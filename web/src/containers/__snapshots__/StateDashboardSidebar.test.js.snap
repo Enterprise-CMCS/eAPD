@@ -26,7 +26,7 @@ exports[`State dashboard sidebar component renders correctly 1`] = `
           Solid
            
           <br />
-           HITECH APD
+           APD Portfolio
         </h1>
       </div>
       <VerticalNav
