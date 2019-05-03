@@ -497,10 +497,6 @@ describe('apd actions', () => {
 
       const expectedActions = [
         { type: actions.SAVE_APD_REQUEST },
-        {
-          type: notificationActions.ADD_NOTIFICATION,
-          message: 'Save failed (not-sure-why)'
-        },
         { type: actions.SAVE_APD_FAILURE }
       ];
 
@@ -552,10 +548,6 @@ describe('apd actions', () => {
 
           const expectedActions = [
             { type: actions.SAVE_APD_REQUEST },
-            {
-              type: notificationActions.ADD_NOTIFICATION,
-              message: 'Save successful!'
-            },
             { type: actions.SAVE_APD_SUCCESS, data: { foo: 'bar' } }
           ];
 
@@ -628,10 +620,6 @@ describe('apd actions', () => {
 
           const expectedActions = [
             { type: actions.SAVE_APD_REQUEST },
-            {
-              type: notificationActions.ADD_NOTIFICATION,
-              message: 'Save successful!'
-            },
             { type: actions.SAVE_APD_SUCCESS, data: { foo: 'bar' } }
           ];
 

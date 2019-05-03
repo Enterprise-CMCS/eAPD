@@ -9,6 +9,7 @@ import Export from './ApdExport';
 import ApdSummary from './ApdSummary';
 import ExecutiveSummary from './ExecutiveSummary';
 import PreviousActivities from './PreviousActivities';
+import SaveButton from './SaveButton';
 import ScheduleSummary from './ScheduleSummary';
 import Sidebar from './Sidebar';
 import { selectApdOnLoad } from '../actions/apd';
@@ -100,6 +101,8 @@ class ApdApplication extends Component {
             <Export />
           </div>
         </div>
+
+        <SaveButton />
       </div>
     );
   }
