@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import CardForm from '../../components/CardForm';
-import Header from '../../components/Header';
 import Password from '../../components/PasswordWithMeter';
 import { STATES } from '../../util';
 import { createUser as createUserDispatch } from '../../actions/admin';
@@ -83,8 +82,6 @@ class CreateUser extends Component {
 
     return (
       <Fragment>
-        <Header />
-
         <CardForm
           title="Create account"
           sectionName="administrator"
