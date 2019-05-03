@@ -1,0 +1,749 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component opens and closes the dropdown when clicked 1`] = `
+<header>
+  <div
+    className="ds-l-container"
+  >
+    <div
+      className="ds-l-row"
+    >
+      <div
+        className="ds-l-col--12 ds-l-md-col--4 site-title"
+      >
+        <Link
+          replace={false}
+          to="/"
+        >
+          CMS HITECH APD
+        </Link>
+      </div>
+      <div
+        className="ds-l-col--12 ds-l-md-col--8"
+      >
+        <ul
+          aria-expanded={true}
+          className="nav--dropdown"
+        >
+          <li>
+            <button
+              className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
+              onClick={[Function]}
+              type="button"
+            >
+              frasiercrane@kacl.com
+              <FontAwesomeIcon
+                border={false}
+                className=""
+                fixedWidth={false}
+                flip={null}
+                icon={
+                  Object {
+                    "icon": Array [
+                      448,
+                      512,
+                      Array [],
+                      "f078",
+                      "M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z",
+                    ],
+                    "iconName": "chevron-down",
+                    "prefix": "fas",
+                  }
+                }
+                inverse={false}
+                listItem={false}
+                mask={null}
+                pull={null}
+                pulse={false}
+                rotation={null}
+                size={null}
+                spin={false}
+                style={
+                  Object {
+                    "width": "8px",
+                  }
+                }
+                symbol={false}
+                title=""
+                transform={null}
+              />
+            </button>
+            <ul
+              aria-hidden={false}
+              className="nav--submenu"
+            >
+              <li>
+                <Link
+                  className="nav--dropdown__action"
+                  onClick={[Function]}
+                  replace={false}
+                  to="/me"
+                >
+                  <FontAwesomeIcon
+                    border={false}
+                    className=""
+                    fixedWidth={false}
+                    flip={null}
+                    icon={
+                      Object {
+                        "icon": Array [
+                          576,
+                          512,
+                          Array [],
+                          "f044",
+                          "M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z",
+                        ],
+                        "iconName": "edit",
+                        "prefix": "fas",
+                      }
+                    }
+                    inverse={false}
+                    listItem={false}
+                    mask={null}
+                    pull={null}
+                    pulse={false}
+                    rotation={null}
+                    size={null}
+                    spin={false}
+                    style={
+                      Object {
+                        "width": "14px",
+                      }
+                    }
+                    symbol={false}
+                    title=""
+                    transform={null}
+                  />
+                  Manage account
+                </Link>
+              </li>
+              <li>
+                <Button
+                  className="nav--dropdown__action"
+                  onClick={[Function]}
+                  size="small"
+                  type="button"
+                  variation="transparent"
+                >
+                  <FontAwesomeIcon
+                    border={false}
+                    className=""
+                    fixedWidth={false}
+                    flip={null}
+                    icon={
+                      Object {
+                        "icon": Array [
+                          512,
+                          512,
+                          Array [],
+                          "f2f5",
+                          "M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z",
+                        ],
+                        "iconName": "sign-out-alt",
+                        "prefix": "fas",
+                      }
+                    }
+                    inverse={false}
+                    listItem={false}
+                    mask={null}
+                    pull={null}
+                    pulse={false}
+                    rotation={null}
+                    size={null}
+                    spin={false}
+                    style={
+                      Object {
+                        "width": "14px",
+                      }
+                    }
+                    symbol={false}
+                    title=""
+                    transform={null}
+                  />
+                  Log out
+                </Button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`Header component renders correctly when the dropdown is closed and the page is top level 1`] = `
+<header>
+  <div
+    className="ds-l-container"
+  >
+    <div
+      className="ds-l-row"
+    >
+      <div
+        className="ds-l-col--12 ds-l-md-col--4 site-title"
+      >
+        <Link
+          replace={false}
+          to="/"
+        >
+          CMS HITECH APD
+        </Link>
+      </div>
+      <div
+        className="ds-l-col--12 ds-l-md-col--8"
+      >
+        <ul
+          aria-expanded={false}
+          className="nav--dropdown"
+        >
+          <li>
+            <button
+              className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
+              onClick={[Function]}
+              type="button"
+            >
+              frasiercrane@kacl.com
+              <FontAwesomeIcon
+                border={false}
+                className=""
+                fixedWidth={false}
+                flip={null}
+                icon={
+                  Object {
+                    "icon": Array [
+                      448,
+                      512,
+                      Array [],
+                      "f078",
+                      "M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z",
+                    ],
+                    "iconName": "chevron-down",
+                    "prefix": "fas",
+                  }
+                }
+                inverse={false}
+                listItem={false}
+                mask={null}
+                pull={null}
+                pulse={false}
+                rotation={null}
+                size={null}
+                spin={false}
+                style={
+                  Object {
+                    "width": "8px",
+                  }
+                }
+                symbol={false}
+                title=""
+                transform={null}
+              />
+            </button>
+            <ul
+              aria-hidden={true}
+              className="nav--submenu"
+            >
+              <li>
+                <Link
+                  className="nav--dropdown__action"
+                  onClick={[Function]}
+                  replace={false}
+                  to="/me"
+                >
+                  <FontAwesomeIcon
+                    border={false}
+                    className=""
+                    fixedWidth={false}
+                    flip={null}
+                    icon={
+                      Object {
+                        "icon": Array [
+                          576,
+                          512,
+                          Array [],
+                          "f044",
+                          "M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z",
+                        ],
+                        "iconName": "edit",
+                        "prefix": "fas",
+                      }
+                    }
+                    inverse={false}
+                    listItem={false}
+                    mask={null}
+                    pull={null}
+                    pulse={false}
+                    rotation={null}
+                    size={null}
+                    spin={false}
+                    style={
+                      Object {
+                        "width": "14px",
+                      }
+                    }
+                    symbol={false}
+                    title=""
+                    transform={null}
+                  />
+                  Manage account
+                </Link>
+              </li>
+              <li>
+                <Button
+                  className="nav--dropdown__action"
+                  onClick={[Function]}
+                  size="small"
+                  type="button"
+                  variation="transparent"
+                >
+                  <FontAwesomeIcon
+                    border={false}
+                    className=""
+                    fixedWidth={false}
+                    flip={null}
+                    icon={
+                      Object {
+                        "icon": Array [
+                          512,
+                          512,
+                          Array [],
+                          "f2f5",
+                          "M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z",
+                        ],
+                        "iconName": "sign-out-alt",
+                        "prefix": "fas",
+                      }
+                    }
+                    inverse={false}
+                    listItem={false}
+                    mask={null}
+                    pull={null}
+                    pulse={false}
+                    rotation={null}
+                    size={null}
+                    spin={false}
+                    style={
+                      Object {
+                        "width": "14px",
+                      }
+                    }
+                    symbol={false}
+                    title=""
+                    transform={null}
+                  />
+                  Log out
+                </Button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`Header component renders the admin home title when an admin user is at a secondary page 1`] = `
+<header>
+  <div
+    className="ds-l-container"
+  >
+    <div
+      className="ds-l-row"
+    >
+      <div
+        className="ds-l-col--12 ds-l-md-col--4 site-title"
+      >
+        <Link
+          replace={false}
+          to="/"
+        >
+          <FontAwesomeIcon
+            border={false}
+            className=""
+            fixedWidth={false}
+            flip={null}
+            icon={
+              Object {
+                "icon": Array [
+                  320,
+                  512,
+                  Array [],
+                  "f053",
+                  "M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z",
+                ],
+                "iconName": "chevron-left",
+                "prefix": "fas",
+              }
+            }
+            inverse={false}
+            listItem={false}
+            mask={null}
+            pull={null}
+            pulse={false}
+            rotation={null}
+            size="sm"
+            spin={false}
+            symbol={false}
+            title=""
+            transform={null}
+          />
+          Admin Dashboard
+        </Link>
+      </div>
+      <div
+        className="ds-l-col--12 ds-l-md-col--8"
+      >
+        <ul
+          aria-expanded={false}
+          className="nav--dropdown"
+        >
+          <li>
+            <button
+              className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
+              onClick={[Function]}
+              type="button"
+            >
+              frasiercrane@kacl.com
+              <FontAwesomeIcon
+                border={false}
+                className=""
+                fixedWidth={false}
+                flip={null}
+                icon={
+                  Object {
+                    "icon": Array [
+                      448,
+                      512,
+                      Array [],
+                      "f078",
+                      "M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z",
+                    ],
+                    "iconName": "chevron-down",
+                    "prefix": "fas",
+                  }
+                }
+                inverse={false}
+                listItem={false}
+                mask={null}
+                pull={null}
+                pulse={false}
+                rotation={null}
+                size={null}
+                spin={false}
+                style={
+                  Object {
+                    "width": "8px",
+                  }
+                }
+                symbol={false}
+                title=""
+                transform={null}
+              />
+            </button>
+            <ul
+              aria-hidden={true}
+              className="nav--submenu"
+            >
+              <li>
+                <Link
+                  className="nav--dropdown__action"
+                  onClick={[Function]}
+                  replace={false}
+                  to="/me"
+                >
+                  <FontAwesomeIcon
+                    border={false}
+                    className=""
+                    fixedWidth={false}
+                    flip={null}
+                    icon={
+                      Object {
+                        "icon": Array [
+                          576,
+                          512,
+                          Array [],
+                          "f044",
+                          "M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z",
+                        ],
+                        "iconName": "edit",
+                        "prefix": "fas",
+                      }
+                    }
+                    inverse={false}
+                    listItem={false}
+                    mask={null}
+                    pull={null}
+                    pulse={false}
+                    rotation={null}
+                    size={null}
+                    spin={false}
+                    style={
+                      Object {
+                        "width": "14px",
+                      }
+                    }
+                    symbol={false}
+                    title=""
+                    transform={null}
+                  />
+                  Manage account
+                </Link>
+              </li>
+              <li>
+                <Button
+                  className="nav--dropdown__action"
+                  onClick={[Function]}
+                  size="small"
+                  type="button"
+                  variation="transparent"
+                >
+                  <FontAwesomeIcon
+                    border={false}
+                    className=""
+                    fixedWidth={false}
+                    flip={null}
+                    icon={
+                      Object {
+                        "icon": Array [
+                          512,
+                          512,
+                          Array [],
+                          "f2f5",
+                          "M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z",
+                        ],
+                        "iconName": "sign-out-alt",
+                        "prefix": "fas",
+                      }
+                    }
+                    inverse={false}
+                    listItem={false}
+                    mask={null}
+                    pull={null}
+                    pulse={false}
+                    rotation={null}
+                    size={null}
+                    spin={false}
+                    style={
+                      Object {
+                        "width": "14px",
+                      }
+                    }
+                    symbol={false}
+                    title=""
+                    transform={null}
+                  />
+                  Log out
+                </Button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`Header component renders the state user home title when a state user is at a secondary page 1`] = `
+<header>
+  <div
+    className="ds-l-container"
+  >
+    <div
+      className="ds-l-row"
+    >
+      <div
+        className="ds-l-col--12 ds-l-md-col--4 site-title"
+      >
+        <Link
+          replace={false}
+          to="/"
+        >
+          <FontAwesomeIcon
+            border={false}
+            className=""
+            fixedWidth={false}
+            flip={null}
+            icon={
+              Object {
+                "icon": Array [
+                  320,
+                  512,
+                  Array [],
+                  "f053",
+                  "M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z",
+                ],
+                "iconName": "chevron-left",
+                "prefix": "fas",
+              }
+            }
+            inverse={false}
+            listItem={false}
+            mask={null}
+            pull={null}
+            pulse={false}
+            rotation={null}
+            size="sm"
+            spin={false}
+            symbol={false}
+            title=""
+            transform={null}
+          />
+          WA APD Home
+        </Link>
+      </div>
+      <div
+        className="ds-l-col--12 ds-l-md-col--8"
+      >
+        <ul
+          aria-expanded={false}
+          className="nav--dropdown"
+        >
+          <li>
+            <button
+              className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
+              onClick={[Function]}
+              type="button"
+            >
+              frasiercrane@kacl.com
+              <FontAwesomeIcon
+                border={false}
+                className=""
+                fixedWidth={false}
+                flip={null}
+                icon={
+                  Object {
+                    "icon": Array [
+                      448,
+                      512,
+                      Array [],
+                      "f078",
+                      "M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z",
+                    ],
+                    "iconName": "chevron-down",
+                    "prefix": "fas",
+                  }
+                }
+                inverse={false}
+                listItem={false}
+                mask={null}
+                pull={null}
+                pulse={false}
+                rotation={null}
+                size={null}
+                spin={false}
+                style={
+                  Object {
+                    "width": "8px",
+                  }
+                }
+                symbol={false}
+                title=""
+                transform={null}
+              />
+            </button>
+            <ul
+              aria-hidden={true}
+              className="nav--submenu"
+            >
+              <li>
+                <Link
+                  className="nav--dropdown__action"
+                  onClick={[Function]}
+                  replace={false}
+                  to="/me"
+                >
+                  <FontAwesomeIcon
+                    border={false}
+                    className=""
+                    fixedWidth={false}
+                    flip={null}
+                    icon={
+                      Object {
+                        "icon": Array [
+                          576,
+                          512,
+                          Array [],
+                          "f044",
+                          "M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z",
+                        ],
+                        "iconName": "edit",
+                        "prefix": "fas",
+                      }
+                    }
+                    inverse={false}
+                    listItem={false}
+                    mask={null}
+                    pull={null}
+                    pulse={false}
+                    rotation={null}
+                    size={null}
+                    spin={false}
+                    style={
+                      Object {
+                        "width": "14px",
+                      }
+                    }
+                    symbol={false}
+                    title=""
+                    transform={null}
+                  />
+                  Manage account
+                </Link>
+              </li>
+              <li>
+                <Button
+                  className="nav--dropdown__action"
+                  onClick={[Function]}
+                  size="small"
+                  type="button"
+                  variation="transparent"
+                >
+                  <FontAwesomeIcon
+                    border={false}
+                    className=""
+                    fixedWidth={false}
+                    flip={null}
+                    icon={
+                      Object {
+                        "icon": Array [
+                          512,
+                          512,
+                          Array [],
+                          "f2f5",
+                          "M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z",
+                        ],
+                        "iconName": "sign-out-alt",
+                        "prefix": "fas",
+                      }
+                    }
+                    inverse={false}
+                    listItem={false}
+                    mask={null}
+                    pull={null}
+                    pulse={false}
+                    rotation={null}
+                    size={null}
+                    spin={false}
+                    style={
+                      Object {
+                        "width": "14px",
+                      }
+                    }
+                    symbol={false}
+                    title=""
+                    transform={null}
+                  />
+                  Log out
+                </Button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+`;
