@@ -195,18 +195,6 @@ exports[`Sidebar component renders correctly 1`] = `
         }
         selectedId="some section"
       />
-      <div
-        className="ds-u-margin-top--2"
-      >
-        <Btn
-          extraCss={null}
-          kind="primary"
-          onClick={[Function]}
-          size={null}
-        >
-          Save APD
-        </Btn>
-      </div>
     </div>
   </aside>
 </div>

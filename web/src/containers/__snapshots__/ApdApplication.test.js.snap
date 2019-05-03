@@ -40,6 +40,7 @@ exports[`apd (application) component renders correctly 1`] = `
       <Connect(ExportAndSubmit) />
     </div>
   </div>
+  <Connect(SaveButton) />
 </div>
 `;
 
