@@ -7,7 +7,6 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './Sidebar';
-import { saveApd } from '../actions/apd';
 import { jumpTo } from '../actions/navigation';
 
 describe('Sidebar component', () => {
@@ -25,17 +24,6 @@ describe('Sidebar component', () => {
 
   test('renders correctly', () => {
     expect(shallow(<Sidebar {...props} />)).toMatchSnapshot();
-  });
-
-  test('saves apd to api', () => {
-    const saveApdToApiProp = sinon.spy();
-    const component = shallow(
-      <Sidebar {...props} saveApdToAPI={saveApdToApiProp} />
-    );
-
-    component.find('Btn[onClick][kind="primary"]').simulate('click');
-
-    expect(saveApdToApiProp.called).toBeTruthy();
   });
 
   test('maps state to props', () => {
@@ -68,8 +56,7 @@ describe('Sidebar component', () => {
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      jumpTo,
-      saveApdToAPI: saveApd
+      jumpTo
     });
   });
 });
