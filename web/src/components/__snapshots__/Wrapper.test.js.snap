@@ -4,6 +4,9 @@ exports[`Wrapper component renders correctly in dev mode 1`] = `
 <div
   className="site"
 >
+  <Connect(Header)
+    showSiteTitle={true}
+  />
   child content
 </div>
 `;
@@ -12,6 +15,9 @@ exports[`Wrapper component renders correctly in non-dev mode 1`] = `
 <div
   className="site"
 >
+  <Connect(Header)
+    showSiteTitle={true}
+  />
   child content
 </div>
 `;
