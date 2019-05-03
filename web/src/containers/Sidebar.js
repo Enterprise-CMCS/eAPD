@@ -6,9 +6,7 @@ import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/
 import stickybits from 'stickybits';
 
 import { t } from '../i18n';
-import { saveApd } from '../actions/apd';
 import { jumpTo } from '../actions/navigation';
-import Btn from '../components/Btn';
 import { selectActivitiesSidebar } from '../reducers/activities.selectors';
 import { selectActiveSection } from '../reducers/navigation';
 
@@ -54,7 +52,7 @@ class Sidebar extends Component {
   };
 
   render() {
-    const { activities, place, saveApdToAPI } = this.props;
+    const { activities, place } = this.props;
 
     const activityItems = this.createActivityItems(activities);
 
@@ -217,11 +215,6 @@ class Sidebar extends Component {
               selectedId={activeSection || 'apd-state-profile-overview'}
               items={links}
             />
-            <div className="ds-u-margin-top--2">
-              <Btn onClick={() => saveApdToAPI()}>
-                {t('sidebar.saveApdButtonText')}
-              </Btn>
-            </div>
           </div>
         </aside>
       </div>
@@ -233,8 +226,7 @@ Sidebar.propTypes = {
   activities: PropTypes.array.isRequired,
   activeSection: PropTypes.string.isRequired,
   jumpTo: PropTypes.func.isRequired,
-  place: PropTypes.object.isRequired,
-  saveApdToAPI: PropTypes.func.isRequired
+  place: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -243,8 +235,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  jumpTo,
-  saveApdToAPI: saveApd
+  jumpTo
 };
 
 export default connect(
