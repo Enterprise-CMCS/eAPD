@@ -1,24 +1,13 @@
-import {
-  Button,
-  Choice,
-  FormLabel,
-  Review,
-  TextField
-} from '@cmsgov/design-system-core';
+import { Choice, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Waypoint from './ConnectedWaypoint';
 import { updateApd as updateApdAction } from '../actions/apd';
-import { Textarea } from '../components/Inputs';
-import Btn from '../components/Btn';
 import { Section, Subsection } from '../components/Section';
 import regLinks from '../data/assurancesAndCompliance.yaml';
 import { t } from '../i18n';
-
-const yes = t('assurancesAndCompliance.formLabels._yes');
-const no = t('assurancesAndCompliance.formLabels._no');
 
 const namify = (name, title) =>
   `explanation-${name}-${title}`.replace(/\s/g, '_');
