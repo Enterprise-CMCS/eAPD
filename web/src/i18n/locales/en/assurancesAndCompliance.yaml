@@ -18,6 +18,3 @@ headings:
   security: >-
     Security and interface requirements to be employed for all state
     HIT systems
-formLabels:
-  _no: 'No'
-  _yes: 'Yes'
