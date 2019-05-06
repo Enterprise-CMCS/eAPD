@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import { selectActivitiesByKey } from './activities.selectors';
-import { selectApdData } from './apd.selectors';
 import { ACTIVITY_FUNDING_SOURCES } from '../util';
 
 const selectBudget = ({ budget }) => budget;
@@ -23,34 +22,34 @@ export const selectBudgetActivitiesByFundingSource = createSelector(
 );
 
 export const selectBudgetExecutiveSummary = createSelector(
-  [selectApdData, selectActivitiesByKey, selectBudget],
-  ({ years }, byKey, budget) => {
-    const data = Object.entries(byKey).map(([key, { name, descShort }]) => {
+  [selectActivitiesByKey, selectBudget],
+  (byKey, budget) => {
+    const data = Object.entries(byKey).map(([key, { name, summary }]) => {
       const activityCosts = budget.activities[key].costsByFFY;
 
       return {
         key,
         name,
-        descShort,
-        totals: years.reduce(
-          (acc, year) => ({ ...acc, [year]: activityCosts[year].total }),
-          {}
-        ),
-        combined: activityCosts.total.total
+        summary,
+        combined: activityCosts.total.total,
+        federal: activityCosts.total.federal,
+        medicaid: activityCosts.total.medicaidShare
       };
-    });
-
-    data.push({
-      key: 'all',
-      name: 'Total Cost',
-      descShort: null,
-      totals: years.reduce(
-        (acc, year) => ({ ...acc, [year]: budget.combined[year].total }),
-        {}
-      ),
-      combined: budget.combined.total.total
     });
 
     return data;
   }
+);
+
+export const selectBudgetGrandTotal = createSelector(
+  [selectBudget],
+  ({
+    combined: {
+      total: { federal, medicaid, total }
+    }
+  }) => ({
+    combined: total,
+    federal,
+    medicaid
+  })
 );
