@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import Icon, { faUserCog, faUserPlus } from '../../components/Icons';
-import Footer from '../../components/Footer';
 
 const AdminDashboard = () => {
   return (
@@ -47,7 +46,6 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </Fragment>
   );
 };
