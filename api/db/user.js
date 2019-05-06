@@ -1,8 +1,8 @@
-const defaultBcrypt = require('bcryptjs');
 const defaultZxcvbn = require('zxcvbn');
+const defaultHash = require('../auth/passwordHash');
 const logger = require('../logger')('db user model');
 
-module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
+module.exports = (zxcvbn = defaultZxcvbn, hash = defaultHash) => ({
   user: {
     tableName: 'users',
 
@@ -17,7 +17,7 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
     format(attr) {
       if (this.hasChanged('password')) {
         // eslint-disable-next-line no-param-reassign
-        attr.password = bcrypt.hashSync(attr.password);
+        attr.password = hash.hashSync(attr.password);
       }
       return attr;
     },
