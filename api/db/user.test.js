@@ -11,9 +11,9 @@ tap.test('user data model', async userModelTests => {
   });
 
   const passwordChecker = sandbox.stub();
-  const bcrypt = { hashSync: sandbox.stub() };
+  const hash = { hashSync: sandbox.stub() };
 
-  const user = userCreator(passwordChecker, bcrypt);
+  const user = userCreator(passwordChecker, hash);
 
   userModelTests.test('setup', async setupTests => {
     setupTests.match(
@@ -102,12 +102,12 @@ tap.test('user data model', async userModelTests => {
 
     formatTests.test('when the password has changed', async test => {
       self.hasChanged.withArgs('password').returns(true);
-      bcrypt.hashSync.returns('hashed password');
+      hash.hashSync.returns('hashed password');
 
       const out = format({ password: 'new password here' });
 
       test.same(out, { password: 'hashed password' });
-      test.ok(bcrypt.hashSync.calledWith('new password here'));
+      test.ok(hash.hashSync.calledWith('new password here'));
     });
   });
 
@@ -189,7 +189,7 @@ tap.test('user data model', async userModelTests => {
 
       password.test('and the password is strong', async validTest => {
         passwordChecker.returns({ score: 4 });
-        bcrypt.hashSync.returns('hashed-password');
+        hash.hashSync.returns('hashed-password');
 
         await validate();
 
