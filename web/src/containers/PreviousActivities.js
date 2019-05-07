@@ -19,9 +19,9 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
         id="prev-activities-outline"
         resource="previousActivities.outline"
       >
-        <div className="mb-tiny bold">
+        <h4 className="ds-h4">
           {t('previousActivities.outline.instruction.label')}
-        </div>
+        </h4>
         <RichText
           content={previousActivitySummary}
           onSync={html => updateApd({ previousActivitySummary: html })}
@@ -34,15 +34,9 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
         id="prev-activities-table"
         resource="previousActivities.actualExpenses"
       >
-        <div className="mb3">
           <ApdPreviousActivityTableHI />
-        </div>
-        <div className="mb3">
           <ApdPreviousActivityTableMMIS />
-        </div>
-        <div className="mb3">
           <ApdPreviousActivityTableTotal />
-        </div>
       </Subsection>
     </Section>
   </Waypoint>
