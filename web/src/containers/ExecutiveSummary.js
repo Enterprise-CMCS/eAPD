@@ -1,6 +1,6 @@
 import { Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
@@ -35,24 +35,35 @@ class ExecutiveSummary extends PureComponent {
           >
             {data.map((activity, i) => (
               <Review
-                heading={`Activity ${i + 1}: ${activity.name ||
-                  t('activities.noNameYet')}`}
+                key={activity.key}
+                heading={
+                  <Fragment>
+                    Activity {i + 1}:{' '}
+                    <a
+                      href={`#activity-${activity.key}`}
+                      onClick={this.jump(activity.key)}
+                    >
+                      {activity.name || t('activities.noNameYet')}
+                    </a>
+                  </Fragment>
+                }
+                headingLevel={4}
                 editHref={`#activity-${activity.key}`}
-                onEditClick={this.jump(`#activity-${activity.key}`)}
+                onEditClick={this.jump(activity.key)}
                 className={i === data.length - 1 ? 'ds-u-border-bottom--0' : ''}
               >
                 {activity.summary && <p>{activity.summary}</p>}
 
                 <ul className="ds-c-list--bare">
                   <li>
-                    <strong>Date:</strong>
+                    <strong>Date:</strong> {activity.dateRange}
                   </li>
                   <li>
                     <strong>Total cost of activity:</strong>{' '}
                     <Dollars long>{activity.combined}</Dollars>
                   </li>
                   <li>
-                    <strong>Medicaid share:</strong>
+                    <strong>Medicaid share:</strong>{' '}
                     <Dollars long>{activity.medicaid}</Dollars> (
                     <Dollars long>{activity.federal}</Dollars> Federal share)
                   </li>
@@ -102,7 +113,7 @@ class ExecutiveSummary extends PureComponent {
 ExecutiveSummary.propTypes = {
   data: PropTypes.array.isRequired,
   jumpTo: PropTypes.func.isRequired,
-  total: PropTypes.number.isRequired,
+  total: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
 

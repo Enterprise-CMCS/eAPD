@@ -29,6 +29,7 @@ describe('executive summary component', () => {
         medicaid: 2150
       }
     ],
+    jumpTo: jest.fn(),
     total: {
       combined: 10,
       federal: 20,
@@ -51,6 +52,10 @@ describe('executive summary component', () => {
           a1: {
             key: 'a1',
             name: 'activity 1',
+            // Hiram Revels is seated to the United States Senate
+            plannedEndDate: '1870-02-25',
+            // Shirley Chisholm is seated to the United States House of Representatives
+            plannedStartDate: '1969-01-03',
             summary: 'first activity'
           },
           a2: {
@@ -90,6 +95,7 @@ describe('executive summary component', () => {
       data: [
         {
           key: 'a1',
+          dateRange: '1/3/1969 - 2/25/1870',
           name: 'activity 1',
           summary: 'first activity',
           combined: 950,
@@ -98,6 +104,7 @@ describe('executive summary component', () => {
         },
         {
           key: 'a2',
+          dateRange: 'Dates not set',
           name: 'activity 2',
           summary: 'second activity',
           combined: 310,
