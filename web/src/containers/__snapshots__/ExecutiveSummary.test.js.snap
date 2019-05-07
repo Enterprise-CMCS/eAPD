@@ -21,7 +21,22 @@ exports[`executive summary component renders correctly 1`] = `
         className=""
         editHref="#activity-a1"
         editText="Edit"
-        heading="Activity 1: activity 1"
+        heading={
+          <React.Fragment>
+            Activity 
+            1
+            :
+             
+            <a
+              href="#activity-a1"
+              onClick={[Function]}
+            >
+              activity 1
+            </a>
+          </React.Fragment>
+        }
+        headingLevel={4}
+        key="a1"
         onEditClick={[Function]}
       >
         <p>
@@ -34,6 +49,7 @@ exports[`executive summary component renders correctly 1`] = `
             <strong>
               Date:
             </strong>
+             
           </li>
           <li>
             <strong>
@@ -50,6 +66,7 @@ exports[`executive summary component renders correctly 1`] = `
             <strong>
               Medicaid share:
             </strong>
+             
             <Dollars
               long={true}
             >
@@ -69,7 +86,22 @@ exports[`executive summary component renders correctly 1`] = `
         className="ds-u-border-bottom--0"
         editHref="#activity-a2"
         editText="Edit"
-        heading="Activity 2: activity 2"
+        heading={
+          <React.Fragment>
+            Activity 
+            2
+            :
+             
+            <a
+              href="#activity-a2"
+              onClick={[Function]}
+            >
+              activity 2
+            </a>
+          </React.Fragment>
+        }
+        headingLevel={4}
+        key="a2"
         onEditClick={[Function]}
       >
         <p>
@@ -82,6 +114,7 @@ exports[`executive summary component renders correctly 1`] = `
             <strong>
               Date:
             </strong>
+             
           </li>
           <li>
             <strong>
@@ -98,6 +131,7 @@ exports[`executive summary component renders correctly 1`] = `
             <strong>
               Medicaid share:
             </strong>
+             
             <Dollars
               long={true}
             >
