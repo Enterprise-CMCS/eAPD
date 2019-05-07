@@ -63,11 +63,11 @@ class AssurancesAndCompliance extends Component {
             resource="assurancesAndCompliance.citations"
           >
             {Object.entries(regLinks).map(([name, regulations]) => (
-              <div key={name} className="mb3">
+              <div key={name} className="ds-u-margin-bottom--3">
                 <h3>{t(`assurancesAndCompliance.headings.${name}`)}</h3>
                 {apdSections[name].map(
                   ({ title, checked, explanation }, index) => (
-                    <div key={title} className="mt2">
+                    <fieldset key={title} className="ds-u-margin-top--2">
                       <legend className="ds-c-label">
                         Are you complying with{' '}
                         <strong>
@@ -110,7 +110,7 @@ class AssurancesAndCompliance extends Component {
                       >
                         No
                       </Choice>
-                    </div>
+                    </fieldset>
                   )
                 )}
               </div>
