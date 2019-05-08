@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import { editSelf } from '../../actions/admin';
 import CardForm from '../../components/CardForm';
-import Header from '../../components/Header';
 import Password from '../../components/PasswordWithMeter';
 import { LockIcon, UnlockIcon } from '../../components/Icons';
 import { getEditOwnAccountError } from '../../reducers/errors';
@@ -81,8 +80,6 @@ class MyAccount extends Component {
 
     return (
       <Fragment>
-        <Header />
-
         <CardForm
           title="Manage account"
           legend="manage account details"

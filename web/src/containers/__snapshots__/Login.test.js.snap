@@ -2,7 +2,6 @@
 
 exports[`login component renders consent banner initially 1`] = `
 <Fragment>
-  <Connect(Header) />
   <ConsentBanner
     onAgree={[Function]}
   />
@@ -36,7 +35,6 @@ exports[`login component renders correctly if logged in, but no previous locatio
 
 exports[`login component renders correctly if not logged in 1`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
@@ -84,7 +82,6 @@ exports[`login component renders correctly if not logged in 1`] = `
 
 exports[`login component renders correctly if not logged in 2`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
@@ -132,7 +129,6 @@ exports[`login component renders correctly if not logged in 2`] = `
 
 exports[`login component renders correctly if not logged in 3`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     canSubmit={6}
     cancelable={false}
@@ -180,7 +176,6 @@ exports[`login component renders correctly if not logged in 3`] = `
 
 exports[`login component renders correctly if not logged in and fetching data 1`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
@@ -228,7 +223,6 @@ exports[`login component renders correctly if not logged in and fetching data 1`
 
 exports[`login component renders correctly if not logged in and there is an error 1`] = `
 <Fragment>
-  <Connect(Header) />
   <withRouter(CardForm)
     canSubmit={0}
     cancelable={false}
