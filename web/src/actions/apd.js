@@ -154,8 +154,6 @@ export const notifyNetError = (action, error) => {
 };
 
 export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
-  dispatch(requestSave());
-
   const {
     apd: { data: updatedApd },
     activities,
@@ -163,9 +161,10 @@ export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
   } = state();
 
   if (!dirty.dirty) {
-    dispatch(notify('Save successful!'));
     return Promise.resolve();
   }
+
+  dispatch(requestSave());
 
   const apd = serialize(updatedApd, activities);
 
@@ -221,12 +220,10 @@ export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
   return axios
     .put(`/apds/${updatedApd.id}`, apd)
     .then(res => {
-      dispatch(notify('Save successful!'));
       dispatch(saveSuccess(res.data));
       return res.data;
     })
     .catch(error => {
-      dispatch(notifyNetError('Save', error));
       dispatch(saveFailure());
       throw error;
     });

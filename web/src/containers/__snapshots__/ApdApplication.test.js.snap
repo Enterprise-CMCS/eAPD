@@ -17,7 +17,6 @@ exports[`apd (application) component renders correctly 1`] = `
     <div
       className="site-main p2 sm-p4 md-px0 ds-l-col--9"
     >
-      <Connect(TopBtns) />
       <h1
         className="ds-h1 apd--title"
       >
@@ -41,6 +40,7 @@ exports[`apd (application) component renders correctly 1`] = `
       <Connect(ExportAndSubmit) />
     </div>
   </div>
+  <Connect(SaveButton) />
 </div>
 `;
 
