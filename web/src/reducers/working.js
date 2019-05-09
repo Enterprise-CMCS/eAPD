@@ -9,11 +9,17 @@ import {
   ADMIN_EDIT_ME_ERROR,
   ADMIN_EDIT_ME_SUCCESS
 } from '../actions/admin';
+import {
+  SAVE_APD_FAILURE,
+  SAVE_APD_REQUEST,
+  SAVE_APD_SUCCESS
+} from '../actions/apd';
 
 const initialState = {
   addAccount: false,
   editAccount: false,
-  editOwnAccount: false
+  editOwnAccount: false,
+  saveApd: false
 };
 
 // Maps action symbols to state properties.  When these actions happen, the
@@ -22,7 +28,8 @@ const initialState = {
 const yesActions = new Map([
   [ADMIN_CREATE_USER_REQUEST, 'addAccount'],
   [ADMIN_EDIT_ACCOUNT_REQUEST, 'editAccount'],
-  [ADMIN_EDIT_ME_REQUEST, 'editOwnAccount']
+  [ADMIN_EDIT_ME_REQUEST, 'editOwnAccount'],
+  [SAVE_APD_REQUEST, 'saveApd']
 ]);
 
 // When these actions happen, the state properties will be set to false.  If
@@ -34,7 +41,9 @@ const noActions = new Map([
   [ADMIN_EDIT_ACCOUNT_ERROR, 'editAccount'],
   [ADMIN_EDIT_ACCOUNT_SUCCESS, 'editAccount'],
   [ADMIN_EDIT_ME_ERROR, 'editOwnAccount'],
-  [ADMIN_EDIT_ME_SUCCESS, 'editOwnAccount']
+  [ADMIN_EDIT_ME_SUCCESS, 'editOwnAccount'],
+  [SAVE_APD_FAILURE, 'saveApd'],
+  [SAVE_APD_SUCCESS, 'saveApd']
 ]);
 
 const reducer = (state = initialState, { type }) => {
@@ -42,6 +51,7 @@ const reducer = (state = initialState, { type }) => {
     case ADMIN_CREATE_USER_REQUEST:
     case ADMIN_EDIT_ACCOUNT_REQUEST:
     case ADMIN_EDIT_ME_REQUEST:
+    case SAVE_APD_REQUEST:
       return { ...state, [yesActions.get(type)]: true };
 
     case ADMIN_CREATE_USER_ERROR:
@@ -50,6 +60,8 @@ const reducer = (state = initialState, { type }) => {
     case ADMIN_EDIT_ACCOUNT_SUCCESS:
     case ADMIN_EDIT_ME_ERROR:
     case ADMIN_EDIT_ME_SUCCESS:
+    case SAVE_APD_FAILURE:
+    case SAVE_APD_SUCCESS:
       return { ...state, [noActions.get(type)]: false };
 
     default:
@@ -60,11 +72,13 @@ const reducer = (state = initialState, { type }) => {
 const getAddAccountWorking = state => state.working.addAccount;
 const getEditAccountWorking = state => state.working.editAccount;
 const getEditOwnAccountWorking = state => state.working.editOwnAccount;
+const getSaveApdWorking = state => state.working.saveApd;
 
 export default reducer;
 
 export {
   getAddAccountWorking,
   getEditAccountWorking,
-  getEditOwnAccountWorking
+  getEditOwnAccountWorking,
+  getSaveApdWorking
 };

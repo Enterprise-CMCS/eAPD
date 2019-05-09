@@ -22,7 +22,7 @@ const Instruction = ({ args, reverse, source }) => {
             <Md
               content={helpText}
               wrapper="p"
-              className="mb2 text-s alert alert-info"
+              className="instruction-box"
             />
           )}
         </div>

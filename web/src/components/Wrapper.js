@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import Header from './Header';
 
 class Wrapper extends Component {
   componentDidMount() {
@@ -17,7 +18,13 @@ class Wrapper extends Component {
 
   render() {
     const { children } = this.props;
-    return <div className="site">{children}</div>;
+    const showSiteTitle = document.location.pathname === '/';
+    return (
+      <div className="site">
+        <Header showSiteTitle={showSiteTitle} />
+        {children}
+      </div>)
+    ;
   }
 }
 
