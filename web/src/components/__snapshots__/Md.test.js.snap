@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Md component handles converting custom formatting 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "This is some content.<br />
+<ol><li>first ordered item</li><li>second ordered item</li><li>third ordered item</li></ol><br />
+<br />
+<ul><li>first unordered item</li><li>second unordered item</li><li>third unordered item</li></ul>",
+    }
+  }
+/>
+`;
+
+exports[`Md component ignores [format] blocks that it does not understand 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "This is some content.<br />
+[unknown]<br />
+first item<br />
+<br />
+second item<br />
+<br />
+third item<br />
+[/unknown]",
+    }
+  }
+/>
+`;
+
 exports[`Md component renders correctly 1`] = `
 <div
   dangerouslySetInnerHTML={

@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import Icon, { faPlusCircle, faSpinner } from '../components/Icons';
 import Md from '../components/Md';
 import Sidebar from './StateDashboardSidebar';
-import TopBtns from './TopBtns';
 import { createApd, deleteApd, selectApd } from '../actions/apd';
 import { Section } from '../components/Section';
 import { t } from '../i18n';
@@ -45,6 +44,7 @@ const StateDashboard = (
       <div className="ds-l-row ds-u-margin--0">
         <Sidebar />
         <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
+<<<<<<< HEAD
           <TopBtns hideDashboard />
 
           <Section>
@@ -53,6 +53,9 @@ const StateDashboard = (
               <Md content={t('stateDashboard.helpText')} />
             </span>
 
+=======
+          <Section resource="stateDashboard">
+>>>>>>> master
             <div className="mb3 bg-white rounded shadow accordian">
               <div className="px3 py2 border-bottom border-bottom-darken-1 blue">
                 <span className="h2">{state.name} APDs</span>

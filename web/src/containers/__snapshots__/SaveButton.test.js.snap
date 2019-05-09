@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`save button component handles changing based on behavior shows error alert if save fails 1`] = `
+<div
+  className="save-button--container ds-u-margin-bottom--3"
+>
+  <div
+    className="save-button--alert"
+  >
+    <Alert
+      className="ds-u-margin-bottom--2"
+      variation="error"
+    >
+      Now there is an error
+    </Alert>
+  </div>
+  <Button
+    onClick={[Function]}
+    type="button"
+    variation="success"
+  >
+    Saved
+  </Button>
+</div>
+`;
+
+exports[`save button component handles changing based on behavior shows success alert if saved 1`] = `
+<div
+  className="save-button--container ds-u-margin-bottom--3"
+>
+  <div
+    className="save-button--alert"
+  >
+    <Alert
+      className="ds-u-margin-bottom--2"
+      variation="success"
+    >
+      Save successful!
+    </Alert>
+  </div>
+  <Button
+    onClick={[Function]}
+    type="button"
+    variation="success"
+  >
+    Saved
+  </Button>
+</div>
+`;
+
+exports[`save button component handles changing based on behavior shows success alert if saved 2`] = `
+<div
+  className="save-button--container ds-u-margin-bottom--3"
+>
+  <div
+    className="save-button--alert"
+  />
+  <Button
+    onClick={[Function]}
+    type="button"
+    variation="success"
+  >
+    Saved
+  </Button>
+</div>
+`;
+
+exports[`save button component renders if dirty, not working, no error 1`] = `
+<div
+  className="save-button--container ds-u-margin-bottom--3"
+>
+  <div
+    className="save-button--alert"
+  />
+  <Button
+    onClick={[Function]}
+    type="button"
+    variation="primary"
+  >
+    Save
+  </Button>
+</div>
+`;
+
+exports[`save button component renders if dirty, working, no error 1`] = `
+<div
+  className="save-button--container ds-u-margin-bottom--3"
+>
+  <div
+    className="save-button--alert"
+  />
+  <Button
+    onClick={[Function]}
+    type="button"
+    variation="primary"
+  >
+    <Spinner
+      aria-valuetext="Loading"
+      role="progressbar"
+    />
+     Saving
+  </Button>
+</div>
+`;
+
+exports[`save button component renders if not dirty, not working, no error 1`] = `
+<div
+  className="save-button--container ds-u-margin-bottom--3"
+>
+  <div
+    className="save-button--alert"
+  />
+  <Button
+    onClick={[Function]}
+    type="button"
+    variation="success"
+  >
+    Saved
+  </Button>
+</div>
+`;
+
+exports[`save button component renders if not dirty, working, no error 1`] = `
+<div
+  className="save-button--container ds-u-margin-bottom--3"
+>
+  <div
+    className="save-button--alert"
+  />
+  <Button
+    onClick={[Function]}
+    type="button"
+    variation="success"
+  >
+    Saved
+  </Button>
+</div>
+`;
