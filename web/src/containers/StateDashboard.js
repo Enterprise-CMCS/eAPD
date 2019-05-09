@@ -44,18 +44,7 @@ const StateDashboard = (
       <div className="ds-l-row ds-u-margin--0">
         <Sidebar />
         <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
-<<<<<<< HEAD
-          <TopBtns hideDashboard />
-
-          <Section>
-            <h2 className="ds-h2">{t('stateDashboard.title')}</h2>
-            <span className="ds-text--lead">
-              <Md content={t('stateDashboard.helpText')} />
-            </span>
-
-=======
           <Section resource="stateDashboard">
->>>>>>> master
             <div className="mb3 bg-white rounded shadow accordian">
               <div className="px3 py2 border-bottom border-bottom-darken-1 blue">
                 <span className="h2">{state.name} APDs</span>
