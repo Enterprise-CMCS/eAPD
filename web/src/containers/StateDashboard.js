@@ -41,11 +41,11 @@ const StateDashboard = (
   return (
     <div className="site-body ds-l-container">
       <div className="ds-l-row ds-u-margin--0">
-        <div className="site-main ds-l-col--12 ds-u-margin-x--auto ">
+        <div className="site-main ds-l-col--8 ds-u-margin-x--auto ">
           <h1 className="ds-h1 ds-u-margin-top--3">
             {t('stateDashboard.title', { state: state.name })}
           </h1>
-          <Instruction source="stateDashboard.instructionBroken" />
+          <Instruction source="stateDashboard.instruction" />
 
           <div className="ds-u-border-bottom--2 ds-u-margin-bottom--1 ds-u-margin-top--6 ds-u-padding-bottom--1">
             <Button
