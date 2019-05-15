@@ -4,7 +4,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Icon, { faPlusCircle, faSpinner } from '../components/Icons';
-import Md from '../components/Md';
 import Sidebar from './StateDashboardSidebar';
 import { createApd, deleteApd, selectApd } from '../actions/apd';
 import { Section } from '../components/Section';
