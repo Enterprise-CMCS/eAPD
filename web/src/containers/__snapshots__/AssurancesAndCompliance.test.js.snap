@@ -27,14 +27,14 @@ exports[`assurances and compliance component main component renders correctly 1`
       resource="assurancesAndCompliance.citations"
     >
       <div
-        className="mb3"
+        className="ds-u-margin-bottom--3"
         key="procurement"
       >
         <h3>
           Procurement Standards (Competition / Sole Source)
         </h3>
-        <div
-          className="mt2"
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 495.348"
         >
           <legend
@@ -87,9 +87,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="SMM Section 11267"
         >
           <legend
@@ -142,9 +142,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="45 CFR Part 95.615"
         >
           <legend
@@ -197,9 +197,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="45 CFR Part 75.326"
         >
           <legend
@@ -252,17 +252,17 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
+        </fieldset>
       </div>
       <div
-        className="mb3"
+        className="ds-u-margin-bottom--3"
         key="recordsAccess"
       >
         <h3>
           Access to Records, Reporting and Agency Attestations
         </h3>
-        <div
-          className="mt2"
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 495.350"
         >
           <legend
@@ -315,9 +315,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 495.352"
         >
           <legend
@@ -370,9 +370,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 495.346"
         >
           <legend
@@ -425,9 +425,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 433.112(b)(5) - (9)"
         >
           <legend
@@ -480,9 +480,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="45 CFR Part 95.615"
         >
           <legend
@@ -535,9 +535,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="SMM Section 11267"
         >
           <legend
@@ -590,17 +590,17 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
+        </fieldset>
       </div>
       <div
-        className="mb3"
+        className="ds-u-margin-bottom--3"
         key="softwareRights"
       >
         <h3>
           Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports
         </h3>
-        <div
-          className="mt2"
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 495.360"
         >
           <legend
@@ -653,9 +653,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="45 CFR Part 95.617"
         >
           <legend
@@ -708,9 +708,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 431.300"
         >
           <legend
@@ -763,9 +763,9 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
-        <div
-          className="mt2"
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 433.112"
         >
           <legend
@@ -818,17 +818,17 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
+        </fieldset>
       </div>
       <div
-        className="mb3"
+        className="ds-u-margin-bottom--3"
         key="security"
       >
         <h3>
           Security and interface requirements to be employed for all state HIT systems
         </h3>
-        <div
-          className="mt2"
+        <fieldset
+          className="ds-u-margin-top--2"
           key="45 CFR 164 Securities and Privacy"
         >
           <legend
@@ -881,7 +881,7 @@ exports[`assurances and compliance component main component renders correctly 1`
           >
             No
           </Choice>
-        </div>
+        </fieldset>
       </div>
     </Subsection>
   </Section>
