@@ -1,6 +1,6 @@
+import moment from 'moment';
 import { createSelector } from 'reselect';
 import { selectActivitiesByKey } from './activities.selectors';
-import { selectApdData } from './apd.selectors';
 import { ACTIVITY_FUNDING_SOURCES } from '../util';
 
 const selectBudget = ({ budget }) => budget;
@@ -23,34 +23,44 @@ export const selectBudgetActivitiesByFundingSource = createSelector(
 );
 
 export const selectBudgetExecutiveSummary = createSelector(
-  [selectApdData, selectActivitiesByKey, selectBudget],
-  ({ years }, byKey, budget) => {
-    const data = Object.entries(byKey).map(([key, { name, descShort }]) => {
-      const activityCosts = budget.activities[key].costsByFFY;
+  [selectActivitiesByKey, selectBudget],
+  (byKey, budget) => {
+    const data = Object.entries(byKey).map(
+      ([key, { name, plannedEndDate, plannedStartDate, summary }]) => {
+        const activityCosts = budget.activities[key].costsByFFY;
 
-      return {
-        key,
-        name,
-        descShort,
-        totals: years.reduce(
-          (acc, year) => ({ ...acc, [year]: activityCosts[year].total }),
-          {}
-        ),
-        combined: activityCosts.total.total
-      };
-    });
+        let dateRange = 'Dates not set';
+        if (plannedEndDate && plannedStartDate) {
+          dateRange = `${moment(plannedStartDate, 'YYYY-MM-DD').format(
+            'M/D/YYYY'
+          )} - ${moment(plannedEndDate, 'YYYY-MM-DD').format('M/D/YYYY')}`;
+        }
 
-    data.push({
-      key: 'all',
-      name: 'Total Cost',
-      descShort: null,
-      totals: years.reduce(
-        (acc, year) => ({ ...acc, [year]: budget.combined[year].total }),
-        {}
-      ),
-      combined: budget.combined.total.total
-    });
+        return {
+          key,
+          dateRange,
+          name,
+          summary,
+          combined: activityCosts.total.total,
+          federal: activityCosts.total.federal,
+          medicaid: activityCosts.total.medicaidShare
+        };
+      }
+    );
 
     return data;
   }
+);
+
+export const selectBudgetGrandTotal = createSelector(
+  [selectBudget],
+  ({
+    combined: {
+      total: { federal, medicaid, total }
+    }
+  }) => ({
+    combined: total,
+    federal,
+    medicaid
+  })
 );

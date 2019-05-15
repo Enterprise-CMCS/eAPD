@@ -1,17 +1,13 @@
+import { Choice, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Waypoint from './ConnectedWaypoint';
 import { updateApd as updateApdAction } from '../actions/apd';
-import { Textarea } from '../components/Inputs';
-import Btn from '../components/Btn';
 import { Section, Subsection } from '../components/Section';
 import regLinks from '../data/assurancesAndCompliance.yaml';
 import { t } from '../i18n';
-
-const yes = t('assurancesAndCompliance.formLabels._yes');
-const no = t('assurancesAndCompliance.formLabels._no');
 
 const namify = (name, title) =>
   `explanation-${name}-${title}`.replace(/\s/g, '_');
@@ -67,49 +63,54 @@ class AssurancesAndCompliance extends Component {
             resource="assurancesAndCompliance.citations"
           >
             {Object.entries(regLinks).map(([name, regulations]) => (
-              <div key={name} className="mb3">
+              <div key={name} className="ds-u-margin-bottom--3">
                 <h3>{t(`assurancesAndCompliance.headings.${name}`)}</h3>
                 {apdSections[name].map(
                   ({ title, checked, explanation }, index) => (
-                    <div key={title} className="mt2">
-                      <div className="mb1 flex items-end justify-between">
-                        <LinkOrText link={regulations[title]} title={title} />
-                        <div>
-                          <Btn
-                            kind="outline"
-                            size="small"
-                            extraCss={`h5 ${checked ? 'bg-black white' : ''}`}
-                            onClick={this.handleCheckChange(name, index, true)}
-                          >
-                            {yes}
-                          </Btn>{' '}
-                          <Btn
-                            kind="outline"
-                            size="small"
-                            extraCss={`h5 ${checked ? '' : 'bg-black white'}`}
-                            onClick={this.handleCheckChange(name, index, false)}
-                          >
-                            {no}
-                          </Btn>
-                        </div>
-                      </div>
-                      {checked ? (
-                        <hr className="my2 border-grey" />
-                      ) : (
-                        <div>
-                          <Textarea
-                            name={namify(name, title)}
-                            label={`Explanation for why you do not comply with ${title}`}
-                            placeholder="Please explain..."
-                            hideLabel
-                            value={explanation}
-                            onChange={this.handleExplanationChange(name, index)}
-                            className="m0 textarea textarea-sm"
-                            rows="3"
-                          />
-                        </div>
-                      )}
-                    </div>
+                    <fieldset key={title} className="ds-u-margin-top--2">
+                      <legend className="ds-c-label">
+                        Are you complying with{' '}
+                        <strong>
+                          <LinkOrText link={regulations[title]} title={title} />
+                        </strong>
+                        ?
+                      </legend>
+                      <Choice
+                        type="radio"
+                        value="yes"
+                        name={`apd-assurances-yes-${namify(name, title)}`}
+                        size="small"
+                        checked={checked === true}
+                        onChange={this.handleCheckChange(name, index, true)}
+                      >
+                        Yes
+                      </Choice>
+                      <Choice
+                        type="radio"
+                        value="no"
+                        name={`apd-assurances-no-${namify(name, title)}`}
+                        size="small"
+                        checked={checked === false}
+                        onChange={this.handleCheckChange(name, index, false)}
+                        checkedChildren={
+                          <div className="ds-c-choice__checkedChild">
+                            <TextField
+                              label="Please explain"
+                              name={namify(name, title)}
+                              value={explanation}
+                              onChange={this.handleExplanationChange(
+                                name,
+                                index
+                              )}
+                              multiline
+                              rows={5}
+                            />
+                          </div>
+                        }
+                      >
+                        No
+                      </Choice>
+                    </fieldset>
                   )
                 )}
               </div>
