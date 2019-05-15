@@ -1,97 +1,86 @@
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useCallback, useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { TextField } from '@cmsgov/design-system-core';
 
+import { useFormField } from './admin/hooks';
 import ConsentBanner from '../components/ConsentBanner';
-import { login } from '../actions/auth';
+import { login as loginDispatch } from '../actions/auth';
 import CardForm from '../components/CardForm';
 import Password from '../components/PasswordWithMeter';
 
-class Login extends Component {
-  state = { showConsent: true, username: '', password: '' };
+const Login = ({ authenticated, error, fetching, location, login }) => {
+  const { from } = location.state || { from: { pathname: '/' } };
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
+  const [username, setUsername] = useFormField('');
+  const [password, setPassword] = useFormField('');
+  const [showConsent, setShowConsent] = useState(true);
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const { login: action } = this.props;
-    const { username, password } = this.state;
-    action(username, password);
-  };
+  const hideConsent = useCallback(() => setShowConsent(false), []);
 
-  hideConsent = () => {
-    this.setState({ showConsent: false });
-  };
+  const submit = useCallback(
+    e => {
+      e.preventDefault();
+      login(username, password);
+    },
+    [username, password]
+  );
 
-  render() {
-    const { authenticated, error, fetching, location } = this.props;
-    const { from } = location.state || { from: { pathname: '/' } };
-    const { showConsent, username, password } = this.state;
-
-    if (authenticated) {
-      if (from.pathname !== '/logout') {
-        return <Redirect to={from} />;
-      }
-      return <Redirect to="/" />;
+  if (authenticated) {
+    if (from.pathname !== '/logout') {
+      return <Redirect to={from} />;
     }
+    return <Redirect to="/" />;
+  }
 
-    if (showConsent) {
-      return (
-        <Fragment>
-          <ConsentBanner onAgree={this.hideConsent} />
-        </Fragment>
-      );
-    }
-
-    let errorMessage = false;
-    if (error === 'Unauthorized') {
-      errorMessage = 'The email or password you’ve entered is incorrect.';
-    } else if (error === 'Unauthorized') {
-      errorMessage = 'Sorry! Something went wrong. Please try again.';
-    }
-
+  if (showConsent) {
     return (
       <Fragment>
-        <CardForm
-          title="Log in"
-          cancelable={false}
-          canSubmit={username.length && password.length}
-          error={errorMessage}
-          working={fetching}
-          primaryButtonText={['Log in', 'Logging in']}
-          onSave={this.handleSubmit}
-          footer={
-            <p>
-              Forgot your password? Contact{' '}
-              <a href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD">
-                CMS-EAPD@cms.hhs.gov
-              </a>
-            </p>
-          }
-        >
-          <TextField
-            id="username"
-            label="Email"
-            name="username"
-            ariaLabel="Enter the email associated with this account."
-            value={username}
-            onChange={this.handleChange}
-          />
-          <Password
-            title="Password"
-            value={password}
-            onChange={this.handleChange}
-          />
-        </CardForm>
+        <ConsentBanner onAgree={hideConsent} />
       </Fragment>
     );
   }
-}
+
+  let errorMessage = false;
+  if (error === 'Unauthorized') {
+    errorMessage = 'The email or password you’ve entered is incorrect.';
+  } else if (error === 'Unauthorized') {
+    errorMessage = 'Sorry! Something went wrong. Please try again.';
+  }
+
+  return (
+    <Fragment>
+      <CardForm
+        title="Log in"
+        cancelable={false}
+        canSubmit={username.length && password.length}
+        error={errorMessage}
+        working={fetching}
+        primaryButtonText={['Log in', 'Logging in']}
+        onSave={submit}
+        footer={
+          <p>
+            Forgot your password? Contact{' '}
+            <a href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD">
+              CMS-EAPD@cms.hhs.gov
+            </a>
+          </p>
+        }
+      >
+        <TextField
+          id="username"
+          label="Email"
+          name="username"
+          ariaLabel="Enter the email associated with this account."
+          value={username}
+          onChange={setUsername}
+        />
+        <Password title="Password" value={password} onChange={setPassword} />
+      </CardForm>
+    </Fragment>
+  );
+};
 
 Login.propTypes = {
   authenticated: PropTypes.bool.isRequired,
@@ -107,7 +96,7 @@ const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
   fetching
 });
 
-const mapDispatchToProps = { login };
+const mapDispatchToProps = { login: loginDispatch };
 
 export default connect(
   mapStateToProps,

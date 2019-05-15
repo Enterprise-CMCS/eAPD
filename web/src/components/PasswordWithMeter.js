@@ -1,92 +1,86 @@
 import { Choice, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useCallback, useMemo } from 'react';
 import zxcvbn from '../lazy/zxcvbn';
 
-class Password extends Component {
-  state = { showPassword: false, strength: 0 };
+import { useBoolState } from '../containers/admin/hooks';
 
-  componentWillMount() {
-    const { value } = this.props;
-    if (value) {
-      this.changePassword({ target: { value } });
-    }
+const Password = ({
+  compareTo,
+  onChange,
+  title,
+  value,
+  showMeter,
+  ...rest
+}) => {
+  const [showPassword, toggleShowPassword] = useBoolState(false);
+  const strength = useMemo(() => zxcvbn(value, compareTo).score, [value]);
+
+  const changePassword = useCallback(
+    e => {
+      if (onChange) {
+        onChange(e);
+      }
+    },
+    [onChange]
+  );
+
+  let passwordQuality = 'Password strength: Weak';
+  if (value.length === 0) {
+    passwordQuality = <span>&nbsp;</span>;
+  } else if (strength === 3) {
+    passwordQuality = 'Password strength: Good';
+  } else if (strength > 3) {
+    passwordQuality = 'Password strength: Great';
   }
 
-  changePassword = e => {
-    const { compareTo, onChange } = this.props;
-    this.setState({ strength: zxcvbn(e.target.value, compareTo).score });
+  return (
+    <div {...rest}>
+      <div className="password-input">
+        <Choice
+          className="password-input--show-password ds-u-float--right"
+          checked={showPassword}
+          name="show password"
+          value="Show password"
+          onChange={toggleShowPassword}
+          size="small"
+        >
+          Show password
+        </Choice>
 
-    if (onChange) {
-      onChange(e);
-    }
-  };
-
-  toggleShowPassword = () => {
-    this.setState(prev => ({ showPassword: !prev.showPassword }));
-  };
-
-  render() {
-    const { compareTo, title, value, showMeter, ...rest } = this.props;
-    const { showPassword, strength } = this.state;
-
-    let passwordQuality = 'Password strength: Weak';
-    if (value.length === 0) {
-      passwordQuality = <span>&nbsp;</span>;
-    } else if (strength === 3) {
-      passwordQuality = 'Password strength: Good';
-    } else if (strength > 3) {
-      passwordQuality = 'Password strength: Great';
-    }
-
-    return (
-      <div {...rest}>
-        <div className="password-input">
-          <Choice
-            className="password-input--show-password ds-u-float--right"
-            checked={showPassword}
-            name="show password"
-            value="Show password"
-            onChange={this.toggleShowPassword}
-            size="small"
-          >
-            Show password
-          </Choice>
-
-          <TextField
-            hint={
-              showMeter &&
-              'A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address.'
-            }
-            label={title || 'Password'}
-            name="password"
-            className="no-clearfix"
-            type={showPassword ? 'text' : 'password'}
-            value={value}
-            onChange={this.changePassword}
-          />
-          {showMeter && (
-            <Fragment>
-              <div className="strength-meter">
-                <div
-                  className="strength-meter-fill"
-                  data-strength={value.length ? strength : 'empty'}
-                />
-              </div>
-              <p
-                role="alert"
-                aria-live="polite"
-                className="strength-meter-quality"
-              >
-                {passwordQuality}
-              </p>
-            </Fragment>
-          )}
-        </div>
+        <TextField
+          hint={
+            showMeter &&
+            'A strong password is at least 9 characters, not a commonly-used word or phrase, and not too similar to the person’s name or email address.'
+          }
+          label={title || 'Password'}
+          name="password"
+          className="no-clearfix"
+          type={showPassword ? 'text' : 'password'}
+          value={value}
+          onChange={changePassword}
+        />
+        {showMeter && (
+          <Fragment>
+            <div className="strength-meter">
+              <div
+                className="strength-meter-fill"
+                data-strength={value.length ? strength : 'empty'}
+              />
+            </div>
+            <p
+              role="alert"
+              aria-live="polite"
+              className="strength-meter-quality"
+            >
+              {passwordQuality}
+            </p>
+          </Fragment>
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Password.propTypes = {
   compareTo: PropTypes.arrayOf(PropTypes.string),
