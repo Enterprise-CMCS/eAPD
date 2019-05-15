@@ -9,9 +9,9 @@ import Export from './ApdExport';
 import ApdSummary from './ApdSummary';
 import ExecutiveSummary from './ExecutiveSummary';
 import PreviousActivities from './PreviousActivities';
+import SaveButton from './SaveButton';
 import ScheduleSummary from './ScheduleSummary';
 import Sidebar from './Sidebar';
-import TopBtns from './TopBtns';
 import { selectApdOnLoad } from '../actions/apd';
 import StateProfile from '../components/ApdStateProfile';
 import ProposedBudget from '../components/ProposedBudget';
@@ -86,7 +86,6 @@ class ApdApplication extends Component {
         <div className="ds-l-row ds-u-margin--0">
           <Sidebar place={place} />
           <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
-            <TopBtns />
             <h1 className="ds-h1 apd--title">
               <span className="ds-h6 ds-u-display--block">{apdName}</span>
               {place.name} {year} APD
@@ -102,6 +101,8 @@ class ApdApplication extends Component {
             <Export />
           </div>
         </div>
+
+        <SaveButton />
       </div>
     );
   }

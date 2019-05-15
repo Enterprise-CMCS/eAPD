@@ -17,230 +17,199 @@ exports[`executive summary component renders correctly 1`] = `
       nested={false}
       resource="executiveSummary.summary"
     >
-      <div
-        className="mb2 md-flex items-center alert alert-success"
+      <Review
+        className=""
+        editHref="#activity-a1"
+        editText="Edit"
+        heading={
+          <React.Fragment>
+            Activity 
+            1
+            :
+             
+            <a
+              href="#activity-a1"
+              onClick={[Function]}
+            >
+              activity 1
+            </a>
+          </React.Fragment>
+        }
+        headingLevel={4}
         key="a1"
+        onEditClick={[Function]}
       >
-        <div
-          className="p2 sm-m0 flex-auto"
+        <p>
+          first activity
+        </p>
+        <ul
+          className="ds-c-list--bare"
         >
-          <div
-            className="h5"
-          >
-            Activity 1
-          </div>
-          <a
-            className="h3 bold black"
-            href="#activity-a1"
-            onClick={[Function]}
-          >
-            activity 1
-          </a>
-          <div>
-            first activity
-          </div>
-        </div>
-        <div
-          className="md-flex md-col-7"
-        >
-          <div
-            className="px2 py3 flex-auto"
-            key="1"
-          >
-            <div
-              className="h5"
+          <li>
+            <strong>
+              Date:
+            </strong>
+             
+          </li>
+          <li>
+            <strong>
+              Total cost of activity:
+            </strong>
+             
+            <Dollars
+              long={true}
             >
-              FFY 1
-            </div>
-            <div
-              className="h3 mono bold"
+              950
+            </Dollars>
+          </li>
+          <li>
+            <strong>
+              Medicaid share:
+            </strong>
+             
+            <Dollars
+              long={true}
             >
-              <Dollars>
-                250
-              </Dollars>
-            </div>
-          </div>
-          <div
-            className="px2 py3 flex-auto"
-            key="2"
-          >
-            <div
-              className="h5"
+              1150
+            </Dollars>
+             (
+            <Dollars
+              long={true}
             >
-              FFY 2
-            </div>
-            <div
-              className="h3 mono bold"
+              1050
+            </Dollars>
+             Federal share)
+          </li>
+        </ul>
+      </Review>
+      <Review
+        className="ds-u-border-bottom--0"
+        editHref="#activity-a2"
+        editText="Edit"
+        heading={
+          <React.Fragment>
+            Activity 
+            2
+            :
+             
+            <a
+              href="#activity-a2"
+              onClick={[Function]}
             >
-              <Dollars>
-                700
-              </Dollars>
-            </div>
-          </div>
-          <div
-            className="px2 py3 flex-auto"
-          >
-            <div
-              className="h5"
-            >
-              Total
-            </div>
-            <div
-              className="h3 mono bold"
-            >
-              <Dollars>
-                950
-              </Dollars>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="mb2 md-flex items-center alert alert-success"
+              activity 2
+            </a>
+          </React.Fragment>
+        }
+        headingLevel={4}
         key="a2"
+        onEditClick={[Function]}
       >
-        <div
-          className="p2 sm-m0 flex-auto"
+        <p>
+          second activity
+        </p>
+        <ul
+          className="ds-c-list--bare"
         >
-          <div
-            className="h5"
-          >
-            Activity 2
-          </div>
+          <li>
+            <strong>
+              Date:
+            </strong>
+             
+          </li>
+          <li>
+            <strong>
+              Total cost of activity:
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              310
+            </Dollars>
+          </li>
+          <li>
+            <strong>
+              Medicaid share:
+            </strong>
+             
+            <Dollars
+              long={true}
+            >
+              2150
+            </Dollars>
+             (
+            <Dollars
+              long={true}
+            >
+              2050
+            </Dollars>
+             Federal share)
+          </li>
+        </ul>
+      </Review>
+      <hr
+        className="ds-u-border--dark ds-u-margin--0"
+      />
+      <Review
+        className="ds-u-border--0"
+        editText="Edit"
+        heading="Total cost"
+        headingLevel={4}
+      >
+        <p>
+          Verify that this information is correct.
+           
           <a
-            className="h3 bold black"
-            href="#activity-a2"
+            href="#activities"
             onClick={[Function]}
           >
-            activity 2
+            Edit activities above
           </a>
-          <div>
-            second activity
-          </div>
-        </div>
-        <div
-          className="md-flex md-col-7"
+           
+          to make changes.
+        </p>
+        <ul
+          className="ds-c-list--bare"
         >
-          <div
-            className="px2 py3 flex-auto"
-            key="1"
-          >
-            <div
-              className="h5"
+          <li>
+            <strong>
+              Federal Fiscal Years requested:
+            </strong>
+             FFY
+             
+            1, 2
+          </li>
+          <li>
+            <strong>
+              Medicaid share:
+            </strong>
+             
+            <Dollars
+              long={true}
             >
-              FFY 1
-            </div>
-            <div
-              className="h3 mono bold"
+              30
+            </Dollars>
+             (
+            <Dollars
+              long={true}
             >
-              <Dollars>
-                300
-              </Dollars>
-            </div>
-          </div>
-          <div
-            className="px2 py3 flex-auto"
-            key="2"
-          >
-            <div
-              className="h5"
+              20
+            </Dollars>
+             Federal share)
+          </li>
+          <li>
+            <strong>
+              Total funding request:
+            </strong>
+             
+            <Dollars
+              long={true}
             >
-              FFY 2
-            </div>
-            <div
-              className="h3 mono bold"
-            >
-              <Dollars>
-                10
-              </Dollars>
-            </div>
-          </div>
-          <div
-            className="px2 py3 flex-auto"
-          >
-            <div
-              className="h5"
-            >
-              Total
-            </div>
-            <div
-              className="h3 mono bold"
-            >
-              <Dollars>
-                310
-              </Dollars>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="mb2 md-flex items-center alert alert-success"
-        key="all"
-      >
-        <div
-          className="p2 sm-m0 flex-auto"
-        >
-          <div
-            className="h3 bold"
-          >
-            Total Cost
-          </div>
-        </div>
-        <div
-          className="md-flex md-col-7"
-        >
-          <div
-            className="px2 py3 flex-auto"
-            key="1"
-          >
-            <div
-              className="h5"
-            >
-              FFY 1
-            </div>
-            <div
-              className="h3 mono bold"
-            >
-              <Dollars>
-                550
-              </Dollars>
-            </div>
-          </div>
-          <div
-            className="px2 py3 flex-auto"
-            key="2"
-          >
-            <div
-              className="h5"
-            >
-              FFY 2
-            </div>
-            <div
-              className="h3 mono bold"
-            >
-              <Dollars>
-                710
-              </Dollars>
-            </div>
-          </div>
-          <div
-            className="px2 py3 flex-auto"
-          >
-            <div
-              className="h5"
-            >
-              Total
-            </div>
-            <div
-              className="h3 mono bold"
-            >
-              <Dollars>
-                1260
-              </Dollars>
-            </div>
-          </div>
-        </div>
-      </div>
+              10
+            </Dollars>
+          </li>
+        </ul>
+      </Review>
     </Subsection>
     <Connect(ConnectedWaypoint)
       id="executive-summary-budget-table"
