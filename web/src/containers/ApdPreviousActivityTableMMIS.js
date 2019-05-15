@@ -26,7 +26,7 @@ const ApdPreviousActivityTableMMIS = ({
     <Fragment>
       <h4 className="ds-h4">MMIS</h4>
       {[90, 75, 50].map((level) => (
-        <table className="table-cms centered-headers table-fixed">
+        <table key={level} className="table-cms centered-headers table-fixed">
           <thead>
             <tr>
               <th id="prev_act_mmis_null2" />
