@@ -118,7 +118,9 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           className="mono right-align align-middle"
         >
-          <Dollars>
+          <Dollars
+            long={false}
+          >
             10
           </Dollars>
         </td>
@@ -262,7 +264,9 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           className="mono right-align align-middle"
         >
-          <Dollars>
+          <Dollars
+            long={false}
+          >
             74
           </Dollars>
         </td>
@@ -456,7 +460,9 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           className="mono right-align align-middle"
         >
-          <Dollars>
+          <Dollars
+            long={false}
+          >
             26
           </Dollars>
         </td>
@@ -600,7 +606,9 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           className="mono right-align align-middle"
         >
-          <Dollars>
+          <Dollars
+            long={false}
+          >
             90
           </Dollars>
         </td>
