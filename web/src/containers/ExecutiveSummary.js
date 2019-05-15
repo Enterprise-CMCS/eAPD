@@ -71,7 +71,11 @@ class ExecutiveSummary extends PureComponent {
               </Review>
             ))}
             <hr className="ds-u-border--dark ds-u-margin--0" />
-            <Review heading="Total cost" className="ds-u-border--0">
+            <Review
+              heading="Total cost"
+              headingLevel={4}
+              className="ds-u-border--0"
+            >
               <p>
                 Verify that this information is correct.{' '}
                 <a href="#activities" onClick={this.jump('activities')}>

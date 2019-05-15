@@ -154,6 +154,7 @@ exports[`executive summary component renders correctly 1`] = `
         className="ds-u-border--0"
         editText="Edit"
         heading="Total cost"
+        headingLevel={4}
       >
         <p>
           Verify that this information is correct.
