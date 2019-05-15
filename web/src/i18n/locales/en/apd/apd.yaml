@@ -14,33 +14,34 @@ overview:
 introduction:
   instruction:
     heading: Program Introduction
-    short: >-
-      Provide a high-level introduction to the state program.
     detail: >-
-      Include the history and context of the program and the state’s future vision for it.
+      Provide a high-level introduction to the state program. Include the history and context of the program and the state’s future vision for it.
 
 hit:
   instruction:
     heading: HIT Overview
-    short: >-
+    detail: >-
       Briefly summarize planned HIT-funded activities contained within this APD.
 
 hie:
   instruction:
     heading: HIE Overview
-    short: >-
-      Summarize planned HIE-funded activities within this APD.
     detail: >-
+      Summarize planned HIE-funded activities within this APD.
+      
       If there are no HIE activities, enter “No HIE activities.”
 
-      (1) Description of the state's HIE approach (statewide, sub-state
+
+      [ol]
+      Description of the state's HIE approach (statewide, sub-state
       health information office (HIOs), etc.);
 
-      (2) Anticipated risks and mitigation strategies;
+      Anticipated risks and mitigation strategies;
 
-      (3) The short and long term value proposition to providers;
+      The short and long term value proposition to providers;
 
-      (4) The role of state government in governance and policy-setting.
+      The role of state government in governance and policy-setting.
+      [/ol]
     helpText: >-
       CMS recommends that states connect with regional CMS HITECH contacts prior to
       developing HIE funding request. HIE funding requests are complex. Early
@@ -49,7 +50,7 @@ hie:
 mmis:
   instruction:
     heading: MMIS Overview
-    short: >-
-      Briefly summarize planned MMIS-funded activities contained within this APD.
     detail: >-
+      Briefly summarize planned MMIS-funded activities contained within this APD.
+      
       If there are no MMIS activities, enter “No MMIS activities.”

@@ -156,7 +156,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             <td
               headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 18
               </Dollars>
             </td>
@@ -201,7 +203,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             <td
               headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 180
               </Dollars>
             </td>
@@ -375,7 +379,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             <td
               headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 30
               </Dollars>
             </td>
@@ -420,7 +426,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             <td
               headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 300
               </Dollars>
             </td>
@@ -594,7 +602,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             <td
               headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 30
               </Dollars>
             </td>
@@ -639,7 +649,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             <td
               headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 300
               </Dollars>
             </td>

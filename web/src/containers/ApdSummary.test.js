@@ -45,13 +45,13 @@ describe('apd summary component', () => {
   test('dispatches on a year change', () => {
     // add a year
     shallow(<ApdSummary {...props} />)
-      .find('input[value="3"]')
+      .find('Choice[value="3"]')
       .simulate('change', { target: { value: '3' } });
     expect(props.updateApd.calledWith({ years: ['1', '2', '3'] }));
 
     // remove a year
     shallow(<ApdSummary {...props} />)
-      .find('input[value="2"]')
+      .find('Choice[value="2"]')
       .simulate('change', { target: { value: '2' } });
     expect(props.updateApd.calledWith({ years: ['1'] }));
   });
