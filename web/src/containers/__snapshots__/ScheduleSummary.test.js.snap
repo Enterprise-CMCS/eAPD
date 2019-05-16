@@ -14,183 +14,129 @@ exports[`schedule summary component renders correctly 1`] = `
       nested={false}
       resource="scheduleSummary.main"
     >
-      <ReactTable
-        AggregatedComponent={[Function]}
-        ExpanderComponent={[Function]}
-        FilterComponent={[Function]}
-        LoadingComponent={[Function]}
-        NoDataComponent={[Function]}
-        PadRowComponent={[Function]}
-        PaginationComponent={[Function]}
-        PivotValueComponent={[Function]}
-        ResizerComponent={[Function]}
-        TableComponent={[Function]}
-        TbodyComponent={[Function]}
-        TdComponent={[Function]}
-        TfootComponent={[Function]}
-        ThComponent={[Function]}
-        TheadComponent={[Function]}
-        TrComponent={[Function]}
-        TrGroupComponent={[Function]}
-        aggregatedKey="_aggregated"
-        className="h6 -striped"
-        collapseOnDataChange={true}
-        collapseOnPageChange={true}
-        collapseOnSortingChange={true}
-        column={
-          Object {
-            "Aggregated": undefined,
-            "Cell": undefined,
-            "Expander": undefined,
-            "Filter": undefined,
-            "Footer": undefined,
-            "Header": undefined,
-            "Pivot": undefined,
-            "PivotValue": undefined,
-            "Placeholder": undefined,
-            "aggregate": undefined,
-            "className": "",
-            "filterAll": false,
-            "filterMethod": undefined,
-            "filterable": undefined,
-            "footerClassName": "",
-            "footerStyle": Object {},
-            "getFooterProps": [Function],
-            "getHeaderProps": [Function],
-            "getProps": [Function],
-            "headerClassName": "",
-            "headerStyle": Object {},
-            "minResizeWidth": 11,
-            "minWidth": 100,
-            "resizable": undefined,
-            "show": true,
-            "sortMethod": undefined,
-            "sortable": undefined,
-            "style": Object {},
-          }
-        }
-        columns={
-          Array [
-            Object {
-              "accessor": "accessor 1",
-              "cell": [Function],
-              "header": "Header 1",
-            },
-            Object {
-              "accessor": "accessor 2",
-              "cell": [Function],
-              "header": "Header 2",
-            },
-            Object {
-              "accessor": "accessor 3",
-              "cell": [Function],
-              "header": "Header 3",
-            },
-          ]
-        }
-        data={
-          Array [
-            Object {
-              "accessor 1": "value 1.1",
-              "accessor 2": "value 1.2",
-              "accessor 3": "value 1.3",
-            },
-            Object {
-              "accessor 1": "value 2.1",
-              "accessor 2": "value 2.2",
-              "accessor 3": "value 2.3",
-            },
-          ]
-        }
-        defaultExpanded={Object {}}
-        defaultFilterMethod={[Function]}
-        defaultFiltered={Array []}
-        defaultPage={0}
-        defaultPageSize={20}
-        defaultResized={Array []}
-        defaultSortDesc={false}
-        defaultSortMethod={[Function]}
-        defaultSorted={
-          Array [
-            Object {
-              "desc": false,
-              "id": "accessor 2",
-            },
-          ]
-        }
-        expanderDefaults={
-          Object {
-            "filterable": false,
-            "resizable": false,
-            "sortable": false,
-            "width": 35,
-          }
-        }
-        filterable={false}
-        freezeWhenExpanded={false}
-        getLoadingProps={[Function]}
-        getNoDataProps={[Function]}
-        getPaginationProps={[Function]}
-        getProps={[Function]}
-        getResizerProps={[Function]}
-        getTableProps={[Function]}
-        getTbodyProps={[Function]}
-        getTdProps={[Function]}
-        getTfootProps={[Function]}
-        getTfootTdProps={[Function]}
-        getTfootTrProps={[Function]}
-        getTheadFilterProps={[Function]}
-        getTheadFilterThProps={[Function]}
-        getTheadFilterTrProps={[Function]}
-        getTheadGroupProps={[Function]}
-        getTheadGroupThProps={[Function]}
-        getTheadGroupTrProps={[Function]}
-        getTheadProps={[Function]}
-        getTheadThProps={[Function]}
-        getTheadTrProps={[Function]}
-        getTrGroupProps={[Function]}
-        getTrProps={[Function]}
-        groupedByPivotKey="_groupedByPivot"
-        indexKey="_index"
-        loading={false}
-        loadingText="Loading..."
-        minRows={0}
-        multiSort={true}
-        nestingLevelKey="_nestingLevel"
-        nextText="Next"
-        noDataText="No rows found"
-        ofText="of"
-        onFetchData={[Function]}
-        originalKey="_original"
-        pageJumpText="jump to page"
-        pageSizeOptions={
-          Array [
-            5,
-            10,
-            20,
-            25,
-            50,
-            100,
-          ]
-        }
-        pageText="Page"
-        pivotDefaults={Object {}}
-        pivotIDKey="_pivotID"
-        pivotValKey="_pivotVal"
-        previousText="Previous"
-        resizable={false}
-        resolveData={[Function]}
-        rowsSelectorText="rows per page"
-        rowsText="rows"
-        showPageJump={true}
-        showPageSizeOptions={true}
-        showPagination={false}
-        showPaginationBottom={true}
-        showPaginationTop={false}
-        sortable={true}
-        style={Object {}}
-        subRowsKey="_subRows"
-      />
+      <table
+        className="table-cms"
+      >
+        <tbody>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold"
+              colSpan="2"
+            >
+              Activity 
+              1
+              : 
+              Number One
+            </th>
+          </tr>
+          <tr>
+            <td
+              className="ds-u-padding-left--3 ds-u-border-right--0"
+            >
+              one-one
+            </td>
+            <td
+              className="ds-u-padding-right--3 ds-u-border-left--0"
+            >
+              1995/12/02
+               - 
+              1996/03/16
+            </td>
+          </tr>
+          <tr>
+            <td
+              className="ds-u-padding-left--3 ds-u-border-right--0"
+            >
+              one-two
+            </td>
+            <td
+              className="ds-u-padding-right--3 ds-u-border-left--0"
+            >
+              1962/10/05
+               - 
+              1970/05/23
+            </td>
+          </tr>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold"
+              colSpan="2"
+            >
+              Activity 
+              2
+              : 
+              Number 💩
+            </th>
+          </tr>
+          <tr>
+            <td
+              className="ds-u-padding-left--3 ds-u-border-right--0"
+            >
+              three-one
+            </td>
+            <td
+              className="ds-u-padding-right--3 ds-u-border-left--0"
+            >
+              2016/10/06
+               - 
+              2016/10/06
+            </td>
+          </tr>
+          <tr>
+            <td
+              className="ds-u-padding-left--3 ds-u-border-right--0"
+            >
+              two-two
+            </td>
+            <td
+              className="ds-u-padding-right--3 ds-u-border-left--0"
+            >
+              2014/06/25
+               - 
+              2014/06/25
+            </td>
+          </tr>
+          <tr>
+            <td
+              className="ds-u-padding-left--3 ds-u-border-right--0"
+            >
+              two-three
+            </td>
+            <td
+              className="ds-u-padding-right--3 ds-u-border-left--0"
+            >
+              1965/08/29
+               - 
+              1965/08/21
+            </td>
+          </tr>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold"
+              colSpan="2"
+            >
+              Activity 
+              3
+              : 
+              Number Three
+            </th>
+          </tr>
+          <tr>
+            <td
+              className="ds-u-padding-left--3 ds-u-border-right--0"
+            >
+              three-one
+            </td>
+            <td
+              className="ds-u-padding-right--3 ds-u-border-left--0"
+            >
+              2018/05/05
+               - 
+              2018/06/09
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </Subsection>
   </Section>
 </Connect(ConnectedWaypoint)>
