@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 import {
   plain as ExecutiveSummary,
@@ -8,6 +7,7 @@ import {
   mapDispatchToProps
 } from './ExecutiveSummary';
 import { expandActivitySection } from '../actions/activities';
+import { jumpTo } from '../actions/navigation';
 
 describe('executive summary component', () => {
   const props = {
@@ -15,25 +15,26 @@ describe('executive summary component', () => {
       {
         key: 'a1',
         name: 'activity 1',
-        descShort: 'first activity',
-        totals: { '1': 250, '2': 700 },
-        combined: 950
+        summary: 'first activity',
+        combined: 950,
+        federal: 1050,
+        medicaid: 1150
       },
       {
         key: 'a2',
         name: 'activity 2',
-        descShort: 'second activity',
-        totals: { '1': 300, '2': 10 },
-        combined: 310
-      },
-      {
-        key: 'all',
-        name: 'Total Cost',
-        descShort: null,
-        totals: { '1': 550, '2': 710 },
-        combined: 1260
+        summary: 'second activity',
+        combined: 310,
+        federal: 2050,
+        medicaid: 2150
       }
     ],
+    jumpTo: jest.fn(),
+    total: {
+      combined: 10,
+      federal: 20,
+      medicaid: 30
+    },
     years: ['1', '2']
   };
 
@@ -44,21 +45,6 @@ describe('executive summary component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('dispatches an action to expand', () => {
-    const expandSectionProp = sinon.spy();
-    const component = shallow(
-      <ExecutiveSummary {...props} expandSection={expandSectionProp} />
-    );
-
-    // clicking the first link should expand the first activity
-    component
-      .find('a')
-      .at(0)
-      .simulate('click');
-
-    expect(expandSectionProp.calledWith('a1'));
-  });
-
   test('maps state to props', () => {
     const state = {
       activities: {
@@ -66,12 +52,16 @@ describe('executive summary component', () => {
           a1: {
             key: 'a1',
             name: 'activity 1',
-            descShort: 'first activity'
+            // Hiram Revels is seated to the United States Senate
+            plannedEndDate: '1870-02-25',
+            // Shirley Chisholm is seated to the United States House of Representatives
+            plannedStartDate: '1969-01-03',
+            summary: 'first activity'
           },
           a2: {
             key: 'a2',
             name: 'activity 2',
-            descShort: 'second activity'
+            summary: 'second activity'
           }
         }
       },
@@ -82,21 +72,21 @@ describe('executive summary component', () => {
             costsByFFY: {
               '1': { total: 250 },
               '2': { total: 700 },
-              total: { total: 950 }
+              total: { federal: 1050, medicaidShare: 1150, total: 950 }
             }
           },
           a2: {
             costsByFFY: {
               '1': { total: 300 },
               '2': { total: 10 },
-              total: { total: 310 }
+              total: { federal: 410, medicaidShare: 510, total: 310 }
             }
           }
         },
         combined: {
           '1': { total: 550 },
           '2': { total: 710 },
-          total: { total: 1260 }
+          total: { federal: 1360, medicaid: 1460, total: 1260 }
         }
       }
     };
@@ -105,33 +95,36 @@ describe('executive summary component', () => {
       data: [
         {
           key: 'a1',
+          dateRange: '1/3/1969 - 2/25/1870',
           name: 'activity 1',
-          descShort: 'first activity',
-          totals: { '1': 250, '2': 700 },
-          combined: 950
+          summary: 'first activity',
+          combined: 950,
+          federal: 1050,
+          medicaid: 1150
         },
         {
           key: 'a2',
+          dateRange: 'Dates not set',
           name: 'activity 2',
-          descShort: 'second activity',
-          totals: { '1': 300, '2': 10 },
-          combined: 310
-        },
-        {
-          key: 'all',
-          name: 'Total Cost',
-          descShort: null,
-          totals: { '1': 550, '2': 710 },
-          combined: 1260
+          summary: 'second activity',
+          combined: 310,
+          federal: 410,
+          medicaid: 510
         }
       ],
+      total: {
+        combined: 1260,
+        federal: 1360,
+        medicaid: 1460
+      },
       years: ['1', '2']
     });
   });
 
   test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      expandSection: expandActivitySection
+      expandSection: expandActivitySection,
+      jumpTo
     });
   });
 });

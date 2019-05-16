@@ -10,7 +10,7 @@ export const initialAssurances = Object.entries(assurancesList).reduce(
     ...acc,
     [name]: Object.keys(regulations).map(reg => ({
       title: reg,
-      checked: false,
+      checked: '',
       explanation: ''
     }))
   }),
