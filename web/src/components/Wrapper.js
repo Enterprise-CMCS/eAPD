@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Header from './Header';
+import Footer from './Footer';
 
 class Wrapper extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class Wrapper extends Component {
       <div className="site">
         <Header showSiteTitle={showSiteTitle} />
         {children}
+        <Footer />
       </div>)
     ;
   }
