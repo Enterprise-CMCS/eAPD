@@ -7,8 +7,8 @@ citations:
   title: Federal Citations and Justification
   instruction:
     detail: >-
-      For each citation, select “Yes” if the state is complying. Select “No” if
-      the state is not complying. For every “No,” you must also provide a justification.
+      Indicate if you are complying with each of these citations. If you select
+      "no," provide additional justification for each item.
 headings:
   procurement: Procurement Standards (Competition / Sole Source)
   recordsAccess: Access to Records, Reporting and Agency Attestations
@@ -18,6 +18,3 @@ headings:
   security: >-
     Security and interface requirements to be employed for all state
     HIT systems
-formLabels:
-  _no: 'No'
-  _yes: 'Yes'
