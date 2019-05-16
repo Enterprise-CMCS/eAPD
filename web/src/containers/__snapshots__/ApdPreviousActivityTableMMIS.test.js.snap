@@ -9,6 +9,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
   </h4>
   <table
     className="table-cms centered-headers table-fixed"
+    key="90"
   >
     <thead>
       <tr>
@@ -156,6 +157,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
   </table>
   <table
     className="table-cms centered-headers table-fixed"
+    key="75"
   >
     <thead>
       <tr>
@@ -303,6 +305,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
   </table>
   <table
     className="table-cms centered-headers table-fixed"
+    key="50"
   >
     <thead>
       <tr>
