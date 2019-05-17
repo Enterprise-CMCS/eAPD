@@ -41,39 +41,58 @@ const StateDashboard = (
   };
 
   return (
-    <Fragment>
-      <Header />
-      <div className="site-body ds-l-container">
-        <div className="ds-l-row ds-u-margin--0">
-          <div className="site-main p2 sm-p4 md-px0 ds-l-col--8 ds-u-margin-x--auto ">
-            <h1 className="ds-h1">
-              {t('stateDashboard.title', { state: state.name })}
-            </h1>
-            <Instruction source="stateDashboard.instruction" />
+    <div className="ds-l-container ds-u-margin-top--7">
+      <div className="ds-l-row">
+        <div className="ds-l-col--8 ds-u-margin-x--auto ">
+          <h1 className="ds-h1">
+            {t('stateDashboard.title', { state: state.name })}
+          </h1>
+          <Instruction source="stateDashboard.instruction" />
 
-            <div className="ds-u-border-bottom--2 ds-u-margin-bottom--1 ds-u-margin-top--6 ds-u-padding-bottom--1">
-              <Button
-                variation="primary"
-                className="ds-u-float--right"
-                onClick={create}
-              >
-                Create new&nbsp;&nbsp;
-                <Icon icon={faPlusCircle} />
-              </Button>
-              <h2 className="h2">{state.name} APDs</h2>
-            </div>
-
-            {fetching ? <Loading /> : null}
-            {!fetching && apds.length === 0 ? t('stateDashboard.none') : null}
-            <div className="ds-l-container">
-              {apds.map(apd => (
+          <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
+            <h2 className="ds-h2 ds-u-display--inline-block">{state.name} APDs</h2>
+            <Button
+              variation="primary"
+              className="ds-u-float--right"
+              onClick={create}
+            >
+              Create new&nbsp;&nbsp;
+              <Icon icon={faPlusCircle} />
+            </Button>
+          </div>
+        </div>
+      </div>
+      {fetching ? <Loading /> : null}
+      {!fetching && apds.length === 0 ? t('stateDashboard.none') : null}
+        {apds.map((apd, i) => (
+          <div
+            key={apd.id}
+            className="ds-l-row"
+          >
+            <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
+              <div className="ds-u-border-bottom--2 ds-u-padding-bottom--3">
                 <div
-                  key={apd.id}
-                  className="ds-l-row ds-u-border-bottom--2 ds-u-margin-bottom--2 ds-u-padding-bottom--2"
+                  className="ds-u-display--inline-block ds-u-float--left ds-u-fill--primary-alt-lightest ds-u-padding--2 ds-u-margin-right--2"
                 >
-                  <div
-                    className="ds-l-col--1 ds-u-valign--middle ds-u-text-align--center"
-                    style={{ alignSelf: 'center' }}
+                  <File size="lg" color="#046b99" />
+                </div>
+                <div className="ds-u-display--inline-block">
+                  <h3 className="ds-u-margin-top--0">
+                    <a href="#!" onClick={open(apd.id)}>
+                      {apd.name}
+                    </a>
+                  </h3>
+                  <ul className="ds-c-list--bare">
+                    <li>
+                      <strong>Last edited:</strong> {apd.updated}
+                    </li>
+                  </ul>
+                </div>
+                <div className="ds-u-display--inline-block ds-u-float--right ds-u-text-align--right">
+                  <Button
+                    variation="transparent"
+                    size="small"
+                    onClick={delApd(apd)}
                   >
                     <span
                       className="ds-u-fill--primary-alt-lightest ds-u-padding--2"
@@ -104,13 +123,11 @@ const StateDashboard = (
                     </Button>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <Footer />
-    </Fragment>
+      ))}
+    </div>
   );
 };
 
