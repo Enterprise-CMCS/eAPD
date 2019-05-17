@@ -78,14 +78,18 @@ exports[`apd previous activity table, grand total component renders correctly 1`
             <td
               headers="prev_act_total_row_1 prev_act_total_approved"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 1878
               </Dollars>
             </td>
             <td
               headers="prev_act_total_row_1 prev_act_total_actual"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 1090
               </Dollars>
             </td>
@@ -102,14 +106,18 @@ exports[`apd previous activity table, grand total component renders correctly 1`
             <td
               headers="prev_act_total_row_2 prev_act_total_approved"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 4380
               </Dollars>
             </td>
             <td
               headers="prev_act_total_row_2 prev_act_total_actual"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 3900
               </Dollars>
             </td>

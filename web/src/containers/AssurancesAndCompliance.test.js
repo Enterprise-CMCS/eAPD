@@ -19,7 +19,7 @@ describe('assurances and compliance component', () => {
         procurement: [
           { title: '42 CFR Part 495.348', checked: false, explanation: '' },
           { title: 'SMM Section 11267', checked: true, explanation: '' },
-          { title: '45 CFR Part 95.615', checked: true, explanation: '' },
+          { title: '45 CFR Part 95.615', checked: '', explanation: '' },
           { title: '45 CFR Part 75.326', checked: true, explanation: '' }
         ],
         recordsAccess: [
@@ -67,38 +67,14 @@ describe('assurances and compliance component', () => {
       expect(shallow(<AssurancesAndCompliance {...props} />)).toMatchSnapshot();
     });
 
-    test('dispatches when a checkbox is toggled', () => {
-      const component = shallow(<AssurancesAndCompliance {...props} />);
-
-      component
-        .find('Btn[children="Yes"]')
-        .at(0)
-        .simulate('click');
-
-      expect(
-        props.updateApd.calledWith({
-          federalCitation: { procurement: { 0: { checked: true } } }
-        })
-      );
-
-      component
-        .find('Btn[children="No"]')
-        .at(0)
-        .simulate('click');
-
-      expect(
-        props.updateApd.calledWith({
-          federalCitation: { procurement: { 0: { checked: false } } }
-        })
-      );
-    });
-
     test('dispatches when text is changed', () => {
       const component = shallow(<AssurancesAndCompliance {...props} />);
 
       component
-        .find('InputHolder')
-        .at(0)
+        .find('Choice')
+        .at(1) // choice 0 is yes, choice 1 is no
+        .dive()
+        .find('TextField')
         .simulate('change', { target: { value: 'new text' } });
 
       expect(

@@ -79,7 +79,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               3
             </Dollars>
           </td>
@@ -87,7 +89,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               6
             </Dollars>
           </td>
@@ -95,7 +99,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               9
             </Dollars>
           </td>
@@ -103,14 +109,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               12
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               15
             </Dollars>
           </td>
@@ -127,7 +137,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               2
             </Dollars>
           </td>
@@ -135,7 +147,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               5
             </Dollars>
           </td>
@@ -143,7 +157,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               8
             </Dollars>
           </td>
@@ -151,14 +167,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               11
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               14
             </Dollars>
           </td>
@@ -175,7 +195,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1
             </Dollars>
           </td>
@@ -183,7 +205,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               4
             </Dollars>
           </td>
@@ -191,7 +215,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               7
             </Dollars>
           </td>
@@ -199,14 +225,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               10
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               13
             </Dollars>
           </td>
@@ -281,7 +311,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               103
             </Dollars>
           </td>
@@ -289,7 +321,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               106
             </Dollars>
           </td>
@@ -297,7 +331,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               109
             </Dollars>
           </td>
@@ -305,14 +341,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               112
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               115
             </Dollars>
           </td>
@@ -329,7 +369,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               102
             </Dollars>
           </td>
@@ -337,7 +379,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               105
             </Dollars>
           </td>
@@ -345,7 +389,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               108
             </Dollars>
           </td>
@@ -353,14 +399,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               111
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               114
             </Dollars>
           </td>
@@ -377,7 +427,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               101
             </Dollars>
           </td>
@@ -385,7 +437,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               104
             </Dollars>
           </td>
@@ -393,7 +447,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               107
             </Dollars>
           </td>
@@ -401,14 +457,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               110
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               113
             </Dollars>
           </td>
@@ -443,7 +503,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           <td
             className="bold mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               3002
             </Dollars>
           </td>
@@ -457,7 +519,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           <td
             className="bold mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               3001
             </Dollars>
           </td>
@@ -471,7 +535,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           <td
             className="bold mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               3000
             </Dollars>
           </td>
@@ -556,7 +622,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               203
             </Dollars>
           </td>
@@ -564,7 +632,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               206
             </Dollars>
           </td>
@@ -572,7 +642,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               209
             </Dollars>
           </td>
@@ -580,14 +652,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               212
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               215
             </Dollars>
           </td>
@@ -604,7 +680,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               202
             </Dollars>
           </td>
@@ -612,7 +690,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               205
             </Dollars>
           </td>
@@ -620,7 +700,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               208
             </Dollars>
           </td>
@@ -628,14 +710,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               211
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               214
             </Dollars>
           </td>
@@ -652,7 +738,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               201
             </Dollars>
           </td>
@@ -660,7 +748,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               204
             </Dollars>
           </td>
@@ -668,7 +758,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               207
             </Dollars>
           </td>
@@ -676,14 +768,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               210
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               213
             </Dollars>
           </td>
@@ -758,7 +854,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1103
             </Dollars>
           </td>
@@ -766,7 +864,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1106
             </Dollars>
           </td>
@@ -774,7 +874,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1109
             </Dollars>
           </td>
@@ -782,14 +884,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1112
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1115
             </Dollars>
           </td>
@@ -806,7 +912,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1102
             </Dollars>
           </td>
@@ -814,7 +922,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1105
             </Dollars>
           </td>
@@ -822,7 +932,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1108
             </Dollars>
           </td>
@@ -830,14 +942,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1111
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1114
             </Dollars>
           </td>
@@ -854,7 +970,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="1"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1101
             </Dollars>
           </td>
@@ -862,7 +980,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="2"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1104
             </Dollars>
           </td>
@@ -870,7 +990,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="3"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1107
             </Dollars>
           </td>
@@ -878,14 +1000,18 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
             className="mono right-align nowrap"
             key="4"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1110
             </Dollars>
           </td>
           <td
             className="mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               1113
             </Dollars>
           </td>
@@ -920,7 +1046,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           <td
             className="bold mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               4002
             </Dollars>
           </td>
@@ -934,7 +1062,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           <td
             className="bold mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               4001
             </Dollars>
           </td>
@@ -948,7 +1078,9 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           <td
             className="bold mono right-align nowrap"
           >
-            <Dollars>
+            <Dollars
+              long={false}
+            >
               4000
             </Dollars>
           </td>

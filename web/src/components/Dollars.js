@@ -45,11 +45,15 @@ const formatLong = num => formats.long(num);
  * "only-screen" and contains the potentially truncated dollar value. The other
  * has a class of "only-print" and contains the full dollar value.
  */
-const Dollars = ({ children }) => {
+const Dollars = ({ children, long }) => {
   const num = parseFloat(children);
 
   if (Number.isNaN(num) || !Number.isFinite(num)) {
     return <Fragment>--</Fragment>;
+  }
+
+  if (long) {
+    return <span>{formatLong(num)}</span>;
   }
 
   return (
@@ -63,7 +67,13 @@ const Dollars = ({ children }) => {
 Dollars.propTypes = {
   /** The number, either as a numeric type or a parseable string, to display as
    * dollars. */
-  children: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
+  children: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    .isRequired,
+  long: PropTypes.bool
+};
+
+Dollars.defaultProps = {
+  long: false
 };
 
 export default Dollars;

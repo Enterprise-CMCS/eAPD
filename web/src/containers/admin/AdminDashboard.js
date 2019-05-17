@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 
 import Icon, { faUserCog, faUserPlus } from '../../components/Icons';
 import Footer from '../../components/Footer';
-import Header from '../../components/Header';
 
 const AdminDashboard = () => {
   return (
     <Fragment>
-      <Header />
       <div className="site-body ds-l-container">
         <div className="ds-l-row">
           <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-y--6">

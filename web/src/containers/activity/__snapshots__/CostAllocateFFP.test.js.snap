@@ -23,7 +23,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
         <div
           className="h3 bold mono truncate"
         >
-          <Dollars>
+          <Dollars
+            long={false}
+          >
             300
           </Dollars>
         </div>
@@ -43,7 +45,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
         <div
           className="h4 bold mono truncate"
         >
-          <Dollars>
+          <Dollars
+            long={false}
+          >
             290
           </Dollars>
         </div>
@@ -75,7 +79,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
             <div
               className="h4 bold mono truncate"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 261
               </Dollars>
             </div>
@@ -89,7 +95,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
             <div
               className="h4 bold mono truncate"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 29
               </Dollars>
             </div>
@@ -110,7 +118,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
         <div
           className="h3 bold mono truncate"
         >
-          <Dollars>
+          <Dollars
+            long={false}
+          >
             3000
           </Dollars>
         </div>
@@ -130,7 +140,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
         <div
           className="h4 bold mono truncate"
         >
-          <Dollars>
+          <Dollars
+            long={false}
+          >
             3000
           </Dollars>
         </div>
@@ -162,7 +174,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
             <div
               className="h4 bold mono truncate"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 300
               </Dollars>
             </div>
@@ -176,7 +190,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
             <div
               className="h4 bold mono truncate"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 2700
               </Dollars>
             </div>
