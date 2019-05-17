@@ -3,8 +3,6 @@ import PropType from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import Footer from '../components/Footer';
-import Header from '../components/Header';
 import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
 import Instruction from '../components/Instruction';
 import Md from '../components/Md';
@@ -94,34 +92,8 @@ const StateDashboard = (
                     size="small"
                     onClick={delApd(apd)}
                   >
-                    <span
-                      className="ds-u-fill--primary-alt-lightest ds-u-padding--2"
-                      style={{ marginLeft: '-16px' }}
-                    >
-                      <File size="lg" color="#046b99" />
-                    </span>
-                  </div>
-                  <div className="ds-l-col--9">
-                    <h3 className="ds-u-margin-top--0">
-                      <a href="#!" onClick={open(apd.id)}>
-                        {apd.name}
-                      </a>
-                    </h3>
-                    <ul className="ds-c-list--bare">
-                      <li>
-                        <strong>Last edited:</strong> {apd.updated}
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="ds-l-col--2 ds-u-text-align--right">
-                    <Button
-                      variation="transparent"
-                      size="small"
-                      onClick={delApd(apd)}
-                    >
-                      Delete
-                    </Button>
-                  </div>
+                    Delete
+                  </Button>
                 </div>
               </div>
             </div>
