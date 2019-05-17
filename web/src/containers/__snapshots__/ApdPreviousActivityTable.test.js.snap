@@ -155,7 +155,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             <td
               headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_total_approved"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 18
               </Dollars>
             </td>
@@ -200,7 +202,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
             <td
               headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_total_approved"
             >
-              <Dollars>
+              <Dollars
+                long={false}
+              >
                 180
               </Dollars>
             </td>

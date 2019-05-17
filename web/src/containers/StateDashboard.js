@@ -1,18 +1,18 @@
 import { Button } from '@cmsgov/design-system-core';
 import PropType from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
 import Instruction from '../components/Instruction';
-import Md from '../components/Md';
 import { createApd, deleteApd, selectApd } from '../actions/apd';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 
 const Loading = () => (
-  <div className="h2 p0 pb3 center">
-    <Icon icon={faSpinner} spin size="sm" className="mr1" /> Loading APDs
+  <div className="ds-h2 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
+    <Icon icon={faSpinner} spin size="sm" className="ds-u-margin-right--1" />{' '}
+    Loading APDs
   </div>
 );
 
@@ -46,7 +46,6 @@ const StateDashboard = (
             {t('stateDashboard.title', { state: state.name })}
           </h1>
           <Instruction source="stateDashboard.instruction" />
-
           <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
             <h2 className="ds-h2 ds-u-display--inline-block">{state.name} APDs</h2>
             <Button
