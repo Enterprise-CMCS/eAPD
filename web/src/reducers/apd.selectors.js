@@ -65,5 +65,6 @@ export const selectIncentivePaymentTotals = createSelector(
 
 export const selectApdDashboard = createSelector(
   [selectApds],
-  ({ byId }) => Object.values(byId).map(({ id, years }) => ({ id, years }))
+  ({ byId }) =>
+    Object.values(byId).map(({ id, name, updated }) => ({ id, name, updated }))
 );
