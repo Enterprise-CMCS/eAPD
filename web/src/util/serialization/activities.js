@@ -1,4 +1,4 @@
-import { applyToNumbers, generateKey, replaceNulls } from '../index';
+import { applyToNumbers, generateKey, replaceNulls, arrToObj } from '../index';
 
 const getFileURL = id => `${process.env.API_URL}/files/${id}`;
 
