@@ -4,15 +4,17 @@ import React from 'react';
 import Md from './Md';
 import { t } from '../i18n';
 
-const Instruction = ({ args, reverse, source }) => {
+const Instruction = ({ args, reverse, source, headingDisplay }) => {
   const heading = t([source, 'heading'], { defaultValue: false, ...args });
   const short = t([source, 'short'], { defaultValue: false, ...args });
   const detail = t([source, 'detail'], { defaultValue: false, ...args });
   const helpText = t([source, 'helpText'], { defaultValue: false, ...args });
+  const Tag = headingDisplay !== undefined ? headingDisplay.level : 'h3';
+  const headingClass = headingDisplay !== undefined ? headingDisplay.className : 'ds-h3';
 
   return (
     <div>
-      {heading && <h3>{heading}</h3>}
+      {heading && <Tag className={headingClass}>{heading}</Tag>}
       {(short || detail || helpText) && (
         <div className="visibility--screen">
           {reverse && detail && <Md content={detail} wrapper="p" />}
