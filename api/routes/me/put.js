@@ -48,7 +48,7 @@ module.exports = (app, { deserialize = deserializeUser } = {}) => {
 
       // The GET /me method relies on the data from the deserializer. Rather
       // than duplicate that logic, just call it.  Hooray x 2!
-      deserialize(req.user.id, (err, user) => {
+      deserialize(req.session.passport.user, (err, user) => {
         if (err) {
           return res.status(500).end();
         }
