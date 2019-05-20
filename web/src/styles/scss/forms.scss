@@ -33,3 +33,13 @@ be aligned vertically with their input field comrades */
 div.form--computed-value__input-aligned {
   margin: ($spacer-half + $input-padding) 0;
 }
+
+/* Rich text editor border */
+.public-DraftEditor-content {
+  border: 2px solid $color-base;
+  border-radius: $border-radius;
+}
+
+.rdw-editor-toolbar {
+  border-radius: $border-radius;
+}

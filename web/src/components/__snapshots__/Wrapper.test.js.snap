@@ -8,6 +8,7 @@ exports[`Wrapper component renders correctly in dev mode 1`] = `
     showSiteTitle={true}
   />
   child content
+  <Footer />
 </div>
 `;
 
@@ -19,5 +20,6 @@ exports[`Wrapper component renders correctly in non-dev mode 1`] = `
     showSiteTitle={true}
   />
   child content
+  <Footer />
 </div>
 `;
