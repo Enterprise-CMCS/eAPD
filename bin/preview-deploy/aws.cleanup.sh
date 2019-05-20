@@ -29,8 +29,7 @@ function cleanupPreviewDeploys() {
 # Expects global environment variables:
 #   AWS_PROD_API_REGION - The AWS region to use
 function configureAWS() {
-  # aws configure set default.region $AWS_PROD_API_REGION
-  echo
+  aws configure set default.region $AWS_PROD_API_REGION
 }
 
 # Finds any existing instances for previewing this PR
