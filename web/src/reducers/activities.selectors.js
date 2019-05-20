@@ -49,19 +49,33 @@ export const makeSelectCostAllocateFFPBudget = () =>
 export const selectActivitySchedule = createSelector(
   [selectActivitiesByKey],
   byKey => {
-    const data = [];
+    const activities = [];
 
-    Object.values(byKey).forEach(activity => {
-      activity.schedule.forEach(milestone => {
-        data.push({
-          ...milestone,
-          activityName: activity.name,
-          startDate: activity.plannedStartDate
+    Object.values(byKey).forEach(({ name, plannedStartDate, schedule }) => {
+      const milestones = [];
+      activities.push({
+        name,
+        milestones,
+        start: plannedStartDate && plannedStartDate.replace(/-/g, '/')
+      });
+
+      schedule.forEach(({ milestone, endDate }) => {
+        milestones.push({
+          end: endDate && endDate.replace(/-/g, '/'),
+          name: milestone,
+          start: plannedStartDate && plannedStartDate.replace(/-/g, '/')
         });
+      });
+
+      milestones.sort(({ end: endA }, { end: endB }) => {
+        if (endA === endB) {
+          return 0;
+        }
+        return endA > endB ? 1 : -1;
       });
     });
 
-    return data;
+    return activities;
   }
 );
 
