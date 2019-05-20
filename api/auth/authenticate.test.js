@@ -11,11 +11,11 @@ const userModel = {
 };
 const get = sandbox.stub();
 
-const bcrypt = {
+const hash = {
   compare: sandbox.stub()
 };
 
-const auth = lib(userModel, bcrypt);
+const auth = lib(userModel, hash);
 
 tap.test('local authentication', async authTest => {
   const doneCallback = sandbox.spy();
@@ -70,7 +70,7 @@ tap.test('local authentication', async authTest => {
 
     nonceTests.test('invalid algorithm', async test => {
       const nonce = lib.getNonce('username');
-      const token = jwt.decode(nonce, { complete: true })
+      const token = jwt.decode(nonce, { complete: true });
 
       const badNonce = jwt.sign(token.payload, 'secret', { algorithm: 'none' });
 
@@ -81,13 +81,17 @@ tap.test('local authentication', async authTest => {
         'never get as far as querying the database'
       );
       test.ok(doneCallback.calledWith(null, false), 'got a false user');
-    })
+    });
 
     nonceTests.test('invalid signature', async test => {
       const nonce = lib.getNonce('username');
       const last = nonce[nonce.length - 1];
 
-      await auth(`${nonce.substr(0, nonce.length - 1)}${last === 'x' ? 'y' : 'x'}`, '', doneCallback);
+      await auth(
+        `${nonce.substr(0, nonce.length - 1)}${last === 'x' ? 'y' : 'x'}`,
+        '',
+        doneCallback
+      );
 
       test.ok(
         userModel.fetch.notCalled,
@@ -128,7 +132,7 @@ tap.test('local authentication', async authTest => {
     );
     errorTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
 
-    errorTest.ok(bcrypt.compare.notCalled, 'does not compare passwords');
+    errorTest.ok(hash.compare.notCalled, 'does not compare passwords');
 
     errorTest.equal(doneCallback.callCount, 1, 'called done callback once');
     errorTest.ok(
@@ -152,7 +156,7 @@ tap.test('local authentication', async authTest => {
     );
     noUserTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
 
-    noUserTest.ok(bcrypt.compare.notCalled, 'does not compare password');
+    noUserTest.ok(hash.compare.notCalled, 'does not compare password');
 
     noUserTest.equal(doneCallback.callCount, 1, 'called done callback once');
     noUserTest.ok(doneCallback.calledWith(null, false), 'got a false user');
@@ -163,7 +167,7 @@ tap.test('local authentication', async authTest => {
     get.withArgs('password').returns('test-password');
     get.withArgs('id').returns(57);
     userModel.fetch.resolves({ get });
-    bcrypt.compare.resolves(false);
+    hash.compare.resolves(false);
 
     await auth(lib.getNonce('user'), 'password', doneCallback);
 
@@ -180,9 +184,9 @@ tap.test('local authentication', async authTest => {
       'the query is executed one time'
     );
 
-    invalidTest.ok(bcrypt.compare.calledOnce, 'password is compared one time');
+    invalidTest.ok(hash.compare.calledOnce, 'password is compared one time');
     invalidTest.ok(
-      bcrypt.compare.calledWith('password', 'test-password'),
+      hash.compare.calledWith('password', 'test-password'),
       'password is compared to database value'
     );
 
@@ -202,7 +206,7 @@ tap.test('local authentication', async authTest => {
       get
     };
     userModel.fetch.resolves(model);
-    bcrypt.compare.resolves(true);
+    hash.compare.resolves(true);
 
     await auth(lib.getNonce('user'), 'password', doneCallback);
 
@@ -216,9 +220,9 @@ tap.test('local authentication', async authTest => {
     );
     validTest.ok(userModel.fetch.calledOnce, 'the query is executed one time');
 
-    validTest.ok(bcrypt.compare.calledOnce, 'password is compared one time');
+    validTest.ok(hash.compare.calledOnce, 'password is compared one time');
     validTest.ok(
-      bcrypt.compare.calledWith('password', 'test-password'),
+      hash.compare.calledWith('password', 'test-password'),
       'password is compared to database value'
     );
 
