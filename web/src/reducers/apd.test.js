@@ -5,8 +5,12 @@ import sinon from 'sinon';
 // so that the stuff we import will use our faked-out clock.
 const mockClock = sinon.useFakeTimers(new Date(1990, 3, 24).getTime());
 
-const apd = require('./apd').default;
-const { SUBMIT_APD_SUCCESS, WITHDRAW_APD_SUCCESS } = require('../actions/apd');
+const { default: apd } = require('./apd');
+const {
+  SUBMIT_APD_SUCCESS,
+  WITHDRAW_APD_SUCCESS,
+  SAVE_APD_SUCCESS
+} = require('../actions/apd');
 
 describe('APD reducer', () => {
   afterAll(() => {
@@ -30,7 +34,13 @@ describe('APD reducer', () => {
     expect(
       apd(initialState, {
         type: 'CREATE_APD_SUCCESS',
-        data: { id: 'apd-id', other: 'data', goes: 'here' }
+        data: {
+          id: 'apd-id',
+          // Queen Elizabeth II is born
+          updated: '1926-04-21T00:00:00Z',
+          other: 'data',
+          goes: 'here'
+        }
       })
     ).toEqual({
       byId: {
@@ -38,6 +48,7 @@ describe('APD reducer', () => {
           id: 'apd-id',
           other: 'data',
           goes: 'here',
+          updated: 'April 21, 1926, 12:00 AM GMT',
           yearOptions: ['1990', '1991', '1992']
         }
       },
@@ -66,19 +77,32 @@ describe('APD reducer', () => {
 
     beforeEach(() => {
       data = [
-        { id: 'apd-id-1', name: 'my first apd' },
-        { id: 'apd-id-2', name: 'a second apd' }
+        {
+          id: 'apd-id-1',
+          name: 'my first apd',
+          // Laika the dog is launched into space
+          updated: '1957-11-03T06:30:00Z'
+        },
+        {
+          id: 'apd-id-2',
+          name: 'a second apd',
+          // The Battle of Hastings, essentially completing the Norman conquest
+          // of England and securing William the Conqueror's seat on the throne
+          updated: '1066-10-14T18:00:00Z'
+        }
       ];
 
       expected = {
         byId: {
           'apd-id-1': {
             id: 'apd-id-1',
-            name: 'my first apd'
+            name: 'my first apd',
+            updated: 'November 3, 1957, 6:30 AM GMT'
           },
           'apd-id-2': {
             id: 'apd-id-2',
-            name: 'a second apd'
+            name: 'a second apd',
+            updated: 'October 14, 1066, 6:00 PM GMT'
           }
         },
         data: {},
@@ -116,12 +140,18 @@ describe('APD reducer', () => {
     expect(
       apd(initialState, {
         type: 'SELECT_APD',
-        apd: { value: `hurr hurr i'm a burr` }
+        apd: {
+          value: `hurr hurr i'm a burr`,
+          // Some nobles are tossed out a window in the Second Defenestration
+          // of Prague, kicking off the Thirty Years' War
+          updated: '1618-05-23T10:30:00Z'
+        }
       })
     ).toEqual({
       ...initialState,
       data: {
         value: `hurr hurr i'm a burr`,
+        updated: 'May 23, 1618, 10:30 AM GMT',
         yearOptions: ['1990', '1991', '1992']
       }
     });
@@ -304,6 +334,44 @@ describe('APD reducer', () => {
         ]
       }
     });
+  });
+
+  it('should handle APD save success', () => {
+    expect(
+      apd(
+        {
+          a: 'alpha',
+          b: 'beta',
+          byId: {
+            apdID: { name: 'Bobbert', updated: 'in the past' },
+            otherID: { name: 'Jimbob', updated: 'in the future' }
+          },
+          data: {
+            name: 'Timmothert',
+            updated: 'in the present'
+          }
+        },
+        {
+          type: SAVE_APD_SUCCESS,
+          // US Department of Health and Human Services is created
+          data: { id: 'apdID', updated: '1953-04-11T00:00:00Z' }
+        }
+      )
+    ).toEqual(
+      {
+        a: 'alpha',
+        b: 'beta',
+        byId: {
+          apdID: { name: 'Bobbert', updated: 'April 11, 1953, 12:00 AM GMT' },
+          otherID: { name: 'Jimbob', updated: 'in the future' }
+        },
+        data: {
+          name: 'Timmothert',
+          updated: 'April 11, 1953, 12:00 AM GMT'
+        }
+      },
+      { type: SAVE_APD_SUCCESS, data: { id: 'apdID', updated: '' } }
+    );
   });
 
   it('should handle APD submission success', () => {
