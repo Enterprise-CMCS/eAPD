@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { t } from '../i18n';
@@ -16,29 +16,29 @@ const ScheduleSummary = ({ activities }) => (
             {t('scheduleSummary.noDataMessage')}
           </div>
         ) : (
-          <table className="table-cms">
-            <tbody>
-              {activities.map(({ name: activityName, milestones }, i) => (
-                <Fragment key={activityName}>
+          activities.map(({ name: activityName, milestones }, i) => (
+            <table key={activityName} className="table-cms ds-u-margin-top--0">
+              <thead>
+                <tr>
+                  <th colSpan="2" className="ds-u-font-weight--bold">
+                    Activity {i + 1}: {activityName}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {milestones.map(({ end, name: milestoneName, start }) => (
                   <tr>
-                    <th colSpan="2" className="ds-u-font-weight--bold">
-                      Activity {i + 1}: {activityName}
-                    </th>
+                    <td className="ds-u-padding-left--3 ds-u-border-right--0">
+                      {milestoneName}
+                    </td>
+                    <td className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right">
+                      {start || 'N/A'} - {end || 'N/A'}
+                    </td>
                   </tr>
-                  {milestones.map(({ end, name: milestoneName, start }) => (
-                    <tr>
-                      <td className="ds-u-padding-left--3 ds-u-border-right--0">
-                        {milestoneName}
-                      </td>
-                      <td className="ds-u-padding-right--3 ds-u-border-left--0">
-                        {start || 'N/A'} - {end || 'N/A'}
-                      </td>
-                    </tr>
-                  ))}
-                </Fragment>
-              ))}
-            </tbody>
-          </table>
+                ))}
+              </tbody>
+            </table>
+          ))
         )}
       </Subsection>
     </Section>
