@@ -5,7 +5,9 @@ exports[`executive summary budget component DollarCell renders correctly 1`] = `
   className="mono right-align"
   headers="one two three"
 >
-  <Dollars>
+  <Dollars
+    long={false}
+  >
     32.57
   </Dollars>
 </td>
@@ -16,7 +18,9 @@ exports[`executive summary budget component DollarCell renders correctly 2`] = `
   className="mono right-align"
   headers="one two three"
 >
-  <Dollars>
+  <Dollars
+    long={false}
+  >
     75.23
   </Dollars>
 </td>

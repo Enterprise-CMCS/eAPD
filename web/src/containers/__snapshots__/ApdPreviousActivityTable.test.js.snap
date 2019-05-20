@@ -2,226 +2,161 @@
 
 exports[`apd previous activity table, mmis component renders correctly 1`] = `
 <Fragment>
-  <h3>
-    HIT + HIE
-  </h3>
-  <div
-    className="table-frozen-wrapper table-frozen-narrow-header"
+  <h4
+    className="ds-h4"
   >
-    <div
-      className="table-frozen-scroller"
-    >
-      <table
-        aria-hidden="true"
-        className="table-cms table-fixed table-frozen-left-pane"
+    HIT + HIE
+  </h4>
+  <table
+    className="table-cms centered-headers"
+  >
+    <thead>
+      <tr>
+        <th
+          id="prev_act_hit_header_null2"
+        />
+        <th
+          className="pre-line"
+          id="prev_act_hithie_total"
+        >
+          <span>
+            Total computable
+            <br />
+            (Federal + state)
+          </span>
+        </th>
+        <th
+          className="pre-line"
+          colSpan="2"
+          id="prev_act_hithie_federal"
+        >
+          <span>
+            Federal share 
+            <strong>
+              90
+              %
+            </strong>
+             FFP
+          </span>
+        </th>
+      </tr>
+      <tr>
+        <th
+          id="prev_act_hit_header_null3"
+        />
+        <th
+          id="prev_act_hithie_total_approved"
+        >
+          Approved
+        </th>
+        <th
+          id="prev_act_hithie_federal_approved"
+        >
+          Approved
+        </th>
+        <th
+          id="prev_act_hithie_federal_actual"
+        >
+          Actual
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="align-middle"
+        key="1"
       >
-        <thead>
-          <tr>
-            <th
-              className="table-frozen-null-cell"
-            >
-              -
-              <br />
-              -
-            </th>
-          </tr>
-          <tr>
-            <th
-              className="table-frozen-null-cell"
-            >
-              --
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            key="1-fake-row"
+        <th
+          id="prev_act_hithie_row_1"
+        >
+          FFY 1
+        </th>
+        <td
+          headers="prev_act_hithie_row_1 prev_act_hithie_total prev_act_hithie_total_approved"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="total approved funding for HIT and HIE for FFY 1, state plus federal"
+            name="hithie-approved-total-1"
+            onChange={[Function]}
+            type="text"
+            value={20}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_total_approved"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              key="1-fake-header"
-            >
-              FFY 1
-            </th>
-            <td>
-              <InputHolder
-                className="fake-spacer-input m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="fake-spacer-input"
-                name="fake-spacer-input"
-                type="text"
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-          <tr
-            key="2-fake-row"
-          >
-            <th
-              key="2-fake-header"
-            >
-              FFY 2
-            </th>
-            <td>
-              <InputHolder
-                className="fake-spacer-input m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="fake-spacer-input"
-                name="fake-spacer-input"
-                type="text"
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        className="table-cms centered-headers table-fixed table-frozen-data"
+            18
+          </Dollars>
+        </td>
+        <td
+          headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_actual"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="actual federal share for HIT and HIE for FFY 1"
+            name="hithie-actual-federal-1"
+            onChange={[Function]}
+            type="text"
+            value={10}
+            wrapperClass="m0"
+          />
+        </td>
+      </tr>
+      <tr
+        className="align-middle"
+        key="2"
       >
-        <thead>
-          <tr>
-            <th
-              id="prev_act_hit_header_null2"
-            />
-            <th
-              className="pre-line"
-              id="prev_act_hithie_total"
-            >
-              <span>
-                Total computable
-                <br />
-                (Federal + state)
-              </span>
-            </th>
-            <th
-              className="pre-line"
-              colSpan="2"
-              id="prev_act_hithie_federal"
-            >
-              <span>
-                Federal share 
-                <strong>
-                  90
-                  %
-                </strong>
-                 FFP
-              </span>
-            </th>
-          </tr>
-          <tr>
-            <th
-              id="prev_act_hit_header_null3"
-            />
-            <th
-              id="prev_act_hithie_total_approved"
-            >
-              Approved
-            </th>
-            <th
-              id="prev_act_hithie_federal_approved"
-            >
-              Approved
-            </th>
-            <th
-              id="prev_act_hithie_federal_actual"
-            >
-              Actual
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            className="align-middle"
-            key="1"
+        <th
+          id="prev_act_hithie_row_2"
+        >
+          FFY 2
+        </th>
+        <td
+          headers="prev_act_hithie_row_2 prev_act_hithie_total prev_act_hithie_total_approved"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="total approved funding for HIT and HIE for FFY 2, state plus federal"
+            name="hithie-approved-total-2"
+            onChange={[Function]}
+            type="text"
+            value={200}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_total_approved"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              id="prev_act_hithie_row_1"
-            >
-              FFY 1
-            </th>
-            <td
-              headers="prev_act_hithie_row_1 prev_act_hithie_total prev_act_hithie_total_approved"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="total approved funding for HIT and HIE for FFY 1, state plus federal"
-                name="hithie-approved-total-1"
-                onChange={[Function]}
-                type="text"
-                value={20}
-                wrapperClass="m0"
-              />
-            </td>
-            <td
-              headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_total_approved"
-            >
-              <Dollars>
-                18
-              </Dollars>
-            </td>
-            <td
-              headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_actual"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="actual federal share for HIT and HIE for FFY 1"
-                name="hithie-actual-federal-1"
-                onChange={[Function]}
-                type="text"
-                value={10}
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-          <tr
-            className="align-middle"
-            key="2"
-          >
-            <th
-              id="prev_act_hithie_row_2"
-            >
-              FFY 2
-            </th>
-            <td
-              headers="prev_act_hithie_row_2 prev_act_hithie_total prev_act_hithie_total_approved"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="total approved funding for HIT and HIE for FFY 2, state plus federal"
-                name="hithie-approved-total-2"
-                onChange={[Function]}
-                type="text"
-                value={200}
-                wrapperClass="m0"
-              />
-            </td>
-            <td
-              headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_total_approved"
-            >
-              <Dollars>
-                180
-              </Dollars>
-            </td>
-            <td
-              headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_actual"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="actual federal share for HIT and HIE for FFY 2"
-                name="hithie-actual-federal-2"
-                onChange={[Function]}
-                type="text"
-                value={100}
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+            180
+          </Dollars>
+        </td>
+        <td
+          headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_actual"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="actual federal share for HIT and HIE for FFY 2"
+            name="hithie-actual-federal-2"
+            onChange={[Function]}
+            type="text"
+            value={100}
+            wrapperClass="m0"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </Fragment>
 `;

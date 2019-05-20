@@ -17,11 +17,11 @@ exports[`previous activities component renders correctly if data is not loaded 1
       nested={false}
       resource="previousActivities.outline"
     >
-      <div
-        className="mb-tiny bold"
+      <h4
+        className="ds-h4"
       >
         Previous Activities Summary
-      </div>
+      </h4>
       <RichText
         content="previous"
         editorClassName="rte-textarea-l"
@@ -36,21 +36,9 @@ exports[`previous activities component renders correctly if data is not loaded 1
       nested={false}
       resource="previousActivities.actualExpenses"
     >
-      <div
-        className="mb3"
-      >
-        <Connect(ApdPreviousActivityTable) />
-      </div>
-      <div
-        className="mb3"
-      >
-        <Connect(ApdPreviousActivityTableMMIS) />
-      </div>
-      <div
-        className="mb3"
-      >
-        <Connect(ApdPreviousActivityTableMMIS) />
-      </div>
+      <Connect(ApdPreviousActivityTable) />
+      <Connect(ApdPreviousActivityTableMMIS) />
+      <Connect(ApdPreviousActivityTableMMIS) />
     </Subsection>
   </Section>
 </Connect(ConnectedWaypoint)>
