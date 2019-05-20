@@ -189,25 +189,29 @@ const ContractorForm = ({
         </Choice>
       </fieldset>
 
-      {contractor.hourly.useHourly
-        ? years.map(ffy => (
+      {contractor.hourly.useHourly ? (
+        <p className="ds-u-margin-bottom--0">
+          {years.map(ffy => (
             <Fragment key={ffy}>
               <FormLabel>FFY {ffy} Cost</FormLabel>
               <Dollars>{contractor.years[ffy]}</Dollars>
             </Fragment>
-          ))
-        : years.map(ffy => (
-            <TextField
-              key={ffy}
-              label={`FFY ${ffy} Cost`}
-              name={`contractor-cost-ffy-${ffy}`}
-              disabled={contractor.hourly.useHourly}
-              mask="currency"
-              size="medium"
-              value={contractor.years[ffy]}
-              onChange={handle.changeYearCost[ffy]}
-            />
           ))}
+        </p>
+      ) : (
+        years.map(ffy => (
+          <TextField
+            key={ffy}
+            label={`FFY ${ffy} Cost`}
+            name={`contractor-cost-ffy-${ffy}`}
+            disabled={contractor.hourly.useHourly}
+            mask="currency"
+            size="medium"
+            value={contractor.years[ffy]}
+            onChange={handle.changeYearCost[ffy]}
+          />
+        ))
+      )}
 
       <Button
         variation="primary"

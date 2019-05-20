@@ -393,30 +393,34 @@ exports[`the ContractorResourcesForm component renders if use hourly data is sel
       Yes
     </Choice>
   </fieldset>
-  <FormLabel
-    component="label"
+  <p
+    className="ds-u-margin-bottom--0"
   >
-    FFY 
-    1066
-     Cost
-  </FormLabel>
-  <Dollars
-    long={false}
-  >
-    300
-  </Dollars>
-  <FormLabel
-    component="label"
-  >
-    FFY 
-    1067
-     Cost
-  </FormLabel>
-  <Dollars
-    long={false}
-  >
-    400
-  </Dollars>
+    <FormLabel
+      component="label"
+    >
+      FFY 
+      1066
+       Cost
+    </FormLabel>
+    <Dollars
+      long={false}
+    >
+      300
+    </Dollars>
+    <FormLabel
+      component="label"
+    >
+      FFY 
+      1067
+       Cost
+    </FormLabel>
+    <Dollars
+      long={false}
+    >
+      400
+    </Dollars>
+  </p>
   <Button
     className="ds-u-margin-top--4"
     onClick={[Function]}
