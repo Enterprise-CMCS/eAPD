@@ -27,594 +27,861 @@ exports[`assurances and compliance component main component renders correctly 1`
       resource="assurancesAndCompliance.citations"
     >
       <div
-        className="mb3"
+        className="ds-u-margin-bottom--3"
         key="procurement"
       >
         <h3>
           Procurement Standards (Competition / Sole Source)
         </h3>
-        <div
-          className="mt2"
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 495.348"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=60f02a079c6f091871999372387e5750&mc=true&node=se42.5.495_1348&rgn=div8"
-              title="42 CFR Part 495.348"
-            />
-            <div>
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=60f02a079c6f091871999372387e5750&mc=true&node=se42.5.495_1348&rgn=div8"
+                title="42 CFR Part 495.348"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={false}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-procurement-42_CFR_Part_495.348"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={true}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <div>
-            <InputHolder
-              className="m0 textarea textarea-sm"
-              hideLabel={true}
-              label="Explanation for why you do not comply with 42 CFR Part 495.348"
-              name="explanation-procurement-42_CFR_Part_495.348"
-              onChange={[Function]}
-              placeholder="Please explain..."
-              rows="3"
-              type="text"
-              value=""
-              wrapperClass=""
-            />
-          </div>
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-procurement-42_CFR_Part_495.348"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-procurement-42_CFR_Part_495.348"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="SMM Section 11267"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html"
-              title="SMM Section 11267"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html"
+                title="SMM Section 11267"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-procurement-SMM_Section_11267"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-procurement-SMM_Section_11267"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-procurement-SMM_Section_11267"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="45 CFR Part 95.615"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8"
-              title="45 CFR Part 95.615"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8"
+                title="45 CFR Part 95.615"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={false}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-procurement-45_CFR_Part_95.615"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-procurement-45_CFR_Part_95.615"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-procurement-45_CFR_Part_95.615"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="45 CFR Part 75.326"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link={null}
-              title="45 CFR Part 75.326"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link={null}
+                title="45 CFR Part 75.326"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-procurement-45_CFR_Part_75.326"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-procurement-45_CFR_Part_75.326"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-procurement-45_CFR_Part_75.326"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
       </div>
       <div
-        className="mb3"
+        className="ds-u-margin-bottom--3"
         key="recordsAccess"
       >
         <h3>
           Access to Records, Reporting and Agency Attestations
         </h3>
-        <div
-          className="mt2"
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 495.350"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1350&rgn=div8"
-              title="42 CFR Part 495.350"
-            />
-            <div>
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1350&rgn=div8"
+                title="42 CFR Part 495.350"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={false}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_495.350"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={true}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <div>
-            <InputHolder
-              className="m0 textarea textarea-sm"
-              hideLabel={true}
-              label="Explanation for why you do not comply with 42 CFR Part 495.350"
-              name="explanation-recordsAccess-42_CFR_Part_495.350"
-              onChange={[Function]}
-              placeholder="Please explain..."
-              rows="3"
-              type="text"
-              value="some words"
-              wrapperClass=""
-            />
-          </div>
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-recordsAccess-42_CFR_Part_495.350"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value="some words"
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_495.350"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 495.352"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1352&rgn=div8"
-              title="42 CFR Part 495.352"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1352&rgn=div8"
+                title="42 CFR Part 495.352"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_495.352"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-recordsAccess-42_CFR_Part_495.352"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_495.352"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 495.346"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1346&rgn=div8"
-              title="42 CFR Part 495.346"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1346&rgn=div8"
+                title="42 CFR Part 495.346"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_495.346"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-recordsAccess-42_CFR_Part_495.346"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_495.346"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 433.112(b)(5) - (9)"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8"
-              title="42 CFR Part 433.112(b)(5) - (9)"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8"
+                title="42 CFR Part 433.112(b)(5) - (9)"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_433.112(b)(5)_-_(9)"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-recordsAccess-42_CFR_Part_433.112(b)(5)_-_(9)"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_433.112(b)(5)_-_(9)"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="45 CFR Part 95.615"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8"
-              title="45 CFR Part 95.615"
-            />
-            <div>
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8"
+                title="45 CFR Part 95.615"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={false}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-recordsAccess-45_CFR_Part_95.615"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={true}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <div>
-            <InputHolder
-              className="m0 textarea textarea-sm"
-              hideLabel={true}
-              label="Explanation for why you do not comply with 45 CFR Part 95.615"
-              name="explanation-recordsAccess-45_CFR_Part_95.615"
-              onChange={[Function]}
-              placeholder="Please explain..."
-              rows="3"
-              type="text"
-              value="other words"
-              wrapperClass=""
-            />
-          </div>
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-recordsAccess-45_CFR_Part_95.615"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value="other words"
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-recordsAccess-45_CFR_Part_95.615"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="SMM Section 11267"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html"
-              title="SMM Section 11267"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html"
+                title="SMM Section 11267"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-recordsAccess-SMM_Section_11267"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-recordsAccess-SMM_Section_11267"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-recordsAccess-SMM_Section_11267"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
       </div>
       <div
-        className="mb3"
+        className="ds-u-margin-bottom--3"
         key="softwareRights"
       >
         <h3>
           Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports
         </h3>
-        <div
-          className="mt2"
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 495.360"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link={null}
-              title="42 CFR Part 495.360"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link={null}
+                title="42 CFR Part 495.360"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_495.360"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-softwareRights-42_CFR_Part_495.360"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_495.360"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="45 CFR Part 95.617"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link={null}
-              title="45 CFR Part 95.617"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link={null}
+                title="45 CFR Part 95.617"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-softwareRights-45_CFR_Part_95.617"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-softwareRights-45_CFR_Part_95.617"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-softwareRights-45_CFR_Part_95.617"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 431.300"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.431_1300&rgn=div8"
-              title="42 CFR Part 431.300"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.431_1300&rgn=div8"
+                title="42 CFR Part 431.300"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
-        <div
-          className="mt2"
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-softwareRights-42_CFR_Part_431.300"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_431.300"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
+        <fieldset
+          className="ds-u-margin-top--2"
           key="42 CFR Part 433.112"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8"
-              title="42 CFR Part 433.112"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8"
+                title="42 CFR Part 433.112"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_433.112"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-softwareRights-42_CFR_Part_433.112"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_433.112"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
       </div>
       <div
-        className="mb3"
+        className="ds-u-margin-bottom--3"
         key="security"
       >
         <h3>
           Security and interface requirements to be employed for all state HIT systems
         </h3>
-        <div
-          className="mt2"
+        <fieldset
+          className="ds-u-margin-top--2"
           key="45 CFR 164 Securities and Privacy"
         >
-          <div
-            className="mb1 flex items-end justify-between"
+          <legend
+            className="ds-c-label"
           >
-            <LinkOrText
-              link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&tpl=/ecfrbrowse/Title45/45cfr164_main_02.tpl"
-              title="45 CFR 164 Securities and Privacy"
-            />
-            <div>
-              <Btn
-                extraCss="h5 bg-black white"
-                kind="outline"
-                onClick={[Function]}
-                size="small"
+            Are you complying with
+             
+            <strong>
+              <LinkOrText
+                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&tpl=/ecfrbrowse/Title45/45cfr164_main_02.tpl"
+                title="45 CFR 164 Securities and Privacy"
+              />
+            </strong>
+            ?
+          </legend>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-assurances-yes-explanation-security-45_CFR_164_Securities_and_Privacy"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="yes"
+          >
+            Yes
+          </Choice>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild"
               >
-                Yes
-              </Btn>
-               
-              <Btn
-                extraCss="h5 "
-                kind="outline"
-                onClick={[Function]}
-                size="small"
-              >
-                No
-              </Btn>
-            </div>
-          </div>
-          <hr
-            className="my2 border-grey"
-          />
-        </div>
+                <TextField
+                  label="Please explain"
+                  multiline={true}
+                  name="explanation-security-45_CFR_164_Securities_and_Privacy"
+                  onChange={[Function]}
+                  rows={5}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-assurances-no-explanation-security-45_CFR_164_Securities_and_Privacy"
+            onChange={[Function]}
+            size="small"
+            type="radio"
+            value="no"
+          >
+            No
+          </Choice>
+        </fieldset>
       </div>
     </Subsection>
   </Section>

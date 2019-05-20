@@ -15,6 +15,12 @@ exports[`Dollars formatting container prints full numbers below $100,000 1`] = `
 </Fragment>
 `;
 
+exports[`Dollars formatting container prints full numbers if long prop is set 1`] = `
+<span>
+  $2,857,298,672
+</span>
+`;
+
 exports[`Dollars formatting container prints truncated numbers above $100,000 1`] = `
 <Fragment>
   <span
