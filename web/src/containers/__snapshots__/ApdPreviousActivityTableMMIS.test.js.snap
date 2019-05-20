@@ -2,665 +2,466 @@
 
 exports[`apd previous activity table, mmis component renders correctly 1`] = `
 <Fragment>
-  <h3>
+  <h4
+    className="ds-h4"
+  >
     MMIS
-  </h3>
-  <div
-    className="table-frozen-wrapper table-frozen-narrow-header "
+  </h4>
+  <table
+    className="table-cms centered-headers table-fixed"
     key="90"
   >
-    <div
-      className="table-frozen-scroller"
-    >
-      <table
-        aria-hidden="true"
-        className="table-cms table-fixed table-frozen-left-pane"
+    <thead>
+      <tr>
+        <th
+          id="prev_act_mmis_null2"
+        />
+        <th
+          className="pre-line"
+          id="prev_act_mmis90_total"
+        >
+          <span>
+            Total computable
+            <br />
+            (Federal + state)
+          </span>
+        </th>
+        <th
+          className="pre-line"
+          colSpan="2"
+          id="prev_act_mmis90_federal"
+        >
+          <span>
+            Federal share 
+            <strong>
+              90
+              %
+            </strong>
+             FFP
+          </span>
+        </th>
+      </tr>
+      <tr>
+        <th
+          id="prev_act_mmis_null3"
+        />
+        <th
+          id="prev_act_mmis90_total_approved"
+        >
+          Approved
+        </th>
+        <th
+          id="prev_act_mmis90_federal_approved"
+        >
+          Approved
+        </th>
+        <th
+          id="prev_act_mmis90_federal_actual"
+        >
+          Actual
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="align-middle"
+        key="1"
       >
-        <thead>
-          <tr>
-            <th
-              className="table-frozen-null-cell"
-            >
-              -
-              <br />
-              -
-            </th>
-          </tr>
-          <tr>
-            <th
-              className="table-frozen-null-cell"
-            >
-              --
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            key="1-mmis-fake-row"
+        <th
+          id="prev_act_mmis_row_1"
+        >
+          FFY 1
+        </th>
+        <td
+          headers="prev_act_mmis_row_1 prev_act_mmis90_total prev_act_mmis90_total_approved"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal"
+            name="approved-total-mmis90-1"
+            onChange={[Function]}
+            type="text"
+            value={20}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              key="1-mmis-fake-header"
-            >
-              FFY 1
-            </th>
-            <td>
-              <InputHolder
-                className="fake-spacer-input m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="fake-spacer-input"
-                name="fake-spacer-input"
-                type="text"
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-          <tr
-            key="2-mmis-fake-row"
-          >
-            <th
-              key="2-mmis-fake-header"
-            >
-              FFY 2
-            </th>
-            <td>
-              <InputHolder
-                className="fake-spacer-input m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="fake-spacer-input"
-                name="fake-spacer-input"
-                type="text"
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        className="table-cms centered-headers table-fixed table-frozen-data"
+            18
+          </Dollars>
+        </td>
+        <td
+          headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_actual"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="actual federal share for MMIS at the 90/10 level for FFY 1"
+            name="actual-federal-mmis90-1"
+            onChange={[Function]}
+            type="text"
+            value={10}
+            wrapperClass="m0"
+          />
+        </td>
+      </tr>
+      <tr
+        className="align-middle"
+        key="2"
       >
-        <thead>
-          <tr>
-            <th
-              id="prev_act_mmis_null2"
-            />
-            <th
-              className="pre-line"
-              id="prev_act_mmis90_total"
-            >
-              <span>
-                Total computable
-                <br />
-                (Federal + state)
-              </span>
-            </th>
-            <th
-              className="pre-line"
-              colSpan="2"
-              id="prev_act_mmis90_federal"
-            >
-              <span>
-                Federal share 
-                <strong>
-                  90
-                  %
-                </strong>
-                 FFP
-              </span>
-            </th>
-          </tr>
-          <tr>
-            <th
-              id="prev_act_mmis_null3"
-            />
-            <th
-              id="prev_act_mmis90_total_approved"
-            >
-              Approved
-            </th>
-            <th
-              id="prev_act_mmis90_federal_approved"
-            >
-              Approved
-            </th>
-            <th
-              id="prev_act_mmis90_federal_actual"
-            >
-              Actual
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            className="align-middle"
-            key="1"
+        <th
+          id="prev_act_mmis_row_2"
+        >
+          FFY 2
+        </th>
+        <td
+          headers="prev_act_mmis_row_2 prev_act_mmis90_total prev_act_mmis90_total_approved"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal"
+            name="approved-total-mmis90-2"
+            onChange={[Function]}
+            type="text"
+            value={200}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              id="prev_act_mmis_row_1"
-            >
-              FFY 1
-            </th>
-            <td
-              headers="prev_act_mmis_row_1 prev_act_mmis90_total prev_act_mmis90_total_approved"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal"
-                name="approved-total-mmis90-1"
-                onChange={[Function]}
-                type="text"
-                value={20}
-                wrapperClass="m0"
-              />
-            </td>
-            <td
-              headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
-            >
-              <Dollars>
-                18
-              </Dollars>
-            </td>
-            <td
-              headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_actual"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="actual federal share for MMIS at the 90/10 level for FFY 1"
-                name="actual-federal-mmis90-1"
-                onChange={[Function]}
-                type="text"
-                value={10}
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-          <tr
-            className="align-middle"
-            key="2"
-          >
-            <th
-              id="prev_act_mmis_row_2"
-            >
-              FFY 2
-            </th>
-            <td
-              headers="prev_act_mmis_row_2 prev_act_mmis90_total prev_act_mmis90_total_approved"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal"
-                name="approved-total-mmis90-2"
-                onChange={[Function]}
-                type="text"
-                value={200}
-                wrapperClass="m0"
-              />
-            </td>
-            <td
-              headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
-            >
-              <Dollars>
-                180
-              </Dollars>
-            </td>
-            <td
-              headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_actual"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="actual federal share for MMIS at the 90/10 level for FFY 2"
-                name="actual-federal-mmis90-2"
-                onChange={[Function]}
-                type="text"
-                value={100}
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div
-    className="table-frozen-wrapper table-frozen-narrow-header mt3"
+            180
+          </Dollars>
+        </td>
+        <td
+          headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_actual"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="actual federal share for MMIS at the 90/10 level for FFY 2"
+            name="actual-federal-mmis90-2"
+            onChange={[Function]}
+            type="text"
+            value={100}
+            wrapperClass="m0"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+    className="table-cms centered-headers table-fixed"
     key="75"
   >
-    <div
-      className="table-frozen-scroller"
-    >
-      <table
-        aria-hidden="true"
-        className="table-cms table-fixed table-frozen-left-pane"
+    <thead>
+      <tr>
+        <th
+          id="prev_act_mmis_null2"
+        />
+        <th
+          className="pre-line"
+          id="prev_act_mmis75_total"
+        >
+          <span>
+            Total computable
+            <br />
+            (Federal + state)
+          </span>
+        </th>
+        <th
+          className="pre-line"
+          colSpan="2"
+          id="prev_act_mmis75_federal"
+        >
+          <span>
+            Federal share 
+            <strong>
+              75
+              %
+            </strong>
+             FFP
+          </span>
+        </th>
+      </tr>
+      <tr>
+        <th
+          id="prev_act_mmis_null3"
+        />
+        <th
+          id="prev_act_mmis75_total_approved"
+        >
+          Approved
+        </th>
+        <th
+          id="prev_act_mmis75_federal_approved"
+        >
+          Approved
+        </th>
+        <th
+          id="prev_act_mmis75_federal_actual"
+        >
+          Actual
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="align-middle"
+        key="1"
       >
-        <thead>
-          <tr>
-            <th
-              className="table-frozen-null-cell"
-            >
-              -
-              <br />
-              -
-            </th>
-          </tr>
-          <tr>
-            <th
-              className="table-frozen-null-cell"
-            >
-              --
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            key="1-mmis-fake-row"
+        <th
+          id="prev_act_mmis_row_1"
+        >
+          FFY 1
+        </th>
+        <td
+          headers="prev_act_mmis_row_1 prev_act_mmis75_total prev_act_mmis75_total_approved"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal"
+            name="approved-total-mmis75-1"
+            onChange={[Function]}
+            type="text"
+            value={40}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              key="1-mmis-fake-header"
-            >
-              FFY 1
-            </th>
-            <td>
-              <InputHolder
-                className="fake-spacer-input m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="fake-spacer-input"
-                name="fake-spacer-input"
-                type="text"
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-          <tr
-            key="2-mmis-fake-row"
-          >
-            <th
-              key="2-mmis-fake-header"
-            >
-              FFY 2
-            </th>
-            <td>
-              <InputHolder
-                className="fake-spacer-input m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="fake-spacer-input"
-                name="fake-spacer-input"
-                type="text"
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        className="table-cms centered-headers table-fixed table-frozen-data"
+            30
+          </Dollars>
+        </td>
+        <td
+          headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_actual"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="actual federal share for MMIS at the 75/25 level for FFY 1"
+            name="actual-federal-mmis75-1"
+            onChange={[Function]}
+            type="text"
+            value={30}
+            wrapperClass="m0"
+          />
+        </td>
+      </tr>
+      <tr
+        className="align-middle"
+        key="2"
       >
-        <thead>
-          <tr>
-            <th
-              id="prev_act_mmis_null2"
-            />
-            <th
-              className="pre-line"
-              id="prev_act_mmis75_total"
-            >
-              <span>
-                Total computable
-                <br />
-                (Federal + state)
-              </span>
-            </th>
-            <th
-              className="pre-line"
-              colSpan="2"
-              id="prev_act_mmis75_federal"
-            >
-              <span>
-                Federal share 
-                <strong>
-                  75
-                  %
-                </strong>
-                 FFP
-              </span>
-            </th>
-          </tr>
-          <tr>
-            <th
-              id="prev_act_mmis_null3"
-            />
-            <th
-              id="prev_act_mmis75_total_approved"
-            >
-              Approved
-            </th>
-            <th
-              id="prev_act_mmis75_federal_approved"
-            >
-              Approved
-            </th>
-            <th
-              id="prev_act_mmis75_federal_actual"
-            >
-              Actual
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            className="align-middle"
-            key="1"
+        <th
+          id="prev_act_mmis_row_2"
+        >
+          FFY 2
+        </th>
+        <td
+          headers="prev_act_mmis_row_2 prev_act_mmis75_total prev_act_mmis75_total_approved"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal"
+            name="approved-total-mmis75-2"
+            onChange={[Function]}
+            type="text"
+            value={400}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              id="prev_act_mmis_row_1"
-            >
-              FFY 1
-            </th>
-            <td
-              headers="prev_act_mmis_row_1 prev_act_mmis75_total prev_act_mmis75_total_approved"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal"
-                name="approved-total-mmis75-1"
-                onChange={[Function]}
-                type="text"
-                value={40}
-                wrapperClass="m0"
-              />
-            </td>
-            <td
-              headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
-            >
-              <Dollars>
-                30
-              </Dollars>
-            </td>
-            <td
-              headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_actual"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="actual federal share for MMIS at the 75/25 level for FFY 1"
-                name="actual-federal-mmis75-1"
-                onChange={[Function]}
-                type="text"
-                value={30}
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-          <tr
-            className="align-middle"
-            key="2"
-          >
-            <th
-              id="prev_act_mmis_row_2"
-            >
-              FFY 2
-            </th>
-            <td
-              headers="prev_act_mmis_row_2 prev_act_mmis75_total prev_act_mmis75_total_approved"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal"
-                name="approved-total-mmis75-2"
-                onChange={[Function]}
-                type="text"
-                value={400}
-                wrapperClass="m0"
-              />
-            </td>
-            <td
-              headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
-            >
-              <Dollars>
-                300
-              </Dollars>
-            </td>
-            <td
-              headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_actual"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="actual federal share for MMIS at the 75/25 level for FFY 2"
-                name="actual-federal-mmis75-2"
-                onChange={[Function]}
-                type="text"
-                value={300}
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div
-    className="table-frozen-wrapper table-frozen-narrow-header mt3"
+            300
+          </Dollars>
+        </td>
+        <td
+          headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_actual"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="actual federal share for MMIS at the 75/25 level for FFY 2"
+            name="actual-federal-mmis75-2"
+            onChange={[Function]}
+            type="text"
+            value={300}
+            wrapperClass="m0"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+    className="table-cms centered-headers table-fixed"
     key="50"
   >
-    <div
-      className="table-frozen-scroller"
-    >
-      <table
-        aria-hidden="true"
-        className="table-cms table-fixed table-frozen-left-pane"
+    <thead>
+      <tr>
+        <th
+          id="prev_act_mmis_null2"
+        />
+        <th
+          className="pre-line"
+          id="prev_act_mmis50_total"
+        >
+          <span>
+            Total computable
+            <br />
+            (Federal + state)
+          </span>
+        </th>
+        <th
+          className="pre-line"
+          colSpan="2"
+          id="prev_act_mmis50_federal"
+        >
+          <span>
+            Federal share 
+            <strong>
+              50
+              %
+            </strong>
+             FFP
+          </span>
+        </th>
+      </tr>
+      <tr>
+        <th
+          id="prev_act_mmis_null3"
+        />
+        <th
+          id="prev_act_mmis50_total_approved"
+        >
+          Approved
+        </th>
+        <th
+          id="prev_act_mmis50_federal_approved"
+        >
+          Approved
+        </th>
+        <th
+          id="prev_act_mmis50_federal_actual"
+        >
+          Actual
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="align-middle"
+        key="1"
       >
-        <thead>
-          <tr>
-            <th
-              className="table-frozen-null-cell"
-            >
-              -
-              <br />
-              -
-            </th>
-          </tr>
-          <tr>
-            <th
-              className="table-frozen-null-cell"
-            >
-              --
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            key="1-mmis-fake-row"
+        <th
+          id="prev_act_mmis_row_1"
+        >
+          FFY 1
+        </th>
+        <td
+          headers="prev_act_mmis_row_1 prev_act_mmis50_total prev_act_mmis50_total_approved"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal"
+            name="approved-total-mmis50-1"
+            onChange={[Function]}
+            type="text"
+            value={60}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              key="1-mmis-fake-header"
-            >
-              FFY 1
-            </th>
-            <td>
-              <InputHolder
-                className="fake-spacer-input m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="fake-spacer-input"
-                name="fake-spacer-input"
-                type="text"
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-          <tr
-            key="2-mmis-fake-row"
-          >
-            <th
-              key="2-mmis-fake-header"
-            >
-              FFY 2
-            </th>
-            <td>
-              <InputHolder
-                className="fake-spacer-input m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="fake-spacer-input"
-                name="fake-spacer-input"
-                type="text"
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        className="table-cms centered-headers table-fixed table-frozen-data"
+            30
+          </Dollars>
+        </td>
+        <td
+          headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_actual"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="actual federal share for MMIS at the 50/50 level for FFY 1"
+            name="actual-federal-mmis50-1"
+            onChange={[Function]}
+            type="text"
+            value={50}
+            wrapperClass="m0"
+          />
+        </td>
+      </tr>
+      <tr
+        className="align-middle"
+        key="2"
       >
-        <thead>
-          <tr>
-            <th
-              id="prev_act_mmis_null2"
-            />
-            <th
-              className="pre-line"
-              id="prev_act_mmis50_total"
-            >
-              <span>
-                Total computable
-                <br />
-                (Federal + state)
-              </span>
-            </th>
-            <th
-              className="pre-line"
-              colSpan="2"
-              id="prev_act_mmis50_federal"
-            >
-              <span>
-                Federal share 
-                <strong>
-                  50
-                  %
-                </strong>
-                 FFP
-              </span>
-            </th>
-          </tr>
-          <tr>
-            <th
-              id="prev_act_mmis_null3"
-            />
-            <th
-              id="prev_act_mmis50_total_approved"
-            >
-              Approved
-            </th>
-            <th
-              id="prev_act_mmis50_federal_approved"
-            >
-              Approved
-            </th>
-            <th
-              id="prev_act_mmis50_federal_actual"
-            >
-              Actual
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            className="align-middle"
-            key="1"
+        <th
+          id="prev_act_mmis_row_2"
+        >
+          FFY 2
+        </th>
+        <td
+          headers="prev_act_mmis_row_2 prev_act_mmis50_total prev_act_mmis50_total_approved"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal"
+            name="approved-total-mmis50-2"
+            onChange={[Function]}
+            type="text"
+            value={600}
+            wrapperClass="m0"
+          />
+        </td>
+        <td
+          headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              id="prev_act_mmis_row_1"
-            >
-              FFY 1
-            </th>
-            <td
-              headers="prev_act_mmis_row_1 prev_act_mmis50_total prev_act_mmis50_total_approved"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal"
-                name="approved-total-mmis50-1"
-                onChange={[Function]}
-                type="text"
-                value={60}
-                wrapperClass="m0"
-              />
-            </td>
-            <td
-              headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
-            >
-              <Dollars>
-                30
-              </Dollars>
-            </td>
-            <td
-              headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_actual"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="actual federal share for MMIS at the 50/50 level for FFY 1"
-                name="actual-federal-mmis50-1"
-                onChange={[Function]}
-                type="text"
-                value={50}
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-          <tr
-            className="align-middle"
-            key="2"
-          >
-            <th
-              id="prev_act_mmis_row_2"
-            >
-              FFY 2
-            </th>
-            <td
-              headers="prev_act_mmis_row_2 prev_act_mmis50_total prev_act_mmis50_total_approved"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal"
-                name="approved-total-mmis50-2"
-                onChange={[Function]}
-                type="text"
-                value={600}
-                wrapperClass="m0"
-              />
-            </td>
-            <td
-              headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
-            >
-              <Dollars>
-                300
-              </Dollars>
-            </td>
-            <td
-              headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_actual"
-            >
-              <InputHolder
-                className="m0 input input-condensed mono right-align"
-                hideLabel={true}
-                label="actual federal share for MMIS at the 50/50 level for FFY 2"
-                name="actual-federal-mmis50-2"
-                onChange={[Function]}
-                type="text"
-                value={500}
-                wrapperClass="m0"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+            300
+          </Dollars>
+        </td>
+        <td
+          headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_actual"
+        >
+          <InputHolder
+            className="m0 input input-condensed mono right-align"
+            hideLabel={true}
+            label="actual federal share for MMIS at the 50/50 level for FFY 2"
+            name="actual-federal-mmis50-2"
+            onChange={[Function]}
+            type="text"
+            value={500}
+            wrapperClass="m0"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </Fragment>
 `;
