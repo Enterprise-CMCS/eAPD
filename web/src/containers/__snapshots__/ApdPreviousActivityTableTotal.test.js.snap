@@ -2,121 +2,89 @@
 
 exports[`apd previous activity table, grand total component renders correctly 1`] = `
 <Fragment>
-  <h3>
-    Grand totals: Federal HIT, HIE, MMIS
-  </h3>
-  <div
-    className="table-frozen-wrapper table-frozen-narrow-header"
+  <h4
+    className="ds-h4"
   >
-    <div
-      className="table-frozen-scroller"
-    >
-      <table
-        aria-hidden="true"
-        className="table-cms table-fixed table-frozen-left-pane"
+    Grand totals: Federal HIT, HIE, MMIS
+  </h4>
+  <table
+    className="table-cms centered-headers table-fixed"
+  >
+    <thead>
+      <tr>
+        <th
+          id="prev_act_totals_null3"
+        />
+        <th
+          id="prev_act_total_approved"
+        >
+          FFP Approved
+        </th>
+        <th
+          id="prev_act_total_actual"
+        >
+          FFP Actual
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="align-middle"
+        key="1"
       >
-        <thead>
-          <tr>
-            <th
-              className="table-frozen-null-cell"
-            >
-              --
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            key="1-mmis-fake-row"
+        <th
+          id="prev_act_total_row_1"
+        >
+          FFY 1
+        </th>
+        <td
+          headers="prev_act_total_row_1 prev_act_total_approved"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              key="1-mmis-fake-header"
-            >
-              FFY 1
-            </th>
-          </tr>
-          <tr
-            key="2-mmis-fake-row"
+            1878
+          </Dollars>
+        </td>
+        <td
+          headers="prev_act_total_row_1 prev_act_total_actual"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              key="2-mmis-fake-header"
-            >
-              FFY 2
-            </th>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        className="table-cms centered-headers table-fixed table-frozen-data"
+            1090
+          </Dollars>
+        </td>
+      </tr>
+      <tr
+        className="align-middle"
+        key="2"
       >
-        <thead>
-          <tr>
-            <th
-              id="prev_act_totals_null3"
-            />
-            <th
-              id="prev_act_total_approved"
-            >
-              FFP Approved
-            </th>
-            <th
-              id="prev_act_total_actual"
-            >
-              FFP Actual
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            className="align-middle"
-            key="1"
+        <th
+          id="prev_act_total_row_2"
+        >
+          FFY 2
+        </th>
+        <td
+          headers="prev_act_total_row_2 prev_act_total_approved"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              id="prev_act_total_row_1"
-            >
-              FFY 1
-            </th>
-            <td
-              headers="prev_act_total_row_1 prev_act_total_approved"
-            >
-              <Dollars>
-                1878
-              </Dollars>
-            </td>
-            <td
-              headers="prev_act_total_row_1 prev_act_total_actual"
-            >
-              <Dollars>
-                1090
-              </Dollars>
-            </td>
-          </tr>
-          <tr
-            className="align-middle"
-            key="2"
+            4380
+          </Dollars>
+        </td>
+        <td
+          headers="prev_act_total_row_2 prev_act_total_actual"
+        >
+          <Dollars
+            long={false}
           >
-            <th
-              id="prev_act_total_row_2"
-            >
-              FFY 2
-            </th>
-            <td
-              headers="prev_act_total_row_2 prev_act_total_approved"
-            >
-              <Dollars>
-                4380
-              </Dollars>
-            </td>
-            <td
-              headers="prev_act_total_row_2 prev_act_total_actual"
-            >
-              <Dollars>
-                3900
-              </Dollars>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+            3900
+          </Dollars>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </Fragment>
 `;

@@ -3,16 +3,16 @@ import PropType from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Icon, { faPlusCircle, faSpinner } from '../components/Icons';
-import Sidebar from './StateDashboardSidebar';
+import Icon, { File, faPlusCircle, faSpinner } from '../components/Icons';
+import Instruction from '../components/Instruction';
 import { createApd, deleteApd, selectApd } from '../actions/apd';
-import { Section } from '../components/Section';
 import { t } from '../i18n';
 import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
 
 const Loading = () => (
-  <div className="h2 p0 pb3 center">
-    <Icon icon={faSpinner} spin size="sm" className="mr1" /> Loading APDs
+  <div className="ds-h2 ds-u-padding--0 ds-u-padding-bottom--3 ds-u-text-align--center">
+    <Icon icon={faSpinner} spin size="sm" className="ds-u-margin-right--1" />{' '}
+    Loading APDs
   </div>
 );
 
@@ -33,65 +33,68 @@ const StateDashboard = (
   };
 
   const delApd = apd => () => {
-    if (global.confirm(`Delete HITECH APD for FFY ${apd.years.join(', ')}?`)) {
+    if (global.confirm(`Delete ${apd.name}?`)) {
       del(apd.id);
     }
   };
 
   return (
-    <div className="site-body ds-l-container">
-      <div className="ds-l-row ds-u-margin--0">
-        <Sidebar />
-        <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
-          <Section resource="stateDashboard">
-            <div className="mb3 bg-white rounded shadow accordian">
-              <div className="px3 py2 border-bottom border-bottom-darken-1 blue">
-                <span className="h2">{state.name} APDs</span>
-                <Button
-                  variation="primary"
-                  size="small"
-                  className="right inline-block"
-                  onClick={create}
-                >
-                  Create new&nbsp;&nbsp;
-                  <Icon icon={faPlusCircle} />
-                </Button>
-              </div>
-              <div className="p3">
-                {fetching ? <Loading /> : null}
-                {!fetching && apds.length === 0
-                  ? t('stateDashboard.none')
-                  : null}
-                {apds.map(apd => (
-                  <div key={apd.id} className="p2 mb2 bg-gray-lightest">
-                    <div className="inline-block p2 mr2 bg-white blue rounded left">
-                      <img
-                        src="/static/img/icon-document.svg"
-                        alt=""
-                        className="align-middle"
-                        style={{ minWidth: '33px' }}
-                      />
-                    </div>
-                    <h3 className="inline-block">
-                      <a href="#!" onClick={open(apd.id)}>
-                        HITECH APD for FFY {apd.years.join(', ')}
-                      </a>
-                    </h3>
-                    <Button
-                      variation="danger"
-                      size="small"
-                      className="right"
-                      onClick={delApd(apd)}
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Section>
+    <div className="ds-l-container ds-u-margin-top--7">
+      <div className="ds-l-row">
+        <div className="ds-l-col--8 ds-u-margin-x--auto ">
+          <h1 className="ds-h1">
+            {t('stateDashboard.title', { state: state.name })}
+          </h1>
+          <Instruction source="stateDashboard.instruction" />
+          <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
+            <h2 className="ds-h2 ds-u-display--inline-block">
+              {state.name} APDs
+            </h2>
+            <Button
+              variation="primary"
+              className="ds-u-float--right"
+              onClick={create}
+            >
+              Create new&nbsp;&nbsp;
+              <Icon icon={faPlusCircle} />
+            </Button>
+          </div>
         </div>
       </div>
+      {fetching ? <Loading /> : null}
+      {!fetching && apds.length === 0 ? t('stateDashboard.none') : null}
+      {apds.map(apd => (
+        <div key={apd.id} className="ds-l-row">
+          <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
+            <div className="ds-u-border-bottom--2 ds-u-padding-bottom--3">
+              <div className="ds-u-display--inline-block ds-u-float--left ds-u-fill--primary-alt-lightest ds-u-padding--2 ds-u-margin-right--2">
+                <File size="lg" color="#046b99" />
+              </div>
+              <div className="ds-u-display--inline-block">
+                <h3 className="ds-u-margin-top--0">
+                  <a href="#!" onClick={open(apd.id)}>
+                    {apd.name}
+                  </a>
+                </h3>
+                <ul className="ds-c-list--bare">
+                  <li>
+                    <strong>Last edited:</strong> {apd.updated}
+                  </li>
+                </ul>
+              </div>
+              <div className="ds-u-display--inline-block ds-u-float--right ds-u-text-align--right">
+                <Button
+                  variation="transparent"
+                  size="small"
+                  onClick={delApd(apd)}
+                >
+                  Delete
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
