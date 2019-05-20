@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ContractorResourcesReview component renders correctly 1`] = `
+<Review
+  editContent={
+    <div>
+      <Button
+        onClick={[Function]}
+        size="small"
+        type="button"
+        variation="transparent"
+      >
+        Edit
+      </Button>
+      |
+      <Button
+        onClick={[Function]}
+        size="small"
+        type="button"
+        variation="transparent"
+      >
+        Remove
+      </Button>
+    </div>
+  }
+  editText="Edit"
+  heading="2. Honey Dipper Dan"
+>
+  <p
+    className="ds-u-margin-top--2"
+  >
+    They cleaned up the latrines after the Battle of Hastings
+  </p>
+  <ul
+    className="ds-c-list--bare"
+  >
+    <li>
+      <strong>
+        Contract term:
+      </strong>
+       
+      10/14/1066 - 10/15/1066
+    </li>
+    <li>
+      <strong>
+        Total cost:
+      </strong>
+       
+      <Dollars
+        long={true}
+      >
+        12345
+      </Dollars>
+    </li>
+    <li
+      key="1066"
+    >
+      <strong>
+        FFY 
+        1066
+         cost:
+      </strong>
+       
+      <Dollars
+        long={true}
+      >
+        300
+      </Dollars>
+    </li>
+    <li
+      key="1067"
+    >
+      <strong>
+        FFY 
+        1067
+         cost:
+      </strong>
+       
+      <Dollars
+        long={true}
+      >
+        400
+      </Dollars>
+    </li>
+  </ul>
+</Review>
+`;
