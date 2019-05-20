@@ -28,6 +28,10 @@ class StandardsAndConditions extends Component {
           <div key={std.id}>
             <Instruction
               source={`activities.standardsAndConditions.${std.id}.instruction`}
+              headingDisplay={{
+                level: 'h4',
+                className: 'ds-h4'
+              }}
             />
 
             <Textarea
