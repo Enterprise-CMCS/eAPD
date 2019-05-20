@@ -47,7 +47,9 @@ const StateDashboard = (
           </h1>
           <Instruction source="stateDashboard.instruction" />
           <div className="ds-u-margin-top--5 ds-u-padding-bottom--1 ds-u-border-bottom--2">
-            <h2 className="ds-h2 ds-u-display--inline-block">{state.name} APDs</h2>
+            <h2 className="ds-h2 ds-u-display--inline-block">
+              {state.name} APDs
+            </h2>
             <Button
               variation="primary"
               className="ds-u-float--right"
@@ -61,42 +63,37 @@ const StateDashboard = (
       </div>
       {fetching ? <Loading /> : null}
       {!fetching && apds.length === 0 ? t('stateDashboard.none') : null}
-        {apds.map((apd, i) => (
-          <div
-            key={apd.id}
-            className="ds-l-row"
-          >
-            <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
-              <div className="ds-u-border-bottom--2 ds-u-padding-bottom--3">
-                <div
-                  className="ds-u-display--inline-block ds-u-float--left ds-u-fill--primary-alt-lightest ds-u-padding--2 ds-u-margin-right--2"
+      {apds.map(apd => (
+        <div key={apd.id} className="ds-l-row">
+          <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
+            <div className="ds-u-border-bottom--2 ds-u-padding-bottom--3">
+              <div className="ds-u-display--inline-block ds-u-float--left ds-u-fill--primary-alt-lightest ds-u-padding--2 ds-u-margin-right--2">
+                <File size="lg" color="#046b99" />
+              </div>
+              <div className="ds-u-display--inline-block">
+                <h3 className="ds-u-margin-top--0">
+                  <a href="#!" onClick={open(apd.id)}>
+                    {apd.name}
+                  </a>
+                </h3>
+                <ul className="ds-c-list--bare">
+                  <li>
+                    <strong>Last edited:</strong> {apd.updated}
+                  </li>
+                </ul>
+              </div>
+              <div className="ds-u-display--inline-block ds-u-float--right ds-u-text-align--right">
+                <Button
+                  variation="transparent"
+                  size="small"
+                  onClick={delApd(apd)}
                 >
-                  <File size="lg" color="#046b99" />
-                </div>
-                <div className="ds-u-display--inline-block">
-                  <h3 className="ds-u-margin-top--0">
-                    <a href="#!" onClick={open(apd.id)}>
-                      {apd.name}
-                    </a>
-                  </h3>
-                  <ul className="ds-c-list--bare">
-                    <li>
-                      <strong>Last edited:</strong> {apd.updated}
-                    </li>
-                  </ul>
-                </div>
-                <div className="ds-u-display--inline-block ds-u-float--right ds-u-text-align--right">
-                  <Button
-                    variation="transparent"
-                    size="small"
-                    onClick={delApd(apd)}
-                  >
-                    Delete
-                  </Button>
-                </div>
+                  Delete
+                </Button>
               </div>
             </div>
           </div>
+        </div>
       ))}
     </div>
   );
