@@ -1,6 +1,6 @@
-const defaultBcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+const defaultHash = require('./passwordHash');
 const logger = require('../logger')('authentication');
 const defaultUserModel = require('../db').models.user;
 
@@ -10,10 +10,11 @@ const defaultUserModel = require('../db').models.user;
 // should somewhat increase security - automatic key cycling!
 const NONCE_SECRET = crypto.randomBytes(64);
 
-module.exports = (
-  userModel = defaultUserModel,
-  bcrypt = defaultBcrypt
-) => async (nonce, password, done) => {
+module.exports = (userModel = defaultUserModel, hash = defaultHash) => async (
+  nonce,
+  password,
+  done
+) => {
   try {
     logger.verbose(`got authentication request. decoding jwt...`);
     let verified = false;
@@ -33,7 +34,7 @@ module.exports = (
       .query('whereRaw', 'LOWER(email) = ?', [username.toLowerCase()])
       .fetch({ withRelated: ['state'] });
 
-    if (user && (await bcrypt.compare(password, user.get('password')))) {
+    if (user && (await hash.compare(password, user.get('password')))) {
       logger.verbose(`authenticated user [${username}]`);
       return done(null, {
         username: user.get('email'),
