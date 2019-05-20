@@ -12,9 +12,25 @@ import {
   SET_SELECT_APD_ON_LOAD,
   SUBMIT_APD_SUCCESS,
   UPDATE_APD,
-  WITHDRAW_APD_SUCCESS
+  WITHDRAW_APD_SUCCESS,
+  SAVE_APD_SUCCESS
 } from '../actions/apd';
 import { defaultAPDYearOptions, generateKey } from '../util';
+
+const getHumanTimestamp = iso8601 => {
+  const d = new Date(iso8601);
+
+  return `${d.toLocaleDateString('en-us', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  })}, ${d.toLocaleTimeString('en-us', {
+    timeZoneName: 'short',
+    hour12: true,
+    hour: 'numeric',
+    minute: 'numeric'
+  })}`;
+};
 
 export const getKeyPersonnel = () => ({
   costs: {},
@@ -71,6 +87,7 @@ const reducer = (state = initialState, action) => {
           byId: {
             [action.data.id]: {
               ...action.data,
+              updated: getHumanTimestamp(action.data.updated),
               yearOptions: defaultAPDYearOptions
             }
           }
@@ -87,7 +104,7 @@ const reducer = (state = initialState, action) => {
         byId: action.data.reduce(
           (acc, apd) => ({
             ...acc,
-            [apd.id]: apd
+            [apd.id]: { ...apd, updated: getHumanTimestamp(apd.updated) }
           }),
           {}
         ),
@@ -105,10 +122,29 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
+    case SAVE_APD_SUCCESS:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.data.id]: {
+            ...state.byId[action.data.id],
+            updated: getHumanTimestamp(action.data.updated)
+          }
+        },
+        data: {
+          ...state.data,
+          updated: getHumanTimestamp(action.data.updated)
+        }
+      };
     case SELECT_APD:
       return {
         ...state,
-        data: { ...action.apd, yearOptions: defaultAPDYearOptions }
+        data: {
+          ...action.apd,
+          updated: getHumanTimestamp(action.apd.updated),
+          yearOptions: defaultAPDYearOptions
+        }
       };
     case SET_SELECT_APD_ON_LOAD:
       return { ...state, selectAPDOnLoad: true };

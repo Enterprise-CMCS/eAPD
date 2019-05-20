@@ -39,7 +39,6 @@ directory.
 The API is built on [Express](https://expressjs.com/) using a
 [PostgreSQL](https://www.postgresql.org/) database, and a handful of libraries:
 
-- [bcryptjs](https://www.npmjs.com/package/bcryptjs) for secure hashing
 - [client-session](https://www.npmjs.com/package/client-sessions) for secure
   cookie-based sessions
 - [Passport](http://www.passportjs.org/) for authentication
