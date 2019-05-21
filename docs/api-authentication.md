@@ -3,7 +3,8 @@
 The API uses [Passport](https://passportjs.org) to simplify authentication.
 Currently, we only support authentication against a local database. Users are
 stored in a `users` table, uniquely identified by an email address, with a
-bcrypt-hashed password.
+SHA256-hashed password using PBKDF2 with a random salt and a number of
+iterations calibrated to take about 300 ms.
 
 Authentication is a two-step process. First, users obtain a nonce based on
 their username (usernames are users' email addresses). This nonce is
