@@ -50,10 +50,6 @@ rm seeds/shared/delete-everything.js
 
 npm ci --only=production
 
-# Migrate the database.  The "DB_URL" placeholder below should be replaced by
-# the CI/CD process with the real database URL to use.
-NODE_ENV=production DB_URL=__DB_URL__ npm run migrate
-
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace the
