@@ -68,7 +68,7 @@ exports.up = async knex => {
     table.comment('list of users');
     table.increments();
     table.text('email'); // who knows how long an email address might be
-    table.string('password', 60).comment('bcrypted password'); // bcrypt hashes are 60 characters
+    table.string('password', 60).comment('hashed password'); // hashed passwords are 60 characters
     table.string('auth_role', 64).comment('the name of the role this user has');
     table.foreign('auth_role').references('auth_roles.name');
     table.text('name').comment('the users name');

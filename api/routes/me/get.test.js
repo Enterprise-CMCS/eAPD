@@ -15,6 +15,8 @@ tap.test('me GET endpoint', async endpointTest => {
     end: sandbox.stub()
   };
 
+  const deserialize = sandbox.stub();
+
   endpointTest.beforeEach(async () => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
@@ -34,7 +36,7 @@ tap.test('me GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('get me users handler', async handlerTest => {
-    getEndpoint(app);
+    getEndpoint(app, { deserialize });
     const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][2];
 
     const get = sinon.stub();
@@ -53,15 +55,22 @@ tap.test('me GET endpoint', async endpointTest => {
       model: userModel
     };
 
-    meHandler({ user }, res);
+    deserialize.yields(null, {
+      info: 'deserialized user from session',
+      model: userModel
+    });
+
+    await meHandler(
+      { session: { passport: { user: 'session-id' } }, user },
+      res
+    );
 
     handlerTest.ok(
-      res.send.calledWith(
-        sinon.match({
-          id: 'user-id',
-          state: { id: 'state id', name: 'state name' }
-        })
-      ),
+      res.send.calledWith({
+        info: 'deserialized user from session',
+        state: { id: 'state id', name: 'state name' },
+        model: undefined
+      }),
       'sends back the user object'
     );
   });
