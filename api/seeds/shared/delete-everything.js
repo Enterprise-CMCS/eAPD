@@ -20,7 +20,8 @@ exports.seed = async knex =>
     knex('apd_key_personnel_yearly').del(),
     knex('apd_previous_activity_expenses').del(),
     knex('apd_versions').del(),
-    knex('auth_role_activity_mapping').del()
+    knex('auth_role_activity_mapping').del(),
+    knex('auth_sessions').del()
   ])
     .then(() =>
       Promise.all([

@@ -9,7 +9,7 @@
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run",
     "start": "node main.js",
-    "start-dev": "nodemon ./main.js",
+    "start-dev": "nodemon ./main.js -e js",
     "jest": "NODE_ENV=test jest",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-browser --reporter=spec --test-arg=--silent '{,!(node_modules)/**/}*.test.js'",
     "test-endpoints": "jest --runInBand '.+\\.endpoint\\.js'",
@@ -52,7 +52,6 @@
   },
   "homepage": "https://github.com/18F/cms-hitech-apd#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "bookshelf": "^0.12.1",
     "compression": "^1.7.3",

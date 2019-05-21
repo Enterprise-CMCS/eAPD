@@ -5,6 +5,7 @@ const logger = require('../logger')('auth index');
 const authenticate = require('./authenticate');
 const serialization = require('./serialization');
 const sessionFunction = require('./session')();
+const { removeUserSession } = require('./sessionStore');
 
 const defaultStrategies = [new LocalStrategy(authenticate())];
 
@@ -23,6 +24,7 @@ module.exports.setup = function setup(
   {
     auth = authenticate,
     passport = Passport,
+    removeSession = removeUserSession,
     session = sessionFunction,
     strategies = defaultStrategies
   } = {}
@@ -45,6 +47,9 @@ module.exports.setup = function setup(
 
   logger.silly('setting up a logout handler');
   app.get('/auth/logout', (req, res) => {
+    if (req.session && req.session.passport) {
+      removeSession(req.session.passport.user);
+    }
     req.logout();
     session.destroy();
     res.status(200).end();
