@@ -72,8 +72,7 @@ function deployAPItoEC2() {
 
 # Reads deployment ecosystem data from the environment, builds a PM2
 # ecosystem configuration document, encodes it in base 64, and injects
-# it into the user-data script.  Also injects the database URL in place
-# of __DB_URL__
+# it into the user-data script.
 #
 # Expects global environment variables:
 #   AWS_PROD_API_PORT - port the API should listen on
@@ -84,7 +83,6 @@ function addEcosystemToUserData() {
     apps : [{
       name: 'eAPD API',
       script: 'main.js',
-
       instances: 1,
       autorestart: true,
       env: {
@@ -94,14 +92,19 @@ function addEcosystemToUserData() {
         DATABASE_URL: '$AWS_PROD_API_DATABASE_URL',
         SESSION_SECRET: '$AWS_PROD_API_SESSION_SECRET'
       },
+    },{
+      name: 'Database migration',
+      script: 'npm',
+      args: 'run migrate',
+      autorestart: false,
+      env: {
+        NODE_ENV: 'production',
+        DATABASE_URL: '$AWS_PROD_API_DATABASE_URL'
+      }
     }]
   };" | base64 -w 0`
 
   sed -i'.backup' -e "s/__ECOSYSTEM__/`echo $ECOSYSTEM`/g" aws.user-data.sh
-
-  # Use vertical pipes as sed delimiters instead of slashes, since the database
-  # URL can contain slashes itself.
-  sed -i'.backup' -e "s|__DB_URL__|\"`echo $AWS_PROD_API_DATABASE_URL`\"|g" aws.user-data.sh
 
   rm aws.user-data.sh.backup
 }
