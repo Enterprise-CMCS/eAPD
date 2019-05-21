@@ -1,6 +1,126 @@
 version: 2
+
+workflows:
+  version: 2
+
+  # Workflow to cleanup preview deploys from AWS.  Runs every two hours.
+  cleanup preview deploys:
+    triggers:
+      - schedule:
+          # Run every 2 hours, every day. Specified this way because the more
+          # compact cron syntax wasn't working.
+          cron: '0 0,2,4,6,8,10,12,14,16,18,20,22 * * *'
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cleanup preview deploys
+
+  # Workflow to test, build, and deploy the backend and frontend
+  test, build, and deploy:
+    jobs:
+      # independent jobs
+      - check docker-compose image tags
+      - install dependencies
+      - validate openapi
+      - yaml test
+
+      # backend jobs
+      - backend api endpoint test:
+          requires:
+            - install dependencies
+      - backend dependency vulnerability scan:
+          requires:
+            - install dependencies
+      - backend lint:
+          requires:
+            - install dependencies
+      - backend unit test:
+          requires:
+            - install dependencies
+      - backend deploy prod:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - backend api endpoint test
+            - backend dependency vulnerability scan
+            - backend lint
+            - backend unit test
+
+      # frontend jobs
+      - frontend dependency vulnerability scan:
+          requires:
+            - install dependencies
+      - frontend lint:
+          requires:
+            - install dependencies
+      - frontend test:
+          requires:
+            - install dependencies
+            - yaml test
+      - frontend build:
+          requires:
+            - frontend dependency vulnerability scan
+      - frontend deploy prod:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - frontend build
+            - frontend dependency vulnerability scan
+            - frontend lint
+            - frontend test
+            - yaml test
+
+      # joint jobs
+      - preview deploy:
+          filters:
+            branches:
+              ignore:
+                - master
+          requires:
+            - backend dependency vulnerability scan
+            - frontend build
+            - frontend dependency vulnerability scan
+            - yaml test
+
+      - store artifacts:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - frontend build
+
 jobs:
-  prepare dependencies cache:
+  # ===== Independent jobs =====
+  # These jobs don't rely on anything else having happened first, and cut
+  # across both backend and frontend.
+
+  # Checks that the image tags in the docker-compose.yml file match the md5
+  # hashes of the backend and frontend package-lock.json files.
+  check docker-compose image tags:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - run:
+          name: check docker-compose image tags
+          working_directory: ~/project
+          command: |
+            echo "`cat docker-compose.yml | grep -m1 cms-eapd/api: | sed 's/.*image: cms-eapd\/api://'` api/package-lock.json" > hashes.md5
+            echo "`cat docker-compose.yml | grep -m1 cms-eapd/web: | sed 's/.*image: cms-eapd\/web://'` web/package-lock.json" >> hashes.md5
+            md5sum -c hashes.md5
+
+  # Installs npm dependencies for the frontend and backend pieces, then saves
+  # those in the workflow workspace. Save the npm cache to CircleCI cache to
+  # speed up subsequent builds, but don't save the dependencies to cache
+  # because "npm ci" deletes the node_modules folder anyway so it's pointless.
+  install dependencies:
     docker:
       - image: node:10
     steps:
@@ -19,82 +139,14 @@ jobs:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
           paths:
             - /root/.npm
-      - save_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-          paths:
-            - web/node_modules
-      - save_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - persist_to_workspace:
+          root: ~/project
           paths:
             - api/node_modules
+            - web/node_modules
 
-  yaml test:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - run: npm install glob
-      - run: npm install js-yaml
-      - run: 
-          working_directory: ~/project/web
-          command: node yaml-tests.js
-
-  check docker-compose image tags:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - run:
-          name: check docker-compose image tags
-          working_directory: ~/project
-          command: |
-            echo "`cat docker-compose.yml | grep -m1 cms-eapd/api: | sed 's/.*image: cms-eapd\/api://'` api/package-lock.json" > hashes.md5
-            echo "`cat docker-compose.yml | grep -m1 cms-eapd/web: | sed 's/.*image: cms-eapd\/web://'` web/package-lock.json" >> hashes.md5
-            md5sum -c hashes.md5
-
-  web dependency vulnerability scan:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-      - run:
-          name: vulnerability scan
-          working_directory: ~/project/web
-          command: |
-            npx snyk auth $SNYK_TOKEN
-            npx snyk test
-
-  web lint:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-      - run:
-          name: run linter
-          working_directory: ~/project/web
-          command: npm run lint
-
-  web test:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-cms-hitech-apd-{{ checksum "web/package-lock.json" }}
-      - run:
-          name: run tests
-          working_directory: ~/project/web
-          command: npm test -- --runInBand
-      - run:
-          name: report coverage
-          when: always
-          working_directory: ~/project/web
-          command: bash <(curl -s https://codecov.io/bash)
-
+  # Runs an OpenAPI validator on the API spec generated by our code to ensure
+  # it's a valid OpenAPI document.
   validate openapi:
     docker:
       - image: circleci/node:10
@@ -111,50 +163,24 @@ jobs:
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
 
-  api dependency vulnerability scan:
+  # Validates YAML files. Doesn't look at content, just structure. Doesn't
+  # enforce a schema either - strictly checks that the files are valid YAML.
+  yaml test:
     docker:
       - image: node:10
     steps:
       - checkout
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: vulnerability scan
-          working_directory: ~/project/api
-          command: |
-            npx snyk auth $SNYK_TOKEN
-            npx snyk test
+      - run: npm install glob
+      - run: npm install js-yaml
+      - run: 
+          working_directory: ~/project/web
+          command: node yaml-tests.js
 
-  api lint:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: run linter
-          working_directory: ~/project/api
-          command: npm run lint
+  # ===== Backend jobs =====
+  # These all depend on "install dependencies" running first.
 
-  api unit test:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
-      - run:
-          name: run tests
-          working_directory: ~/project/api
-          command: npm test
-      - run:
-          name: report coverage
-          when: always
-          working_directory: ~/project/api
-          command: bash <(curl -s https://codecov.io/bash)
-
-  api endpoint test:
+  # Runs backend API integration/end-to-end tests.
+  backend api endpoint test:
     docker:
       - image: node:10
         environment:
@@ -168,11 +194,10 @@ jobs:
           - POSTGRES_USER=postgres
           - POSTGRES_PASSWORD=cms
           - POSTGRES_DB=hitech_apd_test
-
     steps:
       - checkout
-      - restore_cache:
-          key: v1-cms-hitech-api-{{ checksum "api/package-lock.json" }}
+      - attach_workspace:
+          at: ~/project
       - run:
           name: get wait-on
           command: |
@@ -205,96 +230,209 @@ jobs:
           working_directory: ~/project/api
           command: mv endpoint-data.json endpoint-tests && node endpoint-tests/endpoint-coverage.js
 
-  deploy staging:
+  # Uses snyk to scan the installed backend dependencies for known
+  # vulnerabilities. Using the CLI instead of the web app means it scans
+  # actually-installed dependencies instead of "potentially-installed"
+  # dependencies, as inferred from the package.json file.
+  backend dependency vulnerability scan:
     docker:
       - image: node:10
     steps:
       - checkout
-      - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+      - attach_workspace:
+          at: ~/project
       - run:
-          name: deploy to prod
-          command: ./bin/deploy.sh
+          name: vulnerability scan
+          working_directory: ~/project/api
+          command: |
+            npx snyk auth $SNYK_TOKEN
+            npx snyk test
+
+  # Lints the backend code.
+  backend lint:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: run linter
+          working_directory: ~/project/api
+          command: npm run lint
+
+  # Runs backend unit tests and reports coverage to codecov.io.
+  backend unit test:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: run tests
+          working_directory: ~/project/api
+          command: npm test
+      - run:
+          name: report coverage
+          when: always
+          working_directory: ~/project/api
+          command: bash <(curl -s https://codecov.io/bash)
+
+  # ===== Frontend jobs =====
+  # These all depend on "install dependencies" running first.
+
+  # Builds the static web app into the ~/project/web/dist directory and then
+  # saves that into the workflow workspace.
+  frontend build:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: build the web app
+          working_directory: ~/project/web
+          command: API_URL=$PROD_API_URL npm run build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - web/dist
+
+  # Uses snyk to scan the installed frontend dependencies for known
+  # vulnerabilities. Using the CLI instead of the web app means it scans
+  # actually-installed dependencies instead of "potentially-installed"
+  # dependencies, as inferred from the package.json file.
+  frontend dependency vulnerability scan:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: vulnerability scan
+          working_directory: ~/project/web
+          command: |
+            npx snyk auth $SNYK_TOKEN
+            npx snyk test
+
+  # Lints the frontend code.
+  frontend lint:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: run linter
+          working_directory: ~/project/web
+          command: npm run lint
+
+  # Runs frontend tests and reports coverage to codecov.io.
+  frontend test:
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: run tests
+          working_directory: ~/project/web
+          command: npm test -- --runInBand
+      - run:
+          name: report coverage
+          when: always
+          working_directory: ~/project/web
+          command: bash <(curl -s https://codecov.io/bash)
+
+  # ===== Deployment jobs =====
+  # These may have varying prerequisites, but they're grouped here because
+  # they are all related to deployment.
+
+  # Backend production deployment.
+  backend deploy prod:
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - run:
+          name: deploy to production
+          working_directory: ~/project/bin/prod-deploy
+          command: |
+            apt-get -qq update
+            apt-get -qq install jq -y
+            pip install --quiet awscli
+            ./aws.sh
+
+  # Cleans up preview deploys that are no longer associated with open pull
+  # requests.
+  cleanup preview deploys:
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - run:
+          name: cleanup deploys with no open PR
+          working_directory: ~/project/bin/preview-deploy
+          command: |
+            apt-get -qq update
+            apt-get -qq install jq -y
+            pip install --quiet awscli
+            ./aws.cleanup.sh
+
+  # Frontend production deployment.
+  frontend deploy prod:
+    docker:
+      - image: python:3
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: sync to s3
+          command: |
+            apt-get update
+            apt-get install awscli -y
+            aws s3 sync web/dist $AWS_PROD_S3_BUCKET --region $AWS_PROD_S3_REGION --delete
+  
+  # Preview deployment, used to put up preview links in pull requests
+  preview deploy:
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - run:
+          name: deploy to preview
+          working_directory: ~/project/bin/preview-deploy
+          command: |
+            if [ -n "$CI_PULL_REQUESTS" ]; then
+              apt-get -qq update
+              apt-get -qq install jq -y
+              pip install --quiet awscli
+              PRNUM=$(basename $CI_PULL_REQUESTS)
+              URL=$(./aws.sh "$PRNUM" "$CIRCLE_BRANCH")
+              ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
+            else
+              echo "Not a pull request"
+            fi
+
+  # Zips up artifacts created in build steps and makes them available as
+  # CircleCI artifact downloads.
+  store artifacts:
+    docker:
+      - image: node:10
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: create frontend build artifact zip
+          command: |
+            apt-get update
+            apt-get install zip -y
+            zip -r /tmp/webapp.zip web/dist/*
       - store_artifacts:
           path: /tmp/webapp.zip
           destination: build
-
-  deploy pr:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - run:
-          name: deploy for pull request
-          command: ./bin/deploy-pr.sh
-
-  cleanup PR-specific deploys:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - run:
-          name: run nightly script
-          command: ./bin/cleanup-pr-deploys.sh
-
-workflows:
-  version: 2
-  cleanup:
-    triggers:
-      - schedule:
-          cron: '0 0,2,4,6,8,10,12,14,16,18,20,22 * * *'
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - cleanup PR-specific deploys
-  web:
-    jobs:
-      - prepare dependencies cache
-      - check docker-compose image tags
-      - web dependency vulnerability scan:
-          requires:
-            - prepare dependencies cache
-      - web lint:
-          requires:
-            - prepare dependencies cache
-      - yaml test
-      - web test:
-          requires:
-            - prepare dependencies cache
-            - yaml test
-      - validate openapi:
-          requires:
-            - prepare dependencies cache
-      - api dependency vulnerability scan:
-          requires:
-            - prepare dependencies cache
-      - api lint:
-          requires:
-            - prepare dependencies cache
-      - api unit test:
-          requires:
-            - prepare dependencies cache
-      - api endpoint test:
-          requires:
-            - prepare dependencies cache
-      - deploy pr:
-          filters:
-            branches:
-              ignore:
-                - master
-          requires:
-            - web dependency vulnerability scan
-            - yaml test
-      - deploy staging:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - web test
-            - web dependency vulnerability scan
-            - api unit test
-            - api endpoint test
-            - api dependency vulnerability scan
