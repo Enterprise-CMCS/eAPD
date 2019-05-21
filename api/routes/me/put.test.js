@@ -11,6 +11,7 @@ tap.test('me PUT endpoint', async endpointTest => {
   };
 
   const req = {
+    session: { passport: { user: 'session id' } },
     user: {
       id: 'one',
       model: {
