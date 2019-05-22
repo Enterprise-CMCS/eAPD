@@ -28,6 +28,8 @@ tap.test('authentication setup', async authTest => {
     authenticate: sandbox.stub().returns('passport-authenticate')
   };
 
+  const removeSession = sandbox.spy();
+
   const session = sandbox.stub();
   session.destroy = sandbox.stub();
 
@@ -168,16 +170,25 @@ tap.test('authentication setup', async authTest => {
   });
 
   authTest.test('GET logout endpoint behaves as expected', async getTest => {
-    authSetup(app, { session });
+    authSetup(app, { removeSession, session });
     const get = app.get.args[0][1];
 
     const req = {
-      logout: sinon.spy()
+      logout: sinon.spy(),
+      session: {
+        passport: {
+          user: 'session id'
+        }
+      }
     };
 
     get(req, res);
 
     getTest.ok(req.logout.calledOnce, 'user is logged out');
+    getTest.ok(
+      removeSession.calledWith('session id'),
+      'session is removed from storage'
+    );
     getTest.ok(session.destroy.calledOnce, 'session is destroyed');
     getTest.ok(res.status.calledOnce, 'an HTTP status is set once');
     getTest.ok(res.status.calledWith(200), 'sets a 200 HTTP status');

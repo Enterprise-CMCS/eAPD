@@ -1,16 +1,16 @@
-const bcrypt = require('bcryptjs');
+const hash = require('../../auth/passwordHash');
 
 exports.seed = async knex => {
   await knex('users').insert([
     {
       email: 'em@il.com',
-      password: bcrypt.hashSync('password'),
+      password: hash.hashSync('password'),
       auth_role: 'state coordinator',
       state_id: 'mo'
     },
     {
       email: 'admin',
-      password: bcrypt.hashSync('password'),
+      password: hash.hashSync('password'),
       auth_role: 'admin'
     }
   ]);
