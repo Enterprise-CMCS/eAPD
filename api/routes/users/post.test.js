@@ -11,6 +11,7 @@ tap.test('user POST endpoint', async endpointTest => {
   };
 
   const User = {
+    get: sandbox.stub(),
     save: sandbox.stub(),
     validate: sandbox.stub()
   };
