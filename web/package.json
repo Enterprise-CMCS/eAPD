@@ -7,11 +7,11 @@
     "storybook": "start-storybook --ci -p 9001 -c .storybook",
     "build-storybook": "build-storybook -c .storybook -o .storybook-dist/public",
     "make-state-icons": "babel-node scripts/stateIcons.js",
-    "scaffold": "rm -rf dist && mkdir dist && cp ../Staticfile dist/ && cp -r src/static dist/",
+    "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.js'",
     "start": "webpack-dev-server --config webpack.config.dev.js",
-    "test": "jest --collectCoverage",
+    "test": "TZ=utc jest --collectCoverage",
     "test-watch": "jest --watch",
     "prettier": "prettier --single-quote --trailing-comma none --write \"src/**/*.js\"",
     "postinstall": "sed -i'.backup' -e 's/\\(image: cms-eapd\\/web:\\).*/\\1'`md5 -q package-lock.json`'/g' ../docker-compose.yml && rm ../docker-compose.yml.backup || true"
