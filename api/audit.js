@@ -37,7 +37,11 @@ module.exports = (action, req) => {
       },
       set: (field, value) => {
         try {
-          data[field] = value;
+          if (field === 'password') {
+            data.password = '<new password>';
+          } else {
+            data[field] = value;
+          }
         } catch (e) {
           logger.error('ERROR SETTING AUDIT VALUE', e);
         }

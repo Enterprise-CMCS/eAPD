@@ -56,9 +56,6 @@ module.exports = (
       ['email', 'name', 'password', 'position', 'phone'].forEach(field => {
         if (req.body[field]) {
           audit.set(field, req.body[field]);
-          if (field === 'password') {
-            audit.set('password', '<new password>');
-          }
           targetUser.set(field, req.body[field]);
         }
       });
