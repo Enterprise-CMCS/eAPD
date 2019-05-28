@@ -364,7 +364,7 @@ jobs:
           working_directory: ~/project
           command: |
             git diff master --relative=api --name-only --exit-code > /dev/null
-            if [ $? -ne 0 ]; then
+            if [ $? -eq "0" ]; then
               circleci-agent step halt
             fi
       - run:
@@ -403,7 +403,7 @@ jobs:
           name: make sure the frontend changed
           command: |
             git diff master --relative=web --name-only --exit-code > /dev/null
-            if [ $? -ne 0 ]; thenqgit
+            if [ $? -eq "0" ]; thenqgit
               circleci-agent step halt
             fi
       - run:
