@@ -4,6 +4,6 @@ version: v1.13.5
 ignore:
   SNYK-JS-AXIOS-174505:
     - axios:
-        reason: no fix; does not affect our app
-        expires: '2019-05-25T14:29:57.487Z'
+        reason: no fix yet
+        expires: '2019-06-27T13:08:48.879Z'
 patch: {}
