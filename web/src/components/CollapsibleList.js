@@ -30,9 +30,7 @@ class ListItem extends Component {
             }`}
             onClick={this.toggle}
           >
-            <header className="flex items-center justify-between">
-              {header}
-            </header>
+            <div className="flex items-center justify-between">{header}</div>
           </button>
           {deleteItem && (
             <button
@@ -50,9 +48,7 @@ class ListItem extends Component {
             className="btn btn-no-focus p1 flex-auto left-align bg-blue-light rounded"
             onClick={this.toggle}
           >
-            <header className="flex items-center justify-between">
-              {header}
-            </header>
+            <div className="flex items-center justify-between">{header}</div>
           </button>
         </div>
         <div className={childClass}>{children}</div>
