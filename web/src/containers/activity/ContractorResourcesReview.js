@@ -28,7 +28,8 @@ const ContractorReview = ({
 
   return (
     <Review
-      heading={`${idx + 1}. ${contractor.name}`}
+      heading={`${idx + 1}. ${contractor.name ||
+        'Contractor Name not specified'}`}
       editContent={
         <div>
           <Button size="small" variation="transparent" onClick={handleEdit}>
@@ -41,12 +42,14 @@ const ContractorReview = ({
         </div>
       }
     >
-      <p className="ds-u-margin-top--2">{contractor.desc}</p>
+      <p className="ds-u-margin-top--0">
+        {contractor.desc || 'Description of Services not specified'}
+      </p>
       <ul className="ds-c-list--bare">
         <li>
           <strong>Contract term:</strong>{' '}
           {dateRangeForHumans || (
-            <span className="ds-u-color--gray">dates not completed</span>
+            <span className="ds-u-color--gray">Dates not specified</span>
           )}
         </li>
         <li>
