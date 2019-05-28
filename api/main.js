@@ -16,6 +16,17 @@ const endpointCoverage = require('./endpointCoverageMiddleware');
 const server = express();
 
 endpointCoverage.registerCoverageMiddleware(server);
+
+if (process.env.PROXY_TRUST !== 'false') {
+  // If there is a non-false PROXY_TRUST value, use it. If the value is 'true',
+  // convert to a boolean to trust everything. This will use the left-most
+  // value in X-FORWARDED-FOR as the requestor IP address.
+  server.set(
+    'trust proxy',
+    process.env.PROXY_TRUST === 'true' || process.env.PROXY_TRUST
+  );
+}
+
 server.use((req, res, next) => {
   req.id = uuid();
   req.meta = {};
