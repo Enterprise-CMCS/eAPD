@@ -90,7 +90,8 @@ function addEcosystemToUserData() {
         PBKDF2_ITERATIONS: '$AWS_PROD_API_PBKDF2_ITERATIONS',
         PORT: '$AWS_PROD_API_PORT',
         DATABASE_URL: '$AWS_PROD_API_DATABASE_URL',
-        SESSION_SECRET: '$AWS_PROD_API_SESSION_SECRET'
+        SESSION_SECRET: '$AWS_PROD_API_SESSION_SECRET',
+        PROXY_TRUST: 'true'
       },
     },{
       name: 'Database migration',
