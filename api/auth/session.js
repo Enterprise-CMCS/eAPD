@@ -13,6 +13,11 @@ const TOKEN_ISSUER = 'CMS eAPD API';
  *                                   cookies; primary for unit testing
  */
 const loadSession = (req, cookie) => {
+  if (!cookie) {
+    logger.silly(req, 'no auth cookie, skip validation');
+    return {};
+  }
+
   try {
     logger.silly(req, 'verifying JWT auth token');
     const valid = jwt.verify(cookie, process.env.SESSION_SECRET, {
@@ -88,7 +93,7 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
               expiresIn: `${process.env.SESSION_LIFETIME_MINUTES}m`
             }
           ),
-          { httpOnly: true }
+          { httpOnly: true, overwrite: true }
         );
       } else {
         // Else, write a cookie with an immediate expiration
