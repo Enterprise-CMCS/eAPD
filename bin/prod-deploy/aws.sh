@@ -142,6 +142,7 @@ function configureAWS() {
 function createNewInstance() {
   aws ec2 run-instances \
     --instance-type c4.large \
+    --key-name $AWS_PROD_KEY_NAME \
     --image-id $AWS_PROD_API_AMI \
     --security-group-ids $AWS_PROD_API_SECURITY_GROUP \
     --subnet-id $AWS_PROD_API_SUBNET \
