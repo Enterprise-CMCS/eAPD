@@ -28,7 +28,7 @@ module.exports = (app, ApdModel = defaultApdModel) => {
         }));
 
       logger.silly(req, `got apds:`);
-      logger.silly(req, apds);
+      logger.silly(req, apds.map(({ id, name }) => ({ id, name })));
       return res.send(apds);
     } catch (e) {
       logger.error(req, e);
@@ -53,8 +53,10 @@ module.exports = (app, ApdModel = defaultApdModel) => {
       })).toJSON();
 
       if (apds.length) {
-        logger.silly(req, `got apds:`);
-        logger.silly(req, apds[0]);
+        logger.silly(
+          req,
+          `got single apd, id=${apds[0].id}, name="${apds[0].name}"`
+        );
         return res.send(apds[0]);
       }
 
