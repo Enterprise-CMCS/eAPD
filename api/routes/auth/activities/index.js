@@ -8,8 +8,13 @@ module.exports = (app, ActivityModel = defaultActivityModel) => {
     logger.silly(req, 'handling GET /auth/activities');
     try {
       const activities = await ActivityModel.fetchAll();
-      logger.silly(req, 'got activities:');
-      logger.silly(req, activities);
+      logger.silly(
+        req,
+        `got all the activities: ${activities
+          .toJSON()
+          .reduce((acc, { name }) => [...acc, name], [])
+          .join(', ')}`
+      );
       res.send(activities.toJSON());
     } catch (e) {
       logger.error(req, e);
