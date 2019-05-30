@@ -1,5 +1,7 @@
+import { Button, Review, TextField } from '@cmsgov/design-system-core';
+
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -7,55 +9,125 @@ import {
   removeActivityGoal as removeActivityGoalAction,
   updateActivity as updateActivityAction
 } from '../../actions/activities';
-import Btn from '../../components/Btn';
-import CollapsibleList from '../../components/CollapsibleList';
-import { RichText } from '../../components/Inputs';
-import Instruction from '../../components/Instruction';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
-const plaintext = txt => {
-  const e = document.createElement('div');
-  e.innerHTML = txt;
-  return e.innerText;
+const GoalReview = ({ goal, idx, edit, handleDelete }) => (
+  <Review
+    heading={
+      <h5 className="ds-h4">
+        {idx + 1}. {goal.description}
+      </h5>
+    }
+    editHref="#"
+    onEditClick={edit}
+    editContent={
+      <div className="nowrap">
+        <Button size="small" variation="transparent" onClick={edit}>
+          Edit
+        </Button>
+        {handleDelete && (
+          <Fragment>
+            |
+            <Button size="small" variation="transparent" onClick={handleDelete}>
+              Remove
+            </Button>
+          </Fragment>
+        )}
+      </div>
+    }
+  >
+    <p className="ds-u-margin-top--2">Benchmark: {goal.objective}</p>
+  </Review>
+);
+
+GoalReview.propTypes = {
+  edit: PropTypes.func.isRequired,
+  goal: PropTypes.object.isRequired,
+  handleDelete: PropTypes.func,
+  idx: PropTypes.number.isRequired
 };
 
-const GoalForm = ({ goal, idx, handleChange, handleDelete }) => (
-  <div className="mt2 mb3">
-    <Btn
-      kind="outline"
-      extraCss="right px-tiny py0 h5 xs-hide visibility--screen"
-      onClick={handleDelete}
-    >
-      ✗
-    </Btn>
+GoalReview.defaultProps = {
+  handleDelete: null
+};
 
-    <Instruction source="activities.goals.goal.instruction" />
-    <div className="mb3">
-      {t('activities.goals.goal.title', { number: idx + 1 })}
-      <RichText
-        content={goal.description}
-        onSync={handleChange(idx, 'description')}
-      />
-    </div>
+const GoalForm = ({ goal, idx, done, handleChange }) => (
+  <div className="ds-u-padding-bottom--2 ds-u-border-bottom--2">
+    <TextField
+      name="name"
+      className="data-entry-box"
+      label="Goal name"
+      hint={t('activities.goals.goal.instruction.detail', {
+        defaultValue: ''
+      })}
+      value={goal.description}
+      onChange={handleChange(idx, 'description')}
+    />
 
-    <Instruction source="activities.goals.objective.instruction" />
-    <div className="mb3">
-      {t('activities.goals.objective.title')}
-      <RichText
-        content={goal.objective}
-        onSync={handleChange(idx, 'objective')}
-      />
-    </div>
+    <TextField
+      name="milestones"
+      className="data-entry-box"
+      label="Benchmarks"
+      multiline
+      rows={6}
+      hint={t('activities.goals.objective.instruction.detail', {
+        defaultValue: ''
+      })}
+      value={goal.objective}
+      onChange={handleChange('idx', 'objective')}
+    />
+
+    <Button variation="primary" className="ds-u-margin-top--4" onClick={done}>
+      Done
+    </Button>
   </div>
 );
 
 GoalForm.propTypes = {
   goal: PropTypes.object.isRequired,
   idx: PropTypes.number.isRequired,
+  done: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired
+};
+
+const Goal = ({ goal, idx, initialExpanded, handleChange, handleDelete }) => {
+  const [collapsed, setCollapsed] = useState(!initialExpanded);
+
+  if (collapsed) {
+    return (
+      <GoalReview
+        goal={goal}
+        idx={idx}
+        edit={() => setCollapsed(false)}
+        handleDelete={handleDelete}
+      />
+    );
+  }
+
+  return (
+    <GoalForm
+      goal={goal}
+      idx={idx}
+      handleChange={handleChange}
+      handleDelete={handleDelete}
+      done={() => setCollapsed(true)}
+    />
+  );
+};
+
+Goal.propTypes = {
+  goal: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
-  handleDelete: PropTypes.func.isRequired
+  handleDelete: PropTypes.func,
+  idx: PropTypes.number.isRequired,
+  initialExpanded: PropTypes.bool
+};
+
+Goal.defaultProps = {
+  handleDelete: null,
+  initialExpanded: false
 };
 
 class Goals extends Component {
@@ -85,36 +157,29 @@ class Goals extends Component {
         {goals.length === 0 ? (
           <NoDataMsg>{t('activities.expenses.noDataNotice')}</NoDataMsg>
         ) : (
-          <div className="mt3 pt3 border-top border-grey">
-            <CollapsibleList
-              items={goals}
-              getKey={goal => goal.key}
-              deleteItem={this.handleDelete}
-              header={(goal, i) => (
-                <Fragment>
-                  <div className="col-1 truncate">
-                    {i + 1}. <strong>Goal:</strong>
-                  </div>
-                  <div className="col-11 truncate">
-                    {plaintext(goal.description)}
-                  </div>
-                </Fragment>
-              )}
-              content={(goal, i) => (
-                <GoalForm
-                  goal={goal}
-                  idx={i}
-                  handleChange={this.handleSync}
-                  handleDelete={this.getDeleter(goal.key)}
-                />
-              )}
-            />
+          <div className="ds-u-border-top--1">
+            {goals.map((goal, i) => (
+              <Goal
+                key={goal.key}
+                goal={goal}
+                idx={i}
+                initialExpanded={goal.expanded}
+                handleChange={this.handleSync}
+                handleDelete={
+                  goals.length > 1 ? this.getDeleter(goal.key) : null
+                }
+              />
+            ))}
           </div>
         )}
 
-        <Btn extraCss="visibility--screen" onClick={this.handleAdd}>
+        <Button
+          className="ds-u-margin-top--4 visibility--screen"
+          onClick={this.handleAdd}
+        >
           {t('activities.goals.addGoalButtonText')}
-        </Btn>
+        </Button>
+        <hr />
       </Subsection>
     );
   }
