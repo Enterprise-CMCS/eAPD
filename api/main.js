@@ -27,6 +27,14 @@ if (process.env.PROXY_TRUST !== 'false') {
   );
 }
 
+// This endpoint doesn't do anything, but lets us verify that the server is
+// online without triggering any other processing - e.g., no authentication,
+// no cookie/token processing, etc.
+logger.silly('setting up heartbeat endpoint');
+server.get('/heartbeat', (_, res) => {
+  res.status(204).end();
+});
+
 server.use((req, res, next) => {
   req.id = uuid();
   req.meta = {};
