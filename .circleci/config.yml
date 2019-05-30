@@ -400,10 +400,12 @@ jobs:
     docker:
       - image: python:3
     steps:
+      - checkout
       - attach_workspace:
           at: ~/project
       - run:
           name: make sure the frontend changed
+          working_directory: ~/project
           command: |
             # git diff --exit-code will exit with a 0 if there were no changes
             # or a non-zero if there were changes, so stop this step gracefully
