@@ -35,9 +35,10 @@ function deployAPItoEC2() {
   # Configure AWS CLI with defaults
   configureAWS
 
-  # Get the instance ID of the current API EC2 instance, so we can delete it later
-  PREV_INSTANCE_ID=$(getCurrentTargetGroupInstanceID)
-  echo "• Found previous instance $PREV_INSTANCE_ID"
+  # Get the instance IDs of the current API EC2 production instances, so we can 
+  # delete them later
+  PREV_INSTANCE_INFOS=$(findExistingInstances)
+  echo "• Found previous instances: $PREV_INSTANCE_INFOS"
 
   # Create new EC2 instance
   INSTANCE_ID=$(createNewInstance)
@@ -60,14 +61,13 @@ function deployAPItoEC2() {
   echo "• Waiting for target to be healthy"
   waitForTargetToBeHealthy $INSTANCE_ID
 
-  # Once the new instance is healthy, we can take the old instance out of the
-  # ELB target group.
-  removeInstanceFromTargetGroup $PREV_INSTANCE_ID
-  echo "• Removed previous instance $PREV_INSTANCE_ID from ELB target group"
-
-  # And finally, we terminate it.
-  terminateInstance $PREV_INSTANCE_ID
-  echo "• Terminated previous instance $PREV_INSTANCE_ID"
+  # And finally, we terminate previous instances.
+  while read -r PREV_INSTANCE_INFO; do
+    BITS=(${PREV_INSTANCE_INFO//,/ })
+    PREV_INSTANCE_ID=$(echo ${BITS[0]} | tr -d '"')
+    terminateInstance $PREV_INSTANCE_ID
+    echo "• Terminated previous instance $PREV_INSTANCE_ID"
+  done <<< "$PREV_INSTANCE_INFOS"
 }
 
 # Reads deployment ecosystem data from the environment, builds a PM2
@@ -152,16 +152,15 @@ function createNewInstance() {
     | jq -r -c '.Instances[0].InstanceId'
 }
 
-# Get the EC2 instance ID of the instance currently in the ELB target group.
-# Echos the instance ID.
+# Finds any existing instances for production. Echos a newline-delimited list
+# of instance IDs and names.  E.g.:
 #
-# Expects global environment variables:
-#   AWS_PROD_API_TARGET_GROUP_ARN - The ARN of the target group to check
-function getCurrentTargetGroupInstanceID() {
-  aws elbv2 describe-target-health \
-    --target-group-arn $AWS_PROD_API_TARGET_GROUP_ARN \
-    --query 'TargetHealthDescriptions[*].Target.Id' \
-    | jq -r -c '.[0]'
+# "instance-id-1","instance-name-1"
+# "instance-id-2","instance-name-2"
+function findExistingInstances() {
+  aws ec2 describe-instances \
+    --filter "Name=tag:Name,Values=eapd-prod-auto" \
+    | jq -rc '.Reservations[].Instances[] | [.InstanceId, .Tags[].Value] | @csv'
 }
 
 # Gets the target health for an EC2 instance in an ELB target group
@@ -177,21 +176,6 @@ function getTargetHealth() {
     --target-group-arn $AWS_PROD_API_TARGET_GROUP_ARN \
     --targets Id=$1,Port=$AWS_PROD_API_PORT \
     | jq -r -c '.TargetHealthDescriptions[0].TargetHealth.State'
-}
-
-# Remove an EC2 instance from the ELB target group.
-#
-# $1 - ID of the EC2 instance to remove
-#
-# Expects global environment variables:
-#   AWS_PROD_API_PORT - Port the EC2 instance is listening on
-#   AWS_PROD_API_TARGET_GROUP_ARN - The ARN of the target group to remove the
-#     instance from.
-function removeInstanceFromTargetGroup() {
-  aws elbv2 deregister-targets \
-    --target-group-arn $AWS_PROD_API_TARGET_GROUP_ARN \
-    --targets Id=$1,Port=$AWS_PROD_API_PORT \
-    > /dev/null
 }
 
 # Terminate an EC2 instance
