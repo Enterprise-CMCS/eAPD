@@ -38,7 +38,9 @@ const GoalReview = ({ goal, idx, edit, handleDelete }) => (
       </div>
     }
   >
-    <p className="ds-u-margin-top--2">Benchmark: {goal.objective}</p>
+    <p className="ds-u-margin-top--2">
+      <strong>Benchmark:</strong> {goal.objective}
+    </p>
   </Review>
 );
 
