@@ -17,10 +17,9 @@ exports[`executive summary component renders correctly 1`] = `
       nested={false}
       resource="executiveSummary.summary"
     >
-      <Review
+      <StandardReview
         className=""
         editHref="#activity-a1"
-        editText="Edit"
         heading={
           <React.Fragment>
             Activity 
@@ -37,6 +36,7 @@ exports[`executive summary component renders correctly 1`] = `
         }
         headingLevel={4}
         key="a1"
+        onDeleteClick={null}
         onEditClick={[Function]}
       >
         <p>
@@ -81,11 +81,10 @@ exports[`executive summary component renders correctly 1`] = `
              Federal share)
           </li>
         </ul>
-      </Review>
-      <Review
+      </StandardReview>
+      <StandardReview
         className="ds-u-border-bottom--0"
         editHref="#activity-a2"
-        editText="Edit"
         heading={
           <React.Fragment>
             Activity 
@@ -102,6 +101,7 @@ exports[`executive summary component renders correctly 1`] = `
         }
         headingLevel={4}
         key="a2"
+        onDeleteClick={null}
         onEditClick={[Function]}
       >
         <p>
@@ -146,15 +146,17 @@ exports[`executive summary component renders correctly 1`] = `
              Federal share)
           </li>
         </ul>
-      </Review>
+      </StandardReview>
       <hr
         className="ds-u-border--dark ds-u-margin--0"
       />
-      <Review
+      <StandardReview
         className="ds-u-border--0"
-        editText="Edit"
+        editHref={null}
         heading="Total cost"
         headingLevel={4}
+        onDeleteClick={null}
+        onEditClick={[Function]}
       >
         <p>
           Verify that this information is correct.
@@ -209,7 +211,7 @@ exports[`executive summary component renders correctly 1`] = `
             </Dollars>
           </li>
         </ul>
-      </Review>
+      </StandardReview>
     </Subsection>
     <Connect(ConnectedWaypoint)
       id="executive-summary-budget-table"
