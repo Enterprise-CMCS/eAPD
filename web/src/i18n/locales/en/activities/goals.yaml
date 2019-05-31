@@ -12,11 +12,14 @@ instruction:
     improved health outcomes for benficiaries, transformation of public health services,
     enabling implementation of other initiatives, etc.
 noDataNotice: There are no goals set for this activity.
-goal:
-  title: 'Goal #{{number}}'
+
+description:
+  input:
+    label: Goal name
+
 objective:
-  title: Benchmarks
-  instruction:
-    detail: >-
+  input:
+    label: Benchmarks
+    hint: >-
       Briefly describe how the state will measure progress toward the identified goal.
-addGoalButtonText: Add a goal
+
