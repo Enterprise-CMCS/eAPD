@@ -11,9 +11,10 @@ import { makeSelectCostAllocateFFP } from '../../reducers/activities.selectors';
 
 class CostAllocateFFP extends Component {
   handleOther = year => e => {
+    console.log("calling handleOther with ", e);
     const { aKey, updateActivity } = this.props;
     const { value } = e.target;
-    const updates = { costAllocation: { [year]: { other: +value } } };
+    const updates = { costAllocation: { [year]: { other: parseFloat(value) } } };
 
     updateActivity(aKey, updates, true);
   };
