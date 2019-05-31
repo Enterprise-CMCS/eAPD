@@ -186,7 +186,10 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
             <p
               className="ds-u-margin-top--2"
             >
-              Benchmark: 
+              <strong>
+                Benchmark:
+              </strong>
+               
             </p>
           </div>
         </div>
@@ -303,7 +306,10 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
             <p
               className="ds-u-margin-top--2"
             >
-              Benchmark: 
+              <strong>
+                Benchmark:
+              </strong>
+               
             </p>
           </div>
         </div>
@@ -536,7 +542,10 @@ exports[`activity goals subsection the GoalReview component renders properly wit
   <p
     className="ds-u-margin-top--2"
   >
-    Benchmark: 
+    <strong>
+      Benchmark:
+    </strong>
+     
     goal benchmarks
   </p>
 </Review>
@@ -574,7 +583,10 @@ exports[`activity goals subsection the GoalReview component renders properly wit
   <p
     className="ds-u-margin-top--2"
   >
-    Benchmark: 
+    <strong>
+      Benchmark:
+    </strong>
+     
     goal benchmarks
   </p>
 </Review>
