@@ -76,7 +76,7 @@ const GoalForm = ({ goal, idx, done, handleChange }) => (
         defaultValue: ''
       })}
       value={goal.objective}
-      onChange={handleChange('idx', 'objective')}
+      onChange={handleChange(idx, 'objective')}
     />
 
     <Button variation="primary" className="ds-u-margin-top--4" onClick={done}>
@@ -141,11 +141,9 @@ class Goals extends Component {
     addActivityGoal(activityKey);
   };
 
-  handleDelete = goal => this.getDeleter(goal.key)();
-
-  handleSync = (index, field) => html => {
+  handleChange = (index, field) => ({ target: { value } }) => {
     const { activityKey, updateActivity } = this.props;
-    const updates = { goals: { [index]: { [field]: html } } };
+    const updates = { goals: { [index]: { [field]: value } } };
     updateActivity(activityKey, updates);
   };
 
@@ -164,7 +162,7 @@ class Goals extends Component {
                 goal={goal}
                 idx={i}
                 initialExpanded={goal.expanded}
-                handleChange={this.handleSync}
+                handleChange={this.handleChange}
                 handleDelete={
                   goals.length > 1 ? this.getDeleter(goal.key) : null
                 }
@@ -208,3 +206,12 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Goals);
+
+export {
+  Goals as plain,
+  Goal,
+  GoalForm,
+  GoalReview,
+  mapStateToProps,
+  mapDispatchToProps
+};
