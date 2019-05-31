@@ -9,8 +9,11 @@ const StandardReview = ({
   onEditClick,
   ...rest
 }) => {
+  // If there's an editHref, we need to catch the onEditClick event before
+  // passing it along so we can be certain the link gets clicked. Otherwise,
+  // a user could click in the button padding around the link and then the
+  // link wouldn't get clicked.
   const anchor = useRef(null);
-
   const editHandler = useMemo(
     () =>
       editHref
