@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const labelClasses = {
-  hidden: 'sr-only',
-  visible: 'block mb-tiny truncate'
+  hidden: 'ds-u-visibility--screen-reader',
+  visible: 'ds-h4 ds-u-display--block'
 };
 
 // a HOC for Text / Textarea input that includes
@@ -17,7 +17,7 @@ const InputWrapper = InputInner => {
     wrapperClass,
     ...rest
   }) => (
-    <div className={wrapperClass || 'mb2'}>
+    <div className={wrapperClass || 'ds-u-margin-bottom--2'}>
       <label
         htmlFor={name}
         className={hideLabel ? labelClasses.hidden : labelClasses.visible}
