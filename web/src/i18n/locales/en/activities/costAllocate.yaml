@@ -25,8 +25,8 @@ instruction:
   helpText: >-
     Include any participating non-Medicaid FTEs.
 methodology:
-  title: Description of cost allocation methodology
   instruction:
+    heading: Description of cost allocation methodology
     detail: >-
       Do not assume absence of other payers is sufficient cause for
       Medicaid to be primary payer. Limit ambiguity about other
@@ -35,7 +35,7 @@ methodology:
       For example, if no CHIP funds are being requested, include a statement in
       this section.
 ffp:
-  title: Federal Financial Partipation (FFP) and Cost Allocation
+  title: Federal Financial Participation (FFP) and Cost Allocation
   medicaidShare: Medicaid Share
   labels:
     other: Other Funding Amount
@@ -51,8 +51,8 @@ quarterly:
     contractor: Private Contractor Costs
     combined: Total Enhanced FFP
 otherFunding:
-  title: Other funding description
   instruction:
+    heading: Other funding description
     detail: >-
       Write a high level description to describe funding used to support this activity.
       (Review Letter 10‐016 for examples of grants for inclusion.)
