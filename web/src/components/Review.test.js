@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import React from 'react';
 
 import Review from './Review';
@@ -26,6 +26,25 @@ describe('Review wrapper component', () => {
     expect(
       shallow(<Review editHref="something">Hello</Review>)
     ).toMatchSnapshot();
+  });
+
+  it('clicks the link if an edit link is set, when the button is clicked', () => {
+    const component = mount(<Review editHref="something">Hello</Review>);
+
+    const handler = jest.fn();
+    component
+      .find('Review')
+      .find('Button')
+      .find('a')
+      .getDOMNode()
+      .addEventListener('click', handler);
+
+    component
+      .find('Review')
+      .find('Button')
+      .simulate('click');
+
+    expect(handler).toHaveBeenCalled();
   });
 
   it('renders properly if a delete handler is provided', () => {

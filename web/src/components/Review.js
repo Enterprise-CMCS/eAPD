@@ -1,6 +1,6 @@
 import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useMemo, useRef } from 'react';
 
 const StandardReview = ({
   children,
@@ -8,37 +8,58 @@ const StandardReview = ({
   onDeleteClick,
   onEditClick,
   ...rest
-}) => (
-  <Review
-    editContent={
-      <div className="nowrap">
-        <Button size="small" variation="transparent" onClick={onEditClick}>
-          {// If the editHref is set, create a link element here so it'll
-          // behave as intended on the outside.  Otherwise, the button
-          // content can just be text.
-          editHref ? <a href={editHref}>Edit</a> : 'Edit'}
-        </Button>
-        {onDeleteClick && (
-          // If there's a delete click handler, add a remove button to the
-          // header area and wire it up
-          <Fragment>
-            |
-            <Button
-              size="small"
-              variation="transparent"
-              onClick={onDeleteClick}
-            >
-              Remove
-            </Button>
-          </Fragment>
-        )}
-      </div>
-    }
-    {...rest}
-  >
-    {children}
-  </Review>
-);
+}) => {
+  const anchor = useRef(null);
+
+  const editHandler = useMemo(
+    () =>
+      editHref
+        ? (...args) => {
+            anchor.current.click();
+            onEditClick(...args);
+          }
+        : onEditClick,
+    [editHref]
+  );
+
+  return (
+    <Review
+      editContent={
+        <div className="nowrap">
+          <Button size="small" variation="transparent" onClick={editHandler}>
+            {// If the editHref is set, create a link element here so it'll
+            // behave as intended on the outside.  Otherwise, the button
+            // content can just be text.
+            editHref ? (
+              <a href={editHref} ref={anchor}>
+                Edit
+              </a>
+            ) : (
+              'Edit'
+            )}
+          </Button>
+          {onDeleteClick && (
+            // If there's a delete click handler, add a remove button to the
+            // header area and wire it up
+            <Fragment>
+              |
+              <Button
+                size="small"
+                variation="transparent"
+                onClick={onDeleteClick}
+              >
+                Remove
+              </Button>
+            </Fragment>
+          )}
+        </div>
+      }
+      {...rest}
+    >
+      {children}
+    </Review>
+  );
+};
 
 StandardReview.propTypes = {
   children: PropTypes.node.isRequired,
