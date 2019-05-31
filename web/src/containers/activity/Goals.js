@@ -58,8 +58,10 @@ const GoalForm = ({ goal, idx, done, handleChange }) => (
     <TextField
       name="name"
       className="data-entry-box"
-      label="Goal name"
-      hint={t('activities.goals.goal.instruction.detail', {
+      label={t('activities.goals.description.input.label', {
+        defaultValue: ''
+      })}
+      hint={t('activities.goals.description.input.hint', {
         defaultValue: ''
       })}
       value={goal.description}
@@ -69,10 +71,12 @@ const GoalForm = ({ goal, idx, done, handleChange }) => (
     <TextField
       name="milestones"
       className="data-entry-box"
-      label="Benchmarks"
+      label={t('activities.goals.objective.input.label', {
+        defaultValue: 'Benchmarks'
+      })}
       multiline
       rows={6}
-      hint={t('activities.goals.objective.instruction.detail', {
+      hint={t('activities.goals.objective.input.hint', {
         defaultValue: ''
       })}
       value={goal.objective}
@@ -175,7 +179,7 @@ class Goals extends Component {
           className="ds-u-margin-top--4 visibility--screen"
           onClick={this.handleAdd}
         >
-          {t('activities.goals.addGoalButtonText')}
+          Add a goal
         </Button>
         <hr />
       </Subsection>
