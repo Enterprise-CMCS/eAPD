@@ -57,7 +57,7 @@ class CostAllocateFFPQuarterly extends Component {
                 ))}
                 <th
                   className="right-align"
-                  id={`act_qbudget_fyy_subtotal`}
+                  id="act_qbudget_fyy_subtotal"
                 >
                   {t('table.subtotal')}
                 </th>
