@@ -11,37 +11,24 @@ import { FileDownload } from '../components/Icons';
 const ExportAndSubmit = ({ printApd: print }) => (
   <Waypoint id="export-and-submit">
     <Section isNumbered id="export-and-submit" resource="exportAndSubmit">
+    <h3>Download</h3>
       <p>
-        To submit your APD for analyst review, export the document as a PDF,
-        then send it to CMS just like you’ve done before.
+        Download a copy of your APD to review your work offline or as the first
+        step in submitting a completed APD to CMS. If you make changes, follow these
+        steps again at any time to download a new PDF.
       </p>
       <ol>
         <li>
           Select <strong>Export</strong> to open up your browser’s print
-          options.
+          options window. For longer PDFs this may take a few seconds.
         </li>
         <li>
-          In the print window, select <strong>Save as PDF</strong>. In Chrome,
-          this option is listed under <em>Destination</em>. In other browsers,
-          this option is part of a dropdown menu labeled <em>PDF</em>.
+          In the print window, select your PDF printer or Save to PDF, depending
+          on the options your browser offers.
         </li>
-
         <li>
-          Select <strong>Save</strong>. This will download a PDF to your
-          computer.
-        </li>
-
-        <li>
-          If you decide to make changes before you submit, follow those three
-          steps again to download a new PDF.
-        </li>
-
-        <li>
-          Email the completed APD to{' '}
-          <strong>
-            <a href="mailto:CMS-EAPD@cms.hhs.gov">CMS-EAPD@cms.hhs.gov</a>
-          </strong>
-          .
+          If prompted, provide a file name for the PDF. Then to download or open
+          it, select <strong>OK</strong> or <strong>Save</strong>.
         </li>
       </ol>
       <Button
@@ -55,6 +42,13 @@ const ExportAndSubmit = ({ printApd: print }) => (
           <FileDownload />
         </span>
       </Button>
+
+    <h3>Submit to CMS</h3>
+      <p>
+        Once you’ve exported a PDF of a completed APD, submit it for state officer
+        review by emailing the PDF to <a href="mailto:MedicaidHITECH@cms.hhs.gov">MedicaidHITECH@cms.hhs.gov</a>.
+      </p>
+
     </Section>
   </Waypoint>
 );

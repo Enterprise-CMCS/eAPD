@@ -66,7 +66,13 @@ tap.test('auth roles GET endpoint', async endpointTest => {
 
     handlerTest.test('sends back a list of roles', async validTest => {
       RoleModel.fetchAll.resolves({
-        toJSON: sinon.stub().returns('roles as json')
+        toJSON: sinon
+          .stub()
+          .returns([
+            { name: 'auth role 1' },
+            { name: 'auth role 2' },
+            { name: 'auth role 3' }
+          ])
       });
 
       await handler({}, res);
@@ -79,7 +85,11 @@ tap.test('auth roles GET endpoint', async endpointTest => {
       );
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        res.send.calledWith('roles as json'),
+        res.send.calledWith([
+          { name: 'auth role 1' },
+          { name: 'auth role 2' },
+          { name: 'auth role 3' }
+        ]),
         'body is JSON-ified roles'
       );
     });
