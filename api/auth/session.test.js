@@ -146,7 +146,8 @@ tap.test('session functions', async tests => {
 
         test.ok(
           cookies.set.calledWith('token', sinon.match.string, {
-            httpOnly: true
+            httpOnly: true,
+            overwrite: true
           }),
           'sets the cookie'
         );
@@ -187,7 +188,8 @@ tap.test('session functions', async tests => {
 
           test.ok(
             cookies.set.calledWith('token', sinon.match.string, {
-              httpOnly: true
+              httpOnly: true,
+              overwrite: true
             }),
             'sets the cookie'
           );

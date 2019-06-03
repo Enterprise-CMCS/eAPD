@@ -6,7 +6,16 @@ const allUsersHandler = async (req, res, UserModel) => {
   logger.silly(req, 'handling GET /users route');
   try {
     const users = await UserModel.fetchAll();
-    logger.silly(req, 'sending users', users.toJSON());
+    logger.silly(
+      req,
+      'sending users',
+      users
+        .toJSON()
+        .map(
+          ({ id, email, name, state, role }) =>
+            `id: ${id}, email: ${email}, name: ${name}, state: ${state}, auth role: ${role}`
+        )
+    );
     res.send(users.toJSON());
   } catch (e) {
     logger.error(req, e);
