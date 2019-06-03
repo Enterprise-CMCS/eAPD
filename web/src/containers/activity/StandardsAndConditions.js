@@ -11,7 +11,6 @@ import { STANDARDS } from '../../util';
 
 class StandardsAndConditions extends Component {
   sync = name => html => {
-    console.log('yo');
     const { activity, updateActivity } = this.props;
     const updates = { standardsAndConditions: { [name]: html }}
     updateActivity(activity.key, updates);
