@@ -63,7 +63,11 @@ tap.test('auth activities GET endpoint', async endpointTest => {
 
     handlerTest.test('sends back a list of activities', async validTest => {
       const toJSON = sinon.stub();
-      toJSON.returns('json stuff');
+      toJSON.returns([
+        { name: 'auth activity 1' },
+        { name: 'auth activity 2' },
+        { name: 'auth activity 3' }
+      ]);
       const activities = { toJSON };
       ActivityModel.fetchAll.resolves(activities);
 
@@ -71,7 +75,11 @@ tap.test('auth activities GET endpoint', async endpointTest => {
 
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        res.send.calledWith('json stuff'),
+        res.send.calledWith([
+          { name: 'auth activity 1' },
+          { name: 'auth activity 2' },
+          { name: 'auth activity 3' }
+        ]),
         'body is JSON-ified activities'
       );
     });

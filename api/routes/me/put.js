@@ -1,6 +1,7 @@
 const logger = require('../../logger')('me route put');
 const loggedIn = require('../../middleware').loggedIn;
 const deserializeUser = require('../../auth/serialization').deserializeUser;
+const auditor = require('../../audit');
 
 const editableFields = ['name', 'password', 'phone', 'position'];
 
@@ -18,6 +19,7 @@ const getUserJSON = user => ({
 module.exports = (app, { deserialize = deserializeUser } = {}) => {
   logger.silly('setting up PUT endpoint');
   app.put('/me', loggedIn, async (req, res) => {
+    const audit = auditor(auditor.actions.MODIFY_ACCOUNT, req);
     try {
       // If the body doesn't include any editable fields, we
       // can bail out now.  Hooray!
@@ -27,9 +29,11 @@ module.exports = (app, { deserialize = deserializeUser } = {}) => {
       }
 
       const dbUser = req.user.model;
+      audit.target({ id: dbUser.get('id'), email: dbUser.get('email') });
 
       editableFields.forEach(f => {
         if (req.body[f]) {
+          audit.set(f, req.body[f]);
           dbUser.set(f, req.body[f]);
         }
       });
@@ -45,6 +49,7 @@ module.exports = (app, { deserialize = deserializeUser } = {}) => {
       }
 
       await dbUser.save();
+      audit.log();
 
       // The GET /me method relies on the data from the deserializer. Rather
       // than duplicate that logic, just call it.  Hooray x 2!
