@@ -3,19 +3,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity as updateActivityAction } from '../../actions/activities';
-import { Textarea } from '../../components/Inputs';
+import { RichText } from '../../components/Inputs';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
-import { t } from '../../i18n';
 import { selectActivityByKey } from '../../reducers/activities.selectors';
 import { STANDARDS } from '../../util';
 
 class StandardsAndConditions extends Component {
-  handleChange = field => e => {
-    const { value } = e.target;
+  sync = name => html => {
     const { activity, updateActivity } = this.props;
-
-    const updates = { standardsAndConditions: { [field]: value } };
+    const updates = { standardsAndConditions: { [name]: html }}
     updateActivity(activity.key, updates);
   };
 
@@ -25,21 +22,22 @@ class StandardsAndConditions extends Component {
     return (
       <Subsection resource="activities.standardsAndConditions" nested>
         {STANDARDS.map(std => (
-          <div key={std.id}>
+          <div
+            key={std.id}
+            className="ds-u-margin-bottom--6"
+          >
             <Instruction
               source={`activities.standardsAndConditions.${std.id}.instruction`}
+              headingDisplay={{
+                level: 'h4',
+                className: 'ds-h4'
+              }}
             />
-
-            <Textarea
-              name={`activity-${activity.id}-condition-${std.id}`}
-              label={t(
-                `activities.standardsAndConditions.${std.id}.instruction.short`
-              )}
-              hideLabel
-              rows="7"
-              className="m0 textarea textarea-m"
-              value={activity.standardsAndConditions[std.id]}
-              onChange={this.handleChange(std.id)}
+            
+            <RichText
+              content={activity.standardsAndConditions[std.id]}
+              onSync={this.sync(std.id)}
+              editorClassName="rte-textarea-l"
             />
           </div>
         ))}
