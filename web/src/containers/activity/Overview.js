@@ -14,10 +14,6 @@ const Description = props => {
   const { activity, updateActivity } = props;
   const { alternatives, description, summary } = activity;
 
-  const sync = name => html => {
-    updateActivity(activity.key, { [name]: html });
-  };
-
   const overviewLabel = useMemo(
     () =>
       t('activities.overview.activityOverviewInput.label', {
@@ -62,6 +58,12 @@ const Description = props => {
       ),
     [activity.fundingSource]
   );
+  const syncDescription = useCallback(
+    html => {
+      updateActivity(activity.key, { description: html });
+    },
+    [activity.key]
+  );
 
   const alternativesLabel = useMemo(
     () =>
@@ -76,6 +78,12 @@ const Description = props => {
         defaultValue: ''
       }),
     []
+  );
+  const syncAlternatives = useCallback(
+    html => {
+      updateActivity(activity.key, { alternatives: html });
+    },
+    [activity.key]
   );
 
   return (
@@ -98,7 +106,7 @@ const Description = props => {
         )}
         <RichText
           content={description}
-          onSync={sync('description')}
+          onSync={syncDescription}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -108,7 +116,7 @@ const Description = props => {
         <Instruction source="activities.overview.activityAlternativesInput" />
         <RichText
           content={alternatives}
-          onSync={sync('alternatives')}
+          onSync={syncAlternatives}
           editorClassName="rte-textarea-l"
         />
       </div>
