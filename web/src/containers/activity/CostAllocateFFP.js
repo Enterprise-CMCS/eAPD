@@ -50,7 +50,7 @@ class CostAllocateFFP extends Component {
                 onChange={this.handleOther(year)}
               />
 
-              <label className="ds-h4 ds-u-display--block">{t('activities.costAllocate.ffp.medicaidShare')}</label>
+              <p className="ds-h4 ds-u-display--block">{t('activities.costAllocate.ffp.medicaidShare')}</p>
               <p>
                 <Dollars long>{medicaidShare}</Dollars>
               </p>
@@ -63,7 +63,7 @@ class CostAllocateFFP extends Component {
                 )}
                 labelClassName='ds-h4'
                 choices={[
-                  { label: '90-10', value:'90-10' },
+                  { label: '90-10', value: '90-10' },
                   { label: '75-25', value: '75-25' },
                   { label: '50-50', value: '50-50' }
                 ]}
