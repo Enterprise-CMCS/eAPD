@@ -69,14 +69,44 @@ tap.test('user GET endpoint', async endpointTest => {
 
     handlerTest.test('sends back a list of users', async validTest => {
       UserModel.fetchAll.resolves({
-        toJSON: sinon.stub().returns('object-as-json')
+        toJSON: sinon.stub().returns([
+          {
+            id: 1,
+            email: 'user@one.com',
+            name: 'User 1',
+            state: 'us1',
+            role: 'role 1'
+          },
+          {
+            id: 2,
+            email: 'user@two.net',
+            name: 'User 2',
+            state: 'us2',
+            role: 'role 2'
+          }
+        ])
       });
 
       await handler({}, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        res.send.calledWith('object-as-json'),
+        res.send.calledWith([
+          {
+            id: 1,
+            email: 'user@one.com',
+            name: 'User 1',
+            state: 'us1',
+            role: 'role 1'
+          },
+          {
+            id: 2,
+            email: 'user@two.net',
+            name: 'User 2',
+            state: 'us2',
+            role: 'role 2'
+          }
+        ]),
         'body is set to the list of users'
       );
     });
