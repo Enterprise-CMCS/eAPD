@@ -18,7 +18,7 @@ services:
 
   web:
     build: ./web
-    image: cms-eapd/web:68660de6bd4a20fbc9efe15e12cfe164
+    image: cms-eapd/web:7c65129c58231d270f2d40daf70e5ef4
     environment:
       - API_URL=http://localhost:8081
     volumes:
@@ -31,7 +31,7 @@ services:
       - 8080:8001
   
   storybook:
-    image: cms-eapd/web:68660de6bd4a20fbc9efe15e12cfe164
+    image: cms-eapd/web:7c65129c58231d270f2d40daf70e5ef4
     volumes:
       - ./web:/app
       - /app/node_modules
