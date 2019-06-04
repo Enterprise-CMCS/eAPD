@@ -63,36 +63,44 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
         ]
       }
       label="Federal-State Split"
-      labelClassName="ds-h4"
+      labelClassName="ds-h5"
       name="ffp-1066"
       onChange={[Function]}
       type="select"
       value="90-10"
     />
-    <p
-      className="ds-h4"
+    <div
+      className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2"
     >
-      Federal
-    </p>
-    <p>
-      <Dollars
-        long={true}
+      <p
+        className="ds-u-margin-bottom--0"
       >
-        261
-      </Dollars>
-    </p>
-    <p
-      className="ds-h4"
-    >
-      State
-    </p>
-    <p>
-      <Dollars
-        long={true}
+        <strong>
+          Federal
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
+        >
+          261
+        </Dollars>
+      </p>
+      <p
+        className="ds-u-margin-bottom--0"
       >
-        29
-      </Dollars>
-    </p>
+        <strong>
+          State
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
+        >
+          29
+        </Dollars>
+      </p>
+    </div>
     <Connect(CostAllocateFFPQuarterly)
       aKey="activity key"
       year="1066"
@@ -155,36 +163,44 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
         ]
       }
       label="Federal-State Split"
-      labelClassName="ds-h4"
+      labelClassName="ds-h5"
       name="ffp-1067"
       onChange={[Function]}
       type="select"
       value="10-90"
     />
-    <p
-      className="ds-h4"
+    <div
+      className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2"
     >
-      Federal
-    </p>
-    <p>
-      <Dollars
-        long={true}
+      <p
+        className="ds-u-margin-bottom--0"
       >
-        300
-      </Dollars>
-    </p>
-    <p
-      className="ds-h4"
-    >
-      State
-    </p>
-    <p>
-      <Dollars
-        long={true}
+        <strong>
+          Federal
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
+        >
+          300
+        </Dollars>
+      </p>
+      <p
+        className="ds-u-margin-bottom--0"
       >
-        2700
-      </Dollars>
-    </p>
+        <strong>
+          State
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
+        >
+          2700
+        </Dollars>
+      </p>
+    </div>
     <Connect(CostAllocateFFPQuarterly)
       aKey="activity key"
       year="1067"
