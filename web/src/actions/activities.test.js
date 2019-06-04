@@ -129,7 +129,11 @@ describe('activities actions', () => {
         expectedActions.push(updatedBudgetAction(state));
       }
 
-      store.dispatch(actions[method]('activity key', 'item key'));
+      store.dispatch(
+        actions[method]('activity key', 'item key', {
+          global: { confirm: sinon.stub().returns(true) }
+        })
+      );
 
       expect(store.getActions()).toEqual(expectedActions);
     });
