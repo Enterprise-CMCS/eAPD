@@ -2,7 +2,7 @@
 
 exports[`save button component handles changing based on behavior shows error alert if save fails 1`] = `
 <div
-  className="save-button--container ds-u-margin-bottom--3"
+  className="save-button--container ds-u-margin-bottom--3 visibility--screen"
 >
   <div
     className="save-button--alert"
@@ -26,7 +26,7 @@ exports[`save button component handles changing based on behavior shows error al
 
 exports[`save button component handles changing based on behavior shows success alert if saved 1`] = `
 <div
-  className="save-button--container ds-u-margin-bottom--3"
+  className="save-button--container ds-u-margin-bottom--3 visibility--screen"
 >
   <div
     className="save-button--alert"
@@ -50,7 +50,7 @@ exports[`save button component handles changing based on behavior shows success 
 
 exports[`save button component handles changing based on behavior shows success alert if saved 2`] = `
 <div
-  className="save-button--container ds-u-margin-bottom--3"
+  className="save-button--container ds-u-margin-bottom--3 visibility--screen"
 >
   <div
     className="save-button--alert"
@@ -67,7 +67,7 @@ exports[`save button component handles changing based on behavior shows success 
 
 exports[`save button component renders if dirty, not working, no error 1`] = `
 <div
-  className="save-button--container ds-u-margin-bottom--3"
+  className="save-button--container ds-u-margin-bottom--3 visibility--screen"
 >
   <div
     className="save-button--alert"
@@ -84,7 +84,7 @@ exports[`save button component renders if dirty, not working, no error 1`] = `
 
 exports[`save button component renders if dirty, working, no error 1`] = `
 <div
-  className="save-button--container ds-u-margin-bottom--3"
+  className="save-button--container ds-u-margin-bottom--3 visibility--screen"
 >
   <div
     className="save-button--alert"
@@ -105,7 +105,7 @@ exports[`save button component renders if dirty, working, no error 1`] = `
 
 exports[`save button component renders if not dirty, not working, no error 1`] = `
 <div
-  className="save-button--container ds-u-margin-bottom--3"
+  className="save-button--container ds-u-margin-bottom--3 visibility--screen"
 >
   <div
     className="save-button--alert"
@@ -122,7 +122,7 @@ exports[`save button component renders if not dirty, not working, no error 1`] =
 
 exports[`save button component renders if not dirty, working, no error 1`] = `
 <div
-  className="save-button--container ds-u-margin-bottom--3"
+  className="save-button--container ds-u-margin-bottom--3 visibility--screen"
 >
   <div
     className="save-button--alert"

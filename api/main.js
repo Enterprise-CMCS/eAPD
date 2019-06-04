@@ -16,6 +16,25 @@ const endpointCoverage = require('./endpointCoverageMiddleware');
 const server = express();
 
 endpointCoverage.registerCoverageMiddleware(server);
+
+if (process.env.PROXY_TRUST !== 'false') {
+  // If there is a non-false PROXY_TRUST value, use it. If the value is 'true',
+  // convert to a boolean to trust everything. This will use the left-most
+  // value in X-FORWARDED-FOR as the requestor IP address.
+  server.set(
+    'trust proxy',
+    process.env.PROXY_TRUST === 'true' || process.env.PROXY_TRUST
+  );
+}
+
+// This endpoint doesn't do anything, but lets us verify that the server is
+// online without triggering any other processing - e.g., no authentication,
+// no cookie/token processing, etc.
+logger.silly('setting up heartbeat endpoint');
+server.get('/heartbeat', (_, res) => {
+  res.status(204).end();
+});
+
 server.use((req, res, next) => {
   req.id = uuid();
   req.meta = {};
