@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ContractorResources from './ContractorResources';
 import CostAllocate from './CostAllocate';
 import Costs from './Costs';
-import Description from './Description';
+import Overview from './Overview';
 import Goals from './Goals';
 import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
@@ -29,7 +29,7 @@ const makeTitle = ({ name, fundingSource }, i) => {
 };
 
 const components = [
-  Description,
+  Overview,
   Goals,
   Schedule,
   Costs,

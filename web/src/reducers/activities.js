@@ -32,7 +32,12 @@ export const setKeyGenerator = fn => {
   generateKey = fn;
 };
 
-const newGoal = () => ({ key: generateKey(), description: '', objective: '' });
+const newGoal = () => ({
+  key: generateKey(),
+  description: '',
+  expanded: true,
+  objective: ''
+});
 
 const newMilestone = (milestone = '', endDate = '') => ({
   key: generateKey(),
