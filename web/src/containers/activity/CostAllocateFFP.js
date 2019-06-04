@@ -61,7 +61,7 @@ class CostAllocateFFP extends Component {
                 label={t(
                   'activities.costAllocate.ffp.labels.fedStateSplit'
                 )}
-                labelClassName='ds-h4'
+                labelClassName='ds-h5'
                 choices={[
                   { label: '90-10', value: '90-10' },
                   { label: '75-25', value: '75-25' },
@@ -70,15 +70,16 @@ class CostAllocateFFP extends Component {
                 value={ffpSelectVal}
                 onChange={this.handleFFP(year)}
               />
-
-              <p className="ds-h4">Federal</p>
-              <p>
-                <Dollars long>{allocations.federal}</Dollars>
-              </p>
-              <p className="ds-h4">State</p>
-              <p>
-                <Dollars long>{allocations.state}</Dollars>
-              </p>
+              <div className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2">
+                <p className="ds-u-margin-bottom--0"><strong>Federal</strong></p>
+                <p>
+                  <Dollars long>{allocations.federal}</Dollars>
+                </p>
+                <p className="ds-u-margin-bottom--0"><strong>State</strong></p>
+                <p>
+                  <Dollars long>{allocations.state}</Dollars>
+                </p>
+              </div>
               <CostAllocateFFPQuarterly aKey={aKey} year={year}/>
               <hr />
             </div>
