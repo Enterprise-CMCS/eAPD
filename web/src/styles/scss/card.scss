@@ -4,6 +4,7 @@
   background-color: $color-gray-lightest;
   padding-top: $spacer-7;
   padding-bottom: $spacer-7;
+  min-height: 60vh; // 100 is too much, but no min-height puts a white gap under the gray background
 }
 
 .card {
