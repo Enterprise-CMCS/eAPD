@@ -175,6 +175,7 @@ export const fromAPI = (activityAPI, years) => {
 
     goals: goals.map(g => ({
       ...replaceNulls(g),
+      expanded: false,
       key: generateKey()
     })),
 
