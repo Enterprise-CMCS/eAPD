@@ -53,7 +53,7 @@ const Subsection = ({ children, id, nested, resource }) => {
         </h3>
       )}
       {nested && (
-        <h4 id={id} className="ds-h3">
+        <h4 id={id} className="ds-h4">
           {title}
         </h4>
       )}
