@@ -126,34 +126,8 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
     handleDelete={[Function]}
     idx={0}
   >
-    <Review
-      editContent={
-        <div
-          className="nowrap"
-        >
-          <Button
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
-          >
-            Edit
-          </Button>
-          <React.Fragment>
-            |
-            <Button
-              onClick={[Function]}
-              size="small"
-              type="button"
-              variation="transparent"
-            >
-              Remove
-            </Button>
-          </React.Fragment>
-        </div>
-      }
-      editHref="#"
-      editText="Edit"
+    <StandardReview
+      editHref={null}
       heading={
         <h4
           className="ds-h4"
@@ -162,72 +136,110 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
           . 
         </h4>
       }
+      onDeleteClick={[Function]}
       onEditClick={[Function]}
     >
-      <div
-        className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
-      >
-        <div
-          className="ds-u-margin-right--2"
-        >
-          <h3
-            className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
-          >
-            <h4
-              className="ds-h4"
-            >
-              1
-              . 
-            </h4>
-          </h3>
+      <Review
+        editContent={
           <div
-            className="ds-c-review__body"
+            className="nowrap"
           >
-            <p
-              className="ds-u-margin-top--2"
-            >
-              <strong>
-                Benchmark:
-              </strong>
-               
-            </p>
-          </div>
-        </div>
-        <div
-          className="nowrap"
-        >
-          <Button
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
-          >
-            <button
-              className="ds-c-button ds-c-button--transparent ds-c-button--small"
+            <Button
               onClick={[Function]}
+              size="small"
               type="button"
+              variation="transparent"
             >
               Edit
-            </button>
-          </Button>
-          |
-          <Button
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
+            </Button>
+            <React.Fragment>
+              |
+              <Button
+                onClick={[Function]}
+                size="small"
+                type="button"
+                variation="transparent"
+              >
+                Remove
+              </Button>
+            </React.Fragment>
+          </div>
+        }
+        editText="Edit"
+        heading={
+          <h4
+            className="ds-h4"
           >
-            <button
-              className="ds-c-button ds-c-button--transparent ds-c-button--small"
-              onClick={[Function]}
-              type="button"
+            1
+            . 
+          </h4>
+        }
+      >
+        <div
+          className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
+        >
+          <div
+            className="ds-u-margin-right--2"
+          >
+            <h3
+              className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
             >
-              Remove
-            </button>
-          </Button>
+              <h4
+                className="ds-h4"
+              >
+                1
+                . 
+              </h4>
+            </h3>
+            <div
+              className="ds-c-review__body"
+            >
+              <p
+                className="ds-u-margin-top--2"
+              >
+                <strong>
+                  Benchmark:
+                </strong>
+                 
+              </p>
+            </div>
+          </div>
+          <div
+            className="nowrap"
+          >
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Edit
+              </button>
+            </Button>
+            |
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Remove
+              </button>
+            </Button>
+          </div>
         </div>
-      </div>
-    </Review>
+      </Review>
+    </StandardReview>
   </GoalReview>
 </Goal>
 `;
@@ -246,34 +258,8 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
     handleDelete={[Function]}
     idx={0}
   >
-    <Review
-      editContent={
-        <div
-          className="nowrap"
-        >
-          <Button
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
-          >
-            Edit
-          </Button>
-          <React.Fragment>
-            |
-            <Button
-              onClick={[Function]}
-              size="small"
-              type="button"
-              variation="transparent"
-            >
-              Remove
-            </Button>
-          </React.Fragment>
-        </div>
-      }
-      editHref="#"
-      editText="Edit"
+    <StandardReview
+      editHref={null}
       heading={
         <h4
           className="ds-h4"
@@ -282,72 +268,110 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
           . 
         </h4>
       }
+      onDeleteClick={[Function]}
       onEditClick={[Function]}
     >
-      <div
-        className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
-      >
-        <div
-          className="ds-u-margin-right--2"
-        >
-          <h3
-            className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
-          >
-            <h4
-              className="ds-h4"
-            >
-              1
-              . 
-            </h4>
-          </h3>
+      <Review
+        editContent={
           <div
-            className="ds-c-review__body"
+            className="nowrap"
           >
-            <p
-              className="ds-u-margin-top--2"
-            >
-              <strong>
-                Benchmark:
-              </strong>
-               
-            </p>
-          </div>
-        </div>
-        <div
-          className="nowrap"
-        >
-          <Button
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
-          >
-            <button
-              className="ds-c-button ds-c-button--transparent ds-c-button--small"
+            <Button
               onClick={[Function]}
+              size="small"
               type="button"
+              variation="transparent"
             >
               Edit
-            </button>
-          </Button>
-          |
-          <Button
-            onClick={[Function]}
-            size="small"
-            type="button"
-            variation="transparent"
+            </Button>
+            <React.Fragment>
+              |
+              <Button
+                onClick={[Function]}
+                size="small"
+                type="button"
+                variation="transparent"
+              >
+                Remove
+              </Button>
+            </React.Fragment>
+          </div>
+        }
+        editText="Edit"
+        heading={
+          <h4
+            className="ds-h4"
           >
-            <button
-              className="ds-c-button ds-c-button--transparent ds-c-button--small"
-              onClick={[Function]}
-              type="button"
+            1
+            . 
+          </h4>
+        }
+      >
+        <div
+          className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
+        >
+          <div
+            className="ds-u-margin-right--2"
+          >
+            <h3
+              className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
             >
-              Remove
-            </button>
-          </Button>
+              <h4
+                className="ds-h4"
+              >
+                1
+                . 
+              </h4>
+            </h3>
+            <div
+              className="ds-c-review__body"
+            >
+              <p
+                className="ds-u-margin-top--2"
+              >
+                <strong>
+                  Benchmark:
+                </strong>
+                 
+              </p>
+            </div>
+          </div>
+          <div
+            className="nowrap"
+          >
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Edit
+              </button>
+            </Button>
+            |
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Remove
+              </button>
+            </Button>
+          </div>
         </div>
-      </div>
-    </Review>
+      </Review>
+    </StandardReview>
   </GoalReview>
 </Goal>
 `;
@@ -500,34 +524,8 @@ exports[`activity goals subsection the GoalForm component renders properly 1`] =
 `;
 
 exports[`activity goals subsection the GoalReview component renders properly with a delete handler 1`] = `
-<Review
-  editContent={
-    <div
-      className="nowrap"
-    >
-      <Button
-        onClick={[Function]}
-        size="small"
-        type="button"
-        variation="transparent"
-      >
-        Edit
-      </Button>
-      <React.Fragment>
-        |
-        <Button
-          onClick={[Function]}
-          size="small"
-          type="button"
-          variation="transparent"
-        >
-          Remove
-        </Button>
-      </React.Fragment>
-    </div>
-  }
-  editHref="#"
-  editText="Edit"
+<StandardReview
+  editHref={null}
   heading={
     <h4
       className="ds-h4"
@@ -537,6 +535,7 @@ exports[`activity goals subsection the GoalReview component renders properly wit
       goal name
     </h4>
   }
+  onDeleteClick={[Function]}
   onEditClick={[Function]}
 >
   <p
@@ -548,27 +547,12 @@ exports[`activity goals subsection the GoalReview component renders properly wit
      
     goal benchmarks
   </p>
-</Review>
+</StandardReview>
 `;
 
 exports[`activity goals subsection the GoalReview component renders properly without a delete handler 1`] = `
-<Review
-  editContent={
-    <div
-      className="nowrap"
-    >
-      <Button
-        onClick={[Function]}
-        size="small"
-        type="button"
-        variation="transparent"
-      >
-        Edit
-      </Button>
-    </div>
-  }
-  editHref="#"
-  editText="Edit"
+<StandardReview
+  editHref={null}
   heading={
     <h4
       className="ds-h4"
@@ -578,6 +562,7 @@ exports[`activity goals subsection the GoalReview component renders properly wit
       goal name
     </h4>
   }
+  onDeleteClick={null}
   onEditClick={[Function]}
 >
   <p
@@ -589,7 +574,7 @@ exports[`activity goals subsection the GoalReview component renders properly wit
      
     goal benchmarks
   </p>
-</Review>
+</StandardReview>
 `;
 
 exports[`activity goals subsection the Goals commponent, wrapping all the others with no goals renders properly 1`] = `

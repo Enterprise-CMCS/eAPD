@@ -1,7 +1,7 @@
-import { Button, Review, TextField } from '@cmsgov/design-system-core';
+import { Button, TextField } from '@cmsgov/design-system-core';
 
 import PropTypes from 'prop-types';
-import React, { Component, Fragment, useState } from 'react';
+import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -10,6 +10,7 @@ import {
   updateActivity as updateActivityAction
 } from '../../actions/activities';
 import NoDataMsg from '../../components/NoDataMsg';
+import Review from '../../components/Review';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
@@ -20,23 +21,8 @@ const GoalReview = ({ goal, idx, edit, handleDelete }) => (
         {idx + 1}. {goal.description}
       </h4>
     }
-    editHref="#"
+    onDeleteClick={handleDelete}
     onEditClick={edit}
-    editContent={
-      <div className="nowrap">
-        <Button size="small" variation="transparent" onClick={edit}>
-          Edit
-        </Button>
-        {handleDelete && (
-          <Fragment>
-            |
-            <Button size="small" variation="transparent" onClick={handleDelete}>
-              Remove
-            </Button>
-          </Fragment>
-        )}
-      </div>
-    }
   >
     <p className="ds-u-margin-top--2">
       <strong>Benchmark:</strong> {goal.objective}

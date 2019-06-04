@@ -2,13 +2,13 @@ import {
   Button,
   Choice,
   FormLabel,
-  Review,
   TextField
 } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { t } from '../i18n';
 import Dollars from '../components/Dollars';
+import Review from '../components/Review';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
@@ -161,31 +161,8 @@ class ApdStateKeyPerson extends Component {
           ) : (
             <Review
               heading={`${number}. ${person.name}`}
-              editHref="#"
+              onDeleteClick={primary ? null : remove}
               onEditClick={this.toggleExpanded}
-              editContent={
-                <div>
-                  <Button
-                    size="small"
-                    variation="transparent"
-                    onClick={this.toggleExpanded}
-                  >
-                    Edit
-                  </Button>
-                  {!primary && (
-                    <Fragment>
-                      |
-                      <Button
-                        size="small"
-                        variation="transparent"
-                        onClick={remove}
-                      >
-                        Remove
-                      </Button>
-                    </Fragment>
-                  )}
-                </div>
-              }
             >
               <ul className="ds-c-list--bare">
                 <li>{person.position}</li>
