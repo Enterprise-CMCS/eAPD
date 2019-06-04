@@ -155,12 +155,12 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
       editHref="#"
       editText="Edit"
       heading={
-        <h5
+        <h4
           className="ds-h4"
         >
           1
           . 
-        </h5>
+        </h4>
       }
       onEditClick={[Function]}
     >
@@ -173,12 +173,12 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
           <h3
             className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
           >
-            <h5
+            <h4
               className="ds-h4"
             >
               1
               . 
-            </h5>
+            </h4>
           </h3>
           <div
             className="ds-c-review__body"
@@ -275,12 +275,12 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
       editHref="#"
       editText="Edit"
       heading={
-        <h5
+        <h4
           className="ds-h4"
         >
           1
           . 
-        </h5>
+        </h4>
       }
       onEditClick={[Function]}
     >
@@ -293,12 +293,12 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
           <h3
             className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
           >
-            <h5
+            <h4
               className="ds-h4"
             >
               1
               . 
-            </h5>
+            </h4>
           </h3>
           <div
             className="ds-c-review__body"
@@ -529,13 +529,13 @@ exports[`activity goals subsection the GoalReview component renders properly wit
   editHref="#"
   editText="Edit"
   heading={
-    <h5
+    <h4
       className="ds-h4"
     >
       1
       . 
       goal name
-    </h5>
+    </h4>
   }
   onEditClick={[Function]}
 >
@@ -551,7 +551,7 @@ exports[`activity goals subsection the GoalReview component renders properly wit
 </Review>
 `;
 
-exports[`activity goals subsection the GoalReview component renders properly without a delete delete 1`] = `
+exports[`activity goals subsection the GoalReview component renders properly without a delete handler 1`] = `
 <Review
   editContent={
     <div
@@ -570,13 +570,13 @@ exports[`activity goals subsection the GoalReview component renders properly wit
   editHref="#"
   editText="Edit"
   heading={
-    <h5
+    <h4
       className="ds-h4"
     >
       1
       . 
       goal name
-    </h5>
+    </h4>
   }
   onEditClick={[Function]}
 >
