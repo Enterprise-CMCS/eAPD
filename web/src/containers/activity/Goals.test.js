@@ -244,7 +244,7 @@ describe('activity goals subsection', () => {
     const edit = sandbox.spy();
     const handleDelete = sandbox.spy();
 
-    it('renders properly without a delete delete', () => {
+    it('renders properly without a delete handler', () => {
       expect(
         shallow(
           <GoalReview

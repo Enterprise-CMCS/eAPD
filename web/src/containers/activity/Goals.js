@@ -16,9 +16,9 @@ import { t } from '../../i18n';
 const GoalReview = ({ goal, idx, edit, handleDelete }) => (
   <Review
     heading={
-      <h5 className="ds-h4">
+      <h4 className="ds-h4">
         {idx + 1}. {goal.description}
-      </h5>
+      </h4>
     }
     editHref="#"
     onEditClick={edit}
