@@ -9,6 +9,7 @@ const defaults = {
   LOG_LEVEL: 'info',
   LOG_FILE: 'false',
   LOG_CONSOLE: 'true',
+  PROXY_TRUST: 'false',
   STORE_PATH: '',
   STORE_TYPE: 'null' // default to using the /dev/null store
 };
@@ -35,16 +36,19 @@ process.env = Object.assign({}, defaults, upsEnv, process.env);
 
 // Don't require this until process.env is finished setting up, since that
 // defines how the logger works.
-const logger = require('./logger')('env setup')
+const logger = require('./logger')('env setup');
 
 // Convert the SESSION_SECRET from a hex string to a bunch of bytes, if
 // applicable.
 if (process.env.SESSION_SECRET.match(/^[a-f0-9]+$/i)) {
   process.env.SESSION_SECRET = Buffer.from(process.env.SESSION_SECRET, 'hex');
 } else {
-  logger.warn('SESSION_SECRET should be a hex string')
+  logger.warn('SESSION_SECRET should be a hex string');
 }
 
 if (process.env.SESSION_SECRET.length * 8 < 256) {
-  logger.warn(`SESSION_SECRET is ${process.env.SESSION_SECRET.length * 8} bits - should be AT LEAST 256 bits [see: https://tools.ietf.org/html/rfc7518#section-3.2]`)
+  logger.warn(
+    `SESSION_SECRET is ${process.env.SESSION_SECRET.length *
+      8} bits - should be AT LEAST 256 bits [see: https://tools.ietf.org/html/rfc7518#section-3.2]`
+  );
 }

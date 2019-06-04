@@ -3,6 +3,7 @@ const defaultRoleModel = require('../../db').models.role;
 const defaultStateModel = require('../../db').models.state;
 const defaultUserModel = require('../../db').models.user;
 const can = require('../../middleware').can;
+const auditor = require('../../audit');
 
 module.exports = (
   app,
@@ -14,6 +15,7 @@ module.exports = (
 ) => {
   logger.silly('setting up PUT /users/:id route');
   app.put('/users/:id', can('add-users'), async (req, res) => {
+    const audit = auditor(auditor.actions.MODIFY_ACCOUNT, req);
     logger.silly(req, 'handling PUT /users/:id route');
     logger.silly(req, `attempting to update user [${req.params.id}]`);
 
@@ -40,6 +42,10 @@ module.exports = (
         );
         return res.status(404).end();
       }
+      audit.target({
+        id: targetUser.get('id'),
+        emmail: targetUser.get('email')
+      });
       logger.verbose(
         req,
         `request to modify user [${targetUser.get('email')}]`
@@ -49,6 +55,7 @@ module.exports = (
       // all willy-nilly.
       ['email', 'name', 'password', 'position', 'phone'].forEach(field => {
         if (req.body[field]) {
+          audit.set(field, req.body[field]);
           targetUser.set(field, req.body[field]);
         }
       });
@@ -63,6 +70,7 @@ module.exports = (
         const validStateIDs = validStates.map(state => state.get('id'));
 
         if (validStateIDs.some(role => role === req.body.state)) {
+          audit.set('state_id', req.body.state);
           targetUser.set('state_id', req.body.state);
         } else {
           logger.verbose(`state [${req.body.state}] is invalid`);
@@ -81,6 +89,7 @@ module.exports = (
         const validRoleNames = validRoles.map(role => role.get('name'));
 
         if (validRoleNames.some(role => role === req.body.role)) {
+          audit.set('auth_role', req.body.role);
           targetUser.set('auth_role', req.body.role);
         } else {
           logger.verbose(`role [${req.body.role}] is invalid`);
@@ -93,9 +102,11 @@ module.exports = (
 
       // And provide a way to unset the user's state or role.
       if (req.body.state === '') {
+        audit.set('state_id', null);
         targetUser.set('state_id', null);
       }
       if (req.body.role === '') {
+        audit.set('auth_role', null);
         targetUser.set('auth_role', null);
       }
 
@@ -109,6 +120,7 @@ module.exports = (
       }
 
       await targetUser.save();
+      audit.log();
       logger.silly(req, 'all done');
       return res.status(204).end();
     } catch (e) {

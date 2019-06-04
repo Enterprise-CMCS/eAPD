@@ -10,8 +10,13 @@ module.exports = (app, RoleModel = defaultRoleModel) => {
       const roles = await RoleModel.fetchAll({
         withRelated: RoleModel.withRelated
       });
-      logger.silly(req, 'got all the roles');
-      logger.silly(req, roles);
+      logger.silly(
+        req,
+        `got all the roles: ${roles
+          .toJSON()
+          .reduce((acc, { name }) => [...acc, name], [])
+          .join(', ')}`
+      );
       res.send(roles.toJSON());
     } catch (e) {
       logger.error(req, e);
