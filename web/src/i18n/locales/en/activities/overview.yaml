@@ -1,56 +1,25 @@
 title: Activity Overview
-instruction:
-  short: >-
-    Provide a short overview of the activity.
-  detail: >-
-    Details for the activity go in the following sections.
 
-summary:
-  title: Activity Summary
-  helpText: >-
+activityOverviewInput:
+  label: Provide a short overview of the activity.
+  hint: Details for the activity go in the following sections.
 
-  reminder: >-
-
-# This is for the detailed rich textbox
-detail:
-  # Standard is for HIT and MMIS
+activityDescriptionInput:
   standard:
-    subheader:
-    instruction:
-      short: >-
-        Include as much detail as is necessary to explain the activity.
+    label: Include as much detail as is necessary to explain the activity.
   hie:
-    subheader:
-    instruction:
-      detail: >-
-        Detail linkage to meaningful use, including value proposition to providers,
-        and a sustainability plan describing how the activity will be sustained after
-        HIE DDI funding is exhausted.
-      helpText: >-
-        Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
-  hit:
-    instruction:
-      detail: >-
-        Summarize activity needs for how requested funding will be used (e.g. administrative, outreach,
-        auditing, Public Health Registry Development, etc).
-      helpText: >-
-        Detail plans for requested funds in this section.
-  mmis:
-    instruction:
-      detail: >-
-        Summarize activity needs for how requested funding will be used (e.g. administrative,
-        outreach, auditing, Public Health Registry Development, etc).
-      helpText: >-
-        Detail plans for requested funds in this section.
-
-# Statement of alternatives
-alternatives:
-  instruction:
-    short: >-
-      Statement of alternative considerations and supporting justification
-    detail: >-
-      If substantive changes have been made, include statement describing alternative
-      considerations made before selecting implementation strategy.
+    hint: >-
+      Detail linkage to meaningful use, including value proposition to providers,
+      and a sustainability plan describing how the activity will be sustained after
+      HIE DDI funding is exhausted.
     helpText: >-
-      If substantive changes have not been made, include a statement of alternative considerations from
-      the previous version of the IAPD.
+      Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
+
+activityAlternativesInput:
+  label: Statement of alternative considerations and supporting justification
+  hint: >-
+    If substantive changes have been made, include statement describing alternative
+    considerations made before selecting implementation strategy.
+  helpText: >-
+    If substantive changes have not been made, include a statement of alternative considerations from
+    the previous version of the IAPD.
