@@ -16,6 +16,12 @@ exports[`the CostAllocate component renders correctly 1`] = `
     </div>
     <Instruction
       args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
       reverse={false}
       source="activities.costAllocate.methodology.instruction"
     />
@@ -38,6 +44,12 @@ exports[`the CostAllocate component renders correctly 1`] = `
     </div>
     <Instruction
       args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
       reverse={false}
       source="activities.costAllocate.quarterly.instruction"
     />
@@ -55,6 +67,12 @@ exports[`the CostAllocate component renders correctly 1`] = `
     </div>
     <Instruction
       args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
       reverse={false}
       source="activities.costAllocate.otherFunding.instruction"
     />

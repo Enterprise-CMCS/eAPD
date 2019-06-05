@@ -16,6 +16,12 @@ exports[`apd summary component renders correctly 1`] = `
     </h3>
     <Instruction
       args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
       reverse={false}
       source="apd.overview.instruction"
     />
@@ -57,6 +63,12 @@ exports[`apd summary component renders correctly 1`] = `
     >
       <Instruction
         args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
         reverse={false}
         source="apd.introduction.instruction"
       />
@@ -71,6 +83,12 @@ exports[`apd summary component renders correctly 1`] = `
     >
       <Instruction
         args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
         reverse={false}
         source="apd.hit.instruction"
       />
@@ -85,6 +103,12 @@ exports[`apd summary component renders correctly 1`] = `
     >
       <Instruction
         args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
         reverse={false}
         source="apd.hie.instruction"
       />
@@ -97,6 +121,12 @@ exports[`apd summary component renders correctly 1`] = `
     <div>
       <Instruction
         args={null}
+        headingDisplay={
+          Object {
+            "className": "ds-h3",
+            "level": "h3",
+          }
+        }
         reverse={false}
         source="apd.mmis.instruction"
       />
