@@ -1,15 +1,9 @@
 title: Activity Schedule
-instruction:
-  short: >-
-    Indicate this activity’s start and end dates.
 milestone:
   instruction:
-    short: List major milestones the state is working toward as part of this activity.
+    heading: Milestones
     detail: >-
-      Include work occurring under previously approved APDs.
-  noMilestonesNotice: Add milestones for this activity.
-  milestoneHeader: Milestone
-  milestoneLabel: Milestone name
-  endHeader: Planned end date
-  removeLabel: Remove milestone
-  addMilestoneButtonText: Add milestone
+      List major milestones the state is working toward as part of this
+      activity. Include work occurring under previously approved APDs.
+noMilestonesNotice: Add milestones for this activity.
+addMilestoneButtonText: Add another milestone

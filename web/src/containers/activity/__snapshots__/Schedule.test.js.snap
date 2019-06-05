@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Schedule (milestones) component renders correctly with just one milestone 1`] = `
+<Subsection
+  id={null}
+  nested={true}
+  resource="activities.schedule"
+>
+  <h5
+    className="ds-h5"
+  >
+    Activity start and end dates
+  </h5>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <StartAndEndDate
+      endDate="2020-01-01"
+      onEndDateChanged={[Function]}
+      onStartDateChanged={[Function]}
+      startDate="2019-10-14"
+    />
+  </div>
+  <div
+    className="mb3"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h5",
+        }
+      }
+      reverse={false}
+      source="activities.schedule.milestone.instruction"
+    />
+    <hr />
+    <Milestone
+      endDate="2040-10-10"
+      idx={0}
+      initialCollapsed={true}
+      key="milestone 1"
+      name="Milestone the First"
+      onChangeDate={[Function]}
+      onChangeName={[Function]}
+      onDelete={null}
+    />
+  </div>
+  <Button
+    className="visibility--screen"
+    onClick={[Function]}
+    type="button"
+  >
+    Add another milestone
+  </Button>
+  <hr />
+</Subsection>
+`;
+
+exports[`the Schedule (milestones) component renders correctly with multiple milestones 1`] = `
+<Subsection
+  id={null}
+  nested={true}
+  resource="activities.schedule"
+>
+  <h5
+    className="ds-h5"
+  >
+    Activity start and end dates
+  </h5>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <StartAndEndDate
+      endDate="2020-01-01"
+      onEndDateChanged={[Function]}
+      onStartDateChanged={[Function]}
+      startDate="2019-10-14"
+    />
+  </div>
+  <div
+    className="mb3"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h5",
+        }
+      }
+      reverse={false}
+      source="activities.schedule.milestone.instruction"
+    />
+    <hr />
+    <Milestone
+      endDate="2040-10-10"
+      idx={0}
+      initialCollapsed={true}
+      key="milestone 1"
+      name="Milestone the First"
+      onChangeDate={[Function]}
+      onChangeName={[Function]}
+      onDelete={[Function]}
+    />
+    <Milestone
+      endDate="2040-30-10"
+      idx={1}
+      initialCollapsed={false}
+      key="milestone 2"
+      name="Milestone, Jr."
+      onChangeDate={[Function]}
+      onChangeName={[Function]}
+      onDelete={[Function]}
+    />
+  </div>
+  <Button
+    className="visibility--screen"
+    onClick={[Function]}
+    type="button"
+  >
+    Add another milestone
+  </Button>
+  <hr />
+</Subsection>
+`;
