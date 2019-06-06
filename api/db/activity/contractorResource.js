@@ -38,7 +38,7 @@ module.exports = {
         ([attribute, name]) => {
           if (this.attributes[attribute]) {
             // true to enforce strict parsing
-            const date = moment(this.attributes[attribute], 'YYYY-MM-DD', true);
+            const date = moment(this.attributes[attribute], 'YYYY-M-D', true);
             if (!date.isValid()) {
               throw new Error(`${name}-invalid`);
             }
