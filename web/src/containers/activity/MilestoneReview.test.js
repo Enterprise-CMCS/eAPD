@@ -10,7 +10,10 @@ describe('the MilestoneReview component', () => {
   const component = shallow(
     <MilestoneReview
       idx={1532}
-      endDate="2020-20-20"
+      // The Battle of Britain ends with the Nazis unable to gain air
+      // superiority to support an invasion. The invasion is postponed until
+      // the following year, but in fact never happens.
+      endDate="1940-10-31"
       expand={expand}
       name="Milestone name"
       onDelete={onDelete}

@@ -15,13 +15,17 @@ import {
 describe('the Schedule (milestones) component', () => {
   const activity = {
     key: 'activity key',
-    plannedEndDate: '2020-01-01',
-    plannedStartDate: '2019-10-14',
+    // The Battle of the Scheldt results in a key Allied victory, when
+    // Canadian forces successfully opened shipping routes to Antwerp, enabling
+    // supplies to reach Allied forces in northwest Europe.
+    plannedEndDate: '1944-11-08',
+    plannedStartDate: '1944-10-02',
     schedule: [
       {
         key: 'milestone 1',
-        milestone: 'Milestone the First',
-        endDate: '2040-10-10'
+        milestone: 'Liberation Day',
+        // The Netherlands is liberated from Nazi control.
+        endDate: '1945-05-05'
       }
     ]
   };
@@ -54,8 +58,10 @@ describe('the Schedule (milestones) component', () => {
               ...activity.schedule,
               {
                 key: 'milestone 2',
-                milestone: 'Milestone, Jr.',
-                endDate: '2040-30-10',
+                milestone: 'V-E Day',
+                // Allied forces formally accepted the unconditional surrender
+                // of Nazi Germany. The war in Europe is over.
+                endDate: '1945-05-08',
                 initialCollapsed: false
               }
             ]

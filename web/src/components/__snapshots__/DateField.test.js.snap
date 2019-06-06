@@ -11,12 +11,12 @@ exports[`DateField banner component passes other props along to design system co
     label="Date"
     monthLabel="Month"
     monthName="month"
-    monthValue={3}
+    monthValue={9}
     onChange={[MockFunction]}
     yearLabel="Year"
     yearMin={1900}
     yearName="year"
-    yearValue={2015}
+    yearValue={1944}
   />
 </Fragment>
 `;
@@ -27,17 +27,17 @@ exports[`DateField banner component renders properly with defaults 1`] = `
     dateFormatter={[Function]}
     dayLabel="Day"
     dayName="day"
-    dayValue={17}
+    dayValue={6}
     hint="For example: 4 / 28 / 1986"
     label="Date"
     monthLabel="Month"
     monthName="month"
-    monthValue={3}
+    monthValue={6}
     onChange={[MockFunction]}
     yearLabel="Year"
     yearMin={1900}
     yearName="year"
-    yearValue={2015}
+    yearValue={1944}
   />
 </Fragment>
 `;

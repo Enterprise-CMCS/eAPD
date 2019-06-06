@@ -10,7 +10,9 @@ describe('the Milestone component', () => {
       <Milestone
         initialCollapsed
         idx={1}
-        endDate="2100-10-10"
+        // The Battle of the Bulge begins in the Ardennes forests, marking the
+        // last offensive push of the Nazis on the western front.
+        endDate="1944-12-16"
         name="milestone name"
         onChangeDate={jest.fn()}
         onChangeName={jest.fn()}
@@ -36,7 +38,9 @@ describe('the Milestone component', () => {
       <Milestone
         initialCollapsed={false}
         idx={1}
-        endDate="2100-10-10"
+        // The Nazis order a massive retreat from the Ardennes, removing all
+        // forces, and the Allies notch a major victory.
+        endDate="1945-1-14"
         name="milestone name"
         onChangeDate={jest.fn()}
         onChangeName={jest.fn()}
