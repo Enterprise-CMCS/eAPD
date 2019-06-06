@@ -12,7 +12,8 @@ describe('DateField banner component', () => {
 
   test('renders properly with defaults', () => {
     expect(
-      shallow(<DateField value="2015-3-17" onChange={onChange} />)
+      // Operation Overlord begins with the invasion of Normandy
+      shallow(<DateField value="1944-6-6" onChange={onChange} />)
     ).toMatchSnapshot();
   });
 
@@ -22,7 +23,9 @@ describe('DateField banner component', () => {
         <DateField
           hint=""
           dayLabel="THE DAY"
-          value="2015-3-17"
+          // Operation Market Garden begins to liberate portions of the
+          // Netherlands and establish a northern invasion point into Germany.
+          value="1944-9-17"
           onChange={onChange}
         />
       )
@@ -31,7 +34,10 @@ describe('DateField banner component', () => {
 
   test('handles changes', () => {
     const component = shallow(
-      <DateField value="2015-3-17" onChange={onChange} />
+      // Allied forces halt Operation Market Garden, unable to cross the Rhine
+      // River. However, they succeeded in liberating several Dutch cities and
+      // disrupting V-2 rocket launches.
+      <DateField value="1944-9-25" onChange={onChange} />
     );
     component.find('DateField').simulate('change', 'moop moop');
     expect(onChange).toHaveBeenCalledWith('moop moop');

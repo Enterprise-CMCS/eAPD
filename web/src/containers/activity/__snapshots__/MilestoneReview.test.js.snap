@@ -15,7 +15,7 @@ exports[`the MilestoneReview component renders correctly 1`] = `
       Planned end date:
     </strong>
      
-    2020-20-20
+    1940-10-31
   </p>
 </StandardReview>
 `;

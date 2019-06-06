@@ -2,7 +2,7 @@
 
 exports[`the Milestone component when the milestone is initially NOT collapsed it renders correctly after being collapsed 1`] = `
 <Milestone
-  endDate="2100-10-10"
+  endDate="1945-1-14"
   idx={1}
   initialCollapsed={false}
   name="milestone name"
@@ -11,7 +11,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
   onDelete={[MockFunction]}
 >
   <MilestoneReview
-    endDate="2100-10-10"
+    endDate="1945-1-14"
     expand={[Function]}
     idx={1}
     name="milestone name"
@@ -77,7 +77,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
                   Planned end date:
                 </strong>
                  
-                2100-10-10
+                1945-1-14
               </p>
             </div>
           </div>
@@ -123,7 +123,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
 
 exports[`the Milestone component when the milestone is initially NOT collapsed it renders correctly initially 1`] = `
 <Milestone
-  endDate="2100-10-10"
+  endDate="1945-1-14"
   idx={1}
   initialCollapsed={false}
   name="milestone name"
@@ -133,7 +133,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
 >
   <MilestoneForm
     collapse={[Function]}
-    endDate="2100-10-10"
+    endDate="1945-1-14"
     idx={1}
     name="milestone name"
     onChangeDate={[MockFunction]}
@@ -189,23 +189,23 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
         hint=""
         label="Planned end date"
         onChange={[Function]}
-        value="2100-10-10"
+        value="1945-1-14"
       >
         <DateField
           dateFormatter={[Function]}
           dayLabel="Day"
           dayName="day"
-          dayValue={10}
+          dayValue={14}
           hint=""
           label="Planned end date"
           monthLabel="Month"
           monthName="month"
-          monthValue={10}
+          monthValue={1}
           onChange={[Function]}
           yearLabel="Year"
           yearMin={1900}
           yearName="year"
-          yearValue={2100}
+          yearValue={1945}
         >
           <fieldset
             className="ds-c-fieldset"
@@ -241,7 +241,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
                 name="month"
                 onChange={[Function]}
                 type="number"
-                value={10}
+                value={1}
               >
                 <div
                   className="ds-u-clearfix ds-l-col--auto"
@@ -271,7 +271,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
                     name="month"
                     onChange={[Function]}
                     type="number"
-                    value={10}
+                    value={1}
                   />
                 </div>
               </TextField>
@@ -292,7 +292,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
                 name="day"
                 onChange={[Function]}
                 type="number"
-                value={10}
+                value={14}
               >
                 <div
                   className="ds-u-clearfix ds-l-col--auto"
@@ -322,7 +322,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
                     name="day"
                     onChange={[Function]}
                     type="number"
-                    value={10}
+                    value={14}
                   />
                 </div>
               </TextField>
@@ -342,7 +342,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
                 name="year"
                 onChange={[Function]}
                 type="number"
-                value={2100}
+                value={1945}
               >
                 <div
                   className="ds-u-clearfix ds-l-col--auto"
@@ -371,7 +371,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
                     name="year"
                     onChange={[Function]}
                     type="number"
-                    value={2100}
+                    value={1945}
                   />
                 </div>
               </TextField>
@@ -400,7 +400,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
 
 exports[`the Milestone component when the milestone is initially collapsed it renders correctly after being expanded 1`] = `
 <Milestone
-  endDate="2100-10-10"
+  endDate="1944-12-16"
   idx={1}
   initialCollapsed={true}
   name="milestone name"
@@ -410,7 +410,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
 >
   <MilestoneForm
     collapse={[Function]}
-    endDate="2100-10-10"
+    endDate="1944-12-16"
     idx={1}
     name="milestone name"
     onChangeDate={[MockFunction]}
@@ -466,23 +466,23 @@ exports[`the Milestone component when the milestone is initially collapsed it re
         hint=""
         label="Planned end date"
         onChange={[Function]}
-        value="2100-10-10"
+        value="1944-12-16"
       >
         <DateField
           dateFormatter={[Function]}
           dayLabel="Day"
           dayName="day"
-          dayValue={10}
+          dayValue={16}
           hint=""
           label="Planned end date"
           monthLabel="Month"
           monthName="month"
-          monthValue={10}
+          monthValue={12}
           onChange={[Function]}
           yearLabel="Year"
           yearMin={1900}
           yearName="year"
-          yearValue={2100}
+          yearValue={1944}
         >
           <fieldset
             className="ds-c-fieldset"
@@ -518,7 +518,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
                 name="month"
                 onChange={[Function]}
                 type="number"
-                value={10}
+                value={12}
               >
                 <div
                   className="ds-u-clearfix ds-l-col--auto"
@@ -548,7 +548,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
                     name="month"
                     onChange={[Function]}
                     type="number"
-                    value={10}
+                    value={12}
                   />
                 </div>
               </TextField>
@@ -569,7 +569,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
                 name="day"
                 onChange={[Function]}
                 type="number"
-                value={10}
+                value={16}
               >
                 <div
                   className="ds-u-clearfix ds-l-col--auto"
@@ -599,7 +599,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
                     name="day"
                     onChange={[Function]}
                     type="number"
-                    value={10}
+                    value={16}
                   />
                 </div>
               </TextField>
@@ -619,7 +619,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
                 name="year"
                 onChange={[Function]}
                 type="number"
-                value={2100}
+                value={1944}
               >
                 <div
                   className="ds-u-clearfix ds-l-col--auto"
@@ -648,7 +648,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
                     name="year"
                     onChange={[Function]}
                     type="number"
-                    value={2100}
+                    value={1944}
                   />
                 </div>
               </TextField>
@@ -677,7 +677,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
 
 exports[`the Milestone component when the milestone is initially collapsed it renders correctly initially 1`] = `
 <Milestone
-  endDate="2100-10-10"
+  endDate="1944-12-16"
   idx={1}
   initialCollapsed={true}
   name="milestone name"
@@ -686,7 +686,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
   onDelete={[MockFunction]}
 >
   <MilestoneReview
-    endDate="2100-10-10"
+    endDate="1944-12-16"
     expand={[Function]}
     idx={1}
     name="milestone name"
@@ -752,7 +752,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
                   Planned end date:
                 </strong>
                  
-                2100-10-10
+                1944-12-16
               </p>
             </div>
           </div>

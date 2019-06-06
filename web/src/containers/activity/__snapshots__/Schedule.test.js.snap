@@ -16,11 +16,11 @@ exports[`the Schedule (milestones) component renders correctly with just one mil
   >
     <DateField
       onChange={[Function]}
-      value="2019-10-14"
+      value="1944-10-02"
     />
     <DateField
       onChange={[Function]}
-      value="2020-01-01"
+      value="1944-11-08"
     />
   </div>
   <div
@@ -39,11 +39,11 @@ exports[`the Schedule (milestones) component renders correctly with just one mil
     />
     <hr />
     <Milestone
-      endDate="2040-10-10"
+      endDate="1945-05-05"
       idx={0}
       initialCollapsed={true}
       key="milestone 1"
-      name="Milestone the First"
+      name="Liberation Day"
       onChangeDate={[Function]}
       onChangeName={[Function]}
       onDelete={null}
@@ -76,11 +76,11 @@ exports[`the Schedule (milestones) component renders correctly with multiple mil
   >
     <DateField
       onChange={[Function]}
-      value="2019-10-14"
+      value="1944-10-02"
     />
     <DateField
       onChange={[Function]}
-      value="2020-01-01"
+      value="1944-11-08"
     />
   </div>
   <div
@@ -99,21 +99,21 @@ exports[`the Schedule (milestones) component renders correctly with multiple mil
     />
     <hr />
     <Milestone
-      endDate="2040-10-10"
+      endDate="1945-05-05"
       idx={0}
       initialCollapsed={true}
       key="milestone 1"
-      name="Milestone the First"
+      name="Liberation Day"
       onChangeDate={[Function]}
       onChangeName={[Function]}
       onDelete={[Function]}
     />
     <Milestone
-      endDate="2040-30-10"
+      endDate="1945-05-08"
       idx={1}
       initialCollapsed={false}
       key="milestone 2"
-      name="Milestone, Jr."
+      name="V-E Day"
       onChangeDate={[Function]}
       onChangeName={[Function]}
       onDelete={[Function]}

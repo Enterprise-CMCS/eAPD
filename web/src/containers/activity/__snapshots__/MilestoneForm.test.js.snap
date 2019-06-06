@@ -22,7 +22,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
     hint=""
     label="Planned end date"
     onChange={[Function]}
-    value="2020-1010"
+    value="1942-8-16"
   />
   <Button
     className="ds-u-margin-top--2"
