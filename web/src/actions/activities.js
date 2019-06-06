@@ -172,13 +172,21 @@ export const removeActivity = key => dispatch => {
   dispatch(updateBudget());
 };
 
-export const removeActivityContractor = (key, contractorKey) => dispatch => {
-  dispatch({
-    type: REMOVE_ACTIVITY_CONTRACTOR,
-    key,
-    contractorKey
-  });
-  dispatch(updateBudget());
+export const removeActivityContractor = (
+  key,
+  contractorKey,
+  { global = window } = {}
+) => dispatch => {
+  if (
+    global.confirm('Do you really want to delete this contractor resource?')
+  ) {
+    dispatch({
+      type: REMOVE_ACTIVITY_CONTRACTOR,
+      key,
+      contractorKey
+    });
+    dispatch(updateBudget());
+  }
 };
 
 export const removeActivityGoal = (
