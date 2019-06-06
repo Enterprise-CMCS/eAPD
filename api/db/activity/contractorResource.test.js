@@ -123,7 +123,7 @@ tap.test(
       await Promise.all(
         ['end', 'start'].map(async attr => {
           await Promise.all(
-            [7, 'bob', 'January 3, 1947', '14 October 1066', '2014-3-9'].map(
+            [7, 'bob', 'January 3, 1947', '14 October 1066'].map(
               async invalidValue => {
                 try {
                   const self = { attributes: { [attr]: invalidValue } };
@@ -141,7 +141,7 @@ tap.test(
       const self = {
         attributes: {
           end: '2000-01-01',
-          start: '2000-01-01'
+          start: '2000-1-1'
         }
       };
 
