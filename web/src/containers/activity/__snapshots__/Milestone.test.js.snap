@@ -77,7 +77,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
                   Planned end date:
                 </strong>
                  
-                1945-1-14
+                1-14-1945
               </p>
             </div>
           </div>
@@ -752,7 +752,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
                   Planned end date:
                 </strong>
                  
-                1944-12-16
+                12-16-1944
               </p>
             </div>
           </div>
