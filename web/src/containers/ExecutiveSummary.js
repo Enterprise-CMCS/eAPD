@@ -1,4 +1,3 @@
-import { Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
@@ -7,6 +6,7 @@ import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
 import Waypoint from './ConnectedWaypoint';
 import { expandActivitySection } from '../actions/activities';
 import Dollars from '../components/Dollars';
+import Review from '../components/Review';
 import { Section, Subsection } from '../components/Section';
 import { t } from '../i18n';
 

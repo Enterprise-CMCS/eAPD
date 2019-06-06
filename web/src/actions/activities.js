@@ -189,11 +189,19 @@ export const removeActivityContractor = (
   }
 };
 
-export const removeActivityGoal = (key, goalKey) => ({
-  type: REMOVE_ACTIVITY_GOAL,
+export const removeActivityGoal = (
   key,
-  goalKey
-});
+  goalKey,
+  { global = window } = {}
+) => dispatch => {
+  if (global.confirm('Do you really want to delete this activity goal?')) {
+    dispatch({
+      type: REMOVE_ACTIVITY_GOAL,
+      key,
+      goalKey
+    });
+  }
+};
 
 export const removeActivityExpense = (key, expenseKey) => dispatch => {
   dispatch({
