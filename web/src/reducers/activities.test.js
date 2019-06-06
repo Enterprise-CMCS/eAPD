@@ -51,7 +51,12 @@ describe('activities reducer', () => {
     years: { '1973': { amt: '', perc: '' }, '1974': { amt: '', perc: '' } }
   });
 
-  const newGoal = keyFn => ({ key: keyFn(), description: '', objective: '' });
+  const newGoal = keyFn => ({
+    key: keyFn(),
+    description: '',
+    expanded: true,
+    objective: ''
+  });
 
   const newExpense = keyFn => ({
     key: keyFn(),

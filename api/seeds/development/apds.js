@@ -781,53 +781,53 @@ exports.seed = async knex => {
     {
       activity_id: activity0,
       description:
-        '<p>Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.</p>\n<p></p>\n',
+        'Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.',
       objective:
-        '<ol>\n<li>Complete SLR modifications by 11/1/18</li>\n<li>Accept attestations through 4/30/19.</li>\n</ol>\n'
+        '- Complete SLR modifications by 11/1/18\n- Accept attestations through 4/30/19.'
     },
     {
       activity_id: activity0,
       description:
-        '<p>Provide support to EPs and EHs through attestation process.</p>\n',
+        'Provide support to EPs and EHs through attestation process.',
       objective:
-        "<ol>\n<li>Guidance available on Tycho's websites</li>\n<li>Office hours availble for EPs and EHs</li>\n<li>Site visits, as needed, for EPs and EHs</li>\n</ol>\n"
+        "- Guidance available on Tycho's websites\n- Office hours availble for EPs and EHs\n- Site visits, as needed, for EPs and EHs"
     },
     {
       activity_id: activity1,
       description:
-        '<p>Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.&nbsp;</p>\n',
+        'Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.',
       objective:
-        '<ol>\n<li>Hire contracted support to build an open API for the DW that the HIE and PHR can consume.</li>\n<li>Provide support for using open API for DW</li>\n</ol>\n'
+        '- Hire contracted support to build an open API for the DW that the HIE and PHR can consume.\n- Provide support for using open API for DW'
     },
     {
       activity_id: activity2,
-      description: '<p>Plan to do a thing.</p>\n',
-      objective: '<p>Do a thing.</p>\n'
+      description: 'Plan to do a thing.',
+      objective: 'Do a thing.'
     },
     {
       activity_id: activity2,
-      description: '<p>Onboard 100 providers.</p>\n',
-      objective: '<p>100 providers onboarded.</p>\n'
+      description: 'Onboard 100 providers.',
+      objective: '100 providers onboarded.'
     },
     {
       activity_id: activity3,
-      description: '<p>Build blue button.</p>\n',
-      objective: '<p>Test blue button with 10 providers.</p>\n'
+      description: 'Build blue button.',
+      objective: 'Test blue button with 10 providers.'
     },
     {
       activity_id: activity4,
-      description: '<p>Identifiy PH needs</p>\n',
-      objective: '<p>Complete a build/implementation plan by Summery 2019</p>\n'
+      description: 'Identifiy PH needs',
+      objective: 'Complete a build/implementation plan by Summery 2019'
     },
     {
       activity_id: activity4,
-      description: '<p>Connect PH systems to HIE</p>\n',
-      objective: '<p>Connect all 3 PH systems to HIE by Fall 2019</p>\n'
+      description: 'Connect PH systems to HIE',
+      objective: 'Connect all 3 PH systems to HIE by Fall 2019'
     },
     {
       activity_id: activity5,
-      description: '<p>Complete MITA 3.0 HITECH portion.</p>\n',
-      objective: '<p>&nbsp;Complete MITA 3.0 HITECH portion by July 2019</p>\n'
+      description: 'Complete MITA 3.0 HITECH portion.',
+      objective: '&nbsp;Complete MITA 3.0 HITECH portion by July 2019'
     }
   ]);
 

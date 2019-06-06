@@ -58,6 +58,12 @@ exports[`Subsection component renders correctly 1`] = `
   </h3>
   <Instruction
     args={null}
+    headingDisplay={
+      Object {
+        "className": "ds-h3",
+        "level": "h3",
+      }
+    }
     reverse={false}
     source="activities.goals.instruction"
   />
