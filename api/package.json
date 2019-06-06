@@ -86,7 +86,7 @@
     "request": "^2.88.0",
     "sinon": "^7.2.5",
     "stream-mock": "^1.2.0",
-    "tap": "^12.5.3"
+    "tap": "^14.2.2"
   },
   "jest": {
     "testMatch": [
