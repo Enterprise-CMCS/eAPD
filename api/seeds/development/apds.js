@@ -317,7 +317,7 @@ exports.seed = async knex => {
         end: null,
         name: 'Super SLR Incorporated',
         start: null,
-        // totalCost: 32423,
+        totalCost: 32423,
         useHourly: false
       },
       {
@@ -326,7 +326,7 @@ exports.seed = async knex => {
         end: null,
         name: 'Tech Consulting Inc.',
         start: null,
-        // totalCost: 473573,
+        totalCost: 473573,
         useHourly: false
       },
       {
@@ -335,7 +335,7 @@ exports.seed = async knex => {
         end: null,
         name: 'Interface Vendor Inc.',
         start: null,
-        // totalCost: 26453574,
+        totalCost: 26453574,
         useHourly: false
       },
       {
@@ -344,7 +344,7 @@ exports.seed = async knex => {
         end: null,
         name: 'TBD',
         start: null,
-        // totalCost: 7398,
+        totalCost: 7398,
         useHourly: false
       },
       {
@@ -353,7 +353,7 @@ exports.seed = async knex => {
         end: null,
         name: '',
         start: null,
-        // totalCost: 3496874,
+        totalCost: 3496874,
         useHourly: false
       },
       {
@@ -362,7 +362,7 @@ exports.seed = async knex => {
         end: null,
         name: 'RFP Planning Vendor Inc.',
         start: null,
-        // totalCost: 4368734,
+        totalCost: 4368734,
         useHourly: false
       },
       {
@@ -371,7 +371,7 @@ exports.seed = async knex => {
         end: null,
         name: 'Blue Button Builder Inc.',
         start: null,
-        // totalCost: 35246,
+        totalCost: 35246,
         useHourly: false
       },
       {
@@ -380,7 +380,7 @@ exports.seed = async knex => {
         end: null,
         name: 'TBD',
         start: null,
-        // totalCost: 246477,
+        totalCost: 246477,
         useHourly: false
       },
       {
@@ -389,7 +389,7 @@ exports.seed = async knex => {
         end: null,
         name: 'Gateway Vendor Inc.',
         start: null,
-        // totalCost: 7473747,
+        totalCost: 7473747,
         useHourly: false
       },
       {
@@ -398,7 +398,7 @@ exports.seed = async knex => {
         end: null,
         name: 'Tech Consulting Inc.',
         start: null,
-        // totalCost: 264574,
+        totalCost: 264574,
         useHourly: false
       },
       {
@@ -407,11 +407,44 @@ exports.seed = async knex => {
         end: null,
         name: 'TBD',
         start: null,
-        // totalCost: 64574,
+        totalCost: 64574,
         useHourly: false
       }
     ])
     .returning('id')
+    .then(
+      ([a, b, c, d, e, f, g, h, i, j, k]) =>
+        new Promise(resolve =>
+          knex('activity_contractor_resources_hourly')
+            .insert([
+              { contractor_resource_id: a, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: a, hours: 0, rate: 0, year: 2020 },
+              { contractor_resource_id: b, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: b, hours: 0, rate: 0, year: 2020 },
+              { contractor_resource_id: c, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: c, hours: 0, rate: 0, year: 2020 },
+              { contractor_resource_id: d, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: d, hours: 0, rate: 0, year: 2020 },
+              { contractor_resource_id: e, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: e, hours: 0, rate: 0, year: 2020 },
+              { contractor_resource_id: f, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: f, hours: 0, rate: 0, year: 2020 },
+              { contractor_resource_id: g, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: g, hours: 0, rate: 0, year: 2020 },
+              { contractor_resource_id: h, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: h, hours: 0, rate: 0, year: 2020 },
+              { contractor_resource_id: i, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: i, hours: 0, rate: 0, year: 2020 },
+              { contractor_resource_id: j, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: j, hours: 0, rate: 0, year: 2020 },
+              { contractor_resource_id: k, hours: 0, rate: 0, year: 2019 },
+              { contractor_resource_id: k, hours: 0, rate: 0, year: 2020 }
+            ])
+            .then(() => {
+              resolve([a, b, c, d, e, f, g, h, i, j, k]);
+            })
+        )
+    )
     .then(([a, b, c, d, e, f, g, h, i, j, k]) =>
       knex('activity_contractor_resources_yearly').insert([
         {
