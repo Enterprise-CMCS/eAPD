@@ -75,20 +75,20 @@ describe('the Schedule (milestones) component', () => {
     });
 
     test('updates activity start date', () => {
-      component.find('StartAndEndDate').prop('onStartDateChanged')(
-        null,
-        'new date'
-      );
+      component
+        .find('DateField')
+        .at(0)
+        .prop('onChange')(null, 'new date');
       expect(fns.updateActivity).toHaveBeenCalledWith('activity key', {
         plannedStartDate: 'new date'
       });
     });
 
     test('updates activity end date', () => {
-      component.find('StartAndEndDate').prop('onEndDateChanged')(
-        null,
-        'other date'
-      );
+      component
+        .find('DateField')
+        .at(1)
+        .prop('onChange')(null, 'other date');
       expect(fns.updateActivity).toHaveBeenCalledWith('activity key', {
         plannedEndDate: 'other date'
       });

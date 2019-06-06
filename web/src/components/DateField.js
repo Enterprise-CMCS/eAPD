@@ -1,4 +1,4 @@
-import { DateField } from '@cmsgov/design-system-core';
+import { DateField as DSDateField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo } from 'react';
 
@@ -10,26 +10,26 @@ const splitDate = date =>
 
 const joinDate = ({ day, month, year }) => `${year}-${month}-${day}`;
 
-const SingleDateField = ({ date, onDateChanged, ...rest }) => {
-  const dateParts = splitDate(date);
+const DateField = ({ value, onChange, ...rest }) => {
+  const dateParts = splitDate(value);
 
   return (
     <Fragment>
-      <DateField
+      <DSDateField
         {...rest}
         dayValue={dateParts.day}
         monthValue={dateParts.month}
         yearValue={dateParts.year}
         dateFormatter={joinDate}
-        onChange={onDateChanged}
+        onChange={onChange}
       />
     </Fragment>
   );
 };
 
-SingleDateField.propTypes = {
-  date: PropTypes.string.isRequired,
-  onDateChanged: PropTypes.func.isRequired
+DateField.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
-export default SingleDateField;
+export default DateField;

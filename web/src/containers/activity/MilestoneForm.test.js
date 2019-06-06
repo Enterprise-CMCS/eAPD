@@ -39,8 +39,8 @@ describe('the MilestoneForm component', () => {
 
     test('handles changing the milestone date', () => {
       component
-        .find('SingleDateField')
-        .simulate('dateChanged', 'ignored text', 'new date');
+        .find('DateField')
+        .simulate('change', 'ignored text', 'new date');
       expect(onChangeDate).toHaveBeenCalledWith(3252, 'new date');
     });
   });

@@ -14,11 +14,13 @@ exports[`the Schedule (milestones) component renders correctly with just one mil
   <div
     className="ds-c-choice__checkedChild ds-u-padding-y--0"
   >
-    <StartAndEndDate
-      endDate="2020-01-01"
-      onEndDateChanged={[Function]}
-      onStartDateChanged={[Function]}
-      startDate="2019-10-14"
+    <DateField
+      onChange={[Function]}
+      value="2019-10-14"
+    />
+    <DateField
+      onChange={[Function]}
+      value="2020-01-01"
     />
   </div>
   <div
@@ -72,11 +74,13 @@ exports[`the Schedule (milestones) component renders correctly with multiple mil
   <div
     className="ds-c-choice__checkedChild ds-u-padding-y--0"
   >
-    <StartAndEndDate
-      endDate="2020-01-01"
-      onEndDateChanged={[Function]}
-      onStartDateChanged={[Function]}
-      startDate="2019-10-14"
+    <DateField
+      onChange={[Function]}
+      value="2019-10-14"
+    />
+    <DateField
+      onChange={[Function]}
+      value="2020-01-01"
     />
   </div>
   <div

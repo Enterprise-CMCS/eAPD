@@ -2,7 +2,7 @@ import { Button, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 
-import SingleDate from '../../components/SingleDateField';
+import DateField from '../../components/DateField';
 
 const MilestoneForm = ({
   idx,
@@ -25,11 +25,11 @@ const MilestoneForm = ({
     <div className="ds-u-border-bottom--2 ds-u-padding-y--2">
       <h6 className="ds-h4">Milestone {idx + 1}:</h6>
       <TextField label="Name" name="name" value={name} onChange={changeName} />
-      <SingleDate
+      <DateField
         label="Planned end date"
         hint=""
-        date={endDate}
-        onDateChanged={changeDate}
+        value={endDate}
+        onChange={changeDate}
       />
       <Button
         variation="primary"

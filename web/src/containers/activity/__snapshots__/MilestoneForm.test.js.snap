@@ -18,11 +18,11 @@ exports[`the MilestoneForm component renders correctly 1`] = `
     type="text"
     value="Milestone name"
   />
-  <SingleDateField
-    date="2020-1010"
+  <DateField
     hint=""
     label="Planned end date"
-    onDateChanged={[Function]}
+    onChange={[Function]}
+    value="2020-1010"
   />
   <Button
     className="ds-u-margin-top--2"

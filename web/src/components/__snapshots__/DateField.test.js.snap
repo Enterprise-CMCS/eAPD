@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DateField banner component passes other props along to design system component 1`] = `
+<Fragment>
+  <DateField
+    dateFormatter={[Function]}
+    dayLabel="THE DAY"
+    dayName="day"
+    dayValue={17}
+    hint=""
+    label="Date"
+    monthLabel="Month"
+    monthName="month"
+    monthValue={3}
+    onChange={[MockFunction]}
+    yearLabel="Year"
+    yearMin={1900}
+    yearName="year"
+    yearValue={2015}
+  />
+</Fragment>
+`;
+
+exports[`DateField banner component renders properly with defaults 1`] = `
+<Fragment>
+  <DateField
+    dateFormatter={[Function]}
+    dayLabel="Day"
+    dayName="day"
+    dayValue={17}
+    hint="For example: 4 / 28 / 1986"
+    label="Date"
+    monthLabel="Month"
+    monthName="month"
+    monthValue={3}
+    onChange={[MockFunction]}
+    yearLabel="Year"
+    yearMin={1900}
+    yearName="year"
+    yearValue={2015}
+  />
+</Fragment>
+`;
