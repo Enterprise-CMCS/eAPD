@@ -1,11 +1,12 @@
+
+import { TextField, ChoiceList } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 import { updateActivity as updateActivityAction } from '../../actions/activities';
 import Dollars from '../../components/Dollars';
-import { DollarInput } from '../../components/Inputs';
-import Select from '../../components/Select';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFP } from '../../reducers/activities.selectors';
 
@@ -13,7 +14,7 @@ class CostAllocateFFP extends Component {
   handleOther = year => e => {
     const { aKey, updateActivity } = this.props;
     const { value } = e.target;
-    const updates = { costAllocation: { [year]: { other: +value } } };
+    const updates = { costAllocation: { [year]: { other: +value.replace(/[^\d]/g, '') } } };
 
     updateActivity(aKey, updates, true);
   };
@@ -28,63 +29,63 @@ class CostAllocateFFP extends Component {
   };
 
   render() {
-    const { byYearData, costAllocation } = this.props;
+    const { byYearData, costAllocation, aKey } = this.props;
 
     return (
-      <div className="mb3">
-        <h4>{t('activities.costAllocate.ffp.title')}</h4>
-        <div className="clearfix mxn1">
-          {byYearData.map(
-            ({ year, total, medicaidShare, ffpSelectVal, allocations }) => (
-              <div key={year} className="col col-12 sm-col-6 mb2 px1">
-                <div className="p2 bg-gray-lightest">
-                  <div>{year}</div>
-                  <div className="h3 bold mono truncate">
-                    <Dollars>{total}</Dollars>
-                  </div>
-                  <hr />
-                  <DollarInput
-                    wrapperClass="lg-col-8 mb2"
-                    name={`cost-allocate-other-${year}`}
-                    label={t('activities.costAllocate.ffp.labels.other')}
-                    value={costAllocation[year].other}
-                    onChange={this.handleOther(year)}
-                  />
-                  <div>{t('activities.costAllocate.ffp.medicaidShare')}</div>
-                  <div className="h4 bold mono truncate">
-                    <Dollars>{medicaidShare}</Dollars>
-                  </div>
-                  <hr />
-                  <Select
-                    wrapperClass="lg-col-8 mb2"
-                    name={`ffp-${year}`}
-                    label={t(
-                      'activities.costAllocate.ffp.labels.fedStateSplit'
-                    )}
-                    options={['90-10', '75-25', '50-50']}
-                    value={ffpSelectVal}
-                    onChange={this.handleFFP(year)}
-                  />
-                  <div className="lg-flex">
-                    <div className="lg-col-6 mb1 lg-m0">
-                      <div>Federal</div>
-                      <div className="h4 bold mono truncate">
-                        <Dollars>{allocations.federal}</Dollars>
-                      </div>
-                    </div>
-                    <div className="lg-col-6 mb1 lg-m0">
-                      <div>State</div>
-                      <div className="h4 bold mono truncate">
-                        <Dollars>{allocations.state}</Dollars>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+      <Fragment>
+        <h5 className="ds-h4">{t('activities.costAllocate.ffp.title')}</h5>
+        {byYearData.map(
+          ({ year, total, medicaidShare, ffpSelectVal, allocations }) => (
+            <div key={year}>
+              <h6 className="ds-h3">FFY {year}:</h6>
+              <p>
+                <Dollars long>{total}</Dollars>
+              </p>
+              <TextField
+                label={t('activities.costAllocate.ffp.labels.other')}
+                labelClassName='ds-h4'
+                mask='currency'
+                name={`cost-allocate-other-${year}`}
+                value={costAllocation[year].other || '0'}
+                onChange={this.handleOther(year)}
+              />
+
+              <p className="ds-h4 ds-u-display--block">{t('activities.costAllocate.ffp.medicaidShare')}</p>
+              <p>
+                <Dollars long>{medicaidShare}</Dollars>
+              </p>
+
+              <ChoiceList
+                name={`ffp-${year}`}
+                type="select"
+                label={t(
+                  'activities.costAllocate.ffp.labels.fedStateSplit'
+                )}
+                labelClassName='ds-h5'
+                choices={[
+                  { label: '90-10', value: '90-10' },
+                  { label: '75-25', value: '75-25' },
+                  { label: '50-50', value: '50-50' }
+                ]}
+                value={ffpSelectVal}
+                onChange={this.handleFFP(year)}
+              />
+              <div className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2">
+                <p className="ds-u-margin-bottom--0"><strong>Federal</strong></p>
+                <p>
+                  <Dollars long>{allocations.federal}</Dollars>
+                </p>
+                <p className="ds-u-margin-bottom--0"><strong>State</strong></p>
+                <p>
+                  <Dollars long>{allocations.state}</Dollars>
+                </p>
               </div>
-            )
-          )}
-        </div>
-      </div>
+              <CostAllocateFFPQuarterly aKey={aKey} year={year}/>
+              <hr />
+            </div>
+          )
+        )}
+      </Fragment>
     );
   }
 }
