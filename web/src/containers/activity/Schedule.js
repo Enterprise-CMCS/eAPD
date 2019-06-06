@@ -12,7 +12,7 @@ import {
 import Instruction from '../../components/Instruction';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
-import StartAndEndDate from '../../components/StartAndEndDateFields';
+import DateField from '../../components/DateField';
 import { t } from '../../i18n';
 
 const Schedule = ({
@@ -55,11 +55,13 @@ const Schedule = ({
         <Fragment>
           <h5 className="ds-h5">Activity start and end dates</h5>
           <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
-            <StartAndEndDate
-              startDate={activity.plannedStartDate}
-              onStartDateChanged={handleActivityStartChange}
-              endDate={activity.plannedEndDate}
-              onEndDateChanged={handleActivityEndChange}
+            <DateField
+              value={activity.plannedStartDate}
+              onChange={handleActivityStartChange}
+            />
+            <DateField
+              value={activity.plannedEndDate}
+              onChange={handleActivityEndChange}
             />
           </div>
           <div className="mb3">

@@ -185,11 +185,11 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
           />
         </div>
       </TextField>
-      <SingleDateField
-        date="2100-10-10"
+      <DateField
         hint=""
         label="Planned end date"
-        onDateChanged={[Function]}
+        onChange={[Function]}
+        value="2100-10-10"
       >
         <DateField
           dateFormatter={[Function]}
@@ -378,7 +378,7 @@ exports[`the Milestone component when the milestone is initially NOT collapsed i
             </div>
           </fieldset>
         </DateField>
-      </SingleDateField>
+      </DateField>
       <Button
         className="ds-u-margin-top--2"
         onClick={[Function]}
@@ -462,11 +462,11 @@ exports[`the Milestone component when the milestone is initially collapsed it re
           />
         </div>
       </TextField>
-      <SingleDateField
-        date="2100-10-10"
+      <DateField
         hint=""
         label="Planned end date"
-        onDateChanged={[Function]}
+        onChange={[Function]}
+        value="2100-10-10"
       >
         <DateField
           dateFormatter={[Function]}
@@ -655,7 +655,7 @@ exports[`the Milestone component when the milestone is initially collapsed it re
             </div>
           </fieldset>
         </DateField>
-      </SingleDateField>
+      </DateField>
       <Button
         className="ds-u-margin-top--2"
         onClick={[Function]}
