@@ -1,6 +1,6 @@
 import { DateField as DSDateField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 // Dates are stored internally as YYYY-MM-DD. The design system date field
 // expects separate day, month, and year values. So split the incoming
@@ -20,16 +20,14 @@ const DateField = ({ value, onChange, ...rest }) => {
   const dateParts = splitDate(value);
 
   return (
-    <Fragment>
-      <DSDateField
-        {...rest}
-        dayValue={dateParts.day}
-        monthValue={dateParts.month}
-        yearValue={dateParts.year}
-        dateFormatter={joinDate}
-        onChange={onChange}
-      />
-    </Fragment>
+    <DSDateField
+      {...rest}
+      dayValue={dateParts.day}
+      monthValue={dateParts.month}
+      yearValue={dateParts.year}
+      dateFormatter={joinDate}
+      onChange={onChange}
+    />
   );
 };
 
