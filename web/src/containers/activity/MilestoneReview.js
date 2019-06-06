@@ -7,6 +7,11 @@ const MilestoneReview = ({ idx, endDate, expand, name, onDelete }) => {
     onDelete
   ]);
 
+  const formattedDate = useMemo(() => {
+    const [year, month, day] = endDate.split('-');
+    return `${month}-${day}-${year}`;
+  }, [endDate]);
+
   return (
     <Review
       heading={`${idx + 1}. ${name}`}
@@ -15,7 +20,7 @@ const MilestoneReview = ({ idx, endDate, expand, name, onDelete }) => {
       onEditClick={expand}
     >
       <p className="ds-u-margin-top--2">
-        <strong>Planned end date:</strong> {endDate}
+        <strong>Planned end date:</strong> {formattedDate}
       </p>
     </Review>
   );
