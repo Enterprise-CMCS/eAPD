@@ -90,6 +90,8 @@ tap.test('password hashing utilities', async moduleTests => {
 
     tests.test(
       'generates a hash with specified iteration count that exceeds the max',
+      // this test can take dozens of seconds, so explicitly set a high timeout
+      { timeout: 300000 },
       async test => {
         // The result of pbkdf2 with the test salt and password, with the
         // maximum number of iterations and other expected parameters.
