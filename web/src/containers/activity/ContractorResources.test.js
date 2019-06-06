@@ -3,17 +3,15 @@ import sinon from 'sinon';
 import React from 'react';
 
 import {
-  ContractorResourcesRaw as ContractorResources,
+  plain as ContractorResources,
   mapStateToProps,
   mapDispatchToProps
 } from './ContractorResources';
 import {
   addActivityContractor,
-  deleteActivityContractorFile,
   removeActivityContractor,
   toggleActivityContractorHourly,
-  updateActivity,
-  uploadActivityContractorFile
+  updateActivity
 } from '../../actions/activities';
 
 describe('the ContractorResources component', () => {
@@ -22,33 +20,23 @@ describe('the ContractorResources component', () => {
     activityKey: 'activity key',
     contractors: [
       {
-        id: 'contractor id',
-        key: 'contractor key',
-        name: 'contractor name',
-        desc: 'contractor description',
-        start: 'start date',
-        end: 'end date',
-        totalCost: 123,
-        years: {
-          '1066': 100,
-          '1067': 200
-        },
-        hourly: {
-          useHourly: false,
-          data: {
-            '1066': { hours: '', rate: '' },
-            '1067': { hours: '', rate: '' }
-          }
-        }
+        id: 'contractor 1',
+        key: 'key 1'
+      },
+      {
+        id: 'contractor 2',
+        key: 'key 2'
+      },
+      {
+        id: 'contractor 3',
+        key: 'key 3'
       }
     ],
     years: ['1066', '1067'],
     addContractor: sinon.stub(),
-    deleteFile: sinon.stub(),
     removeContractor: sinon.stub(),
     toggleContractorHourly: sinon.stub(),
-    updateActivity: sinon.stub(),
-    uploadFile: sinon.stub()
+    updateActivity: sinon.stub()
   };
 
   beforeEach(() => {
@@ -63,78 +51,8 @@ describe('the ContractorResources component', () => {
 
   test('adds a new contractor', () => {
     const component = shallow(<ContractorResources {...props} />);
-    component.find('Btn[children="Add contractor"]').simulate('click');
+    component.find('Button').simulate('click');
     expect(props.addContractor.calledWith('activity key')).toBeTruthy();
-  });
-
-  test('removes a contractor', () => {
-    const component = shallow(<ContractorResources {...props} />);
-
-    component
-      .find('CollapsibleList')
-      .dive()
-      .find('ListItem')
-      .dive()
-      .find('ContractorForm')
-      .dive()
-      .find('Btn[children="✗"]')
-      .simulate('click');
-
-    expect(
-      props.removeContractor.calledWith('activity key', 'contractor key')
-    ).toBeTruthy();
-  });
-
-  test('handles changing contractor info', () => {
-    const component = shallow(<ContractorResources {...props} />)
-      .find('CollapsibleList')
-      .dive()
-      .find('ListItem')
-      .dive()
-      .find('ContractorForm')
-      .dive();
-
-    const nameInput = component
-      .find('InputHolder')
-      .filterWhere(n => n.props().value === 'contractor name');
-    nameInput.simulate('change', { target: { value: 'bloop' } });
-    expect(
-      props.updateActivity.calledWith('activity key', {
-        contractorResources: { '0': { name: 'bloop' } }
-      })
-    ).toBeTruthy();
-
-    const descInput = component
-      .find('InputHolder')
-      .filterWhere(n => n.props().value === 'contractor description');
-    descInput.simulate('change', { target: { value: 'florp' } });
-    expect(
-      props.updateActivity.calledWith('activity key', {
-        contractorResources: { '0': { desc: 'florp' } }
-      })
-    ).toBeTruthy();
-  });
-
-  test('handles changing contractor expense info', () => {
-    const component = shallow(<ContractorResources {...props} />)
-      .find('CollapsibleList')
-      .dive()
-      .find('ListItem')
-      .dive()
-      .find('ContractorForm')
-      .dive();
-    const yearInput = component
-      .find('InputHolder')
-      .filterWhere(n => n.props().value === 100);
-
-    yearInput.simulate('change', { target: { value: '300' } });
-    expect(
-      props.updateActivity.calledWith(
-        'activity key',
-        { contractorResources: { '0': { years: { '1066': '300' } } } },
-        true
-      )
-    ).toBeTruthy();
   });
 
   test('maps redux state to component props', () => {
@@ -164,11 +82,9 @@ describe('the ContractorResources component', () => {
   test('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
       addContractor: addActivityContractor,
-      deleteFile: deleteActivityContractorFile,
       removeContractor: removeActivityContractor,
       toggleContractorHourly: toggleActivityContractorHourly,
-      updateActivity,
-      uploadFile: uploadActivityContractorFile
+      updateActivity
     });
   });
 });
