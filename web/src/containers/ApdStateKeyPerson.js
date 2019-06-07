@@ -7,6 +7,7 @@ import {
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { t } from '../i18n';
+import DollarField from '../components/DollarField';
 import Dollars from '../components/Dollars';
 import Review from '../components/Review';
 
@@ -80,11 +81,10 @@ const PersonForm = ({
             <div className="ds-c-choice__checkedChild ds-l-form-row">
               {years.map(ffy => (
                 <div key={ffy} className="ds-l-col--auto">
-                  <TextField
+                  <DollarField
                     name={`apd-state-profile-costs${number}-fy${ffy}`}
                     label={`FFY ${ffy}`}
                     size="small"
-                    mask="currency"
                     value={person.costs[ffy]}
                     onChange={handleYearChange(ffy)}
                   />
