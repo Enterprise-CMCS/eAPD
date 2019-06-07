@@ -3,12 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import CostAllocateFFP from './CostAllocateFFP';
-import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 import { updateActivity as updateActivityAction } from '../../actions/activities';
 import Instruction from '../../components/Instruction';
 import { RichText } from '../../components/Inputs';
 import { Subsection } from '../../components/Section';
-import { t } from '../../i18n';
 
 const CostAllocate = props => {
   const { activity, updateActivity } = props;
@@ -20,36 +18,38 @@ const CostAllocate = props => {
 
   return (
     <Subsection resource="activities.costAllocate" nested>
-      <div className="mb3">
-        <div className="mb-tiny bold">
-          {t('activities.costAllocate.methodology.title')}
-        </div>
-        <Instruction source="activities.costAllocate.methodology.instruction" />
+      <div className="data-entry-box">
+        <Instruction
+          source="activities.costAllocate.methodology.instruction"
+          headingDisplay={{
+            level: 'h5',
+            className: 'ds-h4'
+          }}
+        />
         <RichText
           content={costAllocationDesc}
           onSync={sync('costAllocationDesc')}
           editorClassName="rte-textarea-l"
         />
       </div>
-      <CostAllocateFFP aKey={activity.key} />
-      <div className="mb3">
-        <div className="mb-tiny bold">
-          {t('activities.costAllocate.quarterly.title')}
-        </div>
-        <Instruction source="activities.costAllocate.quarterly.instruction" />
-        <CostAllocateFFPQuarterly aKey={activity.key} />
-      </div>
-      <div className="mb3">
-        <div className="mb-tiny bold">
-          {t('activities.costAllocate.otherFunding.title')}
-        </div>
-        <Instruction source="activities.costAllocate.otherFunding.instruction" />
+
+      <div className="data-entry-box">
+        <Instruction
+          source="activities.costAllocate.otherFunding.instruction"
+          headingDisplay={{
+            level: 'h5',
+            className: 'ds-h4'
+          }}
+          />
         <RichText
           content={otherFundingDesc}
           onSync={sync('otherFundingDesc')}
           editorClassName="rte-textarea-l"
         />
       </div>
+      <hr />
+      <CostAllocateFFP aKey={activity.key} />
+
     </Subsection>
   );
 };

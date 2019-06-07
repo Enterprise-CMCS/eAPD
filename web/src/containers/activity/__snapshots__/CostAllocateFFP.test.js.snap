@@ -1,205 +1,211 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the CostAllocateFFP component renders correctly 1`] = `
-<div
-  className="mb3"
->
-  <h4>
-    Federal Financial Partipation (FFP) and Cost Allocation
-  </h4>
-  <div
-    className="clearfix mxn1"
+<Fragment>
+  <h5
+    className="ds-h4"
   >
-    <div
-      className="col col-12 sm-col-6 mb2 px1"
-      key="1066"
+    Federal Financial Participation (FFP) and Cost Allocation
+  </h5>
+  <div
+    key="1066"
+  >
+    <h6
+      className="ds-h3"
     >
-      <div
-        className="p2 bg-gray-lightest"
+      FFY 
+      1066
+      :
+    </h6>
+    <p>
+      <Dollars
+        long={true}
       >
-        <div>
-          1066
-        </div>
-        <div
-          className="h3 bold mono truncate"
-        >
-          <Dollars
-            long={false}
-          >
-            300
-          </Dollars>
-        </div>
-        <hr />
-        <InputHolder
-          hideLabel={false}
-          label="Other Funding Amount"
-          name="cost-allocate-other-1066"
-          onChange={[Function]}
-          type="text"
-          value={10}
-          wrapperClass="lg-col-8 mb2"
-        />
-        <div>
-          Medicaid Share
-        </div>
-        <div
-          className="h4 bold mono truncate"
-        >
-          <Dollars
-            long={false}
-          >
-            290
-          </Dollars>
-        </div>
-        <hr />
-        <Select
-          hideLabel={false}
-          label="Federal-State Split"
-          name="ffp-1066"
-          onChange={[Function]}
-          options={
-            Array [
-              "90-10",
-              "75-25",
-              "50-50",
-            ]
-          }
-          value="90-10"
-          wrapperClass="lg-col-8 mb2"
-        />
-        <div
-          className="lg-flex"
-        >
-          <div
-            className="lg-col-6 mb1 lg-m0"
-          >
-            <div>
-              Federal
-            </div>
-            <div
-              className="h4 bold mono truncate"
-            >
-              <Dollars
-                long={false}
-              >
-                261
-              </Dollars>
-            </div>
-          </div>
-          <div
-            className="lg-col-6 mb1 lg-m0"
-          >
-            <div>
-              State
-            </div>
-            <div
-              className="h4 bold mono truncate"
-            >
-              <Dollars
-                long={false}
-              >
-                29
-              </Dollars>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="col col-12 sm-col-6 mb2 px1"
-      key="1067"
+        300
+      </Dollars>
+    </p>
+    <TextField
+      label="Other Funding Amount"
+      labelClassName="ds-h4"
+      mask="currency"
+      name="cost-allocate-other-1066"
+      onChange={[Function]}
+      type="text"
+      value={10}
+    />
+    <p
+      className="ds-h4 ds-u-display--block"
     >
-      <div
-        className="p2 bg-gray-lightest"
+      Medicaid Share
+    </p>
+    <p>
+      <Dollars
+        long={true}
       >
-        <div>
-          1067
-        </div>
-        <div
-          className="h3 bold mono truncate"
+        290
+      </Dollars>
+    </p>
+    <ChoiceList
+      choices={
+        Array [
+          Object {
+            "label": "90-10",
+            "value": "90-10",
+          },
+          Object {
+            "label": "75-25",
+            "value": "75-25",
+          },
+          Object {
+            "label": "50-50",
+            "value": "50-50",
+          },
+        ]
+      }
+      label="Federal-State Split"
+      labelClassName="ds-h5"
+      name="ffp-1066"
+      onChange={[Function]}
+      type="select"
+      value="90-10"
+    />
+    <div
+      className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2"
+    >
+      <p
+        className="ds-u-margin-bottom--0"
+      >
+        <strong>
+          Federal
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
         >
-          <Dollars
-            long={false}
-          >
-            3000
-          </Dollars>
-        </div>
-        <hr />
-        <InputHolder
-          hideLabel={false}
-          label="Other Funding Amount"
-          name="cost-allocate-other-1067"
-          onChange={[Function]}
-          type="text"
-          value={0}
-          wrapperClass="lg-col-8 mb2"
-        />
-        <div>
-          Medicaid Share
-        </div>
-        <div
-          className="h4 bold mono truncate"
+          261
+        </Dollars>
+      </p>
+      <p
+        className="ds-u-margin-bottom--0"
+      >
+        <strong>
+          State
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
         >
-          <Dollars
-            long={false}
-          >
-            3000
-          </Dollars>
-        </div>
-        <hr />
-        <Select
-          hideLabel={false}
-          label="Federal-State Split"
-          name="ffp-1067"
-          onChange={[Function]}
-          options={
-            Array [
-              "90-10",
-              "75-25",
-              "50-50",
-            ]
-          }
-          value="10-90"
-          wrapperClass="lg-col-8 mb2"
-        />
-        <div
-          className="lg-flex"
-        >
-          <div
-            className="lg-col-6 mb1 lg-m0"
-          >
-            <div>
-              Federal
-            </div>
-            <div
-              className="h4 bold mono truncate"
-            >
-              <Dollars
-                long={false}
-              >
-                300
-              </Dollars>
-            </div>
-          </div>
-          <div
-            className="lg-col-6 mb1 lg-m0"
-          >
-            <div>
-              State
-            </div>
-            <div
-              className="h4 bold mono truncate"
-            >
-              <Dollars
-                long={false}
-              >
-                2700
-              </Dollars>
-            </div>
-          </div>
-        </div>
-      </div>
+          29
+        </Dollars>
+      </p>
     </div>
+    <Connect(CostAllocateFFPQuarterly)
+      aKey="activity key"
+      year="1066"
+    />
+    <hr />
   </div>
-</div>
+  <div
+    key="1067"
+  >
+    <h6
+      className="ds-h3"
+    >
+      FFY 
+      1067
+      :
+    </h6>
+    <p>
+      <Dollars
+        long={true}
+      >
+        3000
+      </Dollars>
+    </p>
+    <TextField
+      label="Other Funding Amount"
+      labelClassName="ds-h4"
+      mask="currency"
+      name="cost-allocate-other-1067"
+      onChange={[Function]}
+      type="text"
+      value="0"
+    />
+    <p
+      className="ds-h4 ds-u-display--block"
+    >
+      Medicaid Share
+    </p>
+    <p>
+      <Dollars
+        long={true}
+      >
+        3000
+      </Dollars>
+    </p>
+    <ChoiceList
+      choices={
+        Array [
+          Object {
+            "label": "90-10",
+            "value": "90-10",
+          },
+          Object {
+            "label": "75-25",
+            "value": "75-25",
+          },
+          Object {
+            "label": "50-50",
+            "value": "50-50",
+          },
+        ]
+      }
+      label="Federal-State Split"
+      labelClassName="ds-h5"
+      name="ffp-1067"
+      onChange={[Function]}
+      type="select"
+      value="10-90"
+    />
+    <div
+      className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2"
+    >
+      <p
+        className="ds-u-margin-bottom--0"
+      >
+        <strong>
+          Federal
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
+        >
+          300
+        </Dollars>
+      </p>
+      <p
+        className="ds-u-margin-bottom--0"
+      >
+        <strong>
+          State
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
+        >
+          2700
+        </Dollars>
+      </p>
+    </div>
+    <Connect(CostAllocateFFPQuarterly)
+      aKey="activity key"
+      year="1067"
+    />
+    <hr />
+  </div>
+</Fragment>
 `;
