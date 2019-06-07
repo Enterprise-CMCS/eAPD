@@ -228,6 +228,7 @@ describe('APD activity serializer', () => {
             {
               id: 'person 1',
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              initialCollapsed: true,
               title: 'job title 1',
               desc: 'desc 1',
               years: {
@@ -238,6 +239,7 @@ describe('APD activity serializer', () => {
             {
               id: 'person 2',
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              initialCollapsed: true,
               title: 'job title 2',
               desc: 'desc 2',
               years: {
@@ -299,6 +301,7 @@ describe('APD activity serializer', () => {
             {
               id: 'e1',
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              initialCollapsed: true,
               category: 'category 1',
               desc: 'desc 1',
               years: { 2018: 10, 2019: 20 }
@@ -306,6 +309,7 @@ describe('APD activity serializer', () => {
             {
               id: 'e2',
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              initialCollapsed: true,
               category: 'category 2',
               desc: 'desc 2',
               years: { 2018: 30, 2019: 40 }

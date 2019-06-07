@@ -48,6 +48,7 @@ const newMilestone = (milestone = '', endDate = '') => ({
 const statePersonDefaultYear = () => ({ amt: '', perc: '' });
 const newStatePerson = years => ({
   key: generateKey(),
+  initialCollapsed: false,
   title: '',
   desc: '',
   years: arrToObj(years, statePersonDefaultYear())
@@ -74,6 +75,7 @@ const expenseDefaultYear = () => 0;
 
 const newExpense = years => ({
   key: generateKey(),
+  initialCollapsed: false,
   category: 'Hardware, software, and licensing',
   desc: '',
   years: arrToObj(years, expenseDefaultYear())

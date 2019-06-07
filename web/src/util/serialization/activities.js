@@ -161,6 +161,7 @@ export const fromAPI = (activityAPI, years) => {
 
     expenses: expenses.map(e => ({
       key: generateKey(),
+      initialCollapsed: true,
       id: e.id,
       category: e.category,
       desc: e.description,
@@ -186,6 +187,7 @@ export const fromAPI = (activityAPI, years) => {
 
     statePersonnel: statePersonnel.map(s => ({
       key: generateKey(),
+      initialCollapsed: true,
       id: s.id,
       title: s.title,
       desc: s.description,

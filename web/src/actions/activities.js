@@ -203,13 +203,19 @@ export const removeActivityGoal = (
   }
 };
 
-export const removeActivityExpense = (key, expenseKey) => dispatch => {
-  dispatch({
-    type: REMOVE_ACTIVITY_EXPENSE,
-    key,
-    expenseKey
-  });
-  dispatch(updateBudget());
+export const removeActivityExpense = (
+  key,
+  expenseKey,
+  { global = window } = {}
+) => dispatch => {
+  if (global.confirm('Do you really want to delete this non-personnel cost?')) {
+    dispatch({
+      type: REMOVE_ACTIVITY_EXPENSE,
+      key,
+      expenseKey
+    });
+    dispatch(updateBudget());
+  }
 };
 
 export const removeActivityMilestone = (key, milestoneKey) => ({
@@ -218,13 +224,19 @@ export const removeActivityMilestone = (key, milestoneKey) => ({
   milestoneKey
 });
 
-export const removeActivityStatePerson = (key, personKey) => dispatch => {
-  dispatch({
-    type: REMOVE_ACTIVITY_STATE_PERSON,
-    key,
-    personKey
-  });
-  dispatch(updateBudget());
+export const removeActivityStatePerson = (
+  key,
+  personKey,
+  { global = window } = {}
+) => dispatch => {
+  if (global.confirm('Do you really want to delete this personnel entry?')) {
+    dispatch({
+      type: REMOVE_ACTIVITY_STATE_PERSON,
+      key,
+      personKey
+    });
+    dispatch(updateBudget());
+  }
 };
 
 export const toggleActivitySection = key => ({
