@@ -2,10 +2,10 @@
 
 exports[`DollarInput component renders correctly 1`] = `
 <div
-  className="mb2"
+  className="ds-u-margin-bottom--2"
 >
   <label
-    className="block mb-tiny truncate"
+    className="ds-h4 ds-u-display--block"
     htmlFor="name"
   >
     label
@@ -20,10 +20,10 @@ exports[`DollarInput component renders correctly 1`] = `
 
 exports[`PercentInput component renders correctly 1`] = `
 <div
-  className="mb2"
+  className="ds-u-margin-bottom--2"
 >
   <label
-    className="block mb-tiny truncate"
+    className="ds-h4 ds-u-display--block"
     htmlFor="name"
   >
     label
