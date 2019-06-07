@@ -7,19 +7,14 @@ exports[`the CostAllocate component renders correctly 1`] = `
   resource="activities.costAllocate"
 >
   <div
-    className="mb3"
+    className="data-entry-box"
   >
-    <div
-      className="mb-tiny bold"
-    >
-      Description of cost allocation methodology
-    </div>
     <Instruction
       args={null}
       headingDisplay={
         Object {
-          "className": "ds-h3",
-          "level": "h3",
+          "className": "ds-h4",
+          "level": "h5",
         }
       }
       reverse={false}
@@ -31,46 +26,15 @@ exports[`the CostAllocate component renders correctly 1`] = `
       onSync={[Function]}
     />
   </div>
-  <Connect(CostAllocateFFP)
-    aKey="activity key"
-  />
   <div
-    className="mb3"
+    className="data-entry-box"
   >
-    <div
-      className="mb-tiny bold"
-    >
-      Breakout of federal share by quarter
-    </div>
     <Instruction
       args={null}
       headingDisplay={
         Object {
-          "className": "ds-h3",
-          "level": "h3",
-        }
-      }
-      reverse={false}
-      source="activities.costAllocate.quarterly.instruction"
-    />
-    <Connect(CostAllocateFFPQuarterly)
-      aKey="activity key"
-    />
-  </div>
-  <div
-    className="mb3"
-  >
-    <div
-      className="mb-tiny bold"
-    >
-      Other funding description
-    </div>
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h3",
-          "level": "h3",
+          "className": "ds-h4",
+          "level": "h5",
         }
       }
       reverse={false}
@@ -82,5 +46,9 @@ exports[`the CostAllocate component renders correctly 1`] = `
       onSync={[Function]}
     />
   </div>
+  <hr />
+  <Connect(CostAllocateFFP)
+    aKey="activity key"
+  />
 </Subsection>
 `;
