@@ -1,29 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Expenses from './Expenses';
+import Expenses from './NonPersonnelCosts';
 import StatePersonnel from './StatePersonnel';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
-const SubTitle = ({ children }) => (
-  <h2 className="mt1 mb2 h3 fw-600 blue">{children}</h2>
-);
-
-SubTitle.propTypes = {
-  children: PropTypes.node.isRequired
-};
-
 const Costs = ({ aKey }) => (
   <Subsection resource="activities.costs" nested>
-    <div className="mb4 pb4 border-bottom border-grey">
-      <SubTitle>{t('activities.costs.subtitles.personnel')}</SubTitle>
-      <StatePersonnel aKey={aKey} />
-    </div>
-    <div>
-      <SubTitle>{t('activities.costs.subtitles.nonPersonnel')}</SubTitle>
-      <Expenses aKey={aKey} />
-    </div>
+    <h5 className="ds-h4">{t('activities.costs.subtitles.personnel')}</h5>
+    <StatePersonnel aKey={aKey} />
+    <hr />
+
+    <h5 className="ds-h4">{t('activities.costs.subtitles.nonPersonnel')}</h5>
+    <Expenses aKey={aKey} />
+    <hr />
   </Subsection>
 );
 
