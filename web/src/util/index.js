@@ -179,6 +179,21 @@ export const generateKey = (() => {
   };
 })();
 
+/**
+ * Convert a YYYY-MM-DD date string from state format into a
+ * consistent display format
+ *
+ * @param {String} date Date string from state.
+ * @returns {String} Display-formatted date string.
+ */
+export const stateDateToDisplay = date => {
+  if (date) {
+    const [year, month, day] = date.split('-');
+    return `${month}/${day}/${year}`;
+  }
+  return 'N/A';
+};
+
 export const arrToObj = (array = [], initialValue = 0) => {
   const init =
     typeof initialValue === 'function' ? initialValue : () => initialValue;
