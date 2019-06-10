@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { selectApdData } from './apd.selectors';
+import { stateDateToDisplay } from '../util';
 
 export const selectActivityKeys = ({ activities: { allKeys } }) => allKeys;
 
@@ -51,29 +52,32 @@ export const selectActivitySchedule = createSelector(
   byKey => {
     const activities = [];
 
-    Object.values(byKey).forEach(({ name, plannedStartDate, schedule }) => {
-      const milestones = [];
-      activities.push({
-        name,
-        milestones,
-        start: plannedStartDate && plannedStartDate.replace(/-/g, '/')
-      });
-
-      schedule.forEach(({ milestone, endDate }) => {
-        milestones.push({
-          end: endDate && endDate.replace(/-/g, '/'),
-          name: milestone,
-          start: plannedStartDate && plannedStartDate.replace(/-/g, '/')
+    Object.values(byKey).forEach(
+      ({ name, plannedEndDate, plannedStartDate, schedule }) => {
+        const milestones = [];
+        activities.push({
+          end: stateDateToDisplay(plannedEndDate),
+          name,
+          milestones,
+          start: stateDateToDisplay(plannedStartDate)
         });
-      });
 
-      milestones.sort(({ end: endA }, { end: endB }) => {
-        if (endA === endB) {
-          return 0;
-        }
-        return endA > endB ? 1 : -1;
-      });
-    });
+        schedule.forEach(({ milestone, endDate }) => {
+          milestones.push({
+            end: stateDateToDisplay(endDate),
+            name: milestone,
+            start: stateDateToDisplay(plannedStartDate)
+          });
+        });
+
+        milestones.sort(({ end: endA }, { end: endB }) => {
+          if (endA === endB) {
+            return 0;
+          }
+          return endA > endB ? 1 : -1;
+        });
+      }
+    );
 
     return activities;
   }

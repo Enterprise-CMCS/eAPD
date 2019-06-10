@@ -21,13 +21,19 @@ exports[`schedule summary component renders correctly 1`] = `
         <thead>
           <tr>
             <th
-              className="ds-u-font-weight--bold"
-              colSpan="2"
+              className="ds-u-font-weight--bold ds-u-border-right--0"
             >
               Activity 
               1
               : 
               Number One
+            </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0"
+            >
+              12/10/1988
+               – 
+              4/15/1896
             </th>
           </tr>
         </thead>
@@ -39,11 +45,9 @@ exports[`schedule summary component renders correctly 1`] = `
               one-one
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--left"
             >
-              1995/12/02
-               - 
-              1996/03/16
+              03/16/1996
             </td>
           </tr>
           <tr>
@@ -53,11 +57,9 @@ exports[`schedule summary component renders correctly 1`] = `
               one-two
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--left"
             >
-              1962/10/05
-               - 
-              1970/05/23
+              05/23/1970
             </td>
           </tr>
         </tbody>
@@ -69,13 +71,19 @@ exports[`schedule summary component renders correctly 1`] = `
         <thead>
           <tr>
             <th
-              className="ds-u-font-weight--bold"
-              colSpan="2"
+              className="ds-u-font-weight--bold ds-u-border-right--0"
             >
               Activity 
               2
               : 
               Number 💩
+            </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0"
+            >
+              02/18/1853
+               – 
+              07/14/2002
             </th>
           </tr>
         </thead>
@@ -87,11 +95,9 @@ exports[`schedule summary component renders correctly 1`] = `
               three-one
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--left"
             >
-              2016/10/06
-               - 
-              2016/10/06
+              10/06/2016
             </td>
           </tr>
           <tr>
@@ -101,11 +107,9 @@ exports[`schedule summary component renders correctly 1`] = `
               two-two
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--left"
             >
-              2014/06/25
-               - 
-              2014/06/25
+              06/25/2014
             </td>
           </tr>
           <tr>
@@ -115,11 +119,9 @@ exports[`schedule summary component renders correctly 1`] = `
               two-three
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--left"
             >
-              1965/08/29
-               - 
-              1965/08/21
+              08/21/1965
             </td>
           </tr>
         </tbody>
@@ -131,13 +133,19 @@ exports[`schedule summary component renders correctly 1`] = `
         <thead>
           <tr>
             <th
-              className="ds-u-font-weight--bold"
-              colSpan="2"
+              className="ds-u-font-weight--bold ds-u-border-right--0"
             >
               Activity 
               3
               : 
               Number Three
+            </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0"
+            >
+              11/22/1987
+               – 
+              10/15/2009
             </th>
           </tr>
         </thead>
@@ -149,11 +157,9 @@ exports[`schedule summary component renders correctly 1`] = `
               three-one
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--left"
             >
-              2018/05/05
-               - 
-              2018/06/09
+              06/09/2018
             </td>
           </tr>
         </tbody>
