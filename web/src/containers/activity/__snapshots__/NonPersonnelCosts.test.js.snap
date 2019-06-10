@@ -21,7 +21,7 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
     handleEditCost={[Function]}
     handleEditDesc={[Function]}
     idx={0}
-    initialCollapsed={true}
+    initialCollapsed={false}
     key="cost key"
     years={
       Object {

@@ -73,6 +73,7 @@ const StatePersonnel = ({
             handleEditFTE={handleEditFTE}
             handleEditPersonDesc={handleEditPersonDesc}
             handleEditPersonTitle={handleEditPersonTitle}
+            initialCollapsed={person.initialCollapsed}
             idx={idx}
             title={person.title}
             desc={person.desc}

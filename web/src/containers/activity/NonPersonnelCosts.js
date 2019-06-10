@@ -65,7 +65,7 @@ const NonPersonnelCosts = ({
             handleEditCost={handleEditCost}
             handleEditDesc={handleEditDesc}
             idx={idx}
-            initialCollapsed={expenses.initialCollapsed}
+            initialCollapsed={expense.initialCollapsed}
             key={expense.key}
             years={expense.years}
           />
