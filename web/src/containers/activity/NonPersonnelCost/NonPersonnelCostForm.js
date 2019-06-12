@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 
 import DollarField from '../../../components/DollarField';
+import { getLabelID } from '../../../util';
 
 const NonPersonnelCostForm = ({
   category,
@@ -34,11 +35,18 @@ const NonPersonnelCostForm = ({
     [idx]
   );
 
+  const selectID = getLabelID();
+
   return (
     <div className="ds-u-border-bottom--2 ds-u-padding-y--2">
-      <h6 className="ds-h4">Personnel {idx + 1}:</h6>
-      <FormLabel>Category</FormLabel>
-      <Select name="category" value={category} onChange={editCategory}>
+      <h6 className="ds-h4">Non-Personnel Cost {idx + 1}:</h6>
+      <FormLabel fieldId={selectID}>Category</FormLabel>
+      <Select
+        id={selectID}
+        name="category"
+        value={category}
+        onChange={editCategory}
+      >
         <option value="Hardware, software, and licensing">
           Hardware, software, and licensing
         </option>
