@@ -39,15 +39,17 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
       <h6
         className="ds-h4"
       >
-        Personnel 
+        Non-Personnel Cost 
         4
         :
       </h6>
       <FormLabel
         component="label"
+        fieldId="eapd-form-label-12321"
       >
         <label
           className="ds-c-label"
+          htmlFor="eapd-form-label-12321"
         >
           <span
             className=""
@@ -57,13 +59,14 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
         </label>
       </FormLabel>
       <Select
+        id="eapd-form-label-12321"
         name="category"
         onChange={[Function]}
         value="cost category"
       >
         <select
           className="ds-c-field"
-          id="select_category_5"
+          id="eapd-form-label-12321"
           name="category"
           onChange={[Function]}
           value="cost category"
@@ -114,11 +117,11 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
         >
           <FormLabel
             component="label"
-            fieldId="textfield_6"
+            fieldId="textfield_4"
           >
             <label
               className="ds-c-label"
-              htmlFor="textfield_6"
+              htmlFor="textfield_4"
             >
               <span
                 className=""
@@ -129,7 +132,7 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
           </FormLabel>
           <textarea
             className="ds-c-field"
-            id="textfield_6"
+            id="textfield_4"
             name="desc"
             onChange={[Function]}
             rows={5}
@@ -159,11 +162,11 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
           >
             <FormLabel
               component="label"
-              fieldId="textfield_7"
+              fieldId="textfield_5"
             >
               <label
                 className="ds-c-label"
-                htmlFor="textfield_7"
+                htmlFor="textfield_5"
               >
                 <span
                   className=""
@@ -186,7 +189,7 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
                 <input
                   aria-label="2003 Cost. Enter amount in dollars."
                   className="ds-c-field ds-c-field--currency ds-c-field--medium"
-                  id="textfield_7"
+                  id="textfield_5"
                   name="cost"
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -220,11 +223,11 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
           >
             <FormLabel
               component="label"
-              fieldId="textfield_8"
+              fieldId="textfield_6"
             >
               <label
                 className="ds-c-label"
-                htmlFor="textfield_8"
+                htmlFor="textfield_6"
               >
                 <span
                   className=""
@@ -247,7 +250,7 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
                 <input
                   aria-label="2004 Cost. Enter amount in dollars."
                   className="ds-c-field ds-c-field--currency ds-c-field--medium"
-                  id="textfield_8"
+                  id="textfield_6"
                   name="cost"
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -314,7 +317,7 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
     <StandardReview
       editHref={null}
       heading="4. cost category"
-      headingLevel={4}
+      headingLevel={6}
       onDeleteClick={[MockFunction]}
       onEditClick={[Function]}
     >
@@ -346,7 +349,7 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
         }
         editText="Edit"
         heading="4. cost category"
-        headingLevel={4}
+        headingLevel={6}
       >
         <div
           className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
@@ -354,11 +357,11 @@ exports[`the NonPersonnelCost component when the cost is initially collapsed it 
           <div
             className="ds-u-margin-right--2"
           >
-            <h4
+            <h6
               className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
             >
               4. cost category
-            </h4>
+            </h6>
             <div
               className="ds-c-review__body"
             >
@@ -491,7 +494,7 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
     <StandardReview
       editHref={null}
       heading="4. cost category"
-      headingLevel={4}
+      headingLevel={6}
       onDeleteClick={[MockFunction]}
       onEditClick={[Function]}
     >
@@ -523,7 +526,7 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
         }
         editText="Edit"
         heading="4. cost category"
-        headingLevel={4}
+        headingLevel={6}
       >
         <div
           className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
@@ -531,11 +534,11 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
           <div
             className="ds-u-margin-right--2"
           >
-            <h4
+            <h6
               className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
             >
               4. cost category
-            </h4>
+            </h6>
             <div
               className="ds-c-review__body"
             >
@@ -671,15 +674,17 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
       <h6
         className="ds-h4"
       >
-        Personnel 
+        Non-Personnel Cost 
         4
         :
       </h6>
       <FormLabel
         component="label"
+        fieldId="eapd-form-label-12321"
       >
         <label
           className="ds-c-label"
+          htmlFor="eapd-form-label-12321"
         >
           <span
             className=""
@@ -689,13 +694,14 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
         </label>
       </FormLabel>
       <Select
+        id="eapd-form-label-12321"
         name="category"
         onChange={[Function]}
         value="cost category"
       >
         <select
           className="ds-c-field"
-          id="select_category_1"
+          id="eapd-form-label-12321"
           name="category"
           onChange={[Function]}
           value="cost category"
@@ -746,11 +752,11 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
         >
           <FormLabel
             component="label"
-            fieldId="textfield_2"
+            fieldId="textfield_1"
           >
             <label
               className="ds-c-label"
-              htmlFor="textfield_2"
+              htmlFor="textfield_1"
             >
               <span
                 className=""
@@ -761,7 +767,7 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
           </FormLabel>
           <textarea
             className="ds-c-field"
-            id="textfield_2"
+            id="textfield_1"
             name="desc"
             onChange={[Function]}
             rows={5}
@@ -791,11 +797,11 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
           >
             <FormLabel
               component="label"
-              fieldId="textfield_3"
+              fieldId="textfield_2"
             >
               <label
                 className="ds-c-label"
-                htmlFor="textfield_3"
+                htmlFor="textfield_2"
               >
                 <span
                   className=""
@@ -818,7 +824,7 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
                 <input
                   aria-label="2003 Cost. Enter amount in dollars."
                   className="ds-c-field ds-c-field--currency ds-c-field--medium"
-                  id="textfield_3"
+                  id="textfield_2"
                   name="cost"
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -852,11 +858,11 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
           >
             <FormLabel
               component="label"
-              fieldId="textfield_4"
+              fieldId="textfield_3"
             >
               <label
                 className="ds-c-label"
-                htmlFor="textfield_4"
+                htmlFor="textfield_3"
               >
                 <span
                   className=""
@@ -879,7 +885,7 @@ exports[`the NonPersonnelCost component when the milestone is initially NOT coll
                 <input
                   aria-label="2004 Cost. Enter amount in dollars."
                   className="ds-c-field ds-c-field--currency ds-c-field--medium"
-                  id="textfield_4"
+                  id="textfield_3"
                   name="cost"
                   onBlur={[Function]}
                   onChange={[Function]}
