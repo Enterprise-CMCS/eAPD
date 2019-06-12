@@ -8,10 +8,11 @@ import {
 } from '../actions/auth';
 
 const initialState = {
-  initialCheck: false,
-  fetching: false,
   authenticated: false,
   error: '',
+  fetching: false,
+  hasEverLoggedOn: false,
+  initialCheck: false,
   user: null
 };
 
@@ -20,8 +21,9 @@ const auth = (state = initialState, action) => {
     case AUTH_CHECK_SUCCESS:
       return {
         ...state,
-        initialCheck: true,
         authenticated: true,
+        hasEverLoggedOn: true,
+        initialCheck: true,
         user: action.data
       };
     case AUTH_CHECK_FAILURE:
@@ -31,14 +33,19 @@ const auth = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        fetching: false,
         authenticated: true,
+        fetching: false,
+        hasEverLoggedOn: true,
         user: action.data
       };
     case LOGIN_FAILURE:
       return { ...state, fetching: false, error: action.error };
     case LOGOUT_SUCCESS:
-      return { ...initialState, initialCheck: state.initialCheck };
+      return {
+        ...initialState,
+        hasEverLoggedOn: state.hasEverLoggedOn,
+        initialCheck: state.initialCheck
+      };
     default:
       return state;
   }
