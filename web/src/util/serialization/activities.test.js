@@ -218,6 +218,7 @@ describe('APD activity serializer', () => {
           schedule: [
             {
               id: 'm1',
+              initialCollapsed: true,
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
               milestone: 'milestone name',
               plannedStart: 'start',
