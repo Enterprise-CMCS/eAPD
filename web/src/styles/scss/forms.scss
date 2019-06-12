@@ -1,4 +1,5 @@
 @import '@cmsgov/design-system-support/src/settings/index';
+@import './variables';
 
 fieldset {
   margin: 0;
@@ -42,4 +43,23 @@ div.form--computed-value__input-aligned {
 
 .rdw-editor-toolbar {
   border-radius: $border-radius;
+}
+
+/* dolla dolla inputs */
+.table--input-holder {
+  padding-bottom: 0;
+}
+
+.table--input__number {
+  font-family: $font-family-mono;
+  font-size: inherit;
+  text-align: right;
+  border: 1px solid $color-gray-lighter;
+  border-radius: $border-radius;
+  padding: $spacer-1;
+  width: 100%;
+}
+
+.input {
+  background-color: greenyellow;
 }

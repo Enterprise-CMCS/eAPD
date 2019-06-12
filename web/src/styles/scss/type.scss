@@ -1,11 +1,12 @@
 @import '@cmsgov/design-system-support/src/settings/index';
+@import './variables';
 
 em {
   font-style: italic !important;
 }
 
 .font-family--mono {
-  font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  font-family: $font-family-mono;
 }
 
 h1.apd--title {
