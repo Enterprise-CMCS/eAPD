@@ -7,16 +7,18 @@ exports[`the NonPersonnelCostForm component renders correctly 1`] = `
   <h6
     className="ds-h4"
   >
-    Personnel 
+    Non-Personnel Cost 
     84
     :
   </h6>
   <FormLabel
     component="label"
+    fieldId="eapd-form-label-12321"
   >
     Category
   </FormLabel>
   <Select
+    id="eapd-form-label-12321"
     name="category"
     onChange={[Function]}
     value="cost category"
