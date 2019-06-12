@@ -4,7 +4,7 @@ exports[`the NonPersonnelCostReview component renders correctly 1`] = `
 <StandardReview
   editHref={null}
   heading="54. test category"
-  headingLevel={4}
+  headingLevel={6}
   onDeleteClick={[MockFunction]}
   onEditClick={[MockFunction]}
 >
