@@ -16,11 +16,8 @@ import { t } from '../../i18n';
 
 const GoalReview = ({ goal, idx, edit, handleDelete }) => (
   <Review
-    heading={
-      <h4 className="ds-h4">
-        {idx + 1}. {goal.description}
-      </h4>
-    }
+    heading={`${idx + 1}. ${goal.description || ''}`}
+    headingLevel={4}
     onDeleteClick={handleDelete}
     onEditClick={edit}
   >

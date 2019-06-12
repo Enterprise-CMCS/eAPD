@@ -128,14 +128,8 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
   >
     <StandardReview
       editHref={null}
-      heading={
-        <h4
-          className="ds-h4"
-        >
-          1
-          . 
-        </h4>
-      }
+      heading="1. "
+      headingLevel={4}
       onDeleteClick={[Function]}
       onEditClick={[Function]}
     >
@@ -166,14 +160,8 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
           </div>
         }
         editText="Edit"
-        heading={
-          <h4
-            className="ds-h4"
-          >
-            1
-            . 
-          </h4>
-        }
+        heading="1. "
+        headingLevel={4}
       >
         <div
           className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
@@ -181,16 +169,11 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
           <div
             className="ds-u-margin-right--2"
           >
-            <h3
+            <h4
               className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
             >
-              <h4
-                className="ds-h4"
-              >
-                1
-                . 
-              </h4>
-            </h3>
+              1. 
+            </h4>
             <div
               className="ds-c-review__body"
             >
@@ -260,14 +243,8 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
   >
     <StandardReview
       editHref={null}
-      heading={
-        <h4
-          className="ds-h4"
-        >
-          1
-          . 
-        </h4>
-      }
+      heading="1. "
+      headingLevel={4}
       onDeleteClick={[Function]}
       onEditClick={[Function]}
     >
@@ -298,14 +275,8 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
           </div>
         }
         editText="Edit"
-        heading={
-          <h4
-            className="ds-h4"
-          >
-            1
-            . 
-          </h4>
-        }
+        heading="1. "
+        headingLevel={4}
       >
         <div
           className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
@@ -313,16 +284,11 @@ exports[`activity goals subsection the Goal component, wrapper around the form a
           <div
             className="ds-u-margin-right--2"
           >
-            <h3
+            <h4
               className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
             >
-              <h4
-                className="ds-h4"
-              >
-                1
-                . 
-              </h4>
-            </h3>
+              1. 
+            </h4>
             <div
               className="ds-c-review__body"
             >
@@ -526,15 +492,8 @@ exports[`activity goals subsection the GoalForm component renders properly 1`] =
 exports[`activity goals subsection the GoalReview component renders properly with a delete handler 1`] = `
 <StandardReview
   editHref={null}
-  heading={
-    <h4
-      className="ds-h4"
-    >
-      1
-      . 
-      goal name
-    </h4>
-  }
+  heading="1. goal name"
+  headingLevel={4}
   onDeleteClick={[Function]}
   onEditClick={[Function]}
 >
@@ -553,15 +512,8 @@ exports[`activity goals subsection the GoalReview component renders properly wit
 exports[`activity goals subsection the GoalReview component renders properly without a delete handler 1`] = `
 <StandardReview
   editHref={null}
-  heading={
-    <h4
-      className="ds-h4"
-    >
-      1
-      . 
-      goal name
-    </h4>
-  }
+  heading="1. goal name"
+  headingLevel={4}
   onDeleteClick={null}
   onEditClick={[Function]}
 >
