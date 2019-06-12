@@ -1,136 +1,104 @@
-import moment from 'moment';
+import { Button } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Fragment, useCallback, useMemo } from 'react';
 import { connect } from 'react-redux';
 
+import Milestone from './Milestone';
 import {
   addActivityMilestone as addActivityMilestoneAction,
   removeActivityMilestone as removeActivityMilestoneAction,
   updateActivity as updateActivityAction
 } from '../../actions/activities';
-import Btn from '../../components/Btn';
-import DatePicker from '../../components/DatePicker';
-import DateRangePicker from '../../components/DateRangePicker';
-import { Input } from '../../components/Inputs';
 import Instruction from '../../components/Instruction';
 import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
+import DateField from '../../components/DateField';
 import { t } from '../../i18n';
 
-class Schedule extends Component {
-  handleActivityDateChange = ({ start, end }) => {
-    const { activity, updateActivity } = this.props;
+const Schedule = ({
+  activity,
+  addActivityMilestone,
+  removeActivityMilestone,
+  updateActivity
+}) => {
+  const handleActivityStartChange = useCallback((_, dateStr) => {
+    updateActivity(activity.key, { plannedStartDate: dateStr });
+  });
+
+  const handleActivityEndChange = useCallback((_, dateStr) => {
+    updateActivity(activity.key, { plannedEndDate: dateStr });
+  });
+
+  const handleMilestoneNameChange = useCallback((index, name) => {
     updateActivity(activity.key, {
-      plannedStartDate: start,
-      plannedEndDate: end
+      schedule: { [index]: { milestone: name } }
     });
-  };
+  });
 
-  handleChange = (index, field) => e => {
-    const { value } = e.target;
-    const { activity, updateActivity } = this.props;
+  const handleMilestoneDateChange = useCallback((index, date) => {
+    updateActivity(activity.key, { schedule: { [index]: { endDate: date } } });
+  });
 
-    const updates = { schedule: { [index]: { [field]: value } } };
-    updateActivity(activity.key, updates);
-  };
+  const removeMilestone = useMemo(
+    () =>
+      activity.schedule.length > 1
+        ? i => removeActivityMilestone(activity.key, activity.schedule[i].key)
+        : null,
+    [activity.schedule.length]
+  );
 
-  handleMilestoneDateChange = index => endDate => {
-    const { activity, updateActivity } = this.props;
-
-    const updates = { schedule: { [index]: { endDate } } };
-    updateActivity(activity.key, updates);
-  };
-
-  render() {
-    const {
-      activity,
-      addActivityMilestone,
-      removeActivityMilestone
-    } = this.props;
-
-    return (
-      <Subsection resource="activities.schedule" nested>
-        {activity.schedule.length === 0 ? (
-          <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
-        ) : (
-          <div className="mb3">
-            <div className="mt1 mb3">
-              <DateRangePicker
-                initialStartDate={activity.plannedStartDate}
-                startDateId={`activity-${activity.key}-start-date`}
-                initialEndDate={activity.plannedEndDate}
-                endDateId={`activity-${activity.key}-end-date`}
-                onChange={this.handleActivityDateChange}
-              />
-            </div>
-            <Instruction source="activities.schedule.milestone.instruction" />
-
-            <table className="h5 table table-fixed">
-              <thead>
-                <tr>
-                  <th className="col-5 border-none">
-                    {t('activities.schedule.milestone.milestoneHeader')}
-                  </th>
-                  <th className="col-6 border-none">
-                    {t('activities.schedule.milestone.endHeader')}
-                  </th>
-                  <th className="col-1 border-none" />
-                </tr>
-              </thead>
-              <tbody>
-                {activity.schedule.map((d, i) => (
-                  <tr key={d.key}>
-                    <td className="border-bottom">
-                      <Input
-                        name={`milestone-${d.key}-name`}
-                        label={t(
-                          'activities.schedule.milestone.milestoneLabel'
-                        )}
-                        hideLabel
-                        wrapperClass="m0"
-                        value={d.milestone}
-                        onChange={this.handleChange(i, 'milestone')}
-                      />
-                    </td>
-                    <td className="border-bottom">
-                      <DatePicker
-                        id={`milestone-${d.key}-end-date`}
-                        initialDate={d.endDate}
-                        initialVisibleMonth={() =>
-                          activity.plannedStartDate
-                            ? moment(activity.plannedStartDate)
-                            : moment()
-                        }
-                        onChange={this.handleMilestoneDateChange(i)}
-                      />
-                    </td>
-                    <td className="center align-middle border-bottom">
-                      <Btn
-                        kind="outline"
-                        extraCss="px1 py-tiny visibility--screen"
-                        onClick={() =>
-                          removeActivityMilestone(activity.key, d.key)
-                        }
-                      >
-                        ✗
-                      </Btn>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+  return (
+    <Subsection resource="activities.schedule" nested>
+      {activity.schedule.length === 0 ? (
+        <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
+      ) : (
+        <Fragment>
+          <h5 className="ds-h5">Activity start and end dates</h5>
+          <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
+            <DateField
+              value={activity.plannedStartDate}
+              onChange={handleActivityStartChange}
+            />
+            <DateField
+              value={activity.plannedEndDate}
+              onChange={handleActivityEndChange}
+            />
           </div>
-        )}
-        <Btn
-          extraCss="visibility--screen"
-          onClick={() => addActivityMilestone(activity.key)}
-        >
-          {t('activities.schedule.milestone.addMilestoneButtonText')}
-        </Btn>
-      </Subsection>
-    );
-  }
-}
+          <div className="mb3">
+            <Instruction
+              source="activities.schedule.milestone.instruction"
+              headingDisplay={{ className: 'ds-h5', level: 'h5' }}
+            />
+
+            <hr />
+
+            {activity.schedule.map(
+              ({ endDate, initialCollapsed, key, milestone: name }, i) => (
+                <Milestone
+                  key={key}
+                  idx={i}
+                  initialCollapsed={initialCollapsed}
+                  name={name}
+                  onChangeName={handleMilestoneNameChange}
+                  endDate={endDate}
+                  onChangeDate={handleMilestoneDateChange}
+                  onDelete={removeMilestone}
+                />
+              )
+            )}
+          </div>
+        </Fragment>
+      )}
+      <Button
+        className="visibility--screen"
+        onClick={() => addActivityMilestone(activity.key)}
+      >
+        {t('activities.schedule.addMilestoneButtonText')}
+      </Button>
+      <hr />
+    </Subsection>
+  );
+};
 
 Schedule.propTypes = {
   activity: PropTypes.object.isRequired,
@@ -153,3 +121,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Schedule);
+
+export { Schedule as plain, mapStateToProps, mapDispatchToProps };

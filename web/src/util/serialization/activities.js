@@ -181,6 +181,7 @@ export const fromAPI = (activityAPI, years) => {
 
     schedule: schedule.map(s => ({
       ...replaceNulls(s),
+      initialCollapsed: true,
       key: generateKey()
     })),
 
