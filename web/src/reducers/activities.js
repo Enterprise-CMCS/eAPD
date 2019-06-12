@@ -40,6 +40,7 @@ const newGoal = () => ({
 });
 
 const newMilestone = (milestone = '', endDate = '') => ({
+  initialCollapsed: false,
   key: generateKey(),
   milestone,
   endDate
