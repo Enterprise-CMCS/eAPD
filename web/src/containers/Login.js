@@ -1,8 +1,8 @@
+import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { TextField } from '@cmsgov/design-system-core';
 
 import ConsentBanner from '../components/ConsentBanner';
 import { login } from '../actions/auth';
@@ -29,7 +29,13 @@ class Login extends Component {
   };
 
   render() {
-    const { authenticated, error, fetching, location } = this.props;
+    const {
+      authenticated,
+      error,
+      fetching,
+      hasEverLoggedOn,
+      location
+    } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
     const { showConsent, username, password } = this.state;
 
@@ -40,7 +46,7 @@ class Login extends Component {
       return <Redirect to="/" />;
     }
 
-    if (showConsent) {
+    if (showConsent && !hasEverLoggedOn) {
       return (
         <Fragment>
           <ConsentBanner onAgree={this.hideConsent} />
@@ -62,6 +68,7 @@ class Login extends Component {
           cancelable={false}
           canSubmit={username.length && password.length}
           error={errorMessage}
+          success={hasEverLoggedOn ? 'You have securely logged out.' : null}
           working={fetching}
           primaryButtonText={['Log in', 'Logging in']}
           onSave={this.handleSubmit}
@@ -97,14 +104,18 @@ Login.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   fetching: PropTypes.bool.isRequired,
+  hasEverLoggedOn: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ auth: { authenticated, error, fetching } }) => ({
+const mapStateToProps = ({
+  auth: { authenticated, error, fetching, hasEverLoggedOn }
+}) => ({
   authenticated,
   error,
-  fetching
+  fetching,
+  hasEverLoggedOn
 });
 
 const mapDispatchToProps = { login };
