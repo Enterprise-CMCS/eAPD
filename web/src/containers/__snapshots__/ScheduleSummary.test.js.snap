@@ -22,6 +22,11 @@ exports[`schedule summary component renders correctly 1`] = `
           <tr>
             <th
               className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "90%",
+                }
+              }
             >
               Activity 
               1
@@ -72,6 +77,11 @@ exports[`schedule summary component renders correctly 1`] = `
           <tr>
             <th
               className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "90%",
+                }
+              }
             >
               Activity 
               2
@@ -134,6 +144,11 @@ exports[`schedule summary component renders correctly 1`] = `
           <tr>
             <th
               className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "90%",
+                }
+              }
             >
               Activity 
               3
