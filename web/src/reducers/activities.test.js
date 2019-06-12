@@ -69,6 +69,7 @@ describe('activities reducer', () => {
 
   const newMilestone = keyFn => ({
     key: keyFn(),
+    initialCollapsed: false,
     milestone: '',
     endDate: ''
   });

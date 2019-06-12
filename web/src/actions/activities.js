@@ -218,11 +218,19 @@ export const removeActivityExpense = (
   }
 };
 
-export const removeActivityMilestone = (key, milestoneKey) => ({
-  type: REMOVE_ACTIVITY_MILESTONE,
+export const removeActivityMilestone = (
   key,
-  milestoneKey
-});
+  milestoneKey,
+  { global = window } = {}
+) => dispatch => {
+  if (global.confirm('Do you really want to delete this activity milestone?')) {
+    dispatch({
+      type: REMOVE_ACTIVITY_MILESTONE,
+      key,
+      milestoneKey
+    });
+  }
+};
 
 export const removeActivityStatePerson = (
   key,
