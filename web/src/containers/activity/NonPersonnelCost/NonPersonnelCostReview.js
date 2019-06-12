@@ -15,7 +15,7 @@ const NonPersonnelCostReview = ({
   return (
     <Review
       heading={`${idx + 1}. ${category}`}
-      headingLevel={4}
+      headingLevel={6}
       onDeleteClick={handleDelete}
       onEditClick={expand}
     >
