@@ -50,7 +50,7 @@ exports[`the StatePerson component when the milestone is initially NOT collapsed
     <StandardReview
       editHref={null}
       heading="4. personnel title"
-      headingLevel={4}
+      headingLevel={6}
       onDeleteClick={[MockFunction]}
       onEditClick={[Function]}
     >
@@ -82,7 +82,7 @@ exports[`the StatePerson component when the milestone is initially NOT collapsed
         }
         editText="Edit"
         heading="4. personnel title"
-        headingLevel={4}
+        headingLevel={6}
       >
         <div
           className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
@@ -90,11 +90,11 @@ exports[`the StatePerson component when the milestone is initially NOT collapsed
           <div
             className="ds-u-margin-right--2"
           >
-            <h4
+            <h6
               className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
             >
               4. personnel title
-            </h4>
+            </h6>
             <div
               className="ds-c-review__body"
             >
@@ -975,7 +975,7 @@ exports[`the StatePerson component when the person is initially collapsed it ren
     <StandardReview
       editHref={null}
       heading="4. personnel title"
-      headingLevel={4}
+      headingLevel={6}
       onDeleteClick={[MockFunction]}
       onEditClick={[Function]}
     >
@@ -1007,7 +1007,7 @@ exports[`the StatePerson component when the person is initially collapsed it ren
         }
         editText="Edit"
         heading="4. personnel title"
-        headingLevel={4}
+        headingLevel={6}
       >
         <div
           className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
@@ -1015,11 +1015,11 @@ exports[`the StatePerson component when the person is initially collapsed it ren
           <div
             className="ds-u-margin-right--2"
           >
-            <h4
+            <h6
               className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
             >
               4. personnel title
-            </h4>
+            </h6>
             <div
               className="ds-c-review__body"
             >
