@@ -25,7 +25,7 @@ const ApdPreviousActivityTable = ({
   return (
     <Fragment>
       <h4 className="ds-h4">HIT + HIE</h4>
-      <table className="table-cms centered-headers">
+      <table className="table-cms">
         <thead>
           <tr>
             <th id="prev_act_hit_header_null2" />
@@ -71,8 +71,8 @@ const ApdPreviousActivityTable = ({
                       name={`hithie-approved-total-${year}`}
                       label={`total approved funding for HIT and HIE for FFY ${year}, state plus federal`}
                       hideLabel
-                      wrapperClass="m0"
-                      className="m0 input input-condensed mono right-align"
+                      wrapperClass="table--input-holder"
+                      className="table--input__number"
                       value={
                         previousActivityExpenses[year].hithie.totalApproved
                       }
@@ -93,8 +93,8 @@ const ApdPreviousActivityTable = ({
                       name={`hithie-actual-federal-${year}`}
                       label={`actual federal share for HIT and HIE for FFY ${year}`}
                       hideLabel
-                      wrapperClass="m0"
-                      className="m0 input input-condensed mono right-align"
+                      wrapperClass="table--input-holder"
+                      className="table--input__number"
                       value={
                         previousActivityExpenses[year].hithie.federalActual
                       }
