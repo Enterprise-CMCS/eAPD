@@ -26,23 +26,21 @@ const ApdPreviousActivityTableMMIS = ({
     <Fragment>
       <h4 className="ds-h4">MMIS</h4>
       {[90, 75, 50].map((level) => (
-        <table key={level} className="table-cms centered-headers table-fixed">
+        <table key={level} className="budget-table">
           <thead>
             <tr>
-              <th id="prev_act_mmis_null2" />
-              <th className="pre-line" id={`prev_act_mmis${level}_total`}>
+              <th id="prev_act_mmis_null2" rowspan="2" />
+              <th id={`prev_act_mmis${level}_total`}>
                 {TABLE_HEADERS.total}
               </th>
               <th
                 colSpan="2"
-                className="pre-line"
                 id={`prev_act_mmis${level}_federal`}
               >
                 {TABLE_HEADERS.federal(level)}
               </th>
             </tr>
             <tr>
-              <th id="prev_act_mmis_null3" />
               <th id={`prev_act_mmis${level}_total_approved`}>
                 {TABLE_HEADERS.approved}
               </th>
@@ -62,7 +60,7 @@ const ApdPreviousActivityTableMMIS = ({
                 (expenses.totalApproved * level) / 100;
 
               return (
-                <tr key={year} className="align-middle">
+                <tr key={year}>
                   <th id={`prev_act_mmis_row_${year}`}>
                     {TABLE_HEADERS.ffy(year)}
                   </th>
@@ -74,8 +72,8 @@ const ApdPreviousActivityTableMMIS = ({
                       label={`total approved funding for MMIS at the ${level}/${100 -
                         level} level for FFY ${year}, state plus federal`}
                       hideLabel
-                      wrapperClass="m0"
-                      className="m0 input input-condensed mono right-align"
+                      wrapperClass="budget-table--input-holder"
+                      className="budget-table--input__number"
                       value={expenses.totalApproved}
                       onChange={handleChange(year, level, 'totalApproved')}
                     />
@@ -83,6 +81,7 @@ const ApdPreviousActivityTableMMIS = ({
 
                   <td
                     headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_approved`}
+                    className="font-family--mono"
                   >
                     <Dollars>{federalApproved}</Dollars>
                   </td>
@@ -95,8 +94,8 @@ const ApdPreviousActivityTableMMIS = ({
                       label={`actual federal share for MMIS at the ${level}/${100 -
                         level} level for FFY ${year}`}
                       hideLabel
-                      wrapperClass="m0"
-                      className="m0 input input-condensed mono right-align"
+                      wrapperClass="budget-table--input-holder"
+                      className="budget-table--input__number"
                       value={expenses.federalActual}
                       onChange={handleChange(year, level, 'federalActual')}
                     />

@@ -1,11 +1,11 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
-.table-cms {
+.budget-table {
   font-size: 12px;
   &.table-cms__totals {
     width: 42%; // roughly equal to full tables' cells; temp fix before switching font to courier
   }
-  + .table-cms:not(.table-frozen-data){
+  + .budget-table {
     margin-top: $spacer-2;
   }
 

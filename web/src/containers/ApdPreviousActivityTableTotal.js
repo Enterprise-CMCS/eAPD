@@ -12,7 +12,7 @@ const ApdPreviousActivityTableMMIS = ({ totals }) => {
   return (
     <Fragment>
       <h4 className="ds-h4">Grand totals: Federal HIT, HIE, MMIS</h4>
-      <table className="table-cms centered-headers table-fixed">
+      <table className="budget-table">
         <thead>
           <tr>
             <th id="prev_act_totals_null3" />
@@ -26,18 +26,20 @@ const ApdPreviousActivityTableMMIS = ({ totals }) => {
             const expenses = totals[year];
 
             return (
-              <tr key={year} className="align-middle">
+              <tr key={year}>
                 <th id={`prev_act_total_row_${year}`}>
                   {TABLE_HEADERS.ffy(year)}
                 </th>
                 <td
                   headers={`prev_act_total_row_${year} prev_act_total_approved`}
+                  className="font-family--mono"
                 >
                   <Dollars>{expenses.approved}</Dollars>
                 </td>
 
                 <td
                   headers={`prev_act_total_row_${year} prev_act_total_actual`}
+                  className="font-family--mono"
                 >
                   <Dollars>{expenses.actual}</Dollars>
                 </td>
