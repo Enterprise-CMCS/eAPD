@@ -78,10 +78,4 @@ export default connect(
   mapDispatchToProps
 )(Goals);
 
-export {
-  Goals as plain,
-  GoalForm,
-  GoalReview,
-  mapStateToProps,
-  mapDispatchToProps
-};
+export { Goals as plain, mapStateToProps, mapDispatchToProps };

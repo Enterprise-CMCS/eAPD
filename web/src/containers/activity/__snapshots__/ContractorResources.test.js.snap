@@ -6,93 +6,34 @@ exports[`the ContractorResources component renders correctly 1`] = `
   nested={true}
   resource="activities.contractorResources"
 >
-  <div
-    className="ds-u-border-y--1"
-    key="key 1"
-  >
-    <ContractorForm
-      contractor={
+  <FormAndReviewList
+    addButtonText="Add another contractor"
+    collapsed={[Function]}
+    expanded={[Function]}
+    handleChange={[Function]}
+    handleHourlyChange={[Function]}
+    handleTermChange={[Function]}
+    handleUseHourly={[Function]}
+    handleYearChange={[Function]}
+    list={
+      Array [
         Object {
           "id": "contractor 1",
           "key": "key 1",
-        }
-      }
-      handleChange={[Function]}
-      handleDelete={[Function]}
-      handleHourlyChange={[Function]}
-      handleTermChange={[Function]}
-      handleUseHourly={[Function]}
-      handleYearChange={[Function]}
-      idx={0}
-      initialCollapsed={true}
-      years={
-        Array [
-          "1066",
-          "1067",
-        ]
-      }
-    />
-  </div>
-  <div
-    className="ds-u-border-y--1"
-    key="key 2"
-  >
-    <ContractorForm
-      contractor={
+        },
         Object {
           "id": "contractor 2",
           "key": "key 2",
-        }
-      }
-      handleChange={[Function]}
-      handleDelete={[Function]}
-      handleHourlyChange={[Function]}
-      handleTermChange={[Function]}
-      handleUseHourly={[Function]}
-      handleYearChange={[Function]}
-      idx={1}
-      initialCollapsed={true}
-      years={
-        Array [
-          "1066",
-          "1067",
-        ]
-      }
-    />
-  </div>
-  <div
-    className="ds-u-border-y--1"
-    key="key 3"
-  >
-    <ContractorForm
-      contractor={
+        },
         Object {
           "id": "contractor 3",
           "key": "key 3",
-        }
-      }
-      handleChange={[Function]}
-      handleDelete={[Function]}
-      handleHourlyChange={[Function]}
-      handleTermChange={[Function]}
-      handleUseHourly={[Function]}
-      handleYearChange={[Function]}
-      idx={2}
-      initialCollapsed={true}
-      years={
-        Array [
-          "1066",
-          "1067",
-        ]
-      }
-    />
-  </div>
-  <Button
-    className="ds-u-margin-top--2 visibility--screen"
-    onClick={[Function]}
-    type="button"
-  >
-    Add another contractor
-  </Button>
+        },
+      ]
+    }
+    noDataMessage="There are no contracts assigned to this activity."
+    onAddClick={[Function]}
+    onDeleteClick={[Function]}
+  />
 </Subsection>
 `;

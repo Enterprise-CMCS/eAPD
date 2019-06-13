@@ -10,15 +10,16 @@ describe('the MilestoneForm component', () => {
 
   const component = shallow(
     <MilestoneForm
-      idx={3252}
-      // Operation Torch, the Allied invasion of North Africa, is launched
-      // to relieve pressure on Egypt and provide an invasion route into
-      // southern Europe,
-      endDate="1942-8-16"
+      index={3252}
+      item={{
+        // Operation Torch, the Allied invasion of North Africa, is launched
+        // to relieve pressure on Egypt and provide an invasion route into
+        // southern Europe,
+        endDate: '1942-8-16',
+        name: 'Milestone name'
+      }}
       onChangeDate={onChangeDate}
       onChangeName={onChangeName}
-      name="Milestone name"
-      collapse={collapse}
     />
   );
 

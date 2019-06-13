@@ -13,55 +13,31 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
     reverse={false}
     source="activities.statePersonnel.instruction"
   />
-  <StatePerson
-    desc="test desc"
-    handleDelete={[Function]}
+  <FormAndReviewList
+    addButtonText="Add another personnel"
+    collapsed={[Function]}
+    expanded={[Function]}
     handleEditCost={[Function]}
     handleEditFTE={[Function]}
     handleEditPersonDesc={[Function]}
     handleEditPersonTitle={[Function]}
-    idx={0}
-    initialCollapsed={false}
-    key="personnel key"
-    years={
-      Object {
-        "2027": 34355,
-        "2028": 48833,
-      }
+    list={
+      Array [
+        Object {
+          "category": "test category",
+          "desc": "test desc",
+          "initialCollapsed": false,
+          "key": "personnel key",
+          "years": Object {
+            "2027": 34355,
+            "2028": 48833,
+          },
+        },
+      ]
     }
+    noDataMessage="There are no personnel resources for this activity."
+    onAddClick={[Function]}
+    onDeleteClick={[Function]}
   />
-  <Button
-    className="ds-u-margin-top--2 visibility--screen"
-    onClick={[Function]}
-    type="button"
-  >
-    Add another personnel
-  </Button>
-</Fragment>
-`;
-
-exports[`activity state personnel costs subsection renders correctly when there are no expenses 1`] = `
-<Fragment>
-  <Instruction
-    args={null}
-    headingDisplay={
-      Object {
-        "className": "ds-h3",
-        "level": "h3",
-      }
-    }
-    reverse={false}
-    source="activities.statePersonnel.instruction"
-  />
-  <NoDataMsg>
-    There are no personnel resources for this activity.
-  </NoDataMsg>
-  <Button
-    className="ds-u-margin-top--2 visibility--screen"
-    onClick={[Function]}
-    type="button"
-  >
-    Add another personnel
-  </Button>
 </Fragment>
 `;

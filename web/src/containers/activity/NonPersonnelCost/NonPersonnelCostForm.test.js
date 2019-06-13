@@ -11,17 +11,18 @@ describe('the NonPersonnelCostForm component', () => {
 
   const component = shallow(
     <NonPersonnelCostForm
-      category="cost category"
-      collapse={collapse}
-      desc="cost desc"
+      index={83}
+      item={{
+        category: 'cost category',
+        desc: 'cost desc',
+        years: {
+          7473: 2398235,
+          7474: 72323
+        }
+      }}
       handleEditCost={handleEditCost}
       handleEditDesc={handleEditDesc}
       handleEditCategory={handleEditCategory}
-      idx={83}
-      years={{
-        7473: 2398235,
-        7474: 72323
-      }}
     />
   );
 

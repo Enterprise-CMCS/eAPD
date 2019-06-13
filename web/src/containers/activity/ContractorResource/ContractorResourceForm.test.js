@@ -2,13 +2,19 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
-import ContractorForm from './ContractorResourcesForm';
+import ContractorForm from './ContractorResourceForm';
 
-describe('the ContractorResourcesForm component', () => {
+describe('the ContractorResourceForm component', () => {
   const sandbox = sinon.createSandbox();
 
   const props = {
-    contractor: {
+    handleChange: sandbox.stub(),
+    handleHourlyChange: sandbox.spy(),
+    handleTermChange: sandbox.spy(),
+    handleUseHourly: sandbox.spy(),
+    handleYearChange: sandbox.spy(),
+    index: 1,
+    item: {
       desc: 'They cleaned up the latrines after the Battle of Hastings',
       end: '1066-10-15',
       hourly: {
@@ -33,35 +39,49 @@ describe('the ContractorResourcesForm component', () => {
         '1066': 300,
         '1067': 400
       }
-    },
-    handleChange: sandbox.spy(),
-    handleDelete: sandbox.spy(),
-    handleHourlyChange: sandbox.spy(),
-    handleTermChange: sandbox.spy(),
-    handleUseHourly: sandbox.spy(),
-    handleYearChange: sandbox.spy(),
-    idx: 1,
-    initialCollapsed: false,
-    years: ['1066', '1067']
+    }
   };
 
   beforeEach(() => {
     sandbox.resetHistory();
   });
 
-  test('renders correctly when initially collapsed', () => {
-    const component = shallow(<ContractorForm {...props} initialCollapsed />);
-    expect(component).toMatchSnapshot();
-  });
-
-  test('renders correctly when not collapsed', () => {
+  test('renders correctly', () => {
     const component = shallow(<ContractorForm {...props} />);
     expect(component).toMatchSnapshot();
   });
 
   test('renders if use hourly data is selected', () => {
-    props.contractor.hourly.useHourly = true;
+    props.item.hourly.useHourly = true;
     const component = shallow(<ContractorForm {...props} />);
     expect(component).toMatchSnapshot();
   });
+
+  describe('handles changing fields', () => {
+    [
+      ['name', 'contractor-name'],
+      ['desc', 'contractor-description'],
+      ['totalCost', 'contractor-total-cost']
+    ].forEach(([propName, fieldName]) => {
+      it(`handles changing the ${propName} prop`, () => {
+        const handler = sinon.spy();
+        props.handleChange.returns(handler);
+
+        const component = shallow(<ContractorForm {...props} />);
+
+        component
+          .findWhere(c => c.prop('name') === fieldName)
+          .simulate('change', { target: { value: 'new value' } });
+
+        expect(props.handleChange.calledWith(1, propName)).toEqual(true);
+        expect(handler.calledWith({ target: { value: 'new value' } })).toEqual(
+          true
+        );
+      });
+    });
+  });
+
+  // I'm not sure how to test changing the number of hours and hourly rate
+  // fields because they are nodes passed as props to a Choice. Really not
+  // clear about how to get those...
 });

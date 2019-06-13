@@ -9,15 +9,17 @@ describe('the NonPersonnelCostReview component', () => {
 
   const component = shallow(
     <NonPersonnelCostReview
-      category="test category"
-      desc="test desc"
-      expand={expand}
-      handleDelete={handleDelete}
-      idx={53}
-      years={{
-        1487: 347293,
-        1488: 234797
+      index={53}
+      item={{
+        category: 'test category',
+        desc: 'test desc',
+        years: {
+          1487: 347293,
+          1488: 234797
+        }
       }}
+      expand={expand}
+      onDeleteClick={handleDelete}
     />
   );
 

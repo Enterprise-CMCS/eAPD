@@ -38,25 +38,26 @@ exports[`the Schedule (milestones) component renders correctly with just one mil
       source="activities.schedule.milestone.instruction"
     />
     <hr />
-    <Milestone
-      endDate="1945-05-05"
-      idx={0}
-      initialCollapsed={true}
-      key="milestone 1"
-      name="Liberation Day"
+    <FormAndReviewList
+      addButtonText="Add another milestone"
+      collapsed={[Function]}
+      expanded={[Function]}
+      list={
+        Array [
+          Object {
+            "endDate": "1945-05-05",
+            "key": "milestone 1",
+            "milestone": "Liberation Day",
+          },
+        ]
+      }
+      noDataMessage="Add milestones for this activity."
+      onAddClick={[Function]}
       onChangeDate={[Function]}
       onChangeName={[Function]}
-      onDelete={null}
+      onDeleteClick={[Function]}
     />
   </div>
-  <Button
-    className="visibility--screen"
-    onClick={[Function]}
-    type="button"
-  >
-    Add another milestone
-  </Button>
-  <hr />
 </Subsection>
 `;
 
@@ -98,34 +99,31 @@ exports[`the Schedule (milestones) component renders correctly with multiple mil
       source="activities.schedule.milestone.instruction"
     />
     <hr />
-    <Milestone
-      endDate="1945-05-05"
-      idx={0}
-      initialCollapsed={true}
-      key="milestone 1"
-      name="Liberation Day"
+    <FormAndReviewList
+      addButtonText="Add another milestone"
+      collapsed={[Function]}
+      expanded={[Function]}
+      list={
+        Array [
+          Object {
+            "endDate": "1945-05-05",
+            "key": "milestone 1",
+            "milestone": "Liberation Day",
+          },
+          Object {
+            "endDate": "1945-05-08",
+            "initialCollapsed": false,
+            "key": "milestone 2",
+            "milestone": "V-E Day",
+          },
+        ]
+      }
+      noDataMessage="Add milestones for this activity."
+      onAddClick={[Function]}
       onChangeDate={[Function]}
       onChangeName={[Function]}
-      onDelete={[Function]}
-    />
-    <Milestone
-      endDate="1945-05-08"
-      idx={1}
-      initialCollapsed={false}
-      key="milestone 2"
-      name="V-E Day"
-      onChangeDate={[Function]}
-      onChangeName={[Function]}
-      onDelete={[Function]}
+      onDeleteClick={[Function]}
     />
   </div>
-  <Button
-    className="visibility--screen"
-    onClick={[Function]}
-    type="button"
-  >
-    Add another milestone
-  </Button>
-  <hr />
 </Subsection>
 `;

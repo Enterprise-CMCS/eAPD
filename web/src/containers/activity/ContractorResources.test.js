@@ -49,12 +49,6 @@ describe('the ContractorResources component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('adds a new contractor', () => {
-    const component = shallow(<ContractorResources {...props} />);
-    component.find('Button').simulate('click');
-    expect(props.addContractor.calledWith('activity key')).toBeTruthy();
-  });
-
   test('maps redux state to component props', () => {
     expect(
       mapStateToProps(
@@ -63,19 +57,13 @@ describe('the ContractorResources component', () => {
             byKey: {
               key: { contractorResources: 'contractorz' }
             }
-          },
-          apd: {
-            data: {
-              years: 'seven'
-            }
           }
         },
         { aKey: 'key' }
       )
     ).toEqual({
       activityKey: 'key',
-      contractors: 'contractorz',
-      years: 'seven'
+      contractors: 'contractorz'
     });
   });
 

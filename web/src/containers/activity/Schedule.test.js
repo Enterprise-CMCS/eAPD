@@ -75,11 +75,6 @@ describe('the Schedule (milestones) component', () => {
   describe('events', () => {
     const component = shallow(<Schedule activity={activity} {...fns} />);
 
-    test('adds an activity milestone', () => {
-      component.find('Button').simulate('click');
-      expect(fns.addActivityMilestone).toHaveBeenCalledWith('activity key');
-    });
-
     test('updates activity start date', () => {
       component
         .find('DateField')
@@ -97,26 +92,6 @@ describe('the Schedule (milestones) component', () => {
         .prop('onChange')(null, 'other date');
       expect(fns.updateActivity).toHaveBeenCalledWith('activity key', {
         plannedEndDate: 'other date'
-      });
-    });
-
-    test('updates milestone name', () => {
-      component
-        .find('Milestone')
-        .first()
-        .prop('onChangeName')('index', 'new name');
-      expect(fns.updateActivity).toHaveBeenCalledWith('activity key', {
-        schedule: { index: { milestone: 'new name' } }
-      });
-    });
-
-    test('updates milestone end date', () => {
-      component
-        .find('Milestone')
-        .first()
-        .prop('onChangeDate')('opposite of index', 'new date');
-      expect(fns.updateActivity).toHaveBeenCalledWith('activity key', {
-        schedule: { 'opposite of index': { endDate: 'new date' } }
       });
     });
   });

@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the NonPersonnelCostForm component renders correctly 1`] = `
-<div
-  className="ds-u-border-bottom--2 ds-u-padding-y--2"
->
+<Fragment>
   <h6
     className="ds-h4"
   >
@@ -79,13 +77,5 @@ exports[`the NonPersonnelCostForm component renders correctly 1`] = `
     size="medium"
     value={72323}
   />
-  <Button
-    className="ds-u-margin-top--2"
-    onClick={[MockFunction]}
-    type="button"
-    variation="primary"
-  >
-    Done
-  </Button>
-</div>
+</Fragment>
 `;
