@@ -28,20 +28,18 @@ const ApdPreviousActivityTable = ({
       <table className="table-cms">
         <thead>
           <tr>
-            <th id="prev_act_hit_header_null2" />
-            <th className="pre-line" id="prev_act_hithie_total">
+            <th id="prev_act_hit_header_null2" rowspan="2" />
+            <th id="prev_act_hithie_total">
               {TABLE_HEADERS.total}
             </th>
             <th
               colSpan="2"
-              className="pre-line"
               id="prev_act_hithie_federal"
             >
               {TABLE_HEADERS.federal()}
             </th>
           </tr>
           <tr>
-            <th id="prev_act_hit_header_null3" />
             <th id="prev_act_hithie_total_approved">
               {TABLE_HEADERS.approved}
             </th>
@@ -59,7 +57,7 @@ const ApdPreviousActivityTable = ({
                 previousActivityExpenses[year].hithie.totalApproved * 0.9;
 
               return (
-                <tr key={year} className="align-middle">
+                <tr key={year}>
                   <th id={`prev_act_hithie_row_${year}`}>
                     {TABLE_HEADERS.ffy(year)}
                   </th>
@@ -81,7 +79,8 @@ const ApdPreviousActivityTable = ({
                   </td>
 
                   <td
-                    headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_total_approved`}
+                    headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_federal_approved`}
+                    class="font-family--mono"
                   >
                     <Dollars>{federalApproved}</Dollars>
                   </td>

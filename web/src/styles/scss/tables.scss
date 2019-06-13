@@ -12,7 +12,8 @@
   thead {
     th {
       background-color: $color-gray-lighter;
-      font-weight: normal;
+      font-weight: $font-semibold;
+      white-space: pre-line;
     }
     border-top: 1px solid $color-gray-light;
     border-bottom: 1px solid $color-gray-light;
@@ -24,6 +25,9 @@
       border-top: 1px dotted $color-gray-lighter;
       border-bottom: 1px dotted $color-gray-lighter;
       vertical-align: middle; /* Ace.css override */
+    }
+    th {
+      font-weight: $font-semibold;
     }
   }
 
