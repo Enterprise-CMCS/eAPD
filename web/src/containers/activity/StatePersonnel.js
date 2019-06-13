@@ -1,4 +1,3 @@
-import { Button } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
@@ -11,9 +10,10 @@ import {
 import { selectActivityStatePersonnel } from '../../reducers/activities.selectors';
 
 import Instruction from '../../components/Instruction';
-import NoDataMsg from '../../components/NoDataMsg';
 import { t } from '../../i18n';
-import StatePerson from './StatePerson';
+
+import FormAndReviewList from '../../components/FormAndReviewList';
+import { StatePersonForm, StatePersonReview } from './StatePerson';
 
 const StatePersonnel = ({
   activityKey,
@@ -22,12 +22,9 @@ const StatePersonnel = ({
   removePerson,
   updateActivity
 }) => {
-  const getDeleteHandler = useCallback(
-    key => () => {
-      removePerson(activityKey, key);
-    },
-    []
-  );
+  const handleDelete = useCallback(key => {
+    removePerson(activityKey, key);
+  });
 
   const handleAdd = useCallback(() => addPerson(activityKey));
 
@@ -62,31 +59,19 @@ const StatePersonnel = ({
   return (
     <Fragment>
       <Instruction source="activities.statePersonnel.instruction" />
-      {personnel.length === 0 ? (
-        <NoDataMsg>{t('activities.statePersonnel.noDataNotice')}</NoDataMsg>
-      ) : (
-        personnel.map((person, idx) => (
-          <StatePerson
-            key={person.key}
-            handleDelete={getDeleteHandler(person.key)}
-            handleEditCost={handleEditCost}
-            handleEditFTE={handleEditFTE}
-            handleEditPersonDesc={handleEditPersonDesc}
-            handleEditPersonTitle={handleEditPersonTitle}
-            initialCollapsed={person.initialCollapsed}
-            idx={idx}
-            title={person.title}
-            desc={person.desc}
-            years={person.years}
-          />
-        ))
-      )}
-      <Button
-        className="ds-u-margin-top--2 visibility--screen"
-        onClick={handleAdd}
-      >
-        {t('activities.statePersonnel.addButtonText')}
-      </Button>
+      <FormAndReviewList
+        addButtonText={t('activities.statePersonnel.addButtonText')}
+        onAddClick={handleAdd}
+        list={personnel}
+        collapsed={StatePersonReview}
+        expanded={StatePersonForm}
+        noDataMessage={t('activities.statePersonnel.noDataNotice')}
+        onDeleteClick={handleDelete}
+        handleEditCost={handleEditCost}
+        handleEditFTE={handleEditFTE}
+        handleEditPersonDesc={handleEditPersonDesc}
+        handleEditPersonTitle={handleEditPersonTitle}
+      />
     </Fragment>
   );
 };

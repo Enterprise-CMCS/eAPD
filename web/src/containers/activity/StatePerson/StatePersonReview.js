@@ -5,18 +5,16 @@ import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 
 const StatePersonReview = ({
-  desc,
+  item: { desc, title, years },
   expand,
-  handleDelete,
-  idx,
-  title,
-  years
+  index,
+  onDeleteClick
 }) => {
   return (
     <Review
-      heading={`${idx + 1}. ${title}`}
+      heading={`${index + 1}. ${title}`}
       headingLevel={6}
-      onDeleteClick={handleDelete}
+      onDeleteClick={onDeleteClick}
       onEditClick={expand}
     >
       {desc}
@@ -33,12 +31,19 @@ const StatePersonReview = ({
 };
 
 StatePersonReview.propTypes = {
-  desc: PropTypes.string.isRequired,
   expand: PropTypes.func.isRequired,
-  handleDelete: PropTypes.func.isRequired,
-  idx: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  years: PropTypes.object.isRequired
+
+  index: PropTypes.number.isRequired,
+  item: PropTypes.shape({
+    desc: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    years: PropTypes.object.isRequired
+  }).isRequired,
+  onDeleteClick: PropTypes.func
+};
+
+StatePersonReview.defaultProps = {
+  onDeleteClick: null
 };
 
 export default StatePersonReview;

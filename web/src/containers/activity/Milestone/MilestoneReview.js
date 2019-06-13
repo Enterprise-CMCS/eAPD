@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
-import Review from '../../components/Review';
+import Review from '../../../components/Review';
 
-const MilestoneReview = ({ idx, endDate, expand, name, onDelete }) => {
-  const del = useMemo(() => (onDelete ? () => onDelete(idx) : null), [
-    onDelete
-  ]);
-
+const MilestoneReview = ({
+  index,
+  item: { endDate, milestone },
+  expand,
+  onDeleteClick
+}) => {
   const formattedDate = useMemo(() => {
     const [year, month, day] = endDate.split('-');
     return `${month}-${day}-${year}`;
@@ -14,9 +15,9 @@ const MilestoneReview = ({ idx, endDate, expand, name, onDelete }) => {
 
   return (
     <Review
-      heading={`${idx + 1}. ${name}`}
+      heading={`${index + 1}. ${milestone}`}
       headingLevel={4}
-      onDeleteClick={del}
+      onDeleteClick={onDeleteClick}
       onEditClick={expand}
     >
       <p className="ds-u-margin-top--2">
@@ -27,11 +28,17 @@ const MilestoneReview = ({ idx, endDate, expand, name, onDelete }) => {
 };
 
 MilestoneReview.propTypes = {
-  idx: PropTypes.number.isRequired,
-  endDate: PropTypes.string.isRequired,
   expand: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired
+  index: PropTypes.number.isRequired,
+  item: PropTypes.shape({
+    endDate: PropTypes.string.isRequired,
+    milestone: PropTypes.string.isRequired
+  }).isRequired,
+  onDeleteClick: PropTypes.func
+};
+
+MilestoneReview.defaultProps = {
+  onDeleteClick: null
 };
 
 export default MilestoneReview;

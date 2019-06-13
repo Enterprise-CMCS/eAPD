@@ -1,7 +1,12 @@
-import { Button } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import {
+  ContractorResourceForm,
+  ContractorResourceReview
+} from './ContractorResource';
+import FormAndReviewList from '../../components/FormAndReviewList';
 
 import {
   addActivityContractor,
@@ -9,22 +14,10 @@ import {
   toggleActivityContractorHourly,
   updateActivity as updateActivityAction
 } from '../../actions/activities';
-import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
-import Form from './ContractorResourcesForm';
 
 class ContractorResources extends Component {
-  state = {
-    initialContractorKeys: []
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state.initialContractorKeys = props.contractors.map(c => c.key);
-  }
-
   getDeleter = entryKey => () => {
     const { activityKey, removeContractor } = this.props;
     removeContractor(activityKey, entryKey);
@@ -43,7 +36,10 @@ class ContractorResources extends Component {
     updateActivity(activityKey, updates);
   };
 
-  handleDelete = contractor => this.getDeleter(contractor.key)();
+  handleDelete = key => {
+    const { activityKey, removeContractor } = this.props;
+    removeContractor(activityKey, key);
+  };
 
   handleHourlyChange = (index, year, field) => e => {
     const value = +e.target.value;
@@ -88,43 +84,26 @@ class ContractorResources extends Component {
   };
 
   render() {
-    const { contractors, years } = this.props;
-    const { initialContractorKeys } = this.state;
+    const { contractors } = this.props;
 
     if (!contractors) return null;
 
     return (
       <Subsection resource="activities.contractorResources" nested>
-        {contractors.length === 0 ? (
-          <NoDataMsg>
-            {t('activities.contractorResources.noDataNotice')}
-          </NoDataMsg>
-        ) : (
-          contractors.map((contractor, i) => (
-            <div key={contractor.key} className="ds-u-border-y--1">
-              <Form
-                idx={i}
-                contractor={contractor}
-                years={years}
-                handleChange={this.handleChange}
-                handleDelete={this.getDeleter(contractor.key)}
-                handleHourlyChange={this.handleHourlyChange}
-                handleTermChange={this.handleTermChange}
-                handleUseHourly={this.handleUseHourly}
-                handleYearChange={this.handleYearChange}
-                initialCollapsed={
-                  initialContractorKeys.indexOf(contractor.key) >= 0
-                }
-              />
-            </div>
-          ))
-        )}
-        <Button
-          className="ds-u-margin-top--2 visibility--screen"
-          onClick={this.handleAdd}
-        >
-          Add another contractor
-        </Button>
+        <FormAndReviewList
+          addButtonText="Add another contractor"
+          list={contractors}
+          collapsed={ContractorResourceReview}
+          expanded={ContractorResourceForm}
+          noDataMessage={t('activities.contractorResources.noDataNotice')}
+          onAddClick={this.handleAdd}
+          onDeleteClick={this.handleDelete}
+          handleChange={this.handleChange}
+          handleHourlyChange={this.handleHourlyChange}
+          handleTermChange={this.handleTermChange}
+          handleUseHourly={this.handleUseHourly}
+          handleYearChange={this.handleYearChange}
+        />
       </Subsection>
     );
   }
@@ -133,17 +112,15 @@ class ContractorResources extends Component {
 ContractorResources.propTypes = {
   activityKey: PropTypes.string.isRequired,
   contractors: PropTypes.array.isRequired,
-  years: PropTypes.array.isRequired,
   addContractor: PropTypes.func.isRequired,
   removeContractor: PropTypes.func.isRequired,
   toggleContractorHourly: PropTypes.func.isRequired,
   updateActivity: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = ({ activities: { byKey }, apd }, { aKey }) => ({
+export const mapStateToProps = ({ activities: { byKey } }, { aKey }) => ({
   activityKey: aKey,
-  contractors: byKey[aKey].contractorResources,
-  years: apd.data.years
+  contractors: byKey[aKey].contractorResources
 });
 
 export const mapDispatchToProps = {
