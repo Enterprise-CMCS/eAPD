@@ -2,13 +2,15 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
-import ContractorReview from './ContractorResourcesReview';
+import ContractorReview from './ContractorResourceReview';
 
-describe('the ContractorResourcesReview component', () => {
+describe('the ContractorResourceReview component', () => {
   const sandbox = sinon.createSandbox();
 
   const props = {
-    contractor: {
+    expand: sandbox.spy(),
+    index: 1,
+    item: {
       desc: 'They cleaned up the latrines after the Battle of Hastings',
       end: '1066-10-15',
       hourly: {
@@ -34,10 +36,7 @@ describe('the ContractorResourcesReview component', () => {
         '1067': 400
       }
     },
-    handleDelete: sandbox.spy(),
-    handleEdit: sandbox.spy(),
-    idx: 1,
-    years: ['1066', '1067']
+    onDeleteClick: sandbox.spy()
   };
 
   beforeEach(() => {
@@ -47,25 +46,12 @@ describe('the ContractorResourcesReview component', () => {
   test('renders correctly', () => {
     const component = shallow(<ContractorReview {...props} />);
     expect(component).toMatchSnapshot();
-  });
 
-  test('edits a contractor', () => {
-    const component = shallow(<ContractorReview {...props} />);
-    component
-      .find('Review')
-      .dive()
-      .find('Button[children="Edit"]')
-      .simulate('click');
-    expect(props.handleEdit.calledOnce).toEqual(true);
-  });
-
-  test('deletes a contractor', () => {
-    const component = shallow(<ContractorReview {...props} />);
-    component
-      .find('Review')
-      .dive()
-      .find('Button[children="Remove"]')
-      .simulate('click');
-    expect(props.handleDelete.calledOnce).toEqual(true);
+    expect(component.find('StandardReview').prop('onEditClick')).toEqual(
+      props.expand
+    );
+    expect(component.find('StandardReview').prop('onDeleteClick')).toEqual(
+      props.onDeleteClick
+    );
   });
 });

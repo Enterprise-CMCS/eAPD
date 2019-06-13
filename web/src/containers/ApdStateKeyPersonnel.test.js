@@ -50,52 +50,6 @@ describe('apd state profile, Medicaid office component', () => {
       expect(shallow(<KeyPersonnel {...props} />)).toMatchSnapshot();
     });
 
-    test('dispatches adding a new person', () => {
-      shallow(<KeyPersonnel {...props} />)
-        .find('Button')
-        .simulate('click');
-
-      expect(props.addKeyPerson.called).toBeTruthy();
-    });
-
-    test('dispatches removing a person', () => {
-      shallow(<KeyPersonnel {...props} />)
-        .find('ApdStateKeyPerson')
-        .first()
-        .prop('remove')('person object');
-
-      expect(props.removeKeyPerson.calledWith(0)).toBeTruthy();
-    });
-
-    test('dispatches when a person changes', () => {
-      shallow(<KeyPersonnel {...props} />)
-        .find('ApdStateKeyPerson')
-        .first()
-        .prop('handleChange')('field')({ target: { value: 'new value' } });
-
-      expect(
-        props.updateApd.calledWith({
-          keyPersonnel: { 0: { field: 'new value' } }
-        })
-      ).toBeTruthy();
-    });
-
-    test('dispatches when person years change', () => {
-      shallow(<KeyPersonnel {...props} />)
-        .find('ApdStateKeyPerson')
-        .first()
-        .prop('handleYearChange')('1908')({
-        target: { value: '235235' }
-      });
-
-      expect(
-        props.updateApd.calledWith({
-          keyPersonnel: { 0: { costs: { '1908': 235235 } } }
-        })
-      ).toBeTruthy();
-      expect(props.updateBudget.called).toBeTruthy();
-    });
-
     test('maps state to props', () => {
       const state = {
         apd: {

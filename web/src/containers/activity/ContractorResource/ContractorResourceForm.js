@@ -65,7 +65,7 @@ const ContractorResourceForm = ({
         label="Contractor Name"
         name="contractor-name"
         value={name}
-        onChange={handleChange(index, 'name')}
+        onChange={handle.changeName}
       />
       <TextField
         label="Description of Services"
@@ -73,7 +73,7 @@ const ContractorResourceForm = ({
         multiline
         rows={5}
         value={desc}
-        onChange={handleChange(index, 'desc')}
+        onChange={handle.changeDesc}
       />
       <FormLabel>Contract Term</FormLabel>
       <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
