@@ -38,9 +38,11 @@ export const getKeyPersonnel = () => ({
   expanded: true,
   hasCosts: false,
   isPrimary: false,
+  percentTime: 0,
   name: '',
   position: '',
-  key: generateKey()
+  key: generateKey(),
+  initialCollapsed: false
 });
 
 export const getAPDName = ({
@@ -117,7 +119,8 @@ const reducer = (state = initialState, action) => {
       return u(
         {
           data: {
-            keyPersonnel: people => people.filter((_, i) => i !== action.index)
+            keyPersonnel: people =>
+              people.filter(({ key }) => key !== action.key)
           }
         },
         state
