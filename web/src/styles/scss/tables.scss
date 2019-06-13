@@ -5,9 +5,10 @@
   &.table-cms__totals {
     width: 42%; // roughly equal to full tables' cells; temp fix before switching font to courier
   }
-  &.centered-headers th {
-    text-align: center;
+  + .table-cms:not(.table-frozen-data){
+    margin-top: $spacer-2;
   }
+
   thead {
     th {
       background-color: $color-gray-lighter;
@@ -16,16 +17,16 @@
     border-top: 1px solid $color-gray-light;
     border-bottom: 1px solid $color-gray-light;
   }
+
   tbody {
-    td {
+    th, td {
       background-color: $color-white;
       border-top: 1px dotted $color-gray-lighter;
       border-bottom: 1px dotted $color-gray-lighter;
+      vertical-align: middle; /* Ace.css override */
     }
   }
-  + .table-cms:not(.table-frozen-data){
-    margin-top: $spacer-2;
-  }
+
   .table-cms--col-header__fixed-width {
     width: 175px; // so totals tables have the same col width as other tables
   }
