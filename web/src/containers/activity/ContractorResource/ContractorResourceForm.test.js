@@ -10,7 +10,7 @@ describe('the ContractorResourceForm component', () => {
   const props = {
     handleChange: sandbox.stub(),
     handleHourlyChange: sandbox.spy(),
-    handleTermChange: sandbox.spy(),
+    handleTermChange: sandbox.stub(),
     handleUseHourly: sandbox.spy(),
     handleYearChange: sandbox.spy(),
     index: 1,
@@ -78,6 +78,42 @@ describe('the ContractorResourceForm component', () => {
           true
         );
       });
+    });
+
+    it('handles changing the start date', () => {
+      const handler = sinon.spy();
+      props.handleTermChange.returns(handler);
+
+      const component = shallow(<ContractorForm {...props} />);
+      component
+        .findWhere(c => c.name() === 'DateField' && c.prop('label') === 'Start')
+        .simulate('change', 'ignored stuff', 'new start date');
+
+      expect(props.handleTermChange.calledWith(1)).toEqual(true);
+      expect(
+        handler.calledWith({
+          end: '1066-10-15',
+          start: 'new start date'
+        })
+      ).toEqual(true);
+    });
+
+    it('handles changing the end date', () => {
+      const handler = sinon.spy();
+      props.handleTermChange.returns(handler);
+
+      const component = shallow(<ContractorForm {...props} />);
+      component
+        .findWhere(c => c.name() === 'DateField' && c.prop('label') === 'End')
+        .simulate('change', 'ignored stuff', 'new end date');
+
+      expect(props.handleTermChange.calledWith(1)).toEqual(true);
+      expect(
+        handler.calledWith({
+          end: 'new end date',
+          start: '1066-10-14'
+        })
+      ).toEqual(true);
     });
   });
 

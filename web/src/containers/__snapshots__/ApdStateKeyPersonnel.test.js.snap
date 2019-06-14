@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`apd state profile, Medicaid office component main component renders correctly 1`] = `
+exports[`apd state profile, Medicaid office component renders correctly 1`] = `
 <FormAndReviewList
   addButtonText="Add another person"
   collapsed={[Function]}
@@ -32,8 +32,8 @@ exports[`apd state profile, Medicaid office component main component renders cor
     ]
   }
   noDataMessage={null}
-  onAddClick={[Function]}
-  onDeleteClick={[Function]}
+  onAddClick={[MockFunction]}
+  onDeleteClick={[MockFunction]}
   years={
     Array [
       "1",

@@ -44,6 +44,48 @@ describe('activity non-personnel costs subsection', () => {
     expect(component).toMatchSnapshot();
   });
 
+  describe('events', () => {
+    const list = component.find('FormAndReviewList');
+
+    it('handles adding a new cost', () => {
+      list.prop('onAddClick')();
+      expect(props.addExpense).toHaveBeenCalledWith('activity key');
+    });
+
+    it('handles deleting a cost', () => {
+      list.prop('onDeleteClick')('cost key');
+      expect(props.removeExpense).toHaveBeenCalledWith(
+        'activity key',
+        'cost key'
+      );
+    });
+
+    it('handles editing a cost category', () => {
+      list.prop('handleEditCategory')(3, 'new category');
+      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
+        expenses: { 3: { category: 'new category' } }
+      });
+    });
+
+    it('handles editing a cost description', () => {
+      list.prop('handleEditDesc')(3, 'new description');
+      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
+        expenses: { 3: { desc: 'new description' } }
+      });
+    });
+
+    it('handles editing a cost for a fiscal year', () => {
+      list.prop('handleEditCost')(3, 1997, 'new cost');
+      expect(props.updateActivity).toHaveBeenCalledWith(
+        'activity key',
+        {
+          expenses: { 3: { years: { 1997: 'new cost' } } }
+        },
+        true
+      );
+    });
+  });
+
   it('maps state to props', () => {
     expect(
       mapStateToProps(
