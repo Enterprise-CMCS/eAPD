@@ -1,3 +1,8 @@
+/* eslint-disable */
+// ^ a bad practice, but this is also a bad storybook, I think, and if we're
+// going to take a pass at making them better overall, I didn't want to spend
+// a bunch of time escaping HTML entities and minor gunk like that...
+
 import React, { Fragment, useState } from 'react';
 
 import FormAndReviewList from '../../components/FormAndReviewList';
