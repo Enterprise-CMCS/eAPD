@@ -13,11 +13,6 @@ import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
 class Goals extends Component {
-  getDeleter = key => () => {
-    const { activityKey, removeActivityGoal } = this.props;
-    removeActivityGoal(activityKey, key);
-  };
-
   handleDelete = key => {
     const { activityKey, removeActivityGoal } = this.props;
     removeActivityGoal(activityKey, key);

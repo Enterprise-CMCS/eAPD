@@ -1,14 +1,11 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
 import ContractorReview from './ContractorResourceReview';
 
 describe('the ContractorResourceReview component', () => {
-  const sandbox = sinon.createSandbox();
-
   const props = {
-    expand: sandbox.spy(),
+    expand: jest.fn(),
     index: 1,
     item: {
       desc: 'They cleaned up the latrines after the Battle of Hastings',
@@ -36,14 +33,10 @@ describe('the ContractorResourceReview component', () => {
         '1067': 400
       }
     },
-    onDeleteClick: sandbox.spy()
+    onDeleteClick: jest.fn()
   };
 
-  beforeEach(() => {
-    sandbox.resetHistory();
-  });
-
-  test('renders correctly', () => {
+  it('renders correctly', () => {
     const component = shallow(<ContractorReview {...props} />);
     expect(component).toMatchSnapshot();
 
@@ -53,5 +46,12 @@ describe('the ContractorResourceReview component', () => {
     expect(component.find('StandardReview').prop('onDeleteClick')).toEqual(
       props.onDeleteClick
     );
+  });
+
+  it('renders placeholder date text if they are not fully-formed', () => {
+    const component = shallow(
+      <ContractorReview {...props} item={{ ...props.item, start: '1993' }} />
+    );
+    expect(component).toMatchSnapshot();
   });
 });

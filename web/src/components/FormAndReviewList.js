@@ -95,3 +95,5 @@ FormAndReviewList.defaultProps = {
 };
 
 export default FormAndReviewList;
+
+export { FormAndReviewItem };

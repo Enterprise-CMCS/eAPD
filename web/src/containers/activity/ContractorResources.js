@@ -18,11 +18,6 @@ import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 
 class ContractorResources extends Component {
-  getDeleter = entryKey => () => {
-    const { activityKey, removeContractor } = this.props;
-    removeContractor(activityKey, entryKey);
-  };
-
   handleAdd = () => {
     const { activityKey, addContractor } = this.props;
     addContractor(activityKey);
@@ -85,8 +80,6 @@ class ContractorResources extends Component {
 
   render() {
     const { contractors } = this.props;
-
-    if (!contractors) return null;
 
     return (
       <Subsection resource="activities.contractorResources" nested>
