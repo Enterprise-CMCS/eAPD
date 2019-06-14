@@ -89,6 +89,6 @@ if (/^\d+$/.test(id)) {
 
   <id> - Required. To delete a single APD, use the APD
          numeric ID.  To delete all APDs for a given
-         state, use the state's two-letter ID.
+         state, use the state’s two-letter ID.
   `);
 }
