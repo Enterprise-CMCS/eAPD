@@ -39,26 +39,36 @@ class CostAllocateFFPQuarterly extends Component {
 
     return (
       <Fragment>
-        <table className="table-cms table-fixed" key={year}>
+        <table className="budget-table" key={year}>
+          <caption className="ds-u-visibility--screen-reader">
+            Enter the federal fiscal year { year } quarterly breakdown by percentage.
+          </caption>
           <thead>
             <tr>
-              <th id={`act_qbudget_ffy${year}`}>
-                {t('ffy', { year })}
+              <th>
+                <span aria-hidden="true">
+                  {t('ffy', { year })}
+                </span>
               </th>
               <Fragment key={year}>
                 {QUARTERS.map(q => (
                   <th
                     key={q}
-                    className="center"
-                    id={`act_qbudget_fy${year}_q${q}`}
+                    scope="col"
                   >
+                    <span className="ds-u-visibility--screen-reader">
+                      {t('ffy', { year })} 
+                    </span>
                     {t('table.quarter', { q })}
                   </th>
                 ))}
                 <th
-                  className="right-align"
-                  id="act_qbudget_fyy_subtotal"
+                  scope="col"
+                  className="budget-table--subtotal"
                 >
+                  <span className="ds-u-visibility--screen-reader">
+                    {t('ffy', { year })} 
+                  </span>
                   {t('table.subtotal')}
                 </th>
               </Fragment>
@@ -67,37 +77,29 @@ class CostAllocateFFPQuarterly extends Component {
           <tbody>
             {['state', 'contractors'].map(name => (
               <Fragment key={name}>
-                <tr
-                  key={name}
-                  className={`align-middle ${
-                    name === 'combined' ? 'bold' : ''
-                  }`}
-                >
-                  <td rowSpan="2" headers={`act_qbudget_ffy${year}`}>
+                <tr key={name}>
+                  <th
+                    rowSpan="2"
+                    scope="row"
+                  >
                     {EXPENSE_NAME_DISPLAY[name]}
-                  </td>
+                  </th>
                   <Fragment key={year}>
                     {QUARTERS.map(q => (
-                      <td
-                        key={q}
-                        className="mono right-align"
-                        headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
-                      >
+                      <td key={q}>
                         <PercentInput
                           name={`ffp-${aKey}-${year}-${q}-${name}`}
                           label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
-                          wrapperClass="m0"
-                          className="m0 input input-condensed mono right-align"
+                          wrapperClass="budget-table--input-holder"
+                          className="budget-table--input__number"
                           onChange={this.handleChange(year, q, name)}
                           value={quarterlyFFP[year][q][name].percent * 100}
                           hideLabel
+                          aria-controls={`ffp-${aKey}-${year}-${q}-${name}-dollar-equivalent`}
                         />
                       </td>
                     ))}
-                    <td
-                      className="bold mono right-align"
-                      headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
-                    >
+                    <td className="budget-table--number budget-table--subtotal">
                       {formatPerc(
                         quarterlyFFP[year].subtotal[name].percent
                       )}
@@ -108,22 +110,18 @@ class CostAllocateFFPQuarterly extends Component {
                   <Fragment key={year}>
                     {QUARTERS.map(q => (
                       <td
-                        className={`mono right-align ${
-                          name === 'combined' ? '' : ''
-                        }`}
-                        style={{ borderLeft: '4px solid white' }}
+                        className="budget-table--number"
                         key={q}
-                        headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
+                        role="region"
+                        id={`ffp-${aKey}-${year}-${q}-${name}-dollar-equivalent`}
+                        aria-live="polite"
                       >
                         <Dollars>
                           {quarterlyFFP[year][q][name].dollars}
                         </Dollars>
                       </td>
                     ))}
-                    <td
-                      className="bold mono right-align"
-                      headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
-                    >
+                    <td className="budget-table--number budget-table--subtotal">
                       <Dollars>
                         {quarterlyFFP[year].subtotal[name].dollars}
                       </Dollars>
@@ -132,14 +130,18 @@ class CostAllocateFFPQuarterly extends Component {
                 </tr>
               </Fragment>
             ))}
-            <tr className="bold">
-              <td>{EXPENSE_NAME_DISPLAY.combined}</td>
+            <tr>
+              <th
+                scope="row"
+                className="budget-table--total"
+              >
+                {EXPENSE_NAME_DISPLAY.combined}
+              </th>
               <Fragment key={year}>
                 {QUARTERS.map(q => (
                   <td
-                    className="mono right-align"
+                    className="budget-table--number budget-table--total"
                     key={q}
-                    headers={`act_qbudget_fy${year} act_qbudget_fy${year}_q${q}`}
                   >
                     <Dollars>
                       {quarterlyFFP[year][q].combined.dollars}
@@ -147,8 +149,7 @@ class CostAllocateFFPQuarterly extends Component {
                   </td>
                 ))}
                 <td
-                  className="bold mono right-align"
-                  headers={`act_qbudget_fy${year} act_qbudget_fy${year}_subtotal`}
+                  className="budget-table--number budget-table--subtotal"
                 >
                   <Dollars>
                     {quarterlyFFP[year].subtotal.combined.dollars}

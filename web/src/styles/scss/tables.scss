@@ -14,6 +14,11 @@
       background-color: $color-gray-lighter;
       font-weight: $font-semibold;
       white-space: pre-line;
+      &.budget-table--total,
+      &.budget-table--subtotal,
+      &.budget-table--sum {
+        font-weight: $font-bold;
+      }
     }
     border-top: 1px solid $color-gray-light;
     border-bottom: 1px solid $color-gray-light;
@@ -28,6 +33,11 @@
     }
     th {
       font-weight: $font-semibold;
+      &.budget-table--total,
+      &.budget-table--subtotal,
+      &.budget-table--sum {
+        font-weight: $font-bold;
+      }
     }
   }
 
