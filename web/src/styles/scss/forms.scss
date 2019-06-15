@@ -60,6 +60,18 @@ div.form--computed-value__input-aligned {
   width: 100%;
 }
 
+.budget-table--number {
+  font-family: $font-family-mono;
+  font-size: inherit;
+  text-align: right;
+}
+
+.budget-table--subtotal,
+.budget-table--total,
+.budget-table--sum {
+  font-weight: $font-bold;
+}
+
 .input {
   background-color: greenyellow;
 }
