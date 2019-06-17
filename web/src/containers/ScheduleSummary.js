@@ -20,7 +20,7 @@ const ScheduleSummary = ({ activities }) => (
             <table key={activityName} className="budget-table">
               <thead>
                 <tr>
-                  <th colSpan="2" className="ds-u-font-weight--bold">
+                  <th colSpan="2">
                     Activity {i + 1}: {activityName}
                   </th>
                 </tr>
@@ -28,10 +28,10 @@ const ScheduleSummary = ({ activities }) => (
               <tbody>
                 {milestones.map(({ end, name: milestoneName, start }) => (
                   <tr>
-                    <td className="ds-u-padding-left--3 ds-u-border-right--0">
+                    <td className="ds-u-border-right--0">
                       {milestoneName}
                     </td>
-                    <td className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right">
+                    <td className="ds-u-border-left--0 ds-u-text-align--right">
                       {start || 'N/A'} - {end || 'N/A'}
                     </td>
                   </tr>
