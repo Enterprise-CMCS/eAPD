@@ -22,7 +22,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
       {FUNDING_SOURCES.map(([source, sourceDisplay]) => {
         const data = budget[source];
         return (
-          <div
+          <Fragment
             key={source}
           >
             <h3 className="ds-h3">{sourceDisplay}</h3>
@@ -112,7 +112,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
               ))}
               </tbody>
             </table>
-          </div>
+          </Fragment>
         );
 
       })}
