@@ -1838,7 +1838,7 @@ Object {
                         "type": "string",
                       },
                       "position": Object {
-                        "description": "User's position in the state's Medicaid program",
+                        "description": "User's position in the state’s Medicaid program",
                         "type": "string",
                       },
                       "role": Object {
@@ -2017,7 +2017,7 @@ Object {
                       "type": "string",
                     },
                     "position": Object {
-                      "description": "User's position in the state's Medicaid program",
+                      "description": "User's position in the state’s Medicaid program",
                       "type": "string",
                     },
                     "role": Object {
