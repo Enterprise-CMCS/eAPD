@@ -24,34 +24,38 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
         return (
           <div
             key={source}
-            className="mb3"
           >
             <h3 className="ds-h3">{sourceDisplay}</h3>
             {years.map((year) => (
               <table
-                className="table-cms"
+                className="budget-table"
                 key={year}
               >
+                <caption className="ds-u-visibility--screen-reader">
+                  {t('ffy', { year })}
+                </caption>
               <colgroup>
-                <col className="table-cms--col-header__fixed-width" />
+                <col className="budget-table--col-header__fixed-width" />
                 <col span="5"/>
               </colgroup>
               <thead>
                 <tr>
-                  <th className="center">
-                    {t('ffy', { year })}
+                  <th>
+                    <span aria-hidden="true">
+                      {t('ffy', { year })}
+                    </span>
                   </th>
                   {QUARTERS.map(q => (
                     <th
                       key={q}
-                      className="center"
+                      className="ds-u-text-align--right"
                       scope="col"
                     >
                       {t('table.quarter', { q })}
                     </th>
                   ))}
                   <th
-                    className="center"
+                    className="ds-u-text-align--right"
                     scope="col"
                   >
                     {t('table.subtotal')}
@@ -68,14 +72,14 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                     </th>
                     {QUARTERS.map(q => (
                       <td
-                        className="mono right-align nowrap"
+                        className="budget-table--number"
                         key={q}
                       >
                         <Dollars>{data[year][q][name]}</Dollars>
                       </td>
                     ))}
                     <td
-                      className="mono right-align nowrap"
+                      className="budget-table--number"
                     >
                       <Dollars>{data[year].subtotal[name]}</Dollars>
                     </td>
@@ -84,9 +88,9 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
               </tbody>
             </table>
             ))}
-            <table className="table-cms table-cms__totals">
+            <table className="budget-table budget-table--totals">
               <colgroup>
-                <col className="table-cms--col-header__fixed-width" />
+                <col className="budget-table--col-header__fixed-width" />
                 <col />
               </colgroup>
               <thead>
@@ -101,7 +105,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                   <th scope="row">
                     {EXPENSE_NAME_DISPLAY[name]}
                   </th>
-                  <td className="bold mono right-align nowrap">
+                  <td className="budget-table--total budget-table--number">
                     <Dollars>{data.total[name]}</Dollars>
                   </td>
                 </tr>

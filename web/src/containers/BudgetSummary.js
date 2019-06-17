@@ -12,9 +12,11 @@ const categoryLookup = {
   combined: 'Subtotal'
 };
 
-function DataRow({ data, title, year }) {
+function DataRow({ data, title }) {
   return (
-    <tr>
+    <tr
+      className={ title===categoryLookup['combined'] ? 'budget-table--subtotal budget-table--row__highlight' : '' }
+    >
       <th scope="row">{title}</th>
       <td
         className="budget-table--number"
