@@ -15,7 +15,7 @@ const categoryLookup = {
 function DataRow({ data, title }) {
   return (
     <tr
-      className={ title===categoryLookup['combined'] ? 'budget-table--subtotal budget-table--row__highlight' : '' }
+      className={ title===categoryLookup.combined ? 'budget-table--subtotal budget-table--row__highlight' : '' }
     >
       <th scope="row">{title}</th>
       <td
