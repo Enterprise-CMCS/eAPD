@@ -110,7 +110,7 @@ exports[`executive summary budget component renders correctly with data 1`] = `
             className="right-align"
             id="program-budget-table-combined-total"
           >
-            Medicaid total
+            Medicaid Total
           </th>
         </tr>
       </thead>
@@ -330,7 +330,7 @@ exports[`executive summary budget component renders correctly with data 1`] = `
             className="right-align"
             id="program-budget-table-mmisTotal-total"
           >
-            Medicaid total
+            Medicaid Total
           </th>
         </tr>
       </thead>
