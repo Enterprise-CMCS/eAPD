@@ -15,22 +15,19 @@ const categoryLookup = {
 function DataRow({ data, title, year }) {
   return (
     <tr>
-      <th headers="summary-budget-null1 summary-budget-null2">{title}</th>
+      <th scope="row">{title}</th>
       <td
-        className="font-family--mono right-align"
-        headers={`summary-budget-fy-${year} summary-budget-fy-${year}-total`}
+        className="budget-table--number"
       >
         <Dollars>{data.medicaid}</Dollars>
       </td>
       <td
-        className="font-family--mono right-align"
-        headers={`summary-budget-fy-${year} summary-budget-fy-${year}-federal`}
+        className="budget-table--number"
       >
         <Dollars>{data.federal}</Dollars>
       </td>
       <td
-        className="font-family--mono right-align"
-        headers={`summary-budget-fy-${year} summary-budget-fy-${year}-state`}
+        className="budget-table--number"
       >
         <Dollars>{data.state}</Dollars>
       </td>
@@ -70,26 +67,25 @@ const HeaderRow = ({ yr }) => {
     <tr>
       <th
         key={yr}
-        className="ds-u-font-weight--bold"
         id={`summary-budget-fy-${yr}`}
       >
         FFY {yr}
       </th>
       <th
-        className="ds-u-text-align--center"
-        id={`summary-budget-fy-${yr}-total`}
+        className="ds-u-text-align--right"
+        scope="col"
       >
         Medicaid total
       </th>
       <th
-        className="ds-u-text-align--center"
-        id={`summary-budget-fy-${yr}-federal`}
+        className="ds-u-text-align--right"
+        scope="col"
       >
         Federal total
       </th>
       <th
-        className="ds-u-text-align--center"
-        id={`summary-budget-fy-${yr}-state`}
+        className="ds-u-text-align--right"
+        scope="col"
       >
         State total
       </th>
@@ -105,7 +101,7 @@ const BudgetSummary = ({ activities, data, years }) => (
   <Fragment>
     <h3 className="ds-h3">HIT activities</h3>
     {[...years, 'total'].map(yr => (
-      <table className="table-cms" key={yr}>
+      <table className="budget-table" key={yr}>
         <thead>
           <HeaderRow yr={yr} />
         </thead>
@@ -117,7 +113,7 @@ const BudgetSummary = ({ activities, data, years }) => (
 
     <h3 className="ds-h3">HIE activities</h3>
     {[...years, 'total'].map(yr => (
-      <table className="table-cms" key={yr}>
+      <table className="budget-table" key={yr}>
         <thead>
           <HeaderRow yr={yr} />
         </thead>
@@ -129,7 +125,7 @@ const BudgetSummary = ({ activities, data, years }) => (
 
     <h3 className="ds-h3">MMIS activities</h3>
     {[...years, 'total'].map(yr => (
-      <table className="table-cms" key={yr}>
+      <table className="budget-table" key={yr}>
         <thead>
           <HeaderRow yr={yr} />
         </thead>
@@ -140,25 +136,25 @@ const BudgetSummary = ({ activities, data, years }) => (
     ))}
 
     <h3 className="ds-h3">Project activities totals</h3>
-    <table className="table-cms">
+    <table className="budget-table">
       <thead>
         <tr>
           <th id="summary-budget-null1" />
           <th
-            className="ds-u-text-align--center"
-            id="summary-budget-total-medicaid"
+            scope="col"
+            className="ds-u-text-align--right"
           >
             Medicaid total
           </th>
           <th
-            className="ds-u-text-align--center"
-            id="summary-budget-total-federal"
+            scope="col"
+            className="ds-u-text-align--right"
           >
             Federal total
           </th>
           <th
-            className="ds-u-text-align--center"
-            id="summary-budget-total-state"
+            scope="col"
+            className="ds-u-text-align--right"
           >
             State total
           </th>
@@ -169,23 +165,14 @@ const BudgetSummary = ({ activities, data, years }) => (
           const combined = data.combined[ffy];
           return (
             <tr key={ffy}>
-              <th headers="summary-budget-null1">FFY {ffy}</th>
-              <td
-                className="font-family--mono right-align"
-                headers="summary-budget-total-medicaid"
-              >
+              <th scope="row">FFY {ffy}</th>
+              <td className="budget-table--number">
                 <Dollars>{combined.medicaid}</Dollars>
               </td>
-              <td
-                className="font-family--mono right-align"
-                headers="summary-budget-total-federal"
-              >
+              <td className="budget-table--number">
                 <Dollars>{combined.federal}</Dollars>
               </td>
-              <td
-                className="font-family--mono right-align"
-                headers="summary-budget-total-state"
-              >
+              <td className="budget-table--number">
                 <Dollars>{combined.state}</Dollars>
               </td>
             </tr>
