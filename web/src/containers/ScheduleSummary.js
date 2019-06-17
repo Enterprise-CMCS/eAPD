@@ -12,12 +12,12 @@ const ScheduleSummary = ({ activities }) => (
     <Section isNumbered id="schedule-summary" resource="scheduleSummary">
       <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
         {activities.length === 0 ? (
-          <div className="p1 h6 alert">
+          <div className="ds-c-alert ds-c-alert--warn">
             {t('scheduleSummary.noDataMessage')}
           </div>
         ) : (
           activities.map(({ name: activityName, milestones }, i) => (
-            <table key={activityName} className="table-cms ds-u-margin-top--0">
+            <table key={activityName} className="budget-table">
               <thead>
                 <tr>
                   <th colSpan="2" className="ds-u-font-weight--bold">
