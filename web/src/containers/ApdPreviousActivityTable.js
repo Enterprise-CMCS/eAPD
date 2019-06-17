@@ -28,7 +28,7 @@ const ApdPreviousActivityTable = ({
       <table className="budget-table">
         <thead>
           <tr>
-            <th id="prev_act_hit_header_null2" rowspan="2" />
+            <th id="prev_act_hit_header_null2" rowSpan="2" />
             <th id="prev_act_hithie_total">
               {TABLE_HEADERS.total}
             </th>
