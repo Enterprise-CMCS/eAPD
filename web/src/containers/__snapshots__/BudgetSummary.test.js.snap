@@ -27,7 +27,7 @@ exports[`budget summary component data row group renders 1`] = `
       ]
     }
     key="contractors"
-    title="Contracted resources"
+    title="Contracted Resources"
     year="1448"
   />
   <DataRow
@@ -41,7 +41,7 @@ exports[`budget summary component data row group renders 1`] = `
       ]
     }
     key="expenses"
-    title="Non-personnel"
+    title="Non-Personnel"
     year="1448"
   />
   <DataRow
@@ -55,7 +55,7 @@ exports[`budget summary component data row group renders 1`] = `
       ]
     }
     key="statePersonnel"
-    title="Project state staff"
+    title="Project State Staff"
     year="1448"
   />
 </Fragment>
@@ -155,19 +155,19 @@ exports[`budget summary component header row renders 1`] = `
     className="ds-u-text-align--center"
     id="summary-budget-fy-1-total"
   >
-    Medicaid total
+    Medicaid Total
   </th>
   <th
     className="ds-u-text-align--center"
     id="summary-budget-fy-1-federal"
   >
-    Federal total
+    Federal Total
   </th>
   <th
     className="ds-u-text-align--center"
     id="summary-budget-fy-1-state"
   >
-    State total
+    State Total
   </th>
 </tr>
 `;
@@ -177,7 +177,7 @@ exports[`budget summary component renders correctly 1`] = `
   <h3
     className="ds-h3"
   >
-    HIT activities
+    HIT Activities
   </h3>
   <table
     className="table-cms"
@@ -245,7 +245,7 @@ exports[`budget summary component renders correctly 1`] = `
   <h3
     className="ds-h3"
   >
-    HIE activities
+    HIE Activities
   </h3>
   <table
     className="table-cms"
@@ -313,7 +313,7 @@ exports[`budget summary component renders correctly 1`] = `
   <h3
     className="ds-h3"
   >
-    MMIS activities
+    MMIS Activities
   </h3>
   <table
     className="table-cms"
@@ -381,7 +381,7 @@ exports[`budget summary component renders correctly 1`] = `
   <h3
     className="ds-h3"
   >
-    Project activities totals
+    Project Activities Totals
   </h3>
   <table
     className="table-cms"
@@ -395,19 +395,19 @@ exports[`budget summary component renders correctly 1`] = `
           className="ds-u-text-align--center"
           id="summary-budget-total-medicaid"
         >
-          Medicaid total
+          Medicaid Total
         </th>
         <th
           className="ds-u-text-align--center"
           id="summary-budget-total-federal"
         >
-          Federal total
+          Federal Total
         </th>
         <th
           className="ds-u-text-align--center"
           id="summary-budget-total-state"
         >
-          State total
+          State Total
         </th>
       </tr>
     </thead>

@@ -41,8 +41,8 @@ ffp:
     other: Other Funding Amount
     fedStateSplit: Federal-State Split
 quarterly:
-  title: Breakout of federal share by quarter
   instruction:
+    heading: Breakout of federal share by quarter
     detail: >-
       Indicate allocations of state personnel & contract resources in current FFY
       by quarter.
@@ -54,7 +54,7 @@ otherFunding:
   instruction:
     heading: Other funding description
     detail: >-
-      Write a high level description to describe funding used to support this activity.
+      Write a high level description of funding used to support this activity.
       (Review Letter 10‐016 for examples of grants for inclusion.)
     helpText: >-
       Ensure new grants are included, and remove expired grants.
