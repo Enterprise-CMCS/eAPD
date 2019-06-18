@@ -25,7 +25,7 @@ const userObjectSchema = {
     },
     position: {
       type: 'string',
-      description: "User's position in the state's Medicaid program"
+      description: "User's position in the state’s Medicaid program"
     },
     state: {
       type: 'string',
