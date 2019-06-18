@@ -46,7 +46,7 @@ const ExecutiveSummaryBudget = ({ budget }) => {
             <th className="ds-u-text-align--center" colSpan="2" id={thId('hie')}>
               {t('executiveSummary.budgetTable.hie')}
             </th>
-            <th className="ds-u-text-align--center" colSpan="2" id={thId('combined')}>
+            <th className="ds-u-text-align--center" colSpan="3" id={thId('combined')}>
               {t('executiveSummary.budgetTable.hitHie')}
             </th>
           </tr>
@@ -69,6 +69,9 @@ const ExecutiveSummaryBudget = ({ budget }) => {
             </th>
             <th className="ds-u-text-align--right" id={thId('combined', 'state')}>
               {t('executiveSummary.budgetTable.stateShare')}
+            </th>
+            <th className="ds-u-text-align--right" id={thId('combined', 'total')}>
+              {t('executiveSummary.budgetTable.grandTotal')}
             </th>
           </tr>
         </thead>
@@ -108,34 +111,12 @@ const ExecutiveSummaryBudget = ({ budget }) => {
                 value={hitAndHie.combined[year].state}
                 headers={tdHdrs('combined', 'state')}
               />
+              <DollarCell
+                value={hitAndHie.combined[year].medicaid}
+                headers={tdHdrs('combined', 'total')}
+              />
             </tr>
           ))}
-        </tbody>
-      </table>
-      <table className="budget-table budget-table--totals">
-        <caption className="ds-u-visibility--screen-reader">
-          Medicaid HIE and HIT totals per year
-        </caption>
-        <thead>
-          <th />
-          <th className="ds-u-text-align--right" id={thId('combined', 'total')}>
-            {t('executiveSummary.budgetTable.grandTotal')}
-          </th>
-        </thead>
-        <tbody>
-        {rowKeys.map(({ year, display }) => (
-          <tr
-            key={`${year}-medicaid-total`}
-            className={display==='Total' ? 'budget-table--total budget-table--row__highlight' : ''}
-          >
-            <th scope="row">
-              {display}
-            </th>
-            <td className="budget-table--number">
-              <Dollars>{hitAndHie.combined[year].medicaid}</Dollars>
-            </td>
-          </tr>
-        ))}
         </tbody>
       </table>
 
@@ -153,7 +134,7 @@ const ExecutiveSummaryBudget = ({ budget }) => {
             <th className="ds-u-text-align--center" colSpan="2" id={thId('mmis50')}>
               {t('executiveSummary.budgetTable.mmis50')}
             </th>
-            <th className="ds-u-text-align--center" colSpan="2" id={thId('mmisTotal')}>
+            <th className="ds-u-text-align--center" colSpan="3" id={thId('mmisTotal')}>
               {t('executiveSummary.budgetTable.mmisTotal')}
             </th>
           </tr>
@@ -182,6 +163,9 @@ const ExecutiveSummaryBudget = ({ budget }) => {
             </th>
             <th className="ds-u-text-align--right" id={thId('mmisTotal', 'state')}>
               {t('executiveSummary.budgetTable.stateShare')}
+            </th>
+            <th className="ds-u-text-align--right" id={thId('mmisTotal', 'total')}>
+              {t('executiveSummary.budgetTable.grandTotal')}
             </th>
           </tr>
         </thead>
@@ -226,33 +210,11 @@ const ExecutiveSummaryBudget = ({ budget }) => {
                 value={mmisByFFP.combined[year].state}
                 headers={tdHdrs('mmisTotal', 'state')}
               />
+              <DollarCell
+                value={mmisByFFP.combined[year].medicaid}
+                headers={tdHdrs('mmisTotal', 'total')}
+              />
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <table className="budget-table budget-table--totals">
-        <caption className="ds-u-visibility--screen-reader">
-          Medicaid MMIS totals by year
-        </caption>
-        <thead>
-          <th />
-          <th className="ds-u-text-align--right" id={thId('mmisTotal', 'total')}>
-            {t('executiveSummary.budgetTable.grandTotal')}
-          </th>
-        </thead>
-        <tbody>
-        {rowKeys.map(({ year, display }) => (
-          <tr
-            key={year}
-            className={display==='Total' ? 'budget-table--total budget-table--row__highlight' : ''}
-          >
-            <th scope="row">
-              {display}
-            </th>
-            <td className="budget-table--number">
-              <Dollars>{mmisByFFP.combined[year].medicaid}</Dollars>
-            </td>
-          </tr>
           ))}
         </tbody>
       </table>
