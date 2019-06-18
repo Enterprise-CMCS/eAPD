@@ -29,7 +29,7 @@ const ApdPreviousActivityTableMMIS = ({
         <table key={level} className="budget-table">
           <thead>
             <tr>
-              <th id="prev_act_mmis_null2" rowspan="2" />
+              <th id="prev_act_mmis_null2" rowSpan="2" />
               <th id={`prev_act_mmis${level}_total`}>
                 {TABLE_HEADERS.total}
               </th>

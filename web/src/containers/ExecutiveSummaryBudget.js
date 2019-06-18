@@ -74,8 +74,14 @@ const ExecutiveSummaryBudget = ({ budget }) => {
         </thead>
         <tbody>
          {rowKeys.map(({ year, display }) => (
-            <tr key={year}>
-              <th headers="program-budget-table-null1 program-budget-table-null2" scope="row">
+            <tr
+              key={year}
+              className={display==='Total' ? 'budget-table--total budget-table--row__highlight' : ''}
+            >
+              <th
+                headers="program-budget-table-null1 program-budget-table-null2"
+                scope="row"
+              >
                 {display}
               </th>
               <DollarCell
@@ -118,7 +124,10 @@ const ExecutiveSummaryBudget = ({ budget }) => {
         </thead>
         <tbody>
         {rowKeys.map(({ year, display }) => (
-          <tr key={`${year}-medicaid-total`}>
+          <tr
+            key={`${year}-medicaid-total`}
+            className={display==='Total' ? 'budget-table--total budget-table--row__highlight' : ''}
+          >
             <th scope="row">
               {display}
             </th>
@@ -178,7 +187,10 @@ const ExecutiveSummaryBudget = ({ budget }) => {
         </thead>
         <tbody>
           {rowKeys.map(({ year, display }) => (
-            <tr key={year}>
+            <tr
+              key={year}
+              className={display==='Total' ? 'budget-table--total budget-table--row__highlight' : ''}
+            >
               <th headers="program-budget-table-null3 program-budget-table-null4" scope="row">
                 {display}
               </th>
@@ -230,7 +242,10 @@ const ExecutiveSummaryBudget = ({ budget }) => {
         </thead>
         <tbody>
         {rowKeys.map(({ year, display }) => (
-          <tr key={year}>
+          <tr
+            key={year}
+            className={display==='Total' ? 'budget-table--total budget-table--row__highlight' : ''}
+          >
             <th scope="row">
               {display}
             </th>

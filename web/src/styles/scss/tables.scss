@@ -2,8 +2,8 @@
 
 .budget-table {
   font-size: 12px;
-  &.budget-table--totals{
-    width: 42%; // roughly equal to full tables' cells; temp fix before switching font to courier
+  &.budget-table--totals {
+    width: 42%;
   }
   + .budget-table {
     margin-top: $spacer-2;
@@ -18,6 +18,9 @@
     &.budget-table--subtotal,
     &.budget-table--sum {
       font-weight: $font-bold;
+      th, td {
+        font-weight: $font-bold;
+      }
     }
   }
 
