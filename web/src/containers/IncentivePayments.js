@@ -19,8 +19,6 @@ const QUARTERS = [1, 2, 3, 4];
 const formatNumber = (type, number) =>
   type === 'amount' ? <Dollars>{number}</Dollars> : formatNum(number);
 
-const thId = (fy, q) => `incentive-payments-table-fy${fy}${q ? `-q${q}` : ''}`;
-
 class IncentivePayments extends Component {
   handleChange = (key, year, quarter) => e => {
     const { value } = e.target;
