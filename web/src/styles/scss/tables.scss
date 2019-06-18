@@ -3,7 +3,7 @@
 .budget-table {
   font-size: 12px;
   &.budget-table--totals {
-    width: 42%;
+    width: 50%;
   }
   + .budget-table {
     margin-top: $spacer-2;

@@ -81,7 +81,7 @@ const ApdPreviousActivityTableMMIS = ({
 
                   <td
                     headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_approved`}
-                    className="font-family--mono"
+                    className="budget-table--number"
                   >
                     <Dollars>{federalApproved}</Dollars>
                   </td>

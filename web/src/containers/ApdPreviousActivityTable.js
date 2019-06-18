@@ -80,7 +80,7 @@ const ApdPreviousActivityTable = ({
 
                   <td
                     headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_federal_approved`}
-                    className="font-family--mono"
+                    className="budget-table--number"
                   >
                     <Dollars>{federalApproved}</Dollars>
                   </td>
