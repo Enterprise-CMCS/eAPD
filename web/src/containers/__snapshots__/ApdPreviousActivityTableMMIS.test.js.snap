@@ -42,16 +42,19 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </tr>
       <tr>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis90_total_approved"
         >
           Approved
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis90_federal_approved"
         >
           Approved
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis90_federal_actual"
         >
           Actual
@@ -190,16 +193,19 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </tr>
       <tr>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis75_total_approved"
         >
           Approved
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis75_federal_approved"
         >
           Approved
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis75_federal_actual"
         >
           Actual
@@ -338,16 +344,19 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </tr>
       <tr>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis50_total_approved"
         >
           Approved
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis50_federal_approved"
         >
           Approved
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_mmis50_federal_actual"
         >
           Actual

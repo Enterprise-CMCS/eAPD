@@ -41,16 +41,19 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </tr>
       <tr>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_hithie_total_approved"
         >
           Approved
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_hithie_federal_approved"
         >
           Approved
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_hithie_federal_actual"
         >
           Actual

@@ -42,21 +42,18 @@ exports[`executive summary budget component renders correctly with data 1`] = `
           id="program-budget-table-null1"
         />
         <th
-          className="ds-u-text-align--center"
           colSpan="2"
           id="program-budget-table-hit"
         >
           HIT (90/10)
         </th>
         <th
-          className="ds-u-text-align--center"
           colSpan="2"
           id="program-budget-table-hie"
         >
           HIE (90/10)
         </th>
         <th
-          className="ds-u-text-align--center"
           colSpan="3"
           id="program-budget-table-combined"
         >
@@ -245,28 +242,24 @@ exports[`executive summary budget component renders correctly with data 1`] = `
           id="program-budget-table-null3"
         />
         <th
-          className="ds-u-text-align--center"
           colSpan="2"
           id="program-budget-table-mmis90"
         >
           MMIS (90/10)
         </th>
         <th
-          className="ds-u-text-align--center"
           colSpan="2"
           id="program-budget-table-mmis75"
         >
           MMIS (75/25)
         </th>
         <th
-          className="ds-u-text-align--center"
           colSpan="2"
           id="program-budget-table-mmis50"
         >
           MMIS (50/50)
         </th>
         <th
-          className="ds-u-text-align--center"
           colSpan="3"
           id="program-budget-table-mmisTotal"
         >
