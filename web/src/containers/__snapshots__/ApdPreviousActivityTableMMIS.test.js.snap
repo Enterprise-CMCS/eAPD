@@ -8,16 +8,16 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     MMIS
   </h4>
   <table
-    className="table-cms centered-headers table-fixed"
+    className="budget-table"
     key="90"
   >
     <thead>
       <tr>
         <th
           id="prev_act_mmis_null2"
+          rowSpan="2"
         />
         <th
-          className="pre-line"
           id="prev_act_mmis90_total"
         >
           <span>
@@ -27,7 +27,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           </span>
         </th>
         <th
-          className="pre-line"
           colSpan="2"
           id="prev_act_mmis90_federal"
         >
@@ -42,9 +41,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </th>
       </tr>
       <tr>
-        <th
-          id="prev_act_mmis_null3"
-        />
         <th
           id="prev_act_mmis90_total_approved"
         >
@@ -64,7 +60,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
-        className="align-middle"
         key="1"
       >
         <th
@@ -76,17 +71,18 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_1 prev_act_mmis90_total prev_act_mmis90_total_approved"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal"
             name="approved-total-mmis90-1"
             onChange={[Function]}
             type="text"
             value={20}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
+          className="font-family--mono"
           headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
         >
           <Dollars
@@ -99,19 +95,18 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_actual"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="actual federal share for MMIS at the 90/10 level for FFY 1"
             name="actual-federal-mmis90-1"
             onChange={[Function]}
             type="text"
             value={10}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
       </tr>
       <tr
-        className="align-middle"
         key="2"
       >
         <th
@@ -123,17 +118,18 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_2 prev_act_mmis90_total prev_act_mmis90_total_approved"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal"
             name="approved-total-mmis90-2"
             onChange={[Function]}
             type="text"
             value={200}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
+          className="font-family--mono"
           headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
         >
           <Dollars
@@ -146,30 +142,30 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_actual"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="actual federal share for MMIS at the 90/10 level for FFY 2"
             name="actual-federal-mmis90-2"
             onChange={[Function]}
             type="text"
             value={100}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
       </tr>
     </tbody>
   </table>
   <table
-    className="table-cms centered-headers table-fixed"
+    className="budget-table"
     key="75"
   >
     <thead>
       <tr>
         <th
           id="prev_act_mmis_null2"
+          rowSpan="2"
         />
         <th
-          className="pre-line"
           id="prev_act_mmis75_total"
         >
           <span>
@@ -179,7 +175,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           </span>
         </th>
         <th
-          className="pre-line"
           colSpan="2"
           id="prev_act_mmis75_federal"
         >
@@ -194,9 +189,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </th>
       </tr>
       <tr>
-        <th
-          id="prev_act_mmis_null3"
-        />
         <th
           id="prev_act_mmis75_total_approved"
         >
@@ -216,7 +208,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
-        className="align-middle"
         key="1"
       >
         <th
@@ -228,17 +219,18 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_1 prev_act_mmis75_total prev_act_mmis75_total_approved"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal"
             name="approved-total-mmis75-1"
             onChange={[Function]}
             type="text"
             value={40}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
+          className="font-family--mono"
           headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
         >
           <Dollars
@@ -251,19 +243,18 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_actual"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="actual federal share for MMIS at the 75/25 level for FFY 1"
             name="actual-federal-mmis75-1"
             onChange={[Function]}
             type="text"
             value={30}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
       </tr>
       <tr
-        className="align-middle"
         key="2"
       >
         <th
@@ -275,17 +266,18 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_2 prev_act_mmis75_total prev_act_mmis75_total_approved"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal"
             name="approved-total-mmis75-2"
             onChange={[Function]}
             type="text"
             value={400}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
+          className="font-family--mono"
           headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
         >
           <Dollars
@@ -298,30 +290,30 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_actual"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="actual federal share for MMIS at the 75/25 level for FFY 2"
             name="actual-federal-mmis75-2"
             onChange={[Function]}
             type="text"
             value={300}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
       </tr>
     </tbody>
   </table>
   <table
-    className="table-cms centered-headers table-fixed"
+    className="budget-table"
     key="50"
   >
     <thead>
       <tr>
         <th
           id="prev_act_mmis_null2"
+          rowSpan="2"
         />
         <th
-          className="pre-line"
           id="prev_act_mmis50_total"
         >
           <span>
@@ -331,7 +323,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           </span>
         </th>
         <th
-          className="pre-line"
           colSpan="2"
           id="prev_act_mmis50_federal"
         >
@@ -346,9 +337,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </th>
       </tr>
       <tr>
-        <th
-          id="prev_act_mmis_null3"
-        />
         <th
           id="prev_act_mmis50_total_approved"
         >
@@ -368,7 +356,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
-        className="align-middle"
         key="1"
       >
         <th
@@ -380,17 +367,18 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_1 prev_act_mmis50_total prev_act_mmis50_total_approved"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal"
             name="approved-total-mmis50-1"
             onChange={[Function]}
             type="text"
             value={60}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
+          className="font-family--mono"
           headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
         >
           <Dollars
@@ -403,19 +391,18 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_actual"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="actual federal share for MMIS at the 50/50 level for FFY 1"
             name="actual-federal-mmis50-1"
             onChange={[Function]}
             type="text"
             value={50}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
       </tr>
       <tr
-        className="align-middle"
         key="2"
       >
         <th
@@ -427,17 +414,18 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_2 prev_act_mmis50_total prev_act_mmis50_total_approved"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal"
             name="approved-total-mmis50-2"
             onChange={[Function]}
             type="text"
             value={600}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
+          className="font-family--mono"
           headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
         >
           <Dollars
@@ -450,14 +438,14 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_actual"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="actual federal share for MMIS at the 50/50 level for FFY 2"
             name="actual-federal-mmis50-2"
             onChange={[Function]}
             type="text"
             value={500}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
       </tr>

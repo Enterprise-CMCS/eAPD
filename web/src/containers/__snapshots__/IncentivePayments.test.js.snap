@@ -2,47 +2,53 @@
 
 exports[`incentive payments component renders correctly 1`] = `
 <Fragment>
-  <h3
-    id="incentive-payments-table-fy1"
-  >
-    FFY 1
-  </h3>
   <table
-    className="table-cms table-fixed"
+    className="budget-table"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 1
+    </caption>
     <thead>
       <tr>
-        <th />
+        <th>
+          <span
+            aria-hidden="true"
+          >
+            FFY 1
+          </span>
+        </th>
         <th
-          className="center"
+          className="ds-u-text-align--right"
           key="1"
           scope="col"
         >
           Q1
         </th>
         <th
-          className="center"
+          className="ds-u-text-align--right"
           key="2"
           scope="col"
         >
           Q2
         </th>
         <th
-          className="center"
+          className="ds-u-text-align--right"
           key="3"
           scope="col"
         >
           Q3
         </th>
         <th
-          className="center"
+          className="ds-u-text-align--right"
           key="4"
           scope="col"
         >
           Q4
         </th>
         <th
-          className="center"
+          className="ds-u-text-align--right budget-table--subtotal budget-table--col__highlight"
           scope="col"
         >
           Subtotal
@@ -54,7 +60,6 @@ exports[`incentive payments component renders correctly 1`] = `
         key="ehAmt"
       >
         <th
-          className="align-middle"
           scope="row"
         >
           EH Payments
@@ -63,60 +68,60 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehAmt payments for 1, quarter 1"
             name="ehAmt-payments-1-q1"
             onChange={[Function]}
             type="text"
             value={2}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehAmt payments for 1, quarter 2"
             name="ehAmt-payments-1-q2"
             onChange={[Function]}
             type="text"
             value={3}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehAmt payments for 1, quarter 3"
             name="ehAmt-payments-1-q3"
             onChange={[Function]}
             type="text"
             value={4}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehAmt payments for 1, quarter 4"
             name="ehAmt-payments-1-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
-          className="mono right-align align-middle"
+          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -129,7 +134,6 @@ exports[`incentive payments component renders correctly 1`] = `
         key="ehCt"
       >
         <th
-          className="align-middle"
           scope="row"
         >
           EH Count (optional)
@@ -138,60 +142,60 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehCt payments for 1, quarter 1"
             name="ehCt-payments-1-q1"
             onChange={[Function]}
             type="text"
             value={10}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehCt payments for 1, quarter 2"
             name="ehCt-payments-1-q2"
             onChange={[Function]}
             type="text"
             value={11}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehCt payments for 1, quarter 3"
             name="ehCt-payments-1-q3"
             onChange={[Function]}
             type="text"
             value={12}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehCt payments for 1, quarter 4"
             name="ehCt-payments-1-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
-          className="mono right-align align-middle"
+          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
           42
         </td>
@@ -200,7 +204,6 @@ exports[`incentive payments component renders correctly 1`] = `
         key="epAmt"
       >
         <th
-          className="align-middle"
           scope="row"
         >
           EP Payments
@@ -209,60 +212,60 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epAmt payments for 1, quarter 1"
             name="epAmt-payments-1-q1"
             onChange={[Function]}
             type="text"
             value={18}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epAmt payments for 1, quarter 2"
             name="epAmt-payments-1-q2"
             onChange={[Function]}
             type="text"
             value={19}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epAmt payments for 1, quarter 3"
             name="epAmt-payments-1-q3"
             onChange={[Function]}
             type="text"
             value={20}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epAmt payments for 1, quarter 4"
             name="epAmt-payments-1-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
-          className="mono right-align align-middle"
+          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -275,7 +278,6 @@ exports[`incentive payments component renders correctly 1`] = `
         key="epCt"
       >
         <th
-          className="align-middle"
           scope="row"
         >
           EP Count (optional)
@@ -284,107 +286,113 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epCt payments for 1, quarter 1"
             name="epCt-payments-1-q1"
             onChange={[Function]}
             type="text"
             value={26}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epCt payments for 1, quarter 2"
             name="epCt-payments-1-q2"
             onChange={[Function]}
             type="text"
             value={27}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epCt payments for 1, quarter 3"
             name="epCt-payments-1-q3"
             onChange={[Function]}
             type="text"
             value={28}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epCt payments for 1, quarter 4"
             name="epCt-payments-1-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
-          className="mono right-align align-middle"
+          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
           106
         </td>
       </tr>
     </tbody>
   </table>
-  <h3
-    id="incentive-payments-table-fy2"
-  >
-    FFY 2
-  </h3>
   <table
-    className="table-cms table-fixed"
+    className="budget-table"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 2
+    </caption>
     <thead>
       <tr>
-        <th />
+        <th>
+          <span
+            aria-hidden="true"
+          >
+            FFY 2
+          </span>
+        </th>
         <th
-          className="center"
+          className="ds-u-text-align--right"
           key="1"
           scope="col"
         >
           Q1
         </th>
         <th
-          className="center"
+          className="ds-u-text-align--right"
           key="2"
           scope="col"
         >
           Q2
         </th>
         <th
-          className="center"
+          className="ds-u-text-align--right"
           key="3"
           scope="col"
         >
           Q3
         </th>
         <th
-          className="center"
+          className="ds-u-text-align--right"
           key="4"
           scope="col"
         >
           Q4
         </th>
         <th
-          className="center"
+          className="ds-u-text-align--right budget-table--subtotal budget-table--col__highlight"
           scope="col"
         >
           Subtotal
@@ -396,7 +404,6 @@ exports[`incentive payments component renders correctly 1`] = `
         key="ehAmt"
       >
         <th
-          className="align-middle"
           scope="row"
         >
           EH Payments
@@ -405,60 +412,60 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehAmt payments for 2, quarter 1"
             name="ehAmt-payments-2-q1"
             onChange={[Function]}
             type="text"
             value={6}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehAmt payments for 2, quarter 2"
             name="ehAmt-payments-2-q2"
             onChange={[Function]}
             type="text"
             value={7}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehAmt payments for 2, quarter 3"
             name="ehAmt-payments-2-q3"
             onChange={[Function]}
             type="text"
             value={8}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehAmt payments for 2, quarter 4"
             name="ehAmt-payments-2-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
-          className="mono right-align align-middle"
+          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -471,7 +478,6 @@ exports[`incentive payments component renders correctly 1`] = `
         key="ehCt"
       >
         <th
-          className="align-middle"
           scope="row"
         >
           EH Count (optional)
@@ -480,60 +486,60 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehCt payments for 2, quarter 1"
             name="ehCt-payments-2-q1"
             onChange={[Function]}
             type="text"
             value={14}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehCt payments for 2, quarter 2"
             name="ehCt-payments-2-q2"
             onChange={[Function]}
             type="text"
             value={15}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehCt payments for 2, quarter 3"
             name="ehCt-payments-2-q3"
             onChange={[Function]}
             type="text"
             value={16}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="ehCt payments for 2, quarter 4"
             name="ehCt-payments-2-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
-          className="mono right-align align-middle"
+          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
           58
         </td>
@@ -542,7 +548,6 @@ exports[`incentive payments component renders correctly 1`] = `
         key="epAmt"
       >
         <th
-          className="align-middle"
           scope="row"
         >
           EP Payments
@@ -551,60 +556,60 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epAmt payments for 2, quarter 1"
             name="epAmt-payments-2-q1"
             onChange={[Function]}
             type="text"
             value={22}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epAmt payments for 2, quarter 2"
             name="epAmt-payments-2-q2"
             onChange={[Function]}
             type="text"
             value={23}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epAmt payments for 2, quarter 3"
             name="epAmt-payments-2-q3"
             onChange={[Function]}
             type="text"
             value={24}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epAmt payments for 2, quarter 4"
             name="epAmt-payments-2-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
-          className="mono right-align align-middle"
+          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -617,7 +622,6 @@ exports[`incentive payments component renders correctly 1`] = `
         key="epCt"
       >
         <th
-          className="align-middle"
           scope="row"
         >
           EP Count (optional)
@@ -626,60 +630,60 @@ exports[`incentive payments component renders correctly 1`] = `
           key="1"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epCt payments for 2, quarter 1"
             name="epCt-payments-2-q1"
             onChange={[Function]}
             type="text"
             value={30}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epCt payments for 2, quarter 2"
             name="epCt-payments-2-q2"
             onChange={[Function]}
             type="text"
             value={31}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epCt payments for 2, quarter 3"
             name="epCt-payments-2-q3"
             onChange={[Function]}
             type="text"
             value={32}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="epCt payments for 2, quarter 4"
             name="epCt-payments-2-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
-          className="mono right-align align-middle"
+          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
         >
           122
         </td>

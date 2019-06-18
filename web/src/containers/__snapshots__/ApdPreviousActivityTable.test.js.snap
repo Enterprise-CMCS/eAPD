@@ -8,15 +8,15 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     HIT + HIE
   </h4>
   <table
-    className="table-cms centered-headers"
+    className="budget-table"
   >
     <thead>
       <tr>
         <th
           id="prev_act_hit_header_null2"
+          rowSpan="2"
         />
         <th
-          className="pre-line"
           id="prev_act_hithie_total"
         >
           <span>
@@ -26,7 +26,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           </span>
         </th>
         <th
-          className="pre-line"
           colSpan="2"
           id="prev_act_hithie_federal"
         >
@@ -41,9 +40,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </th>
       </tr>
       <tr>
-        <th
-          id="prev_act_hit_header_null3"
-        />
         <th
           id="prev_act_hithie_total_approved"
         >
@@ -63,7 +59,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
-        className="align-middle"
         key="1"
       >
         <th
@@ -75,18 +70,19 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_hithie_row_1 prev_act_hithie_total prev_act_hithie_total_approved"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="total approved funding for HIT and HIE for FFY 1, state plus federal"
             name="hithie-approved-total-1"
             onChange={[Function]}
             type="text"
             value={20}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
-          headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_total_approved"
+          className="font-family--mono"
+          headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_approved"
         >
           <Dollars
             long={false}
@@ -98,19 +94,18 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_actual"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="actual federal share for HIT and HIE for FFY 1"
             name="hithie-actual-federal-1"
             onChange={[Function]}
             type="text"
             value={10}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
       </tr>
       <tr
-        className="align-middle"
         key="2"
       >
         <th
@@ -122,18 +117,19 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_hithie_row_2 prev_act_hithie_total prev_act_hithie_total_approved"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="total approved funding for HIT and HIE for FFY 2, state plus federal"
             name="hithie-approved-total-2"
             onChange={[Function]}
             type="text"
             value={200}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
-          headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_total_approved"
+          className="font-family--mono"
+          headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_approved"
         >
           <Dollars
             long={false}
@@ -145,14 +141,14 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_actual"
         >
           <InputHolder
-            className="m0 input input-condensed mono right-align"
+            className="budget-table--input__number"
             hideLabel={true}
             label="actual federal share for HIT and HIE for FFY 2"
             name="hithie-actual-federal-2"
             onChange={[Function]}
             type="text"
             value={100}
-            wrapperClass="m0"
+            wrapperClass="budget-table--input-holder"
           />
         </td>
       </tr>
