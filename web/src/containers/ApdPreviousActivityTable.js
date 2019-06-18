@@ -40,13 +40,22 @@ const ApdPreviousActivityTable = ({
             </th>
           </tr>
           <tr>
-            <th id="prev_act_hithie_total_approved">
+            <th
+              id="prev_act_hithie_total_approved"
+              className="ds-u-text-align--right"
+            >
               {TABLE_HEADERS.approved}
             </th>
-            <th id="prev_act_hithie_federal_approved">
+            <th
+              id="prev_act_hithie_federal_approved"
+              className="ds-u-text-align--right"
+            >
               {TABLE_HEADERS.approved}
             </th>
-            <th id="prev_act_hithie_federal_actual">
+            <th
+              id="prev_act_hithie_federal_actual"
+              className="ds-u-text-align--right"
+            >
               {TABLE_HEADERS.actual}
             </th>
           </tr>

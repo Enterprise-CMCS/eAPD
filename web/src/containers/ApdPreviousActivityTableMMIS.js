@@ -41,14 +41,23 @@ const ApdPreviousActivityTableMMIS = ({
               </th>
             </tr>
             <tr>
-              <th id={`prev_act_mmis${level}_total_approved`}>
+              <th
+                id={`prev_act_mmis${level}_total_approved`}
+                className="ds-u-text-align--right"
+              >
                 {TABLE_HEADERS.approved}
               </th>
 
-              <th id={`prev_act_mmis${level}_federal_approved`}>
+              <th
+                id={`prev_act_mmis${level}_federal_approved`}
+                className="ds-u-text-align--right"
+              >
                 {TABLE_HEADERS.approved}
               </th>
-              <th id={`prev_act_mmis${level}_federal_actual`}>
+              <th
+                id={`prev_act_mmis${level}_federal_actual`}
+                className="ds-u-text-align--right"
+              >
                 {TABLE_HEADERS.actual}
               </th>
             </tr>

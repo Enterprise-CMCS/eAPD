@@ -40,13 +40,13 @@ const ExecutiveSummaryBudget = ({ budget }) => {
         <thead>
           <tr>
             <th id="program-budget-table-null1" />
-            <th className="ds-u-text-align--center" colSpan="2" id={thId('hit')}>
+            <th colSpan="2" id={thId('hit')}>
               {t('executiveSummary.budgetTable.hit')}
             </th>
-            <th className="ds-u-text-align--center" colSpan="2" id={thId('hie')}>
+            <th colSpan="2" id={thId('hie')}>
               {t('executiveSummary.budgetTable.hie')}
             </th>
-            <th className="ds-u-text-align--center" colSpan="3" id={thId('combined')}>
+            <th colSpan="3" id={thId('combined')}>
               {t('executiveSummary.budgetTable.hitHie')}
             </th>
           </tr>
@@ -125,16 +125,16 @@ const ExecutiveSummaryBudget = ({ budget }) => {
         <thead>
           <tr>
             <th id="program-budget-table-null3" />
-            <th className="ds-u-text-align--center" colSpan="2" id={thId('mmis90')}>
+            <th colSpan="2" id={thId('mmis90')}>
               {t('executiveSummary.budgetTable.mmis90')}
             </th>
-            <th className="ds-u-text-align--center" colSpan="2" id={thId('mmis75')}>
+            <th colSpan="2" id={thId('mmis75')}>
               {t('executiveSummary.budgetTable.mmis75')}
             </th>
-            <th className="ds-u-text-align--center" colSpan="2" id={thId('mmis50')}>
+            <th colSpan="2" id={thId('mmis50')}>
               {t('executiveSummary.budgetTable.mmis50')}
             </th>
-            <th className="ds-u-text-align--center" colSpan="3" id={thId('mmisTotal')}>
+            <th colSpan="3" id={thId('mmisTotal')}>
               {t('executiveSummary.budgetTable.mmisTotal')}
             </th>
           </tr>
