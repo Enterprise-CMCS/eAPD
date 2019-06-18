@@ -55,6 +55,7 @@ class CostAllocateFFPQuarterly extends Component {
                   <th
                     key={q}
                     scope="col"
+                    className="ds-u-text-align--right"
                   >
                     <span className="ds-u-visibility--screen-reader">
                       {t('ffy', { year })} 
@@ -64,7 +65,7 @@ class CostAllocateFFPQuarterly extends Component {
                 ))}
                 <th
                   scope="col"
-                  className="budget-table--subtotal"
+                  className="budget-table--subtotal ds-u-text-align--right"
                 >
                   <span className="ds-u-visibility--screen-reader">
                     {t('ffy', { year })} 
