@@ -101,12 +101,11 @@ exports[`the ContractorResourcesForm component renders correctly when not collap
       yearValue={1066}
     />
   </div>
-  <TextField
+  <DollarField
     label="Total Contract Cost"
-    mask="currency"
     name="contractor-total-cost"
+    onChange={null}
     size="medium"
-    type="text"
     value={12345}
   />
   <fieldset
@@ -150,14 +149,13 @@ exports[`the ContractorResourcesForm component renders correctly when not collap
                 type="number"
                 value={10}
               />
-              <TextField
+              <DollarField
                 className="ds-u-margin-left--1"
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
-                mask="currency"
                 name="contractor-hourly-rate-ffy-1066"
+                onChange={null}
                 size="medium"
-                type="text"
                 value={100}
               />
             </div>
@@ -180,14 +178,13 @@ exports[`the ContractorResourcesForm component renders correctly when not collap
                 type="number"
                 value={20}
               />
-              <TextField
+              <DollarField
                 className="ds-u-margin-left--1"
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
-                mask="currency"
                 name="contractor-hourly-rate-ffy-1067"
+                onChange={null}
                 size="medium"
-                type="text"
                 value={200}
               />
             </div>
@@ -202,24 +199,22 @@ exports[`the ContractorResourcesForm component renders correctly when not collap
       Yes
     </Choice>
   </fieldset>
-  <TextField
+  <DollarField
     disabled={false}
     key="1066"
     label="FFY 1066 Cost"
-    mask="currency"
     name="contractor-cost-ffy-1066"
+    onChange={null}
     size="medium"
-    type="text"
     value={300}
   />
-  <TextField
+  <DollarField
     disabled={false}
     key="1067"
     label="FFY 1067 Cost"
-    mask="currency"
     name="contractor-cost-ffy-1067"
+    onChange={null}
     size="medium"
-    type="text"
     value={400}
   />
   <Button
@@ -292,12 +287,11 @@ exports[`the ContractorResourcesForm component renders if use hourly data is sel
       yearValue={1066}
     />
   </div>
-  <TextField
+  <DollarField
     label="Total Contract Cost"
-    mask="currency"
     name="contractor-total-cost"
+    onChange={null}
     size="medium"
-    type="text"
     value={12345}
   />
   <fieldset
@@ -341,14 +335,13 @@ exports[`the ContractorResourcesForm component renders if use hourly data is sel
                 type="number"
                 value={10}
               />
-              <TextField
+              <DollarField
                 className="ds-u-margin-left--1"
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
-                mask="currency"
                 name="contractor-hourly-rate-ffy-1066"
+                onChange={null}
                 size="medium"
-                type="text"
                 value={100}
               />
             </div>
@@ -371,14 +364,13 @@ exports[`the ContractorResourcesForm component renders if use hourly data is sel
                 type="number"
                 value={20}
               />
-              <TextField
+              <DollarField
                 className="ds-u-margin-left--1"
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
-                mask="currency"
                 name="contractor-hourly-rate-ffy-1067"
+                onChange={null}
                 size="medium"
-                type="text"
                 value={200}
               />
             </div>
