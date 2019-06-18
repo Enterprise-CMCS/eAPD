@@ -8,7 +8,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
     Grand totals: Federal HIT, HIE, MMIS
   </h4>
   <table
-    className="table-cms centered-headers table-fixed"
+    className="budget-table"
   >
     <thead>
       <tr>
@@ -29,7 +29,6 @@ exports[`apd previous activity table, grand total component renders correctly 1`
     </thead>
     <tbody>
       <tr
-        className="align-middle"
         key="1"
       >
         <th
@@ -38,6 +37,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
           FFY 1
         </th>
         <td
+          className="font-family--mono"
           headers="prev_act_total_row_1 prev_act_total_approved"
         >
           <Dollars
@@ -47,6 +47,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
           </Dollars>
         </td>
         <td
+          className="font-family--mono"
           headers="prev_act_total_row_1 prev_act_total_actual"
         >
           <Dollars
@@ -57,7 +58,6 @@ exports[`apd previous activity table, grand total component renders correctly 1`
         </td>
       </tr>
       <tr
-        className="align-middle"
         key="2"
       >
         <th
@@ -66,6 +66,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
           FFY 2
         </th>
         <td
+          className="font-family--mono"
           headers="prev_act_total_row_2 prev_act_total_approved"
         >
           <Dollars
@@ -75,6 +76,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
           </Dollars>
         </td>
         <td
+          className="font-family--mono"
           headers="prev_act_total_row_2 prev_act_total_actual"
         >
           <Dollars
