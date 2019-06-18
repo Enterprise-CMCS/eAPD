@@ -39,8 +39,7 @@ function DataRow({ data, title }) {
 
 DataRow.propTypes = {
   data: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired
 };
 
 const DataRowGroup = ({ data, entries, year }) => (
