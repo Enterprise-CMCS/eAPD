@@ -365,11 +365,14 @@ jobs:
           command: |
             # git diff --exit-code will exit with a 0 if there were no changes
             # or a non-zero if there were changes, so stop this step gracefully
-            # if there were no changes in the api directory
-            git diff master --relative=api --name-only --exit-code > /dev/null
+            # if there were no changes in the api directory. Compare to
+            # one commit back, which is before the current merge commit.
+            set +e
+            git diff HEAD~1 --relative=api --name-only --exit-code > /dev/null
             if [ $? -eq "0" ]; then
               circleci-agent step halt
             fi
+            set -e
       - run:
           name: deploy to production
           working_directory: ~/project/bin/prod-deploy
@@ -409,11 +412,14 @@ jobs:
           command: |
             # git diff --exit-code will exit with a 0 if there were no changes
             # or a non-zero if there were changes, so stop this step gracefully
-            # if there were no changes in the web directory
-            git diff master --relative=web --name-only --exit-code > /dev/null
+            # if there were no changes in the web directory. Compare to one
+            # commit back, which is before the current merge commit.
+            set +e
+            git diff HEAD~1 --relative=web --name-only --exit-code > /dev/null
             if [ $? -eq "0" ]; then
               circleci-agent step halt
             fi
+            set -e
       - run:
           name: sync to s3
           command: |
