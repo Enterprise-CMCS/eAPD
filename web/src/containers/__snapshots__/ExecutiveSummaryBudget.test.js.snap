@@ -57,7 +57,7 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         </th>
         <th
           className="ds-u-text-align--center"
-          colSpan="2"
+          colSpan="3"
           id="program-budget-table-combined"
         >
           HIT + HIE (90/10)
@@ -103,6 +103,12 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         >
           State
         </th>
+        <th
+          className="ds-u-text-align--right"
+          id="program-budget-table-combined-total"
+        >
+          Medicaid Total
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -140,6 +146,10 @@ exports[`executive summary budget component renders correctly with data 1`] = `
           headers="program-budget-table-combined program-budget-table-combined-state"
           value={200}
         />
+        <DollarCell
+          headers="program-budget-table-combined program-budget-table-combined-total"
+          value={300}
+        />
       </tr>
       <tr
         className=""
@@ -174,6 +184,10 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         <DollarCell
           headers="program-budget-table-combined program-budget-table-combined-state"
           value={500}
+        />
+        <DollarCell
+          headers="program-budget-table-combined program-budget-table-combined-total"
+          value={700}
         />
       </tr>
       <tr
@@ -210,83 +224,10 @@ exports[`executive summary budget component renders correctly with data 1`] = `
           headers="program-budget-table-combined program-budget-table-combined-state"
           value={800}
         />
-      </tr>
-    </tbody>
-  </table>
-  <table
-    className="budget-table budget-table--totals"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
-    >
-      Medicaid HIE and HIT totals per year
-    </caption>
-    <thead>
-      <th />
-      <th
-        className="ds-u-text-align--right"
-        id="program-budget-table-combined-total"
-      >
-        Medicaid Total
-      </th>
-    </thead>
-    <tbody>
-      <tr
-        className=""
-        key="1-medicaid-total"
-      >
-        <th
-          scope="row"
-        >
-          FFY 1
-        </th>
-        <td
-          className="budget-table--number"
-        >
-          <Dollars
-            long={false}
-          >
-            300
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        className=""
-        key="2-medicaid-total"
-      >
-        <th
-          scope="row"
-        >
-          FFY 2
-        </th>
-        <td
-          className="budget-table--number"
-        >
-          <Dollars
-            long={false}
-          >
-            700
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        className="budget-table--total budget-table--row__highlight"
-        key="total-medicaid-total"
-      >
-        <th
-          scope="row"
-        >
-          Total
-        </th>
-        <td
-          className="budget-table--number"
-        >
-          <Dollars
-            long={false}
-          >
-            1500
-          </Dollars>
-        </td>
+        <DollarCell
+          headers="program-budget-table-combined program-budget-table-combined-total"
+          value={1500}
+        />
       </tr>
     </tbody>
   </table>
@@ -326,7 +267,7 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         </th>
         <th
           className="ds-u-text-align--center"
-          colSpan="2"
+          colSpan="3"
           id="program-budget-table-mmisTotal"
         >
           MMIS (Total)
@@ -384,6 +325,12 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         >
           State
         </th>
+        <th
+          className="ds-u-text-align--right"
+          id="program-budget-table-mmisTotal-total"
+        >
+          Medicaid Total
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -429,6 +376,10 @@ exports[`executive summary budget component renders correctly with data 1`] = `
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
           value={2000}
         />
+        <DollarCell
+          headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
+          value={3000}
+        />
       </tr>
       <tr
         className=""
@@ -471,6 +422,10 @@ exports[`executive summary budget component renders correctly with data 1`] = `
         <DollarCell
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
           value={5000}
+        />
+        <DollarCell
+          headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
+          value={9000}
         />
       </tr>
       <tr
@@ -515,83 +470,10 @@ exports[`executive summary budget component renders correctly with data 1`] = `
           headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-state"
           value={8000}
         />
-      </tr>
-    </tbody>
-  </table>
-  <table
-    className="budget-table budget-table--totals"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
-    >
-      Medicaid MMIS totals by year
-    </caption>
-    <thead>
-      <th />
-      <th
-        className="ds-u-text-align--right"
-        id="program-budget-table-mmisTotal-total"
-      >
-        Medicaid Total
-      </th>
-    </thead>
-    <tbody>
-      <tr
-        className=""
-        key="1"
-      >
-        <th
-          scope="row"
-        >
-          FFY 1
-        </th>
-        <td
-          className="budget-table--number"
-        >
-          <Dollars
-            long={false}
-          >
-            3000
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        className=""
-        key="2"
-      >
-        <th
-          scope="row"
-        >
-          FFY 2
-        </th>
-        <td
-          className="budget-table--number"
-        >
-          <Dollars
-            long={false}
-          >
-            9000
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        className="budget-table--total budget-table--row__highlight"
-        key="total"
-      >
-        <th
-          scope="row"
-        >
-          Total
-        </th>
-        <td
-          className="budget-table--number"
-        >
-          <Dollars
-            long={false}
-          >
-            15000
-          </Dollars>
-        </td>
+        <DollarCell
+          headers="program-budget-table-mmisTotal program-budget-table-mmisTotal-total"
+          value={15000}
+        />
       </tr>
     </tbody>
   </table>
