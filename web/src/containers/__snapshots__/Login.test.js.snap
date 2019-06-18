@@ -22,6 +22,54 @@ exports[`login component renders correctly if logged in and previous location is
 />
 `;
 
+exports[`login component renders correctly if logged in previously but not logged in now (shows logout notice) 1`] = `
+<Fragment>
+  <withRouter(CardForm)
+    canSubmit={0}
+    cancelable={false}
+    error={false}
+    footer={
+      <p>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    success="You have securely logged out."
+    title="Log in"
+    working={false}
+  >
+    <TextField
+      ariaLabel="Enter the email associated with this account."
+      id="username"
+      label="Email"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <Password
+      compareTo={Array []}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value=""
+    />
+  </withRouter(CardForm)>
+</Fragment>
+`;
+
 exports[`login component renders correctly if logged in, but no previous location 1`] = `
 <Redirect
   push={false}
@@ -31,147 +79,6 @@ exports[`login component renders correctly if logged in, but no previous locatio
     }
   }
 />
-`;
-
-exports[`login component renders correctly if not logged in 1`] = `
-<Fragment>
-  <withRouter(CardForm)
-    canSubmit={0}
-    cancelable={false}
-    error={false}
-    footer={
-      <p>
-        Forgot your password? Contact
-         
-        <a
-          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
-        >
-          CMS-EAPD@cms.hhs.gov
-        </a>
-      </p>
-    }
-    onSave={[Function]}
-    primaryButtonText={
-      Array [
-        "Log in",
-        "Logging in",
-      ]
-    }
-    title="Log in"
-    working={false}
-  >
-    <TextField
-      ariaLabel="Enter the email associated with this account."
-      id="username"
-      label="Email"
-      name="username"
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
-    <Password
-      compareTo={Array []}
-      onChange={[Function]}
-      showMeter={false}
-      title="Password"
-      value=""
-    />
-  </withRouter(CardForm)>
-</Fragment>
-`;
-
-exports[`login component renders correctly if not logged in 2`] = `
-<Fragment>
-  <withRouter(CardForm)
-    canSubmit={0}
-    cancelable={false}
-    error={false}
-    footer={
-      <p>
-        Forgot your password? Contact
-         
-        <a
-          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
-        >
-          CMS-EAPD@cms.hhs.gov
-        </a>
-      </p>
-    }
-    onSave={[Function]}
-    primaryButtonText={
-      Array [
-        "Log in",
-        "Logging in",
-      ]
-    }
-    title="Log in"
-    working={false}
-  >
-    <TextField
-      ariaLabel="Enter the email associated with this account."
-      id="username"
-      label="Email"
-      name="username"
-      onChange={[Function]}
-      type="text"
-      value="bob"
-    />
-    <Password
-      compareTo={Array []}
-      onChange={[Function]}
-      showMeter={false}
-      title="Password"
-      value=""
-    />
-  </withRouter(CardForm)>
-</Fragment>
-`;
-
-exports[`login component renders correctly if not logged in 3`] = `
-<Fragment>
-  <withRouter(CardForm)
-    canSubmit={6}
-    cancelable={false}
-    error={false}
-    footer={
-      <p>
-        Forgot your password? Contact
-         
-        <a
-          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
-        >
-          CMS-EAPD@cms.hhs.gov
-        </a>
-      </p>
-    }
-    onSave={[Function]}
-    primaryButtonText={
-      Array [
-        "Log in",
-        "Logging in",
-      ]
-    }
-    title="Log in"
-    working={false}
-  >
-    <TextField
-      ariaLabel="Enter the email associated with this account."
-      id="username"
-      label="Email"
-      name="username"
-      onChange={[Function]}
-      type="text"
-      value="bob"
-    />
-    <Password
-      compareTo={Array []}
-      onChange={[Function]}
-      showMeter={false}
-      title="Password"
-      value="secret"
-    />
-  </withRouter(CardForm)>
-</Fragment>
 `;
 
 exports[`login component renders correctly if not logged in and fetching data 1`] = `
@@ -198,6 +105,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
         "Logging in",
       ]
     }
+    success={null}
     title="Log in"
     working={true}
   >
@@ -245,6 +153,7 @@ exports[`login component renders correctly if not logged in and there is an erro
         "Logging in",
       ]
     }
+    success={null}
     title="Log in"
     working={false}
   >
@@ -263,6 +172,150 @@ exports[`login component renders correctly if not logged in and there is an erro
       showMeter={false}
       title="Password"
       value=""
+    />
+  </withRouter(CardForm)>
+</Fragment>
+`;
+
+exports[`login component renders correctly if not logged in, and never logged in 1`] = `
+<Fragment>
+  <withRouter(CardForm)
+    canSubmit={0}
+    cancelable={false}
+    error={false}
+    footer={
+      <p>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    success={null}
+    title="Log in"
+    working={false}
+  >
+    <TextField
+      ariaLabel="Enter the email associated with this account."
+      id="username"
+      label="Email"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <Password
+      compareTo={Array []}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value=""
+    />
+  </withRouter(CardForm)>
+</Fragment>
+`;
+
+exports[`login component renders correctly if not logged in, and never logged in 2`] = `
+<Fragment>
+  <withRouter(CardForm)
+    canSubmit={0}
+    cancelable={false}
+    error={false}
+    footer={
+      <p>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    success={null}
+    title="Log in"
+    working={false}
+  >
+    <TextField
+      ariaLabel="Enter the email associated with this account."
+      id="username"
+      label="Email"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value="bob"
+    />
+    <Password
+      compareTo={Array []}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value=""
+    />
+  </withRouter(CardForm)>
+</Fragment>
+`;
+
+exports[`login component renders correctly if not logged in, and never logged in 3`] = `
+<Fragment>
+  <withRouter(CardForm)
+    canSubmit={6}
+    cancelable={false}
+    error={false}
+    footer={
+      <p>
+        Forgot your password? Contact
+         
+        <a
+          href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD"
+        >
+          CMS-EAPD@cms.hhs.gov
+        </a>
+      </p>
+    }
+    onSave={[Function]}
+    primaryButtonText={
+      Array [
+        "Log in",
+        "Logging in",
+      ]
+    }
+    success={null}
+    title="Log in"
+    working={false}
+  >
+    <TextField
+      ariaLabel="Enter the email associated with this account."
+      id="username"
+      label="Email"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value="bob"
+    />
+    <Password
+      compareTo={Array []}
+      onChange={[Function]}
+      showMeter={false}
+      title="Password"
+      value="secret"
     />
   </withRouter(CardForm)>
 </Fragment>
