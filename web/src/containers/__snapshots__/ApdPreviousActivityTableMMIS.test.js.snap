@@ -82,7 +82,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           />
         </td>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
         >
           <Dollars
@@ -129,7 +129,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           />
         </td>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
         >
           <Dollars
@@ -230,7 +230,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           />
         </td>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
         >
           <Dollars
@@ -277,7 +277,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           />
         </td>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
         >
           <Dollars
@@ -378,7 +378,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           />
         </td>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
         >
           <Dollars
@@ -425,7 +425,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           />
         </td>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
         >
           <Dollars

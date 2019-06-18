@@ -81,7 +81,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           />
         </td>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_approved"
         >
           <Dollars
@@ -128,7 +128,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
           />
         </td>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_approved"
         >
           <Dollars

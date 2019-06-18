@@ -8,7 +8,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
     Grand totals: Federal HIT, HIE, MMIS
   </h4>
   <table
-    className="budget-table"
+    className="budget-table budget-table--totals"
   >
     <thead>
       <tr>
@@ -16,11 +16,13 @@ exports[`apd previous activity table, grand total component renders correctly 1`
           id="prev_act_totals_null3"
         />
         <th
+          className="ds-u-text-align--right"
           id="prev_act_total_approved"
         >
           FFP Approved
         </th>
         <th
+          className="ds-u-text-align--right"
           id="prev_act_total_actual"
         >
           FFP Actual
@@ -37,7 +39,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
           FFY 1
         </th>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_total_row_1 prev_act_total_approved"
         >
           <Dollars
@@ -47,7 +49,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
           </Dollars>
         </td>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_total_row_1 prev_act_total_actual"
         >
           <Dollars
@@ -66,7 +68,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
           FFY 2
         </th>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_total_row_2 prev_act_total_approved"
         >
           <Dollars
@@ -76,7 +78,7 @@ exports[`apd previous activity table, grand total component renders correctly 1`
           </Dollars>
         </td>
         <td
-          className="font-family--mono"
+          className="budget-table--number"
           headers="prev_act_total_row_2 prev_act_total_actual"
         >
           <Dollars
