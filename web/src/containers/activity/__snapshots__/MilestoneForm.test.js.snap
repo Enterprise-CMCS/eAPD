@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the MilestoneForm component renders correctly 1`] = `
+<div
+  className="ds-u-border-bottom--2 ds-u-padding-y--2"
+>
+  <h6
+    className="ds-h4"
+  >
+    Milestone 
+    3253
+    :
+  </h6>
+  <TextField
+    label="Name"
+    name="name"
+    onChange={[Function]}
+    type="text"
+    value="Milestone name"
+  />
+  <DateField
+    hint=""
+    label="Planned end date"
+    onChange={[Function]}
+    value="1942-8-16"
+  />
+  <Button
+    className="ds-u-margin-top--2"
+    onClick={[MockFunction]}
+    type="button"
+    variation="primary"
+  >
+    Done
+  </Button>
+</div>
+`;

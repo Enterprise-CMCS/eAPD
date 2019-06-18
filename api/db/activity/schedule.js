@@ -23,7 +23,7 @@ module.exports = {
     async validate() {
       if (this.attributes.endDate) {
         // true to enforce strict parsing
-        const date = moment(this.attributes.endDate, 'YYYY-MM-DD', true);
+        const date = moment(this.attributes.endDate, 'YYYY-M-D', true);
         if (!date.isValid()) {
           throw new Error(`end-date-invalid`);
         }

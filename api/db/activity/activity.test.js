@@ -390,7 +390,7 @@ tap.test('activity data model', async activityModelTests => {
       });
 
       validationTests.test('passes if dates are valid', async test => {
-        self.attributes.plannedEndDate = '1977-09-05'; // Voyager 1 launched
+        self.attributes.plannedEndDate = '1977-9-5'; // Voyager 1 launched
         self.attributes.plannedStartDate = '2004-06-30'; // Cassini reaches Saturn system
         await validate();
         test.ok(true, 'resolves');

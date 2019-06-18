@@ -1,0 +1,797 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Milestone component when the milestone is initially NOT collapsed it renders correctly after being collapsed 1`] = `
+<Milestone
+  endDate="1945-1-14"
+  idx={1}
+  initialCollapsed={false}
+  name="milestone name"
+  onChangeDate={[MockFunction]}
+  onChangeName={[MockFunction]}
+  onDelete={[MockFunction]}
+>
+  <MilestoneReview
+    endDate="1945-1-14"
+    expand={[Function]}
+    idx={1}
+    name="milestone name"
+    onChangeDate={[MockFunction]}
+    onChangeName={[MockFunction]}
+    onDelete={[MockFunction]}
+  >
+    <StandardReview
+      editHref={null}
+      heading="2. milestone name"
+      headingLevel={4}
+      onDeleteClick={[Function]}
+      onEditClick={[Function]}
+    >
+      <Review
+        editContent={
+          <div
+            className="nowrap"
+          >
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              Edit
+            </Button>
+            <React.Fragment>
+              |
+              <Button
+                onClick={[Function]}
+                size="small"
+                type="button"
+                variation="transparent"
+              >
+                Remove
+              </Button>
+            </React.Fragment>
+          </div>
+        }
+        editText="Edit"
+        heading="2. milestone name"
+        headingLevel={4}
+      >
+        <div
+          className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
+        >
+          <div
+            className="ds-u-margin-right--2"
+          >
+            <h4
+              className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
+            >
+              2. milestone name
+            </h4>
+            <div
+              className="ds-c-review__body"
+            >
+              <p
+                className="ds-u-margin-top--2"
+              >
+                <strong>
+                  Planned end date:
+                </strong>
+                 
+                1-14-1945
+              </p>
+            </div>
+          </div>
+          <div
+            className="nowrap"
+          >
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Edit
+              </button>
+            </Button>
+            |
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Remove
+              </button>
+            </Button>
+          </div>
+        </div>
+      </Review>
+    </StandardReview>
+  </MilestoneReview>
+</Milestone>
+`;
+
+exports[`the Milestone component when the milestone is initially NOT collapsed it renders correctly initially 1`] = `
+<Milestone
+  endDate="1945-1-14"
+  idx={1}
+  initialCollapsed={false}
+  name="milestone name"
+  onChangeDate={[MockFunction]}
+  onChangeName={[MockFunction]}
+  onDelete={[MockFunction]}
+>
+  <MilestoneForm
+    collapse={[Function]}
+    endDate="1945-1-14"
+    idx={1}
+    name="milestone name"
+    onChangeDate={[MockFunction]}
+    onChangeName={[MockFunction]}
+    onDelete={[MockFunction]}
+  >
+    <div
+      className="ds-u-border-bottom--2 ds-u-padding-y--2"
+    >
+      <h6
+        className="ds-h4"
+      >
+        Milestone 
+        2
+        :
+      </h6>
+      <TextField
+        label="Name"
+        name="name"
+        onChange={[Function]}
+        type="text"
+        value="milestone name"
+      >
+        <div
+          className="ds-u-clearfix"
+        >
+          <FormLabel
+            component="label"
+            fieldId="textfield_1"
+          >
+            <label
+              className="ds-c-label"
+              htmlFor="textfield_1"
+            >
+              <span
+                className=""
+              >
+                Name
+              </span>
+            </label>
+          </FormLabel>
+          <input
+            className="ds-c-field"
+            id="textfield_1"
+            name="name"
+            onChange={[Function]}
+            type="text"
+            value="milestone name"
+          />
+        </div>
+      </TextField>
+      <DateField
+        hint=""
+        label="Planned end date"
+        onChange={[Function]}
+        value="1945-1-14"
+      >
+        <DateField
+          dateFormatter={[Function]}
+          dayLabel="Day"
+          dayName="day"
+          dayValue={14}
+          hint=""
+          label="Planned end date"
+          monthLabel="Month"
+          monthName="month"
+          monthValue={1}
+          onChange={[Function]}
+          yearLabel="Year"
+          yearMin={1900}
+          yearName="year"
+          yearValue={1945}
+        >
+          <fieldset
+            className="ds-c-fieldset"
+          >
+            <FormLabel
+              component="legend"
+              hint=""
+              id="datefield_label_2"
+            >
+              <legend
+                className="ds-c-label"
+                id="datefield_label_2"
+              >
+                <span
+                  className=""
+                >
+                  Planned end date
+                </span>
+              </legend>
+            </FormLabel>
+            <div
+              className="ds-l-form-row ds-u-align-items--end"
+            >
+              <TextField
+                aria-describedby="datefield_label_2"
+                className="ds-l-col--auto"
+                fieldClassName="ds-c-field--month"
+                fieldRef={[Function]}
+                label="Month"
+                labelClassName="ds-u-font-weight--normal ds-u-margin-top--1"
+                max="12"
+                min="1"
+                name="month"
+                onChange={[Function]}
+                type="number"
+                value={1}
+              >
+                <div
+                  className="ds-u-clearfix ds-l-col--auto"
+                >
+                  <FormLabel
+                    className="ds-u-font-weight--normal ds-u-margin-top--1"
+                    component="label"
+                    fieldId="textfield_3"
+                  >
+                    <label
+                      className="ds-c-label ds-u-font-weight--normal ds-u-margin-top--1"
+                      htmlFor="textfield_3"
+                    >
+                      <span
+                        className=""
+                      >
+                        Month
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    aria-describedby="datefield_label_2"
+                    className="ds-c-field ds-c-field--month"
+                    id="textfield_3"
+                    max="12"
+                    min="1"
+                    name="month"
+                    onChange={[Function]}
+                    type="number"
+                    value={1}
+                  />
+                </div>
+              </TextField>
+              <span
+                className="ds-c-datefield__separator"
+              >
+                /
+              </span>
+              <TextField
+                aria-describedby="datefield_label_2"
+                className="ds-l-col--auto"
+                fieldClassName="ds-c-field--day"
+                fieldRef={[Function]}
+                label="Day"
+                labelClassName="ds-u-font-weight--normal ds-u-margin-top--1"
+                max="31"
+                min="1"
+                name="day"
+                onChange={[Function]}
+                type="number"
+                value={14}
+              >
+                <div
+                  className="ds-u-clearfix ds-l-col--auto"
+                >
+                  <FormLabel
+                    className="ds-u-font-weight--normal ds-u-margin-top--1"
+                    component="label"
+                    fieldId="textfield_4"
+                  >
+                    <label
+                      className="ds-c-label ds-u-font-weight--normal ds-u-margin-top--1"
+                      htmlFor="textfield_4"
+                    >
+                      <span
+                        className=""
+                      >
+                        Day
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    aria-describedby="datefield_label_2"
+                    className="ds-c-field ds-c-field--day"
+                    id="textfield_4"
+                    max="31"
+                    min="1"
+                    name="day"
+                    onChange={[Function]}
+                    type="number"
+                    value={14}
+                  />
+                </div>
+              </TextField>
+              <span
+                className="ds-c-datefield__separator"
+              >
+                /
+              </span>
+              <TextField
+                aria-describedby="datefield_label_2"
+                className="ds-l-col--auto"
+                fieldClassName="ds-c-field--year"
+                fieldRef={[Function]}
+                label="Year"
+                labelClassName="ds-u-font-weight--normal ds-u-margin-top--1"
+                min={1900}
+                name="year"
+                onChange={[Function]}
+                type="number"
+                value={1945}
+              >
+                <div
+                  className="ds-u-clearfix ds-l-col--auto"
+                >
+                  <FormLabel
+                    className="ds-u-font-weight--normal ds-u-margin-top--1"
+                    component="label"
+                    fieldId="textfield_5"
+                  >
+                    <label
+                      className="ds-c-label ds-u-font-weight--normal ds-u-margin-top--1"
+                      htmlFor="textfield_5"
+                    >
+                      <span
+                        className=""
+                      >
+                        Year
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    aria-describedby="datefield_label_2"
+                    className="ds-c-field ds-c-field--year"
+                    id="textfield_5"
+                    min={1900}
+                    name="year"
+                    onChange={[Function]}
+                    type="number"
+                    value={1945}
+                  />
+                </div>
+              </TextField>
+            </div>
+          </fieldset>
+        </DateField>
+      </DateField>
+      <Button
+        className="ds-u-margin-top--2"
+        onClick={[Function]}
+        type="button"
+        variation="primary"
+      >
+        <button
+          className="ds-c-button ds-c-button--primary ds-u-margin-top--2"
+          onClick={[Function]}
+          type="button"
+        >
+          Done
+        </button>
+      </Button>
+    </div>
+  </MilestoneForm>
+</Milestone>
+`;
+
+exports[`the Milestone component when the milestone is initially collapsed it renders correctly after being expanded 1`] = `
+<Milestone
+  endDate="1944-12-16"
+  idx={1}
+  initialCollapsed={true}
+  name="milestone name"
+  onChangeDate={[MockFunction]}
+  onChangeName={[MockFunction]}
+  onDelete={[MockFunction]}
+>
+  <MilestoneForm
+    collapse={[Function]}
+    endDate="1944-12-16"
+    idx={1}
+    name="milestone name"
+    onChangeDate={[MockFunction]}
+    onChangeName={[MockFunction]}
+    onDelete={[MockFunction]}
+  >
+    <div
+      className="ds-u-border-bottom--2 ds-u-padding-y--2"
+    >
+      <h6
+        className="ds-h4"
+      >
+        Milestone 
+        2
+        :
+      </h6>
+      <TextField
+        label="Name"
+        name="name"
+        onChange={[Function]}
+        type="text"
+        value="milestone name"
+      >
+        <div
+          className="ds-u-clearfix"
+        >
+          <FormLabel
+            component="label"
+            fieldId="textfield_6"
+          >
+            <label
+              className="ds-c-label"
+              htmlFor="textfield_6"
+            >
+              <span
+                className=""
+              >
+                Name
+              </span>
+            </label>
+          </FormLabel>
+          <input
+            className="ds-c-field"
+            id="textfield_6"
+            name="name"
+            onChange={[Function]}
+            type="text"
+            value="milestone name"
+          />
+        </div>
+      </TextField>
+      <DateField
+        hint=""
+        label="Planned end date"
+        onChange={[Function]}
+        value="1944-12-16"
+      >
+        <DateField
+          dateFormatter={[Function]}
+          dayLabel="Day"
+          dayName="day"
+          dayValue={16}
+          hint=""
+          label="Planned end date"
+          monthLabel="Month"
+          monthName="month"
+          monthValue={12}
+          onChange={[Function]}
+          yearLabel="Year"
+          yearMin={1900}
+          yearName="year"
+          yearValue={1944}
+        >
+          <fieldset
+            className="ds-c-fieldset"
+          >
+            <FormLabel
+              component="legend"
+              hint=""
+              id="datefield_label_7"
+            >
+              <legend
+                className="ds-c-label"
+                id="datefield_label_7"
+              >
+                <span
+                  className=""
+                >
+                  Planned end date
+                </span>
+              </legend>
+            </FormLabel>
+            <div
+              className="ds-l-form-row ds-u-align-items--end"
+            >
+              <TextField
+                aria-describedby="datefield_label_7"
+                className="ds-l-col--auto"
+                fieldClassName="ds-c-field--month"
+                fieldRef={[Function]}
+                label="Month"
+                labelClassName="ds-u-font-weight--normal ds-u-margin-top--1"
+                max="12"
+                min="1"
+                name="month"
+                onChange={[Function]}
+                type="number"
+                value={12}
+              >
+                <div
+                  className="ds-u-clearfix ds-l-col--auto"
+                >
+                  <FormLabel
+                    className="ds-u-font-weight--normal ds-u-margin-top--1"
+                    component="label"
+                    fieldId="textfield_8"
+                  >
+                    <label
+                      className="ds-c-label ds-u-font-weight--normal ds-u-margin-top--1"
+                      htmlFor="textfield_8"
+                    >
+                      <span
+                        className=""
+                      >
+                        Month
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    aria-describedby="datefield_label_7"
+                    className="ds-c-field ds-c-field--month"
+                    id="textfield_8"
+                    max="12"
+                    min="1"
+                    name="month"
+                    onChange={[Function]}
+                    type="number"
+                    value={12}
+                  />
+                </div>
+              </TextField>
+              <span
+                className="ds-c-datefield__separator"
+              >
+                /
+              </span>
+              <TextField
+                aria-describedby="datefield_label_7"
+                className="ds-l-col--auto"
+                fieldClassName="ds-c-field--day"
+                fieldRef={[Function]}
+                label="Day"
+                labelClassName="ds-u-font-weight--normal ds-u-margin-top--1"
+                max="31"
+                min="1"
+                name="day"
+                onChange={[Function]}
+                type="number"
+                value={16}
+              >
+                <div
+                  className="ds-u-clearfix ds-l-col--auto"
+                >
+                  <FormLabel
+                    className="ds-u-font-weight--normal ds-u-margin-top--1"
+                    component="label"
+                    fieldId="textfield_9"
+                  >
+                    <label
+                      className="ds-c-label ds-u-font-weight--normal ds-u-margin-top--1"
+                      htmlFor="textfield_9"
+                    >
+                      <span
+                        className=""
+                      >
+                        Day
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    aria-describedby="datefield_label_7"
+                    className="ds-c-field ds-c-field--day"
+                    id="textfield_9"
+                    max="31"
+                    min="1"
+                    name="day"
+                    onChange={[Function]}
+                    type="number"
+                    value={16}
+                  />
+                </div>
+              </TextField>
+              <span
+                className="ds-c-datefield__separator"
+              >
+                /
+              </span>
+              <TextField
+                aria-describedby="datefield_label_7"
+                className="ds-l-col--auto"
+                fieldClassName="ds-c-field--year"
+                fieldRef={[Function]}
+                label="Year"
+                labelClassName="ds-u-font-weight--normal ds-u-margin-top--1"
+                min={1900}
+                name="year"
+                onChange={[Function]}
+                type="number"
+                value={1944}
+              >
+                <div
+                  className="ds-u-clearfix ds-l-col--auto"
+                >
+                  <FormLabel
+                    className="ds-u-font-weight--normal ds-u-margin-top--1"
+                    component="label"
+                    fieldId="textfield_10"
+                  >
+                    <label
+                      className="ds-c-label ds-u-font-weight--normal ds-u-margin-top--1"
+                      htmlFor="textfield_10"
+                    >
+                      <span
+                        className=""
+                      >
+                        Year
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    aria-describedby="datefield_label_7"
+                    className="ds-c-field ds-c-field--year"
+                    id="textfield_10"
+                    min={1900}
+                    name="year"
+                    onChange={[Function]}
+                    type="number"
+                    value={1944}
+                  />
+                </div>
+              </TextField>
+            </div>
+          </fieldset>
+        </DateField>
+      </DateField>
+      <Button
+        className="ds-u-margin-top--2"
+        onClick={[Function]}
+        type="button"
+        variation="primary"
+      >
+        <button
+          className="ds-c-button ds-c-button--primary ds-u-margin-top--2"
+          onClick={[Function]}
+          type="button"
+        >
+          Done
+        </button>
+      </Button>
+    </div>
+  </MilestoneForm>
+</Milestone>
+`;
+
+exports[`the Milestone component when the milestone is initially collapsed it renders correctly initially 1`] = `
+<Milestone
+  endDate="1944-12-16"
+  idx={1}
+  initialCollapsed={true}
+  name="milestone name"
+  onChangeDate={[MockFunction]}
+  onChangeName={[MockFunction]}
+  onDelete={[MockFunction]}
+>
+  <MilestoneReview
+    endDate="1944-12-16"
+    expand={[Function]}
+    idx={1}
+    name="milestone name"
+    onChangeDate={[MockFunction]}
+    onChangeName={[MockFunction]}
+    onDelete={[MockFunction]}
+  >
+    <StandardReview
+      editHref={null}
+      heading="2. milestone name"
+      headingLevel={4}
+      onDeleteClick={[Function]}
+      onEditClick={[Function]}
+    >
+      <Review
+        editContent={
+          <div
+            className="nowrap"
+          >
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              Edit
+            </Button>
+            <React.Fragment>
+              |
+              <Button
+                onClick={[Function]}
+                size="small"
+                type="button"
+                variation="transparent"
+              >
+                Remove
+              </Button>
+            </React.Fragment>
+          </div>
+        }
+        editText="Edit"
+        heading="2. milestone name"
+        headingLevel={4}
+      >
+        <div
+          className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
+        >
+          <div
+            className="ds-u-margin-right--2"
+          >
+            <h4
+              className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
+            >
+              2. milestone name
+            </h4>
+            <div
+              className="ds-c-review__body"
+            >
+              <p
+                className="ds-u-margin-top--2"
+              >
+                <strong>
+                  Planned end date:
+                </strong>
+                 
+                12-16-1944
+              </p>
+            </div>
+          </div>
+          <div
+            className="nowrap"
+          >
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Edit
+              </button>
+            </Button>
+            |
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Remove
+              </button>
+            </Button>
+          </div>
+        </div>
+      </Review>
+    </StandardReview>
+  </MilestoneReview>
+</Milestone>
+`;

@@ -6,9 +6,9 @@ import Dollars from '../components/Dollars';
 import { selectBudgetActivitiesByFundingSource } from '../reducers/budget.selectors';
 
 const categoryLookup = {
-  statePersonnel: 'Project state staff',
-  expenses: 'Non-personnel',
-  contractors: 'Contracted resources',
+  statePersonnel: 'Project State Staff',
+  expenses: 'Non-Personnel',
+  contractors: 'Contracted Resources',
   combined: 'Subtotal'
 };
 
@@ -76,19 +76,19 @@ const HeaderRow = ({ yr }) => {
         className="ds-u-text-align--right"
         scope="col"
       >
-        Medicaid total
+        Medicaid Total
       </th>
       <th
         className="ds-u-text-align--right"
         scope="col"
       >
-        Federal total
+        Federal Total
       </th>
       <th
         className="ds-u-text-align--right"
         scope="col"
       >
-        State total
+        State Total
       </th>
     </tr>
   );
@@ -100,7 +100,7 @@ HeaderRow.propTypes = {
 
 const BudgetSummary = ({ activities, data, years }) => (
   <Fragment>
-    <h3 className="ds-h3">HIT activities</h3>
+    <h3 className="ds-h3">HIT Activities</h3>
     {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <thead>
@@ -112,7 +112,7 @@ const BudgetSummary = ({ activities, data, years }) => (
       </table>
     ))}
 
-    <h3 className="ds-h3">HIE activities</h3>
+    <h3 className="ds-h3">HIE Activities</h3>
     {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <thead>
@@ -124,7 +124,7 @@ const BudgetSummary = ({ activities, data, years }) => (
       </table>
     ))}
 
-    <h3 className="ds-h3">MMIS activities</h3>
+    <h3 className="ds-h3">MMIS Activities</h3>
     {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <thead>
@@ -136,7 +136,7 @@ const BudgetSummary = ({ activities, data, years }) => (
       </table>
     ))}
 
-    <h3 className="ds-h3">Project activities totals</h3>
+    <h3 className="ds-h3">Project Activities Totals</h3>
     <table className="budget-table">
       <thead>
         <tr>
@@ -145,19 +145,19 @@ const BudgetSummary = ({ activities, data, years }) => (
             scope="col"
             className="ds-u-text-align--right"
           >
-            Medicaid total
+            Medicaid Total
           </th>
           <th
             scope="col"
             className="ds-u-text-align--right"
           >
-            Federal total
+            Federal Total
           </th>
           <th
             scope="col"
             className="ds-u-text-align--right"
           >
-            State total
+            State Total
           </th>
         </tr>
       </thead>
