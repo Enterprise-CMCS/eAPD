@@ -1,0 +1,917 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the NonPersonnelCost component when the cost is initially collapsed it renders correctly after being expanded 1`] = `
+<NonPersonnelCost
+  category="cost category"
+  desc="cost desc"
+  handleDelete={[MockFunction]}
+  handleEditCategory={[MockFunction]}
+  handleEditCost={[MockFunction]}
+  handleEditDesc={[MockFunction]}
+  idx={3}
+  initialCollapsed={true}
+  years={
+    Object {
+      "2003": 3848,
+      "2004": 7773,
+    }
+  }
+>
+  <NonPersonnelCostForm
+    category="cost category"
+    collapse={[Function]}
+    desc="cost desc"
+    handleDelete={[MockFunction]}
+    handleEditCategory={[MockFunction]}
+    handleEditCost={[MockFunction]}
+    handleEditDesc={[MockFunction]}
+    idx={3}
+    years={
+      Object {
+        "2003": 3848,
+        "2004": 7773,
+      }
+    }
+  >
+    <div
+      className="ds-u-border-bottom--2 ds-u-padding-y--2"
+    >
+      <h6
+        className="ds-h4"
+      >
+        Non-Personnel Cost 
+        4
+        :
+      </h6>
+      <FormLabel
+        component="label"
+        fieldId="eapd-form-label-12321"
+      >
+        <label
+          className="ds-c-label"
+          htmlFor="eapd-form-label-12321"
+        >
+          <span
+            className=""
+          >
+            Category
+          </span>
+        </label>
+      </FormLabel>
+      <Select
+        id="eapd-form-label-12321"
+        name="category"
+        onChange={[Function]}
+        value="cost category"
+      >
+        <select
+          className="ds-c-field"
+          id="eapd-form-label-12321"
+          name="category"
+          onChange={[Function]}
+          value="cost category"
+        >
+          <option
+            value="Hardware, software, and licensing"
+          >
+            Hardware, software, and licensing
+          </option>
+          <option
+            value="Equipment and supplies"
+          >
+            Equipment and supplies
+          </option>
+          <option
+            value="Training and outreach"
+          >
+            Training and outreach
+          </option>
+          <option
+            value="Travel"
+          >
+            Travel
+          </option>
+          <option
+            value="Administrative operations"
+          >
+            Administrative operations
+          </option>
+          <option
+            value="Miscellaneous expenses for the project"
+          >
+            Miscellaneous expenses for the project
+          </option>
+        </select>
+      </Select>
+      <TextField
+        label="Description"
+        multiline={true}
+        name="desc"
+        onChange={[Function]}
+        rows={5}
+        type="text"
+        value="cost desc"
+      >
+        <div
+          className="ds-u-clearfix"
+        >
+          <FormLabel
+            component="label"
+            fieldId="textfield_4"
+          >
+            <label
+              className="ds-c-label"
+              htmlFor="textfield_4"
+            >
+              <span
+                className=""
+              >
+                Description
+              </span>
+            </label>
+          </FormLabel>
+          <textarea
+            className="ds-c-field"
+            id="textfield_4"
+            name="desc"
+            onChange={[Function]}
+            rows={5}
+            value="cost desc"
+          />
+        </div>
+      </TextField>
+      <DollarField
+        key="2003"
+        label="2003 Cost"
+        name="cost"
+        onChange={[Function]}
+        size="medium"
+        value={3848}
+      >
+        <TextField
+          label="2003 Cost"
+          mask="currency"
+          name="cost"
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value={3848}
+        >
+          <div
+            className="ds-u-clearfix"
+          >
+            <FormLabel
+              component="label"
+              fieldId="textfield_5"
+            >
+              <label
+                className="ds-c-label"
+                htmlFor="textfield_5"
+              >
+                <span
+                  className=""
+                >
+                  2003 Cost
+                </span>
+              </label>
+            </FormLabel>
+            <div
+              className="ds-c-field-mask ds-c-field-mask--currency"
+            >
+              <div
+                className="ds-c-field__before ds-c-field__before--currency"
+              >
+                $
+              </div>
+              <Mask
+                mask="currency"
+              >
+                <input
+                  aria-label="2003 Cost. Enter amount in dollars."
+                  className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                  id="textfield_5"
+                  name="cost"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value={3848}
+                />
+              </Mask>
+            </div>
+          </div>
+        </TextField>
+      </DollarField>
+      <DollarField
+        key="2004"
+        label="2004 Cost"
+        name="cost"
+        onChange={[Function]}
+        size="medium"
+        value={7773}
+      >
+        <TextField
+          label="2004 Cost"
+          mask="currency"
+          name="cost"
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value={7773}
+        >
+          <div
+            className="ds-u-clearfix"
+          >
+            <FormLabel
+              component="label"
+              fieldId="textfield_6"
+            >
+              <label
+                className="ds-c-label"
+                htmlFor="textfield_6"
+              >
+                <span
+                  className=""
+                >
+                  2004 Cost
+                </span>
+              </label>
+            </FormLabel>
+            <div
+              className="ds-c-field-mask ds-c-field-mask--currency"
+            >
+              <div
+                className="ds-c-field__before ds-c-field__before--currency"
+              >
+                $
+              </div>
+              <Mask
+                mask="currency"
+              >
+                <input
+                  aria-label="2004 Cost. Enter amount in dollars."
+                  className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                  id="textfield_6"
+                  name="cost"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value={7773}
+                />
+              </Mask>
+            </div>
+          </div>
+        </TextField>
+      </DollarField>
+      <Button
+        className="ds-u-margin-top--2"
+        onClick={[Function]}
+        type="button"
+        variation="primary"
+      >
+        <button
+          className="ds-c-button ds-c-button--primary ds-u-margin-top--2"
+          onClick={[Function]}
+          type="button"
+        >
+          Done
+        </button>
+      </Button>
+    </div>
+  </NonPersonnelCostForm>
+</NonPersonnelCost>
+`;
+
+exports[`the NonPersonnelCost component when the cost is initially collapsed it renders correctly initially 1`] = `
+<NonPersonnelCost
+  category="cost category"
+  desc="cost desc"
+  handleDelete={[MockFunction]}
+  handleEditCategory={[MockFunction]}
+  handleEditCost={[MockFunction]}
+  handleEditDesc={[MockFunction]}
+  idx={3}
+  initialCollapsed={true}
+  years={
+    Object {
+      "2003": 3848,
+      "2004": 7773,
+    }
+  }
+>
+  <NonPersonnelCostReview
+    category="cost category"
+    desc="cost desc"
+    expand={[Function]}
+    handleDelete={[MockFunction]}
+    handleEditCategory={[MockFunction]}
+    handleEditCost={[MockFunction]}
+    handleEditDesc={[MockFunction]}
+    idx={3}
+    years={
+      Object {
+        "2003": 3848,
+        "2004": 7773,
+      }
+    }
+  >
+    <StandardReview
+      editHref={null}
+      heading="4. cost category"
+      headingLevel={6}
+      onDeleteClick={[MockFunction]}
+      onEditClick={[Function]}
+    >
+      <Review
+        editContent={
+          <div
+            className="nowrap"
+          >
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              Edit
+            </Button>
+            <React.Fragment>
+              |
+              <Button
+                onClick={[MockFunction]}
+                size="small"
+                type="button"
+                variation="transparent"
+              >
+                Remove
+              </Button>
+            </React.Fragment>
+          </div>
+        }
+        editText="Edit"
+        heading="4. cost category"
+        headingLevel={6}
+      >
+        <div
+          className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
+        >
+          <div
+            className="ds-u-margin-right--2"
+          >
+            <h6
+              className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
+            >
+              4. cost category
+            </h6>
+            <div
+              className="ds-c-review__body"
+            >
+              cost desc
+              <div
+                className="ds-u-margin-top--2"
+              >
+                <div
+                  key="2003"
+                >
+                  <strong>
+                    2003
+                     Costs:
+                  </strong>
+                   
+                  <Dollars
+                    long={false}
+                  >
+                    <span
+                      className="visibility--screen"
+                    >
+                      $3,848
+                    </span>
+                    <span
+                      className="visibility--print"
+                    >
+                      $3,848
+                    </span>
+                  </Dollars>
+                </div>
+                <div
+                  key="2004"
+                >
+                  <strong>
+                    2004
+                     Costs:
+                  </strong>
+                   
+                  <Dollars
+                    long={false}
+                  >
+                    <span
+                      className="visibility--screen"
+                    >
+                      $7,773
+                    </span>
+                    <span
+                      className="visibility--print"
+                    >
+                      $7,773
+                    </span>
+                  </Dollars>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="nowrap"
+          >
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Edit
+              </button>
+            </Button>
+            |
+            <Button
+              onClick={[MockFunction]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Remove
+              </button>
+            </Button>
+          </div>
+        </div>
+      </Review>
+    </StandardReview>
+  </NonPersonnelCostReview>
+</NonPersonnelCost>
+`;
+
+exports[`the NonPersonnelCost component when the milestone is initially NOT collapsed it renders correctly after being collapsed 1`] = `
+<NonPersonnelCost
+  category="cost category"
+  desc="cost desc"
+  handleDelete={[MockFunction]}
+  handleEditCategory={[MockFunction]}
+  handleEditCost={[MockFunction]}
+  handleEditDesc={[MockFunction]}
+  idx={3}
+  initialCollapsed={false}
+  years={
+    Object {
+      "2003": 3848,
+      "2004": 7773,
+    }
+  }
+>
+  <NonPersonnelCostReview
+    category="cost category"
+    desc="cost desc"
+    expand={[Function]}
+    handleDelete={[MockFunction]}
+    handleEditCategory={[MockFunction]}
+    handleEditCost={[MockFunction]}
+    handleEditDesc={[MockFunction]}
+    idx={3}
+    years={
+      Object {
+        "2003": 3848,
+        "2004": 7773,
+      }
+    }
+  >
+    <StandardReview
+      editHref={null}
+      heading="4. cost category"
+      headingLevel={6}
+      onDeleteClick={[MockFunction]}
+      onEditClick={[Function]}
+    >
+      <Review
+        editContent={
+          <div
+            className="nowrap"
+          >
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              Edit
+            </Button>
+            <React.Fragment>
+              |
+              <Button
+                onClick={[MockFunction]}
+                size="small"
+                type="button"
+                variation="transparent"
+              >
+                Remove
+              </Button>
+            </React.Fragment>
+          </div>
+        }
+        editText="Edit"
+        heading="4. cost category"
+        headingLevel={6}
+      >
+        <div
+          className="ds-c-review ds-u-border-bottom--2 ds-u-padding-y--2 ds-u-justify-content--between ds-u-display--flex"
+        >
+          <div
+            className="ds-u-margin-right--2"
+          >
+            <h6
+              className="ds-c-review__heading ds-text ds-u-margin-bottom--0 ds-u-font-weight--bold ds-u-display--inline-block"
+            >
+              4. cost category
+            </h6>
+            <div
+              className="ds-c-review__body"
+            >
+              cost desc
+              <div
+                className="ds-u-margin-top--2"
+              >
+                <div
+                  key="2003"
+                >
+                  <strong>
+                    2003
+                     Costs:
+                  </strong>
+                   
+                  <Dollars
+                    long={false}
+                  >
+                    <span
+                      className="visibility--screen"
+                    >
+                      $3,848
+                    </span>
+                    <span
+                      className="visibility--print"
+                    >
+                      $3,848
+                    </span>
+                  </Dollars>
+                </div>
+                <div
+                  key="2004"
+                >
+                  <strong>
+                    2004
+                     Costs:
+                  </strong>
+                   
+                  <Dollars
+                    long={false}
+                  >
+                    <span
+                      className="visibility--screen"
+                    >
+                      $7,773
+                    </span>
+                    <span
+                      className="visibility--print"
+                    >
+                      $7,773
+                    </span>
+                  </Dollars>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="nowrap"
+          >
+            <Button
+              onClick={[Function]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Edit
+              </button>
+            </Button>
+            |
+            <Button
+              onClick={[MockFunction]}
+              size="small"
+              type="button"
+              variation="transparent"
+            >
+              <button
+                className="ds-c-button ds-c-button--transparent ds-c-button--small"
+                onClick={[Function]}
+                type="button"
+              >
+                Remove
+              </button>
+            </Button>
+          </div>
+        </div>
+      </Review>
+    </StandardReview>
+  </NonPersonnelCostReview>
+</NonPersonnelCost>
+`;
+
+exports[`the NonPersonnelCost component when the milestone is initially NOT collapsed it renders correctly initially 1`] = `
+<NonPersonnelCost
+  category="cost category"
+  desc="cost desc"
+  handleDelete={[MockFunction]}
+  handleEditCategory={[MockFunction]}
+  handleEditCost={[MockFunction]}
+  handleEditDesc={[MockFunction]}
+  idx={3}
+  initialCollapsed={false}
+  years={
+    Object {
+      "2003": 3848,
+      "2004": 7773,
+    }
+  }
+>
+  <NonPersonnelCostForm
+    category="cost category"
+    collapse={[Function]}
+    desc="cost desc"
+    handleDelete={[MockFunction]}
+    handleEditCategory={[MockFunction]}
+    handleEditCost={[MockFunction]}
+    handleEditDesc={[MockFunction]}
+    idx={3}
+    years={
+      Object {
+        "2003": 3848,
+        "2004": 7773,
+      }
+    }
+  >
+    <div
+      className="ds-u-border-bottom--2 ds-u-padding-y--2"
+    >
+      <h6
+        className="ds-h4"
+      >
+        Non-Personnel Cost 
+        4
+        :
+      </h6>
+      <FormLabel
+        component="label"
+        fieldId="eapd-form-label-12321"
+      >
+        <label
+          className="ds-c-label"
+          htmlFor="eapd-form-label-12321"
+        >
+          <span
+            className=""
+          >
+            Category
+          </span>
+        </label>
+      </FormLabel>
+      <Select
+        id="eapd-form-label-12321"
+        name="category"
+        onChange={[Function]}
+        value="cost category"
+      >
+        <select
+          className="ds-c-field"
+          id="eapd-form-label-12321"
+          name="category"
+          onChange={[Function]}
+          value="cost category"
+        >
+          <option
+            value="Hardware, software, and licensing"
+          >
+            Hardware, software, and licensing
+          </option>
+          <option
+            value="Equipment and supplies"
+          >
+            Equipment and supplies
+          </option>
+          <option
+            value="Training and outreach"
+          >
+            Training and outreach
+          </option>
+          <option
+            value="Travel"
+          >
+            Travel
+          </option>
+          <option
+            value="Administrative operations"
+          >
+            Administrative operations
+          </option>
+          <option
+            value="Miscellaneous expenses for the project"
+          >
+            Miscellaneous expenses for the project
+          </option>
+        </select>
+      </Select>
+      <TextField
+        label="Description"
+        multiline={true}
+        name="desc"
+        onChange={[Function]}
+        rows={5}
+        type="text"
+        value="cost desc"
+      >
+        <div
+          className="ds-u-clearfix"
+        >
+          <FormLabel
+            component="label"
+            fieldId="textfield_1"
+          >
+            <label
+              className="ds-c-label"
+              htmlFor="textfield_1"
+            >
+              <span
+                className=""
+              >
+                Description
+              </span>
+            </label>
+          </FormLabel>
+          <textarea
+            className="ds-c-field"
+            id="textfield_1"
+            name="desc"
+            onChange={[Function]}
+            rows={5}
+            value="cost desc"
+          />
+        </div>
+      </TextField>
+      <DollarField
+        key="2003"
+        label="2003 Cost"
+        name="cost"
+        onChange={[Function]}
+        size="medium"
+        value={3848}
+      >
+        <TextField
+          label="2003 Cost"
+          mask="currency"
+          name="cost"
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value={3848}
+        >
+          <div
+            className="ds-u-clearfix"
+          >
+            <FormLabel
+              component="label"
+              fieldId="textfield_2"
+            >
+              <label
+                className="ds-c-label"
+                htmlFor="textfield_2"
+              >
+                <span
+                  className=""
+                >
+                  2003 Cost
+                </span>
+              </label>
+            </FormLabel>
+            <div
+              className="ds-c-field-mask ds-c-field-mask--currency"
+            >
+              <div
+                className="ds-c-field__before ds-c-field__before--currency"
+              >
+                $
+              </div>
+              <Mask
+                mask="currency"
+              >
+                <input
+                  aria-label="2003 Cost. Enter amount in dollars."
+                  className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                  id="textfield_2"
+                  name="cost"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value={3848}
+                />
+              </Mask>
+            </div>
+          </div>
+        </TextField>
+      </DollarField>
+      <DollarField
+        key="2004"
+        label="2004 Cost"
+        name="cost"
+        onChange={[Function]}
+        size="medium"
+        value={7773}
+      >
+        <TextField
+          label="2004 Cost"
+          mask="currency"
+          name="cost"
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value={7773}
+        >
+          <div
+            className="ds-u-clearfix"
+          >
+            <FormLabel
+              component="label"
+              fieldId="textfield_3"
+            >
+              <label
+                className="ds-c-label"
+                htmlFor="textfield_3"
+              >
+                <span
+                  className=""
+                >
+                  2004 Cost
+                </span>
+              </label>
+            </FormLabel>
+            <div
+              className="ds-c-field-mask ds-c-field-mask--currency"
+            >
+              <div
+                className="ds-c-field__before ds-c-field__before--currency"
+              >
+                $
+              </div>
+              <Mask
+                mask="currency"
+              >
+                <input
+                  aria-label="2004 Cost. Enter amount in dollars."
+                  className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                  id="textfield_3"
+                  name="cost"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value={7773}
+                />
+              </Mask>
+            </div>
+          </div>
+        </TextField>
+      </DollarField>
+      <Button
+        className="ds-u-margin-top--2"
+        onClick={[Function]}
+        type="button"
+        variation="primary"
+      >
+        <button
+          className="ds-c-button ds-c-button--primary ds-u-margin-top--2"
+          onClick={[Function]}
+          type="button"
+        >
+          Done
+        </button>
+      </Button>
+    </div>
+  </NonPersonnelCostForm>
+</NonPersonnelCost>
+`;

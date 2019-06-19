@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the NonPersonnelCostReview component renders correctly 1`] = `
+<StandardReview
+  editHref={null}
+  heading="54. test category"
+  headingLevel={6}
+  onDeleteClick={[MockFunction]}
+  onEditClick={[MockFunction]}
+>
+  test desc
+  <div
+    className="ds-u-margin-top--2"
+  >
+    <div
+      key="1487"
+    >
+      <strong>
+        1487
+         Costs:
+      </strong>
+       
+      <Dollars
+        long={false}
+      >
+        347293
+      </Dollars>
+    </div>
+    <div
+      key="1488"
+    >
+      <strong>
+        1488
+         Costs:
+      </strong>
+       
+      <Dollars
+        long={false}
+      >
+        234797
+      </Dollars>
+    </div>
+  </div>
+</StandardReview>
+`;

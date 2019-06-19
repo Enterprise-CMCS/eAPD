@@ -56,7 +56,7 @@ module.exports = {
       return {
         id: this.get('id'),
         cost: this.get('cost'),
-        fte: this.get('fte'),
+        fte: +this.get('fte'),
         year: this.get('year')
       };
     },
