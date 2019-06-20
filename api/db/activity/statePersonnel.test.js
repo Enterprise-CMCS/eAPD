@@ -160,7 +160,7 @@ tap.test(
         self.get.returns('--- unknown field ---');
         self.get.withArgs('id').returns('id field');
         self.get.withArgs('cost').returns('cost field');
-        self.get.withArgs('fte').returns('fte field');
+        self.get.withArgs('fte').returns('1.00');
         self.get.withArgs('year').returns('year field');
 
         const output = cost.toJSON.bind(self)();
@@ -168,7 +168,7 @@ tap.test(
         jsonTests.same(output, {
           id: 'id field',
           cost: 'cost field',
-          fte: 'fte field',
+          fte: 1,
           year: 'year field'
         });
       }

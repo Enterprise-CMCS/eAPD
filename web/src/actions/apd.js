@@ -41,9 +41,9 @@ export const selectApdOnLoad = () => (dispatch, getState) => {
 };
 
 export const addKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
-export const removeKeyPerson = index => ({
+export const removeKeyPerson = key => ({
   type: REMOVE_APD_KEY_PERSON,
-  index
+  key
 });
 
 export const updateBudget = () => (dispatch, getState) =>

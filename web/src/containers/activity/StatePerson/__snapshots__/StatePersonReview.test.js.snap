@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the StatePersonReview component renders correctly 1`] = `
+<StandardReview
+  editHref={null}
+  heading="54. test desc"
+  headingLevel={6}
+  onDeleteClick={[MockFunction]}
+  onEditClick={[MockFunction]}
+>
+  test desc
+  <div
+    className="ds-u-margin-top--2"
+  >
+    <div
+      key="2003"
+    >
+      <strong>
+        2003
+         Costs:
+      </strong>
+       
+      <Dollars
+        long={false}
+      >
+        85938
+      </Dollars>
+       |
+       
+      <strong>
+        FTEs:
+      </strong>
+       
+      3
+    </div>
+    <div
+      key="2004"
+    >
+      <strong>
+        2004
+         Costs:
+      </strong>
+       
+      <Dollars
+        long={false}
+      >
+        37523
+      </Dollars>
+       |
+       
+      <strong>
+        FTEs:
+      </strong>
+       
+      0.5
+    </div>
+  </div>
+</StandardReview>
+`;

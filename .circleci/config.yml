@@ -367,10 +367,12 @@ jobs:
             # or a non-zero if there were changes, so stop this step gracefully
             # if there were no changes in the api directory. Compare to
             # one commit back, which is before the current merge commit.
+            set +e
             git diff HEAD~1 --relative=api --name-only --exit-code > /dev/null
             if [ $? -eq "0" ]; then
               circleci-agent step halt
             fi
+            set -e
       - run:
           name: deploy to production
           working_directory: ~/project/bin/prod-deploy
@@ -412,10 +414,12 @@ jobs:
             # or a non-zero if there were changes, so stop this step gracefully
             # if there were no changes in the web directory. Compare to one
             # commit back, which is before the current merge commit.
+            set +e
             git diff HEAD~1 --relative=web --name-only --exit-code > /dev/null
             if [ $? -eq "0" ]; then
               circleci-agent step halt
             fi
+            set -e
       - run:
           name: sync to s3
           command: |
