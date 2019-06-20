@@ -10,7 +10,7 @@ exports[`FormAndReviewList component expands and collapses items 1`] = `
   prop3="passed down"
 >
   <div
-    className="form-and-review-list-item--collapsed"
+    className="form-and-review-list--item__collapsed"
   >
     <Collapsed
       expand={[Function]}
@@ -34,7 +34,7 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
   prop3="passed down"
 >
   <div
-    className="form-and-review-list-item--expanded"
+    className="form-and-review-list--item__expanded"
   >
     <Expanded
       collapse={[Function]}
@@ -71,7 +71,7 @@ exports[`FormAndReviewList component expands and collapses items 3`] = `
   prop3="passed down"
 >
   <div
-    className="form-and-review-list-item--collapsed"
+    className="form-and-review-list--item__collapsed"
   >
     <Collapsed
       expand={[Function]}

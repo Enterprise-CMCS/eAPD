@@ -14,14 +14,14 @@ const FormAndReviewItem = ({
 
   if (collapsed) {
     return (
-      <div className="form-and-review-list-item--collapsed">
+      <div className="form-and-review-list--item__collapsed">
         <Collapsed {...rest} expand={expand} />
       </div>
     );
   }
 
   return (
-    <div className="form-and-review-list-item--expanded">
+    <div className="form-and-review-list--item__expanded">
       <Expanded {...rest} collapse={collapse} />
       <Button variation="primary" onClick={collapse}>
         Done
