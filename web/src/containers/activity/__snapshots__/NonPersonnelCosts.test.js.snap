@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activity non-personnel costs subsection renders correctly 1`] = `
+<Fragment>
+  <Instruction
+    args={null}
+    headingDisplay={
+      Object {
+        "className": "ds-h3",
+        "level": "h3",
+      }
+    }
+    reverse={false}
+    source="activities.expenses.instruction"
+  />
+  <NonPersonnelCost
+    category="test category"
+    desc="test desc"
+    handleDelete={[Function]}
+    handleEditCategory={[Function]}
+    handleEditCost={[Function]}
+    handleEditDesc={[Function]}
+    idx={0}
+    initialCollapsed={false}
+    key="cost key"
+    years={
+      Object {
+        "2027": 34355,
+        "2028": 48833,
+      }
+    }
+  />
+  <Button
+    className="ds-u-margin-top--2 visibility--screen"
+    onClick={[Function]}
+    type="button"
+  >
+    Add another non-personnel cost
+  </Button>
+</Fragment>
+`;
+
+exports[`activity non-personnel costs subsection renders correctly when there are no expenses 1`] = `
+<Fragment>
+  <Instruction
+    args={null}
+    headingDisplay={
+      Object {
+        "className": "ds-h3",
+        "level": "h3",
+      }
+    }
+    reverse={false}
+    source="activities.expenses.instruction"
+  />
+  <NoDataMsg>
+    Additional costs for this activity are missing.
+  </NoDataMsg>
+  <Button
+    className="ds-u-margin-top--2 visibility--screen"
+    onClick={[Function]}
+    type="button"
+  >
+    Add another non-personnel cost
+  </Button>
+</Fragment>
+`;

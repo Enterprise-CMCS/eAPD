@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DollarField component passes back numeric values on change, but still renders masked 1`] = `
+<DollarField
+  className="stuff"
+  label="test label"
+  name="test name"
+  onChange={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "target": Object {
+              "value": 123456,
+            },
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  size="medium"
+  value="12332"
+>
+  <TextField
+    className="stuff"
+    label="test label"
+    mask="currency"
+    name="test name"
+    onChange={[Function]}
+    size="medium"
+    type="text"
+    value="123,456"
+  >
+    <div
+      className="ds-u-clearfix stuff"
+    >
+      <FormLabel
+        component="label"
+        fieldId="textfield_2"
+      >
+        <label
+          className="ds-c-label"
+          htmlFor="textfield_2"
+        >
+          <span
+            className=""
+          >
+            test label
+          </span>
+        </label>
+      </FormLabel>
+      <div
+        className="ds-c-field-mask ds-c-field-mask--currency"
+      >
+        <div
+          className="ds-c-field__before ds-c-field__before--currency"
+        >
+          $
+        </div>
+        <Mask
+          mask="currency"
+        >
+          <input
+            aria-label="test label. Enter amount in dollars."
+            className="ds-c-field ds-c-field--currency ds-c-field--medium"
+            id="textfield_2"
+            name="test name"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="text"
+            value="123,456"
+          />
+        </Mask>
+      </div>
+    </div>
+  </TextField>
+</DollarField>
+`;
+
+exports[`DollarField component renders correctly, passing props down 1`] = `
+<DollarField
+  className="stuff"
+  label="test label"
+  name="test name"
+  onChange={[MockFunction]}
+  size="medium"
+  value="12332"
+>
+  <TextField
+    className="stuff"
+    label="test label"
+    mask="currency"
+    name="test name"
+    onChange={[Function]}
+    size="medium"
+    type="text"
+    value="12332"
+  >
+    <div
+      className="ds-u-clearfix stuff"
+    >
+      <FormLabel
+        component="label"
+        fieldId="textfield_1"
+      >
+        <label
+          className="ds-c-label"
+          htmlFor="textfield_1"
+        >
+          <span
+            className=""
+          >
+            test label
+          </span>
+        </label>
+      </FormLabel>
+      <div
+        className="ds-c-field-mask ds-c-field-mask--currency"
+      >
+        <div
+          className="ds-c-field__before ds-c-field__before--currency"
+        >
+          $
+        </div>
+        <Mask
+          mask="currency"
+        >
+          <input
+            aria-label="test label. Enter amount in dollars."
+            className="ds-c-field ds-c-field--currency ds-c-field--medium"
+            id="textfield_1"
+            name="test name"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="text"
+            value="12,332"
+          />
+        </Mask>
+      </div>
+    </div>
+  </TextField>
+</DollarField>
+`;
