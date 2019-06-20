@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useState, useCallback, useMemo } from 'react';
 
 import ContractorReview from './ContractorResourcesReview';
+import DollarField from '../../components/DollarField';
 import Dollars from '../../components/Dollars';
 
 const dateFormatter = ({ day, month, year }) => `${year}-${month}-${day}`;
@@ -128,10 +129,9 @@ const ContractorForm = ({
           onChange={endDateChangeHandler}
         />
       </div>
-      <TextField
+      <DollarField
         label="Total Contract Cost"
         name="contractor-total-cost"
-        mask="currency"
         size="medium"
         value={contractor.totalCost}
         onChange={handle.changeTotalCost}
@@ -169,12 +169,11 @@ const ContractorForm = ({
                       value={contractor.hourly.data[ffy].hours}
                       onChange={handle.changeHourlyHours[ffy]}
                     />
-                    <TextField
+                    <DollarField
                       className="ds-u-margin-left--1"
                       label="Hourly rate"
                       name={`contractor-hourly-rate-ffy-${ffy}`}
                       labelClassName="ds-u-margin-top--1"
-                      mask="currency"
                       size="medium"
                       value={contractor.hourly.data[ffy].rate}
                       onChange={handle.changeHourlyRate[ffy]}
@@ -200,12 +199,11 @@ const ContractorForm = ({
         </p>
       ) : (
         years.map(ffy => (
-          <TextField
+          <DollarField
             key={ffy}
             label={`FFY ${ffy} Cost`}
             name={`contractor-cost-ffy-${ffy}`}
             disabled={contractor.hourly.useHourly}
-            mask="currency"
             size="medium"
             value={contractor.years[ffy]}
             onChange={handle.changeYearCost[ffy]}

@@ -171,13 +171,13 @@ Object {
           "years": Array [
             Object {
               "cost": 0,
-              "fte": "0.00",
+              "fte": 0,
               "id": 1,
               "year": 2019,
             },
             Object {
               "cost": 0,
-              "fte": "0.00",
+              "fte": 0,
               "id": 2,
               "year": 2020,
             },
