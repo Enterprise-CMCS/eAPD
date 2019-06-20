@@ -1,0 +1,52 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.3
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-MIXINDEEP-450212:
+    - knex > liftoff > findup-sync > micromatch > snapdragon > base > mixin-deep:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.933Z'
+    - knex > liftoff > findup-sync > micromatch > braces > snapdragon > base > mixin-deep:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > extglob > snapdragon > base > mixin-deep:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > nanomatch > snapdragon > base > mixin-deep:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > extglob > expand-brackets > snapdragon > base > mixin-deep:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+  SNYK-JS-SETVALUE-450213:
+    - knex > liftoff > findup-sync > micromatch > snapdragon > base > cache-base > set-value:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+    - knex > liftoff > findup-sync > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: can't update
+        expires: '2019-07-20T16:44:45.934Z'
+patch: {}

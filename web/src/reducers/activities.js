@@ -34,6 +34,7 @@ export const setKeyGenerator = fn => {
 
 const newGoal = () => ({
   key: generateKey(),
+  initialCollapsed: false,
   description: '',
   expanded: true,
   objective: ''

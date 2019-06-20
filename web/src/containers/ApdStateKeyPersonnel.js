@@ -1,9 +1,10 @@
-import { Button } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import Person from './ApdStateKeyPerson';
+import { ApdKeyPersonForm, ApdKeyPersonReview } from './ApdKeyPerson';
+import FormAndReviewList from '../components/FormAndReviewList';
+
 import {
   addKeyPerson,
   removeKeyPerson,
@@ -11,62 +12,44 @@ import {
   updateBudget
 } from '../actions/apd';
 
-class ApdStateKeyPersonnel extends Component {
-  handleChange = index => (field, isExpense = false) => e => {
-    const { updateBudget: dispatchBudget, updateApd } = this.props;
-    updateApd({
-      keyPersonnel: { [index]: { [field]: e.target.value } }
-    });
+const ApdStateKeyPersonnel = ({
+  addKeyPerson: addPerson,
+  poc,
+  removeKeyPerson: deletePerson,
+  updateApd,
+  updateBudget: dispatchBudget,
+  years
+}) => {
+  const handleChange = useCallback((index, field, value, isExpense = false) => {
+    updateApd({ keyPersonnel: { [index]: { [field]: value } } });
     if (isExpense) {
       dispatchBudget();
     }
-  };
+  }, []);
 
-  handleYearChange = index => year => e => {
-    const { value } = e.target;
-    const { updateBudget: dispatchBudget, updateApd } = this.props;
-
-    const updates = {
+  const handleYearChange = useCallback((index, year, value) => {
+    updateApd({
       keyPersonnel: {
-        [index]: { costs: { [year]: +value.replace(/[^\d]/g, '') } }
+        [index]: { costs: { [year]: value } }
       }
-    };
-    updateApd(updates);
+    });
     dispatchBudget();
-  };
+  }, []);
 
-  removePerson = i => () => {
-    const { removeKeyPerson: action } = this.props;
-    action(i);
-  };
-
-  render() {
-    const { addKeyPerson: addPerson, poc, years } = this.props;
-    return (
-      <div className="ds-u-border-top--2">
-        {poc.map((person, i) => (
-          <Person
-            key={person.key}
-            handleChange={this.handleChange(i)}
-            handleYearChange={this.handleYearChange(i)}
-            initialExpanded={person.expanded}
-            number={i + 1}
-            person={person}
-            primary={i === 0}
-            remove={this.removePerson(i)}
-            years={years}
-          />
-        ))}
-        <Button
-          className="ds-u-margin-top--2 visibility--screen"
-          onClick={addPerson}
-        >
-          Add another person
-        </Button>
-      </div>
-    );
-  }
-}
+  return (
+    <FormAndReviewList
+      addButtonText="Add another person"
+      list={poc}
+      collapsed={ApdKeyPersonReview}
+      expanded={ApdKeyPersonForm}
+      onAddClick={addPerson}
+      handleChange={handleChange}
+      handleYearChange={handleYearChange}
+      onDeleteClick={deletePerson}
+      years={years}
+    />
+  );
+};
 
 ApdStateKeyPersonnel.propTypes = {
   addKeyPerson: PropTypes.func.isRequired,

@@ -8,6 +8,9 @@ tap.beforeEach(done => {
 
 tap.test('environment setup', async envTest => {
   const knownEnvironmentVariables = [
+    { name: 'AUTH_LOCK_FAILED_ATTEMPTS_COUNT', type: 'number' },
+    { name: 'AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES', type: 'number' },
+    { name: 'AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES', type: 'number' },
     { name: 'PORT', type: 'number' },
     { name: 'SESSION_SECRET', type: 'object' },
     { name: 'SESSION_LIFETIME_MINUTES', type: 'number' },

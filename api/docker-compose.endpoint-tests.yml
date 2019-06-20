@@ -13,6 +13,9 @@ services:
     depends_on:
       - db
     environment:
+      - AUTH_LOCK_FAILED_ATTEMPTS_COUNT=5
+      - AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES=1
+      - AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES=30
       - PORT=8000
       - NODE_ENV=test
       - API_PORT=8000

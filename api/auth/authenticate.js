@@ -34,8 +34,28 @@ module.exports = (userModel = defaultUserModel, hash = defaultHash) => async (
       .query('whereRaw', 'LOWER(email) = ?', [username.toLowerCase()])
       .fetch({ withRelated: ['state'] });
 
+    if (user && user.get('locked_until')) {
+      // If the lock date is still in the future, we can bail out now.
+      if (user.get('locked_until') > Date.now()) {
+        logger.warn(
+          'account is locked due to excessive failed logons; not processing request'
+        );
+        return done(null, false);
+      }
+
+      // The lock has expired, so go ahead and clear it.
+      user.set('failed_logons', null);
+      user.set('locked_until', null);
+      await user.save();
+    }
+
     if (user && (await hash.compare(password, user.get('password')))) {
       logger.verbose(`authenticated user [${username}]`);
+
+      user.set('failed_logons', null);
+      user.set('locked_until', null);
+      user.save();
+
       return done(null, {
         username: user.get('email'),
         id: user.get('id'),
@@ -44,6 +64,31 @@ module.exports = (userModel = defaultUserModel, hash = defaultHash) => async (
         activities: await user.activities(),
         model: user
       });
+    }
+
+    // If the user was found and we're here, then the password didn't match.
+    // Increment the fail count and check if we need to lock the account.
+    if (user) {
+      const windowTime =
+        +process.env.AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES * 60000;
+      // Get only the failed logons that are still within the failure window.
+      // E.g., if the rule is to lock accounts after 5 failed logon attempts
+      // within 10 minutes, we only need to look at the failed logon attempts
+      // within the past 10 minutes. Logons longer ago than that are irrelevant
+      const failedLogons = (user.get('failed_logons') || []).filter(
+        failure => failure > Date.now() - windowTime
+      );
+      failedLogons.push(Date.now());
+
+      user.set('failed_logons', failedLogons);
+
+      if (failedLogons.length >= +process.env.AUTH_LOCK_FAILED_ATTEMPTS_COUNT) {
+        const duration =
+          +process.env.AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES * 60000;
+        user.set('locked_until', Date.now() + duration);
+      }
+
+      await user.save();
     }
 
     logger.verbose(`no user found or password mismatch for [${username}]`);
