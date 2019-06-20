@@ -172,6 +172,7 @@ exports[`budget summary component header row renders 1`] = `
 exports[`budget summary component renders correctly 1`] = `
 <Fragment>
   <h3
+    aria-hidden="true"
     className="ds-h3"
   >
     HIT Activities
@@ -180,6 +181,13 @@ exports[`budget summary component renders correctly 1`] = `
     className="budget-table"
     key="1"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      1
+       HIT Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="1"
@@ -201,6 +209,13 @@ exports[`budget summary component renders correctly 1`] = `
     className="budget-table"
     key="2"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      2
+       HIT Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="2"
@@ -222,6 +237,13 @@ exports[`budget summary component renders correctly 1`] = `
     className="budget-table"
     key="total"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      total
+       HIT Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="total"
@@ -240,6 +262,7 @@ exports[`budget summary component renders correctly 1`] = `
     </tbody>
   </table>
   <h3
+    aria-hidden="true"
     className="ds-h3"
   >
     HIE Activities
@@ -248,6 +271,13 @@ exports[`budget summary component renders correctly 1`] = `
     className="budget-table"
     key="1"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      1
+       HIE Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="1"
@@ -269,6 +299,13 @@ exports[`budget summary component renders correctly 1`] = `
     className="budget-table"
     key="2"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      2
+       HIE Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="2"
@@ -290,6 +327,13 @@ exports[`budget summary component renders correctly 1`] = `
     className="budget-table"
     key="total"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      total
+       HIE Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="total"
@@ -308,6 +352,7 @@ exports[`budget summary component renders correctly 1`] = `
     </tbody>
   </table>
   <h3
+    aria-hidden="true"
     className="ds-h3"
   >
     MMIS Activities
@@ -316,6 +361,13 @@ exports[`budget summary component renders correctly 1`] = `
     className="budget-table"
     key="1"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      1
+       MMIS Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="1"
@@ -337,6 +389,13 @@ exports[`budget summary component renders correctly 1`] = `
     className="budget-table"
     key="2"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      2
+       MMIS Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="2"
@@ -358,6 +417,13 @@ exports[`budget summary component renders correctly 1`] = `
     className="budget-table"
     key="total"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      total
+       MMIS Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="total"
@@ -375,14 +441,14 @@ exports[`budget summary component renders correctly 1`] = `
       />
     </tbody>
   </table>
-  <h3
-    className="ds-h3"
-  >
-    Project Activities Totals
-  </h3>
   <table
     className="budget-table"
   >
+    <caption
+      className="ds-h3"
+    >
+      Project Activities Totals
+    </caption>
     <thead>
       <tr>
         <th

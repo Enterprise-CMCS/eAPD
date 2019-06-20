@@ -32,7 +32,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                 key={year}
               >
                 <caption className="ds-u-visibility--screen-reader">
-                  {t('ffy', { year })}
+                  {t('ffy', { year })} {sourceDisplay}
                 </caption>
               <colgroup>
                 <col className="budget-table--col-header__fixed-width" />

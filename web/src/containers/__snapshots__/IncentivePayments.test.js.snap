@@ -9,6 +9,7 @@ exports[`incentive payments component renders correctly 1`] = `
       className="ds-u-visibility--screen-reader"
     >
       FFY 1
+       Incentive Payments by Quarter
     </caption>
     <thead>
       <tr>
@@ -353,6 +354,7 @@ exports[`incentive payments component renders correctly 1`] = `
       className="ds-u-visibility--screen-reader"
     >
       FFY 2
+       Incentive Payments by Quarter
     </caption>
     <thead>
       <tr>

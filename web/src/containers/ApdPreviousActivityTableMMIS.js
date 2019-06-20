@@ -24,12 +24,19 @@ const ApdPreviousActivityTableMMIS = ({
 
   return (
     <Fragment>
-      <h4 className="ds-h4">MMIS</h4>
+      <h4 className="ds-h4" aria-hidden="true">MMIS</h4>
       {[90, 75, 50].map((level) => (
         <table key={level} className="budget-table">
+          <caption className="ds-h4 ds-u-visibility--screen-reader">
+            MMIS {TABLE_HEADERS.federal(level)}
+          </caption>
           <thead>
             <tr>
-              <th id="prev_act_mmis_null2" rowSpan="2" />
+              <th id="prev_act_mmis_ffy" rowSpan="2">
+                <span className="ds-u-visibility--screen-reader">
+                  Year
+                </span>
+              </th>
               <th id={`prev_act_mmis${level}_total`}>
                 {TABLE_HEADERS.total}
               </th>

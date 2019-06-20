@@ -36,7 +36,7 @@ class IncentivePayments extends Component {
           <Fragment key={year}>
             <table className="budget-table">
               <caption className="ds-u-visibility--screen-reader">
-                {t('ffy', { year })}
+                {t('ffy', { year })} Incentive Payments by Quarter
               </caption>
               <thead>
                 <tr>
