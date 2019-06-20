@@ -28,14 +28,19 @@ exports[`executive summary budget component DollarCell renders correctly 2`] = `
 
 exports[`executive summary budget component renders correctly with data 1`] = `
 <Fragment>
-  <h3
-    className="ds-h3"
-  >
-    HIT + HIE
-  </h3>
   <table
     className="budget-table"
   >
+    <caption
+      className="ds-h3"
+    >
+      HIT + HIE 
+      <span
+        className="ds-u-visibility--screen-reader"
+      >
+        executive summary
+      </span>
+    </caption>
     <thead>
       <tr>
         <th
@@ -228,14 +233,19 @@ exports[`executive summary budget component renders correctly with data 1`] = `
       </tr>
     </tbody>
   </table>
-  <h3
-    className="ds-h3"
-  >
-    MMIS
-  </h3>
   <table
     className="budget-table"
   >
+    <caption
+      className="ds-h3"
+    >
+      MMIS 
+      <span
+        className="ds-u-visibility--screen-reader"
+      >
+        executive summary
+      </span>
+    </caption>
     <thead>
       <tr>
         <th

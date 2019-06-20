@@ -15,6 +15,8 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       className="ds-u-visibility--screen-reader"
     >
       FFY 1
+       
+      HIT and HIE
     </caption>
     <colgroup>
       <col
@@ -254,6 +256,8 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       className="ds-u-visibility--screen-reader"
     >
       FFY 2
+       
+      HIT and HIE
     </caption>
     <colgroup>
       <col
@@ -567,6 +571,8 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       className="ds-u-visibility--screen-reader"
     >
       FFY 1
+       
+      MMIS
     </caption>
     <colgroup>
       <col
@@ -806,6 +812,8 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       className="ds-u-visibility--screen-reader"
     >
       FFY 2
+       
+      MMIS
     </caption>
     <colgroup>
       <col

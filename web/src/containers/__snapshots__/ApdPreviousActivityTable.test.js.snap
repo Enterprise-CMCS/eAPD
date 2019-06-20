@@ -1,161 +1,167 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`apd previous activity table, mmis component renders correctly 1`] = `
-<Fragment>
-  <h4
+<table
+  className="budget-table"
+>
+  <caption
     className="ds-h4"
   >
     HIT + HIE
-  </h4>
-  <table
-    className="budget-table"
-  >
-    <thead>
-      <tr>
-        <th
-          id="prev_act_hit_header_null2"
-          rowSpan="2"
+  </caption>
+  <thead>
+    <tr>
+      <th
+        id="prev_act_hit_header_ffy"
+        rowSpan="2"
+      >
+        <span
+          className="ds-u-visibility--screen-reader"
+        >
+          Year
+        </span>
+      </th>
+      <th
+        id="prev_act_hithie_total"
+      >
+        <span>
+          Total computable
+          <br />
+          (Federal + state)
+        </span>
+      </th>
+      <th
+        colSpan="2"
+        id="prev_act_hithie_federal"
+      >
+        <span>
+          Federal share 
+          <strong>
+            90
+            %
+          </strong>
+           FFP
+        </span>
+      </th>
+    </tr>
+    <tr>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_hithie_total_approved"
+      >
+        Approved
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_hithie_federal_approved"
+      >
+        Approved
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_hithie_federal_actual"
+      >
+        Actual
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      key="1"
+    >
+      <th
+        headers="prev_act_hit_header_ffy"
+        id="prev_act_hithie_row_1"
+      >
+        FFY 1
+      </th>
+      <td
+        headers="prev_act_hithie_row_1 prev_act_hithie_total prev_act_hithie_total_approved"
+      >
+        <InputHolder
+          className="budget-table--input__number"
+          hideLabel={true}
+          label="total approved funding for HIT and HIE for FFY 1, state plus federal"
+          name="hithie-approved-total-1"
+          onChange={[Function]}
+          type="text"
+          value={20}
+          wrapperClass="budget-table--input-holder"
         />
-        <th
-          id="prev_act_hithie_total"
-        >
-          <span>
-            Total computable
-            <br />
-            (Federal + state)
-          </span>
-        </th>
-        <th
-          colSpan="2"
-          id="prev_act_hithie_federal"
-        >
-          <span>
-            Federal share 
-            <strong>
-              90
-              %
-            </strong>
-             FFP
-          </span>
-        </th>
-      </tr>
-      <tr>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_hithie_total_approved"
-        >
-          Approved
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_hithie_federal_approved"
-        >
-          Approved
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_hithie_federal_actual"
-        >
-          Actual
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        key="1"
+      </td>
+      <td
+        className="budget-table--number"
+        headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_approved"
       >
-        <th
-          id="prev_act_hithie_row_1"
+        <Dollars
+          long={false}
         >
-          FFY 1
-        </th>
-        <td
-          headers="prev_act_hithie_row_1 prev_act_hithie_total prev_act_hithie_total_approved"
-        >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
-            label="total approved funding for HIT and HIE for FFY 1, state plus federal"
-            name="hithie-approved-total-1"
-            onChange={[Function]}
-            type="text"
-            value={20}
-            wrapperClass="budget-table--input-holder"
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_approved"
-        >
-          <Dollars
-            long={false}
-          >
-            18
-          </Dollars>
-        </td>
-        <td
-          headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_actual"
-        >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
-            label="actual federal share for HIT and HIE for FFY 1"
-            name="hithie-actual-federal-1"
-            onChange={[Function]}
-            type="text"
-            value={10}
-            wrapperClass="budget-table--input-holder"
-          />
-        </td>
-      </tr>
-      <tr
-        key="2"
+          18
+        </Dollars>
+      </td>
+      <td
+        headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_actual"
       >
-        <th
-          id="prev_act_hithie_row_2"
+        <InputHolder
+          className="budget-table--input__number"
+          hideLabel={true}
+          label="actual federal share for HIT and HIE for FFY 1"
+          name="hithie-actual-federal-1"
+          onChange={[Function]}
+          type="text"
+          value={10}
+          wrapperClass="budget-table--input-holder"
+        />
+      </td>
+    </tr>
+    <tr
+      key="2"
+    >
+      <th
+        headers="prev_act_hit_header_ffy"
+        id="prev_act_hithie_row_2"
+      >
+        FFY 2
+      </th>
+      <td
+        headers="prev_act_hithie_row_2 prev_act_hithie_total prev_act_hithie_total_approved"
+      >
+        <InputHolder
+          className="budget-table--input__number"
+          hideLabel={true}
+          label="total approved funding for HIT and HIE for FFY 2, state plus federal"
+          name="hithie-approved-total-2"
+          onChange={[Function]}
+          type="text"
+          value={200}
+          wrapperClass="budget-table--input-holder"
+        />
+      </td>
+      <td
+        className="budget-table--number"
+        headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_approved"
+      >
+        <Dollars
+          long={false}
         >
-          FFY 2
-        </th>
-        <td
-          headers="prev_act_hithie_row_2 prev_act_hithie_total prev_act_hithie_total_approved"
-        >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
-            label="total approved funding for HIT and HIE for FFY 2, state plus federal"
-            name="hithie-approved-total-2"
-            onChange={[Function]}
-            type="text"
-            value={200}
-            wrapperClass="budget-table--input-holder"
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_approved"
-        >
-          <Dollars
-            long={false}
-          >
-            180
-          </Dollars>
-        </td>
-        <td
-          headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_actual"
-        >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
-            label="actual federal share for HIT and HIE for FFY 2"
-            name="hithie-actual-federal-2"
-            onChange={[Function]}
-            type="text"
-            value={100}
-            wrapperClass="budget-table--input-holder"
-          />
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</Fragment>
+          180
+        </Dollars>
+      </td>
+      <td
+        headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_actual"
+      >
+        <InputHolder
+          className="budget-table--input__number"
+          hideLabel={true}
+          label="actual federal share for HIT and HIE for FFY 2"
+          name="hithie-actual-federal-2"
+          onChange={[Function]}
+          type="text"
+          value={100}
+          wrapperClass="budget-table--input-holder"
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;

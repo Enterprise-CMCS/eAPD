@@ -1,94 +1,98 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`apd previous activity table, grand total component renders correctly 1`] = `
-<Fragment>
-  <h4
+<table
+  className="budget-table budget-table--totals"
+>
+  <caption
     className="ds-h4"
   >
     Grand totals: Federal HIT, HIE, MMIS
-  </h4>
-  <table
-    className="budget-table budget-table--totals"
-  >
-    <thead>
-      <tr>
-        <th
-          id="prev_act_totals_null3"
-        />
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_total_approved"
-        >
-          FFP Approved
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_total_actual"
-        >
-          FFP Actual
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        key="1"
+  </caption>
+  <thead>
+    <tr>
+      <th
+        id="prev_act_totals_ffy"
       >
-        <th
-          id="prev_act_total_row_1"
+        <span
+          className="ds-u-visibility--screen-reader"
         >
-          FFY 1
-        </th>
-        <td
-          className="budget-table--number"
-          headers="prev_act_total_row_1 prev_act_total_approved"
-        >
-          <Dollars
-            long={false}
-          >
-            1878
-          </Dollars>
-        </td>
-        <td
-          className="budget-table--number"
-          headers="prev_act_total_row_1 prev_act_total_actual"
-        >
-          <Dollars
-            long={false}
-          >
-            1090
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        key="2"
+          Year
+        </span>
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_total_approved"
       >
-        <th
-          id="prev_act_total_row_2"
+        FFP Approved
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        id="prev_act_total_actual"
+      >
+        FFP Actual
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      key="1"
+    >
+      <th
+        id="prev_act_total_row_1"
+      >
+        FFY 1
+      </th>
+      <td
+        className="budget-table--number"
+        headers="prev_act_total_row_1 prev_act_total_approved"
+      >
+        <Dollars
+          long={false}
         >
-          FFY 2
-        </th>
-        <td
-          className="budget-table--number"
-          headers="prev_act_total_row_2 prev_act_total_approved"
+          1878
+        </Dollars>
+      </td>
+      <td
+        className="budget-table--number"
+        headers="prev_act_total_row_1 prev_act_total_actual"
+      >
+        <Dollars
+          long={false}
         >
-          <Dollars
-            long={false}
-          >
-            4380
-          </Dollars>
-        </td>
-        <td
-          className="budget-table--number"
-          headers="prev_act_total_row_2 prev_act_total_actual"
+          1090
+        </Dollars>
+      </td>
+    </tr>
+    <tr
+      key="2"
+    >
+      <th
+        id="prev_act_total_row_2"
+      >
+        FFY 2
+      </th>
+      <td
+        className="budget-table--number"
+        headers="prev_act_total_row_2 prev_act_total_approved"
+      >
+        <Dollars
+          long={false}
         >
-          <Dollars
-            long={false}
-          >
-            3900
-          </Dollars>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</Fragment>
+          4380
+        </Dollars>
+      </td>
+      <td
+        className="budget-table--number"
+        headers="prev_act_total_row_2 prev_act_total_actual"
+      >
+        <Dollars
+          long={false}
+        >
+          3900
+        </Dollars>
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;
