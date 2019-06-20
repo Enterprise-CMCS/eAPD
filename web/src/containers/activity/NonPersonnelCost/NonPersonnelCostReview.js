@@ -5,18 +5,16 @@ import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 
 const NonPersonnelCostReview = ({
-  category,
-  desc,
+  item: { category, desc, years },
   expand,
-  handleDelete,
-  idx,
-  years
+  index,
+  onDeleteClick
 }) => {
   return (
     <Review
-      heading={`${idx + 1}. ${category}`}
+      heading={`${index + 1}. ${category}`}
       headingLevel={6}
-      onDeleteClick={handleDelete}
+      onDeleteClick={onDeleteClick}
       onEditClick={expand}
     >
       {desc}
@@ -32,12 +30,18 @@ const NonPersonnelCostReview = ({
 };
 
 NonPersonnelCostReview.propTypes = {
-  category: PropTypes.string.isRequired,
-  desc: PropTypes.string.isRequired,
+  item: PropTypes.shape({
+    category: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    years: PropTypes.object.isRequired
+  }).isRequired,
   expand: PropTypes.func.isRequired,
-  handleDelete: PropTypes.func.isRequired,
-  idx: PropTypes.number.isRequired,
-  years: PropTypes.object.isRequired
+  index: PropTypes.number.isRequired,
+  onDeleteClick: PropTypes.func
+};
+
+NonPersonnelCostReview.defaultProps = {
+  onDeleteClick: null
 };
 
 export default NonPersonnelCostReview;

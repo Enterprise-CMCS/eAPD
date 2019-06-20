@@ -1,43 +1,40 @@
-import { Button, TextField } from '@cmsgov/design-system-core';
+import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 
 import DollarField from '../../../components/DollarField';
 
 const StatePersonForm = ({
-  collapse,
-  desc,
+  item: { desc, title, years },
   handleEditCost,
   handleEditFTE,
   handleEditPersonDesc,
   handleEditPersonTitle,
-  idx,
-  title,
-  years
+  index
 }) => {
   const editTitle = useCallback(
-    ({ target: { value } }) => handleEditPersonTitle(idx, value),
-    [idx]
+    ({ target: { value } }) => handleEditPersonTitle(index, value),
+    [index]
   );
 
   const editDesc = useCallback(
-    ({ target: { value } }) => handleEditPersonDesc(idx, value),
-    [idx]
+    ({ target: { value } }) => handleEditPersonDesc(index, value),
+    [index]
   );
 
   const getEditCostForYear = useCallback(
-    year => ({ target: { value } }) => handleEditCost(idx, year, value),
-    [idx]
+    year => ({ target: { value } }) => handleEditCost(index, year, value),
+    [index]
   );
 
   const getEditFTEForYear = useCallback(
-    year => ({ target: { value } }) => handleEditFTE(idx, year, value),
-    [idx]
+    year => ({ target: { value } }) => handleEditFTE(index, year, value),
+    [index]
   );
 
   return (
-    <div className="ds-u-border-bottom--2 ds-u-padding-y--2">
-      <h6 className="ds-h4">Personnel {idx + 1}:</h6>
+    <Fragment>
+      <h6 className="ds-h4">Personnel {index + 1}:</h6>
       <TextField
         label="Personnel title"
         name="title"
@@ -74,27 +71,21 @@ const StatePersonForm = ({
           </div>
         </Fragment>
       ))}
-      <Button
-        variation="primary"
-        className="ds-u-margin-top--2"
-        onClick={collapse}
-      >
-        Done
-      </Button>
-    </div>
+    </Fragment>
   );
 };
 
 StatePersonForm.propTypes = {
-  collapse: PropTypes.func.isRequired,
-  desc: PropTypes.string.isRequired,
   handleEditCost: PropTypes.func.isRequired,
   handleEditFTE: PropTypes.func.isRequired,
   handleEditPersonDesc: PropTypes.func.isRequired,
   handleEditPersonTitle: PropTypes.func.isRequired,
-  idx: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  years: PropTypes.object.isRequired
+  index: PropTypes.number.isRequired,
+  item: PropTypes.shape({
+    desc: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    years: PropTypes.object.isRequired
+  }).isRequired
 };
 
 export default StatePersonForm;
