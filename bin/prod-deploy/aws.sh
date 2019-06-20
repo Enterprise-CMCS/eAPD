@@ -86,6 +86,9 @@ function addEcosystemToUserData() {
       instances: 1,
       autorestart: true,
       env: {
+        AUTH_LOCK_FAILED_ATTEMPTS_COUNT: 5,
+        AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES: 1,
+        AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES: 30,
         NODE_ENV: 'production',
         PBKDF2_ITERATIONS: '$AWS_PROD_API_PBKDF2_ITERATIONS',
         PORT: '$AWS_PROD_API_PORT',
