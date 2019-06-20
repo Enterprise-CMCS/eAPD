@@ -42,9 +42,9 @@ describe('apd actions', () => {
   });
 
   it('removeApdKeyPerson should create REMOVE_APD_KEY_PERSON action', () => {
-    expect(actions.removeKeyPerson('id')).toEqual({
+    expect(actions.removeKeyPerson('key')).toEqual({
       type: actions.REMOVE_APD_KEY_PERSON,
-      index: 'id'
+      key: 'key'
     });
   });
 

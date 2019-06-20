@@ -1,16 +1,16 @@
-import { Button } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useMemo } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import Milestone from './Milestone';
+import FormAndReviewList from '../../components/FormAndReviewList';
+import { MilestoneForm, MilestoneReview } from './Milestone';
+
 import {
   addActivityMilestone as addActivityMilestoneAction,
   removeActivityMilestone as removeActivityMilestoneAction,
   updateActivity as updateActivityAction
 } from '../../actions/activities';
 import Instruction from '../../components/Instruction';
-import NoDataMsg from '../../components/NoDataMsg';
 import { Subsection } from '../../components/Section';
 import DateField from '../../components/DateField';
 import { t } from '../../i18n';
@@ -21,6 +21,10 @@ const Schedule = ({
   removeActivityMilestone,
   updateActivity
 }) => {
+  const handleAdd = useCallback(() => {
+    addActivityMilestone(activity.key);
+  });
+
   const handleActivityStartChange = useCallback((_, dateStr) => {
     updateActivity(activity.key, { plannedStartDate: dateStr });
   });
@@ -39,63 +43,45 @@ const Schedule = ({
     updateActivity(activity.key, { schedule: { [index]: { endDate: date } } });
   });
 
-  const removeMilestone = useMemo(
-    () =>
-      activity.schedule.length > 1
-        ? i => removeActivityMilestone(activity.key, activity.schedule[i].key)
-        : null,
-    [activity.schedule.length]
-  );
+  const handleDelete = useCallback(key => {
+    removeActivityMilestone(activity.key, key);
+  });
 
   return (
     <Subsection resource="activities.schedule" nested>
-      {activity.schedule.length === 0 ? (
-        <NoDataMsg>{t('activities.schedule.noMilestonesNotice')}</NoDataMsg>
-      ) : (
-        <Fragment>
-          <h5 className="ds-h5">Activity start and end dates</h5>
-          <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
-            <DateField
-              value={activity.plannedStartDate}
-              onChange={handleActivityStartChange}
-            />
-            <DateField
-              value={activity.plannedEndDate}
-              onChange={handleActivityEndChange}
-            />
-          </div>
-          <div className="mb3">
-            <Instruction
-              source="activities.schedule.milestone.instruction"
-              headingDisplay={{ className: 'ds-h5', level: 'h5' }}
-            />
+      <Fragment>
+        <h5 className="ds-h5">Activity start and end dates</h5>
+        <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
+          <DateField
+            value={activity.plannedStartDate}
+            onChange={handleActivityStartChange}
+          />
+          <DateField
+            value={activity.plannedEndDate}
+            onChange={handleActivityEndChange}
+          />
+        </div>
+        <div className="mb3">
+          <Instruction
+            source="activities.schedule.milestone.instruction"
+            headingDisplay={{ className: 'ds-h5', level: 'h5' }}
+          />
 
-            <hr />
+          <hr />
 
-            {activity.schedule.map(
-              ({ endDate, initialCollapsed, key, milestone: name }, i) => (
-                <Milestone
-                  key={key}
-                  idx={i}
-                  initialCollapsed={initialCollapsed}
-                  name={name}
-                  onChangeName={handleMilestoneNameChange}
-                  endDate={endDate}
-                  onChangeDate={handleMilestoneDateChange}
-                  onDelete={removeMilestone}
-                />
-              )
-            )}
-          </div>
-        </Fragment>
-      )}
-      <Button
-        className="visibility--screen"
-        onClick={() => addActivityMilestone(activity.key)}
-      >
-        {t('activities.schedule.addMilestoneButtonText')}
-      </Button>
-      <hr />
+          <FormAndReviewList
+            addButtonText={t('activities.schedule.addMilestoneButtonText')}
+            list={activity.schedule}
+            collapsed={MilestoneReview}
+            expanded={MilestoneForm}
+            noDataMessage={t('activities.schedule.noMilestonesNotice')}
+            onAddClick={handleAdd}
+            onChangeName={handleMilestoneNameChange}
+            onChangeDate={handleMilestoneDateChange}
+            onDeleteClick={handleDelete}
+          />
+        </div>
+      </Fragment>
     </Subsection>
   );
 };

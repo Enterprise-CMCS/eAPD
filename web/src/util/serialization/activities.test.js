@@ -202,14 +202,14 @@ describe('APD activity serializer', () => {
           goals: [
             {
               id: 'g1',
-              expanded: false,
+              initialCollapsed: true,
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
               description: 'goal 1 description',
               objective: 'goal 1 objective'
             },
             {
               id: 'g2',
-              expanded: false,
+              initialCollapsed: true,
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
               description: 'goal 2 description',
               objective: 'goal 2 objective'

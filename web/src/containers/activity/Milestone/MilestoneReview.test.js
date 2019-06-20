@@ -9,14 +9,16 @@ describe('the MilestoneReview component', () => {
 
   const component = shallow(
     <MilestoneReview
-      idx={1532}
-      // The Battle of Britain ends with the Nazis unable to gain air
-      // superiority to support an invasion. The invasion is postponed until
-      // the following year, but in fact never happens.
-      endDate="1940-10-31"
+      index={1532}
+      item={{
+        // The Battle of Britain ends with the Nazis unable to gain air
+        // superiority to support an invasion. The invasion is postponed until
+        // the following year, but in fact never happens.
+        endDate: '1940-10-31',
+        milestone: 'Milestone name'
+      }}
       expand={expand}
-      name="Milestone name"
-      onDelete={onDelete}
+      onDeleteClick={onDelete}
     />
   );
 
@@ -25,8 +27,9 @@ describe('the MilestoneReview component', () => {
   });
 
   test('triggers the delete event', () => {
-    component.find('StandardReview').prop('onDeleteClick')();
-    expect(onDelete).toHaveBeenCalledWith(1532);
+    expect(component.find('StandardReview').prop('onDeleteClick')).toEqual(
+      onDelete
+    );
   });
 
   test('hooks up the expand event', () => {
