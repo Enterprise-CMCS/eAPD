@@ -12,18 +12,19 @@ describe('the StatePersonForm component', () => {
 
   const component = shallow(
     <StatePersonForm
-      collapse={collapse}
-      desc="personnel desc"
+      index={83}
+      item={{
+        desc: 'personnel desc',
+        title: 'personnel title',
+        years: {
+          7473: 2398235,
+          7474: 72323
+        }
+      }}
       handleEditCost={handleEditCost}
       handleEditFTE={handleEditFTE}
       handleEditPersonDesc={handleEditPersonDesc}
       handleEditPersonTitle={handleEditPersonTitle}
-      idx={83}
-      title="personnel title"
-      years={{
-        7473: 2398235,
-        7474: 72323
-      }}
     />
   );
 

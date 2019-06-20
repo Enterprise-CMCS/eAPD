@@ -10,11 +10,9 @@ const Costs = ({ aKey }) => (
   <Subsection resource="activities.costs" nested>
     <h5 className="ds-h4">{t('activities.costs.subtitles.personnel')}</h5>
     <StatePersonnel aKey={aKey} />
-    <hr />
 
     <h5 className="ds-h4">{t('activities.costs.subtitles.nonPersonnel')}</h5>
     <Expenses aKey={aKey} />
-    <hr />
   </Subsection>
 );
 

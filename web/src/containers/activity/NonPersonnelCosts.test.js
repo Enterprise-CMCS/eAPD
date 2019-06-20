@@ -44,59 +44,46 @@ describe('activity non-personnel costs subsection', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('renders correctly when there are no expenses', () => {
-    expect(
-      shallow(
-        <NonPersonnelCosts
-          activityKey="activity key"
-          addExpense={jest.fn()}
-          expenses={[]}
-          removeExpense={jest.fn()}
-          updateActivity={jest.fn()}
-        />
-      )
-    ).toMatchSnapshot();
-  });
+  describe('events', () => {
+    const list = component.find('FormAndReviewList');
 
-  it('handles adding a new cost', () => {
-    component.find('Button').simulate('click');
-    expect(props.addExpense).toHaveBeenCalledWith('activity key');
-  });
-
-  it('handles updating a cost category', () => {
-    component.find('NonPersonnelCost').prop('handleEditCategory')(
-      3,
-      'new category'
-    );
-    expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-      expenses: { 3: { category: 'new category' } }
+    it('handles adding a new cost', () => {
+      list.prop('onAddClick')();
+      expect(props.addExpense).toHaveBeenCalledWith('activity key');
     });
-  });
 
-  it('handles updating a cost description', () => {
-    component.find('NonPersonnelCost').prop('handleEditDesc')(3, 'new desc');
-    expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-      expenses: { 3: { desc: 'new desc' } }
+    it('handles deleting a cost', () => {
+      list.prop('onDeleteClick')('cost key');
+      expect(props.removeExpense).toHaveBeenCalledWith(
+        'activity key',
+        'cost key'
+      );
     });
-  });
 
-  it('handles editing a cost FY total', () => {
-    component.find('NonPersonnelCost').prop('handleEditCost')(3, 2027, 982357);
-    expect(props.updateActivity).toHaveBeenCalledWith(
-      'activity key',
-      {
-        expenses: { 3: { years: { 2027: 982357 } } }
-      },
-      true
-    );
-  });
+    it('handles editing a cost category', () => {
+      list.prop('handleEditCategory')(3, 'new category');
+      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
+        expenses: { 3: { category: 'new category' } }
+      });
+    });
 
-  it('handles deleting a cost', () => {
-    component.find('NonPersonnelCost').prop('handleDelete')();
-    expect(props.removeExpense).toHaveBeenCalledWith(
-      'activity key',
-      'cost key'
-    );
+    it('handles editing a cost description', () => {
+      list.prop('handleEditDesc')(3, 'new description');
+      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
+        expenses: { 3: { desc: 'new description' } }
+      });
+    });
+
+    it('handles editing a cost for a fiscal year', () => {
+      list.prop('handleEditCost')(3, 1997, 'new cost');
+      expect(props.updateActivity).toHaveBeenCalledWith(
+        'activity key',
+        {
+          expenses: { 3: { years: { 1997: 'new cost' } } }
+        },
+        true
+      );
+    });
   });
 
   it('maps state to props', () => {

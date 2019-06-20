@@ -44,67 +44,57 @@ describe('activity state personnel costs subsection', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('renders correctly when there are no expenses', () => {
-    expect(
-      shallow(
-        <StatePersonnel
-          activityKey="activity key"
-          addPerson={jest.fn()}
-          personnel={[]}
-          removePerson={jest.fn()}
-          updateActivity={jest.fn()}
-        />
-      )
-    ).toMatchSnapshot();
-  });
+  describe('events', () => {
+    const list = component.find('FormAndReviewList');
 
-  it('handles adding a new personnel', () => {
-    component.find('Button').simulate('click');
-    expect(props.addPerson).toHaveBeenCalledWith('activity key');
-  });
-
-  it('handles updating a personnel title', () => {
-    component.find('StatePerson').prop('handleEditPersonTitle')(3, 'new title');
-    expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-      statePersonnel: { 3: { title: 'new title' } }
+    it('handles adding a new state person', () => {
+      list.prop('onAddClick')();
+      expect(props.addPerson).toHaveBeenCalledWith('activity key');
     });
-  });
 
-  it('handles updating a personnel description', () => {
-    component.find('StatePerson').prop('handleEditPersonDesc')(3, 'new desc');
-    expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
-      statePersonnel: { 3: { desc: 'new desc' } }
+    it('handles deleting a state person', () => {
+      list.prop('onDeleteClick')('person key');
+      expect(props.removePerson).toHaveBeenCalledWith(
+        'activity key',
+        'person key'
+      );
     });
-  });
 
-  it('handles editing a personnel FY cost total', () => {
-    component.find('StatePerson').prop('handleEditCost')(3, 2027, 982357);
-    expect(props.updateActivity).toHaveBeenCalledWith(
-      'activity key',
-      {
-        statePersonnel: { 3: { years: { 2027: { amt: 982357 } } } }
-      },
-      true
-    );
-  });
+    it('handles editing a state personnel cost for a fiscal year', () => {
+      list.prop('handleEditCost')(3, 2014, 'new cost');
+      expect(props.updateActivity).toHaveBeenCalledWith(
+        'activity key',
+        {
+          statePersonnel: { 3: { years: { 2014: { amt: 'new cost' } } } }
+        },
+        true
+      );
+    });
 
-  it('handles editing a personnel FY FTE', () => {
-    component.find('StatePerson').prop('handleEditFTE')(3, 2027, 1.5);
-    expect(props.updateActivity).toHaveBeenCalledWith(
-      'activity key',
-      {
-        statePersonnel: { 3: { years: { 2027: { perc: 1.5 } } } }
-      },
-      true
-    );
-  });
+    it('handles editing a state personnel FTE for a fiscal year', () => {
+      list.prop('handleEditFTE')(3, 2014, 'new FTE');
+      expect(props.updateActivity).toHaveBeenCalledWith(
+        'activity key',
+        {
+          statePersonnel: { 3: { years: { 2014: { perc: 'new FTE' } } } }
+        },
+        true
+      );
+    });
 
-  it('handles deleting a person', () => {
-    component.find('StatePerson').prop('handleDelete')();
-    expect(props.removePerson).toHaveBeenCalledWith(
-      'activity key',
-      'personnel key'
-    );
+    it('handles editing a state personnel description', () => {
+      list.prop('handleEditPersonDesc')(3, 'new description');
+      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
+        statePersonnel: { 3: { desc: 'new description' } }
+      });
+    });
+
+    it('handles editing a state personnel title', () => {
+      list.prop('handleEditPersonTitle')(3, 'new title');
+      expect(props.updateActivity).toHaveBeenCalledWith('activity key', {
+        statePersonnel: { 3: { title: 'new title' } }
+      });
+    });
   });
 
   it('maps state to props', () => {

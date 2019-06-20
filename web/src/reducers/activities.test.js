@@ -54,6 +54,7 @@ describe('activities reducer', () => {
 
   const newGoal = keyFn => ({
     key: keyFn(),
+    initialCollapsed: false,
     description: '',
     expanded: true,
     objective: ''

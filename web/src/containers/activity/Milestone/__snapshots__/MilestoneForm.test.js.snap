@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the MilestoneForm component renders correctly 1`] = `
+<Fragment>
+  <h6
+    className="ds-h4"
+  >
+    Milestone 
+    3253
+    :
+  </h6>
+  <TextField
+    label="Name"
+    name="name"
+    onChange={[Function]}
+    type="text"
+  />
+  <DateField
+    hint=""
+    label="Planned end date"
+    onChange={[Function]}
+    value="1942-8-16"
+  />
+</Fragment>
+`;
