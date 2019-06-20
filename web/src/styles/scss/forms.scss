@@ -28,6 +28,35 @@ div.form--with-reviews {
   padding-bottom: nth($spacers, 3);
 }
 
+// Above is a previous class that was used by the APD key personnel form/review
+// section. Properties below are derived from what was kind of scattered around
+// the activity subsection form/review lists, plus some convenience things to
+// account for the "Add new..." and "Done" buttons being placed automatically
+// by the wrapper.
+//
+// .form--with-reviews isn't being used anywhere at the moment, but preserved
+// here temporarily until reviews, to make it easier to decide which set of
+// styles we should keep.
+
+.form-and-review-list {
+  border-bottom: 2px solid $border-color;
+  padding-bottom: nth($spacers, 3);
+
+  > button {
+    margin-top: nth($spacers, 3);
+  }
+}
+
+.form-and-review-list--item__expanded {
+  border-bottom: 2px solid $border-color;
+  padding-bottom: nth($spacers, 4);
+  padding-top: nth($spacers, 3);
+
+  button:last-child {
+    margin-top: nth($spacers, 5);
+  }
+}
+
 /* for forms that display computed values, but those computed values should
 be aligned vertically with their input field comrades */
 div.form--computed-value__input-aligned {

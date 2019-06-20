@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the GoalForm component renders correctly 1`] = `
+<Fragment>
+  <TextField
+    className="data-entry-box"
+    hint=""
+    label="Goal name"
+    name="name"
+    type="text"
+    value="goal description"
+  />
+  <TextField
+    className="data-entry-box"
+    hint="Briefly describe how the state will measure progress toward the identified goal."
+    label="Benchmarks"
+    multiline={true}
+    name="milestones"
+    rows={6}
+    type="text"
+    value="goal objective"
+  />
+</Fragment>
+`;
