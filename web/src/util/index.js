@@ -195,6 +195,18 @@ export const getLabelID = (() => {
   };
 })();
 
+/** Converts a single phrase to sentence case, not accounting for punctuation
+ */
+export const toSentenceCase = str =>
+  str
+    // Replace the first character after the start-of-line with its uppercase
+    .replace(/^(.)/, letter => letter.toUpperCase())
+    // Then replace every uppercase letter that is followed by a space or a
+    // lowercase letter with its lowercase. This way groups of capitalized
+    // letters (like acronyms) will stay capitalized, but other capitalized
+    // words will be lower-cased.
+    .replace(/ ([A-Z])([a-z]| )/g, start => start.toLowerCase());
+
 export const arrToObj = (array = [], initialValue = 0) => {
   const init =
     typeof initialValue === 'function' ? initialValue : () => initialValue;

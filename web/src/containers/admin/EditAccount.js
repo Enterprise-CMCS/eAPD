@@ -14,7 +14,7 @@ import Password from '../../components/PasswordWithMeter';
 import { LockIcon, UnlockIcon } from '../../components/Icons';
 import { getEditAccountError } from '../../reducers/errors';
 import { getEditAccountWorking } from '../../reducers/working';
-import { STATES } from '../../util';
+import { STATES, toSentenceCase } from '../../util';
 
 class EditAccount extends Component {
   state = {
@@ -112,7 +112,7 @@ class EditAccount extends Component {
             <option value="">None</option>
             {roles.map(r => (
               <option key={r.name} value={r.name}>
-                {r.name}
+                {toSentenceCase(r.name)}
               </option>
             ))}
           </Select>
