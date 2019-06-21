@@ -202,14 +202,14 @@ describe('APD activity serializer', () => {
           goals: [
             {
               id: 'g1',
-              expanded: false,
+              initialCollapsed: true,
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
               description: 'goal 1 description',
               objective: 'goal 1 objective'
             },
             {
               id: 'g2',
-              expanded: false,
+              initialCollapsed: true,
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
               description: 'goal 2 description',
               objective: 'goal 2 objective'
@@ -218,6 +218,7 @@ describe('APD activity serializer', () => {
           schedule: [
             {
               id: 'm1',
+              initialCollapsed: true,
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
               milestone: 'milestone name',
               plannedStart: 'start',
@@ -228,6 +229,7 @@ describe('APD activity serializer', () => {
             {
               id: 'person 1',
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              initialCollapsed: true,
               title: 'job title 1',
               desc: 'desc 1',
               years: {
@@ -238,6 +240,7 @@ describe('APD activity serializer', () => {
             {
               id: 'person 2',
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              initialCollapsed: true,
               title: 'job title 2',
               desc: 'desc 2',
               years: {
@@ -299,6 +302,7 @@ describe('APD activity serializer', () => {
             {
               id: 'e1',
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              initialCollapsed: true,
               category: 'category 1',
               desc: 'desc 1',
               years: { 2018: 10, 2019: 20 }
@@ -306,6 +310,7 @@ describe('APD activity serializer', () => {
             {
               id: 'e2',
               key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              initialCollapsed: true,
               category: 'category 2',
               desc: 'desc 2',
               years: { 2018: 30, 2019: 40 }

@@ -36,6 +36,10 @@ keyPersonnel:
       Activities instead. CMS seeks to ensure  state teams are adequately resourced,
       but does not require states to provide key vendor personnel to satisfy this
       requirement.
+
+      Key personnel costs are included within Activity #1, Program Administration. 
+      These costs are HIT costs shared at the 90-10 rate. Quarterly adjustments for
+      personnel costs under Activity #1 will apply to all key personnel costs.
   contact: 'Contact #{{number}}'
   labels:
     name: Name

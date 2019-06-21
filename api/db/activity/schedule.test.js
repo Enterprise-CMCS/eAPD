@@ -63,7 +63,7 @@ tap.test('schedule data model', async scheduleModelTests => {
 
   scheduleModelTests.test('validation', async test => {
     await Promise.all(
-      [7, 'bob', 'January 3, 1947', '14 October 1066', '2014-3-9'].map(
+      [7, 'bob', 'January 3, 1947', '14 October 1066'].map(
         async invalidValue => {
           try {
             const self = { attributes: { endDate: invalidValue } };
@@ -76,9 +76,10 @@ tap.test('schedule data model', async scheduleModelTests => {
       )
     );
 
-    const self = { attributes: { endDate: '2000-01-01' } };
-
     try {
+      const self = { attributes: { endDate: '2000-01-01' } };
+      await schedule.validate.bind(self)();
+      self.attributes.endDate = '2000-1-1';
       await schedule.validate.bind(self)();
       test.pass('resolves if all values are valid');
     } catch (e) {

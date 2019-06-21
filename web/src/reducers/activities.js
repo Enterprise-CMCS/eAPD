@@ -34,12 +34,14 @@ export const setKeyGenerator = fn => {
 
 const newGoal = () => ({
   key: generateKey(),
+  initialCollapsed: false,
   description: '',
   expanded: true,
   objective: ''
 });
 
 const newMilestone = (milestone = '', endDate = '') => ({
+  initialCollapsed: false,
   key: generateKey(),
   milestone,
   endDate
@@ -48,6 +50,7 @@ const newMilestone = (milestone = '', endDate = '') => ({
 const statePersonDefaultYear = () => ({ amt: '', perc: '' });
 const newStatePerson = years => ({
   key: generateKey(),
+  initialCollapsed: false,
   title: '',
   desc: '',
   years: arrToObj(years, statePersonDefaultYear())
@@ -74,6 +77,7 @@ const expenseDefaultYear = () => 0;
 
 const newExpense = years => ({
   key: generateKey(),
+  initialCollapsed: false,
   category: 'Hardware, software, and licensing',
   desc: '',
   years: arrToObj(years, expenseDefaultYear())

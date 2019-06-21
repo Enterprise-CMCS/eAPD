@@ -46,6 +46,7 @@ describe('activities reducer', () => {
 
   const newPerson = keyFn => ({
     key: keyFn(),
+    initialCollapsed: false,
     desc: '',
     title: '',
     years: { '1973': { amt: '', perc: '' }, '1974': { amt: '', perc: '' } }
@@ -53,6 +54,7 @@ describe('activities reducer', () => {
 
   const newGoal = keyFn => ({
     key: keyFn(),
+    initialCollapsed: false,
     description: '',
     expanded: true,
     objective: ''
@@ -60,6 +62,7 @@ describe('activities reducer', () => {
 
   const newExpense = keyFn => ({
     key: keyFn(),
+    initialCollapsed: false,
     category: 'Hardware, software, and licensing',
     desc: '',
     years: { '1973': 0, '1974': 0 }
@@ -67,6 +70,7 @@ describe('activities reducer', () => {
 
   const newMilestone = keyFn => ({
     key: keyFn(),
+    initialCollapsed: false,
     milestone: '',
     endDate: ''
   });

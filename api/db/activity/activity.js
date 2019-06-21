@@ -143,7 +143,7 @@ module.exports = {
       ].forEach(([prop, errName]) => {
         if (this.attributes[prop]) {
           // true to enforce strict parsing
-          const date = moment(this.attributes[prop], 'YYYY-MM-DD', true);
+          const date = moment(this.attributes[prop], 'YYYY-M-D', true);
           if (!date.isValid()) {
             throw new Error(`activity-${errName}`);
           }

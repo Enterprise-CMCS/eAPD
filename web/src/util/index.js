@@ -194,6 +194,22 @@ export const stateDateToDisplay = date => {
   return 'N/A';
 };
 
+/**
+ * Get a sequential form label ID, for uniqueness
+ */
+export const getLabelID = (() => {
+  let count = 0;
+  return () => {
+    count += 1;
+    if (process && process.env.NODE_ENV === 'test') {
+      // In test environments, always return the same thing, otherwise our
+      // snapshots are just like 🤷🏼‍♂️
+      count = 12321;
+    }
+    return `eapd-form-label-${count}`;
+  };
+})();
+
 export const arrToObj = (array = [], initialValue = 0) => {
   const init =
     typeof initialValue === 'function' ? initialValue : () => initialValue;
