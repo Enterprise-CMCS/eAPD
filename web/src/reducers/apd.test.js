@@ -191,8 +191,10 @@ describe('APD reducer', () => {
             email: '',
             expanded: true,
             hasCosts: false,
+            initialCollapsed: false,
             isPrimary: false,
             name: '',
+            percentTime: 0,
             position: '',
             key: expect.stringMatching(/^[a-f0-9]{8}$/)
           }
@@ -208,7 +210,7 @@ describe('APD reducer', () => {
           ...initialState,
           data: { keyPersonnel: [{ key: 'person', goes: 'here' }] }
         },
-        { type: 'REMOVE_APD_KEY_PERSON', index: 0 }
+        { type: 'REMOVE_APD_KEY_PERSON', key: 'person' }
       )
     ).toEqual({
       ...initialState,

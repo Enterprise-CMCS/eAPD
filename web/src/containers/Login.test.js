@@ -12,6 +12,7 @@ describe('login component', () => {
         authenticated
         error=""
         fetching
+        hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={() => {}}
       />
@@ -25,6 +26,7 @@ describe('login component', () => {
         authenticated
         error=""
         fetching
+        hasEverLoggedOn={false}
         location={{ state: { from: '/logout' } }}
         login={() => {}}
       />
@@ -34,7 +36,14 @@ describe('login component', () => {
 
   test('renders correctly if logged in, but no previous location', () => {
     const component = shallow(
-      <Login authenticated error="" fetching location={{}} login={() => {}} />
+      <Login
+        authenticated
+        error=""
+        fetching
+        hasEverLoggedOn={false}
+        location={{}}
+        login={() => {}}
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -45,6 +54,7 @@ describe('login component', () => {
         authenticated={false}
         error=""
         fetching={false}
+        hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={() => {}}
       />
@@ -52,12 +62,29 @@ describe('login component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('renders correctly if not logged in', () => {
+  test('renders correctly if logged in previously but not logged in now (shows logout notice)', () => {
     const component = shallow(
       <Login
         authenticated={false}
         error=""
         fetching={false}
+        hasEverLoggedOn
+        location={{ state: { from: 'origin' } }}
+        login={() => {}}
+      />
+    );
+
+    // should never be a consent banner, so no need to clicky through it
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly if not logged in, and never logged in', () => {
+    const component = shallow(
+      <Login
+        authenticated={false}
+        error=""
+        fetching={false}
+        hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={() => {}}
       />
@@ -83,6 +110,7 @@ describe('login component', () => {
         authenticated={false}
         error="something here"
         fetching={false}
+        hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={() => {}}
       />
@@ -99,6 +127,7 @@ describe('login component', () => {
         authenticated={false}
         error=""
         fetching
+        hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={() => {}}
       />
@@ -118,6 +147,7 @@ describe('login component', () => {
         authenticated={false}
         error=""
         fetching={false}
+        hasEverLoggedOn={false}
         location={{ state: { from: 'origin' } }}
         login={loginProp}
       />

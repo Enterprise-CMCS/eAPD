@@ -83,6 +83,12 @@ export const selectActivitySchedule = createSelector(
   }
 );
 
+export const selectActivityNonPersonnelCosts = (state, aKey) =>
+  selectActivityByKey(state, { aKey }).expenses;
+
+export const selectActivityStatePersonnel = (state, aKey) =>
+  selectActivityByKey(state, { aKey }).statePersonnel;
+
 export const selectActivitiesSidebar = createSelector(
   [selectActivityKeys, selectActivitiesByKey],
   (allKeys, byKey) =>
