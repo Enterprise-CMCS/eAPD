@@ -148,8 +148,7 @@ exports[`budget summary component header row renders 1`] = `
     id="summary-budget-fy-1"
     key="1"
   >
-    FFY 
-    1
+    FFY 1
   </th>
   <th
     className="ds-u-text-align--center"
@@ -166,6 +165,36 @@ exports[`budget summary component header row renders 1`] = `
   <th
     className="ds-u-text-align--center"
     id="summary-budget-fy-1-state"
+  >
+    State Total
+  </th>
+</tr>
+`;
+
+exports[`budget summary component header row renders 2`] = `
+<tr>
+  <th
+    className="ds-u-font-weight--bold"
+    id="summary-budget-fy-total"
+    key="total"
+  >
+    Total
+  </th>
+  <th
+    className="ds-u-text-align--center"
+    id="summary-budget-fy-total-total"
+  >
+    Medicaid Total
+  </th>
+  <th
+    className="ds-u-text-align--center"
+    id="summary-budget-fy-total-federal"
+  >
+    Federal Total
+  </th>
+  <th
+    className="ds-u-text-align--center"
+    id="summary-budget-fy-total-state"
   >
     State Total
   </th>
@@ -418,8 +447,7 @@ exports[`budget summary component renders correctly 1`] = `
         <th
           headers="summary-budget-null1"
         >
-          FFY 
-          1
+          FFY 1
         </th>
         <td
           className="font-family--mono right-align"
@@ -458,8 +486,7 @@ exports[`budget summary component renders correctly 1`] = `
         <th
           headers="summary-budget-null1"
         >
-          FFY 
-          2
+          FFY 2
         </th>
         <td
           className="font-family--mono right-align"
