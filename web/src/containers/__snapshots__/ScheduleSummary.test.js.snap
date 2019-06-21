@@ -24,7 +24,7 @@ exports[`schedule summary component renders correctly 1`] = `
               className="ds-u-font-weight--bold ds-u-border-right--0"
               style={
                 Object {
-                  "width": "90%",
+                  "width": "70%",
                 }
               }
             >
@@ -34,7 +34,7 @@ exports[`schedule summary component renders correctly 1`] = `
               Number One
             </th>
             <th
-              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0"
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
             >
               12/10/1988
                – 
@@ -79,7 +79,7 @@ exports[`schedule summary component renders correctly 1`] = `
               className="ds-u-font-weight--bold ds-u-border-right--0"
               style={
                 Object {
-                  "width": "90%",
+                  "width": "70%",
                 }
               }
             >
@@ -89,7 +89,7 @@ exports[`schedule summary component renders correctly 1`] = `
               Number 💩
             </th>
             <th
-              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0"
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
             >
               02/18/1853
                – 
@@ -146,7 +146,7 @@ exports[`schedule summary component renders correctly 1`] = `
               className="ds-u-font-weight--bold ds-u-border-right--0"
               style={
                 Object {
-                  "width": "90%",
+                  "width": "70%",
                 }
               }
             >
@@ -156,7 +156,7 @@ exports[`schedule summary component renders correctly 1`] = `
               Number Three
             </th>
             <th
-              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0"
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
             >
               11/22/1987
                – 
