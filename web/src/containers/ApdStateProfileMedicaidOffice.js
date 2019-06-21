@@ -15,6 +15,7 @@ class ApdStateProfile extends Component {
 
   render() {
     const {
+      defaultStateID,
       stateProfile: { medicaidDirector, medicaidOffice }
     } = this.props;
     const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
@@ -74,7 +75,7 @@ class ApdStateProfile extends Component {
               <Select
                 name="apd-state-profile-state"
                 label={t(`${offTRoot}.labels.state`)}
-                value={medicaidOffice.state}
+                value={medicaidOffice.state || defaultStateID}
                 onChange={this.handleChange('medicaidOffice', 'state')}
               >
                 {STATES.map(({ id, name }) => (
@@ -99,6 +100,7 @@ class ApdStateProfile extends Component {
 }
 
 ApdStateProfile.propTypes = {
+  defaultStateID: PropTypes.string.isRequired,
   stateProfile: PropTypes.object.isRequired,
   updateApd: PropTypes.func.isRequired
 };
@@ -106,8 +108,14 @@ ApdStateProfile.propTypes = {
 const mapStateToProps = ({
   apd: {
     data: { stateProfile }
+  },
+  user: {
+    data: {
+      state: { id }
+    }
   }
 }) => ({
+  defaultStateID: id.toUpperCase(),
   stateProfile
 });
 const mapDispatchToProps = { updateApd: updateApdAction };
