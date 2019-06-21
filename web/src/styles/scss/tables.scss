@@ -31,3 +31,7 @@
     width: 175px; // so totals tables have the same col width as other tables
   }
 }
+
+.budget-table--cell__nowrap {
+  white-space: nowrap;
+}
