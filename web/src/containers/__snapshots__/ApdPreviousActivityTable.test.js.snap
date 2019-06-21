@@ -13,7 +13,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
     <tr>
       <th
         id="prev_act_hit_header_ffy"
-        rowSpan="2"
       >
         <span
           className="ds-u-visibility--screen-reader"
@@ -45,6 +44,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </th>
     </tr>
     <tr>
+      <th
+        aria-hidden="true"
+      />
       <th
         className="ds-u-text-align--right"
         id="prev_act_hithie_total_approved"
