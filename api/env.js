@@ -2,14 +2,20 @@ const crypto = require('crypto');
 const dotenv = require('dotenv');
 
 const defaults = {
-  PORT: 8000,
-  SESSION_SECRET: crypto.randomBytes(64).toString('hex'),
-  SESSION_LIFETIME_MINUTES: 2880,
-  NODE_ENV: 'development',
+  // Default to locking accounts for 30 minutes if there are five
+  // failed logon attempts within a 1-minute period.
+  AUTH_LOCK_FAILED_ATTEMPTS_COUNT: 5,
+  AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES: 1,
+  AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES: 30,
+
   LOG_LEVEL: 'info',
   LOG_FILE: 'false',
   LOG_CONSOLE: 'true',
+  NODE_ENV: 'development',
+  PORT: 8000,
   PROXY_TRUST: 'false',
+  SESSION_LIFETIME_MINUTES: 2880,
+  SESSION_SECRET: crypto.randomBytes(64).toString('hex'),
   STORE_PATH: '',
   STORE_TYPE: 'null' // default to using the /dev/null store
 };
