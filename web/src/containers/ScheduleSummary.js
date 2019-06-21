@@ -26,11 +26,11 @@ const ScheduleSummary = ({ activities }) => (
                   <tr>
                     <th
                       className="ds-u-font-weight--bold ds-u-border-right--0"
-                      style={{ width: '90%' }}
+                      style={{ width: '70%' }}
                     >
                       Activity {i + 1}: {activityName}
                     </th>
-                    <th className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0">
+                    <th className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
                       {start} – {end}
                     </th>
                   </tr>
