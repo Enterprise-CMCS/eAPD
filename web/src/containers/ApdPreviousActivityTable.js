@@ -29,7 +29,7 @@ const ApdPreviousActivityTable = ({
       </caption>
       <thead>
         <tr>
-          <th id="prev_act_hit_header_ffy" rowSpan="2">
+          <th id="prev_act_hit_header_ffy">
             <span className="ds-u-visibility--screen-reader">
               Year
             </span>
@@ -45,6 +45,7 @@ const ApdPreviousActivityTable = ({
           </th>
         </tr>
         <tr>
+          <th aria-hidden="true" />
           <th
             id="prev_act_hithie_total_approved"
             className="ds-u-text-align--right"

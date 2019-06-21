@@ -29,7 +29,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       <tr>
         <th
           id="prev_act_mmis_ffy"
-          rowSpan="2"
         >
           <span
             className="ds-u-visibility--screen-reader"
@@ -61,6 +60,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </th>
       </tr>
       <tr>
+        <th
+          aria-hidden="true"
+        />
         <th
           className="ds-u-text-align--right"
           id="prev_act_mmis90_total_approved"
@@ -199,7 +201,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       <tr>
         <th
           id="prev_act_mmis_ffy"
-          rowSpan="2"
         >
           <span
             className="ds-u-visibility--screen-reader"
@@ -231,6 +232,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </th>
       </tr>
       <tr>
+        <th
+          aria-hidden="true"
+        />
         <th
           className="ds-u-text-align--right"
           id="prev_act_mmis75_total_approved"
@@ -369,7 +373,6 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       <tr>
         <th
           id="prev_act_mmis_ffy"
-          rowSpan="2"
         >
           <span
             className="ds-u-visibility--screen-reader"
@@ -401,6 +404,9 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
         </th>
       </tr>
       <tr>
+        <th
+          aria-hidden="true"
+        />
         <th
           className="ds-u-text-align--right"
           id="prev_act_mmis50_total_approved"
