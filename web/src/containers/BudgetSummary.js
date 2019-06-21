@@ -73,7 +73,7 @@ const HeaderRow = ({ yr }) => {
         className="ds-u-font-weight--bold"
         id={`summary-budget-fy-${yr}`}
       >
-        FFY {yr}
+        {yr === 'total' ? 'Total' : `FFY ${yr}`}
       </th>
       <th
         className="ds-u-text-align--center"
@@ -169,7 +169,9 @@ const BudgetSummary = ({ activities, data, years }) => (
           const combined = data.combined[ffy];
           return (
             <tr key={ffy}>
-              <th headers="summary-budget-null1">FFY {ffy}</th>
+              <th headers="summary-budget-null1">
+                {ffy === 'total' ? 'Total' : `FFY ${ffy}`}
+              </th>
               <td
                 className="font-family--mono right-align"
                 headers="summary-budget-total-medicaid"
