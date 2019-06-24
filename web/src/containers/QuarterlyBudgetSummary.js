@@ -66,6 +66,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                 {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
                   <tr
                     key={name}
+                    className={name === "combined" && "budget-table--row__highlight"}
                   >
                     <th scope="row">
                       {EXPENSE_NAME_DISPLAY[name]}
@@ -101,7 +102,9 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
               </thead>
               <tbody>
               {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
-                <tr>
+                <tr
+                  className={name === "combined" && "budget-table--row__highlight"}
+                >
                   <th scope="row">
                     {EXPENSE_NAME_DISPLAY[name]}
                   </th>

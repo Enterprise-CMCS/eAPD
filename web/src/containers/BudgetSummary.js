@@ -176,7 +176,10 @@ const BudgetSummary = ({ activities, data, years }) => (
         {Object.keys(data.combined).map(ffy => {
           const combined = data.combined[ffy];
           return (
-            <tr key={ffy}>
+            <tr
+              key={ffy}
+              className={ffy === "total" && "budget-table--row__highlight"}
+            >
               <th scope="row">FFY {ffy}</th>
               <td className="budget-table--number">
                 <Dollars>{combined.medicaid}</Dollars>

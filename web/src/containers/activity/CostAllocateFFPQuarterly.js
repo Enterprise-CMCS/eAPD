@@ -131,7 +131,7 @@ class CostAllocateFFPQuarterly extends Component {
                 </tr>
               </Fragment>
             ))}
-            <tr>
+            <tr className="budget-table--row__highlight">
               <th
                 scope="row"
                 className="budget-table--total"
