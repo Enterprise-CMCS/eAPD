@@ -476,6 +476,7 @@ exports[`budget summary component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
+        className={false}
         key="1"
       >
         <th
@@ -513,6 +514,7 @@ exports[`budget summary component renders correctly 1`] = `
         </td>
       </tr>
       <tr
+        className={false}
         key="2"
       >
         <th
