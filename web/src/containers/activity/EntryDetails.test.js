@@ -1,16 +1,7 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
-import {
-  plain as EntryDetails,
-  mapStateToProps,
-  mapDispatchToProps
-} from './EntryDetails';
-import {
-  removeActivity,
-  toggleActivitySection
-} from '../../actions/activities';
+import { plain as EntryDetails, mapStateToProps } from './EntryDetails';
 
 describe('the (Activity) EntryDetails component', () => {
   const props = {
@@ -18,35 +9,17 @@ describe('the (Activity) EntryDetails component', () => {
       name: 'activity name'
     },
     aKey: 'activity-key',
-    expanded: false,
-    num: 3,
-    removeActivity: sinon.stub(),
-    toggleSection: sinon.stub()
+    num: 3
   };
-
-  beforeEach(() => {
-    props.toggleSection.resetHistory();
-  });
 
   test('renders correctly', () => {
     const component = shallow(<EntryDetails {...props} />);
     expect(component).toMatchSnapshot();
   });
 
-  test('toggles its collapse state', () => {
-    const component = shallow(<EntryDetails {...props} />);
-    component
-      .dive()
-      .find('button')
-      .simulate('click');
-
-    expect(props.toggleSection.calledOnce).toBeTruthy();
-  });
-
   test('maps redux state to component props', () => {
     const activity = {
       fundingSource: 'FUNDING!',
-      meta: { expanded: 'bloop' },
       name: 'activity name'
     };
 
@@ -62,15 +35,7 @@ describe('the (Activity) EntryDetails component', () => {
         { aKey: 'key', num: 3 }
       )
     ).toEqual({
-      activity,
-      expanded: 'bloop'
-    });
-  });
-
-  test('maps dispatch actions to props', () => {
-    expect(mapDispatchToProps).toEqual({
-      removeActivity,
-      toggleSection: toggleActivitySection
+      activity
     });
   });
 });
