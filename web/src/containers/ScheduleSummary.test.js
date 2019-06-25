@@ -10,42 +10,48 @@ describe('schedule summary component', () => {
       milestones: [
         // Mariah Carey and Boz II Men's "One Sweet Day" sits at #1 on the
         // Billboard Hot 100 for a record 16 consecutive weeks.
-        { end: '1996/03/16', name: 'one-one', start: '1995/12/02' },
+        { end: '03/16/1996', name: 'one-one' },
         // The Beatles begin their record-holding streak of #1 hits on
         // Billboard with "Love Me Do" and wrap things up with "The Long and
         // Winding Road"
-        { end: '1970/05/23', name: 'one-two', start: '1962/10/05' }
+        { end: '05/23/1970', name: 'one-two' }
       ],
+      // The first modern Olympics come to a close in Athens, Greece.
+      end: '4/15/1896',
       // For the first time, Captain Picard gives Commander Riker his most
       // famous order:  "Make it so, Number One."
-      start: '1988/12/10'
+      start: '12/10/1988'
     },
     {
       name: 'Number 💩',
       milestones: [
         // The Squatty Potty commercial hits YouTube and instantly goes viral.
-        { end: '2016/10/06', name: 'three-one', start: '2016/10/06' },
+        { end: '10/06/2016', name: 'three-one' },
         // National Geographic publishes a story about a 50,000-year old poop
         // discovered in Spain.
-        { end: '2014/06/25', name: 'two-two', start: '2014/06/25' },
+        { end: '06/25/2014', name: 'two-two' },
         // The Gemini V mission marks the first time humans pooped in space.
         // During the 8-day mission, Gordon Cooper and Pete Conrad pooped a
         // total of 4 times.
-        { end: '1965/08/21', name: 'two-three', start: '1965/08/29' }
+        { end: '08/21/1965', name: 'two-three' }
       ],
+      // Al Roker trusted a fart in the White House press room. He soon
+      // realized his mistake.
+      end: '07/14/2002',
       // First flush toilet installed in the White House during the Millard
       // Filmore administration, possibly its only noteworthy contribution.
-      start: '1853/02/18'
+      start: '02/18/1853'
     },
     {
       name: 'Number Three',
       // The horse Justify wins the Triple Crown, 99 years after it was first
       // won by the horse Sir Barton.
-      milestones: [
-        { end: '2018/06/09', name: 'three-one', start: '2018/05/05' }
-      ],
+      milestones: [{ end: '06/09/2018', name: 'three-one' }],
+      // Researchers conclude that bronze medalists are happier than silver
+      // medalists.
+      end: '10/15/2009',
       // Dale Earnhardt wins his 3rd NASCAR championship driving car #3.
-      start: '1987/11/22'
+      start: '11/22/1987'
     }
   ];
 
@@ -65,6 +71,8 @@ describe('schedule summary component', () => {
         byKey: {
           key1: {
             name: 'activity 1',
+            // Chuck Yeager became the first person to break the sound barrier.
+            plannedEndDate: '1947-10-14',
             // The Centennial Light, a 60-watt lightbulb was installed at a
             // firehouse in Livermore, California, where it's still lit.
             plannedStartDate: '1901-01-01',
@@ -82,6 +90,9 @@ describe('schedule summary component', () => {
           },
           key2: {
             name: 'activity 2',
+            // Franklin Pierce becomes President, and kicks off a truly bizarre
+            // episode in American military history.
+            plannedEndDate: '1853-03-04',
             // The United States Camel Corps is created. Seriously, look it up.
             plannedStartDate: '1855-03-03',
             schedule: [
@@ -104,21 +115,23 @@ describe('schedule summary component', () => {
     expect(props).toMatchObject({
       activities: [
         {
+          end: '10/14/1947',
           name: 'activity 1',
           milestones: [
-            { end: '1872/11/28', name: '1-three' },
-            { end: '1991/10/01', name: '1-two' },
-            { end: '2006/01/31', name: '1-one' }
+            { end: '01/31/2006', name: '1-one' },
+            { end: '10/01/1991', name: '1-two' },
+            { end: '11/28/1872', name: '1-three' }
           ],
-          start: '1901/01/01'
+          start: '01/01/1901'
         },
         {
+          end: '03/04/1853',
           name: 'activity 2',
           milestones: [
-            { end: '1864/06/06', name: '2-one' },
-            { end: '1873/08/08', name: '2-two' }
+            { end: '06/06/1864', name: '2-one' },
+            { end: '08/08/1873', name: '2-two' }
           ],
-          start: '1855/03/03'
+          start: '03/03/1855'
         }
       ]
     });

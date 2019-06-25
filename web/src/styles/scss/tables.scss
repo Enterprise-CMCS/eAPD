@@ -22,12 +22,14 @@
     font-weight: $font-semibold;
   }
 
-  th, tr {
+  th,
+  tr {
     &.budget-table--total,
     &.budget-table--subtotal,
     &.budget-table--sum {
       font-weight: $font-bold;
-      th, td {
+      th,
+      td {
         font-weight: $font-bold;
       }
     }
@@ -59,9 +61,10 @@
       &:first-child {
         border-top: none;
       }
-      th, td {
+      th,
+      td {
         vertical-align: middle; /* Ace.css override */
-        
+
         /* used for highlights in a column */
         &.budget-table--col__highlight {
           background-color: $color-warn-lightest;
@@ -70,11 +73,16 @@
     }
     /* used on a tr to highlight a whole row */
     .budget-table--row__highlight {
-      td, th {
+      td,
+      th {
         background-color: $color-warn-lightest;
       }
     }
   }
+}
+
+.budget-table--cell__nowrap {
+  white-space: nowrap;
 }
 
 /* override our default rule that causes tables to be 100% of parent container */
