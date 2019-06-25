@@ -18,13 +18,28 @@ exports[`the Activities component renders correctly 1`] = `
       open={true}
       resource="activities.list"
     >
+      <NameAndFundingSourceReview
+        disableExpand={true}
+        expand={[Function]}
+        index={-1}
+        item="activity 1"
+        onDeleteClick={null}
+      />
       <FormAndReviewList
         addButtonText="Add another activity"
+        allowDeleteAll={true}
         collapsed={[Function]}
         expanded={[Function]}
-        noDataMessage="There are no activities. Add one below."
-        onAddClick={null}
-        onDeleteClick={null}
+        handleChange={[MockFunction]}
+        list={
+          Array [
+            "activity 2",
+            "activity 3",
+          ]
+        }
+        noDataMessage={false}
+        onAddClick={[MockFunction]}
+        onDeleteClick={[MockFunction]}
       />
     </Subsection>
     <Connect(ConnectedWaypoint)

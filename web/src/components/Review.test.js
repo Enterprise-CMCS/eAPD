@@ -28,6 +28,17 @@ describe('Review wrapper component', () => {
     ).toMatchSnapshot();
   });
 
+  it('renders properly if an edit handler is supplied', () => {
+    const handler = jest.fn();
+    const component = shallow(<Review onEditClick={handler}>Hello</Review>);
+
+    expect(component).toMatchSnapshot();
+  });
+
+  it('renders properly if the edit link and edit handler are both omitted', () => {
+    expect(shallow(<Review>Hello</Review>)).toMatchSnapshot();
+  });
+
   it('clicks the link if an edit link is set, when the button is clicked', () => {
     const component = mount(<Review editHref="something">Hello</Review>);
 

@@ -115,6 +115,7 @@ const newActivity = ({
   expenses: [newExpense(years)],
   fundingSource,
   goals: [newGoal()],
+  initialCollapsed: false,
   key: generateKey(),
   name,
   plannedEndDate: '',

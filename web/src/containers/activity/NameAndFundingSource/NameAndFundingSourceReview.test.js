@@ -14,7 +14,7 @@ describe('the NameAndFundingSourceReview component', () => {
     onDeleteClick: jest.fn()
   };
 
-  it('renders correctly', () => {
+  it('renders correctly when expanding is enabled', () => {
     const component = shallow(<NamdAndFundingSourceReview {...props} />);
     expect(component).toMatchSnapshot();
 
@@ -23,6 +23,18 @@ describe('the NameAndFundingSourceReview component', () => {
     );
     expect(component.find('StandardReview').prop('onDeleteClick')).toEqual(
       props.onDeleteClick
+    );
+  });
+
+  it('renders correctly when expanding is disabled', () => {
+    const component = shallow(
+      <NamdAndFundingSourceReview {...props} disableExpand />
+    );
+    expect(component).toMatchSnapshot();
+
+    expect(component.find('StandardReview').prop('onEditClick')).toEqual(null);
+    expect(component.find('StandardReview').prop('onDeleteClick')).toEqual(
+      null
     );
   });
 });

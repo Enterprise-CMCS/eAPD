@@ -35,7 +35,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
       editHref={null}
       heading="13. Bob the Builder"
       onDeleteClick={null}
-      onEditClick={[Function]}
+      onEditClick={null}
     >
       <ul
         className="ds-c-list--bare"

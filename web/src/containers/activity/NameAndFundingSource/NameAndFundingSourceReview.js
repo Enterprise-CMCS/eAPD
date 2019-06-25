@@ -4,6 +4,7 @@ import React from 'react';
 import Review from '../../../components/Review';
 
 const NameAndFundingSourceReview = ({
+  disableExpand,
   item: { fundingSource, name },
   expand,
   index,
@@ -11,10 +12,10 @@ const NameAndFundingSourceReview = ({
 }) => {
   return (
     <Review
-      heading={`${index + 1}. ${name}`}
+      heading={`${index + 2}. ${name}`}
       headingLevel={3}
-      onDeleteClick={onDeleteClick}
-      onEditClick={expand}
+      onDeleteClick={disableExpand ? null : onDeleteClick}
+      onEditClick={disableExpand ? null : expand}
     >
       Program type: {fundingSource}
     </Review>
@@ -22,16 +23,19 @@ const NameAndFundingSourceReview = ({
 };
 
 NameAndFundingSourceReview.propTypes = {
+  disableExpand: PropTypes.bool,
   item: PropTypes.shape({
     fundingSource: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired,
-  expand: PropTypes.func.isRequired,
+  expand: PropTypes.func,
   index: PropTypes.number.isRequired,
   onDeleteClick: PropTypes.func
 };
 
 NameAndFundingSourceReview.defaultProps = {
+  disableExpand: false,
+  expand: () => {},
   onDeleteClick: null
 };
 
