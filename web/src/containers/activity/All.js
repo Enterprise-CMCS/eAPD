@@ -15,7 +15,6 @@ import {
   updateActivity
 } from '../../actions/activities';
 import { Section, Subsection } from '../../components/Section';
-import { t } from '../../i18n';
 import {
   selectActivityKeys,
   selectAllActivities
