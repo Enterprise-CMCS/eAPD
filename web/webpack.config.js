@@ -90,7 +90,8 @@ const config = {
   // environment at build time
   plugins: [
     new webpack.EnvironmentPlugin({
-      API_URL: null
+      API_URL: null,
+      IDLE_LOGOUT_TIME_MINUTES: 15
     }),
 
     // uses module hashs as IDs instead of numeric indices, so adding a new

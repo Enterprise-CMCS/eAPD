@@ -70,7 +70,7 @@ const HeaderRow = ({ yr }) => {
         key={yr}
         id={`summary-budget-fy-${yr}`}
       >
-        FFY {yr}
+        {yr === 'total' ? 'Total' : `FFY ${yr}`}
       </th>
       <th
         className="ds-u-text-align--right"
@@ -180,7 +180,9 @@ const BudgetSummary = ({ activities, data, years }) => (
               key={ffy}
               className={ffy === "total" && "budget-table--row__highlight budget-table--total"}
             >
-              <th scope="row">FFY {ffy}</th>
+              <th scope="row">
+                {ffy === 'total' ? 'Total' : `FFY ${ffy}`}
+              </th>
               <td className="budget-table--number">
                 <Dollars>{combined.medicaid}</Dollars>
               </td>
