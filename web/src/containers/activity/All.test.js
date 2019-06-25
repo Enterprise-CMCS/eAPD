@@ -15,15 +15,20 @@ describe('the Activities component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('adds a new activity', () => {
-    const component = shallow(<Activities {...props} />);
-    component.find('Btn').simulate('click');
-    expect(props.addActivity.callCount).toBe(1);
-  });
-
   test('maps redux state to component props', () => {
     expect(
-      mapStateToProps({ activities: { allKeys: ['1', 'two', '3'] } })
-    ).toEqual({ activityKeys: ['1', 'two', '3'] });
+      mapStateToProps({
+        activities: {
+          allKeys: ['1', 'two', '3'],
+          byKey: {
+            key1: 'activity 1',
+            key2: 'activity 2'
+          }
+        }
+      })
+    ).toEqual({
+      activityKeys: ['1', 'two', '3'],
+      activities: ['activity 1', 'activity 2']
+    });
   });
 });

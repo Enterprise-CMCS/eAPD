@@ -18,33 +18,14 @@ exports[`the Activities component renders correctly 1`] = `
       open={true}
       resource="activities.list"
     >
-      <div
-        className="mb3"
-      >
-        <Connect(EntryBasic)
-          aKey="1"
-          key="1"
-          num={1}
-        />
-        <Connect(EntryBasic)
-          aKey="2"
-          key="2"
-          num={2}
-        />
-        <Connect(EntryBasic)
-          aKey="3"
-          key="3"
-          num={3}
-        />
-      </div>
-      <Btn
-        extraCss="visibility--screen"
-        kind="primary"
-        onClick={[Function]}
-        size={null}
-      >
-        Add activity
-      </Btn>
+      <FormAndReviewList
+        addButtonText="Add another activity"
+        collapsed={[Function]}
+        expanded={[Function]}
+        noDataMessage="There are no activities. Add one below."
+        onAddClick={null}
+        onDeleteClick={null}
+      />
     </Subsection>
     <Connect(ConnectedWaypoint)
       id="1"
