@@ -52,3 +52,5 @@ const auth = (state = initialState, action) => {
 };
 
 export default auth;
+
+export const selectIsLoggedIn = state => state.auth.authenticated;

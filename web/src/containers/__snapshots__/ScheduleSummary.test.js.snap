@@ -15,145 +15,190 @@ exports[`schedule summary component renders correctly 1`] = `
       resource="scheduleSummary.main"
     >
       <table
-        className="table-cms ds-u-margin-top--0"
+        className="budget-table"
         key="Number One"
       >
+        <caption
+          className="ds-u-visibility--screen-reader"
+        >
+          Activity 
+          1
+          : 
+          Number One
+        </caption>
         <thead>
           <tr>
             <th
-              className="ds-u-font-weight--bold"
-              colSpan="2"
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "70%",
+                }
+              }
             >
               Activity 
               1
               : 
               Number One
             </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
+            >
+              12/10/1988
+               – 
+              4/15/1896
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
+              className="ds-u-border-right--0"
             >
               one-one
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-border-left--0 ds-u-text-align--left"
             >
-              1995/12/02
-               - 
-              1996/03/16
+              03/16/1996
             </td>
           </tr>
           <tr>
             <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
+              className="ds-u-border-right--0"
             >
               one-two
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-border-left--0 ds-u-text-align--left"
             >
-              1962/10/05
-               - 
-              1970/05/23
+              05/23/1970
             </td>
           </tr>
         </tbody>
       </table>
       <table
-        className="table-cms ds-u-margin-top--0"
+        className="budget-table"
         key="Number 💩"
       >
+        <caption
+          className="ds-u-visibility--screen-reader"
+        >
+          Activity 
+          2
+          : 
+          Number 💩
+        </caption>
         <thead>
           <tr>
             <th
-              className="ds-u-font-weight--bold"
-              colSpan="2"
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "70%",
+                }
+              }
             >
               Activity 
               2
               : 
               Number 💩
             </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
-            >
-              three-one
-            </td>
-            <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
-            >
-              2016/10/06
-               - 
-              2016/10/06
-            </td>
-          </tr>
-          <tr>
-            <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
-            >
-              two-two
-            </td>
-            <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
-            >
-              2014/06/25
-               - 
-              2014/06/25
-            </td>
-          </tr>
-          <tr>
-            <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
-            >
-              two-three
-            </td>
-            <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
-            >
-              1965/08/29
-               - 
-              1965/08/21
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        className="table-cms ds-u-margin-top--0"
-        key="Number Three"
-      >
-        <thead>
-          <tr>
             <th
-              className="ds-u-font-weight--bold"
-              colSpan="2"
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
             >
-              Activity 
-              3
-              : 
-              Number Three
+              02/18/1853
+               – 
+              07/14/2002
             </th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
+              className="ds-u-border-right--0"
             >
               three-one
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-border-left--0 ds-u-text-align--left"
             >
-              2018/05/05
-               - 
-              2018/06/09
+              10/06/2016
+            </td>
+          </tr>
+          <tr>
+            <td
+              className="ds-u-border-right--0"
+            >
+              two-two
+            </td>
+            <td
+              className="ds-u-border-left--0 ds-u-text-align--left"
+            >
+              06/25/2014
+            </td>
+          </tr>
+          <tr>
+            <td
+              className="ds-u-border-right--0"
+            >
+              two-three
+            </td>
+            <td
+              className="ds-u-border-left--0 ds-u-text-align--left"
+            >
+              08/21/1965
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table
+        className="budget-table"
+        key="Number Three"
+      >
+        <caption
+          className="ds-u-visibility--screen-reader"
+        >
+          Activity 
+          3
+          : 
+          Number Three
+        </caption>
+        <thead>
+          <tr>
+            <th
+              className="ds-u-font-weight--bold ds-u-border-right--0"
+              style={
+                Object {
+                  "width": "70%",
+                }
+              }
+            >
+              Activity 
+              3
+              : 
+              Number Three
+            </th>
+            <th
+              className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
+            >
+              11/22/1987
+               – 
+              10/15/2009
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td
+              className="ds-u-border-right--0"
+            >
+              three-one
+            </td>
+            <td
+              className="ds-u-border-left--0 ds-u-text-align--left"
+            >
+              06/09/2018
             </td>
           </tr>
         </tbody>
@@ -178,7 +223,7 @@ exports[`schedule summary component renders correctly with no data 1`] = `
       resource="scheduleSummary.main"
     >
       <div
-        className="p1 h6 alert"
+        className="ds-c-alert ds-c-alert--warn"
       >
         There are no milestones scheduled.
       </div>

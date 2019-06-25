@@ -20,9 +20,9 @@ Object {
     "view-document",
   ],
   "id": 2000,
-  "name": null,
+  "name": "Wonder Woman",
   "phone": null,
-  "position": null,
+  "position": "User that can do anything at all",
   "role": "admin",
   "state": Object {
     "id": "mn",

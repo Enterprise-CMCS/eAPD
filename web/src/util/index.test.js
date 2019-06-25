@@ -48,6 +48,7 @@ describe('utility functions', () => {
     generateKey,
     getParams,
     replaceNulls,
+    stateDateToDisplay,
     stateLookup
   } = load();
 
@@ -100,6 +101,12 @@ describe('utility functions', () => {
       expect(key).toEqual(expect.stringMatching(/^[a-f0-9]{8}$/));
       expect(key).toEqual(expect.stringMatching(/[a-f]/));
     }
+  });
+
+  test('converts a state-formatted date string into a display string', () => {
+    expect(stateDateToDisplay('2014-04-03')).toEqual('04/03/2014');
+    expect(stateDateToDisplay(null)).toEqual('N/A');
+    expect(stateDateToDisplay()).toEqual('N/A');
   });
 
   test('converts an array into an object with array values as object keys', () => {
