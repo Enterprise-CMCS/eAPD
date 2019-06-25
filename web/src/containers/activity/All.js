@@ -26,12 +26,18 @@ const All = ({ activityKeys, activities, add, update, remove }) => (
     <Section isNumbered id="activities" resource="activities">
       <Waypoint id="activities-list" />
       <Subsection id="activities-list" resource="activities.list" open>
+        <NameAndFundingSourceReview
+          item={activities[0]}
+          index={-1}
+          disableExpand
+        />
         <FormAndReviewList
           addButtonText="Add another activity"
-          list={activities}
+          allowDeleteAll
+          list={activities.slice(1)}
           collapsed={NameAndFundingSourceReview}
           expanded={NameAndFundingSourceForm}
-          noDataMessage={t('activities.noActivityMessage')}
+          noDataMessage={false}
           onAddClick={add}
           handleChange={update}
           onDeleteClick={remove}
