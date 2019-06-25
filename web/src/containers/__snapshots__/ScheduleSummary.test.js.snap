@@ -15,13 +15,20 @@ exports[`schedule summary component renders correctly 1`] = `
       resource="scheduleSummary.main"
     >
       <table
-        className="table-cms ds-u-margin-top--0"
+        className="budget-table"
         key="Number One"
       >
+        <caption
+          className="ds-u-visibility--screen-reader"
+        >
+          Activity 
+          1
+          : 
+          Number One
+        </caption>
         <thead>
           <tr>
             <th
-              className="ds-u-font-weight--bold"
               colSpan="2"
             >
               Activity 
@@ -34,12 +41,12 @@ exports[`schedule summary component renders correctly 1`] = `
         <tbody>
           <tr>
             <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
+              className="ds-u-border-right--0"
             >
               one-one
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               1995/12/02
                - 
@@ -48,12 +55,12 @@ exports[`schedule summary component renders correctly 1`] = `
           </tr>
           <tr>
             <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
+              className="ds-u-border-right--0"
             >
               one-two
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               1962/10/05
                - 
@@ -63,13 +70,20 @@ exports[`schedule summary component renders correctly 1`] = `
         </tbody>
       </table>
       <table
-        className="table-cms ds-u-margin-top--0"
+        className="budget-table"
         key="Number 💩"
       >
+        <caption
+          className="ds-u-visibility--screen-reader"
+        >
+          Activity 
+          2
+          : 
+          Number 💩
+        </caption>
         <thead>
           <tr>
             <th
-              className="ds-u-font-weight--bold"
               colSpan="2"
             >
               Activity 
@@ -82,12 +96,12 @@ exports[`schedule summary component renders correctly 1`] = `
         <tbody>
           <tr>
             <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
+              className="ds-u-border-right--0"
             >
               three-one
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               2016/10/06
                - 
@@ -96,12 +110,12 @@ exports[`schedule summary component renders correctly 1`] = `
           </tr>
           <tr>
             <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
+              className="ds-u-border-right--0"
             >
               two-two
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               2014/06/25
                - 
@@ -110,12 +124,12 @@ exports[`schedule summary component renders correctly 1`] = `
           </tr>
           <tr>
             <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
+              className="ds-u-border-right--0"
             >
               two-three
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               1965/08/29
                - 
@@ -125,13 +139,20 @@ exports[`schedule summary component renders correctly 1`] = `
         </tbody>
       </table>
       <table
-        className="table-cms ds-u-margin-top--0"
+        className="budget-table"
         key="Number Three"
       >
+        <caption
+          className="ds-u-visibility--screen-reader"
+        >
+          Activity 
+          3
+          : 
+          Number Three
+        </caption>
         <thead>
           <tr>
             <th
-              className="ds-u-font-weight--bold"
               colSpan="2"
             >
               Activity 
@@ -144,12 +165,12 @@ exports[`schedule summary component renders correctly 1`] = `
         <tbody>
           <tr>
             <td
-              className="ds-u-padding-left--3 ds-u-border-right--0"
+              className="ds-u-border-right--0"
             >
               three-one
             </td>
             <td
-              className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right"
+              className="ds-u-border-left--0 ds-u-text-align--right"
             >
               2018/05/05
                - 
@@ -178,7 +199,7 @@ exports[`schedule summary component renders correctly with no data 1`] = `
       resource="scheduleSummary.main"
     >
       <div
-        className="p1 h6 alert"
+        className="ds-c-alert ds-c-alert--warn"
       >
         There are no milestones scheduled.
       </div>

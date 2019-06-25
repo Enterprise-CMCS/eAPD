@@ -1,33 +1,87 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
-.table-cms {
+.budget-table {
   font-size: 12px;
-  &.table-cms__totals {
-    width: 42%; // roughly equal to full tables' cells; temp fix before switching font to courier
+  &.budget-table--totals {
+    width: 50%;
   }
-  &.centered-headers th {
-    text-align: center;
-  }
-  th {
-    background-color: #DAE9F7;
-    font-weight: normal;
-  }
-  td {
-    background-color: #F3F8FC;
-  }
-  th,
-  td {
-    border-left: 4px solid $color-white;
-    border-top: 4px solid $color-white;
-    &:first-child {
-      border-left: none;
-    }
-
-  }
-  + .table-cms:not(.table-frozen-data){
+  + .budget-table {
     margin-top: $spacer-2;
   }
-  .table-cms--col-header__fixed-width {
-    width: 175px; // so totals tables have the same col width as other tables
+
+  caption {
+    text-align: left;
+    /* override for design system where first-child has a top margin of 0 */
+    &.ds-h3,
+    &.ds-h4 {
+      margin-top: $spacer-4 !important;
+    }
   }
+
+  th {
+    font-weight: $font-semibold;
+  }
+
+  th, tr {
+    &.budget-table--total,
+    &.budget-table--subtotal,
+    &.budget-table--sum {
+      font-weight: $font-bold;
+      th, td {
+        font-weight: $font-bold;
+      }
+    }
+  }
+
+  thead {
+    tr + tr {
+      border-top: 1px solid $color-gray-light;
+    }
+    th {
+      background-color: $color-gray-lighter;
+      white-space: pre-line;
+      /* used for highlights in a column */
+      &.budget-table--col__highlight {
+        background-color: $color-warn-lightest;
+      }
+    }
+    border-top: 1px solid $color-gray-light;
+    border-bottom: 1px solid $color-gray-light;
+  }
+
+  tbody {
+    th {
+      border-right: solid 2px $color-gray-lighter;
+    }
+    tr {
+      border-top: 1px dotted $color-gray-lighter;
+      border-bottom: 1px dotted $color-gray-lighter;
+      &:first-child {
+        border-top: none;
+      }
+      th, td {
+        vertical-align: middle; /* Ace.css override */
+        
+        /* used for highlights in a column */
+        &.budget-table--col__highlight {
+          background-color: $color-warn-lightest;
+        }
+      }
+    }
+    /* used on a tr to highlight a whole row */
+    .budget-table--row__highlight {
+      td, th {
+        background-color: $color-warn-lightest;
+      }
+    }
+  }
+}
+
+/* override our default rule that causes tables to be 100% of parent container */
+.table-fit-contents {
+  width: auto;
+}
+/* use on tables in sections where some tables are small, but some aren't so we can standardize width */
+.budget-table--col-header__fixed-width {
+  width: 175px;
 }

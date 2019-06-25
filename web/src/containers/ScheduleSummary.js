@@ -12,15 +12,18 @@ const ScheduleSummary = ({ activities }) => (
     <Section isNumbered id="schedule-summary" resource="scheduleSummary">
       <Subsection id="schedule-summary-table" resource="scheduleSummary.main">
         {activities.length === 0 ? (
-          <div className="p1 h6 alert">
+          <div className="ds-c-alert ds-c-alert--warn">
             {t('scheduleSummary.noDataMessage')}
           </div>
         ) : (
           activities.map(({ name: activityName, milestones }, i) => (
-            <table key={activityName} className="table-cms ds-u-margin-top--0">
+            <table key={activityName} className="budget-table">
+              <caption className="ds-u-visibility--screen-reader">
+                Activity {i + 1}: {activityName}
+              </caption>
               <thead>
                 <tr>
-                  <th colSpan="2" className="ds-u-font-weight--bold">
+                  <th colSpan="2">
                     Activity {i + 1}: {activityName}
                   </th>
                 </tr>
@@ -28,10 +31,10 @@ const ScheduleSummary = ({ activities }) => (
               <tbody>
                 {milestones.map(({ end, name: milestoneName, start }) => (
                   <tr>
-                    <td className="ds-u-padding-left--3 ds-u-border-right--0">
+                    <td className="ds-u-border-right--0">
                       {milestoneName}
                     </td>
-                    <td className="ds-u-padding-right--3 ds-u-border-left--0 ds-u-text-align--right">
+                    <td className="ds-u-border-left--0 ds-u-text-align--right">
                       {start || 'N/A'} - {end || 'N/A'}
                     </td>
                   </tr>
