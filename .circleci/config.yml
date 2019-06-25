@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 workflows:
   version: 2
@@ -7,9 +7,9 @@ workflows:
   cleanup preview deploys:
     triggers:
       - schedule:
-          # Run every 2 hours, every day. Specified this way because the more
+          # Run every hour, every day. Specified this way because the more
           # compact cron syntax wasn't working.
-          cron: '0 0,2,4,6,8,10,12,14,16,18,20,22 * * *'
+          cron: '0 * * * *'
           filters:
             branches:
               only:
@@ -30,7 +30,9 @@ workflows:
       - backend api endpoint test:
           requires:
             - install dependencies
-      - backend dependency vulnerability scan:
+      - dependency vulnerability scan:
+          name: backend dependency vulnerability scan
+          path: api
           requires:
             - install dependencies
       - backend lint:
@@ -39,19 +41,36 @@ workflows:
       - backend unit test:
           requires:
             - install dependencies
-      - backend deploy prod:
+      - backend deploy:
+          name: backend deploy staging
+          env: STAGING
           filters:
             branches:
               only:
                 - master
           requires:
+            - store artifacts staging
+            - backend api endpoint test
+            - backend dependency vulnerability scan
+            - backend lint
+            - backend unit test
+      - backend deploy:
+          name: backend deploy prod
+          env: PRODUCTION
+          filters:
+            tags:
+              only: /^v.*/
+          requires:
+            - store artifacts prod
             - backend api endpoint test
             - backend dependency vulnerability scan
             - backend lint
             - backend unit test
 
       # frontend jobs
-      - frontend dependency vulnerability scan:
+      - dependency vulnerability scan:
+          name: frontend dependency vulnerability scan
+          path: web
           requires:
             - install dependencies
       - frontend lint:
@@ -62,15 +81,55 @@ workflows:
             - install dependencies
             - yaml test
       - frontend build:
+          name: frontend build preview
+          env: PRODUCTION
+          filters:
+            branches:
+              ignore:
+                - master
           requires:
             - frontend dependency vulnerability scan
-      - frontend deploy prod:
+      - frontend build:
+          name: frontend build prod
+          env: PRODUCTION
+          filters:
+            tags:
+              only: /^v.*/
+          requires:
+            - frontend dependency vulnerability scan
+      - frontend build:
+          name: frontend build staging
+          env: STAGING
           filters:
             branches:
               only:
                 - master
           requires:
-            - frontend build
+            - frontend dependency vulnerability scan
+      - frontend deploy:
+          name: frontend deploy staging
+          env: STAGING
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - frontend build staging
+            - frontend dependency vulnerability scan
+            - frontend lint
+            - frontend test
+            - yaml test
+      - frontend deploy:
+          name: frontend deploy production
+          env: PRODUCTION
+          filters:
+            branches:
+              only:
+                - master
+            tags:
+              only: /^v.*/
+          requires:
+            - frontend build prod
             - frontend dependency vulnerability scan
             - frontend lint
             - frontend test
@@ -84,17 +143,31 @@ workflows:
                 - master
           requires:
             - backend dependency vulnerability scan
-            - frontend build
+            - frontend build preview
             - frontend dependency vulnerability scan
             - yaml test
 
       - store artifacts:
+          name: store artifacts staging
           filters:
             branches:
               only:
                 - master
           requires:
-            - frontend build
+            - backend dependency vulnerability scan
+            - frontend build staging
+
+      - store artifacts:
+          name: store artifacts prod
+          filters:
+            branches:
+              only:
+                - master
+            tags:
+              only: /^v.*/
+          requires:
+            - backend dependency vulnerability scan
+            - frontend build prod
 
 jobs:
   # ===== Independent jobs =====
@@ -230,24 +303,6 @@ jobs:
           working_directory: ~/project/api
           command: mv endpoint-data.json endpoint-tests && node endpoint-tests/endpoint-coverage.js
 
-  # Uses snyk to scan the installed backend dependencies for known
-  # vulnerabilities. Using the CLI instead of the web app means it scans
-  # actually-installed dependencies instead of "potentially-installed"
-  # dependencies, as inferred from the package.json file.
-  backend dependency vulnerability scan:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: vulnerability scan
-          working_directory: ~/project/api
-          command: |
-            npx snyk auth $SNYK_TOKEN
-            npx snyk test
-
   # Lints the backend code.
   backend lint:
     docker:
@@ -285,6 +340,10 @@ jobs:
   # Builds the static web app into the ~/project/web/dist directory and then
   # saves that into the workflow workspace.
   frontend build:
+    parameters:
+      env:
+        description: The environment being deployed
+        type: string
     docker:
       - image: node:10
     steps:
@@ -294,29 +353,11 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: API_URL=$PROD_API_URL npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
             - web/dist
-
-  # Uses snyk to scan the installed frontend dependencies for known
-  # vulnerabilities. Using the CLI instead of the web app means it scans
-  # actually-installed dependencies instead of "potentially-installed"
-  # dependencies, as inferred from the package.json file.
-  frontend dependency vulnerability scan:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: vulnerability scan
-          working_directory: ~/project/web
-          command: |
-            npx snyk auth $SNYK_TOKEN
-            npx snyk test
 
   # Lints the frontend code.
   frontend lint:
@@ -349,30 +390,47 @@ jobs:
           working_directory: ~/project/web
           command: bash <(curl -s https://codecov.io/bash)
 
+  # ===== Shared jobs =====
+  # These all depend on "install dependencies" running first.
+
+  # Uses snyk to scan the installed dependencies for known vulnerabilities.
+  # Using the CLI instead of the web app means it scans actually-installed
+  # dependencies instead of "potentially-installed" dependencies, as inferred
+  # from the package.json file.
+  dependency vulnerability scan:
+    parameters:
+      path:
+        description: The path to test
+        type: string
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: vulnerability scan
+          working_directory: ~/project/<< parameters.path >>
+          command: |
+            npx snyk auth $SNYK_TOKEN
+            npx snyk test
+
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
   # they are all related to deployment.
 
   # Backend production deployment.
-  backend deploy prod:
+  backend deploy:
+    parameters:
+      env:
+        description: The environment being deployed
+        type: string
     docker:
       - image: python:3
     steps:
       - checkout
-      - run:
-          name: make sure the backend changed
-          working_directory: ~/project
-          command: |
-            # git diff --exit-code will exit with a 0 if there were no changes
-            # or a non-zero if there were changes, so stop this step gracefully
-            # if there were no changes in the api directory. Compare to
-            # one commit back, which is before the current merge commit.
-            set +e
-            git diff HEAD~1 --relative=api --name-only --exit-code > /dev/null
-            if [ $? -eq "0" ]; then
-              circleci-agent step halt
-            fi
-            set -e
+      - attach_workspace:
+          at: ~/project
       - run:
           name: deploy to production
           working_directory: ~/project/bin/prod-deploy
@@ -380,7 +438,18 @@ jobs:
             apt-get -qq update
             apt-get -qq install jq -y
             pip install --quiet awscli
-            ./aws.sh
+            ./aws.sh \
+              --API_DATABASE_URL "${<< parameters.env >>_API_DATABASE_URL}" \
+              --API_PBKDF2_ITERATIONS "${<< parameters.env >>_API_PBKDF2_ITERATIONS}" \
+              --API_PORT "${<< parameters.env >>_API_PORT}" \
+              --API_SESSION_SECRET "${<< parameters.env >>_API_SESSION_SECRET}" \
+              --AWS_AMI "${<< parameters.env >>_API_AWS_AMI}" \
+              --AWS_REGION "${<< parameters.env >>_API_AWS_REGION}" \
+              --AWS_SECURITY_GROUP "${<< parameters.env >>_API_AWS_SECURITY_GROUP}" \
+              --AWS_SUBNET "${<< parameters.env >>_API_AWS_SUBNET}" \
+              --AWS_TARGET_GROUP "${<< parameters.env >>_API_AWS_TARGET_GROUP}" \
+              --BUILD_URL "$(cat ../../build-url.txt)/backend.zip" \
+              --ENVIRONMENT "$(echo '<< parameters.env >>' | tr '[:upper:]' '[:lower:]')"
 
   # Cleans up preview deploys that are no longer associated with open pull
   # requests.
@@ -399,7 +468,11 @@ jobs:
             ./aws.cleanup.sh
 
   # Frontend production deployment.
-  frontend deploy prod:
+  frontend deploy:
+    parameters:
+      env:
+        description: The environment being deployed
+        type: string
     docker:
       - image: python:3
     steps:
@@ -407,25 +480,11 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-          name: make sure the frontend changed
-          working_directory: ~/project
-          command: |
-            # git diff --exit-code will exit with a 0 if there were no changes
-            # or a non-zero if there were changes, so stop this step gracefully
-            # if there were no changes in the web directory. Compare to one
-            # commit back, which is before the current merge commit.
-            set +e
-            git diff HEAD~1 --relative=web --name-only --exit-code > /dev/null
-            if [ $? -eq "0" ]; then
-              circleci-agent step halt
-            fi
-            set -e
-      - run:
           name: sync to s3
           command: |
             apt-get update
             apt-get install awscli -y
-            aws s3 sync web/dist $AWS_PROD_S3_BUCKET --region $AWS_PROD_S3_REGION --delete
+            aws s3 sync web/dist "${<< parameters.env >>_WEB_AWS_S3_BUCKET}" --region ${<< parameters.env >>_WEB_AWS_REGION} --delete
   
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
@@ -442,7 +501,12 @@ jobs:
               apt-get -qq install jq -y
               pip install --quiet awscli
               PRNUM=$(basename $CI_PULL_REQUESTS)
-              URL=$(./aws.sh "$PRNUM" "$CIRCLE_BRANCH")
+              URL=$(./aws.sh \
+                --API_PBKDF2_ITERATIONS "$PRODUCTION_API_PBKDF2_ITERATIONS" \
+                --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
+                --PR_NUM "$PRNUM" \
+                --BRANCH "$CIRCLE_BRANCH"
+              )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
               echo "Not a pull request"
@@ -454,14 +518,35 @@ jobs:
     docker:
       - image: node:10
     steps:
+      - checkout
       - attach_workspace:
           at: ~/project
       - run:
-          name: create frontend build artifact zip
+          name: create backend build artifact zip
+          working_directory: ~/project
           command: |
             apt-get update
             apt-get install zip -y
-            zip -r /tmp/webapp.zip web/dist/*
+            rm -rf api/seeds/development
+            rm -rf api/seeds/test
+            rm api/seeds/development.js
+            rm api/seeds/test.js
+            rm api/seeds/shared/delete-everything.js
+            cd api
+            npm ci --only=production
+            cd ..
+            zip -r /tmp/backend.zip api/*
+            zip -r /tmp/frontend.zip web/dist/*
+      - run:
+          name: persist build URL to workspace
+          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - ./build-url.txt
       - store_artifacts:
-          path: /tmp/webapp.zip
-          destination: build
+          path: /tmp/backend.zip
+          destination: backend.zip
+      - store_artifacts:
+          path: /tmp/frontend.zip
+          destination: frontend.zip
