@@ -55,7 +55,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                     </th>
                   ))}
                   <th
-                    className="ds-u-text-align--right"
+                    className="ds-u-text-align--right budget-table--subtotal"
                     scope="col"
                   >
                     {t('table.subtotal')}
@@ -66,7 +66,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                 {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
                   <tr
                     key={name}
-                    className={name === "combined" && "budget-table--row__highlight"}
+                    className={name === "combined" && "budget-table--row__highlight budget-table--total"}
                   >
                     <th scope="row">
                       {EXPENSE_NAME_DISPLAY[name]}
@@ -80,7 +80,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                       </td>
                     ))}
                     <td
-                      className="budget-table--number"
+                      className="budget-table--number budget-table--subtotal"
                     >
                       <Dollars>{data[year].subtotal[name]}</Dollars>
                     </td>
@@ -103,7 +103,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
               <tbody>
               {Object.keys(EXPENSE_NAME_DISPLAY).map(name => (
                 <tr
-                  className={name === "combined" && "budget-table--row__highlight"}
+                  className={name === "combined" && "budget-table--row__highlight budget-table--total"}
                 >
                   <th scope="row">
                     {EXPENSE_NAME_DISPLAY[name]}

@@ -178,7 +178,7 @@ const BudgetSummary = ({ activities, data, years }) => (
           return (
             <tr
               key={ffy}
-              className={ffy === "total" && "budget-table--row__highlight"}
+              className={ffy === "total" && "budget-table--row__highlight budget-table--total"}
             >
               <th scope="row">FFY {ffy}</th>
               <td className="budget-table--number">
