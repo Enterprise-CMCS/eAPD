@@ -64,7 +64,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           Q4
         </th>
         <th
-          className="ds-u-text-align--right"
+          className="ds-u-text-align--right budget-table--subtotal"
           scope="col"
         >
           Subtotal
@@ -122,7 +122,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -181,7 +181,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -191,7 +191,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className="budget-table--row__highlight"
+        className="budget-table--row__highlight budget-table--total"
         key="combined"
       >
         <th
@@ -240,7 +240,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -308,7 +308,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           Q4
         </th>
         <th
-          className="ds-u-text-align--right"
+          className="ds-u-text-align--right budget-table--subtotal"
           scope="col"
         >
           Subtotal
@@ -366,7 +366,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -425,7 +425,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -435,7 +435,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className="budget-table--row__highlight"
+        className="budget-table--row__highlight budget-table--total"
         key="combined"
       >
         <th
@@ -484,7 +484,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -551,7 +551,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className="budget-table--row__highlight"
+        className="budget-table--row__highlight budget-table--total"
       >
         <th
           scope="row"
@@ -632,7 +632,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           Q4
         </th>
         <th
-          className="ds-u-text-align--right"
+          className="ds-u-text-align--right budget-table--subtotal"
           scope="col"
         >
           Subtotal
@@ -690,7 +690,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -749,7 +749,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -759,7 +759,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className="budget-table--row__highlight"
+        className="budget-table--row__highlight budget-table--total"
         key="combined"
       >
         <th
@@ -808,7 +808,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -876,7 +876,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           Q4
         </th>
         <th
-          className="ds-u-text-align--right"
+          className="ds-u-text-align--right budget-table--subtotal"
           scope="col"
         >
           Subtotal
@@ -934,7 +934,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -993,7 +993,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -1003,7 +1003,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className="budget-table--row__highlight"
+        className="budget-table--row__highlight budget-table--total"
         key="combined"
       >
         <th
@@ -1052,7 +1052,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
           </Dollars>
         </td>
         <td
-          className="budget-table--number"
+          className="budget-table--number budget-table--subtotal"
         >
           <Dollars
             long={false}
@@ -1119,7 +1119,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
         </td>
       </tr>
       <tr
-        className="budget-table--row__highlight"
+        className="budget-table--row__highlight budget-table--total"
       >
         <th
           scope="row"
