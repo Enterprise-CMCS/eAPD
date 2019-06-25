@@ -70,7 +70,11 @@ describe('activities actions', () => {
         expectedActions.push(updatedBudgetAction({}));
       }
 
-      store.dispatch(actions[method]('activity key'));
+      store.dispatch(
+        actions[method]('activity key', {
+          global: { confirm: sinon.stub().returns(true) }
+        })
+      );
 
       expect(store.getActions()).toEqual(expectedActions);
     });
