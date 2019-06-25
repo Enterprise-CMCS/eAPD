@@ -1,33 +1,35 @@
-
 #!/bin/bash
 
-# Expects the following environment variables to already be set:
+# Expects the following environment variables:
 #
-#   AWS_PROD_API_AMI - Image ID of the AMI to use for the new instance
+#   API_DATABASE_URL - PostgreSQL database URL the API should use. This is
+#                      written into the API's configuration
 #
-#   AWS_PROD_API_DATABASE_URL - PostgreSQL database URL the API should use.
-#                               This is written into the API's configuration
+#   API_PORT - The port the API should listen on. The load balancer will
+#              redirect internet traffic to this port. This is written into the
+#              API's configuration as well.
 #
-#   AWS_PROD_API_PORT - The port the API should listen on. The load balancer
-#                       will redirect internet traffic to this port. This
-#                       is written into the API's configuration as well.
+#   API_SESSION_SECRET - The secret key used to sign session tokens. This is
+#                        written into the API's configuration.
 #
-#   AWS_PROD_API_REGION - The AWS region the instance should be created in
+#   AWS_AMI	 - Image ID of the AMI to use for the new instance
 #
-#   AWS_PROD_API_SECURITY_GROUP - ID of the security group for the instance
+#   AWS_REGION - The AWS region the instance should be created in
 #
-#   AWS_PROD_API_SESSION_SECRET - The secret key used to sign session tokens.
-#                                 This is written into the API's configuration.
+#   AWS_SECURITY_GROUP - ID of the security group for the instance
 #
-#   AWS_PROD_API_SUBNET - ID of the subnet this instance should be attached to
+#   AWS_SUBNET - ID of the subnet this instance should be attached to
 #
-#   AWS_PROD_API_TARGET_GROUP_ARN - The ARN of the target group to add the
-#                                   instance to.
+#   AWS_TARGET_GROUP	 - The ARN of the target group to add the instance to.
 
 # Exit when any command fails
 set -e
 
 function deployAPItoEC2() {
+  # Adds the URL to the build artifacts to the user data file, so we can
+  # download it when the EC2 instance starts up
+  addBuildUrlToUserData
+
   # Create PM2 ecosystem file using CI/CD environment and inject it into
   # EC2 run-instances user data file
   addEcosystemToUserData
@@ -70,14 +72,21 @@ function deployAPItoEC2() {
   done <<< "$PREV_INSTANCE_INFOS"
 }
 
+function addBuildUrlToUserData() {
+  sed -i'.backup' -e "s|__BUILDURL__|`echo $BUILD_URL`|g" aws.user-data.sh
+
+  rm aws.user-data.sh.backup
+}
+
 # Reads deployment ecosystem data from the environment, builds a PM2
 # ecosystem configuration document, encodes it in base 64, and injects
 # it into the user-data script.
 #
-# Expects global environment variables:
-#   AWS_PROD_API_PORT - port the API should listen on
-#   AWS_PROD_API_DATABASE_URL - PostgreSQL database URL the API should use
-#   AWS_PROD_API_SESSION_SECRET - The secret key used to sign session tokens
+# Expects global variables:
+#   API_PORT - port the API should listen on
+#   API_DATABASE_URL - PostgreSQL database URL the API should use
+#   API_PBKDF2_ITERATIONS - Number of iterations for hashing passwords
+#   API_SESSION_SECRET - The secret key used to sign session tokens
 function addEcosystemToUserData() {
   ECOSYSTEM=`echo "module.exports = {
     apps : [{
@@ -90,10 +99,10 @@ function addEcosystemToUserData() {
         AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES: 1,
         AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES: 30,
         NODE_ENV: 'production',
-        PBKDF2_ITERATIONS: '$AWS_PROD_API_PBKDF2_ITERATIONS',
-        PORT: '$AWS_PROD_API_PORT',
-        DATABASE_URL: '$AWS_PROD_API_DATABASE_URL',
-        SESSION_SECRET: '$AWS_PROD_API_SESSION_SECRET',
+        PBKDF2_ITERATIONS: '$API_PBKDF2_ITERATIONS',
+        PORT: '$API_PORT',
+        DATABASE_URL: '$API_DATABASE_URL',
+        SESSION_SECRET: '$API_SESSION_SECRET',
         PROXY_TRUST: 'true'
       },
     },{
@@ -103,7 +112,7 @@ function addEcosystemToUserData() {
       autorestart: false,
       env: {
         NODE_ENV: 'production',
-        DATABASE_URL: '$AWS_PROD_API_DATABASE_URL'
+        DATABASE_URL: '$API_DATABASE_URL'
       }
     }]
   };" | base64 -w 0`
@@ -117,52 +126,54 @@ function addEcosystemToUserData() {
 #
 # $1 - The EC2 instance ID to add to the target group
 #
-# Expects global environment variable:
-#   AWS_PROD_API_PORT - Port the EC2 instance is listening on
-#   AWS_PROD_API_TARGET_GROUP_ARN - The ARN of the target group to add the
-#     instance to.
+# Expects global variable:
+#   API_PORT - Port the EC2 instance is listening on
+#   AWS_TARGET_GROUP	 - The ARN of the target group to add the instance to
 function addInstanceToTargetGroup() {
   aws elbv2 register-targets \
-    --target-group-arn $AWS_PROD_API_TARGET_GROUP_ARN \
-    --targets Id=$1,Port=$AWS_PROD_API_PORT \
+    --target-group-arn $AWS_TARGET_GROUP \
+    --targets Id=$1,Port=$API_PORT \
     > /dev/null
 }
 
 # Sets up AWS global configuration for all subsequent commands.
 #
-# Expects global environment variables:
-#   AWS_PROD_API_REGION - The AWS region to use
+# Expects global variable:
+#   AWS_REGION - The AWS region to use
 function configureAWS() {
-  aws configure set default.region $AWS_PROD_API_REGION
+  aws configure set default.region $AWS_REGION
 }
 
 # Create a new EC2 instance. Echos the new instance ID.
 #
-# Expects global environment variables:
-#   AWS_PROD_API_AMI - Image ID of the AMI to use for this instance
-#   AWS_PROD_API_SECURITY_GROUP - ID of the security group for this instance
-#   AWS_PROD_API_SUBNET - ID of the subnet this instance should be attached to
+# Expects global variables:
+#   AWS_AMI	 - Image ID of the AMI to use for this instance
+#   AWS_SECURITY_GROUP - ID of the security group for this instance
+#   AWS_SUBNET - ID of the subnet this instance should be attached to
+#   ENVIRONMENT - name of the environment being deployed to; lowercase
 function createNewInstance() {
   aws ec2 run-instances \
     --instance-type c4.large \
-    --key-name $AWS_PROD_KEY_NAME \
-    --image-id $AWS_PROD_API_AMI \
-    --security-group-ids $AWS_PROD_API_SECURITY_GROUP \
-    --subnet-id $AWS_PROD_API_SUBNET \
+    --image-id $AWS_AMI	 \
+    --security-group-ids $AWS_SECURITY_GROUP \
+    --subnet-id $AWS_SUBNET \
     --ebs-optimized \
-    --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eapd-prod-auto}]" \
+    --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
 }
 
-# Finds any existing instances for production. Echos a newline-delimited list
-# of instance IDs and names.  E.g.:
+# Finds any existing instances for the environment. Echos a newline-delimited
+# list of instance IDs and names.  E.g.:
 #
 # "instance-id-1","instance-name-1"
 # "instance-id-2","instance-name-2"
+#
+# Expects global variables:
+#   ENVIRONMENT - name of the environment being deployed to; lowercase
 function findExistingInstances() {
   aws ec2 describe-instances \
-    --filter "Name=tag:Name,Values=eapd-prod-auto" \
+    --filter "Name=tag:environment,Values=$ENVIRONMENT" \
     | jq -rc '.Reservations[].Instances[] | [.InstanceId, .Tags[].Value] | @csv'
 }
 
@@ -170,14 +181,13 @@ function findExistingInstances() {
 #
 # $1 - ID of the EC2 instance to wait for
 #
-# Expects global environment variables:
-#   AWS_PROD_API_PORT - Port the EC2 instance is listening on
-#   AWS_PROD_API_TARGET_GROUP_ARN - The ARN of the target group to remove the
-#     instance from.
+# Expects global  variables:
+#   API_PORT - Port the EC2 instance is listening on
+#   AWS_TARGET_GROUP - The ARN of the target group to remove the instance from.
 function getTargetHealth() {
   aws elbv2 describe-target-health \
-    --target-group-arn $AWS_PROD_API_TARGET_GROUP_ARN \
-    --targets Id=$1,Port=$AWS_PROD_API_PORT \
+    --target-group-arn $AWS_TARGET_GROUP \
+    --targets Id=$1,Port=$API_PORT \
     | jq -r -c '.TargetHealthDescriptions[0].TargetHealth.State'
 }
 
@@ -185,9 +195,14 @@ function getTargetHealth() {
 #
 # $1 - ID of the EC2 instance to terminate
 function terminateInstance() {
+  # This command can fail if AWS doesn't recognize the instance ID, but in that
+  # case we really, really don't care; so don't stop the script if it errors.
+  set +e
   aws ec2 terminate-instances \
     --instance-ids $1 \
     > /dev/null
+  # Switch back to stop-on-error mode
+  set -e
 }
 
 # Wait for EC2 instance status checks to be "passed"
@@ -215,14 +230,13 @@ function waitForInstanceToBeReady() {
 #
 # $1 - ID of the EC2 instance to wait for
 #
-# Expects global environment variables:
-#   AWS_PROD_API_PORT - Port the EC2 instance is listening on
-#   AWS_PROD_API_TARGET_GROUP_ARN - The ARN of the target group to remove the
-#     instance from.
+# Expects global variables:
+#   API_PORT - Port the EC2 instance is listening on
+#   AWS_TARGET_GROUP - The ARN of the target group to remove the instance from.
 function waitForTargetToBeHealthy() {
   HEALTH_CHECK_COUNT=1
   TARGET_HEALTH=$(getTargetHealth $1)
-  while [[ "$TARGET_HEALTH" != "healthy" && "HEALTH_CHECK_COUNT" -lt 10 ]]; do
+  while [[ "$TARGET_HEALTH" != "healthy" && "HEALTH_CHECK_COUNT" -lt 60 ]]; do
     echo "  ...health check #$HEALTH_CHECK_COUNT: '$TARGET_HEALTH'"
     sleep 60s
     TARGET_HEALTH=$(getTargetHealth $1)
@@ -238,5 +252,18 @@ function waitForTargetToBeHealthy() {
     exit 1
   fi
 }
+
+# Iterate while there are arguments
+while [ $# -gt 0 ]; do
+  # If the argument begins with --, strip the -- to create the variable name
+  # and then set it to the next argument
+  if [[ $1 == *"--"* ]]; then
+    v="${1/--/}"
+    export $v="$2"
+  fi
+
+  # Remove the current argument
+  shift
+done
 
 deployAPItoEC2
