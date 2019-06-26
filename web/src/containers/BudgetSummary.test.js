@@ -84,6 +84,7 @@ describe('budget summary component', () => {
 
   test('header row renders', () => {
     expect(shallow(<HeaderRow yr="1" />)).toMatchSnapshot();
+    expect(shallow(<HeaderRow yr="total" />)).toMatchSnapshot();
   });
 
   test('maps state to props', () => {

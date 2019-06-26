@@ -1,4 +1,4 @@
-import admin from './admin';
+import admin, { selectUsers, selectUsersSorted } from './admin';
 import {
   ADMIN_GET_ACTIVITIES_SUCCESS,
   ADMIN_GET_ROLES_SUCCESS,
@@ -52,6 +52,30 @@ describe('admin reducer', () => {
       activities: [],
       roles: [],
       users: ['user 1', 'user 2']
+    });
+  });
+
+  describe('selectors', () => {
+    const users = [
+      { name: 'Barbara', email: 'barbara@yahoo.com' },
+      { name: 'Xander', email: 'xander@sunnydale.org' },
+      { name: null, email: 'george@weasleygags.co.uk' },
+      { name: 'Elizabeth', email: 'queen@uk' },
+      { name: null, email: 'devilbaby@hotmail.com' }
+    ];
+
+    it('selectUsers selector returns users', () => {
+      expect(selectUsers({ admin: { users } })).toEqual(users);
+    });
+
+    it('selectUsersSorted returns users in a sorted order', () => {
+      expect(selectUsersSorted({ admin: { users } })).toEqual([
+        { name: 'Barbara', email: 'barbara@yahoo.com' },
+        { name: null, email: 'devilbaby@hotmail.com' },
+        { name: 'Elizabeth', email: 'queen@uk' },
+        { name: null, email: 'george@weasleygags.co.uk' },
+        { name: 'Xander', email: 'xander@sunnydale.org' }
+      ]);
     });
   });
 });
