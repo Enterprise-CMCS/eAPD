@@ -5,16 +5,18 @@ const Footer = () => {
     <footer>
       <div className="ds-l-container">
         <div className="ds-l-row">
-          <div className="ds-l-md-col--6 logo-container">
-            <img
-              src="/static/img/macpro_logo_transparent.png"
-              alt="MACPro logo"
-              className="macpro-logo"
-            />
+          <div className="ds-l-md-col--3 footer--logo-container">
             <img
               src="/static/img/medicaid_logo.png"
               alt="Medicaid logo"
               className="medicaid-logo"
+            />
+          </div>
+          <div className="ds-l-md-col--3 footer--logo-container">
+            <img
+              src="/static/img/macpro_logo_transparent.png"
+              alt="MACPro logo"
+              className="macpro-logo"
             />
           </div>
           <div className="ds-l-md-col--6 logo-container">

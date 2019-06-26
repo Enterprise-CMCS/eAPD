@@ -5,7 +5,7 @@ footer {
   padding-top: $spacer-6;
   margin-top: $spacer-6;
 
-  .logo-container {
+  .footer--logo-container {
     display: flex;
     align-items: center;
   }
@@ -21,12 +21,11 @@ footer {
     margin-top: $spacer-6;
     background-color: $color-primary-darkest;
     color: $color-white;
+    p {
+      margin-bottom: 0;
+    }
     a {
       color: $color-white;
     }
-  }
-  img + img {
-    margin-left: $spacer-6;
-    margin-right: $spacer-6;
   }
 }
