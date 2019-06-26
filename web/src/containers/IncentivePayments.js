@@ -19,8 +19,6 @@ const QUARTERS = [1, 2, 3, 4];
 const formatNumber = (type, number) =>
   type === 'amount' ? <Dollars>{number}</Dollars> : formatNum(number);
 
-const thId = (fy, q) => `incentive-payments-table-fy${fy}${q ? `-q${q}` : ''}`;
-
 class IncentivePayments extends Component {
   handleChange = (key, year, quarter) => e => {
     const { value } = e.target;
@@ -36,18 +34,31 @@ class IncentivePayments extends Component {
       <Fragment>
         {years.map(year => (
           <Fragment key={year}>
-            <h3 id={thId(year)}>{t('ffy', { year })}</h3>
-            <table className="table-cms table-fixed">
+            <table className="budget-table">
+              <caption className="ds-u-visibility--screen-reader">
+                {t('ffy', { year })} Incentive Payments by Quarter
+              </caption>
               <thead>
                 <tr>
-                  <th />
+                  <th>
+                    <span aria-hidden="true">
+                      {t('ffy', { year })}
+                    </span>
+                  </th>
                   <Fragment key={year}>
                     {QUARTERS.map(q => (
-                      <th key={q} className="center" scope="col">
+                      <th
+                        key={q}
+                        className="ds-u-text-align--right"
+                        scope="col"
+                      >
                         {t('table.quarter', { q })}
                       </th>
                     ))}
-                    <th className="center" scope="col">
+                    <th
+                      className="ds-u-text-align--right budget-table--subtotal budget-table--col__highlight"
+                      scope="col"
+                    >
                       {t('table.subtotal')}
                     </th>
                   </Fragment>
@@ -60,10 +71,7 @@ class IncentivePayments extends Component {
 
                   return (
                     <tr key={id}>
-                      <th
-                        className="align-middle"
-                        scope="row"
-                      >
+                      <th scope="row">
                         {name}
                       </th>
                       <Fragment key={year}>
@@ -72,8 +80,8 @@ class IncentivePayments extends Component {
                             <InputComponent
                               name={`${id}-payments-${year}-q${q}`}
                               label={`${id} payments for ${year}, quarter ${q}`}
-                              wrapperClass="m0"
-                              className="m0 input input-condensed mono right-align"
+                              wrapperClass="budget-table--input-holder"
+                              className="budget-table--input__number"
                               value={data[id][year][q] || ''}
                               onChange={this.handleChange(id, year, q)}
                               hideLabel
@@ -81,7 +89,7 @@ class IncentivePayments extends Component {
                           </td>
                         ))}
                         <td
-                          className="mono right-align align-middle"
+                          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
                         >
                           {formatNumber(type, totals[id].byYear[year])}
                         </td>

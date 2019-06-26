@@ -1,4 +1,4 @@
-import auth from './auth';
+import auth, { selectIsLoggedIn } from './auth';
 import {
   AUTH_CHECK_SUCCESS,
   AUTH_CHECK_FAILURE,
@@ -109,5 +109,13 @@ describe('auth reducer', () => {
         user: null
       });
     });
+  });
+
+  it('selects the current logged-in state', () => {
+    expect(
+      selectIsLoggedIn({
+        auth: { authenticated: 'this is the authenticated state value' }
+      })
+    ).toEqual('this is the authenticated state value');
   });
 });
