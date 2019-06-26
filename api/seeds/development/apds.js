@@ -69,26 +69,6 @@ exports.seed = async knex => {
   await knex('apd_incentive_payments').insert([
     {
       apd_id,
-      year: '2018',
-      q1_eh_count: 0,
-      q2_eh_count: 0,
-      q3_eh_count: 0,
-      q4_eh_count: 0,
-      q1_eh_payment: 0,
-      q2_eh_payment: 0,
-      q3_eh_payment: 0,
-      q4_eh_payment: 0,
-      q1_ep_count: 0,
-      q2_ep_count: 0,
-      q3_ep_count: 0,
-      q4_ep_count: 0,
-      q1_ep_payment: 0,
-      q2_ep_payment: 0,
-      q3_ep_payment: 0,
-      q4_ep_payment: 0
-    },
-    {
-      apd_id,
       year: '2019',
       q1_eh_count: 0,
       q2_eh_count: 0,
