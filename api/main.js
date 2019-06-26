@@ -15,6 +15,12 @@ const endpointCoverage = require('./endpointCoverageMiddleware');
 
 const server = express();
 
+// Turn off the X-Powered-By header that reveals information about the server
+// architecture. No need just giving away all the information, though this
+// code IS on Github, so I reckon folks could figure it out easily enough...
+// But hey, it reduces the value of automated malicious scans, so there's that.
+server.disable('x-powered-by');
+
 endpointCoverage.registerCoverageMiddleware(server);
 
 if (process.env.PROXY_TRUST !== 'false') {
@@ -33,6 +39,35 @@ if (process.env.PROXY_TRUST !== 'false') {
 logger.silly('setting up heartbeat endpoint');
 server.get('/heartbeat', (_, res) => {
   res.status(204).end();
+});
+
+server.use((_, res, next) => {
+  // Disallow proxies from cacheing anything ("private"); instruct browsers to
+  // validate the content with etags before using their own caches ("no-cache")
+  res.header('Cache-Control', 'private, no-cache');
+
+  // Instruct the browser to use HTTPS for this domain and its subdomains for
+  // the next year.
+  res.header(
+    'Strict-Transport-Security',
+    'max-age=31536000; includeSubDomains'
+  );
+
+  // Instruct browsers to use the content-type indicated by the server rather
+  // than ignore that and try to guess the content-type from the response body
+  // (IE used to do this and would sometimes decide that things were executable
+  // and then run them, with I'm sure HILARIOUS results)
+  res.header('X-Content-Type-Options', 'nosniff');
+
+  // Don't allow this URL to be embedded in frames on any sites that aren't on
+  // this same domain. Not super useful for an API, but the scanners will be
+  // looking for it.
+  res.header('X-Frame-Options', 'sameorigin');
+
+  // Trigger browsers' built-in cross-site scripting protection. It's usually
+  // on by default, but let's be explicit. Also not super useful for an API.
+  res.header('X-XSS-Protection', '1; mode=block');
+  next();
 });
 
 server.use((req, res, next) => {

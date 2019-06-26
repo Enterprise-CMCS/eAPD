@@ -19,7 +19,7 @@ describe('admin page > edit account', () => {
       mapStateToProps({
         admin: {
           roles: 'a list of roles',
-          users: 'and a list of users'
+          users: [{ email: 'and a list of users' }]
         },
         auth: {
           user: 'the current user'
@@ -31,7 +31,7 @@ describe('admin page > edit account', () => {
       currentUser: 'the current user',
       error: 'that error',
       roles: 'a list of roles',
-      users: 'and a list of users',
+      users: [{ email: 'and a list of users' }],
       working: 'hard, playing likewise'
     });
   });

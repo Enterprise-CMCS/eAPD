@@ -62,15 +62,16 @@ exports[`budget summary component data row group renders 1`] = `
 `;
 
 exports[`budget summary component data row renders with data 1`] = `
-<tr>
+<tr
+  className=""
+>
   <th
-    headers="summary-budget-null1 summary-budget-null2"
+    scope="row"
   >
     title text
   </th>
   <td
-    className="font-family--mono right-align"
-    headers="summary-budget-fy-year summary-budget-fy-year-total"
+    className="budget-table--number"
   >
     <Dollars
       long={false}
@@ -79,8 +80,7 @@ exports[`budget summary component data row renders with data 1`] = `
     </Dollars>
   </td>
   <td
-    className="font-family--mono right-align"
-    headers="summary-budget-fy-year summary-budget-fy-year-federal"
+    className="budget-table--number"
   >
     <Dollars
       long={false}
@@ -89,8 +89,7 @@ exports[`budget summary component data row renders with data 1`] = `
     </Dollars>
   </td>
   <td
-    className="font-family--mono right-align"
-    headers="summary-budget-fy-year summary-budget-fy-year-state"
+    className="budget-table--number"
   >
     <Dollars
       long={false}
@@ -102,15 +101,16 @@ exports[`budget summary component data row renders with data 1`] = `
 `;
 
 exports[`budget summary component data row renders with no data 1`] = `
-<tr>
+<tr
+  className=""
+>
   <th
-    headers="summary-budget-null1 summary-budget-null2"
+    scope="row"
   >
     title text
   </th>
   <td
-    className="font-family--mono right-align"
-    headers="summary-budget-fy-year summary-budget-fy-year-total"
+    className="budget-table--number"
   >
     <Dollars
       long={false}
@@ -119,8 +119,7 @@ exports[`budget summary component data row renders with no data 1`] = `
     </Dollars>
   </td>
   <td
-    className="font-family--mono right-align"
-    headers="summary-budget-fy-year summary-budget-fy-year-federal"
+    className="budget-table--number"
   >
     <Dollars
       long={false}
@@ -129,8 +128,7 @@ exports[`budget summary component data row renders with no data 1`] = `
     </Dollars>
   </td>
   <td
-    className="font-family--mono right-align"
-    headers="summary-budget-fy-year summary-budget-fy-year-state"
+    className="budget-table--number"
   >
     <Dollars
       long={false}
@@ -144,28 +142,55 @@ exports[`budget summary component data row renders with no data 1`] = `
 exports[`budget summary component header row renders 1`] = `
 <tr>
   <th
-    className="ds-u-font-weight--bold"
     id="summary-budget-fy-1"
     key="1"
   >
-    FFY 
-    1
+    FFY 1
   </th>
   <th
-    className="ds-u-text-align--center"
-    id="summary-budget-fy-1-total"
+    className="ds-u-text-align--right"
+    scope="col"
   >
     Medicaid Total
   </th>
   <th
-    className="ds-u-text-align--center"
-    id="summary-budget-fy-1-federal"
+    className="ds-u-text-align--right"
+    scope="col"
   >
     Federal Total
   </th>
   <th
-    className="ds-u-text-align--center"
-    id="summary-budget-fy-1-state"
+    className="ds-u-text-align--right"
+    scope="col"
+  >
+    State Total
+  </th>
+</tr>
+`;
+
+exports[`budget summary component header row renders 2`] = `
+<tr>
+  <th
+    id="summary-budget-fy-total"
+    key="total"
+  >
+    Total
+  </th>
+  <th
+    className="ds-u-text-align--right"
+    scope="col"
+  >
+    Medicaid Total
+  </th>
+  <th
+    className="ds-u-text-align--right"
+    scope="col"
+  >
+    Federal Total
+  </th>
+  <th
+    className="ds-u-text-align--right"
+    scope="col"
   >
     State Total
   </th>
@@ -175,14 +200,22 @@ exports[`budget summary component header row renders 1`] = `
 exports[`budget summary component renders correctly 1`] = `
 <Fragment>
   <h3
+    aria-hidden="true"
     className="ds-h3"
   >
     HIT Activities
   </h3>
   <table
-    className="table-cms"
+    className="budget-table"
     key="1"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      1
+       HIT Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="1"
@@ -201,9 +234,16 @@ exports[`budget summary component renders correctly 1`] = `
     </tbody>
   </table>
   <table
-    className="table-cms"
+    className="budget-table"
     key="2"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      2
+       HIT Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="2"
@@ -222,9 +262,16 @@ exports[`budget summary component renders correctly 1`] = `
     </tbody>
   </table>
   <table
-    className="table-cms"
+    className="budget-table"
     key="total"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      total
+       HIT Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="total"
@@ -243,14 +290,22 @@ exports[`budget summary component renders correctly 1`] = `
     </tbody>
   </table>
   <h3
+    aria-hidden="true"
     className="ds-h3"
   >
     HIE Activities
   </h3>
   <table
-    className="table-cms"
+    className="budget-table"
     key="1"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      1
+       HIE Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="1"
@@ -269,9 +324,16 @@ exports[`budget summary component renders correctly 1`] = `
     </tbody>
   </table>
   <table
-    className="table-cms"
+    className="budget-table"
     key="2"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      2
+       HIE Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="2"
@@ -290,9 +352,16 @@ exports[`budget summary component renders correctly 1`] = `
     </tbody>
   </table>
   <table
-    className="table-cms"
+    className="budget-table"
     key="total"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      total
+       HIE Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="total"
@@ -311,14 +380,22 @@ exports[`budget summary component renders correctly 1`] = `
     </tbody>
   </table>
   <h3
+    aria-hidden="true"
     className="ds-h3"
   >
     MMIS Activities
   </h3>
   <table
-    className="table-cms"
+    className="budget-table"
     key="1"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      1
+       MMIS Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="1"
@@ -337,9 +414,16 @@ exports[`budget summary component renders correctly 1`] = `
     </tbody>
   </table>
   <table
-    className="table-cms"
+    className="budget-table"
     key="2"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      2
+       MMIS Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="2"
@@ -358,9 +442,16 @@ exports[`budget summary component renders correctly 1`] = `
     </tbody>
   </table>
   <table
-    className="table-cms"
+    className="budget-table"
     key="total"
   >
+    <caption
+      className="ds-u-visibility--screen-reader"
+    >
+      FFY 
+      total
+       MMIS Activities
+    </caption>
     <thead>
       <HeaderRow
         yr="total"
@@ -378,34 +469,34 @@ exports[`budget summary component renders correctly 1`] = `
       />
     </tbody>
   </table>
-  <h3
-    className="ds-h3"
-  >
-    Project Activities Totals
-  </h3>
   <table
-    className="table-cms"
+    className="budget-table"
   >
+    <caption
+      className="ds-h3"
+    >
+      Project Activities Totals
+    </caption>
     <thead>
       <tr>
         <th
           id="summary-budget-null1"
         />
         <th
-          className="ds-u-text-align--center"
-          id="summary-budget-total-medicaid"
+          className="ds-u-text-align--right"
+          scope="col"
         >
           Medicaid Total
         </th>
         <th
-          className="ds-u-text-align--center"
-          id="summary-budget-total-federal"
+          className="ds-u-text-align--right"
+          scope="col"
         >
           Federal Total
         </th>
         <th
-          className="ds-u-text-align--center"
-          id="summary-budget-total-state"
+          className="ds-u-text-align--right"
+          scope="col"
         >
           State Total
         </th>
@@ -413,17 +504,16 @@ exports[`budget summary component renders correctly 1`] = `
     </thead>
     <tbody>
       <tr
+        className={false}
         key="1"
       >
         <th
-          headers="summary-budget-null1"
+          scope="row"
         >
-          FFY 
-          1
+          FFY 1
         </th>
         <td
-          className="font-family--mono right-align"
-          headers="summary-budget-total-medicaid"
+          className="budget-table--number"
         >
           <Dollars
             long={false}
@@ -432,8 +522,7 @@ exports[`budget summary component renders correctly 1`] = `
           </Dollars>
         </td>
         <td
-          className="font-family--mono right-align"
-          headers="summary-budget-total-federal"
+          className="budget-table--number"
         >
           <Dollars
             long={false}
@@ -442,8 +531,7 @@ exports[`budget summary component renders correctly 1`] = `
           </Dollars>
         </td>
         <td
-          className="font-family--mono right-align"
-          headers="summary-budget-total-state"
+          className="budget-table--number"
         >
           <Dollars
             long={false}
@@ -453,17 +541,16 @@ exports[`budget summary component renders correctly 1`] = `
         </td>
       </tr>
       <tr
+        className={false}
         key="2"
       >
         <th
-          headers="summary-budget-null1"
+          scope="row"
         >
-          FFY 
-          2
+          FFY 2
         </th>
         <td
-          className="font-family--mono right-align"
-          headers="summary-budget-total-medicaid"
+          className="budget-table--number"
         >
           <Dollars
             long={false}
@@ -472,8 +559,7 @@ exports[`budget summary component renders correctly 1`] = `
           </Dollars>
         </td>
         <td
-          className="font-family--mono right-align"
-          headers="summary-budget-total-federal"
+          className="budget-table--number"
         >
           <Dollars
             long={false}
@@ -482,8 +568,7 @@ exports[`budget summary component renders correctly 1`] = `
           </Dollars>
         </td>
         <td
-          className="font-family--mono right-align"
-          headers="summary-budget-total-state"
+          className="budget-table--number"
         >
           <Dollars
             long={false}
