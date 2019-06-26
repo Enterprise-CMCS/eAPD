@@ -23,8 +23,10 @@ module.exports.setup = function setup(
   app,
   {
     auth = authenticate,
+    deserializeUser = serialization.deserializeUser,
     passport = Passport,
     removeSession = removeUserSession,
+    serializeUser = serialization.serializeUser,
     session = sessionFunction,
     strategies = defaultStrategies
   } = {}
@@ -35,8 +37,8 @@ module.exports.setup = function setup(
 
   // Register our user serialization methods with passport
   logger.silly('setting up our user serializer with Passport');
-  passport.serializeUser(serialization.serializeUser);
-  passport.deserializeUser(serialization.deserializeUser);
+  passport.serializeUser(serializeUser);
+  passport.deserializeUser(deserializeUser);
 
   // Add our session function and passport to our app's
   // middleware
@@ -67,17 +69,27 @@ module.exports.setup = function setup(
 
   // Add a local authentication endpoint
   logger.silly('setting up a local login handler');
-  app.post('/auth/login', passport.authenticate('local'), (req, res) => {
-    res
-      .status(200)
-      .send({
-        ...req.user,
-        state: {
-          id: req.user.model.related('state').get('id'),
-          name: req.user.model.related('state').get('name')
-        },
-        model: undefined
+  app.post(
+    '/auth/login',
+    passport.authenticate('local'),
+    (req, res) =>
+      new Promise(resolve => {
+        deserializeUser(req.session.passport.user, (err, user) => {
+          if (err) {
+            res.status(500).end();
+            return resolve();
+          }
+
+          res.send({
+            ...user,
+            state: {
+              id: user.model.related('state').get('id'),
+              name: user.model.related('state').get('name')
+            },
+            model: undefined
+          });
+          return resolve();
+        });
       })
-      .end();
-  });
+  );
 };
