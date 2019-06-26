@@ -66,9 +66,11 @@ module.exports = (zxcvbn = defaultZxcvbn, hash = defaultHash) => ({
       if (this.hasChanged('email')) {
         logger.silly('email address changed; making sure it is unique');
 
-        const otherUsersWithThisEmail = await this.where({
-          email: this.attributes.email
-        }).fetchAll();
+        const otherUsersWithThisEmail = await this.query(
+          'whereRaw',
+          'LOWER(email) = ?',
+          [this.attributes.email.toLowerCase()]
+        ).fetchAll();
 
         if (otherUsersWithThisEmail.length) {
           logger.verbose(
