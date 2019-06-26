@@ -6,12 +6,12 @@ footer {
   padding-top: $spacer-6;
   margin-top: $spacer-6;
 
-  img {
-    width: 100%; /* fix for IE */
-  }
   .footer--logo-container {
     display: flex;
     align-items: center;
+    img {
+      width: 100%; /* fix for IE */
+    }
   }
 
   .hhs-logo {
