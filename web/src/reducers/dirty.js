@@ -55,6 +55,9 @@ const dirty = (state = initialState, action) => {
       return initialState;
 
     case SELECT_APD:
+      // When we select an APD, stash off all the activity keys so we'll
+      // have them to iterate over later, if the APD years change (see
+      // below for more explanation of why).
       return u(
         {
           data: {
@@ -179,6 +182,13 @@ const dirty = (state = initialState, action) => {
       ) {
         return u({ dirty: true, data: { apd: { ...action.updates } } }, state);
       }
+
+      // When APD years change, several other properties will be updated to
+      // make space for or remove those years.  For example, activity
+      // contractor resources has a year-based property that gets modified.
+      // We need to mark all those fields as dirty for all the activities so
+      // that if the user saves their APD after changing the years we will ALSO
+      // save those other bits and pieces.
       if (action.updates.years) {
         const activityKeys = Object.keys(state.data.activities.byKey);
         const update = activityKeys.reduce(
