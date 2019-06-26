@@ -52,8 +52,22 @@ const up = updates =>
 const dirty = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_APD_SUCCESS:
-    case SELECT_APD:
       return initialState;
+
+    case SELECT_APD:
+      return u(
+        {
+          data: {
+            activities: {
+              byKey: action.apd.activities.reduce(
+                (byKey, activity) => ({ ...byKey, [activity.key]: false }),
+                {}
+              )
+            }
+          }
+        },
+        initialState
+      );
 
     case ADD_ACTIVITY_DIRTY:
       // when an activity is added, we need to add the
@@ -164,6 +178,32 @@ const dirty = (state = initialState, action) => {
         action.updates.stateProfile
       ) {
         return u({ dirty: true, data: { apd: { ...action.updates } } }, state);
+      }
+      if (action.updates.years) {
+        const activityKeys = Object.keys(state.data.activities.byKey);
+        const update = activityKeys.reduce(
+          (byKey, key) => ({
+            ...byKey,
+            [key]: {
+              contractorResources: true,
+              costAllocation: true,
+              expenses: true,
+              statePersonnel: true,
+              quarterlyFFP: true
+            }
+          }),
+          {}
+        );
+        return u(
+          {
+            dirty: true,
+            data: {
+              activities: { byKey: update },
+              apd: { incentivePayments: true, keyPersonnel: true, years: true }
+            }
+          },
+          state
+        );
       }
       return u({ dirty: true }, state);
 
