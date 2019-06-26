@@ -12,6 +12,7 @@ import { editAccount as editAccountDispatch } from '../../actions/admin';
 import CardForm from '../../components/CardForm';
 import Password from '../../components/PasswordWithMeter';
 import { LockIcon, UnlockIcon } from '../../components/Icons';
+import { selectUsersSorted } from '../../reducers/admin';
 import { getEditAccountError } from '../../reducers/errors';
 import { getEditAccountWorking } from '../../reducers/working';
 import { STATES, toSentenceCase } from '../../util';
@@ -246,7 +247,7 @@ const mapStateToProps = state => ({
   currentUser: state.auth.user,
   error: getEditAccountError(state),
   roles: state.admin.roles,
-  users: state.admin.users,
+  users: selectUsersSorted(state),
   working: getEditAccountWorking(state)
 });
 

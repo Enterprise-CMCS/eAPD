@@ -24,33 +24,48 @@ const ApdPreviousActivityTableMMIS = ({
 
   return (
     <Fragment>
-      <h4 className="ds-h4">MMIS</h4>
+      <h4 className="ds-h4" aria-hidden="true">MMIS</h4>
       {[90, 75, 50].map((level) => (
-        <table key={level} className="table-cms centered-headers table-fixed">
+        <table key={level} className="budget-table">
+          <caption className="ds-h4 ds-u-visibility--screen-reader">
+            MMIS {TABLE_HEADERS.federal(level)}
+          </caption>
           <thead>
             <tr>
-              <th id="prev_act_mmis_null2" />
-              <th className="pre-line" id={`prev_act_mmis${level}_total`}>
+              <th id="prev_act_mmis_ffy">
+                <span className="ds-u-visibility--screen-reader">
+                  Year
+                </span>
+              </th>
+              <th id={`prev_act_mmis${level}_total`}>
                 {TABLE_HEADERS.total}
               </th>
               <th
                 colSpan="2"
-                className="pre-line"
                 id={`prev_act_mmis${level}_federal`}
               >
                 {TABLE_HEADERS.federal(level)}
               </th>
             </tr>
             <tr>
-              <th id="prev_act_mmis_null3" />
-              <th id={`prev_act_mmis${level}_total_approved`}>
+              <th aria-hidden="true" />
+              <th
+                id={`prev_act_mmis${level}_total_approved`}
+                className="ds-u-text-align--right"
+              >
                 {TABLE_HEADERS.approved}
               </th>
 
-              <th id={`prev_act_mmis${level}_federal_approved`}>
+              <th
+                id={`prev_act_mmis${level}_federal_approved`}
+                className="ds-u-text-align--right"
+              >
                 {TABLE_HEADERS.approved}
               </th>
-              <th id={`prev_act_mmis${level}_federal_actual`}>
+              <th
+                id={`prev_act_mmis${level}_federal_actual`}
+                className="ds-u-text-align--right"
+              >
                 {TABLE_HEADERS.actual}
               </th>
             </tr>
@@ -62,7 +77,7 @@ const ApdPreviousActivityTableMMIS = ({
                 (expenses.totalApproved * level) / 100;
 
               return (
-                <tr key={year} className="align-middle">
+                <tr key={year}>
                   <th id={`prev_act_mmis_row_${year}`}>
                     {TABLE_HEADERS.ffy(year)}
                   </th>
@@ -74,8 +89,8 @@ const ApdPreviousActivityTableMMIS = ({
                       label={`total approved funding for MMIS at the ${level}/${100 -
                         level} level for FFY ${year}, state plus federal`}
                       hideLabel
-                      wrapperClass="m0"
-                      className="m0 input input-condensed mono right-align"
+                      wrapperClass="budget-table--input-holder"
+                      className="budget-table--input__number"
                       value={expenses.totalApproved}
                       onChange={handleChange(year, level, 'totalApproved')}
                     />
@@ -83,6 +98,7 @@ const ApdPreviousActivityTableMMIS = ({
 
                   <td
                     headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_approved`}
+                    className="budget-table--number"
                   >
                     <Dollars>{federalApproved}</Dollars>
                   </td>
@@ -95,8 +111,8 @@ const ApdPreviousActivityTableMMIS = ({
                       label={`actual federal share for MMIS at the ${level}/${100 -
                         level} level for FFY ${year}`}
                       hideLabel
-                      wrapperClass="m0"
-                      className="m0 input input-condensed mono right-align"
+                      wrapperClass="budget-table--input-holder"
+                      className="budget-table--input__number"
                       value={expenses.federalActual}
                       onChange={handleChange(year, level, 'federalActual')}
                     />

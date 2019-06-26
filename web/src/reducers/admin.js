@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect';
+
 import {
   ADMIN_GET_ACTIVITIES_SUCCESS,
   ADMIN_GET_ROLES_SUCCESS,
@@ -24,3 +26,25 @@ const user = (state = initialState, action) => {
 };
 
 export default user;
+
+export const selectUsers = ({ admin: { users } }) => users;
+
+export const selectUsersSorted = createSelector(
+  [selectUsers],
+  users => {
+    return [...users].sort(
+      ({ name: nameA, email: emailA }, { name: nameB, email: emailB }) => {
+        const sortA = (nameA || emailA).toLowerCase();
+        const sortB = (nameB || emailB).toLowerCase();
+
+        if (sortA < sortB) {
+          return -1;
+        }
+        if (sortA > sortB) {
+          return 1;
+        }
+        return 0;
+      }
+    );
+  }
+);
