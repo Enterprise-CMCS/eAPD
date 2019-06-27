@@ -15,13 +15,14 @@ const StandardReview = ({
   // link wouldn't get clicked.
   const anchor = useRef(null);
   const editHandler = useMemo(
-    () =>
-      editHref
-        ? (...args) => {
-            anchor.current.click();
-            onEditClick(...args);
-          }
-        : onEditClick,
+    () => (...args) => {
+      if (editHref) {
+        anchor.current.click();
+      }
+      if (onEditClick) {
+        onEditClick(...args);
+      }
+    },
     [editHref]
   );
 
@@ -29,18 +30,20 @@ const StandardReview = ({
     <Review
       editContent={
         <div className="nowrap">
-          <Button size="small" variation="transparent" onClick={editHandler}>
-            {// If the editHref is set, create a link element here so it'll
-            // behave as intended on the outside.  Otherwise, the button
-            // content can just be text.
-            editHref ? (
-              <a href={editHref} ref={anchor}>
-                Edit
-              </a>
-            ) : (
-              'Edit'
-            )}
-          </Button>
+          {onEditClick || editHref ? (
+            <Button size="small" variation="transparent" onClick={editHandler}>
+              {// If the editHref is set, create a link element here so it'll
+              // behave as intended on the outside.  Otherwise, the button
+              // content can just be text.
+              editHref ? (
+                <a href={editHref} ref={anchor}>
+                  Edit
+                </a>
+              ) : (
+                'Edit'
+              )}
+            </Button>
+          ) : null}
           {onDeleteClick && (
             // If there's a delete click handler, add a remove button to the
             // header area and wire it up
@@ -74,7 +77,7 @@ StandardReview.propTypes = {
 StandardReview.defaultProps = {
   editHref: null,
   onDeleteClick: null,
-  onEditClick: () => {}
+  onEditClick: null
 };
 
 export default StandardReview;

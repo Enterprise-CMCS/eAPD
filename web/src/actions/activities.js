@@ -167,9 +167,11 @@ export const expandActivitySection = key => ({
   key
 });
 
-export const removeActivity = key => dispatch => {
-  dispatch({ type: REMOVE_ACTIVITY, key });
-  dispatch(updateBudget());
+export const removeActivity = (key, { global = window } = {}) => dispatch => {
+  if (global.confirm('Do you really want to delete this activity?')) {
+    dispatch({ type: REMOVE_ACTIVITY, key });
+    dispatch(updateBudget());
+  }
 };
 
 export const removeActivityContractor = (

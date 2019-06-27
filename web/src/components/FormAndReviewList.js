@@ -44,6 +44,7 @@ FormAndReviewItem.defaultProps = {
 
 const FormAndReviewList = ({
   addButtonText,
+  allowDeleteAll,
   collapsed,
   expanded,
   list,
@@ -53,7 +54,7 @@ const FormAndReviewList = ({
   ...rest
 }) => (
   <div className="form-and-review-list">
-    {list.length === 0 ? (
+    {list.length === 0 && noDataMessage !== false ? (
       <Alert variation="error">{noDataMessage || 'This list is empty'}</Alert>
     ) : (
       list.map((item, index) => (
@@ -64,7 +65,11 @@ const FormAndReviewList = ({
           index={index}
           initialCollapsed={item.initialCollapsed}
           item={item}
-          onDeleteClick={list.length > 1 ? () => onDeleteClick(item.key) : null}
+          onDeleteClick={
+            list.length > 1 || allowDeleteAll
+              ? () => onDeleteClick(item.key)
+              : null
+          }
           {...rest}
         />
       ))
@@ -79,16 +84,18 @@ const FormAndReviewList = ({
 
 FormAndReviewList.propTypes = {
   addButtonText: PropTypes.string,
+  allowDeleteAll: PropTypes.bool,
   collapsed: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
   expanded: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
   list: PropTypes.array.isRequired,
-  noDataMessage: PropTypes.string,
+  noDataMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onAddClick: PropTypes.func,
   onDeleteClick: PropTypes.func
 };
 
 FormAndReviewList.defaultProps = {
   addButtonText: null,
+  allowDeleteAll: false,
   noDataMessage: null,
   onAddClick: null,
   onDeleteClick: null
