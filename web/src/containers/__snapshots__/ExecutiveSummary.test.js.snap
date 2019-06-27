@@ -156,7 +156,7 @@ exports[`executive summary component renders correctly 1`] = `
         heading="Total cost"
         headingLevel={4}
         onDeleteClick={null}
-        onEditClick={[Function]}
+        onEditClick={null}
       >
         <p>
           Verify that this information is correct.
