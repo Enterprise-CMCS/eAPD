@@ -20,6 +20,9 @@ Object {
     "view-document",
   ],
   "id": 2000,
+  "name": "Wonder Woman",
+  "phone": null,
+  "position": "User that can do anything at all",
   "role": "admin",
   "state": Object {
     "id": "mn",
@@ -49,6 +52,9 @@ Object {
     "view-document",
   ],
   "id": 2000,
+  "name": "Wonder Woman",
+  "phone": null,
+  "position": "User that can do anything at all",
   "role": "admin",
   "state": Object {
     "id": "mn",
@@ -78,6 +84,9 @@ Object {
     "view-document",
   ],
   "id": 2000,
+  "name": "Wonder Woman",
+  "phone": null,
+  "position": "User that can do anything at all",
   "role": "admin",
   "state": Object {
     "id": "mn",

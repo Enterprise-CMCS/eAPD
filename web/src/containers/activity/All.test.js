@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import React from 'react';
 
 import { AllRaw as Activities, mapStateToProps } from './All';
@@ -7,7 +6,10 @@ import { AllRaw as Activities, mapStateToProps } from './All';
 describe('the Activities component', () => {
   const props = {
     activityKeys: ['1', '2', '3'],
-    addActivity: sinon.stub()
+    activities: ['activity 1', 'activity 2', 'activity 3'],
+    add: jest.fn(),
+    remove: jest.fn(),
+    update: jest.fn()
   };
 
   test('renders correctly', () => {
@@ -15,15 +17,20 @@ describe('the Activities component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('adds a new activity', () => {
-    const component = shallow(<Activities {...props} />);
-    component.find('Btn').simulate('click');
-    expect(props.addActivity.callCount).toBe(1);
-  });
-
   test('maps redux state to component props', () => {
     expect(
-      mapStateToProps({ activities: { allKeys: ['1', 'two', '3'] } })
-    ).toEqual({ activityKeys: ['1', 'two', '3'] });
+      mapStateToProps({
+        activities: {
+          allKeys: ['1', 'two', '3'],
+          byKey: {
+            key1: 'activity 1',
+            key2: 'activity 2'
+          }
+        }
+      })
+    ).toEqual({
+      activityKeys: ['1', 'two', '3'],
+      activities: ['activity 1', 'activity 2']
+    });
   });
 });

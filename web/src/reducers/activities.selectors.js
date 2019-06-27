@@ -9,6 +9,9 @@ export const selectActivitiesByKey = ({ activities: { byKey } }) => byKey;
 export const selectActivityByKey = ({ activities: { byKey } }, { aKey }) =>
   byKey[aKey];
 
+export const selectAllActivities = ({ activities: { byKey } }) =>
+  Object.values(byKey);
+
 const selectBudgetForActivity = ({ budget }, { aKey }) =>
   budget.activities[aKey];
 

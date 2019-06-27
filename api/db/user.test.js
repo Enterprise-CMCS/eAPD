@@ -165,17 +165,17 @@ tap.test('user data model', async userModelTests => {
 
   userModelTests.test('validation', async validationTests => {
     const self = {
-      where: sandbox.stub(),
-      fetchAll: sandbox.stub(),
       attributes: {},
+      fetchAll: sandbox.stub(),
       hasChanged: sandbox.stub(),
-      set: sandbox.stub()
+      set: sandbox.stub(),
+      query: sandbox.stub()
     };
 
     const validate = user.user.validate.bind(self);
 
     validationTests.beforeEach(async () => {
-      self.where.returns({ fetchAll: self.fetchAll });
+      self.query.returns({ fetchAll: self.fetchAll });
 
       self.attributes = {};
       self.hasChanged.returns(false);
