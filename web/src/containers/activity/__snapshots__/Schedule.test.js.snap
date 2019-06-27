@@ -40,6 +40,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     <hr />
     <FormAndReviewList
       addButtonText="Add another milestone"
+      allowDeleteAll={false}
       collapsed={[Function]}
       expanded={[Function]}
       list={

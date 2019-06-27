@@ -160,6 +160,17 @@ const Story = () => {
         </li>
         <li style={{ marginTop: '1em' }}>
           <strong>
+            <code>allowDeleteAll</code>
+          </strong>{' '}
+          - Whether to allow all items from the list to be deleted. If false,
+          then the review component will be passed <code>null</code> for its{' '}
+          <code>onDeleteClick</code> prop when there is only one item left in
+          the list. If true, the proper delete handler will be passed to the
+          review component no matter how many items are in the list. Defaults to{' '}
+          <code>false</code>
+        </li>
+        <li style={{ marginTop: '1em' }}>
+          <strong>
             <code>noDataMessage</code>
           </strong>{' '}
           - Text to be displayed inside an alert panel if there are no items in
