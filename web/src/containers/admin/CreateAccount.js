@@ -4,7 +4,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import CardForm from '../../components/CardForm';
 import Password from '../../components/PasswordWithMeter';
-import { STATES } from '../../util';
+import { STATES, toSentenceCase } from '../../util';
 import { createUser as createUserDispatch } from '../../actions/admin';
 import { getAddAccountError } from '../../reducers/errors';
 import { getAddAccountWorking } from '../../reducers/working';
@@ -136,7 +136,7 @@ class CreateUser extends Component {
             <option value="">None</option>
             {roles.map(r => (
               <option key={r.name} value={r.name}>
-                {r.name}
+                {toSentenceCase(r.name)}
               </option>
             ))}
           </Select>
