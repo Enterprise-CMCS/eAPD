@@ -77,6 +77,17 @@ describe('users endpoint | POST /users', () => {
       expect(newUsers).toBeFalsy();
     });
 
+    it('with existing email address but different capitalization', async () => {
+      const { response, body } = await request.post(url, {
+        jar: cookies,
+        json: { email: 'All-Permissions-And-State', password: 'anything' }
+      });
+      expect(response.statusCode).toEqual(400);
+      expect(body).toMatchSnapshot();
+      const newUsers = await newUsersInTheDatabase();
+      expect(newUsers).toBeFalsy();
+    });
+
     it('with a weak password', async () => {
       const { response, body } = await request.post(url, {
         jar: cookies,
