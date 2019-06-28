@@ -88,6 +88,7 @@ describe('activities reducer', () => {
     expenses: [newExpense(keyFn)],
     fundingSource: 'HIT',
     goals: [newGoal(keyFn)],
+    initialCollapsed: false,
     meta: { expanded: false },
     plannedStartDate: '',
     plannedEndDate: '',
