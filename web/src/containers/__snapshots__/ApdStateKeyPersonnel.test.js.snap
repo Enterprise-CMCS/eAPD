@@ -1,16 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`apd state profile, Medicaid office component main component renders correctly 1`] = `
-<div
-  className="ds-u-border-top--2"
->
-  <ApdStateKeyPerson
-    handleChange={[Function]}
-    handleYearChange={[Function]}
-    initialExpanded={false}
-    key="person1"
-    number={1}
-    person={
+exports[`apd state profile, Medicaid office component renders correctly 1`] = `
+<FormAndReviewList
+  addButtonText="Add another person"
+  allowDeleteAll={false}
+  collapsed={[Function]}
+  expanded={[Function]}
+  handleChange={[Function]}
+  handleYearChange={[Function]}
+  list={
+    Array [
       Object {
         "costs": Object {
           "1": 100,
@@ -20,24 +19,7 @@ exports[`apd state profile, Medicaid office component main component renders cor
         "key": "person1",
         "name": "person name",
         "position": "unobservable",
-      }
-    }
-    primary={true}
-    remove={[Function]}
-    years={
-      Array [
-        "1",
-        "2",
-      ]
-    }
-  />
-  <ApdStateKeyPerson
-    handleChange={[Function]}
-    handleYearChange={[Function]}
-    initialExpanded={false}
-    key="person2"
-    number={2}
-    person={
+      },
       Object {
         "costs": Object {
           "1": 0,
@@ -47,23 +29,17 @@ exports[`apd state profile, Medicaid office component main component renders cor
         "key": "person2",
         "name": "",
         "position": "",
-      }
-    }
-    primary={false}
-    remove={[Function]}
-    years={
-      Array [
-        "1",
-        "2",
-      ]
-    }
-  />
-  <Button
-    className="ds-u-margin-top--2 visibility--screen"
-    onClick={[Function]}
-    type="button"
-  >
-    Add another person
-  </Button>
-</div>
+      },
+    ]
+  }
+  noDataMessage={null}
+  onAddClick={[MockFunction]}
+  onDeleteClick={[MockFunction]}
+  years={
+    Array [
+      "1",
+      "2",
+    ]
+  }
+/>
 `;

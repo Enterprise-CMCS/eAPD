@@ -179,6 +179,49 @@ export const generateKey = (() => {
   };
 })();
 
+/**
+ * Convert a YYYY-MM-DD date string from state format into a
+ * consistent display format
+ *
+ * @param {String} date Date string from state.
+ * @returns {String} Display-formatted date string.
+ */
+export const stateDateToDisplay = date => {
+  if (date) {
+    const [year, month, day] = date.split('-');
+    return `${month}/${day}/${year}`;
+  }
+  return 'N/A';
+};
+
+/**
+ * Get a sequential form label ID, for uniqueness
+ */
+export const getLabelID = (() => {
+  let count = 0;
+  return () => {
+    count += 1;
+    if (process && process.env.NODE_ENV === 'test') {
+      // In test environments, always return the same thing, otherwise our
+      // snapshots are just like 🤷🏼‍♂️
+      count = 12321;
+    }
+    return `eapd-form-label-${count}`;
+  };
+})();
+
+/** Converts a single phrase to sentence case, not accounting for punctuation
+ */
+export const toSentenceCase = str =>
+  str
+    // Replace the first character after the start-of-line with its uppercase
+    .replace(/^(.)/, letter => letter.toUpperCase())
+    // Then replace every uppercase letter that is followed by a space or a
+    // lowercase letter with its lowercase. This way groups of capitalized
+    // letters (like acronyms) will stay capitalized, but other capitalized
+    // words will be lower-cased.
+    .replace(/ ([A-Z])([a-z]| )/g, start => start.toLowerCase());
+
 export const arrToObj = (array = [], initialValue = 0) => {
   const init =
     typeof initialValue === 'function' ? initialValue : () => initialValue;

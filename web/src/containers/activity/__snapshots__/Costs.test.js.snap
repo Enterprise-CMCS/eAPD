@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activity costs wrapper (around personnel and non-personnel)  renders properly 1`] = `
+<Subsection
+  id={null}
+  nested={true}
+  resource="activities.costs"
+>
+  <h5
+    className="ds-h4"
+  >
+    Personnel
+  </h5>
+  <Connect(StatePersonnel)
+    aKey="activity key"
+  />
+  <h5
+    className="ds-h4"
+  >
+    Non-Personnel
+  </h5>
+  <Connect(NonPersonnelCosts)
+    aKey="activity key"
+  />
+</Subsection>
+`;

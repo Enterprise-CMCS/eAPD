@@ -1,5 +1,5 @@
 /*
- * Graphviz of '<open file '<stdin>', mode 'r' at 0x7f11dba740c0>', created 2019-01-29 18:55:56.429640
+ * Graphviz of '<open file '<stdin>', mode 'r' at 0x7f0d6b0ca0c0>', created 2019-06-17 20:14:59.358385
  * Generated from https://github.com/rm-hull/sql_graphviz
  */
 digraph g { graph [ rankdir = "LR" ];
@@ -340,6 +340,17 @@ digraph g { graph [ rankdir = "LR" ];
       </table>
     >];
 
+  "auth_sessions" [
+    shape=none
+    label=<
+      <table border="0" cellspacing="0" cellborder="1">
+        <tr><td bgcolor="lightblue2"><font face="Times-bold" point-size="20">auth_sessions</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="session_id"><font face="Times-bold">session_id</font>  <font color="#535353">character varying ( 64 ) NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="user_id"><font face="Times-bold">user_id</font>  <font color="#535353">integer NOT NULL</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="expiration"><font face="Times-bold">expiration</font>  <font color="#535353">bigint NOT NULL</font></td></tr>
+      </table>
+    >];
+
   "files" [
     shape=none
     label=<
@@ -398,6 +409,8 @@ digraph g { graph [ rankdir = "LR" ];
         <tr><td bgcolor="grey96" align="left" port="position"><font face="Times-bold">position</font>  <font color="#535353">text</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="phone"><font face="Times-bold">phone</font>  <font color="#535353">character varying ( 10 )</font></td></tr>
         <tr><td bgcolor="grey96" align="left" port="state_id"><font face="Times-bold">state_id</font>  <font color="#535353">character varying ( 2 )</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="failed_logons"><font face="Times-bold">failed_logons</font>  <font color="#535353">json</font></td></tr>
+        <tr><td bgcolor="grey96" align="left" port="locked_until"><font face="Times-bold">locked_until</font>  <font color="#535353">bigint</font></td></tr>
       </table>
     >];
   "activities":apd_id -> "apds":id
@@ -425,6 +438,7 @@ digraph g { graph [ rankdir = "LR" ];
   "apds":state_id -> "states":id
   "auth_role_activity_mapping":activity_id -> "auth_activities":id
   "auth_role_activity_mapping":role_id -> "auth_roles":id
+  "auth_sessions":user_id -> "users":id
   "users":auth_role -> "auth_roles":name
   "users":state_id -> "states":id
 }

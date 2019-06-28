@@ -81,6 +81,28 @@ tap.test('user data model', async userModelTests => {
     }
   );
 
+  userModelTests.test('parse', async tests => {
+    tests.test('coerced lock timeout into a number', async test => {
+      const fromNull = user.user.parse({ locked_until: null });
+      const fromNumberString = user.user.parse({ locked_until: '123' });
+      const fromText = user.user.parse({ locked_until: 'something' });
+      const withoutLock = user.user.parse({ something: 'else' });
+
+      test.same(fromNull, { locked_until: 0 }, 'coerces null to 0');
+      test.same(
+        fromNumberString,
+        { locked_until: 123 },
+        'coerces number string'
+      );
+      test.same(fromText, { locked_until: 0 }, 'coerces non-number to 0');
+      test.same(
+        withoutLock,
+        { something: 'else' },
+        'does not add lock timeout if not requested'
+      );
+    });
+  });
+
   userModelTests.test('format', async formatTests => {
     const self = {
       hasChanged: sandbox.stub()
@@ -109,21 +131,51 @@ tap.test('user data model', async userModelTests => {
       test.same(out, { password: 'hashed password' });
       test.ok(hash.hashSync.calledWith('new password here'));
     });
+
+    formatTests.test('when failed_logons has changed', async test => {
+      self.hasChanged.withArgs('failed_logons').returns(true);
+
+      const out = format({ failed_logons: [1, 2, 3] });
+
+      test.same(
+        out,
+        { failed_logons: '[1,2,3]' },
+        'failed_logons is stringified'
+      );
+    });
+
+    formatTests.test(
+      'deletes numberified locked_until if it has not been changed',
+      async test => {
+        self.hasChanged.withArgs('locked_until').returns(false);
+
+        const out = format({
+          locked_until: 'something',
+          another: 'something else'
+        });
+
+        test.same(
+          out,
+          { another: 'something else' },
+          'deletes locked_until attribute if it was not changed'
+        );
+      }
+    );
   });
 
   userModelTests.test('validation', async validationTests => {
     const self = {
-      where: sandbox.stub(),
-      fetchAll: sandbox.stub(),
       attributes: {},
+      fetchAll: sandbox.stub(),
       hasChanged: sandbox.stub(),
-      set: sandbox.stub()
+      set: sandbox.stub(),
+      query: sandbox.stub()
     };
 
     const validate = user.user.validate.bind(self);
 
     validationTests.beforeEach(async () => {
-      self.where.returns({ fetchAll: self.fetchAll });
+      self.query.returns({ fetchAll: self.fetchAll });
 
       self.attributes = {};
       self.hasChanged.returns(false);

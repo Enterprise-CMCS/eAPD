@@ -19,7 +19,22 @@ module.exports = (zxcvbn = defaultZxcvbn, hash = defaultHash) => ({
         // eslint-disable-next-line no-param-reassign
         attr.password = hash.hashSync(attr.password);
       }
+      if (this.hasChanged('failed_logons')) {
+        // eslint-disable-next-line no-param-reassign
+        attr.failed_logons = JSON.stringify(attr.failed_logons);
+      }
+      if (!this.hasChanged('locked_until')) {
+        // eslint-disable-next-line no-param-reassign
+        delete attr.locked_until;
+      }
       return attr;
+    },
+
+    parse(response) {
+      if (Object.keys(response).includes('locked_until')) {
+        response.locked_until = +response.locked_until || 0;
+      }
+      return response;
     },
 
     async activities() {
@@ -51,9 +66,11 @@ module.exports = (zxcvbn = defaultZxcvbn, hash = defaultHash) => ({
       if (this.hasChanged('email')) {
         logger.silly('email address changed; making sure it is unique');
 
-        const otherUsersWithThisEmail = await this.where({
-          email: this.attributes.email
-        }).fetchAll();
+        const otherUsersWithThisEmail = await this.query(
+          'whereRaw',
+          'LOWER(email) = ?',
+          [this.attributes.email.toLowerCase()]
+        ).fetchAll();
 
         if (otherUsersWithThisEmail.length) {
           logger.verbose(
