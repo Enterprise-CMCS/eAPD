@@ -45,6 +45,24 @@ describe('FormAndReviewList component', () => {
       // FormAndReviewItem since there is just one item.
     });
 
+    it('with just one item and allowDeleteAll set to true', () => {
+      expect(
+        shallow(
+          <FormAndReviewList
+            addButtonText="text for adding a new button"
+            allowDeleteAll
+            collapsed={jest.fn()}
+            expanded={jest.fn()}
+            list={[{ initialCollapsed: true, key: 'one' }]}
+            noDataMessage="displayed when there is no data"
+            onAddClick={jest.fn()}
+            onDeleteClick={jest.fn()}
+          />
+        )
+      ).toMatchSnapshot();
+      // Manually inspect that onDeleteClick is passed down to FormAndReviewItem
+    });
+
     it('with no items', () => {
       expect(
         shallow(
@@ -54,6 +72,22 @@ describe('FormAndReviewList component', () => {
             expanded={jest.fn()}
             list={[]}
             noDataMessage="displayed when there is no data"
+            onAddClick={jest.fn()}
+            onDeleteClick={jest.fn()}
+          />
+        )
+      ).toMatchSnapshot();
+    });
+
+    it('with no items and noDataMessage set to false', () => {
+      expect(
+        shallow(
+          <FormAndReviewList
+            addButtonText="text for adding a new button"
+            collapsed={jest.fn()}
+            expanded={jest.fn()}
+            list={[]}
+            noDataMessage={false}
             onAddClick={jest.fn()}
             onDeleteClick={jest.fn()}
           />

@@ -6,14 +6,6 @@ exports[`Review wrapper component renders properly if a delete handler is provid
     <div
       className="nowrap"
     >
-      <Button
-        onClick={[Function]}
-        size="small"
-        type="button"
-        variation="transparent"
-      >
-        Edit
-      </Button>
       <React.Fragment>
         |
         <Button
@@ -33,7 +25,7 @@ exports[`Review wrapper component renders properly if a delete handler is provid
 </Review>
 `;
 
-exports[`Review wrapper component renders properly if only the required props are set 1`] = `
+exports[`Review wrapper component renders properly if an edit handler is supplied 1`] = `
 <Review
   editContent={
     <div
@@ -48,6 +40,32 @@ exports[`Review wrapper component renders properly if only the required props ar
         Edit
       </Button>
     </div>
+  }
+  editText="Edit"
+>
+  Hello
+</Review>
+`;
+
+exports[`Review wrapper component renders properly if only the required props are set 1`] = `
+<Review
+  editContent={
+    <div
+      className="nowrap"
+    />
+  }
+  editText="Edit"
+>
+  Hello
+</Review>
+`;
+
+exports[`Review wrapper component renders properly if the edit link and edit handler are both omitted 1`] = `
+<Review
+  editContent={
+    <div
+      className="nowrap"
+    />
   }
   editText="Edit"
 >

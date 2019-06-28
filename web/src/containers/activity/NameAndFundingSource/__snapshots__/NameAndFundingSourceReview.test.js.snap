@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the NameAndFundingSourceReview component renders correctly when expanding is disabled 1`] = `
+<StandardReview
+  editHref={null}
+  heading="3. Getting out of jail"
+  headingLevel={3}
+  onDeleteClick={null}
+  onEditClick={null}
+>
+  Program type: 
+  Rich Uncle Pennybags
+</StandardReview>
+`;
+
+exports[`the NameAndFundingSourceReview component renders correctly when expanding is enabled 1`] = `
+<StandardReview
+  editHref={null}
+  heading="3. Getting out of jail"
+  headingLevel={3}
+  onDeleteClick={[MockFunction]}
+  onEditClick={[MockFunction]}
+>
+  Program type: 
+  Rich Uncle Pennybags
+</StandardReview>
+`;

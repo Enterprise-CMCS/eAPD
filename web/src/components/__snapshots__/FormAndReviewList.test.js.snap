@@ -113,6 +113,34 @@ exports[`FormAndReviewList component renders properly with just one item 1`] = `
 </div>
 `;
 
+exports[`FormAndReviewList component renders properly with just one item and allowDeleteAll set to true 1`] = `
+<div
+  className="form-and-review-list"
+>
+  <FormAndReviewItem
+    collapsedComponent={[MockFunction]}
+    expandedComponent={[MockFunction]}
+    index={0}
+    initialCollapsed={true}
+    item={
+      Object {
+        "initialCollapsed": true,
+        "key": "one",
+      }
+    }
+    key="one"
+    onDeleteClick={[Function]}
+  />
+  <Button
+    className="visibility--screen"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    text for adding a new button
+  </Button>
+</div>
+`;
+
 exports[`FormAndReviewList component renders properly with multiple items 1`] = `
 <div
   className="form-and-review-list"
@@ -164,6 +192,20 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
   >
     displayed when there is no data
   </Alert>
+  <Button
+    className="visibility--screen"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    text for adding a new button
+  </Button>
+</div>
+`;
+
+exports[`FormAndReviewList component renders properly with no items and noDataMessage set to false 1`] = `
+<div
+  className="form-and-review-list"
+>
   <Button
     className="visibility--screen"
     onClick={[MockFunction]}
