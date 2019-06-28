@@ -5,14 +5,12 @@
   &.activity--body__first {
     border-top: 4px solid $color-primary;
   }
-
-  // padding: $spacer-1 0;
 }
 
 .activity--body__collapsed > .ds-c-review {
   border: 0 !important;
 }
 
-// .activity--body__expanded {
-//   padding-bottom: $spacer-2;
-// }
+.activity--body__expanded {
+  padding-bottom: $spacer-3;
+}
