@@ -1,19 +1,35 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
 footer {
-  background-color: $color-primary-alt-lightest;
-  padding-top: $spacer-6*2;
-  padding-bottom: $spacer-6*2;
+  background-color: $color-gray-lightest;
+  border-top: solid 2px $color-gray-light;
+  padding-top: $spacer-6;
   margin-top: $spacer-6;
 
-  .logo-container {
+  .footer--logo-container {
     display: flex;
     align-items: center;
+    img {
+      width: 100%; /* fix for IE */
+    }
   }
 
   .hhs-logo {
     float: left;
     height: 100px;
     margin-right: $spacer-4;
+  }
+
+  .footer--banner {
+    padding: $spacer-1 0;
+    margin-top: $spacer-6;
+    background-color: $color-primary-darkest;
+    color: $color-white;
+    p {
+      margin-bottom: 0;
+    }
+    a {
+      color: $color-white;
+    }
   }
 }
