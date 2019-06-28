@@ -18,33 +18,29 @@ exports[`the Activities component renders correctly 1`] = `
       open={true}
       resource="activities.list"
     >
-      <div
-        className="mb3"
-      >
-        <Connect(EntryBasic)
-          aKey="1"
-          key="1"
-          num={1}
-        />
-        <Connect(EntryBasic)
-          aKey="2"
-          key="2"
-          num={2}
-        />
-        <Connect(EntryBasic)
-          aKey="3"
-          key="3"
-          num={3}
-        />
-      </div>
-      <Btn
-        extraCss="visibility--screen"
-        kind="primary"
-        onClick={[Function]}
-        size={null}
-      >
-        Add activity
-      </Btn>
+      <NameAndFundingSourceReview
+        disableExpand={true}
+        expand={[Function]}
+        index={-1}
+        item="activity 1"
+        onDeleteClick={null}
+      />
+      <FormAndReviewList
+        addButtonText="Add another activity"
+        allowDeleteAll={true}
+        collapsed={[Function]}
+        expanded={[Function]}
+        handleChange={[MockFunction]}
+        list={
+          Array [
+            "activity 2",
+            "activity 3",
+          ]
+        }
+        noDataMessage={false}
+        onAddClick={[MockFunction]}
+        onDeleteClick={[MockFunction]}
+      />
     </Subsection>
     <Connect(ConnectedWaypoint)
       id="1"

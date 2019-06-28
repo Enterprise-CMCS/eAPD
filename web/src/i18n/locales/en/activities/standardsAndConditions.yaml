@@ -14,6 +14,7 @@ modularity:
       availability of business rules in both human and machine-readable
       formats.
 
+
       Commitment to formal system development methodology
       and open reusable system architecture is extremely important in
       order to ensure that states can more easily change and maintain
@@ -23,10 +24,12 @@ modularity:
       component parts. Extremely complex systems can be developed as
       part of a service-oriented architecture (SOA).
 
+
       Modularity also helps address the challenges of customization.
       Baseline web services and capabilities can be developed for and used
       by anyone, with exceptions for specific business processes handled
       by a separate module that interoperates with the baseline modules.
+
 
       Changes can be made independently to baseline
       capabilities without affecting how the extension works. By doing
@@ -63,6 +66,7 @@ industryStandards:
       adopted by the Secretary under section 1561 of the Affordable
       Care Act.
 
+
       CMS must ensure that Medicaid infrastructure and
       information system investments are made with the assurance that
       timely and reliable adoption of industry standards and productive
@@ -83,6 +87,7 @@ leverage:
       from publicly available or commercially sold components and
       products, and from the use of cloud technologies to share
       infrastructure and applications.
+
 
       CMS commits to work assertively with the states to identify promising
       state systems  that can be leveraged by other states. CMS strongly
@@ -118,6 +123,7 @@ reporting:
       systems should produce reports that contribute to continuous
       improvement in business operations, transparency, and accountability.
 
+
       Reports should be automatically generated through open interfaces
       to designated federal repositories or data hubs, with appropriate
       audit trails. MITA 3.0 will provide additional detail about
@@ -144,6 +150,7 @@ interoperability:
       business services and technology investments to produce
       seamless and efficient customer experiences.
 
+
       Systems must include appropriate architecture, and standardized
       communication protocols to preserve the
       ability to appropriately exchange
@@ -152,6 +159,7 @@ interoperability:
       “responsible for knowing and understanding its environment
       (data, applications and infrastructure) in order to map its data
       to information sharing requirements."
+
 
       The data-sharing architecture addresses conceptual and
       logical mechanisms used (i.e., data hubs, repositories, and registries).
@@ -171,6 +179,7 @@ mitigationStrategy:
       for any major IT build; CMS expects that states will identify
       potential risks and develop strategies to address those risks
       throughout the system lifecycle.
+
 
       Mitigation plans for major
       Medicaid E&E system or MMIS projects should address minimum
@@ -204,6 +213,7 @@ keyPersonnel:
       (including by email) and formally reflect the change in the next
       planned APD update.
 
+
       This condition refines and strengthens the existing APD
       requirements regarding personnel resource statements as required
       under 45 CFR 95.610. For Medicaid E&E APDs, states should include
@@ -233,6 +243,7 @@ documentation:
       necessary information to ensure systems could be installed and
       operated by a variety of contractors or other users.
 
+
       While the APD should address how the state plans to maintain documentation,
       documentation is not required with the APD.
       States are responsible for making documentation
@@ -256,6 +267,7 @@ minimizeCost:
       and requires that states consider options beyond software that
       will reduce costs or promote reuse.
 
+
       States should describe strategies considered when
       deciding which most efficient solution. States are not required to
       adopt a particular strategy, but CMS must have sufficient
@@ -266,6 +278,7 @@ minimizeCost:
       well as the extent to which the solutions can be readily implemented
       with alternate hardware and operating systems.
 
+      
       States should consider this new condition in conjunction with existing APD
       requirements regarding cost benefit analyses required at 45 CFR
       95.605 or § 95.610.

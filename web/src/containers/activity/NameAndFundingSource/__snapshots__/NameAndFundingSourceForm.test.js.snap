@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ContractorResourceForm component renders correctly 1`] = `
+<Fragment>
+  <TextField
+    label="Activity name"
+    name="activity-name"
+    onChange={[Function]}
+    type="text"
+    value="Buying bikes for Huey, Dewey, and Louie"
+  />
+  <ChoiceList
+    choices={
+      Array [
+        Object {
+          "checked": false,
+          "label": "HIT",
+          "value": "HIT",
+        },
+        Object {
+          "checked": false,
+          "label": "HIE",
+          "value": "HIE",
+        },
+        Object {
+          "checked": false,
+          "label": "MMIS",
+          "value": "MMIS",
+        },
+      ]
+    }
+    label="Program type"
+    name="program-type"
+    onChange={[Function]}
+  />
+</Fragment>
+`;

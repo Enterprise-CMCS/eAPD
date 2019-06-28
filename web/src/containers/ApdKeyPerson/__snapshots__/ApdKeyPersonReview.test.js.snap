@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ApdKeyPersonReview component renders correctly 1`] = `
+<Fragment>
+  <div
+    className="visibility--screen"
+  >
+    <StandardReview
+      editHref={null}
+      heading="13. Bob the Builder"
+      onDeleteClick={[MockFunction]}
+      onEditClick={[MockFunction]}
+    >
+      <ul
+        className="ds-c-list--bare"
+      >
+        <li>
+          The Builder
+        </li>
+        <li>
+          Total cost: 
+          <Dollars
+            long={false}
+          >
+            400
+          </Dollars>
+        </li>
+      </ul>
+    </StandardReview>
+  </div>
+  <div
+    className="visibility--print"
+  >
+    <StandardReview
+      editHref={null}
+      heading="13. Bob the Builder"
+      onDeleteClick={null}
+      onEditClick={null}
+    >
+      <ul
+        className="ds-c-list--bare"
+      >
+        <li>
+          email address
+        </li>
+        <li>
+          The Builder
+        </li>
+        <li>
+          Time commitment to project: 
+          32
+          %
+        </li>
+        <li>
+          Total cost: 
+          <Dollars
+            long={false}
+          >
+            400
+          </Dollars>
+        </li>
+      </ul>
+    </StandardReview>
+  </div>
+</Fragment>
+`;

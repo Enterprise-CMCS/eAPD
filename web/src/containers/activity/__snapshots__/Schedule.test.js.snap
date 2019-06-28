@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the Schedule (milestones) component renders correctly with just one milestone 1`] = `
+exports[`the Schedule (milestones) component renders correctly 1`] = `
 <Subsection
   id={null}
   nested={true}
@@ -38,94 +38,26 @@ exports[`the Schedule (milestones) component renders correctly with just one mil
       source="activities.schedule.milestone.instruction"
     />
     <hr />
-    <Milestone
-      endDate="1945-05-05"
-      idx={0}
-      initialCollapsed={true}
-      key="milestone 1"
-      name="Liberation Day"
-      onChangeDate={[Function]}
-      onChangeName={[Function]}
-      onDelete={null}
-    />
-  </div>
-  <Button
-    className="visibility--screen"
-    onClick={[Function]}
-    type="button"
-  >
-    Add another milestone
-  </Button>
-  <hr />
-</Subsection>
-`;
-
-exports[`the Schedule (milestones) component renders correctly with multiple milestones 1`] = `
-<Subsection
-  id={null}
-  nested={true}
-  resource="activities.schedule"
->
-  <h5
-    className="ds-h5"
-  >
-    Activity start and end dates
-  </h5>
-  <div
-    className="ds-c-choice__checkedChild ds-u-padding-y--0"
-  >
-    <DateField
-      onChange={[Function]}
-      value="1944-10-02"
-    />
-    <DateField
-      onChange={[Function]}
-      value="1944-11-08"
-    />
-  </div>
-  <div
-    className="mb3"
-  >
-    <Instruction
-      args={null}
-      headingDisplay={
-        Object {
-          "className": "ds-h5",
-          "level": "h5",
-        }
+    <FormAndReviewList
+      addButtonText="Add another milestone"
+      allowDeleteAll={false}
+      collapsed={[Function]}
+      expanded={[Function]}
+      list={
+        Array [
+          Object {
+            "endDate": "1945-05-05",
+            "key": "milestone 1",
+            "milestone": "Liberation Day",
+          },
+        ]
       }
-      reverse={false}
-      source="activities.schedule.milestone.instruction"
-    />
-    <hr />
-    <Milestone
-      endDate="1945-05-05"
-      idx={0}
-      initialCollapsed={true}
-      key="milestone 1"
-      name="Liberation Day"
+      noDataMessage="Add milestones for this activity."
+      onAddClick={[Function]}
       onChangeDate={[Function]}
       onChangeName={[Function]}
-      onDelete={[Function]}
-    />
-    <Milestone
-      endDate="1945-05-08"
-      idx={1}
-      initialCollapsed={false}
-      key="milestone 2"
-      name="V-E Day"
-      onChangeDate={[Function]}
-      onChangeName={[Function]}
-      onDelete={[Function]}
+      onDeleteClick={[Function]}
     />
   </div>
-  <Button
-    className="visibility--screen"
-    onClick={[Function]}
-    type="button"
-  >
-    Add another milestone
-  </Button>
-  <hr />
 </Subsection>
 `;

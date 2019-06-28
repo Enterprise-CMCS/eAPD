@@ -1,4 +1,5 @@
 @import '@cmsgov/design-system-support/src/settings/index';
+@import './variables';
 
 fieldset {
   margin: 0;
@@ -28,6 +29,35 @@ div.form--with-reviews {
   padding-bottom: nth($spacers, 3);
 }
 
+// Above is a previous class that was used by the APD key personnel form/review
+// section. Properties below are derived from what was kind of scattered around
+// the activity subsection form/review lists, plus some convenience things to
+// account for the "Add new..." and "Done" buttons being placed automatically
+// by the wrapper.
+//
+// .form--with-reviews isn't being used anywhere at the moment, but preserved
+// here temporarily until reviews, to make it easier to decide which set of
+// styles we should keep.
+
+.form-and-review-list {
+  border-bottom: 2px solid $border-color;
+  padding-bottom: nth($spacers, 3);
+
+  > button {
+    margin-top: nth($spacers, 3);
+  }
+}
+
+.form-and-review-list--item__expanded {
+  border-bottom: 2px solid $border-color;
+  padding-bottom: nth($spacers, 4);
+  padding-top: nth($spacers, 3);
+
+  button:last-child {
+    margin-top: nth($spacers, 5);
+  }
+}
+
 /* for forms that display computed values, but those computed values should
 be aligned vertically with their input field comrades */
 div.form--computed-value__input-aligned {
@@ -42,4 +72,31 @@ div.form--computed-value__input-aligned {
 
 .rdw-editor-toolbar {
   border-radius: $border-radius;
+}
+
+/* dolla dolla inputs */
+.budget-table--input-holder {
+  padding-bottom: 0;
+}
+
+.budget-table--input__number {
+  font-family: $font-family-mono;
+  font-size: inherit;
+  text-align: right;
+  border: 1px solid $color-gray-lighter;
+  border-radius: $border-radius;
+  padding: $spacer-1;
+  width: 100%;
+}
+
+.budget-table--number {
+  font-family: $font-family-mono;
+  font-size: inherit;
+  text-align: right;
+}
+
+.budget-table--subtotal,
+.budget-table--total,
+.budget-table--sum {
+  font-weight: $font-bold;
 }

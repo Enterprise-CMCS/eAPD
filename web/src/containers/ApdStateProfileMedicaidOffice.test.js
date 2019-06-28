@@ -67,10 +67,14 @@ describe('apd state profile, Medicaid office component', () => {
         data: {
           stateProfile: 'state profile'
         }
-      }
+      },
+      user: { data: { state: { id: 'logged-in state id' } } }
     };
 
-    expect(mapStateToProps(state)).toEqual({ stateProfile: 'state profile' });
+    expect(mapStateToProps(state)).toEqual({
+      defaultStateID: 'LOGGED-IN STATE ID',
+      stateProfile: 'state profile'
+    });
   });
 
   test('maps dispatch to props', () => {

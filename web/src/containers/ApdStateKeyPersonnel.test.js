@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 import {
   plain as KeyPersonnel,
@@ -15,110 +14,103 @@ import {
 } from '../actions/apd';
 
 describe('apd state profile, Medicaid office component', () => {
-  const sandbox = sinon.createSandbox();
+  const props = {
+    addKeyPerson: jest.fn(),
+    poc: [
+      {
+        key: 'person1',
+        name: 'person name',
+        position: 'unobservable',
+        hasCosts: true,
+        costs: { '1': 100, '2': 200 }
+      },
+      {
+        key: 'person2',
+        name: '',
+        position: '',
+        hasCosts: false,
+        costs: { '1': 0, '2': 0 }
+      }
+    ],
+    removeKeyPerson: jest.fn(),
+    updateApd: jest.fn(),
+    updateBudget: jest.fn(),
+    years: ['1', '2']
+  };
+
+  const component = shallow(<KeyPersonnel {...props} />);
+
   beforeEach(() => {
-    sandbox.resetHistory();
+    props.addKeyPerson.mockClear();
+    props.removeKeyPerson.mockClear();
+    props.updateApd.mockClear();
+    props.updateBudget.mockClear();
   });
 
-  describe('main component', () => {
-    const props = {
-      addKeyPerson: sandbox.spy(),
-      poc: [
-        {
-          key: 'person1',
-          name: 'person name',
-          position: 'unobservable',
-          hasCosts: true,
-          costs: { '1': 100, '2': 200 }
-        },
-        {
-          key: 'person2',
-          name: '',
-          position: '',
-          hasCosts: false,
-          costs: { '1': 0, '2': 0 }
+  test('renders correctly', () => {
+    expect(component).toMatchSnapshot();
+  });
+
+  describe('events', () => {
+    const list = component.find('FormAndReviewList');
+
+    it('handles adding a new key person', () => {
+      list.prop('onAddClick')();
+      expect(props.addKeyPerson).toHaveBeenCalledWith();
+    });
+
+    it('handles deleting a key person', () => {
+      list.prop('onDeleteClick')('person key');
+      expect(props.removeKeyPerson).toHaveBeenCalledWith('person key');
+    });
+
+    it('handles editing a non-expense property of a key person', () => {
+      list.prop('handleChange')(3, 'field', 'new value');
+      expect(props.updateApd).toHaveBeenCalledWith({
+        keyPersonnel: { 3: { field: 'new value' } }
+      });
+      expect(props.updateBudget).not.toHaveBeenCalled();
+    });
+
+    it('handles editing an expense property of a key person', () => {
+      list.prop('handleChange')(3, 'field', 'new value', true);
+      expect(props.updateApd).toHaveBeenCalledWith({
+        keyPersonnel: { 3: { field: 'new value' } }
+      });
+      expect(props.updateBudget).toHaveBeenCalled();
+    });
+
+    it('handles changing a key person FFY cost', () => {
+      list.prop('handleYearChange')(3, 2004, 'new cost');
+      expect(props.updateApd).toHaveBeenCalledWith({
+        keyPersonnel: { 3: { costs: { 2004: 'new cost' } } }
+      });
+      expect(props.updateBudget).toHaveBeenCalled();
+    });
+  });
+
+  test('maps state to props', () => {
+    const state = {
+      apd: {
+        data: {
+          keyPersonnel: 'key people',
+          years: 'some years'
         }
-      ],
-      removeKeyPerson: sandbox.spy(),
-      setPrimaryKeyPerson: sandbox.spy(),
-      updateApd: sandbox.spy(),
-      updateBudget: sandbox.spy(),
-      years: ['1', '2']
+      }
     };
 
-    test('renders correctly', () => {
-      expect(shallow(<KeyPersonnel {...props} />)).toMatchSnapshot();
+    expect(mapStateToProps(state)).toEqual({
+      poc: 'key people',
+      years: 'some years'
     });
+  });
 
-    test('dispatches adding a new person', () => {
-      shallow(<KeyPersonnel {...props} />)
-        .find('Button')
-        .simulate('click');
-
-      expect(props.addKeyPerson.called).toBeTruthy();
-    });
-
-    test('dispatches removing a person', () => {
-      shallow(<KeyPersonnel {...props} />)
-        .find('ApdStateKeyPerson')
-        .first()
-        .prop('remove')('person object');
-
-      expect(props.removeKeyPerson.calledWith(0)).toBeTruthy();
-    });
-
-    test('dispatches when a person changes', () => {
-      shallow(<KeyPersonnel {...props} />)
-        .find('ApdStateKeyPerson')
-        .first()
-        .prop('handleChange')('field')({ target: { value: 'new value' } });
-
-      expect(
-        props.updateApd.calledWith({
-          keyPersonnel: { 0: { field: 'new value' } }
-        })
-      ).toBeTruthy();
-    });
-
-    test('dispatches when person years change', () => {
-      shallow(<KeyPersonnel {...props} />)
-        .find('ApdStateKeyPerson')
-        .first()
-        .prop('handleYearChange')('1908')({
-        target: { value: '235235' }
-      });
-
-      expect(
-        props.updateApd.calledWith({
-          keyPersonnel: { 0: { costs: { '1908': 235235 } } }
-        })
-      ).toBeTruthy();
-      expect(props.updateBudget.called).toBeTruthy();
-    });
-
-    test('maps state to props', () => {
-      const state = {
-        apd: {
-          data: {
-            keyPersonnel: 'key people',
-            years: 'some years'
-          }
-        }
-      };
-
-      expect(mapStateToProps(state)).toEqual({
-        poc: 'key people',
-        years: 'some years'
-      });
-    });
-
-    test('maps dispatch to props', () => {
-      expect(mapDispatchToProps).toEqual({
-        addKeyPerson,
-        removeKeyPerson,
-        updateApd,
-        updateBudget
-      });
+  test('maps dispatch to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      addKeyPerson,
+      removeKeyPerson,
+      updateApd,
+      updateBudget
     });
   });
 });
