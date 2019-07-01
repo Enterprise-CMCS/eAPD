@@ -9,6 +9,7 @@ exports[`activity Goals component renders properly 1`] = `
   <FormAndReviewList
     addButtonText="Add a goal"
     allowDeleteAll={false}
+    className={null}
     collapsed={[Function]}
     expanded={[Function]}
     handleChange={[Function]}
