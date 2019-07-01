@@ -1,5 +1,5 @@
 import { Alert, Button } from '@cmsgov/design-system-core';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 const FormAndReviewItem = ({
@@ -45,6 +45,7 @@ FormAndReviewItem.defaultProps = {
 const FormAndReviewList = ({
   addButtonText,
   allowDeleteAll,
+  className,
   collapsed,
   expanded,
   list,
@@ -52,39 +53,47 @@ const FormAndReviewList = ({
   onAddClick,
   onDeleteClick,
   ...rest
-}) => (
-  <div className="form-and-review-list">
-    {list.length === 0 && noDataMessage !== false ? (
-      <Alert variation="error">{noDataMessage || 'This list is empty'}</Alert>
-    ) : (
-      list.map((item, index) => (
-        <FormAndReviewItem
-          key={item.key}
-          collapsedComponent={collapsed}
-          expandedComponent={expanded}
-          index={index}
-          initialCollapsed={item.initialCollapsed}
-          item={item}
-          onDeleteClick={
-            list.length > 1 || allowDeleteAll
-              ? () => onDeleteClick(item.key)
-              : null
-          }
-          {...rest}
-        />
-      ))
-    )}
-    {onAddClick && (
-      <Button className="visibility--screen" onClick={onAddClick}>
-        {addButtonText || 'Add another'}
-      </Button>
-    )}
-  </div>
-);
+}) => {
+  const combinedClassName = useMemo(
+    () => ['form-and-review-list', className].join(' '),
+    className
+  );
+
+  return (
+    <div className={combinedClassName}>
+      {list.length === 0 && noDataMessage !== false ? (
+        <Alert variation="error">{noDataMessage || 'This list is empty'}</Alert>
+      ) : (
+        list.map((item, index) => (
+          <FormAndReviewItem
+            key={item.key}
+            collapsedComponent={collapsed}
+            expandedComponent={expanded}
+            index={index}
+            initialCollapsed={item.initialCollapsed}
+            item={item}
+            onDeleteClick={
+              list.length > 1 || allowDeleteAll
+                ? () => onDeleteClick(item.key)
+                : null
+            }
+            {...rest}
+          />
+        ))
+      )}
+      {onAddClick && (
+        <Button className="visibility--screen" onClick={onAddClick}>
+          {addButtonText || 'Add another'}
+        </Button>
+      )}
+    </div>
+  );
+};
 
 FormAndReviewList.propTypes = {
   addButtonText: PropTypes.string,
   allowDeleteAll: PropTypes.bool,
+  className: PropTypes.string,
   collapsed: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
   expanded: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
   list: PropTypes.array.isRequired,
@@ -96,6 +105,7 @@ FormAndReviewList.propTypes = {
 FormAndReviewList.defaultProps = {
   addButtonText: null,
   allowDeleteAll: false,
+  className: null,
   noDataMessage: null,
   onAddClick: null,
   onDeleteClick: null

@@ -16,6 +16,7 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
   <FormAndReviewList
     addButtonText="Add another personnel"
     allowDeleteAll={false}
+    className={null}
     collapsed={[Function]}
     expanded={[Function]}
     handleEditCost={[Function]}
