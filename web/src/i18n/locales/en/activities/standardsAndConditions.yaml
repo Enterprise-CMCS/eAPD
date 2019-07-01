@@ -7,6 +7,7 @@ modularity:
   instruction:
     heading: Modularity
     helpText: >-
+      [ol]
       Modularity requires the use of a modular, flexible approach
       to systems development, including the use of open interfaces
       and exposed application programming interfaces (API); the
@@ -38,6 +39,7 @@ modularity:
       of compliance with this condition is providing CMS with an
       understanding where services and code will be integrated, and where
       the state will pursue a more aggressive decoupling strategy.
+      [/ol]
     detail: >-
       Describe how this activity will support the Modularity condition.
 mita:
