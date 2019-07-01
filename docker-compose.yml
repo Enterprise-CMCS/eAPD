@@ -1,10 +1,16 @@
-version: "3"
+version: "3.2"
 services:
   db:
-    image: postgres:latest
+    image: postgres:10
     environment:
       - POSTGRES_DB=hitech_apd
       - POSTGRES_PASSWORD=cms
+      - PGDATA=/pgdata
+    volumes:
+      - type: bind
+        source: ./pgdata
+        target: /pgdata
+        consistency: delegated
     expose:
       - 5432
     ports:
@@ -12,25 +18,42 @@ services:
 
   web:
     build: ./web
+    image: cms-eapd/web:95c84c6ae834700756ba39e006780037
     environment:
       - API_URL=http://localhost:8081
     volumes:
-      - ./web:/app
+      - type: bind
+        source: ./web
+        target: /app
+        consistency: delegated
       - /app/node_modules
     ports:
       - 8080:8001
+  
+  storybook:
+    image: cms-eapd/web:95c84c6ae834700756ba39e006780037
+    volumes:
+      - ./web:/app
+      - /app/node_modules
+    command: npm run storybook
+    ports:
+      - 8082:9001
 
   api:
     build: ./api
+    image: cms-eapd/api:9ccb093fea8b07059418373a522707bb
     depends_on:
       - db
     environment:
       - PORT=8000
       - DATABASE_URL=postgres://postgres:cms@db/hitech_apd
       - NODE_ENV=development
-      - SESSION_SECRET=super-secret-docker-secret-shhhh
+      - SESSION_SECRET=dadccbf1e3bcb63a4d533c3f184eecfc79fd07e76d0584f808078125a83bc40b6413829e5c690d391dd3f6cbca44406cef07b8193cd4db2f03bab355eea9cb2e
     volumes:
-      - ./api:/app
+      - type: bind
+        source: ./api
+        target: /app
+        consistency: delegated
       - /app/node_modules
     ports:
       - 8081:8000

@@ -1,4 +1,6 @@
-FROM node:8
+FROM node:10
+
+RUN npm i -g npm@^6
 
 RUN mkdir /app
 WORKDIR /app

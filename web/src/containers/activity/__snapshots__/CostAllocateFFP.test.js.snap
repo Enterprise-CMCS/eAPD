@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the CostAllocateFFP component renders correctly 1`] = `
+<Fragment>
+  <h5
+    className="ds-h4"
+  >
+    Federal Financial Participation (FFP) and Cost Allocation
+  </h5>
+  <div
+    key="1066"
+  >
+    <h6
+      className="ds-h3"
+    >
+      FFY 
+      1066
+      :
+    </h6>
+    <p>
+      <Dollars
+        long={true}
+      >
+        300
+      </Dollars>
+    </p>
+    <TextField
+      label="Other Funding Amount"
+      labelClassName="ds-h4"
+      mask="currency"
+      name="cost-allocate-other-1066"
+      onChange={[Function]}
+      type="text"
+      value={10}
+    />
+    <p
+      className="ds-h4 ds-u-display--block"
+    >
+      Medicaid Share
+    </p>
+    <p>
+      <Dollars
+        long={true}
+      >
+        290
+      </Dollars>
+    </p>
+    <ChoiceList
+      choices={
+        Array [
+          Object {
+            "label": "90-10",
+            "value": "90-10",
+          },
+          Object {
+            "label": "75-25",
+            "value": "75-25",
+          },
+          Object {
+            "label": "50-50",
+            "value": "50-50",
+          },
+        ]
+      }
+      label="Federal-State Split"
+      labelClassName="ds-h5"
+      name="ffp-1066"
+      onChange={[Function]}
+      type="select"
+      value="90-10"
+    />
+    <div
+      className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2"
+    >
+      <p
+        className="ds-u-margin-bottom--0"
+      >
+        <strong>
+          Federal
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
+        >
+          261
+        </Dollars>
+      </p>
+      <p
+        className="ds-u-margin-bottom--0"
+      >
+        <strong>
+          State
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
+        >
+          29
+        </Dollars>
+      </p>
+    </div>
+    <Connect(CostAllocateFFPQuarterly)
+      aKey="activity key"
+      year="1066"
+    />
+    <hr />
+  </div>
+  <div
+    key="1067"
+  >
+    <h6
+      className="ds-h3"
+    >
+      FFY 
+      1067
+      :
+    </h6>
+    <p>
+      <Dollars
+        long={true}
+      >
+        3000
+      </Dollars>
+    </p>
+    <TextField
+      label="Other Funding Amount"
+      labelClassName="ds-h4"
+      mask="currency"
+      name="cost-allocate-other-1067"
+      onChange={[Function]}
+      type="text"
+      value="0"
+    />
+    <p
+      className="ds-h4 ds-u-display--block"
+    >
+      Medicaid Share
+    </p>
+    <p>
+      <Dollars
+        long={true}
+      >
+        3000
+      </Dollars>
+    </p>
+    <ChoiceList
+      choices={
+        Array [
+          Object {
+            "label": "90-10",
+            "value": "90-10",
+          },
+          Object {
+            "label": "75-25",
+            "value": "75-25",
+          },
+          Object {
+            "label": "50-50",
+            "value": "50-50",
+          },
+        ]
+      }
+      label="Federal-State Split"
+      labelClassName="ds-h5"
+      name="ffp-1067"
+      onChange={[Function]}
+      type="select"
+      value="10-90"
+    />
+    <div
+      className="ds-u-margin-top--2 ds-u-border-left--2 ds-u-padding-left--2"
+    >
+      <p
+        className="ds-u-margin-bottom--0"
+      >
+        <strong>
+          Federal
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
+        >
+          300
+        </Dollars>
+      </p>
+      <p
+        className="ds-u-margin-bottom--0"
+      >
+        <strong>
+          State
+        </strong>
+      </p>
+      <p>
+        <Dollars
+          long={true}
+        >
+          2700
+        </Dollars>
+      </p>
+    </div>
+    <Connect(CostAllocateFFPQuarterly)
+      aKey="activity key"
+      year="1067"
+    />
+    <hr />
+  </div>
+</Fragment>
+`;

@@ -4,23 +4,6 @@ html {
   font-size: var(--base-font-size);
 }
 
-body {
-  font-family: var(--base-font-family);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--base-font-family);
-  font-weight: bold;
-  line-height: 1.25;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-}
-
 p,
 dl,
 ol,
@@ -58,7 +41,7 @@ table {
 
 th,
 td {
-  padding: 0.5rem 1rem;
+  padding: 0.375rem 0.75rem;
   line-height: inherit;
 }
 
@@ -76,6 +59,10 @@ td {
   margin-left: auto;
   margin-right: auto;
   max-width: 960px;
+}
+
+.preserve-line-breaks {
+  white-space: pre-line;
 }
 
 .sr-only {

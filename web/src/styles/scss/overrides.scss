@@ -1,0 +1,10 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+.ds-l-container {
+  width: 100%;
+}
+
+.ds-c-review__heading,
+.ds-c-label.ds-h4 {
+  font-size: $h4-font-size;
+}

@@ -6,6 +6,8 @@ const {
 const openAPI = {
   '/auth/activities': {
     get: {
+      tags: ['Authentication and authorization'],
+      summary: 'Gets the list of all activities',
       description: 'Get a list of all activities in the system',
       responses: {
         200: {

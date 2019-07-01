@@ -1,0 +1,101 @@
+@import 'ace-css';
+
+@import 'app/base';
+
+@import 'app/alert';
+@import 'app/border';
+@import 'app/color';
+@import 'app/confirm';
+@import 'app/form';
+@import 'app/layout';
+@import 'app/misc';
+@import 'app/progress';
+@import 'app/sidebar';
+@import 'app/spacing';
+@import 'app/type';
+
+/* third-party things */
+@import 'app/datepicker';
+@import 'app/editor';
+
+@custom-media --breakpoint-sm (min-width: 40rem);
+@custom-media --breakpoint-md (min-width: 52rem);
+@custom-media --breakpoint-lg (min-width: 64rem);
+
+:root {
+  --base-font-size: 16px;
+  --base-font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'avenir next', avenir, 'helvetica neue', helvetica, roboto, noto, 'segoe ui',
+    arial, sans-serif;
+
+  --font-size-xl: 1.3125rem;
+  --line-height-xl: 1.7rem;
+
+  --font-size-l: 1.25rem; /* 20px */
+  --line-height-l: 1.875rem; /* 30px */
+
+  --font-size-md: 1rem; /* 16px -- this is the base font size for body copy */
+  --line-height-md: 1.5rem; /* 24px */
+
+  --font-size-s: 0.875rem; /* 14px */
+  --line-height-s: 1.3125rem; /* 21px */
+
+  --h0: 2.5rem;
+  --h1: 2rem;
+  --h2: var(--font-size-xl);
+  --h3: var(--font-size-l);
+  --h4: var(--font-size-md);
+  --h5: var(--font-size-s);
+  --h6: 0.75rem;
+
+  --bold-font-weight: 700;
+
+  --space-tiny: 4px;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+
+  --border-width: 1px;
+  --border-radius: 5px;
+
+  --button-color: #000;
+  --button-background-color: #fdd430;
+  --button-font-weight: normal;
+
+  --col-1: calc(1 / 12 * 100%);
+  --col-2: calc(2 / 12 * 100%);
+  --col-3: calc(3 / 12 * 100%);
+  --col-4: calc(4 / 12 * 100%);
+  --col-5: calc(5 / 12 * 100%);
+  --col-6: calc(6 / 12 * 100%);
+  --col-7: calc(7 / 12 * 100%);
+  --col-8: calc(8 / 12 * 100%);
+  --col-9: calc(9 / 12 * 100%);
+  --col-10: calc(10 / 12 * 100%);
+  --col-11: calc(11 / 12 * 100%);
+  --col-12: calc(12 / 12 * 100%);
+
+  /* ace color overrides */
+
+  --gray: #ccc;
+  --red: #e21c3d;
+
+  /* app colors */
+
+  --teal: #167f91;
+  --teal-light: #d0f1f7;
+  --teal-lightest: #e8f7fa;
+  --teal-bright: #6ecbdb;
+
+  --yellow: #fdd430;
+  --yellow-light: #f7e8b0;
+  --yellow-bright: #f0d04f;
+
+  --blue: #124f81;
+  --blue-light: #dae9f7;
+  --blue-bright: #317cb9;
+
+  --grey: #e6e6e6;
+  --grey-light: #f5f5f5;
+}

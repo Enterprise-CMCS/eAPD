@@ -35,14 +35,19 @@ describe('auth actions', () => {
 
     it('creates LOGIN_SUCCESS after successful auth', () => {
       const store = mockStore({});
-      fetchMock.onPost().reply(200);
+      fetchMock
+        .onPost('/auth/login/nonce', { username: 'name' })
+        .reply(200, { nonce: '123abc' });
+      fetchMock
+        .onPost('/auth/login', { username: '123abc', password: 'secret' })
+        .reply(200, { moop: 'moop', activities: [] });
 
       const expectedActions = [
         { type: actions.LOGIN_REQUEST },
-        { type: actions.LOGIN_SUCCESS }
+        { type: actions.LOGIN_SUCCESS, data: { moop: 'moop', activities: [] } }
       ];
 
-      return store.dispatch(actions.login()).then(() => {
+      return store.dispatch(actions.login('name', 'secret')).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
@@ -84,13 +89,16 @@ describe('auth actions', () => {
       fetchMock.reset();
     });
 
-    it('creates LOGIN_SUCCESS after successful auth', () => {
+    it('creates AUTH_CHEK_SUCCESS after successful auth', () => {
       const store = mockStore({});
-      fetchMock.onGet().reply(200);
+      fetchMock.onGet().reply(200, { name: 'bloop', activities: [] });
 
       const expectedActions = [
         { type: actions.AUTH_CHECK_REQUEST },
-        { type: actions.AUTH_CHECK_SUCCESS }
+        {
+          type: actions.AUTH_CHECK_SUCCESS,
+          data: { name: 'bloop', activities: [] }
+        }
       ];
 
       return store.dispatch(actions.checkAuth()).then(() => {
@@ -98,7 +106,7 @@ describe('auth actions', () => {
       });
     });
 
-    it('creates LOGIN_FAILURE after unsuccessful auth', () => {
+    it('creates AUTH_CHECK_FAILURE after unsuccessful auth and does not load APDs', () => {
       const store = mockStore({});
       fetchMock.onGet().reply(403);
 

@@ -1,3 +1,7 @@
+const moment = require('moment');
+
+const getDate = date => (date ? moment(date).format('YYYY-MM-DD') : null);
+
 module.exports = {
   apdActivitySchedule: {
     tableName: 'activity_schedule',
@@ -10,49 +14,40 @@ module.exports = {
       return {
         id: attributes.id,
         activity_id: attributes.activity_id,
-        actual_end: new Date(attributes.actualEnd),
-        actual_start: new Date(attributes.actualStart),
+        end_date: attributes.endDate,
         milestone: attributes.milestone,
-        planned_end: new Date(attributes.plannedEnd),
-        planned_start: new Date(attributes.plannedStart),
         status: attributes.status
       };
     },
 
-    parse(attributes) {
-      return {
-        id: attributes.id,
-        activity_id: attributes.activity_id,
-        actualEnd: attributes.actual_end,
-        actualStart: attributes.actual_start,
-        milestone: attributes.milestone,
-        plannedEnd: attributes.planned_end,
-        plannedStart: attributes.planned_start,
-        status: attributes.status
-      };
+    async validate() {
+      if (this.attributes.endDate) {
+        // true to enforce strict parsing
+        const date = moment(this.attributes.endDate, 'YYYY-M-D', true);
+        if (!date.isValid()) {
+          throw new Error(`end-date-invalid`);
+        }
+
+        // convert to JS date object
+        this.attributes.endDate = date.toDate();
+      } else {
+        // if the date is some kind of falsey, delete it from the
+        // attributes so we don't save it at all
+        delete this.attributes.endDate;
+      }
     },
 
     toJSON() {
       return {
         id: this.get('id'),
-        actualEnd: this.get('actualEnd'),
-        actualStart: this.get('actualStart'),
+        endDate: getDate(this.get('end_date')),
         milestone: this.get('milestone'),
-        plannedEnd: this.get('plannedEnd'),
-        plannedStart: this.get('plannedStart'),
         status: this.get('status')
       };
     },
 
     static: {
-      updateableFields: [
-        'actualEnd',
-        'actualStart',
-        'milestone',
-        'plannedEnd',
-        'plannedStart',
-        'status'
-      ]
+      updateableFields: ['endDate', 'milestone', 'status']
     }
   }
 };

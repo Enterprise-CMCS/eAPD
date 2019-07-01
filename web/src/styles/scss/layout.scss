@@ -1,0 +1,17 @@
+// needed for sticky footer
+.site {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.site-sidebar__sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+footer {
+  margin-top: auto; // will push the footer as far down as it can
+}

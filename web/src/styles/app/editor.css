@@ -18,12 +18,18 @@
   border-radius: var(--border-radius);
 }
 
-.rdw-editor-main {
-  overflow: inherit;
+.rdw-emoji-modal {
+  height: auto;
 }
 
-.DraftEditor-root {
-  height: 15rem;
+.rdw-editor-main {
+  overflow: inherit;
+  background-color: #fff;
+}
+
+.DraftEditor-root,
+.public-DraftEditor-content {
+  min-height: 240px;
 }
 
 .public-DraftEditor-content {
@@ -39,9 +45,18 @@
   box-shadow: 0 0 0 2px rgba(0, 116, 217, 0.5);
 }
 
+.public-DraftStyleDefault-ol,
+.public-DraftStyleDefault-ul {
+  margin: 0.5rem 0;
+}
+
 .public-DraftStyleDefault-block {
-  line-height: 1.75;
+  line-height: 1.25;
   margin: 0;
+}
+
+.public-DraftStyleDefault-unorderedListItem {
+  line-height: 1;
 }
 
 .rdw-dropdown-wrapper a {

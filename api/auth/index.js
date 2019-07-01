@@ -1,12 +1,13 @@
-const logger = require('../logger')('auth index');
 const Passport = require('passport');
 const LocalStrategy = require('passport-local');
 
-const authenticate = require('./authenticate')();
+const logger = require('../logger')('auth index');
+const authenticate = require('./authenticate');
 const serialization = require('./serialization');
-const sessionFunction = require('./session').getSessionFunction();
+const sessionFunction = require('./session')();
+const { removeUserSession } = require('./sessionStore');
 
-const defaultStrategies = [new LocalStrategy(authenticate)];
+const defaultStrategies = [new LocalStrategy(authenticate())];
 
 // This setup method configures passport and inserts it into
 // the express middleware. After a successful authentication,
@@ -20,9 +21,15 @@ const defaultStrategies = [new LocalStrategy(authenticate)];
 
 module.exports.setup = function setup(
   app,
-  passport = Passport,
-  strategies = defaultStrategies,
-  session = sessionFunction
+  {
+    auth = authenticate,
+    deserializeUser = serialization.deserializeUser,
+    passport = Passport,
+    removeSession = removeUserSession,
+    serializeUser = serialization.serializeUser,
+    session = sessionFunction,
+    strategies = defaultStrategies
+  } = {}
 ) {
   // Handle all of the authentication strategies that we support
   logger.silly('setting up strategies with Passport');
@@ -30,8 +37,8 @@ module.exports.setup = function setup(
 
   // Register our user serialization methods with passport
   logger.silly('setting up our user serializer with Passport');
-  passport.serializeUser(serialization.serializeUser);
-  passport.deserializeUser(serialization.deserializeUser);
+  passport.serializeUser(serializeUser);
+  passport.deserializeUser(deserializeUser);
 
   // Add our session function and passport to our app's
   // middleware
@@ -42,16 +49,47 @@ module.exports.setup = function setup(
 
   logger.silly('setting up a logout handler');
   app.get('/auth/logout', (req, res) => {
+    if (req.session && req.session.passport) {
+      removeSession(req.session.passport.user);
+    }
     req.logout();
+    session.destroy();
     res.status(200).end();
+  });
+
+  logger.silly('setting up local login nonce-fetcher');
+  app.post('/auth/login/nonce', (req, res) => {
+    if (req.body && req.body.username) {
+      res.send({
+        nonce: auth.getNonce(req.body.username)
+      });
+    }
+    return res.status(400).end();
   });
 
   // Add a local authentication endpoint
   logger.silly('setting up a local login handler');
-  app.post('/auth/login', passport.authenticate('local'), (req, res) => {
-    res
-      .status(200)
-      .send({ id: req.user.id })
-      .end();
-  });
+  app.post(
+    '/auth/login',
+    passport.authenticate('local'),
+    (req, res) =>
+      new Promise(resolve => {
+        deserializeUser(req.session.passport.user, (err, user) => {
+          if (err) {
+            res.status(500).end();
+            return resolve();
+          }
+
+          res.send({
+            ...user,
+            state: {
+              id: user.model.related('state').get('id'),
+              name: user.model.related('state').get('name')
+            },
+            model: undefined
+          });
+          return resolve();
+        });
+      })
+  );
 };

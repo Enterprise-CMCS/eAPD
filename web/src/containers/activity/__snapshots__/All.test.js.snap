@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Activities component renders correctly 1`] = `
+<Connect(ConnectedWaypoint)
+  id="activities-overview"
+>
+  <Section
+    id="activities"
+    isNumbered={true}
+    resource="activities"
+  >
+    <Connect(ConnectedWaypoint)
+      id="activities-list"
+    />
+    <Subsection
+      id="activities-list"
+      nested={false}
+      open={true}
+      resource="activities.list"
+    >
+      <NameAndFundingSourceReview
+        disableExpand={true}
+        expand={[Function]}
+        index={-1}
+        item="activity 1"
+        onDeleteClick={null}
+      />
+      <FormAndReviewList
+        addButtonText="Add another activity"
+        allowDeleteAll={true}
+        className="ds-u-border-bottom--0"
+        collapsed={[Function]}
+        expanded={[Function]}
+        handleChange={[MockFunction]}
+        list={
+          Array [
+            "activity 2",
+            "activity 3",
+          ]
+        }
+        noDataMessage={false}
+        onAddClick={[MockFunction]}
+        onDeleteClick={[MockFunction]}
+      />
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="1"
+      key="1"
+    >
+      <Connect(EntryDetails)
+        aKey="1"
+        num={1}
+      />
+    </Connect(ConnectedWaypoint)>
+    <Connect(ConnectedWaypoint)
+      id="2"
+      key="2"
+    >
+      <Connect(EntryDetails)
+        aKey="2"
+        num={2}
+      />
+    </Connect(ConnectedWaypoint)>
+    <Connect(ConnectedWaypoint)
+      id="3"
+      key="3"
+    >
+      <Connect(EntryDetails)
+        aKey="3"
+        num={3}
+      />
+    </Connect(ConnectedWaypoint)>
+  </Section>
+</Connect(ConnectedWaypoint)>
+`;

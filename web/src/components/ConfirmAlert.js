@@ -6,9 +6,11 @@ the application of the "react-confirm-alert-blur" class
 
 */
 
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
+
+import Btn from './Btn';
 
 function getAppWrapper() {
   const bodyKids = [...document.body.children];
@@ -91,7 +93,8 @@ class ConfirmAlert extends Component {
   };
 
   componentWillUnmount = () => {
-    this.props.willUnmount();
+    const { willUnmount } = this.props;
+    willUnmount();
   };
 
   handleClickButton = button => {
@@ -130,13 +133,14 @@ class ConfirmAlert extends Component {
               {childrenElement()}
               <div className="react-confirm-alert-button-group">
                 {buttons.map((button, i) => (
-                  <button
+                  <Btn
                     key={i}
+                    size="small"
+                    extraCss="mr1"
                     onClick={() => this.handleClickButton(button)}
-                    className="btn btn-small btn-primary bg-black mr1"
                   >
                     {button.label}
-                  </button>
+                  </Btn>
                 ))}
               </div>
             </div>

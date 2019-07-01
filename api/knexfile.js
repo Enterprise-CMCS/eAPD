@@ -19,7 +19,7 @@ module.exports = {
     }
   },
 
-  staging: {
+  production: {
     client: 'postgresql',
     connection: process.env.DATABASE_URL
   }

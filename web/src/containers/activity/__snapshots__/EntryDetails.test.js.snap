@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the (Activity) EntryDetails component renders correctly 1`] = `
+<div
+  className="activity--body activity--body__collapsed activity--body__notfirst"
+  id="activity-activity-key"
+>
+  <Review
+    editContent={
+      <div
+        className="nowrap"
+      >
+        <Button
+          onClick={[Function]}
+          size="small"
+          type="button"
+          variation="transparent"
+        >
+          Edit
+        </Button>
+      </div>
+    }
+    editText="Edit"
+    heading="Activity 3: activity name"
+    headingLevel={3}
+  />
+</div>
+`;

@@ -11,16 +11,17 @@ tap.test('activity model index', async activityIndexTests => {
     Object.keys(out),
     [
       'apdActivity',
-      'apdActivityApproach',
       'apdActivityContractorResource',
       'apdActivityContractorResourceCost',
+      'apdActivityContractorResourceHourly',
+      'apdActivityCostAllocation',
       'apdActivityExpense',
       'apdActivityExpenseEntry',
       'apdActivityGoal',
-      'apdActivityGoalObjective',
       'apdActivitySchedule',
       'apdActivityStatePersonnel',
-      'apdActivityStatePersonnelCost'
+      'apdActivityStatePersonnelCost',
+      'apdActivityQuarterlyFFP'
     ],
     'exports the expected models'
   );

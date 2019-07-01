@@ -69,13 +69,12 @@ tap.test('auth roles PUT endpoint', async endpointTest => {
       'rejects if the user attempts to edit own role',
       async invalidTest => {
         const req = { user: { role: 'role' }, params: { id: 1 } };
-        const fetchTrue = sinon.stub().resolves(true);
         RoleModel.where
           .withArgs({ id: 1 })
           .returns({ fetch: RoleModel.fetch })
           .withArgs({ id: 1, name: 'role' })
-          .returns({ fetch: fetchTrue });
-        RoleModel.fetch.resolves({});
+          .returns({ fetch: sinon.stub().resolves(true) });
+        RoleModel.fetch.resolves(true);
 
         await handler(req, res);
 
@@ -109,7 +108,8 @@ tap.test('auth roles PUT endpoint', async endpointTest => {
           .stub()
           .withArgs('id')
           .returns('bob-id'),
-        validate: sinon.stub().rejects(new Error('oh-noes'))
+        validate: sinon.stub().rejects(new Error('oh-noes')),
+        toJSON: sinon.stub()
       });
 
       await handler(req, res);
@@ -155,7 +155,7 @@ tap.test('auth roles PUT endpoint', async endpointTest => {
         // query to make sure the role is not this user's role
         .withArgs({ id: 1, name: 'role' })
         .returns({ fetch: sinon.stub().resolves(false) });
-      RoleModel.fetch.resolves({
+      const model = {
         save,
         activities: () => ({ attach, detach }),
         getActivities: async () => ['activity model 1', 'activity model 2'],
@@ -163,11 +163,18 @@ tap.test('auth roles PUT endpoint', async endpointTest => {
           .stub()
           .withArgs('id')
           .returns('bob-id'),
-        validate: sinon.stub().resolves()
-      });
+        set: sinon.spy(),
+        validate: sinon.stub().resolves(),
+        toJSON: sinon.stub().returns('as json')
+      };
+      RoleModel.fetch.resolves(model);
 
       await handler(req, res);
 
+      saveTest.ok(
+        model.set.calledWith({ name: 'bob' }),
+        'updates the role name'
+      );
       saveTest.ok(
         detach.calledBefore(attach),
         'activities are detached before new activities are added'
@@ -192,7 +199,10 @@ tap.test('auth roles PUT endpoint', async endpointTest => {
         save.calledAfter(attach),
         'the model is saved after new activities are attached'
       );
-      saveTest.ok(res.status.calledWith(204), 'HTTP status set to 204');
+      saveTest.ok(
+        res.send.calledWith('as json'),
+        'sends JSON-ified updated role'
+      );
     });
   });
 });

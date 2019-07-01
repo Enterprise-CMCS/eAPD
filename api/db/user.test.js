@@ -11,9 +11,9 @@ tap.test('user data model', async userModelTests => {
   });
 
   const passwordChecker = sandbox.stub();
-  const bcrypt = { hashSync: sandbox.stub() };
+  const hash = { hashSync: sandbox.stub() };
 
-  const user = userCreator(passwordChecker, bcrypt);
+  const user = userCreator(passwordChecker, hash);
 
   userModelTests.test('setup', async setupTests => {
     setupTests.match(
@@ -81,19 +81,101 @@ tap.test('user data model', async userModelTests => {
     }
   );
 
+  userModelTests.test('parse', async tests => {
+    tests.test('coerced lock timeout into a number', async test => {
+      const fromNull = user.user.parse({ locked_until: null });
+      const fromNumberString = user.user.parse({ locked_until: '123' });
+      const fromText = user.user.parse({ locked_until: 'something' });
+      const withoutLock = user.user.parse({ something: 'else' });
+
+      test.same(fromNull, { locked_until: 0 }, 'coerces null to 0');
+      test.same(
+        fromNumberString,
+        { locked_until: 123 },
+        'coerces number string'
+      );
+      test.same(fromText, { locked_until: 0 }, 'coerces non-number to 0');
+      test.same(
+        withoutLock,
+        { something: 'else' },
+        'does not add lock timeout if not requested'
+      );
+    });
+  });
+
+  userModelTests.test('format', async formatTests => {
+    const self = {
+      hasChanged: sandbox.stub()
+    };
+
+    const format = user.user.format.bind(self);
+
+    formatTests.test('when password has not changed', async test => {
+      self.hasChanged.withArgs('password').returns(false);
+
+      const out = format({ attr1: 'value 1', attr2: 'value 2' });
+
+      test.same(
+        out,
+        { attr1: 'value 1', attr2: 'value 2' },
+        'gets back the expected, unchanged attributes'
+      );
+    });
+
+    formatTests.test('when the password has changed', async test => {
+      self.hasChanged.withArgs('password').returns(true);
+      hash.hashSync.returns('hashed password');
+
+      const out = format({ password: 'new password here' });
+
+      test.same(out, { password: 'hashed password' });
+      test.ok(hash.hashSync.calledWith('new password here'));
+    });
+
+    formatTests.test('when failed_logons has changed', async test => {
+      self.hasChanged.withArgs('failed_logons').returns(true);
+
+      const out = format({ failed_logons: [1, 2, 3] });
+
+      test.same(
+        out,
+        { failed_logons: '[1,2,3]' },
+        'failed_logons is stringified'
+      );
+    });
+
+    formatTests.test(
+      'deletes numberified locked_until if it has not been changed',
+      async test => {
+        self.hasChanged.withArgs('locked_until').returns(false);
+
+        const out = format({
+          locked_until: 'something',
+          another: 'something else'
+        });
+
+        test.same(
+          out,
+          { another: 'something else' },
+          'deletes locked_until attribute if it was not changed'
+        );
+      }
+    );
+  });
+
   userModelTests.test('validation', async validationTests => {
     const self = {
-      where: sandbox.stub(),
-      fetchAll: sandbox.stub(),
       attributes: {},
+      fetchAll: sandbox.stub(),
       hasChanged: sandbox.stub(),
-      set: sandbox.stub()
+      set: sandbox.stub(),
+      query: sandbox.stub()
     };
 
     const validate = user.user.validate.bind(self);
 
     validationTests.beforeEach(async () => {
-      self.where.returns({ fetchAll: self.fetchAll });
+      self.query.returns({ fetchAll: self.fetchAll });
 
       self.attributes = {};
       self.hasChanged.returns(false);
@@ -159,17 +241,13 @@ tap.test('user data model', async userModelTests => {
 
       password.test('and the password is strong', async validTest => {
         passwordChecker.returns({ score: 4 });
-        bcrypt.hashSync.returns('hashed-password');
+        hash.hashSync.returns('hashed-password');
 
         await validate();
 
         validTest.ok(
           passwordChecker.calledWith('password', ['email', 'Bob']),
           'password checker called with extra data'
-        );
-        validTest.ok(
-          self.set.calledWith({ password: 'hashed-password' }),
-          'updates the model with a hashed password'
         );
       });
     });
@@ -283,8 +361,7 @@ tap.test('user data model', async userModelTests => {
     apdsTests.test(
       'resolves a list of apds when the state relationship is already loaded',
       async alreadyLoadedTests => {
-        self.relations.state = {};
-        self.relations.state.apds = true;
+        self.relations.state = { relations: { apds: true } };
         const list = await apds();
 
         alreadyLoadedTests.ok(
@@ -292,6 +369,17 @@ tap.test('user data model', async userModelTests => {
           'the model load method is not called'
         );
         alreadyLoadedTests.same(list, [1, 2, 3], 'returns the list of apds');
+      }
+    );
+
+    apdsTests.test(
+      'resolves a list of apds when the state relationship is loaded but its APDs are not',
+      async test => {
+        self.relations.state = { relations: {} };
+        const list = await apds();
+
+        test.ok(self.load.calledOnce, 'the model load method is called');
+        test.same(list, [1, 2, 3], 'returns the list of apds');
       }
     );
 

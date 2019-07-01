@@ -14,39 +14,30 @@ footer {
   flex: none;
 }
 
-.site {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 100vh;
-}
-
-.site-body {
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
-}
-
-@media (--breakpoint-md) {
-  .site-body {
-    flex-direction: row;
-  }
-
-  .site-content {
-    flex: 1;
-  }
-
-  .site-sidebar {
-    display: block;
-    flex: 0 0 18rem;
-    overflow: auto;
-  }
-}
-
 .measure {
   max-width: 30em;
 }
 
 .w-3 {
   width: 3rem;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.has-sticky-header .sticky-nested {
+  position: sticky;
+  top: 58px; /* height of sticky parent header */
+  z-index: 2; /* 1 less than parent */
+}
+
+.overflow-x {
+  overflow-x: scroll;
+}
+
+.overflow-y {
+  overflow-y: scroll;
 }

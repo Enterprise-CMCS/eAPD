@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Schedule (milestones) component renders correctly 1`] = `
+<Subsection
+  id={null}
+  nested={true}
+  resource="activities.schedule"
+>
+  <h5
+    className="ds-h5"
+  >
+    Activity start and end dates
+  </h5>
+  <div
+    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+  >
+    <DateField
+      onChange={[Function]}
+      value="1944-10-02"
+    />
+    <DateField
+      onChange={[Function]}
+      value="1944-11-08"
+    />
+  </div>
+  <div
+    className="mb3"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h5",
+          "level": "h5",
+        }
+      }
+      reverse={false}
+      source="activities.schedule.milestone.instruction"
+    />
+    <hr />
+    <FormAndReviewList
+      addButtonText="Add another milestone"
+      allowDeleteAll={false}
+      className={null}
+      collapsed={[Function]}
+      expanded={[Function]}
+      list={
+        Array [
+          Object {
+            "endDate": "1945-05-05",
+            "key": "milestone 1",
+            "milestone": "Liberation Day",
+          },
+        ]
+      }
+      noDataMessage="Add milestones for this activity."
+      onAddClick={[Function]}
+      onChangeDate={[Function]}
+      onChangeName={[Function]}
+      onDeleteClick={[Function]}
+    />
+  </div>
+</Subsection>
+`;

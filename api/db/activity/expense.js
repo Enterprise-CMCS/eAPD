@@ -13,13 +13,14 @@ module.exports = {
     toJSON() {
       return {
         id: this.get('id'),
-        name: this.get('name'),
+        description: this.get('description'),
+        category: this.get('category'),
         entries: this.related('entries')
       };
     },
 
     static: {
-      updateableFields: ['name'],
+      updateableFields: ['category', 'description'],
       owns: { entries: 'apdActivityExpenseEntry' },
       foreignKey: 'expense_id'
     }

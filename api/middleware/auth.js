@@ -1,6 +1,11 @@
 const logger = require('../logger')('auth middleware');
 const { cache } = require('./cache');
 
+/**
+ * @description Middleware to check if the current request is
+ * authenticated.  Returns a 403 and breaks the
+ * process chain if the request is not authenticated.
+ */
 const loggedIn = (req, res, next) => {
   logger.silly(req, 'got a loggedIn middleware request');
   if (req.user) {
@@ -14,7 +19,16 @@ const loggedIn = (req, res, next) => {
 
 module.exports.loggedIn = loggedIn;
 
-const canCreator = activity =>
+/**
+ * @description Middleware to check if the authenticated user
+ * has a particular activity permission. Returns
+ * a 401 and breaks the process chain if the
+ * user is not authorized.
+ *
+ * @param {string} activity The activity permission to check for
+ * @returns {function} The middleware function
+ */
+module.exports.can = activity =>
   cache(['can', activity], () => {
     const can = (req, res, next) => {
       logger.silly(req, `got a can middleware request for [${activity}]`);
@@ -32,5 +46,3 @@ const canCreator = activity =>
     };
     return can;
   });
-
-module.exports = { loggedIn, can: canCreator };

@@ -18,7 +18,7 @@ a full page, click buttons, and verify expected behaviors.
 To run the tests, after everything is installed, just open a command line
 and run:
 
-```bash
+```shell
 cd web # get into the right directory!
 npm test
 ```
@@ -41,7 +41,7 @@ API tests.
 The unit tests are pretty easy to run since all external interactions are
 mocked. Open a command line and run:
 
-```bash
+```shell
 cd api # get into the right directory!
 npm test
 ```
@@ -56,7 +56,7 @@ backend actually be running with a real database setup and everything. If
 you're using Docker, there's a script you can run that will set everything up
 for you:
 
-```bash
+```shell
 cd api
 ./endpoint-tests/endpoint.sh
 ```
@@ -71,8 +71,8 @@ If you're not using Docker, here are the steps:
 6. run `npm run migrate` to create the database structures
 7. run `npm run seed` to populate the database with test data
 8. run the API, either in the background or in a separate tab/window
-   * to run in the background, run `npm start &`
-   * if running in a separate tab/window, be sure to set the `NODE_ENV` and `TEST_DB_HOST` in the new tab/window
+   - to run in the background, run `npm start &`
+   - if running in a separate tab/window, be sure to set the `NODE_ENV` and `TEST_DB_HOST` in the new tab/window
 9. run `npm run test-endpoints`
 10. all done! You can kill the backgrounded API now
 

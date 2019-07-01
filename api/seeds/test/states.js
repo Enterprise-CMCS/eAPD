@@ -14,8 +14,6 @@ exports.seed = async knex => {
           phone: '5551234567'
         }
       }),
-      program_benefits: 'The program will have benefits',
-      program_vision: 'The program vision is 20/20',
       state_pocs: JSON.stringify([
         {
           name: 'Corinne Johnson',

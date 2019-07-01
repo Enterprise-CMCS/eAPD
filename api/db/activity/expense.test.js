@@ -10,7 +10,7 @@ tap.test('expense data model', async expenseModelTests => {
       {
         tableName: 'activity_expenses',
         static: {
-          updateableFields: ['name'],
+          updateableFields: ['category', 'description'],
           owns: { entries: 'apdActivityExpenseEntry' },
           foreignKey: 'expense_id'
         }
@@ -68,14 +68,16 @@ tap.test('expense data model', async expenseModelTests => {
   expenseModelTests.test('overrides toJSON method', async jsonTests => {
     const self = { get: sinon.stub(), related: sinon.stub() };
     self.get.withArgs('id').returns('Jerome Lee');
-    self.get.withArgs('name').returns('at');
+    self.get.withArgs('description').returns('at');
+    self.get.withArgs('category').returns('HHS');
     self.related.withArgs('entries').returns('CMS');
 
     const output = expense.toJSON.bind(self)();
 
     jsonTests.match(output, {
       id: 'Jerome Lee',
-      name: 'at',
+      description: 'at',
+      category: 'HHS',
       entries: 'CMS'
     });
   });

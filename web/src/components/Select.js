@@ -5,12 +5,14 @@ const Select = ({ name, options, label, hideLabel, wrapperClass, ...rest }) => (
   <div className={wrapperClass || 'mb2'}>
     <label
       htmlFor={name}
-      className={hideLabel ? 'sr-only' : 'block mb-tiny bold'}
+      className={hideLabel ? 'sr-only' : 'block mb-tiny truncate'}
     >
       {label}
     </label>
     <select id={name} className="m0 select" {...rest}>
-      {options.map(o => <option key={o}>{o}</option>)}
+      {options.map(o => (
+        <option key={o}>{o}</option>
+      ))}
     </select>
   </div>
 );
