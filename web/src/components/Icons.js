@@ -21,11 +21,16 @@ import {
   faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 
-import { faCircle, faClock } from '@fortawesome/free-regular-svg-icons';
+import {
+  faCircle,
+  faClock,
+  faTimesCircle
+} from '@fortawesome/free-regular-svg-icons';
 
 const File = ({ ...props }) => <FontAwesomeIcon icon={faFileAlt} {...props} />;
 const FileDownload = () => <FontAwesomeIcon icon={faFileDownload} />;
 const LockIcon = () => <FontAwesomeIcon icon={faLock} />;
+const TimesCircle = () => <FontAwesomeIcon icon={faTimesCircle} />;
 const UnlockIcon = () => <FontAwesomeIcon icon={faUnlock} />;
 
 export {
@@ -42,10 +47,12 @@ export {
   faPlusCircle,
   faSignOutAlt,
   faSpinner,
+  faTimesCircle,
   faUnlock,
   File,
   FileDownload,
   LockIcon,
+  TimesCircle,
   UnlockIcon,
   faUserCog,
   faUserPlus

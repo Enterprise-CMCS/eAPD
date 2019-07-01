@@ -1,0 +1,16 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+.activity--body {
+  border-bottom: 4px solid $color-primary;
+  &.activity--body__first {
+    border-top: 4px solid $color-primary;
+  }
+}
+
+.activity--body__collapsed > .ds-c-review {
+  border: 0 !important;
+}
+
+.activity--body__expanded {
+  padding-bottom: $spacer-3;
+}
