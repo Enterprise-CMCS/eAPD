@@ -76,13 +76,13 @@
     padding: 0 !important;
     border: none !important;
   }
-}
 
-.numbered-section > h2:before {
-  background-color: transparent !important;
-  font-weight: bold !important;
-  color: black !important;
-  border: 1px solid black;
+  .numbered-section > h2:before {
+    background-color: transparent !important;
+    font-weight: bold !important;
+    color: black !important;
+    border: 1px solid black;
+  }
 }
 
 @media screen {
