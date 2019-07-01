@@ -34,7 +34,39 @@ describe('dirty state reducer', () => {
 
   it('should reset when the APD is saved or a new one is selected', () => {
     expect(dirty({}, { type: SAVE_APD_SUCCESS })).toEqual(initialState);
-    expect(dirty({}, { type: SELECT_APD })).toEqual(initialState);
+  });
+
+  it('should reset when an APD is selected and stash off the activity keys', () => {
+    expect(
+      dirty(
+        {},
+        {
+          type: SELECT_APD,
+          apd: {
+            activities: [
+              {
+                key: 'key 1'
+              },
+              { key: 'key 2' },
+              { key: 'key 3' }
+            ]
+          }
+        }
+      )
+    ).toEqual({
+      ...initialState,
+      data: {
+        ...initialState.data,
+        activities: {
+          ...initialState.data.activities,
+          byKey: {
+            'key 1': false,
+            'key 2': false,
+            'key 3': false
+          }
+        }
+      }
+    });
   });
 
   describe('handles the APD being updated', () => {
@@ -83,6 +115,60 @@ describe('dirty state reducer', () => {
           },
           dirty: true
         });
+      });
+    });
+
+    it('marks year-based properties as dirty when the APD years change', () => {
+      expect(
+        dirty(
+          {
+            ...initialState,
+            data: {
+              ...initialState.data,
+              activities: {
+                byKey: { 'key 1': false, 'key 2': false, 'key 3': false }
+              }
+            }
+          },
+          {
+            type: UPDATE_APD,
+            updates: { years: [1, 2, 3] }
+          }
+        )
+      ).toEqual({
+        data: {
+          activities: {
+            byKey: {
+              'key 1': {
+                contractorResources: true,
+                costAllocation: true,
+                expenses: true,
+                statePersonnel: true,
+                quarterlyFFP: true
+              },
+              'key 2': {
+                contractorResources: true,
+                costAllocation: true,
+                expenses: true,
+                statePersonnel: true,
+                quarterlyFFP: true
+              },
+              'key 3': {
+                contractorResources: true,
+                costAllocation: true,
+                expenses: true,
+                statePersonnel: true,
+                quarterlyFFP: true
+              }
+            }
+          },
+          apd: {
+            incentivePayments: true,
+            keyPersonnel: true,
+            years: true
+          }
+        },
+        dirty: true
       });
     });
   });
