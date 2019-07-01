@@ -83,6 +83,10 @@
     color: black !important;
     border: 1px solid black;
   }
+  .form-and-review-list,
+  div.form--with-reviews {
+    border-bottom: none;
+  }
 }
 
 @media screen {
