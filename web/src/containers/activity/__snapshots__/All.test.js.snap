@@ -28,6 +28,7 @@ exports[`the Activities component renders correctly 1`] = `
       <FormAndReviewList
         addButtonText="Add another activity"
         allowDeleteAll={true}
+        className="ds-u-border-bottom--0"
         collapsed={[Function]}
         expanded={[Function]}
         handleChange={[MockFunction]}
