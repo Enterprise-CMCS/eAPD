@@ -1,48 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the (Activity) EntryDetails component renders correctly 1`] = `
-<Collapsible
-  bgColor="white"
-  btnBgColor="blue"
-  btnColor="white"
+<div
+  className="activity--body activity--body__collapsed activity--body__notfirst"
   id="activity-activity-key"
-  nested={false}
-  onChange={[Function]}
-  open={false}
-  sticky={true}
-  title="Activity 3: activity name"
 >
-  <Connect(Description)
-    aKey="activity-key"
-    key="0"
+  <Review
+    editContent={
+      <div
+        className="nowrap"
+      >
+        <Button
+          onClick={[Function]}
+          size="small"
+          type="button"
+          variation="transparent"
+        >
+          Edit
+        </Button>
+      </div>
+    }
+    editText="Edit"
+    heading="Activity 3: activity name"
+    headingLevel={3}
   />
-  <Connect(Goals)
-    aKey="activity-key"
-    key="1"
-  />
-  <Connect(Schedule)
-    aKey="activity-key"
-    key="2"
-  />
-  <Costs
-    aKey="activity-key"
-    key="3"
-  />
-  <Connect(ContractorResources)
-    aKey="activity-key"
-    key="4"
-  />
-  <Connect(CostAllocate)
-    aKey="activity-key"
-    key="5"
-  />
-  <Connect(StandardsAndConditions)
-    aKey="activity-key"
-    key="6"
-  />
-  <DeleteButton
-    remove={[Function]}
-    resource="activities.delete"
-  />
-</Collapsible>
+</div>
 `;

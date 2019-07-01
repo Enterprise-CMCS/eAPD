@@ -9,6 +9,7 @@ exports[`the ContractorResources component renders correctly 1`] = `
   <FormAndReviewList
     addButtonText="Add another contractor"
     allowDeleteAll={false}
+    className={null}
     collapsed={[Function]}
     expanded={[Function]}
     handleChange={[Function]}
