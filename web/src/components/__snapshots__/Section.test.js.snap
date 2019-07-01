@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Section component renders correctly with no resource 1`] = `
+<section
+  className=""
+  id={null}
+>
+  <h2
+    className="ds-h2"
+  />
+  <span
+    className="ds-text--lead"
+  />
+  test child
+</section>
+`;
+
+exports[`Section component renders correctly with resource containing title, subheader, and helptext 1`] = `
+<section
+  className=""
+  id={null}
+>
+  <h2
+    className="ds-h2"
+  >
+    Performance Goals and Benchmarks
+  </h2>
+  <span
+    className="ds-text--lead"
+  />
+  test child
+</section>
+`;
+
+exports[`SectionDesc component renders correctly 1`] = `
+<p
+  className="mb4 text-l"
+>
+  test child
+</p>
+`;
+
+exports[`SectionTitle component renders correctly 1`] = `
+<h2>
+  <div
+    className="test child"
+  />
+</h2>
+`;
+
+exports[`Subsection component renders correctly 1`] = `
+<Fragment>
+  <h3
+    className="subsection--title ds-h3"
+    id={null}
+  >
+    Performance Goals and Benchmarks
+  </h3>
+  <Instruction
+    args={null}
+    headingDisplay={
+      Object {
+        "className": "ds-h3",
+        "level": "h3",
+      }
+    }
+    reverse={false}
+    source="activities.goals.instruction"
+  />
+  test child
+</Fragment>
+`;

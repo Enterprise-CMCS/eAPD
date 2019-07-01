@@ -1,9 +1,19 @@
 module.exports = {
   apdActivityStatePersonnel: {
-    tableName: 'activity_state_peronnel',
+    tableName: 'activity_state_personnel',
 
     activity() {
       return this.belongsTo('apdActivity');
+    },
+
+    format(attributes) {
+      return Object.entries(attributes).reduce(
+        (acc, [field, value]) => ({
+          ...acc,
+          [field.replace(/([A-Z])/g, m => `_${m.toLowerCase()}`)]: value
+        }),
+        {}
+      );
     },
 
     years() {
@@ -34,7 +44,7 @@ module.exports = {
     },
 
     async validate() {
-      if (this.attributes.fte < 0 || this.attributes.fte > 1) {
+      if (this.attributes.fte < 0) {
         throw new Error('fte-out-of-range');
       }
       if (this.attributes.year < 2010 || this.attributes.year > 3000) {
@@ -46,7 +56,7 @@ module.exports = {
       return {
         id: this.get('id'),
         cost: this.get('cost'),
-        fte: this.get('fte'),
+        fte: +this.get('fte'),
         year: this.get('year')
       };
     },

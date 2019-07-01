@@ -1,100 +1,83 @@
 #!/usr/bin/env node
 
+// The point of this script is to write stuff to the console.
+/* eslint-disable no-console */
+
+const colors = require('colors'); // eslint-disable-line import/no-extraneous-dependencies
 const fs = require('fs');
-const readline = require('readline');
 
-const openAPI = require('../routes/openAPI');
+let endpoints = [];
+if (fs.existsSync(`${__dirname}/endpoint-data.json`)) {
+  endpoints = JSON.parse(fs.readFileSync(`${__dirname}/endpoint-data.json`));
+}
 
-const allEndpoints = JSON.parse(
-  fs.readFileSync(`${__dirname}/endpoints-all.txt`)
-).reduce((acc, { path, method }) => {
-  const methodStatus = {
-    tested: false,
-    documented: false
-  };
-  if (acc[path]) {
-    acc[path][method] = methodStatus;
-  } else {
-    acc[path] = {
-      [method]: methodStatus
-    };
+// Treat it the same as the outside world will see it.  If we
+// don't do this, the object could contain undefineds, which
+// can mess up our reporting.  Stringifying and parsing will
+// strip out the undefineds, since those don't survive stringing
+const openAPI = JSON.parse(JSON.stringify(require('../routes/openAPI')));
+
+Object.entries(openAPI.paths).forEach(([path, pathObj]) => {
+  if (!endpoints.some(e => e.openAPIPath === path)) {
+    endpoints.push({ path, openAPIPath: path, methods: {} });
   }
 
-  const openAPIpath = path.replace(/\/:(.+?)(\/|$)/, '/{$1}$2');
-  const oa = openAPI.paths[openAPIpath];
-  if (oa && oa[method] && oa[method].responses) {
-    acc[path][method].documented = Object.keys(oa[method].responses)
-      .map(r => +r)
-      .sort();
-  }
+  const endpoint = endpoints.find(e => e.openAPIPath === path);
 
-  return acc;
-}, {});
-
-const hitsStream = fs.createReadStream(`${__dirname}/endpoints-hit.txt`);
-const hitsReader = readline.createInterface({ input: hitsStream });
-
-hitsReader.on('line', line => {
-  const { path, method, status } = JSON.parse(line);
-  const endpoint = allEndpoints[path][method.toLowerCase()];
-
-  if (!endpoint.tested) {
-    endpoint.tested = [];
-  }
-  if (!endpoint.tested.includes(status)) {
-    endpoint.tested.push(status);
-  }
-  endpoint.tested.sort();
-});
-
-hitsReader.on('close', () => {
-  const messages = [];
-  const methodMessages = [];
-
-  Object.keys(allEndpoints).forEach(path => {
-    messages.length = 0;
-
-    Object.keys(allEndpoints[path]).forEach(method => {
-      methodMessages.length = 0;
-      const tests = allEndpoints[path][method].tested;
-      const docs = allEndpoints[path][method].documented;
-
-      if (!tests) {
-        methodMessages.push(`    not tested`);
-      }
-      if (!docs) {
-        methodMessages.push(`    not documented`);
-      }
-
-      if (methodMessages.length) {
-        messages.push(`  ${method}`, ...methodMessages);
-        return;
-      }
-
-      tests.forEach(status => {
-        if (!docs.includes(status)) {
-          methodMessages.push(
-            `     tests for status ${status}, but that status is not documented`
-          );
-        }
-      });
-      docs.forEach(status => {
-        if (!tests.includes(status)) {
-          methodMessages.push(
-            `     documents status ${status}, but that status is not tested`
-          );
-        }
-      });
-
-      if (methodMessages.length) {
-        messages.push(`  ${method}`, ...methodMessages);
-      }
-    });
-
-    if (messages.length) {
-      console.log(`\n${path}`);
-      console.log(messages.join('\n'));
+  Object.entries(pathObj).forEach(([method, methodObj]) => {
+    if (!endpoint.methods[method]) {
+      endpoint.methods[method] = { registered: false, statuses: {} };
     }
+
+    Object.keys(methodObj.responses).forEach(statusCode => {
+      if (!endpoint.methods[method].statuses[statusCode]) {
+        endpoint.methods[method].statuses[statusCode] = {};
+      }
+      endpoint.methods[method].statuses[statusCode].documented = true;
+    });
   });
-  // console.log(JSON.stringify(allEndpoints, false, 2));
 });
+
+const pad = (str, len) =>
+  `${str}${[...Array(len - str.length)].map(() => ' ').join('')}`;
+
+const mark = v => (v ? colors.green('✔') : colors.red('✗'));
+
+const report = [];
+const maxPath = Math.max(...endpoints.map(e => e.openAPIPath.length));
+
+const header = `| Method | ${pad(
+  'Path',
+  maxPath
+)} | Status | Registered | Tested | Documented |`;
+const divider = [...Array(header.length)].map(() => '-').join('');
+
+console.log(divider);
+console.log(header);
+console.log(divider);
+
+endpoints.forEach(endpoint => {
+  Object.entries(endpoint.methods).forEach(([method, methodObj]) => {
+    Object.entries(methodObj.statuses).forEach(
+      ([statusCode, { tested, documented }]) => {
+        console.log(
+          `| ${pad(method.toUpperCase(), 6)} | ${pad(
+            endpoint.openAPIPath,
+            maxPath
+          )} | ${statusCode}    | ${mark(
+            methodObj.registered
+          )}          | ${mark(tested)}      | ${mark(documented)}          |`
+        );
+        report.push({
+          method,
+          path: endpoint.openAPIPath,
+          status: statusCode,
+          registered: methodObj.registered ? '✔' : '✗',
+          tested: tested ? '✔' : '✗',
+          documented: documented ? '✔' : '✗'
+        });
+      }
+    );
+  });
+});
+console.log(divider);

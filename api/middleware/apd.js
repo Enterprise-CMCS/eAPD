@@ -6,6 +6,21 @@ const {
   apdActivity: defaultActivityModel
 } = require('../db').models;
 
+// Prepend "apd" to relationship names. Note that since
+// the "withRelated" values can be objects, we have to
+// preserve the objecty-ness and just change the keys.
+//
+// We prepend "apd" because if we're loading an APD
+// via a different model, we want to make sure when
+// we load the intermediary object, we also get the
+// APD and alll of its related data.  That way, we can
+// shortcut and return the APD in full directly from
+// the intermediary model rather than making another
+// fetch call.
+// --
+// For some reason, in unit testing, the defaultApdModel
+// object doesn't have a "withRelated" property, so
+// default to an empty array.
 const apdRelations = (defaultApdModel ? defaultApdModel.withRelated : []).map(
   relation => {
     if (typeof relation === 'object') {
@@ -19,6 +34,11 @@ const apdRelations = (defaultApdModel ? defaultApdModel.withRelated : []).map(
   }
 );
 
+/**
+ * @description Middleware to load an APD into the request "meta" property
+ * @param {object} model The model class to use; defaults to Apd model
+ * @param {string} idParam The request parameter to use as the model ID
+ */
 module.exports.loadApd = (model = defaultApdModel, idParam = 'id') =>
   cache(['loadApd', modelIndex(model), idParam], () => {
     const loadApd = async (req, res, next) => {
@@ -35,6 +55,8 @@ module.exports.loadApd = (model = defaultApdModel, idParam = 'id') =>
         } else {
           const obj = await model
             .where({ id: req.params[idParam] })
+            // Here's where we use that "apd" prepended
+            // list of relations
             .fetch({ withRelated: apdRelations });
           if (obj) {
             req.meta.apd = obj.related('apd');
@@ -57,12 +79,26 @@ module.exports.loadApd = (model = defaultApdModel, idParam = 'id') =>
     return loadApd;
   });
 
-module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') =>
-  cache(['userCanEditAPD', modelIndex(model), idParam], () => {
-    const userCanEditAPD = async (req, res, next) => {
+/**
+ * @description Middleware to determine if the current user has access
+ *    to the APD they would load.  Also calls loadApd middleware
+ * @param {object} model The APD model class to use; defaults to Apd model
+ * @param {string} idParam The request parameter to use as the model ID
+ */
+module.exports.userCanAccessAPD = (model = defaultApdModel, idParam = 'id') =>
+  cache(['userCanAccessAPD', modelIndex(model), idParam], () => {
+    const userCanAccessAPD = async (req, res, next) => {
       logger.silly(req, 'verifying the user can access this APD');
+
+      // Load the APD first...  Technically we don't have to await this
+      // since we rely on the next() callback from loadApd.  However,
+      // if we don't await this, the function will return immediately
+      // and that causes problems in testing.  So we await.  :)
       await module.exports.loadApd(model, idParam)(req, res, async () => {
+        // ...then get a list of APDs this user is associated with
         const userApds = await req.user.model.apds();
+
+        // Make sure there's overlap
         if (userApds.includes(req.meta.apd.get('id'))) {
           next();
         } else {
@@ -71,9 +107,49 @@ module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') =>
         }
       });
     };
+    return userCanAccessAPD;
+  });
+
+/**
+ * @description Middleware to determine if the current user can edit
+ *    the APD they would load.  Also calls userCanAccessAPD middleware
+ * @param {object} model The APD model class to use; defaults to Apd model
+ * @param {string} idParam The request parameter to use as the model ID
+ */
+module.exports.userCanEditAPD = (model = defaultApdModel, idParam = 'id') =>
+  cache(['userCanEditAPD', modelIndex(model), idParam], () => {
+    const userCanEditAPD = async (req, res, next) => {
+      logger.silly(req, 'verifying the user can edit this APD');
+
+      // First make sure they can access the APD.  Same story here
+      // as above with respect to await.
+      await module.exports.userCanAccessAPD(model, idParam)(req, res, () => {
+        // Then make sure it's in draft
+        if (req.meta.apd.get('status') === 'draft') {
+          next();
+        } else {
+          logger.verbose(
+            req,
+            `apd status is [${req.meta.apd.get('status')}], not editable`
+          );
+          res
+            .status(400)
+            .send({
+              error: 'apd-not-editable'
+            })
+            .end();
+        }
+      });
+    };
     return userCanEditAPD;
   });
 
+/**
+ * @description Middleware to load an activity into the request "meta" property
+ * @param {string} idParam The request parameter to use as the model ID
+ * @param {object} model The model class to use; defaults to ApdActivity model;
+ *    this parameter is primarily for DI in unit tests
+ */
 module.exports.loadActivity = (idParam = 'id', model = defaultActivityModel) =>
   cache(['loadActivity', modelIndex(model), idParam], () => {
     const loadActivity = async (req, res, next) => {

@@ -1,6 +1,7 @@
 const logger = require('../../logger')('users route get');
 const defaultUserModel = require('../../db').models.user;
 const can = require('../../middleware').can;
+const auditor = require('../../audit');
 
 module.exports = (app, UserModel = defaultUserModel) => {
   logger.silly('setting up DELETE /users/:id route');
@@ -9,6 +10,7 @@ module.exports = (app, UserModel = defaultUserModel) => {
     logger.verbose(req, 'got a request to delete a user', req.params.id);
 
     try {
+      const audit = auditor(auditor.actions.REMOVE_ACCOUNT, req);
       const targetID = Number.parseInt(req.params.id, 10);
       if (Number.isNaN(targetID)) {
         return res.status(400).end();
@@ -29,11 +31,13 @@ module.exports = (app, UserModel = defaultUserModel) => {
       }
       logger.verbose(
         req,
-        `request to delete role [${targetUser.get('email')}]`
+        `request to delete user [${targetUser.get('email')}]`
       );
+      audit.target({ id: targetID, email: targetUser.get('email') });
 
       logger.silly(req, 'destroying user');
       await targetUser.destroy();
+      audit.log();
       logger.silly(req, 'okay, all good');
       return res.status(204).end();
     } catch (e) {

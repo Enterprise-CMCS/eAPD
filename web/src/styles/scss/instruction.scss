@@ -1,0 +1,19 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+.instruction-box {
+  background-color: $color-primary-alt-lightest;
+  border-radius: 3px;
+  padding: 0.2rem 1.95rem 1rem;
+  font-size: $small-font-size;
+}
+
+.instruction-box::before {
+  width: 0;
+  height: 0;
+  content: "";
+  display: block;
+  border-bottom: 12px solid $color-primary-darkest;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  transform: translate(-2.43rem,-.32rem) rotate(-45deg);
+}

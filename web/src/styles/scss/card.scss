@@ -1,0 +1,36 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+
+.card--container {
+  background-color: $color-gray-lightest;
+  padding-top: $spacer-7;
+  padding-bottom: $spacer-7;
+  min-height: 60vh; // 100 is too much, but no min-height puts a white gap under the gray background
+}
+
+.card {
+  /* the white margins around the card's content */
+  .ds-l-col--1:first-child {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+    background-color: $color-white;
+  }
+
+  .ds-l-col--1:last-child {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    background-color: $color-white;
+  }
+
+  /* the card's content */
+  .ds-l-lg-col--6 {
+    background-color: $color-white;
+    padding-top: $spacer-5;
+    padding-bottom: $spacer-5;
+  }
+}
+
+.card--foter {
+  border-top: 1px solid $border-color !important;
+  color: $color-muted !important;
+  margin-top: nth($spacers, 5);
+}

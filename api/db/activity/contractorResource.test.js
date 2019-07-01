@@ -1,9 +1,11 @@
 const tap = require('tap');
 const sinon = require('sinon');
+const moment = require('moment');
 
 const {
   apdActivityContractorResource: contractor,
-  apdActivityContractorResourceCost: cost
+  apdActivityContractorResourceCost: cost,
+  apdActivityContractorResourceHourly: hourly
 } = require('./contractorResource');
 
 tap.test(
@@ -15,10 +17,22 @@ tap.test(
         {
           tableName: 'activity_contractor_resources',
           activity: Function,
+          files: Function,
+          hourlyData: Function,
           years: Function,
           static: {
-            updateableFields: ['name', 'description', 'start', 'end'],
-            owns: { years: 'apdActivityContractorResourceCost' },
+            updateableFields: [
+              'name',
+              'description',
+              'end',
+              'start',
+              'totalCost',
+              'useHourly'
+            ],
+            owns: {
+              hourlyData: 'apdActivityContractorResourceHourly',
+              years: 'apdActivityContractorResourceCost'
+            },
             foreignKey: 'contractor_resource_id'
           }
         },
@@ -27,7 +41,7 @@ tap.test(
     });
 
     contractorResourceModelTests.test(
-      'expense model sets up activity relationship',
+      'contractor model sets up activity relationship',
       async relationTest => {
         const self = {
           belongsTo: sinon.stub().returns('baz')
@@ -44,7 +58,49 @@ tap.test(
     );
 
     contractorResourceModelTests.test(
-      'expense model sets up resource cost relationship',
+      'contractor model sets up files relationship',
+      async test => {
+        const self = {
+          belongsToMany: sinon.stub().returns('foo')
+        };
+
+        const output = contractor.files.bind(self)();
+
+        test.ok(
+          self.belongsToMany.calledWith(
+            'file',
+            'activity_contractor_files',
+            'activity_contractor_resource_id',
+            'file_id'
+          ),
+          'sets up the relationship mapping to files'
+        );
+        test.equal(output, 'foo', 'retuns the expected value');
+      }
+    );
+
+    contractorResourceModelTests.test(
+      'contractor model sets up resource hourly data relationship',
+      async relationTest => {
+        const self = {
+          hasMany: sinon.stub().returns('baz')
+        };
+
+        const output = contractor.hourlyData.bind(self)();
+
+        relationTest.ok(
+          self.hasMany.calledWith(
+            'apdActivityContractorResourceHourly',
+            'contractor_resource_id'
+          ),
+          'sets up the relationship mapping to hourly data'
+        );
+        relationTest.equal(output, 'baz', 'returns the expected value');
+      }
+    );
+
+    contractorResourceModelTests.test(
+      'contractor model sets up resource cost relationship',
       async relationTest => {
         const self = {
           hasMany: sinon.stub().returns('baz')
@@ -63,28 +119,38 @@ tap.test(
       }
     );
 
-    contractorResourceModelTests.test('validation', async validationTests => {
-      validationTests.test('fails if dates cannot be parsed', async test => {
-        const self = { attributes: { start: 'invalid date', end: 0 } };
+    contractorResourceModelTests.test('validation', async test => {
+      await Promise.all(
+        ['end', 'start'].map(async attr => {
+          await Promise.all(
+            [7, 'bob', 'January 3, 1947', '14 October 1066'].map(
+              async invalidValue => {
+                try {
+                  const self = { attributes: { [attr]: invalidValue } };
+                  await contractor.validate.bind(self)();
+                  test.fail(`rejects if ${attr} is "${invalidValue}"`);
+                } catch (e) {
+                  test.pass(`rejects if ${attr} is "${invalidValue}"`);
+                }
+              }
+            )
+          );
+        })
+      );
 
-        test.rejects(
-          contractor.validate.bind(self),
-          'rejects if start date is invalid'
-        );
+      const self = {
+        attributes: {
+          end: '2000-01-01',
+          start: '2000-1-1'
+        }
+      };
 
-        self.attributes.start = 0;
-        self.attributes.end = 'invalidate date';
-
-        test.rejects(
-          contractor.validate.bind(self),
-          'rejects if end date is invalid'
-        );
-      });
-
-      validationTests.test('pass if dates are valid', async test => {
-        const self = { attributes: { start: 0, end: 0 } };
-        test.resolves(contractor.validate.bind(self), 'resolves');
-      });
+      try {
+        await contractor.validate.bind(self)();
+        test.pass('resolves if all values are valid');
+      } catch (e) {
+        test.fail('resolves if all values are valid');
+      }
     });
 
     contractorResourceModelTests.test(
@@ -93,20 +159,30 @@ tap.test(
         const self = { get: sinon.stub(), related: sinon.stub() };
         self.get.returns('--- unknown field ---');
         self.get.withArgs('id').returns('id field');
-        self.get.withArgs('name').returns('name field');
         self.get.withArgs('description').returns('description field');
-        self.get.withArgs('start').returns('start field');
-        self.get.withArgs('end').returns('end field');
+        self.get.withArgs('end').returns(moment('2002-02-02').toDate());
+        self.get.withArgs('name').returns('name field');
+        self.get.withArgs('start').returns(moment('2001-01-01').toDate());
+        self.get.withArgs('totalCost').returns('total cost');
+        self.get.withArgs('useHourly').returns('hooooouuuuurly');
+        self.related.withArgs('files').returns('on the floppy disk');
+        self.related
+          .withArgs('hourlyData')
+          .returns('but the actual hourly data is here');
         self.related.withArgs('years').returns('some times');
 
         const output = contractor.toJSON.bind(self)();
 
         jsonTests.same(output, {
+          description: 'description field',
+          end: '2002-02-02',
+          files: 'on the floppy disk',
+          hourlyData: 'but the actual hourly data is here',
           id: 'id field',
           name: 'name field',
-          description: 'description field',
-          start: 'start field',
-          end: 'end field',
+          start: '2001-01-01',
+          totalCost: 'total cost',
+          useHourly: 'hooooouuuuurly',
           years: 'some times'
         });
       }
@@ -194,3 +270,54 @@ tap.test(
     );
   }
 );
+
+tap.test('contractor resource hourly data model', async tests => {
+  tests.test('setup', async test => {
+    test.match(
+      hourly,
+      {
+        tableName: 'activity_contractor_resources_hourly',
+        contractorResource: Function,
+        static: {
+          updateableFields: ['year', 'hours', 'rate']
+        }
+      },
+      'get the expected model definitions'
+    );
+  });
+
+  tests.test(
+    'expense model sets up contractor resource relationship',
+    async test => {
+      const self = {
+        belongsTo: sinon.stub().returns('baz')
+      };
+
+      const output = hourly.contractorResource.bind(self)();
+
+      test.ok(
+        self.belongsTo.calledWith('apdActivityContractorResource'),
+        'sets up the relationship mapping to a contractor resource'
+      );
+      test.equal(output, 'baz', 'returns the expected value');
+    }
+  );
+
+  tests.test('overrides toJSON method', async test => {
+    const self = { get: sinon.stub() };
+    self.get.returns('--- unknown field ---');
+    self.get.withArgs('id').returns('id field');
+    self.get.withArgs('hours').returns(123.45);
+    self.get.withArgs('rate').returns('54.321');
+    self.get.withArgs('year').returns('year field');
+
+    const output = hourly.toJSON.bind(self)();
+
+    test.same(output, {
+      id: 'id field',
+      hours: 123.45,
+      rate: 54.321,
+      year: 'year field'
+    });
+  });
+});

@@ -1,4 +1,4 @@
-import auth from './auth';
+import auth, { selectIsLoggedIn } from './auth';
 import {
   AUTH_CHECK_SUCCESS,
   AUTH_CHECK_FAILURE,
@@ -10,10 +10,12 @@ import {
 
 describe('auth reducer', () => {
   const initialState = {
-    initialCheck: false,
     authenticated: false,
     error: '',
-    fetching: false
+    fetching: false,
+    hasEverLoggedOn: false,
+    initialCheck: false,
+    user: null
   };
 
   it('should handle initial state', () => {
@@ -21,69 +23,99 @@ describe('auth reducer', () => {
   });
 
   it('should handle AUTH_CHECK_SUCCESS', () => {
-    expect(auth(initialState, { type: AUTH_CHECK_SUCCESS })).toEqual({
-      initialCheck: true,
+    expect(
+      auth(initialState, { type: AUTH_CHECK_SUCCESS, data: 'user info' })
+    ).toEqual({
       authenticated: true,
       error: '',
-      fetching: false
+      fetching: false,
+      hasEverLoggedOn: true,
+      initialCheck: true,
+      user: 'user info'
     });
   });
 
   it('should handle AUTH_CHECK_FAILURE', () => {
     expect(auth(initialState, { type: AUTH_CHECK_FAILURE })).toEqual({
-      initialCheck: true,
       authenticated: false,
       error: '',
-      fetching: false
+      fetching: false,
+      hasEverLoggedOn: false,
+      initialCheck: true,
+      user: null
     });
   });
 
   it('should handle LOGIN_REQUEST', () => {
     expect(auth(initialState, { type: LOGIN_REQUEST })).toEqual({
-      initialCheck: false,
       authenticated: false,
       error: '',
-      fetching: true
+      fetching: true,
+      hasEverLoggedOn: false,
+      initialCheck: false,
+      user: null
     });
   });
 
   it('should handle LOGIN_SUCCESS', () => {
-    expect(auth(initialState, { type: LOGIN_SUCCESS })).toEqual({
-      initialCheck: false,
+    expect(
+      auth(initialState, { type: LOGIN_SUCCESS, data: 'user goes here' })
+    ).toEqual({
       authenticated: true,
       error: '',
-      fetching: false
+      fetching: false,
+      hasEverLoggedOn: true,
+      initialCheck: false,
+      user: 'user goes here'
     });
   });
 
   it('should handle LOGIN_FAILURE', () => {
     expect(auth(initialState, { type: LOGIN_FAILURE, error: 'foo' })).toEqual({
-      initialCheck: false,
       authenticated: false,
       error: 'foo',
-      fetching: false
+      fetching: false,
+      hasEverLoggedOn: false,
+      initialCheck: false,
+      user: null
     });
   });
 
   it('should handle LOGOUT_SUCCESS', () => {
     expect(auth(initialState, { type: LOGOUT_SUCCESS })).toEqual({
-      initialCheck: false,
       authenticated: false,
       error: '',
-      fetching: false
+      fetching: false,
+      hasEverLoggedOn: false,
+      initialCheck: false,
+      user: null
     });
   });
 
   describe('when user is already logged in', () => {
     it('should reset auth after LOGOUT_SUCCESS', () => {
-      const state = { initialCheck: true, authenticated: true };
+      const state = {
+        authenticated: true,
+        initialCheck: true,
+        hasEverLoggedOn: true
+      };
 
       expect(auth(state, { type: LOGOUT_SUCCESS })).toEqual({
-        initialCheck: true,
         authenticated: false,
         error: '',
-        fetching: false
+        fetching: false,
+        hasEverLoggedOn: true,
+        initialCheck: true,
+        user: null
       });
     });
+  });
+
+  it('selects the current logged-in state', () => {
+    expect(
+      selectIsLoggedIn({
+        auth: { authenticated: 'this is the authenticated state value' }
+      })
+    ).toEqual('this is the authenticated state value');
   });
 });

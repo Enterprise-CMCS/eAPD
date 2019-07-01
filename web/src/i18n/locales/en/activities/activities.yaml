@@ -1,0 +1,37 @@
+title: Program Activities
+helpText: >-
+  Explain the goals, timelines, and costs associated with each activity. Activities
+  are narrowly scoped bodies of work that comprise the APD as described within
+  the Program Overview section.
+list:
+  title: Activity List
+  instruction:
+    short: >-
+      List as many activities as necessary to cover all scope related to this APD.
+    detail: >-
+      Examples of individual activities include:
+      auditing, environmental scans, HIE registry development,
+      CQM database development, data and analytics, HIE onboarding, etc.
+    helpText: >-
+      Program administration pertains to implementing the EHR Incentive program itself, including
+      state and contractor costs associated with operating EHR incentive program
+      and SLR enhancements/upgrades. All APDs must provide activity details for program
+      administration.
+addActivityButtonText: Add activity
+noActivityMessage: There are no activities. Add one below.
+noNameYet: (No name provided yet)
+delete:
+  text: Remove Activity
+  confirm:
+    header: Confirm
+    body: Remove this activity?
+    _yes: 'Yes'
+    _no: 'No'
+header: Program Activities
+namePrefix: Activity
+namePrefixAndNum: Activity {{number}}
+costs:
+  title: In-House Cost Categories
+  subtitles:
+    personnel: Personnel
+    nonPersonnel: Non-Personnel

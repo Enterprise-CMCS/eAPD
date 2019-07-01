@@ -13,6 +13,9 @@ tap.test('Data model synchronization middleware', async middlewareTests => {
     status: sandbox.stub()
   };
 
+  const beforeSync = sandbox.stub();
+  const afterSync = sandbox.stub();
+
   const getDetails = sandbox.stub();
 
   middlewareTests.beforeEach(async () => {
@@ -21,6 +24,9 @@ tap.test('Data model synchronization middleware', async middlewareTests => {
 
     res.send.returns(res);
     res.status.returns(res);
+
+    beforeSync.resolves();
+    afterSync.resolves();
   });
 
   middlewareTests.test(
@@ -165,8 +171,13 @@ tap.test('Data model synchronization middleware', async middlewareTests => {
 
           const body = {};
 
-          await middleware.synchronizeSpecific(getDetails)({ body }, res, next);
+          await middleware.synchronizeSpecific(getDetails, {
+            beforeSync,
+            afterSync
+          })({ body }, res, next);
 
+          test.ok(beforeSync.calledOnce, 'event is called before syncing');
+          test.ok(afterSync.notCalled, 'event is NOT called after syncing');
           test.ok(model.synchronize.calledWith(body), 'model is synchronized');
           test.ok(next.notCalled, 'the middleware chain is broken');
           test.ok(
@@ -199,8 +210,13 @@ tap.test('Data model synchronization middleware', async middlewareTests => {
 
           const body = {};
 
-          await middleware.synchronizeSpecific(getDetails)({ body }, res, next);
+          await middleware.synchronizeSpecific(getDetails, {
+            beforeSync,
+            afterSync
+          })({ body }, res, next);
 
+          test.ok(beforeSync.calledOnce, 'event is called before syncing');
+          test.ok(afterSync.calledOnce, 'event is called after syncing');
           test.ok(model.synchronize.calledWith(body), 'model is synchronized');
           test.ok(
             model.fetch.calledWith({ withRelated: 'list of relationships' }),

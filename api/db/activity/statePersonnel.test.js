@@ -11,7 +11,7 @@ tap.test('state personnel data model', async statePersonnelModelTests => {
     setupTests.match(
       personnel,
       {
-        tableName: 'activity_state_peronnel',
+        tableName: 'activity_state_personnel',
         activity: Function,
         years: Function,
         static: {
@@ -60,6 +60,17 @@ tap.test('state personnel data model', async statePersonnelModelTests => {
       relationTest.equal(output, 'baz', 'returns the expected value');
     }
   );
+
+  statePersonnelModelTests.test('snake-cases attributes', async test => {
+    test.same(
+      personnel.format({
+        attr1: 'attribute 1',
+        attrTwo: 'attribute 2'
+      }),
+      { attr1: 'attribute 1', attr_two: 'attribute 2' },
+      'formats camel-case attributes into snake-case attributes'
+    );
+  });
 
   statePersonnelModelTests.test('overrides toJSON method', async jsonTests => {
     const self = { get: sinon.stub(), related: sinon.stub() };
@@ -129,17 +140,11 @@ tap.test(
         }
       );
 
-      validationTests.test(
-        'fails if FTE is too small or too large',
-        async test => {
-          self.attributes.year = 2019;
-          self.attributes.fte = -0.3;
-          test.rejects(cost.validate.bind(self), 'rejects if fte is negative');
-
-          self.attributes.fte = 1.3;
-          test.rejects(cost.validate.bind(self), 'rejects if fte is over 100%');
-        }
-      );
+      validationTests.test('fails if FTE is too small', async test => {
+        self.attributes.year = 2019;
+        self.attributes.fte = -0.3;
+        test.rejects(cost.validate.bind(self), 'rejects if fte is negative');
+      });
 
       validationTests.test('succeeds if data is valid', async test => {
         self.attributes.year = 2019;
@@ -155,7 +160,7 @@ tap.test(
         self.get.returns('--- unknown field ---');
         self.get.withArgs('id').returns('id field');
         self.get.withArgs('cost').returns('cost field');
-        self.get.withArgs('fte').returns('fte field');
+        self.get.withArgs('fte').returns('1.00');
         self.get.withArgs('year').returns('year field');
 
         const output = cost.toJSON.bind(self)();
@@ -163,7 +168,7 @@ tap.test(
         jsonTests.same(output, {
           id: 'id field',
           cost: 'cost field',
-          fte: 'fte field',
+          fte: 1,
           year: 'year field'
         });
       }

@@ -1,34 +1,58 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions'; // eslint-disable-line import/no-extraneous-dependencies
 
-import Collapsible from '../components/Collapsible';
-import { Input, Textarea } from '../components/Inputs';
-import PageNavButtons from '../components/PageNavButtons';
+import { DocumentItem, ProgressDot, ProgressLine } from './DashboardStory';
+import { Instruction, Section, Subsection } from './content';
+import { FormAndReviewList } from './FormsAndReviews';
+import FrozenTableStory from './FrozenTableStory';
+import { DollarInput } from '../components/Inputs';
 
-import '../styles/index.css';
+import '../styles/legacy.css';
+import '../styles/index.scss';
+import './story-styles.scss';
 
-storiesOf('Collapsible', module)
-  .add('starts open', () => (
-    <Collapsible title="An open thing" open>
-      <p>Hello!</p>
-    </Collapsible>
-  ))
-  .add('starts closed', () => (
-    <Collapsible title="A closed thing">
-      <p>Wazzzzup!</p>
-    </Collapsible>
-  ));
+storiesOf('Content components', module)
+  .add('Section', () => <Section />)
+  .add('Subsection', () => <Subsection />)
+  .add('Instruction', () => <Instruction />);
 
-const inputProps = { input: { name: 'Foo' }, meta: {}, label: 'Input Label' };
+storiesOf('Forms and reviews', module).add('FormAndReviewList', () => (
+  <FormAndReviewList />
+));
 
-storiesOf('Inputs', module)
-  .add('text input', () => <Input {...inputProps} />)
-  .add('textarea input', () => <Textarea {...inputProps} />);
+storiesOf('Frozen-pane tables', module).add('example', () => (
+  <FrozenTableStory />
+));
 
-storiesOf('PageNavButtons', module)
-  .add('next only', () => <PageNavButtons goTo={action('goTo')} next="/foo" />)
-  .add('prev only', () => <PageNavButtons goTo={action('goTo')} prev="/bar" />)
-  .add('prev and next', () => (
-    <PageNavButtons goTo={action('goTo')} prev="/bar" next="/foo" />
-  ));
+storiesOf('Dashboard components', module)
+  .add('Document', () => <DocumentItem />)
+  .add('Progress dot', () => <ProgressDot />)
+  .add('Progress line', () => <ProgressLine />);
+
+storiesOf('Numeric inputs', module).add('Dollars', () => {
+  class Dollar extends Component {
+    state = { value: 0 };
+
+    change = e => {
+      this.setState({ value: e.target.value });
+    };
+
+    render() {
+      const { value } = this.state;
+
+      return (
+        <DollarInput
+          hideLabel
+          wrapperClass="m0"
+          className="fake-spacer-input m0 input input-condensed mono right-align"
+          label="fake-spacer-input"
+          name="fake-spacer-input"
+          value={value}
+          onChange={this.change}
+        />
+      );
+    }
+  }
+
+  return <Dollar />;
+});

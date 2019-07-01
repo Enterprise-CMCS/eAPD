@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the CostAllocate component renders correctly 1`] = `
+<Subsection
+  id={null}
+  nested={true}
+  resource="activities.costAllocate"
+>
+  <div
+    className="data-entry-box"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h4",
+          "level": "h5",
+        }
+      }
+      reverse={false}
+      source="activities.costAllocate.methodology.instruction"
+    />
+    <RichText
+      content="cost allocation"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="data-entry-box"
+  >
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h4",
+          "level": "h5",
+        }
+      }
+      reverse={false}
+      source="activities.costAllocate.otherFunding.instruction"
+    />
+    <RichText
+      content="other funding"
+      editorClassName="rte-textarea-l"
+      onSync={[Function]}
+    />
+  </div>
+  <hr />
+  <Connect(CostAllocateFFP)
+    aKey="activity key"
+  />
+</Subsection>
+`;

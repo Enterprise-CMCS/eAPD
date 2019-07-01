@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activity non-personnel costs subsection renders correctly 1`] = `
+<Fragment>
+  <Instruction
+    args={null}
+    headingDisplay={
+      Object {
+        "className": "ds-h3",
+        "level": "h3",
+      }
+    }
+    reverse={false}
+    source="activities.expenses.instruction"
+  />
+  <FormAndReviewList
+    addButtonText="Add another non-personnel cost"
+    allowDeleteAll={false}
+    className={null}
+    collapsed={[Function]}
+    expanded={[Function]}
+    handleEditCategory={[Function]}
+    handleEditCost={[Function]}
+    handleEditDesc={[Function]}
+    list={
+      Array [
+        Object {
+          "category": "test category",
+          "desc": "test desc",
+          "initialCollapsed": false,
+          "key": "cost key",
+          "years": Object {
+            "2027": 34355,
+            "2028": 48833,
+          },
+        },
+      ]
+    }
+    noDataMessage="Additional costs for this activity are missing."
+    onAddClick={[Function]}
+    onDeleteClick={[Function]}
+  />
+</Fragment>
+`;

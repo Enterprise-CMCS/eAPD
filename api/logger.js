@@ -29,6 +29,8 @@ module.exports = name => {
         timestamp: true
       };
     } else {
+      // If console logging is not enabled, explicitly
+      // silence it.  Otherwise it shows up anyway.
       transports.console = {
         silent: true
       };
@@ -39,10 +41,18 @@ module.exports = name => {
   }
 
   const logger = winston.loggers.get(name);
+
+  // Add an audit log level at 0 priority, so it will always be logged
+  // regardless of the configured logging level.
+  logger.setLevels({ audit: 0, ...winston.config.npm.levels });
+  winston.addColors({ audit: 'red' });
+
   // Override the log function to append request information
   // if it's provided
   logger.log = (level, req, ...args) => {
     let requestInfo = req;
+    // TODO [GW]: See if we can duck-type the request object, so we don't
+    // try to log EVERY object as a request
     if (req && typeof req !== 'string') {
       requestInfo = {
         requestID: req.id

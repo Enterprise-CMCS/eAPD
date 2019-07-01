@@ -10,13 +10,12 @@ module.exports = {
       return {
         id: this.get('id'),
         year: this.get('year'),
-        amount: this.get('amount'),
-        description: this.get('description')
+        amount: this.get('amount')
       };
     },
 
     static: {
-      updateableFields: ['year', 'amount', 'description']
+      updateableFields: ['year', 'amount']
     }
   }
 };

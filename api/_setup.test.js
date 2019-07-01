@@ -28,12 +28,9 @@ require('./routes/auth/roles');
 require('./routes/auth/roles/get');
 require('./routes/auth/roles/post');
 require('./routes/auth/roles/put');
-require('./routes/states');
-require('./routes/states/put');
 require('./routes/users');
 require('./routes/users/get');
 require('./routes/users/post');
-require('./routes/logForm');
 
 // fin
 

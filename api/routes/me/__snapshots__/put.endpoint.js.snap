@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/me endpoint | PUT when authenticated does not update uneditable fields 1`] = `
+Object {
+  "activities": Array [
+    "view-users",
+    "add-users",
+    "view-roles",
+    "create-roles",
+    "edit-roles",
+    "submit-federal-response",
+    "submit-clearance",
+    "edit-comments",
+    "submit-document",
+    "submit-state-response",
+    "create-draft",
+    "edit-document",
+    "edit-response",
+    "delete-users",
+    "view-document",
+  ],
+  "id": 2000,
+  "name": "Bob Belcher",
+  "phone": "5554567890",
+  "position": "cook",
+  "role": "admin",
+  "state": Object {
+    "id": "mn",
+    "name": "Minnesota",
+  },
+  "username": "all-permissions-and-state",
+}
+`;
+
+exports[`/me endpoint | PUT when authenticated only updates the fields that were sent in 1`] = `
+Object {
+  "activities": Array [
+    "view-users",
+    "add-users",
+    "view-roles",
+    "create-roles",
+    "edit-roles",
+    "submit-federal-response",
+    "submit-clearance",
+    "edit-comments",
+    "submit-document",
+    "submit-state-response",
+    "create-draft",
+    "edit-document",
+    "edit-response",
+    "delete-users",
+    "view-document",
+  ],
+  "id": 2000,
+  "name": "Wonder Woman",
+  "phone": null,
+  "position": "cook",
+  "role": "admin",
+  "state": Object {
+    "id": "mn",
+    "name": "Minnesota",
+  },
+  "username": "all-permissions-and-state",
+}
+`;
+
+exports[`/me endpoint | PUT when authenticated rejects when changing password to something insufficiently complex 1`] = `
+Object {
+  "error": "edit-self.weak-password",
+}
+`;
+
+exports[`/me endpoint | PUT when authenticated rejects when changing phone number to something over 10 digits 1`] = `
+Object {
+  "error": "edit-self.invalid-phone",
+}
+`;

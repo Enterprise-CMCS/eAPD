@@ -1,21 +1,32 @@
-import { routerReducer } from 'react-router-redux';
+import { connectRouter } from 'connected-react-router';
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
 import activities from './activities';
+import admin from './admin';
 import apd from './apd';
 import auth from './auth';
-import state from './state';
+import budget from './budget';
+import dirty from './dirty';
+import errors from './errors';
+import navigation from './navigation';
+import notification from './notification';
 import user from './user';
+import working from './working';
 
-const rootReducer = combineReducers({
-  activities,
-  apd,
-  auth,
-  state,
-  user,
-  router: routerReducer,
-  form: formReducer
-});
+const rootReducer = history =>
+  combineReducers({
+    activities,
+    admin,
+    apd,
+    auth,
+    budget,
+    dirty,
+    errors,
+    navigation,
+    notification,
+    user,
+    working,
+    router: connectRouter(history)
+  });
 
 export default rootReducer;

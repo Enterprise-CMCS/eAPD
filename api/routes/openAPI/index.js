@@ -4,13 +4,13 @@ const auth = require('./auth');
 const apds = require('../apds/openAPI');
 const authActivities = require('../auth/activities/openAPI');
 const authRoles = require('../auth/roles/openAPI');
+const files = require('../files/openAPI');
 const me = require('../me/openAPI');
 const users = require('../users/openAPI');
-const states = require('../states/openAPI');
 const { arrayOf } = require('./helpers').schema;
 
 module.exports = {
-  openapi: '3.0',
+  openapi: '3.0.0',
   info: {
     title: 'CMS HITECH APD API',
     description: 'The API for the CMS HITECH APD app.',
@@ -21,11 +21,13 @@ module.exports = {
     ...auth,
     ...authActivities,
     ...authRoles,
+    ...files,
     ...me,
     ...users,
-    ...states,
     '/open-api': {
       get: {
+        tags: ['Metadata'],
+        summary: 'Gets this document',
         description: 'Returns this document',
         responses: {
           200: {
@@ -48,32 +50,168 @@ module.exports = {
             type: 'string',
             description: 'Activity name, unique within an APD'
           },
+          fundingSource: {
+            type: 'string',
+            description: 'Federal funding source that applies to this activity'
+          },
+          summary: {
+            type: 'string',
+            description: 'Short summary of the activity'
+          },
           description: {
             type: 'string',
             description: 'Activity description'
           },
-          otherFundingSources: {
+          alernatives: {
+            type: 'string',
+            description: 'Alternative considerations for the activity'
+          },
+          plannedEndDate: {
+            type: 'string',
+            format: 'date-time',
+            description: 'The date this activity is planned to begin'
+          },
+          plannedStartDate: {
+            type: 'string',
+            format: 'date-time',
+            description: 'The date this activity is planned to be completed'
+          },
+          contractorResources: arrayOf({
             type: 'object',
+            description: 'Activity contractor resource',
             properties: {
+              name: {
+                type: 'string',
+                description: 'Name of the contractor resource'
+              },
               description: {
                 type: 'string',
-                description:
-                  'Description of the other funding sources for this activity'
+                description: 'Description'
               },
-              amount: {
-                type: 'number',
+              files: arrayOf({
+                $ref: '#/components/schemas/file'
+              }),
+              hourlyData: arrayOf({
+                type: 'object',
+                properties: {
+                  hours: {
+                    type: 'number',
+                    description: 'Number of hours this contractor works/ed'
+                  },
+                  rates: {
+                    type: 'number',
+                    description: 'Hourly rate for this contractor'
+                  },
+                  year: {
+                    type: 'string',
+                    description: 'Year this hourly rate applies to'
+                  }
+                }
+              }),
+              start: {
+                type: 'string',
+                format: 'date-time',
                 description:
-                  'The total funding provided by the other sources described here'
+                  'When the contractor resource will begin work; date only'
+              },
+              end: {
+                type: 'string',
+                format: 'date-time',
+                description:
+                  'When the contractor resource will end work; date only'
+              },
+              totalCost: {
+                type: 'number',
+                description: 'Contractor resource total cost'
+              },
+              useHourly: {
+                type: 'boolean',
+                description: 'Whether to use hourly rates for this contractor'
+              },
+              years: arrayOf({
+                type: 'object',
+                description:
+                  'Details of each year the contractor resource will be working',
+                properties: {
+                  year: {
+                    type: 'string',
+                    description: 'Year this detail applies to'
+                  },
+                  cost: {
+                    type: 'number',
+                    description: 'Contractor resource cost of the year'
+                  }
+                }
+              })
+            }
+          }),
+          costAllocationNarrative: {
+            type: 'object',
+            properties: {
+              methodology: {
+                type: 'string',
+                description: 'Description of the cost allocation methodology'
+              },
+              otherSources: {
+                type: 'string',
+                description: 'Description of other funding sources'
               }
             }
           },
+          costAllocation: arrayOf({
+            type: 'object',
+            properties: {
+              federalPercent: {
+                type: 'number',
+                description:
+                  'Federal share for this activity for this year, from 0 to 1'
+              },
+              statePercent: {
+                type: 'number',
+                description:
+                  'State share for this activity for this year, from 0 to 1'
+              },
+              otherAmount: {
+                type: 'number',
+                description:
+                  'Other amount (dollars) for this activity for this year'
+              },
+              year: {
+                type: 'number',
+                description:
+                  'Federal fiscal year this cost allocation applies to'
+              }
+            }
+          }),
+          files: arrayOf({
+            $ref: '#/components/schemas/file'
+          }),
+          goals: arrayOf({
+            type: 'object',
+            description: 'Activity goal',
+            properties: {
+              description: {
+                type: 'string',
+                description: 'Goal description'
+              },
+              objective: {
+                type: 'string',
+                description: 'Goal objective'
+              }
+            }
+          }),
           expenses: arrayOf({
             type: 'object',
             description: 'Activity expense',
             properties: {
-              name: {
+              category: {
                 type: 'string',
-                description: 'Expense name'
+                description:
+                  'Expense category, such as "Hardware, software, and licensing"'
+              },
+              description: {
+                type: 'string',
+                description: 'Short description of the expense'
               },
               entries: arrayOf({
                 type: 'object',
@@ -84,28 +222,10 @@ module.exports = {
                     description: 'Expense entry year'
                   },
                   amount: {
-                    type: 'decimal',
+                    type: 'number',
                     description: 'Expense entry amount'
-                  },
-                  description: {
-                    type: 'string',
-                    description: 'Expense entry description'
                   }
                 }
-              })
-            }
-          }),
-          goals: arrayOf({
-            type: 'object',
-            description: 'Activity goal',
-            properties: {
-              description: {
-                type: 'string',
-                description: 'Goal description'
-              },
-              objectives: arrayOf({
-                type: 'string',
-                description: 'Goal objective'
               })
             }
           }),
@@ -113,36 +233,153 @@ module.exports = {
             type: 'object',
             description: 'Activity schedule item',
             properties: {
-              actualEnd: {
+              endDate: {
                 type: 'string',
                 format: 'date-time',
-                description:
-                  'The actual date the milestone was completed, if known'
-              },
-              actualStart: {
-                type: 'string',
-                format: 'date-time',
-                description:
-                  'The actual date the milestone was started, if known'
+                description: 'The date this milestone is planned to be met'
               },
               milestone: {
                 type: 'string',
                 description:
                   'The name of the milestone this schedule entry refers to'
               },
-              plannedEnd: {
-                type: 'string',
-                format: 'date-time',
-                description: 'The planned milestone completion date'
-              },
-              plannedStart: {
-                type: 'string',
-                format: 'date-time',
-                description: 'The planned milestone start date'
-              },
               status: {
                 type: 'string',
                 description: 'The status of the milestone'
+              }
+            }
+          }),
+          standardsAndConditions: {
+            type: 'object'
+          },
+          statePersonnel: arrayOf({
+            type: 'object',
+            properties: {
+              title: {
+                type: 'string',
+                description: 'Title for the state personnel'
+              },
+              description: {
+                type: 'string',
+                description: 'Description of the role'
+              },
+              keyPersonnel: {
+                type: 'boolean',
+                description: '"Key Personnel" designation'
+              },
+              years: arrayOf({
+                type: 'object',
+                properties: {
+                  cost: {
+                    type: 'number',
+                    description: `This personnel's cost for the given federal fiscal year`
+                  },
+                  fte: {
+                    type: 'number',
+                    description:
+                      'Percent of time this personnel is dedicating to the activity'
+                  },
+                  year: {
+                    type: 'string',
+                    description:
+                      'Federal fiscal year this information applies to'
+                  }
+                }
+              })
+            }
+          }),
+          quarterlyFFP: arrayOf({
+            type: 'object',
+            description:
+              'Federal share of this activity cost, by expense type, per fiscal quarter',
+            properties: {
+              q1: {
+                type: 'object',
+                description: 'First fiscal quarter FFP',
+                properties: {
+                  combined: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total to be paid in this quarter'
+                  },
+                  contractors: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
+                  },
+                  state: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
+                  }
+                }
+              },
+              q2: {
+                type: 'object',
+                description: 'Second fiscal quarter FFP',
+                properties: {
+                  combined: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total to be paid in this quarter'
+                  },
+                  contractors: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
+                  },
+                  state: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
+                  }
+                }
+              },
+              q3: {
+                type: 'object',
+                description: 'Third fiscal quarter FFP',
+                properties: {
+                  combined: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total to be paid in this quarter'
+                  },
+                  contractors: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
+                  },
+                  state: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
+                  }
+                }
+              },
+              q4: {
+                type: 'object',
+                description: 'Fourth fiscal quarter FFP',
+                properties: {
+                  combined: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total to be paid in this quarter'
+                  },
+                  contractors: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total contractor expense to be paid in this quarter'
+                  },
+                  state: {
+                    type: 'number',
+                    description:
+                      'Percent of the federal share of the FFY total state expense to be paid in this quarter'
+                  }
+                }
+              },
+              year: {
+                type: 'number',
+                description: 'Federal fiscal year this quarterly FFP applies to'
               }
             }
           })
@@ -155,32 +392,296 @@ module.exports = {
             type: 'number',
             description: 'APD ID'
           },
+          name: {
+            type: 'string',
+            description:
+              'The APD document name, following SEA naming conventions'
+          },
+          activities: arrayOf({
+            $ref: '#/components/schemas/activity'
+          }),
+          federalCitations: {
+            type: 'object',
+            description:
+              'Federal citations that states must assert compliance with. This is a free-form object.'
+          },
+          incentivePayments: arrayOf({
+            type: 'object',
+            properties: {
+              year: {},
+              q1: { $ref: '#/components/schemas/incentivePaymentQuarter' },
+              q2: { $ref: '#/components/schemas/incentivePaymentQuarter' },
+              q3: { $ref: '#/components/schemas/incentivePaymentQuarter' },
+              q4: { $ref: '#/components/schemas/incentivePaymentQuarter' }
+            }
+          }),
+          keyPersonnel: arrayOf({
+            type: 'object',
+            properties: {
+              id: { type: 'number' },
+              costs: arrayOf({
+                type: 'object',
+                properties: {
+                  cost: {
+                    type: 'number',
+                    description: `Person's cost for the given year`
+                  },
+                  year: {
+                    type: 'string',
+                    description:
+                      'Federal fiscal year this cost is attributable to'
+                  }
+                }
+              }),
+              email: { type: 'string', description: `Person's email address` },
+              hasCosts: {
+                type: 'boolean',
+                description:
+                  'Whether the person has costs attributable to the project'
+              },
+              isPrimary: {
+                type: 'boolean',
+                description:
+                  'Whether the person is the primary point of contact for the APD'
+              },
+              name: { type: 'string', description: `Person's name` },
+              percentTime: {
+                type: 'number',
+                description: `Percent of this person's time dedicated to the project, as a faction between 0 and 1.`,
+                minimum: 0,
+                maximum: 1
+              },
+              position: { type: 'string', description: `Person's position` }
+            }
+          }),
+          narrativeHIE: {
+            type: 'string',
+            description:
+              'Brief description of HIE-funded activities contained in this APD'
+          },
+          narrativeHIT: {
+            type: 'string',
+            description:
+              'Brief description of HIT-funded activities contained in this APD'
+          },
+          narrativeMMIS: {
+            type: 'string',
+            description:
+              'Brief description of MMIS-funded activities contained in this APD'
+          },
+          previousActivityExpenses: arrayOf({
+            type: 'object',
+            properties: {
+              year: {
+                type: 'string',
+                description: 'Federal fiscal year this information applies to'
+              },
+              hie: {
+                type: 'object',
+                description: 'HIE-funded expenses',
+                properties: {
+                  federalActual: {
+                    type: 'number',
+                    description: 'Total federal share actually spent'
+                  },
+                  federalApproved: {
+                    type: 'number',
+                    description:
+                      'Total federal share approved in the previous APD'
+                  },
+                  stateActual: {
+                    type: 'number',
+                    description: 'Total state share actually spent'
+                  },
+                  stateApproved: {
+                    type: 'number',
+                    description:
+                      'Total state share approved in the previous APD'
+                  }
+                }
+              },
+              hit: {
+                type: 'object',
+                description: 'HIT-funded expenses',
+                properties: {
+                  federalActual: {
+                    type: 'number',
+                    description: 'Total federal share actually spent'
+                  },
+                  federalApproved: {
+                    type: 'number',
+                    description:
+                      'Total federal share approved in the previous APD'
+                  },
+                  stateActual: {
+                    type: 'number',
+                    description: 'Total state share actually spent'
+                  },
+                  stateApproved: {
+                    type: 'number',
+                    description:
+                      'Total state share approved in the previous APD'
+                  }
+                }
+              },
+              mmis: {
+                type: 'object',
+                description: 'HIT-funded expenses',
+                properties: {
+                  federal90Actual: {
+                    type: 'number',
+                    description: 'Total federal 90% share actually spent'
+                  },
+                  federal90Approved: {
+                    type: 'number',
+                    description:
+                      'Total federal 90% share approved in the previous APD'
+                  },
+                  state10Actual: {
+                    type: 'number',
+                    description: 'Total state 10% share actually spent'
+                  },
+                  state10Approved: {
+                    type: 'number',
+                    description:
+                      'Total state 10% share approved in the previous APD'
+                  },
+                  federal75Actual: {
+                    type: 'number',
+                    description: 'Total federal 75% share actually spent'
+                  },
+                  federal75Approved: {
+                    type: 'number',
+                    description:
+                      'Total federal 75% share approved in the previous APD'
+                  },
+                  state25Actual: {
+                    type: 'number',
+                    description: 'Total state 25% share actually spent'
+                  },
+                  state25Approved: {
+                    type: 'number',
+                    description:
+                      'Total state 25% share approved in the previous APD'
+                  },
+                  federal50Actual: {
+                    type: 'number',
+                    description: 'Total federal 50% share actually spent'
+                  },
+                  federal50Approved: {
+                    type: 'number',
+                    description:
+                      'Total federal 50% share approved in the previous APD'
+                  },
+                  state50Actual: {
+                    type: 'number',
+                    description: 'Total state 50% share actually spent'
+                  },
+                  state50Approved: {
+                    type: 'number',
+                    description:
+                      'Total state 50% share approved in the previous APD'
+                  }
+                }
+              }
+            }
+          }),
+          previousActivitySummary: {
+            type: 'string',
+            description:
+              'High-level outline of activities approved in previous APD'
+          },
+          programOverview: {
+            type: 'string',
+            description: 'An overview of the overall program'
+          },
+          stateProfile: {
+            type: 'object',
+            description: 'The state profile for this specific APD',
+            properties: {
+              medicaidDirector: {
+                type: 'object',
+                properties: {
+                  name: {
+                    type: 'string',
+                    description: `State Medicaid director's name`
+                  },
+                  email: {
+                    type: 'string',
+                    description: `State Medicaid director's email address`
+                  },
+                  phone: {
+                    type: 'string',
+                    description: `State Medicaid director's phone number`
+                  }
+                }
+              },
+              medicaidOffice: {
+                type: 'object',
+                properties: {
+                  address1: {
+                    type: 'string',
+                    description: 'State Medicaid office address'
+                  },
+                  address2: {
+                    type: 'string',
+                    description: 'State Medicaid office address'
+                  },
+                  city: {
+                    type: 'string',
+                    description: 'State Medicaid office address city'
+                  },
+                  state: {
+                    type: 'string',
+                    description: 'State Medicaid office address state'
+                  },
+                  zip: {
+                    type: 'string',
+                    description: 'State Medicaid office address ZIP code'
+                  }
+                }
+              }
+            }
+          },
           status: {
             type: 'string',
             description: 'Status'
           },
-          period: {
-            type: 'string',
-            description: 'Covered time period'
-          },
-          created_at: {
+          updated: {
             type: 'string',
             format: 'date-time',
-            description: 'Creation date'
+            description: 'Timestamp of the last save to this APD'
           },
-          updated_at: {
-            type: 'string',
-            format: 'date-time',
-            description: 'Last updated date'
+          years: arrayOf({
+            type: 'number'
+          })
+        }
+      },
+      file: {
+        type: 'object',
+        description: 'Files associated with the activity',
+        properties: {
+          id: {
+            type: 'number'
           },
-          approved_at: {
-            type: 'string',
-            format: 'date-time',
-            description: 'Approval date'
+          size: {
+            type: 'number',
+            description: 'Size of the file, in bytes'
           },
-          activities: {
-            $ref: '#/components/schemas/activity'
+          metadata: {
+            type: 'object',
+            description:
+              'The properties from any metadata supplied when the file was uploaded will be added to the file object'
           }
+        }
+      },
+      incentivePaymentQuarter: {
+        type: 'object',
+        properties: {
+          ehPayment: { type: 'number' },
+          ehCount: { type: 'number' },
+          epPayment: { type: 'number' },
+          epCount: { type: 'number' }
         }
       },
       state: {
@@ -245,7 +746,7 @@ module.exports = {
       sessionCookie: {
         type: 'apiKey',
         in: 'cookie',
-        name: 'session'
+        name: 'token'
       }
     }
   }

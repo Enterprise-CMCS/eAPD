@@ -1,16 +1,23 @@
-import Activities from './containers/Activities';
-import Hello from './components/Hello';
 import NoMatch from './components/NoMatch';
+import CreateAccount from './containers/admin/CreateAccount';
+import Dashboard from './containers/Dashboard';
+import ApdApplication from './containers/ApdApplication';
+import EditAccount from './containers/admin/EditAccount';
+import MyAccount from './containers/admin/MyAccount';
 import Login from './containers/Login';
-import PoC from './components/PoC';
+import Logout from './containers/Logout';
 
 const routes = [
-  { path: '/', component: PoC, exact: true, nonPrivate: true },
-  { path: '/login', component: Login, nonPrivate: true },
-  { path: '/hello', component: Hello, nonPrivate: true },
-  { path: '/poc', component: PoC, nonPrivate: true },
-  { path: '/activities', component: Activities, nonPrivate: true },
-  { component: NoMatch, nonPrivate: true }
+  { path: '/', component: Dashboard, exact: true, isPublic: false },
+  { path: '/apd', component: ApdApplication, exact: true, isPublic: false },
+
+  { path: '/create-account', component: CreateAccount, isAdmin: true },
+  { path: '/edit-account', component: EditAccount, isAdmin: true },
+
+  { path: '/me', component: MyAccount, isPublic: false },
+  { path: '/login', component: Login, isPublic: true },
+  { path: '/logout', component: Logout, isPublic: false },
+  { component: NoMatch, isPublic: true }
 ];
 
 export default routes;

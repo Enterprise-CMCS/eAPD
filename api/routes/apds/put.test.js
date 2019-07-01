@@ -1,7 +1,7 @@
 const tap = require('tap');
 const sinon = require('sinon');
 
-const { loggedIn, userCanEditAPD } = require('../../middleware');
+const { can, userCanEditAPD } = require('../../middleware');
 const putEndpoint = require('./put');
 
 tap.test('apds PUT endpoint', async endpointTest => {
@@ -13,7 +13,7 @@ tap.test('apds PUT endpoint', async endpointTest => {
     setupTest.ok(
       app.put.calledWith(
         '/apds/:id',
-        loggedIn,
+        can('edit-document'),
         userCanEditAPD(),
         sinon.match.func
       ),
@@ -24,17 +24,68 @@ tap.test('apds PUT endpoint', async endpointTest => {
   endpointTest.test(
     'synchronize responder returns the expected data',
     async test => {
-      const apd = {};
-      const out = putEndpoint.syncResponder({
+      const model = {};
+      const modelClass = {};
+      const out = putEndpoint.syncResponder(modelClass)({
         meta: {
-          apd
+          apd: model
         }
       });
 
       test.same(
         out,
-        { model: apd, action: 'update-apd' },
+        { model, modelClass, action: 'update-apd' },
         'returns the specific model to synchronize'
+      );
+    }
+  );
+
+  endpointTest.test(
+    'afterSync event handler updates state profile',
+    async test => {
+      const StateModel = {
+        where: sinon.stub(),
+        fetch: sinon.stub()
+      };
+      StateModel.where.returns(StateModel);
+
+      const state = {
+        set: sinon.stub(),
+        save: sinon.stub().resolves()
+      };
+      StateModel.fetch.resolves(state);
+
+      await putEndpoint.updateStateProfile(StateModel)({
+        user: { state: 'zz' },
+        body: {
+          stateProfile: { info: 'goes here', toBe: 'saved' },
+          pointsOfContact: [
+            {
+              id: 'remove',
+              name: 'Bob',
+              position: 'Builder',
+              email: 'bob@builder.org'
+            }
+          ]
+        }
+      });
+
+      test.ok(
+        StateModel.where.calledWith({ id: 'zz' }),
+        'fetches the associated state'
+      );
+      test.ok(
+        state.set.calledWith('medicaid_office', {
+          info: 'goes here',
+          toBe: 'saved'
+        }),
+        'updates the state with profile info from the request body'
+      );
+      test.ok(
+        state.set.calledWith('state_pocs', [
+          { name: 'Bob', position: 'Builder', email: 'bob@builder.org' }
+        ]),
+        'updates the state with points of contact from the request body'
       );
     }
   );

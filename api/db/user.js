@@ -1,8 +1,8 @@
-const defaultBcrypt = require('bcryptjs');
 const defaultZxcvbn = require('zxcvbn');
+const defaultHash = require('../auth/passwordHash');
 const logger = require('../logger')('db user model');
 
-module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
+module.exports = (zxcvbn = defaultZxcvbn, hash = defaultHash) => ({
   user: {
     tableName: 'users',
 
@@ -12,6 +12,29 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
 
     state() {
       return this.hasOne('state', 'id', 'state_id');
+    },
+
+    format(attr) {
+      if (this.hasChanged('password')) {
+        // eslint-disable-next-line no-param-reassign
+        attr.password = hash.hashSync(attr.password);
+      }
+      if (this.hasChanged('failed_logons')) {
+        // eslint-disable-next-line no-param-reassign
+        attr.failed_logons = JSON.stringify(attr.failed_logons);
+      }
+      if (!this.hasChanged('locked_until')) {
+        // eslint-disable-next-line no-param-reassign
+        delete attr.locked_until;
+      }
+      return attr;
+    },
+
+    parse(response) {
+      if (Object.keys(response).includes('locked_until')) {
+        response.locked_until = +response.locked_until || 0;
+      }
+      return response;
     },
 
     async activities() {
@@ -28,7 +51,7 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
 
     async apds() {
       logger.silly('getting user apds');
-      if (!this.relations.state || !this.relations.state.apds) {
+      if (!this.relations.state || !this.relations.state.relations.apds) {
         logger.silly('user apds are not loaded yet... loading them');
         await this.load('state.apds');
       }
@@ -43,9 +66,11 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
       if (this.hasChanged('email')) {
         logger.silly('email address changed; making sure it is unique');
 
-        const otherUsersWithThisEmail = await this.where({
-          email: this.attributes.email
-        }).fetchAll();
+        const otherUsersWithThisEmail = await this.query(
+          'whereRaw',
+          'LOWER(email) = ?',
+          [this.attributes.email.toLowerCase()]
+        ).fetchAll();
 
         if (otherUsersWithThisEmail.length) {
           logger.verbose(
@@ -70,7 +95,6 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
         }
 
         logger.silly('password is sufficiently complex; hashing it');
-        this.set({ password: bcrypt.hashSync(this.attributes.password) });
       }
 
       if (this.hasChanged('phone')) {
@@ -96,7 +120,8 @@ module.exports = (zxcvbn = defaultZxcvbn, bcrypt = defaultBcrypt) => ({
         name: this.get('name'),
         position: this.get('position'),
         phone: this.get('phone'),
-        state_id: this.get('state_id')
+        state: this.get('state_id'),
+        role: this.get('auth_role')
       };
     }
   }

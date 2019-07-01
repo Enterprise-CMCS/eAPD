@@ -1,0 +1,22 @@
+@import '@cmsgov/design-system-support/src/settings/index';
+@import './variables';
+
+body {
+  font-family: $font-sans;
+}
+
+em {
+  font-style: italic !important;
+}
+
+strong {
+  font-weight: $font-bold !important;
+}
+
+.font-family--mono {
+  font-family: $font-family-mono;
+}
+
+h1.apd--title {
+  margin-left: 72px;
+}

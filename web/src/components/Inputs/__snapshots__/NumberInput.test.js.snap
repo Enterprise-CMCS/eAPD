@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DollarInput component renders correctly 1`] = `
+<div
+  className="ds-u-margin-bottom--2"
+>
+  <label
+    className="ds-h4 ds-u-display--block"
+    htmlFor="name"
+  >
+    label
+  </label>
+  <NumberInput
+    id="name"
+    onChange={null}
+    type="text"
+  />
+</div>
+`;
+
+exports[`PercentInput component renders correctly 1`] = `
+<div
+  className="ds-u-margin-bottom--2"
+>
+  <label
+    className="ds-h4 ds-u-display--block"
+    htmlFor="name"
+  >
+    label
+  </label>
+  <NumberInput
+    id="name"
+    onChange={null}
+    type="text"
+  />
+</div>
+`;

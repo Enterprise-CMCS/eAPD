@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`previous activities component renders correctly if data is not loaded 1`] = `
+<Connect(ConnectedWaypoint)
+  id="prev-activities-overview"
+>
+  <Section
+    id="prev-activities"
+    isNumbered={true}
+    resource="previousActivities"
+  >
+    <Connect(ConnectedWaypoint)
+      id="prev-activities-outline"
+    />
+    <Subsection
+      id="prev-activities-outline"
+      nested={false}
+      resource="previousActivities.outline"
+    >
+      <h4
+        className="ds-h4"
+      >
+        Previous Activities Summary
+      </h4>
+      <RichText
+        content="previous"
+        editorClassName="rte-textarea-l"
+        onSync={[Function]}
+      />
+    </Subsection>
+    <Connect(ConnectedWaypoint)
+      id="prev-activities-table"
+    />
+    <Subsection
+      id="prev-activities-table"
+      nested={false}
+      resource="previousActivities.actualExpenses"
+    >
+      <Connect(ApdPreviousActivityTable) />
+      <Connect(ApdPreviousActivityTableMMIS) />
+      <Connect(ApdPreviousActivityTableMMIS) />
+    </Subsection>
+  </Section>
+</Connect(ConnectedWaypoint)>
+`;

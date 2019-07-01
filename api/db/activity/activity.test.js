@@ -1,3 +1,4 @@
+const moment = require('moment');
 const tap = require('tap');
 const sinon = require('sinon');
 
@@ -13,34 +14,51 @@ tap.test('activity data model', async activityModelTests => {
 
           apd: Function,
           goals: Function,
-          approaches: Function,
           contractorResources: Function,
           expenses: Function,
+          files: Function,
           schedule: Function,
           statePersonnel: Function,
+          costAllocation: Function,
+          format: Function,
+          quarterlyFFP: Function,
 
           static: {
-            updateableFields: ['name', 'description'],
+            updateableFields: [
+              'alternatives',
+              'costAllocationNarrative',
+              'description',
+              'fundingSource',
+              'name',
+              'plannedEndDate',
+              'plannedStartDate',
+              'standardsAndConditions',
+              'summary'
+            ],
             owns: {
               goals: 'apdActivityGoal',
-              approaches: 'apdActivityApproach',
               contractorResources: 'apdActivityContractorResource',
               expenses: 'apdActivityExpense',
               schedule: 'apdActivitySchedule',
-              statePersonnel: 'apdActivityStatePersonnel'
+              statePersonnel: 'apdActivityStatePersonnel',
+              costAllocation: 'apdActivityCostAllocation',
+              quarterlyFFP: 'apdActivityQuarterlyFFP'
             },
             foreignKey: 'activity_id',
             withRelated: [
-              'approaches',
               'contractorResources',
+              'contractorResources.files',
+              'contractorResources.hourlyData',
               'contractorResources.years',
               'goals',
-              'goals.objectives',
               'expenses',
               'expenses.entries',
+              'files',
               'schedule',
               'statePersonnel',
-              'statePersonnel.years'
+              'statePersonnel.years',
+              'costAllocation',
+              'quarterlyFFP'
             ]
           }
         }
@@ -81,23 +99,6 @@ tap.test('activity data model', async activityModelTests => {
           'sets up the relationship mapping to goal'
         );
         apdTests.equal(output, 'bag', 'returns the expected value');
-      }
-    );
-
-    relationshipTests.test(
-      'activity model sets up approaches relationship',
-      async apdTests => {
-        const self = {
-          hasMany: sinon.stub().returns('starsky')
-        };
-
-        const output = activity.apdActivity.approaches.bind(self)();
-
-        apdTests.ok(
-          self.hasMany.calledWith('apdActivityApproach'),
-          'sets up the relationship mapping to approach'
-        );
-        apdTests.equal(output, 'starsky', 'returns the expected value');
       }
     );
 
@@ -168,6 +169,62 @@ tap.test('activity data model', async activityModelTests => {
         apdTests.equal(output, 'can', 'returns the expected value');
       }
     );
+
+    relationshipTests.test(
+      'activity model sets up cost allocation relationship',
+      async apdTests => {
+        const self = {
+          hasMany: sinon.stub().returns('can')
+        };
+
+        const output = activity.apdActivity.costAllocation.bind(self)();
+
+        apdTests.ok(
+          self.hasMany.calledWith('apdActivityCostAllocation'),
+          'sets up the relationship mapping to cost allocation'
+        );
+        apdTests.equal(output, 'can', 'returns the expected value');
+      }
+    );
+
+    relationshipTests.test(
+      'activity model sets up quarterly FFP relationship',
+      async apdTests => {
+        const self = {
+          hasMany: sinon.stub().returns('can')
+        };
+
+        const output = activity.apdActivity.quarterlyFFP.bind(self)();
+
+        apdTests.ok(
+          self.hasMany.calledWith('apdActivityQuarterlyFFP'),
+          'sets up the relationship mapping to quarterly FFP'
+        );
+        apdTests.equal(output, 'can', 'returns the expected value');
+      }
+    );
+
+    relationshipTests.test(
+      'activity model sets up files relationship',
+      async test => {
+        const self = {
+          belongsToMany: sinon.stub().returns('boo')
+        };
+
+        const output = activity.apdActivity.files.bind(self)();
+
+        test.ok(
+          self.belongsToMany.calledWith(
+            'file',
+            'activity_files',
+            'activity_id',
+            'file_id'
+          ),
+          'sets up the relationship mapping to files'
+        );
+        test.equal(output, 'boo', 'retuns the expected value');
+      }
+    );
   });
 
   activityModelTests.test(
@@ -205,9 +262,14 @@ tap.test('activity data model', async activityModelTests => {
         async test => {
           self.hasChanged.withArgs('name').returns(true);
           self.attributes.name = 'valid name';
+          self.attributes.apd_id = 'apd id';
           self.fetchAll.resolves([]);
 
-          test.resolves(validate(), 'validate resolves');
+          await validate();
+          test.ok(true, 'validate resolves');
+          test.ok(
+            self.where.calledWith({ apd_id: 'apd id', name: 'valid name' })
+          );
         }
       );
 
@@ -218,7 +280,7 @@ tap.test('activity data model', async activityModelTests => {
         try {
           await validate();
         } catch (e) {
-          test.ok('rejects on an empty name');
+          test.ok(true, 'rejects on an empty name');
           test.equal(
             e.message,
             'activity-name-invalid',
@@ -227,14 +289,14 @@ tap.test('activity data model', async activityModelTests => {
         }
       });
 
-      validationTests.test('throws if the name is not a number', async test => {
+      validationTests.test('throws if the name is a number', async test => {
         self.hasChanged.withArgs('name').returns(true);
         self.attributes.name = 7;
 
         try {
           await validate();
         } catch (e) {
-          test.ok('rejects on an empty name');
+          test.ok(true, 'rejects on an numeric name');
           test.equal(
             e.message,
             'activity-name-invalid',
@@ -252,7 +314,7 @@ tap.test('activity data model', async activityModelTests => {
           try {
             await validate();
           } catch (e) {
-            test.ok('rejects on an empty name');
+            test.ok(true, 'rejects on an empty name');
             test.equal(
               e.message,
               'activity-name-invalid',
@@ -265,18 +327,73 @@ tap.test('activity data model', async activityModelTests => {
       validationTests.test('throws if the name already exists', async test => {
         self.hasChanged.withArgs('name').returns(true);
         self.attributes.name = 'valid name';
+        self.attributes.apd_id = 'apd id';
         self.fetchAll.resolves([{ hello: 'world' }]);
 
         try {
           await validate();
         } catch (e) {
-          test.ok('rejects if the name already exists');
+          test.ok(true, 'rejects if the name already exists');
+          test.ok(
+            self.where.calledWith({ apd_id: 'apd id', name: 'valid name' })
+          );
           test.equal(
             e.message,
             'activity-name-exists',
             'rejects with the expected message'
           );
         }
+      });
+
+      validationTests.test('deletes falsey date attributes', async test => {
+        self.attributes.plannedEndDate = false;
+        self.attributes.plannedStartDate = 0;
+
+        await validate();
+        test.type(
+          self.attributes.plannedEndDate,
+          'undefined',
+          'end date is deleted'
+        );
+        test.type(
+          self.attributes.plannedStartDate,
+          'undefined',
+          'start date is deleted'
+        );
+      });
+
+      validationTests.test('rejects if dates are invalid', async test => {
+        self.attributes.plannedEndDate = 'invalid gunk';
+        try {
+          await validate();
+        } catch (e) {
+          test.ok(true, 'rejects invalid end date');
+          test.equal(
+            e.message,
+            'activity-planned-end-date',
+            'rejects with the expected message'
+          );
+        }
+
+        delete self.attributes.plannedEndDate;
+        self.attributes.plannedStartDate = 'invalid gunk';
+        try {
+          await validate();
+        } catch (e) {
+          test.ok(true, 'rejects invalid start date');
+          test.equal(
+            e.message,
+            'activity-planned-start-date',
+            'rejects with the expected message'
+          );
+        }
+      });
+
+      validationTests.test('passes if dates are valid', async test => {
+        self.attributes.plannedEndDate = '1977-9-5'; // Voyager 1 launched
+        self.attributes.plannedStartDate = '2004-06-30'; // Cassini reaches Saturn system
+        await validate();
+        test.ok(true, 'resolves');
       });
     }
   );
@@ -290,10 +407,30 @@ tap.test('activity data model', async activityModelTests => {
       };
       self.get.withArgs('id').returns('eye-dee');
       self.get.withArgs('name').returns('Jerome Lee');
+      self.get.withArgs('summary').returns('US Public Health Service officer');
       self.get.withArgs('description').returns('cool CMS person');
+      self.get.withArgs('alternatives').returns('Nick Aretakis');
+      self.get.withArgs('cost_allocation_methodology').returns('moop moop');
+      self.get
+        .withArgs('other_funding_sources_description')
+        .returns('panhandling, funny videos online');
+      self.get.withArgs('funding_source').returns('bitcoin');
+      self.get
+        .withArgs('standards_and_conditions')
+        .returns('nobody reads them');
 
       self.related.withArgs('goals').returns('goooooaaaaals');
-      self.related.withArgs('approaches').returns('quietly from the left');
+      self.related
+        .withArgs('costAllocation')
+        .returns('cost allocation by year');
+      self.related.withArgs('files').returns('file file file');
+
+      self.get
+        .withArgs('planned_end_date')
+        .returns(moment('1957-10-04').toDate()); // Sputnik 1 launched
+      self.get
+        .withArgs('planned_start_date')
+        .returns(moment('1974-02-08').toDate()); // Final Skylab crew returns to Earth
 
       const output = activity.apdActivity.toJSON.bind(self)();
 
@@ -302,9 +439,20 @@ tap.test('activity data model', async activityModelTests => {
         {
           id: 'eye-dee',
           name: 'Jerome Lee',
+          summary: 'US Public Health Service officer',
           description: 'cool CMS person',
+          alternatives: 'Nick Aretakis',
+          costAllocationNarrative: {
+            methodology: 'moop moop',
+            otherSources: 'panhandling, funny videos online'
+          },
+          costAllocation: 'cost allocation by year',
+          files: 'file file file',
           goals: 'goooooaaaaals',
-          approaches: 'quietly from the left'
+          standardsAndConditions: 'nobody reads them',
+          fundingSource: 'bitcoin',
+          plannedEndDate: '1957-10-04',
+          plannedStartDate: '1974-02-08'
         },
         'gives us back the right JSON-ified object'
       );

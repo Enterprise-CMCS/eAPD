@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activity Goals component renders properly 1`] = `
+<Subsection
+  id={null}
+  nested={true}
+  resource="activities.goals"
+>
+  <FormAndReviewList
+    addButtonText="Add a goal"
+    allowDeleteAll={false}
+    className={null}
+    collapsed={[Function]}
+    expanded={[Function]}
+    handleChange={[Function]}
+    list={
+      Array [
+        "some",
+        "goals",
+        "here",
+      ]
+    }
+    noDataMessage="Additional costs for this activity are missing."
+    onAddClick={[Function]}
+    onDeleteClick={[Function]}
+  />
+</Subsection>
+`;

@@ -1,0 +1,85 @@
+@media print {
+  body {
+    background-color: white;
+  }
+
+  .visibility--screen {
+    display: none;
+  }
+
+  .site,
+  .ds-l-row {
+    display: block;
+  }
+  .ds-l-col--9 {
+    flex: none;
+  }
+  section {
+    border: 0;
+  }
+
+  table,
+  figure,
+  textarea {
+    page-break-inside: avoid;
+  }
+
+  header,
+  .ds-l-col--3,
+  .site-sidebar,
+  .btn-collapse svg,
+  .alert,
+  .rdw-editor-toolbar,
+  .table-frozen-left-pane {
+    display: none;
+  }
+
+
+  .ds-l-container,
+  .ds-l-col--9 {
+    width: 100%!important;
+    min-width: 100%!important;
+  }
+
+  .accordian {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    .btn-collapse {
+      border-bottom: 1px solid #eee;
+      border-radius: 0;
+      display: block !important;
+    }
+
+    .d-none {
+      // force accordians to open
+      display: block !important;
+    }
+  }
+
+  .sticky-header,
+  .has-sticky-header .sticky-nested {
+    // unsticky headers
+    position: inherit;
+  }
+
+  .site-main,
+  .ds-l-container,
+  .accordian > .btn.sm-px3,
+  .has-sticky-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  table input {
+    padding: 0 !important;
+    border: none !important;
+  }
+}
+
+@media screen {
+  .visibility--print {
+    display: none;
+  }
+}

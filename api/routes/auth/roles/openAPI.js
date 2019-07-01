@@ -24,6 +24,8 @@ const roleObjectSchema = {
 const openAPI = {
   '/auth/roles': {
     get: {
+      tags: ['Authentication and authorization'],
+      summary: 'Gets the list of all roles',
       description: 'Get a list of all roles in the system',
       responses: {
         200: {
@@ -33,6 +35,8 @@ const openAPI = {
       }
     },
     post: {
+      tags: ['Authentication and authorization'],
+      summary: 'Creates a new role',
       description: 'Create a new role',
       requestBody: {
         description: 'The new values for the new role',
@@ -70,6 +74,8 @@ const openAPI = {
   },
   '/auth/roles/{id}': {
     put: {
+      tags: ['Authentication and authorization'],
+      summary: 'Sets the activities for a role',
       description:
         'Change which activities an existing role is associated with',
       parameters: [
@@ -77,7 +83,10 @@ const openAPI = {
           name: 'id',
           in: 'path',
           description: 'The ID of the role to update',
-          required: true
+          required: true,
+          schema: {
+            type: 'integer'
+          }
         }
       ],
       requestBody: {
@@ -98,8 +107,14 @@ const openAPI = {
         })
       },
       responses: {
-        204: {
-          description: 'The update was successful'
+        200: {
+          description: 'The update was successful',
+          content: jsonResponse({
+            ...arrayOf({
+              type: 'number',
+              description: 'The activities now associated with the role'
+            })
+          })
         },
         400: {
           description:
@@ -112,6 +127,8 @@ const openAPI = {
       }
     },
     delete: {
+      tags: ['Authentication and authorization'],
+      summary: 'Deletes a role',
       description:
         'Remove the associations between a role and activities, and delete the role',
       parameters: [
@@ -119,7 +136,10 @@ const openAPI = {
           name: 'id',
           in: 'path',
           description: 'The ID of the role to delete',
-          required: true
+          required: true,
+          schema: {
+            type: 'integer'
+          }
         }
       ],
       responses: {

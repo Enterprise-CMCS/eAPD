@@ -1,5 +1,9 @@
 .mono {
-  font-family: Courier, Consolas, Menlo, Monaco, Liberation Mono, monospace;
+  font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+
+.sans {
+  font-family: var(--base-font-family);
 }
 
 .caps {
@@ -7,10 +11,31 @@
   letter-spacing: 0.1em;
 }
 
-.fw-800 {
-  font-weight: 800;
+.light {
+  font-weight: 300;
 }
 
-.fs-10p {
-  font-size: 10px;
+.fw-600 {
+  font-weight: 600;
+}
+
+.text-s {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+}
+
+/* this is the base font size for body copy */
+.text-med {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+}
+
+.text-l {
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-l);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
 }

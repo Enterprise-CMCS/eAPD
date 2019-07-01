@@ -1,11 +1,13 @@
 import {
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAILURE,
-  UPDATE_USER_REQUEST,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE
-} from '../actions/user';
+  AUTH_CHECK_SUCCESS,
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS
+} from '../actions/auth';
+import {
+  ADMIN_EDIT_ME_ERROR,
+  ADMIN_EDIT_ME_REQUEST,
+  ADMIN_EDIT_ME_SUCCESS
+} from '../actions/admin';
 
 const fields = ['id', 'email', 'name', 'position', 'phone', 'state'];
 const fieldsObj = Object.assign({}, ...fields.map(f => ({ [f]: '' })));
@@ -14,35 +16,46 @@ const initialState = {
   data: { ...fieldsObj },
   fetching: false,
   loaded: false,
-  error: ''
+  error: false
 };
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case GET_USER_REQUEST:
-      return { ...state, fetching: true, error: '' };
-    case GET_USER_SUCCESS:
+    case ADMIN_EDIT_ME_REQUEST:
+      return { ...state, error: false, fetching: true };
+    case AUTH_CHECK_SUCCESS:
+    case LOGIN_SUCCESS:
+    case ADMIN_EDIT_ME_SUCCESS:
       return {
         ...state,
+        error: false,
         fetching: false,
         loaded: true,
         data: { ...action.data }
       };
-    case GET_USER_FAILURE:
-      return { ...state, fetching: false, error: action.error };
-    case UPDATE_USER_REQUEST:
-      return { ...state, fetching: true, error: '' };
-    case UPDATE_USER_SUCCESS:
-      return {
-        ...state,
-        fetching: false,
-        data: { ...state.data, ...action.data }
-      };
-    case UPDATE_USER_FAILURE:
-      return { ...state, fetching: false, error: action.error };
+    case ADMIN_EDIT_ME_ERROR:
+      return { ...state, error: true, fetching: false };
+    case LOGOUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }
 };
 
 export default user;
+
+const getIsAdmin = ({
+  user: {
+    data: { role }
+  }
+}) => {
+  return role === 'admin';
+};
+
+export const getUserStateOrTerritory = ({
+  user: {
+    data: { state }
+  }
+}) => state;
+
+export { getIsAdmin };

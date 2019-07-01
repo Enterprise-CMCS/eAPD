@@ -8,6 +8,7 @@ applications:
   - name: hitech-apd-api
     services:
       - cms-db
+      - hitech-api-env
     memory: 128M
     path: api
     host: hitech-api
