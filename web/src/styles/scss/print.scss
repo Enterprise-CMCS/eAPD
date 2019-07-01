@@ -20,7 +20,8 @@
 
   table,
   figure,
-  textarea {
+  textarea,
+  fieldset {
     page-break-inside: avoid;
   }
 
@@ -39,6 +40,12 @@
   .ds-l-col--9 {
     width: 100%!important;
     min-width: 100%!important;
+  }
+
+  fieldset,
+  .ds-c-label {
+    width: 100% !important;
+    max-width: 100%;
   }
 
   .accordian {
