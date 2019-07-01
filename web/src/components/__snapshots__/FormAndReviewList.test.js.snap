@@ -85,9 +85,51 @@ exports[`FormAndReviewList component expands and collapses items 3`] = `
 </FormAndReviewItem>
 `;
 
+exports[`FormAndReviewList component renders properly with a custom class name 1`] = `
+<div
+  className="form-and-review-list test-class"
+>
+  <FormAndReviewItem
+    collapsedComponent={[MockFunction]}
+    expandedComponent={[MockFunction]}
+    index={0}
+    initialCollapsed={true}
+    item={
+      Object {
+        "initialCollapsed": true,
+        "key": "one",
+      }
+    }
+    key="one"
+    onDeleteClick={[Function]}
+  />
+  <FormAndReviewItem
+    collapsedComponent={[MockFunction]}
+    expandedComponent={[MockFunction]}
+    index={1}
+    initialCollapsed={false}
+    item={
+      Object {
+        "initialCollapsed": false,
+        "key": "two",
+      }
+    }
+    key="two"
+    onDeleteClick={[Function]}
+  />
+  <Button
+    className="visibility--screen"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    text for adding a new button
+  </Button>
+</div>
+`;
+
 exports[`FormAndReviewList component renders properly with just one item 1`] = `
 <div
-  className="form-and-review-list"
+  className="form-and-review-list "
 >
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
@@ -115,7 +157,7 @@ exports[`FormAndReviewList component renders properly with just one item 1`] = `
 
 exports[`FormAndReviewList component renders properly with just one item and allowDeleteAll set to true 1`] = `
 <div
-  className="form-and-review-list"
+  className="form-and-review-list "
 >
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
@@ -143,7 +185,7 @@ exports[`FormAndReviewList component renders properly with just one item and all
 
 exports[`FormAndReviewList component renders properly with multiple items 1`] = `
 <div
-  className="form-and-review-list"
+  className="form-and-review-list "
 >
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
@@ -185,7 +227,7 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
 
 exports[`FormAndReviewList component renders properly with no items 1`] = `
 <div
-  className="form-and-review-list"
+  className="form-and-review-list "
 >
   <Alert
     variation="error"
@@ -204,7 +246,7 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
 
 exports[`FormAndReviewList component renders properly with no items and noDataMessage set to false 1`] = `
 <div
-  className="form-and-review-list"
+  className="form-and-review-list "
 >
   <Button
     className="visibility--screen"
@@ -218,7 +260,7 @@ exports[`FormAndReviewList component renders properly with no items and noDataMe
 
 exports[`FormAndReviewList component renders properly without an add button if the onAddClick prop is missing 1`] = `
 <div
-  className="form-and-review-list"
+  className="form-and-review-list "
 >
   <Alert
     variation="error"

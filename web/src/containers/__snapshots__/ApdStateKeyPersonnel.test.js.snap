@@ -4,6 +4,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
 <FormAndReviewList
   addButtonText="Add another person"
   allowDeleteAll={false}
+  className={null}
   collapsed={[Function]}
   expanded={[Function]}
   handleChange={[Function]}

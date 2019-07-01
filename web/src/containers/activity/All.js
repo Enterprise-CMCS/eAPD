@@ -34,6 +34,7 @@ const All = ({ activityKeys, activities, add, update, remove }) => (
           addButtonText="Add another activity"
           allowDeleteAll
           list={activities.slice(1)}
+          className="ds-u-border-bottom--0"
           collapsed={NameAndFundingSourceReview}
           expanded={NameAndFundingSourceForm}
           noDataMessage={false}
