@@ -7,12 +7,15 @@
     display: none;
   }
 
+  .site,
+  .ds-l-row {
+    display: block;
+  }
+  .ds-l-col--9 {
+    flex: none;
+  }
   section {
     border: 0;
-
-    > h2 {
-      page-break-before: always;
-    }
   }
 
   table,
