@@ -51,6 +51,7 @@ The icons in this project are from [Font Awesome Free](https://fontawesome.com/i
 - [plus-circle](https://fontawesome.com/icons/plus-circle?style=solid)
 - [spinner](https://fontawesome.com/icons/spinner?style=solid)
 - [sign-out-alt](https://fontawesome.com/icons/sign-out-alt?style=solid)
+- [times-circle](https://fontawesome.com/icons/times-circle?style=regular)
 - [unlock](https://fontawesome.com/icons/unlock?style=solid)
 - [user-plus](https://fontawesome.com/icons/user-plus?style=solid)
 - [user-cog](https://fontawesome.com/icons/user-cog?style=solid)
