@@ -25,24 +25,24 @@ const ApdStateKeyPerson = ({
           onEditClick={expand}
         >
           <ul className="ds-c-list--bare">
+            {primary ? <li>Primary APD Point of Contact</li> : null}
             <li>{position}</li>
             <li>
-              Total cost: <Dollars>{hasCosts ? totalCost : 0}</Dollars>
+              <strong>Total cost:</strong> <Dollars>{hasCosts ? totalCost : 0}</Dollars>
             </li>
-            {primary ? <li>Primary APD Point of Contact</li> : null}
           </ul>
         </Review>
       </div>
       <div className="visibility--print">
         <Review heading={`${index + 1}. ${name}`}>
           <ul className="ds-c-list--bare">
-            <li>{email}</li>
-            <li>{position}</li>
-            <li>Time commitment to project: {percentTime}%</li>
-            <li>
-              Total cost: <Dollars>{hasCosts ? totalCost : 0}</Dollars>
-            </li>
             {primary ? <li>Primary APD Point of Contact</li> : null}
+            <li>{position}</li>
+            <li>{email}</li>
+            <li><strong>Time commitment to project:</strong> {percentTime}%</li>
+            <li>
+              <strong>Total cost:</strong> <Dollars>{hasCosts ? totalCost : 0}</Dollars>
+            </li>
           </ul>
         </Review>
       </div>
