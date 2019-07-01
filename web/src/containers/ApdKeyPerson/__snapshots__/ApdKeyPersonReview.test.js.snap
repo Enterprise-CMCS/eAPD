@@ -18,7 +18,10 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           The Builder
         </li>
         <li>
-          Total cost: 
+          <strong>
+            Total cost:
+          </strong>
+           
           <Dollars
             long={false}
           >
@@ -41,18 +44,24 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
         className="ds-c-list--bare"
       >
         <li>
-          email address
-        </li>
-        <li>
           The Builder
         </li>
         <li>
-          Time commitment to project: 
+          email address
+        </li>
+        <li>
+          <strong>
+            Time commitment to project:
+          </strong>
+           
           32
           %
         </li>
         <li>
-          Total cost: 
+          <strong>
+            Total cost:
+          </strong>
+           
           <Dollars
             long={false}
           >
