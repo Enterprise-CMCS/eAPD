@@ -6,6 +6,28 @@ import FormAndReviewList, { FormAndReviewItem } from './FormAndReviewList';
 
 describe('FormAndReviewList component', () => {
   describe('renders properly', () => {
+    it('with a custom class name', () => {
+      expect(
+        shallow(
+          <FormAndReviewList
+            addButtonText="text for adding a new button"
+            className="test-class"
+            collapsed={jest.fn()}
+            expanded={jest.fn()}
+            list={[
+              { initialCollapsed: true, key: 'one' },
+              { initialCollapsed: false, key: 'two' }
+            ]}
+            noDataMessage="displayed when there is no data"
+            onAddClick={jest.fn()}
+            onDeleteClick={jest.fn()}
+          />
+        )
+      ).toMatchSnapshot();
+      // If the snapshot changes, manually inspect it to make sure the
+      // className prop gets set correctly on the containing div
+    });
+
     it('with multiple items', () => {
       expect(
         shallow(

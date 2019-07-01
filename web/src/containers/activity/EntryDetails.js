@@ -1,5 +1,6 @@
+import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Fragment, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 
 import ContractorResources from './ContractorResources';
@@ -9,12 +10,7 @@ import Overview from './Overview';
 import Goals from './Goals';
 import Schedule from './Schedule';
 import StandardsAndConditions from './StandardsAndConditions';
-import {
-  removeActivity as removeActivityAction,
-  toggleActivitySection
-} from '../../actions/activities';
-import Collapsible from '../../components/Collapsible';
-import DeleteButton from '../../components/DeleteConfirm';
+import { TimesCircle } from '../../components/Icons';
 import { t } from '../../i18n';
 
 const makeTitle = ({ name, fundingSource }, i) => {
@@ -28,72 +24,73 @@ const makeTitle = ({ name, fundingSource }, i) => {
   return title;
 };
 
-const components = [
-  Overview,
-  Goals,
-  Schedule,
-  Costs,
-  ContractorResources,
-  CostAllocate,
-  StandardsAndConditions
-];
+const EntryDetails = ({ activity, aKey, num }) => {
+  const [collapsed, setCollapsed] = useState(num > 1);
 
-class EntryDetails extends Component {
-  handleChange = key => () => {
-    const { toggleSection } = this.props;
-    toggleSection(key);
-  };
+  const title = useMemo(() => makeTitle(activity, num), [
+    activity.fundingSource,
+    activity.name,
+    num
+  ]);
 
-  render() {
-    const { activity, aKey, expanded, num, removeActivity } = this.props;
-    const title = makeTitle(activity, num);
+  const editContent = useMemo(
+    () => (
+      <div className="nowrap">
+        <Button
+          size="small"
+          variation="transparent"
+          onClick={() => setCollapsed(!collapsed)}
+        >
+          {collapsed ? (
+            'Edit'
+          ) : (
+            <Fragment>
+              <TimesCircle /> Close
+            </Fragment>
+          )}
+        </Button>
+      </div>
+    ),
+    [collapsed]
+  );
 
-    return (
-      <Collapsible
-        id={`activity-${aKey}`}
-        title={title}
-        btnBgColor="blue"
-        btnColor="white"
-        open={expanded}
-        onChange={this.handleChange(aKey)}
-      >
-        {components.map((Comp, i) => (
-          <Comp key={i} aKey={aKey} />
-        ))}
-        {num > 1 && (
-          <DeleteButton
-            remove={() => removeActivity(aKey)}
-            resource="activities.delete"
-          />
-        )}
-      </Collapsible>
-    );
-  }
-}
+  return (
+    <div
+      id={`activity-${aKey}`}
+      className={`activity--body activity--body__${
+        collapsed ? 'collapsed' : 'expanded'
+      } activity--body__${num === 1 ? 'first' : 'notfirst'}`}
+    >
+      <Review heading={title} headingLevel={3} editContent={editContent} />
+      {collapsed ? null : (
+        <Fragment>
+          <Overview aKey={aKey} />
+          <Goals aKey={aKey} />
+          <Schedule aKey={aKey} />
+          <Costs aKey={aKey} />
+          <ContractorResources aKey={aKey} />
+          <CostAllocate aKey={aKey} />
+          <StandardsAndConditions aKey={aKey} />
+          <Button variation="primary" onClick={() => setCollapsed(true)}>
+            Done
+          </Button>
+        </Fragment>
+      )}
+    </div>
+  );
+};
 
 EntryDetails.propTypes = {
   activity: PropTypes.object.isRequired,
   aKey: PropTypes.string.isRequired,
-  expanded: PropTypes.bool.isRequired,
-  num: PropTypes.number.isRequired,
-  removeActivity: PropTypes.func.isRequired,
-  toggleSection: PropTypes.func.isRequired
+  num: PropTypes.number.isRequired
 };
 
 export const mapStateToProps = ({ activities: { byKey } }, { aKey }) => {
   const activity = byKey[aKey];
-  const { expanded } = activity.meta;
 
-  return { activity, expanded };
-};
-
-export const mapDispatchToProps = {
-  removeActivity: removeActivityAction,
-  toggleSection: toggleActivitySection
+  return { activity };
 };
 
 export { EntryDetails as plain };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EntryDetails);
+export default connect(mapStateToProps)(EntryDetails);

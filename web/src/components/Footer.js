@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="visibility--screen">
       <div className="ds-l-container">
         <div className="ds-l-row">
           <div className="ds-l-md-col--3 footer--logo-container">
@@ -26,7 +26,9 @@ const Footer = () => {
               className="hhs-logo"
             />
             <p>
-              A federal government website managed and paid for by the U.S. Centers for Medicare and Medicaid Services and part of the MACPro suite.
+              A federal government website managed and paid for by the U.S.
+              Centers for Medicare and Medicaid Services and part of the MACPro
+              suite.
             </p>
           </div>
         </div>
@@ -34,13 +36,18 @@ const Footer = () => {
       <div className="footer--banner">
         <div className="ds-l-container">
           <div className="ds-l-row">
-            <p className="ds-l-md-col--6">Email <a href="mailto:CMS-EAPD@cms.gov">CMS-EAPD@cms.gov</a> for help or feedback.</p>
-            <p className="ds-l-md-col--6 ds-u-text-align--right">7500 Security Boulevard, Baltimore, MD 21244</p>
+            <p className="ds-l-md-col--6">
+              Email <a href="mailto:CMS-EAPD@cms.gov">CMS-EAPD@cms.gov</a> for
+              help or feedback.
+            </p>
+            <p className="ds-l-md-col--6 ds-u-text-align--right">
+              7500 Security Boulevard, Baltimore, MD 21244
+            </p>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;
