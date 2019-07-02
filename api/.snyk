@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.3
+version: v1.13.5
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   SNYK-JS-MIXINDEEP-450212:
@@ -49,4 +49,11 @@ ignore:
     - knex > liftoff > findup-sync > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
         reason: can't update
         expires: '2019-07-20T16:44:45.934Z'
+  SNYK-JS-LODASH-450202:
+    - bookshelf > lodash:
+        reason: None given
+        expires: '2019-08-01T19:24:14.098Z'
+    - knex > lodash:
+        reason: None given
+        expires: '2019-08-01T19:24:14.098Z'
 patch: {}

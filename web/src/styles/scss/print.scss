@@ -34,11 +34,10 @@
     display: none;
   }
 
-
   .ds-l-container,
   .ds-l-col--9 {
-    width: 100%!important;
-    min-width: 100%!important;
+    width: 100% !important;
+    min-width: 100% !important;
   }
 
   .accordian {
@@ -82,6 +81,15 @@
     font-weight: bold !important;
     color: black !important;
     border: 1px solid black;
+  }
+  
+  .public-DraftEditor-content {
+    border: 0;
+  }
+
+  .rte-textarea-l .public-DraftEditor-content,
+  .textarea-l {
+    min-height: 0;
   }
 }
 
