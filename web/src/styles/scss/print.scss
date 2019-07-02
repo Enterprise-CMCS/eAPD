@@ -31,6 +31,7 @@
   .btn-collapse svg,
   .alert,
   .rdw-editor-toolbar,
+  .ds-c-choice:not(:checked) + label,
   .ds-c-review .nowrap {
     display: none;
   }
@@ -102,6 +103,13 @@
   .rte-textarea-l .public-DraftEditor-content,
   .textarea-l {
     min-height: 0;
+  }
+
+  .ds-c-choice:checked + label {
+    padding-left: 0 !important;
+    &::before {
+      display: none;
+    }
   }
 }
 
