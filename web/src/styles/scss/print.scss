@@ -35,11 +35,10 @@
     display: none;
   }
 
-
   .ds-l-container,
   .ds-l-col--9 {
-    width: 100%!important;
-    min-width: 100%!important;
+    width: 100% !important;
+    min-width: 100% !important;
   }
 
   fieldset,
@@ -90,9 +89,19 @@
     color: black !important;
     border: 1px solid black;
   }
+
   .form-and-review-list,
   div.form--with-reviews {
     border-bottom: none;
+  }
+  
+  .public-DraftEditor-content {
+    border: 0;
+  }
+
+  .rte-textarea-l .public-DraftEditor-content,
+  .textarea-l {
+    min-height: 0;
   }
 }
 
