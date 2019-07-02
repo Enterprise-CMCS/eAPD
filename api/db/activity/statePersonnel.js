@@ -43,15 +43,6 @@ module.exports = {
       return this.belongsTo('apdActivityStatePersonnel', 'personnel_id');
     },
 
-    async validate() {
-      if (this.attributes.fte < 0) {
-        throw new Error('fte-out-of-range');
-      }
-      if (this.attributes.year < 2010 || this.attributes.year > 3000) {
-        throw new Error('year-out-of-range');
-      }
-    },
-
     toJSON() {
       return {
         id: this.get('id'),

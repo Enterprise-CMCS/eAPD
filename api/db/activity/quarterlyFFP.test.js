@@ -11,7 +11,6 @@ tap.test('activity quarterly FFP data model', async tests => {
         tableName: 'activity_quarterly_ffp',
         activity: Function,
         format: Function,
-        validate: Function,
         toJSON: Function,
         static: {
           updateableFields: ['q1', 'q2', 'q3', 'q4', 'year']
@@ -76,46 +75,6 @@ tap.test('activity quarterly FFP data model', async tests => {
       );
     }
   );
-
-  tests.test('has validate method', async validationTests => {
-    validationTests.test('throws if year is empty', async test => {
-      test.rejects(
-        quarterlyFFP.validate.bind({
-          attributes: {
-            year: undefined
-          }
-        }),
-        'fails if year is undefined'
-      );
-
-      test.rejects(
-        quarterlyFFP.validate.bind({
-          attributes: {
-            year: null
-          }
-        }),
-        'fails if value is null'
-      );
-
-      test.rejects(
-        quarterlyFFP.validate.bind({
-          attributes: {
-            year: ''
-          }
-        }),
-        'fails if value is empty string'
-      );
-
-      test.resolves(
-        quarterlyFFP.validate.bind({
-          attributes: {
-            year: 2001
-          }
-        }),
-        'passes if at year is not empty'
-      );
-    });
-  });
 
   tests.test('overrides toJSON method', async test => {
     const self = { get: sinon.stub() };

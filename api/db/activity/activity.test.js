@@ -248,102 +248,102 @@ tap.test('activity data model', async activityModelTests => {
         self.where.returns(self);
       });
 
-      validationTests.test(
-        'does not throw if the name has not changed',
-        async test => {
-          self.hasChanged.withArgs('name').returns(false);
+      // validationTests.test(
+      //   'does not throw if the name has not changed',
+      //   async test => {
+      //     self.hasChanged.withArgs('name').returns(false);
 
-          test.resolves(validate(), 'validate resolves');
-        }
-      );
+      //     test.resolves(validate(), 'validate resolves');
+      //   }
+      // );
 
-      validationTests.test(
-        'does not throw if the name has changed, is valid, and is unique',
-        async test => {
-          self.hasChanged.withArgs('name').returns(true);
-          self.attributes.name = 'valid name';
-          self.attributes.apd_id = 'apd id';
-          self.fetchAll.resolves([]);
+      // validationTests.test(
+      //   'does not throw if the name has changed, is valid, and is unique',
+      //   async test => {
+      //     self.hasChanged.withArgs('name').returns(true);
+      //     self.attributes.name = 'valid name';
+      //     self.attributes.apd_id = 'apd id';
+      //     self.fetchAll.resolves([]);
 
-          await validate();
-          test.ok(true, 'validate resolves');
-          test.ok(
-            self.where.calledWith({ apd_id: 'apd id', name: 'valid name' })
-          );
-        }
-      );
+      //     await validate();
+      //     test.ok(true, 'validate resolves');
+      //     test.ok(
+      //       self.where.calledWith({ apd_id: 'apd id', name: 'valid name' })
+      //     );
+      //   }
+      // );
 
-      validationTests.test('throws if the name is null', async test => {
-        self.hasChanged.withArgs('name').returns(true);
-        self.attributes.name = null;
+      // validationTests.test('throws if the name is null', async test => {
+      //   self.hasChanged.withArgs('name').returns(true);
+      //   self.attributes.name = null;
 
-        try {
-          await validate();
-        } catch (e) {
-          test.ok(true, 'rejects on an empty name');
-          test.equal(
-            e.message,
-            'activity-name-invalid',
-            'rejects with the expected message'
-          );
-        }
-      });
+      //   try {
+      //     await validate();
+      //   } catch (e) {
+      //     test.ok(true, 'rejects on an empty name');
+      //     test.equal(
+      //       e.message,
+      //       'activity-name-invalid',
+      //       'rejects with the expected message'
+      //     );
+      //   }
+      // });
 
-      validationTests.test('throws if the name is a number', async test => {
-        self.hasChanged.withArgs('name').returns(true);
-        self.attributes.name = 7;
+      // validationTests.test('throws if the name is a number', async test => {
+      //   self.hasChanged.withArgs('name').returns(true);
+      //   self.attributes.name = 7;
 
-        try {
-          await validate();
-        } catch (e) {
-          test.ok(true, 'rejects on an numeric name');
-          test.equal(
-            e.message,
-            'activity-name-invalid',
-            'rejects with the expected message'
-          );
-        }
-      });
+      //   try {
+      //     await validate();
+      //   } catch (e) {
+      //     test.ok(true, 'rejects on an numeric name');
+      //     test.equal(
+      //       e.message,
+      //       'activity-name-invalid',
+      //       'rejects with the expected message'
+      //     );
+      //   }
+      // });
 
-      validationTests.test(
-        'throws if the name is an empty string',
-        async test => {
-          self.hasChanged.withArgs('name').returns(true);
-          self.attributes.name = '';
+      // validationTests.test(
+      //   'throws if the name is an empty string',
+      //   async test => {
+      //     self.hasChanged.withArgs('name').returns(true);
+      //     self.attributes.name = '';
 
-          try {
-            await validate();
-          } catch (e) {
-            test.ok(true, 'rejects on an empty name');
-            test.equal(
-              e.message,
-              'activity-name-invalid',
-              'rejects with the expected message'
-            );
-          }
-        }
-      );
+      //     try {
+      //       await validate();
+      //     } catch (e) {
+      //       test.ok(true, 'rejects on an empty name');
+      //       test.equal(
+      //         e.message,
+      //         'activity-name-invalid',
+      //         'rejects with the expected message'
+      //       );
+      //     }
+      //   }
+      // );
 
-      validationTests.test('throws if the name already exists', async test => {
-        self.hasChanged.withArgs('name').returns(true);
-        self.attributes.name = 'valid name';
-        self.attributes.apd_id = 'apd id';
-        self.fetchAll.resolves([{ hello: 'world' }]);
+      // validationTests.test('throws if the name already exists', async test => {
+      //   self.hasChanged.withArgs('name').returns(true);
+      //   self.attributes.name = 'valid name';
+      //   self.attributes.apd_id = 'apd id';
+      //   self.fetchAll.resolves([{ hello: 'world' }]);
 
-        try {
-          await validate();
-        } catch (e) {
-          test.ok(true, 'rejects if the name already exists');
-          test.ok(
-            self.where.calledWith({ apd_id: 'apd id', name: 'valid name' })
-          );
-          test.equal(
-            e.message,
-            'activity-name-exists',
-            'rejects with the expected message'
-          );
-        }
-      });
+      //   try {
+      //     await validate();
+      //   } catch (e) {
+      //     test.ok(true, 'rejects if the name already exists');
+      //     test.ok(
+      //       self.where.calledWith({ apd_id: 'apd id', name: 'valid name' })
+      //     );
+      //     test.equal(
+      //       e.message,
+      //       'activity-name-exists',
+      //       'rejects with the expected message'
+      //     );
+      //   }
+      // });
 
       validationTests.test('deletes falsey date attributes', async test => {
         self.attributes.plannedEndDate = false;
