@@ -125,34 +125,6 @@ tap.test(
       }
     );
 
-    statePersonnelCostModelTests.test('validation', async validationTests => {
-      const self = { attributes: { fte: 0, year: 0 } };
-      validationTests.test(
-        'fails if the year is too early or too late',
-        async test => {
-          self.attributes.year = 2009;
-          test.rejects(
-            cost.validate.bind(self),
-            'rejects if year is too early'
-          );
-          self.attributes.year = 3001;
-          test.rejects(cost.validate.bind(self), 'rejects if year is too late');
-        }
-      );
-
-      validationTests.test('fails if FTE is too small', async test => {
-        self.attributes.year = 2019;
-        self.attributes.fte = -0.3;
-        test.rejects(cost.validate.bind(self), 'rejects if fte is negative');
-      });
-
-      validationTests.test('succeeds if data is valid', async test => {
-        self.attributes.year = 2019;
-        self.attributes.fte = 0.5;
-        test.resolves(cost.validate.bind(self), 'resolves if year is valid');
-      });
-    });
-
     statePersonnelCostModelTests.test(
       'overrides toJSON method',
       async jsonTests => {

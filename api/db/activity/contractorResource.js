@@ -92,12 +92,6 @@ module.exports = {
       );
     },
 
-    async validate() {
-      if (this.attributes.year < 2010 || this.attributes.year > 3000) {
-        throw new Error('year-out-of-range');
-      }
-    },
-
     toJSON() {
       return {
         id: this.get('id'),
