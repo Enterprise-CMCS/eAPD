@@ -8,7 +8,10 @@ exports[`the NameAndFundingSourceReview component renders correctly when expandi
   onDeleteClick={null}
   onEditClick={null}
 >
-  Program type: 
+  <strong>
+    Program type:
+  </strong>
+   
   Rich Uncle Pennybags
 </StandardReview>
 `;
@@ -21,7 +24,10 @@ exports[`the NameAndFundingSourceReview component renders correctly when expandi
   onDeleteClick={[MockFunction]}
   onEditClick={[MockFunction]}
 >
-  Program type: 
+  <strong>
+    Program type:
+  </strong>
+   
   Rich Uncle Pennybags
 </StandardReview>
 `;
