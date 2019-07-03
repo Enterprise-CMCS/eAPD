@@ -29,7 +29,7 @@ const StandardReview = ({
   return (
     <Review
       editContent={
-        <div className="nowrap">
+        <div className="nowrap visibility--screen">
           {onEditClick || editHref ? (
             <Button size="small" variation="transparent" onClick={editHandler}>
               {// If the editHref is set, create a link element here so it'll
