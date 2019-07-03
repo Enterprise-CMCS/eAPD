@@ -4,7 +4,7 @@ exports[`Review wrapper component renders properly if a delete handler is provid
 <Review
   editContent={
     <div
-      className="nowrap"
+      className="nowrap visibility--screen"
     >
       <React.Fragment>
         |
@@ -29,7 +29,7 @@ exports[`Review wrapper component renders properly if an edit handler is supplie
 <Review
   editContent={
     <div
-      className="nowrap"
+      className="nowrap visibility--screen"
     >
       <Button
         onClick={[Function]}
@@ -51,7 +51,7 @@ exports[`Review wrapper component renders properly if only the required props ar
 <Review
   editContent={
     <div
-      className="nowrap"
+      className="nowrap visibility--screen"
     />
   }
   editText="Edit"
@@ -64,7 +64,7 @@ exports[`Review wrapper component renders properly if the edit link and edit han
 <Review
   editContent={
     <div
-      className="nowrap"
+      className="nowrap visibility--screen"
     />
   }
   editText="Edit"
@@ -77,7 +77,7 @@ exports[`Review wrapper component renders properly if the edit link is set 1`] =
 <Review
   editContent={
     <div
-      className="nowrap"
+      className="nowrap visibility--screen"
     >
       <Button
         onClick={[Function]}
