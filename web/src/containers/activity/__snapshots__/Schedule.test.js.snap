@@ -12,7 +12,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     Activity start and end dates
   </h5>
   <div
-    className="ds-c-choice__checkedChild ds-u-padding-y--0"
+    className="ds-c-choice__checkedChild ds-u-padding-y--0 visibility--screen"
   >
     <DateField
       onChange={[Function]}
@@ -22,6 +22,25 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       onChange={[Function]}
       value="1944-11-08"
     />
+  </div>
+  <div
+    className="visibility--print"
+  >
+    <p>
+      <strong>
+        Planned start date:
+      </strong>
+       
+      1944-10-02
+    </p>
+    <p>
+      <strong>
+        Planned end date:
+      </strong>
+       
+      1944-11-08
+    </p>
+    <hr />
   </div>
   <div
     className="mb3"
