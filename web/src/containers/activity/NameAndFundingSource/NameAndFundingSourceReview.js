@@ -17,7 +17,7 @@ const NameAndFundingSourceReview = ({
       onDeleteClick={disableExpand ? null : onDeleteClick}
       onEditClick={disableExpand ? null : expand}
     >
-      Program type: {fundingSource}
+      <strong>Program type:</strong> {fundingSource}
     </Review>
   );
 };
