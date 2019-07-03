@@ -25,6 +25,10 @@ section > fieldset {
   }
 }
 
+.data-entry-box .ds-c-label {
+  margin-top: 0;
+}
+
 div.form--with-reviews {
   border-bottom: 2px solid $border-color;
   margin-bottom: nth($spacers, 3);
