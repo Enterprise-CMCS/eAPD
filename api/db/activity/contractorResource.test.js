@@ -225,32 +225,6 @@ tap.test(
     );
 
     contractorResourceCostModelTests.test(
-      'validation',
-      async validationTests => {
-        validationTests.test(
-          'fails if the year is too early or too late',
-          async test => {
-            const self = { attributes: { year: 2009 } };
-            test.rejects(
-              cost.validate.bind(self),
-              'rejects if year is too early'
-            );
-            self.attributes.year = 3001;
-            test.rejects(
-              cost.validate.bind(self),
-              'rejects if year is too late'
-            );
-          }
-        );
-
-        validationTests.test('succeeds if year is valid', async test => {
-          const self = { attributes: { year: 2019 } };
-          test.resolves(cost.validate.bind(self), 'resolves if year is valid');
-        });
-      }
-    );
-
-    contractorResourceCostModelTests.test(
       'overrides toJSON method',
       async jsonTests => {
         const self = { get: sinon.stub() };
