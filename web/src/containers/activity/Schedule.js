@@ -51,7 +51,7 @@ const Schedule = ({
     <Subsection resource="activities.schedule" nested>
       <Fragment>
         <h5 className="ds-h5">Activity start and end dates</h5>
-        <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
+        <div className="ds-c-choice__checkedChild ds-u-padding-y--0 visibility--screen">
           <DateField
             value={activity.plannedStartDate}
             onChange={handleActivityStartChange}
@@ -60,6 +60,11 @@ const Schedule = ({
             value={activity.plannedEndDate}
             onChange={handleActivityEndChange}
           />
+        </div>
+        <div className="visibility--print">
+          <p><strong>Planned start date:</strong> {activity.plannedStartDate || "No date entered"}</p>
+          <p><strong>Planned end date:</strong> {activity.plannedEndDate || "No date entered"}</p>
+          <hr />
         </div>
         <div className="mb3">
           <Instruction
