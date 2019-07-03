@@ -116,26 +116,31 @@ module.exports = {
       ]
     },
 
-    async validate({ transacting } = {}) {
+    // TODO: Re-enable these validations.
+    // Name uniqueness and minimum length validation temporarily removed until
+    // we have better frontend support for notifying users why a save failed.
+    // Associated tests are also commented out.
+
+    async validate(/* { transacting } = {} */) {
       logger.silly('validating');
 
-      if (this.hasChanged('name')) {
-        const name = this.attributes.name;
+      // if (this.hasChanged('name')) {
+      //   const name = this.attributes.name;
 
-        if (typeof name !== 'string' || name.length < 1) {
-          logger.verbose('name is not a string or is empty');
-          throw new Error('activity-name-invalid');
-        }
+      //   if (typeof name !== 'string' || name.length < 1) {
+      //     logger.verbose('name is not a string or is empty');
+      //     throw new Error('activity-name-invalid');
+      //   }
 
-        const hasName = await this.where({
-          apd_id: this.attributes.apd_id,
-          name
-        }).fetchAll({ transacting });
-        if (hasName.length) {
-          logger.verbose('another activity already has this name');
-          throw new Error('activity-name-exists');
-        }
-      }
+      //   const hasName = await this.where({
+      //     apd_id: this.attributes.apd_id,
+      //     name
+      //   }).fetchAll({ transacting });
+      //   if (hasName.length) {
+      //     logger.verbose('another activity already has this name');
+      //     throw new Error('activity-name-exists');
+      //   }
+      // }
 
       [
         ['plannedEndDate', 'planned-end-date'],

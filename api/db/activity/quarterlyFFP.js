@@ -24,12 +24,6 @@ module.exports = {
       return out;
     },
 
-    async validate() {
-      if (!this.attributes.year) {
-        throw new Error('invalid-activity-quarterly-ffp');
-      }
-    },
-
     toJSON() {
       return {
         q1: {
