@@ -8,7 +8,7 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
   <Review
     editContent={
       <div
-        className="nowrap"
+        className="nowrap visibility--screen"
       >
         <Button
           onClick={[Function]}

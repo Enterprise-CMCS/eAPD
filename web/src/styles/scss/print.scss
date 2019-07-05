@@ -31,8 +31,7 @@
   .btn-collapse svg,
   .alert,
   .rdw-editor-toolbar,
-  .ds-c-choice:not(:checked) + label,
-  .ds-c-review .nowrap {
+  .ds-c-choice:not(:checked) + label {
     display: none;
   }
 

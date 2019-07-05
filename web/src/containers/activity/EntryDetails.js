@@ -35,7 +35,7 @@ const EntryDetails = ({ activity, aKey, num }) => {
 
   const editContent = useMemo(
     () => (
-      <div className="nowrap">
+      <div className="nowrap visibility--screen">
         <Button
           size="small"
           variation="transparent"
