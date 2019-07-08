@@ -290,6 +290,7 @@ exports[`card form wrapper renders a success alert if message provided 1`] = `
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
         <Alert
+          role="alert"
           variation="success"
         >
           oh yeah!
@@ -345,6 +346,7 @@ exports[`card form wrapper renders an error alert if message provided 1`] = `
         className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
       >
         <Alert
+          role="alert"
           variation="error"
         >
           oh noes!
