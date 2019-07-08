@@ -44,9 +44,7 @@ exports[`schedule summary component renders correctly 1`] = `
             <th
               className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
             >
-              12/10/1988
-               – 
-              4/15/1896
+              date range 1
             </th>
           </tr>
         </thead>
@@ -107,9 +105,7 @@ exports[`schedule summary component renders correctly 1`] = `
             <th
               className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
             >
-              02/18/1853
-               – 
-              07/14/2002
+              date range 2
             </th>
           </tr>
         </thead>
@@ -182,9 +178,7 @@ exports[`schedule summary component renders correctly 1`] = `
             <th
               className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap"
             >
-              11/22/1987
-               – 
-              10/15/2009
+              date range 3
             </th>
           </tr>
         </thead>

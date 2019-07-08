@@ -14,6 +14,7 @@ import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
 import DateField from '../../components/DateField';
 import { t } from '../../i18n';
+import { stateDateToDisplay } from '../../util';
 
 const Schedule = ({
   activity,
@@ -62,8 +63,14 @@ const Schedule = ({
           />
         </div>
         <div className="visibility--print">
-          <p><strong>Planned start date:</strong> {activity.plannedStartDate || "No date entered"}</p>
-          <p><strong>Planned end date:</strong> {activity.plannedEndDate || "No date entered"}</p>
+          <p>
+            <strong>Planned start date:</strong>{' '}
+            {stateDateToDisplay(activity.plannedStartDate)}
+          </p>
+          <p>
+            <strong>Planned end date:</strong>{' '}
+            {stateDateToDisplay(activity.plannedEndDate)}
+          </p>
           <hr />
         </div>
         <div className="mb3">
