@@ -47,11 +47,4 @@ describe('the ContractorResourceReview component', () => {
       props.onDeleteClick
     );
   });
-
-  it('renders placeholder date text if they are not fully-formed', () => {
-    const component = shallow(
-      <ContractorReview {...props} item={{ ...props.item, start: '1993' }} />
-    );
-    expect(component).toMatchSnapshot();
-  });
 });

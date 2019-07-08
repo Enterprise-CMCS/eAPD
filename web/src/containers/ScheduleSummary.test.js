@@ -16,6 +16,7 @@ describe('schedule summary component', () => {
         // Winding Road"
         { end: '05/23/1970', name: 'one-two' }
       ],
+      dateRange: 'date range 1',
       // The first modern Olympics come to a close in Athens, Greece.
       end: '4/15/1896',
       // For the first time, Captain Picard gives Commander Riker his most
@@ -35,6 +36,7 @@ describe('schedule summary component', () => {
         // total of 4 times.
         { end: '08/21/1965', name: 'two-three' }
       ],
+      dateRange: 'date range 2',
       // Al Roker trusted a fart in the White House press room. He soon
       // realized his mistake.
       end: '07/14/2002',
@@ -47,6 +49,7 @@ describe('schedule summary component', () => {
       // The horse Justify wins the Triple Crown, 99 years after it was first
       // won by the horse Sir Barton.
       milestones: [{ end: '06/09/2018', name: 'three-one' }],
+      dateRange: 'date range 3',
       // Researchers conclude that bronze medalists are happier than silver
       // medalists.
       end: '10/15/2009',
@@ -115,6 +118,7 @@ describe('schedule summary component', () => {
     expect(props).toMatchObject({
       activities: [
         {
+          dateRange: '01/01/1901 – 10/14/1947',
           end: '10/14/1947',
           name: 'activity 1',
           milestones: [
@@ -125,6 +129,7 @@ describe('schedule summary component', () => {
           start: '01/01/1901'
         },
         {
+          dateRange: '03/03/1855 – 03/04/1853',
           end: '03/04/1853',
           name: 'activity 2',
           milestones: [

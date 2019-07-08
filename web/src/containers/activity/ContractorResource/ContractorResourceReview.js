@@ -1,18 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
-import Review from '../../../components/Review';
-
 import Dollars from '../../../components/Dollars';
-
-const getHumanReadableDateRange = (startDate, endDate) => {
-  const [startYear, startMonth, startDay] = startDate.split('-');
-  const [endYear, endMonth, endDay] = endDate.split('-');
-
-  if (startDay && startMonth && startYear && endDay && endMonth && endYear) {
-    return `${startMonth}/${startDay}/${startYear} - ${endMonth}/${endDay}/${endYear}`;
-  }
-  return null;
-};
+import Review from '../../../components/Review';
+import { stateDateRangeToDisplay } from '../../../util';
 
 const ContractorResourceReview = ({
   index,
@@ -23,7 +13,7 @@ const ContractorResourceReview = ({
   const apdFFYs = useMemo(() => Object.keys(years), [years]);
 
   const dateRangeForHumans = useMemo(
-    () => getHumanReadableDateRange(start, end),
+    () => stateDateRangeToDisplay(start, end),
     [end, start]
   );
 
@@ -38,10 +28,7 @@ const ContractorResourceReview = ({
       </p>
       <ul className="ds-c-list--bare">
         <li>
-          <strong>Contract term:</strong>{' '}
-          {dateRangeForHumans || (
-            <span className="ds-u-color--gray">Dates not specified</span>
-          )}
+          <strong>Contract term:</strong> {dateRangeForHumans}
         </li>
         <li>
           <strong>Total cost:</strong> <Dollars long>{totalCost}</Dollars>

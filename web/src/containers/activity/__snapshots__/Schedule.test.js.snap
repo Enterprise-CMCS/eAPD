@@ -31,14 +31,14 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
         Planned start date:
       </strong>
        
-      1944-10-02
+      10/02/1944
     </p>
     <p>
       <strong>
         Planned end date:
       </strong>
        
-      1944-11-08
+      11/08/1944
     </p>
     <hr />
   </div>
