@@ -118,25 +118,25 @@ describe('schedule summary component', () => {
     expect(props).toMatchObject({
       activities: [
         {
-          dateRange: '01/01/1901 – 10/14/1947',
+          dateRange: '1/1/1901 – 10/14/1947',
           end: '10/14/1947',
           name: 'activity 1',
           milestones: [
-            { end: '01/31/2006', name: '1-one' },
-            { end: '10/01/1991', name: '1-two' },
+            { end: '1/31/2006', name: '1-one' },
+            { end: '10/1/1991', name: '1-two' },
             { end: '11/28/1872', name: '1-three' }
           ],
-          start: '01/01/1901'
+          start: '1/1/1901'
         },
         {
-          dateRange: '03/03/1855 – 03/04/1853',
-          end: '03/04/1853',
+          dateRange: '3/3/1855 – 3/4/1853',
+          end: '3/4/1853',
           name: 'activity 2',
           milestones: [
-            { end: '06/06/1864', name: '2-one' },
-            { end: '08/08/1873', name: '2-two' }
+            { end: '6/6/1864', name: '2-one' },
+            { end: '8/8/1873', name: '2-two' }
           ],
-          start: '03/03/1855'
+          start: '3/3/1855'
         }
       ]
     });
