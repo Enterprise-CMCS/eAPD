@@ -49,7 +49,7 @@ const Dollars = ({ children, long }) => {
   const num = parseFloat(children);
 
   if (Number.isNaN(num) || !Number.isFinite(num)) {
-    return <Fragment>--</Fragment>;
+    return <Fragment>$0</Fragment>;
   }
 
   if (long) {
