@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+import moment from 'moment';
 
 export const ACTIVITY_FUNDING_SOURCES = ['HIT', 'HIE', 'MMIS'];
 
@@ -187,18 +187,26 @@ export const generateKey = (() => {
  * @returns {String} Display-formatted date string.
  */
 export const stateDateToDisplay = date => {
-  if (date) {
-    const [year, month, day] = date.split('-');
-    return `${month}/${day}/${year}`;
+  const m = moment(date, 'YYYY-MM-DD');
+  if (m.isValid()) {
+    return m.format('M/D/YYYY');
   }
   return 'Date not specified';
 };
 
+/**
+ * Convert a pair of YYYY-MM-DD date strings from state format into a
+ * consistent display format
+ *
+ * @param {String} start Start date string from state
+ * @param {String} end End date string from state
+ * @returns {String} Display-formatted date range string
+ */
 export const stateDateRangeToDisplay = (start, end) => {
-  if (start && end) {
-    const starty = stateDateToDisplay(start);
-    const endy = stateDateToDisplay(end);
-    return `${starty} – ${endy}`;
+  const starty = moment(start, 'YYYY-MM-DD');
+  const endy = moment(end, 'YYYY-MM-DD');
+  if (starty.isValid() && endy.isValid()) {
+    return `${starty.format('M/D/YYYY')} – ${endy.format('M/D/YYYY')}`;
   }
   return 'Dates not specified';
 };
