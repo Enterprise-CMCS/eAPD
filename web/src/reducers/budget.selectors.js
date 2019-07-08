@@ -1,7 +1,6 @@
-import moment from 'moment';
 import { createSelector } from 'reselect';
 import { selectActivitiesByKey } from './activities.selectors';
-import { ACTIVITY_FUNDING_SOURCES } from '../util';
+import { ACTIVITY_FUNDING_SOURCES, stateDateRangeToDisplay } from '../util';
 
 const selectBudget = ({ budget }) => budget;
 
@@ -29,16 +28,9 @@ export const selectBudgetExecutiveSummary = createSelector(
       ([key, { name, plannedEndDate, plannedStartDate, summary }]) => {
         const activityCosts = budget.activities[key].costsByFFY;
 
-        let dateRange = 'Dates not set';
-        if (plannedEndDate && plannedStartDate) {
-          dateRange = `${moment(plannedStartDate, 'YYYY-MM-DD').format(
-            'M/D/YYYY'
-          )} - ${moment(plannedEndDate, 'YYYY-MM-DD').format('M/D/YYYY')}`;
-        }
-
         return {
           key,
-          dateRange,
+          dateRange: stateDateRangeToDisplay(plannedStartDate, plannedEndDate),
           name,
           summary,
           combined: activityCosts.total.total,
