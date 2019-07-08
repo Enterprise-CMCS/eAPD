@@ -49,6 +49,7 @@ describe('utility functions', () => {
     getParams,
     replaceNulls,
     stateDateToDisplay,
+    stateDateRangeToDisplay,
     stateLookup
   } = load();
 
@@ -105,8 +106,22 @@ describe('utility functions', () => {
 
   test('converts a state-formatted date string into a display string', () => {
     expect(stateDateToDisplay('2014-04-03')).toEqual('04/03/2014');
-    expect(stateDateToDisplay(null)).toEqual('N/A');
-    expect(stateDateToDisplay()).toEqual('N/A');
+    expect(stateDateToDisplay(null)).toEqual('Date not specified');
+    expect(stateDateToDisplay()).toEqual('Date not specified');
+  });
+
+  test('converts two state-formatted date strings into a display date range', () => {
+    expect(stateDateRangeToDisplay('2014-04-03', '2015-04-09')).toEqual(
+      '04/03/2014 – 04/09/2015'
+    );
+    expect(stateDateRangeToDisplay(null, null)).toEqual('Dates not specified');
+    expect(stateDateRangeToDisplay('2014-04-03', null)).toEqual(
+      'Dates not specified'
+    );
+    expect(stateDateRangeToDisplay(null, '2015-04-09')).toEqual(
+      'Dates not specified'
+    );
+    expect(stateDateRangeToDisplay()).toEqual('Dates not specified');
   });
 
   test('converts an array into an object with array values as object keys', () => {

@@ -95,7 +95,7 @@ describe('executive summary component', () => {
       data: [
         {
           key: 'a1',
-          dateRange: '1/3/1969 - 2/25/1870',
+          dateRange: '01/03/1969 – 02/25/1870',
           name: 'activity 1',
           summary: 'first activity',
           combined: 950,
@@ -104,7 +104,7 @@ describe('executive summary component', () => {
         },
         {
           key: 'a2',
-          dateRange: 'Dates not set',
+          dateRange: 'Dates not specified',
           name: 'activity 2',
           summary: 'second activity',
           combined: 310,

@@ -191,7 +191,16 @@ export const stateDateToDisplay = date => {
     const [year, month, day] = date.split('-');
     return `${month}/${day}/${year}`;
   }
-  return 'N/A';
+  return 'Date not specified';
+};
+
+export const stateDateRangeToDisplay = (start, end) => {
+  if (start && end) {
+    const starty = stateDateToDisplay(start);
+    const endy = stateDateToDisplay(end);
+    return `${starty} – ${endy}`;
+  }
+  return 'Dates not specified';
 };
 
 /**
