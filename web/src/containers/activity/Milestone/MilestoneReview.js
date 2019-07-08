@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
 import Review from '../../../components/Review';
+import { stateDateToDisplay } from '../../../util';
 
 const MilestoneReview = ({
   index,
@@ -8,10 +9,7 @@ const MilestoneReview = ({
   expand,
   onDeleteClick
 }) => {
-  const formattedDate = useMemo(() => {
-    const [year, month, day] = endDate.split('-');
-    return `${month}-${day}-${year}`;
-  }, [endDate]);
+  const formattedDate = useMemo(() => stateDateToDisplay(endDate), [endDate]);
 
   return (
     <Review
