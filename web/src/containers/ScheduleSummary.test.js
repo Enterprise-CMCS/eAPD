@@ -118,7 +118,7 @@ describe('schedule summary component', () => {
     expect(props).toMatchObject({
       activities: [
         {
-          dateRange: '1/1/1901 – 10/14/1947',
+          dateRange: '1/1/1901 - 10/14/1947',
           end: '10/14/1947',
           name: 'activity 1',
           milestones: [
@@ -129,7 +129,7 @@ describe('schedule summary component', () => {
           start: '1/1/1901'
         },
         {
-          dateRange: '3/3/1855 – 3/4/1853',
+          dateRange: '3/3/1855 - 3/4/1853',
           end: '3/4/1853',
           name: 'activity 2',
           milestones: [

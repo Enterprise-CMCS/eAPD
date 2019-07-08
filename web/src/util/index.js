@@ -206,7 +206,7 @@ export const stateDateRangeToDisplay = (start, end) => {
   const starty = moment(start, 'YYYY-MM-DD');
   const endy = moment(end, 'YYYY-MM-DD');
   if (starty.isValid() && endy.isValid()) {
-    return `${starty.format('M/D/YYYY')} – ${endy.format('M/D/YYYY')}`;
+    return `${starty.format('M/D/YYYY')} - ${endy.format('M/D/YYYY')}`;
   }
   return 'Dates not specified';
 };

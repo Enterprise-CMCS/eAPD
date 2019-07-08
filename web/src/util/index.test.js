@@ -112,7 +112,7 @@ describe('utility functions', () => {
 
   test('converts two state-formatted date strings into a display date range', () => {
     expect(stateDateRangeToDisplay('2014-04-03', '2015-04-19')).toEqual(
-      '4/3/2014 – 4/19/2015'
+      '4/3/2014 - 4/19/2015'
     );
     expect(stateDateRangeToDisplay(null, null)).toEqual('Dates not specified');
     expect(stateDateRangeToDisplay('2014-04-03', null)).toEqual(
