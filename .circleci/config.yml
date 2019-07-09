@@ -58,6 +58,8 @@ workflows:
           name: backend deploy prod
           env: PRODUCTION
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /^v.*/
           requires:
@@ -93,6 +95,8 @@ workflows:
           name: frontend build prod
           env: PRODUCTION
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /^v.*/
           requires:
@@ -124,8 +128,7 @@ workflows:
           env: PRODUCTION
           filters:
             branches:
-              only:
-                - master
+              ignore: /.*/
             tags:
               only: /^v.*/
           requires:
@@ -161,8 +164,7 @@ workflows:
           name: store artifacts prod
           filters:
             branches:
-              only:
-                - master
+              ignore: /.*/
             tags:
               only: /^v.*/
           requires:
