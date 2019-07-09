@@ -25,8 +25,22 @@ const CardForm = ({
       <div className="ds-l-row card">
         <div className="ds-l-col--1 ds-u-margin-left--auto" />
         <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
-          {!!success && <Alert variation="success">{success}</Alert>}
-          {!!error && <Alert variation="error">{error}</Alert>}
+          {!!success && 
+            <Alert
+              variation="success"
+              role="alert"
+            >
+              {success}
+            </Alert>
+          }
+          {!!error && 
+            <Alert
+              variation="error"
+              role="alert"
+            >
+              {error}
+            </Alert>
+          }
 
           <h1 className="ds-h1">
             {sectionName.length > 0 && (

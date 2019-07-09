@@ -53,30 +53,30 @@ exports[`Dollars formatting container shows B for billions instead of G for giga
 
 exports[`Dollars formatting container with not-numbers handles NaN 1`] = `
 <Fragment>
-  --
+  $0
 </Fragment>
 `;
 
 exports[`Dollars formatting container with not-numbers handles infinity 1`] = `
 <Fragment>
-  --
+  $0
 </Fragment>
 `;
 
 exports[`Dollars formatting container with not-numbers handles non-numeric children 1`] = `
 <Fragment>
-  --
+  $0
 </Fragment>
 `;
 
 exports[`Dollars formatting container with not-numbers handles non-numeric children 2`] = `
 <Fragment>
-  --
+  $0
 </Fragment>
 `;
 
 exports[`Dollars formatting container with not-numbers handles non-numeric children 3`] = `
 <Fragment>
-  --
+  $0
 </Fragment>
 `;
