@@ -14,16 +14,16 @@ function deployPreviewtoEC2() {
   # Configure AWS CLI with defaults
   configureAWS
 
-  # Inject branch name into user data
-  configureUserData $2
+  # Inject configuration information from the environment into the user data
+  configureUserData
 
   # Find any existing preview deploys
   print "• Finding existing preview instances"
-  EXISTING_INSTANCES=$(findExistingInstances $1)
+  EXISTING_INSTANCES=$(findExistingInstances)
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
-  INSTANCE_ID=$(createNewInstance $1)
+  INSTANCE_ID=$(createNewInstance)
   print "• Created instance $INSTANCE_ID"
 
   # Wait for the instance to become ready.  This will happen once the VM is
@@ -47,9 +47,9 @@ function deployPreviewtoEC2() {
 # Sets up AWS global configuration for all subsequent commands.
 #
 # Expects global environment variables:
-#   AWS_PROD_API_REGION - The AWS region to use
+#   PRODUCTION_AWS_REGION - The AWS region to use
 function configureAWS() {
-  aws configure set default.region $AWS_PROD_API_REGION
+  aws configure set default.region $AWS_REGION
 }
 
 # Updates the EC2 user data script with values from the environment.
@@ -58,9 +58,9 @@ function configureAWS() {
 function configureUserData() {
   # Use vertical pipes as sed delimiters instead of slashes, since git branch
   # names can contain slashes
-  sed -i'.backup' -e "s|__GIT_BRANCH__|\"`echo $1`\"|g" aws.user-data.sh
+  sed -i'.backup' -e "s|__GIT_BRANCH__|\"`echo $BRANCH`\"|g" aws.user-data.sh
 
-  sed -i'.backup' -e "s/__PBKDF2_ITERATIONS__/`echo $AWS_PREVIEW_API_PBKDF2_ITERATIONS`/g" aws.user-data.sh
+  sed -i'.backup' -e "s/__PBKDF2_ITERATIONS__/`echo $API_PBKDF2_ITERATIONS`/g" aws.user-data.sh
 
   rm aws.user-data.sh.backup
 }
@@ -70,17 +70,16 @@ function configureUserData() {
 # $1 - the pull request number
 #
 # Expects global environment variables:
-#   AWS_PROD_API_REGION - The AWS region the instance should be created in
-#   AWS_PROD_API_AMI - Image ID of the AMI to use for this instance
-#   AWS_PROD_API_SECURITY_GROUP - ID of the security group for this instance
-#   AWS_PROD_API_SUBNET - ID of the subnet this instance should be attached to
+#   PRODUCTION_API_AWS_AMI	 - Image ID of the AMI to use for this instance
+#   PRODUCTION_API_AWS_SECURITY_GROUP - ID of the security group for this instance
+#   PRODUCTION_API_AWS_SUBNET - ID of the subnet this instance should be attached to
 function createNewInstance() {
   aws ec2 run-instances \
     --instance-type t2.medium \
     --image-id ami-0de53d8956e8dcf80 \
     --security-group-ids sg-0d0314e8cf261d9f6 \
     --subnet-id subnet-6c76f642 \
-    --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eapd-pr-$1}]" \
+    --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
 }
@@ -90,7 +89,7 @@ function createNewInstance() {
 # $1 - the pull request number
 function findExistingInstances() {
   aws ec2 describe-instances \
-    --filter Name=tag:Name,Values=eapd-pr-$1 \
+    --filter Name=tag:github-pr,Values=$PR_NUM \
     --query "Reservations[*].Instances[*].InstanceId" \
     | jq -c -r '.[] | join("")'
 }
@@ -108,10 +107,14 @@ function getPublicDNS() {
 #
 # $1 - list of instance ID to delete
 function terminateInstance() {
+  # This command can fail if AWS doesn't recognize the instance ID, but in that
+  # case we really, really don't care; so don't stop the script if it errors.
+  set +e
   print "  ...terminating existing instance: $1"
   aws ec2 terminate-instances \
     --instance-ids "$1" \
     > /dev/null
+  set -e
 }
 
 # Wait for EC2 instance status checks to be "passed"
@@ -134,6 +137,17 @@ function waitForInstanceToBeReady() {
   print "  ...status check #$INSTANCE_CHECK_COUNT: READY"
 }
 
-# $1 - pull request number
-# $2 - git branch name
-echo $(deployPreviewtoEC2 $1 $2)
+# Iterate while there are arguments
+while [ $# -gt 0 ]; do
+  # If the argument begins with --, strip the -- to create the variable name
+  # and then set it to the next argument
+  if [[ $1 == *"--"* ]]; then
+    v="${1/--/}"
+    export $v="$2"
+  fi
+
+  # Remove the current argument
+  shift
+done
+
+echo $(deployPreviewtoEC2)

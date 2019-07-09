@@ -27,9 +27,9 @@ function cleanupPreviewDeploys() {
 # Sets up AWS global configuration for all subsequent commands.
 #
 # Expects global environment variables:
-#   AWS_PROD_API_REGION - The AWS region to use
+#   PRODUCTION_AWS_REGION - The AWS region to use
 function configureAWS() {
-  aws configure set default.region $AWS_PROD_API_REGION
+  aws configure set default.region $PRODUCTION_AWS_REGION
 }
 
 # Finds any existing instances for previewing this PR
