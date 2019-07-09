@@ -24,5 +24,37 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
     heading="Activity 3: activity name"
     headingLevel={3}
   />
+  <div
+    className="visibility--print"
+  >
+    <Connect(Description)
+      aKey="activity-key"
+    />
+    <Connect(Goals)
+      aKey="activity-key"
+    />
+    <Connect(Schedule)
+      aKey="activity-key"
+    />
+    <Costs
+      aKey="activity-key"
+    />
+    <Connect(ContractorResources)
+      aKey="activity-key"
+    />
+    <Connect(CostAllocate)
+      aKey="activity-key"
+    />
+    <Connect(StandardsAndConditions)
+      aKey="activity-key"
+    />
+    <Button
+      onClick={[Function]}
+      type="button"
+      variation="primary"
+    >
+      Done
+    </Button>
+  </div>
 </div>
 `;

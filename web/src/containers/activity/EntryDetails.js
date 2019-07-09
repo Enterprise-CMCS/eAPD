@@ -62,20 +62,18 @@ const EntryDetails = ({ activity, aKey, num }) => {
       } activity--body__${num === 1 ? 'first' : 'notfirst'}`}
     >
       <Review heading={title} headingLevel={3} editContent={editContent} />
-      {collapsed ? null : (
-        <Fragment>
-          <Overview aKey={aKey} />
-          <Goals aKey={aKey} />
-          <Schedule aKey={aKey} />
-          <Costs aKey={aKey} />
-          <ContractorResources aKey={aKey} />
-          <CostAllocate aKey={aKey} />
-          <StandardsAndConditions aKey={aKey} />
-          <Button variation="primary" onClick={() => setCollapsed(true)}>
-            Done
-          </Button>
-        </Fragment>
-      )}
+      <div className={collapsed ? 'visibility--print' : ''}>
+        <Overview aKey={aKey} />
+        <Goals aKey={aKey} />
+        <Schedule aKey={aKey} />
+        <Costs aKey={aKey} />
+        <ContractorResources aKey={aKey} />
+        <CostAllocate aKey={aKey} />
+        <StandardsAndConditions aKey={aKey} />
+        <Button variation="primary" onClick={() => setCollapsed(true)}>
+          Done
+        </Button>
+      </div>
     </div>
   );
 };
