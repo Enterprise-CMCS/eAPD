@@ -55,7 +55,7 @@ const StateDashboard = (
               className="ds-u-float--right"
               onClick={create}
             >
-              Create new&nbsp;&nbsp;
+              Create new <span className="sr-only">APD</span>&nbsp;&nbsp;
               <Icon icon={faPlusCircle} />
             </Button>
           </div>
@@ -73,7 +73,7 @@ const StateDashboard = (
               <div className="ds-u-display--inline-block">
                 <h3 className="ds-u-margin-top--0">
                   <a href="#!" onClick={open(apd.id)}>
-                    {apd.name}
+                    <span className="sr-only">Edit APD: </span>{apd.name}
                   </a>
                 </h3>
                 <ul className="ds-c-list--bare">
@@ -88,7 +88,7 @@ const StateDashboard = (
                   size="small"
                   onClick={delApd(apd)}
                 >
-                  Delete
+                  Delete <span className="sr-only"> this APD</span>
                 </Button>
               </div>
             </div>
