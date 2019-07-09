@@ -28,17 +28,29 @@ workflows:
 
       # backend jobs
       - backend api endpoint test:
+          filters:
+            tags:
+              only: /.*/
           requires:
             - install dependencies
       - dependency vulnerability scan:
+          filters:
+            tags:
+              only: /.*/
           name: backend dependency vulnerability scan
           path: api
           requires:
             - install dependencies
       - backend lint:
+          filters:
+            tags:
+              only: /.*/
           requires:
             - install dependencies
       - backend unit test:
+          filters:
+            tags:
+              only: /.*/
           requires:
             - install dependencies
       - backend deploy:
@@ -71,14 +83,23 @@ workflows:
 
       # frontend jobs
       - dependency vulnerability scan:
+          filters:
+            tags:
+              only: /.*/
           name: frontend dependency vulnerability scan
           path: web
           requires:
             - install dependencies
       - frontend lint:
+          filters:
+            tags:
+              only: /.*/
           requires:
             - install dependencies
       - frontend test:
+          filters:
+            tags:
+              only: /.*/
           requires:
             - install dependencies
             - yaml test
