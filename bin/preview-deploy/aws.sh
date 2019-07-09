@@ -14,7 +14,7 @@ function deployPreviewtoEC2() {
   # Configure AWS CLI with defaults
   configureAWS
 
-  # Inject branch name into user data
+  # Inject configuration information from the environment into the user data
   configureUserData
 
   # Find any existing preview deploys
