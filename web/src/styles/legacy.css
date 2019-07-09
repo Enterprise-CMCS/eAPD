@@ -15,7 +15,6 @@
 @import 'app/type';
 
 /* third-party things */
-@import 'app/datepicker';
 @import 'app/editor';
 
 @custom-media --breakpoint-sm (min-width: 40rem);
