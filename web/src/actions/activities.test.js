@@ -1,4 +1,3 @@
-import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import sinon from 'sinon';
@@ -6,10 +5,7 @@ import sinon from 'sinon';
 import * as actions from './activities';
 import * as apdActions from './apd';
 
-import axios from '../util/api';
-
 const mockStore = configureStore([thunk]);
-const fetchMock = new MockAdapter(axios);
 
 describe('activities actions', () => {
   const updatedBudgetAction = state => ({
