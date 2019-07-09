@@ -21,10 +21,22 @@ workflows:
   test, build, and deploy:
     jobs:
       # independent jobs
-      - check docker-compose image tags
-      - install dependencies
-      - validate openapi
-      - yaml test
+      - check docker-compose image tags:
+          filters:
+            tags:
+              only: /.*/
+      - install dependencies:
+          filters:
+            tags:
+              only: /.*/
+      - validate openapi:
+          filters:
+            tags:
+              only: /.*/
+      - yaml test:
+          filters:
+            tags:
+              only: /.*/
 
       # backend jobs
       - backend api endpoint test:
