@@ -21,6 +21,7 @@ const ApdStateKeyPerson = ({
       <div className="visibility--screen">
         <Review
           heading={`${index + 1}. ${name}`}
+          headingLevel={4}
           onDeleteClick={onDeleteClick}
           onEditClick={expand}
         >
