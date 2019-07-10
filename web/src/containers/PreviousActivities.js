@@ -19,7 +19,7 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
         id="prev-activities-outline"
         resource="previousActivities.outline"
       >
-        <h4 className="ds-h4">
+        <h4 className="ds-c-label">
           {t('previousActivities.outline.instruction.label')}
         </h4>
         <RichText
