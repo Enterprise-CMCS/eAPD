@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import { DocumentItem, ProgressDot, ProgressLine } from './DashboardStory';
 import { Instruction, Section, Subsection } from './content';
 import { FormAndReviewList } from './FormsAndReviews';
 import FrozenTableStory from './FrozenTableStory';
@@ -23,11 +22,6 @@ storiesOf('Forms and reviews', module).add('FormAndReviewList', () => (
 storiesOf('Frozen-pane tables', module).add('example', () => (
   <FrozenTableStory />
 ));
-
-storiesOf('Dashboard components', module)
-  .add('Document', () => <DocumentItem />)
-  .add('Progress dot', () => <ProgressDot />)
-  .add('Progress line', () => <ProgressLine />);
 
 storiesOf('Numeric inputs', module).add('Dollars', () => {
   class Dollar extends Component {

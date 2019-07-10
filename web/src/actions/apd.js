@@ -1,6 +1,5 @@
 import { push } from 'connected-react-router';
 
-import { notify } from './notification';
 import { getIsAdmin } from '../reducers/user';
 import axios from '../util/api';
 import { fromAPI, toAPI } from '../util/serialization/apd';
@@ -41,10 +40,14 @@ export const selectApdOnLoad = () => (dispatch, getState) => {
 };
 
 export const addKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
-export const removeKeyPerson = key => ({
-  type: REMOVE_APD_KEY_PERSON,
-  key
-});
+export const removeKeyPerson = (key, { global = window } = {}) => dispatch => {
+  if (global.confirm('Do you really want to delete this key person?')) {
+    dispatch({
+      type: REMOVE_APD_KEY_PERSON,
+      key
+    });
+  }
+};
 
 export const updateBudget = () => (dispatch, getState) =>
   dispatch({ type: UPDATE_BUDGET, state: getState() });
@@ -146,13 +149,6 @@ export const fetchApdDataIfNeeded = () => (dispatch, getState) => {
   return null;
 };
 
-export const notifyNetError = (action, error) => {
-  const { response: res } = error;
-  const reason = (res && (res.data || {}).error) || 'not-sure-why';
-
-  return notify(`${action} failed (${reason})`);
-};
-
 export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
   const {
     apd: { data: updatedApd },
@@ -226,79 +222,6 @@ export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
     .catch(error => {
       dispatch(saveFailure());
       throw error;
-    });
-};
-
-export const submitAPD = (save = saveApd) => (dispatch, getState) =>
-  dispatch(save())
-    .then(() => {
-      dispatch({ type: SUBMIT_APD_REQUEST });
-
-      const {
-        activities: { byKey: activities },
-        apd: {
-          data: { id: apdID }
-        },
-        budget
-      } = getState();
-
-      const tables = {
-        activityQuarterlyFederalShare: Object.entries(budget.activities).reduce(
-          (acc, [key, activity]) => ({
-            ...acc,
-            [activities[key].name]: activity.quarterlyFFP
-          }),
-          {}
-        ),
-        summaryBudgetTable: {
-          hie: budget.hie,
-          hit: budget.hit,
-          mmis: budget.mmis,
-          total: budget.combined
-        },
-        federalShareByFFYQuarter: budget.federalShareByFFYQuarter,
-        programBudgetTable: {
-          hitAndHie: {
-            hit: budget.hit.combined,
-            hie: budget.hie.combined,
-            hitAndHie: budget.hitAndHie.combined
-          },
-          mmis: budget.mmisByFFP
-        }
-      };
-
-      return axios
-        .post(`/apds/${apdID}/versions`, { tables })
-        .then(() => {
-          dispatch(notify('Submission successful!'));
-          dispatch({ type: SUBMIT_APD_SUCCESS });
-        })
-        .catch(error => {
-          dispatch(notifyNetError('Submit', error));
-          dispatch({ type: SUBMIT_APD_FAILURE });
-        });
-    })
-    .catch(error => {
-      dispatch(notifyNetError('Submit', error));
-    });
-
-export const withdrawApd = () => (dispatch, getState) => {
-  dispatch({ type: WITHDRAW_APD_REQUEST });
-
-  const {
-    apd: {
-      data: { id: apdID }
-    }
-  } = getState();
-
-  return axios
-    .delete(`/apds/${apdID}/versions`)
-    .then(() => {
-      dispatch({ type: WITHDRAW_APD_SUCCESS });
-    })
-    .catch(error => {
-      dispatch(notifyNetError('Withdraw', error));
-      dispatch({ type: WITHDRAW_APD_FAILURE });
     });
 };
 
