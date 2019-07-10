@@ -9,7 +9,6 @@ import budget from './budget';
 import dirty from './dirty';
 import errors from './errors';
 import navigation from './navigation';
-import notification from './notification';
 import user from './user';
 import working from './working';
 
@@ -23,7 +22,6 @@ const rootReducer = history =>
     dirty,
     errors,
     navigation,
-    notification,
     user,
     working,
     router: connectRouter(history)

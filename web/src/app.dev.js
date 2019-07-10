@@ -2,7 +2,6 @@ import '@babel/polyfill';
 
 import createHistory from 'history/createBrowserHistory';
 import React from 'react';
-import 'react-dates/initialize';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
 import { routerMiddleware } from 'connected-react-router';
