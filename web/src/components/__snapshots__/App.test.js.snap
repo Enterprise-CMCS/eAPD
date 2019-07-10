@@ -8,6 +8,5 @@ exports[`App component renders correctly 1`] = `
   <Connect(AuthChecker)>
     <Routes />
   </Connect(AuthChecker)>
-  <Connect(Notification) />
 </Wrapper>
 `;

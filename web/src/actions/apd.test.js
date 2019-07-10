@@ -5,7 +5,6 @@ import sinon from 'sinon';
 import u from 'updeep';
 
 import * as actions from './apd';
-import * as notificationActions from './notification';
 import axios from '../util/api';
 
 const mockStore = configureStore([thunk]);
@@ -41,10 +40,34 @@ describe('apd actions', () => {
     });
   });
 
-  it('removeApdKeyPerson should create REMOVE_APD_KEY_PERSON action', () => {
-    expect(actions.removeKeyPerson('key')).toEqual({
-      type: actions.REMOVE_APD_KEY_PERSON,
-      key: 'key'
+  describe('removeApdKeyPerson should create REMOVE_APD_KEY_PERSON action', () => {
+    const global = {
+      confirm: jest.fn()
+    };
+
+    it('dispatches nothing if the user does not confirm', () => {
+      global.confirm.mockReset();
+      global.confirm.mockReturnValue(false);
+      const store = mockStore();
+
+      store.dispatch(actions.removeKeyPerson('key', { global }));
+      expect(global.confirm).toHaveBeenCalled();
+      expect(store.getActions()).toEqual([]);
+    });
+
+    it('dispatches the expected action if the user confirms', () => {
+      global.confirm.mockReset();
+      global.confirm.mockReturnValue(true);
+      const store = mockStore();
+
+      store.dispatch(actions.removeKeyPerson('key', { global }));
+      expect(global.confirm).toHaveBeenCalled();
+      expect(store.getActions()).toEqual([
+        {
+          type: actions.REMOVE_APD_KEY_PERSON,
+          key: 'key'
+        }
+      ]);
     });
   });
 
@@ -475,13 +498,7 @@ describe('apd actions', () => {
       const store = mockStore(state);
       fetchMock.onPut('/apds/id-to-update').reply(403, [{ foo: 'bar' }]);
 
-      const expectedActions = [
-        { type: actions.SAVE_APD_REQUEST },
-        {
-          type: notificationActions.ADD_NOTIFICATION,
-          message: 'Save successful!'
-        }
-      ];
+      const expectedActions = [{ type: actions.SAVE_APD_REQUEST }];
 
       return store.dispatch(actions.saveApd({ serialize })).catch(() => {
         expect(store.getActions()).toEqual(expectedActions);
@@ -630,202 +647,6 @@ describe('apd actions', () => {
             ).toEqual(true);
           });
         });
-      });
-    });
-  });
-
-  describe('submit an APD', () => {
-    const budget = {
-      activities: {
-        'activity-key': {
-          quarterlyFFP: 'quarterly ffp'
-        }
-      },
-      combined: 'overall combined',
-      federalShareByFFYQuarter: 'federal share, ffy quarter',
-      hie: {
-        hello: 'from hie',
-        combined: 'hie combined'
-      },
-      hit: {
-        also: 'from hit',
-        combined: 'hit combined'
-      },
-      hitAndHie: {
-        combined: 'hit and hie combined'
-      },
-      mmis: {
-        greetings: 'from mmis',
-        combined: 'mmis combined'
-      },
-      mmisByFFP: 'mmis by ffp'
-    };
-
-    beforeEach(() => {
-      fetchMock.reset();
-    });
-
-    it('sets a notification if the preceding save fails', () => {
-      const store = mockStore({
-        activities: {
-          byKey: { 'activity-key': { name: 'number one best activity' } }
-        },
-        apd: { data: { id: 'id-to-update' } },
-        budget,
-        notification: { open: false, queue: [] }
-      });
-
-      const save = () => () =>
-        Promise.reject(new Error('preceding save failed (set by test)'));
-      const spy = jest.spyOn(axios, 'post');
-
-      const expectedActions = [
-        {
-          type: notificationActions.ADD_NOTIFICATION,
-          message: 'Submit failed (not-sure-why)'
-        }
-      ];
-
-      return store.dispatch(actions.submitAPD(save)).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        expect(spy).not.toHaveBeenCalled();
-      });
-    });
-
-    it('sets a notification if the submission fails', () => {
-      const store = mockStore({
-        activities: {
-          byKey: { 'activity-key': { name: 'number one best activity' } }
-        },
-        apd: { data: { id: 'id-to-update' } },
-        budget,
-        notification: { open: false, queue: [] }
-      });
-      const save = () => () => Promise.resolve();
-      const spy = jest.spyOn(axios, 'post');
-
-      fetchMock.onPost('/apds/id-to-update/versions').reply(403);
-
-      const expectedActions = [
-        { type: actions.SUBMIT_APD_REQUEST },
-        {
-          type: notificationActions.ADD_NOTIFICATION,
-          message: 'Submit failed (not-sure-why)'
-        },
-        { type: actions.SUBMIT_APD_FAILURE }
-      ];
-
-      return store.dispatch(actions.submitAPD(save)).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        expect(spy).toHaveBeenCalled();
-      });
-    });
-
-    it('sets a notification if the submission succeeds', () => {
-      const store = mockStore({
-        activities: {
-          byKey: { 'activity-key': { name: 'number one best activity' } }
-        },
-        apd: { data: { id: 'id-to-update' } },
-        budget,
-        notification: { open: false, queue: [] }
-      });
-      const save = () => () => Promise.resolve();
-      const spy = jest.spyOn(axios, 'post');
-
-      fetchMock.onPost('/apds/id-to-update/versions').reply(204);
-
-      const expectedActions = [
-        { type: actions.SUBMIT_APD_REQUEST },
-        {
-          type: notificationActions.ADD_NOTIFICATION,
-          message: 'Submission successful!'
-        },
-        { type: actions.SUBMIT_APD_SUCCESS }
-      ];
-
-      beforeEach(() => {
-        fetchMock.reset();
-      });
-
-      return store.dispatch(actions.submitAPD(save)).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        expect(spy).toHaveBeenCalled();
-        expect(spy.mock.calls[0][1]).toMatchObject({
-          tables: {
-            activityQuarterlyFederalShare: {
-              'number one best activity': 'quarterly ffp'
-            },
-            summaryBudgetTable: {
-              hie: { hello: 'from hie', combined: 'hie combined' },
-              hit: { also: 'from hit', combined: 'hit combined' },
-              mmis: { greetings: 'from mmis', combined: 'mmis combined' },
-              total: 'overall combined'
-            },
-            federalShareByFFYQuarter: 'federal share, ffy quarter',
-            programBudgetTable: {
-              hitAndHie: {
-                hie: 'hie combined',
-                hit: 'hit combined',
-                hitAndHie: 'hit and hie combined'
-              },
-              mmis: 'mmis by ffp'
-            }
-          }
-        });
-      });
-    });
-  });
-
-  describe('withdraw an APD submission', () => {
-    beforeEach(() => {
-      fetchMock.reset();
-    });
-
-    it('sets a notification if the withdrawal fails', () => {
-      const store = mockStore({
-        apd: { data: { id: 'id-to-update' } },
-        notification: { open: false, queue: [] }
-      });
-      const spy = jest.spyOn(axios, 'delete');
-
-      fetchMock.onDelete('/apds/id-to-update/versions').reply(403);
-
-      const expectedActions = [
-        { type: actions.WITHDRAW_APD_REQUEST },
-        {
-          type: notificationActions.ADD_NOTIFICATION,
-          message: 'Withdraw failed (not-sure-why)'
-        },
-        { type: actions.WITHDRAW_APD_FAILURE }
-      ];
-
-      return store.dispatch(actions.withdrawApd()).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        expect(spy).toHaveBeenCalled();
-      });
-    });
-
-    it('dispatches an action if the submission succeeds', () => {
-      const store = mockStore({
-        apd: { data: { id: 'id-to-update' } }
-      });
-      const spy = jest.spyOn(axios, 'delete');
-
-      fetchMock.onDelete('/apds/id-to-update/versions').reply(204);
-
-      const expectedActions = [
-        { type: actions.WITHDRAW_APD_REQUEST },
-        { type: actions.WITHDRAW_APD_SUCCESS }
-      ];
-
-      beforeEach(() => {
-        fetchMock.reset();
-      });
-
-      return store.dispatch(actions.withdrawApd()).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        expect(spy).toHaveBeenCalled();
       });
     });
   });
