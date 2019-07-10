@@ -4,12 +4,12 @@
 #    --AWS_REGION <AWS region name>   | The AWS region the instance should be
 #                                     | created in
 #                                     |----------------------------------------
-#    --GH_BOT_PASSWORD <password>     | Username of the Github user to update
+#    --GH_BOT_PASSWORD <password>     | Password of the Github user to update
+#                                     | comments as
+#                                     |----------------------------------------
+#    --GH_BOT_USER <username>         | Username of the Github user to update
 #                                     | comments as. These are the comments
 #                                     | that say the preview deploy was removed
-#                                     |----------------------------------------
-#    --GH_BOT_USER <username>         | Password of the Github user to update
-#                                     | comments as
 
 # Exit when any command fails
 set -e
