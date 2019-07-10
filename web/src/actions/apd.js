@@ -41,10 +41,14 @@ export const selectApdOnLoad = () => (dispatch, getState) => {
 };
 
 export const addKeyPerson = () => ({ type: ADD_APD_KEY_PERSON });
-export const removeKeyPerson = key => ({
-  type: REMOVE_APD_KEY_PERSON,
-  key
-});
+export const removeKeyPerson = (key, { global = window } = {}) => dispatch => {
+  if (global.confirm('Do you really want to delete this key person?')) {
+    dispatch({
+      type: REMOVE_APD_KEY_PERSON,
+      key
+    });
+  }
+};
 
 export const updateBudget = () => (dispatch, getState) =>
   dispatch({ type: UPDATE_BUDGET, state: getState() });
