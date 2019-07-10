@@ -4,8 +4,17 @@
 #    --API_PBKDF2_ITERATIONS <number> | Number of PBKDF2 iterations the server
 #                                     | should use for hashing user passwords.
 #                                     |----------------------------------------
+#    --AWS_AMI <AMI ID>               | Image ID of the AMI to use for the new
+#                                     | instance
+#                                     |----------------------------------------
 #    --AWS_REGION <AWS region name>   | The AWS region the instance should be
 #                                     | created in
+#                                     |----------------------------------------
+#    --AWS_SECURITY_GROUP <group ID>  | ID of the security group for the
+#                                     | instance
+#                                     |----------------------------------------
+#    --AWS_SUBNET <subnet ID>         | ID of the subnet this instance should
+#                                     | be attached to
 #                                     |----------------------------------------
 #    --BUILD_URL <URL>                | The URL to the zip file containing the
 #                                     | built API. This zip will be pulled into
@@ -23,9 +32,6 @@ function print() {
 }
 
 # Deploys a preview instance to EC2 with a fully self-contained environment.
-#
-# $1 - the pull request number
-# $2 - git branch name
 function deployPreviewtoEC2() {
   # Configure AWS CLI with defaults
   configureAWS
@@ -63,14 +69,16 @@ function deployPreviewtoEC2() {
 # Sets up AWS global configuration for all subsequent commands.
 #
 # Expects global environment variables:
-#   PRODUCTION_AWS_REGION - The AWS region to use
+#   AWS_REGION - The AWS region to use
 function configureAWS() {
   aws configure set default.region $AWS_REGION
 }
 
 # Updates the EC2 user data script with values from the environment.
 #
-# $1 - the git branch that should be checked out/built
+# Expects global environment variables:
+#   API_PBKDF2_ITERATIONS - Number of iterations for hashing passwords
+#   BRANCH - the git branch that should be checked out/built
 function configureUserData() {
   # Use vertical pipes as sed delimiters instead of slashes, since git branch
   # names can contain slashes
@@ -83,18 +91,17 @@ function configureUserData() {
 
 # Create a new EC2 instance. Echos the new instance ID.
 #
-# $1 - the pull request number
-#
 # Expects global environment variables:
-#   PRODUCTION_API_AWS_AMI	 - Image ID of the AMI to use for this instance
-#   PRODUCTION_API_AWS_SECURITY_GROUP - ID of the security group for this instance
-#   PRODUCTION_API_AWS_SUBNET - ID of the subnet this instance should be attached to
+#   AWS_AMI - Image ID of the AMI to use for this instance
+#   AWS_SECURITY_GROUP - ID of the security group for this instance
+#   AWS_SUBNET - ID of the subnet this instance should be attached to
+#   PR_NUM - Github pull request number associated with this instance
 function createNewInstance() {
   aws ec2 run-instances \
     --instance-type t2.medium \
-    --image-id ami-0de53d8956e8dcf80 \
-    --security-group-ids sg-0d0314e8cf261d9f6 \
-    --subnet-id subnet-6c76f642 \
+    --image-id $AWS_AMI \
+    --security-group-ids $AWS_SECURITY_GROUP \
+    --subnet-id $AWS_SUBNET \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
@@ -102,7 +109,8 @@ function createNewInstance() {
 
 # Finds any existing instances for previewing this PR
 #
-# $1 - the pull request number
+# Expects global environment variables:
+#   PR_NUM - Github pull request number associated with this instance
 function findExistingInstances() {
   aws ec2 describe-instances \
     --filter Name=tag:github-pr,Values=$PR_NUM \
