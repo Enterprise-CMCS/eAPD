@@ -40,10 +40,34 @@ describe('apd actions', () => {
     });
   });
 
-  it('removeApdKeyPerson should create REMOVE_APD_KEY_PERSON action', () => {
-    expect(actions.removeKeyPerson('key')).toEqual({
-      type: actions.REMOVE_APD_KEY_PERSON,
-      key: 'key'
+  describe('removeApdKeyPerson should create REMOVE_APD_KEY_PERSON action', () => {
+    const global = {
+      confirm: jest.fn()
+    };
+
+    it('dispatches nothing if the user does not confirm', () => {
+      global.confirm.mockReset();
+      global.confirm.mockReturnValue(false);
+      const store = mockStore();
+
+      store.dispatch(actions.removeKeyPerson('key', { global }));
+      expect(global.confirm).toHaveBeenCalled();
+      expect(store.getActions()).toEqual([]);
+    });
+
+    it('dispatches the expected action if the user confirms', () => {
+      global.confirm.mockReset();
+      global.confirm.mockReturnValue(true);
+      const store = mockStore();
+
+      store.dispatch(actions.removeKeyPerson('key', { global }));
+      expect(global.confirm).toHaveBeenCalled();
+      expect(store.getActions()).toEqual([
+        {
+          type: actions.REMOVE_APD_KEY_PERSON,
+          key: 'key'
+        }
+      ]);
     });
   });
 

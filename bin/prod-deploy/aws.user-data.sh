@@ -35,20 +35,16 @@ nvm alias default 10
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
 
-# Get the API code.  In the future, it'd be nice if we could get a zip file
-# from the CI/CD process instead of using git.  This will work for now.
+# Get the built API code
 cd /app
-git clone --depth 1 https://github.com/18F/cms-hitech-apd.git
-cd cms-hitech-apd/api
+curl -o backend.zip __BUILDURL__
+unzip backend.zip
+rm backend.zip
+cd api
 
-# Delete seed files that might be dangerous so they can't be accidentally run
-rm -rf seeds/development
-rm -rf seeds/test
-rm seeds/development.js
-rm seeds/test.js
-rm seeds/shared/delete-everything.js
-
-npm ci --only=production
+# There are some platform-dependent binaries that need to be rebuilt before
+# the knex CLI will work correctly.
+npm rebuild knex
 
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
