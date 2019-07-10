@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { selectApdData } from './apd.selectors';
-import { stateDateToDisplay } from '../util';
+import { stateDateRangeToDisplay, stateDateToDisplay } from '../util';
 
 export const selectActivityKeys = ({ activities: { allKeys } }) => allKeys;
 
@@ -59,6 +59,7 @@ export const selectActivitySchedule = createSelector(
       ({ name, plannedEndDate, plannedStartDate, schedule }) => {
         const milestones = [];
         activities.push({
+          dateRange: stateDateRangeToDisplay(plannedStartDate, plannedEndDate),
           end: stateDateToDisplay(plannedEndDate),
           name,
           milestones,

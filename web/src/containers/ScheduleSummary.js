@@ -16,42 +16,38 @@ const ScheduleSummary = ({ activities }) => (
             {t('scheduleSummary.noDataMessage')}
           </div>
         ) : (
-          activities.map(
-            ({ end, name: activityName, milestones, start }, i) => (
-              <table key={activityName} className="budget-table">
-                <caption className="ds-u-visibility--screen-reader">
-                  Activity {i + 1}: {activityName}
-                </caption>
-                <thead>
-                  <tr>
-                    <th
-                      className="ds-u-font-weight--bold ds-u-border-right--0"
-                      style={{ width: '70%' }}
-                    >
-                      Activity {i + 1}: {activityName}
-                    </th>
-                    <th className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
-                      {start} – {end}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {milestones.map(
-                    ({ end: milestoneEnd, name: milestoneName }) => (
-                      <tr>
-                        <td className="ds-u-border-right--0">
-                          {milestoneName}
-                        </td>
-                        <td className="ds-u-border-left--0 ds-u-text-align--left">
-                          {milestoneEnd}
-                        </td>
-                      </tr>
-                    )
-                  )}
-                </tbody>
-              </table>
-            )
-          )
+          activities.map(({ name: activityName, dateRange, milestones }, i) => (
+            <table key={activityName} className="budget-table">
+              <caption className="ds-u-visibility--screen-reader">
+                Activity {i + 1}: {activityName}
+              </caption>
+              <thead>
+                <tr>
+                  <th
+                    className="ds-u-font-weight--bold ds-u-border-right--0"
+                    style={{ width: '70%' }}
+                  >
+                    Activity {i + 1}: {activityName}
+                  </th>
+                  <th className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
+                    {dateRange}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {milestones.map(
+                  ({ end: milestoneEnd, name: milestoneName }) => (
+                    <tr>
+                      <td className="ds-u-border-right--0">{milestoneName}</td>
+                      <td className="ds-u-border-left--0 ds-u-text-align--left">
+                        {milestoneEnd}
+                      </td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </table>
+          ))
         )}
       </Subsection>
     </Section>

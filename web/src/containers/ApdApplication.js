@@ -9,12 +9,12 @@ import Export from './ApdExport';
 import ApdSummary from './ApdSummary';
 import ExecutiveSummary from './ExecutiveSummary';
 import PreviousActivities from './PreviousActivities';
+import ProposedBudget from './ProposedBudget';
 import SaveButton from './SaveButton';
 import ScheduleSummary from './ScheduleSummary';
 import Sidebar from './Sidebar';
 import { selectApdOnLoad } from '../actions/apd';
 import StateProfile from '../components/ApdStateProfile';
-import ProposedBudget from '../components/ProposedBudget';
 
 import {
   getAPDName,
