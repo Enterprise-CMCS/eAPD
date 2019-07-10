@@ -1,4 +1,16 @@
 #!/bin/bash
+
+# Call with the following arguments:
+#    --AWS_REGION <AWS region name>   | The AWS region the instance should be
+#                                     | created in
+#                                     |----------------------------------------
+#    --GH_BOT_PASSWORD <password>     | Username of the Github user to update
+#                                     | comments as. These are the comments
+#                                     | that say the preview deploy was removed
+#                                     |----------------------------------------
+#    --GH_BOT_USER <username>         | Password of the Github user to update
+#                                     | comments as
+
 # Exit when any command fails
 set -e
 
@@ -29,14 +41,14 @@ function cleanupPreviewDeploys() {
 # Expects global environment variables:
 #   PRODUCTION_AWS_REGION - The AWS region to use
 function configureAWS() {
-  aws configure set default.region $PRODUCTION_AWS_REGION
+  aws configure set default.region $AWS_REGION
 }
 
-# Finds any existing instances for previewing this PR
+# Finds all existing preview instances
 function findExistingInstances() {
   aws ec2 describe-instances \
-    --filter "Name=tag:Name,Values=eapd-pr-*" \
-    | jq -rc '.Reservations[].Instances[] | [.InstanceId, .Tags[].Value] | @csv'
+    --filter "Name=tag:environment,Values=preview" \
+    | jq -rc '.Reservations[].Instances[] | [.InstanceId, (.Tags[] | (select(.Key == "github-pr") | .Value))] | @csv'
 }
 
 # Gets a list of open pull requests
@@ -53,7 +65,7 @@ function getOpenPullRequests() {
 function terminateIfClosedPR() {
   BITS=(${1//,/ })
   INSTANCE_ID=$(echo ${BITS[0]} | tr -d '"')
-  INSTANCE_PR=$(echo ${BITS[1]} | sed "s/eapd-pr-//" | tr -d '"')
+  INSTANCE_PR=$(echo ${BITS[1]} | tr -d '"')
 
   echo "  ...instance $INSTANCE_ID is for PR $INSTANCE_PR";
 
@@ -85,5 +97,19 @@ function updateGithubComment() {
     curl -s -u "$GH_BOT_USER:$GH_BOT_PASSWORD" -d '{"body":"This deploy was cleaned up."}' -H "Content-Type: application/json" -X PATCH "https://api.github.com/repos/18f/cms-hitech-apd/issues/comments/$ID"
   fi
 }
+
+
+# Iterate while there are arguments
+while [ $# -gt 0 ]; do
+  # If the argument begins with --, strip the -- to create the variable name
+  # and then set it to the next argument
+  if [[ $1 == *"--"* ]]; then
+    v="${1/--/}"
+    export $v="$2"
+  fi
+
+  # Remove the current argument
+  shift
+done
 
 cleanupPreviewDeploys
