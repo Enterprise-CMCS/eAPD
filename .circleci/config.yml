@@ -500,7 +500,10 @@ jobs:
             apt-get -qq update
             apt-get -qq install jq -y
             pip install --quiet awscli
-            ./aws.cleanup.sh
+            ./aws.cleanup.sh \
+              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
+              --GH_BOT_PASSWORD "$GH_BOT_PASSWORD" \
+              --GH_BOT_USER "$GH_BOT_USER"
 
   # Frontend production deployment.
   frontend deploy:
