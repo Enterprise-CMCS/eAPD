@@ -76,7 +76,7 @@ const Schedule = ({
         <div className="mb3">
           <Instruction
             source="activities.schedule.milestone.instruction"
-            headingDisplay={{ className: 'ds-h5', level: 'h5' }}
+            headingDisplay={{ className: 'ds-h5', level: 'h6' }}
           />
 
           <hr />

@@ -10,7 +10,7 @@ const GoalReview = ({
 }) => (
   <Review
     heading={`${index + 1}. ${description || ''}`}
-    headingLevel={4}
+    headingLevel={6}
     onDeleteClick={onDeleteClick}
     onEditClick={expand}
   >
