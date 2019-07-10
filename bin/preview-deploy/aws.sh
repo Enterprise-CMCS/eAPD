@@ -1,4 +1,20 @@
 #!/bin/bash
+
+# Call with the following arguments:
+#    --API_PBKDF2_ITERATIONS <number> | Number of PBKDF2 iterations the server
+#                                     | should use for hashing user passwords.
+#                                     |----------------------------------------
+#    --AWS_REGION <AWS region name>   | The AWS region the instance should be
+#                                     | created in
+#                                     |----------------------------------------
+#    --BUILD_URL <URL>                | The URL to the zip file containing the
+#                                     | built API. This zip will be pulled into
+#                                     | the EC2 instance and launched.
+#                                     |----------------------------------------
+#    --PR_NUM <number>                | The PR number for this preview. This is
+#                                     | used to tag the instance as well as to
+#                                     | find previous instances for this PR.
+
 # Exit when any command fails
 set -e
 
