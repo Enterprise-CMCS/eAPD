@@ -11,7 +11,7 @@ import { FileDownload } from '../components/Icons';
 const ExportAndSubmit = ({ printApd: print }) => (
   <Waypoint id="export-and-submit">
     <Section isNumbered id="export-and-submit" resource="exportAndSubmit">
-    <h3>Download</h3>
+    <h3 className="ds-h3">Download</h3>
       <p>
         Download a copy of your APD to review your work offline or as the first
         step in submitting a completed APD to CMS. If you make changes, follow these
@@ -43,7 +43,7 @@ const ExportAndSubmit = ({ printApd: print }) => (
         </span>
       </Button>
 
-    <h3>Submit to CMS</h3>
+    <h3 className="ds-h3">Submit to CMS</h3>
       <p>
         Once you’ve exported a PDF of a completed APD, submit it for state officer
         review by emailing the PDF to <a href="mailto:MedicaidHITECH@cms.hhs.gov">MedicaidHITECH@cms.hhs.gov</a>.
