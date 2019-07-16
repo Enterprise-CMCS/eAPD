@@ -199,12 +199,12 @@ exports[`budget summary component header row renders 2`] = `
 
 exports[`budget summary component renders correctly 1`] = `
 <Fragment>
-  <h3
+  <h4
     aria-hidden="true"
-    className="ds-h3"
+    className="ds-h4"
   >
     HIT Activities
-  </h3>
+  </h4>
   <table
     className="budget-table"
     key="1"
@@ -289,12 +289,12 @@ exports[`budget summary component renders correctly 1`] = `
       />
     </tbody>
   </table>
-  <h3
+  <h4
     aria-hidden="true"
-    className="ds-h3"
+    className="ds-h4"
   >
     HIE Activities
-  </h3>
+  </h4>
   <table
     className="budget-table"
     key="1"
@@ -379,12 +379,12 @@ exports[`budget summary component renders correctly 1`] = `
       />
     </tbody>
   </table>
-  <h3
+  <h4
     aria-hidden="true"
-    className="ds-h3"
+    className="ds-h4"
   >
     MMIS Activities
-  </h3>
+  </h4>
   <table
     className="budget-table"
     key="1"
@@ -473,7 +473,7 @@ exports[`budget summary component renders correctly 1`] = `
     className="budget-table"
   >
     <caption
-      className="ds-h3"
+      className="ds-h4"
     >
       Project Activities Totals
     </caption>

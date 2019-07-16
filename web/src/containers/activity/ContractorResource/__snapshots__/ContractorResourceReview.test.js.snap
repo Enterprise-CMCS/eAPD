@@ -4,6 +4,7 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
 <StandardReview
   editHref={null}
   heading="2. Honey Dipper Dan"
+  headingLevel={6}
   onDeleteClick={[MockFunction]}
   onEditClick={[MockFunction]}
 >
