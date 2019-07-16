@@ -166,11 +166,11 @@ class CostAllocateFFPQuarterly extends Component {
             <h6 className="ds-h3">{`Total FFY ${years[0]} - ${years[years.length - 1]}`}</h6>
             {['state', 'contractors'].map(name => (
               <Fragment key={name}>
-                  <p className="ds-h4">{EXPENSE_NAME_DISPLAY[name]}</p>
+                  <p className="ds-h5">{EXPENSE_NAME_DISPLAY[name]}</p>
                   <p><Dollars long>{quarterlyFFP.total[name]}</Dollars></p>
               </Fragment>
             ))}
-            <p className="ds-h4">{EXPENSE_NAME_DISPLAY.combined}</p>
+            <p className="ds-h5">{EXPENSE_NAME_DISPLAY.combined}</p>
             <p><Dollars long>{quarterlyFFP.total.combined}</Dollars></p>
           </Fragment>
         }
