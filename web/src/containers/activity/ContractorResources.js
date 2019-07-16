@@ -96,6 +96,7 @@ class ContractorResources extends Component {
           handleTermChange={this.handleTermChange}
           handleUseHourly={this.handleUseHourly}
           handleYearChange={this.handleYearChange}
+          headingLevel={6}
         />
       </Subsection>
     );
