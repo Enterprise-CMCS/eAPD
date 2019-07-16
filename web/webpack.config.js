@@ -4,6 +4,10 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 
+if (!process.env.IDLE_LOGOUT_TIME_MINUTES) {
+  delete process.env.IDLE_LOGOUT_TIME_MINUTES;
+}
+
 const config = {
   mode: 'production',
   entry: {

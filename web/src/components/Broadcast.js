@@ -39,9 +39,8 @@ const Broadcast = () => {
           channel = null;
         };
       }
-
-      return () => {};
-    } catch (e) {}
+    } catch (e) {} // eslint-disable-line no-empty
+    return () => {};
   });
 
   return null;
