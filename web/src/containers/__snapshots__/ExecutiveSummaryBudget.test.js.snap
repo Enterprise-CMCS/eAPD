@@ -32,7 +32,7 @@ exports[`executive summary budget component renders correctly with data 1`] = `
     className="budget-table"
   >
     <caption
-      className="ds-h3"
+      className="ds-h4"
     >
       HIT + HIE 
       <span
@@ -237,7 +237,7 @@ exports[`executive summary budget component renders correctly with data 1`] = `
     className="budget-table"
   >
     <caption
-      className="ds-h3"
+      className="ds-h4"
     >
       MMIS 
       <span

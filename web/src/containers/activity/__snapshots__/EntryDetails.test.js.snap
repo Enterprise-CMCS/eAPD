@@ -22,7 +22,7 @@ exports[`the (Activity) EntryDetails component renders correctly 1`] = `
     }
     editText="Edit"
     heading="Activity 3: activity name"
-    headingLevel={3}
+    headingLevel={4}
   />
   <div
     className="visibility--print"
