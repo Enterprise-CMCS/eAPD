@@ -41,7 +41,7 @@ services:
 
   api:
     build: ./api
-    image: cms-eapd/api:e46f9a12ec1a78c79cbb5ac3188c20a2
+    image: cms-eapd/api:c4beaa62bf3d46491dff748f831b5069
     depends_on:
       - db
     environment:
