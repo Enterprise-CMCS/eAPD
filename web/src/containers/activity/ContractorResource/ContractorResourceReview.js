@@ -48,7 +48,14 @@ const ContractorResourceReview = ({
 ContractorResourceReview.propTypes = {
   expand: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  item: PropTypes.shape({}).isRequired,
+  item: PropTypes.shape({
+    desc: PropTypes.string,
+    end: PropTypes.string,
+    name: PropTypes.string,
+    start: PropTypes.string,
+    totalCost: PropTypes.number,
+    years: PropTypes.array
+  }).isRequired,
   onDeleteClick: PropTypes.func
 };
 
