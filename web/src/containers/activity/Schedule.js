@@ -51,13 +51,14 @@ const Schedule = ({
   return (
     <Subsection resource="activities.schedule" nested>
       <Fragment>
-        <h5 className="ds-h5">Activity start and end dates</h5>
-        <div className="ds-c-choice__checkedChild ds-u-padding-y--0 visibility--screen">
+        <div className="ds-u-padding-y--0 visibility--screen">
           <DateField
+            label="Planned start date"
             value={activity.plannedStartDate}
             onChange={handleActivityStartChange}
           />
           <DateField
+            label="Planned end date"
             value={activity.plannedEndDate}
             onChange={handleActivityEndChange}
           />
@@ -76,7 +77,7 @@ const Schedule = ({
         <div className="mb3">
           <Instruction
             source="activities.schedule.milestone.instruction"
-            headingDisplay={{ className: 'ds-h5', level: 'h5' }}
+            headingDisplay={{ className: 'ds-h5', level: 'h6' }}
           />
 
           <hr />
