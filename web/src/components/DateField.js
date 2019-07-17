@@ -27,27 +27,31 @@ const DateField = ({ value, onChange, ...rest }) => {
     }
 
     const message = [];
-    let invalidDay = false;
-    let invalidMonth = false;
-    let invalidYear = false;
+    let dayInvalid = false;
+    let monthInvalid = false;
+    let yearInvalid = false;
 
     if (!dateParts.month) {
       message.push('Month is required.');
-      invalidMonth = true;
+      monthInvalid = true;
     }
     if (dateParts.month > 12) {
       message.push('Month must be between 1 and 12.');
-      invalidMonth = true;
+      monthInvalid = true;
     }
 
     if (!dateParts.day) {
       message.push('Day is required.');
-      invalidDay = true;
+      dayInvalid = true;
+    }
+    if (dateParts.day > 31) {
+      message.push('Day must be less than 31.');
+      dayInvalid = true;
     }
 
     if (`${dateParts.year}`.length !== 4) {
       message.push('Year must be 4 digits.');
-      invalidYear = true;
+      yearInvalid = true;
     }
 
     if (message.length === 0) {
@@ -58,9 +62,9 @@ const DateField = ({ value, onChange, ...rest }) => {
 
     return {
       errorMessage: message.join(' '),
-      invalidDay,
-      invalidMonth,
-      invalidYear
+      dayInvalid,
+      monthInvalid,
+      yearInvalid
     };
   }, [value]);
 
