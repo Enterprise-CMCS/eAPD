@@ -100,7 +100,7 @@ HeaderRow.propTypes = {
 
 const BudgetSummary = ({ activities, data, years }) => (
   <Fragment>
-    <h3 className="ds-h3" aria-hidden="true">HIT Activities</h3>
+    <h4 className="ds-h4" aria-hidden="true">HIT Activities</h4>
     {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <caption className="ds-u-visibility--screen-reader">
@@ -115,7 +115,7 @@ const BudgetSummary = ({ activities, data, years }) => (
       </table>
     ))}
 
-    <h3 className="ds-h3" aria-hidden="true">HIE Activities</h3>
+    <h4 className="ds-h4" aria-hidden="true">HIE Activities</h4>
     {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <caption className="ds-u-visibility--screen-reader">
@@ -130,7 +130,7 @@ const BudgetSummary = ({ activities, data, years }) => (
       </table>
     ))}
 
-    <h3 className="ds-h3" aria-hidden="true">MMIS Activities</h3>
+    <h4 className="ds-h4" aria-hidden="true">MMIS Activities</h4>
     {[...years, 'total'].map(yr => (
       <table className="budget-table" key={yr}>
         <caption className="ds-u-visibility--screen-reader">
@@ -146,7 +146,7 @@ const BudgetSummary = ({ activities, data, years }) => (
     ))}
 
     <table className="budget-table">
-      <caption className="ds-h3">
+      <caption className="ds-h4">
         Project Activities Totals
       </caption>
       <thead>
