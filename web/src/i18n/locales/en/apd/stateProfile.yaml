@@ -28,18 +28,21 @@ keyPersonnel:
       Personnel listed in this section must be assigned to APD by name, role,
       time commitment, and cost, where applicable.
     helpText: >-
-      1. Key personnel are individuals involved with all activities within this
+    [ol]
+      Key personnel are individuals involved with all activities within this
       APD, or are directly involved with governance, coordination, stakeholder
       decision-making, oversight, and/or performance of the activities as they affect
       the state’s Medicaid program. 
       
-      2. Individuals whose responsibilities
+
+      Individuals whose responsibilities
       apply only to specific activities should be listed individually under Program
       Activities instead. CMS seeks to ensure  state teams are adequately resourced,
       but does not require states to provide key vendor personnel to satisfy this
       requirement.
 
-      3. Key personnel costs are included within Activity #1, Program Administration. 
+
+      Key personnel costs are included within Activity #1, Program Administration. 
       These costs are HIT costs shared at the 90-10 rate. Quarterly adjustments for
       personnel costs under Activity #1 will apply to all key personnel costs.
   contact: 'Contact #{{number}}'
