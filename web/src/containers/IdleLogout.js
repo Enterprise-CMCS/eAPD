@@ -17,8 +17,7 @@ const events = [
   'scroll'
 ];
 
-// const IDLE_TIMEOUT = process.env.IDLE_LOGOUT_TIME_MINUTES * 60 * 1000;
-const IDLE_TIMEOUT = 2.2 * 60 * 1000;
+const IDLE_TIMEOUT = process.env.IDLE_LOGOUT_TIME_MINUTES * 60 * 1000;
 
 const flashWindowTitle = () => {
   const newTitle = `🔴 ${document.title}`;
