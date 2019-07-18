@@ -23,6 +23,7 @@ const MilestoneForm = ({
     <Fragment>
       <h6 className="ds-h4">Milestone {index + 1}:</h6>
       <TextField
+        autoFocus="true"
         label="Name"
         name="name"
         value={milestone}
