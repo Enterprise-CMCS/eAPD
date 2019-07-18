@@ -28,7 +28,7 @@ keyPersonnel:
       Personnel listed in this section must be assigned to APD by name, role,
       time commitment, and cost, where applicable.
     helpText: >-
-    [ol]
+      [ol]
       Key personnel are individuals involved with all activities within this
       APD, or are directly involved with governance, coordination, stakeholder
       decision-making, oversight, and/or performance of the activities as they affect
@@ -45,6 +45,7 @@ keyPersonnel:
       Key personnel costs are included within Activity #1, Program Administration. 
       These costs are HIT costs shared at the 90-10 rate. Quarterly adjustments for
       personnel costs under Activity #1 will apply to all key personnel costs.
+      [/ol]
   contact: 'Contact #{{number}}'
   labels:
     name: Name
