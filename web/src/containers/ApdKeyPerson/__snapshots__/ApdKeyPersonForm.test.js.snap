@@ -9,6 +9,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
      APD Point of Contact
   </h4>
   <TextField
+    autoFocus="true"
     label="Name"
     name="apd-state-profile-pocname1"
     onChange={[Function]}
@@ -124,6 +125,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
      APD Point of Contact
   </h4>
   <TextField
+    autoFocus="true"
     label="Name"
     name="apd-state-profile-pocname1"
     onChange={[Function]}
