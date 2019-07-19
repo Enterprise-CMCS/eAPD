@@ -4,6 +4,10 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
+if (!process.env.IDLE_LOGOUT_TIME_MINUTES) {
+  delete process.env.IDLE_LOGOUT_TIME_MINUTES;
+}
+
 const config = {
   mode: 'production',
   entry: {

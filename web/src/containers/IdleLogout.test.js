@@ -14,6 +14,7 @@ const { plain: IdleLogout, mapStateToProps } = require('./IdleLogout');
 describe('IdleLogout component', () => {
   beforeEach(() => {
     // Need to do this before each test in order to reset the mock state
+    jest.clearAllTimers();
     jest.useFakeTimers();
   });
 
@@ -22,7 +23,7 @@ describe('IdleLogout component', () => {
 
     // Need to be explicit about the timeout we expect to be uncalled because
     // the React lifecycle may also call setTimeout. (I think it's pretty much
-    // guaranteed to do so, but :shrugging_person_made_of_symbols:)
+    // guaran teed to do so, but :shrugging_person_made_of_symbols:)
     expect(setTimeout).not.toHaveBeenCalledWith(
       expect.any(Function),
       LOGOUT_TIMER
@@ -42,9 +43,11 @@ describe('IdleLogout component', () => {
   });
 
   test('clears the timer when it unmounts', () => {
+    setTimeout.mockReturnValue('timer id');
+
     const component = mount(<IdleLogout history={{}} loggedIn />);
     component.unmount();
-    expect(clearTimeout).toHaveBeenCalled();
+    expect(clearTimeout).toHaveBeenCalledWith('timer id');
   });
 
   test('navigates to /logout when the idle timer expires', () => {
@@ -53,7 +56,7 @@ describe('IdleLogout component', () => {
     };
 
     const component = mount(<IdleLogout history={history} loggedIn />);
-    jest.advanceTimersByTime(LOGOUT_TIMER);
+    jest.runOnlyPendingTimers();
     expect(history.replace).toHaveBeenCalledWith('/logout');
     component.unmount();
   });
@@ -67,10 +70,17 @@ describe('IdleLogout component', () => {
       events[eventName] = handler;
     };
 
-    const component = mount(<IdleLogout history={{}} loggedIn />);
+    const closeNotification = jest.fn();
 
-    afterAll(() => {
-      component.unmount();
+    beforeEach(() => {
+      global.Notification = jest.fn();
+      global.Notification.mockImplementation(() => ({
+        close: closeNotification
+      }));
+      global.Notification.requestPermission = jest.fn();
+    });
+    afterEach(() => {
+      delete global.Notification;
     });
 
     [
@@ -84,43 +94,112 @@ describe('IdleLogout component', () => {
       'scroll'
     ].forEach(eventName => {
       it(`resets on ${eventName} events`, () => {
+        // TODO: When Jest supports conditional mock returns, switch to that.
+        // Order-based mock returns is supercali-fragile-isticexpialidocious.
+        setTimeout
+          // React has a setTimeout call before our stuff, so we need to account
+          // for that in our mocked returns.
+          .mockReturnValueOnce(0)
+          .mockReturnValueOnce('idle timer id')
+          .mockReturnValueOnce('warning timer id');
+        setInterval.mockReturnValueOnce('warning interval id');
+        const component = mount(<IdleLogout history={{}} loggedIn />);
+
         events[eventName]();
-        expect(clearTimeout).toHaveBeenCalled();
+        expect(clearTimeout).toHaveBeenCalledWith('idle timer id');
+        expect(clearTimeout).toHaveBeenCalledWith('warning timer id');
         expect(setTimeout).toHaveBeenCalledWith(
           expect.any(Function),
           LOGOUT_TIMER
         );
+        expect(setTimeout).toHaveBeenCalledWith(
+          expect.any(Function),
+          LOGOUT_TIMER - 120000
+        );
+
+        // Trigger the warning, so we can make sure those are
+        // cleared as well.
+        jest.advanceTimersByTime(LOGOUT_TIMER - 120000);
+        events[eventName]();
+        expect(clearInterval).toHaveBeenCalledWith('warning interval id');
+        expect(closeNotification).toHaveBeenCalled();
+
+        component.unmount();
       });
     });
   });
 
-  test('runs the timers, resets on events, does not logout on initial timer, but does on extension', () => {
+  test('requests permission to show notifications', () => {
+    global.Notification = {
+      requestPermission: jest.fn()
+    };
+    const component = mount(<IdleLogout history={{}} loggedIn />);
+
+    expect(global.Notification.requestPermission).toHaveBeenCalled();
+
+    delete global.Notification;
+    component.unmount();
+  });
+
+  test('clicking the notification resets the timers', () => {
+    // TODO
+    // This needs to be filled in, but the setTimeout return mocks are too
+    // fragile and I can't figure out what order things are happening in.
+    // Since Jest currently doesn't support conditional returns, it's based
+    // entirely on call order, which is SO FRAGILE. So rather than bang my
+    // head against this any longer, I'm just commenting it out. But it still
+    // needs to be done eventually.
+  });
+
+  test('runs the timers', () => {
     const events = {};
     global.document.addEventListener = (eventName, handler) => {
       events[eventName] = handler;
     };
 
+    const notification = {
+      close: jest.fn()
+    };
+    global.Notification = jest.fn();
+    global.Notification.mockImplementation(() => notification);
+    global.Notification.requestPermission = jest.fn();
+
     const history = {
       replace: jest.fn()
     };
 
+    global.document.title = 'Original title';
     const component = mount(<IdleLogout history={history} loggedIn />);
 
-    // Not called yet
-    jest.advanceTimersByTime(LOGOUT_TIMER - 1);
-    expect(history.replace).not.toHaveBeenCalled();
+    // Advance to 2 minutes before idle timeout
+    jest.advanceTimersByTime(LOGOUT_TIMER - 120000);
 
-    // Timers should reset; advancing the timer by the remaining time should
-    // not trigger logout. (Advance by a little extra, just to be safe.)
-    events.click();
-    jest.advanceTimersByTime(10);
+    // Haven't logged out yet, but have setup the warnings
     expect(history.replace).not.toHaveBeenCalled();
+    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 300);
+    expect(notification.onclick).toEqual(expect.any(Function));
 
-    // New timers should trigger when we advance the timer by the timeout again
-    jest.advanceTimersByTime(LOGOUT_TIMER);
-    expect(history.replace).toHaveBeenCalled();
+    expect(global.Notification).toHaveBeenCalledWith(expect.any(String), {
+      body: expect.any(String),
+      requireInteraction: true
+    });
+
+    // Make sure the title flashes back and forth
+    for (let i = 0; i < 10; i += 1) {
+      jest.advanceTimersByTime(300);
+      expect(global.document.title).toEqual('🔴 Original title');
+
+      // And flashes back
+      jest.advanceTimersByTime(300);
+      expect(global.document.title).toEqual('Original title');
+    }
+
+    // Now finish up the idle timeout and make sure we log out.
+    jest.advanceTimersByTime(120000);
+    expect(history.replace).toHaveBeenCalledWith('/logout');
 
     component.unmount();
+    delete global.Notification;
   });
 
   test('maps state to props', () => {
