@@ -18,7 +18,7 @@ exports[`previous activities component renders correctly if data is not loaded 1
       resource="previousActivities.outline"
     >
       <h4
-        className="ds-h4"
+        className="ds-c-label"
       >
         Previous Activities Summary
       </h4>

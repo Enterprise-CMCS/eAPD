@@ -26,7 +26,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
     </p>
     <TextField
       label="Other Funding Amount"
-      labelClassName="ds-h4"
+      labelClassName="ds-h5"
       mask="currency"
       name="cost-allocate-other-1066"
       onChange={[Function]}
@@ -126,7 +126,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
     </p>
     <TextField
       label="Other Funding Amount"
-      labelClassName="ds-h4"
+      labelClassName="ds-h5"
       mask="currency"
       name="cost-allocate-other-1067"
       onChange={[Function]}
