@@ -61,7 +61,7 @@ const EntryDetails = ({ activity, aKey, num }) => {
         collapsed ? 'collapsed' : 'expanded'
       } activity--body__${num === 1 ? 'first' : 'notfirst'}`}
     >
-      <Review heading={title} headingLevel={3} editContent={editContent} />
+      <Review heading={title} headingLevel={4} editContent={editContent} />
       <div className={collapsed ? 'visibility--print' : ''}>
         <Overview aKey={aKey} />
         <Goals aKey={aKey} />

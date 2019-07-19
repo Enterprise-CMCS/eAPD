@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { getIsAdmin } from '../reducers/user';
+import { getIsAdmin } from '../reducers/user.selector';
 import AdminDashboard from './admin/AdminDashboard';
 import StateDashboard from './StateDashboard';
 

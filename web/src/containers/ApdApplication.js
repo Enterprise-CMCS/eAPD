@@ -22,7 +22,7 @@ import {
   getIsAnAPDSelected
 } from '../reducers/apd';
 import { getIsDirty } from '../reducers/dirty';
-import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user';
+import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
 
 const unsavedPrompt =
   'You have unsaved changes to your APD. Do you want to leave this page without saving?';

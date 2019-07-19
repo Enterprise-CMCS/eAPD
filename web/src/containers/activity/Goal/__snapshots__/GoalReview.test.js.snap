@@ -4,7 +4,7 @@ exports[`the GoalReview component renders correctly 1`] = `
 <StandardReview
   editHref={null}
   heading="2. goal description"
-  headingLevel={4}
+  headingLevel={6}
   onDeleteClick={[Function]}
   onEditClick={[Function]}
 >
