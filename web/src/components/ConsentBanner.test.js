@@ -18,7 +18,7 @@ describe('Consent banner component', () => {
       expect(component).toMatchSnapshot();
     });
 
-    test('toggles consent details on and off', () => {
+    test('toggles consent details on', () => {
       const component = shallow(<ConsentBanner onAgree={onAgree} />);
       expect(component).toMatchSnapshot();
 
@@ -27,10 +27,6 @@ describe('Consent banner component', () => {
         .find('Button')
         .find({ variation: 'transparent' })
         .simulate('click');
-      expect(component).toMatchSnapshot();
-
-      // toggle them off
-      component.find('Button').simulate('click');
       expect(component).toMatchSnapshot();
     });
 
