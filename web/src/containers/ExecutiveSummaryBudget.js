@@ -36,7 +36,7 @@ const ExecutiveSummaryBudget = ({ budget }) => {
   return (
     <Fragment>
       <table className="budget-table">
-        <caption className="ds-h3">
+        <caption className="ds-h4">
           HIT + HIE <span className="ds-u-visibility--screen-reader">executive summary</span>
         </caption>
         <thead>
@@ -123,7 +123,7 @@ const ExecutiveSummaryBudget = ({ budget }) => {
       </table>
 
       <table className="budget-table">
-        <caption className="ds-h3">
+        <caption className="ds-h4">
           MMIS <span className="ds-u-visibility--screen-reader">executive summary</span>
         </caption>
         <thead>

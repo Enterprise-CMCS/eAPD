@@ -4,10 +4,10 @@ exports[`App component renders correctly 1`] = `
 <Wrapper
   isDev={true}
 >
+  <Broadcast />
   <withRouter(Connect(IdleLogout)) />
   <Connect(AuthChecker)>
     <Routes />
   </Connect(AuthChecker)>
-  <Connect(Notification) />
 </Wrapper>
 `;

@@ -500,7 +500,10 @@ jobs:
             apt-get -qq update
             apt-get -qq install jq -y
             pip install --quiet awscli
-            ./aws.cleanup.sh
+            ./aws.cleanup.sh \
+              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
+              --GH_BOT_PASSWORD "$GH_BOT_PASSWORD" \
+              --GH_BOT_USER "$GH_BOT_USER"
 
   # Frontend production deployment.
   frontend deploy:
@@ -537,10 +540,13 @@ jobs:
               pip install --quiet awscli
               PRNUM=$(basename $CI_PULL_REQUESTS)
               URL=$(./aws.sh \
-                --API_PBKDF2_ITERATIONS "$PRODUCTION_API_PBKDF2_ITERATIONS" \
-                --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
-                --PR_NUM "$PRNUM" \
-                --BRANCH "$CIRCLE_BRANCH"
+                --API_PBKDF2_ITERATIONS "$PREVIEW_API_PBKDF2_ITERATIONS" \
+                --AWS_AMI "$PREVIEW_AWS_AMI" \
+                --AWS_REGION "$PREVIEW_AWS_REGION" \
+                --AWS_SECURITY_GROUP "$PREVIEW_AWS_SECURITY_GROUP" \
+                --AWS_SUBNET "$PREVIEW_AWS_SUBNET" \
+                --BRANCH "$CIRCLE_BRANCH" \
+                --PR_NUM "$PRNUM"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
