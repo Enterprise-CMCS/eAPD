@@ -22,8 +22,8 @@ const CostAllocate = props => {
         <Instruction
           source="activities.costAllocate.methodology.instruction"
           headingDisplay={{
-            level: 'h5',
-            className: 'ds-h4'
+            level: 'h6',
+            className: 'ds-h5'
           }}
         />
         <RichText
@@ -37,8 +37,8 @@ const CostAllocate = props => {
         <Instruction
           source="activities.costAllocate.otherFunding.instruction"
           headingDisplay={{
-            level: 'h5',
-            className: 'ds-h4'
+            level: 'h6',
+            className: 'ds-h5'
           }}
           />
         <RichText

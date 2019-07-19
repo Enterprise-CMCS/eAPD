@@ -2,12 +2,12 @@
 
 exports[`the ApdKeyPersonForm component renders correctly 1`] = `
 <Fragment>
-  <h3
-    className="ds-h3"
+  <h4
+    className="ds-h4"
   >
     Additional
      APD Point of Contact
-  </h3>
+  </h4>
   <TextField
     label="Name"
     name="apd-state-profile-pocname1"
@@ -117,12 +117,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
 
 exports[`the ApdKeyPersonForm component renders correctly if the person does not have costs 1`] = `
 <Fragment>
-  <h3
-    className="ds-h3"
+  <h4
+    className="ds-h4"
   >
     Additional
      APD Point of Contact
-  </h3>
+  </h4>
   <TextField
     label="Name"
     name="apd-state-profile-pocname1"

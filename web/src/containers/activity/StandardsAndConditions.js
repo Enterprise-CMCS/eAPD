@@ -29,8 +29,8 @@ class StandardsAndConditions extends Component {
             <Instruction
               source={`activities.standardsAndConditions.${std.id}.instruction`}
               headingDisplay={{
-                level: 'h4',
-                className: 'ds-h4'
+                level: 'h6',
+                className: 'ds-h5'
               }}
             />
             

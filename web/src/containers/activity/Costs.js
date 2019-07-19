@@ -8,10 +8,10 @@ import { t } from '../../i18n';
 
 const Costs = ({ aKey }) => (
   <Subsection resource="activities.costs" nested>
-    <h5 className="ds-h4">{t('activities.costs.subtitles.personnel')}</h5>
+    <h6 className="ds-h4">{t('activities.costs.subtitles.personnel')}</h6>
     <StatePersonnel aKey={aKey} />
 
-    <h5 className="ds-h4">{t('activities.costs.subtitles.nonPersonnel')}</h5>
+    <h6 className="ds-h4">{t('activities.costs.subtitles.nonPersonnel')}</h6>
     <Expenses aKey={aKey} />
   </Subsection>
 );

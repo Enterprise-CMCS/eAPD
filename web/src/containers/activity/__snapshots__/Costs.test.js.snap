@@ -6,19 +6,19 @@ exports[`activity costs wrapper (around personnel and non-personnel)  renders pr
   nested={true}
   resource="activities.costs"
 >
-  <h5
+  <h6
     className="ds-h4"
   >
     Personnel
-  </h5>
+  </h6>
   <Connect(StatePersonnel)
     aKey="activity key"
   />
-  <h5
+  <h6
     className="ds-h4"
   >
     Non-Personnel
-  </h5>
+  </h6>
   <Connect(NonPersonnelCosts)
     aKey="activity key"
   />

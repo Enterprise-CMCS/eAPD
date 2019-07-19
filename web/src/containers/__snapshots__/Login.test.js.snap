@@ -10,14 +10,12 @@ exports[`login component renders consent banner initially 1`] = `
 
 exports[`login component renders correctly if logged in 1`] = `
 <Redirect
-  push={false}
   to="origin"
 />
 `;
 
 exports[`login component renders correctly if logged in and previous location is logout 1`] = `
 <Redirect
-  push={false}
   to="/logout"
 />
 `;
@@ -39,6 +37,7 @@ exports[`login component renders correctly if logged in previously but not logge
         </a>
       </p>
     }
+    legend="Log in"
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -60,6 +59,7 @@ exports[`login component renders correctly if logged in previously but not logge
       value=""
     />
     <Password
+      ariaLabel="Enter the password for this account."
       compareTo={Array []}
       onChange={[Function]}
       showMeter={false}
@@ -72,7 +72,6 @@ exports[`login component renders correctly if logged in previously but not logge
 
 exports[`login component renders correctly if logged in, but no previous location 1`] = `
 <Redirect
-  push={false}
   to={
     Object {
       "pathname": "/",
@@ -98,6 +97,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
         </a>
       </p>
     }
+    legend="Log in"
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -119,6 +119,7 @@ exports[`login component renders correctly if not logged in and fetching data 1`
       value=""
     />
     <Password
+      ariaLabel="Enter the password for this account."
       compareTo={Array []}
       onChange={[Function]}
       showMeter={false}
@@ -146,6 +147,7 @@ exports[`login component renders correctly if not logged in and there is an erro
         </a>
       </p>
     }
+    legend="Log in"
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -167,6 +169,7 @@ exports[`login component renders correctly if not logged in and there is an erro
       value=""
     />
     <Password
+      ariaLabel="Enter the password for this account."
       compareTo={Array []}
       onChange={[Function]}
       showMeter={false}
@@ -194,6 +197,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    legend="Log in"
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -215,6 +219,7 @@ exports[`login component renders correctly if not logged in, and never logged in
       value=""
     />
     <Password
+      ariaLabel="Enter the password for this account."
       compareTo={Array []}
       onChange={[Function]}
       showMeter={false}
@@ -242,6 +247,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    legend="Log in"
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -263,6 +269,7 @@ exports[`login component renders correctly if not logged in, and never logged in
       value="bob"
     />
     <Password
+      ariaLabel="Enter the password for this account."
       compareTo={Array []}
       onChange={[Function]}
       showMeter={false}
@@ -290,6 +297,7 @@ exports[`login component renders correctly if not logged in, and never logged in
         </a>
       </p>
     }
+    legend="Log in"
     onSave={[Function]}
     primaryButtonText={
       Array [
@@ -311,6 +319,7 @@ exports[`login component renders correctly if not logged in, and never logged in
       value="bob"
     />
     <Password
+      ariaLabel="Enter the password for this account."
       compareTo={Array []}
       onChange={[Function]}
       showMeter={false}

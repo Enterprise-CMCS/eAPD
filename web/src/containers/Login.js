@@ -65,6 +65,7 @@ class Login extends Component {
       <Fragment>
         <CardForm
           title="Log in"
+          legend="Log in"
           cancelable={false}
           canSubmit={username.length && password.length}
           error={errorMessage}
@@ -91,6 +92,7 @@ class Login extends Component {
           />
           <Password
             title="Password"
+            ariaLabel="Enter the password for this account."
             value={password}
             onChange={this.handleChange}
           />
