@@ -10,14 +10,12 @@ exports[`login component renders consent banner initially 1`] = `
 
 exports[`login component renders correctly if logged in 1`] = `
 <Redirect
-  push={false}
   to="origin"
 />
 `;
 
 exports[`login component renders correctly if logged in and previous location is logout 1`] = `
 <Redirect
-  push={false}
   to="/logout"
 />
 `;
@@ -74,7 +72,6 @@ exports[`login component renders correctly if logged in previously but not logge
 
 exports[`login component renders correctly if logged in, but no previous location 1`] = `
 <Redirect
-  push={false}
   to={
     Object {
       "pathname": "/",

@@ -1,6 +1,6 @@
 import { push } from 'connected-react-router';
 
-import { getIsAdmin } from '../reducers/user';
+import { getIsAdmin } from '../reducers/user.selector';
 import axios from '../util/api';
 import { fromAPI, toAPI } from '../util/serialization/apd';
 
