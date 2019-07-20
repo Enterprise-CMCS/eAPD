@@ -17,6 +17,14 @@ Anticipated release: TBD
 - Remove unused code
 - Updated 3rd-party dependencies
 
+# v1.0.1
+
+Released: July 19, 2019
+
+#### 🐛 Bugs fixed
+
+- Added lightweight, simplistic date validation to indicate when years, months, or exact dates are invalid to help understand why a save may have failed. Placeholder until more thorough data validation is implemented.
+
 # v1.0.0
 
 Released: July 9, 2019
