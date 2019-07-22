@@ -43,6 +43,7 @@ const PersonForm = ({
         {primary ? 'Primary' : 'Additional'} APD Point of Contact
       </h4>
       <TextField
+        autoFocus="true"
         name={`apd-state-profile-pocname${index}`}
         label={t(`${tRoot}.labels.name`)}
         value={name}
