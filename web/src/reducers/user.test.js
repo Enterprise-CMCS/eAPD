@@ -9,9 +9,9 @@ import {
   ADMIN_EDIT_ME_SUCCESS
 } from '../actions/admin';
 
-import user, { getIsAdmin } from './user';
+import user from './user';
 
-describe('user reducer and selectors', () => {
+describe('user state reducer', () => {
   describe('user reducer', () => {
     const initialState = {
       error: false,
@@ -66,24 +66,6 @@ describe('user reducer and selectors', () => {
       expect(user({ not: 'initial state' }, { type: LOGOUT_SUCCESS })).toEqual(
         initialState
       );
-    });
-  });
-
-  describe('getIsAdmin selector', () => {
-    it('returns true if the user is an admin', () => {
-      expect(
-        getIsAdmin({
-          user: { data: { role: 'admin' } }
-        })
-      ).toEqual(true);
-    });
-
-    it('returns false if the user is not an admin', () => {
-      expect(
-        getIsAdmin({
-          user: { data: { role: 'not an admin' } }
-        })
-      ).toEqual(false);
     });
   });
 });
