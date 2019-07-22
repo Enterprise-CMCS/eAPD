@@ -62,6 +62,7 @@ const ContractorResourceForm = ({
   return (
     <Fragment>
       <TextField
+        autoFocus="true"
         label="Contractor Name"
         name="contractor-name"
         value={name}
