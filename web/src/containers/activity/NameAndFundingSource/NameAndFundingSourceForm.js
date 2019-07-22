@@ -17,6 +17,7 @@ const NameAndFundingSourceForm = ({
   return (
     <Fragment>
       <TextField
+        autoFocus="true"
         label="Activity name"
         name="activity-name"
         value={name}
