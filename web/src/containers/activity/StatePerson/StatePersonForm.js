@@ -36,6 +36,7 @@ const StatePersonForm = ({
     <Fragment>
       <h6 className="ds-h4">Personnel {index + 1}:</h6>
       <TextField
+        autoFocus="true"
         label="Personnel title"
         name="title"
         value={title}
