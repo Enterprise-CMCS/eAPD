@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import DollarField from '../components/DollarField';
 import Dollars from '../components/Dollars';
-import { DollarInput } from '../components/Inputs';
 import { updateApd } from '../actions/apd';
 import { TABLE_HEADERS } from '../constants';
 
