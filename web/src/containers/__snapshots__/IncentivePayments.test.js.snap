@@ -68,57 +68,53 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehAmt payments for 1, quarter 1"
+            labelClassName="sr-only"
             name="ehAmt-payments-1-q1"
             onChange={[Function]}
-            type="text"
             value={2}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehAmt payments for 1, quarter 2"
+            labelClassName="sr-only"
             name="ehAmt-payments-1-q2"
             onChange={[Function]}
-            type="text"
             value={3}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehAmt payments for 1, quarter 3"
+            labelClassName="sr-only"
             name="ehAmt-payments-1-q3"
             onChange={[Function]}
-            type="text"
             value={4}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehAmt payments for 1, quarter 4"
+            labelClassName="sr-only"
             name="ehAmt-payments-1-q4"
             onChange={[Function]}
-            type="text"
             value=""
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
@@ -142,57 +138,57 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehCt payments for 1, quarter 1"
+            labelClassName="sr-only"
             name="ehCt-payments-1-q1"
             onChange={[Function]}
             type="text"
             value={10}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehCt payments for 1, quarter 2"
+            labelClassName="sr-only"
             name="ehCt-payments-1-q2"
             onChange={[Function]}
             type="text"
             value={11}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehCt payments for 1, quarter 3"
+            labelClassName="sr-only"
             name="ehCt-payments-1-q3"
             onChange={[Function]}
             type="text"
             value={12}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehCt payments for 1, quarter 4"
+            labelClassName="sr-only"
             name="ehCt-payments-1-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
@@ -212,57 +208,53 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epAmt payments for 1, quarter 1"
+            labelClassName="sr-only"
             name="epAmt-payments-1-q1"
             onChange={[Function]}
-            type="text"
             value={18}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epAmt payments for 1, quarter 2"
+            labelClassName="sr-only"
             name="epAmt-payments-1-q2"
             onChange={[Function]}
-            type="text"
             value={19}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epAmt payments for 1, quarter 3"
+            labelClassName="sr-only"
             name="epAmt-payments-1-q3"
             onChange={[Function]}
-            type="text"
             value={20}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epAmt payments for 1, quarter 4"
+            labelClassName="sr-only"
             name="epAmt-payments-1-q4"
             onChange={[Function]}
-            type="text"
             value=""
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
@@ -286,57 +278,57 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epCt payments for 1, quarter 1"
+            labelClassName="sr-only"
             name="epCt-payments-1-q1"
             onChange={[Function]}
             type="text"
             value={26}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epCt payments for 1, quarter 2"
+            labelClassName="sr-only"
             name="epCt-payments-1-q2"
             onChange={[Function]}
             type="text"
             value={27}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epCt payments for 1, quarter 3"
+            labelClassName="sr-only"
             name="epCt-payments-1-q3"
             onChange={[Function]}
             type="text"
             value={28}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epCt payments for 1, quarter 4"
+            labelClassName="sr-only"
             name="epCt-payments-1-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
@@ -413,57 +405,53 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehAmt payments for 2, quarter 1"
+            labelClassName="sr-only"
             name="ehAmt-payments-2-q1"
             onChange={[Function]}
-            type="text"
             value={6}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehAmt payments for 2, quarter 2"
+            labelClassName="sr-only"
             name="ehAmt-payments-2-q2"
             onChange={[Function]}
-            type="text"
             value={7}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehAmt payments for 2, quarter 3"
+            labelClassName="sr-only"
             name="ehAmt-payments-2-q3"
             onChange={[Function]}
-            type="text"
             value={8}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehAmt payments for 2, quarter 4"
+            labelClassName="sr-only"
             name="ehAmt-payments-2-q4"
             onChange={[Function]}
-            type="text"
             value=""
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
@@ -487,57 +475,57 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehCt payments for 2, quarter 1"
+            labelClassName="sr-only"
             name="ehCt-payments-2-q1"
             onChange={[Function]}
             type="text"
             value={14}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehCt payments for 2, quarter 2"
+            labelClassName="sr-only"
             name="ehCt-payments-2-q2"
             onChange={[Function]}
             type="text"
             value={15}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehCt payments for 2, quarter 3"
+            labelClassName="sr-only"
             name="ehCt-payments-2-q3"
             onChange={[Function]}
             type="text"
             value={16}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="ehCt payments for 2, quarter 4"
+            labelClassName="sr-only"
             name="ehCt-payments-2-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
@@ -557,57 +545,53 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epAmt payments for 2, quarter 1"
+            labelClassName="sr-only"
             name="epAmt-payments-2-q1"
             onChange={[Function]}
-            type="text"
             value={22}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epAmt payments for 2, quarter 2"
+            labelClassName="sr-only"
             name="epAmt-payments-2-q2"
             onChange={[Function]}
-            type="text"
             value={23}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epAmt payments for 2, quarter 3"
+            labelClassName="sr-only"
             name="epAmt-payments-2-q3"
             onChange={[Function]}
-            type="text"
             value={24}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <DollarField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epAmt payments for 2, quarter 4"
+            labelClassName="sr-only"
             name="epAmt-payments-2-q4"
             onChange={[Function]}
-            type="text"
             value=""
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
@@ -631,57 +615,57 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epCt payments for 2, quarter 1"
+            labelClassName="sr-only"
             name="epCt-payments-2-q1"
             onChange={[Function]}
             type="text"
             value={30}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="2"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epCt payments for 2, quarter 2"
+            labelClassName="sr-only"
             name="epCt-payments-2-q2"
             onChange={[Function]}
             type="text"
             value={31}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="3"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epCt payments for 2, quarter 3"
+            labelClassName="sr-only"
             name="epCt-payments-2-q3"
             onChange={[Function]}
             type="text"
             value={32}
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
           key="4"
         >
-          <InputHolder
-            className="budget-table--input__number"
-            hideLabel={true}
+          <TextField
+            className="budget-table--input-holder"
+            fieldClassName="budget-table--input__number"
             label="epCt payments for 2, quarter 4"
+            labelClassName="sr-only"
             name="epCt-payments-2-q4"
             onChange={[Function]}
             type="text"
             value=""
-            wrapperClass="budget-table--input-holder"
           />
         </td>
         <td
