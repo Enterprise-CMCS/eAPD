@@ -24,35 +24,9 @@ const uploadImageCallBack = file =>
   });
 
 export const EDITOR_CONFIG = {
-  options: [
-    'inline',
-    'blockType',
-    'fontSize',
-    'emoji',
-    'image',
-    'list',
-    'link'
-  ],
+  options: ['inline', 'blockType', 'fontSize', 'image', 'list', 'link'],
   inline: {
     options: ['bold', 'italic', 'underline']
-  },
-  emoji: {
-    emojis: [
-      '😀',
-      '😉',
-      '😎',
-      '👈',
-      '👉',
-      '👉',
-      '👆',
-      '👌',
-      '👍',
-      '👎',
-      '💰',
-      '📅',
-      '✅',
-      '❎'
-    ]
   },
   image: {
     className: undefined,
