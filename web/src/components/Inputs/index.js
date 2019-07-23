@@ -2,7 +2,6 @@ import React from 'react';
 
 import InputWrapper from './InputWrapper';
 import { DollarInput, PercentInput } from './NumberInput';
-import RichText from './RichText';
 
 const Input = props => <input className="m0 input" {...props} />;
 
@@ -19,6 +18,5 @@ export {
   InputHolder as Input,
   TextareaHolder as Textarea,
   DollarInputHolder as DollarInput,
-  PercentInputHolder as PercentInput,
-  RichText
+  PercentInputHolder as PercentInput
 };
