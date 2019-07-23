@@ -1,14 +1,9 @@
 @import '@cmsgov/design-system-support/src/settings/index';
 
 .save-button--container {
-  max-width: inherit;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  margin: auto;
+  bottom: $spacer-3;
+  position: sticky;
   text-align: right;
-  margin-bottom: $spacer-3;
-  padding-right: $spacer-4 * 2; //inheriting the max-width means we inherit the width of .site-body including padding, which is 32px on each side. Setting the right padding here to 64px makes this the right size.
   z-index: 10;
 }
 
