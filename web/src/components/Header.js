@@ -1,5 +1,3 @@
-import Button from '@cmsgov/design-system-core/dist/components/Button/Button';
-
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -32,13 +30,6 @@ class Header extends Component {
     this.setState({ ariaExpanded: false });
     // remove the global click handler when the dropdown is collapsed
     document.removeEventListener('click', this.handleOutsideClick);
-  };
-
-  handleLogout = e => {
-    e.preventDefault();
-    const { pushRoute } = this.props;
-    this.toggleDropdown();
-    pushRoute('/logout');
   };
 
   toggleDropdown = () => {
@@ -99,15 +90,14 @@ class Header extends Component {
                         </Link>
                       </li>
                       <li>
-                        <Button
-                          size="small"
+                        <Link
+                          to="/logout"
+                          onClick={this.toggleDropdown}
                           className="nav--dropdown__action"
-                          variation="transparent"
-                          onClick={this.handleLogout}
                         >
                           <Icon icon={faSignOutAlt} style={{ width: '14px' }} />
                           {t('logout')}
-                        </Button>
+                        </Link>
                       </li>
                     </ul>
                   </li>
@@ -133,7 +123,6 @@ Header.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
   isAdmin: PropTypes.bool.isRequired,
-  pushRoute: PropTypes.func.isRequired,
   ariaExpanded: PropTypes.bool.isRequired,
   showSiteTitle: PropTypes.bool.isRequired
 };
