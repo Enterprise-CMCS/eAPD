@@ -1,6 +1,282 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DateField banner component passes other props along to design system component 1`] = `
+exports[`DateField wrapper component handles invalid dates day and year are not set 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={true}
+  dayLabel="Day"
+  dayName="day"
+  dayValue=""
+  errorMessage="Day is required. Year must be 4 digits."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={false}
+  monthLabel="Month"
+  monthName="month"
+  monthValue={3}
+  onChange={[MockFunction]}
+  yearInvalid={true}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue=""
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates day is a leap day but not a leap year 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={false}
+  dayLabel="Day"
+  dayName="day"
+  dayValue={29}
+  errorMessage="Invalid date - is the day number too high for the provided month and year?"
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={false}
+  monthLabel="Month"
+  monthName="month"
+  monthValue={2}
+  onChange={[MockFunction]}
+  yearInvalid={false}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue={2019}
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates day is invalid for month and year 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={true}
+  dayLabel="Day"
+  dayName="day"
+  dayValue={73}
+  errorMessage="Day must be less than 31."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={false}
+  monthLabel="Month"
+  monthName="month"
+  monthValue={4}
+  onChange={[MockFunction]}
+  yearInvalid={false}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue={2019}
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates day is not set 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={true}
+  dayLabel="Day"
+  dayName="day"
+  dayValue=""
+  errorMessage="Day is required."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={false}
+  monthLabel="Month"
+  monthName="month"
+  monthValue={3}
+  onChange={[MockFunction]}
+  yearInvalid={false}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue={2000}
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates empty date 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={true}
+  dayLabel="Day"
+  dayName="day"
+  dayValue=""
+  errorMessage="Month is required. Day is required. Year must be 4 digits."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={true}
+  monthLabel="Month"
+  monthName="month"
+  monthValue=""
+  onChange={[MockFunction]}
+  yearInvalid={true}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue=""
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates month and day are not set 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={true}
+  dayLabel="Day"
+  dayName="day"
+  dayValue=""
+  errorMessage="Month is required. Day is required."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={true}
+  monthLabel="Month"
+  monthName="month"
+  monthValue=""
+  onChange={[MockFunction]}
+  yearInvalid={false}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue={2000}
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates month and year are not set 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={false}
+  dayLabel="Day"
+  dayName="day"
+  dayValue={3}
+  errorMessage="Month is required. Year must be 4 digits."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={true}
+  monthLabel="Month"
+  monthName="month"
+  monthValue=""
+  onChange={[MockFunction]}
+  yearInvalid={true}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue=""
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates month is not set 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={false}
+  dayLabel="Day"
+  dayName="day"
+  dayValue={4}
+  errorMessage="Month is required."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={true}
+  monthLabel="Month"
+  monthName="month"
+  monthValue=""
+  onChange={[MockFunction]}
+  yearInvalid={false}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue={2000}
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates month is out of range 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={false}
+  dayLabel="Day"
+  dayName="day"
+  dayValue={4}
+  errorMessage="Month must be between 1 and 12."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={true}
+  monthLabel="Month"
+  monthName="month"
+  monthValue={13}
+  onChange={[MockFunction]}
+  yearInvalid={false}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue={2000}
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates year is 3 digits 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={false}
+  dayLabel="Day"
+  dayName="day"
+  dayValue={3}
+  errorMessage="Year must be 4 digits."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={false}
+  monthLabel="Month"
+  monthName="month"
+  monthValue={3}
+  onChange={[MockFunction]}
+  yearInvalid={true}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue={200}
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates year is 5 digits 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={false}
+  dayLabel="Day"
+  dayName="day"
+  dayValue={3}
+  errorMessage="Year must be 4 digits."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={false}
+  monthLabel="Month"
+  monthName="month"
+  monthValue={3}
+  onChange={[MockFunction]}
+  yearInvalid={true}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue={20000}
+/>
+`;
+
+exports[`DateField wrapper component handles invalid dates year is not set 1`] = `
+<DateField
+  dateFormatter={[Function]}
+  dayInvalid={false}
+  dayLabel="Day"
+  dayName="day"
+  dayValue={3}
+  errorMessage="Year must be 4 digits."
+  hint="For example: 4 / 28 / 1986"
+  label="Date"
+  monthInvalid={false}
+  monthLabel="Month"
+  monthName="month"
+  monthValue={3}
+  onChange={[MockFunction]}
+  yearInvalid={true}
+  yearLabel="Year"
+  yearMin={1900}
+  yearName="year"
+  yearValue=""
+/>
+`;
+
+exports[`DateField wrapper component passes other props along to design system component 1`] = `
 <DateField
   dateFormatter={[Function]}
   dayLabel="THE DAY"
@@ -19,7 +295,7 @@ exports[`DateField banner component passes other props along to design system co
 />
 `;
 
-exports[`DateField banner component renders properly with defaults 1`] = `
+exports[`DateField wrapper component renders properly with defaults 1`] = `
 <DateField
   dateFormatter={[Function]}
   dayLabel="Day"
