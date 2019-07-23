@@ -13,6 +13,7 @@ Anticipated release: TBD
 - Fixed semantic heading levels ([#1695])
 - Fixed a keyboard focus order problem when adding new items to a list ([#1712])
 - Fixed a keyboard focus order problem with the system use banner ([#1715])
+- Make the navigation sidebar scrollable. ([#1475])
 
 #### ⚙️ Behind the scenes
 
@@ -33,6 +34,7 @@ Released: July 9, 2019
 
 Pilot release to select state partners
 
+[#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
 [#1647]: https://github.com/18F/cms-hitech-apd/pull/1647
 [#1651]: https://github.com/18F/cms-hitech-apd/pull/1651
 [#1688]: https://github.com/18F/cms-hitech-apd/pull/1688
