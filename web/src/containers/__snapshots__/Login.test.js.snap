@@ -27,7 +27,9 @@ exports[`login component renders correctly if logged in previously but not logge
     cancelable={false}
     error={false}
     footer={
-      <p>
+      <p
+        className="ds-u-padding-top--2"
+      >
         Forgot your password? Contact
          
         <a
@@ -87,7 +89,9 @@ exports[`login component renders correctly if not logged in and fetching data 1`
     cancelable={false}
     error={false}
     footer={
-      <p>
+      <p
+        className="ds-u-padding-top--2"
+      >
         Forgot your password? Contact
          
         <a
@@ -137,7 +141,9 @@ exports[`login component renders correctly if not logged in and there is an erro
     cancelable={false}
     error={false}
     footer={
-      <p>
+      <p
+        className="ds-u-padding-top--2"
+      >
         Forgot your password? Contact
          
         <a
@@ -187,7 +193,9 @@ exports[`login component renders correctly if not logged in, and never logged in
     cancelable={false}
     error={false}
     footer={
-      <p>
+      <p
+        className="ds-u-padding-top--2"
+      >
         Forgot your password? Contact
          
         <a
@@ -237,7 +245,9 @@ exports[`login component renders correctly if not logged in, and never logged in
     cancelable={false}
     error={false}
     footer={
-      <p>
+      <p
+        className="ds-u-padding-top--2"
+      >
         Forgot your password? Contact
          
         <a
@@ -287,7 +297,9 @@ exports[`login component renders correctly if not logged in, and never logged in
     cancelable={false}
     error={false}
     footer={
-      <p>
+      <p
+        className="ds-u-padding-top--2"
+      >
         Forgot your password? Contact
          
         <a
