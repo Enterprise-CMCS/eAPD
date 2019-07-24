@@ -3,9 +3,7 @@
 exports[`apd state profile, Medicaid office component renders correctly 1`] = `
 <Fragment>
   <fieldset>
-    <legend
-      className="ds-u-padding-bottom--1"
-    >
+    <legend>
       Medicaid director
     </legend>
     <TextField
@@ -31,9 +29,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
     />
   </fieldset>
   <fieldset>
-    <legend
-      className="ds-u-padding-bottom--1"
-    >
+    <legend>
       Medicaid office
     </legend>
     <TextField
@@ -430,9 +426,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
 exports[`apd state profile, Medicaid office component renders correctly 2`] = `
 <Fragment>
   <fieldset>
-    <legend
-      className="ds-u-padding-bottom--1"
-    >
+    <legend>
       Medicaid director
     </legend>
     <TextField
@@ -458,9 +452,7 @@ exports[`apd state profile, Medicaid office component renders correctly 2`] = `
     />
   </fieldset>
   <fieldset>
-    <legend
-      className="ds-u-padding-bottom--1"
-    >
+    <legend>
       Medicaid office
     </legend>
     <TextField

@@ -24,9 +24,7 @@ class ApdStateProfile extends Component {
     return (
       <Fragment>
         <fieldset>
-          <legend className="ds-u-padding-bottom--1">
-            {t(`${dirTRoot}.title`)}
-          </legend>
+          <legend>{t(`${dirTRoot}.title`)}</legend>
           <TextField
             name="apd-state-profile-mdname"
             label={t(`${dirTRoot}.labels.name`)}
@@ -48,9 +46,7 @@ class ApdStateProfile extends Component {
         </fieldset>
 
         <fieldset>
-          <legend className="ds-u-padding-bottom--1">
-            {t(`${offTRoot}.title`)}
-          </legend>
+          <legend>{t(`${offTRoot}.title`)}</legend>
           <TextField
             name="apd-state-profile-addr1"
             label={t(`${offTRoot}.labels.address1`)}
