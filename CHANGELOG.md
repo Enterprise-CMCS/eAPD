@@ -13,6 +13,7 @@ Anticipated release: TBD
 - Fixed semantic heading levels ([#1695])
 - Fixed a keyboard focus order problem when adding new items to a list ([#1712])
 - Fixed a keyboard focus order problem with the system use banner ([#1715])
+- For users in American Samoa, Guam, Northern Mariana Islands, or U.S. Virgin Islands, do not attempt to display a territory outline at the top of the sidebar because we don't have those outlines ([#1423]; see [#1730] for more information)
 
 #### ⚙️ Behind the scenes
 
@@ -33,6 +34,7 @@ Released: July 9, 2019
 
 Pilot release to select state partners
 
+[#1423]: https://github.com/18F/cms-hitech-apd/issues/1423
 [#1647]: https://github.com/18F/cms-hitech-apd/pull/1647
 [#1651]: https://github.com/18F/cms-hitech-apd/pull/1651
 [#1688]: https://github.com/18F/cms-hitech-apd/pull/1688
@@ -41,3 +43,4 @@ Pilot release to select state partners
 [#1712]: https://github.com/18F/cms-hitech-apd/pull/1712
 [#1713]: https://github.com/18F/cms-hitech-apd/pull/1713
 [#1715]: https://github.com/18F/cms-hitech-apd/pull/1715
+[#1730]: https://github.com/18F/cms-hitech-apd/pull/1730
