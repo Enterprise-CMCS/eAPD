@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity } from '../../actions/activities';
+import { ariaAnnounce } from '../../actions/aria';
 import Dollars from '../../components/Dollars';
 import { PercentInput } from '../../components/Inputs';
 import { t } from '../../i18n';
@@ -27,8 +28,10 @@ class CostAllocateFFPQuarterly extends Component {
         [year]: { [q]: { [name]: +e.target.value } }
       }
     };
-    const { aKey, update } = this.props;
+    const { aKey, update, announce, quarterlyFFP } = this.props;
     update(aKey, change, true);
+    // ARIA region update goes in here somewhere
+    announce(quarterlyFFP[year][q][name].dollars);
   };
 
   render() {
@@ -113,9 +116,6 @@ class CostAllocateFFPQuarterly extends Component {
                       <td
                         className="budget-table--number"
                         key={q}
-                        role="region"
-                        id={`ffp-${aKey}-${year}-${q}-${name}-dollar-equivalent`}
-                        aria-live="polite"
                       >
                         <Dollars>
                           {quarterlyFFP[year][q][name].dollars}
@@ -194,7 +194,10 @@ const makeMapStateToProps = () => {
   return mapStateToProps;
 };
 
-const mapDispatchToProps = { update: updateActivity };
+const mapDispatchToProps = {
+  update: updateActivity,
+  announce: ariaAnnounce
+};
 
 export default connect(
   makeMapStateToProps,
