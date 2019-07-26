@@ -16,6 +16,7 @@ const dbQueryBuilder = {
   first: sandbox.stub(),
   insert: sandbox.stub(),
   select: sandbox.stub(),
+  update: sandbox.stub(),
   where: sandbox.stub()
 };
 
@@ -135,6 +136,10 @@ tap.test('session store module', async tests => {
 
       test.ok(expiredSessionsAreDeleted(), 'expired sessions are deleted');
       test.ok(queryIsCorrect(), 'queries for a matching, non-expired session');
+      test.ok(
+        dbQueryBuilder.update.calledWith({ expiration: 2220000 }),
+        'session is extended'
+      );
       test.equal(userID, 'user id', 'returns the user ID');
     });
   });
