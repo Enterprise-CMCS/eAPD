@@ -208,7 +208,7 @@ class Sidebar extends Component {
                 <img
                   src={`/static/img/states/${place.id}.svg`}
                   alt={place.name}
-                  className="align-middle mr2"
+                  className="ds-u-margin-right--2"
                   width="40"
                   height="40"
                 />
