@@ -28,6 +28,7 @@ describe('activities reducer', () => {
 
   const newContractor = keyFn => ({
     key: keyFn(),
+    initialCollapsed: false,
     desc: '',
     end: '',
     name: '',
