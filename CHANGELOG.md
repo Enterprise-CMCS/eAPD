@@ -13,6 +13,7 @@ Anticipated release: TBD
 - Fixed semantic heading levels ([#1695])
 - Fixed a keyboard focus order problem when adding new items to a list ([#1712])
 - Fixed a keyboard focus order problem with the system use banner ([#1715])
+- Fixed a bug where adding a new contractor resource didn't expand the contractor form ([#1710])
 
 #### ⚙️ Behind the scenes
 
@@ -38,6 +39,7 @@ Pilot release to select state partners
 [#1688]: https://github.com/18F/cms-hitech-apd/pull/1688
 [#1695]: https://github.com/18F/cms-hitech-apd/pull/1695
 [#1697]: https://github.com/18F/cms-hitech-apd/pull/1697
+[#1710]: https://github.com/18F/cms-hitech-apd/pull/1710
 [#1712]: https://github.com/18F/cms-hitech-apd/pull/1712
 [#1713]: https://github.com/18F/cms-hitech-apd/pull/1713
 [#1715]: https://github.com/18F/cms-hitech-apd/pull/1715
