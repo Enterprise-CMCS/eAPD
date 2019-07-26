@@ -1,5 +1,5 @@
 import { Alert, Button } from '@cmsgov/design-system-core';
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const FormAndReviewItem = ({
@@ -8,20 +8,27 @@ const FormAndReviewItem = ({
   initialCollapsed,
   ...rest
 }) => {
+  const container = useRef(null);
   const [collapsed, setCollapsed] = useState(initialCollapsed);
-  const collapse = useCallback(() => setCollapsed(true), []);
+  const collapse = useCallback(() => {
+    const { top } = container.current.getBoundingClientRect();
+    if (top < 0 || top > window.innerHeight) {
+      container.current.scrollIntoView({ behavior: 'auto' });
+    }
+    setCollapsed(true);
+  }, []);
   const expand = useCallback(() => setCollapsed(false), []);
 
   if (collapsed) {
     return (
-      <div className="form-and-review-list--item__collapsed">
+      <div ref={container} className="form-and-review-list--item__collapsed">
         <Collapsed {...rest} expand={expand} />
       </div>
     );
   }
 
   return (
-    <div className="form-and-review-list--item__expanded">
+    <div ref={container} className="form-and-review-list--item__expanded">
       <Expanded {...rest} collapse={collapse} />
       <Button variation="primary" onClick={collapse}>
         Done
