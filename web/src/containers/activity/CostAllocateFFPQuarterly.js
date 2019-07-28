@@ -3,11 +3,12 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity } from '../../actions/activities';
-import { ariaAnnounce } from '../../actions/aria';
+import { ariaQueueAnnouncement, ariaAnnounce } from '../../actions/aria';
 import Dollars from '../../components/Dollars';
 import { PercentInput } from '../../components/Inputs';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
+import { getAriaQueuedAnnouncement } from '../../reducers/aria';
 import { formatPerc } from '../../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
@@ -18,6 +19,14 @@ const EXPENSE_NAME_DISPLAY = {
 };
 
 class CostAllocateFFPQuarterly extends Component {
+  componentDidUpdate = () =>{
+    const { announce, ariaQueuedMessage, quarterlyFFP } = this.props;
+    const year = Object.keys(ariaQueuedMessage["quarterlyFFP"])[0];
+    const q = Object.keys(ariaQueuedMessage["quarterlyFFP"][year])[0];
+    const name = Object.keys(ariaQueuedMessage["quarterlyFFP"][year][q])[0];
+    announce(quarterlyFFP[year][q][name].dollars);
+  }
+
   handleChange = (year, q, name) => e => {
     // Keep percent as 0-100 here because the activity state
     // uses Big Percents, and this action updates the
@@ -28,10 +37,10 @@ class CostAllocateFFPQuarterly extends Component {
         [year]: { [q]: { [name]: +e.target.value } }
       }
     };
-    const { aKey, update, announce, quarterlyFFP } = this.props;
+    const { aKey, update, queue } = this.props;
     update(aKey, change, true);
-    // ARIA region update goes in here somewhere
-    announce(quarterlyFFP[year][q][name].dollars);
+    // queue the change for AriaAnnounce
+    queue(change);
   };
 
   render() {
@@ -190,12 +199,14 @@ CostAllocateFFPQuarterly.propTypes = {
 const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
   const mapStateToProps = (state, props) =>
+    ariaQueuedMessage: getAriaQueuedAnnouncement(state),
     selectCostAllocateFFPBudget(state, props);
   return mapStateToProps;
 };
 
 const mapDispatchToProps = {
   update: updateActivity,
+  queue: ariaQueueAnnouncement,
   announce: ariaAnnounce
 };
 
