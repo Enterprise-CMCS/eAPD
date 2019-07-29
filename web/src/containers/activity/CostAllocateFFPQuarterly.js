@@ -19,12 +19,20 @@ const EXPENSE_NAME_DISPLAY = {
 };
 
 class CostAllocateFFPQuarterly extends Component {
-  componentDidUpdate = () =>{
-    const { announce, ariaQueuedMessage, quarterlyFFP } = this.props;
-    const year = Object.keys(ariaQueuedMessage["quarterlyFFP"])[0];
-    const q = Object.keys(ariaQueuedMessage["quarterlyFFP"][year])[0];
-    const name = Object.keys(ariaQueuedMessage["quarterlyFFP"][year][q])[0];
-    announce(quarterlyFFP[year][q][name].dollars);
+  componentDidUpdate = (prevProps) =>{
+    const { ariaQueuedMessage } = this.props;
+    // Don't announce the same message more than once
+    if (ariaQueuedMessage["quarterlyFFP"] && ariaQueuedMessage !== prevProps.ariaQueuedMessage) {
+      const { announce, quarterlyFFP } = this.props;
+      const year = Object.keys(ariaQueuedMessage["quarterlyFFP"])[0];
+      const q = Object.keys(ariaQueuedMessage["quarterlyFFP"][year])[0];
+      const name = Object.keys(ariaQueuedMessage["quarterlyFFP"][year][q])[0];
+      announce(quarterlyFFP[year][q][name].dollars);
+    } else if (ariaQueuedMessage === prevProps.ariaQueuedMessage) {
+      // Don't keep the old message hanging around in state
+      const { queue } = this.props;
+      queue('');
+    }
   }
 
   handleChange = (year, q, name) => e => {
@@ -193,14 +201,24 @@ CostAllocateFFPQuarterly.propTypes = {
   quarterlyFFP: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
   year: PropTypes.string.isRequired,
-  update: PropTypes.func.isRequired
+  update: PropTypes.func.isRequired,
+  queue: PropTypes.func.isRequired,
+  announce: PropTypes.func.isRequired,
+  ariaQueuedMessage: PropTypes.object,
 };
+
+CostAllocateFFPQuarterly.defaultProps = {
+  ariaQueuedMessage: {
+    "quarterlyFFP": null
+  },
+}
 
 const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
-  const mapStateToProps = (state, props) =>
+  const mapStateToProps = (state, props) => ({
     ariaQueuedMessage: getAriaQueuedAnnouncement(state),
-    selectCostAllocateFFPBudget(state, props);
+    ...selectCostAllocateFFPBudget(state, props)
+  });
   return mapStateToProps;
 };
 
