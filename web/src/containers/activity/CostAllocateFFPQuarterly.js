@@ -19,14 +19,14 @@ const EXPENSE_NAME_DISPLAY = {
 };
 
 class CostAllocateFFPQuarterly extends Component {
-  componentDidUpdate = (prevProps) =>{
+  componentDidUpdate = (prevProps) => {
     const { ariaQueuedMessage } = this.props;
     // Don't announce the same message more than once
-    if (ariaQueuedMessage["quarterlyFFP"] && ariaQueuedMessage !== prevProps.ariaQueuedMessage) {
+    if (ariaQueuedMessage.quarterlyFFP && ariaQueuedMessage !== prevProps.ariaQueuedMessage) {
       const { announce, quarterlyFFP } = this.props;
-      const year = Object.keys(ariaQueuedMessage["quarterlyFFP"])[0];
-      const q = Object.keys(ariaQueuedMessage["quarterlyFFP"][year])[0];
-      const name = Object.keys(ariaQueuedMessage["quarterlyFFP"][year][q])[0];
+      const year = Object.keys(ariaQueuedMessage.quarterlyFFP)[0];
+      const q = Object.keys(ariaQueuedMessage.quarterlyFFP[year])[0];
+      const name = Object.keys(ariaQueuedMessage.quarterlyFFP[year][q])[0];
       announce(quarterlyFFP[year][q][name].dollars);
     } else if (ariaQueuedMessage === prevProps.ariaQueuedMessage) {
       // Don't keep the old message hanging around in state

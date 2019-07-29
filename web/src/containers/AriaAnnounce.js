@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { getAriaAnnouncement } from '../reducers/aria';
 
 const AriaAnnounce = (props) =>{
-    // const [ariaMessage, getAriaAnnouncement] = useState(null);
     const {ariaMessage} = props;
     return (
         <div
@@ -15,6 +15,14 @@ const AriaAnnounce = (props) =>{
         </div>
     )
 };
+
+AriaAnnounce.propTypes = {
+    ariaMessage: PropTypes.string,
+}
+
+AriaAnnounce.defaultProps = {
+    ariaMessage: '',
+}
 
 const mapStateToProps = state => ({
     ariaMessage: getAriaAnnouncement(state)
