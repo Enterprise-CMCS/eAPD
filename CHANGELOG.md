@@ -13,6 +13,7 @@ Anticipated release: TBD
 - Fixed semantic heading levels ([#1695])
 - Fixed a keyboard focus order problem when adding new items to a list ([#1712])
 - Fixed a keyboard focus order problem with the system use banner ([#1715])
+- Switched remaining text inputs (except for rich text) to Design System components and removed custom components ([#1686])
 - For users in American Samoa, Guam, Northern Mariana Islands, or U.S. Virgin Islands, do not attempt to display a territory outline at the top of the sidebar because we don't have those outlines ([#1423]; see [#1730] for more information)
 - Fixed a bug where adding a new contractor resource didn't expand the contractor form ([#1710])
 - Make the navigation sidebar scrollable. ([#1475])
@@ -51,6 +52,7 @@ Pilot release to select state partners
 [#1651]: https://github.com/18F/cms-hitech-apd/pull/1651
 [#1655]: https://github.com/18F/cms-hitech-apd/issues/1655
 [#1680]: https://github.com/18F/cms-hitech-apd/issues/1680
+[#1686]: https://github.com/18F/cms-hitech-apd/issues/1686
 [#1688]: https://github.com/18F/cms-hitech-apd/pull/1688
 [#1695]: https://github.com/18F/cms-hitech-apd/pull/1695
 [#1697]: https://github.com/18F/cms-hitech-apd/pull/1697
