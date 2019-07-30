@@ -208,7 +208,7 @@ exports[`Sidebar component renders correctly 1`] = `
       >
         <img
           alt="place name"
-          className="align-middle mr2"
+          className="ds-u-margin-right--2"
           height="40"
           src="/static/img/states/place id.svg"
           width="40"
