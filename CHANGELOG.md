@@ -18,6 +18,7 @@ Anticipated release: TBD
 - Fixed the width on activity overview detail and statement of alternatives textbox labels ([#1640])
 - Made the "manage account" and "login" text the same size in the header dropdown ([#1655], [#1680])
 - Removed the emoji button from the rich text editor ([#1649])
+- Adds spacing around the Medicaid director and Medicaid office address form headers ([#1646])
 
 #### ⚙️ Behind the scenes
 
@@ -40,6 +41,7 @@ Pilot release to select state partners
 
 [#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
 [#1640]: https://github.com/18F/cms-hitech-apd/issues/1640
+[#1646]: https://github.com/18F/cms-hitech-apd/pull/1646
 [#1647]: https://github.com/18F/cms-hitech-apd/pull/1647
 [#1649]: https://github.com/18F/cms-hitech-apd/issues/1649
 [#1651]: https://github.com/18F/cms-hitech-apd/pull/1651
