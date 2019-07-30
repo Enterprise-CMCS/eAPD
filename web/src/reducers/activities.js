@@ -60,6 +60,7 @@ const contractorDefaultYear = () => 0;
 const contractorDefaultHourly = () => ({ hours: '', rate: '' });
 const newContractor = years => ({
   key: generateKey(),
+  initialCollapsed: false,
   name: '',
   desc: '',
   start: '',
