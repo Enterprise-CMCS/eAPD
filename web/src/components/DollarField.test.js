@@ -5,7 +5,7 @@ import { act } from 'react-dom/test-utils';
 import DollarField from './DollarField';
 
 describe('DollarField component', () => {
-  it('renders correctly, passing props down', () => {
+  it('renders correctly, does not add commas to small numbers, passing props down', () => {
     expect(
       mount(
         <DollarField
@@ -13,7 +13,22 @@ describe('DollarField component', () => {
           name="test name"
           size="medium"
           className="stuff"
-          value="12332"
+          value="123"
+          onChange={jest.fn()}
+        />
+      )
+    ).toMatchSnapshot();
+  });
+
+  it('renders correctly, adds commas to big numbers, passing props down', () => {
+    expect(
+      mount(
+        <DollarField
+          label="test label"
+          name="test name"
+          size="medium"
+          className="stuff"
+          value="123321"
           onChange={jest.fn()}
         />
       )
