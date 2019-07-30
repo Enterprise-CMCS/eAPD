@@ -19,6 +19,7 @@ Anticipated release: TBD
 - Made the "manage account" and "login" text the same size in the header dropdown ([#1655], [#1680])
 - Removed the emoji button from the rich text editor ([#1649])
 - Adds spacing around the Medicaid director and Medicaid office address form headers ([#1646])
+- Adds margin to the bottom of the state dashboard ([#1601])
 
 #### ⚙️ Behind the scenes
 
@@ -40,6 +41,7 @@ Released: July 9, 2019
 Pilot release to select state partners
 
 [#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
+[#1601]: https://github.com/18F/cms-hitech-apd/pull/1601
 [#1640]: https://github.com/18F/cms-hitech-apd/issues/1640
 [#1646]: https://github.com/18F/cms-hitech-apd/pull/1646
 [#1647]: https://github.com/18F/cms-hitech-apd/pull/1647
