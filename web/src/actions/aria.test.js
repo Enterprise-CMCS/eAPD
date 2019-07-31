@@ -10,13 +10,13 @@ describe('aria actions', () => {
     const state = {
       budget: {
         activities: {
-          '0213': {
+          '0123': {
             quarterlyFFP: {
               '2019': {
                 '1': {
                   combined: {
-                    dollars: 700,
-                    percent: 100
+                    dollars: '700',
+                    percent: '100'
                   }
                 }
               }
@@ -27,7 +27,10 @@ describe('aria actions', () => {
     }
 
     const store = mockStore(state);
-    store.dispatch('ARIA_ANNOUNCE_CHANGE');
-    expect(ariaAnnounceFFPQuarterly('0123', '2019', '1', 'combined')).toMatchObject({ type: ARIA_ANNOUNCE_CHANGE, message: '700'})
+    store.dispatch(ariaAnnounceFFPQuarterly('0123', '2019', '1', 'combined'));
+    expect(store.getActions()).toEqual([{
+      type: ARIA_ANNOUNCE_CHANGE,
+      message: '700'
+    }])
   });
 });
