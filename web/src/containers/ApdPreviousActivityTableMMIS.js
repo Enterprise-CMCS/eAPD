@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import DollarField from '../components/DollarField';
 import Dollars from '../components/Dollars';
-import { DollarInput } from '../components/Inputs';
 import { updateApd } from '../actions/apd';
 import { TABLE_HEADERS } from '../constants';
 
@@ -24,8 +24,10 @@ const ApdPreviousActivityTableMMIS = ({
 
   return (
     <Fragment>
-      <h4 className="ds-h4" aria-hidden="true">MMIS</h4>
-      {[90, 75, 50].map((level) => (
+      <h4 className="ds-h4" aria-hidden="true">
+        MMIS
+      </h4>
+      {[90, 75, 50].map(level => (
         <table key={level} className="budget-table">
           <caption className="ds-h4 ds-u-visibility--screen-reader">
             MMIS {TABLE_HEADERS.federal(level)}
@@ -33,17 +35,10 @@ const ApdPreviousActivityTableMMIS = ({
           <thead>
             <tr>
               <th id="prev_act_mmis_ffy">
-                <span className="ds-u-visibility--screen-reader">
-                  Year
-                </span>
+                <span className="ds-u-visibility--screen-reader">Year</span>
               </th>
-              <th id={`prev_act_mmis${level}_total`}>
-                {TABLE_HEADERS.total}
-              </th>
-              <th
-                colSpan="2"
-                id={`prev_act_mmis${level}_federal`}
-              >
+              <th id={`prev_act_mmis${level}_total`}>{TABLE_HEADERS.total}</th>
+              <th colSpan="2" id={`prev_act_mmis${level}_federal`}>
                 {TABLE_HEADERS.federal(level)}
               </th>
             </tr>
@@ -73,8 +68,7 @@ const ApdPreviousActivityTableMMIS = ({
           <tbody>
             {years.map(year => {
               const expenses = previousActivityExpenses[year].mmis[level];
-              const federalApproved =
-                (expenses.totalApproved * level) / 100;
+              const federalApproved = (expenses.totalApproved * level) / 100;
 
               return (
                 <tr key={year}>
@@ -84,13 +78,13 @@ const ApdPreviousActivityTableMMIS = ({
                   <td
                     headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_total prev_act_mmis${level}_total_approved`}
                   >
-                    <DollarInput
-                      name={`approved-total-mmis${level}-${year}`}
+                    <DollarField
+                      className="budget-table--input-holder"
+                      fieldClassName="budget-table--input__number"
                       label={`total approved funding for MMIS at the ${level}/${100 -
                         level} level for FFY ${year}, state plus federal`}
-                      hideLabel
-                      wrapperClass="budget-table--input-holder"
-                      className="budget-table--input__number"
+                      labelClassName="sr-only"
+                      name={`approved-total-mmis${level}-${year}`}
                       value={expenses.totalApproved}
                       onChange={handleChange(year, level, 'totalApproved')}
                     />
@@ -106,13 +100,13 @@ const ApdPreviousActivityTableMMIS = ({
                   <td
                     headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_actual`}
                   >
-                    <DollarInput
-                      name={`actual-federal-mmis${level}-${year}`}
+                    <DollarField
+                      className="budget-table--input-holder"
+                      fieldClassName="budget-table--input__number"
                       label={`actual federal share for MMIS at the ${level}/${100 -
                         level} level for FFY ${year}`}
-                      hideLabel
-                      wrapperClass="budget-table--input-holder"
-                      className="budget-table--input__number"
+                      labelClassName="sr-only"
+                      name={`actual-federal-mmis${level}-${year}`}
                       value={expenses.federalActual}
                       onChange={handleChange(year, level, 'federalActual')}
                     />
