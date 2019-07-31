@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { t } from '../../i18n';
 import { updateActivity as updateActivityAction } from '../../actions/activities';
-import { RichText } from '../../components/Inputs';
+import RichText from '../../components/RichText';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
 import { selectActivityByKey } from '../../reducers/activities.selectors';
