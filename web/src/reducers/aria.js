@@ -1,6 +1,4 @@
-import {
-    ARIA_ANNOUNCE_CHANGE
-} from '../actions/aria';
+import { ARIA_ANNOUNCE_CHANGE } from '../actions/aria';
 
 const initialState = {
     ariaRegionMessage: ''

@@ -6,7 +6,7 @@ import { ARIA_ANNOUNCE_CHANGE, ariaAnnounceFFPQuarterly } from './aria.js';
 const mockStore = configureStore([thunk]);
 
 describe('aria actions', () => {
-  it('ariaAnnounceFFPQuarterly dispatches ARIA_ANNOUNCE_CHANGE action', () => {
+  it('ariaAnnounceFFPQuarterly creates ARIA_ANNOUNCE_CHANGE action', () => {
     const state = {
       budget: {
         activities: {
