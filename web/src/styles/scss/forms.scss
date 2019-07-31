@@ -29,6 +29,10 @@ section > fieldset {
   margin-top: 0;
 }
 
+.data-entry-box .ds-c-label--full-width {
+  max-width: initial;
+}
+
 div.form--with-reviews {
   border-bottom: 2px solid $border-color;
   margin-bottom: nth($spacers, 3);
