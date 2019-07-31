@@ -31,3 +31,5 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps
 )(AriaAnnounce);
+
+export { AriaAnnounce as plain };
