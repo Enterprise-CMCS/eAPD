@@ -42,6 +42,71 @@ exports[`DollarField component passes back numeric values on change, but still r
     >
       <FormLabel
         component="label"
+        fieldId="textfield_3"
+      >
+        <label
+          className="ds-c-label"
+          htmlFor="textfield_3"
+        >
+          <span
+            className=""
+          >
+            test label
+          </span>
+        </label>
+      </FormLabel>
+      <div
+        className="ds-c-field-mask ds-c-field-mask--currency"
+      >
+        <div
+          className="ds-c-field__before ds-c-field__before--currency"
+        >
+          $
+        </div>
+        <Mask
+          mask="currency"
+        >
+          <input
+            aria-label="test label. Enter amount in dollars."
+            className="ds-c-field ds-c-field--currency ds-c-field--medium"
+            id="textfield_3"
+            name="test name"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="text"
+            value="123,456"
+          />
+        </Mask>
+      </div>
+    </div>
+  </TextField>
+</DollarField>
+`;
+
+exports[`DollarField component renders correctly, adds commas to big numbers, passing props down 1`] = `
+<DollarField
+  className="stuff"
+  label="test label"
+  name="test name"
+  onChange={[MockFunction]}
+  size="medium"
+  value="123321"
+>
+  <TextField
+    className="stuff"
+    label="test label"
+    mask="currency"
+    name="test name"
+    onChange={[Function]}
+    size="medium"
+    type="text"
+    value="123,321"
+  >
+    <div
+      className="ds-u-clearfix stuff"
+    >
+      <FormLabel
+        component="label"
         fieldId="textfield_2"
       >
         <label
@@ -74,7 +139,7 @@ exports[`DollarField component passes back numeric values on change, but still r
             onBlur={[Function]}
             onChange={[Function]}
             type="text"
-            value="123,456"
+            value="123,321"
           />
         </Mask>
       </div>
@@ -83,14 +148,14 @@ exports[`DollarField component passes back numeric values on change, but still r
 </DollarField>
 `;
 
-exports[`DollarField component renders correctly, passing props down 1`] = `
+exports[`DollarField component renders correctly, does not add commas to small numbers, passing props down 1`] = `
 <DollarField
   className="stuff"
   label="test label"
   name="test name"
   onChange={[MockFunction]}
   size="medium"
-  value="12332"
+  value="123"
 >
   <TextField
     className="stuff"
@@ -100,7 +165,7 @@ exports[`DollarField component renders correctly, passing props down 1`] = `
     onChange={[Function]}
     size="medium"
     type="text"
-    value="12332"
+    value="123"
   >
     <div
       className="ds-u-clearfix stuff"
@@ -139,7 +204,7 @@ exports[`DollarField component renders correctly, passing props down 1`] = `
             onBlur={[Function]}
             onChange={[Function]}
             type="text"
-            value="12,332"
+            value="123"
           />
         </Mask>
       </div>

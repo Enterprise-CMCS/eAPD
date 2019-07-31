@@ -38,7 +38,7 @@ describe('apd previous activity table, mmis component', () => {
 
   test('dispatches on a change', () => {
     shallow(<ApdPreviousActivityTable {...props} />)
-      .find('InputHolder[name="hithie-approved-total-1"]')
+      .find('DollarField[name="hithie-approved-total-1"]')
       .simulate('change', { target: { value: 'new value' } });
 
     expect(
