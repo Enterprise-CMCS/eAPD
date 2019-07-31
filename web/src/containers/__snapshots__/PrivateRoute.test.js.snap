@@ -36,6 +36,7 @@ exports[`private route component renders correctly if logged out 1`] = `
 
 exports[`private route component renders correctly if logged out 2`] = `
 <Redirect
+  push={false}
   to={
     Object {
       "pathname": "/login",

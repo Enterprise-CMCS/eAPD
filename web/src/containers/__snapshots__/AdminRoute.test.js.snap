@@ -50,6 +50,7 @@ exports[`admin route component renders correctly if logged out 1`] = `
 
 exports[`admin route component renders correctly if logged out 2`] = `
 <Redirect
+  push={false}
   to={
     Object {
       "pathname": "/login",

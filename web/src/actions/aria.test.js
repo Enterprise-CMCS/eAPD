@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { ARIA_ANNOUNCE_CHANGE, ariaAnnounceFFPQuarterly } from './aria.js';
+import { ARIA_ANNOUNCE_CHANGE, ariaAnnounceFFPQuarterly } from './aria';
 
 const mockStore = configureStore([thunk]);
 
