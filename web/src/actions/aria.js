@@ -1,16 +1,8 @@
-export const ARIA_QUEUE_ANNOUNCEMENT = 'ARIA_QUEUE_ANNOUNCEMENT';
 export const ARIA_ANNOUNCE_CHANGE = 'ARIA_ANNOUNCE_CHANGE';
 
-export const ariaQueueAnnouncement = change => dispatch => {
-    dispatch({
-        type: ARIA_QUEUE_ANNOUNCEMENT,
-        change
-    });
-}
-
-export const ariaAnnounce = message => dispatch => {
+export const ariaAnnounceFFPQuarterly = (aKey, year, q, name) => (dispatch, getState) => {
     dispatch({
         type: ARIA_ANNOUNCE_CHANGE,
-        message
+        message: getState().budget.activities[aKey].quarterlyFFP[year][q][name].dollars
     });
 }

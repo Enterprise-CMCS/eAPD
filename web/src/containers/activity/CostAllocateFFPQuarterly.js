@@ -3,12 +3,11 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity } from '../../actions/activities';
-import { ariaQueueAnnouncement, ariaAnnounce } from '../../actions/aria';
+import { ariaAnnounceFFPQuarterly } from '../../actions/aria';
 import Dollars from '../../components/Dollars';
 import { PercentInput } from '../../components/Inputs';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
-import { getAriaQueuedAnnouncement } from '../../reducers/aria';
 import { formatPerc } from '../../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
@@ -19,22 +18,6 @@ const EXPENSE_NAME_DISPLAY = {
 };
 
 class CostAllocateFFPQuarterly extends Component {
-  componentDidUpdate = (prevProps) => {
-    const { ariaQueuedMessage } = this.props;
-    // Don't announce the same message more than once
-    if (ariaQueuedMessage.quarterlyFFP && ariaQueuedMessage !== prevProps.ariaQueuedMessage) {
-      const { announce, quarterlyFFP } = this.props;
-      const year = Object.keys(ariaQueuedMessage.quarterlyFFP)[0];
-      const q = Object.keys(ariaQueuedMessage.quarterlyFFP[year])[0];
-      const name = Object.keys(ariaQueuedMessage.quarterlyFFP[year][q])[0];
-      announce(quarterlyFFP[year][q][name].dollars);
-    } else if (ariaQueuedMessage === prevProps.ariaQueuedMessage) {
-      // Don't keep the old message hanging around in state
-      const { queue } = this.props;
-      queue('');
-    }
-  }
-
   handleChange = (year, q, name) => e => {
     // Keep percent as 0-100 here because the activity state
     // uses Big Percents, and this action updates the
@@ -45,10 +28,9 @@ class CostAllocateFFPQuarterly extends Component {
         [year]: { [q]: { [name]: +e.target.value } }
       }
     };
-    const { aKey, update, queue } = this.props;
+    const { aKey, update, announce } = this.props;
     update(aKey, change, true);
-    // queue the change for AriaAnnounce
-    queue(change);
+    announce(aKey, year, q, name);
   };
 
   render() {
@@ -202,21 +184,12 @@ CostAllocateFFPQuarterly.propTypes = {
   years: PropTypes.array.isRequired,
   year: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
-  queue: PropTypes.func.isRequired,
   announce: PropTypes.func.isRequired,
-  ariaQueuedMessage: PropTypes.object,
 };
-
-CostAllocateFFPQuarterly.defaultProps = {
-  ariaQueuedMessage: {
-    "quarterlyFFP": null
-  },
-}
 
 const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
   const mapStateToProps = (state, props) => ({
-    ariaQueuedMessage: getAriaQueuedAnnouncement(state),
     ...selectCostAllocateFFPBudget(state, props)
   });
   return mapStateToProps;
@@ -224,8 +197,7 @@ const makeMapStateToProps = () => {
 
 const mapDispatchToProps = {
   update: updateActivity,
-  queue: ariaQueueAnnouncement,
-  announce: ariaAnnounce
+  announce: ariaAnnounceFFPQuarterly
 };
 
 export default connect(
