@@ -189,9 +189,7 @@ CostAllocateFFPQuarterly.propTypes = {
 
 const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
-  const mapStateToProps = (state, props) => ({
-    ...selectCostAllocateFFPBudget(state, props)
-  });
+  const mapStateToProps = (state, props) => selectCostAllocateFFPBudget(state, props);
   return mapStateToProps;
 };
 
