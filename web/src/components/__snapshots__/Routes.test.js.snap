@@ -3,95 +3,39 @@
 exports[`Routes component renders correctly 1`] = `
 <Switch>
   <Connect(PrivateRoute)
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(Dashboard)",
-        "type": [Function],
-      }
-    }
+    component={[Function]}
     exact={true}
     key="/"
     path="/"
   />
   <Connect(PrivateRoute)
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(ApdApplication)",
-        "type": [Function],
-      }
-    }
+    component={[Function]}
     exact={true}
     key="/apd"
     path="/apd"
   />
   <Connect(AdminRoute)
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(CreateUser)",
-        "type": [Function],
-      }
-    }
+    component={[Function]}
     key="/create-account"
     path="/create-account"
   />
   <Connect(AdminRoute)
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(EditAccount)",
-        "type": [Function],
-      }
-    }
+    component={[Function]}
     key="/edit-account"
     path="/edit-account"
   />
   <Connect(PrivateRoute)
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(MyAccount)",
-        "type": [Function],
-      }
-    }
+    component={[Function]}
     key="/me"
     path="/me"
   />
   <Route
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(Login)",
-        "type": [Function],
-      }
-    }
+    component={[Function]}
     key="/login"
     path="/login"
   />
   <Connect(PrivateRoute)
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(Logout)",
-        "type": [Function],
-      }
-    }
+    component={[Function]}
     key="/logout"
     path="/logout"
   />
