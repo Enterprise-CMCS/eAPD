@@ -4,6 +4,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateActivity } from '../../actions/activities';
+import { ariaAnnounceFFPQuarterly } from '../../actions/aria';
 import Dollars from '../../components/Dollars';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
@@ -27,8 +28,9 @@ class CostAllocateFFPQuarterly extends Component {
         [year]: { [q]: { [name]: +e.target.value } }
       }
     };
-    const { aKey, update } = this.props;
+    const { aKey, update, announce } = this.props;
     update(aKey, change, true);
+    announce(aKey, year, q, name);
   };
 
   render() {
@@ -105,9 +107,6 @@ class CostAllocateFFPQuarterly extends Component {
                       <td
                         className="budget-table--number"
                         key={q}
-                        role="region"
-                        id={`ffp-${aKey}-${year}-${q}-${name}-dollar-equivalent`}
-                        aria-live="polite"
                       >
                         <Dollars>{quarterlyFFP[year][q][name].dollars}</Dollars>
                       </td>
@@ -173,17 +172,20 @@ CostAllocateFFPQuarterly.propTypes = {
   quarterlyFFP: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
   year: PropTypes.string.isRequired,
-  update: PropTypes.func.isRequired
+  update: PropTypes.func.isRequired,
+  announce: PropTypes.func.isRequired,
 };
 
 const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
-  const mapStateToProps = (state, props) =>
-    selectCostAllocateFFPBudget(state, props);
+  const mapStateToProps = (state, props) => selectCostAllocateFFPBudget(state, props);
   return mapStateToProps;
 };
 
-const mapDispatchToProps = { update: updateActivity };
+const mapDispatchToProps = {
+  update: updateActivity,
+  announce: ariaAnnounceFFPQuarterly
+};
 
 export default connect(
   makeMapStateToProps,
