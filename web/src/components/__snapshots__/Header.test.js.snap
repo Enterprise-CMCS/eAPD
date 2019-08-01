@@ -12,7 +12,6 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
         <Link
-          replace={false}
           to="/"
         >
           CMS HITECH APD
@@ -76,7 +75,6 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/me"
                 >
                   <FontAwesomeIcon
@@ -121,7 +119,6 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/logout"
                 >
                   <FontAwesomeIcon
@@ -183,7 +180,6 @@ exports[`Header component renders correctly when the dropdown is closed and the 
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
         <Link
-          replace={false}
           to="/"
         >
           CMS HITECH APD
@@ -247,7 +243,6 @@ exports[`Header component renders correctly when the dropdown is closed and the 
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/me"
                 >
                   <FontAwesomeIcon
@@ -292,7 +287,6 @@ exports[`Header component renders correctly when the dropdown is closed and the 
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/logout"
                 >
                   <FontAwesomeIcon
@@ -354,7 +348,6 @@ exports[`Header component renders the admin home title when an admin user is at 
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
         <Link
-          replace={false}
           to="/"
         >
           <FontAwesomeIcon
@@ -448,7 +441,6 @@ exports[`Header component renders the admin home title when an admin user is at 
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/me"
                 >
                   <FontAwesomeIcon
@@ -493,7 +485,6 @@ exports[`Header component renders the admin home title when an admin user is at 
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/logout"
                 >
                   <FontAwesomeIcon
@@ -555,7 +546,6 @@ exports[`Header component renders the state user home title when a state user is
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
         <Link
-          replace={false}
           to="/"
         >
           <FontAwesomeIcon
@@ -649,7 +639,6 @@ exports[`Header component renders the state user home title when a state user is
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/me"
                 >
                   <FontAwesomeIcon
@@ -694,7 +683,6 @@ exports[`Header component renders the state user home title when a state user is
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/logout"
                 >
                   <FontAwesomeIcon
