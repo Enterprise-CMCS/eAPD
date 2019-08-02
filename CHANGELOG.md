@@ -8,6 +8,7 @@ Anticipated release: TBD
 
 #### 🐛 Bugs fixed
 
+- Add a "skip to main content" link ([#1304])
 - Prompt for confirmation before deleting APD key personnel ([#1651], [#1647])
 - Fixed accessibility issues on the login page and the dashboard ([#1688])
 - Fixed semantic heading levels ([#1695])
@@ -42,6 +43,7 @@ Released: July 9, 2019
 
 Pilot release to select state partners
 
+[#1304]: https://github.com/18F/cms-hitech-apd/issues/1304
 [#1423]: https://github.com/18F/cms-hitech-apd/issues/1423
 [#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
 [#1601]: https://github.com/18F/cms-hitech-apd/pull/1601
