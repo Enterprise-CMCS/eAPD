@@ -4,6 +4,12 @@ exports[`Wrapper component renders correctly in dev mode 1`] = `
 <div
   className="site"
 >
+  <a
+    className="skip-nav"
+    href="#apd-title"
+  >
+    Skip to main content
+  </a>
   <Connect(Header)
     showSiteTitle={true}
   />
@@ -16,6 +22,12 @@ exports[`Wrapper component renders correctly in non-dev mode 1`] = `
 <div
   className="site"
 >
+  <a
+    className="skip-nav"
+    href="#apd-title"
+  >
+    Skip to main content
+  </a>
   <Connect(Header)
     showSiteTitle={true}
   />

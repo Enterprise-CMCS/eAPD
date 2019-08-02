@@ -17,3 +17,18 @@
 footer {
   margin-top: auto; // will push the footer as far down as it can
 }
+
+.skip-nav {
+  background: white;
+  height: 3rem;
+  line-height: 3rem;
+  padding: 0 0.5rem;
+  position: absolute;
+  top: -3rem;
+  transition: top 1s ease-out;
+
+  &:focus {
+    top: 0;
+    transition: top 200ms ease-out;
+  }
+}
