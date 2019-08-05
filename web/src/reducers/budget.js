@@ -291,9 +291,9 @@ const buildBudget = bigState => {
       // total activity cost.  This is useful for distributing the total
       // in a way that we get whole numbers and preserve sums.
       const costCategoryPercentages = [
-        activityTotals.data.contractors[year] / totalCost,
-        activityTotals.data.expenses[year] / totalCost,
-        activityTotals.data.statePersonnel[year] / totalCost
+        activityTotals.data.contractors[year] / totalCost || 0,
+        activityTotals.data.expenses[year] / totalCost || 0,
+        activityTotals.data.statePersonnel[year] / totalCost || 0
       ];
 
       // Compute the state and federal share for each cost category, based on
@@ -411,9 +411,7 @@ const buildBudget = bigState => {
         // at the 90/10 level, at the 75/25 level, and at the 50/50 level.
 
         // Compute a string that represents the MMIS level for this activity
-        const ffpLevel = `${allocation[year].ffp.federal}-${
-          allocation[year].ffp.state
-        }`;
+        const ffpLevel = `${allocation[year].ffp.federal}-${allocation[year].ffp.state}`;
 
         // Then do basically the same as updateCosts() above, but we only
         // need to track subtotals, not individual cost categories
