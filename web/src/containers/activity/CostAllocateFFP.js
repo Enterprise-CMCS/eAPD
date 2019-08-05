@@ -43,7 +43,7 @@ class CostAllocateFFP extends Component {
               </p>
               <TextField
                 label={t('activities.costAllocate.ffp.labels.other')}
-                labelClassName='ds-h4'
+                labelClassName='ds-h5'
                 mask='currency'
                 name={`cost-allocate-other-${year}`}
                 value={costAllocation[year].other || '0'}

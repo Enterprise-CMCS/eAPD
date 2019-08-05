@@ -13,7 +13,7 @@ const NameAndFundingSourceReview = ({
   return (
     <Review
       heading={`${index + 2}. ${name}`}
-      headingLevel={3}
+      headingLevel={4}
       onDeleteClick={disableExpand ? null : onDeleteClick}
       onEditClick={disableExpand ? null : expand}
     >

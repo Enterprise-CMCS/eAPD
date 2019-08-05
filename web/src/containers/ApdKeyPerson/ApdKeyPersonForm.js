@@ -39,10 +39,11 @@ const PersonForm = ({
 
   return (
     <Fragment>
-      <h3 className="ds-h3">
+      <h4 className="ds-h4">
         {primary ? 'Primary' : 'Additional'} APD Point of Contact
-      </h3>
+      </h4>
       <TextField
+        autoFocus="true"
         name={`apd-state-profile-pocname${index}`}
         label={t(`${tRoot}.labels.name`)}
         value={name}
