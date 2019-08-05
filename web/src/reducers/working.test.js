@@ -17,6 +17,7 @@ import {
   ADMIN_EDIT_ME_SUCCESS
 } from '../actions/admin';
 import {
+  NOT_LOGGED_IN,
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS
@@ -89,6 +90,11 @@ describe('working state reducer', () => {
       ['a user account is created', ADMIN_CREATE_USER_ERROR, 'addAccount'],
       ['a user account is edited', ADMIN_EDIT_ACCOUNT_ERROR, 'editAccount'],
       ['a user saves their account', ADMIN_EDIT_ME_ERROR, 'editOwnAccount'],
+      [
+        'a user is logged on when they attempt to save',
+        NOT_LOGGED_IN,
+        'saveApd'
+      ],
       ['an APD is saved', SAVE_APD_FAILURE, 'saveApd']
     ].forEach(([test, type, prop]) => {
       it(test, () => {

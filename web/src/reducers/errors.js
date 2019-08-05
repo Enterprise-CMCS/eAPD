@@ -10,6 +10,7 @@ import {
   ADMIN_EDIT_ME_REQUEST
 } from '../actions/admin';
 import {
+  NOT_LOGGED_IN,
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS
@@ -66,7 +67,14 @@ const errorActions = {
   [ADMIN_CREATE_USER_ERROR]: ['addAccount', 'Unknown error creating account'],
   [ADMIN_EDIT_ACCOUNT_ERROR]: ['editAccount', 'Unknown error editing account'],
   [ADMIN_EDIT_ME_ERROR]: ['editOwnAccount', 'Unknown error editing account'],
-  [SAVE_APD_FAILURE]: ['saveApd', 'Save failed. Check the section you were editing & try saving again.']
+  [NOT_LOGGED_IN]: [
+    'saveApd',
+    'Save failed: you have been logged out. Try logging in in another tab and then saving again.'
+  ],
+  [SAVE_APD_FAILURE]: [
+    'saveApd',
+    'Save failed. Check the section you were editing & try saving again.'
+  ]
 };
 
 const reducer = (state = initialState, action) => {
@@ -84,6 +92,7 @@ const reducer = (state = initialState, action) => {
     case ADMIN_CREATE_USER_ERROR:
     case ADMIN_EDIT_ACCOUNT_ERROR:
     case ADMIN_EDIT_ME_ERROR:
+    case NOT_LOGGED_IN:
     case SAVE_APD_FAILURE: {
       const [prop, fallback] = errorActions[action.type];
       return {
