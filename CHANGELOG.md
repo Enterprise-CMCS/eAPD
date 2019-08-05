@@ -22,6 +22,7 @@ Anticipated release: TBD
 - Removed the emoji button from the rich text editor ([#1649])
 - Adds spacing around the Medicaid director and Medicaid office address form headers ([#1646])
 - Adds margin to the bottom of the state dashboard ([#1601])
+- Adds an ARIA region component to prevent screen readers from prematurely announcing quarterly budget numbers ([#1731])
 
 #### ⚙️ Behind the scenes
 
