@@ -2,8 +2,16 @@ import { TextField, unmaskValue } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 
+const maskValue = value => {
+  const num = +value;
+  if (!Number.isNaN(num)) {
+    return num.toLocaleString();
+  }
+  return value;
+};
+
 const DollarField = ({ onChange, value, ...rest }) => {
-  const [local, setLocal] = useState(value);
+  const [local, setLocal] = useState(maskValue(value, 'currency'));
 
   const changeHandler = useCallback(
     e => {
