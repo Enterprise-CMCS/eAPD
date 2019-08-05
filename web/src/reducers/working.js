@@ -10,6 +10,7 @@ import {
   ADMIN_EDIT_ME_SUCCESS
 } from '../actions/admin';
 import {
+  NOT_LOGGED_IN,
   SAVE_APD_FAILURE,
   SAVE_APD_REQUEST,
   SAVE_APD_SUCCESS
@@ -42,6 +43,7 @@ const noActions = new Map([
   [ADMIN_EDIT_ACCOUNT_SUCCESS, 'editAccount'],
   [ADMIN_EDIT_ME_ERROR, 'editOwnAccount'],
   [ADMIN_EDIT_ME_SUCCESS, 'editOwnAccount'],
+  [NOT_LOGGED_IN, 'saveApd'],
   [SAVE_APD_FAILURE, 'saveApd'],
   [SAVE_APD_SUCCESS, 'saveApd']
 ]);
@@ -60,6 +62,7 @@ const reducer = (state = initialState, { type }) => {
     case ADMIN_EDIT_ACCOUNT_SUCCESS:
     case ADMIN_EDIT_ME_ERROR:
     case ADMIN_EDIT_ME_SUCCESS:
+    case NOT_LOGGED_IN:
     case SAVE_APD_FAILURE:
     case SAVE_APD_SUCCESS:
       return { ...state, [noActions.get(type)]: false };
