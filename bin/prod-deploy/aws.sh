@@ -1,26 +1,46 @@
 #!/bin/bash
 
-# Expects the following environment variables:
-#
-#   API_DATABASE_URL - PostgreSQL database URL the API should use. This is
-#                      written into the API's configuration
-#
-#   API_PORT - The port the API should listen on. The load balancer will
-#              redirect internet traffic to this port. This is written into the
-#              API's configuration as well.
-#
-#   API_SESSION_SECRET - The secret key used to sign session tokens. This is
-#                        written into the API's configuration.
-#
-#   AWS_AMI	 - Image ID of the AMI to use for the new instance
-#
-#   AWS_REGION - The AWS region the instance should be created in
-#
-#   AWS_SECURITY_GROUP - ID of the security group for the instance
-#
-#   AWS_SUBNET - ID of the subnet this instance should be attached to
-#
-#   AWS_TARGET_GROUP	 - The ARN of the target group to add the instance to.
+# Call with the following arguments:
+#    --API_DATABASE_URL <psql url>    | PostgreSQL database URL the API should
+#                                     | use. This is written into the API's
+#                                     | configuration.
+#                                     |----------------------------------------
+#    --API_PBKDF2_ITERATIONS <number> | Number of PBKDF2 iterations the server
+#                                     | should use for hashing user passwords.
+#                                     |----------------------------------------
+#    --API_PORT <API server port>     | The port the API should listen on. The
+#                                     | load balancer will redirect internet
+#                                     | traffic to this port. This is written
+#                                     | into the API's configuration as well.
+#                                     |----------------------------------------
+#    --API_SESSION_SECRET <secret key | The secret key used to sign session
+#                                     | tokens. This is written into the API's
+#                                     | configuration.
+#                                     |----------------------------------------
+#    --AWS_AMI <AMI ID>               | Image ID of the AMI to use for the new
+#                                     | instance
+#                                     |----------------------------------------
+#    --AWS_REGION <AWS region name>   | The AWS region the instance should be
+#                                     | created in
+#                                     |----------------------------------------
+#    --AWS_SECURITY_GROUP <group ID>  | ID of the security group for the
+#                                     | instance
+#                                     |----------------------------------------
+#    --AWS_SUBNET <subnet ID>         | ID of the subnet this instance should
+#                                     | be attached to
+#                                     |----------------------------------------
+#    --AWS_TARGET_GROUP <AWS ARN>     | The ARN of the target group to add the
+#                                     | instance to.
+#                                     |----------------------------------------
+#    --BUILD_URL <URL>                | The URL to the zip file containing the
+#                                     | built API. This zip will be pulled into
+#                                     | the EC2 instance and launched.
+#                                     |----------------------------------------
+#    --ENVIRONMENT <env name>         | Environment being deployed, lowercase.
+#                                     | This is used to tag the EC2 instance
+#                                     | and find previous instances for the
+#                                     | same environment. "production" or
+#                                     | "staging".
 
 # Exit when any command fails
 set -e

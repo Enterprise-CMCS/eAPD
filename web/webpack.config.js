@@ -2,7 +2,11 @@ const path = require('path');
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
+
+if (!process.env.IDLE_LOGOUT_TIME_MINUTES) {
+  delete process.env.IDLE_LOGOUT_TIME_MINUTES;
+}
 
 const config = {
   mode: 'production',
@@ -103,8 +107,8 @@ const config = {
       minify: { removeComments: true },
       template: 'src/index.html'
     }),
-    new HtmlWebpackIncludeAssetsPlugin({
-      assets: ['legacy.css', 'app.css'],
+    new HtmlWebpackTagsPlugin({
+      tags: ['legacy.css', 'app.css'],
       append: true,
       hash: true
     })

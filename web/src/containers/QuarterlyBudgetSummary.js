@@ -25,7 +25,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
           <Fragment
             key={source}
           >
-            <h3 className="ds-h3">{sourceDisplay}</h3>
+            <h4 className="ds-h4">{sourceDisplay}</h4>
             {years.map((year) => (
               <table
                 className="budget-table"
