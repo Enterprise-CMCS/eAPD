@@ -39,7 +39,7 @@ const StateDashboard = (
   };
 
   return (
-    <div className="ds-l-container ds-u-margin-top--7">
+    <div className="ds-l-container ds-u-margin-top--7 ds-u-margin-bottom--5">
       <div className="ds-l-row">
         <div className="ds-l-col--8 ds-u-margin-x--auto ">
           <h1 className="ds-h1">

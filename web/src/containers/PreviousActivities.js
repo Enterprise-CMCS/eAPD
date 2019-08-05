@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
-import { RichText } from '../components/Inputs';
+import RichText from '../components/RichText';
 import { Section, Subsection } from '../components/Section';
 import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
 import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
@@ -34,9 +34,9 @@ const PreviousActivities = ({ previousActivitySummary, updateApd }) => (
         id="prev-activities-table"
         resource="previousActivities.actualExpenses"
       >
-          <ApdPreviousActivityTableHI />
-          <ApdPreviousActivityTableMMIS />
-          <ApdPreviousActivityTableTotal />
+        <ApdPreviousActivityTableHI />
+        <ApdPreviousActivityTableMMIS />
+        <ApdPreviousActivityTableTotal />
       </Subsection>
     </Section>
   </Waypoint>

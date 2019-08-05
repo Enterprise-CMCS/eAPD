@@ -1,16 +1,19 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 import { push } from 'connected-react-router';
 
 import { plain as Header, mapStateToProps, mapDispatchToProps } from './Header';
 
 describe('Header component', () => {
-  it('renders correctly when the dropdown is closed and the page is top level', ()=> {
+  it('renders correctly when the dropdown is closed and the page is top level', () => {
     const component = shallow(
       <Header
         authenticated
-        currentUser={{ role: "admin", state: { id: "wa", name: "Washington" }, username: "frasiercrane@kacl.com"}}
+        currentUser={{
+          role: 'admin',
+          state: { id: 'wa', name: 'Washington' },
+          username: 'frasiercrane@kacl.com'
+        }}
         isAdmin
         pushRoute={() => {}}
         ariaExpanded={false}
@@ -24,7 +27,11 @@ describe('Header component', () => {
     const component = shallow(
       <Header
         authenticated
-        currentUser={{ role: "admin", state: { id: "wa", name: "Washington" }, username: "frasiercrane@kacl.com"}}
+        currentUser={{
+          role: 'admin',
+          state: { id: 'wa', name: 'Washington' },
+          username: 'frasiercrane@kacl.com'
+        }}
         isAdmin
         pushRoute={() => {}}
         ariaExpanded={false}
@@ -105,7 +112,11 @@ describe('Header component', () => {
     const component = shallow(
       <Header
         authenticated
-        currentUser={{ role: "admin", state: { id: "wa", name: "Washington" }, username: "frasiercrane@kacl.com"}}
+        currentUser={{
+          role: 'admin',
+          state: { id: 'wa', name: 'Washington' },
+          username: 'frasiercrane@kacl.com'
+        }}
         isAdmin
         pushRoute={() => {}}
         ariaExpanded={false}
@@ -119,7 +130,11 @@ describe('Header component', () => {
     const component = shallow(
       <Header
         authenticated
-        currentUser={{ role: "admin", state: { id: "wa", name: "Washington" }, username: "frasiercrane@kacl.com"}}
+        currentUser={{
+          role: 'admin',
+          state: { id: 'wa', name: 'Washington' },
+          username: 'frasiercrane@kacl.com'
+        }}
         isAdmin={false}
         pushRoute={() => {}}
         ariaExpanded={false}
@@ -127,27 +142,6 @@ describe('Header component', () => {
       />
     );
     expect(component).toMatchSnapshot();
-  });
-
-  it('goes to the logout route', () => {
-    const event = { preventDefault: sinon.spy() };
-    const pushRouteProp = sinon.spy();
-
-    const component = shallow(
-     <Header
-        authenticated
-        currentUser={{ role: "admin", state: { id: "wa", name: "Washington" }, username: "frasiercrane@kacl.com"}}
-        isAdmin={false}
-        pushRoute={pushRouteProp}
-        ariaExpanded={false}
-        showSiteTitle={false}
-      />
-    );
-
-    component.find('Button').simulate('click', event);
-
-    expect(pushRouteProp.calledWith('/logout')).toBeTruthy();
-    expect(event.preventDefault.called).toBeTruthy();
   });
 
   it('maps state to props', () => {
@@ -165,7 +159,11 @@ describe('Header component', () => {
       }
     };
 
-    expect(mapStateToProps(state)).toEqual({ authenticated: 'some value', currentUser: { role: 'admin' }, isAdmin: true});
+    expect(mapStateToProps(state)).toEqual({
+      authenticated: 'some value',
+      currentUser: { role: 'admin' },
+      isAdmin: true
+    });
   });
 
   it('maps dispatch to props', () => {
