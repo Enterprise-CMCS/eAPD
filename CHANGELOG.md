@@ -23,6 +23,7 @@ Anticipated release: TBD
 - Adds spacing around the Medicaid director and Medicaid office address form headers ([#1646])
 - Adds margin to the bottom of the state dashboard ([#1601])
 - Adds an ARIA region component to prevent screen readers from prematurely announcing quarterly budget numbers ([#1731])
+- Adds a more informative error message if attempting to save an APD while logged out ([#1729])
 
 #### ⚙️ Behind the scenes
 
@@ -61,4 +62,5 @@ Pilot release to select state partners
 [#1712]: https://github.com/18F/cms-hitech-apd/pull/1712
 [#1713]: https://github.com/18F/cms-hitech-apd/pull/1713
 [#1715]: https://github.com/18F/cms-hitech-apd/pull/1715
+[#1729]: https://github.com/18F/cms-hitech-apd/issues/1729
 [#1730]: https://github.com/18F/cms-hitech-apd/pull/1730
