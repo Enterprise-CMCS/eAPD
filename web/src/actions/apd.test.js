@@ -514,7 +514,7 @@ describe('apd actions', () => {
 
       const expectedActions = [
         { type: actions.SAVE_APD_REQUEST },
-        { type: actions.NOT_LOGGED_IN }
+        { type: actions.SAVE_APD_FAILURE, data: 'save-apd.not-logged-in' }
       ];
 
       return store.dispatch(actions.saveApd({ serialize })).catch(() => {

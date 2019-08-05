@@ -17,7 +17,6 @@ export const DELETE_APD_FAILURE = Symbol('delete apd : failure');
 export const GET_APD_REQUEST = 'GET_APD_REQUEST';
 export const GET_APD_SUCCESS = 'GET_APD_SUCCESS';
 export const GET_APD_FAILURE = 'GET_APD_FAILURE';
-export const NOT_LOGGED_IN = Symbol('not logged in');
 export const REMOVE_APD_KEY_PERSON = 'REMOVE_APD_KEY_PERSON';
 export const SAVE_APD_REQUEST = 'SAVE_APD_REQUEST';
 export const SAVE_APD_SUCCESS = 'SAVE_APD_SUCCESS';
@@ -101,7 +100,7 @@ export const createApd = ({
 
 export const requestSave = () => ({ type: SAVE_APD_REQUEST });
 export const saveSuccess = data => ({ type: SAVE_APD_SUCCESS, data });
-export const saveFailure = () => ({ type: SAVE_APD_FAILURE });
+export const saveFailure = data => ({ type: SAVE_APD_FAILURE, data });
 
 export const fetchApd = ({
   global = window,
@@ -222,7 +221,7 @@ export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
     })
     .catch(error => {
       if (error.response.status === 403) {
-        dispatch({ type: NOT_LOGGED_IN });
+        dispatch(saveFailure('save-apd.not-logged-in'));
       } else {
         dispatch(saveFailure());
       }
