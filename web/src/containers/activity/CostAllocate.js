@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import CostAllocateFFP from './CostAllocateFFP';
 import { updateActivity as updateActivityAction } from '../../actions/activities';
 import Instruction from '../../components/Instruction';
-import { RichText } from '../../components/Inputs';
+import RichText from '../../components/RichText';
 import { Subsection } from '../../components/Section';
 
 const CostAllocate = props => {
@@ -40,7 +40,7 @@ const CostAllocate = props => {
             level: 'h6',
             className: 'ds-h5'
           }}
-          />
+        />
         <RichText
           content={otherFundingDesc}
           onSync={sync('otherFundingDesc')}
@@ -49,7 +49,6 @@ const CostAllocate = props => {
       </div>
       <hr />
       <CostAllocateFFP aKey={activity.key} />
-
     </Subsection>
   );
 };
