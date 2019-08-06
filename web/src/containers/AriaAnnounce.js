@@ -8,6 +8,7 @@ const AriaAnnounce = (props) =>{
     const {ariaMessage} = props;
     return (
         <div
+            className="ds-u-visibility--screen-reader"
             role="region"
             aria-live="polite"
         >
