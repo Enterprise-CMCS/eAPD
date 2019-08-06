@@ -6,7 +6,7 @@ exports[`Wrapper component renders correctly in dev mode 1`] = `
 >
   <a
     className="skip-nav"
-    href="#apd-title"
+    href="#start-main-content"
   >
     Skip to main content
   </a>
@@ -24,7 +24,7 @@ exports[`Wrapper component renders correctly in non-dev mode 1`] = `
 >
   <a
     className="skip-nav"
-    href="#apd-title"
+    href="#start-main-content"
   >
     Skip to main content
   </a>
