@@ -5,6 +5,7 @@ Anticipated release: TBD
 #### 🚀 New features
 
 - Attempt to alert users before automatically logging them out due to inactivity. The app will try to use built-in browser notifications as well as flashing the tab title. In browsers that support it, the app treats activity in any eAPD tab as valid, so all eAPD tabs will remain valid as long as at least one of them is getting activity. ([#1697])
+- Automatically select numeric form field contents when the field is focused if the current value is 0 ([#1736])
 
 #### 🐛 Bugs fixed
 
@@ -25,7 +26,6 @@ Anticipated release: TBD
 - Adds an ARIA region component to prevent screen readers from prematurely announcing quarterly budget numbers ([#1731])
 - Fixed alignment of the message if there are no APDs on the state dashboard ([#1602])
 - Adds spacing between the login form and the "forgotten password" help link ([#1600])
-- Automatically select form field contents when the field is focused if they are numeric and the current value is 0 ([#1736])
 
 #### ⚙️ Behind the scenes
 
