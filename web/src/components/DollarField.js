@@ -1,6 +1,6 @@
 import { unmaskValue } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import NumberField from './NumberField';
 
 const maskValue = value => {
