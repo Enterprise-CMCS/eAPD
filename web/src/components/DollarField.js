@@ -1,6 +1,7 @@
-import { TextField, unmaskValue } from '@cmsgov/design-system-core';
+import { unmaskValue } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import NumberField from './NumberField';
 
 const maskValue = value => {
   const num = +value;
@@ -26,7 +27,7 @@ const DollarField = ({ onChange, value, ...rest }) => {
   );
 
   return (
-    <TextField
+    <NumberField
       {...rest}
       mask="currency"
       value={local}
