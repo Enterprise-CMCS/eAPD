@@ -1,4 +1,3 @@
-import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -6,6 +5,7 @@ import { connect } from 'react-redux';
 import { updateActivity } from '../../actions/activities';
 import { ariaAnnounceFFPQuarterly } from '../../actions/aria';
 import Dollars from '../../components/Dollars';
+import NumberField from '../../components/NumberField';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
 import { formatPerc } from '../../util/formats';
@@ -83,7 +83,7 @@ class CostAllocateFFPQuarterly extends Component {
                     {QUARTERS.map(q => (
                       <td key={q}>
                         <div className="budget-table--input__percent">
-                          <TextField
+                          <NumberField
                             className="budget-table--input-holder"
                             fieldClassName="budget-table--input__number"
                             label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
@@ -104,10 +104,7 @@ class CostAllocateFFPQuarterly extends Component {
                 <tr>
                   <Fragment key={year}>
                     {QUARTERS.map(q => (
-                      <td
-                        className="budget-table--number"
-                        key={q}
-                      >
+                      <td className="budget-table--number" key={q}>
                         <Dollars>{quarterlyFFP[year][q][name].dollars}</Dollars>
                       </td>
                     ))}
@@ -173,12 +170,13 @@ CostAllocateFFPQuarterly.propTypes = {
   years: PropTypes.array.isRequired,
   year: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
-  announce: PropTypes.func.isRequired,
+  announce: PropTypes.func.isRequired
 };
 
 const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
-  const mapStateToProps = (state, props) => selectCostAllocateFFPBudget(state, props);
+  const mapStateToProps = (state, props) =>
+    selectCostAllocateFFPBudget(state, props);
   return mapStateToProps;
 };
 
