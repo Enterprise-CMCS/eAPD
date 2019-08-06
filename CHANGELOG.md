@@ -25,6 +25,7 @@ Anticipated release: TBD
 - Adds an ARIA region component to prevent screen readers from prematurely announcing quarterly budget numbers ([#1731])
 - Fixed alignment of the message if there are no APDs on the state dashboard ([#1602])
 - Adds spacing between the login form and the "forgotten password" help link ([#1600])
+- Automatically select form field contents when the field is focused if they are numeric and the current value is 0 ([#1736])
 
 #### ⚙️ Behind the scenes
 
@@ -66,3 +67,4 @@ Pilot release to select state partners
 [#1713]: https://github.com/18F/cms-hitech-apd/pull/1713
 [#1715]: https://github.com/18F/cms-hitech-apd/pull/1715
 [#1730]: https://github.com/18F/cms-hitech-apd/pull/1730
+[#1736]: https://github.com/18F/cms-hitech-apd/issues/1736
