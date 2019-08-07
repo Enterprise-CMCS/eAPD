@@ -3,6 +3,7 @@
 exports[`card form wrapper disables the save button if canSubmit is false 1`] = `
 <div
   className="card--container"
+  id="start-main-content"
 >
   <div
     className="ds-l-container"
@@ -60,6 +61,7 @@ exports[`card form wrapper disables the save button if canSubmit is false 1`] = 
 exports[`card form wrapper does not render a cancel button if form is not cancelable 1`] = `
 <div
   className="card--container"
+  id="start-main-content"
 >
   <div
     className="ds-l-container"
@@ -102,6 +104,7 @@ exports[`card form wrapper does not render a cancel button if form is not cancel
 exports[`card form wrapper renders a footer if provided 1`] = `
 <div
   className="card--container"
+  id="start-main-content"
 >
   <div
     className="ds-l-container"
@@ -159,6 +162,7 @@ exports[`card form wrapper renders a footer if provided 1`] = `
 exports[`card form wrapper renders a legend if provided 1`] = `
 <div
   className="card--container"
+  id="start-main-content"
 >
   <div
     className="ds-l-container"
@@ -214,6 +218,7 @@ exports[`card form wrapper renders a legend if provided 1`] = `
 exports[`card form wrapper renders a spinny-wheel on the save button and disables it if the form is busy 1`] = `
 <div
   className="card--container"
+  id="start-main-content"
 >
   <div
     className="ds-l-container"
@@ -276,6 +281,7 @@ exports[`card form wrapper renders a spinny-wheel on the save button and disable
 exports[`card form wrapper renders a success alert if message provided 1`] = `
 <div
   className="card--container"
+  id="start-main-content"
 >
   <div
     className="ds-l-container"
@@ -332,6 +338,7 @@ exports[`card form wrapper renders a success alert if message provided 1`] = `
 exports[`card form wrapper renders an error alert if message provided 1`] = `
 <div
   className="card--container"
+  id="start-main-content"
 >
   <div
     className="ds-l-container"
@@ -388,6 +395,7 @@ exports[`card form wrapper renders an error alert if message provided 1`] = `
 exports[`card form wrapper renders with a save button if onSave prop is provided 1`] = `
 <div
   className="card--container"
+  id="start-main-content"
 >
   <div
     className="ds-l-container"
@@ -445,6 +453,7 @@ exports[`card form wrapper renders with a save button if onSave prop is provided
 exports[`card form wrapper renders without a save button if onSave prop is missing 1`] = `
 <div
   className="card--container"
+  id="start-main-content"
 >
   <div
     className="ds-l-container"
