@@ -100,7 +100,7 @@ export const createApd = ({
 
 export const requestSave = () => ({ type: SAVE_APD_REQUEST });
 export const saveSuccess = data => ({ type: SAVE_APD_SUCCESS, data });
-export const saveFailure = () => ({ type: SAVE_APD_FAILURE });
+export const saveFailure = data => ({ type: SAVE_APD_FAILURE, data });
 
 export const fetchApd = ({
   global = window,
@@ -220,7 +220,11 @@ export const saveApd = ({ serialize = toAPI } = {}) => (dispatch, state) => {
       return res.data;
     })
     .catch(error => {
-      dispatch(saveFailure());
+      if (error.response.status === 403) {
+        dispatch(saveFailure('save-apd.not-logged-in'));
+      } else {
+        dispatch(saveFailure());
+      }
       throw error;
     });
 };
