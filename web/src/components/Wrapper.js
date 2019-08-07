@@ -22,11 +22,14 @@ class Wrapper extends Component {
     const showSiteTitle = document.location.pathname === '/';
     return (
       <div className="site">
+        <a href="#start-main-content" className="skip-nav">
+          Skip to main content
+        </a>
         <Header showSiteTitle={showSiteTitle} />
         {children}
         <Footer />
-      </div>)
-    ;
+      </div>
+    );
   }
 }
 

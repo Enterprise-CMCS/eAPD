@@ -8,6 +8,7 @@ Anticipated release: TBD
 
 #### 🐛 Bugs fixed
 
+- Add a "skip to main content" link ([#1304])
 - Prompt for confirmation before deleting APD key personnel ([#1651], [#1647])
 - Fixed accessibility issues on the login page and the dashboard ([#1688])
 - Fixed semantic heading levels ([#1695])
@@ -22,6 +23,11 @@ Anticipated release: TBD
 - Removed the emoji button from the rich text editor ([#1649])
 - Adds spacing around the Medicaid director and Medicaid office address form headers ([#1646])
 - Adds margin to the bottom of the state dashboard ([#1601])
+- Adds an ARIA region component to prevent screen readers from prematurely announcing quarterly budget numbers ([#1731])
+- Fixed alignment of the message if there are no APDs on the state dashboard ([#1602])
+- Adds spacing between the login form and the "forgotten password" help link ([#1600])
+- Adds per-year APD key personnel costs to the review view ([#1747])
+- Adds a more informative error message if attempting to save an APD while logged out ([#1729])
 
 #### ⚙️ Behind the scenes
 
@@ -42,9 +48,12 @@ Released: July 9, 2019
 
 Pilot release to select state partners
 
+[#1304]: https://github.com/18F/cms-hitech-apd/issues/1304
 [#1423]: https://github.com/18F/cms-hitech-apd/issues/1423
 [#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
+[#1600]: https://github.com/18F/cms-hitech-apd/issues/1600
 [#1601]: https://github.com/18F/cms-hitech-apd/pull/1601
+[#1602]: https://github.com/18F/cms-hitech-apd/pull/1602
 [#1640]: https://github.com/18F/cms-hitech-apd/issues/1640
 [#1646]: https://github.com/18F/cms-hitech-apd/pull/1646
 [#1647]: https://github.com/18F/cms-hitech-apd/pull/1647
@@ -60,4 +69,6 @@ Pilot release to select state partners
 [#1712]: https://github.com/18F/cms-hitech-apd/pull/1712
 [#1713]: https://github.com/18F/cms-hitech-apd/pull/1713
 [#1715]: https://github.com/18F/cms-hitech-apd/pull/1715
+[#1729]: https://github.com/18F/cms-hitech-apd/issues/1729
 [#1730]: https://github.com/18F/cms-hitech-apd/pull/1730
+[#1747]: https://github.com/18F/cms-hitech-apd/issues/1747
