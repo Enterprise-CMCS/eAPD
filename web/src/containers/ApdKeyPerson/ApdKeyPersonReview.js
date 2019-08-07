@@ -16,6 +16,18 @@ const ApdStateKeyPerson = ({
     [costs]
   );
 
+  const costByYear = useMemo(
+    () =>
+      hasCosts
+        ? Object.keys(costs).map(year => (
+            <li key={year}>
+              <strong>FFY {year} cost:</strong> <Dollars>{costs[year]}</Dollars>
+            </li>
+          ))
+        : null,
+    [costs]
+  );
+
   return (
     <Fragment>
       <div className="visibility--screen">
@@ -29,8 +41,10 @@ const ApdStateKeyPerson = ({
             {primary ? <li>Primary APD Point of Contact</li> : null}
             <li>{position}</li>
             <li>
-              <strong>Total cost:</strong> <Dollars>{hasCosts ? totalCost : 0}</Dollars>
+              <strong>Total cost:</strong>{' '}
+              <Dollars>{hasCosts ? totalCost : 0}</Dollars>
             </li>
+            {costByYear}
           </ul>
         </Review>
       </div>
@@ -40,10 +54,14 @@ const ApdStateKeyPerson = ({
             {primary ? <li>Primary APD Point of Contact</li> : null}
             <li>{position}</li>
             <li>{email}</li>
-            <li><strong>Time commitment to project:</strong> {percentTime}%</li>
             <li>
-              <strong>Total cost:</strong> <Dollars>{hasCosts ? totalCost : 0}</Dollars>
+              <strong>Time commitment to project:</strong> {percentTime}%
             </li>
+            <li>
+              <strong>Total cost:</strong>{' '}
+              <Dollars>{hasCosts ? totalCost : 0}</Dollars>
+            </li>
+            {costByYear}
           </ul>
         </Review>
       </div>
@@ -59,7 +77,8 @@ ApdStateKeyPerson.propTypes = {
     email: PropTypes.string.isRequired,
     hasCosts: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-    percentTime: PropTypes.number.isRequired,
+    percentTime: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+      .isRequired,
     position: PropTypes.string.isRequired
   }).isRequired,
   onDeleteClick: PropTypes.func
