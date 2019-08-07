@@ -29,6 +29,36 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             400
           </Dollars>
         </li>
+        <li
+          key="1992"
+        >
+          <strong>
+            FFY 
+            1992
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            100
+          </Dollars>
+        </li>
+        <li
+          key="1993"
+        >
+          <strong>
+            FFY 
+            1993
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            300
+          </Dollars>
+        </li>
       </ul>
     </StandardReview>
   </div>
@@ -67,6 +97,36 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             long={false}
           >
             400
+          </Dollars>
+        </li>
+        <li
+          key="1992"
+        >
+          <strong>
+            FFY 
+            1992
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            100
+          </Dollars>
+        </li>
+        <li
+          key="1993"
+        >
+          <strong>
+            FFY 
+            1993
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            300
           </Dollars>
         </li>
       </ul>
