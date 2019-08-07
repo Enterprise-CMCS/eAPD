@@ -9,6 +9,7 @@ Anticipated release: TBD
 
 #### 🐛 Bugs fixed
 
+- Add a "skip to main content" link ([#1304])
 - Prompt for confirmation before deleting APD key personnel ([#1651], [#1647])
 - Fixed accessibility issues on the login page and the dashboard ([#1688])
 - Fixed semantic heading levels ([#1695])
@@ -26,6 +27,8 @@ Anticipated release: TBD
 - Adds an ARIA region component to prevent screen readers from prematurely announcing quarterly budget numbers ([#1731])
 - Fixed alignment of the message if there are no APDs on the state dashboard ([#1602])
 - Adds spacing between the login form and the "forgotten password" help link ([#1600])
+- Adds per-year APD key personnel costs to the review view ([#1747])
+- Adds a more informative error message if attempting to save an APD while logged out ([#1729])
 - Use a dollar field for the "other funding" field in the cost allocation form ([#1754])
 
 #### ⚙️ Behind the scenes
@@ -47,6 +50,7 @@ Released: July 9, 2019
 
 Pilot release to select state partners
 
+[#1304]: https://github.com/18F/cms-hitech-apd/issues/1304
 [#1423]: https://github.com/18F/cms-hitech-apd/issues/1423
 [#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
 [#1600]: https://github.com/18F/cms-hitech-apd/issues/1600
@@ -67,6 +71,8 @@ Pilot release to select state partners
 [#1712]: https://github.com/18F/cms-hitech-apd/pull/1712
 [#1713]: https://github.com/18F/cms-hitech-apd/pull/1713
 [#1715]: https://github.com/18F/cms-hitech-apd/pull/1715
+[#1729]: https://github.com/18F/cms-hitech-apd/issues/1729
 [#1730]: https://github.com/18F/cms-hitech-apd/pull/1730
 [#1736]: https://github.com/18F/cms-hitech-apd/issues/1736
+[#1747]: https://github.com/18F/cms-hitech-apd/issues/1747
 [#1754]: https://github.com/18F/cms-hitech-apd/issues/1754
