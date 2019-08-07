@@ -62,7 +62,13 @@ const StateDashboard = (
         </div>
       </div>
       {fetching ? <Loading /> : null}
-      {!fetching && apds.length === 0 ? t('stateDashboard.none') : null}
+      {!fetching && apds.length === 0 ? (
+        <div className="ds-l-row">
+          <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2 ds-u-padding-bottom--5 ds-u-color--muted">
+            {t('stateDashboard.none')}
+          </div>
+        </div>
+      ) : null}
       {apds.map(apd => (
         <div key={apd.id} className="ds-l-row">
           <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
