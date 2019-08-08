@@ -3,7 +3,7 @@
 exports[`the ContractorResourceForm component renders correctly 1`] = `
 <Fragment>
   <TextField
-    autoFocus="true"
+    autoFocus={true}
     label="Contractor Name"
     name="contractor-name"
     type="text"
@@ -159,7 +159,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
 exports[`the ContractorResourceForm component renders if use hourly data is selected 1`] = `
 <Fragment>
   <TextField
-    autoFocus="true"
+    autoFocus={true}
     label="Contractor Name"
     name="contractor-name"
     type="text"
