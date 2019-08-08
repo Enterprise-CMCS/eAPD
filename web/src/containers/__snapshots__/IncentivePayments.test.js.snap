@@ -138,56 +138,52 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehCt payments for 1, quarter 1"
             labelClassName="sr-only"
             name="ehCt-payments-1-q1"
             onChange={[Function]}
-            type="text"
             value={10}
           />
         </td>
         <td
           key="2"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehCt payments for 1, quarter 2"
             labelClassName="sr-only"
             name="ehCt-payments-1-q2"
             onChange={[Function]}
-            type="text"
             value={11}
           />
         </td>
         <td
           key="3"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehCt payments for 1, quarter 3"
             labelClassName="sr-only"
             name="ehCt-payments-1-q3"
             onChange={[Function]}
-            type="text"
             value={12}
           />
         </td>
         <td
           key="4"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehCt payments for 1, quarter 4"
             labelClassName="sr-only"
             name="ehCt-payments-1-q4"
             onChange={[Function]}
-            type="text"
             value=""
           />
         </td>
@@ -278,56 +274,52 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epCt payments for 1, quarter 1"
             labelClassName="sr-only"
             name="epCt-payments-1-q1"
             onChange={[Function]}
-            type="text"
             value={26}
           />
         </td>
         <td
           key="2"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epCt payments for 1, quarter 2"
             labelClassName="sr-only"
             name="epCt-payments-1-q2"
             onChange={[Function]}
-            type="text"
             value={27}
           />
         </td>
         <td
           key="3"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epCt payments for 1, quarter 3"
             labelClassName="sr-only"
             name="epCt-payments-1-q3"
             onChange={[Function]}
-            type="text"
             value={28}
           />
         </td>
         <td
           key="4"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epCt payments for 1, quarter 4"
             labelClassName="sr-only"
             name="epCt-payments-1-q4"
             onChange={[Function]}
-            type="text"
             value=""
           />
         </td>
@@ -475,56 +467,52 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehCt payments for 2, quarter 1"
             labelClassName="sr-only"
             name="ehCt-payments-2-q1"
             onChange={[Function]}
-            type="text"
             value={14}
           />
         </td>
         <td
           key="2"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehCt payments for 2, quarter 2"
             labelClassName="sr-only"
             name="ehCt-payments-2-q2"
             onChange={[Function]}
-            type="text"
             value={15}
           />
         </td>
         <td
           key="3"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehCt payments for 2, quarter 3"
             labelClassName="sr-only"
             name="ehCt-payments-2-q3"
             onChange={[Function]}
-            type="text"
             value={16}
           />
         </td>
         <td
           key="4"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="ehCt payments for 2, quarter 4"
             labelClassName="sr-only"
             name="ehCt-payments-2-q4"
             onChange={[Function]}
-            type="text"
             value=""
           />
         </td>
@@ -615,56 +603,52 @@ exports[`incentive payments component renders correctly 1`] = `
         <td
           key="1"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epCt payments for 2, quarter 1"
             labelClassName="sr-only"
             name="epCt-payments-2-q1"
             onChange={[Function]}
-            type="text"
             value={30}
           />
         </td>
         <td
           key="2"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epCt payments for 2, quarter 2"
             labelClassName="sr-only"
             name="epCt-payments-2-q2"
             onChange={[Function]}
-            type="text"
             value={31}
           />
         </td>
         <td
           key="3"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epCt payments for 2, quarter 3"
             labelClassName="sr-only"
             name="epCt-payments-2-q3"
             onChange={[Function]}
-            type="text"
             value={32}
           />
         </td>
         <td
           key="4"
         >
-          <TextField
+          <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
             label="epCt payments for 2, quarter 4"
             labelClassName="sr-only"
             name="epCt-payments-2-q4"
             onChange={[Function]}
-            type="text"
             value=""
           />
         </td>

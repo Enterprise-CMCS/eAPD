@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 
 import DollarField from '../../../components/DollarField';
+import NumberField from '../../../components/NumberField';
 
 const StatePersonForm = ({
   item: { desc, title, years },
@@ -61,7 +62,7 @@ const StatePersonForm = ({
               value={amt}
               onChange={getEditCostForYear(year)}
             />
-            <TextField
+            <NumberField
               label="Number of FTEs"
               name="ftes"
               size="medium"
