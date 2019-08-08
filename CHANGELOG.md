@@ -5,6 +5,7 @@ Anticipated release: TBD
 #### 🚀 New features
 
 - Attempt to alert users before automatically logging them out due to inactivity. The app will try to use built-in browser notifications as well as flashing the tab title. In browsers that support it, the app treats activity in any eAPD tab as valid, so all eAPD tabs will remain valid as long as at least one of them is getting activity. ([#1697])
+- Automatically select numeric form field contents when the field is focused if the current value is 0 ([#1736])
 
 #### 🐛 Bugs fixed
 
@@ -28,6 +29,7 @@ Anticipated release: TBD
 - Adds spacing between the login form and the "forgotten password" help link ([#1600])
 - Adds per-year APD key personnel costs to the review view ([#1747])
 - Adds a more informative error message if attempting to save an APD while logged out ([#1729])
+- Use a dollar field for the "other funding" field in the cost allocation form ([#1754])
 
 #### ⚙️ Behind the scenes
 
@@ -71,4 +73,6 @@ Pilot release to select state partners
 [#1715]: https://github.com/18F/cms-hitech-apd/pull/1715
 [#1729]: https://github.com/18F/cms-hitech-apd/issues/1729
 [#1730]: https://github.com/18F/cms-hitech-apd/pull/1730
+[#1736]: https://github.com/18F/cms-hitech-apd/issues/1736
 [#1747]: https://github.com/18F/cms-hitech-apd/issues/1747
+[#1754]: https://github.com/18F/cms-hitech-apd/issues/1754
