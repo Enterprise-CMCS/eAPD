@@ -508,9 +508,26 @@ describe('apd actions', () => {
       });
     });
 
-    it('creates save request and save failure actions if the save fails', () => {
+    it('creates save request and logged-out actions if the user is not logged in', () => {
       const store = mockStore(state);
       fetchMock.onPut('/apds/id-to-update').reply(403, [{ foo: 'bar' }]);
+
+      const expectedActions = [
+        { type: actions.SAVE_APD_REQUEST },
+        { type: actions.SAVE_APD_FAILURE, data: 'save-apd.not-logged-in' }
+      ];
+
+      return store.dispatch(actions.saveApd({ serialize })).catch(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(serialize.calledWith(state.apd.data, state.activities)).toEqual(
+          true
+        );
+      });
+    });
+
+    it('creates save request and save failure actions if the save fails', () => {
+      const store = mockStore(state);
+      fetchMock.onPut('/apds/id-to-update').reply(400, [{ foo: 'bar' }]);
 
       const expectedActions = [
         { type: actions.SAVE_APD_REQUEST },

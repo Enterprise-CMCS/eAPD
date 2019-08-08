@@ -27,59 +27,81 @@ exports[`DollarField component passes back numeric values on change, but still r
   size="medium"
   value="12332"
 >
-  <TextField
+  <NumberField
     className="stuff"
     label="test label"
     mask="currency"
     name="test name"
     onChange={[Function]}
     size="medium"
-    type="text"
     value="123,456"
   >
-    <div
-      className="ds-u-clearfix stuff"
-    >
-      <FormLabel
-        component="label"
-        fieldId="textfield_3"
-      >
-        <label
-          className="ds-c-label"
-          htmlFor="textfield_3"
-        >
-          <span
-            className=""
-          >
-            test label
-          </span>
-        </label>
-      </FormLabel>
-      <div
-        className="ds-c-field-mask ds-c-field-mask--currency"
-      >
-        <div
-          className="ds-c-field__before ds-c-field__before--currency"
-        >
-          $
-        </div>
-        <Mask
-          mask="currency"
-        >
-          <input
+    <TextField
+      className="stuff"
+      fieldRef={
+        Object {
+          "current": <input
             aria-label="test label. Enter amount in dollars."
-            className="ds-c-field ds-c-field--currency ds-c-field--medium"
+            class="ds-c-field ds-c-field--currency ds-c-field--medium"
             id="textfield_3"
             name="test name"
-            onBlur={[Function]}
-            onChange={[Function]}
             type="text"
             value="123,456"
-          />
-        </Mask>
+          />,
+        }
+      }
+      label="test label"
+      mask="currency"
+      name="test name"
+      onChange={[Function]}
+      size="medium"
+      type="text"
+      value="123,456"
+    >
+      <div
+        className="ds-u-clearfix stuff"
+      >
+        <FormLabel
+          component="label"
+          fieldId="textfield_3"
+        >
+          <label
+            className="ds-c-label"
+            htmlFor="textfield_3"
+          >
+            <span
+              className=""
+            >
+              test label
+            </span>
+          </label>
+        </FormLabel>
+        <div
+          className="ds-c-field-mask ds-c-field-mask--currency"
+        >
+          <div
+            className="ds-c-field__before ds-c-field__before--currency"
+          >
+            $
+          </div>
+          <Mask
+            mask="currency"
+          >
+            <input
+              aria-label="test label. Enter amount in dollars."
+              className="ds-c-field ds-c-field--currency ds-c-field--medium"
+              id="textfield_3"
+              name="test name"
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="text"
+              value="123,456"
+            />
+          </Mask>
+        </div>
       </div>
-    </div>
-  </TextField>
+    </TextField>
+  </NumberField>
 </DollarField>
 `;
 
@@ -92,59 +114,81 @@ exports[`DollarField component renders correctly, adds commas to big numbers, pa
   size="medium"
   value="123321"
 >
-  <TextField
+  <NumberField
     className="stuff"
     label="test label"
     mask="currency"
     name="test name"
     onChange={[Function]}
     size="medium"
-    type="text"
     value="123,321"
   >
-    <div
-      className="ds-u-clearfix stuff"
-    >
-      <FormLabel
-        component="label"
-        fieldId="textfield_2"
-      >
-        <label
-          className="ds-c-label"
-          htmlFor="textfield_2"
-        >
-          <span
-            className=""
-          >
-            test label
-          </span>
-        </label>
-      </FormLabel>
-      <div
-        className="ds-c-field-mask ds-c-field-mask--currency"
-      >
-        <div
-          className="ds-c-field__before ds-c-field__before--currency"
-        >
-          $
-        </div>
-        <Mask
-          mask="currency"
-        >
-          <input
+    <TextField
+      className="stuff"
+      fieldRef={
+        Object {
+          "current": <input
             aria-label="test label. Enter amount in dollars."
-            className="ds-c-field ds-c-field--currency ds-c-field--medium"
+            class="ds-c-field ds-c-field--currency ds-c-field--medium"
             id="textfield_2"
             name="test name"
-            onBlur={[Function]}
-            onChange={[Function]}
             type="text"
             value="123,321"
-          />
-        </Mask>
+          />,
+        }
+      }
+      label="test label"
+      mask="currency"
+      name="test name"
+      onChange={[Function]}
+      size="medium"
+      type="text"
+      value="123,321"
+    >
+      <div
+        className="ds-u-clearfix stuff"
+      >
+        <FormLabel
+          component="label"
+          fieldId="textfield_2"
+        >
+          <label
+            className="ds-c-label"
+            htmlFor="textfield_2"
+          >
+            <span
+              className=""
+            >
+              test label
+            </span>
+          </label>
+        </FormLabel>
+        <div
+          className="ds-c-field-mask ds-c-field-mask--currency"
+        >
+          <div
+            className="ds-c-field__before ds-c-field__before--currency"
+          >
+            $
+          </div>
+          <Mask
+            mask="currency"
+          >
+            <input
+              aria-label="test label. Enter amount in dollars."
+              className="ds-c-field ds-c-field--currency ds-c-field--medium"
+              id="textfield_2"
+              name="test name"
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="text"
+              value="123,321"
+            />
+          </Mask>
+        </div>
       </div>
-    </div>
-  </TextField>
+    </TextField>
+  </NumberField>
 </DollarField>
 `;
 
@@ -157,58 +201,80 @@ exports[`DollarField component renders correctly, does not add commas to small n
   size="medium"
   value="123"
 >
-  <TextField
+  <NumberField
     className="stuff"
     label="test label"
     mask="currency"
     name="test name"
     onChange={[Function]}
     size="medium"
-    type="text"
     value="123"
   >
-    <div
-      className="ds-u-clearfix stuff"
-    >
-      <FormLabel
-        component="label"
-        fieldId="textfield_1"
-      >
-        <label
-          className="ds-c-label"
-          htmlFor="textfield_1"
-        >
-          <span
-            className=""
-          >
-            test label
-          </span>
-        </label>
-      </FormLabel>
-      <div
-        className="ds-c-field-mask ds-c-field-mask--currency"
-      >
-        <div
-          className="ds-c-field__before ds-c-field__before--currency"
-        >
-          $
-        </div>
-        <Mask
-          mask="currency"
-        >
-          <input
+    <TextField
+      className="stuff"
+      fieldRef={
+        Object {
+          "current": <input
             aria-label="test label. Enter amount in dollars."
-            className="ds-c-field ds-c-field--currency ds-c-field--medium"
+            class="ds-c-field ds-c-field--currency ds-c-field--medium"
             id="textfield_1"
             name="test name"
-            onBlur={[Function]}
-            onChange={[Function]}
             type="text"
             value="123"
-          />
-        </Mask>
+          />,
+        }
+      }
+      label="test label"
+      mask="currency"
+      name="test name"
+      onChange={[Function]}
+      size="medium"
+      type="text"
+      value="123"
+    >
+      <div
+        className="ds-u-clearfix stuff"
+      >
+        <FormLabel
+          component="label"
+          fieldId="textfield_1"
+        >
+          <label
+            className="ds-c-label"
+            htmlFor="textfield_1"
+          >
+            <span
+              className=""
+            >
+              test label
+            </span>
+          </label>
+        </FormLabel>
+        <div
+          className="ds-c-field-mask ds-c-field-mask--currency"
+        >
+          <div
+            className="ds-c-field__before ds-c-field__before--currency"
+          >
+            $
+          </div>
+          <Mask
+            mask="currency"
+          >
+            <input
+              aria-label="test label. Enter amount in dollars."
+              className="ds-c-field ds-c-field--currency ds-c-field--medium"
+              id="textfield_1"
+              name="test name"
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="text"
+              value="123"
+            />
+          </Mask>
+        </div>
       </div>
-    </div>
-  </TextField>
+    </TextField>
+  </NumberField>
 </DollarField>
 `;
