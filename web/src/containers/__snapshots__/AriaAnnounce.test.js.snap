@@ -3,6 +3,7 @@
 exports[`aria announce component renders a message 1`] = `
 <div
   aria-live="polite"
+  className="ds-u-visibility--screen-reader"
   role="region"
 />
 `;
@@ -10,6 +11,7 @@ exports[`aria announce component renders a message 1`] = `
 exports[`aria announce component renders correctly 1`] = `
 <div
   aria-live="polite"
+  className="ds-u-visibility--screen-reader"
   role="region"
 />
 `;
