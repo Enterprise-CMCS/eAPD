@@ -28,6 +28,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       label="Other Funding Amount"
       labelClassName="ds-h5"
       name="cost-allocate-other-1066"
+      onBlur={null}
       onChange={[Function]}
       value={10}
     />
@@ -126,6 +127,7 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       label="Other Funding Amount"
       labelClassName="ds-h5"
       name="cost-allocate-other-1067"
+      onBlur={null}
       onChange={[Function]}
       value="0"
     />

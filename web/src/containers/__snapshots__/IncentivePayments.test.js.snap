@@ -74,6 +74,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="ehAmt payments for 1, quarter 1"
             labelClassName="sr-only"
             name="ehAmt-payments-1-q1"
+            onBlur={null}
             onChange={[Function]}
             value={2}
           />
@@ -87,6 +88,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="ehAmt payments for 1, quarter 2"
             labelClassName="sr-only"
             name="ehAmt-payments-1-q2"
+            onBlur={null}
             onChange={[Function]}
             value={3}
           />
@@ -100,6 +102,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="ehAmt payments for 1, quarter 3"
             labelClassName="sr-only"
             name="ehAmt-payments-1-q3"
+            onBlur={null}
             onChange={[Function]}
             value={4}
           />
@@ -113,6 +116,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="ehAmt payments for 1, quarter 4"
             labelClassName="sr-only"
             name="ehAmt-payments-1-q4"
+            onBlur={null}
             onChange={[Function]}
             value=""
           />
@@ -210,6 +214,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="epAmt payments for 1, quarter 1"
             labelClassName="sr-only"
             name="epAmt-payments-1-q1"
+            onBlur={null}
             onChange={[Function]}
             value={18}
           />
@@ -223,6 +228,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="epAmt payments for 1, quarter 2"
             labelClassName="sr-only"
             name="epAmt-payments-1-q2"
+            onBlur={null}
             onChange={[Function]}
             value={19}
           />
@@ -236,6 +242,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="epAmt payments for 1, quarter 3"
             labelClassName="sr-only"
             name="epAmt-payments-1-q3"
+            onBlur={null}
             onChange={[Function]}
             value={20}
           />
@@ -249,6 +256,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="epAmt payments for 1, quarter 4"
             labelClassName="sr-only"
             name="epAmt-payments-1-q4"
+            onBlur={null}
             onChange={[Function]}
             value=""
           />
@@ -403,6 +411,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="ehAmt payments for 2, quarter 1"
             labelClassName="sr-only"
             name="ehAmt-payments-2-q1"
+            onBlur={null}
             onChange={[Function]}
             value={6}
           />
@@ -416,6 +425,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="ehAmt payments for 2, quarter 2"
             labelClassName="sr-only"
             name="ehAmt-payments-2-q2"
+            onBlur={null}
             onChange={[Function]}
             value={7}
           />
@@ -429,6 +439,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="ehAmt payments for 2, quarter 3"
             labelClassName="sr-only"
             name="ehAmt-payments-2-q3"
+            onBlur={null}
             onChange={[Function]}
             value={8}
           />
@@ -442,6 +453,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="ehAmt payments for 2, quarter 4"
             labelClassName="sr-only"
             name="ehAmt-payments-2-q4"
+            onBlur={null}
             onChange={[Function]}
             value=""
           />
@@ -539,6 +551,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="epAmt payments for 2, quarter 1"
             labelClassName="sr-only"
             name="epAmt-payments-2-q1"
+            onBlur={null}
             onChange={[Function]}
             value={22}
           />
@@ -552,6 +565,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="epAmt payments for 2, quarter 2"
             labelClassName="sr-only"
             name="epAmt-payments-2-q2"
+            onBlur={null}
             onChange={[Function]}
             value={23}
           />
@@ -565,6 +579,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="epAmt payments for 2, quarter 3"
             labelClassName="sr-only"
             name="epAmt-payments-2-q3"
+            onBlur={null}
             onChange={[Function]}
             value={24}
           />
@@ -578,6 +593,7 @@ exports[`incentive payments component renders correctly 1`] = `
             label="epAmt payments for 2, quarter 4"
             labelClassName="sr-only"
             name="epAmt-payments-2-q4"
+            onBlur={null}
             onChange={[Function]}
             value=""
           />
