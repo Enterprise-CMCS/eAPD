@@ -1,7 +1,8 @@
-import { Choice, FormLabel, TextField } from '@cmsgov/design-system-core';
+import { FormLabel, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 import { t } from '../../i18n';
+import Choice from '../../components/Choice';
 import DollarField from '../../components/DollarField';
 import Dollars from '../../components/Dollars';
 
