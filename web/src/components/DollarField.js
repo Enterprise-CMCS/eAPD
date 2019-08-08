@@ -16,10 +16,10 @@ const DollarField = ({ onBlur, onChange, value, ...rest }) => {
 
   const blurHandler = useCallback(
     e => {
-      const value = +unmaskValue(e.target.value, 'currency');
-      const rounded = Math.round(+unmaskValue(e.target.value, 'currency'));
+      const fieldValue = +unmaskValue(e.target.value, 'currency');
+      const rounded = Math.round(fieldValue);
 
-      if (value !== rounded) {
+      if (fieldValue !== rounded) {
         setLocal(maskValue(rounded));
 
         if (onChange) {
