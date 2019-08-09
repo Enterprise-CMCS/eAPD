@@ -1,4 +1,5 @@
 const logger = require('../../logger')('apds route post');
+const { raw } = require('../../db');
 const { apd: defaultApdModel } = require('../../db').models;
 const { can } = require('../../middleware');
 
@@ -6,7 +7,7 @@ const defaultGetNewApd = require('./post.data');
 
 module.exports = (
   app,
-  { getNewApd = defaultGetNewApd, ApdModel = defaultApdModel } = {}
+  { db = raw, getNewApd = defaultGetNewApd, ApdModel = defaultApdModel } = {}
 ) => {
   logger.silly('setting up POST /apds/ route');
   app.post('/apds', can('edit-document'), async (req, res) => {
@@ -25,6 +26,11 @@ module.exports = (
       const apd = await ApdModel.where({ id: newApd.get('id') }).fetch({
         withRelated: ApdModel.withRelated
       });
+
+      await db('apds')
+        .where({ id: newApd.get('id') })
+        .update({ document: apd.toJSON() });
+
       res.send(apd);
     } catch (e) {
       logger.error(req, e);
