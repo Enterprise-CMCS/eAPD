@@ -1,4 +1,3 @@
-import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -6,6 +5,7 @@ import { connect } from 'react-redux';
 import { updateApd as updateApdAction } from '../actions/apd';
 import DollarField from '../components/DollarField';
 import Dollars from '../components/Dollars';
+import NumberField from '../components/NumberField';
 import { t } from '../i18n';
 import {
   selectApdYears,
@@ -66,7 +66,7 @@ class IncentivePayments extends Component {
               <tbody>
                 {INCENTIVE_ENTRIES.map(({ id, name, type }) => {
                   const InputComponent =
-                    type === 'amount' ? DollarField : TextField;
+                    type === 'amount' ? DollarField : NumberField;
 
                   return (
                     <tr key={id}>
