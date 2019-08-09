@@ -1,5 +1,4 @@
 import { Choice } from '@cmsgov/design-system-core';
-import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 
 const ChoiceComponent = props => {
