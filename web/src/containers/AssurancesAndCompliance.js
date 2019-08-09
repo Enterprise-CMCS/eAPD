@@ -1,10 +1,11 @@
-import { Choice, TextField } from '@cmsgov/design-system-core';
+import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Waypoint from './ConnectedWaypoint';
 import { updateApd as updateApdAction } from '../actions/apd';
+import Choice from '../components/Choice';
 import { Section, Subsection } from '../components/Section';
 import regLinks from '../data/assurancesAndCompliance.yaml';
 import { t } from '../i18n';
