@@ -434,6 +434,14 @@ describe('activities reducer', () => {
             contractorResources: [
               {
                 ...stateWithOne.byKey['1'].contractorResources[0],
+                hourly: {
+                  ...stateWithOne.byKey['1'].contractorResources[0].hourly,
+                  data: {
+                    ...stateWithOne.byKey['1'].contractorResources[0].hourly
+                      .data,
+                    '1975': { hours: '', rate: '' }
+                  }
+                },
                 years: {
                   ...stateWithOne.byKey['1'].contractorResources[0].years,
                   '1975': 0
@@ -504,6 +512,12 @@ describe('activities reducer', () => {
             contractorResources: [
               {
                 ...stateWithOne.byKey['1'].contractorResources[0],
+                hourly: {
+                  ...stateWithOne.byKey['1'].contractorResources[0].hourly,
+                  data: {
+                    '1973': { hours: '', rate: '' }
+                  }
+                },
                 years: {
                   '1973': 0
                 }
