@@ -1,9 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 
-import Choice from '../components/Choice';
-
-
+import Choice from './Choice';
 
 describe('Choice wrapper component', () => {
   it('renders correctly without checkedChildren', () =>{
