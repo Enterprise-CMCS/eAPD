@@ -76,7 +76,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
             <div
               className="ds-l-row ds-u-padding-left--2"
             >
-              <TextField
+              <NumberField
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1066"
@@ -105,7 +105,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
             <div
               className="ds-l-row ds-u-padding-left--2"
             >
-              <TextField
+              <NumberField
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1067"
@@ -230,7 +230,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
             <div
               className="ds-l-row ds-u-padding-left--2"
             >
-              <TextField
+              <NumberField
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1066"
@@ -259,7 +259,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
             <div
               className="ds-l-row ds-u-padding-left--2"
             >
-              <TextField
+              <NumberField
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1067"
