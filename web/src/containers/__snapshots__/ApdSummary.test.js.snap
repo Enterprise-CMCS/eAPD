@@ -25,9 +25,8 @@ exports[`apd summary component renders correctly 1`] = `
       reverse={false}
       source="apd.overview.instruction"
     />
-    <Choice
+    <ChoiceComponent
       checked={true}
-      inputPlacement="left"
       key="1"
       name="apd year 1"
       onChange={[Function]}
@@ -35,10 +34,9 @@ exports[`apd summary component renders correctly 1`] = `
       value="1"
     >
       1
-    </Choice>
-    <Choice
+    </ChoiceComponent>
+    <ChoiceComponent
       checked={true}
-      inputPlacement="left"
       key="2"
       name="apd year 2"
       onChange={[Function]}
@@ -46,10 +44,9 @@ exports[`apd summary component renders correctly 1`] = `
       value="2"
     >
       2
-    </Choice>
-    <Choice
+    </ChoiceComponent>
+    <ChoiceComponent
       checked={false}
-      inputPlacement="left"
       key="3"
       name="apd year 3"
       onChange={[Function]}
@@ -57,7 +54,7 @@ exports[`apd summary component renders correctly 1`] = `
       value="3"
     >
       3
-    </Choice>
+    </ChoiceComponent>
     <div
       className="ds-u-margin-y--3"
     >
