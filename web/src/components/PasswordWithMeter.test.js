@@ -36,7 +36,7 @@ describe('PasswordWithmeter component', () => {
 
   it('shows the password', () => {
     const component = shallow(<Password value="abcd1234" />);
-    component.find('Choice').simulate('change');
+    component.find('ChoiceComponent').simulate('change');
 
     expect(component).toMatchSnapshot();
   });

@@ -8,7 +8,6 @@ Anticipated release: TBD
 - Automatically select numeric form field contents when the field is focused if the current value is 0 ([#1736])
 
 #### 🐛 Bugs fixed
-
 - Add a "skip to main content" link ([#1304])
 - Prompt for confirmation before deleting APD key personnel ([#1651], [#1647])
 - Fixed accessibility issues on the login page and the dashboard ([#1688])
@@ -30,6 +29,7 @@ Anticipated release: TBD
 - Adds per-year APD key personnel costs to the review view ([#1747])
 - Adds a more informative error message if attempting to save an APD while logged out ([#1729])
 - Use a dollar field for the "other funding" field in the cost allocation form ([#1754])
+- Fixes a screen reader bug by adding a wrapper around the CMS Design System's Choice component ([#1760]) 
 - Round off dollar input fields when they lose focus ([#1739])
 
 #### ⚙️ Behind the scenes
