@@ -32,29 +32,17 @@ const ContractorResourceForm = ({
 
   const handle = {
     changeDesc: useCallback(handleChange(index, 'desc'), []),
-    changeHourlyHours: apdFFYs.reduce(
-      (acc, ffy) => ({
-        ...acc,
-        [ffy]: useCallback(handleHourlyChange(index, ffy, 'hours'), [apdFFYs])
-      }),
-      {}
+    changeHourlyHours: useCallback(
+      ffy => handleHourlyChange(index, ffy, 'hours'),
+      [index]
     ),
-    changeHourlyRate: apdFFYs.reduce(
-      (acc, ffy) => ({
-        ...acc,
-        [ffy]: useCallback(handleHourlyChange(index, ffy, 'rate'), [apdFFYs])
-      }),
-      {}
+    changeHourlyRate: useCallback(
+      ffy => handleHourlyChange(index, ffy, 'rate'),
+      [index]
     ),
     changeName: useCallback(handleChange(index, 'name'), []),
     changeTotalCost: useCallback(handleChange(index, 'totalCost'), []),
-    changeYearCost: apdFFYs.reduce(
-      (acc, ffy) => ({
-        ...acc,
-        [ffy]: useCallback(handleYearChange(index, ffy), [apdFFYs])
-      }),
-      {}
-    ),
+    changeYearCost: useCallback(ffy => handleYearChange(index, ffy), [index]),
     setUseHourlyOff: useCallback(handleUseHourly(key, false), []),
     setUseHourlyOn: useCallback(handleUseHourly(key, true), [])
   };
@@ -127,7 +115,7 @@ const ContractorResourceForm = ({
                       type="number"
                       size="medium"
                       value={hourly.data[ffy].hours}
-                      onChange={handle.changeHourlyHours[ffy]}
+                      onChange={handle.changeHourlyHours(ffy)}
                     />
                     <DollarField
                       className="ds-u-margin-left--1"
@@ -136,7 +124,7 @@ const ContractorResourceForm = ({
                       labelClassName="ds-u-margin-top--1"
                       size="medium"
                       value={hourly.data[ffy].rate}
-                      onChange={handle.changeHourlyRate[ffy]}
+                      onChange={handle.changeHourlyRate(ffy)}
                     />
                   </div>
                 </Fragment>
@@ -166,7 +154,7 @@ const ContractorResourceForm = ({
             disabled={hourly.useHourly}
             size="medium"
             value={years[ffy]}
-            onChange={handle.changeYearCost[ffy]}
+            onChange={handle.changeYearCost(ffy)}
           />
         ))
       )}
