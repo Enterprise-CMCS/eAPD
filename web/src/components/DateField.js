@@ -15,7 +15,15 @@ const splitDate = date =>
 // The design system will call our formatter before calling our change event
 // handlers. This formatter puts the date pieces back into our internal date
 // string format.
-const joinDate = ({ day, month, year }) => `${year}-${month}-${day}`;
+const joinDate = ({ day, month, year }) => {
+  // If the date is empty, revert to an empty string so it can save
+  // successfully.
+  if (!day && !month && !year) {
+    return '';
+  }
+
+  return `${year}-${month}-${day}`;
+};
 
 const DateField = ({ value, onChange, ...rest }) => {
   const dateParts = splitDate(value);
