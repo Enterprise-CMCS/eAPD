@@ -38,6 +38,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     <DollarField
       label="Costs with benefits"
       name="cost"
+      onBlur={null}
       onChange={[Function]}
       size="medium"
       value=""
@@ -62,6 +63,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     <DollarField
       label="Costs with benefits"
       name="cost"
+      onBlur={null}
       onChange={[Function]}
       size="medium"
       value=""

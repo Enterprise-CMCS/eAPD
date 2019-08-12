@@ -11,8 +11,32 @@ const maskValue = value => {
   return value;
 };
 
-const DollarField = ({ onChange, value, ...rest }) => {
+const DollarField = ({ onBlur, onChange, value, ...rest }) => {
   const [local, setLocal] = useState(maskValue(value, 'currency'));
+
+  const blurHandler = useCallback(
+    e => {
+      const fieldValue = +unmaskValue(e.target.value, 'currency');
+      const rounded = Math.round(fieldValue);
+
+      if (fieldValue !== rounded) {
+        setLocal(maskValue(rounded));
+
+        if (onChange) {
+          onChange({
+            target: {
+              value: rounded
+            }
+          });
+        }
+      }
+
+      if (onBlur) {
+        onBlur(e);
+      }
+    },
+    [onBlur, onChange]
+  );
 
   const changeHandler = useCallback(
     e => {
@@ -31,17 +55,20 @@ const DollarField = ({ onChange, value, ...rest }) => {
       {...rest}
       mask="currency"
       value={local}
+      onBlur={blurHandler}
       onChange={changeHandler}
     />
   );
 };
 
 DollarField.propTypes = {
+  onBlur: PropTypes.func,
   onChange: PropTypes.func,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 DollarField.defaultProps = {
+  onBlur: null,
   onChange: null,
   value: ''
 };

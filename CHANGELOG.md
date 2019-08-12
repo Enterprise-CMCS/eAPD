@@ -30,6 +30,7 @@ Anticipated release: TBD
 - Adds a more informative error message if attempting to save an APD while logged out ([#1729])
 - Use a dollar field for the "other funding" field in the cost allocation form ([#1754])
 - Fixes a screen reader bug by adding a wrapper around the CMS Design System's Choice component ([#1760]) 
+- Round off dollar input fields when they lose focus ([#1739])
 
 #### ⚙️ Behind the scenes
 
@@ -74,5 +75,6 @@ Pilot release to select state partners
 [#1729]: https://github.com/18F/cms-hitech-apd/issues/1729
 [#1730]: https://github.com/18F/cms-hitech-apd/pull/1730
 [#1736]: https://github.com/18F/cms-hitech-apd/issues/1736
+[#1739]: https://github.com/18F/cms-hitech-apd/issues/1739
 [#1747]: https://github.com/18F/cms-hitech-apd/issues/1747
 [#1754]: https://github.com/18F/cms-hitech-apd/issues/1754
