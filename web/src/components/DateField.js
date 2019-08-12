@@ -22,6 +22,10 @@ const DateField = ({ value, onChange, ...rest }) => {
 
   const errorInfo = useMemo(() => {
     const date = moment(value, 'YYYY-M-D', true);
+    if (value === null || value === undefined || value.length === 0) {
+      return null;
+    }
+
     if (date.isValid()) {
       return null;
     }

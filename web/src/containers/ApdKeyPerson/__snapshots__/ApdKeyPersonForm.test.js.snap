@@ -45,17 +45,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     >
       Does this person have costs directly attributable to this program?
     </legend>
-    <Choice
+    <ChoiceComponent
       checked={false}
-      inputPlacement="left"
       name="apd-state-profile-hascosts-no1"
       onChange={[Function]}
       type="radio"
       value="no"
     >
       No
-    </Choice>
-    <Choice
+    </ChoiceComponent>
+    <ChoiceComponent
       checked={true}
       checkedChildren={
         <div
@@ -105,14 +104,13 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
           </div>
         </div>
       }
-      inputPlacement="left"
       name="apd-state-profile-hascosts-yes1"
       onChange={[Function]}
       type="radio"
       value="yes"
     >
       Yes
-    </Choice>
+    </ChoiceComponent>
   </fieldset>
 </Fragment>
 `;
@@ -162,17 +160,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     >
       Does this person have costs directly attributable to this program?
     </legend>
-    <Choice
+    <ChoiceComponent
       checked={true}
-      inputPlacement="left"
       name="apd-state-profile-hascosts-no1"
       onChange={[Function]}
       type="radio"
       value="no"
     >
       No
-    </Choice>
-    <Choice
+    </ChoiceComponent>
+    <ChoiceComponent
       checked={false}
       checkedChildren={
         <div
@@ -222,14 +219,13 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           </div>
         </div>
       }
-      inputPlacement="left"
       name="apd-state-profile-hascosts-yes1"
       onChange={[Function]}
       type="radio"
       value="yes"
     >
       Yes
-    </Choice>
+    </ChoiceComponent>
   </fieldset>
 </Fragment>
 `;
