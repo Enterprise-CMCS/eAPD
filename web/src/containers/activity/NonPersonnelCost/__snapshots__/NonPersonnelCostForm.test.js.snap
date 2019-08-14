@@ -52,13 +52,11 @@ exports[`the NonPersonnelCostForm component renders correctly 1`] = `
       Miscellaneous expenses for the project
     </option>
   </Select>
-  <TextField
+  <TextArea
     label="Description"
-    multiline={true}
     name="desc"
     onChange={[Function]}
     rows={5}
-    type="text"
     value="cost desc"
   />
   <DollarField
