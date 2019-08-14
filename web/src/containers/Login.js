@@ -65,6 +65,7 @@ class Login extends Component {
       <Fragment>
         <CardForm
           title="Log in"
+          legend="Log in"
           cancelable={false}
           canSubmit={username.length && password.length}
           error={errorMessage}
@@ -73,7 +74,7 @@ class Login extends Component {
           primaryButtonText={['Log in', 'Logging in']}
           onSave={this.handleSubmit}
           footer={
-            <p>
+            <p className="ds-u-padding-top--2">
               Forgot your password? Contact{' '}
               <a href="mailto:CMS-EAPD@cms.hhs.gov?subject=Password%20Recovery%20Request%20for%20eAPD">
                 CMS-EAPD@cms.hhs.gov
@@ -91,6 +92,7 @@ class Login extends Component {
           />
           <Password
             title="Password"
+            ariaLabel="Enter the password for this account."
             value={password}
             onChange={this.handleChange}
           />

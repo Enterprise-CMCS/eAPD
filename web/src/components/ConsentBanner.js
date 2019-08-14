@@ -44,6 +44,20 @@ class ConsentBanner extends PureComponent {
           <div className="ds-l-row card">
             <div className="ds-l-col--1 ds-u-margin-left--auto" />
             <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
+              <p>
+                This is a U.S. government service. Your use indicates your
+                consent to monitoring, recording, and no expectation of privacy.
+                Misuse is subject to criminal and civil penalties.
+                {showDetails ? null : (
+                  <Button
+                    size="small"
+                    variation="transparent"
+                    onClick={this.toggleDetails}
+                  >
+                    Read more details
+                  </Button>
+                )}
+              </p>
               {showDetails ? (
                 <Fragment>
                   <p>
@@ -92,33 +106,13 @@ class ConsentBanner extends PureComponent {
                       be cancelled.
                     </li>
                   </ul>
-                  <div className="ds-u-text-align--right">
-                    <Button variation="primary" onClick={this.toggleDetails}>
-                      Hide details
-                    </Button>
-                  </div>
                 </Fragment>
-              ) : (
-                <Fragment>
-                  <p>
-                    This is a U.S. government service. Your use indicates your
-                    consent to monitoring, recording, and no expectation of
-                    privacy. Misuse is subject to criminal and civil penalties.{' '}
-                    <Button
-                      size="small"
-                      variation="transparent"
-                      onClick={this.toggleDetails}
-                    >
-                      Read more details
-                    </Button>
-                  </p>
-                  <div className="ds-u-text-align--center">
-                    <Button variation="primary" onClick={this.agreeAndContinue}>
-                      Agree and continue
-                    </Button>
-                  </div>
-                </Fragment>
-              )}
+              ) : null}
+              <div className="ds-u-text-align--center">
+                <Button variation="primary" onClick={this.agreeAndContinue}>
+                  Agree and continue
+                </Button>
+              </div>
             </div>
             <div className="ds-l-col--1 ds-u-margin-right--auto" />
           </div>

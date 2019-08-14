@@ -30,9 +30,11 @@ exports[`assurances and compliance component main component renders correctly 1`
         className="ds-u-margin-bottom--3"
         key="procurement"
       >
-        <h3>
+        <h4
+          className="ds-h4"
+        >
           Procurement Standards (Competition / Sole Source)
-        </h3>
+        </h4>
         <fieldset
           className="ds-u-margin-top--2"
           key="42 CFR Part 495.348"
@@ -50,9 +52,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={false}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-procurement-42_CFR_Part_495.348"
             onChange={[Function]}
             size="small"
@@ -60,8 +61,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={true}
             checkedChildren={
               <div
@@ -78,7 +79,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-procurement-42_CFR_Part_495.348"
             onChange={[Function]}
             size="small"
@@ -86,7 +86,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -105,9 +105,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-procurement-SMM_Section_11267"
             onChange={[Function]}
             size="small"
@@ -115,8 +114,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -133,7 +132,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-procurement-SMM_Section_11267"
             onChange={[Function]}
             size="small"
@@ -141,7 +139,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -160,9 +158,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={false}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-procurement-45_CFR_Part_95.615"
             onChange={[Function]}
             size="small"
@@ -170,8 +167,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -188,7 +185,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-procurement-45_CFR_Part_95.615"
             onChange={[Function]}
             size="small"
@@ -196,7 +192,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -215,9 +211,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-procurement-45_CFR_Part_75.326"
             onChange={[Function]}
             size="small"
@@ -225,8 +220,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -243,7 +238,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-procurement-45_CFR_Part_75.326"
             onChange={[Function]}
             size="small"
@@ -251,16 +245,18 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
       </div>
       <div
         className="ds-u-margin-bottom--3"
         key="recordsAccess"
       >
-        <h3>
+        <h4
+          className="ds-h4"
+        >
           Access to Records, Reporting and Agency Attestations
-        </h3>
+        </h4>
         <fieldset
           className="ds-u-margin-top--2"
           key="42 CFR Part 495.350"
@@ -278,9 +274,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={false}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_495.350"
             onChange={[Function]}
             size="small"
@@ -288,8 +283,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={true}
             checkedChildren={
               <div
@@ -306,7 +301,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_495.350"
             onChange={[Function]}
             size="small"
@@ -314,7 +308,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -333,9 +327,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_495.352"
             onChange={[Function]}
             size="small"
@@ -343,8 +336,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -361,7 +354,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_495.352"
             onChange={[Function]}
             size="small"
@@ -369,7 +361,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -388,9 +380,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_495.346"
             onChange={[Function]}
             size="small"
@@ -398,8 +389,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -416,7 +407,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_495.346"
             onChange={[Function]}
             size="small"
@@ -424,7 +414,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -443,9 +433,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_433.112(b)(5)_-_(9)"
             onChange={[Function]}
             size="small"
@@ -453,8 +442,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -471,7 +460,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_433.112(b)(5)_-_(9)"
             onChange={[Function]}
             size="small"
@@ -479,7 +467,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -498,9 +486,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={false}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-recordsAccess-45_CFR_Part_95.615"
             onChange={[Function]}
             size="small"
@@ -508,8 +495,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={true}
             checkedChildren={
               <div
@@ -526,7 +513,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-recordsAccess-45_CFR_Part_95.615"
             onChange={[Function]}
             size="small"
@@ -534,7 +520,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -553,9 +539,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-recordsAccess-SMM_Section_11267"
             onChange={[Function]}
             size="small"
@@ -563,8 +548,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -581,7 +566,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-recordsAccess-SMM_Section_11267"
             onChange={[Function]}
             size="small"
@@ -589,16 +573,18 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
       </div>
       <div
         className="ds-u-margin-bottom--3"
         key="softwareRights"
       >
-        <h3>
+        <h4
+          className="ds-h4"
+        >
           Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA compliance, and progress reports
-        </h3>
+        </h4>
         <fieldset
           className="ds-u-margin-top--2"
           key="42 CFR Part 495.360"
@@ -616,9 +602,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_495.360"
             onChange={[Function]}
             size="small"
@@ -626,8 +611,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -644,7 +629,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_495.360"
             onChange={[Function]}
             size="small"
@@ -652,7 +636,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -671,9 +655,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-softwareRights-45_CFR_Part_95.617"
             onChange={[Function]}
             size="small"
@@ -681,8 +664,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -699,7 +682,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-softwareRights-45_CFR_Part_95.617"
             onChange={[Function]}
             size="small"
@@ -707,7 +689,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -726,9 +708,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300"
             onChange={[Function]}
             size="small"
@@ -736,8 +717,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -754,7 +735,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_431.300"
             onChange={[Function]}
             size="small"
@@ -762,7 +742,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
         <fieldset
           className="ds-u-margin-top--2"
@@ -781,9 +761,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_433.112"
             onChange={[Function]}
             size="small"
@@ -791,8 +770,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -809,7 +788,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_433.112"
             onChange={[Function]}
             size="small"
@@ -817,16 +795,18 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
       </div>
       <div
         className="ds-u-margin-bottom--3"
         key="security"
       >
-        <h3>
+        <h4
+          className="ds-h4"
+        >
           Security and interface requirements to be employed for all state HIT systems
-        </h3>
+        </h4>
         <fieldset
           className="ds-u-margin-top--2"
           key="45 CFR 164 Securities and Privacy"
@@ -844,9 +824,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             </strong>
             ?
           </legend>
-          <Choice
+          <ChoiceComponent
             checked={true}
-            inputPlacement="left"
             name="apd-assurances-yes-explanation-security-45_CFR_164_Securities_and_Privacy"
             onChange={[Function]}
             size="small"
@@ -854,8 +833,8 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="yes"
           >
             Yes
-          </Choice>
-          <Choice
+          </ChoiceComponent>
+          <ChoiceComponent
             checked={false}
             checkedChildren={
               <div
@@ -872,7 +851,6 @@ exports[`assurances and compliance component main component renders correctly 1`
                 />
               </div>
             }
-            inputPlacement="left"
             name="apd-assurances-no-explanation-security-45_CFR_164_Securities_and_Privacy"
             onChange={[Function]}
             size="small"
@@ -880,7 +858,7 @@ exports[`assurances and compliance component main component renders correctly 1`
             value="no"
           >
             No
-          </Choice>
+          </ChoiceComponent>
         </fieldset>
       </div>
     </Subsection>

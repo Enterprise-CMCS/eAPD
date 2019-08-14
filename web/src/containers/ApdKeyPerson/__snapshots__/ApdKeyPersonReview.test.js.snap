@@ -8,6 +8,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
     <StandardReview
       editHref={null}
       heading="13. Bob the Builder"
+      headingLevel={4}
       onDeleteClick={[MockFunction]}
       onEditClick={[MockFunction]}
     >
@@ -26,6 +27,36 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             long={false}
           >
             400
+          </Dollars>
+        </li>
+        <li
+          key="1992"
+        >
+          <strong>
+            FFY 
+            1992
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            100
+          </Dollars>
+        </li>
+        <li
+          key="1993"
+        >
+          <strong>
+            FFY 
+            1993
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            300
           </Dollars>
         </li>
       </ul>
@@ -66,6 +97,36 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
             long={false}
           >
             400
+          </Dollars>
+        </li>
+        <li
+          key="1992"
+        >
+          <strong>
+            FFY 
+            1992
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            100
+          </Dollars>
+        </li>
+        <li
+          key="1993"
+        >
+          <strong>
+            FFY 
+            1993
+             cost:
+          </strong>
+           
+          <Dollars
+            long={false}
+          >
+            300
           </Dollars>
         </li>
       </ul>

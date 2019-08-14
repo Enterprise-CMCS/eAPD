@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Section, Subsection } from './Section';
-import BudgetSummary from '../containers/BudgetSummary';
-import Waypoint from '../containers/ConnectedWaypoint';
-import IncentivePayments from '../containers/IncentivePayments';
-import QuarterlyBudgetSummary from '../containers/QuarterlyBudgetSummary';
+import { Section, Subsection } from '../components/Section';
+import BudgetSummary from './BudgetSummary';
+import Waypoint from './ConnectedWaypoint';
+import IncentivePayments from './IncentivePayments';
+import QuarterlyBudgetSummary from './QuarterlyBudgetSummary';
 
 const ProposedBudget = () => (
   <Waypoint id="budget-overview">

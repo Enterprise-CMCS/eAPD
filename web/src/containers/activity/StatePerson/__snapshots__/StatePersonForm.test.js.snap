@@ -10,6 +10,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     :
   </h6>
   <TextField
+    autoFocus="true"
     label="Personnel title"
     name="title"
     onChange={[Function]}
@@ -37,11 +38,12 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     <DollarField
       label="Costs with benefits"
       name="cost"
+      onBlur={null}
       onChange={[Function]}
       size="medium"
       value=""
     />
-    <TextField
+    <NumberField
       label="Number of FTEs"
       name="ftes"
       onChange={[Function]}
@@ -61,11 +63,12 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     <DollarField
       label="Costs with benefits"
       name="cost"
+      onBlur={null}
       onChange={[Function]}
       size="medium"
       value=""
     />
-    <TextField
+    <NumberField
       label="Number of FTEs"
       name="ftes"
       onChange={[Function]}
