@@ -1,10 +1,11 @@
-import { Choice, TextField } from '@cmsgov/design-system-core';
+import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Waypoint from './ConnectedWaypoint';
 import { updateApd as updateApdAction } from '../actions/apd';
+import Choice from '../components/Choice';
 import { Section, Subsection } from '../components/Section';
 import regLinks from '../data/assurancesAndCompliance.yaml';
 import { t } from '../i18n';
@@ -64,7 +65,7 @@ class AssurancesAndCompliance extends Component {
           >
             {Object.entries(regLinks).map(([name, regulations]) => (
               <div key={name} className="ds-u-margin-bottom--3">
-                <h3>{t(`assurancesAndCompliance.headings.${name}`)}</h3>
+                <h4 className="ds-h4">{t(`assurancesAndCompliance.headings.${name}`)}</h4>
                 {apdSections[name].map(
                   ({ title, checked, explanation }, index) => (
                     <fieldset key={title} className="ds-u-margin-top--2">

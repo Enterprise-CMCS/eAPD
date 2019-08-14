@@ -13,8 +13,8 @@ exports[`the CostAllocate component renders correctly 1`] = `
       args={null}
       headingDisplay={
         Object {
-          "className": "ds-h4",
-          "level": "h5",
+          "className": "ds-h5",
+          "level": "h6",
         }
       }
       reverse={false}
@@ -33,8 +33,8 @@ exports[`the CostAllocate component renders correctly 1`] = `
       args={null}
       headingDisplay={
         Object {
-          "className": "ds-h4",
-          "level": "h5",
+          "className": "ds-h5",
+          "level": "h6",
         }
       }
       reverse={false}

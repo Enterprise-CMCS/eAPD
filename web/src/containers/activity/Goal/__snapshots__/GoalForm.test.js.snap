@@ -3,6 +3,7 @@
 exports[`the GoalForm component renders correctly 1`] = `
 <Fragment>
   <TextField
+    autoFocus="true"
     className="data-entry-box"
     hint=""
     label="Goal name"

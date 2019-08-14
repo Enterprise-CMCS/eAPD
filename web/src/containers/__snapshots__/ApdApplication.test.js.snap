@@ -19,6 +19,7 @@ exports[`apd (application) component renders correctly 1`] = `
     >
       <h1
         className="ds-h1 apd--title"
+        id="start-main-content"
       >
         <span
           className="ds-h6 ds-u-display--block"
@@ -46,14 +47,12 @@ exports[`apd (application) component renders correctly 1`] = `
 
 exports[`apd (application) component renders correctly 2`] = `
 <Redirect
-  push={false}
   to="/"
 />
 `;
 
 exports[`apd (application) component renders correctly 3`] = `
 <Redirect
-  push={false}
   to="/"
 />
 `;

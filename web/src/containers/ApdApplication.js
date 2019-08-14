@@ -9,12 +9,12 @@ import Export from './ApdExport';
 import ApdSummary from './ApdSummary';
 import ExecutiveSummary from './ExecutiveSummary';
 import PreviousActivities from './PreviousActivities';
+import ProposedBudget from './ProposedBudget';
 import SaveButton from './SaveButton';
 import ScheduleSummary from './ScheduleSummary';
 import Sidebar from './Sidebar';
 import { selectApdOnLoad } from '../actions/apd';
 import StateProfile from '../components/ApdStateProfile';
-import ProposedBudget from '../components/ProposedBudget';
 
 import {
   getAPDName,
@@ -22,7 +22,7 @@ import {
   getIsAnAPDSelected
 } from '../reducers/apd';
 import { getIsDirty } from '../reducers/dirty';
-import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user';
+import { getIsAdmin, getUserStateOrTerritory } from '../reducers/user.selector';
 
 const unsavedPrompt =
   'You have unsaved changes to your APD. Do you want to leave this page without saving?';
@@ -86,7 +86,7 @@ class ApdApplication extends Component {
         <div className="ds-l-row ds-u-margin--0">
           <Sidebar place={place} />
           <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
-            <h1 className="ds-h1 apd--title">
+            <h1 id="start-main-content" className="ds-h1 apd--title">
               <span className="ds-h6 ds-u-display--block">{apdName}</span>
               {place.name} {year} APD
             </h1>

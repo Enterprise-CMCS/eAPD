@@ -12,7 +12,6 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
         <Link
-          replace={false}
           to="/"
         >
           CMS HITECH APD
@@ -76,7 +75,6 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/me"
                 >
                   <FontAwesomeIcon
@@ -118,12 +116,10 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
                 </Link>
               </li>
               <li>
-                <Button
+                <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  size="small"
-                  type="button"
-                  variation="transparent"
+                  to="/logout"
                 >
                   <FontAwesomeIcon
                     border={false}
@@ -161,7 +157,7 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
                     transform={null}
                   />
                   Log out
-                </Button>
+                </Link>
               </li>
             </ul>
           </li>
@@ -184,7 +180,6 @@ exports[`Header component renders correctly when the dropdown is closed and the 
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
         <Link
-          replace={false}
           to="/"
         >
           CMS HITECH APD
@@ -248,7 +243,6 @@ exports[`Header component renders correctly when the dropdown is closed and the 
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/me"
                 >
                   <FontAwesomeIcon
@@ -290,12 +284,10 @@ exports[`Header component renders correctly when the dropdown is closed and the 
                 </Link>
               </li>
               <li>
-                <Button
+                <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  size="small"
-                  type="button"
-                  variation="transparent"
+                  to="/logout"
                 >
                   <FontAwesomeIcon
                     border={false}
@@ -333,7 +325,7 @@ exports[`Header component renders correctly when the dropdown is closed and the 
                     transform={null}
                   />
                   Log out
-                </Button>
+                </Link>
               </li>
             </ul>
           </li>
@@ -356,7 +348,6 @@ exports[`Header component renders the admin home title when an admin user is at 
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
         <Link
-          replace={false}
           to="/"
         >
           <FontAwesomeIcon
@@ -450,7 +441,6 @@ exports[`Header component renders the admin home title when an admin user is at 
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/me"
                 >
                   <FontAwesomeIcon
@@ -492,12 +482,10 @@ exports[`Header component renders the admin home title when an admin user is at 
                 </Link>
               </li>
               <li>
-                <Button
+                <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  size="small"
-                  type="button"
-                  variation="transparent"
+                  to="/logout"
                 >
                   <FontAwesomeIcon
                     border={false}
@@ -535,7 +523,7 @@ exports[`Header component renders the admin home title when an admin user is at 
                     transform={null}
                   />
                   Log out
-                </Button>
+                </Link>
               </li>
             </ul>
           </li>
@@ -558,7 +546,6 @@ exports[`Header component renders the state user home title when a state user is
         className="ds-l-col--12 ds-l-md-col--4 site-title"
       >
         <Link
-          replace={false}
           to="/"
         >
           <FontAwesomeIcon
@@ -652,7 +639,6 @@ exports[`Header component renders the state user home title when a state user is
                 <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  replace={false}
                   to="/me"
                 >
                   <FontAwesomeIcon
@@ -694,12 +680,10 @@ exports[`Header component renders the state user home title when a state user is
                 </Link>
               </li>
               <li>
-                <Button
+                <Link
                   className="nav--dropdown__action"
                   onClick={[Function]}
-                  size="small"
-                  type="button"
-                  variation="transparent"
+                  to="/logout"
                 >
                   <FontAwesomeIcon
                     border={false}
@@ -737,7 +721,7 @@ exports[`Header component renders the state user home title when a state user is
                     transform={null}
                   />
                   Log out
-                </Button>
+                </Link>
               </li>
             </ul>
           </li>
