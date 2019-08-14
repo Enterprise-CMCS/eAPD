@@ -8,6 +8,7 @@ Anticipated release: TBD
 - Automatically select numeric form field contents when the field is focused if the current value is 0 ([#1736])
 
 #### 🐛 Bugs fixed
+
 - Add a "skip to main content" link ([#1304])
 - Prompt for confirmation before deleting APD key personnel ([#1651], [#1647])
 - Fixed accessibility issues on the login page and the dashboard ([#1688])
@@ -29,13 +30,31 @@ Anticipated release: TBD
 - Adds per-year APD key personnel costs to the review view ([#1747])
 - Adds a more informative error message if attempting to save an APD while logged out ([#1729])
 - Use a dollar field for the "other funding" field in the cost allocation form ([#1754])
-- Fixes a screen reader bug by adding a wrapper around the CMS Design System's Choice component ([#1760]) 
+- Fixes a screen reader bug by adding a wrapper around the CMS Design System's Choice component ([#1760])
 - Round off dollar input fields when they lose focus ([#1739])
 
 #### ⚙️ Behind the scenes
 
 - Remove unused code
 - Updated 3rd-party dependencies
+
+# v1.0.3
+
+Released: August 14, 2019
+
+#### 🐛 Bugs fixed
+
+- Fixes a bug where adding a federal fiscal year to the APD causes the app to crash when users attempt to edit existing activity contractor resources. ([#1762])
+- Fixes a bug where entering a date and then backing it out would make it impossible to save the APD. ([#1765])
+- Fixes a bug where adding a federal fiscal year to the APD while an activity contractor resource form was expanded would cause the app to crash.
+
+# v1.0.2
+
+Released: August 2, 2019
+
+#### 🐛 Bugs fixed
+
+- Fixes a bug where the summary budget table individual line items would show $0 if any single activity's total cost was $0. ([#1745])
 
 # v1.0.1
 
@@ -76,5 +95,8 @@ Pilot release to select state partners
 [#1730]: https://github.com/18F/cms-hitech-apd/pull/1730
 [#1736]: https://github.com/18F/cms-hitech-apd/issues/1736
 [#1739]: https://github.com/18F/cms-hitech-apd/issues/1739
+[#1745]: https://github.com/18F/cms-hitech-apd/pull/1745
 [#1747]: https://github.com/18F/cms-hitech-apd/issues/1747
 [#1754]: https://github.com/18F/cms-hitech-apd/issues/1754
+[#1762]: https://github.com/18F/cms-hitech-apd/issues/1762
+[#1765]: https://github.com/18F/cms-hitech-apd/issues/1765
