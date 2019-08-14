@@ -369,10 +369,23 @@ const reducer = (state = initialState, action) => {
           // contractorResources, statePersonnel, and expenses
           // are all arrays with years subproperties
           if (Array.isArray(objects)) {
-            return objects.map(o => ({
-              ...o,
-              years: fixupYears(o.years, defaultValue)
-            }));
+            return objects.map(({ hourly, years: objYears, ...rest }) => {
+              if (hourly) {
+                return {
+                  ...rest,
+                  hourly: {
+                    ...hourly,
+                    data: fixupYears(hourly.data, contractorDefaultHourly)
+                  },
+                  years: fixupYears(objYears, defaultValue)
+                };
+              }
+
+              return {
+                ...rest,
+                years: fixupYears(objYears, defaultValue)
+              };
+            });
           }
           // but costAllocation is just an object whose properties
           // are the years
