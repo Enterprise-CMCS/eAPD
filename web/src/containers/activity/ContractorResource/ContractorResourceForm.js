@@ -5,6 +5,7 @@ import React, { Fragment, useCallback, useMemo } from 'react';
 import DateField from '../../../components/DateField';
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
+import TextArea from '../../../components/TextArea';
 
 const ContractorResourceForm = ({
   index,
@@ -55,10 +56,9 @@ const ContractorResourceForm = ({
         value={name}
         onChange={handle.changeName}
       />
-      <TextField
+      <TextArea
         label="Description of Services"
         name="contractor-description"
-        multiline
         rows={5}
         value={desc}
         onChange={handle.changeDesc}

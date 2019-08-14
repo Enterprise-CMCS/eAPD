@@ -3,6 +3,7 @@ import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { t } from '../../../i18n';
+import TextArea from '../../../components/TextArea';
 
 const GoalForm = ({
   item: { description, objective },
@@ -23,13 +24,12 @@ const GoalForm = ({
       onChange={handleChange(index, 'description')}
     />
 
-    <TextField
+    <TextArea
       name="milestones"
       className="data-entry-box"
       label={t('activities.goals.objective.input.label', {
         defaultValue: 'Benchmarks'
       })}
-      multiline
       rows={6}
       hint={t('activities.goals.objective.input.hint', {
         defaultValue: ''
