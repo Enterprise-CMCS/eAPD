@@ -9,12 +9,10 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     type="text"
     value="Honey Dipper Dan"
   />
-  <TextField
+  <TextArea
     label="Description of Services"
-    multiline={true}
     name="contractor-description"
     rows={5}
-    type="text"
     value="They cleaned up the latrines after the Battle of Hastings"
   />
   <FormLabel
@@ -168,12 +166,10 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
     type="text"
     value="Honey Dipper Dan"
   />
-  <TextField
+  <TextArea
     label="Description of Services"
-    multiline={true}
     name="contractor-description"
     rows={5}
-    type="text"
     value="They cleaned up the latrines after the Battle of Hastings"
   />
   <FormLabel

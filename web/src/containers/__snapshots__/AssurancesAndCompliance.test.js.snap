@@ -68,13 +68,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-procurement-42_CFR_Part_495.348"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -121,13 +119,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-procurement-SMM_Section_11267"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -174,13 +170,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-procurement-45_CFR_Part_95.615"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -227,13 +221,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-procurement-45_CFR_Part_75.326"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -290,13 +282,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-recordsAccess-42_CFR_Part_495.350"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value="some words"
                 />
               </div>
@@ -343,13 +333,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-recordsAccess-42_CFR_Part_495.352"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -396,13 +384,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-recordsAccess-42_CFR_Part_495.346"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -449,13 +435,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-recordsAccess-42_CFR_Part_433.112(b)(5)_-_(9)"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -502,13 +486,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-recordsAccess-45_CFR_Part_95.615"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value="other words"
                 />
               </div>
@@ -555,13 +537,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-recordsAccess-SMM_Section_11267"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -618,13 +598,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-softwareRights-42_CFR_Part_495.360"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -671,13 +649,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-softwareRights-45_CFR_Part_95.617"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -724,13 +700,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-softwareRights-42_CFR_Part_431.300"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -777,13 +751,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-softwareRights-42_CFR_Part_433.112"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>
@@ -840,13 +812,11 @@ exports[`assurances and compliance component main component renders correctly 1`
               <div
                 className="ds-c-choice__checkedChild"
               >
-                <TextField
+                <TextArea
                   label="Please explain"
-                  multiline={true}
                   name="explanation-security-45_CFR_164_Securities_and_Privacy"
                   onChange={[Function]}
                   rows={5}
-                  type="text"
                   value=""
                 />
               </div>

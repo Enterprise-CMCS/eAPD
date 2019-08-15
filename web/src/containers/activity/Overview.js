@@ -1,4 +1,4 @@
-import { FormLabel, TextField } from '@cmsgov/design-system-core';
+import { FormLabel } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { useMemo, useCallback } from 'react';
 import { connect } from 'react-redux';
@@ -8,6 +8,7 @@ import { updateActivity as updateActivityAction } from '../../actions/activities
 import RichText from '../../components/RichText';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
+import TextArea from '../../components/TextArea';
 import { selectActivityByKey } from '../../reducers/activities.selectors';
 
 const Description = props => {
@@ -88,10 +89,9 @@ const Description = props => {
 
   return (
     <Subsection resource="activities.overview" nested>
-      <TextField
+      <TextArea
         label={overviewLabel}
         hint={overviewHint}
-        multiline
         max={280}
         rows={6}
         className="data-entry-box"

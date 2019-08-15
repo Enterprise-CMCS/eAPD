@@ -1,4 +1,3 @@
-import { TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -7,6 +6,7 @@ import Waypoint from './ConnectedWaypoint';
 import { updateApd as updateApdAction } from '../actions/apd';
 import Choice from '../components/Choice';
 import { Section, Subsection } from '../components/Section';
+import TextArea from '../components/TextArea';
 import regLinks from '../data/assurancesAndCompliance.yaml';
 import { t } from '../i18n';
 
@@ -65,7 +65,9 @@ class AssurancesAndCompliance extends Component {
           >
             {Object.entries(regLinks).map(([name, regulations]) => (
               <div key={name} className="ds-u-margin-bottom--3">
-                <h4 className="ds-h4">{t(`assurancesAndCompliance.headings.${name}`)}</h4>
+                <h4 className="ds-h4">
+                  {t(`assurancesAndCompliance.headings.${name}`)}
+                </h4>
                 {apdSections[name].map(
                   ({ title, checked, explanation }, index) => (
                     <fieldset key={title} className="ds-u-margin-top--2">
@@ -95,7 +97,7 @@ class AssurancesAndCompliance extends Component {
                         onChange={this.handleCheckChange(name, index, false)}
                         checkedChildren={
                           <div className="ds-c-choice__checkedChild">
-                            <TextField
+                            <TextArea
                               label="Please explain"
                               name={namify(name, title)}
                               value={explanation}
@@ -103,7 +105,6 @@ class AssurancesAndCompliance extends Component {
                                 name,
                                 index
                               )}
-                              multiline
                               rows={5}
                             />
                           </div>
