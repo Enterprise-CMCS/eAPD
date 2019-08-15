@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { t } from '../../i18n';
 import { updateActivity as updateActivityAction } from '../../actions/activities';
-import { RichText } from '../../components/Inputs';
+import RichText from '../../components/RichText';
 import Instruction from '../../components/Instruction';
 import { Subsection } from '../../components/Section';
 import TextArea from '../../components/TextArea';
@@ -100,7 +100,9 @@ const Description = props => {
       />
 
       <div className="data-entry-box">
-        <FormLabel hint={descriptionHint}>{descriptionLabel}</FormLabel>
+        <FormLabel className="ds-c-label--full-width" hint={descriptionHint}>
+          {descriptionLabel}
+        </FormLabel>
         {activity.fundingSource === 'HIE' && (
           <Instruction source="activities.overview.activityDescriptionInput.hie" />
         )}
@@ -112,7 +114,9 @@ const Description = props => {
       </div>
 
       <div className="data-entry-box">
-        <FormLabel hint={alternativesHint}>{alternativesLabel}</FormLabel>
+        <FormLabel className="ds-c-label--full-width" hint={alternativesHint}>
+          {alternativesLabel}
+        </FormLabel>
         <Instruction source="activities.overview.activityAlternativesInput" />
         <RichText
           content={alternatives}

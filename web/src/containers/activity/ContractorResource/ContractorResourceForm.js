@@ -1,11 +1,13 @@
-import { Choice, FormLabel, TextField } from '@cmsgov/design-system-core';
+import { FormLabel, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback, useMemo } from 'react';
 
+import Choice from '../../../components/Choice';
 import DateField from '../../../components/DateField';
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
 import TextArea from '../../../components/TextArea';
+import NumberField from '../../../components/NumberField';
 
 const ContractorResourceForm = ({
   index,
@@ -51,6 +53,7 @@ const ContractorResourceForm = ({
   return (
     <Fragment>
       <TextField
+        autoFocus
         label="Contractor Name"
         name="contractor-name"
         value={name}
@@ -108,7 +111,7 @@ const ContractorResourceForm = ({
                 <Fragment key={ffy}>
                   <FormLabel>FFY {ffy}</FormLabel>
                   <div className="ds-l-row ds-u-padding-left--2">
-                    <TextField
+                    <NumberField
                       label="Number of hours"
                       name={`contractor-num-hours-ffy-${ffy}`}
                       labelClassName="ds-u-margin-top--1"

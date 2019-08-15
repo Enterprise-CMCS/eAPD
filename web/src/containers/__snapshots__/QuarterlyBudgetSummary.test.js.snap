@@ -2,11 +2,11 @@
 
 exports[`quarterly budget summary component renders correctly if data is loaded 1`] = `
 <Fragment>
-  <h3
-    className="ds-h3"
+  <h4
+    className="ds-h4"
   >
     HIT and HIE
-  </h3>
+  </h4>
   <table
     className="budget-table"
     key="1"
@@ -570,11 +570,11 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       </tr>
     </tbody>
   </table>
-  <h3
-    className="ds-h3"
+  <h4
+    className="ds-h4"
   >
     MMIS
-  </h3>
+  </h4>
   <table
     className="budget-table"
     key="1"

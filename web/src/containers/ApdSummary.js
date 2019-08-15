@@ -1,11 +1,11 @@
-import { Choice } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Waypoint from './ConnectedWaypoint';
 import { updateApd as updateApdAction } from '../actions/apd';
-import { RichText } from '../components/Inputs';
+import Choice from '../components/Choice';
+import RichText from '../components/RichText';
 import Instruction from '../components/Instruction';
 import { Section } from '../components/Section';
 import { t } from '../i18n';

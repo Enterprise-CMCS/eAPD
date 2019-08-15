@@ -24,13 +24,12 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
         300
       </Dollars>
     </p>
-    <TextField
+    <DollarField
       label="Other Funding Amount"
-      labelClassName="ds-h4"
-      mask="currency"
+      labelClassName="ds-h5"
       name="cost-allocate-other-1066"
+      onBlur={null}
       onChange={[Function]}
-      type="text"
       value={10}
     />
     <p
@@ -124,13 +123,12 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
         3000
       </Dollars>
     </p>
-    <TextField
+    <DollarField
       label="Other Funding Amount"
-      labelClassName="ds-h4"
-      mask="currency"
+      labelClassName="ds-h5"
       name="cost-allocate-other-1067"
+      onBlur={null}
       onChange={[Function]}
-      type="text"
       value="0"
     />
     <p

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Choice wrapper component renders correctly with checkedChildren when checked 1`] = `
+<div>
+  <Choice
+    checked={true}
+    checkedChildren={
+      <div
+        className="ds-c-choice__checkedChild"
+      >
+        <p>
+          I am the child element
+        </p>
+      </div>
+    }
+    inputPlacement="left"
+    name="radio-with-children"
+    size="small"
+    type="radio"
+    value="radio-with-children"
+  >
+    I have checkedChildren
+  </Choice>
+</div>
+`;
+
+exports[`Choice wrapper component renders correctly with checkedChildren when unchecked 1`] = `
+<div>
+  <Choice
+    checkedChildren={
+      <div
+        className="ds-c-choice__checkedChild"
+      >
+        <p>
+          I am the child element
+        </p>
+      </div>
+    }
+    inputPlacement="left"
+    name="radio-with-children"
+    size="small"
+    type="radio"
+    value="radio-with-children"
+  >
+    I have checkedChildren
+  </Choice>
+</div>
+`;
+
+exports[`Choice wrapper component renders correctly without checkedChildren 1`] = `
+<div>
+  <Choice
+    inputPlacement="left"
+    name="radio-no-children"
+    size="small"
+    type="radio"
+    value="radio-no-children"
+  >
+    I have no checkedChildren
+  </Choice>
+</div>
+`;

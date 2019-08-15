@@ -5,6 +5,9 @@ invalid-phone: Phone number may not be more than 10 digits
 no-password: Password is required
 weak-password: The provided password is too weak
 
+save-apd:
+  not-logged-in: "Save failed: You are logged out. Use another tab to login, and try saving again."
+
 # Errors specific to adding a new account
 add-account:
   invalid: Email and password are required
