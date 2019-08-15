@@ -4,6 +4,7 @@ import React, { Fragment, useCallback } from 'react';
 
 import DollarField from '../../../components/DollarField';
 import TextArea from '../../../components/TextArea';
+import NumberField from '../../../components/NumberField';
 
 const StatePersonForm = ({
   item: { desc, title, years },
@@ -37,6 +38,7 @@ const StatePersonForm = ({
     <Fragment>
       <h6 className="ds-h4">Personnel {index + 1}:</h6>
       <TextField
+        autoFocus="true"
         label="Personnel title"
         name="title"
         value={title}
@@ -60,7 +62,7 @@ const StatePersonForm = ({
               value={amt}
               onChange={getEditCostForYear(year)}
             />
-            <TextField
+            <NumberField
               label="Number of FTEs"
               name="ftes"
               size="medium"

@@ -16,6 +16,7 @@ exports[`the NonPersonnelCostForm component renders correctly 1`] = `
     Category
   </FormLabel>
   <Select
+    autoFocus="true"
     id="eapd-form-label-12321"
     name="category"
     onChange={[Function]}
@@ -63,6 +64,7 @@ exports[`the NonPersonnelCostForm component renders correctly 1`] = `
     key="7473"
     label="7473 Cost"
     name="cost"
+    onBlur={null}
     onChange={[Function]}
     size="medium"
     value={2398235}
@@ -71,6 +73,7 @@ exports[`the NonPersonnelCostForm component renders correctly 1`] = `
     key="7474"
     label="7474 Cost"
     name="cost"
+    onBlur={null}
     onChange={[Function]}
     size="medium"
     value={72323}

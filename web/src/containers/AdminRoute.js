@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getIsAdmin } from '../reducers/user';
+import { getIsAdmin } from '../reducers/user.selector';
 import NoMatch from '../components/NoMatch';
 
 const AdminRoute = ({

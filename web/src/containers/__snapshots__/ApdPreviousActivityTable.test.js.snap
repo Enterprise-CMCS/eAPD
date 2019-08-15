@@ -80,15 +80,15 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       <td
         headers="prev_act_hithie_row_1 prev_act_hithie_total prev_act_hithie_total_approved"
       >
-        <InputHolder
-          className="budget-table--input__number"
-          hideLabel={true}
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
           label="total approved funding for HIT and HIE for FFY 1, state plus federal"
+          labelClassName="sr-only"
           name="hithie-approved-total-1"
+          onBlur={null}
           onChange={[Function]}
-          type="text"
           value={20}
-          wrapperClass="budget-table--input-holder"
         />
       </td>
       <td
@@ -104,15 +104,15 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       <td
         headers="prev_act_hithie_row_1 prev_act_hithie_federal prev_act_hithie_federal_actual"
       >
-        <InputHolder
-          className="budget-table--input__number"
-          hideLabel={true}
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
           label="actual federal share for HIT and HIE for FFY 1"
+          labelClassName="sr-only"
           name="hithie-actual-federal-1"
+          onBlur={null}
           onChange={[Function]}
-          type="text"
           value={10}
-          wrapperClass="budget-table--input-holder"
         />
       </td>
     </tr>
@@ -128,15 +128,15 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       <td
         headers="prev_act_hithie_row_2 prev_act_hithie_total prev_act_hithie_total_approved"
       >
-        <InputHolder
-          className="budget-table--input__number"
-          hideLabel={true}
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
           label="total approved funding for HIT and HIE for FFY 2, state plus federal"
+          labelClassName="sr-only"
           name="hithie-approved-total-2"
+          onBlur={null}
           onChange={[Function]}
-          type="text"
           value={200}
-          wrapperClass="budget-table--input-holder"
         />
       </td>
       <td
@@ -152,15 +152,15 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       <td
         headers="prev_act_hithie_row_2 prev_act_hithie_federal prev_act_hithie_federal_actual"
       >
-        <InputHolder
-          className="budget-table--input__number"
-          hideLabel={true}
+        <DollarField
+          className="budget-table--input-holder"
+          fieldClassName="budget-table--input__number"
           label="actual federal share for HIT and HIE for FFY 2"
+          labelClassName="sr-only"
           name="hithie-actual-federal-2"
+          onBlur={null}
           onChange={[Function]}
-          type="text"
           value={100}
-          wrapperClass="budget-table--input-holder"
         />
       </td>
     </tr>

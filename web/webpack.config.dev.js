@@ -2,7 +2,7 @@ const path = require('path');
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
 const config = {
   mode: 'development',
@@ -82,8 +82,8 @@ const config = {
       minify: { removeComments: true },
       template: 'src/index.html'
     }),
-    new HtmlWebpackIncludeAssetsPlugin({
-      assets: ['legacy.css', 'app.css'],
+    new HtmlWebpackTagsPlugin({
+      tags: ['legacy.css', 'app.css'],
       append: true
     })
   ],
