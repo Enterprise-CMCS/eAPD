@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 
 import DollarField from '../../../components/DollarField';
+import TextArea from '../../../components/TextArea';
 import NumberField from '../../../components/NumberField';
 
 const StatePersonForm = ({
@@ -43,9 +44,8 @@ const StatePersonForm = ({
         value={title}
         onChange={editTitle}
       />
-      <TextField
+      <TextArea
         label="Description"
-        multiline
         rows={5}
         name="desc"
         value={desc}

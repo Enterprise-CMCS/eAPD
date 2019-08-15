@@ -76,7 +76,7 @@ describe('assurances and compliance component', () => {
         .dive()
         .find('Choice')
         .dive()
-        .find('TextField')
+        .find('TextArea')
         .simulate('change', { target: { value: 'new text' } });
 
       expect(

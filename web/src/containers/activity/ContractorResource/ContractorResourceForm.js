@@ -6,6 +6,7 @@ import Choice from '../../../components/Choice';
 import DateField from '../../../components/DateField';
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
+import TextArea from '../../../components/TextArea';
 import NumberField from '../../../components/NumberField';
 
 const ContractorResourceForm = ({
@@ -58,10 +59,9 @@ const ContractorResourceForm = ({
         value={name}
         onChange={handle.changeName}
       />
-      <TextField
+      <TextArea
         label="Description of Services"
         name="contractor-description"
-        multiline
         rows={5}
         value={desc}
         onChange={handle.changeDesc}
