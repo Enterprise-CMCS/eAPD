@@ -47,14 +47,12 @@ exports[`apd (application) component renders correctly 1`] = `
 
 exports[`apd (application) component renders correctly 2`] = `
 <Redirect
-  push={false}
   to="/"
 />
 `;
 
 exports[`apd (application) component renders correctly 3`] = `
 <Redirect
-  push={false}
   to="/"
 />
 `;
