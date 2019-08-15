@@ -32,6 +32,7 @@ Anticipated release: TBD
 - Use a dollar field for the "other funding" field in the cost allocation form ([#1754])
 - Fixes a screen reader bug by adding a wrapper around the CMS Design System's Choice component ([#1760])
 - Round off dollar input fields when they lose focus ([#1739])
+- Fixed a bug where multiline plain text fields (such as the activity overview) gets exported as a text field, and the content is truncated within it. ([#1767])
 
 #### ⚙️ Behind the scenes
 
@@ -100,3 +101,4 @@ Pilot release to select state partners
 [#1754]: https://github.com/18F/cms-hitech-apd/issues/1754
 [#1762]: https://github.com/18F/cms-hitech-apd/issues/1762
 [#1765]: https://github.com/18F/cms-hitech-apd/issues/1765
+[#1767]: https://github.com/18F/cms-hitech-apd/issues/1767
