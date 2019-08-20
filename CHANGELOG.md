@@ -36,6 +36,7 @@ Anticipated release: TBD
 
 #### ⚙️ Behind the scenes
 
+- Removed old styles ([#1770])
 - Remove unused code
 - Updated 3rd-party dependencies
 
