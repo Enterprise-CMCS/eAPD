@@ -36,6 +36,7 @@ Anticipated release: TBD
 
 #### ⚙️ Behind the scenes
 
+- Removed old styles ([#1770])
 - Remove unused code
 - Updated 3rd-party dependencies
 
@@ -102,3 +103,4 @@ Pilot release to select state partners
 [#1762]: https://github.com/18F/cms-hitech-apd/issues/1762
 [#1765]: https://github.com/18F/cms-hitech-apd/issues/1765
 [#1767]: https://github.com/18F/cms-hitech-apd/issues/1767
+[#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
