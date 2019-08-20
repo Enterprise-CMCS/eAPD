@@ -9,7 +9,6 @@ const config = {
   entry: {
     js: [
       path.join(__dirname, 'src/app.dev.js'),
-      path.join(__dirname, 'src/styles/legacy.css'),
       path.join(__dirname, 'src/styles/index.scss')
     ]
   },
@@ -83,7 +82,7 @@ const config = {
       template: 'src/index.html'
     }),
     new HtmlWebpackTagsPlugin({
-      tags: ['legacy.css', 'app.css'],
+      tags: ['app.css'],
       append: true
     })
   ],

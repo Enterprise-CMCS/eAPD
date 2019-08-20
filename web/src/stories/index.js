@@ -5,7 +5,6 @@ import { Instruction, Section, Subsection } from './content';
 import { FormAndReviewList } from './FormsAndReviews';
 import FrozenTableStory from './FrozenTableStory';
 
-import '../styles/legacy.css';
 import '../styles/index.scss';
 import './story-styles.scss';
 
