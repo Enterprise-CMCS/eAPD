@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 
 import activities from './activities';
 import admin from './admin';
+import aria from './aria';
 import apd from './apd';
 import auth from './auth';
 import budget from './budget';
@@ -16,6 +17,7 @@ const rootReducer = history =>
   combineReducers({
     activities,
     admin,
+    aria,
     apd,
     auth,
     budget,

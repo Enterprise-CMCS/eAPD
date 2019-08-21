@@ -11,14 +11,12 @@ exports[`the GoalForm component renders correctly 1`] = `
     type="text"
     value="goal description"
   />
-  <TextField
+  <TextArea
     className="data-entry-box"
     hint="Briefly describe how the state will measure progress toward the identified goal."
     label="Benchmarks"
-    multiline={true}
     name="milestones"
     rows={6}
-    type="text"
     value="goal objective"
   />
 </Fragment>

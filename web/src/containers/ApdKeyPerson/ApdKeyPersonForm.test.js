@@ -68,7 +68,7 @@ describe('the ApdKeyPersonForm component', () => {
 
     it('handles toggling hasCosts off', () => {
       component
-        .findWhere(c => c.name() === 'Choice' && c.prop('value') === 'no')
+        .findWhere(c => c.name() === 'ChoiceComponent' && c.prop('value') === 'no')
         .simulate('change');
       expect(props.handleChange).toHaveBeenCalledWith(
         1,
@@ -80,7 +80,7 @@ describe('the ApdKeyPersonForm component', () => {
 
     it('handles toggling hasCosts on', () => {
       component
-        .findWhere(c => c.name() === 'Choice' && c.prop('value') === 'yes')
+        .findWhere(c => c.name() === 'ChoiceComponent' && c.prop('value') === 'yes')
         .simulate('change');
       expect(props.handleChange).toHaveBeenCalledWith(
         1,
@@ -93,7 +93,7 @@ describe('the ApdKeyPersonForm component', () => {
     it('handles changing cost for FFY', () => {
       const hasCostsForm = shallow(
         component
-          .findWhere(c => c.name() === 'Choice' && c.prop('value') === 'yes')
+          .findWhere(c => c.name() === 'ChoiceComponent' && c.prop('value') === 'yes')
           .prop('checkedChildren')
       );
 

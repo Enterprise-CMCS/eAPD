@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
 import { routerMiddleware } from 'connected-react-router';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
 import thunk from 'redux-thunk';
 
@@ -22,7 +22,15 @@ const history = createHistory();
 
 const middleware = [thunk, routerMiddleware(history), createLogger()];
 
-const store = createStore(reducer(history), applyMiddleware(...middleware));
+/* eslint-disable no-underscore-dangle */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+/* eslint-enable */
+const store = createStore(
+  reducer(history), 
+  composeEnhancers(
+    applyMiddleware(...middleware),
+  )
+);
 
 const render = (Component, props) => {
   ReactDOM.render(
