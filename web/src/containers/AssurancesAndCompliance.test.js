@@ -71,10 +71,12 @@ describe('assurances and compliance component', () => {
       const component = shallow(<AssurancesAndCompliance {...props} />);
 
       component
-        .find('Choice')
+        .find('ChoiceComponent')
         .at(1) // choice 0 is yes, choice 1 is no
         .dive()
-        .find('TextField')
+        .find('Choice')
+        .dive()
+        .find('TextArea')
         .simulate('change', { target: { value: 'new text' } });
 
       expect(

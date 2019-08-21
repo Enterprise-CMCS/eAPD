@@ -269,6 +269,54 @@ describe('budget reducer', () => {
                     '4': { state: 25, contractors: 10 }
                   }
                 }
+              },
+              '5': {
+                // This activity is to represent the case where an activity's
+                // total costs are zero, because that was causing budget math
+                // errors. https://github.com/18F/cms-hitech-apd/issues/1740
+                id: 5,
+                key: '5',
+                name: 'zero total',
+                fundingSource: 'MMIS',
+                years: ['1931', '1932', '1933'],
+                costAllocation: {
+                  '1931': { ffp: { federal: 50, state: 50 }, other: 0 },
+                  '1932': { ffp: { federal: 75, state: 25 }, other: 0 },
+                  '1933': { ffp: { federal: 90, state: 10 }, other: 0 }
+                },
+                contractorResources: [
+                  { years: { '1931': 0, '1932': 0, '1933': 0 } }
+                ],
+                expenses: [{ years: { '1931': 0, '1932': 0, '1933': 0 } }],
+                statePersonnel: [
+                  {
+                    years: {
+                      '1931': { amt: 0, perc: 0 },
+                      '1932': { amt: 0, perc: 0 },
+                      '1933': { amt: 0, perc: 0 }
+                    }
+                  }
+                ],
+                quarterlyFFP: {
+                  '1931': {
+                    '1': { state: 0, contractors: 0 },
+                    '2': { state: 0, contractors: 0 },
+                    '3': { state: 0, contractors: 0 },
+                    '4': { state: 0, contractors: 0 }
+                  },
+                  '1932': {
+                    '1': { state: 0, contractors: 0 },
+                    '2': { state: 0, contractors: 0 },
+                    '3': { state: 0, contractors: 0 },
+                    '4': { state: 0, contractors: 0 }
+                  },
+                  '1933': {
+                    '1': { state: 0, contractors: 0 },
+                    '2': { state: 0, contractors: 0 },
+                    '3': { state: 0, contractors: 0 },
+                    '4': { state: 0, contractors: 0 }
+                  }
+                }
               }
             }
           }
@@ -723,6 +771,102 @@ describe('budget reducer', () => {
             },
             total: { state: 2440, contractors: 1800, combined: 4240 }
           }
+        },
+        '5': {
+          costsByFFY: {
+            '1931': { federal: 0, medicaidShare: 0, state: 0, total: 0 },
+            '1932': { federal: 0, medicaidShare: 0, state: 0, total: 0 },
+            '1933': { federal: 0, medicaidShare: 0, state: 0, total: 0 },
+            total: { federal: 0, medicaidShare: 0, state: 0, total: 0 }
+          },
+          quarterlyFFP: {
+            '1931': {
+              '1': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              '2': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              '3': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              '4': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              subtotal: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              }
+            },
+            '1932': {
+              '1': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              '2': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              '3': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              '4': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              subtotal: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              }
+            },
+            '1933': {
+              '1': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              '2': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              '3': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              '4': {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              },
+              subtotal: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                state: { dollars: 0, percent: 0 }
+              }
+            },
+            total: {
+              combined: 0,
+              contractors: 0,
+              state: 0
+            }
+          }
         }
       },
       combined: {
@@ -1024,6 +1168,27 @@ describe('budget reducer', () => {
             },
             expenses: { '1931': 1000, '1932': 1000, '1933': 1000, total: 3000 },
             combined: { '1931': 2500, '1932': 3000, '1933': 2100, total: 7600 }
+          }
+        },
+        {
+          id: 5,
+          name: 'zero total',
+          fundingSource: 'MMIS',
+          data: {
+            statePersonnel: {
+              '1931': 0,
+              '1932': 0,
+              '1933': 0,
+              total: 0
+            },
+            contractors: {
+              '1931': 0,
+              '1932': 0,
+              '1933': 0,
+              total: 0
+            },
+            expenses: { '1931': 0, '1932': 0, '1933': 0, total: 0 },
+            combined: { '1931': 0, '1932': 0, '1933': 0, total: 0 }
           }
         }
       ],

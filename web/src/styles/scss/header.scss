@@ -24,6 +24,7 @@ header {
 }
 
 .site-title {
+  padding-top: 4px; // offsets the padding on the button with the user's email
   svg {
     margin-right: $spacer-1;
   }
@@ -32,6 +33,7 @@ header {
 .nav--dropdown {
   padding-left: 0;
   margin-bottom: 0;
+  margin-top: 0;
   float: right;
   text-align: right;
   position: relative; /* needed for submenu absolute positioning */

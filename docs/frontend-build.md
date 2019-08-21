@@ -30,7 +30,6 @@ files copied from static sources.
 | index.html | Entry page, copied directly from `src/index.html`, unchanged                    |
 | app.js     | The React app and all necessary libraries (entrypoint is `src/app.js`)          |
 | app.css    | Our primary styles, built from Sass (entrypoint is `src/styles/index.scss`)     |
-| legacy.css | Our legacy styles (entrypoint is `src/styles/legacy.css`)                       |
 | static     | Images and other static resources, copied directly from `src/static`, unchanged |
 
 Additionally, our Javascript is run through the

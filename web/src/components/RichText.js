@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 
-import { EDITOR_CONFIG, htmlToEditor, editorToHtml } from '../../util/editor';
+import { EDITOR_CONFIG, htmlToEditor, editorToHtml } from '../util/editor';
 
 class RichText extends Component {
   constructor(props) {
