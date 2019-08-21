@@ -15,10 +15,11 @@ exports[`apd (application) component renders correctly 1`] = `
       place={Object {}}
     />
     <div
-      className="site-main p2 sm-p4 md-px0 ds-l-col--9"
+      className="site-main ds-u-padding-top--2 ds-l-col--9"
     >
       <h1
         className="ds-h1 apd--title"
+        id="start-main-content"
       >
         <span
           className="ds-h6 ds-u-display--block"

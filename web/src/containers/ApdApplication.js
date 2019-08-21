@@ -85,8 +85,8 @@ class ApdApplication extends Component {
         />
         <div className="ds-l-row ds-u-margin--0">
           <Sidebar place={place} />
-          <div className="site-main p2 sm-p4 md-px0 ds-l-col--9">
-            <h1 className="ds-h1 apd--title">
+          <div className="site-main ds-u-padding-top--2 ds-l-col--9">
+            <h1 id="start-main-content" className="ds-h1 apd--title">
               <span className="ds-h6 ds-u-display--block">{apdName}</span>
               {place.name} {year} APD
             </h1>

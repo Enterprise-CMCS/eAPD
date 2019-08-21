@@ -6,6 +6,7 @@ describe('root reducer', () => {
     expect(stateKeys).toEqual([
       'activities',
       'admin',
+      'aria',
       'apd',
       'auth',
       'budget',
