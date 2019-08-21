@@ -50,7 +50,7 @@ describe('the StatePersonForm component', () => {
 
     test('handles changing the personnel desc', () => {
       component
-        .findWhere(c => c.name() === 'TextField' && c.prop('name') === 'desc')
+        .findWhere(c => c.name() === 'TextArea' && c.prop('name') === 'desc')
         .simulate('change', { target: { value: 'new desc' } });
       expect(handleEditPersonDesc).toHaveBeenCalledWith(83, 'new desc');
     });
@@ -65,7 +65,7 @@ describe('the StatePersonForm component', () => {
 
     test('handles changing the personnel FTE for a year', () => {
       component
-        .findWhere(c => c.name() === 'TextField' && c.prop('name') === 'ftes')
+        .findWhere(c => c.name() === 'NumberField' && c.prop('name') === 'ftes')
         .first()
         .simulate('change', { target: { value: 'new ftes' } });
       expect(handleEditFTE).toHaveBeenCalledWith(83, '7473', 'new ftes');

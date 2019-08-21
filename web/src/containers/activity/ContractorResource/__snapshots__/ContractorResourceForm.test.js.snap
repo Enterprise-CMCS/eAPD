@@ -3,18 +3,16 @@
 exports[`the ContractorResourceForm component renders correctly 1`] = `
 <Fragment>
   <TextField
-    autoFocus="true"
+    autoFocus={true}
     label="Contractor Name"
     name="contractor-name"
     type="text"
     value="Honey Dipper Dan"
   />
-  <TextField
+  <TextArea
     label="Description of Services"
-    multiline={true}
     name="contractor-description"
     rows={5}
-    type="text"
     value="They cleaned up the latrines after the Battle of Hastings"
   />
   <FormLabel
@@ -40,6 +38,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
   <DollarField
     label="Total Contract Cost"
     name="contractor-total-cost"
+    onBlur={null}
     onChange={null}
     size="medium"
     value={12345}
@@ -52,16 +51,15 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     >
       This is an hourly resource
     </legend>
-    <Choice
+    <ChoiceComponent
       checked={true}
-      inputPlacement="left"
       name="apd-activity-contractor-hourly-key 1-no"
       type="radio"
       value="no"
     >
       No
-    </Choice>
-    <Choice
+    </ChoiceComponent>
+    <ChoiceComponent
       checked={false}
       checkedChildren={
         <div
@@ -77,7 +75,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
             <div
               className="ds-l-row ds-u-padding-left--2"
             >
-              <TextField
+              <NumberField
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1066"
@@ -90,6 +88,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1066"
+                onBlur={null}
                 onChange={null}
                 size="medium"
                 value={100}
@@ -106,7 +105,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
             <div
               className="ds-l-row ds-u-padding-left--2"
             >
-              <TextField
+              <NumberField
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1067"
@@ -119,6 +118,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1067"
+                onBlur={null}
                 onChange={null}
                 size="medium"
                 value={200}
@@ -127,19 +127,19 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
           </React.Fragment>
         </div>
       }
-      inputPlacement="left"
       name="apd-activity-contractor-hourly-key 1-yes"
       type="radio"
       value="yes"
     >
       Yes
-    </Choice>
+    </ChoiceComponent>
   </fieldset>
   <DollarField
     disabled={false}
     key="1066"
     label="FFY 1066 Cost"
     name="contractor-cost-ffy-1066"
+    onBlur={null}
     onChange={null}
     size="medium"
     value={300}
@@ -149,6 +149,7 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     key="1067"
     label="FFY 1067 Cost"
     name="contractor-cost-ffy-1067"
+    onBlur={null}
     onChange={null}
     size="medium"
     value={400}
@@ -159,18 +160,16 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
 exports[`the ContractorResourceForm component renders if use hourly data is selected 1`] = `
 <Fragment>
   <TextField
-    autoFocus="true"
+    autoFocus={true}
     label="Contractor Name"
     name="contractor-name"
     type="text"
     value="Honey Dipper Dan"
   />
-  <TextField
+  <TextArea
     label="Description of Services"
-    multiline={true}
     name="contractor-description"
     rows={5}
-    type="text"
     value="They cleaned up the latrines after the Battle of Hastings"
   />
   <FormLabel
@@ -196,6 +195,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
   <DollarField
     label="Total Contract Cost"
     name="contractor-total-cost"
+    onBlur={null}
     onChange={null}
     size="medium"
     value={12345}
@@ -208,16 +208,15 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
     >
       This is an hourly resource
     </legend>
-    <Choice
+    <ChoiceComponent
       checked={false}
-      inputPlacement="left"
       name="apd-activity-contractor-hourly-key 1-no"
       type="radio"
       value="no"
     >
       No
-    </Choice>
-    <Choice
+    </ChoiceComponent>
+    <ChoiceComponent
       checked={true}
       checkedChildren={
         <div
@@ -233,7 +232,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
             <div
               className="ds-l-row ds-u-padding-left--2"
             >
-              <TextField
+              <NumberField
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1066"
@@ -246,6 +245,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1066"
+                onBlur={null}
                 onChange={null}
                 size="medium"
                 value={100}
@@ -262,7 +262,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
             <div
               className="ds-l-row ds-u-padding-left--2"
             >
-              <TextField
+              <NumberField
                 label="Number of hours"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-num-hours-ffy-1067"
@@ -275,6 +275,7 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
                 label="Hourly rate"
                 labelClassName="ds-u-margin-top--1"
                 name="contractor-hourly-rate-ffy-1067"
+                onBlur={null}
                 onChange={null}
                 size="medium"
                 value={200}
@@ -283,13 +284,12 @@ exports[`the ContractorResourceForm component renders if use hourly data is sele
           </React.Fragment>
         </div>
       }
-      inputPlacement="left"
       name="apd-activity-contractor-hourly-key 1-yes"
       type="radio"
       value="yes"
     >
       Yes
-    </Choice>
+    </ChoiceComponent>
   </fieldset>
   <p
     className="ds-u-margin-bottom--0"

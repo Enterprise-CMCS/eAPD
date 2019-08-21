@@ -1,6 +1,6 @@
 import { Button, Review } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo, useState } from 'react';
+import React, { Fragment, useMemo, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 
 import ContractorResources from './ContractorResources';
@@ -25,7 +25,19 @@ const makeTitle = ({ name, fundingSource }, i) => {
 };
 
 const EntryDetails = ({ activity, aKey, num }) => {
-  const [collapsed, setCollapsed] = useState(num > 1);
+  const container = useRef();
+
+  const [collapsed, internalSetCollapsed] = useState(num > 1);
+  const setCollapsed = newCollapsed => {
+    if (newCollapsed) {
+      const { top } = container.current.getBoundingClientRect();
+      if (top < 0 || top > window.innerHeight) {
+        container.current.scrollIntoView({ behavior: 'auto' });
+        container.current.focus();
+      }
+    }
+    internalSetCollapsed(newCollapsed);
+  };
 
   const title = useMemo(() => makeTitle(activity, num), [
     activity.fundingSource,
@@ -60,6 +72,7 @@ const EntryDetails = ({ activity, aKey, num }) => {
       className={`activity--body activity--body__${
         collapsed ? 'collapsed' : 'expanded'
       } activity--body__${num === 1 ? 'first' : 'notfirst'}`}
+      ref={container}
     >
       <Review heading={title} headingLevel={4} editContent={editContent} />
       <div className={collapsed ? 'visibility--print' : ''}>

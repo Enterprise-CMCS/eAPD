@@ -26,6 +26,14 @@ describe('Sidebar component', () => {
     expect(shallow(<Sidebar {...props} />)).toMatchSnapshot();
   });
 
+  test(`leaves off the state image for states we don't have images for`, () => {
+    expect(
+      shallow(
+        <Sidebar {...props} place={{ id: 'vi', name: 'U.S. Virgin Islands' }} />
+      )
+    ).toMatchSnapshot();
+  });
+
   test('maps state to props', () => {
     const state = {
       activities: {

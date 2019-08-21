@@ -1,8 +1,9 @@
-import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
+import { FormLabel, Select } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 
 import DollarField from '../../../components/DollarField';
+import TextArea from '../../../components/TextArea';
 import { getLabelID } from '../../../util';
 
 const NonPersonnelCostForm = ({
@@ -53,9 +54,8 @@ const NonPersonnelCostForm = ({
           Miscellaneous expenses for the project
         </option>
       </Select>
-      <TextField
+      <TextArea
         label="Description"
-        multiline
         rows={5}
         name="desc"
         value={desc}

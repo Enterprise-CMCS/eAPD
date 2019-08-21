@@ -55,7 +55,7 @@ describe('the NonPersonnelCostForm component', () => {
 
     test('handles changing the cost desc', () => {
       component
-        .find('TextField')
+        .find('TextArea')
         .simulate('change', { target: { value: 'new desc' } });
       expect(handleEditDesc).toHaveBeenCalledWith(83, 'new desc');
     });

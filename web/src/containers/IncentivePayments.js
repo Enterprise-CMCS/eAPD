@@ -3,8 +3,9 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { updateApd as updateApdAction } from '../actions/apd';
+import DollarField from '../components/DollarField';
 import Dollars from '../components/Dollars';
-import { Input, DollarInput } from '../components/Inputs';
+import NumberField from '../components/NumberField';
 import { t } from '../i18n';
 import {
   selectApdYears,
@@ -41,9 +42,7 @@ class IncentivePayments extends Component {
               <thead>
                 <tr>
                   <th>
-                    <span aria-hidden="true">
-                      {t('ffy', { year })}
-                    </span>
+                    <span aria-hidden="true">{t('ffy', { year })}</span>
                   </th>
                   <Fragment key={year}>
                     {QUARTERS.map(q => (
@@ -67,30 +66,26 @@ class IncentivePayments extends Component {
               <tbody>
                 {INCENTIVE_ENTRIES.map(({ id, name, type }) => {
                   const InputComponent =
-                    type === 'amount' ? DollarInput : Input;
+                    type === 'amount' ? DollarField : NumberField;
 
                   return (
                     <tr key={id}>
-                      <th scope="row">
-                        {name}
-                      </th>
+                      <th scope="row">{name}</th>
                       <Fragment key={year}>
                         {QUARTERS.map(q => (
                           <td key={q}>
                             <InputComponent
-                              name={`${id}-payments-${year}-q${q}`}
+                              className="budget-table--input-holder"
+                              fieldClassName="budget-table--input__number"
                               label={`${id} payments for ${year}, quarter ${q}`}
-                              wrapperClass="budget-table--input-holder"
-                              className="budget-table--input__number"
+                              labelClassName="sr-only"
+                              name={`${id}-payments-${year}-q${q}`}
                               value={data[id][year][q] || ''}
                               onChange={this.handleChange(id, year, q)}
-                              hideLabel
                             />
                           </td>
                         ))}
-                        <td
-                          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
-                        >
+                        <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
                           {formatNumber(type, totals[id].byYear[year])}
                         </td>
                       </Fragment>
