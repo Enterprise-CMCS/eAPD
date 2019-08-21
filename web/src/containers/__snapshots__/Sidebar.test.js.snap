@@ -1,5 +1,196 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Sidebar component leaves off the state image for states we don't have images for 1`] = `
+<div
+  className="ds-l-col--3"
+>
+  <aside
+    className="site-sidebar"
+  >
+    <div
+      className="site-sidebar__sticky"
+    >
+      <div
+        className="ds-u-display--flex ds-u-align-items--center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
+      >
+        <h1>
+          U.S. Virgin Islands
+        </h1>
+      </div>
+      <VerticalNav
+        collapsed={false}
+        items={
+          Array [
+            Object {
+              "defaultCollapsed": true,
+              "id": "apd-state-profile",
+              "items": Array [
+                Object {
+                  "id": "apd-state-profile-overview",
+                  "label": "Overview",
+                  "onClick": [Function],
+                  "url": "#apd-state-profile",
+                },
+                Object {
+                  "id": "apd-state-profile-office",
+                  "label": "State Director and Office Address",
+                  "onClick": [Function],
+                  "url": "#apd-state-profile-office",
+                },
+                Object {
+                  "id": "apd-state-profile-key-personnel",
+                  "label": "Key Personnel and Program Management",
+                  "onClick": [Function],
+                  "url": "#apd-state-profile-key-personnel",
+                },
+              ],
+              "label": "Key State Personnel",
+            },
+            Object {
+              "id": "apd-summary",
+              "label": "Program Summary",
+              "onClick": [Function],
+              "url": "#apd-summary",
+            },
+            Object {
+              "defaultCollapsed": true,
+              "id": "prev-activities",
+              "items": Array [
+                Object {
+                  "id": "prev-activities-overview",
+                  "label": "Overview",
+                  "onClick": [Function],
+                  "url": "#prev-activities",
+                },
+                Object {
+                  "id": "prev-activities-outline",
+                  "label": "Prior Activities Overview",
+                  "onClick": [Function],
+                  "url": "#prev-activities-outline",
+                },
+                Object {
+                  "id": "prev-activities-table",
+                  "label": "Actual Costs",
+                  "onClick": [Function],
+                  "url": "#prev-activities-table",
+                },
+              ],
+              "label": "Results of Previous Activities",
+            },
+            Object {
+              "defaultCollapsed": true,
+              "id": "activities",
+              "items": Array [
+                Object {
+                  "id": "activities-overview",
+                  "label": "Overview",
+                  "onClick": [Function],
+                  "url": "#activities",
+                },
+                Object {
+                  "id": "activities-list",
+                  "label": "Activity List",
+                  "onClick": [Function],
+                  "url": "#activities-list",
+                },
+                Object {
+                  "id": "key 1",
+                  "label": "Activity 1",
+                  "onClick": [Function],
+                  "url": "##key1",
+                },
+                Object {
+                  "id": "key 2",
+                  "label": "Activity 2",
+                  "onClick": [Function],
+                  "url": "##key2",
+                },
+              ],
+              "label": "Program Activities",
+            },
+            Object {
+              "id": "schedule-summary",
+              "label": "Activity Schedule Summary",
+              "onClick": [Function],
+              "url": "#schedule-summary",
+            },
+            Object {
+              "defaultCollapsed": true,
+              "id": "budget",
+              "items": Array [
+                Object {
+                  "id": "budget-overview",
+                  "label": "Overview",
+                  "onClick": [Function],
+                  "url": "#budget",
+                },
+                Object {
+                  "id": "budget-summary-table",
+                  "label": "Summary Budget Table",
+                  "onClick": [Function],
+                  "url": "#budget-summary-table",
+                },
+                Object {
+                  "id": "budget-federal-by-quarter",
+                  "label": "Quarterly Federal Share",
+                  "onClick": [Function],
+                  "url": "#budget-federal-by-quarter",
+                },
+                Object {
+                  "id": "budget-incentive-by-quarter",
+                  "label": "Estimated Quarterly Incentive Payments",
+                  "onClick": [Function],
+                  "url": "#budget-incentive-by-quarter",
+                },
+              ],
+              "label": "Proposed Budget",
+            },
+            Object {
+              "id": "assurances-compliance",
+              "label": "Assurances and Compliance",
+              "onClick": [Function],
+              "url": "#assurances-compliance",
+            },
+            Object {
+              "defaultCollapsed": true,
+              "id": "executive-summary",
+              "items": Array [
+                Object {
+                  "id": "executive-summary-overview",
+                  "label": "Overview",
+                  "onClick": [Function],
+                  "url": "#executive-summary",
+                },
+                Object {
+                  "id": "executive-summary-summary",
+                  "label": "Activities Summary",
+                  "onClick": [Function],
+                  "url": "#executive-summary-summary",
+                },
+                Object {
+                  "id": "executive-summary-budget-table",
+                  "label": "Program Budget Tables",
+                  "onClick": [Function],
+                  "url": "#executive-summary-budget-table",
+                },
+              ],
+              "label": "Executive Summary",
+            },
+            Object {
+              "id": "export-and-submit",
+              "label": "Export and Submit",
+              "onClick": [Function],
+              "url": "#export-and-submit",
+            },
+          ]
+        }
+        selectedId="some section"
+      />
+    </div>
+  </aside>
+</div>
+`;
+
 exports[`Sidebar component renders correctly 1`] = `
 <div
   className="ds-l-col--3"
@@ -8,21 +199,19 @@ exports[`Sidebar component renders correctly 1`] = `
     className="site-sidebar"
   >
     <div
-      className="xs-hide sm-hide site-sidebar__sticky"
+      className="site-sidebar__sticky"
     >
       <div
-        className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
+        className="ds-u-display--flex ds-u-align-items--center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4"
       >
         <img
           alt="place name"
-          className="align-middle mr2"
+          className="ds-u-margin-right--2"
           height="40"
           src="/static/img/states/place id.svg"
           width="40"
         />
-        <h1
-          className="text-xl"
-        >
+        <h1>
           place name
         </h1>
       </div>

@@ -17,13 +17,11 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     type="text"
     value="personnel title"
   />
-  <TextField
+  <TextArea
     label="Description"
-    multiline={true}
     name="desc"
     onChange={[Function]}
     rows={5}
-    type="text"
     value="personnel desc"
   />
   <h5
@@ -38,11 +36,12 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     <DollarField
       label="Costs with benefits"
       name="cost"
+      onBlur={null}
       onChange={[Function]}
       size="medium"
       value=""
     />
-    <TextField
+    <NumberField
       label="Number of FTEs"
       name="ftes"
       onChange={[Function]}
@@ -62,11 +61,12 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     <DollarField
       label="Costs with benefits"
       name="cost"
+      onBlur={null}
       onChange={[Function]}
       size="medium"
       value=""
     />
-    <TextField
+    <NumberField
       label="Number of FTEs"
       name="ftes"
       onChange={[Function]}

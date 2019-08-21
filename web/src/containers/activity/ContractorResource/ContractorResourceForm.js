@@ -1,10 +1,13 @@
-import { Choice, FormLabel, TextField } from '@cmsgov/design-system-core';
+import { FormLabel, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback, useMemo } from 'react';
 
+import Choice from '../../../components/Choice';
 import DateField from '../../../components/DateField';
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
+import TextArea from '../../../components/TextArea';
+import NumberField from '../../../components/NumberField';
 
 const ContractorResourceForm = ({
   index,
@@ -32,29 +35,17 @@ const ContractorResourceForm = ({
 
   const handle = {
     changeDesc: useCallback(handleChange(index, 'desc'), []),
-    changeHourlyHours: apdFFYs.reduce(
-      (acc, ffy) => ({
-        ...acc,
-        [ffy]: useCallback(handleHourlyChange(index, ffy, 'hours'), [apdFFYs])
-      }),
-      {}
+    changeHourlyHours: useCallback(
+      ffy => handleHourlyChange(index, ffy, 'hours'),
+      [index]
     ),
-    changeHourlyRate: apdFFYs.reduce(
-      (acc, ffy) => ({
-        ...acc,
-        [ffy]: useCallback(handleHourlyChange(index, ffy, 'rate'), [apdFFYs])
-      }),
-      {}
+    changeHourlyRate: useCallback(
+      ffy => handleHourlyChange(index, ffy, 'rate'),
+      [index]
     ),
     changeName: useCallback(handleChange(index, 'name'), []),
     changeTotalCost: useCallback(handleChange(index, 'totalCost'), []),
-    changeYearCost: apdFFYs.reduce(
-      (acc, ffy) => ({
-        ...acc,
-        [ffy]: useCallback(handleYearChange(index, ffy), [apdFFYs])
-      }),
-      {}
-    ),
+    changeYearCost: useCallback(ffy => handleYearChange(index, ffy), [index]),
     setUseHourlyOff: useCallback(handleUseHourly(key, false), []),
     setUseHourlyOn: useCallback(handleUseHourly(key, true), [])
   };
@@ -62,16 +53,15 @@ const ContractorResourceForm = ({
   return (
     <Fragment>
       <TextField
-        autoFocus="true"
+        autoFocus
         label="Contractor Name"
         name="contractor-name"
         value={name}
         onChange={handle.changeName}
       />
-      <TextField
+      <TextArea
         label="Description of Services"
         name="contractor-description"
-        multiline
         rows={5}
         value={desc}
         onChange={handle.changeDesc}
@@ -121,14 +111,14 @@ const ContractorResourceForm = ({
                 <Fragment key={ffy}>
                   <FormLabel>FFY {ffy}</FormLabel>
                   <div className="ds-l-row ds-u-padding-left--2">
-                    <TextField
+                    <NumberField
                       label="Number of hours"
                       name={`contractor-num-hours-ffy-${ffy}`}
                       labelClassName="ds-u-margin-top--1"
                       type="number"
                       size="medium"
                       value={hourly.data[ffy].hours}
-                      onChange={handle.changeHourlyHours[ffy]}
+                      onChange={handle.changeHourlyHours(ffy)}
                     />
                     <DollarField
                       className="ds-u-margin-left--1"
@@ -137,7 +127,7 @@ const ContractorResourceForm = ({
                       labelClassName="ds-u-margin-top--1"
                       size="medium"
                       value={hourly.data[ffy].rate}
-                      onChange={handle.changeHourlyRate[ffy]}
+                      onChange={handle.changeHourlyRate(ffy)}
                     />
                   </div>
                 </Fragment>
@@ -167,7 +157,7 @@ const ContractorResourceForm = ({
             disabled={hourly.useHourly}
             size="medium"
             value={years[ffy]}
-            onChange={handle.changeYearCost[ffy]}
+            onChange={handle.changeYearCost(ffy)}
           />
         ))
       )}
