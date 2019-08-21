@@ -33,6 +33,7 @@ Anticipated release: TBD
 - Fixes a screen reader bug by adding a wrapper around the CMS Design System's Choice component ([#1760])
 - Round off dollar input fields when they lose focus ([#1739])
 - Fixed a bug where multiline plain text fields (such as the activity overview) gets exported as a text field, and the content is truncated within it. ([#1767])
+- Fixed the spacing in the activity overview section. ([#1648])
 
 #### ⚙️ Behind the scenes
 
@@ -81,6 +82,7 @@ Pilot release to select state partners
 [#1640]: https://github.com/18F/cms-hitech-apd/issues/1640
 [#1646]: https://github.com/18F/cms-hitech-apd/pull/1646
 [#1647]: https://github.com/18F/cms-hitech-apd/pull/1647
+[#1648]: https://github.com/18F/cms-hitech-apd/issues/1648
 [#1649]: https://github.com/18F/cms-hitech-apd/issues/1649
 [#1651]: https://github.com/18F/cms-hitech-apd/pull/1651
 [#1655]: https://github.com/18F/cms-hitech-apd/issues/1655
