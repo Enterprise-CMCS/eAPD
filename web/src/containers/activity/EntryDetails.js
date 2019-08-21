@@ -33,6 +33,7 @@ const EntryDetails = ({ activity, aKey, num }) => {
       const { top } = container.current.getBoundingClientRect();
       if (top < 0 || top > window.innerHeight) {
         container.current.scrollIntoView({ behavior: 'auto' });
+        container.current.focus();
       }
     }
     internalSetCollapsed(newCollapsed);
