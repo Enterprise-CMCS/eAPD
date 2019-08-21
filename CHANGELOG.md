@@ -23,6 +23,7 @@ Anticipated release: TBD
 - Fixed the width on activity overview detail and statement of alternatives textbox labels ([#1640])
 - Made the "manage account" and "login" text the same size in the header dropdown ([#1655], [#1680])
 - Removed the emoji button from the rich text editor ([#1649])
+- Extend user sessions on API activity ([#1728])
 - Adds spacing around the Medicaid director and Medicaid office address form headers ([#1646])
 - Adds margin to the bottom of the state dashboard ([#1601])
 - Adds an ARIA region component to prevent screen readers from prematurely announcing quarterly budget numbers ([#1731])
@@ -94,6 +95,7 @@ Pilot release to select state partners
 [#1712]: https://github.com/18F/cms-hitech-apd/pull/1712
 [#1713]: https://github.com/18F/cms-hitech-apd/pull/1713
 [#1715]: https://github.com/18F/cms-hitech-apd/pull/1715
+[#1728]: https://github.com/18F/cms-hitech-apd/issues/1728
 [#1730]: https://github.com/18F/cms-hitech-apd/pull/1730
 [#1729]: https://github.com/18F/cms-hitech-apd/issues/1729
 [#1732]: https://github.com/18F/cms-hitech-apd/issues/1732
@@ -106,3 +108,4 @@ Pilot release to select state partners
 [#1765]: https://github.com/18F/cms-hitech-apd/issues/1765
 [#1767]: https://github.com/18F/cms-hitech-apd/issues/1767
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
+
