@@ -17,6 +17,7 @@ strong {
   font-family: $font-family-mono;
 }
 
-h1.apd--title {
-  margin-left: 72px;
+.ds-h1.apd--title {
+  margin-top: $spacer-2;
+  margin-left: $spacer-1 * 9;
 }

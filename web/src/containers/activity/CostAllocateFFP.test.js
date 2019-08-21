@@ -98,7 +98,7 @@ describe('the CostAllocateFFP component', () => {
   test('handles changes to other funding', () => {
     const component = shallow(<CostAllocateFFP {...props} />);
     component
-      .find('TextField')
+      .find('DollarField')
       .filterWhere(n => n.props().value === 10)
       .simulate('change', { target: { value: '150' } });
 

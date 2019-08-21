@@ -1,8 +1,10 @@
-import { Choice, FormLabel, TextField } from '@cmsgov/design-system-core';
+import { FormLabel, TextField } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, useCallback } from 'react';
 import { t } from '../../i18n';
+import Choice from '../../components/Choice';
 import DollarField from '../../components/DollarField';
+import NumberField from '../../components/NumberField';
 import Dollars from '../../components/Dollars';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
@@ -61,7 +63,7 @@ const PersonForm = ({
         value={position}
         onChange={getOnChangeHandler('position')}
       />
-      <TextField
+      <NumberField
         name={`apd-state-profile-pocpercentTime${index}`}
         label={t(`${tRoot}.labels.percentTime`)}
         value={percentTime || 0}

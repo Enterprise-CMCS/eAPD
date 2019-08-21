@@ -197,19 +197,23 @@ class Sidebar extends Component {
 
     const { activeSection } = this.props;
 
+    const hasImage = ['as', 'gu', 'mp', 'vi'].indexOf(place.id) < 0;
+
     return (
       <div className="ds-l-col--3">
         <aside className="site-sidebar">
-          <div className="xs-hide sm-hide site-sidebar__sticky">
-            <div className="flex items-center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4">
-              <img
-                src={`/static/img/states/${place.id}.svg`}
-                alt={place.name}
-                className="align-middle mr2"
-                width="40"
-                height="40"
-              />
-              <h1 className="text-xl">{place.name}</h1>
+          <div className="site-sidebar__sticky">
+            <div className="ds-u-display--flex ds-u-align-items--center ds-u-border-bottom--1 ds-u-padding-y--2 ds-u-margin-bottom--4">
+              {hasImage && (
+                <img
+                  src={`/static/img/states/${place.id}.svg`}
+                  alt={place.name}
+                  className="ds-u-margin-right--2"
+                  width="40"
+                  height="40"
+                />
+              )}
+              <h1>{place.name}</h1>
             </div>
             <VerticalNav
               selectedId={activeSection || 'apd-state-profile-overview'}
