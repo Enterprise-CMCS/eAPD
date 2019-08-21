@@ -14,6 +14,7 @@ const FormAndReviewItem = ({
     const { top } = container.current.getBoundingClientRect();
     if (top < 0 || top > window.innerHeight) {
       container.current.scrollIntoView({ behavior: 'auto' });
+      container.current.focus();
     }
     setCollapsed(true);
   }, []);
