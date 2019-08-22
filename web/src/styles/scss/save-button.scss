@@ -2,9 +2,15 @@
 
 .save-button--container {
   bottom: $spacer-3;
-  position: sticky;
+  position: fixed;
   text-align: right;
+  width: 960px;
   z-index: 10;
+
+  @supports (display: sticky) {
+    position: sticky;
+    width: auto;
+  }
 }
 
 .save-button--alert {
