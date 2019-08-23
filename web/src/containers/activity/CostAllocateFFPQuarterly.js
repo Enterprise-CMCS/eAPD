@@ -34,7 +34,7 @@ class CostAllocateFFPQuarterly extends Component {
   };
 
   render() {
-    const { aKey, quarterlyFFP, year, years } = this.props;
+    const { aKey, quarterlyFFP, year } = this.props;
 
     // Wait until the budget is ready
     if (!quarterlyFFP) return null;
@@ -145,7 +145,6 @@ class CostAllocateFFPQuarterly extends Component {
 CostAllocateFFPQuarterly.propTypes = {
   aKey: PropTypes.string.isRequired,
   quarterlyFFP: PropTypes.object.isRequired,
-  years: PropTypes.array.isRequired,
   year: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
   announce: PropTypes.func.isRequired
