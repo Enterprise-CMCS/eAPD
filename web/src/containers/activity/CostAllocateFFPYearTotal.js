@@ -39,7 +39,6 @@ const CostAllocateFFPYearTotal = ({ quarterlyFFP, years }) => {
 };
 
 CostAllocateFFPYearTotal.propTypes = {
-  aKey: PropTypes.string.isRequired,
   quarterlyFFP: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired
 };
