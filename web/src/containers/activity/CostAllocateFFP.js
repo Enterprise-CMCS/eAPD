@@ -4,6 +4,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
+import CostAllocateFFPYearTotal from './CostAllocateFFPYearTotal';
 import { updateActivity as updateActivityAction } from '../../actions/activities';
 import DollarField from '../../components/DollarField';
 import Dollars from '../../components/Dollars';
@@ -86,6 +87,7 @@ class CostAllocateFFP extends Component {
                 </p>
               </div>
               <CostAllocateFFPQuarterly aKey={aKey} year={year} />
+              <CostAllocateFFPYearTotal aKey={aKey} />
               <hr />
             </div>
           )
