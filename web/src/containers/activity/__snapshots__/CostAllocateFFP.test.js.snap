@@ -104,6 +104,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
       aKey="activity key"
       year="1066"
     />
+    <Connect(CostAllocateFFPYearTotal)
+      aKey="activity key"
+    />
     <hr />
   </div>
   <div
@@ -202,6 +205,9 @@ exports[`the CostAllocateFFP component renders correctly 1`] = `
     <Connect(CostAllocateFFPQuarterly)
       aKey="activity key"
       year="1067"
+    />
+    <Connect(CostAllocateFFPYearTotal)
+      aKey="activity key"
     />
     <hr />
   </div>

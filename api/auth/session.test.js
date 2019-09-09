@@ -4,6 +4,9 @@ const sinon = require('sinon');
 
 const sandbox = sinon.createSandbox();
 
+// Need to set this env var before loading the file under test, because it
+// computes the time in milliseconds at load and stashes it for future use
+process.env.SESSION_LIFETIME_MINUTES = 1;
 const session = require('./session');
 
 tap.test('session functions', async tests => {
@@ -139,6 +142,8 @@ tap.test('session functions', async tests => {
         );
         cookies.get.withArgs('token').returns(token);
 
+        const clock = sinon.useFakeTimers();
+
         await middleware({}, res, next);
         res.writeHead('arg1', 'arg2');
 
@@ -147,6 +152,7 @@ tap.test('session functions', async tests => {
         test.ok(
           cookies.set.calledWith('token', sinon.match.string, {
             httpOnly: true,
+            maxAge: 60000,
             overwrite: true
           }),
           'sets the cookie'
@@ -166,6 +172,8 @@ tap.test('session functions', async tests => {
           writeHead.calledWith('arg1', 'arg2'),
           'original writeHead is called with args'
         );
+
+        clock.restore();
       });
 
       writeTests.test(
@@ -182,6 +190,8 @@ tap.test('session functions', async tests => {
           await middleware(req, res, next);
           req.session = { newSessionProp: 'bob' };
 
+          const clock = sinon.useFakeTimers();
+
           res.writeHead('arg1', 'arg2');
 
           const cookieValue = jwt.decode(cookies.set.args[0][1]);
@@ -189,6 +199,7 @@ tap.test('session functions', async tests => {
           test.ok(
             cookies.set.calledWith('token', sinon.match.string, {
               httpOnly: true,
+              maxAge: 60000,
               overwrite: true
             }),
             'sets the cookie'
@@ -208,6 +219,8 @@ tap.test('session functions', async tests => {
             writeHead.calledWith('arg1', 'arg2'),
             'original writeHead is called with args'
           );
+
+          clock.restore();
         }
       );
     }

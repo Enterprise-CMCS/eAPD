@@ -5,6 +5,9 @@ const logger = require('../logger')('auth session');
 const COOKIE_NAME = 'token';
 const TOKEN_ISSUER = 'CMS eAPD API';
 
+const sessionLifetimeMilliseconds =
+  +process.env.SESSION_LIFETIME_MINUTES * 60 * 1000;
+
 /**
  * Load a session from client cookie
  * @param {Object} req - Express request object
@@ -93,7 +96,11 @@ module.exports = ({ Cookies = defaultCookies } = {}) => {
               expiresIn: `${process.env.SESSION_LIFETIME_MINUTES}m`
             }
           ),
-          { httpOnly: true, overwrite: true }
+          {
+            httpOnly: true,
+            maxAge: sessionLifetimeMilliseconds,
+            overwrite: true
+          }
         );
       } else {
         // Else, write a cookie with an immediate expiration
