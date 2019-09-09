@@ -36,12 +36,14 @@ Anticipated release: TBD
 - Fixes a screen reader bug by adding a wrapper around the CMS Design System's Choice component ([#1760])
 - Round off dollar input fields when they lose focus ([#1739])
 - Fixed a bug where multiline plain text fields (such as the activity overview) gets exported as a text field, and the content is truncated within it. ([#1767])
+- Fixed a bug where the session authentication cookie would expire at the end of the browser session instead of at the scheduled time. ([#1756])
 
 #### ⚙️ Behind the scenes
 
 - Removed old styles ([#1770])
 - Remove unused code
 - Updated 3rd-party dependencies
+- Refactored the activity quarterly cost allocation tables ([#1574])
 
 # v1.0.3
 
@@ -79,6 +81,7 @@ Pilot release to select state partners
 [#1423]: https://github.com/18F/cms-hitech-apd/issues/1423
 [#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
 [#1524]: https://github.com/18F/cms-hitech-apd/issues/1524
+[#1574]: https://github.com/18F/cms-hitech-apd/issues/1574
 [#1600]: https://github.com/18F/cms-hitech-apd/issues/1600
 [#1601]: https://github.com/18F/cms-hitech-apd/pull/1601
 [#1602]: https://github.com/18F/cms-hitech-apd/pull/1602
@@ -106,8 +109,8 @@ Pilot release to select state partners
 [#1745]: https://github.com/18F/cms-hitech-apd/pull/1745
 [#1747]: https://github.com/18F/cms-hitech-apd/issues/1747
 [#1754]: https://github.com/18F/cms-hitech-apd/issues/1754
+[#1756]: https://github.com/18F/cms-hitech-apd/issues/1756
 [#1762]: https://github.com/18F/cms-hitech-apd/issues/1762
 [#1765]: https://github.com/18F/cms-hitech-apd/issues/1765
 [#1767]: https://github.com/18F/cms-hitech-apd/issues/1767
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
-
