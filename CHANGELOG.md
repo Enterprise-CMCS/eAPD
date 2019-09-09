@@ -41,6 +41,7 @@ Anticipated release: TBD
 - Removed old styles ([#1770])
 - Remove unused code
 - Updated 3rd-party dependencies
+- Refactored the activity quarterly cost allocation tables ([#1574])
 
 # v1.0.3
 
@@ -77,6 +78,7 @@ Pilot release to select state partners
 [#1304]: https://github.com/18F/cms-hitech-apd/issues/1304
 [#1423]: https://github.com/18F/cms-hitech-apd/issues/1423
 [#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
+[#1574]: https://github.com/18F/cms-hitech-apd/issues/1574
 [#1600]: https://github.com/18F/cms-hitech-apd/issues/1600
 [#1601]: https://github.com/18F/cms-hitech-apd/pull/1601
 [#1602]: https://github.com/18F/cms-hitech-apd/pull/1602
@@ -108,4 +110,3 @@ Pilot release to select state partners
 [#1765]: https://github.com/18F/cms-hitech-apd/issues/1765
 [#1767]: https://github.com/18F/cms-hitech-apd/issues/1767
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
-
