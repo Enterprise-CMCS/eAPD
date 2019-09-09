@@ -34,132 +34,110 @@ class CostAllocateFFPQuarterly extends Component {
   };
 
   render() {
-    const { aKey, quarterlyFFP, year, years } = this.props;
+    const { aKey, quarterlyFFP, year } = this.props;
 
     // Wait until the budget is ready
     if (!quarterlyFFP) return null;
 
     return (
-      <Fragment>
-        <table className="budget-table" key={year}>
-          <caption className="ds-u-visibility--screen-reader">
-            Enter the federal fiscal year {year} quarterly breakdown by
-            percentage.
-          </caption>
-          <thead>
-            <tr>
-              <th>
-                <span aria-hidden="true">{t('ffy', { year })}</span>
-              </th>
-              <Fragment key={year}>
-                {QUARTERS.map(q => (
-                  <th key={q} scope="col" className="ds-u-text-align--right">
-                    <span className="ds-u-visibility--screen-reader">
-                      {t('ffy', { year })}
-                    </span>
-                    {t('table.quarter', { q })}
-                  </th>
-                ))}
-                <th
-                  scope="col"
-                  className="budget-table--subtotal ds-u-text-align--right"
-                >
+      <table className="budget-table" key={year}>
+        <caption className="ds-u-visibility--screen-reader">
+          Enter the federal fiscal year {year} quarterly breakdown by
+          percentage.
+        </caption>
+        <thead>
+          <tr>
+            <th>
+              <span aria-hidden="true">{t('ffy', { year })}</span>
+            </th>
+            <Fragment key={year}>
+              {QUARTERS.map(q => (
+                <th key={q} scope="col" className="ds-u-text-align--right">
                   <span className="ds-u-visibility--screen-reader">
                     {t('ffy', { year })}
                   </span>
-                  {t('table.subtotal')}
+                  {t('table.quarter', { q })}
                 </th>
-              </Fragment>
-            </tr>
-          </thead>
-          <tbody>
-            {['state', 'contractors'].map(name => (
-              <Fragment key={name}>
-                <tr key={name}>
-                  <th rowSpan="2" scope="row">
-                    {EXPENSE_NAME_DISPLAY[name]}
-                  </th>
-                  <Fragment key={year}>
-                    {QUARTERS.map(q => (
-                      <td key={q}>
-                        <div className="budget-table--input__percent">
-                          <NumberField
-                            className="budget-table--input-holder"
-                            fieldClassName="budget-table--input__number"
-                            label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
-                            labelClassName="sr-only"
-                            name={`ffp-${aKey}-${year}-${q}-${name}`}
-                            onChange={this.handleChange(year, q, name)}
-                            value={quarterlyFFP[year][q][name].percent * 100}
-                            aria-controls={`ffp-${aKey}-${year}-${q}-${name}-dollar-equivalent`}
-                          />
-                        </div>
-                      </td>
-                    ))}
-                    <td className="budget-table--number budget-table--subtotal">
-                      {formatPerc(quarterlyFFP[year].subtotal[name].percent)}
-                    </td>
-                  </Fragment>
-                </tr>
-                <tr>
-                  <Fragment key={year}>
-                    {QUARTERS.map(q => (
-                      <td className="budget-table--number" key={q}>
-                        <Dollars>{quarterlyFFP[year][q][name].dollars}</Dollars>
-                      </td>
-                    ))}
-                    <td className="budget-table--number budget-table--subtotal">
-                      <Dollars>
-                        {quarterlyFFP[year].subtotal[name].dollars}
-                      </Dollars>
-                    </td>
-                  </Fragment>
-                </tr>
-              </Fragment>
-            ))}
-            <tr className="budget-table--row__highlight">
-              <th scope="row" className="budget-table--total">
-                {EXPENSE_NAME_DISPLAY.combined}
+              ))}
+              <th
+                scope="col"
+                className="budget-table--subtotal ds-u-text-align--right"
+              >
+                <span className="ds-u-visibility--screen-reader">
+                  {t('ffy', { year })}
+                </span>
+                {t('table.subtotal')}
               </th>
-              <Fragment key={year}>
-                {QUARTERS.map(q => (
-                  <td
-                    className="budget-table--number budget-table--total"
-                    key={q}
-                  >
-                    <Dollars>{quarterlyFFP[year][q].combined.dollars}</Dollars>
+            </Fragment>
+          </tr>
+        </thead>
+        <tbody>
+          {['state', 'contractors'].map(name => (
+            <Fragment key={name}>
+              <tr key={name}>
+                <th rowSpan="2" scope="row">
+                  {EXPENSE_NAME_DISPLAY[name]}
+                </th>
+                <Fragment key={year}>
+                  {QUARTERS.map(q => (
+                    <td key={q}>
+                      <div className="budget-table--input__percent">
+                        <NumberField
+                          className="budget-table--input-holder"
+                          fieldClassName="budget-table--input__number"
+                          label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
+                          labelClassName="sr-only"
+                          name={`ffp-${aKey}-${year}-${q}-${name}`}
+                          onChange={this.handleChange(year, q, name)}
+                          value={quarterlyFFP[year][q][name].percent * 100}
+                          aria-controls={`ffp-${aKey}-${year}-${q}-${name}-dollar-equivalent`}
+                        />
+                      </div>
+                    </td>
+                  ))}
+                  <td className="budget-table--number budget-table--subtotal">
+                    {formatPerc(quarterlyFFP[year].subtotal[name].percent)}
                   </td>
-                ))}
-                <td className="budget-table--number budget-table--subtotal">
-                  <Dollars>
-                    {quarterlyFFP[year].subtotal.combined.dollars}
-                  </Dollars>
+                </Fragment>
+              </tr>
+              <tr>
+                <Fragment key={year}>
+                  {QUARTERS.map(q => (
+                    <td className="budget-table--number" key={q}>
+                      <Dollars>{quarterlyFFP[year][q][name].dollars}</Dollars>
+                    </td>
+                  ))}
+                  <td className="budget-table--number budget-table--subtotal">
+                    <Dollars>
+                      {quarterlyFFP[year].subtotal[name].dollars}
+                    </Dollars>
+                  </td>
+                </Fragment>
+              </tr>
+            </Fragment>
+          ))}
+          <tr className="budget-table--row__highlight">
+            <th scope="row" className="budget-table--total">
+              {EXPENSE_NAME_DISPLAY.combined}
+            </th>
+            <Fragment key={year}>
+              {QUARTERS.map(q => (
+                <td
+                  className="budget-table--number budget-table--total"
+                  key={q}
+                >
+                  <Dollars>{quarterlyFFP[year][q].combined.dollars}</Dollars>
                 </td>
-              </Fragment>
-            </tr>
-          </tbody>
-        </table>
-        {year === years[years.length - 1] && (
-          <Fragment>
-            <hr />
-            <h6 className="ds-h3">{`Total FFY ${years[0]} - ${
-              years[years.length - 1]
-            }`}</h6>
-            {['state', 'contractors'].map(name => (
-              <Fragment key={name}>
-                <p className="ds-h5">{EXPENSE_NAME_DISPLAY[name]}</p>
-                <p>
-                  <Dollars long>{quarterlyFFP.total[name]}</Dollars>
-                </p>
-              </Fragment>
-            ))}
-            <p className="ds-h5">{EXPENSE_NAME_DISPLAY.combined}</p>
-            <p>
-              <Dollars long>{quarterlyFFP.total.combined}</Dollars>
-            </p>
-          </Fragment>
-        )}
-      </Fragment>
+              ))}
+              <td className="budget-table--number budget-table--subtotal">
+                <Dollars>
+                  {quarterlyFFP[year].subtotal.combined.dollars}
+                </Dollars>
+              </td>
+            </Fragment>
+          </tr>
+        </tbody>
+      </table>
     );
   }
 }
@@ -167,7 +145,6 @@ class CostAllocateFFPQuarterly extends Component {
 CostAllocateFFPQuarterly.propTypes = {
   aKey: PropTypes.string.isRequired,
   quarterlyFFP: PropTypes.object.isRequired,
-  years: PropTypes.array.isRequired,
   year: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
   announce: PropTypes.func.isRequired
