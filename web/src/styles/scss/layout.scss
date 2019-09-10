@@ -6,6 +6,10 @@
   min-height: 100vh;
 }
 
+.site-sidebar.site-sidebar__ie {
+  max-width: 212px;
+}
+
 .site-sidebar__sticky {
   max-height: 100vh;
   overflow-y: auto;
