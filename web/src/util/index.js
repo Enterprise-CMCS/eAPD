@@ -267,3 +267,14 @@ export const replaceNulls = (obj, newValue = '') => {
   replace(objNew);
   return objNew;
 };
+
+/**
+ * Discover whether the current browser is a version of Internet Explorer
+ * @returns {Boolean} True if the browser is IE, false otherwise. Returns false
+ *                    for Edge.
+ */
+export const isIE = () => {
+  const ua = window.navigator.userAgent;
+  const isIE = ua.indexOf('MSIE ') >= 0 || ua.indexOf('Trident') >= 0;
+  return isIE;
+};
