@@ -36,6 +36,7 @@ Anticipated release: TBD
 - Round off dollar input fields when they lose focus ([#1739])
 - Fixed a bug where multiline plain text fields (such as the activity overview) gets exported as a text field, and the content is truncated within it. ([#1767])
 - Fixed a bug where the session authentication cookie would expire at the end of the browser session instead of at the scheduled time. ([#1756])
+- Fixed a bug where the sidebar would change width during scrolling in IE. ([#1434])
 
 #### ⚙️ Behind the scenes
 
@@ -78,6 +79,7 @@ Pilot release to select state partners
 
 [#1304]: https://github.com/18F/cms-hitech-apd/issues/1304
 [#1423]: https://github.com/18F/cms-hitech-apd/issues/1423
+[#1434]: https://github.com/18F/cms-hitech-apd/issues/1434
 [#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
 [#1574]: https://github.com/18F/cms-hitech-apd/issues/1574
 [#1600]: https://github.com/18F/cms-hitech-apd/issues/1600
