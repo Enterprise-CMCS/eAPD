@@ -69,6 +69,23 @@ div.form--with-reviews {
   }
 }
 
+.input-holder__percent {
+  display: inline-block;
+  position: relative;
+  &:after {
+    content: '%';
+    font-weight: 700;
+    font-size: 18px;
+    position: absolute;
+    right: 8px;
+    top: 12px;
+  }
+
+  input {
+    padding-right: 28px;
+  }
+}
+
 /* for forms that display computed values, but those computed values should
 be aligned vertically with their input field comrades */
 div.form--computed-value__input-aligned {
@@ -88,6 +105,10 @@ div.form--computed-value__input-aligned {
 /* dolla dolla inputs */
 .budget-table--input-holder {
   padding-bottom: 0;
+  .input-holder__percent:after {
+    font-size: 12px;
+    top: 12px;
+  }
 }
 
 .budget-table--input__number {
@@ -98,24 +119,6 @@ div.form--computed-value__input-aligned {
   border-radius: $border-radius;
   padding: $spacer-1;
   width: 100%;
-}
-
-.budget-table--input__percent {
-  position: relative;
-}
-
-.budget-table--input__percent::before {
-  content: '%';
-  font-weight: bold;
-  line-height: 1.3;
-  padding: 8px 0;
-  position: absolute;
-  right: 8px;
-  top: 4px;
-}
-
-.budget-table--input__percent .budget-table--input__number {
-  padding-right: $spacer-1 + $spacer-1 + $spacer-half;
 }
 
 .budget-table--number {

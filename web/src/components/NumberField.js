@@ -8,8 +8,8 @@ const selectTextIfZero = ({ target }) => {
   }
 };
 
-const NumberField = ({ ...props }) => {
-  const textField = useRef(null);
+const NumberField = ({ fieldRef, ...props }) => {
+  const textField = fieldRef || useRef(null);
 
   useEffect(() => {
     textField.current.addEventListener('focus', selectTextIfZero);
