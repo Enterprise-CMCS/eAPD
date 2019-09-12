@@ -5,7 +5,6 @@
 .rdw-editor-toolbar {
   background-color: #f5f5f5;
   border: 0;
-  border-radius: var(--border-radius);
 
   & * {
     box-sizing: content-box;
@@ -15,7 +14,6 @@
 .rdw-dropdown-wrapper,
 .rdw-option-wrapper {
   border: 1px solid #eee;
-  border-radius: var(--border-radius);
 }
 
 .rdw-emoji-modal {
@@ -34,7 +32,6 @@
 
 .public-DraftEditor-content {
   border: 1px solid #ddd;
-  border-radius: var(--border-radius);
   overflow: auto;
   padding: 0.5rem;
 }
