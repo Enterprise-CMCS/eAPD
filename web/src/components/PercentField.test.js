@@ -5,8 +5,7 @@ import PercentField from './PercentField';
 
 describe('PercentField component', () => {
   it('renders correctly', () => {
-    let component;
-    component = mount(
+    const component = mount(
       <PercentField
         label="test label"
         name="test name"
