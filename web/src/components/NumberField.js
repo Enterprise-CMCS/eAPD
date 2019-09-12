@@ -1,4 +1,5 @@
 import { TextField } from '@cmsgov/design-system-core';
+import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 
 const selectTextIfZero = ({ target }) => {
@@ -20,5 +21,13 @@ const NumberField = ({ fieldRef, ...props }) => {
 
   return <TextField {...props} fieldRef={textField} />;
 };
+
+NumberField.propTypes = {
+  fieldRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+  ])
+};
+NumberField.defaultProps = { fieldRef: null };
 
 export default NumberField;
