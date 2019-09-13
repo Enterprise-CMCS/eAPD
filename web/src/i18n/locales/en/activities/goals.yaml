@@ -8,9 +8,6 @@ instruction:
     describe how each goal relates to the vision identified in the program
     summary.
   helpText: >-
-    Examples of goals include:
-    improved health outcomes for benficiaries, transformation of public health services,
-    enabling implementation of other initiatives, etc.
 noDataNotice: There are no goals set for this activity.
 
 description:
