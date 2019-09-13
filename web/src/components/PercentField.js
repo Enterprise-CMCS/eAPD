@@ -10,7 +10,7 @@ const PercentField = ({ ...props }) => {
       ref.current.parentNode.appendChild(wrapper);
       wrapper.appendChild(ref.current);
     }
-  });
+  }, []);
 
   return <NumberField {...props} fieldRef={ref} />;
 };
