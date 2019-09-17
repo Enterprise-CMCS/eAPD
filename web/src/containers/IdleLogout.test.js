@@ -97,9 +97,6 @@ describe('IdleLogout component', () => {
         // TODO: When Jest supports conditional mock returns, switch to that.
         // Order-based mock returns is supercali-fragile-isticexpialidocious.
         setTimeout
-          // React has a setTimeout call before our stuff, so we need to account
-          // for that in our mocked returns.
-          .mockReturnValueOnce(0)
           .mockReturnValueOnce('idle timer id')
           .mockReturnValueOnce('warning timer id');
         setInterval.mockReturnValueOnce('warning interval id');
