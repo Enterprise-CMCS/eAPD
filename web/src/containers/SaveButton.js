@@ -2,6 +2,7 @@ import { Alert, Button, Spinner } from '@cmsgov/design-system-core';
 import PropTypes from 'prop-types';
 import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
+import stickybits from 'stickybits';
 
 import { saveApd } from '../actions/apd';
 import { getIsDirty } from '../reducers/dirty';
@@ -39,6 +40,10 @@ class SaveButton extends PureComponent {
       return { success };
     }
     return null;
+  }
+
+  componentDidMount() {
+    stickybits('#apd-save-button', { verticalPosition: 'bottom' });
   }
 
   setSuccessTimer = (() => {
@@ -89,7 +94,10 @@ class SaveButton extends PureComponent {
     const buttonVariant = dirty ? 'primary' : 'success';
 
     return (
-      <div className="save-button--container ds-u-margin-bottom--3 visibility--screen">
+      <div
+        id="apd-save-button"
+        className="save-button--container ds-u-margin-bottom--3 visibility--screen"
+      >
         <div className="save-button--alert">{alert}</div>
         <Button variation={buttonVariant} onClick={this.save}>
           {getButtonContent(dirty, working)}
@@ -101,7 +109,7 @@ class SaveButton extends PureComponent {
 
 SaveButton.propTypes = {
   dirty: PropTypes.bool.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   saveApd: PropTypes.func.isRequired,
   working: PropTypes.bool.isRequired
 };

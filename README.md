@@ -11,6 +11,10 @@ creation, submission, review, and approval of Medicaid APDs and their
 associated contract documents. It is currently limited to HITECH but may
 potentially be expanded to other Medicaid programs in the future.
 
+*Please note:* Any content contained in screenshots from the application within
+the `cms-hitech-apd` repo should be considered test data being used for development purposes ONLY.
+Project, financial, and timeline information is NOT representative of any production data from actual users.
+
 ## Developing
 
 ### Getting the code
