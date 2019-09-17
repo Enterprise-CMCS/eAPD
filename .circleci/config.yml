@@ -523,6 +523,9 @@ jobs:
             apt-get update
             apt-get install awscli -y
             aws s3 sync web/dist "${<< parameters.env >>_WEB_AWS_S3_BUCKET}" --region ${<< parameters.env >>_WEB_AWS_REGION} --delete
+            # Copy up index.html separately, so we can set metadata on it to
+            # disable client cacheing
+            aws s3 cp web/dist/index.html "${<< parameters.env >>_WEB_AWS_S3_BUCKET}/index.html" --metadata '{"Cache-Control":"no-cache"}' --region ${<< parameters.env >>_WEB_AWS_REGION}
   
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:

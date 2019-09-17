@@ -39,6 +39,7 @@ Anticipated release: TBD
 - Fixed a bug where multiline plain text fields (such as the activity overview) gets exported as a text field, and the content is truncated within it. ([#1767])
 - Fixed a bug where the session authentication cookie would expire at the end of the browser session instead of at the scheduled time. ([#1756])
 - Fixed the spacing in the activity overview section. ([#1648])
+- Disabled cacheing of the index page, so that clients always get the latest. ([#1775])
 
 #### ⚙️ Behind the scenes
 
@@ -118,3 +119,4 @@ Pilot release to select state partners
 [#1767]: https://github.com/18F/cms-hitech-apd/issues/1767
 [#1769]: https://github.com/18F/cms-hitech-apd/issues/1769
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
+[#1775]: https://github.com/18F/cms-hitech-apd/issues/1775
