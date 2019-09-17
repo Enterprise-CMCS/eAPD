@@ -1,4 +1,5 @@
 const logger = require('../../logger')('apds route put');
+const { raw: db } = require('../../db');
 const {
   apd: defaultApdModel,
   state: defaultStateModel
@@ -37,6 +38,18 @@ const updateStateProfile = (StateModel = defaultStateModel) => async req => {
   }
 };
 
+const afterSync = async req => {
+  updateStateProfile()(req);
+
+  await db('apds')
+    .where({ id: req.params.id })
+    .update({
+      document: (await defaultApdModel.where({ id: req.params.id }).fetchAll({
+        withRelated: defaultApdModel.withRelated
+      })).toJSON()[0]
+    });
+};
+
 module.exports = app => {
   logger.silly('setting up PUT /apds/:id route');
   app.put(
@@ -44,7 +57,7 @@ module.exports = app => {
     can('edit-document'),
     userCanEditAPD(),
     synchronizeSpecific(syncResponder(), {
-      afterSync: updateStateProfile()
+      afterSync
     })
   );
 };

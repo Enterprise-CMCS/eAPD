@@ -67,6 +67,10 @@ const getUserIDFromSession = async sessionID => {
 
     if (session) {
       logger.silly(`got user ID ${session.user_id}`);
+      logger.silly(`extending session lifetime`);
+      await knex('auth_sessions')
+        .where('session_id', sessionID)
+        .update({ expiration: Date.now() + sessionLifetimeMilliseconds });
       return session.user_id;
     }
   } catch (e) {
