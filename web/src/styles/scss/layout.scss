@@ -6,6 +6,10 @@
   min-height: 100vh;
 }
 
+.site-body {
+  position: relative;
+}
+
 .site-sidebar__sticky {
   max-height: 100vh;
   overflow-y: auto;
