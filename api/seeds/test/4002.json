@@ -1,0 +1,28 @@
+{
+  "id": 4002,
+  "name": "MN-1936-08-03-HITECH-APD",
+  "activities": [],
+  "federalCitations": null,
+  "incentivePayments": [],
+  "keyPersonnel": [],
+  "narrativeHIE": null,
+  "narrativeHIT": null,
+  "narrativeMMIS": null,
+  "previousActivityExpenses": [],
+  "previousActivitySummary": null,
+  "programOverview": null,
+  "state": "mn",
+  "stateProfile": {
+    "medicaidDirector": { "name": null, "email": null, "phone": null },
+    "medicaidOffice": {
+      "address1": null,
+      "address2": null,
+      "city": null,
+      "state": null,
+      "zip": null
+    }
+  },
+  "status": "not draft",
+  "updated": "1947-04-10T00:00:00.000Z",
+  "years": null
+}

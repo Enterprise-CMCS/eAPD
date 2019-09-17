@@ -1,3 +1,6 @@
+require('../../db').setup();
+const apdModel = require('../../db').models.apd;
+
 exports.seed = async knex => {
   const { state_id } = await knex('users').first('state_id'); // eslint-disable-line camelcase
 
@@ -1536,4 +1539,16 @@ exports.seed = async knex => {
         }
       ])
     );
+
+  const apds = (await apdModel.fetchAll({
+    withRelated: apdModel.withRelated
+  })).toJSON();
+
+  await Promise.all(
+    apds.map(apd =>
+      knex('apds')
+        .where({ id: apd.id })
+        .update('document', JSON.stringify(apd))
+    )
+  );
 };
