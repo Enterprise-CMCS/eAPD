@@ -7,6 +7,7 @@ Anticipated release: TBD
 - Attempt to alert users before automatically logging them out due to inactivity. The app will try to use built-in browser notifications as well as flashing the tab title. In browsers that support it, the app treats activity in any eAPD tab as valid, so all eAPD tabs will remain valid as long as at least one of them is getting activity. ([#1697])
 - Scroll the collapsed activity review panel into view after collapsing an activity form. This way, when you collapse an activity, you end up essentially looking at the list of activities again instead of being pushed way down the page. ([#1732])
 - Automatically select numeric form field contents when the field is focused if the current value is 0 ([#1736])
+- Add spellcheck to rich text fields ([#1769])
 
 #### 🐛 Bugs fixed
 
@@ -16,6 +17,7 @@ Anticipated release: TBD
 - Fixed semantic heading levels ([#1695])
 - Fixed a keyboard focus order problem when adding new items to a list ([#1712])
 - Fixed a keyboard focus order problem with the system use banner ([#1715])
+- Fixed the save button so it doesn't go into the footer ([#1524])
 - Switched remaining text inputs (except for rich text) to Design System components and removed custom components ([#1686])
 - For users in American Samoa, Guam, Northern Mariana Islands, or U.S. Virgin Islands, do not attempt to display a territory outline at the top of the sidebar because we don't have those outlines ([#1423]; see [#1730] for more information)
 - Fixed a bug where adding a new contractor resource didn't expand the contractor form ([#1710])
@@ -79,6 +81,7 @@ Pilot release to select state partners
 [#1304]: https://github.com/18F/cms-hitech-apd/issues/1304
 [#1423]: https://github.com/18F/cms-hitech-apd/issues/1423
 [#1475]: https://github.com/18F/cms-hitech-apd/issues/1475
+[#1524]: https://github.com/18F/cms-hitech-apd/issues/1524
 [#1574]: https://github.com/18F/cms-hitech-apd/issues/1574
 [#1600]: https://github.com/18F/cms-hitech-apd/issues/1600
 [#1601]: https://github.com/18F/cms-hitech-apd/pull/1601
@@ -111,4 +114,5 @@ Pilot release to select state partners
 [#1762]: https://github.com/18F/cms-hitech-apd/issues/1762
 [#1765]: https://github.com/18F/cms-hitech-apd/issues/1765
 [#1767]: https://github.com/18F/cms-hitech-apd/issues/1767
+[#1769]: https://github.com/18F/cms-hitech-apd/issues/1769
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
