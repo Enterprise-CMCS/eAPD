@@ -13,6 +13,7 @@ exports[`executive summary component renders correctly 1`] = `
       id="executive-summary-summary"
     />
     <Subsection
+      headerClassName={null}
       id="executive-summary-summary"
       nested={false}
       resource="executiveSummary.summary"
@@ -217,6 +218,7 @@ exports[`executive summary component renders correctly 1`] = `
       id="executive-summary-budget-table"
     />
     <Subsection
+      headerClassName={null}
       id="executive-summary-budget-table"
       nested={false}
       resource="executiveSummary.budgetTable"
