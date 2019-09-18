@@ -51,7 +51,30 @@ exports[`SectionTitle component renders correctly 1`] = `
 exports[`Subsection component renders correctly 1`] = `
 <Fragment>
   <h3
-    className="subsection--title ds-h3"
+    className=" subsection--title ds-h3"
+    id={null}
+  >
+    Performance Goals and Benchmarks
+  </h3>
+  <Instruction
+    args={null}
+    headingDisplay={
+      Object {
+        "className": "ds-h3",
+        "level": "h3",
+      }
+    }
+    reverse={false}
+    source="activities.goals.instruction"
+  />
+  test child
+</Fragment>
+`;
+
+exports[`Subsection component uses the passed-in heading class 1`] = `
+<Fragment>
+  <h3
+    className="bobs-burgers subsection--title ds-h3"
     id={null}
   >
     Performance Goals and Benchmarks

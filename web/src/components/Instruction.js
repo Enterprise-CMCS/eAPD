@@ -11,25 +11,24 @@ const Instruction = ({ args, reverse, source, headingDisplay }) => {
   const helpText = t([source, 'helpText'], { defaultValue: false, ...args });
   const Tag = headingDisplay.level;
 
-  return (
-    <div>
-      {heading && <Tag className={headingDisplay.className}>{heading}</Tag>}
-      {(short || detail || helpText) && (
-        <div className="visibility--screen">
-          {reverse && detail && <Md content={detail} wrapper="p" />}
-          {short && <p className="ds-u-font-weight--bold">{short}</p>}
-          {!reverse && detail && <Md content={detail} wrapper="p" />}
-          {helpText && (
-            <Md
-              content={helpText}
-              wrapper="p"
-              className="instruction-box"
-            />
-          )}
-        </div>
-      )}
-    </div>
-  );
+  if (heading || short || detail || helpText) {
+    return (
+      <div>
+        {heading && <Tag className={headingDisplay.className}>{heading}</Tag>}
+        {(short || detail || helpText) && (
+          <div className="visibility--screen">
+            {reverse && detail && <Md content={detail} wrapper="p" />}
+            {short && <p className="ds-u-font-weight--bold">{short}</p>}
+            {!reverse && detail && <Md content={detail} wrapper="p" />}
+            {helpText && (
+              <Md content={helpText} wrapper="p" className="instruction-box" />
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+  return null;
 };
 
 Instruction.propTypes = {
