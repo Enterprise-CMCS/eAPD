@@ -75,7 +75,7 @@ div.form--with-reviews {
   &:after {
     content: '%';
     font-weight: $font-normal;
-    font-size: 18px;
+    font-size: $lead-font-size;
     position: absolute;
     right: 8px;
     top: 12px;
