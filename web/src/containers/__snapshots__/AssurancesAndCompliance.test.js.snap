@@ -22,6 +22,7 @@ exports[`assurances and compliance component main component renders correctly 1`
     resource="assurancesAndCompliance"
   >
     <Subsection
+      headerClassName={null}
       id="assurances-compliance-fed-citations"
       nested={false}
       resource="assurancesAndCompliance.citations"

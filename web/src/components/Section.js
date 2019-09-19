@@ -42,18 +42,21 @@ Section.defaultProps = {
   isNumbered: false
 };
 
-const Subsection = ({ children, id, nested, resource }) => {
+const Subsection = ({ children, headerClassName, id, nested, resource }) => {
   const title = t([resource, 'title'], { defaultValue: '' });
 
   return (
     <Fragment>
       {!nested && (
-        <h3 id={id} className="subsection--title ds-h3">
+        <h3
+          id={id}
+          className={`${headerClassName || ''} subsection--title ds-h3`}
+        >
           {title}
         </h3>
       )}
       {nested && (
-        <h5 id={id} className="ds-h4">
+        <h5 id={id} className={`${headerClassName || ''} ds-h4`}>
           {title}
         </h5>
       )}
@@ -65,6 +68,7 @@ const Subsection = ({ children, id, nested, resource }) => {
 
 Subsection.propTypes = {
   children: PropTypes.node.isRequired,
+  headerClassName: PropTypes.string,
   id: PropTypes.string,
   nested: PropTypes.bool,
   resource: PropTypes.string
@@ -72,6 +76,7 @@ Subsection.propTypes = {
 
 Subsection.defaultProps = {
   resource: null,
+  headerClassName: null,
   id: null,
   nested: false
 };
