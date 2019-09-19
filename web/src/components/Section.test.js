@@ -42,4 +42,13 @@ describe('Subsection component', () => {
     );
     expect(component).toMatchSnapshot();
   });
+
+  test('uses the passed-in heading class', () => {
+    const component = shallow(
+      <Subsection headerClassName="bobs-burgers" resource="activities.goals">
+        test child
+      </Subsection>
+    );
+    expect(component).toMatchSnapshot();
+  });
 });
