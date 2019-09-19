@@ -41,6 +41,7 @@ Anticipated release: TBD
 - Fixed the spacing in the activity overview section. ([#1648])
 - Disabled cacheing of the index page, so that clients always get the latest. ([#1775])
 - Fixed a bug where the APD Key Personnel section asked for a person's percent time using a plain number input box instead of a percent box ([#1753])
+- Improved ARIA metadata on the account management dropdown button for screen readers ([#1681])
 
 #### ⚙️ Behind the scenes
 
@@ -97,6 +98,7 @@ Pilot release to select state partners
 [#1651]: https://github.com/18F/cms-hitech-apd/pull/1651
 [#1655]: https://github.com/18F/cms-hitech-apd/issues/1655
 [#1680]: https://github.com/18F/cms-hitech-apd/issues/1680
+[#1681]: https://github.com/18F/cms-hitech-apd/issues/1681
 [#1686]: https://github.com/18F/cms-hitech-apd/issues/1686
 [#1688]: https://github.com/18F/cms-hitech-apd/pull/1688
 [#1695]: https://github.com/18F/cms-hitech-apd/pull/1695
