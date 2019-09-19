@@ -41,13 +41,31 @@ const updateStateProfile = (StateModel = defaultStateModel) => async req => {
 const afterSync = async req => {
   updateStateProfile()(req);
 
+  const document = (await defaultApdModel
+    .where({ id: req.params.id })
+    .fetchAll({
+      withRelated: defaultApdModel.withRelated
+    })).toJSON()[0];
+
+  document.activities.forEach(activity => {
+    if (!activity.costAllocationNarrative.otherSources) {
+      activity.costAllocationNarrative.otherSources = '';
+    }
+    if (!activity.costAllocationNarrative.methodology) {
+      activity.costAllocationNarrative.methodology = '';
+    }
+  });
+
+  if (!document.federalCitations) {
+    document.federalCitations = {};
+  }
+  if (!document.stateProfile.medicaidOffice.address2) {
+    document.stateProfile.medicaidOffice.address2 = '';
+  }
+
   await db('apds')
     .where({ id: req.params.id })
-    .update({
-      document: (await defaultApdModel.where({ id: req.params.id }).fetchAll({
-        withRelated: defaultApdModel.withRelated
-      })).toJSON()[0]
-    });
+    .update({ document });
 };
 
 module.exports = app => {

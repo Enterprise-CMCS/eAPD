@@ -27,9 +27,27 @@ module.exports = (
         withRelated: ApdModel.withRelated
       });
 
+      const document = apd.toJSON();
+
+      document.activities.forEach(activity => {
+        if (!activity.costAllocationNarrative.otherSources) {
+          activity.costAllocationNarrative.otherSources = '';
+        }
+        if (!activity.costAllocationNarrative.methodology) {
+          activity.costAllocationNarrative.methodology = '';
+        }
+      });
+
+      if (!document.federalCitations) {
+        document.federalCitations = {};
+      }
+      if (!document.stateProfile.medicaidOffice.address2) {
+        document.stateProfile.medicaidOffice.address2 = '';
+      }
+
       await db('apds')
         .where({ id: newApd.get('id') })
-        .update({ document: apd.toJSON() });
+        .update({ document });
 
       res.send(apd);
     } catch (e) {

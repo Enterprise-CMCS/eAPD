@@ -1,0 +1,35 @@
+exports.up = async knex => {
+  const apds = await knex('apds').select('id', 'document');
+
+  // In the old model, some string values defaulted to null. In the new
+  // model, they should always be strings. This migration updates any of
+  // those from nulls to empty strings.
+
+  await Promise.all(
+    apds.map(apd => {
+      const document = apd.document;
+
+      document.activities.forEach(activity => {
+        if (!activity.costAllocationNarrative.otherSources) {
+          activity.costAllocationNarrative.otherSources = '';
+        }
+        if (!activity.costAllocationNarrative.methodology) {
+          activity.costAllocationNarrative.methodology = '';
+        }
+      });
+
+      if (!document.federalCitations) {
+        document.federalCitations = {};
+      }
+      if (!document.stateProfile.medicaidOffice.address2) {
+        document.stateProfile.medicaidOffice.address2 = '';
+      }
+
+      return knex('apds')
+        .where({ id: apd.id })
+        .update('document', document);
+    })
+  );
+};
+
+exports.down = async () => {};
