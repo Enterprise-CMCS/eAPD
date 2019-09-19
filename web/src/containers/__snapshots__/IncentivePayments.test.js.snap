@@ -145,6 +145,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="ehCt payments for 1, quarter 1"
             labelClassName="sr-only"
             name="ehCt-payments-1-q1"
@@ -158,6 +159,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="ehCt payments for 1, quarter 2"
             labelClassName="sr-only"
             name="ehCt-payments-1-q2"
@@ -171,6 +173,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="ehCt payments for 1, quarter 3"
             labelClassName="sr-only"
             name="ehCt-payments-1-q3"
@@ -184,6 +187,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="ehCt payments for 1, quarter 4"
             labelClassName="sr-only"
             name="ehCt-payments-1-q4"
@@ -285,6 +289,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="epCt payments for 1, quarter 1"
             labelClassName="sr-only"
             name="epCt-payments-1-q1"
@@ -298,6 +303,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="epCt payments for 1, quarter 2"
             labelClassName="sr-only"
             name="epCt-payments-1-q2"
@@ -311,6 +317,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="epCt payments for 1, quarter 3"
             labelClassName="sr-only"
             name="epCt-payments-1-q3"
@@ -324,6 +331,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="epCt payments for 1, quarter 4"
             labelClassName="sr-only"
             name="epCt-payments-1-q4"
@@ -482,6 +490,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="ehCt payments for 2, quarter 1"
             labelClassName="sr-only"
             name="ehCt-payments-2-q1"
@@ -495,6 +504,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="ehCt payments for 2, quarter 2"
             labelClassName="sr-only"
             name="ehCt-payments-2-q2"
@@ -508,6 +518,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="ehCt payments for 2, quarter 3"
             labelClassName="sr-only"
             name="ehCt-payments-2-q3"
@@ -521,6 +532,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="ehCt payments for 2, quarter 4"
             labelClassName="sr-only"
             name="ehCt-payments-2-q4"
@@ -622,6 +634,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="epCt payments for 2, quarter 1"
             labelClassName="sr-only"
             name="epCt-payments-2-q1"
@@ -635,6 +648,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="epCt payments for 2, quarter 2"
             labelClassName="sr-only"
             name="epCt-payments-2-q2"
@@ -648,6 +662,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="epCt payments for 2, quarter 3"
             labelClassName="sr-only"
             name="epCt-payments-2-q3"
@@ -661,6 +676,7 @@ exports[`incentive payments component renders correctly 1`] = `
           <NumberField
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
+            fieldRef={null}
             label="epCt payments for 2, quarter 4"
             labelClassName="sr-only"
             name="epCt-payments-2-q4"

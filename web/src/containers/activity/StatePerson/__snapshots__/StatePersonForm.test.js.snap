@@ -42,6 +42,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
       value=""
     />
     <NumberField
+      fieldRef={null}
       label="Number of FTEs"
       name="ftes"
       onChange={[Function]}
@@ -67,6 +68,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
       value=""
     />
     <NumberField
+      fieldRef={null}
       label="Number of FTEs"
       name="ftes"
       onChange={[Function]}
