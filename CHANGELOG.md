@@ -40,6 +40,7 @@ Anticipated release: TBD
 - Fixed a bug where the session authentication cookie would expire at the end of the browser session instead of at the scheduled time. ([#1756])
 - Fixed the spacing in the activity overview section. ([#1648])
 - Disabled cacheing of the index page, so that clients always get the latest. ([#1775])
+- Fixed a bug where the APD Key Personnel section asked for a person's percent time using a plain number input box instead of a percent box ([#1753])
 
 #### ⚙️ Behind the scenes
 
@@ -112,6 +113,7 @@ Pilot release to select state partners
 [#1739]: https://github.com/18F/cms-hitech-apd/issues/1739
 [#1745]: https://github.com/18F/cms-hitech-apd/pull/1745
 [#1747]: https://github.com/18F/cms-hitech-apd/issues/1747
+[#1753]: https://github.com/18F/cms-hitech-apd/issues/1753
 [#1754]: https://github.com/18F/cms-hitech-apd/issues/1754
 [#1756]: https://github.com/18F/cms-hitech-apd/issues/1756
 [#1762]: https://github.com/18F/cms-hitech-apd/issues/1762
