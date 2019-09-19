@@ -29,14 +29,22 @@ module.exports = (
 
       const document = apd.toJSON();
 
-      document.activities.forEach(activity => {
-        if (!activity.costAllocationNarrative.otherSources) {
-          activity.costAllocationNarrative.otherSources = '';
+      document.activities = document.activities.map(activity => ({
+        ...activity,
+        costAllocationNarrative: {
+          ...activity.costAllocationNarrative,
+          methodology: activity.costAllocationNarrative.methodology || '',
+          otherSources: activity.costAllocationNarrative.otherSources || ''
         }
-        if (!activity.costAllocationNarrative.methodology) {
-          activity.costAllocationNarrative.methodology = '';
-        }
-      });
+      }));
+      // document.activities.forEach(activity => {
+      //   if (!activity.costAllocationNarrative.otherSources) {
+      //     activity.costAllocationNarrative.otherSources = '';
+      //   }
+      //   if (!activity.costAllocationNarrative.methodology) {
+      //     activity.costAllocationNarrative.methodology = '';
+      //   }
+      // });
 
       if (!document.federalCitations) {
         document.federalCitations = {};
