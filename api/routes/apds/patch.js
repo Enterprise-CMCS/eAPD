@@ -3,7 +3,7 @@ const { apply_patch: applyPatch } = require('jsonpatch');
 const jsonpointer = require('jsonpointer');
 
 const logger = require('../../logger')('apds route put');
-const { raw: db } = require('../../db');
+const { raw: knex } = require('../../db');
 const { can, userCanEditAPD } = require('../../middleware');
 const apdSchema = require('../../schemas/apd.json');
 
@@ -13,13 +13,19 @@ const ajv = new Ajv({
   removeAdditional: true
 });
 
-const validateApd = ajv.compile({ ...apdSchema, additionalProperties: false });
+const validatorFunction = ajv.compile({
+  ...apdSchema,
+  additionalProperties: false
+});
 
 // This is a list of property paths that cannot be changed with this endpoint.
 // Any patches pointing at these paths will be ignored.
 const staticFields = ['/name'];
 
-module.exports = app => {
+module.exports = (
+  app,
+  { db = knex, patchObject = applyPatch, validateApd = validatorFunction } = {}
+) => {
   logger.silly('setting up PATCH /apds/:id route');
   app.patch(
     '/apds/:id',
@@ -27,6 +33,15 @@ module.exports = app => {
     userCanEditAPD(),
     async (req, res) => {
       logger.silly(req, 'handling PATCH /apds/:id route');
+      if (!req.params.id) {
+        logger.error(req, 'no ID given');
+        return res.status(400).end();
+      }
+      if (!Array.isArray(req.body)) {
+        logger.error(req, 'request body must be an array');
+        return res.status(400).end();
+      }
+
       logger.silly(req, `attempting to update APD [${req.params.id}]`);
 
       try {
@@ -45,13 +60,13 @@ module.exports = app => {
 
         let updatedDocument;
         try {
-          updatedDocument = applyPatch(currentDocument, patch);
+          updatedDocument = patchObject(currentDocument, patch);
         } catch (e) {
           // This can happen for a variety of reasons. E.g., a patch tries to
           // operate on a property that doesn't currently exist.
           logger.error(req, 'error patching the document');
           logger.error(null, e);
-          return res.sendStatus(400).end();
+          return res.status(400).end();
         }
 
         const valid = validateApd(updatedDocument);
