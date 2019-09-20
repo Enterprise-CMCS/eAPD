@@ -1,5 +1,5 @@
 const Ajv = require('ajv');
-const { apply_patch } = require('jsonpatch');
+const { apply_patch: applyPatch } = require('jsonpatch');
 const jsonpointer = require('jsonpointer');
 
 const logger = require('../../logger')('apds route put');
@@ -45,7 +45,7 @@ module.exports = app => {
 
         let updatedDocument;
         try {
-          updatedDocument = apply_patch(currentDocument, patch);
+          updatedDocument = applyPatch(currentDocument, patch);
         } catch (e) {
           // This can happen for a variety of reasons. E.g., a patch tries to
           // operate on a property that doesn't currently exist.
