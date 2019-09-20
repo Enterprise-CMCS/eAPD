@@ -6,16 +6,15 @@
   min-height: 100vh;
 }
 
-.site-sidebar.site-sidebar__ie {
-  max-width: 212px;
-}
-
-.site-sidebar__sticky {
+.site-sidebar {
+  top: 50px;
+  width: 212px;
+  position: fixed;
   max-height: 100vh;
   overflow-y: auto;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  + .site-main {
+    margin-left: 244px; // sidebar width plus $spacer-4
+  }
 }
 
 footer {
