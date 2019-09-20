@@ -30,6 +30,7 @@ exports[`DollarField component passes back numeric values on change, but still r
 >
   <NumberField
     className="stuff"
+    fieldRef={null}
     label="test label"
     mask="currency"
     name="test name"
@@ -120,6 +121,7 @@ exports[`DollarField component renders correctly for non-numeric initial values 
 >
   <NumberField
     className="stuff"
+    fieldRef={null}
     label="test label"
     mask="currency"
     name="test name"
@@ -210,6 +212,7 @@ exports[`DollarField component renders correctly, adds commas to big numbers, pa
 >
   <NumberField
     className="stuff"
+    fieldRef={null}
     label="test label"
     mask="currency"
     name="test name"
@@ -300,6 +303,7 @@ exports[`DollarField component renders correctly, does not add commas to small n
 >
   <NumberField
     className="stuff"
+    fieldRef={null}
     label="test label"
     mask="currency"
     name="test name"
@@ -426,6 +430,7 @@ exports[`DollarField component rounds numbers when the component loses focus, bu
 >
   <NumberField
     className="stuff"
+    fieldRef={null}
     label="test label"
     mask="currency"
     name="test name"

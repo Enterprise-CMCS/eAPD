@@ -68,12 +68,15 @@ class Header extends Component {
             </div>
             {authenticated && (
               <div className="ds-l-col--12 ds-l-md-col--8">
-                <ul className="nav--dropdown" aria-expanded={ariaExpanded}>
+                <ul className="nav--dropdown">
                   <li>
                     <button
                       type="button"
                       className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
                       onClick={this.toggleDropdown}
+                      aria-expanded={ariaExpanded ? 'true' : 'false'}
+                      aria-haspopup="true"
+                      aria-label={`Logged in as ${currentUser.username}. Click to manage your account.`}
                     >
                       {currentUser ? currentUser.username : 'Your account'}
                       <Icon icon={faChevronDown} style={{ width: '8px' }} />

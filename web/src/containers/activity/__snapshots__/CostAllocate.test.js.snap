@@ -2,6 +2,7 @@
 
 exports[`the CostAllocate component renders correctly 1`] = `
 <Subsection
+  headerClassName={null}
   id={null}
   nested={true}
   resource="activities.costAllocate"
