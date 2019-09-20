@@ -13,6 +13,7 @@ exports[`the Activities component renders correctly 1`] = `
       id="activities-list"
     />
     <Subsection
+      headerClassName={null}
       id="activities-list"
       nested={false}
       open={true}

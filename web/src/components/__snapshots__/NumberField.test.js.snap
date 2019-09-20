@@ -3,6 +3,7 @@
 exports[`NumberField component renders correctly 1`] = `
 <NumberField
   className="stuff"
+  fieldRef={null}
   label="test label"
   name="test name"
   onChange={[MockFunction]}

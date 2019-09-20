@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { updateActivity } from '../../actions/activities';
 import { ariaAnnounceFFPQuarterly } from '../../actions/aria';
 import Dollars from '../../components/Dollars';
-import NumberField from '../../components/NumberField';
+import PercentField from '../../components/PercentField';
 import { t } from '../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../reducers/activities.selectors';
 import { formatPerc } from '../../util/formats';
@@ -81,18 +81,16 @@ class CostAllocateFFPQuarterly extends Component {
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <td key={q}>
-                      <div className="budget-table--input__percent">
-                        <NumberField
-                          className="budget-table--input-holder"
-                          fieldClassName="budget-table--input__number"
-                          label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
-                          labelClassName="sr-only"
-                          name={`ffp-${aKey}-${year}-${q}-${name}`}
-                          onChange={this.handleChange(year, q, name)}
-                          value={quarterlyFFP[year][q][name].percent * 100}
-                          aria-controls={`ffp-${aKey}-${year}-${q}-${name}-dollar-equivalent`}
-                        />
-                      </div>
+                      <PercentField
+                        className="budget-table--input-holder"
+                        fieldClassName="budget-table--input__number"
+                        label={`federal share for ffy ${year}, quarter ${q}, ${name}`}
+                        labelClassName="sr-only"
+                        name={`ffp-${aKey}-${year}-${q}-${name}`}
+                        onChange={this.handleChange(year, q, name)}
+                        value={quarterlyFFP[year][q][name].percent * 100}
+                        aria-controls={`ffp-${aKey}-${year}-${q}-${name}-dollar-equivalent`}
+                      />
                     </td>
                   ))}
                   <td className="budget-table--number budget-table--subtotal">

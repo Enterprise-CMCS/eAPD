@@ -30,7 +30,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     type="text"
     value="The Builder"
   />
-  <NumberField
+  <PercentField
     label="Percent commitment to program"
     name="apd-state-profile-pocpercentTime1"
     onChange={[Function]}
@@ -145,7 +145,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     type="text"
     value="The Builder"
   />
-  <NumberField
+  <PercentField
     label="Percent commitment to program"
     name="apd-state-profile-pocpercentTime1"
     onChange={[Function]}

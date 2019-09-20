@@ -48,6 +48,7 @@ class RichText extends Component {
         onEditorStateChange={this.onEditorChange}
         onBlur={this.onBlur}
         editorClassName={editorClassName}
+        spellCheck
       />
     );
   }

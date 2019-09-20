@@ -13,6 +13,7 @@ exports[`ProposedBudget component renders correctly 1`] = `
       id="budget-summary-table"
     />
     <Subsection
+      headerClassName={null}
       id="budget-summary-table"
       nested={false}
       resource="proposedBudget.summaryBudget"
@@ -23,6 +24,7 @@ exports[`ProposedBudget component renders correctly 1`] = `
       id="budget-federal-by-quarter"
     />
     <Subsection
+      headerClassName={null}
       id="budget-federal-by-quarter"
       nested={false}
       resource="proposedBudget.quarterlyBudget"
@@ -33,6 +35,7 @@ exports[`ProposedBudget component renders correctly 1`] = `
       id="budget-incentive-by-quarter"
     />
     <Subsection
+      headerClassName={null}
       id="budget-incentive-by-quarter"
       nested={false}
       resource="proposedBudget.paymentsByFFYQuarter"

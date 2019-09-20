@@ -39,8 +39,17 @@ tap.test('apds POST endpoint', async endpointTest => {
       save: sandbox.stub(),
       synchronize: sandbox.stub()
     };
+    const apdObject = {
+      toJSON: () => {}
+    };
 
     const dataBuilder = sandbox.stub();
+
+    const db = sinon.stub().returns({
+      where: sinon.stub().returns({
+        update: sinon.stub().resolves()
+      })
+    });
 
     tests.beforeEach(async () => {
       sandbox.resetBehavior();
@@ -56,14 +65,14 @@ tap.test('apds POST endpoint', async endpointTest => {
         fetch: sandbox
           .stub()
           .withArgs({ withRelated: 'related!' })
-          .resolves('this is the new APD')
+          .resolves(apdObject)
       });
 
       apd.get.withArgs('id').returns('new apd id');
       apd.save.resolves();
       apd.synchronize.resolves();
 
-      postEndpoint(app, { ApdModel, getNewApd: dataBuilder });
+      postEndpoint(app, { ApdModel, db, getNewApd: dataBuilder });
       handler = app.post.args
         .slice(-1)[0]
         .slice(-1)
@@ -120,10 +129,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         'model query filter is set before fetching'
       );
 
-      test.ok(
-        res.send.calledWith('this is the new APD'),
-        'sends back the new APD'
-      );
+      test.ok(res.send.calledWith(apdObject), 'sends back the new APD');
     });
   });
 });
