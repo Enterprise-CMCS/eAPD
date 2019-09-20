@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import VerticalNav from '@cmsgov/design-system-core/dist/components/VerticalNav/VerticalNav';
-import stickybits from 'stickybits';
 
 import { t } from '../i18n';
 import { jumpTo } from '../actions/navigation';
@@ -12,10 +11,6 @@ import { selectActivitiesSidebar } from '../reducers/activities.selectors';
 import { selectActiveSection } from '../reducers/navigation';
 
 class Sidebar extends Component {
-  componentDidMount() {
-    stickybits('.site-sidebar');
-  }
-
   handleSelectClick = id => {
     const { jumpTo: action } = this.props;
     action(id);
