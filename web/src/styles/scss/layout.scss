@@ -6,8 +6,13 @@
   min-height: 100vh;
 }
 
-.site-sidebar.site-sidebar__ie {
-  max-width: 212px;
+.site-sidebar {
+  top: 50px;
+  width: 212px;
+  position: fixed;
+  + .site-main {
+    margin-left: 244px; // sidebar width plus $spacer-4
+  }
 }
 
 .site-sidebar__sticky {
