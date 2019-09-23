@@ -21,11 +21,13 @@ exports[`Header component opens and closes the dropdown when clicked 1`] = `
         className="ds-l-col--12 ds-l-md-col--8"
       >
         <ul
-          aria-expanded={true}
           className="nav--dropdown"
         >
           <li>
             <button
+              aria-expanded="true"
+              aria-haspopup="true"
+              aria-label="Logged in as frasiercrane@kacl.com. Click to manage your account."
               className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
               onClick={[Function]}
               type="button"
@@ -189,11 +191,13 @@ exports[`Header component renders correctly when the dropdown is closed and the 
         className="ds-l-col--12 ds-l-md-col--8"
       >
         <ul
-          aria-expanded={false}
           className="nav--dropdown"
         >
           <li>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="Logged in as frasiercrane@kacl.com. Click to manage your account."
               className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
               onClick={[Function]}
               type="button"
@@ -387,11 +391,13 @@ exports[`Header component renders the admin home title when an admin user is at 
         className="ds-l-col--12 ds-l-md-col--8"
       >
         <ul
-          aria-expanded={false}
           className="nav--dropdown"
         >
           <li>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="Logged in as frasiercrane@kacl.com. Click to manage your account."
               className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
               onClick={[Function]}
               type="button"
@@ -585,11 +591,13 @@ exports[`Header component renders the state user home title when a state user is
         className="ds-l-col--12 ds-l-md-col--8"
       >
         <ul
-          aria-expanded={false}
           className="nav--dropdown"
         >
           <li>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="Logged in as frasiercrane@kacl.com. Click to manage your account."
               className="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"
               onClick={[Function]}
               type="button"
