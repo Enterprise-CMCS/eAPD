@@ -42,6 +42,7 @@ Anticipated release: TBD
 - Disabled cacheing of the index page, so that clients always get the latest. ([#1775])
 - Fixed a bug where the APD Key Personnel section asked for a person's percent time using a plain number input box instead of a percent box ([#1753])
 - Improved ARIA metadata on the account management dropdown button for screen readers ([#1681])
+- Changed the APD title to include the full year range instead of just the start year ([#1820])
 
 #### ⚙️ Behind the scenes
 
@@ -124,3 +125,4 @@ Pilot release to select state partners
 [#1769]: https://github.com/18F/cms-hitech-apd/issues/1769
 [#1770]: https://github.com/18F/cms-hitech-apd/pull/1770
 [#1775]: https://github.com/18F/cms-hitech-apd/issues/1775
+[#1820]: https://github.com/18F/cms-hitech-apd/issues/1820
