@@ -1,5 +1,6 @@
 import diff from 'lodash.difference';
 import u from 'updeep';
+import { apply_patch as applyPatch } from 'jsonpatch';
 
 import {
   ADD_APD_KEY_PERSON,
@@ -15,6 +16,7 @@ import {
   WITHDRAW_APD_SUCCESS,
   SAVE_APD_SUCCESS
 } from '../actions/apd';
+import { EDIT_APD } from '../actions/editApd';
 import { defaultAPDYearOptions, generateKey } from '../util';
 
 const getHumanTimestamp = iso8601 => {
@@ -153,6 +155,20 @@ const reducer = (state = initialState, action) => {
       return { ...state, selectAPDOnLoad: true };
     case SUBMIT_APD_SUCCESS:
       return u({ data: { status: 'submitted' } }, state);
+
+    case EDIT_APD: {
+      return {
+        ...state,
+        data: applyPatch(state.data, [
+          {
+            op: 'replace',
+            path: action.path,
+            value: action.value
+          }
+        ])
+      };
+    }
+
     case UPDATE_APD: {
       if (!action.updates.years) {
         return u({ data: { ...action.updates } }, state);

@@ -2,7 +2,6 @@ import { FormLabel, Select, TextField } from '@cmsgov/design-system-core';
 import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateApd } from '../actions/apd';
 import {
   setMedicaidDirectorEmail,
   setMedicaidDirectorName,
@@ -22,8 +21,7 @@ const offTRoot = 'apd.stateProfile.directorAndAddress.address';
 const ApdStateProfile = () => {
   const dispatch = useDispatch();
 
-  const handleChange = (action, area, field) => ({ target: { value } }) => {
-    dispatch(updateApd({ stateProfile: { [area]: { [field]: value } } }));
+  const handleChange = action => ({ target: { value } }) => {
     dispatch(action(value));
   };
 
@@ -56,31 +54,19 @@ const ApdStateProfile = () => {
           name="apd-state-profile-mdname"
           label={t(`${dirTRoot}.labels.name`)}
           value={medicaidDirector.name}
-          onChange={handleChange(
-            setMedicaidDirectorName,
-            'medicaidDirector',
-            'name'
-          )}
+          onChange={handleChange(setMedicaidDirectorName)}
         />
         <TextField
           name="apd-state-profile-mdemail"
           label={t(`${dirTRoot}.labels.email`)}
           value={medicaidDirector.email}
-          onChange={handleChange(
-            setMedicaidDirectorEmail,
-            'medicaidDirector',
-            'email'
-          )}
+          onChange={handleChange(setMedicaidDirectorEmail)}
         />
         <TextField
           name="apd-state-profile-mdphone"
           label={t(`${dirTRoot}.labels.phone`)}
           value={medicaidDirector.phone}
-          onChange={handleChange(
-            setMedicaidDirectorPhoneNumber,
-            'medicaidDirector',
-            'phone'
-          )}
+          onChange={handleChange(setMedicaidDirectorPhoneNumber)}
         />
       </fieldset>
 
@@ -92,22 +78,14 @@ const ApdStateProfile = () => {
           name="apd-state-profile-addr1"
           label={t(`${offTRoot}.labels.address1`)}
           value={medicaidOffice.address1}
-          onChange={handleChange(
-            setMedicaidOfficeAddress1,
-            'medicaidOffice',
-            'address1'
-          )}
+          onChange={handleChange(setMedicaidOfficeAddress1)}
         />
         <TextField
           name="apd-state-profile-addr2"
           label={t(`${offTRoot}.labels.address2`)}
           hint="Optional"
           value={medicaidOffice.address2}
-          onChange={handleChange(
-            setMedicaidOfficeAddress2,
-            'medicaidOffice',
-            'address2'
-          )}
+          onChange={handleChange(setMedicaidOfficeAddress2)}
         />
         <div className="ds-l-row">
           <TextField
@@ -115,11 +93,7 @@ const ApdStateProfile = () => {
             label={t(`${offTRoot}.labels.city`)}
             value={medicaidOffice.city}
             className="ds-l-col--6"
-            onChange={handleChange(
-              setMedicaidOfficeCity,
-              'medicaidOffice',
-              'city'
-            )}
+            onChange={handleChange(setMedicaidOfficeCity)}
           />
           <div className="ds-u-clearfix ds-l-col--6">
             <FormLabel component="label">
@@ -129,11 +103,7 @@ const ApdStateProfile = () => {
               name="apd-state-profile-state"
               label={t(`${offTRoot}.labels.state`)}
               value={medicaidOffice.state || defaultStateID}
-              onChange={handleChange(
-                setMedicaidOfficeState,
-                'medicaidOffice',
-                'state'
-              )}
+              onChange={handleChange(setMedicaidOfficeState)}
             >
               {STATES.map(({ id, name }) => (
                 <option key={name} value={id.toUpperCase()}>
@@ -148,7 +118,7 @@ const ApdStateProfile = () => {
           label={t(`${offTRoot}.labels.zip`)}
           value={medicaidOffice.zip}
           mask="zip"
-          onChange={handleChange(setMedicaidOfficeZip, 'medicaidOffice', 'zip')}
+          onChange={handleChange(setMedicaidOfficeZip)}
         />
       </fieldset>
     </Fragment>
