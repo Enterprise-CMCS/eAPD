@@ -1,25 +1,25 @@
 export const EDIT_APD = Symbol('edit apd');
 
-export const setMedicaidDirectorName = name => {
-  return {
-    type: EDIT_APD,
-    path: 'stateProfile/medicaidDirector/name',
-    value: name
-  };
-};
-
 export const setMedicaidDirectorEmail = email => {
   return {
     type: EDIT_APD,
-    path: 'stateProfile/medicaidDirector/email',
+    path: '/stateProfile/medicaidDirector/email',
     value: email
+  };
+};
+
+export const setMedicaidDirectorName = name => {
+  return {
+    type: EDIT_APD,
+    path: '/stateProfile/medicaidDirector/name',
+    value: name
   };
 };
 
 export const setMedicaidDirectorPhoneNumber = phone => {
   return {
     type: EDIT_APD,
-    path: 'stateProfile/medicaidDirector/phone',
+    path: '/stateProfile/medicaidDirector/phone',
     value: phone
   };
 };
@@ -27,7 +27,7 @@ export const setMedicaidDirectorPhoneNumber = phone => {
 export const setMedicaidOfficeAddress1 = address => {
   return {
     type: EDIT_APD,
-    path: 'stateProfile/medicaidOffice/address1',
+    path: '/stateProfile/medicaidOffice/address1',
     value: address
   };
 };
@@ -35,7 +35,7 @@ export const setMedicaidOfficeAddress1 = address => {
 export const setMedicaidOfficeAddress2 = address => {
   return {
     type: EDIT_APD,
-    path: 'stateProfile/medicaidOffice/address2',
+    path: '/stateProfile/medicaidOffice/address2',
     value: address
   };
 };
@@ -43,7 +43,7 @@ export const setMedicaidOfficeAddress2 = address => {
 export const setMedicaidOfficeCity = city => {
   return {
     type: EDIT_APD,
-    path: 'stateProfile/medicaidOffice/city',
+    path: '/stateProfile/medicaidOffice/city',
     value: city
   };
 };
@@ -51,7 +51,7 @@ export const setMedicaidOfficeCity = city => {
 export const setMedicaidOfficeState = state => {
   return {
     type: EDIT_APD,
-    path: 'stateProfile/medicaidOffice/state',
+    path: '/stateProfile/medicaidOffice/state',
     value: state
   };
 };
@@ -59,7 +59,7 @@ export const setMedicaidOfficeState = state => {
 export const setMedicaidOfficeZip = zip => {
   return {
     type: EDIT_APD,
-    path: 'stateProfile/medicaidOffice/zip',
+    path: '/stateProfile/medicaidOffice/zip',
     value: zip
   };
 };

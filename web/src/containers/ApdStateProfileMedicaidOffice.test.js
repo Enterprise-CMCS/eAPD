@@ -56,7 +56,7 @@ describe('apd state profile, Medicaid office component', () => {
     {
       testName: 'director name change',
       fieldName: 'apd-state-profile-mdname',
-      path: 'stateProfile/medicaidDirector/name',
+      path: '/stateProfile/medicaidDirector/name',
       getLegacyUpdates: value => ({
         stateProfile: { medicaidDirector: { name: value } }
       })
@@ -64,7 +64,7 @@ describe('apd state profile, Medicaid office component', () => {
     {
       testName: 'director email change',
       fieldName: 'apd-state-profile-mdemail',
-      path: 'stateProfile/medicaidDirector/email',
+      path: '/stateProfile/medicaidDirector/email',
       getLegacyUpdates: value => ({
         stateProfile: { medicaidDirector: { email: value } }
       })
@@ -72,7 +72,7 @@ describe('apd state profile, Medicaid office component', () => {
     {
       testName: 'director phone number change',
       fieldName: 'apd-state-profile-mdphone',
-      path: 'stateProfile/medicaidDirector/phone',
+      path: '/stateProfile/medicaidDirector/phone',
       getLegacyUpdates: value => ({
         stateProfile: { medicaidDirector: { phone: value } }
       })
@@ -80,7 +80,7 @@ describe('apd state profile, Medicaid office component', () => {
     {
       testName: 'office address line 1 change',
       fieldName: 'apd-state-profile-addr1',
-      path: 'stateProfile/medicaidOffice/address1',
+      path: '/stateProfile/medicaidOffice/address1',
       getLegacyUpdates: value => ({
         stateProfile: { medicaidOffice: { address1: value } }
       })
@@ -88,7 +88,7 @@ describe('apd state profile, Medicaid office component', () => {
     {
       testName: 'office address line 2 change',
       fieldName: 'apd-state-profile-addr2',
-      path: 'stateProfile/medicaidOffice/address2',
+      path: '/stateProfile/medicaidOffice/address2',
       getLegacyUpdates: value => ({
         stateProfile: { medicaidOffice: { address2: value } }
       })
@@ -96,7 +96,7 @@ describe('apd state profile, Medicaid office component', () => {
     {
       testName: 'office city change',
       fieldName: 'apd-state-profile-city',
-      path: 'stateProfile/medicaidOffice/city',
+      path: '/stateProfile/medicaidOffice/city',
       getLegacyUpdates: value => ({
         stateProfile: { medicaidOffice: { city: value } }
       })
@@ -104,7 +104,7 @@ describe('apd state profile, Medicaid office component', () => {
     {
       testName: 'office state change',
       fieldName: 'apd-state-profile-state',
-      path: 'stateProfile/medicaidOffice/state',
+      path: '/stateProfile/medicaidOffice/state',
       getLegacyUpdates: value => ({
         stateProfile: { medicaidOffice: { state: value } }
       })
@@ -112,7 +112,7 @@ describe('apd state profile, Medicaid office component', () => {
     {
       testName: 'office zip change',
       fieldName: 'apd-state-profile-zip',
-      path: 'stateProfile/medicaidOffice/zip',
+      path: '/stateProfile/medicaidOffice/zip',
       getLegacyUpdates: value => ({
         stateProfile: { medicaidOffice: { zip: value } }
       })
