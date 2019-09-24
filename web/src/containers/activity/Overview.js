@@ -88,7 +88,11 @@ const Description = props => {
   );
 
   return (
-    <Subsection resource="activities.overview" nested>
+    <Subsection
+      headerClassName="header-with-top-margin"
+      resource="activities.overview"
+      nested
+    >
       <TextArea
         label={overviewLabel}
         hint={overviewHint}

@@ -10,6 +10,7 @@ exports[`schedule summary component renders correctly 1`] = `
     resource="scheduleSummary"
   >
     <Subsection
+      headerClassName={null}
       id="schedule-summary-table"
       nested={false}
       resource="scheduleSummary.main"
@@ -212,6 +213,7 @@ exports[`schedule summary component renders correctly with no data 1`] = `
     resource="scheduleSummary"
   >
     <Subsection
+      headerClassName={null}
       id="schedule-summary-table"
       nested={false}
       resource="scheduleSummary.main"
