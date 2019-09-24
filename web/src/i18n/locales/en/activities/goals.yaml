@@ -4,15 +4,15 @@ instruction:
     
   detail: >-
     Performance goals should explain what outcomes are expected for an individual activity. These are high-level and relate to the vision outline in the program summary.
-  helpText: >-
-    Examples of goals include:
-    improved health outcomes for benficiaries, transformation of public health services,
-    enabling implementation of other initiatives, etc.
 noDataNotice: There are no goals set for this activity.
 
 description:
   input:
     label: Goal name
+    hint: >- 
+    Examples of goals include: improved health outcomes for benficiaries, transformation of public health services,
+    enabling implementation of other initiatives, etc.
+    
 
 objective:
   input:
