@@ -105,7 +105,7 @@ describe('APD serializer', () => {
             name: 'Alice the Architect',
             percentTime: 21,
             position: 'Architect',
-            costs: {}
+            costs: { 1431: 0 }
           },
           {
             email: 'bob@thebuilder.net',
@@ -117,6 +117,7 @@ describe('APD serializer', () => {
             percentTime: 37,
             position: 'Builder',
             costs: {
+              1431: 0,
               1903: 50,
               2018: 73293
             }
