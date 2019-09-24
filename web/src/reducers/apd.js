@@ -16,7 +16,7 @@ import {
   WITHDRAW_APD_SUCCESS,
   SAVE_APD_SUCCESS
 } from '../actions/apd';
-import { EDIT_APD } from '../actions/editApd';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../actions/editApd';
 import { defaultAPDYearOptions, generateKey } from '../util';
 
 const getHumanTimestamp = iso8601 => {
@@ -34,8 +34,8 @@ const getHumanTimestamp = iso8601 => {
   })}`;
 };
 
-export const getKeyPersonnel = () => ({
-  costs: {},
+export const getKeyPersonnel = (years = []) => ({
+  costs: years.reduce((c, year) => ({ ...c, [year]: 0 }), {}),
   email: '',
   expanded: true,
   hasCosts: false,
@@ -76,6 +76,56 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_APD_ITEM: {
+      let newValue = null;
+
+      switch (action.path) {
+        case '/keyPersonnel/-':
+          newValue = getKeyPersonnel(state.data.years);
+          break;
+        default:
+          break;
+      }
+
+      return {
+        ...state,
+        data: applyPatch(state.data, [
+          {
+            op: 'add',
+            path: action.path,
+            value: newValue
+          }
+        ])
+      };
+    }
+
+    case EDIT_APD: {
+      return {
+        ...state,
+        data: applyPatch(state.data, [
+          {
+            op: 'replace',
+            path: action.path,
+            value: action.value
+          }
+        ])
+      };
+    }
+
+    case REMOVE_APD_ITEM: {
+      return {
+        ...state,
+        data: applyPatch(state.data, [
+          {
+            op: 'remove',
+            path: action.path
+          }
+        ])
+      };
+    }
+
+    // ------------------
+
     case ADD_APD_KEY_PERSON:
       return u(
         {
@@ -155,19 +205,6 @@ const reducer = (state = initialState, action) => {
       return { ...state, selectAPDOnLoad: true };
     case SUBMIT_APD_SUCCESS:
       return u({ data: { status: 'submitted' } }, state);
-
-    case EDIT_APD: {
-      return {
-        ...state,
-        data: applyPatch(state.data, [
-          {
-            op: 'replace',
-            path: action.path,
-            value: action.value
-          }
-        ])
-      };
-    }
 
     case UPDATE_APD: {
       if (!action.updates.years) {
