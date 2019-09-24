@@ -9,7 +9,6 @@
         {
           "description": "Maintain SLR",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4300,
           "name": "Super SLR Incorporated",
@@ -24,7 +23,6 @@
         {
           "description": "Technology consulting and planning services.",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4301,
           "name": "Tech Consulting Inc.",
@@ -85,7 +83,6 @@
           ]
         }
       ],
-      "files": [],
       "fundingSource": "HIT",
       "goals": [
         {
@@ -234,7 +231,6 @@
         {
           "description": "Hosting and development support.",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4310,
           "name": "Interface Vendor Inc.",
@@ -249,7 +245,6 @@
         {
           "description": "Interface M&O contractor.",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4311,
           "name": "TBD",
@@ -292,7 +287,6 @@
           ]
         }
       ],
-      "files": [],
       "fundingSource": "MMIS",
       "goals": [
         {
@@ -430,7 +424,6 @@
         {
           "description": "",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4320,
           "name": "",
@@ -470,7 +463,6 @@
           ]
         }
       ],
-      "files": [],
       "fundingSource": "HIE",
       "goals": [
         {
@@ -604,7 +596,6 @@
         {
           "description": "",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4330,
           "name": "RFP Planning Vendor Inc.",
@@ -619,7 +610,6 @@
         {
           "description": "",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4331,
           "name": "Blue Button Builder Inc.",
@@ -659,7 +649,6 @@
           ]
         }
       ],
-      "files": [],
       "fundingSource": "HIE",
       "goals": [
         {
@@ -740,7 +729,6 @@
         {
           "description": "Gateway Implementation.",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4340,
           "name": "TBD",
@@ -755,7 +743,6 @@
         {
           "description": "Gateway Development Planning and RFP",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4341,
           "name": "Gateway Vendor Inc.",
@@ -795,7 +782,6 @@
           ]
         }
       ],
-      "files": [],
       "fundingSource": "HIE",
       "goals": [
         {
@@ -881,7 +867,6 @@
         {
           "description": "Research for and RFP development for MITA 3.0 SSA",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4350,
           "name": "Tech Consulting Inc.",
@@ -896,7 +881,6 @@
         {
           "description": "MITA 3.0 implementation.",
           "end": null,
-          "files": [],
           "hourlyData": [],
           "id": 4351,
           "name": "TBD",
@@ -936,7 +920,6 @@
           ]
         }
       ],
-      "files": [],
       "fundingSource": "HIT",
       "goals": [
         {

@@ -23,12 +23,6 @@ Object {
                   "format": "date-time",
                   "type": "string",
                 },
-                "files": Object {
-                  "items": Object {
-                    "$ref": "#/components/schemas/file",
-                  },
-                  "type": "array",
-                },
                 "hourlyData": Object {
                   "items": Object {
                     "properties": Object {
@@ -160,12 +154,6 @@ Object {
                 },
               },
               "type": "object",
-            },
-            "type": "array",
-          },
-          "files": Object {
-            "items": Object {
-              "$ref": "#/components/schemas/file",
             },
             "type": "array",
           },
@@ -651,23 +639,6 @@ Object {
               "type": "number",
             },
             "type": "array",
-          },
-        },
-        "type": "object",
-      },
-      "file": Object {
-        "description": "Files associated with the activity",
-        "properties": Object {
-          "id": Object {
-            "type": "number",
-          },
-          "metadata": Object {
-            "description": "The properties from any metadata supplied when the file was uploaded will be added to the file object",
-            "type": "object",
-          },
-          "size": Object {
-            "description": "Size of the file, in bytes",
-            "type": "number",
           },
         },
         "type": "object",
@@ -1501,157 +1472,6 @@ Object {
         "summary": "Sets the activities for a role",
         "tags": Array [
           "Authentication and authorization",
-        ],
-      },
-    },
-    "/files/contractor/{id}": Object {
-      "post": Object {
-        "description": "Uploads a file and attaches it to a contractor resource, if the user has permission to modify the APD the contractor is attached to",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the contractor resource to attach this file to",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "requestBody": Object {
-          "content": Object {
-            "multipart/form-data": Object {
-              "schema": Object {
-                "properties": Object {
-                  "file": Object {
-                    "description": "The file being uploaded",
-                    "format": "binary",
-                    "type": "string",
-                  },
-                  "metadata": Object {
-                    "description": "The metadata to attach to this file. Must be stringified-JSON.",
-                    "type": "string",
-                  },
-                },
-              },
-            },
-          },
-        },
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/file",
-                },
-              },
-            },
-            "description": "The file metadata stored in the database",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Upload a file",
-        "tags": Array [
-          "Files",
-        ],
-      },
-    },
-    "/files/contractor/{id}/{fileID}": Object {
-      "delete": Object {
-        "description": "Deletes a file associated with a contractor resource, if the user has permission to modify the APD the contractor is attached to",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the contractor resource to delete this file from",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-          Object {
-            "description": "The ID of the file to delete",
-            "in": "path",
-            "name": "fileID",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "responses": Object {
-          "204": Object {
-            "description": "The file is deleted successfully",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The contractor ID is not found",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Delete a file",
-        "tags": Array [
-          "Files",
-        ],
-      },
-    },
-    "/files/{id}": Object {
-      "get": Object {
-        "description": "Downloads the specified file if it exists and the user has permission",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the file to download",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "integer",
-            },
-          },
-        ],
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "*/*": Object {
-                "schema": Object {
-                  "format": "binary",
-                  "type": "string",
-                },
-              },
-            },
-            "description": "The file",
-          },
-          "400": Object {
-            "description": "The provided file ID was invalid",
-          },
-          "403": Object {
-            "description": "Not logged in",
-          },
-          "404": Object {
-            "description": "The file ID does not match any known files, or the file does not exist in storage",
-          },
-        },
-        "security": Array [
-          Object {
-            "sessionCookie": Array [],
-          },
-        ],
-        "summary": "Downloads a file",
-        "tags": Array [
-          "Files",
         ],
       },
     },
