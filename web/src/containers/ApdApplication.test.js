@@ -67,7 +67,7 @@ describe('apd (application) component', () => {
         data: {
           id: 'bloop',
           name: 'florp',
-          years: ['dinkus', 'dorkus']
+          years: ['dinkus', 'dorkus', 'durkus']
         }
       },
       dirty: {
@@ -86,7 +86,7 @@ describe('apd (application) component', () => {
       dirty: 'moop moop',
       isAdmin: false,
       place: 'place',
-      year: 'dinkus'
+      year: 'dinkus-durkus'
     });
 
     state.apd.data.id = false;
