@@ -40,7 +40,7 @@ tap.test('apds POST endpoint', async endpointTest => {
       synchronize: sandbox.stub()
     };
     const apdObject = {
-      toJSON: () => {}
+      toJSON: sandbox.stub()
     };
 
     const dataBuilder = sandbox.stub();
@@ -59,12 +59,18 @@ tap.test('apds POST endpoint', async endpointTest => {
       res.status.returns(res);
       res.end.returns(res);
 
+      apdObject.toJSON.returns({
+        activities: [],
+        federalCitations: null,
+        stateProfile: { medicaidOffice: {} }
+      });
+
       ApdModel.forge.returns(apd);
 
       ApdModel.where.returns({
         fetch: sandbox
           .stub()
-          .withArgs({ withRelated: 'related!' })
+          .withArgs({ withRelated: 'relations!' })
           .resolves(apdObject)
       });
 
