@@ -45,7 +45,8 @@ describe('APD edit actions', () => {
       expect(store.getActions()).toEqual([
         {
           type: ADD_APD_YEAR,
-          value: '1234'
+          value: '1234',
+          state: 'add year state'
         },
         {
           type: UPDATE_BUDGET,
@@ -62,7 +63,8 @@ describe('APD edit actions', () => {
       expect(store.getActions()).toEqual([
         {
           type: REMOVE_APD_YEAR,
-          value: '1234'
+          value: '1234',
+          state: 'remove year state'
         },
         {
           type: UPDATE_BUDGET,

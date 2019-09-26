@@ -11,8 +11,8 @@ export const addKeyPerson = () => ({
   path: '/keyPersonnel/-'
 });
 
-export const addYear = year => dispatch => {
-  dispatch({ type: ADD_APD_YEAR, value: year });
+export const addYear = year => (dispatch, getState) => {
+  dispatch({ type: ADD_APD_YEAR, value: year, state: getState() });
   dispatch(updateBudget());
 };
 
@@ -29,8 +29,8 @@ export const removeKeyPerson = (
   }
 };
 
-export const removeYear = year => dispatch => {
-  dispatch({ type: REMOVE_APD_YEAR, value: year });
+export const removeYear = year => (dispatch, getState) => {
+  dispatch({ type: REMOVE_APD_YEAR, value: year, state: getState() });
   dispatch(updateBudget());
 };
 

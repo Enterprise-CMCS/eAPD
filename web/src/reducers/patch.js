@@ -1,7 +1,16 @@
 import u from 'updeep';
 
 import { SAVE_APD_SUCCESS } from '../actions/apd';
-import { EDIT_APD } from '../actions/editApd';
+import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from '../actions/editApd';
+
+import {
+  getPatchesToAddYear as getApdPatchesToAddYear,
+  getPatchesToRemoveYear as getApdPatchesToRemoveYear
+} from './apd';
+import {
+  getPatchesToAddYear as getActivityPatchesToAddYear,
+  getPatchesToRemoveYear as getActivityPatchesToRemoveYear
+} from './activities';
 
 const initialState = [];
 
@@ -22,6 +31,13 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_APD_SUCCESS:
       return initialState;
+
+    case ADD_APD_YEAR:
+      return [
+        ...state,
+        ...getApdPatchesToAddYear(action.state.apd, action.value),
+        ...getActivityPatchesToAddYear(action.state.activities, action.value)
+      ];
 
     case EDIT_APD: {
       // If the last patch for the given path is already a replace, we can just
@@ -53,6 +69,13 @@ const reducer = (state = initialState, action) => {
         { op: 'replace', path: action.path, value: action.value }
       ];
     }
+
+    case REMOVE_APD_YEAR:
+      return [
+        ...state,
+        ...getApdPatchesToRemoveYear(action.state.apd, action.value),
+        ...getActivityPatchesToRemoveYear(action.state.activities, action.value)
+      ];
 
     default:
       return state;

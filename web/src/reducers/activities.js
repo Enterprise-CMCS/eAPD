@@ -148,6 +148,105 @@ const newActivity = ({
   ...rest
 });
 
+export const getPatchesToAddYear = (state, year) => {
+  const patches = [];
+  Object.entries(state.byKey).forEach(([key, activity]) => {
+    const years = [...activity.years, year].sort();
+    patches.push({
+      op: 'replace',
+      path: `/byKey/${key}/years`,
+      value: years
+    });
+
+    activity.contractorResources.forEach((_, i) => {
+      patches.push({
+        op: 'add',
+        path: `/byKey/${key}/contractorResources/${i}/hourly/data/${year}`,
+        value: contractorDefaultHourly()
+      });
+      patches.push({
+        op: 'add',
+        path: `/byKey/${key}/contractorResources/${i}/years/${year}`,
+        value: contractorDefaultYear()
+      });
+    });
+
+    activity.expenses.forEach((_, i) => {
+      patches.push({
+        op: 'add',
+        path: `/byKey/${key}/expenses/${i}/years/${year}`,
+        value: expenseDefaultYear()
+      });
+    });
+
+    activity.statePersonnel.forEach((_, i) => {
+      patches.push({
+        op: 'add',
+        path: `/byKey/${key}/statePersonnel/${i}/years/${year}`,
+        value: statePersonDefaultYear()
+      });
+    });
+
+    patches.push({
+      op: 'add',
+      path: `/byKey/${key}/costAllocation/${year}`,
+      value: costAllocationEntry()
+    });
+
+    patches.push({
+      op: 'add',
+      path: `/byKey/${key}/quarterlyFFP/${year}`,
+      value: quarterlyFFPEntry()
+    });
+  });
+  return patches;
+};
+
+export const getPatchesToRemoveYear = (state, year) => {
+  const patches = [];
+  Object.entries(state.byKey).forEach(([key, activity]) => {
+    const index = activity.years.indexOf(year);
+    patches.push({ op: 'remove', path: `/byKey/${key}/years/${index}` });
+
+    activity.contractorResources.forEach((_, i) => {
+      patches.push({
+        op: 'remove',
+        path: `/byKey/${key}/contractorResources/${i}/hourly/data/${year}`
+      });
+      patches.push({
+        op: 'remove',
+        path: `/byKey/${key}/contractorResources/${i}/years/${year}`
+      });
+    });
+
+    activity.expenses.forEach((_, i) => {
+      patches.push({
+        op: 'remove',
+        path: `/byKey/${key}/expenses/${i}/years/${year}`
+      });
+    });
+
+    activity.statePersonnel.forEach((_, i) => {
+      patches.push({
+        op: 'remove',
+        path: `/byKey/${key}/statePersonnel/${i}/years/${year}`
+      });
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/byKey/${key}/costAllocation/${year}`
+    });
+
+    patches.push({
+      op: 'remove',
+      path: `/byKey/${key}/quarterlyFFP/${year}`
+    });
+  });
+
+  return patches;
+};
+
 const initialState = {
   byKey: {},
   allKeys: []
@@ -340,106 +439,12 @@ const reducer = (state = initialState, action) => {
         state
       );
     case ADD_APD_YEAR: {
-      const year = action.value;
-
-      const patches = [];
-      Object.entries(state.byKey).forEach(([key, activity]) => {
-        const years = [...activity.years, year].sort();
-        patches.push({
-          op: 'replace',
-          path: `/byKey/${key}/years`,
-          value: years
-        });
-
-        activity.contractorResources.forEach((_, i) => {
-          patches.push({
-            op: 'add',
-            path: `/byKey/${key}/contractorResources/${i}/hourly/data/${year}`,
-            value: contractorDefaultHourly()
-          });
-          patches.push({
-            op: 'add',
-            path: `/byKey/${key}/contractorResources/${i}/years/${year}`,
-            value: contractorDefaultYear()
-          });
-        });
-
-        activity.expenses.forEach((_, i) => {
-          patches.push({
-            op: 'add',
-            path: `/byKey/${key}/expenses/${i}/years/${year}`,
-            value: expenseDefaultYear()
-          });
-        });
-
-        activity.statePersonnel.forEach((_, i) => {
-          patches.push({
-            op: 'add',
-            path: `/byKey/${key}/statePersonnel/${i}/years/${year}`,
-            value: statePersonDefaultYear()
-          });
-        });
-
-        patches.push({
-          op: 'add',
-          path: `/byKey/${key}/costAllocation/${year}`,
-          value: costAllocationEntry()
-        });
-
-        patches.push({
-          op: 'add',
-          path: `/byKey/${key}/quarterlyFFP/${year}`,
-          value: quarterlyFFPEntry()
-        });
-      });
-
+      const patches = getPatchesToAddYear(state, action.value);
       return applyPatch(state, patches);
     }
 
     case REMOVE_APD_YEAR: {
-      const year = action.value;
-
-      const patches = [];
-      Object.entries(state.byKey).forEach(([key, activity]) => {
-        const index = activity.years.indexOf(year);
-        patches.push({ op: 'remove', path: `/byKey/${key}/years/${index}` });
-
-        activity.contractorResources.forEach((_, i) => {
-          patches.push({
-            op: 'remove',
-            path: `/byKey/${key}/contractorResources/${i}/hourly/data/${year}`
-          });
-          patches.push({
-            op: 'remove',
-            path: `/byKey/${key}/contractorResources/${i}/years/${year}`
-          });
-        });
-
-        activity.expenses.forEach((_, i) => {
-          patches.push({
-            op: 'remove',
-            path: `/byKey/${key}/expenses/${i}/years/${year}`
-          });
-        });
-
-        activity.statePersonnel.forEach((_, i) => {
-          patches.push({
-            op: 'remove',
-            path: `/byKey/${key}/statePersonnel/${i}/years/${year}`
-          });
-        });
-
-        patches.push({
-          op: 'remove',
-          path: `/byKey/${key}/costAllocation/${year}`
-        });
-
-        patches.push({
-          op: 'remove',
-          path: `/byKey/${key}/quarterlyFFP/${year}`
-        });
-      });
-
+      const patches = getPatchesToRemoveYear(state, action.value);
       return applyPatch(state, patches);
     }
 

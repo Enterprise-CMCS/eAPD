@@ -71,7 +71,7 @@ describe('apd summary component', () => {
       .find('ChoiceComponent[value="3"]')
       .prop('onChange')({ target: { value: '3' } });
     expect(store.getActions()).toEqual([
-      { type: ADD_APD_YEAR, value: '3' },
+      { type: ADD_APD_YEAR, value: '3', state },
       { type: UPDATE_BUDGET, state }
     ]);
   });
@@ -86,7 +86,7 @@ describe('apd summary component', () => {
       .find('ChoiceComponent[value="2"]')
       .prop('onChange')({ target: { value: '2' } });
     expect(store.getActions()).toEqual([
-      { type: REMOVE_APD_YEAR, value: '2' },
+      { type: REMOVE_APD_YEAR, value: '2', state },
       { type: UPDATE_BUDGET, state }
     ]);
   });
