@@ -53,11 +53,14 @@ export const getAPDName = ({
   }
 }) => name;
 
-export const getAPDFirstYear = ({
+export const getAPDYearRange = ({
   apd: {
     data: { years }
   }
-}) => (years && years.length ? years[0] : '');
+}) =>
+  years && years.length
+    ? `${years[0]}${years.length > 1 ? `-${years[years.length - 1]}` : ''}`
+    : '';
 
 export const getIsAnAPDSelected = ({
   apd: {
