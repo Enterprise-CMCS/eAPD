@@ -11,6 +11,7 @@ const {
   WITHDRAW_APD_SUCCESS,
   SAVE_APD_SUCCESS
 } = require('../actions/apd');
+const { EDIT_APD } = require('../actions/editApd');
 
 describe('APD reducer', () => {
   afterAll(() => {
@@ -161,6 +162,21 @@ describe('APD reducer', () => {
     expect(apd(initialState, { type: 'SET_SELECT_APD_ON_LOAD' })).toEqual({
       ...initialState,
       selectAPDOnLoad: true
+    });
+  });
+
+  it('should handle an APD edit', () => {
+    const state = {
+      data: {
+        overview: 'bleep'
+      }
+    };
+    expect(
+      apd(state, { type: EDIT_APD, path: '/overview', value: 'bloop' })
+    ).toEqual({
+      data: {
+        overview: 'bloop'
+      }
     });
   });
 

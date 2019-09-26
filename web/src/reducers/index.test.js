@@ -13,6 +13,7 @@ describe('root reducer', () => {
       'dirty',
       'errors',
       'navigation',
+      'patch',
       'user',
       'working',
       'router'
