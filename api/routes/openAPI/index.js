@@ -4,7 +4,6 @@ const auth = require('./auth');
 const apds = require('../apds/openAPI');
 const authActivities = require('../auth/activities/openAPI');
 const authRoles = require('../auth/roles/openAPI');
-const files = require('../files/openAPI');
 const me = require('../me/openAPI');
 const users = require('../users/openAPI');
 const { arrayOf } = require('./helpers').schema;
@@ -21,7 +20,6 @@ module.exports = {
     ...auth,
     ...authActivities,
     ...authRoles,
-    ...files,
     ...me,
     ...users,
     '/open-api': {
@@ -88,9 +86,6 @@ module.exports = {
                 type: 'string',
                 description: 'Description'
               },
-              files: arrayOf({
-                $ref: '#/components/schemas/file'
-              }),
               hourlyData: arrayOf({
                 type: 'object',
                 properties: {
@@ -182,9 +177,6 @@ module.exports = {
                   'Federal fiscal year this cost allocation applies to'
               }
             }
-          }),
-          files: arrayOf({
-            $ref: '#/components/schemas/file'
           }),
           goals: arrayOf({
             type: 'object',
@@ -655,24 +647,6 @@ module.exports = {
           years: arrayOf({
             type: 'number'
           })
-        }
-      },
-      file: {
-        type: 'object',
-        description: 'Files associated with the activity',
-        properties: {
-          id: {
-            type: 'number'
-          },
-          size: {
-            type: 'number',
-            description: 'Size of the file, in bytes'
-          },
-          metadata: {
-            type: 'object',
-            description:
-              'The properties from any metadata supplied when the file was uploaded will be added to the file object'
-          }
         }
       },
       incentivePaymentQuarter: {
