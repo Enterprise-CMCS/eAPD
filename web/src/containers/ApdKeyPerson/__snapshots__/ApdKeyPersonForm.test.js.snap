@@ -1,231 +1,1080 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the ApdKeyPersonForm component renders correctly 1`] = `
-<Fragment>
-  <h4
-    className="ds-h4"
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <PersonForm
+    index={1}
+    item={
+      Object {
+        "costs": Object {
+          "1992": 100,
+          "1993": 300,
+        },
+        "email": "email address",
+        "hasCosts": true,
+        "key": "person key",
+        "name": "Bob the Builder",
+        "percentTime": "32",
+        "position": "The Builder",
+      }
+    }
+    years={
+      Array [
+        "1992",
+        "1993",
+      ]
+    }
   >
-    Additional
-     APD Point of Contact
-  </h4>
-  <TextField
-    autoFocus="true"
-    label="Name"
-    name="apd-state-profile-pocname1"
-    onChange={[Function]}
-    type="text"
-    value="Bob the Builder"
-  />
-  <TextField
-    label="Email"
-    name="apd-state-profile-pocemail1"
-    onChange={[Function]}
-    type="text"
-    value="email address"
-  />
-  <TextField
-    label="Role"
-    name="apd-state-profile-pocposition1"
-    onChange={[Function]}
-    type="text"
-    value="The Builder"
-  />
-  <PercentField
-    label="Percent commitment to program"
-    name="apd-state-profile-pocpercentTime1"
-    onChange={[Function]}
-    size="small"
-    value="32"
-  />
-  <fieldset
-    className="ds-c-fieldset"
-  >
-    <legend
-      className="ds-c-label"
+    <h4
+      className="ds-h4"
     >
-      Does this person have costs directly attributable to this program?
-    </legend>
-    <ChoiceComponent
-      checked={false}
-      name="apd-state-profile-hascosts-no1"
+      Additional
+       APD Point of Contact
+    </h4>
+    <TextField
+      autoFocus="true"
+      label="Name"
+      name="apd-state-profile-pocname1"
       onChange={[Function]}
-      type="radio"
-      value="no"
+      type="text"
+      value="Bob the Builder"
     >
-      No
-    </ChoiceComponent>
-    <ChoiceComponent
-      checked={true}
-      checkedChildren={
-        <div
-          className="ds-c-choice__checkedChild ds-l-form-row"
+      <div
+        className="ds-u-clearfix"
+      >
+        <FormLabel
+          component="label"
+          fieldId="textfield_1"
+        >
+          <label
+            className="ds-c-label"
+            htmlFor="textfield_1"
+          >
+            <span
+              className=""
+            >
+              Name
+            </span>
+          </label>
+        </FormLabel>
+        <input
+          autoFocus="true"
+          className="ds-c-field"
+          id="textfield_1"
+          name="apd-state-profile-pocname1"
+          onChange={[Function]}
+          type="text"
+          value="Bob the Builder"
+        />
+      </div>
+    </TextField>
+    <TextField
+      label="Email"
+      name="apd-state-profile-pocemail1"
+      onChange={[Function]}
+      type="text"
+      value="email address"
+    >
+      <div
+        className="ds-u-clearfix"
+      >
+        <FormLabel
+          component="label"
+          fieldId="textfield_2"
+        >
+          <label
+            className="ds-c-label"
+            htmlFor="textfield_2"
+          >
+            <span
+              className=""
+            >
+              Email
+            </span>
+          </label>
+        </FormLabel>
+        <input
+          className="ds-c-field"
+          id="textfield_2"
+          name="apd-state-profile-pocemail1"
+          onChange={[Function]}
+          type="text"
+          value="email address"
+        />
+      </div>
+    </TextField>
+    <TextField
+      label="Role"
+      name="apd-state-profile-pocposition1"
+      onChange={[Function]}
+      type="text"
+      value="The Builder"
+    >
+      <div
+        className="ds-u-clearfix"
+      >
+        <FormLabel
+          component="label"
+          fieldId="textfield_3"
+        >
+          <label
+            className="ds-c-label"
+            htmlFor="textfield_3"
+          >
+            <span
+              className=""
+            >
+              Role
+            </span>
+          </label>
+        </FormLabel>
+        <input
+          className="ds-c-field"
+          id="textfield_3"
+          name="apd-state-profile-pocposition1"
+          onChange={[Function]}
+          type="text"
+          value="The Builder"
+        />
+      </div>
+    </TextField>
+    <PercentField
+      label="Percent commitment to program"
+      name="apd-state-profile-pocpercentTime1"
+      onChange={[Function]}
+      size="small"
+      value="32"
+    >
+      <NumberField
+        fieldRef={
+          Object {
+            "current": <input
+              class="ds-c-field ds-c-field--small"
+              id="textfield_4"
+              name="apd-state-profile-pocpercentTime1"
+              type="text"
+              value="32"
+            />,
+          }
+        }
+        label="Percent commitment to program"
+        name="apd-state-profile-pocpercentTime1"
+        onChange={[Function]}
+        size="small"
+        value="32"
+      >
+        <TextField
+          fieldRef={
+            Object {
+              "current": <input
+                class="ds-c-field ds-c-field--small"
+                id="textfield_4"
+                name="apd-state-profile-pocpercentTime1"
+                type="text"
+                value="32"
+              />,
+            }
+          }
+          label="Percent commitment to program"
+          name="apd-state-profile-pocpercentTime1"
+          onChange={[Function]}
+          size="small"
+          type="text"
+          value="32"
         >
           <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1992"
-              name="apd-state-profile-costs1-fy1992"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={100}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1993"
-              name="apd-state-profile-costs1-fy1993"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={300}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
+            className="ds-u-clearfix"
           >
             <FormLabel
               component="label"
+              fieldId="textfield_4"
             >
-              Total
-            </FormLabel>
-            <div
-              className="form--computed-value__input-aligned"
-            >
-              <Dollars
-                long={false}
+              <label
+                className="ds-c-label"
+                htmlFor="textfield_4"
               >
-                400
-              </Dollars>
+                <span
+                  className=""
+                >
+                  Percent commitment to program
+                </span>
+              </label>
+            </FormLabel>
+            <input
+              className="ds-c-field ds-c-field--small"
+              id="textfield_4"
+              name="apd-state-profile-pocpercentTime1"
+              onChange={[Function]}
+              type="text"
+              value="32"
+            />
+          </div>
+        </TextField>
+      </NumberField>
+    </PercentField>
+    <fieldset
+      className="ds-c-fieldset"
+    >
+      <legend
+        className="ds-c-label"
+      >
+        Does this person have costs directly attributable to this program?
+      </legend>
+      <ChoiceComponent
+        checked={false}
+        name="apd-state-profile-hascosts-no1"
+        onChange={[Function]}
+        type="radio"
+        value="no"
+      >
+        <div>
+          <Choice
+            checked={false}
+            inputPlacement="left"
+            name="apd-state-profile-hascosts-no1"
+            onChange={[Function]}
+            type="radio"
+            value="no"
+          >
+            <div
+              aria-atomic={null}
+              aria-live={null}
+              aria-relevant={null}
+            >
+              <input
+                checked={false}
+                className="ds-c-choice"
+                id="radio_apd-state-profile-hascosts-no1_5"
+                name="apd-state-profile-hascosts-no1"
+                onChange={[Function]}
+                type="radio"
+                value="no"
+              />
+              <FormLabel
+                component="label"
+                fieldId="radio_apd-state-profile-hascosts-no1_5"
+              >
+                <label
+                  className="ds-c-label"
+                  htmlFor="radio_apd-state-profile-hascosts-no1_5"
+                >
+                  <span
+                    className=""
+                  >
+                    No
+                  </span>
+                </label>
+              </FormLabel>
+            </div>
+          </Choice>
+        </div>
+      </ChoiceComponent>
+      <ChoiceComponent
+        checked={true}
+        checkedChildren={
+          <div
+            className="ds-c-choice__checkedChild ds-l-form-row"
+          >
+            <div
+              className="ds-l-col--auto"
+            >
+              <DollarField
+                label="FFY 1992"
+                name="apd-state-profile-costs1-fy1992"
+                onBlur={null}
+                onChange={[Function]}
+                size="small"
+                value={100}
+              />
+            </div>
+            <div
+              className="ds-l-col--auto"
+            >
+              <DollarField
+                label="FFY 1993"
+                name="apd-state-profile-costs1-fy1993"
+                onBlur={null}
+                onChange={[Function]}
+                size="small"
+                value={300}
+              />
+            </div>
+            <div
+              className="ds-l-col--auto"
+            >
+              <FormLabel
+                component="label"
+              >
+                Total
+              </FormLabel>
+              <div
+                className="form--computed-value__input-aligned"
+              >
+                <Dollars
+                  long={false}
+                >
+                  400
+                </Dollars>
+              </div>
             </div>
           </div>
+        }
+        name="apd-state-profile-hascosts-yes1"
+        onChange={[Function]}
+        type="radio"
+        value="yes"
+      >
+        <div>
+          <Choice
+            checked={true}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild ds-l-form-row"
+              >
+                <div
+                  className="ds-l-col--auto"
+                >
+                  <DollarField
+                    label="FFY 1992"
+                    name="apd-state-profile-costs1-fy1992"
+                    onBlur={null}
+                    onChange={[Function]}
+                    size="small"
+                    value={100}
+                  />
+                </div>
+                <div
+                  className="ds-l-col--auto"
+                >
+                  <DollarField
+                    label="FFY 1993"
+                    name="apd-state-profile-costs1-fy1993"
+                    onBlur={null}
+                    onChange={[Function]}
+                    size="small"
+                    value={300}
+                  />
+                </div>
+                <div
+                  className="ds-l-col--auto"
+                >
+                  <FormLabel
+                    component="label"
+                  >
+                    Total
+                  </FormLabel>
+                  <div
+                    className="form--computed-value__input-aligned"
+                  >
+                    <Dollars
+                      long={false}
+                    >
+                      400
+                    </Dollars>
+                  </div>
+                </div>
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-state-profile-hascosts-yes1"
+            onChange={[Function]}
+            type="radio"
+            value="yes"
+          >
+            <div
+              aria-atomic="false"
+              aria-live="polite"
+              aria-relevant="additions text"
+            >
+              <input
+                checked={true}
+                className="ds-c-choice"
+                id="radio_apd-state-profile-hascosts-yes1_6"
+                name="apd-state-profile-hascosts-yes1"
+                onChange={[Function]}
+                type="radio"
+                value="yes"
+              />
+              <FormLabel
+                component="label"
+                fieldId="radio_apd-state-profile-hascosts-yes1_6"
+              >
+                <label
+                  className="ds-c-label"
+                  htmlFor="radio_apd-state-profile-hascosts-yes1_6"
+                >
+                  <span
+                    className=""
+                  >
+                    Yes
+                  </span>
+                </label>
+              </FormLabel>
+              <div
+                className="ds-c-choice__checkedChild ds-l-form-row"
+              >
+                <div
+                  className="ds-l-col--auto"
+                  key="1992"
+                >
+                  <DollarField
+                    label="FFY 1992"
+                    name="apd-state-profile-costs1-fy1992"
+                    onBlur={null}
+                    onChange={[Function]}
+                    size="small"
+                    value={100}
+                  >
+                    <NumberField
+                      fieldRef={null}
+                      label="FFY 1992"
+                      mask="currency"
+                      name="apd-state-profile-costs1-fy1992"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      size="small"
+                      value="100"
+                    >
+                      <TextField
+                        fieldRef={
+                          Object {
+                            "current": <input
+                              aria-label="FFY 1992. Enter amount in dollars."
+                              class="ds-c-field ds-c-field--currency ds-c-field--small"
+                              id="textfield_7"
+                              name="apd-state-profile-costs1-fy1992"
+                              type="text"
+                              value="100"
+                            />,
+                          }
+                        }
+                        label="FFY 1992"
+                        mask="currency"
+                        name="apd-state-profile-costs1-fy1992"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        size="small"
+                        type="text"
+                        value="100"
+                      >
+                        <div
+                          className="ds-u-clearfix"
+                        >
+                          <FormLabel
+                            component="label"
+                            fieldId="textfield_7"
+                          >
+                            <label
+                              className="ds-c-label"
+                              htmlFor="textfield_7"
+                            >
+                              <span
+                                className=""
+                              >
+                                FFY 1992
+                              </span>
+                            </label>
+                          </FormLabel>
+                          <div
+                            className="ds-c-field-mask ds-c-field-mask--currency"
+                          >
+                            <div
+                              className="ds-c-field__before ds-c-field__before--currency"
+                            >
+                              $
+                            </div>
+                            <Mask
+                              mask="currency"
+                            >
+                              <input
+                                aria-label="FFY 1992. Enter amount in dollars."
+                                className="ds-c-field ds-c-field--currency ds-c-field--small"
+                                id="textfield_7"
+                                name="apd-state-profile-costs1-fy1992"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                type="text"
+                                value="100"
+                              />
+                            </Mask>
+                          </div>
+                        </div>
+                      </TextField>
+                    </NumberField>
+                  </DollarField>
+                </div>
+                <div
+                  className="ds-l-col--auto"
+                  key="1993"
+                >
+                  <DollarField
+                    label="FFY 1993"
+                    name="apd-state-profile-costs1-fy1993"
+                    onBlur={null}
+                    onChange={[Function]}
+                    size="small"
+                    value={300}
+                  >
+                    <NumberField
+                      fieldRef={null}
+                      label="FFY 1993"
+                      mask="currency"
+                      name="apd-state-profile-costs1-fy1993"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      size="small"
+                      value="300"
+                    >
+                      <TextField
+                        fieldRef={
+                          Object {
+                            "current": <input
+                              aria-label="FFY 1993. Enter amount in dollars."
+                              class="ds-c-field ds-c-field--currency ds-c-field--small"
+                              id="textfield_8"
+                              name="apd-state-profile-costs1-fy1993"
+                              type="text"
+                              value="300"
+                            />,
+                          }
+                        }
+                        label="FFY 1993"
+                        mask="currency"
+                        name="apd-state-profile-costs1-fy1993"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        size="small"
+                        type="text"
+                        value="300"
+                      >
+                        <div
+                          className="ds-u-clearfix"
+                        >
+                          <FormLabel
+                            component="label"
+                            fieldId="textfield_8"
+                          >
+                            <label
+                              className="ds-c-label"
+                              htmlFor="textfield_8"
+                            >
+                              <span
+                                className=""
+                              >
+                                FFY 1993
+                              </span>
+                            </label>
+                          </FormLabel>
+                          <div
+                            className="ds-c-field-mask ds-c-field-mask--currency"
+                          >
+                            <div
+                              className="ds-c-field__before ds-c-field__before--currency"
+                            >
+                              $
+                            </div>
+                            <Mask
+                              mask="currency"
+                            >
+                              <input
+                                aria-label="FFY 1993. Enter amount in dollars."
+                                className="ds-c-field ds-c-field--currency ds-c-field--small"
+                                id="textfield_8"
+                                name="apd-state-profile-costs1-fy1993"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                type="text"
+                                value="300"
+                              />
+                            </Mask>
+                          </div>
+                        </div>
+                      </TextField>
+                    </NumberField>
+                  </DollarField>
+                </div>
+                <div
+                  className="ds-l-col--auto"
+                >
+                  <FormLabel
+                    component="label"
+                  >
+                    <label
+                      className="ds-c-label"
+                    >
+                      <span
+                        className=""
+                      >
+                        Total
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <div
+                    className="form--computed-value__input-aligned"
+                  >
+                    <Dollars
+                      long={false}
+                    >
+                      <span
+                        className="visibility--screen"
+                      >
+                        $400
+                      </span>
+                      <span
+                        className="visibility--print"
+                      >
+                        $400
+                      </span>
+                    </Dollars>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Choice>
         </div>
-      }
-      name="apd-state-profile-hascosts-yes1"
-      onChange={[Function]}
-      type="radio"
-      value="yes"
-    >
-      Yes
-    </ChoiceComponent>
-  </fieldset>
-</Fragment>
+      </ChoiceComponent>
+    </fieldset>
+  </PersonForm>
+</Provider>
 `;
 
 exports[`the ApdKeyPersonForm component renders correctly if the person does not have costs 1`] = `
-<Fragment>
-  <h4
-    className="ds-h4"
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <PersonForm
+    index={1}
+    item={
+      Object {
+        "costs": Object {
+          "1992": 100,
+          "1993": 300,
+        },
+        "email": "email address",
+        "hasCosts": false,
+        "key": "person key",
+        "name": "Bob the Builder",
+        "percentTime": "32",
+        "position": "The Builder",
+      }
+    }
+    years={
+      Array [
+        "1992",
+        "1993",
+      ]
+    }
   >
-    Additional
-     APD Point of Contact
-  </h4>
-  <TextField
-    autoFocus="true"
-    label="Name"
-    name="apd-state-profile-pocname1"
-    onChange={[Function]}
-    type="text"
-    value="Bob the Builder"
-  />
-  <TextField
-    label="Email"
-    name="apd-state-profile-pocemail1"
-    onChange={[Function]}
-    type="text"
-    value="email address"
-  />
-  <TextField
-    label="Role"
-    name="apd-state-profile-pocposition1"
-    onChange={[Function]}
-    type="text"
-    value="The Builder"
-  />
-  <PercentField
-    label="Percent commitment to program"
-    name="apd-state-profile-pocpercentTime1"
-    onChange={[Function]}
-    size="small"
-    value="32"
-  />
-  <fieldset
-    className="ds-c-fieldset"
-  >
-    <legend
-      className="ds-c-label"
+    <h4
+      className="ds-h4"
     >
-      Does this person have costs directly attributable to this program?
-    </legend>
-    <ChoiceComponent
-      checked={true}
-      name="apd-state-profile-hascosts-no1"
+      Additional
+       APD Point of Contact
+    </h4>
+    <TextField
+      autoFocus="true"
+      label="Name"
+      name="apd-state-profile-pocname1"
       onChange={[Function]}
-      type="radio"
-      value="no"
+      type="text"
+      value="Bob the Builder"
     >
-      No
-    </ChoiceComponent>
-    <ChoiceComponent
-      checked={false}
-      checkedChildren={
-        <div
-          className="ds-c-choice__checkedChild ds-l-form-row"
+      <div
+        className="ds-u-clearfix"
+      >
+        <FormLabel
+          component="label"
+          fieldId="textfield_9"
+        >
+          <label
+            className="ds-c-label"
+            htmlFor="textfield_9"
+          >
+            <span
+              className=""
+            >
+              Name
+            </span>
+          </label>
+        </FormLabel>
+        <input
+          autoFocus="true"
+          className="ds-c-field"
+          id="textfield_9"
+          name="apd-state-profile-pocname1"
+          onChange={[Function]}
+          type="text"
+          value="Bob the Builder"
+        />
+      </div>
+    </TextField>
+    <TextField
+      label="Email"
+      name="apd-state-profile-pocemail1"
+      onChange={[Function]}
+      type="text"
+      value="email address"
+    >
+      <div
+        className="ds-u-clearfix"
+      >
+        <FormLabel
+          component="label"
+          fieldId="textfield_10"
+        >
+          <label
+            className="ds-c-label"
+            htmlFor="textfield_10"
+          >
+            <span
+              className=""
+            >
+              Email
+            </span>
+          </label>
+        </FormLabel>
+        <input
+          className="ds-c-field"
+          id="textfield_10"
+          name="apd-state-profile-pocemail1"
+          onChange={[Function]}
+          type="text"
+          value="email address"
+        />
+      </div>
+    </TextField>
+    <TextField
+      label="Role"
+      name="apd-state-profile-pocposition1"
+      onChange={[Function]}
+      type="text"
+      value="The Builder"
+    >
+      <div
+        className="ds-u-clearfix"
+      >
+        <FormLabel
+          component="label"
+          fieldId="textfield_11"
+        >
+          <label
+            className="ds-c-label"
+            htmlFor="textfield_11"
+          >
+            <span
+              className=""
+            >
+              Role
+            </span>
+          </label>
+        </FormLabel>
+        <input
+          className="ds-c-field"
+          id="textfield_11"
+          name="apd-state-profile-pocposition1"
+          onChange={[Function]}
+          type="text"
+          value="The Builder"
+        />
+      </div>
+    </TextField>
+    <PercentField
+      label="Percent commitment to program"
+      name="apd-state-profile-pocpercentTime1"
+      onChange={[Function]}
+      size="small"
+      value="32"
+    >
+      <NumberField
+        fieldRef={
+          Object {
+            "current": <input
+              class="ds-c-field ds-c-field--small"
+              id="textfield_12"
+              name="apd-state-profile-pocpercentTime1"
+              type="text"
+              value="32"
+            />,
+          }
+        }
+        label="Percent commitment to program"
+        name="apd-state-profile-pocpercentTime1"
+        onChange={[Function]}
+        size="small"
+        value="32"
+      >
+        <TextField
+          fieldRef={
+            Object {
+              "current": <input
+                class="ds-c-field ds-c-field--small"
+                id="textfield_12"
+                name="apd-state-profile-pocpercentTime1"
+                type="text"
+                value="32"
+              />,
+            }
+          }
+          label="Percent commitment to program"
+          name="apd-state-profile-pocpercentTime1"
+          onChange={[Function]}
+          size="small"
+          type="text"
+          value="32"
         >
           <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1992"
-              name="apd-state-profile-costs1-fy1992"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={100}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
-          >
-            <DollarField
-              label="FFY 1993"
-              name="apd-state-profile-costs1-fy1993"
-              onBlur={null}
-              onChange={[Function]}
-              size="small"
-              value={300}
-            />
-          </div>
-          <div
-            className="ds-l-col--auto"
+            className="ds-u-clearfix"
           >
             <FormLabel
               component="label"
+              fieldId="textfield_12"
             >
-              Total
-            </FormLabel>
-            <div
-              className="form--computed-value__input-aligned"
-            >
-              <Dollars
-                long={false}
+              <label
+                className="ds-c-label"
+                htmlFor="textfield_12"
               >
-                400
-              </Dollars>
+                <span
+                  className=""
+                >
+                  Percent commitment to program
+                </span>
+              </label>
+            </FormLabel>
+            <input
+              className="ds-c-field ds-c-field--small"
+              id="textfield_12"
+              name="apd-state-profile-pocpercentTime1"
+              onChange={[Function]}
+              type="text"
+              value="32"
+            />
+          </div>
+        </TextField>
+      </NumberField>
+    </PercentField>
+    <fieldset
+      className="ds-c-fieldset"
+    >
+      <legend
+        className="ds-c-label"
+      >
+        Does this person have costs directly attributable to this program?
+      </legend>
+      <ChoiceComponent
+        checked={true}
+        name="apd-state-profile-hascosts-no1"
+        onChange={[Function]}
+        type="radio"
+        value="no"
+      >
+        <div>
+          <Choice
+            checked={true}
+            inputPlacement="left"
+            name="apd-state-profile-hascosts-no1"
+            onChange={[Function]}
+            type="radio"
+            value="no"
+          >
+            <div
+              aria-atomic={null}
+              aria-live={null}
+              aria-relevant={null}
+            >
+              <input
+                checked={true}
+                className="ds-c-choice"
+                id="radio_apd-state-profile-hascosts-no1_13"
+                name="apd-state-profile-hascosts-no1"
+                onChange={[Function]}
+                type="radio"
+                value="no"
+              />
+              <FormLabel
+                component="label"
+                fieldId="radio_apd-state-profile-hascosts-no1_13"
+              >
+                <label
+                  className="ds-c-label"
+                  htmlFor="radio_apd-state-profile-hascosts-no1_13"
+                >
+                  <span
+                    className=""
+                  >
+                    No
+                  </span>
+                </label>
+              </FormLabel>
+            </div>
+          </Choice>
+        </div>
+      </ChoiceComponent>
+      <ChoiceComponent
+        checked={false}
+        checkedChildren={
+          <div
+            className="ds-c-choice__checkedChild ds-l-form-row"
+          >
+            <div
+              className="ds-l-col--auto"
+            >
+              <DollarField
+                label="FFY 1992"
+                name="apd-state-profile-costs1-fy1992"
+                onBlur={null}
+                onChange={[Function]}
+                size="small"
+                value={100}
+              />
+            </div>
+            <div
+              className="ds-l-col--auto"
+            >
+              <DollarField
+                label="FFY 1993"
+                name="apd-state-profile-costs1-fy1993"
+                onBlur={null}
+                onChange={[Function]}
+                size="small"
+                value={300}
+              />
+            </div>
+            <div
+              className="ds-l-col--auto"
+            >
+              <FormLabel
+                component="label"
+              >
+                Total
+              </FormLabel>
+              <div
+                className="form--computed-value__input-aligned"
+              >
+                <Dollars
+                  long={false}
+                >
+                  400
+                </Dollars>
+              </div>
             </div>
           </div>
+        }
+        name="apd-state-profile-hascosts-yes1"
+        onChange={[Function]}
+        type="radio"
+        value="yes"
+      >
+        <div>
+          <Choice
+            checked={false}
+            checkedChildren={
+              <div
+                className="ds-c-choice__checkedChild ds-l-form-row"
+              >
+                <div
+                  className="ds-l-col--auto"
+                >
+                  <DollarField
+                    label="FFY 1992"
+                    name="apd-state-profile-costs1-fy1992"
+                    onBlur={null}
+                    onChange={[Function]}
+                    size="small"
+                    value={100}
+                  />
+                </div>
+                <div
+                  className="ds-l-col--auto"
+                >
+                  <DollarField
+                    label="FFY 1993"
+                    name="apd-state-profile-costs1-fy1993"
+                    onBlur={null}
+                    onChange={[Function]}
+                    size="small"
+                    value={300}
+                  />
+                </div>
+                <div
+                  className="ds-l-col--auto"
+                >
+                  <FormLabel
+                    component="label"
+                  >
+                    Total
+                  </FormLabel>
+                  <div
+                    className="form--computed-value__input-aligned"
+                  >
+                    <Dollars
+                      long={false}
+                    >
+                      400
+                    </Dollars>
+                  </div>
+                </div>
+              </div>
+            }
+            inputPlacement="left"
+            name="apd-state-profile-hascosts-yes1"
+            onChange={[Function]}
+            type="radio"
+            value="yes"
+          >
+            <div
+              aria-atomic="false"
+              aria-live="polite"
+              aria-relevant="additions text"
+            >
+              <input
+                checked={false}
+                className="ds-c-choice"
+                id="radio_apd-state-profile-hascosts-yes1_14"
+                name="apd-state-profile-hascosts-yes1"
+                onChange={[Function]}
+                type="radio"
+                value="yes"
+              />
+              <FormLabel
+                component="label"
+                fieldId="radio_apd-state-profile-hascosts-yes1_14"
+              >
+                <label
+                  className="ds-c-label"
+                  htmlFor="radio_apd-state-profile-hascosts-yes1_14"
+                >
+                  <span
+                    className=""
+                  >
+                    Yes
+                  </span>
+                </label>
+              </FormLabel>
+            </div>
+          </Choice>
         </div>
-      }
-      name="apd-state-profile-hascosts-yes1"
-      onChange={[Function]}
-      type="radio"
-      value="yes"
-    >
-      Yes
-    </ChoiceComponent>
-  </fieldset>
-</Fragment>
+      </ChoiceComponent>
+    </fieldset>
+  </PersonForm>
+</Provider>
 `;

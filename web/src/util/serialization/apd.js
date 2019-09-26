@@ -162,10 +162,14 @@ export const fromAPI = (apdAPI, deserializeActivity = activityFromAPI) => {
           +p.percentTime === 0 &&
           !p.position),
       percentTime: p.percentTime * 100,
-      costs: p.costs.reduce(
-        (costs, { year, cost }) => ({ ...costs, [year]: +cost }),
-        {}
-      ),
+      costs: years.reduce((costs, year) => {
+        const index = p.costs.findIndex(cost => cost.year === +year);
+
+        if (index < 0) {
+          return { ...costs, [year]: 0 };
+        }
+        return { ...costs, [year]: p.costs[index].cost };
+      }, p.costs.reduce((costs, { year, cost }) => ({ ...costs, [year]: +cost }), {})),
       key: generateKey()
     })),
     previousActivityExpenses: previousActivityExpenses.reduce(

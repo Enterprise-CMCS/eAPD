@@ -11,7 +11,11 @@ const {
   WITHDRAW_APD_SUCCESS,
   SAVE_APD_SUCCESS
 } = require('../actions/apd');
-const { EDIT_APD } = require('../actions/editApd');
+const {
+  ADD_APD_ITEM,
+  EDIT_APD,
+  REMOVE_APD_ITEM
+} = require('../actions/editApd');
 
 describe('APD reducer', () => {
   afterAll(() => {
@@ -162,6 +166,60 @@ describe('APD reducer', () => {
     expect(apd(initialState, { type: 'SET_SELECT_APD_ON_LOAD' })).toEqual({
       ...initialState,
       selectAPDOnLoad: true
+    });
+  });
+
+  describe('should handle an APD item being added', () => {
+    it('should add arbitrary items', () => {
+      const state = {
+        data: {
+          theArray: [1, 2, 4, 5]
+        }
+      };
+      expect(apd(state, { type: ADD_APD_ITEM, path: '/theArray/2' })).toEqual({
+        data: { theArray: [1, 2, null, 4, 5] }
+      });
+    });
+
+    it('should add a new state key personnel', () => {
+      const state = {
+        data: {
+          keyPersonnel: [],
+          years: ['1', '2']
+        }
+      };
+      expect(
+        apd(state, { type: ADD_APD_ITEM, path: '/keyPersonnel/-' })
+      ).toEqual({
+        data: {
+          keyPersonnel: [
+            {
+              costs: { '1': 0, '2': 0 },
+              email: '',
+              expanded: true,
+              hasCosts: false,
+              isPrimary: false,
+              percentTime: 0,
+              name: '',
+              position: '',
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              initialCollapsed: false
+            }
+          ],
+          years: ['1', '2']
+        }
+      });
+    });
+  });
+
+  describe('should handle an APD item being removed', () => {
+    const state = {
+      data: {
+        items: [1, 2, 3, 4, 5]
+      }
+    };
+    expect(apd(state, { type: REMOVE_APD_ITEM, path: '/items/2' })).toEqual({
+      data: { items: [1, 2, 4, 5] }
     });
   });
 
