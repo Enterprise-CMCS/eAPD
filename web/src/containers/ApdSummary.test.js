@@ -10,6 +10,9 @@ import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from '../actions/editApd';
 
 const mockStore = configureStore([thunk]);
 
+// The rich text editor explodes in Enzyme - literally it exhausts v8's memory
+// and crashes. So we can mock it to a do-nothing, since we're not actually
+// interested in testing it here.
 jest.mock('../components/RichText');
 
 describe('apd summary component', () => {
