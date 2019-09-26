@@ -37,7 +37,6 @@ Object {
         Object {
           "description": "Maintain SLR",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4300,
           "name": "Super SLR Incorporated",
@@ -60,7 +59,6 @@ Object {
         Object {
           "description": "Technology consulting and planning services.",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4301,
           "name": "Tech Consulting Inc.",
@@ -162,7 +160,6 @@ Object {
           "id": 4402,
         },
       ],
-      "files": Array [],
       "fundingSource": "HIT",
       "goals": Array [
         Object {
@@ -447,7 +444,6 @@ Object {
         Object {
           "description": "Hosting and development support.",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4310,
           "name": "Interface Vendor Inc.",
@@ -470,7 +466,6 @@ Object {
         Object {
           "description": "Interface M&O contractor.",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4311,
           "name": "TBD",
@@ -545,7 +540,6 @@ Object {
           "id": 4410,
         },
       ],
-      "files": Array [],
       "fundingSource": "MMIS",
       "goals": Array [
         Object {
@@ -872,7 +866,6 @@ Object {
         Object {
           "description": "",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4320,
           "name": "",
@@ -992,7 +985,6 @@ Object {
           "id": 4420,
         },
       ],
-      "files": Array [],
       "fundingSource": "HIE",
       "goals": Array [
         Object {
@@ -1181,7 +1173,6 @@ Object {
         Object {
           "description": "",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4330,
           "name": "RFP Planning Vendor Inc.",
@@ -1204,7 +1195,6 @@ Object {
         Object {
           "description": "",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4331,
           "name": "Blue Button Builder Inc.",
@@ -1270,7 +1260,6 @@ Object {
           "id": 4430,
         },
       ],
-      "files": Array [],
       "fundingSource": "HIE",
       "goals": Array [
         Object {
@@ -1401,7 +1390,6 @@ Object {
         Object {
           "description": "Gateway Implementation.",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4340,
           "name": "TBD",
@@ -1424,7 +1412,6 @@ Object {
         Object {
           "description": "Gateway Development Planning and RFP",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4341,
           "name": "Gateway Vendor Inc.",
@@ -1520,7 +1507,6 @@ Object {
           "id": 4440,
         },
       ],
-      "files": Array [],
       "fundingSource": "HIE",
       "goals": Array [
         Object {
@@ -1653,7 +1639,6 @@ Object {
         Object {
           "description": "Research for and RFP development for MITA 3.0 SSA",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4350,
           "name": "Tech Consulting Inc.",
@@ -1676,7 +1661,6 @@ Object {
         Object {
           "description": "MITA 3.0 implementation.",
           "end": null,
-          "files": Array [],
           "hourlyData": Array [],
           "id": 4351,
           "name": "TBD",
@@ -1737,7 +1721,6 @@ Object {
           "id": 4450,
         },
       ],
-      "files": Array [],
       "fundingSource": "HIT",
       "goals": Array [
         Object {
