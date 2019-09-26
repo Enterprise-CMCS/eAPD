@@ -18,7 +18,7 @@ import StateProfile from '../components/ApdStateProfile';
 
 import {
   getAPDName,
-  getAPDFirstYear,
+  getAPDYearRange,
   getIsAnAPDSelected
 } from '../reducers/apd';
 import { getIsDirty } from '../reducers/dirty';
@@ -124,7 +124,7 @@ const mapStateToProps = state => ({
   dirty: getIsDirty(state),
   isAdmin: getIsAdmin(state),
   place: getUserStateOrTerritory(state),
-  year: getAPDFirstYear(state)
+  year: getAPDYearRange(state)
 });
 
 const mapDispatchToProps = { selectApdOnLoad };
