@@ -5,10 +5,14 @@ import { UPDATE_BUDGET } from './apd';
 
 import {
   ADD_APD_ITEM,
+  ADD_APD_YEAR,
   EDIT_APD,
   REMOVE_APD_ITEM,
+  REMOVE_APD_YEAR,
   addKeyPerson,
+  addYear,
   removeKeyPerson,
+  removeYear,
   setKeyPersonCost,
   setKeyPersonEmail,
   setKeyPersonHasCosts,
@@ -22,12 +26,52 @@ import {
   setMedicaidOfficeAddress2,
   setMedicaidOfficeCity,
   setMedicaidOfficeState,
-  setMedicaidOfficeZip
+  setMedicaidOfficeZip,
+  setProgramOverview,
+  setNarrativeForHIT,
+  setNarrativeForHIE,
+  setNarrativeForMMIS
 } from './editApd';
 
 const mockStore = configureStore([thunk]);
 
 describe('APD edit actions', () => {
+  describe('for adding or removing APD years', () => {
+    it('dispatchs an action for adding an APD year', () => {
+      const store = mockStore('add year state');
+
+      store.dispatch(addYear('1234'));
+
+      expect(store.getActions()).toEqual([
+        {
+          type: ADD_APD_YEAR,
+          value: '1234'
+        },
+        {
+          type: UPDATE_BUDGET,
+          state: 'add year state'
+        }
+      ]);
+    });
+
+    it('dispatchs an action for removing an APD year', () => {
+      const store = mockStore('remove year state');
+
+      store.dispatch(removeYear('1234'));
+
+      expect(store.getActions()).toEqual([
+        {
+          type: REMOVE_APD_YEAR,
+          value: '1234'
+        },
+        {
+          type: UPDATE_BUDGET,
+          state: 'remove year state'
+        }
+      ]);
+    });
+  });
+
   describe('for APD key personnel', () => {
     it('dispatchs an action for adding a key person', () => {
       expect(addKeyPerson()).toEqual({
@@ -192,6 +236,40 @@ describe('APD edit actions', () => {
         type: EDIT_APD,
         path: '/stateProfile/medicaidOffice/zip',
         value: 'zip code'
+      });
+    });
+  });
+
+  describe('for APD summary and HIE/HIT/MMIS narratives', () => {
+    it('dispatches an action for setting the program overview', () => {
+      expect(setProgramOverview('overview')).toEqual({
+        type: EDIT_APD,
+        path: '/programOverview',
+        value: 'overview'
+      });
+    });
+
+    it('dispatches an action for setting the HIT narrative', () => {
+      expect(setNarrativeForHIT('narrative')).toEqual({
+        type: EDIT_APD,
+        path: '/narrativeHIT',
+        value: 'narrative'
+      });
+    });
+
+    it('dispatches an action for setting the HIE narrative', () => {
+      expect(setNarrativeForHIE('narrative')).toEqual({
+        type: EDIT_APD,
+        path: '/narrativeHIE',
+        value: 'narrative'
+      });
+    });
+
+    it('dispatches an action for setting the MMIS narrative', () => {
+      expect(setNarrativeForMMIS('narrative')).toEqual({
+        type: EDIT_APD,
+        path: '/narrativeMMIS',
+        value: 'narrative'
       });
     });
   });

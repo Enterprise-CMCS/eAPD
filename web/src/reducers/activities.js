@@ -1,3 +1,4 @@
+import { apply_patch as applyPatch } from 'jsonpatch';
 import u from 'updeep';
 
 import {
@@ -18,7 +19,8 @@ import {
   TOGGLE_ACTIVITY_SECTION,
   UPDATE_ACTIVITY
 } from '../actions/activities';
-import { SAVE_APD_SUCCESS, SELECT_APD, UPDATE_APD } from '../actions/apd';
+import { SAVE_APD_SUCCESS, SELECT_APD } from '../actions/apd';
+import { ADD_APD_YEAR, REMOVE_APD_YEAR } from '../actions/editApd';
 
 import {
   arrToObj,
@@ -337,85 +339,110 @@ const reducer = (state = initialState, action) => {
         },
         state
       );
-    case UPDATE_APD:
-      if (action.updates.years) {
-        const { years } = action.updates;
-        const update = { byKey: {} };
+    case ADD_APD_YEAR: {
+      const year = action.value;
 
-        const fixupYears = (obj, defaultValue) => {
-          // Can't clone in the typical way because the incoming
-          // object derives from redux state and preventExtensions()
-          // has been called on it.  That means we can't add
-          // years if necessary.  To get around that, stringify
-          // then parse.  It's brute force but it works.
-          const out = JSON.parse(JSON.stringify(obj));
-
-          Object.keys(obj).forEach(year => {
-            if (!years.includes(year)) {
-              delete out[year];
-            }
-          });
-
-          years.forEach(year => {
-            if (!out[year]) {
-              out[year] = defaultValue();
-            }
-          });
-
-          return out;
-        };
-
-        const fixupExpenses = (objects, defaultValue) => () => {
-          // contractorResources, statePersonnel, and expenses
-          // are all arrays with years subproperties
-          if (Array.isArray(objects)) {
-            return objects.map(({ hourly, years: objYears, ...rest }) => {
-              if (hourly) {
-                return {
-                  ...rest,
-                  hourly: {
-                    ...hourly,
-                    data: fixupYears(hourly.data, contractorDefaultHourly)
-                  },
-                  years: fixupYears(objYears, defaultValue)
-                };
-              }
-
-              return {
-                ...rest,
-                years: fixupYears(objYears, defaultValue)
-              };
-            });
-          }
-          // but costAllocation is just an object whose properties
-          // are the years
-          return fixupYears(objects, defaultValue);
-        };
-
-        Object.entries(state.byKey).forEach(([key, activity]) => {
-          update.byKey[key] = {
-            years,
-            statePersonnel: fixupExpenses(
-              activity.statePersonnel,
-              statePersonDefaultYear
-            ),
-            contractorResources: fixupExpenses(
-              activity.contractorResources,
-              contractorDefaultYear
-            ),
-            expenses: fixupExpenses(activity.expenses, expenseDefaultYear),
-            costAllocation: fixupExpenses(
-              activity.costAllocation,
-              costAllocationEntry
-            ),
-            quarterlyFFP: () =>
-              fixupYears(activity.quarterlyFFP, quarterlyFFPEntry)
-          };
+      const patches = [];
+      Object.entries(state.byKey).forEach(([key, activity]) => {
+        const years = [...activity.years, year].sort();
+        patches.push({
+          op: 'replace',
+          path: `/byKey/${key}/years`,
+          value: years
         });
 
-        return u(update, state);
-      }
-      return state;
+        activity.contractorResources.forEach((_, i) => {
+          patches.push({
+            op: 'add',
+            path: `/byKey/${key}/contractorResources/${i}/hourly/data/${year}`,
+            value: contractorDefaultHourly()
+          });
+          patches.push({
+            op: 'add',
+            path: `/byKey/${key}/contractorResources/${i}/years/${year}`,
+            value: contractorDefaultYear()
+          });
+        });
+
+        activity.expenses.forEach((_, i) => {
+          patches.push({
+            op: 'add',
+            path: `/byKey/${key}/expenses/${i}/years/${year}`,
+            value: expenseDefaultYear()
+          });
+        });
+
+        activity.statePersonnel.forEach((_, i) => {
+          patches.push({
+            op: 'add',
+            path: `/byKey/${key}/statePersonnel/${i}/years/${year}`,
+            value: statePersonDefaultYear()
+          });
+        });
+
+        patches.push({
+          op: 'add',
+          path: `/byKey/${key}/costAllocation/${year}`,
+          value: costAllocationEntry()
+        });
+
+        patches.push({
+          op: 'add',
+          path: `/byKey/${key}/quarterlyFFP/${year}`,
+          value: quarterlyFFPEntry()
+        });
+      });
+
+      return applyPatch(state, patches);
+    }
+
+    case REMOVE_APD_YEAR: {
+      const year = action.value;
+
+      const patches = [];
+      Object.entries(state.byKey).forEach(([key, activity]) => {
+        const index = activity.years.indexOf(year);
+        patches.push({ op: 'remove', path: `/byKey/${key}/years/${index}` });
+
+        activity.contractorResources.forEach((_, i) => {
+          patches.push({
+            op: 'remove',
+            path: `/byKey/${key}/contractorResources/${i}/hourly/data/${year}`
+          });
+          patches.push({
+            op: 'remove',
+            path: `/byKey/${key}/contractorResources/${i}/years/${year}`
+          });
+        });
+
+        activity.expenses.forEach((_, i) => {
+          patches.push({
+            op: 'remove',
+            path: `/byKey/${key}/expenses/${i}/years/${year}`
+          });
+        });
+
+        activity.statePersonnel.forEach((_, i) => {
+          patches.push({
+            op: 'remove',
+            path: `/byKey/${key}/statePersonnel/${i}/years/${year}`
+          });
+        });
+
+        patches.push({
+          op: 'remove',
+          path: `/byKey/${key}/costAllocation/${year}`
+        });
+
+        patches.push({
+          op: 'remove',
+          path: `/byKey/${key}/quarterlyFFP/${year}`
+        });
+      });
+
+      return applyPatch(state, patches);
+    }
+
     case SELECT_APD: {
       const byKey = {};
       ((action.apd || {}).activities || []).forEach(a => {
