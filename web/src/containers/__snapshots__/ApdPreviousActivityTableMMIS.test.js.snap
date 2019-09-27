@@ -1,528 +1,1579 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`apd previous activity table, mmis component renders correctly 1`] = `
-<Fragment>
-  <h4
-    aria-hidden="true"
-    className="ds-h4"
-  >
-    MMIS
-  </h4>
-  <table
-    className="budget-table"
-    key="90"
-  >
-    <caption
-      className="ds-h4 ds-u-visibility--screen-reader"
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <ApdPreviousActivityTableMMIS>
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
     >
-      MMIS 
-      <span>
-        Federal share 
-        <strong>
-          90
-          %
-        </strong>
-         FFP
-      </span>
-    </caption>
-    <thead>
-      <tr>
-        <th
-          id="prev_act_mmis_ffy"
-        >
-          <span
-            className="ds-u-visibility--screen-reader"
-          >
-            Year
-          </span>
-        </th>
-        <th
-          id="prev_act_mmis90_total"
-        >
-          <span>
-            Total computable
-            <br />
-            (Federal + state)
-          </span>
-        </th>
-        <th
-          colSpan="2"
-          id="prev_act_mmis90_federal"
-        >
-          <span>
-            Federal share 
-            <strong>
-              90
-              %
-            </strong>
-             FFP
-          </span>
-        </th>
-      </tr>
-      <tr>
-        <th
-          aria-hidden="true"
-        />
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis90_total_approved"
-        >
-          Approved
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis90_federal_approved"
-        >
-          Approved
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis90_federal_actual"
-        >
-          Actual
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        key="1"
-      >
-        <th
-          id="prev_act_mmis_row_1"
-        >
-          FFY 1
-        </th>
-        <td
-          headers="prev_act_mmis_row_1 prev_act_mmis90_total prev_act_mmis90_total_approved"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal"
-            labelClassName="sr-only"
-            name="approved-total-mmis90-1"
-            onBlur={null}
-            onChange={[Function]}
-            value={20}
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
-        >
-          <Dollars
-            long={false}
-          >
-            18
-          </Dollars>
-        </td>
-        <td
-          headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_actual"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 90/10 level for FFY 1"
-            labelClassName="sr-only"
-            name="actual-federal-mmis90-1"
-            onBlur={null}
-            onChange={[Function]}
-            value={10}
-          />
-        </td>
-      </tr>
-      <tr
-        key="2"
-      >
-        <th
-          id="prev_act_mmis_row_2"
-        >
-          FFY 2
-        </th>
-        <td
-          headers="prev_act_mmis_row_2 prev_act_mmis90_total prev_act_mmis90_total_approved"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal"
-            labelClassName="sr-only"
-            name="approved-total-mmis90-2"
-            onBlur={null}
-            onChange={[Function]}
-            value={200}
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
-        >
-          <Dollars
-            long={false}
-          >
-            180
-          </Dollars>
-        </td>
-        <td
-          headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_actual"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 90/10 level for FFY 2"
-            labelClassName="sr-only"
-            name="actual-federal-mmis90-2"
-            onBlur={null}
-            onChange={[Function]}
-            value={100}
-          />
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <table
-    className="budget-table"
-    key="75"
-  >
-    <caption
-      className="ds-h4 ds-u-visibility--screen-reader"
+      MMIS
+    </h4>
+    <table
+      className="budget-table"
+      key="90"
     >
-      MMIS 
-      <span>
-        Federal share 
-        <strong>
-          75
-          %
-        </strong>
-         FFP
-      </span>
-    </caption>
-    <thead>
-      <tr>
-        <th
-          id="prev_act_mmis_ffy"
-        >
-          <span
-            className="ds-u-visibility--screen-reader"
-          >
-            Year
-          </span>
-        </th>
-        <th
-          id="prev_act_mmis75_total"
-        >
-          <span>
-            Total computable
-            <br />
-            (Federal + state)
-          </span>
-        </th>
-        <th
-          colSpan="2"
-          id="prev_act_mmis75_federal"
-        >
-          <span>
-            Federal share 
-            <strong>
-              75
-              %
-            </strong>
-             FFP
-          </span>
-        </th>
-      </tr>
-      <tr>
-        <th
-          aria-hidden="true"
-        />
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis75_total_approved"
-        >
-          Approved
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis75_federal_approved"
-        >
-          Approved
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis75_federal_actual"
-        >
-          Actual
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        key="1"
+      <caption
+        className="ds-h4 ds-u-visibility--screen-reader"
       >
-        <th
-          id="prev_act_mmis_row_1"
-        >
-          FFY 1
-        </th>
-        <td
-          headers="prev_act_mmis_row_1 prev_act_mmis75_total prev_act_mmis75_total_approved"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal"
-            labelClassName="sr-only"
-            name="approved-total-mmis75-1"
-            onBlur={null}
-            onChange={[Function]}
-            value={40}
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
-        >
-          <Dollars
-            long={false}
+        MMIS 
+        <span>
+          Federal share 
+          <strong>
+            90
+            %
+          </strong>
+           FFP
+        </span>
+      </caption>
+      <thead>
+        <tr>
+          <th
+            id="prev_act_mmis_ffy"
           >
-            30
-          </Dollars>
-        </td>
-        <td
-          headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_actual"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 75/25 level for FFY 1"
-            labelClassName="sr-only"
-            name="actual-federal-mmis75-1"
-            onBlur={null}
-            onChange={[Function]}
-            value={30}
-          />
-        </td>
-      </tr>
-      <tr
-        key="2"
-      >
-        <th
-          id="prev_act_mmis_row_2"
-        >
-          FFY 2
-        </th>
-        <td
-          headers="prev_act_mmis_row_2 prev_act_mmis75_total prev_act_mmis75_total_approved"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal"
-            labelClassName="sr-only"
-            name="approved-total-mmis75-2"
-            onBlur={null}
-            onChange={[Function]}
-            value={400}
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
-        >
-          <Dollars
-            long={false}
+            <span
+              className="ds-u-visibility--screen-reader"
+            >
+              Year
+            </span>
+          </th>
+          <th
+            id="prev_act_mmis90_total"
           >
-            300
-          </Dollars>
-        </td>
-        <td
-          headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_actual"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 75/25 level for FFY 2"
-            labelClassName="sr-only"
-            name="actual-federal-mmis75-2"
-            onBlur={null}
-            onChange={[Function]}
-            value={300}
+            <span>
+              Total computable
+              <br />
+              (Federal + state)
+            </span>
+          </th>
+          <th
+            colSpan="2"
+            id="prev_act_mmis90_federal"
+          >
+            <span>
+              Federal share 
+              <strong>
+                90
+                %
+              </strong>
+               FFP
+            </span>
+          </th>
+        </tr>
+        <tr>
+          <th
+            aria-hidden="true"
           />
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <table
-    className="budget-table"
-    key="50"
-  >
-    <caption
-      className="ds-h4 ds-u-visibility--screen-reader"
+          <th
+            className="ds-u-text-align--right"
+            id="prev_act_mmis90_total_approved"
+          >
+            Approved
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            id="prev_act_mmis90_federal_approved"
+          >
+            Approved
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            id="prev_act_mmis90_federal_actual"
+          >
+            Actual
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          key="1"
+        >
+          <th
+            id="prev_act_mmis_row_1"
+          >
+            FFY 1
+          </th>
+          <td
+            headers="prev_act_mmis_row_1 prev_act_mmis90_total prev_act_mmis90_total_approved"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal"
+              labelClassName="sr-only"
+              name="approved-total-mmis90-1"
+              onBlur={null}
+              onChange={[Function]}
+              value={20}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal"
+                labelClassName="sr-only"
+                mask="currency"
+                name="approved-total-mmis90-1"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="20"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_1"
+                        name="approved-total-mmis90-1"
+                        type="text"
+                        value="20"
+                      />,
+                    }
+                  }
+                  label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="approved-total-mmis90-1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="20"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_1"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_1"
+                      >
+                        <span
+                          className=""
+                        >
+                          total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="total approved funding for MMIS at the 90/10 level for FFY 1, state plus federal. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_1"
+                          name="approved-total-mmis90-1"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="20"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            className="budget-table--number"
+            headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
+          >
+            <Dollars
+              long={false}
+            >
+              <span
+                className="visibility--screen"
+              >
+                $18
+              </span>
+              <span
+                className="visibility--print"
+              >
+                $18
+              </span>
+            </Dollars>
+          </td>
+          <td
+            headers="prev_act_mmis_row_1 prev_act_mmis90_federal prev_act_mmis90_federal_actual"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="actual federal share for MMIS at the 90/10 level for FFY 1"
+              labelClassName="sr-only"
+              name="actual-federal-mmis90-1"
+              onBlur={null}
+              onChange={[Function]}
+              value={10}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="actual federal share for MMIS at the 90/10 level for FFY 1"
+                labelClassName="sr-only"
+                mask="currency"
+                name="actual-federal-mmis90-1"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="10"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="actual federal share for MMIS at the 90/10 level for FFY 1. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_2"
+                        name="actual-federal-mmis90-1"
+                        type="text"
+                        value="10"
+                      />,
+                    }
+                  }
+                  label="actual federal share for MMIS at the 90/10 level for FFY 1"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="actual-federal-mmis90-1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="10"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_2"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_2"
+                      >
+                        <span
+                          className=""
+                        >
+                          actual federal share for MMIS at the 90/10 level for FFY 1
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="actual federal share for MMIS at the 90/10 level for FFY 1. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_2"
+                          name="actual-federal-mmis90-1"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="10"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+        </tr>
+        <tr
+          key="2"
+        >
+          <th
+            id="prev_act_mmis_row_2"
+          >
+            FFY 2
+          </th>
+          <td
+            headers="prev_act_mmis_row_2 prev_act_mmis90_total prev_act_mmis90_total_approved"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal"
+              labelClassName="sr-only"
+              name="approved-total-mmis90-2"
+              onBlur={null}
+              onChange={[Function]}
+              value={200}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal"
+                labelClassName="sr-only"
+                mask="currency"
+                name="approved-total-mmis90-2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="200"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_3"
+                        name="approved-total-mmis90-2"
+                        type="text"
+                        value="200"
+                      />,
+                    }
+                  }
+                  label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="approved-total-mmis90-2"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="200"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_3"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_3"
+                      >
+                        <span
+                          className=""
+                        >
+                          total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="total approved funding for MMIS at the 90/10 level for FFY 2, state plus federal. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_3"
+                          name="approved-total-mmis90-2"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="200"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            className="budget-table--number"
+            headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_approved"
+          >
+            <Dollars
+              long={false}
+            >
+              <span
+                className="visibility--screen"
+              >
+                $180
+              </span>
+              <span
+                className="visibility--print"
+              >
+                $180
+              </span>
+            </Dollars>
+          </td>
+          <td
+            headers="prev_act_mmis_row_2 prev_act_mmis90_federal prev_act_mmis90_federal_actual"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="actual federal share for MMIS at the 90/10 level for FFY 2"
+              labelClassName="sr-only"
+              name="actual-federal-mmis90-2"
+              onBlur={null}
+              onChange={[Function]}
+              value={100}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="actual federal share for MMIS at the 90/10 level for FFY 2"
+                labelClassName="sr-only"
+                mask="currency"
+                name="actual-federal-mmis90-2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="100"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="actual federal share for MMIS at the 90/10 level for FFY 2. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_4"
+                        name="actual-federal-mmis90-2"
+                        type="text"
+                        value="100"
+                      />,
+                    }
+                  }
+                  label="actual federal share for MMIS at the 90/10 level for FFY 2"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="actual-federal-mmis90-2"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="100"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_4"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_4"
+                      >
+                        <span
+                          className=""
+                        >
+                          actual federal share for MMIS at the 90/10 level for FFY 2
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="actual federal share for MMIS at the 90/10 level for FFY 2. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_4"
+                          name="actual-federal-mmis90-2"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="100"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      key="75"
     >
-      MMIS 
-      <span>
-        Federal share 
-        <strong>
-          50
-          %
-        </strong>
-         FFP
-      </span>
-    </caption>
-    <thead>
-      <tr>
-        <th
-          id="prev_act_mmis_ffy"
-        >
-          <span
-            className="ds-u-visibility--screen-reader"
-          >
-            Year
-          </span>
-        </th>
-        <th
-          id="prev_act_mmis50_total"
-        >
-          <span>
-            Total computable
-            <br />
-            (Federal + state)
-          </span>
-        </th>
-        <th
-          colSpan="2"
-          id="prev_act_mmis50_federal"
-        >
-          <span>
-            Federal share 
-            <strong>
-              50
-              %
-            </strong>
-             FFP
-          </span>
-        </th>
-      </tr>
-      <tr>
-        <th
-          aria-hidden="true"
-        />
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis50_total_approved"
-        >
-          Approved
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis50_federal_approved"
-        >
-          Approved
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          id="prev_act_mmis50_federal_actual"
-        >
-          Actual
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        key="1"
+      <caption
+        className="ds-h4 ds-u-visibility--screen-reader"
       >
-        <th
-          id="prev_act_mmis_row_1"
-        >
-          FFY 1
-        </th>
-        <td
-          headers="prev_act_mmis_row_1 prev_act_mmis50_total prev_act_mmis50_total_approved"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal"
-            labelClassName="sr-only"
-            name="approved-total-mmis50-1"
-            onBlur={null}
-            onChange={[Function]}
-            value={60}
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
-        >
-          <Dollars
-            long={false}
+        MMIS 
+        <span>
+          Federal share 
+          <strong>
+            75
+            %
+          </strong>
+           FFP
+        </span>
+      </caption>
+      <thead>
+        <tr>
+          <th
+            id="prev_act_mmis_ffy"
           >
-            30
-          </Dollars>
-        </td>
-        <td
-          headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_actual"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 50/50 level for FFY 1"
-            labelClassName="sr-only"
-            name="actual-federal-mmis50-1"
-            onBlur={null}
-            onChange={[Function]}
-            value={50}
+            <span
+              className="ds-u-visibility--screen-reader"
+            >
+              Year
+            </span>
+          </th>
+          <th
+            id="prev_act_mmis75_total"
+          >
+            <span>
+              Total computable
+              <br />
+              (Federal + state)
+            </span>
+          </th>
+          <th
+            colSpan="2"
+            id="prev_act_mmis75_federal"
+          >
+            <span>
+              Federal share 
+              <strong>
+                75
+                %
+              </strong>
+               FFP
+            </span>
+          </th>
+        </tr>
+        <tr>
+          <th
+            aria-hidden="true"
           />
-        </td>
-      </tr>
-      <tr
-        key="2"
+          <th
+            className="ds-u-text-align--right"
+            id="prev_act_mmis75_total_approved"
+          >
+            Approved
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            id="prev_act_mmis75_federal_approved"
+          >
+            Approved
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            id="prev_act_mmis75_federal_actual"
+          >
+            Actual
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          key="1"
+        >
+          <th
+            id="prev_act_mmis_row_1"
+          >
+            FFY 1
+          </th>
+          <td
+            headers="prev_act_mmis_row_1 prev_act_mmis75_total prev_act_mmis75_total_approved"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal"
+              labelClassName="sr-only"
+              name="approved-total-mmis75-1"
+              onBlur={null}
+              onChange={[Function]}
+              value={40}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal"
+                labelClassName="sr-only"
+                mask="currency"
+                name="approved-total-mmis75-1"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="40"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_5"
+                        name="approved-total-mmis75-1"
+                        type="text"
+                        value="40"
+                      />,
+                    }
+                  }
+                  label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="approved-total-mmis75-1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="40"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_5"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_5"
+                      >
+                        <span
+                          className=""
+                        >
+                          total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="total approved funding for MMIS at the 75/25 level for FFY 1, state plus federal. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_5"
+                          name="approved-total-mmis75-1"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="40"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            className="budget-table--number"
+            headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
+          >
+            <Dollars
+              long={false}
+            >
+              <span
+                className="visibility--screen"
+              >
+                $30
+              </span>
+              <span
+                className="visibility--print"
+              >
+                $30
+              </span>
+            </Dollars>
+          </td>
+          <td
+            headers="prev_act_mmis_row_1 prev_act_mmis75_federal prev_act_mmis75_federal_actual"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="actual federal share for MMIS at the 75/25 level for FFY 1"
+              labelClassName="sr-only"
+              name="actual-federal-mmis75-1"
+              onBlur={null}
+              onChange={[Function]}
+              value={30}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="actual federal share for MMIS at the 75/25 level for FFY 1"
+                labelClassName="sr-only"
+                mask="currency"
+                name="actual-federal-mmis75-1"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="30"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="actual federal share for MMIS at the 75/25 level for FFY 1. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_6"
+                        name="actual-federal-mmis75-1"
+                        type="text"
+                        value="30"
+                      />,
+                    }
+                  }
+                  label="actual federal share for MMIS at the 75/25 level for FFY 1"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="actual-federal-mmis75-1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="30"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_6"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_6"
+                      >
+                        <span
+                          className=""
+                        >
+                          actual federal share for MMIS at the 75/25 level for FFY 1
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="actual federal share for MMIS at the 75/25 level for FFY 1. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_6"
+                          name="actual-federal-mmis75-1"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="30"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+        </tr>
+        <tr
+          key="2"
+        >
+          <th
+            id="prev_act_mmis_row_2"
+          >
+            FFY 2
+          </th>
+          <td
+            headers="prev_act_mmis_row_2 prev_act_mmis75_total prev_act_mmis75_total_approved"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal"
+              labelClassName="sr-only"
+              name="approved-total-mmis75-2"
+              onBlur={null}
+              onChange={[Function]}
+              value={400}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal"
+                labelClassName="sr-only"
+                mask="currency"
+                name="approved-total-mmis75-2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="400"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_7"
+                        name="approved-total-mmis75-2"
+                        type="text"
+                        value="400"
+                      />,
+                    }
+                  }
+                  label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="approved-total-mmis75-2"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="400"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_7"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_7"
+                      >
+                        <span
+                          className=""
+                        >
+                          total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="total approved funding for MMIS at the 75/25 level for FFY 2, state plus federal. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_7"
+                          name="approved-total-mmis75-2"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="400"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            className="budget-table--number"
+            headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_approved"
+          >
+            <Dollars
+              long={false}
+            >
+              <span
+                className="visibility--screen"
+              >
+                $300
+              </span>
+              <span
+                className="visibility--print"
+              >
+                $300
+              </span>
+            </Dollars>
+          </td>
+          <td
+            headers="prev_act_mmis_row_2 prev_act_mmis75_federal prev_act_mmis75_federal_actual"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="actual federal share for MMIS at the 75/25 level for FFY 2"
+              labelClassName="sr-only"
+              name="actual-federal-mmis75-2"
+              onBlur={null}
+              onChange={[Function]}
+              value={300}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="actual federal share for MMIS at the 75/25 level for FFY 2"
+                labelClassName="sr-only"
+                mask="currency"
+                name="actual-federal-mmis75-2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="300"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="actual federal share for MMIS at the 75/25 level for FFY 2. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_8"
+                        name="actual-federal-mmis75-2"
+                        type="text"
+                        value="300"
+                      />,
+                    }
+                  }
+                  label="actual federal share for MMIS at the 75/25 level for FFY 2"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="actual-federal-mmis75-2"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="300"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_8"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_8"
+                      >
+                        <span
+                          className=""
+                        >
+                          actual federal share for MMIS at the 75/25 level for FFY 2
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="actual federal share for MMIS at the 75/25 level for FFY 2. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_8"
+                          name="actual-federal-mmis75-2"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="300"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
+      key="50"
+    >
+      <caption
+        className="ds-h4 ds-u-visibility--screen-reader"
       >
-        <th
-          id="prev_act_mmis_row_2"
-        >
-          FFY 2
-        </th>
-        <td
-          headers="prev_act_mmis_row_2 prev_act_mmis50_total prev_act_mmis50_total_approved"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal"
-            labelClassName="sr-only"
-            name="approved-total-mmis50-2"
-            onBlur={null}
-            onChange={[Function]}
-            value={600}
-          />
-        </td>
-        <td
-          className="budget-table--number"
-          headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
-        >
-          <Dollars
-            long={false}
+        MMIS 
+        <span>
+          Federal share 
+          <strong>
+            50
+            %
+          </strong>
+           FFP
+        </span>
+      </caption>
+      <thead>
+        <tr>
+          <th
+            id="prev_act_mmis_ffy"
           >
-            300
-          </Dollars>
-        </td>
-        <td
-          headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_actual"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="actual federal share for MMIS at the 50/50 level for FFY 2"
-            labelClassName="sr-only"
-            name="actual-federal-mmis50-2"
-            onBlur={null}
-            onChange={[Function]}
-            value={500}
+            <span
+              className="ds-u-visibility--screen-reader"
+            >
+              Year
+            </span>
+          </th>
+          <th
+            id="prev_act_mmis50_total"
+          >
+            <span>
+              Total computable
+              <br />
+              (Federal + state)
+            </span>
+          </th>
+          <th
+            colSpan="2"
+            id="prev_act_mmis50_federal"
+          >
+            <span>
+              Federal share 
+              <strong>
+                50
+                %
+              </strong>
+               FFP
+            </span>
+          </th>
+        </tr>
+        <tr>
+          <th
+            aria-hidden="true"
           />
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</Fragment>
+          <th
+            className="ds-u-text-align--right"
+            id="prev_act_mmis50_total_approved"
+          >
+            Approved
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            id="prev_act_mmis50_federal_approved"
+          >
+            Approved
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            id="prev_act_mmis50_federal_actual"
+          >
+            Actual
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          key="1"
+        >
+          <th
+            id="prev_act_mmis_row_1"
+          >
+            FFY 1
+          </th>
+          <td
+            headers="prev_act_mmis_row_1 prev_act_mmis50_total prev_act_mmis50_total_approved"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal"
+              labelClassName="sr-only"
+              name="approved-total-mmis50-1"
+              onBlur={null}
+              onChange={[Function]}
+              value={60}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal"
+                labelClassName="sr-only"
+                mask="currency"
+                name="approved-total-mmis50-1"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="60"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_9"
+                        name="approved-total-mmis50-1"
+                        type="text"
+                        value="60"
+                      />,
+                    }
+                  }
+                  label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="approved-total-mmis50-1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="60"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_9"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_9"
+                      >
+                        <span
+                          className=""
+                        >
+                          total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="total approved funding for MMIS at the 50/50 level for FFY 1, state plus federal. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_9"
+                          name="approved-total-mmis50-1"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="60"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            className="budget-table--number"
+            headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
+          >
+            <Dollars
+              long={false}
+            >
+              <span
+                className="visibility--screen"
+              >
+                $30
+              </span>
+              <span
+                className="visibility--print"
+              >
+                $30
+              </span>
+            </Dollars>
+          </td>
+          <td
+            headers="prev_act_mmis_row_1 prev_act_mmis50_federal prev_act_mmis50_federal_actual"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="actual federal share for MMIS at the 50/50 level for FFY 1"
+              labelClassName="sr-only"
+              name="actual-federal-mmis50-1"
+              onBlur={null}
+              onChange={[Function]}
+              value={50}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="actual federal share for MMIS at the 50/50 level for FFY 1"
+                labelClassName="sr-only"
+                mask="currency"
+                name="actual-federal-mmis50-1"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="50"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="actual federal share for MMIS at the 50/50 level for FFY 1. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_10"
+                        name="actual-federal-mmis50-1"
+                        type="text"
+                        value="50"
+                      />,
+                    }
+                  }
+                  label="actual federal share for MMIS at the 50/50 level for FFY 1"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="actual-federal-mmis50-1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="50"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_10"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_10"
+                      >
+                        <span
+                          className=""
+                        >
+                          actual federal share for MMIS at the 50/50 level for FFY 1
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="actual federal share for MMIS at the 50/50 level for FFY 1. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_10"
+                          name="actual-federal-mmis50-1"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="50"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+        </tr>
+        <tr
+          key="2"
+        >
+          <th
+            id="prev_act_mmis_row_2"
+          >
+            FFY 2
+          </th>
+          <td
+            headers="prev_act_mmis_row_2 prev_act_mmis50_total prev_act_mmis50_total_approved"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal"
+              labelClassName="sr-only"
+              name="approved-total-mmis50-2"
+              onBlur={null}
+              onChange={[Function]}
+              value={600}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal"
+                labelClassName="sr-only"
+                mask="currency"
+                name="approved-total-mmis50-2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="600"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_11"
+                        name="approved-total-mmis50-2"
+                        type="text"
+                        value="600"
+                      />,
+                    }
+                  }
+                  label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="approved-total-mmis50-2"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="600"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_11"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_11"
+                      >
+                        <span
+                          className=""
+                        >
+                          total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="total approved funding for MMIS at the 50/50 level for FFY 2, state plus federal. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_11"
+                          name="approved-total-mmis50-2"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="600"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            className="budget-table--number"
+            headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_approved"
+          >
+            <Dollars
+              long={false}
+            >
+              <span
+                className="visibility--screen"
+              >
+                $300
+              </span>
+              <span
+                className="visibility--print"
+              >
+                $300
+              </span>
+            </Dollars>
+          </td>
+          <td
+            headers="prev_act_mmis_row_2 prev_act_mmis50_federal prev_act_mmis50_federal_actual"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="actual federal share for MMIS at the 50/50 level for FFY 2"
+              labelClassName="sr-only"
+              name="actual-federal-mmis50-2"
+              onBlur={null}
+              onChange={[Function]}
+              value={500}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="actual federal share for MMIS at the 50/50 level for FFY 2"
+                labelClassName="sr-only"
+                mask="currency"
+                name="actual-federal-mmis50-2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="500"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="actual federal share for MMIS at the 50/50 level for FFY 2. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_12"
+                        name="actual-federal-mmis50-2"
+                        type="text"
+                        value="500"
+                      />,
+                    }
+                  }
+                  label="actual federal share for MMIS at the 50/50 level for FFY 2"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="actual-federal-mmis50-2"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="500"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_12"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_12"
+                      >
+                        <span
+                          className=""
+                        >
+                          actual federal share for MMIS at the 50/50 level for FFY 2
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="actual federal share for MMIS at the 50/50 level for FFY 2. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_12"
+                          name="actual-federal-mmis50-2"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="500"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ApdPreviousActivityTableMMIS>
+</Provider>
 `;

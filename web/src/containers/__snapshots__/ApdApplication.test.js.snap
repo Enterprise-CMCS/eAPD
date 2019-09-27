@@ -32,7 +32,7 @@ exports[`apd (application) component renders correctly 1`] = `
       </h1>
       <ApdStateProfile />
       <ApdSummary />
-      <Connect(PreviousActivities) />
+      <PreviousActivities />
       <Connect(All) />
       <Connect(ScheduleSummary) />
       <ProposedBudget />

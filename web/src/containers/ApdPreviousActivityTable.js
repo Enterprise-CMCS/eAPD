@@ -1,25 +1,29 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import DollarField from '../components/DollarField';
 import Dollars from '../components/Dollars';
-import { updateApd } from '../actions/apd';
+import {
+  setPreviousActivityApprovedExpenseForHITandHIE,
+  setPreviousActivityFederalActualExpenseForHITandHIE
+} from '../actions/editApd';
 import { TABLE_HEADERS } from '../constants';
 
-const ApdPreviousActivityTable = ({
-  previousActivityExpenses,
-  updateApd: dispatchUpdateApd
-}) => {
+const ApdPreviousActivityTable = () => {
+  const dispatch = useDispatch();
+
+  const previousActivityExpenses = useSelector(
+    state => state.apd.data.previousActivityExpenses
+  );
+
   const years = Object.keys(previousActivityExpenses);
 
-  const handleChange = (year, program, type) => e => {
-    const update = {
-      previousActivityExpenses: {
-        [year]: { [program]: { [type]: e.target.value } }
-      }
-    };
-    dispatchUpdateApd(update);
+  const getActualsHandler = year => ({ target: { value } }) => {
+    dispatch(setPreviousActivityFederalActualExpenseForHITandHIE(year, value));
+  };
+
+  const getApprovedHandler = year => ({ target: { value } }) => {
+    dispatch(setPreviousActivityApprovedExpenseForHITandHIE(year, value));
   };
 
   return (
@@ -81,7 +85,7 @@ const ApdPreviousActivityTable = ({
                   labelClassName="sr-only"
                   name={`hithie-approved-total-${year}`}
                   value={previousActivityExpenses[year].hithie.totalApproved}
-                  onChange={handleChange(year, 'hithie', 'totalApproved')}
+                  onChange={getApprovedHandler(year)}
                 />
               </td>
 
@@ -102,7 +106,7 @@ const ApdPreviousActivityTable = ({
                   labelClassName="sr-only"
                   name={`hithie-actual-federal-${year}`}
                   value={previousActivityExpenses[year].hithie.federalActual}
-                  onChange={handleChange(year, 'hithie', 'federalActual')}
+                  onChange={getActualsHandler(year)}
                 />
               </td>
             </tr>
@@ -113,28 +117,4 @@ const ApdPreviousActivityTable = ({
   );
 };
 
-ApdPreviousActivityTable.propTypes = {
-  previousActivityExpenses: PropTypes.object.isRequired,
-  updateApd: PropTypes.func.isRequired
-};
-
-const mapStateToProps = ({
-  apd: {
-    data: { previousActivityExpenses }
-  }
-}) => ({
-  previousActivityExpenses
-});
-
-const mapDispatchToProps = { updateApd };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ApdPreviousActivityTable);
-
-export {
-  ApdPreviousActivityTable as plain,
-  mapStateToProps,
-  mapDispatchToProps
-};
+export default ApdPreviousActivityTable;

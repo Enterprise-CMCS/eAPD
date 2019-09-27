@@ -1,92 +1,87 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
 import React from 'react';
-import sinon from 'sinon';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 
-import {
-  plain as ApdPreviousActivityTableMMIS,
-  mapStateToProps,
-  mapDispatchToProps
-} from './ApdPreviousActivityTableMMIS';
-import { updateApd } from '../actions/apd';
+import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
+import { EDIT_APD } from '../actions/editApd';
+
+const mockStore = configureStore([thunk]);
 
 describe('apd previous activity table, mmis component', () => {
-  const props = {
-    previousActivityExpenses: {
-      '1': {
-        mmis: {
-          90: {
-            federalActual: 10,
-            totalApproved: 20
+  const state = {
+    apd: {
+      data: {
+        previousActivityExpenses: {
+          '1': {
+            mmis: {
+              90: {
+                federalActual: 10,
+                totalApproved: 20
+              },
+              75: {
+                federalActual: 30,
+                totalApproved: 40
+              },
+              50: {
+                federalActual: 50,
+                totalApproved: 60
+              }
+            }
           },
-          75: {
-            federalActual: 30,
-            totalApproved: 40
-          },
-          50: {
-            federalActual: 50,
-            totalApproved: 60
-          }
-        }
-      },
-      '2': {
-        mmis: {
-          90: {
-            federalActual: 100,
-            totalApproved: 200
-          },
-          75: {
-            federalActual: 300,
-            totalApproved: 400
-          },
-          50: {
-            federalActual: 500,
-            totalApproved: 600
+          '2': {
+            mmis: {
+              90: {
+                federalActual: 100,
+                totalApproved: 200
+              },
+              75: {
+                federalActual: 300,
+                totalApproved: 400
+              },
+              50: {
+                federalActual: 500,
+                totalApproved: 600
+              }
+            }
           }
         }
       }
-    },
-    updateApd: sinon.spy()
+    }
   };
 
+  const store = mockStore(state);
+
   beforeEach(() => {
-    props.updateApd.resetHistory();
+    store.clearActions();
   });
 
   test('renders correctly', () => {
     expect(
-      shallow(<ApdPreviousActivityTableMMIS {...props} />)
+      mount(
+        <Provider store={store}>
+          <ApdPreviousActivityTableMMIS />
+        </Provider>
+      )
     ).toMatchSnapshot();
   });
 
   test('dispatches on a change', () => {
-    shallow(<ApdPreviousActivityTableMMIS {...props} />)
+    mount(
+      <Provider store={store}>
+        <ApdPreviousActivityTableMMIS />
+      </Provider>
+    )
       .find('DollarField[name="approved-total-mmis90-1"]')
-      .simulate('change', { target: { value: 'new value' } });
+      .prop('onChange')({ target: { value: 'new value' } });
 
-    expect(
-      props.updateApd.calledWith({
-        previousActivityExpenses: {
-          '1': { mmis: { '90': { approvedTotal: 'new value' } } }
-        }
-      })
-    );
-  });
-
-  test('maps state to props', () => {
-    const state = {
-      apd: {
-        data: {
-          previousActivityExpenses: 'previous activities'
-        }
+    expect(store.getActions()).toEqual([
+      {
+        type: EDIT_APD,
+        path: '/previousActivityExpenses/1/mmis/90/totalApproved',
+        value: 'new value'
       }
-    };
-
-    expect(mapStateToProps(state)).toEqual({
-      previousActivityExpenses: 'previous activities'
-    });
-  });
-
-  test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ updateApd });
+    ]);
   });
 });
