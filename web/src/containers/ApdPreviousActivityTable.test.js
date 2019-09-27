@@ -1,70 +1,67 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
 import React from 'react';
-import sinon from 'sinon';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 
-import {
-  plain as ApdPreviousActivityTable,
-  mapStateToProps,
-  mapDispatchToProps
-} from './ApdPreviousActivityTable';
-import { updateApd } from '../actions/apd';
+import ApdPreviousActivityTable from './ApdPreviousActivityTable';
+import { EDIT_APD } from '../actions/editApd';
+
+const mockStore = configureStore([thunk]);
 
 describe('apd previous activity table, mmis component', () => {
-  const props = {
-    previousActivityExpenses: {
-      '1': {
-        hithie: {
-          federalActual: 10,
-          totalApproved: 20
-        }
-      },
-      '2': {
-        hithie: {
-          federalActual: 100,
-          totalApproved: 200
+  const state = {
+    apd: {
+      data: {
+        previousActivityExpenses: {
+          '1': {
+            hithie: {
+              federalActual: 10,
+              totalApproved: 20
+            }
+          },
+          '2': {
+            hithie: {
+              federalActual: 100,
+              totalApproved: 200
+            }
+          }
         }
       }
-    },
-    updateApd: sinon.spy()
+    }
   };
 
+  const store = mockStore(state);
+
   beforeEach(() => {
-    props.updateApd.resetHistory();
+    store.clearActions();
   });
 
   test('renders correctly', () => {
-    expect(shallow(<ApdPreviousActivityTable {...props} />)).toMatchSnapshot();
+    expect(
+      mount(
+        <Provider store={store}>
+          <ApdPreviousActivityTable />
+        </Provider>
+      )
+    ).toMatchSnapshot();
   });
 
   test('dispatches on a change', () => {
-    shallow(<ApdPreviousActivityTable {...props} />)
+    mount(
+      <Provider store={store}>
+        <ApdPreviousActivityTable />
+      </Provider>
+    )
       .find('DollarField[name="hithie-approved-total-1"]')
-      .simulate('change', { target: { value: 'new value' } });
+      .prop('onChange')({ target: { value: 'new value' } });
 
-    expect(
-      props.updateApd.calledWith({
-        previousActivityExpenses: {
-          '1': { hithie: { totalApproved: 'new value' } }
-        }
-      })
-    );
-  });
-
-  test('maps state to props', () => {
-    const state = {
-      apd: {
-        data: {
-          previousActivityExpenses: 'previous activities'
-        }
+    expect(store.getActions()).toEqual([
+      {
+        type: EDIT_APD,
+        path: '/previousActivityExpenses/1/hithie/totalApproved',
+        value: 'new value'
       }
-    };
-
-    expect(mapStateToProps(state)).toEqual({
-      previousActivityExpenses: 'previous activities'
-    });
-  });
-
-  test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ updateApd });
+    ]);
   });
 });

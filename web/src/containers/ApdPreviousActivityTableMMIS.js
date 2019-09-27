@@ -1,25 +1,75 @@
-import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import DollarField from '../components/DollarField';
 import Dollars from '../components/Dollars';
-import { updateApd } from '../actions/apd';
+import {
+  setPreviousActivityApprovedExpenseforMMIS50FFP,
+  setPreviousActivityApprovedExpenseforMMIS75FFP,
+  setPreviousActivityApprovedExpenseforMMIS90FFP,
+  setPreviousActivityFederalActualExpenseforMMIS50FFP,
+  setPreviousActivityFederalActualExpenseforMMIS75FFP,
+  setPreviousActivityFederalActualExpenseforMMIS90FFP
+} from '../actions/editApd';
 import { TABLE_HEADERS } from '../constants';
 
-const ApdPreviousActivityTableMMIS = ({
-  previousActivityExpenses,
-  updateApd: dispatchUpdateApd
-}) => {
+const ApdPreviousActivityTableMMIS = () => {
+  const dispatch = useDispatch();
+
+  const previousActivityExpenses = useSelector(
+    state => state.apd.data.previousActivityExpenses
+  );
+
   const years = Object.keys(previousActivityExpenses);
 
-  const handleChange = (year, level, type) => e => {
-    const update = {
-      previousActivityExpenses: {
-        [year]: { mmis: { [level]: { [type]: e.target.value } } }
-      }
-    };
-    dispatchUpdateApd(update);
+  const getActualsHandler = (year, ffp) => {
+    switch (+ffp) {
+      case 50:
+        return ({ target: { value } }) => {
+          dispatch(
+            setPreviousActivityFederalActualExpenseforMMIS50FFP(year, value)
+          );
+        };
+
+      case 75:
+        return ({ target: { value } }) => {
+          dispatch(
+            setPreviousActivityFederalActualExpenseforMMIS75FFP(year, value)
+          );
+        };
+
+      case 90:
+        return ({ target: { value } }) => {
+          dispatch(
+            setPreviousActivityFederalActualExpenseforMMIS90FFP(year, value)
+          );
+        };
+
+      default:
+        return () => {};
+    }
+  };
+
+  const getApprovedHandler = (year, ffp) => {
+    switch (+ffp) {
+      case 50:
+        return ({ target: { value } }) => {
+          dispatch(setPreviousActivityApprovedExpenseforMMIS50FFP(year, value));
+        };
+
+      case 75:
+        return ({ target: { value } }) => {
+          dispatch(setPreviousActivityApprovedExpenseforMMIS75FFP(year, value));
+        };
+
+      case 90:
+        return ({ target: { value } }) => {
+          dispatch(setPreviousActivityApprovedExpenseforMMIS90FFP(year, value));
+        };
+
+      default:
+        return () => {};
+    }
   };
 
   return (
@@ -86,7 +136,7 @@ const ApdPreviousActivityTableMMIS = ({
                       labelClassName="sr-only"
                       name={`approved-total-mmis${level}-${year}`}
                       value={expenses.totalApproved}
-                      onChange={handleChange(year, level, 'totalApproved')}
+                      onChange={getApprovedHandler(year, level)}
                     />
                   </td>
 
@@ -108,7 +158,7 @@ const ApdPreviousActivityTableMMIS = ({
                       labelClassName="sr-only"
                       name={`actual-federal-mmis${level}-${year}`}
                       value={expenses.federalActual}
-                      onChange={handleChange(year, level, 'federalActual')}
+                      onChange={getActualsHandler(year, level)}
                     />
                   </td>
                 </tr>
@@ -121,28 +171,4 @@ const ApdPreviousActivityTableMMIS = ({
   );
 };
 
-ApdPreviousActivityTableMMIS.propTypes = {
-  previousActivityExpenses: PropTypes.object.isRequired,
-  updateApd: PropTypes.func.isRequired
-};
-
-const mapStateToProps = ({
-  apd: {
-    data: { previousActivityExpenses }
-  }
-}) => ({
-  previousActivityExpenses
-});
-
-const mapDispatchToProps = { updateApd };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ApdPreviousActivityTableMMIS);
-
-export {
-  ApdPreviousActivityTableMMIS as plain,
-  mapStateToProps,
-  mapDispatchToProps
-};
+export default ApdPreviousActivityTableMMIS;

@@ -1,52 +1,56 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
 import React from 'react';
-import sinon from 'sinon';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 
-import { updateApd } from '../actions/apd';
+import PreviousActivities from './PreviousActivities';
+import { EDIT_APD } from '../actions/editApd';
 
-import {
-  plain as PreviousActivities,
-  mapStateToProps,
-  mapDispatchToProps
-} from './PreviousActivities';
+// The rich text editor explodes in Enzyme - literally it exhausts v8's memory
+// and crashes. So we can mock it to a do-nothing, since we're not actually
+// interested in testing it here.
+jest.mock('../components/RichText');
+
+// Also mock out these tables, because we don't want to test them here.
+jest.mock('./ApdPreviousActivityTable');
+jest.mock('./ApdPreviousActivityTableMMIS');
+jest.mock('./ApdPreviousActivityTableTotal');
+
+const mockStore = configureStore([thunk]);
 
 describe('previous activities component', () => {
+  const store = mockStore({
+    apd: { data: { previousActivitySummary: 'bob' } }
+  });
+
+  beforeEach(() => {
+    store.clearActions();
+  });
+
   test('renders correctly if data is not loaded', () => {
-    const component = shallow(
-      <PreviousActivities
-        previousActivitySummary="previous"
-        updateApd={() => {}}
-      />
+    const component = mount(
+      <Provider store={store}>
+        <PreviousActivities />
+      </Provider>
     );
     expect(component).toMatchSnapshot();
   });
 
   test('updates on text change', () => {
-    const updateApdProps = sinon.spy();
-    const component = shallow(
-      <PreviousActivities
-        previousActivitySummary="previous"
-        updateApd={updateApdProps}
-      />
+    const component = mount(
+      <Provider store={store}>
+        <PreviousActivities />
+      </Provider>
     );
     component.find('RichText').prop('onSync')('this is html');
 
-    expect(
-      updateApdProps.calledWith({ previousActivitySummary: 'this is html' })
-    ).toBeTruthy();
-  });
-
-  test('maps state to props', () => {
-    const state = {
-      apd: { data: { previousActivitySummary: 'moop moop' } }
-    };
-
-    expect(mapStateToProps(state)).toEqual({
-      previousActivitySummary: 'moop moop'
-    });
-  });
-
-  test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ updateApd });
+    expect(store.getActions()).toEqual([
+      {
+        type: EDIT_APD,
+        path: '/previousActivitySummary',
+        value: 'this is html'
+      }
+    ]);
   });
 });

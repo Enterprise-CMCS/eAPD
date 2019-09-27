@@ -1,47 +1,225 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`previous activities component renders correctly if data is not loaded 1`] = `
-<Connect(ConnectedWaypoint)
-  id="prev-activities-overview"
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
 >
-  <Section
-    id="prev-activities"
-    isNumbered={true}
-    resource="previousActivities"
-  >
+  <PreviousActivities>
     <Connect(ConnectedWaypoint)
-      id="prev-activities-outline"
-    />
-    <Subsection
-      headerClassName={null}
-      id="prev-activities-outline"
-      nested={false}
-      resource="previousActivities.outline"
+      id="prev-activities-overview"
     >
-      <h4
-        className="ds-c-label"
+      <ConnectedWaypoint
+        id="prev-activities-overview"
+        scrollTo={[Function]}
       >
-        Previous Activities Summary
-      </h4>
-      <RichText
-        content="previous"
-        editorClassName="rte-textarea-l"
-        onSync={[Function]}
-      />
-    </Subsection>
-    <Connect(ConnectedWaypoint)
-      id="prev-activities-table"
-    />
-    <Subsection
-      headerClassName={null}
-      id="prev-activities-table"
-      nested={false}
-      resource="previousActivities.actualExpenses"
-    >
-      <Connect(ApdPreviousActivityTable) />
-      <Connect(ApdPreviousActivityTableMMIS) />
-      <Connect(ApdPreviousActivityTableMMIS) />
-    </Subsection>
-  </Section>
-</Connect(ConnectedWaypoint)>
+        <Waypoint
+          bottomOffset="90%"
+          debug={false}
+          fireOnRapidScroll={true}
+          horizontal={false}
+          onEnter={[Function]}
+          onLeave={[Function]}
+          onPositionChange={[Function]}
+          topOffset="0px"
+        >
+          <span
+            style={
+              Object {
+                "fontSize": 0,
+              }
+            }
+          />
+        </Waypoint>
+        <Section
+          id="prev-activities"
+          isNumbered={true}
+          resource="previousActivities"
+        >
+          <section
+            className="numbered-section"
+            id="prev-activities"
+          >
+            <h2
+              className="ds-h2"
+            >
+              Results of Previous Activities
+            </h2>
+            <span
+              className="ds-text--lead"
+            >
+              Describe the results of the program’s activities approved in the previous APD. This includes both the current status of those activities and the costs associated with them.
+            </span>
+            <Connect(ConnectedWaypoint)
+              id="prev-activities-outline"
+            >
+              <ConnectedWaypoint
+                id="prev-activities-outline"
+                scrollTo={[Function]}
+              >
+                <Waypoint
+                  bottomOffset="90%"
+                  debug={false}
+                  fireOnRapidScroll={true}
+                  horizontal={false}
+                  onEnter={[Function]}
+                  onLeave={[Function]}
+                  onPositionChange={[Function]}
+                  topOffset="0px"
+                >
+                  <span
+                    style={
+                      Object {
+                        "fontSize": 0,
+                      }
+                    }
+                  />
+                </Waypoint>
+              </ConnectedWaypoint>
+            </Connect(ConnectedWaypoint)>
+            <Subsection
+              headerClassName={null}
+              id="prev-activities-outline"
+              nested={false}
+              resource="previousActivities.outline"
+            >
+              <h3
+                className=" subsection--title ds-h3"
+                id="prev-activities-outline"
+              >
+                Prior Activities Overview
+              </h3>
+              <Instruction
+                args={null}
+                headingDisplay={
+                  Object {
+                    "className": "ds-h3",
+                    "level": "h3",
+                  }
+                }
+                reverse={false}
+                source="previousActivities.outline.instruction"
+              >
+                <div>
+                  <div
+                    className="visibility--screen"
+                  >
+                    <p
+                      className="ds-u-font-weight--bold"
+                    >
+                      Summarize previous activities.
+                    </p>
+                    <Md
+                      content="Provide a high level description of the activities that are completed, in-progress, or on-hold."
+                      wrapper="p"
+                    >
+                      <p
+                        dangerouslySetInnerHTML={
+                          Object {
+                            "__html": "Provide a high level description of the activities that are completed, in-progress, or on-hold.",
+                          }
+                        }
+                      />
+                    </Md>
+                  </div>
+                </div>
+              </Instruction>
+              <h4
+                className="ds-c-label"
+              >
+                Previous Activities Summary
+              </h4>
+              <RichText
+                content="bob"
+                editorClassName="rte-textarea-l"
+                onSync={[Function]}
+              />
+            </Subsection>
+            <Connect(ConnectedWaypoint)
+              id="prev-activities-table"
+            >
+              <ConnectedWaypoint
+                id="prev-activities-table"
+                scrollTo={[Function]}
+              >
+                <Waypoint
+                  bottomOffset="90%"
+                  debug={false}
+                  fireOnRapidScroll={true}
+                  horizontal={false}
+                  onEnter={[Function]}
+                  onLeave={[Function]}
+                  onPositionChange={[Function]}
+                  topOffset="0px"
+                >
+                  <span
+                    style={
+                      Object {
+                        "fontSize": 0,
+                      }
+                    }
+                  />
+                </Waypoint>
+              </ConnectedWaypoint>
+            </Connect(ConnectedWaypoint)>
+            <Subsection
+              headerClassName={null}
+              id="prev-activities-table"
+              nested={false}
+              resource="previousActivities.actualExpenses"
+            >
+              <h3
+                className=" subsection--title ds-h3"
+                id="prev-activities-table"
+              >
+                Actual Costs
+              </h3>
+              <Instruction
+                args={null}
+                headingDisplay={
+                  Object {
+                    "className": "ds-h3",
+                    "level": "h3",
+                  }
+                }
+                reverse={false}
+                source="previousActivities.actualExpenses.instruction"
+              >
+                <div>
+                  <div
+                    className="visibility--screen"
+                  >
+                    <Md
+                      content="Input the most recent approved and actual costs."
+                      wrapper="p"
+                    >
+                      <p
+                        dangerouslySetInnerHTML={
+                          Object {
+                            "__html": "Input the most recent approved and actual costs.",
+                          }
+                        }
+                      />
+                    </Md>
+                  </div>
+                </div>
+              </Instruction>
+              <Connect(ApdPreviousActivityTable) />
+              <Connect(ApdPreviousActivityTableMMIS) />
+              <Connect(ApdPreviousActivityTableMMIS) />
+            </Subsection>
+          </section>
+        </Section>
+      </ConnectedWaypoint>
+    </Connect(ConnectedWaypoint)>
+  </PreviousActivities>
+</Provider>
 `;
