@@ -16,8 +16,84 @@ import {
   WITHDRAW_APD_SUCCESS,
   SAVE_APD_SUCCESS
 } from '../actions/apd';
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../actions/editApd';
+import {
+  ADD_APD_ITEM,
+  ADD_APD_YEAR,
+  EDIT_APD,
+  REMOVE_APD_ITEM,
+  REMOVE_APD_YEAR
+} from '../actions/editApd';
 import { defaultAPDYearOptions, generateKey } from '../util';
+
+export const getPatchesToAddYear = (state, year) => {
+  const years = [...state.data.years, year].sort();
+  const patches = [
+    { op: 'replace', path: '/years', value: years },
+    {
+      op: 'add',
+      path: `/incentivePayments/ehAmt/${year}`,
+      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+    },
+    {
+      op: 'add',
+      path: `/incentivePayments/ehCt/${year}`,
+      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+    },
+    {
+      op: 'add',
+      path: `/incentivePayments/epAmt/${year}`,
+      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+    },
+    {
+      op: 'add',
+      path: `/incentivePayments/epCt/${year}`,
+      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+    }
+  ];
+
+  state.data.keyPersonnel.forEach((_, i) => {
+    patches.push({
+      op: 'add',
+      path: `/keyPersonnel/${i}/costs/${year}`,
+      value: 0
+    });
+  });
+
+  return patches;
+};
+
+export const getPatchesToRemoveYear = (state, year) => {
+  const index = state.data.years.indexOf(year);
+
+  const patches = [
+    { op: 'remove', path: `/years/${index}` },
+    {
+      op: 'remove',
+      path: `/incentivePayments/ehAmt/${year}`
+    },
+    {
+      op: 'remove',
+      path: `/incentivePayments/ehCt/${year}`
+    },
+    {
+      op: 'remove',
+      path: `/incentivePayments/epAmt/${year}`
+    },
+    {
+      op: 'remove',
+      path: `/incentivePayments/epCt/${year}`
+    }
+  ];
+
+  state.data.keyPersonnel.forEach((_, i) => {
+    patches.push({
+      op: 'remove',
+      path: `/keyPersonnel/${i}/costs/${year}`
+    });
+  });
+
+  return patches;
+};
 
 const getHumanTimestamp = iso8601 => {
   const d = new Date(iso8601);
@@ -96,6 +172,11 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case ADD_APD_YEAR: {
+      const patches = getPatchesToAddYear(state, action.value);
+      return { ...state, data: applyPatch(state.data, patches) };
+    }
+
     case EDIT_APD: {
       return {
         ...state,
@@ -119,6 +200,11 @@ const reducer = (state = initialState, action) => {
           }
         ])
       };
+    }
+
+    case REMOVE_APD_YEAR: {
+      const patches = getPatchesToRemoveYear(state, action.value);
+      return { ...state, data: applyPatch(state.data, patches) };
     }
 
     // ------------------

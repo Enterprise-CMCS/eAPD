@@ -12,6 +12,7 @@ const mockClock = sinon.useFakeTimers(new Date(1972, 11, 13).getTime());
 // library computes years as soon as it's loaded, so...  require() is left
 // alone, so it will come after the clock fakery.  :pixar-joy:
 const imported = require('./activities');
+const { ADD_APD_YEAR, REMOVE_APD_YEAR } = require('../actions/editApd');
 
 const activities = imported.default;
 const { setKeyGenerator } = imported;
@@ -412,146 +413,248 @@ describe('activities reducer', () => {
     });
   });
 
-  describe('it responds to APD updates', () => {
-    const type = 'UPDATE_APD';
+  it('handles adding an APD year', () => {
+    const state = {
+      byKey: {
+        activityKey: {
+          costAllocation: {
+            '1888': 'yes',
+            '1890': 'no'
+          },
+          contractorResources: [
+            {
+              hourly: {
+                data: {
+                  '1888': { hours: 20, rate: 22 },
+                  '1890': { hours: 25, rate: 27 }
+                }
+              },
+              years: {
+                '1888': 0,
+                '1890': 0
+              }
+            }
+          ],
+          expenses: [
+            {
+              years: {
+                '1888': 0,
+                '1890': 0
+              }
+            }
+          ],
+          quarterlyFFP: {
+            '1888': 'sometimes',
+            '1890': 'rarely'
+          },
+          statePersonnel: [
+            {
+              years: {
+                '1888': 0,
+                '1890': 0
+              }
+            }
+          ],
+          years: ['1888', '1890']
+        }
+      }
+    };
 
-    it(`doesn't do anything if APD years aren't being updated`, () => {
-      expect(activities(stateWithOne, { type, updates: {} })).toEqual(
-        stateWithOne
-      );
+    expect(activities(state, { type: ADD_APD_YEAR, value: '1889' })).toEqual({
+      byKey: {
+        activityKey: {
+          costAllocation: {
+            '1888': 'yes',
+            '1889': { other: 0, ffp: { federal: 90, state: 10 } },
+            '1890': 'no'
+          },
+          contractorResources: [
+            {
+              hourly: {
+                data: {
+                  '1888': { hours: 20, rate: 22 },
+                  '1889': { hours: '', rate: '' },
+                  '1890': { hours: 25, rate: 27 }
+                }
+              },
+              years: {
+                '1888': 0,
+                '1889': 0,
+                '1890': 0
+              }
+            }
+          ],
+          expenses: [
+            {
+              years: {
+                '1888': 0,
+                '1889': 0,
+                '1890': 0
+              }
+            }
+          ],
+          quarterlyFFP: {
+            '1888': 'sometimes',
+            '1889': {
+              1: {
+                state: 25,
+                contractors: 25,
+                combined: 25
+              },
+              2: {
+                state: 25,
+                contractors: 25,
+                combined: 25
+              },
+              3: {
+                state: 25,
+                contractors: 25,
+                combined: 25
+              },
+              4: {
+                state: 25,
+                contractors: 25,
+                combined: 25
+              }
+            },
+            '1890': 'rarely'
+          },
+          statePersonnel: [
+            {
+              years: {
+                '1888': 0,
+                '1889': { amt: '', perc: '' },
+                '1890': 0
+              }
+            }
+          ],
+          years: ['1888', '1889', '1890']
+        }
+      }
     });
+  });
 
-    it('adds year-based pieces if a new year was added', () => {
-      expect(
-        activities(stateWithOne, {
-          type,
-          updates: { years: ['1973', '1974', '1975'] }
-        })
-      ).toEqual({
-        ...stateWithOne,
+  it('handles removing an APD year', () => {
+    const state = {
+      byKey: {
+        activityKey: {
+          costAllocation: {
+            '1888': 'yes',
+            '1889': { other: 0, ffp: { federal: 90, state: 10 } },
+            '1890': 'no'
+          },
+          contractorResources: [
+            {
+              hourly: {
+                data: {
+                  '1888': { hours: 20, rate: 22 },
+                  '1889': { hours: '', rate: '' },
+                  '1890': { hours: 25, rate: 27 }
+                }
+              },
+              years: {
+                '1888': 0,
+                '1889': 0,
+                '1890': 0
+              }
+            }
+          ],
+          expenses: [
+            {
+              years: {
+                '1888': 0,
+                '1889': 0,
+                '1890': 0
+              }
+            }
+          ],
+          quarterlyFFP: {
+            '1888': 'sometimes',
+            '1889': {
+              1: {
+                state: 25,
+                contractors: 25,
+                combined: 25
+              },
+              2: {
+                state: 25,
+                contractors: 25,
+                combined: 25
+              },
+              3: {
+                state: 25,
+                contractors: 25,
+                combined: 25
+              },
+              4: {
+                state: 25,
+                contractors: 25,
+                combined: 25
+              }
+            },
+            '1890': 'rarely'
+          },
+          statePersonnel: [
+            {
+              years: {
+                '1888': 0,
+                '1889': { amt: '', perc: '' },
+                '1890': 0
+              }
+            }
+          ],
+          years: ['1888', '1889', '1890']
+        }
+      }
+    };
+
+    expect(activities(state, { type: REMOVE_APD_YEAR, value: '1889' })).toEqual(
+      {
         byKey: {
-          '1': {
-            ...stateWithOne.byKey['1'],
+          activityKey: {
+            costAllocation: {
+              '1888': 'yes',
+              '1890': 'no'
+            },
             contractorResources: [
               {
-                ...stateWithOne.byKey['1'].contractorResources[0],
                 hourly: {
-                  ...stateWithOne.byKey['1'].contractorResources[0].hourly,
                   data: {
-                    ...stateWithOne.byKey['1'].contractorResources[0].hourly
-                      .data,
-                    '1975': { hours: '', rate: '' }
+                    '1888': { hours: 20, rate: 22 },
+                    '1890': { hours: 25, rate: 27 }
                   }
                 },
                 years: {
-                  ...stateWithOne.byKey['1'].contractorResources[0].years,
-                  '1975': 0
+                  '1888': 0,
+                  '1890': 0
                 }
               }
             ],
-            costAllocation: {
-              ...stateWithOne.byKey['1'].costAllocation,
-              '1975': { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
             expenses: [
               {
-                ...stateWithOne.byKey['1'].expenses[0],
                 years: {
-                  ...stateWithOne.byKey['1'].expenses[0].years,
-                  '1975': 0
-                }
-              }
-            ],
-            statePersonnel: [
-              {
-                ...stateWithOne.byKey['1'].statePersonnel[0],
-                years: {
-                  ...stateWithOne.byKey['1'].statePersonnel[0].years,
-                  '1975': { amt: '', perc: '' }
+                  '1888': 0,
+                  '1890': 0
                 }
               }
             ],
             quarterlyFFP: {
-              ...stateWithOne.byKey['1'].quarterlyFFP,
-              '1975': {
-                '1': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
-                },
-                '2': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
-                },
-                '3': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
-                },
-                '4': {
-                  combined: 25,
-                  contractors: 25,
-                  state: 25
-                }
-              }
+              '1888': 'sometimes',
+              '1890': 'rarely'
             },
-            years: ['1973', '1974', '1975']
-          }
-        }
-      });
-    });
-
-    it('removes year-based pieces if a year was removed', () => {
-      expect(
-        activities(stateWithOne, { type, updates: { years: ['1973'] } })
-      ).toEqual({
-        ...stateWithOne,
-        byKey: {
-          '1': {
-            ...stateWithOne.byKey['1'],
-            contractorResources: [
-              {
-                ...stateWithOne.byKey['1'].contractorResources[0],
-                hourly: {
-                  ...stateWithOne.byKey['1'].contractorResources[0].hourly,
-                  data: {
-                    '1973': { hours: '', rate: '' }
-                  }
-                },
-                years: {
-                  '1973': 0
-                }
-              }
-            ],
-            costAllocation: {
-              '1973': { ffp: { federal: 90, state: 10 }, other: 0 }
-            },
-            expenses: [
-              {
-                ...stateWithOne.byKey['1'].expenses[0],
-                years: {
-                  '1973': 0
-                }
-              }
-            ],
             statePersonnel: [
               {
-                ...stateWithOne.byKey['1'].statePersonnel[0],
                 years: {
-                  '1973': { amt: '', perc: '' }
+                  '1888': 0,
+                  '1890': 0
                 }
               }
             ],
-            quarterlyFFP: {
-              '1973': stateWithOne.byKey['1'].quarterlyFFP['1973'],
-              total: stateWithOne.byKey['1'].quarterlyFFP.total
-            },
-            years: ['1973']
+            years: ['1888', '1890']
           }
         }
-      });
-    });
+      }
+    );
   });
 
   describe('handles receiving an APD', () => {

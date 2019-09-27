@@ -1,8 +1,23 @@
 import u from 'updeep';
 
-import { getPatchesForAddingItem } from './apd';
 import { SAVE_APD_SUCCESS } from '../actions/apd';
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../actions/editApd';
+import {
+  ADD_APD_ITEM,
+  ADD_APD_YEAR,
+  EDIT_APD,
+  REMOVE_APD_ITEM,
+  REMOVE_APD_YEAR
+} from '../actions/editApd';
+
+import {
+  getPatchesForAddingItem as getApdPatchesForAddingItem,
+  getPatchesToAddYear as getApdPatchesToAddYear,
+  getPatchesToRemoveYear as getApdPatchesToRemoveYear
+} from './apd';
+import {
+  getPatchesToAddYear as getActivityPatchesToAddYear,
+  getPatchesToRemoveYear as getActivityPatchesToRemoveYear
+} from './activities';
 
 const initialState = [];
 
@@ -25,9 +40,16 @@ const reducer = (state = initialState, action) => {
       return initialState;
 
     case ADD_APD_ITEM: {
-      const patches = getPatchesForAddingItem(action.state.apd, action.path);
+      const patches = getApdPatchesForAddingItem(action.state.apd, action.path);
       return [...state, ...patches];
     }
+
+    case ADD_APD_YEAR:
+      return [
+        ...state,
+        ...getApdPatchesToAddYear(action.state.apd, action.value),
+        ...getActivityPatchesToAddYear(action.state.activities, action.value)
+      ];
 
     case EDIT_APD: {
       // If the last patch for the given path is already a replace, we can just
@@ -62,6 +84,13 @@ const reducer = (state = initialState, action) => {
 
     case REMOVE_APD_ITEM:
       return [...state, { op: 'remove', path: action.path }];
+
+    case REMOVE_APD_YEAR:
+      return [
+        ...state,
+        ...getApdPatchesToRemoveYear(action.state.apd, action.value),
+        ...getActivityPatchesToRemoveYear(action.state.activities, action.value)
+      ];
 
     default:
       return state;
