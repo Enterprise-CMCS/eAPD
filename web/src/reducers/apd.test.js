@@ -5,7 +5,7 @@ import sinon from 'sinon';
 // so that the stuff we import will use our faked-out clock.
 const mockClock = sinon.useFakeTimers(new Date(1990, 3, 24).getTime());
 
-const { default: apd } = require('./apd');
+const { default: apd, getPatchesForAddingItem } = require('./apd');
 const {
   SUBMIT_APD_SUCCESS,
   WITHDRAW_APD_SUCCESS,
@@ -460,5 +460,41 @@ describe('APD reducer', () => {
     expect(
       apd({ data: { status: 'not draft' } }, { type: WITHDRAW_APD_SUCCESS })
     ).toEqual({ data: { status: 'draft' } });
+  });
+});
+
+describe('APD reducer helper methods', () => {
+  describe('it can get patches for adding new APD items', () => {
+    it(`gets patches for paths that don't need anything special`, () => {
+      expect(getPatchesForAddingItem({}, '/fake/path')).toEqual([
+        { op: 'add', path: '/fake/path', value: null }
+      ]);
+    });
+
+    it('gets patches for adding a key personnel', () => {
+      expect(
+        getPatchesForAddingItem(
+          { data: { years: ['1', '2'] } },
+          '/keyPersonnel/-'
+        )
+      ).toEqual([
+        {
+          op: 'add',
+          path: '/keyPersonnel/-',
+          value: {
+            costs: { '1': 0, '2': 0 },
+            email: '',
+            expanded: true,
+            hasCosts: false,
+            isPrimary: false,
+            percentTime: 0,
+            name: '',
+            position: '',
+            key: expect.stringMatching(/^[a-f0-9]{8}$/),
+            initialCollapsed: false
+          }
+        }
+      ]);
+    });
   });
 });

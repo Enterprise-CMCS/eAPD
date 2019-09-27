@@ -68,7 +68,8 @@ describe('apd state profile, Medicaid office component', () => {
       expect(store.getActions()).toEqual([
         {
           type: ADD_APD_ITEM,
-          path: '/keyPersonnel/-'
+          path: '/keyPersonnel/-',
+          state
         }
       ]);
     });

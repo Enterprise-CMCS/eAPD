@@ -1,7 +1,8 @@
 import u from 'updeep';
 
+import { getPatchesForAddingItem } from './apd';
 import { SAVE_APD_SUCCESS } from '../actions/apd';
-import { EDIT_APD } from '../actions/editApd';
+import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../actions/editApd';
 
 const initialState = [];
 
@@ -22,6 +23,11 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_APD_SUCCESS:
       return initialState;
+
+    case ADD_APD_ITEM: {
+      const patches = getPatchesForAddingItem(action.state.apd, action.path);
+      return [...state, ...patches];
+    }
 
     case EDIT_APD: {
       // If the last patch for the given path is already a replace, we can just
@@ -53,6 +59,9 @@ const reducer = (state = initialState, action) => {
         { op: 'replace', path: action.path, value: action.value }
       ];
     }
+
+    case REMOVE_APD_ITEM:
+      return [...state, { op: 'remove', path: action.path }];
 
     default:
       return state;
