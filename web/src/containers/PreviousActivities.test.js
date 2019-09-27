@@ -17,6 +17,14 @@ jest.mock('./ApdPreviousActivityTable');
 jest.mock('./ApdPreviousActivityTableMMIS');
 jest.mock('./ApdPreviousActivityTableTotal');
 
+// And override their implementations as well. This isn't required for
+// connect()ed components, but they are for plain componetns for some reason.
+// I don't understand it, I just know it works.
+require('./ApdPreviousActivityTable').default.mockImplementation(() => null);
+require('./ApdPreviousActivityTableMMIS').default.mockImplementation(
+  () => null
+);
+
 const mockStore = configureStore([thunk]);
 
 describe('previous activities component', () => {
@@ -28,7 +36,7 @@ describe('previous activities component', () => {
     store.clearActions();
   });
 
-  test('renders correctly if data is not loaded', () => {
+  test('renders correctly', () => {
     const component = mount(
       <Provider store={store}>
         <PreviousActivities />

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`previous activities component renders correctly if data is not loaded 1`] = `
+exports[`previous activities component renders correctly 1`] = `
 <Provider
   store={
     Object {
@@ -212,8 +212,8 @@ exports[`previous activities component renders correctly if data is not loaded 1
                   </div>
                 </div>
               </Instruction>
-              <Connect(ApdPreviousActivityTable) />
-              <Connect(ApdPreviousActivityTableMMIS) />
+              <ApdPreviousActivityTable />
+              <ApdPreviousActivityTableMMIS />
               <Connect(ApdPreviousActivityTableMMIS) />
             </Subsection>
           </section>
