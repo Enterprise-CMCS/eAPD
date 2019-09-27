@@ -4,6 +4,16 @@ Anticipated release: TBD
 
 #### 🚀 New features
 
+#### 🐛 Bugs fixed
+
+#### 🐛 Bugs fixed
+
+# v1.1.0
+
+Released: September 27, 2019
+
+#### 🚀 New features
+
 - Attempt to alert users before automatically logging them out due to inactivity. The app will try to use built-in browser notifications as well as flashing the tab title. In browsers that support it, the app treats activity in any eAPD tab as valid, so all eAPD tabs will remain valid as long as at least one of them is getting activity. ([#1697])
 - Scroll the collapsed activity review panel into view after collapsing an activity form. This way, when you collapse an activity, you end up essentially looking at the list of activities again instead of being pushed way down the page. ([#1732])
 - Automatically select numeric form field contents when the field is focused if the current value is 0 ([#1736])
