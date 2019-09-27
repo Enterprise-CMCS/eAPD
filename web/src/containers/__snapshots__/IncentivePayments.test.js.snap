@@ -1,696 +1,2857 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`incentive payments component renders correctly 1`] = `
-<Fragment>
-  <table
-    className="budget-table"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <IncentivePayments>
+    <table
+      className="budget-table"
     >
-      FFY 1
-       Incentive Payments by Quarter
-    </caption>
-    <thead>
-      <tr>
-        <th>
-          <span
-            aria-hidden="true"
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 1
+         Incentive Payments by Quarter
+      </caption>
+      <thead>
+        <tr>
+          <th>
+            <span
+              aria-hidden="true"
+            >
+              FFY 1
+            </span>
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            key="1"
+            scope="col"
           >
-            FFY 1
-          </span>
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          key="1"
-          scope="col"
-        >
-          Q1
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          key="2"
-          scope="col"
-        >
-          Q2
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          key="3"
-          scope="col"
-        >
-          Q3
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          key="4"
-          scope="col"
-        >
-          Q4
-        </th>
-        <th
-          className="ds-u-text-align--right budget-table--subtotal budget-table--col__highlight"
-          scope="col"
-        >
-          Subtotal
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        key="ehAmt"
-      >
-        <th
-          scope="row"
-        >
-          EH Payments
-        </th>
-        <td
-          key="1"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="ehAmt payments for 1, quarter 1"
-            labelClassName="sr-only"
-            name="ehAmt-payments-1-q1"
-            onBlur={null}
-            onChange={[Function]}
-            value={2}
-          />
-        </td>
-        <td
-          key="2"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="ehAmt payments for 1, quarter 2"
-            labelClassName="sr-only"
-            name="ehAmt-payments-1-q2"
-            onBlur={null}
-            onChange={[Function]}
-            value={3}
-          />
-        </td>
-        <td
-          key="3"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="ehAmt payments for 1, quarter 3"
-            labelClassName="sr-only"
-            name="ehAmt-payments-1-q3"
-            onBlur={null}
-            onChange={[Function]}
-            value={4}
-          />
-        </td>
-        <td
-          key="4"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="ehAmt payments for 1, quarter 4"
-            labelClassName="sr-only"
-            name="ehAmt-payments-1-q4"
-            onBlur={null}
-            onChange={[Function]}
-            value=""
-          />
-        </td>
-        <td
-          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
-        >
-          <Dollars
-            long={false}
+            Q1
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            key="2"
+            scope="col"
           >
-            10
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        key="ehCt"
-      >
-        <th
-          scope="row"
-        >
-          EH Count (optional)
-        </th>
-        <td
-          key="1"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="ehCt payments for 1, quarter 1"
-            labelClassName="sr-only"
-            name="ehCt-payments-1-q1"
-            onChange={[Function]}
-            value={10}
-          />
-        </td>
-        <td
-          key="2"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="ehCt payments for 1, quarter 2"
-            labelClassName="sr-only"
-            name="ehCt-payments-1-q2"
-            onChange={[Function]}
-            value={11}
-          />
-        </td>
-        <td
-          key="3"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="ehCt payments for 1, quarter 3"
-            labelClassName="sr-only"
-            name="ehCt-payments-1-q3"
-            onChange={[Function]}
-            value={12}
-          />
-        </td>
-        <td
-          key="4"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="ehCt payments for 1, quarter 4"
-            labelClassName="sr-only"
-            name="ehCt-payments-1-q4"
-            onChange={[Function]}
-            value=""
-          />
-        </td>
-        <td
-          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
-        >
-          42
-        </td>
-      </tr>
-      <tr
-        key="epAmt"
-      >
-        <th
-          scope="row"
-        >
-          EP Payments
-        </th>
-        <td
-          key="1"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="epAmt payments for 1, quarter 1"
-            labelClassName="sr-only"
-            name="epAmt-payments-1-q1"
-            onBlur={null}
-            onChange={[Function]}
-            value={18}
-          />
-        </td>
-        <td
-          key="2"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="epAmt payments for 1, quarter 2"
-            labelClassName="sr-only"
-            name="epAmt-payments-1-q2"
-            onBlur={null}
-            onChange={[Function]}
-            value={19}
-          />
-        </td>
-        <td
-          key="3"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="epAmt payments for 1, quarter 3"
-            labelClassName="sr-only"
-            name="epAmt-payments-1-q3"
-            onBlur={null}
-            onChange={[Function]}
-            value={20}
-          />
-        </td>
-        <td
-          key="4"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="epAmt payments for 1, quarter 4"
-            labelClassName="sr-only"
-            name="epAmt-payments-1-q4"
-            onBlur={null}
-            onChange={[Function]}
-            value=""
-          />
-        </td>
-        <td
-          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
-        >
-          <Dollars
-            long={false}
+            Q2
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            key="3"
+            scope="col"
           >
-            74
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        key="epCt"
-      >
-        <th
-          scope="row"
-        >
-          EP Count (optional)
-        </th>
-        <td
-          key="1"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="epCt payments for 1, quarter 1"
-            labelClassName="sr-only"
-            name="epCt-payments-1-q1"
-            onChange={[Function]}
-            value={26}
-          />
-        </td>
-        <td
-          key="2"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="epCt payments for 1, quarter 2"
-            labelClassName="sr-only"
-            name="epCt-payments-1-q2"
-            onChange={[Function]}
-            value={27}
-          />
-        </td>
-        <td
-          key="3"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="epCt payments for 1, quarter 3"
-            labelClassName="sr-only"
-            name="epCt-payments-1-q3"
-            onChange={[Function]}
-            value={28}
-          />
-        </td>
-        <td
-          key="4"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="epCt payments for 1, quarter 4"
-            labelClassName="sr-only"
-            name="epCt-payments-1-q4"
-            onChange={[Function]}
-            value=""
-          />
-        </td>
-        <td
-          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
-        >
-          106
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <table
-    className="budget-table"
-  >
-    <caption
-      className="ds-u-visibility--screen-reader"
+            Q3
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            key="4"
+            scope="col"
+          >
+            Q4
+          </th>
+          <th
+            className="ds-u-text-align--right budget-table--subtotal budget-table--col__highlight"
+            scope="col"
+          >
+            Subtotal
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th
+            scope="row"
+          >
+            EH Payments
+          </th>
+          <td
+            key="1"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="ehAmt payments for 1, quarter 1"
+              labelClassName="sr-only"
+              name="ehAmt-payments-1-q1"
+              onBlur={null}
+              onChange={[Function]}
+              value={2}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="ehAmt payments for 1, quarter 1"
+                labelClassName="sr-only"
+                mask="currency"
+                name="ehAmt-payments-1-q1"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="2"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="ehAmt payments for 1, quarter 1. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_1"
+                        name="ehAmt-payments-1-q1"
+                        type="text"
+                        value="2"
+                      />,
+                    }
+                  }
+                  label="ehAmt payments for 1, quarter 1"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="ehAmt-payments-1-q1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="2"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_1"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_1"
+                      >
+                        <span
+                          className=""
+                        >
+                          ehAmt payments for 1, quarter 1
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="ehAmt payments for 1, quarter 1. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_1"
+                          name="ehAmt-payments-1-q1"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="2"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="2"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="ehAmt payments for 1, quarter 2"
+              labelClassName="sr-only"
+              name="ehAmt-payments-1-q2"
+              onBlur={null}
+              onChange={[Function]}
+              value={3}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="ehAmt payments for 1, quarter 2"
+                labelClassName="sr-only"
+                mask="currency"
+                name="ehAmt-payments-1-q2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="3"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="ehAmt payments for 1, quarter 2. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_2"
+                        name="ehAmt-payments-1-q2"
+                        type="text"
+                        value="3"
+                      />,
+                    }
+                  }
+                  label="ehAmt payments for 1, quarter 2"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="ehAmt-payments-1-q2"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="3"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_2"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_2"
+                      >
+                        <span
+                          className=""
+                        >
+                          ehAmt payments for 1, quarter 2
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="ehAmt payments for 1, quarter 2. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_2"
+                          name="ehAmt-payments-1-q2"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="3"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="3"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="ehAmt payments for 1, quarter 3"
+              labelClassName="sr-only"
+              name="ehAmt-payments-1-q3"
+              onBlur={null}
+              onChange={[Function]}
+              value={4}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="ehAmt payments for 1, quarter 3"
+                labelClassName="sr-only"
+                mask="currency"
+                name="ehAmt-payments-1-q3"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="4"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="ehAmt payments for 1, quarter 3. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_3"
+                        name="ehAmt-payments-1-q3"
+                        type="text"
+                        value="4"
+                      />,
+                    }
+                  }
+                  label="ehAmt payments for 1, quarter 3"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="ehAmt-payments-1-q3"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="4"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_3"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_3"
+                      >
+                        <span
+                          className=""
+                        >
+                          ehAmt payments for 1, quarter 3
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="ehAmt payments for 1, quarter 3. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_3"
+                          name="ehAmt-payments-1-q3"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="4"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="4"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="ehAmt payments for 1, quarter 4"
+              labelClassName="sr-only"
+              name="ehAmt-payments-1-q4"
+              onBlur={null}
+              onChange={[Function]}
+              value=""
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="ehAmt payments for 1, quarter 4"
+                labelClassName="sr-only"
+                mask="currency"
+                name="ehAmt-payments-1-q4"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="0"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="ehAmt payments for 1, quarter 4. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_4"
+                        name="ehAmt-payments-1-q4"
+                        type="text"
+                        value="0"
+                      />,
+                    }
+                  }
+                  label="ehAmt payments for 1, quarter 4"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="ehAmt-payments-1-q4"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="0"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_4"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_4"
+                      >
+                        <span
+                          className=""
+                        >
+                          ehAmt payments for 1, quarter 4
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="ehAmt payments for 1, quarter 4. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_4"
+                          name="ehAmt-payments-1-q4"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="0"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          >
+            <Dollars
+              long={false}
+            >
+              <span
+                className="visibility--screen"
+              >
+                $10
+              </span>
+              <span
+                className="visibility--print"
+              >
+                $10
+              </span>
+            </Dollars>
+          </td>
+        </tr>
+        <tr>
+          <th
+            scope="row"
+          >
+            EH Count (optional)
+          </th>
+          <td
+            key="1"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="ehCt payments for 1, quarter 1"
+              labelClassName="sr-only"
+              name="ehCt-payments-1-q1"
+              onChange={[Function]}
+              value={10}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_5"
+                      name="ehCt-payments-1-q1"
+                      type="text"
+                      value="10"
+                    />,
+                  }
+                }
+                label="ehCt payments for 1, quarter 1"
+                labelClassName="sr-only"
+                name="ehCt-payments-1-q1"
+                onChange={[Function]}
+                type="text"
+                value={10}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_5"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_5"
+                    >
+                      <span
+                        className=""
+                      >
+                        ehCt payments for 1, quarter 1
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_5"
+                    name="ehCt-payments-1-q1"
+                    onChange={[Function]}
+                    type="text"
+                    value={10}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="2"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="ehCt payments for 1, quarter 2"
+              labelClassName="sr-only"
+              name="ehCt-payments-1-q2"
+              onChange={[Function]}
+              value={11}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_6"
+                      name="ehCt-payments-1-q2"
+                      type="text"
+                      value="11"
+                    />,
+                  }
+                }
+                label="ehCt payments for 1, quarter 2"
+                labelClassName="sr-only"
+                name="ehCt-payments-1-q2"
+                onChange={[Function]}
+                type="text"
+                value={11}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_6"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_6"
+                    >
+                      <span
+                        className=""
+                      >
+                        ehCt payments for 1, quarter 2
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_6"
+                    name="ehCt-payments-1-q2"
+                    onChange={[Function]}
+                    type="text"
+                    value={11}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="3"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="ehCt payments for 1, quarter 3"
+              labelClassName="sr-only"
+              name="ehCt-payments-1-q3"
+              onChange={[Function]}
+              value={12}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_7"
+                      name="ehCt-payments-1-q3"
+                      type="text"
+                      value="12"
+                    />,
+                  }
+                }
+                label="ehCt payments for 1, quarter 3"
+                labelClassName="sr-only"
+                name="ehCt-payments-1-q3"
+                onChange={[Function]}
+                type="text"
+                value={12}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_7"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_7"
+                    >
+                      <span
+                        className=""
+                      >
+                        ehCt payments for 1, quarter 3
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_7"
+                    name="ehCt-payments-1-q3"
+                    onChange={[Function]}
+                    type="text"
+                    value={12}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="4"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="ehCt payments for 1, quarter 4"
+              labelClassName="sr-only"
+              name="ehCt-payments-1-q4"
+              onChange={[Function]}
+              value=""
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_8"
+                      name="ehCt-payments-1-q4"
+                      type="text"
+                      value=""
+                    />,
+                  }
+                }
+                label="ehCt payments for 1, quarter 4"
+                labelClassName="sr-only"
+                name="ehCt-payments-1-q4"
+                onChange={[Function]}
+                type="text"
+                value=""
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_8"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_8"
+                    >
+                      <span
+                        className=""
+                      >
+                        ehCt payments for 1, quarter 4
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_8"
+                    name="ehCt-payments-1-q4"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          >
+            42
+          </td>
+        </tr>
+        <tr>
+          <th
+            scope="row"
+          >
+            EP Payments
+          </th>
+          <td
+            key="1"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="epAmt payments for 1, quarter 1"
+              labelClassName="sr-only"
+              name="epAmt-payments-1-q1"
+              onBlur={null}
+              onChange={[Function]}
+              value={18}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="epAmt payments for 1, quarter 1"
+                labelClassName="sr-only"
+                mask="currency"
+                name="epAmt-payments-1-q1"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="18"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="epAmt payments for 1, quarter 1. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_9"
+                        name="epAmt-payments-1-q1"
+                        type="text"
+                        value="18"
+                      />,
+                    }
+                  }
+                  label="epAmt payments for 1, quarter 1"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="epAmt-payments-1-q1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="18"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_9"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_9"
+                      >
+                        <span
+                          className=""
+                        >
+                          epAmt payments for 1, quarter 1
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="epAmt payments for 1, quarter 1. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_9"
+                          name="epAmt-payments-1-q1"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="18"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="2"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="epAmt payments for 1, quarter 2"
+              labelClassName="sr-only"
+              name="epAmt-payments-1-q2"
+              onBlur={null}
+              onChange={[Function]}
+              value={19}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="epAmt payments for 1, quarter 2"
+                labelClassName="sr-only"
+                mask="currency"
+                name="epAmt-payments-1-q2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="19"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="epAmt payments for 1, quarter 2. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_10"
+                        name="epAmt-payments-1-q2"
+                        type="text"
+                        value="19"
+                      />,
+                    }
+                  }
+                  label="epAmt payments for 1, quarter 2"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="epAmt-payments-1-q2"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="19"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_10"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_10"
+                      >
+                        <span
+                          className=""
+                        >
+                          epAmt payments for 1, quarter 2
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="epAmt payments for 1, quarter 2. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_10"
+                          name="epAmt-payments-1-q2"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="19"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="3"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="epAmt payments for 1, quarter 3"
+              labelClassName="sr-only"
+              name="epAmt-payments-1-q3"
+              onBlur={null}
+              onChange={[Function]}
+              value={20}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="epAmt payments for 1, quarter 3"
+                labelClassName="sr-only"
+                mask="currency"
+                name="epAmt-payments-1-q3"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="20"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="epAmt payments for 1, quarter 3. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_11"
+                        name="epAmt-payments-1-q3"
+                        type="text"
+                        value="20"
+                      />,
+                    }
+                  }
+                  label="epAmt payments for 1, quarter 3"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="epAmt-payments-1-q3"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="20"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_11"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_11"
+                      >
+                        <span
+                          className=""
+                        >
+                          epAmt payments for 1, quarter 3
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="epAmt payments for 1, quarter 3. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_11"
+                          name="epAmt-payments-1-q3"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="20"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="4"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="epAmt payments for 1, quarter 4"
+              labelClassName="sr-only"
+              name="epAmt-payments-1-q4"
+              onBlur={null}
+              onChange={[Function]}
+              value=""
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="epAmt payments for 1, quarter 4"
+                labelClassName="sr-only"
+                mask="currency"
+                name="epAmt-payments-1-q4"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="0"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="epAmt payments for 1, quarter 4. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_12"
+                        name="epAmt-payments-1-q4"
+                        type="text"
+                        value="0"
+                      />,
+                    }
+                  }
+                  label="epAmt payments for 1, quarter 4"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="epAmt-payments-1-q4"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="0"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_12"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_12"
+                      >
+                        <span
+                          className=""
+                        >
+                          epAmt payments for 1, quarter 4
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="epAmt payments for 1, quarter 4. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_12"
+                          name="epAmt-payments-1-q4"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="0"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          >
+            <Dollars
+              long={false}
+            >
+              <span
+                className="visibility--screen"
+              >
+                $74
+              </span>
+              <span
+                className="visibility--print"
+              >
+                $74
+              </span>
+            </Dollars>
+          </td>
+        </tr>
+        <tr>
+          <th
+            scope="row"
+          >
+            EP Count (optional)
+          </th>
+          <td
+            key="1"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="epCt payments for 1, quarter 1"
+              labelClassName="sr-only"
+              name="epCt-payments-1-q1"
+              onChange={[Function]}
+              value={26}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_13"
+                      name="epCt-payments-1-q1"
+                      type="text"
+                      value="26"
+                    />,
+                  }
+                }
+                label="epCt payments for 1, quarter 1"
+                labelClassName="sr-only"
+                name="epCt-payments-1-q1"
+                onChange={[Function]}
+                type="text"
+                value={26}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_13"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_13"
+                    >
+                      <span
+                        className=""
+                      >
+                        epCt payments for 1, quarter 1
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_13"
+                    name="epCt-payments-1-q1"
+                    onChange={[Function]}
+                    type="text"
+                    value={26}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="2"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="epCt payments for 1, quarter 2"
+              labelClassName="sr-only"
+              name="epCt-payments-1-q2"
+              onChange={[Function]}
+              value={27}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_14"
+                      name="epCt-payments-1-q2"
+                      type="text"
+                      value="27"
+                    />,
+                  }
+                }
+                label="epCt payments for 1, quarter 2"
+                labelClassName="sr-only"
+                name="epCt-payments-1-q2"
+                onChange={[Function]}
+                type="text"
+                value={27}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_14"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_14"
+                    >
+                      <span
+                        className=""
+                      >
+                        epCt payments for 1, quarter 2
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_14"
+                    name="epCt-payments-1-q2"
+                    onChange={[Function]}
+                    type="text"
+                    value={27}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="3"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="epCt payments for 1, quarter 3"
+              labelClassName="sr-only"
+              name="epCt-payments-1-q3"
+              onChange={[Function]}
+              value={28}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_15"
+                      name="epCt-payments-1-q3"
+                      type="text"
+                      value="28"
+                    />,
+                  }
+                }
+                label="epCt payments for 1, quarter 3"
+                labelClassName="sr-only"
+                name="epCt-payments-1-q3"
+                onChange={[Function]}
+                type="text"
+                value={28}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_15"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_15"
+                    >
+                      <span
+                        className=""
+                      >
+                        epCt payments for 1, quarter 3
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_15"
+                    name="epCt-payments-1-q3"
+                    onChange={[Function]}
+                    type="text"
+                    value={28}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="4"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="epCt payments for 1, quarter 4"
+              labelClassName="sr-only"
+              name="epCt-payments-1-q4"
+              onChange={[Function]}
+              value=""
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_16"
+                      name="epCt-payments-1-q4"
+                      type="text"
+                      value=""
+                    />,
+                  }
+                }
+                label="epCt payments for 1, quarter 4"
+                labelClassName="sr-only"
+                name="epCt-payments-1-q4"
+                onChange={[Function]}
+                type="text"
+                value=""
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_16"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_16"
+                    >
+                      <span
+                        className=""
+                      >
+                        epCt payments for 1, quarter 4
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_16"
+                    name="epCt-payments-1-q4"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          >
+            106
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table
+      className="budget-table"
     >
-      FFY 2
-       Incentive Payments by Quarter
-    </caption>
-    <thead>
-      <tr>
-        <th>
-          <span
-            aria-hidden="true"
+      <caption
+        className="ds-u-visibility--screen-reader"
+      >
+        FFY 2
+         Incentive Payments by Quarter
+      </caption>
+      <thead>
+        <tr>
+          <th>
+            <span
+              aria-hidden="true"
+            >
+              FFY 2
+            </span>
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            key="1"
+            scope="col"
           >
-            FFY 2
-          </span>
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          key="1"
-          scope="col"
-        >
-          Q1
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          key="2"
-          scope="col"
-        >
-          Q2
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          key="3"
-          scope="col"
-        >
-          Q3
-        </th>
-        <th
-          className="ds-u-text-align--right"
-          key="4"
-          scope="col"
-        >
-          Q4
-        </th>
-        <th
-          className="ds-u-text-align--right budget-table--subtotal budget-table--col__highlight"
-          scope="col"
-        >
-          Subtotal
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        key="ehAmt"
-      >
-        <th
-          scope="row"
-        >
-          EH Payments
-        </th>
-        <td
-          key="1"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="ehAmt payments for 2, quarter 1"
-            labelClassName="sr-only"
-            name="ehAmt-payments-2-q1"
-            onBlur={null}
-            onChange={[Function]}
-            value={6}
-          />
-        </td>
-        <td
-          key="2"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="ehAmt payments for 2, quarter 2"
-            labelClassName="sr-only"
-            name="ehAmt-payments-2-q2"
-            onBlur={null}
-            onChange={[Function]}
-            value={7}
-          />
-        </td>
-        <td
-          key="3"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="ehAmt payments for 2, quarter 3"
-            labelClassName="sr-only"
-            name="ehAmt-payments-2-q3"
-            onBlur={null}
-            onChange={[Function]}
-            value={8}
-          />
-        </td>
-        <td
-          key="4"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="ehAmt payments for 2, quarter 4"
-            labelClassName="sr-only"
-            name="ehAmt-payments-2-q4"
-            onBlur={null}
-            onChange={[Function]}
-            value=""
-          />
-        </td>
-        <td
-          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
-        >
-          <Dollars
-            long={false}
+            Q1
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            key="2"
+            scope="col"
           >
-            26
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        key="ehCt"
-      >
-        <th
-          scope="row"
-        >
-          EH Count (optional)
-        </th>
-        <td
-          key="1"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="ehCt payments for 2, quarter 1"
-            labelClassName="sr-only"
-            name="ehCt-payments-2-q1"
-            onChange={[Function]}
-            value={14}
-          />
-        </td>
-        <td
-          key="2"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="ehCt payments for 2, quarter 2"
-            labelClassName="sr-only"
-            name="ehCt-payments-2-q2"
-            onChange={[Function]}
-            value={15}
-          />
-        </td>
-        <td
-          key="3"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="ehCt payments for 2, quarter 3"
-            labelClassName="sr-only"
-            name="ehCt-payments-2-q3"
-            onChange={[Function]}
-            value={16}
-          />
-        </td>
-        <td
-          key="4"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="ehCt payments for 2, quarter 4"
-            labelClassName="sr-only"
-            name="ehCt-payments-2-q4"
-            onChange={[Function]}
-            value=""
-          />
-        </td>
-        <td
-          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
-        >
-          58
-        </td>
-      </tr>
-      <tr
-        key="epAmt"
-      >
-        <th
-          scope="row"
-        >
-          EP Payments
-        </th>
-        <td
-          key="1"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="epAmt payments for 2, quarter 1"
-            labelClassName="sr-only"
-            name="epAmt-payments-2-q1"
-            onBlur={null}
-            onChange={[Function]}
-            value={22}
-          />
-        </td>
-        <td
-          key="2"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="epAmt payments for 2, quarter 2"
-            labelClassName="sr-only"
-            name="epAmt-payments-2-q2"
-            onBlur={null}
-            onChange={[Function]}
-            value={23}
-          />
-        </td>
-        <td
-          key="3"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="epAmt payments for 2, quarter 3"
-            labelClassName="sr-only"
-            name="epAmt-payments-2-q3"
-            onBlur={null}
-            onChange={[Function]}
-            value={24}
-          />
-        </td>
-        <td
-          key="4"
-        >
-          <DollarField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            label="epAmt payments for 2, quarter 4"
-            labelClassName="sr-only"
-            name="epAmt-payments-2-q4"
-            onBlur={null}
-            onChange={[Function]}
-            value=""
-          />
-        </td>
-        <td
-          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
-        >
-          <Dollars
-            long={false}
+            Q2
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            key="3"
+            scope="col"
           >
-            90
-          </Dollars>
-        </td>
-      </tr>
-      <tr
-        key="epCt"
-      >
-        <th
-          scope="row"
-        >
-          EP Count (optional)
-        </th>
-        <td
-          key="1"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="epCt payments for 2, quarter 1"
-            labelClassName="sr-only"
-            name="epCt-payments-2-q1"
-            onChange={[Function]}
-            value={30}
-          />
-        </td>
-        <td
-          key="2"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="epCt payments for 2, quarter 2"
-            labelClassName="sr-only"
-            name="epCt-payments-2-q2"
-            onChange={[Function]}
-            value={31}
-          />
-        </td>
-        <td
-          key="3"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="epCt payments for 2, quarter 3"
-            labelClassName="sr-only"
-            name="epCt-payments-2-q3"
-            onChange={[Function]}
-            value={32}
-          />
-        </td>
-        <td
-          key="4"
-        >
-          <NumberField
-            className="budget-table--input-holder"
-            fieldClassName="budget-table--input__number"
-            fieldRef={null}
-            label="epCt payments for 2, quarter 4"
-            labelClassName="sr-only"
-            name="epCt-payments-2-q4"
-            onChange={[Function]}
-            value=""
-          />
-        </td>
-        <td
-          className="budget-table--number budget-table--col__highlight budget-table--subtotal"
-        >
-          122
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</Fragment>
+            Q3
+          </th>
+          <th
+            className="ds-u-text-align--right"
+            key="4"
+            scope="col"
+          >
+            Q4
+          </th>
+          <th
+            className="ds-u-text-align--right budget-table--subtotal budget-table--col__highlight"
+            scope="col"
+          >
+            Subtotal
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th
+            scope="row"
+          >
+            EH Payments
+          </th>
+          <td
+            key="1"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="ehAmt payments for 2, quarter 1"
+              labelClassName="sr-only"
+              name="ehAmt-payments-2-q1"
+              onBlur={null}
+              onChange={[Function]}
+              value={6}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="ehAmt payments for 2, quarter 1"
+                labelClassName="sr-only"
+                mask="currency"
+                name="ehAmt-payments-2-q1"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="6"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="ehAmt payments for 2, quarter 1. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_17"
+                        name="ehAmt-payments-2-q1"
+                        type="text"
+                        value="6"
+                      />,
+                    }
+                  }
+                  label="ehAmt payments for 2, quarter 1"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="ehAmt-payments-2-q1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="6"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_17"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_17"
+                      >
+                        <span
+                          className=""
+                        >
+                          ehAmt payments for 2, quarter 1
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="ehAmt payments for 2, quarter 1. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_17"
+                          name="ehAmt-payments-2-q1"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="6"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="2"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="ehAmt payments for 2, quarter 2"
+              labelClassName="sr-only"
+              name="ehAmt-payments-2-q2"
+              onBlur={null}
+              onChange={[Function]}
+              value={7}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="ehAmt payments for 2, quarter 2"
+                labelClassName="sr-only"
+                mask="currency"
+                name="ehAmt-payments-2-q2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="7"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="ehAmt payments for 2, quarter 2. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_18"
+                        name="ehAmt-payments-2-q2"
+                        type="text"
+                        value="7"
+                      />,
+                    }
+                  }
+                  label="ehAmt payments for 2, quarter 2"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="ehAmt-payments-2-q2"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="7"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_18"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_18"
+                      >
+                        <span
+                          className=""
+                        >
+                          ehAmt payments for 2, quarter 2
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="ehAmt payments for 2, quarter 2. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_18"
+                          name="ehAmt-payments-2-q2"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="7"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="3"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="ehAmt payments for 2, quarter 3"
+              labelClassName="sr-only"
+              name="ehAmt-payments-2-q3"
+              onBlur={null}
+              onChange={[Function]}
+              value={8}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="ehAmt payments for 2, quarter 3"
+                labelClassName="sr-only"
+                mask="currency"
+                name="ehAmt-payments-2-q3"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="8"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="ehAmt payments for 2, quarter 3. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_19"
+                        name="ehAmt-payments-2-q3"
+                        type="text"
+                        value="8"
+                      />,
+                    }
+                  }
+                  label="ehAmt payments for 2, quarter 3"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="ehAmt-payments-2-q3"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="8"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_19"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_19"
+                      >
+                        <span
+                          className=""
+                        >
+                          ehAmt payments for 2, quarter 3
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="ehAmt payments for 2, quarter 3. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_19"
+                          name="ehAmt-payments-2-q3"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="8"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="4"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="ehAmt payments for 2, quarter 4"
+              labelClassName="sr-only"
+              name="ehAmt-payments-2-q4"
+              onBlur={null}
+              onChange={[Function]}
+              value=""
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="ehAmt payments for 2, quarter 4"
+                labelClassName="sr-only"
+                mask="currency"
+                name="ehAmt-payments-2-q4"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="0"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="ehAmt payments for 2, quarter 4. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_20"
+                        name="ehAmt-payments-2-q4"
+                        type="text"
+                        value="0"
+                      />,
+                    }
+                  }
+                  label="ehAmt payments for 2, quarter 4"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="ehAmt-payments-2-q4"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="0"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_20"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_20"
+                      >
+                        <span
+                          className=""
+                        >
+                          ehAmt payments for 2, quarter 4
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="ehAmt payments for 2, quarter 4. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_20"
+                          name="ehAmt-payments-2-q4"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="0"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          >
+            <Dollars
+              long={false}
+            >
+              <span
+                className="visibility--screen"
+              >
+                $26
+              </span>
+              <span
+                className="visibility--print"
+              >
+                $26
+              </span>
+            </Dollars>
+          </td>
+        </tr>
+        <tr>
+          <th
+            scope="row"
+          >
+            EH Count (optional)
+          </th>
+          <td
+            key="1"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="ehCt payments for 2, quarter 1"
+              labelClassName="sr-only"
+              name="ehCt-payments-2-q1"
+              onChange={[Function]}
+              value={14}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_21"
+                      name="ehCt-payments-2-q1"
+                      type="text"
+                      value="14"
+                    />,
+                  }
+                }
+                label="ehCt payments for 2, quarter 1"
+                labelClassName="sr-only"
+                name="ehCt-payments-2-q1"
+                onChange={[Function]}
+                type="text"
+                value={14}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_21"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_21"
+                    >
+                      <span
+                        className=""
+                      >
+                        ehCt payments for 2, quarter 1
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_21"
+                    name="ehCt-payments-2-q1"
+                    onChange={[Function]}
+                    type="text"
+                    value={14}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="2"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="ehCt payments for 2, quarter 2"
+              labelClassName="sr-only"
+              name="ehCt-payments-2-q2"
+              onChange={[Function]}
+              value={15}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_22"
+                      name="ehCt-payments-2-q2"
+                      type="text"
+                      value="15"
+                    />,
+                  }
+                }
+                label="ehCt payments for 2, quarter 2"
+                labelClassName="sr-only"
+                name="ehCt-payments-2-q2"
+                onChange={[Function]}
+                type="text"
+                value={15}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_22"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_22"
+                    >
+                      <span
+                        className=""
+                      >
+                        ehCt payments for 2, quarter 2
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_22"
+                    name="ehCt-payments-2-q2"
+                    onChange={[Function]}
+                    type="text"
+                    value={15}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="3"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="ehCt payments for 2, quarter 3"
+              labelClassName="sr-only"
+              name="ehCt-payments-2-q3"
+              onChange={[Function]}
+              value={16}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_23"
+                      name="ehCt-payments-2-q3"
+                      type="text"
+                      value="16"
+                    />,
+                  }
+                }
+                label="ehCt payments for 2, quarter 3"
+                labelClassName="sr-only"
+                name="ehCt-payments-2-q3"
+                onChange={[Function]}
+                type="text"
+                value={16}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_23"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_23"
+                    >
+                      <span
+                        className=""
+                      >
+                        ehCt payments for 2, quarter 3
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_23"
+                    name="ehCt-payments-2-q3"
+                    onChange={[Function]}
+                    type="text"
+                    value={16}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="4"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="ehCt payments for 2, quarter 4"
+              labelClassName="sr-only"
+              name="ehCt-payments-2-q4"
+              onChange={[Function]}
+              value=""
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_24"
+                      name="ehCt-payments-2-q4"
+                      type="text"
+                      value=""
+                    />,
+                  }
+                }
+                label="ehCt payments for 2, quarter 4"
+                labelClassName="sr-only"
+                name="ehCt-payments-2-q4"
+                onChange={[Function]}
+                type="text"
+                value=""
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_24"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_24"
+                    >
+                      <span
+                        className=""
+                      >
+                        ehCt payments for 2, quarter 4
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_24"
+                    name="ehCt-payments-2-q4"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          >
+            58
+          </td>
+        </tr>
+        <tr>
+          <th
+            scope="row"
+          >
+            EP Payments
+          </th>
+          <td
+            key="1"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="epAmt payments for 2, quarter 1"
+              labelClassName="sr-only"
+              name="epAmt-payments-2-q1"
+              onBlur={null}
+              onChange={[Function]}
+              value={22}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="epAmt payments for 2, quarter 1"
+                labelClassName="sr-only"
+                mask="currency"
+                name="epAmt-payments-2-q1"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="22"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="epAmt payments for 2, quarter 1. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_25"
+                        name="epAmt-payments-2-q1"
+                        type="text"
+                        value="22"
+                      />,
+                    }
+                  }
+                  label="epAmt payments for 2, quarter 1"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="epAmt-payments-2-q1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="22"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_25"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_25"
+                      >
+                        <span
+                          className=""
+                        >
+                          epAmt payments for 2, quarter 1
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="epAmt payments for 2, quarter 1. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_25"
+                          name="epAmt-payments-2-q1"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="22"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="2"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="epAmt payments for 2, quarter 2"
+              labelClassName="sr-only"
+              name="epAmt-payments-2-q2"
+              onBlur={null}
+              onChange={[Function]}
+              value={23}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="epAmt payments for 2, quarter 2"
+                labelClassName="sr-only"
+                mask="currency"
+                name="epAmt-payments-2-q2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="23"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="epAmt payments for 2, quarter 2. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_26"
+                        name="epAmt-payments-2-q2"
+                        type="text"
+                        value="23"
+                      />,
+                    }
+                  }
+                  label="epAmt payments for 2, quarter 2"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="epAmt-payments-2-q2"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="23"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_26"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_26"
+                      >
+                        <span
+                          className=""
+                        >
+                          epAmt payments for 2, quarter 2
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="epAmt payments for 2, quarter 2. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_26"
+                          name="epAmt-payments-2-q2"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="23"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="3"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="epAmt payments for 2, quarter 3"
+              labelClassName="sr-only"
+              name="epAmt-payments-2-q3"
+              onBlur={null}
+              onChange={[Function]}
+              value={24}
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="epAmt payments for 2, quarter 3"
+                labelClassName="sr-only"
+                mask="currency"
+                name="epAmt-payments-2-q3"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="24"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="epAmt payments for 2, quarter 3. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_27"
+                        name="epAmt-payments-2-q3"
+                        type="text"
+                        value="24"
+                      />,
+                    }
+                  }
+                  label="epAmt payments for 2, quarter 3"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="epAmt-payments-2-q3"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="24"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_27"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_27"
+                      >
+                        <span
+                          className=""
+                        >
+                          epAmt payments for 2, quarter 3
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="epAmt payments for 2, quarter 3. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_27"
+                          name="epAmt-payments-2-q3"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="24"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            key="4"
+          >
+            <DollarField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              label="epAmt payments for 2, quarter 4"
+              labelClassName="sr-only"
+              name="epAmt-payments-2-q4"
+              onBlur={null}
+              onChange={[Function]}
+              value=""
+            >
+              <NumberField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={null}
+                label="epAmt payments for 2, quarter 4"
+                labelClassName="sr-only"
+                mask="currency"
+                name="epAmt-payments-2-q4"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="0"
+              >
+                <TextField
+                  className="budget-table--input-holder"
+                  fieldClassName="budget-table--input__number"
+                  fieldRef={
+                    Object {
+                      "current": <input
+                        aria-label="epAmt payments for 2, quarter 4. Enter amount in dollars."
+                        class="ds-c-field ds-c-field--currency budget-table--input__number"
+                        id="textfield_28"
+                        name="epAmt-payments-2-q4"
+                        type="text"
+                        value="0"
+                      />,
+                    }
+                  }
+                  label="epAmt payments for 2, quarter 4"
+                  labelClassName="sr-only"
+                  mask="currency"
+                  name="epAmt-payments-2-q4"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="text"
+                  value="0"
+                >
+                  <div
+                    className="ds-u-clearfix budget-table--input-holder"
+                  >
+                    <FormLabel
+                      className="sr-only"
+                      component="label"
+                      fieldId="textfield_28"
+                    >
+                      <label
+                        className="ds-c-label sr-only"
+                        htmlFor="textfield_28"
+                      >
+                        <span
+                          className=""
+                        >
+                          epAmt payments for 2, quarter 4
+                        </span>
+                      </label>
+                    </FormLabel>
+                    <div
+                      className="ds-c-field-mask ds-c-field-mask--currency"
+                    >
+                      <div
+                        className="ds-c-field__before ds-c-field__before--currency"
+                      >
+                        $
+                      </div>
+                      <Mask
+                        mask="currency"
+                      >
+                        <input
+                          aria-label="epAmt payments for 2, quarter 4. Enter amount in dollars."
+                          className="ds-c-field ds-c-field--currency budget-table--input__number"
+                          id="textfield_28"
+                          name="epAmt-payments-2-q4"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          type="text"
+                          value="0"
+                        />
+                      </Mask>
+                    </div>
+                  </div>
+                </TextField>
+              </NumberField>
+            </DollarField>
+          </td>
+          <td
+            className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          >
+            <Dollars
+              long={false}
+            >
+              <span
+                className="visibility--screen"
+              >
+                $90
+              </span>
+              <span
+                className="visibility--print"
+              >
+                $90
+              </span>
+            </Dollars>
+          </td>
+        </tr>
+        <tr>
+          <th
+            scope="row"
+          >
+            EP Count (optional)
+          </th>
+          <td
+            key="1"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="epCt payments for 2, quarter 1"
+              labelClassName="sr-only"
+              name="epCt-payments-2-q1"
+              onChange={[Function]}
+              value={30}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_29"
+                      name="epCt-payments-2-q1"
+                      type="text"
+                      value="30"
+                    />,
+                  }
+                }
+                label="epCt payments for 2, quarter 1"
+                labelClassName="sr-only"
+                name="epCt-payments-2-q1"
+                onChange={[Function]}
+                type="text"
+                value={30}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_29"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_29"
+                    >
+                      <span
+                        className=""
+                      >
+                        epCt payments for 2, quarter 1
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_29"
+                    name="epCt-payments-2-q1"
+                    onChange={[Function]}
+                    type="text"
+                    value={30}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="2"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="epCt payments for 2, quarter 2"
+              labelClassName="sr-only"
+              name="epCt-payments-2-q2"
+              onChange={[Function]}
+              value={31}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_30"
+                      name="epCt-payments-2-q2"
+                      type="text"
+                      value="31"
+                    />,
+                  }
+                }
+                label="epCt payments for 2, quarter 2"
+                labelClassName="sr-only"
+                name="epCt-payments-2-q2"
+                onChange={[Function]}
+                type="text"
+                value={31}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_30"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_30"
+                    >
+                      <span
+                        className=""
+                      >
+                        epCt payments for 2, quarter 2
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_30"
+                    name="epCt-payments-2-q2"
+                    onChange={[Function]}
+                    type="text"
+                    value={31}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="3"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="epCt payments for 2, quarter 3"
+              labelClassName="sr-only"
+              name="epCt-payments-2-q3"
+              onChange={[Function]}
+              value={32}
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_31"
+                      name="epCt-payments-2-q3"
+                      type="text"
+                      value="32"
+                    />,
+                  }
+                }
+                label="epCt payments for 2, quarter 3"
+                labelClassName="sr-only"
+                name="epCt-payments-2-q3"
+                onChange={[Function]}
+                type="text"
+                value={32}
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_31"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_31"
+                    >
+                      <span
+                        className=""
+                      >
+                        epCt payments for 2, quarter 3
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_31"
+                    name="epCt-payments-2-q3"
+                    onChange={[Function]}
+                    type="text"
+                    value={32}
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            key="4"
+          >
+            <NumberField
+              className="budget-table--input-holder"
+              fieldClassName="budget-table--input__number"
+              fieldRef={null}
+              label="epCt payments for 2, quarter 4"
+              labelClassName="sr-only"
+              name="epCt-payments-2-q4"
+              onChange={[Function]}
+              value=""
+            >
+              <TextField
+                className="budget-table--input-holder"
+                fieldClassName="budget-table--input__number"
+                fieldRef={
+                  Object {
+                    "current": <input
+                      class="ds-c-field budget-table--input__number"
+                      id="textfield_32"
+                      name="epCt-payments-2-q4"
+                      type="text"
+                      value=""
+                    />,
+                  }
+                }
+                label="epCt payments for 2, quarter 4"
+                labelClassName="sr-only"
+                name="epCt-payments-2-q4"
+                onChange={[Function]}
+                type="text"
+                value=""
+              >
+                <div
+                  className="ds-u-clearfix budget-table--input-holder"
+                >
+                  <FormLabel
+                    className="sr-only"
+                    component="label"
+                    fieldId="textfield_32"
+                  >
+                    <label
+                      className="ds-c-label sr-only"
+                      htmlFor="textfield_32"
+                    >
+                      <span
+                        className=""
+                      >
+                        epCt payments for 2, quarter 4
+                      </span>
+                    </label>
+                  </FormLabel>
+                  <input
+                    className="ds-c-field budget-table--input__number"
+                    id="textfield_32"
+                    name="epCt-payments-2-q4"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </TextField>
+            </NumberField>
+          </td>
+          <td
+            className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          >
+            122
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </IncentivePayments>
+</Provider>
 `;
