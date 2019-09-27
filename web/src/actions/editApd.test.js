@@ -76,10 +76,16 @@ describe('APD edit actions', () => {
 
   describe('for APD key personnel', () => {
     it('dispatchs an action for adding a key person', () => {
-      expect(addKeyPerson()).toEqual({
-        type: ADD_APD_ITEM,
-        path: '/keyPersonnel/-'
-      });
+      const store = mockStore('add state');
+      store.dispatch(addKeyPerson());
+
+      expect(store.getActions()).toEqual([
+        {
+          type: ADD_APD_ITEM,
+          path: '/keyPersonnel/-',
+          state: 'add state'
+        }
+      ]);
     });
 
     it('dispatches an action to remove a key person if confirmed', () => {

@@ -1,5 +1,11 @@
 import { SAVE_APD_SUCCESS } from '../actions/apd';
-import { EDIT_APD, ADD_APD_YEAR, REMOVE_APD_YEAR } from '../actions/editApd';
+import {
+  ADD_APD_ITEM,
+  ADD_APD_YEAR,
+  EDIT_APD,
+  REMOVE_APD_ITEM,
+  REMOVE_APD_YEAR
+} from '../actions/editApd';
 
 import reducer, { getHasChanges } from './patch';
 
@@ -115,6 +121,22 @@ describe('JSON patch reducer', () => {
         }
       })
     ).toMatchSnapshot();
+  });
+
+  it('creates a patch for adding an APD item', () => {
+    expect(
+      reducer([], {
+        type: ADD_APD_ITEM,
+        path: '/path/to/add',
+        state: {}
+      })
+    ).toEqual([{ op: 'add', path: '/path/to/add', value: null }]);
+  });
+
+  it('creates a patch for removing an APD item', () => {
+    expect(
+      reducer([], { type: REMOVE_APD_ITEM, path: '/path/to/remove' })
+    ).toEqual([{ op: 'remove', path: '/path/to/remove' }]);
   });
 });
 

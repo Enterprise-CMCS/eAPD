@@ -6,10 +6,13 @@ export const EDIT_APD = Symbol('edit apd');
 export const REMOVE_APD_ITEM = Symbol('remove apd item');
 export const REMOVE_APD_YEAR = Symbol('remove apd year');
 
-export const addKeyPerson = () => ({
-  type: ADD_APD_ITEM,
-  path: '/keyPersonnel/-'
-});
+export const addKeyPerson = () => (dispatch, getState) => {
+  dispatch({
+    type: ADD_APD_ITEM,
+    path: '/keyPersonnel/-',
+    state: getState()
+  });
+};
 
 export const addYear = year => (dispatch, getState) => {
   dispatch({ type: ADD_APD_YEAR, value: year, state: getState() });

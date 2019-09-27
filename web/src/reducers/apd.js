@@ -144,6 +144,15 @@ export const getIsAnAPDSelected = ({
   }
 }) => !!id;
 
+export const getPatchesForAddingItem = (state, path) => {
+  switch (path) {
+    case '/keyPersonnel/-':
+      return [{ op: 'add', path, value: getKeyPersonnel(state.data.years) }];
+    default:
+      return [{ op: 'add', path, value: null }];
+  }
+};
+
 const initialState = {
   data: {},
   byId: {},
@@ -156,25 +165,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_APD_ITEM: {
-      let newValue = null;
-
-      switch (action.path) {
-        case '/keyPersonnel/-':
-          newValue = getKeyPersonnel(state.data.years);
-          break;
-        default:
-          break;
-      }
-
+      const patches = getPatchesForAddingItem(state, action.path);
       return {
         ...state,
-        data: applyPatch(state.data, [
-          {
-            op: 'add',
-            path: action.path,
-            value: newValue
-          }
-        ])
+        data: applyPatch(state.data, patches)
       };
     }
 

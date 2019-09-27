@@ -1,9 +1,16 @@
 import u from 'updeep';
 
 import { SAVE_APD_SUCCESS } from '../actions/apd';
-import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from '../actions/editApd';
+import {
+  ADD_APD_ITEM,
+  ADD_APD_YEAR,
+  EDIT_APD,
+  REMOVE_APD_ITEM,
+  REMOVE_APD_YEAR
+} from '../actions/editApd';
 
 import {
+  getPatchesForAddingItem as getApdPatchesForAddingItem,
   getPatchesToAddYear as getApdPatchesToAddYear,
   getPatchesToRemoveYear as getApdPatchesToRemoveYear
 } from './apd';
@@ -31,6 +38,11 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_APD_SUCCESS:
       return initialState;
+
+    case ADD_APD_ITEM: {
+      const patches = getApdPatchesForAddingItem(action.state.apd, action.path);
+      return [...state, ...patches];
+    }
 
     case ADD_APD_YEAR:
       return [
@@ -69,6 +81,9 @@ const reducer = (state = initialState, action) => {
         { op: 'replace', path: action.path, value: action.value }
       ];
     }
+
+    case REMOVE_APD_ITEM:
+      return [...state, { op: 'remove', path: action.path }];
 
     case REMOVE_APD_YEAR:
       return [
