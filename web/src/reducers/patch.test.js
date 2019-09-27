@@ -1,5 +1,11 @@
 import { SAVE_APD_SUCCESS } from '../actions/apd';
-import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../actions/editApd';
+import {
+  ADD_APD_ITEM,
+  ADD_APD_YEAR,
+  EDIT_APD,
+  REMOVE_APD_ITEM,
+  REMOVE_APD_YEAR
+} from '../actions/editApd';
 
 import reducer, { getHasChanges } from './patch';
 
@@ -47,6 +53,74 @@ describe('JSON patch reducer', () => {
       { op: 'remove', path: '/path/to/edit' },
       { op: 'replace', path: '/path/to/edit', value: 'new value' }
     ]);
+  });
+
+  it('adds a new year to the APD', () => {
+    expect(
+      reducer([], {
+        type: ADD_APD_YEAR,
+        value: '2019',
+        state: {
+          apd: {
+            data: {
+              incentivePayments: {},
+              keyPersonnel: [{ costs: {} }],
+              years: []
+            }
+          },
+          activities: {
+            byKey: {
+              activityKey: {
+                contractorResources: [
+                  {
+                    hourly: { data: {} },
+                    years: {}
+                  }
+                ],
+                costAllocation: {},
+                expenses: [{ years: {} }],
+                statePersonnel: [{ years: {} }],
+                years: []
+              }
+            }
+          }
+        }
+      })
+    ).toMatchSnapshot();
+  });
+
+  it('removes a year from the APD', () => {
+    expect(
+      reducer([], {
+        type: REMOVE_APD_YEAR,
+        value: '2019',
+        state: {
+          apd: {
+            data: {
+              incentivePayments: { '2019': 'this gets deleted' },
+              keyPersonnel: [{ costs: { '2019': 'this gets deleted' } }],
+              years: ['2019']
+            }
+          },
+          activities: {
+            byKey: {
+              activityKey: {
+                contractorResources: [
+                  {
+                    hourly: { data: { '2019': 'this gets deleted' } },
+                    years: { '2019': 'this gets deleted' }
+                  }
+                ],
+                costAllocation: { '2019': 'this gets deleted' },
+                expenses: [{ years: { '2019': 'this gets deleted' } }],
+                statePersonnel: [{ years: { '2019': 'this gets deleted' } }],
+                years: ['2019']
+              }
+            }
+          }
+        }
+      })
+    ).toMatchSnapshot();
   });
 
   it('creates a patch for adding an APD item', () => {
