@@ -40,7 +40,7 @@ exports[`ProposedBudget component renders correctly 1`] = `
       nested={false}
       resource="proposedBudget.paymentsByFFYQuarter"
     >
-      <Connect(IncentivePayments) />
+      <IncentivePayments />
     </Subsection>
   </Section>
 </Connect(ConnectedWaypoint)>
