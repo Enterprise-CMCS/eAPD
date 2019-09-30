@@ -18,7 +18,7 @@ import StateProfile from '../components/ApdStateProfile';
 
 import {
   getAPDName,
-  getAPDFirstYear,
+  getAPDYearRange,
   getIsAnAPDSelected
 } from '../reducers/apd';
 import { getIsDirty } from '../reducers/dirty';
@@ -83,9 +83,9 @@ class ApdApplication extends Component {
             return unsavedPrompt;
           }}
         />
-        <div className="ds-l-row ds-u-margin--0">
+        <div className="ds-u-margin--0">
           <Sidebar place={place} />
-          <div className="site-main ds-u-padding-top--2 ds-l-col--9">
+          <div className="site-main ds-u-padding-top--2">
             <h1 id="start-main-content" className="ds-h1 apd--title">
               <span className="ds-h6 ds-u-display--block">{apdName}</span>
               {place.name} {year} APD
@@ -124,7 +124,7 @@ const mapStateToProps = state => ({
   dirty: getIsDirty(state),
   isAdmin: getIsAdmin(state),
   place: getUserStateOrTerritory(state),
-  year: getAPDFirstYear(state)
+  year: getAPDYearRange(state)
 });
 
 const mapDispatchToProps = { selectApdOnLoad };
